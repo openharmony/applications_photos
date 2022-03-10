@@ -1,0 +1,17 @@
+{
+  "plural":[
+    {
+      "name":"count_details_selected",
+      "value":[
+        {
+          "quantity":"one",
+          "value":"%d item selected"
+        },
+        {
+          "quantity":"other",
+          "value":"%d items selected"
+        }
+      ]
+    }
+  ]
+}
