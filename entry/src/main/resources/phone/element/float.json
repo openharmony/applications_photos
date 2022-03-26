@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name":"tab_bar_height",
+      "value":"56vp"
+    },
+    {
+      "name":"tab_bar_text_padding_horizontal",
+      "value":"4vp"
+    },
+    {
+      "name":"tab_bar_text_padding_top",
+      "value":"2vp"
+    },
+    {
+      "name":"default_padding_end",
+      "value":"24vp"
+    },
+    {
+      "name":"default_padding_start",
+      "value":"24vp"
+    }
+  ]
+}

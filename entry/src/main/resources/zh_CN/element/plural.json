@@ -1,0 +1,13 @@
+{
+  "plural":[
+    {
+      "name":"count_details_selected",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"已选择 %d 项"
+        }
+      ]
+    }
+  ]
+}
