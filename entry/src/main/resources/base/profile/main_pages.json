@@ -1,0 +1,18 @@
+{
+  "src": [
+    "product/phone/view/index",
+    "product/pad/view/index",
+    "feature/browser/view/photoGrid/PhotoGridPage",
+    "feature/browser/view/photo/PhotoBrowser",
+    "feature/browser/view/photo/VideoBrowser",
+    "feature/browser/view/photo/SelectPhotoBrowser",
+    "feature/thirdSelect/view/ThirdSelectPhotoBrowser",
+    "feature/thirdSelect/view/ThirdSelectAlbumSetPage",
+    "feature/thirdSelect/view/ThirdSelectPhotoGridPage",
+    "feature/browser/view/album/DistributedAlbumSetPage",
+    "common/view/mediaOperation/MediaOperationPage",
+    "feature/browser/view/album/NewAlbumPage",
+    "feature/browser/view/album/AlbumSelect",
+    "feature/editor/view/EditMain"
+  ]
+}
