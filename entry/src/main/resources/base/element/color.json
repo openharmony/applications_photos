@@ -14,7 +14,11 @@
     },
     {
       "name": "default_background_color",
-      "value": "#F1F3F5"
+      "value": "#FFF1F3F5"
+    },
+    {
+      "name": "default_bar_content_color",
+      "value": "#FF000000"
     },
     {
       "name": "icon_default_color",
@@ -62,7 +66,7 @@
     },
     {
       "name": "text_color_above_picture",
-      "value": "#E6FFFFFF"
+      "value": "#FFFFFF"
     },
     {
       "name": "detail_view_bg_color",
@@ -116,10 +120,10 @@
       "name": "empty_or_recycle_album_back",
       "value": "#9E9E9E"
     },
-	{
+    {
       "name": "id_color_isActive",
       "value": "#006CDE"
-	},
+    },
     {
       "name": "id_color_adjust_shadows",
       "value": "#73000000"
@@ -145,17 +149,29 @@
       "value": "#0A59F7"
     },
     {
+      "name": "color_system_highlight",
+      "value": "#007DFF"
+    },
+    {
       "name": "text_color_secondary",
       "value": "#99182431"
-	},
+    },
     {
       "name": "color_primary",
       "value": "#182431"
     },
     {
+      "name": "color_secondary",
+      "value": "#99000000"
+    },
+    {
+      "name": "color_notify",
+      "value": "#66000000"
+    },
+    {
       "name": "album_set_empty_album_bright",
       "value": "#0D182431"
-	},
+    },
     {
       "name": "default_border_color",
       "value": "#006CDE"

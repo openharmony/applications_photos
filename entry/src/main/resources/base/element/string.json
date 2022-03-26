@@ -230,27 +230,27 @@
     },
     {
       "name": "recycle_single_album_with_photos_tips",
-      "value": "Delete this album? (photos: %d)"
+      "value": "Delete this album? (Photos: %d)"
     },
     {
       "name": "recycle_single_album_with_videos_tips",
-      "value": "Delete this album? (videos: %d)"
+      "value": "Delete this album? (Videos: %d)"
     },
     {
       "name": "recycle_single_album_tips",
-      "value": "Delete this album? (photos: %d, videos: %d)"
+      "value": "Delete this album? (Photos: %d, Videos: %d)"
     },
     {
       "name": "recycle_albums_with_photos_tips",
-      "value": "Delete these %d albums? (photos: %d)"
+      "value": "Delete these %d albums? (Photos: %d)"
     },
     {
       "name": "recycle_albums_with_videos_tips",
-      "value": "Delete these %d albums? (videos: %d)"
+      "value": "Delete these %d albums? (Videos: %d)"
     },
     {
       "name": "recycle_albums_tips",
-      "value": "Delete these %d albums? (photos: %d, videos: %d)"
+      "value": "Delete these %d albums? (Photos: %d, Videos: %d)"
     },
     {
       "name": "photo_deleting",
@@ -310,7 +310,7 @@
     },
     {
       "name": "count",
-      "value": "Count:"
+      "value": "Selected:"
     },
     {
       "name": "detail_dialog_confirm",
@@ -346,11 +346,11 @@
     },
     {
       "name": "tabBar_label",
-      "value": "label"
+      "value": "Label"
     },
     {
       "name": "tabBar_text",
-      "value": "text"
+      "value": "Text"
     },
     {
       "name": "editBar_text",
@@ -358,7 +358,7 @@
     },
     {
       "name": "ImageCollageHasFrame_text",
-      "value": "frame"
+      "value": "Frame"
     },
     {
       "name": "ImageCollageTitle_text",
@@ -366,11 +366,11 @@
     },
     {
       "name": "cropModeReset_text",
-      "value": "reset"
+      "value": "Reset"
     },
     {
       "name": "rotate_text",
-      "value": "rotate"
+      "value": "Rotate"
     },
     {
       "name": "save_to_local",
@@ -378,7 +378,7 @@
     },
     {
       "name": "mirror_text",
-      "value": "mirror"
+      "value": "Mirror"
     },
     {
       "name": "frame_text",
@@ -386,7 +386,7 @@
     },
     {
       "name": "blur_text",
-      "value": "blur"
+      "value": "Blur"
     },
     {
       "name": "video_pause",
@@ -394,7 +394,7 @@
     },
     {
       "name": "crop_text",
-      "value": "crop"
+      "value": "Crop"
     },
     {
       "name": "filter_text",
@@ -414,59 +414,63 @@
     },
     {
       "name": "doodle_text",
-      "value": "doodle"
+      "value": "Doodle"
     },
     {
       "name": "mosaic_text",
-      "value": "mosaic"
+      "value": "Mosaic"
+    },
+    {
+      "name": "mosaic_style_text",
+      "value": "Style"
     },
     {
       "name": "brightness_text",
-      "value": "brightness"
+      "value": "Brightness"
     },
     {
       "name": "contrast_text",
-      "value": "contrast"
+      "value": "Contrast"
     },
     {
       "name": "saturation_text",
-      "value": "saturation"
+      "value": "Saturation"
     },
     {
       "name": "sharpness_text",
-      "value": "sharpness"
+      "value": "Sharpness"
     },
     {
       "name": "highlights_text",
-      "value": "highlights"
+      "value": "Highlights"
     },
     {
       "name": "shadows_text",
-      "value": "shadows"
+      "value": "Shadows"
     },
     {
       "name": "hue_text",
-      "value": "hue"
+      "value": "Hue"
     },
     {
       "name": "bw_text",
-      "value": "bw"
+      "value": "BW"
     },
     {
       "name": "doodle_pen_text",
-      "value": "doodle"
+      "value": "Style"
     },
     {
       "name": "doodle_color_text",
-      "value": "color"
+      "value": "Color"
     },
     {
       "name": "doodle_stroke_text",
-      "value": "stroke"
+      "value": "Size"
     },
     {
       "name": "doodle_eraser_text",
-      "value": "eraser"
+      "value": "Eraser"
     },
     {
       "name": "move_to",
@@ -478,11 +482,15 @@
     },
     {
       "name": "recycleAlbum_message",
-      "value": "The remaining days (up to 30 days) are displayed before the file is deleted, after which it will be permanently deleted"
+      "value": "Photos and videos will be permanently deleted after the number of days shown (up to 30 days )."
     },
     {
       "name": "recycleAlbum_delete_message",
       "value": "Permanently delete what selected?"
+    },
+    {
+      "name": "recycleAlbum_clear_message",
+      "value": "Permanently clear all items?"
     },
     {
       "name": "move_progress_message",
@@ -503,6 +511,10 @@
     {
       "name": "name_already_use",
       "value": "Name already in use."
+    },
+    {
+      "name": "rename_failed",
+      "value": "Rename failed"
     },
     {
       "name": "download_progress_message",
@@ -534,7 +546,15 @@
     },
     {
       "name": "download_failed_single",
-      "value": "Saving has been cancelled."
+      "value": "Saving has been failed."
+    },
+    {
+      "name": "copy_failed_single",
+      "value": "Copy has been failed"
+    },
+    {
+      "name": "move_failed_single",
+      "value": "Move has been failed"
     },
     {
       "name": "download_failed_multi",
@@ -555,7 +575,7 @@
     {
       "name": "stop",
       "value": "Stop"
-	},
+    },
     {
       "name": "specific_characters_not_supported",
       "value": "\".\\\/:*?<>|[]{} are not supported"
@@ -566,39 +586,39 @@
     },
     {
       "name": "filter_original_text",
-      "value": "original"
+      "value": "Original"
     },
     {
       "name": "filter_gray_text",
-      "value": "gray"
+      "value": "Gray"
     },
     {
       "name": "filter_antique_text",
-      "value": "antique"
+      "value": "Memory"
     },
     {
       "name": "filter_negative_text",
-      "value": "negative"
+      "value": "Negative"
     },
     {
       "name": "filter_tranquil_text",
-      "value": "tranquil"
+      "value": "Sweet"
     },
     {
       "name": "filter_blues_text",
-      "value": "blues"
+      "value": "Blue"
     },
     {
       "name": "blur_round_text",
-      "value": "round"
+      "value": "Circle"
     },
     {
       "name": "blur_linear_text",
-      "value": "linear"
+      "value": "Bar"
     },
     {
       "name": "blur_blur_text",
-      "value": "blur"
+      "value": "Everywhere"
     },
     {
       "name": "save_dialog_title_text",
@@ -677,6 +697,10 @@
       "value": "Move"
     },
     {
+      "name": "add_notes",
+      "value": "Add notes"
+    },
+    {
       "name": "complete",
       "value": "Done"
     },
@@ -737,6 +761,18 @@
       "value": "Reliving your best memories has never been easier"
     },
     {
+      "name": "no_distributed_photo_head_title_album",
+      "value": "No photos and videos"
+    },
+    {
+      "name": "no_distributed_photo_show_image",
+      "value": "Open a large image in the peer gallery, and then browse the image on the local gallery."
+    },
+    {
+      "name": "no_distributed_photo_show_video",
+      "value": "Download the video file to the local computer for playback."
+    },
+    {
       "name": "distribute_album_title_holder",
       "value": "(%s)"
     },
@@ -787,6 +823,14 @@
     {
       "name": "fa_play_interval_time",
       "value": "30 minute"
+    },
+    {
+      "name": "progress_delete",
+      "value": "Delete%1$d/%2$d"
+    },
+    {
+      "name": "progress_recover",
+      "value": "Restore%1$d/%2$d"
     }
   ]
 }
