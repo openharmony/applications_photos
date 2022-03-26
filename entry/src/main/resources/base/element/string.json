@@ -766,7 +766,11 @@
     },
     {
       "name": "no_distributed_photo_show_image",
-      "value": "Please open the picture in the opposite picture library first, and then browse at this end"
+      "value": "Open a large image in the peer gallery, and then browse the image on the local gallery."
+    },
+    {
+      "name": "no_distributed_photo_show_video",
+      "value": "Download the video file to the local computer for playback."
     },
     {
       "name": "distribute_album_title_holder",

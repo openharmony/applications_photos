@@ -777,6 +777,10 @@
       "value": "8vp"
     },
     {
+      "name": "input_text_notify_margin",
+      "value": "86vp"
+    },
+    {
       "name": "FA_ListCard_padding_top",
       "value": "24vp"
     },

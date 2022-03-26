@@ -769,6 +769,10 @@
       "value": "请先在对端图库打开大图，再在本端浏览"
     },
     {
+      "name": "no_distributed_photo_show_video",
+      "value": "请下载视频文件至本机进行播放"
+    },
+    {
       "name": "distribute_album_title_holder",
       "value": "(%s)"
     },
