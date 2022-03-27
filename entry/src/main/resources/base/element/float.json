@@ -283,7 +283,7 @@
     {
       "name": "album_set_shadow_radius",
       "value": "2"
-	},
+    },
     {
       "name":"grid_more_height",
       "value":"400vp"
@@ -328,7 +328,7 @@
       "name": "buttonActionTextSize_default",
       "value": "10fp"
     },
-	{
+    {
       "name":"crop_listItem_horizontal",
       "value":"65.5vp"
     },
@@ -375,7 +375,7 @@
     {
       "name": "icon_size_hot_padding_48",
       "value": "12vp"
-	},
+    },
     {
       "name": "dialog_divider_height",
       "value": "24vp"
@@ -383,7 +383,7 @@
     {
       "name": "album_set_icon_size",
       "value": "32vp"
-	},
+    },
     {
       "name":"adjust_params_bar_height",
       "value":"64vp"
@@ -589,14 +589,6 @@
       "value": "12vp"
     },
     {
-      "name": "bind_popup_width",
-      "value": "150vp"
-    },
-    {
-      "name": "bind_popup_height",
-      "value": "48vp"
-    },
-    {
       "name": "select_model_dialog_margin",
       "value": "16vp"
     },
@@ -729,6 +721,14 @@
       "value": "0.5"
     },
     {
+      "name": "process_bar_margin_left",
+      "value": "4"
+    },
+    {
+      "name": "process_bar_margin_right",
+      "value": "40"
+    },
+    {
       "name": "menu_padding_horizontal",
       "value": "16vp"
     },
@@ -737,12 +737,24 @@
       "value": "4vp"
     },
     {
+      "name": "menu_horizontal_margin_right",
+      "value": "8vp"
+    },
+    {
+      "name": "menu_horizontal_margin_top",
+      "value": "-8vp"
+    },
+    {
       "name": "menu_margin_right",
       "value": "24vp"
     },
     {
       "name": "menu_margin_bottom",
       "value": "4vp"
+    },
+    {
+      "name": "menu_height",
+      "value": "48vp"
     },
     {
       "name": "edit_exit_button",
@@ -759,6 +771,14 @@
     {
       "name": "bind_popup_margin_y",
       "value": "12vp"
+    },
+    {
+      "name": "input_text_margin",
+      "value": "8vp"
+    },
+    {
+      "name": "input_text_notify_margin",
+      "value": "86vp"
     },
     {
       "name": "FA_ListCard_padding_top",
@@ -811,6 +831,6 @@
     {
       "name": "FA_ListCard_radius",
       "value": "4vp"
-    }
+    },
   ]
 }

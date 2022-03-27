@@ -230,27 +230,27 @@
     },
     {
       "name": "recycle_single_album_with_photos_tips",
-      "value": "是否删除此相册？（包含 %d 张图片）"
+      "value": "是否删除此相册 （包含 %d 张图片）？"
     },
     {
       "name": "recycle_single_album_with_videos_tips",
-      "value": "是否删除此相册？（包含 %d 个视频）"
+      "value": "是否删除此相册 （包含 %d 个视频）？"
     },
     {
       "name": "recycle_single_album_tips",
-      "value": "是否删除此相册？（包含 %d 张图片， %d 个视频）"
+      "value": "是否删除此相册 （包含 %d 张图片， %d 个视频）？"
     },
     {
       "name": "recycle_albums_with_photos_tips",
-      "value": "是否删除 %d 本相册？（包含 %d 张图片）"
+      "value": "是否删除 %d 本相册 （包含 %d 张图片）？"
     },
     {
       "name": "recycle_albums_with_videos_tips",
-      "value": "是否删除 %d 本相册？（包含 %d 个视频）"
+      "value": "是否删除 %d 本相册 （包含 %d 个视频）？"
     },
     {
       "name": "recycle_albums_tips",
-      "value": "是否删除 %d 本相册？（包含 %d 张图片， %d 个视频）"
+      "value": "是否删除 %d 本相册 （包含 %d 张图片， %d 个视频）？"
     },
     {
       "name": "photo_deleting",
@@ -390,7 +390,7 @@
     },
     {
       "name": "crop_text",
-      "value": "裁剪"
+      "value": "修剪"
     },
     {
       "name": "filter_text",
@@ -414,6 +414,10 @@
     },
     {
       "name": "mosaic_text",
+      "value": "马赛克"
+    },
+    {
+      "name": "mosaic_style_text",
       "value": "马赛克"
     },
     {
@@ -481,6 +485,10 @@
       "value": "所选文件将被永久删除，无法恢复。是否删除？"
     },
     {
+      "name": "recycleAlbum_clear_message",
+      "value": "所有文件将被永久删除，无法恢复。是否清空？"
+    },
+    {
       "name": "move_progress_message",
       "value": "正在移动到\"%s\""
     },
@@ -499,6 +507,10 @@
     {
       "name": "name_already_use",
       "value": "此名称已被使用"
+    },
+    {
+      "name": "rename_failed",
+      "value": "重命名失败"
     },
     {
       "name": "download_progress_message",
@@ -526,11 +538,19 @@
     },
     {
       "name": "distributed_album_disconnected",
-      "value": "已于其他设备断开连接"
+      "value": "已与其他设备断开连接"
     },
     {
       "name": "download_failed_single",
       "value": "文件保存失败"
+    },
+    {
+      "name": "copy_failed_single",
+      "value": "复制失败"
+    },
+    {
+      "name": "move_failed_single",
+      "value": "移动失败"
     },
     {
       "name": "download_failed_multi",
@@ -566,7 +586,7 @@
     },
     {
       "name": "filter_gray_text",
-      "value": "灰度"
+      "value": "中灰"
     },
     {
       "name": "filter_antique_text",
@@ -677,6 +697,10 @@
       "value": "移动"
     },
     {
+      "name": "add_notes",
+      "value": "添加备注"
+    },
+    {
       "name": "complete",
       "value": "完成"
     },
@@ -737,6 +761,18 @@
       "value": "整理美好记忆，查找更方便"
     },
     {
+      "name": "no_distributed_photo_head_title_album",
+      "value": "没有照片和视频"
+    },
+    {
+      "name": "no_distributed_photo_show_image",
+      "value": "请先在对端图库打开大图，再在本端浏览"
+    },
+    {
+      "name": "no_distributed_photo_show_video",
+      "value": "请下载视频文件至本机进行播放"
+    },
+    {
       "name": "distribute_album_title_holder",
       "value": "(%s)"
     },
@@ -787,6 +823,14 @@
     {
       "name": "fa_play_interval_time",
       "value": "30 分钟"
+    },
+    {
+      "name": "progress_delete",
+      "value": "删除%1$d/%2$d"
+    },
+    {
+      "name": "progress_recover",
+      "value": "恢复%1$d/%2$d"
     }
   ]
 }

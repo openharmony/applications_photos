@@ -1,0 +1,75 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "srcEntrance": "./ets/Application/AbilityStage.ts",
+    "description": "$string:mainability_description",
+    "mainElement": "MainAbility",
+    "deviceTypes": [
+      "phone",
+      "tablet",
+      "wearable",
+      "car",
+      "tv",
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "uiSyntax": "ets",
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.READ_MEDIA",
+      },
+      {
+        "name": "ohos.permission.WRITE_MEDIA",
+      },
+      {
+        "name": "ohos.permission.WRITE_EXTERNAL_MEDIA_MEMORY",
+      },
+      {
+        "name": "ohos.permission.MEDIA_LOCATION",
+      },
+      {
+        "name": "ohos.permission.REQUIRE_FORM",
+      },
+      {
+        "name": "ohos.permission.GET_BUNDLE_INFO_PRIVILEGED",
+      }
+    ],
+    "abilities": [
+      {
+        "name": "com.ohos.photos.MainAbility",
+        "srcEntrance": "./ets/MainAbility/MainAbility.ts",
+        "description": "$string:description_mainability",
+        "icon": "$media:ohos_gallery",
+        "label": "$string:app_name",
+        "visible": true,
+        "launchType": "singleton",
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home",
+            ],
+            "actions": [
+              "action.system.home",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+}
