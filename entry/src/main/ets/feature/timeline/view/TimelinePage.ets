@@ -15,19 +15,19 @@
 
 import {ImageGridItemComponent} from '../../../common/view/ImageGridItemComponent'
 import {TimelineDataSource} from '../model/TimelineDataSource'
-import {TimelineData} from '../../../common/model/browser/photo/TimelineData.ets'
-import {TimelineTitleComponent} from '../../../common/view/TimelineTitleComponent'
+import {TimelineData} from '../../../common/model/browser/photo/TimelineData'
+import {TimelineTitleComponent} from './timelinetitlecomponent'
 import {CustomDialogView} from '../../../common/view/dialog/CustomDialogView'
 import {Logger} from '../utils/Logger'
 import {TimelinePageActionBar} from './TimelinePageActionBar'
 import {TimelinePageToolBar} from './TimelinePageToolBar'
-import {Constants} from '../../../common/model/common/Constants.ets'
-import {MenuOperation} from '../../../common/model/browser/operation/MenuOperation'
-import {MenuContext} from '../../../common/model/browser/operation/MenuContext'
-import {MenuOperationFactory} from '../../../common/model/browser/interface/MenuOperationFactory.ets'
-import {BatchDeleteMenuOperation} from '../../../common/model/browser/operation/BatchDeleteMenuOperation.ets';
+import {Constants} from '../../../common/model/common/Constants'
+import {MenuOperation} from '../../../common/view/browserOperation/MenuOperation'
+import {MenuContext} from '../../../common/view/browserOperation/MenuContext'
+import {MenuOperationFactory} from '../../../common/interface/MenuOperationFactory'
+import {BatchDeleteMenuOperation} from '../../../common/view/browserOperation/BatchDeleteMenuOperation';
 import {ViewType} from '../../../common/model/browser/photo/ViewType'
-import {Action} from '../../../common/model/browser/operation/Action'
+import {Action} from '../../../common/view/browserOperation/Action'
 import {BroadCast} from '../../../common/utils/BroadCast'
 import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
 import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
@@ -38,25 +38,24 @@ import {ScreenManager} from '../../../common/model/common/ScreenManager'
 import router from '@system.router'
 import {TraceControllerUtils} from '../../../common/utils/TraceControllerUtils'
 import {TimelineDataSourceManager} from '../model/TimelineDataSourceManager';
-import {ShareMenuOperation} from '../../../common/model/browser/operation/ShareMenuOperation.ets';
-import {CommonObserverCallback} from '../../../common/model/browser/CommonObserverCallback.ets';
-import {MediaObserver} from '../../../common/model/browser/dataObserver/MediaObserver.ets';
-import {UiUtil} from '../../../common/utils/UiUtil.ets';
+import {ShareMenuOperation} from '../../../common/view/browserOperation/ShareMenuOperation';
+import {CommonObserverCallback} from '../../../common/model/browser/CommonObserverCallback';
+import {MediaObserver} from '../../../common/model/browser/dataObserver/MediaObserver';
+import {UiUtil} from '../../../common/utils/UiUtil';
 import {MediaOperationType} from '../../../common/model/common/MediaOperationType'
-import {MoveMenuOperation} from '../../../common/model/browser/operation/MoveMenuOperation';
-import {CopyMenuOperation} from '../../../common/model/browser/operation/CopyMenuOperation';
-import {TimelineScrollBar} from './TimelineScrollBar.ets';
-import {DateUtil} from '../../../common/utils/DateUtil.ets';
-
-AppStorage.SetOrCreate('TimelinePageIndex', Constants.INVALID)
+import {MoveMenuOperation} from '../../../common/view/browserOperation/MoveMenuOperation';
+import {CopyMenuOperation} from '../../../common/view/browserOperation/CopyMenuOperation';
+import {TimelineScrollBar} from './TimelineScrollBar';
+import {DateUtil} from '../../../common/utils/DateUtil';
+import {AlbumInfo} from '../../../common/model/browser/album/AlbumInfo';
 
 // PHOTO Page
 @Component
 export struct TimelinePage {
     @State isEmpty: boolean = false;
     @Provide isHideScrollBar: boolean = true;
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
+    @StorageProp('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
+    @StorageProp('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
     @State gridRowCount: number = 0;
     @Consume isSelectedMode: boolean;
     @Provide isAllSelected: boolean = false;
@@ -78,6 +77,8 @@ export struct TimelinePage {
     isDataFreeze = false; // Is the page data frozen
     deleteMode = false; // Is delete mode
     isActive = false; // Is the page active
+    @State initLoadFinish: boolean = false; // Is first patch load finished
+    routerStart = false; // Is move or copy router page
     @Provide moreMenuList: Action[] = new Array<Action>();
 
     @State groupSelectMode: boolean[] = [];
@@ -85,14 +86,20 @@ export struct TimelinePage {
     @Provide dateText: string = '';
     @Provide isShowBar: boolean = true;
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         TraceControllerUtils.startTrace('TimelinePageAboutToAppear');
+        this.logger.info('aboutToAppear');
         let self = this;
         this.dataSource = TimelineDataSourceManager.getInstance().getDataSource();
+        let params = router.getParams();
+        if (params != null && params.pageFrom && params.pageFrom == Constants.ENTRY_FROM.CAMERA) {
+            this.dataSource.initData();
+        }
         this.mSelectManager.setGroupData(this.dataSource.getGroupData());
         this.mSelectManager.setTotalCount(this.dataSource.getMediaCount());
         this.moreMenuList = [Action.MOVE, Action.COPY, Action.INFO];
         this.isEmpty = !Boolean(this.dataSource.getMediaCount());
+        this.initLoadFinish = Boolean(this.dataSource.getMediaCount());
         MediaObserver.getInstance().registerObserver(this.dataObserver);
         this.dataSource.registerCallback('updateGroupData', (newState: TimelineData[]) => {
             self.mSelectManager.updateGroupData(newState);
@@ -100,13 +107,10 @@ export struct TimelinePage {
         });
         this.dataSource.registerCallback('updateCount', (newState: number) => {
             self.logger.info(`updateCount ${newState}`);
-            self.isHideScrollBar = (newState <= 50);
+            self.isEmpty = !Boolean(newState);
+            self.isHideScrollBar = (newState <= Constants.SCROLL_BAR_VISIBLE_THRESHOLD);
             self.mSelectManager.setTotalCount(newState);
         });
-
-        if (AppStorage.Get('mainWindow') != null) {
-            ScreenManager.getInstance().setMainWindow(AppStorage.Get('mainWindow'));
-        }
 
         ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
             self.initGridRowCount();
@@ -123,7 +127,11 @@ export struct TimelinePage {
         });
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
             this.logger.info(`ON_LOADING_FINISHED size: ${size}`);
-            this.isEmpty = size == 0;
+        });
+
+        this.broadCast.on(Constants.FIRST_PATCH_LOAD_FINISH, (size: number) => {
+            this.logger.info(`FIRST_PATCH_LOAD_FINISH size: ${size}`);
+            this.initLoadFinish = true;
         });
 
         this.onMenuClicked = this.onMenuClicked.bind(this);
@@ -183,7 +191,7 @@ export struct TimelinePage {
         this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, () => {
             this.logger.info('ON_DATA_RELOADED');
             if (this.deleteMode) {
-                animateTo({}, () => {
+                animateTo({duration: Constants.DELETE_ANIMATE_DURATION}, () => {
                     this.dataSource.onDataReloaded();
                 })
                 this.deleteMode = false;
@@ -200,6 +208,7 @@ export struct TimelinePage {
         this.mSelectManager.registerCallback('allSelect', this.freezeAdapter((newState: boolean) => {
             self.logger.info(`allSelect ${newState}`);
             self.isAllSelected = newState;
+            self.dataSource.forceUpdate();
         }));
 
         this.mSelectManager.registerCallback('updateGroupCount', this.freezeAdapter(() => {
@@ -212,10 +221,6 @@ export struct TimelinePage {
             self.totalSelectedCount = newState;
             self.moreMenuList = Boolean(newState) ? [Action.MOVE, Action.COPY, Action.INFO]
                                                   : [Action.MOVE_INVALID, Action.COPY_INVALID, Action.INFO_INVALID];
-
-            if (self.isSelectedMode) {
-                self.dataSource.forceUpdate();
-            }
         }));
         this.isInCurrentTab = true;
         this.initGridRowCount();
@@ -225,8 +230,8 @@ export struct TimelinePage {
         TraceControllerUtils.finishTrace('TimelinePageAboutToAppear');
     }
 
-    private aboutToDisappear(): void {
-        this.logger.debug('aboutToDisappear');
+    aboutToDisappear(): void {
+        this.logger.info('TimelinePageAboutToDisappear');
         this.dataSource.unregisterCallback('updateGroupData');
         this.dataSource.unregisterCallback('updateCount');
         this.appBroadCast.off(BroadCastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
@@ -234,6 +239,8 @@ export struct TimelinePage {
         this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
         this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
         MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+        this.broadCast.off(null, null)
+        TimelineDataSourceManager.destroyInstance()
     }
 
     // Calculate the number of squares per row
@@ -242,13 +249,21 @@ export struct TimelinePage {
         let contentWidth = ScreenManager.getInstance().getWinWidth() - sideBarWidth;
         let margin = 0;
         let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
-        this.gridRowCount = Math.max(Constants.GRID_MIN_COUNT,
+        let newCount = Math.max(Constants.GRID_MIN_COUNT,
             Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
                 + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
+        if(newCount != this.gridRowCount) {
+            if (this.gridRowCount == 0) {
+                this.gridRowCount = newCount;
+            } else {
+                this.gridRowCount = newCount;
+                this.dataSource.forceUpdate();
+            }
+        }
         this.logger.info(`initGridRowCount contentWidth: ${contentWidth}`);
     }
 
-    private moveOperation(albumName: string) {
+    private moveOperation(albumInfo: AlbumInfo) {
         let menuContext = new MenuContext();
         this.onMoveStart = this.onMoveStart.bind(this);
         this.onMoveEnd = this.onMoveEnd.bind(this);
@@ -257,12 +272,12 @@ export struct TimelinePage {
             .withOperationStartCallback(this.onMoveStart)
             .withOperationEndCallback(this.onMoveEnd)
             .withBroadCast(this.broadCast)
-            .withAlbumName(albumName);
+            .withAlbumInfo(albumInfo);
         let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(MoveMenuOperation, menuContext);
         menuOperation.doAction();
     }
 
-    private copyOperation(albumName: string) {
+    private copyOperation(albumInfo: AlbumInfo) {
         let menuContext = new MenuContext();
         this.onCopyStart = this.onCopyStart.bind(this);
         this.onCopyEnd = this.onCopyEnd.bind(this);
@@ -271,7 +286,7 @@ export struct TimelinePage {
             .withOperationStartCallback(this.onCopyStart)
             .withOperationEndCallback(this.onCopyEnd)
             .withBroadCast(this.broadCast)
-            .withAlbumName(albumName);
+            .withAlbumInfo(albumInfo);
         let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(CopyMenuOperation, menuContext);
         menuOperation.doAction();
     }
@@ -370,7 +385,7 @@ export struct TimelinePage {
                 this.mSelectManager.selectAll(true);
                 break;
             case Action.DESELECT_ALL:
-                this.mSelectManager.deSelectAll();
+                this.mSelectManager.unselectAll();
                 break;
             case Action.DELETE:
                 menuContext = new MenuContext();
@@ -401,17 +416,6 @@ export struct TimelinePage {
             case Action.COPY:
                 this.routeSelectAlbumPage(MediaOperationType.Copy);
                 break;
-            case Action.DOWNLOAD:
-                this.onCopyStart = this.onCopyStart.bind(this);
-                this.onCopyEnd = this.onCopyEnd.bind(this);
-                menuContext
-                    .withSelectManager(this.mSelectManager)
-                    .withOperationStartCallback(this.onCopyStart)
-                    .withOperationEndCallback(this.onCopyEnd)
-                    .withBroadCast(this.broadCast)
-                    .withAlbumName('FromOtherDevices');
-                menuOperation = MenuOperationFactory.getInstance().createMenuOperation(CopyMenuOperation, menuContext);
-                menuOperation.doAction();
             default:
                 break;
         }
@@ -419,11 +423,12 @@ export struct TimelinePage {
 
     routeSelectAlbumPage(pageType: string): void {
         router.push({
-            uri: "common/view/mediaOperation/MediaOperationPage",
+            uri: "common/view/browserOperation/MediaOperationPage",
             params: {
                 pageType : pageType
             }
         });
+        this.routerStart = true;
     }
 
     onMediaLibDataChange(changeType){
@@ -466,6 +471,7 @@ export struct TimelinePage {
     }
 
     onDeleteStart(): void {
+        this.logger.info(`onDeleteStart`);
         this.deleteMode = true;
         this.isDataFreeze = true;
         MediaObserver.getInstance().unregisterObserver(this.dataObserver);
@@ -473,14 +479,18 @@ export struct TimelinePage {
     }
 
     onDeleteEnd(): void {
+        this.logger.info(`onDeleteEnd`);
         this.isDataFreeze = false;
+        TraceControllerUtils.startTrace('onModeChange');
         this.onModeChange();
+        TraceControllerUtils.finishTrace('onModeChange');
         MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.onChange('image');
+        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
         this.dataSource.unfreeze();
     }
 
     onCopyStart(): void {
+        this.logger.info(`onCopyStart`);
         this.isDataFreeze = true;
         MediaObserver.getInstance().unregisterObserver(this.dataObserver);
         this.dataSource.freeze();
@@ -488,11 +498,13 @@ export struct TimelinePage {
     }
 
     onCopyEnd(err, count, total): void {
-        this.logger.debug(`onCopyEnd count: ${count}, total: ${total}`);
+        this.logger.info(`onCopyEnd count: ${count}, total: ${total}`);
         this.isDataFreeze = false;
+        TraceControllerUtils.startTrace('onModeChange');
         this.onModeChange();
+        TraceControllerUtils.finishTrace('onModeChange');
         MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.onChange('image');
+        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
         this.dataSource.unfreeze();
         if (err) {
             UiUtil.showToast($r('app.string.copy_failed_single'));
@@ -500,18 +512,22 @@ export struct TimelinePage {
     }
 
     onMoveStart(): void {
+        this.logger.info(`onMoveStart`);
         this.isDataFreeze = true;
         MediaObserver.getInstance().unregisterObserver(this.dataObserver);
         this.dataSource.freeze();
     }
 
     onMoveEnd(err, count, total): void {
-        this.logger.debug(`onMoveEnd count: ${count}, total: ${total}`);
+        this.logger.info(`onMoveEnd count: ${count}, total: ${total}`);
         this.isDataFreeze = false;
+        TraceControllerUtils.startTrace('onModeChange');
         this.onModeChange();
+        TraceControllerUtils.finishTrace('onModeChange');
         MediaObserver.getInstance().registerObserver(this.dataObserver);
         this.dataSource.unfreeze();
-        this.dataSource.onChange('image');
+        this.dataSource.switchRefreshOn();
+        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
         if (err) {
             UiUtil.showToast($r('app.string.move_failed_single'));
         }
@@ -542,22 +558,24 @@ export struct TimelinePage {
 
     // The callbacks after index page shows
     onIndexPageShow() {
+        this.logger.info(`onIndexPageShow`)
         if (this.isShow && this.isInCurrentTab) {
-            this.onActive();
             let params = router.getParams();
-            if (params != null && params.pageType != null) {
+            if (this.routerStart && params != null && params.pageType != null) {
                 this.logger.info(`MediaOperation back ${JSON.stringify(params)}`)
                 switch(params.pageType) {
                     case MediaOperationType.Move:
-                        this.moveOperation(params.albumName);
+                        this.moveOperation(JSON.parse(params.albumInfo.toString()));
                         break;
                     case MediaOperationType.Copy:
-                        this.copyOperation(params.albumName);
+                        this.copyOperation(JSON.parse(params.albumInfo.toString()));
                         break;
                     default:
                         break;
                 }
             }
+            this.routerStart = false;
+            this.onActive();
         } else if (!this.isShow && this.isInCurrentTab) {
             this.onInActive();
         } else {
@@ -594,14 +612,12 @@ export struct TimelinePage {
                 justifyContent: FlexAlign.Start,
                 alignItems: ItemAlign.Start
             }) {
-                TimelinePageActionBar({onMenuClicked: this.onMenuClicked});
+                if (this.isEmpty || !this.initLoadFinish) {
+                    NoPhotoIndexComponent({ index: Constants.TIMELINE_PAGE_INDEX })
+                } else {
+                    TimelinePageActionBar({ onMenuClicked: this.onMenuClicked });
 
-                Stack() {
-                    if (this.isEmpty) {
-                        NoPhotoIndexComponent({
-                            index: Constants.TIMELINE_PAGE_INDEX
-                        })
-                    } else {
+                    Stack() {
                         Grid(this.scroller) {
                             LazyForEach(this.dataSource, (item) => {
                                 if (item.viewType == ViewType.GROUP_TITLE) {
@@ -638,19 +654,24 @@ export struct TimelinePage {
                             }
                         })
 
-                        TimelineScrollBar({scroller: this.scroller})
+                        Column() {
+                            TimelineScrollBar({ scroller: this.scroller })
+                        }
+                        .position({ x: '100%', y: 0 })
+                        .markAnchor({
+                            x: '100%',
+                            y: 0
+                        })
                     }
-                }
-                .layoutWeight(1)
-                .padding({
-                    bottom: this.isSidebar ? 0 : $r('app.float.album_set_tab_bar_height')
-                })
-
-                if (this.isSelectedMode) {
-                    TimelinePageToolBar({ onMenuClicked: this.onMenuClicked })
+                    .layoutWeight(1)
+                    .padding({
+                        bottom: this.isSidebar ? 0 : $r('app.float.album_set_tab_bar_height')
+                    })
                 }
             }
-
+            if (this.isSelectedMode) {
+                TimelinePageToolBar({ onMenuClicked: this.onMenuClicked })
+            }
             CustomDialogView()
         }
     }

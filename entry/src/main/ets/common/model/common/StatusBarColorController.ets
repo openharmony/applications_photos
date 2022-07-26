@@ -14,9 +14,8 @@
  */
 
 
-import {UiUtil} from '../../utils/UiUtil.ets'
-import {ActionBarProp} from '../browser/operation/ActionBarProp.ets';
-import {Logger} from '../../utils/Logger.ets'
+import {UiUtil} from '../../utils/UiUtil'
+import {Logger} from '../../utils/Logger'
 import {Constants} from './Constants'
 
 export enum StatusBarColorMode {

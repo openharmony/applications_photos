@@ -15,28 +15,31 @@
 import {AlbumDefine} from '../AlbumDefine'
 import {AlbumInfo} from './AlbumInfo'
 import {AsyncCallback} from '../../common/AsyncCallback'
-import {BrowserDataImpl} from '../BrowserDataImpl.ets'
-import {MediaLibraryAccess} from '../../../access/MediaLibraryAccess.ets'
-import {Logger} from '../../../utils/Logger.ets'
+import {BrowserDataImpl} from '../BrowserDataImpl'
+import {MediaLibraryAccess} from '../../../access/MediaLibraryAccess'
+import {Logger} from '../../../utils/Logger'
+import {UiUtil} from '../../../utils/UiUtil'
 
 export class AlbumDataImpl extends BrowserDataImpl {
     logger = new Logger('AlbumDataImpl');
 
     private virtualAlbumList = [
-        AlbumDefine.ALBUM_NAME_ALL,
-        AlbumDefine.ALBUM_NAME_VIDEO,
+        AlbumDefine.ALBUM_ID_ALL,
+        AlbumDefine.ALBUM_ID_VIDEO,
     ];
     private entityAlbumList = new Map([
-        [AlbumDefine.CAMERA_ALBUM_PATH, AlbumDefine.ALBUM_NAME_CAMERA],
-        [AlbumDefine.ALBUM_NAME_REMOTE, AlbumDefine.ALBUM_NAME_REMOTE],
+        [`${MediaLibraryAccess.getInstance().PUBLIC_PATH_CAMERA}`, AlbumDefine.ALBUM_ID_CAMERA],
+        [`${MediaLibraryAccess.getInstance().PUBLIC_PATH_CAMERA}${AlbumDefine.REMOTE_ALBUM_PATH}/`, AlbumDefine.ALBUM_ID_REMOTE],
+        [`${MediaLibraryAccess.getInstance().PUBLIC_PATH_IMAGE}${AlbumDefine.SNAPSHOT_ALBUM_PATH}/`, AlbumDefine.ALBUM_ID_SNAPSHOT],
     ]);
 
     private deviceId:string = '';
     private deviceName:string = '';
+    private moreInfo: boolean = false;
 
     constructor(param) {
         super();
-        if (param) {
+        if (param && param.deviceId) {
             this.logger.debug(`Remote networkId: ${param.deviceId}`);
             this.deviceId = param.deviceId;
             this.deviceName = param.deviceName;
@@ -44,22 +47,47 @@ export class AlbumDataImpl extends BrowserDataImpl {
             this.logger.debug(`Local`);
         }
 
+        if (param && param.moreInfo){
+            this.moreInfo = param.moreInfo
+        }
+
         this.logger = new Logger(`AlbumDataImpl[${this.deviceId}]`);
     }
 
-    async getData(callback, param) : Promise<void> {
-        return new Promise((resolve) => {
-            if (param == null) {
-                this.buildAlbums(callback);
-            } else {
-                this.genAlbumsInfo(callback,param);
-            }
-            resolve();
-        });
+    getData(callback, param) : void {
+        if (param == null) {
+            this.buildAlbums(callback);
+        } else {
+            this.genAlbumsInfo(callback,param);
+        }
     }
 
-    private async genAlbumsInfo(cb, uris) {
-        this.logger.debug(`genAlbumsInfo uris: ${JSON.stringify(uris)}`);
+    async getDataById(id: any, deviceId? :any) {
+        let albums = await MediaLibraryAccess.getInstance().getAlbums(AlbumDefine.getAlbumFetchOpt(id, deviceId));
+        if (albums && albums.length > 0){
+            return albums[0];
+        }else{
+            return null;
+        }
+    }
+
+    async getDataByName(name: string, albumInfo: any) {
+        let albums = await MediaLibraryAccess.getInstance().getAlbums(AlbumDefine.getAlbumFetchOptByName(name, albumInfo.relativePath));
+        if (albums && albums.length > 0){
+            let fileResult = await albums[0].getFileAssets(AlbumDefine.getFileFetchOpt(''));
+            let count = fileResult.getCount();
+            if (count <= 0) {
+                this.logger.warn(`Not valid album Name: ${albums[0].albumName} URI: ${albums[0].albumUri} relativePath: ${albums[0].relativePath} id: ${albums[0].albumId}`);
+                return null;
+            }
+            return albums[0];
+        }else{
+            return null;
+        }
+    }
+
+    private async genAlbumsInfo(cb, ids) {
+        this.logger.debug(`genAlbumsInfo ids: ${JSON.stringify(ids)}`);
 
         let res = {
             uris: [],
@@ -67,15 +95,15 @@ export class AlbumDataImpl extends BrowserDataImpl {
             videoCount: 0,
         };
 
-        for (let name of uris) {
-            let objects = await super.getItems(name, -1, -1, this.deviceId);
-            this.logger.debug(`get album objects: Name:${name} length: ${objects.length}`);
+        for (let id of ids) {
+            let objects = await super.getItems(id, -1, -1, this.deviceId);
+            this.logger.debug(`get album objects: id:${id} length: ${objects.length}`);
 
             res.count += objects.length;
             for (let item of objects) {
                 res.uris.push(item.uri);
             }
-            let tmpAlbum = new AlbumInfo('', name, '', 0, '');
+            let tmpAlbum = new AlbumInfo(id, '', '', '', 0, '', '');
             await this.updateAlbumVideoCount(tmpAlbum);
             this.logger.debug(`get album objects: vcount: ${tmpAlbum.videoCount}`);
             res.videoCount += tmpAlbum.videoCount;
@@ -113,15 +141,17 @@ export class AlbumDataImpl extends BrowserDataImpl {
             return;
         }
 
-        for (let name of this.virtualAlbumList) {
-            let file = await this.getFirstObject(AlbumDefine.getFetchOpt(name, this.deviceId));
+        for (let id of this.virtualAlbumList) {
+            let file = await this.getFirstObject(AlbumDefine.getFileFetchOpt(id, this.deviceId));
             if (file.count > 0) {
-                let data = new AlbumInfo(this.getThumbnailSafe(file.obj.uri),
-                    name, this.getAlbumDisplayName(name), file.count, this.deviceId);
+                let data = new AlbumInfo(id, this.getThumbnailSafe(file.obj.uri),
+                    id, await this.getAlbumDisplayName(id), file.count, this.deviceId, '');
+                data.coverOrientation = file.obj.orientation;
                 data.deviceName = this.deviceName;
-                data.isDisableDelete = AlbumDefine.ALBUM_DISABLE_DELETE_LIST.has(name);
-                data.isDisableRename = AlbumDefine.ALBUM_DISABLE_RENAME_LIST.has(name);
-                albumList.set(data.name, data);
+                data.innerId = id;
+                data.isDisableDelete = AlbumDefine.ALBUM_DISABLE_DELETE_LIST.has(data.innerId);
+                data.isDisableRename = AlbumDefine.ALBUM_DISABLE_RENAME_LIST.has(data.innerId);
+                albumList.set(data.innerId, data);
             }
         }
 
@@ -133,12 +163,15 @@ export class AlbumDataImpl extends BrowserDataImpl {
             return;
         }
 
-        let favAlbum = await MediaLibraryAccess.getFavoriteAlbum(AlbumDefine.getFetchOpt(AlbumDefine.ALBUM_NAME_FAVOR));
+        let favAlbum = await MediaLibraryAccess.getInstance().getFavoriteAlbum(AlbumDefine.getFileFetchOpt(AlbumDefine.ALBUM_ID_FAVOR));
         if (favAlbum.count > 0) {
-                let fav = new AlbumInfo(await this.getThumbnailSafe(favAlbum.file.uri), AlbumDefine.ALBUM_NAME_FAVOR, this.getAlbumDisplayName(AlbumDefine.ALBUM_NAME_FAVOR), favAlbum.count, this.deviceId);
-                fav.isDisableDelete = AlbumDefine.ALBUM_DISABLE_DELETE_LIST.has(fav.name);
-                fav.isDisableRename = AlbumDefine.ALBUM_DISABLE_RENAME_LIST.has(fav.name);
-                albumList.set(fav.name, fav);
+                let fav = new AlbumInfo(AlbumDefine.ALBUM_ID_FAVOR, this.getThumbnailSafe(favAlbum.file.uri), AlbumDefine.ALBUM_ID_FAVOR,
+                    await this.getAlbumDisplayName(AlbumDefine.ALBUM_ID_FAVOR), favAlbum.count, this.deviceId, '');
+                fav.coverOrientation = favAlbum.file.orientation;
+                fav.innerId = fav.id;
+                fav.isDisableDelete = AlbumDefine.ALBUM_DISABLE_DELETE_LIST.has(fav.innerId);
+                fav.isDisableRename = AlbumDefine.ALBUM_DISABLE_RENAME_LIST.has(fav.innerId);
+                albumList.set(fav.innerId, fav);
         }
     }
 
@@ -147,12 +180,14 @@ export class AlbumDataImpl extends BrowserDataImpl {
             return;
         }
 
-        let trashAlbum = await MediaLibraryAccess.getTrashAlbum(AlbumDefine.getFetchOpt(AlbumDefine.ALBUM_NAME_RECYCLE));
+        let trashAlbum = await MediaLibraryAccess.getInstance().getTrashAlbum(AlbumDefine.getFileFetchOpt(AlbumDefine.ALBUM_ID_RECYCLE));
         if (trashAlbum.count > 0) {
-            let trash = new AlbumInfo(await this.getThumbnailSafe(trashAlbum.file.uri), AlbumDefine.ALBUM_NAME_RECYCLE,
-                this.getAlbumDisplayName(AlbumDefine.ALBUM_NAME_RECYCLE), trashAlbum.count, this.deviceId);
-            trash.isDisableDelete = AlbumDefine.ALBUM_DISABLE_DELETE_LIST.has(trash.name);
-            trash.isDisableRename = AlbumDefine.ALBUM_DISABLE_RENAME_LIST.has(trash.name);
+            let trash = new AlbumInfo(AlbumDefine.ALBUM_ID_RECYCLE, this.getThumbnailSafe(trashAlbum.file.uri), AlbumDefine.ALBUM_ID_RECYCLE,
+                await this.getAlbumDisplayName(AlbumDefine.ALBUM_ID_RECYCLE), trashAlbum.count, this.deviceId, '');
+            trash.coverOrientation = trashAlbum.file.orientation;
+            trash.innerId = trash.id;
+            trash.isDisableDelete = AlbumDefine.ALBUM_DISABLE_DELETE_LIST.has(trash.innerId);
+            trash.isDisableRename = AlbumDefine.ALBUM_DISABLE_RENAME_LIST.has(trash.innerId);
 
             albumList.push(trash);
         }
@@ -161,35 +196,34 @@ export class AlbumDataImpl extends BrowserDataImpl {
 
     private async getEntityAlbumSourceData(output) {
         this.logger.debug('getEntityAlbumSourceData');
-        let fileFetchOpt = {
-            selections: '',
-            selectionArgs: [],
-            order: AlbumDefine.QUERY_ORDER_BASE
-        };
 
-        let albums = await MediaLibraryAccess.getAlbums(AlbumDefine.getAlbumFetchOpt('', this.deviceId));
+        let albums = await MediaLibraryAccess.getInstance().getAlbums(AlbumDefine.getAlbumFetchOpt('', this.deviceId));
         if (albums) {
             for (let item of albums) {
-                let fileResult = await item.getFileAssets(fileFetchOpt);
+                let fileResult = await item.getFileAssets(AlbumDefine.getFileFetchOpt(''));
                 let count = fileResult.getCount();
                 if (count <= 0) {
-                    this.logger.warn(`Not valid album Name: ${item.albumName} URI: ${item.albumUri}`);
+                    this.logger.warn(`Not valid album Name: ${item.albumName} URI: ${item.albumUri} relativePath: ${item.relativePath} id: ${item.albumId}`);
                     continue;
                 }
                 let obj = await fileResult.getFirstObject();
-                this.logger.debug(`albumName: ${item.albumName} file count: ${count} coverUri:${obj.uri}`);
+                this.logger.debug(`albumName: ${item.albumName} file count: ${count} coverUri:${obj.uri} relativePath: ${item.relativePath} id: ${item.albumId}`);
 
-                let album = new AlbumInfo(this.getThumbnailSafe(obj.uri),
-                    item.albumName, item.albumName, count, this.deviceId);
+                let album = new AlbumInfo(`${item.albumId}`, this.getThumbnailSafe(obj.uri),
+                    item.albumName, item.albumName, count, this.deviceId, obj.relativePath);
+                album.coverOrientation = obj.orientation;
                 album.uri = item.albumUri;
                 album.deviceName = this.deviceName;
+                album.innerId = album.id;
 
-                this.fixDefaultEntityAlbum(album, obj);
+                await this.fixDefaultEntityAlbum(album);
 
-                album.isDisableDelete = AlbumDefine.ALBUM_DISABLE_DELETE_LIST.has(album.name);
-                album.isDisableRename = AlbumDefine.ALBUM_DISABLE_RENAME_LIST.has(album.name);
-                await this.updateAlbumVideoCount(album);
-                output.set(album.name, album);
+                album.isDisableDelete = AlbumDefine.ALBUM_DISABLE_DELETE_LIST.has(album.innerId);
+                album.isDisableRename = AlbumDefine.ALBUM_DISABLE_RENAME_LIST.has(album.innerId);
+                if (this.moreInfo){
+                    await this.updateAlbumVideoCount(album);
+                }
+                output.set(album.innerId, album);
 
                 fileResult.close();
             }
@@ -200,31 +234,33 @@ export class AlbumDataImpl extends BrowserDataImpl {
         this.logger.debug('get entity album done');
     }
 
-    private getAlbumDisplayName(name) {
+    private async getAlbumDisplayName(name) {
         switch (name) {
-            case AlbumDefine.ALBUM_NAME_ALL:
-                return $r('app.string.album_all');
-            case AlbumDefine.ALBUM_NAME_VIDEO:
-                return $r('app.string.album_video');
-            case AlbumDefine.ALBUM_NAME_RECYCLE:
-                return $r('app.string.album_recycle');
-            case AlbumDefine.ALBUM_NAME_CAMERA:
-                return $r('app.string.album_camera');
-            case AlbumDefine.ALBUM_NAME_FAVOR:
-                return $r('app.string.album_favor');
-            case AlbumDefine.ALBUM_NAME_REMOTE:
-                return $r('app.string.album_remote_device');
+            case AlbumDefine.ALBUM_ID_ALL:
+                return await UiUtil.getResourceString($r('app.string.album_all'));
+            case AlbumDefine.ALBUM_ID_VIDEO:
+                return await UiUtil.getResourceString($r('app.string.album_video'));
+            case AlbumDefine.ALBUM_ID_RECYCLE:
+                return await UiUtil.getResourceString($r('app.string.album_recycle'));
+            case AlbumDefine.ALBUM_ID_CAMERA:
+                return await UiUtil.getResourceString($r('app.string.album_camera'));
+            case AlbumDefine.ALBUM_ID_FAVOR:
+                return await UiUtil.getResourceString($r('app.string.album_favor'));
+            case AlbumDefine.ALBUM_ID_REMOTE:
+                return await UiUtil.getResourceString($r('app.string.album_remote_device'));
+            case AlbumDefine.ALBUM_ID_SNAPSHOT:
+                return await UiUtil.getResourceString($r('app.string.album_screen_shot'));
             default:
                 break;
         }
         return null;
     }
 
-    private fixDefaultEntityAlbum(album, src) {
-        let value = this.entityAlbumList.get(album.name);
-        if (value != undefined && src.relativePath == `${globalThis.__MediaLibraryAccess_PUBLIC_PATH_IMAGE}${album.name}/`) {
-            album.displayName = this.getAlbumDisplayName(value);
-            album.name = value;
+    private async fixDefaultEntityAlbum(album: AlbumInfo) {
+        let value = this.entityAlbumList.get(album.relativePath);
+        if (value != undefined) {
+            album.displayName = await this.getAlbumDisplayName(value);
+            album.innerId = value;
         }
     }
 
@@ -252,23 +288,23 @@ export class AlbumDataImpl extends BrowserDataImpl {
         return AlbumDefine.ALBUM_DEFAULT_SORT_LIST;
     }
 
-    getMediaItemCount(callback, albumInfo) {
+    getDataCount(callback, albumInfo) {
         this.updateAlbumVideoCount(albumInfo);
     }
 
     async updateAlbumVideoCount(albumInfo: AlbumInfo) {
-        this.logger.debug(`updateAlbumVideoCount ${albumInfo.name}`);
-        switch (albumInfo.name) {
-            case AlbumDefine.ALBUM_NAME_ALL:
-                albumInfo.videoCount = await super.getCount(AlbumDefine.getFetchOpt(AlbumDefine.ALBUM_NAME_VIDEO));
+        this.logger.debug(`updateAlbumVideoCount ${albumInfo.id}`);
+        switch (albumInfo.id) {
+            case AlbumDefine.ALBUM_ID_ALL:
+                albumInfo.videoCount = await super.getCount(AlbumDefine.getFileFetchOpt(AlbumDefine.ALBUM_ID_VIDEO));
                 break;
-            case AlbumDefine.ALBUM_NAME_VIDEO:
+            case AlbumDefine.ALBUM_ID_VIDEO:
                 albumInfo.videoCount = albumInfo.count;
                 break;
             default:
                 albumInfo.videoCount
-                    = await MediaLibraryAccess.getEntityAlbumCount(AlbumDefine.getAlbumFetchOpt(albumInfo.name),
-                    AlbumDefine.getFetchOpt(AlbumDefine.ALBUM_NAME_VIDEO));
+                    = await MediaLibraryAccess.getInstance().getEntityAlbumCount(AlbumDefine.getAlbumFetchOpt(albumInfo.id),
+                    AlbumDefine.getFileFetchOpt(AlbumDefine.ALBUM_ID_VIDEO));
                 break;
         }
     }

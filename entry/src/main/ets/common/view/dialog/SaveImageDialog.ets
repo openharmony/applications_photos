@@ -14,9 +14,9 @@
  */
 
 import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {BroadCast} from '../../../common/utils/BroadCast.ets'
+import {BroadCast} from '../../../common/utils/BroadCast'
 import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants.ets';
+import {Constants} from '../../model/common/Constants';
 
 @CustomDialog
 export struct SaveImageDialog {
@@ -37,18 +37,24 @@ export struct SaveImageDialog {
 
     build() {
         Column() {
-            Text($r('app.string.edit_save_picture_text')).fontSize($r('sys.float.ohos_id_text_size_body1'))
-                .margin({bottom : $r('app.float.dialog_content_margin'), top : $r('app.float.dialog_content_margin')})
+            Row() {
+                Text($r('app.string.edit_save_picture_text')).fontSize($r('sys.float.ohos_id_text_size_body1'))
+                    .flexGrow(1)
+                LoadingProgress().width($r('app.float.image_save_dialog_loading_w'))
+                    .height($r('app.float.image_save_dialog_loading_h'))
+            }
+            .width('100%')
+            .alignItems(VerticalAlign.Center)
         }
         .alignItems(HorizontalAlign.Start)
         .width(ScreenManager.getInstance().getColumnsWidth(4))
         .backgroundColor($r('app.color.white'))
-        .borderRadius($r('app.float.dialog_content_margin'))
+        .borderRadius($r('app.float.dialog_border_radius'))
         .margin({
-            right: $r('app.float.dialog_content_margin'),
-            left: $r('app.float.dialog_content_margin'),
+            right: $r('app.float.dialog_window_margin'),
+            left: $r('app.float.dialog_window_margin'),
             bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
         })
-        .padding({left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin')})
+        .padding({left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin'), bottom: $r('app.float.dialog_content_margin'), top: $r('app.float.dialog_content_margin')})
     }
 }

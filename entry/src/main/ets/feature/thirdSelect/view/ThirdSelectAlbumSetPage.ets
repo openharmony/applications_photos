@@ -14,20 +14,19 @@
  */
 
 import router from '@system.router'
-import app from '@system.app'
-import {ThirdAlbumGridItem} from './/ThirdAlbumGridItem.ets'
-import {Action} from '../../../common/model/browser/operation/Action.ets'
+import {ThirdAlbumGridItem} from './ThirdAlbumGridItem'
+import {Action} from '../../../common/view/browserOperation/Action'
 import {ThirdSelectedPageActionBar} from './ThirdSelectedPageActionBar'
-import {ActionBarProp} from '../../../common/model/browser/operation/ActionBarProp.ets'
-import {AlbumSetDataSource} from '../../../common/model/browser/album/AlbumSetDataSource.ets'
+import {ActionBarProp} from '../../../common/view/browserOperation/ActionBarProp'
+import {AlbumSetDataSource} from '../../../common/model/browser/album/AlbumSetDataSource'
 import {Logger} from '../utils/Logger'
 import {SelectUtil} from '../../../common/model/browser/photo/SelectUtil'
-import {Constants} from '../../../common/model/common/Constants.ets'
-import {ThirdSelectManager} from '../../../common/model/browser/SelectManager.ets'
+import {Constants} from '../../../common/model/common/Constants'
+import {ThirdSelectManager} from '../../../common/model/browser/SelectManager'
 import {BroadCast} from '../../../common/utils/BroadCast'
 import {NoPhotoComponent} from '../../../common/view/NoPhotoComponent'
 import {ScreenManager} from '../../../common/model/common/ScreenManager'
-import {AlbumDefine} from '../../../common/model/browser/AlbumDefine.ets'
+import {AlbumDefine} from '../../../common/model/browser/AlbumDefine'
 import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
 import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
 
@@ -44,7 +43,7 @@ export struct ThirdSelectAlbumSetPage {
     @Provide moreMenuList: Array<Action> = new Array<Action>();
     isFromWallpaper = false; // Whether the current interface is opened from the wallpaper
     type: string;
-    isFromFa: boolean;
+    isFromFa: boolean = false;
     selectManager: ThirdSelectManager;
     @State gridRowCount: number = 3;
     isActive = false;
@@ -53,22 +52,28 @@ export struct ThirdSelectAlbumSetPage {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
     @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
+    isFromFaPhoto: boolean = false;
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.albums = new AlbumSetDataSource(this.broadCast);
         let param = router.getParams();
         if (param != null) {
-            this.isMultiPick = param.isMultiPick;
-            this.type = param.type;
+            this.isMultiPick = new Boolean(param.isMultiPick).valueOf();
+            param.type && (this.type = param.type.toString());
             if (param.isFromFa != undefined || param.isFromFa != null) {
-                this.isFromFa = param.isFromFa;
+                this.isFromFa = new Boolean(param.isFromFa).valueOf();
             }
-            this.isFromWallpaper = param.isFromWallpaper;
+            if (param.isFromFaPhoto != undefined || param.isFromFaPhoto != null) {
+                this.isFromFaPhoto = new Boolean(param.isFromFaPhoto).valueOf();
+            }
+            this.isFromWallpaper = new Boolean(param.isFromWallpaper).valueOf();
             if (this.isFromWallpaper) {
-                this.maxSelectCount = param.remainingOfWallpapers;
+                this.maxSelectCount = new Number(param.remainingOfWallpapers).valueOf() || 0
             }
         }
+        this.logger.info(`isFromFa: ${this.isFromFa} isFromFaPhoto ${this.isFromFaPhoto}`);
+        this.albums.setBlackList([AlbumDefine.ALBUM_ID_VIDEO, AlbumDefine.ALBUM_ID_RECYCLE])
         this.selectManager = new ThirdSelectManager();
         this.onMenuClicked = this.onMenuClicked.bind(this);
         this.logger.info(`isMultiPick: ${this.isMultiPick}`);
@@ -89,6 +94,10 @@ export struct ThirdSelectAlbumSetPage {
             });
         }
 
+        ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
+            this.initGridRowCount();
+        });
+
         this.initGridRowCount();
     }
 
@@ -100,12 +109,12 @@ export struct ThirdSelectAlbumSetPage {
         this.logger.info(`initGridRowCount gridRowCount: ${this.gridRowCount}`);
     }
 
-    private onPageShow() {
+    onPageShow() {
         this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
         this.onActive();
     }
 
-    private onPageHide() {
+    onPageHide() {
         this.onInActive();
     }
 
@@ -142,6 +151,9 @@ export struct ThirdSelectAlbumSetPage {
                     this.logger.info(`terminateSelfWithResult result: ${result}`);
                 });
                 break;
+            case Action.BACK:
+                router.back();
+                break;
             case Action.OK:
                 this.logger.info('click ok');
                 this.setPickResult();
@@ -157,15 +169,16 @@ export struct ThirdSelectAlbumSetPage {
             justifyContent: FlexAlign.Start,
             alignItems: ItemAlign.Start
         }) {
-            ThirdSelectedPageActionBar({ leftAction: Action.CANCEL, isMultiPick: this.isMultiPick,
-                title: ActionBarProp.SINGLE_UNSELECT_TITLE, onMenuClicked: this.onMenuClicked })
+            ThirdSelectedPageActionBar({ leftAction: this.isFromFa ? Action.BACK : Action.CANCEL, isMultiPick: this.isMultiPick,
+                title: (this.isFromFa && !this.isFromFaPhoto) ? ActionBarProp.SINGLE_SELECT_ALBUM_TITLE : ActionBarProp.SINGLE_UNSELECT_TITLE,
+                onMenuClicked: this.onMenuClicked })
             Stack() {
                 if (this.isEmpty) {
                     NoPhotoComponent({ title: $r('app.string.title_no_albums') })
                 }
                 Grid() {
                     LazyForEach(this.albums, (item) => {
-                        if (item.name != AlbumDefine.ALBUM_NAME_RECYCLE) {
+                        if (item.name != AlbumDefine.ALBUM_ID_RECYCLE) {
                             if (this.albums.mediaSetList.indexOf(item) == 0) {
                                 GridItem() {
                                     ThirdAlbumGridItem({
@@ -174,7 +187,8 @@ export struct ThirdSelectAlbumSetPage {
                                         isMultiPick: this.isMultiPick,
                                         isFromWallpaper: this.isFromWallpaper,
                                         maxSelectCount: this.maxSelectCount,
-                                        isFromFa: this.isFromFa
+                                        isFromFa: this.isFromFa,
+                                        isFromFaPhoto: this.isFromFaPhoto
                                     })
                                 }.columnStart(0).columnEnd(1)
                             } else {
@@ -185,7 +199,8 @@ export struct ThirdSelectAlbumSetPage {
                                         isMultiPick: this.isMultiPick,
                                         isFromWallpaper: this.isFromWallpaper,
                                         maxSelectCount: this.maxSelectCount,
-                                        isFromFa: this.isFromFa
+                                        isFromFa: this.isFromFa,
+                                        isFromFaPhoto: this.isFromFaPhoto
                                     })
                                 }
                             }
@@ -197,14 +212,13 @@ export struct ThirdSelectAlbumSetPage {
                         left: $r('app.float.max_padding_start'),
                         right: $r('app.float.max_padding_end'),
                         top: $r('app.float.album_set_page_padding_top'),
-                        bottom: $r('app.float.album_set_page_padding_end')
                     })
                     .columnsGap($r('app.float.album_set_grid_column_gap'))
                     .rowsGap($r('app.float.album_set_grid_row_gap'))
             }
         }
         .backgroundColor($r('app.color.default_background_color'))
-            .margin({
+            .padding({
                 top: this.leftBlank[1],
                 bottom: this.leftBlank[3]
             })

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {BroadCast} from '../../../../common/utils/BroadCast.ets'
+import {BroadCast} from '../../../../common/utils/BroadCast'
 import {Constants as PhotoConstants} from '../../../../common/model/browser/photo/Constants'
 
 @Component
@@ -42,6 +42,6 @@ export struct TipPopup{
         .backgroundColor($r('app.color.detail_view_bg_color'))
         .padding($r('app.float.popup_padding'))
         .visibility(this.isShowPop ? Visibility.Visible : Visibility.None)
-        .borderRadius(15)
+        .borderRadius($r('app.float.tip_popup_border_radius'))
     }
 }

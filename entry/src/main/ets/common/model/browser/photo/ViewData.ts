@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {ViewType} from './ViewType.ets'
+import {ViewType} from './ViewType'
 
 export class ViewData {
     viewType: ViewType;

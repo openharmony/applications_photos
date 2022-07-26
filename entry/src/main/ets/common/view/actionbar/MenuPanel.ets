@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger.ets'
-import {ActionBarProp} from '../../model/browser/operation/ActionBarProp.ets'
-import {Action} from '../../model/browser/operation/Action.ets'
-import {ActionBarButton} from './ActionBarButton.ets'
+import {Logger} from '../../utils/Logger'
+import {ActionBarProp} from '../browserOperation/ActionBarProp'
+import {Action} from '../browserOperation/Action'
+import {ActionBarButton} from './ActionBarButton'
 
 // MenuPanel，Right menu button panel
 @Component
@@ -26,7 +26,7 @@ export struct MenuPanel {
     onMenuClicked: Function;
     logger: Logger = new Logger('MenuPanel');
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.logger.info('aboutToAppear.');
         this.onActionBarPropChanged();
     }
@@ -57,9 +57,5 @@ export struct MenuPanel {
             }, menu => (menu.actionType ? menu.actionType.id : menu.actionID))
         }
         .alignItems(VerticalAlign.Center)
-            .margin(
-                {
-                    right: $r('app.float.default_actionbar_padding_right')
-                })
     }
 }

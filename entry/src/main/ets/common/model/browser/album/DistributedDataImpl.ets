@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {BrowserDataImpl} from '../BrowserDataImpl.ets'
+import {BrowserDataImpl} from '../BrowserDataImpl'
 import {PeerInfo} from './PeerInfo'
-import {MediaLibraryAccess} from '../../../access/MediaLibraryAccess.ets';
+import {MediaLibraryAccess} from '../../../access/MediaLibraryAccess';
 import {AlbumDefine} from '../AlbumDefine'
-import {Logger} from '../../../utils/Logger.ets'
+import {Logger} from '../../../utils/Logger'
 
 export class DistributedDataImpl extends BrowserDataImpl {
     constructor() {
@@ -24,27 +24,28 @@ export class DistributedDataImpl extends BrowserDataImpl {
         this.logger = new Logger('DistributedDataImpl');
     }
 
-    async getData(callback:any, param:any): Promise<void> {
+    getData(callback:any, param:any): void{
         let result : PeerInfo[] = [];
 
-        let devices = await MediaLibraryAccess.getConnectedRemoteDevice();
-        for (let dev of devices) {
-            this.logger.info(`Online remote Device Name:${dev.deviceName} networkID: ${dev.networkId}`);
-            let peerInfo = new PeerInfo(null, dev.deviceName, 0, dev.networkId);
-            let file = await this.getFirstObject(AlbumDefine.getFetchOpt(AlbumDefine.ALBUM_NAME_ALL, dev.networkId));
+        MediaLibraryAccess.getInstance().getConnectedRemoteDevice().then(async (devices) => {
+            for (let dev of devices) {
+                this.logger.info(`Online remote Device Name:${dev.deviceName} networkID: ${dev.networkId}`);
+                let peerInfo = new PeerInfo(null, dev.deviceName, 0, dev.networkId);
+                let file = await this.getFirstObject(AlbumDefine.getFileFetchOpt(AlbumDefine.ALBUM_ID_ALL, dev.networkId));
 
-            if (file.count > 0) {
-                peerInfo.coverUri = this.getThumbnailSafe(file.obj.uri);
-                peerInfo.count = file.count;
+                if (file.count > 0) {
+                    peerInfo.coverUri = this.getThumbnailSafe(file.obj.uri);
+                    peerInfo.count = file.count;
+                }
+
+                result.push(peerInfo);
             }
 
-            result.push(peerInfo);
-        }
-
-        callback(result);
-
-        return new Promise((resolve) => { resolve(); });
+            callback(result);
+        });
     }
 
-    getMediaItemCount(callback:any, param:any): void {}
+    getDataCount(callback:any, param:any): void {}
+    getDataById(id: any, deviceId? :any): any{}
+    getDataByName(name: string, albumInfo: any): any{}
 }

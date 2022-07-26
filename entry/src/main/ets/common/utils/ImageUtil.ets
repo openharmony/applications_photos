@@ -13,10 +13,17 @@
  * limitations under the License.
  */
 
-import {Logger} from './Logger.ets'
+import {Logger} from './Logger'
 
 export class ImageUtil {
     static logger: Logger = new Logger('ImageUtil');
+    private static readonly MAX_BIT = 30;
+    private static readonly BIT_SIXTEEN = 16;
+    private static readonly BIT_EIGHT = 8;
+    private static readonly BIT_FOUR = 4;
+    private static readonly BIT_TWO = 2;
+    private static readonly BIT_ONE = 1;
+    private static readonly ROTATE_TWICE = 180; //TODO MAGIC
 
     static computeSampleSize(width: number, height: number, minSideLength: number, maxNumOfPixels: number): number {
         if (width == 0 || height == 0 || minSideLength == 0 || maxNumOfPixels == 0) {
@@ -45,14 +52,14 @@ export class ImageUtil {
 
     static nextPowerOf2(value: number): number {
         let useValue = value;
-        if (useValue <= 0 || useValue > (1 << 30)) {
+        if (useValue <= 0 || useValue > (1 << ImageUtil.MAX_BIT)) {
         }
         useValue -= 1;
-        useValue |= useValue >> 16;
-        useValue |= useValue >> 8;
-        useValue |= useValue >> 4;
-        useValue |= useValue >> 2;
-        useValue |= useValue >> 1;
+        useValue |= useValue >> ImageUtil.BIT_SIXTEEN;
+        useValue |= useValue >> ImageUtil.BIT_EIGHT;
+        useValue |= useValue >> ImageUtil.BIT_FOUR;
+        useValue |= useValue >> ImageUtil.BIT_TWO;
+        useValue |= useValue >> ImageUtil.BIT_ONE;
         this.logger.error(`nextPowerOf2:${useValue}`);
         return useValue + 1;
     }
@@ -71,6 +78,6 @@ export class ImageUtil {
             return 1;
         }
         let orientation = info.orientation || 0;
-        return orientation == 0 || orientation == 180 ? info.width / info.height : info.height / info.width;
+        return orientation == 0 || orientation == ImageUtil.ROTATE_TWICE ? info.width / info.height : info.height / info.width;
     }
 }

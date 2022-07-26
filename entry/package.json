@@ -1,15 +1,10 @@
 {
-  "name": "photos",
+  "name": "entry",
   "version": "1.0.0",
   "ohos": {
     "org": "huawei",
     "buildTool": "hvigor",
-    "directoryLevel": "project"
+    "directoryLevel": "module"
   },
-  "dependencies": {
-    "@ohos/hvigor": "^1.0.6",
-    "@ohos/hvigor-base": "^1.0.6",
-    "@ohos/hvigor-ohos-plugin": "^1.0.6",
-    "@ohos/sdkmanager-common": "^1.1.1"
-  }
+  "dependencies": {}
 }

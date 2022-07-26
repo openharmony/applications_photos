@@ -17,10 +17,12 @@ import {PhotoEditMode} from '../base/PhotoEditType'
 import {BroadCast} from '../../../common/utils/BroadCast'
 import {Constants} from '../../../common/model/common/Constants'
 import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
+import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
 import {PhotoEditorManager} from '../PhotoEditorManager'
 import {PhotoEditCrop} from '../crop/PhotoEditCrop'
 import {Logger} from '../utils/Logger'
 import router from '@system.router'
+import {UiUtil} from '../../../common/utils/UiUtil'
 
 @Component
 export struct TitleBar {
@@ -29,33 +31,61 @@ export struct TitleBar {
     @State name: Resource = undefined;
     @Consume('selected') selectedMode: number;
     @Consume broadCast: BroadCast;
+    @Consume isVerticalScreen: boolean;
     @State isImmersive: boolean = false;
     @Consume editorManager: PhotoEditorManager;
     @Consume cropEdit: PhotoEditCrop;
     private log: Logger = new Logger('Title');
+    private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    private newImageId: number = -1;
+    private immersiveClick: Function = undefined;
+    private onBackAfterSaveComplete: Function = undefined;
+
 
     saveAsNewCallback() {
         this.log.debug('saveAsNewCallback called');
-        PhotoEditorManager.getInstance().save(false, this.saveImageComplete.bind(this));
+        PhotoEditorManager.getInstance().save(false, this.saveImageCallback.bind(this));
     }
 
     replaceOriginalCallback() {
         this.log.debug('replaceOriginalCallback called');
-        PhotoEditorManager.getInstance().save(true, this.saveImageComplete.bind(this));
+        PhotoEditorManager.getInstance().save(true, this.saveImageCallback.bind(this));
     }
 
     discardCallback() {
         this.log.debug('discardCallback called');
     }
 
-    saveImageComplete() {
-        this.log.debug('saveImageComplete called');
+    saveImageCallback(id: number) {
+        this.log.debug(`saveImageCallback id = ${id}`);
+        if (id < 0) {
+            this.broadCast.emit(BroadCastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
+            UiUtil.showToast($r('app.string.edit_photo_save_fail'));
+            router.back();
+        } else {
+            AppStorage.SetOrCreate(BroadCastConstants.PHOTO_EDIT_SAVE_ID, id);
+            this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [true, Constants.PHOTO_TRANSITION_EDIT]);
+        }
+    }
+
+    backAfterSaveComplete() {
+        this.log.debug(`backAfterSaveComplete called`);
+        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, Constants.PHOTO_TRANSITION_EDIT]);
         this.broadCast.emit(BroadCastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
+        AppStorage.SetOrCreate(BroadCastConstants.PHOTO_EDIT_SAVE_ID, -1);
         router.back();
     }
 
     aboutToAppear() {
-        this.broadCast.on(Constants.IS_IMMERSIVE, this.immersive.bind(this));
+        this.immersiveClick = this.immersive.bind(this);
+        this.broadCast.on(Constants.IS_IMMERSIVE, this.immersiveClick);
+        this.onBackAfterSaveComplete = this.backAfterSaveComplete.bind(this);
+        this.appBroadCast.on(BroadCastConstants.PHOTO_EDIT_SAVE_COMPLETE, this.onBackAfterSaveComplete);
+    }
+
+    aboutToDisappear() {
+        this.broadCast.off(Constants.IS_IMMERSIVE, this.immersiveClick);
+        this.appBroadCast.off(BroadCastConstants.PHOTO_EDIT_SAVE_COMPLETE, this.onBackAfterSaveComplete);
     }
 
     immersive(isImmersive : boolean) {
@@ -64,7 +94,7 @@ export struct TitleBar {
 
     onBackClicked() {
         this.log.debug('back clicked');
-        if (this.isRedo || this.isRedo) {
+        if (this.isRedo || this.isUndo) {
             this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
         } else if (this.selectedMode == PhotoEditMode.EDIT_MODE_CROP && this.cropEdit.couldReset()) {
             this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
@@ -113,8 +143,10 @@ export struct TitleBar {
 
                         Row() {
                             Text(this.name)
-                                .fontSize($r('app.float.title_text_default'))
+                                .fontSize(this.isVerticalScreen ? $r('app.float.title_text_default')
+                                                                : $r('app.float.title_text_default_H'))
                                 .fontColor($r('app.color.default_white_color'))
+                                .fontWeight(FontWeight.Bold)
                                 .margin({
                                     left: $r('app.float.adjust_text_margin_bottom'),
                                     right: $r('app.float.adjust_text_margin_left')

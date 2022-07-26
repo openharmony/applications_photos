@@ -21,7 +21,7 @@ import {CropAngle} from './CropType'
 export abstract class MathUtils {
     private static readonly EQUALITY_THRESHOLD = 0.0001;
 
-    static roundOutRect(rect: RectF) {
+    static roundRect(rect: RectF) {
         let copy = { ...rect };
         rect.set(Math.round(copy.left), Math.round(copy.top), Math.round(copy.right), Math.round(copy.bottom));
     }
@@ -274,7 +274,7 @@ export abstract class MathUtils {
         return [width, height];
     }
 
-    static areRectsSame(rect1: RectF, rect2: RectF): boolean {
+    static areRectSame(rect1: RectF, rect2: RectF): boolean {
         if (rect1.left == rect2.left && rect1.top == rect2.top
         && rect1.right == rect2.right && rect1.bottom == rect2.bottom) {
             return true;

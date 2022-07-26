@@ -17,17 +17,17 @@ import {MediaItem} from './MediaItem'
 import {AbsDataSource} from '../AbsDataSource'
 import {GetItemsCallback} from './GetItemsCallback'
 import {GetMediaCountCallback} from './GetMediaCountCallback'
-import {Logger} from '../../../utils/Logger.ets'
-import { BroadCastConstants } from '../../common/BroadCastConstants.ets';
-import { BroadCast } from '../../../utils/BroadCast.ets';
-import {BroadCastManager} from '../../common/BroadCastManager.ets'
-import {Constants} from '../../common/Constants.ets'
+import {Logger} from '../../../utils/Logger'
+import { BroadCastConstants } from '../../common/BroadCastConstants';
+import { BroadCast } from '../../../utils/BroadCast';
+import {BroadCastManager} from '../../common/BroadCastManager'
+import {Constants} from '../../common/Constants'
 import {PendingTask} from './PendingTask'
 import {PendingCondition} from './PendingCondition'
-import {TraceControllerUtils} from '../../../utils/TraceControllerUtils.ets'
-import {AlbumDefine} from '../AlbumDefine.ets'
-import {BrowserDataFactory} from '../interface/BrowserDataFactory.ets'
-import {BrowserDataInterface} from '../interface/BrowserDataInterface'
+import {TraceControllerUtils} from '../../../utils/TraceControllerUtils'
+import {AlbumDefine} from '../AlbumDefine'
+import {BrowserDataFactory} from '../../../interface/BrowserDataFactory'
+import {BrowserDataInterface} from '../../../interface/BrowserDataInterface'
 
 export class MediaDataSource extends AbsDataSource {
     // Number of first pictures loaded during initialization
@@ -83,13 +83,17 @@ export class MediaDataSource extends AbsDataSource {
 
     // Request time of the first batch of data
     firstPatchDataRequestTime: number;
-    albumName: string = AlbumDefine.ALBUM_NAME_ALL;
+    albumId: string = AlbumDefine.ALBUM_ID_ALL;
 
     deviceId: string = undefined;
 
+    isRefresh: boolean = false;
+
+    isEditSaveReload: boolean = false;
+
     constructor(windowSize: number) {
         super();
-        this.photoDataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_ALBUM);
+        this.photoDataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
         this.windowSize = windowSize;
         this.activeEnd = windowSize;
         this.items = new Array(windowSize);
@@ -127,6 +131,16 @@ export class MediaDataSource extends AbsDataSource {
         return Constants.NOT_FOUND;
     }
 
+    // get DataIndex with item
+    getDataIndexById(id: number): number {
+        for (let i = 0; i < this.items.length; i++) {
+            if (this.items[i] != undefined && this.items[i].id == id) {
+                return i + this.activeStart;
+            }
+        }
+        return Constants.NOT_FOUND;
+    }
+
     getMediaCount(): number {
         return this.mediaCount;
     }
@@ -151,22 +165,21 @@ export class MediaDataSource extends AbsDataSource {
         this.lastUpdateTime = this.firstPatchDataRequestTime;
         let firstPatchDataCallback: any = {
             callback: (assets: MediaItem[]) => {
-                TraceControllerUtils.finishTraceWithTaskId('getMediaItems', this.firstPatchDataRequestTime);
                 this.logger.info(`took  ${(Date.now() - this.firstPatchDataRequestTime)}\
                  milliseconds to load first batch: ${(assets == null ? 0 : assets.length)}`);
                 this.updateMediaData(this.firstPatchDataRequestTime, start, assets);
+                this.broadCast && this.broadCast.emit(Constants.FIRST_PATCH_LOAD_FINISH, []);
                 let secondPatchDataCallback: GetItemsCallback = new GetItemsCallback(this, limit);
                 this.photoDataImpl.getData(secondPatchDataCallback, {
-                    name: this.albumName,
+                    id: this.albumId,
                     start: limit,
                     count: this.windowSize - limit,
                     deviceId: this.deviceId
                 });
             }
         };
-        TraceControllerUtils.startTraceWithTaskId('getMediaItems', this.firstPatchDataRequestTime);
         this.photoDataImpl.getData(firstPatchDataCallback,
-            {name: this.albumName, start: start, count: limit, deviceId: this.deviceId});
+            {id: this.albumId, start: start, count: limit, deviceId: this.deviceId});
         this.loadData();
     }
 
@@ -175,7 +188,7 @@ export class MediaDataSource extends AbsDataSource {
         this.logger.info(`loadData`);
 
         let initCountCallback: GetMediaCountCallback = new GetMediaCountCallback(this);
-        this.photoDataImpl.getMediaItemCount(initCountCallback, { name: this.albumName, deviceId: this.deviceId });
+        this.photoDataImpl.getDataCount(initCountCallback, { id: this.albumId, deviceId: this.deviceId });
     }
 
     // update media count
@@ -239,16 +252,18 @@ export class MediaDataSource extends AbsDataSource {
             if (this.mediaCount == 0) {
                 this.hasNewChange = false;
                 this.onDataReloaded();
-            } else {
+            } else if(this.isEditSaveReload || this.isCountChanged || this.isRefresh) {
                 // dirty data, need to get data again
                 this.logger.info('dirty data, need to get data again');
                 let callback: GetItemsCallback = new GetItemsCallback(this, this.activeStart);
                 this.photoDataImpl.getData(callback, {
-                    name: this.albumName,
+                    id: this.albumId,
                     start: this.activeStart,
                     count: this.windowSize,
                     deviceId: this.deviceId
                 });
+            } else {
+                this.hasNewChange = false;
             }
         }
         this.emitCountUpdateCallbacks();
@@ -327,8 +342,9 @@ export class MediaDataSource extends AbsDataSource {
             this.logger.debug(`updateMediaData ${this.layoutIndexes[i]}`);
 //            !this.isCountChanged && this.onDataChanged(this.layoutIndexes[i]);
         }
-        if (this.isCountChanged) {
-            if (this.photosBroadCast && this.isCountReduced) {
+
+        if (this.isCountChanged || this.isRefresh) {
+            if (this.photosBroadCast && (this.isCountReduced || this.isRefresh)) {
                 this.photosBroadCast.emit(BroadCastConstants.ON_DATA_RELOADED, [])
             } else if (this.broadCast) {
                 this.broadCast.emit(BroadCastConstants.ON_DATA_RELOADED, [])
@@ -338,13 +354,19 @@ export class MediaDataSource extends AbsDataSource {
 
             this.isCountChanged = false;
             this.isCountReduced = false;
+            this.isRefresh = false;
         } else {
             for (let i = fromIndex; i < endIndex; i++) {
                 this.onDataChanged(this.layoutIndexes[i]);
             }
         }
+
+        if (this.isEditSaveReload) {
+            this.photosBroadCast && this.photosBroadCast.emit(BroadCastConstants.ON_DATA_RELOADED_WITH_EDIT, []);
+        } else {
+            this.notifyDataLoadingFinished();
+        }
         TraceControllerUtils.finishTraceWithTaskId('updateMediaData', requestTime);
-        this.notifyDataLoadingFinished();
     }
 
     // Update sliding window
@@ -374,22 +396,20 @@ export class MediaDataSource extends AbsDataSource {
             this.lastUpdateTime = this.firstPatchDataRequestTime;
             let firstPatchDataCallback: any = {
                 callback: (assets: MediaItem[]) => {
-                    TraceControllerUtils.finishTraceWithTaskId('getMediaItems', this.firstPatchDataRequestTime);
                     this.logger.info(`took  ${(Date.now() - this.firstPatchDataRequestTime)}\
                      milliseconds to load first batch: ${(assets == null ? 0 : assets.length)}`);
                     this.updateMediaData(this.firstPatchDataRequestTime, start, assets);
                     let secondPatchDataCallback: GetItemsCallback = new GetItemsCallback(this, newActiveStart);
                     this.photoDataImpl.getData(secondPatchDataCallback, {
-                        name: this.albumName,
+                        id: this.albumId,
                         start: newActiveStart,
                         count: this.windowSize,
                         deviceId: this.deviceId
                     });
                 }
             };
-            TraceControllerUtils.startTraceWithTaskId('getMediaItems', this.firstPatchDataRequestTime);
             this.photoDataImpl.getData(firstPatchDataCallback,
-                {name: this.albumName, start: start, count: limit, deviceId: this.deviceId });
+                {id: this.albumId, start: start, count: limit, deviceId: this.deviceId });
         }
 
         if (newActiveEnd < this.activeEnd && newActiveEnd > this.activeStart) {
@@ -408,7 +428,7 @@ export class MediaDataSource extends AbsDataSource {
         this.logger.info(`trigger data fetch start: ${requestStart}, count: ${requestCount}`);
         let callback: GetItemsCallback = new GetItemsCallback(this, requestStart);
         this.photoDataImpl.getData(callback,
-            {name: this.albumName, start: requestStart, count: requestCount, deviceId: this.deviceId });
+            {id: this.albumId, start: requestStart, count: requestCount, deviceId: this.deviceId });
     }
 
     private getWindowActiveStart(dataIndex: number, windowCenter: number): number{
@@ -465,9 +485,9 @@ export class MediaDataSource extends AbsDataSource {
         return result;
     }
 
-    setAlbumName(name: string) {
-        this.logger.info(`setAlbumName: ${name}`)
-        this.albumName = name;
+    setAlbumId(id: string) {
+        this.logger.info(`setAlbumId: ${id}`)
+        this.albumId = id;
     }
 
     setBroadCast(broadCastParam: BroadCast) {
@@ -490,6 +510,13 @@ export class MediaDataSource extends AbsDataSource {
             } else {
                 this.onInActive();
             }
+        } else if (transition == Constants.PHOTO_TRANSITION_EDIT) {
+            if (isActive) {
+                this.isEditSaveReload = true;
+                this.onActive();
+            } else {
+                this.isEditSaveReload = false;
+            }
         }
     }
 
@@ -503,39 +530,26 @@ export class MediaDataSource extends AbsDataSource {
         return -1;
     }
 
-    deleteData(uris: string[]): void {
-      try {
-          this.loadData();
-      } catch(err) {
-          this.logger.info(`deleteData items err: ${err} `);
-      }
-      this.logger.info(`deleteData items ${this.items.length} `);
-    }
-
-    getIndexByUri(uri: string): number {
-        for (let index = 0; index < this.items.length; index++) {
-            if (uri == this.items[index].uri) {
-                return index;
-            }
-        }
-        return -1;
-    }
-
     getPositionByIndex(index: number): number {
         return index;
     }
 
     onChange(mediaType: string) {
         if(this.deviceId == '' || this.deviceId == undefined) {
-            if (mediaType == 'image' || mediaType == 'video' || mediaType == 'album') {
+            if (mediaType == Constants.MEDIA_TYPE_IMAGE || mediaType == Constants.MEDIA_TYPE_VIDEO || mediaType == Constants.MEDIA_TYPE_ALBUM) {
                 this.logger.debug(`local onChange ${mediaType}`);
                 super.onChange(mediaType);
             }
         } else {
-            if (mediaType == 'remote') {
+            if (mediaType == Constants.MEDIA_TYPE_REMOTE) {
                 this.logger.debug(`remote onChange`);
+                this.switchRefreshOn()
                 super.onChange(mediaType);
             }
         }
+    }
+
+    switchRefreshOn() {
+        this.isRefresh = true
     }
 }

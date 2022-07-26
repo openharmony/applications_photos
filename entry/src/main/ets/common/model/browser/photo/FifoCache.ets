@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../../utils/Logger.ets'
+import {Logger} from '../../../utils/Logger'
 import {Releasable} from '../../common/Releasable'
 
 export class FifoCache <T extends Releasable> {

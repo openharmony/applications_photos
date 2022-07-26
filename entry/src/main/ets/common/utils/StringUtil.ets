@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {Logger} from './Logger.ets'
+import {Logger} from './Logger'
 
 export class StringUtil {
     static logger: Logger = new Logger('StringUtil');
@@ -59,5 +59,14 @@ export class StringUtil {
             this.logger.info(`connectString: ${i}  + ${result}`);
         }
         return result.substr(0, (result.length - connector.length));
+    }
+
+    static getIdFromUri(uri:string): number {
+        let srcIndex = uri.lastIndexOf('/');
+        let srcEnd = uri.length;
+        let srcId = uri.substring(srcIndex + 1, srcEnd);
+        let fileId = new Number(srcId);
+        this.logger.info(`getIdByUri fileId: ${fileId}`);
+        return fileId.valueOf();
     }
 }

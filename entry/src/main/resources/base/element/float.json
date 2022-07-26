@@ -90,7 +90,11 @@
     },
     {
       "name":"album_set_page_padding_end",
-      "value":"48vp"
+      "value":"56vp"
+    },
+    {
+      "name":"album_set_page_padding_end_112",
+      "value":"112vp"
     },
     {
       "name":"album_set_grid_column_gap",
@@ -125,6 +129,10 @@
       "value":"4vp"
     },
     {
+      "name":"dialog_list_card_height",
+      "value":"48vp"
+    },
+    {
       "name": "details_dialog_button_height",
       "value": "40vp"
     },
@@ -149,12 +157,16 @@
       "value":"24vp"
     },
     {
+      "name":"dialog_window_margin",
+      "value":"12vp"
+    },
+    {
       "name":"dialog_content_margin_bottom",
       "value":"-12vp"
     },
     {
       "name":"dialog_offset_bottom",
-      "value":"-12vp"
+      "value":"0vp"
     },
     {
       "name":"dialog_title_height",
@@ -187,6 +199,10 @@
     {
       "name":"empty_page_picture_size",
       "value":"120vp"
+    },
+    {
+      "name":"empty_page_picture_size_large",
+      "value":"160vp"
     },
     {
       "name":"recycle_album_cover_icon_size",
@@ -403,6 +419,10 @@
     {
       "name": "title_text_default",
       "value": "16fp"
+    },
+    {
+      "name": "title_text_default_H",
+      "value": "20fp"
     },
     {
       "name": "big_text_default",
@@ -625,6 +645,18 @@
       "value": "14fp"
     },
     {
+      "name": "same_name_date_title_dialog_bottom",
+      "value": "16vp"
+    },
+    {
+      "name": "same_name_date_title2_dialog_bottom",
+      "value": "8vp"
+    },
+    {
+      "name": "same_name_date_title3_dialog_bottom",
+      "value": "2vp"
+    },
+    {
       "name": "same_name_date_dialog_bottom",
       "value": "12vp"
     },
@@ -646,7 +678,7 @@
     },
     {
       "name": "scroll_press_all_width",
-      "value": "250vp"
+      "value": "200vp"
     },
     {
       "name": "scroll_bar_small_height",
@@ -702,7 +734,7 @@
     },
     {
       "name": "scroll_bar_side_text_shadow_radio",
-      "value": "-5"
+      "value": "6"
     },
     {
       "name": "scroll_bar_side_text_shadow_offsetX",
@@ -710,7 +742,7 @@
     },
     {
       "name": "scroll_bar_side_text_shadow_offsetY",
-      "value": "4"
+      "value": "0"
     },
     {
       "name": "scroll_bar_side_gap",
@@ -790,7 +822,7 @@
     },
     {
       "name": "FA_back_size",
-      "value": "45vp"
+      "value": "24vp"
     },
     {
       "name": "FA_back_margin_left",
@@ -830,7 +862,99 @@
     },
     {
       "name": "FA_ListCard_radius",
+      "value": "15vp"
+    },
+    {
+      "name": "form_list_card_more_gap",
       "value": "4vp"
     },
+    {
+      "name": "appbar_max_height",
+      "value": "112vp"
+    },
+    {
+      "name": "form_list_card_more_arrow_w",
+      "value": "12vp"
+    },
+    {
+      "name": "form_list_card_more_arrow_h",
+      "value": "24vp"
+    },
+    {
+      "name": "save_dialog_height",
+      "value": "136vp"
+    },
+    {
+      "name": "image_save_dialog_loading_w",
+      "value": "40vp"
+    },
+    {
+      "name": "image_save_dialog_loading_h",
+      "value": "48vp"
+    },
+    {
+      "name": "grid_item_text_line_height",
+      "value": "12vp"
+    },
+    {
+      "name": "grid_item_duration_markAnchor_x",
+      "value": "-4vp"
+    },
+    {
+      "name": "grid_item_duration_markAnchor_y",
+      "value": "16vp"
+    },
+    {
+      "name": "grid_item_duration_margin_right",
+      "value": "32vp"
+    },
+    {
+      "name": "grid_item_favor_markAnchor_x",
+      "value": "28vp"
+    },
+    {
+      "name": "grid_item_favor_markAnchor_y",
+      "value": "-4vp"
+    },
+    {
+      "name": "grid_item_preview_padding",
+      "value": "4vp"
+    },
+    {
+      "name": "grid_item_checkbox_markAnchor",
+      "value": "28vp"
+    },
+    {
+      "name": "loading_panel_icon_w",
+      "value": "72vp"
+    },
+    {
+      "name": "loading_panel_icon_margin",
+      "value": "16vp"
+    },
+    {
+      "name": "loading_panel_item_gap",
+      "value": "15vp"
+    },
+    {
+      "name": "progress_padding_right",
+      "value": "16vp"
+    },
+    {
+      "name": "photo_browser_holder_opacity",
+      "value": "0.95"
+    },
+    {
+      "name": "detail_sub_title_max_lines",
+      "value": "18vp"
+    },
+    {
+      "name": "detail_title_constraint_size_min_height",
+      "value": "48vp"
+    },
+    {
+      "name": "tip_popup_border_radius",
+      "value": "15vp"
+    }
   ]
 }

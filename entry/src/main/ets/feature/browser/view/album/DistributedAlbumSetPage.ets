@@ -14,20 +14,20 @@
  */
 
 import router from '@system.router';
-import {Action} from '../../../../common/model/browser/operation/Action'
-import {AlbumGridItemTraditionalStyle} from './AlbumGridItemTraditionalStyle.ets'
-import {AlbumSetDataSource} from '../../../../common/model/browser/album/AlbumSetDataSource.ets'
-import {Constants} from '../../../../common/model/common/Constants.ets'
-import {DistributedAlbumSetPageActionBar} from './DistributedAlbumSetPageActionBar.ets'
+import {Action} from '../../../../common/view/browserOperation/Action'
+import {AlbumGridItemTraditionalStyle} from './AlbumGridItemTraditionalStyle'
+import {AlbumSetDataSource} from '../../../../common/model/browser/album/AlbumSetDataSource'
+import {Constants} from '../../../../common/model/common/Constants'
+import {DistributedAlbumSetPageActionBar} from './DistributedAlbumSetPageActionBar'
 import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {BroadCast} from '../../../../common/utils/BroadCast.ets'
+import {BroadCast} from '../../../../common/utils/BroadCast'
 import {NoPhotoIndexComponent} from '../../../../common/view/NoPhotoIndexComponent'
-import {Logger} from '../../utils/Logger.ets'
+import {Logger} from '../../utils/Logger'
 import {JumpSourceToMain} from '../../../../common/model/browser/photo/JumpSourceToMain'
 import {BroadCastManager} from '../../../../common/model/common/BroadCastManager'
 import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants'
-import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback.ets'
-import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver.ets'
+import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback'
+import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver'
 
 @Entry
 @Component
@@ -39,6 +39,7 @@ export struct DistributedAlbumSetPage {
     @Provide broadCast: BroadCast = new BroadCast();
     @Provide isAlbumSetSelectedMode: boolean = false;
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
+
 
     private dataObserver: CommonObserverCallback  = new CommonObserverCallback(this);
 
@@ -61,16 +62,18 @@ export struct DistributedAlbumSetPage {
         }
     }
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         let param = router.getParams();
-        if (param != null) {
+        if (param.item) {
             this.logger.debug(`After router.getParams, param is: ${JSON.stringify(param)}`);
-            let item = JSON.parse(param.item);
+            let item = JSON.parse(param.item.toString());
             this.title = item.deviceName;
             this.albums
                 = new AlbumSetDataSource(this.broadCast, {deviceId: item.networkId, deviceName: item.deviceName});
 
             this.deviceId = item.networkId;
+        } else {
+            this.logger.error(`param is error`);
         }
 
         this.onMenuClicked = this.onMenuClicked.bind(this);
@@ -93,17 +96,18 @@ export struct DistributedAlbumSetPage {
         this.logger.info(`the grid count in a line is : ${this.gridColumnsCount}`);
     }
 
-    private aboutToDisappear(): void {
+    aboutToDisappear(): void {
         BroadCastManager.getInstance().getBroadCast().off(BroadCastConstants.ON_REMOTE_CHANGED,
             this.onUpdateRemoteDevice.bind(this));
         MediaObserver.getInstance().unregisterObserver(this.dataObserver);
     }
 
-    private onPageShow() {
+    onPageShow() {
+        BroadCastManager.getInstance().getBroadCast().emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
         this.onActive();
     }
 
-    private onPageHide() {
+    onPageHide() {
         this.onInActive();
     }
 
@@ -137,7 +141,7 @@ export struct DistributedAlbumSetPage {
             return;
         }
 
-        if(res == 'offline') {
+        if(res == Constants.DEVICE_STATE_OFFLINE) {
             this.logger.debug(`device offline route to album main`);
             router.back({
                 uri: this.isHorizontal === true ? 'product/pad/view/index' : 'product/phone/view/index',
@@ -195,8 +199,7 @@ export struct DistributedAlbumSetPage {
                     .padding({
                         left: $r('app.float.max_padding_start'),
                         right: $r('app.float.max_padding_end'),
-                        top: $r('app.float.album_set_page_padding_top'),
-                        bottom: $r('app.float.album_set_page_padding_end')
+                        top: $r('app.float.album_set_page_padding_top')
                     })
                     .columnsGap($r('app.float.album_set_grid_column_gap'))
                     .rowsGap($r('app.float.album_set_traditional_style_grid_row_gap'))

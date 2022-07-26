@@ -14,9 +14,9 @@
  */
 
 import {MediaOperationType} from '../../model/common/MediaOperationType'
-import {Logger} from '../../utils/Logger.ets';
-import {ScreenManager} from '../../model/common/ScreenManager.ets';
-import {Constants} from '../../model/common/Constants.ets';
+import {Logger} from '../../utils/Logger';
+import {ScreenManager} from '../../model/common/ScreenManager';
+import {Constants} from '../../model/common/Constants';
 
 @Observed
 export class ProgressParam {
@@ -59,12 +59,12 @@ export struct ProgressDialog {
             .width('100%')
 
             Row() {
-                Progress({ value: 0, total: 100, style: ProgressStyle.Linear })
+                Progress({ value: 0, total: Constants.PROGRESS_MAX, style: ProgressStyle.Linear })
                     .value(this.deleteProgress)
                     .color($r('app.color.color_control_highlight'))
-                    .flexGrow(1)
-                    .padding({
-                        right: 16
+                    .width(ScreenManager.getInstance().getColumnsWidth(4) - Constants.PROGRESS_LENGTH_DIFF)
+                    .margin({
+                        right: $r('app.float.progress_padding_right')
                     })
                 if (this.progressParam.operationType != MediaOperationType.Delete &&
                     this.progressParam.operationType != MediaOperationType.Recover) {
@@ -73,7 +73,6 @@ export struct ProgressDialog {
                         .height($r('app.float.icon_size'))
                         .onClick(() => {
                             this.progressParam.cancelFunc();
-                            this.controller.close();
                         })
                 }
             }
@@ -91,8 +90,8 @@ export struct ProgressDialog {
         .borderRadius($r('app.float.dialog_border_radius'))
         .width(ScreenManager.getInstance().getColumnsWidth(4))
         .margin({
-            right: $r('app.float.dialog_content_margin'),
-            left: $r('app.float.dialog_content_margin'),
+            right: $r('app.float.dialog_window_margin'),
+            left: $r('app.float.dialog_window_margin'),
             bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
         })
     }

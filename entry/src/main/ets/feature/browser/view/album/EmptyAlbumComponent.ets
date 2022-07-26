@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Constants} from '../../../../common/model/common/Constants.ets'
+import {Constants} from '../../../../common/model/common/Constants'
 
 // New style
 @Component
@@ -23,7 +23,7 @@ export struct EmptyAlbumComponent {
 
     gridAspectRatio = Constants.CARD_ASPECT_RATIO;
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         let numberHeight = px2vp(fp2px(Constants.TEXT_SIZE_BODY2));
         let nameHeight = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE1));
         this.icHeight = this.gridHeight - Constants.ALBUM_SET_NEW_ICON_MARGIN; - numberHeight - nameHeight;

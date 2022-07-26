@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {Logger as RootLogger} from '../../../common/utils/Logger.ets'
+import {Logger as RootLogger} from '../../../common/utils/Logger'
 
 const MODULE_ALBUM = 'Album_';
 

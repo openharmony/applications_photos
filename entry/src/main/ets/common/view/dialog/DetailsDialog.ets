@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger.ets'
-import {DateUtil} from '../../../common/utils/DateUtil.ets'
-import {MediaLibraryAccess} from '../../access/MediaLibraryAccess.ets';
+import {Logger} from '../../utils/Logger'
+import {DateUtil} from '../../../common/utils/DateUtil'
+import {MediaLibraryAccess} from '../../access/MediaLibraryAccess';
 import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants.ets';
+import {Constants} from '../../model/common/Constants';
 
 @Observed
 export class MediaDetails {
@@ -40,9 +40,6 @@ export struct DetailsDialog {
     @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-
-    static readonly INTERNAL_PREFIX_NUM = 3;
-    static readonly EXTERNAL_PREFIX_NUM = 2;
     sizeConvert = 1024;
     controller: CustomDialogController;
     dataTime: string;
@@ -88,7 +85,7 @@ export struct DetailsDialog {
             Row() {
                 Text($r('app.string.details'))
                     .fontSize($r('sys.float.ohos_id_text_size_headline7'))
-                    .fontWeight(FontWeight.Bold)
+                    .fontWeight(FontWeight.Medium)
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
             }.alignItems(VerticalAlign.Center)
                 .height($r('app.float.dialog_title_height'))
@@ -227,8 +224,8 @@ export struct DetailsDialog {
         .width(ScreenManager.getInstance().getColumnsWidth(4))
             .backgroundColor($r('app.color.white'))
             .margin({
-                right: $r('app.float.dialog_content_margin'),
-                left: $r('app.float.dialog_content_margin'),
+                right: $r('app.float.dialog_window_margin'),
+                left: $r('app.float.dialog_window_margin'),
                 bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
             })
             .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })

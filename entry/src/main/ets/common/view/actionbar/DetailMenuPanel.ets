@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger.ets'
-import {ActionBarProp} from '../../model/browser/operation/ActionBarProp.ets'
-import {Action} from '../../model/browser/operation/Action.ets'
-import {ActionBarButton} from './ActionBarButton.ets'
+import {Logger} from '../../utils/Logger'
+import {ActionBarProp} from '../browserOperation/ActionBarProp'
+import {Action} from '../browserOperation/Action'
+import {ActionBarButton} from './ActionBarButton'
 
 // Large picture button for dynamic refresh
 @Component
@@ -46,6 +46,6 @@ export struct DetailMenuPanel {
                     colorMode: this.actionBarProp.getColorMode()
                 })
             }, menu => (menu.actionType ? menu.actionType.id : menu.actionID))
-        }.padding({ right: $r('app.float.default_actionbar_padding_right') })
+        }.alignItems(VerticalAlign.Center)
     }
 }

@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {ActionBarColorMode, ActionBarSelectionMode} from '../../model/browser/operation/ActionBarMode'
-import {Logger} from '../../utils/Logger.ets'
-import {ActionBarProp} from '../../model/browser/operation/ActionBarProp.ets'
+import {ActionBarColorMode, ActionBarSelectionMode} from '../browserOperation/ActionBarMode'
+import {Logger} from '../../utils/Logger'
+import {ActionBarProp} from '../browserOperation/ActionBarProp'
 
 // Select the mode title, the content changes with the number of selections
 @Component
@@ -47,6 +47,5 @@ export struct SelectionTitle {
         .margin({ left: $r('app.float.actionbar_title_margin'),
             right: $r('app.float.actionbar_title_margin') })
             .alignItems(VerticalAlign.Center)
-            .flexGrow(1)
     }
 }

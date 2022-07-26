@@ -7,10 +7,9 @@
     "directoryLevel": "project"
   },
   "dependencies": {
-    "@ohos/hvigor": "file:localdep/ohos-hvigor-1.0.3-rc.tgz",
-    "@ohos/hvigor-base": "file:localdep/ohos-hvigor-base-1.0.3-rc.tgz",
-    "@ohos/hvigor-log": "file:localdep/ohos-hvigor-log-1.0.3-rc.tgz",
-    "@ohos/hvigor-ohos-plugin": "file:localdep/ohos-hvigor-ohos-plugin-1.0.3-rc.tgz",
-    "@ohos/sdkmanager-common": "file:localdep/sdkmanager-common-1.1.1.tgz"
+    "@ohos/hvigor": "^1.0.6",
+    "@ohos/hvigor-base": "^1.0.6",
+    "@ohos/hvigor-ohos-plugin": "^1.0.6",
+    "@ohos/sdkmanager-common": "^1.1.1"
   }
 }

@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger.ets'
-import {BroadCast} from '../../utils/BroadCast.ets'
+import {Logger} from '../../utils/Logger'
+import {BroadCast} from '../../utils/BroadCast'
 import {Constants} from './Constants'
 
 export class BroadCastManager {

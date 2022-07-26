@@ -24,7 +24,7 @@ export class Logger {
     static readonly WARN = 3;
     static readonly ERROR = 4;
 
-    static logLevel = Logger.INFO;
+    static logLevel = Logger.DEBUG;
 
     constructor(module: string) {
         this.prefix = `${module}: `;

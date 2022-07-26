@@ -13,36 +13,37 @@
  * limitations under the License.
  */
 
-import {AlbumInfo} from '../../../../common/model/browser/album/AlbumInfo.ets';
+import {AlbumInfo} from '../../../../common/model/browser/album/AlbumInfo';
 import {EmptyAlbumComponent} from './EmptyAlbumComponent';
 import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants'
+import {BroadCastManager} from '../../../../common/model/common/BroadCastManager'
 import {Logger} from '../../utils/Logger'
-import {BroadCast} from '../../../../common//utils/BroadCast.ets'
+import {BroadCast} from '../../../../common//utils/BroadCast'
 import {ScreenManager} from '../../../../common/model/common/ScreenManager'
 import router from '@system.router';
-import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine.ets'
-import {Constants} from '../../../../common/model/common/Constants.ets'
-
-let staticIconList = new Map([
-    [AlbumDefine.ALBUM_NAME_VIDEO , $r('app.media.ic_video')],
-    [AlbumDefine.ALBUM_NAME_FAVOR, $r('app.media.ic_favorite_overlay')]
-]);
+import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine'
+import {Constants} from '../../../../common/model/common/Constants'
 
 // The item of album grid, and it's new style.
 @Component
 export struct AlbumGridItemNewStyle {
-    @State item: AlbumInfo = new AlbumInfo('', '', '', 0, '');
+    private staticIconList = new Map([
+        [AlbumDefine.ALBUM_ID_VIDEO , $r('app.media.ic_video')],
+        [AlbumDefine.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
+    ]);
+    @State @Watch('updateCard') item: AlbumInfo = new AlbumInfo('', '', '', '', 0, '', '');
     @State isEmptyAlbum: boolean = false;
     @State isSelected: boolean = false;
     @State selectable: boolean = true;
     @State icHeight: number = 0;
     @State bigWidth:number = 0;
-
+    @State transformV: number = 0;
     @Provide isBigCard: boolean = false;
     @Provide gridHeight: number = 0;
 
     @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
     @Consume broadCast: BroadCast;
+    private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
     @Consume @Watch('onModeChange') isAlbumSetSelectedMode: boolean;
     logger: Logger = new Logger('AlbumGridItemNewStyle');
 
@@ -50,14 +51,21 @@ export struct AlbumGridItemNewStyle {
     albumCountMarginRight = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN * 2;
     iconMarkAnchorX = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
     iconMarkAnchorY = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
+    @State cardWidth: number = 0;
+    @State cardHeight: number = 0;
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.logger.debug(`aboutToAppear`);
-        this.selectable = (this.item.name == AlbumDefine.ALBUM_NAME_RECYCLE) ? false : true;
+        this.selectable = (this.item.name == AlbumDefine.ALBUM_ID_RECYCLE) ? false : true;
         let self = this;
         ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
             self.updateCardSize();
         })
+        this.updateCardSize();
+    }
+
+    updateCard() {
+        this.logger.debug('Album changed and update card size.');
         this.updateCardSize();
     }
 
@@ -74,6 +82,25 @@ export struct AlbumGridItemNewStyle {
         let numberHeight = px2vp(fp2px(Constants.TEXT_SIZE_BODY2));
         let nameHeight = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE1));
         this.icHeight = this.gridHeight - Constants.ALBUM_SET_NEW_ICON_MARGIN; - numberHeight - nameHeight;
+
+        if (Constants.ANGLE_90 == this.item.coverOrientation
+            || Constants.ANGLE_270 == this.item.coverOrientation) {
+            this.cardWidth = this.gridHeight;
+            if (this.isBigCard) {
+                this.cardHeight = this.bigWidth;
+            } else {
+                this.cardHeight = gridWidth;
+            }
+            this.transformV = (this.cardHeight - this.cardWidth) / Constants.NUMBER_2;
+        } else {
+            if (this.isBigCard) {
+                this.cardWidth = this.bigWidth;
+            } else {
+                this.cardWidth = gridWidth;
+            }
+            this.cardHeight = this.gridHeight;
+            this.transformV = 0;
+        }
     }
 
     onModeChange(): void {
@@ -92,7 +119,7 @@ export struct AlbumGridItemNewStyle {
 
         if (this.selectable) {
         this.broadCast.emit(BroadCastConstants.SELECT,
-            [this.item.name, newState, this.item.isDisableRename, this.item.isDisableDelete, function () {
+            [this.item.id, newState, this.item.isDisableRename, this.item.isDisableDelete, function () {
                 this.logger.info('enter callback');
                 this.isSelected = newState;
             }.bind(this)]);
@@ -106,7 +133,7 @@ export struct AlbumGridItemNewStyle {
             }
 
             if (this.isBigCard) {
-                if (this.item.name == AlbumDefine.ALBUM_NAME_RECYCLE) {
+                if (this.item.name == AlbumDefine.ALBUM_ID_RECYCLE) {
                     Flex({
                         direction: FlexDirection.Column,
                         justifyContent: FlexAlign.Start,
@@ -126,17 +153,32 @@ export struct AlbumGridItemNewStyle {
                     .backgroundColor($r('app.color.empty_or_recycle_album_back'))
                     .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
                 } else {
-                    Image(this.item.coverUri)
-                        .height(this.gridHeight)
-                        .offset({x:0, y:0})
-                        .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
-                        .onError(() => {
-                            this.logger.debug('album is empty or its cover is error');
-                            this.isEmptyAlbum = true;
-                        })
+                    Flex({
+                        direction: FlexDirection.Row,
+                        justifyContent: FlexAlign.Center,
+                        alignItems: ItemAlign.Center
+                    }) {
+                        Image(this.item.coverUri)
+                            .width(this.cardWidth)
+                            .height(this.cardHeight)
+                            .transform({ y: this.transformV })
+                            .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
+                            .rotate({
+                                centerX: this.cardWidth / Constants.NUMBER_2,
+                                centerY: this.cardHeight / Constants.NUMBER_2,
+                                z: 1,
+                                angle: this.item.coverOrientation
+                            })
+                            .onError(() => {
+                                this.logger.debug('album is empty or its cover is error');
+                                this.isEmptyAlbum = true;
+                            })
+                    }
+                    .width(this.bigWidth)
+                    .height(this.gridHeight)
                 }
             } else {
-                if (this.item.name == AlbumDefine.ALBUM_NAME_RECYCLE) {
+                if (this.item.name == AlbumDefine.ALBUM_ID_RECYCLE) {
                     Flex({
                         direction: FlexDirection.Column,
                         justifyContent: FlexAlign.Start,
@@ -151,18 +193,33 @@ export struct AlbumGridItemNewStyle {
                         .height(this.icHeight)
                         .width('100%')
                     }
+                    .height(this.gridHeight)
                     .aspectRatio(this.gridAspectRatio)
                     .backgroundColor($r('app.color.empty_or_recycle_album_back'))
                     .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
                 } else {
-                    Image(this.item.coverUri)
-                        .aspectRatio(this.gridAspectRatio)
-                        .offset({x:0, y:0})
-                        .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
-                        .onError(() => {
-                            this.logger.debug('album is empty or its cover is error');
-                            this.isEmptyAlbum = true;
-                        })
+                    Flex({
+                        direction: FlexDirection.Row,
+                        justifyContent: FlexAlign.Center,
+                        alignItems: ItemAlign.Center
+                    }) {
+                        Image(this.item.coverUri)
+                            .width(this.cardWidth)
+                            .height(this.cardHeight)
+                            .translate({ x: this.transformV })
+                            .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
+                            .rotate({
+                                centerX: this.cardWidth / Constants.NUMBER_2,
+                                centerY: this.cardHeight / Constants.NUMBER_2,
+                                z: 1,
+                                angle: this.item.coverOrientation
+                            })
+                            .onError(() => {
+                                this.logger.debug('album is empty or its cover is error');
+                                this.isEmptyAlbum = true;
+                            })
+                    }
+                    .height(this.gridHeight)
                 }
             }
 
@@ -193,8 +250,8 @@ export struct AlbumGridItemNewStyle {
                 .alignItems(HorizontalAlign.Start)
                 .margin({left: $r('app.float.album_set_count_margin_left'), bottom: $r('app.float.album_set_count_margin_bottom')})
 
-                if (staticIconList.has(this.item.name) && !this.isAlbumSetSelectedMode) {
-                    Image(staticIconList.get(this.item.name))
+                if (this.staticIconList.has(this.item.name) && !this.isAlbumSetSelectedMode) {
+                    Image(this.staticIconList.get(this.item.name))
                       .height($r('app.float.album_set_new_style_icon'))
                       .aspectRatio(1)
                       .position({ x: '100%', y: '100%' })
@@ -214,12 +271,14 @@ export struct AlbumGridItemNewStyle {
                     .position({x: '100%', y: '100%'})
                     .markAnchor({x: this.iconMarkAnchorX, y: this.iconMarkAnchorY})
                     .visibility(this.isAlbumSetSelectedMode && this.selectable ? Visibility.Visible : Visibility.None)
-            }
-            .border({
+
+            Column().height('100%')
+                .width('100%').border({
                 radius: $r('sys.float.ohos_id_corner_radius_default_l'),
                 width: $r('app.float.album_cover_stroke_width'),
                 color: $r('app.color.album_cover_stroke_color')
             })
+        }
             .gesture(
                 LongPressGesture()
                     .onAction(() => {

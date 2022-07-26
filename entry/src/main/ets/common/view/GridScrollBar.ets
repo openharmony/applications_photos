@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import {Constants} from '../model/common/Constants'
 
 @Component
 export struct GridScrollBar {
@@ -25,18 +25,19 @@ export struct GridScrollBar {
             state: this.isHideScrollBar? BarState.Off: BarState.Auto }) {
             Row() {
                 if (this.isClickScrollBar) {
-                    Image($r('app.media.scroll_press_light_hdpi'))
+                    Image($r("app.media.scroll_press_light"))
                         .width($r('app.float.scroll_bar_big_width'))
                         .height($r('app.float.scroll_bar_big_height'))
                 } else {
-                    Image($r('app.media.scroll_light_hdpi'))
+                    Image($r("app.media.scroll_light"))
                         .width($r('app.float.scroll_bar_small_width'))
                         .height($r('app.float.scroll_bar_small_height'))
-                        .borderRadius(25)
                 }
             }
         }
         .height('100%')
+        .width(this.isClickScrollBar
+            ? $r('app.float.scroll_bar_margin_small') : $r('app.float.scroll_bar_small_width'),)
         .position({x:'100%', y:0})
         .markAnchor({
             x: this.isClickScrollBar ? $r('app.float.scroll_bar_big_width') : $r('app.float.scroll_bar_small_width'),

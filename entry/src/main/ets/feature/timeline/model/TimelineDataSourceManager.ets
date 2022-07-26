@@ -15,7 +15,7 @@
 
 import {TimelineDataSource} from './TimelineDataSource'
 import {BroadCast} from '../../../common/utils/BroadCast';
-import {Constants} from '../../../common/model/common/Constants.ets'
+import {Constants} from '../../../common/model/common/Constants'
 import {Constants as TimeLineConstants} from './Constants'
 import {Logger} from '../utils/Logger'
 
@@ -35,6 +35,10 @@ export class TimelineDataSourceManager {
             AppStorage.SetOrCreate(TimeLineConstants.APP_KEY_GROUP_DATA_SOURCE_MANAGER, new TimelineDataSourceManager());
         }
         return AppStorage.Get(TimeLineConstants.APP_KEY_GROUP_DATA_SOURCE_MANAGER);
+    }
+
+    public static destroyInstance(): void {
+        AppStorage.Delete(TimeLineConstants.APP_KEY_GROUP_DATA_SOURCE_MANAGER);
     }
 
     public getBroadCast(): BroadCast{

@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {Logger} from './Logger.ets'
-import {ScreenManager} from '../../../common/model/common/ScreenManager.ets'
-import {Constants} from '../../../common/model/common/Constants.ets'
+import {Logger} from './Logger'
+import {ScreenManager} from '../../../common/model/common/ScreenManager'
+import {Constants} from '../../../common/model/common/Constants'
 
 export class UiUtil {
     private static logger: Logger = new Logger('UiUtil');

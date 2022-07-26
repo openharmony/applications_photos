@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger.ets';
-import {ScreenManager} from '../../model/common/ScreenManager.ets';
-import {Constants} from '../../model/common/Constants.ets';
+import {Logger} from '../../utils/Logger';
+import {ScreenManager} from '../../model/common/ScreenManager';
+import {Constants} from '../../model/common/Constants';
 
 @Observed
 export class DeleteProgressParam {
@@ -64,12 +64,12 @@ export struct DeleteProgressDialog {
             .width('100%')
 
             Row() {
-                Progress({ value: 0, total: 100, style: ProgressStyle.Linear })
+                Progress({ value: 0, total: Constants.PROGRESS_MAX, style: ProgressStyle.Linear })
                     .value(this.deleteProgress)
                     .color($r('app.color.color_control_highlight'))
                     .flexGrow(1)
                     .padding({
-                        right: 16
+                        right: $r('app.float.progress_padding_right')
                     })
             }
             .width('100%')
@@ -86,8 +86,8 @@ export struct DeleteProgressDialog {
         .borderRadius($r('app.float.dialog_border_radius'))
         .width(ScreenManager.getInstance().getColumnsWidth(4))
         .margin({
-            right: $r('app.float.dialog_content_margin'),
-            left: $r('app.float.dialog_content_margin'),
+            right: $r('app.float.dialog_window_margin'),
+            left: $r('app.float.dialog_window_margin'),
             bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
         })
     }

@@ -32,7 +32,7 @@ export class TraceControllerUtils {
         bytrace.startTrace(name, taskId);
     }
 
-    // Used to track the end of cross tasks. The name and taskid must be the same as at start
+    // Used to track the end of cross tasks. The name and taskId must be the same as at start
     public static finishTraceWithTaskId(name: string, taskId: number): void {
         bytrace.finishTrace(name, taskId);
     }

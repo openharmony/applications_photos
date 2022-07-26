@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger.ets'
+import {Logger} from '../../utils/Logger'
 import {LoadingListener} from './LoadingListener'
 
 // Abs DataSource

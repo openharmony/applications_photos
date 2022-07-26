@@ -46,20 +46,25 @@ export class PhotoEditorManager {
         return AppStorage.Get(Constants.PHOTO_EDITOR_MANAGER);
     }
 
-    initialize(item: MediaItem, mode: PhotoEditMode = PhotoEditMode.EDIT_MODE_MAIN) {
+    initialize(item: MediaItem, mode: PhotoEditMode, errCallback?: any) {
         this.logger.info(`initialize mode[${mode}]`);
         this.item = item;
         Loader.loadPixelMapWrapper(item, true).then((pixelMap) => {
-            this.origin = pixelMap;
-            this.historyManager.setOriginPixelMap(this.origin);
-            this.switchMode(mode);
+            if (pixelMap) {
+                this.origin = pixelMap;
+                this.historyManager.setOriginPixelMap(this.origin);
+                this.switchMode(mode);
+            } else {
+                this.logger.error('initialize loadPixelMapWrapper failed');
+                errCallback && errCallback();
+            }
         })
     }
 
     clear() {
         this.logger.debug('clear');
         this.item = undefined;
-        this.origin.release();
+        this.origin && this.origin.release();
         this.origin = undefined;
         this.historyManager.setOriginPixelMap(undefined);
         this.historyManager.releaseAll();
@@ -70,9 +75,9 @@ export class PhotoEditorManager {
         return this.editors[mode];
     }
 
-    getLastestPixelMap(): PixelMapWrapper {
+    getLastPixelMap(): PixelMapWrapper {
         let position = this.historyManager.getPosition();
-        this.logger.debug(`getLastestPixelMap position = ${position}`);
+        this.logger.debug(`getLastPixelMap position = ${position}`);
         if (position < 0) {
             return this.origin;
         } else {
@@ -92,7 +97,7 @@ export class PhotoEditorManager {
             if (filter != undefined) {
                 // save cache
                 if (!filter.isCached()) {
-                    const prePixelMap = this.getLastestPixelMap();
+                    const prePixelMap = this.getLastPixelMap();
                     filter.setCache(filter.render(prePixelMap));
                 }
                 this.historyManager.push(filter);
@@ -100,7 +105,7 @@ export class PhotoEditorManager {
         }
 
         // entry next edit mode
-        let input = this.getLastestPixelMap();
+        let input = this.getLastPixelMap();
         if (input && this.editors[mode] != undefined) {
             this.editors[mode].entry(input);
             // update current edit mode
@@ -138,6 +143,7 @@ export class PhotoEditorManager {
     }
 
     save(isReplace: boolean, callback: any) {
+        this.logger.info(`save enter isReplace = ${isReplace}`);
         const filter = this.editors[this.currentMode].exit();
         if (filter != undefined) {
             this.historyManager.push(filter);

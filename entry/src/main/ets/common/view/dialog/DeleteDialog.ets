@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 import {DialogCallback} from '../../model/common/DialogUtil'
-import { Logger } from '../../utils/Logger.ets'
+import { Logger } from '../../utils/Logger'
 import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants.ets';
+import {Constants} from '../../model/common/Constants'
 
 @CustomDialog
 export struct DeleteDialog {
@@ -68,9 +68,8 @@ export struct DeleteDialog {
                     Row() {
                         Divider()
                         .vertical(true)
-                            .strokeWidth('2vp')
                             .height($r('app.float.dialog_divider_height'))
-                            .color($r('sys.color.ohos_id_color_list_separator'))
+                            .color($r('app.color.divider_vertical_color'))
                     }
                     .height($r('app.float.details_dialog_button_height'))
                         .alignItems(VerticalAlign.Center)
@@ -102,8 +101,8 @@ export struct DeleteDialog {
             .width(ScreenManager.getInstance().getColumnsWidth(4))
             .backgroundColor($r('app.color.white'))
             .margin({
-                right: $r('app.float.dialog_content_margin'),
-                left: $r('app.float.dialog_content_margin'),
+                right: $r('app.float.dialog_window_margin'),
+                left: $r('app.float.dialog_window_margin'),
                 bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
             })
             .padding({left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin')})

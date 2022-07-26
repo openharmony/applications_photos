@@ -10,9 +10,10 @@
     "feature/thirdSelect/view/ThirdSelectAlbumSetPage",
     "feature/thirdSelect/view/ThirdSelectPhotoGridPage",
     "feature/browser/view/album/DistributedAlbumSetPage",
-    "common/view/mediaOperation/MediaOperationPage",
+    "common/view/browserOperation/MediaOperationPage",
     "feature/browser/view/album/NewAlbumPage",
     "feature/browser/view/album/AlbumSelect",
-    "feature/editor/view/EditMain"
+    "feature/editor/view/EditMain",
+    "feature/formEditor/view/FormEditorPage"
   ]
 }

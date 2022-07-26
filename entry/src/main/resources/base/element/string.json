@@ -70,15 +70,15 @@
     },
     {
       "name": "title_select_photos",
-      "value": "Select photos"
+      "value": "Select images"
+    },
+    {
+      "name": "title_select_album",
+      "value": "Select album"
     },
     {
       "name": "title_none_selected",
       "value": "None selected"
-    },
-    {
-      "name": "title_no_photos",
-      "value": "No photos or videos"
     },
     {
       "name": "title_no_albums",
@@ -278,19 +278,19 @@
     },
     {
       "name": "no",
-      "value": "Cancel"
+      "value": "CANCEL"
     },
     {
       "name": "resolution",
-      "value": "Resolution:"
+      "value": "Resolution: "
     },
     {
       "name": "title",
-      "value": "Title:"
+      "value": "Title: "
     },
     {
       "name": "time",
-      "value": "Time:"
+      "value": "Time: "
     },
     {
       "name": "details",
@@ -298,19 +298,19 @@
     },
     {
       "name": "size",
-      "value": "Size:"
+      "value": "Size: "
     },
     {
       "name": "path",
-      "value": "Path:"
+      "value": "Path: "
     },
     {
       "name": "duration",
-      "value": "Duration:"
+      "value": "Duration: "
     },
     {
       "name": "count",
-      "value": "Selected:"
+      "value": "Selected: "
     },
     {
       "name": "detail_dialog_confirm",
@@ -354,7 +354,7 @@
     },
     {
       "name": "editBar_text",
-      "value": "editor"
+      "value": "Edit"
     },
     {
       "name": "ImageCollageHasFrame_text",
@@ -374,7 +374,7 @@
     },
     {
       "name": "save_to_local",
-      "value": "save to local"
+      "value": "Save to local"
     },
     {
       "name": "mirror_text",
@@ -474,19 +474,15 @@
     },
     {
       "name": "move_to",
-      "value": "MOVE TO"
+      "value": "Move to"
     },
     {
       "name": "copy_to",
-      "value": "COPY TO"
+      "value": "Copy to"
     },
     {
       "name": "recycleAlbum_message",
       "value": "Photos and videos will be permanently deleted after the number of days shown (up to 30 days )."
-    },
-    {
-      "name": "recycleAlbum_delete_message",
-      "value": "Permanently delete what selected?"
     },
     {
       "name": "recycleAlbum_clear_message",
@@ -494,19 +490,19 @@
     },
     {
       "name": "move_progress_message",
-      "value": "Moving to \"%s\""
+      "value": "Moving to %s"
     },
     {
       "name": "move_cancel_message",
-      "value": "%d moved.Stop moving the remaining files?"
+      "value": "%s% moved.Stop moving the remaining files?"
     },
     {
       "name": "copy_progress_message",
-      "value": "Copying to \"%s\""
+      "value": "Copying to %s"
     },
     {
       "name": "copy_cancel_message",
-      "value": "%s copied.Stop copying the remaining files?"
+      "value": "%s% copied.Stop copying the remaining files?"
     },
     {
       "name": "name_already_use",
@@ -514,7 +510,7 @@
     },
     {
       "name": "rename_failed",
-      "value": "Rename failed"
+      "value": "Unable to rename.Please try again"
     },
     {
       "name": "download_progress_message",
@@ -542,7 +538,7 @@
     },
     {
       "name": "distributed_album_disconnected",
-      "value": "Other device disconnected."
+      "value": "Other devices have been disconnected."
     },
     {
       "name": "download_failed_single",
@@ -550,31 +546,31 @@
     },
     {
       "name": "copy_failed_single",
-      "value": "Copy has been failed"
+      "value": "Unable to copy.Please try again"
     },
     {
       "name": "move_failed_single",
-      "value": "Move has been failed"
+      "value": "Unable to move.Please try again"
     },
     {
       "name": "download_failed_multi",
-      "value": "Saved %d, but failed other"
+      "value": "Only able to save %d of the items"
     },
     {
       "name": "local",
-      "value": "Local"
+      "value": "This device"
     },
     {
       "name": "other_equipment",
-      "value": "Other equipment"
+      "value": "Other devices"
     },
     {
       "name": "continue",
-      "value": "Continue"
+      "value": "CONTINUE"
     },
     {
       "name": "stop",
-      "value": "Stop"
+      "value": "STOP"
     },
     {
       "name": "specific_characters_not_supported",
@@ -653,32 +649,20 @@
       "value": "%d items"
     },
     {
-      "name": "move_to_album",
+      "name": "action_move_to_album",
       "value": "Move to album"
     },
     {
-      "name": "copy_to_album",
+      "name": "action_copy_to_album",
       "value": "Copy to album"
     },
     {
-      "name": "show_photo_num",
-      "value": "%d photos"
-    },
-    {
-      "name": "show_video_num",
-      "value": "%d videos"
-    },
-    {
-      "name": "show_photo_video_num",
-      "value": "%d photos，%d videos"
-    },
-    {
       "name": "album_new_album",
-      "value": "new album"
+      "value": "newAlbum"
     },
     {
       "name": "album_new_album_title",
-      "value": "new album"
+      "value": "New album"
     },
     {
       "name": "navigation_albums",
@@ -762,7 +746,7 @@
     },
     {
       "name": "no_distributed_photo_head_title_album",
-      "value": "No photos and videos"
+      "value": "No photos or videos"
     },
     {
       "name": "no_distributed_photo_show_image",
@@ -771,10 +755,6 @@
     {
       "name": "no_distributed_photo_show_video",
       "value": "Download the video file to the local computer for playback."
-    },
-    {
-      "name": "distribute_album_title_holder",
-      "value": "(%s)"
     },
     {
       "name": "description_serviceability",
@@ -790,7 +770,7 @@
     },
     {
       "name": "edit_save_picture_text",
-      "value": "Saving picture..."
+      "value": "Saving photo..."
     },
     {
       "name": "fa_select_time",
@@ -802,27 +782,35 @@
     },
     {
       "name": "fa_subTitle_text",
-      "value": "Select the photo or album you'd like to see"
+      "value": "Select a photo"
     },
     {
       "name": "fa_select_image_text",
-      "value": "Choose an image"
+      "value": "Select a photo"
     },
     {
       "name": "fa_select_album_text",
-      "value": "Choose an album"
+      "value": "Select an album"
     },
     {
       "name": "fa_setting_text",
-      "value": "Setting"
+      "value": "Settings"
     },
     {
       "name": "fa_image_show_interval",
       "value": "Slideshow interval"
     },
     {
-      "name": "fa_play_interval_time",
+      "name": "fa_play_interval_time_30",
       "value": "30 minute"
+    },
+    {
+      "name": "fa_play_interval_time_60",
+      "value": "1 hour"
+    },
+    {
+      "name": "fa_play_interval_time_90",
+      "value": "1.5 hour"
     },
     {
       "name": "progress_delete",
@@ -831,6 +819,18 @@
     {
       "name": "progress_recover",
       "value": "Restore%1$d/%2$d"
+    },
+    {
+      "name": "form_FormAbility_label",
+      "value": "Album"
+    },
+    {
+      "name": "edit_photo_save_fail",
+      "value": "Failed to save image!"
+    },
+    {
+      "name": "image_loading",
+      "value": "Loading..."
     }
   ]
 }

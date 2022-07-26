@@ -66,10 +66,10 @@ export struct CropRulerBar {
         this.context.beginPath();
         this.context.fillStyle = Constants.RULER_FILL_STYLE_100;
         if (this.isVerticalScreen) {
-            this.context.fillRect(mid_x, this.rulerWidth * Constants.NUMBER_8 / Constants.NUMBER_15,
+            this.context.fillRect(mid_x - Constants.MID_LINE_WIDTH / 2, this.rulerWidth * Constants.NUMBER_8 / Constants.NUMBER_15,
                 Constants.MID_LINE_WIDTH, Constants.MID_LINE_HEIGHT);
         } else {
-            this.context.fillRect(this.rulerWidth * Constants.NUMBER_9 / Constants.NUMBER_15, mid_x,
+            this.context.fillRect(this.rulerWidth * Constants.NUMBER_7_5 / Constants.NUMBER_15, mid_x - Constants.MID_LINE_WIDTH / 2,
                 Constants.MID_LINE_HEIGHT, Constants.MID_LINE_WIDTH);
         }
         this.context.stroke();
@@ -80,7 +80,7 @@ export struct CropRulerBar {
         if (this.isVerticalScreen) {
             this.context.moveTo(cur_x, (this.rulerWidth * Constants.NUMBER_8_5) / Constants.NUMBER_15);
         } else {
-            this.context.moveTo((this.rulerWidth * Constants.NUMBER_9_5) / Constants.NUMBER_15, cur_x);
+            this.context.moveTo((this.rulerWidth * Constants.NUMBER_8) / Constants.NUMBER_15, cur_x);
         }
 
         if (Math.abs(cur_num) > Constants.EDGE_ANGLE) {
@@ -97,7 +97,7 @@ export struct CropRulerBar {
                                       (this.rulerWidth * Constants.NUMBER_6) / Constants.NUMBER_15);
             } else {
                 this.context.fillText(this.integerAngleToString(Math.round(cur_num)),
-                                      (this.rulerWidth * Constants.NUMBER_4) / Constants.NUMBER_15, cur_x);
+                    (this.rulerWidth * Constants.NUMBER_6_5) / Constants.NUMBER_15, cur_x);
             }
         } else {
             if (this.isVerticalScreen) {
@@ -105,13 +105,13 @@ export struct CropRulerBar {
                                       (this.rulerWidth * Constants.NUMBER_6) / Constants.NUMBER_15);
             } else {
                 this.context.fillText(cur_num.toString(),
-                                      (this.cWidth * Constants.NUMBER_4) / Constants.NUMBER_15, cur_x);
+                    (this.rulerWidth * Constants.NUMBER_6_5) / Constants.NUMBER_15, cur_x);
             }
         }
         if (this.isVerticalScreen) {
             this.context.lineTo(cur_x, this.rulerWidth * Constants.NUMBER_10_5 / Constants.NUMBER_15);
         } else {
-            this.context.lineTo(this.rulerWidth * Constants.NUMBER_11_5 / Constants.NUMBER_15, cur_x);
+            this.context.lineTo(this.rulerWidth * Constants.NUMBER_10 / Constants.NUMBER_15, cur_x);
         }
 
     }
@@ -127,6 +127,7 @@ export struct CropRulerBar {
             this.multiScreenAdaptation()
             this.context.textAlign = 'center';
             if (!this.isVerticalScreen) {
+                this.context.textAlign = 'end';
                 this.context.textBaseline = 'middle'
             }
             if (Math.abs(cur_num) > Constants.EDGE_ANGLE) {
@@ -153,8 +154,8 @@ export struct CropRulerBar {
                     this.context.moveTo(cur_x, (this.rulerWidth * Constants.NUMBER_9_5) / Constants.NUMBER_15);
                     this.context.lineTo(cur_x, this.rulerWidth * Constants.NUMBER_10_5 / Constants.NUMBER_15);
                 } else {
-                    this.context.moveTo((this.rulerWidth * Constants.NUMBER_10_5) / Constants.NUMBER_15, cur_x);
-                    this.context.lineTo(this.rulerWidth * Constants.NUMBER_11_5 / Constants.NUMBER_15, cur_x);
+                    this.context.moveTo((this.rulerWidth * Constants.NUMBER_9) / Constants.NUMBER_15, cur_x);
+                    this.context.lineTo(this.rulerWidth * Constants.NUMBER_10 / Constants.NUMBER_15, cur_x);
                 }
             }
             this.context.stroke();

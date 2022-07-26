@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 import {DialogCallback} from '../../model/common/DialogUtil'
-import { Logger } from '../../utils/Logger.ets'
-import {DateUtil} from '../../../common/utils/DateUtil.ets'
-import {FindSameOperation} from '../../model/browser/operation/ProcessMenuOperation.ets'
-import {ScreenManager} from '../../model/common/ScreenManager.ets';
-import {Constants} from '../../model/common/Constants.ets';
+import { Logger } from '../../utils/Logger'
+import {DateUtil} from '../../../common/utils/DateUtil'
+import {FindSameOperation} from '../browserOperation/ProcessMenuOperation'
+import {ScreenManager} from '../../model/common/ScreenManager'
+import {Constants} from '../../model/common/Constants'
 
 @Observed
 export class FindSameNameParam {
@@ -65,20 +65,16 @@ export struct FindSameNameDialog {
     aboutToAppear() {
         this.sourceDetails = this.findSameNameParam.sourceFileAsset;
         this.targetDetails = this.findSameNameParam.targetFileAsset;
-        let localizedDate = DateUtil.getLocalizedDate(this.sourceDetails.dateModified * this.timeConvert);
-        let localizedTime = DateUtil.getLocalizedTime(this.sourceDetails.dateModified * this.timeConvert);
-        this.dataTime = `${localizedDate} ${localizedTime}`;
-        let targetDate = DateUtil.getLocalizedDate(this.targetDetails.dateModified * this.timeConvert);
-        let targetTime = DateUtil.getLocalizedTime(this.targetDetails.dateModified * this.timeConvert);
-        this.targetDataTime = `${targetDate} ${targetTime}`;
+        this.dataTime = DateUtil.getDateTimeFormat(this.sourceDetails.dateModified * this.timeConvert);
+        this.targetDataTime = DateUtil.getDateTimeFormat(this.targetDetails.dateModified * this.timeConvert);
     }
 
     build() {
         Column() {
             Row() {
                 Text($r('app.string.find_same_name'))
-                    .fontSize($r('sys.float.ohos_id_text_size_headline7'))
-                    .fontWeight(FontWeight.Bold)
+                    .fontSize($r('sys.float.ohos_id_text_size_dialog_tittle'))
+                    .fontWeight(FontWeight.Medium)
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
             }.alignItems(VerticalAlign.Center)
             .height($r('app.float.dialog_title_height'))
@@ -87,72 +83,72 @@ export struct FindSameNameDialog {
                 Column() {
                     Text($r('app.string.target_has_same_name', this.getTitle(this.sourceDetails.displayName)))
                         .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
-                        .fontFamily($r('app.string.id_text_font_family_regular'))
+                        .fontWeight(FontWeight.Bold)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                         .maxLines(3)
                 }
             }.margin({
-                bottom: $r('app.float.same_name_date_dialog_bottom') })
+                bottom: $r('app.float.same_name_date_title_dialog_bottom') })
 
             Row() {
                 Column() {
                     Text($r('app.string.source_file_location'))
-                        .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
-                        .fontFamily($r('app.string.id_text_font_family_regular'))
+                        .fontSize($r('sys.float.ohos_id_text_size_sub_title3'))
+                        .fontWeight(FontWeight.Bold)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
-                bottom: $r('app.float.same_name_date_dialog_bottom') })
+                bottom: $r('app.float.same_name_date_title2_dialog_bottom') })
 
             Row() {
                 Column() {
-                    Text($r('app.string.file_size_location', `${(this.sourceDetails.size/(1024 * 1024)).toFixed(2)}MB`))
+                    Text($r('app.string.file_size_location', `${(this.sourceDetails.size / Constants.BYTE_TO_MB).toFixed(2)}MB`))
                         .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
-                        .fontFamily($r('app.string.id_text_font_family_regular'))
+                        .fontWeight(FontWeight.Regular)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
-                bottom: $r('sys.float.ohos_id_text_paragraph_margin_s'), left: $r('app.float.same_name_date_dialog_left') })
+                bottom: $r('app.float.same_name_date_title3_dialog_bottom')})
 
             Row() {
                 Column() {
                     Text($r('app.string.file_time_location', this.dataTime))
-                        .fontSize($r('app.float.same_name_date_size'))
-                        .fontFamily($r('app.string.id_text_font_family_regular'))
+                        .fontSize($r('sys.float.ohos_id_text_size_body2'))
+                        .fontWeight(FontWeight.Regular)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
-                bottom: $r('app.float.same_name_date_dialog_bottom'), left: $r('app.float.same_name_date_dialog_left') })
+                bottom: $r('app.float.same_name_date_title_dialog_bottom')})
 
             Row() {
                 Column() {
                     Text($r('app.string.target_file_location'))
                         .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
-                        .fontFamily($r('app.string.id_text_font_family_regular'))
+                        .fontWeight(FontWeight.Bold)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
-                bottom: $r('app.float.same_name_date_dialog_bottom') })
+                bottom: $r('app.float.same_name_date_title2_dialog_bottom') })
 
             Row() {
                 Column() {
-                    Text($r('app.string.file_size_location', `${(this.targetDetails.size/(1024 * 1024)).toFixed(2)}MB`))
+                    Text($r('app.string.file_size_location', `${(this.targetDetails.size / Constants.BYTE_TO_MB).toFixed(2)}MB`))
                         .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
-                        .fontFamily($r('app.string.id_text_font_family_regular'))
+                        .fontWeight(FontWeight.Regular)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
-                bottom: $r('sys.float.ohos_id_text_paragraph_margin_s'), left: $r('app.float.same_name_date_dialog_left')})
+                bottom: $r('app.float.same_name_date_title3_dialog_bottom')})
 
             Row() {
                 Column() {
                     Text($r('app.string.file_time_location', this.targetDataTime))
-                        .fontSize($r('app.float.same_name_date_size'))
-                        .fontFamily($r('app.string.id_text_font_family_regular'))
+                        .fontSize($r('sys.float.ohos_id_text_size_body2'))
+                        .fontWeight(FontWeight.Regular)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
-                bottom: $r('sys.float.ohos_id_text_paragraph_margin_s'), left: $r('app.float.same_name_date_dialog_left')})
+                bottom: $r('app.float.same_name_date_title_dialog_bottom')})
 
             Row() {
                 Image(this.isDoSameAction ? $r('app.media.ic_gallery_public_checkbox_filled')
@@ -180,7 +176,7 @@ export struct FindSameNameDialog {
                         Text($r('app.string.replace_action'))
                             .fontSize($r('sys.float.ohos_id_text_size_button1'))
                             .fontColor($r('app.color.color_control_highlight'))
-                            .width(this.findSameNameParam.singlePhoto ? '50%' : `${100/3}%`)
+                            .width(this.findSameNameParam.singlePhoto ? '50%' : Constants.PERCENT_ONE_THIRD)
                             .textAlign(TextAlign.Center)
                             .fontWeight(FontWeight.Medium)
                     }
@@ -203,9 +199,8 @@ export struct FindSameNameDialog {
                     Row() {
                         Divider()
                             .vertical(true)
-                            .strokeWidth(2)
                             .height($r('app.float.dialog_divider_height'))
-                            .color($r('sys.color.ohos_id_color_list_separator'))
+                            .color($r('app.color.divider_vertical_color'))
                     }
                     .height($r('app.float.details_dialog_button_height'))
                     .alignItems(VerticalAlign.Center)
@@ -215,7 +210,7 @@ export struct FindSameNameDialog {
                             Text($r('app.string.skip_action'))
                                 .fontSize($r('sys.float.ohos_id_text_size_button1'))
                                 .fontColor($r('app.color.color_control_highlight'))
-                                .width(`${100/3}%`)
+                                .width(Constants.PERCENT_ONE_THIRD)
                                 .textAlign(TextAlign.Center)
                                 .fontWeight(FontWeight.Medium)
                         }
@@ -238,19 +233,18 @@ export struct FindSameNameDialog {
                         Row() {
                             Divider()
                                 .vertical(true)
-                                .strokeWidth(2)
                                 .height($r('app.float.dialog_divider_height'))
-                                .color($r('sys.color.ohos_id_color_list_separator'))
+                                .color($r('app.color.divider_vertical_color'))
                         }
                         .height($r('app.float.details_dialog_button_height'))
                         .alignItems(VerticalAlign.Center)
                     }
 
                     Button() {
-                        Text($r('app.string.action_cancel'))
+                        Text($r('app.string.dialog_cancel'))
                             .fontSize($r('sys.float.ohos_id_text_size_button1'))
                             .fontColor($r('app.color.color_control_highlight'))
-                            .width(this.findSameNameParam.singlePhoto ? '50%' : `${100/3}%`)
+                            .width(this.findSameNameParam.singlePhoto ? '50%' : Constants.PERCENT_ONE_THIRD)
                             .textAlign(TextAlign.Center)
                             .fontWeight(FontWeight.Medium)
                     }
@@ -274,8 +268,8 @@ export struct FindSameNameDialog {
         .width(ScreenManager.getInstance().getColumnsWidth(4))
         .backgroundColor($r('app.color.white'))
         .margin({
-            right: $r('app.float.dialog_content_margin'),
-            left: $r('app.float.dialog_content_margin'),
+            right: $r('app.float.dialog_window_margin'),
+            left: $r('app.float.dialog_window_margin'),
             bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
         })
     }

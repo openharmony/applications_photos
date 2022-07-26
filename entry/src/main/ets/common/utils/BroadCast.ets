@@ -63,4 +63,12 @@ export class BroadCast {
             }
         }
     }
+
+    public release() {
+        this.callBackArray.forEach((array) => {
+            array.length = 0;
+        });
+        this.callBackArray.length = 0;
+        this.callBackArray = [];
+    }
 }

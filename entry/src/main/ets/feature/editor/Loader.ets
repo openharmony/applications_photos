@@ -15,7 +15,7 @@
 
 import {Logger} from './utils/Logger'
 import {MediaItem} from '../../common/model/browser/photo/MediaItem'
-import {MediaLibraryAccess} from '../../common/access/MediaLibraryAccess'
+import {BrowserDataFactory} from '../../common/interface/BrowserDataFactory'
 import image from '@ohos.multimedia.image'
 import {Size} from '../../common/model/common/DataTypes'
 import {PixelMapWrapper} from './base/PixelMapWrapper'
@@ -28,7 +28,7 @@ export class Loader {
     private static logger: Logger = new Logger('Loader');
     private static readonly MIN_PIXEL_MAP_SIZE: number = 1024;
 
-    static getPixelMapPreviewSize(size: Size) {
+    private static getPixelMapPreviewSize(size: Size) {
         let width = ScreenManager.getInstance().getWinWidth();
         let height = ScreenManager.getInstance().getWinHeight();
         this.logger.debug(`picture real size: ${size.width} ${size.height}`);
@@ -40,41 +40,38 @@ export class Loader {
 
     static async loadPixelMapWrapper(mediaItem: MediaItem, isPreview: boolean = false): Promise<PixelMapWrapper> {
         this.logger.debug(`Photo: loadPixelMap id = ${mediaItem.id}`);
-        let fetchOpt = {
-            selections: 'file_id =?',
-            selectionArgs: [`${mediaItem.id}`]
-        };
+        let dataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
 
-        let result = await MediaLibraryAccess.getFirstObject(fetchOpt);
-        if (!result.obj) {
+        let result = await dataImpl.getDataById(mediaItem.id);
+        if (!result) {
             this.logger.error('get file asset failed.');
             return null;
         }
 
-        let fileAsset = result.obj;
         let size = {
-            width: fileAsset.width,
-            height: fileAsset.height
+            width: result.width,
+            height: result.height
         };
         isPreview && Loader.getPixelMapPreviewSize(size);
 
-        let thumbnail = await fileAsset.getThumbnail(size);
+        let thumbnail = await result.getThumbnail(size);
         let wrapper = new PixelMapWrapper(thumbnail, px2vp(size.width), px2vp(size.height));
-        this.logger.debug(`Photo: loadPixelMap: size[${JSON.stringify(size)}] wrapper[${JSON.stringify(wrapper)}]`);
+        this.logger.info(`Photo: loadPixelMap: size[${JSON.stringify(size)}] wrapper[${JSON.stringify(wrapper)}]`);
 
         let orientation = mediaItem.orientation || 0;
-        wrapper = Loader.translatePixelMap(wrapper, orientation);
+        await Loader.translatePixelMap(wrapper, orientation);
+        this.logger.info(`Photo: loadPixelMap: final wrapper[${JSON.stringify(wrapper)}]`);
         return wrapper;
     }
 
-    private static translatePixelMap(image: PixelMapWrapper, orientation: number): PixelMapWrapper {
+    private static translatePixelMap(image: PixelMapWrapper, orientation: number) {
         if (0 == orientation % CropAngle.CIRCLE_ANGLE) {
             return image;
         }
 
         let size = Loader.swapSize(image, orientation);
-        let offWidth = vp2px(size.width); // Apply to the case that offscreen canvas is constructed with px
-        let offHeight = vp2px(size.height); // Apply to the case that offscreen canvas is constructed with px
+        let offWidth = size.width;
+        let offHeight = size.height;
         let setting = new RenderingContextSettings(true)
         let context = new OffscreenCanvasRenderingContext2D(offWidth, offHeight, setting);
 
@@ -89,7 +86,6 @@ export class Loader {
         image.pixelMap = context.getPixelMap(0, 0, offWidth, offHeight);
         image.width = size.width;
         image.height = size.height;
-        return image;
     }
 
     private static swapSize(image: PixelMapWrapper, orientation: number): Size {
@@ -97,7 +93,7 @@ export class Loader {
         let size = {
             width: image.width,
             height: image.height
-        }
+        };
         if (0 != angle) {
             size.width = image.height;
             size.height = image.width;

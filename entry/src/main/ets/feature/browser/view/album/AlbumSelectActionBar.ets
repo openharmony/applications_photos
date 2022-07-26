@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import {Action} from '../../../../common/model/browser/operation/Action'
-import {ActionBar} from '../../../../common/view/actionbar/ActionBar.ets'
-import {ActionBarProp} from '../../../../common/model/browser/operation/ActionBarProp.ets'
-import {ActionBarMode, ActionBarSelectionMode} from '../../../../common/model/browser/operation/ActionBarMode.ets'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager.ets'
-import {Logger} from '../../utils/Logger.ets'
+import {Action} from '../../../../common/view/browserOperation/Action'
+import {ActionBar} from '../../../../common/view/actionbar/ActionBar'
+import {ActionBarProp} from '../../../../common/view/browserOperation/ActionBarProp'
+import {ActionBarMode, ActionBarSelectionMode} from '../../../../common/view/browserOperation/ActionBarMode'
+import {ScreenManager} from '../../../../common/model/common/ScreenManager'
+import {Logger} from '../../utils/Logger'
 
 @Component
 export struct AlbumSelectActionBar {
@@ -27,19 +27,6 @@ export struct AlbumSelectActionBar {
 
     onMenuClicked : Function;
     logger: Logger = new Logger('AlbumSetPageActionBar');
-
-    private createHorizontalActionBar(): ActionBarProp {
-        let menuList: Array<Action> = new Array<Action>();
-        let actionBarProp: ActionBarProp = new ActionBarProp();
-        menuList.push(Action.OK);
-
-        actionBarProp
-            .setLeftAction(Action.CANCEL)
-            .setMode(ActionBarMode.SELECTION_MODE)
-            .setSelectionMode(ActionBarSelectionMode.MULTI)
-            .setMenuList(menuList);
-        return actionBarProp;
-    }
 
     private createActionBar(): ActionBarProp {
         let menuList: Array<Action> = new Array<Action>();
@@ -55,19 +42,11 @@ export struct AlbumSelectActionBar {
 
     build() {
         Column() {
-            if (this.isHorizontal) {
-                ActionBar({
-                    isShowBar: true,
-                    actionBarProp: this.createHorizontalActionBar(),
-                    onMenuClicked: this.onMenuClicked
-                })
-            } else {
-                ActionBar({
-                    isShowBar: true,
-                    actionBarProp: this.createActionBar(),
-                    onMenuClicked: this.onMenuClicked
-                })
-            }
+            ActionBar({
+                isShowBar: true,
+                actionBarProp: this.createActionBar(),
+                onMenuClicked: this.onMenuClicked
+            })
         }
     }
 }

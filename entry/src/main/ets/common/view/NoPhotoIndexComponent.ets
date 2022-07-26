@@ -14,8 +14,8 @@
  */
 
 import {ScreenManager} from '../model/common/ScreenManager'
-import {Constants} from '../model/common/Constants.ets'
-import {Logger} from '../utils/Logger.ets'
+import {Constants} from '../model/common/Constants'
+import {Logger} from '../utils/Logger'
 
 const IMAGE_SCREEN_RATIO = 0.8
 
@@ -26,9 +26,15 @@ export struct NoPhotoIndexComponent {
 
     // set an initial value temporarily, later change to 0.
     @State imageSize: number = 0;
+    private reSizeFunc = this.reSizeLayout.bind(this);
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.logger.info('aboutToAppear');
+        ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.reSizeFunc);
+        this.updateImageSize();
+    }
+
+    reSizeLayout() {
         this.updateImageSize();
     }
 
@@ -37,16 +43,13 @@ export struct NoPhotoIndexComponent {
         let winHeightHalf = ScreenManager.getInstance().getWinHeight() / 2;
         this.imageSize
             = (winWidth < winHeightHalf) ? (winWidth * IMAGE_SCREEN_RATIO) : (winHeightHalf * IMAGE_SCREEN_RATIO)
+        this.logger.info(`window size: ${winWidth}, ${winHeightHalf}  ,empty photos or album picture size = ${this.imageSize}`);
     }
 
     build() {
-        Flex({
-            direction: FlexDirection.Column,
-            justifyContent: FlexAlign.Start,
-            alignItems: ItemAlign.Start
-        }) {
+        Row() {
             Column() {
-                Image((this.index == Constants.TIMELINE_PAGE_INDEX) ? $r('app.media.Photo') : $r('app.media.Album'))
+                Image((this.index == Constants.TIMELINE_PAGE_INDEX) ? $r("app.media.photo_empty") : $r("app.media.album_empty"))
                     .height(this.imageSize)
                     .width(this.imageSize)
                     .margin({
@@ -66,7 +69,7 @@ export struct NoPhotoIndexComponent {
                     Text((this.index == Constants.TIMELINE_PAGE_INDEX) ? $r('app.string.no_photo_head_title_timeline')
                                                                        : $r('app.string.no_photo_head_title_album'))
                         .fontSize($r('sys.float.ohos_id_text_size_headline8'))
-                        .fontFamily($r('app.string.id_text_font_family_regular'))
+                        .fontWeight(FontWeight.Medium)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                         .margin({
                             left: $r('app.float.max_padding_start'),
@@ -86,7 +89,11 @@ export struct NoPhotoIndexComponent {
                 }
             }
             .width('100%')
+            .margin({ top: $r('app.float.appbar_max_height')})
         }
         .width('100%')
+        .height('100%')
+        .alignItems(VerticalAlign.Top)
+        .justifyContent(FlexAlign.Start)
     }
 }

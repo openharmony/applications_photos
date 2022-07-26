@@ -23,7 +23,7 @@ import {MathUtils} from './MathUtils'
 import {ScreenManager} from '../../../common/model/common/ScreenManager'
 
 export class CropShow {
-    private static readonly DEFAULT_MIN_SIDE_LENGTH: number = 50;
+    private static readonly DEFAULT_MIN_SIDE_LENGTH: number = 90;
     private static readonly DEFAULT_TOUCH_BOUND: number = 20;
     private static readonly BASE_SCALE_VALUE: number = 1.0;
     private log: Logger = new Logger('CropShow');
@@ -314,10 +314,6 @@ export class CropShow {
     }
 
     private moveInFixedMode(offsetX: number, offsetY: number) {
-        if (!this.couldEnlargeImage()) {
-            return;
-        }
-
         let x = offsetX;
         let y = offsetY;
         if (this.isHorizontalSide) {

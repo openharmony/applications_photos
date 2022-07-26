@@ -14,9 +14,9 @@
  */
 import {Logger} from '../../utils/Logger'
 import {DialogCallback} from '../../model/common/DialogUtil'
-import {ScreenManager} from '../../model/common/ScreenManager.ets';
-import {Constants} from '../../model/common/Constants.ets';
-import {UiUtil} from '../../../common/utils/UiUtil.ets';
+import {ScreenManager} from '../../model/common/ScreenManager'
+import {Constants} from '../../model/common/Constants'
+import {UiUtil} from '../../../common/utils/UiUtil'
 
 @CustomDialog
 export struct NewAlbumDialog {
@@ -28,16 +28,16 @@ export struct NewAlbumDialog {
     @Consume renameFileName: string;
     @Consume dialogCallback: DialogCallback;
     @State isNull: boolean = false;
-    @State dividerColor: Resource = $r('sys.color.ohos_id_color_list_separator');
+    @State dividerColor: Resource = $r('app.color.dialog_divider_h_color_182431');
     @State dividerWidth: string = '1vp';
     private inputName: string = '';
     private logger: Logger = new Logger('NewAlbumDialog');
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.logger.info('aboutToAppear');
         this.inputName = this.renameFileName;
         this.isNull = this.inputName === '';
-        if (this.inputName.length === 80) {
+        if (this.inputName.length === Constants.ALBUM_NAME_MAX_LENGTH) {
             UiUtil.showToast($r('app.string.Maximum_length_reached'));
         }
     }
@@ -47,7 +47,7 @@ export struct NewAlbumDialog {
             Row() {
                 Text($r('app.string.album_new_album_title'))
                     .fontSize($r('sys.float.ohos_id_text_size_headline7'))
-                    .fontWeight(FontWeight.Bold)
+                    .fontWeight(FontWeight.Medium)
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
             }.alignItems(VerticalAlign.Center)
             .height($r('app.float.dialog_title_height'))
@@ -60,29 +60,21 @@ export struct NewAlbumDialog {
                     TextInput({placeholder:'', text: this.inputName})
                         .fontSize($r('sys.float.ohos_id_text_size_body1'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
-                        .fontColor($r('sys.color.ohos_id_color_text_hint'))
+                        .fontColor($r('app.color.text_input_font_color_182431'))
                         .maxLength(Constants.RENAME_MAX_LENGTH)
                         .enterKeyType(EnterKeyType.Done)
                         .backgroundColor($r('app.color.transparent'))
                         .onChange((value: string) => {
                             this.logger.info(`TextInput onChange : ${value}`)
                             this.inputName = value
-                            if (value.length === 80) {
+                            if (value.length === Constants.ALBUM_NAME_MAX_LENGTH) {
                                 UiUtil.showToast($r('app.string.Maximum_length_reached'));
                             }
                             this.isNull = this.inputName === '';
                         })
-                        .onEditChanged((isEditing) => {
-                            if (isEditing) {
-                                this.dividerColor = $r('sys.color.ohos_id_color_secondary');
-                                this.dividerWidth = '2vp';
-                            } else {
-                                this.dividerColor = $r('sys.color.ohos_id_color_list_separator');
-                                this.dividerWidth = '1vp';
-                            }
-                        }).margin({
-                        left: $r('app.float.input_text_margin'), right: $r('app.float.input_text_margin')
-                    })
+                        .margin({
+                            left: $r('app.float.input_text_margin'), right: $r('app.float.input_text_margin')
+                        })
 
                     Divider().vertical(false).strokeWidth(this.dividerWidth)
                         .color(this.dividerColor)
@@ -110,8 +102,10 @@ export struct NewAlbumDialog {
                         this.controller.close()
                     })
                     Row() {
-                        Divider().vertical(true).strokeWidth('2vp').height($r('app.float.dialog_divider_height'))
-                            .color($r('sys.color.ohos_id_color_list_separator'))
+                        Divider()
+                            .vertical(true)
+                            .height($r('app.float.dialog_divider_height'))
+                            .color($r('app.color.divider_vertical_color'))
                     }.height($r('app.float.details_dialog_button_height'))
                     .alignItems(VerticalAlign.Center)
                     Button() {
@@ -149,8 +143,8 @@ export struct NewAlbumDialog {
         .width(ScreenManager.getInstance().getColumnsWidth(4))
         .backgroundColor($r('app.color.white'))
         .margin({
-            right: $r('app.float.dialog_content_margin'),
-            left: $r('app.float.dialog_content_margin'),
+            right: $r('app.float.dialog_window_margin'),
+            left: $r('app.float.dialog_window_margin'),
             bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
         })
     }

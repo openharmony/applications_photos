@@ -14,13 +14,13 @@
  */
 
 import Matrix4 from '@ohos.matrix4'
-import {MediaItem} from './MediaItem.ets'
-import {Logger} from '../../../utils/Logger.ets'
+import {MediaItem} from './MediaItem'
+import {Logger} from '../../../utils/Logger'
 import {BroadCast} from '../../../utils/BroadCast'
 import {MathUtil} from '../../../utils/MathUtil'
-import {Constants as PhotoConstants} from './Constants.ets'
+import {Constants as PhotoConstants} from './Constants'
 import {ScreenManager} from '../../common/ScreenManager'
-import {Constants} from './Constants.ets'
+import {Constants} from './Constants'
 
 export class EventPipeline {
     // logger
@@ -97,16 +97,16 @@ export class EventPipeline {
     constructor(broadCastParam: BroadCast, item: MediaItem) {
         this.broadCast = broadCastParam;
         this.item = item;
-        this.width = this.item.width == 0 ? Constants.DEFAULT_SIZE : this.item.width;
-        this.height = this.item.height == 0 ? Constants.DEFAULT_SIZE : this.item.height;
+        this.width = this.item.imgWidth == 0 ? Constants.DEFAULT_SIZE : this.item.imgWidth;
+        this.height = this.item.imgHeight == 0 ? Constants.DEFAULT_SIZE : this.item.imgHeight;
         this.orientation = this.item.orientation || 0;
         this.evaluateScales();
     }
 
     onDataChanged(item: MediaItem) {
         this.item = item;
-        this.width = this.item.width == 0 ? Constants.DEFAULT_SIZE : this.item.width;
-        this.height = this.item.height == 0 ? Constants.DEFAULT_SIZE : this.item.height;
+        this.width = this.item.imgWidth == 0 ? Constants.DEFAULT_SIZE : this.item.imgWidth;
+        this.height = this.item.imgHeight == 0 ? Constants.DEFAULT_SIZE : this.item.imgHeight;
         this.orientation = this.item.orientation || 0;
         this.evaluateScales();
     }
@@ -167,10 +167,7 @@ export class EventPipeline {
         } else {
             direction = PanDirection.Vertical;
         }
-        this.logger.debug(`emitDirectionChange reaches: ${[this.hasReachLeft, this.hasReachRight]}, scale ${scale}, direction: ${direction}`);
-        if (this.isExiting) {
-            return;
-        }
+
         if ((this.orientation == Constants.ROTATE_ONCE || this.orientation == Constants.ROTATE_THRICE) && isEnlarged) {
             if (!this.hasReachTop && !this.hasReachBottom) {
                 direction = PanDirection.All;
@@ -190,17 +187,25 @@ export class EventPipeline {
                 direction = PanDirection.Vertical;
             }
         }
+
+        this.logger.info(`emitDirectionChange reaches: ${[this.hasReachLeft, this.hasReachRight, this.hasReachTop, this.hasReachBottom]}, scale ${scale}, direction: ${direction}`);
+        if (this.isExiting) {
+            return;
+        }
+
+        if (direction == PanDirection.Vertical || direction == (PanDirection.Vertical | PanDirection.Left) ||
+                direction == (PanDirection.Vertical | PanDirection.Right)) {
+            this.broadCast.emit(PhotoConstants.SET_DISABLE_SWIPE, [false]);
+        } else {
+            this.broadCast.emit(PhotoConstants.SET_DISABLE_SWIPE, [true]);
+        }
         this.broadCast.emit(PhotoConstants.DIRECTION_CHANGE + this.item.uri, [direction]);
     }
 
     private evaluateOffset(): [number, number] {
-        this.logger.debug(`evaluateOffset lastOffset: ${this.lastOffset}, offset: ${this.offset}`);
+        this.logger.info(`evaluateOffset lastOffset: ${this.lastOffset}, offset: ${this.offset}`);
         let centerX = (this.center[0] - PhotoConstants.CENTER_DEFAULT) * this.componentWidth * (this.defaultScale - this.scale) * this.lastScale;
         let centerY = (this.center[1] - PhotoConstants.CENTER_DEFAULT) * this.componentHeight * (this.defaultScale - this.scale) * this.lastScale;
-        if (this.orientation == Constants.ROTATE_ONCE || this.orientation == Constants.ROTATE_THRICE) {
-            centerX = (this.center[0] - PhotoConstants.CENTER_DEFAULT) * this.componentHeight * (this.defaultScale - this.scale) * this.lastScale;
-            centerY = (this.center[1] - PhotoConstants.CENTER_DEFAULT) * this.componentWidth * (this.defaultScale - this.scale) * this.lastScale;
-        }
         let offsetX = this.lastOffset[0] + this.offset[0] + centerX;
         let offsetY = this.lastOffset[1] + this.offset[1] + centerY;
         this.logger.debug(`evaluateOffset offsetX: ${offsetX}, offsetY: ${offsetY}`);
@@ -252,7 +257,7 @@ export class EventPipeline {
             })
             .copy();
         this.logger.debug(`emitTouchEvent lastOffset: ${this.lastOffset}, offset: ${this.offset},\
-        center: ${this.center}, scale: ${[this.lastScale, this.scale]}, matrix: ${matrix.matrix4x4}`);
+        center: ${this.center}, scale: ${[this.lastScale, this.scale]}`);
         this.broadCast.emit(PhotoConstants.TOUCH_EVENT + this.item.uri, [matrix]);
         this.evaluateBounds();
     }
@@ -305,16 +310,13 @@ export class EventPipeline {
 
     private evaluateImgDisplaySize(): [number, number] {
         let screenScale = 1;
-        if (this.orientation == Constants.ROTATE_ONCE || this.orientation == Constants.ROTATE_THRICE) {
-            let widthScale = this.componentWidth / this.item.height;
-            let heightScale = this.componentHeight / this.item.width;
-            screenScale = widthScale > heightScale ? heightScale : widthScale;
-        } else {
-            let widthScale = this.componentWidth / this.item.width;
-            let heightScale = this.componentHeight / this.item.height;
-            screenScale = widthScale > heightScale ? heightScale : widthScale;
-        }
+        let widthScale = this.componentWidth / this.item.imgWidth;
+        let heightScale = this.componentHeight / this.item.imgHeight;
+        screenScale = widthScale > heightScale ? heightScale : widthScale;
         let scale = this.lastScale * this.scale * screenScale;
+        if (this.orientation == Constants.ROTATE_ONCE || this.orientation == Constants.ROTATE_THRICE) {
+            scale = this.lastScale * this.scale;
+        }
         let imgDisplayWidth = 0;
         let imgDisplayHeight = 0;
         imgDisplayWidth = this.width * scale;
@@ -381,12 +383,12 @@ export class EventPipeline {
         let result: [number, number, number, number] = [0, 0, 0, 0];
         let screenScale = 1;
         if (this.orientation == Constants.ROTATE_ONCE || this.orientation == Constants.ROTATE_THRICE) {
-            let widthScale = this.componentWidth / this.item.height;
-            let heightScale = this.componentHeight / this.item.width;
+            let widthScale = this.componentWidth / this.item.imgHeight;
+            let heightScale = this.componentHeight / this.item.imgWidth;
             screenScale = widthScale > heightScale ? heightScale : widthScale;
         } else {
-            let widthScale = this.componentWidth / this.item.width;
-            let heightScale = this.componentHeight / this.item.height;
+            let widthScale = this.componentWidth / this.item.imgWidth;
+            let heightScale = this.componentHeight / this.item.imgHeight;
             screenScale = widthScale > heightScale ? heightScale : widthScale;
         }
         let left = (screenScale * scale * this.width - this.componentWidth) / PhotoConstants.NUMBER_2;
@@ -657,7 +659,7 @@ export class EventPipeline {
                 y: offset[1]
             })
             .copy();
-        this.logger.debug(`evaluateAnimeMatrix scale:${scale}, center:${center}, result:${animationEndMatrix.matrix4x4}`);
+        this.logger.debug(`evaluateAnimeMatrix scale:${scale}, center:${center}`);
         return animationEndMatrix;
     }
 
@@ -738,13 +740,15 @@ export class EventPipeline {
      * @param animationEndMatrix Transformation matrix at end
      */
     onAnimationEnd(animationEndMatrix: any): void{
-        this.logger.info(`onAnimationEnd: ${animationEndMatrix.matrix4x4}`);
-        this.lastScale = animationEndMatrix.matrix4x4[0];
-        this.scale = 1;
-        this.lastOffset = [animationEndMatrix.matrix4x4[PhotoConstants.NUMBER_12], animationEndMatrix.matrix4x4[PhotoConstants.NUMBER_13]];
-        this.offset = [0, 0];
-        this.evaluateBounds();
-        this.isInAnimation = false;
-        this.emitDirectionChange();
+        if (animationEndMatrix) {
+            this.logger.info(`onAnimationEnd: ${animationEndMatrix.matrix4x4}`);
+            this.lastScale = animationEndMatrix.matrix4x4[0];
+            this.scale = 1;
+            this.lastOffset = [animationEndMatrix.matrix4x4[PhotoConstants.NUMBER_12], animationEndMatrix.matrix4x4[PhotoConstants.NUMBER_13]];
+            this.offset = [0, 0];
+            this.evaluateBounds();
+            this.isInAnimation = false;
+            this.emitDirectionChange();
+        }
     }
 }

@@ -13,33 +13,40 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../../utils/Logger.ets'
-import {MediaDataSource} from './MediaDataSource.ets'
+import {Logger} from '../../../utils/Logger'
+import {MediaDataSource} from './MediaDataSource'
 import {LoadingListener} from '../LoadingListener'
 import {BroadCast} from '../../../utils/BroadCast'
 import {Constants as PhotoConstants} from './Constants'
 import {MediaItem} from './MediaItem'
-import {Constants} from '../../common/Constants.ets'
+import {Constants} from '../../common/Constants'
 import {PixelMapManager} from '../../common/PixelMapManager'
-import {BrowserDataFactory} from '../interface/BrowserDataFactory.ets';
+import {BrowserDataFactory} from '../../../interface/BrowserDataFactory';
+import {AlbumDefine} from '../AlbumDefine'
+import {BroadCastManager} from '../../common/BroadCastManager';
+import {ImageUtil} from '../../../utils/ImageUtil';
+import {ScreenManager} from '../../common/ScreenManager';
 
 // DataSource
 export class PhotoDataSource implements IDataSource, LoadingListener {
-    private logger: Logger = new Logger('PhotoDataSource');
+    protected logger: Logger = new Logger('PhotoDataSource');
     private albumDataSource: MediaDataSource;
     private broadCast: BroadCast;
     private currentIndex = 0;
     private pixelMapManager: PixelMapManager;
-
+    private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
     // Data change listener
     private listeners: DataChangeListener[] = [];
-    private albumName: string = 'Camera'
+    private albumId: string = AlbumDefine.ALBUM_ID_CAMERA
     private deviceId: string = ''
-    private photoDataImpl;
+    protected photoDataImpl;
 
     totalCount(): number {
         let totalCount = this.albumDataSource.mediaCount;
         this.logger.debug(`totalCount: ${totalCount}`);
+        if (totalCount > 0 && !this.albumDataSource.getRawData(0)) {
+            return 0;
+        }
         return totalCount || 0;
     }
 
@@ -48,18 +55,22 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
         return this.albumDataSource.getDataIndex(item);
     }
 
-    constructor(albumName?: string) {
-        this.logger.debug('bind onMessage');
-        this.pixelMapManager = PixelMapManager.getInstance();
-        if (albumName) {
-            this.albumName = albumName;
-        }
-
-        this.photoDataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_ALBUM);
+    getDataIndexById(id: number) {
+        return this.albumDataSource.getDataIndexById(id);
     }
 
-    setAlbumName(albumName: string) {
-        this.albumName = albumName;
+    constructor(albumId?: string) {
+        this.logger.debug('bind onMessage');
+        this.pixelMapManager = PixelMapManager.getInstance();
+        if (albumId) {
+            this.albumId = albumId;
+        }
+
+        this.photoDataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
+    }
+
+    setAlbumId(albumId: string) {
+        this.albumId = albumId;
     }
 
     setDeviceId(deviceId: string) {
@@ -71,7 +82,7 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
 
     initData() {
         let dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
-        dataSource.setAlbumName(this.albumName);
+        dataSource.setAlbumId(this.albumId);
         dataSource.initData();
         this.setAlbumDataSource(dataSource);
     }
@@ -81,9 +92,28 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
         this.logger.info(`getData index ${index}`);
         this.albumDataSource.updateSlidingWindow(index);
         let mediaItem: MediaItem = this.albumDataSource.getRawData(index);
+
+        if (mediaItem.height == 0 || mediaItem.width == 0) {
+            this.getDataById(mediaItem.id).then((result) => {
+                mediaItem = new MediaItem(result);
+                if (mediaItem.height == 0 || mediaItem.width == 0) {
+                    return;
+                }
+                let index = this.albumDataSource.getIndexByMediaItem(mediaItem);
+                if (index != -1) {
+                    this.albumDataSource.onDataChanged(index);
+                }
+                this.onDataChanged(index);
+            })
+        }
         let orientation = mediaItem.orientation || 0;
         let imgWidth = orientation == 0 || orientation == PhotoConstants.ROTATE_TWICE ? mediaItem.width : mediaItem.height;
         let imgHeight = orientation == 0 || orientation == PhotoConstants.ROTATE_TWICE ? mediaItem.height : mediaItem.width;
+        let scale = this.generateSampleSize(imgWidth, imgHeight, index);
+        mediaItem.imgWidth = Math.ceil(mediaItem.width / scale);
+        mediaItem.imgHeight = Math.ceil(mediaItem.height / scale);
+        imgWidth = Math.ceil(imgWidth / scale);
+        imgHeight = Math.ceil(imgHeight / scale);
         return {
             data: mediaItem,
             pos: index,
@@ -166,12 +196,17 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
         })
     }
 
+    async getDataById(id) {
+        return await this.photoDataImpl.getDataById(id);
+    }
+
     public release(): void {
         this.albumDataSource.releasePhotoBroadCast();
         this.albumDataSource.removeLoadingListener(this);
         // cancel the mediaLibrary listening of albumDataSource when the large image is destroyed.
         // cannot cancel it in unregisterDataChangeListener
         this.albumDataSource && this.albumDataSource.unregisterObserver();
+        this.broadCast = null;
     }
 
     getPositionByIndex(index: number): number {
@@ -180,5 +215,24 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
 
     onChange(changeType) {
         this.albumDataSource.onChange(changeType);
+    }
+
+    switchRefreshOn(){
+        this.albumDataSource.switchRefreshOn();
+    };
+
+    private generateSampleSize(imageWidth: number, imageHeight: number, index: number): number {
+        let width = ScreenManager.getInstance().getWinWidth();
+        let height = ScreenManager.getInstance().getWinHeight();
+        width = width == 0 ? ScreenManager.DEFAULT_WIDTH : width;
+        height = height == 0 ? ScreenManager.DEFAULT_HEIGHT : height;
+        let maxNumOfPixels
+        if (this.currentIndex == index) {
+            maxNumOfPixels = 2 * width * height;
+        } else {
+            maxNumOfPixels = width * height;
+        }
+        let minSide = Math.min(width, height);
+        return ImageUtil.computeSampleSize(imageWidth, imageHeight, minSide, maxNumOfPixels);
     }
 }

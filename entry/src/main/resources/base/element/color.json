@@ -146,7 +146,7 @@
     },
     {
       "name": "color_control_highlight",
-      "value": "#0A59F7"
+      "value": "#007DFF"
     },
     {
       "name": "color_system_highlight",
@@ -207,6 +207,18 @@
     {
       "name": "slider_color5",
       "value": "#FFFFFF"
+    },
+    {
+      "name": "divider_vertical_color",
+      "value": "#33182431"
+    },
+    {
+      "name": "text_input_font_color_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "dialog_divider_h_color_182431",
+      "value": "#182431"
     },
     {
       "name": "slider_color6",
@@ -290,11 +302,11 @@
     },
     {
       "name": "scroll_bar_side_text_color",
-      "value": "#95FFFFFF"
+      "value": "#F2FFFFFF"
     },
     {
       "name": "scroll_bar_side_text_small_color",
-      "value": "#80FFFFFF"
+      "value": "#CCFFFFFF"
     },
     {
       "name": "FA_title_text_color",
@@ -307,6 +319,10 @@
     {
       "name": "FA_background_color",
       "value": "#075579"
+    },
+    {
+      "name": "scroll_bar_side_text_shadow_color",
+      "value": "#1A000000"
     }
   ]
 }

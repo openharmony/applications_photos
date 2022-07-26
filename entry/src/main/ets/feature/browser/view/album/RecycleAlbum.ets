@@ -14,7 +14,7 @@
  */
 
 import {Logger} from '../../utils/Logger'
-import {Constants} from '../../../../common/model/common/Constants.ets'
+import {Constants} from '../../../../common/model/common/Constants'
 
 @Component
 export struct RecycleAlbum {
@@ -26,7 +26,7 @@ export struct RecycleAlbum {
 
     gridAspectRatio = Constants.CARD_ASPECT_RATIO;
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         let numberHeight = px2vp(fp2px(Constants.TEXT_SIZE_BODY2));
         let nameHeight = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE1));
         this.icHeight = this.gridHeight - Constants.ALBUM_SET_NEW_ICON_MARGIN; - numberHeight - nameHeight;
@@ -44,8 +44,8 @@ export struct RecycleAlbum {
                     .height($r('app.float.recycle_album_cover_icon_size'))
                     .fillColor($r('app.color.empty_or_recycle_album_icon'))
                     .onError((msg: {componentWidth: number, componentHeight: number}) => {
-                        this.logger.debug(`image load failed and its componentWidth is: ${msg.componentWidth}`);
-                        this.logger.debug(`image load failed and its componentHeight is: ${msg.componentHeight}`);
+                        this.logger.error(`image load failed and its componentWidth is: ${msg.componentWidth}`);
+                        this.logger.error(`image load failed and its componentHeight is: ${msg.componentHeight}`);
                     })
                     .onComplete((msg: { width: number, height: number, componentWidth: number,
                         componentHeight: number}) => {

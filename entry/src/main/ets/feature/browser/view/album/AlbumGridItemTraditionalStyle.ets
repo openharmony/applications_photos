@@ -13,40 +13,41 @@
  * limitations under the License.
  */
 
-import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine.ets'
 import {AlbumInfo} from '../../../../common/model/browser/album/AlbumInfo';
 import {EmptyAlbumComponent} from './EmptyAlbumComponent';
-import {ScreenManager} from '../../../../common/model/common/ScreenManager.ets';
+import {ScreenManager} from '../../../../common/model/common/ScreenManager';
 import {Logger} from '../../utils/Logger'
-import {Constants} from '../../../../common/model/common/Constants.ets'
+import {Constants} from '../../../../common/model/common/Constants'
 import router from '@system.router';
-import {UiUtil} from '../../../../common/utils/UiUtil'
-
-let static_icon_list = new Map([
-    [AlbumDefine.ALBUM_NAME_VIDEO , $r('app.media.ic_video')],
-    [AlbumDefine.ALBUM_NAME_FAVOR, $r('app.media.ic_favorite_overlay')]
-]);
 
 // Traditional style grid item for distributed album set page
 // There is no selection mode.
 @Component
 export struct AlbumGridItemTraditionalStyle {
-    @State item: AlbumInfo = new AlbumInfo('', '', '', 0, '');
+    @State @Watch('updateCard') item: AlbumInfo = new AlbumInfo('', '', '', '', 0, '', '');
     @State isEmptyAlbum : boolean = false;
     @Provide isBigCard: boolean = false;
     @Provide gridHeight:number = 0;
     logger: Logger = new Logger('AlbumGridItemTraditionalStyle');
-
+    @State bigWidth:number = 0;
+    @State cardWidth: number = 0;
+    @State cardHeight: number = 0;
+    @State transformV: number = 0;
     gridAspectRatio = Constants.CARD_ASPECT_RATIO;
     albumCountMarginRight = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN * 2;
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.logger.info('aboutToAppear new opp');
 
         let self = this;
         ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
             self.updateCardSize();
         })
+        this.updateCardSize();
+    }
+
+    updateCard() {
+        this.logger.debug('Album changed and update card size.');
         this.updateCardSize();
     }
 
@@ -58,6 +59,26 @@ export struct AlbumGridItemTraditionalStyle {
         let gridWidth = ((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER) / count) -
         Constants.ALBUM_SET_GUTTER;
         this.gridHeight = gridWidth / this.gridAspectRatio;
+        this.bigWidth = gridWidth * 2 + Constants.ALBUM_SET_GUTTER;
+
+        if (Constants.ANGLE_90 == this.item.coverOrientation
+            || Constants.ANGLE_270 == this.item.coverOrientation) {
+            this.cardWidth = this.gridHeight;
+            if (this.isBigCard) {
+                this.cardHeight = this.bigWidth;
+            } else {
+                this.cardHeight = gridWidth;
+            }
+            this.transformV = (this.cardHeight - this.cardWidth) / Constants.NUMBER_2;
+        } else {
+            if (this.isBigCard) {
+                this.cardWidth = this.bigWidth;
+            } else {
+                this.cardWidth = gridWidth;
+            }
+            this.cardHeight = this.gridHeight;
+            this.transformV = 0;
+        }
     }
 
     build() {
@@ -68,40 +89,69 @@ export struct AlbumGridItemTraditionalStyle {
                 }
 
                 if (this.isBigCard) {
-                    Image(this.item.coverUri)
-                        .height(this.gridHeight)
-                        .offset({ x: 0, y: 0 })
-                        .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
-                        .onError(() => {
-                            this.logger.debug('album is empty or its cover is error');
-                            this.isEmptyAlbum = true;
-                        })
-                        .onComplete((msg: {
-                            width: number,
-                            height: number,
-                            componentWidth: number,
-                            componentHeight: number
-                        }) => {
-                            this.logger.debug(`image load success.Size: ${msg.componentWidth}x${msg.componentHeight}`);
-                        })
+                    Flex({
+                        direction: FlexDirection.Row,
+                        justifyContent: FlexAlign.Center,
+                        alignItems: ItemAlign.Center
+                    }) {
+                        Image(this.item.coverUri)
+                            .width(this.cardWidth)
+                            .height(this.cardHeight)
+                            .transform({ y: this.transformV })
+                            .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
+                            .rotate({
+                                centerX: this.cardWidth / Constants.NUMBER_2,
+                                centerY: this.cardHeight / Constants.NUMBER_2,
+                                z: 1,
+                                angle: this.item.coverOrientation
+                            })
+                            .onError(() => {
+                                this.logger.debug('album is empty or its cover is error');
+                                this.isEmptyAlbum = true;
+                            })
+                            .onComplete((msg: {
+                                width: number,
+                                height: number,
+                                componentWidth: number,
+                                componentHeight: number
+                            }) => {
+                                this.logger.debug(`image load success.Size: ${msg.componentWidth}x${msg.componentHeight}`);
+                            })
+                    }
+                    .width(this.bigWidth)
+                    .height(this.gridHeight)
                 } else {
-                    Image(this.item.coverUri)
-                        .aspectRatio(this.gridAspectRatio)
-                        .offset({ x: 0, y: 0 })
-                        .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
-                        .onError(() => {
-                            this.logger.debug('album is empty or its cover is error');
-                            this.isEmptyAlbum = true;
-                        })
-                        .onComplete((msg: {
-                            width: number,
-                            height: number,
-                            componentWidth: number,
-                            componentHeight: number
-                        }) => {
-                            this.logger.debug(`image load success. Size: ${msg.width}x${msg.height},\
-                                componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
-                        })
+                    Flex({
+                        direction: FlexDirection.Row,
+                        justifyContent: FlexAlign.Center,
+                        alignItems: ItemAlign.Center
+                    }) {
+                        Image(this.item.coverUri)
+                            .width(this.cardWidth)
+                            .height(this.cardHeight)
+                            .translate({ x: this.transformV })
+                            .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
+                            .rotate({
+                                centerX: this.cardWidth / Constants.NUMBER_2,
+                                centerY: this.cardHeight / Constants.NUMBER_2,
+                                z: 1,
+                                angle: this.item.coverOrientation
+                            })
+                            .onError(() => {
+                                this.logger.debug('album is empty or its cover is error');
+                                this.isEmptyAlbum = true;
+                            })
+                            .onComplete((msg: {
+                                width: number,
+                                height: number,
+                                componentWidth: number,
+                                componentHeight: number
+                            }) => {
+                                this.logger.debug(`image load success. Size: ${msg.width}x${msg.height},\
+                                    componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
+                            })
+                    }
+                    .height(this.gridHeight)
                 }
 
                 Column() {
@@ -135,10 +185,7 @@ export struct AlbumGridItemTraditionalStyle {
             })
             .onClick(async () => {
                 this.logger.info(`After onClick : ${JSON.stringify(this.item)}`);
-                let display = typeof this.item.displayName == 'string'
-                    ? this.item.displayName
-                    : await UiUtil.getResourceString(this.item.displayName);
-                let name = this.item.deviceName ? `${this.item.deviceName}(${display})` : this.item.name;
+                let name = this.item.deviceName ? `${this.item.deviceName}(${this.item.displayName})` : this.item.displayName;
                 router.push({
                     uri: 'feature/browser/view/photoGrid/PhotoGridPage',
                     params: {

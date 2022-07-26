@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {BroadCast} from '../../utils/BroadCast.ets';
-import {Logger} from '../../utils/Logger.ets';
-import {ScreenManager} from '../../model/common/ScreenManager.ets';
-import {Constants} from '../../model/common/Constants.ets';
+import {BroadCast} from '../../utils/BroadCast'
+import {Logger} from '../../utils/Logger'
+import {ScreenManager} from '../../model/common/ScreenManager'
+import {Constants} from '../../model/common/Constants'
 
 @Observed
 export class CancelParam {
@@ -52,38 +52,60 @@ export struct DownloadCancelOperationDialog {
             .alignItems(VerticalAlign.Center)
             .width('100%')
 
-            Flex({
-                justifyContent: FlexAlign.SpaceAround,
-                alignItems: ItemAlign.Center
-            }) {
-                Button() {
-                    Text($r('app.string.download_progress_continue'))
-                        .fontColor($r('app.color.color_control_highlight'))
-                        .fontWeight(FontWeight.Medium)
-                        .fontSize($r('sys.float.ohos_id_text_size_body1'))
-                }
-                .onClick(() => {
-                    this.logger.info('click continue')
-                    this.cancelParam.continueFunc();
-                    this.controller.close()
-                }).backgroundColor($r('app.color.transparent'))
+            Stack({alignContent: Alignment.Top}) {
+                Row() {
+                    Button() {
+                        Text($r('app.string.download_progress_continue'))
+                            .fontSize($r('sys.float.ohos_id_text_size_button1'))
+                            .fontColor($r('app.color.color_control_highlight'))
+                            .fontWeight(FontWeight.Medium)
+                            .width('50%')
+                            .textAlign(TextAlign.Center)
+                    }
+                    .margin({
+                        left: $r('app.float.details_dialog_button_margin_left'),
+                        right: $r('app.float.details_dialog_button_margin_right')
+                    })
+                    .backgroundColor($r('app.color.transparent'))
+                    .height($r('app.float.details_dialog_button_height'))
+                    .onClick(() => {
+                        this.logger.info('click continue')
+                        this.cancelParam.continueFunc();
+                        this.controller.close()
+                    })
 
-                Divider().vertical(true)
-                    .height($r('sys.float.ohos_id_text_size_body1'))
-                    .color($r('sys.color.ohos_id_color_list_separator'))
+                    Row() {
+                        Divider()
+                            .vertical(true)
+                            .height($r('app.float.dialog_divider_height'))
+                            .color($r('app.color.divider_vertical_color'))
+                    }
+                    .height($r('app.float.details_dialog_button_height'))
+                    .alignItems(VerticalAlign.Center)
 
-                Button() {
-                    Text($r('app.string.download_progress_cancel'))
-                        .fontColor($r('app.color.color_control_highlight'))
-                        .fontSize($r('sys.float.ohos_id_text_size_body1'))
-                        .fontWeight(FontWeight.Medium)
+                    Button() {
+                        Text($r('app.string.download_progress_cancel'))
+                            .fontSize($r('sys.float.ohos_id_text_size_button1'))
+                            .fontColor($r('app.color.color_control_highlight'))
+                            .fontWeight(FontWeight.Medium)
+                            .width('50%')
+                            .textAlign(TextAlign.Center)
+                    }
+                    .margin({
+                        left: $r('app.float.details_dialog_button_margin_left'),
+                        right: $r('app.float.details_dialog_button_margin_right')
+                    })
+                    .backgroundColor($r('app.color.transparent'))
+                    .height($r('app.float.details_dialog_button_height'))
+                    .onClick(() => {
+                        this.logger.info('click cancel')
+                        this.cancelParam.cancelFunc();
+                        this.controller.close()
+                    })
                 }
-                .onClick(() => {
-                    this.logger.info('click cancel')
-                    this.cancelParam.cancelFunc();
-                    this.controller.close()
-                }).backgroundColor($r('app.color.transparent'))
             }
+            .width('100%')
+            .height($r('app.float.details_dialog_button_area_height'))
         }
         .padding({
             left: $r('app.float.max_padding_start'),
@@ -96,8 +118,8 @@ export struct DownloadCancelOperationDialog {
         .borderRadius($r('app.float.dialog_border_radius'))
         .width(ScreenManager.getInstance().getColumnsWidth(4))
         .margin({
-            right: $r('app.float.dialog_content_margin'),
-            left: $r('app.float.dialog_content_margin'),
+            right: $r('app.float.dialog_window_margin'),
+            left: $r('app.float.dialog_window_margin'),
             bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
         })
     }

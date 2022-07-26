@@ -13,17 +13,17 @@
  * limitations under the License.
  */
 
-import {Logger} from '../utils/Logger.ets'
-import {Constants} from '../model/common/Constants.ets'
-import {MediaItem} from '../model/browser/photo/MediaItem.ets'
+import {Logger} from '../utils/Logger'
+import {Constants} from '../model/common/Constants'
+import {MediaItem} from '../model/browser/photo/MediaItem'
 import {DateUtil} from '../utils/DateUtil'
-import {BroadCast} from '../utils/BroadCast.ets'
+import {BroadCast} from '../utils/BroadCast'
 import {BroadCastConstants} from '../model/common/BroadCastConstants'
 import image from '@ohos.multimedia.image'
 import {ImageUtil} from '../utils/ImageUtil'
 import {ScreenManager} from '../model/common/ScreenManager'
 import {TraceControllerUtils} from '../utils/TraceControllerUtils'
-import { MediaLibraryAccess } from '../access/MediaLibraryAccess.ets';
+import { MediaLibraryAccess } from '../access/MediaLibraryAccess';
 
 // General grid picture control
 @Component
@@ -69,7 +69,7 @@ export struct ImageGridItemComponent {
         this.isEnteringPhoto = false;
     }
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.logger.debug('aboutToAppear');
         this.imageThumbnail = this.item.thumbnail;
         this.logger.debug(`imageThumbnail: ${JSON.stringify(this.imageThumbnail)}`);
@@ -141,8 +141,8 @@ export struct ImageGridItemComponent {
     private generateSampleSize(imageWidth: number, imageHeight: number): number {
         let width = ScreenManager.getInstance().getWinWidth();
         let height = ScreenManager.getInstance().getWinHeight();
-        width = width == 0 ? 1920 : width;
-        height = height == 0 ? 1080 : height;
+        width = width == 0 ? ScreenManager.DEFAULT_WIDTH : width;
+        height = height == 0 ? ScreenManager.DEFAULT_HEIGHT : height;
         let maxNumOfPixels = width * height;
         let minSide = Math.min(width, height);
         return ImageUtil.computeSampleSize(imageWidth, imageHeight, minSide, maxNumOfPixels);
@@ -151,24 +151,25 @@ export struct ImageGridItemComponent {
     build() {
         Column() {
             Stack({ alignContent: Alignment.Start }) {
-                Image(this.useAlt ? ((this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) ?
-                $r('app.media.alt_video_placeholder') : $r('app.media.alt_placeholder')) : this.imageThumbnail)
-                    .alt(this.useAlt ? ((this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) ?
-                    $r('app.media.alt_video_placeholder') : $r('app.media.alt_placeholder')) : '')
-                    .aspectRatio(1)
-                    .rotate({ x: 0, y: 0, z: 1, angle: this.useAlt ? 0 : this.item.orientation })
-                    .objectFit(ImageFit.Cover)
-                    .autoResize(false)
-//                    .sharedTransition(this.transitionId, {duration:200}) TODO: delete dynamic effect
-                    .onError(() => {
-                        if(this.imageThumbnail) {
-                            this.useAlt = true;
-                        }
-                        this.logger.error('alt Image error');
-                    })
-                    .onComplete(() => {
-                        this.logger.debug(`Draw the image! ${this.imageThumbnail}`);
-                    })
+                Row() {
+                    Image(this.useAlt ? ((this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) ?
+                    $r('app.media.alt_video_placeholder') : $r('app.media.alt_placeholder')) : this.imageThumbnail)
+                        .alt(this.useAlt ? ((this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) ?
+                        $r('app.media.alt_video_placeholder') : $r('app.media.alt_placeholder')) : '')
+                        .aspectRatio(1)
+                        .rotate({ x: 0, y: 0, z: 1, angle: this.useAlt ? 0 : this.item.orientation })
+                        .objectFit(ImageFit.Cover)
+                        .autoResize(false)
+                        .onError(() => {
+                            if(this.imageThumbnail) {
+                                this.useAlt = true;
+                            }
+                            this.logger.error('alt Image error');
+                        })
+                        .onComplete(() => {
+                            this.logger.debug(`Draw the image! ${this.imageThumbnail}`);
+                        })
+                }.sharedTransition(this.transitionId, {duration : Constants.SHARE_TRANSITION_DURATION})
 
                 if (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) {
                     Column()
@@ -181,10 +182,10 @@ export struct ImageGridItemComponent {
                         .fontSize($r('sys.float.ohos_id_text_size_caption'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
                         .fontColor($r('app.color.text_color_above_picture'))
-                        .lineHeight(12)
+                        .lineHeight($r('app.float.grid_item_text_line_height'))
                         .position({ x: '0%', y: '100%' })
-                        .markAnchor({ x: -4, y: 16 })
-                        .margin({ right: 32 })
+                        .markAnchor({ x: $r('app.float.grid_item_duration_markAnchor_x'), y: $r('app.float.grid_item_duration_markAnchor_y') })
+                        .margin({ right: $r('app.float.grid_item_duration_margin_right') })
                 }
 
                 Image($r('app.media.ic_favorite_overlay'))
@@ -192,7 +193,7 @@ export struct ImageGridItemComponent {
                     .width($r('app.float.icon_size'))
                     .objectFit(ImageFit.Contain)
                     .position({ x: '100%', y: '0%' })
-                    .markAnchor({ x: 28, y: -4 })
+                    .markAnchor({ x: $r('app.float.grid_item_favor_markAnchor_x'), y: $r('app.float.grid_item_favor_markAnchor_y') })
                     .visibility(this.item.isFavor ? Visibility.Visible : Visibility.None)
 
                 Column()
@@ -224,7 +225,7 @@ export struct ImageGridItemComponent {
                     .width($r('app.float.icon_size_hot'))
                     .position({ x: '0%', y: '0%' })
                     .markAnchor({ x: 0, y: 0 })
-                    .padding(4)
+                    .padding($r('app.float.grid_item_preview_padding'))
                     .visibility(this.isSelectedMode ? Visibility.Visible : Visibility.None)
 
                 Image(this.isSelected
@@ -232,7 +233,7 @@ export struct ImageGridItemComponent {
                     .height($r('app.float.icon_size'))
                     .width($r('app.float.icon_size'))
                     .position({ x: '100%', y: '100%' })
-                    .markAnchor({ x: 28, y: 28 })
+                    .markAnchor({ x: $r('app.float.grid_item_checkbox_markAnchor'), y: $r('app.float.grid_item_checkbox_markAnchor') })
                     .visibility(this.isSelectedMode ? Visibility.Visible : Visibility.None)
                     .onClick(() => {
                         this.selectStateChange();

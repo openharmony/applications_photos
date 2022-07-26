@@ -14,18 +14,23 @@
  */
 
 export class AlbumInfo {
+    id: string;
     coverUri: any;
+    coverOrientation: number;
     name: string;
     uri: string;
-    displayName: Resource;
+    displayName: string;
     count: number;
     videoCount: number;
     isDisableRename: boolean;
     isDisableDelete: boolean;
     deviceId: string;
     deviceName: string;
+    relativePath: string;
+    innerId: string;
 
-    constructor(uri, name, displayName, count, deviceId) {
+    constructor(id, uri, name, displayName, count, deviceId, relativePath) {
+        this.id = id;
         this.coverUri = uri;
         this.name = name;
         this.displayName = displayName;
@@ -34,5 +39,6 @@ export class AlbumInfo {
         this.isDisableDelete = false;
         this.videoCount = 0;
         this.deviceId = deviceId;
+        this.relativePath = relativePath;
     }
 }

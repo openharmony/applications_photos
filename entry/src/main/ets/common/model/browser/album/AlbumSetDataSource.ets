@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-import { AlbumSetCallback } from './AlbumSetCallback.ets';
-import { TraceControllerUtils } from '../../../utils/TraceControllerUtils.ets';
-import { BrowserDataFactory } from '../interface/BrowserDataFactory.ets';
-import { BrowserDataInterface } from '../interface/BrowserDataInterface';
-import { BroadCast } from '../../../utils/BroadCast.ets';
-import { Logger } from '../../../utils/Logger.ets';
-import { AlbumInfo } from './AlbumInfo.ets';
-import { AbsDataSource } from '../AbsDataSource.ets';
-import { Constants } from '../../common/Constants.ets';
+import { AlbumSetCallback } from './AlbumSetCallback';
+import { TraceControllerUtils } from '../../../utils/TraceControllerUtils';
+import { BrowserDataFactory } from '../../../interface/BrowserDataFactory';
+import { BrowserDataInterface } from '../../../interface/BrowserDataInterface';
+import { BroadCast } from '../../../utils/BroadCast';
+import { Logger } from '../../../utils/Logger';
+import { AlbumInfo } from './AlbumInfo';
+import { AbsDataSource } from '../AbsDataSource';
+import { Constants } from '../../common/Constants';
 
 export class AlbumSetDataSource extends AbsDataSource {
     logger: Logger = new Logger('AlbumSetDataSource');
@@ -34,15 +34,15 @@ export class AlbumSetDataSource extends AbsDataSource {
     private blackList: Array<string> = [];
     private deviceId = ''
 
-    constructor(broadCast: BroadCast, device?) {
+    constructor(broadCast: BroadCast, param?) {
         super();
 
-        this.logger.debug(`constructor ${JSON.stringify(device)}`);
+        this.logger.debug(`constructor ${JSON.stringify(param)}`);
         this.broadCast_ = broadCast;
-        this.albumBrowserDataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_ALBUM_SET, device);
+        this.albumBrowserDataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_ALBUM, param);
 
-        if (device != undefined){
-            this.deviceId = device.deviceId;
+        if (param && param.deviceId){
+            this.deviceId = param.deviceId;
         }
     }
 
@@ -52,13 +52,12 @@ export class AlbumSetDataSource extends AbsDataSource {
         this.loadData();
     }
 
-    loadData(): Promise<void> {
+    loadData(): void {
         this.logger.info('load data');
         if (this.albumBrowserDataImpl != null) {
             let callback: AlbumSetCallback = new AlbumSetCallback(this);
-            return this.albumBrowserDataImpl.getData(callback, null);
+            this.albumBrowserDataImpl.getData(callback, null);
         }
-        return new Promise((resolve) => {resolve()})
     }
 
     totalCount(): number {
@@ -101,7 +100,7 @@ export class AlbumSetDataSource extends AbsDataSource {
         }
         this.logger.debug(`BlackList: albums name ${JSON.stringify(this.blackList)}.`);
         let res = mediaSetList.filter((item) => {
-            return this.blackList.indexOf(item.name) < 0;
+            return this.blackList.indexOf(item.id) < 0;
         });
         this.logger.debug(`BlackList: old albums length ${mediaSetList.length}, new albums length ${res.length}.`);
         return res;
@@ -109,11 +108,11 @@ export class AlbumSetDataSource extends AbsDataSource {
 
     onChange(mediaType: string) {
         if(this.deviceId == '' || this.deviceId == undefined) {
-            if (mediaType == 'image' || mediaType == 'video' || mediaType == 'album'){
+            if (mediaType == Constants.MEDIA_TYPE_IMAGE || mediaType == Constants.MEDIA_TYPE_VIDEO || mediaType == Constants.MEDIA_TYPE_ALBUM){
                 super.onChange(mediaType);
             }
         }else{
-            if (mediaType == 'remote'){
+            if (mediaType == Constants.MEDIA_TYPE_REMOTE){
                 super.onChange(mediaType);
             }
         }
@@ -121,48 +120,8 @@ export class AlbumSetDataSource extends AbsDataSource {
 
     updateAlbumMediaCount() {
         for (let album of this.mediaSetList) {
-            this.albumBrowserDataImpl.getMediaItemCount(null, album);
+            this.albumBrowserDataImpl.getDataCount(null, album);
         }
-    }
-
-    getNewAlbumDefaultName(prefixName : string) : string {
-        let numbers = [];
-        for (let album of this.mediaSetList) {
-            let res = album.name.match(new RegExp(`${prefixName}[1-9][0-9]*`));
-            if (res != null) {
-                let number = res[0].match(new RegExp(`[1-9][0-9]*`));
-                numbers.push(parseInt(number[0]));
-            }
-        }
-
-        if (numbers.length <= 0) {
-            return `${prefixName}1`;
-        } else if (numbers.length == 1) {
-            if (numbers[0] - 1 > 0) {
-                return `${prefixName}${numbers[0] - 1}`;
-            } else {
-                return `${prefixName}${numbers[0] + 1}`;
-            }
-        }
-
-        numbers.sort(function(a, b) { return a - b; });
-
-        for (let i = 1; i < numbers.length; i++) {
-            let res = numbers[i - 1] + 1;
-            if (res < numbers[i]) {
-                return `${prefixName}${res}`;
-            }
-        }
-        return `${prefixName}${numbers[numbers.length - 1] + 1}`;
-    }
-
-    isRepeatedName(albumName) {
-        for (let album of this.mediaSetList) {
-            if (album.name == albumName) {
-                return true;
-            }
-        }
-        return false;
     }
 
     setBlackList(albums: Array<string>) {

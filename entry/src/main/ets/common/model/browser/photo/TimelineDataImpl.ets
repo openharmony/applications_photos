@@ -12,15 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {BrowserDataImpl} from '../BrowserDataImpl.ets'
+import {BrowserDataImpl} from '../BrowserDataImpl'
 import {AsyncCallback} from '../../common/AsyncCallback'
 import {AlbumDefine} from '../AlbumDefine'
-import {TimelineData} from './TimelineData.ets'
-import {DateUtil} from '../../../utils/DateUtil.ets';
+import {TimelineData} from './TimelineData'
+import {DateUtil} from '../../../utils/DateUtil';
 import {MediaItem} from './MediaItem'
 
 export class TimelineDataImpl extends BrowserDataImpl {
-    getData(callback: AsyncCallback<TimelineData[]>, param): Promise<void>{
+    getData(callback: AsyncCallback<TimelineData[]>, param): void{
         this.logger.info(`loadGroupData start ${param}`);
         if (callback == null) {
             this.logger.info('loadGroupData with empty args');
@@ -28,14 +28,13 @@ export class TimelineDataImpl extends BrowserDataImpl {
         }
 
         let groupDataList: TimelineData[] = [];
-        let mediaItemList: MediaItem[] = [];
         let start: number = undefined;
         let count: number = undefined;
         if (param) {
             start = param.start;
             count = param.count;
         }
-        this.getItems(AlbumDefine.ALBUM_NAME_ALL, start, count).then(async (dataList) => {
+        this.getItems(AlbumDefine.ALBUM_ID_ALL, start, count).then((dataList) => {
             if (dataList != null) {
                 if (dataList.length) {
                     let groupCount = 1;
@@ -57,17 +56,20 @@ export class TimelineDataImpl extends BrowserDataImpl {
                     let groupData = new TimelineData(startTime, endTime, groupCount);
                     groupDataList.push(groupData);
                 } else {
-                    this.logger.error(`getGroupData item size: ${mediaItemList.length}`);
+                    this.logger.error(`getGroupData item size: ${groupDataList.length}`);
                 }
             }
 
             callback.callback(groupDataList);
         })
     }
-    getMediaItemCount(callback: AsyncCallback<number>, param): void {
-        this.getItemsCount(param.name).then((count) => {
+    getDataCount(callback: AsyncCallback<number>, param): void {
+        this.getItemsCount(param.id).then((count) => {
             this.logger.info(`getMediaItemCount callback: ${count}`);
             callback.callback(count);
         });
     }
+
+    getDataById(id: any, deviceId? :any): any{}
+    getDataByName(name: string, albumInfo: any): any{}
 }

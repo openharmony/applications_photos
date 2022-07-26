@@ -13,46 +13,43 @@
  * limitations under the License.
  */
 
-import prompt from '@system.prompt';
-import {AlbumGridItemNewStyle} from './AlbumGridItemNewStyle.ets'
-import {AlbumSetDataSource} from '../../../../common/model/browser/album/AlbumSetDataSource.ets'
-import {Constants} from '../../../../common/model/common/Constants.ets'
+import {AlbumSetDataSource} from '../../../../common/model/browser/album/AlbumSetDataSource'
+import {Constants} from '../../../../common/model/common/Constants'
 import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {BroadCast} from '../../../../common/utils/BroadCast.ets'
+import {BroadCast} from '../../../../common/utils/BroadCast'
 import {NoPhotoIndexComponent} from '../../../../common/view/NoPhotoIndexComponent'
-import {Logger} from '../../utils/Logger.ets'
 import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants'
 import {BroadCastManager} from '../../../../common/model/common/BroadCastManager'
 import {TraceControllerUtils} from '../../../../common/utils/TraceControllerUtils'
+import {TabBarForAlbumSet} from '../../../../common/view/TabBar'
+import {TabItemWithText} from '../../../../common/model/common/TabItem'
+import {AlbumSetSelectManager} from '../../../../common/model/browser/SelectManager'
+import {AlbumSetNewMenuOperation} from '../../../../common/view/browserOperation/AlbumSetNewMenuOperation'
+import {DistributedDataSource} from '../../../../common/model/browser/album/DistributedDataSource'
+import {MenuContext} from '../../../../common/view/browserOperation/MenuContext'
+import {MenuOperation} from '../../../../common/view/browserOperation/MenuOperation'
+import {MenuOperationFactory} from '../../../../common/interface/MenuOperationFactory'
+import {CustomDialogView} from '../../../../common/view/dialog/CustomDialogView'
+import {Action} from '../../../../common/view/browserOperation/Action'
+import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback'
+import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver'
+import {UiUtil} from '../../../../common/utils/UiUtil'
+import {Logger} from '../../utils/Logger'
 
-import {AlbumSetPageActionBar} from './AlbumSetPageActionBar.ets'
-import {AlbumSetPageToolBar} from './AlbumSetPageToolBar.ets'
-import {TabBarForAlbumSet} from '../../../../common/view/TabBar.ets'
-import {TabItemWithText} from '../../../../common/model/common/TabItem.ets'
-import {OtherEquipmentAlbumGriItem} from './OtherEquipmentAlbumGriItem.ets'
-import {AlbumSetSelectManager} from '../../../../common/model/browser/SelectManager.ets'
-import {AlbumSetRenameMenuOperation} from '../../../../common/model/browser/operation/AlbumSetRenameMenuOperation.ets'
-import {AlbumSetNewMenuOperation} from '../../../../common/model/browser/operation/AlbumSetNewMenuOperation.ets'
-import {DistributedDataSource} from '../../../../common/model/browser/album/DistributedDataSource.ets'
-import {MenuContext} from '../../../../common/model/browser/operation/MenuContext'
-import {MenuOperation} from '../../../../common/model/browser/operation/MenuOperation'
-import {MenuOperationFactory} from '../../../../common/model/browser/interface/MenuOperationFactory.ets'
-import {AlbumSetDeleteMenuOperation} from '../../../../common/model/browser/operation/AlbumSetDeleteMenuOperation'
-import {CustomDialogView} from '../../../../common/view/dialog/CustomDialogView.ets'
-import {Action} from '../../../../common/model/browser/operation/Action'
-
-import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback.ets'
-import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver.ets'
-import {UiUtil} from '../../../../common/utils/UiUtil.ets';
-
-let tabs: TabItemWithText[] = [
-    new TabItemWithText($r('app.string.local'), false),
-    new TabItemWithText($r('app.string.other_equipment'), false)
-];
+import {AlbumSetPageActionBar} from './AlbumSetPageActionBar'
+import {AlbumSetPageToolBar} from './AlbumSetPageToolBar'
+import {AlbumGridItemNewStyle} from './AlbumGridItemNewStyle'
+import {DistributedAlbumGriItem} from './DistributedAlbumGriItem'
+import {AlbumSetDeleteMenuOperation} from './AlbumSetDeleteMenuOperation'
+import {AlbumSetRenameMenuOperation} from './AlbumSetRenameMenuOperation'
 
 // Album Set Page
 @Component
 export struct AlbumSetPage {
+    private tabs: TabItemWithText[] = [
+        new TabItemWithText($r('app.string.local'), false),
+        new TabItemWithText($r('app.string.other_equipment'), false)
+    ];
     @Consume @Watch('onModeChange') isAlbumSetSelectedMode: boolean;
 
     @Provide('selectedCount') selectedAlbumsCount: number = 0;
@@ -61,12 +58,12 @@ export struct AlbumSetPage {
 
     @Provide isDisableRename: boolean = false;
 
-    @State isEmpty: boolean = false;
+    @State isEmpty: boolean = true;
     @Provide gridColumnsCount: number = 0;
     @Provide broadCast: BroadCast = new BroadCast();
     @Consume @Watch('onIndexPageShow') isShow: boolean;
 
-    albums: AlbumSetDataSource= new AlbumSetDataSource(this.broadCast);
+    albums: AlbumSetDataSource = new AlbumSetDataSource(this.broadCast);
     distributed: DistributedDataSource = new DistributedDataSource(this.broadCast);
     private dataObserver: CommonObserverCallback  = new CommonObserverCallback(this);
 
@@ -162,16 +159,16 @@ export struct AlbumSetPage {
         this.isDataFreeze = false;
         this.isAlbumSetSelectedMode = false
         this.ignoreLocalNotify = false;
-        this.albums.onChange('image');
+        this.albums.onChange(Constants.MEDIA_TYPE_IMAGE);
         this.albums.unfreeze();
     }
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         TraceControllerUtils.startTrace('AlbumSetPageAboutToAppear');
+        this.logger.info(`AlbumSetPageAboutToAppear`);
         this.appBroadCast.on(BroadCastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
         this.appBroadCast.on(BroadCastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
         this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        AppStorage.SetOrCreate('setSelectManagerToAnother', this.mSelectManager);
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
             this.isEmpty = (size == 0);
         });
@@ -215,10 +212,17 @@ export struct AlbumSetPage {
         ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
             self.initGridRowCount();
         });
+        if (Constants.LOCAL_TAB_INDEX == this.currentIndex) {
+            this.tabs[Constants.LOCAL_TAB_INDEX].isSelected = true;
+            this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = false;
+        } else {
+            this.tabs[Constants.LOCAL_TAB_INDEX].isSelected = false;
+            this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = true;
+        }
         TraceControllerUtils.finishTrace('AlbumSetPageAboutToAppear');
     }
 
-    private aboutToDisappear(): void {
+    aboutToDisappear(): void {
         this.appBroadCast.off(BroadCastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
         this.appBroadCast.off(BroadCastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
         this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
@@ -229,6 +233,7 @@ export struct AlbumSetPage {
 
     // Callback when the page is show.
     onIndexPageShow() {
+        this.logger.info(`onIndexPageShow`)
         if (this.isShow && this.isInCurrentTab) {
             this.onActive();
         } else if (!this.isShow && this.isInCurrentTab) {
@@ -374,7 +379,7 @@ export struct AlbumSetPage {
     private onUpdateRemoteDevice(res, deviceId, size): void {
         this.logger.info(`onUpdateRemoteDevice size: ${size} deviceId: ${deviceId} type: ${res}`);
 
-        if (res == 'offline') {
+        if (res == Constants.DEVICE_STATE_OFFLINE) {
             this.needNotify = true;
         }
 
@@ -383,10 +388,10 @@ export struct AlbumSetPage {
             try {
                 this.tabsController.changeIndex(this.currentIndex);
             } catch (error) {
-                this.logger.debug(`change tab index failed: ${error}`);
+                this.logger.error(`change tab index failed: ${error}`);
             }
-            tabs[Constants.LOCAL_TAB_INDEX].isSelected = true;
-            tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = false;
+            this.tabs[Constants.LOCAL_TAB_INDEX].isSelected = true;
+            this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = false;
 
             if (this.isActive) {
                 this.showNotify();
@@ -404,18 +409,22 @@ export struct AlbumSetPage {
                         GridItem() {
                             AlbumGridItemNewStyle({
                                 item: item,
-                                isBigCard: true
+                                isBigCard: true,
+                                isSelected: this.isAlbumSetSelectedMode ?
+                                this.mSelectManager.isItemSelected(item.id) : false,
                             })
                         }.columnStart(0).columnEnd(1)
                     } else {
                         GridItem() {
                             AlbumGridItemNewStyle({
                                 item: item,
-                                isBigCard: false
+                                isBigCard: false,
+                                isSelected: this.isAlbumSetSelectedMode ?
+                                this.mSelectManager.isItemSelected(item.id) : false,
                             })
                         }
                     }
-                }, item => 'uri:' + item.name)
+                }, item => 'uri:' + item.id)
             }
             .visibility(this.isEmpty ? Visibility.None : Visibility.Visible)
             .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
@@ -423,7 +432,9 @@ export struct AlbumSetPage {
                 left: $r('app.float.max_padding_start'),
                 right: $r('app.float.max_padding_end'),
                 top: $r('app.float.album_set_page_padding_top'),
-                bottom: $r('app.float.album_set_page_padding_end')
+                bottom: this.isTabBarShow
+                    ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
+                    : (this.isSidebar ? 0 : $r('app.float.album_set_page_padding_end'))
             })
             .columnsGap($r('app.float.album_set_grid_column_gap'))
             .rowsGap($r('app.float.album_set_grid_row_gap'))
@@ -434,16 +445,18 @@ export struct AlbumSetPage {
         Grid(this.scroller) {
             LazyForEach(this.distributed, (item) => {
                 GridItem() {
-                    OtherEquipmentAlbumGriItem({item: item})
+                    DistributedAlbumGriItem({item: item})
                 }
-            }, item => 'uri:' + item.deviceName)
+            }, item => 'uri:' + item.networkId)
         }
         .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
         .padding({
             left: $r('app.float.max_padding_start'),
             right: $r('app.float.max_padding_end'),
             top: $r('app.float.album_set_page_padding_top'),
-            bottom: $r('app.float.album_set_page_padding_end')
+            bottom: this.isTabBarShow
+                ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
+                : (this.isSidebar ? 0 : $r('app.float.album_set_page_padding_end'))
         })
         .columnsGap($r('app.float.album_set_grid_column_gap'))
         .rowsGap($r('app.float.album_set_grid_row_gap'))
@@ -456,38 +469,42 @@ export struct AlbumSetPage {
                 justifyContent: FlexAlign.Start,
                 alignItems: ItemAlign.Start
             }) {
-                AlbumSetPageActionBar({onMenuClicked: this.onMenuClicked})
+                Column() {
+                    AlbumSetPageActionBar({onMenuClicked: this.onMenuClicked})
+                }.visibility(this.isEmpty && !this.isTabBarShow ? Visibility.None : Visibility.Visible)
 
-                TabBarForAlbumSet({
-                    currentIndex: this.currentIndex,
-                    tabs: tabs,
-                    controller: this.tabsController,
-                })
+                Column() {
+                    TabBarForAlbumSet({
+                        currentIndex: this.currentIndex,
+                        tabs: this.tabs,
+                        controller: this.tabsController,
+                    })
 
-                Tabs({
-                    barPosition: BarPosition.Start,
-                    index: this.currentIndex,
-                    controller: this.tabsController
-                }) {
-                    TabContent() {
-                        this.LocalAlbumSet()
+                    Tabs({
+                        barPosition: BarPosition.Start,
+                        index: this.currentIndex,
+                        controller: this.tabsController
+                    }) {
+                        TabContent() {
+                            this.LocalAlbumSet()
+                        }
+
+                        TabContent() {
+                            this.OtherEquipmentAlbumSet()
+                        }
                     }
-
-                    TabContent() {
-                        this.OtherEquipmentAlbumSet()
-                    }
-                }
-                .animationDuration(0)
-                .vertical(false)
-                .scrollable(false)
-                .barMode(BarMode.Fixed)
-                .barWidth(0)
-                .barHeight(0)
-                .flexGrow(1)
-                .onChange((index: number) => {
-                    this.logger.info(`Switch to Tab ${index}.`);
-                    this.onDistributedTabChanged(index);
-                })
+                    .animationDuration(0)
+                    .vertical(false)
+                    .scrollable(false)
+                    .barMode(BarMode.Fixed)
+                    .barWidth(0)
+                    .barHeight(0)
+                    .flexGrow(1)
+                    .onChange((index: number) => {
+                        this.logger.info(`Switch to Tab ${index}.`);
+                        this.onDistributedTabChanged(index);
+                    })
+                }.visibility(this.isEmpty && !this.isTabBarShow ? Visibility.None : Visibility.Visible)
 
                 if (this.isAlbumSetSelectedMode) {
                     AlbumSetPageToolBar({onMenuClicked: this.onMenuClicked})

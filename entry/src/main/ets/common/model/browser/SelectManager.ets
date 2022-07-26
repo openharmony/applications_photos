@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import {TimelineData} from './photo/TimelineData.ets'
-import {Logger} from '../../utils/Logger.ets'
-import {MediaItem} from './photo/MediaItem.ets'
+import {TimelineData} from './photo/TimelineData'
+import {Logger} from '../../utils/Logger'
+import {MediaItem} from './photo/MediaItem'
 import {AsyncCallback} from '../common/AsyncCallback'
 import {AlbumDefine} from './AlbumDefine'
-import {BrowserDataFactory} from './interface/BrowserDataFactory.ets'
-import {BrowserDataInterface} from './interface/BrowserDataInterface'
+import {BrowserDataFactory} from '../../interface/BrowserDataFactory'
+import {BrowserDataInterface} from '../../interface/BrowserDataInterface'
 
 export class BucketSelectionEntry {
     private groupId = -1;
@@ -69,7 +69,7 @@ export class BucketSelectionEntry {
         this.clickedSet.clear();
     }
 
-    public deSelectAll() {
+    public unselectAll() {
         this.inverseSelection = false;
         this.groupSelect = false;
         this.clickedSet.clear();
@@ -91,8 +91,8 @@ export class BucketSelectionEntry {
      */
     public changeSelectMode(isInverseMode: boolean) {
         isInverseMode
-            ? (this.getSelectedCount() == 0 ? this.selectAll() : this.deSelectAll())
-            : (this.inSelectAllMode() ? this.deSelectAll() : this.selectAll())
+            ? (this.getSelectedCount() == 0 ? this.selectAll() : this.unselectAll())
+            : (this.inSelectAllMode() ? this.unselectAll() : this.selectAll())
     }
 
     public getInverseSelection() {
@@ -137,7 +137,7 @@ export class SelectManager {
     mCallbacks = {};
     photoDataImpl: BrowserDataInterface;
     selectManagerCallback;
-    albumName = undefined;
+    albumId = undefined;
     deviceId = undefined;
 
     constructor() {
@@ -147,14 +147,23 @@ export class SelectManager {
     public setTotalCount(count: number) {
         this.totalCount = count;
         this.mCallbacks['updateCount'] && this.mCallbacks['updateCount'](this.getSelectedCount());
+
+        if (this.isAllSelected) {
+            this.isAllSelected = false;
+            this.mCallbacks['allSelect'] && this.mCallbacks['allSelect'](false);
+        }
+        if (this.totalCount == this.getSelectedCount()) {
+            this.isAllSelected = true;
+            this.mCallbacks['allSelect'] && this.mCallbacks['allSelect'](true);
+        }
     }
 
     public setPhotoDataImpl() {
-        this.photoDataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_ALBUM);
+        this.photoDataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
     }
 
-    public setAlbumName(albumName) {
-         this.albumName = albumName;
+    public setAlbumId(albumId) {
+         this.albumId = albumId;
     }
 
     public setDeviceId(deviceId) {
@@ -208,7 +217,7 @@ export class SelectManager {
         this.mCallbacks['updateCount'] && this.mCallbacks['updateCount'](this.getSelectedCount());
     }
 
-    public deSelectAll() {
+    public unselectAll() {
         this.inverseSelection = false;
         this.isAllSelected = false;
         this.clickedSet.clear();
@@ -241,7 +250,7 @@ export class SelectManager {
         if (this.inverseSelection) {
             this.selectManagerCallback.setSubCallback(callback);
             this.photoDataImpl.getData(this.selectManagerCallback, {
-                name: this.albumName,
+                id: this.albumId,
                 deviceId: this.deviceId
             });
         } else {
@@ -255,7 +264,7 @@ export class SelectManager {
         if (this.inverseSelection) {
             this.selectManagerCallback.setSubCallback(callback);
             this.photoDataImpl.getData(this.selectManagerCallback, {
-                name: AlbumDefine.ALBUM_NAME_RECYCLE
+                id: AlbumDefine.ALBUM_ID_RECYCLE
             });
         } else {
             let result = [];
@@ -296,21 +305,20 @@ export class SelectManager {
     }
 
     public async getItems(photoDataImpl: BrowserDataInterface,
-                          start: number, count: number, callback: Function): Promise<void> {
+                          start: number, count: number, callbackFunc: Function): Promise<void> {
         this.logger.info(`getItems start: ${start} count: ${count}`);
         let cb: AsyncCallback<MediaItem[]> = {
-            callback(t: MediaItem[]) {
-                callback(t);
+            callback: (t: MediaItem[]) => {
+                callbackFunc(t);
             }
         }
 
-
-        if (this.albumName) {
+        if (this.albumId) {
             await photoDataImpl.getData(cb,
-                {name: this.albumName, start: start, count: count, deviceId: this.deviceId});
+                {id: this.albumId, start: start, count: count, deviceId: this.deviceId});
         } else {
             await photoDataImpl.getData(cb,
-                {name: AlbumDefine.ALBUM_NAME_ALL, start: start, count: count, deviceId: this.deviceId});
+                {id: AlbumDefine.ALBUM_ID_ALL, start: start, count: count, deviceId: this.deviceId});
         }
     }
 }
@@ -385,7 +393,7 @@ export class TimelineSelectManager extends SelectManager {
         this.mCallbacks['updateCount'] && this.mCallbacks['updateCount'](this.getSelectedCount());
     }
 
-    public deSelectAll() {
+    public unselectAll() {
         this.inverseSelection = false;
         this.isAllSelected = false;
         this.clearEntryArray();

@@ -14,13 +14,19 @@
  */
 
 import {MediaObserverCallback} from './MediaObserverCallback';
-import {Logger} from '../../../utils/Logger.ets'
+import {Logger} from '../../../utils/Logger'
 import {Constants} from '../../common/Constants'
 import {MediaLibraryAccess} from '../../../access/MediaLibraryAccess'
 
 export class MediaObserver {
     private logger: Logger = new Logger('MediaObserver');
     callbacks: MediaObserverCallback[] = [];
+
+    private static readonly OBSERVER_IMAGE_CHANGE : string = 'imageChange'
+    private static readonly OBSERVER_VIDEO_CHANGE : string = 'videoChange'
+    private static readonly OBSERVER_DEVICE_CHANGE : string = 'deviceChange'
+    private static readonly OBSERVER_ALBUM_CHANGE : string = 'albumChange'
+    private static readonly OBSERVER_REMOTE_FILE_CHANGE : string = 'remoteFileChange'
 
     static getInstance(): MediaObserver {
         if (AppStorage.Get(Constants.APP_KEY_MENU_MEDIA_OBSERVER) == null) {
@@ -45,25 +51,25 @@ export class MediaObserver {
 
         if (this.callbacks.length == 1) {
             this.logger.info('registerObserver register media');
-            MediaLibraryAccess.getMediaLibrary().on('imageChange', () => {
+            MediaLibraryAccess.getInstance().getMediaLibrary().on(MediaObserver.OBSERVER_IMAGE_CHANGE, () => {
                 this.logger.info('registerObserver on image');
-                this.sendNotify('image');
+                this.sendNotify(Constants.MEDIA_TYPE_IMAGE);
             })
-            MediaLibraryAccess.getMediaLibrary().on('videoChange', () => {
+            MediaLibraryAccess.getInstance().getMediaLibrary().on(MediaObserver.OBSERVER_VIDEO_CHANGE, () => {
                 this.logger.info('registerObserver on video');
-                this.sendNotify('video');
+                this.sendNotify(Constants.MEDIA_TYPE_VIDEO);
             })
-            MediaLibraryAccess.getMediaLibrary().on('deviceChange', () => {
+            MediaLibraryAccess.getInstance().getMediaLibrary().on(MediaObserver.OBSERVER_DEVICE_CHANGE, () => {
                 this.logger.info('registerObserver on device');
-                this.sendNotify('device');
+                this.sendNotify(Constants.MEDIA_TYPE_DEVICE);
             })
-            MediaLibraryAccess.getMediaLibrary().on('albumChange', () => {
+            MediaLibraryAccess.getInstance().getMediaLibrary().on(MediaObserver.OBSERVER_ALBUM_CHANGE, () => {
                 this.logger.info('registerObserver on album');
-                this.sendNotify('album');
+                this.sendNotify(Constants.MEDIA_TYPE_ALBUM);
             })
-            MediaLibraryAccess.getMediaLibrary().on('remoteFileChange', () => {
+            MediaLibraryAccess.getInstance().getMediaLibrary().on(MediaObserver.OBSERVER_REMOTE_FILE_CHANGE, () => {
                 this.logger.info('registerObserver on remoteFile');
-                this.sendNotify('remote');
+                this.sendNotify(Constants.MEDIA_TYPE_REMOTE);
             })
         }
     }

@@ -12,180 +12,160 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {MediaLibraryAccess} from '../../access/MediaLibraryAccess.ets';
+import {MediaLibraryAccess, FetchOptionBuilder} from '../../access/MediaLibraryAccess'
 
 export class AlbumDefine {
-    static readonly ALBUM_NAME_ALL = 'default_all';
-    static readonly ALBUM_NAME_CAMERA = 'default_camera';
-    static readonly ALBUM_NAME_VIDEO = 'default_video';
-    static readonly ALBUM_NAME_RECYCLE = 'default_recycle';
-    static readonly ALBUM_NAME_FAVOR = 'default_favor';
-    static readonly ALBUM_NAME_SNAPSHOT = 'default_snapshot';
-    static readonly ALBUM_NAME_REMOTE = 'FromOtherDevices';
+    static readonly ALBUM_ID_ALL = 'default_all';
+    static readonly ALBUM_ID_CAMERA = 'default_camera';
+    static readonly ALBUM_ID_VIDEO = 'default_video';
+    static readonly ALBUM_ID_RECYCLE = 'default_recycle';
+    static readonly ALBUM_ID_FAVOR = 'default_favor';
+    static readonly ALBUM_ID_SNAPSHOT = 'default_snapshot';
+    static readonly ALBUM_ID_REMOTE = 'default_remote';
 
     static readonly ALBUM_DISABLE_COPY_LIST = new Set ([
-        AlbumDefine.ALBUM_NAME_ALL,
-        AlbumDefine.ALBUM_NAME_VIDEO,
-        AlbumDefine.ALBUM_NAME_RECYCLE,
-        AlbumDefine.ALBUM_NAME_FAVOR
+        AlbumDefine.ALBUM_ID_ALL,
+        AlbumDefine.ALBUM_ID_VIDEO,
+        AlbumDefine.ALBUM_ID_RECYCLE,
+        AlbumDefine.ALBUM_ID_FAVOR
     ]);
 
     static readonly ALBUM_DISABLE_DELETE_LIST = new Set ([
-        AlbumDefine.ALBUM_NAME_ALL,
-        AlbumDefine.ALBUM_NAME_CAMERA,
-        AlbumDefine.ALBUM_NAME_VIDEO,
-        AlbumDefine.ALBUM_NAME_RECYCLE,
-        AlbumDefine.ALBUM_NAME_FAVOR,
-        AlbumDefine.ALBUM_NAME_SNAPSHOT
+        AlbumDefine.ALBUM_ID_ALL,
+        AlbumDefine.ALBUM_ID_CAMERA,
+        AlbumDefine.ALBUM_ID_VIDEO,
+        AlbumDefine.ALBUM_ID_RECYCLE,
+        AlbumDefine.ALBUM_ID_FAVOR
+    ]);
+
+    static readonly ALBUM_DISABLE_NEW_LIST = new Set ([
+        AlbumDefine.ALBUM_ID_ALL,
+        AlbumDefine.ALBUM_ID_CAMERA,
+        AlbumDefine.ALBUM_ID_VIDEO,
+        AlbumDefine.ALBUM_ID_RECYCLE,
+        AlbumDefine.ALBUM_ID_FAVOR,
+        AlbumDefine.ALBUM_ID_SNAPSHOT
     ]);
 
     static readonly ALBUM_DISABLE_RENAME_LIST = new Set ([
-        AlbumDefine.ALBUM_NAME_ALL,
-        AlbumDefine.ALBUM_NAME_CAMERA,
-        AlbumDefine.ALBUM_NAME_VIDEO,
-        AlbumDefine.ALBUM_NAME_RECYCLE,
-        AlbumDefine.ALBUM_NAME_FAVOR,
-        AlbumDefine.ALBUM_NAME_SNAPSHOT
+        AlbumDefine.ALBUM_ID_ALL,
+        AlbumDefine.ALBUM_ID_CAMERA,
+        AlbumDefine.ALBUM_ID_VIDEO,
+        AlbumDefine.ALBUM_ID_RECYCLE,
+        AlbumDefine.ALBUM_ID_FAVOR,
+        AlbumDefine.ALBUM_ID_SNAPSHOT
     ]);
 
     static readonly ALBUM_DEFAULT_SORT_LIST = [
-        AlbumDefine.ALBUM_NAME_CAMERA,
-        AlbumDefine.ALBUM_NAME_ALL,
-        AlbumDefine.ALBUM_NAME_VIDEO,
-        AlbumDefine.ALBUM_NAME_FAVOR
+        AlbumDefine.ALBUM_ID_CAMERA,
+        AlbumDefine.ALBUM_ID_ALL,
+        AlbumDefine.ALBUM_ID_VIDEO,
+        AlbumDefine.ALBUM_ID_SNAPSHOT,
+        AlbumDefine.ALBUM_ID_FAVOR
     ];
 
-    static readonly QUERY_ORDER_BASE = 'date_added DESC';  // TODO dateTaken is not supported, use dateAdded
-
     static readonly CAMERA_ALBUM_PATH = 'Camera'
+    static readonly REMOTE_ALBUM_PATH = 'FromOtherDevices'
+    static readonly SNAPSHOT_ALBUM_PATH = 'Screenshots'
 
-    private static readonly DEFAULT_ALBUM_FETCH_OPTIONS = new Map([
-        [
-            AlbumDefine.ALBUM_NAME_ALL,
-            {
-                selections: `${MediaLibraryAccess.FILE_KEY_MEDIA_TYPE} =? OR ${MediaLibraryAccess.FILE_KEY_MEDIA_TYPE} =?`,
-                selectionArgs: [MediaLibraryAccess.MEDIA_TYPE_IMAGE.toString(), MediaLibraryAccess.MEDIA_TYPE_VIDEO.toString()],
-                order: AlbumDefine.QUERY_ORDER_BASE
-            }
-        ],
-        [
-            AlbumDefine.ALBUM_NAME_VIDEO,
-            {
-                selections: `${MediaLibraryAccess.FILE_KEY_MEDIA_TYPE} =?`,
-                selectionArgs: [MediaLibraryAccess.MEDIA_TYPE_VIDEO.toString()],
-                order: AlbumDefine.QUERY_ORDER_BASE
-            }
-        ],
-        [
-            AlbumDefine.ALBUM_NAME_FAVOR,
-            {
-                selections: '',
-                selectionArgs: [],
-                order: AlbumDefine.QUERY_ORDER_BASE
-            }
-        ],
-        [
-            AlbumDefine.ALBUM_NAME_RECYCLE,
-            {
-                selections: '',
-                selectionArgs: [],
-                order: 'date_trashed DESC'
-            }
-        ],
-        [
-            AlbumDefine.ALBUM_NAME_CAMERA,
-            {
-                selections: 'relative_path =? AND bucket_display_name =?',
-                selectionArgs: ['', AlbumDefine.CAMERA_ALBUM_PATH],
-            }
-        ]
-    ]);
+    static getFileFetchOpt(albumId: string, deviceId?, startIndex?: number, count?: number){
+        let builder = new FetchOptionBuilder();
 
-    static getFetchOpt(albumName: string, deviceId?) {
-        let opt = AlbumDefine.DEFAULT_ALBUM_FETCH_OPTIONS.get(albumName);
-        let fetchOpt = {
-            selections: '',
-            selectionArgs: [],
-            order: ''
-        };
-
-        if (opt) {
-            fetchOpt = {
-                selections: opt.selections,
-                selectionArgs: opt.selectionArgs,
-                order: opt.order
-            };
-        } else {
-            fetchOpt = {
-                selections: `bucket_display_name =?`,
-                selectionArgs: [`${albumName}`],
-                order: AlbumDefine.QUERY_ORDER_BASE
-            };
+        switch (albumId) {
+            case AlbumDefine.ALBUM_ID_VIDEO:
+                builder
+                    .media(MediaLibraryAccess.MEDIA_TYPE_VIDEO.toString())
+                    .order(MediaLibraryAccess.FILE_KEY_DATE_TAKEN, false)
+                break;
+            case AlbumDefine.ALBUM_ID_RECYCLE:
+                builder
+                    .media(MediaLibraryAccess.MEDIA_TYPE_IMAGE.toString())
+                    .logicalOr()
+                    .media(MediaLibraryAccess.MEDIA_TYPE_VIDEO.toString())
+                    .order(MediaLibraryAccess.FILE_KEY_DATE_TRASHED, false)
+                break;
+            case AlbumDefine.ALBUM_ID_ALL:
+            case AlbumDefine.ALBUM_ID_FAVOR:
+            default:
+                builder
+                    .media(MediaLibraryAccess.MEDIA_TYPE_IMAGE.toString())
+                    .logicalOr()
+                    .media(MediaLibraryAccess.MEDIA_TYPE_VIDEO.toString())
+                    .order(MediaLibraryAccess.FILE_KEY_DATE_TAKEN, false)
+                break;
         }
 
-        if (deviceId != undefined && deviceId != '') {
-            fetchOpt['networkId'] = deviceId;
+        if (startIndex != undefined && count != undefined && startIndex >= 0  && count >= 0) {
+            builder.select(startIndex, count);
         }
 
-        return fetchOpt;
+        if(deviceId){
+            builder.device(deviceId);
+        }
+
+        return builder.build();
     }
 
-    static getFileFetchOpt(fileId, deviceId?) {
-        let fetchOpt = {
-            selections : 'file_id =?',
-            selectionArgs : [`${fileId}`],
-            order: ''
-        };
+    static getFileFetchOptById(fileId: number, deviceId?: string) {
+        let builder = new FetchOptionBuilder().fileId(`${fileId}`);
 
-        if (deviceId != undefined && deviceId != '') {
-            fetchOpt['networkId'] = deviceId;
+        if(deviceId){
+            builder.device(deviceId);
         }
 
-        return fetchOpt;
+        return builder.build();
     }
 
-    static getFileFetchOptByName(displayName) {
-        let fetchOpt = {
-            selections: 'display_name =?',
-            selectionArgs: [`${displayName}`],
+    static getFileFetchOptByName(displayName: string, relativePath? :string) {
+        let builder = new FetchOptionBuilder().displayName(displayName);
+
+        if(relativePath){
+            builder.logicalAnd().relativePath(relativePath);
         }
 
-        return fetchOpt;
+        return builder.build();
     }
 
-    static getAlbumFetchOpt(displayName?, deviceId?) {
-        let fetchOpt = {
-            selections: '',
-            selectionArgs: []
-        };
+    static getAlbumFetchOptByName(name, relativePath){
+        let builder = new FetchOptionBuilder()
+            .albumName(name)
+            .logicalAnd()
+            .relativePath(relativePath);;
 
-        if (displayName != undefined && displayName != '') {
-            fetchOpt.selections = `bucket_display_name =?`,
-            fetchOpt.selectionArgs = [`${displayName}`]
-        }
+        return builder.build();
+    }
 
-        if (displayName == AlbumDefine.ALBUM_NAME_CAMERA) {
-            let opt = AlbumDefine.DEFAULT_ALBUM_FETCH_OPTIONS.get(displayName);
-            if (!opt.selectionArgs[0]) {
-                opt.selectionArgs[0] = globalThis.__MediaLibraryAccess_PUBLIC_PATH_IMAGE;
+    static getAlbumFetchOpt(id?, deviceId?) {
+        let builder = new FetchOptionBuilder()
+            .media(MediaLibraryAccess.MEDIA_TYPE_IMAGE.toString())
+            .logicalOr()
+            .media(MediaLibraryAccess.MEDIA_TYPE_VIDEO.toString())
+            .parentheses();
+
+        if (id){
+            if (id == AlbumDefine.ALBUM_ID_CAMERA){
+                builder
+                    .logicalAnd()
+                    .relativePath('')
+                    .logicalAnd()
+                    .albumName(`${MediaLibraryAccess.getInstance().PUBLIC_PATH_CAMERA.substr(0, MediaLibraryAccess.getInstance().PUBLIC_PATH_CAMERA.length - 1)}`)
+            }else{
+                builder.logicalAnd().albumId(id)
             }
-
-            fetchOpt.selections = opt.selections;
-            fetchOpt.selectionArgs = opt.selectionArgs;
         }
 
-        if (deviceId != undefined && deviceId != '') {
-            fetchOpt["networkId"] = deviceId;
+        if(deviceId){
+            builder.device(deviceId);
         }
 
-        return fetchOpt;
+        return builder.build();
     }
 
-    static getAlbumPath(albumName) {
-        if (albumName == AlbumDefine.ALBUM_NAME_CAMERA) {
-            return AlbumDefine.CAMERA_ALBUM_PATH;
+    static genAlbumRelativePath(albumName: string, isOrigin: boolean = false): string {
+        if (isOrigin){
+            return MediaLibraryAccess.getInstance().PUBLIC_PATH_CAMERA;
         }
-
-        return albumName;
+        let path = `${MediaLibraryAccess.getInstance().PUBLIC_PATH_CAMERA}${albumName}/`;
+        return path;
     }
 }

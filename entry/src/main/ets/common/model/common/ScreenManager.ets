@@ -13,10 +13,9 @@
  * limitations under the License.
  */
 
-import display from '@ohos.display'
-import {Logger} from '../../utils/Logger.ets'
+import {Logger} from '../../utils/Logger'
 import {Constants} from './Constants'
-import {UiUtil} from '../../utils/UiUtil.ets';
+import {UiUtil} from '../../utils/UiUtil'
 
 export enum ColumnSize {
     COLUMN_TWO = 2,
@@ -33,7 +32,7 @@ enum ScreenWidth {
 
 enum WindowMode {
     UNDEFINED = 1,
-    FULLSCREEN,
+    FULL_SCREEN,
     PRIMARY,
     SECONDARY,
     FLOATING
@@ -43,6 +42,8 @@ export class ScreenManager {
     static readonly ON_WIN_SIZE_CHANGED = 'on_win_size_changed';
     static readonly ON_SPLIT_MODE_CHANGED = 'on_split_mode_changed';
     static readonly ON_LEFT_BLANK_CHANGED = 'on_left_blank_changed';
+    static readonly DEFAULT_WIDTH : number = 1920;
+    static readonly DEFAULT_HEIGHT : number = 1080;
     private static readonly SPLIT_THRESHOLD = 1.7;
     private logger: Logger = new Logger('ScreenManager');
     private winWidth = 0.0;
@@ -51,7 +52,7 @@ export class ScreenManager {
     private naviBarHeight = 0;
     private leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     private events = [];
-
+    private mainWindow = undefined;
     private columns: number = ColumnSize.COLUMN_FOUR;
 
     // Default orientation
@@ -71,27 +72,30 @@ export class ScreenManager {
         }
 
         let manager: ScreenManager = AppStorage.Get(Constants.APP_KEY_SCREEN_MANAGER);
-
-        // TODO: use display to replace window Temporarily
-        if (0 == manager.winWidth || 0 == manager.winHeight) {
-            display.getDefaultDisplay().then(retDisplay => {
-                if (retDisplay.height <= retDisplay.width) {
-                    manager.winWidth = px2vp(retDisplay.height);
-                    manager.winHeight = px2vp(retDisplay.width);
-                } else {
-                    manager.winWidth = px2vp(retDisplay.width);
-                    manager.winHeight = px2vp(retDisplay.height);
-                }
-            });
-        }
-        if (manager.winWidth < ScreenWidth.WIDTH_MEDIUM) {
-            manager.columns = ColumnSize.COLUMN_FOUR;
-        } else if (manager.winWidth >= ScreenWidth.WIDTH_MEDIUM && manager.winWidth < ScreenWidth.WIDTH_LARGE) {
-            manager.columns = ColumnSize.COLUMN_EIGHT;
-        } else {
-            manager.columns = ColumnSize.COLUMN_TWELVE;
-        }
         return manager;
+    }
+
+    async initializationSize(win): Promise<void> {
+        this.mainWindow = win;
+        let properties =  await win.getProperties();
+        return new Promise<void>((resolve, reject) => {
+            if (!properties || !properties.windowRect) {
+                reject();
+            }
+            let size = properties.windowRect;
+            this.logger.info(`display screen windowRect: ${JSON.stringify(size)}`);
+            this.winWidth = px2vp(size.width);
+            this.winHeight = px2vp(size.height);
+            this.logger.info(`display screen windowRect px2vp: ${this.winWidth} ${this.winHeight}`);
+            if (this.winWidth < ScreenWidth.WIDTH_MEDIUM) {
+                this.columns = ColumnSize.COLUMN_FOUR;
+            } else if (this.winWidth >= ScreenWidth.WIDTH_MEDIUM && this.winWidth < ScreenWidth.WIDTH_LARGE) {
+                this.columns = ColumnSize.COLUMN_EIGHT;
+            } else {
+                this.columns = ColumnSize.COLUMN_TWELVE;
+            }
+            resolve();
+        });
     }
 
     /**
@@ -188,6 +192,7 @@ export class ScreenManager {
     initWindowMode() {
         this.logger.debug(`start to initialize photos application window mode: ${this.windowMode}`);
         this.checkWindowMode();
+        this.mainWindow && this.setMainWindow();
     }
 
     isSplitMode(): boolean {
@@ -205,23 +210,23 @@ export class ScreenManager {
             return;
         }
         this.windowMode = mode;
-        if (WindowMode.FULLSCREEN == this.windowMode) {
+        if (WindowMode.FULL_SCREEN == this.windowMode) {
             this.setFullScreen();
         } else {
             this.setSplitScreen();
         }
     }
 
-    setMainWindow(win) {
+    setMainWindow() {
         this.logger.debug('setMainWindow');
-        win.on('windowSizeChange', (data) => {
+        this.mainWindow.on('windowSizeChange', (data) => {
             this.logger.debug(`windowSizeChange ${JSON.stringify(data)}`);
             this.onWinSizeChanged(data);
         })
     }
 
     getAvoidArea() {
-        let topWindow: any = AppStorage.Get('mainWindow');
+        let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
         topWindow.getAvoidArea(0, (err, data) => {
             this.logger.info('Succeeded in obtaining the area. Data:' + JSON.stringify(data));
             this.onLeftBlankChanged(data);
@@ -229,7 +234,7 @@ export class ScreenManager {
     }
 
     setFullScreen() {
-        let topWindow: any = AppStorage.Get('mainWindow');
+        let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
         this.logger.debug('getTopWindow start');
         try {
             topWindow.setLayoutFullScreen(true, () => {
@@ -254,7 +259,7 @@ export class ScreenManager {
 
     hideStatusBar() {
         this.logger.debug('hideStatusBar start');
-        let topWindow: any = AppStorage.Get('mainWindow');
+        let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
         this.logger.debug('getTopWindow start');
         let names = ['navigation'];
         this.logger.debug(`getTopWindow names: ${names} end`);
@@ -264,13 +269,13 @@ export class ScreenManager {
                 topWindow.getAvoidArea(0, async (err, data) => {
                     this.logger.info(`Succeeded in obtaining the area. Data: ${JSON.stringify(data)}`);
                     this.onLeftBlankChanged(data);
-                    let barColor = await UiUtil.getResourceString($r('app.color.default_background_color'));
+                    let barColor = await UiUtil.getResourceString($r('app.color.transparent'));
                     let barContentColor = await UiUtil.getResourceString($r('app.color.default_bar_content_color'));
                     if (!barColor) {
-                        barColor = '#fff1f3f5';
+                        barColor = '#00000000';
                     }
                     if (!barContentColor) {
-                        barContentColor = '#ff000000';
+                        barContentColor = '#FF000000';
                     }
                     topWindow.setSystemBarProperties({navigationBarColor: barColor, navigationBarContentColor: barContentColor},
                         () => { this.logger.info('setStatusBarColor done'); });
@@ -281,9 +286,33 @@ export class ScreenManager {
         }
     }
 
+    async setNavigationBarColor(resource: string) {
+        this.logger.debug('setNavigationBarColor start');
+        let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
+        try {
+            topWindow.setSystemBarProperties({navigationBarContentColor: resource},
+                () => { this.logger.info('setStatusBarColor done'); });
+        } catch (err) {
+            this.logger.error(`setNavigationBarColor err: ${err}`);
+        }
+    }
+
+    async setNavigationBarProperties(barColor: String, barContentColor: string) {
+        this.logger.debug('setNavigationBarColor start');
+        let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
+        let backColor = barColor == '' ? '#00000000' : barColor;
+        let contentColor = barContentColor == '' ? '#ff000000' : barContentColor;
+        try {
+            topWindow.setSystemBarProperties({navigationBarColor: backColor, navigationBarContentColor: contentColor},
+                () => { this.logger.info('setStatusBarColor done'); });
+        } catch (err) {
+            this.logger.error(`setNavigationBarColor err: ${err}`);
+        }
+    }
+
     setSystemUi(isShowBar: boolean): void {
         this.logger.debug('setSystemUi start');
-        let topWindow: any = AppStorage.Get('mainWindow');
+        let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
         this.logger.debug('getTopWindow start');
         let names = ["navigation"];
         if (!isShowBar) {
@@ -335,6 +364,14 @@ export class ScreenManager {
         };
         this.winWidth = px2vp(size.width);
         this.winHeight = px2vp(size.height);
+        this.logger.info(`onWinSizeChanged px2vp: ${this.winWidth} ${this.winHeight}`);
+        if (this.winWidth < ScreenWidth.WIDTH_MEDIUM) {
+            this.columns = ColumnSize.COLUMN_FOUR;
+        } else if (this.winWidth >= ScreenWidth.WIDTH_MEDIUM && this.winWidth < ScreenWidth.WIDTH_LARGE) {
+            this.columns = ColumnSize.COLUMN_EIGHT;
+        } else {
+            this.columns = ColumnSize.COLUMN_TWELVE;
+        }
         let isSplitModeNow = this.isSplitMode();
         if (isSplitModeBefore != isSplitModeNow) {
             this.logger.info(`splitMode changed: ${isSplitModeBefore} -> ${isSplitModeNow}`);
@@ -374,6 +411,7 @@ export class ScreenManager {
     }
 
     getColumnsWidth(count: number): number {
+        this.logger.info(`getColumnsWidth count is ${count} colunms is ${this.columns}`);
         let columnWidth = (this.winWidth - Constants.COLUMN_MARGIN) / this.columns;
         return columnWidth * count - Constants.COLUMN_GUTTER;
     }

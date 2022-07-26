@@ -17,7 +17,7 @@ export class DateUtil {
     private static readonly NEW_NAME_IMG: string = 'IMG_';
     private static readonly NEW_NAME_EDIT: string = 'edit_';
 
-    public static format(format?: string): string {
+    public static formats(format?: string): string {
         let time = new Date();
         if (!format) {
             return time.valueOf().toString();
@@ -28,7 +28,7 @@ export class DateUtil {
             'HH': time.getHours(),
             'mm': time.getMinutes(),
             'ss': time.getSeconds()
-        }
+        };
 
         if (/(y+)/.test(format)) {
             format = format.replace('yyyy', time.getFullYear().toString().substr(0));
@@ -44,9 +44,9 @@ export class DateUtil {
 
     public static nameByDate(isReplace: Boolean, name?: string): string {
         if (isReplace) {
-            return (!name) ? null : name.split('.')[0] + '_' + DateUtil.NEW_NAME_EDIT + DateUtil.format();
+            return (!name) ? null : name.split('.')[0] + '_' + DateUtil.NEW_NAME_EDIT + DateUtil.formats();
         } else {
-            return DateUtil.NEW_NAME_IMG + DateUtil.format('yyyyMMdd_HHmmss');
+            return DateUtil.NEW_NAME_IMG + DateUtil.formats('yyyyMMdd_HHmmss');
         }
     }
 }
