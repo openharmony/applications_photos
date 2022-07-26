@@ -1,15 +1,16 @@
 {
-  "name": "photos",
-  "version": "1.0.0",
-  "ohos": {
-    "org": "huawei",
-    "buildTool": "hvigor",
-    "directoryLevel": "project"
-  },
-  "dependencies": {
-    "@ohos/hvigor": "^1.0.6",
-    "@ohos/hvigor-base": "^1.0.6",
-    "@ohos/hvigor-ohos-plugin": "^1.0.6",
-    "@ohos/sdkmanager-common": "^1.1.1"
-  }
+	"devDependencies":{},
+	"name":"photos",
+	"ohos":{
+		"org":"huawei",
+		"directoryLevel":"project",
+		"buildTool":"hvigor"
+	},
+	"version":"1.0.0",
+	"dependencies":{
+		"@ohos/hvigor-base":"^1.0.6",
+		"@ohos/hvigor-ohos-plugin":"^1.0.6",
+		"@ohos/hvigor":"^1.0.6",
+		"@ohos/sdkmanager-common":"^1.1.1"
+	}
 }
