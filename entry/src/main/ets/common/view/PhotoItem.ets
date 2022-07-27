@@ -14,16 +14,16 @@
  */
 import Matrix4 from '@ohos.matrix4'
 import router from '@system.router'
-import {MediaItem} from '../../common/model/browser/photo/MediaItem'
-import {EventPipeline} from '../../common/model/browser/photo/EventPipeline'
-import {BroadCast} from '../../common/utils/BroadCast'
-import {Logger} from '../utils/Logger'
-import {Constants as PhotoConstants} from '../../common/model/browser/photo/Constants'
-import {MediaLibraryAccess} from '../../common/access/MediaLibraryAccess'
-import {ScreenManager} from '../model/common/ScreenManager'
-import {Constants} from '../model/common/Constants';
-import {TraceControllerUtils} from '../utils/TraceControllerUtils';
-import {LoadingPanel} from '../../feature/browser/view/photo/components/LoadingPanel'
+import { MediaItem } from '../../common/model/browser/photo/MediaItem'
+import { EventPipeline } from '../../common/model/browser/photo/EventPipeline'
+import { BroadCast } from '../../common/utils/BroadCast'
+import { Logger } from '../utils/Logger'
+import { Constants as PhotoConstants } from '../../common/model/browser/photo/Constants'
+import { MediaLibraryAccess } from '../../common/access/MediaLibraryAccess'
+import { ScreenManager } from '../model/common/ScreenManager'
+import { Constants } from '../model/common/Constants';
+import { TraceControllerUtils } from '../utils/TraceControllerUtils';
+import { LoadingPanel } from '../../feature/browser/view/photo/components/LoadingPanel'
 
 @Component
 export struct PhotoItem {
@@ -48,7 +48,7 @@ export struct PhotoItem {
     @Provide isLoading: boolean = true;
     private imgScale: number = 1;
     private firstLoad: boolean = true;
-    private preItem = {rotate: 0, height: 0, width: 0};
+    private preItem = { rotate: 0, height: 0, width: 0 };
 
     onTransitionChange() {
         this.logger.info(`onTransitionChange , ${this.updateTransition} ${this.position}`);
@@ -112,7 +112,7 @@ export struct PhotoItem {
     onViewDataChanged(): void {
         this.logger.info(`onViewDataChanged start`);
         if ((this.preItem.rotate == this.item.orientation && this.preItem.height == this.item.imgHeight &&
-            this.preItem.width == this.item.imgWidth) && !this.firstLoad) {
+        this.preItem.width == this.item.imgWidth) && !this.firstLoad) {
             this.preItem.rotate = this.item.orientation;
             this.preItem.width = this.item.imgWidth;
             this.preItem.height = this.item.imgHeight;
@@ -157,6 +157,7 @@ export struct PhotoItem {
             }
             .width('100%')
             .height('100%')
+
             Flex({
                 direction: FlexDirection.Row,
                 alignItems: ItemAlign.Center,
@@ -191,157 +192,164 @@ export struct PhotoItem {
             .onClick(() => {
                 this.broadCast.emit(PhotoConstants.TOGGLE_BAR, [null]);
             })
-                .gesture(
-                    GestureGroup(GestureMode.Parallel,
-                    PinchGesture({
-                        fingers: 2,
-                        distance: 1
-                    })
-                    .onActionStart((event: GestureEvent) => {
-                        this.logger.debug('PinchGesture onActionStart');
-                        if (this.isPullingDown) {
-                            this.logger.debug('Not allow to pinch when pullingDown');
-                            return;
-                        }
-                        this.logger.debug(`PinchGesture onActionStart scale:\
+            .gesture(
+            GestureGroup(GestureMode.Parallel,
+            PinchGesture({
+                fingers: 2,
+                distance: 1
+            })
+                .onActionStart((event: GestureEvent) => {
+                    this.logger.debug('PinchGesture onActionStart');
+                    if (this.isPullingDown) {
+                        this.logger.debug('Not allow to pinch when pullingDown');
+                        return;
+                    }
+                    this.logger.debug(`PinchGesture onActionStart scale:\
                             ${event.scale}, cx: ${event.pinchCenterX}, cy: ${event.pinchCenterY}`);
-                        if (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
-                            this.eventPipeline.onScaleStart(event.scale, event.pinchCenterX, event.pinchCenterY);
-                        }
-                    })
-                        .onActionUpdate((event) => {
-                            this.logger.debug(`PinchGesture onActionUpdate scale: ${event.scale}`);
-                            if (this.isPullingDown) {
-                                this.logger.debug('Not allow to pinch when pullingDown');
-                                return;
-                            }
-                            if (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
-                                this.eventPipeline.onScale(event.scale);
-                            }
-                        })
-                        .onActionEnd(() => {
-                            this.logger.debug('PinchGesture onActionEnd');
-                            if (this.isPullingDown) {
-                                this.logger.debug('Not allow to pinch when pullingDown');
-                                return;
-                            }
-                            if (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
-                                this.eventPipeline.onScaleEnd();
-                                if (this.animationOption != null) {
-                                    animateTo({
-                                        duration: this.animationOption.duration,
-                                        curve: this.animationOption.curve,
-                                        onFinish: () => {
-                                            this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
-                                            this.animationOption = null;
-                                            this.animationEndMatrix = null;
-                                        }
-                                    }, () => {
-                                        this.matrix = this.animationEndMatrix;
-                                    })
+                    if (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
+                        this.eventPipeline.onScaleStart(event.scale, event.pinchCenterX, event.pinchCenterY);
+                    }
+                })
+                .onActionUpdate((event) => {
+                    this.logger.debug(`PinchGesture onActionUpdate scale: ${event.scale}`);
+                    if (this.isPullingDown) {
+                        this.logger.debug('Not allow to pinch when pullingDown');
+                        return;
+                    }
+                    if (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
+                        this.eventPipeline.onScale(event.scale);
+                    }
+                })
+                .onActionEnd(() => {
+                    this.logger.debug('PinchGesture onActionEnd');
+                    if (this.isPullingDown) {
+                        this.logger.debug('Not allow to pinch when pullingDown');
+                        return;
+                    }
+                    if (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
+                        this.eventPipeline.onScaleEnd();
+                        if (this.animationOption != null) {
+                            animateTo({
+                                duration: this.animationOption.duration,
+                                curve: this.animationOption.curve,
+                                onFinish: () => {
+                                    this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
+                                    this.animationOption = null;
+                                    this.animationEndMatrix = null;
                                 }
-                            }
-                        }),
-                    PanGesture({
-                        direction: this.direction
-                    })
-                        .onActionStart((event: GestureEvent) => {
-                            this.logger.debug(`PanGesture start offsetX:\
+                            }, () => {
+                                this.matrix = this.animationEndMatrix;
+                            })
+                        }
+                    }
+                }),
+            PanGesture({
+                direction: this.direction
+            })
+                .onActionStart((event: GestureEvent) => {
+                    this.logger.debug(`PanGesture start offsetX:\
                                     ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)}`);
-                            this.eventPipeline.onMoveStart(vp2px(event.offsetX), vp2px(event.offsetY));
-                        })
-                        .onActionUpdate((event: GestureEvent) => {
-                            this.logger.debug(`PanGesture update offsetX:\
+                    this.eventPipeline.onMoveStart(vp2px(event.offsetX), vp2px(event.offsetY));
+                })
+                .onActionUpdate((event: GestureEvent) => {
+                    this.logger.debug(`PanGesture update offsetX:\
                                     ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)}`);
-                                this.eventPipeline.onMove(vp2px(event.offsetX), vp2px(event.offsetY));
-                        })
-                        .onActionEnd((event: GestureEvent) => {
-                            this.logger.debug(`PanGesture end offsetX:\
+                    this.eventPipeline.onMove(vp2px(event.offsetX), vp2px(event.offsetY));
+                })
+                .onActionEnd((event: GestureEvent) => {
+                    this.logger.debug(`PanGesture end offsetX:\
                                     ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)}`);
-                                this.eventPipeline.onMoveEnd(vp2px(event.offsetX), vp2px(event.offsetY));
-                            if (this.animationOption != null) {
-                                animateTo({
-                                    duration: this.animationOption.duration,
-                                    curve: this.animationOption.curve,
-                                    onFinish: () => {
-                                        this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
-                                        this.animationOption = null;
-                                        this.animationEndMatrix = null;
-                                    }
-                                }, () => {
-                                    this.matrix = this.animationEndMatrix;
-                                })
+                    this.eventPipeline.onMoveEnd(vp2px(event.offsetX), vp2px(event.offsetY));
+                    if (this.animationOption != null) {
+                        animateTo({
+                            duration: this.animationOption.duration,
+                            curve: this.animationOption.curve,
+                            onFinish: () => {
+                                this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
+                                this.animationOption = null;
+                                this.animationEndMatrix = null;
                             }
-                        }),
-                    TapGesture({
-                        count: 2
-                    })
-                        .onAction((event: GestureEvent) => {
-                            if (this.isPullingDown) {
-                                this.logger.debug('Not allow to double tap when pullingDown');
-                                return;
-                            }
-                            this.logger.debug(`onDoubleTap event: ${JSON.stringify(event)}`);
-                            if (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) {
-                                return;
-                            }
-                            this.eventPipeline.onDoubleTap(event.fingerList[0].localX, event.fingerList[0].localY);
-                            if (this.animationOption != null) {
-                                this.logger.debug('TapGesture animateTo start');
-                                animateTo({
-                                    duration: this.animationOption.duration,
-                                    curve: this.animationOption.curve,
-                                    onFinish: () => {
-                                        this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
-                                        this.animationOption = null;
-                                        this.animationEndMatrix = null;
-                                    }
-                                }, () => {
-                                    this.matrix = this.animationEndMatrix;
-                                })
-                            }
+                        }, () => {
+                            this.matrix = this.animationEndMatrix;
                         })
-                    )
+                    }
+                }),
+            TapGesture({
+                count: 2
+            })
+                .onAction((event: GestureEvent) => {
+                    if (this.isPullingDown) {
+                        this.logger.debug('Not allow to double tap when pullingDown');
+                        return;
+                    }
+                    this.logger.debug(`onDoubleTap event: ${JSON.stringify(event)}`);
+                    if (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) {
+                        return;
+                    }
+                    this.eventPipeline.onDoubleTap(event.fingerList[0].localX, event.fingerList[0].localY);
+                    if (this.animationOption != null) {
+                        this.logger.debug('TapGesture animateTo start');
+                        animateTo({
+                            duration: this.animationOption.duration,
+                            curve: this.animationOption.curve,
+                            onFinish: () => {
+                                this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
+                                this.animationOption = null;
+                                this.animationEndMatrix = null;
+                            }
+                        }, () => {
+                            this.matrix = this.animationEndMatrix;
+                        })
+                    }
+                })
+            )
             )
             .clip(true)
-                .onTouch((event) => {
-                    this.eventPipeline.onTouch(event);
-                })
+            .onTouch((event) => {
+                this.eventPipeline.onTouch(event);
+            })
             // TODO Remind users when pictures of other devices cannot be show
             if ((this.showError || this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) &&
-                this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
+            this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
                 Row() {
                     Text((this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) ?
-                        $r('app.string.no_distributed_photo_show_video') :
-                        $r('app.string.no_distributed_photo_show_image'))
+                    $r('app.string.no_distributed_photo_show_video') :
+                    $r('app.string.no_distributed_photo_show_image'))
                         .fontSize($r('sys.float.ohos_id_text_size_body2'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
                         .fontColor($r('sys.color.ohos_id_color_text_tertiary'))
-                }.margin({top: (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) ? $r('app.float.input_text_notify_margin') : 0})
+                }
+                .margin({
+                    top: (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) ? $r('app.float.input_text_notify_margin') : 0
+                })
             }
             Row() {
-                Image($r('app.media.ic_video_play_btn_png')).objectFit(ImageFit.Contain).width($r('app.float.icon_video_size'))
-                    .height($r('app.float.icon_video_size')).onClick(() => {
-                    if (this.item != undefined) {
-                        router.push({
-                            uri: 'feature/browser/view/photo/VideoBrowser',
-                            params: {
-                                uri: this.item.uri,
-                                dateTaken: this.item.dateTaken,
-                                previewUri: this.thumbnail
-                            }
-                        })
-                    }
-                }).visibility(this.isVideoPlayBtnShow())
+                Image($r('app.media.ic_video_play_btn_png'))
+                    .objectFit(ImageFit.Contain)
+                    .width($r('app.float.icon_video_size'))
+                    .height($r('app.float.icon_video_size'))
+                    .onClick(() => {
+                        if (this.item != undefined) {
+                            router.push({
+                                uri: 'feature/browser/view/photo/VideoBrowser',
+                                params: {
+                                    uri: this.item.uri,
+                                    dateTaken: this.item.dateTaken,
+                                    previewUri: this.thumbnail
+                                }
+                            })
+                        }
+                    })
+                    .visibility(this.isVideoPlayBtnShow())
             }
         }.width('100%')
         .height('100%')
-        .sharedTransition(this.transitionId, {duration: PhotoConstants.SHARE_TRANSITION_DURATION})
+        .sharedTransition(this.transitionId, { duration: PhotoConstants.SHARE_TRANSITION_DURATION })
     }
 
     isVideoPlayBtnShow(): Visibility {
         this.logger.debug(`isVideoPlayBtnShow: ${this.item.mediaType}`);
         return ((this.item != undefined)
-            && (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO)) ? Visibility.Visible : Visibility.None;
+        && (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO)) ? Visibility.Visible : Visibility.None;
     }
 }

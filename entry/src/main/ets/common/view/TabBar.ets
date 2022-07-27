@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import {Logger} from '../utils/Logger'
-import {TabItem, TabItemWithText} from '../model/common/TabItem'
-import {BroadCastManager} from '../model/common/BroadCastManager'
-import {BroadCast} from '../utils/BroadCast'
-import {BroadCastConstants} from '../model/common/BroadCastConstants'
-import {Constants} from '../model/common/Constants'
+import { Logger } from '../utils/Logger'
+import { TabItem, TabItemWithText } from '../model/common/TabItem'
+import { BroadCastManager } from '../model/common/BroadCastManager'
+import { BroadCast } from '../utils/BroadCast'
+import { BroadCastConstants } from '../model/common/BroadCastConstants'
+import { Constants } from '../model/common/Constants'
 
 export enum DEVICE_TYPE {
     DEVICE_PHONE,
@@ -40,7 +40,9 @@ export struct TabBar {
     aboutToAppear(): void {
         this.onTabSelected = this.onTabSelected.bind(this);
         this.tabs[this.currentIndex].isSelected = true;
-        this.tabs.forEach((tab: TabItem) => {this.logger.info(`${JSON.stringify(tab.name)} , ${tab.iconSelected}`)});
+        this.tabs.forEach((tab: TabItem) => {
+            this.logger.info(`${JSON.stringify(tab.name)} , ${tab.iconSelected}`)
+        });
     }
 
     private onTabSelected(index: number) {
@@ -74,10 +76,10 @@ export struct TabBar {
                 }
                 .height(DEVICE_TYPE.DEVICE_PAD == this.deviceType ? $r('app.float.horizontal_width') : '100%')
             }
-            .markAnchor({x: '0%', y: '0%'})
-            .position({x: '0%', y: '0%'})
+            .markAnchor({ x: '0%', y: '0%' })
+            .position({ x: '0%', y: '0%' })
             .width($r('app.float.tab_bar_width'))
-                .backgroundColor($r('app.color.default_background_color'))
+            .backgroundColor($r('app.color.default_background_color'))
         } else {
             Flex({
                 direction: FlexDirection.Row,
@@ -90,8 +92,8 @@ export struct TabBar {
                     }.layoutWeight(1)
                 }, tab => tab.name.id)
             }
-            .markAnchor({x: '0%', y: '100%'})
-            .position({x: '0%', y: '100%'})
+            .markAnchor({ x: '0%', y: '100%' })
+            .position({ x: '0%', y: '100%' })
             .visibility((this.isSelectedMode || this.isAlbumSetSelectedMode) ? Visibility.None : Visibility.Visible)
             .height('56vp')
             .backgroundColor($r('app.color.default_background_color'))
@@ -129,10 +131,10 @@ struct Tab {
                     left: $r('app.float.tab_bar_text_padding_horizontal')
                 })
         }
-            .onClick(() => {
-                this.onTabSelected && this.onTabSelected(this.index);
-                this.tabItem.isSelected = true;
-            })
+        .onClick(() => {
+            this.onTabSelected && this.onTabSelected(this.index);
+            this.tabItem.isSelected = true;
+        })
     }
 }
 
@@ -157,7 +159,7 @@ export struct TabBarForAlbumSet {
         this.logger.info(`this.currentIndex: ${this.currentIndex} index: ${index}`);
         this.currentIndex = index;
         this.controller.changeIndex(this.currentIndex);
-        this.tabs.forEach((tab:TabItemWithText) => {
+        this.tabs.forEach((tab: TabItemWithText) => {
             tab.isSelected = false;
         })
         this.logger.info(`select ${this.currentIndex}`);
@@ -170,13 +172,13 @@ export struct TabBarForAlbumSet {
             alignItems: ItemAlign.Start
         }) {
             ForEach(this.tabs, (tab: TabItemWithText) => {
-                TabWithText({tabItemWithText: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected})
+                TabWithText({ tabItemWithText: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
             }, tab => tab.name.id)
         }
         .width('100%')
         .visibility(this.isTabBarShow ? Visibility.Visible : Visibility.None)
         .height($r('app.float.album_set_tab_bar_height'))
-        .padding({left: $r('app.float.max_padding_start'), right: $r('app.float.max_padding_end')})
+        .padding({ left: $r('app.float.max_padding_start'), right: $r('app.float.max_padding_end') })
         .backgroundColor($r('app.color.default_background_color'))
     }
 }
@@ -213,10 +215,10 @@ struct TabWithText {
                 .fontWeight(this.tabItemWithText.getTextWeight())
                 .fontColor(this.tabItemWithText.getTextColor())
                 .maxLines(1)
-                .margin({top: $r('app.float.tab_bar_line_margin_top'),
+                .margin({ top: $r('app.float.tab_bar_line_margin_top'),
                     left: $r('app.float.single_tab_margin'),
                     right: $r('app.float.single_tab_margin'),
-                    bottom: $r('app.float.tab_bar_line_margin_top')})
+                    bottom: $r('app.float.tab_bar_line_margin_top') })
             Column()
                 .width(this.TabWidth)
                 .height($r('app.float.tab_bar_line_height'))

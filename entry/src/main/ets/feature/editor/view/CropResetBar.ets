@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {Constants} from '../../../common/model/common/Constants'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { Constants } from '../../../common/model/common/Constants'
 
 @Component
 export struct CropResetBar {

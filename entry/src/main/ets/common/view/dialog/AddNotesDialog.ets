@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Logger} from '../../utils/Logger'
-import {DialogCallback} from '../../model/common/DialogUtil'
-import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants'
-import {UiUtil} from '../../../common/utils/UiUtil'
+import { Logger } from '../../utils/Logger'
+import { DialogCallback } from '../../model/common/DialogUtil'
+import { ScreenManager } from '../../model/common/ScreenManager'
+import { Constants } from '../../model/common/Constants'
+import { UiUtil } from '../../../common/utils/UiUtil'
 
 @CustomDialog
 export struct AddNotesDialog {
@@ -48,10 +48,10 @@ export struct AddNotesDialog {
                         this.dialogCallback && this.dialogCallback.cancelCallback();
                         this.controller.close()
                     })
-                }.margin({right: $r('app.float.dialog_icon_margin_horizontal')})
+                }.margin({ right: $r('app.float.dialog_icon_margin_horizontal') })
 
                 Column() {
-                    TextInput({placeholder:'', text: this.inputNote})
+                    TextInput({ placeholder: '', text: this.inputNote })
                         .fontSize($r('sys.float.ohos_id_text_size_caption1'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
                         .fontColor($r('app.color.text_input_font_color_182431'))
@@ -62,7 +62,7 @@ export struct AddNotesDialog {
                             this.inputNote = value
                             this.isNull = this.inputNote === '';
                         })
-                }.margin({right: $r('app.float.dialog_icon_margin_horizontal')})
+                }.margin({ right: $r('app.float.dialog_icon_margin_horizontal') })
 
                 Column() {
                     Button() {
@@ -81,11 +81,14 @@ export struct AddNotesDialog {
                         this.controller.close()
                     })
                 }
-            }.margin({top: $r('sys.float.ohos_id_text_paragraph_margin_s'),
-                bottom: $r('sys.float.ohos_id_text_paragraph_margin_s')})
+            }.margin({ top: $r('sys.float.ohos_id_text_paragraph_margin_s'),
+                bottom: $r('sys.float.ohos_id_text_paragraph_margin_s') })
             .height($r('app.float.dialog_add_notes_content_height'))
-        }.padding({left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin')})
-        .height($r('app.float.dialog_add_notes_height')).width('100%').borderRadius($r('app.float.dialog_border_radius'))
+        }
+        .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
+        .height($r('app.float.dialog_add_notes_height'))
+        .width('100%')
+        .borderRadius($r('app.float.dialog_border_radius'))
         .width(ScreenManager.getInstance().getColumnsWidth(4))
         .backgroundColor($r('app.color.white'))
         .margin({

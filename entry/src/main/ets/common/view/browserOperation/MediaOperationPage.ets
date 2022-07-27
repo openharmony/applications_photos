@@ -12,25 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {MediaOperationType} from '../../model/common/MediaOperationType'
-import {MediaOperationActionBar} from './MediaOperationActionBar'
-import {Logger} from '../../utils/Logger'
-import {BroadCast} from '../../utils/BroadCast'
-import {AlbumSetNewMenuOperation} from './AlbumSetNewMenuOperation';
-import {MenuOperationFactory} from '../../interface/MenuOperationFactory';
-import {AlbumSetDataSource} from '../../model/browser/album/AlbumSetDataSource';
-import {AlbumInfo} from '../../model/browser/album/AlbumInfo';
-import {BroadCastConstants} from '../../model/common/BroadCastConstants';
-import {AlbumListCard} from './AlbumListCard';
+import { MediaOperationType } from '../../model/common/MediaOperationType'
+import { MediaOperationActionBar } from './MediaOperationActionBar'
+import { Logger } from '../../utils/Logger'
+import { BroadCast } from '../../utils/BroadCast'
+import { AlbumSetNewMenuOperation } from './AlbumSetNewMenuOperation';
+import { MenuOperationFactory } from '../../interface/MenuOperationFactory';
+import { AlbumSetDataSource } from '../../model/browser/album/AlbumSetDataSource';
+import { AlbumInfo } from '../../model/browser/album/AlbumInfo';
+import { BroadCastConstants } from '../../model/common/BroadCastConstants';
+import { AlbumListCard } from './AlbumListCard';
 import router from '@system.router';
-import {MenuContext} from './MenuContext';
-import {Action} from './Action';
-import {JumpSourceToMain} from '../../../common/model/browser/photo/JumpSourceToMain'
-import {CustomDialogView} from '../dialog/CustomDialogView';
-import {AlbumDefine} from '../../model/browser/AlbumDefine';
-import {ScreenManager, ColumnSize} from '../../model/common/ScreenManager';
-import {BroadCastManager} from '../../model/common/BroadCastManager';
-import {Constants} from '../../model/common/Constants';
+import { MenuContext } from './MenuContext';
+import { Action } from './Action';
+import { JumpSourceToMain } from '../../../common/model/browser/photo/JumpSourceToMain'
+import { CustomDialogView } from '../dialog/CustomDialogView';
+import { AlbumDefine } from '../../model/browser/AlbumDefine';
+import { ScreenManager, ColumnSize } from '../../model/common/ScreenManager';
+import { BroadCastManager } from '../../model/common/BroadCastManager';
+import { Constants } from '../../model/common/Constants';
 
 @Entry
 @Component
@@ -52,7 +52,7 @@ struct MediaOperationPage {
 
     aboutToAppear(): void {
         let self = this;
-        this.albums = new AlbumSetDataSource(this.broadCast, {moreInfo: true});
+        this.albums = new AlbumSetDataSource(this.broadCast, { moreInfo: true });
 
         this.onActive();
         let param = router.getParams();
@@ -70,7 +70,7 @@ struct MediaOperationPage {
         this.broadCast.on(BroadCastConstants.MEDIA_OPERATION, (albumInfo: AlbumInfo, completedFunc?: Function) => {
             router.back({
                 uri: '',
-                params:{
+                params: {
                     pageType: self.pageType,
                     albumInfo: JSON.stringify(albumInfo)
                 }
@@ -165,24 +165,24 @@ struct MediaOperationPage {
         return list[list.length - 1].innerId == info.innerId;
     }
 
-    onPageShow(){
+    onPageShow() {
         this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
     }
 
     build() {
         Column() {
-            MediaOperationActionBar({onMenuClicked: this.onMenuClicked})
+            MediaOperationActionBar({ onMenuClicked: this.onMenuClicked })
 
-            List({scroller: this.scroller}) {
+            List({ scroller: this.scroller }) {
                 LazyForEach(this.albums, (item: AlbumInfo, index) => {
                     ListItem() {
                         if (!AlbumDefine.ALBUM_DISABLE_COPY_LIST.has(item.id) && item.id != this.sourceAlbumId) {
                             Column() {
-                                AlbumListCard({item: item})
+                                AlbumListCard({ item: item })
                                 if (!this.isLast(item)) {
                                     Divider().vertical(false).strokeWidth(1)
                                         .color($r('sys.color.ohos_id_color_list_separator'))
-                                        .margin({left: $r('app.float.album_list_card_divider_margin_left')})
+                                        .margin({ left: $r('app.float.album_list_card_divider_margin_left') })
                                 }
                             }
                         }
@@ -192,26 +192,27 @@ struct MediaOperationPage {
             .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
             .margin({
                 top: $r('app.float.album_let_page_padding_top'),
-                left : $r('app.float.max_padding_start'),
-                right : $r('app.float.max_padding_end'),
+                left: $r('app.float.max_padding_start'),
+                right: $r('app.float.max_padding_end'),
                 bottom: this.leftBlank[3]
             })
             .padding({
-                left : $r('app.float.list_card_margin'),
-                right : $r('app.float.list_card_margin')
+                left: $r('app.float.list_card_margin'),
+                right: $r('app.float.list_card_margin')
             })
             .width(this.listCardWidth)
             .backgroundColor($r('sys.color.ohos_id_color_card_bg'))
 
             CustomDialogView()
         }
-        .backgroundColor($r('app.color.default_background_color'))  // ux: colorSubBackground
+        .backgroundColor($r('app.color.default_background_color')) // ux: colorSubBackground
         .height('100%')
         .padding({
             top: this.leftBlank[1],
             bottom: this.leftBlank[3]
         })
     }
+
     pageTransition() {
         PageTransitionEnter({ type: RouteType.None, duration: 1 })
             .opacity(0)

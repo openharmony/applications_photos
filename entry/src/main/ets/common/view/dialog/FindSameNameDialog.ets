@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {DialogCallback} from '../../model/common/DialogUtil'
+import { DialogCallback } from '../../model/common/DialogUtil'
 import { Logger } from '../../utils/Logger'
-import {DateUtil} from '../../../common/utils/DateUtil'
-import {FindSameOperation} from '../browserOperation/ProcessMenuOperation'
-import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants'
+import { DateUtil } from '../../../common/utils/DateUtil'
+import { FindSameOperation } from '../browserOperation/ProcessMenuOperation'
+import { ScreenManager } from '../../model/common/ScreenManager'
+import { Constants } from '../../model/common/Constants'
 
 @Observed
 export class FindSameNameParam {
@@ -40,7 +40,6 @@ export struct FindSameNameDialog {
     @Consume dialogCallback: DialogCallback;
     @Consume dialogMessage: Resource;
     @Consume findSameNameParam: FindSameNameParam;
-
     sourceDetails: any;
     targetDetails: any;
     logger: Logger = new Logger('FindSameNameDialog');
@@ -108,7 +107,7 @@ export struct FindSameNameDialog {
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
-                bottom: $r('app.float.same_name_date_title3_dialog_bottom')})
+                bottom: $r('app.float.same_name_date_title3_dialog_bottom') })
 
             Row() {
                 Column() {
@@ -118,7 +117,7 @@ export struct FindSameNameDialog {
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
-                bottom: $r('app.float.same_name_date_title_dialog_bottom')})
+                bottom: $r('app.float.same_name_date_title_dialog_bottom') })
 
             Row() {
                 Column() {
@@ -138,7 +137,7 @@ export struct FindSameNameDialog {
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
-                bottom: $r('app.float.same_name_date_title3_dialog_bottom')})
+                bottom: $r('app.float.same_name_date_title3_dialog_bottom') })
 
             Row() {
                 Column() {
@@ -148,18 +147,18 @@ export struct FindSameNameDialog {
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
-                bottom: $r('app.float.same_name_date_title_dialog_bottom')})
+                bottom: $r('app.float.same_name_date_title_dialog_bottom') })
 
             Row() {
                 Image(this.isDoSameAction ? $r('app.media.ic_gallery_public_checkbox_filled')
                                           : $r('app.media.ic_checkbox_off_overlay'))
-                .height($r('app.float.icon_size'))
+                    .height($r('app.float.icon_size'))
                     .width($r('app.float.icon_size'))
                     .margin({
                         right: $r('app.float.details_dialog_button_margin_right') })
-                .onClick(() => {
-                    this.isDoSameAction = !this.isDoSameAction
-                })
+                    .onClick(() => {
+                        this.isDoSameAction = !this.isDoSameAction
+                    })
 
                 Text($r('app.string.do_same_action'))
                     .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
@@ -170,7 +169,7 @@ export struct FindSameNameDialog {
             .margin({
                 bottom: $r('app.float.same_name_date_dialog_bottom') })
 
-            Stack({alignContent: Alignment.Top}) {
+            Stack({ alignContent: Alignment.Top }) {
                 Row() {
                     Button() {
                         Text($r('app.string.replace_action'))
@@ -263,8 +262,10 @@ export struct FindSameNameDialog {
             }
             .width('100%')
             .height($r('app.float.details_dialog_button_area_height'))
-        }.padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
-        .alignItems(HorizontalAlign.Start).borderRadius($r('app.float.dialog_border_radius'))
+        }
+        .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
+        .alignItems(HorizontalAlign.Start)
+        .borderRadius($r('app.float.dialog_border_radius'))
         .width(ScreenManager.getInstance().getColumnsWidth(4))
         .backgroundColor($r('app.color.white'))
         .margin({

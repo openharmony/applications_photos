@@ -15,23 +15,24 @@
 
 import Ability from '@ohos.application.Ability'
 import wantConstant from '@ohos.ability.wantConstant'
-import {Logger} from '../common/utils/Logger'
-import {ScreenManager} from '../common/model/common/ScreenManager'
-import {PixelMapManager} from '../common/model/common/PixelMapManager'
-import {StatusBarColorController} from '../common/model/common/StatusBarColorController'
-import {MediaLibraryAccess} from '../common/access/MediaLibraryAccess'
-import {TimelineDataSourceManager} from '../feature/timeline/model/TimelineDataSourceManager'
-import {Constants} from '../common/model/common/Constants'
-import {MediaDataSource} from '../common/model/browser/photo/MediaDataSource'
-import {BroadCastManager} from '../common/model/common/BroadCastManager';
-import {TraceControllerUtils} from '../common/utils/TraceControllerUtils';
-import {BroadCastConstants} from '../common/model/common/BroadCastConstants'
+import { Logger } from '../common/utils/Logger'
+import { ScreenManager } from '../common/model/common/ScreenManager'
+import { PixelMapManager } from '../common/model/common/PixelMapManager'
+import { StatusBarColorController } from '../common/model/common/StatusBarColorController'
+import { MediaLibraryAccess } from '../common/access/MediaLibraryAccess'
+import { TimelineDataSourceManager } from '../feature/timeline/model/TimelineDataSourceManager'
+import { Constants } from '../common/model/common/Constants'
+import { MediaDataSource } from '../common/model/browser/photo/MediaDataSource'
+import { BroadCastManager } from '../common/model/common/BroadCastManager';
+import { TraceControllerUtils } from '../common/utils/TraceControllerUtils';
+import { BroadCastConstants } from '../common/model/common/BroadCastConstants'
 import router from '@system.router'
 
 const appLogger: Logger = new Logger('app');
 let isFromCard = false;
 let isFromCamera = false;
 let appBroadCast = BroadCastManager.getInstance().getBroadCast();
+
 export default class MainAbility extends Ability {
     private static readonly RETRY_MAX_TIMES = 100;
     private static readonly ACTION_URI_SINGLE_SELECT = 'singleselect';
@@ -58,7 +59,7 @@ export default class MainAbility extends Ability {
             AppStorage.SetOrCreate(Constants.FROM_CURRENT_INDEX, action.currentIndex);
         } else if (action != null && action != undefined && action.uri == Constants.ACTION_URI_FORM_ABILITY_NONE) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY_NONE);
-        } else if (action != null && action != undefined &&  action['formId'] != null) {
+        } else if (action != null && action != undefined && action['formId'] != null) {
             AppStorage.SetOrCreate(Constants.FA_SETTING_FROM_ID, action['formId']);
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_FORM_EDITOR);
         } else if (want.action == wantConstant.Action.ACTION_VIEW_DATA) {
@@ -99,6 +100,7 @@ export default class MainAbility extends Ability {
         }, (err) => {
             appLogger.error(`Failed to requestPermissionsFromUser, ${err.code}`);
         });
+
         appBroadCast.on(BroadCastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
         appLogger.info('Application onCreate end');
     }
@@ -118,7 +120,7 @@ export default class MainAbility extends Ability {
             AppStorage.SetOrCreate(Constants.FROM_CURRENT_INDEX, action.currentIndex);
         } else if (action != null && action != undefined && action.uri == Constants.ACTION_URI_FORM_ABILITY_NONE) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY_NONE);
-        } else if (action != null && action != undefined &&  action['formId'] != null) {
+        } else if (action != null && action != undefined && action['formId'] != null) {
             AppStorage.SetOrCreate(Constants.FA_SETTING_FROM_ID, action['formId']);
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_FORM_EDITOR);
         } else if (want.action == wantConstant.Action.ACTION_VIEW_DATA) {

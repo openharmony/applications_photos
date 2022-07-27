@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import {Logger} from '../utils/Logger'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {Constants} from '../../../common/model/common/Constants'
-import {PhotoEditCrop} from '../crop/PhotoEditCrop'
-import {CropResetBar} from './CropResetBar'
-import {ScreenManager} from '../../../common/model/common/ScreenManager'
+import { Logger } from '../utils/Logger'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { Constants } from '../../../common/model/common/Constants'
+import { PhotoEditCrop } from '../crop/PhotoEditCrop'
+import { CropResetBar } from './CropResetBar'
+import { ScreenManager } from '../../../common/model/common/ScreenManager'
 
 @Component
 export struct CropImageShow {
@@ -47,7 +47,7 @@ export struct CropImageShow {
         this.broadCast.emit(Constants.RULER_BAR_INTI, []);
     }
 
-    onTouchStart(event : TouchEvent) {
+    onTouchStart(event: TouchEvent) {
         let x = event.touches[0].x;
         let y = event.touches[0].y;
         switch (event.type) {
@@ -87,7 +87,7 @@ export struct CropImageShow {
         this.cropEdit.onPinchStart(x, y, event.scale);
     }
 
-    onPinchGestureUpdate(event:GestureEvent) {
+    onPinchGestureUpdate(event: GestureEvent) {
         let now = new Date().getTime();
         if (now - this.prePinch >= Constants.TIMEOUT) {
             this.prePinch = now;

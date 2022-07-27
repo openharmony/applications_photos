@@ -14,22 +14,21 @@
  */
 
 import router from '@system.router';
-import {Logger} from '../utils/Logger'
-import {TitleBar} from './TitleBar'
-import {MainMenuBar} from './MainMenuBar'
-import {PhotoEditMode} from '../base/PhotoEditType'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {ScreenManager} from '../../../common/model/common/ScreenManager'
-import {ToolBar} from './ToolBar'
-import {CropImageShow} from './CropImageShow'
-import {CustomDialogView} from '../../../common/view/dialog/CustomDialogView'
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
-import {PhotoEditorManager} from '../PhotoEditorManager'
-import {PhotoEditCrop} from '../crop/PhotoEditCrop'
-import {MediaItem} from '../../../common/model/browser/photo/MediaItem'
-import {Constants} from '../../../common/model/common/Constants'
-import image from '@ohos.multimedia.image'
+import { Logger } from '../utils/Logger'
+import { TitleBar } from './TitleBar'
+import { MainMenuBar } from './MainMenuBar'
+import { PhotoEditMode } from '../base/PhotoEditType'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import { ToolBar } from './ToolBar'
+import { CropImageShow } from './CropImageShow'
+import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
+import { PhotoEditorManager } from '../PhotoEditorManager'
+import { PhotoEditCrop } from '../crop/PhotoEditCrop'
+import { MediaItem } from '../../../common/model/browser/photo/MediaItem'
+import { Constants } from '../../../common/model/common/Constants'
 
 @Entry
 @Component
@@ -138,7 +137,7 @@ export struct Edit {
                 justifyContent: FlexAlign.Center
             }) {
                 Row() {
-                    TitleBar({name: $r('app.string.editBar_text') })
+                    TitleBar({ name: $r('app.string.editBar_text') })
                 }
                 .height($r('app.float.title_default'))
                 .width('100%')

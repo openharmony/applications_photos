@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 
-import {PhotoEditMode} from '../base/PhotoEditType'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {Constants} from '../../../common/model/common/Constants'
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
-import {PhotoEditorManager} from '../PhotoEditorManager'
-import {PhotoEditCrop} from '../crop/PhotoEditCrop'
-import {Logger} from '../utils/Logger'
+import { PhotoEditMode } from '../base/PhotoEditType'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { Constants } from '../../../common/model/common/Constants'
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
+import { PhotoEditorManager } from '../PhotoEditorManager'
+import { PhotoEditCrop } from '../crop/PhotoEditCrop'
+import { Logger } from '../utils/Logger'
 import router from '@system.router'
-import {UiUtil} from '../../../common/utils/UiUtil'
+import { UiUtil } from '../../../common/utils/UiUtil'
 
 @Component
 export struct TitleBar {
@@ -40,7 +40,6 @@ export struct TitleBar {
     private newImageId: number = -1;
     private immersiveClick: Function = undefined;
     private onBackAfterSaveComplete: Function = undefined;
-
 
     saveAsNewCallback() {
         this.log.debug('saveAsNewCallback called');
@@ -88,7 +87,7 @@ export struct TitleBar {
         this.appBroadCast.off(BroadCastConstants.PHOTO_EDIT_SAVE_COMPLETE, this.onBackAfterSaveComplete);
     }
 
-    immersive(isImmersive : boolean) {
+    immersive(isImmersive: boolean) {
         this.isImmersive = isImmersive;
     }
 

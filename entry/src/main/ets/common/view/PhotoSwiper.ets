@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import {PhotoItem} from './PhotoItem'
-import {BroadCastConstants} from '../model/common/BroadCastConstants';
-import {Logger} from '../../feature/browser/utils/Logger';
-import {BroadCast} from '../utils/BroadCast';
-import {Constants} from '../model/common/Constants';
-import {Constants as PhotoConstants} from '../../common/model/browser/photo/Constants'
+import { PhotoItem } from './PhotoItem'
+import { BroadCastConstants } from '../model/common/BroadCastConstants';
+import { Logger } from '../../feature/browser/utils/Logger';
+import { BroadCast } from '../utils/BroadCast';
+import { Constants } from '../model/common/Constants';
+import { Constants as PhotoConstants } from '../../common/model/browser/photo/Constants'
 
 @Component
 export struct PhotoSwiper {
@@ -48,7 +48,7 @@ export struct PhotoSwiper {
                         this.dataSource.onDataChanged(this.currentIndex + 2);
                     }
                     this.dataSource.onDataReloaded();
-                }}, () => {
+                } }, () => {
                 this.dataSource.deleteData(this.currentIndex);
             })
         });
@@ -78,13 +78,13 @@ export struct PhotoSwiper {
             direction: PanDirection.Horizontal
         }))
         .index(this.currentIndex)
-            .indicator(false)
-            .loop(false)
-            .onChange((index: number) => {
-                if (this.duration != 0) {
-                    this.onPhotoChanged(index);
-                }
-            })
-            .disableSwipe(this.canSwipe)
+        .indicator(false)
+        .loop(false)
+        .onChange((index: number) => {
+            if (this.duration != 0) {
+                this.onPhotoChanged(index);
+            }
+        })
+        .disableSwipe(this.canSwipe)
     }
 }

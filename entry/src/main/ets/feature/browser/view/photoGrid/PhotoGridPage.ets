@@ -15,31 +15,31 @@
 
 import router from '@system.router'
 import prompt from '@system.prompt';
-import {Logger} from '../../utils/Logger'
-import {PhotoGridPageActionBar} from './PhotoGridPageActionBar'
-import {PhotoGridPageToolBar} from './PhotoGridPageToolBar'
-import {ImageGridItemComponent} from '../../../../common/view/ImageGridItemComponent'
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {CustomDialogView} from '../../../../common/view/dialog/CustomDialogView'
-import {SelectManager} from '../../../../common/model/browser/SelectManager'
-import {BroadCast} from '../../../../common/utils/BroadCast'
-import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants'
-import {Constants} from '../../../../common/model/common/Constants'
-import {MenuOperation} from '../../../../common/view/browserOperation/MenuOperation'
-import {MenuContext} from '../../../../common/view/browserOperation/MenuContext'
-import {MenuOperationFactory} from '../../../../common/interface/MenuOperationFactory'
-import {BatchDeleteMenuOperation} from '../../../../common/view/browserOperation/BatchDeleteMenuOperation'
-import {MediaDataSource} from '../../../../common/model/browser/photo/MediaDataSource'
-import {MediaItem} from '../../../../common/model/browser/photo/MediaItem'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {TraceControllerUtils} from '../../../../common/utils/TraceControllerUtils'
+import { Logger } from '../../utils/Logger'
+import { PhotoGridPageActionBar } from './PhotoGridPageActionBar'
+import { PhotoGridPageToolBar } from './PhotoGridPageToolBar'
+import { ImageGridItemComponent } from '../../../../common/view/ImageGridItemComponent'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { CustomDialogView } from '../../../../common/view/dialog/CustomDialogView'
+import { SelectManager } from '../../../../common/model/browser/SelectManager'
+import { BroadCast } from '../../../../common/utils/BroadCast'
+import { BroadCastConstants } from '../../../../common/model/common/BroadCastConstants'
+import { Constants } from '../../../../common/model/common/Constants'
+import { MenuOperation } from '../../../../common/view/browserOperation/MenuOperation'
+import { MenuContext } from '../../../../common/view/browserOperation/MenuContext'
+import { MenuOperationFactory } from '../../../../common/interface/MenuOperationFactory'
+import { BatchDeleteMenuOperation } from '../../../../common/view/browserOperation/BatchDeleteMenuOperation'
+import { MediaDataSource } from '../../../../common/model/browser/photo/MediaDataSource'
+import { MediaItem } from '../../../../common/model/browser/photo/MediaItem'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
+import { TraceControllerUtils } from '../../../../common/utils/TraceControllerUtils'
 import { ShareMenuOperation } from '../../../../common/view/browserOperation/ShareMenuOperation';
-import {BroadCastManager} from '../../../../common/model/common/BroadCastManager'
-import {JumpSourceToMain} from '../../../../common/model/browser/photo/JumpSourceToMain'
-import {UiUtil} from '../../../../common/utils/UiUtil';
-import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine'
-import {MediaOperationType} from '../../../../common/model/common/MediaOperationType'
-import {CopyMenuOperation} from '../../../../common/view/browserOperation/CopyMenuOperation';
+import { BroadCastManager } from '../../../../common/model/common/BroadCastManager'
+import { JumpSourceToMain } from '../../../../common/model/browser/photo/JumpSourceToMain'
+import { UiUtil } from '../../../../common/utils/UiUtil';
+import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine'
+import { MediaOperationType } from '../../../../common/model/common/MediaOperationType'
+import { CopyMenuOperation } from '../../../../common/view/browserOperation/CopyMenuOperation';
 import { MoveMenuOperation } from '../../../../common/view/browserOperation/MoveMenuOperation';
 import { GridScrollBar } from '../../../../common/view/GridScrollBar';
 import { BatchRecoverMenuOperation } from './BatchRecoverMenuOperation';
@@ -64,9 +64,7 @@ export struct PhotoGridPage {
     @Provide isShow: boolean = true;
     @Provide isShowBar: boolean = true;
     @Provide moreMenuList: Array<Action> = new Array<Action>();
-
     @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
-
     @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
@@ -82,7 +80,7 @@ export struct PhotoGridPage {
     isDistributedAlbum = false;
     deleteMode: boolean = false;
     routerStart = false;
-    private dataObserver: CommonObserverCallback  = new CommonObserverCallback(this);
+    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
 
     onIndexChange() {
@@ -206,13 +204,13 @@ export struct PhotoGridPage {
                 this.broadCast.emit(BroadCastConstants.SHOW_DETAIL_DIALOG, [selectItems[0], this.isDistributedAlbum]);
             });
         } else {
-            await this.mSelectManager.getSelectedItems((selectItems:MediaItem[]) => {
+            await this.mSelectManager.getSelectedItems((selectItems: MediaItem[]) => {
                 if (selectItems.length <= 1) {
                     this.logger.error('get selectItems is error');
                     return;
                 }
                 let size = 0;
-                selectItems.forEach((item) =>{
+                selectItems.forEach((item) => {
                     size = size + item.size;
                 })
 
@@ -226,7 +224,7 @@ export struct PhotoGridPage {
     routerAblumSetPage() {
         router.replace({
             uri: this.isHorizontal === true ? 'product/pad/view/index' : 'product/phone/view/index',
-            params:{
+            params: {
                 jumpSource: JumpSourceToMain.ALBUM,
             }
         });
@@ -237,8 +235,8 @@ export struct PhotoGridPage {
         router.push({
             uri: 'common/view/browserOperation/MediaOperationPage',
             params: {
-                pageType : pageType,
-                albumId : this.albumInfo.id
+                pageType: pageType,
+                albumId: this.albumInfo.id
             }
         });
     }
@@ -247,7 +245,7 @@ export struct PhotoGridPage {
         router.push({
             uri: 'feature/browser/view/album/AlbumSelect',
             params: {
-                albumInfo : JSON.stringify(this.albumInfo)
+                albumInfo: JSON.stringify(this.albumInfo)
             }
         });
     }
@@ -297,7 +295,9 @@ export struct PhotoGridPage {
                     bottom: `${64 + naviBarHeight}vp`
                 });
             } else {
-                UiUtil.showToast($r('app.string.download_failed_single'))};
+                UiUtil.showToast($r('app.string.download_failed_single'))
+            }
+            ;
         } else {
             UiUtil.showToast($r('app.string.download_progress_done'));
         }
@@ -364,7 +364,7 @@ export struct PhotoGridPage {
         let params = router.getParams();
         if (this.routerStart && params && params.pageType && params.albumInfo) {
             this.logger.info('MediaOperation back');
-            switch(params.pageType) {
+            switch (params.pageType) {
                 case MediaOperationType.Move:
                     this.moveOperation(JSON.parse(params.albumInfo.toString()));
                     break;
@@ -478,17 +478,17 @@ export struct PhotoGridPage {
 
         this.broadCast.on(BroadCastConstants.SELECT,
             (position: number, key: string, value: boolean, callback: Function) => {
-            if (self.mSelectManager.toggle(key, value)) {
-                self.logger.info('enter event process')
-                if (!self.isSelectedMode) {
-                    self.isSelectedMode = true;
+                if (self.mSelectManager.toggle(key, value)) {
+                    self.logger.info('enter event process')
+                    if (!self.isSelectedMode) {
+                        self.isSelectedMode = true;
+                    }
+                    callback();
                 }
-                callback();
-            }
-        });
+            });
         this.broadCast.on(BroadCastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaItem) => {
             let targetIndex = self.dataSource.getDataIndex(item);
-            if(targetIndex == Constants.NOT_FOUND) {
+            if (targetIndex == Constants.NOT_FOUND) {
                 self.logger.error('targetIndex is not found');
                 return;
             }
@@ -516,7 +516,7 @@ export struct PhotoGridPage {
         this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaItem) => {
             self.logger.info('JUMP_THIRD_PHOTO_BROWSER');
             let targetIndex = self.dataSource.getDataIndex(item);
-            if(targetIndex == Constants.NOT_FOUND) {
+            if (targetIndex == Constants.NOT_FOUND) {
                 self.logger.error('targetIndex is not found');
                 return;
             }
@@ -543,7 +543,7 @@ export struct PhotoGridPage {
         });
         this.appBroadCast.on(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
 
-        if(this.albumInfo.deviceId){
+        if (this.albumInfo.deviceId) {
             this.logger.info(`deviceId size: ${this.albumInfo.deviceId}`);
             this.appBroadCast.on(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
         }
@@ -569,7 +569,7 @@ export struct PhotoGridPage {
         this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, () => {
             this.logger.info('ON_DATA_RELOADED');
             if (this.deleteMode) {
-                animateTo({duration: Constants.DELETE_ANIMATE_DURATION}, ()=>{
+                animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => {
                     this.dataSource.onDataReloaded();
                 })
                 this.deleteMode = false;
@@ -602,11 +602,11 @@ export struct PhotoGridPage {
             this.logger.debug(`other device`);
             return;
         }
-        if(res == Constants.DEVICE_STATE_OFFLINE) {
+        if (res == Constants.DEVICE_STATE_OFFLINE) {
             this.logger.debug(`device offline route to album main`);
             router.back({
                 uri: this.isHorizontal === true ? 'product/pad/view/index' : 'product/phone/view/index',
-                params:{
+                params: {
                     jumpSource: JumpSourceToMain.ALBUM,
                 }
             });
@@ -616,7 +616,7 @@ export struct PhotoGridPage {
         }
     }
 
-    onMediaLibDataChange(changeType){
+    onMediaLibDataChange(changeType) {
         this.logger.info(`onMediaLibDataChange type: ${changeType}`);
         this.dataSource.onChange(changeType);
     }
@@ -639,7 +639,7 @@ export struct PhotoGridPage {
                 isDistributedAlbum: this.isDistributedAlbum
             })
 
-            if(this.isEmpty) {
+            if (this.isEmpty) {
                 NoPhotoComponent({ title: $r('app.string.no_distributed_photo_head_title_album') })
             } else {
                 Stack() {
@@ -652,7 +652,9 @@ export struct PhotoGridPage {
                                     this.mSelectManager.isItemSelected(item.mediaItem.uri) : false,
                                     pageName: Constants.PHOTO_TRANSITION_ALBUM
                                 })
-                            }.columnStart(item.viewIndex % this.gridRowCount).columnEnd(item.viewIndex % this.gridRowCount)
+                            }
+                            .columnStart(item.viewIndex % this.gridRowCount)
+                            .columnEnd(item.viewIndex % this.gridRowCount)
                         }, item => item == null ? JSON.stringify(item) : item.mediaItem.uri)
                     }
                     .columnsTemplate('1fr '.repeat(this.gridRowCount))
@@ -660,7 +662,7 @@ export struct PhotoGridPage {
                     .rowsGap(Constants.GRID_GUTTER)
                     .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
 
-                    GridScrollBar({scroller: this.scroller});
+                    GridScrollBar({ scroller: this.scroller });
                 }.layoutWeight(1)
                 .padding({
                     bottom: ((this.isSelectedMode || (this.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE)) && !this.isHorizontal) ? Constants.ActionBarHeight : 0
@@ -680,11 +682,12 @@ export struct PhotoGridPage {
 
         }
         .backgroundColor($r('app.color.default_background_color'))
-            .padding({
-                top: this.leftBlank[1],
-                bottom: this.leftBlank[3]
-            })
+        .padding({
+            top: this.leftBlank[1],
+            bottom: this.leftBlank[3]
+        })
     }
+
     pageTransition() {
         PageTransitionEnter({ type: RouteType.None, duration: 1 })
             .opacity(0)

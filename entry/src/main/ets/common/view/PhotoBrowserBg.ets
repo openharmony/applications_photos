@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Constants as PhotoConstants} from '../../common/model/browser/photo/Constants'
+import { Constants as PhotoConstants } from '../../common/model/browser/photo/Constants'
 
 @Component
 export struct PhotoBrowserBg {
@@ -23,10 +23,10 @@ export struct PhotoBrowserBg {
         Column() {
         }
         .backgroundColor(this.backgroundColor)
-            .width('100%')
-            .height('100%')
-            .animation({
-                duration: PhotoConstants.IMMERSE_ANIM_DURATION
-            })
+        .width('100%')
+        .height('100%')
+        .animation({
+            duration: PhotoConstants.IMMERSE_ANIM_DURATION
+        })
     }
 }

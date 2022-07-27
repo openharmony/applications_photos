@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 import router from '@system.router'
-import {DateUtil} from '../../../../common/utils/DateUtil'
-import {Logger} from '../../utils/Logger'
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {MenuOperation} from '../../../../common/view/browserOperation/MenuOperation'
-import {PhotoBrowserActionBar} from './PhotoBrowserActionBar'
-import {BroadCast} from '../../../../common/utils/BroadCast'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager';
-import {BroadCastManager} from '../../../../common/model/common/BroadCastManager';
-import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants';
-import {TraceControllerUtils} from '../../../../common/utils/TraceControllerUtils';
+import { DateUtil } from '../../../../common/utils/DateUtil'
+import { Logger } from '../../utils/Logger'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { MenuOperation } from '../../../../common/view/browserOperation/MenuOperation'
+import { PhotoBrowserActionBar } from './PhotoBrowserActionBar'
+import { BroadCast } from '../../../../common/utils/BroadCast'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager';
+import { BroadCastManager } from '../../../../common/model/common/BroadCastManager';
+import { BroadCastConstants } from '../../../../common/model/common/BroadCastConstants';
+import { TraceControllerUtils } from '../../../../common/utils/TraceControllerUtils';
 
 @Entry
 @Component
@@ -88,7 +88,7 @@ struct VideoBrowser {
 
     build() {
         Stack({ alignContent: Alignment.TopStart }) {
-            Video({ src: this.uri, controller: this.myVideoController})
+            Video({ src: this.uri, controller: this.myVideoController })
                 .controls(this.isShowBar)
                 .objectFit(ImageFit.Contain)
                 .onClick(() => {
@@ -108,8 +108,8 @@ struct VideoBrowser {
             })
         }
         .width('100%')
-            .height('100%')
-            .backgroundColor($r('app.color.black'))
+        .height('100%')
+        .backgroundColor($r('app.color.black'))
     }
 
     pageTransition() {

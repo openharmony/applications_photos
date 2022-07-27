@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger'
-import {ScreenManager} from '../../model/common/ScreenManager';
-import {Constants} from '../../model/common/Constants';
+import { Logger } from '../../utils/Logger'
+import { ScreenManager } from '../../model/common/ScreenManager';
+import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class OperateParam {
@@ -46,7 +46,7 @@ export struct CopyOrMoveDialog {
                     .fontWeight(FontWeight.Medium)
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
             }.alignItems(VerticalAlign.Center)
-                .height($r('app.float.dialog_title_height'))
+            .height($r('app.float.dialog_title_height'))
 
 
             Row() {
@@ -80,7 +80,8 @@ export struct CopyOrMoveDialog {
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
 
-            }.alignItems(VerticalAlign.Center)
+            }
+            .alignItems(VerticalAlign.Center)
             .height($r('app.float.dialog_list_card_height'))
             .width('100%')
             .margin({
@@ -100,20 +101,22 @@ export struct CopyOrMoveDialog {
                         .fontWeight(FontWeight.Medium)
                 }
                 .backgroundColor($r('app.color.transparent'))
-                    .height($r('app.float.details_dialog_button_height'))
-                    .onClick(() => {
-                        this.controller.close()
-                    })
+                .height($r('app.float.details_dialog_button_height'))
+                .onClick(() => {
+                    this.controller.close()
+                })
             }.width('100%')
-                .height($r('app.float.details_dialog_button_area_height'))
-        }.padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
-            .alignItems(HorizontalAlign.Start).borderRadius($r('app.float.dialog_border_radius'))
-            .width(ScreenManager.getInstance().getColumnsWidth(4))
-            .backgroundColor($r('app.color.white'))
-            .margin({
-                right: $r('app.float.dialog_window_margin'),
-                left: $r('app.float.dialog_window_margin'),
-                bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
-            })
+            .height($r('app.float.details_dialog_button_area_height'))
+        }
+        .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
+        .alignItems(HorizontalAlign.Start)
+        .borderRadius($r('app.float.dialog_border_radius'))
+        .width(ScreenManager.getInstance().getColumnsWidth(4))
+        .backgroundColor($r('app.color.white'))
+        .margin({
+            right: $r('app.float.dialog_window_margin'),
+            left: $r('app.float.dialog_window_margin'),
+            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
+        })
     }
 }

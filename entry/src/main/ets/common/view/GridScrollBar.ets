@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Constants} from '../model/common/Constants'
 
 @Component
 export struct GridScrollBar {
@@ -22,7 +21,7 @@ export struct GridScrollBar {
 
     build() {
         ScrollBar({ scroller: this.scroller, direction: ScrollBarDirection.Vertical,
-            state: this.isHideScrollBar? BarState.Off: BarState.Auto }) {
+            state: this.isHideScrollBar ? BarState.Off : BarState.Auto }) {
             Row() {
                 if (this.isClickScrollBar) {
                     Image($r("app.media.scroll_press_light"))
@@ -38,12 +37,12 @@ export struct GridScrollBar {
         .height('100%')
         .width(this.isClickScrollBar
             ? $r('app.float.scroll_bar_margin_small') : $r('app.float.scroll_bar_small_width'),)
-        .position({x:'100%', y:0})
+        .position({ x: '100%', y: 0 })
         .markAnchor({
             x: this.isClickScrollBar ? $r('app.float.scroll_bar_big_width') : $r('app.float.scroll_bar_small_width'),
             y: 0
         })
-        .onTouch((event: TouchEvent)=> {
+        .onTouch((event: TouchEvent) => {
             if (event.type == TouchType.Down) {
                 this.isClickScrollBar = true;
             } else if (event.type == TouchType.Up) {

@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-import {ActionButton} from './ActionButton'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {ActionButtonInfo} from './MainMenuInfo'
-import {RefreshActionMenu, ActionChangedEvent} from './RefreshMenu'
-import {PhotoEditMode} from '../base/PhotoEditType'
-import {Constants} from '../../../common/model/common/Constants'
-import {PhotoEditorManager} from '../PhotoEditorManager'
-import {Logger} from '../utils/Logger'
+import { ActionButton } from './ActionButton'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { ActionButtonInfo } from './MainMenuInfo'
+import { RefreshActionMenu, ActionChangedEvent } from './RefreshMenu'
+import { PhotoEditMode } from '../base/PhotoEditType'
+import { Constants } from '../../../common/model/common/Constants'
+import { PhotoEditorManager } from '../PhotoEditorManager'
+import { Logger } from '../utils/Logger'
 
 @Component
 export struct ToolBar {

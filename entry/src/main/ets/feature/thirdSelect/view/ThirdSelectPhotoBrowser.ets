@@ -14,21 +14,21 @@
  */
 
 import router from '@system.router'
-import {Logger} from '../utils/Logger'
-import {SelectUtil} from '../../../common/model/browser/photo/SelectUtil'
-import {Action} from '../../../common/view/browserOperation/Action'
-import {Constants} from '../../../common/model/common/Constants'
-import {MediaItem} from '../../../common/model/browser/photo/MediaItem'
-import {PhotoDataSource} from '../../../common/model/browser/photo/PhotoDataSource'
-import {ThirdSelectManager} from '../../../common/model/browser/SelectManager'
-import {ThirdSelectPhotoBrowserActionBar} from '../../../common/view/ThirdSelectPhotoBrowserActionBar'
-import {PhotoBrowserBg} from '../../../common/view/PhotoBrowserBg'
-import {Constants as PhotoConstants} from '../../../common/model/browser/photo/Constants'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {PhotoSwiper} from '../../../common/view/PhotoSwiper'
-import {ScreenManager} from '../../../common/model/common/ScreenManager';
+import { Logger } from '../utils/Logger'
+import { SelectUtil } from '../../../common/model/browser/photo/SelectUtil'
+import { Action } from '../../../common/view/browserOperation/Action'
+import { Constants } from '../../../common/model/common/Constants'
+import { MediaItem } from '../../../common/model/browser/photo/MediaItem'
+import { PhotoDataSource } from '../../../common/model/browser/photo/PhotoDataSource'
+import { ThirdSelectManager } from '../../../common/model/browser/SelectManager'
+import { ThirdSelectPhotoBrowserActionBar } from '../../../common/view/ThirdSelectPhotoBrowserActionBar'
+import { PhotoBrowserBg } from '../../../common/view/PhotoBrowserBg'
+import { Constants as PhotoConstants } from '../../../common/model/browser/photo/Constants'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { PhotoSwiper } from '../../../common/view/PhotoSwiper'
+import { ScreenManager } from '../../../common/model/common/ScreenManager';
 import mMultimodalInputManager from '../../../common/model/common/MultimodalInputManager'
 
 // third selection photoBrowser

@@ -13,19 +13,18 @@
  * limitations under the License.
  */
 
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {ActionBar} from '../../../../common/view/actionbar/ActionBar'
-import {ActionBarProp} from '../../../../common/view/browserOperation/ActionBarProp'
-import {ActionBarMode, ActionBarSelectionMode} from '../../../../common/view/browserOperation/ActionBarMode'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {Logger} from '../../utils/Logger'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { ActionBar } from '../../../../common/view/actionbar/ActionBar'
+import { ActionBarProp } from '../../../../common/view/browserOperation/ActionBarProp'
+import { ActionBarMode, ActionBarSelectionMode } from '../../../../common/view/browserOperation/ActionBarMode'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
+import { Logger } from '../../utils/Logger'
 
 @Component
 export struct AlbumSelectActionBar {
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-
-    onMenuClicked : Function;
+    onMenuClicked: Function;
     logger: Logger = new Logger('AlbumSetPageActionBar');
 
     private createActionBar(): ActionBarProp {

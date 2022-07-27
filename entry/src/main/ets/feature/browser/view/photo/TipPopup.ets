@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {BroadCast} from '../../../../common/utils/BroadCast'
-import {Constants as PhotoConstants} from '../../../../common/model/browser/photo/Constants'
+import { BroadCast } from '../../../../common/utils/BroadCast'
+import { Constants as PhotoConstants } from '../../../../common/model/browser/photo/Constants'
 
 @Component
-export struct TipPopup{
+export struct TipPopup {
     @State isShowPop: boolean = false;
     @Consume broadCast: BroadCast;
 
@@ -36,7 +36,7 @@ export struct TipPopup{
                 .fontFamily($r('app.string.id_text_font_family_regular'))
                 .fontColor($r('app.color.white'))
                 .maxLines(1)
-                .textOverflow({overflow:TextOverflow.Ellipsis})
+                .textOverflow({ overflow: TextOverflow.Ellipsis })
                 .align(Alignment.Center)
         }
         .backgroundColor($r('app.color.detail_view_bg_color'))

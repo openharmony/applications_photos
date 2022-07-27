@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger'
-import {DateUtil} from '../../../common/utils/DateUtil'
-import {MediaLibraryAccess} from '../../access/MediaLibraryAccess';
-import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants';
+import { Logger } from '../../utils/Logger'
+import { DateUtil } from '../../../common/utils/DateUtil'
+import { MediaLibraryAccess } from '../../access/MediaLibraryAccess';
+import { ScreenManager } from '../../model/common/ScreenManager'
+import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class MediaDetails {
@@ -43,7 +43,6 @@ export struct DetailsDialog {
     sizeConvert = 1024;
     controller: CustomDialogController;
     dataTime: string;
-
     @Consume mediaDetails: MediaDetails;
     @Consume isDistributedAlbum: boolean;
     logger: Logger = new Logger('DetailsView');
@@ -88,7 +87,7 @@ export struct DetailsDialog {
                     .fontWeight(FontWeight.Medium)
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
             }.alignItems(VerticalAlign.Center)
-                .height($r('app.float.dialog_title_height'))
+            .height($r('app.float.dialog_title_height'))
 
             Row() {
                 Column() {
@@ -107,7 +106,7 @@ export struct DetailsDialog {
                         .padding({ right: $r('app.float.dialog_content_margin') })
                 }
             }.alignItems(VerticalAlign.Top)
-                .margin({ bottom: $r('sys.float.ohos_id_text_paragraph_margin_s') })
+            .margin({ bottom: $r('sys.float.ohos_id_text_paragraph_margin_s') })
 
             Row() {
                 Column() {
@@ -191,17 +190,17 @@ export struct DetailsDialog {
                             .fontColor($r('sys.color.ohos_id_color_text_primary'))
                     }
 
-                Column() {
-                    Text(this.getDisplayPath())
-                        .fontSize($r('sys.float.ohos_id_text_size_body2'))
-                        .fontFamily($r('app.string.id_text_font_family_regular'))
-                        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                        .maxLines(Constants.DETAILS_DIALOG_PATH_MAX_LINE)
-                        .padding({ right: $r('app.float.dialog_content_margin') })
+                    Column() {
+                        Text(this.getDisplayPath())
+                            .fontSize($r('sys.float.ohos_id_text_size_body2'))
+                            .fontFamily($r('app.string.id_text_font_family_regular'))
+                            .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                            .maxLines(Constants.DETAILS_DIALOG_PATH_MAX_LINE)
+                            .padding({ right: $r('app.float.dialog_content_margin') })
                     }
                 }.alignItems(VerticalAlign.Top)
                 .margin({
-                  bottom: $r('sys.float.ohos_id_text_paragraph_margin_s') })
+                    bottom: $r('sys.float.ohos_id_text_paragraph_margin_s') })
             }
 
             Stack({ alignContent: Alignment.Top }) {
@@ -214,21 +213,22 @@ export struct DetailsDialog {
                         .fontWeight(FontWeight.Medium)
                 }
                 .backgroundColor($r('app.color.transparent'))
-                    .height($r('app.float.details_dialog_button_height'))
-                    .onClick(() => {
-                        this.controller.close()
-                    })
+                .height($r('app.float.details_dialog_button_height'))
+                .onClick(() => {
+                    this.controller.close()
+                })
             }.width('100%')
-                .height($r('app.float.details_dialog_button_area_height'))
-        }.borderRadius($r('app.float.dialog_border_radius'))
+            .height($r('app.float.details_dialog_button_area_height'))
+        }
+        .borderRadius($r('app.float.dialog_border_radius'))
         .width(ScreenManager.getInstance().getColumnsWidth(4))
-            .backgroundColor($r('app.color.white'))
-            .margin({
-                right: $r('app.float.dialog_window_margin'),
-                left: $r('app.float.dialog_window_margin'),
-                bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
-            })
-            .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
-                .alignItems(HorizontalAlign.Start)
+        .backgroundColor($r('app.color.white'))
+        .margin({
+            right: $r('app.float.dialog_window_margin'),
+            left: $r('app.float.dialog_window_margin'),
+            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
+        })
+        .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
+        .alignItems(HorizontalAlign.Start)
     }
 }

@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import {ActionButtonInfo} from './MainMenuInfo'
-import {Constants} from '../../../common/model/common/Constants'
+import { ActionButtonInfo } from './MainMenuInfo'
+import { Constants } from '../../../common/model/common/Constants'
 
 export class RefreshActionMenu {
     isChanged: number;
@@ -29,7 +29,7 @@ export class RefreshActionMenu {
 export class ActionChangedEvent {
     static allChanged(menuChanged: RefreshActionMenu) {
         if (menuChanged.isChanged == Constants.NEGATIVE_1 || menuChanged.isChanged > menuChanged.menuArray.length
-            || menuChanged.isChanged == Constants.NEGATIVE_2) {
+        || menuChanged.isChanged == Constants.NEGATIVE_2) {
             menuChanged.isChanged = Constants.NEGATIVE_1;
             return;
         }

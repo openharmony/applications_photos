@@ -14,8 +14,8 @@
  */
 
 import router from '@system.router'
-import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants'
+import { ScreenManager } from '../../model/common/ScreenManager'
+import { Constants } from '../../model/common/Constants'
 
 @Observed
 export class EditExitDialogCallback {
@@ -33,17 +33,17 @@ export struct EditExitDialog {
 
     build() {
         Column() {
-            Stack({alignContent: Alignment.Center}) {
+            Stack({ alignContent: Alignment.Center }) {
                 Text($r('app.string.edit_exit_dialog_context_text'))
                     .fontSize($r('sys.float.ohos_id_text_size_body1'))
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
             }.width('100%')
             .margin({
-                top:$r('app.float.dialog_content_margin'),
+                top: $r('app.float.dialog_content_margin'),
                 bottom: $r('sys.float.ohos_id_text_paragraph_margin_s')
             })
 
-            Stack({alignContent: Alignment.Top}) {
+            Stack({ alignContent: Alignment.Top }) {
                 Row() {
                     Button() {
                         Text($r('app.string.save_dialog_cancel_text'))
@@ -71,6 +71,7 @@ export struct EditExitDialog {
                     }
                     .height($r('app.float.details_dialog_button_height'))
                     .alignItems(VerticalAlign.Center)
+
                     Button() {
                         Text($r('app.string.edit_exit_dialog_discard_text'))
                             .fontSize($r('sys.float.ohos_id_text_size_button1'))
@@ -103,7 +104,7 @@ export struct EditExitDialog {
             left: $r('app.float.dialog_window_margin'),
             bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
         })
-        .padding({left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin')})
+        .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
         .alignItems(HorizontalAlign.Start)
     }
 }

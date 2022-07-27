@@ -13,32 +13,31 @@
  * limitations under the License.
  */
 
-import {AlbumInfo} from '../../../../common/model/browser/album/AlbumInfo';
-import {EmptyAlbumComponent} from './EmptyAlbumComponent';
-import {Logger} from '../../utils/Logger'
-import {BroadCast} from '../../../../common//utils/BroadCast'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
+import { AlbumInfo } from '../../../../common/model/browser/album/AlbumInfo';
+import { EmptyAlbumComponent } from './EmptyAlbumComponent';
+import { Logger } from '../../utils/Logger'
+import { BroadCast } from '../../../../common//utils/BroadCast'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
 import router from '@system.router';
-import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine'
-import {SelectManager} from '../../../../common/model/browser/SelectManager'
-import {Constants} from '../../../../common/model/common/Constants'
+import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine'
+import { SelectManager } from '../../../../common/model/browser/SelectManager'
+import { Constants } from '../../../../common/model/common/Constants'
 
 // The item of album grid, and it's new style.
 @Component
 export struct AlbumSelectGridItemNewStyle {
     private staticIconList = new Map([
-        [AlbumDefine.ALBUM_ID_VIDEO , $r('app.media.ic_video')],
+        [AlbumDefine.ALBUM_ID_VIDEO, $r('app.media.ic_video')],
         [AlbumDefine.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
     ]);
     @State @Watch('updateCard') item: AlbumInfo = new AlbumInfo('', '', '', '', 0, '', '');
     @State isEmptyAlbum: boolean = false;
     @Provide isBigCard: boolean = false;
     @Provide gridHeight: number = 0;
-    @State bigWidth:number = 0;
+    @State bigWidth: number = 0;
     @Consume broadCast: BroadCast;
     private logger: Logger = new Logger('AlbumSelectGridItemNewStyle');
-    mSelectManager : SelectManager;
-
+    mSelectManager: SelectManager;
     gridAspectRatio = Constants.CARD_ASPECT_RATIO;
     albumCountMarginRight = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN * 2;
     iconMarkAnchorX = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
@@ -64,7 +63,7 @@ export struct AlbumSelectGridItemNewStyle {
         this.logger.info(`is big card : ${this.isBigCard}`);
 
         if (Constants.ANGLE_90 == this.item.coverOrientation
-            || Constants.ANGLE_270 == this.item.coverOrientation) {
+        || Constants.ANGLE_270 == this.item.coverOrientation) {
             this.cardWidth = this.gridHeight;
             if (this.isBigCard) {
                 this.cardHeight = this.bigWidth;
@@ -147,19 +146,19 @@ export struct AlbumSelectGridItemNewStyle {
             Image($r('app.media.gradient_mask_layer'))
                 .height('50%')
                 .width('100%')
-                .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
+                .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
             Column() {
                 Text(this.item.displayName)
-                    .margin({right: $r('app.float.album_set_name_margin_right')})
-                    .textOverflow({overflow: TextOverflow.Ellipsis})
+                    .margin({ right: $r('app.float.album_set_name_margin_right') })
+                    .textOverflow({ overflow: TextOverflow.Ellipsis })
                     .maxLines(1)
                     .fontWeight(FontWeight.Medium)
                     .fontSize($r('sys.float.ohos_id_text_size_sub_title1'))
                     .fontColor($r('app.color.white'))
 
                 Text(String(this.item.count))
-                    .margin({right: this.albumCountMarginRight})
-                    .textOverflow({overflow: TextOverflow.Ellipsis})
+                    .margin({ right: this.albumCountMarginRight })
+                    .textOverflow({ overflow: TextOverflow.Ellipsis })
                     .maxLines(1)
                     .fontColor($r('app.color.white'))
                     .fontWeight(FontWeight.Regular)
@@ -167,8 +166,8 @@ export struct AlbumSelectGridItemNewStyle {
             }
             .width('100%')
             .alignItems(HorizontalAlign.Start)
-            .margin({left: $r('app.float.album_set_count_margin_left'),
-                bottom: $r('app.float.album_set_count_margin_bottom')})
+            .margin({ left: $r('app.float.album_set_count_margin_left'),
+                bottom: $r('app.float.album_set_count_margin_bottom') })
 
 
             if (this.staticIconList.has(this.item.name)) {

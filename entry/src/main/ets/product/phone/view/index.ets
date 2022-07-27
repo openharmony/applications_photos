@@ -13,18 +13,18 @@
  * limitations under the License.
  */
 
-import {TimelinePage} from '../../../feature/timeline/view/TimelinePage'
-import {AlbumSetPage} from '../../../feature/browser/view/album/AlbumSetPage'
-import {Logger} from '../../../common/utils/Logger'
-import {TabBar} from '../../../common/view/TabBar'
-import {TabItem} from '../../../common/model/common/TabItem'
-import {JumpSourceToMain} from '../../../common/model/browser/photo/JumpSourceToMain'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
-import {Constants} from '../../../common/model/common/Constants'
-import {ScreenManager} from '../../../common/model/common/ScreenManager'
-import {TraceControllerUtils} from '../../../common/utils/TraceControllerUtils'
+import { TimelinePage } from '../../../feature/timeline/view/TimelinePage'
+import { AlbumSetPage } from '../../../feature/browser/view/album/AlbumSetPage'
+import { Logger } from '../../../common/utils/Logger'
+import { TabBar } from '../../../common/view/TabBar'
+import { TabItem } from '../../../common/model/common/TabItem'
+import { JumpSourceToMain } from '../../../common/model/browser/photo/JumpSourceToMain'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
+import { Constants } from '../../../common/model/common/Constants'
+import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import { TraceControllerUtils } from '../../../common/utils/TraceControllerUtils'
 import router from '@system.router'
 
 @Entry
@@ -42,7 +42,6 @@ struct IndexPage {
     @Provide isShow: boolean = true;
     @Provide isSelectedMode: boolean = false;
     @Provide isAlbumSetSelectedMode: boolean = false;
-
     @Provide screenHeight: number = 0.0;
     @Provide screenWidth: number = 0.0;
     private currentIndex: number = this.preIndex // Don't use @
@@ -96,7 +95,7 @@ struct IndexPage {
 
     onBackPress() {
         let isProcessed = false;
-        this.appBroadCast.emit(BroadCastConstants.BACK_PRESS_EVENT, [function(isModeChanged: boolean) {
+        this.appBroadCast.emit(BroadCastConstants.BACK_PRESS_EVENT, [function(isModeChanged: boolean){
             isProcessed = isModeChanged;
         }.bind(this)]);
         return isProcessed;
@@ -130,17 +129,17 @@ struct IndexPage {
                         }
                     }
                     .animationDuration(0)
-                        .vertical(true)
-                        .scrollable(false)
-                        .barMode(BarMode.Fixed)
-                        .barWidth(0)
-                        .barHeight(0)
-                        .flexGrow(1)
-                        .onChange((index: number) => {
-                            this.resetTabState(this.currentIndex)
-                            this.onTabChanged(index);
-                            this.logger.info(`Switch to Tab ${this.currentIndex}.`)
-                        })
+                    .vertical(true)
+                    .scrollable(false)
+                    .barMode(BarMode.Fixed)
+                    .barWidth(0)
+                    .barHeight(0)
+                    .flexGrow(1)
+                    .onChange((index: number) => {
+                        this.resetTabState(this.currentIndex)
+                        this.onTabChanged(index);
+                        this.logger.info(`Switch to Tab ${this.currentIndex}.`)
+                    })
 
                     TabBar({
                         currentIndex: this.currentIndex,
@@ -153,12 +152,13 @@ struct IndexPage {
             }
         }
         .backgroundColor($r('app.color.default_background_color'))
-            .padding({
-                top: this.leftBlank[1],
-                bottom: this.leftBlank[3]
-            })
+        .padding({
+            top: this.leftBlank[1],
+            bottom: this.leftBlank[3]
+        })
 
     }
+
     pageTransition() {
         PageTransitionEnter({ type: RouteType.None, duration: 1 })
             .opacity(0)

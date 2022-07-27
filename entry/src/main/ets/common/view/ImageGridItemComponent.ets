@@ -13,16 +13,15 @@
  * limitations under the License.
  */
 
-import {Logger} from '../utils/Logger'
-import {Constants} from '../model/common/Constants'
-import {MediaItem} from '../model/browser/photo/MediaItem'
-import {DateUtil} from '../utils/DateUtil'
-import {BroadCast} from '../utils/BroadCast'
-import {BroadCastConstants} from '../model/common/BroadCastConstants'
-import image from '@ohos.multimedia.image'
-import {ImageUtil} from '../utils/ImageUtil'
-import {ScreenManager} from '../model/common/ScreenManager'
-import {TraceControllerUtils} from '../utils/TraceControllerUtils'
+import { Logger } from '../utils/Logger'
+import { Constants } from '../model/common/Constants'
+import { MediaItem } from '../model/browser/photo/MediaItem'
+import { DateUtil } from '../utils/DateUtil'
+import { BroadCast } from '../utils/BroadCast'
+import { BroadCastConstants } from '../model/common/BroadCastConstants'
+import { ImageUtil } from '../utils/ImageUtil'
+import { ScreenManager } from '../model/common/ScreenManager'
+import { TraceControllerUtils } from '../utils/TraceControllerUtils'
 import { MediaLibraryAccess } from '../access/MediaLibraryAccess';
 
 // General grid picture control
@@ -130,8 +129,8 @@ export struct ImageGridItemComponent {
     selectStateChange() {
         this.logger.info('change selected.');
         let newState = !this.isSelected;
-        if(this.item.uri) {
-            this.broadCast.emit(BroadCastConstants.SELECT, [this.position, this.item.uri, newState, function() {
+        if (this.item.uri) {
+            this.broadCast.emit(BroadCastConstants.SELECT, [this.position, this.item.uri, newState, function(){
                 this.logger.info('enter callback');
                 this.isSelected = newState;
             }.bind(this)]);
@@ -161,7 +160,7 @@ export struct ImageGridItemComponent {
                         .objectFit(ImageFit.Cover)
                         .autoResize(false)
                         .onError(() => {
-                            if(this.imageThumbnail) {
+                            if (this.imageThumbnail) {
                                 this.useAlt = true;
                             }
                             this.logger.error('alt Image error');
@@ -169,7 +168,7 @@ export struct ImageGridItemComponent {
                         .onComplete(() => {
                             this.logger.debug(`Draw the image! ${this.imageThumbnail}`);
                         })
-                }.sharedTransition(this.transitionId, {duration : Constants.SHARE_TRANSITION_DURATION})
+                }.sharedTransition(this.transitionId, { duration: Constants.SHARE_TRANSITION_DURATION })
 
                 if (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) {
                     Column()
@@ -184,7 +183,10 @@ export struct ImageGridItemComponent {
                         .fontColor($r('app.color.text_color_above_picture'))
                         .lineHeight($r('app.float.grid_item_text_line_height'))
                         .position({ x: '0%', y: '100%' })
-                        .markAnchor({ x: $r('app.float.grid_item_duration_markAnchor_x'), y: $r('app.float.grid_item_duration_markAnchor_y') })
+                        .markAnchor({
+                            x: $r('app.float.grid_item_duration_markAnchor_x'),
+                            y: $r('app.float.grid_item_duration_markAnchor_y')
+                        })
                         .margin({ right: $r('app.float.grid_item_duration_margin_right') })
                 }
 
@@ -193,14 +195,17 @@ export struct ImageGridItemComponent {
                     .width($r('app.float.icon_size'))
                     .objectFit(ImageFit.Contain)
                     .position({ x: '100%', y: '0%' })
-                    .markAnchor({ x: $r('app.float.grid_item_favor_markAnchor_x'), y: $r('app.float.grid_item_favor_markAnchor_y') })
+                    .markAnchor({
+                        x: $r('app.float.grid_item_favor_markAnchor_x'),
+                        y: $r('app.float.grid_item_favor_markAnchor_y')
+                    })
                     .visibility(this.item.isFavor ? Visibility.Visible : Visibility.None)
 
                 Column()
                     .height('100%')
                     .width('100%')
                     .backgroundColor(this.isSelected && this.isSelectedMode ?
-                        $r('app.color.item_selection_bg_color') : $r('app.color.transparent'))
+                    $r('app.color.item_selection_bg_color') : $r('app.color.transparent'))
                     .onClick(() => {
                         if (this.isSelectedMode) {
                             this.selectStateChange();
@@ -233,45 +238,48 @@ export struct ImageGridItemComponent {
                     .height($r('app.float.icon_size'))
                     .width($r('app.float.icon_size'))
                     .position({ x: '100%', y: '100%' })
-                    .markAnchor({ x: $r('app.float.grid_item_checkbox_markAnchor'), y: $r('app.float.grid_item_checkbox_markAnchor') })
+                    .markAnchor({
+                        x: $r('app.float.grid_item_checkbox_markAnchor'),
+                        y: $r('app.float.grid_item_checkbox_markAnchor')
+                    })
                     .visibility(this.isSelectedMode ? Visibility.Visible : Visibility.None)
                     .onClick(() => {
                         this.selectStateChange();
                     })
             }
             .gesture(
-                LongPressGesture()
-                    .onAction((event: GestureEvent) => {
-                        this.logger.info(`LongPressGesture ${event}`);
-                        this.selectStateChange();
-                        this.pressAnimScale = 1;
-                    })
+            LongPressGesture()
+                .onAction((event: GestureEvent) => {
+                    this.logger.info(`LongPressGesture ${event}`);
+                    this.selectStateChange();
+                    this.pressAnimScale = 1;
+                })
             )
         }
         .scale({
             x: this.pressAnimScale,
             y: this.pressAnimScale
         })
-            .alignItems(HorizontalAlign.Start)
-            .animation({
-                duration: Constants.PRESS_ANIM_DURATION,
-                curve: Curve.Ease
-            })
-            .onTouch(event => {
-                this.logger.info(`onTouch trigger: isSelectedMode: ${this.isSelectedMode},
+        .alignItems(HorizontalAlign.Start)
+        .animation({
+            duration: Constants.PRESS_ANIM_DURATION,
+            curve: Curve.Ease
+        })
+        .onTouch(event => {
+            this.logger.info(`onTouch trigger: isSelectedMode: ${this.isSelectedMode},
                     isEnteringPhoto: ${this.isEnteringPhoto}, ${JSON.stringify(event)}`);
-                if (this.isSelectedMode) {
-                    return;
-                }
+            if (this.isSelectedMode) {
+                return;
+            }
 
-                // Press animation
-                if (event.type == TouchType.Down) {
-                    this.pressAnimScale = Constants.PRESS_ANIM_SCALE;
-                }
+            // Press animation
+            if (event.type == TouchType.Down) {
+                this.pressAnimScale = Constants.PRESS_ANIM_SCALE;
+            }
 
-                if (event.type == TouchType.Up && !this.isEnteringPhoto && this.pressAnimScale != 1) {
-                    this.pressAnimScale = 1;
-                }
-            })
+            if (event.type == TouchType.Up && !this.isEnteringPhoto && this.pressAnimScale != 1) {
+                this.pressAnimScale = 1;
+            }
+        })
     }
 }

@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {ActionBar} from '../../../../common/view/actionbar/ActionBar'
-import {ActionBarProp} from '../../../../common/view/browserOperation/ActionBarProp'
-import {ActionBarMode} from '../../../../common/view/browserOperation/ActionBarMode'
-import {Logger} from '../../utils/Logger'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { ActionBar } from '../../../../common/view/actionbar/ActionBar'
+import { ActionBarProp } from '../../../../common/view/browserOperation/ActionBarProp'
+import { ActionBarMode } from '../../../../common/view/browserOperation/ActionBarMode'
+import { Logger } from '../../utils/Logger'
 
 @Component
 export struct DistributedAlbumSetPageActionBar {
     name: Resource;
-    onMenuClicked : Function;
+    onMenuClicked: Function;
     @Provide moreMenuList: Action[] = [];
     logger: Logger = new Logger('DistributedAlbumSetPageActionBar');
 

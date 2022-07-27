@@ -50,7 +50,6 @@ export class TabItem {
 export class TabItemWithText {
     name: Resource;
     isSelected: boolean;
-
     textSizeDefault: Resource = $r('sys.float.ohos_id_text_size_body1');
     textSizeSelected: Resource = $r('sys.float.ohos_id_text_size_sub_title2');
     textWeightDefault: FontWeight = FontWeight.Regular;
@@ -58,7 +57,7 @@ export class TabItemWithText {
     textColorDefault: Resource = $r('sys.color.ohos_id_color_bottom_tab_text_off');
     textColorSelected: Resource = $r('app.color.color_system_highlight');
 
-    constructor (name: Resource, isSelected: boolean) {
+    constructor(name: Resource, isSelected: boolean) {
         this.name = name;
         this.isSelected = isSelected;
     }

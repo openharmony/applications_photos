@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {MediaOperationType} from '../../model/common/MediaOperationType'
-import {Logger} from '../../utils/Logger';
-import {ScreenManager} from '../../model/common/ScreenManager';
-import {Constants} from '../../model/common/Constants';
+import { MediaOperationType } from '../../model/common/MediaOperationType'
+import { Logger } from '../../utils/Logger';
+import { ScreenManager } from '../../model/common/ScreenManager';
+import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class ProgressParam {
@@ -34,7 +34,6 @@ export struct ProgressDialog {
     @Consume progressMessage: Resource;
     @Consume deleteProgress: number;
     @Consume progressParam: ProgressParam;
-
     logger: Logger = new Logger('ProgressDialog');
 
     build() {
@@ -67,7 +66,7 @@ export struct ProgressDialog {
                         right: $r('app.float.progress_padding_right')
                     })
                 if (this.progressParam.operationType != MediaOperationType.Delete &&
-                    this.progressParam.operationType != MediaOperationType.Recover) {
+                this.progressParam.operationType != MediaOperationType.Recover) {
                     Image($r('app.media.ic_progress_cancel'))
                         .width($r('app.float.icon_size'))
                         .height($r('app.float.icon_size'))

@@ -12,10 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {DialogCallback} from '../../model/common/DialogUtil'
+import { DialogCallback } from '../../model/common/DialogUtil'
 import { Logger } from '../../utils/Logger'
-import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants'
+import { ScreenManager } from '../../model/common/ScreenManager'
+import { Constants } from '../../model/common/Constants'
 
 @CustomDialog
 export struct DeleteDialog {
@@ -33,17 +33,17 @@ export struct DeleteDialog {
 
     build() {
         Column() {
-            Stack({alignContent: Alignment.Center}) {
+            Stack({ alignContent: Alignment.Center }) {
                 Text(this.dialogMessage)
                     .fontSize($r('sys.float.ohos_id_text_size_body1'))
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
             }.width('100%')
-                .margin({
-                    top:$r('app.float.dialog_content_margin'),
-                    bottom: $r('sys.float.ohos_id_text_paragraph_margin_s')
-                })
+            .margin({
+                top: $r('app.float.dialog_content_margin'),
+                bottom: $r('sys.float.ohos_id_text_paragraph_margin_s')
+            })
 
-            Stack({alignContent: Alignment.Top}) {
+            Stack({ alignContent: Alignment.Top }) {
                 Row() {
                     Button() {
                         Text($r('app.string.dialog_cancel'))
@@ -57,22 +57,23 @@ export struct DeleteDialog {
                         left: $r('app.float.details_dialog_button_margin_left'),
                         right: $r('app.float.details_dialog_button_margin_right')
                     })
-                        .backgroundColor($r('app.color.transparent'))
-                        .height($r('app.float.details_dialog_button_height'))
-                        .onClick(() => {
-                            this.logger.debug(`cancelCallback`);
-                            this.controller.close();
-                            this.dialogCallback && this.dialogCallback.cancelCallback();
-                        })
+                    .backgroundColor($r('app.color.transparent'))
+                    .height($r('app.float.details_dialog_button_height'))
+                    .onClick(() => {
+                        this.logger.debug(`cancelCallback`);
+                        this.controller.close();
+                        this.dialogCallback && this.dialogCallback.cancelCallback();
+                    })
 
                     Row() {
                         Divider()
-                        .vertical(true)
+                            .vertical(true)
                             .height($r('app.float.dialog_divider_height'))
                             .color($r('app.color.divider_vertical_color'))
                     }
                     .height($r('app.float.details_dialog_button_height'))
-                        .alignItems(VerticalAlign.Center)
+                    .alignItems(VerticalAlign.Center)
+
                     Button() {
                         Text($r('app.string.dialog_delete'))
                             .fontSize($r('sys.float.ohos_id_text_size_button1'))
@@ -85,27 +86,27 @@ export struct DeleteDialog {
                         left: $r('app.float.details_dialog_button_margin_left'),
                         right: $r('app.float.details_dialog_button_margin_right')
                     })
-                        .backgroundColor($r('app.color.transparent'))
-                        .height($r('app.float.details_dialog_button_height'))
-                        .onClick(() => {
-                            this.logger.debug(`confirmCallback`);
-                            this.controller.close();
-                            this.dialogCallback && this.dialogCallback.confirmCallback();
-                        })
+                    .backgroundColor($r('app.color.transparent'))
+                    .height($r('app.float.details_dialog_button_height'))
+                    .onClick(() => {
+                        this.logger.debug(`confirmCallback`);
+                        this.controller.close();
+                        this.dialogCallback && this.dialogCallback.confirmCallback();
+                    })
                 }
             }
             .width('100%')
-                .height($r('app.float.details_dialog_button_area_height'))
+            .height($r('app.float.details_dialog_button_area_height'))
         }
         .borderRadius($r('app.float.dialog_border_radius'))
-            .width(ScreenManager.getInstance().getColumnsWidth(4))
-            .backgroundColor($r('app.color.white'))
-            .margin({
-                right: $r('app.float.dialog_window_margin'),
-                left: $r('app.float.dialog_window_margin'),
-                bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
-            })
-            .padding({left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin')})
-                .alignItems(HorizontalAlign.Start)
+        .width(ScreenManager.getInstance().getColumnsWidth(4))
+        .backgroundColor($r('app.color.white'))
+        .margin({
+            right: $r('app.float.dialog_window_margin'),
+            left: $r('app.float.dialog_window_margin'),
+            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
+        })
+        .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
+        .alignItems(HorizontalAlign.Start)
     }
 }

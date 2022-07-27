@@ -13,35 +13,35 @@
  * limitations under the License.
  */
 
-import {AlbumSetDataSource} from '../../../../common/model/browser/album/AlbumSetDataSource'
-import {Constants} from '../../../../common/model/common/Constants'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {BroadCast} from '../../../../common/utils/BroadCast'
-import {NoPhotoIndexComponent} from '../../../../common/view/NoPhotoIndexComponent'
-import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants'
-import {BroadCastManager} from '../../../../common/model/common/BroadCastManager'
-import {TraceControllerUtils} from '../../../../common/utils/TraceControllerUtils'
-import {TabBarForAlbumSet} from '../../../../common/view/TabBar'
-import {TabItemWithText} from '../../../../common/model/common/TabItem'
-import {AlbumSetSelectManager} from '../../../../common/model/browser/SelectManager'
-import {AlbumSetNewMenuOperation} from '../../../../common/view/browserOperation/AlbumSetNewMenuOperation'
-import {DistributedDataSource} from '../../../../common/model/browser/album/DistributedDataSource'
-import {MenuContext} from '../../../../common/view/browserOperation/MenuContext'
-import {MenuOperation} from '../../../../common/view/browserOperation/MenuOperation'
-import {MenuOperationFactory} from '../../../../common/interface/MenuOperationFactory'
-import {CustomDialogView} from '../../../../common/view/dialog/CustomDialogView'
-import {Action} from '../../../../common/view/browserOperation/Action'
+import { AlbumSetDataSource } from '../../../../common/model/browser/album/AlbumSetDataSource'
+import { Constants } from '../../../../common/model/common/Constants'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
+import { BroadCast } from '../../../../common/utils/BroadCast'
+import { NoPhotoIndexComponent } from '../../../../common/view/NoPhotoIndexComponent'
+import { BroadCastConstants } from '../../../../common/model/common/BroadCastConstants'
+import { BroadCastManager } from '../../../../common/model/common/BroadCastManager'
+import { TraceControllerUtils } from '../../../../common/utils/TraceControllerUtils'
+import { TabBarForAlbumSet } from '../../../../common/view/TabBar'
+import { TabItemWithText } from '../../../../common/model/common/TabItem'
+import { AlbumSetSelectManager } from '../../../../common/model/browser/SelectManager'
+import { AlbumSetNewMenuOperation } from '../../../../common/view/browserOperation/AlbumSetNewMenuOperation'
+import { DistributedDataSource } from '../../../../common/model/browser/album/DistributedDataSource'
+import { MenuContext } from '../../../../common/view/browserOperation/MenuContext'
+import { MenuOperation } from '../../../../common/view/browserOperation/MenuOperation'
+import { MenuOperationFactory } from '../../../../common/interface/MenuOperationFactory'
+import { CustomDialogView } from '../../../../common/view/dialog/CustomDialogView'
+import { Action } from '../../../../common/view/browserOperation/Action'
 import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback'
 import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver'
-import {UiUtil} from '../../../../common/utils/UiUtil'
-import {Logger} from '../../utils/Logger'
+import { UiUtil } from '../../../../common/utils/UiUtil'
+import { Logger } from '../../utils/Logger'
 
-import {AlbumSetPageActionBar} from './AlbumSetPageActionBar'
-import {AlbumSetPageToolBar} from './AlbumSetPageToolBar'
-import {AlbumGridItemNewStyle} from './AlbumGridItemNewStyle'
-import {DistributedAlbumGriItem} from './DistributedAlbumGriItem'
-import {AlbumSetDeleteMenuOperation} from './AlbumSetDeleteMenuOperation'
-import {AlbumSetRenameMenuOperation} from './AlbumSetRenameMenuOperation'
+import { AlbumSetPageActionBar } from './AlbumSetPageActionBar'
+import { AlbumSetPageToolBar } from './AlbumSetPageToolBar'
+import { AlbumGridItemNewStyle } from './AlbumGridItemNewStyle'
+import { DistributedAlbumGriItem } from './DistributedAlbumGriItem'
+import { AlbumSetDeleteMenuOperation } from './AlbumSetDeleteMenuOperation'
+import { AlbumSetRenameMenuOperation } from './AlbumSetRenameMenuOperation'
 
 // Album Set Page
 @Component
@@ -51,57 +51,40 @@ export struct AlbumSetPage {
         new TabItemWithText($r('app.string.other_equipment'), false)
     ];
     @Consume @Watch('onModeChange') isAlbumSetSelectedMode: boolean;
-
     @Provide('selectedCount') selectedAlbumsCount: number = 0;
-
     @Provide isDisableDelete: boolean = false;
-
     @Provide isDisableRename: boolean = false;
-
     @State isEmpty: boolean = true;
     @Provide gridColumnsCount: number = 0;
     @Provide broadCast: BroadCast = new BroadCast();
     @Consume @Watch('onIndexPageShow') isShow: boolean;
-
     albums: AlbumSetDataSource = new AlbumSetDataSource(this.broadCast);
     distributed: DistributedDataSource = new DistributedDataSource(this.broadCast);
-    private dataObserver: CommonObserverCallback  = new CommonObserverCallback(this);
-
+    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
     appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
-
     isInCurrentTab = false;
-
     isActive = false; // Whether the page is in the foreground
 
     logger: Logger = new Logger('AlbumSetPage');
-
     scroller: Scroller = new Scroller();
-
     @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-
     mSelectManager = new AlbumSetSelectManager();
-
     isDataFreeze: boolean = false;
 
     // the switch of distributed page
     @Provide isTabBarShow: boolean = false;
-
     @Provide moreMenuList: Action[] = new Array<Action>();
-
     private tabsController: TabsController = new TabsController();
-
     private currentIndex: number = Constants.LOCAL_TAB_INDEX;
-
     private needNotify = false;
-
     private ignoreLocalNotify = false;
 
     onMenuClicked(action: Action, arg: any[]) {
         this.logger.info(`onMenuClicked, action: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
-        switch(action) {
-            case  Action.NEW:
+        switch (action) {
+            case Action.NEW:
                 menuContext = new MenuContext();
                 this.onOperationStart = this.onOperationStart.bind(this);
                 this.onOperationEnd = this.onOperationEnd.bind(this);
@@ -111,13 +94,13 @@ export struct AlbumSetPage {
                     .withAlbumSetDataSource(this.albums)
                     .withBroadCast(this.broadCast);
                 menuOperation
-                    = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetNewMenuOperation, menuContext);
+                = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetNewMenuOperation, menuContext);
                 menuOperation.doAction();
                 break;
-            case  Action.CANCEL:
+            case Action.CANCEL:
                 this.isAlbumSetSelectedMode = false;
                 break;
-            case  Action.RENAME:
+            case Action.RENAME:
                 menuContext = new MenuContext();
                 this.onOperationStart = this.onOperationStart.bind(this);
                 this.onOperationEnd = this.onOperationEnd.bind(this);
@@ -127,10 +110,10 @@ export struct AlbumSetPage {
                     .withOperationEndCallback(this.onOperationEnd)
                     .withBroadCast(this.broadCast);
                 menuOperation
-                    = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetRenameMenuOperation, menuContext);
+                = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetRenameMenuOperation, menuContext);
                 menuOperation.doAction();
                 break;
-            case  Action.DELETE:
+            case Action.DELETE:
                 menuContext = new MenuContext();
                 this.onOperationStart = this.onOperationStart.bind(this);
                 this.onOperationEnd = this.onOperationEnd.bind(this);
@@ -140,7 +123,7 @@ export struct AlbumSetPage {
                     .withOperationEndCallback(this.onOperationEnd)
                     .withBroadCast(this.broadCast);
                 menuOperation
-                    = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetDeleteMenuOperation, menuContext);
+                = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetDeleteMenuOperation, menuContext);
                 menuOperation.doAction();
                 break;
             default:
@@ -185,9 +168,9 @@ export struct AlbumSetPage {
 
         this.initGridRowCount();
 
-        let self  = this;
+        let self = this;
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        this.broadCast.on(BroadCastConstants.SELECT, function(
+        this.broadCast.on(BroadCastConstants.SELECT, function (
                 key: string, value: boolean, isDisableRename: boolean, isDisableDelete: boolean, callback: Function) {
             self.mSelectManager.toolBarStateToggle(key, value, isDisableRename, isDisableDelete);
             if (self.mSelectManager.toggle(key, value)) {
@@ -196,12 +179,12 @@ export struct AlbumSetPage {
             }
         });
 
-        this.mSelectManager.registerCallback('updateCount', this.freezeAdapter(function(newState: number) {
+        this.mSelectManager.registerCallback('updateCount', this.freezeAdapter(function (newState: number) {
             self.logger.info(`updateSelectedCount ${newState}`);
             self.selectedAlbumsCount = newState;
         }));
         this.mSelectManager.registerCallback('updateToolBarState', this.freezeAdapter(
-            function(isDisableRename: boolean, isDisableDelete: boolean) {
+            function (isDisableRename: boolean, isDisableDelete: boolean) {
                 self.logger.info(`updateToolBarState:\
                     isDisableRename: ${isDisableRename}, isDisableDelete: ${isDisableDelete}`);
                 self.isDisableRename = isDisableRename
@@ -252,7 +235,7 @@ export struct AlbumSetPage {
 
     freezeAdapter(fn): Function {
         let self = this;
-        return function() {
+        return function () {
             if (self.isDataFreeze) {
                 return;
             }
@@ -363,14 +346,14 @@ export struct AlbumSetPage {
         let contentWidth = ScreenManager.getInstance().getWinWidth() - sideBarWidth;
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         this.gridColumnsCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
-            / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
+        / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
         this.logger.info(`the grid count in a line is: ${this.gridColumnsCount}`);
 
     }
 
     onMediaLibDataChange(changeType) {
         this.logger.info(`onMediaLibDataChange type: ${changeType}`);
-        if (!this.ignoreLocalNotify){
+        if (!this.ignoreLocalNotify) {
             this.albums.onChange(changeType);
         }
         this.distributed.onChange(changeType);
@@ -445,7 +428,7 @@ export struct AlbumSetPage {
         Grid(this.scroller) {
             LazyForEach(this.distributed, (item) => {
                 GridItem() {
-                    DistributedAlbumGriItem({item: item})
+                    DistributedAlbumGriItem({ item: item })
                 }
             }, item => 'uri:' + item.networkId)
         }
@@ -470,7 +453,7 @@ export struct AlbumSetPage {
                 alignItems: ItemAlign.Start
             }) {
                 Column() {
-                    AlbumSetPageActionBar({onMenuClicked: this.onMenuClicked})
+                    AlbumSetPageActionBar({ onMenuClicked: this.onMenuClicked })
                 }.visibility(this.isEmpty && !this.isTabBarShow ? Visibility.None : Visibility.Visible)
 
                 Column() {
@@ -507,11 +490,11 @@ export struct AlbumSetPage {
                 }.visibility(this.isEmpty && !this.isTabBarShow ? Visibility.None : Visibility.Visible)
 
                 if (this.isAlbumSetSelectedMode) {
-                    AlbumSetPageToolBar({onMenuClicked: this.onMenuClicked})
+                    AlbumSetPageToolBar({ onMenuClicked: this.onMenuClicked })
                 }
 
                 if (this.isEmpty && !this.isTabBarShow) {
-                    NoPhotoIndexComponent({index: Constants.ALBUM_PAGE_INDEX})
+                    NoPhotoIndexComponent({ index: Constants.ALBUM_PAGE_INDEX })
                 }
             }
 

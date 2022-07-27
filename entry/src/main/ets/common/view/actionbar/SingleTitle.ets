@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger'
-import {ActionBarProp} from '../browserOperation/ActionBarProp'
-import {Action} from '../browserOperation/Action';
+import { Logger } from '../../utils/Logger'
+import { ActionBarProp } from '../browserOperation/ActionBarProp'
+import { Action } from '../browserOperation/Action';
 
 // Single line title, fixed content
 @Component
@@ -39,10 +39,10 @@ export struct SingleTitle {
         }
         .width('80%')
         .alignItems(VerticalAlign.Center)
-            .padding({
-                left: this.actionBarProp.getLeftAction().equals(Action.NONE) ?
-                    $r('app.float.default_actionbar_padding_start_without_tab_bar') :
-                    $r('app.float.actionbar_title_margin')
-            })
+        .padding({
+            left: this.actionBarProp.getLeftAction().equals(Action.NONE) ?
+            $r('app.float.default_actionbar_padding_start_without_tab_bar') :
+            $r('app.float.actionbar_title_margin')
+        })
     }
 }

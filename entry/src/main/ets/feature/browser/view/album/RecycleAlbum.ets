@@ -13,23 +13,21 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger'
-import {Constants} from '../../../../common/model/common/Constants'
+import { Logger } from '../../utils/Logger'
+import { Constants } from '../../../../common/model/common/Constants'
 
 @Component
 export struct RecycleAlbum {
     @State icHeight: number = 0;
-
     @Consume gridHeight: number;
-
     logger: Logger = new Logger('RecycleAlbum');
-
     gridAspectRatio = Constants.CARD_ASPECT_RATIO;
 
     aboutToAppear(): void {
         let numberHeight = px2vp(fp2px(Constants.TEXT_SIZE_BODY2));
         let nameHeight = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE1));
-        this.icHeight = this.gridHeight - Constants.ALBUM_SET_NEW_ICON_MARGIN; - numberHeight - nameHeight;
+        this.icHeight = this.gridHeight - Constants.ALBUM_SET_NEW_ICON_MARGIN;
+        -numberHeight - nameHeight;
     }
 
     build() {
@@ -43,12 +41,19 @@ export struct RecycleAlbum {
                     .width($r('app.float.recycle_album_cover_icon_size'))
                     .height($r('app.float.recycle_album_cover_icon_size'))
                     .fillColor($r('app.color.empty_or_recycle_album_icon'))
-                    .onError((msg: {componentWidth: number, componentHeight: number}) => {
+                    .onError((msg: {
+                        componentWidth: number,
+                        componentHeight: number
+                    }) => {
                         this.logger.error(`image load failed and its componentWidth is: ${msg.componentWidth}`);
                         this.logger.error(`image load failed and its componentHeight is: ${msg.componentHeight}`);
                     })
-                    .onComplete((msg: { width: number, height: number, componentWidth: number,
-                        componentHeight: number}) => {
+                    .onComplete((msg: {
+                        width: number,
+                        height: number,
+                        componentWidth: number,
+                        componentHeight: number
+                    }) => {
                         this.logger.debug(`image load successfully and its width is: ${msg.width}`);
                         this.logger.debug(`image load successfully and its height is: ${msg.height}`);
                         this.logger.debug(`image load successfully and its componentWidth is: ${msg.componentWidth}`);
@@ -56,10 +61,10 @@ export struct RecycleAlbum {
                     })
             }
             .height(this.icHeight)
-                .width('100%')
+            .width('100%')
         }
         .aspectRatio(this.gridAspectRatio)
-            .backgroundColor($r('app.color.empty_or_recycle_album_back'))
-            .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
+        .backgroundColor($r('app.color.empty_or_recycle_album_back'))
+        .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
     }
 }

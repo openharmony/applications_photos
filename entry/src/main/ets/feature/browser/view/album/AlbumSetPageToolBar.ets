@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger'
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {ToolBar} from '../../../../common/view/actionbar/ToolBar'
+import { Logger } from '../../utils/Logger'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { ToolBar } from '../../../../common/view/actionbar/ToolBar'
 
 @Component
 export struct AlbumSetPageToolBar {
@@ -23,26 +23,24 @@ export struct AlbumSetPageToolBar {
     @Provide toolMenuList: Array<Action> = new Array<Action>();
     @Consume @Watch('updateToolbar') isAlbumSetSelectedMode: boolean;
     @Consume('selectedCount') @Watch('updateToolbar') selectedAlbumsCount: number;
-
     @Consume isDisableRename: boolean;
     @Consume isDisableDelete: boolean;
-
-    onMenuClicked : Function;
+    onMenuClicked: Function;
     logger: Logger = new Logger('AlbumSetPageToolBar');
 
-    aboutToAppear() : void {
+    aboutToAppear(): void {
         this.logger.info('aboutToAppear');
         this.updateToolbar();
     }
 
-    private updateToolbar() : void {
+    private updateToolbar(): void {
         this.logger.info('updateToolbar');
         if (this.isAlbumSetSelectedMode) {
             this.logger.info('pushToolbar');
             this.toolMenuList = [];
             this.toolMenuList.push(
                 ((!this.isDisableRename && this.selectedAlbumsCount == 1) ? Action.RENAME : Action.RENAME_INVALID),
-                ((!this.isDisableDelete && this.selectedAlbumsCount > 0) ? Action.DELETE :Action.DELETE_INVALID));
+                ((!this.isDisableDelete && this.selectedAlbumsCount > 0) ? Action.DELETE : Action.DELETE_INVALID));
         }
     }
 

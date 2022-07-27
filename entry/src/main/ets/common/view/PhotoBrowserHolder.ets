@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {ScreenManager} from '../model/common/ScreenManager';
+import { ScreenManager } from '../model/common/ScreenManager';
 
 @Component
 export struct PhotoBrowserHolder {
@@ -24,11 +24,11 @@ export struct PhotoBrowserHolder {
         Column() {
         }
         .backgroundColor($r('app.color.default_background_color'))
-            .width('100%')
-            .height(this.leftBlank[3])
-            .markAnchor({x: '0%', y: '100%'})
-            .position({x: '0%', y: '100%'})
-            .opacity($r('app.float.photo_browser_holder_opacity'))
-            .visibility(this.isShowBar ? Visibility.Visible : Visibility.Hidden)
+        .width('100%')
+        .height(this.leftBlank[3])
+        .markAnchor({ x: '0%', y: '100%' })
+        .position({ x: '0%', y: '100%' })
+        .opacity($r('app.float.photo_browser_holder_opacity'))
+        .visibility(this.isShowBar ? Visibility.Visible : Visibility.Hidden)
     }
 }

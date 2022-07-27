@@ -14,8 +14,11 @@
  */
 
 export interface BrowserDataInterface {
-    getData(callback:any, param:any): void;
-    getDataCount(callback:any, param:any): void;
-    getDataById(id: any, deviceId? :any): any;
+    getData(callback: any, param: any): void;
+
+    getDataCount(callback: any, param: any): void;
+
+    getDataById(id: any, deviceId?: any): any;
+
     getDataByName(name: string, albumInfo: any): any;
 }

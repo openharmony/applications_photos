@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger'
-import {MenuContext} from './MenuContext'
-import {ProcessMenuOperation, FindSameOperation} from './ProcessMenuOperation'
-import {BrowserOperationFactory} from '../../interface/BrowserOperationFactory'
-import {MediaOperationType} from '../../model/common/MediaOperationType'
-import {SelectManager} from '../../model/browser/SelectManager';
-import {BroadCastConstants} from '../../model/common/BroadCastConstants';
-import {AlbumInfo} from '../../model/browser/album/AlbumInfo';
+import { Logger } from '../../utils/Logger'
+import { MenuContext } from './MenuContext'
+import { ProcessMenuOperation, FindSameOperation } from './ProcessMenuOperation'
+import { BrowserOperationFactory } from '../../interface/BrowserOperationFactory'
+import { MediaOperationType } from '../../model/common/MediaOperationType'
+import { SelectManager } from '../../model/browser/SelectManager';
+import { BroadCastConstants } from '../../model/common/BroadCastConstants';
+import { AlbumInfo } from '../../model/browser/album/AlbumInfo';
 import { TraceControllerUtils } from '../../utils/TraceControllerUtils';
 
 export class MoveMenuOperation extends ProcessMenuOperation {
@@ -83,7 +83,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
         if (this.isCancelled) {
             return;
         }
-        this.currentBatch ++;
+        this.currentBatch++;
         let startIndex = (this.currentBatch - 1) * this.BATCH_SIZE;
         let endIndex = this.currentBatch * this.BATCH_SIZE;
         let batchUris: string[] = this.uris.slice(startIndex, Math.min(endIndex, this.uris.length));
@@ -102,7 +102,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
                     return;
                 }
                 this.logger.info('show find same file dialog');
-                switch(this.findSameOperation) {
+                switch (this.findSameOperation) {
                     case FindSameOperation.NONE:
                         this.menuContext.broadCast.emit(BroadCastConstants.FIND_SAME_FILE_DIALOG,
                             [assets, this.count, () => {
@@ -126,18 +126,18 @@ export class MoveMenuOperation extends ProcessMenuOperation {
         })
     }
 
-    async move(file, path, targetFile?){
+    async move(file, path, targetFile?) {
         TraceControllerUtils.startTraceWithTaskId('move', this.currentBatch);
         let operationImpl = BrowserOperationFactory.getFeature(BrowserOperationFactory.TYPE_PHOTO);
         try {
-            if(targetFile){
+            if (targetFile) {
                 await operationImpl.delete(targetFile.uri);
             }
             operationImpl.setRelativePath(file, path)
             await operationImpl.commitChanges(file);
             TraceControllerUtils.finishTraceWithTaskId('move', this.currentBatch);
             this.onCompleted();
-        } catch(error) {
+        } catch (error) {
             this.logger.error(`move error: ${error}`)
             this.onError();
         }
