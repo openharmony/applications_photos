@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import {Action} from '../../model/browser/operation/Action.ets'
-import {ActionBarColorMode} from '../../model/browser/operation/ActionBarMode.ets'
+import {Action} from '../browserOperation/Action'
+import {ActionBarColorMode} from '../browserOperation/ActionBarMode'
 
 @Component
 export struct ToolBarButton {

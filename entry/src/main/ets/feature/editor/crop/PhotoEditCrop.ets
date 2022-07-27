@@ -67,20 +67,23 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     entry(pixelMap: PixelMapWrapper) {
-        this.log.debug(`entry pixelMap: ${JSON.stringify(pixelMap)}`);
+        if (undefined == pixelMap) {
+            return;
+        }
+        this.log.info(`entry pixelMap: ${JSON.stringify(pixelMap)}`);
         this.input = pixelMap;
         this.filter = new ImageFilterCrop();
-        this.initialize();
+        this.initialize(this.input);
         if (this.isCropShowInitialized) {
             let limit = this.calcNewLimit();
             this.cropShow.init(limit, this.imageRatio);
-            this.refresh();
         }
+        this.refresh();
     }
 
-    private initialize() {
-        this.imageRatio = this.input.width / this.input.height;
-        this.determineMaxScaleFactor();
+    private initialize(pixelMap: PixelMapWrapper) {
+        this.imageRatio = pixelMap.width / pixelMap.height;
+        this.determineMaxScaleFactor(pixelMap);
         this.clear();
     }
 
@@ -90,14 +93,14 @@ export class PhotoEditCrop extends PhotoEditBase {
         return limit;
     }
 
-    private determineMaxScaleFactor() {
-        let scaleFactorW = this.input.width / px2vp(PhotoEditCrop.DEFAULT_MIN_SIDE_LENGTH);
-        let scaleFactorH = this.input.height / px2vp(PhotoEditCrop.DEFAULT_MIN_SIDE_LENGTH);
+    private determineMaxScaleFactor(pixelMap: PixelMapWrapper) {
+        let scaleFactorW = pixelMap.width / px2vp(PhotoEditCrop.DEFAULT_MIN_SIDE_LENGTH);
+        let scaleFactorH = pixelMap.height / px2vp(PhotoEditCrop.DEFAULT_MIN_SIDE_LENGTH);
         this.cropShow.setMaxScaleFactor(scaleFactorW, scaleFactorH);
     }
 
     exit(): ImageFilterBase {
-        this.log.debug('exit');
+        this.log.info('exit');
         this.saveFinalOperation();
         this.isCropShowInitialized = false;
         this.input = undefined;
@@ -131,24 +134,24 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     setCanvasContext(context: CanvasRenderingContext2D) {
-        this.log.debug('setCanvasContext');
+        this.log.info('setCanvasContext');
         this.ctx = context;
         this.refresh();
     }
 
     setCanvasSize(width: number, height: number) {
-        this.log.debug(`setCanvasSize: width[${width}], height[${height}]`);
+        this.log.info(`setCanvasSize: width[${width}], height[${height}]`);
         this.displayWidth = width;
         this.displayHeight = height;
         let limit = this.calcNewLimit();
         if (this.isCropShowInitialized) {
             this.cropShow.syncLimitRect(limit);
-            this.determineMaxScaleFactor();
-            this.refresh();
+            this.determineMaxScaleFactor(this.input);
         } else {
             this.cropShow.init(limit, this.imageRatio);
             this.isCropShowInitialized = true;
         }
+        this.refresh();
     }
 
     private refresh() {
@@ -193,14 +196,14 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.ctx.translate(-x, -y);
 
         let image = this.cropShow.getImageRect();
-        MathUtils.roundOutRect(image);
+        MathUtils.roundRect(image);
         this.ctx.drawImage(this.input.pixelMap, image.left, image.top, image.getWidth(), image.getHeight());
         this.ctx.restore();
     }
 
     private drawCrop() {
         let crop = this.cropShow.getCropRect();
-        MathUtils.roundOutRect(crop);
+        MathUtils.roundRect(crop);
         let display = new RectF();
         display.set(0, 0, this.displayWidth, this.displayHeight);
         DrawingUtils.drawMask(this.ctx, display, crop);
@@ -393,13 +396,13 @@ export class PhotoEditCrop extends PhotoEditBase {
 
     couldReset(): boolean {
         let crop = this.cropShow.getCropRect();
-        MathUtils.roundOutRect(crop);
+        MathUtils.roundRect(crop);
         let image = this.cropShow.getImageRect();
-        MathUtils.roundOutRect(image);
+        MathUtils.roundRect(image);
         if (this.isFlipHorizontal != false || this.isFlipVertically != false
         || this.rotationAngle != 0 || this.sliderAngle != 0
         || this.cropRatio != CropRatioType.RATIO_TYPE_FREE
-        || !MathUtils.areRectsSame(crop, image)) {
+        || !MathUtils.areRectSame(crop, image)) {
             return true;
         }
         return false;
@@ -409,7 +412,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.log.debug('reset');
         let limit = this.calcNewLimit();
         this.cropShow.init(limit, this.imageRatio);
-        this.initialize();
+        this.initialize(this.input);
         this.refresh();
     }
 }

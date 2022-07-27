@@ -13,12 +13,17 @@
  * limitations under the License.
  */
 
-import {Logger} from '../utils/Logger.ets'
-import {TabItem, TabItemWithText} from '../model/common/TabItem.ets'
+import {Logger} from '../utils/Logger'
+import {TabItem, TabItemWithText} from '../model/common/TabItem'
 import {BroadCastManager} from '../model/common/BroadCastManager'
 import {BroadCast} from '../utils/BroadCast'
 import {BroadCastConstants} from '../model/common/BroadCastConstants'
-import {Constants} from '../model/common/Constants.ets'
+import {Constants} from '../model/common/Constants'
+
+export enum DEVICE_TYPE {
+    DEVICE_PHONE,
+    DEVICE_PAD
+}
 
 @Component
 export struct TabBar {
@@ -30,8 +35,9 @@ export struct TabBar {
     private controller: TabsController;
     private logger: Logger = new Logger('TabBar');
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    deviceType: DEVICE_TYPE = DEVICE_TYPE.DEVICE_PHONE;
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.onTabSelected = this.onTabSelected.bind(this);
         this.tabs[this.currentIndex].isSelected = true;
         this.tabs.forEach((tab: TabItem) => {this.logger.info(`${JSON.stringify(tab.name)} , ${tab.iconSelected}`)});
@@ -59,10 +65,17 @@ export struct TabBar {
                 alignItems: ItemAlign.Center,
                 justifyContent: FlexAlign.Center
             }) {
-                ForEach(this.tabs, (tab: TabItem) => {
-                    Tab({ tabItem: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
-                }, tab => tab.name.id)
+                Column() {
+                    ForEach(this.tabs, (tab: TabItem) => {
+                        Stack() {
+                            Tab({ tabItem: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
+                        }.layoutWeight(1)
+                    }, tab => tab.name.id)
+                }
+                .height(DEVICE_TYPE.DEVICE_PAD == this.deviceType ? $r('app.float.horizontal_width') : '100%')
             }
+            .markAnchor({x: '0%', y: '0%'})
+            .position({x: '0%', y: '0%'})
             .width($r('app.float.tab_bar_width'))
                 .backgroundColor($r('app.color.default_background_color'))
         } else {
@@ -72,7 +85,9 @@ export struct TabBar {
                 justifyContent: FlexAlign.Center
             }) {
                 ForEach(this.tabs, (tab: TabItem) => {
-                    Tab({ tabItem: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
+                    Stack() {
+                        Tab({ tabItem: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
+                    }.layoutWeight(1)
                 }, tab => tab.name.id)
             }
             .markAnchor({x: '0%', y: '100%'})
@@ -102,7 +117,6 @@ struct Tab {
                     .height($r('app.float.icon_size'))
                     .width($r('app.float.icon_size'))
                     .objectFit(ImageFit.Fill)
-                    .fillColor(this.tabItem.getConditionIcon(this.tabItem.isSelected))
             }
 
             Text(this.tabItem.name)
@@ -115,7 +129,6 @@ struct Tab {
                     left: $r('app.float.tab_bar_text_padding_horizontal')
                 })
         }
-        .layoutWeight(1)
             .onClick(() => {
                 this.onTabSelected && this.onTabSelected(this.index);
                 this.tabItem.isSelected = true;
@@ -132,7 +145,7 @@ export struct TabBarForAlbumSet {
     private controller: TabsController;
     private logger: Logger = new Logger('TabBarForAlbumSet');
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.onTabSelected = this.onTabSelected.bind(this);
         this.tabs[this.currentIndex].isSelected = true;
         this.tabs.forEach((tab: TabItemWithText) => {
@@ -179,7 +192,7 @@ struct TabWithText {
     onTabSelected: Function;
     private logger: Logger = new Logger('TabWithText');
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         // Determine the length of the underline based on the font length
         if (this.index == 0) {
             this.TabWidth = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE2)) * 2;

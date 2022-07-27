@@ -14,20 +14,23 @@
  */
 
 import router from '@system.router'
-import {AlbumSelectGridItemNewStyle} from './AlbumSelectGridItemNewStyle.ets'
-import {AlbumSetDataSource} from '../../../../common/model/browser/album/AlbumSetDataSource.ets'
-import {Constants} from '../../../../common/model/common/Constants.ets'
+import {AlbumSelectGridItemNewStyle} from './AlbumSelectGridItemNewStyle'
+import {AlbumSetDataSource} from '../../../../common/model/browser/album/AlbumSetDataSource'
+import {Constants} from '../../../../common/model/common/Constants'
 import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {BroadCast} from '../../../../common/utils/BroadCast.ets'
+import {BroadCast} from '../../../../common/utils/BroadCast'
 import {NoPhotoComponent} from '../../../../common/view/NoPhotoComponent'
-import {Logger} from '../../utils/Logger.ets'
+import {Logger} from '../../utils/Logger'
 import {TraceControllerUtils} from '../../../../common/utils/TraceControllerUtils'
-import {MediaDataSource} from '../../../../common/model/browser/photo/MediaDataSource.ets'
-import {NewAlbumPageActionBar} from './NewAlbumPageActionBar.ets'
-import {Action} from '../../../../common/model/browser/operation/Action'
-import {SelectManager} from '../../../../common/model/browser/SelectManager.ets'
-import {UiUtil} from '../../utils/UiUtil.ets'
-import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine.ets';
+import {MediaDataSource} from '../../../../common/model/browser/photo/MediaDataSource'
+import {NewAlbumPageActionBar} from './NewAlbumPageActionBar'
+import {Action} from '../../../../common/view/browserOperation/Action'
+import {SelectManager} from '../../../../common/model/browser/SelectManager'
+import {UiUtil} from '../../utils/UiUtil'
+import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine';
+import {AlbumInfo} from '../../../../common/model/browser/album/AlbumInfo';
+import {BroadCastManager} from '../../../../common/model/common/BroadCastManager';
+import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants';
 
 @Entry
 @Component
@@ -46,9 +49,9 @@ export struct AlbumSelect {
     private albums: AlbumSetDataSource;
     private dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
     private mSelectManager = new SelectManager();
-    private albumName: string = undefined;
+    private albumInfo: AlbumInfo = undefined;
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         TraceControllerUtils.startTrace('AlbumSetPageAboutToAppear');
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
             this.logger.info(`ON_LOADING_FINISHED size: ${size}`);
@@ -62,28 +65,31 @@ export struct AlbumSelect {
 
         let param = router.getParams();
         if (param) {
-            this.albumName = param.albumName;
+            param.albumInfo && (this.albumInfo = JSON.parse(param.albumInfo.toString()));
             if (param.isNewAlbum) {
                 AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, true);
+            } else {
+                AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, false);
             }
         }
-        this.albums.setBlackList([this.albumName, AlbumDefine.ALBUM_NAME_RECYCLE]);
-        this.logger.debug(`the album name is: ${this.albumName}`);
+        this.albums.setBlackList([this.albumInfo.id, AlbumDefine.ALBUM_ID_RECYCLE]);
+        this.logger.debug(`the album Id is: ${this.albumInfo.id}`);
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_TARGET, this.albumName);
+        AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_TARGET, this.albumInfo);
         AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.mSelectManager);
         TraceControllerUtils.finishTrace('AlbumSetPageAboutToAppear');
     }
 
-    private aboutToDisappear(): void {
+    aboutToDisappear(): void {
         this.albums.setBlackList([]);
     }
 
-    private onPageShow() {
+    onPageShow() {
+        BroadCastManager.getInstance().getBroadCast().emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
         this.onActive();
     }
 
-    private onPageHide() {
+    onPageHide() {
         this.onInActive();
     }
 
@@ -153,21 +159,20 @@ export struct AlbumSelect {
                                 })
                             }
                         }
-                    }, item => 'uri:' + item.name)
+                    }, item => 'uri:' + item.id)
                 }
                 .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
                 .padding({
                     left: $r('app.float.max_padding_start'),
                     right: $r('app.float.max_padding_end'),
-                    top: $r('app.float.album_set_page_padding_top'),
-                    bottom: $r('app.float.album_set_page_padding_end')
+                    top: $r('app.float.album_set_page_padding_top')
                 })
                 .columnsGap($r('app.float.album_set_grid_column_gap'))
                 .rowsGap($r('app.float.album_set_grid_row_gap'))
             }
         }
         .backgroundColor($r('app.color.default_background_color'))
-        .margin({
+        .padding({
             top: this.leftBlank[1],
             bottom: this.leftBlank[3]
         })

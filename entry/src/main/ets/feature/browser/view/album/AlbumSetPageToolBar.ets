@@ -14,14 +14,14 @@
  */
 
 import {Logger} from '../../utils/Logger'
-import {Action} from '../../../../common/model/browser/operation/Action'
+import {Action} from '../../../../common/view/browserOperation/Action'
 import {ToolBar} from '../../../../common/view/actionbar/ToolBar'
 
 @Component
 export struct AlbumSetPageToolBar {
     @Provide isShowBar: boolean = true;
     @Provide toolMenuList: Array<Action> = new Array<Action>();
-    @Consume isAlbumSetSelectedMode: boolean;
+    @Consume @Watch('updateToolbar') isAlbumSetSelectedMode: boolean;
     @Consume('selectedCount') @Watch('updateToolbar') selectedAlbumsCount: number;
 
     @Consume isDisableRename: boolean;
@@ -30,7 +30,7 @@ export struct AlbumSetPageToolBar {
     onMenuClicked : Function;
     logger: Logger = new Logger('AlbumSetPageToolBar');
 
-    private aboutToAppear() : void {
+    aboutToAppear() : void {
         this.logger.info('aboutToAppear');
         this.updateToolbar();
     }

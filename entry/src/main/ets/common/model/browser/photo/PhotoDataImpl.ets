@@ -13,11 +13,13 @@
  * limitations under the License.
  */
 
-import {AlbumDefine} from '../AlbumDefine.ets'
-import {BrowserDataImpl} from '../BrowserDataImpl.ets'
-import {Logger} from '../../../utils/Logger.ets'
+import {AlbumDefine} from '../AlbumDefine'
+import {BrowserDataImpl} from '../BrowserDataImpl'
+import {Logger} from '../../../utils/Logger'
 import {AsyncCallback} from '../../common/AsyncCallback'
-import {MediaItem} from './MediaItem.ets'
+import {MediaItem} from './MediaItem'
+import {MediaLibraryAccess} from '../../../access/MediaLibraryAccess'
+import {TraceControllerUtils} from '../../../utils/TraceControllerUtils';
 
 export class PhotoDataImpl extends BrowserDataImpl {
     logger: Logger = new Logger('PhotoDataImpl');
@@ -27,7 +29,7 @@ export class PhotoDataImpl extends BrowserDataImpl {
         super()
     }
 
-    getData(callback: AsyncCallback<MediaItem[]>, param): Promise<void>{
+    getData(callback: AsyncCallback<MediaItem[]>, param): void{
         this.logger.info(`getMediaItem start ${JSON.stringify(param)}`);
         if (callback == null) {
             this.logger.error('getMediaItem, param or callback is null, return!');
@@ -36,7 +38,7 @@ export class PhotoDataImpl extends BrowserDataImpl {
 
         // Querying MediaLibrary data
         let mediaItemList: MediaItem[] = [];
-        this.getItems(param.name, param.start, param.count, param.deviceId).then(async (dataList) => {
+        this.getItems(param.id, param.start, param.count, param.deviceId).then((dataList) => {
             this.logger.info(`getMediaItem coming`);
             if (dataList != null) {
                 let promiseStatus: Array<Promise<boolean>> = []
@@ -48,7 +50,9 @@ export class PhotoDataImpl extends BrowserDataImpl {
                         this.logger.error(`getItems error: ${err}`);
                     }
                 }
+                TraceControllerUtils.startTraceWithTaskId('getFavorInfo', dataList.length);
                 Promise.all(this.handlePromise(promiseStatus)).then((favor: any) => {
+                    TraceControllerUtils.finishTraceWithTaskId('getFavorInfo', dataList.length);
                     for (let i = 0; i < promiseStatus.length; i++) {
                         try {
                             let item = dataList[i];
@@ -78,29 +82,49 @@ export class PhotoDataImpl extends BrowserDataImpl {
             (err) => ({status: 'failed', err})))
     }
 
-    getMediaItemCount(callback: AsyncCallback<number>, param: any): void {
+    getDataCount(callback: AsyncCallback<number>, param: any): void {
         this.logger.debug(`getMediaItemCount: ${JSON.stringify(param)}`);
-        this.getItemsCount(param.name, param.deviceId).then((count) => {
+        this.getItemsCount(param.id, param.deviceId).then((count) => {
             this.logger.debug(`getMediaItemCount callback: ${count}`);
             callback.callback(count);
         });
     }
 
-    async getObjectById(id, deviceId, isTrash: boolean = false) {
-        this.logger.debug(`getObjectById: ${id} deviceID: ${deviceId} isTrash: ${isTrash}`);
-        if (isTrash) {
-            return await this.getTrashObjectById(id);
-        } else {
-            let obj = await this.getFirstObject(AlbumDefine.getFileFetchOpt(id, deviceId));
-            if (obj == null) {
-                this.logger.error('getFirstObject fail!');
-                return null;
-            }
-            return obj.obj;
+    getThumbnail(sourceUri: string, size?) {
+        return this.getThumbnailSafe(sourceUri, size);
+    }
+
+    async getDataById(id: any, deviceId? :any){
+        this.logger.debug('getFileAssetById');
+        try {
+            let result = await MediaLibraryAccess.getInstance().getFirstObject(AlbumDefine.getFileFetchOptById(id, deviceId));
+            return result.obj;
+        } catch (error) {
+            this.logger.error('getFileAssetById error');
+            return null;
         }
     }
 
-    getThumbnail(sourceUri: string, size?) {
-        return this.getThumbnailSafe(sourceUri, size);
+    async getDataByName(name: string, albumInfo: any){
+        this.logger.debug('getFileByName');
+
+        let dataList;
+        if (albumInfo.id){
+            dataList = await MediaLibraryAccess.getInstance().getEntityAlbumObject(AlbumDefine.getAlbumFetchOpt(albumInfo.id),
+            AlbumDefine.getFileFetchOptByName(name))
+        }else{
+            dataList = await MediaLibraryAccess.getInstance().getAllObject(AlbumDefine.getFileFetchOptByName(name, albumInfo.relativePath))
+        }
+
+        if (dataList != null) {
+            if (dataList.length > 0) {
+                return dataList[0];
+            } else {
+                this.logger.info('fileAsset is null');
+                return null;
+            }
+        }
+        this.logger.debug('getFileAsset end');
+        return null;
     }
 }

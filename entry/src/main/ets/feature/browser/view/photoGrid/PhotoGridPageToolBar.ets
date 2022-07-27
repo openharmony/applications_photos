@@ -14,7 +14,7 @@
  */
 
 import {Logger} from '../../utils/Logger'
-import {Action} from '../../../../common/model/browser/operation/Action.ets'
+import {Action} from '../../../../common/view/browserOperation/Action'
 import {ToolBar} from '../../../../common/view/actionbar/ToolBar'
 
 @Component
@@ -22,6 +22,7 @@ export struct PhotoGridPageToolBar {
     @Consume @Watch('updateToolbar') isSelectedMode: boolean;
     @Consume @Watch('updateToolbar') isAllSelected: boolean;
     @Consume('selectedCount') @Watch('updateToolbar') selectedCount: number;
+    @Consume isEmpty: boolean;
     isRecycleAlbum : boolean;
     onMenuClicked : Function;
     logger: Logger = new Logger('PhotoGridPageToolBar');
@@ -30,7 +31,7 @@ export struct PhotoGridPageToolBar {
     @Provide toolMenuList: Array<Action> = new Array<Action>();
 
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.logger.info('aboutToAppear');
         this.updateToolbar();
     }
@@ -56,7 +57,7 @@ export struct PhotoGridPageToolBar {
         } else {
             if (this.isRecycleAlbum) {
                 this.toolMenuList = [];
-                this.toolMenuList.push(Action.CLEAR_RECYCLE);
+                this.toolMenuList.push(this.isEmpty ? Action.CLEAR_RECYCLE_INVALID : Action.CLEAR_RECYCLE);
             }
         }
     }

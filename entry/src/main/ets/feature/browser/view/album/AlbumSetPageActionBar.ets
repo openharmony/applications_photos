@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import {Action} from '../../../../common/model/browser/operation/Action'
-import {ActionBar} from '../../../../common/view/actionbar/ActionBar.ets'
-import {ActionBarProp} from '../../../../common/model/browser/operation/ActionBarProp.ets'
-import {ActionBarMode, ActionBarSelectionMode} from '../../../../common/model/browser/operation/ActionBarMode.ets'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager.ets'
-import {Logger} from '../../utils/Logger.ets'
+import {Action} from '../../../../common/view/browserOperation/Action'
+import {ActionBar} from '../../../../common/view/actionbar/ActionBar'
+import {ActionBarProp} from '../../../../common/view/browserOperation/ActionBarProp'
+import {ActionBarMode, ActionBarSelectionMode} from '../../../../common/view/browserOperation/ActionBarMode'
+import {ScreenManager} from '../../../../common/model/common/ScreenManager'
+import {Logger} from '../../utils/Logger'
 
 @Component
 export struct AlbumSetPageActionBar {

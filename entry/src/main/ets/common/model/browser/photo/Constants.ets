@@ -74,6 +74,12 @@ export class Constants {
     // delete photo
     static readonly DELETE = 'single_photo_delete';
 
+    // photo show state
+    static readonly PHOTO_SHOW_STATE = 'single_photo_show_state';
+
+    // set swiper can swipe
+    static readonly SET_DISABLE_SWIPE = 'set_disable_swipe';
+
     // Scale lower limit
     static readonly COMPONENT_SCALE_FLOOR = 0.5;
 
@@ -111,4 +117,6 @@ export class Constants {
     static readonly NUMBER_3 = 3;
     static readonly NUMBER_12 = 12;
     static readonly NUMBER_13 = 13;
+
+    static readonly DEFAULT_TRANSITION_ID: string = 'default_id';
 }

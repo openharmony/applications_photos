@@ -13,8 +13,9 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger.ets'
-import {ActionBarProp} from '../../model/browser/operation/ActionBarProp.ets'
+import {Logger} from '../../utils/Logger'
+import {ActionBarProp} from '../browserOperation/ActionBarProp'
+import {Action} from '../browserOperation/Action';
 
 // Single line title, fixed content
 @Component
@@ -30,16 +31,18 @@ export struct SingleTitle {
         Row() {
             Text(this.actionBarProp.getTitle())
                 .fontSize(this.actionBarProp.getIsHeadTitle()
-                    ? ActionBarProp.HEAD_TITLE_TEXT_SIZE : ActionBarProp.TITLE_TEXT_SIZE)
+                    ? ActionBarProp.HEAD_TITLE_ONE_LINE_TEXT_SIZE : ActionBarProp.TITLE_TEXT_SIZE)
                 .fontWeight(FontWeight.Bold)
                 .fontColor(ActionBarProp.NORMAL_TEXT_COLOR)
                 .maxLines(2)
                 .textOverflow({ overflow: TextOverflow.Ellipsis })
         }
+        .width('80%')
         .alignItems(VerticalAlign.Center)
-            .flexGrow(1)
             .padding({
-                left: $r('app.float.default_actionbar_padding_start_without_tab_bar')
+                left: this.actionBarProp.getLeftAction().equals(Action.NONE) ?
+                    $r('app.float.default_actionbar_padding_start_without_tab_bar') :
+                    $r('app.float.actionbar_title_margin')
             })
     }
 }

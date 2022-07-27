@@ -41,6 +41,8 @@ export class Constants {
     static readonly DEFAULT_ROTATE_VALUE = 90;
 
     static readonly ROTATE_AROUND = 360;
+    static readonly ANGLE_90 = 90;
+    static readonly ANGLE_270 = 270;
 
     // Step size. When the last obtained data index deviates from the center of the current sliding window by more
     // than this step, adjust the start and end of the window and re initiate the data request
@@ -59,17 +61,18 @@ export class Constants {
     static readonly APP_KEY_NEW_ALBUM = 'app_key_new_album';
     static readonly APP_KEY_NEW_ALBUM_TARGET = 'app_key_new_album_target';
     static readonly APP_KEY_NEW_ALBUM_SELECTED = 'app_key_new_album_selected';
+    static readonly APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS = 'app_key_instance_media_library_access';
+    static readonly FROM_DATA_STORE_UTIL = 'form_data_store_util';
 
     // BroadCast
     static readonly APP_KEY_EVENT_BUS = 'app_key_event_bus';
 
-    // Persistent storage of tabs index
-    static readonly APP_KEY_TABS_INDEX: string = 'app_key_tabs_index';
     static readonly SCREEN_MANAGER = 'screen_manager';
     static readonly PIXEL_MAP_MANAGER = 'pixel_map_manager';
 
     // Load completion event
     static readonly ON_LOADING_FINISHED = 'on_loading_finished';
+    static readonly FIRST_PATCH_LOAD_FINISH = 'first_patch_load_finish';
 
     // Large jump source: timeline
     static readonly PHOTO_TRANSITION_TIMELINE: string = 'TimelinePage';
@@ -79,6 +82,8 @@ export class Constants {
 
     // Large jump source: camera
     static readonly PHOTO_TRANSITION_CAMERA: string = 'Camera';
+
+    static readonly  PHOTO_TRANSITION_EDIT: string = 'EditPage';
 
     // Timeline page index
     static readonly TIMELINE_PAGE_INDEX: number = 0;
@@ -96,16 +101,16 @@ export class Constants {
     static readonly PRESS_ANIM_SCALE = 0.9;
 
     // Default maximum number of external selection pages
-    static readonly DEFAULT_MAX_THIRD_SELECT_COUNT: number = 500;
+    static readonly DEFAULT_MAX_THIRD_SELECT_COUNT: number = 50;
 
     // Horizontal and vertical screen flag
     static readonly SCREEN_ORIENTATION_HORIZONTAL: string = 'isHorizontal';
 
     // Sidebar flag
-    static readonly SCREEN_SIDEBAR: string = 'screen_sidebar';
+    static readonly SCREEN_SIDEBAR: string = 'isSidebar';
 
     // Column flag
-    static readonly SCREEN_COLUMNS: string = 'screen_colums';
+    static readonly SCREEN_COLUMNS: string = 'screen_columns';
 
     static readonly ADD_NOTES_MAX_LENGTH: number = 140;
 
@@ -118,6 +123,10 @@ export class Constants {
     static readonly ENTRY_FROM_RECYCLE = 4;
     static readonly ENTRY_FROM_DISTRIBUTED = 5;
     static readonly ENTRY_FROM_NORMAL = 6;
+    static readonly ENTRY_FROM_FORM_ABILITY = 7;
+    static readonly ENTRY_FROM_FORM_FORM_EDITOR = 8;
+    static readonly ENTRY_FROM_VIEW_DATA = 9;
+    static readonly ENTRY_FROM_FORM_ABILITY_NONE = 12;
 
     static readonly ENTRY_FROM = {
         NORMAL: 0,
@@ -126,10 +135,11 @@ export class Constants {
         MULTIPLE_SELECT: 3,
         RECYCLE: 4,
         DISTRIBUTED: 5,
-        CARD: 6
+        CARD: 6,
+        VIEW_DATA: 7
     }
 
-    static readonly DIALOG_BOTTOM_OFFSET: number = 12;
+    static readonly DIALOG_BOTTOM_OFFSET: number = 16;
 
     // Local tab index
     static readonly LOCAL_TAB_INDEX: number = 0;
@@ -184,6 +194,15 @@ export class Constants {
     static readonly RULER_FILL_STYLE_40: string = '#66FFFFFF';
     static readonly RULER_TEXT_ALIGN: string = 'center';
 
+    static readonly MEDIA_TYPE_IMAGE: string = 'image';
+    static readonly MEDIA_TYPE_VIDEO: string = 'video';
+    static readonly MEDIA_TYPE_ALBUM: string = 'album';
+    static readonly MEDIA_TYPE_DEVICE: string = 'device';
+    static readonly MEDIA_TYPE_REMOTE: string = 'remote';
+    static readonly DEVICE_STATE_ONLINE: string = 'online';
+    static readonly DEVICE_STATE_OFFLINE: string = 'offline';
+    static readonly DEVICE_STATE_CHANGE: string = 'change';
+
     static readonly TOP_BAR_SIZE: number = 56;
     static readonly TOOL_BAR_SIZE: number = 72;
     static readonly BOTTOM_TOOL_BAR_SIZE: number = 196;
@@ -204,7 +223,11 @@ export class Constants {
     static readonly NUMBER_3: number = 3;
     static readonly NUMBER_4: number = 4;
     static readonly NUMBER_5: number = 5;
+    static readonly NUMBER_5_5: number = 5.5;
     static readonly NUMBER_6: number = 6;
+    static readonly NUMBER_6_5: number = 6.5;
+    static readonly NUMBER_7: number = 7;
+    static readonly NUMBER_7_5: number = 7.5;
     static readonly NUMBER_8: number = 8;
     static readonly NUMBER_8_5: number = 8.5;
     static readonly NUMBER_9: number = 9;
@@ -227,10 +250,12 @@ export class Constants {
     static readonly GRID_MAX_SIZE_RATIO: number = 1.2;
     static readonly GRID_MIN_COUNT: number = 4;
     static readonly SCROLL_BAR_SIDE_MIN_GAP: number = 12;
+    static readonly SCROLL_MARGIN: number = 24;
+    static readonly SCROLL_BAR_VISIBLE_THRESHOLD: number = 50;
 
     // Column Constants
-    static readonly COLUMN_MARGIN: number = 24;
-    static readonly COLUMN_GUTTER: number = 24;
+    static readonly COLUMN_MARGIN: number = 12;
+    static readonly COLUMN_GUTTER: number = 12;
 
     // Album Card Constants
     static readonly CARD_ASPECT_RATIO: number = 0.75;
@@ -250,9 +275,48 @@ export class Constants {
     static readonly EMPTY_PAGE_DEFAULT_OFFSET: number = 300;
     static readonly EMPTY_PAGE_MARGIN: number = 12;
 
+    // Dialog
     static readonly DETAILS_DIALOG_PATH_MAX_LINE: number = 7;
     static readonly DETAILS_DIALOG_NAME_MAX_LINE: number = 5;
+    static readonly PROGRESS_MAX: number = 100;
+    static readonly BYTE_TO_MB: number = 1024 * 1024;
 
+    static readonly BIG_SCREEN_WIDTH: number = 600;
+    static readonly BIG_EMPTY_ICON_SIZE: number = 160;
+    static readonly SMALL_EMPTY_ICON_SIZE: number = 120;
     // Menu
-    static readonly MENU_DIVIDER_STROKE_WIDTH: number = 0.5;
+    static readonly MENU_DIVIDER_STROKE_WIDTH: number = 1;
+
+    // Duration
+    static readonly SHARE_TRANSITION_DURATION: number = 200;
+    static readonly DELETE_ANIMATE_DURATION: number = 300;
+
+    // Percent
+    static readonly PERCENT_HUNDRED: number = 100;
+    static readonly PERCENT_ONE_THIRD: string = `${100 / 3}%`;
+
+    // AppStorage constants
+    static readonly ENTRY_FROM_HAP: string = 'entryFromHap';
+    static readonly FROM_ALBUM_ID: string = 'form_albumId';
+    static readonly FROM_CURRENT_INDEX: string = 'form_currentIndex';
+    static readonly FA_SETTING_FROM_ID: string = 'FASetting_FormId';
+    static readonly VIEW_DATA_URI: string = 'viewDataUri';
+    static readonly VIEW_DATA_POS: string = 'viewDataPos';
+    static readonly PERMISSION_STATUS: string = 'permissionStatus';
+    static readonly LEFT_BLANK: string = 'leftBlank';
+    static readonly FROM_FORM_PHOTO_EDITOR: string = 'from_form_photo_editor';
+    static readonly FORM_ITEM_NAME: string = 'form_itemName';
+    static readonly FORM_ITEM_ALBUM_ID: string = 'form_itemAlbumId';
+    static readonly FORM_ITEM_DISPLAY_NAME: string = 'form_itemDisplayName';
+    static readonly MAIN_WINDOW: string = 'mainWindow';
+    static readonly IS_SPLIT_MODE: string = 'isSplitMode';
+
+    static readonly ACTION_URI_FORM_ABILITY: string = 'formAbility';
+    static readonly ACTION_URI_FORM_ABILITY_NONE: string = 'formAbilityNone';
+
+    static readonly PROGRESS_LENGTH_DIFF: number = 88;
+    static readonly ALBUM_NAME_MAX_LENGTH = 80;
+
+    static readonly BACK_FROM_FORM_DETAIL: string = 'back_from_form_detail';
+
 }

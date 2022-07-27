@@ -40,11 +40,11 @@ export struct CropStyleBar {
             isActive: true
         }),
         new ActionButtonInfo({
-            src: $r('app.media.ic_edit_photo_crop_landfull'),
+            src: $r("app.media.ic_edit_photo_crop_land_full"),
             actionID: CropRatioType.RATIO_TYPE_HORIZONTAL
         }),
         new ActionButtonInfo({
-            src: $r('app.media.ic_edit_photo_crop_portfull'),
+            src: $r("app.media.ic_edit_photo_crop_port_full"),
             actionID: CropRatioType.RATIO_TYPE_VERTICAL
         }),
         new ActionButtonInfo({ src: $r('app.media.ic_edit_photo_crop_1_1'), actionID: CropRatioType.RATIO_TYPE_1_1 }),

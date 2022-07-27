@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {Action} from '../../../../common/model/browser/operation/Action.ets'
-import {ActionBar} from '../../../../common/view/actionbar/ActionBar.ets'
-import {ActionBarProp} from '../../../../common/model/browser/operation/ActionBarProp.ets'
-import {ActionBarMode, ActionBarColorMode} from '../../../../common/model/browser/operation/ActionBarMode.ets'
+import {Action} from '../../../../common/view/browserOperation/Action'
+import {ActionBar} from '../../../../common/view/actionbar/ActionBar'
+import {ActionBarProp} from '../../../../common/view/browserOperation/ActionBarProp'
+import {ActionBarMode, ActionBarColorMode} from '../../../../common/view/browserOperation/ActionBarMode'
 import {ScreenManager} from '../../../../common/model/common/ScreenManager'
 
 @Component

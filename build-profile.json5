@@ -20,6 +20,7 @@
     "products": [
       {
         "name": "default",
+        "signingConfig": "default"
       },
     ],
   },

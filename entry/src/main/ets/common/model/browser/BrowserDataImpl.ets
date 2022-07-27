@@ -12,96 +12,67 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {BrowserDataInterface} from './interface/BrowserDataInterface'
+import {BrowserDataInterface} from '../../interface/BrowserDataInterface'
 import {AlbumDefine} from './AlbumDefine'
-import {Logger} from '../../utils/Logger.ets'
-import {MediaLibraryAccess} from '../../access/MediaLibraryAccess.ets';
+import {Logger} from '../../utils/Logger'
+import {MediaLibraryAccess} from '../../access/MediaLibraryAccess';
 
 export abstract class BrowserDataImpl implements BrowserDataInterface {
     logger: Logger = new Logger('BrowserDataImpl');
     static readonly THUMBNAIL_WIDTH = 256;
 
-    abstract getData(callback, param): Promise<void>;
-    abstract getMediaItemCount(callback, param): void;
+    abstract getData(callback, param): void;
+    abstract getDataCount(callback, param): void;
+    abstract getDataById(id: any, deviceId? :any): any;
+    abstract getDataByName(name: string, albumInfo: any): any;
 
     async getAllObject(fetchOpt) {
         this.logger.debug('getAllObject');
-        let allObject = await MediaLibraryAccess.getAllObject(fetchOpt);
+        let allObject = await MediaLibraryAccess.getInstance().getAllObject(fetchOpt);
         return allObject;
     }
 
     async getCount(fetchOpt) {
-        let count = await MediaLibraryAccess.getCount(fetchOpt);
+        let count = await MediaLibraryAccess.getInstance().getCount(fetchOpt);
         return count;
     }
 
     async getFirstObject(fetchOpt) {
         this.logger.debug('getFirstObject');
-        let firstObject = await MediaLibraryAccess.getFirstObject(fetchOpt);
+        let firstObject = await MediaLibraryAccess.getInstance().getFirstObject(fetchOpt);
         return firstObject;
     }
 
-    async getItems(albumName: string, startIndex?: number, count?:number, deviceId?) {
-        let external_order = '';
-        if ( startIndex != undefined && count != undefined && startIndex >= 0  && count >= 0) {
-            external_order = ` LIMIT ${startIndex},${count}`;
-        }
-
-        let fetchOpt = AlbumDefine.getFetchOpt(albumName, deviceId);
-        fetchOpt.order += external_order;
-
-        switch (albumName) {
-            case AlbumDefine.ALBUM_NAME_ALL:
-            case AlbumDefine.ALBUM_NAME_VIDEO:
+    async getItems(albumId: string, startIndex?: number, count?:number, deviceId?) {
+        let fetchOpt = AlbumDefine.getFileFetchOpt(albumId, deviceId, startIndex, count);
+        switch (albumId) {
+            case AlbumDefine.ALBUM_ID_ALL:
+            case AlbumDefine.ALBUM_ID_VIDEO:
                 return await this.getAllObject(fetchOpt);
-            case AlbumDefine.ALBUM_NAME_FAVOR:
-                return await MediaLibraryAccess.getFavoriteObject(fetchOpt);
-            case AlbumDefine.ALBUM_NAME_RECYCLE:
-                return await MediaLibraryAccess.getTrashObject(fetchOpt);
+            case AlbumDefine.ALBUM_ID_FAVOR:
+                return await MediaLibraryAccess.getInstance().getFavoriteObject(fetchOpt);
+            case AlbumDefine.ALBUM_ID_RECYCLE:
+                return await MediaLibraryAccess.getInstance().getTrashObject(fetchOpt);
             default:
-                let fileFetchOpt = {
-                    selections: '',
-                    selectionArgs: [],
-                    order: AlbumDefine.QUERY_ORDER_BASE + external_order
-                }
-                if (deviceId != undefined && deviceId != '') {
-                    fetchOpt['networkId'] = deviceId
-                }
-                return await MediaLibraryAccess.getEntityAlbumObject(
-                    AlbumDefine.getAlbumFetchOpt(albumName, deviceId), fileFetchOpt);
+                return await MediaLibraryAccess.getInstance().getEntityAlbumObject(
+                    AlbumDefine.getAlbumFetchOpt(albumId, deviceId), fetchOpt);
                 break;
         }
     }
 
-    async getItemsCount(albumName, deviceId?) {
-        switch (albumName) {
-            case AlbumDefine.ALBUM_NAME_ALL:
-            case AlbumDefine.ALBUM_NAME_VIDEO:
-                let fetchOpt = AlbumDefine.getFetchOpt(albumName, deviceId);
+    async getItemsCount(albumId, deviceId?) {
+        switch (albumId) {
+            case AlbumDefine.ALBUM_ID_ALL:
+            case AlbumDefine.ALBUM_ID_VIDEO:
+                let fetchOpt = AlbumDefine.getFileFetchOpt(albumId, deviceId);
                 return await this.getCount(fetchOpt);
-            case AlbumDefine.ALBUM_NAME_FAVOR:
-                return await MediaLibraryAccess.getFavoriteCount();
-            case AlbumDefine.ALBUM_NAME_RECYCLE:
-                return await MediaLibraryAccess.getTrashCount();
+            case AlbumDefine.ALBUM_ID_FAVOR:
+                return await MediaLibraryAccess.getInstance().getFavoriteCount();
+            case AlbumDefine.ALBUM_ID_RECYCLE:
+                return await MediaLibraryAccess.getInstance().getTrashCount();
             default:
-                return await MediaLibraryAccess.getEntityAlbumCount(AlbumDefine.getAlbumFetchOpt(albumName, deviceId));
+                return await MediaLibraryAccess.getInstance().getEntityAlbumCount(AlbumDefine.getAlbumFetchOpt(albumId, deviceId), AlbumDefine.getFileFetchOpt(''));
                 break;
-        }
-    }
-
-    async getTrashObjectById(id) {
-        this.logger.info('getTrashObjectById');
-
-        try {
-            let result = await MediaLibraryAccess.getTrashObject(AlbumDefine.getFileFetchOpt(id));
-            if (result == null) {
-                this.logger.info('getTrashObjectByUri fail');
-                return null;
-            }
-            return result[0];
-        } catch (error) {
-            this.logger.error('getTrashObject error');
-            return null;
         }
     }
 
@@ -115,7 +86,7 @@ export abstract class BrowserDataImpl implements BrowserDataInterface {
                 return `${sourceUri}/thumbnail/${BrowserDataImpl.THUMBNAIL_WIDTH}/${BrowserDataImpl.THUMBNAIL_WIDTH}`;
             }
         } catch (err) {
-            this.logger.warn(`get Thumbnail Failed! msg:${err}`);
+            this.logger.error(`get Thumbnail Failed! msg:${err}`);
             return null;
         }
     }

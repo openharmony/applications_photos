@@ -13,10 +13,12 @@
  * limitations under the License.
  */
 
-import {MathUtil} from './MathUtil.ets'
-import {Logger} from './Logger.ets'
+import {MathUtil} from './MathUtil'
+import {Logger} from './Logger'
+import {Constants} from '../model/common/Constants';
 import resourceManager from '@ohos.resourceManager';
 import prompt from '@system.prompt';
+import {ScreenManager} from '../model/common/ScreenManager';
 
 export class UiUtil {
 
@@ -55,7 +57,7 @@ export class UiUtil {
      */
     private static readonly HEX_COLOR_OPACITY_LENGTH = 2;
 
-    private static readonly TOAST_DURATION = 2000;
+    public static readonly TOAST_DURATION = 3000;
 
     /**
      * Hexadecimal array
@@ -92,7 +94,7 @@ export class UiUtil {
      */
     static setSystemUi(isShowBar: boolean): void {
         this.logger.debug('setSystemUi start');
-        let topWindow: any = AppStorage.Get('mainWindow');
+        let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
         this.logger.debug('getTopWindow start');
         let names = ["status", "navigation"];
         if (!isShowBar) {
@@ -233,8 +235,8 @@ export class UiUtil {
     static async getResourceString(resource: Resource) {
         try {
             this.logger.info(`getResourceString: ${JSON.stringify(resource)}`);
-            let mgr = await resourceManager.getResourceManager(globalThis.photosAbilityContext);
-            if (mgr) {
+            let mgr:resourceManager.ResourceManager = await resourceManager.getResourceManager(globalThis.photosAbilityContext);
+            if (mgr != null || mgr != undefined) {
                 return await mgr.getString(resource.id);
             } else {
                 this.logger.error(`getResourceManager instance is none`);
@@ -248,11 +250,12 @@ export class UiUtil {
 
     static async showToast(resource: Resource) {
         let message = await UiUtil.getResourceString(resource);
+        let naviBarHeight = ScreenManager.getInstance().getNaviBarHeight()
         this.logger.debug(`showToast: ${message}`);
         prompt.showToast({
             message: message,
             duration: UiUtil.TOAST_DURATION,
-            bottom: '200vp'
+            bottom: `${64 + naviBarHeight}vp`
         });
     }
 }

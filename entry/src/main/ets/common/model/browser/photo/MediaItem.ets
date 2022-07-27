@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 import { DateUtil } from '../../../utils/DateUtil';
+import { Constants } from '../../common/Constants'
+
 export class MediaItem {
     index?: number;
     id: number;
@@ -27,6 +29,8 @@ export class MediaItem {
     orientation: number;
     width: number;
     height: number;
+    imgWidth: number;
+    imgHeight: number;
     isFavor: boolean;
     type: string;
     displayName: string;
@@ -45,15 +49,17 @@ export class MediaItem {
         this.title = data.title;
         this.size = data.size;
         this.dateTaken = data.dateAdded * DateUtil.MILLISECONDS_PER_SECOND;   // TODO dateTaken is not supported, use dateAdded
-        this.dateModified = data.dateModified * 1000;
+        this.dateModified = data.dateModified * DateUtil.MILLISECONDS_PER_SECOND;
         this.orientation = data.orientation;
-        if (this.orientation == 90 || this.orientation == 270) {
+        if (this.orientation == Constants.ANGLE_90 || this.orientation == Constants.ANGLE_270) {
             this.width = data.height;
             this.height = data.width;
         } else {
             this.width = data.width;
             this.height = data.height;
         }
+        this.imgWidth = this.width;
+        this.imgHeight = this.height;
         this.displayName = data.displayName;
         this.path = data.relativePath;
     }

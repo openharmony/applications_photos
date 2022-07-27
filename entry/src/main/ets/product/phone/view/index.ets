@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import {TimelinePage} from '../../../feature/timeline/view/TimelinePage.ets'
-import {AlbumSetPage} from '../../../feature/browser/view/album/AlbumSetPage.ets'
+import {TimelinePage} from '../../../feature/timeline/view/TimelinePage'
+import {AlbumSetPage} from '../../../feature/browser/view/album/AlbumSetPage'
 import {Logger} from '../../../common/utils/Logger'
-import {TabBar} from '../../../common/view/TabBar.ets'
-import {TabItem} from '../../../common/model/common/TabItem.ets'
-import {JumpSourceToMain} from '../../../common/model/browser/photo/JumpSourceToMain.ets'
+import {TabBar} from '../../../common/view/TabBar'
+import {TabItem} from '../../../common/model/common/TabItem'
+import {JumpSourceToMain} from '../../../common/model/browser/photo/JumpSourceToMain'
 import {BroadCast} from '../../../common/utils/BroadCast'
 import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
 import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
@@ -27,15 +27,14 @@ import {ScreenManager} from '../../../common/model/common/ScreenManager'
 import {TraceControllerUtils} from '../../../common/utils/TraceControllerUtils'
 import router from '@system.router'
 
-let tabs: TabItem[] = [
-    new TabItem($r('app.string.tab_timeline'), $r('app.media.ic_photos'), $r('app.media.ic_photos_actived'), false),
-    new TabItem($r('app.string.tab_albums'), $r('app.media.ic_albums'), $r('app.media.ic_albums_actived'), false)
-];
-
 @Entry
 @Component
 struct IndexPage {
-    @StorageLink('app_key_tabs_index') preIndex: number = Constants.TIMELINE_PAGE_INDEX;
+    private tabs: TabItem[] = [
+        new TabItem($r('app.string.tab_timeline'), $r('app.media.ic_photos'), $r("app.media.ic_photos_active"), false),
+        new TabItem($r('app.string.tab_albums'), $r('app.media.ic_albums'), $r("app.media.ic_albums_active"), false)
+    ];
+    private preIndex: number = Constants.TIMELINE_PAGE_INDEX;
     @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
     @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
@@ -60,67 +59,28 @@ struct IndexPage {
         this.isUpdate = !this.isUpdate;
     }
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         TraceControllerUtils.startTrace('indexPageAppearToShow');
-        Environment.EnvProp('languageCode', 'default');
-        ScreenManager.getInstance().initWindowMode();
+        if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
+            AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false)
+            this.currentIndex = Constants.ALBUM_PAGE_INDEX;
+        }
         let param = router.getParams();
         this.logger.info(`param: ${JSON.stringify(param)}`);
         if (param != null) {
-            this.jumpSource = param.jumpSource;
+            this.jumpSource = new Number(param.jumpSource).valueOf() || 0
             if (this.jumpSource == JumpSourceToMain.CAMERA) {
                 this.currentIndex = Constants.TIMELINE_PAGE_INDEX;
                 this.entryFromHap = Constants.ENTRY_FROM_NONE;
                 this.logger.info(`Camera in, switch to Tab ${this.currentIndex}.`);
             }
         }
-        this.appBroadCast.on(BroadCastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
     }
 
-    thirdRouterPage() {
-        this.logger.debug(`thirdRouterPage entryFromHap: ${this.entryFromHap}`);
-        if (this.entryFromHap == Constants.ENTRY_FROM_NONE) {
-            return;
-        }
-        if (this.entryFromHap == Constants.ENTRY_FROM_CAMERA) {
-            let options = {
-                uri: 'feature/browser/view/photo/PhotoBrowser',
-                params: {
-                    pageFrom: Constants.ENTRY_FROM.CAMERA
-                }
-            };
-            this.entryFromHap = Constants.ENTRY_FROM_NONE;
-            router.replace(options);
-        } else if (this.entryFromHap == Constants.ENTRY_FROM_SINGLE_SELECT) {
-            let options = {
-                uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
-                params: {
-                    isMultiPick: false,
-                }
-            };
-            this.entryFromHap = Constants.ENTRY_FROM_NONE;
-            router.replace(options);
-        } else if (this.entryFromHap == Constants.ENTRY_FROM_MULTIPLE_SELECT) {
-            let options = {
-                uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
-                params: {
-                    isMultiPick: true,
-                }
-            };
-            this.entryFromHap = Constants.ENTRY_FROM_NONE;
-            router.replace(options);
-        }
-        setTimeout(() => {
-            router.clear();
-        }, 50);
-    }
-
-    private onPageShow() {
+    onPageShow() {
         this.logger.debug(`IndexPage.onPageShow entryFromHap: ${this.entryFromHap} permission ${this.permission}`);
-        this.thirdRouterPage();
-        setTimeout(() => {
-            this.isShow = true
-        }, 50);
+        this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
+        this.isShow = true
         this.logger.error(`IndexPage.onPageShow: router.clear ${this.jumpSource}`);
         if (this.jumpSource == JumpSourceToMain.CAMERA) {
             router.clear();
@@ -130,13 +90,11 @@ struct IndexPage {
         TraceControllerUtils.finishTrace('indexPageAppearToShow');
     }
 
-    private onPageHide() {
-        setTimeout(() => {
-            this.isShow = false
-        }, 50);
+    onPageHide() {
+        this.isShow = false
     }
 
-    private onBackPress() {
+    onBackPress() {
         let isProcessed = false;
         this.appBroadCast.emit(BroadCastConstants.BACK_PRESS_EVENT, [function(isModeChanged: boolean) {
             isProcessed = isModeChanged;
@@ -155,7 +113,7 @@ struct IndexPage {
     }
 
     build() {
-        Stack() {
+        Row() {
             if (this.permission && this.entryFromHap == Constants.ENTRY_FROM_NONE) {
                 Row() {
                     Tabs({
@@ -186,7 +144,7 @@ struct IndexPage {
 
                     TabBar({
                         currentIndex: this.currentIndex,
-                        tabs: tabs,
+                        tabs: this.tabs,
                         controller: this.tabsController,
                         isSidebar: this.isSidebar
                     })
@@ -201,11 +159,10 @@ struct IndexPage {
             })
 
     }
-
     pageTransition() {
-        PageTransitionEnter({ duration: 300 })
-            .opacity(1)
-        PageTransitionExit({ duration: 300 })
-            .opacity(1)
+        PageTransitionEnter({ type: RouteType.None, duration: 1 })
+            .opacity(0)
+        PageTransitionExit({ type: RouteType.None, duration: 1 })
+            .opacity(0)
     }
 }

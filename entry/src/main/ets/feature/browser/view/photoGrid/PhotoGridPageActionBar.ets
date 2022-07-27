@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import {Action} from '../../../../common/model/browser/operation/Action.ets'
-import {ActionBar} from '../../../../common/view/actionbar/ActionBar.ets'
-import {ActionBarProp} from '../../../../common/model/browser/operation/ActionBarProp.ets'
-import {ActionBarMode, ActionBarSelectionMode} from '../../../../common/model/browser/operation/ActionBarMode.ets'
+import {Action} from '../../../../common/view/browserOperation/Action'
+import {ActionBar} from '../../../../common/view/actionbar/ActionBar'
+import {ActionBarProp} from '../../../../common/view/browserOperation/ActionBarProp'
+import {ActionBarMode, ActionBarSelectionMode} from '../../../../common/view/browserOperation/ActionBarMode'
 import {Logger} from '../../utils/Logger'
 import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine.ets';
+import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine';
 
 @Component
 export struct PhotoGridPageActionBar {
@@ -27,9 +27,9 @@ export struct PhotoGridPageActionBar {
     @Consume isAllSelected: boolean;
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
     @Consume('selectedCount') selectedCount: number;
-    title: Resource | string;
-    deviceName: string;
-    albumName: string;
+    @Consume isEmpty: boolean;
+    title: string;
+    albumId: string;
     isRecycle: boolean;
     onMenuClicked: Function;
     logger: Logger = new Logger('PhotoGridPageActionBar');
@@ -65,10 +65,10 @@ export struct PhotoGridPageActionBar {
                 .setMode(ActionBarMode.SELECTION_MODE)
                 .setSelectionMode(ActionBarSelectionMode.MULTI);
         } else {
-            if (!AlbumDefine.ALBUM_DISABLE_DELETE_LIST.has(this.albumName) && this.isDistributedAlbum == false) {
+            if (!AlbumDefine.ALBUM_DISABLE_NEW_LIST.has(this.albumId) && this.isDistributedAlbum == false) {
                 menuList.push(Action.NEW);
             }
-            if (this.isRecycle) {
+            if (this.isRecycle && !this.isEmpty) {
                 menuList.push(Action.CLEAR_RECYCLE);
             }
         }
@@ -80,14 +80,13 @@ export struct PhotoGridPageActionBar {
         let menuList: Array<Action> = new Array<Action>();
         let actionBarProp: ActionBarProp = new ActionBarProp();
 
-        if (!AlbumDefine.ALBUM_DISABLE_DELETE_LIST.has(this.albumName) && this.isDistributedAlbum == false) {
+        if (!AlbumDefine.ALBUM_DISABLE_NEW_LIST.has(this.albumId) && this.isDistributedAlbum == false) {
             menuList.push(Action.NEW);
         }
 
         actionBarProp
             .setLeftAction(Action.BACK)
             .setTitle(this.title)
-            .setSubTitle(this.deviceName ? $r('app.string.distribute_album_title_holder', this.deviceName) : null)
             .setMenuList(menuList)
             .setMode(ActionBarMode.STANDARD_MODE);
         this.logger.info(`createActionBar, isSelectedMode: ${this.isSelectedMode}`);

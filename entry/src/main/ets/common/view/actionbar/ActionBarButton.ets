@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {Action} from '../../model/browser/operation/Action.ets'
-import {ActionBarColorMode} from '../../model/browser/operation/ActionBarMode.ets'
-import {ScreenManager, ColumnSize} from '../../model/common/ScreenManager.ets';
-import {Constants} from '../../model/common/Constants.ets';
+import {Action} from '../browserOperation/Action'
+import {ActionBarColorMode} from '../browserOperation/ActionBarMode'
+import {ScreenManager, ColumnSize} from '../../model/common/ScreenManager';
+import {Constants} from '../../model/common/Constants';
 
 @Component
 export struct ActionBarButton {
@@ -31,40 +31,36 @@ export struct ActionBarButton {
     @State showPopup: boolean = false
     @Consume moreMenuList: Action[];
 
-    private aboutToAppear(): void {}
+    aboutToAppear(): void {}
 
     @Builder PopupBuilder() {
         Column() {
             ForEach(this.moreMenuList, (menu: Action) => {
                 Text(menu.textRes)
-                    .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
+                    .width('100%')
                     .height($r('app.float.menu_height'))
                     .fontColor(menu.fillColor)
                     .fontSize($r('sys.float.ohos_id_text_size_body1'))
                     .onClick(() => {
+                        this.showPopup = false;
                         this.onMenuClicked && this.onMenuClicked(menu);
                     })
                 if (this.moreMenuList.indexOf(menu) != this.moreMenuList.length - 1) {
                     Divider()
-                        .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
+                        .width('100%')
                         .strokeWidth(Constants.MENU_DIVIDER_STROKE_WIDTH)
                         .color($r('sys.color.ohos_id_color_list_separator'))
                 }
             }, menu => (menu.actionType != null ? menu.actionType.id : menu.actionID))
-        }
+        }.width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
         .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
-        .padding({
-            top: $r('app.float.menu_padding_vertical'),
-            bottom: $r('app.float.menu_padding_vertical'),
-            left: $r('app.float.menu_padding_horizontal'),
-            right: $r('app.float.menu_padding_horizontal')
-        })
-            .backgroundColor(Color.White)
-            .margin({
-                right: this.isHorizontal ? $r('app.float.menu_horizontal_margin_right') : $r('app.float.menu_margin_right'),
-                bottom: this.isHorizontal ? 0 : $r('app.float.menu_margin_bottom'),
-                top: this.isHorizontal ? $r('app.float.menu_horizontal_margin_top') : 0
+            .padding({
+                top: $r('app.float.menu_padding_vertical'),
+                bottom: $r('app.float.menu_padding_vertical'),
+                left: $r('app.float.menu_padding_horizontal'),
+                right: $r('app.float.menu_padding_horizontal')
             })
+            .backgroundColor(Color.White)
     }
 
     @Builder ActionBarButtonBuilder() {
@@ -75,12 +71,14 @@ export struct ActionBarButton {
         }) {
             if (this.isAutoTint) {
                 Image(this.res)
-                    .commonButtonStyle()
+                    .height($r('app.float.icon_size'))
+                    .width($r('app.float.icon_size'))
                     .fillColor(this.colorMode == ActionBarColorMode.TRANSPARENT ?
                         Action.ICON_DEFAULT_COLOR_CONTRARY : this.action.fillColor)
             } else {
                 Image(this.res)
-                    .commonButtonStyle()
+                    .height($r('app.float.icon_size'))
+                    .width($r('app.float.icon_size'))
             }
         }
         .height($r('app.float.default_button_size'))
@@ -117,9 +115,4 @@ export struct ActionBarButton {
             })
         }
     }
-}
-
-@Extend(Image) function commonButtonStyle () {
-    .height($r('app.float.icon_size'))
-        .width($r('app.float.icon_size'))
 }

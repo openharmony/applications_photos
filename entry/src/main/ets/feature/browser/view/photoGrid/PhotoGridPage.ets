@@ -16,43 +16,45 @@
 import router from '@system.router'
 import prompt from '@system.prompt';
 import {Logger} from '../../utils/Logger'
-import {PhotoGridPageActionBar} from './PhotoGridPageActionBar.ets'
-import {PhotoGridPageToolBar} from './PhotoGridPageToolBar.ets'
-import {ImageGridItemComponent} from '../../../../common/view/ImageGridItemComponent.ets'
-import {Action} from '../../../../common/model/browser/operation/Action.ets'
+import {PhotoGridPageActionBar} from './PhotoGridPageActionBar'
+import {PhotoGridPageToolBar} from './PhotoGridPageToolBar'
+import {ImageGridItemComponent} from '../../../../common/view/ImageGridItemComponent'
+import {Action} from '../../../../common/view/browserOperation/Action'
 import {CustomDialogView} from '../../../../common/view/dialog/CustomDialogView'
-import {SelectManager} from '../../../../common/model/browser/SelectManager.ets'
-import {BroadCast} from '../../../../common/utils/BroadCast.ets'
+import {SelectManager} from '../../../../common/model/browser/SelectManager'
+import {BroadCast} from '../../../../common/utils/BroadCast'
 import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants'
-import {Constants} from '../../../../common/model/common/Constants.ets'
-import {MenuOperation} from '../../../../common/model/browser/operation/MenuOperation'
-import {MenuContext} from '../../../../common/model/browser/operation/MenuContext'
-import {MenuOperationFactory} from '../../../../common/model/browser/interface/MenuOperationFactory.ets'
-import {BatchDeleteMenuOperation} from '../../../../common/model/browser/operation/BatchDeleteMenuOperation'
-import {MediaDataSource} from '../../../../common/model/browser/photo/MediaDataSource.ets'
-import {MediaItem} from '../../../../common/model/browser/photo/MediaItem.ets'
+import {Constants} from '../../../../common/model/common/Constants'
+import {MenuOperation} from '../../../../common/view/browserOperation/MenuOperation'
+import {MenuContext} from '../../../../common/view/browserOperation/MenuContext'
+import {MenuOperationFactory} from '../../../../common/interface/MenuOperationFactory'
+import {BatchDeleteMenuOperation} from '../../../../common/view/browserOperation/BatchDeleteMenuOperation'
+import {MediaDataSource} from '../../../../common/model/browser/photo/MediaDataSource'
+import {MediaItem} from '../../../../common/model/browser/photo/MediaItem'
 import {ScreenManager} from '../../../../common/model/common/ScreenManager'
 import {TraceControllerUtils} from '../../../../common/utils/TraceControllerUtils'
-import { ShareMenuOperation } from '../../../../common/model/browser/operation/ShareMenuOperation.ets';
+import { ShareMenuOperation } from '../../../../common/view/browserOperation/ShareMenuOperation';
 import {BroadCastManager} from '../../../../common/model/common/BroadCastManager'
 import {JumpSourceToMain} from '../../../../common/model/browser/photo/JumpSourceToMain'
-import {UiUtil} from '../../../../common/utils/UiUtil.ets';
-import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine.ets'
+import {UiUtil} from '../../../../common/utils/UiUtil';
+import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine'
 import {MediaOperationType} from '../../../../common/model/common/MediaOperationType'
-import {CopyMenuOperation} from '../../../../common/model/browser/operation/CopyMenuOperation';
-import { MoveMenuOperation } from '../../../../common/model/browser/operation/MoveMenuOperation.ets';
-import { GridScrollBar } from '../../../../common/view/GridScrollBar.ets';
-import { BatchRecoverMenuOperation } from '../../../../common/model/browser/operation/BatchRecoverMenuOperation.ets';
-import { ClearRecycleMenuOperation } from '../../../../common/model/browser/operation/ClearRecycleMenuOperation.ets';
-import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver.ets';
-import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback.ets';
+import {CopyMenuOperation} from '../../../../common/view/browserOperation/CopyMenuOperation';
+import { MoveMenuOperation } from '../../../../common/view/browserOperation/MoveMenuOperation';
+import { GridScrollBar } from '../../../../common/view/GridScrollBar';
+import { BatchRecoverMenuOperation } from './BatchRecoverMenuOperation';
+import { ClearRecycleMenuOperation } from './ClearRecycleMenuOperation';
+import { AlbumInfo } from '../../../../common/model/browser/album/AlbumInfo';
+import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver';
+import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback';
+import { NoPhotoComponent } from '../../../../common/view/NoPhotoComponent';
 
-AppStorage.SetOrCreate('PhotoGridPageIndex', Constants.INVALID);
 // Album Page
 @Entry
 @Component
 export struct PhotoGridPage {
     @Provide isHideScrollBar: boolean = true;
+    @Provide isEmpty: boolean = false;
     @State gridRowCount: number = 0;
     @Provide isSelectedMode: boolean = false;
     @Provide isAllSelected: boolean = false;
@@ -68,9 +70,9 @@ export struct PhotoGridPage {
     @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    albumInfo: AlbumInfo;
     title: string;
     deviceName: string;
-    albumName: string;
     dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
     scroller: Scroller = new Scroller();
     isDataFreeze = false;
@@ -78,8 +80,8 @@ export struct PhotoGridPage {
     mSelectManager = new SelectManager();
     isActive = false;
     isDistributedAlbum = false;
-    deviceId: string = '';
     deleteMode: boolean = false;
+    routerStart = false;
     private dataObserver: CommonObserverCallback  = new CommonObserverCallback(this);
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
 
@@ -96,7 +98,11 @@ export struct PhotoGridPage {
         let menuOperation: MenuOperation;
         switch (action) {
             case Action.BACK:
-                router.back();
+                if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
+                    this.routerAblumSetPage();
+                } else {
+                    router.back();
+                }
                 break;
             case Action.CANCEL:
                 this.onModeChange();
@@ -105,7 +111,7 @@ export struct PhotoGridPage {
                 this.mSelectManager.selectAll(true);
                 break;
             case Action.DESELECT_ALL:
-                this.mSelectManager.deSelectAll();
+                this.mSelectManager.unselectAll();
                 break;
             case Action.DELETE:
                 menuContext = new MenuContext();
@@ -116,7 +122,7 @@ export struct PhotoGridPage {
                     .withOperationStartCallback(this.onDeleteStart)
                     .withOperationEndCallback(this.onDeleteEnd)
                     .withBroadCast(this.broadCast)
-                    .withAlbumName(this.albumName);
+                    .withAlbumId(this.albumInfo.id)
                 menuOperation = MenuOperationFactory.getInstance()
                     .createMenuOperation(BatchDeleteMenuOperation, menuContext);
                 menuOperation.doAction();
@@ -140,7 +146,7 @@ export struct PhotoGridPage {
                     .withOperationStartCallback(this.onDeleteStart)
                     .withOperationEndCallback(this.onDeleteEnd)
                     .withBroadCast(this.broadCast)
-                    .withAlbumName(AlbumDefine.ALBUM_NAME_RECYCLE);
+                    .withAlbumId(AlbumDefine.ALBUM_ID_RECYCLE)
                 menuOperation = MenuOperationFactory.getInstance()
                     .createMenuOperation(ClearRecycleMenuOperation, menuContext);
                 menuOperation.doAction();
@@ -150,11 +156,11 @@ export struct PhotoGridPage {
                 this.onDeleteStart = this.onDeleteStart.bind(this);
                 this.onDeleteEnd = this.onDeleteEnd.bind(this);
                 menuContext
-                    .withAlbumName(AlbumDefine.ALBUM_NAME_RECYCLE)
+                    .withAlbumId(AlbumDefine.ALBUM_ID_RECYCLE)
                     .withSelectManager(this.mSelectManager)
                     .withOperationStartCallback(this.onDeleteStart)
                     .withOperationEndCallback(this.onDeleteEnd)
-                    .withBroadCast(this.broadCast);
+                    .withBroadCast(this.broadCast)
                 menuOperation = MenuOperationFactory.getInstance()
                     .createMenuOperation(BatchRecoverMenuOperation, menuContext);
                 menuOperation.doAction();
@@ -177,8 +183,7 @@ export struct PhotoGridPage {
                     .withOperationStartCallback(this.onDownloadStart)
                     .withOperationEndCallback(this.onDownloadEnd)
                     .withBroadCast(this.broadCast)
-                    .withAlbumName(AlbumDefine.ALBUM_NAME_REMOTE)
-                    .withRemoteDevice(this.deviceId);
+                    .withRemoteDevice(this.albumInfo.deviceId);
                 menuOperation = MenuOperationFactory.getInstance().createMenuOperation(CopyMenuOperation, menuContext);
                 menuOperation.doAction();
                 break;
@@ -218,12 +223,22 @@ export struct PhotoGridPage {
         }
     }
 
+    routerAblumSetPage() {
+        router.replace({
+            uri: this.isHorizontal === true ? 'product/pad/view/index' : 'product/phone/view/index',
+            params:{
+                jumpSource: JumpSourceToMain.ALBUM,
+            }
+        });
+    }
+
     routeSelectAlbumPage(pageType: string): void {
+        this.routerStart = true;
         router.push({
-            uri: 'common/view/mediaOperation/MediaOperationPage',
+            uri: 'common/view/browserOperation/MediaOperationPage',
             params: {
                 pageType : pageType,
-                albumName : this.albumName
+                albumId : this.albumInfo.id
             }
         });
     }
@@ -232,23 +247,24 @@ export struct PhotoGridPage {
         router.push({
             uri: 'feature/browser/view/album/AlbumSelect',
             params: {
-                albumName : this.albumName
+                albumInfo : JSON.stringify(this.albumInfo)
             }
         });
     }
 
     onCopyStart(): void {
+        this.logger.info(`onCopyStart`);
         this.isDataFreeze = true;
         MediaObserver.getInstance().unregisterObserver(this.dataObserver);
         this.dataSource.freeze();
     }
 
     onCopyEnd(err, count, total): void {
-        this.logger.debug(`onCopyEnd count: ${count}, total: ${total}`);
+        this.logger.info(`onCopyEnd count: ${count}, total: ${total}`);
         this.isDataFreeze = false;
         this.onModeChange();
         MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.onChange('image');
+        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
         this.dataSource.unfreeze();
         if (err) {
             UiUtil.showToast($r('app.string.copy_failed_single'));
@@ -256,26 +272,29 @@ export struct PhotoGridPage {
     }
 
     onDownloadStart(): void {
+        this.logger.info(`onDownloadStart`);
         this.isDataFreeze = true;
         MediaObserver.getInstance().unregisterObserver(this.dataObserver);
         this.dataSource.freeze();
     }
 
     async onDownloadEnd(err, count, total) {
+        this.logger.info(`onDownloadEnd count: ${count}, total: ${total}`);
         this.isDataFreeze = false;
         this.onModeChange();
         MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.onChange('image');
+        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
         this.dataSource.unfreeze();
         if (err) {
             if (total > 1) {
                 this.logger.error(`get selectItems is error ${count}`);
                 let str = await UiUtil.getResourceString($r('app.string.download_failed_multi'));
+                let naviBarHeight = ScreenManager.getInstance().getNaviBarHeight()
                 let message = str.replace('%d', count.toString());
                 prompt.showToast({
                     message: message,
-                    duration: 2000,
-                    bottom: '200vp'
+                    duration: UiUtil.TOAST_DURATION,
+                    bottom: `${64 + naviBarHeight}vp`
                 });
             } else {
                 UiUtil.showToast($r('app.string.download_failed_single'))};
@@ -285,17 +304,19 @@ export struct PhotoGridPage {
     }
 
     onMoveStart(): void {
+        this.logger.info(`onMoveStart`);
         this.isDataFreeze = true;
         MediaObserver.getInstance().unregisterObserver(this.dataObserver);
         this.dataSource.freeze();
     }
 
     onMoveEnd(err, count, total): void {
-        this.logger.debug(`onMoveEnd count: ${count}, total: ${total}`);
+        this.logger.info(`onMoveEnd count: ${count}, total: ${total}`);
         this.isDataFreeze = false;
         this.onModeChange();
         MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.onChange('image');
+        this.dataSource.switchRefreshOn();
+        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
         this.dataSource.unfreeze();
         if (err) {
             UiUtil.showToast($r('app.string.move_failed_single'));
@@ -303,6 +324,7 @@ export struct PhotoGridPage {
     }
 
     onDeleteStart(): void {
+        this.logger.info(`onDeleteStart`);
         this.deleteMode = true;
         this.isDataFreeze = true;
         MediaObserver.getInstance().unregisterObserver(this.dataObserver);
@@ -310,10 +332,11 @@ export struct PhotoGridPage {
     }
 
     onDeleteEnd(): void {
+        this.logger.info(`onDeleteEnd`);
         this.isDataFreeze = false;
         this.onModeChange();
         MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.onChange('image');
+        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
         this.dataSource.unfreeze();
     }
 
@@ -335,27 +358,28 @@ export struct PhotoGridPage {
         this.mSelectManager.onModeChange(false);
     }
 
-    private onPageShow() {
+    onPageShow() {
         this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
         this.isShow = true
         let params = router.getParams();
-        if (params != null && params.pageType != null) {
+        if (this.routerStart && params && params.pageType && params.albumInfo) {
             this.logger.info('MediaOperation back');
             switch(params.pageType) {
                 case MediaOperationType.Move:
-                    this.moveOperation(params.albumName);
+                    this.moveOperation(JSON.parse(params.albumInfo.toString()));
                     break;
                 case MediaOperationType.Copy:
-                    this.copyOperation(params.albumName);
+                    this.copyOperation(JSON.parse(params.albumInfo.toString()));
                     break;
                 default:
                     break;
             }
         }
+        this.routerStart = false;
         this.onActive();
     }
 
-    private onPageHide() {
+    onPageHide() {
         this.isShow = false;
         this.onInActive();
     }
@@ -388,7 +412,11 @@ export struct PhotoGridPage {
         }
     }
 
-    private onBackPress() {
+    onBackPress() {
+        if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
+            this.routerAblumSetPage();
+            return true;
+        }
         if (this.isSelectedMode) {
             this.onModeChange();
             return true;
@@ -396,7 +424,7 @@ export struct PhotoGridPage {
         return false;
     }
 
-    private moveOperation(albumName: string) {
+    private moveOperation(albumInfo: AlbumInfo) {
         let menuContext = new MenuContext();
         this.onMoveStart = this.onMoveStart.bind(this);
         this.onMoveEnd = this.onMoveEnd.bind(this);
@@ -405,12 +433,12 @@ export struct PhotoGridPage {
             .withOperationStartCallback(this.onMoveStart)
             .withOperationEndCallback(this.onMoveEnd)
             .withBroadCast(this.broadCast)
-            .withAlbumName(albumName);
+            .withAlbumInfo(albumInfo);
         let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(MoveMenuOperation, menuContext);
         menuOperation.doAction();
     }
 
-    private copyOperation(albumName: string) {
+    private copyOperation(albumInfo: AlbumInfo) {
         let menuContext = new MenuContext();
         this.onCopyStart = this.onCopyStart.bind(this);
         this.onCopyEnd = this.onCopyEnd.bind(this);
@@ -419,31 +447,25 @@ export struct PhotoGridPage {
             .withOperationStartCallback(this.onCopyStart)
             .withOperationEndCallback(this.onCopyEnd)
             .withBroadCast(this.broadCast)
-            .withAlbumName(albumName);
+            .withAlbumInfo(albumInfo);
         let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(CopyMenuOperation, menuContext);
         menuOperation.doAction();
     }
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         TraceControllerUtils.startTrace('PhotoGridPageAboutToAppear');
         let param = router.getParams();
-        if (param != null) {
+        if (param.item) {
             this.logger.debug(`After router.getParams, param is: ${JSON.stringify(param)}`);
-            let item = JSON.parse(param.item);
-            this.title = item.displayName;
-            this.albumName = item.name;
-            this.dataSource.setAlbumName(item.name);
+            this.albumInfo = JSON.parse(param.item.toString());
+            this.title = this.albumInfo.displayName;
+            this.dataSource.setAlbumId(this.albumInfo.id);
 
             if (param.isDistributedAlbum) {
-                this.isDistributedAlbum = param.isDistributedAlbum;
-                this.deviceId = item.deviceId;
-                this.title = param.distributedAlbumName;
-            }
-
-            if (item.deviceId) {
-                this.dataSource.setDeviceId(item.deviceId);
-                this.mSelectManager.setDeviceId(item.deviceId);
-                this.deviceName = item.deviceName;
+                this.isDistributedAlbum = new Boolean(param.isDistributedAlbum).valueOf();
+                param.distributedAlbumName && (this.title = param.distributedAlbumName.toString());
+                this.dataSource.setDeviceId(this.albumInfo.deviceId);
+                this.mSelectManager.setDeviceId(this.albumInfo.deviceId);
             }
         }
 
@@ -451,8 +473,9 @@ export struct PhotoGridPage {
         this.onMenuClicked = this.onMenuClicked.bind(this);
         this.dataSource.setBroadCast(this.broadCast)
         this.mSelectManager.setPhotoDataImpl();
-        this.mSelectManager.setAlbumName(this.albumName);
+        this.mSelectManager.setAlbumId(this.albumInfo.id);
         MediaObserver.getInstance().registerObserver(this.dataObserver);
+
         this.broadCast.on(BroadCastConstants.SELECT,
             (position: number, key: string, value: boolean, callback: Function) => {
             if (self.mSelectManager.toggle(key, value)) {
@@ -471,7 +494,7 @@ export struct PhotoGridPage {
             }
             self.logger.info(`jump to photo browser at index: ${targetIndex}`);
             let pageEntryFrom = Constants.ENTRY_FROM.NORMAL;
-            if (self.dataSource.albumName == AlbumDefine.ALBUM_NAME_RECYCLE) {
+            if (self.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE) {
                 pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
             } else if (self.isDistributedAlbum) {
                 pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
@@ -485,9 +508,8 @@ export struct PhotoGridPage {
                     transition: name,
                     leftBlank: self.leftBlank,
                     pageFrom: pageEntryFrom,
-                    deviceId: self.deviceId,
-                    albumName: self.albumName,
-                    deviceName: self.deviceName
+                    deviceName: self.deviceName,
+                    albumInfo: self.albumInfo
                 }
             });
         });
@@ -500,7 +522,7 @@ export struct PhotoGridPage {
             }
             self.logger.info(`jump to photo browser at index: ${targetIndex} ${name}`);
             let pageEntryFrom = Constants.ENTRY_FROM.NORMAL;
-            if (self.dataSource.albumName == AlbumDefine.ALBUM_NAME_RECYCLE) {
+            if (self.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE) {
                 pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
             } else if (self.isDistributedAlbum) {
                 pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
@@ -512,7 +534,7 @@ export struct PhotoGridPage {
                     position: targetIndex,
                     transition: name,
                     pageFrom: pageEntryFrom,
-                    deviceId: self.deviceId
+                    deviceId: self.albumInfo.deviceId
                 }
             });
         });
@@ -521,8 +543,8 @@ export struct PhotoGridPage {
         });
         this.appBroadCast.on(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
 
-        if(this.deviceId){
-            this.logger.info(`deviceId size: ${this.deviceId}`);
+        if(this.albumInfo.deviceId){
+            this.logger.info(`deviceId size: ${this.albumInfo.deviceId}`);
             this.appBroadCast.on(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
         }
         AppStorage.SetOrCreate(Constants.THIRD_SELECT_MANAGER, this.mSelectManager);
@@ -539,18 +561,15 @@ export struct PhotoGridPage {
         }));
         this.dataSource.registerCallback('updateCount', (newState: number) => {
             self.logger.info(`updateTotalCount ${newState}`);
-            self.isHideScrollBar = (newState <= 50);
+            self.isHideScrollBar = (newState <= Constants.SCROLL_BAR_VISIBLE_THRESHOLD);
+            self.isEmpty = !Boolean(newState)
             self.mSelectManager.setTotalCount(newState);
-            if (newState == 0) {
-                self.logger.info(`router back`);
-                router.back();
-            }
         })
 
         this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, () => {
             this.logger.info('ON_DATA_RELOADED');
             if (this.deleteMode) {
-                animateTo({}, ()=>{
+                animateTo({duration: Constants.DELETE_ANIMATE_DURATION}, ()=>{
                     this.dataSource.onDataReloaded();
                 })
                 this.deleteMode = false;
@@ -579,11 +598,11 @@ export struct PhotoGridPage {
 
     private onUpdateRemoteDevice(res, deviceId): void {
         this.logger.info(`onUpdateRemoteDevice`);
-        if (deviceId != this.deviceId || this.isActive == false) {
+        if (deviceId != this.albumInfo.deviceId || this.isActive == false) {
             this.logger.debug(`other device`);
             return;
         }
-        if(res == 'offline') {
+        if(res == Constants.DEVICE_STATE_OFFLINE) {
             this.logger.debug(`device offline route to album main`);
             router.back({
                 uri: this.isHorizontal === true ? 'product/pad/view/index' : 'product/phone/view/index',
@@ -602,7 +621,7 @@ export struct PhotoGridPage {
         this.dataSource.onChange(changeType);
     }
 
-    private aboutToDisappear(): void {
+    aboutToDisappear(): void {
         this.logger.info(`aboutToDisappear`);
         this.broadCast.off(null, null);
         this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
@@ -614,42 +633,47 @@ export struct PhotoGridPage {
         Column() {
             PhotoGridPageActionBar({
                 title: this.title,
-                deviceName: this.deviceName,
-                albumName: this.albumName,
+                albumId: this.albumInfo.innerId,
                 onMenuClicked: this.onMenuClicked,
-                isRecycle: this.dataSource.albumName == AlbumDefine.ALBUM_NAME_RECYCLE,
+                isRecycle: this.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE,
                 isDistributedAlbum: this.isDistributedAlbum
             })
 
-            Stack() {
-                Grid(this.scroller) {
-                    LazyForEach(this.dataSource, (item) => {
-                        GridItem() {
-                            ImageGridItemComponent({
-                                item: item.mediaItem,
-                                isSelected: this.isSelectedMode ?
+            if(this.isEmpty) {
+                NoPhotoComponent({ title: $r('app.string.no_distributed_photo_head_title_album') })
+            } else {
+                Stack() {
+                    Grid(this.scroller) {
+                        LazyForEach(this.dataSource, (item) => {
+                            GridItem() {
+                                ImageGridItemComponent({
+                                    item: item.mediaItem,
+                                    isSelected: this.isSelectedMode ?
                                     this.mSelectManager.isItemSelected(item.mediaItem.uri) : false,
-                                pageName: Constants.PHOTO_TRANSITION_ALBUM
-                            })
-                        }.columnStart(item.viewIndex % this.gridRowCount).columnEnd(item.viewIndex % this.gridRowCount)
-                    }, item => item == null ? JSON.stringify(item) : item.mediaItem.uri)
-                }
-                .columnsTemplate('1fr '.repeat(this.gridRowCount))
+                                    pageName: Constants.PHOTO_TRANSITION_ALBUM
+                                })
+                            }.columnStart(item.viewIndex % this.gridRowCount).columnEnd(item.viewIndex % this.gridRowCount)
+                        }, item => item == null ? JSON.stringify(item) : item.mediaItem.uri)
+                    }
+                    .columnsTemplate('1fr '.repeat(this.gridRowCount))
                     .columnsGap(Constants.GRID_GUTTER)
                     .rowsGap(Constants.GRID_GUTTER)
                     .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
-                GridScrollBar({scroller: this.scroller});
-            }.layoutWeight(1)
-            .padding({
-                bottom: ((this.isSelectedMode || (this.dataSource.albumName == AlbumDefine.ALBUM_NAME_RECYCLE)) && !this.isHorizontal) ? Constants.ActionBarHeight : 0
-            })
+
+                    GridScrollBar({scroller: this.scroller});
+                }.layoutWeight(1)
+                .padding({
+                    bottom: ((this.isSelectedMode || (this.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE)) && !this.isHorizontal) ? Constants.ActionBarHeight : 0
+                })
+
+            }
 
             CustomDialogView();
 
-            if (this.isSelectedMode || (this.dataSource.albumName == AlbumDefine.ALBUM_NAME_RECYCLE)) {
+            if (this.isSelectedMode || (this.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE) && !this.isEmpty) {
                 PhotoGridPageToolBar({
                     onMenuClicked: this.onMenuClicked,
-                    isRecycleAlbum: (this.dataSource.albumName == AlbumDefine.ALBUM_NAME_RECYCLE),
+                    isRecycleAlbum: (this.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE),
                     isDistributedAlbum: this.isDistributedAlbum
                 });
             }
@@ -661,11 +685,10 @@ export struct PhotoGridPage {
                 bottom: this.leftBlank[3]
             })
     }
-
     pageTransition() {
-        PageTransitionEnter({ type: RouteType.Pop, duration: 300 })
-            .opacity(1)
-        PageTransitionExit({ type: RouteType.Push, duration: 300 })
-            .opacity(1)
+        PageTransitionEnter({ type: RouteType.None, duration: 1 })
+            .opacity(0)
+        PageTransitionExit({ type: RouteType.None, duration: 1 })
+            .opacity(0)
     }
 }

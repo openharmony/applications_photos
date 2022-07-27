@@ -14,8 +14,8 @@
  */
 
 import {ScreenManager} from '../model/common/ScreenManager'
-import {Constants} from '../model/common/Constants.ets'
-import {Logger} from '../utils/Logger.ets'
+import {Constants} from '../model/common/Constants'
+import {Logger} from '../utils/Logger'
 
 @Component
 export struct NoPhotoComponent {
@@ -25,19 +25,31 @@ export struct NoPhotoComponent {
     // set an initial value temporarily, later change to 0.
     @State offSetY: number = Constants.EMPTY_PAGE_DEFAULT_OFFSET;
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
+    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
+    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    @State bigScreen: boolean = false;
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
+        this.logger.info(`aboutToAppear`);
+        this.bigScreen = Math.min(ScreenManager.getInstance().getWinHeight(), ScreenManager.getInstance().getWinWidth()) > Constants.BIG_SCREEN_WIDTH
+        let halfImageHeight = this.bigScreen ? Constants.BIG_EMPTY_ICON_SIZE / 2 : Constants.SMALL_EMPTY_ICON_SIZE / 2
+        let screenHeight = ScreenManager.getInstance().getWinHeight() - this.leftBlank[1] - this.leftBlank[3]
         if (this.isHorizontal) {
-            // Phone landscape
-            this.offSetY = (ScreenManager.getInstance().getWinHeight() -
-                Constants.ActionBarHeight) / Constants.NUMBER_2 - Constants.EMPTY_PAGE_MARGIN;
+            if (this.isSidebar) {
+                // Pad landscape
+                    this.offSetY = screenHeight / Constants.NUMBER_2 - halfImageHeight - Constants.ActionBarHeight;
+            } else {
+                // Phone landscape
+                this.offSetY = (screenHeight - Constants.ActionBarHeight) / Constants.NUMBER_2 - halfImageHeight;
+            }
         } else {
             // Phone vertical screen
-            this.offSetY = ScreenManager.getInstance().getWinHeight() * Constants.EMPTY_PAGE_OFFSET_RADIO -
-                Constants.ActionBarHeight - Constants.EMPTY_PAGE_MARGIN;
+            this.offSetY = screenHeight * Constants.EMPTY_PAGE_OFFSET_RADIO -
+                Constants.ActionBarHeight - halfImageHeight;
         }
 
-        this.logger.info(`isHorizontal: ${this.isHorizontal}, offSetY: ${this.offSetY}`);
+        this.logger.info(`isHorizontal: ${this.isHorizontal}, offSetY: ${this.offSetY}, bigScreen: ${this.bigScreen}`);
     }
 
     build() {
@@ -47,9 +59,9 @@ export struct NoPhotoComponent {
             alignItems: ItemAlign.Start
         }) {
             Column() {
-                Image($rawfile('no_photos.png'))
-                    .height($r('app.float.empty_page_picture_size'))
-                    .width($r('app.float.empty_page_picture_size'))
+                Image($r("app.media.no_image_icon"))
+                    .height(this.bigScreen ? $r('app.float.empty_page_picture_size_large') : $r('app.float.empty_page_picture_size'))
+                    .width(this.bigScreen ? $r('app.float.empty_page_picture_size_large') : $r('app.float.empty_page_picture_size'))
                     .margin({
                         bottom: $r('sys.float.ohos_id_elements_margin_vertical_m'),
                     })

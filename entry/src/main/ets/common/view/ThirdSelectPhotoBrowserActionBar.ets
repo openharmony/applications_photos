@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import {Action} from '../model/browser/operation/Action.ets'
-import {ActionBar} from './actionbar/ActionBar.ets'
-import {ActionBarProp} from '../model/browser/operation/ActionBarProp.ets'
-import {ActionBarMode, ActionBarColorMode, ActionBarSelectionMode} from '../model/browser/operation/ActionBarMode.ets'
-import {Logger} from '../utils/Logger.ets'
-import {ScreenManager} from '../model/common/ScreenManager.ets';
+import {Action} from './browserOperation/Action'
+import {ActionBar} from './actionbar/ActionBar'
+import {ActionBarProp} from './browserOperation/ActionBarProp'
+import {ActionBarMode, ActionBarColorMode, ActionBarSelectionMode} from './browserOperation/ActionBarMode'
+import {Logger} from '../utils/Logger'
+import {ScreenManager} from '../model/common/ScreenManager';
 
 @Component
 export struct ThirdSelectPhotoBrowserActionBar {
@@ -37,7 +37,7 @@ export struct ThirdSelectPhotoBrowserActionBar {
             .setLeftAction(Action.BACK)
             .setMode(ActionBarMode.SELECTION_MODE)
             .setSelectionMode(this.isMultiPick ? ActionBarSelectionMode.MULTI : ActionBarSelectionMode.SINGLE)
-            .setColorMode(ActionBarColorMode.NORMAL)
+            .setColorMode(ActionBarColorMode.TRANSPARENT)
             .setAlpha(ActionBarProp.PHOTO_BROWSER_ACTIONBAR_ALPHA)
             .setMenuList(menuList);
         return actionBarProp;
@@ -45,6 +45,8 @@ export struct ThirdSelectPhotoBrowserActionBar {
 
     build() {
         Stack({ alignContent: Alignment.TopStart }) {
+            Image($r('app.media.gradientBasePlate')).width('100%')
+                .height('100%').objectFit(ImageFit.Fill)
             ActionBar({
                 isShowBar: true,
                 actionBarProp: this.createActionBar(),

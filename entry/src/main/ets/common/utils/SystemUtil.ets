@@ -14,13 +14,14 @@
  */
 
 import i18n from '@ohos.i18n';
-import {Logger} from './Logger.ets'
+import {Logger} from './Logger'
 
 export class SystemUtil {
     static logger: Logger = new Logger('SystemUtil');
 
     public static getSystemLanguage(): string {
-        let localInfo = AppStorage.Get('languageCode').toString();
+        let systemLocale = i18n.getSystemLanguage();
+        let localInfo = systemLocale.split('-')[0];
         return localInfo;
     }
 

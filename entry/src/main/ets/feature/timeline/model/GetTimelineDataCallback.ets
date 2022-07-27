@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import {TimelineData} from '../../../common/model/browser/photo/TimelineData.ets'
+import {TimelineData} from '../../../common/model/browser/photo/TimelineData'
 import {AsyncCallback} from '../../../common/model/common/AsyncCallback'
-import {Logger} from '../utils/Logger.ets'
+import {Logger} from '../utils/Logger'
 import {TimelineDataSource} from './TimelineDataSource'
-import {TraceControllerUtils} from '../../../common/utils/TraceControllerUtils.ets'
+import {TraceControllerUtils} from '../../../common/utils/TraceControllerUtils'
 
 // Datasource requests media timeline group data callback
 export class GetTimelineDataCallback implements AsyncCallback<TimelineData[]> {

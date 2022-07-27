@@ -15,8 +15,8 @@
 
 import {AlbumSetDataSource} from './AlbumSetDataSource'
 import {AsyncCallback} from '../../common/AsyncCallback'
-import { TraceControllerUtils } from '../../../utils/TraceControllerUtils.ets';
-import { AlbumInfo } from './AlbumInfo.ets';
+import { TraceControllerUtils } from '../../../utils/TraceControllerUtils';
+import { AlbumInfo } from './AlbumInfo';
 
 export class AlbumSetCallback implements AsyncCallback<AlbumInfo[]> {
     source: AlbumSetDataSource;

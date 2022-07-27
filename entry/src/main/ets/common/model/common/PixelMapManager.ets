@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {FifoCache} from '../browser/photo/FifoCache.ets'
-import {Thumbnail} from '../browser/photo/Thumbnail.ets'
-import {Logger} from '../../utils/Logger.ets'
+import {FifoCache} from '../browser/photo/FifoCache'
+import {Thumbnail} from '../browser/photo/Thumbnail'
+import {Logger} from '../../utils/Logger'
 import {Constants} from './Constants'
 
 export class PixelMapManager {

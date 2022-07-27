@@ -13,19 +13,19 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger.ets'
-import {ActionBarProp} from '../../model/browser/operation/ActionBarProp.ets'
-import {Action} from '../../model/browser/operation/Action.ets'
-import {ActionBarMode} from '../../model/browser/operation/ActionBarMode.ets'
-import {SingleTitle} from './SingleTitle.ets'
-import {DetailTitle} from './DetailTitle.ets'
-import {SelectionTitle} from './SelectionTitle.ets'
-import {MenuPanel} from './MenuPanel.ets'
-import {DetailMenuPanel} from './DetailMenuPanel.ets'
-import {Constants} from '../../model/common/Constants.ets'
-import {ActionBarButton} from './ActionBarButton.ets'
+import {Logger} from '../../utils/Logger'
+import {ActionBarProp} from '../browserOperation/ActionBarProp'
+import {Action} from '../browserOperation/Action'
+import {ActionBarMode} from '../browserOperation/ActionBarMode'
+import {SingleTitle} from './SingleTitle'
+import {DetailTitle} from './DetailTitle'
+import {SelectionTitle} from './SelectionTitle'
+import {MenuPanel} from './MenuPanel'
+import {DetailMenuPanel} from './DetailMenuPanel'
+import {Constants} from '../../model/common/Constants'
+import {ActionBarButton} from './ActionBarButton'
 
-// ActionBar，It consists of action on the left, title in the middle and menupanel on the right
+// ActionBar，It consists of action on the left, title in the middle and menu panel on the right
 @Component
 export struct ActionBar {
     @State isShowBar: boolean = true;
@@ -33,6 +33,7 @@ export struct ActionBar {
     onMenuClicked: Function;
     logger: Logger = new Logger('ActionBar');
     isVideoPage: boolean = false;
+    @State hasTabBar: boolean = this.actionBarProp.getHasTabBar();
 
     private onBuildDone(): void {
         this.logger.info(`onBuildDone,actionBarProp:${this.actionBarProp.getHasTabBar()}, isShowBar:${this.isShowBar}`);
@@ -57,13 +58,19 @@ export struct ActionBar {
             if (this.actionBarProp.getMode() === ActionBarMode.DETAIL_MODE) {
                 DetailMenuPanel({ actionBarProp: this.actionBarProp, onMenuClicked: this.onMenuClicked, isLeft: true })
             } else if (this.actionBarProp.getMode() === ActionBarMode.SELECTION_MODE) {
-                SelectionTitle({ actionBarProp: this.actionBarProp })
+                Stack({alignContent: Alignment.Start}) {
+                    SelectionTitle({ actionBarProp: this.actionBarProp })
+                }.flexGrow(1)
                 MenuPanel({ actionBarProp: this.actionBarProp, onMenuClicked: this.onMenuClicked })
             } else if (this.actionBarProp.getMode() === ActionBarMode.TOP_MODE) {
-                DetailTitle({isVideoPage: this.isVideoPage})
+                Stack({alignContent: Alignment.Start}) {
+                    DetailTitle({isVideoPage: this.isVideoPage})
+                }.flexGrow(1)
                 DetailMenuPanel({ actionBarProp: this.actionBarProp, onMenuClicked: this.onMenuClicked, isLeft: false })
             } else {
-                SingleTitle({ actionBarProp: this.actionBarProp })
+                Stack({ alignContent: Alignment.Start }) {
+                    SingleTitle({ actionBarProp: this.actionBarProp })
+                }.flexGrow(1)
                 MenuPanel({ actionBarProp: this.actionBarProp, onMenuClicked: this.onMenuClicked })
             }
         }
@@ -73,7 +80,7 @@ export struct ActionBar {
             .backgroundColor(this.actionBarProp.getBackgroundColor())
             .opacity(this.actionBarProp.getAlpha())
             .padding({ right: $r('app.float.default_actionbar_padding_right'),
-                left: (this.actionBarProp.getHasTabBar() ?
+                left: (this.hasTabBar ?
                     $r('app.float.default_padding_start_with_tab_bar') :
                     $r('app.float.default_actionbar_padding_start_without_tab_bar'))
             })

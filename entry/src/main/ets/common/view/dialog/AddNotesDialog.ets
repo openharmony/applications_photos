@@ -14,9 +14,9 @@
  */
 import {Logger} from '../../utils/Logger'
 import {DialogCallback} from '../../model/common/DialogUtil'
-import {ScreenManager} from '../../model/common/ScreenManager.ets';
-import {Constants} from '../../model/common/Constants.ets';
-import {UiUtil} from '../../../common/utils/UiUtil.ets';
+import {ScreenManager} from '../../model/common/ScreenManager'
+import {Constants} from '../../model/common/Constants'
+import {UiUtil} from '../../../common/utils/UiUtil'
 
 @CustomDialog
 export struct AddNotesDialog {
@@ -30,7 +30,7 @@ export struct AddNotesDialog {
     private inputNote: string = '';
     private logger: Logger = new Logger('AddNotesDialog');
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.logger.info('aboutToAppear');
         this.inputNote = '';
         this.isNull = this.inputNote === '';
@@ -54,7 +54,7 @@ export struct AddNotesDialog {
                     TextInput({placeholder:'', text: this.inputNote})
                         .fontSize($r('sys.float.ohos_id_text_size_caption1'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
-                        .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                        .fontColor($r('app.color.text_input_font_color_182431'))
                         .maxLength(Constants.ADD_NOTES_MAX_LENGTH)
                         .enterKeyType(EnterKeyType.Done)
                         .onChange((value: string) => {
@@ -85,7 +85,7 @@ export struct AddNotesDialog {
                 bottom: $r('sys.float.ohos_id_text_paragraph_margin_s')})
             .height($r('app.float.dialog_add_notes_content_height'))
         }.padding({left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin')})
-        .height('dialog_add_notes_height').width('100%').borderRadius($r('app.float.dialog_border_radius'))
+        .height($r('app.float.dialog_add_notes_height')).width('100%').borderRadius($r('app.float.dialog_border_radius'))
         .width(ScreenManager.getInstance().getColumnsWidth(4))
         .backgroundColor($r('app.color.white'))
         .margin({

@@ -14,9 +14,9 @@
  */
 
 import {AsyncCallback} from '../../common/AsyncCallback'
-import {MediaDataSource} from './MediaDataSource.ets'
-import {Logger} from '../../../utils/Logger.ets'
-import {TraceControllerUtils} from '../../../utils/TraceControllerUtils.ets'
+import {MediaDataSource} from './MediaDataSource'
+import {Logger} from '../../../utils/Logger'
+import {TraceControllerUtils} from '../../../utils/TraceControllerUtils'
 
 // DataSource request media photo quantity callback
 export class GetMediaCountCallback implements AsyncCallback<number> {

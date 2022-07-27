@@ -15,34 +15,34 @@
 
 import router from '@system.router'
 import {Logger} from '../../utils/Logger'
-import {ImageGridItemComponent} from '../../../../common/view/ImageGridItemComponent.ets'
-import {Action} from '../../../../common/model/browser/operation/Action.ets'
+import {ImageGridItemComponent} from '../../../../common/view/ImageGridItemComponent'
+import {Action} from '../../../../common/view/browserOperation/Action'
 import {CustomDialogView} from '../../../../common/view/dialog/CustomDialogView'
-import {SelectManager} from '../../../../common/model/browser/SelectManager.ets'
-import {BroadCast} from '../../../../common/utils/BroadCast.ets'
+import {SelectManager} from '../../../../common/model/browser/SelectManager'
+import {BroadCast} from '../../../../common/utils/BroadCast'
 import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants'
-import {Constants} from '../../../../common/model/common/Constants.ets'
-import {MediaDataSource} from '../../../../common/model/browser/photo/MediaDataSource.ets'
-import {MediaItem} from '../../../../common/model/browser/photo/MediaItem.ets'
+import {Constants} from '../../../../common/model/common/Constants'
+import {MediaDataSource} from '../../../../common/model/browser/photo/MediaDataSource'
+import {MediaItem} from '../../../../common/model/browser/photo/MediaItem'
 import {NoPhotoComponent} from '../../../../common/view/NoPhotoComponent'
 import {ScreenManager} from '../../../../common/model/common/ScreenManager'
 import {TraceControllerUtils} from '../../../../common/utils/TraceControllerUtils'
 import {BroadCastManager} from '../../../../common/model/common/BroadCastManager'
-import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine.ets'
-import {AlbumSelectActionBar} from './AlbumSelectActionBar.ets'
-import {MenuContext} from '../../../../common/model/browser/operation/MenuContext'
-import {MenuOperationFactory} from '../../../../common/model/browser/interface/MenuOperationFactory.ets'
-import {CopyMenuOperation} from '../../../../common/model/browser/operation/CopyMenuOperation.ets'
-import {MoveMenuOperation} from '../../../../common/model/browser/operation/MoveMenuOperation.ets'
-import {JumpSourceToMain} from '../../../../common/model/browser/photo/JumpSourceToMain.ets'
-
-AppStorage.SetOrCreate('PhotoGridPageIndex', Constants.INVALID);
+import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine'
+import {AlbumSelectActionBar} from './AlbumSelectActionBar'
+import {MenuContext} from '../../../../common/view/browserOperation/MenuContext'
+import {MenuOperationFactory} from '../../../../common/interface/MenuOperationFactory'
+import {CopyMenuOperation} from '../../../../common/view/browserOperation/CopyMenuOperation'
+import {MoveMenuOperation} from '../../../../common/view/browserOperation/MoveMenuOperation'
+import {JumpSourceToMain} from '../../../../common/model/browser/photo/JumpSourceToMain'
+import {AlbumInfo} from '../../../../common/model/browser/album/AlbumInfo';
+import {GridScrollBar} from '../../../../common/view/GridScrollBar';
 
 @Entry
 @Component
 export struct NewAlbumPage {
     @State isEmpty: boolean = false;
-    @State isHideScrollBar: boolean = true;
+    @Provide isHideScrollBar: boolean = true;
     @State gridRowCount: number = 0;
     @Provide isSelectedMode: boolean = true;
     @Provide isAllSelected: boolean = false;
@@ -68,7 +68,7 @@ export struct NewAlbumPage {
     private isActive = false;
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
     private isNewAlbum: boolean = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM);
-    private targetAlbumName: string = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_TARGET);
+    private targetAlbum: AlbumInfo = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_TARGET);
 
     onIndexChange() {
         this.logger.info(`onIndexChange ${this.PhotoGridPageIndex}`)
@@ -117,12 +117,13 @@ export struct NewAlbumPage {
         this.logger.info('onModeChange');
     }
 
-    private onPageShow() {
+    onPageShow() {
+        this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
         this.isShow = true;
         this.onActive();
     }
 
-    private onPageHide() {
+    onPageHide() {
         this.isShow = false;
         this.onInActive();
     }
@@ -155,7 +156,7 @@ export struct NewAlbumPage {
         }
     }
 
-    private onBackPress() {
+    onBackPress() {
         return false;
     }
 
@@ -171,7 +172,7 @@ export struct NewAlbumPage {
             AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
             AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
             let url = this.isHorizontal ? 'product/pad/view/index' : 'product/phone/view/index'
-            router.replace({
+            router.back({
                 uri: url,
                 params: {
                     jumpSource: JumpSourceToMain.ALBUM
@@ -193,7 +194,7 @@ export struct NewAlbumPage {
             .withOperationStartCallback(this.onOperationStart)
             .withOperationEndCallback(this.onOperationEnd)
             .withBroadCast(this.broadCast)
-            .withAlbumName(this.targetAlbumName);
+            .withAlbumInfo(this.targetAlbum);
         let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(CopyMenuOperation, menuContext);
         menuOperation.doAction();
     }
@@ -207,23 +208,23 @@ export struct NewAlbumPage {
             .withOperationStartCallback(this.onOperationStart)
             .withOperationEndCallback(this.onOperationEnd)
             .withBroadCast(this.broadCast)
-            .withAlbumName(this.targetAlbumName);
+            .withAlbumInfo(this.targetAlbum);
         let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(MoveMenuOperation, menuContext);
         menuOperation.doAction();
     }
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         TraceControllerUtils.startTrace('PhotoGridPageAboutToAppear');
         this.mSelectManager = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_SELECTED);
         let param = router.getParams();
-        if (param != null) {
+        if (param.item) {
             this.logger.debug(`After router.getParams, param is: ${JSON.stringify(param)}`);
-            let item = JSON.parse(param.item);
+            let item = JSON.parse(param.item.toString());
             this.title = item.displayName;
-            this.dataSource.setAlbumName(item.name);
+            this.dataSource.setAlbumId(item.id);
         } else {
             this.title = '';
-            this.dataSource.setAlbumName(AlbumDefine.ALBUM_NAME_ALL);
+            this.dataSource.setAlbumId(AlbumDefine.ALBUM_ID_ALL);
         }
 
         let self = this;
@@ -299,7 +300,7 @@ export struct NewAlbumPage {
         }));
         this.dataSource.registerCallback('updateCount', (newState: number) => {
             self.logger.info(`updateTotalCount ${newState}`);
-            self.isHideScrollBar = (newState <= 50);
+            self.isHideScrollBar = (newState <= Constants.SCROLL_BAR_VISIBLE_THRESHOLD);
             self.mSelectManager.setTotalCount(newState);
         })
 
@@ -318,7 +319,7 @@ export struct NewAlbumPage {
         this.logger.info(`initGridRowCount contentWidth: ${contentWidth}`);
     }
 
-    private aboutToDisappear(): void {
+    aboutToDisappear(): void {
         this.broadCast.off(null, null);
         this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
     }
@@ -326,72 +327,38 @@ export struct NewAlbumPage {
     build() {
         Column() {
             AlbumSelectActionBar({ onMenuClicked: this.onMenuClicked })
-            Stack() {
-                if (this.isEmpty) {
-                    NoPhotoComponent({
-                        title: $r('app.string.title_no_photos')
-                    })
-                }
-                Grid(this.scroller) {
-                    LazyForEach(this.dataSource, (item) => {
-                        GridItem() {
-                            ImageGridItemComponent({
-                                item: item.mediaItem,
-                                isSelected: this.mSelectManager.isItemSelected(item.mediaItem.uri),
-                                pageName: Constants.PHOTO_TRANSITION_ALBUM
-                            })
-                        }.columnStart(item.viewIndex % this.gridRowCount).columnEnd(item.viewIndex % this.gridRowCount)
-                    }, item => JSON.stringify(item))
-                }
-                .columnsTemplate('1fr '.repeat(this.gridRowCount))
+            if (this.isEmpty) {
+                NoPhotoComponent({
+                    title: $r('app.string.no_distributed_photo_head_title_album')
+                })
+            } else {
+                Stack(){
+                    Grid(this.scroller) {
+                        LazyForEach(this.dataSource, (item) => {
+                            GridItem() {
+                                ImageGridItemComponent({
+                                    item: item.mediaItem,
+                                    isSelected: this.mSelectManager.isItemSelected(item.mediaItem.uri),
+                                    pageName: Constants.PHOTO_TRANSITION_ALBUM
+                                })
+                            }.columnStart(item.viewIndex % this.gridRowCount).columnEnd(item.viewIndex % this.gridRowCount)
+                        }, item => item == null ? JSON.stringify(item) : item.mediaItem.uri)
+                    }
+                    .columnsTemplate('1fr '.repeat(this.gridRowCount))
                     .columnsGap(Constants.GRID_GUTTER)
                     .rowsGap(Constants.GRID_GUTTER)
                     .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
 
-                ScrollBar({ scroller: this.scroller, direction: ScrollBarDirection.Vertical,
-                    state: this.isHideScrollBar? BarState.Off: BarState.Auto }) {
-                    Row() {
-                        if (this.isClickScrollBar) {
-                            Image($r('app.media.scroll_press_light_hdpi'))
-                                .width(40)
-                                .height(69)
-                                .backgroundColor(0x01000000)
-                                .border({ width: 1, color: Color.White })
-                                .borderRadius(25)
-                        } else {
-                            Image($r('app.media.scroll_light_hdpi'))
-                                .width(32)
-                                .height(56)
-                                .backgroundColor(0x01000000)
-                                .border({ width: 1, color: Color.White })
-                                .borderRadius(25)
-                        }
-                    }
-                }.width(40).height(900).backgroundColor(0x01000000)
-                .position({ x:'100%', y:0 })
-                .markAnchor({ x: 40, y: 0 })
-                .onTouch((event: TouchEvent) => {
-                    if (event.type == TouchType.Down) {
-                        this.isClickScrollBar = true;
-                    } else if (event.type == TouchType.Down) {
-                        this.isClickScrollBar = false;
-                    }
-                })
-            }.layoutWeight(1)
-
+                    GridScrollBar({scroller: this.scroller});
+                }
+                .layoutWeight(1)
+            }
             CustomDialogView()
         }
         .backgroundColor($r('app.color.default_background_color'))
-        .margin({
+        .padding({
             top: this.leftBlank[1],
             bottom: this.leftBlank[3]
         })
-    }
-
-    pageTransition() {
-        PageTransitionEnter({ type: RouteType.Pop, duration: 300 })
-            .opacity(1)
-        PageTransitionExit({ type: RouteType.Push, duration: 300 })
-            .opacity(1)
     }
 }

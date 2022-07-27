@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {Point} from './Point.ets'
+import {Point} from './Point'
 
 export class LineSegment {
     start: Point;

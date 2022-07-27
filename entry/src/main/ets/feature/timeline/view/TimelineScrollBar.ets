@@ -12,13 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Constants} from '../../../common/model/common/Constants.ets'
-import {ScreenManager} from '../../../common/model/common/ScreenManager.ets';
-import {DateUtil} from '../../../common/utils/DateUtil.ets';
-import {TimelineData} from '../../../common/model/browser/photo/TimelineData.ets';
+import {Constants} from '../../../common/model/common/Constants'
+import {ScreenManager} from '../../../common/model/common/ScreenManager';
+import {DateUtil} from '../../../common/utils/DateUtil';
+import {TimelineData} from '../../../common/model/browser/photo/TimelineData';
 import {Logger} from '../utils/Logger'
-import {BroadCast} from '../../../common/utils/BroadCast.ets';
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants.ets';
+import {BroadCast} from '../../../common/utils/BroadCast';
+import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants';
 
 @Component
 export struct TimelineScrollBar {
@@ -31,16 +31,16 @@ export struct TimelineScrollBar {
     @Consume broadCast: BroadCast;
 
     @State totalNum: number = 0;
-    gridHeight: number = ScreenManager.getInstance().getWinHeight() - Constants.ActionBarHeight;
+    gridHeight: number = ScreenManager.getInstance().getWinHeight() - Constants.ActionBarHeight - Constants.TOOL_BAR_SIZE - Constants.SCROLL_MARGIN * 2;
     logger: Logger = new Logger('TimelineScrollBar');
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.updateTotalNum();
     }
 
     nodeGap(count: number): number {
         this.logger.debug(`nodeGap start ${count} --- ${this.gridHeight} ---- ${this.totalNum}`)
-        let gapS = Math.ceil(this.gridHeight * count / this.totalNum - 24);
+        let gapS = Math.ceil(this.gridHeight * count / this.totalNum - Constants.SCROLL_MARGIN * 2);
         if (gapS >= Constants.SCROLL_BAR_SIDE_MIN_GAP) {
             return gapS;
         }
@@ -58,7 +58,7 @@ export struct TimelineScrollBar {
 
     build() {
         Stack({alignContent: Alignment.End}) {
-            if (this.isClickScrollBar) {
+            if (this.isClickScrollBar && !this.isHideScrollBar) {
                 Column() {
                     ForEach(this.yearData, (year: TimelineData) => {
                         if (this.nodeGap(year.count) > 0 || this.yearData.indexOf(year) == 0
@@ -80,11 +80,9 @@ export struct TimelineScrollBar {
                             })
                             .shadow({
                                 radius: $r('app.float.scroll_bar_side_text_shadow_radio'),
+                                color: $r('app.color.scroll_bar_side_text_shadow_color'),
                                 offsetX: $r('app.float.scroll_bar_side_text_shadow_offsetX'),
                                 offsetY: $r('app.float.scroll_bar_side_text_shadow_offsetY'),
-                            })
-                            .border({
-                                width: $r('app.float.scroll_bar_side_text_border_width')
                             })
                             .margin({
                                 bottom: this.nodeGap(year.count)
@@ -104,18 +102,7 @@ export struct TimelineScrollBar {
                 state: this.isHideScrollBar? BarState.Off: BarState.Auto }) {
                 Row() {
                     if (this.isClickScrollBar) {
-                        Flex({
-                            direction: FlexDirection.RowReverse,
-                            alignItems: ItemAlign.Center,
-                            justifyContent: FlexAlign.Start
-                        }) {
-                            Row() {
-                                Image($r('app.media.scroll_press_light_hdpi'))
-                            }
-                            .width($r('app.float.scroll_bar_big_width'))
-                            .height($r('app.float.scroll_bar_big_height'))
-                            .margin({left: $r('app.float.scroll_bar_side_gap')})
-
+                        Row() {
                             Row() {
                                 Text(this.dateText)
                                     .fontSize($r('sys.float.ohos_id_text_size_sub_title1'))
@@ -133,23 +120,32 @@ export struct TimelineScrollBar {
                             })
                             .shadow({
                                 radius: $r('app.float.scroll_bar_side_text_shadow_radio'),
+                                color: $r('app.color.scroll_bar_side_text_shadow_color'),
                                 offsetX: $r('app.float.scroll_bar_side_text_shadow_offsetX'),
                                 offsetY: $r('app.float.scroll_bar_side_text_shadow_offsetY'),
                             })
-                            .border({
-                                width: $r('app.float.scroll_bar_side_text_border_width')
-                            })
+
+                            Row() {
+                                Image($r("app.media.scroll_press_light"))
+                            }
+                            .width($r('app.float.scroll_bar_big_width'))
+                            .height($r('app.float.scroll_bar_big_height'))
+                            .margin({ left: $r('app.float.scroll_bar_side_gap') })
                         }
                         .width($r('app.float.scroll_press_all_width'))
+                        .justifyContent(FlexAlign.End)
                     } else {
-                        Image($r('app.media.scroll_light_hdpi'))
-                            .width($r('app.float.scroll_bar_small_width'))
-                            .height($r('app.float.scroll_bar_small_height'))
-                            .borderRadius(25)
+                        Row() {
+                            Image($r("app.media.scroll_light"))
+                                .width($r('app.float.scroll_bar_small_width'))
+                                .height($r('app.float.scroll_bar_small_height'))
+                        }
                     }
                 }
             }
             .height('100%')
+            .width(this.isClickScrollBar
+                ? $r('app.float.scroll_bar_margin_small') : $r('app.float.scroll_bar_small_width'),)
             .position({x:'100%', y:0})
             .markAnchor({
                 x: this.isClickScrollBar

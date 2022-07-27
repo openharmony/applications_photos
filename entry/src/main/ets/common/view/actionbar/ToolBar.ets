@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import {ScreenManager,ColumnSize} from '../../model/common/ScreenManager.ets'
+import {ScreenManager,ColumnSize} from '../../model/common/ScreenManager'
 import {ToolBarButton} from './ToolBarButton'
-import {Constants} from '../../model/common/Constants.ets'
-import {ActionBarProp} from '../../model/browser/operation/ActionBarProp.ets'
-import {Action} from '../../model/browser/operation/Action.ets'
-import {ActionBarMode} from '../../model/browser/operation/ActionBarMode.ets'
+import {Constants} from '../../model/common/Constants'
+import {ActionBarProp} from '../browserOperation/ActionBarProp'
+import {Action} from '../browserOperation/Action'
+import {ActionBarMode} from '../browserOperation/ActionBarMode'
 
 export class MenuItem {
     value: string;
@@ -48,7 +48,7 @@ export struct ToolBar {
         return actionBarProp;
     }
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.actionBarProp = this.createActionBar();
     }
 
@@ -56,22 +56,23 @@ export struct ToolBar {
         Column() {
             ForEach(this.moreMenuList, (menu: Action) => {
                 Text(menu.textRes)
-                    .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
+                    .width('100%')
                     .height($r('app.float.menu_height'))
                     .fontColor(menu.fillColor)
                     .fontSize($r('sys.float.ohos_id_text_size_body1'))
                     .onClick(() => {
+                        this.showPopup = false;
                         this.onMenuClicked && this.onMenuClicked(menu);
                     })
                 if (this.moreMenuList.indexOf(menu) != this.moreMenuList.length - 1) {
                     Divider()
-                        .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
+                        .width('100%')
                         .strokeWidth(Constants.MENU_DIVIDER_STROKE_WIDTH)
                         .color($r('sys.color.ohos_id_color_list_separator'))
                 }
 
             }, menu => (menu.actionType != null ? menu.actionType.id : menu.actionID))
-        }
+        }.width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
         .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
             .padding({
                 top: $r('app.float.menu_padding_vertical'),
@@ -80,93 +81,90 @@ export struct ToolBar {
                 right: $r('app.float.menu_padding_horizontal')
             })
             .backgroundColor(Color.White)
-            .offset({x : $r('app.float.bind_popup_margin_x'), y: $r('app.float.bind_popup_margin_y')})
     }
 
     build() {
-        if (this.isShowBar) {
+        Row() {
             Row() {
-                Row() {
-                    ForEach(this.toolMenuList, (menu: Action) => {
-                        if (menu == Action.MORE) {
-                            Column() {
-                                Row() {
-                                    ToolBarButton({
-                                        res: menu.iconRes,
-                                        action: menu,
-                                        isLeft: true,
-                                        isAutoTint: menu.isAutoTint,
-                                        colorMode: this.actionBarProp.getColorMode()
-                                    })
-                                }.margin({ top: $r('app.float.id_icon_margin_vertical') })
-
-                                Row() {
-                                    Text(menu.textRes)
-                                        .fontSize($r('sys.float.ohos_id_text_size_caption'))
-                                        .fontFamily($r('app.string.id_text_font_family_regular'))
-                                        .fontColor(menu.fillColor)
-                                }.margin({ top: $r('sys.float.ohos_id_text_margin_vertical') })
-                            }
-                            .width(`${100/this.toolMenuList.length}%`)
-                                .height('100%')
-                                .onClick(() => {
-                                    this.showPopup = !this.showPopup
+                ForEach(this.toolMenuList, (menu: Action) => {
+                    if (menu == Action.MORE) {
+                        Column() {
+                            Row() {
+                                ToolBarButton({
+                                    res: menu.iconRes,
+                                    action: menu,
+                                    isLeft: true,
+                                    isAutoTint: menu.isAutoTint,
+                                    colorMode: this.actionBarProp.getColorMode()
                                 })
-                                .bindPopup(this.showPopup, {
-                                    builder: this.PopupBuilder,
-                                    placement: Placement.Top,
-                                    maskColor: 0x33000000,
-                                    popupColor: '#00FFFFFF',
-                                    enableArrow: false,
-                                    onStateChange: (e) => {
-                                        if (!e.isVisible) {
-                                            this.showPopup = false
-                                        }
-                                    }
-                                })
+                            }.margin({ top: $r('app.float.id_icon_margin_vertical') })
 
-                        } else {
-                            Column() {
-                                Row() {
-                                    ToolBarButton({
-                                        res: menu.iconRes,
-                                        action: menu,
-                                        isLeft: true,
-                                        isAutoTint: menu.isAutoTint,
-                                        colorMode: this.actionBarProp.getColorMode()
-                                    })
-                                }.margin({ top: $r('app.float.id_icon_margin_vertical') })
-
-                                Row() {
-                                    Text(menu.textRes)
-                                        .fontSize($r('sys.float.ohos_id_text_size_caption'))
-                                        .fontFamily($r('app.string.id_text_font_family_regular'))
-                                        .fontColor(menu.fillColor)
-                                }
-                                .margin({ top: $r('sys.float.ohos_id_text_margin_vertical') })
-                            }
-                            .onClick(() => {
-                                this.onMenuClicked && this.onMenuClicked(menu)
-                            })
-                                .width(`${100/this.toolMenuList.length}%`)
-                                .height('100%')
+                            Row() {
+                                Text(menu.textRes)
+                                    .fontSize($r('sys.float.ohos_id_text_size_caption'))
+                                    .fontFamily($r('app.string.id_text_font_family_regular'))
+                                    .fontColor(menu.fillColor)
+                            }.margin({ top: $r('sys.float.ohos_id_text_margin_vertical') })
                         }
-                    }, menu => (menu.actionType != null ? menu.actionType.id : menu.actionID))
-                }
-                .width('100%')
-                .height(Constants.ActionBarHeight)
-                .padding(this.toolMenuList.length > 4 ? {} : {left: $r('app.float.actionbar_margin_horizontal'),
-                                                                 right: $r('app.float.actionbar_margin_horizontal')})
+                        .width(`${Constants.PERCENT_HUNDRED / this.toolMenuList.length}%`)
+                        .height('100%')
+                        .onClick(() => {
+                            this.showPopup = !this.showPopup
+                        })
+                        .bindPopup(this.showPopup, {
+                            builder: this.PopupBuilder,
+                            placement: Placement.Top,
+                            maskColor: 0x33000000,
+                            popupColor: '#00FFFFFF',
+                            enableArrow: false,
+                            onStateChange: (e) => {
+                                if (!e.isVisible) {
+                                    this.showPopup = false
+                                }
+                            }
+                        })
+
+                    } else {
+                        Column() {
+                            Row() {
+                                ToolBarButton({
+                                    res: menu.iconRes,
+                                    action: menu,
+                                    isLeft: true,
+                                    isAutoTint: menu.isAutoTint,
+                                    colorMode: this.actionBarProp.getColorMode()
+                                })
+                            }.margin({ top: $r('app.float.id_icon_margin_vertical') })
+
+                            Row() {
+                                Text(menu.textRes)
+                                    .fontSize($r('sys.float.ohos_id_text_size_caption'))
+                                    .fontFamily($r('app.string.id_text_font_family_regular'))
+                                    .fontColor(menu.fillColor)
+                            }
+                            .margin({ top: $r('sys.float.ohos_id_text_margin_vertical') })
+                        }
+                        .onClick(() => {
+                            this.onMenuClicked && this.onMenuClicked(menu)
+                        })
+                        .width(`${Constants.PERCENT_HUNDRED / this.toolMenuList.length}%`)
+                        .height('100%')
+                    }
+                }, menu => (menu.actionType != null ? menu.actionType.id : menu.actionID))
             }
-            .margin({
-                bottom: this.isFromPhotoBrowser ? this.leftBlank[3] : 0
-            })
             .width('100%')
-            .backgroundColor(this.actionBarProp.getBackgroundColor())
-            .opacity(this.actionBarProp.getAlpha())
-            .visibility(this.isShowBar && !this.isHorizontal ? Visibility.Visible : Visibility.Hidden)
-            .markAnchor({x: '0%', y: '100%'})
-            .position({x: '0%', y: '100%'})
+            .height(Constants.ActionBarHeight)
+            .padding(this.toolMenuList.length > 4 ? {} : {left: $r('app.float.actionbar_margin_horizontal'),
+                                                             right: $r('app.float.actionbar_margin_horizontal')})
         }
+        .margin({
+            bottom: this.isFromPhotoBrowser ? this.leftBlank[3] : 0
+        })
+        .width('100%')
+        .backgroundColor(this.actionBarProp.getBackgroundColor())
+        .opacity(this.actionBarProp.getAlpha())
+        .visibility(this.isShowBar && !this.isHorizontal ? Visibility.Visible : Visibility.Hidden)
+        .markAnchor({x: '0%', y: '100%'})
+        .position({x: '0%', y: '100%'})
     }
 }

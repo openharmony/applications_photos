@@ -14,14 +14,16 @@
  */
 import Matrix4 from '@ohos.matrix4'
 import router from '@system.router'
-import {MediaItem} from '../../common/model/browser/photo/MediaItem.ets'
-import {EventPipeline} from '../../common/model/browser/photo/EventPipeline.ets'
+import {MediaItem} from '../../common/model/browser/photo/MediaItem'
+import {EventPipeline} from '../../common/model/browser/photo/EventPipeline'
 import {BroadCast} from '../../common/utils/BroadCast'
 import {Logger} from '../utils/Logger'
 import {Constants as PhotoConstants} from '../../common/model/browser/photo/Constants'
 import {MediaLibraryAccess} from '../../common/access/MediaLibraryAccess'
 import {ScreenManager} from '../model/common/ScreenManager'
-import {Constants} from '../model/common/Constants.ets';
+import {Constants} from '../model/common/Constants';
+import {TraceControllerUtils} from '../utils/TraceControllerUtils';
+import {LoadingPanel} from '../../feature/browser/view/photo/components/LoadingPanel'
 
 @Component
 export struct PhotoItem {
@@ -29,8 +31,7 @@ export struct PhotoItem {
     @State matrix: any = Matrix4.identity().copy();
     @State direction: PanDirection = PanDirection.Vertical;
     @Consume broadCast: BroadCast;
-    @State transitionId: string = 'null';
-    @State visible: Visibility = Visibility.Hidden;
+    @State transitionId: string = PhotoConstants.DEFAULT_TRANSITION_ID;
     @State objectFit: ImageFit = ImageFit.Contain;
     @State thumbnail: string = '';
     @State ratio: number = 1.0;
@@ -44,28 +45,40 @@ export struct PhotoItem {
     private logger: Logger = new Logger('PhotoItem');
     private animationOption: any = null;
     private animationEndMatrix: any = null;
-    @State usePixmap: boolean = true;
-    private releasePixmap: Function;
+    @Provide isLoading: boolean = true;
+    private imgScale: number = 1;
+    private firstLoad: boolean = true;
+    private preItem = {rotate: 0, height: 0, width: 0};
 
     onTransitionChange() {
         this.logger.info(`onTransitionChange , ${this.updateTransition} ${this.position}`);
         if (this.updateTransition == this.position) {
             this.transitionId = this.transitionTag + this.item.uri;
-            this.visible = Visibility.Visible;
+            this.broadCast.emit(PhotoConstants.PHOTO_SHOW_STATE, [!this.showError]);
         } else {
-            this.transitionId = 'null';
-            this.visible = Visibility.Hidden;
+            this.transitionId = PhotoConstants.DEFAULT_TRANSITION_ID;
             this.isPullingDown = false;
         }
         // reset matrix
-        this.matrix = Matrix4.identity().copy();
-        this.eventPipeline.reset();
+        if (this.imgScale != 1) {
+            this.matrix = Matrix4.identity().scale({
+                x: this.imgScale,
+                y: this.imgScale
+            }).copy();
+            this.eventPipeline && this.eventPipeline.setDefaultScale(this.imgScale);
+        } else {
+            this.matrix = Matrix4.identity().copy();
+            this.eventPipeline.reset();
+        }
+        this.logger.info(`onTransitionChange end`);
     }
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.logger.info(`photoItem aboutToAppear ${this.item.uri}`);
         this.eventPipeline = new EventPipeline(this.broadCast, this.item);
         this.matrix = Matrix4.identity().copy();
+        this.firstLoad = true;
+        this.isLoading = this.updateTransition == this.position;
         // register event handling
         this.broadCast.on(PhotoConstants.TOUCH_EVENT + this.item.uri, (matrix: any) => {
             this.matrix = matrix;
@@ -83,38 +96,46 @@ export struct PhotoItem {
         });
         this.onTransitionChange();
         this.onViewDataChanged();
+        this.logger.info(`photoItem aboutToAppear ${this.item.uri} end`);
     }
 
-    private aboutToDisappear(): void {
+    aboutToDisappear(): void {
         this.logger.info(`aboutToDisappear ${this.item.uri}`);
         // clean up event registration
         this.broadCast.off(PhotoConstants.TOUCH_EVENT + this.item.uri, null);
         this.broadCast.off(PhotoConstants.DIRECTION_CHANGE + this.item.uri, null);
         this.broadCast.off(PhotoConstants.ANIMATION_EVENT + this.item.uri, null);
         this.isPullingDown = false;
-        this.releasePixmap(this.item.uri);
         this.logger.info(`aboutToDisappear ${this.item.uri} end`);
     }
 
     onViewDataChanged(): void {
         this.logger.info(`onViewDataChanged start`);
+        if ((this.preItem.rotate == this.item.orientation && this.preItem.height == this.item.imgHeight &&
+            this.preItem.width == this.item.imgWidth) && !this.firstLoad) {
+            this.preItem.rotate = this.item.orientation;
+            this.preItem.width = this.item.imgWidth;
+            this.preItem.height = this.item.imgHeight;
+            this.eventPipeline && this.eventPipeline.onDataChanged(this.item)
+            return;
+        }
         if (this.item.orientation == PhotoConstants.ROTATE_ONCE || this.item.orientation == PhotoConstants.ROTATE_THRICE) {
             let componentWidth = vp2px(ScreenManager.getInstance().getWinWidth());
             let componentHeight = vp2px(ScreenManager.getInstance().getWinHeight());
-            let widthScale = componentWidth / (this.item.width == 0 ? PhotoConstants.DEFAULT_SIZE : this.item.width);
-            let heightScale = componentHeight / (this.item.height == 0 ? PhotoConstants.DEFAULT_SIZE : this.item.height);
+            let widthScale = componentWidth / (this.item.imgWidth == 0 ? PhotoConstants.DEFAULT_SIZE : this.item.imgWidth);
+            let heightScale = componentHeight / (this.item.imgHeight == 0 ? PhotoConstants.DEFAULT_SIZE : this.item.imgHeight);
             let screenScale = widthScale > heightScale ? heightScale : widthScale;
-            let reWidthScale = componentWidth / (this.item.height == 0 ? PhotoConstants.DEFAULT_SIZE : this.item.height);
-            let reHeightScale = componentHeight / (this.item.width == 0 ? PhotoConstants.DEFAULT_SIZE : this.item.width);
+            let reWidthScale = componentWidth / (this.item.imgHeight == 0 ? PhotoConstants.DEFAULT_SIZE : this.item.imgHeight);
+            let reHeightScale = componentHeight / (this.item.imgWidth == 0 ? PhotoConstants.DEFAULT_SIZE : this.item.imgWidth);
             let reScale = reWidthScale > reHeightScale ? reHeightScale : reWidthScale;
             let scale = screenScale / reScale;
-
+            this.imgScale = scale;
             this.matrix = Matrix4.identity().scale({
                 x: scale,
                 y: scale
             }).copy();
             this.logger.debug(`onViewDataChanged scale:${scale}, componentSize:${componentWidth}x${componentHeight}\
-                width: ${this.item.width}, height: ${this.item.height}`);
+                width: ${this.item.imgWidth}, height: ${this.item.imgHeight}`);
             this.eventPipeline && this.eventPipeline.setDefaultScale(scale);
         } else {
             this.matrix = Matrix4.identity().copy();
@@ -122,31 +143,20 @@ export struct PhotoItem {
             this.eventPipeline && this.eventPipeline.setDefaultScale(1);
         }
         this.eventPipeline && this.eventPipeline.onDataChanged(this.item)
-        this.logger.debug(`onViewDataChanged usePixmap:${this.usePixmap}, thumbnail:${JSON.stringify(this.thumbnail)}`);
-    }
-
-    getVideoPlayIcon() {
-        if (vp2px(Constants.NUMBER_1) >= Constants.NUMBER_1 && vp2px(Constants.NUMBER_1) < Constants.NUMBER_2) {
-            return $r('app.media.ic_video_play_btn_hdpi')
-        } else if (vp2px(Constants.NUMBER_1) == Constants.NUMBER_2) {
-            return $r('app.media.ic_video_play_btn_xhdpi')
-        } else if (vp2px(Constants.NUMBER_1) == Constants.NUMBER_3) {
-            return $r('app.media.ic_video_play_btn_xxhdpi')
-        } else {
-            return $r('app.media.ic_video_play_btn_xxxhdpi')
-        }
+        this.firstLoad = false;
+        this.preItem.rotate = this.item.orientation;
+        this.preItem.width = this.item.imgWidth;
+        this.preItem.height = this.item.imgHeight;
+        this.logger.debug(`onViewDataChanged thumbnail:${JSON.stringify(this.thumbnail)}`);
     }
 
     build() {
         Stack() {
-            Image('placeholder')
-                .visibility(Visibility.Hidden)
-                .onComplete(() => {
-                    this.eventPipeline.onComponentSizeChanged();
-                })
-                .onError(() => {
-                    this.eventPipeline.onComponentSizeChanged();
-                })
+            Column() {
+                LoadingPanel()
+            }
+            .width('100%')
+            .height('100%')
             Flex({
                 direction: FlexDirection.Row,
                 alignItems: ItemAlign.Center,
@@ -157,14 +167,23 @@ export struct PhotoItem {
                     .rotate({ x: 0, y: 0, z: 1, angle: this.item.orientation })
                     .transform(this.matrix)
                     .autoResize(false)
-//                    .sharedTransition(this.transitionId, {duration: PhotoConstants.SHARE_TRANSITION_DURATION}) TODO: delete dynamic effect
                     .onComplete(() => {
+                        TraceControllerUtils.startTrace(`PhotoItemComplete_${this.position}`);
                         this.logger.debug(`onComplete finish index: ${this.position}, uri: ${this.item.uri}`);
                         this.showError = false;
+                        this.isLoading = false;
+                        if (this.updateTransition == this.position) {
+                            this.broadCast.emit(PhotoConstants.PHOTO_SHOW_STATE, [true]);
+                        }
+                        TraceControllerUtils.finishTrace(`PhotoItemComplete_${this.position}`);
                     })
                     .onError(() => {
-                        this.logger.debug(`image show error`);
+                        this.logger.error(`image show error`);
                         this.showError = true;
+                        this.isLoading = true;
+                        if (this.updateTransition == this.position) {
+                            this.broadCast.emit(PhotoConstants.PHOTO_SHOW_STATE, [false]);
+                        }
                     })
             }
             .width('100%')
@@ -285,8 +304,6 @@ export struct PhotoItem {
                     )
             )
             .clip(true)
-                .width('100%')
-                .height('100%')
                 .onTouch((event) => {
                     this.eventPipeline.onTouch(event);
                 })
@@ -303,7 +320,7 @@ export struct PhotoItem {
                 }.margin({top: (this.item.mediaType == MediaLibraryAccess.MEDIA_TYPE_VIDEO) ? $r('app.float.input_text_notify_margin') : 0})
             }
             Row() {
-                Image(this.getVideoPlayIcon()).objectFit(ImageFit.Contain).width($r('app.float.icon_video_size'))
+                Image($r('app.media.ic_video_play_btn_png')).objectFit(ImageFit.Contain).width($r('app.float.icon_video_size'))
                     .height($r('app.float.icon_video_size')).onClick(() => {
                     if (this.item != undefined) {
                         router.push({
@@ -315,9 +332,11 @@ export struct PhotoItem {
                             }
                         })
                     }
-                }).visibility(this.isPullingDown ? Visibility.None : this.isVideoPlayBtnShow())
+                }).visibility(this.isVideoPlayBtnShow())
             }
-        }
+        }.width('100%')
+        .height('100%')
+        .sharedTransition(this.transitionId, {duration: PhotoConstants.SHARE_TRANSITION_DURATION})
     }
 
     isVideoPlayBtnShow(): Visibility {

@@ -40,10 +40,13 @@ export class ImageFilterCrop extends ImageFilterBase {
         let realCropRect = new RectF();
         realCropRect.set(this.cropRect.left, this.cropRect.top, this.cropRect.right, this.cropRect.bottom);
         MathUtils.revertRect(realCropRect, width, height);
-        MathUtils.roundOutRect(realCropRect);
+        MathUtils.roundRect(realCropRect);
+        this.log.debug(`realCropRect: ${JSON.stringify(realCropRect)}`);
 
-        let offWidth = vp2px(realCropRect.getWidth()); // Apply to the case that offscreen canvas is constructed with px
-        let offHeight = vp2px(realCropRect.getHeight()); // Apply to the case that offscreen canvas is constructed with px
+        let offWidth = realCropRect.getWidth();
+        let offHeight = realCropRect.getHeight();
+        offWidth = (offWidth > 0) ? offWidth : 1;
+        offHeight = (offHeight > 0) ? offHeight : 1;
         let setting = new RenderingContextSettings(true);
         let offCtx = new OffscreenCanvasRenderingContext2D(offWidth, offHeight, setting);
         let tX = this.isFlipHorizontal ? -1 : 1;

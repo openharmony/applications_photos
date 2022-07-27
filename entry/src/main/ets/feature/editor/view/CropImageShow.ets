@@ -117,6 +117,10 @@ export struct CropImageShow {
         this.log.debug(`CropImageShow this.screenHeight = ${this.flexHeight}, this.screenWidth = ${this.flexWidth}`);
     }
 
+    aboutToDisappear() {
+
+    }
+
     build() {
         Flex({
             direction: this.isVerticalScreen ? FlexDirection.Column : FlexDirection.Row,

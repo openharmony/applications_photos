@@ -13,28 +13,29 @@
  * limitations under the License.
  */
 
-import { DownloadCancelOperationDialog } from './DownloadCancelOperationDialog.ets';
-import {BroadCast} from '../../utils/BroadCast.ets'
-import {BroadCastConstants} from '../../model/common/BroadCastConstants.ets'
-import {Logger} from '../../utils/Logger.ets'
-import {MediaDetails, DetailsDialog} from './DetailsDialog.ets'
-import {MultiSelectDetails, MultiSelectDialog} from './MultiSelectDialog.ets'
-import {DeleteDialog} from './DeleteDialog.ets'
+import {DownloadCancelOperationDialog} from './DownloadCancelOperationDialog';
+import {Constants} from '../../model/common/Constants'
+import {BroadCast} from '../../utils/BroadCast'
+import {BroadCastConstants} from '../../model/common/BroadCastConstants'
+import {Logger} from '../../utils/Logger'
+import {MediaDetails, DetailsDialog} from './DetailsDialog'
+import {MultiSelectDetails, MultiSelectDialog} from './MultiSelectDialog'
+import {DeleteDialog} from './DeleteDialog'
 import {DialogCallback} from '../../model/common/DialogUtil'
-import {MediaItem} from '../../model/browser/photo/MediaItem.ets';
+import {MediaItem} from '../../model/browser/photo/MediaItem';
 
-import {CancelOperationDialog, CancelParam} from './CancelOperationDialog.ets';
-import {RenameDialog} from './RenameDialog.ets';
-import {AddNotesDialog} from './AddNotesDialog.ets';
-import {ProgressDialog, ProgressParam} from './ProgressDialog.ets';
-import {DeleteProgressDialog, DeleteProgressParam} from './DeleteProgressDialog.ets';
-import {SaveDialog, SaveDialogCallback} from './SaveDialog.ets'
-import {EditExitDialog, EditExitDialogCallback} from './EditExitDialog.ets'
-import {NewAlbumDialog} from './NewAlbumDialog.ets'
-import {CopyOrMoveDialog, OperateParam} from './CopyOrMoveDialog.ets'
-import {FindSameNameDialog, FindSameNameParam} from './FindSameNameDialog.ets'
+import {CancelOperationDialog, CancelParam} from './CancelOperationDialog';
+import {RenameDialog} from './RenameDialog';
+import {AddNotesDialog} from './AddNotesDialog';
+import {ProgressDialog, ProgressParam} from './ProgressDialog';
+import {DeleteProgressDialog, DeleteProgressParam} from './DeleteProgressDialog';
+import {SaveDialog, SaveDialogCallback} from './SaveDialog'
+import {EditExitDialog, EditExitDialogCallback} from './EditExitDialog'
+import {NewAlbumDialog} from './NewAlbumDialog'
+import {CopyOrMoveDialog, OperateParam} from './CopyOrMoveDialog'
+import {FindSameNameDialog, FindSameNameParam} from './FindSameNameDialog'
 import {ScreenManager} from '../../model/common/ScreenManager'
-import {SaveImageDialog} from './SaveImageDialog.ets'
+import {SaveImageDialog} from './SaveImageDialog'
 
 @Component
 export struct CustomDialogView {
@@ -58,13 +59,13 @@ export struct CustomDialogView {
     private logger: Logger = new Logger('CustomDialogView');
     @Provide mediaDetails: MediaDetails = {
         mediaType: 0,
-        height: 256,
-        width: 256,
-        size: 256,
-        path: 'string',
-        duration: 1028,
-        title: 'title',
-        dateTaken: 10280000,
+        height: 0,
+        width: 0,
+        size: 0,
+        path: '',
+        duration: 0,
+        title: '',
+        dateTaken: 0,
         uri: '',
         displayName: '',
         dateModified: 0
@@ -72,21 +73,21 @@ export struct CustomDialogView {
 
     @Provide targetMediaDetails: MediaDetails = {
         mediaType: 0,
-        height: 256,
-        width: 256,
-        size: 256,
-        path: 'string',
-        duration: 1028,
-        title: 'title',
-        dateTaken: 10280000,
+        height: 0,
+        width: 0,
+        size: 0,
+        path: '',
+        duration: 0,
+        title: '',
+        dateTaken: 0,
         uri: '',
         displayName: '',
         dateModified: 0
     };
 
     @Provide multiSelectDetails: MultiSelectDetails = {
-        count: 500,
-        size: 256,
+        count: 0,
+        size: 0,
     };
 
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
@@ -241,12 +242,11 @@ export struct CustomDialogView {
         customStyle: true
     });
 
-    private aboutToDisappear(): void {
+    aboutToDisappear(): void {
         this.logger.info('aboutToDisappear');
-        this.broadCast.off(null, null)
     }
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.logger.info('aboutToAppear');
         let self = this;
         this.broadCast.on(BroadCastConstants.SHOW_DETAIL_DIALOG,
@@ -325,7 +325,7 @@ export struct CustomDialogView {
                 self.logger.info(`UPDATE_PROGRESS ${progress}`);
                 self.deleteProgress = progress;
                 self.deleteProgressParam.currentCount = currentCount;
-                if (progress == 100) {
+                if (progress == Constants.PROGRESS_MAX) {
                     self.logger.info('Update progress 100%');
                     self.progressDialogController.close();
                     self.deleteProgress = 0;
@@ -393,7 +393,7 @@ export struct CustomDialogView {
             function(assets: any, count: number, replaceFunc: Function, skipFunc: Function,
                      cancelFunc: Function, doSameFunc: Function) {
                 self.logger.info('FIND_SAME_FILE_DIALOG');
-                self.findSameNameParam.sourceFileAsset = assets.fileAsset;
+                self.findSameNameParam.sourceFileAsset = assets.sourceAsset;
                 self.findSameNameParam.targetFileAsset = assets.targetAsset;
                 self.findSameNameParam.replaceFunc = replaceFunc;
                 self.findSameNameParam.skipFunc = skipFunc;

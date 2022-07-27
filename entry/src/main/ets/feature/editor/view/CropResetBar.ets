@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {BroadCast} from '../../../common/utils/BroadCast.ets'
+import {BroadCast} from '../../../common/utils/BroadCast'
 import {Constants} from '../../../common/model/common/Constants'
 
 @Component

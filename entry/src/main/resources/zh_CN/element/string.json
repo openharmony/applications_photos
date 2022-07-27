@@ -73,20 +73,20 @@
       "value": "选择图片"
     },
     {
+      "name": "title_select_album",
+      "value": "选择相册"
+    },
+    {
       "name": "title_none_selected",
       "value": "未选择"
     },
     {
-      "name": "title_no_photos",
-      "value": "暂无图片或视频"
-    },
-    {
       "name": "title_no_albums",
-      "value": "暂无相册"
+      "value": "没有相册"
     },
     {
       "name": "title_no_photos_with_geo_info",
-      "value": "暂无包含地理位置的图片或视频"
+      "value": "没有包含地理位置的图片或视频"
     },
     {
       "name": "photo_detail_duration",
@@ -282,15 +282,15 @@
     },
     {
       "name": "resolution",
-      "value": "分辨率:"
+      "value": "分辨率: "
     },
     {
       "name": "title",
-      "value": "名称:"
+      "value": "名称: "
     },
     {
       "name": "time",
-      "value": "时间:"
+      "value": "时间: "
     },
     {
       "name": "details",
@@ -298,19 +298,19 @@
     },
     {
       "name": "size",
-      "value": "大小:"
+      "value": "大小: "
     },
     {
       "name": "count",
-      "value": "数量:"
+      "value": "数量: "
     },
     {
       "name": "path",
-      "value": "路径:"
+      "value": "路径: "
     },
     {
       "name": "duration",
-      "value": "时长:"
+      "value": "时长: "
     },
     {
       "name": "detail_dialog_confirm",
@@ -481,10 +481,6 @@
       "value": "文件在删除前会显示剩余天数（最长30天），之后将永久删除"
     },
     {
-      "name": "recycleAlbum_delete_message",
-      "value": "所选文件将被永久删除，无法恢复。是否删除？"
-    },
-    {
       "name": "recycleAlbum_clear_message",
       "value": "所有文件将被永久删除，无法恢复。是否清空？"
     },
@@ -510,7 +506,7 @@
     },
     {
       "name": "rename_failed",
-      "value": "重命名失败"
+      "value": "重命名失败，请重试"
     },
     {
       "name": "download_progress_message",
@@ -546,11 +542,11 @@
     },
     {
       "name": "copy_failed_single",
-      "value": "复制失败"
+      "value": "复制失败，请重试"
     },
     {
       "name": "move_failed_single",
-      "value": "移动失败"
+      "value": "移动失败，请重试"
     },
     {
       "name": "download_failed_multi",
@@ -649,32 +645,20 @@
       "value": "%d 项"
     },
     {
-      "name": "move_to_album",
-      "value": "移动到"
+      "name": "action_move_to_album",
+      "value": "移动到相册"
     },
     {
-      "name": "copy_to_album",
-      "value": "复制到"
+      "name": "action_copy_to_album",
+      "value": "复制到相册"
     },
     {
       "name": "rename",
       "value": "重命名"
     },
     {
-      "name": "show_photo_num",
-      "value": "%d 张照片"
-    },
-    {
-      "name": "show_video_num",
-      "value": "%d 个视频"
-    },
-    {
-      "name": "show_photo_video_num",
-      "value": "%d 张照片，%d 个视频"
-    },
-    {
       "name": "album_new_album",
-      "value": "newAlbum"
+      "value": "新建相册"
     },
     {
       "name": "album_new_album_title",
@@ -773,10 +757,6 @@
       "value": "请下载视频文件至本机进行播放"
     },
     {
-      "name": "distribute_album_title_holder",
-      "value": "(%s)"
-    },
-    {
       "name": "description_serviceability",
       "value": "hap sample empty service"
     },
@@ -790,7 +770,7 @@
     },
     {
       "name": "edit_save_picture_text",
-      "value": "正在保存图片..."
+      "value": "正在保存照片..."
     },
     {
       "name": "fa_select_time",
@@ -821,8 +801,16 @@
       "value": "图片播放间隔"
     },
     {
-      "name": "fa_play_interval_time",
+      "name": "fa_play_interval_time_30",
       "value": "30 分钟"
+    },
+    {
+      "name": "fa_play_interval_time_60",
+      "value": "1 小时"
+    },
+    {
+      "name": "fa_play_interval_time_90",
+      "value": "1.5 小时"
     },
     {
       "name": "progress_delete",
@@ -831,6 +819,18 @@
     {
       "name": "progress_recover",
       "value": "恢复%1$d/%2$d"
+    },
+    {
+      "name": "form_FormAbility_label",
+      "value": "相册"
+    },
+    {
+      "name": "edit_photo_save_fail",
+      "value": "图片保存失败!"
+    },
+    {
+      "name": "image_loading",
+      "value": "正在加载..."
     }
   ]
 }

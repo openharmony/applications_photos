@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger.ets'
-import {ScreenManager} from '../../model/common/ScreenManager.ets';
-import {Constants} from '../../model/common/Constants.ets';
+import {Logger} from '../../utils/Logger'
+import {ScreenManager} from '../../model/common/ScreenManager';
+import {Constants} from '../../model/common/Constants';
 
 @Observed
 export class MultiSelectDetails {
@@ -29,10 +29,6 @@ export struct MultiSelectDialog {
     @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-    static readonly INTERNAL_PREFIX_NUM = 3;
-
-    static readonly EXTERNAL_PREFIX_NUM = 2;
-
     controller: CustomDialogController;
 
     @Consume multiSelectDetails: MultiSelectDetails;
@@ -46,7 +42,7 @@ export struct MultiSelectDialog {
             Row() {
                 Text($r('app.string.details'))
                 .fontSize($r('sys.float.ohos_id_text_size_headline7'))
-                    .fontWeight(FontWeight.Bold)
+                    .fontWeight(FontWeight.Medium)
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
             }
             .alignItems(VerticalAlign.Center)
@@ -54,13 +50,13 @@ export struct MultiSelectDialog {
             Row() {
                 Column() {
                     Text($r('app.string.count'))
-                    .fontSize($r('sys.float.ohos_id_text_size_caption1'))
+                    .fontSize($r('sys.float.ohos_id_text_size_body2'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
                 Column() {
                     Text($r('app.string.items',this.multiSelectDetails.count))
-                    .fontSize($r('sys.float.ohos_id_text_size_caption1'))
+                    .fontSize($r('sys.float.ohos_id_text_size_body2'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
                         .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                         .textOverflow({overflow:TextOverflow.Ellipsis})
@@ -70,13 +66,13 @@ export struct MultiSelectDialog {
             Row() {
                 Column() {
                     Text($r('app.string.size'))
-                    .fontSize($r('sys.float.ohos_id_text_size_caption1'))
+                    .fontSize($r('sys.float.ohos_id_text_size_body2'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
                 Column() {
-                    Text(`${(this.multiSelectDetails.size/(1024 * 1024)).toFixed(2)}MB`)
-                    .fontSize($r('sys.float.ohos_id_text_size_caption1'))
+                    Text(`${(this.multiSelectDetails.size / Constants.BYTE_TO_MB).toFixed(2)}MB`)
+                    .fontSize($r('sys.float.ohos_id_text_size_body2'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
                         .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                         .textOverflow({overflow:TextOverflow.Ellipsis})
@@ -107,8 +103,8 @@ export struct MultiSelectDialog {
         .width(ScreenManager.getInstance().getColumnsWidth(4))
             .backgroundColor($r('app.color.white'))
             .margin({
-                right: $r('app.float.dialog_content_margin'),
-                left: $r('app.float.dialog_content_margin'),
+                right: $r('app.float.dialog_window_margin'),
+                left: $r('app.float.dialog_window_margin'),
                 bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
             })
             .padding({left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin')})

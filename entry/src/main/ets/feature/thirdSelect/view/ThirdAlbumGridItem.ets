@@ -1,3 +1,4 @@
+import { EmptyAlbumComponent } from '../../browser/view/album/EmptyAlbumComponent';
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,41 +14,45 @@
  * limitations under the License.
  */
 
-import {AlbumInfo} from '../../../common/model/browser/album/AlbumInfo.ets';
-import {EmptyAlbumComponent} from '../../browser/view/album/EmptyAlbumComponent';
+import {AlbumInfo} from '../../../common/model/browser/album/AlbumInfo'
 import {Logger} from '../utils/Logger'
 import {ScreenManager} from '../../../common/model/common/ScreenManager'
-import router from '@system.router';
-import {AlbumDefine} from '../../../common/model/browser/AlbumDefine.ets'
-import {BroadCast} from '../../../common/utils/BroadCast.ets'
+import router from '@system.router'
+import {AlbumDefine} from '../../../common/model/browser/AlbumDefine'
+import {BroadCast} from '../../../common/utils/BroadCast'
 import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
 import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
-import {Constants} from '../../../common/model/common/Constants.ets'
-
-let staticIconList = new Map([
-    [AlbumDefine.ALBUM_NAME_VIDEO , $r('app.media.ic_video')],
-    [AlbumDefine.ALBUM_NAME_FAVOR, $r('app.media.ic_favorite_overlay')]
-]);
+import {Constants} from '../../../common/model/common/Constants'
 
 // The item of album grid, and it's new style.
 @Component
 export struct ThirdAlbumGridItem {
-    @State item: AlbumInfo = new AlbumInfo('', '', '', 0, '');
+    private staticIconList = new Map([
+        [AlbumDefine.ALBUM_ID_VIDEO , $r('app.media.ic_video')],
+        [AlbumDefine.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
+    ]);
+    @State item: AlbumInfo = new AlbumInfo('','', '', '', 0, '', '');
     isMultiPick: boolean;
-    isBigCard: boolean = false;
-    gridHeight: number = 0;
+    @Provide isBigCard: boolean = false;
+    @Provide gridHeight: number = 0;
     logger: Logger = new Logger('ThirdAlbumGridItem');
     isFromWallpaper: boolean;
     maxSelectCount: number;
     isFromFa:boolean;
+    isFromFaPhoto: boolean;
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
 
     gridAspectRatio = Constants.CARD_ASPECT_RATIO;
     albumCountMarginRight = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN * 2;
     iconMarkAnchorX = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
     iconMarkAnchorY = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
+    @State bigWidth:number = 0;
+    @State cardWidth: number = 0;
+    @State cardHeight: number = 0;
+    @State transformV: number = 0;
+    @State isEmptyAlbum: boolean = false;
 
-    private aboutToAppear(): void {
+    aboutToAppear(): void {
         this.logger.info(`aboutToAppear + ${this.item.coverUri}`)
         let self = this
         ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, (size) => {
@@ -64,6 +69,26 @@ export struct ThirdAlbumGridItem {
         let gridWidth = ((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER) / count) -
         Constants.ALBUM_SET_GUTTER;
         this.gridHeight = gridWidth / this.gridAspectRatio;
+        this.bigWidth = gridWidth * 2 + Constants.ALBUM_SET_GUTTER;
+
+        if (Constants.ANGLE_90 == this.item.coverOrientation
+        || Constants.ANGLE_270 == this.item.coverOrientation) {
+            this.cardWidth = this.gridHeight;
+            if (this.isBigCard) {
+                this.cardHeight = this.bigWidth;
+            } else {
+                this.cardHeight = gridWidth;
+            }
+            this.transformV = (this.cardHeight - this.cardWidth) / Constants.NUMBER_2;
+        } else {
+            if (this.isBigCard) {
+                this.cardWidth = this.bigWidth;
+            } else {
+                this.cardWidth = gridWidth;
+            }
+            this.cardHeight = this.gridHeight;
+            this.transformV = 0;
+        }
 
         this.logger.info(`is big card : ${this.isBigCard}`);
         this.logger.info(`little grid size is: ${gridWidth}x${this.gridHeight}`);
@@ -71,20 +96,61 @@ export struct ThirdAlbumGridItem {
 
     build() {
         Stack({ alignContent: Alignment.Bottom }) {
+            if (this.isEmptyAlbum) {
+                EmptyAlbumComponent()
+            }
+
             if (this.isBigCard) {
-                Image(this.item.coverUri)
-                    .alt($r('app.media.ic_goto_photos'))
-                    .height(this.gridHeight)
-                    .offset({x:0, y:0})
-                    .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
-                    .fillColor($r('app.color.empty_or_recycle_album_icon'))
+                Flex({
+                        direction: FlexDirection.Row,
+                        justifyContent: FlexAlign.Center,
+                        alignItems: ItemAlign.Center
+                    }) {
+                    Image(this.item.coverUri)
+                        .alt($r('app.media.ic_goto_photos'))
+                        .width(this.cardWidth)
+                        .height(this.cardHeight)
+                        .transform({ y: this.transformV })
+                        .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
+                        .rotate({
+                            centerX: this.cardWidth / Constants.NUMBER_2,
+                            centerY: this.cardHeight / Constants.NUMBER_2,
+                            z: 1,
+                            angle: this.item.coverOrientation
+                        })
+                        .fillColor($r('app.color.empty_or_recycle_album_icon'))
+                        .onError(() => {
+                            this.logger.debug('album is empty or its cover is error');
+                            this.isEmptyAlbum = true;
+                        })
+                }
+                .width(this.bigWidth)
+                .height(this.gridHeight)
             } else {
-                Image(this.item.coverUri)
-                    .alt($r('app.media.ic_goto_photos'))
-                    .aspectRatio(this.gridAspectRatio)
-                    .offset({x:0, y:0})
-                    .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
-                    .fillColor($r('app.color.empty_or_recycle_album_icon'))
+                Flex({
+                        direction: FlexDirection.Row,
+                        justifyContent: FlexAlign.Center,
+                        alignItems: ItemAlign.Center
+                    }) {
+                    Image(this.item.coverUri)
+                        .alt($r('app.media.ic_goto_photos'))
+                        .width(this.cardWidth)
+                        .height(this.cardHeight)
+                        .translate({ x: this.transformV })
+                        .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
+                        .rotate({
+                            centerX: this.cardWidth / Constants.NUMBER_2,
+                            centerY: this.cardHeight / Constants.NUMBER_2,
+                            z: 1,
+                            angle: this.item.coverOrientation
+                        })
+                        .fillColor($r('app.color.empty_or_recycle_album_icon'))
+                        .onError(() => {
+                            this.logger.debug('album is empty or its cover is error');
+                            this.isEmptyAlbum = true;
+                        })
+                }
+                .height(this.gridHeight)
             }
 
             Column() {
@@ -110,8 +176,8 @@ export struct ThirdAlbumGridItem {
                 bottom: $r('app.float.album_set_count_margin_bottom')})
 
 
-            if (staticIconList.has(this.item.name)) {
-                Image(staticIconList.get(this.item.name))
+            if (this.staticIconList.has(this.item.name)) {
+                Image(this.staticIconList.get(this.item.name))
                     .height($r('app.float.album_set_new_style_icon'))
                     .aspectRatio(1)
                     .position({ x: '100%', y: '100%' })
@@ -130,28 +196,21 @@ export struct ThirdAlbumGridItem {
             color: $r('app.color.album_cover_stroke_color')
         })
         .onClick(() => {
-            if (this.isFromFa) {
+            if (this.isFromFa && (!this.isFromFaPhoto)) {
                 this.appBroadCast.emit(BroadCastConstants.SAVE_FORM_EDITOR_DATA,
-                    [this.item.name, this.item.displayName, '', 5]);
-                let abilityResult = {
-                    want: {},
-                    resultCode: 0
-                };
-                globalThis.photosAbilityContext.terminateSelfWithResult(abilityResult).then((result) => {
-                    this.logger.info(`terminateSelfWithResult result: ${result}`)
-                });
+                    [this.item.name, this.item.id, this.item.displayName, '', true]);
             } else {
                 router.push({
                     uri: 'feature/thirdSelect/view/ThirdSelectPhotoGridPage',
                     params: {
                         itemCoverUri: this.item.coverUri,
-                        itemName: this.item.name,
+                        itemId: this.item.id,
                         itemCount: this.item.count,
                         isMultiPick: this.isMultiPick,
                         isFromWallpaper: this.isFromWallpaper,
                         maxSelectCount: this.maxSelectCount,
                         itemDisplayName: this.item.displayName,
-                        isFromFa: false
+                        isFromFa: this.isFromFa
                     }
                 });
             }

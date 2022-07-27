@@ -14,14 +14,15 @@
  */
 
 import {PeerInfo} from './PeerInfo'
-import {Logger} from '../../../utils/Logger.ets'
-import {AbsDataSource} from '../AbsDataSource.ets'
-import { BroadCast } from '../../../utils/BroadCast.ets';
-import { BrowserDataFactory } from '../interface/BrowserDataFactory.ets';
-import { BrowserDataInterface } from '../interface/BrowserDataInterface';
+import {Logger} from '../../../utils/Logger'
+import {AbsDataSource} from '../AbsDataSource'
+import { BroadCast } from '../../../utils/BroadCast';
+import { BrowserDataFactory } from '../../../interface/BrowserDataFactory';
+import { BrowserDataInterface } from '../../../interface/BrowserDataInterface';
 
-import {BroadCastConstants} from '../../common/BroadCastConstants.ets'
-import {BroadCastManager} from '../../common/BroadCastManager.ets'
+import {BroadCastConstants} from '../../common/BroadCastConstants'
+import {BroadCastManager} from '../../common/BroadCastManager'
+import {Constants} from '../../common/Constants';
 
 export class DistributedDataSource extends AbsDataSource {
     logger: Logger = new Logger('DistributedDataSource');
@@ -75,7 +76,7 @@ export class DistributedDataSource extends AbsDataSource {
     }
 
     onChange(mediaType: string) {
-        if (mediaType == 'device'|| mediaType == 'remote') {
+        if (mediaType == Constants.MEDIA_TYPE_DEVICE|| mediaType == Constants.MEDIA_TYPE_REMOTE) {
             this.logger.info(`onChange: ${mediaType}`);
             this.lastChangeTime = Date.now();
             this.loadData();
@@ -90,16 +91,16 @@ export class DistributedDataSource extends AbsDataSource {
 
     private getDevicesStatus(devices, params) {
         if (this.peerInfoList.length <= 0) {
-            params.push('online');
+            params.push(Constants.DEVICE_STATE_ONLINE);
             params.push('');
         }
 
         for (let device of this.peerInfoList) {
             if (!this.hasDevice(device.networkId, devices)) {
                 this.logger.debug(`offline: ${device.networkId}`);
-                params.push('offline');
+                params.push(Constants.DEVICE_STATE_OFFLINE);
             }else{
-                params.push('changed');
+                params.push(Constants.DEVICE_STATE_CHANGE);
             }
             params.push(device.networkId);
         }

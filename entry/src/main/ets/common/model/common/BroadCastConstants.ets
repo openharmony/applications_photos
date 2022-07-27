@@ -50,4 +50,8 @@ export class BroadCastConstants {
     static readonly SAVE_FORM_EDITOR_DATA = 'save_form_editor_data';
     static readonly INIT_DATE_TEXT = 'init_date_text';
     static readonly THIRD_ROUTE_PAGE = 'third_route_page';
+    static readonly ON_DATA_RELOADED_WITH_EDIT = 'on_data_reloaded_with_edit';
+    static readonly PHOTO_EDIT_SAVE_ID: string = 'photo_edit_save_id';
+    static readonly PHOTO_EDIT_SAVE_COMPLETE: string = 'photo_edit_save_complete';
+    static readonly CHANGE_SWIPER_DURATION = 'change_swiper_duration';
 }

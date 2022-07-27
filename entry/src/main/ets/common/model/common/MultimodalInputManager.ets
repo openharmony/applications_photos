@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import inputConsumer from '@ohos.multimodalInput.inputConsumer';
-import {Logger} from '../../utils/Logger.ets';
+import {Logger} from '../../utils/Logger';
 
 export class MultimodalInputManager {
     logger: Logger = new Logger('MultimodalInputManager');
@@ -41,33 +41,33 @@ export class MultimodalInputManager {
         'finalKeyDownDuration': 0
     };
 
-    registerListener(callback) {
+    async registerListener(callback) {
         this.logger.debug(`registerListener start`);
-        inputConsumer.on('key', this.leftKeyOptions, (err, data) => {
-            this.logger.debug(`notificationRegister err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`);
+        inputConsumer.on('key', this.leftKeyOptions, (data) => {
+            this.logger.debug(`notificationRegister data: ${JSON.stringify(data)}`);
             callback(0);
         });
-        inputConsumer.on('key', this.rightKeyOptions, (err, data) => {
-            this.logger.debug(`controlRegister err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`);
+        inputConsumer.on('key', this.rightKeyOptions, (data) => {
+            this.logger.debug(`controlRegister data: ${JSON.stringify(data)}`);
             callback(1);
         });
-        inputConsumer.on('key', this.escKeyOptions, (err, data) => {
-            this.logger.debug(`escRegister err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`);
+        inputConsumer.on('key', this.escKeyOptions, (data) => {
+            this.logger.debug(`escRegister data: ${JSON.stringify(data)}`);
             callback(2);
         });
         this.logger.debug(`registerListener end`);
     }
 
-    unregisterListener() {
+    async unregisterListener() {
         this.logger.debug(`unregisterListener start`);
-        inputConsumer.off('key', this.leftKeyOptions, (err, data) => {
-            this.logger.debug(`notificationUnregister err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`);
+        inputConsumer.off('key', this.leftKeyOptions, (data) => {
+            this.logger.debug(`notificationUnregister data: ${JSON.stringify(data)}`);
         });
-        inputConsumer.off('key', this.rightKeyOptions, (err, data) => {
-            this.logger.debug(`controlUnregister err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`);
+        inputConsumer.off('key', this.rightKeyOptions, (data) => {
+            this.logger.debug(`controlUnregister data: ${JSON.stringify(data)}`);
         });
-        inputConsumer.off('key', this.escKeyOptions, (err, data) => {
-            this.logger.debug(`escUnregister err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`);
+        inputConsumer.off('key', this.escKeyOptions, (data) => {
+            this.logger.debug(`escUnregister data: ${JSON.stringify(data)}`);
         });
         this.logger.debug(`unregisterListener end`);
     }

@@ -14,10 +14,10 @@
  */
 
 import {AsyncCallback} from '../../common/AsyncCallback'
-import {MediaItem} from './MediaItem.ets'
-import {MediaDataSource} from './MediaDataSource.ets'
-import {Logger} from '../../../utils/Logger.ets'
-import {TraceControllerUtils} from '../../../utils/TraceControllerUtils.ets'
+import {MediaItem} from './MediaItem'
+import {MediaDataSource} from './MediaDataSource'
+import {Logger} from '../../../utils/Logger'
+import {TraceControllerUtils} from '../../../utils/TraceControllerUtils'
 
 // Datasource requests media mediaItem callback
 export class GetItemsCallback implements AsyncCallback<MediaItem[]> {

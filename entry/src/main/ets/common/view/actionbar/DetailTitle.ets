@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger.ets'
-import {ActionBarProp} from '../../model/browser/operation/ActionBarProp.ets'
+import {Logger} from '../../utils/Logger'
+import {ActionBarProp} from '../browserOperation/ActionBarProp'
 
 // Large picture title, including primary date title and secondary time and place title
 @Component
@@ -42,15 +42,14 @@ export struct DetailTitle {
                     .fontFamily(ActionBarProp.REGULAR_FONT)
                     .fontColor(this.isVideoPage ? $r('app.color.white') : ActionBarProp.NORMAL_SUBTITLE_TEXT_COLOR)
                     .maxLines(1)
-                    .lineHeight(18)
+                    .lineHeight('app.float.detail_sub_title_max_lines')
                     .margin({ top: $r('sys.float.ohos_id_text_margin_vertical') })
                     .textOverflow({ overflow: TextOverflow.Ellipsis })
             }
-            .constraintSize({ minHeight: 48 })
+            .constraintSize({ minHeight: ('app.float.detail_title_constraint_size_min_height') })
                 .alignItems(HorizontalAlign.Start)
         }.margin({ left: $r('app.float.actionbar_title_margin'),
             right: $r('app.float.actionbar_title_margin') })
-            .flexGrow(1)
             .alignItems(VerticalAlign.Center)
     }
 }

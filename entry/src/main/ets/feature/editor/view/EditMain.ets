@@ -63,24 +63,31 @@ export struct Edit {
     appEventBus: BroadCast = BroadCastManager.getInstance().getBroadCast();
     private log: Logger = new Logger('EditMain');
     private defaultWidth: number = Constants.DEFAULT_WIDTH;
+    private isLoadFailed: boolean = false;
 
-    private onBackPress() {
+    onBackPress() {
         if (this.isCropReset) {
             this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
         } else {
             router.back();
         }
+        return true;
     }
 
     discardCallback() {
         this.log.debug('discardCallback called');
     }
 
+    loadFailedCallback() {
+        this.isLoadFailed = true;
+    }
+
     aboutToAppear() {
         this.log.debug('EditMain init start');
-        ScreenManager.getInstance().setSystemUi(false);
         if (this.mediaItem) {
-            this.editorManager.initialize(this.mediaItem, PhotoEditMode.EDIT_MODE_CROP);
+            this.isLoadFailed = false;
+            this.editorManager.initialize(
+                this.mediaItem, PhotoEditMode.EDIT_MODE_CROP, this.loadFailedCallback.bind(this));
         }
         this.cropEdit = this.editorManager.getPhotoEditBaseInstance(PhotoEditMode.EDIT_MODE_CROP) as PhotoEditCrop;
         if (this.isVerticalScreen) {
@@ -102,17 +109,21 @@ export struct Edit {
         this.imageScale = this.isVerticalScreen
             ? (this.screenHeight - this.titleSize - this.mainBottomSize) : (this.screenWidth - this.titleSize);
         this.imageScaleWidth = this.isVerticalScreen ? this.screenWidth : (this.screenHeight - this.mainBottomSize);
+        ScreenManager.getInstance().setNavigationBarColor('#FFFFFFFF')
     }
 
     aboutToDisappear() {
         this.log.debug('aboutToDisappear');
         globalThis.EditorMediaItem = undefined;
         PhotoEditorManager.getInstance().clear();
-        ScreenManager.getInstance().setSystemUi(true);
+        ScreenManager.getInstance().setNavigationBarColor('#FF000000')
     }
 
-    private onPageShow() {
+    onPageShow() {
         this.appEventBus.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
+        if (this.isLoadFailed) {
+            router.back();
+        }
     }
 
     build() {

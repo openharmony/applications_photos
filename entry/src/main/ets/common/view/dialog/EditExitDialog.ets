@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import router from '@system.router';
+import router from '@system.router'
 import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants.ets';
+import {Constants} from '../../model/common/Constants'
 
 @Observed
 export class EditExitDialogCallback {
@@ -33,55 +33,77 @@ export struct EditExitDialog {
 
     build() {
         Column() {
-            Text($r('app.string.edit_exit_dialog_context_text')).fontSize($r('sys.float.ohos_id_text_size_body1'))
-                .fontColor($r('sys.color.ohos_id_color_text_primary'))
-                .margin({bottom: $r('app.float.album_set_count_margin_left')})
-            Flex({
-                direction:FlexDirection.Row,
-                justifyContent: FlexAlign.SpaceAround,
-                alignItems: ItemAlign.Center,
-            }) {
-                Button() {
-                    Text($r('app.string.save_dialog_cancel_text'))
-                        .fontColor($r('app.color.color_control_highlight'))
-                        .fontWeight(FontWeight.Medium)
-                        .fontSize($r('sys.float.ohos_id_text_size_button1'))
-                }
-                .height($r('app.float.default_button_size'))
-                .width($r('app.float.edit_exit_button'))
-                .onClick(() => {
-                    this.controller.close()
-                }).backgroundColor($r('app.color.transparent'))
+            Stack({alignContent: Alignment.Center}) {
+                Text($r('app.string.edit_exit_dialog_context_text'))
+                    .fontSize($r('sys.float.ohos_id_text_size_body1'))
+                    .fontColor($r('sys.color.ohos_id_color_text_primary'))
+            }.width('100%')
+            .margin({
+                top:$r('app.float.dialog_content_margin'),
+                bottom: $r('sys.float.ohos_id_text_paragraph_margin_s')
+            })
 
-                Divider().vertical(true)
-                    .height($r('app.float.actionbar_text_icon_margin'))
-                    .color($r('sys.color.ohos_id_color_list_separator'))
+            Stack({alignContent: Alignment.Top}) {
+                Row() {
+                    Button() {
+                        Text($r('app.string.save_dialog_cancel_text'))
+                            .fontSize($r('sys.float.ohos_id_text_size_button1'))
+                            .fontColor($r('app.color.color_control_highlight'))
+                            .fontWeight(FontWeight.Medium)
+                            .width('50%')
+                            .textAlign(TextAlign.Center)
+                    }
+                    .margin({
+                        left: $r('app.float.details_dialog_button_margin_left'),
+                        right: $r('app.float.details_dialog_button_margin_right')
+                    })
+                    .backgroundColor($r('app.color.transparent'))
+                    .height($r('app.float.details_dialog_button_height'))
+                    .onClick(() => {
+                        this.controller.close();
+                    })
 
-                Button() {
-                    Text($r('app.string.edit_exit_dialog_discard_text'))
-                        .fontColor($r('app.color.color_control_highlight'))
-                        .fontWeight(FontWeight.Medium)
-                        .fontSize($r('sys.float.ohos_id_text_size_button1'))
+                    Row() {
+                        Divider()
+                            .vertical(true)
+                            .height($r('app.float.dialog_divider_height'))
+                            .color($r('app.color.divider_vertical_color'))
+                    }
+                    .height($r('app.float.details_dialog_button_height'))
+                    .alignItems(VerticalAlign.Center)
+                    Button() {
+                        Text($r('app.string.edit_exit_dialog_discard_text'))
+                            .fontSize($r('sys.float.ohos_id_text_size_button1'))
+                            .fontColor($r('app.color.color_control_highlight'))
+                            .fontWeight(FontWeight.Medium)
+                            .width('50%')
+                            .textAlign(TextAlign.Center)
+                    }
+                    .margin({
+                        left: $r('app.float.details_dialog_button_margin_left'),
+                        right: $r('app.float.details_dialog_button_margin_right')
+                    })
+                    .backgroundColor($r('app.color.transparent'))
+                    .height($r('app.float.details_dialog_button_height'))
+                    .onClick(() => {
+                        this.controller.close();
+                        this.editExitDialogCallback && this.editExitDialogCallback.discardCallback();
+                        router.back()
+                    })
                 }
-                .height($r('app.float.default_button_size'))
-                .width($r('app.float.edit_exit_button'))
-                .onClick(() => {
-                    this.editExitDialogCallback && this.editExitDialogCallback.discardCallback()
-                    this.controller.close()
-                    router.back()
-                }).backgroundColor($r('app.color.transparent'))
             }
             .width('100%')
+            .height($r('app.float.details_dialog_button_area_height'))
         }
+        .borderRadius($r('app.float.dialog_border_radius'))
         .width(ScreenManager.getInstance().getColumnsWidth(4))
         .backgroundColor($r('app.color.white'))
-        .borderRadius($r('app.float.dialog_content_margin'))
         .margin({
-            right: $r('app.float.dialog_content_margin'),
-            left: $r('app.float.dialog_content_margin'),
+            right: $r('app.float.dialog_window_margin'),
+            left: $r('app.float.dialog_window_margin'),
             bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
         })
-        .padding({bottom: $r('app.float.dialog_content_margin'), top:$r('app.float.dialog_content_margin'),
-            left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin')})
+        .padding({left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin')})
+        .alignItems(HorizontalAlign.Start)
     }
 }

@@ -13,21 +13,21 @@
  * limitations under the License.
  */
 
-import {TimelineData} from '../../../common/model/browser/photo/TimelineData.ets'
-import {DateUtil} from '../../../common/utils/DateUtil.ets';
-import {MediaDataSource} from '../../../common/model/browser/photo/MediaDataSource.ets'
+import {TimelineData} from '../../../common/model/browser/photo/TimelineData'
+import {DateUtil} from '../../../common/utils/DateUtil';
+import {MediaDataSource} from '../../../common/model/browser/photo/MediaDataSource'
 import {GetTimelineDataCallback} from './GetTimelineDataCallback'
 import {ViewType} from '../../../common/model/browser/photo/ViewType'
 import {ViewData} from '../../../common/model/browser/photo/ViewData'
 import {MediaItem} from '../../../common/model/browser/photo/MediaItem'
-import {Logger} from '../utils/Logger.ets'
-import { BroadCast } from '../../../common/utils/BroadCast.ets';
-import {Constants} from '../../../common/model/common/Constants.ets'
+import {Logger} from '../utils/Logger'
+import { BroadCast } from '../../../common/utils/BroadCast';
+import {Constants} from '../../../common/model/common/Constants'
 import {PendingTask} from '../../../common/model/browser/photo/PendingTask'
 import {PendingCondition} from '../../../common/model/browser/photo/PendingCondition'
-import {TraceControllerUtils} from '../../../common/utils/TraceControllerUtils.ets'
-import {BrowserDataFactory} from '../../../common/model/browser/interface/BrowserDataFactory.ets'
-import {BrowserDataInterface} from '../../../common/model/browser/interface/BrowserDataInterface'
+import {TraceControllerUtils} from '../../../common/utils/TraceControllerUtils'
+import {BrowserDataFactory} from '../../../common/interface/BrowserDataFactory'
+import {BrowserDataInterface} from '../../../common/interface/BrowserDataInterface'
 
 const TITLE_DATA_INDEX = -1;
 
@@ -124,7 +124,6 @@ export class TimelineDataSource extends MediaDataSource {
             }
         }
 
-        this.isCountChanged = (previousSize != this.size);
         this.logger.info(`updateGroupSize, old size: ${previousSize} , old mediaCount: ${previousMediaCount},\
             new size: ${this.size}, new mediaCount: ${this.mediaCount}`);
 
@@ -240,6 +239,13 @@ export class TimelineDataSource extends MediaDataSource {
                 this.onActive();
             } else {
                 this.onInActive();
+            }
+        } else if (transition == Constants.PHOTO_TRANSITION_EDIT) {
+            if (isActive) {
+                this.isEditSaveReload = true;
+                this.onActive();
+            } else {
+                this.isEditSaveReload = false;
             }
         }
     }

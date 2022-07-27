@@ -15,17 +15,20 @@
 import router from '@system.router'
 import {DateUtil} from '../../../../common/utils/DateUtil'
 import {Logger} from '../../utils/Logger'
-import {Action} from '../../../../common/model/browser/operation/Action.ets'
-import {MenuOperation} from '../../../../common/model/browser/operation/MenuOperation'
+import {Action} from '../../../../common/view/browserOperation/Action'
+import {MenuOperation} from '../../../../common/view/browserOperation/MenuOperation'
 import {PhotoBrowserActionBar} from './PhotoBrowserActionBar'
-import {BroadCast} from '../../../../common/utils/BroadCast.ets'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager.ets';
+import {BroadCast} from '../../../../common/utils/BroadCast'
+import {ScreenManager} from '../../../../common/model/common/ScreenManager';
+import {BroadCastManager} from '../../../../common/model/common/BroadCastManager';
+import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants';
+import {TraceControllerUtils} from '../../../../common/utils/TraceControllerUtils';
 
 @Entry
 @Component
 struct VideoBrowser {
-    @Provide(dateTitle) photoDate: string = '';
-    @Provide(timeLocationTitle) timeAndLocation: string = '';
+    @Provide('dateTitle') photoDate: string = '';
+    @Provide('timeLocationTitle') timeAndLocation: string = '';
     @Provide isShowBar: boolean = false;
     @Provide menuList: Array<Action> = new Array<Action>();
     @Provide moreMenuList: Array<Action> = new Array<Action>();
@@ -36,7 +39,7 @@ struct VideoBrowser {
     private dateTaken = 0;
     private previewUri = null;
 
-    private onBackPress() {
+    onBackPress() {
         this.logger.info('onBackPress');
         router.back();
         return true;
@@ -56,32 +59,36 @@ struct VideoBrowser {
     }
 
     aboutToAppear() {
+        TraceControllerUtils.startTrace('VideoBrowserAboutToAppear');
         let param = router.getParams();
-        this.uri = param.uri;
-        this.dateTaken = param.dateTaken;
+        param.uri && (this.uri = param.uri.toString());
+        this.dateTaken = new Number(param.dateTaken).valueOf() || 0;
         this.previewUri = param.previewUri;
         if (this.uri == undefined) {
             return;
         }
         this.logger.info(`uri is ${this.uri}`);
-        if (this.previewUri) {
-            this.logger.debug(`previewUri: ${JSON.stringify(this.previewUri)}`);
-        } else {
-            this.logger.debug('previewUri is null');
-        }
         this.photoDate = DateUtil.getLocalizedDate(this.dateTaken);
         this.timeAndLocation = DateUtil.getLocalizedTime(this.dateTaken);
         this.onMenuClicked = this.onMenuClicked.bind(this);
         ScreenManager.getInstance().setSystemUi(false);
+        TraceControllerUtils.finishTrace('VideoBrowserAboutToAppear');
     }
 
-    private aboutToDisappear(): void {
+    aboutToDisappear(): void {
+        this.myVideoController.stop();
         ScreenManager.getInstance().setSystemUi(true);
+    }
+
+    onPageShow() {
+        this.photoDate = DateUtil.getLocalizedDate(this.dateTaken);
+        this.timeAndLocation = DateUtil.getLocalizedTime(this.dateTaken);
+        BroadCastManager.getInstance().getBroadCast().emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
     }
 
     build() {
         Stack({ alignContent: Alignment.TopStart }) {
-            Video({ src: this.uri, controller: this.myVideoController, previewUri: this.previewUri })
+            Video({ src: this.uri, controller: this.myVideoController})
                 .controls(this.isShowBar)
                 .objectFit(ImageFit.Contain)
                 .onClick(() => {
@@ -103,6 +110,13 @@ struct VideoBrowser {
         .width('100%')
             .height('100%')
             .backgroundColor($r('app.color.black'))
+    }
+
+    pageTransition() {
+        PageTransitionEnter({ type: RouteType.None, duration: 0 })
+            .opacity(0)
+        PageTransitionExit({ type: RouteType.None, duration: 0 })
+            .opacity(0)
     }
 }
 
