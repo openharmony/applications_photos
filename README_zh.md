@@ -253,14 +253,14 @@ hdc target mount
 hdc shell "mount -o remount,rw /"
 ```
 
-将签名好的 hap 包放入设备的 `/system/app` 目录下，并修改hap包的权限。删除和发送文件命令如下：
+将签名好的 hap 包放入设备的 `/system/app/包名` 目录下，并修改hap包的权限。删除和发送文件命令如下：
 
 ```
-hdc file send 本地路径 /system/app/hap包名称
+hdc file send 本地路径 /system/app/包名/hap包名称
 ```
-例：将当前本地目录的 `Photos.hap` 文件放入到 `system/app/Photos.hap` 文件中。
+例：将当前本地目录的 `Photos.hap` 文件放入到 `system/app/com.ohos.photos/Photos.hap` 文件中。
 ```
-hdc file send Photos.hap /system/app/Photos.hap
+hdc file send Photos.hap /system/app/com.ohos.photos/Photos.hap
 ```
 > 注意，如果设备不存在 `/system/app` 目录，则需要手动创建该目录并修改权限。
 > ```
