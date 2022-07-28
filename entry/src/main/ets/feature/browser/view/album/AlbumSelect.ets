@@ -14,23 +14,23 @@
  */
 
 import router from '@system.router'
-import {AlbumSelectGridItemNewStyle} from './AlbumSelectGridItemNewStyle'
-import {AlbumSetDataSource} from '../../../../common/model/browser/album/AlbumSetDataSource'
-import {Constants} from '../../../../common/model/common/Constants'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {BroadCast} from '../../../../common/utils/BroadCast'
-import {NoPhotoComponent} from '../../../../common/view/NoPhotoComponent'
-import {Logger} from '../../utils/Logger'
-import {TraceControllerUtils} from '../../../../common/utils/TraceControllerUtils'
-import {MediaDataSource} from '../../../../common/model/browser/photo/MediaDataSource'
-import {NewAlbumPageActionBar} from './NewAlbumPageActionBar'
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {SelectManager} from '../../../../common/model/browser/SelectManager'
-import {UiUtil} from '../../utils/UiUtil'
+import { AlbumSelectGridItemNewStyle } from './AlbumSelectGridItemNewStyle'
+import { AlbumSetDataSource } from '../../../../common/model/browser/album/AlbumSetDataSource'
+import { Constants } from '../../../../common/model/common/Constants'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
+import { BroadCast } from '../../../../common/utils/BroadCast'
+import { NoPhotoComponent } from '../../../../common/view/NoPhotoComponent'
+import { Logger } from '../../utils/Logger'
+import { TraceControllerUtils } from '../../../../common/utils/TraceControllerUtils'
+import { MediaDataSource } from '../../../../common/model/browser/photo/MediaDataSource'
+import { NewAlbumPageActionBar } from './NewAlbumPageActionBar'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { SelectManager } from '../../../../common/model/browser/SelectManager'
+import { UiUtil } from '../../utils/UiUtil'
 import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine';
-import {AlbumInfo} from '../../../../common/model/browser/album/AlbumInfo';
-import {BroadCastManager} from '../../../../common/model/common/BroadCastManager';
-import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants';
+import { AlbumInfo } from '../../../../common/model/browser/album/AlbumInfo';
+import { BroadCastManager } from '../../../../common/model/common/BroadCastManager';
+import { BroadCastConstants } from '../../../../common/model/common/BroadCastConstants';
 
 @Entry
 @Component
@@ -42,7 +42,6 @@ export struct AlbumSelect {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
     @Provide moreMenuList: Action[] = new Array<Action>();
-
     private isActive = false;
     private logger: Logger = new Logger('AlbumSelect');
     private scroller: Scroller = new Scroller();
@@ -115,7 +114,7 @@ export struct AlbumSelect {
 
     private onMenuClicked(action: Action): void {
         this.logger.debug(`onMenuClicked, action: ${action.actionID}`);
-        switch(action) {
+        switch (action) {
             case Action.CANCEL:
                 this.logger.info('clear SelectManager data');
                 this.mSelectManager.onModeChange(false);
@@ -134,11 +133,11 @@ export struct AlbumSelect {
             justifyContent: FlexAlign.Start,
             alignItems: ItemAlign.Start
         }) {
-            NewAlbumPageActionBar({onMenuClicked: this.onMenuClicked})
+            NewAlbumPageActionBar({ onMenuClicked: this.onMenuClicked })
 
             Stack() {
                 if (this.isEmpty) {
-                    NoPhotoComponent({title: $r('app.string.title_no_albums')})
+                    NoPhotoComponent({ title: $r('app.string.title_no_albums') })
                 }
                 Grid(this.scroller) {
                     LazyForEach(this.albums, (item) => {
@@ -147,7 +146,7 @@ export struct AlbumSelect {
                                 AlbumSelectGridItemNewStyle({
                                     item: item,
                                     isBigCard: true,
-                                    mSelectManager : this.mSelectManager
+                                    mSelectManager: this.mSelectManager
                                 })
                             }.columnStart(0).columnEnd(1)
                         } else {
@@ -155,7 +154,7 @@ export struct AlbumSelect {
                                 AlbumSelectGridItemNewStyle({
                                     item: item,
                                     isBigCard: false,
-                                    mSelectManager : this.mSelectManager
+                                    mSelectManager: this.mSelectManager
                                 })
                             }
                         }

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {PhotoEditMode} from '../base/PhotoEditType'
+import { PhotoEditMode } from '../base/PhotoEditType'
 
 export enum ID {
     CROP = 100,

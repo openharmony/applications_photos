@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {ScreenManager} from '../../model/common/ScreenManager'
-import {BroadCastConstants} from '../../model/common/BroadCastConstants'
-import {Constants} from '../../model/common/Constants';
-import {DateUtil} from '../../utils/DateUtil';
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { ScreenManager } from '../../model/common/ScreenManager'
+import { BroadCastConstants } from '../../model/common/BroadCastConstants'
+import { Constants } from '../../model/common/Constants';
+import { DateUtil } from '../../utils/DateUtil';
 
 
 @Observed
@@ -43,9 +43,9 @@ export struct SaveDialog {
                 .height($r('app.float.title_default'))
             Text($r('app.string.save_dialog_context_text')).fontSize($r('sys.float.ohos_id_text_size_body1'))
                 .fontColor($r('sys.color.ohos_id_color_text_primary'))
-                .margin({bottom: $r('app.float.adjust_text_padding_bottom_isVertical')})
+                .margin({ bottom: $r('app.float.adjust_text_padding_bottom_isVertical') })
             if (DateUtil.getLocales() == 'zh-CN') {
-                Stack({alignContent: Alignment.Top}) {
+                Stack({ alignContent: Alignment.Top }) {
                     Row() {
                         Column() {
                             Button() {
@@ -59,7 +59,9 @@ export struct SaveDialog {
                             .onClick(() => {
                                 this.controller.close()
                             }).backgroundColor($r('app.color.transparent'))
-                        }.width(Constants.PERCENT_ONE_THIRD).padding({right: $r('app.float.details_dialog_button_margin_right')})
+                        }
+                        .width(Constants.PERCENT_ONE_THIRD)
+                        .padding({ right: $r('app.float.details_dialog_button_margin_right') })
 
 
                         Row() {
@@ -86,7 +88,10 @@ export struct SaveDialog {
                                 this.saveDialogCallback && this.saveDialogCallback.replaceOriginalCallback()
                             }).backgroundColor($r('app.color.transparent'))
                         }.width(Constants.PERCENT_ONE_THIRD)
-                        .padding({left: $r('app.float.details_dialog_button_margin_left'), right: $r('app.float.details_dialog_button_margin_right')})
+                        .padding({
+                            left: $r('app.float.details_dialog_button_margin_left'),
+                            right: $r('app.float.details_dialog_button_margin_right')
+                        })
 
                         Row() {
                             Divider()
@@ -111,14 +116,16 @@ export struct SaveDialog {
                                 this.broadCast.emit(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                                 this.saveDialogCallback && this.saveDialogCallback.saveAsNewCallback()
                             }).backgroundColor($r('app.color.transparent'))
-                        }.width(Constants.PERCENT_ONE_THIRD).padding({left: $r('app.float.details_dialog_button_margin_left')})
+                        }
+                        .width(Constants.PERCENT_ONE_THIRD)
+                        .padding({ left: $r('app.float.details_dialog_button_margin_left') })
                     }
                 }
                 .width('100%')
                 .height($r('app.float.details_dialog_button_area_height'))
             } else {
                 Flex({
-                    direction:FlexDirection.Column,
+                    direction: FlexDirection.Column,
                     justifyContent: FlexAlign.Center,
                     alignItems: ItemAlign.Center,
                 }) {
@@ -129,7 +136,7 @@ export struct SaveDialog {
                             .fontWeight(FontWeight.Medium)
                     }
                     .height($r('app.float.details_dialog_button_height'))
-                    .margin({bottom: $r('app.float.adjust_text_margin_bottom')})
+                    .margin({ bottom: $r('app.float.adjust_text_margin_bottom') })
                     .onClick(() => {
                         this.controller.close()
                         this.broadCast.emit(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
@@ -143,7 +150,7 @@ export struct SaveDialog {
                             .fontWeight(FontWeight.Medium)
                     }
                     .height($r('app.float.details_dialog_button_height'))
-                    .margin({bottom: $r('app.float.adjust_text_margin_bottom')})
+                    .margin({ bottom: $r('app.float.adjust_text_margin_bottom') })
                     .onClick(() => {
                         this.broadCast.emit(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                         this.controller.close()
@@ -157,7 +164,7 @@ export struct SaveDialog {
                             .fontWeight(FontWeight.Medium)
                     }
                     .height($r('app.float.details_dialog_button_height'))
-                    .margin({bottom: $r('app.float.adjust_text_padding_bottom_isVertical')})
+                    .margin({ bottom: $r('app.float.adjust_text_padding_bottom_isVertical') })
                     .onClick(() => {
                         this.controller.close()
                     }).backgroundColor($r('app.color.transparent'))
@@ -176,6 +183,6 @@ export struct SaveDialog {
             left: $r('app.float.dialog_window_margin'),
             bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
         })
-        .padding({left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin')})
+        .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
     }
 }

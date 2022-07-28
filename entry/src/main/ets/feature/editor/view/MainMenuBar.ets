@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {CropModeBar} from './CropModeBar'
-import {PhotoEditMode} from '../base/PhotoEditType'
-import {BroadCast} from '../../../common/utils/BroadCast'
+import { CropModeBar } from './CropModeBar'
+import { PhotoEditMode } from '../base/PhotoEditType'
+import { BroadCast } from '../../../common/utils/BroadCast'
 
 @Component
 export struct MainMenuBar {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,48 +15,48 @@
  */
 
 import router from '@system.router'
-import {Logger} from '../../utils/Logger'
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {MenuOperation} from '../../../../common/view/browserOperation/MenuOperation'
-import {MenuContext} from '../../../../common/view/browserOperation/MenuContext'
-import {MenuOperationFactory} from '../../../../common/interface/MenuOperationFactory'
-import {GotoPhotosMenuOperation} from './GotoPhotosMenuOperation'
-import {DeleteMenuOperation} from './DeleteMenuOperation'
-import {RecoverMenuOperation} from './RecoverMenuOperation'
-import {MoveMenuOperation} from '../../../../common/view/browserOperation/MoveMenuOperation'
-import {CopyMenuOperation} from '../../../../common/view/browserOperation/CopyMenuOperation'
-import {FavoriteMenuOperation} from './FavoriteMenuOperation'
-import {DateUtil} from '../../../../common/utils/DateUtil'
-import {CustomDialogView} from '../../../../common/view/dialog/CustomDialogView'
-import {Constants} from '../../../../common/model/common/Constants'
-import {MediaItem} from '../../../../common/model/browser/photo/MediaItem'
-import {PhotoDataSource} from '../../../../common/model/browser/photo/PhotoDataSource'
-import {BroadCast} from '../../../../common/utils/BroadCast'
-import {UriDataSource} from '../../../../common/model/browser/photo/UriDataSource'
-import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants'
-import {BroadCastManager} from '../../../../common/model/common/BroadCastManager'
-import {Constants as PhotoConstants} from '../../../../common/model/browser/photo/Constants'
-import {PhotoBrowserBg} from '../../../../common/view/PhotoBrowserBg'
-import {PhotoBrowserActionBar} from './PhotoBrowserActionBar'
-import {ToolBar} from '../../../../common/view/actionbar/ToolBar'
-import {PhotoSwiper} from '../../../../common/view/PhotoSwiper'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {JumpSourceToMain} from '../../../../common/model/browser/photo/JumpSourceToMain'
-import {RenameMenuOperation} from './RenameMenuOperation'
-import {RotateMenuOperation} from './RotateMenuOperation'
-import {AddNotesMenuOperation} from './AddNotesMenuOperation'
-import {MediaLibraryAccess} from '../../../../common/access/MediaLibraryAccess'
-import {MediaOperationType} from '../../../../common/model/common/MediaOperationType'
-import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine'
-import {UiUtil} from '../../../../common/utils/UiUtil';
-import {AlbumInfo} from '../../../../common/model/browser/album/AlbumInfo';
-import {CommonObserverCallback} from '../../../../common/model/browser/CommonObserverCallback';
-import {MediaObserver} from '../../../../common/model/browser/dataObserver/MediaObserver';
+import { Logger } from '../../utils/Logger'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { MenuOperation } from '../../../../common/view/browserOperation/MenuOperation'
+import { MenuContext } from '../../../../common/view/browserOperation/MenuContext'
+import { MenuOperationFactory } from '../../../../common/interface/MenuOperationFactory'
+import { GotoPhotosMenuOperation } from './GotoPhotosMenuOperation'
+import { DeleteMenuOperation } from './DeleteMenuOperation'
+import { RecoverMenuOperation } from './RecoverMenuOperation'
+import { MoveMenuOperation } from '../../../../common/view/browserOperation/MoveMenuOperation'
+import { CopyMenuOperation } from '../../../../common/view/browserOperation/CopyMenuOperation'
+import { FavoriteMenuOperation } from './FavoriteMenuOperation'
+import { DateUtil } from '../../../../common/utils/DateUtil'
+import { CustomDialogView } from '../../../../common/view/dialog/CustomDialogView'
+import { Constants } from '../../../../common/model/common/Constants'
+import { MediaItem } from '../../../../common/model/browser/photo/MediaItem'
+import { PhotoDataSource } from '../../../../common/model/browser/photo/PhotoDataSource'
+import { BroadCast } from '../../../../common/utils/BroadCast'
+import { UriDataSource } from '../../../../common/model/browser/photo/UriDataSource'
+import { BroadCastConstants } from '../../../../common/model/common/BroadCastConstants'
+import { BroadCastManager } from '../../../../common/model/common/BroadCastManager'
+import { Constants as PhotoConstants } from '../../../../common/model/browser/photo/Constants'
+import { PhotoBrowserBg } from '../../../../common/view/PhotoBrowserBg'
+import { PhotoBrowserActionBar } from './PhotoBrowserActionBar'
+import { ToolBar } from '../../../../common/view/actionbar/ToolBar'
+import { PhotoSwiper } from '../../../../common/view/PhotoSwiper'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
+import { JumpSourceToMain } from '../../../../common/model/browser/photo/JumpSourceToMain'
+import { RenameMenuOperation } from './RenameMenuOperation'
+import { RotateMenuOperation } from './RotateMenuOperation'
+import { AddNotesMenuOperation } from './AddNotesMenuOperation'
+import { MediaLibraryAccess } from '../../../../common/access/MediaLibraryAccess'
+import { MediaOperationType } from '../../../../common/model/common/MediaOperationType'
+import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine'
+import { UiUtil } from '../../../../common/utils/UiUtil';
+import { AlbumInfo } from '../../../../common/model/browser/album/AlbumInfo';
+import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback';
+import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver';
 import mMultimodalInputManager from '../../../../common/model/common/MultimodalInputManager'
-import {TraceControllerUtils} from '../../../../common/utils/TraceControllerUtils'
-import {PhotoBrowserHolder} from '../../../../common/view/PhotoBrowserHolder';
+import { TraceControllerUtils } from '../../../../common/utils/TraceControllerUtils'
+import { PhotoBrowserHolder } from '../../../../common/view/PhotoBrowserHolder';
 import resourceManager from '@ohos.resourceManager';
-import {BrowserDataImpl} from '../../../../common/model/browser/BrowserDataImpl'
+import { BrowserDataImpl } from '../../../../common/model/browser/BrowserDataImpl'
 
 // page of large photo
 @Entry
@@ -83,7 +84,6 @@ struct PhotoBrowser {
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
     @StorageLink('entryFromHap') entryFromHap: number = Constants.ENTRY_FROM_NONE;
     transition: string;
-
     albumId = '';
 
     // swiper currentIndex, there may not be onChanged callback during data refresh, so mediaItem cannot be saved
@@ -95,7 +95,7 @@ struct PhotoBrowser {
 
     // DataSource
     private dataSource: PhotoDataSource = new PhotoDataSource();
-    private dataObserver: CommonObserverCallback  = new CommonObserverCallback(this);
+    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
 
     // The global BroadCast of the application process. Event registration and destruction should be paired
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
@@ -110,15 +110,18 @@ struct PhotoBrowser {
 
     // When clicking quickly, only run aboutToAppear for the first time
     private hasAppeared: boolean;
-
     private albumInfo: AlbumInfo;
     private deviceName = '';
     private backFromCopy = false;
     private pullDownFlag: boolean = false;
     private entityAlbumList = new Map([
         [`${MediaLibraryAccess.getInstance().PUBLIC_PATH_CAMERA}`, AlbumDefine.ALBUM_ID_CAMERA],
-        [`${MediaLibraryAccess.getInstance().PUBLIC_PATH_CAMERA}${AlbumDefine.REMOTE_ALBUM_PATH}/`, AlbumDefine.ALBUM_ID_REMOTE],
-        [`${MediaLibraryAccess.getInstance().PUBLIC_PATH_IMAGE}${AlbumDefine.SNAPSHOT_ALBUM_PATH}/`, AlbumDefine.ALBUM_ID_SNAPSHOT],
+        [`${
+        MediaLibraryAccess.getInstance()
+        .PUBLIC_PATH_CAMERA}${AlbumDefine.REMOTE_ALBUM_PATH}/`, AlbumDefine.ALBUM_ID_REMOTE],
+        [`${
+        MediaLibraryAccess.getInstance()
+        .PUBLIC_PATH_IMAGE}${AlbumDefine.SNAPSHOT_ALBUM_PATH}/`, AlbumDefine.ALBUM_ID_SNAPSHOT],
     ]);
 
     onMenuClicked(action: Action) {
@@ -161,7 +164,8 @@ struct PhotoBrowser {
                 }
                 currentPhoto.isFavor = !currentPhoto.isFavor;
                 menuContext.withMediaItem(currentPhoto).withBroadCast(this.broadCast);
-                menuOperation = MenuOperationFactory.getInstance().createMenuOperation(FavoriteMenuOperation, menuContext);
+                menuOperation = MenuOperationFactory.getInstance()
+                    .createMenuOperation(FavoriteMenuOperation, menuContext);
                 this.updateMenu();
                 break;
             case Action.DELETE:
@@ -205,7 +209,8 @@ struct PhotoBrowser {
                     return;
                 }
                 menuContext.withMediaItem(currentPhoto).withBroadCast(this.broadCast).withAlbumId(this.albumId);
-                menuOperation = MenuOperationFactory.getInstance().createMenuOperation(RenameMenuOperation, menuContext);
+                menuOperation = MenuOperationFactory.getInstance()
+                    .createMenuOperation(RenameMenuOperation, menuContext);
                 break;
             case Action.ROTATE:
                 if (currentPhoto == undefined) {
@@ -217,14 +222,16 @@ struct PhotoBrowser {
                 }
                 currentPhoto.orientation = rotateValue;
                 menuContext.withMediaItem(currentPhoto).withBroadCast(this.broadCast);
-                menuOperation = MenuOperationFactory.getInstance().createMenuOperation(RotateMenuOperation, menuContext);
+                menuOperation = MenuOperationFactory.getInstance()
+                    .createMenuOperation(RotateMenuOperation, menuContext);
                 break;
             case Action.ADD_NOTES:
                 if (currentPhoto == undefined) {
                     return;
                 }
                 menuContext.withMediaItem(currentPhoto).withBroadCast(this.broadCast);
-                menuOperation = MenuOperationFactory.getInstance().createMenuOperation(AddNotesMenuOperation, menuContext);
+                menuOperation = MenuOperationFactory.getInstance()
+                    .createMenuOperation(AddNotesMenuOperation, menuContext);
                 break;
             case Action.MOVE:
                 this.backFromCopy = true;
@@ -272,8 +279,8 @@ struct PhotoBrowser {
         router.push({
             uri: 'common/view/browserOperation/MediaOperationPage',
             params: {
-                pageType : pageType,
-                albumId : this.albumId
+                pageType: pageType,
+                albumId: this.albumId
             }
         });
     }
@@ -377,6 +384,7 @@ struct PhotoBrowser {
         }
 
     }
+
     updateMoreMenu() {
         this.moreMenuList = [];
         let currentPhoto = this.getCurrentPhoto();
@@ -449,7 +457,7 @@ struct PhotoBrowser {
                 break;
             case Constants.PHOTO_TRANSITION_CAMERA:
                 this.logger.info('onBackPress Camera');
-                if (this.pageFrom == Constants.ENTRY_FROM.CARD && !this.pullDownFlag ) {
+                if (this.pageFrom == Constants.ENTRY_FROM.CARD && !this.pullDownFlag) {
                     this.routerGridPaged();
                 } else {
                     if (this.pullDownFlag) {
@@ -670,7 +678,7 @@ struct PhotoBrowser {
                     }
                     this.onPhotoChanged(newIndex);
                 }
-            } catch(e) {
+            } catch (e) {
                 this.logger.error(`ON_DATA_RELOADED_WITH_EDIT error ${e}`);
             } finally {
                 this.appBroadCast.emit(BroadCastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
@@ -696,14 +704,15 @@ struct PhotoBrowser {
                 this.logger.error('MediaOperation currentPhoto is undefined');
                 return;
             }
-            switch(params.pageType) {
+            switch (params.pageType) {
                 case MediaOperationType.Move:
                     this.onMoveEnd = this.onMoveEnd.bind(this);
                     menuContext.withMediaItem(currentPhoto)
                         .withBroadCast(this.broadCast)
                         .withAlbumInfo(JSON.parse(params.albumInfo ? params.albumInfo.toString() : ''))
                         .withOperationEndCallback(this.onMoveEnd);
-                    menuOperation = MenuOperationFactory.getInstance().createMenuOperation(MoveMenuOperation, menuContext);
+                    menuOperation = MenuOperationFactory.getInstance()
+                        .createMenuOperation(MoveMenuOperation, menuContext);
                     break;
                 case MediaOperationType.Copy:
                     this.onCopyEnd = this.onCopyEnd.bind(this);
@@ -711,7 +720,8 @@ struct PhotoBrowser {
                         .withBroadCast(this.broadCast)
                         .withAlbumInfo(JSON.parse(params.albumInfo ? params.albumInfo.toString() : ''))
                         .withOperationEndCallback(this.onCopyEnd);
-                    menuOperation = MenuOperationFactory.getInstance().createMenuOperation(CopyMenuOperation, menuContext);
+                    menuOperation = MenuOperationFactory.getInstance()
+                        .createMenuOperation(CopyMenuOperation, menuContext);
                     this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, this.checkedTransition]);
                     break;
             }
@@ -746,12 +756,12 @@ struct PhotoBrowser {
         this.showBars();
     }
 
-    onMediaLibDataChange(changeType){
+    onMediaLibDataChange(changeType) {
         this.logger.info(`onMediaLibDataChange type: ${changeType}`);
         this.dataSource.onChange(changeType);
     }
 
-    async getResourceString(resource: Resource) {
+    private async getResourceString(resource: Resource) {
         try {
             this.logger.info(`getResourceString: ${JSON.stringify(resource)}`);
             let mgr: resourceManager.ResourceManager = await resourceManager.getResourceManager(globalThis.photosAbilityContext);
@@ -796,7 +806,7 @@ struct PhotoBrowser {
 
     async routerGridPaged() {
         AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, true);
-        let item : AlbumInfo = await this.getAlbumDataById(AppStorage.Get(Constants.FROM_ALBUM_ID));
+        let item: AlbumInfo = await this.getAlbumDataById(AppStorage.Get(Constants.FROM_ALBUM_ID));
         if (item == null) {
             return;
         }
@@ -809,7 +819,7 @@ struct PhotoBrowser {
         });
     }
 
-    async getAlbumDataById(id: any, deviceId? :any) {
+    async getAlbumDataById(id: any, deviceId?: any) {
         this.logger.info(`getAlbumDataById id ${id}`);
         switch (id) {
             case AlbumDefine.ALBUM_ID_ALL:
@@ -824,7 +834,8 @@ struct PhotoBrowser {
                 }
                 return null;
             case AlbumDefine.ALBUM_ID_FAVOR:
-                let favAlbum = await MediaLibraryAccess.getInstance().getFavoriteAlbum(AlbumDefine.getFileFetchOpt(AlbumDefine.ALBUM_ID_FAVOR));
+                let favAlbum = await MediaLibraryAccess.getInstance()
+                    .getFavoriteAlbum(AlbumDefine.getFileFetchOpt(AlbumDefine.ALBUM_ID_FAVOR));
                 if (favAlbum.count > 0) {
                     let fav = new AlbumInfo(AlbumDefine.ALBUM_ID_FAVOR, '', AlbumDefine.ALBUM_ID_FAVOR,
                         await this.getAlbumDisplayName(AlbumDefine.ALBUM_ID_FAVOR), favAlbum.count, '', '');
@@ -834,7 +845,8 @@ struct PhotoBrowser {
                 }
                 return null;
             case AlbumDefine.ALBUM_ID_RECYCLE:
-                let trashAlbum = await MediaLibraryAccess.getInstance().getTrashAlbum(AlbumDefine.getFileFetchOpt(AlbumDefine.ALBUM_ID_RECYCLE));
+                let trashAlbum = await MediaLibraryAccess.getInstance()
+                    .getTrashAlbum(AlbumDefine.getFileFetchOpt(AlbumDefine.ALBUM_ID_RECYCLE));
                 if (trashAlbum.count > 0) {
                     let trash = new AlbumInfo(AlbumDefine.ALBUM_ID_RECYCLE, '', AlbumDefine.ALBUM_ID_RECYCLE,
                         await this.getAlbumDisplayName(AlbumDefine.ALBUM_ID_RECYCLE), trashAlbum.count, '', '');
@@ -844,8 +856,9 @@ struct PhotoBrowser {
                 }
                 return null;
             default:
-                let albums = await MediaLibraryAccess.getInstance().getAlbums(AlbumDefine.getAlbumFetchOpt(id, deviceId));
-                if (albums && albums.length > 0){
+                let albums = await MediaLibraryAccess.getInstance()
+                    .getAlbums(AlbumDefine.getAlbumFetchOpt(id, deviceId));
+                if (albums && albums.length > 0) {
                     let fileResult = await albums[0].getFileAssets(AlbumDefine.getFileFetchOpt(''));
                     let count = fileResult.getCount();
                     if (count <= 0) {
@@ -897,8 +910,11 @@ struct PhotoBrowser {
                         .height($r('app.float.menu_height'))
                         .fontColor($r('app.color.text_color_secondary'))
                         .fontSize($r('sys.float.ohos_id_text_size_body1'))
-                        .markAnchor({x: '0%', y: '0%'})
-                        .position({x: '0%', y: ScreenManager.getInstance().getStatusBarHeight() + Constants.ActionBarHeight})
+                        .markAnchor({ x: '0%', y: '0%' })
+                        .position({
+                            x: '0%',
+                            y: ScreenManager.getInstance().getStatusBarHeight() + Constants.ActionBarHeight
+                        })
                 }.alignItems(HorizontalAlign.Start)
             }
         }

@@ -13,18 +13,18 @@
  * limitations under the License.
  */
 
-import {TimelinePage} from '../../../feature/timeline/view/TimelinePage'
-import {AlbumSetPage} from '../../../feature/browser/view/album/AlbumSetPage'
-import {Logger} from '../../../common/utils/Logger'
-import {TabBar, DEVICE_TYPE} from '../../../common/view/TabBar'
-import {TabItem} from '../../../common/model/common/TabItem'
-import {JumpSourceToMain} from '../../../common/model/browser/photo/JumpSourceToMain'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
-import {Constants} from '../../../common/model/common/Constants'
-import {ScreenManager} from '../../../common/model/common/ScreenManager'
-import {TraceControllerUtils} from '../../../common/utils/TraceControllerUtils'
+import { TimelinePage } from '../../../feature/timeline/view/TimelinePage'
+import { AlbumSetPage } from '../../../feature/browser/view/album/AlbumSetPage'
+import { Logger } from '../../../common/utils/Logger'
+import { TabBar, DEVICE_TYPE } from '../../../common/view/TabBar'
+import { TabItem } from '../../../common/model/common/TabItem'
+import { JumpSourceToMain } from '../../../common/model/browser/photo/JumpSourceToMain'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
+import { Constants } from '../../../common/model/common/Constants'
+import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import { TraceControllerUtils } from '../../../common/utils/TraceControllerUtils'
 import router from '@system.router'
 
 // Application entry
@@ -77,7 +77,7 @@ struct IndexPage {
     }
 
     onPageShow() {
-        this.logger.info(`IndexPage.onPageShow entryFromHap: ${this.entryFromHap}`);
+        this.logger.info(`IndexPage.onPageShow entryFromHap: ${this.entryFromHap} permission ${this.permission}`);
         this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
         this.isShow = true
         this.logger.error(`IndexPage.onPageShow: router.clear ${this.jumpSource}`);
@@ -95,7 +95,7 @@ struct IndexPage {
 
     onBackPress() {
         let isProcessed = false;
-        this.appBroadCast.emit(BroadCastConstants.BACK_PRESS_EVENT, [function(isModeChanged: boolean) {
+        this.appBroadCast.emit(BroadCastConstants.BACK_PRESS_EVENT, [function(isModeChanged: boolean){
             isProcessed = isModeChanged;
         }.bind(this)]);
         return isProcessed;
@@ -133,18 +133,18 @@ struct IndexPage {
 
                     }
                     .animationDuration(0)
-                        .vertical(true)
-                        .scrollable(false)
-                        .barMode(BarMode.Fixed)
-                        .barWidth(0)
-                        .barHeight(0)
-                        .flexGrow(1)
-                        .onChange((index: number) => {
-                            this.resetTabState(this.currentIndex)
-                            this.onTabChanged(index);
-                            this.logger.info(`Switch to Tab ${this.currentIndex}.`)
-                        })
-                        .padding({left : this.isSidebar ? $r('app.float.tab_bar_width') : 0})
+                    .vertical(true)
+                    .scrollable(false)
+                    .barMode(BarMode.Fixed)
+                    .barWidth(0)
+                    .barHeight(0)
+                    .flexGrow(1)
+                    .onChange((index: number) => {
+                        this.resetTabState(this.currentIndex)
+                        this.onTabChanged(index);
+                        this.logger.info(`Switch to Tab ${this.currentIndex}.`)
+                    })
+                    .padding({ left: this.isSidebar ? $r('app.float.tab_bar_width') : 0 })
 
                     TabBar({
                         currentIndex: this.currentIndex,
@@ -158,11 +158,12 @@ struct IndexPage {
             }
         }
         .backgroundColor($r('app.color.default_background_color'))
-            .padding({
-                top: this.leftBlank[1],
-                bottom: this.leftBlank[3]
-            })
+        .padding({
+            top: this.leftBlank[1],
+            bottom: this.leftBlank[3]
+        })
     }
+
     pageTransition() {
         PageTransitionEnter({ type: RouteType.None, duration: 1 })
             .opacity(0)

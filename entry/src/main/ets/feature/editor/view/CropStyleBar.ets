@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-import {Logger} from '../utils/Logger'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {ActionButton} from './ActionButton'
-import {ActionButtonInfo, ID} from './MainMenuInfo'
-import {RefreshActionMenu, ActionChangedEvent} from './RefreshMenu'
-import {Constants} from '../../../common/model/common/Constants'
-import {CropRatioType} from '../crop/CropType'
-import {PhotoEditMode} from '../base/PhotoEditType'
-import {PhotoEditCrop} from '../crop/PhotoEditCrop'
+import { Logger } from '../utils/Logger'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { ActionButton } from './ActionButton'
+import { ActionButtonInfo, ID } from './MainMenuInfo'
+import { RefreshActionMenu, ActionChangedEvent } from './RefreshMenu'
+import { Constants } from '../../../common/model/common/Constants'
+import { CropRatioType } from '../crop/CropType'
+import { PhotoEditMode } from '../base/PhotoEditType'
+import { PhotoEditCrop } from '../crop/PhotoEditCrop'
 
 @Component
 export struct CropStyleBar {

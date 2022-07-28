@@ -12,26 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Constants} from '../../../common/model/common/Constants'
-import {ScreenManager} from '../../../common/model/common/ScreenManager';
-import {DateUtil} from '../../../common/utils/DateUtil';
-import {TimelineData} from '../../../common/model/browser/photo/TimelineData';
-import {Logger} from '../utils/Logger'
-import {BroadCast} from '../../../common/utils/BroadCast';
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants';
+import { Constants } from '../../../common/model/common/Constants'
+import { ScreenManager } from '../../../common/model/common/ScreenManager';
+import { DateUtil } from '../../../common/utils/DateUtil';
+import { TimelineData } from '../../../common/model/browser/photo/TimelineData';
+import { Logger } from '../utils/Logger'
+import { BroadCast } from '../../../common/utils/BroadCast';
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants';
 
 @Component
 export struct TimelineScrollBar {
     scroller: Scroller;
-
     @Consume @Watch('updateTotalNum') yearData: TimelineData[];
     @State isClickScrollBar: boolean = false;
     @Consume isHideScrollBar: boolean;
     @Consume dateText: string;
     @Consume broadCast: BroadCast;
-
     @State totalNum: number = 0;
-    gridHeight: number = ScreenManager.getInstance().getWinHeight() - Constants.ActionBarHeight - Constants.TOOL_BAR_SIZE - Constants.SCROLL_MARGIN * 2;
+    gridHeight: number = ScreenManager.getInstance()
+        .getWinHeight() - Constants.ActionBarHeight - Constants.TOOL_BAR_SIZE - Constants.SCROLL_MARGIN * 2;
     logger: Logger = new Logger('TimelineScrollBar');
 
     aboutToAppear(): void {
@@ -50,14 +49,14 @@ export struct TimelineScrollBar {
 
     updateTotalNum() {
         let totalCount = 0;
-        for(let year of this.yearData) {
+        for (let year of this.yearData) {
             totalCount = totalCount + year.count;
         }
         this.totalNum = totalCount;
     }
 
     build() {
-        Stack({alignContent: Alignment.End}) {
+        Stack({ alignContent: Alignment.End }) {
             if (this.isClickScrollBar && !this.isHideScrollBar) {
                 Column() {
                     ForEach(this.yearData, (year: TimelineData) => {
@@ -99,7 +98,7 @@ export struct TimelineScrollBar {
             }
 
             ScrollBar({ scroller: this.scroller, direction: ScrollBarDirection.Vertical,
-                state: this.isHideScrollBar? BarState.Off: BarState.Auto }) {
+                state: this.isHideScrollBar ? BarState.Off : BarState.Auto }) {
                 Row() {
                     if (this.isClickScrollBar) {
                         Row() {
@@ -146,7 +145,7 @@ export struct TimelineScrollBar {
             .height('100%')
             .width(this.isClickScrollBar
                 ? $r('app.float.scroll_bar_margin_small') : $r('app.float.scroll_bar_small_width'),)
-            .position({x:'100%', y:0})
+            .position({ x: '100%', y: 0 })
             .markAnchor({
                 x: this.isClickScrollBar
                     ? $r('app.float.scroll_press_all_width') : $r('app.float.scroll_bar_small_width'),

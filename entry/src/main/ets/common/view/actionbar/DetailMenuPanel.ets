@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger'
-import {ActionBarProp} from '../browserOperation/ActionBarProp'
-import {Action} from '../browserOperation/Action'
-import {ActionBarButton} from './ActionBarButton'
+import { Logger } from '../../utils/Logger'
+import { ActionBarProp } from '../browserOperation/ActionBarProp'
+import { Action } from '../browserOperation/Action'
+import { ActionBarButton } from './ActionBarButton'
 
 // Large picture button for dynamic refresh
 @Component

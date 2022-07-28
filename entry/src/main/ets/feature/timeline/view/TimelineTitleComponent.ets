@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import {TimelineData} from '../../../common/model/browser/photo/TimelineData'
-import {Logger} from '../../../common/utils/Logger'
-import {DateUtil} from '../../../common/utils/DateUtil'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
+import { TimelineData } from '../../../common/model/browser/photo/TimelineData'
+import { Logger } from '../../../common/utils/Logger'
+import { DateUtil } from '../../../common/utils/DateUtil'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
 
 // Group Title
 @Component
@@ -55,7 +55,7 @@ export struct TimelineTitleComponent {
                     .fontColor($r('sys.color.ohos_id_color_titlebar_text'))
             }
             .height('100%')
-                .layoutWeight(1)
+            .layoutWeight(1)
 
             if (this.isSelectedMode) {
                 Flex({
@@ -69,13 +69,13 @@ export struct TimelineTitleComponent {
 
                 }
                 .height($r('app.float.icon_title_size_hot'))
-                    .width($r('app.float.icon_title_size_hot'))
-                    .padding({
-                        left: $r('app.float.group_title_padding_bottom'),
-                    })
-                    .onClick(() => {
-                        this.selectStateChange()
-                    })
+                .width($r('app.float.icon_title_size_hot'))
+                .padding({
+                    left: $r('app.float.group_title_padding_bottom'),
+                })
+                .onClick(() => {
+                    this.selectStateChange()
+                })
             }
         }
         .margin({
@@ -83,6 +83,6 @@ export struct TimelineTitleComponent {
             right: $r('app.float.max_padding_end'),
             bottom: $r('app.float.group_title_padding_bottom')
         })
-            .height($r('app.float.group_title_height'));
+        .height($r('app.float.group_title_height'));
     }
 }

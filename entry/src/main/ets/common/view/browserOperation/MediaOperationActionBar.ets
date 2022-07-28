@@ -13,27 +13,26 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger'
-import {Action} from './Action'
-import {ActionBar} from '../../../common/view/actionbar/ActionBar'
-import {ActionBarProp} from './ActionBarProp'
-import {ActionBarMode} from './ActionBarMode'
-import {ScreenManager} from '../../model/common/ScreenManager'
-import {MediaOperationType} from '../../model/common/MediaOperationType'
+import { Logger } from '../../utils/Logger'
+import { Action } from './Action'
+import { ActionBar } from '../../../common/view/actionbar/ActionBar'
+import { ActionBarProp } from './ActionBarProp'
+import { ActionBarMode } from './ActionBarMode'
+import { ScreenManager } from '../../model/common/ScreenManager'
+import { MediaOperationType } from '../../model/common/MediaOperationType'
 
 @Component
 export struct MediaOperationActionBar {
-    @Consume pageType:string;
+    @Consume pageType: string;
     @Consume loadingFinish: boolean;
-    onMenuClicked : Function;
+    onMenuClicked: Function;
     logger: Logger = new Logger('MediaOperationActionBar');
-
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
 
     private createActionBar(): ActionBarProp {
         let menuList: Array<Action> = new Array<Action>();
         let actionBarProp: ActionBarProp = new ActionBarProp();
-        if(this.loadingFinish){
+        if (this.loadingFinish) {
             menuList.push(Action.NEW);
         }
         actionBarProp

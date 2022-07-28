@@ -15,12 +15,20 @@
 
 export interface BrowserOperationInterface {
     create(param: any): any;
+
     delete(uri: string): any;
+
     trash(uri: string, isTrash: boolean): any;
+
     copy(source: any, target: any): any;
+
     favor(uri: string, isFavor: boolean): void;
+
     setName(source: any, name: string): void;
+
     setOrientation(source: any, orientation: number): void;
+
     setRelativePath(source: any, relativePath: string): void;
-    commitChanges(source :any): any;
+
+    commitChanges(source: any): any;
 }

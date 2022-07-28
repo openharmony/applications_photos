@@ -14,18 +14,18 @@
  */
 
 import router from '@system.router'
-import {Logger} from '../utils/Logger'
-import {Constants} from '../../../FormAbility/common/Constants'
-import {AlbumDefine} from '../../../common/model/browser/AlbumDefine'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
-import {UiUtil} from '../../../common/utils/UiUtil'
-import {ScreenManager} from '../../../common/model/common/ScreenManager'
-import {DataStoreUtil} from '../../../common/utils/DataStoreUtil'
+import { Logger } from '../utils/Logger'
+import { Constants } from '../../../FormAbility/common/Constants'
+import { AlbumDefine } from '../../../common/model/browser/AlbumDefine'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
+import { UiUtil } from '../../../common/utils/UiUtil'
+import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import { DataStoreUtil } from '../../../common/utils/DataStoreUtil'
 import formBindingData from '@ohos.application.formBindingData'
 import formProvider from '@ohos.application.formProvider'
-import {MediaLibraryAccess} from '../../../common/access/MediaLibraryAccess'
+import { MediaLibraryAccess } from '../../../common/access/MediaLibraryAccess'
 
 @CustomDialog
 struct SettingDialog {
@@ -60,7 +60,7 @@ struct SettingDialog {
                     .fontFamily($r('app.string.id_text_font_family_regular'))
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
             }.alignItems(VerticalAlign.Center)
-                .height($r('app.float.dialog_title_height'))
+            .height($r('app.float.dialog_title_height'))
 
             List() {
                 ForEach(this.settings, (item, index) => {
@@ -97,7 +97,7 @@ struct SettingDialog {
                     }
                 })
             }
-            .margin({ bottom: $r('sys.float.ohos_id_text_paragraph_margin_s')})
+            .margin({ bottom: $r('sys.float.ohos_id_text_paragraph_margin_s') })
 
             Button() {
                 Text($r('app.string.no'))
@@ -109,19 +109,21 @@ struct SettingDialog {
             .backgroundColor($r('app.color.transparent'))
             .height($r('app.float.details_dialog_button_height'))
             .width('100%')
-            .margin({ bottom: $r('sys.float.ohos_id_text_paragraph_margin_s')})
+            .margin({ bottom: $r('sys.float.ohos_id_text_paragraph_margin_s') })
             .onClick(() => {
                 this.controller.close();
             })
-        }.padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
-            .width(ScreenManager.getInstance().getColumnsWidth(Constants.NUMBER_4))
-            .alignItems(HorizontalAlign.Start).borderRadius($r('app.float.dialog_border_radius'))
-            .backgroundColor($r('app.color.white'))
-            .margin({
-                right: $r('app.float.dialog_content_margin'),
-                left: $r('app.float.dialog_content_margin'),
-                bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
-            })
+        }
+        .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
+        .width(ScreenManager.getInstance().getColumnsWidth(Constants.NUMBER_4))
+        .alignItems(HorizontalAlign.Start)
+        .borderRadius($r('app.float.dialog_border_radius'))
+        .backgroundColor($r('app.color.white'))
+        .margin({
+            right: $r('app.float.dialog_content_margin'),
+            left: $r('app.float.dialog_content_margin'),
+            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
+        })
     }
 }
 
@@ -140,25 +142,24 @@ struct FormEditorPage {
     arkUri: number = 0;
     fd: number = -1;
     fileAsset: any = null;
-    displayName:string = '';
+    displayName: string = '';
     @State time: number = 30;
     private saveDataFunc = this.saveData.bind(this);
     private onChangeFunc = this.onChange.bind(this);
-
     settingController: CustomDialogController = new CustomDialogController({
         builder: SettingDialog(),
         autoCancel: false,
         alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset:{
+        offset: {
             dx: 0,
             dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
         },
         customStyle: true
     })
 
-    async getItems(albumId: string, startIndex?: number, count?:number, deviceId?) {
+    async getItems(albumId: string, startIndex?: number, count?: number, deviceId?) {
         let fetchOpt = AlbumDefine.getFileFetchOpt(albumId, deviceId, startIndex, count);
-        switch (albumId){
+        switch (albumId) {
             case AlbumDefine.ALBUM_ID_ALL:
                 let allObject = await MediaLibraryAccess.getInstance().getAllObject(fetchOpt);
                 return allObject;
@@ -188,9 +189,9 @@ struct FormEditorPage {
     }
 
     async openCurrentFd() {
-        this.fd = (this.fileAsset != null) ? await  MediaLibraryAccess.getInstance().openAsset('R', this.fileAsset): -1;
+        this.fd = (this.fileAsset != null) ? await  MediaLibraryAccess.getInstance()
+            .openAsset('R', this.fileAsset) : -1;
     }
-
 
     bindFormData(): any {
         this.logger.debug(`bindFormData start formId: ${this.formId}`)
@@ -198,21 +199,21 @@ struct FormEditorPage {
         let dataObj1: any;
         if (image == "image0") {
             dataObj1 = {
-                "fd": this.fd==-1? false: true,
+                "fd": this.fd == -1 ? false : true,
                 "image1": "memory://image" + this.arkUri,
                 "albumName": this.displayName,
                 "currentIndex": this.currentIndex,
                 "isShow": this.isShow,
-                "formImages": {"image0": this.fd}
+                "formImages": { "image0": this.fd }
             };
         } else {
             dataObj1 = {
-                "fd": this.fd==-1? false: true,
+                "fd": this.fd == -1 ? false : true,
                 "image1": "memory://image" + this.arkUri,
                 "albumName": this.displayName,
                 "currentIndex": this.currentIndex,
                 "isShow": this.isShow,
-                "formImages": {"image1": this.fd}
+                "formImages": { "image1": this.fd }
             };
         }
         this.logger.debug(`bindFormData, createFormBindingData dataObj2.data: ${JSON.stringify(dataObj1)}`);
@@ -233,7 +234,7 @@ struct FormEditorPage {
         })
     }
 
-    terminate () {
+    terminate() {
         globalThis.photosAbilityContext.terminateSelf((result) => {
             this.logger.info(`terminateSelf result: ${JSON.stringify(result)}`);
         })
@@ -257,9 +258,9 @@ struct FormEditorPage {
                     this.terminate();
                 }
             }).catch((error) => {
-                this.logger.error(`updateForm failed. Cause: ${JSON.stringify(error)}`);
-                this.terminate();
-            });
+            this.logger.error(`updateForm failed. Cause: ${JSON.stringify(error)}`);
+            this.terminate();
+        });
     }
 
     async saveData(albumName: string, albumId: string, displayName, uri: string, isShow: boolean) {
@@ -294,7 +295,7 @@ struct FormEditorPage {
             let currentIndexKey = 'currentIndex_' + this.formId;
             await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(currentIndexKey, this.currentIndex);
             let isShowKey = 'isShow_' + this.formId;
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(isShowKey, this.isShow? 1: 0);
+            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(isShowKey, this.isShow ? 1 : 0);
             let arkUriKey = 'arkUri_' + this.formId;
             await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(arkUriKey, this.arkUri);
             await DataStoreUtil.getInstance(globalThis.photosGlobalContext).flush();
@@ -330,15 +331,15 @@ struct FormEditorPage {
         }
     }
 
-    selectAlbum(){
+    selectAlbum() {
         this.routerPhotos(Constants.SELECT_ALBUM);
     }
 
-    selectPhoto(){
+    selectPhoto() {
         this.routerPhotos(Constants.SELECT_PHOTO);
     }
 
-    setPlayInterval(){
+    setPlayInterval() {
         this.settingController.open();
     }
 
@@ -423,7 +424,7 @@ struct FormEditorPage {
                     .margin({ top: $r('app.float.FA_subTitle_margin_top') })
                     .fontColor($r('app.color.FA_subTitle_text_color'))
             }
-            .margin({ top: $r('app.float.FA_title_margin_top'), bottom: $r('app.float.FA_title_margin_bottom')})
+            .margin({ top: $r('app.float.FA_title_margin_top'), bottom: $r('app.float.FA_title_margin_bottom') })
 
             GridContainer({
                 columns: Constants.NUMBER_12,
@@ -446,17 +447,22 @@ struct FormEditorPage {
                     }
                     .width('100%')
                     .padding({
-                        left: $r('app.float.FA_ListCard_padding_left'), top: $r('app.float.FA_ListCard_padding_top'), right: $r('app.float.FA_ListCard_padding_left'), bottom: $r('app.float.FA_ListCard_padding_top')
+                        left: $r('app.float.FA_ListCard_padding_left'),
+                        top: $r('app.float.FA_ListCard_padding_top'),
+                        right: $r('app.float.FA_ListCard_padding_left'),
+                        bottom: $r('app.float.FA_ListCard_padding_top')
                     })
                     .backgroundColor($r('app.color.white'))
                     .borderRadius($r("app.float.FA_ListCard_radius"))
-                    .onClick(() =>{
+                    .onClick(() => {
                         this.selectPhoto();
                     })
                 }
                 .useSizeType({
-                    xs: { span: Constants.NUMBER_12, offset: 0 }, sm: { span: Constants.NUMBER_12, offset: 0 },
-                    md: { span: Constants.NUMBER_12, offset: 0 }, lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
+                    xs: { span: Constants.NUMBER_12, offset: 0 },
+                    sm: { span: Constants.NUMBER_12, offset: 0 },
+                    md: { span: Constants.NUMBER_12, offset: 0 },
+                    lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
                 })
 
                 Row() {
@@ -474,18 +480,23 @@ struct FormEditorPage {
                     }
                     .width('100%')
                     .padding({
-                        left: $r('app.float.FA_ListCard_padding_left'), top: $r('app.float.FA_ListCard_padding_top'), right: $r('app.float.FA_ListCard_padding_left'), bottom: $r('app.float.FA_ListCard_padding_top')
+                        left: $r('app.float.FA_ListCard_padding_left'),
+                        top: $r('app.float.FA_ListCard_padding_top'),
+                        right: $r('app.float.FA_ListCard_padding_left'),
+                        bottom: $r('app.float.FA_ListCard_padding_top')
                     })
                     .backgroundColor($r('app.color.white'))
                     .borderRadius($r("app.float.FA_ListCard_radius"))
-                    .onClick(() =>{
+                    .onClick(() => {
                         this.selectAlbum();
                     })
                 }
                 .margin({ top: $r('app.float.FA_select_album_padding') })
                 .useSizeType({
-                    xs: { span: Constants.NUMBER_12, offset: 0 }, sm: { span: Constants.NUMBER_12, offset: 0 },
-                    md: { span: Constants.NUMBER_12, offset: 0 }, lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
+                    xs: { span: Constants.NUMBER_12, offset: 0 },
+                    sm: { span: Constants.NUMBER_12, offset: 0 },
+                    md: { span: Constants.NUMBER_12, offset: 0 },
+                    lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
                 })
 
                 Row() {
@@ -494,11 +505,15 @@ struct FormEditorPage {
                         .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 }
                 .padding({
-                    top: $r('app.float.FA_setting_padding_top'), left: $r('app.float.FA_setting_padding_left'), bottom: $r('app.float.FA_setting_padding_bottom')
+                    top: $r('app.float.FA_setting_padding_top'),
+                    left: $r('app.float.FA_setting_padding_left'),
+                    bottom: $r('app.float.FA_setting_padding_bottom')
                 })
                 .useSizeType({
-                    xs: { span: Constants.NUMBER_12, offset: 0 }, sm: { span: Constants.NUMBER_12, offset: 0 },
-                    md: { span: Constants.NUMBER_12, offset: 0 }, lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
+                    xs: { span: Constants.NUMBER_12, offset: 0 },
+                    sm: { span: Constants.NUMBER_12, offset: 0 },
+                    md: { span: Constants.NUMBER_12, offset: 0 },
+                    lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
                 })
 
                 Row() {
@@ -524,17 +539,22 @@ struct FormEditorPage {
                     }
                     .width('100%')
                     .padding({
-                        left: $r('app.float.FA_ListCard_padding_left'), top: $r('app.float.FA_ListCard_padding_top'), right: $r('app.float.FA_ListCard_padding_left'), bottom: $r('app.float.FA_ListCard_padding_top')
+                        left: $r('app.float.FA_ListCard_padding_left'),
+                        top: $r('app.float.FA_ListCard_padding_top'),
+                        right: $r('app.float.FA_ListCard_padding_left'),
+                        bottom: $r('app.float.FA_ListCard_padding_top')
                     })
                     .backgroundColor($r('app.color.white'))
                     .borderRadius($r("app.float.FA_ListCard_radius"))
-                    .onClick(() =>{
+                    .onClick(() => {
                         this.setPlayInterval()
                     })
                 }
                 .useSizeType({
-                    xs: { span: Constants.NUMBER_12, offset: 0 }, sm: { span: Constants.NUMBER_12, offset: 0 },
-                    md: { span: Constants.NUMBER_12, offset: 0 }, lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
+                    xs: { span: Constants.NUMBER_12, offset: 0 },
+                    sm: { span: Constants.NUMBER_12, offset: 0 },
+                    md: { span: Constants.NUMBER_12, offset: 0 },
+                    lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
                 })
             }
         }

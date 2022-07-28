@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import {Action} from '../browserOperation/Action'
-import {ActionBarColorMode} from '../browserOperation/ActionBarMode'
+import { Action } from '../browserOperation/Action'
+import { ActionBarColorMode } from '../browserOperation/ActionBarMode'
 
 @Component
 export struct ToolBarButton {
@@ -41,11 +41,11 @@ export struct ToolBarButton {
             }
         }
         .height($r('app.float.icon_size'))
-            .width($r('app.float.icon_size'))
+        .width($r('app.float.icon_size'))
     }
 }
 
 @Extend(Image) function commonButtonStyle () {
     .height($r('app.float.icon_size'))
-        .width($r('app.float.icon_size'))
+    .width($r('app.float.icon_size'))
 }

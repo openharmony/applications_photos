@@ -16,6 +16,7 @@
 @Component
 export struct LoadingPanel {
     @Consume isLoading: boolean;
+
     build() {
         Column() {
             Column() {

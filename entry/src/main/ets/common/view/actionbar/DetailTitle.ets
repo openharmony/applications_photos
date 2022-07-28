@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger'
-import {ActionBarProp} from '../browserOperation/ActionBarProp'
+import { Logger } from '../../utils/Logger'
+import { ActionBarProp } from '../browserOperation/ActionBarProp'
 
 // Large picture title, including primary date title and secondary time and place title
 @Component
@@ -47,9 +47,9 @@ export struct DetailTitle {
                     .textOverflow({ overflow: TextOverflow.Ellipsis })
             }
             .constraintSize({ minHeight: ('app.float.detail_title_constraint_size_min_height') })
-                .alignItems(HorizontalAlign.Start)
+            .alignItems(HorizontalAlign.Start)
         }.margin({ left: $r('app.float.actionbar_title_margin'),
             right: $r('app.float.actionbar_title_margin') })
-            .alignItems(VerticalAlign.Center)
+        .alignItems(VerticalAlign.Center)
     }
 }

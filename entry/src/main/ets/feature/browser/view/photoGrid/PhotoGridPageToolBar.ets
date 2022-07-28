@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger'
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {ToolBar} from '../../../../common/view/actionbar/ToolBar'
+import { Logger } from '../../utils/Logger'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { ToolBar } from '../../../../common/view/actionbar/ToolBar'
 
 @Component
 export struct PhotoGridPageToolBar {
@@ -23,13 +23,11 @@ export struct PhotoGridPageToolBar {
     @Consume @Watch('updateToolbar') isAllSelected: boolean;
     @Consume('selectedCount') @Watch('updateToolbar') selectedCount: number;
     @Consume isEmpty: boolean;
-    isRecycleAlbum : boolean;
-    onMenuClicked : Function;
+    isRecycleAlbum: boolean;
+    onMenuClicked: Function;
     logger: Logger = new Logger('PhotoGridPageToolBar');
-    isDistributedAlbum : boolean;
-
+    isDistributedAlbum: boolean;
     @Provide toolMenuList: Array<Action> = new Array<Action>();
-
 
     aboutToAppear(): void {
         this.logger.info('aboutToAppear');

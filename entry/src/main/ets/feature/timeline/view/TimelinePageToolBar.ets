@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {Logger} from '../utils/Logger'
-import {Action} from '../../../common/view/browserOperation/Action'
-import {ToolBar} from '../../../common/view/actionbar/ToolBar'
+import { Logger } from '../utils/Logger'
+import { Action } from '../../../common/view/browserOperation/Action'
+import { ToolBar } from '../../../common/view/actionbar/ToolBar'
 
 @Component
 export struct TimelinePageToolBar {

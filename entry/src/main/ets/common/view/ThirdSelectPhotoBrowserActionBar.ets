@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import {Action} from './browserOperation/Action'
-import {ActionBar} from './actionbar/ActionBar'
-import {ActionBarProp} from './browserOperation/ActionBarProp'
-import {ActionBarMode, ActionBarColorMode, ActionBarSelectionMode} from './browserOperation/ActionBarMode'
-import {Logger} from '../utils/Logger'
-import {ScreenManager} from '../model/common/ScreenManager';
+import { Action } from './browserOperation/Action'
+import { ActionBar } from './actionbar/ActionBar'
+import { ActionBarProp } from './browserOperation/ActionBarProp'
+import { ActionBarMode, ActionBarColorMode, ActionBarSelectionMode } from './browserOperation/ActionBarMode'
+import { Logger } from '../utils/Logger'
+import { ScreenManager } from '../model/common/ScreenManager';
 
 @Component
 export struct ThirdSelectPhotoBrowserActionBar {
@@ -53,7 +53,7 @@ export struct ThirdSelectPhotoBrowserActionBar {
                 onMenuClicked: this.onMenuClicked
             })
         }
-        .markAnchor({x: '0%', y: '0%'})
-        .position({x: '0%', y: this.leftBlank[1]})
+        .markAnchor({ x: '0%', y: '0%' })
+        .position({ x: '0%', y: this.leftBlank[1] })
     }
 }

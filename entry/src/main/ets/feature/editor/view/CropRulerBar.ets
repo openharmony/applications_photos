@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {Constants} from '../../../common/model/common/Constants'
-import {Logger} from '../utils/Logger'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { Constants } from '../../../common/model/common/Constants'
+import { Logger } from '../utils/Logger'
 
 @Component
 export struct CropRulerBar {
@@ -94,7 +94,7 @@ export struct CropRulerBar {
         if (Math.round(cur_num) == Math.round(this.current_def)) {
             if (this.isVerticalScreen) {
                 this.context.fillText(this.integerAngleToString(Math.round(cur_num)), cur_x,
-                                      (this.rulerWidth * Constants.NUMBER_6) / Constants.NUMBER_15);
+                    (this.rulerWidth * Constants.NUMBER_6) / Constants.NUMBER_15);
             } else {
                 this.context.fillText(this.integerAngleToString(Math.round(cur_num)),
                     (this.rulerWidth * Constants.NUMBER_6_5) / Constants.NUMBER_15, cur_x);
@@ -102,7 +102,7 @@ export struct CropRulerBar {
         } else {
             if (this.isVerticalScreen) {
                 this.context.fillText(cur_num.toString(), cur_x,
-                                      (this.rulerWidth * Constants.NUMBER_6) / Constants.NUMBER_15);
+                    (this.rulerWidth * Constants.NUMBER_6) / Constants.NUMBER_15);
             } else {
                 this.context.fillText(cur_num.toString(),
                     (this.rulerWidth * Constants.NUMBER_6_5) / Constants.NUMBER_15, cur_x);
@@ -163,7 +163,7 @@ export struct CropRulerBar {
         }
     }
 
-    onTouchEvent(event : TouchEvent) {
+    onTouchEvent(event: TouchEvent) {
         if (event.type == TouchType.Down) {
             if (this.isVerticalScreen) {
                 this.startPos = (event.touches[0].x);
@@ -182,13 +182,13 @@ export struct CropRulerBar {
             }
 
             let dir = this.isVerticalScreen ? this.startPos - (event.touches[0].x) :
-                      this.startPos - (event.touches[0].y);
+                this.startPos - (event.touches[0].y);
             if (Math.abs(dir / Constants.NUMBER_5) >= Constants.NUMBER_1) {
                 this.current_def += parseInt((dir / Constants.NUMBER_5).toFixed(0));
                 this.startPos = this.isVerticalScreen ? (event.touches[0].x) : (event.touches[0].y)
                 if (Math.abs(this.current_def) > Constants.EDGE_ANGLE) {
                     this.current_def = this.current_def > Constants.EDGE_ANGLE ?
-                                        Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
+                        Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
                 }
 
                 this.drawRuler();

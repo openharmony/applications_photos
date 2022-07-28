@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {ActionBar} from '../../../../common/view/actionbar/ActionBar'
-import {ActionBarProp} from '../../../../common/view/browserOperation/ActionBarProp'
-import {ActionBarMode, ActionBarColorMode} from '../../../../common/view/browserOperation/ActionBarMode'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { ActionBar } from '../../../../common/view/actionbar/ActionBar'
+import { ActionBarProp } from '../../../../common/view/browserOperation/ActionBarProp'
+import { ActionBarMode, ActionBarColorMode } from '../../../../common/view/browserOperation/ActionBarMode'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
 
 @Component
 export struct PhotoBrowserActionBar {
@@ -50,7 +50,7 @@ export struct PhotoBrowserActionBar {
                 })
             }
         }
-        .markAnchor({x: '0%', y: '0%'})
-        .position({x: '0%', y: this.leftBlank[1]})
+        .markAnchor({ x: '0%', y: '0%' })
+        .position({ x: '0%', y: this.leftBlank[1] })
     }
 }

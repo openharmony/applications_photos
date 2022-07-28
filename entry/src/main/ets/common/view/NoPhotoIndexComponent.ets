@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {ScreenManager} from '../model/common/ScreenManager'
-import {Constants} from '../model/common/Constants'
-import {Logger} from '../utils/Logger'
+import { ScreenManager } from '../model/common/ScreenManager'
+import { Constants } from '../model/common/Constants'
+import { Logger } from '../utils/Logger'
 
 const IMAGE_SCREEN_RATIO = 0.8
 
@@ -42,7 +42,7 @@ export struct NoPhotoIndexComponent {
         let winWidth = ScreenManager.getInstance().getWinWidth();
         let winHeightHalf = ScreenManager.getInstance().getWinHeight() / 2;
         this.imageSize
-            = (winWidth < winHeightHalf) ? (winWidth * IMAGE_SCREEN_RATIO) : (winHeightHalf * IMAGE_SCREEN_RATIO)
+        = (winWidth < winHeightHalf) ? (winWidth * IMAGE_SCREEN_RATIO) : (winHeightHalf * IMAGE_SCREEN_RATIO)
         this.logger.info(`window size: ${winWidth}, ${winHeightHalf}  ,empty photos or album picture size = ${this.imageSize}`);
     }
 
@@ -89,7 +89,7 @@ export struct NoPhotoIndexComponent {
                 }
             }
             .width('100%')
-            .margin({ top: $r('app.float.appbar_max_height')})
+            .margin({ top: $r('app.float.appbar_max_height') })
         }
         .width('100%')
         .height('100%')

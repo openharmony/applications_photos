@@ -14,10 +14,10 @@
  */
 
 import FormExtension from '@ohos.application.FormExtension';
-import {Logger} from './common/Logger'
-import {FormControllerManager} from './controller/FormControllerManager'
-import {FormController} from './controller/FormController'
-import {Constants} from './common/Constants'
+import { Logger } from './common/Logger'
+import { FormControllerManager } from './controller/FormControllerManager'
+import { FormController } from './controller/FormController'
+import { Constants } from './common/Constants'
 
 export default class FormAbility extends FormExtension {
     private logger: Logger = new Logger('FormAbility');
@@ -72,7 +72,7 @@ export default class FormAbility extends FormExtension {
 
     onDestroy(formId) {
         this.logger.info(`onDestroy, formId: ${formId}`);
-        let formControllerManager: FormControllerManager  = FormControllerManager.getInstance(this.context);
+        let formControllerManager: FormControllerManager = FormControllerManager.getInstance(this.context);
         formControllerManager.destroyController(formId);
     }
 };

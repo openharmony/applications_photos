@@ -14,29 +14,29 @@
  */
 
 import router from '@system.router'
-import {Logger} from '../../utils/Logger'
-import {ImageGridItemComponent} from '../../../../common/view/ImageGridItemComponent'
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {CustomDialogView} from '../../../../common/view/dialog/CustomDialogView'
-import {SelectManager} from '../../../../common/model/browser/SelectManager'
-import {BroadCast} from '../../../../common/utils/BroadCast'
-import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants'
-import {Constants} from '../../../../common/model/common/Constants'
-import {MediaDataSource} from '../../../../common/model/browser/photo/MediaDataSource'
-import {MediaItem} from '../../../../common/model/browser/photo/MediaItem'
-import {NoPhotoComponent} from '../../../../common/view/NoPhotoComponent'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {TraceControllerUtils} from '../../../../common/utils/TraceControllerUtils'
-import {BroadCastManager} from '../../../../common/model/common/BroadCastManager'
-import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine'
-import {AlbumSelectActionBar} from './AlbumSelectActionBar'
-import {MenuContext} from '../../../../common/view/browserOperation/MenuContext'
-import {MenuOperationFactory} from '../../../../common/interface/MenuOperationFactory'
-import {CopyMenuOperation} from '../../../../common/view/browserOperation/CopyMenuOperation'
-import {MoveMenuOperation} from '../../../../common/view/browserOperation/MoveMenuOperation'
-import {JumpSourceToMain} from '../../../../common/model/browser/photo/JumpSourceToMain'
-import {AlbumInfo} from '../../../../common/model/browser/album/AlbumInfo';
-import {GridScrollBar} from '../../../../common/view/GridScrollBar';
+import { Logger } from '../../utils/Logger'
+import { ImageGridItemComponent } from '../../../../common/view/ImageGridItemComponent'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { CustomDialogView } from '../../../../common/view/dialog/CustomDialogView'
+import { SelectManager } from '../../../../common/model/browser/SelectManager'
+import { BroadCast } from '../../../../common/utils/BroadCast'
+import { BroadCastConstants } from '../../../../common/model/common/BroadCastConstants'
+import { Constants } from '../../../../common/model/common/Constants'
+import { MediaDataSource } from '../../../../common/model/browser/photo/MediaDataSource'
+import { MediaItem } from '../../../../common/model/browser/photo/MediaItem'
+import { NoPhotoComponent } from '../../../../common/view/NoPhotoComponent'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
+import { TraceControllerUtils } from '../../../../common/utils/TraceControllerUtils'
+import { BroadCastManager } from '../../../../common/model/common/BroadCastManager'
+import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine'
+import { AlbumSelectActionBar } from './AlbumSelectActionBar'
+import { MenuContext } from '../../../../common/view/browserOperation/MenuContext'
+import { MenuOperationFactory } from '../../../../common/interface/MenuOperationFactory'
+import { CopyMenuOperation } from '../../../../common/view/browserOperation/CopyMenuOperation'
+import { MoveMenuOperation } from '../../../../common/view/browserOperation/MoveMenuOperation'
+import { JumpSourceToMain } from '../../../../common/model/browser/photo/JumpSourceToMain'
+import { AlbumInfo } from '../../../../common/model/browser/album/AlbumInfo';
+import { GridScrollBar } from '../../../../common/view/GridScrollBar';
 
 @Entry
 @Component
@@ -53,9 +53,7 @@ export struct NewAlbumPage {
     @Provide isShowBar: boolean = true;
     @Provide moreMenuList: Array<Action> = new Array<Action>();
     @State isClickScrollBar: boolean = false;
-
     @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
-
     @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
@@ -64,7 +62,7 @@ export struct NewAlbumPage {
     private scroller: Scroller = new Scroller();
     private isDataFreeze = false;
     private logger: Logger = new Logger('NewAlbumPage');
-    private mSelectManager : SelectManager;
+    private mSelectManager: SelectManager;
     private isActive = false;
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
     private isNewAlbum: boolean = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM);
@@ -148,6 +146,7 @@ export struct NewAlbumPage {
             this.dataSource && this.dataSource.onInActive();
         }
     }
+
     onUpdateFavorState(item: MediaItem) {
         this.logger.debug('onUpdateFavorState');
         let index = this.dataSource.getIndexByMediaItem(item);
@@ -242,7 +241,7 @@ export struct NewAlbumPage {
         this.broadCast.on(BroadCastConstants.JUMP_PHOTO_BROWSER,
             (name: string, item: MediaItem) => {
                 let targetIndex = self.dataSource.getDataIndex(item);
-                if(targetIndex == Constants.NOT_FOUND) {
+                if (targetIndex == Constants.NOT_FOUND) {
                     self.logger.error('targetIndex is not found');
                     return;
                 }
@@ -295,7 +294,7 @@ export struct NewAlbumPage {
         this.mSelectManager.registerCallback('updateCount', this.freezeAdapter((newState: number) => {
             self.logger.info(`updateSelectedCount ${newState}`);
             self.moreMenuList = [];
-            self.moreMenuList.push(Boolean(newState) ? Action.INFO: Action.INFO_INVALID);
+            self.moreMenuList.push(Boolean(newState) ? Action.INFO : Action.INFO_INVALID);
             self.totalSelectedCount = newState;
         }));
         this.dataSource.registerCallback('updateCount', (newState: number) => {
@@ -332,7 +331,7 @@ export struct NewAlbumPage {
                     title: $r('app.string.no_distributed_photo_head_title_album')
                 })
             } else {
-                Stack(){
+                Stack() {
                     Grid(this.scroller) {
                         LazyForEach(this.dataSource, (item) => {
                             GridItem() {
@@ -341,7 +340,9 @@ export struct NewAlbumPage {
                                     isSelected: this.mSelectManager.isItemSelected(item.mediaItem.uri),
                                     pageName: Constants.PHOTO_TRANSITION_ALBUM
                                 })
-                            }.columnStart(item.viewIndex % this.gridRowCount).columnEnd(item.viewIndex % this.gridRowCount)
+                            }
+                            .columnStart(item.viewIndex % this.gridRowCount)
+                            .columnEnd(item.viewIndex % this.gridRowCount)
                         }, item => item == null ? JSON.stringify(item) : item.mediaItem.uri)
                     }
                     .columnsTemplate('1fr '.repeat(this.gridRowCount))
@@ -349,7 +350,7 @@ export struct NewAlbumPage {
                     .rowsGap(Constants.GRID_GUTTER)
                     .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
 
-                    GridScrollBar({scroller: this.scroller});
+                    GridScrollBar({ scroller: this.scroller });
                 }
                 .layoutWeight(1)
             }

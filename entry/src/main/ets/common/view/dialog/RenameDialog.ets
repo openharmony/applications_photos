@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Logger} from '../../utils/Logger'
-import {DialogCallback} from '../../model/common/DialogUtil'
-import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants'
-import {UiUtil} from '../../../common/utils/UiUtil'
+import { Logger } from '../../utils/Logger'
+import { DialogCallback } from '../../model/common/DialogUtil'
+import { ScreenManager } from '../../model/common/ScreenManager'
+import { Constants } from '../../model/common/Constants'
+import { UiUtil } from '../../../common/utils/UiUtil'
 
 @CustomDialog
 export struct RenameDialog {
@@ -57,7 +57,7 @@ export struct RenameDialog {
 
             Row() {
                 Column() {
-                    TextInput({placeholder:'', text: this.inputName})
+                    TextInput({ placeholder: '', text: this.inputName })
                         .fontSize($r('sys.float.ohos_id_text_size_body1'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
                         .fontColor($r('app.color.text_input_font_color_182431'))
@@ -83,8 +83,9 @@ export struct RenameDialog {
                         })
                 }
             }.margin({
-                bottom: $r('sys.float.ohos_id_text_paragraph_margin_s')})
-            Stack({alignContent: Alignment.Top}) {
+                bottom: $r('sys.float.ohos_id_text_paragraph_margin_s') })
+
+            Stack({ alignContent: Alignment.Top }) {
                 Row() {
                     Button() {
                         Text($r('app.string.no'))
@@ -94,13 +95,14 @@ export struct RenameDialog {
                             .width('50%')
                             .textAlign(TextAlign.Center)
                     }
-                    .margin({right: $r('app.float.details_dialog_button_margin_right')})
+                    .margin({ right: $r('app.float.details_dialog_button_margin_right') })
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
                         this.dialogCallback && this.dialogCallback.cancelCallback();
                         this.controller.close()
                     })
+
                     Row() {
                         Divider()
                             .vertical(true)
@@ -108,6 +110,7 @@ export struct RenameDialog {
                             .color($r('app.color.divider_vertical_color'))
                     }.height($r('app.float.details_dialog_button_height'))
                     .alignItems(VerticalAlign.Center)
+
                     Button() {
                         Text($r('app.string.yes'))
                             .fontSize($r('sys.float.ohos_id_text_size_button1'))
@@ -118,7 +121,7 @@ export struct RenameDialog {
                     }
                     .enabled(!this.isNull)
                     .opacity(this.isNull ? $r('app.float.disable_button_opacity') : 1)
-                    .margin({right: $r('app.float.details_dialog_button_margin_left')})
+                    .margin({ right: $r('app.float.details_dialog_button_margin_left') })
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {

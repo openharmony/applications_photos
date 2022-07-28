@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {ActionBarColorMode, ActionBarSelectionMode} from '../browserOperation/ActionBarMode'
-import {Logger} from '../../utils/Logger'
-import {ActionBarProp} from '../browserOperation/ActionBarProp'
+import { ActionBarColorMode, ActionBarSelectionMode } from '../browserOperation/ActionBarMode'
+import { Logger } from '../../utils/Logger'
+import { ActionBarProp } from '../browserOperation/ActionBarProp'
 
 // Select the mode title, the content changes with the number of selections
 @Component
@@ -33,9 +33,9 @@ export struct SelectionTitle {
             Text((this.actionBarProp.getSelectionMode() == ActionBarSelectionMode.MULTI ?
                 (this.count == 0 ? ActionBarProp.MULTI_UNSELECT_TITLE :
                     (this.actionBarProp.getMaxSelectCount() > 0 ?
-                        ActionBarProp.getCountDetailExternalSelectedTitle(this.count,
-                            this.actionBarProp.getMaxSelectCount()) :
-                        ActionBarProp.getCountDetailSelectedTitle(this.count))) :
+                    ActionBarProp.getCountDetailExternalSelectedTitle(this.count,
+                    this.actionBarProp.getMaxSelectCount()) :
+                    ActionBarProp.getCountDetailSelectedTitle(this.count))) :
                 ActionBarProp.SINGLE_UNSELECT_TITLE))
                 .fontSize(ActionBarProp.TITLE_TEXT_SIZE)
                 .fontWeight(FontWeight.Bold)
@@ -46,6 +46,6 @@ export struct SelectionTitle {
         }
         .margin({ left: $r('app.float.actionbar_title_margin'),
             right: $r('app.float.actionbar_title_margin') })
-            .alignItems(VerticalAlign.Center)
+        .alignItems(VerticalAlign.Center)
     }
 }

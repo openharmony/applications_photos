@@ -14,39 +14,38 @@ import { EmptyAlbumComponent } from '../../browser/view/album/EmptyAlbumComponen
  * limitations under the License.
  */
 
-import {AlbumInfo} from '../../../common/model/browser/album/AlbumInfo'
-import {Logger} from '../utils/Logger'
-import {ScreenManager} from '../../../common/model/common/ScreenManager'
+import { AlbumInfo } from '../../../common/model/browser/album/AlbumInfo'
+import { Logger } from '../utils/Logger'
+import { ScreenManager } from '../../../common/model/common/ScreenManager'
 import router from '@system.router'
-import {AlbumDefine} from '../../../common/model/browser/AlbumDefine'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
-import {Constants} from '../../../common/model/common/Constants'
+import { AlbumDefine } from '../../../common/model/browser/AlbumDefine'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
+import { Constants } from '../../../common/model/common/Constants'
 
 // The item of album grid, and it's new style.
 @Component
 export struct ThirdAlbumGridItem {
     private staticIconList = new Map([
-        [AlbumDefine.ALBUM_ID_VIDEO , $r('app.media.ic_video')],
+        [AlbumDefine.ALBUM_ID_VIDEO, $r('app.media.ic_video')],
         [AlbumDefine.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
     ]);
-    @State item: AlbumInfo = new AlbumInfo('','', '', '', 0, '', '');
+    @State item: AlbumInfo = new AlbumInfo('', '', '', '', 0, '', '');
     isMultiPick: boolean;
     @Provide isBigCard: boolean = false;
     @Provide gridHeight: number = 0;
     logger: Logger = new Logger('ThirdAlbumGridItem');
     isFromWallpaper: boolean;
     maxSelectCount: number;
-    isFromFa:boolean;
+    isFromFa: boolean;
     isFromFaPhoto: boolean;
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
-
     gridAspectRatio = Constants.CARD_ASPECT_RATIO;
     albumCountMarginRight = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN * 2;
     iconMarkAnchorX = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
     iconMarkAnchorY = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
-    @State bigWidth:number = 0;
+    @State bigWidth: number = 0;
     @State cardWidth: number = 0;
     @State cardHeight: number = 0;
     @State transformV: number = 0;
@@ -102,16 +101,16 @@ export struct ThirdAlbumGridItem {
 
             if (this.isBigCard) {
                 Flex({
-                        direction: FlexDirection.Row,
-                        justifyContent: FlexAlign.Center,
-                        alignItems: ItemAlign.Center
-                    }) {
+                    direction: FlexDirection.Row,
+                    justifyContent: FlexAlign.Center,
+                    alignItems: ItemAlign.Center
+                }) {
                     Image(this.item.coverUri)
                         .alt($r('app.media.ic_goto_photos'))
                         .width(this.cardWidth)
                         .height(this.cardHeight)
                         .transform({ y: this.transformV })
-                        .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
+                        .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                         .rotate({
                             centerX: this.cardWidth / Constants.NUMBER_2,
                             centerY: this.cardHeight / Constants.NUMBER_2,
@@ -128,16 +127,16 @@ export struct ThirdAlbumGridItem {
                 .height(this.gridHeight)
             } else {
                 Flex({
-                        direction: FlexDirection.Row,
-                        justifyContent: FlexAlign.Center,
-                        alignItems: ItemAlign.Center
-                    }) {
+                    direction: FlexDirection.Row,
+                    justifyContent: FlexAlign.Center,
+                    alignItems: ItemAlign.Center
+                }) {
                     Image(this.item.coverUri)
                         .alt($r('app.media.ic_goto_photos'))
                         .width(this.cardWidth)
                         .height(this.cardHeight)
                         .translate({ x: this.transformV })
-                        .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
+                        .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                         .rotate({
                             centerX: this.cardWidth / Constants.NUMBER_2,
                             centerY: this.cardHeight / Constants.NUMBER_2,
@@ -155,16 +154,16 @@ export struct ThirdAlbumGridItem {
 
             Column() {
                 Text(this.item.displayName)
-                    .margin({right: $r('app.float.album_set_name_margin_right')})
-                    .textOverflow({overflow: TextOverflow.Ellipsis})
+                    .margin({ right: $r('app.float.album_set_name_margin_right') })
+                    .textOverflow({ overflow: TextOverflow.Ellipsis })
                     .maxLines(1)
                     .fontWeight(FontWeight.Medium)
                     .fontSize($r('sys.float.ohos_id_text_size_sub_title1'))
                     .fontColor($r('app.color.white'))
 
                 Text(String(this.item.count))
-                    .margin({right: this.albumCountMarginRight})
-                    .textOverflow({overflow: TextOverflow.Ellipsis})
+                    .margin({ right: this.albumCountMarginRight })
+                    .textOverflow({ overflow: TextOverflow.Ellipsis })
                     .maxLines(1)
                     .fontColor($r('app.color.white'))
                     .fontWeight(FontWeight.Regular)
@@ -172,8 +171,8 @@ export struct ThirdAlbumGridItem {
             }
             .width('100%')
             .alignItems(HorizontalAlign.Start)
-            .margin({left: $r('app.float.album_set_count_margin_left'),
-                bottom: $r('app.float.album_set_count_margin_bottom')})
+            .margin({ left: $r('app.float.album_set_count_margin_left'),
+                bottom: $r('app.float.album_set_count_margin_bottom') })
 
 
             if (this.staticIconList.has(this.item.name)) {
@@ -187,7 +186,7 @@ export struct ThirdAlbumGridItem {
             Column()
                 .height('100%')
                 .width('100%')
-                .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
+                .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                 .backgroundColor($r('app.color.transparent'))
         }
         .border({

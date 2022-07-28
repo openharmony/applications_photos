@@ -13,41 +13,41 @@
  * limitations under the License.
  */
 
-import {ImageGridItemComponent} from '../../../common/view/ImageGridItemComponent'
-import {TimelineDataSource} from '../model/TimelineDataSource'
-import {TimelineData} from '../../../common/model/browser/photo/TimelineData'
-import {TimelineTitleComponent} from './timelinetitlecomponent'
-import {CustomDialogView} from '../../../common/view/dialog/CustomDialogView'
-import {Logger} from '../utils/Logger'
-import {TimelinePageActionBar} from './TimelinePageActionBar'
-import {TimelinePageToolBar} from './TimelinePageToolBar'
-import {Constants} from '../../../common/model/common/Constants'
-import {MenuOperation} from '../../../common/view/browserOperation/MenuOperation'
-import {MenuContext} from '../../../common/view/browserOperation/MenuContext'
-import {MenuOperationFactory} from '../../../common/interface/MenuOperationFactory'
-import {BatchDeleteMenuOperation} from '../../../common/view/browserOperation/BatchDeleteMenuOperation';
-import {ViewType} from '../../../common/model/browser/photo/ViewType'
-import {Action} from '../../../common/view/browserOperation/Action'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
-import {TimelineSelectManager} from '../../../common/model/browser/SelectManager'
-import {MediaItem} from '../../../common/model/browser/photo/MediaItem'
-import {NoPhotoIndexComponent} from '../../../common/view/NoPhotoIndexComponent'
-import {ScreenManager} from '../../../common/model/common/ScreenManager'
+import { ImageGridItemComponent } from '../../../common/view/ImageGridItemComponent'
+import { TimelineDataSource } from '../model/TimelineDataSource'
+import { TimelineData } from '../../../common/model/browser/photo/TimelineData'
+import { TimelineTitleComponent } from './timelinetitlecomponent'
+import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
+import { Logger } from '../utils/Logger'
+import { TimelinePageActionBar } from './TimelinePageActionBar'
+import { TimelinePageToolBar } from './TimelinePageToolBar'
+import { Constants } from '../../../common/model/common/Constants'
+import { MenuOperation } from '../../../common/view/browserOperation/MenuOperation'
+import { MenuContext } from '../../../common/view/browserOperation/MenuContext'
+import { MenuOperationFactory } from '../../../common/interface/MenuOperationFactory'
+import { BatchDeleteMenuOperation } from '../../../common/view/browserOperation/BatchDeleteMenuOperation';
+import { ViewType } from '../../../common/model/browser/photo/ViewType'
+import { Action } from '../../../common/view/browserOperation/Action'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
+import { TimelineSelectManager } from '../../../common/model/browser/SelectManager'
+import { MediaItem } from '../../../common/model/browser/photo/MediaItem'
+import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent'
+import { ScreenManager } from '../../../common/model/common/ScreenManager'
 import router from '@system.router'
-import {TraceControllerUtils} from '../../../common/utils/TraceControllerUtils'
-import {TimelineDataSourceManager} from '../model/TimelineDataSourceManager';
-import {ShareMenuOperation} from '../../../common/view/browserOperation/ShareMenuOperation';
-import {CommonObserverCallback} from '../../../common/model/browser/CommonObserverCallback';
-import {MediaObserver} from '../../../common/model/browser/dataObserver/MediaObserver';
-import {UiUtil} from '../../../common/utils/UiUtil';
-import {MediaOperationType} from '../../../common/model/common/MediaOperationType'
-import {MoveMenuOperation} from '../../../common/view/browserOperation/MoveMenuOperation';
-import {CopyMenuOperation} from '../../../common/view/browserOperation/CopyMenuOperation';
-import {TimelineScrollBar} from './TimelineScrollBar';
-import {DateUtil} from '../../../common/utils/DateUtil';
-import {AlbumInfo} from '../../../common/model/browser/album/AlbumInfo';
+import { TraceControllerUtils } from '../../../common/utils/TraceControllerUtils'
+import { TimelineDataSourceManager } from '../model/TimelineDataSourceManager';
+import { ShareMenuOperation } from '../../../common/view/browserOperation/ShareMenuOperation';
+import { CommonObserverCallback } from '../../../common/model/browser/CommonObserverCallback';
+import { MediaObserver } from '../../../common/model/browser/dataObserver/MediaObserver';
+import { UiUtil } from '../../../common/utils/UiUtil';
+import { MediaOperationType } from '../../../common/model/common/MediaOperationType'
+import { MoveMenuOperation } from '../../../common/view/browserOperation/MoveMenuOperation';
+import { CopyMenuOperation } from '../../../common/view/browserOperation/CopyMenuOperation';
+import { TimelineScrollBar } from './TimelineScrollBar';
+import { DateUtil } from '../../../common/utils/DateUtil';
+import { AlbumInfo } from '../../../common/model/browser/album/AlbumInfo';
 
 // PHOTO Page
 @Component
@@ -61,7 +61,6 @@ export struct TimelinePage {
     @Provide isAllSelected: boolean = false;
     @Provide('selectedCount') totalSelectedCount: number = 0;
     @Provide broadCast: BroadCast = TimelineDataSourceManager.getInstance().getBroadCast();
-
     @Consume @Watch('onIndexPageShow') isShow: boolean;
     @StorageLink('TimelinePageIndex') @Watch('onIndexChange') TimelinePageIndex: number = Constants.INVALID;
     @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
@@ -73,14 +72,13 @@ export struct TimelinePage {
     scroller: Scroller = new Scroller();
     appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
     isInCurrentTab = false; // Is it on the current tab page
-    dataObserver: CommonObserverCallback  = new CommonObserverCallback(this);
+    dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
     isDataFreeze = false; // Is the page data frozen
     deleteMode = false; // Is delete mode
     isActive = false; // Is the page active
     @State initLoadFinish: boolean = false; // Is first patch load finished
     routerStart = false; // Is move or copy router page
     @Provide moreMenuList: Action[] = new Array<Action>();
-
     @State groupSelectMode: boolean[] = [];
     @Provide yearData: TimelineData[] = [];
     @Provide dateText: string = '';
@@ -156,7 +154,7 @@ export struct TimelinePage {
         });
         this.broadCast.on(BroadCastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaItem) => {
             let targetIndex = self.dataSource.getDataIndex(item);
-            if(targetIndex == Constants.NOT_FOUND) {
+            if (targetIndex == Constants.NOT_FOUND) {
                 self.logger.error('targetIndex is not found');
                 return;
             }
@@ -172,7 +170,7 @@ export struct TimelinePage {
         });
         this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaItem) => {
             let targetIndex = self.dataSource.getDataIndex(item);
-            if(targetIndex == Constants.NOT_FOUND) {
+            if (targetIndex == Constants.NOT_FOUND) {
                 self.logger.error('targetIndex is not found');
                 return;
             }
@@ -191,7 +189,7 @@ export struct TimelinePage {
         this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, () => {
             this.logger.info('ON_DATA_RELOADED');
             if (this.deleteMode) {
-                animateTo({duration: Constants.DELETE_ANIMATE_DURATION}, () => {
+                animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => {
                     this.dataSource.onDataReloaded();
                 })
                 this.deleteMode = false;
@@ -250,9 +248,9 @@ export struct TimelinePage {
         let margin = 0;
         let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
         let newCount = Math.max(Constants.GRID_MIN_COUNT,
-            Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
-                + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
-        if(newCount != this.gridRowCount) {
+        Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
+        + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
+        if (newCount != this.gridRowCount) {
             if (this.gridRowCount == 0) {
                 this.gridRowCount = newCount;
             } else {
@@ -425,13 +423,13 @@ export struct TimelinePage {
         router.push({
             uri: "common/view/browserOperation/MediaOperationPage",
             params: {
-                pageType : pageType
+                pageType: pageType
             }
         });
         this.routerStart = true;
     }
 
-    onMediaLibDataChange(changeType){
+    onMediaLibDataChange(changeType) {
         this.logger.info(`onMediaLibDataChange type: ${changeType}`);
         this.dataSource.onChange(changeType);
     }
@@ -442,7 +440,7 @@ export struct TimelinePage {
             return;
         } else if (this.totalSelectedCount == 1) {
             this.logger.info('totalSelectedCount is 1');
-            await this.mSelectManager.getSelectedItems((selectItems:MediaItem[]) => {
+            await this.mSelectManager.getSelectedItems((selectItems: MediaItem[]) => {
                 this.logger.info(`openDetailsDialog selectItems.length: ${selectItems.length}`);
                 if (selectItems.length != 1) {
                     this.logger.error('get selectItems is error');
@@ -451,14 +449,14 @@ export struct TimelinePage {
                 this.broadCast.emit(BroadCastConstants.SHOW_DETAIL_DIALOG, [selectItems[0], false]);
             });
         } else {
-            await this.mSelectManager.getSelectedItems((selectItems:MediaItem[]) => {
+            await this.mSelectManager.getSelectedItems((selectItems: MediaItem[]) => {
                 this.logger.info(`openDetailsDialog selectItems.length: ${selectItems.length}`);
                 if (selectItems.length <= 1) {
                     this.logger.error('get selectItems is error');
                     return;
                 }
                 let size = 0;
-                selectItems.forEach((item) =>{
+                selectItems.forEach((item) => {
                     this.logger.info(`openDetailsDialog item.size: ${item.size}`);
                     size = size + item.size;
                 })
@@ -563,7 +561,7 @@ export struct TimelinePage {
             let params = router.getParams();
             if (this.routerStart && params != null && params.pageType != null) {
                 this.logger.info(`MediaOperation back ${JSON.stringify(params)}`)
-                switch(params.pageType) {
+                switch (params.pageType) {
                     case MediaOperationType.Move:
                         this.moveOperation(JSON.parse(params.albumInfo.toString()));
                         break;
@@ -636,7 +634,9 @@ export struct TimelinePage {
                                             isSelected: this.isSelectedMode ? this.mSelectManager.isItemSelected(item.viewData.mediaItem.uri, item.viewIndex) : false,
                                             pageName: Constants.PHOTO_TRANSITION_TIMELINE
                                         })
-                                    }.columnStart(item.indexInGroup % this.gridRowCount).columnEnd(item.indexInGroup % this.gridRowCount)
+                                    }
+                                    .columnStart(item.indexInGroup % this.gridRowCount)
+                                    .columnEnd(item.indexInGroup % this.gridRowCount)
                                 }
                             }, item => item == null ? JSON.stringify(item) : (item.viewType == ViewType.GROUP_TITLE ? item.viewData : item.mediaItem.uri))
                         }
@@ -669,6 +669,7 @@ export struct TimelinePage {
                     })
                 }
             }
+
             if (this.isSelectedMode) {
                 TimelinePageToolBar({ onMenuClicked: this.onMenuClicked })
             }

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {Logger as RootLogger} from '../../../common/utils/Logger'
+import { Logger as RootLogger } from '../../../common/utils/Logger'
 
 const MODULE_ALBUM: string = 'PhotoEditor_';
 

@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger';
-import {ScreenManager} from '../../model/common/ScreenManager';
-import {Constants} from '../../model/common/Constants';
+import { Logger } from '../../utils/Logger';
+import { ScreenManager } from '../../model/common/ScreenManager';
+import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class DeleteProgressParam {
@@ -33,10 +33,7 @@ export struct DeleteProgressDialog {
     controller: CustomDialogController
     @Consume deleteProgress: number;
     @Consume deleteProgressParam: DeleteProgressParam;
-
     logger: Logger = new Logger('ProgressDialog');
-
-
 
     build() {
         Column() {

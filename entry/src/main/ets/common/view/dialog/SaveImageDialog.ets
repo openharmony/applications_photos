@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants';
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { ScreenManager } from '../../model/common/ScreenManager'
+import { Constants } from '../../model/common/Constants';
 
 @CustomDialog
 export struct SaveImageDialog {
@@ -55,6 +55,11 @@ export struct SaveImageDialog {
             left: $r('app.float.dialog_window_margin'),
             bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
         })
-        .padding({left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin'), bottom: $r('app.float.dialog_content_margin'), top: $r('app.float.dialog_content_margin')})
+        .padding({
+            left: $r('app.float.dialog_content_margin'),
+            right: $r('app.float.dialog_content_margin'),
+            bottom: $r('app.float.dialog_content_margin'),
+            top: $r('app.float.dialog_content_margin')
+        })
     }
 }

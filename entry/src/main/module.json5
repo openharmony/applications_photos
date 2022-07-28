@@ -48,6 +48,8 @@
         "label": "$string:app_name",
         "visible": true,
         "launchType": "singleton",
+        "startWindowIcon": "$media:app_icon",
+        "startWindowBackground": "$color:white",
         "skills": [
           {
             "entities": [

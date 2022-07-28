@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import {ScreenManager} from '../model/common/ScreenManager'
-import {Constants} from '../model/common/Constants'
-import {Logger} from '../utils/Logger'
+import { ScreenManager } from '../model/common/ScreenManager'
+import { Constants } from '../model/common/Constants'
+import { Logger } from '../utils/Logger'
 
 @Component
 export struct NoPhotoComponent {
@@ -32,13 +32,14 @@ export struct NoPhotoComponent {
 
     aboutToAppear(): void {
         this.logger.info(`aboutToAppear`);
-        this.bigScreen = Math.min(ScreenManager.getInstance().getWinHeight(), ScreenManager.getInstance().getWinWidth()) > Constants.BIG_SCREEN_WIDTH
+        this.bigScreen = Math.min(ScreenManager.getInstance().getWinHeight(), ScreenManager.getInstance()
+            .getWinWidth()) > Constants.BIG_SCREEN_WIDTH
         let halfImageHeight = this.bigScreen ? Constants.BIG_EMPTY_ICON_SIZE / 2 : Constants.SMALL_EMPTY_ICON_SIZE / 2
         let screenHeight = ScreenManager.getInstance().getWinHeight() - this.leftBlank[1] - this.leftBlank[3]
         if (this.isHorizontal) {
             if (this.isSidebar) {
                 // Pad landscape
-                    this.offSetY = screenHeight / Constants.NUMBER_2 - halfImageHeight - Constants.ActionBarHeight;
+                this.offSetY = screenHeight / Constants.NUMBER_2 - halfImageHeight - Constants.ActionBarHeight;
             } else {
                 // Phone landscape
                 this.offSetY = (screenHeight - Constants.ActionBarHeight) / Constants.NUMBER_2 - halfImageHeight;
@@ -46,7 +47,7 @@ export struct NoPhotoComponent {
         } else {
             // Phone vertical screen
             this.offSetY = screenHeight * Constants.EMPTY_PAGE_OFFSET_RADIO -
-                Constants.ActionBarHeight - halfImageHeight;
+            Constants.ActionBarHeight - halfImageHeight;
         }
 
         this.logger.info(`isHorizontal: ${this.isHorizontal}, offSetY: ${this.offSetY}, bigScreen: ${this.bigScreen}`);
@@ -71,8 +72,8 @@ export struct NoPhotoComponent {
                     .fontColor($r('app.color.tertiary_title_text_color'))
             }
             .width('100%')
-                .offset({ x: 0, y: this.offSetY })
-                .padding({ left: $r('app.float.max_padding_start'), right: $r('app.float.max_padding_start') })
+            .offset({ x: 0, y: this.offSetY })
+            .padding({ left: $r('app.float.max_padding_start'), right: $r('app.float.max_padding_start') })
         }
         .width('100%')
     }

@@ -14,18 +14,18 @@
  */
 
 import router from '@system.router';
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {AlbumGridItemTraditionalStyle} from './AlbumGridItemTraditionalStyle'
-import {AlbumSetDataSource} from '../../../../common/model/browser/album/AlbumSetDataSource'
-import {Constants} from '../../../../common/model/common/Constants'
-import {DistributedAlbumSetPageActionBar} from './DistributedAlbumSetPageActionBar'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {BroadCast} from '../../../../common/utils/BroadCast'
-import {NoPhotoIndexComponent} from '../../../../common/view/NoPhotoIndexComponent'
-import {Logger} from '../../utils/Logger'
-import {JumpSourceToMain} from '../../../../common/model/browser/photo/JumpSourceToMain'
-import {BroadCastManager} from '../../../../common/model/common/BroadCastManager'
-import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { AlbumGridItemTraditionalStyle } from './AlbumGridItemTraditionalStyle'
+import { AlbumSetDataSource } from '../../../../common/model/browser/album/AlbumSetDataSource'
+import { Constants } from '../../../../common/model/common/Constants'
+import { DistributedAlbumSetPageActionBar } from './DistributedAlbumSetPageActionBar'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
+import { BroadCast } from '../../../../common/utils/BroadCast'
+import { NoPhotoIndexComponent } from '../../../../common/view/NoPhotoIndexComponent'
+import { Logger } from '../../utils/Logger'
+import { JumpSourceToMain } from '../../../../common/model/browser/photo/JumpSourceToMain'
+import { BroadCastManager } from '../../../../common/model/common/BroadCastManager'
+import { BroadCastConstants } from '../../../../common/model/common/BroadCastConstants'
 import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback'
 import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver'
 
@@ -39,22 +39,18 @@ export struct DistributedAlbumSetPage {
     @Provide broadCast: BroadCast = new BroadCast();
     @Provide isAlbumSetSelectedMode: boolean = false;
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-
-
-    private dataObserver: CommonObserverCallback  = new CommonObserverCallback(this);
-
+    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
     title: any;
-    albums : AlbumSetDataSource
+    albums: AlbumSetDataSource
     isActive: boolean = false; // Whether the page is in the foreground
     logger: Logger = new Logger('DistributedAlbumSetPage')
     scroller: Scroller = new Scroller();
-
-    private deviceId : string = ''
+    private deviceId: string = ''
 
     onMenuClicked(action: Action, arg: any[]) {
         this.logger.info(`onMenuClicked, action: ${action.actionID}`);
-        switch(action) {
-            case  Action.BACK:
+        switch (action) {
+            case Action.BACK:
                 router.back();
                 break;
             default:
@@ -69,7 +65,7 @@ export struct DistributedAlbumSetPage {
             let item = JSON.parse(param.item.toString());
             this.title = item.deviceName;
             this.albums
-                = new AlbumSetDataSource(this.broadCast, {deviceId: item.networkId, deviceName: item.deviceName});
+            = new AlbumSetDataSource(this.broadCast, { deviceId: item.networkId, deviceName: item.deviceName });
 
             this.deviceId = item.networkId;
         } else {
@@ -83,7 +79,7 @@ export struct DistributedAlbumSetPage {
         });
 
         BroadCastManager.getInstance().getBroadCast().on(BroadCastConstants.ON_REMOTE_CHANGED,
-            this.onUpdateRemoteDevice.bind(this));
+        this.onUpdateRemoteDevice.bind(this));
 
         MediaObserver.getInstance().registerObserver(this.dataObserver);
 
@@ -98,7 +94,7 @@ export struct DistributedAlbumSetPage {
 
     aboutToDisappear(): void {
         BroadCastManager.getInstance().getBroadCast().off(BroadCastConstants.ON_REMOTE_CHANGED,
-            this.onUpdateRemoteDevice.bind(this));
+        this.onUpdateRemoteDevice.bind(this));
         MediaObserver.getInstance().unregisterObserver(this.dataObserver);
     }
 
@@ -111,7 +107,7 @@ export struct DistributedAlbumSetPage {
         this.onInActive();
     }
 
-// Callback when the page is in the foreground
+    // Callback when the page is in the foreground
     onActive() {
         if (!this.isActive) {
             this.logger.info('onActive');
@@ -120,7 +116,7 @@ export struct DistributedAlbumSetPage {
         }
     }
 
-// Callback when the page is in the background
+    // Callback when the page is in the background
     onInActive() {
         if (this.isActive) {
             this.logger.info('onInActive');
@@ -141,11 +137,11 @@ export struct DistributedAlbumSetPage {
             return;
         }
 
-        if(res == Constants.DEVICE_STATE_OFFLINE) {
+        if (res == Constants.DEVICE_STATE_OFFLINE) {
             this.logger.debug(`device offline route to album main`);
             router.back({
                 uri: this.isHorizontal === true ? 'product/pad/view/index' : 'product/phone/view/index',
-                params:{
+                params: {
                     jumpSource: JumpSourceToMain.ALBUM,
                 }
             })
@@ -155,7 +151,7 @@ export struct DistributedAlbumSetPage {
         }
     }
 
-    onMediaLibDataChange(changeType){
+    onMediaLibDataChange(changeType) {
         this.logger.info(`onMediaLibDataChange type: ${changeType}`);
         this.albums.onChange(changeType);
     }
@@ -173,7 +169,7 @@ export struct DistributedAlbumSetPage {
 
             Stack() {
                 if (this.isEmpty) {
-                    NoPhotoIndexComponent({index: Constants.DISTRIBUTED_ALBUM_PAGE_INDEX})
+                    NoPhotoIndexComponent({ index: Constants.DISTRIBUTED_ALBUM_PAGE_INDEX })
                 } else {
                     Grid(this.scroller) {
                         LazyForEach(this.albums, (item) => {

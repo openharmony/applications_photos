@@ -14,23 +14,22 @@
  */
 
 import router from '@system.router'
-import {Logger} from '../utils/Logger'
-import {SelectUtil} from '../../../common/model/browser/photo/SelectUtil'
-import {ImageGridItemComponent} from '../../../common/view/ImageGridItemComponent'
-import {Action} from '../../../common/view/browserOperation/Action'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {Constants} from '../../../common/model/common/Constants'
-import {MediaDataSource} from '../../../common/model/browser/photo/MediaDataSource'
-import {PhotoDataImpl} from '../../../common/model/browser/photo/PhotoDataImpl'
-import {MediaItem} from '../../../common/model/browser/photo/MediaItem'
-import {ThirdSelectManager} from '../../../common/model/browser/SelectManager'
-import {NoPhotoComponent} from '../../../common/view/NoPhotoComponent'
-import {ScreenManager} from '../../../common/model/common/ScreenManager'
-import {ThirdSelectedPageActionBar} from './ThirdSelectedPageActionBar'
-import prompt from '@ohos.prompt'
+import { Logger } from '../utils/Logger'
+import { SelectUtil } from '../../../common/model/browser/photo/SelectUtil'
+import { ImageGridItemComponent } from '../../../common/view/ImageGridItemComponent'
+import { Action } from '../../../common/view/browserOperation/Action'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { Constants } from '../../../common/model/common/Constants'
+import { MediaDataSource } from '../../../common/model/browser/photo/MediaDataSource'
+import { PhotoDataImpl } from '../../../common/model/browser/photo/PhotoDataImpl'
+import { MediaItem } from '../../../common/model/browser/photo/MediaItem'
+import { ThirdSelectManager } from '../../../common/model/browser/SelectManager'
+import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent'
+import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import { ThirdSelectedPageActionBar } from './ThirdSelectedPageActionBar'
 import { GridScrollBar } from '../../../common/view/GridScrollBar';
-import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
+import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
 import { UiUtil } from '../../../common/utils/UiUtil';
 
 // Third Select Album Page
@@ -215,18 +214,18 @@ export struct ThirdSelectPhotoGridPage {
                 }, item => JSON.stringify(item))
             }
             .columnsTemplate('1fr '.repeat(this.gridRowCount))
-                .columnsGap(Constants.GRID_GUTTER)
-                .rowsGap(Constants.GRID_GUTTER)
-                .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
-                .layoutWeight(1)
+            .columnsGap(Constants.GRID_GUTTER)
+            .rowsGap(Constants.GRID_GUTTER)
+            .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
+            .layoutWeight(1)
 
-            GridScrollBar({scroller: this.scroller});
+            GridScrollBar({ scroller: this.scroller });
         }
         .backgroundColor($r('app.color.default_background_color'))
-            .padding({
-                top: this.leftBlank[1],
-                bottom: this.leftBlank[3]
-            })
+        .padding({
+            top: this.leftBlank[1],
+            bottom: this.leftBlank[3]
+        })
     }
 
     private setPickResult(): void {

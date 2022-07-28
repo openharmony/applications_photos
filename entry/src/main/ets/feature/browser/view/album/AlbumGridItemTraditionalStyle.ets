@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import {AlbumInfo} from '../../../../common/model/browser/album/AlbumInfo';
-import {EmptyAlbumComponent} from './EmptyAlbumComponent';
-import {ScreenManager} from '../../../../common/model/common/ScreenManager';
-import {Logger} from '../../utils/Logger'
-import {Constants} from '../../../../common/model/common/Constants'
+import { AlbumInfo } from '../../../../common/model/browser/album/AlbumInfo';
+import { EmptyAlbumComponent } from './EmptyAlbumComponent';
+import { ScreenManager } from '../../../../common/model/common/ScreenManager';
+import { Logger } from '../../utils/Logger'
+import { Constants } from '../../../../common/model/common/Constants'
 import router from '@system.router';
 
 // Traditional style grid item for distributed album set page
@@ -25,11 +25,11 @@ import router from '@system.router';
 @Component
 export struct AlbumGridItemTraditionalStyle {
     @State @Watch('updateCard') item: AlbumInfo = new AlbumInfo('', '', '', '', 0, '', '');
-    @State isEmptyAlbum : boolean = false;
+    @State isEmptyAlbum: boolean = false;
     @Provide isBigCard: boolean = false;
-    @Provide gridHeight:number = 0;
+    @Provide gridHeight: number = 0;
     logger: Logger = new Logger('AlbumGridItemTraditionalStyle');
-    @State bigWidth:number = 0;
+    @State bigWidth: number = 0;
     @State cardWidth: number = 0;
     @State cardHeight: number = 0;
     @State transformV: number = 0;
@@ -62,7 +62,7 @@ export struct AlbumGridItemTraditionalStyle {
         this.bigWidth = gridWidth * 2 + Constants.ALBUM_SET_GUTTER;
 
         if (Constants.ANGLE_90 == this.item.coverOrientation
-            || Constants.ANGLE_270 == this.item.coverOrientation) {
+        || Constants.ANGLE_270 == this.item.coverOrientation) {
             this.cardWidth = this.gridHeight;
             if (this.isBigCard) {
                 this.cardHeight = this.bigWidth;
@@ -83,7 +83,7 @@ export struct AlbumGridItemTraditionalStyle {
 
     build() {
         Column() {
-            Stack({alignContent:Alignment.Bottom}) {
+            Stack({ alignContent: Alignment.Bottom }) {
                 if (this.isEmptyAlbum) {
                     EmptyAlbumComponent()
                 }

@@ -13,22 +13,22 @@
  * limitations under the License.
  */
 
-import {AlbumInfo} from '../../../../common/model/browser/album/AlbumInfo';
-import {EmptyAlbumComponent} from './EmptyAlbumComponent';
-import {BroadCastConstants} from '../../../../common/model/common/BroadCastConstants'
-import {BroadCastManager} from '../../../../common/model/common/BroadCastManager'
-import {Logger} from '../../utils/Logger'
-import {BroadCast} from '../../../../common//utils/BroadCast'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
+import { AlbumInfo } from '../../../../common/model/browser/album/AlbumInfo';
+import { EmptyAlbumComponent } from './EmptyAlbumComponent';
+import { BroadCastConstants } from '../../../../common/model/common/BroadCastConstants'
+import { BroadCastManager } from '../../../../common/model/common/BroadCastManager'
+import { Logger } from '../../utils/Logger'
+import { BroadCast } from '../../../../common//utils/BroadCast'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
 import router from '@system.router';
-import {AlbumDefine} from '../../../../common/model/browser/AlbumDefine'
-import {Constants} from '../../../../common/model/common/Constants'
+import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine'
+import { Constants } from '../../../../common/model/common/Constants'
 
 // The item of album grid, and it's new style.
 @Component
 export struct AlbumGridItemNewStyle {
     private staticIconList = new Map([
-        [AlbumDefine.ALBUM_ID_VIDEO , $r('app.media.ic_video')],
+        [AlbumDefine.ALBUM_ID_VIDEO, $r('app.media.ic_video')],
         [AlbumDefine.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
     ]);
     @State @Watch('updateCard') item: AlbumInfo = new AlbumInfo('', '', '', '', 0, '', '');
@@ -36,17 +36,15 @@ export struct AlbumGridItemNewStyle {
     @State isSelected: boolean = false;
     @State selectable: boolean = true;
     @State icHeight: number = 0;
-    @State bigWidth:number = 0;
+    @State bigWidth: number = 0;
     @State transformV: number = 0;
     @Provide isBigCard: boolean = false;
     @Provide gridHeight: number = 0;
-
     @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
     @Consume broadCast: BroadCast;
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
     @Consume @Watch('onModeChange') isAlbumSetSelectedMode: boolean;
     logger: Logger = new Logger('AlbumGridItemNewStyle');
-
     gridAspectRatio = Constants.CARD_ASPECT_RATIO;
     albumCountMarginRight = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN * 2;
     iconMarkAnchorX = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
@@ -74,17 +72,18 @@ export struct AlbumGridItemNewStyle {
         let contentWidth = ScreenManager.getInstance().getWinWidth() - sideBarWidth;
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         let count: number = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
-            / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
+        / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
         let gridWidth = ((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER) / count)
-            - Constants.ALBUM_SET_GUTTER;
+        - Constants.ALBUM_SET_GUTTER;
         this.gridHeight = gridWidth / this.gridAspectRatio;
         this.bigWidth = gridWidth * 2 + Constants.ALBUM_SET_GUTTER;
         let numberHeight = px2vp(fp2px(Constants.TEXT_SIZE_BODY2));
         let nameHeight = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE1));
-        this.icHeight = this.gridHeight - Constants.ALBUM_SET_NEW_ICON_MARGIN; - numberHeight - nameHeight;
+        this.icHeight = this.gridHeight - Constants.ALBUM_SET_NEW_ICON_MARGIN;
+        -numberHeight - nameHeight;
 
         if (Constants.ANGLE_90 == this.item.coverOrientation
-            || Constants.ANGLE_270 == this.item.coverOrientation) {
+        || Constants.ANGLE_270 == this.item.coverOrientation) {
             this.cardWidth = this.gridHeight;
             if (this.isBigCard) {
                 this.cardHeight = this.bigWidth;
@@ -105,7 +104,7 @@ export struct AlbumGridItemNewStyle {
 
     onModeChange(): void {
         if (!this.isAlbumSetSelectedMode) {
-        this.isSelected = false;
+            this.isSelected = false;
         }
     }
 
@@ -118,11 +117,11 @@ export struct AlbumGridItemNewStyle {
         }
 
         if (this.selectable) {
-        this.broadCast.emit(BroadCastConstants.SELECT,
-            [this.item.id, newState, this.item.isDisableRename, this.item.isDisableDelete, function () {
-                this.logger.info('enter callback');
-                this.isSelected = newState;
-            }.bind(this)]);
+            this.broadCast.emit(BroadCastConstants.SELECT,
+                [this.item.id, newState, this.item.isDisableRename, this.item.isDisableDelete, function(){
+                    this.logger.info('enter callback');
+                    this.isSelected = newState;
+                }.bind(this)]);
         }
     }
 
@@ -151,7 +150,7 @@ export struct AlbumGridItemNewStyle {
                     .height(this.gridHeight)
                     .width(this.bigWidth)
                     .backgroundColor($r('app.color.empty_or_recycle_album_back'))
-                    .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
+                    .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                 } else {
                     Flex({
                         direction: FlexDirection.Row,
@@ -196,7 +195,7 @@ export struct AlbumGridItemNewStyle {
                     .height(this.gridHeight)
                     .aspectRatio(this.gridAspectRatio)
                     .backgroundColor($r('app.color.empty_or_recycle_album_back'))
-                    .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
+                    .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                 } else {
                     Flex({
                         direction: FlexDirection.Row,
@@ -223,54 +222,57 @@ export struct AlbumGridItemNewStyle {
                 }
             }
 
-                Image($r('app.media.gradient_mask_layer'))
-                    .height('50%')
-                    .width('100%')
-                    .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
-                    .visibility(this.isSelected && this.isAlbumSetSelectedMode && this.selectable ? Visibility.None : Visibility.Visible)
+            Image($r('app.media.gradient_mask_layer'))
+                .height('50%')
+                .width('100%')
+                .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
+                .visibility(this.isSelected && this.isAlbumSetSelectedMode && this.selectable ? Visibility.None : Visibility.Visible)
             Column() {
                 Text(this.item.displayName)
-                    .margin({right: $r('app.float.album_set_name_margin_right')})
-                    .textOverflow({overflow: TextOverflow.Ellipsis})
+                    .margin({ right: $r('app.float.album_set_name_margin_right') })
+                    .textOverflow({ overflow: TextOverflow.Ellipsis })
                     .maxLines(1)
                     .fontWeight(FontWeight.Medium)
                     .fontSize($r('sys.float.ohos_id_text_size_sub_title1'))
                     .fontColor($r('app.color.white'))
-                    // shadow and shadow's fuzzy
+                // shadow and shadow's fuzzy
 
                 Text(String(this.item.count))
-                    .margin({right: this.albumCountMarginRight})
-                    .textOverflow({overflow: TextOverflow.Ellipsis})
+                    .margin({ right: this.albumCountMarginRight })
+                    .textOverflow({ overflow: TextOverflow.Ellipsis })
                     .maxLines(1)
                     .fontColor($r('app.color.white'))
                     .fontWeight(FontWeight.Regular)
                     .fontSize($r('sys.float.ohos_id_text_size_body2'))
             }
             .width('100%')
-                .alignItems(HorizontalAlign.Start)
-                .margin({left: $r('app.float.album_set_count_margin_left'), bottom: $r('app.float.album_set_count_margin_bottom')})
+            .alignItems(HorizontalAlign.Start)
+            .margin({
+                left: $r('app.float.album_set_count_margin_left'),
+                bottom: $r('app.float.album_set_count_margin_bottom')
+            })
 
-                if (this.staticIconList.has(this.item.name) && !this.isAlbumSetSelectedMode) {
-                    Image(this.staticIconList.get(this.item.name))
-                      .height($r('app.float.album_set_new_style_icon'))
-                      .aspectRatio(1)
-                      .position({ x: '100%', y: '100%' })
-                      .markAnchor({ x: this.iconMarkAnchorX, y: this.iconMarkAnchorY })
-            }
-
-                Column()
-                    .height('100%')
-                    .width('100%')
-                    .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
-                    .backgroundColor(this.isSelected && this.isAlbumSetSelectedMode && this.selectable
-                        ? $r('app.color.item_selection_bg_color') : $r('app.color.transparent'))
-
-                Image(this.isSelected ? $r('app.media.ic_checkbox_on') : $r('app.media.ic_checkbox_off_overlay'))
+            if (this.staticIconList.has(this.item.name) && !this.isAlbumSetSelectedMode) {
+                Image(this.staticIconList.get(this.item.name))
                     .height($r('app.float.album_set_new_style_icon'))
                     .aspectRatio(1)
-                    .position({x: '100%', y: '100%'})
-                    .markAnchor({x: this.iconMarkAnchorX, y: this.iconMarkAnchorY})
-                    .visibility(this.isAlbumSetSelectedMode && this.selectable ? Visibility.Visible : Visibility.None)
+                    .position({ x: '100%', y: '100%' })
+                    .markAnchor({ x: this.iconMarkAnchorX, y: this.iconMarkAnchorY })
+            }
+
+            Column()
+                .height('100%')
+                .width('100%')
+                .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
+                .backgroundColor(this.isSelected && this.isAlbumSetSelectedMode && this.selectable
+                    ? $r('app.color.item_selection_bg_color') : $r('app.color.transparent'))
+
+            Image(this.isSelected ? $r('app.media.ic_checkbox_on') : $r('app.media.ic_checkbox_off_overlay'))
+                .height($r('app.float.album_set_new_style_icon'))
+                .aspectRatio(1)
+                .position({ x: '100%', y: '100%' })
+                .markAnchor({ x: this.iconMarkAnchorX, y: this.iconMarkAnchorY })
+                .visibility(this.isAlbumSetSelectedMode && this.selectable ? Visibility.Visible : Visibility.None)
 
             Column().height('100%')
                 .width('100%').border({
@@ -279,24 +281,24 @@ export struct AlbumGridItemNewStyle {
                 color: $r('app.color.album_cover_stroke_color')
             })
         }
-            .gesture(
-                LongPressGesture()
-                    .onAction(() => {
-                        this.selectStateChange();
-                    })
-            )
-            .onClick(() => {
-                if (this.isAlbumSetSelectedMode) {
-                    this.selectStateChange();
-                } else {
-                    this.logger.info(`After onClick, MediaSet is: ${JSON.stringify(this.item)}`);
-                    router.push({
-                        uri: 'feature/browser/view/photoGrid/PhotoGridPage',
-                        params: {
-                            item: JSON.stringify(this.item)
-                        }
-                    });
-                }
+        .gesture(
+        LongPressGesture()
+            .onAction(() => {
+                this.selectStateChange();
             })
+        )
+        .onClick(() => {
+            if (this.isAlbumSetSelectedMode) {
+                this.selectStateChange();
+            } else {
+                this.logger.info(`After onClick, MediaSet is: ${JSON.stringify(this.item)}`);
+                router.push({
+                    uri: 'feature/browser/view/photoGrid/PhotoGridPage',
+                    params: {
+                        item: JSON.stringify(this.item)
+                    }
+                });
+            }
+        })
     }
 }

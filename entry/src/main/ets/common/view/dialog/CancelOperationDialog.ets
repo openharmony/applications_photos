@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {BroadCast} from '../../utils/BroadCast'
-import {Logger} from '../../utils/Logger'
-import {ScreenManager} from '../../model/common/ScreenManager'
-import {Constants} from '../../model/common/Constants'
+import { BroadCast } from '../../utils/BroadCast'
+import { Logger } from '../../utils/Logger'
+import { ScreenManager } from '../../model/common/ScreenManager'
+import { Constants } from '../../model/common/Constants'
 
 @Observed
 export class CancelParam {
@@ -48,7 +48,7 @@ export struct CancelOperationDialog {
                     bottom: 8
                 })
 
-            Stack({alignContent: Alignment.Top}) {
+            Stack({ alignContent: Alignment.Top }) {
                 Row() {
                     Button() {
                         Text($r('app.string.continue'))

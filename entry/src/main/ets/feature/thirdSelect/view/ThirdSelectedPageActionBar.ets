@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {Action} from '../../../common/view/browserOperation/Action'
-import {ActionBar} from '../../../common/view/actionbar/ActionBar'
-import {ActionBarProp} from '../../../common/view/browserOperation/ActionBarProp'
-import {ActionBarMode} from '../../../common/view/browserOperation/ActionBarMode'
+import { Action } from '../../../common/view/browserOperation/Action'
+import { ActionBar } from '../../../common/view/actionbar/ActionBar'
+import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp'
+import { ActionBarMode } from '../../../common/view/browserOperation/ActionBarMode'
 
 @Component
 export struct ThirdSelectedPageActionBar {

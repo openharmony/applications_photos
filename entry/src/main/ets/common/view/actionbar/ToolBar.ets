@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import {ScreenManager,ColumnSize} from '../../model/common/ScreenManager'
-import {ToolBarButton} from './ToolBarButton'
-import {Constants} from '../../model/common/Constants'
-import {ActionBarProp} from '../browserOperation/ActionBarProp'
-import {Action} from '../browserOperation/Action'
-import {ActionBarMode} from '../browserOperation/ActionBarMode'
+import { ScreenManager, ColumnSize } from '../../model/common/ScreenManager'
+import { ToolBarButton } from './ToolBarButton'
+import { Constants } from '../../model/common/Constants'
+import { ActionBarProp } from '../browserOperation/ActionBarProp'
+import { Action } from '../browserOperation/Action'
+import { ActionBarMode } from '../browserOperation/ActionBarMode'
 
 export class MenuItem {
     value: string;
@@ -34,7 +34,6 @@ export struct ToolBar {
     @Consume toolMenuList: Action[];
     @Consume moreMenuList: Action[];
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-
     @State showPopup: boolean = false;
     private isFromPhotoBrowser = false;
     onMenuClicked: Function;
@@ -74,13 +73,13 @@ export struct ToolBar {
             }, menu => (menu.actionType != null ? menu.actionType.id : menu.actionID))
         }.width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
         .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
-            .padding({
-                top: $r('app.float.menu_padding_vertical'),
-                bottom: $r('app.float.menu_padding_vertical'),
-                left: $r('app.float.menu_padding_horizontal'),
-                right: $r('app.float.menu_padding_horizontal')
-            })
-            .backgroundColor(Color.White)
+        .padding({
+            top: $r('app.float.menu_padding_vertical'),
+            bottom: $r('app.float.menu_padding_vertical'),
+            left: $r('app.float.menu_padding_horizontal'),
+            right: $r('app.float.menu_padding_horizontal')
+        })
+        .backgroundColor(Color.White)
     }
 
     build() {
@@ -154,8 +153,8 @@ export struct ToolBar {
             }
             .width('100%')
             .height(Constants.ActionBarHeight)
-            .padding(this.toolMenuList.length > 4 ? {} : {left: $r('app.float.actionbar_margin_horizontal'),
-                                                             right: $r('app.float.actionbar_margin_horizontal')})
+            .padding(this.toolMenuList.length > 4 ? {} : { left: $r('app.float.actionbar_margin_horizontal'),
+                                                             right: $r('app.float.actionbar_margin_horizontal') })
         }
         .margin({
             bottom: this.isFromPhotoBrowser ? this.leftBlank[3] : 0
@@ -164,7 +163,7 @@ export struct ToolBar {
         .backgroundColor(this.actionBarProp.getBackgroundColor())
         .opacity(this.actionBarProp.getAlpha())
         .visibility(this.isShowBar && !this.isHorizontal ? Visibility.Visible : Visibility.Hidden)
-        .markAnchor({x: '0%', y: '100%'})
-        .position({x: '0%', y: '100%'})
+        .markAnchor({ x: '0%', y: '100%' })
+        .position({ x: '0%', y: '100%' })
     }
 }

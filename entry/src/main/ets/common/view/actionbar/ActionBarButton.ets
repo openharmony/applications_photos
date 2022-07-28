@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {Action} from '../browserOperation/Action'
-import {ActionBarColorMode} from '../browserOperation/ActionBarMode'
-import {ScreenManager, ColumnSize} from '../../model/common/ScreenManager';
-import {Constants} from '../../model/common/Constants';
+import { Action } from '../browserOperation/Action'
+import { ActionBarColorMode } from '../browserOperation/ActionBarMode'
+import { ScreenManager, ColumnSize } from '../../model/common/ScreenManager';
+import { Constants } from '../../model/common/Constants';
 
 @Component
 export struct ActionBarButton {
@@ -31,7 +31,8 @@ export struct ActionBarButton {
     @State showPopup: boolean = false
     @Consume moreMenuList: Action[];
 
-    aboutToAppear(): void {}
+    aboutToAppear(): void {
+    }
 
     @Builder PopupBuilder() {
         Column() {
@@ -54,13 +55,13 @@ export struct ActionBarButton {
             }, menu => (menu.actionType != null ? menu.actionType.id : menu.actionID))
         }.width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
         .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
-            .padding({
-                top: $r('app.float.menu_padding_vertical'),
-                bottom: $r('app.float.menu_padding_vertical'),
-                left: $r('app.float.menu_padding_horizontal'),
-                right: $r('app.float.menu_padding_horizontal')
-            })
-            .backgroundColor(Color.White)
+        .padding({
+            top: $r('app.float.menu_padding_vertical'),
+            bottom: $r('app.float.menu_padding_vertical'),
+            left: $r('app.float.menu_padding_horizontal'),
+            right: $r('app.float.menu_padding_horizontal')
+        })
+        .backgroundColor(Color.White)
     }
 
     @Builder ActionBarButtonBuilder() {
@@ -82,8 +83,8 @@ export struct ActionBarButton {
             }
         }
         .height($r('app.float.default_button_size'))
-            .width($r('app.float.default_button_size'))
-            .margin({ left: (this.action == Action.NAVIGATION) ? $r('app.float.max_padding_start') : 0 })
+        .width($r('app.float.default_button_size'))
+        .margin({ left: (this.action == Action.NAVIGATION) ? $r('app.float.max_padding_start') : 0 })
     }
 
     build() {
@@ -94,18 +95,18 @@ export struct ActionBarButton {
             .onClick(() => {
                 this.showPopup = !this.showPopup
             })
-                .bindPopup(this.showPopup, {
-                    builder: this.PopupBuilder,
-                    placement: Placement.Top,
-                    maskColor: 0x33000000,
-                    popupColor: '#00FFFFFF',
-                    enableArrow: false,
-                    onStateChange: (e) => {
-                        if (!e.isVisible) {
-                            this.showPopup = false
-                        }
+            .bindPopup(this.showPopup, {
+                builder: this.PopupBuilder,
+                placement: Placement.Top,
+                maskColor: 0x33000000,
+                popupColor: '#00FFFFFF',
+                enableArrow: false,
+                onStateChange: (e) => {
+                    if (!e.isVisible) {
+                        this.showPopup = false
                     }
-                })
+                }
+            })
         } else {
             Row() {
                 this.ActionBarButtonBuilder()

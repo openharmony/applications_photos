@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-import {Logger} from '../utils/Logger'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {ActionButton} from './ActionButton'
-import {ID} from './MainMenuInfo'
-import {Constants} from '../../../common/model/common/Constants'
-import {PhotoEditCrop} from '../crop/PhotoEditCrop'
-import {CropStyleBar} from './CropStyleBar'
-import {CropRulerBar} from './CropRulerBar'
+import { Logger } from '../utils/Logger'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { ActionButton } from './ActionButton'
+import { ID } from './MainMenuInfo'
+import { Constants } from '../../../common/model/common/Constants'
+import { PhotoEditCrop } from '../crop/PhotoEditCrop'
+import { CropStyleBar } from './CropStyleBar'
+import { CropRulerBar } from './CropRulerBar'
 
 @Component
 export struct CropModeBar {
@@ -89,7 +89,7 @@ export struct CropModeBar {
                 }
                 .padding(this.isVerticalScreen
                     ? { bottom: $r('app.float.crop_rotate_vertical_padding') }
-                    : {left: $r('app.float.crop_rotate_horizontal_padding')})
+                    : { left: $r('app.float.crop_rotate_horizontal_padding') })
 
                 Flex({
                     direction: this.isVerticalScreen ? FlexDirection.Row : FlexDirection.Column,
@@ -118,7 +118,7 @@ export struct CropModeBar {
                 }
                 .padding(this.isVerticalScreen
                     ? { bottom: $r('app.float.crop_rotate_vertical_padding') }
-                    : { left: $r('app.float.crop_rotate_horizontal_padding')})
+                    : { left: $r('app.float.crop_rotate_horizontal_padding') })
             }
             .height(this.isVerticalScreen ? $r('app.float.secondary_menu_height_default') : '100%')
             .width(this.isVerticalScreen ? '100%' : $r('app.float.secondary_menu_height_default'))

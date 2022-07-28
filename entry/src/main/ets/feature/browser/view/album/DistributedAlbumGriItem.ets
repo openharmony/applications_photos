@@ -13,25 +13,21 @@
  * limitations under the License.
  */
 
-import {Logger} from '../../utils/Logger'
-import {EmptyAlbumComponent} from './EmptyAlbumComponent';
-import {PeerInfo} from '../../../../common/model/browser/album/PeerInfo';
+import { Logger } from '../../utils/Logger'
+import { EmptyAlbumComponent } from './EmptyAlbumComponent';
+import { PeerInfo } from '../../../../common/model/browser/album/PeerInfo';
 import router from '@system.router';
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {Constants} from '../../../../common/model/common/Constants'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
+import { Constants } from '../../../../common/model/common/Constants'
 
 @Component
 export struct DistributedAlbumGriItem {
     @State item: PeerInfo = new PeerInfo('', '', 0, '');
-    @State isEmptyAlbum : boolean = false;
-
+    @State isEmptyAlbum: boolean = false;
     @Provide isBigCard: boolean = false;
-    @Provide gridHeight:number = 0;
-
+    @Provide gridHeight: number = 0;
     @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-
     logger: Logger = new Logger('DistributedAlbumGriItem');
-
     gridAspectRatio = Constants.CARD_ASPECT_RATIO;
     albumCountMarginRight = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN * 2;
 
@@ -65,28 +61,36 @@ export struct DistributedAlbumGriItem {
             if (this.isBigCard) {
                 Image(this.item.coverUri)
                     .height(this.gridHeight)
-                    .offset({x:0, y:0})
-                    .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
+                    .offset({ x: 0, y: 0 })
+                    .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                     .onError(() => {
                         this.logger.debug('album is empty or its cover is error');
                         this.isEmptyAlbum = true;
                     })
-                    .onComplete((msg: {width: number, height: number, componentWidth: number,
-                    componentHeight: number}) => {
+                    .onComplete((msg: {
+                        width: number,
+                        height: number,
+                        componentWidth: number,
+                        componentHeight: number
+                    }) => {
                         this.logger.debug(`image load success. Size: ${msg.width}x${msg.height},\
                             componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
                     })
             } else {
                 Image(this.item.coverUri)
                     .aspectRatio(this.gridAspectRatio)
-                    .offset({x:0, y:0})
-                    .border({radius: $r('sys.float.ohos_id_corner_radius_default_l')})
+                    .offset({ x: 0, y: 0 })
+                    .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                     .onError(() => {
                         this.logger.debug('album is empty or its cover is error');
                         this.isEmptyAlbum = true;
                     })
-                    .onComplete((msg: { width: number, height: number,
-                    componentWidth: number, componentHeight: number}) => {
+                    .onComplete((msg: {
+                        width: number,
+                        height: number,
+                        componentWidth: number,
+                        componentHeight: number
+                    }) => {
                         this.logger.debug(`image load success. Size: ${msg.width}x${msg.height},\
                             componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
                     })
@@ -95,16 +99,16 @@ export struct DistributedAlbumGriItem {
 
             Column() {
                 Text(this.item.deviceName)
-                    .margin({right: $r('app.float.album_set_name_margin_right')})
-                    .textOverflow({overflow: TextOverflow.Ellipsis})
+                    .margin({ right: $r('app.float.album_set_name_margin_right') })
+                    .textOverflow({ overflow: TextOverflow.Ellipsis })
                     .maxLines(1)
                     .fontWeight(FontWeight.Medium)
                     .fontSize($r('sys.float.ohos_id_text_size_sub_title1'))
                     .fontColor($r('app.color.white'))
 
                 Text(String(this.item.count))
-                    .margin({right: this.albumCountMarginRight})
-                    .textOverflow({overflow: TextOverflow.Ellipsis})
+                    .margin({ right: this.albumCountMarginRight })
+                    .textOverflow({ overflow: TextOverflow.Ellipsis })
                     .maxLines(1)
                     .fontColor($r('app.color.white'))
                     .fontWeight(FontWeight.Regular)
@@ -112,7 +116,10 @@ export struct DistributedAlbumGriItem {
             }
             .width('100%')
             .alignItems(HorizontalAlign.Start)
-            .margin({left: $r('app.float.album_set_count_margin_left'), bottom: $r('app.float.album_set_count_margin_bottom')})
+            .margin({
+                left: $r('app.float.album_set_count_margin_left'),
+                bottom: $r('app.float.album_set_count_margin_bottom')
+            })
         }
         .border({
             radius: $r('sys.float.ohos_id_corner_radius_default_l'),

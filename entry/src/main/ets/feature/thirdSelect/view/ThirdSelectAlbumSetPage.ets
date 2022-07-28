@@ -14,21 +14,21 @@
  */
 
 import router from '@system.router'
-import {ThirdAlbumGridItem} from './ThirdAlbumGridItem'
-import {Action} from '../../../common/view/browserOperation/Action'
-import {ThirdSelectedPageActionBar} from './ThirdSelectedPageActionBar'
-import {ActionBarProp} from '../../../common/view/browserOperation/ActionBarProp'
-import {AlbumSetDataSource} from '../../../common/model/browser/album/AlbumSetDataSource'
-import {Logger} from '../utils/Logger'
-import {SelectUtil} from '../../../common/model/browser/photo/SelectUtil'
-import {Constants} from '../../../common/model/common/Constants'
-import {ThirdSelectManager} from '../../../common/model/browser/SelectManager'
-import {BroadCast} from '../../../common/utils/BroadCast'
-import {NoPhotoComponent} from '../../../common/view/NoPhotoComponent'
-import {ScreenManager} from '../../../common/model/common/ScreenManager'
-import {AlbumDefine} from '../../../common/model/browser/AlbumDefine'
-import {BroadCastConstants} from '../../../common/model/common/BroadCastConstants'
-import {BroadCastManager} from '../../../common/model/common/BroadCastManager'
+import { ThirdAlbumGridItem } from './ThirdAlbumGridItem'
+import { Action } from '../../../common/view/browserOperation/Action'
+import { ThirdSelectedPageActionBar } from './ThirdSelectedPageActionBar'
+import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp'
+import { AlbumSetDataSource } from '../../../common/model/browser/album/AlbumSetDataSource'
+import { Logger } from '../utils/Logger'
+import { SelectUtil } from '../../../common/model/browser/photo/SelectUtil'
+import { Constants } from '../../../common/model/common/Constants'
+import { ThirdSelectManager } from '../../../common/model/browser/SelectManager'
+import { BroadCast } from '../../../common/utils/BroadCast'
+import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent'
+import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import { AlbumDefine } from '../../../common/model/browser/AlbumDefine'
+import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
 
 // Third Select AlbumSet Page
 @Entry
@@ -105,7 +105,7 @@ export struct ThirdSelectAlbumSetPage {
         let contentWidth = ScreenManager.getInstance().getWinWidth();
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         this.gridRowCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
-            / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
+        / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
         this.logger.info(`initGridRowCount gridRowCount: ${this.gridRowCount}`);
     }
 
@@ -169,9 +169,12 @@ export struct ThirdSelectAlbumSetPage {
             justifyContent: FlexAlign.Start,
             alignItems: ItemAlign.Start
         }) {
-            ThirdSelectedPageActionBar({ leftAction: this.isFromFa ? Action.BACK : Action.CANCEL, isMultiPick: this.isMultiPick,
+            ThirdSelectedPageActionBar({
+                leftAction: this.isFromFa ? Action.BACK : Action.CANCEL,
+                isMultiPick: this.isMultiPick,
                 title: (this.isFromFa && !this.isFromFaPhoto) ? ActionBarProp.SINGLE_SELECT_ALBUM_TITLE : ActionBarProp.SINGLE_UNSELECT_TITLE,
-                onMenuClicked: this.onMenuClicked })
+                onMenuClicked: this.onMenuClicked
+            })
             Stack() {
                 if (this.isEmpty) {
                     NoPhotoComponent({ title: $r('app.string.title_no_albums') })
@@ -208,20 +211,20 @@ export struct ThirdSelectAlbumSetPage {
                     }, item => item.name)
                 }
                 .columnsTemplate('1fr '.repeat(this.gridRowCount))
-                    .padding({
-                        left: $r('app.float.max_padding_start'),
-                        right: $r('app.float.max_padding_end'),
-                        top: $r('app.float.album_set_page_padding_top'),
-                    })
-                    .columnsGap($r('app.float.album_set_grid_column_gap'))
-                    .rowsGap($r('app.float.album_set_grid_row_gap'))
+                .padding({
+                    left: $r('app.float.max_padding_start'),
+                    right: $r('app.float.max_padding_end'),
+                    top: $r('app.float.album_set_page_padding_top'),
+                })
+                .columnsGap($r('app.float.album_set_grid_column_gap'))
+                .rowsGap($r('app.float.album_set_grid_row_gap'))
             }
         }
         .backgroundColor($r('app.color.default_background_color'))
-            .padding({
-                top: this.leftBlank[1],
-                bottom: this.leftBlank[3]
-            })
+        .padding({
+            top: this.leftBlank[1],
+            bottom: this.leftBlank[3]
+        })
     }
 
     private setPickResult(): void {

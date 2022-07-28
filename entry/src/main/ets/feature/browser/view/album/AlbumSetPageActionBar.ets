@@ -13,24 +13,22 @@
  * limitations under the License.
  */
 
-import {Action} from '../../../../common/view/browserOperation/Action'
-import {ActionBar} from '../../../../common/view/actionbar/ActionBar'
-import {ActionBarProp} from '../../../../common/view/browserOperation/ActionBarProp'
-import {ActionBarMode, ActionBarSelectionMode} from '../../../../common/view/browserOperation/ActionBarMode'
-import {ScreenManager} from '../../../../common/model/common/ScreenManager'
-import {Logger} from '../../utils/Logger'
+import { Action } from '../../../../common/view/browserOperation/Action'
+import { ActionBar } from '../../../../common/view/actionbar/ActionBar'
+import { ActionBarProp } from '../../../../common/view/browserOperation/ActionBarProp'
+import { ActionBarMode, ActionBarSelectionMode } from '../../../../common/view/browserOperation/ActionBarMode'
+import { ScreenManager } from '../../../../common/model/common/ScreenManager'
+import { Logger } from '../../utils/Logger'
 
 @Component
 export struct AlbumSetPageActionBar {
     @Consume isAlbumSetSelectedMode: boolean;
-    @Consume ('selectedCount') selectedAlbumsCount: number;
+    @Consume('selectedCount') selectedAlbumsCount: number;
     @Consume isDisableRename: boolean;
     @Consume isDisableDelete: boolean;
-
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-
-    onMenuClicked : Function;
+    onMenuClicked: Function;
     logger: Logger = new Logger('AlbumSetPageActionBar');
 
     private createHorizontalActionBar(): ActionBarProp {
@@ -47,7 +45,7 @@ export struct AlbumSetPageActionBar {
         if (this.isAlbumSetSelectedMode) {
             menuList.push(
                 ((!this.isDisableRename && this.selectedAlbumsCount == 1) ? Action.RENAME : Action.RENAME_INVALID),
-                ((!this.isDisableDelete && this.selectedAlbumsCount > 0) ? Action.DELETE :Action.DELETE_INVALID));
+                ((!this.isDisableDelete && this.selectedAlbumsCount > 0) ? Action.DELETE : Action.DELETE_INVALID));
             actionBarProp
                 .setLeftAction(Action.CANCEL)
                 .setMenuList(menuList)
