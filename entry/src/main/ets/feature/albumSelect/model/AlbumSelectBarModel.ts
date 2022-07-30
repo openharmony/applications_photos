@@ -13,35 +13,18 @@
  * limitations under the License.
  */
 
-import { Action } from '../../../../common/view/browserOperation/Action'
-import { ActionBar } from '../../../../common/view/actionbar/ActionBar'
-import { ActionBarProp } from '../../../../common/view/browserOperation/ActionBarProp'
-import { ActionBarMode, ActionBarSelectionMode } from '../../../../common/view/browserOperation/ActionBarMode'
-import { Logger } from '../../utils/Logger'
+import { Action } from '../../../common/view/browserOperation/Action'
+import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp'
+import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/browserOperation/ActionBarMode'
 
-@Component
-export struct NewAlbumPageActionBar {
-    onMenuClicked: Function;
-    private logger: Logger = new Logger('NewAlbumPageActionBar');
-
-    private createActionBar(): ActionBarProp {
+export class AlbumSelectBarModel {
+    createActionBar(): ActionBarProp {
         let actionBarProp: ActionBarProp = new ActionBarProp();
         actionBarProp
             .setLeftAction(Action.CANCEL)
             .setMode(ActionBarMode.STANDARD_MODE)
             .setSelectionMode(ActionBarSelectionMode.SINGLE)
             .setTitle($r('app.string.title_select_photos'));
-
         return actionBarProp;
-    }
-
-    build() {
-        Column() {
-            ActionBar({
-                isShowBar: true,
-                actionBarProp: this.createActionBar(),
-                onMenuClicked: this.onMenuClicked
-            })
-        }
     }
 }

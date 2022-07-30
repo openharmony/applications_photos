@@ -19,6 +19,7 @@ import { BroadCastManager } from '../model/common/BroadCastManager'
 import { BroadCast } from '../utils/BroadCast'
 import { BroadCastConstants } from '../model/common/BroadCastConstants'
 import { Constants } from '../model/common/Constants'
+import { ScreenManager } from '../model/common/ScreenManager';
 
 export enum DEVICE_TYPE {
     DEVICE_PHONE,
@@ -30,7 +31,7 @@ export struct TabBar {
     @Consume isSelectedMode: boolean;
     @Consume isAlbumSetSelectedMode: boolean;
     private currentIndex: number;
-    private isSidebar: boolean = false;
+    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
     private tabs: TabItem[] = [];
     private controller: TabsController;
     private logger: Logger = new Logger('TabBar');

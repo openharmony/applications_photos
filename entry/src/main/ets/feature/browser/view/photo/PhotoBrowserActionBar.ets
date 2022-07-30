@@ -22,7 +22,7 @@ import { ScreenManager } from '../../../../common/model/common/ScreenManager'
 @Component
 export struct PhotoBrowserActionBar {
     @Consume isShowBar: boolean;
-    @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
+    @Consume menuList: Action[];
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
     onMenuClicked: Function;
@@ -35,20 +35,19 @@ export struct PhotoBrowserActionBar {
             .setLeftAction(Action.BACK)
             .setAlpha(ActionBarProp.PHOTO_BROWSER_ACTIONBAR_ALPHA)
             .setMode(ActionBarMode.TOP_MODE)
-            .setColorMode(this.isVideoPage ? ActionBarColorMode.TRANSPARENT : ActionBarColorMode.NORMAL);
+            .setColorMode(this.isVideoPage ? ActionBarColorMode.TRANSPARENT : ActionBarColorMode.NORMAL)
+            .setMenuList(this.menuList)
         return actionBarProp;
     }
 
     build() {
         Column() {
-            if (this.isShowBar) {
-                ActionBar({
-                    isShowBar: true,
-                    actionBarProp: this.createActionBar(),
-                    onMenuClicked: this.onMenuClicked,
-                    isVideoPage: this.isVideoPage
-                })
-            }
+            ActionBar({
+                isShowBar: this.isShowBar,
+                actionBarProp: this.createActionBar(),
+                onMenuClicked: this.onMenuClicked,
+                isVideoPage: this.isVideoPage
+            })
         }
         .markAnchor({ x: '0%', y: '0%' })
         .position({ x: '0%', y: this.leftBlank[1] })

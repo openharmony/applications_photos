@@ -15,10 +15,10 @@
 
 import router from '@system.router';
 import { Action } from '../../../../common/view/browserOperation/Action'
+import { ActionBar } from '../../../../common/view/actionbar/ActionBar';
 import { AlbumGridItemTraditionalStyle } from './AlbumGridItemTraditionalStyle'
 import { AlbumSetDataSource } from '../../../../common/model/browser/album/AlbumSetDataSource'
 import { Constants } from '../../../../common/model/common/Constants'
-import { DistributedAlbumSetPageActionBar } from './DistributedAlbumSetPageActionBar'
 import { ScreenManager } from '../../../../common/model/common/ScreenManager'
 import { BroadCast } from '../../../../common/utils/BroadCast'
 import { NoPhotoIndexComponent } from '../../../../common/view/NoPhotoIndexComponent'
@@ -28,6 +28,7 @@ import { BroadCastManager } from '../../../../common/model/common/BroadCastManag
 import { BroadCastConstants } from '../../../../common/model/common/BroadCastConstants'
 import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback'
 import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver'
+import { DistributedAlbumBarModel } from '../../../distributedAlbum/model/DistributedAlbumBarModel';
 
 @Entry
 @Component
@@ -39,13 +40,15 @@ export struct DistributedAlbumSetPage {
     @Provide broadCast: BroadCast = new BroadCast();
     @Provide isAlbumSetSelectedMode: boolean = false;
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
+    @Provide moreMenuList: Action[] = [];
     title: any;
     albums: AlbumSetDataSource
     isActive: boolean = false; // Whether the page is in the foreground
     logger: Logger = new Logger('DistributedAlbumSetPage')
     scroller: Scroller = new Scroller();
+    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
     private deviceId: string = ''
+    private barModel: DistributedAlbumBarModel = new DistributedAlbumBarModel()
 
     onMenuClicked(action: Action, arg: any[]) {
         this.logger.info(`onMenuClicked, action: ${action.actionID}`);
@@ -162,9 +165,9 @@ export struct DistributedAlbumSetPage {
             justifyContent: FlexAlign.Start,
             alignItems: ItemAlign.Start
         }) {
-            DistributedAlbumSetPageActionBar({
-                name: this.title,
-                onMenuClicked: this.onMenuClicked,
+            ActionBar({
+                actionBarProp: this.barModel.createActionBar(this.title),
+                onMenuClicked: this.onMenuClicked
             })
 
             Stack() {

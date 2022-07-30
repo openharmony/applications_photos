@@ -36,7 +36,6 @@ struct IndexPage {
     ];
     private preIndex: number = Constants.TIMELINE_PAGE_INDEX;
     @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
     @Provide isShow: boolean = true;
@@ -145,7 +144,6 @@ struct IndexPage {
                         currentIndex: this.currentIndex,
                         tabs: this.tabs,
                         controller: this.tabsController,
-                        isSidebar: this.isSidebar
                     })
                 }
                 .flexGrow(1)

@@ -56,7 +56,6 @@ import mMultimodalInputManager from '../../../../common/model/common/MultimodalI
 import { TraceControllerUtils } from '../../../../common/utils/TraceControllerUtils'
 import { PhotoBrowserHolder } from '../../../../common/view/PhotoBrowserHolder';
 import resourceManager from '@ohos.resourceManager';
-import { BrowserDataImpl } from '../../../../common/model/browser/BrowserDataImpl'
 
 // page of large photo
 @Entry
@@ -67,7 +66,7 @@ struct PhotoBrowser {
     @Provide(dateTitle) photoDate: string = '';
     @Provide(timeLocationTitle) timeAndLocation: string = '';
     @Provide menuList: Array<Action> = new Array<Action>();
-    @Provide toolMenuList: Array<Action> = new Array<Action>();
+    private toolMenuList: Array<Action> = new Array<Action>();
     @Provide topMenuList: Array<Action> = new Array<Action>();
     @Provide moreMenuList: Array<Action> = new Array<Action>();
     @Provide broadCast: BroadCast = new BroadCast();
@@ -897,7 +896,10 @@ struct PhotoBrowser {
                     onMenuClicked: this.onMenuClicked,
                 })
                 ToolBar({
-                    onMenuClicked: this.onMenuClicked, isFromPhotoBrowser: true
+                    isShowBar:this.isShowBar,
+                    toolMenuList: this.toolMenuList,
+                    onMenuClicked: this.onMenuClicked,
+                    isFromPhotoBrowser: true
                 })
                 PhotoBrowserHolder()
                 CustomDialogView()

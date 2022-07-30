@@ -21,7 +21,7 @@ import { ActionBarButton } from './ActionBarButton'
 // MenuPanel，Right menu button panel
 @Component
 export struct MenuPanel {
-    @State @Watch('onActionBarPropChanged') actionBarProp: ActionBarProp = new ActionBarProp();
+    @State actionBarProp: ActionBarProp = new ActionBarProp();
     @State menuList: Action[] = [];
     onMenuClicked: Function;
     logger: Logger = new Logger('MenuPanel');
@@ -45,12 +45,11 @@ export struct MenuPanel {
 
     build() {
         Row() {
-            ForEach(this.menuList, (menu: Action) => {
+            ForEach(this.actionBarProp.getMenuList(), (menu: Action) => {
                 ActionBarButton({
                     res: menu.iconRes,
                     action: menu,
                     onMenuClicked: this.onMenuClicked,
-                    isLeft: false,
                     isAutoTint: menu.isAutoTint,
                     colorMode: this.actionBarProp.getColorMode()
                 })

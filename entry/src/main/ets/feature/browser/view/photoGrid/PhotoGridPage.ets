@@ -16,10 +16,10 @@
 import router from '@system.router'
 import prompt from '@system.prompt';
 import { Logger } from '../../utils/Logger'
-import { PhotoGridPageActionBar } from './PhotoGridPageActionBar'
-import { PhotoGridPageToolBar } from './PhotoGridPageToolBar'
+import { ToolBar } from '../../../../common/view/actionbar/ToolBar';
 import { ImageGridItemComponent } from '../../../../common/view/ImageGridItemComponent'
 import { Action } from '../../../../common/view/browserOperation/Action'
+import { ActionBar } from '../../../../common/view/actionbar/ActionBar';
 import { CustomDialogView } from '../../../../common/view/dialog/CustomDialogView'
 import { SelectManager } from '../../../../common/model/browser/SelectManager'
 import { BroadCast } from '../../../../common/utils/BroadCast'
@@ -48,7 +48,7 @@ import { AlbumInfo } from '../../../../common/model/browser/album/AlbumInfo';
 import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver';
 import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback';
 import { NoPhotoComponent } from '../../../../common/view/NoPhotoComponent';
-
+import { PhotoGridBarModel } from '../../../photoGrid/model/PhotoGridBarModel';
 // Album Page
 @Entry
 @Component
@@ -82,6 +82,7 @@ export struct PhotoGridPage {
     routerStart = false;
     private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    private barModel: PhotoGridBarModel = new PhotoGridBarModel()
 
     onIndexChange() {
         this.logger.info(`onIndexChange ${this.PhotoGridPageIndex}`)
@@ -460,9 +461,10 @@ export struct PhotoGridPage {
             this.albumInfo = JSON.parse(param.item.toString());
             this.title = this.albumInfo.displayName;
             this.dataSource.setAlbumId(this.albumInfo.id);
-
+            this.barModel.setAlbumId(this.albumInfo.id)
             if (param.isDistributedAlbum) {
                 this.isDistributedAlbum = new Boolean(param.isDistributedAlbum).valueOf();
+                this.barModel.setDistributedAlbum(this.isDistributedAlbum)
                 param.distributedAlbumName && (this.title = param.distributedAlbumName.toString());
                 this.dataSource.setDeviceId(this.albumInfo.deviceId);
                 this.mSelectManager.setDeviceId(this.albumInfo.deviceId);
@@ -631,12 +633,14 @@ export struct PhotoGridPage {
 
     build() {
         Column() {
-            PhotoGridPageActionBar({
-                title: this.title,
-                albumId: this.albumInfo.innerId,
-                onMenuClicked: this.onMenuClicked,
-                isRecycle: this.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE,
-                isDistributedAlbum: this.isDistributedAlbum
+            ActionBar({
+                actionBarProp: this.barModel.createActionBar(
+                    this.title,
+                    this.isSelectedMode,
+                    this.totalSelectedCount,
+                    this.isAllSelected,
+                    this.isEmpty),
+                onMenuClicked: this.onMenuClicked
             })
 
             if (this.isEmpty) {
@@ -672,14 +676,11 @@ export struct PhotoGridPage {
 
             CustomDialogView();
 
-            if (this.isSelectedMode || (this.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE) && !this.isEmpty) {
-                PhotoGridPageToolBar({
-                    onMenuClicked: this.onMenuClicked,
-                    isRecycleAlbum: (this.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE),
-                    isDistributedAlbum: this.isDistributedAlbum
-                });
-            }
-
+            ToolBar({
+                isShowBar: this.isSelectedMode || (this.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE) && !this.isEmpty,
+                toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected, this.isEmpty),
+                onMenuClicked: this.onMenuClicked
+            })
         }
         .backgroundColor($r('app.color.default_background_color'))
         .padding({

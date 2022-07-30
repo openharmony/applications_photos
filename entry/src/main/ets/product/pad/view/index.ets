@@ -150,7 +150,6 @@ struct IndexPage {
                         currentIndex: this.currentIndex,
                         tabs: this.tabs,
                         controller: this.tabsController,
-                        isSidebar: this.isSidebar,
                         deviceType: DEVICE_TYPE.DEVICE_PAD
                     })
                 }

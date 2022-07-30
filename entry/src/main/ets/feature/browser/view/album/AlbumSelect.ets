@@ -23,14 +23,15 @@ import { NoPhotoComponent } from '../../../../common/view/NoPhotoComponent'
 import { Logger } from '../../utils/Logger'
 import { TraceControllerUtils } from '../../../../common/utils/TraceControllerUtils'
 import { MediaDataSource } from '../../../../common/model/browser/photo/MediaDataSource'
-import { NewAlbumPageActionBar } from './NewAlbumPageActionBar'
 import { Action } from '../../../../common/view/browserOperation/Action'
+import { ActionBar } from '../../../../common/view/actionbar/ActionBar';
 import { SelectManager } from '../../../../common/model/browser/SelectManager'
 import { UiUtil } from '../../utils/UiUtil'
 import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine';
 import { AlbumInfo } from '../../../../common/model/browser/album/AlbumInfo';
 import { BroadCastManager } from '../../../../common/model/common/BroadCastManager';
 import { BroadCastConstants } from '../../../../common/model/common/BroadCastConstants';
+import { AlbumSelectBarModel } from '../../../albumSelect/model/AlbumSelectBarModel';
 
 @Entry
 @Component
@@ -49,6 +50,7 @@ export struct AlbumSelect {
     private dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
     private mSelectManager = new SelectManager();
     private albumInfo: AlbumInfo = undefined;
+    private barModel: AlbumSelectBarModel = new AlbumSelectBarModel()
 
     aboutToAppear(): void {
         TraceControllerUtils.startTrace('AlbumSetPageAboutToAppear');
@@ -133,7 +135,10 @@ export struct AlbumSelect {
             justifyContent: FlexAlign.Start,
             alignItems: ItemAlign.Start
         }) {
-            NewAlbumPageActionBar({ onMenuClicked: this.onMenuClicked })
+            ActionBar({
+                actionBarProp: this.barModel.createActionBar(),
+                onMenuClicked: this.onMenuClicked
+            })
 
             Stack() {
                 if (this.isEmpty) {

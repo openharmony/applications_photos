@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import {AlbumDefine} from '../AlbumDefine'
-import {BrowserDataImpl} from '../BrowserDataImpl'
-import {Logger} from '../../../utils/Logger'
-import {AsyncCallback} from '../../common/AsyncCallback'
-import {MediaItem} from './MediaItem'
-import {MediaLibraryAccess} from '../../../access/MediaLibraryAccess'
-import {TraceControllerUtils} from '../../../utils/TraceControllerUtils';
+import { AlbumDefine } from '../AlbumDefine'
+import { BrowserDataImpl } from '../BrowserDataImpl'
+import { Logger } from '../../../utils/Logger'
+import { AsyncCallback } from '../../common/AsyncCallback'
+import { MediaItem } from './MediaItem'
+import { MediaLibraryAccess } from '../../../access/MediaLibraryAccess'
+import { TraceControllerUtils } from '../../../utils/TraceControllerUtils';
 
 export class PhotoDataImpl extends BrowserDataImpl {
     logger: Logger = new Logger('PhotoDataImpl');
@@ -46,7 +46,7 @@ export class PhotoDataImpl extends BrowserDataImpl {
                     try {
                         promiseStatus.push(item.isFavorite())
                     }
-                    catch(err) {
+                    catch (err) {
                         this.logger.error(`getItems error: ${err}`);
                     }
                 }
@@ -57,7 +57,7 @@ export class PhotoDataImpl extends BrowserDataImpl {
                         try {
                             let item = dataList[i];
                             let mediaItem: MediaItem = new MediaItem(item);
-                            if(favor[i].status = 'success'){
+                            if (favor[i].status = 'success') {
                                 mediaItem.setFavorite(favor[i].res);
                             } else {
                                 this.logger.error(`getFavorite error: ${favor[i].err}`);
@@ -78,8 +78,8 @@ export class PhotoDataImpl extends BrowserDataImpl {
     }
 
     handlePromise(promiseList) {
-        return promiseList.map(promise => promise.then((res) => ({status: 'success', res}),
-            (err) => ({status: 'failed', err})))
+        return promiseList.map(promise => promise.then((res) => ({ status: 'success', res }),
+            (err) => ({ status: 'failed', err })))
     }
 
     getDataCount(callback: AsyncCallback<number>, param: any): void {
@@ -94,10 +94,11 @@ export class PhotoDataImpl extends BrowserDataImpl {
         return this.getThumbnailSafe(sourceUri, size);
     }
 
-    async getDataById(id: any, deviceId? :any){
+    async getDataById(id: any, deviceId?: any) {
         this.logger.debug('getFileAssetById');
         try {
             let result = await MediaLibraryAccess.getInstance().getFirstObject(AlbumDefine.getFileFetchOptById(id, deviceId));
+            this.logger.debug(`result: ${JSON.stringify(result)}`)
             return result.obj;
         } catch (error) {
             this.logger.error('getFileAssetById error');
@@ -105,14 +106,14 @@ export class PhotoDataImpl extends BrowserDataImpl {
         }
     }
 
-    async getDataByName(name: string, albumInfo: any){
+    async getDataByName(name: string, albumInfo: any) {
         this.logger.debug('getFileByName');
 
         let dataList;
-        if (albumInfo.id){
+        if (albumInfo.id) {
             dataList = await MediaLibraryAccess.getInstance().getEntityAlbumObject(AlbumDefine.getAlbumFetchOpt(albumInfo.id),
             AlbumDefine.getFileFetchOptByName(name))
-        }else{
+        } else {
             dataList = await MediaLibraryAccess.getInstance().getAllObject(AlbumDefine.getFileFetchOptByName(name, albumInfo.relativePath))
         }
 

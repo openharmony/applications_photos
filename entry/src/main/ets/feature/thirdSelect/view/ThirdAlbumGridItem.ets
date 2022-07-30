@@ -32,12 +32,12 @@ export struct ThirdAlbumGridItem {
         [AlbumDefine.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
     ]);
     @State item: AlbumInfo = new AlbumInfo('', '', '', '', 0, '', '');
-    isMultiPick: boolean;
+    @Consume isMultiPick: boolean;
     @Provide isBigCard: boolean = false;
     @Provide gridHeight: number = 0;
     logger: Logger = new Logger('ThirdAlbumGridItem');
     isFromWallpaper: boolean;
-    maxSelectCount: number;
+    @Consume maxSelectCount: number;
     isFromFa: boolean;
     isFromFaPhoto: boolean;
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();

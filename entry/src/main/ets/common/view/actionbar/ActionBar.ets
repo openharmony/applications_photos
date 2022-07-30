@@ -20,7 +20,6 @@ import { ActionBarMode } from '../browserOperation/ActionBarMode'
 import { SingleTitle } from './SingleTitle'
 import { DetailTitle } from './DetailTitle'
 import { SelectionTitle } from './SelectionTitle'
-import { MenuPanel } from './MenuPanel'
 import { DetailMenuPanel } from './DetailMenuPanel'
 import { Constants } from '../../model/common/Constants'
 import { ActionBarButton } from './ActionBarButton'
@@ -29,7 +28,7 @@ import { ActionBarButton } from './ActionBarButton'
 @Component
 export struct ActionBar {
     @State isShowBar: boolean = true;
-    @State actionBarProp: ActionBarProp = new ActionBarProp();
+    @Provide actionBarProp: ActionBarProp = new ActionBarProp();
     onMenuClicked: Function;
     logger: Logger = new Logger('ActionBar');
     isVideoPage: boolean = false;
@@ -49,33 +48,26 @@ export struct ActionBar {
                     res: this.actionBarProp.getLeftAction().iconRes,
                     action: this.actionBarProp.getLeftAction(),
                     onMenuClicked: this.onMenuClicked,
-                    isLeft: true,
                     isAutoTint: this.actionBarProp.getLeftAction().isAutoTint,
                     colorMode: this.actionBarProp.getColorMode(),
                     isFirst: true
                 })
             }
             if (this.actionBarProp.getMode() === ActionBarMode.DETAIL_MODE) {
-                DetailMenuPanel({ actionBarProp: this.actionBarProp, onMenuClicked: this.onMenuClicked, isLeft: true })
             } else if (this.actionBarProp.getMode() === ActionBarMode.SELECTION_MODE) {
                 Stack({ alignContent: Alignment.Start }) {
                     SelectionTitle({ actionBarProp: this.actionBarProp })
                 }.flexGrow(1)
-
-                MenuPanel({ actionBarProp: this.actionBarProp, onMenuClicked: this.onMenuClicked })
             } else if (this.actionBarProp.getMode() === ActionBarMode.TOP_MODE) {
                 Stack({ alignContent: Alignment.Start }) {
                     DetailTitle({ isVideoPage: this.isVideoPage })
                 }.flexGrow(1)
-
-                DetailMenuPanel({ actionBarProp: this.actionBarProp, onMenuClicked: this.onMenuClicked, isLeft: false })
             } else {
                 Stack({ alignContent: Alignment.Start }) {
                     SingleTitle({ actionBarProp: this.actionBarProp })
                 }.flexGrow(1)
-
-                MenuPanel({ actionBarProp: this.actionBarProp, onMenuClicked: this.onMenuClicked })
             }
+            DetailMenuPanel({ onMenuClicked: this.onMenuClicked })
         }
         .height(Constants.ActionBarHeight)
         .zIndex(3)

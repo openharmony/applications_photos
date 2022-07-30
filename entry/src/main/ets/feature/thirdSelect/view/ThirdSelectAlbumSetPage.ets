@@ -16,7 +16,7 @@
 import router from '@system.router'
 import { ThirdAlbumGridItem } from './ThirdAlbumGridItem'
 import { Action } from '../../../common/view/browserOperation/Action'
-import { ThirdSelectedPageActionBar } from './ThirdSelectedPageActionBar'
+import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp'
 import { AlbumSetDataSource } from '../../../common/model/browser/album/AlbumSetDataSource'
 import { Logger } from '../utils/Logger'
@@ -29,6 +29,7 @@ import { ScreenManager } from '../../../common/model/common/ScreenManager'
 import { AlbumDefine } from '../../../common/model/browser/AlbumDefine'
 import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
 import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
+import { ThirdSelectBarModel } from '../model/ThirdSelectBarModel'
 
 // Third Select AlbumSet Page
 @Entry
@@ -54,6 +55,9 @@ export struct ThirdSelectAlbumSetPage {
     @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
     isFromFaPhoto: boolean = false;
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    private barModel: ThirdSelectBarModel = new ThirdSelectBarModel()
+    private leftAction: Action = Action.BACK
+    private title: string | Resource = ""
 
     aboutToAppear(): void {
         this.albums = new AlbumSetDataSource(this.broadCast);
@@ -73,6 +77,8 @@ export struct ThirdSelectAlbumSetPage {
             }
         }
         this.logger.info(`isFromFa: ${this.isFromFa} isFromFaPhoto ${this.isFromFaPhoto}`);
+        this.leftAction = this.isFromFa ? Action.BACK : Action.CANCEL
+        this.title = (this.isFromFa && !this.isFromFaPhoto) ? ActionBarProp.SINGLE_SELECT_ALBUM_TITLE : ActionBarProp.SINGLE_UNSELECT_TITLE
         this.albums.setBlackList([AlbumDefine.ALBUM_ID_VIDEO, AlbumDefine.ALBUM_ID_RECYCLE])
         this.selectManager = new ThirdSelectManager();
         this.onMenuClicked = this.onMenuClicked.bind(this);
@@ -169,12 +175,16 @@ export struct ThirdSelectAlbumSetPage {
             justifyContent: FlexAlign.Start,
             alignItems: ItemAlign.Start
         }) {
-            ThirdSelectedPageActionBar({
-                leftAction: this.isFromFa ? Action.BACK : Action.CANCEL,
-                isMultiPick: this.isMultiPick,
-                title: (this.isFromFa && !this.isFromFaPhoto) ? ActionBarProp.SINGLE_SELECT_ALBUM_TITLE : ActionBarProp.SINGLE_UNSELECT_TITLE,
+            ActionBar({
+                actionBarProp: this.barModel.createActionBar(
+                    this.leftAction,
+                    this.title,
+                    this.isMultiPick,
+                    this.selectedCount,
+                    this.maxSelectCount),
                 onMenuClicked: this.onMenuClicked
             })
+
             Stack() {
                 if (this.isEmpty) {
                     NoPhotoComponent({ title: $r('app.string.title_no_albums') })
@@ -187,9 +197,7 @@ export struct ThirdSelectAlbumSetPage {
                                     ThirdAlbumGridItem({
                                         item: item,
                                         isBigCard: true,
-                                        isMultiPick: this.isMultiPick,
                                         isFromWallpaper: this.isFromWallpaper,
-                                        maxSelectCount: this.maxSelectCount,
                                         isFromFa: this.isFromFa,
                                         isFromFaPhoto: this.isFromFaPhoto
                                     })
@@ -199,9 +207,7 @@ export struct ThirdSelectAlbumSetPage {
                                     ThirdAlbumGridItem({
                                         item: item,
                                         isBigCard: false,
-                                        isMultiPick: this.isMultiPick,
                                         isFromWallpaper: this.isFromWallpaper,
-                                        maxSelectCount: this.maxSelectCount,
                                         isFromFa: this.isFromFa,
                                         isFromFaPhoto: this.isFromFaPhoto
                                     })

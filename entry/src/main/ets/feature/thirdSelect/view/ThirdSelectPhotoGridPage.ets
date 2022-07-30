@@ -18,6 +18,7 @@ import { Logger } from '../utils/Logger'
 import { SelectUtil } from '../../../common/model/browser/photo/SelectUtil'
 import { ImageGridItemComponent } from '../../../common/view/ImageGridItemComponent'
 import { Action } from '../../../common/view/browserOperation/Action'
+import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { BroadCast } from '../../../common/utils/BroadCast'
 import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
 import { Constants } from '../../../common/model/common/Constants'
@@ -27,11 +28,10 @@ import { MediaItem } from '../../../common/model/browser/photo/MediaItem'
 import { ThirdSelectManager } from '../../../common/model/browser/SelectManager'
 import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent'
 import { ScreenManager } from '../../../common/model/common/ScreenManager'
-import { ThirdSelectedPageActionBar } from './ThirdSelectedPageActionBar'
 import { GridScrollBar } from '../../../common/view/GridScrollBar';
 import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
 import { UiUtil } from '../../../common/utils/UiUtil';
-
+import { ThirdSelectBarModel } from '../model/ThirdSelectBarModel';
 // Third Select Album Page
 @Entry
 @Component
@@ -57,8 +57,9 @@ export struct ThirdSelectPhotoGridPage {
     @State gridRowCount: number = 0;
     @Provide isHideScrollBar: boolean = true;
     isFromFa: boolean = false;
-    private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
     scroller: Scroller = new Scroller();
+    private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    private barModel: ThirdSelectBarModel = new ThirdSelectBarModel()
 
     onMenuClicked(action: Action) {
         this.logger.info(`onMenuClicked, action: ${action.actionID}`);
@@ -197,8 +198,15 @@ export struct ThirdSelectPhotoGridPage {
 
     build() {
         Column() {
-            ThirdSelectedPageActionBar({ leftAction: Action.BACK, isMultiPick: this.isMultiPick, title: this.title,
-                onMenuClicked: this.onMenuClicked })
+            ActionBar({
+                actionBarProp: this.barModel.createActionBar(
+                    Action.BACK,
+                    this.title,
+                    this.isMultiPick,
+                    this.selectedCount,
+                    this.maxSelectCount),
+                onMenuClicked: this.onMenuClicked
+            })
             if (this.isEmpty) {
                 NoPhotoComponent({ title: $r('app.string.no_distributed_photo_head_title_album') })
             }

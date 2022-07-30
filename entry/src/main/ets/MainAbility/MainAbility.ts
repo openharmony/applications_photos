@@ -183,7 +183,7 @@ export default class MainAbility extends Ability {
                         }, 50)
                     });
                 } else {
-                    windowStage.setUIContent(this.context, 'product/phone/view/index', null);
+                    windowStage.setUIContent(this.context, 'product/pad/view/index', null);
                     ScreenManager.getInstance().initWindowMode();
                 }
                 TraceControllerUtils.finishTrace('onWindowStageCreate');

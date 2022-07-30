@@ -27,11 +27,11 @@ export class MenuItem {
 
 @Component
 export struct ToolBar {
-    @Consume isShowBar: boolean;
+    @State isShowBar: boolean = true;
     @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-    @Consume toolMenuList: Action[];
+    @State toolMenuList: Action[] = [];
     @Consume moreMenuList: Action[];
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
     @State showPopup: boolean = false;

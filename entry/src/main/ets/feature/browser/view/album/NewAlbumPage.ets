@@ -17,6 +17,7 @@ import router from '@system.router'
 import { Logger } from '../../utils/Logger'
 import { ImageGridItemComponent } from '../../../../common/view/ImageGridItemComponent'
 import { Action } from '../../../../common/view/browserOperation/Action'
+import { ActionBar } from '../../../../common/view/actionbar/ActionBar';
 import { CustomDialogView } from '../../../../common/view/dialog/CustomDialogView'
 import { SelectManager } from '../../../../common/model/browser/SelectManager'
 import { BroadCast } from '../../../../common/utils/BroadCast'
@@ -29,7 +30,6 @@ import { ScreenManager } from '../../../../common/model/common/ScreenManager'
 import { TraceControllerUtils } from '../../../../common/utils/TraceControllerUtils'
 import { BroadCastManager } from '../../../../common/model/common/BroadCastManager'
 import { AlbumDefine } from '../../../../common/model/browser/AlbumDefine'
-import { AlbumSelectActionBar } from './AlbumSelectActionBar'
 import { MenuContext } from '../../../../common/view/browserOperation/MenuContext'
 import { MenuOperationFactory } from '../../../../common/interface/MenuOperationFactory'
 import { CopyMenuOperation } from '../../../../common/view/browserOperation/CopyMenuOperation'
@@ -37,6 +37,7 @@ import { MoveMenuOperation } from '../../../../common/view/browserOperation/Move
 import { JumpSourceToMain } from '../../../../common/model/browser/photo/JumpSourceToMain'
 import { AlbumInfo } from '../../../../common/model/browser/album/AlbumInfo';
 import { GridScrollBar } from '../../../../common/view/GridScrollBar';
+import { NewAlbumBarModel } from '../../../newAlbum/model/NewAlbumBarModel';
 
 @Entry
 @Component
@@ -67,6 +68,7 @@ export struct NewAlbumPage {
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
     private isNewAlbum: boolean = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM);
     private targetAlbum: AlbumInfo = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_TARGET);
+    private barModel: NewAlbumBarModel = new NewAlbumBarModel()
 
     onIndexChange() {
         this.logger.info(`onIndexChange ${this.PhotoGridPageIndex}`)
@@ -325,7 +327,11 @@ export struct NewAlbumPage {
 
     build() {
         Column() {
-            AlbumSelectActionBar({ onMenuClicked: this.onMenuClicked })
+            ActionBar({
+                isShowBar: true,
+                actionBarProp: this.barModel.createActionBar(),
+                onMenuClicked: this.onMenuClicked
+            })
             if (this.isEmpty) {
                 NoPhotoComponent({
                     title: $r('app.string.no_distributed_photo_head_title_album')

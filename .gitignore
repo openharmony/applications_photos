@@ -12,4 +12,4 @@
 /entry/.preview
 .cxx
 /package-lock.json
-
+/tsconfig.json

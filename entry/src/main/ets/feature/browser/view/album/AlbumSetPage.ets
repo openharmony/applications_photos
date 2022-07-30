@@ -31,13 +31,13 @@ import { MenuOperation } from '../../../../common/view/browserOperation/MenuOper
 import { MenuOperationFactory } from '../../../../common/interface/MenuOperationFactory'
 import { CustomDialogView } from '../../../../common/view/dialog/CustomDialogView'
 import { Action } from '../../../../common/view/browserOperation/Action'
+import { ActionBar } from '../../../../common/view/actionbar/ActionBar';
 import { CommonObserverCallback } from '../../../../common/model/browser/CommonObserverCallback'
 import { MediaObserver } from '../../../../common/model/browser/dataObserver/MediaObserver'
 import { UiUtil } from '../../../../common/utils/UiUtil'
 import { Logger } from '../../utils/Logger'
-
-import { AlbumSetPageActionBar } from './AlbumSetPageActionBar'
-import { AlbumSetPageToolBar } from './AlbumSetPageToolBar'
+import { AlbumBarModel } from '../../../album/model/AlbumBarModel';
+import { ToolBar } from '../../../../common/view/actionbar/ToolBar';
 import { AlbumGridItemNewStyle } from './AlbumGridItemNewStyle'
 import { DistributedAlbumGriItem } from './DistributedAlbumGriItem'
 import { AlbumSetDeleteMenuOperation } from './AlbumSetDeleteMenuOperation'
@@ -78,6 +78,7 @@ export struct AlbumSetPage {
     private currentIndex: number = Constants.LOCAL_TAB_INDEX;
     private needNotify = false;
     private ignoreLocalNotify = false;
+    private barModel: AlbumBarModel = new AlbumBarModel()
 
     onMenuClicked(action: Action, arg: any[]) {
         this.logger.info(`onMenuClicked, action: ${action.actionID}`);
@@ -452,10 +453,15 @@ export struct AlbumSetPage {
                 justifyContent: FlexAlign.Start,
                 alignItems: ItemAlign.Start
             }) {
-                Column() {
-                    AlbumSetPageActionBar({ onMenuClicked: this.onMenuClicked })
-                }.visibility(this.isEmpty && !this.isTabBarShow ? Visibility.None : Visibility.Visible)
-
+                ActionBar({
+                    isShowBar: !(this.isEmpty && !this.isTabBarShow),
+                    actionBarProp: this.barModel.createActionBar(
+                        this.isAlbumSetSelectedMode,
+                        this.selectedAlbumsCount,
+                        this.isDisableRename,
+                        this.isDisableDelete),
+                    onMenuClicked: this.onMenuClicked
+                })
                 Column() {
                     TabBarForAlbumSet({
                         currentIndex: this.currentIndex,
@@ -489,9 +495,15 @@ export struct AlbumSetPage {
                     })
                 }.visibility(this.isEmpty && !this.isTabBarShow ? Visibility.None : Visibility.Visible)
 
-                if (this.isAlbumSetSelectedMode) {
-                    AlbumSetPageToolBar({ onMenuClicked: this.onMenuClicked })
-                }
+                ToolBar({
+                    isShowBar: this.isAlbumSetSelectedMode,
+                    toolMenuList: this.barModel.getMenuList(
+                        this.isAlbumSetSelectedMode,
+                        this.selectedAlbumsCount,
+                        this.isDisableRename,
+                        this.isDisableDelete),
+                    onMenuClicked: this.onMenuClicked
+                })
 
                 if (this.isEmpty && !this.isTabBarShow) {
                     NoPhotoIndexComponent({ index: Constants.ALBUM_PAGE_INDEX })

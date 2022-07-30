@@ -21,27 +21,17 @@ import { ActionBarButton } from './ActionBarButton'
 // Large picture button for dynamic refresh
 @Component
 export struct DetailMenuPanel {
-    @Consume menuList: Action[];
-    actionBarProp: ActionBarProp = new ActionBarProp();
+    @Consume actionBarProp: ActionBarProp;
     onMenuClicked: Function;
-    logger: Logger = new Logger('DetailMenuPanel');
-    isLeft = false;
-
-    private onBuildDone(): void {
-        this.logger.info(`onBuildDone, menu's size: ${this.menuList.length}`);
-        this.menuList.forEach((menu: Action) => {
-            this.logger.info(`ActionId: ${menu.actionID}`)
-        })
-    }
+    private logger: Logger = new Logger('DetailMenuPanel');
 
     build() {
         Row() {
-            ForEach(this.menuList, (menu: Action) => {
+            ForEach(this.actionBarProp.getMenuList(), (menu: Action) => {
                 ActionBarButton({
                     res: menu.iconRes,
                     action: menu,
                     onMenuClicked: this.onMenuClicked,
-                    isLeft: this.isLeft,
                     isAutoTint: menu.isAutoTint,
                     colorMode: this.actionBarProp.getColorMode()
                 })
