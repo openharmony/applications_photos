@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {BroadCast} from '../../utils/BroadCast'
-import {Logger} from '../../../feature/browser/utils/Logger';
-import {BroadCastConstants} from '../../model/common/BroadCastConstants';
-import {AlbumInfo} from '../../model/browser/album/AlbumInfo';
+import { BroadCast } from '../../utils/BroadCast'
+import { Logger } from '../../utils/Logger'
+import { BroadCastConstants } from '../../model/common/BroadCastConstants';
+import { AlbumInfo } from '../../model/browser/album/AlbumInfo';
 
 @Component
 export struct AlbumListCard {
@@ -49,8 +49,8 @@ export struct AlbumListCard {
 
     build() {
         Row() {
-            if(this.useAlt) {
-                Row(){
+            if (this.useAlt) {
+                Row() {
                     Image($r('app.media.ic_goto_photos'))
                         .height($r('app.float.icon_size'))
                         .width($r('app.float.icon_size'))
@@ -67,7 +67,7 @@ export struct AlbumListCard {
                     .width($r('app.float.list_card_image_size'))
                     .borderRadius($r('sys.float.ohos_id_corner_radius_default_s'))
                     .onError(() => {
-                        if(this.item.coverUri) {
+                        if (this.item.coverUri) {
                             this.useAlt = true;
                         }
                         this.logger.error('alt Image error');

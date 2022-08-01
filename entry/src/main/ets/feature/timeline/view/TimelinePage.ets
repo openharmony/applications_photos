@@ -83,7 +83,6 @@ export struct TimelinePage {
     @State groupSelectMode: boolean[] = [];
     @Provide yearData: TimelineData[] = [];
     @Provide dateText: string = '';
-    @Provide isShowBar: boolean = true;
     private barModel = new TimelinePageBarModel()
 
     aboutToAppear(): void {
@@ -162,7 +161,7 @@ export struct TimelinePage {
             }
             AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
             router.push({
-                uri: 'feature/browser/view/photo/PhotoBrowser',
+                uri: 'feature/browser/view/PhotoBrowser',
                 params: {
                     position: targetIndex,
                     transition: name,
@@ -180,7 +179,7 @@ export struct TimelinePage {
             AppStorage.SetOrCreate(Constants.THIRD_SELECT_MANAGER, self.mSelectManager);
             AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
             router.push({
-                uri: 'feature/browser/view/photo/SelectPhotoBrowser',
+                uri: 'feature/browser/view/SelectPhotoBrowser',
                 params: {
                     position: targetIndex,
                     transition: name,
@@ -676,7 +675,7 @@ export struct TimelinePage {
             }
 
             ToolBar({
-                isShowBar: this.isSelectedMode,
+                isShowBar: $isSelectedMode,
                 toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected),
                 onMenuClicked: this.onMenuClicked
             })

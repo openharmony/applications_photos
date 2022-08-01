@@ -15,7 +15,7 @@
 
 import { PhotoItem } from './PhotoItem'
 import { BroadCastConstants } from '../model/common/BroadCastConstants';
-import { Logger } from '../../feature/browser/utils/Logger';
+import { Logger } from '../utils/Logger'
 import { BroadCast } from '../utils/BroadCast';
 import { Constants } from '../model/common/Constants';
 import { Constants as PhotoConstants } from '../../common/model/browser/photo/Constants'
