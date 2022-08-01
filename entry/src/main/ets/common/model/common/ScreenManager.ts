@@ -56,10 +56,10 @@ export class ScreenManager {
     private columns: number = ColumnSize.COLUMN_FOUR;
 
     // Default orientation
-    private horizontal = false;
+    private horizontal = true;
 
     // Default sidebar
-    private sidebar = false;
+    private sidebar = true;
     private windowMode = WindowMode.UNDEFINED;
 
     private constructor() {

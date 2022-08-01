@@ -14,7 +14,7 @@
  */
 
 import { TimelinePage } from '../../../feature/timeline/view/TimelinePage'
-import { AlbumSetPage } from '../../../feature/browser/view/album/AlbumSetPage'
+import { AlbumSetPage } from '../../../feature/album/view/AlbumSetPage'
 import { Logger } from '../../../common/utils/Logger'
 import { TabBar, DEVICE_TYPE } from '../../../common/view/TabBar'
 import { TabItem } from '../../../common/model/common/TabItem'
@@ -150,7 +150,6 @@ struct IndexPage {
                         currentIndex: this.currentIndex,
                         tabs: this.tabs,
                         controller: this.tabsController,
-                        isSidebar: this.isSidebar,
                         deviceType: DEVICE_TYPE.DEVICE_PAD
                     })
                 }

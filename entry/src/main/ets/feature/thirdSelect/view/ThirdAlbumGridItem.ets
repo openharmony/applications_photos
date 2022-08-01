@@ -1,4 +1,3 @@
-import { EmptyAlbumComponent } from '../../browser/view/album/EmptyAlbumComponent';
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +22,7 @@ import { BroadCast } from '../../../common/utils/BroadCast'
 import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
 import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
 import { Constants } from '../../../common/model/common/Constants'
+import { EmptyAlbumComponent } from '../../../common/view/EmptyAlbumComponent';
 
 // The item of album grid, and it's new style.
 @Component
@@ -32,12 +32,12 @@ export struct ThirdAlbumGridItem {
         [AlbumDefine.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
     ]);
     @State item: AlbumInfo = new AlbumInfo('', '', '', '', 0, '', '');
-    isMultiPick: boolean;
+    @Consume isMultiPick: boolean;
     @Provide isBigCard: boolean = false;
     @Provide gridHeight: number = 0;
     logger: Logger = new Logger('ThirdAlbumGridItem');
     isFromWallpaper: boolean;
-    maxSelectCount: number;
+    @Consume maxSelectCount: number;
     isFromFa: boolean;
     isFromFaPhoto: boolean;
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();

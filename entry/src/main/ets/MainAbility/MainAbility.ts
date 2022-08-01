@@ -175,7 +175,7 @@ export default class MainAbility extends Ability {
                             appLogger.info(`setInterval go`);
                             if (dataSource.getRawData(0) || times >= MainAbility.RETRY_MAX_TIMES) {
                                 AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, dataSource);
-                                windowStage.setUIContent(this.context, 'feature/browser/view/photo/PhotoBrowser', null);
+                                windowStage.setUIContent(this.context, 'feature/browser/view/PhotoBrowser', null);
                                 ScreenManager.getInstance().initWindowMode();
                                 clearInterval(intervalId);
                             }
@@ -183,7 +183,7 @@ export default class MainAbility extends Ability {
                         }, 50)
                     });
                 } else {
-                    windowStage.setUIContent(this.context, 'product/phone/view/index', null);
+                    windowStage.setUIContent(this.context, 'product/pad/view/index', null);
                     ScreenManager.getInstance().initWindowMode();
                 }
                 TraceControllerUtils.finishTrace('onWindowStageCreate');
@@ -212,7 +212,7 @@ export default class MainAbility extends Ability {
         }
         if (entryFrom == Constants.ENTRY_FROM_CAMERA) {
             let options = {
-                uri: 'feature/browser/view/photo/PhotoBrowser',
+                uri: 'feature/browser/view/PhotoBrowser',
                 params: {
                     pageFrom: Constants.ENTRY_FROM.CAMERA
                 }
@@ -244,7 +244,7 @@ export default class MainAbility extends Ability {
                 if (dataSource.getRawData(0) || times >= MainAbility.RETRY_MAX_TIMES) {
                     AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, dataSource);
                     let options = {
-                        uri: 'feature/browser/view/photo/PhotoBrowser',
+                        uri: 'feature/browser/view/PhotoBrowser',
                         params: {
                             pageFrom: Constants.ENTRY_FROM.CARD,
                             albumId: AppStorage.Get(Constants.FROM_ALBUM_ID),
@@ -268,7 +268,7 @@ export default class MainAbility extends Ability {
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_VIEW_DATA) {
             let options = {
-                uri: 'feature/browser/view/photo/PhotoBrowser',
+                uri: 'feature/browser/view/PhotoBrowser',
                 params: {
                     pageFrom: Constants.ENTRY_FROM.VIEW_DATA,
                     viewData: AppStorage.Get(Constants.VIEW_DATA_URI),

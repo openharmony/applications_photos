@@ -23,7 +23,7 @@ import { MediaLibraryAccess } from '../../common/access/MediaLibraryAccess'
 import { ScreenManager } from '../model/common/ScreenManager'
 import { Constants } from '../model/common/Constants';
 import { TraceControllerUtils } from '../utils/TraceControllerUtils';
-import { LoadingPanel } from '../../feature/browser/view/photo/components/LoadingPanel'
+import { LoadingPanel } from './components/LoadingPanel'
 
 @Component
 export struct PhotoItem {
@@ -331,7 +331,7 @@ export struct PhotoItem {
                     .onClick(() => {
                         if (this.item != undefined) {
                             router.push({
-                                uri: 'feature/browser/view/photo/VideoBrowser',
+                                uri: 'feature/browser/view/VideoBrowser',
                                 params: {
                                     uri: this.item.uri,
                                     dateTaken: this.item.dateTaken,

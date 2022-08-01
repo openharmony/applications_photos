@@ -88,7 +88,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
                 [newAlbumInfo, this.onCompleted.bind(this)]);
         } else {
             router.push({
-                uri: 'feature/browser/view/album/AlbumSelect',
+                uri: 'feature/albumSelect/view/AlbumSelect/AlbumSelect',
                 params: {
                     albumInfo: JSON.stringify(newAlbumInfo),
                     isNewAlbum: true

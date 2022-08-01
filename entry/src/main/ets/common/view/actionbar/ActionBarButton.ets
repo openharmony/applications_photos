@@ -24,7 +24,6 @@ export struct ActionBarButton {
     @State res: Resource = undefined;
     action: Action;
     onMenuClicked: Function;
-    isLeft = true;
     isFirst = false;
     isAutoTint = true;
     colorMode: ActionBarColorMode;

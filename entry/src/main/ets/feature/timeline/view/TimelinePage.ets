@@ -19,8 +19,7 @@ import { TimelineData } from '../../../common/model/browser/photo/TimelineData'
 import { TimelineTitleComponent } from './timelinetitlecomponent'
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
 import { Logger } from '../utils/Logger'
-import { TimelinePageActionBar } from './TimelinePageActionBar'
-import { TimelinePageToolBar } from './TimelinePageToolBar'
+import { ToolBar } from '../../../common/view/actionbar/ToolBar';
 import { Constants } from '../../../common/model/common/Constants'
 import { MenuOperation } from '../../../common/view/browserOperation/MenuOperation'
 import { MenuContext } from '../../../common/view/browserOperation/MenuContext'
@@ -48,6 +47,8 @@ import { CopyMenuOperation } from '../../../common/view/browserOperation/CopyMen
 import { TimelineScrollBar } from './TimelineScrollBar';
 import { DateUtil } from '../../../common/utils/DateUtil';
 import { AlbumInfo } from '../../../common/model/browser/album/AlbumInfo';
+import { TimelinePageBarModel } from '../model/TimelinePageBarModel'
+import { ActionBar } from '../../../common/view/actionbar/ActionBar'
 
 // PHOTO Page
 @Component
@@ -82,7 +83,7 @@ export struct TimelinePage {
     @State groupSelectMode: boolean[] = [];
     @Provide yearData: TimelineData[] = [];
     @Provide dateText: string = '';
-    @Provide isShowBar: boolean = true;
+    private barModel = new TimelinePageBarModel()
 
     aboutToAppear(): void {
         TraceControllerUtils.startTrace('TimelinePageAboutToAppear');
@@ -160,7 +161,7 @@ export struct TimelinePage {
             }
             AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
             router.push({
-                uri: 'feature/browser/view/photo/PhotoBrowser',
+                uri: 'feature/browser/view/PhotoBrowser',
                 params: {
                     position: targetIndex,
                     transition: name,
@@ -178,7 +179,7 @@ export struct TimelinePage {
             AppStorage.SetOrCreate(Constants.THIRD_SELECT_MANAGER, self.mSelectManager);
             AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
             router.push({
-                uri: 'feature/browser/view/photo/SelectPhotoBrowser',
+                uri: 'feature/browser/view/SelectPhotoBrowser',
                 params: {
                     position: targetIndex,
                     transition: name,
@@ -613,7 +614,10 @@ export struct TimelinePage {
                 if (this.isEmpty || !this.initLoadFinish) {
                     NoPhotoIndexComponent({ index: Constants.TIMELINE_PAGE_INDEX })
                 } else {
-                    TimelinePageActionBar({ onMenuClicked: this.onMenuClicked });
+                    ActionBar({
+                        actionBarProp: this.barModel.createActionBar(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected),
+                        onMenuClicked: this.onMenuClicked
+                    })
 
                     Stack() {
                         Grid(this.scroller) {
@@ -670,9 +674,11 @@ export struct TimelinePage {
                 }
             }
 
-            if (this.isSelectedMode) {
-                TimelinePageToolBar({ onMenuClicked: this.onMenuClicked })
-            }
+            ToolBar({
+                isShowBar: $isSelectedMode,
+                toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected),
+                onMenuClicked: this.onMenuClicked
+            })
             CustomDialogView()
         }
     }
