@@ -13,6 +13,10 @@
  * limitations under the License.
  */
 
+import router from '@ohos.router';
+import { CopyMenuOperation } from '../../../common/view/browserOperation/CopyMenuOperation';
+import { MoveMenuOperation } from '../../../common/view/browserOperation/MoveMenuOperation';
+import { AlbumInfo } from '../../../common/model/browser/album/AlbumInfo';
 import { AlbumSetDataSource } from '../../../common/model/browser/album/AlbumSetDataSource'
 import { Constants } from '../../../common/model/common/Constants'
 import { ScreenManager } from '../../../common/model/common/ScreenManager'
@@ -23,7 +27,7 @@ import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
 import { TraceControllerUtils } from '../../../common/utils/TraceControllerUtils'
 import { TabBarForAlbumSet } from '../../../common/view/TabBar'
 import { TabItemWithText } from '../../../common/model/common/TabItem'
-import { AlbumSetSelectManager } from '../../../common/model/browser/SelectManager'
+import { AlbumSetSelectManager, SelectManager } from '../../../common/model/browser/SelectManager'
 import { AlbumSetNewMenuOperation } from '../../../common/view/browserOperation/AlbumSetNewMenuOperation'
 import { DistributedDataSource } from '../../../common/model/browser/album/DistributedDataSource'
 import { MenuContext } from '../../../common/view/browserOperation/MenuContext'
@@ -79,6 +83,7 @@ export struct AlbumSetPage {
     private needNotify = false;
     private ignoreLocalNotify = false;
     private barModel: AlbumBarModel = new AlbumBarModel()
+    private toPhotoGrid: boolean = false;
 
     onMenuClicked(action: Action, arg: any[]) {
         this.logger.info(`onMenuClicked, action: ${action.actionID}`);
@@ -145,6 +150,11 @@ export struct AlbumSetPage {
         this.ignoreLocalNotify = false;
         this.albums.onChange(Constants.MEDIA_TYPE_IMAGE);
         this.albums.unfreeze();
+        let newAlbum = AppStorage.Get<boolean>(Constants.APP_KEY_NEW_ALBUM);
+        if (newAlbum) {
+            this.toPhotoGrid = true;
+            AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+        }
     }
 
     aboutToAppear(): void {
@@ -155,6 +165,28 @@ export struct AlbumSetPage {
         this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
             this.isEmpty = (size == 0);
+            let newAlbum = AppStorage.Get<boolean>(Constants.APP_KEY_NEW_ALBUM);
+            if (!this.isEmpty && newAlbum && this.toPhotoGrid) {
+                this.toPhotoGrid = false;
+                let newAlbum = AppStorage.Get<AlbumInfo>(Constants.APP_KEY_NEW_ALBUM_TARGET);
+                for (let album of this.albums.mediaSetList) {
+                    if (album.name == newAlbum.name
+                    && album.displayName == newAlbum.displayName
+                    && album.relativePath == newAlbum.relativePath) {
+                        let options = {
+                            url: 'feature/browser/view/photoGrid/PhotoGridPage',
+                            params: {
+                                item: JSON.stringify(album)
+                            }
+                        }
+                        router.push(options);
+                        break;
+                    }
+                }
+                AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
+                AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
+                AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+            }
         });
 
         this.appBroadCast.on(BroadCastConstants.RESET_ZERO, this.onResetZero.bind(this));
@@ -220,10 +252,53 @@ export struct AlbumSetPage {
         this.logger.info(`onIndexPageShow`)
         if (this.isShow && this.isInCurrentTab) {
             this.onActive();
+            this.createAlbum();
         } else if (!this.isShow && this.isInCurrentTab) {
             this.onInActive();
         } else {
         }
+    }
+
+    createAlbum() {
+        let newAlbum = AppStorage.Get<boolean>(Constants.APP_KEY_NEW_ALBUM);
+        if (newAlbum) {
+            this.broadCast.emit(BroadCastConstants.SHOW_COPY_OR_MOVE_DIALOG,
+                [this.moveOperation.bind(this), this.copyOperation.bind(this)]);
+        }
+    }
+
+    private copyOperation() {
+        let selectManager = AppStorage.Get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+        let targetAlbum = AppStorage.Get<AlbumInfo>(Constants.APP_KEY_NEW_ALBUM_TARGET);
+        if (undefined == selectManager || undefined == targetAlbum) {
+            return;
+        }
+        let menuContext = new MenuContext();
+        menuContext
+            .withSelectManager(selectManager)
+            .withOperationStartCallback(this.onOperationStart.bind(this))
+            .withOperationEndCallback(this.onOperationEnd.bind(this))
+            .withBroadCast(this.broadCast)
+            .withAlbumInfo(targetAlbum);
+        let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(CopyMenuOperation, menuContext);
+        menuOperation.doAction();
+    }
+
+    private moveOperation() {
+        let selectManager = AppStorage.Get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+        let targetAlbum = AppStorage.Get<AlbumInfo>(Constants.APP_KEY_NEW_ALBUM_TARGET);
+        if (undefined == selectManager || undefined == targetAlbum) {
+            return;
+        }
+        let menuContext = new MenuContext();
+        menuContext
+            .withSelectManager(selectManager)
+            .withOperationStartCallback(this.onOperationStart.bind(this))
+            .withOperationEndCallback(this.onOperationEnd.bind(this))
+            .withBroadCast(this.broadCast)
+            .withAlbumInfo(targetAlbum);
+        let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(MoveMenuOperation, menuContext);
+        menuOperation.doAction();
     }
 
     onModeChange() {

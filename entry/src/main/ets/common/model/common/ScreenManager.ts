@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -427,5 +428,29 @@ export class ScreenManager {
 
     getScreenColumns(): number {
         return this.columns;
+    }
+
+    setKeepScreenOn() {
+        this.logger.info('setKeepScreenOn start');
+        let topWindow: any = AppStorage.Get('mainWindow');
+        try {
+            topWindow.setKeepScreenOn(true, () => {
+                this.logger.info('setKeepScreenOn Succeeded');
+            })
+        } catch(err) {
+            this.logger.error(`setKeepScreenOn err: ${err}`);
+        }
+    }
+
+    setKeepScreenOff() {
+        this.logger.info('setKeepScreenOff start');
+        let topWindow: any = AppStorage.Get('mainWindow');
+        try {
+            topWindow.setKeepScreenOn(false, () => {
+                this.logger.info('setKeepScreenOff Succeeded');
+            })
+        } catch(err) {
+            this.logger.error(`setKeepScreenOff err: ${err}`);
+        }
     }
 }

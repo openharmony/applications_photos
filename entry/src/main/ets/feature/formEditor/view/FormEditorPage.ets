@@ -453,7 +453,7 @@ struct FormEditorPage {
                         bottom: $r('app.float.FA_ListCard_padding_top')
                     })
                     .backgroundColor($r('app.color.white'))
-                    .borderRadius($r("app.float.FA_ListCard_radius"))
+                    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
                     .onClick(() => {
                         this.selectPhoto();
                     })
@@ -486,7 +486,7 @@ struct FormEditorPage {
                         bottom: $r('app.float.FA_ListCard_padding_top')
                     })
                     .backgroundColor($r('app.color.white'))
-                    .borderRadius($r("app.float.FA_ListCard_radius"))
+                    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
                     .onClick(() => {
                         this.selectAlbum();
                     })
@@ -502,7 +502,7 @@ struct FormEditorPage {
                 Row() {
                     Text($r('app.string.fa_setting_text'))
                         .fontSize($r('sys.float.ohos_id_text_size_body2'))
-                        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                        .fontColor($r('app.color.FA_subTitle_text_color'))
                 }
                 .padding({
                     top: $r('app.float.FA_setting_padding_top'),
@@ -545,7 +545,7 @@ struct FormEditorPage {
                         bottom: $r('app.float.FA_ListCard_padding_top')
                     })
                     .backgroundColor($r('app.color.white'))
-                    .borderRadius($r("app.float.FA_ListCard_radius"))
+                    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
                     .onClick(() => {
                         this.setPlayInterval()
                     })

@@ -55,7 +55,7 @@ export struct DeleteProgressDialog {
                     .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                     .margin({
                         left: $r('app.float.process_bar_margin_left'),
-                        right: $r('app.float.process_bar_margin_left'),
+                        right: $r('app.float.delete_process_bar_margin_right'),
                     })
             }
             .width('100%')

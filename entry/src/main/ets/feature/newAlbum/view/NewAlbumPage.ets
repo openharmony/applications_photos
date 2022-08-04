@@ -90,8 +90,13 @@ export struct NewAlbumPage {
                 }
                 this.logger.info(`onMenuClicked, action: ${action.actionID} newAlbum: ${this.isNewAlbum}`);
                 if (this.isNewAlbum) {
-                    this.broadCast.emit(BroadCastConstants.SHOW_COPY_OR_MOVE_DIALOG,
-                        [this.moveOperation.bind(this), this.copyOperation.bind(this)]);
+                    let url = this.isHorizontal ? 'product/pad/view/index' : 'product/phone/view/index'
+                    router.back({
+                        uri: url,
+                        params: {
+                            jumpSource: JumpSourceToMain.ALBUM
+                        }
+                    })
                 } else {
                     this.copyOperation();
                 }

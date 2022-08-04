@@ -44,7 +44,7 @@ export class OperationImpl implements BrowserOperationInterface {
 
         TraceControllerUtils.startTrace('openAssetR')
         let fd = await MediaLibraryAccess.getInstance().openAsset('R', source);
-        TraceControllerUtils.finishTrace('openAsset')
+        TraceControllerUtils.finishTrace('openAssetR')
         if (fd <= 0) {
             throw 'fd is invalid'
             return;
