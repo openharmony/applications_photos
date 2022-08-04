@@ -571,7 +571,7 @@ export struct AlbumSetPage {
                 }.visibility(this.isEmpty && !this.isTabBarShow ? Visibility.None : Visibility.Visible)
 
                 ToolBar({
-                    isShowBar: $isAlbumSetSelectedMode,
+                    isShowBar: this.isAlbumSetSelectedMode,
                     toolMenuList: this.barModel.getMenuList(
                         this.isAlbumSetSelectedMode,
                         this.selectedAlbumsCount,

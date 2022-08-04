@@ -675,7 +675,7 @@ export struct TimelinePage {
             }
 
             ToolBar({
-                isShowBar: $isSelectedMode,
+                isShowBar: this.isSelectedMode,
                 toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected),
                 onMenuClicked: this.onMenuClicked
             })

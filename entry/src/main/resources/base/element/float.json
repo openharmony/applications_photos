@@ -757,6 +757,10 @@
       "value": "4vp"
     },
     {
+      "name": "delete_process_bar_margin_right",
+      "value": "12vp"
+    },
+    {
       "name": "process_bar_margin_right",
       "value": "44vp"
     },
