@@ -754,11 +754,15 @@
     },
     {
       "name": "process_bar_margin_left",
-      "value": "4"
+      "value": "4vp"
+    },
+    {
+      "name": "delete_process_bar_margin_right",
+      "value": "12vp"
     },
     {
       "name": "process_bar_margin_right",
-      "value": "40"
+      "value": "44vp"
     },
     {
       "name": "menu_padding_horizontal",
@@ -854,7 +858,7 @@
     },
     {
       "name": "FA_setting_padding_left",
-      "value": "24vp"
+      "value": "12vp"
     },
     {
       "name": "FA_setting_padding_bottom",

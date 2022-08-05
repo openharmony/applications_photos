@@ -98,7 +98,7 @@ export struct TimelinePage {
         this.mSelectManager.setTotalCount(this.dataSource.getMediaCount());
         this.moreMenuList = [Action.MOVE, Action.COPY, Action.INFO];
         this.isEmpty = !Boolean(this.dataSource.getMediaCount());
-        this.initLoadFinish = Boolean(this.dataSource.getMediaCount());
+        this.initLoadFinish = this.dataSource.isFirstPatchDataRequest;
         MediaObserver.getInstance().registerObserver(this.dataObserver);
         this.dataSource.registerCallback('updateGroupData', (newState: TimelineData[]) => {
             self.mSelectManager.updateGroupData(newState);
@@ -675,7 +675,7 @@ export struct TimelinePage {
             }
 
             ToolBar({
-                isShowBar: $isSelectedMode,
+                isShowBar: this.isSelectedMode,
                 toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected),
                 onMenuClicked: this.onMenuClicked
             })

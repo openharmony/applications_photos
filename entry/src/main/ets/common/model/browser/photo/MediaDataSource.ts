@@ -87,6 +87,7 @@ export class MediaDataSource extends AbsDataSource {
     deviceId: string = undefined;
     isRefresh: boolean = false;
     isEditSaveReload: boolean = false;
+    isFirstPatchDataRequest: boolean = false;
 
     constructor(windowSize: number) {
         super();
@@ -166,6 +167,7 @@ export class MediaDataSource extends AbsDataSource {
                  milliseconds to load first batch: ${(assets == null ? 0 : assets.length)}`);
                 this.updateMediaData(this.firstPatchDataRequestTime, start, assets);
                 this.broadCast && this.broadCast.emit(Constants.FIRST_PATCH_LOAD_FINISH, []);
+                this.isFirstPatchDataRequest = true
                 let secondPatchDataCallback: GetItemsCallback = new GetItemsCallback(this, limit);
                 this.photoDataImpl.getData(secondPatchDataCallback, {
                     id: this.albumId,

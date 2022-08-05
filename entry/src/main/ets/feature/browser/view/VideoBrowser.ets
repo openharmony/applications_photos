@@ -95,11 +95,13 @@ struct VideoBrowser {
                     this.isShowBar = !this.isShowBar;
                 })
                 .onStart(() => {
+                    ScreenManager.getInstance().setKeepScreenOn();
                 })
                 .onPause(() => {
                 })
                 .onFinish(() => {
                     this.isShowBar = true;
+                    ScreenManager.getInstance().setKeepScreenOff();
                 })
                 .autoPlay(true)
 

@@ -79,8 +79,7 @@ export struct AlbumGridItemNewStyle {
         this.bigWidth = gridWidth * 2 + Constants.ALBUM_SET_GUTTER;
         let numberHeight = px2vp(fp2px(Constants.TEXT_SIZE_BODY2));
         let nameHeight = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE1));
-        this.icHeight = this.gridHeight - Constants.ALBUM_SET_NEW_ICON_MARGIN;
-        -numberHeight - nameHeight;
+        this.icHeight = this.gridHeight - Constants.ALBUM_SET_NEW_ICON_MARGIN - numberHeight - nameHeight;
 
         if (Constants.ANGLE_90 == this.item.coverOrientation
         || Constants.ANGLE_270 == this.item.coverOrientation) {

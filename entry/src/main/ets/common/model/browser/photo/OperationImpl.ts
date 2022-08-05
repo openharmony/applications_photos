@@ -44,7 +44,7 @@ export class OperationImpl implements BrowserOperationInterface {
 
         TraceControllerUtils.startTrace('openAssetR')
         let fd = await MediaLibraryAccess.getInstance().openAsset('R', source);
-        TraceControllerUtils.finishTrace('openAsset')
+        TraceControllerUtils.finishTrace('openAssetR')
         if (fd <= 0) {
             throw 'fd is invalid'
             return;
@@ -58,9 +58,9 @@ export class OperationImpl implements BrowserOperationInterface {
             return;
         }
 
-        TraceControllerUtils.startTrace('readAndWriteData')
-        await this.readAndWriteData(fd, targetFd);
-        TraceControllerUtils.finishTrace('readAndWriteData')
+        TraceControllerUtils.startTrace('copyFile')
+        await fileio.copyFile(fd, targetFd)
+        TraceControllerUtils.finishTrace('copyFile')
 
         TraceControllerUtils.startTrace('sourceClose')
         await source.close(fd);
