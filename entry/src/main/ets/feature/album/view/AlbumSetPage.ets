@@ -46,6 +46,7 @@ import { AlbumGridItemNewStyle } from './AlbumGridItemNewStyle'
 import { DistributedAlbumGriItem } from './DistributedAlbumGriItem'
 import { AlbumSetDeleteMenuOperation } from '../operation/AlbumSetDeleteMenuOperation'
 import { AlbumSetRenameMenuOperation } from '../operation/AlbumSetRenameMenuOperation'
+import { AlbumScrollBar } from '../../../common/view/scrollBar/AlbumScrollBar'
 
 // Album Set Page
 @Component
@@ -57,6 +58,7 @@ export struct AlbumSetPage {
     @Consume @Watch('onModeChange') isAlbumSetSelectedMode: boolean;
     @Provide('selectedCount') selectedAlbumsCount: number = 0;
     @Provide isDisableDelete: boolean = false;
+    @Provide isHideScrollBar: boolean = true;
     @Provide isDisableRename: boolean = false;
     @State isEmpty: boolean = true;
     @Provide gridColumnsCount: number = 0;
@@ -76,7 +78,7 @@ export struct AlbumSetPage {
     isDataFreeze: boolean = false;
 
     // the switch of distributed page
-    @Provide isTabBarShow: boolean = false;
+    @Provide('tabBarShow') isTabBarShow: boolean = false;
     @Provide moreMenuList: Action[] = new Array<Action>();
     private tabsController: TabsController = new TabsController();
     private currentIndex: number = Constants.LOCAL_TAB_INDEX;
@@ -84,6 +86,7 @@ export struct AlbumSetPage {
     private ignoreLocalNotify = false;
     private barModel: AlbumBarModel = new AlbumBarModel()
     private toPhotoGrid: boolean = false;
+    private isNewAlbum: boolean = false;
 
     onMenuClicked(action: Action, arg: any[]) {
         this.logger.info(`onMenuClicked, action: ${action.actionID}`);
@@ -150,8 +153,8 @@ export struct AlbumSetPage {
         this.ignoreLocalNotify = false;
         this.albums.onChange(Constants.MEDIA_TYPE_IMAGE);
         this.albums.unfreeze();
-        let newAlbum = AppStorage.Get<boolean>(Constants.APP_KEY_NEW_ALBUM);
-        if (newAlbum) {
+
+        if (this.isNewAlbum) {
             this.toPhotoGrid = true;
             AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
         }
@@ -165,8 +168,9 @@ export struct AlbumSetPage {
         this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
             this.isEmpty = (size == 0);
-            let newAlbum = AppStorage.Get<boolean>(Constants.APP_KEY_NEW_ALBUM);
-            if (!this.isEmpty && newAlbum && this.toPhotoGrid) {
+            this.isHideScrollBar = (size <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
+            if (!this.isEmpty && this.isNewAlbum && this.toPhotoGrid) {
+                this.isNewAlbum = false;
                 this.toPhotoGrid = false;
                 let newAlbum = AppStorage.Get<AlbumInfo>(Constants.APP_KEY_NEW_ALBUM_TARGET);
                 for (let album of this.albums.mediaSetList) {
@@ -253,6 +257,7 @@ export struct AlbumSetPage {
         if (this.isShow && this.isInCurrentTab) {
             this.onActive();
             this.createAlbum();
+            this.isHideScrollBar = (this.albums.totalCount() <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         } else if (!this.isShow && this.isInCurrentTab) {
             this.onInActive();
         } else {
@@ -262,12 +267,14 @@ export struct AlbumSetPage {
     createAlbum() {
         let newAlbum = AppStorage.Get<boolean>(Constants.APP_KEY_NEW_ALBUM);
         if (newAlbum) {
+            AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
             this.broadCast.emit(BroadCastConstants.SHOW_COPY_OR_MOVE_DIALOG,
                 [this.moveOperation.bind(this), this.copyOperation.bind(this)]);
         }
     }
 
     private copyOperation() {
+        this.isNewAlbum = true;
         let selectManager = AppStorage.Get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
         let targetAlbum = AppStorage.Get<AlbumInfo>(Constants.APP_KEY_NEW_ALBUM_TARGET);
         if (undefined == selectManager || undefined == targetAlbum) {
@@ -285,6 +292,7 @@ export struct AlbumSetPage {
     }
 
     private moveOperation() {
+        this.isNewAlbum = true;
         let selectManager = AppStorage.Get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
         let targetAlbum = AppStorage.Get<AlbumInfo>(Constants.APP_KEY_NEW_ALBUM_TARGET);
         if (undefined == selectManager || undefined == targetAlbum) {
@@ -497,6 +505,8 @@ export struct AlbumSetPage {
             })
             .columnsGap($r('app.float.album_set_grid_column_gap'))
             .rowsGap($r('app.float.album_set_grid_row_gap'))
+
+            AlbumScrollBar({ scroller: this.scroller, hasSideBar: this.isSidebar })
         }
     }
 
@@ -519,6 +529,8 @@ export struct AlbumSetPage {
         })
         .columnsGap($r('app.float.album_set_grid_column_gap'))
         .rowsGap($r('app.float.album_set_grid_row_gap'))
+
+        AlbumScrollBar({ scroller: this.scroller, hasSideBar: this.isSidebar })
     }
 
     build() {

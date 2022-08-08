@@ -172,36 +172,45 @@ struct MediaOperationPage {
     build() {
         Column() {
             MediaOperationActionBar({ onMenuClicked: this.onMenuClicked })
-
             List({ scroller: this.scroller }) {
-                LazyForEach(this.albums, (item: AlbumInfo, index) => {
-                    ListItem() {
-                        if (!AlbumDefine.ALBUM_DISABLE_COPY_LIST.has(item.id) && item.id != this.sourceAlbumId) {
-                            Column() {
-                                AlbumListCard({ item: item })
-                                if (!this.isLast(item)) {
-                                    Divider().vertical(false).strokeWidth(1)
-                                        .color($r('sys.color.ohos_id_color_list_separator'))
-                                        .margin({ left: $r('app.float.album_list_card_divider_margin_left') })
+                ListItem() {
+                    List() {
+                        LazyForEach(this.albums, (item: AlbumInfo, index) => {
+                            ListItem() {
+                                if (!AlbumDefine.ALBUM_DISABLE_COPY_LIST.has(item.id) && item.id != this.sourceAlbumId) {
+                                    Column() {
+                                        AlbumListCard({ item: item })
+                                        if (!this.isLast(item)) {
+                                            Divider().vertical(false).strokeWidth(1)
+                                                .color($r('sys.color.ohos_id_color_list_separator'))
+                                                .margin({ left: $r('app.float.album_list_card_divider_margin_left') })
+                                        }
+                                    }
                                 }
                             }
-                        }
+                        }, item => item.id)
                     }
-                }, item => item.id)
+                    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
+                    .backgroundColor($r('sys.color.ohos_id_color_card_bg'))
+                    .padding({
+                        left: $r('app.float.list_card_margin'),
+                        right: $r('app.float.list_card_margin')
+                    })
+                }
             }
             .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
+            .scrollBar(BarState.Auto)
+            .padding({
+                left: $r('app.float.list_card_margin'),
+                right: $r('app.float.list_card_margin')
+            })
+            .width(this.listCardWidth)
             .margin({
                 top: $r('app.float.album_let_page_padding_top'),
                 left: $r('app.float.max_padding_start'),
                 right: $r('app.float.max_padding_end'),
                 bottom: this.leftBlank[3]
             })
-            .padding({
-                left: $r('app.float.list_card_margin'),
-                right: $r('app.float.list_card_margin')
-            })
-            .width(this.listCardWidth)
-            .backgroundColor($r('sys.color.ohos_id_color_card_bg'))
 
             CustomDialogView()
         }

@@ -101,6 +101,14 @@
       "value":"12vp"
     },
     {
+      "name":"album_tab_col_4_gap",
+      "value":"16vp"
+    },
+    {
+      "name":"album_tab_col_8_gap",
+      "value":"24vp"
+    },
+    {
       "name":"album_set_grid_row_gap",
       "value":"12vp"
     },
@@ -959,6 +967,22 @@
     {
       "name": "tip_popup_border_radius",
       "value": "15vp"
+    },
+    {
+      "name": "album_scrollbar_normal_size",
+      "value": "6vp"
+    },
+    {
+      "name": "album_scrollbar_select_size",
+      "value": "12vp"
+    },
+    {
+      "name": "album_scrollbar_height_size",
+      "value": "80vp"
+    },
+    {
+      "name": "album_scrollbar_radius",
+      "value": "50vp"
     }
   ]
 }

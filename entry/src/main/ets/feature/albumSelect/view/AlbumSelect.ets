@@ -32,6 +32,7 @@ import { AlbumInfo } from '../../../common/model/browser/album/AlbumInfo';
 import { BroadCastManager } from '../../../common/model/common/BroadCastManager';
 import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants';
 import { AlbumSelectBarModel } from '../model/AlbumSelectBarModel';
+import { AlbumScrollBar } from '../../../common/view/scrollBar/AlbumScrollBar'
 
 @Entry
 @Component
@@ -43,6 +44,8 @@ export struct AlbumSelect {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
     @Provide moreMenuList: Action[] = new Array<Action>();
+    @Provide isHideScrollBar: boolean = true;
+    @Provide('tabBarShow') isTabBarShow: boolean = false;
     private isActive = false;
     private logger: Logger = new Logger('AlbumSelect');
     private scroller: Scroller = new Scroller();
@@ -57,6 +60,7 @@ export struct AlbumSelect {
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
             this.logger.info(`ON_LOADING_FINISHED size: ${size}`);
             this.isEmpty = size == 0;
+            this.isHideScrollBar = (size <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         });
         this.albums = new AlbumSetDataSource(this.broadCast);
         this.onActive();
@@ -88,10 +92,18 @@ export struct AlbumSelect {
     onPageShow() {
         BroadCastManager.getInstance().getBroadCast().emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
         this.onActive();
+        this.isHideScrollBar = (this.albums.totalCount() < (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
     }
 
     onPageHide() {
         this.onInActive();
+    }
+
+    onBackPress() {
+        AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
+        AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
+        AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+        return false;
     }
 
     // Callback when the page is in the foreground
@@ -120,6 +132,8 @@ export struct AlbumSelect {
             case Action.CANCEL:
                 this.logger.info('clear SelectManager data');
                 this.mSelectManager.onModeChange(false);
+                AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
+                AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
                 AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
                 router.back();
                 break;
@@ -173,6 +187,8 @@ export struct AlbumSelect {
                 })
                 .columnsGap($r('app.float.album_set_grid_column_gap'))
                 .rowsGap($r('app.float.album_set_grid_row_gap'))
+
+                AlbumScrollBar({ scroller: this.scroller })
             }
         }
         .backgroundColor($r('app.color.default_background_color'))
