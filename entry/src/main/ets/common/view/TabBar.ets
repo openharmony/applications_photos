@@ -19,7 +19,7 @@ import { BroadCastManager } from '../model/common/BroadCastManager'
 import { BroadCast } from '../utils/BroadCast'
 import { BroadCastConstants } from '../model/common/BroadCastConstants'
 import { Constants } from '../model/common/Constants'
-import { ScreenManager } from '../model/common/ScreenManager';
+import { ScreenManager, ColumnSize } from '../model/common/ScreenManager'
 
 export enum DEVICE_TYPE {
     DEVICE_PHONE,
@@ -31,7 +31,7 @@ export struct TabBar {
     @Consume isSelectedMode: boolean;
     @Consume isAlbumSetSelectedMode: boolean;
     private currentIndex: number;
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
+    private isSidebar: boolean = false;
     private tabs: TabItem[] = [];
     private controller: TabsController;
     private logger: Logger = new Logger('TabBar');
@@ -147,6 +147,9 @@ export struct TabBarForAlbumSet {
     private tabs: TabItemWithText[] = [];
     private controller: TabsController;
     private logger: Logger = new Logger('TabBarForAlbumSet');
+    @State tabWidth: string = '100%';
+    @State tabCol: Resource = $r('app.float.album_tab_col_4_gap');
+    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
 
     aboutToAppear(): void {
         this.onTabSelected = this.onTabSelected.bind(this);
@@ -154,6 +157,16 @@ export struct TabBarForAlbumSet {
         this.tabs.forEach((tab: TabItemWithText) => {
             this.logger.info(`${JSON.stringify(tab.name)}, ${tab.isSelected}`);
         });
+        let col = ScreenManager.getInstance().getScreenColumns();
+        if (col < ColumnSize.COLUMN_EIGHT) {
+            this.tabWidth = '100%';
+            this.tabCol = $r('app.float.album_tab_col_4_gap');
+        } else {
+            let sideWidth = this.isSidebar ? Constants.TAB_BAR_WIDTH : 0;
+            this.tabWidth = (ScreenManager.getInstance().getWinWidth() - sideWidth) / Constants.NUMBER_2 + 'vp';
+            this.tabCol = $r('app.float.album_tab_col_8_gap');
+        }
+        this.logger.info(`album tabs item width: ${this.tabWidth}, col: ${col}`);
     }
 
     private onTabSelected(index: number) {
@@ -172,9 +185,20 @@ export struct TabBarForAlbumSet {
             justifyContent: FlexAlign.Center,
             alignItems: ItemAlign.Start
         }) {
-            ForEach(this.tabs, (tab: TabItemWithText) => {
-                TabWithText({ tabItemWithText: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
-            }, tab => tab.name.id)
+            Grid() {
+                ForEach(this.tabs, (tab: TabItemWithText) => {
+                    GridItem() {
+                        TabWithText({
+                            tabItemWithText: tab,
+                            index: this.tabs.indexOf(tab),
+                            onTabSelected: this.onTabSelected
+                        })
+                    }
+                }, tab => tab.name.id)
+            }
+            .width(this.tabWidth)
+            .columnsTemplate('1fr '.repeat(this.tabs.length))
+            .columnsGap(this.tabCol)
         }
         .width('100%')
         .visibility(this.isTabBarShow ? Visibility.Visible : Visibility.None)
@@ -228,6 +252,7 @@ struct TabWithText {
                 .visibility(this.tabItemWithText.isSelected ? Visibility.Visible : Visibility.Hidden)
         }
         .height('100%')
+        .width('100%')
         .onClick(() => {
             if (!this.isAlbumSetSelectedMode) {
                 this.onTabSelected && this.onTabSelected(this.index)

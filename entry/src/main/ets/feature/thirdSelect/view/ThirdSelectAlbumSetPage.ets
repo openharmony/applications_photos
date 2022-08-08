@@ -30,6 +30,7 @@ import { AlbumDefine } from '../../../common/model/browser/AlbumDefine'
 import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
 import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
 import { ThirdSelectBarModel } from '../model/ThirdSelectBarModel'
+import { AlbumScrollBar } from '../../../common/view/scrollBar/AlbumScrollBar'
 
 // Third Select AlbumSet Page
 @Entry
@@ -58,6 +59,9 @@ export struct ThirdSelectAlbumSetPage {
     private barModel: ThirdSelectBarModel = new ThirdSelectBarModel()
     private leftAction: Action = Action.BACK
     private title: string | Resource = ""
+    private scroller: Scroller = new Scroller();
+    @Provide isHideScrollBar: boolean = true;
+    @Provide('tabBarShow') isTabBarShow: boolean = false;
 
     aboutToAppear(): void {
         this.albums = new AlbumSetDataSource(this.broadCast);
@@ -92,6 +96,7 @@ export struct ThirdSelectAlbumSetPage {
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
             this.logger.info(`ON_LOADING_FINISHED size: ${size}`);
             this.isEmpty = size == 0;
+            this.isHideScrollBar = (size <= (this.gridRowCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         });
         if (this.isMultiPick) {
             this.selectManager.registerCallback('thirdSelectUpdateCount', (newState: number) => {
@@ -189,7 +194,7 @@ export struct ThirdSelectAlbumSetPage {
                 if (this.isEmpty) {
                     NoPhotoComponent({ title: $r('app.string.title_no_albums') })
                 }
-                Grid() {
+                Grid(this.scroller) {
                     LazyForEach(this.albums, (item) => {
                         if (item.name != AlbumDefine.ALBUM_ID_RECYCLE) {
                             if (this.albums.mediaSetList.indexOf(item) == 0) {
@@ -224,6 +229,8 @@ export struct ThirdSelectAlbumSetPage {
                 })
                 .columnsGap($r('app.float.album_set_grid_column_gap'))
                 .rowsGap($r('app.float.album_set_grid_row_gap'))
+
+                AlbumScrollBar({ scroller: this.scroller })
             }
         }
         .backgroundColor($r('app.color.default_background_color'))

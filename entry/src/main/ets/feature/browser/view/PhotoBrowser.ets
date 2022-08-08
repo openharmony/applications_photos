@@ -676,6 +676,7 @@ struct PhotoBrowser {
                         }
                     }
                     this.onPhotoChanged(newIndex);
+                    this.dataSource.onDataChanged(newIndex);
                 }
             } catch (e) {
                 this.logger.error(`ON_DATA_RELOADED_WITH_EDIT error ${e}`);

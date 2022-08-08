@@ -323,6 +323,10 @@
     {
       "name": "scroll_bar_side_text_shadow_color",
       "value": "#1A000000"
+    },
+    {
+      "name": "album_scrollbar_color",
+      "value": "#ffb3b3b3"
     }
   ]
 }

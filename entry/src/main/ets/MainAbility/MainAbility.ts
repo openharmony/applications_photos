@@ -32,6 +32,7 @@ const appLogger: Logger = new Logger('app');
 let isFromCard = false;
 let isFromCamera = false;
 let appBroadCast = BroadCastManager.getInstance().getBroadCast();
+const pagePath: string = 'product/phone/view/index';
 
 export default class MainAbility extends Ability {
     private static readonly RETRY_MAX_TIMES = 100;
@@ -183,7 +184,7 @@ export default class MainAbility extends Ability {
                         }, 50)
                     });
                 } else {
-                    windowStage.setUIContent(this.context, 'product/pad/view/index', null);
+                    windowStage.setUIContent(this.context, pagePath, null);
                     ScreenManager.getInstance().initWindowMode();
                 }
                 TraceControllerUtils.finishTrace('onWindowStageCreate');
@@ -258,7 +259,7 @@ export default class MainAbility extends Ability {
             }, 50)
         } else if (entryFrom == Constants.ENTRY_FROM_FORM_ABILITY_NONE) {
             let options = {
-                uri: 'product/phone/view/index'
+                uri: pagePath
             }
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_FORM_FORM_EDITOR) {
