@@ -127,9 +127,57 @@ export class TimelineDataSource extends MediaDataSource {
         this.logger.info(`updateGroupSize, old size: ${previousSize} , old mediaCount: ${previousMediaCount},\
             new size: ${this.size}, new mediaCount: ${this.mediaCount}`);
 
-        this.isCountChanged = previousSize != this.size;
-        this.isCountReduced = previousSize > this.size;
+        this.isCountChanged = previousMediaCount != this.mediaCount;
+        this.isCountReduced = previousMediaCount > this.mediaCount;
         this.updateCountPostProcess();
+    }
+
+    deleteDataUpdateSize(indexes: number[]) {
+        this.logger.info(`deleteDataUpdateSize ${indexes}`);
+        let count = 0;
+        let isGroup = true
+        for (let index of indexes) {
+            let newIndex = index - count;
+            if (this.dataIndexes[newIndex] == TITLE_DATA_INDEX) {
+                for (let i = newIndex + 1; i < this.dataIndexes.length; i++) {
+                    this.layoutIndexes[i] = this.layoutIndexes[i] - 1;
+                    this.groupIndexes[i] = this.groupIndexes[i] - 1;
+                }
+            } else {
+                for (let i = newIndex + 1; i < this.dataIndexes.length; i++) {
+                    if (this.dataIndexes[i] == TITLE_DATA_INDEX) {
+                        isGroup = false;
+                    } else {
+                        this.dataIndexes[i] = this.dataIndexes[i] - 1;
+                        if (isGroup) {
+                            this.groupViewIndexes[i] = this.groupViewIndexes[i] - 1;
+                        }
+                    }
+
+                    this.layoutIndexes[i] = this.layoutIndexes[i] - 1;
+                }
+                isGroup = true
+                this.layoutIndexes.splice(newIndex, 1);
+            }
+
+            this.dataIndexes.splice(newIndex, 1);
+            this.groupIndexes.splice(newIndex, 1);
+            this.groupViewIndexes.splice(newIndex, 1);
+            count++;
+        }
+
+        this.size = this.size - indexes.length;
+    }
+
+    getDataIndexes(indexes: number[]) {
+        let newDataIndexes = []
+        for (let index of indexes) {
+            if (this.dataIndexes[index] != TITLE_DATA_INDEX) {
+                newDataIndexes.push(this.dataIndexes[index]);
+            }
+        }
+
+        return newDataIndexes
     }
 
     emitCountUpdateCallbacks(): void {

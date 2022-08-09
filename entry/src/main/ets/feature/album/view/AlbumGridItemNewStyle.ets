@@ -143,7 +143,7 @@ export struct AlbumGridItemNewStyle {
                                 .height($r('app.float.recycle_album_cover_icon_size'))
                                 .fillColor($r('app.color.empty_or_recycle_album_icon'))
                         }
-                        .height(this.icHeight)
+                        .height(this.gridHeight)
                         .width('100%')
                     }
                     .height(this.gridHeight)

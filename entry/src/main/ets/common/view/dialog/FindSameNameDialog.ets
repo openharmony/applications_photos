@@ -82,7 +82,7 @@ export struct FindSameNameDialog {
                 Column() {
                     Text($r('app.string.target_has_same_name', this.getTitle(this.sourceDetails.displayName)))
                         .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
-                        .fontWeight(FontWeight.Bold)
+                        .fontWeight(FontWeight.Medium)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                         .maxLines(3)
                 }
@@ -92,8 +92,8 @@ export struct FindSameNameDialog {
             Row() {
                 Column() {
                     Text($r('app.string.source_file_location'))
-                        .fontSize($r('sys.float.ohos_id_text_size_sub_title3'))
-                        .fontWeight(FontWeight.Bold)
+                        .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
+                        .fontWeight(FontWeight.Medium)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
@@ -114,7 +114,7 @@ export struct FindSameNameDialog {
                     Text($r('app.string.file_time_location', this.dataTime))
                         .fontSize($r('sys.float.ohos_id_text_size_body2'))
                         .fontWeight(FontWeight.Regular)
-                        .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 }
             }.margin({
                 bottom: $r('app.float.same_name_date_title_dialog_bottom') })
@@ -123,7 +123,7 @@ export struct FindSameNameDialog {
                 Column() {
                     Text($r('app.string.target_file_location'))
                         .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
-                        .fontWeight(FontWeight.Bold)
+                        .fontWeight(FontWeight.Medium)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 }
             }.margin({
@@ -144,7 +144,7 @@ export struct FindSameNameDialog {
                     Text($r('app.string.file_time_location', this.targetDataTime))
                         .fontSize($r('sys.float.ohos_id_text_size_body2'))
                         .fontWeight(FontWeight.Regular)
-                        .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 }
             }.margin({
                 bottom: $r('app.float.same_name_date_title_dialog_bottom') })

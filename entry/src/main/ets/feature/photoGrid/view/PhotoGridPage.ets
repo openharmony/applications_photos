@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -80,6 +79,7 @@ export struct PhotoGridPage {
     isActive = false;
     isDistributedAlbum = false;
     deleteMode: boolean = false;
+    deleteReady = true;
     routerStart = false;
     private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
     private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
@@ -315,14 +315,22 @@ export struct PhotoGridPage {
     onMoveEnd(err, count, total): void {
         this.logger.info(`onMoveEnd count: ${count}, total: ${total}`);
         this.isDataFreeze = false;
+        let deleteIndexes = this.mSelectManager.getSelectedIndexes();
+        if (deleteIndexes.length >= Constants.DEFAULT_SLIDING_WIN_SIZE) {
+            this.deleteReady = false;
+        }
+        this.dataSource.unfreeze();
+        if (count == deleteIndexes && this.albumInfo.id != AlbumDefine.ALBUM_ID_ALL && this.deleteReady) {
+            this.dataSource.deleteData(deleteIndexes);
+        }
         this.onModeChange();
         MediaObserver.getInstance().registerObserver(this.dataObserver);
         this.dataSource.switchRefreshOn();
         this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
-        this.dataSource.unfreeze();
         if (err) {
             UiUtil.showToast($r('app.string.move_failed_single'));
         }
+        this.deleteReady = true;
     }
 
     onDeleteStart(): void {
@@ -333,13 +341,21 @@ export struct PhotoGridPage {
         this.dataSource.freeze();
     }
 
-    onDeleteEnd(): void {
+    onDeleteEnd(err): void {
         this.logger.info(`onDeleteEnd`);
         this.isDataFreeze = false;
+        let deleteIndexes = this.mSelectManager.getSelectedIndexes();
+        if (deleteIndexes.length >= Constants.DEFAULT_SLIDING_WIN_SIZE) {
+            this.deleteReady = false;
+        }
+        this.dataSource.unfreeze();
+        if (!err && this.deleteReady) {
+            this.dataSource.deleteData(deleteIndexes);
+        }
         this.onModeChange();
         MediaObserver.getInstance().registerObserver(this.dataObserver);
         this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
-        this.dataSource.unfreeze();
+        this.deleteReady = true;
     }
 
     freezeAdapter(fn): Function {
@@ -481,7 +497,7 @@ export struct PhotoGridPage {
 
         this.broadCast.on(BroadCastConstants.SELECT,
             (position: number, key: string, value: boolean, callback: Function) => {
-                if (self.mSelectManager.toggle(key, value)) {
+                if (self.mSelectManager.toggle(key, value, position)) {
                     self.logger.info('enter event process')
                     if (!self.isSelectedMode) {
                         self.isSelectedMode = true;
@@ -554,7 +570,9 @@ export struct PhotoGridPage {
         this.mSelectManager.registerCallback('allSelect', this.freezeAdapter((newState: boolean) => {
             self.logger.info(`allSelect ${newState}`);
             self.isAllSelected = newState;
-            self.dataSource.forceUpdate();
+            if (!self.deleteMode && this.isSelectedMode) {
+                self.dataSource.forceUpdate();
+            }
         }));
         this.mSelectManager.registerCallback('updateCount', this.freezeAdapter((newState: number) => {
             self.logger.info(`updateSelectedCount ${newState}`);
@@ -569,16 +587,28 @@ export struct PhotoGridPage {
             self.mSelectManager.setTotalCount(newState);
         })
 
-        this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, () => {
+        this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, (sortIndexes: number[]) => {
             this.logger.info('ON_DATA_RELOADED');
-            if (this.deleteMode) {
+            if (this.deleteMode && sortIndexes) {
                 animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => {
-                    this.dataSource.onDataReloaded();
+                    let indexes = sortIndexes.reverse()
+                    indexes.forEach((index) => {
+                        this.dataSource.onDataDeleted(index);
+                    })
                 })
-                this.deleteMode = false;
-            } else {
+            } else if (sortIndexes) {
+                let indexes = sortIndexes.reverse()
+                indexes.forEach((index) => {
+                    this.dataSource.onDataDeleted(index);
+                })
+            }
+            else {
+                if (this.isSelectedMode) {
+                    this.deleteReady = false; // change index when selected mode
+                }
                 this.dataSource.onDataReloaded();
             }
+            this.deleteMode = false;
         });
 
         ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
@@ -655,7 +685,8 @@ export struct PhotoGridPage {
                                     item: item.mediaItem,
                                     isSelected: this.isSelectedMode ?
                                     this.mSelectManager.isItemSelected(item.mediaItem.uri) : false,
-                                    pageName: Constants.PHOTO_TRANSITION_ALBUM
+                                    pageName: Constants.PHOTO_TRANSITION_ALBUM,
+                                    position: item.viewIndex
                                 })
                             }
                             .columnStart(item.viewIndex % this.gridRowCount)

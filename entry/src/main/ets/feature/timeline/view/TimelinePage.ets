@@ -76,6 +76,7 @@ export struct TimelinePage {
     dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
     isDataFreeze = false; // Is the page data frozen
     deleteMode = false; // Is delete mode
+    deleteReady = true; // use local delete mode
     isActive = false; // Is the page active
     @State initLoadFinish: boolean = false; // Is first patch load finished
     routerStart = false; // Is move or copy router page
@@ -187,16 +188,22 @@ export struct TimelinePage {
             });
         });
 
-        this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, () => {
+        this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, (sortIndexes) => {
             this.logger.info('ON_DATA_RELOADED');
-            if (this.deleteMode) {
+            if (this.deleteMode && sortIndexes) {
                 animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => {
-                    this.dataSource.onDataReloaded();
+                    let indexes = sortIndexes.reverse()
+                    indexes.forEach((index) => {
+                        this.dataSource.onDataDeleted(index);
+                    })
                 })
-                this.deleteMode = false;
             } else {
+                if (this.isSelectedMode) {
+                    this.deleteReady = false; // change index when selected mode
+                }
                 this.dataSource.onDataReloaded();
             }
+            this.deleteMode = false;
         });
 
         this.broadCast.on(BroadCastConstants.INIT_DATE_TEXT, () => {
@@ -207,7 +214,9 @@ export struct TimelinePage {
         this.mSelectManager.registerCallback('allSelect', this.freezeAdapter((newState: boolean) => {
             self.logger.info(`allSelect ${newState}`);
             self.isAllSelected = newState;
-            self.dataSource.forceUpdate();
+            if (this.deleteMode) {
+                self.dataSource.forceUpdate();
+            }
         }));
 
         this.mSelectManager.registerCallback('updateGroupCount', this.freezeAdapter(() => {
@@ -477,15 +486,23 @@ export struct TimelinePage {
         this.dataSource.freeze();
     }
 
-    onDeleteEnd(): void {
+    onDeleteEnd(err): void {
         this.logger.info(`onDeleteEnd`);
         this.isDataFreeze = false;
+        let deleteIndexes = this.mSelectManager.getSelectedIndexes();
+        if (deleteIndexes.length >= Constants.DEFAULT_SLIDING_WIN_SIZE) {
+            this.deleteReady = false;
+        }
+        this.dataSource.unfreeze();
+        if (!err && this.deleteReady) {
+            this.dataSource.deleteData(deleteIndexes);
+        }
         TraceControllerUtils.startTrace('onModeChange');
         this.onModeChange();
         TraceControllerUtils.finishTrace('onModeChange');
         MediaObserver.getInstance().registerObserver(this.dataObserver);
         this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
-        this.dataSource.unfreeze();
+        this.deleteReady = true;
     }
 
     onCopyStart(): void {

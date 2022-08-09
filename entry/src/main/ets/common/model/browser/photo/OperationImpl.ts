@@ -58,9 +58,9 @@ export class OperationImpl implements BrowserOperationInterface {
             return;
         }
 
-        TraceControllerUtils.startTrace('copyFile')
-        await fileio.copyFile(fd, targetFd)
-        TraceControllerUtils.finishTrace('copyFile')
+        TraceControllerUtils.startTrace('readAndWriteData')
+        await this.readAndWriteData(fd, targetFd);
+        TraceControllerUtils.finishTrace('readAndWriteData')
 
         TraceControllerUtils.startTrace('sourceClose')
         await source.close(fd);

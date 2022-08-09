@@ -32,7 +32,7 @@ const appLogger: Logger = new Logger('app');
 let isFromCard = false;
 let isFromCamera = false;
 let appBroadCast = BroadCastManager.getInstance().getBroadCast();
-const pagePath: string = 'product/phone/view/index';
+const pagePath: string = 'product/pad/view/index';
 
 export default class MainAbility extends Ability {
     private static readonly RETRY_MAX_TIMES = 100;
