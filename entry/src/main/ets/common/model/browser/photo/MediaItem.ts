@@ -36,6 +36,7 @@ export class MediaItem {
     displayName: string;
     filePath: string;
     path: string;
+    canRotate: boolean;
 
     constructor(data) {
         if (data == null) {
@@ -62,6 +63,7 @@ export class MediaItem {
         this.imgHeight = this.height;
         this.displayName = data.displayName;
         this.path = data.relativePath;
+        this.canRotate = false;
     }
 
     setThumbnail(thumbnail: string) {
@@ -70,5 +72,28 @@ export class MediaItem {
 
     setFavorite(isFavorite: boolean) {
         this.isFavor = isFavorite;
+    }
+
+    setOrientation(orientation: string) {
+        if (orientation.length == 0) {
+            this.canRotate = false;
+            return
+        }
+        this.canRotate = true;
+        switch (orientation) {
+            case "Left-bottom":
+                this.orientation = 270
+                break
+            case "Bottom-right":
+                this.orientation = 180
+                break
+            case "Right-top":
+                this.orientation = 90
+                break;
+            case "Top-left":
+                this.orientation = 0
+                break
+            default:
+        }
     }
 }

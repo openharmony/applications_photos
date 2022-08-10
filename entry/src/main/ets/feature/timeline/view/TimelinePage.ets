@@ -67,7 +67,6 @@ export struct TimelinePage {
     @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-    dataSource: TimelineDataSource;
     logger: Logger = new Logger('TimelinePage');
     mSelectManager: TimelineSelectManager = new TimelineSelectManager();
     scroller: Scroller = new Scroller();
@@ -84,13 +83,13 @@ export struct TimelinePage {
     @State groupSelectMode: boolean[] = [];
     @Provide yearData: TimelineData[] = [];
     @Provide dateText: string = '';
+    private dataSource: TimelineDataSource = TimelineDataSourceManager.getInstance().getDataSource();
     private barModel = new TimelinePageBarModel()
 
     aboutToAppear(): void {
         TraceControllerUtils.startTrace('TimelinePageAboutToAppear');
         this.logger.info('aboutToAppear');
         let self = this;
-        this.dataSource = TimelineDataSourceManager.getInstance().getDataSource();
         let params = router.getParams();
         if (params != null && params.pageFrom && params.pageFrom == Constants.ENTRY_FROM.CAMERA) {
             this.dataSource.initData();

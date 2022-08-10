@@ -77,6 +77,9 @@ export class Constants {
     // photo show state
     static readonly PHOTO_SHOW_STATE = 'single_photo_show_state';
 
+    // photo can rotate
+    static readonly PHOTO_CAN_ROTATE = 'single_photo_can_rotate';
+
     // set swiper can swipe
     static readonly SET_DISABLE_SWIPE = 'set_disable_swipe';
 

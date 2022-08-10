@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import Matrix4 from '@ohos.matrix4'
 import router from '@system.router'
 import { MediaItem } from '../../common/model/browser/photo/MediaItem'
@@ -52,6 +53,7 @@ export struct PhotoItem {
 
     onTransitionChange() {
         this.logger.info(`onTransitionChange , ${this.updateTransition} ${this.position}`);
+        this.photoCanRotateCheck();
         if (this.updateTransition == this.position) {
             this.transitionId = this.transitionTag + this.item.uri;
             this.broadCast.emit(PhotoConstants.PHOTO_SHOW_STATE, [!this.showError]);
@@ -74,7 +76,7 @@ export struct PhotoItem {
     }
 
     aboutToAppear(): void {
-        this.logger.info(`photoItem aboutToAppear ${this.item.uri}`);
+        this.logger.info(`photoItem aboutToAppear ${this.thumbnail}`);
         this.eventPipeline = new EventPipeline(this.broadCast, this.item);
         this.matrix = Matrix4.identity().copy();
         this.firstLoad = true;
@@ -99,8 +101,17 @@ export struct PhotoItem {
         this.logger.info(`photoItem aboutToAppear ${this.item.uri} end`);
     }
 
+    private photoCanRotateCheck() {
+        if (this.updateTransition != this.position) {
+            this.logger.info(`photoCanRotateCheck not current photo`);
+            return
+        }
+        this.logger.debug(`photoCanRotateCheck this.item.canRotate ${this.item.canRotate}`);
+        this.broadCast.emit(PhotoConstants.PHOTO_CAN_ROTATE, [this.item.canRotate]);
+    }
+
     aboutToDisappear(): void {
-        this.logger.info(`aboutToDisappear ${this.item.uri}`);
+        this.logger.info(`aboutToDisappear ${this.thumbnail}`);
         // clean up event registration
         this.broadCast.off(PhotoConstants.TOUCH_EVENT + this.item.uri, null);
         this.broadCast.off(PhotoConstants.DIRECTION_CHANGE + this.item.uri, null);
