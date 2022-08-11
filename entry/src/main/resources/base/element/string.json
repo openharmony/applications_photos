@@ -374,7 +374,7 @@
     },
     {
       "name": "save_to_local",
-      "value": "Save to local"
+      "value": "Save"
     },
     {
       "name": "mirror_text",
@@ -510,7 +510,7 @@
     },
     {
       "name": "rename_failed",
-      "value": "Unable to rename.Please try again"
+      "value": "Unable to rename.Please try again."
     },
     {
       "name": "download_progress_message",
@@ -546,15 +546,15 @@
     },
     {
       "name": "copy_failed_single",
-      "value": "Unable to copy.Please try again"
+      "value": "Unable to copy.Please try again."
     },
     {
       "name": "move_failed_single",
-      "value": "Unable to move.Please try again"
+      "value": "Unable to move.Please try again."
     },
     {
       "name": "download_failed_multi",
-      "value": "Only able to save %d of the items"
+      "value": "Only able to save %d of the items."
     },
     {
       "name": "local",
@@ -714,7 +714,7 @@
     },
     {
       "name": "file_time_location",
-      "value": "Date modified%s"
+      "value": "Date modified: %s"
     },
     {
       "name": "do_same_action",
@@ -770,7 +770,7 @@
     },
     {
       "name": "edit_save_picture_text",
-      "value": "Saving photo..."
+      "value": "Saving picture..."
     },
     {
       "name": "fa_select_time",

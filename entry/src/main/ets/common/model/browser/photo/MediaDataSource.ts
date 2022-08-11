@@ -213,8 +213,8 @@ export class MediaDataSource extends AbsDataSource {
      */
     updateSize(requestTime: number, count: number): void {
         this.logger.info(`updateSize, old size: ${this.size}, new size: ${count}`)
-        this.isCountChanged = count != this.size;
-        this.isCountReduced = count < this.size;
+        this.isCountChanged = count != this.mediaCount;
+        this.isCountReduced = count < this.mediaCount;
         this.mediaCount = count;
         this.size = this.mediaCount;
         this.dataIndexes = [];
@@ -428,6 +428,60 @@ export class MediaDataSource extends AbsDataSource {
         let callback: GetItemsCallback = new GetItemsCallback(this, requestStart);
         this.photoDataImpl.getData(callback,
             { id: this.albumId, start: requestStart, count: requestCount, deviceId: this.deviceId });
+    }
+
+    deleteData(indexes: number[]): void {
+        this.logger.info(`deleteData ${indexes}`);
+        let sortIndexes = indexes.sort(function (a, b) {
+            return a - b
+        });
+        let dataDeleteIndexes = this.getDataIndexes(indexes);
+        this.deleteDataUpdateSize(sortIndexes);
+        this.deleteDataUpdateData(dataDeleteIndexes);
+        this.broadCast.emit(BroadCastConstants.ON_DATA_RELOADED, [sortIndexes]);
+    }
+
+    getDataIndexes(indexes: number[]) {
+        return indexes;
+    }
+
+    deleteDataUpdateSize(indexes: number[]) {
+        this.logger.info(`deleteDataUpdateSize`);
+        let count = 0;
+        for (let index of indexes) {
+            let newIndex = index - count;
+            for (let i = newIndex + 1; i < this.dataIndexes.length; i++) {
+                this.dataIndexes[i] = this.dataIndexes[i] - 1;
+                this.layoutIndexes[i] = this.layoutIndexes[i] - 1;
+            }
+            count++;
+            this.dataIndexes.splice(newIndex, 1);
+            this.layoutIndexes.splice(newIndex, 1);
+        }
+        this.size = this.size - indexes.length;
+    }
+
+    deleteDataUpdateData(indexes: number[]) {
+        this.logger.info(`deleteDataUpdateData ${indexes}`);
+        let countBeforeActiveStart = 0;
+        for (let index of indexes) {
+            if (index < this.activeStart) {
+                countBeforeActiveStart++;
+            } else if (index < this.activeEnd) {
+                this.items[index - this.activeStart] = undefined;
+            } else {
+                break;
+            }
+        }
+
+        let newData = this.items.filter((item) => {
+            return (item != undefined)
+        })
+        newData = newData.slice(countBeforeActiveStart);
+        while (newData.length != Constants.DEFAULT_SLIDING_WIN_SIZE) {
+            newData.push(undefined);
+        }
+        this.items = newData;
     }
 
     private getWindowActiveStart(dataIndex: number, windowCenter: number): number{

@@ -370,7 +370,7 @@
     },
     {
       "name": "save_to_local",
-      "value": "保存至本机"
+      "value": "保存"
     },
     {
       "name": "mirror_text",
@@ -714,7 +714,7 @@
     },
     {
       "name": "file_time_location",
-      "value": "修改时间%s"
+      "value": "修改时间: %s"
     },
     {
       "name": "do_same_action",

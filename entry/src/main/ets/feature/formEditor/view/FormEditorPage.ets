@@ -59,6 +59,7 @@ struct SettingDialog {
                     .fontSize($r('sys.float.ohos_id_text_size_headline7'))
                     .fontFamily($r('app.string.id_text_font_family_regular'))
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                    .fontWeight(FontWeight.Medium)
             }.alignItems(VerticalAlign.Center)
             .height($r('app.float.dialog_title_height'))
 
@@ -78,6 +79,7 @@ struct SettingDialog {
                                 }) {
                                     Radio({ group: 'timeGroup', value: item.value })
                                         .checked(item.checked)
+                                        .offset({ x: $r('app.float.form_card_radius_offset') })
                                         .onChange((checked: boolean) => {
                                             item.checked = checked;
                                             if (checked) {
@@ -406,8 +408,10 @@ struct FormEditorPage {
                     .fillColor($r('app.color.white'))
                     .width($r('app.float.FA_back_size'))
                     .height($r('app.float.FA_back_size'))
-                    .margin({ left: $r('app.float.FA_back_margin_left'), top: $r('app.float.FA_back_margin_top') })
+                    .margin({ left: $r('app.float.FA_back_margin_left') })
             }
+            .height($r('app.float.title_default'))
+            .alignItems(VerticalAlign.Center)
             .width('100%')
             .onClick(() => {
                 this.terminate();
@@ -443,6 +447,7 @@ struct FormEditorPage {
                             Image($r('app.media.ic_gallery_form_arrow'))
                                 .width($r('app.float.form_list_card_more_arrow_w'))
                                 .height($r('app.float.form_list_card_more_arrow_h'))
+                                .fillColor($r('sys.color.ohos_id_color_fourth'))
                         }
                     }
                     .width('100%')
@@ -476,6 +481,7 @@ struct FormEditorPage {
                             Image($r('app.media.ic_gallery_form_arrow'))
                                 .width($r('app.float.form_list_card_more_arrow_w'))
                                 .height($r('app.float.form_list_card_more_arrow_h'))
+                                .fillColor($r('sys.color.ohos_id_color_fourth'))
                         }
                     }
                     .width('100%')
@@ -530,11 +536,12 @@ struct FormEditorPage {
                                                                                                                      : (Constants.NUMBER_2 == this.time / Constants.DEFAULT_TIME) ? $r('app.string.fa_play_interval_time_60')
                                                                                                                                                                                   : $r('app.string.fa_play_interval_time_30'))
                                 .fontSize($r('sys.float.ohos_id_text_size_body2'))
-                                .fontColor(Color.Gray)
+                                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                                 .margin({ right: $r('app.float.form_list_card_more_gap') })
                             Image($r('app.media.ic_gallery_form_arrow'))
                                 .width($r('app.float.form_list_card_more_arrow_w'))
                                 .height($r('app.float.form_list_card_more_arrow_h'))
+                                .fillColor($r('sys.color.ohos_id_color_fourth'))
                         }
                     }
                     .width('100%')

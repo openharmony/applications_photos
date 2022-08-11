@@ -81,6 +81,11 @@ export struct ThirdSelectAlbumSetPage {
             }
         }
         this.logger.info(`isFromFa: ${this.isFromFa} isFromFaPhoto ${this.isFromFaPhoto}`);
+        if (this.isFromFa) {
+            this.albums.setBlackList([AlbumDefine.ALBUM_ID_VIDEO, AlbumDefine.ALBUM_ID_RECYCLE]);
+        } else {
+            this.albums.setBlackList([AlbumDefine.ALBUM_ID_RECYCLE]);
+        }
         this.leftAction = this.isFromFa ? Action.BACK : Action.CANCEL
         this.title = (this.isFromFa && !this.isFromFaPhoto) ? ActionBarProp.SINGLE_SELECT_ALBUM_TITLE : ActionBarProp.SINGLE_UNSELECT_TITLE
         this.albums.setBlackList([AlbumDefine.ALBUM_ID_VIDEO, AlbumDefine.ALBUM_ID_RECYCLE])

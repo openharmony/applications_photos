@@ -31,7 +31,7 @@ export struct TabBar {
     @Consume isSelectedMode: boolean;
     @Consume isAlbumSetSelectedMode: boolean;
     private currentIndex: number;
-    private isSidebar: boolean = false;
+    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
     private tabs: TabItem[] = [];
     private controller: TabsController;
     private logger: Logger = new Logger('TabBar');

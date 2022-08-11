@@ -63,8 +63,8 @@ import resourceManager from '@ohos.resourceManager';
 struct PhotoBrowser {
     @State opacity: number = 1;
     @Provide backgroundColor: Resource = $r('app.color.default_background_color');
-    @Provide(dateTitle) photoDate: string = '';
-    @Provide(timeLocationTitle) timeAndLocation: string = '';
+    @Provide('dateTitle') photoDate: string = '';
+    @Provide('timeLocationTitle') timeAndLocation: string = '';
     @Provide menuList: Array<Action> = new Array<Action>();
     private toolMenuList: Array<Action> = new Array<Action>();
     @Provide topMenuList: Array<Action> = new Array<Action>();
@@ -74,7 +74,8 @@ struct PhotoBrowser {
     @Provide isPullingDown: boolean = false;
     @Provide pageFrom: number = Constants.ENTRY_FROM.NORMAL;
     @Provide canSwipe: boolean = false;
-    @State @Watch('updateMoreMenu') currentShow: boolean = true;
+    @State @Watch('currentShowChange') currentShow: boolean = true;
+    @State @Watch('canRotateChange') canRotate: boolean = false;
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
     @StorageLink('TimelinePageIndex') TimelinePageIndex: number = Constants.INVALID;
     @StorageLink('PhotoGridPageIndex') PhotoGridPageIndex: number = Constants.INVALID;
@@ -344,7 +345,6 @@ struct PhotoBrowser {
         }
 
         this.toolMenuList = [];
-        this.moreMenuList = [];
 
         let list: Array<Action> = new Array<Action>();
         switch (this.pageFrom) {
@@ -372,24 +372,23 @@ struct PhotoBrowser {
         } else {
             this.toolMenuList = list;
         }
-
-        if (currentPhoto.mediaType == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
-            this.moreMenuList.push(Action.MOVE, Action.COPY, Action.RENAME);
-            if (this.currentShow) {
-                this.moreMenuList.push(Action.ROTATE);
-            }
-        } else {
-            this.moreMenuList.push(Action.MOVE, Action.COPY, Action.RENAME);
-        }
-
+        this.updateMoreMenu()
     }
 
-    updateMoreMenu() {
-        this.moreMenuList = [];
+    private currentShowChange() {
+        this.updateMoreMenu()
+    }
+
+    private canRotateChange() {
+        this.updateMoreMenu()
+    }
+
+    private updateMoreMenu() {
         let currentPhoto = this.getCurrentPhoto();
+        this.moreMenuList = [];
         if (currentPhoto.mediaType == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
             this.moreMenuList.push(Action.MOVE, Action.COPY, Action.RENAME);
-            if (this.currentShow) {
+            if (this.currentShow && this.canRotate) {
                 this.moreMenuList.push(Action.ROTATE);
             }
         } else {
@@ -650,6 +649,11 @@ struct PhotoBrowser {
             this.currentShow = state;
         });
 
+        this.broadCast.on(PhotoConstants.PHOTO_CAN_ROTATE, (state: boolean) => {
+            this.logger.debug(`current photo can rotate ${state}`);
+            this.canRotate = state;
+        });
+
         this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean) => {
             this.logger.info(`set swiper swipe ${value}`);
             this.canSwipe = value;
@@ -897,7 +901,7 @@ struct PhotoBrowser {
                     onMenuClicked: this.onMenuClicked,
                 })
                 ToolBar({
-                    isShowBar: $isShowBar,
+                    isShowBar: this.isShowBar,
                     toolMenuList: this.toolMenuList,
                     onMenuClicked: this.onMenuClicked,
                     isFromPhotoBrowser: true

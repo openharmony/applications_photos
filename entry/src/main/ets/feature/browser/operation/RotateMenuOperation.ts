@@ -13,12 +13,14 @@
  * limitations under the License.
  */
 
+import image from '@ohos.multimedia.image'
 import { Logger } from '../../../common/utils/Logger';
 import { Constants } from '../../../common/model/browser/photo/Constants'
 import { MenuOperation } from '../../../common/view/browserOperation/MenuOperation'
 import { MenuContext } from '../../../common/view/browserOperation/MenuContext'
 import { BrowserOperationFactory } from '../../../common/interface/BrowserOperationFactory'
 import { BrowserDataFactory } from '../../../common/interface/BrowserDataFactory'
+import { MediaLibraryAccess } from '../../../common/access/MediaLibraryAccess';
 
 export class RotateMenuOperation implements MenuOperation {
     private menuContext: MenuContext;
@@ -50,8 +52,39 @@ export class RotateMenuOperation implements MenuOperation {
         let dataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
 
         let fileAsset = await dataImpl.getDataById(id);
-        operationImpl.setOrientation(fileAsset, orientation);
-        await operationImpl.commitChanges(fileAsset);
+        if (!fileAsset) {
+            this.logger.error('get file asset failed.');
+            return;
+        }
+        this.logger.debug(`get fileAsset ${JSON.stringify(fileAsset)}`);
+        let fd = await MediaLibraryAccess.getInstance().openAsset('RW', fileAsset);
+        this.logger.debug(`get fd ${fd}`);
+        let imageSourceApi: image.ImageSource = image.createImageSource(fd);
+        this.logger.debug(`get imageSourceApi`);
+
+        try {
+            await imageSourceApi.modifyImageProperty("Orientation", this.getPropertyValidOrientation(orientation))
+            this.logger.debug(`modifyImageProperty ${fileAsset.displayName} finish`);
+        } catch (error) {
+            this.logger.error(`modifyImageProperty ${fileAsset.displayName} fail`)
+        }
+        await MediaLibraryAccess.getInstance().closeAsset(fd, fileAsset)
         this.menuContext.broadCast.emit(Constants.ROTATE, [orientation]);
+    }
+
+    private getPropertyValidOrientation(orientation: number): string {
+        this.logger.info(`getPropertyValidOrientation ${orientation}`)
+        switch (orientation) {
+            case 0:
+                return "1";
+            case 270:
+                return "8";
+            case 180:
+                return "3";
+            case 90:
+                return "6";
+            default:
+                return ""
+        }
     }
 }

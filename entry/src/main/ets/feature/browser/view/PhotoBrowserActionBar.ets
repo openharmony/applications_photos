@@ -43,7 +43,7 @@ export struct PhotoBrowserActionBar {
     build() {
         Column() {
             ActionBar({
-                isShowBar: $isShowBar,
+                isShowBar: this.isShowBar,
                 actionBarProp: this.createActionBar(),
                 onMenuClicked: this.onMenuClicked,
                 isVideoPage: this.isVideoPage

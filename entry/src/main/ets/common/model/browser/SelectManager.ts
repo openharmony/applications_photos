@@ -24,6 +24,7 @@ import { BrowserDataInterface } from '../../interface/BrowserDataInterface'
 export class BucketSelectionEntry {
     private groupId = -1;
     private clickedSet: Set<string> = new Set();
+    private clickIndexSet: Set<number> = new Set();
     private totalCount = 0;
     private inverseSelection = false;
     private groupSelect = false;
@@ -56,6 +57,10 @@ export class BucketSelectionEntry {
         return this.clickedSet;
     }
 
+    public getClickIndexSet() {
+        return this.clickIndexSet;
+    }
+
     public getSelectedCount() {
         if (this.inverseSelection) {
             return this.totalCount - this.clickedSet.size;
@@ -67,12 +72,14 @@ export class BucketSelectionEntry {
         this.inverseSelection = true;
         this.groupSelect = true;
         this.clickedSet.clear();
+        this.clickIndexSet.clear();
     }
 
     public unselectAll() {
         this.inverseSelection = false;
         this.groupSelect = false;
         this.clickedSet.clear();
+        this.clickIndexSet.clear();
     }
 
     public isItemSelected(targetId) {
@@ -130,6 +137,7 @@ export class SelectManager {
     logger: Logger = new Logger('SelectManager');
     mIsSelectedMode = false;
     clickedSet: Set<string> = new Set();
+    clickedIndexSet: Set<number> = new Set();
     totalCount = 0;
     inverseSelection = false;
     inSingleMode = false;
@@ -189,9 +197,12 @@ export class SelectManager {
         }
         if (isSelected == (!this.inverseSelection)) {
             this.clickedSet.add(targetId);
+            this.clickedIndexSet.add(targetIndex)
             this.logger.info(`add targetID ${targetId}`);
+            this.logger.info(`add targetIndex ${targetIndex}`);
         } else {
             this.clickedSet.delete(targetId);
+            this.clickedIndexSet.delete(targetIndex)
         }
         if (this.isAllSelected) {
             this.isAllSelected = false;
@@ -209,6 +220,7 @@ export class SelectManager {
         if (reverseSelection) {
             this.inverseSelection = true;
             this.clickedSet.clear();
+            this.clickedIndexSet.clear();
             this.isAllSelected = true;
         } else {
             this.isAllSelected = true;
@@ -221,6 +233,7 @@ export class SelectManager {
         this.inverseSelection = false;
         this.isAllSelected = false;
         this.clickedSet.clear();
+        this.clickedIndexSet.clear();
         this.mCallbacks['allSelect'] && this.mCallbacks['allSelect'](false);
         this.mCallbacks['updateCount'] && this.mCallbacks['updateCount'](this.getSelectedCount());
     }
@@ -242,6 +255,7 @@ export class SelectManager {
             this.inverseSelection = false;
             this.isAllSelected = false;
             this.clickedSet.clear();
+            this.clickedIndexSet.clear();
             this.mCallbacks[`allSelect`] && this.mCallbacks[`allSelect`](false);
         }
     }
@@ -292,6 +306,21 @@ export class SelectManager {
             this.logger.info(`enter callback result ${result.length}`);
             callback(result);
         })
+    }
+
+    public getSelectedIndexes(): number[] {
+        let selectIndexes: number[] = new Array();
+        if (this.inverseSelection) {
+            for (let i = 0; i < this.totalCount; i++) {
+                if (!this.clickedIndexSet.has(i)) {
+                    selectIndexes.push(i);
+                }
+            }
+        } else {
+            selectIndexes = Array.from(this.clickedIndexSet);
+        }
+        this.logger.info(`getSelectedIndexes ${selectIndexes}`);
+        return selectIndexes;
     }
 
     public handleSelection(mediaItems: MediaItem[], callback: AsyncCallback<string[]>) {
@@ -402,22 +431,25 @@ export class TimelineSelectManager extends SelectManager {
         this.mCallbacks['updateCount'] && this.mCallbacks['updateCount'](this.getSelectedCount());
     }
 
-    private toggleClickSet(entry: BucketSelectionEntry, targetId: string, isSelected: boolean) {
+    private toggleClickSet(entry: BucketSelectionEntry, targetId: string, targetIndex: number, isSelected: boolean) {
         this.logger.info(`toggleClickSet: ${targetId} + ${isSelected}`);
         if (isSelected == (!this.inverseSelection)) {
-            this.toggleEntryItem(entry, targetId, true);
+            this.toggleEntryItem(entry, targetId, targetIndex, true);
         } else {
-            this.toggleEntryItem(entry, targetId, false);
+            this.toggleEntryItem(entry, targetId, targetIndex, false);
         }
     }
 
-    private toggleEntryItem(entry: BucketSelectionEntry, targetId: string, isSelected: boolean) {
+    private toggleEntryItem(entry: BucketSelectionEntry, targetId: string, targetIndex: number, isSelected: boolean) {
         this.logger.info(`toggleEntryItem ${targetId} ${isSelected}`);
         let clickSet = entry.getClickSet();
+        let clickIndexSet = entry.getClickIndexSet();
         if (isSelected != entry.getInverseSelection()) {
             clickSet.add(targetId);
+            clickIndexSet.add(targetIndex);
         } else {
             clickSet.delete(targetId);
+            clickIndexSet.delete(targetIndex);
         }
     }
 
@@ -425,7 +457,7 @@ export class TimelineSelectManager extends SelectManager {
         this.logger.info(`toggleTimeline ${targetIndex} id: ${targetId} ${isSelected}`);
         let itemCoordinate = this.getCoordinateFromPosition(targetIndex);
         let entry = this.getGroupEntry(itemCoordinate);
-        this.toggleClickSet(entry, targetId, isSelected);
+        this.toggleClickSet(entry, targetId, targetIndex, isSelected);
         let entrySelectedCount = entry.getSelectedCount();
         this.logger.info(`check all selected ${entrySelectedCount} ${entry.getTotalCount()}`);
 
@@ -703,6 +735,64 @@ export class TimelineSelectManager extends SelectManager {
                 start += this.mGroupData[i].count;
             }
         }
+    }
+
+    public getSelectedIndexes(): number[] {
+        this.logger.info('getSelectedIndexes');
+        let indexes: number[] = new Array()
+        let start: number = 0
+        if (this.inverseSelection) {
+            for (let i = 0; i < this.mGroupData.length; i++) {
+                let entry = this.mSelectionEntryArray[i];
+                if (entry) {
+                    let entryClickIndexSet = entry.getClickIndexSet()
+                    if (entry.getInverseSelection()) {
+                        entryClickIndexSet.forEach((item) => {
+                            indexes.push(item)
+                        })
+                    } else {
+                        for (let j = start + i + 1; j <= start + i + this.mGroupData[i].count; j++) {
+                            if (!entryClickIndexSet.has(j)) {
+                                indexes.push(j)
+                            }
+                        }
+                    }
+                } else {
+                    for (let j = start + i; j <= start + i + this.mGroupData[i].count; j++) {
+                        indexes.push(j)
+                    }
+                }
+                start += this.mGroupData[i].count;
+            }
+        } else {
+            for (let i = 0; i < this.mGroupData.length; i++) {
+                let entry = this.mSelectionEntryArray[i];
+                if (entry) {
+                    let entryClickIndexSet = entry.getClickIndexSet();
+                    if (entry.getInverseSelection()) {
+                        if (entryClickIndexSet.size == 0) {
+                            this.logger.info('group is all select');
+                            for (let j = start + i; j <= start + i + this.mGroupData[i].count; j++) {
+                                indexes.push(j)
+                            }
+                        } else {
+                            for (let j = start + i + 1; j <= start + i + this.mGroupData[i].count; j++) {
+                                if (!entryClickIndexSet.has(j)) {
+                                    indexes.push(j)
+                                }
+                            }
+                        }
+                    } else {
+                        entryClickIndexSet.forEach((item) => {
+                            indexes.push(item)
+                        })
+                    }
+                }
+                start += this.mGroupData[i].count;
+            }
+        }
+        this.logger.info(`getSelectedIndexes end ${indexes}`);
+        return indexes
     }
 
     private checkIsGetSelectionFinish(doneCount: number, result: string[], callback: AsyncCallback<string[]>): void {

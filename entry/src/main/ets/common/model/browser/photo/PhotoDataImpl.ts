@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import image from '@ohos.multimedia.image'
 import { AlbumDefine } from '../AlbumDefine'
 import { BrowserDataImpl } from '../BrowserDataImpl'
 import { Logger } from '../../../utils/Logger'
@@ -37,7 +38,6 @@ export class PhotoDataImpl extends BrowserDataImpl {
         }
 
         // Querying MediaLibrary data
-        let mediaItemList: MediaItem[] = [];
         this.getItems(param.id, param.start, param.count, param.deviceId).then((dataList) => {
             this.logger.info(`getMediaItem coming`);
             if (dataList != null) {
@@ -53,28 +53,50 @@ export class PhotoDataImpl extends BrowserDataImpl {
                 TraceControllerUtils.startTraceWithTaskId('getFavorInfo', dataList.length);
                 Promise.all(this.handlePromise(promiseStatus)).then((favor: any) => {
                     TraceControllerUtils.finishTraceWithTaskId('getFavorInfo', dataList.length);
-                    for (let i = 0; i < promiseStatus.length; i++) {
-                        try {
-                            let item = dataList[i];
-                            let mediaItem: MediaItem = new MediaItem(item);
-                            if (favor[i].status = 'success') {
-                                mediaItem.setFavorite(favor[i].res);
-                            } else {
-                                this.logger.error(`getFavorite error: ${favor[i].err}`);
-                            }
-                            mediaItem.setThumbnail(this.getThumbnailSafe(item.uri));
-                            mediaItemList.push(mediaItem);
-                        }
-                        catch (err) {
-                            this.logger.error(`getItems error: ${err}`);
-                        }
-                    }
-                    this.logger.info(`getMediaItem item size: ${mediaItemList.length}`);
-                    callback.callback(mediaItemList);
+                    this.getMediaItemList(dataList, promiseStatus, favor, callback)
                 })
 
             }
         });
+    }
+
+    private async getMediaItemList(dataList, promiseStatus: Array<Promise<boolean>>, favor: any, callback: AsyncCallback<MediaItem[]>) {
+        let mediaItemList: MediaItem[] = [];
+        for (let i = 0; i < promiseStatus.length; i++) {
+            try {
+                let item = dataList[i];
+                let mediaItem: MediaItem = new MediaItem(item);
+                await this.checkRotate(mediaItem, item)
+                if (favor[i].status = 'success') {
+                    mediaItem.setFavorite(favor[i].res);
+                } else {
+                    this.logger.error(`getFavorite error: ${favor[i].err}`);
+                }
+                mediaItem.setThumbnail(this.getThumbnailSafe(item.uri));
+                mediaItemList.push(mediaItem);
+            }
+            catch (err) {
+                this.logger.error(`getItems error: ${err}`);
+            }
+        }
+        this.logger.info(`getMediaItem item size: ${mediaItemList.length}`);
+        callback.callback(mediaItemList);
+    }
+
+    private async checkRotate(mediaItem: MediaItem, fileAsset): Promise<void> {
+        this.logger.info(`checkRotate`);
+        let fd = await MediaLibraryAccess.getInstance().openAsset('RW', fileAsset);
+        this.logger.debug(`get fd ${fd}`);
+        let imageSourceApi: image.ImageSource = image.createImageSource(fd);
+        this.logger.debug(`get imageSourceApi ${mediaItem.displayName}`);
+        try {
+            let orientation = await imageSourceApi.getImageProperty("Orientation")
+            this.logger.debug(`get imageSourceApi ${mediaItem.displayName} success ${orientation}`);
+            mediaItem.setOrientation(orientation)
+        } catch (err) {
+            this.logger.debug(`get imageSourceApi ${mediaItem.displayName} fail`);
+            mediaItem.setOrientation("")
+        }
     }
 
     handlePromise(promiseList) {
