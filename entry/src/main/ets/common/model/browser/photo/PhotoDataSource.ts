@@ -93,18 +93,17 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
         this.logger.info(`getData index ${index}`);
         this.albumDataSource.updateSlidingWindow(index);
         let mediaItem: MediaItem = this.albumDataSource.getRawData(index);
-        if (mediaItem.mediaType == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
-            // Thumbnail max size is 1080, so photos should use uri instead
-            return { data: mediaItem, pos: index, thumbnail: mediaItem.uri };
-        }
-
         if (mediaItem.height == 0 || mediaItem.width == 0) {
             this.logger.warn(`height ${mediaItem.height} width: ${mediaItem.width}`)
         }
         let orientation = mediaItem.orientation || 0;
         let imgWidth = orientation == 0 || orientation == PhotoConstants.ROTATE_TWICE ? mediaItem.width : mediaItem.height;
         let imgHeight = orientation == 0 || orientation == PhotoConstants.ROTATE_TWICE ? mediaItem.height : mediaItem.width;
-
+        let scale = this.generateSampleSize(imgWidth, imgHeight, index);
+        mediaItem.imgWidth = Math.ceil(mediaItem.width / scale);
+        mediaItem.imgHeight = Math.ceil(mediaItem.height / scale);
+        imgWidth = Math.ceil(imgWidth / scale);
+        imgHeight = Math.ceil(imgHeight / scale);
         return {
             data: mediaItem,
             pos: index,
