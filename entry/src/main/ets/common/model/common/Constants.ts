@@ -276,7 +276,7 @@ export class Constants {
 
     // Duration
     static readonly SHARE_TRANSITION_DURATION: number = 200;
-    static readonly DELETE_ANIMATE_DURATION: number = 300;
+    static readonly DELETE_ANIMATE_DURATION: number = 150;
 
     // Percent
     static readonly PERCENT_HUNDRED: number = 100;
