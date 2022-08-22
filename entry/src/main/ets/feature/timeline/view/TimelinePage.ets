@@ -638,7 +638,7 @@ export struct TimelinePage {
                     Stack() {
                         Grid(this.scroller) {
                             LazyForEach(this.dataSource, (item) => {
-                                if (item.viewType == ViewType.GROUP_TITLE) {
+                                if (item && item.viewType == ViewType.GROUP_TITLE) {
                                     GridItem() {
                                         TimelineTitleComponent({
                                             groupData: item.viewData,
@@ -646,7 +646,7 @@ export struct TimelinePage {
                                             isSelected: this.groupSelectMode[item.viewIndex]
                                         })
                                     }.columnStart(0).columnEnd(this.gridRowCount - 1)
-                                } else {
+                                } else if (item && item.viewType == ViewType.ITEM) {
                                     GridItem() {
                                         ImageGridItemComponent({
                                             item: item.viewData.mediaItem,
