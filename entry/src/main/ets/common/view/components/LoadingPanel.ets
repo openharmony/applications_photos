@@ -18,22 +18,23 @@ export struct LoadingPanel {
     @Consume isLoading: boolean;
 
     build() {
-        Column() {
+        if (this.isLoading) {
             Column() {
-                LoadingProgress().width($r('app.float.loading_panel_icon_w'))
-                    .height($r('app.float.loading_panel_icon_w'))
-                    .margin({ bottom: $r('app.float.loading_panel_icon_margin') })
-                Text($r('app.string.image_loading'))
-                    .fontSize($r('sys.float.ohos_id_text_size_body2'))
-                    .fontFamily($r('app.string.id_text_font_family_regular'))
-                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                Column() {
+                    LoadingProgress().width($r('app.float.loading_panel_icon_w'))
+                        .height($r('app.float.loading_panel_icon_w'))
+                        .margin({ bottom: $r('app.float.loading_panel_icon_margin') })
+                    Text($r('app.string.image_loading'))
+                        .fontSize($r('sys.float.ohos_id_text_size_body2'))
+                        .fontFamily($r('app.string.id_text_font_family_regular'))
+                        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                }
             }
+            .width('100%')
+            .height('100%')
+            .padding({ top: $r('app.float.loading_panel_item_gap') })
+            .alignItems(HorizontalAlign.Center)
+            .justifyContent(FlexAlign.Center)
         }
-        .width('100%')
-        .height('100%')
-        .padding({ top: $r('app.float.loading_panel_item_gap') })
-        .alignItems(HorizontalAlign.Center)
-        .justifyContent(FlexAlign.Center)
-        .visibility(this.isLoading ? Visibility.Visible : Visibility.None)
     }
 }
