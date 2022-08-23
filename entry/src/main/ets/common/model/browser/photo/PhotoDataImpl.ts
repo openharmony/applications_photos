@@ -85,11 +85,11 @@ export class PhotoDataImpl extends BrowserDataImpl {
 
     private async checkRotate(mediaItem: MediaItem, fileAsset): Promise<void> {
         this.logger.info(`checkRotate`);
-        let fd = await MediaLibraryAccess.getInstance().openAsset('RW', fileAsset);
-        this.logger.debug(`get fd ${fd}`);
-        let imageSourceApi: image.ImageSource = image.createImageSource(fd);
-        this.logger.debug(`get imageSourceApi ${mediaItem.displayName}`);
         try {
+            let fd = await MediaLibraryAccess.getInstance().openAsset('RW', fileAsset);
+            this.logger.debug(`get fd ${fd}`);
+            let imageSourceApi: image.ImageSource = image.createImageSource(fd);
+            this.logger.debug(`get imageSourceApi ${mediaItem.displayName}`);
             let orientation = await imageSourceApi.getImageProperty("Orientation")
             this.logger.debug(`get imageSourceApi ${mediaItem.displayName} success ${orientation}`);
             mediaItem.setOrientation(orientation)
