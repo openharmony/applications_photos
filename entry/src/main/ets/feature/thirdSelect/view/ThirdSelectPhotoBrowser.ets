@@ -35,7 +35,7 @@ import mMultimodalInputManager from '../../../common/model/common/MultimodalInpu
 @Entry
 @Component
 struct ThirdSelectPhotoBrowser {
-    @Provide backgroundColor: Resource = $r('app.color.default_background_color');
+    @Provide thirdSelectBackgroundColor: Resource = $r('app.color.default_background_color');
     @Provide('selectedCount') totalSelectedCount: number = 0;
     @Provide broadCast: BroadCast = new BroadCast();
     @Provide isSelected: boolean = true;
@@ -46,13 +46,13 @@ struct ThirdSelectPhotoBrowser {
     @Provide canSwipe: boolean = true;
     selectManager: ThirdSelectManager;
     isMultiPick = true;
-    transition: string;
+    thirdSelectTransition: string;
     controller: SwiperController = new SwiperController();
     @Provide('transitionIndex') currentIndex: number = 0;
     isFromFa: boolean = false;
 
     // position
-    position: number;
+    thirdSelectPosition: number;
 
     // logger
     private logger: Logger = new Logger('PhotoBrowser');
@@ -63,7 +63,7 @@ struct ThirdSelectPhotoBrowser {
 
     aboutToAppear(): void {
         this.logger.info('photoBrowser aboutToAppear');
-        this.backgroundColor = $r('app.color.black');
+        this.thirdSelectBackgroundColor = $r('app.color.black');
         ScreenManager.getInstance().setNavigationBarColor('#FFFFFFFF')
         mMultimodalInputManager.registerListener((control: number) => {
             this.logger.info(`key control : ${control} index ${this.currentIndex}`);
@@ -89,7 +89,7 @@ struct ThirdSelectPhotoBrowser {
 
         let param = router.getParams();
         this.onPhotoChanged(parseInt(param.position.toString()));
-        this.transition = param.transition.toString();
+        this.thirdSelectTransition = param.transition.toString();
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
         this.dataSource.setBroadCast(this.broadCast);
@@ -159,11 +159,11 @@ struct ThirdSelectPhotoBrowser {
 
     onPageShow() {
         this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
-        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [true, this.transition]);
+        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [true, this.thirdSelectTransition]);
     }
 
     onPageHide() {
-        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, this.transition]);
+        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, this.thirdSelectTransition]);
     }
 
     onMenuClicked(action: Action) {
@@ -203,7 +203,7 @@ struct ThirdSelectPhotoBrowser {
             PhotoBrowserBg()
             PhotoSwiper({
                 dataSource: this.dataSource,
-                transition: this.transition,
+                photoSwiperTransition: this.thirdSelectTransition,
                 onPhotoChanged: this.onPhotoChanged.bind(this),
                 swiperController: this.controller
             })

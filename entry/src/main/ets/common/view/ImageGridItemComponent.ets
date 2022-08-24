@@ -36,7 +36,7 @@ export struct ImageGridItemComponent {
     @Consume @Watch('onShow') isShow: boolean;
     @State autoResize: boolean = true;
     loaded = false;
-    position: number;
+    imageGridPosition: number;
     pageName = '';
     pixelMap: PixelMap;
     @State useAlt: boolean = false;

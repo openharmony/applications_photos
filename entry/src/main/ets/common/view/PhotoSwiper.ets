@@ -24,7 +24,7 @@ import { Constants as PhotoConstants } from '../../common/model/browser/photo/Co
 export struct PhotoSwiper {
     private dataSource;
     private logger: Logger = new Logger('PhotoSwiper');
-    transition: string;
+    photoSwiperTransition: string;
     @Consume currentIndex: number;
     @Consume broadCast: BroadCast;
     @Consume canSwipe: boolean;
@@ -65,11 +65,11 @@ export struct PhotoSwiper {
                 Column() {
                     PhotoItem({
                         item: item.data,
-                        position: item.pos,
+                        photoItemPosition: item.pos,
                         thumbnail: item.thumbnail,
-                        transitionId: (item.pos == this.currentIndex && this.transition != undefined)
-                            ? (this.transition + item.data.uri) : PhotoConstants.DEFAULT_TRANSITION_ID,
-                        transitionTag: this.transition ? this.transition : PhotoConstants.DEFAULT_TRANSITION_ID,
+                        transitionId: (item.pos == this.currentIndex && this.photoSwiperTransition != undefined)
+                            ? (this.photoSwiperTransition + item.data.uri) : PhotoConstants.DEFAULT_TRANSITION_ID,
+                        transitionTag: this.photoSwiperTransition ? this.photoSwiperTransition : PhotoConstants.DEFAULT_TRANSITION_ID,
                     })
                 }.zIndex(item.pos == this.currentIndex ? 2 : 1)
             }, (item) => item.data.uri)

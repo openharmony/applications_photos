@@ -30,7 +30,7 @@ import { LoadingPanel } from './components/LoadingPanel'
 export struct PhotoItem {
     @State @Watch('onViewDataChanged') item: MediaItem = new MediaItem(null);
     @State matrix: any = Matrix4.identity().copy();
-    @State direction: PanDirection = PanDirection.Vertical;
+    @State photoItemDirection: PanDirection = PanDirection.Vertical;
     @Consume broadCast: BroadCast;
     @State transitionId: string = PhotoConstants.DEFAULT_TRANSITION_ID;
     @State objectFit: ImageFit = ImageFit.Contain;
@@ -40,7 +40,7 @@ export struct PhotoItem {
     @Consume isPullingDown: boolean;
     @Consume pageFrom: number;
     @Consume('transitionIndex') @Watch('onTransitionChange') updateTransition: number;
-    position: number;
+    photoItemPosition: number;
     transitionTag: string;
     private eventPipeline: EventPipeline;
     private logger: Logger = new Logger('PhotoItem');
@@ -52,9 +52,9 @@ export struct PhotoItem {
     private preItem = { rotate: 0, height: 0, width: 0 };
 
     onTransitionChange() {
-        this.logger.info(`onTransitionChange , ${this.updateTransition} ${this.position}`);
+        this.logger.info(`onTransitionChange , ${this.updateTransition} ${this.photoItemPosition}`);
         this.photoCanRotateCheck();
-        if (this.updateTransition == this.position) {
+        if (this.updateTransition == this.photoItemPosition) {
             this.transitionId = this.transitionTag + this.item.uri;
             this.broadCast.emit(PhotoConstants.PHOTO_SHOW_STATE, [!this.showError]);
         } else {
@@ -80,7 +80,7 @@ export struct PhotoItem {
         this.eventPipeline = new EventPipeline(this.broadCast, this.item);
         this.matrix = Matrix4.identity().copy();
         this.firstLoad = true;
-        this.isLoading = this.updateTransition == this.position;
+        this.isLoading = this.updateTransition == this.photoItemPosition;
         // register event handling
         this.broadCast.on(PhotoConstants.TOUCH_EVENT + this.item.uri, (matrix: any) => {
             this.matrix = matrix;
@@ -88,7 +88,7 @@ export struct PhotoItem {
 
         this.broadCast.on(PhotoConstants.DIRECTION_CHANGE + this.item.uri, (direction: PanDirection) => {
             this.logger.info(`direction: ${direction}`);
-            this.direction = direction;
+            this.photoItemDirection = direction;
         });
 
         this.broadCast.on(PhotoConstants.ANIMATION_EVENT + this.item.uri, (animationOption: any, animationEndMatrix: any) => {
@@ -102,7 +102,7 @@ export struct PhotoItem {
     }
 
     private photoCanRotateCheck() {
-        if (this.updateTransition != this.position) {
+        if (this.updateTransition != this.photoItemPosition) {
             this.logger.info(`photoCanRotateCheck not current photo`);
             return
         }
@@ -180,20 +180,20 @@ export struct PhotoItem {
                     .transform(this.matrix)
                     .autoResize(false)
                     .onComplete(() => {
-                        TraceControllerUtils.startTrace(`PhotoItemComplete_${this.position}`);
-                        this.logger.debug(`onComplete finish index: ${this.position}, uri: ${this.item.uri}`);
+                        TraceControllerUtils.startTrace(`PhotoItemComplete_${this.photoItemPosition}`);
+                        this.logger.debug(`onComplete finish index: ${this.photoItemPosition}, uri: ${this.item.uri}`);
                         this.showError = false;
                         this.isLoading = false;
-                        if (this.updateTransition == this.position) {
+                        if (this.updateTransition == this.photoItemPosition) {
                             this.broadCast.emit(PhotoConstants.PHOTO_SHOW_STATE, [true]);
                         }
-                        TraceControllerUtils.finishTrace(`PhotoItemComplete_${this.position}`);
+                        TraceControllerUtils.finishTrace(`PhotoItemComplete_${this.photoItemPosition}`);
                     })
                     .onError(() => {
                         this.logger.error(`image show error`);
                         this.showError = true;
                         this.isLoading = true;
-                        if (this.updateTransition == this.position) {
+                        if (this.updateTransition == this.photoItemPosition) {
                             this.broadCast.emit(PhotoConstants.PHOTO_SHOW_STATE, [false]);
                         }
                     })
@@ -255,7 +255,7 @@ export struct PhotoItem {
                     }
                 }),
             PanGesture({
-                direction: this.direction
+                direction: this.photoItemDirection
             })
                 .onActionStart((event: GestureEvent) => {
                     this.logger.debug(`PanGesture start offsetX:\

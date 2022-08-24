@@ -36,7 +36,7 @@ import { AlbumDefine } from '../../../common/model/browser/AlbumDefine'
 @Entry
 @Component
 struct SelectPhotoBrowser {
-    @Provide backgroundColor: Resource = $r('app.color.default_background_color');
+    @Provide selectPhotoBackgroundColor: Resource = $r('app.color.default_background_color');
     @Provide('selectedCount') totalSelectedCount: number = 0
     @Provide broadCast: BroadCast = new BroadCast();
     @Provide isSelected: boolean = true;
@@ -47,14 +47,14 @@ struct SelectPhotoBrowser {
     @Provide canSwipe: boolean = true;
     selectManager: SelectManager;
     isMultiPick = true;
-    transition: string;
+    selectPhotoTransition: string;
     controller: SwiperController = new SwiperController();
 
     // swiper currentIndex, there may not be onChanged callback during data refresh, so mediaItem cannot be saved
     @Provide('transitionIndex') currentIndex: number = 0;
 
     // position
-    position: number;
+    selectPhotoPosition: number;
     timelineIndex: number = -1;
 
     // logger
@@ -68,7 +68,7 @@ struct SelectPhotoBrowser {
 
     aboutToAppear(): void {
         this.logger.info('photoBrowser aboutToAppear');
-        this.backgroundColor = $r('app.color.black');
+        this.selectPhotoBackgroundColor = $r('app.color.black');
         ScreenManager.getInstance().setNavigationBarColor('#FFFFFFFF')
         mMultimodalInputManager.registerListener((control: number) => {
             this.logger.info(`key control : ${control} index ${this.currentIndex}`);
@@ -101,7 +101,7 @@ struct SelectPhotoBrowser {
         }
 
         this.onPhotoChanged(new Number(param.position).valueOf() || 0);
-        this.transition = param.transition ? param.transition.toString() : '';
+        this.selectPhotoTransition = param.transition ? param.transition.toString() : '';
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
         this.dataSource.setBroadCast(this.broadCast);
@@ -178,12 +178,12 @@ struct SelectPhotoBrowser {
     onPageShow() {
         this.logger.info('onPageShow');
         this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
-        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [true, this.transition]);
+        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [true, this.selectPhotoTransition]);
     }
 
     onPageHide() {
         this.logger.info('onPageHide');
-        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, this.transition]);
+        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, this.selectPhotoTransition]);
     }
 
     onMenuClicked(action: Action) {
@@ -224,7 +224,7 @@ struct SelectPhotoBrowser {
             PhotoBrowserBg()
             PhotoSwiper({
                 dataSource: this.dataSource,
-                transition: this.transition,
+                photoSwiperTransition: this.selectPhotoTransition,
                 onPhotoChanged: this.onPhotoChanged.bind(this),
                 swiperController: this.controller
             })
