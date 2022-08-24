@@ -42,27 +42,15 @@ export class FormController {
     bindFormData(formId: string): any {
         this.logger.info(`bindFormData start formId: ${formId}`)
         let fd = this.mediaDataManager.getCurrentFd();
-        let image: string = "image" + this.mediaDataManager.getMediaData().arkUri;
-        let dataObj1: any;
-        if (image == "image0") {
-            dataObj1 = {
-                "fd": fd == -1 ? false : true,
-                "image1": "memory://image" + this.mediaDataManager.getMediaData().arkUri,
-                "albumName": this.mediaDataManager.getCurrentAlbumName(),
-                "currentIndex": this.mediaDataManager.getCurrentIndex(),
-                "isShow": this.mediaDataManager.getIsShowAlbumName(),
-                "formImages": { "image0": fd }
-            };
-        } else {
-            dataObj1 = {
-                "fd": fd == -1 ? false : true,
-                "image1": "memory://image" + this.mediaDataManager.getMediaData().arkUri,
-                "albumName": this.mediaDataManager.getCurrentAlbumName(),
-                "currentIndex": this.mediaDataManager.getCurrentIndex(),
-                "isShow": this.mediaDataManager.getIsShowAlbumName(),
-                "formImages": { "image1": fd }
-            };
-        }
+        let image: string = "image_" + fd + "_formId_" + this.mediaDataManager.getMediaData().formId;
+        let dataObj1: any = {
+            "fd": fd == -1 ? false : true,
+            "image1": "memory://" + image,
+            "albumName": this.mediaDataManager.getCurrentAlbumName(),
+            "currentIndex": this.mediaDataManager.getCurrentIndex(),
+            "isShow": this.mediaDataManager.getIsShowAlbumName(),
+            "formImages": JSON.parse(`{ "${image}": ${fd} }`)
+        };
         this.logger.debug(`bindFormData, createFormBindingData dataObj2.data: ${JSON.stringify(dataObj1)}`);
         let obj = formBindingData.createFormBindingData(JSON.stringify(dataObj1));
         this.logger.debug(`bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
@@ -101,7 +89,6 @@ export class FormController {
     onDestroy() {
         this.logger.info('onDestroy start!');
         this.mediaDataManager.closeFd();
-        DataStoreUtil.getInstance(this.context).removeCache();
         MediaLibraryAccess.getInstance().onDestroy();
         this.callback = null;
         this.logger.info('onDestroy done end!');

@@ -197,29 +197,19 @@ struct FormEditorPage {
 
     bindFormData(): any {
         this.logger.debug(`bindFormData start formId: ${this.formId}`)
-        let image = "image" + this.arkUri;
-        let dataObj1: any;
-        if (image == "image0") {
-            dataObj1 = {
-                "fd": this.fd == -1 ? false : true,
-                "image1": "memory://image" + this.arkUri,
-                "albumName": this.displayName,
-                "currentIndex": this.currentIndex,
-                "isShow": this.isShow,
-                "formImages": { "image0": this.fd }
-            };
-        } else {
-            dataObj1 = {
-                "fd": this.fd == -1 ? false : true,
-                "image1": "memory://image" + this.arkUri,
-                "albumName": this.displayName,
-                "currentIndex": this.currentIndex,
-                "isShow": this.isShow,
-                "formImages": { "image1": this.fd }
-            };
-        }
-        this.logger.debug(`bindFormData, createFormBindingData dataObj2.data: ${JSON.stringify(dataObj1)}`);
-        let obj = formBindingData.createFormBindingData(JSON.stringify(dataObj1));
+        let image = "image_" + this.fd + "_formId_" + this.formId;
+        this.logger.debug(`bindFormData start image: ${image}`)
+        let dataObj1: any = {
+            "fd": this.fd == -1 ? false : true,
+            "image1": "memory://" + image,
+            "albumName": this.displayName,
+            "currentIndex": this.currentIndex,
+            "isShow": this.isShow,
+            "formImages": JSON.parse(`{ "${image}": ${this.fd} }`)
+        };
+        let dataObj = JSON.stringify(dataObj1)
+        this.logger.info(`bindFormData, createFormBindingData dataObj2.data: ${dataObj}`);
+        let obj = formBindingData.createFormBindingData(dataObj);
         this.logger.debug(`bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
         return obj;
     }

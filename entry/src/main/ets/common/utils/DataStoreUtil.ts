@@ -72,6 +72,7 @@ export class DataStoreUtil {
         this.logger.debug('putData start!');
         if (this.preferences == undefined) {
             this.logger.error('putData preferences is undefined');
+            return
         }
 
         await this.preferences.put(key, value).then(() => {
