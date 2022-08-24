@@ -259,24 +259,6 @@ export class MediaDataManager {
         this.logger.debug('storageDelete end!');
     }
 
-    setMediaData(displayName: string, albumName: string, currentUri: string, intervalTime: number) {
-        this.logger.debug('setAlbumNameAndUri start!');
-        if (this.mediaData != null) {
-            this.mediaData.currentUri = currentUri;
-            if (this.mediaData.currentUri == '') {
-                this.mediaData.currentIndex = 0;
-            }
-            this.mediaData.intervalTime = intervalTime;
-            if (this.mediaData.albumName != albumName) {
-                this.mediaData.albumName = albumName;
-                this.loadData();
-            } else {
-                this.saveData();
-            }
-        }
-        this.logger.debug('setAlbumNameAndUri end!');
-    }
-
     filterOutVideoMediaData() {
         this.logger.debug('filterOutVideoMediaData start!');
         if (this.items.length == 0) {
@@ -378,7 +360,8 @@ export class MediaDataManager {
 
     setNextIndex() {
         this.logger.debug(`setNextIndex start old index ${this.mediaData.currentIndex} flag ${this.isNextFag}`);
-        if (this.isNextFag) {
+        // this.mediaData.isShowAlbumName == false means select a photo instead of a album
+        if (this.isNextFag && this.mediaData.isShowAlbumName) {
             let index = this.mediaData.currentIndex;
             if ((this.items.length != 0) && (index < this.items.length - 1)) {
                 index = index + 1;
