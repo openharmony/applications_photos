@@ -12,6 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import image from '@ohos.multimedia.image'
+import { MediaLibraryAccess } from '../../../access/MediaLibraryAccess';
 import { DateUtil } from '../../../utils/DateUtil';
 import { Constants } from '../../common/Constants'
 
@@ -36,13 +39,14 @@ export class MediaItem {
     displayName: string;
     filePath: string;
     path: string;
-    canRotate: boolean;
+    private fileAsset: any
+    private canRotate: number = -1;
 
     constructor(data) {
         if (data == null) {
             return;
         }
-
+        this.fileAsset = data
         this.id = data.id;
         this.mediaType = data.mediaType;
         this.uri = data.uri;
@@ -63,7 +67,6 @@ export class MediaItem {
         this.imgHeight = this.height;
         this.displayName = data.displayName;
         this.path = data.relativePath;
-        this.canRotate = false;
     }
 
     setThumbnail(thumbnail: string) {
@@ -74,12 +77,30 @@ export class MediaItem {
         this.isFavor = isFavorite;
     }
 
-    setOrientation(orientation: string) {
+    async isRotatable(): Promise<boolean> {
+        if (this.canRotate == -1) {
+            await this.setRotatable()
+        }
+        return this.canRotate == 1
+    }
+
+    private async setRotatable() {
+        try {
+            let fd = await MediaLibraryAccess.getInstance().openAsset('RW', this.fileAsset);
+            let imageSourceApi: image.ImageSource = image.createImageSource(fd);
+            let orientation = await imageSourceApi.getImageProperty("Orientation")
+            this.setOrientation(orientation)
+        } catch (err) {
+            this.setOrientation("")
+        }
+    }
+
+    private setOrientation(orientation: string) {
         if (orientation.length == 0) {
-            this.canRotate = false;
+            this.canRotate = 0;
             return
         }
-        this.canRotate = true;
+        this.canRotate = 1;
         switch (orientation) {
             case "Left-bottom":
                 this.orientation = 270

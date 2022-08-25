@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-import image from '@ohos.multimedia.image'
 import { AlbumDefine } from '../AlbumDefine'
 import { BrowserDataImpl } from '../BrowserDataImpl'
 import { Logger } from '../../../utils/Logger'
@@ -66,7 +65,6 @@ export class PhotoDataImpl extends BrowserDataImpl {
             try {
                 let item = dataList[i];
                 let mediaItem: MediaItem = new MediaItem(item);
-                await this.checkRotate(mediaItem, item)
                 if (favor[i].status = 'success') {
                     mediaItem.setFavorite(favor[i].res);
                 } else {
@@ -81,22 +79,6 @@ export class PhotoDataImpl extends BrowserDataImpl {
         }
         this.logger.info(`getMediaItem item size: ${mediaItemList.length}`);
         callback.callback(mediaItemList);
-    }
-
-    private async checkRotate(mediaItem: MediaItem, fileAsset): Promise<void> {
-        this.logger.info(`checkRotate`);
-        try {
-            let fd = await MediaLibraryAccess.getInstance().openAsset('RW', fileAsset);
-            this.logger.debug(`get fd ${fd}`);
-            let imageSourceApi: image.ImageSource = image.createImageSource(fd);
-            this.logger.debug(`get imageSourceApi ${mediaItem.displayName}`);
-            let orientation = await imageSourceApi.getImageProperty("Orientation")
-            this.logger.debug(`get imageSourceApi ${mediaItem.displayName} success ${orientation}`);
-            mediaItem.setOrientation(orientation)
-        } catch (err) {
-            this.logger.debug(`get imageSourceApi ${mediaItem.displayName} fail`);
-            mediaItem.setOrientation("")
-        }
     }
 
     handlePromise(promiseList) {

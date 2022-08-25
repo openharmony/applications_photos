@@ -106,8 +106,10 @@ export struct PhotoItem {
             this.logger.info(`photoCanRotateCheck not current photo`);
             return
         }
-        this.logger.debug(`photoCanRotateCheck this.item.canRotate ${this.item.canRotate}`);
-        this.broadCast.emit(PhotoConstants.PHOTO_CAN_ROTATE, [this.item.canRotate]);
+        this.item.isRotatable().then(canRotate => {
+            this.logger.debug(`photoCanRotateCheck this.item.canRotate ${canRotate}`);
+            this.broadCast.emit(PhotoConstants.PHOTO_CAN_ROTATE, [canRotate]);
+        })
     }
 
     aboutToDisappear(): void {

@@ -177,7 +177,6 @@ export default class MainAbility extends Ability {
                             if (dataSource.getRawData(0) || times >= MainAbility.RETRY_MAX_TIMES) {
                                 AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, dataSource);
                                 windowStage.setUIContent(this.context, 'feature/browser/view/PhotoBrowser', null);
-                                ScreenManager.getInstance().initWindowMode();
                                 clearInterval(intervalId);
                             }
                             times++;
@@ -185,7 +184,6 @@ export default class MainAbility extends Ability {
                     });
                 } else {
                     windowStage.setUIContent(this.context, pagePath, null);
-                    ScreenManager.getInstance().initWindowMode();
                 }
                 TraceControllerUtils.finishTrace('onWindowStageCreate');
             }).catch(() => {
