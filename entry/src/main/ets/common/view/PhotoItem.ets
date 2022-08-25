@@ -341,6 +341,7 @@ export struct PhotoItem {
                     .objectFit(ImageFit.Contain)
                     .width($r('app.float.icon_video_size'))
                     .height($r('app.float.icon_video_size'))
+                    .visibility(!this.isLoading ? Visibility.Visible : Visibility.None)
                     .onClick(() => {
                         if (this.item != undefined) {
                             router.push({
