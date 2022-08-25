@@ -107,7 +107,6 @@ export class MediaDataSource extends AbsDataSource {
         this.updateSlidingWindow(this.dataIndexes[index]);
         let result: any = this.getWrappedData(index);
         this.logger.debug(`getData, index: ${index}`);
-        this.logger.debug(`getData item: ${JSON.stringify(result.mediaItem)}`);
         return result;
     }
 
