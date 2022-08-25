@@ -62,7 +62,7 @@ import resourceManager from '@ohos.resourceManager';
 @Component
 struct PhotoBrowser {
     @State opacity: number = 1;
-    @Provide backgroundColor: Resource = $r('app.color.default_background_color');
+    @Provide browserBackgroundColor: Resource = $r('app.color.default_background_color');
     @Provide('dateTitle') photoDate: string = '';
     @Provide('timeLocationTitle') timeAndLocation: string = '';
     @Provide menuList: Array<Action> = new Array<Action>();
@@ -262,7 +262,7 @@ struct PhotoBrowser {
     showBars(): void {
         if (!this.isShowBar) {
             this.isShowBar = true;
-            this.backgroundColor = $r('app.color.default_background_color');
+            this.browserBackgroundColor = $r('app.color.default_background_color');
             ScreenManager.getInstance().setSystemUi(true);
         }
     }
@@ -270,7 +270,7 @@ struct PhotoBrowser {
     hideBars(): void {
         if (this.isShowBar) {
             this.isShowBar = false;
-            this.backgroundColor = $r('app.color.black');
+            this.browserBackgroundColor = $r('app.color.black');
             ScreenManager.getInstance().setSystemUi(false);
         }
     }
