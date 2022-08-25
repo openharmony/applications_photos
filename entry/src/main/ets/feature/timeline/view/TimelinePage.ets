@@ -642,7 +642,7 @@ export struct TimelinePage {
                                     GridItem() {
                                         TimelineTitleComponent({
                                             groupData: item.viewData,
-                                            position: item.viewIndex,
+                                            timelinePosition: item.viewIndex,
                                             isSelected: this.groupSelectMode[item.viewIndex]
                                         })
                                     }.columnStart(0).columnEnd(this.gridRowCount - 1)
@@ -650,7 +650,7 @@ export struct TimelinePage {
                                     GridItem() {
                                         ImageGridItemComponent({
                                             item: item.viewData.mediaItem,
-                                            position: item.viewIndex,
+                                            imageGridPosition: item.viewIndex,
                                             isSelected: this.isSelectedMode ? this.mSelectManager.isItemSelected(item.viewData.mediaItem.uri, item.viewIndex) : false,
                                             pageName: Constants.PHOTO_TRANSITION_TIMELINE
                                         })
@@ -691,7 +691,7 @@ export struct TimelinePage {
             }
 
             ToolBar({
-                isShowBar: this.isSelectedMode,
+                isShowBar: this.isSelectedMode && true,
                 toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected),
                 onMenuClicked: this.onMenuClicked
             })

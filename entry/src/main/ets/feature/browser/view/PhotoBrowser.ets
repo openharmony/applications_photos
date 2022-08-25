@@ -83,7 +83,7 @@ struct PhotoBrowser {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
     @StorageLink('entryFromHap') entryFromHap: number = Constants.ENTRY_FROM_NONE;
-    transition: string;
+    photoBrowserTransition: string;
     albumId = '';
 
     // swiper currentIndex, there may not be onChanged callback during data refresh, so mediaItem cannot be saved
@@ -547,7 +547,7 @@ struct PhotoBrowser {
             }
 
             this.onPhotoChanged(new Number(param.position).valueOf() || 0);
-            this.transition = (this.isFromCamera || this.isFromViewData)
+            this.photoBrowserTransition = (this.isFromCamera || this.isFromViewData)
                 ? Constants.PHOTO_TRANSITION_CAMERA : (param.transition ? param.transition.toString() : '');
         } else {
             this.logger.info(`photoBrowser start without param`);
@@ -564,10 +564,10 @@ struct PhotoBrowser {
             this.jumpSourceToMain = JumpSourceToMain.CAMERA;
             MediaObserver.getInstance().registerObserver(this.dataObserver);
             this.onPhotoChanged(AppStorage.Get(Constants.FROM_CURRENT_INDEX) || 0);
-            this.transition = Constants.PHOTO_TRANSITION_CAMERA;
+            this.photoBrowserTransition = Constants.PHOTO_TRANSITION_CAMERA;
         }
 
-        this.checkedTransition = this.transition
+        this.checkedTransition = this.photoBrowserTransition
 
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
@@ -892,7 +892,7 @@ struct PhotoBrowser {
             PhotoBrowserBg()
             PhotoSwiper({
                 dataSource: this.dataSource,
-                transition: this.transition,
+                photoSwiperTransition: this.photoBrowserTransition,
                 swiperController: this.controller,
                 onPhotoChanged: this.onPhotoChanged.bind(this)
             })

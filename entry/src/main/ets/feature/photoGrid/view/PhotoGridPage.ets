@@ -686,7 +686,7 @@ export struct PhotoGridPage {
                                     isSelected: this.isSelectedMode ?
                                     this.mSelectManager.isItemSelected(item.mediaItem.uri) : false,
                                     pageName: Constants.PHOTO_TRANSITION_ALBUM,
-                                    position: item.viewIndex
+                                    imageGridPosition: item.viewIndex
                                 })
                             }
                             .columnStart(item.viewIndex % this.gridRowCount)

@@ -27,16 +27,16 @@ export struct TimelineTitleComponent {
     @Consume isSelectedMode: boolean;
     @State isSelected: boolean = false;
     @Consume broadCast: BroadCast;
-    position = 0;
+    timelinePosition = 0;
     addresses = '';
 
     aboutToAppear(): void {
-        this.logger.info(`${this.groupData.startDate} position ${this.position}`);
+        this.logger.info(`${this.groupData.startDate} position ${this.timelinePosition}`);
     }
 
     selectStateChange() {
         this.logger.info('change selected.');
-        this.broadCast.emit(BroadCastConstants.GROUP_SELECT, [this.position]);
+        this.broadCast.emit(BroadCastConstants.GROUP_SELECT, [this.timelinePosition]);
     }
 
     build() {
