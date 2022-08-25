@@ -1,3 +1,4 @@
+import window from '@ohos.window';
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -78,24 +79,19 @@ export class ScreenManager {
     async initializationSize(win): Promise<void> {
         this.mainWindow = win;
         let properties = await win.getProperties();
-        return new Promise<void>((resolve, reject) => {
-            if (!properties || !properties.windowRect) {
-                reject();
-            }
-            let size = properties.windowRect;
-            this.logger.info(`display screen windowRect: ${JSON.stringify(size)}`);
-            this.winWidth = px2vp(size.width);
-            this.winHeight = px2vp(size.height);
-            this.logger.info(`display screen windowRect px2vp: ${this.winWidth} ${this.winHeight}`);
-            if (this.winWidth < ScreenWidth.WIDTH_MEDIUM) {
-                this.columns = ColumnSize.COLUMN_FOUR;
-            } else if (this.winWidth >= ScreenWidth.WIDTH_MEDIUM && this.winWidth < ScreenWidth.WIDTH_LARGE) {
-                this.columns = ColumnSize.COLUMN_EIGHT;
-            } else {
-                this.columns = ColumnSize.COLUMN_TWELVE;
-            }
-            resolve();
-        });
+        let size = properties.windowRect;
+        this.logger.info(`display screen windowRect: ${JSON.stringify(size)}`);
+        this.winWidth = px2vp(size.width);
+        this.winHeight = px2vp(size.height);
+        this.logger.info(`display screen windowRect px2vp: ${this.winWidth} ${this.winHeight}`);
+        if (this.winWidth < ScreenWidth.WIDTH_MEDIUM) {
+            this.columns = ColumnSize.COLUMN_FOUR;
+        } else if (this.winWidth >= ScreenWidth.WIDTH_MEDIUM && this.winWidth < ScreenWidth.WIDTH_LARGE) {
+            this.columns = ColumnSize.COLUMN_EIGHT;
+        } else {
+            this.columns = ColumnSize.COLUMN_TWELVE;
+        }
+        await this.initWindowMode()
     }
 
     /**
@@ -189,9 +185,9 @@ export class ScreenManager {
         return this.naviBarHeight;
     }
 
-    initWindowMode() {
+    private async initWindowMode() {
         this.logger.debug(`start to initialize photos application window mode: ${this.windowMode}`);
-        this.checkWindowMode();
+        await this.checkWindowMode();
         this.mainWindow && this.setMainWindow();
     }
 
@@ -217,7 +213,7 @@ export class ScreenManager {
         }
     }
 
-    setMainWindow() {
+    private setMainWindow() {
         this.logger.debug('setMainWindow');
         this.mainWindow.on('windowSizeChange', (data) => {
             this.logger.debug(`windowSizeChange ${JSON.stringify(data)}`);
@@ -233,14 +229,13 @@ export class ScreenManager {
         });
     }
 
-    setFullScreen() {
+    async setFullScreen() {
         let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
         this.logger.debug('getTopWindow start');
         try {
-            topWindow.setLayoutFullScreen(true, () => {
-                this.logger.debug('setFullScreen true Succeeded');
-                this.hideStatusBar();
-            });
+            await topWindow.setLayoutFullScreen(true)
+            this.logger.debug('setFullScreen true Succeeded');
+            this.hideStatusBar();
         } catch (err) {
             this.logger.error(`setFullScreen err: ${err}`);
         }
@@ -436,7 +431,7 @@ export class ScreenManager {
             topWindow.setKeepScreenOn(true, () => {
                 this.logger.info('setKeepScreenOn Succeeded');
             })
-        } catch(err) {
+        } catch (err) {
             this.logger.error(`setKeepScreenOn err: ${err}`);
         }
     }
@@ -448,7 +443,7 @@ export class ScreenManager {
             topWindow.setKeepScreenOn(false, () => {
                 this.logger.info('setKeepScreenOff Succeeded');
             })
-        } catch(err) {
+        } catch (err) {
             this.logger.error(`setKeepScreenOff err: ${err}`);
         }
     }

@@ -70,47 +70,6 @@ export class UiUtil {
     private static logger: Logger = new Logger('UiUtil');
 
     /**
-     * Set full screen immersion
-     *
-     * @param window window
-     * @param isFullScreen isFullScreen
-     */
-    static setLayoutFullScreen(paramWindow: any, isFullScreen: boolean): void {
-        paramWindow.getTopWindow().then((data) => {
-            this.logger.info(`WindowPlugin getTopWindow promise success data: ${data}`);
-            data.setLayoutFullScreen(isFullScreen).then(() => {
-                this.logger.info('finish to set full screen');
-            });
-        }).catch((error) => {
-            this.logger.error(`WindowPlugin getTopWindow promise failed because ${error}`);
-        });
-    }
-
-    /**
-     * Set system status bar / navigation bar display / hide
-     *
-     * @param window window
-     * @param systemBars ["status", "navigation"] ["status"] ["navigation"] []
-     */
-    static setSystemUi(isShowBar: boolean): void {
-        this.logger.debug('setSystemUi start');
-        let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
-        this.logger.debug('getTopWindow start');
-        let names = ["status", "navigation"];
-        if (!isShowBar) {
-            names = [];
-        }
-        this.logger.debug(`getTopWindow names: ${names} end`);
-        try {
-            topWindow.setSystemBarEnable(names, () => {
-                this.logger.debug('setFullScreen Succeeded');
-            })
-        } catch (err) {
-            this.logger.error(`setSystemUi err: ${err}`);
-        }
-    }
-
-    /**
      * Get system status bar height
      *
      * @param window window
