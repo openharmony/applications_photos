@@ -35,7 +35,7 @@ import mMultimodalInputManager from '../../../common/model/common/MultimodalInpu
 @Entry
 @Component
 struct ThirdSelectPhotoBrowser {
-    @Provide thirdSelectBackgroundColor: Resource = $r('app.color.default_background_color');
+    @Provide browserBackgroundColor: Resource = $r('app.color.default_background_color');
     @Provide('selectedCount') totalSelectedCount: number = 0;
     @Provide broadCast: BroadCast = new BroadCast();
     @Provide isSelected: boolean = true;
@@ -63,7 +63,7 @@ struct ThirdSelectPhotoBrowser {
 
     aboutToAppear(): void {
         this.logger.info('photoBrowser aboutToAppear');
-        this.thirdSelectBackgroundColor = $r('app.color.black');
+        this.browserBackgroundColor = $r('app.color.black');
         ScreenManager.getInstance().setNavigationBarColor('#FFFFFFFF')
         mMultimodalInputManager.registerListener((control: number) => {
             this.logger.info(`key control : ${control} index ${this.currentIndex}`);

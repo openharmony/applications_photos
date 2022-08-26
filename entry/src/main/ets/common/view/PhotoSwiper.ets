@@ -49,12 +49,7 @@ export struct PhotoSwiper {
                     }
                     this.dataSource.onDataReloaded();
                 } }, () => {
-                let totalCount = this.dataSource.totalCount();
-                if (this.currentIndex + 1 == totalCount) {
-                    this.swiperController.showPrevious()
-                } else {
-                    this.swiperController.showNext()
-                }
+                this.dataSource.deleteData(this.currentIndex);
             })
         });
 

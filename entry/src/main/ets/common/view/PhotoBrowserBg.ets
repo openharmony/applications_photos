@@ -1,4 +1,3 @@
-// @ts-nocheck
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,13 +16,13 @@ import { Constants as PhotoConstants } from '../../common/model/browser/photo/Co
 
 @Component
 export struct PhotoBrowserBg {
-    @Consume backgroundColor: Resource;
+    @Consume browserBackgroundColor: Resource;
     @Consume isShowBar: boolean;
 
     build() {
         Column() {
         }
-        .backgroundColor(this.backgroundColor)
+        .backgroundColor(this.browserBackgroundColor)
         .width('100%')
         .height('100%')
         .animation({

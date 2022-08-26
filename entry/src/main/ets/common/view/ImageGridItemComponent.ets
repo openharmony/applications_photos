@@ -130,7 +130,7 @@ export struct ImageGridItemComponent {
         this.logger.info('change selected.');
         let newState = !this.isSelected;
         if (this.item.uri) {
-            this.broadCast.emit(BroadCastConstants.SELECT, [this.position, this.item.uri, newState, function(){
+            this.broadCast.emit(BroadCastConstants.SELECT, [this.imageGridPosition, this.item.uri, newState, function(){
                 this.logger.info('enter callback');
                 this.isSelected = newState;
             }.bind(this)]);
