@@ -65,7 +65,7 @@ struct IndexPage {
             this.currentIndex = Constants.ALBUM_PAGE_INDEX;
         }
         let param = router.getParams();
-        this.logger.info(`param: ${JSON.stringify(param)}`);
+        this.logger.debug(`param: ${JSON.stringify(param)}`);
         if (param != null) {
             this.jumpSource = new Number(param.jumpSource).valueOf() || 0;
             if (this.jumpSource == JumpSourceToMain.CAMERA) {
