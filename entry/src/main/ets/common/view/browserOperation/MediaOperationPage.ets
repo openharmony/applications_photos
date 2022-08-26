@@ -162,7 +162,7 @@ struct MediaOperationPage {
                 list.push(item);
             }
         }
-        return list[list.length - 1].innerId == info.innerId;
+        return list.length == 0 || list[list.length - 1].innerId == info.innerId;
     }
 
     onPageShow() {
