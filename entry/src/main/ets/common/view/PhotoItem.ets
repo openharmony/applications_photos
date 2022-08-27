@@ -24,7 +24,8 @@ import { MediaLibraryAccess } from '../../common/access/MediaLibraryAccess'
 import { ScreenManager } from '../model/common/ScreenManager'
 import { Constants } from '../model/common/Constants';
 import { TraceControllerUtils } from '../utils/TraceControllerUtils';
-import { LoadingPanel } from './components/LoadingPanel'
+import { LoadingPanel } from './components/LoadingPanel';
+import { VideoIcon } from './components/VideoIcon'
 
 @Component
 export struct PhotoItem {
@@ -337,25 +338,24 @@ export struct PhotoItem {
                 })
             }
             Row() {
-                Image($r('app.media.ic_video_play_btn_png'))
-                    .objectFit(ImageFit.Contain)
-                    .width($r('app.float.icon_video_size'))
-                    .height($r('app.float.icon_video_size'))
-                    .visibility(!this.isLoading ? Visibility.Visible : Visibility.None)
-                    .onClick(() => {
-                        if (this.item != undefined) {
-                            router.push({
-                                uri: 'feature/browser/view/VideoBrowser',
-                                params: {
-                                    uri: this.item.uri,
-                                    dateTaken: this.item.dateTaken,
-                                    previewUri: this.thumbnail
-                                }
-                            })
-                        }
-                    })
-                    .visibility(this.isVideoPlayBtnShow())
+                VideoIcon()
             }
+                .width($r('app.float.icon_video_size'))
+                .height($r('app.float.icon_video_size'))
+                .onClick(() => {
+                    if (this.item != undefined) {
+                        router.push({
+                            uri: 'feature/browser/view/VideoBrowser',
+                            params: {
+                                uri: this.item.uri,
+                                dateTaken: this.item.dateTaken,
+                                previewUri: this.thumbnail
+                            }
+                        })
+                    }
+                })
+                .visibility(this.isVideoPlayBtnShow())
+
         }.width('100%')
         .height('100%')
         .sharedTransition(this.transitionId, { duration: PhotoConstants.SHARE_TRANSITION_DURATION })
