@@ -193,8 +193,6 @@ export class ScreenManager {
 
     isSplitMode(): boolean {
         return (WindowMode.PRIMARY == this.windowMode || WindowMode.SECONDARY == this.windowMode)
-            ? true
-            : false;
     }
 
     async checkWindowMode() {
@@ -207,7 +205,7 @@ export class ScreenManager {
         }
         this.windowMode = mode;
         if (WindowMode.FULL_SCREEN == this.windowMode) {
-            this.setFullScreen();
+            await this.setFullScreen();
         } else {
             this.setSplitScreen();
         }
@@ -229,13 +227,13 @@ export class ScreenManager {
         });
     }
 
-    async setFullScreen() {
+    private async setFullScreen() {
         let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
         this.logger.debug('getTopWindow start');
         try {
             await topWindow.setLayoutFullScreen(true)
             this.logger.debug('setFullScreen true Succeeded');
-            this.hideStatusBar();
+            await this.hideStatusBar(topWindow);
         } catch (err) {
             this.logger.error(`setFullScreen err: ${err}`);
         }
@@ -252,35 +250,29 @@ export class ScreenManager {
         }
     }
 
-    hideStatusBar() {
+    private async hideStatusBar(topWindow: any) {
         this.logger.debug('hideStatusBar start');
-        let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
-        this.logger.debug('getTopWindow start');
         let names = ['navigation'];
         this.logger.debug(`getTopWindow names: ${names} end`);
         try {
-            topWindow.setSystemBarEnable(names, () => {
-                this.logger.debug('hideStatusBar Succeeded');
-                topWindow.getAvoidArea(0, async (err, data) => {
-                    this.logger.info(`Succeeded in obtaining the area. Data: ${JSON.stringify(data)}`);
-                    this.onLeftBlankChanged(data);
-                    let barColor = await UiUtil.getResourceString($r('app.color.transparent'));
-                    let barContentColor = await UiUtil.getResourceString($r('app.color.default_bar_content_color'));
-                    if (!barColor) {
-                        barColor = '#00000000';
-                    }
-                    if (!barContentColor) {
-                        barContentColor = '#FF000000';
-                    }
-                    topWindow.setSystemBarProperties({
-                        navigationBarColor: barColor,
-                        navigationBarContentColor: barContentColor
-                    },
-                        () => {
-                            this.logger.info('setStatusBarColor done');
-                        });
-                });
+            await topWindow.setSystemBarEnable(names)
+            this.logger.debug('hideStatusBar Succeeded');
+            let data = await topWindow.getAvoidArea(0)
+            this.logger.debug(`Succeeded in obtaining the area. Data: ${JSON.stringify(data)}`);
+            this.onLeftBlankChanged(data);
+            let barColor = await UiUtil.getResourceString($r('app.color.transparent'));
+            let barContentColor = await UiUtil.getResourceString($r('app.color.default_bar_content_color'));
+            if (!barColor) {
+                barColor = '#00000000';
+            }
+            if (!barContentColor) {
+                barContentColor = '#FF000000';
+            }
+            await topWindow.setSystemBarProperties({
+                navigationBarColor: barColor,
+                navigationBarContentColor: barContentColor
             });
+            this.logger.info('setStatusBarColor done');
         } catch (err) {
             this.logger.error(`hideStatusBar err: ${err}`);
         }
