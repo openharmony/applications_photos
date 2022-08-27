@@ -146,7 +146,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         let limit = this.calcNewLimit();
         if (this.isCropShowInitialized) {
             this.cropShow.syncLimitRect(limit);
-            this.determineMaxScaleFactor(this.input);
+            this.input && this.determineMaxScaleFactor(this.input);
         } else {
             this.cropShow.init(limit, this.imageRatio);
             this.isCropShowInitialized = true;
