@@ -14,6 +14,7 @@ import window from '@ohos.window';
  * limitations under the License.
  */
 
+import deviceInfo from '@ohos.deviceInfo';
 import { Logger } from '../../utils/Logger'
 import { Constants } from './Constants'
 import { UiUtil } from '../../utils/UiUtil'
@@ -57,10 +58,10 @@ export class ScreenManager {
     private columns: number = ColumnSize.COLUMN_FOUR;
 
     // Default orientation
-    private horizontal = true;
+    private horizontal = deviceInfo.deviceType == ('phone || default') ? false : true;
 
     // Default sidebar
-    private sidebar = true;
+    private sidebar = deviceInfo.deviceType == ('phone || default') ? false : true;
     private windowMode = WindowMode.UNDEFINED;
 
     private constructor() {
