@@ -79,19 +79,24 @@ export class ScreenManager {
     async initializationSize(win): Promise<void> {
         this.mainWindow = win;
         let properties = await win.getProperties();
-        let size = properties.windowRect;
-        this.logger.info(`display screen windowRect: ${JSON.stringify(size)}`);
-        this.winWidth = px2vp(size.width);
-        this.winHeight = px2vp(size.height);
-        this.logger.info(`display screen windowRect px2vp: ${this.winWidth} ${this.winHeight}`);
-        if (this.winWidth < ScreenWidth.WIDTH_MEDIUM) {
-            this.columns = ColumnSize.COLUMN_FOUR;
-        } else if (this.winWidth >= ScreenWidth.WIDTH_MEDIUM && this.winWidth < ScreenWidth.WIDTH_LARGE) {
-            this.columns = ColumnSize.COLUMN_EIGHT;
-        } else {
-            this.columns = ColumnSize.COLUMN_TWELVE;
-        }
-        await this.initWindowMode()
+        return new Promise<void>((resolve, reject) => {
+            if (!properties || !properties.windowRect) {
+                reject();
+            }
+            let size = properties.windowRect;
+            this.logger.info(`display screen windowRect: ${JSON.stringify(size)}`);
+            this.winWidth = px2vp(size.width);
+            this.winHeight = px2vp(size.height);
+            this.logger.info(`display screen windowRect px2vp: ${this.winWidth} ${this.winHeight}`);
+            if (this.winWidth < ScreenWidth.WIDTH_MEDIUM) {
+                this.columns = ColumnSize.COLUMN_FOUR;
+            } else if (this.winWidth >= ScreenWidth.WIDTH_MEDIUM && this.winWidth < ScreenWidth.WIDTH_LARGE) {
+                this.columns = ColumnSize.COLUMN_EIGHT;
+            } else {
+                this.columns = ColumnSize.COLUMN_TWELVE;
+            }
+            resolve();
+        });
     }
 
     /**
@@ -185,9 +190,9 @@ export class ScreenManager {
         return this.naviBarHeight;
     }
 
-    private async initWindowMode() {
+    initWindowMode() {
         this.logger.debug(`start to initialize photos application window mode: ${this.windowMode}`);
-        await this.checkWindowMode();
+        this.checkWindowMode();
         this.mainWindow && this.setMainWindow();
     }
 
@@ -211,7 +216,7 @@ export class ScreenManager {
         }
     }
 
-    private setMainWindow() {
+    setMainWindow() {
         this.logger.debug('setMainWindow');
         this.mainWindow.on('windowSizeChange', (data) => {
             this.logger.debug(`windowSizeChange ${JSON.stringify(data)}`);
@@ -227,7 +232,7 @@ export class ScreenManager {
         });
     }
 
-    private async setFullScreen() {
+    async setFullScreen() {
         let topWindow: any = AppStorage.Get(Constants.MAIN_WINDOW);
         this.logger.debug('getTopWindow start');
         try {
