@@ -111,7 +111,8 @@ export class CopyMenuOperation extends ProcessMenuOperation {
             if (this.menuContext.deviceId) {
                 let displayName = assets.sourceAsset.displayName;
                 let index = displayName.lastIndexOf('.');
-                displayName = `${displayName.slice(0, index)}${new Date().getTime()}${displayName.slice(index)}`;
+                let start = displayName.lastIndexOf('_');
+                displayName = `${displayName.slice(0, start)}_${new Date().getTime()}${displayName.slice(index)}`;
                 this.copy(assets.sourceAsset, null, {
                     mediaType: assets.sourceAsset.mediaType,
                     name: displayName,

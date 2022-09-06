@@ -66,7 +66,7 @@ struct PhotoBrowser {
     @Provide('dateTitle') photoDate: string = '';
     @Provide('timeLocationTitle') timeAndLocation: string = '';
     @Provide menuList: Array<Action> = new Array<Action>();
-    private toolMenuList: Array<Action> = new Array<Action>();
+    @State toolMenuList: Array<Action> = new Array<Action>();
     @Provide topMenuList: Array<Action> = new Array<Action>();
     @Provide moreMenuList: Array<Action> = new Array<Action>();
     @Provide broadCast: BroadCast = new BroadCast();

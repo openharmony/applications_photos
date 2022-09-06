@@ -31,7 +31,7 @@ export struct ToolBar {
     @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number]
         = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-    @State toolMenuList: Action[] = [];
+    toolMenuList: Action[] = [];
     @Consume moreMenuList: Action[];
     @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
     @State showPopup: boolean = false;
