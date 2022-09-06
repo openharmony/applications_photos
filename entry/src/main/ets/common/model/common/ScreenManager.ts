@@ -58,10 +58,10 @@ export class ScreenManager {
     private columns: number = ColumnSize.COLUMN_FOUR;
 
     // Default orientation
-    private horizontal = deviceInfo.deviceType == ('phone || default') ? false : true;
+    private horizontal = deviceInfo.deviceType == ('phone' || 'default') ? false : true;
 
     // Default sidebar
-    private sidebar = deviceInfo.deviceType == ('phone || default') ? false : true;
+    private sidebar = deviceInfo.deviceType == ('phone' || 'default') ? false : true;
     private windowMode = WindowMode.UNDEFINED;
 
     private constructor() {
