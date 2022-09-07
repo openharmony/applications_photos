@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import deviceInfo from '@ohos.deviceInfo';
 import Ability from '@ohos.application.Ability'
 import wantConstant from '@ohos.ability.wantConstant'
 import { Logger } from '../common/utils/Logger'
@@ -32,7 +33,7 @@ const appLogger: Logger = new Logger('app');
 let isFromCard = false;
 let isFromCamera = false;
 let appBroadCast = BroadCastManager.getInstance().getBroadCast();
-const pagePath: string = 'product/pad/view/index';
+var pagePath: string = deviceInfo.deviceType == ('phone' || 'default') ? 'product/phone/view/index' : 'product/pad/view/index';
 
 export default class MainAbility extends Ability {
     private static readonly RETRY_MAX_TIMES = 100;
