@@ -71,7 +71,7 @@ export struct PhotoItem {
             this.eventPipeline && this.eventPipeline.setDefaultScale(this.imgScale);
         } else {
             this.matrix = Matrix4.identity().copy();
-            this.eventPipeline.reset();
+            this.eventPipeline && this.eventPipeline.reset();
         }
         this.logger.info(`onTransitionChange end`);
     }

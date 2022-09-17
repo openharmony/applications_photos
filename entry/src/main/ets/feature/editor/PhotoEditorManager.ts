@@ -62,7 +62,7 @@ export class PhotoEditorManager {
 
     clear() {
         this.logger.debug('clear');
-        this.editors[this.currentMode].exit();
+        this.editors[this.currentMode] && this.editors[this.currentMode].exit();
         this.item = undefined;
         this.origin && this.origin.release();
         this.origin = undefined;
