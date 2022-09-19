@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { ScreenManager } from '../model/common/ScreenManager'
+import screenManager from '../../../../../../common/base/src/main/ets/manager/ScreenManager'
 import { Constants } from '../model/common/Constants'
 import { Logger } from '../utils/Logger'
 
@@ -30,7 +30,7 @@ export struct NoPhotoIndexComponent {
 
     aboutToAppear(): void {
         this.logger.info('aboutToAppear');
-        ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.reSizeFunc);
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, this.reSizeFunc);
         this.updateImageSize();
     }
 
@@ -39,8 +39,8 @@ export struct NoPhotoIndexComponent {
     }
 
     updateImageSize() {
-        let winWidth = ScreenManager.getInstance().getWinWidth();
-        let winHeightHalf = ScreenManager.getInstance().getWinHeight() / 2;
+        let winWidth = screenManager.getWinWidth();
+        let winHeightHalf = screenManager.getWinHeight() / 2;
         this.imageSize
         = (winWidth < winHeightHalf) ? (winWidth * IMAGE_SCREEN_RATIO) : (winHeightHalf * IMAGE_SCREEN_RATIO)
         this.logger.info(`window size: ${winWidth}, ${winHeightHalf}  ,empty photos or album picture size = ${this.imageSize}`);

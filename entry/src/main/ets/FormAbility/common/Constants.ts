@@ -31,7 +31,6 @@ export class Constants {
     static readonly CURRENT_INDEX = 'currentIndex_';
     static readonly FLEX_GROW = 2;
     static readonly DIALOG_BOTTOM_OFFSET: number = 12;
-    static readonly DEFAULT_TIME = 30;
     static readonly NUMBER_2 = 2;
     static readonly NUMBER_3 = 3;
     static readonly NUMBER_4: number = 4;
@@ -40,6 +39,4 @@ export class Constants {
     static readonly NUMBER_24: number = 24;
     static readonly FROM_PLAYBACK_INTERVAL = 'form_playback_interval';
     static readonly PHOTOS_FORM_DEFAULT_PERIOD = 30;
-    static readonly SELECT_ALBUM: string = 'selectAlbum';
-    static readonly SELECT_PHOTO: string = 'selectPhoto';
 }

@@ -14,25 +14,21 @@
  */
 
 import deviceInfo from '@ohos.deviceInfo';
+import window from '@ohos.window';
 import Ability from '@ohos.application.Ability'
 import wantConstant from '@ohos.ability.wantConstant'
 import { Logger } from '../common/utils/Logger'
-import { ScreenManager } from '../common/model/common/ScreenManager'
-import { PixelMapManager } from '../common/model/common/PixelMapManager'
-import { StatusBarColorController } from '../common/model/common/StatusBarColorController'
-import { MediaLibraryAccess } from '../common/access/MediaLibraryAccess'
-import { TimelineDataSourceManager } from '../feature/timeline/model/TimelineDataSourceManager'
+import screenManager from '../../../../../common/base/src/main/ets/manager/ScreenManager'
 import { Constants } from '../common/model/common/Constants'
-import { MediaDataSource } from '../common/model/browser/photo/MediaDataSource'
-import { BroadCastManager } from '../common/model/common/BroadCastManager';
-import { TraceControllerUtils } from '../common/utils/TraceControllerUtils';
-import { BroadCastConstants } from '../common/model/common/BroadCastConstants'
+import broadcastManager from '../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { startTrace, finishTrace } from '../../../../../common/base/src/main/ets/utils/TraceControllerUtils';
+import { BroadcastConstants } from '../../../../../common/base/src/main/ets/constants/BroadcastConstants'
+import mediaModel from '@ohos/base/src/main/ets/model/MediaModel'
 import router from '@system.router'
 
 const appLogger: Logger = new Logger('app');
 let isFromCard = false;
-let isFromCamera = false;
-let appBroadCast = BroadCastManager.getInstance().getBroadCast();
+let appBroadcast = broadcastManager.getBroadcast();
 var pagePath: string = deviceInfo.deviceType == ('phone' || 'default') ? 'product/phone/view/index' : 'product/pad/view/index';
 
 export default class MainAbility extends Ability {
@@ -43,12 +39,12 @@ export default class MainAbility extends Ability {
 
     onCreate(want, launchParam) {
         appLogger.info('Application onCreate');
-        TraceControllerUtils.startTrace('onCreate');
+        startTrace('onCreate');
         // Ability is creating, initialize resources for this ability
-        globalThis.photosAbilityContext = this.context;
+        globalThis.appContext = this.context;
+        mediaModel.onCreate(this.context)
         let action = want.parameters;
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
-            isFromCamera = true;
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
@@ -78,8 +74,8 @@ export default class MainAbility extends Ability {
             "ohos.permission.MEDIA_LOCATION",
             "ohos.permission.DISTRIBUTED_DATASYNC"
         ];
-        TraceControllerUtils.startTrace('requestPermissionsFromUser');
-        globalThis.photosAbilityContext.requestPermissionsFromUser(requestPermissionList).then(function (data) {
+        startTrace('requestPermissionsFromUser');
+        this.context.requestPermissionsFromUser(requestPermissionList).then(function (data) {
             appLogger.info(`requestPermissionsFromUser data:  ${JSON.stringify(data)}`)
             let result = 0
             for (let i = 0; i < data.authResults.length; i++) {
@@ -88,14 +84,8 @@ export default class MainAbility extends Ability {
             if (result >= 0) {
                 // Improve cold startup performance. Initialize the timeline in advance
                 AppStorage.SetOrCreate(Constants.PERMISSION_STATUS, true);
-                TraceControllerUtils.finishTrace('requestPermissionsFromUser');
-                MediaLibraryAccess.getInstance().onCreate(globalThis.photosAbilityContext)
-                if (!isFromCard && !isFromCamera) {
-                    TraceControllerUtils.finishTrace('onCreate');
-                    TimelineDataSourceManager.getInstance();
-                } else {
-                    TraceControllerUtils.finishTrace('onCreate');
-                }
+                finishTrace('requestPermissionsFromUser');
+                finishTrace('onCreate');
             } else {
                 AppStorage.SetOrCreate(Constants.PERMISSION_STATUS, false);
             }
@@ -103,12 +93,12 @@ export default class MainAbility extends Ability {
             appLogger.error(`Failed to requestPermissionsFromUser, ${err.code}`);
         });
 
-        appBroadCast.on(BroadCastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
+        appBroadcast.on(BroadcastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
         appLogger.info('Application onCreate end');
     }
 
     onNewWant(want) {
-        TraceControllerUtils.startTrace('onNewWant');
+        startTrace('onNewWant');
         let action = want.parameters;
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
@@ -132,63 +122,33 @@ export default class MainAbility extends Ability {
         } else {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
-        TraceControllerUtils.finishTrace('onNewWant');
+        finishTrace('onNewWant');
     }
 
     onDestroy() {
         // Ability is creating, release resources for this ability
         appLogger.info('Application onDestroy');
-        let pixelMapManager: PixelMapManager = PixelMapManager.getInstance();
-        pixelMapManager.release();
-        let statusBarColorController: StatusBarColorController = StatusBarColorController.getInstance();
-        statusBarColorController.release();
         AppStorage.Delete(Constants.ENTRY_FROM_HAP);
-        MediaLibraryAccess.getInstance().onDestroy();
     }
 
     onWindowStageCreate(windowStage) {
-        TraceControllerUtils.startTrace('onWindowStageCreate');
+        startTrace('onWindowStageCreate');
         // Main window is created, set main page for this ability
         appLogger.info('Application onWindowStageCreate');
         globalThis.photosWindowStage = windowStage;
-        ScreenManager.getInstance().on(ScreenManager.ON_LEFT_BLANK_CHANGED, data => {
-            appLogger.info(`onleftBlankChanged: ${data}`);
-            AppStorage.SetOrCreate(Constants.LEFT_BLANK, data);
-        });
-        ScreenManager.getInstance().on(ScreenManager.ON_SPLIT_MODE_CHANGED, mode => {
-            appLogger.info(`onSplitModeChanged: ${JSON.stringify(mode)}`);
-            AppStorage.SetOrCreate(Constants.IS_SPLIT_MODE, mode);
-        });
-        TraceControllerUtils.startTrace('getMainWindow');
-        windowStage.getMainWindow().then((win) => {
+        startTrace('getMainWindow');
+        windowStage.getMainWindow().then((win: window.Window) => {
             AppStorage.SetOrCreate(Constants.MAIN_WINDOW, win);
-            TraceControllerUtils.finishTrace('getMainWindow');
-            TraceControllerUtils.startTrace('initializationSize');
-            ScreenManager.getInstance().initializationSize(win).then(() => {
-                TraceControllerUtils.finishTrace('initializationSize');
+            finishTrace('getMainWindow');
+            startTrace('initializationSize');
+            screenManager.initializationSize(win).then(() => {
+                finishTrace('initializationSize');
                 if (isFromCard) {
-                    MediaLibraryAccess.getInstance().getPublicDirectory().then(() => {
-                        let dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
-                        dataSource.setAlbumId(AppStorage.Get(Constants.FROM_ALBUM_ID));
-                        dataSource.initialize();
-                        let times = 0;
-                        //该场景是卡片跳转到大图指定图片，需要等大图数据获取完成再跳转，否则组件无法跳转。
-                        let intervalId = setInterval(() => {
-                            appLogger.info(`setInterval go`);
-                            if (dataSource.getRawData(0) || times >= MainAbility.RETRY_MAX_TIMES) {
-                                AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, dataSource);
-                                windowStage.setUIContent(this.context, 'feature/browser/view/PhotoBrowser', null);
-                                ScreenManager.getInstance().initWindowMode();
-                                clearInterval(intervalId);
-                            }
-                            times++;
-                        }, 50)
-                    });
+                    windowStage.setUIContent(this.context, 'feature/browser/view/PhotoBrowser', null);
                 } else {
                     windowStage.setUIContent(this.context, pagePath, null);
-                    ScreenManager.getInstance().initWindowMode();
                 }
-                TraceControllerUtils.finishTrace('onWindowStageCreate');
+                finishTrace('onWindowStageCreate');
             }).catch(() => {
                 appLogger.error(`get device screen info failed.`);
             });
@@ -205,7 +165,6 @@ export default class MainAbility extends Ability {
     }
 
     thirdRouterPage() {
-        TraceControllerUtils.startTrace('thirdRouterPage');
         let entryFrom = AppStorage.Get(Constants.ENTRY_FROM_HAP);
         let permission = AppStorage.Get(Constants.PERMISSION_STATUS);
         appLogger.info(`thirdRouterPage entryFromHap: ${entryFrom} permission: ${permission}`);
@@ -237,27 +196,10 @@ export default class MainAbility extends Ability {
             };
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_FORM_ABILITY) {
-            let dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
-            dataSource.setAlbumId(AppStorage.Get(Constants.FROM_ALBUM_ID));
-            dataSource.initialize();
-            let times = 0;
-            //该场景是卡片跳转到大图指定图片，需要等大图数据获取完成再跳转，否则组件无法跳转。
-            let intervalId = setInterval(() => {
-                if (dataSource.getRawData(0) || times >= MainAbility.RETRY_MAX_TIMES) {
-                    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, dataSource);
-                    let options = {
-                        uri: 'feature/browser/view/PhotoBrowser',
-                        params: {
-                            pageFrom: Constants.ENTRY_FROM.CARD,
-                            albumId: AppStorage.Get(Constants.FROM_ALBUM_ID),
-                            position: AppStorage.Get(Constants.FROM_CURRENT_INDEX)
-                        }
-                    };
-                    router.replace(options);
-                    clearInterval(intervalId);
-                }
-                times++;
-            }, 50)
+            let options = {
+                uri: 'feature/browser/view/PhotoBrowser',
+            };
+            router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_FORM_ABILITY_NONE) {
             let options = {
                 uri: pagePath
@@ -285,6 +227,5 @@ export default class MainAbility extends Ability {
             router.clear();
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, 0)
         }, 50);
-        TraceControllerUtils.finishTrace('thirdRouterPage');
     }
 }

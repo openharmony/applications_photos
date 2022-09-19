@@ -14,7 +14,7 @@
  */
 
 import router from '@system.router'
-import { ScreenManager } from '../../model/common/ScreenManager'
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 import { Constants } from '../../model/common/Constants'
 
 @Observed
@@ -25,10 +25,9 @@ export class EditExitDialogCallback {
 @CustomDialog
 export struct EditExitDialog {
     @Consume editExitDialogCallback: EditExitDialogCallback;
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
+    @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
+    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     controller: CustomDialogController;
 
     build() {
@@ -97,12 +96,12 @@ export struct EditExitDialog {
             .height($r('app.float.details_dialog_button_area_height'))
         }
         .borderRadius($r('app.float.dialog_border_radius'))
-        .width(ScreenManager.getInstance().getColumnsWidth(4))
+        .width(screenManager.getColumnsWidth(4))
         .backgroundColor($r('app.color.white'))
         .margin({
             right: $r('app.float.dialog_window_margin'),
             left: $r('app.float.dialog_window_margin'),
-            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
+            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + px2vp(this.leftBlank[3])
         })
         .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
         .alignItems(HorizontalAlign.Start)

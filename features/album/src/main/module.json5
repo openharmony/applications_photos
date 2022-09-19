@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "album",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "uiSyntax": "ets"
+  }
+}

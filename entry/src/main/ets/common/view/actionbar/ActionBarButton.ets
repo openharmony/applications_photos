@@ -15,12 +15,12 @@
 
 import { Action } from '../browserOperation/Action'
 import { ActionBarColorMode } from '../browserOperation/ActionBarMode'
-import { ScreenManager, ColumnSize } from '../../model/common/ScreenManager';
+import screenManager, { ColumnSize } from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
 @Component
 export struct ActionBarButton {
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
+    @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @State res: Resource = undefined;
     action: Action;
     onMenuClicked: Function;
@@ -52,7 +52,7 @@ export struct ActionBarButton {
                         .color($r('sys.color.ohos_id_color_list_separator'))
                 }
             }, menu => (menu.actionType != null ? menu.actionType.id : menu.actionID))
-        }.width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
+        }.width(screenManager.getColumnsWidth(ColumnSize.COLUMN_TWO))
         .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
         .padding({
             top: $r('app.float.menu_padding_vertical'),

@@ -14,17 +14,17 @@
  */
 
 import { Logger } from '../../../common/utils/Logger';
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 import { Constants } from '../../../common/model/common/Constants'
 
 export class UiUtil {
     private static logger: Logger = new Logger('UiUtil');
 
     public static getAlbumGridCount(horizontal: boolean): number {
-        this.logger.info(`get screen width is : ${ScreenManager.getInstance().getWinWidth()}`);
-        this.logger.info(`get screen height is : ${ScreenManager.getInstance().getWinHeight()}`);
+        this.logger.info(`get screen width is : ${screenManager.getWinWidth()}`);
+        this.logger.info(`get screen height is : ${screenManager.getWinHeight()}`);
         let sideBarWidth = horizontal ? Constants.TAB_BAR_WIDTH : 0;
-        let contentWidth = ScreenManager.getInstance().getWinWidth() - sideBarWidth;
+        let contentWidth = screenManager.getWinWidth() - sideBarWidth;
 
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         let gridColumnsCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)

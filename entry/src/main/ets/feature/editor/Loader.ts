@@ -12,48 +12,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {Logger} from './utils/Logger'
-import {MediaItem} from '../../common/model/browser/photo/MediaItem'
-import {BrowserDataFactory} from '../../common/interface/BrowserDataFactory'
-import {Size} from '../../common/model/common/DataTypes'
-import {PixelMapWrapper} from './base/PixelMapWrapper'
-import {MathUtils} from './crop/MathUtils'
-import {CropAngle} from './crop/CropType'
-import {ImageUtil} from '../../common/utils/ImageUtil'
-import {ScreenManager} from '../../common/model/common/ScreenManager'
+import MediaLib from '@ohos.multimedia.mediaLibrary';
+import { Logger } from './utils/Logger'
+import { MediaDataItem } from '../../../../../../common/base/src/main/ets/data/MediaDataItem';
+import { Size } from '../../common/model/common/DataTypes'
+import { PixelMapWrapper } from './base/PixelMapWrapper'
+import { MathUtils } from './crop/MathUtils'
+import { CropAngle } from './crop/CropType'
+import { computeSampleSize } from '../../../../../../common/base/src/main/ets/utils/ImageUtil'
+import screenManager from '../../../../../../common/base/src/main/ets/manager/ScreenManager'
 
 export class Loader {
     private static logger: Logger = new Logger('Loader');
     private static readonly MIN_PIXEL_MAP_SIZE: number = 1024;
 
     private static getPixelMapPreviewSize(size: Size) {
-        let width = ScreenManager.getInstance().getWinWidth();
-        let height = ScreenManager.getInstance().getWinHeight();
+        let width = screenManager.getWinWidth();
+        let height = screenManager.getWinHeight();
         this.logger.debug(`picture real size: ${size.width} ${size.height}`);
-        let scale = ImageUtil.computeSampleSize(size.width, size.height, Loader.MIN_PIXEL_MAP_SIZE, width * height * 2);
+        let scale = computeSampleSize(size.width, size.height, Loader.MIN_PIXEL_MAP_SIZE, width * height * 2);
         size.width = Math.ceil(size.width / scale);
         size.height = Math.ceil(size.height / scale);
         this.logger.debug(`picture scale: ${scale} size: ${JSON.stringify(size)}`);
     }
 
-    static async loadPixelMapWrapper(mediaItem: MediaItem, isPreview: boolean = false): Promise<PixelMapWrapper> {
+    static async loadPixelMapWrapper(mediaItem: MediaDataItem, isPreview: boolean = false): Promise<PixelMapWrapper> {
         this.logger.debug(`Photo: loadPixelMap id = ${mediaItem.id}`);
-        let dataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
-
-        let result = await dataImpl.getDataById(mediaItem.id);
-        if (!result) {
-            this.logger.error('get file asset failed.');
-            return null;
-        }
-
+        let fileAsset: MediaLib.FileAsset = await mediaItem.loadFileAsset()
         let size = {
-            width: result.width,
-            height: result.height
+            width: fileAsset.width,
+            height: fileAsset.height
         };
         isPreview && Loader.getPixelMapPreviewSize(size);
 
-        let thumbnail = await result.getThumbnail(size);
+        let thumbnail = await fileAsset.getThumbnail(size);
         let wrapper = new PixelMapWrapper(thumbnail, px2vp(size.width), px2vp(size.height));
         this.logger.info(`Photo: loadPixelMap: size[${JSON.stringify(size)}] wrapper[${JSON.stringify(wrapper)}]`);
 

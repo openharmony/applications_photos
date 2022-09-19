@@ -20,7 +20,7 @@ import { Ratio } from '../base/Ratio'
 import { Logger } from '../utils/Logger'
 import { CropRatioType, CropAngle } from './CropType'
 import { MathUtils } from './MathUtils'
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 
 export class CropShow {
     private static readonly DEFAULT_MIN_SIDE_LENGTH: number = 90;
@@ -54,8 +54,8 @@ export class CropShow {
         this.cropRect = new RectF();
         this.ratio = new Ratio(-1, -1);
 
-        let screenWidth = Math.ceil(ScreenManager.getInstance().getWinWidth());
-        let screenHeight = Math.ceil(ScreenManager.getInstance().getWinHeight());
+        let screenWidth = Math.ceil(screenManager.getWinWidth());
+        let screenHeight = Math.ceil(screenManager.getWinHeight());
         this.screenMaxSide = Math.max(screenWidth, screenHeight);
         this.screenMinSide = Math.min(screenWidth, screenHeight);
     }

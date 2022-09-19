@@ -14,38 +14,38 @@
  */
 
 import router from '@system.router'
-import { Logger } from '../../../common/utils/Logger';
-import { SelectUtil } from '../../../common/model/browser/photo/SelectUtil'
+import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils'
 import { Action } from '../../../common/view/browserOperation/Action'
 import { Constants } from '../../../common/model/common/Constants'
-import { MediaItem } from '../../../common/model/browser/photo/MediaItem'
-import { PhotoDataSource } from '../../../common/model/browser/photo/PhotoDataSource'
+import { RouterConstants } from '@ohos/base/src/main/ets/constants/RouterConstants'
 import { ThirdSelectPhotoBrowserActionBar } from '../../../common/view/ThirdSelectPhotoBrowserActionBar'
-import { SelectManager } from '../../../common/model/browser/SelectManager'
-import { PhotoBrowserBg } from '../../../common/view/PhotoBrowserBg'
-import { Constants as PhotoConstants } from '../../../common/model/browser/photo/Constants'
-import { BroadCast } from '../../../common/utils/BroadCast'
-import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
-import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
-import { PhotoSwiper } from '../../../common/view/PhotoSwiper'
-import mMultimodalInputManager from '../../../common/model/common/MultimodalInputManager'
-import { ScreenManager } from '../../../common/model/common/ScreenManager';
-import { AlbumDefine } from '../../../common/model/browser/AlbumDefine'
+import { PhotoBrowserBg } from '../../../../../../../features/browser/src/main/ets/components/PhotoBrowserBg'
+import { Constants as PhotoConstants } from '../../../../../../../features/browser/src/main/ets/constants/Constants'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
+import { PhotoSwiper } from '../../../../../../../features/browser/src/main/ets/components/PhotoSwiper'
+import mMultimodalInputManager from '@ohos/base/src/main/ets/manager/multimodalinputmanager'
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
+import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource'
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem'
+import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
 
+const TAG = "SelectPhotoBrowser"
 // select mode
 @Entry
 @Component
 struct SelectPhotoBrowser {
     @Provide browserBackgroundColor: Resource = $r('app.color.default_background_color');
     @Provide('selectedCount') totalSelectedCount: number = 0
-    @Provide broadCast: BroadCast = new BroadCast();
+    @Provide broadCast: Broadcast = new Broadcast();
     @Provide isSelected: boolean = true;
     @Provide isShowBar: boolean = true;
     @Provide isPullingDown: boolean = false;
     @Provide moreMenuList: Array<Action> = new Array<Action>();
-    @Provide pageFrom: number = Constants.ENTRY_FROM.NORMAL;
+    @Provide pageFrom: number = RouterConstants.ENTRY_FROM.NORMAL;
     @Provide canSwipe: boolean = true;
-    selectManager: SelectManager;
     isMultiPick = true;
     selectPhotoTransition: string;
     controller: SwiperController = new SwiperController();
@@ -53,66 +53,57 @@ struct SelectPhotoBrowser {
     // swiper currentIndex, there may not be onChanged callback during data refresh, so mediaItem cannot be saved
     @Provide('transitionIndex') currentIndex: number = 0;
 
-    // position
-    selectPhotoPosition: number;
-    timelineIndex: number = -1;
-
-    // logger
-    private logger: Logger = new Logger('PhotoBrowser');
-
-    // dataSource
-    private dataSource: PhotoDataSource = new PhotoDataSource();
-
-    // The global BroadCast of the application process. Event registration and destruction should be paired
-    private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    // The global Broadcast of the application process. Event registration and destruction should be paired
+    private appBroadcast: Broadcast = broadcastManager.getBroadcast();
+    private browserDataSource: GroupItemDataSource = new GroupItemDataSource()
 
     aboutToAppear(): void {
-        this.logger.info('photoBrowser aboutToAppear');
+        logInfo(TAG, 'photoBrowser aboutToAppear');
+        screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000')
         this.browserBackgroundColor = $r('app.color.black');
-        ScreenManager.getInstance().setNavigationBarColor('#FFFFFFFF')
         mMultimodalInputManager.registerListener((control: number) => {
-            this.logger.info(`key control : ${control} index ${this.currentIndex}`);
+            logInfo(TAG, `key control : ${control} index ${this.currentIndex}`);
             if (control == 0) {
                 if (this.currentIndex > 0) {
                     this.onPhotoChanged(this.currentIndex - 1);
                 }
             } else if (control == 1) {
-                if (this.currentIndex < this.dataSource.totalCount() - 1) {
+                if (this.currentIndex < this.browserDataSource.totalCount() - 1) {
                     this.onPhotoChanged(this.currentIndex + 1);
                 }
             } else {
                 this.onBackPress();
             }
         });
-        this.selectManager = AppStorage.Get(Constants.THIRD_SELECT_MANAGER);
         let param = router.getParams();
         if (param.pageFrom) {
             this.pageFrom = new Number(param.pageFrom).valueOf() || 0;
         }
-        if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
-            this.dataSource = new PhotoDataSource(AlbumDefine.ALBUM_ID_RECYCLE);
-        } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
-            this.dataSource.setDeviceId(param.deviceId ? param.deviceId.toString() : '');
+        if (this.pageFrom == RouterConstants.ENTRY_FROM.DISTRIBUTED) {
+            this.browserDataSource.setDeviceId(param.deviceId ? param.deviceId.toString() : '')
         }
 
-        this.dataSource.setAlbumDataSource(AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER));
         if (this.isMultiPick == true) {
-            this.totalSelectedCount = this.selectManager.getSelectedCount();
+            this.totalSelectedCount = this.browserDataSource.getSelectedCount();
+        }
+        if (param.albumInfo) {
+            this.browserDataSource.setAlbumId((param.albumInfo as SimpleAlbumDataItem).id)
         }
 
+        this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER)
         this.onPhotoChanged(new Number(param.position).valueOf() || 0);
+        this.isSelected = this.getCurrentPhoto().isSelect
+        this.totalSelectedCount = this.browserDataSource.getSelectedCount()
         this.selectPhotoTransition = param.transition ? param.transition.toString() : '';
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
-        this.dataSource.setBroadCast(this.broadCast);
         // register event handling
         this.broadCast.on(PhotoConstants.TOGGLE_BAR, (event) => {
-            this.logger.info(`TOGGLE_BAR : ${JSON.stringify(event)}`);
-            this.onToggleBars();
+            logInfo(TAG, `TOGGLE_BAR : ${JSON.stringify(event)}`);
         });
 
         this.broadCast.on(PhotoConstants.PULL_DOWN_END, (event) => {
-            this.logger.info(`PULL_DOWN_END : ${JSON.stringify(event)}`);
+            logInfo(TAG, `PULL_DOWN_END : ${JSON.stringify(event)}`);
             this.onBackPress();
         });
 
@@ -122,20 +113,19 @@ struct SelectPhotoBrowser {
 
         this.broadCast.on(PhotoConstants.DATA_CONTENT_CHANGED, (size: number) => {
             // onContentChanged only the current item is updated
-            this.logger.info(`DATA_CONTENT_CHANGED : ${size}`);
+            logInfo(TAG, `DATA_CONTENT_CHANGED : ${size}`);
             this.onPhotoChanged(this.currentIndex);
         });
 
         this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean) => {
-            this.logger.info(`set swiper swipe ${value}`);
+            logInfo(TAG, `set swiper swipe ${value}`);
             this.canSwipe = value;
         });
     }
 
     aboutToDisappear(): void {
-        ScreenManager.getInstance().setNavigationBarColor('#FF000000')
+        screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000')
         this.broadCast.release();
-        this.dataSource.release();
         mMultimodalInputManager.unregisterListener();
     }
 
@@ -143,7 +133,7 @@ struct SelectPhotoBrowser {
     }
 
     onDataSizeChanged(size: number): void {
-        this.logger.info(`onDataSizeChanged, size is ${size}`);
+        logInfo(TAG, `onDataSizeChanged, size is ${size}`);
         if (size == 0) {
             this.onBackPress();
         }
@@ -151,57 +141,44 @@ struct SelectPhotoBrowser {
 
     onPhotoChanged(index: number): void{
         this.currentIndex = index;
-        this.timelineIndex = this.dataSource.getPositionByIndex(index);
-        let currentPhoto = this.getCurrentPhoto();
-        if (currentPhoto == undefined) {
-            this.logger.error('onPhotoChanged, item is undefined');
-        } else {
-            this.isSelected = this.selectManager.isItemSelected(currentPhoto.uri, this.timelineIndex);
-            this.logger.info(`onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri},\
-                isSelected: ${this.isSelected}`);
-        }
+        this.isSelected = this.getCurrentPhoto().isSelect
+        this.browserDataSource.notifyDataChange(index);
     }
 
-    selectStateChange() {
-        this.logger.info('change selected');
+    private selectStateChange() {
+        logInfo(TAG, 'change selected');
         let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined) {
             return;
         }
-        this.isSelected = !this.isSelected;
-        if (this.selectManager.toggle(currentPhoto.uri, this.isSelected, this.timelineIndex)) {
-            this.totalSelectedCount = this.selectManager.getSelectedCount();
-        }
-        this.logger.info(`totalSelectedCount: ${this.totalSelectedCount} after state change`)
+        currentPhoto.setSelect(!currentPhoto.isSelect);
+        this.isSelected = currentPhoto.isSelect;
+        this.totalSelectedCount = this.browserDataSource.getSelectedCount()
+        this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
+        logInfo(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`)
     }
 
     onPageShow() {
-        this.logger.info('onPageShow');
-        this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
-        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [true, this.selectPhotoTransition]);
+        logInfo(TAG, 'onPageShow');
+        this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
     }
 
     onPageHide() {
-        this.logger.info('onPageHide');
-        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, this.selectPhotoTransition]);
+        logInfo(TAG, 'onPageHide');
     }
 
     onMenuClicked(action: Action) {
-        this.logger.debug(`onMenuClicked, action: ${action.actionID}`);
+        logDebug(TAG, `onMenuClicked, action: ${action.actionID}`);
         switch (action) {
             case Action.BACK:
                 this.onBackPress();
                 return;
             case Action.MATERIAL_SELECT:
-                this.logger.info('click UN_SELECTED');
-                this.selectStateChange();
-                return;
             case Action.SELECTED:
-                this.logger.info('click SELECTED');
                 this.selectStateChange();
                 return;
             case Action.OK:
-                this.logger.info('click OK');
+                logInfo(TAG, 'click OK');
                 this.setPickResult();
                 break;
             default:
@@ -209,12 +186,12 @@ struct SelectPhotoBrowser {
         }
     }
 
-    getCurrentPhoto(): MediaItem {
-        return this.dataSource.getData(this.currentIndex).data;
+    getCurrentPhoto(): MediaDataItem {
+        return this.browserDataSource.groupDataItem[this.currentIndex];
     }
 
     onBackPress() {
-        this.logger.info('onBackPress');
+        logInfo(TAG, 'onBackPress');
         router.back({ params: { index: this.currentIndex } });
         return true;
     }
@@ -223,7 +200,7 @@ struct SelectPhotoBrowser {
         Stack({ alignContent: Alignment.TopStart }) {
             PhotoBrowserBg()
             PhotoSwiper({
-                dataSource: this.dataSource,
+                dataSource: this.browserDataSource,
                 photoSwiperTransition: this.selectPhotoTransition,
                 onPhotoChanged: this.onPhotoChanged.bind(this),
                 swiperController: this.controller
@@ -236,10 +213,10 @@ struct SelectPhotoBrowser {
     }
 
     private setPickResult(): void {
-        let uriArray;
+        let uriArray: string | string[];
         if (this.isMultiPick) {
-            uriArray = SelectUtil.getUriArray(this.selectManager.clickedSet);
-            this.logger.debug(`uri size: ${uriArray}`);
+            uriArray = this.browserDataSource.getSelectedUris();
+            logDebug(TAG, `uri size: ${uriArray}`);
         } else {
             let currentPhoto = this.getCurrentPhoto();
             if (currentPhoto == undefined) {
@@ -255,9 +232,7 @@ struct SelectPhotoBrowser {
                 }
             }
         };
-        globalThis.photosAbilityContext.terminateSelfWithResult(abilityResult).then((result) => {
-            this.logger.info(`terminateSelfWithResult result: ${result}`);
-        });
+        terminateSelfWithResult(abilityResult)
     }
 
     pageTransition() {

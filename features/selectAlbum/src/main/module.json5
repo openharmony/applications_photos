@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "selectAlbum",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "uiSyntax": "ets"
+  }
+}

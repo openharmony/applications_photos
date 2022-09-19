@@ -14,7 +14,9 @@
  */
 
 const PHOTOS = 'Photos_'
-
+/**
+ * @deprecated
+ */
 export class Logger {
     prefix: string;
     static readonly DEBUG = 0;

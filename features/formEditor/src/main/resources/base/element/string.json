@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from npm package"
+    },
+    {
+      "name": "fa_play_interval_time_30",
+      "value": "30 minute"
+    },
+    {
+      "name": "fa_play_interval_time_60",
+      "value": "1 hour"
+    },
+    {
+      "name": "fa_play_interval_time_90",
+      "value": "1.5 hour"
+    },
+    {
+      "name": "fa_select_time",
+      "value": "Choose slideshow interval"
+    }
+  ]
+}

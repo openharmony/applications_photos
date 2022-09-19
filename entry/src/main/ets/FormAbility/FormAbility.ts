@@ -18,16 +18,19 @@ import { Logger } from './common/Logger'
 import { FormControllerManager } from './controller/FormControllerManager'
 import { FormController } from './controller/FormController'
 import { Constants } from './common/Constants'
+import mediaModel from '@ohos/base/src/main/ets/model/MediaModel'
 
 export default class FormAbility extends FormExtension {
     private logger: Logger = new Logger('FormAbility');
 
     onCreate(want) {
         this.logger.info(`form onCreate. want ${JSON.stringify(want)}`);
+        mediaModel.onCreate(this.context)
+        globalThis.appContext = this.context
         let param = want.parameters;
         let formId = param['ohos.extra.param.key.form_identity'];
         this.logger.info(`form onCreate formId: ${formId}`);
-        let formControllerManager: FormControllerManager = FormControllerManager.getInstance(this.context);
+        let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE).then(() => {
             let formController: FormController = formControllerManager.getController(formId);
             this.logger.info(`form onCreate. formController ${formController}`);
@@ -50,13 +53,13 @@ export default class FormAbility extends FormExtension {
 
     onUpdate(formId) {
         this.logger.info(`onUpdate, formId: ${formId} context ${JSON.stringify(this.context)}`);
-        let formControllerManager: FormControllerManager = FormControllerManager.getInstance(this.context);
+        let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.updateController(formId);
     }
 
     onVisibilityChange(newStatus) {
         this.logger.info(`onVisibilityChange, newStatus: ${JSON.stringify(newStatus)}`);
-        let formControllerManager: FormControllerManager = FormControllerManager.getInstance(this.context);
+        let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         for (let key in newStatus) {
             this.logger.info(`onVisibilityChange, key:${key}  value ${newStatus[key]}`);
             let formId = key;
@@ -66,13 +69,13 @@ export default class FormAbility extends FormExtension {
 
     onEvent(formId, message) {
         this.logger.info(`onEvent, formId: ${formId}, message: ${message}`);
-        let formControllerManager: FormControllerManager = FormControllerManager.getInstance(this.context);
+        let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.onEvent(formId, message);
     }
 
     onDestroy(formId) {
         this.logger.info(`onDestroy, formId: ${formId}`);
-        let formControllerManager: FormControllerManager = FormControllerManager.getInstance(this.context);
+        let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.destroyController(formId);
     }
 };

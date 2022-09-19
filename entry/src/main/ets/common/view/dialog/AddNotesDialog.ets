@@ -14,16 +14,16 @@
  */
 import { Logger } from '../../utils/Logger'
 import { DialogCallback } from '../../model/common/DialogUtil'
-import { ScreenManager } from '../../model/common/ScreenManager'
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 import { Constants } from '../../model/common/Constants'
-import { UiUtil } from '../../../common/utils/UiUtil'
+import { showToast } from '../../../../../../../common/base/src/main/ets/utils/UiUtil';
+import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
 
 @CustomDialog
 export struct AddNotesDialog {
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
+    @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
+    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     controller: CustomDialogController;
     @Consume dialogCallback: DialogCallback;
     @State isNull: boolean = false;
@@ -73,7 +73,10 @@ export struct AddNotesDialog {
                         let check = /[\\.\\\\/:*?<>\"|\[\]{}\s]/;
                         let passCheck = check.test(this.inputNote)
                         if (passCheck) {
-                            UiUtil.showToast($r('app.string.specific_characters_not_supported'));
+                            getResourceString($r('app.string.specific_characters_not_supported'))
+                                .then((message: string) => {
+                                    showToast(message)
+                                })
                             this.controller.close()
                             return
                         }
@@ -89,12 +92,12 @@ export struct AddNotesDialog {
         .height($r('app.float.dialog_add_notes_height'))
         .width('100%')
         .borderRadius($r('app.float.dialog_border_radius'))
-        .width(ScreenManager.getInstance().getColumnsWidth(4))
+        .width(screenManager.getColumnsWidth(4))
         .backgroundColor($r('app.color.white'))
         .margin({
             right: $r('app.float.dialog_content_margin'),
             left: $r('app.float.dialog_content_margin'),
-            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
+            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + px2vp(this.leftBlank[3])
         })
     }
 }

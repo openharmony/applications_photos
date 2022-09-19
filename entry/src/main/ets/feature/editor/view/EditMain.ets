@@ -18,23 +18,22 @@ import { Logger } from '../utils/Logger'
 import { TitleBar } from './TitleBar'
 import { MainMenuBar } from './MainMenuBar'
 import { PhotoEditMode } from '../base/PhotoEditType'
-import { BroadCast } from '../../../common/utils/BroadCast'
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 import { ToolBar } from './ToolBar'
 import { CropImageShow } from './CropImageShow'
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
-import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
-import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
+import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager'
 import { PhotoEditorManager } from '../PhotoEditorManager'
 import { PhotoEditCrop } from '../crop/PhotoEditCrop'
-import { MediaItem } from '../../../common/model/browser/photo/MediaItem'
+import { MediaDataItem } from '../../../../../../../common/base/src/main/ets/data/MediaDataItem';
 import { Constants } from '../../../common/model/common/Constants'
 
 @Entry
 @Component
 export struct Edit {
-    private mediaItem: MediaItem = globalThis.EditorMediaItem;
-    private screenManager = ScreenManager.getInstance();
+    private mediaItem: MediaDataItem = globalThis.EditorMediaItem;
     @Provide editorManager: PhotoEditorManager = PhotoEditorManager.getInstance();
     @Provide('compare') isCompare: boolean = false;
     @Provide('angle') rotateAngle: number = 0;
@@ -45,8 +44,8 @@ export struct Edit {
     @Provide('scale') imageScale: number = 0;
     @Provide('barSize') barScale: Resource = $r('app.float.menuBar_edit');
     @Provide('selected') selectedMode: number = PhotoEditMode.EDIT_MODE_CROP;
-    @Provide broadCast: BroadCast = new BroadCast();
-    @Provide('verticalScreen') isVerticalScreen: boolean = !ScreenManager.getInstance().isHorizontal();
+    @Provide broadCast: Broadcast = new Broadcast();
+    @Provide('verticalScreen') isVerticalScreen: boolean = !screenManager.isHorizontal();
     @Provide screenWidth: number = 0;
     @Provide screenHeight: number = 0;
     @Provide cropEdit: PhotoEditCrop = undefined;
@@ -56,17 +55,16 @@ export struct Edit {
     @Provide mainBottomSize: number = Constants.BOTTOM_TOOL_BAR_SIZE;
     @Provide titleSize: number = Constants.TOP_BAR_SIZE;
     @Provide filterBottomSize: number = Constants.FILTER_BOTTOM_TOOL_BAR_SIZE;
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @State imageScaleWidth: number = 0;
-    appEventBus: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    appEventBus: Broadcast = broadcastManager.getBroadcast();
     private log: Logger = new Logger('EditMain');
     private defaultWidth: number = Constants.DEFAULT_WIDTH;
     private isLoadFailed: boolean = false;
 
     onBackPress() {
         if (this.isCropReset) {
-            this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
+            this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
         } else {
             router.back();
         }
@@ -90,11 +88,11 @@ export struct Edit {
         }
         this.cropEdit = this.editorManager.getPhotoEditBaseInstance(PhotoEditMode.EDIT_MODE_CROP) as PhotoEditCrop;
         if (this.isVerticalScreen) {
-            this.screenHeight = Math.ceil(this.screenManager.getWinHeight()) - (this.leftBlank[1] + this.leftBlank[3]);
-            this.screenWidth = Math.ceil(this.screenManager.getWinWidth());
+            this.screenHeight = Math.ceil(screenManager.getWinHeight()) - px2vp(this.leftBlank[1] + this.leftBlank[3]);
+            this.screenWidth = Math.ceil(screenManager.getWinWidth());
         } else {
-            this.screenHeight = Math.ceil(this.screenManager.getWinHeight()) - (this.leftBlank[3]);
-            this.screenWidth = Math.ceil(this.screenManager.getWinWidth());
+            this.screenHeight = Math.ceil(screenManager.getWinHeight()) - px2vp(this.leftBlank[3]);
+            this.screenWidth = Math.ceil(screenManager.getWinWidth());
         }
 
         if (this.screenHeight < this.screenWidth) {
@@ -108,18 +106,18 @@ export struct Edit {
         this.imageScale = this.isVerticalScreen
             ? (this.screenHeight - this.titleSize - this.mainBottomSize) : (this.screenWidth - this.titleSize);
         this.imageScaleWidth = this.isVerticalScreen ? this.screenWidth : (this.screenHeight - this.mainBottomSize);
-        ScreenManager.getInstance().setNavigationBarColor('#FFFFFFFF')
+        screenManager.setNavigationBarColor('#00FFFFFF', '#FFFFFFFF')
     }
 
     aboutToDisappear() {
         this.log.debug('aboutToDisappear');
         globalThis.EditorMediaItem = undefined;
         PhotoEditorManager.getInstance().clear();
-        ScreenManager.getInstance().setNavigationBarColor('#FF000000')
+        screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000')
     }
 
     onPageShow() {
-        this.appEventBus.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
+        this.appEventBus.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         if (this.isLoadFailed) {
             router.back();
         }
@@ -189,8 +187,7 @@ export struct Edit {
                 CustomDialogView()
             }
         }
-        .padding(this.isVerticalScreen
-            ? { top: this.leftBlank[1], bottom: this.leftBlank[3] } : { bottom: this.leftBlank[3] })
+        .padding({ bottom: px2vp(this.leftBlank[3]) })
         .width('100%')
         .height('100%')
         .backgroundColor($r('app.color.black'))

@@ -14,15 +14,16 @@
  */
 
 import { PhotoEditMode } from '../base/PhotoEditType'
-import { BroadCast } from '../../../common/utils/BroadCast'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
 import { Constants } from '../../../common/model/common/Constants'
-import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
-import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
+import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager'
 import { PhotoEditorManager } from '../PhotoEditorManager'
 import { PhotoEditCrop } from '../crop/PhotoEditCrop'
 import { Logger } from '../utils/Logger'
 import router from '@system.router'
-import { UiUtil } from '../../../common/utils/UiUtil'
+import { showToast } from '../../../../../../../common/base/src/main/ets/utils/UiUtil';
+import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
 
 @Component
 export struct TitleBar {
@@ -30,25 +31,29 @@ export struct TitleBar {
     @Consume isUndo: boolean;
     @State name: Resource = undefined;
     @Consume('selected') selectedMode: number;
-    @Consume broadCast: BroadCast;
+    @Consume broadCast: Broadcast;
     @Consume isVerticalScreen: boolean;
     @State isImmersive: boolean = false;
     @Consume editorManager: PhotoEditorManager;
     @Consume cropEdit: PhotoEditCrop;
     private log: Logger = new Logger('Title');
-    private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private newImageId: number = -1;
     private immersiveClick: Function = undefined;
     private onBackAfterSaveComplete: Function = undefined;
 
     saveAsNewCallback() {
         this.log.debug('saveAsNewCallback called');
-        PhotoEditorManager.getInstance().save(false, this.saveImageCallback.bind(this));
+        PhotoEditorManager.getInstance().save(false).then((id: number) => {
+            this.saveImageCallback(id)
+        });
     }
 
     replaceOriginalCallback() {
         this.log.debug('replaceOriginalCallback called');
-        PhotoEditorManager.getInstance().save(true, this.saveImageCallback.bind(this));
+        PhotoEditorManager.getInstance().save(true).then((id: number) => {
+            this.saveImageCallback(id)
+        });
     }
 
     discardCallback() {
@@ -56,22 +61,19 @@ export struct TitleBar {
     }
 
     saveImageCallback(id: number) {
-        this.log.debug(`saveImageCallback id = ${id}`);
+        this.log.info(`saveImageCallback id = ${id}`);
         if (id < 0) {
-            this.broadCast.emit(BroadCastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
-            UiUtil.showToast($r('app.string.edit_photo_save_fail'));
+            this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
+            getResourceString($r('app.string.edit_photo_save_fail')).then((message: string) => {
+                showToast(message)
+            })
             router.back();
-        } else {
-            AppStorage.SetOrCreate(BroadCastConstants.PHOTO_EDIT_SAVE_ID, id);
-            this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [true, Constants.PHOTO_TRANSITION_EDIT]);
         }
     }
 
     backAfterSaveComplete() {
         this.log.debug(`backAfterSaveComplete called`);
-        this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, Constants.PHOTO_TRANSITION_EDIT]);
-        this.broadCast.emit(BroadCastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
-        AppStorage.SetOrCreate(BroadCastConstants.PHOTO_EDIT_SAVE_ID, -1);
+        this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
         router.back();
     }
 
@@ -79,12 +81,12 @@ export struct TitleBar {
         this.immersiveClick = this.immersive.bind(this);
         this.broadCast.on(Constants.IS_IMMERSIVE, this.immersiveClick);
         this.onBackAfterSaveComplete = this.backAfterSaveComplete.bind(this);
-        this.appBroadCast.on(BroadCastConstants.PHOTO_EDIT_SAVE_COMPLETE, this.onBackAfterSaveComplete);
+        this.appBroadcast.on(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, this.onBackAfterSaveComplete);
     }
 
     aboutToDisappear() {
         this.broadCast.off(Constants.IS_IMMERSIVE, this.immersiveClick);
-        this.appBroadCast.off(BroadCastConstants.PHOTO_EDIT_SAVE_COMPLETE, this.onBackAfterSaveComplete);
+        this.appBroadcast.off(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, this.onBackAfterSaveComplete);
     }
 
     immersive(isImmersive: boolean) {
@@ -94,9 +96,9 @@ export struct TitleBar {
     onBackClicked() {
         this.log.debug('back clicked');
         if (this.isRedo || this.isUndo) {
-            this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
+            this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
         } else if (this.selectedMode == PhotoEditMode.EDIT_MODE_CROP && this.cropEdit.couldReset()) {
-            this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
+            this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
         } else {
             router.back();
         }
@@ -105,10 +107,10 @@ export struct TitleBar {
     onSaveClicked() {
         this.log.debug('save clicked');
         if (this.isRedo || this.isRedo) {
-            this.broadCast.emit(BroadCastConstants.SHOW_SAVE_PHOTO_DIALOG,
+            this.broadCast.emit(BroadcastConstants.SHOW_SAVE_PHOTO_DIALOG,
                 [this.saveAsNewCallback.bind(this), this.replaceOriginalCallback.bind(this)]);
         } else if (this.selectedMode == PhotoEditMode.EDIT_MODE_CROP && this.cropEdit.couldReset()) {
-            this.broadCast.emit(BroadCastConstants.SHOW_SAVE_PHOTO_DIALOG,
+            this.broadCast.emit(BroadcastConstants.SHOW_SAVE_PHOTO_DIALOG,
                 [this.saveAsNewCallback.bind(this), this.replaceOriginalCallback.bind(this)]);
         } else {
             router.back();

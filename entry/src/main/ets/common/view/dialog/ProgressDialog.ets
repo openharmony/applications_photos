@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import { MediaOperationType } from '../../model/common/MediaOperationType'
+import { MediaOperationType } from '../../../../../../../common/base/src/main/ets/data/MediaOperationType'
 import { Logger } from '../../utils/Logger';
-import { ScreenManager } from '../../model/common/ScreenManager';
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
 @Observed
@@ -26,10 +26,9 @@ export class ProgressParam {
 
 @CustomDialog
 export struct ProgressDialog {
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
+    @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
+    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     controller: CustomDialogController
     @Consume progressMessage: Resource;
     @Consume deleteProgress: number;
@@ -61,7 +60,7 @@ export struct ProgressDialog {
                 Progress({ value: 0, total: Constants.PROGRESS_MAX, style: ProgressStyle.Linear })
                     .value(this.deleteProgress)
                     .color($r('app.color.color_control_highlight'))
-                    .width(ScreenManager.getInstance().getColumnsWidth(4) - Constants.PROGRESS_LENGTH_DIFF)
+                    .width(screenManager.getColumnsWidth(4) - Constants.PROGRESS_LENGTH_DIFF)
                     .margin({
                         right: $r('app.float.progress_padding_right')
                     })
@@ -87,11 +86,11 @@ export struct ProgressDialog {
         .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
         .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
         .borderRadius($r('app.float.dialog_border_radius'))
-        .width(ScreenManager.getInstance().getColumnsWidth(4))
+        .width(screenManager.getColumnsWidth(4))
         .margin({
             right: $r('app.float.dialog_window_margin'),
             left: $r('app.float.dialog_window_margin'),
-            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
+            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + px2vp(this.leftBlank[3])
         })
     }
 }

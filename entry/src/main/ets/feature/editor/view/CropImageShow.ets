@@ -14,16 +14,16 @@
  */
 
 import { Logger } from '../utils/Logger'
-import { BroadCast } from '../../../common/utils/BroadCast'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
 import { Constants } from '../../../common/model/common/Constants'
 import { PhotoEditCrop } from '../crop/PhotoEditCrop'
 import { CropResetBar } from './CropResetBar'
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 
 @Component
 export struct CropImageShow {
     @Consume('selected') selectedMode: number;
-    @Consume broadCast: BroadCast;
+    @Consume broadCast: Broadcast;
     @Consume('verticalScreen') isVerticalScreen: boolean;
     @Consume isCropReset: boolean;
     @Consume screenWidth: number;
@@ -33,7 +33,7 @@ export struct CropImageShow {
     private displayWidth: number = 0;
     private flexHeight: number = 0;
     private flexWidth: number = 0;
-    private stateMenuSize: number = ScreenManager.getInstance().getStatusBarHeight();
+    private stateMenuSize: number = screenManager.getStatusBarHeight();
     private log: Logger = new Logger('CropImageShow');
     setting: RenderingContextSettings = new RenderingContextSettings(true);
     context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.setting);

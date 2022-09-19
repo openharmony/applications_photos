@@ -16,11 +16,11 @@
 import { Action } from '../../../common/view/browserOperation/Action'
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp'
 import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/browserOperation/ActionBarMode'
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 
 export class AlbumBarModel {
     createActionBar(isAlbumSetSelectedMode: boolean, selectedAlbumsCount: number, isDisableRename: boolean, isDisableDelete: boolean): ActionBarProp  {
-        let isHorizontal = ScreenManager.getInstance().isHorizontal()
+        let isHorizontal = screenManager.isHorizontal()
         if (isHorizontal) {
             return this.createHorizontalActionBar(isAlbumSetSelectedMode, selectedAlbumsCount, isDisableRename, isDisableDelete)
         } else {
@@ -29,7 +29,7 @@ export class AlbumBarModel {
     }
 
     private createHorizontalActionBar(isAlbumSetSelectedMode: boolean, selectedAlbumsCount: number, isDisableRename: boolean, isDisableDelete: boolean): ActionBarProp {
-        let isSidebar: boolean = ScreenManager.getInstance().isSidebar();
+        let isSidebar: boolean = screenManager.isSidebar();
         let actionBarProp: ActionBarProp = new ActionBarProp();
         actionBarProp
             .setHasTabBar(isSidebar)
@@ -54,7 +54,7 @@ export class AlbumBarModel {
     private createVerticalActionBar(isAlbumSetSelectedMode: boolean): ActionBarProp {
         let menuList: Array<Action> = new Array<Action>();
         menuList.push(Action.NEW);
-        let isSidebar: boolean = ScreenManager.getInstance().isSidebar();
+        let isSidebar: boolean = screenManager.isSidebar();
         let actionBarProp: ActionBarProp = new ActionBarProp();
         actionBarProp
             .setHasTabBar(isSidebar)

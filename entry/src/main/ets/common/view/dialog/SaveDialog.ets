@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import { BroadCast } from '../../../common/utils/BroadCast'
-import { ScreenManager } from '../../model/common/ScreenManager'
-import { BroadCastConstants } from '../../model/common/BroadCastConstants'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
 import { Constants } from '../../model/common/Constants';
-import { DateUtil } from '../../utils/DateUtil';
+import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil';
 
 
 @Observed
@@ -28,11 +28,10 @@ export class SaveDialogCallback {
 
 @CustomDialog
 export struct SaveDialog {
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-    @Consume broadCast: BroadCast;
+    @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
+    @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
+    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @Consume broadCast: Broadcast;
     @Consume saveDialogCallback: SaveDialogCallback;
     controller: CustomDialogController;
 
@@ -83,7 +82,7 @@ export struct SaveDialog {
                             .height($r('app.float.details_dialog_button_height'))
                             .width('100%')
                             .onClick(() => {
-                                this.broadCast.emit(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
+                                this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                                 this.controller.close()
                                 this.saveDialogCallback && this.saveDialogCallback.replaceOriginalCallback()
                             }).backgroundColor($r('app.color.transparent'))
@@ -113,7 +112,7 @@ export struct SaveDialog {
                             .width('100%')
                             .onClick(() => {
                                 this.controller.close()
-                                this.broadCast.emit(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
+                                this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                                 this.saveDialogCallback && this.saveDialogCallback.saveAsNewCallback()
                             }).backgroundColor($r('app.color.transparent'))
                         }
@@ -139,7 +138,7 @@ export struct SaveDialog {
                     .margin({ bottom: $r('app.float.adjust_text_margin_bottom') })
                     .onClick(() => {
                         this.controller.close()
-                        this.broadCast.emit(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
+                        this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                         this.saveDialogCallback && this.saveDialogCallback.saveAsNewCallback()
                     }).backgroundColor($r('app.color.transparent'))
 
@@ -152,7 +151,7 @@ export struct SaveDialog {
                     .height($r('app.float.details_dialog_button_height'))
                     .margin({ bottom: $r('app.float.adjust_text_margin_bottom') })
                     .onClick(() => {
-                        this.broadCast.emit(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
+                        this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                         this.controller.close()
                         this.saveDialogCallback && this.saveDialogCallback.replaceOriginalCallback()
                     }).backgroundColor($r('app.color.transparent'))
@@ -175,13 +174,13 @@ export struct SaveDialog {
 
         }
         .alignItems(HorizontalAlign.Start)
-        .width(ScreenManager.getInstance().getColumnsWidth(4))
+        .width(screenManager.getColumnsWidth(4))
         .backgroundColor($r('app.color.white'))
         .borderRadius($r('app.float.dialog_border_radius'))
         .margin({
             right: $r('app.float.dialog_window_margin'),
             left: $r('app.float.dialog_window_margin'),
-            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
+            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + px2vp(this.leftBlank[3])
         })
         .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
     }

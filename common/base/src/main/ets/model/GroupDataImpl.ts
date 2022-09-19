@@ -1,0 +1,167 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import MediaLib from '@ohos.multimedia.mediaLibrary';
+import { logDebug, logInfo } from '../utils/LoggerUtils';
+import { WindowConstants } from '../constants/WindowConstants';
+import mediaModel from '../model/MediaModel'
+import screenManager from '../manager/ScreenManager'
+import { MediaConstants } from '../constants/MediaConstants';
+import { getFetchOptions } from '../helper/MediaDataHelper';
+import { MediaDataItem } from '../data/MediaDataItem';
+import { FavorMediaDataItem } from '../data/FavorMediaDataItem'
+import { TrashMediaDataItem } from '../data/TrashMediaDataItem'
+
+const TAG = "GroupDataImpl"
+
+export class GroupDataImpl {
+    private selectType: number = MediaConstants.SELECT_TYPE_ALL
+    private albumId: string = ""
+    private deviceId: string = ""
+
+    setSelectType(selectType: number) {
+        this.selectType = selectType
+    }
+
+    setAlbumId(id: string) {
+        logInfo(TAG, `setAlbumId: ${id}`)
+        this.albumId = id
+    }
+
+    setDeviceId(id: string) {
+        logInfo(TAG, `setDeviceId: ${id}`)
+        this.deviceId = id
+    }
+
+    async reloadGroupItemData(isGrid: boolean): Promise<MediaDataItem[]> {
+        if (isGrid) {
+            return this.reloadGridGroupItemData()
+        } else {
+            return this.reloadBrowserGroupItemData()
+        }
+    }
+
+    async reloadBrowserGroupItemData(): Promise<MediaDataItem[]> {
+        logDebug(TAG, `reloadGroupItemData`)
+        let groupDataItem = []
+        let fetchOption = await getFetchOptions(this.selectType, this.albumId, this.deviceId)
+        if (fetchOption == undefined) {
+            return []
+        }
+        let count: number = 0
+        if (this.albumId == MediaConstants.ALBUM_ID_FAVOR) {
+            count = (await mediaModel.getAllFavorMediaItem(fetchOption, true)).counts
+            for (let i = 0;i < count; i++) {
+                groupDataItem.push(new FavorMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i))
+            }
+        } else if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE) {
+            count = (await mediaModel.getAllTrashMediaItem(fetchOption, true)).counts
+            for (let i = 0;i < count; i++) {
+                groupDataItem.push(new TrashMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i))
+            }
+        } else {
+            count = (await mediaModel.getAllCommonMediaItem(fetchOption, true)).counts
+            for (let i = 0;i < count; i++) {
+                groupDataItem.push(new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i))
+            }
+        }
+
+        logDebug(TAG, `reload finish count:${count}`)
+        return groupDataItem
+    }
+
+    async reloadGridGroupItemData(): Promise<MediaDataItem[]> {
+        logDebug(TAG, `reloadGroupItemData`)
+        let groupDataItem = []
+        let fetchOption = await getFetchOptions(this.selectType, this.albumId, this.deviceId)
+        if (fetchOption == undefined) {
+            return []
+        }
+        let groupCount: number = this.getCount()
+        let mediaFileAssets = await this.getMediaItemFileAssets(0, groupCount)
+        if (this.albumId == MediaConstants.ALBUM_ID_FAVOR) {
+            let count: number = (await mediaModel.getAllFavorMediaItem(fetchOption, true)).counts
+            for (let i = 0;i < count; i++) {
+                let item = new FavorMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i)
+                if (i < mediaFileAssets.length) {
+                    item.update(mediaFileAssets[i])
+                }
+                groupDataItem.push(item)
+            }
+        } else if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE) {
+            let count: number = (await mediaModel.getAllTrashMediaItem(fetchOption, true)).counts
+            for (let i = 0;i < count; i++) {
+                let item = new TrashMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i)
+                if (i < mediaFileAssets.length) {
+                    item.update(mediaFileAssets[i])
+                }
+                groupDataItem.push(item)
+            }
+        } else {
+            let count: number = (await mediaModel.getAllCommonMediaItem(fetchOption, true)).counts
+            for (let i = 0;i < count; i++) {
+                let item = new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i)
+                if (i < mediaFileAssets.length) {
+                    item.update(mediaFileAssets[i])
+                }
+                groupDataItem.push(item)
+            }
+        }
+        // do not use await to avoid load cost too much time
+        this.loadReset(groupDataItem, groupCount)
+
+        logDebug(TAG, `reload finish`)
+        return groupDataItem
+    }
+
+    private async getMediaItemFileAssets(start: number, count: number): Promise<MediaLib.FileAsset[]> {
+        let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?'
+        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()]
+        let fetchOption: MediaLib.MediaFetchOptions = {
+            selections: selections,
+            selectionArgs: selectionArgs,
+            order: `date_added DESC LIMIT ${start},${count}`
+        };
+        if (this.albumId == MediaConstants.ALBUM_ID_FAVOR) {
+            return await mediaModel.getAllFavorMediaItems(fetchOption)
+        } else if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE) {
+            return await mediaModel.getAllTrashMediaItems(fetchOption)
+        } else {
+            return await mediaModel.getAllMediaItems(fetchOption)
+        }
+    }
+
+    private getCount(): number {
+        let contentWidth = screenManager.getWinWidth();
+        let maxThumbWidth = px2vp(WindowConstants.GRID_IMAGE_SIZE) * WindowConstants.GRID_MAX_SIZE_RATIO;
+        let columns = Math.max(WindowConstants.GRID_MIN_COUNT, Math.ceil((contentWidth + WindowConstants.GRID_GUTTER) / (maxThumbWidth + WindowConstants.GRID_GUTTER)));
+        let contentHeight = screenManager.getWinHeight() - WindowConstants.ACTION_BAR_HEIGHT - screenManager.getNaviBarHeight()
+        let rows = Math.ceil((contentHeight + WindowConstants.GRID_GUTTER) / (maxThumbWidth + WindowConstants.GRID_GUTTER)) + 4
+        return columns * rows
+    }
+
+    private async loadReset(items: MediaDataItem[], count) {
+        let itemLen = items.length
+        let countLen = Math.ceil(itemLen / count)
+        for (let i = 1;i < countLen; i++) {
+            let mediaFileAsset: Array<MediaLib.FileAsset> = await this.getMediaItemFileAssets(i * count, count)
+            for (let j = 0;j < count; j++) {
+                if (i * count + j >= itemLen) {
+                    return
+                }
+                items[i * count+j].update(mediaFileAsset[j])
+            }
+        }
+    }
+}

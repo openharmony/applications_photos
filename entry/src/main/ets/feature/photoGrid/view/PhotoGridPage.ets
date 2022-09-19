@@ -14,41 +14,41 @@
  */
 
 import router from '@system.router'
-import prompt from '@system.prompt';
-import { Logger } from '../../../common/utils/Logger';
+import { logDebug, logInfo, logWarn } from '@ohos/base/src/main/ets/utils/LoggerUtils'
+import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { ToolBar } from '../../../common/view/actionbar/ToolBar';
-import { ImageGridItemComponent } from '../../../common/view/ImageGridItemComponent'
+import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent'
 import { Action } from '../../../common/view/browserOperation/Action'
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
-import { SelectManager } from '../../../common/model/browser/SelectManager'
-import { BroadCast } from '../../../common/utils/BroadCast'
-import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
 import { Constants } from '../../../common/model/common/Constants'
-import { MenuOperation } from '../../../common/view/browserOperation/MenuOperation'
-import { MenuContext } from '../../../common/view/browserOperation/MenuContext'
-import { MenuOperationFactory } from '../../../common/interface/MenuOperationFactory'
-import { BatchDeleteMenuOperation } from '../../../common/view/browserOperation/BatchDeleteMenuOperation'
-import { MediaDataSource } from '../../../common/model/browser/photo/MediaDataSource'
-import { MediaItem } from '../../../common/model/browser/photo/MediaItem'
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
-import { TraceControllerUtils } from '../../../common/utils/TraceControllerUtils'
-import { ShareMenuOperation } from '../../../common/view/browserOperation/ShareMenuOperation';
-import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
-import { JumpSourceToMain } from '../../../common/model/browser/photo/JumpSourceToMain'
-import { UiUtil } from '../../../common/utils/UiUtil';
-import { AlbumDefine } from '../../../common/model/browser/AlbumDefine'
-import { MediaOperationType } from '../../../common/model/common/MediaOperationType'
-import { CopyMenuOperation } from '../../../common/view/browserOperation/CopyMenuOperation';
-import { MoveMenuOperation } from '../../../common/view/browserOperation/MoveMenuOperation';
-import { GridScrollBar } from '../../../common/view/GridScrollBar';
-import { BatchRecoverMenuOperation } from '../operation/BatchRecoverMenuOperation';
-import { ClearRecycleMenuOperation } from '../operation/ClearRecycleMenuOperation';
-import { AlbumInfo } from '../../../common/model/browser/album/AlbumInfo';
-import { MediaObserver } from '../../../common/model/browser/dataObserver/MediaObserver';
-import { CommonObserverCallback } from '../../../common/model/browser/CommonObserverCallback';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation'
+import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext'
+import { BatchDeleteMenuOperation } from '@ohos/base/src/main/ets/operation/BatchDeleteMenuOperation'
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils'
+import { ShareMenuOperation } from '@ohos/base/src/main/ets/operation/ShareMenuOperation';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
+import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain'
+import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils'
+import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType'
+import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation';
+import { MoveMenuOperation } from '@ohos/base/src/main/ets/operation/MoveMenuOperation';
+import { GridScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/GridScrollBar';
+import { BatchRecoverMenuOperation } from '@ohos/base/src/main/ets/operation/BatchRecoverMenuOperation';
+import { ClearRecycleMenuOperation } from '@ohos/base/src/main/ets/operation/ClearRecycleMenuOperation';
+import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
+import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver'
+import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
 import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
 import { PhotoGridBarModel } from '../model/PhotoGridBarModel';
+import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource'
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem'
+import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
+
+const TAG = "PhotoGridPage"
 // Album Page
 @Entry
 @Component
@@ -56,44 +56,42 @@ export struct PhotoGridPage {
     @Provide isHideScrollBar: boolean = true;
     @Provide isEmpty: boolean = false;
     @State gridRowCount: number = 0;
-    @Provide isSelectedMode: boolean = false;
+    @Provide @Watch("isSelectedModeChange") isSelectedMode: boolean = false;
     @Provide isAllSelected: boolean = false;
     @Provide('selectedCount') totalSelectedCount: number = 0;
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @Provide broadCast: BroadCast = new BroadCast();
+    @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
+    @Provide broadCast: Broadcast = new Broadcast();
     @Provide isShow: boolean = true;
     @Provide isShowBar: boolean = true;
     @Provide moreMenuList: Array<Action> = new Array<Action>();
     @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
-    @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-    albumInfo: AlbumInfo;
+    @StorageLink('isSplitMode') isSplitMode: boolean = screenManager.isSplitMode();
+    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    private albumInfo: SimpleAlbumDataItem;
     title: string;
     deviceName: string;
-    dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
     scroller: Scroller = new Scroller();
     isDataFreeze = false;
-    logger: Logger = new Logger('PhotoGridPage');
-    mSelectManager = new SelectManager();
     isActive = false;
     isDistributedAlbum = false;
     deleteMode: boolean = false;
     deleteReady = true;
     routerStart = false;
     private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
-    private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private barModel: PhotoGridBarModel = new PhotoGridBarModel()
+    private groupDataSource: GroupItemDataSource = new GroupItemDataSource()
+    private isMediaLibDataChanged: boolean = true
 
     onIndexChange() {
-        this.logger.info(`onIndexChange ${this.PhotoGridPageIndex}`)
+        logInfo(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
         if (this.PhotoGridPageIndex != Constants.INVALID) {
             this.scroller.scrollToIndex(this.PhotoGridPageIndex);
         }
     }
 
     onMenuClicked(action: Action) {
-        this.logger.info(`onMenuClicked, action: ${action.actionID}`);
+        logInfo(TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
         switch (action) {
@@ -108,30 +106,27 @@ export struct PhotoGridPage {
                 this.onModeChange();
                 break;
             case Action.SELECT_ALL:
-                this.mSelectManager.selectAll(true);
-                break;
             case Action.DESELECT_ALL:
-                this.mSelectManager.unselectAll();
+                this.isAllSelected = !this.groupDataSource.isSelect()
+                this.groupDataSource.setSelect(this.isAllSelected)
+                this.onSelect()
                 break;
             case Action.DELETE:
                 menuContext = new MenuContext();
                 this.onDeleteStart = this.onDeleteStart.bind(this);
                 this.onDeleteEnd = this.onDeleteEnd.bind(this);
                 menuContext
-                    .withSelectManager(this.mSelectManager)
+                    .withDataSource(this.groupDataSource)
                     .withOperationStartCallback(this.onDeleteStart)
                     .withOperationEndCallback(this.onDeleteEnd)
                     .withBroadCast(this.broadCast)
-                    .withAlbumId(this.albumInfo.id)
-                menuOperation = MenuOperationFactory.getInstance()
-                    .createMenuOperation(BatchDeleteMenuOperation, menuContext);
+                menuOperation = new BatchDeleteMenuOperation(menuContext);
                 menuOperation.doAction();
                 break;
             case Action.SHARE:
                 menuContext = new MenuContext();
-                menuContext.withSelectManager(this.mSelectManager);
-                menuOperation = MenuOperationFactory.getInstance()
-                    .createMenuOperation(ShareMenuOperation, menuContext);
+                menuContext.withDataSource(this.groupDataSource);
+                menuOperation = new ShareMenuOperation(menuContext);
                 menuOperation.doAction();
                 break;
             case Action.INFO:
@@ -142,13 +137,11 @@ export struct PhotoGridPage {
                 this.onDeleteStart = this.onDeleteStart.bind(this);
                 this.onDeleteEnd = this.onDeleteEnd.bind(this);
                 menuContext
-                    .withSelectManager(this.mSelectManager)
+                    .withDataSource(this.groupDataSource)
                     .withOperationStartCallback(this.onDeleteStart)
                     .withOperationEndCallback(this.onDeleteEnd)
                     .withBroadCast(this.broadCast)
-                    .withAlbumId(AlbumDefine.ALBUM_ID_RECYCLE)
-                menuOperation = MenuOperationFactory.getInstance()
-                    .createMenuOperation(ClearRecycleMenuOperation, menuContext);
+                menuOperation = new ClearRecycleMenuOperation(menuContext)
                 menuOperation.doAction();
                 break;
             case Action.RECOVER:
@@ -156,13 +149,11 @@ export struct PhotoGridPage {
                 this.onDeleteStart = this.onDeleteStart.bind(this);
                 this.onDeleteEnd = this.onDeleteEnd.bind(this);
                 menuContext
-                    .withAlbumId(AlbumDefine.ALBUM_ID_RECYCLE)
-                    .withSelectManager(this.mSelectManager)
+                    .withDataSource(this.groupDataSource)
                     .withOperationStartCallback(this.onDeleteStart)
                     .withOperationEndCallback(this.onDeleteEnd)
                     .withBroadCast(this.broadCast)
-                menuOperation = MenuOperationFactory.getInstance()
-                    .createMenuOperation(BatchRecoverMenuOperation, menuContext);
+                menuOperation = new BatchRecoverMenuOperation(menuContext);
                 menuOperation.doAction();
                 break;
             case Action.MOVE:
@@ -179,12 +170,12 @@ export struct PhotoGridPage {
                 this.onDownloadEnd = this.onDownloadEnd.bind(this);
                 menuContext = new MenuContext();
                 menuContext
-                    .withSelectManager(this.mSelectManager)
+                    .withDataSource(this.groupDataSource)
                     .withOperationStartCallback(this.onDownloadStart)
                     .withOperationEndCallback(this.onDownloadEnd)
                     .withBroadCast(this.broadCast)
                     .withRemoteDevice(this.albumInfo.deviceId);
-                menuOperation = MenuOperationFactory.getInstance().createMenuOperation(CopyMenuOperation, menuContext);
+                menuOperation = new CopyMenuOperation(menuContext);
                 menuOperation.doAction();
                 break;
             default:
@@ -193,33 +184,20 @@ export struct PhotoGridPage {
     }
 
     async openDetailsDialog(): Promise<void> {
-        if (this.totalSelectedCount == 0) {
-            this.logger.error('no select error');
-            return;
-        } else if (this.totalSelectedCount == 1) {
-            this.logger.info('totalSelectedCount is 1');
-            await this.mSelectManager.getSelectedItems((selectItems: MediaItem[]) => {
-                if (selectItems.length != 1) {
-                    this.logger.error('get selectItems is error');
-                    return;
-                }
-                this.broadCast.emit(BroadCastConstants.SHOW_DETAIL_DIALOG, [selectItems[0], this.isDistributedAlbum]);
-            });
+        let items: MediaDataItem[] = this.groupDataSource.getSelectedItems()
+        if (items.length == 0) {
+            logWarn(TAG, 'no select error');
+        } else if (items.length == 1) {
+            logInfo(TAG, 'totalSelectedCount is 1');
+            this.broadCast.emit(BroadcastConstants.SHOW_DETAIL_DIALOG, [items[0], false]);
         } else {
-            await this.mSelectManager.getSelectedItems((selectItems: MediaItem[]) => {
-                if (selectItems.length <= 1) {
-                    this.logger.error('get selectItems is error');
-                    return;
-                }
-                let size = 0;
-                selectItems.forEach((item) => {
-                    size = size + item.size;
-                })
-
-                this.logger.info(`openDetailsDialog size: ${size}`);
-                this.broadCast.emit(BroadCastConstants.SHOW_MULTI_SELECT_DIALOG, [this.totalSelectedCount, size]);
-            });
-            return;
+            let size = 0;
+            items.forEach((item) => {
+                logDebug(TAG, `openDetailsDialog item.size: ${item.size}`);
+                size = size + item.size;
+            })
+            logInfo(TAG, `openDetailsDialog size: ${size}`);
+            this.broadCast.emit(BroadcastConstants.SHOW_MULTI_SELECT_DIALOG, [items.length, size]);
         }
     }
 
@@ -243,7 +221,7 @@ export struct PhotoGridPage {
         });
     }
 
-    routeToAddMediaPage(): void {
+    private routeToAddMediaPage(): void {
         router.push({
             uri: 'feature/albumSelect/view/AlbumSelect',
             params: {
@@ -253,135 +231,107 @@ export struct PhotoGridPage {
     }
 
     onCopyStart(): void {
-        this.logger.info(`onCopyStart`);
-        this.isDataFreeze = true;
-        MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-        this.dataSource.freeze();
+        logInfo(TAG, `onCopyStart`);
+        mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onCopyEnd(err, count, total): void {
-        this.logger.info(`onCopyEnd count: ${count}, total: ${total}`);
-        this.isDataFreeze = false;
+        logInfo(TAG, `onCopyEnd count: ${count}, total: ${total}`);
         this.onModeChange();
-        MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
-        this.dataSource.unfreeze();
+        mediaObserver.registerObserver(this.dataObserver);
         if (err) {
-            UiUtil.showToast($r('app.string.copy_failed_single'));
+            getResourceString($r('app.string.copy_failed_single')).then((message: string) => {
+                showToast(message)
+            })
+        } else {
+            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.groupDataSource.dataReload(true))
         }
     }
 
     onDownloadStart(): void {
-        this.logger.info(`onDownloadStart`);
-        this.isDataFreeze = true;
-        MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-        this.dataSource.freeze();
+        logInfo(TAG, `onDownloadStart`);
+        mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     async onDownloadEnd(err, count, total) {
-        this.logger.info(`onDownloadEnd count: ${count}, total: ${total}`);
-        this.isDataFreeze = false;
+        logInfo(TAG, `onDownloadEnd count: ${count}, total: ${total}`);
         this.onModeChange();
-        MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
-        this.dataSource.unfreeze();
+        mediaObserver.registerObserver(this.dataObserver);
         if (err) {
             if (total > 1) {
-                this.logger.error(`get selectItems is error ${count}`);
-                let str = await UiUtil.getResourceString($r('app.string.download_failed_multi'));
-                let naviBarHeight = ScreenManager.getInstance().getNaviBarHeight()
+                logWarn(TAG, `get selectItems is error ${count}`);
+                let str = await getResourceString($r('app.string.download_failed_multi'));
                 let message = str.replace('%d', count.toString());
-                prompt.showToast({
-                    message: message,
-                    duration: UiUtil.TOAST_DURATION,
-                    bottom: `${64 + naviBarHeight}vp`
-                });
+                showToast(message)
             } else {
-                UiUtil.showToast($r('app.string.download_failed_single'))
+                getResourceString($r('app.string.download_failed_single')).then((message: string) => {
+                    showToast(message)
+                })
             }
             ;
         } else {
-            UiUtil.showToast($r('app.string.download_progress_done'));
+            getResourceString($r('app.string.download_progress_done')).then((message: string) => {
+                showToast(message)
+            })
         }
     }
 
     onMoveStart(): void {
-        this.logger.info(`onMoveStart`);
-        this.isDataFreeze = true;
-        MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-        this.dataSource.freeze();
+        logInfo(TAG, `onMoveStart`);
+        mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onMoveEnd(err, count, total): void {
-        this.logger.info(`onMoveEnd count: ${count}, total: ${total}`);
-        this.isDataFreeze = false;
-        let deleteIndexes = this.mSelectManager.getSelectedIndexes();
-        if (deleteIndexes.length >= Constants.DEFAULT_SLIDING_WIN_SIZE) {
-            this.deleteReady = false;
-        }
-        this.dataSource.unfreeze();
-        if (count == deleteIndexes && this.albumInfo.id != AlbumDefine.ALBUM_ID_ALL && this.deleteReady) {
-            this.dataSource.deleteData(deleteIndexes);
-        }
+        logInfo(TAG, `onMoveEnd count: ${count}, total: ${total}`);
         this.onModeChange();
-        MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.switchRefreshOn();
-        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
+        mediaObserver.registerObserver(this.dataObserver);
         if (err) {
-            UiUtil.showToast($r('app.string.move_failed_single'));
+            getResourceString($r('app.string.move_failed_single')).then((message: string) => {
+                showToast(message)
+            })
+        } else {
+            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.groupDataSource.dataReload(true))
         }
-        this.deleteReady = true;
     }
 
     onDeleteStart(): void {
-        this.logger.info(`onDeleteStart`);
-        this.deleteMode = true;
-        this.isDataFreeze = true;
-        MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-        this.dataSource.freeze();
+        logInfo(TAG, `onDeleteStart`);
+        mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onDeleteEnd(err): void {
-        this.logger.info(`onDeleteEnd`);
-        this.isDataFreeze = false;
-        let deleteIndexes = this.mSelectManager.getSelectedIndexes();
-        if (deleteIndexes.length >= Constants.DEFAULT_SLIDING_WIN_SIZE) {
-            this.deleteReady = false;
-        }
-        this.dataSource.unfreeze();
-        if (!err && this.deleteReady) {
-            this.dataSource.deleteData(deleteIndexes);
-        }
+        logInfo(TAG, `onDeleteEnd`);
         this.onModeChange();
-        MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
-        this.deleteReady = true;
+        mediaObserver.registerObserver(this.dataObserver);
+        animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.groupDataSource.dataRemove())
     }
 
-    freezeAdapter(fn): Function {
-        let _self = this;
-        return function () {
-            if (_self.isDataFreeze) {
-                return;
-            }
-            let context = this;
-            let args = arguments;
-            fn.apply(context, args);
+    /**
+     * Just change select mode to false
+     */
+    onModeChange() {
+        logInfo(TAG, 'onModeChange');
+        if (this.isSelectedMode) {
+            this.isSelectedMode = false;
+            this.onSelect()
         }
     }
 
-    onModeChange() {
-        this.logger.info('onModeChange');
-        this.isSelectedMode = false;
-        this.mSelectManager.onModeChange(false);
+    /**
+     * Do when select mode is change
+     */
+    isSelectedModeChange() {
+        logInfo(TAG, `isSelectedMode:${this.isSelectedMode}`)
+        if (this.isSelectedMode || (this.albumInfo && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE))
+        this.groupDataSource.setSelect(!this.isSelectedMode)
     }
 
     onPageShow() {
-        this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
+        this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.isShow = true
         let params = router.getParams();
         if (this.routerStart && params && params.pageType && params.albumInfo) {
-            this.logger.info('MediaOperation back');
+            logInfo(TAG, 'MediaOperation back');
             switch (params.pageType) {
                 case MediaOperationType.Move:
                     this.moveOperation(JSON.parse(params.albumInfo.toString()));
@@ -402,31 +352,28 @@ export struct PhotoGridPage {
         this.onInActive();
     }
 
+    // The callback when current page is in the foreground
     onActive() {
         if (!this.isActive) {
-            this.logger.info('onActive');
+            logInfo(TAG, 'onActive');
             this.isActive = true;
-            this.dataSource && this.dataSource.onActive();
-            if (this.isSelectedMode) {
-                this.totalSelectedCount = this.mSelectManager.getSelectedCount();
-                this.dataSource.forceUpdate();
-            }
         }
+        this.loadItem()
     }
 
+    // The callback when current page is in the background
     onInActive() {
         if (this.isActive) {
-            this.logger.info('onInActive');
+            logInfo(TAG, 'onInActive');
             this.isActive = false;
-            this.dataSource && this.dataSource.onInActive();
         }
     }
 
-    private onUpdateFavorState(item: MediaItem): void {
-        this.logger.debug('onUpdateFavorState');
-        let index = this.dataSource.getIndexByMediaItem(item);
+    private onUpdateFavorState(item: MediaDataItem): void {
+        logDebug(TAG, 'onUpdateFavorState favor');
+        let index = this.groupDataSource.getIndexByItem(item);
         if (index != -1) {
-            this.dataSource.onDataChanged(index);
+            this.groupDataSource.notifyDataChange(index);
         }
     }
 
@@ -442,201 +389,95 @@ export struct PhotoGridPage {
         return false;
     }
 
-    private moveOperation(albumInfo: AlbumInfo) {
+    private moveOperation(albumInfo: SimpleAlbumDataItem) {
         let menuContext = new MenuContext();
         this.onMoveStart = this.onMoveStart.bind(this);
         this.onMoveEnd = this.onMoveEnd.bind(this);
-        menuContext
-            .withSelectManager(this.mSelectManager)
+        menuContext.withDataSource(this.groupDataSource)
             .withOperationStartCallback(this.onMoveStart)
             .withOperationEndCallback(this.onMoveEnd)
             .withBroadCast(this.broadCast)
             .withAlbumInfo(albumInfo);
-        let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(MoveMenuOperation, menuContext);
+        let menuOperation = new MoveMenuOperation(menuContext);
         menuOperation.doAction();
     }
 
-    private copyOperation(albumInfo: AlbumInfo) {
+    private copyOperation(albumInfo: SimpleAlbumDataItem) {
         let menuContext = new MenuContext();
-        this.onCopyStart = this.onCopyStart.bind(this);
-        this.onCopyEnd = this.onCopyEnd.bind(this);
-        menuContext
-            .withSelectManager(this.mSelectManager)
-            .withOperationStartCallback(this.onCopyStart)
-            .withOperationEndCallback(this.onCopyEnd)
+        menuContext.withDataSource(this.groupDataSource)
+            .withOperationStartCallback(this.onCopyStart.bind(this))
+            .withOperationEndCallback(this.onCopyEnd.bind(this))
             .withBroadCast(this.broadCast)
             .withAlbumInfo(albumInfo);
-        let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(CopyMenuOperation, menuContext);
+        let menuOperation = new CopyMenuOperation(menuContext);
         menuOperation.doAction();
     }
 
     aboutToAppear(): void {
-        TraceControllerUtils.startTrace('PhotoGridPageAboutToAppear');
+        startTrace('PhotoGridPageAboutToAppear');
         let param = router.getParams();
         if (param.item) {
-            this.logger.debug(`After router.getParams, param is: ${JSON.stringify(param)}`);
-            this.albumInfo = JSON.parse(param.item.toString());
+            logDebug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
+            this.albumInfo = JSON.parse(param.item.toString()) as SimpleAlbumDataItem;
             this.title = this.albumInfo.displayName;
-            this.dataSource.setAlbumId(this.albumInfo.id);
             this.barModel.setAlbumId(this.albumInfo.id)
+            this.groupDataSource.setAlbumId(this.albumInfo.id)
             if (param.isDistributedAlbum) {
                 this.isDistributedAlbum = new Boolean(param.isDistributedAlbum).valueOf();
                 this.barModel.setDistributedAlbum(this.isDistributedAlbum)
                 param.distributedAlbumName && (this.title = param.distributedAlbumName.toString());
-                this.dataSource.setDeviceId(this.albumInfo.deviceId);
-                this.mSelectManager.setDeviceId(this.albumInfo.deviceId);
+                this.groupDataSource.setDeviceId(this.albumInfo.deviceId);
             }
         }
+        logInfo(TAG, "reloadGroupItemData")
 
-        let self = this;
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        this.dataSource.setBroadCast(this.broadCast)
-        this.mSelectManager.setPhotoDataImpl();
-        this.mSelectManager.setAlbumId(this.albumInfo.id);
-        MediaObserver.getInstance().registerObserver(this.dataObserver);
+        mediaObserver.registerObserver(this.dataObserver);
 
-        this.broadCast.on(BroadCastConstants.SELECT,
-            (position: number, key: string, value: boolean, callback: Function) => {
-                if (self.mSelectManager.toggle(key, value, position)) {
-                    self.logger.info('enter event process')
-                    if (!self.isSelectedMode) {
-                        self.isSelectedMode = true;
-                    }
-                    callback();
-                }
-            });
-        this.broadCast.on(BroadCastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaItem) => {
-            let targetIndex = self.dataSource.getDataIndex(item);
-            if (targetIndex == Constants.NOT_FOUND) {
-                self.logger.error('targetIndex is not found');
-                return;
-            }
-            self.logger.info(`jump to photo browser at index: ${targetIndex}`);
-            let pageEntryFrom = Constants.ENTRY_FROM.NORMAL;
-            if (self.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE) {
-                pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
-            } else if (self.isDistributedAlbum) {
-                pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
-            }
-
-            AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
-            router.push({
-                uri: 'feature/browser/view/PhotoBrowser',
-                params: {
-                    position: targetIndex,
-                    transition: name,
-                    leftBlank: self.leftBlank,
-                    pageFrom: pageEntryFrom,
-                    deviceName: self.deviceName,
-                    albumInfo: self.albumInfo
-                }
-            });
+        this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect());
+        this.broadCast.on(BroadcastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
+            this.jumpToPhotoBrowser(name, item)
         });
-        this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaItem) => {
-            self.logger.info('JUMP_THIRD_PHOTO_BROWSER');
-            let targetIndex = self.dataSource.getDataIndex(item);
-            if (targetIndex == Constants.NOT_FOUND) {
-                self.logger.error('targetIndex is not found');
-                return;
-            }
-            self.logger.info(`jump to photo browser at index: ${targetIndex} ${name}`);
-            let pageEntryFrom = Constants.ENTRY_FROM.NORMAL;
-            if (self.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE) {
-                pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
-            } else if (self.isDistributedAlbum) {
-                pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
-            }
-            AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
-            router.push({
-                uri: 'feature/browser/view/SelectPhotoBrowser',
-                params: {
-                    position: targetIndex,
-                    transition: name,
-                    pageFrom: pageEntryFrom,
-                    deviceId: self.albumInfo.deviceId
-                }
-            });
+
+        this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
+            this.jumpToThirdPhotoBrowser(name, item)
         });
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            this.logger.info(`ON_LOADING_FINISHED size: ${size}`);
+            logInfo(TAG, `ON_LOADING_FINISHED size: ${size}`);
         });
-        this.appBroadCast.on(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
 
         if (this.albumInfo.deviceId) {
-            this.logger.info(`deviceId size: ${this.albumInfo.deviceId}`);
-            this.appBroadCast.on(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
+            logInfo(TAG, `deviceId size: ${this.albumInfo.deviceId}`);
+            this.appBroadcast.on(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
         }
-        AppStorage.SetOrCreate(Constants.THIRD_SELECT_MANAGER, this.mSelectManager);
-        this.mSelectManager.registerCallback('allSelect', this.freezeAdapter((newState: boolean) => {
-            self.logger.info(`allSelect ${newState}`);
-            self.isAllSelected = newState;
-            if (!self.deleteMode && this.isSelectedMode) {
-                self.dataSource.forceUpdate();
-            }
-        }));
-        this.mSelectManager.registerCallback('updateCount', this.freezeAdapter((newState: number) => {
-            self.logger.info(`updateSelectedCount ${newState}`);
-            self.moreMenuList = Boolean(newState) ? [Action.MOVE, Action.COPY, Action.INFO]
-                                                  : [Action.MOVE_INVALID, Action.COPY_INVALID, Action.INFO_INVALID];
-            self.totalSelectedCount = newState;
-        }));
-        this.dataSource.registerCallback('updateCount', (newState: number) => {
-            self.logger.info(`updateTotalCount ${newState}`);
-            self.isHideScrollBar = (newState <= Constants.SCROLL_BAR_VISIBLE_THRESHOLD);
-            self.isEmpty = !Boolean(newState)
-            self.mSelectManager.setTotalCount(newState);
-        })
 
-        this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, (sortIndexes: number[]) => {
-            this.logger.info('ON_DATA_RELOADED');
-            if (this.deleteMode && sortIndexes) {
-                animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => {
-                    let indexes = sortIndexes.reverse()
-                    indexes.forEach((index) => {
-                        this.dataSource.onDataDeleted(index);
-                    })
-                })
-            } else if (sortIndexes) {
-                let indexes = sortIndexes.reverse()
-                indexes.forEach((index) => {
-                    this.dataSource.onDataDeleted(index);
-                })
-            }
-            else {
-                if (this.isSelectedMode) {
-                    this.deleteReady = false; // change index when selected mode
-                }
-                this.dataSource.onDataReloaded();
-            }
-            this.deleteMode = false;
-        });
-
-        ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-            self.initGridRowCount();
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
+            this.initGridRowCount();
         });
 
         this.initGridRowCount();
         this.moreMenuList = [Action.MOVE, Action.COPY, Action.INFO];
-        TraceControllerUtils.finishTrace('PhotoGridPageAboutToAppear');
+        finishTrace('PhotoGridPageAboutToAppear');
     }
 
     private initGridRowCount(): void {
-        let contentWidth = ScreenManager.getInstance().getWinWidth();
+        let contentWidth = screenManager.getWinWidth();
         let margin = 0;
         let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
         this.gridRowCount = Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
         + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
-        this.logger.info(`initGridRowCount contentWidth: ${contentWidth}`);
+        logInfo(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
     }
 
     private onUpdateRemoteDevice(res, deviceId): void {
-        this.logger.info(`onUpdateRemoteDevice`);
+        logInfo(TAG, `onUpdateRemoteDevice`);
         if (deviceId != this.albumInfo.deviceId || this.isActive == false) {
-            this.logger.debug(`other device`);
+            logDebug(TAG, `other device`);
             return;
         }
         if (res == Constants.DEVICE_STATE_OFFLINE) {
-            this.logger.debug(`device offline route to album main`);
+            logDebug(TAG, `device offline route to album main`);
             router.back({
                 uri: this.isHorizontal === true ? 'product/pad/view/index' : 'product/phone/view/index',
                 params: {
@@ -644,22 +485,100 @@ export struct PhotoGridPage {
                 }
             });
         } else {
-            this.logger.error(`res code is err ${res}`);
+            logWarn(TAG, `res code is err ${res}`);
             return;
         }
     }
 
     onMediaLibDataChange(changeType) {
-        this.logger.info(`onMediaLibDataChange type: ${changeType}`);
-        this.dataSource.onChange(changeType);
+        logInfo(TAG, `onMediaLibDataChange type: ${changeType}`);
+        this.isMediaLibDataChanged = true
+        this.loadItem();
+    }
+
+    private loadItem() {
+        if (this.isActive && this.isMediaLibDataChanged) {
+            this.groupDataSource.reloadGroupItemData(true).then((isEmpty) => {
+                logInfo(TAG, `onMediaLibDataChange load finish`)
+                this.isEmpty = isEmpty
+                this.groupDataSource.notifyDataReload()
+            })
+        } else if (this.isActive) {
+            this.groupDataSource.dataRemove()
+        }
+    }
+
+    private onSelect() {
+        logInfo(TAG, "onSelect")
+        this.totalSelectedCount = this.groupDataSource.getSelectedCount()
+        this.isAllSelected = this.groupDataSource.isSelect()
+        if (this.totalSelectedCount > 0) {
+            this.moreMenuList = [Action.MOVE, Action.COPY, Action.INFO];
+        } else {
+            this.moreMenuList = [Action.MOVE_INVALID, Action.COPY_INVALID, Action.INFO_INVALID];
+        }
+    }
+
+    private jumpToPhotoBrowser(name: string, item: MediaDataItem) {
+        let children: MediaDataItem[] = this.groupDataSource.getItems()
+        let targetIndex = children.indexOf(item);
+        if (targetIndex == Constants.NOT_FOUND) {
+            logWarn(TAG, 'targetIndex is not found');
+            return;
+        }
+        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
+        let pageEntryFrom
+        if (this.albumInfo && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
+            pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
+        } else if (this.isDistributedAlbum) {
+            pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
+        } else {
+            pageEntryFrom = Constants.ENTRY_FROM.NORMAL
+        }
+        router.push({
+            uri: 'feature/browser/view/PhotoBrowser',
+            params: {
+                position: targetIndex,
+                transition: name,
+                albumInfo: this.albumInfo,
+                pageFrom: pageEntryFrom
+            }
+        });
+    }
+
+    private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem) {
+        let children: MediaDataItem[] = this.groupDataSource.getItems()
+        let targetIndex = children.indexOf(item);
+        if (targetIndex == Constants.NOT_FOUND) {
+            logWarn(TAG, 'targetIndex is not found');
+            return;
+        }
+        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
+        let pageEntryFrom
+        if (this.albumInfo && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
+            pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
+        } else if (this.isDistributedAlbum) {
+            pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
+        } else {
+            pageEntryFrom = Constants.ENTRY_FROM.NORMAL
+        }
+        router.push({
+            uri: 'feature/browser/view/SelectPhotoBrowser',
+            params: {
+                position: targetIndex,
+                transition: name,
+                albumInfo: this.albumInfo,
+                pageFrom: pageEntryFrom
+            }
+        });
     }
 
     aboutToDisappear(): void {
-        this.logger.info(`aboutToDisappear`);
+        logInfo(TAG, `aboutToDisappear`);
         this.broadCast.off(null, null);
-        this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
-        this.appBroadCast.off(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
-        MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+        this.appBroadcast.off(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
+        mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     build() {
@@ -679,19 +598,16 @@ export struct PhotoGridPage {
             } else {
                 Stack() {
                     Grid(this.scroller) {
-                        LazyForEach(this.dataSource, (item) => {
+                        LazyForEach(this.groupDataSource, (item: MediaDataItem) => {
                             GridItem() {
                                 ImageGridItemComponent({
-                                    item: item.mediaItem,
-                                    isSelected: this.isSelectedMode ?
-                                    this.mSelectManager.isItemSelected(item.mediaItem.uri) : false,
+                                    mediaItem: item,
                                     pageName: Constants.PHOTO_TRANSITION_ALBUM,
-                                    imageGridPosition: item.viewIndex
                                 })
                             }
-                            .columnStart(item.viewIndex % this.gridRowCount)
-                            .columnEnd(item.viewIndex % this.gridRowCount)
-                        }, item => item == null ? JSON.stringify(item) : item.mediaItem.uri)
+                            .columnStart(item.index % this.gridRowCount)
+                            .columnEnd(item.index % this.gridRowCount)
+                        }, (item: MediaDataItem) => item == null ? JSON.stringify(item) : item.getHashCode())
                     }
                     .columnsTemplate('1fr '.repeat(this.gridRowCount))
                     .columnsGap(Constants.GRID_GUTTER)
@@ -701,23 +617,23 @@ export struct PhotoGridPage {
                     GridScrollBar({ scroller: this.scroller });
                 }.layoutWeight(1)
                 .padding({
-                    bottom: ((this.isSelectedMode || (this.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE)) && !this.isHorizontal) ? Constants.ActionBarHeight : 0
+                    bottom: ((this.isSelectedMode || (this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE)) && !this.isHorizontal) ? Constants.ActionBarHeight : 0
                 })
 
             }
 
             CustomDialogView();
-
-            ToolBar({
-                isShowBar: this.isSelectedMode || (this.dataSource.albumId == AlbumDefine.ALBUM_ID_RECYCLE) && !this.isEmpty,
-                toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected, this.isEmpty),
-                onMenuClicked: this.onMenuClicked
-            })
+            if (this.isSelectedMode || (this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) && !this.isEmpty) {
+                ToolBar({
+                    toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected, this.isEmpty),
+                    onMenuClicked: this.onMenuClicked
+                })
+            }
         }
         .backgroundColor($r('app.color.default_background_color'))
         .padding({
-            top: this.leftBlank[1],
-            bottom: this.leftBlank[3]
+            top: px2vp(this.leftBlank[1]),
+            bottom: px2vp(this.leftBlank[3])
         })
     }
 

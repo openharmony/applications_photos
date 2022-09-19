@@ -19,7 +19,7 @@ import { PhotoEditBase } from './base/PhotoEditBase'
 import { PhotoEditMode } from './base/PhotoEditType'
 import { PixelMapWrapper } from './base/PixelMapWrapper'
 import { ImageFilterStack } from './ImageFilterStack'
-import { MediaItem } from '../../common/model/browser/photo/MediaItem'
+import { MediaDataItem } from '../../../../../../common/base/src/main/ets/data/MediaDataItem';
 import { Loader } from './Loader'
 import { Save } from './Save'
 import { Logger } from './utils/Logger'
@@ -27,7 +27,7 @@ import { Logger } from './utils/Logger'
 export class PhotoEditorManager {
     private currentMode: PhotoEditMode = PhotoEditMode.EDIT_MODE_MAIN;
     private origin: PixelMapWrapper = undefined;
-    private item: MediaItem = undefined;
+    private item: MediaDataItem = undefined;
     private editors: Array<PhotoEditBase> = undefined;
     private historyManager: ImageFilterStack = undefined;
     private logger = new Logger('PhotoEditorManager');
@@ -45,7 +45,7 @@ export class PhotoEditorManager {
         return AppStorage.Get(Constants.PHOTO_EDITOR_MANAGER);
     }
 
-    initialize(item: MediaItem, mode: PhotoEditMode, errCallback?: any) {
+    initialize(item: MediaDataItem, mode: PhotoEditMode, errCallback?: any) {
         this.logger.info(`initialize mode[${mode}]`);
         this.item = item;
         Loader.loadPixelMapWrapper(item, true).then((pixelMap) => {
@@ -142,12 +142,12 @@ export class PhotoEditorManager {
         return false;
     }
 
-    save(isReplace: boolean, callback: any) {
+    async save(isReplace: boolean): Promise<number> {
         this.logger.info(`save enter isReplace = ${isReplace}`);
         const filter = this.editors[this.currentMode].exit();
         if (filter != undefined) {
             this.historyManager.push(filter);
         }
-        Save.save(this.item, this.historyManager, isReplace, callback);
+        return await Save.save(this.item, this.historyManager, isReplace);
     }
 }

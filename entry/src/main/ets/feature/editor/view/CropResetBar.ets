@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import { BroadCast } from '../../../common/utils/BroadCast'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
 import { Constants } from '../../../common/model/common/Constants'
 
 @Component
 export struct CropResetBar {
-    @Consume broadCast: BroadCast;
+    @Consume broadCast: Broadcast;
     @Consume isCropReset: boolean;
     @Consume('verticalScreen') isVerticalScreen: boolean;
 

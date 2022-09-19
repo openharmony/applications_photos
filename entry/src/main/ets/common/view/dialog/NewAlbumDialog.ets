@@ -14,16 +14,16 @@
  */
 import { Logger } from '../../utils/Logger'
 import { DialogCallback } from '../../model/common/DialogUtil'
-import { ScreenManager } from '../../model/common/ScreenManager'
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 import { Constants } from '../../model/common/Constants'
-import { UiUtil } from '../../../common/utils/UiUtil'
+import { showToast } from '../../../../../../../common/base/src/main/ets/utils/UiUtil';
+import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
 
 @CustomDialog
 export struct NewAlbumDialog {
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
+    @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
+    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     controller: CustomDialogController;
     @Consume renameFileName: string;
     @Consume dialogCallback: DialogCallback;
@@ -38,7 +38,9 @@ export struct NewAlbumDialog {
         this.inputName = this.renameFileName;
         this.isNull = this.inputName === '';
         if (this.inputName.length === Constants.ALBUM_NAME_MAX_LENGTH) {
-            UiUtil.showToast($r('app.string.Maximum_length_reached'));
+            getResourceString($r('app.string.Maximum_length_reached')).then((message: string) => {
+                showToast(message)
+            })
         }
     }
 
@@ -68,7 +70,9 @@ export struct NewAlbumDialog {
                             this.logger.info(`TextInput onChange : ${value}`)
                             this.inputName = value
                             if (value.length === Constants.ALBUM_NAME_MAX_LENGTH) {
-                                UiUtil.showToast($r('app.string.Maximum_length_reached'));
+                                getResourceString($r('app.string.Maximum_length_reached')).then((message: string) => {
+                                    showToast(message)
+                                })
                             }
                             this.isNull = this.inputName === '';
                         })
@@ -128,7 +132,9 @@ export struct NewAlbumDialog {
                         let check = /[\\.\\\\/:*?<>\"|\[\]{}\s]/;
                         let passCheck = check.test(this.inputName)
                         if (passCheck) {
-                            UiUtil.showToast($r('app.string.specific_characters_not_supported'));
+                            getResourceString($r('app.string.specific_characters_not_supported')).then((message: string) => {
+                                showToast(message)
+                            })
                             return
                         }
                         this.dialogCallback && this.dialogCallback.confirmCallback(this.inputName);
@@ -144,12 +150,12 @@ export struct NewAlbumDialog {
         }
         .alignItems(HorizontalAlign.Start)
         .borderRadius($r('app.float.dialog_border_radius'))
-        .width(ScreenManager.getInstance().getColumnsWidth(4))
+        .width(screenManager.getColumnsWidth(4))
         .backgroundColor($r('app.color.white'))
         .margin({
             right: $r('app.float.dialog_window_margin'),
             left: $r('app.float.dialog_window_margin'),
-            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
+            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + px2vp(this.leftBlank[3])
         })
     }
 }

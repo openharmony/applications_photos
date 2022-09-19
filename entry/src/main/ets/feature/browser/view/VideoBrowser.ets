@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 import router from '@system.router'
-import { DateUtil } from '../../../common/utils/DateUtil'
+import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil'
 import { Logger } from '../../../common/utils/Logger';
 import { Action } from '../../../common/view/browserOperation/Action'
-import { MenuOperation } from '../../../common/view/browserOperation/MenuOperation'
+import { MenuOperation } from '../../../../../../../common/base/src/main/ets/operation/MenuOperation'
 import { PhotoBrowserActionBar } from './PhotoBrowserActionBar'
-import { BroadCast } from '../../../common/utils/BroadCast'
-import { ScreenManager } from '../../../common/model/common/ScreenManager';
-import { BroadCastManager } from '../../../common/model/common/BroadCastManager';
-import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants';
-import { TraceControllerUtils } from '../../../common/utils/TraceControllerUtils';
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import { startTrace, finishTrace } from '../../../../../../../common/base/src/main/ets/utils/TraceControllerUtils';
 
 @Entry
 @Component
@@ -32,11 +32,11 @@ struct VideoBrowser {
     @Provide isShowBar: boolean = false;
     @Provide menuList: Array<Action> = new Array<Action>();
     @Provide moreMenuList: Array<Action> = new Array<Action>();
-    private broadCast: BroadCast = new BroadCast();
+    private broadCast: Broadcast = new Broadcast();
     private myVideoController: VideoController = new VideoController();
     private logger: Logger = new Logger('VideoBrowser');
     private uri = '';
-    private dateTaken = 0;
+    private dateAdded = 0;
     private previewUri = null;
 
     onBackPress() {
@@ -59,31 +59,31 @@ struct VideoBrowser {
     }
 
     aboutToAppear() {
-        TraceControllerUtils.startTrace('VideoBrowserAboutToAppear');
+        startTrace('VideoBrowserAboutToAppear');
         let param = router.getParams();
         param.uri && (this.uri = param.uri.toString());
-        this.dateTaken = new Number(param.dateTaken).valueOf() || 0;
+        this.dateAdded = new Number(param.dateAdded).valueOf() || 0;
         this.previewUri = param.previewUri;
         if (this.uri == undefined) {
             return;
         }
         this.logger.info(`uri is ${this.uri}`);
-        this.photoDate = DateUtil.getLocalizedDate(this.dateTaken);
-        this.timeAndLocation = DateUtil.getLocalizedTime(this.dateTaken);
+        this.photoDate = DateUtil.getLocalizedDate(this.dateAdded);
+        this.timeAndLocation = DateUtil.getLocalizedTime(this.dateAdded);
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        ScreenManager.getInstance().setSystemUi(false);
-        TraceControllerUtils.finishTrace('VideoBrowserAboutToAppear');
+        screenManager.setSystemUi(false);
+        finishTrace('VideoBrowserAboutToAppear');
     }
 
     aboutToDisappear(): void {
         this.myVideoController.stop();
-        ScreenManager.getInstance().setSystemUi(true);
+        screenManager.setSystemUi(true);
     }
 
     onPageShow() {
-        this.photoDate = DateUtil.getLocalizedDate(this.dateTaken);
-        this.timeAndLocation = DateUtil.getLocalizedTime(this.dateTaken);
-        BroadCastManager.getInstance().getBroadCast().emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
+        this.photoDate = DateUtil.getLocalizedDate(this.dateAdded);
+        this.timeAndLocation = DateUtil.getLocalizedTime(this.dateAdded);
+        broadcastManager.getBroadcast().emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
     }
 
     build() {
@@ -95,13 +95,13 @@ struct VideoBrowser {
                     this.isShowBar = !this.isShowBar;
                 })
                 .onStart(() => {
-                    ScreenManager.getInstance().setKeepScreenOn();
+                    screenManager.setKeepScreenOn();
                 })
                 .onPause(() => {
                 })
                 .onFinish(() => {
                     this.isShowBar = true;
-                    ScreenManager.getInstance().setKeepScreenOff();
+                    screenManager.setKeepScreenOff();
                 })
                 .autoPlay(true)
 

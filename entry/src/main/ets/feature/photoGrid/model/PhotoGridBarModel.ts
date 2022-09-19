@@ -16,8 +16,8 @@
 import { Action } from '../../../common/view/browserOperation/Action'
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp'
 import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/browserOperation/ActionBarMode'
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
-import { AlbumDefine } from '../../../common/model/browser/AlbumDefine';
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { MediaConstants } from '../../../../../../../common/base/src/main/ets/constants/MediaConstants';
 
 
 export class PhotoGridBarModel {
@@ -33,7 +33,7 @@ export class PhotoGridBarModel {
     }
 
     createActionBar(title: string | Resource, isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean, isEmpty: boolean): ActionBarProp  {
-        let isHorizontal = ScreenManager.getInstance().isHorizontal()
+        let isHorizontal = screenManager.isHorizontal()
         if (isHorizontal) {
             return this.createHorizontalActionBar(title, isSelectedMode, selectedCount, isAllSelected, isEmpty)
         } else {
@@ -54,7 +54,7 @@ export class PhotoGridBarModel {
                 .setMode(ActionBarMode.SELECTION_MODE)
                 .setSelectionMode(ActionBarSelectionMode.MULTI);
         } else {
-            if (!AlbumDefine.ALBUM_DISABLE_NEW_LIST.has(this.albumId) && !this.isDistributedAlbum) {
+            if (!MediaConstants.ALBUM_DISABLE_NEW_LIST.has(this.albumId) && !this.isDistributedAlbum) {
                 menuList.push(Action.NEW);
             }
         }
@@ -66,7 +66,7 @@ export class PhotoGridBarModel {
         let menuList: Array<Action> = new Array<Action>();
         let actionBarProp: ActionBarProp = new ActionBarProp();
 
-        if (!AlbumDefine.ALBUM_DISABLE_NEW_LIST.has(this.albumId) && !this.isDistributedAlbum) {
+        if (!MediaConstants.ALBUM_DISABLE_NEW_LIST.has(this.albumId) && !this.isDistributedAlbum) {
             menuList.push(Action.NEW);
         }
 
@@ -90,9 +90,9 @@ export class PhotoGridBarModel {
     getMenuList(isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean, isEmpty: boolean): Array<Action> {
         let menuList: Array<Action> = new Array<Action>();
         if (isSelectedMode) {
-            if (this.albumId == AlbumDefine.ALBUM_ID_RECYCLE) {
+            if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE) {
                 menuList.push(Boolean(selectedCount) ? Action.RECOVER : Action.RECOVER_INVALID)
-                menuList.push(Boolean(selectedCount) ? Action.DELETE : Action.DELETE_INVALID)
+                menuList.push(Boolean(selectedCount) ? Action.CLEAR_RECYCLE : Action.DELETE_INVALID)
                 menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL);
             } else if (this.isDistributedAlbum) {
                 menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL)
@@ -104,7 +104,7 @@ export class PhotoGridBarModel {
                 menuList.push(Boolean(selectedCount) ? Action.DELETE : Action.DELETE_INVALID, Action.MORE)
             }
         } else {
-            if (this.albumId == AlbumDefine.ALBUM_ID_RECYCLE && !isEmpty) {
+            if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE && !isEmpty) {
                 menuList.push(Action.CLEAR_RECYCLE);
             }
         }

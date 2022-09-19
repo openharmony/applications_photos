@@ -1,0 +1,8 @@
+{
+  "module": {
+    "name": "third",
+    "type": "har",
+    "deviceTypes": ["default","tablet"],
+    "uiSyntax": "ets"
+  }
+}

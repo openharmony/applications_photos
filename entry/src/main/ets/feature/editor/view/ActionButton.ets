@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { BroadCast } from '../../../common/utils/BroadCast'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
 import { Constants } from '../../../common/model/common/Constants'
 
 @Component
@@ -25,7 +25,7 @@ export struct ActionButton {
     sizeDefault: Resource = $r('app.float.ic_size_default');
     heightOfActionButton: Resource = $r('app.float.actionButton_default');
     widthOfActionButton: Resource = $r('app.float.actionButton_default');
-    @Consume broadCast: BroadCast;
+    @Consume broadCast: Broadcast;
 
     aboutToAppear() {
         if (this.text == undefined) {

@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "formEditor",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "uiSyntax": "ets"
+  }
+}

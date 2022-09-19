@@ -18,8 +18,8 @@ import { Action } from './Action'
 import { ActionBar } from '../../../common/view/actionbar/ActionBar'
 import { ActionBarProp } from './ActionBarProp'
 import { ActionBarMode } from './ActionBarMode'
-import { ScreenManager } from '../../model/common/ScreenManager'
-import { MediaOperationType } from '../../model/common/MediaOperationType'
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { MediaOperationType } from '../../../../../../../common/base/src/main/ets/data/MediaOperationType'
 
 @Component
 export struct MediaOperationActionBar {
@@ -27,7 +27,7 @@ export struct MediaOperationActionBar {
     @Consume loadingFinish: boolean;
     onMenuClicked: Function;
     logger: Logger = new Logger('MediaOperationActionBar');
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
+    @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
 
     private createActionBar(): ActionBarProp {
         let menuList: Array<Action> = new Array<Action>();
@@ -47,7 +47,6 @@ export struct MediaOperationActionBar {
     build() {
         Column() {
             ActionBar({
-                isShowBar: true,
                 actionBarProp: this.createActionBar(),
                 onMenuClicked: this.onMenuClicked
             })

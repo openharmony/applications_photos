@@ -13,42 +13,53 @@
  * limitations under the License.
  */
 
-import router from '@ohos.router';
-import { CopyMenuOperation } from '../../../common/view/browserOperation/CopyMenuOperation';
-import { MoveMenuOperation } from '../../../common/view/browserOperation/MoveMenuOperation';
-import { AlbumInfo } from '../../../common/model/browser/album/AlbumInfo';
-import { AlbumSetDataSource } from '../../../common/model/browser/album/AlbumSetDataSource'
+import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation';
+import { MoveMenuOperation } from '@ohos/base/src/main/ets/operation/MoveMenuOperation';
+import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import { Constants } from '../../../common/model/common/Constants'
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
-import { BroadCast } from '../../../common/utils/BroadCast';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent'
-import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
-import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
-import { TraceControllerUtils } from '../../../common/utils/TraceControllerUtils'
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils'
 import { TabBarForAlbumSet } from '../../../common/view/TabBar'
 import { TabItemWithText } from '../../../common/model/common/TabItem'
-import { AlbumSetSelectManager, SelectManager } from '../../../common/model/browser/SelectManager'
-import { AlbumSetNewMenuOperation } from '../../../common/view/browserOperation/AlbumSetNewMenuOperation'
-import { DistributedDataSource } from '../../../common/model/browser/album/DistributedDataSource'
-import { MenuContext } from '../../../common/view/browserOperation/MenuContext'
-import { MenuOperation } from '../../../common/view/browserOperation/MenuOperation'
-import { MenuOperationFactory } from '../../../common/interface/MenuOperationFactory'
+import { AlbumSetNewMenuOperation } from '@ohos/base/src/main/ets/operation/AlbumSetNewMenuOperation'
+import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext'
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation'
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
 import { Action } from '../../../common/view/browserOperation/Action'
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
-import { CommonObserverCallback } from '../../../common/model/browser/CommonObserverCallback'
-import { MediaObserver } from '../../../common/model/browser/dataObserver/MediaObserver'
-import { UiUtil } from '../../../common/utils/UiUtil'
-import { Logger } from '../../../common/utils/Logger';
+import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback'
+import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver'
+import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
+import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
+import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
+import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
 import { AlbumBarModel } from '../model/AlbumBarModel';
 import { ToolBar } from '../../../common/view/actionbar/ToolBar';
-import { AlbumGridItemNewStyle } from './AlbumGridItemNewStyle'
-import { DistributedAlbumGriItem } from './DistributedAlbumGriItem'
-import { AlbumSetDeleteMenuOperation } from '../operation/AlbumSetDeleteMenuOperation'
-import { AlbumSetRenameMenuOperation } from '../operation/AlbumSetRenameMenuOperation'
-import { AlbumScrollBar } from '../../../common/view/scrollBar/AlbumScrollBar'
-
+import {
+    AlbumGridItemNewStyle
+} from '../../../../../../../features/album/src/main/ets/components/AlbumGridItemNewStyle'
+import {
+    DistributedAlbumGriItem
+} from '../../../../../../../features/album/src/main/ets/components/DistributedAlbumGriItem'
+import {
+    AlbumSetDeleteMenuOperation
+} from '../../../../../../../features/album/src/main/ets/operation/AlbumSetDeleteMenuOperation'
+import {
+    AlbumSetRenameMenuOperation
+} from '../../../../../../../features/album/src/main/ets/operation/AlbumSetRenameMenuOperation'
+import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar'
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
+import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource'
+import { DistributedDataSource } from '@ohos/base/src/main/ets/vm/DistributedDataSource'
+import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
+import { PeerDataItem } from '@ohos/base/src/main/ets/data/PeerDataItem';
 // Album Set Page
+const TAG = "AlbumSetPage"
+
 @Component
 export struct AlbumSetPage {
     private tabs: TabItemWithText[] = [
@@ -57,25 +68,18 @@ export struct AlbumSetPage {
     ];
     @Consume @Watch('onModeChange') isAlbumSetSelectedMode: boolean;
     @Provide('selectedCount') selectedAlbumsCount: number = 0;
-    @Provide isDisableDelete: boolean = false;
     @Provide isHideScrollBar: boolean = true;
-    @Provide isDisableRename: boolean = false;
     @State isEmpty: boolean = true;
     @Provide gridColumnsCount: number = 0;
-    @Provide broadCast: BroadCast = new BroadCast();
+    @Provide broadCast: Broadcast = new Broadcast();
     @Consume @Watch('onIndexPageShow') isShow: boolean;
-    albums: AlbumSetDataSource = new AlbumSetDataSource(this.broadCast);
-    distributed: DistributedDataSource = new DistributedDataSource(this.broadCast);
     private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
-    appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    appBroadcast: Broadcast = broadcastManager.getBroadcast();
     isInCurrentTab = false;
     isActive = false; // Whether the page is in the foreground
 
-    logger: Logger = new Logger('AlbumSetPage');
     scroller: Scroller = new Scroller();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-    mSelectManager = new AlbumSetSelectManager();
-    isDataFreeze: boolean = false;
+    @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
 
     // the switch of distributed page
     @Provide('tabBarShow') isTabBarShow: boolean = false;
@@ -83,27 +87,24 @@ export struct AlbumSetPage {
     private tabsController: TabsController = new TabsController();
     private currentIndex: number = Constants.LOCAL_TAB_INDEX;
     private needNotify = false;
-    private ignoreLocalNotify = false;
     private barModel: AlbumBarModel = new AlbumBarModel()
-    private toPhotoGrid: boolean = false;
-    private isNewAlbum: boolean = false;
+    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
+    private distributedDataSource: DistributedDataSource = new DistributedDataSource()
+    private isMediaLibDataChanged: boolean = true
 
     onMenuClicked(action: Action, arg: any[]) {
-        this.logger.info(`onMenuClicked, action: ${action.actionID}`);
+        logInfo(TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
         switch (action) {
             case Action.NEW:
                 menuContext = new MenuContext();
-                this.onOperationStart = this.onOperationStart.bind(this);
-                this.onOperationEnd = this.onOperationEnd.bind(this);
                 menuContext
-                    .withOperationStartCallback(this.onOperationStart)
-                    .withOperationEndCallback(this.onOperationEnd)
-                    .withAlbumSetDataSource(this.albums)
+                    .withOperationStartCallback(this.onOperationStart.bind(this))
+                    .withOperationEndCallback(this.onNewEnd.bind(this))
+                    .withDataSource(this.albumsDataSource)
                     .withBroadCast(this.broadCast);
-                menuOperation
-                = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetNewMenuOperation, menuContext);
+                menuOperation = new AlbumSetNewMenuOperation(menuContext);
                 menuOperation.doAction();
                 break;
             case Action.CANCEL:
@@ -111,28 +112,22 @@ export struct AlbumSetPage {
                 break;
             case Action.RENAME:
                 menuContext = new MenuContext();
-                this.onOperationStart = this.onOperationStart.bind(this);
-                this.onOperationEnd = this.onOperationEnd.bind(this);
                 menuContext
-                    .withSelectManager(this.mSelectManager)
-                    .withOperationStartCallback(this.onOperationStart)
-                    .withOperationEndCallback(this.onOperationEnd)
+                    .withDataSource(this.albumsDataSource)
+                    .withOperationStartCallback(this.onOperationStart.bind(this))
+                    .withOperationEndCallback(this.onRenameEnd.bind(this))
                     .withBroadCast(this.broadCast);
-                menuOperation
-                = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetRenameMenuOperation, menuContext);
+                menuOperation = new AlbumSetRenameMenuOperation(menuContext);
                 menuOperation.doAction();
                 break;
             case Action.DELETE:
                 menuContext = new MenuContext();
-                this.onOperationStart = this.onOperationStart.bind(this);
-                this.onOperationEnd = this.onOperationEnd.bind(this);
                 menuContext
-                    .withSelectManager(this.mSelectManager)
-                    .withOperationStartCallback(this.onOperationStart)
-                    .withOperationEndCallback(this.onOperationEnd)
+                    .withDataSource(this.albumsDataSource)
+                    .withOperationStartCallback(this.onOperationStart.bind(this))
+                    .withOperationEndCallback(this.onDeleteEnd.bind(this))
                     .withBroadCast(this.broadCast);
-                menuOperation
-                = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetDeleteMenuOperation, menuContext);
+                menuOperation = new AlbumSetDeleteMenuOperation(menuContext);
                 menuOperation.doAction();
                 break;
             default:
@@ -141,123 +136,88 @@ export struct AlbumSetPage {
     }
 
     onOperationStart(): void {
-        this.isDataFreeze = true;
-        this.ignoreLocalNotify = true;
-        this.albums.freeze();
+        logDebug(TAG, `onOperationStart`);
+        mediaObserver.unregisterObserver(this.dataObserver)
+    }
+
+    private onDeleteEnd(): void {
+        this.isAlbumSetSelectedMode = false
+        this.albumsDataSource.dataRemove()
+        mediaObserver.registerObserver(this.dataObserver);
+    }
+
+    onNewEnd() {
+        logDebug(TAG, `onNewEnd`);
+        this.isAlbumSetSelectedMode = false
+        mediaObserver.registerObserver(this.dataObserver);
+    }
+
+    onRenameEnd() {
+        logDebug(TAG, `onRenameEnd`);
+        this.isAlbumSetSelectedMode = false
+        this.albumsDataSource.notifyDataReload()
+        mediaObserver.registerObserver(this.dataObserver);
     }
 
     onOperationEnd(): void {
-        this.logger.debug(`onOperationEnd`);
-        this.isDataFreeze = false;
+        logDebug(TAG, `onOperationEnd`);
         this.isAlbumSetSelectedMode = false
-        this.ignoreLocalNotify = false;
-        this.albums.onChange(Constants.MEDIA_TYPE_IMAGE);
-        this.albums.unfreeze();
-
-        if (this.isNewAlbum) {
-            this.toPhotoGrid = true;
-            AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
-        }
+        this.isMediaLibDataChanged = true
+        this.loadItem()
+        mediaObserver.registerObserver(this.dataObserver)
+        AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
     }
 
     aboutToAppear(): void {
-        TraceControllerUtils.startTrace('AlbumSetPageAboutToAppear');
-        this.logger.info(`AlbumSetPageAboutToAppear`);
-        this.appBroadCast.on(BroadCastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-        this.appBroadCast.on(BroadCastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-        this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            this.isEmpty = (size == 0);
-            this.isHideScrollBar = (size <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
-            if (!this.isEmpty && this.isNewAlbum && this.toPhotoGrid) {
-                this.isNewAlbum = false;
-                this.toPhotoGrid = false;
-                let newAlbum = AppStorage.Get<AlbumInfo>(Constants.APP_KEY_NEW_ALBUM_TARGET);
-                for (let album of this.albums.mediaSetList) {
-                    if (album.name == newAlbum.name
-                    && album.displayName == newAlbum.displayName
-                    && album.relativePath == newAlbum.relativePath) {
-                        let options = {
-                            url: 'feature/browser/view/photoGrid/PhotoGridPage',
-                            params: {
-                                item: JSON.stringify(album)
-                            }
-                        }
-                        router.push(options);
-                        break;
-                    }
-                }
-                AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
-                AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
-                AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
-            }
-        });
+        startTrace('AlbumSetPageAboutToAppear');
+        logInfo(TAG, `AlbumSetPageAboutToAppear`);
+        this.appBroadcast.on(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
+        this.appBroadcast.on(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
 
-        this.appBroadCast.on(BroadCastConstants.RESET_ZERO, this.onResetZero.bind(this));
-        this.appBroadCast.on(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
+        this.appBroadcast.on(BroadcastConstants.RESET_ZERO, this.onResetZero.bind(this));
 
-        this.distributed.initialize();
         this.isInCurrentTab = true;
 
-        MediaObserver.getInstance().registerObserver(this.dataObserver);
-
-        this.onActive();
+        mediaObserver.registerObserver(this.dataObserver);
 
         this.initGridRowCount();
 
         let self = this;
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        this.broadCast.on(BroadCastConstants.SELECT, function (
-                key: string, value: boolean, isDisableRename: boolean, isDisableDelete: boolean, callback: Function) {
-            self.mSelectManager.toolBarStateToggle(key, value, isDisableRename, isDisableDelete);
-            if (self.mSelectManager.toggle(key, value)) {
-                self.logger.info('enter event process');
-                callback();
-            }
-        });
+        this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect(index));
 
-        this.mSelectManager.registerCallback('updateCount', this.freezeAdapter(function (newState: number) {
-            self.logger.info(`updateSelectedCount ${newState}`);
-            self.selectedAlbumsCount = newState;
-        }));
-        this.mSelectManager.registerCallback('updateToolBarState', this.freezeAdapter(
-            function (isDisableRename: boolean, isDisableDelete: boolean) {
-                self.logger.info(`updateToolBarState:\
-                    isDisableRename: ${isDisableRename}, isDisableDelete: ${isDisableDelete}`);
-                self.isDisableRename = isDisableRename
-                self.isDisableDelete = isDisableDelete
-            })
-        );
-
-        ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
             self.initGridRowCount();
         });
-        if (Constants.LOCAL_TAB_INDEX == this.currentIndex) {
+        if (this.currentIndex == Constants.LOCAL_TAB_INDEX) {
             this.tabs[Constants.LOCAL_TAB_INDEX].isSelected = true;
             this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = false;
         } else {
             this.tabs[Constants.LOCAL_TAB_INDEX].isSelected = false;
             this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = true;
         }
-        TraceControllerUtils.finishTrace('AlbumSetPageAboutToAppear');
+        this.distributedDataSource.reloadAlbumItemData().then((change: number) => {
+            this.onUpdateRemoteDevice(change)
+            this.distributedDataSource.notifyDataReload()
+        })
+        finishTrace('AlbumSetPageAboutToAppear');
     }
 
     aboutToDisappear(): void {
-        this.appBroadCast.off(BroadCastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-        this.appBroadCast.off(BroadCastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-        this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        this.appBroadCast.off(BroadCastConstants.RESET_ZERO, this.onResetZero.bind(this));
-        this.appBroadCast.off(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
-        MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+        this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
+        this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
+        this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
+        this.appBroadcast.off(BroadcastConstants.RESET_ZERO, this.onResetZero.bind(this));
+        mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     // Callback when the page is show.
     onIndexPageShow() {
-        this.logger.info(`onIndexPageShow`)
+        logInfo(TAG, `onIndexPageShow`)
         if (this.isShow && this.isInCurrentTab) {
             this.onActive();
             this.createAlbum();
-            this.isHideScrollBar = (this.albums.totalCount() <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
+            this.isHideScrollBar = (this.albumsDataSource.totalCount() <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         } else if (!this.isShow && this.isInCurrentTab) {
             this.onInActive();
         } else {
@@ -268,64 +228,49 @@ export struct AlbumSetPage {
         let newAlbum = AppStorage.Get<boolean>(Constants.APP_KEY_NEW_ALBUM);
         if (newAlbum) {
             AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
-            this.broadCast.emit(BroadCastConstants.SHOW_COPY_OR_MOVE_DIALOG,
+            this.broadCast.emit(BroadcastConstants.SHOW_COPY_OR_MOVE_DIALOG,
                 [this.moveOperation.bind(this), this.copyOperation.bind(this)]);
         }
     }
 
     private copyOperation() {
-        this.isNewAlbum = true;
-        let selectManager = AppStorage.Get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
-        let targetAlbum = AppStorage.Get<AlbumInfo>(Constants.APP_KEY_NEW_ALBUM_TARGET);
-        if (undefined == selectManager || undefined == targetAlbum) {
+        let mediaItems = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+        let targetAlbum = AppStorage.Get<SimpleAlbumDataItem>(Constants.APP_KEY_NEW_ALBUM_TARGET);
+        if (mediaItems == undefined || targetAlbum == undefined) {
+            logWarn(TAG, `mediaItems is undefined ${mediaItems == undefined} targetAlbum is undefined ${targetAlbum == undefined}`)
             return;
         }
         let menuContext = new MenuContext();
-        menuContext
-            .withSelectManager(selectManager)
+        menuContext.withItems(mediaItems)
             .withOperationStartCallback(this.onOperationStart.bind(this))
             .withOperationEndCallback(this.onOperationEnd.bind(this))
             .withBroadCast(this.broadCast)
             .withAlbumInfo(targetAlbum);
-        let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(CopyMenuOperation, menuContext);
+        let menuOperation = new CopyMenuOperation(menuContext);
         menuOperation.doAction();
     }
 
     private moveOperation() {
-        this.isNewAlbum = true;
-        let selectManager = AppStorage.Get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
-        let targetAlbum = AppStorage.Get<AlbumInfo>(Constants.APP_KEY_NEW_ALBUM_TARGET);
-        if (undefined == selectManager || undefined == targetAlbum) {
+        let mediaItems = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+        let targetAlbum = AppStorage.Get<SimpleAlbumDataItem>(Constants.APP_KEY_NEW_ALBUM_TARGET);
+        if (mediaItems == undefined || undefined == targetAlbum) {
             return;
         }
         let menuContext = new MenuContext();
-        menuContext
-            .withSelectManager(selectManager)
+        menuContext.withItems(mediaItems)
             .withOperationStartCallback(this.onOperationStart.bind(this))
             .withOperationEndCallback(this.onOperationEnd.bind(this))
             .withBroadCast(this.broadCast)
             .withAlbumInfo(targetAlbum);
-        let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(MoveMenuOperation, menuContext);
+        let menuOperation = new MoveMenuOperation(menuContext);
         menuOperation.doAction();
     }
 
     onModeChange() {
-        this.logger.info(`onModeChange ${this.isAlbumSetSelectedMode}`);
+        logInfo(TAG, `onModeChange ${this.isAlbumSetSelectedMode}`);
         if (!this.isAlbumSetSelectedMode) {
-            this.mSelectManager.emitCallback('updateCount', [0]);
-            this.mSelectManager.onModeChange(false);
-        }
-    }
-
-    freezeAdapter(fn): Function {
-        let self = this;
-        return function () {
-            if (self.isDataFreeze) {
-                return;
-            }
-            let context = this;
-            let args = arguments;
-            fn.apply(context, args);
+            this.albumsDataSource.setSelect(false)
+            this.selectedAlbumsCount = 0
         }
     }
 
@@ -359,60 +304,34 @@ export struct AlbumSetPage {
     // Callback when the page is in the foreground
     onActive() {
         if (!this.isActive) {
-            this.logger.info('onActive');
+            logInfo(TAG, 'onActive');
             this.isActive = true;
-            if (this.currentIndex == Constants.LOCAL_TAB_INDEX) {
-                this.onLocalAlbumSetActive();
-            } else {
-                this.onLocalAlbumSetInActive();
-            }
-
+            this.albumsDataSource.dataRemove()
+            this.distributedDataSource.dataRemove()
             this.showNotify();
         }
+        this.loadItem()
     }
 
     // Callback when the page is in the background
     onInActive() {
         if (this.isActive) {
-            this.logger.info('onInActive');
+            logInfo(TAG, 'onInActive');
             this.isActive = false;
-            this.albums && this.albums.onInActive();
-            this.distributed && this.distributed.onInActive();
-        }
-    }
-
-    // Callback when the local albums' page is in the foreground
-    onLocalAlbumSetActive() {
-        if (this.currentIndex == Constants.LOCAL_TAB_INDEX) {
-            this.logger.info('Local album set is on active');
-            this.albums && this.albums.onActive();
-            this.distributed && this.distributed.onInActive();
-        }
-    }
-
-    // Callback when the local albums' page is in the background
-    onLocalAlbumSetInActive() {
-        if (this.currentIndex == Constants.OTHER_EQUIPMENT_TAB_INDEX) {
-            this.logger.info('Local album set is on inactive');
-            this.albums && this.albums.onInActive();
-            this.distributed && this.distributed.onActive();
         }
     }
 
     private showNotify() {
         if (this.needNotify) {
-            UiUtil.showToast($r('app.string.distributed_album_disconnected'));
+            getResourceString($r('app.string.distributed_album_disconnected')).then((message: string) => {
+                showToast(message)
+            })
             this.needNotify = false;
         }
     }
 
     private onDistributedTabChanged(index: number) {
         this.currentIndex = index;
-        if (index == Constants.LOCAL_TAB_INDEX) {
-            this.onLocalAlbumSetActive();
-        } else {
-            this.onLocalAlbumSetInActive();
-        }
     }
 
     onResetZero(pageNumber: number) {
@@ -422,40 +341,58 @@ export struct AlbumSetPage {
     }
 
     initGridRowCount() {
-        this.logger.info(`get screen width is : ${ScreenManager.getInstance().getWinWidth()}`);
-        this.logger.info(`get screen height is : ${ScreenManager.getInstance().getWinHeight()}`);
+        logInfo(TAG, `get screen width is : ${screenManager.getWinWidth()}`);
+        logInfo(TAG, `get screen height is : ${screenManager.getWinHeight()}`);
 
         let sideBarWidth = this.isSidebar ? Constants.TAB_BAR_WIDTH : 0;
 
-        let contentWidth = ScreenManager.getInstance().getWinWidth() - sideBarWidth;
+        let contentWidth = screenManager.getWinWidth() - sideBarWidth;
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         this.gridColumnsCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
         / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
-        this.logger.info(`the grid count in a line is: ${this.gridColumnsCount}`);
+        logInfo(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
 
     }
 
     onMediaLibDataChange(changeType) {
-        this.logger.info(`onMediaLibDataChange type: ${changeType}`);
-        if (!this.ignoreLocalNotify) {
-            this.albums.onChange(changeType);
+        logInfo(TAG, `onMediaLibDataChange type: ${changeType}`);
+        if (changeType == MediaConstants.MEDIA_TYPE_REMOTE) {
+            this.distributedDataSource.reloadAlbumItemData().then((change: number) => {
+                this.onUpdateRemoteDevice(change)
+                this.distributedDataSource.notifyDataReload()
+            })
+        } else {
+            this.isMediaLibDataChanged = true
+            this.loadItem()
         }
-        this.distributed.onChange(changeType);
     }
 
-    private onUpdateRemoteDevice(res, deviceId, size): void {
-        this.logger.info(`onUpdateRemoteDevice size: ${size} deviceId: ${deviceId} type: ${res}`);
+    private loadItem() {
+        if (this.isActive && this.isMediaLibDataChanged) {
+            this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
+                this.isEmpty = isEmpty
+                this.albumsDataSource.notifyDataReload()
+            })
+        } else if (this.isActive) {
+            this.albumsDataSource.dataRemove()
+        }
+    }
 
-        if (res == Constants.DEVICE_STATE_OFFLINE) {
+    private onUpdateRemoteDevice(change: number): void {
+        logInfo(TAG, `onUpdateRemoteDevice`);
+
+        if (change < 0) {
             this.needNotify = true;
         }
+        let size = this.distributedDataSource.totalCount()
+        logInfo(TAG, `onUpdateRemoteDevice length:${size} change: ${change}`);
 
         if (size <= 0) {
-            this.currentIndex = Constants.LOCAL_TAB_INDEX
+            this.onDistributedTabChanged(Constants.LOCAL_TAB_INDEX)
             try {
                 this.tabsController.changeIndex(this.currentIndex);
             } catch (error) {
-                this.logger.error(`change tab index failed: ${error}`);
+                logError(TAG, `change tab index failed: ${error}`);
             }
             this.tabs[Constants.LOCAL_TAB_INDEX].isSelected = true;
             this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = false;
@@ -468,32 +405,44 @@ export struct AlbumSetPage {
         this.isTabBarShow = (size > 0);
     }
 
+    private onSelect(index: number) {
+        this.selectedAlbumsCount = this.albumsDataSource.getSelectedCount()
+        this.albumsDataSource.notifyDataChange(index)
+    }
+
+    private loadAlbums(isForce: boolean) {
+        if (isForce || this.currentIndex == Constants.LOCAL_TAB_INDEX) {
+            this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
+                this.isEmpty = isEmpty
+                this.albumsDataSource.notifyDataReload()
+            })
+        }
+        if (isForce || this.currentIndex == Constants.OTHER_EQUIPMENT_TAB_INDEX) {
+
+        }
+    }
+
     @Builder LocalAlbumSet() {
         Stack() {
             Grid(this.scroller) {
-                LazyForEach(this.albums, (item) => {
-                    if (this.albums.mediaSetList.indexOf(item) == 0) {
+                LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {
+                    if (item && item.index == 0) {
                         GridItem() {
                             AlbumGridItemNewStyle({
                                 item: item,
                                 isBigCard: true,
-                                isSelected: this.isAlbumSetSelectedMode ?
-                                this.mSelectManager.isItemSelected(item.id) : false,
                             })
                         }.columnStart(0).columnEnd(1)
-                    } else {
+                    } else if (item) {
                         GridItem() {
                             AlbumGridItemNewStyle({
                                 item: item,
                                 isBigCard: false,
-                                isSelected: this.isAlbumSetSelectedMode ?
-                                this.mSelectManager.isItemSelected(item.id) : false,
                             })
                         }
                     }
-                }, item => 'uri:' + item.id)
+                }, (item: AlbumDataItem) => item ? item.getHashCode() : JSON.stringify(item))
             }
-            .visibility(this.isEmpty ? Visibility.None : Visibility.Visible)
             .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
             .padding({
                 left: $r('app.float.max_padding_start'),
@@ -512,11 +461,11 @@ export struct AlbumSetPage {
 
     @Builder OtherEquipmentAlbumSet() {
         Grid(this.scroller) {
-            LazyForEach(this.distributed, (item) => {
+            LazyForEach(this.distributedDataSource, (item: PeerDataItem) => {
                 GridItem() {
                     DistributedAlbumGriItem({ item: item })
                 }
-            }, item => 'uri:' + item.networkId)
+            }, (item: PeerDataItem) => item ? item.getHashCode() : JSON.stringify(item))
         }
         .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
         .padding({
@@ -535,67 +484,70 @@ export struct AlbumSetPage {
 
     build() {
         Stack() {
-            Flex({
-                direction: FlexDirection.Column,
-                justifyContent: FlexAlign.Start,
-                alignItems: ItemAlign.Start
-            }) {
-                ActionBar({
-                    isShowBar: !(this.isEmpty && !this.isTabBarShow),
-                    actionBarProp: this.barModel.createActionBar(
-                        this.isAlbumSetSelectedMode,
-                        this.selectedAlbumsCount,
-                        this.isDisableRename,
-                        this.isDisableDelete),
-                    onMenuClicked: this.onMenuClicked
-                })
-                Column() {
-                    TabBarForAlbumSet({
-                        currentIndex: this.currentIndex,
-                        tabs: this.tabs,
-                        controller: this.tabsController,
+            Column() {
+                if (!this.isEmpty || this.isTabBarShow) {
+                    ActionBar({
+                        actionBarProp: this.barModel.createActionBar(
+                            this.isAlbumSetSelectedMode,
+                            this.selectedAlbumsCount,
+                        this.albumsDataSource.isDisableRename(),
+                        this.albumsDataSource.isDisableDelete()),
+                        onMenuClicked: this.onMenuClicked
                     })
-
-                    Tabs({
-                        barPosition: BarPosition.Start,
-                        index: this.currentIndex,
-                        controller: this.tabsController
-                    }) {
-                        TabContent() {
-                            this.LocalAlbumSet()
+                    Column() {
+                        if (this.isTabBarShow) {
+                            TabBarForAlbumSet({
+                                currentIndex: this.currentIndex,
+                                tabs: this.tabs,
+                                controller: this.tabsController,
+                            })
                         }
 
-                        TabContent() {
-                            this.OtherEquipmentAlbumSet()
+                        Tabs({
+                            barPosition: BarPosition.Start,
+                            index: this.currentIndex,
+                            controller: this.tabsController
+                        }) {
+                            TabContent() {
+                                if (!this.isEmpty) {
+                                    this.LocalAlbumSet()
+                                }
+                            }
+
+                            TabContent() {
+                                this.OtherEquipmentAlbumSet()
+                            }
                         }
+                        .animationDuration(0)
+                        .vertical(false)
+                        .scrollable(false)
+                        .barMode(BarMode.Fixed)
+                        .barWidth(0)
+                        .barHeight(0)
+                        .flexGrow(1)
+                        .onChange((index: number) => {
+                            logInfo(TAG, `Switch to Tab ${index}.`);
+                            this.onDistributedTabChanged(index);
+                        })
                     }
-                    .animationDuration(0)
-                    .vertical(false)
-                    .scrollable(false)
-                    .barMode(BarMode.Fixed)
-                    .barWidth(0)
-                    .barHeight(0)
-                    .flexGrow(1)
-                    .onChange((index: number) => {
-                        this.logger.info(`Switch to Tab ${index}.`);
-                        this.onDistributedTabChanged(index);
+                }
+                if (this.isAlbumSetSelectedMode) {
+                    ToolBar({
+                        toolMenuList: this.barModel.getMenuList(
+                            this.isAlbumSetSelectedMode,
+                            this.selectedAlbumsCount,
+                        this.albumsDataSource.isDisableRename(),
+                        this.albumsDataSource.isDisableDelete()),
+                        onMenuClicked: this.onMenuClicked
                     })
-                }.visibility(this.isEmpty && !this.isTabBarShow ? Visibility.None : Visibility.Visible)
-
-                ToolBar({
-                    isShowBar: this.isAlbumSetSelectedMode && true,
-                    toolMenuList: this.barModel.getMenuList(
-                        this.isAlbumSetSelectedMode,
-                        this.selectedAlbumsCount,
-                        this.isDisableRename,
-                        this.isDisableDelete),
-                    onMenuClicked: this.onMenuClicked
-                })
+                }
 
                 if (this.isEmpty && !this.isTabBarShow) {
                     NoPhotoIndexComponent({ index: Constants.ALBUM_PAGE_INDEX })
                 }
             }
+            .justifyContent(FlexAlign.Start)
+            .alignItems(HorizontalAlign.Start)
 
             CustomDialogView()
         }
