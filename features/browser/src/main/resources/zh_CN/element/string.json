@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "image_loading",
+      "value": "正在加载..."
+    },
+    {
+      "name": "no_distributed_photo_show_image",
+      "value": "请先在对端图库打开大图，再在本端浏览"
+    },
+    {
+      "name": "no_distributed_photo_show_video",
+      "value": "请下载视频文件至本机进行播放"
+    }
+  ]
+}

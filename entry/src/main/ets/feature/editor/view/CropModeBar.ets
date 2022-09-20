@@ -14,7 +14,7 @@
  */
 
 import { Logger } from '../utils/Logger'
-import { BroadCast } from '../../../common/utils/BroadCast'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
 import { ActionButton } from './ActionButton'
 import { ID } from './MainMenuInfo'
 import { Constants } from '../../../common/model/common/Constants'
@@ -25,7 +25,7 @@ import { CropRulerBar } from './CropRulerBar'
 @Component
 export struct CropModeBar {
     @Consume('angle') rotateAngle: number;
-    @Consume broadCast: BroadCast;
+    @Consume broadCast: Broadcast;
     @Consume('verticalScreen') isVerticalScreen: boolean;
     @Consume('selected') selectedMode: number;
     @Consume cropEdit: PhotoEditCrop;

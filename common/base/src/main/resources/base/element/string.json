@@ -1,0 +1,52 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from npm package"
+    },
+    {
+      "name": "id_text_font_family_medium",
+      "value": "HwChinese-medium"
+    },
+    {
+      "name": "id_text_font_family_regular",
+      "value": "sans-serif"
+    },
+    {
+      "name": "album_all",
+      "value": "All photos"
+    },
+    {
+      "name": "album_camera",
+      "value": "Camera"
+    },
+    {
+      "name": "album_video",
+      "value": "Videos"
+    },
+    {
+      "name": "album_favor",
+      "value": "My favorites"
+    },
+    {
+      "name": "album_remote_device",
+      "value": "From other devices"
+    },
+    {
+      "name": "album_screen_shot",
+      "value": "Screenshots"
+    },
+    {
+      "name": "album_recycle",
+      "value": "Recently deleted"
+    },
+    {
+      "name": "yes",
+      "value": "OK"
+    },
+    {
+      "name": "no",
+      "value": "CANCEL"
+    }
+  ]
+}

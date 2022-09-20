@@ -14,136 +14,37 @@
  */
 
 import router from '@system.router'
-import { Logger } from '../utils/Logger'
-import { Constants } from '../../../FormAbility/common/Constants'
-import { AlbumDefine } from '../../../common/model/browser/AlbumDefine'
-import { BroadCast } from '../../../common/utils/BroadCast'
-import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
-import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
-import { UiUtil } from '../../../common/utils/UiUtil'
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
-import { DataStoreUtil } from '../../../common/utils/DataStoreUtil'
 import formBindingData from '@ohos.application.formBindingData'
 import formProvider from '@ohos.application.formProvider'
-import { MediaLibraryAccess } from '../../../common/access/MediaLibraryAccess'
+import MediaLib from '@ohos.multimedia.mediaLibrary';
+import { logDebug, logInfo, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils'
+import { Constants } from '../../../../../../../features/formEditor/src/main/ets/constants/Constants'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
+import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import dataStore from '@ohos/base/src/main/ets/utils/DataStoreUtil'
+import mediaModel from '@ohos/base/src/main/ets/model/MediaModel'
+import { terminateSelf } from '@ohos/base/src/main/ets/utils/AbilityUtils';
+import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
+import { getFetchOptions } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
+import { SettingDialog } from '../../../../../../../features/formEditor/src/main/ets/components/SettingDialog'
 
-@CustomDialog
-struct SettingDialog {
-    private broadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
-    @StorageLink('form_playback_interval') time: number = AppStorage.Get(Constants.FROM_PLAYBACK_INTERVAL);
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-    controller: CustomDialogController;
-    private settings = [
-        { title: $r('app.string.fa_play_interval_time_30'), value: '30', checked: false },
-        { title: $r('app.string.fa_play_interval_time_60'), value: '60', checked: false },
-        { title: $r('app.string.fa_play_interval_time_90'), value: '90', checked: false }
-    ];
-
-    aboutToAppear() {
-        this.settings.forEach((item) => {
-            if (this.time == parseInt(item.value)) {
-                item.checked = true;
-            } else {
-                item.checked = false;
-            }
-        })
-    }
-
-    build() {
-        Column() {
-            Row() {
-                Text($r('app.string.fa_select_time'))
-                    .fontSize($r('sys.float.ohos_id_text_size_headline7'))
-                    .fontFamily($r('app.string.id_text_font_family_regular'))
-                    .fontColor($r('sys.color.ohos_id_color_text_primary'))
-                    .fontWeight(FontWeight.Medium)
-            }.alignItems(VerticalAlign.Center)
-            .height($r('app.float.dialog_title_height'))
-
-            List() {
-                ForEach(this.settings, (item, index) => {
-                    ListItem() {
-                        Column() {
-                            Row() {
-                                Text(item.title)
-                                    .fontSize($r('sys.float.ohos_id_text_size_button1'))
-                                    .fontColor($r('app.color.black'))
-                                    .width('50%')
-                                Flex({
-                                    direction: FlexDirection.Row,
-                                    justifyContent: FlexAlign.End,
-                                    alignItems: ItemAlign.Start
-                                }) {
-                                    Radio({ group: 'timeGroup', value: item.value })
-                                        .checked(item.checked)
-                                        .offset({ x: $r('app.float.form_card_radius_offset') })
-                                        .onChange((checked: boolean) => {
-                                            item.checked = checked;
-                                            if (checked) {
-                                                this.broadCast.emit(Constants.FROM_PLAYBACK_INTERVAL, [parseInt(item.value)]);
-                                                this.controller.close();
-                                            }
-                                        })
-                                }
-                                .width('50%')
-                            }
-                            .width('100%')
-
-                            if (index != this.settings.length - 1) {
-                                Divider().width('100%').color($r('sys.color.ohos_id_color_list_separator'))
-                            }
-                        }.width('100%')
-                    }
-                })
-            }
-            .margin({ bottom: $r('sys.float.ohos_id_text_paragraph_margin_s') })
-
-            Button() {
-                Text($r('app.string.no'))
-                    .fontSize($r('sys.float.ohos_id_text_size_button1'))
-                    .fontColor($r('app.color.color_control_highlight'))
-                    .fontWeight(FontWeight.Medium)
-                    .textAlign(TextAlign.Center)
-            }
-            .backgroundColor($r('app.color.transparent'))
-            .height($r('app.float.details_dialog_button_height'))
-            .width('100%')
-            .margin({ bottom: $r('sys.float.ohos_id_text_paragraph_margin_s') })
-            .onClick(() => {
-                this.controller.close();
-            })
-        }
-        .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
-        .width(ScreenManager.getInstance().getColumnsWidth(Constants.NUMBER_4))
-        .alignItems(HorizontalAlign.Start)
-        .borderRadius($r('app.float.dialog_border_radius'))
-        .backgroundColor($r('app.color.white'))
-        .margin({
-            right: $r('app.float.dialog_content_margin'),
-            left: $r('app.float.dialog_content_margin'),
-            bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
-        })
-    }
-}
+const TAG = "FormEditorPage"
 
 @Entry
 @Component
 struct FormEditorPage {
-    logger: Logger = new Logger('FormEditorPage');
     @StorageLink('FASetting_FormId') formId: string = '0';
-    private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    private appBroadcast: Broadcast = broadcastManager.getBroadcast();
+    @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
+    @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     currentIndex: number = 0;
     isShow: boolean = false;
     arkUri: number = 0;
     fd: number = -1;
-    fileAsset: any = null;
+    fileAsset: MediaLib.FileAsset = null;
     displayName: string = '';
     @State time: number = 30;
     private saveDataFunc = this.saveData.bind(this);
@@ -159,46 +60,23 @@ struct FormEditorPage {
         customStyle: true
     })
 
-    async getItems(albumId: string, startIndex?: number, count?: number, deviceId?) {
-        let fetchOpt = AlbumDefine.getFileFetchOpt(albumId, deviceId, startIndex, count);
-        switch (albumId) {
-            case AlbumDefine.ALBUM_ID_ALL:
-                let allObject = await MediaLibraryAccess.getInstance().getAllObject(fetchOpt);
-                return allObject;
-                break;
-            default:
-                return await MediaLibraryAccess.getInstance().getEntityAlbumObject(AlbumDefine.getAlbumFetchOpt(
-                    albumId, deviceId), fetchOpt);
-                break;
-        }
-    }
-
-    async GetMediaData(albumId: string, uri: string) {
-        this.logger.debug(`GetMediaData start uri: ${uri}`)
-        let dataList = await this.getItems(albumId);
-        if (uri != '') {
-            for (let i = 0; i < dataList.length; i++) {
-                let temUri = dataList[i].uri;
-                if (temUri == uri) {
-                    this.currentIndex = i;
-                    break;
-                }
-            }
-        } else {
-            this.currentIndex = 0;
-        }
-        this.fileAsset = dataList[this.currentIndex];
+    async GetMediaData(albumId: string, index: number) {
+        logDebug(TAG, `GetMediaData start`)
+        this.currentIndex = index
+        let fetchOpt = await getFetchOptions(MediaConstants.SELECT_TYPE_IMAGE, albumId, "")
+        fetchOpt.order = `date_added DESC LIMIT ${index},1`
+        this.fileAsset = (await mediaModel.getAllMediaItem(albumId, fetchOpt, false)).fileAsset
     }
 
     async openCurrentFd() {
-        this.fd = (this.fileAsset != null) ? await  MediaLibraryAccess.getInstance()
-            .openAsset('R', this.fileAsset) : -1;
+        logInfo(TAG, `open fd, fileAsset is valid ${this.fileAsset != null}`)
+        this.fd = (this.fileAsset != null) ? await  mediaModel.openAsset('R', this.fileAsset) : -1;
     }
 
     bindFormData(): any {
-        this.logger.debug(`bindFormData start formId: ${this.formId}`)
+        logDebug(TAG, `bindFormData start formId: ${this.formId}`)
         let image = "image_" + this.fd + "_formId_" + this.formId;
-        this.logger.debug(`bindFormData start image: ${image}`)
+        logDebug(TAG, `bindFormData start image: ${image}`)
         let dataObj1: any = {
             "fd": this.fd == -1 ? false : true,
             "image1": "memory://" + image,
@@ -208,127 +86,111 @@ struct FormEditorPage {
             "formImages": JSON.parse(`{ "${image}": ${this.fd} }`)
         };
         let dataObj = JSON.stringify(dataObj1)
-        this.logger.info(`bindFormData, createFormBindingData dataObj2.data: ${dataObj}`);
+        logInfo(TAG, `bindFormData, createFormBindingData dataObj2.data: ${dataObj}`);
         let obj = formBindingData.createFormBindingData(dataObj);
-        this.logger.debug(`bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
+        logDebug(TAG, `bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
         return obj;
     }
 
     updateRefreshTime() {
-        this.logger.debug(`updateRefreshTime isShow ${this.isShow}`);
+        logDebug(TAG, `updateRefreshTime isShow ${this.isShow}`);
         if (!this.isShow) {
             return;
         }
         formProvider.setFormNextRefreshTime(this.formId, this.time).then(() => {
-            this.logger.info(`setFormNextRefreshTime sucessfully`);
+            logInfo(TAG, `setFormNextRefreshTime sucessfully`);
         }).catch((err) => {
-            this.logger.error(`init err ${err}`);
+            logError(TAG, `init err ${err}`);
         })
     }
 
     terminate() {
-        globalThis.photosAbilityContext.terminateSelf((result) => {
-            this.logger.info(`terminateSelf result: ${JSON.stringify(result)}`);
-        })
+        terminateSelf()
     }
 
     updateFormData(): void {
-        this.logger.debug(`updateFormData formId: ${JSON.stringify(this.formId)}`);
+        logDebug(TAG, `updateFormData formId: ${JSON.stringify(this.formId)}`);
         let obj3 = this.bindFormData();
-        this.logger.debug(`updateFormData obj: ${JSON.stringify(obj3)}`);
-        formProvider.updateForm(this.formId, obj3)
-            .then((data) => {
-                this.logger.info(`updateFormData, data: ${JSON.stringify(data)}`);
-                if (this.isShow) {
-                    formProvider.setFormNextRefreshTime(this.formId, this.time).then(() => {
-                        this.terminate();
-                    }).catch((err) => {
-                        this.logger.error(`init err ${err}`);
-                        this.terminate();
-                    })
-                } else {
+        logDebug(TAG, `updateFormData obj: ${JSON.stringify(obj3)}`);
+        formProvider.updateForm(this.formId, obj3).then((data) => {
+            logInfo(TAG, `updateFormData, data: ${JSON.stringify(data)}`);
+            if (this.isShow) {
+                formProvider.setFormNextRefreshTime(this.formId, this.time).then(() => {
                     this.terminate();
-                }
-            }).catch((error) => {
-            this.logger.error(`updateForm failed. Cause: ${JSON.stringify(error)}`);
+                }).catch((err) => {
+                    logError(TAG, `init err ${err}`);
+                    this.terminate();
+                })
+            } else {
+                this.terminate();
+            }
+        }).catch((error) => {
+            logError(TAG, `updateForm failed. Cause: ${JSON.stringify(error)}`);
             this.terminate();
         });
     }
 
-    async saveData(albumName: string, albumId: string, displayName, uri: string, isShow: boolean) {
-        this.logger.debug(`saveData start! ${albumName} ${displayName} ${uri}`)
+    async saveData(albumName: string, albumId: string, displayName, index: number, isShow: boolean) {
+        logDebug(TAG, `saveData start! ${albumName} ${displayName} ${index}`)
         let msgDisplayName = '';
         if (displayName instanceof Object) {
-            this.logger.debug(`saveData object ${displayName}`);
-            msgDisplayName = await UiUtil.getResourceString(displayName);
+            logDebug(TAG, `saveData object ${displayName}`);
+            msgDisplayName = await getResourceString(displayName);
         } else {
             msgDisplayName = displayName;
         }
         this.isShow = isShow;
         this.displayName = msgDisplayName;
-        this.logger.debug(`saveData msgDisplayName ${msgDisplayName}`);
-        await DataStoreUtil.getInstance(globalThis.photosAbilityContext).init();
-        await this.GetMediaData(albumId, uri);
+        logDebug(TAG, `saveData msgDisplayName ${msgDisplayName}`);
+        await dataStore.init();
+        await this.GetMediaData(albumId, index);
         await this.openCurrentFd();
         let formIdKey = 'formId_' + this.formId;
-        let hasFormId = await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(formIdKey);
-        this.logger.debug(`The value of hasFormId is ${hasFormId}`);
+        let hasFormId = await dataStore.hasData(formIdKey);
+        logDebug(TAG, `The value of hasFormId is ${hasFormId}`);
         if (hasFormId) {
             let displayNameKey = 'displayName_' + this.formId;
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(displayNameKey, msgDisplayName);
+            await dataStore.putData(displayNameKey, msgDisplayName);
             let albumNameKey = 'albumName_' + this.formId;
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(albumNameKey, albumName);
+            await dataStore.putData(albumNameKey, albumName);
             let albumIdKey = 'albumId_' + this.formId;
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(albumIdKey, albumId);
+            await dataStore.putData(albumIdKey, albumId);
             let currentUriKey = 'currentUri_' + this.formId;
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(currentUriKey, uri);
+            await dataStore.putData(currentUriKey, this.fileAsset.uri);
             let intervalTimeKey = 'intervalTime_' + this.formId;
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(intervalTimeKey, this.time);
+            await dataStore.putData(intervalTimeKey, this.time);
             let currentIndexKey = 'currentIndex_' + this.formId;
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(currentIndexKey, this.currentIndex);
+            await dataStore.putData(currentIndexKey, this.currentIndex);
             let isShowKey = 'isShow_' + this.formId;
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(isShowKey, this.isShow ? 1 : 0);
+            await dataStore.putData(isShowKey, this.isShow ? 1 : 0);
             let arkUriKey = 'arkUri_' + this.formId;
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(arkUriKey, this.arkUri);
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).flush();
+            await dataStore.putData(arkUriKey, this.arkUri);
+            await dataStore.flush();
             this.updateFormData();
         } else {
-            globalThis.photosAbilityContext.terminateSelf((result) => {
-                this.logger.info(`terminateSelf result: ${JSON.stringify(result)}`);
-            })
+            terminateSelf()
         }
-        this.logger.debug('saveData end!');
+        logDebug(TAG, 'saveData end!');
     }
 
-    routerPhotos(routerUri: string) {
-        if (routerUri == Constants.SELECT_ALBUM) {
-            let options = {
-                uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
-                params: {
-                    isMultiPick: false,
-                    isFromFa: true
-                }
-            };
-            router.push(options);
-        } else if (routerUri == Constants.SELECT_PHOTO) {
-            let options = {
-                uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
-                params: {
-                    isMultiPick: false,
-                    isFromFa: true,
-                    isFromFaPhoto: true
-                }
-            };
-            router.push(options);
-        }
+    routerPhotos(isSelectPhoto: boolean) {
+        let options = {
+            uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
+            params: {
+                isMultiPick: false,
+                isFromFa: true,
+                isFromFaPhoto: isSelectPhoto
+            }
+        };
+        router.push(options);
     }
 
     selectAlbum() {
-        this.routerPhotos(Constants.SELECT_ALBUM);
+        this.routerPhotos(false);
     }
 
     selectPhoto() {
-        this.routerPhotos(Constants.SELECT_PHOTO);
+        this.routerPhotos(true);
     }
 
     setPlayInterval() {
@@ -336,21 +198,21 @@ struct FormEditorPage {
     }
 
     aboutToAppear(): void {
-        this.logger.debug('aboutToAppear start!')
-        this.appBroadCast.on(BroadCastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
-        this.appBroadCast.on(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
-        DataStoreUtil.getInstance(globalThis.photosAbilityContext).init().then(() => {
+        logDebug(TAG, 'aboutToAppear start!')
+        this.appBroadcast.on(BroadcastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
+        this.appBroadcast.on(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
+        dataStore.init().then(() => {
             let intervalTimeKey = 'intervalTime_' + this.formId;
-            DataStoreUtil.getInstance(globalThis.photosAbilityContext).getData(intervalTimeKey, this.time).then((d) => {
+            dataStore.getData(intervalTimeKey, this.time).then((d) => {
                 this.time = d;
                 AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);
             })
             let isShowKey = 'isShow_' + this.formId;
-            DataStoreUtil.getInstance(globalThis.photosAbilityContext).getData(isShowKey, this.isShow).then((d) => {
+            dataStore.getData(isShowKey, this.isShow).then((d) => {
                 this.isShow = d;
             })
             let arkUriKey = 'arkUri_' + this.formId;
-            DataStoreUtil.getInstance(globalThis.photosAbilityContext).getData(arkUriKey, this.arkUri).then((d) => {
+            dataStore.getData(arkUriKey, this.arkUri).then((d) => {
                 if (d == 0) {
                     d = 1;
                 } else {
@@ -362,8 +224,8 @@ struct FormEditorPage {
     }
 
     aboutToDisappear() {
-        this.appBroadCast.off(BroadCastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
-        this.appBroadCast.off(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
+        this.appBroadcast.off(BroadcastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
+        this.appBroadcast.off(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
     }
 
     onChange(value) {
@@ -373,22 +235,34 @@ struct FormEditorPage {
     }
 
     async updateTime() {
-        this.logger.debug(`updateTime start! ${this.time}`)
-        await DataStoreUtil.getInstance(globalThis.photosAbilityContext).init();
+        logDebug(TAG, `updateTime start! ${this.time}`)
+        await dataStore.init();
         let formIdKey = 'formId_' + this.formId;
-        let hasFormId = DataStoreUtil.getInstance(globalThis.photosAbilityContext).hasData(formIdKey);
-        this.logger.debug(`The value of hasFormId is ${hasFormId}`);
+        let hasFormId = dataStore.hasData(formIdKey);
+        logDebug(TAG, `The value of hasFormId is ${hasFormId}`);
         if (hasFormId) {
             let intervalTimeKey = 'intervalTime_' + this.formId;
-            await DataStoreUtil.getInstance(globalThis.photosAbilityContext).putData(intervalTimeKey, this.time);
-            await DataStoreUtil.getInstance(globalThis.photosAbilityContext).flush();
+            await dataStore.putData(intervalTimeKey, this.time);
+            await dataStore.flush();
             this.updateRefreshTime();
         }
-        this.logger.debug('updateTime end!');
+        logDebug(TAG, 'updateTime end!');
     }
 
     onPageShow() {
-        BroadCastManager.getInstance().getBroadCast().emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
+        broadcastManager.getBroadcast().emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
+    }
+
+    private getIntervalTime(): Resource{
+        if (this.time == undefined) {
+            return $r('app.string.fa_play_interval_time_30')
+        } else if (this.time / Constants.DEFAULT_TIME == 3) {
+            return $r('app.string.fa_play_interval_time_90')
+        } else if (this.time / Constants.DEFAULT_TIME == 2) {
+            return $r('app.string.fa_play_interval_time_60')
+        } else {
+            return $r('app.string.fa_play_interval_time_30')
+        }
     }
 
     build() {
@@ -421,10 +295,10 @@ struct FormEditorPage {
             .margin({ top: $r('app.float.FA_title_margin_top'), bottom: $r('app.float.FA_title_margin_bottom') })
 
             GridContainer({
-                columns: Constants.NUMBER_12,
+                columns: 12,
                 sizeType: SizeType.Auto,
-                gutter: Constants.NUMBER_24,
-                margin: Constants.NUMBER_24
+                gutter: 24,
+                margin: 24
             }) {
                 Row() {
                     Row() {
@@ -454,10 +328,10 @@ struct FormEditorPage {
                     })
                 }
                 .useSizeType({
-                    xs: { span: Constants.NUMBER_12, offset: 0 },
-                    sm: { span: Constants.NUMBER_12, offset: 0 },
-                    md: { span: Constants.NUMBER_12, offset: 0 },
-                    lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
+                    xs: { span: 12, offset: 0 },
+                    sm: { span: 12, offset: 0 },
+                    md: { span: 12, offset: 0 },
+                    lg: { span: 8, offset: 2 }
                 })
 
                 Row() {
@@ -489,10 +363,10 @@ struct FormEditorPage {
                 }
                 .margin({ top: $r('app.float.FA_select_album_padding') })
                 .useSizeType({
-                    xs: { span: Constants.NUMBER_12, offset: 0 },
-                    sm: { span: Constants.NUMBER_12, offset: 0 },
-                    md: { span: Constants.NUMBER_12, offset: 0 },
-                    lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
+                    xs: { span: 12, offset: 0 },
+                    sm: { span: 12, offset: 0 },
+                    md: { span: 12, offset: 0 },
+                    lg: { span: 8, offset: 2 }
                 })
 
                 Row() {
@@ -506,10 +380,10 @@ struct FormEditorPage {
                     bottom: $r('app.float.FA_setting_padding_bottom')
                 })
                 .useSizeType({
-                    xs: { span: Constants.NUMBER_12, offset: 0 },
-                    sm: { span: Constants.NUMBER_12, offset: 0 },
-                    md: { span: Constants.NUMBER_12, offset: 0 },
-                    lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
+                    xs: { span: 12, offset: 0 },
+                    sm: { span: 12, offset: 0 },
+                    md: { span: 12, offset: 0 },
+                    lg: { span: 8, offset: 2 }
                 })
 
                 Row() {
@@ -521,10 +395,7 @@ struct FormEditorPage {
                             .fontWeight(FontWeight.Medium)
 
                         Row() {
-                            Text(undefined == this.time ? $r('app.string.fa_play_interval_time_30')
-                                                        : (Constants.NUMBER_3 == this.time / Constants.DEFAULT_TIME) ? $r('app.string.fa_play_interval_time_90')
-                                                                                                                     : (Constants.NUMBER_2 == this.time / Constants.DEFAULT_TIME) ? $r('app.string.fa_play_interval_time_60')
-                                                                                                                                                                                  : $r('app.string.fa_play_interval_time_30'))
+                            Text(this.getIntervalTime())
                                 .fontSize($r('sys.float.ohos_id_text_size_body2'))
                                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                                 .margin({ right: $r('app.float.form_list_card_more_gap') })
@@ -548,10 +419,10 @@ struct FormEditorPage {
                     })
                 }
                 .useSizeType({
-                    xs: { span: Constants.NUMBER_12, offset: 0 },
-                    sm: { span: Constants.NUMBER_12, offset: 0 },
-                    md: { span: Constants.NUMBER_12, offset: 0 },
-                    lg: { span: Constants.NUMBER_8, offset: Constants.NUMBER_2 }
+                    xs: { span: 12, offset: 0 },
+                    sm: { span: 12, offset: 0 },
+                    md: { span: 12, offset: 0 },
+                    lg: { span: 8, offset: 2 }
                 })
             }
         }

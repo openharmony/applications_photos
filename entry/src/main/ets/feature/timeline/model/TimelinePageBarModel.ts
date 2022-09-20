@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ScreenManager } from '../../../common/model/common/ScreenManager';
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/browserOperation/ActionBarMode'
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 
 export class TimelinePageBarModel {
     createActionBar(isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean): ActionBarProp  {
-        let isHorizontal = ScreenManager.getInstance().isHorizontal()
+        let isHorizontal = screenManager.isHorizontal()
         if (isHorizontal) {
             return this.createHorizontalActionBar(isSelectedMode, selectedCount, isAllSelected)
         } else {
@@ -45,7 +45,7 @@ export class TimelinePageBarModel {
     }
 
     private createVerticalActionBar(isSelectedMode: boolean): ActionBarProp  {
-        let isSidebar: boolean = ScreenManager.getInstance().isSidebar();
+        let isSidebar: boolean = screenManager.isSidebar();
         let actionBarProp: ActionBarProp = new ActionBarProp();
         actionBarProp
             .setHasTabBar(isSidebar)

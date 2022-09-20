@@ -14,7 +14,7 @@
  */
 
 import { Logger } from '../utils/Logger'
-import { BroadCast } from '../../../common/utils/BroadCast'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
 import { ActionButton } from './ActionButton'
 import { ActionButtonInfo, ID } from './MainMenuInfo'
 import { RefreshActionMenu, ActionChangedEvent } from './RefreshMenu'
@@ -25,7 +25,7 @@ import { PhotoEditCrop } from '../crop/PhotoEditCrop'
 
 @Component
 export struct CropStyleBar {
-    @Consume broadCast: BroadCast;
+    @Consume broadCast: Broadcast;
     @Consume('verticalScreen') isVerticalScreen: boolean;
     @Consume('selected') selectedMode: number;
     @Consume isCropReset: boolean;

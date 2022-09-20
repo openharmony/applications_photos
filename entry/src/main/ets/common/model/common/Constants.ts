@@ -53,7 +53,6 @@ export class Constants {
     static readonly APP_KEY_MENU_MEDIA_OBSERVER = 'app_key_menu_media_observer';
     static readonly APP_KEY_WORKER_MANAGER = 'app_key_worker_manager';
     static readonly APP_KEY_SLIDE_SHOW = 'app_key_slide_show';
-    static readonly APP_KEY_SCREEN_MANAGER = 'app_key_screen_manager';
     static readonly THIRD_SELECT_MANAGER = 'third_select_manager';
     static readonly APP_KEY_STATUS_BAR_COLOR_CONTROLLER = 'app_key_status_bar_color_controller';
     static readonly APP_KEY_NEW_ALBUM = 'app_key_new_album';
@@ -62,7 +61,7 @@ export class Constants {
     static readonly APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS = 'app_key_instance_media_library_access';
     static readonly FROM_DATA_STORE_UTIL = 'form_data_store_util';
 
-    // BroadCast
+    // Broadcast
     static readonly APP_KEY_EVENT_BUS = 'app_key_event_bus';
     static readonly SCREEN_MANAGER = 'screen_manager';
     static readonly PIXEL_MAP_MANAGER = 'pixel_map_manager';
@@ -98,12 +97,6 @@ export class Constants {
 
     // Default maximum number of external selection pages
     static readonly DEFAULT_MAX_THIRD_SELECT_COUNT: number = 50;
-
-    // Horizontal and vertical screen flag
-    static readonly SCREEN_ORIENTATION_HORIZONTAL: string = 'isHorizontal';
-
-    // Sidebar flag
-    static readonly SCREEN_SIDEBAR: string = 'isSidebar';
 
     // Column flag
     static readonly SCREEN_COLUMNS: string = 'screen_columns';
@@ -183,10 +176,26 @@ export class Constants {
     static readonly RULER_FILL_STYLE_90: string = "#E5FFFFFF";
     static readonly RULER_FILL_STYLE_40: string = '#66FFFFFF';
     static readonly RULER_TEXT_ALIGN: string = 'center';
+
+    /**
+     * @deprecated
+     */
     static readonly MEDIA_TYPE_IMAGE: string = 'image';
+    /**
+     * @deprecated
+     */
     static readonly MEDIA_TYPE_VIDEO: string = 'video';
+    /**
+     * @deprecated
+     */
     static readonly MEDIA_TYPE_ALBUM: string = 'album';
+    /**
+     * @deprecated
+     */
     static readonly MEDIA_TYPE_DEVICE: string = 'device';
+    /**
+     * @deprecated
+     */
     static readonly MEDIA_TYPE_REMOTE: string = 'remote';
     static readonly DEVICE_STATE_ONLINE: string = 'online';
     static readonly DEVICE_STATE_OFFLINE: string = 'offline';
@@ -242,8 +251,7 @@ export class Constants {
     static readonly SCROLL_BAR_VISIBLE_THRESHOLD: number = 50;
 
     // Column Constants
-    static readonly COLUMN_MARGIN: number = 12;
-    static readonly COLUMN_GUTTER: number = 12;
+
 
     // Album Card Constants
     static readonly CARD_ASPECT_RATIO: number = 0.75;
@@ -288,15 +296,13 @@ export class Constants {
     static readonly FROM_CURRENT_INDEX: string = 'form_currentIndex';
     static readonly FA_SETTING_FROM_ID: string = 'FASetting_FormId';
     static readonly VIEW_DATA_URI: string = 'viewDataUri';
-    static readonly VIEW_DATA_POS: string = 'viewDataPos';	
+    static readonly VIEW_DATA_POS: string = 'viewDataPos';
     static readonly PERMISSION_STATUS: string = 'permissionStatus';
-    static readonly LEFT_BLANK: string = 'leftBlank';
-    static readonly FROM_FORM_PHOTO_EDITOR: string = 'from_form_photo_editor';
+
     static readonly FORM_ITEM_NAME: string = 'form_itemName';
     static readonly FORM_ITEM_ALBUM_ID: string = 'form_itemAlbumId';
     static readonly FORM_ITEM_DISPLAY_NAME: string = 'form_itemDisplayName';
     static readonly MAIN_WINDOW: string = 'mainWindow';
-    static readonly IS_SPLIT_MODE: string = 'isSplitMode';
     static readonly ACTION_URI_FORM_ABILITY: string = 'formAbility';
     static readonly ACTION_URI_FORM_ABILITY_NONE: string = 'formAbilityNone';
     static readonly PROGRESS_LENGTH_DIFF: number = 88;

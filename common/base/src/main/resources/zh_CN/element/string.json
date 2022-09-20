@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "id_text_font_family_medium",
+      "value": "中粗"
+    },
+    {
+      "name": "id_text_font_family_regular",
+      "value": "标准"
+    },
+    {
+      "name": "album_all",
+      "value": "所有照片"
+    },
+    {
+      "name": "album_camera",
+      "value": "相机"
+    },
+    {
+      "name": "album_video",
+      "value": "视频"
+    },
+    {
+      "name": "album_favor",
+      "value": "我的收藏"
+    },
+    {
+      "name": "album_screen_shot",
+      "value": "截屏录屏"
+    },
+    {
+      "name": "album_remote_device",
+      "value": "其他设备保存"
+    },
+    {
+      "name": "album_recycle",
+      "value": "最近删除"
+    },
+    {
+      "name": "yes",
+      "value": "确认"
+    },
+    {
+      "name": "no",
+      "value": "取消"
+    }
+  ]
+}

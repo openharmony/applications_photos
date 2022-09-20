@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import { BroadCast } from '../../../common/utils/BroadCast'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
 import { Constants } from '../../../common/model/common/Constants'
 import { Logger } from '../utils/Logger'
 
 @Component
 export struct CropRulerBar {
-    @Consume broadCast: BroadCast;
+    @Consume broadCast: Broadcast;
     @Consume('verticalScreen') isVerticalScreen: boolean;
     @Consume screenWidth: number;
     @Consume screenHeight: number;

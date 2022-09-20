@@ -33,40 +33,12 @@
       "value": "CANCEL"
     },
     {
-      "name": "album_all",
-      "value": "All photos"
-    },
-    {
-      "name": "album_camera",
-      "value": "Camera"
-    },
-    {
-      "name": "album_video",
-      "value": "Videos"
-    },
-    {
-      "name": "album_favor",
-      "value": "My favorites"
-    },
-    {
-      "name": "album_remote_device",
-      "value": "From other devices"
-    },
-    {
-      "name": "album_screen_shot",
-      "value": "Screenshots"
-    },
-    {
       "name": "camera_in",
       "value": "Selfies"
     },
     {
       "name": "camera_out",
       "value": "Exterior shots"
-    },
-    {
-      "name": "album_recycle",
-      "value": "Recently deleted"
     },
     {
       "name": "title_select_photos",
@@ -273,14 +245,6 @@
       "value": "Maximum number of items selected."
     },
     {
-      "name": "yes",
-      "value": "OK"
-    },
-    {
-      "name": "no",
-      "value": "CANCEL"
-    },
-    {
       "name": "resolution",
       "value": "Resolution: "
     },
@@ -332,14 +296,7 @@
       "name": "count_details_external_selected",
       "value": "%1$d/%2$d selected"
     },
-    {
-      "name": "id_text_font_family_regular",
-      "value": "sans-serif"
-    },
-    {
-      "name": "id_text_font_family_medium",
-      "value": "HwChinese-medium"
-    },
+
     {
       "name": "entry_MainAbility",
       "value": "entry_MainAbility"
@@ -748,14 +705,7 @@
       "name": "no_distributed_photo_head_title_album",
       "value": "No photos or videos"
     },
-    {
-      "name": "no_distributed_photo_show_image",
-      "value": "Open a large image in the peer gallery, and then browse the image on the local gallery."
-    },
-    {
-      "name": "no_distributed_photo_show_video",
-      "value": "Download the video file to the local computer for playback."
-    },
+
     {
       "name": "description_serviceability",
       "value": "hap sample empty service"
@@ -771,10 +721,6 @@
     {
       "name": "edit_save_picture_text",
       "value": "Saving picture..."
-    },
-    {
-      "name": "fa_select_time",
-      "value": "Choose slideshow interval"
     },
     {
       "name": "fa_title_text",
@@ -801,18 +747,6 @@
       "value": "Slideshow interval"
     },
     {
-      "name": "fa_play_interval_time_30",
-      "value": "30 minute"
-    },
-    {
-      "name": "fa_play_interval_time_60",
-      "value": "1 hour"
-    },
-    {
-      "name": "fa_play_interval_time_90",
-      "value": "1.5 hour"
-    },
-    {
       "name": "progress_delete",
       "value": "Delete%1$d/%2$d"
     },
@@ -827,10 +761,6 @@
     {
       "name": "edit_photo_save_fail",
       "value": "Failed to save image!"
-    },
-    {
-      "name": "image_loading",
-      "value": "Loading..."
     }
   ]
 }

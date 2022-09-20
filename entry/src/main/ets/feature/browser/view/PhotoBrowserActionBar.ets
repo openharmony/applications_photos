@@ -17,14 +17,11 @@ import { Action } from '../../../common/view/browserOperation/Action'
 import { ActionBar } from '../../../common/view/actionbar/ActionBar'
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp'
 import { ActionBarMode, ActionBarColorMode } from '../../../common/view/browserOperation/ActionBarMode'
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 
 @Component
 export struct PhotoBrowserActionBar {
-    @Consume isShowBar: boolean;
     @Consume menuList: Action[];
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
     onMenuClicked: Function;
     isVideoPage: boolean = false;
 
@@ -43,13 +40,12 @@ export struct PhotoBrowserActionBar {
     build() {
         Column() {
             ActionBar({
-                isShowBar: this.isShowBar,
                 actionBarProp: this.createActionBar(),
                 onMenuClicked: this.onMenuClicked,
                 isVideoPage: this.isVideoPage
             })
         }
         .markAnchor({ x: '0%', y: '0%' })
-        .position({ x: '0%', y: this.leftBlank[1] })
+        .position({ x: '0%', y: '0%' })
     }
 }

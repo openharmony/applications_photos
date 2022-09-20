@@ -1,0 +1,24 @@
+{
+  "float": [
+    {
+      "name": "loading_panel_icon_w",
+      "value": "72vp"
+    },
+    {
+      "name": "loading_panel_icon_margin",
+      "value": "16vp"
+    },
+    {
+      "name": "loading_panel_item_gap",
+      "value": "15vp"
+    },
+    {
+      "name": "icon_video_size",
+      "value": "56vp"
+    },
+    {
+      "name": "input_text_notify_margin",
+      "value": "86vp"
+    }
+  ]
+}

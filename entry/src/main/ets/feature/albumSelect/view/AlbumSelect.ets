@@ -12,87 +12,95 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
+import { MediaConstants } from '../../../../../../../common/base/src/main/ets/constants/MediaConstants';
+import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import router from '@system.router'
-import { AlbumSelectGridItemNewStyle } from './AlbumSelectGridItemNewStyle'
-import { AlbumSetDataSource } from '../../../common/model/browser/album/AlbumSetDataSource'
+import {
+    AlbumSelectGridItemNewStyle
+} from '../../../../../../../features/selectalbum/src/main/ets/components/AlbumSelectGridItemNewStyle'
 import { Constants } from '../../../common/model/common/Constants'
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
-import { BroadCast } from '../../../common/utils/BroadCast'
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
 import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent'
-import { Logger } from '../../../common/utils/Logger';
-import { TraceControllerUtils } from '../../../common/utils/TraceControllerUtils'
-import { MediaDataSource } from '../../../common/model/browser/photo/MediaDataSource'
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils'
 import { Action } from '../../../common/view/browserOperation/Action'
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
-import { SelectManager } from '../../../common/model/browser/SelectManager'
 import { UiUtil } from '../utils/UiUtil'
-import { AlbumDefine } from '../../../common/model/browser/AlbumDefine';
-import { AlbumInfo } from '../../../common/model/browser/album/AlbumInfo';
-import { BroadCastManager } from '../../../common/model/common/BroadCastManager';
-import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants';
+import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
 import { AlbumSelectBarModel } from '../model/AlbumSelectBarModel';
-import { AlbumScrollBar } from '../../../common/view/scrollBar/AlbumScrollBar'
+import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar'
+import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource'
+import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
+
+const TAG = "AlbumSelect"
 
 @Entry
 @Component
 export struct AlbumSelect {
     @State isEmpty: boolean = false;
     @State gridColumnsCount: number = 0;
-    @Provide broadCast: BroadCast = new BroadCast();
+    @Provide broadCast: Broadcast = new Broadcast();
     @Provide('selectedCount') totalSelectedCount: number = 0;
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @Provide moreMenuList: Action[] = new Array<Action>();
     @Provide isHideScrollBar: boolean = true;
     @Provide('tabBarShow') isTabBarShow: boolean = false;
     private isActive = false;
-    private logger: Logger = new Logger('AlbumSelect');
     private scroller: Scroller = new Scroller();
-    private albums: AlbumSetDataSource;
-    private dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
-    private mSelectManager = new SelectManager();
-    private albumInfo: AlbumInfo = undefined;
     private barModel: AlbumSelectBarModel = new AlbumSelectBarModel()
+    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
 
     aboutToAppear(): void {
-        TraceControllerUtils.startTrace('AlbumSetPageAboutToAppear');
+        startTrace('AlbumSetPageAboutToAppear');
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            this.logger.info(`ON_LOADING_FINISHED size: ${size}`);
+            logInfo(TAG, `ON_LOADING_FINISHED size: ${size}`);
             this.isEmpty = size == 0;
             this.isHideScrollBar = (size <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         });
-        this.albums = new AlbumSetDataSource(this.broadCast);
         this.onActive();
 
         this.gridColumnsCount = UiUtil.getAlbumGridCount(false);
-        this.logger.info(`the grid count in a line is: ${this.gridColumnsCount}`);
+        logInfo(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
 
         let param = router.getParams();
         if (param) {
-            param.albumInfo && (this.albumInfo = JSON.parse(param.albumInfo.toString()));
             if (param.isNewAlbum) {
                 AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, true);
             } else {
                 AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, false);
             }
+            let albumInfo: SimpleAlbumDataItem = param.albumInfo ? JSON.parse(param.albumInfo.toString()) : undefined
+            if (albumInfo) {
+                this.albumsDataSource.setBlackList([albumInfo.id, MediaConstants.ALBUM_ID_RECYCLE])
+                logDebug(TAG, `the album Id is: ${albumInfo.id}`);
+            } else {
+                this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_RECYCLE])
+            }
+
+            AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_TARGET, albumInfo);
         }
-        this.albums.setBlackList([this.albumInfo.id, AlbumDefine.ALBUM_ID_RECYCLE]);
-        this.logger.debug(`the album Id is: ${this.albumInfo.id}`);
+
+        this.loadAlbums()
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_TARGET, this.albumInfo);
-        AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.mSelectManager);
-        TraceControllerUtils.finishTrace('AlbumSetPageAboutToAppear');
+        finishTrace('AlbumSetPageAboutToAppear');
+    }
+
+    private loadAlbums() {
+        this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
+            this.isEmpty = isEmpty
+            this.albumsDataSource.notifyDataReload()
+        })
     }
 
     aboutToDisappear(): void {
-        this.albums.setBlackList([]);
     }
 
     onPageShow() {
-        BroadCastManager.getInstance().getBroadCast().emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
+        broadcastManager.getBroadcast().emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.onActive();
-        this.isHideScrollBar = (this.albums.totalCount() < (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
+        this.isHideScrollBar = (this.albumsDataSource.totalCount() < (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
     }
 
     onPageHide() {
@@ -102,39 +110,32 @@ export struct AlbumSelect {
     onBackPress() {
         AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
         AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
-        AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
         return false;
     }
 
     // Callback when the page is in the foreground
     onActive() {
         if (!this.isActive) {
-            this.logger.info('onActive');
+            logInfo(TAG, 'onActive');
             this.isActive = true;
-            this.albums && this.albums.onActive();
-            this.dataSource && this.dataSource.onActive();
-            this.dataSource.forceUpdate();
         }
     }
 
     // Callback when the page is in the background
     onInActive() {
         if (this.isActive) {
-            this.logger.info('onInActive');
+            logInfo(TAG, 'onInActive');
             this.isActive = false;
-            this.albums && this.albums.onInActive();
         }
     }
 
     private onMenuClicked(action: Action): void {
-        this.logger.debug(`onMenuClicked, action: ${action.actionID}`);
+        logDebug(TAG, `onMenuClicked, action: ${action.actionID}`);
         switch (action) {
             case Action.CANCEL:
-                this.logger.info('clear SelectManager data');
-                this.mSelectManager.onModeChange(false);
+                logInfo(TAG, 'clear SelectManager data');
                 AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
                 AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
-                AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
                 router.back();
                 break;
             default:
@@ -159,25 +160,23 @@ export struct AlbumSelect {
                     NoPhotoComponent({ title: $r('app.string.title_no_albums') })
                 }
                 Grid(this.scroller) {
-                    LazyForEach(this.albums, (item) => {
-                        if (this.albums.mediaSetList.indexOf(item) == 0) {
+                    LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {
+                        if (item && item.index == 0) {
                             GridItem() {
                                 AlbumSelectGridItemNewStyle({
                                     item: item,
                                     isBigCard: true,
-                                    mSelectManager: this.mSelectManager
                                 })
                             }.columnStart(0).columnEnd(1)
-                        } else {
+                        } else if (item) {
                             GridItem() {
                                 AlbumSelectGridItemNewStyle({
                                     item: item,
                                     isBigCard: false,
-                                    mSelectManager: this.mSelectManager
                                 })
                             }
                         }
-                    }, item => 'uri:' + item.id)
+                    }, (item: AlbumDataItem) => item ? item.getHashCode() : JSON.stringify(item))
                 }
                 .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
                 .padding({
@@ -193,8 +192,8 @@ export struct AlbumSelect {
         }
         .backgroundColor($r('app.color.default_background_color'))
         .padding({
-            top: this.leftBlank[1],
-            bottom: this.leftBlank[3]
+            top: px2vp(this.leftBlank[1]),
+            bottom: px2vp(this.leftBlank[3])
         })
     }
 }

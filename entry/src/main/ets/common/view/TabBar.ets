@@ -15,11 +15,11 @@
 
 import { Logger } from '../utils/Logger'
 import { TabItem, TabItemWithText } from '../model/common/TabItem'
-import { BroadCastManager } from '../model/common/BroadCastManager'
-import { BroadCast } from '../utils/BroadCast'
-import { BroadCastConstants } from '../model/common/BroadCastConstants'
+import broadcastManager from '../../../../../../common/base/src/main/ets/manager/BroadcastManager'
+import { Broadcast } from '../../../../../../common/base/src/main/ets/utils/Broadcast'
+import { BroadcastConstants } from '../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
 import { Constants } from '../model/common/Constants'
-import { ScreenManager, ColumnSize } from '../model/common/ScreenManager'
+import screenManager, { ColumnSize } from '../../../../../../common/base/src/main/ets/manager/ScreenManager'
 
 export enum DEVICE_TYPE {
     DEVICE_PHONE,
@@ -31,11 +31,14 @@ export struct TabBar {
     @Consume isSelectedMode: boolean;
     @Consume isAlbumSetSelectedMode: boolean;
     private currentIndex: number;
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-    private tabs: TabItem[] = [];
+    @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
+    private tabs: TabItem[] = [
+        new TabItem($r('app.string.tab_timeline'), $r('app.media.ic_photos'), $r("app.media.ic_photos_active"), false),
+        new TabItem($r('app.string.tab_albums'), $r('app.media.ic_albums'), $r("app.media.ic_albums_active"), false)
+    ];
     private controller: TabsController;
     private logger: Logger = new Logger('TabBar');
-    private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     deviceType: DEVICE_TYPE = DEVICE_TYPE.DEVICE_PHONE;
 
     aboutToAppear(): void {
@@ -50,7 +53,7 @@ export struct TabBar {
         this.logger.debug(`this.currentIndex: ${this.currentIndex} index: ${index}`);
         if (this.currentIndex == index) {
             this.logger.error(`it is same: ${index}`);
-            this.appBroadCast.emit(BroadCastConstants.RESET_ZERO, [index]);
+            this.appBroadcast.emit(BroadcastConstants.RESET_ZERO, [index]);
         }
         this.currentIndex = index;
         this.controller.changeIndex(this.currentIndex);
@@ -149,7 +152,7 @@ export struct TabBarForAlbumSet {
     private logger: Logger = new Logger('TabBarForAlbumSet');
     @State tabWidth: string = '100%';
     @State tabCol: Resource = $r('app.float.album_tab_col_4_gap');
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
+    @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
 
     aboutToAppear(): void {
         this.onTabSelected = this.onTabSelected.bind(this);
@@ -157,13 +160,13 @@ export struct TabBarForAlbumSet {
         this.tabs.forEach((tab: TabItemWithText) => {
             this.logger.info(`${JSON.stringify(tab.name)}, ${tab.isSelected}`);
         });
-        let col = ScreenManager.getInstance().getScreenColumns();
+        let col = screenManager.getScreenColumns();
         if (col < ColumnSize.COLUMN_EIGHT) {
             this.tabWidth = '100%';
             this.tabCol = $r('app.float.album_tab_col_4_gap');
         } else {
             let sideWidth = this.isSidebar ? Constants.TAB_BAR_WIDTH : 0;
-            this.tabWidth = (ScreenManager.getInstance().getWinWidth() - sideWidth) / Constants.NUMBER_2 + 'vp';
+            this.tabWidth = (screenManager.getWinWidth() - sideWidth) / Constants.NUMBER_2 + 'vp';
             this.tabCol = $r('app.float.album_tab_col_8_gap');
         }
         this.logger.info(`album tabs item width: ${this.tabWidth}, col: ${col}`);
@@ -201,7 +204,6 @@ export struct TabBarForAlbumSet {
             .columnsGap(this.tabCol)
         }
         .width('100%')
-        .visibility(this.isTabBarShow ? Visibility.Visible : Visibility.None)
         .height($r('app.float.album_set_tab_bar_height'))
         .padding({ left: $r('app.float.max_padding_start'), right: $r('app.float.max_padding_end') })
         .backgroundColor($r('app.color.default_background_color'))

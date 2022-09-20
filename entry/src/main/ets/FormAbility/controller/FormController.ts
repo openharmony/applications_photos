@@ -1,3 +1,4 @@
+import { startAbility } from '../../../../../../common/base/src/main/ets/utils/AbilityUtils';
 /*
  * Copyright (c) 2021 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,18 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import Want from '@ohos.application.Want'
 import { MediaDataManager } from '../data/MediaDataManager'
 import { Logger } from '../common/Logger'
 import formBindingData from '@ohos.application.formBindingData';
 import { Constants } from '../common/Constants'
-import { DataStoreUtil } from '../../common/utils/DataStoreUtil'
 import formProvider from '@ohos.application.formProvider';
-import { MediaLibraryAccess } from '../../common/access/MediaLibraryAccess'
 import { Constants as commonConstants } from '../../common/model/common/Constants'
 
 export class FormController {
-    private context: any;
     private formId: string;
     private operationMode: number = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
     private logger: Logger = new Logger('FormController');
@@ -31,12 +29,11 @@ export class FormController {
     private static readonly MSG_ROUTER_PHOTOS = 'routerPhotos'
     mediaDataManager: MediaDataManager;
 
-    constructor(context: any, formId: string, operationMode: number, callback?: Function) {
-        this.context = context;
+    constructor(formId: string, operationMode: number, callback?: Function) {
         this.formId = formId;
         this.operationMode = operationMode;
         this.callback = callback;
-        this.mediaDataManager = new MediaDataManager(context, formId, operationMode, this);
+        this.mediaDataManager = new MediaDataManager(formId, operationMode, this);
     }
 
     bindFormData(formId: string): any {
@@ -89,7 +86,6 @@ export class FormController {
     onDestroy() {
         this.logger.info('onDestroy start!');
         this.mediaDataManager.closeFd();
-        MediaLibraryAccess.getInstance().onDestroy();
         this.callback = null;
         this.logger.info('onDestroy done end!');
     }
@@ -101,7 +97,7 @@ export class FormController {
 
     routerPhotoBrowser() {
         this.logger.debug('routerPhotoBrowser start!');
-        let param = {
+        let param: Want = {
             'bundleName': 'com.ohos.photos',
             'abilityName': 'com.ohos.photos.MainAbility',
             'parameters': {
@@ -113,10 +109,9 @@ export class FormController {
             }
         };
         this.logger.debug(`routerPhotoBrowser parm ${JSON.stringify(param)}`);
-        this.context.startAbility(param).then(() => {
-            this.logger.info(`raul startAbility complete`);
+        startAbility(param).then(() => {
             AppStorage.Delete(Constants.FROM_CONTROLLER_MANAGER);
-        });
+        })
         this.onDestroy();
         this.logger.debug('routerPhotoBrowser end!');
     }

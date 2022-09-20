@@ -1,22 +1,6 @@
 {
   "color": [
     {
-      "name": "white",
-      "value": "#FFFFFF"
-    },
-    {
-      "name": "black",
-      "value": "#000000"
-    },
-    {
-      "name": "transparent",
-      "value": "#00000000"
-    },
-    {
-      "name": "default_background_color",
-      "value": "#FFF1F3F5"
-    },
-    {
       "name": "default_bar_content_color",
       "value": "#FF000000"
     },
@@ -44,10 +28,7 @@
       "name": "icon_highlight_color",
       "value": "#0A59F7"
     },
-    {
-      "name": "title_text_color",
-      "value": "#E5000000"
-    },
+
     {
       "name": "subtitle_text_color",
       "value": "#99000000"
@@ -65,24 +46,12 @@
       "value": "#99FFFFFF"
     },
     {
-      "name": "text_color_above_picture",
-      "value": "#FFFFFF"
-    },
-    {
       "name": "detail_view_bg_color",
       "value": "#801A1A1A"
     },
     {
-      "name": "item_selection_bg_color",
-      "value": "#80FFFFFF"
-    },
-    {
       "name": "recycle_album_bg_color",
       "value": "#0D000000"
-    },
-    {
-      "name": "album_cover_gradient_start_color",
-      "value": "#33000000"
     },
     {
       "name": "album_set_cover_gradient_start_color",
@@ -105,20 +74,8 @@
       "value": "#00FFFF00"
     },
     {
-      "name": "album_cover_stroke_color",
-      "value": "#14000000"
-    },
-    {
       "name": "album_set_shadow_color",
       "value": "#CC000000"
-    },
-    {
-      "name": "empty_or_recycle_album_icon",
-      "value": "#99FFFFFF"
-    },
-    {
-      "name": "empty_or_recycle_album_back",
-      "value": "#9E9E9E"
     },
     {
       "name": "id_color_isActive",
@@ -143,10 +100,6 @@
     {
       "name": "id_color_control_actived",
       "value": "#990078FF"
-    },
-    {
-      "name": "color_control_highlight",
-      "value": "#007DFF"
     },
     {
       "name": "color_system_highlight",
@@ -300,14 +253,7 @@
       "name": "scroll_bar_side_text_border_color",
       "value": "#07000000"
     },
-    {
-      "name": "scroll_bar_side_text_color",
-      "value": "#F2FFFFFF"
-    },
-    {
-      "name": "scroll_bar_side_text_small_color",
-      "value": "#CCFFFFFF"
-    },
+
     {
       "name": "FA_title_text_color",
       "value": "#E5FFFFFF"
@@ -319,14 +265,6 @@
     {
       "name": "FA_background_color",
       "value": "#075579"
-    },
-    {
-      "name": "scroll_bar_side_text_shadow_color",
-      "value": "#1A000000"
-    },
-    {
-      "name": "album_scrollbar_color",
-      "value": "#ffb3b3b3"
     }
   ]
 }

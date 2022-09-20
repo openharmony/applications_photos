@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "browser",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "uiSyntax": "ets"
+  }
+}

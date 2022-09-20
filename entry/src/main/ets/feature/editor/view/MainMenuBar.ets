@@ -15,7 +15,7 @@
 
 import { CropModeBar } from './CropModeBar'
 import { PhotoEditMode } from '../base/PhotoEditType'
-import { BroadCast } from '../../../common/utils/BroadCast'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
 
 @Component
 export struct MainMenuBar {
@@ -23,7 +23,7 @@ export struct MainMenuBar {
     @Consume('selected') selectedMode: number;
     @Consume('scale') imageScale: number;
     @Consume('barSize') barScale: Resource;
-    @Consume broadCast: BroadCast;
+    @Consume broadCast: Broadcast;
     @Consume('verticalScreen') isVerticalScreen: boolean;
 
     build() {

@@ -14,7 +14,7 @@
  */
 
 import { ActionButton } from './ActionButton'
-import { BroadCast } from '../../../common/utils/BroadCast'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
 import { ActionButtonInfo } from './MainMenuInfo'
 import { RefreshActionMenu, ActionChangedEvent } from './RefreshMenu'
 import { PhotoEditMode } from '../base/PhotoEditType'
@@ -29,7 +29,7 @@ export struct ToolBar {
     @Consume('scale') imageScale: number;
     @Consume('barSize') barScale: Resource;
     @Consume('compare') isCompare: boolean;
-    @Consume broadCast: BroadCast;
+    @Consume broadCast: Broadcast;
     @State isImmersive: boolean = false;
     @Consume('verticalScreen') isVerticalScreen: boolean;
     @Consume screenWidth: number;

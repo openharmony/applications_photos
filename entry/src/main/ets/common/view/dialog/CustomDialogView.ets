@@ -15,15 +15,14 @@
 
 import { DownloadCancelOperationDialog } from './DownloadCancelOperationDialog';
 import { Constants } from '../../model/common/Constants'
-import { BroadCast } from '../../utils/BroadCast'
-import { BroadCastConstants } from '../../model/common/BroadCastConstants'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
 import { Logger } from '../../utils/Logger'
 import { MediaDetails, DetailsDialog } from './DetailsDialog'
 import { MultiSelectDetails, MultiSelectDialog } from './MultiSelectDialog'
 import { DeleteDialog } from './DeleteDialog'
 import { DialogCallback } from '../../model/common/DialogUtil'
-import { MediaItem } from '../../model/browser/photo/MediaItem';
-
+import { MediaDataItem } from '../../../../../../../common/base/src/main/ets/data/MediaDataItem';
 import { CancelOperationDialog, CancelParam } from './CancelOperationDialog';
 import { RenameDialog } from './RenameDialog';
 import { AddNotesDialog } from './AddNotesDialog';
@@ -34,7 +33,7 @@ import { EditExitDialog, EditExitDialogCallback } from './EditExitDialog'
 import { NewAlbumDialog } from './NewAlbumDialog'
 import { CopyOrMoveDialog, OperateParam } from './CopyOrMoveDialog'
 import { FindSameNameDialog, FindSameNameParam } from './FindSameNameDialog'
-import { ScreenManager } from '../../model/common/ScreenManager'
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 import { SaveImageDialog } from './SaveImageDialog'
 
 @Component
@@ -46,7 +45,7 @@ export struct CustomDialogView {
     @Provide dialogCallback: DialogCallback = { confirmCallback: null, cancelCallback: null };
     @Provide saveDialogCallback: SaveDialogCallback = { saveAsNewCallback: null, replaceOriginalCallback: null };
     @Provide editExitDialogCallback: EditExitDialogCallback = { discardCallback: null };
-    @Consume broadCast: BroadCast;
+    @Consume broadCast: Broadcast;
     @Provide progressParam: ProgressParam = { cancelFunc: null, operationType: '' };
     @Provide deleteProgressParam: DeleteProgressParam = { currentCount: 0, totalCount: 0, message: null };
     @Provide cancelParam: CancelParam = { continueFunc: null, cancelFunc: null };
@@ -94,8 +93,8 @@ export struct CustomDialogView {
         count: 0,
         size: 0,
     };
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
+    @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
+    @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     dialogController: CustomDialogController = new CustomDialogController({
         builder: DetailsDialog(),
         autoCancel: false,
@@ -238,27 +237,11 @@ export struct CustomDialogView {
     aboutToAppear(): void {
         this.logger.info('aboutToAppear');
         let self = this;
-        this.broadCast.on(BroadCastConstants.SHOW_DETAIL_DIALOG,
-            function (item: MediaItem, isDistributed: boolean) {
-                self.logger.info('SHOW_DETAIL_DIALOG ');
-                self.mediaDetails = {
-                    mediaType: item.mediaType,
-                    height: item.height,
-                    width: item.width,
-                    size: item.size,
-                    path: item.path,
-                    duration: item.duration,
-                    title: item.title,
-                    dateTaken: item.dateTaken,
-                    uri: item.uri,
-                    displayName: item.displayName,
-                    dateModified: item.dateModified
-                };
-                self.isDistributedAlbum = isDistributed;
-                self.dialogController.open();
-            });
+        this.broadCast.on(BroadcastConstants.SHOW_DETAIL_DIALOG, (item: MediaDataItem, isDistributed: boolean) => {
+            this.showDetailDialog(item, isDistributed)
+        });
 
-        this.broadCast.on(BroadCastConstants.SHOW_MULTI_SELECT_DIALOG,
+        this.broadCast.on(BroadcastConstants.SHOW_MULTI_SELECT_DIALOG,
             function (count: number, size: number) {
                 self.logger.info('SHOW_MULTI_SELECT_DIALOG ');
                 self.multiSelectDetails = {
@@ -269,14 +252,14 @@ export struct CustomDialogView {
                 self.multiSelectDialog.open();
             });
 
-        this.broadCast.on(BroadCastConstants.SHOW_DELETE_DIALOG,
+        this.broadCast.on(BroadcastConstants.SHOW_DELETE_DIALOG,
             function (deleteMessage: Resource, confirmCallback: Function, cancelCallback?: Function) {
                 self.logger.info('SHOW_DELETE_DIALOG ');
                 self.dialogMessage = deleteMessage;
                 self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
                 self.deleteDialogController.open();
             });
-        this.broadCast.on(BroadCastConstants.SHOW_RENAME_PHOTO_DIALOG,
+        this.broadCast.on(BroadcastConstants.SHOW_RENAME_PHOTO_DIALOG,
             function (fileName: string, confirmCallback: Function, cancelCallback?: Function) {
                 self.logger.info('SHOW_RENAME_PHOTO_DIALOG ');
                 self.renameFileName = fileName;
@@ -284,14 +267,14 @@ export struct CustomDialogView {
                 self.renameFileDialogController.open();
             });
 
-        this.broadCast.on(BroadCastConstants.SHOW_ADD_NOTES_PHOTO_DIALOG,
+        this.broadCast.on(BroadcastConstants.SHOW_ADD_NOTES_PHOTO_DIALOG,
             function (confirmCallback: Function, cancelCallback?: Function) {
                 self.logger.info('SHOW_ADD_NOTES_PHOTO_DIALOG ');
                 self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
                 self.addNotesDialogController.open();
             });
 
-        this.broadCast.on(BroadCastConstants.SHOW_PROGRESS_DIALOG,
+        this.broadCast.on(BroadcastConstants.SHOW_PROGRESS_DIALOG,
             function (message: Resource, operationType: string, cancelFunc?: Function) {
                 self.logger.info('SHOW_PROGRESS_DIALOG');
                 if (message != null) {
@@ -309,7 +292,7 @@ export struct CustomDialogView {
                 self.progressDialogController.open();
             });
 
-        this.broadCast.on(BroadCastConstants.UPDATE_PROGRESS,
+        this.broadCast.on(BroadcastConstants.UPDATE_PROGRESS,
             function (progress: number, currentCount: number) {
                 self.logger.info(`UPDATE_PROGRESS ${progress}`);
                 self.deleteProgress = progress;
@@ -323,7 +306,7 @@ export struct CustomDialogView {
                 }
             });
 
-        this.broadCast.on(BroadCastConstants.CANCEL_OPERATE,
+        this.broadCast.on(BroadcastConstants.CANCEL_OPERATE,
             function (cancelMessage: Resource, continueFunc: Function, cancelFunc: Function) {
                 self.cancelMessage = cancelMessage;
                 self.cancelParam.continueFunc = continueFunc;
@@ -332,7 +315,7 @@ export struct CustomDialogView {
                 self.cancelDialogController.open();
             });
 
-        this.broadCast.on(BroadCastConstants.DOWNLOAD_CANCEL_OPERATE,
+        this.broadCast.on(BroadcastConstants.DOWNLOAD_CANCEL_OPERATE,
             function (cancelMessage: Resource, continueFunc: Function, cancelFunc: Function) {
                 self.cancelMessage = cancelMessage;
                 self.cancelParam.continueFunc = continueFunc;
@@ -341,7 +324,7 @@ export struct CustomDialogView {
                 self.downloadCancelOperationDialog.open();
             });
 
-        this.broadCast.on(BroadCastConstants.SHOW_SAVE_PHOTO_DIALOG,
+        this.broadCast.on(BroadcastConstants.SHOW_SAVE_PHOTO_DIALOG,
             function (saveAsNewCallback: Function, replaceOriginalCallback: Function) {
                 self.logger.info('SHOW_SAVE_PHOTO_DIALOG');
                 self.saveDialogCallback
@@ -349,20 +332,20 @@ export struct CustomDialogView {
                 self.saveDialogController.open();
             });
 
-        this.broadCast.on(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG,
+        this.broadCast.on(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG,
             function (discardCallback: Function) {
                 self.logger.info('SHOW_EDIT_EXIT_PHOTO_DIALOG');
                 self.editExitDialogCallback = { discardCallback: discardCallback };
                 self.editExitDialogController.open();
             });
 
-        this.broadCast.on(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG,
+        this.broadCast.on(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG,
             function () {
                 self.logger.info('SHOW_EDIT_SAVE_PROGRESS_DIALOG');
                 self.saveImageDialogController.open();
             });
 
-        this.broadCast.on(BroadCastConstants.SHOW_NEW_ALBUM_PHOTO_DIALOG,
+        this.broadCast.on(BroadcastConstants.SHOW_NEW_ALBUM_PHOTO_DIALOG,
             function (fileName: string, confirmCallback: Function, cancelCallback?: Function) {
                 self.logger.info('SHOW_NEW_ALBUM_PHOTO_DIALOG');
                 self.renameFileName = fileName;
@@ -370,7 +353,7 @@ export struct CustomDialogView {
                 self.newAlbumDialogController.open();
             });
 
-        this.broadCast.on(BroadCastConstants.SHOW_COPY_OR_MOVE_DIALOG,
+        this.broadCast.on(BroadcastConstants.SHOW_COPY_OR_MOVE_DIALOG,
             function (moveFunc: Function, copyFunc: Function) {
                 self.logger.info('SHOW_COPY_OR_MOVE_DIALOG');
                 self.operateParam.moveFunc = moveFunc;
@@ -378,7 +361,7 @@ export struct CustomDialogView {
                 self.copyOrMoveDialogController.open();
             });
 
-        this.broadCast.on(BroadCastConstants.FIND_SAME_FILE_DIALOG,
+        this.broadCast.on(BroadcastConstants.FIND_SAME_FILE_DIALOG,
             function (assets: any, count: number, replaceFunc: Function, skipFunc: Function,
                       cancelFunc: Function, doSameFunc: Function) {
                 self.logger.info('FIND_SAME_FILE_DIALOG');
@@ -392,7 +375,7 @@ export struct CustomDialogView {
                 self.findSameNameDialog.open();
             });
 
-        this.broadCast.on(BroadCastConstants.DELETE_PROGRESS_DIALOG,
+        this.broadCast.on(BroadcastConstants.DELETE_PROGRESS_DIALOG,
             function (message: Resource, totalCount: number) {
                 self.logger.info('DELETE_PROGRESS_DIALOG');
                 self.deleteProgressParam.currentCount = 0;
@@ -400,6 +383,27 @@ export struct CustomDialogView {
                 self.deleteProgressParam.message = message;
                 self.deleteProgressDialogController.open();
             });
+    }
+
+    private showDetailDialog(item: MediaDataItem, isDistributed: boolean) {
+        this.logger.info('SHOW_DETAIL_DIALOG ');
+        item.load(true).then(() => {
+            this.mediaDetails = {
+                mediaType: item.mediaType,
+                height: item.height,
+                width: item.width,
+                size: item.size,
+                path: item.path,
+                duration: item.duration,
+                title: item.title,
+                dateTaken: item.dateTaken,
+                uri: item.uri,
+                displayName: item.displayName,
+                dateModified: item.dateModified
+            };
+            this.isDistributedAlbum = isDistributed;
+            this.dialogController.open();
+        })
     }
 
     build() {

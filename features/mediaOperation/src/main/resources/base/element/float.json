@@ -1,0 +1,12 @@
+{
+  "float": [
+    {
+      "name": "list_card_image_size",
+      "value": "56vp"
+    },
+    {
+      "name": "list_card_height",
+      "value": "80vp"
+    }
+  ]
+}

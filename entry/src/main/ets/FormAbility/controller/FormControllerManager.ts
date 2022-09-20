@@ -15,22 +15,19 @@
 import { Constants } from '../common/Constants'
 import { FormController } from './FormController'
 import { Logger } from '../common/Logger'
-import { DataStoreUtil } from '../../common/utils/DataStoreUtil'
+import dataStore from '../../../../../../common/base/src/main/ets/utils/DataStoreUtil'
 
 export class FormControllerManager {
-    private context: any;
     private formControllerMap = new Map();
     private logger: Logger = new Logger('FormControllerManager');
 
-    private constructor(context) {
+    private constructor() {
         this.logger.info('new FormControllerManager');
-        this.context = context;
-        DataStoreUtil.getInstance(globalThis.photosGlobalContext);
     }
 
-    public static getInstance(context: any): FormControllerManager {
+    public static getInstance(): FormControllerManager {
         if (AppStorage.Get(Constants.FROM_CONTROLLER_MANAGER) == null) {
-            AppStorage.SetOrCreate(Constants.FROM_CONTROLLER_MANAGER, new FormControllerManager(context));
+            AppStorage.SetOrCreate(Constants.FROM_CONTROLLER_MANAGER, new FormControllerManager());
         }
         return AppStorage.Get(Constants.FROM_CONTROLLER_MANAGER);
     }
@@ -41,7 +38,7 @@ export class FormControllerManager {
             this.logger.info('formId is 0 or formName is null!');
             return null;
         }
-        let controller = new FormController(this.context, formId, operationMode, callback);
+        let controller = new FormController(formId, operationMode, callback);
 
         if (controller == null || controller == undefined) {
             this.logger.error('It is failed to create FormController!');
@@ -54,16 +51,17 @@ export class FormControllerManager {
 
     async initData(formId: string, operationMode: number, callback?: Function): Promise<void> {
         this.logger.debug(`initData start! operationMode: ${operationMode}`);
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).init().then(async () => {
+        try {
+            await dataStore.init()
             let formIdKey: string = 'formId_' + formId;
-            let hasFormId = await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(formIdKey);
+            let hasFormId = await dataStore.hasData(formIdKey);
             this.logger.debug(`The value of hasFormId is ${hasFormId}`);
             if (hasFormId) {
                 this.createFormController(formId, operationMode, callback);
             }
-        }).catch((err) => {
+        } catch (err) {
             this.logger.error(`init err ${err}`);
-        })
+        }
         this.logger.debug('initData end!');
     }
 

@@ -33,40 +33,12 @@
       "value": "取消"
     },
     {
-      "name": "album_all",
-      "value": "所有照片"
-    },
-    {
-      "name": "album_camera",
-      "value": "相机"
-    },
-    {
-      "name": "album_video",
-      "value": "视频"
-    },
-    {
-      "name": "album_favor",
-      "value": "我的收藏"
-    },
-    {
-      "name": "album_screen_shot",
-      "value": "截屏录屏"
-    },
-    {
-      "name": "album_remote_device",
-      "value": "其他设备保存"
-    },
-    {
       "name": "camera_in",
       "value": "自拍"
     },
     {
       "name": "camera_out",
       "value": "外景"
-    },
-    {
-      "name": "album_recycle",
-      "value": "最近删除"
     },
     {
       "name": "title_select_photos",
@@ -273,14 +245,6 @@
       "value": "已选素材数量达到上限"
     },
     {
-      "name": "yes",
-      "value": "确认"
-    },
-    {
-      "name": "no",
-      "value": "取消"
-    },
-    {
       "name": "resolution",
       "value": "分辨率: "
     },
@@ -327,14 +291,6 @@
     {
       "name": "count_details_external_selected",
       "value": "已选择 %1$d/%2$d 项"
-    },
-    {
-      "name": "id_text_font_family_regular",
-      "value": "标准"
-    },
-    {
-      "name": "id_text_font_family_medium",
-      "value": "中粗"
     },
     {
       "name": "entry_MainAbility",
@@ -567,7 +523,7 @@
     {
       "name": "stop",
       "value": "停止"
-	},
+    },
     {
       "name": "specific_characters_not_supported",
       "value": "不支持\".\\\/:*?<>|[]{}"
@@ -749,14 +705,6 @@
       "value": "没有照片和视频"
     },
     {
-      "name": "no_distributed_photo_show_image",
-      "value": "请先在对端图库打开大图，再在本端浏览"
-    },
-    {
-      "name": "no_distributed_photo_show_video",
-      "value": "请下载视频文件至本机进行播放"
-    },
-    {
       "name": "description_serviceability",
       "value": "hap sample empty service"
     },
@@ -771,10 +719,6 @@
     {
       "name": "edit_save_picture_text",
       "value": "正在保存照片..."
-    },
-    {
-      "name": "fa_select_time",
-      "value": "选择播放间隔"
     },
     {
       "name": "fa_title_text",
@@ -801,18 +745,6 @@
       "value": "图片播放间隔"
     },
     {
-      "name": "fa_play_interval_time_30",
-      "value": "30 分钟"
-    },
-    {
-      "name": "fa_play_interval_time_60",
-      "value": "1 小时"
-    },
-    {
-      "name": "fa_play_interval_time_90",
-      "value": "1.5 小时"
-    },
-    {
       "name": "progress_delete",
       "value": "删除%1$d/%2$d"
     },
@@ -827,10 +759,6 @@
     {
       "name": "edit_photo_save_fail",
       "value": "图片保存失败!"
-    },
-    {
-      "name": "image_loading",
-      "value": "正在加载..."
     }
   ]
 }

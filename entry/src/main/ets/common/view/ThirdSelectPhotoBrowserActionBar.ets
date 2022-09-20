@@ -18,12 +18,11 @@ import { ActionBar } from './actionbar/ActionBar'
 import { ActionBarProp } from './browserOperation/ActionBarProp'
 import { ActionBarMode, ActionBarColorMode, ActionBarSelectionMode } from './browserOperation/ActionBarMode'
 import { Logger } from '../utils/Logger'
-import { ScreenManager } from '../model/common/ScreenManager';
+import  screenManager  from '../../../../../../common/base/src/main/ets/manager/ScreenManager';
 
 @Component
 export struct ThirdSelectPhotoBrowserActionBar {
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @State isMultiPick: boolean = false;
     @Consume isSelected: boolean;
     onMenuClicked: Function;
@@ -48,12 +47,11 @@ export struct ThirdSelectPhotoBrowserActionBar {
             Image($r('app.media.gradientBasePlate')).width('100%')
                 .height('100%').objectFit(ImageFit.Fill)
             ActionBar({
-                isShowBar: true,
                 actionBarProp: this.createActionBar(),
                 onMenuClicked: this.onMenuClicked
             })
         }
         .markAnchor({ x: '0%', y: '0%' })
-        .position({ x: '0%', y: this.leftBlank[1] })
+        .position({ x: '0%', y: '0%' })
     }
 }

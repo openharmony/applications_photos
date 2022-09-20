@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { ScreenManager } from '../model/common/ScreenManager'
+import screenManager from '../../../../../../common/base/src/main/ets/manager/ScreenManager'
 import { Constants } from '../model/common/Constants'
 import { Logger } from '../utils/Logger'
 
@@ -24,18 +24,17 @@ export struct NoPhotoComponent {
 
     // set an initial value temporarily, later change to 0.
     @State offSetY: number = Constants.EMPTY_PAGE_DEFAULT_OFFSET;
-    @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
+    @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
+    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @State bigScreen: boolean = false;
 
     aboutToAppear(): void {
         this.logger.info(`aboutToAppear`);
-        this.bigScreen = Math.min(ScreenManager.getInstance().getWinHeight(), ScreenManager.getInstance()
+        this.bigScreen = Math.min(screenManager.getWinHeight(), screenManager
             .getWinWidth()) > Constants.BIG_SCREEN_WIDTH
         let halfImageHeight = this.bigScreen ? Constants.BIG_EMPTY_ICON_SIZE / 2 : Constants.SMALL_EMPTY_ICON_SIZE / 2
-        let screenHeight = ScreenManager.getInstance().getWinHeight() - this.leftBlank[1] - this.leftBlank[3]
+        let screenHeight = screenManager.getWinHeight() - px2vp(this.leftBlank[1] + this.leftBlank[3])
         if (this.isHorizontal) {
             if (this.isSidebar) {
                 // Pad landscape

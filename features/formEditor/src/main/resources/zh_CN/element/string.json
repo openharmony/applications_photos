@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "fa_play_interval_time_30",
+      "value": "30 分钟"
+    },
+    {
+      "name": "fa_play_interval_time_60",
+      "value": "1 小时"
+    },
+    {
+      "name": "fa_play_interval_time_90",
+      "value": "1.5 小时"
+    },
+    {
+      "name": "fa_select_time",
+      "value": "选择播放间隔"
+    }
+  ]
+}

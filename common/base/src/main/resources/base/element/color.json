@@ -1,0 +1,52 @@
+{
+  "color": [
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "black",
+      "value": "#000000"
+    },
+    {
+      "name": "album_cover_stroke_color",
+      "value": "#14000000"
+    },
+    {
+      "name": "album_cover_gradient_start_color",
+      "value": "#33000000"
+    },
+    {
+      "name": "album_scrollbar_color",
+      "value": "#ffb3b3b3"
+    },
+    {
+      "name": "transparent",
+      "value": "#00000000"
+    },
+    {
+      "name": "text_color_above_picture",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "item_selection_bg_color",
+      "value": "#80FFFFFF"
+    },
+    {
+      "name": "default_background_color",
+      "value": "#FFF1F3F5"
+    },
+    {
+      "name": "empty_or_recycle_album_icon",
+      "value": "#99FFFFFF"
+    },
+    {
+      "name": "empty_or_recycle_album_back",
+      "value": "#9E9E9E"
+    },
+    {
+      "name": "color_control_highlight",
+      "value": "#007DFF"
+    }
+  ]
+}

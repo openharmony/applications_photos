@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "grid",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "uiSyntax": "ets"
+  }
+}

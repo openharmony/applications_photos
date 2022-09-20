@@ -1,4 +1,3 @@
-// @ts-nocheck
 /*
  * Copyright (c) 2021 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +14,12 @@
  */
 import { MediaData } from './MediaData'
 import { Constants } from '../common/Constants'
+import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { Logger } from '../common/Logger'
-import { AlbumDefine } from '../../common/model/browser/AlbumDefine'
-import { DataStoreUtil } from '../../common/utils/DataStoreUtil'
-import { MediaLibraryAccess } from '../../common/access/MediaLibraryAccess'
-import resourceManager from '@ohos.resourceManager';
+import dataStore from '../../../../../../common/base/src/main/ets/utils/DataStoreUtil'
+import mediaModel from '@ohos/base/src/main/ets/model/MediaModel'
+import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils'
+import { getAlbumDisplayName, getFetchOptions } from '@ohos/base/src/main/ets/helper/MediaDataHelper'
 
 export class MediaDataManager {
     private mediaData: MediaData = null;
@@ -30,78 +30,37 @@ export class MediaDataManager {
     private fd: number = -1;
     private key: string = '';
     private operationMode: number = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
-    private context: any;
     private isNextFag: boolean = true;
     private isUpdate: boolean = false;
 
-    constructor(context: any, formId: string, operationMode: number, formController: any) {
+    constructor(formId: string, operationMode: number, formController: any) {
         this.formController = formController;
         this.operationMode = operationMode;
-        this.context = context;
         this.initData(formId);
-    }
-
-    async getResourceString(resource: Resource) {
-        try {
-            this.logger.info(`getResourceString: ${JSON.stringify(resource)}`);
-            let mgr: resourceManager.ResourceManager = await resourceManager.getResourceManager(this.context);
-            if (mgr != null || mgr != undefined) {
-                return await mgr.getString(resource.id);
-            } else {
-                this.logger.error(`getResourceManager instance is none`);
-                return null;
-            }
-        } catch (error) {
-            this.logger.error(`getResourceString error: ${error}`);
-            return null;
-        }
     }
 
     async initData(formId: string) {
         this.logger.info(`initData formId ${formId}`);
-        MediaLibraryAccess.getInstance().onCreate(this.context);
-        MediaLibraryAccess.getInstance().getPublicDirectory().then(async () => {
-            await this.storageRead(formId);
-            if (this.mediaData == null || this.mediaData == undefined) {
-                this.logger.info('initData new MediaData!');
-                this.mediaData = new MediaData(formId,
-                    await this.getResourceString($r('app.string.album_camera')),
-                    Constants.PHOTOS_FORM_CAMERA_NAME, AlbumDefine.ALBUM_ID_CAMERA, '', 0,
-                    Constants.PHOTOS_FORM_DEFAULT_PERIOD, 1, 0);
-            }
-            this.logger.info(`initData formId ${this.mediaData.formId}
-            albumName ${this.mediaData.albumName} currentIndex ${this.mediaData.currentIndex}`);
-            let displayName = await this.getAlbumDisplayName(this.mediaData.albumId);
-            if (displayName != null) {
-                this.mediaData.displayName = displayName;
-                this.logger.info('initData displayName' + this.mediaData.displayName)
-            }
-            await this.loadData();
-        });
-    }
-
-    private async getAlbumDisplayName(formId) {
-        this.logger.debug('getAlbumDisplayName name ' + formId)
-        switch (formId) {
-            case AlbumDefine.ALBUM_ID_ALL:
-                return await this.getResourceString($r('app.string.album_all'));
-            case AlbumDefine.ALBUM_ID_CAMERA:
-                return await this.getResourceString($r('app.string.album_camera'));
-            case AlbumDefine.ALBUM_ID_FAVOR:
-                return await this.getResourceString($r('app.string.album_favor'));
-            case AlbumDefine.ALBUM_ID_REMOTE:
-                return await this.getResourceString($r('app.string.album_remote_device'));
-            case AlbumDefine.ALBUM_ID_SNAPSHOT:
-                return await this.getResourceString($r('app.string.album_screen_shot'));
-            default:
-                break;
+        await this.storageRead(formId);
+        if (this.mediaData == null || this.mediaData == undefined) {
+            this.logger.info('initData new MediaData!');
+            this.mediaData = new MediaData(formId,
+                await getResourceString($r('app.string.album_camera')),
+                Constants.PHOTOS_FORM_CAMERA_NAME, MediaConstants.ALBUM_ID_CAMERA, '', 0,
+                Constants.PHOTOS_FORM_DEFAULT_PERIOD, 1, 0);
         }
-        return null;
+        this.logger.info(`initData formId ${this.mediaData.formId}
+            albumName ${this.mediaData.albumName} currentIndex ${this.mediaData.currentIndex}`);
+        let displayName = await getAlbumDisplayName(this.mediaData.albumId);
+        if (displayName != null) {
+            this.mediaData.displayName = displayName;
+            this.logger.info('initData displayName' + this.mediaData.displayName)
+        }
+        await this.loadData();
     }
 
     async saveData() {
         this.logger.debug('saveData');
-        this.filterOutVideoMediaData();
         this.updateMediaData();
         if (((this.operationMode != Constants.PHOTOS_FORM_OPERATION_MODE_EVENT)
         && (this.operationMode != Constants.PHOTOS_FORM_OPERATION_MODE_DESTROY)
@@ -146,32 +105,32 @@ export class MediaDataManager {
     async storageRead(formId: string) {
         this.logger.debug('storageRead start!');
         let formIdKey: string = 'formId_' + formId
-        let hasFormId = await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(formIdKey);
+        let hasFormId = await dataStore.hasData(formIdKey);
         this.logger.debug(`The value of hasFormId is ${hasFormId}`)
         if (hasFormId) {
             let displayNameKey = 'displayName_' + formId;
-            let displayName = await DataStoreUtil.getInstance(globalThis.photosGlobalContext).getData(displayNameKey, '') as string;
+            let displayName = await dataStore.getData(displayNameKey, '') as string;
             this.logger.debug(`The value of albumName is ${displayName}`);
             let albumNameKey = 'albumName_' + formId;
-            let albumName = await DataStoreUtil.getInstance(globalThis.photosGlobalContext).getData(albumNameKey, '') as string;
+            let albumName = await dataStore.getData(albumNameKey, '') as string;
             this.logger.debug(`The value of albumName is ${albumName}`);
             let albumIdKey = 'albumId_' + formId;
-            let albumId = await DataStoreUtil.getInstance(globalThis.photosGlobalContext).getData(albumIdKey, '') as string;
+            let albumId = await dataStore.getData(albumIdKey, '') as string;
             this.logger.debug(`The value of albumId is ${albumId}`);
             let currentUriKey = 'currentUri_' + formId;
-            let currentUri = await DataStoreUtil.getInstance(globalThis.photosGlobalContext).getData(currentUriKey, '') as string;
+            let currentUri = await dataStore.getData(currentUriKey, '') as string;
             this.logger.debug(`The value of currentUri is ${currentUri}`);
             let currentIndexKey = 'currentIndex_' + formId;
-            let currentIndex = await DataStoreUtil.getInstance(globalThis.photosGlobalContext).getData(currentIndexKey, 0) as number;
+            let currentIndex = await dataStore.getData(currentIndexKey, 0) as number;
             this.logger.debug(`The value of currentIndex is ${currentIndex}`);
             let intervalTimeKey = 'intervalTime_' + formId;
-            let intervalTime = await DataStoreUtil.getInstance(globalThis.photosGlobalContext).getData(intervalTimeKey, 0) as number;
+            let intervalTime = await dataStore.getData(intervalTimeKey, 0) as number;
             this.logger.debug(`The value of intervalTime is ${intervalTime}`);
             let isShowKey = 'isShow_' + formId;
-            let isShow = await DataStoreUtil.getInstance(globalThis.photosGlobalContext).getData(isShowKey, 0) as number;
+            let isShow = await dataStore.getData(isShowKey, 0) as number;
             this.logger.debug(`The value of isShow is ${isShow}`);
             let arkUriKey = 'arkUri_' + formId;
-            let arkUri = await DataStoreUtil.getInstance(globalThis.photosGlobalContext).getData(arkUriKey, 0) as number;
+            let arkUri = await dataStore.getData(arkUriKey, 0) as number;
             this.logger.debug(`The value of arkUri is ${arkUri}`);
             if (arkUri == 0) {
                 arkUri = 1;
@@ -187,105 +146,76 @@ export class MediaDataManager {
     async storageSet() {
         this.logger.debug('storageSet start!');
         let formIdKey = 'formId_' + this.mediaData.formId;
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(formIdKey, this.mediaData.formId);
+        await dataStore.putData(formIdKey, this.mediaData.formId);
         let displayNameKey = 'displayName_' + this.mediaData.formId;
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(displayNameKey, this.mediaData.displayName);
+        await dataStore.putData(displayNameKey, this.mediaData.displayName);
         let albumNameKey = 'albumName_' + this.mediaData.formId;
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(albumNameKey, this.mediaData.albumName);
+        await dataStore.putData(albumNameKey, this.mediaData.albumName);
         let albumIdKey = 'albumId_' + this.mediaData.formId;
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(albumIdKey, this.mediaData.albumId);
+        await dataStore.putData(albumIdKey, this.mediaData.albumId);
         let currentUriKey = 'currentUri_' + this.mediaData.formId;
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(currentUriKey, this.mediaData.currentUri);
+        await dataStore.putData(currentUriKey, this.mediaData.currentUri);
         let currentIndexKey = 'currentIndex_' + this.mediaData.formId;
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(currentIndexKey, this.mediaData.currentIndex);
+        await dataStore.putData(currentIndexKey, this.mediaData.currentIndex);
         let intervalTimeKey = 'intervalTime_' + this.mediaData.formId;
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(intervalTimeKey, this.mediaData.intervalTime);
+        await dataStore.putData(intervalTimeKey, this.mediaData.intervalTime);
         let isShowKey = 'isShow_' + this.mediaData.formId;
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(isShowKey, this.mediaData.isShowAlbumName);
+        await dataStore.putData(isShowKey, this.mediaData.isShowAlbumName);
         let arkUriKey = 'arkUri_' + this.mediaData.formId;
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).putData(arkUriKey, this.mediaData.arkUri);
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).flush();
+        await dataStore.putData(arkUriKey, this.mediaData.arkUri);
+        await dataStore.flush();
         this.logger.debug('storageSet end!');
     }
 
     async storageDelete() {
         this.logger.debug('storageDelete start!');
         let formIdKey = 'formId_' + this.mediaData.formId;
-        if (await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(formIdKey)) {
+        if (await dataStore.hasData(formIdKey)) {
             this.logger.debug('storageDelete formId');
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).delData(formIdKey);
+            await dataStore.delData(formIdKey);
         }
         let displayNameKey = 'displayName_' + this.mediaData.formId;
-        if (await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(displayNameKey)) {
+        if (await dataStore.hasData(displayNameKey)) {
             this.logger.debug('storageDelete displayName');
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).delData(displayNameKey);
+            await dataStore.delData(displayNameKey);
         }
         let albumNameKey = 'albumName_' + this.mediaData.formId;
-        if (await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(albumNameKey)) {
+        if (await dataStore.hasData(albumNameKey)) {
             this.logger.debug('storageDelete albumName');
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).delData(albumNameKey);
+            await dataStore.delData(albumNameKey);
         }
         let albumIdKey = 'albumId_' + this.mediaData.formId;
-        if (await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(albumIdKey)) {
+        if (await dataStore.hasData(albumIdKey)) {
             this.logger.debug('storageDelete albumId');
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).delData(albumIdKey);
+            await dataStore.delData(albumIdKey);
         }
         let currentUriKey = 'currentUri_' + this.mediaData.formId;
-        if (await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(currentUriKey)) {
+        if (await dataStore.hasData(currentUriKey)) {
             this.logger.debug('storageDelete currentUri');
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).delData(currentUriKey);
+            await dataStore.delData(currentUriKey);
         }
         let currentIndexKey = 'currentIndex_' + this.mediaData.formId;
-        if (await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(currentIndexKey)) {
+        if (await dataStore.hasData(currentIndexKey)) {
             this.logger.debug('storageDelete currentIndex');
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).delData(currentIndexKey);
+            await dataStore.delData(currentIndexKey);
         }
         let intervalTimeKey = 'intervalTime_' + this.mediaData.formId;
-        if (await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(intervalTimeKey)) {
+        if (await dataStore.hasData(intervalTimeKey)) {
             this.logger.debug('storageDelete intervalTime');
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).delData(intervalTimeKey);
+            await dataStore.delData(intervalTimeKey);
         }
         let isShowKey = 'isShow_' + this.mediaData.formId;
-        if (await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(isShowKey)) {
+        if (await dataStore.hasData(isShowKey)) {
             this.logger.debug('storageDelete isShowAlbumName');
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).delData(isShowKey);
+            await dataStore.delData(isShowKey);
         }
         let arkUriKey = 'arkUri_' + this.mediaData.formId;
-        if (await DataStoreUtil.getInstance(globalThis.photosGlobalContext).hasData(arkUriKey)) {
+        if (await dataStore.hasData(arkUriKey)) {
             this.logger.debug('storageDelete arkUri');
-            await DataStoreUtil.getInstance(globalThis.photosGlobalContext).delData(arkUriKey);
+            await dataStore.delData(arkUriKey);
         }
-        await DataStoreUtil.getInstance(globalThis.photosGlobalContext).flush();
+        await dataStore.flush();
         this.logger.debug('storageDelete end!');
-    }
-
-    filterOutVideoMediaData() {
-        this.logger.debug('filterOutVideoMediaData start!');
-        if (this.items.length == 0) {
-            return;
-        }
-        if (this.items[this.mediaData.currentIndex].mediaType == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
-            return;
-        }
-        let currentIndex = this.mediaData.currentIndex;
-        for (let i = currentIndex; i < this.items.length; i++) {
-            let type = this.items[i].mediaType;
-            if (type == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
-                this.mediaData.currentIndex = i;
-                return;
-            }
-        }
-        if (currentIndex != 0) {
-            for (let i = 0; i < this.items.length; i++) {
-                let type = this.items[i].mediaType;
-                if (type == MediaLibraryAccess.MEDIA_TYPE_IMAGE) {
-                    this.mediaData.currentIndex = i;
-                    return;
-                }
-            }
-        }
-        this.mediaData.currentIndex = 0;
-        this.logger.debug('filterOutVideoMediaData end!');
     }
 
     updateMediaData() {
@@ -387,7 +317,7 @@ export class MediaDataManager {
     async openCurrentFd(): Promise<number> {
         let fileAsset = this.getCurrentItem();
         this.logger.info(`openCurrentFd uri: ${this.mediaData.currentUri}`);
-        let fd = (fileAsset != null) ? await  MediaLibraryAccess.getInstance().openAsset('R', fileAsset) : -1;
+        let fd = (fileAsset != null) ? await  mediaModel.openAsset('R', fileAsset) : -1;
         this.logger.info(`openCurrentFd the fd: ${fd}`);
         return fd;
     }
@@ -400,7 +330,7 @@ export class MediaDataManager {
         this.logger.info(`close the fd: ${this.fd}`);
         let fileAsset = this.getCurrentItem();
         if (fileAsset != null && this.fd != -1) {
-            await MediaLibraryAccess.getInstance().closeAsset(this.fd, fileAsset);
+            await mediaModel.closeAsset(this.fd, fileAsset);
             this.fd = -1;
         }
     }
@@ -416,18 +346,13 @@ export class MediaDataManager {
         this.logger.debug('loadData end!');
     }
 
-    async getItems(albumId: string, startIndex?: number, count?: number, deviceId?) {
+    async getItems(albumId: string) {
         this.logger.info('getItems start!');
-        let fetchOpt = AlbumDefine.getFileFetchOpt(albumId, deviceId, startIndex, count);
-        switch (albumId) {
-            case AlbumDefine.ALBUM_ID_ALL:
-                let allObject = await MediaLibraryAccess.getInstance().getAllObject(fetchOpt);
-                return allObject;
-                break;
-            default:
-                return await MediaLibraryAccess.getInstance().getEntityAlbumObject(AlbumDefine.getAlbumFetchOpt(
-                    albumId, deviceId), fetchOpt);
-                break;
+        let fetchOpt = await getFetchOptions(MediaConstants.SELECT_TYPE_IMAGE, albumId, "")
+        if (albumId == MediaConstants.ALBUM_ID_FAVOR) {
+            return await mediaModel.getAllFavorMediaItems(fetchOpt)
+        } else {
+            return await mediaModel.getAllMediaItems(fetchOpt)
         }
     }
 }

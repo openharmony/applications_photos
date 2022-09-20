@@ -13,338 +13,216 @@
  * limitations under the License.
  */
 
-import { ImageGridItemComponent } from '../../../common/view/ImageGridItemComponent'
-import { TimelineDataSource } from '../model/TimelineDataSource'
-import { TimelineData } from '../../../common/model/browser/photo/TimelineData'
-import { TimelineTitleComponent } from './timelinetitlecomponent'
+import { logInfo, logDebug, logWarn } from '@ohos/base/src/main/ets/utils/LoggerUtils'
+import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent'
+import {
+    TimelineTitleComponent
+} from '../../../../../../../features/timeline/src/main/ets/components/TimelineTitleComponent'
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
-import { Logger } from '../utils/Logger'
 import { ToolBar } from '../../../common/view/actionbar/ToolBar';
 import { Constants } from '../../../common/model/common/Constants'
-import { MenuOperation } from '../../../common/view/browserOperation/MenuOperation'
-import { MenuContext } from '../../../common/view/browserOperation/MenuContext'
-import { MenuOperationFactory } from '../../../common/interface/MenuOperationFactory'
-import { BatchDeleteMenuOperation } from '../../../common/view/browserOperation/BatchDeleteMenuOperation';
-import { ViewType } from '../../../common/model/browser/photo/ViewType'
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation'
+import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext'
+import { BatchDeleteMenuOperation } from '@ohos/base/src/main/ets/operation/BatchDeleteMenuOperation';
+import { ViewType } from '@ohos/base/src/main/ets/data/ViewType'
 import { Action } from '../../../common/view/browserOperation/Action'
-import { BroadCast } from '../../../common/utils/BroadCast'
-import { BroadCastConstants } from '../../../common/model/common/BroadCastConstants'
-import { BroadCastManager } from '../../../common/model/common/BroadCastManager'
-import { TimelineSelectManager } from '../../../common/model/browser/SelectManager'
-import { MediaItem } from '../../../common/model/browser/photo/MediaItem'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
 import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent'
-import { ScreenManager } from '../../../common/model/common/ScreenManager'
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
 import router from '@system.router'
-import { TraceControllerUtils } from '../../../common/utils/TraceControllerUtils'
-import { TimelineDataSourceManager } from '../model/TimelineDataSourceManager';
-import { ShareMenuOperation } from '../../../common/view/browserOperation/ShareMenuOperation';
-import { CommonObserverCallback } from '../../../common/model/browser/CommonObserverCallback';
-import { MediaObserver } from '../../../common/model/browser/dataObserver/MediaObserver';
-import { UiUtil } from '../../../common/utils/UiUtil';
-import { MediaOperationType } from '../../../common/model/common/MediaOperationType'
-import { MoveMenuOperation } from '../../../common/view/browserOperation/MoveMenuOperation';
-import { CopyMenuOperation } from '../../../common/view/browserOperation/CopyMenuOperation';
-import { TimelineScrollBar } from './TimelineScrollBar';
-import { DateUtil } from '../../../common/utils/DateUtil';
-import { AlbumInfo } from '../../../common/model/browser/album/AlbumInfo';
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils'
+import { ShareMenuOperation } from '@ohos/base/src/main/ets/operation/ShareMenuOperation';
+import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
+import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver'
+import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
+import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
+import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType'
+import { MoveMenuOperation } from '@ohos/base/src/main/ets/operation/MoveMenuOperation';
+import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation';
+import { TimelineScrollBar } from '../../../../../../../features/timeline/src/main/ets/components/TimelineScrollBar';
+import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
+import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import { TimelinePageBarModel } from '../model/TimelinePageBarModel'
 import { ActionBar } from '../../../common/view/actionbar/ActionBar'
+import {
+    TimelineItemDataSource
+} from '../../../../../../../features/timeline/src/main/ets/vm/TimelineItemDataSource';
+import { TimelineDataItem } from '../../../../../../../features/timeline/src/main/ets/data/TimelineDataItem';
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 
+const TAG = "TimelinePage"
 // PHOTO Page
 @Component
 export struct TimelinePage {
     @State isEmpty: boolean = false;
-    @Provide isHideScrollBar: boolean = true;
-    @StorageProp('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-    @StorageProp('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
+    @StorageProp('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
+    @StorageProp('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     @State gridRowCount: number = 0;
     @Consume isSelectedMode: boolean;
     @Provide isAllSelected: boolean = false;
     @Provide('selectedCount') totalSelectedCount: number = 0;
-    @Provide broadCast: BroadCast = TimelineDataSourceManager.getInstance().getBroadCast();
+    @Provide broadCast: Broadcast = new Broadcast();
     @Consume @Watch('onIndexPageShow') isShow: boolean;
     @StorageLink('TimelinePageIndex') @Watch('onIndexChange') TimelinePageIndex: number = Constants.INVALID;
-    @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-        = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-    logger: Logger = new Logger('TimelinePage');
-    mSelectManager: TimelineSelectManager = new TimelineSelectManager();
     scroller: Scroller = new Scroller();
-    appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+    private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     isInCurrentTab = false; // Is it on the current tab page
-    dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
-    isDataFreeze = false; // Is the page data frozen
-    deleteMode = false; // Is delete mode
-    deleteReady = true; // use local delete mode
     isActive = false; // Is the page active
     @State initLoadFinish: boolean = false; // Is first patch load finished
     routerStart = false; // Is move or copy router page
     @Provide moreMenuList: Action[] = new Array<Action>();
-    @State groupSelectMode: boolean[] = [];
-    @Provide yearData: TimelineData[] = [];
     @Provide dateText: string = '';
-    private dataSource: TimelineDataSource = TimelineDataSourceManager.getInstance().getDataSource();
     private barModel = new TimelinePageBarModel()
+    private timelineDataSource: TimelineItemDataSource = new TimelineItemDataSource()
+    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
+    private isMediaLibDataChanged: boolean = true
 
     aboutToAppear(): void {
-        TraceControllerUtils.startTrace('TimelinePageAboutToAppear');
-        this.logger.info('aboutToAppear');
-        let self = this;
-        let params = router.getParams();
-        if (params != null && params.pageFrom && params.pageFrom == Constants.ENTRY_FROM.CAMERA) {
-            this.dataSource.initData();
-        }
-        this.mSelectManager.setGroupData(this.dataSource.getGroupData());
-        this.mSelectManager.setTotalCount(this.dataSource.getMediaCount());
-        this.moreMenuList = [Action.MOVE, Action.COPY, Action.INFO];
-        this.isEmpty = !Boolean(this.dataSource.getMediaCount());
-        this.initLoadFinish = this.dataSource.isFirstPatchDataRequest;
-        MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.registerCallback('updateGroupData', (newState: TimelineData[]) => {
-            self.mSelectManager.updateGroupData(newState);
-            self.updateYearMap();
-        });
-        this.dataSource.registerCallback('updateCount', (newState: number) => {
-            self.logger.info(`updateCount ${newState}`);
-            self.isEmpty = !Boolean(newState);
-            self.isHideScrollBar = (newState <= Constants.SCROLL_BAR_VISIBLE_THRESHOLD);
-            self.mSelectManager.setTotalCount(newState);
-        });
+        startTrace('TimelinePageAboutToAppear');
+        logInfo(TAG, 'aboutToAppear');
+        this.moreMenuList = [Action.MOVE_INVALID, Action.COPY_INVALID, Action.INFO_INVALID];
+        mediaObserver.registerObserver(this.dataObserver);
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.initGridRowCount());
 
-        ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-            self.initGridRowCount();
-        });
-
-        this.appBroadCast.on(BroadCastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-        this.appBroadCast.on(BroadCastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-        this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        this.appBroadCast.on(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
-        this.appBroadCast.on(BroadCastConstants.RESET_ZERO, (pageNumber: number) => {
+        this.appBroadcast.on(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
+        this.appBroadcast.on(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
+        this.appBroadcast.on(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
+        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+        this.appBroadcast.on(BroadcastConstants.RESET_ZERO, (pageNumber: number) => {
             if (pageNumber == Constants.TIMELINE_PAGE_INDEX) {
                 this.scroller.scrollEdge(Edge.Top);
             }
         });
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            this.logger.info(`ON_LOADING_FINISHED size: ${size}`);
+            logInfo(TAG, `ON_LOADING_FINISHED size: ${size}`);
+        });
+        this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect());
+        this.broadCast.on(BroadcastConstants.GROUP_SELECT, () => this.onSelect());
+
+        this.broadCast.on(BroadcastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
+            this.jumpToPhotoBrowser(name, item)
         });
 
-        this.broadCast.on(Constants.FIRST_PATCH_LOAD_FINISH, (size: number) => {
-            this.logger.info(`FIRST_PATCH_LOAD_FINISH size: ${size}`);
-            this.initLoadFinish = true;
+        this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
+            this.jumpToThirdPhotoBrowser(name, item)
         });
 
-        this.onMenuClicked = this.onMenuClicked.bind(this);
-        this.logger.info('aboutToAppear');
-        this.mSelectManager.setPhotoDataImpl();
-
-        this.broadCast.on(BroadCastConstants.SELECT,
-            (index: number, id: string, isSelected: boolean, callback?: Function) => {
-                if (self.mSelectManager.toggle(id, isSelected, index)) {
-                    self.totalSelectedCount = self.mSelectManager.getSelectedCount();
-                    if (!self.isSelectedMode) {
-                        self.isSelectedMode = true;
-                    }
-                }
-                callback();
-            });
-        this.broadCast.on(BroadCastConstants.GROUP_SELECT, (position: number) => {
-            self.logger.info(`GROUP_SELECT ${position}`);
-            if (self.mSelectManager.toggleGroup(self.mSelectManager.getTitleCoordinate(position))) {
-                self.totalSelectedCount = self.mSelectManager.getSelectedCount();
-            }
-        });
-        this.broadCast.on(BroadCastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaItem) => {
-            let targetIndex = self.dataSource.getDataIndex(item);
-            if (targetIndex == Constants.NOT_FOUND) {
-                self.logger.error('targetIndex is not found');
-                return;
-            }
-            AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
-            router.push({
-                uri: 'feature/browser/view/PhotoBrowser',
-                params: {
-                    position: targetIndex,
-                    transition: name,
-                    leftBlank: self.leftBlank,
-                }
-            });
-        });
-        this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaItem) => {
-            let targetIndex = self.dataSource.getDataIndex(item);
-            if (targetIndex == Constants.NOT_FOUND) {
-                self.logger.error('targetIndex is not found');
-                return;
-            }
-            self.logger.info(`JUMP_THIRD_PHOTO_BROWSER.index: ${targetIndex} transition: ${name}`);
-            AppStorage.SetOrCreate(Constants.THIRD_SELECT_MANAGER, self.mSelectManager);
-            AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
-            router.push({
-                uri: 'feature/browser/view/SelectPhotoBrowser',
-                params: {
-                    position: targetIndex,
-                    transition: name,
-                }
-            });
-        });
-
-        this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, (sortIndexes) => {
-            this.logger.info('ON_DATA_RELOADED');
-            if (this.deleteMode && sortIndexes) {
-                animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => {
-                    let indexes = sortIndexes.reverse()
-                    indexes.forEach((index) => {
-                        this.dataSource.onDataDeleted(index);
-                    })
-                })
-            } else {
-                if (this.isSelectedMode) {
-                    this.deleteReady = false; // change index when selected mode
-                }
-                this.dataSource.onDataReloaded();
-            }
-            this.deleteMode = false;
-        });
-
-        this.broadCast.on(BroadCastConstants.INIT_DATE_TEXT, () => {
-            let scrollMediaItem = this.dataSource.getMediaItemByPosition(0);
-            this.dateText = DateUtil.getLocalizedYearAndMonth(scrollMediaItem.dateTaken);
+        this.broadCast.on(BroadcastConstants.INIT_DATE_TEXT, () => {
+            this.dateText = DateUtil.getLocalizedYearAndMonth(this.timelineDataSource.groupItem[0].dateAdded);
         })
 
-        this.mSelectManager.registerCallback('allSelect', this.freezeAdapter((newState: boolean) => {
-            self.logger.info(`allSelect ${newState}`);
-            self.isAllSelected = newState;
-            if (this.deleteMode) {
-                self.dataSource.forceUpdate();
-            }
-        }));
-
-        this.mSelectManager.registerCallback('updateGroupCount', this.freezeAdapter(() => {
-            self.logger.info('updateGroupCount');
-            self.updateGroupSelectMode();
-        }));
-
-        this.mSelectManager.registerCallback('updateCount', this.freezeAdapter((newState: number) => {
-            self.logger.info(`mSelectManager updateCount ${newState}`);
-            self.totalSelectedCount = newState;
-            self.moreMenuList = Boolean(newState) ? [Action.MOVE, Action.COPY, Action.INFO]
-                                                  : [Action.MOVE_INVALID, Action.COPY_INVALID, Action.INFO_INVALID];
-        }));
         this.isInCurrentTab = true;
         this.initGridRowCount();
-        this.updateGroupSelectMode();
-        this.updateYearMap();
-        this.onActive();
-        TraceControllerUtils.finishTrace('TimelinePageAboutToAppear');
+        finishTrace('TimelinePageAboutToAppear');
+    }
+
+    private onSelect() {
+        logInfo(TAG, "onSelect")
+        this.totalSelectedCount = this.timelineDataSource.getSelectedCount()
+        this.isAllSelected = this.timelineDataSource.isSelect()
+        if (this.totalSelectedCount > 0) {
+            this.moreMenuList = [Action.MOVE, Action.COPY, Action.INFO];
+        } else {
+            this.moreMenuList = [Action.MOVE_INVALID, Action.COPY_INVALID, Action.INFO_INVALID];
+        }
+    }
+
+    private jumpToPhotoBrowser(name: string, item: MediaDataItem) {
+        let children: MediaDataItem[] = this.timelineDataSource.getItems()
+        let targetIndex = children.indexOf(item);
+        if (targetIndex == Constants.NOT_FOUND) {
+            logWarn(TAG, 'targetIndex is not found');
+            return;
+        }
+        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
+        router.push({
+            uri: 'feature/browser/view/PhotoBrowser',
+            params: {
+                position: targetIndex,
+                transition: name
+            }
+        });
+    }
+
+    private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem) {
+        let children: MediaDataItem[] = this.timelineDataSource.getItems()
+        let targetIndex = children.indexOf(item);
+        if (targetIndex == Constants.NOT_FOUND) {
+            logWarn(TAG, 'targetIndex is not found');
+            return;
+        }
+        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
+        router.push({
+            uri: 'feature/browser/view/SelectPhotoBrowser',
+            params: {
+                position: targetIndex,
+                transition: name,
+            }
+        });
     }
 
     aboutToDisappear(): void {
-        this.logger.info('TimelinePageAboutToDisappear');
-        this.dataSource.unregisterCallback('updateGroupData');
-        this.dataSource.unregisterCallback('updateCount');
-        this.appBroadCast.off(BroadCastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-        this.appBroadCast.off(BroadCastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-        this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
-        MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+        logInfo(TAG, 'TimelinePageAboutToDisappear');
+        this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
+        this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
+        this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
+        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+        mediaObserver.unregisterObserver(this.dataObserver);
         this.broadCast.off(null, null)
-        TimelineDataSourceManager.destroyInstance()
     }
 
     // Calculate the number of squares per row
     private initGridRowCount(): void {
         let sideBarWidth = this.isSidebar ? Constants.TAB_BAR_WIDTH : 0;
-        let contentWidth = ScreenManager.getInstance().getWinWidth() - sideBarWidth;
+        let contentWidth = screenManager.getWinWidth() - sideBarWidth;
         let margin = 0;
         let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
-        let newCount = Math.max(Constants.GRID_MIN_COUNT,
-        Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
-        + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
+        let newCount = Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin) + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
         if (newCount != this.gridRowCount) {
             if (this.gridRowCount == 0) {
                 this.gridRowCount = newCount;
             } else {
                 this.gridRowCount = newCount;
-                this.dataSource.forceUpdate();
+                this.timelineDataSource.notifyDataReload()
             }
         }
-        this.logger.info(`initGridRowCount contentWidth: ${contentWidth}`);
+        logInfo(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
     }
 
-    private moveOperation(albumInfo: AlbumInfo) {
+    private moveOperation(albumInfo: SimpleAlbumDataItem) {
         let menuContext = new MenuContext();
         this.onMoveStart = this.onMoveStart.bind(this);
         this.onMoveEnd = this.onMoveEnd.bind(this);
-        menuContext
-            .withSelectManager(this.mSelectManager)
+        menuContext.withDataSource(this.timelineDataSource)
             .withOperationStartCallback(this.onMoveStart)
             .withOperationEndCallback(this.onMoveEnd)
             .withBroadCast(this.broadCast)
             .withAlbumInfo(albumInfo);
-        let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(MoveMenuOperation, menuContext);
+        let menuOperation = new MoveMenuOperation(menuContext);
         menuOperation.doAction();
     }
 
-    private copyOperation(albumInfo: AlbumInfo) {
+    private copyOperation(albumInfo: SimpleAlbumDataItem) {
         let menuContext = new MenuContext();
         this.onCopyStart = this.onCopyStart.bind(this);
         this.onCopyEnd = this.onCopyEnd.bind(this);
-        menuContext
-            .withSelectManager(this.mSelectManager)
+        menuContext.withDataSource(this.timelineDataSource)
             .withOperationStartCallback(this.onCopyStart)
             .withOperationEndCallback(this.onCopyEnd)
             .withBroadCast(this.broadCast)
             .withAlbumInfo(albumInfo);
-        let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(CopyMenuOperation, menuContext);
+        let menuOperation = new CopyMenuOperation(menuContext);
         menuOperation.doAction();
     }
 
-    updateGroupSelectMode() {
-        if (this.groupSelectMode.length == 0) {
-            this.logger.info('first updateGroupSelectMode')
-            for (let i = 0; i < this.dataSource.groups.length; i++) {
-                this.groupSelectMode.push(this.mSelectManager.IsGroupSelected(i));
-            }
-        } else {
-            this.logger.info('no first updateGroupSelectMode')
-            for (let i = 0; i < this.dataSource.groups.length; i++) {
-                this.logger.info('update one');
-                this.groupSelectMode[i] = this.mSelectManager.IsGroupSelected(i);
-            }
-        }
-    }
-
-    updateYearMap() {
-        this.logger.info('updateYearMap');
-        if (this.dataSource.groups.length == 0) {
-            this.logger.error('year length is 0');
-            return;
-        }
-        this.yearData = [];
-        let count = this.dataSource.groups[0].count;
-        let startTime = this.dataSource.groups[0].startDate;
-        let endTime = this.dataSource.groups[0].startDate;
-        for (let i = 1; i < this.dataSource.groups.length; i++) {
-            let dateTaken = this.dataSource.groups[i].startDate;
-            if (DateUtil.isTheSameYear(startTime, dateTaken)) {
-                count = count + this.dataSource.groups[i].count;
-                endTime = dateTaken;
-            } else {
-                let groupData = new TimelineData(startTime, endTime, count);
-                this.yearData.push(groupData);
-                count = this.dataSource.groups[i].count;
-                startTime = dateTaken;
-                endTime = dateTaken;
-            }
-        }
-        let groupData = new TimelineData(startTime, endTime, count);
-        this.yearData.push(groupData);
-        this.logger.info('updateYearMap end');
-    }
-
     onIndexChange() {
-        this.logger.info(`onIndexChange ${this.TimelinePageIndex}`);
+        logInfo(TAG, `onIndexChange ${this.TimelinePageIndex}`);
         if (this.TimelinePageIndex != Constants.INVALID) {
-            this.scroller.scrollToIndex(this.dataSource.getPositionByIndex(this.TimelinePageIndex));
+            let rollToIndex = this.timelineDataSource.getIndexByChildIndex(this.TimelinePageIndex)
+            logInfo(TAG, `onIndexChange ${this.TimelinePageIndex} roll to ${rollToIndex}`)
+            this.scroller.scrollToIndex(rollToIndex);
         }
     }
 
@@ -354,13 +232,11 @@ export struct TimelinePage {
         }
     }
 
-    private onUpdateFavorState(item: MediaItem): void {
-        this.logger.debug('onUpdateFavorState favor');
-        let index = this.dataSource.getIndexByMediaItem(item);
+    private onUpdateFavorState(item: MediaDataItem): void {
+        logDebug(TAG, 'onUpdateFavorState favor');
+        let index = this.timelineDataSource.getIndexByItem(item);
         if (index != -1) {
-            let flushIndex = this.dataSource.getPositionByIndex(index);
-            this.logger.debug(`onUpdateFavorState favor flushIndex ${flushIndex}`);
-            this.dataSource.onDataChanged(flushIndex);
+            this.timelineDataSource.notifyDataChange(index);
         }
     }
 
@@ -381,7 +257,7 @@ export struct TimelinePage {
     }
 
     onMenuClicked(action: Action) {
-        this.logger.info(`onMenuClicked, actionID: ${action.actionID}`);
+        logInfo(TAG, `onMenuClicked, actionID: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
         switch (action) {
@@ -389,29 +265,27 @@ export struct TimelinePage {
                 this.onModeChange();
                 break;
             case Action.SELECT_ALL:
-                this.mSelectManager.selectAll(true);
-                break;
             case Action.DESELECT_ALL:
-                this.mSelectManager.unselectAll();
+                this.isAllSelected = !this.timelineDataSource.isSelect()
+                this.timelineDataSource.setSelect(this.isAllSelected)
+                this.onSelect()
                 break;
             case Action.DELETE:
                 menuContext = new MenuContext();
                 this.onDeleteStart = this.onDeleteStart.bind(this);
                 this.onDeleteEnd = this.onDeleteEnd.bind(this);
                 menuContext
-                    .withSelectManager(this.mSelectManager)
+                    .withDataSource(this.timelineDataSource)
                     .withOperationStartCallback(this.onDeleteStart)
                     .withOperationEndCallback(this.onDeleteEnd)
                     .withBroadCast(this.broadCast);
-                menuOperation = MenuOperationFactory.getInstance()
-                    .createMenuOperation(BatchDeleteMenuOperation, menuContext);
+                menuOperation = new BatchDeleteMenuOperation(menuContext);
                 menuOperation.doAction();
                 break;
             case Action.SHARE:
                 menuContext = new MenuContext();
-                menuContext.withSelectManager(this.mSelectManager);
-                menuOperation = MenuOperationFactory.getInstance()
-                    .createMenuOperation(ShareMenuOperation, menuContext);
+                menuContext.withDataSource(this.timelineDataSource);
+                menuOperation = new ShareMenuOperation(menuContext);
                 menuOperation.doAction();
                 break;
             case Action.INFO:
@@ -439,133 +313,104 @@ export struct TimelinePage {
     }
 
     onMediaLibDataChange(changeType) {
-        this.logger.info(`onMediaLibDataChange type: ${changeType}`);
-        this.dataSource.onChange(changeType);
+        logInfo(TAG, `onMediaLibDataChange type: ${changeType}`);
+        this.isMediaLibDataChanged = true
+        this.loadItem()
+    }
+
+    private loadItem() {
+        if (this.isActive && this.isMediaLibDataChanged) {
+            this.isMediaLibDataChanged = false
+            startTrace("reloadTimelineItemData")
+            this.timelineDataSource.reloadTimelineItemData().then((isEmpty) => {
+                finishTrace("reloadTimelineItemData")
+                logInfo(TAG, `onMediaLibDataChange load finish`)
+                this.initLoadFinish = true
+                this.isEmpty = isEmpty
+                this.timelineDataSource.notifyDataReload()
+            })
+        } else if (this.isActive) {
+            this.timelineDataSource.dataRemove()
+        }
     }
 
     async openDetailsDialog(): Promise<void> {
-        if (this.totalSelectedCount == 0) {
-            this.logger.error('no select error');
-            return;
-        } else if (this.totalSelectedCount == 1) {
-            this.logger.info('totalSelectedCount is 1');
-            await this.mSelectManager.getSelectedItems((selectItems: MediaItem[]) => {
-                this.logger.info(`openDetailsDialog selectItems.length: ${selectItems.length}`);
-                if (selectItems.length != 1) {
-                    this.logger.error('get selectItems is error');
-                    return;
-                }
-                this.broadCast.emit(BroadCastConstants.SHOW_DETAIL_DIALOG, [selectItems[0], false]);
-            });
+        let items: MediaDataItem[] = this.timelineDataSource.getSelectedItems()
+        if (items.length == 0) {
+            logWarn(TAG, 'no select error');
+        } else if (items.length == 1) {
+            logInfo(TAG, 'totalSelectedCount is 1');
+            this.broadCast.emit(BroadcastConstants.SHOW_DETAIL_DIALOG, [items[0], false]);
         } else {
-            await this.mSelectManager.getSelectedItems((selectItems: MediaItem[]) => {
-                this.logger.info(`openDetailsDialog selectItems.length: ${selectItems.length}`);
-                if (selectItems.length <= 1) {
-                    this.logger.error('get selectItems is error');
-                    return;
-                }
-                let size = 0;
-                selectItems.forEach((item) => {
-                    this.logger.info(`openDetailsDialog item.size: ${item.size}`);
-                    size = size + item.size;
-                })
-
-                this.logger.info(`openDetailsDialog size: ${size}`);
-                this.broadCast.emit(BroadCastConstants.SHOW_MULTI_SELECT_DIALOG, [this.totalSelectedCount, size]);
-            });
-            return;
+            let size = 0;
+            items.forEach((item) => {
+                logDebug(TAG, `openDetailsDialog item.size: ${item.size}`);
+                size = size + item.size;
+            })
+            logInfo(TAG, `openDetailsDialog size: ${size}`);
+            this.broadCast.emit(BroadcastConstants.SHOW_MULTI_SELECT_DIALOG, [items.length, size]);
         }
     }
 
     onDeleteStart(): void {
-        this.logger.info(`onDeleteStart`);
-        this.deleteMode = true;
-        this.isDataFreeze = true;
-        MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-        this.dataSource.freeze();
+        logInfo(TAG, `onDeleteStart`);
+        mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onDeleteEnd(err): void {
-        this.logger.info(`onDeleteEnd`);
-        this.isDataFreeze = false;
-        let deleteIndexes = this.mSelectManager.getSelectedIndexes();
-        if (deleteIndexes.length >= Constants.DEFAULT_SLIDING_WIN_SIZE) {
-            this.deleteReady = false;
-        }
-        this.dataSource.unfreeze();
-        if (!err && this.deleteReady) {
-            this.dataSource.deleteData(deleteIndexes);
-        }
-        TraceControllerUtils.startTrace('onModeChange');
+        logInfo(TAG, `onDeleteEnd`);
+        startTrace('onModeChange');
         this.onModeChange();
-        TraceControllerUtils.finishTrace('onModeChange');
-        MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
-        this.deleteReady = true;
+        finishTrace('onModeChange');
+        mediaObserver.registerObserver(this.dataObserver);
+        animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.timelineDataSource.dataRemove())
     }
 
     onCopyStart(): void {
-        this.logger.info(`onCopyStart`);
-        this.isDataFreeze = true;
-        MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-        this.dataSource.freeze();
+        logInfo(TAG, `onCopyStart`);
+        mediaObserver.unregisterObserver(this.dataObserver);
 
     }
 
     onCopyEnd(err, count, total): void {
-        this.logger.info(`onCopyEnd count: ${count}, total: ${total}`);
-        this.isDataFreeze = false;
-        TraceControllerUtils.startTrace('onModeChange');
+        logInfo(TAG, `onCopyEnd count: ${count}, total: ${total}`);
+        startTrace('onModeChange');
         this.onModeChange();
-        TraceControllerUtils.finishTrace('onModeChange');
-        MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
-        this.dataSource.unfreeze();
+        finishTrace('onModeChange');
+        mediaObserver.registerObserver(this.dataObserver);
         if (err) {
-            UiUtil.showToast($r('app.string.copy_failed_single'));
+            getResourceString($r('app.string.copy_failed_single')).then((message: string) => {
+                showToast(message)
+            })
+        } else {
+            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.timelineDataSource.dataReload())
         }
     }
 
     onMoveStart(): void {
-        this.logger.info(`onMoveStart`);
-        this.isDataFreeze = true;
-        MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-        this.dataSource.freeze();
+        logInfo(TAG, `onMoveStart`);
+        mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onMoveEnd(err, count, total): void {
-        this.logger.info(`onMoveEnd count: ${count}, total: ${total}`);
-        this.isDataFreeze = false;
-        TraceControllerUtils.startTrace('onModeChange');
+        logInfo(TAG, `onMoveEnd count: ${count}, total: ${total}`);
+        startTrace('onModeChange');
         this.onModeChange();
-        TraceControllerUtils.finishTrace('onModeChange');
-        MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.unfreeze();
-        this.dataSource.switchRefreshOn();
-        this.dataSource.onChange(Constants.MEDIA_TYPE_IMAGE);
+        finishTrace('onModeChange');
+        mediaObserver.registerObserver(this.dataObserver);
         if (err) {
-            UiUtil.showToast($r('app.string.move_failed_single'));
-        }
-    }
-
-    // If the interface is frozen, the adapter function will be executed only when the page is not frozen
-    freezeAdapter(fn): Function {
-        let self = this;
-        return function () {
-            if (self.isDataFreeze) {
-                return;
-            }
-            let context = this;
-            let args = arguments;
-            fn.apply(context, args);
+            getResourceString($r('app.string.move_failed_single')).then((message: string) => {
+                showToast(message)
+            })
         }
     }
 
     onModeChange() {
-        this.logger.debug('onModeChange');
+        logDebug(TAG, 'onModeChange');
         if (this.isSelectedMode) {
             this.isSelectedMode = false;
-            this.mSelectManager.onModeChange(false);
+            this.timelineDataSource.setSelect(false)
+            this.onSelect()
             return true;
         }
         return false;
@@ -573,11 +418,11 @@ export struct TimelinePage {
 
     // The callbacks after index page shows
     onIndexPageShow() {
-        this.logger.info(`onIndexPageShow`)
+        logInfo(TAG, `onIndexPageShow`)
         if (this.isShow && this.isInCurrentTab) {
             let params = router.getParams();
             if (this.routerStart && params != null && params.pageType != null) {
-                this.logger.info(`MediaOperation back ${JSON.stringify(params)}`)
+                logInfo(TAG, `MediaOperation back ${JSON.stringify(params)}`)
                 switch (params.pageType) {
                     case MediaOperationType.Move:
                         this.moveOperation(JSON.parse(params.albumInfo.toString()));
@@ -600,82 +445,72 @@ export struct TimelinePage {
     // The callback when current page is in the foreground
     onActive() {
         if (!this.isActive) {
-            this.logger.info('onActive');
+            logInfo(TAG, 'onActive');
             this.isActive = true;
-
-            this.dataSource.onActive();
-            if (this.isSelectedMode) {
-                this.totalSelectedCount = this.mSelectManager.getSelectedCount();
-                this.dataSource.forceUpdate();
-            }
         }
+        this.loadItem()
     }
 
     // The callback when current page is in the background
     onInActive() {
         if (this.isActive) {
-            this.logger.info('onInActive');
+            logInfo(TAG, 'onInActive');
             this.isActive = false;
-            this.dataSource.onInActive();
         }
     }
 
     build() {
         Stack() {
-            Flex({
-                direction: FlexDirection.Column,
-                justifyContent: FlexAlign.Start,
-                alignItems: ItemAlign.Start
-            }) {
-                if (this.isEmpty || !this.initLoadFinish) {
+            Column() {
+                if (this.isEmpty) {
                     NoPhotoIndexComponent({ index: Constants.TIMELINE_PAGE_INDEX })
-                } else {
+                }
+                if (this.initLoadFinish && !this.isEmpty) {
                     ActionBar({
                         actionBarProp: this.barModel.createActionBar(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected),
-                        onMenuClicked: this.onMenuClicked
+                        onMenuClicked: this.onMenuClicked.bind(this)
                     })
 
                     Stack() {
                         Grid(this.scroller) {
-                            LazyForEach(this.dataSource, (item) => {
+                            LazyForEach(this.timelineDataSource, (item: TimelineDataItem | MediaDataItem) => {
                                 if (item && item.viewType == ViewType.GROUP_TITLE) {
                                     GridItem() {
                                         TimelineTitleComponent({
-                                            groupData: item.viewData,
-                                            timelinePosition: item.viewIndex,
-                                            isSelected: this.groupSelectMode[item.viewIndex]
+                                            timelineDataItem: item
                                         })
                                     }.columnStart(0).columnEnd(this.gridRowCount - 1)
                                 } else if (item && item.viewType == ViewType.ITEM) {
                                     GridItem() {
                                         ImageGridItemComponent({
-                                            item: item.viewData.mediaItem,
-                                            imageGridPosition: item.viewIndex,
-                                            isSelected: this.isSelectedMode ? this.mSelectManager.isItemSelected(item.viewData.mediaItem.uri, item.viewIndex) : false,
+                                            mediaItem: item,
                                             pageName: Constants.PHOTO_TRANSITION_TIMELINE
                                         })
                                     }
-                                    .columnStart(item.indexInGroup % this.gridRowCount)
-                                    .columnEnd(item.indexInGroup % this.gridRowCount)
+                                    .columnStart(item.index % this.gridRowCount)
+                                    .columnEnd(item.index % this.gridRowCount)
                                 }
-                            }, item => item == null ? JSON.stringify(item) : (item.viewType == ViewType.GROUP_TITLE ? item.viewData : item.mediaItem.uri))
+                            }, item => item == null ? JSON.stringify(item) : item.getHashCode())
                         }
                         .columnsTemplate('1fr '.repeat(this.gridRowCount))
                         .columnsGap(Constants.GRID_GUTTER)
                         .rowsGap(Constants.GRID_GUTTER)
                         .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
-                        .onScrollIndex((first) => {
-                            this.logger.debug(`onScrollIndex index ${first}`)
-                            let scrollMediaItem = this.dataSource.getMediaItemByPosition(first);
-                            if (scrollMediaItem) {
-                                this.dateText = DateUtil.getLocalizedYearAndMonth(scrollMediaItem.dateTaken);
+                        .onScrollIndex((index: number) => {
+                            logDebug(TAG, `onScrollIndex index ${index}`)
+                            let item: TimelineDataItem | MediaDataItem = this.timelineDataSource.getData(index);
+                            if (item) {
+                                this.dateText = DateUtil.getLocalizedYearAndMonth(item.dateAdded);
                             } else {
-                                this.logger.error('index out of active window');
+                                logWarn(TAG, 'index out of active window');
                             }
                         })
 
                         Column() {
-                            TimelineScrollBar({ scroller: this.scroller })
+                            TimelineScrollBar({
+                                scroller: this.scroller,
+                                dataSource: this.timelineDataSource
+                            })
                         }
                         .position({ x: '100%', y: 0 })
                         .markAnchor({
@@ -689,12 +524,15 @@ export struct TimelinePage {
                     })
                 }
             }
+            .justifyContent(FlexAlign.Start)
+            .alignItems(HorizontalAlign.Start)
 
-            ToolBar({
-                isShowBar: this.isSelectedMode && true,
-                toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected),
-                onMenuClicked: this.onMenuClicked
-            })
+            if (this.isSelectedMode) {
+                ToolBar({
+                    toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected),
+                    onMenuClicked: this.onMenuClicked.bind(this)
+                })
+            }
             CustomDialogView()
         }
     }

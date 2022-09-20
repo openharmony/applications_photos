@@ -27,7 +27,6 @@ import { ActionBarButton } from './ActionBarButton'
 // ActionBar，It consists of action on the left, title in the middle and menu panel on the right
 @Component
 export struct ActionBar {
-    @State isShowBar: boolean = true;
     @Provide actionBarProp: ActionBarProp = new ActionBarProp();
     onMenuClicked: Function;
     logger: Logger = new Logger('ActionBar');
@@ -35,14 +34,11 @@ export struct ActionBar {
     @State hasTabBar: boolean = this.actionBarProp.getHasTabBar();
 
     private onBuildDone(): void {
-        this.logger.info(`onBuildDone,actionBarProp:${this.actionBarProp.getHasTabBar()}, isShowBar:${this.isShowBar}`);
+        this.logger.info(`onBuildDone,actionBarProp:${this.actionBarProp.getHasTabBar()}`);
     }
 
     build() {
-        Flex({
-            direction: FlexDirection.Row,
-            alignItems: ItemAlign.Center
-        }) {
+        Row() {
             if (!this.actionBarProp.getLeftAction().equals(Action.NONE)) {
                 ActionBarButton({
                     res: this.actionBarProp.getLeftAction().iconRes,
@@ -70,6 +66,7 @@ export struct ActionBar {
             DetailMenuPanel({ onMenuClicked: this.onMenuClicked })
         }
         .height(Constants.ActionBarHeight)
+        .alignItems(VerticalAlign.Center)
         .zIndex(3)
         .width('100%')
         .backgroundColor(this.actionBarProp.getBackgroundColor())
@@ -79,6 +76,5 @@ export struct ActionBar {
             $r('app.float.default_padding_start_with_tab_bar') :
             $r('app.float.default_actionbar_padding_start_without_tab_bar'))
         })
-        .visibility(this.isShowBar ? Visibility.Visible : Visibility.Hidden)
     }
 }

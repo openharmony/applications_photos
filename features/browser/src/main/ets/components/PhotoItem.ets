@@ -1,0 +1,387 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import Matrix4 from '@ohos.matrix4'
+import router from '@system.router'
+import MediaLib from '@ohos.multimedia.mediaLibrary';
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem'
+import { EventPipeline } from '../utils/EventPipeline'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import { logDebug, logInfo, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils'
+import { Constants } from '../constants/Constants'
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { RouterConstants } from '@ohos/base/src/main/ets/constants/RouterConstants';
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
+import { LoadingPanel } from './LoadingPanel';
+import { VideoIcon } from './VideoIcon'
+import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants'
+import { getThumbnail } from '../model/ThumbnailModel'
+
+const TAG = "PhotoItem"
+
+@Component
+export struct PhotoItem {
+    item: MediaDataItem;
+    pageName: string
+    @State matrix: Matrix4.Matrix4Transit = Matrix4.identity().copy();
+    @State photoItemDirection: PanDirection = PanDirection.Vertical;
+    @Consume broadCast: Broadcast;
+    @State objectFit: ImageFit = ImageFit.Contain;
+    @State thumbnail: string = '';
+    @State ratio: number = 1.0;
+    @State showError: boolean = false;
+    @Consume isPullingDown: boolean;
+    @Consume pageFrom: number;
+    @Consume('transitionIndex') @Watch('onTransitionChange') updateTransition: number;
+    private eventPipeline: EventPipeline;
+    private animationOption: any = null;
+    private animationEndMatrix: any = null;
+    @Provide isLoading: boolean = true;
+    private imgScale: number = 1;
+    private firstLoad: boolean = true;
+    private preItem = { rotate: 0, height: 0, width: 0 };
+
+    onTransitionChange() {
+        logInfo(TAG, `onTransitionChange, ${this.updateTransition} ${this.item.index}`);
+        this.updateThumbnail()
+        if (this.updateTransition == this.item.index) {
+            this.broadCast.emit(Constants.PHOTO_SHOW_STATE, [!this.showError]);
+        } else {
+            this.isPullingDown = false;
+        }
+        // reset matrix
+        if (this.imgScale != 1) {
+            this.matrix = Matrix4.identity().scale({
+                x: this.imgScale,
+                y: this.imgScale
+            }).copy();
+            this.eventPipeline && this.eventPipeline.setDefaultScale(this.imgScale);
+        } else {
+            this.matrix = Matrix4.identity().copy();
+            this.eventPipeline && this.eventPipeline.reset();
+        }
+        logInfo(TAG, `onTransitionChange end, ${this.updateTransition} ${this.item.index}`);
+    }
+
+    aboutToAppear(): void {
+        logInfo(TAG, `aboutToAppear`);
+        this.eventPipeline = new EventPipeline(this.broadCast, this.item);
+        this.matrix = Matrix4.identity().copy();
+        this.firstLoad = true;
+        this.isLoading = true;
+        this.item.load(true).then(() => {
+            this.isLoading = false
+            this.updateThumbnail()
+            logInfo(TAG, `aboutToAppear loadFinish thumbnail ${this.thumbnail}`);
+        })
+        // register event handling
+        this.broadCast.on(Constants.TOUCH_EVENT + this.item.uri, (matrix: any) => {
+            this.matrix = matrix;
+        });
+
+        this.broadCast.on(Constants.DIRECTION_CHANGE + this.item.uri, (direction: PanDirection) => {
+            logInfo(TAG, `direction: ${direction}`);
+            this.photoItemDirection = direction;
+        });
+
+        this.broadCast.on(Constants.ANIMATION_EVENT + this.item.uri, (animationOption: any, animationEndMatrix: any) => {
+            logInfo(TAG, `animationOption: ${JSON.stringify(animationOption)}`);
+            this.animationOption = animationOption;
+            this.animationEndMatrix = animationEndMatrix;
+        });
+        this.onTransitionChange();
+        this.onViewDataChanged();
+        logInfo(TAG, `photoItem aboutToAppear ${this.item.uri} end`);
+    }
+
+    private updateThumbnail() {
+        getThumbnail(this.item, this.updateTransition == this.item.index).then((thumbnail: string) => {
+            this.thumbnail = thumbnail
+        })
+    }
+
+    aboutToDisappear(): void {
+        logInfo(TAG, `aboutToDisappear ${this.item.uri}/${this.thumbnail}`);
+        // clean up event registration
+        this.broadCast.off(Constants.TOUCH_EVENT + this.item.uri, null);
+        this.broadCast.off(Constants.DIRECTION_CHANGE + this.item.uri, null);
+        this.broadCast.off(Constants.ANIMATION_EVENT + this.item.uri, null);
+        this.isPullingDown = false;
+        logInfo(TAG, `aboutToDisappear ${this.item.uri}/${this.thumbnail} end`);
+    }
+
+    onViewDataChanged(): void {
+        logInfo(TAG, `onViewDataChanged start`);
+        if ((this.preItem.rotate == this.item.orientation && this.preItem.height == this.item.imgHeight &&
+        this.preItem.width == this.item.imgWidth) && !this.firstLoad) {
+            this.preItem.rotate = this.item.orientation;
+            this.preItem.width = this.item.imgWidth;
+            this.preItem.height = this.item.imgHeight;
+            this.eventPipeline && this.eventPipeline.onDataChanged(this.item)
+            return;
+        }
+        if (this.item.orientation == MediaConstants.ROTATE_ONCE || this.item.orientation == MediaConstants.ROTATE_THIRD) {
+            let componentWidth = vp2px(screenManager.getWinWidth());
+            let componentHeight = vp2px(screenManager.getWinHeight());
+            let widthScale = componentWidth / (this.item.imgWidth == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgWidth);
+            let heightScale = componentHeight / (this.item.imgHeight == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgHeight);
+            let screenScale = widthScale > heightScale ? heightScale : widthScale;
+            let reWidthScale = componentWidth / (this.item.imgHeight == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgHeight);
+            let reHeightScale = componentHeight / (this.item.imgWidth == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgWidth);
+            let reScale = reWidthScale > reHeightScale ? reHeightScale : reWidthScale;
+            let scale = screenScale / reScale;
+            this.imgScale = scale;
+            this.matrix = Matrix4.identity().scale({
+                x: scale,
+                y: scale
+            }).copy();
+            logDebug(TAG, `onViewDataChanged scale:${scale}, componentSize:${componentWidth}x${componentHeight}\
+                width: ${this.item.imgWidth}, height: ${this.item.imgHeight}`);
+            this.eventPipeline && this.eventPipeline.setDefaultScale(scale);
+        } else {
+            this.matrix = Matrix4.identity().copy();
+            this.objectFit = ImageFit.Contain;
+            this.eventPipeline && this.eventPipeline.setDefaultScale(1);
+        }
+        this.eventPipeline && this.eventPipeline.onDataChanged(this.item)
+        this.firstLoad = false;
+        this.preItem.rotate = this.item.orientation;
+        this.preItem.width = this.item.imgWidth;
+        this.preItem.height = this.item.imgHeight;
+        logDebug(TAG, `onViewDataChanged thumbnail:${JSON.stringify(this.thumbnail)}`);
+    }
+
+    build() {
+        Stack() {
+            Column() {
+                LoadingPanel()
+            }
+            .width('100%')
+            .height('100%')
+
+            Row() {
+                Image(this.thumbnail)
+                    .objectFit(this.objectFit)
+                    .rotate({ x: 0, y: 0, z: 1, angle: this.item.orientation })
+                    .transform(this.matrix)
+                    .autoResize(false)
+                    .onComplete(() => {
+                        startTrace(`PhotoItemComplete_${this.item.index}`);
+                        logInfo(TAG, `onComplete finish index: ${this.item.index}, uri: ${this.thumbnail}.`);
+                        this.showError = false;
+                        this.isLoading = false;
+                        if (this.updateTransition == this.item.index) {
+                            this.broadCast.emit(Constants.PHOTO_SHOW_STATE, [true]);
+                        }
+                        finishTrace(`PhotoItemComplete_${this.item.index}`);
+                    })
+                    .onError(() => {
+                        logError(TAG, `image show error ${this.thumbnail} ${this.item.width} ${this.item.height}`);
+                        if (this.thumbnail.length == 0 || this.item.width == 0 || this.item.height == 0) {
+                            this.updateThumbnail()
+                            return
+                        }
+                        this.showError = true;
+                        this.isLoading = true;
+                        if (this.updateTransition == this.item.index) {
+                            this.broadCast.emit(Constants.PHOTO_SHOW_STATE, [false]);
+                        }
+                    })
+            }
+            .width('100%')
+            .height('100%')
+            .justifyContent(FlexAlign.Center)
+            .alignItems(VerticalAlign.Center)
+            .onClick(() => {
+                this.broadCast.emit(Constants.TOGGLE_BAR, [null]);
+            })
+            .gesture(
+            GestureGroup(GestureMode.Parallel,
+            PinchGesture({
+                fingers: 2,
+                distance: 1
+            })
+                .onActionStart((event: GestureEvent) => {
+                    logDebug(TAG, 'PinchGesture onActionStart');
+                    startTrace("PinchGesture onActionStart")
+                    if (this.isPullingDown) {
+                        logDebug(TAG, 'Not allow to pinch when pullingDown');
+                        finishTrace("PinchGesture onActionStart")
+                        return;
+                    }
+                    logDebug(TAG, `PinchGesture onActionStart scale:\
+                            ${event.scale}, cx: ${event.pinchCenterX}, cy: ${event.pinchCenterY}`);
+                    if (this.item.mediaType == MediaLib.MediaType.IMAGE) {
+                        this.eventPipeline.onScaleStart(event.scale, event.pinchCenterX, event.pinchCenterY);
+                    }
+                    finishTrace("PinchGesture onActionStart")
+                })
+                .onActionUpdate((event) => {
+                    logDebug(TAG, `PinchGesture onActionUpdate scale: ${event.scale}`);
+                    startTrace("PinchGesture onActionUpdate")
+                    if (this.isPullingDown) {
+                        logDebug(TAG, 'Not allow to pinch when pullingDown');
+                        finishTrace("PinchGesture onActionUpdate")
+                        return;
+                    }
+                    if (this.item.mediaType == MediaLib.MediaType.IMAGE) {
+                        this.eventPipeline.onScale(event.scale);
+                    }
+                    finishTrace("PinchGesture onActionUpdate")
+                })
+                .onActionEnd(() => {
+                    logDebug(TAG, 'PinchGesture onActionEnd');
+                    startTrace("PinchGesture onActionEnd")
+                    if (this.isPullingDown) {
+                        logDebug(TAG, 'Not allow to pinch when pullingDown');
+                        finishTrace("PinchGesture onActionEnd")
+                        return;
+                    }
+                    if (this.item.mediaType == MediaLib.MediaType.IMAGE) {
+                        this.eventPipeline.onScaleEnd();
+                        if (this.animationOption != null) {
+                            animateTo({
+                                duration: this.animationOption.duration,
+                                curve: this.animationOption.curve,
+                                onFinish: () => {
+                                    this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
+                                    this.animationOption = null;
+                                    this.animationEndMatrix = null;
+                                }
+                            }, () => {
+                                this.matrix = this.animationEndMatrix;
+                            })
+                        }
+                    }
+                    finishTrace("PinchGesture onActionEnd")
+                }),
+            PanGesture({
+                direction: this.photoItemDirection
+            })
+                .onActionStart((event: GestureEvent) => {
+                    startTrace("PanGesture onActionStart")
+                    logDebug(TAG, `PanGesture start offsetX:\
+                                    ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)}`);
+                    this.eventPipeline.onMoveStart(vp2px(event.offsetX), vp2px(event.offsetY));
+                    finishTrace("PanGesture onActionStart")
+                })
+                .onActionUpdate((event: GestureEvent) => {
+                    startTrace("PanGesture onActionUpdate")
+                    logDebug(TAG, `PanGesture update offsetX:\
+                                    ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)}`);
+                    this.eventPipeline.onMove(vp2px(event.offsetX), vp2px(event.offsetY));
+                    finishTrace("PanGesture onActionUpdate")
+                })
+                .onActionEnd((event: GestureEvent) => {
+                    startTrace("PanGesture onActionEnd")
+                    logDebug(TAG, `PanGesture end offsetX:\
+                                    ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)}`);
+                    this.eventPipeline.onMoveEnd(vp2px(event.offsetX), vp2px(event.offsetY));
+                    if (this.animationOption != null) {
+                        animateTo({
+                            duration: this.animationOption.duration,
+                            curve: this.animationOption.curve,
+                            onFinish: () => {
+                                this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
+                                this.animationOption = null;
+                                this.animationEndMatrix = null;
+                            }
+                        }, () => {
+                            this.matrix = this.animationEndMatrix;
+                        })
+                    }
+                    finishTrace("PanGesture onActionEnd")
+                }),
+            TapGesture({
+                count: 2
+            })
+                .onAction((event: GestureEvent) => {
+                    if (this.isPullingDown) {
+                        logDebug(TAG, 'Not allow to double tap when pullingDown');
+                        return;
+                    }
+                    logDebug(TAG, `onDoubleTap event: ${JSON.stringify(event)}`);
+                    if (this.item.mediaType == MediaLib.MediaType.VIDEO) {
+                        return;
+                    }
+                    this.eventPipeline.onDoubleTap(event.fingerList[0].localX, event.fingerList[0].localY);
+                    if (this.animationOption != null) {
+                        logDebug(TAG, 'TapGesture animateTo start');
+                        animateTo({
+                            duration: this.animationOption.duration,
+                            curve: this.animationOption.curve,
+                            onFinish: () => {
+                                this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
+                                this.animationOption = null;
+                                this.animationEndMatrix = null;
+                            }
+                        }, () => {
+                            this.matrix = this.animationEndMatrix;
+                        })
+                    }
+                })
+            )
+            )
+            .clip(true)
+            .onTouch((event) => {
+                this.eventPipeline.onTouch(event);
+            })
+            // TODO Remind users when pictures of other devices cannot be show
+            if ((this.showError || this.item.mediaType == MediaLib.MediaType.VIDEO) &&
+            this.pageFrom == RouterConstants.ENTRY_FROM.DISTRIBUTED) {
+                Row() {
+                    Text((this.item.mediaType == MediaLib.MediaType.VIDEO) ?
+                    $r('app.string.no_distributed_photo_show_video') :
+                    $r('app.string.no_distributed_photo_show_image'))
+                        .fontSize($r('sys.float.ohos_id_text_size_body2'))
+                        .fontFamily($r('app.string.id_text_font_family_regular'))
+                        .fontColor($r('sys.color.ohos_id_color_text_tertiary'))
+                }
+                .margin({
+                    top: (this.item.mediaType == MediaLib.MediaType.VIDEO) ? $r('app.float.input_text_notify_margin') : 0
+                })
+            }
+            if (this.isVideoPlayBtnShow()) {
+                Row() {
+                    VideoIcon()
+                }
+                .width($r('app.float.icon_video_size'))
+                .height($r('app.float.icon_video_size'))
+                .onClick(() => {
+                    if (this.item != undefined) {
+                        router.push({
+                            uri: 'feature/browser/view/VideoBrowser',
+                            params: {
+                                uri: this.item.uri,
+                                dateAdded: this.item.dateAdded,
+                                previewUri: this.thumbnail
+                            }
+                        })
+                    }
+                })
+            }
+
+        }.width('100%')
+        .height('100%')
+        .sharedTransition(this.item.index == this.updateTransition ? this.pageName + this.item.getHashCode() : "", {
+            duration: Constants.SHARE_TRANSITION_DURATION
+        })
+    }
+
+    private isVideoPlayBtnShow(): boolean {
+        logDebug(TAG, `isVideoPlayBtnShow: ${this.item.mediaType}`);
+        return ((this.item) && (this.item.mediaType == MediaLib.MediaType.VIDEO));
+    }
+}

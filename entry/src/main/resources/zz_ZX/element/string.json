@@ -93,20 +93,12 @@
       "value": "[CJ_862575]_Maximum of %d items can be selected."
     },
     {
-      "name": "yes",
-      "value": "[CJ_874431]_OK"
-    },
-    {
       "name": "video_navigation_dialog_tips",
       "value": "[CJ_874437]_Navigate to where this video was shot?"
     },
     {
       "name": "up_to_limit_tips",
       "value": "[CJ_874436]_Maximum number of items selected."
-    },
-    {
-      "name": "no",
-      "value": "[CJ_874432]_Cancel"
     },
     {
       "name": "image_navigation_dialog_tips",
