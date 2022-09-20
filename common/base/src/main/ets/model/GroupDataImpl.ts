@@ -89,7 +89,7 @@ export class GroupDataImpl {
             return []
         }
         let groupCount: number = this.getCount()
-        let mediaFileAssets = await this.getMediaItemFileAssets(0, groupCount)
+        let mediaFileAssets = await this.getMediaItemFileAssets(fetchOption, 0, groupCount)
         if (this.albumId == MediaConstants.ALBUM_ID_FAVOR) {
             let count: number = (await mediaModel.getAllFavorMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
@@ -119,20 +119,18 @@ export class GroupDataImpl {
             }
         }
         // do not use await to avoid load cost too much time
-        this.loadReset(groupDataItem, groupCount)
+        this.loadReset(fetchOption, groupDataItem, groupCount)
 
         logDebug(TAG, `reload finish`)
         return groupDataItem
     }
 
-    private async getMediaItemFileAssets(start: number, count: number): Promise<MediaLib.FileAsset[]> {
-        let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?'
-        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()]
-        let fetchOption: MediaLib.MediaFetchOptions = {
-            selections: selections,
-            selectionArgs: selectionArgs,
+    private async getMediaItemFileAssets(baseFetchOption: MediaLib.MediaFetchOptions, start: number, count: number): Promise<MediaLib.FileAsset[]> {
+        let fetchOption = {
+            selections: baseFetchOption.selections,
+            selectionArgs: baseFetchOption.selectionArgs,
             order: `date_added DESC LIMIT ${start},${count}`
-        };
+        }
         if (this.albumId == MediaConstants.ALBUM_ID_FAVOR) {
             return await mediaModel.getAllFavorMediaItems(fetchOption)
         } else if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE) {
@@ -151,11 +149,11 @@ export class GroupDataImpl {
         return columns * rows
     }
 
-    private async loadReset(items: MediaDataItem[], count) {
+    private async loadReset(fetchOption: MediaLib.MediaFetchOptions, items: MediaDataItem[], count) {
         let itemLen = items.length
         let countLen = Math.ceil(itemLen / count)
         for (let i = 1;i < countLen; i++) {
-            let mediaFileAsset: Array<MediaLib.FileAsset> = await this.getMediaItemFileAssets(i * count, count)
+            let mediaFileAsset: Array<MediaLib.FileAsset> = await this.getMediaItemFileAssets(fetchOption, i * count, count)
             for (let j = 0;j < count; j++) {
                 if (i * count + j >= itemLen) {
                     return
