@@ -103,12 +103,11 @@ export struct ImageGridItemComponent {
 
     private selectStateChange() {
         logInfo(TAG, `change selected ${this.isSelectedMode}`);
-        if (this.isSelectedMode) {
-            this.onSelected()
-        } else {
+        if (!this.isSelectedMode) {
             this.isSelectedMode = true
             this.pressAnimScale = 1;
         }
+        this.onSelected()
     }
 
     build() {
