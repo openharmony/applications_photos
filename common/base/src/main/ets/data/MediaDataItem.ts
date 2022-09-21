@@ -68,11 +68,20 @@ export class MediaDataItem {
     }
 
     async loadFileAsset(): Promise<MediaLib.FileAsset> {
-        let fetchOption: MediaLib.MediaFetchOptions = {
-            selections: this.selections,
-            selectionArgs: this.selectionArgs,
-            order: `date_added DESC LIMIT ${this.index},1`
-        };
+        let fetchOption: MediaLib.MediaFetchOptions
+        if (this.status == MediaConstants.UNDEFINED) {
+            fetchOption = {
+                selections: this.selections,
+                selectionArgs: this.selectionArgs,
+                order: `date_added DESC LIMIT ${this.index},1`
+            };
+        } else {
+            fetchOption = {
+                selections: `${MediaLib.FileKey.ID} = ?`,
+                selectionArgs: [this.id.toString()],
+                order: `date_added DESC`
+            }
+        }
         if (this.deviceId.length > 0) {
             fetchOption['networkId'] = this.deviceId
         }
@@ -156,7 +165,7 @@ export class MediaDataItem {
             this.status = MediaConstants.TRASHED
             return true
         } catch (err) {
-            logError(TAG, `onDelete error: ${JSON.stringify(err)}`)
+            logError(TAG, `onDelete ${this.index} error: ${JSON.stringify(err)}`)
             return false
         }
     }

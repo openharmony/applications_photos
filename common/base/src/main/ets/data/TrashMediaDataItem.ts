@@ -29,11 +29,20 @@ export class TrashMediaDataItem extends MediaDataItem {
     }
 
     async loadFileAsset(): Promise<MediaLib.FileAsset> {
-        let fetchOption: MediaLib.MediaFetchOptions = {
-            selections: this.selections,
-            selectionArgs: this.selectionArgs,
-            order: `date_added DESC LIMIT ${this.index},1`
-        };
+        let fetchOption: MediaLib.MediaFetchOptions
+        if (this.status == MediaConstants.UNDEFINED) {
+            fetchOption = {
+                selections: this.selections,
+                selectionArgs: this.selectionArgs,
+                order: `date_added DESC LIMIT ${this.index},1`
+            }
+        } else {
+            fetchOption = {
+                selections: `${MediaLib.FileKey.ID} = ?`,
+                selectionArgs: [this.id.toString()],
+                order: `date_added DESC`
+            }
+        }
         return (await mediaModel.getAllTrashMediaItem(fetchOption, false)).fileAsset
     }
 
