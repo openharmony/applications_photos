@@ -126,10 +126,13 @@ export class GroupDataImpl {
     }
 
     private async getMediaItemFileAssets(baseFetchOption: MediaLib.MediaFetchOptions, start: number, count: number): Promise<MediaLib.FileAsset[]> {
-        let fetchOption = {
+        let fetchOption: MediaLib.MediaFetchOptions = {
             selections: baseFetchOption.selections,
             selectionArgs: baseFetchOption.selectionArgs,
             order: `date_added DESC LIMIT ${start},${count}`
+        }
+        if (this.deviceId.length > 0) {
+            fetchOption['networkId'] = this.deviceId
         }
         if (this.albumId == MediaConstants.ALBUM_ID_FAVOR) {
             return await mediaModel.getAllFavorMediaItems(fetchOption)
