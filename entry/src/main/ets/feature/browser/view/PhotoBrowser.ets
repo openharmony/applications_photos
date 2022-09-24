@@ -326,16 +326,15 @@ struct PhotoBrowser {
         if (currentPhoto == undefined) {
             return;
         }
-        if (this.pageFrom == Constants.ENTRY_FROM.CAMERA || this.pageFrom == Constants.ENTRY_FROM.CARD) {
-            this.menuList = [Action.GOTO_PHOTOS, Action.INFO];
-        } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
-            this.menuList = [];
-        } else {
-            this.menuList = [Action.INFO]
-        }
-
         this.toolMenuList = [];
         this.getActionList(currentPhoto).then((list: Array<Action>) => {
+            if (this.pageFrom == Constants.ENTRY_FROM.CAMERA || this.pageFrom == Constants.ENTRY_FROM.CARD) {
+                this.menuList = [Action.GOTO_PHOTOS, Action.INFO];
+            } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
+                this.menuList = [];
+            } else {
+                this.menuList = [Action.INFO]
+            }
             if (this.isHorizontal) {
                 this.menuList = this.menuList.concat(list);
             } else {
