@@ -229,6 +229,9 @@ struct PhotoBrowser {
     private setFavourite(isSuccess: boolean) {
         logDebug(TAG, 'set favor !')
         if (isSuccess) {
+            // 收藏相册进入大图，点击取消收藏会导致Item成员变少，所以要dataRemove
+            this.browserDataSource.dataRemove()
+
             this.updateMenu();
             let currentPhoto = this.getCurrentPhoto();
             this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
