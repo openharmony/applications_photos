@@ -123,9 +123,15 @@ struct PhotoBrowser {
                 this.onBackPress();
                 return;
             case Action.INFO:
+                if (currentPhoto == undefined) {
+                    return;
+                }
                 this.broadCast.emit(BroadcastConstants.SHOW_DETAIL_DIALOG, [currentPhoto, this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED]);
                 return;
             case Action.SHARE:
+                if (currentPhoto == undefined) {
+                    return;
+                }
                 let want: Want = {
                     'action': 'com.huawei.intent.action.hwCHOOSER',
                     'parameters': {
@@ -178,9 +184,6 @@ struct PhotoBrowser {
                 menuOperation.doAction();
                 break;
             case Action.GOTO_PHOTOS:
-                if (currentPhoto == undefined) {
-                    return;
-                }
                 menuContext.withJumpSourceToMain(this.jumpSourceToMain);
                 menuOperation = new GotoPhotosMenuOperation(menuContext);
                 break;
@@ -234,6 +237,9 @@ struct PhotoBrowser {
 
             this.updateMenu();
             let currentPhoto = this.getCurrentPhoto();
+            if (currentPhoto == undefined) {
+                return;
+            }
             this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
         }
     }
@@ -245,6 +251,9 @@ struct PhotoBrowser {
     private setOrientation() {
         logDebug(TAG, `setOrientation`);
         let currentPhoto = this.getCurrentPhoto();
+        if (currentPhoto == undefined) {
+            return;
+        }
         this.browserDataSource.notifyDataChange(this.currentIndex);
         this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
     }
@@ -371,6 +380,9 @@ struct PhotoBrowser {
     private updateMoreMenu() {
         let currentPhoto = this.getCurrentPhoto();
         this.moreMenuList = [Action.MOVE, Action.COPY, Action.RENAME];
+        if (currentPhoto == undefined) {
+            return;
+        }
         if (currentPhoto.mediaType == MediaLib.MediaType.IMAGE) {
             if (this.currentShow) {
                 this.moreMenuList.push(Action.ROTATE);
@@ -395,6 +407,9 @@ struct PhotoBrowser {
             return;
         }
         let currentPhoto = this.getCurrentPhoto()
+        if (currentPhoto == undefined) {
+            return;
+        }
         currentPhoto.path = (await currentPhoto.loadFileAsset()).relativePath
         this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
     }
@@ -595,6 +610,9 @@ struct PhotoBrowser {
         this.broadCast.on(PhotoConstants.RENAME, (result: string[]) => {
             logInfo(TAG, `rename refresh: ${result[0]}, ${result[1]}`);
             let currentPhoto = this.getCurrentPhoto();
+            if (currentPhoto == undefined) {
+                return;
+            }
             currentPhoto.title = result[0];
             currentPhoto.displayName = result[1];
             this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
