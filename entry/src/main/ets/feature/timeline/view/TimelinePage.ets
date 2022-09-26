@@ -362,8 +362,10 @@ export struct TimelinePage {
         startTrace('onModeChange');
         this.onModeChange();
         finishTrace('onModeChange');
-        mediaObserver.registerObserver(this.dataObserver);
-        animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.timelineDataSource.dataRemove())
+        animateTo({
+            duration: Constants.DELETE_ANIMATE_DURATION,
+            onFinish: () => mediaObserver.registerObserver(this.dataObserver)
+        }, () => this.timelineDataSource.dataRemove())
     }
 
     onCopyStart(): void {

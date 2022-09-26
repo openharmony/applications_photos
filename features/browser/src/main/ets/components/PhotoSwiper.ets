@@ -55,12 +55,14 @@ export struct PhotoSwiper {
     build() {
         Swiper(this.swiperController) {
             LazyForEach(this.dataSource, (item: MediaDataItem) => {
-                Column() {
-                    PhotoItem({
-                        item: item,
-                        pageName: this.photoSwiperTransition
-                    })
-                }.zIndex(item && item.index == this.currentIndex ? 2 : 1)
+                if (item) {
+                    Column() {
+                        PhotoItem({
+                            item: item,
+                            pageName: this.photoSwiperTransition
+                        })
+                    }.zIndex(item && item.index == this.currentIndex ? 2 : 1)
+                }
             }, (item: MediaDataItem) => item ? item.getHashCode() : JSON.stringify(item))
         }
         .gesture(PanGesture({

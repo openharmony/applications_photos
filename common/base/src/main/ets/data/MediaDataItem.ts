@@ -64,7 +64,8 @@ export class MediaDataItem {
     }
 
     getHashCode(): string {
-        return this.status == MediaConstants.UNDEFINED ? `${this.hashIndex}` : `${this.uri} ${this.orientation}`
+        //角度，收藏状态变更，都需要刷新界面，所以返回值包含这两项
+        return this.status == MediaConstants.UNDEFINED ? `${this.hashIndex}` : `${this.uri} ${this.orientation} ${this.favouriteStatus}`
     }
 
     async loadFileAsset(): Promise<MediaLib.FileAsset> {
