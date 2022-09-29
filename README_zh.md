@@ -180,9 +180,9 @@
 ### 签名
 #### 签名文件的获取
 1. 拷贝 OpenHarmony 标准版的 prebuilts\signcenter 目录到操作目录。
-2. 拷贝图库工程的 signature\photos.p7b 到该目录下。
+2. 标准版的签名文件下载路径：https://gitee.com/openharmony/signcenter_tool?_from=gitee_search。
+3. 拷贝图库工程的 signature\photos.p7b 到该目录下。
 
-备注：如果需要生成并使用自己的签名文件可参考https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/configuring-openharmony-app-signature.md
 
 #### 签名文件的配置
 打开项目工程，选择 File → Project Structure
@@ -197,6 +197,9 @@
 配置完成后，对应的build.gradle文件中会出现如下内容
 
 ![](./figures/signature_3.png)
+
+使用的SDK 3.2.2.5版本编译master仓代码，在/entry/package.json里手动触发npm install
+![](D:\workspace\readme\applications_photos\figures\npm.png)
 
 ### 打包
 DevEco Studio 支持 debug 与 release 两种打包类型。可以在 OhosBuild Variants 窗口中进行切换。
@@ -241,61 +244,33 @@ DevEco Studio 支持 debug 与 release 两种打包类型。可以在 OhosBuild 
 
 ![](./figures/cmd3.png)
 
-获取 root 权限与读写权限：
+首次安装需要卸载系统自带的图库
 
-```
-hdc target mount
-```
+```html
+hdc shell mount -o remount,rw /
 
-变更根目录读写权限
+hdc shell rm -rf /system/app/com.ohos.photos/Photos.hap
 
-```
-hdc shell "mount -o remount,rw /"
+hdc shell reboot
 ```
 
-将签名好的 hap 包放入设备的 `/system/app/包名` 目录下，并修改hap包的权限。删除和发送文件命令如下：
+安装签过名的hap包
 
+```html
+hdc install 包路径
 ```
-hdc file send 本地路径 /system/app/包名/hap包名称
-```
-例：将当前本地目录的 `Photos.hap` 文件放入到 `system/app/com.ohos.photos/Photos.hap` 文件中。
-```
-hdc file send Photos.hap /system/app/com.ohos.photos/Photos.hap
-```
-> 注意，如果设备不存在 `/system/app` 目录，则需要手动创建该目录并修改权限。
-> ```
-> hdc shell
-> cd system
-> mkdir app
-> chmod 777 app
-> ```
-> `/system/app` 目录放置系统应用，例如：Photos，SystemUI，Settings 等。
->
-> 但hap包需要在该目录下手动设置权限
-> ```
-> chmod 666 hap包名
-> ```
-> 此目录应用不用手动安装，系统自动拉起。
-### 应用运行
-图库属于系统应用，在将签名的 hap 包放入 `/system/app` 目录后，重启系统，应用会自动拉起。
-```
-hdc_std shell "reboot"
-```
-> 注意，如果设备之前安装过系统应用，则需要执行如下几条命令清除设备中存储的应用信息才能够在设备重启的时候将我们装入设备的新 hap 包正常拉起。
-> ```
-> hdc_std shell "rm /data/* -rf"
-> hdc_std shell "sync"
-> hdc_std shell "/system/bin/udevadm trigger"
-> ```
+
+长按图库图标添加到工作区
+
 ### 应用调试
 #### log打印
 - 在程序中添加 log
 ```JS
-private log: Logger = new Logger('MoudleXXX')
+const TAG = "MoudleXXX"
 
 entry() {
     let input = 'hello'
-	this.log.info(`entry: ${input}`)
+	 logInfo(TAG, `onPhotoChanged start ${input}`);
 }
 ```
 上述log打印为：
@@ -358,6 +333,7 @@ hilog | grep Album
 4. 提交代码到 fork 仓库。  
    > 修改后的代码，首先执行 `git add` 命令，然后执行 `git commit` 命令与 `git push` 命令，将代码 push 到我们自己的 fork 仓中。
    > 关于代码提交的这部分内容涉及 git 的使用，可以参照 [git官网](https://git-scm.com/) 的内容，在此不再赘述。
+   > 注意事项：需要使用commit -s,暴露提交者信息，否则门禁不通过
 
 ### 发起 Pull Request (PR)
 在将代码提交到 fork 仓之后，我们可以通过发起 Pull Request（PR）的方式来为 OpenHarmony 的相关项目贡献代码。
