@@ -375,7 +375,7 @@ export struct PhotoItem {
 
         }.width('100%')
         .height('100%')
-        .sharedTransition(this.item.index == this.updateTransition ? this.pageName + this.item.getHashCode() : "", {
+        .sharedTransition(this.item.index == this.updateTransition ? this.pageName + this.item.getHashCode() : Constants.DEFAULT_TRANSITION_ID, {
             duration: Constants.SHARE_TRANSITION_DURATION
         })
     }
