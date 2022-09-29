@@ -25,8 +25,7 @@ export default class FormAbility extends FormExtension {
 
     onCreate(want) {
         this.logger.info(`form onCreate. want ${JSON.stringify(want)}`);
-        mediaModel.onCreate(this.context)
-        globalThis.appContext = this.context
+        this.init()
         let param = want.parameters;
         let formId = param['ohos.extra.param.key.form_identity'];
         this.logger.info(`form onCreate formId: ${formId}`);
@@ -53,12 +52,16 @@ export default class FormAbility extends FormExtension {
 
     onUpdate(formId) {
         this.logger.info(`onUpdate, formId: ${formId} context ${JSON.stringify(this.context)}`);
+        // 经常起来后可能直接走onUpdate， 所以要初始化一下
+        this.init()
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.updateController(formId);
     }
 
     onVisibilityChange(newStatus) {
         this.logger.info(`onVisibilityChange, newStatus: ${JSON.stringify(newStatus)}`);
+        // 经常起来后可能直接走onVisibilityChange， 所以要初始化一下
+        this.init()
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         for (let key in newStatus) {
             this.logger.info(`onVisibilityChange, key:${key}  value ${newStatus[key]}`);
@@ -69,13 +72,22 @@ export default class FormAbility extends FormExtension {
 
     onEvent(formId, message) {
         this.logger.info(`onEvent, formId: ${formId}, message: ${message}`);
+        // 经常起来后可能直接走onEvent， 所以要初始化一下
+        this.init()
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.onEvent(formId, message);
     }
 
     onDestroy(formId) {
         this.logger.info(`onDestroy, formId: ${formId}`);
+        // 经常起来后可能直接走onDestroy， 所以要初始化一下
+        this.init()
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.destroyController(formId);
+    }
+
+    private init() {
+        mediaModel.onCreate(this.context)
+        globalThis.appContext = this.context
     }
 };
