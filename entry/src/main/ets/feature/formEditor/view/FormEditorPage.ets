@@ -47,6 +47,7 @@ struct FormEditorPage {
     fileAsset: MediaLib.FileAsset = null;
     displayName: string = '';
     @State time: number = 30;
+    @State intervalTime: Resource = 30;
     private saveDataFunc = this.saveData.bind(this);
     private onChangeFunc = this.onChange.bind(this);
     settingController: CustomDialogController = new CustomDialogController({
@@ -202,9 +203,10 @@ struct FormEditorPage {
         this.appBroadcast.on(BroadcastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
         this.appBroadcast.on(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
         dataStore.init().then(() => {
-            let intervalTimeKey = 'intervalTime_' + this.formId;
+            let intervalTimeKey = 'intervalTime';
             dataStore.getData(intervalTimeKey, this.time).then((d) => {
                 this.time = d;
+                this.setIntervalTime();
                 AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);
             })
             let isShowKey = 'isShow_' + this.formId;
@@ -230,6 +232,7 @@ struct FormEditorPage {
 
     onChange(value) {
         this.time = value;
+        this.setIntervalTime();
         AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);
         this.updateTime()
     }
@@ -237,15 +240,10 @@ struct FormEditorPage {
     async updateTime() {
         logDebug(TAG, `updateTime start! ${this.time}`)
         await dataStore.init();
-        let formIdKey = 'formId_' + this.formId;
-        let hasFormId = dataStore.hasData(formIdKey);
-        logDebug(TAG, `The value of hasFormId is ${hasFormId}`);
-        if (hasFormId) {
-            let intervalTimeKey = 'intervalTime_' + this.formId;
-            await dataStore.putData(intervalTimeKey, this.time);
-            await dataStore.flush();
-            this.updateRefreshTime();
-        }
+        let intervalTimeKey = 'intervalTime';
+        await dataStore.putData(intervalTimeKey, this.time);
+        await dataStore.flush();
+        this.updateRefreshTime();
         logDebug(TAG, 'updateTime end!');
     }
 
@@ -253,15 +251,15 @@ struct FormEditorPage {
         broadcastManager.getBroadcast().emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
     }
 
-    private getIntervalTime(): Resource{
+    private setIntervalTime(): void{
         if (this.time == undefined) {
-            return $r('app.string.fa_play_interval_time_30')
+            this.intervalTime = $r('app.string.fa_play_interval_time_30')
         } else if (this.time / Constants.DEFAULT_TIME == 3) {
-            return $r('app.string.fa_play_interval_time_90')
+            this.intervalTime = $r('app.string.fa_play_interval_time_90')
         } else if (this.time / Constants.DEFAULT_TIME == 2) {
-            return $r('app.string.fa_play_interval_time_60')
+            this.intervalTime = $r('app.string.fa_play_interval_time_60')
         } else {
-            return $r('app.string.fa_play_interval_time_30')
+            this.intervalTime = $r('app.string.fa_play_interval_time_30')
         }
     }
 
@@ -395,7 +393,7 @@ struct FormEditorPage {
                             .fontWeight(FontWeight.Medium)
 
                         Row() {
-                            Text(this.getIntervalTime())
+                            Text(this.intervalTime)
                                 .fontSize($r('sys.float.ohos_id_text_size_body2'))
                                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                                 .margin({ right: $r('app.float.form_list_card_more_gap') })
