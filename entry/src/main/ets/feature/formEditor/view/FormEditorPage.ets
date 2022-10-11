@@ -47,7 +47,7 @@ struct FormEditorPage {
     fileAsset: MediaLib.FileAsset = null;
     displayName: string = '';
     @State time: number = 30;
-    @State intervalTime: Resource = 30;
+    @State intervalTime: Resource = $r('app.string.fa_play_interval_time_30');
     private saveDataFunc = this.saveData.bind(this);
     private onChangeFunc = this.onChange.bind(this);
     settingController: CustomDialogController = new CustomDialogController({
