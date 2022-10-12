@@ -57,6 +57,7 @@ const TAG = "TimelinePage"
 @Component
 export struct TimelinePage {
     @State isEmpty: boolean = false;
+    @State isHideScrollBar: boolean = true;
     @StorageProp('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageProp('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     @State gridRowCount: number = 0;
@@ -323,11 +324,12 @@ export struct TimelinePage {
             this.isMediaLibDataChanged = false
             startTrace("reloadTimelineItemData")
             this.timelineDataSource.reloadTimelineItemData().then((isEmpty) => {
-                finishTrace("reloadTimelineItemData")
-                logInfo(TAG, `onMediaLibDataChange load finish`)
-                this.initLoadFinish = true
-                this.isEmpty = isEmpty
-                this.timelineDataSource.notifyDataReload()
+                finishTrace("reloadTimelineItemData");
+                logInfo(TAG, `onMediaLibDataChange load finish`);
+                this.initLoadFinish = true;
+                this.isEmpty = isEmpty;
+                this.timelineDataSource.notifyDataReload();
+                this.isHideScrollBar = (this.timelineDataSource.totalCount() <= Constants.SCROLL_BAR_VISIBLE_THRESHOLD);
             })
         } else if (this.isActive) {
             this.timelineDataSource.dataRemove()
@@ -365,7 +367,10 @@ export struct TimelinePage {
         animateTo({
             duration: Constants.DELETE_ANIMATE_DURATION,
             onFinish: () => mediaObserver.registerObserver(this.dataObserver)
-        }, () => this.timelineDataSource.dataRemove())
+        }, () => {
+            this.timelineDataSource.dataRemove();
+            this.isHideScrollBar = (this.timelineDataSource.totalCount() <= Constants.SCROLL_BAR_VISIBLE_THRESHOLD);
+        })
     }
 
     onCopyStart(): void {
@@ -385,7 +390,8 @@ export struct TimelinePage {
                 showToast(message)
             })
         } else {
-            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.timelineDataSource.dataReload())
+            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.timelineDataSource.dataReload());
+            this.isHideScrollBar = (this.timelineDataSource.totalCount() <= Constants.SCROLL_BAR_VISIBLE_THRESHOLD);
         }
     }
 
@@ -511,7 +517,8 @@ export struct TimelinePage {
                         Column() {
                             TimelineScrollBar({
                                 scroller: this.scroller,
-                                dataSource: this.timelineDataSource
+                                dataSource: this.timelineDataSource,
+                                isHideScrollBar: $isHideScrollBar
                             })
                         }
                         .position({ x: '100%', y: 0 })
