@@ -27,6 +27,7 @@ const TAG = "TimelineScrollBar"
 export struct TimelineScrollBar {
     scroller: Scroller;
     dataSource: TimelineItemDataSource;
+    @Link isHideScrollBar: boolean;
     @State isClickScrollBar: boolean = false;
     @Consume dateText: string;
     @Consume broadCast: Broadcast;
@@ -96,7 +97,7 @@ export struct TimelineScrollBar {
             ScrollBar({
                 scroller: this.scroller,
                 direction: ScrollBarDirection.Vertical,
-                state: BarState.Auto
+                state: this.isHideScrollBar ? BarState.Off : BarState.Auto
             }) {
                 Row() {
                     if (this.isClickScrollBar) {

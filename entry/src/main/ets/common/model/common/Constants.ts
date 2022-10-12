@@ -248,7 +248,7 @@ export class Constants {
     static readonly GRID_MIN_COUNT: number = 4;
     static readonly SCROLL_BAR_SIDE_MIN_GAP: number = 12;
     static readonly SCROLL_MARGIN: number = 24;
-    static readonly SCROLL_BAR_VISIBLE_THRESHOLD: number = 50;
+    static readonly SCROLL_BAR_VISIBLE_THRESHOLD: number = 29;
 
     // Column Constants
 
