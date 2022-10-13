@@ -364,6 +364,7 @@ export struct TimelinePage {
         startTrace('onModeChange');
         this.onModeChange();
         finishTrace('onModeChange');
+        this.isEmpty = true;
         animateTo({
             duration: Constants.DELETE_ANIMATE_DURATION,
             onFinish: () => mediaObserver.registerObserver(this.dataObserver)
