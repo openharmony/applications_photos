@@ -92,7 +92,7 @@ export class PhotoGridBarModel {
         if (isSelectedMode) {
             if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE) {
                 menuList.push(Boolean(selectedCount) ? Action.RECOVER : Action.RECOVER_INVALID)
-                menuList.push(Boolean(selectedCount) ? Action.CLEAR_RECYCLE : Action.DELETE_INVALID)
+                menuList.push(Boolean(selectedCount) ? Action.DELETE : Action.DELETE_INVALID)
                 menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL);
             } else if (this.isDistributedAlbum) {
                 menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL)
