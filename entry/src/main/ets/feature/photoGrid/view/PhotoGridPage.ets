@@ -56,7 +56,7 @@ export struct PhotoGridPage {
     @Provide isHideScrollBar: boolean = true;
     @Provide isEmpty: boolean = false;
     @State gridRowCount: number = 0;
-    @Provide @Watch("isSelectedModeChange") isSelectedMode: boolean = false;
+    @Provide isSelectedMode: boolean = false;
     @Provide isAllSelected: boolean = false;
     @Provide('selectedCount') totalSelectedCount: number = 0;
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
@@ -313,17 +313,9 @@ export struct PhotoGridPage {
         logInfo(TAG, 'onModeChange');
         if (this.isSelectedMode) {
             this.isSelectedMode = false;
+            this.groupDataSource.setSelect(false);
             this.onSelect()
         }
-    }
-
-    /**
-     * Do when select mode is change
-     */
-    isSelectedModeChange() {
-        logInfo(TAG, `isSelectedMode:${this.isSelectedMode}`)
-        if (this.isSelectedMode || (this.albumInfo && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE))
-        this.groupDataSource.setSelect(!this.isSelectedMode)
     }
 
     onPageShow() {

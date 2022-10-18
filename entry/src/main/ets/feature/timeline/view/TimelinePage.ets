@@ -364,10 +364,9 @@ export struct TimelinePage {
         startTrace('onModeChange');
         this.onModeChange();
         finishTrace('onModeChange');
-        this.isEmpty = true;
+        mediaObserver.registerObserver(this.dataObserver);
         animateTo({
-            duration: Constants.DELETE_ANIMATE_DURATION,
-            onFinish: () => mediaObserver.registerObserver(this.dataObserver)
+            duration: Constants.DELETE_ANIMATE_DURATION
         }, () => {
             this.timelineDataSource.dataRemove();
             this.isHideScrollBar = (this.timelineDataSource.totalCount() <= Constants.SCROLL_BAR_VISIBLE_THRESHOLD);
