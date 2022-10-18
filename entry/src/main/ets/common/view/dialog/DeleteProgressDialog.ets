@@ -22,6 +22,7 @@ export class DeleteProgressParam {
     currentCount: number
     totalCount: number
     message: Resource
+    deleteProgress: number
 }
 
 @CustomDialog
@@ -30,7 +31,6 @@ export struct DeleteProgressDialog {
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     controller: CustomDialogController
-    @Consume deleteProgress: number;
     @Consume deleteProgressParam: DeleteProgressParam;
     logger: Logger = new Logger('ProgressDialog');
 
@@ -48,7 +48,7 @@ export struct DeleteProgressDialog {
                     .flexGrow(1)
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
                     .textOverflow({ overflow: TextOverflow.Ellipsis })
-                Text(`${this.deleteProgress}%`)
+                Text(`${this.deleteProgressParam.deleteProgress}%`)
                     .fontSize($r('sys.float.ohos_id_text_size_body2'))
                     .fontFamily($r('app.string.id_text_font_family_regular'))
                     .fontColor($r('sys.color.ohos_id_color_text_secondary'))
@@ -61,7 +61,7 @@ export struct DeleteProgressDialog {
 
             Row() {
                 Progress({ value: 0, total: Constants.PROGRESS_MAX, style: ProgressStyle.Linear })
-                    .value(this.deleteProgress)
+                    .value(this.deleteProgressParam.deleteProgress)
                     .color($r('app.color.color_control_highlight'))
                     .flexGrow(1)
                     .padding({

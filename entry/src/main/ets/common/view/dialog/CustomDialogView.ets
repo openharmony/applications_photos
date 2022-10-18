@@ -41,13 +41,12 @@ export struct CustomDialogView {
     @State isShow: boolean = false;
     @Provide dialogMessage: Resource = $r('app.string.common_place_holder', String(''));
     @Provide progressMessage: Resource = $r('app.string.common_place_holder', String(''));
-    @Provide deleteProgress: number = 0;
     @Provide dialogCallback: DialogCallback = { confirmCallback: null, cancelCallback: null };
     @Provide saveDialogCallback: SaveDialogCallback = { saveAsNewCallback: null, replaceOriginalCallback: null };
     @Provide editExitDialogCallback: EditExitDialogCallback = { discardCallback: null };
     @Consume broadCast: Broadcast;
     @Provide progressParam: ProgressParam = { cancelFunc: null, operationType: '' };
-    @Provide deleteProgressParam: DeleteProgressParam = { currentCount: 0, totalCount: 0, message: null };
+    @Provide deleteProgressParam: DeleteProgressParam = { currentCount: 0, totalCount: 0, message: null, deleteProgress: 0};
     @Provide cancelParam: CancelParam = { continueFunc: null, cancelFunc: null };
     @Provide operateParam: OperateParam = { moveFunc: null, copyFunc: null };
     @Provide findSameNameParam: FindSameNameParam = {
@@ -295,12 +294,12 @@ export struct CustomDialogView {
         this.broadCast.on(BroadcastConstants.UPDATE_PROGRESS,
             function (progress: number, currentCount: number) {
                 self.logger.info(`UPDATE_PROGRESS ${progress}`);
-                self.deleteProgress = progress;
+                self.deleteProgressParam.deleteProgress = progress;
                 self.deleteProgressParam.currentCount = currentCount;
                 if (progress == Constants.PROGRESS_MAX) {
                     self.logger.info('Update progress 100%');
                     self.progressDialogController.close();
-                    self.deleteProgress = 0;
+                    self.deleteProgressParam.deleteProgress = 0;
                     self.deleteProgressDialogController.close();
                     self.deleteProgressParam.currentCount = 0;
                 }
@@ -381,6 +380,7 @@ export struct CustomDialogView {
                 self.deleteProgressParam.currentCount = 0;
                 self.deleteProgressParam.totalCount = totalCount;
                 self.deleteProgressParam.message = message;
+                self.deleteProgressParam.deleteProgress = 0;
                 self.deleteProgressDialogController.open();
             });
     }
