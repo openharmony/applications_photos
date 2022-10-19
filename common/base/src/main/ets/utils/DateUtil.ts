@@ -93,6 +93,12 @@ export class DateUtil {
         return new Intl.DateTimeFormat(locales, this.buildDateTimeOpt('numeric', 'long', '', '', '')).format(new Date(milliseconds));
     }
 
+    public static getLocalizedYearString(milliseconds: number): string {
+        let locales: string = this.getLocales();
+
+        return new Intl.DateTimeFormat(locales, this.buildDateTimeOpt('numeric', '', '', '', '')).format(new Date(milliseconds)).toString();
+    }
+
     public static getLocalizedTime(milliseconds: number): string {
         let locales: string = this.getLocales();
         let is24HourClock = i18n.is24HourClock();

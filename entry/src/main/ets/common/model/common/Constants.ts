@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+import deviceInfo from '@ohos.deviceInfo';
+
 export class Constants {
     // illegal value
     static readonly INVALID = -1;
