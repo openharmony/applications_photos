@@ -53,6 +53,13 @@ export struct TimelineScrollBar {
         return this.dataSource.groupItem.indexOf(item) == this.dataSource.groupItem.length - 1
     }
 
+    private isShowLocalizedYear(item: TimelineDataItem): boolean {
+        if (this.dataSource.groupItem.indexOf(item) > 0) {
+            return DateUtil.getLocalizedYearString(item.dateAdded) != DateUtil.getLocalizedYearString(this.dataSource.getData(this.dataSource.groupItem.indexOf(item) - 1).dateAdded)
+        }
+        return true
+    }
+
     build() {
         Stack({ alignContent: Alignment.End }) {
             if (this.isClickScrollBar) {
@@ -83,6 +90,7 @@ export struct TimelineScrollBar {
                             .margin({
                                 bottom: this.nodeGap(year.groupChild.length)
                             })
+                            .visibility(this.isShowLocalizedYear(year) ? Visibility.Visible : Visibility.Hidden)
                         }
                     }, year => JSON.stringify(year))
                 }
