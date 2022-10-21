@@ -43,6 +43,7 @@ export struct PhotoSwiper {
                 onFinish: () => {
                 } }, () => {
                 this.dataSource.dataRemove();
+                this.broadCast.emit(Constants.DATA_SIZE_CHANGED,[this.dataSource.totalCount()]);
             })
         });
 
