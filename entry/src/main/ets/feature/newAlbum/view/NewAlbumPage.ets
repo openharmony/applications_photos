@@ -311,4 +311,11 @@ export struct NewAlbumPage {
             bottom: px2vp(this.leftBlank[3])
         })
     }
+
+    pageTransition() {
+        PageTransitionEnter({ type: RouteType.Push, duration: 300 }).slide(SlideEffect.Right)
+          .opacity(0)
+        PageTransitionExit({ type: RouteType.Pop, duration: 300 }).slide(SlideEffect.Right)
+          .opacity(0)
+    }
 }
