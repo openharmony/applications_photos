@@ -46,6 +46,7 @@ export struct CustomDialogView {
     @Provide editExitDialogCallback: EditExitDialogCallback = { discardCallback: null };
     @Consume broadCast: Broadcast;
     @Provide progressParam: ProgressParam = { cancelFunc: null, operationType: '' };
+    @Provide deleteProgress: number = 0;
     @Provide deleteProgressParam: DeleteProgressParam = { currentCount: 0, totalCount: 0, message: null, deleteProgress: 0};
     @Provide cancelParam: CancelParam = { continueFunc: null, cancelFunc: null };
     @Provide operateParam: OperateParam = { moveFunc: null, copyFunc: null };

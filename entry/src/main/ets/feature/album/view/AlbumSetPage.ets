@@ -450,7 +450,7 @@ export struct AlbumSetPage {
                 top: $r('app.float.album_set_page_padding_top'),
                 bottom: this.isTabBarShow
                     ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
-                    : (this.isSidebar ? $r('app.float.album_set_page_padding_end_112') : $r('app.float.album_set_page_padding_end'))
+                    : $r('app.float.album_set_page_padding_end')
             })
             .columnsGap($r('app.float.album_set_grid_column_gap'))
             .rowsGap($r('app.float.album_set_grid_row_gap'))
@@ -474,7 +474,7 @@ export struct AlbumSetPage {
             top: $r('app.float.album_set_page_padding_top'),
             bottom: this.isTabBarShow
                 ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
-                : (this.isSidebar ? $r('app.float.album_set_page_padding_end_112') : $r('app.float.album_set_page_padding_end'))
+                : $r('app.float.album_set_page_padding_end')
         })
         .columnsGap($r('app.float.album_set_grid_column_gap'))
         .rowsGap($r('app.float.album_set_grid_row_gap'))

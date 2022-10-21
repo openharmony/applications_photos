@@ -25,7 +25,7 @@ const TAG = "TrashMediaDataItem"
 export class TrashMediaDataItem extends MediaDataItem {
     constructor(selections: string, selectionArgs: Array<string>, index: number) {
         super(selections, selectionArgs, "", index)
-        this.setSelect(true)
+        this.setSelect(false)
     }
 
     async loadFileAsset(): Promise<MediaLib.FileAsset> {
