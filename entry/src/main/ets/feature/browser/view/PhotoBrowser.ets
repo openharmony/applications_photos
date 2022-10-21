@@ -56,6 +56,7 @@ import { InnerMediaDataItem } from '../../../../../../../features/browser/src/ma
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import { getAlbumDisplayName } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
 import { startAbility, terminateSelf } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
+import mediaDataItemCache from '@ohos/base/src/main/ets/data/MediaDataItemCache';
 // page of large photo
 
 const TAG = "PhotoBrowser"
@@ -63,7 +64,7 @@ const TAG = "PhotoBrowser"
 @Entry
 @Component
 struct PhotoBrowser {
-    @State opacity: number = 1;
+    @State mOpacity: number = 1;
     @Provide browserBackgroundColor: Resource = $r('app.color.default_background_color');
     @Provide('dateTitle') photoDate: string = '';
     @Provide('timeLocationTitle') timeAndLocation: string = '';
@@ -231,15 +232,18 @@ struct PhotoBrowser {
 
     private setFavourite(isSuccess: boolean) {
         logDebug(TAG, 'set favor !')
-        if (isSuccess) {
-            // 收藏相册进入大图，点击取消收藏会导致Item成员变少，所以要dataRemove
-            this.browserDataSource.dataRemove()
 
-            this.updateMenu();
+        if (isSuccess) {
             let currentPhoto = this.getCurrentPhoto();
             if (currentPhoto == undefined) {
                 return;
             }
+            if (mediaDataItemCache.hasKey(currentPhoto.uri)) {
+                mediaDataItemCache.get(currentPhoto.uri).favouriteStatus = currentPhoto.favouriteStatus;
+            }
+            // 收藏相册进入大图，点击取消收藏会导致Item成员变少，所以要dataRemove
+            this.browserDataSource.dataRemove();
+            this.updateMenu();
             this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
         }
     }

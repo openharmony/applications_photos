@@ -140,4 +140,14 @@ export class GroupItemDataSource extends ItemDataSource {
             }
         }
     }
+
+    dataDelete(uri: string) {
+        const mediaDataItemIndex = this.groupDataItem.findIndex((item: MediaDataItem) => {
+            return item.uri === uri;
+        })
+        if (mediaDataItemIndex != -1 && this.groupDataItem[mediaDataItemIndex].isDeleted()) {
+            this.groupDataItem.splice(mediaDataItemIndex, 1)
+            super.notifyDataDelete(mediaDataItemIndex)
+        }
+    }
 }

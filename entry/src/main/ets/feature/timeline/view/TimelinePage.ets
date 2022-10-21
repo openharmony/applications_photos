@@ -498,7 +498,9 @@ export struct TimelinePage {
                                     .columnStart(item.index % this.gridRowCount)
                                     .columnEnd(item.index % this.gridRowCount)
                                 }
-                            }, item => item == null ? JSON.stringify(item) : item.getHashCode())
+                            }, (item) => {
+                                return item == null ? JSON.stringify(item) : item.uri + item.favouriteStatus + item.orientation
+                            })
                         }
                         .columnsTemplate('1fr '.repeat(this.gridRowCount))
                         .columnsGap(Constants.GRID_GUTTER)
