@@ -196,4 +196,15 @@ export struct AlbumSelect {
             bottom: px2vp(this.leftBlank[3])
         })
     }
+
+    pageTransition() {
+        PageTransitionEnter({ type: RouteType.Push, duration: 300 }).slide(SlideEffect.Right)
+          .opacity(0)
+        PageTransitionEnter({ type: RouteType.Pop, duration: 1 })
+          .opacity(0)
+        PageTransitionExit({ type: RouteType.Push, duration: 1 })
+          .opacity(0)
+        PageTransitionExit({ type: RouteType.Pop, duration: 300 }).slide(SlideEffect.Right)
+          .opacity(0)
+    }
 }

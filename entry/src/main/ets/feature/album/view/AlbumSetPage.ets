@@ -552,4 +552,11 @@ export struct AlbumSetPage {
             CustomDialogView()
         }
     }
+
+    pageTransition() {
+        PageTransitionExit({ type: RouteType.Push, duration: 1 })
+          .opacity(0)
+        PageTransitionEnter({ type: RouteType.Pop, duration: 1 })
+          .opacity(0)
+    }
 }
