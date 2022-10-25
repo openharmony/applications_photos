@@ -57,14 +57,15 @@ export struct PhotoSwiper {
         Swiper(this.swiperController) {
             LazyForEach(this.dataSource, (item: MediaDataItem) => {
                 if (item) {
-                    Column() {
-                        PhotoItem({
-                            item: item,
-                            pageName: this.photoSwiperTransition
-                        })
-                    }.zIndex(item && item.index == this.currentIndex ? 2 : 1)
+                    PhotoItem({
+                        item: item,
+                        pageName: this.photoSwiperTransition
+                    })
+                    .zIndex(item && item.index == this.currentIndex ? 2 : 1)
                 }
-            }, (item: MediaDataItem) => item ? item.getHashCode() : JSON.stringify(item))
+            }, (item: MediaDataItem) => {
+                return item ? item.getHashCode() : JSON.stringify(item)
+            })
         }
         .gesture(PanGesture({
             direction: PanDirection.Horizontal

@@ -22,6 +22,8 @@ import { getFetchOptions } from '../helper/MediaDataHelper';
 import { MediaDataItem } from '../data/MediaDataItem';
 import { FavorMediaDataItem } from '../data/FavorMediaDataItem'
 import { TrashMediaDataItem } from '../data/TrashMediaDataItem'
+import mediaDataItemCache from '../data/MediaDataItemCache'
+
 
 const TAG = "GroupDataImpl"
 
@@ -53,27 +55,55 @@ export class GroupDataImpl {
     }
 
     async reloadBrowserGroupItemData(): Promise<MediaDataItem[]> {
-        logDebug(TAG, `reloadGroupItemData`)
+        logDebug(TAG, `reloadBrowserGroupItemData`)
         let groupDataItem = []
         let fetchOption = await getFetchOptions(this.selectType, this.albumId, this.deviceId)
         if (fetchOption == undefined) {
             return []
         }
         let count: number = 0
+        let groupCount: number = this.getCount()
+        let mediaFileAssets = await this.getMediaItemFileAssets(fetchOption, 0, groupCount)
         if (this.albumId == MediaConstants.ALBUM_ID_FAVOR) {
             count = (await mediaModel.getAllFavorMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
-                groupDataItem.push(new FavorMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i))
+                let favorMediaItem = new FavorMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i)
+                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                    favorMediaItem.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
+                    favorMediaItem.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
+                }
+                if (i < mediaFileAssets.length) {
+                    favorMediaItem.update(mediaFileAssets[i])
+                }
+                groupDataItem.push(favorMediaItem)
             }
         } else if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE) {
             count = (await mediaModel.getAllTrashMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
-                groupDataItem.push(new TrashMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i))
+                let trashMediaItem = new TrashMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i)
+                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                    trashMediaItem.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
+                    trashMediaItem.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
+                }
+                if (i < mediaFileAssets.length) {
+                    trashMediaItem.update(mediaFileAssets[i])
+                }
+                groupDataItem.push(trashMediaItem)
             }
         } else {
             count = (await mediaModel.getAllCommonMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
-                groupDataItem.push(new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i))
+                let mediaItem: MediaDataItem
+                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                    mediaItem = mediaDataItemCache.get(mediaFileAssets[i].uri)
+                } else {
+                    mediaItem = new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i)
+                    mediaDataItemCache.set(mediaFileAssets[i].uri, mediaItem)
+                }
+                if (i < mediaFileAssets.length) {
+                    mediaItem.update(mediaFileAssets[i])
+                }
+                groupDataItem.push(mediaItem)
             }
         }
 
@@ -82,7 +112,7 @@ export class GroupDataImpl {
     }
 
     async reloadGridGroupItemData(): Promise<MediaDataItem[]> {
-        logDebug(TAG, `reloadGroupItemData`)
+        logDebug(TAG, `reloadGridGroupItemData`)
         let groupDataItem = []
         let fetchOption = await getFetchOptions(this.selectType, this.albumId, this.deviceId)
         if (fetchOption == undefined) {
@@ -94,6 +124,10 @@ export class GroupDataImpl {
             let count: number = (await mediaModel.getAllFavorMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
                 let item = new FavorMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i)
+                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                    item.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
+                    item.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
+                }
                 if (i < mediaFileAssets.length) {
                     item.update(mediaFileAssets[i])
                 }
@@ -103,6 +137,10 @@ export class GroupDataImpl {
             let count: number = (await mediaModel.getAllTrashMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
                 let item = new TrashMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i)
+                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                    item.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
+                    item.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
+                }
                 if (i < mediaFileAssets.length) {
                     item.update(mediaFileAssets[i])
                 }
@@ -112,6 +150,12 @@ export class GroupDataImpl {
             let count: number = (await mediaModel.getAllCommonMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
                 let item = new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i)
+                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                    item = mediaDataItemCache.get(mediaFileAssets[i].uri)
+                } else {
+                    item = new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i)
+                    mediaDataItemCache.set(mediaFileAssets[i].uri, item)
+                }
                 if (i < mediaFileAssets.length) {
                     item.update(mediaFileAssets[i])
                 }

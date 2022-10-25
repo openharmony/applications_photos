@@ -36,6 +36,7 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
         if (dataSource == null) {
             this.count = this.menuContext.items.length
         } else {
+            //@ts-ignore
             this.count = dataSource.getItems().length;
         }
         if (this.count <= 0) {
@@ -67,6 +68,7 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
         if (dataSource == null) {
             this.items = this.menuContext.items
         } else {
+            //@ts-ignore
             this.items = dataSource.getItems()
         }
         this.processOperation()
