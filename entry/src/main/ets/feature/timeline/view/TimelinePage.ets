@@ -499,7 +499,14 @@ export struct TimelinePage {
                                     .columnEnd(item.index % this.gridRowCount)
                                 }
                             }, (item) => {
-                                return item == null ? JSON.stringify(item) : item.uri + item.favouriteStatus + item.orientation
+                                if (item == null) {
+                                    return JSON.stringify(item)
+                                }
+                                if (item.viewType === ViewType.ITEM) {
+                                    return item.uri + item.favouriteStatus + item.orientation
+                                } else if (item.viewType === ViewType.GROUP_TITLE) {
+                                    return item.getHashCode()
+                                }
                             })
                         }
                         .columnsTemplate('1fr '.repeat(this.gridRowCount))

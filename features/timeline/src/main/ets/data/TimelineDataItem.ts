@@ -33,13 +33,13 @@ export class TimelineDataItem {
         let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?'
         let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()]
         for (let i = 0;i < this.groupChild.length; i++) {
-            if (mediaDataItemCache.hasKey(mediaFileAsset[index+i].uri)) {
-                this.groupChild[i] = mediaDataItemCache.get(mediaFileAsset[index+i].uri)
-            } else {
-                this.groupChild[i] = new MediaDataItem(selections, selectionArgs, "", index + i)
-                mediaDataItemCache.set(mediaFileAsset[index+i].uri, this.groupChild[i])
-            }
+            this.groupChild[i] = new MediaDataItem(selections, selectionArgs, "", index + i)
             if (index + i < mediaFileAsset.length) {
+                if (mediaDataItemCache.hasKey(mediaFileAsset[index+i].uri)) {
+                    this.groupChild[i] = mediaDataItemCache.get(mediaFileAsset[index+i].uri)
+                } else {
+                    mediaDataItemCache.set(mediaFileAsset[index+i].uri, this.groupChild[i])
+                }
                 this.groupChild[i].update(mediaFileAsset[index+i])
             }
         }
