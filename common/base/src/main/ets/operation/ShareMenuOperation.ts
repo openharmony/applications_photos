@@ -37,9 +37,8 @@ export class ShareMenuOperation implements MenuOperation {
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
             return;
-        } else {
-            this.uris = dataSource.getSelectedUris();
         }
+        this.uris = dataSource.getSelectedUris();
         this.shareFileAsset();
     }
 
