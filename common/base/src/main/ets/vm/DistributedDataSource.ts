@@ -46,6 +46,16 @@ export class DistributedDataSource extends ItemDataSource {
         })
     }
 
+    getSelectedUris(): string[]{
+        let uris: string[] = []
+        this.peerDataItems.forEach((item: PeerDataItem) => {
+            if (item.isSelect) {
+                uris.push(item.uri)
+            }
+        })
+        return uris
+    }
+
     getSelectedCount(): number {
         let count = 0
         for (let i = 0;i < this.peerDataItems.length; i++) {

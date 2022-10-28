@@ -156,6 +156,18 @@ export class TimelineItemDataSource extends ItemDataSource {
         return items
     }
 
+    getSelectedUris(): string[]{
+        let uris: string[] = []
+        this.groupItem.forEach((group: TimelineDataItem) => {
+            group.groupChild.forEach((child: MediaDataItem) => {
+                if (child.isSelect) {
+                    uris.push(child.uri)
+                }
+            })
+        })
+        return uris
+    }
+
     dataReload(): void {
         this.reloadTimelineItemData().then((isEmpty: boolean) => {
             this.notifyDataReload()
