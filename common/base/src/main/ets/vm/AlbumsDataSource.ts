@@ -59,6 +59,16 @@ export class AlbumsDataSource extends ItemDataSource {
         return isSelect
     }
 
+    getSelectedUris(): string[]{
+        let uris: string[] = []
+        this.albumDataItems.forEach((item: AlbumDataItem) => {
+            if (item.isSelect) {
+                uris.push(item.uri)
+            }
+        })
+        return uris
+    }
+
     isDisableRename(): boolean {
         let isDisableRename = false
         for (let i = 0;i < this.albumDataItems.length; i++) {

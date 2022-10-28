@@ -17,11 +17,11 @@ import { logDebug, logInfo, logWarn, logError } from '../utils/LoggerUtils'
 import { startAbility } from '../utils/AbilityUtils';
 import { MenuOperation } from './MenuOperation'
 import { MenuContext } from './MenuContext'
-import { AsyncCallback } from '../interface/AsyncCallback'
+import { ItemDataSource } from '../vm/ItemDataSource';
 
 const TAG = "ShareMenuOperation"
 
-export class ShareMenuOperation implements MenuOperation, AsyncCallback<string[]> {
+export class ShareMenuOperation implements MenuOperation {
     private menuContext: MenuContext;
     private uris: string[];
 
@@ -34,10 +34,12 @@ export class ShareMenuOperation implements MenuOperation, AsyncCallback<string[]
             logWarn(TAG, 'menuContext is null, return');
             return;
         }
-    }
-
-    callback(uris: string[]): void {
-        this.uris = uris;
+        let dataSource: ItemDataSource = this.menuContext.dataSource;
+        if (dataSource == null) {
+            return;
+        } else {
+            this.uris = dataSource.getSelectedUris();
+        }
         this.shareFileAsset();
     }
 

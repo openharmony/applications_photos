@@ -30,6 +30,8 @@ export abstract class ItemDataSource implements IDataSource {
 
     abstract getSelectedItems(): any[]
 
+    abstract getSelectedUris(): any[]
+
     abstract dataRemove(): void
 
     registerDataChangeListener(listener: DataChangeListener): void{
