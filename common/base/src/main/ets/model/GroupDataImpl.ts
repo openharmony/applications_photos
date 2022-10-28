@@ -68,11 +68,11 @@ export class GroupDataImpl {
             count = (await mediaModel.getAllFavorMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
                 let favorMediaItem = new FavorMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i)
-                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
-                    favorMediaItem.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
-                    favorMediaItem.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
-                }
                 if (i < mediaFileAssets.length) {
+                    if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                        favorMediaItem.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
+                        favorMediaItem.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
+                    }
                     favorMediaItem.update(mediaFileAssets[i])
                 }
                 groupDataItem.push(favorMediaItem)
@@ -81,11 +81,11 @@ export class GroupDataImpl {
             count = (await mediaModel.getAllTrashMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
                 let trashMediaItem = new TrashMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i)
-                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
-                    trashMediaItem.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
-                    trashMediaItem.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
-                }
                 if (i < mediaFileAssets.length) {
+                    if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                        trashMediaItem.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
+                        trashMediaItem.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
+                    }
                     trashMediaItem.update(mediaFileAssets[i])
                 }
                 groupDataItem.push(trashMediaItem)
@@ -94,13 +94,13 @@ export class GroupDataImpl {
             count = (await mediaModel.getAllCommonMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
                 let mediaItem: MediaDataItem
-                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
-                    mediaItem = mediaDataItemCache.get(mediaFileAssets[i].uri)
-                } else {
-                    mediaItem = new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i)
-                    mediaDataItemCache.set(mediaFileAssets[i].uri, mediaItem)
-                }
                 if (i < mediaFileAssets.length) {
+                    if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                        mediaItem = mediaDataItemCache.get(mediaFileAssets[i].uri)
+                    } else {
+                        mediaItem = new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i)
+                        mediaDataItemCache.set(mediaFileAssets[i].uri, mediaItem)
+                    }
                     mediaItem.update(mediaFileAssets[i])
                 }
                 groupDataItem.push(mediaItem)
@@ -124,11 +124,11 @@ export class GroupDataImpl {
             let count: number = (await mediaModel.getAllFavorMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
                 let item = new FavorMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i)
-                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
-                    item.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
-                    item.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
-                }
                 if (i < mediaFileAssets.length) {
+                    if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                        item.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
+                        item.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
+                    }
                     item.update(mediaFileAssets[i])
                 }
                 groupDataItem.push(item)
@@ -137,11 +137,11 @@ export class GroupDataImpl {
             let count: number = (await mediaModel.getAllTrashMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
                 let item = new TrashMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i)
-                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
-                    item.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
-                    item.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
-                }
                 if (i < mediaFileAssets.length) {
+                    if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                        item.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus
+                        item.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation
+                    }
                     item.update(mediaFileAssets[i])
                 }
                 groupDataItem.push(item)
@@ -150,13 +150,12 @@ export class GroupDataImpl {
             let count: number = (await mediaModel.getAllCommonMediaItem(fetchOption, true)).counts
             for (let i = 0;i < count; i++) {
                 let item = new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i)
-                if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
-                    item = mediaDataItemCache.get(mediaFileAssets[i].uri)
-                } else {
-                    item = new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i)
-                    mediaDataItemCache.set(mediaFileAssets[i].uri, item)
-                }
                 if (i < mediaFileAssets.length) {
+                    if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                        item = mediaDataItemCache.get(mediaFileAssets[i].uri)
+                    } else {
+                        mediaDataItemCache.set(mediaFileAssets[i].uri, item)
+                    }
                     item.update(mediaFileAssets[i])
                 }
                 groupDataItem.push(item)
