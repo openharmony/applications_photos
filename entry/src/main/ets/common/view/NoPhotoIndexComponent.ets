@@ -13,23 +13,23 @@
  * limitations under the License.
  */
 
-import screenManager from '../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { Constants } from '../model/common/Constants'
-import { Logger } from '../utils/Logger'
+import screenManager from '../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { Constants } from '../model/common/Constants';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 
 const IMAGE_SCREEN_RATIO = 0.8
 
 @Component
 export struct NoPhotoIndexComponent {
+    private TAG: string = 'NoPhotoIndexComponent'
     index: number;
-    logger: Logger = new Logger('NoPhotoIndexComponent');
 
     // set an initial value temporarily, later change to 0.
     @State imageSize: number = 0;
     private reSizeFunc = this.reSizeLayout.bind(this);
 
     aboutToAppear(): void {
-        this.logger.info('aboutToAppear');
+        Log.info(this.TAG, 'aboutToAppear');
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, this.reSizeFunc);
         this.updateImageSize();
     }
@@ -43,7 +43,7 @@ export struct NoPhotoIndexComponent {
         let winHeightHalf = screenManager.getWinHeight() / 2;
         this.imageSize
         = (winWidth < winHeightHalf) ? (winWidth * IMAGE_SCREEN_RATIO) : (winHeightHalf * IMAGE_SCREEN_RATIO)
-        this.logger.info(`window size: ${winWidth}, ${winHeightHalf}  ,empty photos or album picture size = ${this.imageSize}`);
+        Log.info(this.TAG, `window size: ${winWidth}, ${winHeightHalf}  ,empty photos or album picture size = ${this.imageSize}`);
     }
 
     build() {

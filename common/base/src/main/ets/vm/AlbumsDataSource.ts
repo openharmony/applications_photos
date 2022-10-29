@@ -12,10 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { logDebug, logWarn, logError } from '../utils/LoggerUtils';
-import { AlbumDataImpl } from '../model/AlbumDataImpl'
-import { ItemDataSource } from './ItemDataSource'
-import { AlbumDataItem } from '../data/AlbumDataItem'
+import { Log } from '../utils/Log';
+import { AlbumDataImpl } from '../model/AlbumDataImpl';
+import { ItemDataSource } from './ItemDataSource';
+import { AlbumDataItem } from '../data/AlbumDataItem';
 import { MediaConstants } from '../constants/MediaConstants'
 
 const TAG = "AlbumsDataSource"
@@ -40,9 +40,9 @@ export class AlbumsDataSource extends ItemDataSource {
         return this.albumDataItems.length
     }
 
-    getData(index: number): any{
+    getData(index: number): any {
         if (index < 0 || index >= this.albumDataItems.length) {
-            logWarn(TAG, `${index}/${this.albumDataItems.length}`)
+            Log.warn(TAG, `${index}/${this.albumDataItems.length}`)
             return undefined
         }
         this.albumDataItems[index].index = index
@@ -116,7 +116,7 @@ export class AlbumsDataSource extends ItemDataSource {
         return count
     }
 
-    getSelectedItems(): AlbumDataItem[]{
+    getSelectedItems(): AlbumDataItem[] {
         let items: AlbumDataItem[] = []
         this.albumDataItems.forEach((item: AlbumDataItem) => {
             if (item.isSelect) {

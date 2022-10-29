@@ -12,33 +12,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { MediaDataItem } from './MediaDataItem'
+import { MediaDataItem } from './MediaDataItem';
 import createOrGet from '../utils/SingleInstanceUtils';
 
 const TAG = "MediaDataItemCache"
 
 class MediaDataItemCache {
-  private mediaDataItemMap = new Map<string, MediaDataItem>()
+    private mediaDataItemMap = new Map<string, MediaDataItem>()
 
-  hasKey(key: string): boolean {
-    return this.mediaDataItemMap.has(key)
-  }
+    hasKey(key: string): boolean {
+        return this.mediaDataItemMap.has(key)
+    }
 
-  deleteKey(key: string): boolean {
-    return this.mediaDataItemMap.delete(key)
-  }
+    deleteKey(key: string): boolean {
+        return this.mediaDataItemMap.delete(key)
+    }
 
-  set(key: string, value: MediaDataItem): void {
-    this.mediaDataItemMap.set(key, value)
-  }
+    set(key: string, value: MediaDataItem): void {
+        this.mediaDataItemMap.set(key, value)
+    }
 
-  get(key: string): MediaDataItem {
-    return this.mediaDataItemMap.get(key)
-  }
+    get(key: string): MediaDataItem {
+        return this.mediaDataItemMap.get(key)
+    }
 
-  clearAll(): void {
-    this.mediaDataItemMap.clear()
-  }
+    clearAll(): void {
+        this.mediaDataItemMap.clear()
+    }
 }
 
 let mediaDataItemCache = createOrGet(MediaDataItemCache, TAG);

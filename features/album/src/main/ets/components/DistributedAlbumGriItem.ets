@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 import router from '@system.router';
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { EmptyAlbumComponent } from '@ohos/base/src/main/ets/components/EmptyAlbumComponent';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
-import { PeerDataItem } from '@ohos/base/src/main/ets/data/PeerDataItem'
+import { PeerDataItem } from '@ohos/base/src/main/ets/data/PeerDataItem';
 
 const TAG = "DistributedAlbumGriItem"
 
@@ -33,7 +33,7 @@ export struct DistributedAlbumGriItem {
     albumCountMarginRight = WindowConstants.ALBUM_SET_NEW_ICON_SIZE + WindowConstants.ALBUM_SET_NEW_ICON_MARGIN * 2;
 
     aboutToAppear(): void {
-        logInfo(TAG, 'aboutToAppear new opp');
+        Log.info(TAG, 'aboutToAppear new opp');
 
         let self = this;
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
@@ -65,7 +65,7 @@ export struct DistributedAlbumGriItem {
                     .offset({ x: 0, y: 0 })
                     .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                     .onError(() => {
-                        logError(TAG, 'album is empty or its cover is error');
+                        Log.error(TAG, 'album is empty or its cover is error');
                         this.isEmptyAlbum = true;
                     })
                     .onComplete((msg: {
@@ -74,7 +74,7 @@ export struct DistributedAlbumGriItem {
                         componentWidth: number,
                         componentHeight: number
                     }) => {
-                        logDebug(TAG, `image load success. Size: ${msg.width}x${msg.height},\
+                        Log.debug(TAG, `image load success. Size: ${msg.width}x${msg.height},\
                             componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
                     })
             } else {
@@ -83,7 +83,7 @@ export struct DistributedAlbumGriItem {
                     .offset({ x: 0, y: 0 })
                     .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                     .onError(() => {
-                        logError(TAG, 'album is empty or its cover is error');
+                        Log.error(TAG, 'album is empty or its cover is error');
                         this.isEmptyAlbum = true;
                     })
                     .onComplete((msg: {
@@ -92,7 +92,7 @@ export struct DistributedAlbumGriItem {
                         componentWidth: number,
                         componentHeight: number
                     }) => {
-                        logDebug(TAG, `image load success. Size: ${msg.width}x${msg.height},\
+                        Log.debug(TAG, `image load success. Size: ${msg.width}x${msg.height},\
                             componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
                     })
             }
@@ -128,7 +128,7 @@ export struct DistributedAlbumGriItem {
             color: $r('app.color.album_cover_stroke_color')
         })
         .onClick(() => {
-            logInfo(TAG, `After onClick: ${JSON.stringify(this.item)}`);
+            Log.info(TAG, `After onClick: ${JSON.stringify(this.item)}`);
             router.push({
                 uri: 'feature/distributedAlbum/view/DistributedAlbumSetPage',
                 params: {

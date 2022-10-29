@@ -14,14 +14,14 @@
  */
 
 import { EmptyAlbumComponent } from '@ohos/base/src/main/ets/components/EmptyAlbumComponent';
-import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import router from '@system.router';
-import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants'
-import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants'
+import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
+import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 // The item of album grid, and it's new style.
@@ -55,7 +55,7 @@ export struct AlbumGridItemNewStyle {
     @State thumbnail: string = ""
 
     aboutToAppear(): void {
-        logDebug(TAG, `aboutToAppear`);
+        Log.debug(TAG, `aboutToAppear`);
         this.selectable = this.item.id != MediaConstants.ALBUM_ID_RECYCLE
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.updateCardSize())
         startTrace("loadAlbumItem")
@@ -73,7 +73,7 @@ export struct AlbumGridItemNewStyle {
     }
 
     updateCard() {
-        logDebug(TAG, 'Album changed and update card size.');
+        Log.debug(TAG, 'Album changed and update card size.');
         this.updateCardSize();
     }
 
@@ -117,7 +117,7 @@ export struct AlbumGridItemNewStyle {
     }
 
     selectStateChange() {
-        logInfo(TAG, `change selected.`);
+        Log.info(TAG, `change selected.`);
 
         if (!this.isAlbumSetSelectedMode) {
             this.isAlbumSetSelectedMode = true;
@@ -168,7 +168,7 @@ export struct AlbumGridItemNewStyle {
                                 angle: this.item.orientation
                             })
                             .onError(() => {
-                                logDebug(TAG, 'album is empty or its cover is error');
+                                Log.debug(TAG, 'album is empty or its cover is error');
                                 this.isEmptyAlbum = true;
                             })
                     }
@@ -209,7 +209,7 @@ export struct AlbumGridItemNewStyle {
                                 angle: this.item.orientation
                             })
                             .onError(() => {
-                                logError(TAG, `album is empty or its cover is error ${this.thumbnail}`);
+                                Log.error(TAG, `album is empty or its cover is error ${this.thumbnail}`);
                                 this.isEmptyAlbum = true;
                             })
                     }
@@ -291,7 +291,7 @@ export struct AlbumGridItemNewStyle {
             if (this.isAlbumSetSelectedMode) {
                 this.selectStateChange();
             } else {
-                logInfo(TAG, `After onClick, MediaSet is: ${JSON.stringify(this.item)}`);
+                Log.info(TAG, `After onClick, MediaSet is: ${JSON.stringify(this.item)}`);
                 router.push({
                     uri: 'feature/photoGrid/view/PhotoGridPage',
                     params: {

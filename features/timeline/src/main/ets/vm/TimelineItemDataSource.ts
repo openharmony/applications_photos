@@ -12,11 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { logDebug, logInfo } from '@ohos/base/src/main/ets/utils/LoggerUtils'
-import { ItemDataSource } from '@ohos/base/src/main/ets/vm/ItemDataSource'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { ItemDataSource } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
-import { TimelineDataImpl } from '../model/TimelineDataImpl'
+import { TimelineDataImpl } from '../model/TimelineDataImpl';
 import { TimelineDataItem } from '../data/TimelineDataItem';
 
 const TAG = "TimelineItemDataSource"
@@ -103,9 +102,9 @@ export class TimelineItemDataSource extends ItemDataSource {
     }
 
     async reloadTimelineItemData(): Promise<boolean> {
-        logInfo(TAG, "reloadTimelineItemData")
+        Log.info(TAG, "reloadTimelineItemData")
         this.groupItem = await this.timelineDataImpl.getTimelineItemData()
-        logDebug(TAG, "reloadTimelineItemData finish")
+        Log.debug(TAG, "reloadTimelineItemData finish")
         return this.groupItem.length == 0
     }
 

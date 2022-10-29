@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logInfo } from '@ohos/base/src/main/ets/utils/LoggerUtils'
-import { ViewType } from '@ohos/base/src/main/ets/data/ViewType'
-import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem'
-import mediaDataItemCache from '@ohos/base/src/main/ets/data/MediaDataItemCache'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { ViewType } from '@ohos/base/src/main/ets/data/ViewType';
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
+import mediaDataItemCache from '@ohos/base/src/main/ets/data/MediaDataItemCache';
 
 const TAG = "TimelineDataItem"
 
@@ -27,7 +27,7 @@ export class TimelineDataItem {
     groupChild: MediaDataItem[] = []
 
     constructor(fileAssert: MediaLib.FileAsset, mediaFileAsset: Array<MediaLib.FileAsset>, index: number) {
-        logInfo(TAG, `construct ${fileAssert.dateAdded}:${fileAssert.count}`)
+        Log.info(TAG, `construct ${fileAssert.dateAdded}:${fileAssert.count}`)
         this.dateAdded = fileAssert.dateAdded * 1000
         this.groupChild = new Array(fileAssert.count)
         let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?'

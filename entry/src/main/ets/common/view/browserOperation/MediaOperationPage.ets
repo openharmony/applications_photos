@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 import router from '@system.router';
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
-import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType'
-import { MediaOperationActionBar } from './MediaOperationActionBar'
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType';
+import { MediaOperationActionBar } from './MediaOperationActionBar';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { AlbumSetNewMenuOperation } from '@ohos/base/src/main/ets/operation/AlbumSetNewMenuOperation';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { AlbumListCard } from '../../../../../../../features/mediaoperation/src/main/ets/components/AlbumListCard';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { Action } from './Action';
-import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain'
+import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
 import { CustomDialogView } from '../dialog/CustomDialogView';
 import screenManager, { ColumnSize } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
@@ -52,7 +52,7 @@ struct MediaOperationPage {
         let blackList = Array.from(MediaConstants.ALBUM_DISABLE_COPY_LIST)
         let param = router.getParams();
         if (param) {
-            logInfo(TAG, `router getParams ${JSON.stringify(param)}`);
+            Log.info(TAG, `router getParams ${JSON.stringify(param)}`);
             this.pageType = param.pageType.toString();
             if (param.albumId) {
                 this.sourceAlbumId = param.albumId.toString();
@@ -85,7 +85,7 @@ struct MediaOperationPage {
     }
 
     onMenuClicked(action: Action) {
-        logInfo(TAG, `onMenuClicked, actionID: ${action.actionID}`);
+        Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
 
         switch (action) {
             case Action.CANCEL:
@@ -103,7 +103,7 @@ struct MediaOperationPage {
     }
 
     createNewAlbum() {
-        logInfo(TAG, 'createNewAlbum');
+        Log.info(TAG, 'createNewAlbum');
         let menuContext = new MenuContext();
         this.onOperationStart = this.onOperationStart.bind(this);
         this.onOperationEnd = this.onOperationEnd.bind(this);
@@ -124,7 +124,7 @@ struct MediaOperationPage {
     }
 
     updateListCardWidth(): void {
-        logInfo(TAG, `updateListCardWidth start ${this.screenColumns}`);
+        Log.info(TAG, `updateListCardWidth start ${this.screenColumns}`);
         if (this.screenColumns == ColumnSize.COLUMN_FOUR) {
             this.listCardWidth = screenManager.getColumnsWidth(ColumnSize.COLUMN_FOUR);
         } else if (this.screenColumns == ColumnSize.COLUMN_EIGHT) {
@@ -132,21 +132,21 @@ struct MediaOperationPage {
         } else if (this.screenColumns == ColumnSize.COLUMN_TWELVE) {
             this.listCardWidth = screenManager.getColumnsWidth(ColumnSize.COLUMN_EIGHT);
         } else {
-            logWarn(TAG, 'screenColumns is not init');
+            Log.warn(TAG, 'screenColumns is not init');
         }
-        logInfo(TAG, `updateListCardWidth ${this.listCardWidth}`);
+        Log.info(TAG, `updateListCardWidth ${this.listCardWidth}`);
     }
 
     // Callback when the page is in the foreground
     onActive() {
         if (!this.isActive) {
-            logInfo(TAG, 'onActive');
+            Log.info(TAG, 'onActive');
             this.isActive = true;
         }
     }
 
     onBackPress() {
-        logInfo(TAG, 'onBackPress');
+        Log.info(TAG, 'onBackPress');
         router.back({
             uri: '',
             params: {}

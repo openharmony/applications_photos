@@ -19,6 +19,7 @@ import { Constants } from '../../../common/model/common/Constants'
 import { PhotoEditCrop } from '../crop/PhotoEditCrop'
 import { CropResetBar } from './CropResetBar'
 import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 
 @Component
 export struct CropImageShow {
@@ -33,15 +34,15 @@ export struct CropImageShow {
     private displayWidth: number = 0;
     private flexHeight: number = 0;
     private flexWidth: number = 0;
+    private TAG: string = 'CropImageShow'
     private stateMenuSize: number = screenManager.getStatusBarHeight();
-    private log: Logger = new Logger('CropImageShow');
     setting: RenderingContextSettings = new RenderingContextSettings(true);
     context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.setting);
     private preTouch: number = 0;
     private prePinch: number = 0;
 
     onCropResetClicked() {
-        this.log.debug('crop reset is clicked');
+        Log.debug(this.TAG, 'crop reset is clicked');
         this.cropEdit.reset();
         this.isCropReset = this.cropEdit.couldReset();
         this.broadCast.emit(Constants.RULER_BAR_INTI, []);
@@ -73,7 +74,7 @@ export struct CropImageShow {
     }
 
     onPinchGestureStart(event: GestureEvent) {
-        this.log.debug('cropMode onPinchGestureStart called');
+        Log.debug(this.TAG, 'cropMode onPinchGestureStart called');
         this.prePinch = new Date().getTime();
         let x = 0;
         let y = 0;
@@ -96,13 +97,13 @@ export struct CropImageShow {
     }
 
     onPinchGestureEnd() {
-        this.log.debug('cropMode onPinchGestureEnd called');
+        Log.debug(this.TAG, 'cropMode onPinchGestureEnd called');
         this.cropEdit.onPinchEnd();
         this.isCropReset = this.cropEdit.couldReset();
     }
 
     aboutToAppear() {
-        this.log.debug('Photo CropImageShow called');
+        Log.debug(this.TAG, 'Photo CropImageShow called');
         this.broadCast.on(Constants.CROP_RESET_CLICKED, this.onCropResetClicked.bind(this));
         this.flexHeight = this.isVerticalScreen
             ? this.screenHeight - Constants.TOP_BAR_SIZE - Constants.BOTTOM_TOOL_BAR_SIZE
@@ -114,7 +115,7 @@ export struct CropImageShow {
         this.displayWidth = this.isVerticalScreen
             ? this.screenWidth : this.screenHeight - (Constants.BOTTOM_TOOL_BAR_SIZE + Constants.RESET_SIZE_HORIZONTAL);
         this.cropEdit.setCanvasSize(this.displayWidth, this.displayHeight);
-        this.log.debug(`CropImageShow this.screenHeight = ${this.flexHeight}, this.screenWidth = ${this.flexWidth}`);
+        Log.debug(this.TAG, `CropImageShow this.screenHeight = ${this.flexHeight}, this.screenWidth = ${this.flexWidth}`);
     }
 
     aboutToDisappear() {

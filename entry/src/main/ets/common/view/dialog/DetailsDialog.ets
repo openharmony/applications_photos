@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { Logger } from '../../utils/Logger'
-import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil'
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil';
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
 @Observed
@@ -35,6 +35,7 @@ export class MediaDetails {
 
 @CustomDialog
 export struct DetailsDialog {
+    private TAG: string = 'DetailsDialog'
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
@@ -43,7 +44,6 @@ export struct DetailsDialog {
     dataTime: string;
     @Consume mediaDetails: MediaDetails;
     @Consume isDistributedAlbum: boolean;
-    logger: Logger = new Logger('DetailsView');
 
     aboutToAppear() {
         let localizedDate = DateUtil.getLocalizedDate(this.mediaDetails.dateTaken);
@@ -56,7 +56,7 @@ export struct DetailsDialog {
     }
 
     getTitle() {
-        this.logger.info('getTitle');
+        Log.info(this.TAG, 'getTitle');
         if (this.mediaDetails.title) {
             return this.mediaDetails.title;
         }

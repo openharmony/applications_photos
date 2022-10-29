@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logDebug, logWarn, logError } from '../utils/LoggerUtils';
-import { AlbumDataItem } from '../data/AlbumDataItem'
-import { MediaConstants } from '../constants/MediaConstants'
-import mediaModel from '../model/MediaModel'
-import { getAlbumDisplayName, getFetchOptions } from '../helper/MediaDataHelper'
+import { Log } from '../utils/Log';
+import { AlbumDataItem } from '../data/AlbumDataItem';
+import { MediaConstants } from '../constants/MediaConstants';
+import mediaModel from '../model/MediaModel';
+import { getAlbumDisplayName, getFetchOptions } from '../helper/MediaDataHelper';
 
 const TAG = "AlbumDataImpl"
 
@@ -71,7 +71,7 @@ export class AlbumDataImpl {
                 item.update(await fetchFileResult.getFirstObject())
                 albumDataItems.push(item)
             } catch (err) {
-                logError(TAG, `on err: ${JSON.stringify(err)}`)
+                Log.error(TAG, `on err: ${JSON.stringify(err)}`)
             } finally {
                 fetchFileResult.close()
             }
@@ -80,21 +80,21 @@ export class AlbumDataImpl {
 
     private async getAlbumItem(id: string, albumDataItems: AlbumDataItem[]): Promise<void> {
         if (this.blackList.indexOf(id) >= 0) {
-            logDebug(TAG, `no need as in black list`)
+            Log.debug(TAG, `no need as in black list`)
             return
         }
         if (this.deviceId.length > 0 && (id != MediaConstants.ALBUM_ID_SNAPSHOT && id != MediaConstants.ALBUM_ID_CAMERA)) {
-            logDebug(TAG, `no need`)
+            Log.debug(TAG, `no need`)
             return
         }
         let fetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(this.selectType, id, this.deviceId)
         if (fetchOption == undefined) {
-            logWarn(TAG, `${id} fetchOption is undefined`)
+            Log.warn(TAG, `${id} fetchOption is undefined`)
             return
         }
         let item = await mediaModel.getAllMediaItem(id, fetchOption, false)
         if (item.counts == 0) {
-            logWarn(TAG, `${id} is empty`)
+            Log.warn(TAG, `${id} is empty`)
             return
         }
 

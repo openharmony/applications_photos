@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 import { ItemDataSource } from '../vm/ItemDataSource';
-import { MenuContext } from './MenuContext'
+import { MenuContext } from './MenuContext';
 import { BatchDeleteMenuOperation } from './BatchDeleteMenuOperation';
-import { logInfo, logWarn } from '../utils/LoggerUtils'
+import { Log } from '../utils/Log';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 
 const TAG = "ClearRecycleMenuOperation"
@@ -25,10 +25,10 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
         super(menuContext);
     }
 
-    doAction(): void{
-        logInfo(TAG, 'delete doAction');
+    doAction(): void {
+        Log.info(TAG, 'delete doAction');
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
 
@@ -40,7 +40,7 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
             this.count = dataSource.getItems().length;
         }
         if (this.count <= 0) {
-            logWarn(TAG, 'count <= 0, return');
+            Log.warn(TAG, 'count <= 0, return');
             return;
         }
 
@@ -52,7 +52,7 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
     }
 
     confirmCallback(): void {
-        logInfo(TAG, 'Clear Recycle confirm');
+        Log.info(TAG, 'Clear Recycle confirm');
         // 1. Variable initialization
         this.onOperationEnd = this.menuContext.onOperationEnd;
 
@@ -74,7 +74,7 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
         this.processOperation()
     }
 
-    getDeleteMessageResource(dataSource: ItemDataSource): Resource{
+    getDeleteMessageResource(dataSource: ItemDataSource): Resource {
         if (dataSource && dataSource.isSelect()) {
             return $r('app.string.recycleAlbum_clear_message')
         } else {

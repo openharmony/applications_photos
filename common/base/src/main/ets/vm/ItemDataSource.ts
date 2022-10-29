@@ -12,8 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { logInfo } from '../utils/LoggerUtils'
-import { MediaDataItem } from '../data/MediaDataItem'
+import { Log } from '../utils/Log';
 
 const TAG = "ItemDataSource"
 
@@ -34,20 +33,20 @@ export abstract class ItemDataSource implements IDataSource {
 
     abstract dataRemove(): void
 
-    registerDataChangeListener(listener: DataChangeListener): void{
-        logInfo(TAG, 'registerDataChangeListener');
+    registerDataChangeListener(listener: DataChangeListener): void {
+        Log.info(TAG, 'registerDataChangeListener');
         if (this.listeners.indexOf(listener) < 0) {
             this.listeners.push(listener);
-            logInfo(TAG, `registerDataChangeListener, add listener, length: ${this.listeners.length}`);
+            Log.info(TAG, `registerDataChangeListener, add listener, length: ${this.listeners.length}`);
         }
     }
 
-    unregisterDataChangeListener(listener: DataChangeListener): void{
-        logInfo(TAG, 'unregisterDataChangeListener');
+    unregisterDataChangeListener(listener: DataChangeListener): void {
+        Log.info(TAG, 'unregisterDataChangeListener');
         const pos = this.listeners.indexOf(listener);
         if (pos >= 0) {
             this.listeners.splice(pos, 1);
-            logInfo(TAG, `registerDataChangeListener, remove listener, length: ${this.listeners.length}`);
+            Log.info(TAG, `registerDataChangeListener, remove listener, length: ${this.listeners.length}`);
         }
     }
 

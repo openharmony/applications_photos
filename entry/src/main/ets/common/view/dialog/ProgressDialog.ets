@@ -14,7 +14,6 @@
  */
 
 import { MediaOperationType } from '../../../../../../../common/base/src/main/ets/data/MediaOperationType'
-import { Logger } from '../../utils/Logger';
 import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
@@ -33,7 +32,6 @@ export struct ProgressDialog {
     @Consume progressMessage: Resource;
     @Consume deleteProgress: number;
     @Consume progressParam: ProgressParam;
-    logger: Logger = new Logger('ProgressDialog');
 
     build() {
         Column() {

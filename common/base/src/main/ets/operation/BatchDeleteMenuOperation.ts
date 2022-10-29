@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import { logInfo, logWarn } from '../utils/LoggerUtils'
+import { Log } from '../utils/Log';
 import { ItemDataSource } from '../vm/ItemDataSource';
-import { MenuContext } from './MenuContext'
+import { MenuContext } from './MenuContext';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { ProcessMenuOperation } from './ProcessMenuOperation';
 import { MediaDataItem } from '../data/MediaDataItem';
@@ -27,10 +27,10 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
         super(menuContext);
     }
 
-    doAction(): void{
-        logInfo(TAG, 'delete doAction');
+    doAction(): void {
+        Log.info(TAG, 'delete doAction');
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
 
@@ -41,7 +41,7 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
             this.count = dataSource.getSelectedCount();
         }
         if (this.count <= 0) {
-            logWarn(TAG, 'count <= 0, return');
+            Log.warn(TAG, 'count <= 0, return');
             return;
         }
 
@@ -52,7 +52,7 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
         this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [resource, this.confirmCallback, this.cancelCallback]);
     }
 
-    getDeleteMessageResource(dataSource: ItemDataSource): Resource{
+    getDeleteMessageResource(dataSource: ItemDataSource): Resource {
         let resource: Resource
         if (dataSource && dataSource.isSelect()) {
             resource = $r('app.string.recycle_all_files_tips')
@@ -65,7 +65,7 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
     }
 
     confirmCallback(): void {
-        logInfo(TAG, 'Batch delete confirm');
+        Log.info(TAG, 'Batch delete confirm');
         // 1. Variable initialization
         this.onOperationEnd = this.menuContext.onOperationEnd;
 
@@ -96,6 +96,6 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
     }
 
     cancelCallback(): void {
-        logInfo(TAG, 'Batch delete cancel');
+        Log.info(TAG, 'Batch delete cancel');
     }
 }

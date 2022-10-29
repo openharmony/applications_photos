@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logDebug } from '../utils/LoggerUtils'
-import selectManager from '../manager/SelectManager'
+import { Log } from '../utils/Log';
+import selectManager from '../manager/SelectManager';
 
 const TAG = "PeerDataItem"
 
@@ -39,8 +39,8 @@ export class PeerDataItem {
         return `${this.networkId} ${this.orientation}`
     }
 
-    getThumbnail(): string{
-        logDebug(TAG, `this.uri ${this.uri}`)
+    getThumbnail(): string {
+        Log.debug(TAG, `this.uri ${this.uri}`)
         return this.uri + `/thumbnail/256/256`
     }
 

@@ -13,10 +13,11 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import mediaModel from '../model/MediaModel'
-import { logDebug, logError } from '../utils/LoggerUtils'
-import selectManager from '../manager/SelectManager'
-import { MediaConstants } from '../constants/MediaConstants'
+import mediaModel from '../model/MediaModel';
+
+import selectManager from '../manager/SelectManager';
+import { Log } from '../utils/Log';
+import { MediaConstants } from '../constants/MediaConstants';
 import { getFetchOptions } from '../helper/MediaDataHelper';
 
 const TAG = "AlbumDataItem"
@@ -73,8 +74,8 @@ export class AlbumDataItem {
         return this.relativePath
     }
 
-    getThumbnail(): string{
-        logDebug(TAG, `this.uri ${this.uri}`)
+    getThumbnail(): string {
+        Log.debug(TAG, `this.uri ${this.uri}`)
         return this.uri + `/thumbnail/256/256`
     }
 
@@ -99,7 +100,7 @@ export class AlbumDataItem {
             this.status = MediaConstants.TRASHED
             return true
         } catch (err) {
-            logError(TAG, `onDelete error: ${JSON.stringify(err)}`)
+            Log.error(TAG, `onDelete error: ${JSON.stringify(err)}`)
             return false
         }
     }

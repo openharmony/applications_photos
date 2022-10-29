@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-import { PhotoItem } from './PhotoItem'
+import { PhotoItem } from './PhotoItem';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import { logDebug } from '@ohos/base/src/main/ets/utils/LoggerUtils'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { AnimationConstants } from '@ohos/base/src/main/ets/constants/AnimationConstants';
-import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource'
+import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
-import { Constants } from '../constants/Constants'
+import { Constants } from '../constants/Constants';
 
 const TAG = "PhotoSwiper"
 
@@ -37,7 +37,7 @@ export struct PhotoSwiper {
 
     aboutToAppear() {
         this.broadCast.on(BroadcastConstants.ON_DATA_RELOADED, () => {
-            logDebug(TAG, 'animate to data reloaded start');
+            Log.debug(TAG, 'animate to data reloaded start');
             animateTo({
                 duration: AnimationConstants.DELETE_ANIMATE_DURATION,
                 onFinish: () => {
@@ -48,7 +48,7 @@ export struct PhotoSwiper {
         });
 
         this.broadCast.on(BroadcastConstants.CHANGE_SWIPER_DURATION, (value) => {
-            logDebug(TAG, `change duration start ${value}`);
+            Log.debug(TAG, `change duration start ${value}`);
             this.duration = value;
         });
     }

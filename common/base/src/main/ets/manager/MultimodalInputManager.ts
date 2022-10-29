@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 import inputConsumer from '@ohos.multimodalInput.inputConsumer';
-import { logDebug } from '../utils/LoggerUtils';
+import { Log } from '../utils/Log';
+
 
 const TAG = "MultimodalInputManager"
 
@@ -42,34 +43,34 @@ export class MultimodalInputManager {
     };
 
     async registerListener(callback) {
-        logDebug(TAG, `registerListener start`);
+        Log.debug(TAG, `registerListener start`);
         inputConsumer.on('key', this.leftKeyOptions, (data) => {
-            logDebug(TAG, `notificationRegister data: ${JSON.stringify(data)}`);
+            Log.debug(TAG, `notificationRegister data: ${JSON.stringify(data)}`);
             callback(0);
         });
         inputConsumer.on('key', this.rightKeyOptions, (data) => {
-            logDebug(TAG, `controlRegister data: ${JSON.stringify(data)}`);
+            Log.debug(TAG, `controlRegister data: ${JSON.stringify(data)}`);
             callback(1);
         });
         inputConsumer.on('key', this.escKeyOptions, (data) => {
-            logDebug(TAG, `escRegister data: ${JSON.stringify(data)}`);
+            Log.debug(TAG, `escRegister data: ${JSON.stringify(data)}`);
             callback(2);
         });
-        logDebug(TAG, `registerListener end`);
+        Log.debug(TAG, `registerListener end`);
     }
 
     async unregisterListener() {
-        logDebug(TAG, `unregisterListener start`);
+        Log.debug(TAG, `unregisterListener start`);
         inputConsumer.off('key', this.leftKeyOptions, (data) => {
-            logDebug(TAG, `notificationUnregister data: ${JSON.stringify(data)}`);
+            Log.debug(TAG, `notificationUnregister data: ${JSON.stringify(data)}`);
         });
         inputConsumer.off('key', this.rightKeyOptions, (data) => {
-            logDebug(TAG, `controlUnregister data: ${JSON.stringify(data)}`);
+            Log.debug(TAG, `controlUnregister data: ${JSON.stringify(data)}`);
         });
         inputConsumer.off('key', this.escKeyOptions, (data) => {
-            logDebug(TAG, `escUnregister data: ${JSON.stringify(data)}`);
+            Log.debug(TAG, `escUnregister data: ${JSON.stringify(data)}`);
         });
-        logDebug(TAG, `unregisterListener end`);
+        Log.debug(TAG, `unregisterListener end`);
     }
 }
 

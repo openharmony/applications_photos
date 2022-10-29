@@ -13,44 +13,44 @@
  * limitations under the License.
  */
 
-import router from '@system.router'
-import Want from '@ohos.application.Want'
+import router from '@system.router';
+import Want from '@ohos.application.Want';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils'
-import { Action } from '../../../common/view/browserOperation/Action'
-import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation'
-import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Action } from '../../../common/view/browserOperation/Action';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import {
     GotoPhotosMenuOperation
-} from '../../../../../../../features/browser/src/main/ets/operation/gotophotosmenuoperation'
+} from '../../../../../../../features/browser/src/main/ets/operation/gotophotosmenuoperation';
 import { BatchDeleteMenuOperation } from '@ohos/base/src/main/ets/operation/BatchDeleteMenuOperation';
 import { BatchRecoverMenuOperation } from '@ohos/base/src/main/ets/operation/BatchRecoverMenuOperation';
 import { ClearRecycleMenuOperation } from '@ohos/base/src/main/ets/operation/ClearRecycleMenuOperation';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
-import { MoveMenuOperation } from '@ohos/base/src/main/ets/operation/MoveMenuOperation'
-import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation'
-import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil'
-import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
-import { Constants } from '../../../common/model/common/Constants'
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
-import { Constants as PhotoConstants } from '../../../../../../../features/browser/src/main/ets/constants/Constants'
-import { PhotoBrowserBg } from '../../../../../../../features/browser/src/main/ets/components/PhotoBrowserBg'
-import { PhotoBrowserActionBar } from './PhotoBrowserActionBar'
-import { ToolBar } from '../../../common/view/actionbar/ToolBar'
-import { PhotoSwiper } from '../../../../../../../features/browser/src/main/ets/components/PhotoSwiper'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
-import { JumpSourceToMain } from '../../../../../../../common/base/src/main/ets/data/JumpSourceToMain'
-import { RenameMenuOperation } from '../../../../../../../features/browser/src/main/ets/operation/RenameMenuOperation'
-import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType'
+import { MoveMenuOperation } from '@ohos/base/src/main/ets/operation/MoveMenuOperation';
+import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation';
+import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
+import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
+import { Constants } from '../../../common/model/common/Constants';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { Constants as PhotoConstants } from '../../../../../../../features/browser/src/main/ets/constants/Constants';
+import { PhotoBrowserBg } from '../../../../../../../features/browser/src/main/ets/components/PhotoBrowserBg';
+import { PhotoBrowserActionBar } from './PhotoBrowserActionBar';
+import { ToolBar } from '../../../common/view/actionbar/ToolBar';
+import { PhotoSwiper } from '../../../../../../../features/browser/src/main/ets/components/PhotoSwiper';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { JumpSourceToMain } from '../../../../../../../common/base/src/main/ets/data/JumpSourceToMain';
+import { RenameMenuOperation } from '../../../../../../../features/browser/src/main/ets/operation/RenameMenuOperation';
+import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
-import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver'
-import mMultimodalInputManager from '@ohos/base/src/main/ets/manager/multimodalinputmanager'
-import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils'
-import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource'
+import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
+import mMultimodalInputManager from '@ohos/base/src/main/ets/manager/multimodalinputmanager';
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
+import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { InnerMediaDataItem } from '../../../../../../../features/browser/src/main/ets/data/InnerMediaDataItem';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
@@ -114,7 +114,7 @@ struct PhotoBrowser {
     private isToEdit = false
 
     onMenuClicked(action: Action) {
-        logInfo(TAG, `onMenuClicked, action: ${action.actionID}, isPullingDown: ${this.isPullingDown}`);
+        Log.info(TAG, `onMenuClicked, action: ${action.actionID}, isPullingDown: ${this.isPullingDown}`);
         if (this.isPullingDown) {
             return;
         }
@@ -233,7 +233,7 @@ struct PhotoBrowser {
     }
 
     private setFavourite(isSuccess: boolean) {
-        logDebug(TAG, 'set favor !')
+        Log.debug(TAG, 'set favor !')
 
         if (isSuccess) {
             let currentPhoto = this.getCurrentPhoto();
@@ -255,7 +255,7 @@ struct PhotoBrowser {
     }
 
     private setOrientation() {
-        logDebug(TAG, `setOrientation`);
+        Log.debug(TAG, `setOrientation`);
         let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined) {
             return;
@@ -270,7 +270,7 @@ struct PhotoBrowser {
         } else {
             this.showBars();
         }
-        logInfo(TAG, `Toggle bars, isShowBar: ${this.isShowBar}`);
+        Log.info(TAG, `Toggle bars, isShowBar: ${this.isShowBar}`);
     }
 
     showBars(): void {
@@ -301,13 +301,13 @@ struct PhotoBrowser {
 
     onPhotoChanged(index: number): void{
         index = Math.min(index, this.browserDataSource.totalCount() - 1)
-        logInfo(TAG, `onPhotoChanged start ${index}`);
+        Log.info(TAG, `onPhotoChanged start ${index}`);
         this.currentIndex = index;
         this.updateActionBar();
     }
 
     onDataSizeChanged(size: number): void {
-        logInfo(TAG, `onDataSizeChanged, size is ${size}`);
+        Log.info(TAG, `onDataSizeChanged, size is ${size}`);
         if (size == 0) {
             if (this.pageFrom == Constants.ENTRY_FROM.CARD) {
                 let menuContext: MenuContext = new MenuContext();
@@ -323,7 +323,7 @@ struct PhotoBrowser {
     updateActionBar() {
         let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined || this.isFromViewData) {
-            logWarn(TAG, `currentPhoto is undefined:${currentPhoto == undefined} this.isFromViewData:${this.isFromViewData} `)
+            Log.warn(TAG, `currentPhoto is undefined:${currentPhoto == undefined} this.isFromViewData:${this.isFromViewData} `)
             return;
         }
 
@@ -405,7 +405,7 @@ struct PhotoBrowser {
     }
 
     async onMoveEnd(err, count, total) {
-        logDebug(TAG, `onMoveEnd count: ${count}, total: ${total}`);
+        Log.debug(TAG, `onMoveEnd count: ${count}, total: ${total}`);
         if (err) {
             getResourceString($r('app.string.move_failed_single')).then((message: string) => {
                 showToast(message)
@@ -421,7 +421,7 @@ struct PhotoBrowser {
     }
 
     onCopyEnd(err, count, total): void {
-        logDebug(TAG, `onCopyEnd count: ${count}, total: ${total}`);
+        Log.debug(TAG, `onCopyEnd count: ${count}, total: ${total}`);
         this.dataSourceLoadFinish()
         if (err) {
             getResourceString($r('app.string.copy_failed_single')).then((message: string) => {
@@ -431,7 +431,7 @@ struct PhotoBrowser {
     }
 
     async onDownloadEnd(err, count, total) {
-        logDebug(TAG, `onDownloadEnd count: ${count}, total: ${total}`);
+        Log.debug(TAG, `onDownloadEnd count: ${count}, total: ${total}`);
         if (err) {
             getResourceString($r('app.string.download_failed_single')).then((message: string) => {
                 showToast(message)
@@ -444,24 +444,24 @@ struct PhotoBrowser {
     }
 
     onBackPress() {
-        logInfo(TAG, 'onBackPress');
+        Log.info(TAG, 'onBackPress');
         this.controller.finishAnimation(this.onBackPressInner.bind(this));
         return true;
     }
 
     onBackPressInner(): void {
-        logInfo(TAG, `onBackPressInner ${this.checkedTransition}`);
+        Log.info(TAG, `onBackPressInner ${this.checkedTransition}`);
         switch (this.checkedTransition) {
             case Constants.PHOTO_TRANSITION_TIMELINE:
-                logInfo(TAG, 'onBackPress TimelinePage');
+                Log.info(TAG, 'onBackPress TimelinePage');
                 this.TimelinePageIndex = this.currentIndex; // call scrollTo
                 break;
             case Constants.PHOTO_TRANSITION_ALBUM:
-                logInfo(TAG, 'onBackPress PhotoGridPage');
+                Log.info(TAG, 'onBackPress PhotoGridPage');
                 this.PhotoGridPageIndex = this.currentIndex; // call scrollTo
                 break;
             case Constants.PHOTO_TRANSITION_CAMERA:
-                logInfo(TAG, 'onBackPress Camera');
+                Log.info(TAG, 'onBackPress Camera');
                 if (this.pageFrom == Constants.ENTRY_FROM.CARD && !this.pullDownFlag) {
                     this.routerGridPaged();
                 } else {
@@ -483,7 +483,7 @@ struct PhotoBrowser {
     }
 
     aboutToDisappear(): void {
-        logInfo(TAG, 'aboutToDisappear');
+        Log.info(TAG, 'aboutToDisappear');
         screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000')
         if (!this.isShowBar) {
             screenManager.setSystemUi(true);
@@ -498,11 +498,11 @@ struct PhotoBrowser {
 
     aboutToAppear(): void {
         startTrace('PhotoBrowserAboutToAppear');
-        logInfo(TAG, 'photoBrowser aboutToAppear');
+        Log.info(TAG, 'photoBrowser aboutToAppear');
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000')
         this.hasAppeared = true;
         mMultimodalInputManager.registerListener((control: number) => {
-            logInfo(TAG, `key control: ${control} index ${this.currentIndex}`);
+            Log.info(TAG, `key control: ${control} index ${this.currentIndex}`);
             if (control == 0) {
                 if (this.currentIndex > 0) {
                     this.onPhotoChanged(this.currentIndex - 1);
@@ -517,8 +517,8 @@ struct PhotoBrowser {
         });
         let param = router.getParams();
         if (param) {
-            logInfo(TAG, `photoBrowser start with param`);
-            logDebug(TAG, `param: ${JSON.stringify(param)}`);
+            Log.info(TAG, `photoBrowser start with param`);
+            Log.debug(TAG, `param: ${JSON.stringify(param)}`);
             if (param.pageFrom) {
                 this.pageFrom = parseInt(param.pageFrom.toString());
             }
@@ -562,7 +562,7 @@ struct PhotoBrowser {
             this.photoBrowserTransition = (this.isFromCamera || this.isFromViewData)
                 ? Constants.PHOTO_TRANSITION_CAMERA : (param.transition ? param.transition.toString() : '');
         } else {
-            logInfo(TAG, `photoBrowser start without param`);
+            Log.info(TAG, `photoBrowser start without param`);
             if (this.entryFromHap == Constants.ENTRY_FROM_FORM_ABILITY) {
                 this.isFromCard = true;
                 this.pageFrom = Constants.ENTRY_FROM.CARD;
@@ -599,7 +599,7 @@ struct PhotoBrowser {
         });
 
         this.broadCast.on(PhotoConstants.PULL_DOWN_START, () => {
-            logInfo(TAG, 'pulling down start');
+            Log.info(TAG, 'pulling down start');
         });
 
         this.broadCast.on(PhotoConstants.PULL_DOWN_END, () => {
@@ -616,7 +616,7 @@ struct PhotoBrowser {
         });
 
         this.broadCast.on(PhotoConstants.RENAME, (result: string[]) => {
-            logInfo(TAG, `rename refresh: ${result[0]}, ${result[1]}`);
+            Log.info(TAG, `rename refresh: ${result[0]}, ${result[1]}`);
             let currentPhoto = this.getCurrentPhoto();
             if (currentPhoto == undefined) {
                 return;
@@ -627,22 +627,22 @@ struct PhotoBrowser {
         });
 
         this.broadCast.on(PhotoConstants.PULL_DOWN_START, (event) => {
-            logDebug(TAG, `pulling down start : ${JSON.stringify(event)}`);
+            Log.debug(TAG, `pulling down start : ${JSON.stringify(event)}`);
             this.isPullingDown = true;
         })
 
         this.broadCast.on(PhotoConstants.PULL_DOWN_CANCEL, () => {
-            logInfo(TAG, 'pulling down cancel');
+            Log.info(TAG, 'pulling down cancel');
             this.isPullingDown = false;
         })
 
         this.broadCast.on(PhotoConstants.PHOTO_SHOW_STATE, (state: boolean) => {
-            logDebug(TAG, 'current photo show state change');
+            Log.debug(TAG, 'current photo show state change');
             this.currentShow = state;
         });
 
         this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean) => {
-            logInfo(TAG, `set swiper swipe ${value}`);
+            Log.info(TAG, `set swiper swipe ${value}`);
             this.canSwipe = value;
         });
 
@@ -674,12 +674,12 @@ struct PhotoBrowser {
         this.broadCast.emit(BroadcastConstants.CHANGE_SWIPER_DURATION, [400]);
         let params = router.getParams();
         if (params != null && params.pageType != null && this.backFromCopy) {
-            logDebug(TAG, `MediaOperation back ${JSON.stringify(params)}`)
+            Log.debug(TAG, `MediaOperation back ${JSON.stringify(params)}`)
             let menuContext = new MenuContext();
             let menuOperation: MenuOperation;
             let currentPhoto = this.getCurrentPhoto();
             if (currentPhoto == undefined) {
-                logWarn(TAG, 'MediaOperation currentPhoto is undefined');
+                Log.warn(TAG, 'MediaOperation currentPhoto is undefined');
                 return;
             }
             switch (params.pageType) {
@@ -707,13 +707,13 @@ struct PhotoBrowser {
     }
 
     private downLoad() {
-        logInfo(TAG, 'downLoad run');
+        Log.info(TAG, 'downLoad run');
         let menuContext = new MenuContext();
         let menuOperation: MenuOperation;
         let currentPhoto = this.getCurrentPhoto();
         this.onDownloadEnd = this.onDownloadEnd.bind(this);
         if (currentPhoto == undefined) {
-            logWarn(TAG, 'MediaOperation currentPhoto is undefined');
+            Log.warn(TAG, 'MediaOperation currentPhoto is undefined');
             return;
         }
         menuContext.withItems([currentPhoto])
@@ -729,7 +729,7 @@ struct PhotoBrowser {
     }
 
     onMediaLibDataChange(changeType) {
-        logInfo(TAG, `onMediaLibDataChange type: ${changeType}`);
+        Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
         this.dataSourceLoadFinish()
     }
 
@@ -737,7 +737,7 @@ struct PhotoBrowser {
         AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, true);
         let displayName = await getAlbumDisplayName(MediaConstants.ALBUM_ID_CAMERA)
         let item: SimpleAlbumDataItem = new SimpleAlbumDataItem(MediaConstants.ALBUM_ID_CAMERA, displayName, "", "", "")
-        logInfo(TAG, `item.displayName: ${item.displayName} item ${JSON.stringify(item)}`);
+        Log.info(TAG, `item.displayName: ${item.displayName} item ${JSON.stringify(item)}`);
         router.replace({
             uri: 'feature/photoGrid/view/PhotoGridPage',
             params: {

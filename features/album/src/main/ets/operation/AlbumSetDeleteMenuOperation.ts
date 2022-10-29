@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { ItemDataSource } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
@@ -29,7 +29,7 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
 
     doAction(): void {
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
         let dataSource: ItemDataSource = this.menuContext.dataSource;
@@ -41,7 +41,7 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
             this.items = dataSource.getSelectedItems();
         }
         if (this.count <= 0) {
-            logWarn(TAG, 'count <= 0, return');
+            Log.warn(TAG, 'count <= 0, return');
             return;
         }
 
@@ -98,7 +98,7 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
     }
 
     private confirmCallback(): void {
-        logInfo(TAG, 'AlbumSet delete confirm')
+        Log.info(TAG, 'AlbumSet delete confirm')
         // 1. Variable initialization
         this.onOperationEnd = this.menuContext.onOperationEnd;
         let onOperationStart: Function = this.menuContext.onOperationStart;
@@ -110,6 +110,6 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
     }
 
     private cancelCallback(): void {
-        logInfo(TAG, 'AlbumSet delete cancel');
+        Log.info(TAG, 'AlbumSet delete cancel');
     }
 }

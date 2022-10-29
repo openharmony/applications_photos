@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 import resourceManager from '@ohos.resourceManager';
-import { logDebug, logWarn, logError } from './LoggerUtils'
+import { Log } from '../utils/Log';
 
 const TAG = "ResourceUtils"
 
 export async function getResourceString(resource: Resource): Promise<string> {
     try {
-        logDebug(TAG, `getResourceString: ${JSON.stringify(resource)}`);
+        Log.debug(TAG, `getResourceString: ${JSON.stringify(resource)}`);
         let mgr: resourceManager.ResourceManager = await resourceManager.getResourceManager(globalThis.appContext);
         if (mgr != null || mgr != undefined) {
             return await mgr.getString(resource.id);
         } else {
-            logWarn(TAG, `getResourceManager instance is none`);
+            Log.warn(TAG, `getResourceManager instance is none`);
             return null;
         }
     } catch (error) {
-        logError(TAG, `getResourceString error: ${error}`);
+        Log.error(TAG, `getResourceString error: ${error}`);
         return null;
     }
 }

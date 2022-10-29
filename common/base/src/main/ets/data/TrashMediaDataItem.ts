@@ -12,13 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logError } from '../utils/LoggerUtils';
-import selectManager from '../manager/SelectManager'
-import mediaModel from '../model/MediaModel'
-import { MediaConstants } from '../constants/MediaConstants'
-import { MediaDataItem } from './MediaDataItem'
+import selectManager from '../manager/SelectManager';
+import mediaModel from '../model/MediaModel';
+import { Log } from '../utils/Log';
+import { MediaConstants } from '../constants/MediaConstants';
+import { MediaDataItem } from './MediaDataItem';
 
 const TAG = "TrashMediaDataItem"
 
@@ -55,7 +54,7 @@ export class TrashMediaDataItem extends MediaDataItem {
             this.status = MediaConstants.TRASHED
             return true
         } catch (err) {
-            logError(TAG, `onRecover error: ${JSON.stringify(err)}`)
+            Log.error(TAG, `onRecover error: ${JSON.stringify(err)}`)
             return false
         }
     }
@@ -67,7 +66,7 @@ export class TrashMediaDataItem extends MediaDataItem {
             this.status = MediaConstants.TRASHED
             return true
         } catch (err) {
-            logError(TAG, `onDelete error: ${JSON.stringify(err)}`)
+            Log.error(TAG, `onDelete error: ${JSON.stringify(err)}`)
             return false
         }
     }

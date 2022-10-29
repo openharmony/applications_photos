@@ -13,39 +13,39 @@
  * limitations under the License.
  */
 
-import { logInfo, logDebug, logWarn } from '@ohos/base/src/main/ets/utils/LoggerUtils'
-import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent';
 import {
     TimelineTitleComponent
-} from '../../../../../../../features/timeline/src/main/ets/components/TimelineTitleComponent'
-import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
+} from '../../../../../../../features/timeline/src/main/ets/components/TimelineTitleComponent';
+import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
 import { ToolBar } from '../../../common/view/actionbar/ToolBar';
-import { Constants } from '../../../common/model/common/Constants'
-import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation'
-import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext'
+import { Constants } from '../../../common/model/common/Constants';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { BatchDeleteMenuOperation } from '@ohos/base/src/main/ets/operation/BatchDeleteMenuOperation';
-import { ViewType } from '@ohos/base/src/main/ets/data/ViewType'
-import { Action } from '../../../common/view/browserOperation/Action'
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
-import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
-import router from '@system.router'
-import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils'
+import { ViewType } from '@ohos/base/src/main/ets/data/ViewType';
+import { Action } from '../../../common/view/browserOperation/Action';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import router from '@system.router';
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import { ShareMenuOperation } from '@ohos/base/src/main/ets/operation/ShareMenuOperation';
 import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
-import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver'
+import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
-import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType'
+import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType';
 import { MoveMenuOperation } from '@ohos/base/src/main/ets/operation/MoveMenuOperation';
 import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation';
 import { TimelineScrollBar } from '../../../../../../../features/timeline/src/main/ets/components/TimelineScrollBar';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
-import { TimelinePageBarModel } from '../model/TimelinePageBarModel'
-import { ActionBar } from '../../../common/view/actionbar/ActionBar'
+import { TimelinePageBarModel } from '../model/TimelinePageBarModel';
+import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import {
     TimelineItemDataSource
 } from '../../../../../../../features/timeline/src/main/ets/vm/TimelineItemDataSource';
@@ -82,7 +82,7 @@ export struct TimelinePage {
 
     aboutToAppear(): void {
         startTrace('TimelinePageAboutToAppear');
-        logInfo(TAG, 'aboutToAppear');
+        Log.info(TAG, 'aboutToAppear');
         this.moreMenuList = [Action.MOVE_INVALID, Action.COPY_INVALID, Action.INFO_INVALID];
         mediaObserver.registerObserver(this.dataObserver);
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.initGridRowCount());
@@ -97,7 +97,7 @@ export struct TimelinePage {
             }
         });
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            logInfo(TAG, `ON_LOADING_FINISHED size: ${size}`);
+            Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
         });
         this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect());
         this.broadCast.on(BroadcastConstants.GROUP_SELECT, () => this.onSelect());
@@ -120,7 +120,7 @@ export struct TimelinePage {
     }
 
     private onSelect() {
-        logInfo(TAG, "onSelect")
+        Log.info(TAG, "onSelect")
         this.totalSelectedCount = this.timelineDataSource.getSelectedCount()
         this.isAllSelected = this.timelineDataSource.isSelect()
         if (this.totalSelectedCount > 0) {
@@ -134,7 +134,7 @@ export struct TimelinePage {
         let children: MediaDataItem[] = this.timelineDataSource.getItems()
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
-            logWarn(TAG, 'targetIndex is not found');
+            Log.warn(TAG, 'targetIndex is not found');
             return;
         }
         AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
@@ -151,7 +151,7 @@ export struct TimelinePage {
         let children: MediaDataItem[] = this.timelineDataSource.getItems()
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
-            logWarn(TAG, 'targetIndex is not found');
+            Log.warn(TAG, 'targetIndex is not found');
             return;
         }
         AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
@@ -165,7 +165,7 @@ export struct TimelinePage {
     }
 
     aboutToDisappear(): void {
-        logInfo(TAG, 'TimelinePageAboutToDisappear');
+        Log.info(TAG, 'TimelinePageAboutToDisappear');
         this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
         this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
         this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
@@ -189,7 +189,7 @@ export struct TimelinePage {
                 this.timelineDataSource.notifyDataReload()
             }
         }
-        logInfo(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
+        Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
     }
 
     private moveOperation(albumInfo: SimpleAlbumDataItem) {
@@ -219,10 +219,10 @@ export struct TimelinePage {
     }
 
     onIndexChange() {
-        logInfo(TAG, `onIndexChange ${this.TimelinePageIndex}`);
+        Log.info(TAG, `onIndexChange ${this.TimelinePageIndex}`);
         if (this.TimelinePageIndex != Constants.INVALID) {
             let rollToIndex = this.timelineDataSource.getIndexByChildIndex(this.TimelinePageIndex)
-            logInfo(TAG, `onIndexChange ${this.TimelinePageIndex} roll to ${rollToIndex}`)
+            Log.info(TAG, `onIndexChange ${this.TimelinePageIndex} roll to ${rollToIndex}`)
             this.scroller.scrollToIndex(rollToIndex);
         }
     }
@@ -234,7 +234,7 @@ export struct TimelinePage {
     }
 
     private onUpdateFavorState(item: MediaDataItem): void {
-        logDebug(TAG, 'onUpdateFavorState favor');
+        Log.debug(TAG, 'onUpdateFavorState favor');
         let index = this.timelineDataSource.getIndexByItem(item);
         if (index != -1) {
             this.timelineDataSource.notifyDataChange(index);
@@ -258,7 +258,7 @@ export struct TimelinePage {
     }
 
     onMenuClicked(action: Action) {
-        logInfo(TAG, `onMenuClicked, actionID: ${action.actionID}`);
+        Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
         switch (action) {
@@ -314,7 +314,7 @@ export struct TimelinePage {
     }
 
     onMediaLibDataChange(changeType) {
-        logInfo(TAG, `onMediaLibDataChange type: ${changeType}`);
+        Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
         this.isMediaLibDataChanged = true
         this.loadItem()
     }
@@ -325,7 +325,7 @@ export struct TimelinePage {
             startTrace("reloadTimelineItemData")
             this.timelineDataSource.reloadTimelineItemData().then((isEmpty) => {
                 finishTrace("reloadTimelineItemData");
-                logInfo(TAG, `onMediaLibDataChange load finish`);
+                Log.info(TAG, `onMediaLibDataChange load finish`);
                 this.initLoadFinish = true;
                 this.isEmpty = isEmpty;
                 this.timelineDataSource.notifyDataReload();
@@ -339,28 +339,28 @@ export struct TimelinePage {
     async openDetailsDialog(): Promise<void> {
         let items: MediaDataItem[] = this.timelineDataSource.getSelectedItems()
         if (items.length == 0) {
-            logWarn(TAG, 'no select error');
+            Log.warn(TAG, 'no select error');
         } else if (items.length == 1) {
-            logInfo(TAG, 'totalSelectedCount is 1');
+            Log.info(TAG, 'totalSelectedCount is 1');
             this.broadCast.emit(BroadcastConstants.SHOW_DETAIL_DIALOG, [items[0], false]);
         } else {
             let size = 0;
             items.forEach((item) => {
-                logDebug(TAG, `openDetailsDialog item.size: ${item.size}`);
+                Log.debug(TAG, `openDetailsDialog item.size: ${item.size}`);
                 size = size + item.size;
             })
-            logInfo(TAG, `openDetailsDialog size: ${size}`);
+            Log.info(TAG, `openDetailsDialog size: ${size}`);
             this.broadCast.emit(BroadcastConstants.SHOW_MULTI_SELECT_DIALOG, [items.length, size]);
         }
     }
 
     onDeleteStart(): void {
-        logInfo(TAG, `onDeleteStart`);
+        Log.info(TAG, `onDeleteStart`);
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onDeleteEnd(err): void {
-        logInfo(TAG, `onDeleteEnd`);
+        Log.info(TAG, `onDeleteEnd`);
         startTrace('onModeChange');
         this.onModeChange();
         finishTrace('onModeChange');
@@ -374,13 +374,13 @@ export struct TimelinePage {
     }
 
     onCopyStart(): void {
-        logInfo(TAG, `onCopyStart`);
+        Log.info(TAG, `onCopyStart`);
         mediaObserver.unregisterObserver(this.dataObserver);
 
     }
 
     onCopyEnd(err, count, total): void {
-        logInfo(TAG, `onCopyEnd count: ${count}, total: ${total}`);
+        Log.info(TAG, `onCopyEnd count: ${count}, total: ${total}`);
         startTrace('onModeChange');
         this.onModeChange();
         finishTrace('onModeChange');
@@ -396,12 +396,12 @@ export struct TimelinePage {
     }
 
     onMoveStart(): void {
-        logInfo(TAG, `onMoveStart`);
+        Log.info(TAG, `onMoveStart`);
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onMoveEnd(err, count, total): void {
-        logInfo(TAG, `onMoveEnd count: ${count}, total: ${total}`);
+        Log.info(TAG, `onMoveEnd count: ${count}, total: ${total}`);
         startTrace('onModeChange');
         this.onModeChange();
         finishTrace('onModeChange');
@@ -414,7 +414,7 @@ export struct TimelinePage {
     }
 
     onModeChange() {
-        logDebug(TAG, 'onModeChange');
+        Log.debug(TAG, 'onModeChange');
         if (this.isSelectedMode) {
             this.isSelectedMode = false;
             this.timelineDataSource.setSelect(false)
@@ -426,11 +426,11 @@ export struct TimelinePage {
 
     // The callbacks after index page shows
     onIndexPageShow() {
-        logInfo(TAG, `onIndexPageShow`)
+        Log.info(TAG, `onIndexPageShow`)
         if (this.isShow && this.isInCurrentTab) {
             let params = router.getParams();
             if (this.routerStart && params != null && params.pageType != null) {
-                logInfo(TAG, `MediaOperation back ${JSON.stringify(params)}`)
+                Log.info(TAG, `MediaOperation back ${JSON.stringify(params)}`)
                 switch (params.pageType) {
                     case MediaOperationType.Move:
                         this.moveOperation(JSON.parse(params.albumInfo.toString()));
@@ -453,7 +453,7 @@ export struct TimelinePage {
     // The callback when current page is in the foreground
     onActive() {
         if (!this.isActive) {
-            logInfo(TAG, 'onActive');
+            Log.info(TAG, 'onActive');
             this.isActive = true;
         }
         this.loadItem()
@@ -462,7 +462,7 @@ export struct TimelinePage {
     // The callback when current page is in the background
     onInActive() {
         if (this.isActive) {
-            logInfo(TAG, 'onInActive');
+            Log.info(TAG, 'onInActive');
             this.isActive = false;
         }
     }
@@ -514,12 +514,12 @@ export struct TimelinePage {
                         .rowsGap(Constants.GRID_GUTTER)
                         .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
                         .onScrollIndex((index: number) => {
-                            logDebug(TAG, `onScrollIndex index ${index}`)
+                            Log.debug(TAG, `onScrollIndex index ${index}`)
                             let item: TimelineDataItem | MediaDataItem = this.timelineDataSource.getData(index);
                             if (item) {
                                 this.dateText = DateUtil.getLocalizedYearAndMonth(item.dateAdded);
                             } else {
-                                logWarn(TAG, 'index out of active window');
+                                Log.warn(TAG, 'index out of active window');
                             }
                         })
 

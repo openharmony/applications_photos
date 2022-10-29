@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-import { Logger } from '../../utils/Logger';
 import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
@@ -32,7 +31,6 @@ export struct DeleteProgressDialog {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     controller: CustomDialogController
     @Consume deleteProgressParam: DeleteProgressParam;
-    logger: Logger = new Logger('ProgressDialog');
 
     build() {
         Column() {

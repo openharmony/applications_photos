@@ -13,15 +13,16 @@
  * limitations under the License.
  */
 
-import screenManager from '../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { Constants } from '../model/common/Constants'
-import { Logger } from '../utils/Logger'
+import screenManager from '../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { Constants } from '../model/common/Constants';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+
+const TAG = "NoPhotoComponent"
 
 @Component
 export struct NoPhotoComponent {
+    private TAG: string = 'NoPhotoComponent'
     title: Resource;
-    logger: Logger = new Logger('NoPhotoComponent');
-
     // set an initial value temporarily, later change to 0.
     @State offSetY: number = Constants.EMPTY_PAGE_DEFAULT_OFFSET;
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
@@ -30,7 +31,7 @@ export struct NoPhotoComponent {
     @State bigScreen: boolean = false;
 
     aboutToAppear(): void {
-        this.logger.info(`aboutToAppear`);
+        Log.info(TAG, `aboutToAppear`);
         this.bigScreen = Math.min(screenManager.getWinHeight(), screenManager
             .getWinWidth()) > Constants.BIG_SCREEN_WIDTH
         let halfImageHeight = this.bigScreen ? Constants.BIG_EMPTY_ICON_SIZE / 2 : Constants.SMALL_EMPTY_ICON_SIZE / 2
@@ -49,7 +50,7 @@ export struct NoPhotoComponent {
             Constants.ActionBarHeight - halfImageHeight;
         }
 
-        this.logger.info(`isHorizontal: ${this.isHorizontal}, offSetY: ${this.offSetY}, bigScreen: ${this.bigScreen}`);
+         Log.info(TAG, `isHorizontal: ${this.isHorizontal}, offSetY: ${this.offSetY}, bigScreen: ${this.bigScreen}`);
     }
 
     build() {

@@ -13,18 +13,18 @@
  * limitations under the License.
  */
 
-import { Logger } from '../../utils/Logger'
-import { ActionBarProp } from '../browserOperation/ActionBarProp'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { ActionBarProp } from '../browserOperation/ActionBarProp';
 import { Action } from '../browserOperation/Action';
 
 // Single line title, fixed content
 @Component
 export struct SingleTitle {
+    private TAG: string = 'SingleTitle'
     @State actionBarProp: ActionBarProp = new ActionBarProp();
-    logger: Logger = new Logger('SingleTitle');
 
     private onBuildDone(): void {
-        this.logger.info(`onBuildDone, title: ${this.actionBarProp.getTitle()}`)
+        Log.info(this.TAG, `onBuildDone, title: ${this.actionBarProp.getTitle()}`)
     }
 
     build() {

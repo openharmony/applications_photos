@@ -20,10 +20,11 @@ import { RefreshActionMenu, ActionChangedEvent } from './RefreshMenu'
 import { PhotoEditMode } from '../base/PhotoEditType'
 import { Constants } from '../../../common/model/common/Constants'
 import { PhotoEditorManager } from '../PhotoEditorManager'
-import { Logger } from '../utils/Logger'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 
 @Component
 export struct ToolBar {
+    private TAG: string = 'ToolBar'
     @Consume editorManager: PhotoEditorManager;
     @Consume('selected') selectedMode: number;
     @Consume('scale') imageScale: number;
@@ -38,7 +39,6 @@ export struct ToolBar {
     @Consume titleSize: number;
     @Consume isRedo: boolean;
     @Consume isUndo: boolean;
-    private log: Logger = new Logger('ToolBar');
     private menuClick: any = undefined;
     private immersiveClick: any = undefined;
     mainMenuList: Array<ActionButtonInfo> = [];
@@ -52,7 +52,7 @@ export struct ToolBar {
         for (let i = 0; i < this.menuChanged.menuArray.length; i++) {
             if (actionID == this.menuChanged.menuArray[i].actionID) {
                 this.selectedMode = this.menuChanged.menuArray[i].mode;
-                this.log.info('mainMenu onMenuClick mode = ' + this.selectedMode);
+                Log.info(this.TAG, 'mainMenu onMenuClick mode = ' + this.selectedMode);
                 this.menuChanged.isChanged = i;
 
                 let canvasWidth = this.isVerticalScreen ? this.screenWidth : (this.screenHeight - this.mainBottomSize);
@@ -65,7 +65,7 @@ export struct ToolBar {
                         this.isCompare = false;
                         break;
                     default:
-                        this.log.info('this.selectedMode is not toolBar');
+                        Log.info(this.TAG, 'this.selectedMode is not toolBar');
                         break;
                 }
 
@@ -90,7 +90,7 @@ export struct ToolBar {
 
         for (let i = 0; i < this.menuChanged.menuArray.length; i++) {
             if (this.selectedMode == this.menuChanged.menuArray[i].mode) {
-                this.log.info('mainMenu onMenuClick mode = ' + this.selectedMode);
+                Log.info(this.TAG, 'mainMenu onMenuClick mode = ' + this.selectedMode);
                 this.menuChanged.isChanged = i;
             }
         }

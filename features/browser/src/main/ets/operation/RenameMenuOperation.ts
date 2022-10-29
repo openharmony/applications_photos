@@ -12,16 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import { MenuOperationCallback } from '@ohos/base/src/main/ets/operation/MenuOperationCallback'
-import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation'
-import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext'
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel'
+import { MenuOperationCallback } from '@ohos/base/src/main/ets/operation/MenuOperationCallback';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
+import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import { getFetchOptionsByItem } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
-import { Constants } from '../constants/Constants'
-import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
+import { Constants } from '../constants/Constants';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
@@ -35,14 +34,14 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
         this.menuContext = menuContext;
     }
 
-    doAction(): void{
+    doAction(): void {
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
         let mediaItem = this.menuContext.items[0];
         if (mediaItem == null) {
-            logWarn(TAG, 'mediaItem is null, return');
+            Log.warn(TAG, 'mediaItem is null, return');
             return;
         }
 
@@ -61,24 +60,24 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
     }
 
     onCompleted(): void {
-        logInfo(TAG, 'Rename data succeed!');
+        Log.info(TAG, 'Rename data succeed!');
     }
 
     onError(): void {
-        logError(TAG, 'Rename data failed!');
+        Log.error(TAG, 'Rename data failed!');
     }
 
     private async confirmCallback(title: string) {
-        logInfo(TAG, `Rename confirm new name: ${title}`);
+        Log.info(TAG, `Rename confirm new name: ${title}`);
         let mediaItem = (this.menuContext.items[0] as MediaDataItem);
         if (mediaItem == null) {
-            logWarn(TAG, 'mediaItem is null, return');
+            Log.warn(TAG, 'mediaItem is null, return');
             return;
         }
 
         let hasSameName = await this.hasSameNameAsset(mediaItem, title);
         if (hasSameName) {
-            logInfo(TAG, 'show find same file dialog');
+            Log.info(TAG, 'show find same file dialog');
             getResourceString($r('app.string.name_already_use')).then((message: string) => {
                 showToast(message)
             })
@@ -86,10 +85,10 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
         }
         try {
             let result = await this.rename(mediaItem, title);
-            logInfo(TAG, `Rename confirm result: ${result}`);
+            Log.info(TAG, `Rename confirm result: ${result}`);
             this.menuContext.broadCast.emit(Constants.RENAME, [result]);
         } catch (err) {
-            logError(TAG, `Rename error: ${err}`);
+            Log.error(TAG, `Rename error: ${err}`);
             getResourceString($r('app.string.rename_failed')).then((message: string) => {
                 showToast(message)
             })
@@ -98,13 +97,13 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
     }
 
     private async rename(item: MediaDataItem, name: string) {
-        logInfo(TAG, 'renameSinglePhoto start');
+        Log.info(TAG, 'renameSinglePhoto start');
         item.setName(name)
         return [item.title, item.displayName];
     }
 
     private async hasSameNameAsset(item: MediaDataItem, name: string) {
-        logDebug(TAG, 'hasSameNameAsset start');
+       Log.debug(TAG, 'hasSameNameAsset start');
         let fileAsset = await item.loadFileAsset()
         let displayName = fileAsset.displayName;
         let index = displayName.lastIndexOf('.');
@@ -115,15 +114,15 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
         let counts = (await mediaModel.getAllCommonMediaItem(fetchOption, true)).counts
 
         if (counts == 0) {
-            logWarn(TAG, 'hasSameNameAsset is false');
+            Log.warn(TAG, 'hasSameNameAsset is false');
             return false;
         }
 
-        logDebug(TAG, 'hasSameNameAsset true');
+       Log.debug(TAG, 'hasSameNameAsset true');
         return true;
     }
 
     private cancelCallback(): void {
-        logInfo(TAG, 'Rename cancel');
+        Log.info(TAG, 'Rename cancel');
     }
 }

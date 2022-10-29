@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logDebug, logInfo } from '../utils/LoggerUtils';
+import { Log } from '../utils/Log';
 import { WindowConstants } from '../constants/WindowConstants';
-import mediaModel from '../model/MediaModel'
-import screenManager from '../manager/ScreenManager'
+import mediaModel from '../model/MediaModel';
+import screenManager from '../manager/ScreenManager';
 import { MediaConstants } from '../constants/MediaConstants';
 import { getFetchOptions } from '../helper/MediaDataHelper';
 import { MediaDataItem } from '../data/MediaDataItem';
-import { FavorMediaDataItem } from '../data/FavorMediaDataItem'
-import { TrashMediaDataItem } from '../data/TrashMediaDataItem'
-import mediaDataItemCache from '../data/MediaDataItemCache'
+import { FavorMediaDataItem } from '../data/FavorMediaDataItem';
+import { TrashMediaDataItem } from '../data/TrashMediaDataItem';
+import mediaDataItemCache from '../data/MediaDataItemCache';
 
 
 const TAG = "GroupDataImpl"
@@ -37,12 +37,12 @@ export class GroupDataImpl {
     }
 
     setAlbumId(id: string) {
-        logInfo(TAG, `setAlbumId: ${id}`)
+        Log.info(TAG, `setAlbumId: ${id}`)
         this.albumId = id
     }
 
     setDeviceId(id: string) {
-        logInfo(TAG, `setDeviceId: ${id}`)
+        Log.info(TAG, `setDeviceId: ${id}`)
         this.deviceId = id
     }
 
@@ -55,7 +55,7 @@ export class GroupDataImpl {
     }
 
     async reloadBrowserGroupItemData(): Promise<MediaDataItem[]> {
-        logDebug(TAG, `reloadBrowserGroupItemData`)
+        Log.debug(TAG, `reloadBrowserGroupItemData`)
         let groupDataItem = []
         let fetchOption = await getFetchOptions(this.selectType, this.albumId, this.deviceId)
         if (fetchOption == undefined) {
@@ -107,12 +107,12 @@ export class GroupDataImpl {
             }
         }
 
-        logDebug(TAG, `reload finish count:${count}`)
+        Log.debug(TAG, `reload finish count:${count}`)
         return groupDataItem
     }
 
     async reloadGridGroupItemData(): Promise<MediaDataItem[]> {
-        logDebug(TAG, `reloadGridGroupItemData`)
+        Log.debug(TAG, `reloadGridGroupItemData`)
         let groupDataItem = []
         let fetchOption = await getFetchOptions(this.selectType, this.albumId, this.deviceId)
         if (fetchOption == undefined) {
@@ -164,7 +164,7 @@ export class GroupDataImpl {
         // do not use await to avoid load cost too much time
         this.loadReset(fetchOption, groupDataItem, groupCount)
 
-        logDebug(TAG, `reload finish`)
+        Log.debug(TAG, `reload finish`)
         return groupDataItem
     }
 

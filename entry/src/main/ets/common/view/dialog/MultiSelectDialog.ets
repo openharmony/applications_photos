@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-import { Logger } from '../../utils/Logger'
 import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
@@ -30,7 +29,6 @@ export struct MultiSelectDialog {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     controller: CustomDialogController;
     @Consume multiSelectDetails: MultiSelectDetails;
-    logger: Logger = new Logger('DetailsView');
 
     aboutToAppear() {
     }
