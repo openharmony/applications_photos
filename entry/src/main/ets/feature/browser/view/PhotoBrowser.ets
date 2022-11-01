@@ -85,6 +85,8 @@ struct PhotoBrowser {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @StorageLink('entryFromHap') entryFromHap: number = Constants.ENTRY_FROM_NONE;
     photoBrowserTransition: string;
+    private isEmpty = true;
+    private isCard = false;
 
     // swiper currentIndex, there may not be onChanged callback during data refresh, so mediaItem cannot be saved
     @Provide('transitionIndex') currentIndex: number = 0;
@@ -562,6 +564,7 @@ struct PhotoBrowser {
         } else {
             logInfo(TAG, `photoBrowser start without param`);
             if (this.entryFromHap == Constants.ENTRY_FROM_FORM_ABILITY) {
+                this.isCard = true;
                 this.pageFrom = Constants.ENTRY_FROM.CARD;
                 this.albumInfo = new SimpleAlbumDataItem(AppStorage.Get(Constants.FROM_ALBUM_ID), "", "", "", "")
             } else {
@@ -571,6 +574,7 @@ struct PhotoBrowser {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
             this.browserDataSource.setAlbumId(this.albumInfo.id)
             this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean) => {
+                this.isEmpty = isEmpty;
                 this.onPhotoChanged(AppStorage.Get(Constants.FROM_CURRENT_INDEX) || 0);
                 this.browserDataSource.notifyDataReload()
             })
@@ -745,12 +749,21 @@ struct PhotoBrowser {
     build() {
         Stack({ alignContent: Alignment.TopStart }) {
             PhotoBrowserBg()
-            PhotoSwiper({
-                dataSource: this.browserDataSource,
-                photoSwiperTransition: this.photoBrowserTransition,
-                swiperController: this.controller,
-                onPhotoChanged: this.onPhotoChanged.bind(this)
-            })
+            if(!this.isEmpty) {
+                PhotoSwiper({
+                    dataSource: this.browserDataSource,
+                    photoSwiperTransition: this.photoBrowserTransition,
+                    swiperController: this.controller,
+                    onPhotoChanged: this.onPhotoChanged.bind(this)
+                })
+            }else if(!this.isCard == true) {
+                PhotoSwiper({
+                    dataSource: this.browserDataSource,
+                    photoSwiperTransition: this.photoBrowserTransition,
+                    swiperController: this.controller,
+                    onPhotoChanged: this.onPhotoChanged.bind(this)
+                })
+            }
             if (!this.isFromViewData) {
                 if (this.isShowBar) {
                     PhotoBrowserActionBar({
