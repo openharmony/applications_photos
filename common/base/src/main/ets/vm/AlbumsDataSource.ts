@@ -16,6 +16,7 @@ import { logDebug, logWarn, logError } from '../utils/LoggerUtils';
 import { AlbumDataImpl } from '../model/AlbumDataImpl'
 import { ItemDataSource } from './ItemDataSource'
 import { AlbumDataItem } from '../data/AlbumDataItem'
+import { MediaConstants } from '../constants/MediaConstants'
 
 const TAG = "AlbumsDataSource"
 
@@ -57,6 +58,14 @@ export class AlbumsDataSource extends ItemDataSource {
             }
         }
         return isSelect
+    }
+
+    resetLoadState(): void {
+        for (let i = 0;i < this.albumDataItems.length; i++) {
+            if (this.albumDataItems[i].status == MediaConstants.LOADED) {
+                this.albumDataItems[i].status = MediaConstants.UNDEFINED
+            }
+        }
     }
 
     getSelectedUris(): string[]{
