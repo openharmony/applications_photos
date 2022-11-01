@@ -1,4 +1,3 @@
-import { MediaConstants } from '../constants/MediaConstants';
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +16,7 @@ import { logDebug, logWarn, logError } from '../utils/LoggerUtils';
 import { AlbumDataImpl } from '../model/AlbumDataImpl'
 import { ItemDataSource } from './ItemDataSource'
 import { AlbumDataItem } from '../data/AlbumDataItem'
+import { MediaConstants } from '../constants/MediaConstants'
 
 const TAG = "AlbumsDataSource"
 
