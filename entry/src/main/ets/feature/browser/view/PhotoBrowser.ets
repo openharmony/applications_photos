@@ -646,6 +646,10 @@ struct PhotoBrowser {
     }
 
     private async dataSourceLoadFinish() {
+        if (this.isToEdit) {
+            this.isToEdit = false
+            this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
+        }
         let uri: string = this.getCurrentPhoto().uri
         await this.browserDataSource.reloadGroupItemData(false)
         let index = this.currentIndex
@@ -658,10 +662,6 @@ struct PhotoBrowser {
             await item.load(false)
         }
         this.onPhotoChanged(index)
-        if (this.isToEdit) {
-            this.isToEdit = false
-            this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
-        }
     }
 
     onPageShow() {

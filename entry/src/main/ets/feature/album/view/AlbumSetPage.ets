@@ -362,8 +362,9 @@ export struct AlbumSetPage {
                 this.distributedDataSource.notifyDataReload()
             })
         } else {
-            this.isMediaLibDataChanged = true
-            this.loadItem()
+            this.isMediaLibDataChanged = true;
+            this.albumsDataSource.resetLoadState();
+            this.loadItem();
         }
     }
 

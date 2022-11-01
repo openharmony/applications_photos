@@ -1,3 +1,4 @@
+import { MediaConstants } from '../constants/MediaConstants';
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,6 +58,14 @@ export class AlbumsDataSource extends ItemDataSource {
             }
         }
         return isSelect
+    }
+
+    resetLoadState(): void {
+        for (let i = 0;i < this.albumDataItems.length; i++) {
+            if (this.albumDataItems[i].status == MediaConstants.LOADED) {
+                this.albumDataItems[i].status = MediaConstants.UNDEFINED
+            }
+        }
     }
 
     getSelectedUris(): string[]{

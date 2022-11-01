@@ -45,6 +45,7 @@ export struct AlbumGridItemNewStyle {
     @Consume broadCast: Broadcast;
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     @Consume @Watch('onModeChange') isAlbumSetSelectedMode: boolean;
+    @Consume @Watch('onIndexPageShow') isShow: boolean;
     gridAspectRatio = WindowConstants.CARD_ASPECT_RATIO;
     albumCountMarginRight = WindowConstants.ALBUM_SET_NEW_ICON_SIZE + WindowConstants.ALBUM_SET_NEW_ICON_MARGIN * 2;
     iconMarkAnchorX = WindowConstants.ALBUM_SET_NEW_ICON_SIZE + WindowConstants.ALBUM_SET_NEW_ICON_MARGIN;
@@ -63,6 +64,12 @@ export struct AlbumGridItemNewStyle {
             this.thumbnail = this.item.getThumbnail()
         })
         this.updateCardSize();
+    }
+
+    onIndexPageShow(): void {
+        this.item.load().then(() => {
+            this.thumbnail = this.item.getThumbnail()
+        })
     }
 
     updateCard() {
