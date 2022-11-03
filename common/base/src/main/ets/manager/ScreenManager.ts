@@ -66,10 +66,10 @@ class ScreenManager {
     private mainWindow: window.Window = undefined;
 
     // Default orientation
-    private horizontal = deviceInfo.deviceType != ('phone' || 'default')
+    private horizontal = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? false : true;
 
     // Default sidebar
-    private sidebar = deviceInfo.deviceType != ('phone' || 'default')
+    private sidebar = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? false : true;
     private windowMode = WindowMode.UNDEFINED;
 
     constructor() {

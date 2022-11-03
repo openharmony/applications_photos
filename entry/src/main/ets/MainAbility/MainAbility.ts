@@ -29,7 +29,7 @@ import router from '@system.router'
 const appLogger: Logger = new Logger('app');
 let isFromCard = false;
 let appBroadcast = broadcastManager.getBroadcast();
-var pagePath: string = deviceInfo.deviceType == ('phone' || 'default') ? 'product/phone/view/index' : 'product/pad/view/index';
+var pagePath: string = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 'product/phone/view/index' : 'product/pad/view/index';
 
 export default class MainAbility extends Ability {
     private static readonly RETRY_MAX_TIMES = 100;
