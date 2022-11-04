@@ -14,15 +14,15 @@
  */
 import { Constants } from '../common/Constants'
 import { FormController } from './FormController'
-import { Logger } from '../common/Logger'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import dataStore from '../../../../../../common/base/src/main/ets/utils/DataStoreUtil'
 
 export class FormControllerManager {
+    private TAG: string = 'FormControllerManager'
     private formControllerMap = new Map();
-    private logger: Logger = new Logger('FormControllerManager');
 
     private constructor() {
-        this.logger.info('new FormControllerManager');
+        Log.info(this.TAG, 'new FormControllerManager');
     }
 
     public static getInstance(): FormControllerManager {
@@ -33,36 +33,36 @@ export class FormControllerManager {
     }
 
     public createFormController(formId: string, operationMode: number, callback?: Function): FormController {
-        this.logger.debug('createFormController start!');
+        Log.debug(this.TAG, 'createFormController start!');
         if (formId == '0') {
-            this.logger.info('formId is 0 or formName is null!');
+            Log.info(this.TAG, 'formId is 0 or formName is null!');
             return null;
         }
         let controller = new FormController(formId, operationMode, callback);
 
         if (controller == null || controller == undefined) {
-            this.logger.error('It is failed to create FormController!');
+            Log.error(this.TAG, 'It is failed to create FormController!');
             return null;
         }
         this.formControllerMap.set(formId, controller);
-        this.logger.debug('createFormController end!');
+        Log.debug(this.TAG, 'createFormController end!');
         return controller;
     }
 
     async initData(formId: string, operationMode: number, callback?: Function): Promise<void> {
-        this.logger.debug(`initData start! operationMode: ${operationMode}`);
+        Log.debug(this.TAG, `initData start! operationMode: ${operationMode}`);
         try {
             await dataStore.init()
             let formIdKey: string = 'formId_' + formId;
             let hasFormId = await dataStore.hasData(formIdKey);
-            this.logger.debug(`The value of hasFormId is ${hasFormId}`);
+            Log.debug(this.TAG, `The value of hasFormId is ${hasFormId}`);
             if (hasFormId) {
                 this.createFormController(formId, operationMode, callback);
             }
         } catch (err) {
-            this.logger.error(`init err ${err}`);
+            Log.error(this.TAG, `init err ${err}`);
         }
-        this.logger.debug('initData end!');
+        Log.debug(this.TAG, 'initData end!');
     }
 
     public destroyController(formId: string): void {
@@ -84,29 +84,29 @@ export class FormControllerManager {
     }
 
     public getController(formId: string): FormController {
-        this.logger.debug('getController start!');
+        Log.debug(this.TAG, 'getController start!');
         let controller: FormController = this.formControllerMap.get(formId);
         if (controller == null || controller == undefined) {
-            this.logger.info(`has no controller with formid ${formId}`);
+            Log.info(this.TAG, `has no controller with formid ${formId}`);
             return null;
         }
-        this.logger.debug('getController end!');
+        Log.debug(this.TAG, 'getController end!');
         return controller;
     }
 
     public deleteFormController(formId: string): void {
-        this.logger.debug('deleteFormController start!')
+        Log.debug(this.TAG, 'deleteFormController start!')
         if (this.formControllerMap.has(formId)) {
             let ret = this.formControllerMap.delete(formId);
             if (ret) {
-                this.logger.info('It is successful to delete FormController');
+                Log.info(this.TAG, 'It is successful to delete FormController');
             } else {
-                this.logger.error('It is failed to delete FormController');
+                Log.error(this.TAG, 'It is failed to delete FormController');
             }
         } else {
-            this.logger.info(`deleteFormController, It has no controller with formid ${formId}`);
+            Log.info(this.TAG, `deleteFormController, It has no controller with formid ${formId}`);
         }
 
-        this.logger.debug('deleteFormController end!');
+        Log.debug(this.TAG, 'deleteFormController end!');
     }
 }

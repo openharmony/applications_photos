@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 import router from '@system.router';
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { EmptyAlbumComponent } from '@ohos/base/src/main/ets/components/EmptyAlbumComponent';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 const TAG = "AlbumSelectGridItemNewStyle"
 // The item of album grid, and it's new style.
@@ -45,7 +45,7 @@ export struct AlbumSelectGridItemNewStyle {
     @State thumbnail: string = ""
 
     aboutToAppear(): void {
-        logInfo(TAG, `aboutToAppear + ${this.item.uri}`);
+        Log.info(TAG, `aboutToAppear + ${this.item.uri}`);
         this.updateCardSize();
         this.item.load().then(() => {
             this.thumbnail = this.item.getThumbnail()
@@ -61,7 +61,7 @@ export struct AlbumSelectGridItemNewStyle {
         WindowConstants.ALBUM_SET_GUTTER;
         this.gridHeight = gridWidth / this.gridAspectRatio;
         this.bigWidth = gridWidth * 2 + WindowConstants.ALBUM_SET_GUTTER;
-        logInfo(TAG, `is big card : ${this.isBigCard}`);
+        Log.info(TAG, `is big card : ${this.isBigCard}`);
 
         if (MediaConstants.ROTATE_ONCE == this.item.orientation || MediaConstants.ROTATE_THIRD == this.item.orientation) {
             this.cardWidth = this.gridHeight;
@@ -83,7 +83,7 @@ export struct AlbumSelectGridItemNewStyle {
     }
 
     updateCard() {
-        logDebug(TAG, 'Album changed and update card size.');
+        Log.debug(TAG, 'Album changed and update card size.');
         this.updateCardSize();
     }
 
@@ -111,7 +111,7 @@ export struct AlbumSelectGridItemNewStyle {
                             angle: this.item.orientation
                         })
                         .onError(() => {
-                            logDebug(TAG, 'album is empty or its cover is error');
+                            Log.debug(TAG, 'album is empty or its cover is error');
                             this.isEmptyAlbum = true;
                         })
                 }
@@ -135,7 +135,7 @@ export struct AlbumSelectGridItemNewStyle {
                         })
                         .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                         .onError(() => {
-                            logDebug(TAG, 'album is empty or its cover is error');
+                            Log.debug(TAG, 'album is empty or its cover is error');
                             this.isEmptyAlbum = true;
                         })
                 }
@@ -184,7 +184,7 @@ export struct AlbumSelectGridItemNewStyle {
             color: $r('app.color.album_cover_stroke_color')
         })
         .onClick(() => {
-            logInfo(TAG, `After onClick, MediaSet is: ${JSON.stringify(this.item)}`);
+            Log.info(TAG, `After onClick, MediaSet is: ${JSON.stringify(this.item)}`);
             router.push({
                 uri: 'feature/newAlbum/view/NewAlbumPage',
                 params: {

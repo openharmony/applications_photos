@@ -12,30 +12,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import HiLog from "@ohos.hilog";
 
-const PHOTOS = 'Photos_'
+const PHOTOS = '[PhotoApp]'
+
 /**
  * @deprecated
  */
 export class Logger {
     prefix: string;
-    static readonly DEBUG = 0;
-    static readonly LOG = 1;
-    static readonly INFO = 2;
-    static readonly WARN = 3;
-    static readonly ERROR = 4;
+    static readonly DOMAIN = 0x0230
+    static readonly TAG: string = '[PhotoApp]'
+    static readonly DEBUG = HiLog.LogLevel.DEBUG;
+    static readonly INFO = HiLog.LogLevel.INFO;
+    static readonly WARN = HiLog.LogLevel.WARN;
+    static readonly ERROR = HiLog.LogLevel.ERROR;
+    static readonly FATAL = HiLog.LogLevel.FATAL;
     static logLevel = Logger.DEBUG;
 
     constructor(module: string) {
-        this.prefix = `${module}: `;
+        this.prefix = `[${module}] : `;
     }
 
     debug(message: string, ...args: any[]): void {
         this.logImpl(Logger.DEBUG, message, args);
-    }
-
-    log(message: string, ...args: any[]): void {
-        this.logImpl(Logger.LOG, message, args);
     }
 
     info(message: string, ...args: any[]): void {
@@ -50,6 +50,10 @@ export class Logger {
         this.logImpl(Logger.ERROR, message, args);
     }
 
+    fatal(message: string, ...args: any[]): void {
+        this.logImpl(Logger.FATAL, message, args);
+    }
+
     private logImpl(level, message: string, ...args: any[]) {
         if (level < Logger.logLevel) {
             return;
@@ -57,20 +61,22 @@ export class Logger {
 
         switch (level) {
             case Logger.DEBUG:
-                console.debug(PHOTOS + this.prefix + message, args);
+                HiLog.warn(Logger.DOMAIN, Logger.TAG, this.prefix + message);
                 break;
             case Logger.INFO:
-                console.info(PHOTOS + this.prefix + message, args);
+                HiLog.info(Logger.DOMAIN, Logger.TAG, this.prefix + message);
                 break;
             case Logger.WARN:
-                console.warn(PHOTOS + this.prefix + message, args);
+                HiLog.warn(Logger.DOMAIN, Logger.TAG, this.prefix + message);
                 break;
             case Logger.ERROR:
-                console.error(PHOTOS + this.prefix + message, args);
+                HiLog.error(Logger.DOMAIN, Logger.TAG, this.prefix + message);
                 break;
-            case Logger.LOG:
+            case Logger.FATAL:
+                HiLog.fatal(Logger.DOMAIN, Logger.TAG, this.prefix + message);
+                break;
             default:
-                console.log(PHOTOS + this.prefix + message, args);
+                HiLog.info(Logger.DOMAIN, Logger.TAG, this.prefix + message);
                 break;
         }
     }

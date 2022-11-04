@@ -13,20 +13,20 @@
  * limitations under the License.
  */
 
-import router from '@system.router'
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils'
-import { ImageGridItemComponent } from '../../../../../../../common/base/src/main/ets/components/ImageGridItemComponent'
-import { Action } from '../../../common/view/browserOperation/Action'
+import router from '@system.router';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { ImageGridItemComponent } from '../../../../../../../common/base/src/main/ets/components/ImageGridItemComponent';
+import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
-import { Constants } from '../../../common/model/common/Constants'
-import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent'
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import { Constants } from '../../../common/model/common/Constants';
+import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { GridScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/GridScrollBar';
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager'
+import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
 import { ThirdSelectBarModel } from '../model/ThirdSelectBarModel';
-import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource'
+import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
@@ -60,7 +60,7 @@ export struct ThirdSelectPhotoGridPage {
     private albumId: string
 
     onMenuClicked(action: Action) {
-        logInfo(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         switch (action) {
             case Action.BACK:
                 router.back();
@@ -79,13 +79,13 @@ export struct ThirdSelectPhotoGridPage {
         let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
         this.gridRowCount = Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
         + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
-        logInfo(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
+        Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
     }
 
     aboutToAppear(): void {
         let param = router.getParams();
         if (param != null) {
-            logInfo(TAG, `itemId: ${param.itemId}`);
+            Log.info(TAG, `itemId: ${param.itemId}`);
             this.title = param.itemDisplayName;
             if (param.itemId) {
                 this.groupDataSource.setAlbumId(param.itemId.toString());
@@ -96,7 +96,7 @@ export struct ThirdSelectPhotoGridPage {
             if (param.isFromWallpaper) {
                 this.maxSelectCount = new Number(param.maxSelectCount).valueOf() || 0
             }
-            logInfo(TAG, `ThirdSelectPhotoGridPage isMultiPick: ${this.isMultiPick},\
+            Log.info(TAG, `ThirdSelectPhotoGridPage isMultiPick: ${this.isMultiPick},\
                 isFromWallpaper: ${param.isFromWallpaper}, maxSelectCount: ${this.maxSelectCount}`);
         }
         if (this.isFromFa) {
@@ -119,9 +119,9 @@ export struct ThirdSelectPhotoGridPage {
         })
         this.broadCast.on(Constants.ON_LOADING_FINISHED,
             (size: number) => {
-                logInfo(TAG, `ON_LOADING_FINISHED size: ${size}`);
+                Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
                 this.isEmpty = size == 0;
-                logInfo(TAG, `isEmpty: ${this.isEmpty}`)
+                Log.info(TAG, `isEmpty: ${this.isEmpty}`)
             });
         this.isActive = true;
     }
@@ -139,20 +139,20 @@ export struct ThirdSelectPhotoGridPage {
 
     private onActive() {
         if (!this.isActive) {
-            logInfo(TAG, 'onActive');
+            Log.info(TAG, 'onActive');
             this.isActive = true;
         }
     }
 
     private onInActive() {
         if (this.isActive) {
-            logInfo(TAG, 'onInActive');
+            Log.info(TAG, 'onInActive');
             this.isActive = false;
         }
     }
 
     private onSelect(index: number) {
-        logInfo(TAG, "onSelect")
+        Log.info(TAG, "onSelect")
         this.selectedCount = this.groupDataSource.getSelectedCount()
     }
 
@@ -160,7 +160,7 @@ export struct ThirdSelectPhotoGridPage {
         let children: MediaDataItem[] = this.groupDataSource.getItems()
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
-            logWarn(TAG, 'targetIndex is not found');
+            Log.warn(TAG, 'targetIndex is not found');
             return;
         }
         AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
@@ -230,7 +230,7 @@ export struct ThirdSelectPhotoGridPage {
                 }
             }
         };
-        logInfo(TAG, `uri: ${uriArray}`)
+        Log.info(TAG, `uri: ${uriArray}`)
         terminateSelfWithResult(abilityResult)
     }
 }

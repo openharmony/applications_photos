@@ -13,25 +13,25 @@
  * limitations under the License.
  */
 
-import router from '@system.router'
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils'
-import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent'
-import { Action } from '../../../common/view/browserOperation/Action'
+import router from '@system.router';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent';
+import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
-import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
-import { Constants } from '../../../common/model/common/Constants'
-import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
-import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils'
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
-import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext'
-import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation'
-import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain'
+import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import { Constants } from '../../../common/model/common/Constants';
+import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
+import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation';
+import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
 import { GridScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/GridScrollBar';
 import { NewAlbumBarModel } from '../model/NewAlbumBarModel';
-import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource'
+import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
@@ -64,14 +64,14 @@ export struct NewAlbumPage {
     private groupDataSource: GroupItemDataSource = new GroupItemDataSource()
 
     onIndexChange() {
-        logInfo(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
+        Log.info(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
         if (this.PhotoGridPageIndex != Constants.INVALID) {
             this.scroller.scrollToIndex(this.PhotoGridPageIndex);
         }
     }
 
     onMenuClicked(action: Action) {
-        logInfo(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         switch (action) {
             case Action.CANCEL:
                 this.groupDataSource.setSelect(false)
@@ -79,10 +79,10 @@ export struct NewAlbumPage {
                 break;
             case Action.OK:
                 if (this.groupDataSource.getSelectedCount() == 0) {
-                    logInfo(TAG, `onMenuClicked, action: ${action.actionID}, count = 0`);
+                    Log.info(TAG, `onMenuClicked, action: ${action.actionID}, count = 0`);
                     break;
                 }
-                logInfo(TAG, `onMenuClicked, action: ${action.actionID} newAlbum: ${this.isNewAlbum}`);
+                Log.info(TAG, `onMenuClicked, action: ${action.actionID} newAlbum: ${this.isNewAlbum}`);
                 if (this.isNewAlbum) {
                     AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.groupDataSource.getSelectedItems());
                     this.groupDataSource.setSelect(false)
@@ -103,7 +103,7 @@ export struct NewAlbumPage {
     }
 
     onModeChange() {
-        logInfo(TAG, 'onModeChange');
+        Log.info(TAG, 'onModeChange');
     }
 
     onPageShow() {
@@ -120,7 +120,7 @@ export struct NewAlbumPage {
     // The callback when current page is in the foreground
     onActive() {
         if (!this.isActive) {
-            logInfo(TAG, 'onActive');
+            Log.info(TAG, 'onActive');
             this.isActive = true;
         }
         this.groupDataSource.dataRemove()
@@ -129,13 +129,13 @@ export struct NewAlbumPage {
     // The callback when current page is in the background
     onInActive() {
         if (this.isActive) {
-            logInfo(TAG, 'onInActive');
+            Log.info(TAG, 'onInActive');
             this.isActive = false;
         }
     }
 
     onUpdateFavorState(item: MediaDataItem) {
-        logDebug(TAG, 'onUpdateFavorState');
+        Log.debug(TAG, 'onUpdateFavorState');
         let index = this.groupDataSource.getIndexByItem(item);
         if (index != -1) {
             this.groupDataSource.notifyDataChange(index);
@@ -187,7 +187,7 @@ export struct NewAlbumPage {
         startTrace('PhotoGridPageAboutToAppear');
         let param = router.getParams();
         if (param.item) {
-            logDebug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
+            Log.debug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
             let item = JSON.parse(param.item.toString()) as AlbumDataItem;
             this.groupDataSource.setAlbumId(item.id)
         }
@@ -220,11 +220,11 @@ export struct NewAlbumPage {
         let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
         this.gridRowCount = Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
         + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
-        logInfo(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
+        Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
     }
 
     private onSelect(index: number) {
-        logInfo(TAG, "onSelect")
+        Log.info(TAG, "onSelect")
         this.totalSelectedCount = this.groupDataSource.getSelectedCount()
         this.isAllSelected = this.groupDataSource.isSelect()
         this.groupDataSource.notifyDataChange(index)
@@ -234,10 +234,10 @@ export struct NewAlbumPage {
         let children: MediaDataItem[] = this.groupDataSource.getItems()
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
-            logWarn(TAG, 'targetIndex is not found');
+            Log.warn(TAG, 'targetIndex is not found');
             return;
         }
-        logInfo(TAG, `jump to photo browser at index: ${targetIndex}`);
+        Log.info(TAG, `jump to photo browser at index: ${targetIndex}`);
         AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
         router.push({
             uri: 'feature/browser/view/PhotoBrowser',
@@ -252,7 +252,7 @@ export struct NewAlbumPage {
         let children: MediaDataItem[] = this.groupDataSource.getItems()
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
-            logWarn(TAG, 'targetIndex is not found');
+            Log.warn(TAG, 'targetIndex is not found');
             return;
         }
         AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);

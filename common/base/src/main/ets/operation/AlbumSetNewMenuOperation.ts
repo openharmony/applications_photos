@@ -15,17 +15,17 @@
 
 import router from '@system.router';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logDebug, logInfo, logWarn, logError } from '../utils/LoggerUtils';
+import { Log } from '../utils/Log';
 import { getResourceString } from '../utils/ResourceUtils';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
-import { MenuOperationCallback } from './MenuOperationCallback'
-import { MenuOperation } from './MenuOperation'
-import { MenuContext } from './MenuContext'
-import { JumpSourceToMain } from '../data/JumpSourceToMain'
+import { MenuOperationCallback } from './MenuOperationCallback';
+import { MenuOperation } from './MenuOperation';
+import { MenuContext } from './MenuContext';
+import { JumpSourceToMain } from '../data/JumpSourceToMain';
 import { SimpleAlbumDataItem } from '../data/SimpleAlbumDataItem';
 import { getFetchOptionsByItem } from '../helper/MediaDataHelper';
 import { showToast } from '../utils/UiUtil';
-import mediaModel from '../model/MediaModel'
+import mediaModel from '../model/MediaModel';
 import { AlbumDataItem } from '../data/AlbumDataItem';
 
 const TAG = "AlbumSetNewMenuOperation"
@@ -40,13 +40,13 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
 
     doAction() {
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
         getResourceString($r('app.string.album_new_album')).then((name: string) => {
-            logInfo(TAG, `The display name is ${name}`);
+            Log.info(TAG, `The display name is ${name}`);
             this.getNewAlbumDisplayName(name).then((newAlbumDisplayName: string) => {
-                logInfo(TAG, `The display name of new album is ${newAlbumDisplayName}`);
+                Log.info(TAG, `The display name of new album is ${newAlbumDisplayName}`);
 
                 this.confirmCallback = this.confirmCallback.bind(this);
                 this.cancelCallback = this.cancelCallback.bind(this);
@@ -63,7 +63,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     }
 
     private async confirmCallback(displayName: string) {
-        logInfo(TAG, `AlbumSet new album confirm and the new name is: ${displayName}`);
+        Log.info(TAG, `AlbumSet new album confirm and the new name is: ${displayName}`);
         let relativePath = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + displayName + "/"
         let simpleAlbumDataItem: SimpleAlbumDataItem = new SimpleAlbumDataItem("", displayName, relativePath, "", "")
         if (displayName != undefined && displayName != null) {
@@ -80,7 +80,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
         onOperationStart && onOperationStart();
 
         if (this.menuContext.jumpSourceToMain == JumpSourceToMain.ALBUM) {
-            logInfo(TAG, 'go back to photo grid');
+            Log.info(TAG, 'go back to photo grid');
             this.menuContext.broadCast.emit(BroadcastConstants.MEDIA_OPERATION, [simpleAlbumDataItem, this.onCompleted.bind(this)]);
         } else {
             router.push({
@@ -100,16 +100,16 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     }
 
     private cancelCallback(): void {
-        logInfo(TAG, 'AlbumSet new album cancel');
+        Log.info(TAG, 'AlbumSet new album cancel');
     }
 
     onCompleted(): void {
-        logInfo(TAG, 'new album data succeed!');
+        Log.info(TAG, 'new album data succeed!');
         this.onOperationEnd && this.onOperationEnd();
     }
 
     onError(): void {
-        logError(TAG, 'new album data failed!');
+        Log.error(TAG, 'new album data failed!');
         this.onOperationEnd && this.onOperationEnd();
     }
 
@@ -124,7 +124,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
             }
         }
 
-        logDebug(TAG, `${JSON.stringify(numbers)}`);
+        Log.debug(TAG, `${JSON.stringify(numbers)}`);
 
         if (numbers.length <= 0) {
             return `${prefixName}1`;

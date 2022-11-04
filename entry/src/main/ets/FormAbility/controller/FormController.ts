@@ -1,4 +1,3 @@
-import { startAbility } from '../../../../../../common/base/src/main/ets/utils/AbilityUtils';
 /*
  * Copyright (c) 2021 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,18 +12,20 @@ import { startAbility } from '../../../../../../common/base/src/main/ets/utils/A
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Want from '@ohos.application.Want'
-import { MediaDataManager } from '../data/MediaDataManager'
-import { Logger } from '../common/Logger'
+import Want from '@ohos.application.Want';
+import { MediaDataManager } from '../data/MediaDataManager';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { startAbility } from '../../../../../../common/base/src/main/ets/utils/AbilityUtils';
 import formBindingData from '@ohos.application.formBindingData';
-import { Constants } from '../common/Constants'
+import { Constants } from '../common/Constants';
 import formProvider from '@ohos.application.formProvider';
-import { Constants as commonConstants } from '../../common/model/common/Constants'
+import { Constants as commonConstants } from '../../common/model/common/Constants';
+
+const TAG = "FormController"
 
 export class FormController {
     private formId: string;
     private operationMode: number = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
-    private logger: Logger = new Logger('FormController');
     private callback: Function = null;
     private static readonly MSG_ROUTER_PHOTOS = 'routerPhotos'
     mediaDataManager: MediaDataManager;
@@ -37,7 +38,7 @@ export class FormController {
     }
 
     bindFormData(formId: string): any {
-        this.logger.info(`bindFormData start formId: ${formId}`)
+        Log.info(TAG, `bindFormData start formId: ${formId}`)
         let fd = this.mediaDataManager.getCurrentFd();
         let image: string = "image_" + fd + "_formId_" + this.mediaDataManager.getMediaData().formId;
         let dataObj1: any = {
@@ -48,28 +49,28 @@ export class FormController {
             "isShow": this.mediaDataManager.getIsShowAlbumName(),
             "formImages": JSON.parse(`{ "${image}": ${fd} }`)
         };
-        this.logger.debug(`bindFormData, createFormBindingData dataObj2.data: ${JSON.stringify(dataObj1)}`);
+        Log.debug(TAG, `bindFormData, createFormBindingData dataObj2.data: ${JSON.stringify(dataObj1)}`);
         let obj = formBindingData.createFormBindingData(JSON.stringify(dataObj1));
-        this.logger.debug(`bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
+        Log.debug(TAG, `bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
         return obj;
     }
 
     updateFormData(formId: string, vars: string[]): void {
-        this.logger.debug(`updateFormData formId: ${JSON.stringify(formId)}`);
+        Log.debug(TAG, `updateFormData formId: ${JSON.stringify(formId)}`);
         let obj3 = this.bindFormData(formId);
-        this.logger.debug(`updateFormData obj: ${JSON.stringify(obj3)}`);
+        Log.debug(TAG, `updateFormData obj: ${JSON.stringify(obj3)}`);
         formProvider.updateForm(formId, obj3)
             .then((data) => {
-                this.logger.info(`updateFormData, data: ${JSON.stringify(data)}`);
+                Log.info(TAG, `updateFormData, data: ${JSON.stringify(data)}`);
                 if (this.mediaDataManager.getIsShowAlbumName()) {
                     formProvider.setFormNextRefreshTime(formId, this.mediaDataManager.getIntervalTime()).then(() => {
-                        this.logger.error(`setFormNextRefreshTime successfully!`);
+                         Log.error(TAG, `setFormNextRefreshTime successfully!`);
                         if (this.callback != null) {
                             this.callback.call(this.callback);
                         }
                         this.onDestroy();
                     }).catch((err) => {
-                        this.logger.error(`init err ${err}`);
+                         Log.error(TAG, `init err ${err}`);
                     })
                 } else {
                     if (this.callback != null) {
@@ -78,25 +79,25 @@ export class FormController {
                     this.onDestroy();
                 }
             }).catch((error) => {
-            this.logger.error(`updateForm failed. Cause: ${JSON.stringify(error)}`);
+             Log.error(TAG, `updateForm failed. Cause: ${JSON.stringify(error)}`);
             this.mediaDataManager.closeFd();
         });
     }
 
     onDestroy() {
-        this.logger.info('onDestroy start!');
+        Log.info(TAG, 'onDestroy start!');
         this.mediaDataManager.closeFd();
         this.callback = null;
-        this.logger.info('onDestroy done end!');
+        Log.info(TAG, 'onDestroy done end!');
     }
 
     onUpdateFormData(formId: string): void {
-        this.logger.debug(`onUpdateFormData formId: ${formId}`);
+        Log.debug(TAG, `onUpdateFormData formId: ${formId}`);
         this.mediaDataManager.setNextIndex();
     }
 
     routerPhotoBrowser() {
-        this.logger.debug('routerPhotoBrowser start!');
+        Log.debug(TAG, 'routerPhotoBrowser start!');
         let param: Want = {
             'bundleName': 'com.ohos.photos',
             'abilityName': 'com.ohos.photos.MainAbility',
@@ -108,35 +109,35 @@ export class FormController {
                 'currentIndex': this.mediaDataManager.getMediaData().currentIndex
             }
         };
-        this.logger.debug(`routerPhotoBrowser parm ${JSON.stringify(param)}`);
+        Log.debug(TAG, `routerPhotoBrowser parm ${JSON.stringify(param)}`);
         startAbility(param).then(() => {
             AppStorage.Delete(Constants.FROM_CONTROLLER_MANAGER);
         })
         this.onDestroy();
-        this.logger.debug('routerPhotoBrowser end!');
+        Log.debug(TAG, 'routerPhotoBrowser end!');
     }
 
     onTriggerFormEvent(formId: string, message): void {
-        this.logger.debug(`onTriggerFormEvent ${formId} ${message}`);
+        Log.debug(TAG, `onTriggerFormEvent ${formId} ${message}`);
         let msgObj = JSON.parse(message);
         let param = msgObj["params"];
         let msg = param["message"];
-        this.logger.debug(`onTriggerFormEvent ${param} ${msg}`);
+        Log.debug(TAG, `onTriggerFormEvent ${param} ${msg}`);
         if (msg == FormController.MSG_ROUTER_PHOTOS) {
             this.routerPhotoBrowser();
         }
     }
 
     onEvent(formId: string): void {
-        this.logger.debug('onEvent start!');
+        Log.debug(TAG, 'onEvent start!');
         if (this.callback != null) {
             if (this.mediaDataManager.getUpdateTag()) {
                 this.mediaDataManager.setUpdateTag(false)
-                this.logger.debug(`updateFormData formId: ${JSON.stringify(formId)}`);
+                Log.debug(TAG, `updateFormData formId: ${JSON.stringify(formId)}`);
                 let obj3 = this.bindFormData(formId);
-                this.logger.debug(`updateFormData obj: ${JSON.stringify(obj3)}`);
+                Log.debug(TAG, `updateFormData obj: ${JSON.stringify(obj3)}`);
                 formProvider.updateForm(formId, obj3).then((data) => {
-                    this.logger.info(`updateFormData, data: ${JSON.stringify(data)}`);
+                    Log.info(TAG, `updateFormData, data: ${JSON.stringify(data)}`);
                     this.onTriggerFormEvent(formId, this.callback.call(this.callback));
                 }).catch((error) => {
                     this.onTriggerFormEvent(formId, this.callback.call(this.callback));
@@ -145,15 +146,15 @@ export class FormController {
                 this.onTriggerFormEvent(formId, this.callback.call(this.callback));
             }
         }
-        this.logger.debug('onEvent end!');
+        Log.debug(TAG, 'onEvent end!');
     }
 
     onCallback(): void {
-        this.logger.debug('onCallback start!');
+        Log.debug(TAG, 'onCallback start!');
         if (this.callback != null) {
             this.callback.call(this.callback);
         }
-        this.logger.debug('onCallback end!');
+        Log.debug(TAG, 'onCallback end!');
     }
 
     onDeleteForm(formId: string): void {

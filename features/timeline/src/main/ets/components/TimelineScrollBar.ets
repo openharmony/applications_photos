@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants'
+import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { TimelineDataItem } from '../data/TimelineDataItem';
-import { logWarn } from '@ohos/base/src/main/ets/utils/LoggerUtils'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import { TimelineItemDataSource } from '../vm/TimelineItemDataSource'
+import { TimelineItemDataSource } from '../vm/TimelineItemDataSource';
 
 const TAG = "TimelineScrollBar"
 
@@ -161,7 +161,7 @@ export struct TimelineScrollBar {
             })
             .onTouch((event: TouchEvent) => {
                 if (this.dateText == '') {
-                    logWarn(TAG, `dateText is null`)
+                    Log.warn(TAG, `dateText is null`)
                     this.broadCast.emit(BroadcastConstants.INIT_DATE_TEXT, [])
                 }
                 if (event.type == TouchType.Down) {

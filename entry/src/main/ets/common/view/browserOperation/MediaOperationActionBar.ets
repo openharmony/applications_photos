@@ -13,20 +13,18 @@
  * limitations under the License.
  */
 
-import { Logger } from '../../utils/Logger'
-import { Action } from './Action'
-import { ActionBar } from '../../../common/view/actionbar/ActionBar'
-import { ActionBarProp } from './ActionBarProp'
-import { ActionBarMode } from './ActionBarMode'
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { MediaOperationType } from '../../../../../../../common/base/src/main/ets/data/MediaOperationType'
+import { Action } from './Action';
+import { ActionBar } from '../../../common/view/actionbar/ActionBar';
+import { ActionBarProp } from './ActionBarProp';
+import { ActionBarMode } from './ActionBarMode';
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { MediaOperationType } from '../../../../../../../common/base/src/main/ets/data/MediaOperationType';
 
 @Component
 export struct MediaOperationActionBar {
     @Consume pageType: string;
     @Consume loadingFinish: boolean;
     onMenuClicked: Function;
-    logger: Logger = new Logger('MediaOperationActionBar');
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
 
     private createActionBar(): ActionBarProp {

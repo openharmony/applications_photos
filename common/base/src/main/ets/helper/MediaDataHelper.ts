@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import image from '@ohos.multimedia.image'
+import image from '@ohos.multimedia.image';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logInfo, logError } from '../utils/LoggerUtils'
-import mediaModel from '../model/MediaModel'
-import { MediaConstants } from '../constants/MediaConstants'
-import { getResourceString } from '../utils/ResourceUtils'
+import mediaModel from '../model/MediaModel';
+import { Log } from '../utils/Log';
+import { MediaConstants } from '../constants/MediaConstants';
+import { getResourceString } from '../utils/ResourceUtils';
 import { SimpleAlbumDataItem } from '../data/SimpleAlbumDataItem';
 
 const TAG = "MediaDataHelper"
@@ -28,7 +28,7 @@ export class Rotatable {
 }
 
 export async function setOrientation(fileAsset: MediaLib.FileAsset, orientation: number): Promise<void> {
-    logInfo(TAG, `setOrientation`)
+    Log.info(TAG, `setOrientation`)
     try {
         let fd: number = await mediaModel.openAsset('RW', fileAsset);
         let imageSourceApi: image.ImageSource = image.createImageSource(fd);
@@ -36,14 +36,14 @@ export async function setOrientation(fileAsset: MediaLib.FileAsset, orientation:
         imageSourceApi.release()
         mediaModel.closeAsset(fd, fileAsset)
     } catch (err) {
-        logError(TAG, `setOrientation err ${JSON.stringify(err)}`)
+        Log.error(TAG, `setOrientation err ${JSON.stringify(err)}`)
         fileAsset.orientation = orientation
         await fileAsset.commitModify()
     }
 }
 
 function getPropertyValidOrientation(orientation: number): string {
-    logInfo(TAG, `getPropertyValidOrientation ${orientation}`)
+    Log.info(TAG, `getPropertyValidOrientation ${orientation}`)
     switch (orientation) {
         case MediaConstants.ROTATE_NONE:
             return "1";

@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-import image from '@ohos.multimedia.image'
-import fileIO from '@ohos.fileio'
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils'
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel'
+import image from '@ohos.multimedia.image';
+import fileIO from '@ohos.fileio';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
-import { ImageFilterStack } from './ImageFilterStack'
-import { DateUtil } from './utils/DateUtil'
-import { Loader } from './Loader'
+import { ImageFilterStack } from './ImageFilterStack';
+import { DateUtil } from './utils/DateUtil';
+import { Loader } from './Loader';
 
 const TAG = "Save"
 
@@ -31,11 +31,11 @@ export class Save {
     }
 
     public static async save(item: MediaDataItem, optStack: ImageFilterStack, isReplace: Boolean): Promise<number> {
-        logInfo(TAG, `${JSON.stringify(item)} ${isReplace}`);
+        Log.info(TAG, `${JSON.stringify(item)} ${isReplace}`);
         try {
             let wrapper = await Loader.loadPixelMapWrapper(item);
             wrapper = optStack.apply(wrapper);
-            logDebug(TAG, 'Edit and restore operation execution end.');
+            Log.debug(TAG, 'Edit and restore operation execution end.');
 
             let options = {
                 format: 'image/jpeg',
@@ -44,26 +44,26 @@ export class Save {
             let packer = image.createImagePacker();
             let pixelMap = wrapper.pixelMap as image.PixelMap;
             let buffer = await packer.packing(pixelMap, options);
-            logInfo(TAG, 'Format pixelMap data to jpg data end.');
+            Log.info(TAG, 'Format pixelMap data to jpg data end.');
 
             let fileAsset = await this.createFileAsset(item, isReplace);
-            logInfo(TAG, `create fileAsset succeed`);
+            Log.info(TAG, `create fileAsset succeed`);
             let fd = await mediaModel.openAsset('RW', fileAsset);
             if (fd < 0) {
-                logWarn(TAG, 'open asset failed.');
+                Log.warn(TAG, 'open asset failed.');
                 return -1;
             }
             await fileIO.write(fd, buffer);
-            logInfo(TAG, 'write jpg file end.');
+            Log.info(TAG, 'write jpg file end.');
             let newId = fileAsset.id;
             await mediaModel.closeAsset(fd, fileAsset);
 
             await packer.release();
             wrapper && wrapper.release();
-            logInfo(TAG, `end`);
+            Log.info(TAG, `end`);
             return newId
         } catch (e) {
-            logError(TAG, `save catch error: ${JSON.stringify(e)}`);
+            Log.error(TAG, `save catch error: ${JSON.stringify(e)}`);
             return -1
         }
     }
@@ -72,21 +72,21 @@ export class Save {
         let fileAsset =await item.loadFileAsset();
 
         if (!fileAsset) {
-            logWarn(TAG, 'get file error');
+            Log.warn(TAG, 'get file error');
             return null;
         }
         let title = DateUtil.nameByDate(isReplace, fileAsset.displayName);
         if (null == title) {
-            logWarn(TAG, `create picture name failed.`);
+            Log.warn(TAG, `create picture name failed.`);
             return null;
         }
         let displayName = title + '.jpg';
-        logDebug(TAG, `file displayname = ${displayName}, file path = ${fileAsset.relativePath}`);
+        Log.debug(TAG, `file displayname = ${displayName}, file path = ${fileAsset.relativePath}`);
         let favorite = false;
         if (isReplace) {
             favorite = await fileAsset.isFavorite();
             await item.onDelete();
-            logDebug(TAG, `trash picture file id ${item.id} end.`);
+            Log.debug(TAG, `trash picture file id ${item.id} end.`);
         }
         fileAsset = await mediaModel.createOne(fileAsset.mediaType, displayName, fileAsset.relativePath);
         if (favorite) {

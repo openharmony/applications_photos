@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import router from '@system.router'
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
+import router from '@system.router';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { EmptyAlbumComponent } from '@ohos/base/src/main/ets/components/EmptyAlbumComponent';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 // The item of album grid, and it's new style.
@@ -52,7 +52,7 @@ export struct ThirdAlbumGridItem {
     @State thumbnail: string = ""
 
     aboutToAppear(): void {
-        logInfo(TAG, `aboutToAppear + ${this.item.uri}`)
+        Log.info(TAG, `aboutToAppear + ${this.item.uri}`)
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (size) => this.updateCardSize())
         this.updateCardSize();
         this.item.load().then(() => {
@@ -88,8 +88,8 @@ export struct ThirdAlbumGridItem {
             this.transformV = 0;
         }
 
-        logInfo(TAG, `is big card : ${this.isBigCard}`);
-        logInfo(TAG, `little grid size is: ${gridWidth}x${this.gridHeight}`);
+        Log.info(TAG, `is big card : ${this.isBigCard}`);
+        Log.info(TAG, `little grid size is: ${gridWidth}x${this.gridHeight}`);
     }
 
     build() {
@@ -118,7 +118,7 @@ export struct ThirdAlbumGridItem {
                         })
                         .fillColor($r('app.color.empty_or_recycle_album_icon'))
                         .onError(() => {
-                            logError(TAG, 'album is empty or its cover is error');
+                            Log.error(TAG, 'album is empty or its cover is error');
                             this.isEmptyAlbum = true;
                         })
                 }
@@ -144,7 +144,7 @@ export struct ThirdAlbumGridItem {
                         })
                         .fillColor($r('app.color.empty_or_recycle_album_icon'))
                         .onError(() => {
-                            logError(TAG, 'album is empty or its cover is error');
+                            Log.error(TAG, 'album is empty or its cover is error');
                             this.isEmptyAlbum = true;
                         })
                 }

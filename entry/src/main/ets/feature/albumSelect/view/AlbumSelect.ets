@@ -12,26 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 import { MediaConstants } from '../../../../../../../common/base/src/main/ets/constants/MediaConstants';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
-import router from '@system.router'
+import router from '@system.router';
 import {
     AlbumSelectGridItemNewStyle
-} from '../../../../../../../features/selectalbum/src/main/ets/components/AlbumSelectGridItemNewStyle'
-import { Constants } from '../../../common/model/common/Constants'
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent'
-import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils'
-import { Action } from '../../../common/view/browserOperation/Action'
+} from '../../../../../../../features/selectalbum/src/main/ets/components/AlbumSelectGridItemNewStyle';
+import { Constants } from '../../../common/model/common/Constants';
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
+import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
-import { UiUtil } from '../utils/UiUtil'
+import { UiUtil } from '../utils/UiUtil';
 import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
 import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
 import { AlbumSelectBarModel } from '../model/AlbumSelectBarModel';
-import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar'
-import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource'
+import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar';
+import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 
 const TAG = "AlbumSelect"
@@ -55,14 +54,14 @@ export struct AlbumSelect {
     aboutToAppear(): void {
         startTrace('AlbumSetPageAboutToAppear');
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            logInfo(TAG, `ON_LOADING_FINISHED size: ${size}`);
+            Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
             this.isEmpty = size == 0;
             this.isHideScrollBar = (size <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         });
         this.onActive();
 
         this.gridColumnsCount = UiUtil.getAlbumGridCount(false);
-        logInfo(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
+        Log.info(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
 
         let param = router.getParams();
         if (param) {
@@ -74,7 +73,7 @@ export struct AlbumSelect {
             let albumInfo: SimpleAlbumDataItem = param.albumInfo ? JSON.parse(param.albumInfo.toString()) : undefined
             if (albumInfo) {
                 this.albumsDataSource.setBlackList([albumInfo.id, MediaConstants.ALBUM_ID_RECYCLE])
-                logDebug(TAG, `the album Id is: ${albumInfo.id}`);
+                Log.debug(TAG, `the album Id is: ${albumInfo.id}`);
             } else {
                 this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_RECYCLE])
             }
@@ -116,7 +115,7 @@ export struct AlbumSelect {
     // Callback when the page is in the foreground
     onActive() {
         if (!this.isActive) {
-            logInfo(TAG, 'onActive');
+            Log.info(TAG, 'onActive');
             this.isActive = true;
         }
     }
@@ -124,16 +123,16 @@ export struct AlbumSelect {
     // Callback when the page is in the background
     onInActive() {
         if (this.isActive) {
-            logInfo(TAG, 'onInActive');
+            Log.info(TAG, 'onInActive');
             this.isActive = false;
         }
     }
 
     private onMenuClicked(action: Action): void {
-        logDebug(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.debug(TAG, `onMenuClicked, action: ${action.actionID}`);
         switch (action) {
             case Action.CANCEL:
-                logInfo(TAG, 'clear SelectManager data');
+                Log.info(TAG, 'clear SelectManager data');
                 AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
                 AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
                 router.back();

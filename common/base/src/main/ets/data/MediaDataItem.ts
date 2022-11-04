@@ -12,14 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import { Log } from '../utils/Log';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logDebug, logInfo, logWarn, logError } from '../utils/LoggerUtils'
-import { ViewType } from '../data/ViewType'
-import mediaModel from '../model/MediaModel'
-import { MediaConstants } from '../constants/MediaConstants'
-import { setOrientation } from '../helper/MediaDataHelper'
-import selectManager from '../manager/SelectManager'
+import { ViewType } from '../data/ViewType';
+import mediaModel from '../model/MediaModel';
+import { MediaConstants } from '../constants/MediaConstants';
+import { setOrientation } from '../helper/MediaDataHelper';
+import selectManager from '../manager/SelectManager';
 
 const TAG = "MediaDataItem"
 
@@ -90,7 +89,7 @@ export class MediaDataItem {
     }
 
     async load(isForce: boolean): Promise<void> {
-        logInfo(TAG, `load ${this.status}`)
+        Log.info(TAG, `load ${this.status}`)
         if (this.status > (isForce ? MediaConstants.PART_LOADED : MediaConstants.UNDEFINED)) {
             return
         }
@@ -135,17 +134,17 @@ export class MediaDataItem {
         }
     }
 
-    getThumbnail(width: number, height: number): string{
-        logDebug(TAG, `getThumbnail ${this.status}`)
+    getThumbnail(width: number, height: number): string {
+        Log.debug(TAG, `getThumbnail ${this.status}`)
         if (this.status != MediaConstants.LOADED) {
-            logWarn(TAG, `getThumbnail fail as status: ${this.status}`)
+            Log.warn(TAG, `getThumbnail fail as status: ${this.status}`)
             return ""
         }
-        logDebug(TAG, `this.uri ${this.uri}`)
+        Log.debug(TAG, `this.uri ${this.uri}`)
         return this.uri + `/thumbnail/${width}/${height}`
     }
 
-    getAlt(): Resource{
+    getAlt(): Resource {
         if (this.mediaType == MediaLib.MediaType.VIDEO) {
             return $r('app.media.alt_video_placeholder')
         } else {
@@ -166,7 +165,7 @@ export class MediaDataItem {
             this.status = MediaConstants.TRASHED
             return true
         } catch (err) {
-            logError(TAG, `onDelete ${this.index} error: ${JSON.stringify(err)}`)
+            Log.error(TAG, `onDelete ${this.index} error: ${JSON.stringify(err)}`)
             return false
         }
     }

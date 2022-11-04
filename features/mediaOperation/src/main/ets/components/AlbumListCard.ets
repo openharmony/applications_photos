@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 
@@ -29,7 +29,7 @@ export struct AlbumListCard {
     @State mediaRes: Resource = undefined
 
     aboutToAppear(): void {
-        logInfo(TAG, `album mediaSet ${JSON.stringify(this.item)}`);
+        Log.info(TAG, `album mediaSet ${JSON.stringify(this.item)}`);
         this.item.load().then(() => {
             this.thumbnail = this.item.getThumbnail()
         })
@@ -79,7 +79,7 @@ export struct AlbumListCard {
                         if (this.thumbnail) {
                             this.useAlt = true;
                         }
-                        logError(TAG, 'alt Image error');
+                        Log.error(TAG, 'alt Image error');
                     })
             }
             Column() {

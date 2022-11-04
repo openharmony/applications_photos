@@ -13,18 +13,18 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logInfo } from '@ohos/base/src/main/ets/utils/LoggerUtils'
-import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants'
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
-import { TimelineDataItem } from '../data/TimelineDataItem'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
+import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { TimelineDataItem } from '../data/TimelineDataItem';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 
 const TAG = "TimelineDataImpl"
 
 export class TimelineDataImpl {
     async getTimelineItemData(): Promise<TimelineDataItem[]> {
-        logInfo(TAG, "getTimelineItemData")
+        Log.info(TAG, "getTimelineItemData")
         let fileAssets: Array<MediaLib.FileAsset> = await this.getTimelineItemFileAssets()
 
         let count = this.getCount()

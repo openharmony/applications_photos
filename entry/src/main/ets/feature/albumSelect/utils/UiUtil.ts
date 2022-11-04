@@ -13,23 +13,23 @@
  * limitations under the License.
  */
 
-import { Logger } from '../../../common/utils/Logger';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 import { Constants } from '../../../common/model/common/Constants'
 
-export class UiUtil {
-    private static logger: Logger = new Logger('UiUtil');
+const TAG = "UiUtil"
 
+export class UiUtil {
     public static getAlbumGridCount(horizontal: boolean): number {
-        this.logger.info(`get screen width is : ${screenManager.getWinWidth()}`);
-        this.logger.info(`get screen height is : ${screenManager.getWinHeight()}`);
+        Log.info(TAG, `get screen width is : ${screenManager.getWinWidth()}`);
+        Log.info(TAG, `get screen height is : ${screenManager.getWinHeight()}`);
         let sideBarWidth = horizontal ? Constants.TAB_BAR_WIDTH : 0;
         let contentWidth = screenManager.getWinWidth() - sideBarWidth;
 
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         let gridColumnsCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
         / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
-        this.logger.info(`the grid count in a line is : ${gridColumnsCount}`);
+        Log.info(TAG, `the grid count in a line is : ${gridColumnsCount}`);
         return gridColumnsCount;
     }
 }

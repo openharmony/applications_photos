@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { Logger } from '../../utils/Logger'
-import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { Constants } from '../../model/common/Constants'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class CancelParam {
@@ -26,6 +26,7 @@ export class CancelParam {
 
 @CustomDialog
 export struct DownloadCancelOperationDialog {
+    private TAG: string = 'DownloadCancelOperationDialog'
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
@@ -33,7 +34,6 @@ export struct DownloadCancelOperationDialog {
     @Consume broadCast: Broadcast;
     @Consume deleteProgress: number;
     @Consume cancelParam: CancelParam;
-    logger: Logger = new Logger('CancelOperationDialog');
 
     build() {
         Column() {
@@ -68,7 +68,7 @@ export struct DownloadCancelOperationDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        this.logger.info('click continue')
+                        Log.info(this.TAG, 'click continue')
                         this.cancelParam.continueFunc();
                         this.controller.close()
                     })
@@ -97,7 +97,7 @@ export struct DownloadCancelOperationDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        this.logger.info('click cancel')
+                        Log.info(this.TAG, 'click cancel')
                         this.cancelParam.cancelFunc();
                         this.controller.close()
                     })

@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Want from '@ohos.application.Want'
-import { logDebug, logInfo, logWarn, logError } from '../utils/LoggerUtils'
+import Want from '@ohos.application.Want';
+import { Log } from '../utils/Log';
 import { startAbility } from '../utils/AbilityUtils';
-import { MenuOperation } from './MenuOperation'
-import { MenuContext } from './MenuContext'
+import { MenuOperation } from './MenuOperation';
+import { MenuContext } from './MenuContext';
 import { ItemDataSource } from '../vm/ItemDataSource';
 
 const TAG = "ShareMenuOperation"
@@ -31,7 +31,7 @@ export class ShareMenuOperation implements MenuOperation {
 
     doAction(): void {
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
         let dataSource: ItemDataSource = this.menuContext.dataSource;
@@ -43,7 +43,7 @@ export class ShareMenuOperation implements MenuOperation {
     }
 
     shareFileAsset() {
-        logInfo(TAG, 'shareFileAsset');
+        Log.info(TAG, 'shareFileAsset');
         let want: Want = {
             'action': 'com.huawei.intent.action.hwCHOOSER',
             'parameters': {

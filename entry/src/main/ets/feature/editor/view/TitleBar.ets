@@ -20,7 +20,7 @@ import { BroadcastConstants } from '../../../../../../../common/base/src/main/et
 import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager'
 import { PhotoEditorManager } from '../PhotoEditorManager'
 import { PhotoEditCrop } from '../crop/PhotoEditCrop'
-import { Logger } from '../utils/Logger'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 import router from '@system.router'
 import { showToast } from '../../../../../../../common/base/src/main/ets/utils/UiUtil';
 import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
@@ -36,32 +36,32 @@ export struct TitleBar {
     @State isImmersive: boolean = false;
     @Consume editorManager: PhotoEditorManager;
     @Consume cropEdit: PhotoEditCrop;
-    private log: Logger = new Logger('Title');
+    private TAG: string = 'Title'
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private newImageId: number = -1;
     private immersiveClick: Function = undefined;
     private onBackAfterSaveComplete: Function = undefined;
 
     saveAsNewCallback() {
-        this.log.debug('saveAsNewCallback called');
+        Log.debug(this.TAG, 'saveAsNewCallback called');
         PhotoEditorManager.getInstance().save(false).then((id: number) => {
             this.saveImageCallback(id)
         });
     }
 
     replaceOriginalCallback() {
-        this.log.debug('replaceOriginalCallback called');
+        Log.debug(this.TAG, 'replaceOriginalCallback called');
         PhotoEditorManager.getInstance().save(true).then((id: number) => {
             this.saveImageCallback(id)
         });
     }
 
     discardCallback() {
-        this.log.debug('discardCallback called');
+        Log.debug(this.TAG, 'discardCallback called');
     }
 
     saveImageCallback(id: number) {
-        this.log.info(`saveImageCallback id = ${id}`);
+        Log.info(this.TAG,`saveImageCallback id = ${id}`);
         if (id < 0) {
             this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
             getResourceString($r('app.string.edit_photo_save_fail')).then((message: string) => {
@@ -72,7 +72,7 @@ export struct TitleBar {
     }
 
     backAfterSaveComplete() {
-        this.log.debug(`backAfterSaveComplete called`);
+        Log.debug(this.TAG, `backAfterSaveComplete called`);
         this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
         router.back();
     }
@@ -94,7 +94,7 @@ export struct TitleBar {
     }
 
     onBackClicked() {
-        this.log.debug('back clicked');
+        Log.debug(this.TAG, 'back clicked');
         if (this.isRedo || this.isUndo) {
             this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
         } else if (this.selectedMode == PhotoEditMode.EDIT_MODE_CROP && this.cropEdit.couldReset()) {
@@ -105,7 +105,7 @@ export struct TitleBar {
     }
 
     onSaveClicked() {
-        this.log.debug('save clicked');
+        Log.debug(this.TAG, 'save clicked');
         if (this.isRedo || this.isRedo) {
             this.broadCast.emit(BroadcastConstants.SHOW_SAVE_PHOTO_DIALOG,
                 [this.saveAsNewCallback.bind(this), this.replaceOriginalCallback.bind(this)]);

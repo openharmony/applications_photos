@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { TrashMediaDataItem } from '../data/TrashMediaDataItem';
-import { logInfo, logWarn } from '../utils/LoggerUtils'
+import { Log } from '../utils/Log';
 import { ItemDataSource } from '../vm/ItemDataSource';
 import { MenuContext } from './MenuContext'
 import { ProcessMenuOperation } from './ProcessMenuOperation';
@@ -26,10 +26,10 @@ export class BatchRecoverMenuOperation extends ProcessMenuOperation {
         super(menuContext);
     }
 
-    doAction(): void{
-        logInfo(TAG, 'delete doAction');
+    doAction(): void {
+        Log.info(TAG, 'delete doAction');
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
 
@@ -40,7 +40,7 @@ export class BatchRecoverMenuOperation extends ProcessMenuOperation {
             this.count = dataSource.getSelectedCount();
         }
         if (this.count <= 0) {
-            logWarn(TAG, 'count <= 0, return');
+            Log.warn(TAG, 'count <= 0, return');
             return;
         }
 

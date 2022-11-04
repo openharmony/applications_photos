@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import router from '@system.router'
-import { logInfo, logWarn } from '@ohos/base/src/main/ets/utils/LoggerUtils';
-import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation'
-import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
-import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain'
+import router from '@system.router';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
 import { RouterConstants } from '@ohos/base/src/main/ets/constants/RouterConstants';
 
 const TAG = "GotoPhotosMenuOperation"
@@ -32,11 +32,11 @@ export class GotoPhotosMenuOperation implements MenuOperation {
 
     doAction(): void {
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
         let jumpSourceToMain = this.menuContext.jumpSourceToMain;
-        logInfo(TAG, `router to pages/index, jumpSource: ${jumpSourceToMain}`);
+        Log.info(TAG, `router to pages/index, jumpSource: ${jumpSourceToMain}`);
         let leftPos = screenManager.isSidebar();
         let pageFrom = RouterConstants.ENTRY_FROM.NORMAL;
         if (jumpSourceToMain == JumpSourceToMain.CAMERA) {

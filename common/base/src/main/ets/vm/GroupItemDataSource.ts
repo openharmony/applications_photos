@@ -12,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { logDebug, logInfo, logWarn } from '../utils/LoggerUtils'
-import { GroupDataImpl } from '../model/GroupDataImpl'
-import { ItemDataSource } from '../vm/ItemDataSource'
+import { Log } from '../utils/Log';
+import { GroupDataImpl } from '../model/GroupDataImpl';
+import { ItemDataSource } from '../vm/ItemDataSource';
 import { MediaDataItem } from '../data/MediaDataItem';
 
 const TAG = "GroupItemDataSource"
@@ -32,12 +32,12 @@ export class GroupItemDataSource extends ItemDataSource {
     }
 
     setAlbumId(id: string) {
-        logInfo(TAG, `setAlbumId: ${id}`)
+        Log.info(TAG, `setAlbumId: ${id}`)
         this.groupDataImpl.setAlbumId(id)
     }
 
     setDeviceId(id: string) {
-        logInfo(TAG, `setDeviceId: ${id}`)
+        Log.info(TAG, `setDeviceId: ${id}`)
         this.groupDataImpl.setDeviceId(id)
     }
 
@@ -45,7 +45,7 @@ export class GroupItemDataSource extends ItemDataSource {
         return this.groupDataItem.length
     }
 
-    getIndexByItem(item: MediaDataItem): number{
+    getIndexByItem(item: MediaDataItem): number {
         let index = -1
         let length = this.groupDataItem.length
         for (let i = 0;i < length; i++) {
@@ -57,9 +57,9 @@ export class GroupItemDataSource extends ItemDataSource {
         return index
     }
 
-    getData(index: number): any{
+    getData(index: number): any {
         if (index < 0 || index >= this.groupDataItem.length) {
-            logWarn(TAG, `${index}/${this.groupDataItem.length}`)
+            Log.warn(TAG, `${index}/${this.groupDataItem.length}`)
             return undefined
         }
         this.groupDataItem[index].index = index
@@ -87,7 +87,7 @@ export class GroupItemDataSource extends ItemDataSource {
         return count
     }
 
-    getItems(): MediaDataItem[]{
+    getItems(): MediaDataItem[] {
         let items: MediaDataItem[] = []
         this.groupDataItem.forEach((item: MediaDataItem) => {
             items.push(item)
@@ -95,7 +95,7 @@ export class GroupItemDataSource extends ItemDataSource {
         return items
     }
 
-    getSelectedItems(): MediaDataItem[]{
+    getSelectedItems(): MediaDataItem[] {
         let items: MediaDataItem[] = []
         this.groupDataItem.forEach((item: MediaDataItem) => {
             if (item.isSelect) {
@@ -105,7 +105,7 @@ export class GroupItemDataSource extends ItemDataSource {
         return items
     }
 
-    getSelectedUris(): string[]{
+    getSelectedUris(): string[] {
         let uris: string[] = []
         this.groupDataItem.forEach((item: MediaDataItem) => {
             if (item.isSelect) {

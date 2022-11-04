@@ -14,10 +14,9 @@
  */
 
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logInfo } from '../utils/LoggerUtils';
-import { MediaConstants } from '../constants/MediaConstants';
-import mediaModel from '../model/MediaModel'
-import { PeerDataItem } from '../data/PeerDataItem'
+import { Log } from '../utils/Log';
+import mediaModel from '../model/MediaModel';
+import { PeerDataItem } from '../data/PeerDataItem';
 
 const TAG = "DistributedDataImpl"
 
@@ -25,7 +24,7 @@ export class DistributedDataImpl {
     async reloadAlbumItemData(): Promise<PeerDataItem[]> {
         let peerDataItems = []
         let peers: MediaLib.PeerInfo[] = await mediaModel.getActivePeers()
-        logInfo(TAG, `peers： ${JSON.stringify(peers)}`)
+        Log.info(TAG, `peers： ${JSON.stringify(peers)}`)
         for (let i = 0;i < peers.length; i++) {
             let selections: string = `${MediaLib.FileKey.MEDIA_TYPE} = ? or ${MediaLib.FileKey.MEDIA_TYPE} = ?`
             let selectionArgs: string[] = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()]

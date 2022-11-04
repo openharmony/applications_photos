@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { logInfo } from './LoggerUtils'
+import { Log } from '../utils/Log';
 
 const TAG = "StringUtil"
 
@@ -22,6 +22,6 @@ export function getIdFromUri(uri: string): number {
     let srcEnd = uri.length;
     let srcId = uri.substring(srcIndex + 1, srcEnd);
     let fileId = new Number(srcId);
-    logInfo(TAG, `getIdByUri fileId: ${fileId}`);
+    Log.info(TAG, `getIdByUri fileId: ${fileId}`);
     return fileId.valueOf();
 }

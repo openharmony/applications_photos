@@ -12,19 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { DialogCallback } from '../../model/common/DialogUtil'
-import { Logger } from '../../utils/Logger'
-import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { Constants } from '../../model/common/Constants'
+import { DialogCallback } from '../../model/common/DialogUtil';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { Constants } from '../../model/common/Constants';
 
 @CustomDialog
 export struct DeleteDialog {
+    private TAG: string = 'DeleteDialog'
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @Consume dialogCallback: DialogCallback;
     @Consume dialogMessage: Resource;
-    logger: Logger = new Logger('DeleteDialog');
     controller: CustomDialogController;
 
     aboutToAppear() {
@@ -59,7 +59,7 @@ export struct DeleteDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        this.logger.debug(`cancelCallback`);
+                        Log.debug(this.TAG, `cancelCallback`);
                         this.controller.close();
                         this.dialogCallback && this.dialogCallback.cancelCallback();
                     })
@@ -88,7 +88,7 @@ export struct DeleteDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        this.logger.debug(`confirmCallback`);
+                        Log.debug(this.TAG, `confirmCallback`);
                         this.controller.close();
                         this.dialogCallback && this.dialogCallback.confirmCallback();
                     })

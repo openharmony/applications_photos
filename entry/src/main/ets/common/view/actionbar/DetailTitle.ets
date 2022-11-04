@@ -13,19 +13,19 @@
  * limitations under the License.
  */
 
-import { Logger } from '../../utils/Logger'
-import { ActionBarProp } from '../browserOperation/ActionBarProp'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { ActionBarProp } from '../browserOperation/ActionBarProp';
 
 // Large picture title, including primary date title and secondary time and place title
 @Component
 export struct DetailTitle {
+    private TAG: string = 'DetailTitle'
     @Consume('dateTitle') title: string;
     @Consume('timeLocationTitle') subTitle: string;
-    logger: Logger = new Logger('DetailTitle');
     isVideoPage: boolean = false;
 
     private onBuildDone(): void {
-        this.logger.debug(`onBuildDone, title: ${this.title}, subTitle: ${this.subTitle}`)
+        Log.debug(this.TAG, `onBuildDone, title: ${this.title}, subTitle: ${this.subTitle}`)
     }
 
     build() {
