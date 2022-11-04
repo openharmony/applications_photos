@@ -20,11 +20,11 @@ import  screenManager  from '../../../../../../../common/base/src/main/ets/manag
 
 export class AlbumBarModel {
     createActionBar(isAlbumSetSelectedMode: boolean, selectedAlbumsCount: number, isDisableRename: boolean, isDisableDelete: boolean): ActionBarProp  {
-        let isHorizontal = screenManager.isHorizontal()
+        let isHorizontal = screenManager.isHorizontal();
         if (isHorizontal) {
-            return this.createHorizontalActionBar(isAlbumSetSelectedMode, selectedAlbumsCount, isDisableRename, isDisableDelete)
+            return this.createHorizontalActionBar(isAlbumSetSelectedMode, selectedAlbumsCount, isDisableRename, isDisableDelete);
         } else {
-            return this.createVerticalActionBar(isAlbumSetSelectedMode)
+            return this.createVerticalActionBar(isAlbumSetSelectedMode);
         }
     }
 
@@ -78,9 +78,9 @@ export class AlbumBarModel {
     getMenuList(isAlbumSetSelectedMode: boolean, selectedAlbumsCount: number, isDisableRename: boolean, isDisableDelete: boolean): Array<Action> {
         let menuList: Array<Action> = new Array<Action>();
         if (isAlbumSetSelectedMode) {
-            menuList.push((!isDisableRename && selectedAlbumsCount == 1) ? Action.RENAME : Action.RENAME_INVALID)
-            menuList.push((!isDisableDelete && selectedAlbumsCount > 0) ? Action.DELETE : Action.DELETE_INVALID)
+            menuList.push((!isDisableRename && selectedAlbumsCount == 1) ? Action.RENAME : Action.RENAME_INVALID);
+            menuList.push((!isDisableDelete && selectedAlbumsCount > 0) ? Action.DELETE : Action.DELETE_INVALID);
         }
-        return menuList
+        return menuList;
     }
 }

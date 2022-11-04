@@ -23,12 +23,12 @@ const TAG = "TrashMediaDataItem"
 
 export class TrashMediaDataItem extends MediaDataItem {
     constructor(selections: string, selectionArgs: Array<string>, index: number) {
-        super(selections, selectionArgs, "", index)
-        this.setSelect(false)
+        super(selections, selectionArgs, "", index);
+        this.setSelect(false);
     }
 
     async loadFileAsset(): Promise<MediaLib.FileAsset> {
-        let fetchOption: MediaLib.MediaFetchOptions
+        let fetchOption: MediaLib.MediaFetchOptions;
         if (this.status == MediaConstants.UNDEFINED) {
             fetchOption = {
                 selections: this.selections,
@@ -42,32 +42,32 @@ export class TrashMediaDataItem extends MediaDataItem {
                 order: `date_added DESC`
             }
         }
-        return (await mediaModel.getAllTrashMediaItem(fetchOption, false)).fileAsset
+        return (await mediaModel.getAllTrashMediaItem(fetchOption, false)).fileAsset;
     }
 
     async onRecover(): Promise<boolean> {
         try {
-            let fileAsset = await this.loadFileAsset()
+            let fileAsset = await this.loadFileAsset();
 
-            await fileAsset.trash(false)
-            selectManager.deleteSelect(this.uri)
-            this.status = MediaConstants.TRASHED
-            return true
+            await fileAsset.trash(false);
+            selectManager.deleteSelect(this.uri);
+            this.status = MediaConstants.TRASHED;
+            return true;
         } catch (err) {
-            Log.error(TAG, `onRecover error: ${JSON.stringify(err)}`)
-            return false
+            Log.error(TAG, `onRecover error: ${JSON.stringify(err)}`);
+            return false;
         }
     }
 
     async onDelete(): Promise<boolean> {
         try {
-            await mediaModel.deleteOne(this.uri)
-            selectManager.deleteSelect(this.uri)
-            this.status = MediaConstants.TRASHED
-            return true
+            await mediaModel.deleteOne(this.uri);
+            selectManager.deleteSelect(this.uri);
+            this.status = MediaConstants.TRASHED;
+            return true;
         } catch (err) {
-            Log.error(TAG, `onDelete error: ${JSON.stringify(err)}`)
-            return false
+            Log.error(TAG, `onDelete error: ${JSON.stringify(err)}`);
+            return false;
         }
     }
 }

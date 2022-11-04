@@ -28,24 +28,24 @@ export class PeerDataItem {
     isSelect: boolean;
 
     constructor(count: number, peer: MediaLib.PeerInfo, fileAsset: MediaLib.FileAsset) {
-        this.uri = fileAsset.uri
-        this.orientation = fileAsset.orientation
-        this.deviceName = peer.deviceName
-        this.count = count
-        this.networkId = peer.networkId
+        this.uri = fileAsset.uri;
+        this.orientation = fileAsset.orientation;
+        this.deviceName = peer.deviceName;
+        this.count = count;
+        this.networkId = peer.networkId;
     }
 
     getHashCode() {
-        return `${this.networkId} ${this.orientation}`
+        return `${this.networkId} ${this.orientation}`;
     }
 
     getThumbnail(): string {
-        Log.debug(TAG, `this.uri ${this.uri}`)
-        return this.uri + `/thumbnail/256/256`
+        Log.debug(TAG, `this.uri ${this.uri}`);
+        return this.uri + `/thumbnail/256/256`;
     }
 
     setSelect(isSelect: boolean) {
-        this.isSelect = isSelect
-        selectManager.setSelect(this.uri, this.isSelect)
+        this.isSelect = isSelect;
+        selectManager.setSelect(this.uri, this.isSelect);
     }
 }

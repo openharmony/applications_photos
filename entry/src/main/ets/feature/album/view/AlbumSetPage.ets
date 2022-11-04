@@ -87,10 +87,10 @@ export struct AlbumSetPage {
     private tabsController: TabsController = new TabsController();
     private currentIndex: number = Constants.LOCAL_TAB_INDEX;
     private needNotify = false;
-    private barModel: AlbumBarModel = new AlbumBarModel()
-    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
-    private distributedDataSource: DistributedDataSource = new DistributedDataSource()
-    private isMediaLibDataChanged: boolean = true
+    private barModel: AlbumBarModel = new AlbumBarModel();
+    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
+    private distributedDataSource: DistributedDataSource = new DistributedDataSource();
+    private isMediaLibDataChanged: boolean = true;
 
     onMenuClicked(action: Action, arg: any[]) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
@@ -137,34 +137,34 @@ export struct AlbumSetPage {
 
     onOperationStart(): void {
         Log.debug(TAG, `onOperationStart`);
-        mediaObserver.unregisterObserver(this.dataObserver)
+        mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     private onDeleteEnd(): void {
-        this.isAlbumSetSelectedMode = false
-        this.albumsDataSource.dataRemove()
+        this.isAlbumSetSelectedMode = false;
+        this.albumsDataSource.dataRemove();
         mediaObserver.registerObserver(this.dataObserver);
     }
 
     onNewEnd() {
         Log.debug(TAG, `onNewEnd`);
-        this.isAlbumSetSelectedMode = false
+        this.isAlbumSetSelectedMode = false;
         mediaObserver.registerObserver(this.dataObserver);
     }
 
     onRenameEnd() {
         Log.debug(TAG, `onRenameEnd`);
-        this.isAlbumSetSelectedMode = false
-        this.albumsDataSource.notifyDataReload()
+        this.isAlbumSetSelectedMode = false;
+        this.albumsDataSource.notifyDataReload();
         mediaObserver.registerObserver(this.dataObserver);
     }
 
     onOperationEnd(): void {
         Log.debug(TAG, `onOperationEnd`);
-        this.isAlbumSetSelectedMode = false
-        this.isMediaLibDataChanged = true
-        this.loadItem()
-        mediaObserver.registerObserver(this.dataObserver)
+        this.isAlbumSetSelectedMode = false;
+        this.isMediaLibDataChanged = true;
+        this.loadItem();
+        mediaObserver.registerObserver(this.dataObserver);
         AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
     }
 
@@ -197,8 +197,8 @@ export struct AlbumSetPage {
             this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = true;
         }
         this.distributedDataSource.reloadAlbumItemData().then((change: number) => {
-            this.onUpdateRemoteDevice(change)
-            this.distributedDataSource.notifyDataReload()
+            this.onUpdateRemoteDevice(change);
+            this.distributedDataSource.notifyDataReload();
         })
         finishTrace('AlbumSetPageAboutToAppear');
     }
@@ -213,7 +213,7 @@ export struct AlbumSetPage {
 
     // Callback when the page is show.
     onIndexPageShow() {
-        Log.info(TAG, `onIndexPageShow`)
+        Log.info(TAG, `onIndexPageShow`);
         if (this.isShow && this.isInCurrentTab) {
             this.onActive();
             this.createAlbum();
@@ -221,6 +221,7 @@ export struct AlbumSetPage {
         } else if (!this.isShow && this.isInCurrentTab) {
             this.onInActive();
         } else {
+            Log.info(TAG, `other condition`);
         }
     }
 
@@ -269,8 +270,8 @@ export struct AlbumSetPage {
     onModeChange() {
         Log.info(TAG, `onModeChange ${this.isAlbumSetSelectedMode}`);
         if (!this.isAlbumSetSelectedMode) {
-            this.albumsDataSource.setSelect(false)
-            this.selectedAlbumsCount = 0
+            this.albumsDataSource.setSelect(false);
+            this.selectedAlbumsCount = 0;
         }
     }
 
@@ -306,11 +307,11 @@ export struct AlbumSetPage {
         if (!this.isActive) {
             Log.info(TAG, 'onActive');
             this.isActive = true;
-            this.albumsDataSource.dataRemove()
-            this.distributedDataSource.dataRemove()
+            this.albumsDataSource.dataRemove();
+            this.distributedDataSource.dataRemove();
             this.showNotify();
         }
-        this.loadItem()
+        this.loadItem();
     }
 
     // Callback when the page is in the background
@@ -324,7 +325,7 @@ export struct AlbumSetPage {
     private showNotify() {
         if (this.needNotify) {
             getResourceString($r('app.string.distributed_album_disconnected')).then((message: string) => {
-                showToast(message)
+                showToast(message);
             })
             this.needNotify = false;
         }
@@ -371,11 +372,11 @@ export struct AlbumSetPage {
     private loadItem() {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
-                this.isEmpty = isEmpty
-                this.albumsDataSource.notifyDataReload()
+                this.isEmpty = isEmpty;
+                this.albumsDataSource.notifyDataReload();
             })
         } else if (this.isActive) {
-            this.albumsDataSource.dataRemove()
+            this.albumsDataSource.dataRemove();
         }
     }
 
@@ -385,11 +386,11 @@ export struct AlbumSetPage {
         if (change < 0) {
             this.needNotify = true;
         }
-        let size = this.distributedDataSource.totalCount()
+        let size = this.distributedDataSource.totalCount();
         Log.info(TAG, `onUpdateRemoteDevice length:${size} change: ${change}`);
 
         if (size <= 0) {
-            this.onDistributedTabChanged(Constants.LOCAL_TAB_INDEX)
+            this.onDistributedTabChanged(Constants.LOCAL_TAB_INDEX);
             try {
                 this.tabsController.changeIndex(this.currentIndex);
             } catch (error) {
@@ -407,15 +408,15 @@ export struct AlbumSetPage {
     }
 
     private onSelect(index: number) {
-        this.selectedAlbumsCount = this.albumsDataSource.getSelectedCount()
-        this.albumsDataSource.notifyDataChange(index)
+        this.selectedAlbumsCount = this.albumsDataSource.getSelectedCount();
+        this.albumsDataSource.notifyDataChange(index);
     }
 
     private loadAlbums(isForce: boolean) {
         if (isForce || this.currentIndex == Constants.LOCAL_TAB_INDEX) {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
-                this.isEmpty = isEmpty
-                this.albumsDataSource.notifyDataReload()
+                this.isEmpty = isEmpty;
+                this.albumsDataSource.notifyDataReload();
             })
         }
         if (isForce || this.currentIndex == Constants.OTHER_EQUIPMENT_TAB_INDEX) {

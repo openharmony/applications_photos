@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import { PhotoEditMode } from '../base/PhotoEditType'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { Constants } from '../../../common/model/common/Constants'
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager'
-import { PhotoEditorManager } from '../PhotoEditorManager'
-import { PhotoEditCrop } from '../crop/PhotoEditCrop'
+import { PhotoEditMode } from '../base/PhotoEditType';
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { Constants } from '../../../common/model/common/Constants';
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { PhotoEditorManager } from '../PhotoEditorManager';
+import { PhotoEditCrop } from '../crop/PhotoEditCrop';
 import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 import router from '@system.router'
 import { showToast } from '../../../../../../../common/base/src/main/ets/utils/UiUtil';

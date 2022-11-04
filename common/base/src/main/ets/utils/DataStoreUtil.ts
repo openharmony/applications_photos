@@ -20,7 +20,7 @@ const TAG = "DataStoreUtil"
 
 class DataStoreUtil {
     private preferences: preferences.Preferences = undefined;
-    private static readonly PREFERENCES_KEY_MY_FORM_STORE = 'myFormStore'
+    private static readonly PREFERENCES_KEY_MY_FORM_STORE = 'myFormStore';
 
     constructor() {
     }
@@ -29,12 +29,12 @@ class DataStoreUtil {
         Log.debug(TAG, 'init start!');
         if (this.preferences != undefined) {
             Log.info(TAG, `init preferences before`);
-            return
+            return;
         }
         try {
-            let context = globalThis.applicationContext
-            this.preferences = await preferences.getPreferences(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE)
-            Log.info(TAG, `init preferences ${preferences}`)
+            let context = globalThis.applicationContext;
+            this.preferences = await preferences.getPreferences(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE);
+            Log.info(TAG, `init preferences ${preferences}`);
         } catch (err) {
             Log.error(TAG, `init err ${err}`);
         }
@@ -49,10 +49,10 @@ class DataStoreUtil {
         }
         let temValue = defValue;
         try {
-            temValue = await this.preferences.get(key, defValue)
-            Log.debug(TAG, "The value of startup is " + temValue)
+            temValue = await this.preferences.get(key, defValue);
+            Log.debug(TAG, "The value of startup is " + temValue);
         } catch (err) {
-            Log.error(TAG, `Get the value failed with err: ${err}`)
+            Log.error(TAG, `Get the value failed with err: ${err}`);
         }
         return temValue;
     }
@@ -61,12 +61,12 @@ class DataStoreUtil {
         Log.debug(TAG, 'putData start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, 'putData preferences is undefined');
-            return
+            return;
         }
 
         try {
-            await this.preferences.put(key, value)
-            Log.debug(TAG, 'Put the value successfully.')
+            await this.preferences.put(key, value);
+            Log.debug(TAG, 'Put the value successfully.');
         } catch (err) {
             Log.error(TAG, `Put the value failed with err: ${err}`);
         }
@@ -78,7 +78,7 @@ class DataStoreUtil {
             Log.warn(TAG, `delData preferences is undefined`);
         }
         try {
-            await this.preferences.delete(key)
+            await this.preferences.delete(key);
             Log.debug(TAG, "Delete the value successfully.");
         } catch (err) {
             Log.error(TAG, `Delete the value failed with err: ${err}`);
@@ -101,10 +101,10 @@ class DataStoreUtil {
             return ret;
         }
         try {
-            ret = await this.preferences.has(key)
+            ret = await this.preferences.has(key);
             Log.debug(TAG, "hasData the value successfully.");
         } catch (err) {
-            ret = false
+            ret = false;
             Log.error(TAG, `hasData the value failed with err: ${err}`);
         }
         return ret;

@@ -30,10 +30,10 @@ export struct ImageGridItemComponent {
     @Consume broadCast: Broadcast;
     @Consume isSelectedMode: boolean;
     @Consume @Watch('onShow') isShow: boolean;
-    @State thumbnail: string = ""
-    @State isFavourite: boolean = false
+    @State thumbnail: string = "";
+    @State isFavourite: boolean = false;
     @State pressAnimScale: number = 1.0;
-    @State isError: boolean = false
+    @State isError: boolean = false;
     pageName = '';
     mediaItem: MediaDataItem;
     isThird = false;
@@ -50,14 +50,14 @@ export struct ImageGridItemComponent {
     }
 
     private resetShow() {
-        startTraceWithTaskId("load MediaItem", this.mediaItem.index)
+        startTraceWithTaskId("load MediaItem", this.mediaItem.index);
         this.mediaItem.load(false).then(() => {
-            finishTraceWithTaskId("load MediaItem", this.mediaItem.index)
-            this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE)
-            this.isError = false
-            Log.debug(TAG, `getThumbnail ${this.thumbnail}`)
+            finishTraceWithTaskId("load MediaItem", this.mediaItem.index);
+            this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE);
+            this.isError = false;
+            Log.debug(TAG, `getThumbnail ${this.thumbnail}`);
             this.mediaItem.isFavor().then((status: boolean) => {
-                this.isFavourite = status
+                this.isFavourite = status;
             })
         })
         this.resetPressAnim();
@@ -97,17 +97,17 @@ export struct ImageGridItemComponent {
 
     private onSelected() {
         Log.info(TAG, 'onSelected');
-        this.mediaItem.setSelect(!this.mediaItem.isSelect)
-        this.broadCast.emit(BroadcastConstants.SELECT, [this.mediaItem.index])
+        this.mediaItem.setSelect(!this.mediaItem.isSelect);
+        this.broadCast.emit(BroadcastConstants.SELECT, [this.mediaItem.index]);
     }
 
     private selectStateChange() {
         Log.info(TAG, `change selected ${this.isSelectedMode}`);
         if (!this.isSelectedMode) {
-            this.isSelectedMode = true
+            this.isSelectedMode = true;
             this.pressAnimScale = 1;
         }
-        this.onSelected()
+        this.onSelected();
     }
 
     build() {

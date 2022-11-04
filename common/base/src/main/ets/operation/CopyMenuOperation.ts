@@ -45,7 +45,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
 
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.count = this.menuContext.items.length
+            this.count = this.menuContext.items.length;
         } else {
             this.count = dataSource.getSelectedCount();
         }
@@ -70,26 +70,26 @@ export class CopyMenuOperation extends ProcessMenuOperation {
         }
 
         if (dataSource == null) {
-            this.items = this.menuContext.items
+            this.items = this.menuContext.items;
         } else {
-            this.items = dataSource.getSelectedItems()
+            this.items = dataSource.getSelectedItems();
         }
         this.processOperation();
     }
 
     requestOneBatchOperation() {
-        let item = this.items[this.currentBatch++] as MediaDataItem
-        this.copyOne(item)
+        let item = this.items[this.currentBatch++] as MediaDataItem;
+        this.copyOne(item);
     }
 
     private async copyOne(item: MediaDataItem) {
         if (this.menuContext.deviceId) {
-            let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + MediaConstants.REMOTE_ALBUM_PATH + "/"
-            this.albumInfo = new SimpleAlbumDataItem("", "", path, "", "")
+            let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + MediaConstants.REMOTE_ALBUM_PATH + "/";
+            this.albumInfo = new SimpleAlbumDataItem("", "", path, "", "");
 
         }
-        let fileAsset = await item.loadFileAsset()
-        let assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo)
+        let fileAsset = await item.loadFileAsset();
+        let assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo);
         if (this.menuContext.deviceId) {
             let displayName = assets.sourceAsset.displayName;
             let index = displayName.lastIndexOf('.');
@@ -139,7 +139,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
     async copy(source, target, param?) {
         try {
             if (!target) {
-                startTraceWithTaskId('create', this.currentBatch)
+                startTraceWithTaskId('create', this.currentBatch);
                 target = await mediaModel.createOne(param.mediaType, param.name, param.path);
                 finishTraceWithTaskId('create', this.currentBatch);
                 if (target == null) {
@@ -148,9 +148,9 @@ export class CopyMenuOperation extends ProcessMenuOperation {
                     return;
                 }
             }
-            startTraceWithTaskId('openWriteClose', this.currentBatch)
+            startTraceWithTaskId('openWriteClose', this.currentBatch);
             await mediaModel.copyOne(source, target);
-            finishTraceWithTaskId('openWriteClose', this.currentBatch)
+            finishTraceWithTaskId('openWriteClose', this.currentBatch);
             this.onCompleted();
         } catch (error) {
             finishTraceWithTaskId('create', this.currentBatch);

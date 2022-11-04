@@ -60,8 +60,8 @@ export struct NewAlbumPage {
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private isNewAlbum: boolean = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM);
     private targetAlbum: SimpleAlbumDataItem = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_TARGET);
-    private barModel: NewAlbumBarModel = new NewAlbumBarModel()
-    private groupDataSource: GroupItemDataSource = new GroupItemDataSource()
+    private barModel: NewAlbumBarModel = new NewAlbumBarModel();
+    private groupDataSource: GroupItemDataSource = new GroupItemDataSource();
 
     onIndexChange() {
         Log.info(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
@@ -123,7 +123,7 @@ export struct NewAlbumPage {
             Log.info(TAG, 'onActive');
             this.isActive = true;
         }
-        this.groupDataSource.dataRemove()
+        this.groupDataSource.dataRemove();
     }
 
     // The callback when current page is in the background
@@ -143,7 +143,7 @@ export struct NewAlbumPage {
     }
 
     onBackPress() {
-        this.groupDataSource.setSelect(false)
+        this.groupDataSource.setSelect(false);
         return false;
     }
 
@@ -224,14 +224,14 @@ export struct NewAlbumPage {
     }
 
     private onSelect(index: number) {
-        Log.info(TAG, "onSelect")
-        this.totalSelectedCount = this.groupDataSource.getSelectedCount()
-        this.isAllSelected = this.groupDataSource.isSelect()
-        this.groupDataSource.notifyDataChange(index)
+        Log.info(TAG, "onSelect");
+        this.totalSelectedCount = this.groupDataSource.getSelectedCount();
+        this.isAllSelected = this.groupDataSource.isSelect();
+        this.groupDataSource.notifyDataChange(index);
     }
 
     private jumpToPhotoBrowser(name: string, item: MediaDataItem) {
-        let children: MediaDataItem[] = this.groupDataSource.getItems()
+        let children: MediaDataItem[] = this.groupDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
             Log.warn(TAG, 'targetIndex is not found');
@@ -249,7 +249,7 @@ export struct NewAlbumPage {
     }
 
     private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem) {
-        let children: MediaDataItem[] = this.groupDataSource.getItems()
+        let children: MediaDataItem[] = this.groupDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
             Log.warn(TAG, 'targetIndex is not found');

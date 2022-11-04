@@ -21,9 +21,9 @@ export class MenuContext {
     items: any[] = [];
     dataSource: ItemDataSource;
 
-    albumInfo: SimpleAlbumDataItem
+    albumInfo: SimpleAlbumDataItem;
 
-    broadCast: Broadcast
+    broadCast: Broadcast;
     onOperationStart: Function;
     onOperationEnd: Function;
 
@@ -43,8 +43,8 @@ export class MenuContext {
     }
 
     withDataSource(dataSource): MenuContext{
-        this.dataSource = dataSource
-        return this
+        this.dataSource = dataSource;
+        return this;
     }
 
     withOperationStartCallback(onOperationStart: Function): MenuContext {

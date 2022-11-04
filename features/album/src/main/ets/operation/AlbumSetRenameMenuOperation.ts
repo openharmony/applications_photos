@@ -42,11 +42,11 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
             return;
         }
         let dataSource: ItemDataSource = this.menuContext.dataSource;
-        let count: number
-        let items: any[]
+        let count: number;
+        let items: any[];
         if (dataSource == null) {
-            count = this.menuContext.items.length
-            items = this.menuContext.items
+            count = this.menuContext.items.length;
+            items = this.menuContext.items;
         } else {
             count = dataSource.getSelectedCount();
             items = dataSource.getSelectedItems();
@@ -56,7 +56,7 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
             return;
         }
 
-        this.item = items[0] as AlbumDataItem
+        this.item = items[0] as AlbumDataItem;
 
         this.confirmCallback = this.confirmCallback.bind(this);
         this.cancelCallback = this.cancelCallback.bind(this);
@@ -87,7 +87,7 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
                 })
                 Log.warn(TAG, `album is miss`)
                 this.onError();
-                return
+                return;
             }
             albums[0].albumName = name
             await albums[0].commitModify()

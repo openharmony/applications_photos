@@ -14,9 +14,9 @@
  */
 
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import mediaModel from '../model/MediaModel'
-import { MediaConstants } from '../constants/MediaConstants'
-import { MediaDataItem } from './MediaDataItem'
+import mediaModel from '../model/MediaModel';
+import { MediaConstants } from '../constants/MediaConstants';
+import { MediaDataItem } from './MediaDataItem';
 
 export class FavorMediaDataItem extends MediaDataItem {
     constructor(selections: string, selectionArgs: Array<string>, index: number) {
@@ -24,7 +24,7 @@ export class FavorMediaDataItem extends MediaDataItem {
     }
 
     async loadFileAsset(): Promise<MediaLib.FileAsset> {
-        let fetchOption: MediaLib.MediaFetchOptions
+        let fetchOption: MediaLib.MediaFetchOptions;
         if (this.status == MediaConstants.UNDEFINED) {
             fetchOption = {
                 selections: this.selections,
@@ -38,13 +38,13 @@ export class FavorMediaDataItem extends MediaDataItem {
                 order: `date_added DESC`
             }
         }
-        return (await mediaModel.getAllFavorMediaItem(fetchOption, false)).fileAsset
+        return (await mediaModel.getAllFavorMediaItem(fetchOption, false)).fileAsset;
     }
 
     async setFavor(): Promise<boolean> {
-        let isSuccess: boolean = await super.setFavor()
-        let isFavor: boolean = await super.isFavor()
-        this.status = isFavor ? this.status : MediaConstants.TRASHED
-        return isSuccess
+        let isSuccess: boolean = await super.setFavor();
+        let isFavor: boolean = await super.isFavor();
+        this.status = isFavor ? this.status : MediaConstants.TRASHED;
+        return isSuccess;
     }
 }

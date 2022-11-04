@@ -24,7 +24,7 @@ export class DateUtil {
         'zh': 'zh-CN',
         'en': 'en-US'
     };
-    private static readonly FORMAT_DECIMAL: number = 10
+    private static readonly FORMAT_DECIMAL: number = 10;
     public static readonly MILLISECONDS_PER_SECOND: number = 1000;
     public static readonly SECONDS_PER_MINUTE: number = 60;
     public static readonly SECONDS_PER_HOUR: number = 3600;

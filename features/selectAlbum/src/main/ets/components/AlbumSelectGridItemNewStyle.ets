@@ -29,7 +29,7 @@ export struct AlbumSelectGridItemNewStyle {
         [MediaConstants.ALBUM_ID_VIDEO, $r('app.media.ic_video')],
         [MediaConstants.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
     ]);
-    item: AlbumDataItem
+    item: AlbumDataItem;
     @State isEmptyAlbum: boolean = false;
     @Provide isBigCard: boolean = false;
     @Provide gridHeight: number = 0;
@@ -42,7 +42,7 @@ export struct AlbumSelectGridItemNewStyle {
     @State cardWidth: number = 0;
     @State cardHeight: number = 0;
     @State transformV: number = 0;
-    @State thumbnail: string = ""
+    @State thumbnail: string = "";
 
     aboutToAppear(): void {
         Log.info(TAG, `aboutToAppear + ${this.item.uri}`);

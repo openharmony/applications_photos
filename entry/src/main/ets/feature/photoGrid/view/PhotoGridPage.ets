@@ -79,9 +79,9 @@ export struct PhotoGridPage {
     routerStart = false;
     private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
-    private barModel: PhotoGridBarModel = new PhotoGridBarModel()
-    private groupDataSource: GroupItemDataSource = new GroupItemDataSource()
-    private isMediaLibDataChanged: boolean = true
+    private barModel: PhotoGridBarModel = new PhotoGridBarModel();
+    private groupDataSource: GroupItemDataSource = new GroupItemDataSource();
+    private isMediaLibDataChanged: boolean = true;
 
     onIndexChange() {
         Log.info(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
@@ -184,7 +184,7 @@ export struct PhotoGridPage {
     }
 
     async openDetailsDialog(): Promise<void> {
-        let items: MediaDataItem[] = this.groupDataSource.getSelectedItems()
+        let items: MediaDataItem[] = this.groupDataSource.getSelectedItems();
         if (items.length == 0) {
             Log.warn(TAG, 'no select error');
         } else if (items.length == 1) {
@@ -241,10 +241,10 @@ export struct PhotoGridPage {
         mediaObserver.registerObserver(this.dataObserver);
         if (err) {
             getResourceString($r('app.string.copy_failed_single')).then((message: string) => {
-                showToast(message)
+                showToast(message);
             })
         } else {
-            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.groupDataSource.dataReload(true))
+            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.groupDataSource.dataReload(true));
         }
     }
 
@@ -262,16 +262,16 @@ export struct PhotoGridPage {
                 Log.warn(TAG, `get selectItems is error ${count}`);
                 let str = await getResourceString($r('app.string.download_failed_multi'));
                 let message = str.replace('%d', count.toString());
-                showToast(message)
+                showToast(message);
             } else {
                 getResourceString($r('app.string.download_failed_single')).then((message: string) => {
-                    showToast(message)
+                    showToast(message);
                 })
             }
             ;
         } else {
             getResourceString($r('app.string.download_progress_done')).then((message: string) => {
-                showToast(message)
+                showToast(message);
             })
         }
     }
@@ -287,10 +287,10 @@ export struct PhotoGridPage {
         mediaObserver.registerObserver(this.dataObserver);
         if (err) {
             getResourceString($r('app.string.move_failed_single')).then((message: string) => {
-                showToast(message)
+                showToast(message);
             })
         } else {
-            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.groupDataSource.dataReload(true))
+            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.groupDataSource.dataReload(true));
         }
     }
 
@@ -314,13 +314,13 @@ export struct PhotoGridPage {
         if (this.isSelectedMode) {
             this.isSelectedMode = false;
             this.groupDataSource.setSelect(false);
-            this.onSelect()
+            this.onSelect();
         }
     }
 
     onPageShow() {
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
-        this.isShow = true
+        this.isShow = true;
         let params = router.getParams();
         if (this.routerStart && params && params.pageType && params.albumInfo) {
             Log.info(TAG, 'MediaOperation back');
@@ -350,7 +350,7 @@ export struct PhotoGridPage {
             Log.info(TAG, 'onActive');
             this.isActive = true;
         }
-        this.loadItem()
+        this.loadItem();
     }
 
     // The callback when current page is in the background
@@ -421,18 +421,18 @@ export struct PhotoGridPage {
                 this.groupDataSource.setDeviceId(this.albumInfo.deviceId);
             }
         }
-        Log.info(TAG, "reloadGroupItemData")
+        Log.info(TAG, "reloadGroupItemData");
 
         this.onMenuClicked = this.onMenuClicked.bind(this);
         mediaObserver.registerObserver(this.dataObserver);
 
         this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect());
         this.broadCast.on(BroadcastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
-            this.jumpToPhotoBrowser(name, item)
+            this.jumpToPhotoBrowser(name, item);
         });
 
         this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
-            this.jumpToThirdPhotoBrowser(name, item)
+            this.jumpToThirdPhotoBrowser(name, item);
         });
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
             Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
@@ -484,26 +484,26 @@ export struct PhotoGridPage {
 
     onMediaLibDataChange(changeType) {
         Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
-        this.isMediaLibDataChanged = true
+        this.isMediaLibDataChanged = true;
         this.loadItem();
     }
 
     private loadItem() {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.groupDataSource.reloadGroupItemData(true).then((isEmpty) => {
-                Log.info(TAG, `onMediaLibDataChange load finish`)
-                this.isEmpty = isEmpty
-                this.groupDataSource.notifyDataReload()
+                Log.info(TAG, `onMediaLibDataChange load finish`);
+                this.isEmpty = isEmpty;
+                this.groupDataSource.notifyDataReload();
             })
         } else if (this.isActive) {
-            this.groupDataSource.dataRemove()
+            this.groupDataSource.dataRemove();
         }
     }
 
     private onSelect() {
-        Log.info(TAG, "onSelect")
-        this.totalSelectedCount = this.groupDataSource.getSelectedCount()
-        this.isAllSelected = this.groupDataSource.isSelect()
+        Log.info(TAG, "onSelect");
+        this.totalSelectedCount = this.groupDataSource.getSelectedCount();
+        this.isAllSelected = this.groupDataSource.isSelect();
         if (this.totalSelectedCount > 0) {
             this.moreMenuList = [Action.MOVE, Action.COPY, Action.INFO];
         } else {
@@ -512,7 +512,7 @@ export struct PhotoGridPage {
     }
 
     private jumpToPhotoBrowser(name: string, item: MediaDataItem) {
-        let children: MediaDataItem[] = this.groupDataSource.getItems()
+        let children: MediaDataItem[] = this.groupDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
             Log.warn(TAG, 'targetIndex is not found');
@@ -525,7 +525,7 @@ export struct PhotoGridPage {
         } else if (this.isDistributedAlbum) {
             pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
         } else {
-            pageEntryFrom = Constants.ENTRY_FROM.NORMAL
+            pageEntryFrom = Constants.ENTRY_FROM.NORMAL;
         }
         router.push({
             uri: 'feature/browser/view/PhotoBrowser',
@@ -539,20 +539,20 @@ export struct PhotoGridPage {
     }
 
     private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem) {
-        let children: MediaDataItem[] = this.groupDataSource.getItems()
+        let children: MediaDataItem[] = this.groupDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
             Log.warn(TAG, 'targetIndex is not found');
             return;
         }
         AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
-        let pageEntryFrom
+        let pageEntryFrom;
         if (this.albumInfo && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
             pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
         } else if (this.isDistributedAlbum) {
             pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
         } else {
-            pageEntryFrom = Constants.ENTRY_FROM.NORMAL
+            pageEntryFrom = Constants.ENTRY_FROM.NORMAL;
         }
         router.push({
             uri: 'feature/browser/view/SelectPhotoBrowser',

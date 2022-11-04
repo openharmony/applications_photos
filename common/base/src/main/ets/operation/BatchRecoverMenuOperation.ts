@@ -35,7 +35,7 @@ export class BatchRecoverMenuOperation extends ProcessMenuOperation {
 
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.count = this.menuContext.items.length
+            this.count = this.menuContext.items.length;
         } else {
             this.count = dataSource.getSelectedCount();
         }
@@ -53,20 +53,20 @@ export class BatchRecoverMenuOperation extends ProcessMenuOperation {
 
 
         if (dataSource == null) {
-            this.items = this.menuContext.items
+            this.items = this.menuContext.items;
         } else {
-            this.items = dataSource.getSelectedItems()
+            this.items = dataSource.getSelectedItems();
         }
-        this.processOperation()
+        this.processOperation();
     }
 
     // Delete a batch of data
     requestOneBatchOperation(): void {
-        let item = this.items[this.currentBatch] as TrashMediaDataItem
+        let item = this.items[this.currentBatch] as TrashMediaDataItem;
         item.onRecover().then(() => {
-            this.currentBatch++
+            this.currentBatch++;
             this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [this.getExpectProgress(), this.currentBatch]);
-            this.cyclicOperation()
+            this.cyclicOperation();
         })
     }
 }

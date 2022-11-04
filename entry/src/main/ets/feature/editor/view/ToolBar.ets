@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import { ActionButton } from './ActionButton'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { ActionButtonInfo } from './MainMenuInfo'
-import { RefreshActionMenu, ActionChangedEvent } from './RefreshMenu'
-import { PhotoEditMode } from '../base/PhotoEditType'
-import { Constants } from '../../../common/model/common/Constants'
-import { PhotoEditorManager } from '../PhotoEditorManager'
+import { ActionButton } from './ActionButton';
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { ActionButtonInfo } from './MainMenuInfo';
+import { RefreshActionMenu, ActionChangedEvent } from './RefreshMenu';
+import { PhotoEditMode } from '../base/PhotoEditType';
+import { Constants } from '../../../common/model/common/Constants';
+import { PhotoEditorManager } from '../PhotoEditorManager';
 import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 
 @Component

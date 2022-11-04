@@ -19,19 +19,19 @@ const TAG = "ItemDataSource"
 export abstract class ItemDataSource implements IDataSource {
     private listeners: DataChangeListener[] = [];
 
-    abstract totalCount(): number
+    abstract totalCount(): number;
 
-    abstract getData(index: number): any
+    abstract getData(index: number): any;
 
-    abstract isSelect(): boolean
+    abstract isSelect(): boolean;
 
-    abstract getSelectedCount(): number
+    abstract getSelectedCount(): number;
 
-    abstract getSelectedItems(): any[]
+    abstract getSelectedItems(): any[];
 
-    abstract getSelectedUris(): any[]
+    abstract getSelectedUris(): any[];
 
-    abstract dataRemove(): void
+    abstract dataRemove(): void;
 
     registerDataChangeListener(listener: DataChangeListener): void {
         Log.info(TAG, 'registerDataChangeListener');
@@ -52,19 +52,19 @@ export abstract class ItemDataSource implements IDataSource {
 
     notifyDataChange(index: number): void {
         this.listeners.forEach(listener => {
-            listener.onDataChange(index)
+            listener.onDataChange(index);
         })
     }
 
     notifyDataReload(): void {
         this.listeners.forEach(listener => {
-            listener.onDataReloaded()
+            listener.onDataReloaded();
         })
     }
 
     notifyDataDelete(index: number): void {
         this.listeners.forEach(listener => {
-            listener.onDataDelete(index)
+            listener.onDataDelete(index);
         })
     }
 }

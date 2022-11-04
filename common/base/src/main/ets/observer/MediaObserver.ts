@@ -23,11 +23,11 @@ const TAG = "MediaObserver"
 
 class MediaObserver {
     callbacks: MediaObserverCallback[] = [];
-    private static readonly OBSERVER_IMAGE_CHANGE: string = 'imageChange'
-    private static readonly OBSERVER_VIDEO_CHANGE: string = 'videoChange'
-    private static readonly OBSERVER_DEVICE_CHANGE: string = 'deviceChange'
-    private static readonly OBSERVER_ALBUM_CHANGE: string = 'albumChange'
-    private static readonly OBSERVER_REMOTE_FILE_CHANGE: string = 'remoteFileChange'
+    private static readonly OBSERVER_IMAGE_CHANGE: string = 'imageChange';
+    private static readonly OBSERVER_VIDEO_CHANGE: string = 'videoChange';
+    private static readonly OBSERVER_DEVICE_CHANGE: string = 'deviceChange';
+    private static readonly OBSERVER_ALBUM_CHANGE: string = 'albumChange';
+    private static readonly OBSERVER_REMOTE_FILE_CHANGE: string = 'remoteFileChange';
 
     registerObserver(callback: MediaObserverCallback) {
         Log.info(TAG, 'registerObserver');

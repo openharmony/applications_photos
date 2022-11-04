@@ -27,7 +27,7 @@ export class FormController {
     private formId: string;
     private operationMode: number = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
     private callback: Function = null;
-    private static readonly MSG_ROUTER_PHOTOS = 'routerPhotos'
+    private static readonly MSG_ROUTER_PHOTOS = 'routerPhotos';
     mediaDataManager: MediaDataManager;
 
     constructor(formId: string, operationMode: number, callback?: Function) {

@@ -21,7 +21,7 @@ const IMAGE_SCREEN_RATIO = 0.8
 
 @Component
 export struct NoPhotoIndexComponent {
-    private TAG: string = 'NoPhotoIndexComponent'
+    private TAG: string = 'NoPhotoIndexComponent';
     index: number;
 
     // set an initial value temporarily, later change to 0.
@@ -42,7 +42,7 @@ export struct NoPhotoIndexComponent {
         let winWidth = screenManager.getWinWidth();
         let winHeightHalf = screenManager.getWinHeight() / 2;
         this.imageSize
-        = (winWidth < winHeightHalf) ? (winWidth * IMAGE_SCREEN_RATIO) : (winHeightHalf * IMAGE_SCREEN_RATIO)
+        = (winWidth < winHeightHalf) ? (winWidth * IMAGE_SCREEN_RATIO) : (winHeightHalf * IMAGE_SCREEN_RATIO);
         Log.info(this.TAG, `window size: ${winWidth}, ${winHeightHalf}  ,empty photos or album picture size = ${this.imageSize}`);
     }
 

@@ -50,10 +50,10 @@ export struct DistributedAlbumSetPage {
     isActive: boolean = false; // Whether the page is in the foreground
     scroller: Scroller = new Scroller();
     private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
-    private deviceId: string = ''
-    private barModel: DistributedAlbumBarModel = new DistributedAlbumBarModel()
-    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
-    private isMediaLibDataChanged: boolean = true
+    private deviceId: string = '';
+    private barModel: DistributedAlbumBarModel = new DistributedAlbumBarModel();
+    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
+    private isMediaLibDataChanged: boolean = true;
 
     onMenuClicked(action: Action, arg: any[]) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
@@ -73,7 +73,7 @@ export struct DistributedAlbumSetPage {
             let item = JSON.parse(param.item.toString()) as PeerDataItem;
             this.title = item.deviceName;
             this.deviceId = item.networkId;
-            this.albumsDataSource.setDeviceId(item.networkId)
+            this.albumsDataSource.setDeviceId(item.networkId);
         } else {
             Log.warn(TAG, `param is error`);
         }
@@ -117,7 +117,7 @@ export struct DistributedAlbumSetPage {
             Log.info(TAG, 'onActive');
             this.isActive = true;
         }
-        this.loadItem()
+        this.loadItem();
     }
 
     // Callback when the page is in the background
@@ -156,18 +156,18 @@ export struct DistributedAlbumSetPage {
 
     onMediaLibDataChange(changeType) {
         Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
-        this.isMediaLibDataChanged = true
-        this.loadItem()
+        this.isMediaLibDataChanged = true;
+        this.loadItem();
     }
 
     private loadItem() {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
-                this.isEmpty = isEmpty
-                this.albumsDataSource.notifyDataReload()
+                this.isEmpty = isEmpty;
+                this.albumsDataSource.notifyDataReload();
             })
         } else if (this.isActive) {
-            this.albumsDataSource.dataRemove()
+            this.albumsDataSource.dataRemove();
         }
     }
 

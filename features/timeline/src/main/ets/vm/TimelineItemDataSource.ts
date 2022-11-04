@@ -21,169 +21,169 @@ import { TimelineDataItem } from '../data/TimelineDataItem';
 const TAG = "TimelineItemDataSource"
 
 export class TimelineItemDataSource extends ItemDataSource {
-    groupItem: TimelineDataItem[] = []
-    private timelineDataImpl: TimelineDataImpl = new TimelineDataImpl()
+    groupItem: TimelineDataItem[] = [];
+    private timelineDataImpl: TimelineDataImpl = new TimelineDataImpl();
 
     constructor() {
         super()
     }
 
-    totalCount(): number{
+    totalCount(): number {
         let count = 0
         this.groupItem.forEach((item: TimelineDataItem) => {
-            count += 1 + item.groupChild.length
+            count += 1 + item.groupChild.length;
         })
-        return count
+        return count;
     }
 
-    childCount(): number{
-        let count = 0
+    childCount(): number {
+        let count = 0;
         this.groupItem.forEach((item: TimelineDataItem) => {
-            count += item.groupChild.length
+            count += item.groupChild.length;
         })
-        return count
+        return count;
     }
 
     getIndexByChildIndex(childIndex: number): number {
-        let index = 0
+        let index = 0;
         for (let i = 0;i < this.groupItem.length; i++) {
             let childCount = this.groupItem[i].groupChild.length
             if (childIndex >= childCount) {
-                index += (1 + childCount)
-                childIndex -= childCount
+                index += (1 + childCount);
+                childIndex -= childCount;
             } else {
-                index += (1 + childIndex)
+                index += (1 + childIndex);
                 break;
             }
         }
-        return index
+        return index;
     }
 
-    getIndexByItem(item: MediaDataItem): number{
-        let index = 0
-        let length = this.groupItem.length
+    getIndexByItem(item: MediaDataItem): number {
+        let index = 0;
+        let length = this.groupItem.length;
         for (let i = 0;i < length; i++) {
-            let childLength = this.groupItem[i].groupChild.length
+            let childLength = this.groupItem[i].groupChild.length;
             let endDate = this.groupItem[i].groupChild[childLength-1].dateAdded // the min of the group
             if (item.dateAdded < endDate) {
-                index += (1 + childLength)
-                continue
+                index += (1 + childLength);
+                continue;
             }
-            let childIndex: number = this.groupItem[i].groupChild.indexOf(item)
+            let childIndex: number = this.groupItem[i].groupChild.indexOf(item);
             if (childIndex < 0) {
-                index = -1
+                index = -1;
             } else {
-                index += (1 + childIndex)
+                index += (1 + childIndex);
             }
             break;
         }
         return index
     }
 
-    getData(index: number): TimelineDataItem | MediaDataItem{
-        let item: TimelineDataItem | MediaDataItem = undefined
-        let count = 0
+    getData(index: number): TimelineDataItem | MediaDataItem {
+        let item: TimelineDataItem | MediaDataItem = undefined;
+        let count = 0;
         for (let i = 0;i < this.groupItem.length; i++) {
             let groupItem: TimelineDataItem = this.groupItem[i]
-            let childLength = groupItem.groupChild.length
+            let childLength = groupItem.groupChild.length;
             if (index == 0) {
-                item = groupItem
+                item = groupItem;
                 break;
             } else if (index <= childLength) {
-                item = groupItem.groupChild[index-1]
-                item.index = count + index - 1
+                item = groupItem.groupChild[index-1];
+                item.index = count + index - 1;
                 break;
             } else {
-                index -= (1 + childLength)
-                count += childLength
+                index -= (1 + childLength);
+                count += childLength;
             }
         }
-        return item
+        return item;
     }
 
     async reloadTimelineItemData(): Promise<boolean> {
-        Log.info(TAG, "reloadTimelineItemData")
-        this.groupItem = await this.timelineDataImpl.getTimelineItemData()
-        Log.debug(TAG, "reloadTimelineItemData finish")
-        return this.groupItem.length == 0
+        Log.info(TAG, "reloadTimelineItemData");
+        this.groupItem = await this.timelineDataImpl.getTimelineItemData();
+        Log.debug(TAG, "reloadTimelineItemData finish");
+        return this.groupItem.length == 0;
     }
 
     isSelect(): boolean {
-        let status = true
-        for (let i = 0;i < this.groupItem.length; i++) {
+        let status = true;
+        for (let i = 0; i < this.groupItem.length; i++) {
             if (!this.groupItem[i].isSelect()) {
-                status = false
+                status = false;
                 break;
             }
         }
-        return status
+        return status;
     }
 
     setSelect(isSelect: boolean) {
         this.groupItem.forEach((child: TimelineDataItem) => {
-            child.setSelect(isSelect)
+            child.setSelect(isSelect);
         })
     }
 
-    getSelectedCount(): number{
-        let count = 0
+    getSelectedCount(): number {
+        let count = 0;
         this.groupItem.forEach((child: TimelineDataItem) => {
-            count += child.getSelectedCount()
+            count += child.getSelectedCount();
         })
-        return count
+        return count;
     }
 
-    getItems(): MediaDataItem[]{
-        let items: MediaDataItem[] = []
+    getItems(): MediaDataItem[] {
+        let items: MediaDataItem[] = [];
         this.groupItem.forEach((group: TimelineDataItem) => {
             group.groupChild.forEach((child: MediaDataItem) => {
-                items.push(child)
+                items.push(child);
             })
         })
-        return items
+        return items;
     }
 
-    getSelectedItems(): MediaDataItem[]{
-        let items: MediaDataItem[] = []
-        this.groupItem.forEach((group: TimelineDataItem) => {
-            group.groupChild.forEach((child: MediaDataItem) => {
-                if (child.isSelect) {
-                    items.push(child)
-                }
-            })
-        })
-        return items
-    }
-
-    getSelectedUris(): string[]{
-        let uris: string[] = []
+    getSelectedItems(): MediaDataItem[] {
+        let items: MediaDataItem[] = [];
         this.groupItem.forEach((group: TimelineDataItem) => {
             group.groupChild.forEach((child: MediaDataItem) => {
                 if (child.isSelect) {
-                    uris.push(child.uri)
+                    items.push(child);
                 }
             })
         })
-        return uris
+        return items;
+    }
+
+    getSelectedUris(): string[] {
+        let uris: string[] = [];
+        this.groupItem.forEach((group: TimelineDataItem) => {
+            group.groupChild.forEach((child: MediaDataItem) => {
+                if (child.isSelect) {
+                    uris.push(child.uri);
+                }
+            })
+        })
+        return uris;
     }
 
     dataReload(): void {
         this.reloadTimelineItemData().then((isEmpty: boolean) => {
-            this.notifyDataReload()
+            this.notifyDataReload();
         })
     }
 
     dataRemove(): void {
-        let count: number = this.totalCount()
+        let count: number = this.totalCount();
         for (let i = this.groupItem.length - 1;i >= 0; i--) {
-            count -= (this.groupItem[i].groupChild.length + 1)
-            let removeList: number[] = this.groupItem[i].dataRemove()
+            count -= (this.groupItem[i].groupChild.length + 1);
+            let removeList: number[] = this.groupItem[i].dataRemove();
             removeList.forEach((index: number) => {
-                super.notifyDataDelete(count + 1 + index)
+                super.notifyDataDelete(count + 1 + index);
             })
             if (this.groupItem[i].groupChild.length == 0) {
-                this.groupItem.splice(i, 1)
-                super.notifyDataDelete(count)
+                this.groupItem.splice(i, 1);
+                super.notifyDataDelete(count);
             }
         }
     }

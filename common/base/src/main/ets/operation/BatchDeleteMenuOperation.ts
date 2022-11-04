@@ -36,7 +36,7 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
 
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.count = this.menuContext.items.length
+            this.count = this.menuContext.items.length;
         } else {
             this.count = dataSource.getSelectedCount();
         }
@@ -48,20 +48,20 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
         this.confirmCallback = this.confirmCallback.bind(this);
         this.cancelCallback = this.cancelCallback.bind(this);
 
-        let resource: Resource = this.getDeleteMessageResource(dataSource)
+        let resource: Resource = this.getDeleteMessageResource(dataSource);
         this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [resource, this.confirmCallback, this.cancelCallback]);
     }
 
     getDeleteMessageResource(dataSource: ItemDataSource): Resource {
-        let resource: Resource
+        let resource: Resource;
         if (dataSource && dataSource.isSelect()) {
-            resource = $r('app.string.recycle_all_files_tips')
+            resource = $r('app.string.recycle_all_files_tips');
         } else if (this.count == 1) {
-            resource = $r('app.string.recycle_single_file_tips')
+            resource = $r('app.string.recycle_single_file_tips');
         } else {
-            resource = $r('app.string.recycle_files_tips', this.count)
+            resource = $r('app.string.recycle_files_tips', this.count);
         }
-        return resource
+        return resource;
     }
 
     confirmCallback(): void {
@@ -79,19 +79,19 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
         // 3. selectManager gets the URI of the data and starts processing deletion in the callback
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.items = this.menuContext.items
+            this.items = this.menuContext.items;
         } else {
-            this.items = dataSource.getSelectedItems()
+            this.items = dataSource.getSelectedItems();
         }
-        this.processOperation()
+        this.processOperation();
     }
 
     requestOneBatchOperation() {
-        let item = this.items[this.currentBatch] as MediaDataItem
+        let item = this.items[this.currentBatch] as MediaDataItem;
         item.onDelete().then(() => {
-            this.currentBatch++
+            this.currentBatch++;
             this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [this.getExpectProgress(), this.currentBatch]);
-            this.cyclicOperation()
+            this.cyclicOperation();
         })
     }
 

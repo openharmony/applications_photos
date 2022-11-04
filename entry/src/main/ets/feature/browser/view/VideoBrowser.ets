@@ -27,7 +27,7 @@ import { startTrace, finishTrace } from '../../../../../../../common/base/src/ma
 @Entry
 @Component
 struct VideoBrowser {
-    private TAG: string = 'VideoBrowser'
+    private TAG: string = 'VideoBrowser';
     @Provide('dateTitle') photoDate: string = '';
     @Provide('timeLocationTitle') timeAndLocation: string = '';
     @Provide isShowBar: boolean = false;

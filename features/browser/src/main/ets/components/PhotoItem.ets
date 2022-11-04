@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import Matrix4 from '@ohos.matrix4'
-import router from '@system.router'
+import Matrix4 from '@ohos.matrix4';
+import router from '@system.router';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem'
-import { EventPipeline } from '../utils/EventPipeline'
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
+import { EventPipeline } from '../utils/EventPipeline';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { Constants } from '../constants/Constants';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';

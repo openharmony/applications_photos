@@ -38,7 +38,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
 
     // Maximum progress
     readonly MAX_PROGRESS: number = 100;
-    items: any[] = []
+    items: any[] = [];
     menuContext: MenuContext;
     uris: string[];
     count: number;
@@ -123,7 +123,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
 
     onProcessDone(): void {
         this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [100]);
-        this.findSameOperation = FindSameOperation.NONE
+        this.findSameOperation = FindSameOperation.NONE;
         if (this.startTime != null) {
             let operateCount = this.currentBatch >= this.totalBatches ? this.count : this.currentBatch * this.BATCH_SIZE;
             let costTime = Date.now() - this.startTime;
@@ -158,14 +158,14 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
 
     setFindSameOperation(newOperation: number): void {
         Log.info(TAG, `setFindSameOperation ${newOperation}`);
-        this.findSameOperation = newOperation
+        this.findSameOperation = newOperation;
     }
 
     async getFileCopyOrMoveInfo(fileAsset: MediaLib.FileAsset, albumInfo: SimpleAlbumDataItem) {
         Log.debug(TAG, 'getFileCopyOrMoveInfo start');
-        let item: SimpleAlbumDataItem = new SimpleAlbumDataItem("", fileAsset.displayName, albumInfo.relativePath, "", "")
-        let fetchOptions = await getFetchOptionsByItem(item)
-        let targetAsset = (await mediaModel.getAllCommonMediaItem(fetchOptions, false)).fileAsset
+        let item: SimpleAlbumDataItem = new SimpleAlbumDataItem("", fileAsset.displayName, albumInfo.relativePath, "", "");
+        let fetchOptions = await getFetchOptionsByItem(item);
+        let targetAsset = (await mediaModel.getAllCommonMediaItem(fetchOptions, false)).fileAsset;
         if (targetAsset == null || targetAsset == undefined) {
             Log.debug(TAG, 'targetAsset not found');
         }

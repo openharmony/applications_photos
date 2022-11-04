@@ -58,19 +58,19 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     }
 
     private async getNewAlbumDisplayName(name: string): Promise<string> {
-        let relativeRoot = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA)
-        return await this.getNewAlbumDefaultName(relativeRoot, name)
+        let relativeRoot = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA);
+        return await this.getNewAlbumDefaultName(relativeRoot, name);
     }
 
     private async confirmCallback(displayName: string) {
         Log.info(TAG, `AlbumSet new album confirm and the new name is: ${displayName}`);
-        let relativePath = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + displayName + "/"
-        let simpleAlbumDataItem: SimpleAlbumDataItem = new SimpleAlbumDataItem("", displayName, relativePath, "", "")
+        let relativePath = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + displayName + "/";
+        let simpleAlbumDataItem: SimpleAlbumDataItem = new SimpleAlbumDataItem("", displayName, relativePath, "", "");
         if (displayName != undefined && displayName != null) {
-            let isExit = await this.checkAlbumExit(simpleAlbumDataItem)
+            let isExit = await this.checkAlbumExit(simpleAlbumDataItem);
             if (isExit) {
                 getResourceString($r('app.string.name_already_use')).then((message: string) => {
-                    showToast(message)
+                    showToast(message);
                 })
                 return;
             }
@@ -95,8 +95,8 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     }
 
     private async checkAlbumExit(simpleAlbumDataItem: SimpleAlbumDataItem): Promise<boolean> {
-        let fetchOptions: MediaLib.MediaFetchOptions = await getFetchOptionsByItem(simpleAlbumDataItem)
-        return await mediaModel.getAlbumCount(fetchOptions) > 0
+        let fetchOptions: MediaLib.MediaFetchOptions = await getFetchOptionsByItem(simpleAlbumDataItem);
+        return await mediaModel.getAlbumCount(fetchOptions) > 0;
     }
 
     private cancelCallback(): void {
@@ -116,7 +116,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     private async getNewAlbumDefaultName(root: string, prefixName: string): Promise<string> {
         let numbers = [];
         for (let i = 0; i < this.menuContext.dataSource.totalCount(); i++) {
-            let item = this.menuContext.dataSource.getData(i) as AlbumDataItem
+            let item = this.menuContext.dataSource.getData(i) as AlbumDataItem;
             let res = (await item.getRelativePath()).match(new RegExp(`^${root}${prefixName}[1-9][0-9]*${"/"}$`));
             if (res != null) {
                 let number = res[0].match(new RegExp(`[1-9][0-9]*`));

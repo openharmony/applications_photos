@@ -28,7 +28,7 @@ export enum DEVICE_TYPE {
 
 @Component
 export struct TabBar {
-  private TAG: string = 'TabBar'
+  private TAG: string = 'TabBar';
   @Consume isSelectedMode: boolean;
   @Consume isAlbumSetSelectedMode: boolean;
   private currentIndex: number;
@@ -45,7 +45,7 @@ export struct TabBar {
     this.onTabSelected = this.onTabSelected.bind(this);
     this.tabs[this.currentIndex].isSelected = true;
     this.tabs.forEach((tab: TabItem) => {
-      Log.info(this.TAG, `${JSON.stringify(tab.name)} , ${tab.iconSelected}`)
+      Log.info(this.TAG, `${JSON.stringify(tab.name)} , ${tab.iconSelected}`);
     });
   }
 

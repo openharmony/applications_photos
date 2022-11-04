@@ -75,10 +75,10 @@ export struct TimelinePage {
     routerStart = false; // Is move or copy router page
     @Provide moreMenuList: Action[] = new Array<Action>();
     @Provide dateText: string = '';
-    private barModel = new TimelinePageBarModel()
-    private timelineDataSource: TimelineItemDataSource = new TimelineItemDataSource()
+    private barModel = new TimelinePageBarModel();
+    private timelineDataSource: TimelineItemDataSource = new TimelineItemDataSource();
     private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
-    private isMediaLibDataChanged: boolean = true
+    private isMediaLibDataChanged: boolean = true;
 
     aboutToAppear(): void {
         startTrace('TimelinePageAboutToAppear');
@@ -120,9 +120,9 @@ export struct TimelinePage {
     }
 
     private onSelect() {
-        Log.info(TAG, "onSelect")
-        this.totalSelectedCount = this.timelineDataSource.getSelectedCount()
-        this.isAllSelected = this.timelineDataSource.isSelect()
+        Log.info(TAG, "onSelect");
+        this.totalSelectedCount = this.timelineDataSource.getSelectedCount();
+        this.isAllSelected = this.timelineDataSource.isSelect();
         if (this.totalSelectedCount > 0) {
             this.moreMenuList = [Action.MOVE, Action.COPY, Action.INFO];
         } else {
@@ -148,7 +148,7 @@ export struct TimelinePage {
     }
 
     private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem) {
-        let children: MediaDataItem[] = this.timelineDataSource.getItems()
+        let children: MediaDataItem[] = this.timelineDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
             Log.warn(TAG, 'targetIndex is not found');
@@ -171,7 +171,7 @@ export struct TimelinePage {
         this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
         this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
         mediaObserver.unregisterObserver(this.dataObserver);
-        this.broadCast.off(null, null)
+        this.broadCast.off(null, null);
     }
 
     // Calculate the number of squares per row
@@ -186,7 +186,7 @@ export struct TimelinePage {
                 this.gridRowCount = newCount;
             } else {
                 this.gridRowCount = newCount;
-                this.timelineDataSource.notifyDataReload()
+                this.timelineDataSource.notifyDataReload();
             }
         }
         Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
@@ -447,6 +447,7 @@ export struct TimelinePage {
         } else if (!this.isShow && this.isInCurrentTab) {
             this.onInActive();
         } else {
+            Log.info(TAG, `other condition`)
         }
     }
 
@@ -456,7 +457,7 @@ export struct TimelinePage {
             Log.info(TAG, 'onActive');
             this.isActive = true;
         }
-        this.loadItem()
+        this.loadItem();
     }
 
     // The callback when current page is in the background

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { MediaObserverCallback } from '../interface/MediaObserverCallback'
+import { MediaObserverCallback } from '../interface/MediaObserverCallback';
 
 export class CommonObserverCallback implements MediaObserverCallback {
     private source: any;

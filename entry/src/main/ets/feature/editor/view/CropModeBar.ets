@@ -14,13 +14,13 @@
  */
 
 import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { ActionButton } from './ActionButton'
-import { ID } from './MainMenuInfo'
-import { Constants } from '../../../common/model/common/Constants'
-import { PhotoEditCrop } from '../crop/PhotoEditCrop'
-import { CropStyleBar } from './CropStyleBar'
-import { CropRulerBar } from './CropRulerBar'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { ActionButton } from './ActionButton';
+import { ID } from './MainMenuInfo';
+import { Constants } from '../../../common/model/common/Constants';
+import { PhotoEditCrop } from '../crop/PhotoEditCrop';
+import { CropStyleBar } from './CropStyleBar';
+import { CropRulerBar } from './CropRulerBar';
 
 @Component
 export struct CropModeBar {

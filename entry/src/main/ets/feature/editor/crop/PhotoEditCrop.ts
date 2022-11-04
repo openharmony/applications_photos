@@ -34,7 +34,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     private static readonly DEFAULT_MARGIN_LENGTH: number = 20;
     private static readonly DEFAULT_TIMEOUT_MILLISECOND_1000: number = 1000;
     private static readonly DEFAULT_SPLIT_FRACTION: number = 3;
-    private TAG: string = 'PhotoEditCrop'
+    private TAG: string = 'PhotoEditCrop';
     private filter: ImageFilterCrop = undefined;
     private input: PixelMapWrapper = undefined;
     private isFlipHorizontal: boolean = false;

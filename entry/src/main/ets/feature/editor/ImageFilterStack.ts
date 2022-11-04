@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import { EditStack } from './utils/EditStack'
-import { ImageFilterBase } from './base/ImageFilterBase'
-import { PixelMapWrapper } from './base/PixelMapWrapper'
+import { EditStack } from './utils/EditStack';
+import { ImageFilterBase } from './base/ImageFilterBase';
+import { PixelMapWrapper } from './base/PixelMapWrapper';
 
 enum CacheDirection {
     BACKWARD,

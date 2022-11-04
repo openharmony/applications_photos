@@ -20,12 +20,12 @@ import { ActionBarProp } from '../browserOperation/ActionBarProp';
 // Select the mode title, the content changes with the number of selections
 @Component
 export struct SelectionTitle {
-    private TAG: string = 'SelectionTitle'
+    private TAG: string = 'SelectionTitle';
     @State actionBarProp: ActionBarProp = new ActionBarProp();
     @Consume('selectedCount') count: number;
 
     private onBuildDone(): void {
-        Log.info(this.TAG, `onBuildDone, count: ${this.count}`)
+        Log.info(this.TAG, `onBuildDone, count: ${this.count}`);
     }
 
     build() {

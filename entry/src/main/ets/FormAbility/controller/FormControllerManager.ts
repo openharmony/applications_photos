@@ -12,13 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Constants } from '../common/Constants'
-import { FormController } from './FormController'
+import { Constants } from '../common/Constants';
+import { FormController } from './FormController';
 import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
-import dataStore from '../../../../../../common/base/src/main/ets/utils/DataStoreUtil'
+import dataStore from '../../../../../../common/base/src/main/ets/utils/DataStoreUtil';
 
 export class FormControllerManager {
-    private TAG: string = 'FormControllerManager'
+    private TAG: string = 'FormControllerManager';
     private formControllerMap = new Map();
 
     private constructor() {
@@ -52,7 +52,7 @@ export class FormControllerManager {
     async initData(formId: string, operationMode: number, callback?: Function): Promise<void> {
         Log.debug(this.TAG, `initData start! operationMode: ${operationMode}`);
         try {
-            await dataStore.init()
+            await dataStore.init();
             let formIdKey: string = 'formId_' + formId;
             let hasFormId = await dataStore.hasData(formIdKey);
             Log.debug(this.TAG, `The value of hasFormId is ${hasFormId}`);

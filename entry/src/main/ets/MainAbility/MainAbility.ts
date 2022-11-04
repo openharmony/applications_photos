@@ -31,7 +31,7 @@ let appBroadcast = broadcastManager.getBroadcast();
 var pagePath: string = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 'product/phone/view/index' : 'product/pad/view/index';
 
 export default class MainAbility extends Ability {
-    private TAG: string = 'MainAbility'
+    private TAG: string = 'MainAbility';
     private static readonly RETRY_MAX_TIMES = 100;
     private static readonly ACTION_URI_SINGLE_SELECT = 'singleselect';
     private static readonly ACTION_URI_MULTIPLE_SELECT = 'multipleselect';
@@ -42,7 +42,7 @@ export default class MainAbility extends Ability {
         startTrace('onCreate');
         // Ability is creating, initialize resources for this ability
         globalThis.appContext = this.context;
-        mediaModel.onCreate(this.context)
+        mediaModel.onCreate(this.context);
         let action = want.parameters;
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
@@ -76,8 +76,8 @@ export default class MainAbility extends Ability {
         ];
         startTrace('requestPermissionsFromUser');
         this.context.requestPermissionsFromUser(requestPermissionList).then(function (data) {
-            Log.info(this.TAG, `requestPermissionsFromUser data:  ${JSON.stringify(data)}`)
-            let result = 0
+            Log.info(this.TAG, `requestPermissionsFromUser data:  ${JSON.stringify(data)}`);
+            let result = 0;
             for (let i = 0; i < data.authResults.length; i++) {
                 result += data.authResults[i]
             }

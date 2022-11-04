@@ -13,9 +13,8 @@
  * limitations under the License.
  */
 
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { Constants } from '../../../common/model/common/Constants'
-import { Logger } from '../utils/Logger'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { Constants } from '../../../common/model/common/Constants';
 
 @Component
 export struct CropRulerBar {
@@ -29,11 +28,10 @@ export struct CropRulerBar {
     @State cHeight: number = 60;
     private setting: RenderingContextSettings = new RenderingContextSettings(true);
     private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.setting);
-    private log: Logger = new Logger('CropRulerBar');
     private resetClicked: any = undefined;
     private previous: number = 0;
-    private rulerLength: number = 0
-    private rulerWidth: number = 0
+    private rulerLength: number = 0;
+    private rulerWidth: number = 0;
 
     iniSize() {
         if (this.isVerticalScreen) {

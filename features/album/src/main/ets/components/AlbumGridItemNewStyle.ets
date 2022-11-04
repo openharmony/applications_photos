@@ -52,23 +52,23 @@ export struct AlbumGridItemNewStyle {
     iconMarkAnchorY = WindowConstants.ALBUM_SET_NEW_ICON_SIZE + WindowConstants.ALBUM_SET_NEW_ICON_MARGIN;
     @State cardWidth: number = 0;
     @State cardHeight: number = 0;
-    @State thumbnail: string = ""
+    @State thumbnail: string = "";
 
     aboutToAppear(): void {
         Log.debug(TAG, `aboutToAppear`);
-        this.selectable = this.item.id != MediaConstants.ALBUM_ID_RECYCLE
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.updateCardSize())
-        startTrace("loadAlbumItem")
+        this.selectable = this.item.id != MediaConstants.ALBUM_ID_RECYCLE;
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.updateCardSize());
+        startTrace("loadAlbumItem");
         this.item.load().then(() => {
-            finishTrace("loadAlbumItem")
-            this.thumbnail = this.item.getThumbnail()
+            finishTrace("loadAlbumItem");
+            this.thumbnail = this.item.getThumbnail();
         })
         this.updateCardSize();
     }
 
     onIndexPageShow(): void {
         this.item.load().then(() => {
-            this.thumbnail = this.item.getThumbnail()
+            this.thumbnail = this.item.getThumbnail();
         })
     }
 
@@ -124,7 +124,7 @@ export struct AlbumGridItemNewStyle {
         }
 
         if (this.selectable) {
-            this.item.setSelect(!this.item.isSelect)
+            this.item.setSelect(!this.item.isSelect);
             this.broadCast.emit(BroadcastConstants.SELECT, [this.item.index]);
 
         }

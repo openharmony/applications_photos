@@ -22,19 +22,19 @@ const TAG = "AlbumListCard"
 
 @Component
 export struct AlbumListCard {
-    @State useAlt: boolean = false
+    @State useAlt: boolean = false;
     @Consume broadCast: Broadcast;
     item: AlbumDataItem;
-    @State thumbnail: string = ""
-    @State mediaRes: Resource = undefined
+    @State thumbnail: string = "";
+    @State mediaRes: Resource = undefined;
 
     aboutToAppear(): void {
         Log.info(TAG, `album mediaSet ${JSON.stringify(this.item)}`);
         this.item.load().then(() => {
-            this.thumbnail = this.item.getThumbnail()
+            this.thumbnail = this.item.getThumbnail();
         })
         this.item.getVideoCount().then((videoCount: number) => {
-            this.mediaRes = this.showMediaRes(videoCount)
+            this.mediaRes = this.showMediaRes(videoCount);
         })
     }
 

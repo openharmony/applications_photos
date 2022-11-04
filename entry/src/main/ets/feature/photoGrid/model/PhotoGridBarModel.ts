@@ -13,31 +13,31 @@
  * limitations under the License.
  */
 
-import { Action } from '../../../common/view/browserOperation/Action'
-import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp'
-import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/browserOperation/ActionBarMode'
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { Action } from '../../../common/view/browserOperation/Action';
+import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
+import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/browserOperation/ActionBarMode';
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { MediaConstants } from '../../../../../../../common/base/src/main/ets/constants/MediaConstants';
 
 
 export class PhotoGridBarModel {
-    private isDistributedAlbum: boolean = false
-    private albumId: string = ''
+    private isDistributedAlbum: boolean = false;
+    private albumId: string = '';
 
     setAlbumId(albumId: string) {
-        this.albumId = albumId
+        this.albumId = albumId;
     }
 
     setDistributedAlbum(isDistributedAlbum: boolean) {
-        this.isDistributedAlbum = isDistributedAlbum
+        this.isDistributedAlbum = isDistributedAlbum;
     }
 
     createActionBar(title: string | Resource, isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean, isEmpty: boolean): ActionBarProp  {
         let isHorizontal = screenManager.isHorizontal()
         if (isHorizontal) {
-            return this.createHorizontalActionBar(title, isSelectedMode, selectedCount, isAllSelected, isEmpty)
+            return this.createHorizontalActionBar(title, isSelectedMode, selectedCount, isAllSelected, isEmpty);
         } else {
-            return this.createVerticalActionBar(title, isSelectedMode)
+            return this.createVerticalActionBar(title, isSelectedMode);
         }
     }
 
@@ -91,23 +91,23 @@ export class PhotoGridBarModel {
         let menuList: Array<Action> = new Array<Action>();
         if (isSelectedMode) {
             if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE) {
-                menuList.push(Boolean(selectedCount) ? Action.RECOVER : Action.RECOVER_INVALID)
-                menuList.push(Boolean(selectedCount) ? Action.DELETE : Action.DELETE_INVALID)
+                menuList.push(Boolean(selectedCount) ? Action.RECOVER : Action.RECOVER_INVALID);
+                menuList.push(Boolean(selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
                 menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL);
             } else if (this.isDistributedAlbum) {
-                menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL)
-                menuList.push(Boolean(selectedCount) ? Action.SHARE : Action.SHARE_INVALID)
-                menuList.push(Boolean(selectedCount) ? Action.DOWNLOAD : Action.DOWNLOAD_INVALID)
+                menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL);
+                menuList.push(Boolean(selectedCount) ? Action.SHARE : Action.SHARE_INVALID);
+                menuList.push(Boolean(selectedCount) ? Action.DOWNLOAD : Action.DOWNLOAD_INVALID);
             } else {
-                menuList.push(Boolean(selectedCount) ? Action.SHARE : Action.SHARE_INVALID)
-                menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL),
-                menuList.push(Boolean(selectedCount) ? Action.DELETE : Action.DELETE_INVALID, Action.MORE)
+                menuList.push(Boolean(selectedCount) ? Action.SHARE : Action.SHARE_INVALID);
+                menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL);
+                menuList.push(Boolean(selectedCount) ? Action.DELETE : Action.DELETE_INVALID, Action.MORE);
             }
         } else {
             if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE && !isEmpty) {
                 menuList.push(Action.CLEAR_RECYCLE);
             }
         }
-        return menuList
+        return menuList;
     }
 }

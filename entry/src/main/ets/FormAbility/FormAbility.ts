@@ -15,16 +15,16 @@
 
 import FormExtension from '@ohos.application.FormExtension';
 import { Log } from '../../../../../common/base/src/main/ets/utils/Log';
-import { FormControllerManager } from './controller/FormControllerManager'
-import { FormController } from './controller/FormController'
-import { Constants } from './common/Constants'
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel'
+import { FormControllerManager } from './controller/FormControllerManager';
+import { FormController } from './controller/FormController';
+import { Constants } from './common/Constants';
+import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 
 export default class FormAbility extends FormExtension {
-    private TAG: string = 'FormAbility'
+    private TAG: string = 'FormAbility';
     onCreate(want) {
         Log.info(this.TAG, `form onCreate. want ${JSON.stringify(want)}`);
-        this.init()
+        this.init();
         let param = want.parameters;
         let formId = param['ohos.extra.param.key.form_identity'];
         Log.info(this.TAG, `form onCreate formId: ${formId}`);
@@ -52,7 +52,7 @@ export default class FormAbility extends FormExtension {
     onUpdate(formId) {
         Log.info(this.TAG, `onUpdate, formId: ${formId} context ${JSON.stringify(this.context)}`);
         // 经常起来后可能直接走onUpdate， 所以要初始化一下
-        this.init()
+        this.init();
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.updateController(formId);
     }
@@ -60,7 +60,7 @@ export default class FormAbility extends FormExtension {
     onVisibilityChange(newStatus) {
         Log.info(this.TAG, `onVisibilityChange, newStatus: ${JSON.stringify(newStatus)}`);
         // 经常起来后可能直接走onVisibilityChange， 所以要初始化一下
-        this.init()
+        this.init();
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         for (let key in newStatus) {
             Log.info(this.TAG, `onVisibilityChange, key:${key}  value ${newStatus[key]}`);
@@ -72,7 +72,7 @@ export default class FormAbility extends FormExtension {
     onEvent(formId, message) {
         Log.info(this.TAG, `onEvent, formId: ${formId}, message: ${message}`);
         // 经常起来后可能直接走onEvent， 所以要初始化一下
-        this.init()
+        this.init();
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.onEvent(formId, message);
     }
@@ -80,13 +80,13 @@ export default class FormAbility extends FormExtension {
     onDestroy(formId) {
         Log.info(this.TAG, `onDestroy, formId: ${formId}`);
         // 经常起来后可能直接走onDestroy， 所以要初始化一下
-        this.init()
+        this.init();
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.destroyController(formId);
     }
 
     private init() {
-        mediaModel.onCreate(this.context)
-        globalThis.appContext = this.context
+        mediaModel.onCreate(this.context);
+        globalThis.appContext = this.context;
     }
 };

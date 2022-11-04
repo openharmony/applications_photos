@@ -55,9 +55,9 @@ export struct ThirdSelectPhotoGridPage {
     isFromFa: boolean = false;
     scroller: Scroller = new Scroller();
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
-    private barModel: ThirdSelectBarModel = new ThirdSelectBarModel()
-    private groupDataSource: GroupItemDataSource = new GroupItemDataSource()
-    private albumId: string
+    private barModel: ThirdSelectBarModel = new ThirdSelectBarModel();
+    private groupDataSource: GroupItemDataSource = new GroupItemDataSource();
+    private albumId: string;
 
     onMenuClicked(action: Action) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
@@ -106,16 +106,16 @@ export struct ThirdSelectPhotoGridPage {
             AppStorage.SetOrCreate(Constants.FORM_ITEM_DISPLAY_NAME, param.itemDisplayName);
         }
         this.groupDataSource.reloadGroupItemData(true).then((isEmpty: boolean) => {
-            this.isEmpty = isEmpty
-            this.selectedCount = this.groupDataSource.getSelectedCount()
-            this.groupDataSource.notifyDataReload()
+            this.isEmpty = isEmpty;
+            this.selectedCount = this.groupDataSource.getSelectedCount();
+            this.groupDataSource.notifyDataReload();
         })
         this.initGridRowCount();
 
         this.onMenuClicked = this.onMenuClicked.bind(this);
         this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect(index));
         this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
-            this.jumpToThirdPhotoBrowser(name, item)
+            this.jumpToThirdPhotoBrowser(name, item);
         })
         this.broadCast.on(Constants.ON_LOADING_FINISHED,
             (size: number) => {
@@ -152,12 +152,12 @@ export struct ThirdSelectPhotoGridPage {
     }
 
     private onSelect(index: number) {
-        Log.info(TAG, "onSelect")
-        this.selectedCount = this.groupDataSource.getSelectedCount()
+        Log.info(TAG, "onSelect");
+        this.selectedCount = this.groupDataSource.getSelectedCount();
     }
 
     private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem) {
-        let children: MediaDataItem[] = this.groupDataSource.getItems()
+        let children: MediaDataItem[] = this.groupDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
             Log.warn(TAG, 'targetIndex is not found');

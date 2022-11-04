@@ -43,7 +43,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
 
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.count = this.menuContext.items.length
+            this.count = this.menuContext.items.length;
         } else {
             this.count = dataSource.getSelectedCount();
         }
@@ -62,21 +62,21 @@ export class MoveMenuOperation extends ProcessMenuOperation {
         MediaOperationType.Move, this.cancelFunc.bind(this)]);
 
         if (dataSource == null) {
-            this.items = this.menuContext.items
+            this.items = this.menuContext.items;
         } else {
-            this.items = dataSource.getSelectedItems()
+            this.items = dataSource.getSelectedItems();
         }
-        this.processOperation()
+        this.processOperation();
     }
 
     requestOneBatchOperation() {
-        let item = this.items[this.currentBatch++] as MediaDataItem
-        this.moveOne(item)
+        let item = this.items[this.currentBatch++] as MediaDataItem;
+        this.moveOne(item);
     }
 
     private async moveOne(item: MediaDataItem) {
-        let fileAsset = await item.loadFileAsset()
-        let assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo)
+        let fileAsset = await item.loadFileAsset();
+        let assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo);
         if (assets.targetAsset) {
             if (assets.targetAsset.uri == assets.sourceAsset.uri) {
                 Log.info(TAG, 'move same fileAsset');
@@ -103,7 +103,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
                     break;
             }
         } else {
-            this.move(assets.sourceAsset, this.albumInfo.relativePath)
+            this.move(assets.sourceAsset, this.albumInfo.relativePath);
         }
     }
 
@@ -113,8 +113,8 @@ export class MoveMenuOperation extends ProcessMenuOperation {
             if (targetFile) {
                 await mediaModel.deleteOne(targetFile.uri);
             }
-            file.relativePath = path
-            file.commitModify()
+            file.relativePath = path;
+            file.commitModify();
             finishTraceWithTaskId('move', this.currentBatch);
             this.onCompleted();
         } catch (error) {
