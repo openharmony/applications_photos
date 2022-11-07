@@ -34,6 +34,7 @@ export struct GridScrollBar {
                 }
             }
         }
+        .hitTestBehavior(HitTestMode.Transparent)
         .height('100%')
         .width(this.isClickScrollBar
             ? $r('app.float.scroll_bar_margin_small') : $r('app.float.scroll_bar_small_width'),)
