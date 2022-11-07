@@ -530,6 +530,7 @@ export struct TimelinePage {
                                 isHideScrollBar: $isHideScrollBar
                             })
                         }
+                        .hitTestBehavior(HitTestMode.Transparent)
                         .position({ x: '100%', y: 0 })
                         .markAnchor({
                             x: '100%',
