@@ -34,8 +34,8 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
         }
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.count = this.menuContext.items.length
-            this.items = this.menuContext.items
+            this.count = this.menuContext.items.length;
+            this.items = this.menuContext.items;
         } else {
             this.count = dataSource.getSelectedCount();
             this.items = dataSource.getSelectedItems();
@@ -54,12 +54,12 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
     }
 
     private async getDialogTitle(): Promise<Resource> {
-        let videoCount = 0
-        let photoCount = 0
+        let videoCount = 0;
+        let photoCount = 0;
         for (let i = 0; i < this.items.length; i++) {
-            let itemVideoCount = await  (this.items[i] as AlbumDataItem).getVideoCount()
-            videoCount += itemVideoCount
-            photoCount += (this.items[i].count - itemVideoCount)
+            let itemVideoCount = await  (this.items[i] as AlbumDataItem).getVideoCount();
+            videoCount += itemVideoCount;
+            photoCount += (this.items[i].count - itemVideoCount);
         }
 
         if (this.count == 1) {
@@ -87,18 +87,18 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
 
     // Delete a batch of data
     requestOneBatchOperation(): void {
-        let item = this.items[this.currentBatch] as AlbumDataItem
+        let item = this.items[this.currentBatch] as AlbumDataItem;
         item.onDelete().then(() => {
             this.currentBatch++
             this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [this.getExpectProgress(), this.currentBatch]);
-            this.cyclicOperation()
+            this.cyclicOperation();
         }).catch(() => {
-            this.onError()
+            this.onError();
         })
     }
 
     private confirmCallback(): void {
-        Log.info(TAG, 'AlbumSet delete confirm')
+        Log.info(TAG, 'AlbumSet delete confirm');
         // 1. Variable initialization
         this.onOperationEnd = this.menuContext.onOperationEnd;
         let onOperationStart: Function = this.menuContext.onOperationStart;
@@ -106,7 +106,7 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
         onOperationStart && onOperationStart();
 
         this.menuContext.broadCast.emit(BroadcastConstants.DELETE_PROGRESS_DIALOG, [$r('app.string.action_delete'), this.count]);
-        this.processOperation()
+        this.processOperation();
     }
 
     private cancelCallback(): void {

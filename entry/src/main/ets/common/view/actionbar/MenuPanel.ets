@@ -21,7 +21,7 @@ import { ActionBarButton } from './ActionBarButton';
 // MenuPanel，Right menu button panel
 @Component
 export struct MenuPanel {
-    private TAG: string = 'MenuPanel'
+    private TAG: string = 'MenuPanel';
     @State actionBarProp: ActionBarProp = new ActionBarProp();
     @State menuList: Action[] = [];
     onMenuClicked: Function;
@@ -35,7 +35,7 @@ export struct MenuPanel {
         this.menuList = this.actionBarProp.getMenuList();
         Log.info(this.TAG, `onActionBarPropChanged, menu's size: ${this.menuList.length}`);
         this.menuList.forEach((menu: Action) => {
-            Log.info(this.TAG, `ActionId: ${menu.actionID}`)
+            Log.info(this.TAG, `ActionId: ${menu.actionID}`);
         })
     }
 

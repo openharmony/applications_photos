@@ -21,128 +21,128 @@ import { MediaConstants } from '../constants/MediaConstants'
 const TAG = "AlbumsDataSource"
 
 export class AlbumsDataSource extends ItemDataSource {
-    private albumDataItems: AlbumDataItem[] = []
-    private albumDataImpl: AlbumDataImpl = new AlbumDataImpl()
+    private albumDataItems: AlbumDataItem[] = [];
+    private albumDataImpl: AlbumDataImpl = new AlbumDataImpl();
 
     setBlackList(blackList: string[]) {
-        this.albumDataImpl.setBlackList(blackList)
+        this.albumDataImpl.setBlackList(blackList);
     }
 
     setSelectType(selectType: number) {
-        this.albumDataImpl.setSelectType(selectType)
+        this.albumDataImpl.setSelectType(selectType);
     }
 
     setDeviceId(deviceId: string) {
-        this.albumDataImpl.setDeviceId(deviceId)
+        this.albumDataImpl.setDeviceId(deviceId);
     }
 
     totalCount(): number {
-        return this.albumDataItems.length
+        return this.albumDataItems.length;
     }
 
     getData(index: number): any {
         if (index < 0 || index >= this.albumDataItems.length) {
-            Log.warn(TAG, `${index}/${this.albumDataItems.length}`)
-            return undefined
+            Log.warn(TAG, `${index}/${this.albumDataItems.length}`);
+            return undefined;
         }
-        this.albumDataItems[index].index = index
-        return this.albumDataItems[index]
+        this.albumDataItems[index].index = index;
+        return this.albumDataItems[index];
     }
 
     isSelect(): boolean {
-        let isSelect = true
+        let isSelect = true;
         for (let i = 0;i < this.albumDataItems.length; i++) {
             if (!this.albumDataItems[i].isSelect) {
-                isSelect = false
-                break
+                isSelect = false;
+                break;
             }
         }
-        return isSelect
+        return isSelect;
     }
 
     resetLoadState(): void {
         for (let i = 0;i < this.albumDataItems.length; i++) {
             if (this.albumDataItems[i].status == MediaConstants.LOADED) {
-                this.albumDataItems[i].status = MediaConstants.UNDEFINED
+                this.albumDataItems[i].status = MediaConstants.UNDEFINED;
             }
         }
     }
 
     getSelectedUris(): string[]{
-        let uris: string[] = []
+        let uris: string[] = [];
         this.albumDataItems.forEach((item: AlbumDataItem) => {
             if (item.isSelect) {
-                uris.push(item.uri)
+                uris.push(item.uri);
             }
         })
-        return uris
+        return uris;
     }
 
     isDisableRename(): boolean {
-        let isDisableRename = false
+        let isDisableRename = false;
         for (let i = 0;i < this.albumDataItems.length; i++) {
             if (this.albumDataItems[i].isSelect && this.albumDataItems[i].isDisableRename) {
-                isDisableRename = true
-                break
+                isDisableRename = true;
+                break;
             }
         }
-        return isDisableRename
+        return isDisableRename;
     }
 
     isDisableDelete(): boolean {
-        let isDisableDelete = false
+        let isDisableDelete = false;
         for (let i = 0;i < this.albumDataItems.length; i++) {
             if (this.albumDataItems[i].isSelect && this.albumDataItems[i].isDisableDelete) {
-                isDisableDelete = true
-                break
+                isDisableDelete = true;
+                break;
             }
         }
-        return isDisableDelete
+        return isDisableDelete;
     }
 
     setSelect(isSelect: boolean) {
         this.albumDataItems.forEach((item: AlbumDataItem) => {
-            item.setSelect(isSelect)
+            item.setSelect(isSelect);
         })
     }
 
     getSelectedCount(): number {
-        let count = 0
+        let count = 0;
         for (let i = 0;i < this.albumDataItems.length; i++) {
             if (this.albumDataItems[i].isSelect) {
-                count++
+                count++;
             }
         }
-        return count
+        return count;
     }
 
     getSelectedItems(): AlbumDataItem[] {
-        let items: AlbumDataItem[] = []
+        let items: AlbumDataItem[] = [];
         this.albumDataItems.forEach((item: AlbumDataItem) => {
             if (item.isSelect) {
-                items.push(item)
+                items.push(item);
             }
         })
-        return items
+        return items;
     }
 
     dataReload() {
         this.reloadAlbumItemData().then((isEmpty: boolean) => {
-            this.notifyDataReload()
+            this.notifyDataReload();
         })
     }
 
     dataRemove() {
         for (let i = this.albumDataItems.length - 1;i >= 0; i--) {
             if (this.albumDataItems[i].isDeleted()) {
-                this.albumDataItems.splice(i, 1)
-                super.notifyDataDelete(i)
+                this.albumDataItems.splice(i, 1);
+                super.notifyDataDelete(i);
             }
         }
     }
 
     async reloadAlbumItemData(): Promise<boolean> {
-        this.albumDataItems = await this.albumDataImpl.reloadAlbumItemData()
-        return this.albumDataItems.length == 0
+        this.albumDataItems = await this.albumDataImpl.reloadAlbumItemData();
+        return this.albumDataItems.length == 0;
     }
 }

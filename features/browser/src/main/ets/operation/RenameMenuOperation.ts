@@ -52,7 +52,7 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
             fileName = mediaItem.title;
         } else {
             let index = mediaItem.displayName.lastIndexOf('.');
-            fileName = mediaItem.displayName.substr(0, index)
+            fileName = mediaItem.displayName.substr(0, index);
         }
 
         this.menuContext.broadCast.emit(BroadcastConstants.SHOW_RENAME_PHOTO_DIALOG,
@@ -79,7 +79,7 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
         if (hasSameName) {
             Log.info(TAG, 'show find same file dialog');
             getResourceString($r('app.string.name_already_use')).then((message: string) => {
-                showToast(message)
+                showToast(message);
             })
             return;
         }
@@ -90,7 +90,7 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
         } catch (err) {
             Log.error(TAG, `Rename error: ${err}`);
             getResourceString($r('app.string.rename_failed')).then((message: string) => {
-                showToast(message)
+                showToast(message);
             })
         }
 
@@ -98,20 +98,20 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
 
     private async rename(item: MediaDataItem, name: string) {
         Log.info(TAG, 'renameSinglePhoto start');
-        item.setName(name)
+        item.setName(name);
         return [item.title, item.displayName];
     }
 
     private async hasSameNameAsset(item: MediaDataItem, name: string) {
        Log.debug(TAG, 'hasSameNameAsset start');
-        let fileAsset = await item.loadFileAsset()
+        let fileAsset = await item.loadFileAsset();
         let displayName = fileAsset.displayName;
         let index = displayName.lastIndexOf('.');
         displayName = name + displayName.slice(index);
 
-        let simpleAlbumDataItem = new SimpleAlbumDataItem("", displayName, fileAsset.relativePath, "", "")
-        let fetchOption = await getFetchOptionsByItem(simpleAlbumDataItem)
-        let counts = (await mediaModel.getAllCommonMediaItem(fetchOption, true)).counts
+        let simpleAlbumDataItem = new SimpleAlbumDataItem("", displayName, fileAsset.relativePath, "", "");
+        let fetchOption = await getFetchOptionsByItem(simpleAlbumDataItem);
+        let counts = (await mediaModel.getAllCommonMediaItem(fetchOption, true)).counts;
 
         if (counts == 0) {
             Log.warn(TAG, 'hasSameNameAsset is false');

@@ -21,7 +21,7 @@ const TAG = "NoPhotoComponent"
 
 @Component
 export struct NoPhotoComponent {
-    private TAG: string = 'NoPhotoComponent'
+    private TAG: string = 'NoPhotoComponent';
     title: Resource;
     // set an initial value temporarily, later change to 0.
     @State offSetY: number = Constants.EMPTY_PAGE_DEFAULT_OFFSET;
@@ -33,9 +33,9 @@ export struct NoPhotoComponent {
     aboutToAppear(): void {
         Log.info(TAG, `aboutToAppear`);
         this.bigScreen = Math.min(screenManager.getWinHeight(), screenManager
-            .getWinWidth()) > Constants.BIG_SCREEN_WIDTH
-        let halfImageHeight = this.bigScreen ? Constants.BIG_EMPTY_ICON_SIZE / 2 : Constants.SMALL_EMPTY_ICON_SIZE / 2
-        let screenHeight = screenManager.getWinHeight() - px2vp(this.leftBlank[1] + this.leftBlank[3])
+            .getWinWidth()) > Constants.BIG_SCREEN_WIDTH;
+        let halfImageHeight = this.bigScreen ? Constants.BIG_EMPTY_ICON_SIZE / 2 : Constants.SMALL_EMPTY_ICON_SIZE / 2;
+        let screenHeight = screenManager.getWinHeight() - px2vp(this.leftBlank[1] + this.leftBlank[3]);
         if (this.isHorizontal) {
             if (this.isSidebar) {
                 // Pad landscape

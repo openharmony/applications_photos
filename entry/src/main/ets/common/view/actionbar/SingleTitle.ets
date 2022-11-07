@@ -20,11 +20,11 @@ import { Action } from '../browserOperation/Action';
 // Single line title, fixed content
 @Component
 export struct SingleTitle {
-    private TAG: string = 'SingleTitle'
+    private TAG: string = 'SingleTitle';
     @State actionBarProp: ActionBarProp = new ActionBarProp();
 
     private onBuildDone(): void {
-        Log.info(this.TAG, `onBuildDone, title: ${this.actionBarProp.getTitle()}`)
+        Log.info(this.TAG, `onBuildDone, title: ${this.actionBarProp.getTitle()}`);
     }
 
     build() {

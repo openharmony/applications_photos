@@ -18,26 +18,26 @@ import createOrGet from '../utils/SingleInstanceUtils';
 const TAG = "MediaDataItemCache"
 
 class MediaDataItemCache {
-    private mediaDataItemMap = new Map<string, MediaDataItem>()
+    private mediaDataItemMap = new Map<string, MediaDataItem>();
 
     hasKey(key: string): boolean {
-        return this.mediaDataItemMap.has(key)
+        return this.mediaDataItemMap.has(key);
     }
 
     deleteKey(key: string): boolean {
-        return this.mediaDataItemMap.delete(key)
+        return this.mediaDataItemMap.delete(key);
     }
 
     set(key: string, value: MediaDataItem): void {
-        this.mediaDataItemMap.set(key, value)
+        this.mediaDataItemMap.set(key, value);
     }
 
     get(key: string): MediaDataItem {
-        return this.mediaDataItemMap.get(key)
+        return this.mediaDataItemMap.get(key);
     }
 
     clearAll(): void {
-        this.mediaDataItemMap.clear()
+        this.mediaDataItemMap.clear();
     }
 }
 

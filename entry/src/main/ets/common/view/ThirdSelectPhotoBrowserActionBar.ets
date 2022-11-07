@@ -13,12 +13,10 @@
  * limitations under the License.
  */
 
-import { Action } from './browserOperation/Action'
-import { ActionBar } from './actionbar/ActionBar'
-import { ActionBarProp } from './browserOperation/ActionBarProp'
-import { ActionBarMode, ActionBarColorMode, ActionBarSelectionMode } from './browserOperation/ActionBarMode'
-import { Logger } from '../utils/Logger'
-import  screenManager  from '../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { Action } from './browserOperation/Action';
+import { ActionBar } from './actionbar/ActionBar';
+import { ActionBarProp } from './browserOperation/ActionBarProp';
+import { ActionBarMode, ActionBarColorMode, ActionBarSelectionMode } from './browserOperation/ActionBarMode';
 
 @Component
 export struct ThirdSelectPhotoBrowserActionBar {
@@ -26,7 +24,6 @@ export struct ThirdSelectPhotoBrowserActionBar {
     @State isMultiPick: boolean = false;
     @Consume isSelected: boolean;
     onMenuClicked: Function;
-    private logger: Logger = new Logger('ThirdSelectPhotoBrowserActionBar');
 
     private createActionBar(): ActionBarProp {
         let actionBarProp: ActionBarProp = new ActionBarProp();

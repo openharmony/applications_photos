@@ -36,7 +36,7 @@ export struct TimelineScrollBar {
     }
 
     nodeGap(count: number): number {
-        let windowHeight: number = screenManager.getWinHeight() - WindowConstants.TOOL_BAR_SIZE
+        let windowHeight: number = screenManager.getWinHeight() - WindowConstants.TOOL_BAR_SIZE;
         let gridHeight: number = windowHeight - WindowConstants.SCROLL_MARGIN * 2;
         let gapS = Math.ceil(gridHeight * count / this.dataSource.childCount() - WindowConstants.SCROLL_MARGIN * 2);
         if (gapS >= WindowConstants.SCROLL_BAR_SIDE_MIN_GAP) {
@@ -46,18 +46,18 @@ export struct TimelineScrollBar {
     }
 
     private isFirst(item: TimelineDataItem): boolean {
-        return this.dataSource.groupItem.indexOf(item) == 0
+        return this.dataSource.groupItem.indexOf(item) == 0;
     }
 
     private isLast(item: TimelineDataItem): boolean {
-        return this.dataSource.groupItem.indexOf(item) == this.dataSource.groupItem.length - 1
+        return this.dataSource.groupItem.indexOf(item) == this.dataSource.groupItem.length - 1;
     }
 
     private isShowLocalizedYear(item: TimelineDataItem): boolean {
         if (this.dataSource.groupItem.indexOf(item) > 0) {
-            return DateUtil.getLocalizedYearString(item.dateAdded) != DateUtil.getLocalizedYearString(this.dataSource.getData(this.dataSource.groupItem.indexOf(item) - 1).dateAdded)
+            return DateUtil.getLocalizedYearString(item.dateAdded) != DateUtil.getLocalizedYearString(this.dataSource.getData(this.dataSource.groupItem.indexOf(item) - 1).dateAdded);
         }
-        return true
+        return true;
     }
 
     build() {

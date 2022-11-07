@@ -38,7 +38,7 @@ const TAG = "SelectPhotoBrowser"
 @Component
 struct SelectPhotoBrowser {
     @Provide browserBackgroundColor: Resource = $r('app.color.default_background_color');
-    @Provide('selectedCount') totalSelectedCount: number = 0
+    @Provide('selectedCount') totalSelectedCount: number = 0;
     @Provide broadCast: Broadcast = new Broadcast();
     @Provide isSelected: boolean = true;
     @Provide isShowBar: boolean = true;
@@ -55,11 +55,11 @@ struct SelectPhotoBrowser {
 
     // The global Broadcast of the application process. Event registration and destruction should be paired
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
-    private browserDataSource: GroupItemDataSource = new GroupItemDataSource()
+    private browserDataSource: GroupItemDataSource = new GroupItemDataSource();
 
     aboutToAppear(): void {
         Log.info(TAG, 'photoBrowser aboutToAppear');
-        screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000')
+        screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000');
         this.browserBackgroundColor = $r('app.color.black');
         mMultimodalInputManager.registerListener((control: number) => {
             Log.info(TAG, `key control : ${control} index ${this.currentIndex}`);
@@ -80,20 +80,20 @@ struct SelectPhotoBrowser {
             this.pageFrom = new Number(param.pageFrom).valueOf() || 0;
         }
         if (this.pageFrom == RouterConstants.ENTRY_FROM.DISTRIBUTED) {
-            this.browserDataSource.setDeviceId(param.deviceId ? param.deviceId.toString() : '')
+            this.browserDataSource.setDeviceId(param.deviceId ? param.deviceId.toString() : '');
         }
 
         if (this.isMultiPick == true) {
             this.totalSelectedCount = this.browserDataSource.getSelectedCount();
         }
         if (param.albumInfo) {
-            this.browserDataSource.setAlbumId((param.albumInfo as SimpleAlbumDataItem).id)
+            this.browserDataSource.setAlbumId((param.albumInfo as SimpleAlbumDataItem).id);
         }
 
-        this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER)
+        this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER);
         this.onPhotoChanged(new Number(param.position).valueOf() || 0);
-        this.isSelected = this.getCurrentPhoto().isSelect
-        this.totalSelectedCount = this.browserDataSource.getSelectedCount()
+        this.isSelected = this.getCurrentPhoto().isSelect;
+        this.totalSelectedCount = this.browserDataSource.getSelectedCount();
         this.selectPhotoTransition = param.transition ? param.transition.toString() : '';
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
@@ -124,7 +124,7 @@ struct SelectPhotoBrowser {
     }
 
     aboutToDisappear(): void {
-        screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000')
+        screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000');
         this.broadCast.release();
         mMultimodalInputManager.unregisterListener();
     }
@@ -141,7 +141,7 @@ struct SelectPhotoBrowser {
 
     onPhotoChanged(index: number): void{
         this.currentIndex = index;
-        this.isSelected = this.getCurrentPhoto().isSelect
+        this.isSelected = this.getCurrentPhoto().isSelect;
         this.browserDataSource.notifyDataChange(index);
     }
 
@@ -153,9 +153,9 @@ struct SelectPhotoBrowser {
         }
         currentPhoto.setSelect(!currentPhoto.isSelect);
         this.isSelected = currentPhoto.isSelect;
-        this.totalSelectedCount = this.browserDataSource.getSelectedCount()
+        this.totalSelectedCount = this.browserDataSource.getSelectedCount();
         this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
-        Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`)
+        Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
     }
 
     onPageShow() {
@@ -232,7 +232,7 @@ struct SelectPhotoBrowser {
                 }
             }
         };
-        terminateSelfWithResult(abilityResult)
+        terminateSelfWithResult(abilityResult);
     }
 
     pageTransition() {

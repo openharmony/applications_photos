@@ -21,7 +21,7 @@ import { MathUtils } from './MathUtils';
 
 export class ImageFilterCrop extends ImageFilterBase {
     private static readonly FILTER_NAME: string = 'FilterCrop';
-    private TAG: string = 'ImageFilterCrop'
+    private TAG: string = 'ImageFilterCrop';
     private isFlipHorizontal: boolean = false;
     private isFlipVertically: boolean = false;
     private rotationAngle: number = 0;

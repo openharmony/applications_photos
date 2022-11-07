@@ -34,7 +34,7 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
 
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.count = this.menuContext.items.length
+            this.count = this.menuContext.items.length;
         } else {
             //@ts-ignore
             this.count = dataSource.getItems().length;
@@ -47,7 +47,7 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
         this.confirmCallback = this.confirmCallback.bind(this);
         this.cancelCallback = this.cancelCallback.bind(this);
 
-        let resource: Resource = this.getDeleteMessageResource(dataSource)
+        let resource: Resource = this.getDeleteMessageResource(dataSource);
         this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [resource, this.confirmCallback, this.cancelCallback]);
     }
 
@@ -66,19 +66,19 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
         // 3. selectManager gets the URI of the data and starts processing deletion in the callback
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.items = this.menuContext.items
+            this.items = this.menuContext.items;
         } else {
             //@ts-ignore
-            this.items = dataSource.getItems()
+            this.items = dataSource.getItems();
         }
-        this.processOperation()
+        this.processOperation();
     }
 
     getDeleteMessageResource(dataSource: ItemDataSource): Resource {
         if (dataSource && dataSource.isSelect()) {
-            return $r('app.string.recycleAlbum_clear_message')
+            return $r('app.string.recycleAlbum_clear_message');
         } else {
-            return $r('app.plural.recycleAlbum_delete_message', this.count)
+            return $r('app.plural.recycleAlbum_delete_message', this.count);
         }
     }
 }

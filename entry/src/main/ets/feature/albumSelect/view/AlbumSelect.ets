@@ -48,8 +48,8 @@ export struct AlbumSelect {
     @Provide('tabBarShow') isTabBarShow: boolean = false;
     private isActive = false;
     private scroller: Scroller = new Scroller();
-    private barModel: AlbumSelectBarModel = new AlbumSelectBarModel()
-    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
+    private barModel: AlbumSelectBarModel = new AlbumSelectBarModel();
+    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
 
     aboutToAppear(): void {
         startTrace('AlbumSetPageAboutToAppear');
@@ -70,26 +70,26 @@ export struct AlbumSelect {
             } else {
                 AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, false);
             }
-            let albumInfo: SimpleAlbumDataItem = param.albumInfo ? JSON.parse(param.albumInfo.toString()) : undefined
+            let albumInfo: SimpleAlbumDataItem = param.albumInfo ? JSON.parse(param.albumInfo.toString()) : undefined;
             if (albumInfo) {
-                this.albumsDataSource.setBlackList([albumInfo.id, MediaConstants.ALBUM_ID_RECYCLE])
+                this.albumsDataSource.setBlackList([albumInfo.id, MediaConstants.ALBUM_ID_RECYCLE]);
                 Log.debug(TAG, `the album Id is: ${albumInfo.id}`);
             } else {
-                this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_RECYCLE])
+                this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_RECYCLE]);
             }
 
             AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_TARGET, albumInfo);
         }
 
-        this.loadAlbums()
+        this.loadAlbums();
         this.onMenuClicked = this.onMenuClicked.bind(this);
         finishTrace('AlbumSetPageAboutToAppear');
     }
 
     private loadAlbums() {
         this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
-            this.isEmpty = isEmpty
-            this.albumsDataSource.notifyDataReload()
+            this.isEmpty = isEmpty;
+            this.albumsDataSource.notifyDataReload();
         })
     }
 

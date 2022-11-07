@@ -111,7 +111,7 @@ struct PhotoBrowser {
     private backFromCopy = false;
     private pullDownFlag: boolean = false;
     private browserDataSource: GroupItemDataSource = new GroupItemDataSource()
-    private isToEdit = false
+    private isToEdit = false;
 
     onMenuClicked(action: Action) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}, isPullingDown: ${this.isPullingDown}`);
@@ -233,7 +233,7 @@ struct PhotoBrowser {
     }
 
     private setFavourite(isSuccess: boolean) {
-        Log.debug(TAG, 'set favor !')
+        Log.debug(TAG, 'set favor !');
 
         if (isSuccess) {
             let currentPhoto = this.getCurrentPhoto();
@@ -251,7 +251,7 @@ struct PhotoBrowser {
     }
 
     private onDeleteEnd() {
-        this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, [])
+        this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, []);
     }
 
     private setOrientation() {
@@ -300,7 +300,7 @@ struct PhotoBrowser {
     }
 
     onPhotoChanged(index: number): void{
-        index = Math.min(index, this.browserDataSource.totalCount() - 1)
+        index = Math.min(index, this.browserDataSource.totalCount() - 1);
         Log.info(TAG, `onPhotoChanged start ${index}`);
         this.currentIndex = index;
         this.updateActionBar();
@@ -313,7 +313,7 @@ struct PhotoBrowser {
                 let menuContext: MenuContext = new MenuContext();
                 menuContext.withJumpSourceToMain(this.jumpSourceToMain);
                 let menuOperation = new GotoPhotosMenuOperation(menuContext);
-                menuOperation.doAction()
+                menuOperation.doAction();
             } else {
                 this.onBackPress();
             }
@@ -351,14 +351,14 @@ struct PhotoBrowser {
             } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
                 this.menuList = [];
             } else {
-                this.menuList = [Action.INFO]
+                this.menuList = [Action.INFO];
             }
             if (this.isHorizontal) {
                 this.menuList = this.menuList.concat(list);
             } else {
                 this.toolMenuList = list;
             }
-            this.updateMoreMenu()
+            this.updateMoreMenu();
         })
     }
 
@@ -369,18 +369,18 @@ struct PhotoBrowser {
         } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
             list.push(Action.SHARE, Action.DOWNLOAD);
         } else {
-            let isFavor = await currentPhoto.isFavor()
+            let isFavor = await currentPhoto.isFavor();
             list.push(Action.SHARE,
                     isFavor ? Action.FAVORITE : Action.NOT_FAVORITE,
                     currentPhoto.mediaType == MediaLib.MediaType.IMAGE ? Action.EDIT : Action.EDIT_INVALID,
                 Action.DELETE,
                 Action.MORE); // TODO: delete edit
         }
-        return list
+        return list;
     }
 
     private currentShowChange() {
-        this.updateMoreMenu()
+        this.updateMoreMenu();
     }
 
     private updateMoreMenu() {
@@ -412,11 +412,11 @@ struct PhotoBrowser {
             })
             return;
         }
-        let currentPhoto = this.getCurrentPhoto()
+        let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined) {
             return;
         }
-        currentPhoto.path = (await currentPhoto.loadFileAsset()).relativePath
+        currentPhoto.path = (await currentPhoto.loadFileAsset()).relativePath;
         this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
     }
 
@@ -425,7 +425,7 @@ struct PhotoBrowser {
         this.dataSourceLoadFinish()
         if (err) {
             getResourceString($r('app.string.copy_failed_single')).then((message: string) => {
-                showToast(message)
+                showToast(message);
             })
         }
     }
@@ -434,11 +434,11 @@ struct PhotoBrowser {
         Log.debug(TAG, `onDownloadEnd count: ${count}, total: ${total}`);
         if (err) {
             getResourceString($r('app.string.download_failed_single')).then((message: string) => {
-                showToast(message)
+                showToast(message);
             })
         } else {
             getResourceString($r('app.string.download_progress_done')).then((message: string) => {
-                showToast(message)
+                showToast(message);
             })
         }
     }
@@ -484,7 +484,7 @@ struct PhotoBrowser {
 
     aboutToDisappear(): void {
         Log.info(TAG, 'aboutToDisappear');
-        screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000')
+        screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000');
         if (!this.isShowBar) {
             screenManager.setSystemUi(true);
         }
@@ -499,7 +499,7 @@ struct PhotoBrowser {
     aboutToAppear(): void {
         startTrace('PhotoBrowserAboutToAppear');
         Log.info(TAG, 'photoBrowser aboutToAppear');
-        screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000')
+        screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000');
         this.hasAppeared = true;
         mMultimodalInputManager.registerListener((control: number) => {
             Log.info(TAG, `key control: ${control} index ${this.currentIndex}`);
@@ -541,21 +541,21 @@ struct PhotoBrowser {
             let items: MediaDataItem[];
             if (param.viewData) {
                 items = []
-                let uriArr: string[] = String(param.viewData).split(',')
+                let uriArr: string[] = String(param.viewData).split(',');
                 for (let i = 0;i < uriArr.length; i++) {
-                    items.push(new InnerMediaDataItem(uriArr[i], i))
+                    items.push(new InnerMediaDataItem(uriArr[i], i));
                 }
             } else {
-                items = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER)
+                items = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER);
             }
 
             if (items) {
-                this.browserDataSource.groupDataItem = items
+                this.browserDataSource.groupDataItem = items;
                 this.onPhotoChanged(new Number(param.position).valueOf() || 0);
             } else {
                 this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean) => {
-                    this.onPhotoChanged(0)
-                    this.browserDataSource.notifyDataReload()
+                    this.onPhotoChanged(0);
+                    this.browserDataSource.notifyDataReload();
                 })
             }
 
@@ -566,18 +566,18 @@ struct PhotoBrowser {
             if (this.entryFromHap == Constants.ENTRY_FROM_FORM_ABILITY) {
                 this.isFromCard = true;
                 this.pageFrom = Constants.ENTRY_FROM.CARD;
-                this.albumInfo = new SimpleAlbumDataItem(AppStorage.Get(Constants.FROM_ALBUM_ID), "", "", "", "")
+                this.albumInfo = new SimpleAlbumDataItem(AppStorage.Get(Constants.FROM_ALBUM_ID), "", "", "", "");
             } else {
                 this.pageFrom = Constants.ENTRY_FROM.CAMERA;
-                this.albumInfo = new SimpleAlbumDataItem(MediaConstants.ALBUM_ID_CAMERA, "", "", "", "")
+                this.albumInfo = new SimpleAlbumDataItem(MediaConstants.ALBUM_ID_CAMERA, "", "", "", "");
             }
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
-            this.browserDataSource.setAlbumId(this.albumInfo.id)
+            this.browserDataSource.setAlbumId(this.albumInfo.id);
             this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean) => {
                 this.isDataChanged = isEmpty;
                 this.onPhotoChanged(AppStorage.Get(Constants.FROM_CURRENT_INDEX) || 0);
                 this.browserDataSource.notifyDataReload()
-            })
+            });
             this.isFromCamera = true;
             this.jumpSourceToMain = JumpSourceToMain.CAMERA;
 
@@ -585,7 +585,7 @@ struct PhotoBrowser {
         }
 
         mediaObserver.registerObserver(this.dataObserver);
-        this.checkedTransition = this.photoBrowserTransition
+        this.checkedTransition = this.photoBrowserTransition;
 
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
@@ -651,21 +651,21 @@ struct PhotoBrowser {
 
     private async dataSourceLoadFinish() {
         if (this.isToEdit) {
-            this.isToEdit = false
+            this.isToEdit = false;
             this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
         }
-        let uri: string = this.getCurrentPhoto().uri
-        await this.browserDataSource.reloadGroupItemData(false)
-        let index = this.currentIndex
-        let item: MediaDataItem = this.getPhotoByIndex(index)
-        await item.load(false)
-        let length = this.browserDataSource.totalCount()
+        let uri: string = this.getCurrentPhoto().uri;
+        await this.browserDataSource.reloadGroupItemData(false);
+        let index = this.currentIndex;
+        let item: MediaDataItem = this.getPhotoByIndex(index);
+        await item.load(false);
+        let length = this.browserDataSource.totalCount();
         while (item.uri != uri && this.currentIndex + 1 < length) {
-            index++
-            item = this.getPhotoByIndex(index)
-            await item.load(false)
+            index++;
+            item = this.getPhotoByIndex(index);
+            await item.load(false);
         }
-        this.onPhotoChanged(index)
+        this.onPhotoChanged(index);
     }
 
     onPageShow() {
@@ -730,7 +730,7 @@ struct PhotoBrowser {
 
     onMediaLibDataChange(changeType) {
         Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
-        this.dataSourceLoadFinish()
+        this.dataSourceLoadFinish();
     }
 
     async routerGridPaged() {

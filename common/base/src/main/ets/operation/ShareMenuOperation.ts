@@ -56,6 +56,6 @@ export class ShareMenuOperation implements MenuOperation {
                 }
             }
         }
-        startAbility(want)
+        startAbility(want);
     }
 }

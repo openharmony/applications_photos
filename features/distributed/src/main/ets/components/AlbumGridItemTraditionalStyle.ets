@@ -28,9 +28,9 @@ const TAG = "AlbumGridItemTraditionalStyle"
 // There is no selection mode.
 @Component
 export struct AlbumGridItemTraditionalStyle {
-    item: AlbumDataItem
-    deviceName: string
-    deviceId: string
+    item: AlbumDataItem;
+    deviceName: string;
+    deviceId: string;
     @State isEmptyAlbum: boolean = false;
     @Provide isBigCard: boolean = false;
     @Provide gridHeight: number = 0;
@@ -38,7 +38,7 @@ export struct AlbumGridItemTraditionalStyle {
     @State cardWidth: number = 0;
     @State cardHeight: number = 0;
     @State transformV: number = 0;
-    @State thumbnail: string = ""
+    @State thumbnail: string = "";
     gridAspectRatio = WindowConstants.CARD_ASPECT_RATIO;
     albumCountMarginRight = WindowConstants.ALBUM_SET_NEW_ICON_SIZE + WindowConstants.ALBUM_SET_NEW_ICON_MARGIN * 2;
 

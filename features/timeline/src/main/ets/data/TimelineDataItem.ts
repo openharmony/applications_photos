@@ -22,68 +22,68 @@ import mediaDataItemCache from '@ohos/base/src/main/ets/data/MediaDataItemCache'
 const TAG = "TimelineDataItem"
 
 export class TimelineDataItem {
-    readonly viewType = ViewType.GROUP_TITLE
-    dateAdded: number
-    groupChild: MediaDataItem[] = []
+    readonly viewType = ViewType.GROUP_TITLE;
+    dateAdded: number;
+    groupChild: MediaDataItem[] = [];
 
     constructor(fileAssert: MediaLib.FileAsset, mediaFileAsset: Array<MediaLib.FileAsset>, index: number) {
-        Log.info(TAG, `construct ${fileAssert.dateAdded}:${fileAssert.count}`)
-        this.dateAdded = fileAssert.dateAdded * 1000
-        this.groupChild = new Array(fileAssert.count)
-        let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?'
-        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()]
+        Log.info(TAG, `construct ${fileAssert.dateAdded}:${fileAssert.count}`);
+        this.dateAdded = fileAssert.dateAdded * 1000;
+        this.groupChild = new Array(fileAssert.count);
+        let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?';
+        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
         for (let i = 0;i < this.groupChild.length; i++) {
             this.groupChild[i] = new MediaDataItem(selections, selectionArgs, "", index + i)
             if (index + i < mediaFileAsset.length) {
                 if (mediaDataItemCache.hasKey(mediaFileAsset[index+i].uri)) {
-                    this.groupChild[i] = mediaDataItemCache.get(mediaFileAsset[index+i].uri)
+                    this.groupChild[i] = mediaDataItemCache.get(mediaFileAsset[index+i].uri);
                 } else {
-                    mediaDataItemCache.set(mediaFileAsset[index+i].uri, this.groupChild[i])
+                    mediaDataItemCache.set(mediaFileAsset[index+i].uri, this.groupChild[i]);
                 }
-                this.groupChild[i].update(mediaFileAsset[index+i])
+                this.groupChild[i].update(mediaFileAsset[index+i]);
             }
         }
     }
 
     getHashCode(): string {
-        return `${this.dateAdded}`
+        return `${this.dateAdded}`;
     }
 
     isSelect(): boolean {
-        let status = true
+        let status = true;
         for (let i = 0;i < this.groupChild.length; i++) {
             if (!this.groupChild[i].isSelect) {
-                status = false
+                status = false;
                 break;
             }
         }
-        return status
+        return status;
     }
 
     setSelect(isSelect: boolean) {
         this.groupChild.forEach((child: MediaDataItem) => {
-            child.setSelect(isSelect)
+            child.setSelect(isSelect);
         })
     }
 
     getSelectedCount(): number{
-        let count = 0
+        let count = 0;
         this.groupChild.forEach((child: MediaDataItem) => {
             if (child.isSelect) {
-                count++
+                count++;
             }
         })
-        return count
+        return count;
     }
 
     dataRemove(): number[] {
-        let removeList: number[] = []
+        let removeList: number[] = [];
         for (let i = this.groupChild.length - 1;i >= 0; i--) {
             if (this.groupChild[i].isDeleted()) {
-                this.groupChild.splice(i, 1)
-                removeList.push(i)
+                this.groupChild.splice(i, 1);
+                removeList.push(i);
             }
         }
-        return removeList
+        return removeList;
     }
 }

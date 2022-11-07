@@ -19,13 +19,13 @@ import { ActionBarProp } from '../browserOperation/ActionBarProp';
 // Large picture title, including primary date title and secondary time and place title
 @Component
 export struct DetailTitle {
-    private TAG: string = 'DetailTitle'
+    private TAG: string = 'DetailTitle';
     @Consume('dateTitle') title: string;
     @Consume('timeLocationTitle') subTitle: string;
     isVideoPage: boolean = false;
 
     private onBuildDone(): void {
-        Log.debug(this.TAG, `onBuildDone, title: ${this.title}, subTitle: ${this.subTitle}`)
+        Log.debug(this.TAG, `onBuildDone, title: ${this.title}, subTitle: ${this.subTitle}`);
     }
 
     build() {

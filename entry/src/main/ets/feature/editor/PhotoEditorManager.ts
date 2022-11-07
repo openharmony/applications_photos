@@ -25,7 +25,7 @@ import { Save } from './Save';
 import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 
 export class PhotoEditorManager {
-    private TAG: string = 'PhotoEditorManager'
+    private TAG: string = 'PhotoEditorManager';
     private currentMode: PhotoEditMode = PhotoEditMode.EDIT_MODE_MAIN;
     private origin: PixelMapWrapper = undefined;
     private item: MediaDataItem = undefined;

@@ -27,7 +27,7 @@ import { ActionBarButton } from './ActionBarButton';
 // ActionBar，It consists of action on the left, title in the middle and menu panel on the right
 @Component
 export struct ActionBar {
-    private TAG: string = 'ActionBar'
+    private TAG: string = 'ActionBar';
     @Provide actionBarProp: ActionBarProp = new ActionBarProp();
     onMenuClicked: Function;
     isVideoPage: boolean = false;

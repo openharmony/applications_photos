@@ -62,22 +62,22 @@ struct FormEditorPage {
     })
 
     async GetMediaData(albumId: string, index: number) {
-        Log.debug(TAG, `GetMediaData start`)
-        this.currentIndex = index
-        let fetchOpt = await getFetchOptions(MediaConstants.SELECT_TYPE_IMAGE, albumId, "")
-        fetchOpt.order = `date_added DESC LIMIT ${index},1`
-        this.fileAsset = (await mediaModel.getAllMediaItem(albumId, fetchOpt, false)).fileAsset
+        Log.debug(TAG, `GetMediaData start`);
+        this.currentIndex = index;
+        let fetchOpt = await getFetchOptions(MediaConstants.SELECT_TYPE_IMAGE, albumId, "");
+        fetchOpt.order = `date_added DESC LIMIT ${index},1`;
+        this.fileAsset = (await mediaModel.getAllMediaItem(albumId, fetchOpt, false)).fileAsset;
     }
 
     async openCurrentFd() {
-        Log.info(TAG, `open fd, fileAsset is valid ${this.fileAsset != null}`)
+        Log.info(TAG, `open fd, fileAsset is valid ${this.fileAsset != null}`);
         this.fd = (this.fileAsset != null) ? await  mediaModel.openAsset('R', this.fileAsset) : -1;
     }
 
     bindFormData(): any {
-        Log.debug(TAG, `bindFormData start formId: ${this.formId}`)
+        Log.debug(TAG, `bindFormData start formId: ${this.formId}`);
         let image = "image_" + this.fd + "_formId_" + this.formId;
-        Log.debug(TAG, `bindFormData start image: ${image}`)
+        Log.debug(TAG, `bindFormData start image: ${image}`);
         let dataObj1: any = {
             "fd": this.fd == -1 ? false : true,
             "image1": "memory://" + image,
@@ -86,7 +86,7 @@ struct FormEditorPage {
             "isShow": this.isShow,
             "formImages": JSON.parse(`{ "${image}": ${this.fd} }`)
         };
-        let dataObj = JSON.stringify(dataObj1)
+        let dataObj = JSON.stringify(dataObj1);
         Log.info(TAG, `bindFormData, createFormBindingData dataObj2.data: ${dataObj}`);
         let obj = formBindingData.createFormBindingData(dataObj);
         Log.debug(TAG, `bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
@@ -106,7 +106,7 @@ struct FormEditorPage {
     }
 
     terminate() {
-        terminateSelf()
+        terminateSelf();
     }
 
     updateFormData(): void {
@@ -132,7 +132,7 @@ struct FormEditorPage {
     }
 
     async saveData(albumName: string, albumId: string, displayName, index: number, isShow: boolean) {
-        Log.debug(TAG, `saveData start! ${albumName} ${displayName} ${index}`)
+        Log.debug(TAG, `saveData start! ${albumName} ${displayName} ${index}`);
         let msgDisplayName = '';
         if (displayName instanceof Object) {
             Log.debug(TAG, `saveData object ${displayName}`);
@@ -169,7 +169,7 @@ struct FormEditorPage {
             await dataStore.flush();
             this.updateFormData();
         } else {
-            terminateSelf()
+            terminateSelf();
         }
         Log.debug(TAG, 'saveData end!');
     }
@@ -199,7 +199,7 @@ struct FormEditorPage {
     }
 
     aboutToAppear(): void {
-        Log.debug(TAG, 'aboutToAppear start!')
+        Log.debug(TAG, 'aboutToAppear start!');
         this.appBroadcast.on(BroadcastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
         this.appBroadcast.on(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
         dataStore.init().then(() => {
@@ -234,11 +234,11 @@ struct FormEditorPage {
         this.time = value;
         this.setIntervalTime();
         AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);
-        this.updateTime()
+        this.updateTime();
     }
 
     async updateTime() {
-        Log.debug(TAG, `updateTime start! ${this.time}`)
+        Log.debug(TAG, `updateTime start! ${this.time}`);
         await dataStore.init();
         let intervalTimeKey = 'intervalTime';
         await dataStore.putData(intervalTimeKey, this.time);
@@ -253,13 +253,13 @@ struct FormEditorPage {
 
     private setIntervalTime(): void{
         if (this.time == undefined) {
-            this.intervalTime = $r('app.string.fa_play_interval_time_30')
+            this.intervalTime = $r('app.string.fa_play_interval_time_30');
         } else if (this.time / Constants.DEFAULT_TIME == 3) {
-            this.intervalTime = $r('app.string.fa_play_interval_time_90')
+            this.intervalTime = $r('app.string.fa_play_interval_time_90');
         } else if (this.time / Constants.DEFAULT_TIME == 2) {
-            this.intervalTime = $r('app.string.fa_play_interval_time_60')
+            this.intervalTime = $r('app.string.fa_play_interval_time_60');
         } else {
-            this.intervalTime = $r('app.string.fa_play_interval_time_30')
+            this.intervalTime = $r('app.string.fa_play_interval_time_30');
         }
     }
 

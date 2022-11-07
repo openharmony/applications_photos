@@ -12,13 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { Logger } from '../utils/Logger'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { Constants } from '../../../common/model/common/Constants'
-import { PhotoEditCrop } from '../crop/PhotoEditCrop'
-import { CropResetBar } from './CropResetBar'
-import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { Constants } from '../../../common/model/common/Constants';
+import { PhotoEditCrop } from '../crop/PhotoEditCrop';
+import { CropResetBar } from './CropResetBar';
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 
 @Component

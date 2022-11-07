@@ -13,18 +13,18 @@
  * limitations under the License.
  */
 
-import { TimelinePage } from '../../../feature/timeline/view/TimelinePage'
-import { AlbumSetPage } from '../../../feature/album/view/AlbumSetPage'
+import { TimelinePage } from '../../../feature/timeline/view/TimelinePage';
+import { AlbumSetPage } from '../../../feature/album/view/AlbumSetPage';
 import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
-import { TabBar, DEVICE_TYPE } from '../../../common/view/TabBar'
-import { JumpSourceToMain } from '../../../../../../../common/base/src/main/ets/data/JumpSourceToMain'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager'
-import { Constants } from '../../../common/model/common/Constants'
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { startTrace, finishTrace } from '../../../../../../../common/base/src/main/ets/utils/TraceControllerUtils'
-import router from '@system.router'
+import { TabBar, DEVICE_TYPE } from '../../../common/view/TabBar';
+import { JumpSourceToMain } from '../../../../../../../common/base/src/main/ets/data/JumpSourceToMain';
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { Constants } from '../../../common/model/common/Constants';
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { startTrace, finishTrace } from '../../../../../../../common/base/src/main/ets/utils/TraceControllerUtils';
+import router from '@system.router';
 
 // Application entry
 @Entry
@@ -52,7 +52,7 @@ struct IndexPage {
     aboutToAppear(): void {
         startTrace('indexPageAppearToShow');
         if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
-            AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false)
+            AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false);
             this.currentIndex = Constants.ALBUM_PAGE_INDEX;
         }
         let param = router.getParams();
@@ -70,7 +70,7 @@ struct IndexPage {
     onPageShow() {
         Log.info(this.TAG, `IndexPage.onPageShow entryFromHap: ${this.entryFromHap}`);
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
-        this.isShow = true
+        this.isShow = true;
          Log.error(this.TAG, `IndexPage.onPageShow: router.clear ${this.jumpSource}`);
         if (this.jumpSource == JumpSourceToMain.CAMERA) {
             router.clear();
@@ -81,7 +81,7 @@ struct IndexPage {
     }
 
     onPageHide() {
-        this.isShow = false
+        this.isShow = false;
     }
 
     onBackPress() {

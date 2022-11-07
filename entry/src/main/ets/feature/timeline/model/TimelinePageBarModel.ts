@@ -14,16 +14,16 @@
  */
 import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { Action } from '../../../common/view/browserOperation/Action';
-import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/browserOperation/ActionBarMode'
+import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/browserOperation/ActionBarMode';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 
 export class TimelinePageBarModel {
     createActionBar(isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean): ActionBarProp  {
-        let isHorizontal = screenManager.isHorizontal()
+        let isHorizontal = screenManager.isHorizontal();
         if (isHorizontal) {
-            return this.createHorizontalActionBar(isSelectedMode, selectedCount, isAllSelected)
+            return this.createHorizontalActionBar(isSelectedMode, selectedCount, isAllSelected);
         } else {
-            return this.createVerticalActionBar(isSelectedMode)
+            return this.createVerticalActionBar(isSelectedMode);
         }
     }
 

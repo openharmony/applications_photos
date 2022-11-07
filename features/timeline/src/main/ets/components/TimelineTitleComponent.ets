@@ -25,7 +25,7 @@ const TAG = "TimelineTitleComponent"
 export struct TimelineTitleComponent {
     @Consume broadCast: Broadcast;
     @Consume isSelectedMode: boolean;
-    timelineDataItem: TimelineDataItem
+    timelineDataItem: TimelineDataItem;
     addresses = '';
 
     aboutToAppear(): void {

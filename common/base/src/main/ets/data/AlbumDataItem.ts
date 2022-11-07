@@ -33,79 +33,79 @@ export class AlbumDataItem {
     isDisableDelete: boolean;
     relativePath: string;
     innerId: number;
-    selectType: number = MediaConstants.SELECT_TYPE_ALL
-    deviceId: string = ""
-    isSelect: boolean = false
-    status: number = MediaConstants.UNDEFINED
+    selectType: number = MediaConstants.SELECT_TYPE_ALL;
+    deviceId: string = "";
+    isSelect: boolean = false;
+    status: number = MediaConstants.UNDEFINED;
 
     constructor(id: string, count: number, displayName: string, selectType: number, deviceId: string) {
-        this.id = id
-        this.displayName = displayName
-        this.count = count
-        this.isDisableRename = MediaConstants.ALBUM_DISABLE_RENAME_LIST.has(id)
-        this.isDisableDelete = MediaConstants.ALBUM_DISABLE_DELETE_LIST.has(id)
-        this.selectType = selectType
-        this.deviceId = deviceId
+        this.id = id;
+        this.displayName = displayName;
+        this.count = count;
+        this.isDisableRename = MediaConstants.ALBUM_DISABLE_RENAME_LIST.has(id);
+        this.isDisableDelete = MediaConstants.ALBUM_DISABLE_DELETE_LIST.has(id);
+        this.selectType = selectType;
+        this.deviceId = deviceId;
     }
 
     getHashCode(): string {
-        return `${this.id} ${this.orientation}`
+        return `${this.id} ${this.orientation}`;
     }
 
     async load(): Promise<void> {
         if (this.status >= MediaConstants.LOADED) {
-            return
+            return;
         }
-        let fetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(this.selectType, this.id, this.deviceId)
-        let fileAsset = (await mediaModel.getAllMediaItem(this.id, fetchOption, false)).fileAsset
-        this.update(fileAsset)
+        let fetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(this.selectType, this.id, this.deviceId);
+        let fileAsset = (await mediaModel.getAllMediaItem(this.id, fetchOption, false)).fileAsset;
+        this.update(fileAsset);
     }
 
     update(fileAsset: MediaLib.FileAsset) {
-        this.uri = fileAsset.uri
-        this.orientation = fileAsset.orientation
-        this.relativePath = fileAsset.relativePath
+        this.uri = fileAsset.uri;
+        this.orientation = fileAsset.orientation;
+        this.relativePath = fileAsset.relativePath;
 
-        this.status = MediaConstants.LOADED
+        this.status = MediaConstants.LOADED;
     }
 
     async getRelativePath(): Promise<string> {
-        await this.load()
-        return this.relativePath
+        await this.load();
+        return this.relativePath;
     }
 
     getThumbnail(): string {
-        Log.debug(TAG, `this.uri ${this.uri}`)
-        return this.uri + `/thumbnail/256/256`
+        Log.debug(TAG, `this.uri ${this.uri}`);
+        return this.uri + `/thumbnail/256/256`;
     }
 
     async getVideoCount(): Promise<number> {
         if (this.selectType == MediaConstants.SELECT_TYPE_IMAGE) {
-            return 0
+            return 0;
         }
-        let videoFetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(MediaConstants.SELECT_TYPE_VIDEO, this.id, this.deviceId)
-        return (await mediaModel.getAllMediaItem(this.id, videoFetchOption, true)).counts
+        let videoFetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(MediaConstants.SELECT_TYPE_VIDEO, this.id, this.deviceId);
+        return (await mediaModel.getAllMediaItem(this.id, videoFetchOption, true)).counts;
     }
 
     setSelect(isSelect: boolean) {
-        this.isSelect = isSelect
-        selectManager.setSelect(this.uri, this.isSelect)
+        this.isSelect = isSelect;
+        selectManager.setSelect(this.uri, this.isSelect);
     }
 
     async onDelete(): Promise<boolean> {
         try {
-            let fetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(this.selectType, this.id, "")
-            await mediaModel.deleteAll(fetchOption)
-            selectManager.deleteSelect(this.uri)
-            this.status = MediaConstants.TRASHED
-            return true
+            let fetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(this.selectType, this.id, "");
+            await mediaModel.deleteAll(fetchOption);
+            selectManager.deleteSelect(this.uri);
+            this.status = MediaConstants.TRASHED;
+            return true;
         } catch (err) {
-            Log.error(TAG, `onDelete error: ${JSON.stringify(err)}`)
-            return false
+            Log.error(TAG, `onDelete error: ${JSON.stringify(err)}`);
+            return false;
         }
     }
 
     isDeleted(): boolean {
-        return this.status == MediaConstants.TRASHED
+        return this.status == MediaConstants.TRASHED;
     }
 }

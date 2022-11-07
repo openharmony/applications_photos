@@ -22,25 +22,25 @@ const TAG = "DistributedDataImpl"
 
 export class DistributedDataImpl {
     async reloadAlbumItemData(): Promise<PeerDataItem[]> {
-        let peerDataItems = []
-        let peers: MediaLib.PeerInfo[] = await mediaModel.getActivePeers()
-        Log.info(TAG, `peers： ${JSON.stringify(peers)}`)
+        let peerDataItems = [];
+        let peers: MediaLib.PeerInfo[] = await mediaModel.getActivePeers();
+        Log.info(TAG, `peers： ${JSON.stringify(peers)}`);
         for (let i = 0;i < peers.length; i++) {
-            let selections: string = `${MediaLib.FileKey.MEDIA_TYPE} = ? or ${MediaLib.FileKey.MEDIA_TYPE} = ?`
-            let selectionArgs: string[] = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()]
+            let selections: string = `${MediaLib.FileKey.MEDIA_TYPE} = ? or ${MediaLib.FileKey.MEDIA_TYPE} = ?`;
+            let selectionArgs: string[] = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
             let fetchOption: MediaLib.MediaFetchOptions = {
                 selections: selections,
                 selectionArgs: selectionArgs,
                 networkId: peers[i].networkId,
                 order: `date_added DESC`
-            }
-            let item = await mediaModel.getAllCommonMediaItem(fetchOption, false)
+            };
+            let item = await mediaModel.getAllCommonMediaItem(fetchOption, false);
             if (item.counts == 0) {
-                continue
+                continue;
             }
-            peerDataItems.push(new PeerDataItem(item.counts, peers[i], item.fileAsset))
+            peerDataItems.push(new PeerDataItem(item.counts, peers[i], item.fileAsset));
         }
 
-        return peerDataItems
+        return peerDataItems;
     }
 }

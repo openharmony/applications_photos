@@ -19,7 +19,7 @@ const TAG = "AbilityUtils"
 
 export async function startAbility(want: Want): Promise<void> {
     try {
-        await globalThis.appContext.startAbility(want)
+        await globalThis.appContext.startAbility(want);
         Log.debug(TAG, 'raul startAbility complete');
     } catch (error) {
         Log.error(TAG, `raul startAbility failed, error: ${JSON.stringify(error)}`);
@@ -27,9 +27,9 @@ export async function startAbility(want: Want): Promise<void> {
 }
 
 export async function terminateSelf(): Promise<void> {
-    await globalThis.appContext.terminateSelf()
+    await globalThis.appContext.terminateSelf();
 }
 
 export async function terminateSelfWithResult(parameter): Promise<void> {
-    await globalThis.appContext.terminateSelfWithResult(parameter)
+    await globalThis.appContext.terminateSelfWithResult(parameter);
 }

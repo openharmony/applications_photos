@@ -23,7 +23,7 @@ import { MathUtils } from './MathUtils';
 import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 
 export class CropShow {
-    private TAG: string = 'CropShow'
+    private TAG: string = 'CropShow';
     private static readonly DEFAULT_MIN_SIDE_LENGTH: number = 90;
     private static readonly DEFAULT_TOUCH_BOUND: number = 20;
     private static readonly BASE_SCALE_VALUE: number = 1.0;

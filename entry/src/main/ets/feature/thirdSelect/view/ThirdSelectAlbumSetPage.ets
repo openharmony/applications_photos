@@ -53,13 +53,13 @@ export struct ThirdSelectAlbumSetPage {
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     isFromFaPhoto: boolean = false;
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
-    private barModel: ThirdSelectBarModel = new ThirdSelectBarModel()
-    private leftAction: Action = Action.BACK
+    private barModel: ThirdSelectBarModel = new ThirdSelectBarModel();
+    private leftAction: Action = Action.BACK;
     private title: string | Resource = ""
     private scroller: Scroller = new Scroller();
     @Provide isHideScrollBar: boolean = true;
     @Provide('tabBarShow') isTabBarShow: boolean = false;
-    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
+    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
 
     aboutToAppear(): void {
         let param = router.getParams();

@@ -17,22 +17,22 @@ import createOrGet from '../utils/SingleInstanceUtils';
 const TAG = ""
 
 class SelectManager {
-    private status: Map<string, boolean> = new Map()
+    private status: Map<string, boolean> = new Map();
 
     isSelect(key: string, defaultValue: boolean): boolean{
         if (this.status.has(key)) {
-            return this.status.get(key)
+            return this.status.get(key);
         } else {
-            return defaultValue
+            return defaultValue;
         }
     }
 
     setSelect(key: string, value: boolean) {
-        this.status.set(key, value)
+        this.status.set(key, value);
     }
 
     deleteSelect(key: string) {
-        this.status.delete(key)
+        this.status.delete(key);
     }
 }
 

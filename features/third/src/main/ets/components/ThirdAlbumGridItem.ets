@@ -31,7 +31,7 @@ export struct ThirdAlbumGridItem {
         [MediaConstants.ALBUM_ID_VIDEO, $r('app.media.ic_video')],
         [MediaConstants.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
     ]);
-    item: AlbumDataItem
+    item: AlbumDataItem;
     @Consume isMultiPick: boolean;
     @Provide isBigCard: boolean = false;
     @Provide gridHeight: number = 0;
@@ -49,7 +49,7 @@ export struct ThirdAlbumGridItem {
     @State cardHeight: number = 0;
     @State transformV: number = 0;
     @State isEmptyAlbum: boolean = false;
-    @State thumbnail: string = ""
+    @State thumbnail: string = "";
 
     aboutToAppear(): void {
         Log.info(TAG, `aboutToAppear + ${this.item.uri}`)

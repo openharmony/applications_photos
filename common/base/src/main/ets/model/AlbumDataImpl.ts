@@ -22,86 +22,86 @@ import { getAlbumDisplayName, getFetchOptions } from '../helper/MediaDataHelper'
 const TAG = "AlbumDataImpl"
 
 export class AlbumDataImpl {
-    private blackList: string[] = []
-    private selectType: number = MediaConstants.SELECT_TYPE_ALL
-    private deviceId: string = ''
+    private blackList: string[] = [];
+    private selectType: number = MediaConstants.SELECT_TYPE_ALL;
+    private deviceId: string = '';
 
     setBlackList(blackList: string[]) {
-        this.blackList = blackList
+        this.blackList = blackList;
     }
 
     setSelectType(selectType: number) {
-        this.selectType = selectType
+        this.selectType = selectType;
     }
 
     setDeviceId(deviceId: string) {
-        this.deviceId = deviceId
+        this.deviceId = deviceId;
     }
 
     async reloadAlbumItemData(): Promise<AlbumDataItem[]> {
-        let albumDataItems = []
+        let albumDataItems = [];
         for (let i = 0;i < MediaConstants.ALBUM_DEFAULT_SORT_LIST.length; i++) {
-            await this.getAlbumItem(MediaConstants.ALBUM_DEFAULT_SORT_LIST[i], albumDataItems)
+            await this.getAlbumItem(MediaConstants.ALBUM_DEFAULT_SORT_LIST[i], albumDataItems);
         }
-        await this.getCommonAlbumItem(albumDataItems)
-        await this.getAlbumItem(MediaConstants.ALBUM_ID_RECYCLE, albumDataItems)
-        return albumDataItems
+        await this.getCommonAlbumItem(albumDataItems);
+        await this.getAlbumItem(MediaConstants.ALBUM_ID_RECYCLE, albumDataItems);
+        return albumDataItems;
     }
 
     private async getCommonAlbumItem(albumDataItems: AlbumDataItem[]): Promise<void> {
-        let fetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(this.selectType, "", this.deviceId)
+        let fetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(this.selectType, "", this.deviceId);
         if (fetchOption == undefined) {
-            return
+            return;
         }
-        fetchOption.selections = `(${fetchOption.selections}) and (${MediaLib.FileKey.ALBUM_NAME} <> ? and ${MediaLib.FileKey.ALBUM_NAME} <> ?)`
-        fetchOption.selectionArgs.push('Camera', 'Screenshots')
-        let albums: MediaLib.Album[] = await mediaModel.getAlbums(fetchOption)
+        fetchOption.selections = `(${fetchOption.selections}) and (${MediaLib.FileKey.ALBUM_NAME} <> ? and ${MediaLib.FileKey.ALBUM_NAME} <> ?)`;
+        fetchOption.selectionArgs.push('Camera', 'Screenshots');
+        let albums: MediaLib.Album[] = await mediaModel.getAlbums(fetchOption);
         for (let i = 0;i < albums.length; i++) {
-            let album: MediaLib.Album = albums[i]
+            let album: MediaLib.Album = albums[i];
             if (this.blackList.indexOf(album.albumId.toString()) >= 0) {
-                continue
+                continue;
             }
-            let fetchFileResult: MediaLib.FetchFileResult = await album.getFileAssets()
+            let fetchFileResult: MediaLib.FetchFileResult = await album.getFileAssets();
             try {
-                let count = fetchFileResult.getCount()
+                let count = fetchFileResult.getCount();
                 if (count == 0) {
-                    continue
+                    continue;
                 }
-                let item = new AlbumDataItem(album.albumId.toString(), count, album.albumName, this.selectType, this.deviceId)
-                item.update(await fetchFileResult.getFirstObject())
-                albumDataItems.push(item)
+                let item = new AlbumDataItem(album.albumId.toString(), count, album.albumName, this.selectType, this.deviceId);
+                item.update(await fetchFileResult.getFirstObject());
+                albumDataItems.push(item);
             } catch (err) {
-                Log.error(TAG, `on err: ${JSON.stringify(err)}`)
+                Log.error(TAG, `on err: ${JSON.stringify(err)}`);
             } finally {
-                fetchFileResult.close()
+                fetchFileResult.close();
             }
         }
     }
 
     private async getAlbumItem(id: string, albumDataItems: AlbumDataItem[]): Promise<void> {
         if (this.blackList.indexOf(id) >= 0) {
-            Log.debug(TAG, `no need as in black list`)
-            return
+            Log.debug(TAG, `no need as in black list`);
+            return;
         }
         if (this.deviceId.length > 0 && (id != MediaConstants.ALBUM_ID_SNAPSHOT && id != MediaConstants.ALBUM_ID_CAMERA)) {
-            Log.debug(TAG, `no need`)
-            return
+            Log.debug(TAG, `no need`);
+            return;
         }
-        let fetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(this.selectType, id, this.deviceId)
+        let fetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(this.selectType, id, this.deviceId);
         if (fetchOption == undefined) {
-            Log.warn(TAG, `${id} fetchOption is undefined`)
-            return
+            Log.warn(TAG, `${id} fetchOption is undefined`);
+            return;
         }
-        let item = await mediaModel.getAllMediaItem(id, fetchOption, false)
+        let item = await mediaModel.getAllMediaItem(id, fetchOption, false);
         if (item.counts == 0) {
-            Log.warn(TAG, `${id} is empty`)
-            return
+            Log.warn(TAG, `${id} is empty`);
+            return;
         }
 
-        let displayName = await getAlbumDisplayName(id)
-        let albumItem: AlbumDataItem = new AlbumDataItem(id, item.counts, displayName, this.selectType, this.deviceId)
-        albumItem.update(item.fileAsset)
-        albumDataItems.push(albumItem)
-        return
+        let displayName = await getAlbumDisplayName(id);
+        let albumItem: AlbumDataItem = new AlbumDataItem(id, item.counts, displayName, this.selectType, this.deviceId);
+        albumItem.update(item.fileAsset);
+        albumDataItems.push(albumItem);
+        return;
     }
 }

@@ -55,11 +55,11 @@ struct ThirdSelectPhotoBrowser {
     // position
     thirdSelectPosition: number;
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
-    private browserDataSource: GroupItemDataSource = new GroupItemDataSource()
+    private browserDataSource: GroupItemDataSource = new GroupItemDataSource();
 
     aboutToAppear(): void {
         Log.info(TAG, 'photoBrowser aboutToAppear');
-        screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000')
+        screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000');
         this.browserBackgroundColor = $r('app.color.black');
         mMultimodalInputManager.registerListener((control: number) => {
             Log.info(TAG, `key control : ${control} index ${this.currentIndex}`);
@@ -75,16 +75,16 @@ struct ThirdSelectPhotoBrowser {
                 this.onBackPress();
             }
         });
-        let params = router.getParams()
+        let params = router.getParams();
         if (params) {
             this.onPhotoChanged(parseInt(params.position.toString()));
             this.thirdSelectTransition = params.transition.toString();
-            this.isFromFa = params.isFromFa && true
-            this.browserDataSource.setSelectType(params.isFromFa ? MediaConstants.SELECT_TYPE_IMAGE : MediaConstants.SELECT_TYPE_ALL)
-            this.browserDataSource.setAlbumId(params.albumId ? params.albumId.toString() : "")
-            this.isMultiPick = params.isMultiPick as boolean
+            this.isFromFa = params.isFromFa && true;
+            this.browserDataSource.setSelectType(params.isFromFa ? MediaConstants.SELECT_TYPE_IMAGE : MediaConstants.SELECT_TYPE_ALL);
+            this.browserDataSource.setAlbumId(params.albumId ? params.albumId.toString() : "");
+            this.isMultiPick = params.isMultiPick as boolean;
         }
-        this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER)
+        this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER);
         if (this.isMultiPick == true) {
             this.totalSelectedCount = this.browserDataSource.getSelectedCount();
         }
@@ -111,7 +111,7 @@ struct ThirdSelectPhotoBrowser {
     }
 
     aboutToDisappear(): void {
-        screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000')
+        screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000');
         this.broadCast.release();
         mMultimodalInputManager.unregisterListener();
     }
@@ -132,7 +132,7 @@ struct ThirdSelectPhotoBrowser {
         if (currentPhoto == undefined) {
             Log.warn(TAG, 'onPhotoChanged, item is undefined');
         } else {
-            this.isSelected = currentPhoto.isSelect
+            this.isSelected = currentPhoto.isSelect;
             Log.info(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri}`);
         }
     }
@@ -143,7 +143,7 @@ struct ThirdSelectPhotoBrowser {
         if (currentPhoto == undefined) {
             return;
         }
-        currentPhoto.setSelect(!currentPhoto.isSelect)
+        currentPhoto.setSelect(!currentPhoto.isSelect);
         this.totalSelectedCount = this.browserDataSource.getSelectedCount();
         Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
     }
@@ -204,7 +204,7 @@ struct ThirdSelectPhotoBrowser {
     }
 
     private setPickResult(): void {
-        Log.debug(TAG, `setPickResult ${this.isFromFa}`)
+        Log.debug(TAG, `setPickResult ${this.isFromFa}`);
         if (this.isFromFa) {
             this.appBroadcast.emit(BroadcastConstants.SAVE_FORM_EDITOR_DATA,
                 [AppStorage.Get(Constants.FORM_ITEM_NAME), AppStorage.Get(Constants.FORM_ITEM_ALBUM_ID),
@@ -231,7 +231,7 @@ struct ThirdSelectPhotoBrowser {
             }
         };
         Log.info(TAG, `terminateSelfWithResult result: ${JSON.stringify(abilityResult)}`);
-        terminateSelfWithResult(abilityResult)
+        terminateSelfWithResult(abilityResult);
     }
 
     pageTransition() {

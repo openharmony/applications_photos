@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import { Constants } from '../constants//Constants'
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { Constants } from '../constants//Constants';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 @CustomDialog
 export struct SettingDialog {

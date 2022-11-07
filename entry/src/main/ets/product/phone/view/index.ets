@@ -28,13 +28,13 @@ import router from '@system.router';
 @Entry
 @Component
 struct IndexPage {
-    private TAG: string = 'IndexPage'
+    private TAG: string = 'IndexPage';
     private preIndex: number = Constants.TIMELINE_PAGE_INDEX;
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @Provide isShow: boolean = false;
     @Provide isSelectedMode: boolean = false;
     @Provide isAlbumSetSelectedMode: boolean = false;
-    private currentIndex: number = this.preIndex // Don't use @
+    private currentIndex: number = this.preIndex; // Don't use @
 
     private tabsController: TabsController = new TabsController();
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
@@ -50,7 +50,7 @@ struct IndexPage {
     aboutToAppear(): void {
         startTrace('indexPageAppearToShow');
         if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
-            AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false)
+            AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false);
             this.currentIndex = Constants.ALBUM_PAGE_INDEX;
         }
         let param = router.getParams();
@@ -68,7 +68,7 @@ struct IndexPage {
     onPageShow() {
         Log.debug(this.TAG, `IndexPage.onPageShow entryFromHap: ${this.entryFromHap}`);
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
-        this.isShow = true
+        this.isShow = true;
          Log.error(this.TAG, `IndexPage.onPageShow: router.clear ${this.jumpSource}`);
         if (this.jumpSource == JumpSourceToMain.CAMERA) {
             router.clear();
@@ -79,7 +79,7 @@ struct IndexPage {
     }
 
     onPageHide() {
-        this.isShow = false
+        this.isShow = false;
     }
 
     onBackPress() {
