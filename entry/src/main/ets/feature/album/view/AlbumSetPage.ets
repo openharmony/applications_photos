@@ -447,8 +447,8 @@ export struct AlbumSetPage {
             }
             .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
             .padding({
-                left: $r('app.float.max_padding_start'),
-                right: $r('app.float.max_padding_end'),
+                left: $r('sys.float.ohos_id_card_margin_start'),
+                right: $r('sys.float.ohos_id_card_margin_end'),
                 top: $r('app.float.album_set_page_padding_top'),
                 bottom: this.isTabBarShow
                     ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
@@ -471,8 +471,8 @@ export struct AlbumSetPage {
         }
         .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
         .padding({
-            left: $r('app.float.max_padding_start'),
-            right: $r('app.float.max_padding_end'),
+            left: $r('sys.float.ohos_id_card_margin_start'),
+            right: $r('sys.float.ohos_id_card_margin_end'),
             top: $r('app.float.album_set_page_padding_top'),
             bottom: this.isTabBarShow
                 ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))

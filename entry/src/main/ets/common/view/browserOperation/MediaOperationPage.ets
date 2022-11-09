@@ -47,6 +47,7 @@ struct MediaOperationPage {
     sourceAlbumId: string;
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
+    private scroller: Scroller = new Scroller();
 
     aboutToAppear(): void {
         let blackList = Array.from(MediaConstants.ALBUM_DISABLE_COPY_LIST)
@@ -161,34 +162,42 @@ struct MediaOperationPage {
     build() {
         Column() {
             MediaOperationActionBar({ onMenuClicked: this.onMenuClicked })
-            List() {
-                LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {
-                    ListItem() {
-                        Column() {
-                            AlbumListCard({ item: item })
-                            if (item.index + 1 < this.albumsDataSource.totalCount()) {
-                                Divider().vertical(false).strokeWidth(1)
-                                    .color($r('sys.color.ohos_id_color_list_separator'))
-                                    .margin({ left: $r('app.float.album_list_card_divider_margin_left') })
-                            }
+            List({ scroller: this.scroller }) {
+                ListItem() {
+                    Flex({
+                        direction: FlexDirection.Column,
+                        justifyContent: FlexAlign.Center,
+                        alignItems: ItemAlign.Center
+                    }) {
+                        List() {
+                            LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {
+                                ListItem() {
+                                    AlbumListCard({ item: item })
+                                }
+                            }, (item: AlbumDataItem) => item ? item.getHashCode() : JSON.stringify(item))
                         }
-                    }
-                }, (item: AlbumDataItem) => item ? item.getHashCode() : JSON.stringify(item))
+                        .divider({
+                            strokeWidth: 1,
+                            startMargin: $r('app.float.album_list_card_divider_margin_left')
+                        })
+                        .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
+                        .backgroundColor($r('sys.color.ohos_id_color_card_bg'))
+                        .padding({
+                            left: $r('app.float.list_card_margin'),
+                            right: $r('app.float.list_card_margin')
+                        })
+                        .width(this.listCardWidth)
+                    }.width('100%')
+                }.width('100%')
             }
-            .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
-            .backgroundColor($r('sys.color.ohos_id_color_card_bg'))
-            .width(this.listCardWidth)
+            .scrollBar(BarState.Auto)
+            .width('100%')
             .margin({
                 top: $r('app.float.album_let_page_padding_top'),
                 left: $r('app.float.max_padding_start'),
                 right: $r('app.float.max_padding_end'),
                 bottom: px2vp(this.leftBlank[3])
             })
-            .padding({
-                left: $r('app.float.list_card_margin'),
-                right: $r('app.float.list_card_margin')
-            })
-
             CustomDialogView()
         }
         .backgroundColor($r('app.color.default_background_color')) // ux: colorSubBackground
