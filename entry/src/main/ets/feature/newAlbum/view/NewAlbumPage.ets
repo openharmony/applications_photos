@@ -273,7 +273,7 @@ export struct NewAlbumPage {
     build() {
         Column() {
             ActionBar({
-                actionBarProp: this.barModel.createActionBar(),
+                actionBarProp: this.barModel.createActionBar(this.isSelectedMode, this.totalSelectedCount),
                 onMenuClicked: this.onMenuClicked
             })
             if (this.isEmpty) {

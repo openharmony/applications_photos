@@ -63,7 +63,7 @@ export struct NewAlbumDialog {
                         .fontSize($r('sys.float.ohos_id_text_size_body1'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
                         .fontColor($r('app.color.text_input_font_color_182431'))
-                        .maxLength(Constants.RENAME_MAX_LENGTH)
+                        .maxLength(Constants.ALBUM_NAME_MAX_LENGTH)
                         .enterKeyType(EnterKeyType.Done)
                         .backgroundColor($r('app.color.transparent'))
                         .onChange((value: string) => {

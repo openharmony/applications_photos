@@ -150,7 +150,7 @@ export struct FindSameNameDialog {
 
             Row() {
                 Image(this.isDoSameAction ? $r('app.media.ic_gallery_public_checkbox_filled')
-                                          : $r('app.media.ic_checkbox_off_overlay'))
+                                          : $r('app.media.ic_checkbox_off_black_bg'))
                     .height($r('app.float.icon_size'))
                     .width($r('app.float.icon_size'))
                     .margin({

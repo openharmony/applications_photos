@@ -667,7 +667,7 @@
     },
     {
       "name": "file_size_location",
-      "value": "Size%s"
+      "value": "Size: %s"
     },
     {
       "name": "file_time_location",
