@@ -177,6 +177,7 @@ export class Constants {
     static readonly RULER_FILL_STYLE_90: string = "#E5FFFFFF";
     static readonly RULER_FILL_STYLE_40: string = '#66FFFFFF';
     static readonly RULER_TEXT_ALIGN: string = 'center';
+    static readonly EDIT_SAVE_TIMEOUT: number = 150;
 
     /**
      * @deprecated
@@ -250,6 +251,7 @@ export class Constants {
     static readonly SCROLL_BAR_SIDE_MIN_GAP: number = 12;
     static readonly SCROLL_MARGIN: number = 24;
     static readonly SCROLL_BAR_VISIBLE_THRESHOLD: number = deviceInfo.deviceType == ('phone' || 'default') ? 29 : 33;
+    static readonly GRID_SCROLL_BAR_VISIBLE_THRESHOLD: number = deviceInfo.deviceType == ('phone' || 'default') ? 25 : 45;
 
     // Column Constants
 

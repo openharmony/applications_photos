@@ -90,7 +90,7 @@ export struct TimelinePage {
         this.appBroadcast.on(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
         this.appBroadcast.on(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
         this.appBroadcast.on(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
         this.appBroadcast.on(BroadcastConstants.RESET_ZERO, (pageNumber: number) => {
             if (pageNumber == Constants.TIMELINE_PAGE_INDEX) {
                 this.scroller.scrollEdge(Edge.Top);
@@ -169,7 +169,7 @@ export struct TimelinePage {
         this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
         this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
         this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
         mediaObserver.unregisterObserver(this.dataObserver);
         this.broadCast.off(null, null);
     }
@@ -231,6 +231,11 @@ export struct TimelinePage {
         if (this.isInCurrentTab) {
             callback(this.onModeChange());
         }
+    }
+
+    private onUpdateFavorAndSelectState(item: MediaDataItem): void {
+       this.onUpdateFavorState(item);
+        this.onSelect();
     }
 
     private onUpdateFavorState(item: MediaDataItem): void {
