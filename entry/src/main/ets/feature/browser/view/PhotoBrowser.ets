@@ -87,7 +87,6 @@ struct PhotoBrowser {
     photoBrowserTransition: string;
     private isDataChanged = true;
     private isFromCard = false;
-    timeoutId: number = 0;
 
     // swiper currentIndex, there may not be onChanged callback during data refresh, so mediaItem cannot be saved
     @Provide('transitionIndex') currentIndex: number = 0;
@@ -651,13 +650,6 @@ struct PhotoBrowser {
     }
 
     private async dataSourceLoadFinish() {
-        this.timeoutId = setTimeout(()=> {
-            this.onPhotoChanged(index);
-            if (this.isToEdit) {
-                this.isToEdit = false;
-                this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
-            }
-        }, Constants.EDIT_SAVE_TIMEOUT)
         let uri: string = this.getCurrentPhoto().uri;
         await this.browserDataSource.reloadGroupItemData(false);
         let index = this.currentIndex;
@@ -668,10 +660,12 @@ struct PhotoBrowser {
             while (item.uri != uri && this.currentIndex + 1 < length) {
                 index++;
                 item = this.getPhotoByIndex(index);
+                if (item == null || item == undefined) {
+                    break;
+                }
                 await item.load(false);
             }
         }
-        clearTimeout(this.timeoutId);
         this.onPhotoChanged(index);
         if (this.isToEdit) {
             this.isToEdit = false;
