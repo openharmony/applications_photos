@@ -66,6 +66,8 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
 
     confirmCallback(): void {
         Log.info(TAG, 'Batch delete confirm');
+				AppStorage.SetOrCreate("isDelete", 1);
+
         // 1. Variable initialization
         this.onOperationEnd = this.menuContext.onOperationEnd;
 
