@@ -118,9 +118,9 @@ class MediaModel {
         try {
             let fetchFileResult: MediaLib.FetchFileResult = await this.media.getFileAssets(fetchOption);
             Log.debug(TAG, `deleteAll getFileAssets`);
-            let getAllObjectTimeOutId = hiSysEventDataQueryTimedOut('deleteAllGetAllObject')
+            let deleteAllGetAllObject = hiSysEventDataQueryTimedOut('deleteAllGetAllObject')
             let fileAssets: MediaLib.FileAsset[] = await fetchFileResult.getAllObject();
-            clearTimeout(getAllObjectTimeOutId);
+            clearTimeout(deleteAllGetAllObject);
             for (let i = 0;i < fileAssets.length; i++) {
                 await fileAssets[i].trash(true);
             }
@@ -337,9 +337,9 @@ class MediaModel {
         startTrace('getAlbums');
         let albums: Array<MediaLib.Album> = undefined;
         try {
-            let getAlbumsTimeOutId = hiSysEventDataQueryTimedOut('getAlbums')
+            let getAlbums = hiSysEventDataQueryTimedOut('getAlbums')
             albums = await this.media.getAlbums(fetchOption);
-            clearTimeout(getAlbumsTimeOutId);
+            clearTimeout(getAlbums);
             Log.info(TAG, `getAlbums albums ${albums.length}`);
         } catch (err) {
             Log.error(TAG, `getAlbums error:${JSON.stringify(err)}`);
