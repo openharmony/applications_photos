@@ -251,7 +251,16 @@ struct PhotoBrowser {
     }
 
     private onDeleteEnd() {
-        this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, []);
+        Log.debug(TAG, `onDeleteEnd start`);
+        AppStorage.SetOrCreate("isDelete", 0);
+        if (this.currentIndex == 0 || AppStorage.Get("isLeftSwiper") == 0) {
+            this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, []);
+        } else {
+            setTimeout(()=> {
+                Log.info(TAG, `onDeleteEnd curIndex : ` + this.currentIndex);
+                this.currentIndex--;
+            },1);
+        }
     }
 
     private setOrientation() {
@@ -499,6 +508,8 @@ struct PhotoBrowser {
     aboutToAppear(): void {
         startTrace('PhotoBrowserAboutToAppear');
         Log.info(TAG, 'photoBrowser aboutToAppear');
+        AppStorage.SetOrCreate("isDelete", 0);
+        AppStorage.SetOrCreate("isLeftSwiper", 0);
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000');
         this.hasAppeared = true;
         mMultimodalInputManager.registerListener((control: number) => {
