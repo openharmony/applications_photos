@@ -31,6 +31,7 @@ export class PhotoEditorManager {
     private item: MediaDataItem = undefined;
     private editors: Array<PhotoEditBase> = undefined;
     private historyManager: ImageFilterStack = undefined;
+    isSaving: boolean = false;
 
     private constructor() {
         this.historyManager = new ImageFilterStack();
@@ -144,10 +145,13 @@ export class PhotoEditorManager {
 
     async save(isReplace: boolean): Promise<number> {
         Log.info(this.TAG, `save enter isReplace = ${isReplace}`);
+        this.isSaving = true;
         const filter = this.editors[this.currentMode].exit();
         if (filter != undefined) {
             this.historyManager.push(filter);
         }
-        return await Save.save(this.item, this.historyManager, isReplace);
+        let result = await Save.save(this.item, this.historyManager, isReplace);
+        this.isSaving = false;
+        return result;
     }
 }

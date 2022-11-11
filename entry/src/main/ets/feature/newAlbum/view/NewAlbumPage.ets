@@ -42,7 +42,7 @@ const TAG = "NewAlbumPage"
 @Component
 export struct NewAlbumPage {
     @State isEmpty: boolean = false;
-    @Provide isHideScrollBar: boolean = true;
+    @State isHideScrollBar: boolean = true;
     @State gridRowCount: number = 0;
     @Provide isSelectedMode: boolean = true;
     @Provide isAllSelected: boolean = false;
@@ -134,6 +134,11 @@ export struct NewAlbumPage {
         }
     }
 
+    onUpdateFavorAndSelectState(item: MediaDataItem): void {
+        this.onUpdateFavorState(item);
+        this.onSelect(this.groupDataSource.getIndexByItem(item));
+    }
+
     onUpdateFavorState(item: MediaDataItem) {
         Log.debug(TAG, 'onUpdateFavorState');
         let index = this.groupDataSource.getIndexByItem(item);
@@ -194,6 +199,7 @@ export struct NewAlbumPage {
         this.groupDataSource.reloadGroupItemData(true).then((isEmpty: boolean) => {
             this.isEmpty = isEmpty
             this.groupDataSource.notifyDataReload()
+            this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
         })
         this.onMenuClicked = this.onMenuClicked.bind(this);
         this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect(index));
@@ -206,7 +212,7 @@ export struct NewAlbumPage {
             this.jumpToThirdPhotoBrowser(name, item)
         })
 
-        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
 
         this.initGridRowCount();
         this.moreMenuList = [];
@@ -267,7 +273,7 @@ export struct NewAlbumPage {
 
     aboutToDisappear(): void {
         this.broadCast.off(null, null);
-        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
     }
 
     build() {
@@ -299,7 +305,7 @@ export struct NewAlbumPage {
                     .rowsGap(Constants.GRID_GUTTER)
                     .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
 
-                    GridScrollBar({ scroller: this.scroller });
+                    GridScrollBar({ scroller: this.scroller, isHideScrollBar: $isHideScrollBar});
                 }
                 .layoutWeight(1)
             }

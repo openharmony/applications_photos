@@ -51,7 +51,7 @@ export struct ThirdSelectPhotoGridPage {
     isFromWallpaper: boolean;
     @Provide maxSelectCount: number = Constants.DEFAULT_MAX_THIRD_SELECT_COUNT;
     @State gridRowCount: number = 0;
-    @Provide isHideScrollBar: boolean = true;
+    @State isHideScrollBar: boolean = true;
     isFromFa: boolean = false;
     scroller: Scroller = new Scroller();
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
@@ -109,6 +109,7 @@ export struct ThirdSelectPhotoGridPage {
             this.isEmpty = isEmpty;
             this.selectedCount = this.groupDataSource.getSelectedCount();
             this.groupDataSource.notifyDataReload();
+            this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
         })
         this.initGridRowCount();
 
@@ -211,7 +212,7 @@ export struct ThirdSelectPhotoGridPage {
             .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
             .layoutWeight(1)
 
-            GridScrollBar({ scroller: this.scroller });
+            GridScrollBar({ scroller: this.scroller, isHideScrollBar: $isHideScrollBar});
         }
         .backgroundColor($r('app.color.default_background_color'))
         .padding({

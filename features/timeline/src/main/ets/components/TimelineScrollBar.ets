@@ -159,17 +159,17 @@ export struct TimelineScrollBar {
                     ? $r('app.float.scroll_press_all_width') : $r('app.float.scroll_bar_small_width'),
                 y: 0
             })
-            .onTouch((event: TouchEvent) => {
-                if (this.dateText == '') {
-                    Log.warn(TAG, `dateText is null`)
-                    this.broadCast.emit(BroadcastConstants.INIT_DATE_TEXT, [])
-                }
-                if (event.type == TouchType.Down) {
-                    this.isClickScrollBar = true;
-                } else if (event.type == TouchType.Up) {
-                    this.isClickScrollBar = false;
-                }
-            })
         }
+        .onTouch((event: TouchEvent) => {
+            if (this.dateText == '') {
+                Log.warn(TAG, `dateText is null`)
+                this.broadCast.emit(BroadcastConstants.INIT_DATE_TEXT, [])
+            }
+            if (event.type == TouchType.Down) {
+                this.isClickScrollBar = true;
+            } else if (event.type == TouchType.Up) {
+                this.isClickScrollBar = false;
+            }
+        })
     }
 }

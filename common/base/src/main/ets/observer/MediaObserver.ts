@@ -18,6 +18,7 @@ import { Log } from '../utils/Log';
 import { MediaConstants } from '../constants/MediaConstants';
 import mediaModel from '../model/MediaModel';
 import { MediaObserverCallback } from '../interface/MediaObserverCallback';
+import { PhotoEditorManager } from '../../../../../../entry/src/main/ets/feature/editor/PhotoEditorManager';
 
 const TAG = "MediaObserver"
 
@@ -47,7 +48,9 @@ class MediaObserver {
             Log.info(TAG, 'registerObserver register media');
             mediaModel.getMediaLibrary().on('imageChange', () => {
                 Log.info(TAG, 'registerObserver on image');
-                this.sendNotify(MediaConstants.MEDIA_TYPE_IMAGE);
+                if (!PhotoEditorManager.getInstance().isSaving) {
+                    this.sendNotify(MediaConstants.MEDIA_TYPE_IMAGE);
+                }
             })
             mediaModel.getMediaLibrary().on('videoChange', () => {
                 Log.info(TAG, 'registerObserver on video');

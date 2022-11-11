@@ -17,7 +17,7 @@
 export struct GridScrollBar {
     scroller: Scroller;
     @State isClickScrollBar: boolean = false;
-    @Consume isHideScrollBar: boolean;
+    @Link isHideScrollBar: boolean;
 
     build() {
         ScrollBar({ scroller: this.scroller, direction: ScrollBarDirection.Vertical,

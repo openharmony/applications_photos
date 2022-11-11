@@ -661,22 +661,27 @@ struct PhotoBrowser {
     }
 
     private async dataSourceLoadFinish() {
-        if (this.isToEdit) {
-            this.isToEdit = false;
-            this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
-        }
         let uri: string = this.getCurrentPhoto().uri;
         await this.browserDataSource.reloadGroupItemData(false);
         let index = this.currentIndex;
         let item: MediaDataItem = this.getPhotoByIndex(index);
-        await item.load(false);
-        let length = this.browserDataSource.totalCount();
-        while (item.uri != uri && this.currentIndex + 1 < length) {
-            index++;
-            item = this.getPhotoByIndex(index);
+        if (item != null && item != undefined) {
             await item.load(false);
+            let length = this.browserDataSource.totalCount();
+            while (item.uri != uri && this.currentIndex + 1 < length) {
+                index++;
+                item = this.getPhotoByIndex(index);
+                if (item == null || item == undefined) {
+                    break;
+                }
+                await item.load(false);
+            }
         }
         this.onPhotoChanged(index);
+        if (this.isToEdit) {
+            this.isToEdit = false;
+            this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
+        }
     }
 
     onPageShow() {

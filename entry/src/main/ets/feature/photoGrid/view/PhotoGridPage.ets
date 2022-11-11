@@ -53,7 +53,7 @@ const TAG = "PhotoGridPage"
 @Entry
 @Component
 export struct PhotoGridPage {
-    @Provide isHideScrollBar: boolean = true;
+    @State isHideScrollBar: boolean = true;
     @Provide isEmpty: boolean = false;
     @State gridRowCount: number = 0;
     @Provide isSelectedMode: boolean = false;
@@ -245,6 +245,7 @@ export struct PhotoGridPage {
             })
         } else {
             animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.groupDataSource.dataReload(true));
+            this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
         }
     }
 
@@ -303,7 +304,10 @@ export struct PhotoGridPage {
         Log.info(TAG, `onDeleteEnd`);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
-        animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.groupDataSource.dataRemove())
+        animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => {
+            this.groupDataSource.dataRemove();
+            this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
+        })
     }
 
     /**
@@ -359,6 +363,11 @@ export struct PhotoGridPage {
             Log.info(TAG, 'onInActive');
             this.isActive = false;
         }
+    }
+
+    private onUpdateFavorAndSelectState(item: MediaDataItem): void {
+        this.onUpdateFavorState(item);
+        this.onSelect();
     }
 
     private onUpdateFavorState(item: MediaDataItem): void {
@@ -437,7 +446,7 @@ export struct PhotoGridPage {
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
             Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
         });
-        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
 
         if (this.albumInfo.deviceId) {
             Log.info(TAG, `deviceId size: ${this.albumInfo.deviceId}`);
@@ -494,6 +503,7 @@ export struct PhotoGridPage {
                 Log.info(TAG, `onMediaLibDataChange load finish`);
                 this.isEmpty = isEmpty;
                 this.groupDataSource.notifyDataReload();
+                this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
             })
         } else if (this.isActive) {
             this.groupDataSource.dataRemove();
@@ -568,7 +578,7 @@ export struct PhotoGridPage {
     aboutToDisappear(): void {
         Log.info(TAG, `aboutToDisappear`);
         this.broadCast.off(null, null);
-        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
         this.appBroadcast.off(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
         mediaObserver.unregisterObserver(this.dataObserver);
     }
@@ -606,7 +616,7 @@ export struct PhotoGridPage {
                     .rowsGap(Constants.GRID_GUTTER)
                     .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
 
-                    GridScrollBar({ scroller: this.scroller });
+                    GridScrollBar({ scroller: this.scroller, isHideScrollBar: $isHideScrollBar});
                 }.layoutWeight(1)
                 .padding({
                     bottom: ((this.isSelectedMode || (this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE)) && !this.isHorizontal) ? Constants.ActionBarHeight : 0
