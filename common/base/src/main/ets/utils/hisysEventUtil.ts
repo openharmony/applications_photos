@@ -17,7 +17,7 @@ import { Log } from './Log';
 
 const TAG = "hisysEventUtil"
 
-export function hiSysEventDataQueryTimedOut(interfaceName: string): number{
+export function hiSysEventDataQueryTimedOut(interfaceName: string): number {
        let timeOutId = setTimeout(() => {
             hiSysEvent.write({
                 domain: "PHOTOS_APP",
@@ -34,5 +34,4 @@ export function hiSysEventDataQueryTimedOut(interfaceName: string): number{
             });
 	   }, 1000);
 	   return timeOutId;
-
 }
