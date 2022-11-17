@@ -669,7 +669,7 @@ struct PhotoBrowser {
                 this.isToEdit = false;
                 this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
             }
-        });
+        }, 150);
         await this.browserDataSource.reloadGroupItemData(false);
         for(let i = 0;i < this.browserDataSource.groupDataItem.length;i++) {
            await this.browserDataSource.groupDataItem[i].load(false);
