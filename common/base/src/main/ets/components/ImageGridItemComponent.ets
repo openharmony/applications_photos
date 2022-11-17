@@ -129,9 +129,6 @@ export struct ImageGridItemComponent {
                         this.isError = true
                     }
                 })
-                .sharedTransition(this.pageName + this.mediaItem.getHashCode(), {
-                    duration: AnimationConstants.SHARE_TRANSITION_DURATION
-                })
 
             if (this.mediaItem.mediaType == MediaLib.MediaType.VIDEO) {
                 Column()

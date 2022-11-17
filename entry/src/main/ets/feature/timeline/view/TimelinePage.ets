@@ -51,6 +51,7 @@ import {
 } from '../../../../../../../features/timeline/src/main/ets/vm/TimelineItemDataSource';
 import { TimelineDataItem } from '../../../../../../../features/timeline/src/main/ets/data/TimelineDataItem';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
+import { PhotoEditorManager } from '../../editor/PhotoEditorManager';
 
 const TAG = "TimelinePage"
 // PHOTO Page
@@ -320,8 +321,10 @@ export struct TimelinePage {
 
     onMediaLibDataChange(changeType) {
         Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
-        this.isMediaLibDataChanged = true
-        this.loadItem()
+        if (!PhotoEditorManager.getInstance().isSaving) {
+            this.isMediaLibDataChanged = true
+            this.loadItem()
+        }
     }
 
     private loadItem() {

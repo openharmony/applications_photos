@@ -57,6 +57,7 @@ import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDat
 import { getAlbumDisplayName } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
 import { startAbility, terminateSelf } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
 import mediaDataItemCache from '@ohos/base/src/main/ets/data/MediaDataItemCache';
+import { PhotoEditorManager } from '../../editor/PhotoEditorManager';
 // page of large photo
 
 const TAG = "PhotoBrowser"
@@ -77,6 +78,7 @@ struct PhotoBrowser {
     @Provide isPullingDown: boolean = false;
     @Provide pageFrom: number = Constants.ENTRY_FROM.NORMAL;
     @Provide canSwipe: boolean = false;
+    private timeoutId: number = 0;
     @State @Watch('currentShowChange') currentShow: boolean = true;
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('TimelinePageIndex') TimelinePageIndex: number = Constants.INVALID;
@@ -661,23 +663,19 @@ struct PhotoBrowser {
     }
 
     private async dataSourceLoadFinish() {
-        let uri: string = this.getCurrentPhoto().uri;
-        await this.browserDataSource.reloadGroupItemData(false);
-        let index = this.currentIndex;
-        let item: MediaDataItem = this.getPhotoByIndex(index);
-        if (item != null && item != undefined) {
-            await item.load(false);
-            let length = this.browserDataSource.totalCount();
-            while (item.uri != uri && this.currentIndex + 1 < length) {
-                index++;
-                item = this.getPhotoByIndex(index);
-                if (item == null || item == undefined) {
-                    break;
-                }
-                await item.load(false);
+        setTimeout(()=> {
+            this.onPhotoChanged(this.currentIndex);
+            if (this.isToEdit) {
+                this.isToEdit = false;
+                this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
             }
+        });
+        await this.browserDataSource.reloadGroupItemData(false);
+        for(let i = 0;i < this.browserDataSource.groupDataItem.length;i++) {
+           await this.browserDataSource.groupDataItem[i].load(false);
         }
-        this.onPhotoChanged(index);
+        clearTimeout(this.timeoutId);
+        this.onPhotoChanged(this.currentIndex);
         if (this.isToEdit) {
             this.isToEdit = false;
             this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
@@ -746,7 +744,9 @@ struct PhotoBrowser {
 
     onMediaLibDataChange(changeType) {
         Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
-        this.dataSourceLoadFinish();
+        if (!PhotoEditorManager.getInstance().isSaving) {
+            this.dataSourceLoadFinish();
+        }
     }
 
     async routerGridPaged() {
