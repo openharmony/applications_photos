@@ -42,8 +42,10 @@ export struct PhotoSwiper {
                 duration: AnimationConstants.DELETE_ANIMATE_DURATION,
                 onFinish: () => {
                 } }, () => {
-                this.dataSource.dataRemove();
-                this.broadCast.emit(Constants.DATA_SIZE_CHANGED,[this.dataSource.totalCount()]);
+                if (this.dataSource != null && this.dataSource != undefined) {
+                    this.dataSource.dataRemove();
+                    this.broadCast.emit(Constants.DATA_SIZE_CHANGED,[this.dataSource.totalCount()]);
+                }
             })
         });
 

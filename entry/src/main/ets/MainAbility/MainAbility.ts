@@ -168,7 +168,7 @@ export default class MainAbility extends Ability {
         let entryFrom = AppStorage.Get(Constants.ENTRY_FROM_HAP);
         let permission = AppStorage.Get(Constants.PERMISSION_STATUS);
         Log.info(this.TAG, `thirdRouterPage entryFromHap: ${entryFrom} permission: ${permission}`);
-        if (entryFrom == Constants.ENTRY_FROM_NONE || !permission) {
+        if (entryFrom == Constants.ENTRY_FROM_NONE) {
             return;
         }
         if (entryFrom == Constants.ENTRY_FROM_CAMERA) {

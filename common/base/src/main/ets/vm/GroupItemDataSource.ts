@@ -134,7 +134,7 @@ export class GroupItemDataSource extends ItemDataSource {
 
     dataRemove() {
         for (let i = this.groupDataItem.length - 1;i >= 0; i--) {
-            if (this.groupDataItem[i].isDeleted()) {
+            if (this.groupDataItem[i] != undefined && this.groupDataItem[i].isDeleted()) {
                 this.groupDataItem.splice(i, 1);
                 super.notifyDataDelete(i);
             }

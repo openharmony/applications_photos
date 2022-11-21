@@ -296,11 +296,13 @@ export struct CustomDialogView {
         this.broadCast.on(BroadcastConstants.UPDATE_PROGRESS,
             function (progress: number, currentCount: number) {
                Log.info(this.TAG, `UPDATE_PROGRESS ${progress}`);
+                self.deleteProgress = progress;
                 self.deleteProgressParam.deleteProgress = progress;
                 self.deleteProgressParam.currentCount = currentCount;
                 if (progress == Constants.PROGRESS_MAX) {
                    Log.info(this.TAG, 'Update progress 100%');
                     self.progressDialogController.close();
+                    self.deleteProgress = 0;
                     self.deleteProgressParam.deleteProgress = 0;
                     self.deleteProgressDialogController.close();
                     self.deleteProgressParam.currentCount = 0;
@@ -382,6 +384,7 @@ export struct CustomDialogView {
                 self.deleteProgressParam.currentCount = 0;
                 self.deleteProgressParam.totalCount = totalCount;
                 self.deleteProgressParam.message = message;
+                self.deleteProgress = 0;
                 self.deleteProgressParam.deleteProgress = 0;
                 self.deleteProgressDialogController.open();
             });
