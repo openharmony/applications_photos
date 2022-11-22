@@ -19,7 +19,7 @@ import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import {
     AlbumGridItemTraditionalStyle
-} from '../../../../../../../features/distributed/src/main/ets/components/albumgriditemtraditionalstyle';
+} from '../../../../../../../features/distributed/src/main/ets/components/AlbumGridItemTraditionalStyle';
 import { Constants } from '../../../common/model/common/Constants';
 import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';

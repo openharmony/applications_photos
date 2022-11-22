@@ -25,7 +25,7 @@ import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { PhotoSwiper } from '../../../../../../../features/browser/src/main/ets/components/PhotoSwiper';
-import mMultimodalInputManager from '@ohos/base/src/main/ets/manager/multimodalinputmanager';
+import mMultimodalInputManager from '@ohos/base/src/main/ets/manager/MultimodalInputManager';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';

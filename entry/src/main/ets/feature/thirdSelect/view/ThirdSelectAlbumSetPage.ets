@@ -15,7 +15,7 @@
 
 import router from '@system.router';
 import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
-import { ThirdAlbumGridItem } from '../../../../../../../features/third/src/main/ets/components/thirdalbumgriditem';
+import { ThirdAlbumGridItem } from '../../../../../../../features/third/src/main/ets/components/ThirdAlbumGridItem';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';

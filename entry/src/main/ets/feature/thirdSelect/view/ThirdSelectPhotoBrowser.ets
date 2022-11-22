@@ -25,7 +25,7 @@ import broadcastManager from '../../../../../../../common/base/src/main/ets/mana
 import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
 import { PhotoSwiper } from '../../../../../../../features/browser/src/main/ets/components/PhotoSwiper';
 import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
-import mMultimodalInputManager from '../../../../../../../common/base/src/main/ets/manager/multimodalinputmanager';
+import mMultimodalInputManager from '../../../../../../../common/base/src/main/ets/manager/MultimodalInputManager';
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';

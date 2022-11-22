@@ -22,7 +22,7 @@ import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import {
     GotoPhotosMenuOperation
-} from '../../../../../../../features/browser/src/main/ets/operation/gotophotosmenuoperation';
+} from '../../../../../../../features/browser/src/main/ets/operation/GotoPhotosMenuOperation';
 import { BatchDeleteMenuOperation } from '@ohos/base/src/main/ets/operation/BatchDeleteMenuOperation';
 import { BatchRecoverMenuOperation } from '@ohos/base/src/main/ets/operation/BatchRecoverMenuOperation';
 import { ClearRecycleMenuOperation } from '@ohos/base/src/main/ets/operation/ClearRecycleMenuOperation';
@@ -48,7 +48,7 @@ import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
 import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
-import mMultimodalInputManager from '@ohos/base/src/main/ets/manager/multimodalinputmanager';
+import mMultimodalInputManager from '@ohos/base/src/main/ets/manager/MultimodalInputManager';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
