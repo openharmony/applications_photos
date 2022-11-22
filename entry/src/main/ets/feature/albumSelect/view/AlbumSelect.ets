@@ -18,7 +18,7 @@ import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDat
 import router from '@system.router';
 import {
     AlbumSelectGridItemNewStyle
-} from '../../../../../../../features/selectalbum/src/main/ets/components/AlbumSelectGridItemNewStyle';
+} from '../../../../../../../features/selectAlbum/src/main/ets/components/AlbumSelectGridItemNewStyle';
 import { Constants } from '../../../common/model/common/Constants';
 import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
 import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
