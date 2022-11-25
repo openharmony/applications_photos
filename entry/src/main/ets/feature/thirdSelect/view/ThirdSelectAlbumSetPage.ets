@@ -22,6 +22,7 @@ import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarPr
 import { Constants } from '../../../common/model/common/Constants';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
+import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
@@ -184,7 +185,7 @@ export struct ThirdSelectAlbumSetPage {
 
             Stack() {
                 if (this.isEmpty) {
-                    NoPhotoComponent({ title: $r('app.string.title_no_albums') })
+                    NoPhotoIndexComponent({ index: Constants.ALBUM_PAGE_INDEX })
                 }
                 Grid(this.scroller) {
                     LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {

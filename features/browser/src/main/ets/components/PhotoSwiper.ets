@@ -69,6 +69,7 @@ export struct PhotoSwiper {
                 return item ? item.getHashCode() : JSON.stringify(item)
             })
         }
+        .itemSpace('8vp')
         .gesture(PanGesture({
             direction: PanDirection.Horizontal
         }))
