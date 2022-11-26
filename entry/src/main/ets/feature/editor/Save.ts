@@ -1,4 +1,3 @@
-import { PhotoEditorManager } from './PhotoEditorManager';
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +21,7 @@ import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { ImageFilterStack } from './ImageFilterStack';
 import { DateUtil } from './utils/DateUtil';
 import { Loader } from './Loader';
+import { PhotoEditorManager } from './PhotoEditorManager';
 
 const TAG = "Save"
 
