@@ -1,3 +1,4 @@
+import { PhotoEditorManager } from './PhotoEditorManager';
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,6 +55,7 @@ export class Save {
                 return -1;
             }
             await fileIO.write(fd, buffer);
+            PhotoEditorManager.getInstance().isSaving = false;
             Log.info(TAG, 'write jpg file end.');
             let newId = fileAsset.id;
             await mediaModel.closeAsset(fd, fileAsset);

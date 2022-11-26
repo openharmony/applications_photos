@@ -670,7 +670,12 @@ struct PhotoBrowser {
                 this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
             }
         }, 150);
+        let newMediaDataItems: MediaDataItem[] = this.browserDataSource.groupDataItem;
         await this.browserDataSource.reloadGroupItemData(false);
+        if (this.isToEdit) {
+            newMediaDataItems[this.currentIndex] = this.browserDataSource.groupDataItem[0];
+            this.browserDataSource.groupDataItem = newMediaDataItems;
+        }
         for(let i = 0;i < this.browserDataSource.groupDataItem.length;i++) {
            await this.browserDataSource.groupDataItem[i].load(false);
         }
