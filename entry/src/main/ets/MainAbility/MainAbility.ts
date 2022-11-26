@@ -39,7 +39,7 @@ export default class MainAbility extends Ability {
     private static readonly ACTION_URI_PHOTO_DETAIL = 'photodetail';
     private browserDataSource : GroupItemDataSource = new GroupItemDataSource();
 
-    async onCreate(want, launchParam) {
+    onCreate(want, launchParam) {
         Log.info(this.TAG, 'Application onCreate');
         startTrace('onCreate');
         // Ability is creating, initialize resources for this ability
@@ -48,10 +48,11 @@ export default class MainAbility extends Ability {
         let action = want.parameters;
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
-            await this.browserDataSource.reloadGroupItemData(false);
-            if (this.browserDataSource.groupDataItem.length == 0) {
-                this.onDestroy();
-            }
+            this.browserDataSource.reloadGroupItemData(false).then(()=> {
+                if (this.browserDataSource.groupDataItem.length == 0) {
+                    this.onDestroy();
+                }
+            })
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {

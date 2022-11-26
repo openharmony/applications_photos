@@ -663,13 +663,6 @@ struct PhotoBrowser {
     }
 
     private async dataSourceLoadFinish() {
-        setTimeout(()=> {
-            this.onPhotoChanged(this.currentIndex);
-            if (this.isToEdit) {
-                this.isToEdit = false;
-                this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
-            }
-        }, 150);
         let newMediaDataItems: MediaDataItem[] = this.browserDataSource.groupDataItem;
         await this.browserDataSource.reloadGroupItemData(false);
         if (this.isToEdit) {
@@ -679,7 +672,6 @@ struct PhotoBrowser {
         for(let i = 0;i < this.browserDataSource.groupDataItem.length;i++) {
            await this.browserDataSource.groupDataItem[i].load(false);
         }
-        clearTimeout(this.timeoutId);
         this.onPhotoChanged(this.currentIndex);
         if (this.isToEdit) {
             this.isToEdit = false;
