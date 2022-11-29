@@ -61,6 +61,7 @@ export struct PhotoSwiper {
                 if (item) {
                     PhotoItem({
                         item: item,
+                        thumbnail: `${item.uri}/thumbnail/${item.width}/${item.height}`,
                         pageName: this.photoSwiperTransition
                     })
                     .zIndex(item && item.index == this.currentIndex ? 2 : 1)
