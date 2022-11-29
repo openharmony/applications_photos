@@ -62,20 +62,20 @@ export struct ImageGridItemComponent {
             return `${uri}/thumbnail/${imageWidth}/${imageHeight}`;
         }
         let width = 0;
-        let heigth = 0;
+        let height = 0;
         if(orientation != null && (orientation == MediaConstants.ROTATE_ONCE || orientation == MediaConstants.ROTATE_THIRD)) {
             let temp = imageWidth;
             imageWidth = imageHeight;
             imageHeight = temp;
         }
         if(imageHeight < imageWidth) {
-            heigth = MediaConstants.DEFAULT_THUMBNAIL_SIZE;
-            width = Math.round(heigth * imageWidth / imageHeight);
+            height = MediaConstants.DEFAULT_THUMBNAIL_SIZE;
+            width = Math.round(height * imageWidth / imageHeight);
         }else {
             width = MediaConstants.DEFAULT_THUMBNAIL_SIZE;
-            heigth = Math.round(width * imageHeight / imageWidth);
+            height = Math.round(width * imageHeight / imageWidth);
         }
-        return `${uri}/thumbnail/${width}/${heigth}`;
+        return `${uri}/thumbnail/${width}/${height}`;
     }
 
     private resetShow() {
