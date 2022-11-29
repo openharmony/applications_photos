@@ -381,7 +381,8 @@ export struct PhotoItem {
         .height('100%')
         .sharedTransition(this.item.index == this.updateTransition ? this.pageName + this.item.getHashCode() : Constants.DEFAULT_TRANSITION_ID, {
             duration: Constants.SHARE_TRANSITION_DURATION,
-            zIndex: 1
+            zIndex: 1,
+            curve:Curves.cubicBezier(0.2, 0.0, 0.2, 1.0)
         })
     }
 
