@@ -104,11 +104,11 @@ export struct PhotoItem {
         if(info == null || info == undefined) {
             return 1;
         }
-        if(info.width == 0 || info.heigth == 0) {
+        if(info.width == 0 || info.height == 0) {
             return 1;
         }
         let orientation = info.orientation || 0;
-        return orientation == 0 || orientation == 180 ? info.width / info.heigth : info.heigth / info.width;
+        return orientation == 0 || orientation == 180 ? info.width / info.height : info.height / info.width;
     }
 
     aboutToDisappear(): void {
