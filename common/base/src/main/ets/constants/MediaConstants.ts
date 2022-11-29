@@ -35,6 +35,7 @@ export class MediaConstants {
     static readonly ROTATE_THIRD = 270;
     static readonly ROTATE_AROUND = 360;
     static readonly DEFAULT_SIZE = 256;
+    static readonly DEFAULT_THUMBNAIL_SIZE = 1920;
     // select type
     static readonly SELECT_TYPE_ALL = 0;
     static readonly SELECT_TYPE_VIDEO = 1;

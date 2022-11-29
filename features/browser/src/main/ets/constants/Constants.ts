@@ -98,8 +98,8 @@ export class Constants {
 
     // overScale animation duration
     static readonly OVER_SCALE_ANIME_DURATION = 500;
-    static readonly SHARE_TRANSITION_DURATION = 200;
-    static readonly PAGE_SHOW_ANIMATION_DURATION = 200;
+    static readonly SHARE_TRANSITION_DURATION = 300;
+    static readonly PAGE_SHOW_ANIMATION_DURATION = 300;
     static readonly RESERVED_DIGITS = 6;
     static readonly CENTER_DEFAULT = 0.5;
     static readonly NUMBER_2 = 2;

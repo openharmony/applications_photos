@@ -17,12 +17,14 @@ import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import { ActionBarMode, ActionBarColorMode } from '../../../common/view/browserOperation/ActionBarMode';
+import Curves from '@ohos.curves'
 
 @Component
 export struct PhotoBrowserActionBar {
     @Consume menuList: Action[];
     onMenuClicked: Function;
     isVideoPage: boolean = false;
+    static SHARE_DURATION: number = 300;
 
     private createActionBar(): ActionBarProp {
         let actionBarProp: ActionBarProp = new ActionBarProp();
@@ -44,6 +46,12 @@ export struct PhotoBrowserActionBar {
                 isVideoPage: this.isVideoPage
             })
         }
+        .sharedTransition('ActionBar', {
+            duration: PhotoBrowserActionBar.SHARE_DURATION,
+            type: SharedTransitionEffectType.Static,
+            zIndex: 2,
+            curve:Curves.cubicBezier(0.2, 0.0, 0.2, 1.0)
+        })
         .markAnchor({ x: '0%', y: '0%' })
         .position({ x: '0%', y: '0%' })
     }
