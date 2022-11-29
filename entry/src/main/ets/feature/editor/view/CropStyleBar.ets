@@ -12,16 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { Logger } from '../utils/Logger'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { ActionButton } from './ActionButton'
-import { ActionButtonInfo, ID } from './MainMenuInfo'
-import { RefreshActionMenu, ActionChangedEvent } from './RefreshMenu'
-import { Constants } from '../../../common/model/common/Constants'
-import { CropRatioType } from '../crop/CropType'
-import { PhotoEditMode } from '../base/PhotoEditType'
-import { PhotoEditCrop } from '../crop/PhotoEditCrop'
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { ActionButton } from './ActionButton';
+import { ActionButtonInfo, ID } from './MainMenuInfo';
+import { RefreshActionMenu, ActionChangedEvent } from './RefreshMenu';
+import { Constants } from '../../../common/model/common/Constants';
+import { CropRatioType } from '../crop/CropType';
+import { PhotoEditMode } from '../base/PhotoEditType';
+import { PhotoEditCrop } from '../crop/PhotoEditCrop';
 
 @Component
 export struct CropStyleBar {
@@ -30,7 +28,6 @@ export struct CropStyleBar {
     @Consume('selected') selectedMode: number;
     @Consume isCropReset: boolean;
     @Consume cropEdit: PhotoEditCrop;
-    private log: Logger = new Logger('CropStyleBar');
     private menuClick: any = undefined;
     private resetClick: any = undefined;
     mainMenuList: Array<ActionButtonInfo> = [

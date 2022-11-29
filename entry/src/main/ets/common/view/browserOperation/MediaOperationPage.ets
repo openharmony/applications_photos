@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 import router from '@system.router';
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
-import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType'
-import { MediaOperationActionBar } from './MediaOperationActionBar'
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType';
+import { MediaOperationActionBar } from './MediaOperationActionBar';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { AlbumSetNewMenuOperation } from '@ohos/base/src/main/ets/operation/AlbumSetNewMenuOperation';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import { AlbumListCard } from '../../../../../../../features/mediaoperation/src/main/ets/components/AlbumListCard';
+import { AlbumListCard } from '../../../../../../../features/mediaOperation/src/main/ets/components/AlbumListCard';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { Action } from './Action';
-import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain'
+import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
 import { CustomDialogView } from '../dialog/CustomDialogView';
 import screenManager, { ColumnSize } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
@@ -47,12 +47,13 @@ struct MediaOperationPage {
     sourceAlbumId: string;
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
+    private scroller: Scroller = new Scroller();
 
     aboutToAppear(): void {
         let blackList = Array.from(MediaConstants.ALBUM_DISABLE_COPY_LIST)
         let param = router.getParams();
         if (param) {
-            logInfo(TAG, `router getParams ${JSON.stringify(param)}`);
+            Log.info(TAG, `router getParams ${JSON.stringify(param)}`);
             this.pageType = param.pageType.toString();
             if (param.albumId) {
                 this.sourceAlbumId = param.albumId.toString();
@@ -85,7 +86,7 @@ struct MediaOperationPage {
     }
 
     onMenuClicked(action: Action) {
-        logInfo(TAG, `onMenuClicked, actionID: ${action.actionID}`);
+        Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
 
         switch (action) {
             case Action.CANCEL:
@@ -103,7 +104,7 @@ struct MediaOperationPage {
     }
 
     createNewAlbum() {
-        logInfo(TAG, 'createNewAlbum');
+        Log.info(TAG, 'createNewAlbum');
         let menuContext = new MenuContext();
         this.onOperationStart = this.onOperationStart.bind(this);
         this.onOperationEnd = this.onOperationEnd.bind(this);
@@ -124,7 +125,7 @@ struct MediaOperationPage {
     }
 
     updateListCardWidth(): void {
-        logInfo(TAG, `updateListCardWidth start ${this.screenColumns}`);
+        Log.info(TAG, `updateListCardWidth start ${this.screenColumns}`);
         if (this.screenColumns == ColumnSize.COLUMN_FOUR) {
             this.listCardWidth = screenManager.getColumnsWidth(ColumnSize.COLUMN_FOUR);
         } else if (this.screenColumns == ColumnSize.COLUMN_EIGHT) {
@@ -132,21 +133,21 @@ struct MediaOperationPage {
         } else if (this.screenColumns == ColumnSize.COLUMN_TWELVE) {
             this.listCardWidth = screenManager.getColumnsWidth(ColumnSize.COLUMN_EIGHT);
         } else {
-            logWarn(TAG, 'screenColumns is not init');
+            Log.warn(TAG, 'screenColumns is not init');
         }
-        logInfo(TAG, `updateListCardWidth ${this.listCardWidth}`);
+        Log.info(TAG, `updateListCardWidth ${this.listCardWidth}`);
     }
 
     // Callback when the page is in the foreground
     onActive() {
         if (!this.isActive) {
-            logInfo(TAG, 'onActive');
+            Log.info(TAG, 'onActive');
             this.isActive = true;
         }
     }
 
     onBackPress() {
-        logInfo(TAG, 'onBackPress');
+        Log.info(TAG, 'onBackPress');
         router.back({
             uri: '',
             params: {}
@@ -161,34 +162,42 @@ struct MediaOperationPage {
     build() {
         Column() {
             MediaOperationActionBar({ onMenuClicked: this.onMenuClicked })
-            List() {
-                LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {
-                    ListItem() {
-                        Column() {
-                            AlbumListCard({ item: item })
-                            if (item.index + 1 < this.albumsDataSource.totalCount()) {
-                                Divider().vertical(false).strokeWidth(1)
-                                    .color($r('sys.color.ohos_id_color_list_separator'))
-                                    .margin({ left: $r('app.float.album_list_card_divider_margin_left') })
-                            }
+            List({ scroller: this.scroller }) {
+                ListItem() {
+                    Flex({
+                        direction: FlexDirection.Column,
+                        justifyContent: FlexAlign.Center,
+                        alignItems: ItemAlign.Center
+                    }) {
+                        List() {
+                            LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {
+                                ListItem() {
+                                    AlbumListCard({ item: item })
+                                }
+                            }, (item: AlbumDataItem) => item ? item.getHashCode() : JSON.stringify(item))
                         }
-                    }
-                }, (item: AlbumDataItem) => item ? item.getHashCode() : JSON.stringify(item))
+                        .divider({
+                            strokeWidth: 1,
+                            startMargin: $r('app.float.album_list_card_divider_margin_left')
+                        })
+                        .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
+                        .backgroundColor($r('sys.color.ohos_id_color_card_bg'))
+                        .padding({
+                            left: $r('app.float.list_card_margin'),
+                            right: $r('app.float.list_card_margin')
+                        })
+                        .width(this.listCardWidth)
+                    }.width('100%')
+                }.width('100%')
             }
-            .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
-            .backgroundColor($r('sys.color.ohos_id_color_card_bg'))
-            .width(this.listCardWidth)
+            .scrollBar(BarState.Auto)
+            .width('100%')
             .margin({
                 top: $r('app.float.album_let_page_padding_top'),
                 left: $r('app.float.max_padding_start'),
                 right: $r('app.float.max_padding_end'),
                 bottom: px2vp(this.leftBlank[3])
             })
-            .padding({
-                left: $r('app.float.list_card_margin'),
-                right: $r('app.float.list_card_margin')
-            })
-
             CustomDialogView()
         }
         .backgroundColor($r('app.color.default_background_color')) // ux: colorSubBackground

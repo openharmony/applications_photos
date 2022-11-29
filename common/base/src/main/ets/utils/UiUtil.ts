@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 import prompt from '@system.prompt';
-import { logDebug } from './LoggerUtils';
+import { Log } from '../utils/Log';
 import screenManager from '../manager/ScreenManager';
 
 const TAG = "UiUtil"
 const TOAST_DURATION = 3000;
 export function showToast(message: string) {
     let naviBarHeight = screenManager.getNaviBarHeight()
-    logDebug(TAG, `showToast: ${message}`);
+    Log.debug(TAG, `showToast: ${message}`);
     prompt.showToast({
         message: message,
         duration: TOAST_DURATION,

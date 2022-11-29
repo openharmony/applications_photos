@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { TrashMediaDataItem } from '../data/TrashMediaDataItem';
-import { logInfo, logWarn } from '../utils/LoggerUtils'
+import { Log } from '../utils/Log';
 import { ItemDataSource } from '../vm/ItemDataSource';
 import { MenuContext } from './MenuContext'
 import { ProcessMenuOperation } from './ProcessMenuOperation';
@@ -26,21 +26,21 @@ export class BatchRecoverMenuOperation extends ProcessMenuOperation {
         super(menuContext);
     }
 
-    doAction(): void{
-        logInfo(TAG, 'delete doAction');
+    doAction(): void {
+        Log.info(TAG, 'delete doAction');
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
 
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.count = this.menuContext.items.length
+            this.count = this.menuContext.items.length;
         } else {
             this.count = dataSource.getSelectedCount();
         }
         if (this.count <= 0) {
-            logWarn(TAG, 'count <= 0, return');
+            Log.warn(TAG, 'count <= 0, return');
             return;
         }
 
@@ -53,20 +53,20 @@ export class BatchRecoverMenuOperation extends ProcessMenuOperation {
 
 
         if (dataSource == null) {
-            this.items = this.menuContext.items
+            this.items = this.menuContext.items;
         } else {
-            this.items = dataSource.getSelectedItems()
+            this.items = dataSource.getSelectedItems();
         }
-        this.processOperation()
+        this.processOperation();
     }
 
     // Delete a batch of data
     requestOneBatchOperation(): void {
-        let item = this.items[this.currentBatch] as TrashMediaDataItem
+        let item = this.items[this.currentBatch] as TrashMediaDataItem;
         item.onRecover().then(() => {
-            this.currentBatch++
+            this.currentBatch++;
             this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [this.getExpectProgress(), this.currentBatch]);
-            this.cyclicOperation()
+            this.cyclicOperation();
         })
     }
 }

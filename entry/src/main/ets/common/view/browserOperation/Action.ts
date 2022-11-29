@@ -16,6 +16,7 @@
 enum ActionID {
     NONE,
     OK,
+    OK_DISABLE,
     CANCEL,
     BACK,
     INFO,
@@ -75,6 +76,12 @@ export class Action {
         id: ActionID.OK,
         iconRes: $r('app.media.ic_gallery_public_ok'),
         textRes: $r('app.string.action_ok')
+    });
+    public static OK_DISABLE = new Action({
+        id: ActionID.OK,
+        iconRes: $r('app.media.ic_gallery_public_ok'),
+        textRes: $r('app.string.action_ok'),
+        fillColor: $r('app.color.icon_disabled_color')
     });
     public static CANCEL = new Action({
         id: ActionID.CANCEL,
@@ -220,7 +227,7 @@ export class Action {
     });
     public static EDIT_INVALID = new Action({
         id: ActionID.EDIT_INVALID,
-        iconRes: $r('app.media.ic_gallery_public_edit'),
+        iconRes: $r('app.media.ic_gallery_public_edit_disable'),
         textRes: $r('app.string.action_edit'),
         fillColor: $r('app.color.icon_disabled_color')
     });

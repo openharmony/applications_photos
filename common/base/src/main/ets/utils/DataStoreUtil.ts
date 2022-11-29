@@ -12,100 +12,100 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import preferences from '@ohos.data.preferences'
-import { logDebug, logInfo, logWarn, logError } from './LoggerUtils'
+import preferences from '@ohos.data.preferences';
+import { Log } from '../utils/Log';
 import createOrGet from './SingleInstanceUtils';
 
 const TAG = "DataStoreUtil"
 
 class DataStoreUtil {
     private preferences: preferences.Preferences = undefined;
-    private static readonly PREFERENCES_KEY_MY_FORM_STORE = 'myFormStore'
+    private static readonly PREFERENCES_KEY_MY_FORM_STORE = 'myFormStore';
 
     constructor() {
     }
 
     public async init(): Promise<void> {
-        logDebug(TAG, 'init start!');
+        Log.debug(TAG, 'init start!');
         if (this.preferences != undefined) {
-            logInfo(TAG, `init preferences before`);
-            return
+            Log.info(TAG, `init preferences before`);
+            return;
         }
         try {
-            let context = globalThis.applicationContext
-            this.preferences = await preferences.getPreferences(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE)
-            logInfo(TAG, `init preferences ${preferences}`)
+            let context = globalThis.applicationContext;
+            this.preferences = await preferences.getPreferences(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE);
+            Log.info(TAG, `init preferences ${preferences}`);
         } catch (err) {
-            logError(TAG, `init err ${err}`);
+            Log.error(TAG, `init err ${err}`);
         }
-        logDebug(TAG, 'init end!');
+        Log.debug(TAG, 'init end!');
     }
 
     public async getData(key: string, defValue) {
-        logDebug(TAG, 'getData start!');
+        Log.debug(TAG, 'getData start!');
         if (this.preferences == undefined) {
-            logWarn(TAG, `getData preferences is undefined`);
+            Log.warn(TAG, `getData preferences is undefined`);
             return defValue;
         }
         let temValue = defValue;
         try {
-            temValue = await this.preferences.get(key, defValue)
-            logDebug(TAG, "The value of startup is " + temValue)
+            temValue = await this.preferences.get(key, defValue);
+            Log.debug(TAG, "The value of startup is " + temValue);
         } catch (err) {
-            logError(TAG, `Get the value failed with err: ${err}`)
+            Log.error(TAG, `Get the value failed with err: ${err}`);
         }
         return temValue;
     }
 
     public async putData(key: string, value) {
-        logDebug(TAG, 'putData start!');
+        Log.debug(TAG, 'putData start!');
         if (this.preferences == undefined) {
-            logWarn(TAG, 'putData preferences is undefined');
-            return
+            Log.warn(TAG, 'putData preferences is undefined');
+            return;
         }
 
         try {
-            await this.preferences.put(key, value)
-            logDebug(TAG, 'Put the value successfully.')
+            await this.preferences.put(key, value);
+            Log.debug(TAG, 'Put the value successfully.');
         } catch (err) {
-            logError(TAG, `Put the value failed with err: ${err}`);
+            Log.error(TAG, `Put the value failed with err: ${err}`);
         }
     }
 
     public async delData(key: string) {
-        logDebug(TAG, 'delData start!');
+        Log.debug(TAG, 'delData start!');
         if (this.preferences == undefined) {
-            logWarn(TAG, `delData preferences is undefined`);
+            Log.warn(TAG, `delData preferences is undefined`);
         }
         try {
-            await this.preferences.delete(key)
-            logDebug(TAG, "Delete the value successfully.");
+            await this.preferences.delete(key);
+            Log.debug(TAG, "Delete the value successfully.");
         } catch (err) {
-            logError(TAG, `Delete the value failed with err: ${err}`);
+            Log.error(TAG, `Delete the value failed with err: ${err}`);
         }
     }
 
     public async flush() {
-        logDebug(TAG, 'flush start!');
+        Log.debug(TAG, 'flush start!');
         if (this.preferences == undefined) {
-            logWarn(TAG, `flush preferences is undefined`);
+            Log.warn(TAG, `flush preferences is undefined`);
         }
         await this.preferences.flush();
     }
 
     public async hasData(key: string) {
-        logDebug(TAG, `hasData start! preferences ${this.preferences}`);
+        Log.debug(TAG, `hasData start! preferences ${this.preferences}`);
         let ret = false;
         if (this.preferences == undefined) {
-            logWarn(TAG, `hasData preferences is undefined`);
+            Log.warn(TAG, `hasData preferences is undefined`);
             return ret;
         }
         try {
-            ret = await this.preferences.has(key)
-            logDebug(TAG, "hasData the value successfully.");
+            ret = await this.preferences.has(key);
+            Log.debug(TAG, "hasData the value successfully.");
         } catch (err) {
-            ret = false
-            logError(TAG, `hasData the value failed with err: ${err}`);
+            ret = false;
+            Log.error(TAG, `hasData the value failed with err: ${err}`);
         }
         return ret;
     }

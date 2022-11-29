@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Logger } from '../../utils/Logger'
-import { DialogCallback } from '../../model/common/DialogUtil'
-import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { Constants } from '../../model/common/Constants'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { DialogCallback } from '../../model/common/DialogUtil';
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { Constants } from '../../model/common/Constants';
 import { showToast } from '../../../../../../../common/base/src/main/ets/utils/UiUtil';
 import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
 
 @CustomDialog
 export struct RenameDialog {
+    private TAG: string = 'RenameDialog'
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
@@ -32,10 +33,9 @@ export struct RenameDialog {
     @State dividerColor: Resource = $r('app.color.dialog_divider_h_color_182431');
     @State dividerWidth: string = '1vp';
     private inputName: string = '';
-    private logger: Logger = new Logger('RenameDialog');
 
     aboutToAppear(): void {
-        this.logger.info('aboutToAppear');
+        Log.info(this.TAG, 'aboutToAppear');
         this.inputName = this.renameFileName;
         this.isNull = this.inputName === '';
         if (this.inputName.length === Constants.RENAME_MAX_LENGTH) {
@@ -68,7 +68,7 @@ export struct RenameDialog {
                         .enterKeyType(EnterKeyType.Done)
                         .backgroundColor($r('app.color.transparent'))
                         .onChange((value: string) => {
-                            this.logger.info(`TextInput onChange : ${value}`)
+                            Log.info(this.TAG, `TextInput onChange : ${value}`)
                             this.inputName = value
                             if (value.length === Constants.RENAME_MAX_LENGTH) {
                                 getResourceString($r('app.string.Maximum_length_reached')).then((message: string) => {

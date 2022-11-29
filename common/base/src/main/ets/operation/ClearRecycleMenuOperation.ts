@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 import { ItemDataSource } from '../vm/ItemDataSource';
-import { MenuContext } from './MenuContext'
+import { MenuContext } from './MenuContext';
 import { BatchDeleteMenuOperation } from './BatchDeleteMenuOperation';
-import { logInfo, logWarn } from '../utils/LoggerUtils'
+import { Log } from '../utils/Log';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 
 const TAG = "ClearRecycleMenuOperation"
@@ -25,33 +25,34 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
         super(menuContext);
     }
 
-    doAction(): void{
-        logInfo(TAG, 'delete doAction');
+    doAction(): void {
+        Log.info(TAG, 'delete doAction');
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
 
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.count = this.menuContext.items.length
+            this.count = this.menuContext.items.length;
         } else {
+            //@ts-ignore
             this.count = dataSource.getItems().length;
         }
         if (this.count <= 0) {
-            logWarn(TAG, 'count <= 0, return');
+            Log.warn(TAG, 'count <= 0, return');
             return;
         }
 
         this.confirmCallback = this.confirmCallback.bind(this);
         this.cancelCallback = this.cancelCallback.bind(this);
 
-        let resource: Resource = this.getDeleteMessageResource(dataSource)
+        let resource: Resource = this.getDeleteMessageResource(dataSource);
         this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [resource, this.confirmCallback, this.cancelCallback]);
     }
 
     confirmCallback(): void {
-        logInfo(TAG, 'Clear Recycle confirm');
+        Log.info(TAG, 'Clear Recycle confirm');
         // 1. Variable initialization
         this.onOperationEnd = this.menuContext.onOperationEnd;
 
@@ -65,18 +66,19 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
         // 3. selectManager gets the URI of the data and starts processing deletion in the callback
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.items = this.menuContext.items
+            this.items = this.menuContext.items;
         } else {
-            this.items = dataSource.getItems()
+            //@ts-ignore
+            this.items = dataSource.getItems();
         }
-        this.processOperation()
+        this.processOperation();
     }
 
-    getDeleteMessageResource(dataSource: ItemDataSource): Resource{
+    getDeleteMessageResource(dataSource: ItemDataSource): Resource {
         if (dataSource && dataSource.isSelect()) {
-            return $r('app.string.recycleAlbum_clear_message')
+            return $r('app.string.recycleAlbum_clear_message');
         } else {
-            return $r('app.plural.recycleAlbum_delete_message', this.count)
+            return $r('app.plural.recycleAlbum_delete_message', this.count);
         }
     }
 }

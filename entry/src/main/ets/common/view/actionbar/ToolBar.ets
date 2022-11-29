@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import screenManager, { ColumnSize } from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { ToolBarButton } from './ToolBarButton'
-import { Constants } from '../../model/common/Constants'
-import { ActionBarProp } from '../browserOperation/ActionBarProp'
-import { Action } from '../browserOperation/Action'
-import { ActionBarMode } from '../browserOperation/ActionBarMode'
+import screenManager, { ColumnSize } from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { ToolBarButton } from './ToolBarButton';
+import { Constants } from '../../model/common/Constants';
+import { ActionBarProp } from '../browserOperation/ActionBarProp';
+import { Action } from '../browserOperation/Action';
+import { ActionBarMode } from '../browserOperation/ActionBarMode';
 
 export class MenuItem {
     value: string;

@@ -13,34 +13,34 @@
  * limitations under the License.
  */
 
-import { Logger } from '../../utils/Logger'
-import { ActionBarProp } from '../browserOperation/ActionBarProp'
-import { Action } from '../browserOperation/Action'
-import { ActionBarButton } from './ActionBarButton'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { ActionBarProp } from '../browserOperation/ActionBarProp';
+import { Action } from '../browserOperation/Action';
+import { ActionBarButton } from './ActionBarButton';
 
 // MenuPanel，Right menu button panel
 @Component
 export struct MenuPanel {
+    private TAG: string = 'MenuPanel';
     @State actionBarProp: ActionBarProp = new ActionBarProp();
     @State menuList: Action[] = [];
     onMenuClicked: Function;
-    logger: Logger = new Logger('MenuPanel');
 
     aboutToAppear(): void {
-        this.logger.info('aboutToAppear.');
+        Log.info(this.TAG, 'aboutToAppear.');
         this.onActionBarPropChanged();
     }
 
     private onActionBarPropChanged(): void {
         this.menuList = this.actionBarProp.getMenuList();
-        this.logger.info(`onActionBarPropChanged, menu's size: ${this.menuList.length}`);
+        Log.info(this.TAG, `onActionBarPropChanged, menu's size: ${this.menuList.length}`);
         this.menuList.forEach((menu: Action) => {
-            this.logger.info(`ActionId: ${menu.actionID}`)
+            Log.info(this.TAG, `ActionId: ${menu.actionID}`);
         })
     }
 
     private onBuildDone(): void {
-        this.logger.info(`onBuildDone, menu's size: ${this.menuList.length}`);
+        Log.info(this.TAG, `onBuildDone, menu's size: ${this.menuList.length}`);
     }
 
     build() {

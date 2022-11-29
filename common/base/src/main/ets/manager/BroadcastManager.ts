@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import { logInfo } from '../utils/LoggerUtils'
-import { Broadcast } from '../utils/Broadcast'
+import { Log } from '../utils/Log';
+import { Broadcast } from '../utils/Broadcast';
 import createOrGet from '../utils/SingleInstanceUtils';
 
 const TAG = "BroadcastManager"
@@ -24,7 +24,7 @@ export class BroadcastManager {
     private appBroadcast: Broadcast;
 
     constructor() {
-        logInfo(TAG, 'constructor');
+        Log.info(TAG, 'constructor');
         this.appBroadcast = new Broadcast();
     }
 

@@ -13,31 +13,32 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { Logger } from './utils/Logger'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { MediaDataItem } from '../../../../../../common/base/src/main/ets/data/MediaDataItem';
-import { Size } from '../../common/model/common/DataTypes'
-import { PixelMapWrapper } from './base/PixelMapWrapper'
-import { MathUtils } from './crop/MathUtils'
-import { CropAngle } from './crop/CropType'
-import { computeSampleSize } from '../../../../../../common/base/src/main/ets/utils/ImageUtil'
-import screenManager from '../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { Size } from '../../common/model/common/DataTypes';
+import { PixelMapWrapper } from './base/PixelMapWrapper';
+import { MathUtils } from './crop/MathUtils';
+import { CropAngle } from './crop/CropType';
+import { computeSampleSize } from '../../../../../../common/base/src/main/ets/utils/ImageUtil';
+import screenManager from '../../../../../../common/base/src/main/ets/manager/ScreenManager';
+
+const TAG = "Loader"
 
 export class Loader {
-    private static logger: Logger = new Logger('Loader');
     private static readonly MIN_PIXEL_MAP_SIZE: number = 1024;
 
     private static getPixelMapPreviewSize(size: Size) {
         let width = screenManager.getWinWidth();
         let height = screenManager.getWinHeight();
-        this.logger.debug(`picture real size: ${size.width} ${size.height}`);
+        Log.debug(TAG, `picture real size: ${size.width} ${size.height}`);
         let scale = computeSampleSize(size.width, size.height, Loader.MIN_PIXEL_MAP_SIZE, width * height * 2);
         size.width = Math.ceil(size.width / scale);
         size.height = Math.ceil(size.height / scale);
-        this.logger.debug(`picture scale: ${scale} size: ${JSON.stringify(size)}`);
+        Log.debug(TAG, `picture scale: ${scale} size: ${JSON.stringify(size)}`);
     }
 
     static async loadPixelMapWrapper(mediaItem: MediaDataItem, isPreview: boolean = false): Promise<PixelMapWrapper> {
-        this.logger.debug(`Photo: loadPixelMap id = ${mediaItem.id}`);
+        Log.debug(TAG, `Photo: loadPixelMap id = ${mediaItem.id}`);
         let fileAsset: MediaLib.FileAsset = await mediaItem.loadFileAsset()
         let size = {
             width: fileAsset.width,
@@ -47,11 +48,11 @@ export class Loader {
 
         let thumbnail = await fileAsset.getThumbnail(size);
         let wrapper = new PixelMapWrapper(thumbnail, px2vp(size.width), px2vp(size.height));
-        this.logger.info(`Photo: loadPixelMap: size[${JSON.stringify(size)}] wrapper[${JSON.stringify(wrapper)}]`);
+        Log.info(TAG, `Photo: loadPixelMap: size[${JSON.stringify(size)}] wrapper[${JSON.stringify(wrapper)}]`);
 
         let orientation = mediaItem.orientation || 0;
         await Loader.translatePixelMap(wrapper, orientation);
-        this.logger.info(`Photo: loadPixelMap: final wrapper[${JSON.stringify(wrapper)}]`);
+        Log.info(TAG, `Photo: loadPixelMap: final wrapper[${JSON.stringify(wrapper)}]`);
         return wrapper;
     }
 

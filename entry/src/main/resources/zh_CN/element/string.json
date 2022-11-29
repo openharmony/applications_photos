@@ -82,7 +82,7 @@
     },
     {
       "name": "action_ok",
-      "value": "确认"
+      "value": "确定"
     },
     {
       "name": "action_cancel",
@@ -666,7 +666,7 @@
     },
     {
       "name": "file_size_location",
-      "value": "文件大小%s"
+      "value": "文件大小: %s"
     },
     {
       "name": "file_time_location",

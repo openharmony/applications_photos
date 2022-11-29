@@ -12,132 +12,142 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { logDebug, logInfo, logWarn } from '../utils/LoggerUtils'
-import { GroupDataImpl } from '../model/GroupDataImpl'
-import { ItemDataSource } from '../vm/ItemDataSource'
+import { Log } from '../utils/Log';
+import { GroupDataImpl } from '../model/GroupDataImpl';
+import { ItemDataSource } from '../vm/ItemDataSource';
 import { MediaDataItem } from '../data/MediaDataItem';
 
 const TAG = "GroupItemDataSource"
 
 export class GroupItemDataSource extends ItemDataSource {
-    groupDataItem: MediaDataItem[] = []
-    private groupDataImpl: GroupDataImpl = new GroupDataImpl()
+    groupDataItem: MediaDataItem[] = [];
+    private groupDataImpl: GroupDataImpl = new GroupDataImpl();
 
     constructor() {
         super()
     }
 
     setSelectType(selectType: number) {
-        this.groupDataImpl.setSelectType(selectType)
+        this.groupDataImpl.setSelectType(selectType);
     }
 
     setAlbumId(id: string) {
-        logInfo(TAG, `setAlbumId: ${id}`)
-        this.groupDataImpl.setAlbumId(id)
+        Log.info(TAG, `setAlbumId: ${id}`);
+        this.groupDataImpl.setAlbumId(id);
     }
 
     setDeviceId(id: string) {
-        logInfo(TAG, `setDeviceId: ${id}`)
-        this.groupDataImpl.setDeviceId(id)
+        Log.info(TAG, `setDeviceId: ${id}`);
+        this.groupDataImpl.setDeviceId(id);
     }
 
     totalCount(): number {
-        return this.groupDataItem.length
+        return this.groupDataItem.length;
     }
 
-    getIndexByItem(item: MediaDataItem): number{
-        let index = -1
-        let length = this.groupDataItem.length
+    getIndexByItem(item: MediaDataItem): number {
+        let index = -1;
+        let length = this.groupDataItem.length;
         for (let i = 0;i < length; i++) {
             if (this.groupDataItem[i].uri == item.uri) {
                 index = i;
-                break
+                break;
             }
         }
-        return index
+        return index;
     }
 
-    getData(index: number): any{
+    getData(index: number): any {
         if (index < 0 || index >= this.groupDataItem.length) {
-            logWarn(TAG, `${index}/${this.groupDataItem.length}`)
-            return undefined
+            Log.warn(TAG, `${index}/${this.groupDataItem.length}`);
+            return undefined;
         }
-        this.groupDataItem[index].index = index
-        return this.groupDataItem[index]
+        this.groupDataItem[index].index = index;
+        return this.groupDataItem[index];
     }
 
     isSelect(): boolean {
-        let isSelect = true
+        let isSelect = true;
         for (let i = 0;i < this.groupDataItem.length; i++) {
             if (!this.groupDataItem[i].isSelect) {
-                isSelect = false
-                break
+                isSelect = false;
+                break;
             }
         }
-        return isSelect
+        return isSelect;
     }
 
     getSelectedCount(): number {
-        let count = 0
+        let count = 0;
         this.groupDataItem.forEach((item: MediaDataItem) => {
             if (item.isSelect) {
-                count++
+                count++;
             }
         })
-        return count
+        return count;
     }
 
-    getItems(): MediaDataItem[]{
-        let items: MediaDataItem[] = []
+    getItems(): MediaDataItem[] {
+        let items: MediaDataItem[] = [];
         this.groupDataItem.forEach((item: MediaDataItem) => {
-            items.push(item)
+            items.push(item);
         })
-        return items
+        return items;
     }
 
-    getSelectedItems(): MediaDataItem[]{
-        let items: MediaDataItem[] = []
-        this.groupDataItem.forEach((item: MediaDataItem) => {
-            if (item.isSelect) {
-                items.push(item)
-            }
-        })
-        return items
-    }
-
-    getSelectedUris(): string[]{
-        let uris: string[] = []
+    getSelectedItems(): MediaDataItem[] {
+        let items: MediaDataItem[] = [];
         this.groupDataItem.forEach((item: MediaDataItem) => {
             if (item.isSelect) {
-                uris.push(item.uri)
+                items.push(item);
             }
         })
-        return uris
+        return items;
+    }
+
+    getSelectedUris(): string[] {
+        let uris: string[] = [];
+        this.groupDataItem.forEach((item: MediaDataItem) => {
+            if (item.isSelect) {
+                uris.push(item.uri);
+            }
+        })
+        return uris;
     }
 
     setSelect(isSelect: boolean) {
         this.groupDataItem.forEach((item: MediaDataItem) => {
-            item.setSelect(isSelect)
+            item.setSelect(isSelect);
         })
     }
 
     async reloadGroupItemData(isGrid: boolean): Promise<boolean> {
-        this.groupDataItem = await this.groupDataImpl.reloadGroupItemData(isGrid)
-        return this.groupDataItem.length == 0
+        this.groupDataItem = await this.groupDataImpl.reloadGroupItemData(isGrid);
+        return this.groupDataItem.length == 0;
     }
 
     dataReload(isGrid: boolean) {
         this.reloadGroupItemData(isGrid).then((isEmpty: boolean) => {
-            this.notifyDataReload()
+            this.notifyDataReload();
         })
     }
 
     dataRemove() {
         for (let i = this.groupDataItem.length - 1;i >= 0; i--) {
-            if (this.groupDataItem[i].isDeleted()) {
-                this.groupDataItem.splice(i, 1)
-                super.notifyDataDelete(i)
+            if (this.groupDataItem[i] != undefined && this.groupDataItem[i].isDeleted()) {
+                this.groupDataItem.splice(i, 1);
+                super.notifyDataDelete(i);
             }
+        }
+    }
+
+    dataDelete(uri: string) {
+        const mediaDataItemIndex = this.groupDataItem.findIndex((item: MediaDataItem) => {
+            return item.uri === uri;
+        })
+        if (mediaDataItemIndex != -1 && this.groupDataItem[mediaDataItemIndex].isDeleted()) {
+            this.groupDataItem.splice(mediaDataItemIndex, 1);
+            super.notifyDataDelete(mediaDataItemIndex);
         }
     }
 }

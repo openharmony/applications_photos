@@ -13,17 +13,15 @@
  * limitations under the License.
  */
 
-import { Logger } from '../../utils/Logger'
-import { ActionBarProp } from '../browserOperation/ActionBarProp'
-import { Action } from '../browserOperation/Action'
-import { ActionBarButton } from './ActionBarButton'
+import { ActionBarProp } from '../browserOperation/ActionBarProp';
+import { Action } from '../browserOperation/Action';
+import { ActionBarButton } from './ActionBarButton';
 
 // Large picture button for dynamic refresh
 @Component
 export struct DetailMenuPanel {
     @Consume actionBarProp: ActionBarProp;
     onMenuClicked: Function;
-    private logger: Logger = new Logger('DetailMenuPanel');
 
     build() {
         Row() {

@@ -13,21 +13,21 @@
  * limitations under the License.
  */
 
-import Matrix4 from '@ohos.matrix4'
-import router from '@system.router'
+import Matrix4 from '@ohos.matrix4';
+import router from '@system.router';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem'
-import { EventPipeline } from '../utils/EventPipeline'
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import { logDebug, logInfo, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils'
-import { Constants } from '../constants/Constants'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
+import { EventPipeline } from '../utils/EventPipeline';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Constants } from '../constants/Constants';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { RouterConstants } from '@ohos/base/src/main/ets/constants/RouterConstants';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import { LoadingPanel } from './LoadingPanel';
-import { VideoIcon } from './VideoIcon'
-import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants'
-import { getThumbnail } from '../model/ThumbnailModel'
+import { VideoIcon } from './VideoIcon';
+import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
+import { getThumbnail } from '../model/ThumbnailModel';
 
 const TAG = "PhotoItem"
 
@@ -54,7 +54,7 @@ export struct PhotoItem {
     private preItem = { rotate: 0, height: 0, width: 0 };
 
     onTransitionChange() {
-        logInfo(TAG, `onTransitionChange, ${this.updateTransition} ${this.item.index}`);
+        Log.info(TAG, `onTransitionChange, ${this.updateTransition} ${this.item.index}`);
         this.updateThumbnail()
         if (this.updateTransition == this.item.index) {
             this.broadCast.emit(Constants.PHOTO_SHOW_STATE, [!this.showError]);
@@ -72,11 +72,11 @@ export struct PhotoItem {
             this.matrix = Matrix4.identity().copy();
             this.eventPipeline && this.eventPipeline.reset();
         }
-        logInfo(TAG, `onTransitionChange end, ${this.updateTransition} ${this.item.index}`);
+        Log.info(TAG, `onTransitionChange end, ${this.updateTransition} ${this.item.index}`);
     }
 
     aboutToAppear(): void {
-        logInfo(TAG, `aboutToAppear`);
+        Log.info(TAG, `aboutToAppear`);
         this.eventPipeline = new EventPipeline(this.broadCast, this.item);
         this.matrix = Matrix4.identity().copy();
         this.firstLoad = true;
@@ -84,7 +84,7 @@ export struct PhotoItem {
         this.item.load(true).then(() => {
             this.isLoading = false
             this.updateThumbnail()
-            logInfo(TAG, `aboutToAppear loadFinish thumbnail ${this.thumbnail}`);
+            Log.info(TAG, `aboutToAppear loadFinish thumbnail ${this.thumbnail}`);
         })
         // register event handling
         this.broadCast.on(Constants.TOUCH_EVENT + this.item.uri, (matrix: any) => {
@@ -92,18 +92,18 @@ export struct PhotoItem {
         });
 
         this.broadCast.on(Constants.DIRECTION_CHANGE + this.item.uri, (direction: PanDirection) => {
-            logInfo(TAG, `direction: ${direction}`);
+            Log.info(TAG, `direction: ${direction}`);
             this.photoItemDirection = direction;
         });
 
         this.broadCast.on(Constants.ANIMATION_EVENT + this.item.uri, (animationOption: any, animationEndMatrix: any) => {
-            logInfo(TAG, `animationOption: ${JSON.stringify(animationOption)}`);
+            Log.info(TAG, `animationOption: ${JSON.stringify(animationOption)}`);
             this.animationOption = animationOption;
             this.animationEndMatrix = animationEndMatrix;
         });
         this.onTransitionChange();
         this.onViewDataChanged();
-        logInfo(TAG, `photoItem aboutToAppear ${this.item.uri} end`);
+        Log.info(TAG, `photoItem aboutToAppear ${this.item.uri} end`);
     }
 
     private updateThumbnail() {
@@ -113,17 +113,17 @@ export struct PhotoItem {
     }
 
     aboutToDisappear(): void {
-        logInfo(TAG, `aboutToDisappear ${this.item.uri}/${this.thumbnail}`);
+        Log.info(TAG, `aboutToDisappear ${this.item.uri}/${this.thumbnail}`);
         // clean up event registration
         this.broadCast.off(Constants.TOUCH_EVENT + this.item.uri, null);
         this.broadCast.off(Constants.DIRECTION_CHANGE + this.item.uri, null);
         this.broadCast.off(Constants.ANIMATION_EVENT + this.item.uri, null);
         this.isPullingDown = false;
-        logInfo(TAG, `aboutToDisappear ${this.item.uri}/${this.thumbnail} end`);
+        Log.info(TAG, `aboutToDisappear ${this.item.uri}/${this.thumbnail} end`);
     }
 
     onViewDataChanged(): void {
-        logInfo(TAG, `onViewDataChanged start`);
+        Log.info(TAG, `onViewDataChanged start`);
         if ((this.preItem.rotate == this.item.orientation && this.preItem.height == this.item.imgHeight &&
         this.preItem.width == this.item.imgWidth) && !this.firstLoad) {
             this.preItem.rotate = this.item.orientation;
@@ -147,7 +147,7 @@ export struct PhotoItem {
                 x: scale,
                 y: scale
             }).copy();
-            logDebug(TAG, `onViewDataChanged scale:${scale}, componentSize:${componentWidth}x${componentHeight}\
+            Log.debug(TAG, `onViewDataChanged scale:${scale}, componentSize:${componentWidth}x${componentHeight}\
                 width: ${this.item.imgWidth}, height: ${this.item.imgHeight}`);
             this.eventPipeline && this.eventPipeline.setDefaultScale(scale);
         } else {
@@ -160,7 +160,7 @@ export struct PhotoItem {
         this.preItem.rotate = this.item.orientation;
         this.preItem.width = this.item.imgWidth;
         this.preItem.height = this.item.imgHeight;
-        logDebug(TAG, `onViewDataChanged thumbnail:${JSON.stringify(this.thumbnail)}`);
+        Log.debug(TAG, `onViewDataChanged thumbnail:${JSON.stringify(this.thumbnail)}`);
     }
 
     build() {
@@ -179,7 +179,7 @@ export struct PhotoItem {
                     .autoResize(false)
                     .onComplete(() => {
                         startTrace(`PhotoItemComplete_${this.item.index}`);
-                        logInfo(TAG, `onComplete finish index: ${this.item.index}, uri: ${this.thumbnail}.`);
+                        Log.info(TAG, `onComplete finish index: ${this.item.index}, uri: ${this.thumbnail}.`);
                         this.showError = false;
                         this.isLoading = false;
                         if (this.updateTransition == this.item.index) {
@@ -188,7 +188,7 @@ export struct PhotoItem {
                         finishTrace(`PhotoItemComplete_${this.item.index}`);
                     })
                     .onError(() => {
-                        logError(TAG, `image show error ${this.thumbnail} ${this.item.width} ${this.item.height}`);
+                        Log.error(TAG, `image show error ${this.thumbnail} ${this.item.width} ${this.item.height}`);
                         if (this.thumbnail.length == 0 || this.item.width == 0 || this.item.height == 0) {
                             this.updateThumbnail()
                             return
@@ -214,14 +214,14 @@ export struct PhotoItem {
                 distance: 1
             })
                 .onActionStart((event: GestureEvent) => {
-                    logDebug(TAG, 'PinchGesture onActionStart');
+                    Log.debug(TAG, 'PinchGesture onActionStart');
                     startTrace("PinchGesture onActionStart")
                     if (this.isPullingDown) {
-                        logDebug(TAG, 'Not allow to pinch when pullingDown');
+                        Log.debug(TAG, 'Not allow to pinch when pullingDown');
                         finishTrace("PinchGesture onActionStart")
                         return;
                     }
-                    logDebug(TAG, `PinchGesture onActionStart scale:\
+                    Log.debug(TAG, `PinchGesture onActionStart scale:\
                             ${event.scale}, cx: ${event.pinchCenterX}, cy: ${event.pinchCenterY}`);
                     if (this.item.mediaType == MediaLib.MediaType.IMAGE) {
                         this.eventPipeline.onScaleStart(event.scale, event.pinchCenterX, event.pinchCenterY);
@@ -229,10 +229,10 @@ export struct PhotoItem {
                     finishTrace("PinchGesture onActionStart")
                 })
                 .onActionUpdate((event) => {
-                    logDebug(TAG, `PinchGesture onActionUpdate scale: ${event.scale}`);
+                    Log.debug(TAG, `PinchGesture onActionUpdate scale: ${event.scale}`);
                     startTrace("PinchGesture onActionUpdate")
                     if (this.isPullingDown) {
-                        logDebug(TAG, 'Not allow to pinch when pullingDown');
+                        Log.debug(TAG, 'Not allow to pinch when pullingDown');
                         finishTrace("PinchGesture onActionUpdate")
                         return;
                     }
@@ -242,10 +242,10 @@ export struct PhotoItem {
                     finishTrace("PinchGesture onActionUpdate")
                 })
                 .onActionEnd(() => {
-                    logDebug(TAG, 'PinchGesture onActionEnd');
+                    Log.debug(TAG, 'PinchGesture onActionEnd');
                     startTrace("PinchGesture onActionEnd")
                     if (this.isPullingDown) {
-                        logDebug(TAG, 'Not allow to pinch when pullingDown');
+                        Log.debug(TAG, 'Not allow to pinch when pullingDown');
                         finishTrace("PinchGesture onActionEnd")
                         return;
                     }
@@ -272,21 +272,21 @@ export struct PhotoItem {
             })
                 .onActionStart((event: GestureEvent) => {
                     startTrace("PanGesture onActionStart")
-                    logDebug(TAG, `PanGesture start offsetX:\
+                    Log.debug(TAG, `PanGesture start offsetX:\
                                     ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)}`);
                     this.eventPipeline.onMoveStart(vp2px(event.offsetX), vp2px(event.offsetY));
                     finishTrace("PanGesture onActionStart")
                 })
                 .onActionUpdate((event: GestureEvent) => {
                     startTrace("PanGesture onActionUpdate")
-                    logDebug(TAG, `PanGesture update offsetX:\
+                    Log.debug(TAG, `PanGesture update offsetX:\
                                     ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)}`);
                     this.eventPipeline.onMove(vp2px(event.offsetX), vp2px(event.offsetY));
                     finishTrace("PanGesture onActionUpdate")
                 })
                 .onActionEnd((event: GestureEvent) => {
                     startTrace("PanGesture onActionEnd")
-                    logDebug(TAG, `PanGesture end offsetX:\
+                    Log.debug(TAG, `PanGesture end offsetX:\
                                     ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)}`);
                     this.eventPipeline.onMoveEnd(vp2px(event.offsetX), vp2px(event.offsetY));
                     if (this.animationOption != null) {
@@ -309,16 +309,16 @@ export struct PhotoItem {
             })
                 .onAction((event: GestureEvent) => {
                     if (this.isPullingDown) {
-                        logDebug(TAG, 'Not allow to double tap when pullingDown');
+                        Log.debug(TAG, 'Not allow to double tap when pullingDown');
                         return;
                     }
-                    logDebug(TAG, `onDoubleTap event: ${JSON.stringify(event)}`);
+                    Log.debug(TAG, `onDoubleTap event: ${JSON.stringify(event)}`);
                     if (this.item.mediaType == MediaLib.MediaType.VIDEO) {
                         return;
                     }
                     this.eventPipeline.onDoubleTap(event.fingerList[0].localX, event.fingerList[0].localY);
                     if (this.animationOption != null) {
-                        logDebug(TAG, 'TapGesture animateTo start');
+                        Log.debug(TAG, 'TapGesture animateTo start');
                         animateTo({
                             duration: this.animationOption.duration,
                             curve: this.animationOption.curve,
@@ -381,7 +381,7 @@ export struct PhotoItem {
     }
 
     private isVideoPlayBtnShow(): boolean {
-        logDebug(TAG, `isVideoPlayBtnShow: ${this.item.mediaType}`);
+        Log.debug(TAG, `isVideoPlayBtnShow: ${this.item.mediaType}`);
         return ((this.item) && (this.item.mediaType == MediaLib.MediaType.VIDEO));
     }
 }

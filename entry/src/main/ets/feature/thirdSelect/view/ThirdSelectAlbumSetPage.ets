@@ -13,21 +13,22 @@
  * limitations under the License.
  */
 
-import router from '@system.router'
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
-import { ThirdAlbumGridItem } from '../../../../../../../features/third/src/main/ets/components/thirdalbumgriditem'
-import { Action } from '../../../common/view/browserOperation/Action'
+import router from '@system.router';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { ThirdAlbumGridItem } from '../../../../../../../features/third/src/main/ets/components/ThirdAlbumGridItem';
+import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
-import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp'
-import { Constants } from '../../../common/model/common/Constants'
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
-import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
-import { ThirdSelectBarModel } from '../model/ThirdSelectBarModel'
-import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar'
-import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource'
+import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
+import { Constants } from '../../../common/model/common/Constants';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
+import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { ThirdSelectBarModel } from '../model/ThirdSelectBarModel';
+import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar';
+import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
@@ -53,13 +54,13 @@ export struct ThirdSelectAlbumSetPage {
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     isFromFaPhoto: boolean = false;
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
-    private barModel: ThirdSelectBarModel = new ThirdSelectBarModel()
-    private leftAction: Action = Action.BACK
+    private barModel: ThirdSelectBarModel = new ThirdSelectBarModel();
+    private leftAction: Action = Action.BACK;
     private title: string | Resource = ""
     private scroller: Scroller = new Scroller();
     @Provide isHideScrollBar: boolean = true;
     @Provide('tabBarShow') isTabBarShow: boolean = false;
-    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
+    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
 
     aboutToAppear(): void {
         let param = router.getParams();
@@ -77,7 +78,7 @@ export struct ThirdSelectAlbumSetPage {
                 this.maxSelectCount = new Number(param.remainingOfWallpapers).valueOf() || 0
             }
         }
-        logInfo(TAG, `isFromFa: ${this.isFromFa} isFromFaPhoto ${this.isFromFaPhoto}`);
+        Log.info(TAG, `isFromFa: ${this.isFromFa} isFromFaPhoto ${this.isFromFaPhoto}`);
         if (this.isFromFa) {
             this.albumsDataSource.setSelectType(MediaConstants.SELECT_TYPE_IMAGE)
             this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_VIDEO, MediaConstants.ALBUM_ID_RECYCLE]);
@@ -88,12 +89,12 @@ export struct ThirdSelectAlbumSetPage {
         this.leftAction = this.isFromFa ? Action.BACK : Action.CANCEL
         this.title = (this.isFromFa && !this.isFromFaPhoto) ? ActionBarProp.SINGLE_SELECT_ALBUM_TITLE : ActionBarProp.SINGLE_UNSELECT_TITLE
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        logInfo(TAG, `isMultiPick: ${this.isMultiPick}`);
-        logInfo(TAG, `type: ${this.type}`);
-        logInfo(TAG, `ThirdSelectAlbumSetPage isFromWallpaper: ${this.isFromWallpaper}`);
-        logInfo(TAG, `ThirdSelectAlbumSetPage maxSelectCount: ${this.maxSelectCount}`);
+        Log.info(TAG, `isMultiPick: ${this.isMultiPick}`);
+        Log.info(TAG, `type: ${this.type}`);
+        Log.info(TAG, `ThirdSelectAlbumSetPage isFromWallpaper: ${this.isFromWallpaper}`);
+        Log.info(TAG, `ThirdSelectAlbumSetPage maxSelectCount: ${this.maxSelectCount}`);
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            logInfo(TAG, `ON_LOADING_FINISHED size: ${size}`);
+            Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
             this.isEmpty = size == 0;
             this.isHideScrollBar = (size <= (this.gridRowCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         });
@@ -117,7 +118,7 @@ export struct ThirdSelectAlbumSetPage {
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         this.gridRowCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
         / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
-        logInfo(TAG, `initGridRowCount gridRowCount: ${this.gridRowCount}`);
+        Log.info(TAG, `initGridRowCount gridRowCount: ${this.gridRowCount}`);
     }
 
     onPageShow() {
@@ -131,23 +132,23 @@ export struct ThirdSelectAlbumSetPage {
 
     private onActive() {
         if (!this.isActive) {
-            logInfo(TAG, 'onActive');
+            Log.info(TAG, 'onActive');
             this.isActive = true;
         }
     }
 
     private onInActive() {
         if (this.isActive) {
-            logInfo(TAG, 'onInActive');
+            Log.info(TAG, 'onInActive');
             this.isActive = false;
         }
     }
 
     onMenuClicked(action: Action) {
-        logInfo(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         switch (action) {
             case Action.CANCEL:
-                logInfo(TAG, 'click cancel');
+                Log.info(TAG, 'click cancel');
                 let abilityResult = {
                     'resultCode': 0,
                     'want': {
@@ -184,7 +185,7 @@ export struct ThirdSelectAlbumSetPage {
 
             Stack() {
                 if (this.isEmpty) {
-                    NoPhotoComponent({ title: $r('app.string.title_no_albums') })
+                    NoPhotoIndexComponent({ index: Constants.ALBUM_PAGE_INDEX })
                 }
                 Grid(this.scroller) {
                     LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {

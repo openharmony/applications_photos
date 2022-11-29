@@ -13,20 +13,20 @@
  * limitations under the License.
  */
 
-import router from '@system.router'
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils'
-import { Action } from '../../../common/view/browserOperation/Action'
-import { Constants } from '../../../common/model/common/Constants'
-import { ThirdSelectPhotoBrowserActionBar } from '../../../common/view/ThirdSelectPhotoBrowserActionBar'
-import { PhotoBrowserBg } from '../../../../../../../features/browser/src/main/ets/components/PhotoBrowserBg'
-import { Constants as PhotoConstants } from '../../../../../../../features/browser/src/main/ets/constants/Constants'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager'
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
-import { PhotoSwiper } from '../../../../../../../features/browser/src/main/ets/components/PhotoSwiper'
+import router from '@system.router';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Action } from '../../../common/view/browserOperation/Action';
+import { Constants } from '../../../common/model/common/Constants';
+import { ThirdSelectPhotoBrowserActionBar } from '../../../common/view/ThirdSelectPhotoBrowserActionBar';
+import { PhotoBrowserBg } from '../../../../../../../features/browser/src/main/ets/components/PhotoBrowserBg';
+import { Constants as PhotoConstants } from '../../../../../../../features/browser/src/main/ets/constants/Constants';
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import { PhotoSwiper } from '../../../../../../../features/browser/src/main/ets/components/PhotoSwiper';
 import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
-import mMultimodalInputManager from '../../../../../../../common/base/src/main/ets/manager/multimodalinputmanager'
-import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource'
+import mMultimodalInputManager from '../../../../../../../common/base/src/main/ets/manager/MultimodalInputManager';
+import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
@@ -55,14 +55,14 @@ struct ThirdSelectPhotoBrowser {
     // position
     thirdSelectPosition: number;
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
-    private browserDataSource: GroupItemDataSource = new GroupItemDataSource()
+    private browserDataSource: GroupItemDataSource = new GroupItemDataSource();
 
     aboutToAppear(): void {
-        logInfo(TAG, 'photoBrowser aboutToAppear');
-        screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000')
+        Log.info(TAG, 'photoBrowser aboutToAppear');
+        screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000');
         this.browserBackgroundColor = $r('app.color.black');
         mMultimodalInputManager.registerListener((control: number) => {
-            logInfo(TAG, `key control : ${control} index ${this.currentIndex}`);
+            Log.info(TAG, `key control : ${control} index ${this.currentIndex}`);
             if (control == 0) {
                 if (this.currentIndex > 0) {
                     this.onPhotoChanged(this.currentIndex - 1);
@@ -75,16 +75,16 @@ struct ThirdSelectPhotoBrowser {
                 this.onBackPress();
             }
         });
-        let params = router.getParams()
+        let params = router.getParams();
         if (params) {
             this.onPhotoChanged(parseInt(params.position.toString()));
             this.thirdSelectTransition = params.transition.toString();
-            this.isFromFa = params.isFromFa && true
-            this.browserDataSource.setSelectType(params.isFromFa ? MediaConstants.SELECT_TYPE_IMAGE : MediaConstants.SELECT_TYPE_ALL)
-            this.browserDataSource.setAlbumId(params.albumId ? params.albumId.toString() : "")
-            this.isMultiPick = params.isMultiPick as boolean
+            this.isFromFa = params.isFromFa && true;
+            this.browserDataSource.setSelectType(params.isFromFa ? MediaConstants.SELECT_TYPE_IMAGE : MediaConstants.SELECT_TYPE_ALL);
+            this.browserDataSource.setAlbumId(params.albumId ? params.albumId.toString() : "");
+            this.isMultiPick = params.isMultiPick as boolean;
         }
-        this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER)
+        this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER);
         if (this.isMultiPick == true) {
             this.totalSelectedCount = this.browserDataSource.getSelectedCount();
         }
@@ -105,13 +105,13 @@ struct ThirdSelectPhotoBrowser {
             this.onPhotoChanged(this.currentIndex);
         });
         this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean) => {
-            logInfo(TAG, `set swiper swipe ${value}`);
+            Log.info(TAG, `set swiper swipe ${value}`);
             this.canSwipe = value;
         });
     }
 
     aboutToDisappear(): void {
-        screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000')
+        screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000');
         this.broadCast.release();
         mMultimodalInputManager.unregisterListener();
     }
@@ -120,7 +120,7 @@ struct ThirdSelectPhotoBrowser {
     }
 
     onDataSizeChanged(size: number): void {
-        logInfo(TAG, `onDataSizeChanged, size is ${size}`);
+        Log.info(TAG, `onDataSizeChanged, size is ${size}`);
         if (size == 0) {
             this.onBackPress();
         }
@@ -130,22 +130,22 @@ struct ThirdSelectPhotoBrowser {
         this.currentIndex = index;
         let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined) {
-            logWarn(TAG, 'onPhotoChanged, item is undefined');
+            Log.warn(TAG, 'onPhotoChanged, item is undefined');
         } else {
-            this.isSelected = currentPhoto.isSelect
-            logInfo(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri}`);
+            this.isSelected = currentPhoto.isSelect;
+            Log.info(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri}`);
         }
     }
 
     selectStateChange() {
-        logInfo(TAG, 'change selected.');
+        Log.info(TAG, 'change selected.');
         let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined) {
             return;
         }
-        currentPhoto.setSelect(!currentPhoto.isSelect)
+        currentPhoto.setSelect(!currentPhoto.isSelect);
         this.totalSelectedCount = this.browserDataSource.getSelectedCount();
-        logInfo(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
+        Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
     }
 
     onPageShow() {
@@ -156,21 +156,21 @@ struct ThirdSelectPhotoBrowser {
     }
 
     onMenuClicked(action: Action) {
-        logInfo(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         switch (action) {
             case Action.BACK:
                 this.onBackPress();
                 return;
             case Action.MATERIAL_SELECT:
-                logInfo(TAG, 'click UN_SELECTED');
+                Log.info(TAG, 'click UN_SELECTED');
                 this.selectStateChange();
                 return;
             case Action.SELECTED:
-                logInfo(TAG, 'click SELECTED');
+                Log.info(TAG, 'click SELECTED');
                 this.selectStateChange();
                 return;
             case Action.OK:
-                logInfo(TAG, 'click OK');
+                Log.info(TAG, 'click OK');
                 this.setPickResult();
                 break;
             default:
@@ -204,7 +204,7 @@ struct ThirdSelectPhotoBrowser {
     }
 
     private setPickResult(): void {
-        logDebug(TAG, `setPickResult ${this.isFromFa}`)
+        Log.debug(TAG, `setPickResult ${this.isFromFa}`);
         if (this.isFromFa) {
             this.appBroadcast.emit(BroadcastConstants.SAVE_FORM_EDITOR_DATA,
                 [AppStorage.Get(Constants.FORM_ITEM_NAME), AppStorage.Get(Constants.FORM_ITEM_ALBUM_ID),
@@ -214,7 +214,7 @@ struct ThirdSelectPhotoBrowser {
         let uriArray;
         if (this.isMultiPick) {
             uriArray = this.browserDataSource.getSelectedUris();
-            logInfo(TAG, `uri size: ${uriArray}`);
+            Log.info(TAG, `uri size: ${uriArray}`);
         } else {
             let currentPhoto = this.getCurrentPhoto();
             if (currentPhoto == undefined) {
@@ -230,8 +230,8 @@ struct ThirdSelectPhotoBrowser {
                 }
             }
         };
-        logInfo(TAG, `terminateSelfWithResult result: ${JSON.stringify(abilityResult)}`);
-        terminateSelfWithResult(abilityResult)
+        Log.info(TAG, `terminateSelfWithResult result: ${JSON.stringify(abilityResult)}`);
+        terminateSelfWithResult(abilityResult);
     }
 
     pageTransition() {

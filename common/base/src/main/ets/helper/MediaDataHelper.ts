@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import image from '@ohos.multimedia.image'
+import image from '@ohos.multimedia.image';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logInfo, logError } from '../utils/LoggerUtils'
-import mediaModel from '../model/MediaModel'
-import { MediaConstants } from '../constants/MediaConstants'
-import { getResourceString } from '../utils/ResourceUtils'
+import mediaModel from '../model/MediaModel';
+import { Log } from '../utils/Log';
+import { MediaConstants } from '../constants/MediaConstants';
+import { getResourceString } from '../utils/ResourceUtils';
 import { SimpleAlbumDataItem } from '../data/SimpleAlbumDataItem';
 
 const TAG = "MediaDataHelper"
@@ -28,22 +28,22 @@ export class Rotatable {
 }
 
 export async function setOrientation(fileAsset: MediaLib.FileAsset, orientation: number): Promise<void> {
-    logInfo(TAG, `setOrientation`)
+    Log.info(TAG, `setOrientation`)
     try {
         let fd: number = await mediaModel.openAsset('RW', fileAsset);
         let imageSourceApi: image.ImageSource = image.createImageSource(fd);
-        await imageSourceApi.modifyImageProperty("Orientation", getPropertyValidOrientation(orientation))
-        imageSourceApi.release()
-        mediaModel.closeAsset(fd, fileAsset)
+        await imageSourceApi.modifyImageProperty("Orientation", getPropertyValidOrientation(orientation));
+        imageSourceApi.release();
+        mediaModel.closeAsset(fd, fileAsset);
     } catch (err) {
-        logError(TAG, `setOrientation err ${JSON.stringify(err)}`)
-        fileAsset.orientation = orientation
-        await fileAsset.commitModify()
+        Log.error(TAG, `setOrientation err ${JSON.stringify(err)}`);
+        fileAsset.orientation = orientation;
+        await fileAsset.commitModify();
     }
 }
 
 function getPropertyValidOrientation(orientation: number): string {
-    logInfo(TAG, `getPropertyValidOrientation ${orientation}`)
+    Log.info(TAG, `getPropertyValidOrientation ${orientation}`);
     switch (orientation) {
         case MediaConstants.ROTATE_NONE:
             return "1";
@@ -54,7 +54,7 @@ function getPropertyValidOrientation(orientation: number): string {
         case MediaConstants.ROTATE_ONCE:
             return "6";
         default:
-            return ""
+            return "";
     }
 }
 
@@ -81,32 +81,32 @@ export async function getAlbumDisplayName(name: string): Promise<string> {
 }
 
 export async function getFetchOptions(selectType: number, albumId: string, deviceId: string): Promise<MediaLib.MediaFetchOptions> {
-    let selections: string = ""
-    let selectionArgs: Array<string> = []
-    let order: string = `date_added DESC`
+    let selections: string = "";
+    let selectionArgs: Array<string> = [];
+    let order: string = `date_added DESC`;
     if (selectType == MediaConstants.SELECT_TYPE_VIDEO || albumId == MediaConstants.ALBUM_ID_VIDEO) {
-        selections = MediaLib.FileKey.MEDIA_TYPE + ' = ?'
-        selectionArgs = [MediaLib.MediaType.VIDEO.toString()]
+        selections = MediaLib.FileKey.MEDIA_TYPE + ' = ?';
+        selectionArgs = [MediaLib.MediaType.VIDEO.toString()];
     } else if (selectType == MediaConstants.SELECT_TYPE_IMAGE && albumId != MediaConstants.ALBUM_ID_VIDEO) {
-        selections = MediaLib.FileKey.MEDIA_TYPE + ' = ?'
-        selectionArgs = [MediaLib.MediaType.IMAGE.toString()]
+        selections = MediaLib.FileKey.MEDIA_TYPE + ' = ?';
+        selectionArgs = [MediaLib.MediaType.IMAGE.toString()];
     } else if (selectType == MediaConstants.SELECT_TYPE_IMAGE && albumId == MediaConstants.ALBUM_ID_VIDEO) {
-        return undefined
+        return undefined;
     } else {
-        selections = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?'
-        selectionArgs = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()]
+        selections = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?';
+        selectionArgs = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
     }
     if (albumId == MediaConstants.ALBUM_ID_CAMERA) {
-        let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA)
-        selections = `(${selections}) and ${MediaLib.FileKey.ALBUM_NAME} = ?`
-        selectionArgs.push(path.substr(0, path.length - 1))
+        let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA);
+        selections = `(${selections}) and ${MediaLib.FileKey.ALBUM_NAME} = ?`;
+        selectionArgs.push(path.substr(0, path.length - 1));
     } else if (albumId == MediaConstants.ALBUM_ID_SNAPSHOT) {
-        let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_IMAGE) + "Screenshots/"
-        selections = `(${selections}) and ${MediaLib.FileKey.RELATIVE_PATH} = ?`
-        selectionArgs.push(path)
+        let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_IMAGE) + "Screenshots/";
+        selections = `(${selections}) and ${MediaLib.FileKey.RELATIVE_PATH} = ?`;
+        selectionArgs.push(path);
     } else if ((new Number(albumId).valueOf() || 0) > 0) {
-        selections = `(${selections}) and ${MediaLib.FileKey.ALBUM_ID} = ?`
-        selectionArgs.push(albumId)
+        selections = `(${selections}) and ${MediaLib.FileKey.ALBUM_ID} = ?`;
+        selectionArgs.push(albumId);
     }
 
     let fetchOption: MediaLib.MediaFetchOptions = {
@@ -116,23 +116,23 @@ export async function getFetchOptions(selectType: number, albumId: string, devic
     };
 
     if (deviceId.length > 0) {
-        fetchOption['networkId'] = deviceId
+        fetchOption['networkId'] = deviceId;
     }
-    return fetchOption
+    return fetchOption;
 }
 
 export async function getFetchOptionsByItem(item: SimpleAlbumDataItem): Promise<MediaLib.MediaFetchOptions> {
-    let selections: string = `${MediaLib.FileKey.MEDIA_TYPE} = ? or ${MediaLib.FileKey.MEDIA_TYPE} = ?`
-    let selectionArgs: string[] = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()]
+    let selections: string = `${MediaLib.FileKey.MEDIA_TYPE} = ? or ${MediaLib.FileKey.MEDIA_TYPE} = ?`;
+    let selectionArgs: string[] = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
 
     if (item.displayName.length > 0) {
-        selections = `(${selections}) and ${MediaLib.FileKey.DISPLAY_NAME} = ?`
-        selectionArgs.push(item.displayName)
+        selections = `(${selections}) and ${MediaLib.FileKey.DISPLAY_NAME} = ?`;
+        selectionArgs.push(item.displayName);
     }
 
     if (item.relativePath.length > 0) {
-        selections = `(${selections}) and ${MediaLib.FileKey.RELATIVE_PATH} = ?`
-        selectionArgs.push(item.relativePath)
+        selections = `(${selections}) and ${MediaLib.FileKey.RELATIVE_PATH} = ?`;
+        selectionArgs.push(item.relativePath);
     }
 
     let fetchOption: MediaLib.MediaFetchOptions = {
@@ -140,5 +140,5 @@ export async function getFetchOptionsByItem(item: SimpleAlbumDataItem): Promise<
         selectionArgs: selectionArgs,
         order: `date_added DESC`
     };
-    return fetchOption
+    return fetchOption;
 }

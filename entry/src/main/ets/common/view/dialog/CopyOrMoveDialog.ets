@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-import { Logger } from '../../utils/Logger'
 import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
@@ -31,7 +30,6 @@ export struct CopyOrMoveDialog {
     controller: CustomDialogController;
     dataTime: string;
     @Consume operateParam: OperateParam;
-    logger: Logger = new Logger('CopyOrMoveDialog');
 
     aboutToAppear() {
 

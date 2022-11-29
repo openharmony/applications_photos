@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import deviceInfo from '@ohos.deviceInfo';
 
 export class Constants {
     // illegal value
@@ -101,7 +102,7 @@ export class Constants {
     // Column flag
     static readonly SCREEN_COLUMNS: string = 'screen_columns';
     static readonly ADD_NOTES_MAX_LENGTH: number = 140;
-    static readonly RENAME_MAX_LENGTH: number = 80;
+    static readonly RENAME_MAX_LENGTH: number = 82;
     static readonly ENTRY_FROM_NONE = 0;
     static readonly ENTRY_FROM_CAMERA = 1;
     static readonly ENTRY_FROM_SINGLE_SELECT = 2;
@@ -249,6 +250,7 @@ export class Constants {
     static readonly SCROLL_BAR_SIDE_MIN_GAP: number = 12;
     static readonly SCROLL_MARGIN: number = 24;
     static readonly SCROLL_BAR_VISIBLE_THRESHOLD: number = deviceInfo.deviceType == ('phone' || 'default') ? 29 : 33;
+    static readonly GRID_SCROLL_BAR_VISIBLE_THRESHOLD: number = deviceInfo.deviceType == ('phone' || 'default') ? 25 : 45;
 
     // Column Constants
 
@@ -306,6 +308,6 @@ export class Constants {
     static readonly ACTION_URI_FORM_ABILITY: string = 'formAbility';
     static readonly ACTION_URI_FORM_ABILITY_NONE: string = 'formAbilityNone';
     static readonly PROGRESS_LENGTH_DIFF: number = 88;
-    static readonly ALBUM_NAME_MAX_LENGTH = 80;
+    static readonly ALBUM_NAME_MAX_LENGTH = 82;
     static readonly BACK_FROM_FORM_DETAIL: string = 'back_from_form_detail';
 }

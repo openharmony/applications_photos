@@ -15,34 +15,34 @@
 
 import deviceInfo from '@ohos.deviceInfo';
 import window from '@ohos.window';
-import Ability from '@ohos.application.Ability'
-import wantConstant from '@ohos.ability.wantConstant'
-import { Logger } from '../common/utils/Logger'
-import screenManager from '../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { Constants } from '../common/model/common/Constants'
+import Ability from '@ohos.application.Ability';
+import wantConstant from '@ohos.ability.wantConstant';
+import { Log } from '../../../../../common/base/src/main/ets/utils/Log';
+import screenManager from '../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { Constants } from '../common/model/common/Constants';
 import broadcastManager from '../../../../../common/base/src/main/ets/manager/BroadcastManager';
 import { startTrace, finishTrace } from '../../../../../common/base/src/main/ets/utils/TraceControllerUtils';
-import { BroadcastConstants } from '../../../../../common/base/src/main/ets/constants/BroadcastConstants'
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel'
-import router from '@system.router'
+import { BroadcastConstants } from '../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
+import router from '@system.router';
 
-const appLogger: Logger = new Logger('app');
 let isFromCard = false;
 let appBroadcast = broadcastManager.getBroadcast();
-var pagePath: string = deviceInfo.deviceType == ('phone' || 'default') ? 'product/phone/view/index' : 'product/pad/view/index';
+var pagePath: string = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 'product/phone/view/index' : 'product/pad/view/index';
 
 export default class MainAbility extends Ability {
+    private TAG: string = 'MainAbility';
     private static readonly RETRY_MAX_TIMES = 100;
     private static readonly ACTION_URI_SINGLE_SELECT = 'singleselect';
     private static readonly ACTION_URI_MULTIPLE_SELECT = 'multipleselect';
     private static readonly ACTION_URI_PHOTO_DETAIL = 'photodetail';
 
     onCreate(want, launchParam) {
-        appLogger.info('Application onCreate');
+        Log.info(this.TAG, 'Application onCreate');
         startTrace('onCreate');
         // Ability is creating, initialize resources for this ability
         globalThis.appContext = this.context;
-        mediaModel.onCreate(this.context)
+        mediaModel.onCreate(this.context);
         let action = want.parameters;
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
@@ -76,8 +76,8 @@ export default class MainAbility extends Ability {
         ];
         startTrace('requestPermissionsFromUser');
         this.context.requestPermissionsFromUser(requestPermissionList).then(function (data) {
-            appLogger.info(`requestPermissionsFromUser data:  ${JSON.stringify(data)}`)
-            let result = 0
+            Log.info(this.TAG, `requestPermissionsFromUser data:  ${JSON.stringify(data)}`);
+            let result = 0;
             for (let i = 0; i < data.authResults.length; i++) {
                 result += data.authResults[i]
             }
@@ -90,11 +90,11 @@ export default class MainAbility extends Ability {
                 AppStorage.SetOrCreate(Constants.PERMISSION_STATUS, false);
             }
         }, (err) => {
-            appLogger.error(`Failed to requestPermissionsFromUser, ${err.code}`);
+            Log.error(this.TAG, `Failed to requestPermissionsFromUser, ${err.code}`);
         });
 
         appBroadcast.on(BroadcastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
-        appLogger.info('Application onCreate end');
+        Log.info(this.TAG, 'Application onCreate end');
     }
 
     onNewWant(want) {
@@ -127,14 +127,14 @@ export default class MainAbility extends Ability {
 
     onDestroy() {
         // Ability is creating, release resources for this ability
-        appLogger.info('Application onDestroy');
+        Log.info(this.TAG, 'Application onDestroy');
         AppStorage.Delete(Constants.ENTRY_FROM_HAP);
     }
 
     onWindowStageCreate(windowStage) {
         startTrace('onWindowStageCreate');
         // Main window is created, set main page for this ability
-        appLogger.info('Application onWindowStageCreate');
+        Log.info(this.TAG, 'Application onWindowStageCreate');
         globalThis.photosWindowStage = windowStage;
         startTrace('getMainWindow');
         windowStage.getMainWindow().then((win: window.Window) => {
@@ -150,7 +150,7 @@ export default class MainAbility extends Ability {
                 }
                 finishTrace('onWindowStageCreate');
             }).catch(() => {
-                appLogger.error(`get device screen info failed.`);
+                Log.error(this.TAG, `get device screen info failed.`);
             });
         });
     }
@@ -167,8 +167,8 @@ export default class MainAbility extends Ability {
     thirdRouterPage() {
         let entryFrom = AppStorage.Get(Constants.ENTRY_FROM_HAP);
         let permission = AppStorage.Get(Constants.PERMISSION_STATUS);
-        appLogger.info(`thirdRouterPage entryFromHap: ${entryFrom} permission: ${permission}`);
-        if (entryFrom == Constants.ENTRY_FROM_NONE || !permission) {
+        Log.info(this.TAG, `thirdRouterPage entryFromHap: ${entryFrom} permission: ${permission}`);
+        if (entryFrom == Constants.ENTRY_FROM_NONE) {
             return;
         }
         if (entryFrom == Constants.ENTRY_FROM_CAMERA) {

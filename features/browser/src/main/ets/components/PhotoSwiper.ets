@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-import { PhotoItem } from './PhotoItem'
+import { PhotoItem } from './PhotoItem';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import { logDebug } from '@ohos/base/src/main/ets/utils/LoggerUtils'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { AnimationConstants } from '@ohos/base/src/main/ets/constants/AnimationConstants';
-import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource'
+import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
-import { Constants } from '../constants/Constants'
+import { Constants } from '../constants/Constants';
 
 const TAG = "PhotoSwiper"
 
@@ -37,17 +37,20 @@ export struct PhotoSwiper {
 
     aboutToAppear() {
         this.broadCast.on(BroadcastConstants.ON_DATA_RELOADED, () => {
-            logDebug(TAG, 'animate to data reloaded start');
+            Log.debug(TAG, 'animate to data reloaded start');
             animateTo({
                 duration: AnimationConstants.DELETE_ANIMATE_DURATION,
                 onFinish: () => {
                 } }, () => {
-                this.dataSource.dataRemove();
+                if (this.dataSource != null && this.dataSource != undefined) {
+                    this.dataSource.dataRemove();
+                    this.broadCast.emit(Constants.DATA_SIZE_CHANGED,[this.dataSource.totalCount()]);
+                }
             })
         });
 
         this.broadCast.on(BroadcastConstants.CHANGE_SWIPER_DURATION, (value) => {
-            logDebug(TAG, `change duration start ${value}`);
+            Log.debug(TAG, `change duration start ${value}`);
             this.duration = value;
         });
     }
@@ -56,15 +59,17 @@ export struct PhotoSwiper {
         Swiper(this.swiperController) {
             LazyForEach(this.dataSource, (item: MediaDataItem) => {
                 if (item) {
-                    Column() {
-                        PhotoItem({
-                            item: item,
-                            pageName: this.photoSwiperTransition
-                        })
-                    }.zIndex(item && item.index == this.currentIndex ? 2 : 1)
+                    PhotoItem({
+                        item: item,
+                        pageName: this.photoSwiperTransition
+                    })
+                    .zIndex(item && item.index == this.currentIndex ? 2 : 1)
                 }
-            }, (item: MediaDataItem) => item ? item.getHashCode() : JSON.stringify(item))
+            }, (item: MediaDataItem) => {
+                return item ? item.getHashCode() : JSON.stringify(item)
+            })
         }
+        .itemSpace('8vp')
         .gesture(PanGesture({
             direction: PanDirection.Horizontal
         }))
@@ -72,6 +77,13 @@ export struct PhotoSwiper {
         .indicator(false)
         .loop(false)
         .onChange((index: number) => {
+            if (AppStorage.Get("isDelete") == 0) {
+                if (this.currentIndex - index == 1) {
+                    AppStorage.SetOrCreate("isLeftSwiper", 1);
+                } else if (this.currentIndex - index == -1) {
+                    AppStorage.SetOrCreate("isLeftSwiper", 0);
+                }
+            }
             if (this.duration != 0) {
                 this.onPhotoChanged(index);
             }

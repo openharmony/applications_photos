@@ -14,23 +14,23 @@
  */
 
 import router from '@system.router';
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
-import { Action } from '../../../common/view/browserOperation/Action'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import {
     AlbumGridItemTraditionalStyle
-} from '../../../../../../../features/distributed/src/main/ets/components/albumgriditemtraditionalstyle'
-import { Constants } from '../../../common/model/common/Constants'
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent'
-import { JumpSourceToMain } from '../../../../../../../common/base/src/main/ets/data/JumpSourceToMain'
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager'
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
-import { CommonObserverCallback } from '../../../../../../../common/base/src/main/ets/observer/CommonObserverCallback'
-import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver'
+} from '../../../../../../../features/distributed/src/main/ets/components/AlbumGridItemTraditionalStyle';
+import { Constants } from '../../../common/model/common/Constants';
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent';
+import { JumpSourceToMain } from '../../../../../../../common/base/src/main/ets/data/JumpSourceToMain';
+import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import { CommonObserverCallback } from '../../../../../../../common/base/src/main/ets/observer/CommonObserverCallback';
+import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
 import { DistributedAlbumBarModel } from '../model/DistributedAlbumBarModel';
-import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource'
+import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { PeerDataItem } from '@ohos/base/src/main/ets/data/PeerDataItem';
 
@@ -50,13 +50,13 @@ export struct DistributedAlbumSetPage {
     isActive: boolean = false; // Whether the page is in the foreground
     scroller: Scroller = new Scroller();
     private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
-    private deviceId: string = ''
-    private barModel: DistributedAlbumBarModel = new DistributedAlbumBarModel()
-    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
-    private isMediaLibDataChanged: boolean = true
+    private deviceId: string = '';
+    private barModel: DistributedAlbumBarModel = new DistributedAlbumBarModel();
+    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
+    private isMediaLibDataChanged: boolean = true;
 
     onMenuClicked(action: Action, arg: any[]) {
-        logInfo(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         switch (action) {
             case Action.BACK:
                 router.back();
@@ -69,18 +69,18 @@ export struct DistributedAlbumSetPage {
     aboutToAppear(): void {
         let param = router.getParams();
         if (param.item) {
-            logDebug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
+            Log.debug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
             let item = JSON.parse(param.item.toString()) as PeerDataItem;
             this.title = item.deviceName;
             this.deviceId = item.networkId;
-            this.albumsDataSource.setDeviceId(item.networkId)
+            this.albumsDataSource.setDeviceId(item.networkId);
         } else {
-            logWarn(TAG, `param is error`);
+            Log.warn(TAG, `param is error`);
         }
 
         this.onMenuClicked = this.onMenuClicked.bind(this);
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            logInfo(TAG, `ON_LOADING_FINISHED size: ${size}`);
+            Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
             this.isEmpty = size == 0;
         });
 
@@ -93,7 +93,7 @@ export struct DistributedAlbumSetPage {
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         this.gridColumnsCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
         / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
-        logInfo(TAG, `the grid count in a line is : ${this.gridColumnsCount}`);
+        Log.info(TAG, `the grid count in a line is : ${this.gridColumnsCount}`);
     }
 
     aboutToDisappear(): void {
@@ -114,34 +114,34 @@ export struct DistributedAlbumSetPage {
     // Callback when the page is in the foreground
     onActive() {
         if (!this.isActive) {
-            logInfo(TAG, 'onActive');
+            Log.info(TAG, 'onActive');
             this.isActive = true;
         }
-        this.loadItem()
+        this.loadItem();
     }
 
     // Callback when the page is in the background
     onInActive() {
         if (this.isActive) {
-            logInfo(TAG, 'onInActive');
+            Log.info(TAG, 'onInActive');
             this.isActive = false;
         }
     }
 
     private onUpdateRemoteDevice(res, deviceId): void {
-        logDebug(TAG, `onUpdateRemoteDevice`);
+        Log.debug(TAG, `onUpdateRemoteDevice`);
 
         if (!this.isActive) {
             return;
         }
 
         if (deviceId != this.deviceId) {
-            logDebug(TAG, `other device`);
+            Log.debug(TAG, `other device`);
             return;
         }
 
         if (res == Constants.DEVICE_STATE_OFFLINE) {
-            logDebug(TAG, `device offline route to album main`);
+            Log.debug(TAG, `device offline route to album main`);
             router.back({
                 uri: this.isHorizontal === true ? 'product/pad/view/index' : 'product/phone/view/index',
                 params: {
@@ -149,25 +149,25 @@ export struct DistributedAlbumSetPage {
                 }
             })
         } else {
-            logInfo(TAG, `ignore typy: ${res}`);
+            Log.info(TAG, `ignore typy: ${res}`);
             return;
         }
     }
 
     onMediaLibDataChange(changeType) {
-        logInfo(TAG, `onMediaLibDataChange type: ${changeType}`);
-        this.isMediaLibDataChanged = true
-        this.loadItem()
+        Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
+        this.isMediaLibDataChanged = true;
+        this.loadItem();
     }
 
     private loadItem() {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
-                this.isEmpty = isEmpty
-                this.albumsDataSource.notifyDataReload()
+                this.isEmpty = isEmpty;
+                this.albumsDataSource.notifyDataReload();
             })
         } else if (this.isActive) {
-            this.albumsDataSource.dataRemove()
+            this.albumsDataSource.dataRemove();
         }
     }
 

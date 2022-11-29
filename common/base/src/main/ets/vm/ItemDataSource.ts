@@ -12,58 +12,59 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { logInfo } from '../utils/LoggerUtils'
-import { MediaDataItem } from '../data/MediaDataItem'
+import { Log } from '../utils/Log';
 
 const TAG = "ItemDataSource"
 
 export abstract class ItemDataSource implements IDataSource {
     private listeners: DataChangeListener[] = [];
 
-    abstract totalCount(): number
+    abstract totalCount(): number;
 
-    abstract getData(index: number): any
+    abstract getData(index: number): any;
 
-    abstract isSelect(): boolean
+    abstract isSelect(): boolean;
 
-    abstract getSelectedCount(): number
+    abstract getSelectedCount(): number;
 
-    abstract getSelectedItems(): any[]
+    abstract getSelectedItems(): any[];
 
-    abstract dataRemove(): void
+    abstract getSelectedUris(): any[];
 
-    registerDataChangeListener(listener: DataChangeListener): void{
-        logInfo(TAG, 'registerDataChangeListener');
+    abstract dataRemove(): void;
+
+    registerDataChangeListener(listener: DataChangeListener): void {
+        Log.info(TAG, 'registerDataChangeListener');
         if (this.listeners.indexOf(listener) < 0) {
             this.listeners.push(listener);
-            logInfo(TAG, `registerDataChangeListener, add listener, length: ${this.listeners.length}`);
+            Log.info(TAG, `registerDataChangeListener, add listener, length: ${this.listeners.length}`);
         }
     }
 
-    unregisterDataChangeListener(listener: DataChangeListener): void{
-        logInfo(TAG, 'unregisterDataChangeListener');
+    unregisterDataChangeListener(listener: DataChangeListener): void {
+        Log.info(TAG, 'unregisterDataChangeListener');
         const pos = this.listeners.indexOf(listener);
         if (pos >= 0) {
             this.listeners.splice(pos, 1);
-            logInfo(TAG, `registerDataChangeListener, remove listener, length: ${this.listeners.length}`);
+            Log.info(TAG, `registerDataChangeListener, remove listener, length: ${this.listeners.length}`);
         }
     }
 
     notifyDataChange(index: number): void {
         this.listeners.forEach(listener => {
-            listener.onDataChange(index)
+            listener.onDataChange(index);
         })
     }
 
     notifyDataReload(): void {
         this.listeners.forEach(listener => {
-            listener.onDataReloaded()
+            listener.onDataReloaded();
         })
     }
 
     notifyDataDelete(index: number): void {
         this.listeners.forEach(listener => {
-            listener.onDataDelete(index)
+            listener.onDataDelete(index);
         })
     }
 }

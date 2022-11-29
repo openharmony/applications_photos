@@ -16,45 +16,45 @@
 import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation';
 import { MoveMenuOperation } from '@ohos/base/src/main/ets/operation/MoveMenuOperation';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
-import { Constants } from '../../../common/model/common/Constants'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { Constants } from '../../../common/model/common/Constants';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
-import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent'
-import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
-import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils'
-import { TabBarForAlbumSet } from '../../../common/view/TabBar'
-import { TabItemWithText } from '../../../common/model/common/TabItem'
-import { AlbumSetNewMenuOperation } from '@ohos/base/src/main/ets/operation/AlbumSetNewMenuOperation'
-import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext'
-import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation'
-import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
-import { Action } from '../../../common/view/browserOperation/Action'
+import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
+import { TabBarForAlbumSet } from '../../../common/view/TabBar';
+import { TabItemWithText } from '../../../common/model/common/TabItem';
+import { AlbumSetNewMenuOperation } from '@ohos/base/src/main/ets/operation/AlbumSetNewMenuOperation';
+import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
+import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
-import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback'
-import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver'
+import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
+import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 import { AlbumBarModel } from '../model/AlbumBarModel';
 import { ToolBar } from '../../../common/view/actionbar/ToolBar';
 import {
     AlbumGridItemNewStyle
-} from '../../../../../../../features/album/src/main/ets/components/AlbumGridItemNewStyle'
+} from '../../../../../../../features/album/src/main/ets/components/AlbumGridItemNewStyle';
 import {
     DistributedAlbumGriItem
-} from '../../../../../../../features/album/src/main/ets/components/DistributedAlbumGriItem'
+} from '../../../../../../../features/album/src/main/ets/components/DistributedAlbumGriItem';
 import {
     AlbumSetDeleteMenuOperation
-} from '../../../../../../../features/album/src/main/ets/operation/AlbumSetDeleteMenuOperation'
+} from '../../../../../../../features/album/src/main/ets/operation/AlbumSetDeleteMenuOperation';
 import {
     AlbumSetRenameMenuOperation
-} from '../../../../../../../features/album/src/main/ets/operation/AlbumSetRenameMenuOperation'
-import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar'
+} from '../../../../../../../features/album/src/main/ets/operation/AlbumSetRenameMenuOperation';
+import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
-import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource'
-import { DistributedDataSource } from '@ohos/base/src/main/ets/vm/DistributedDataSource'
+import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
+import { DistributedDataSource } from '@ohos/base/src/main/ets/vm/DistributedDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { PeerDataItem } from '@ohos/base/src/main/ets/data/PeerDataItem';
 // Album Set Page
@@ -87,13 +87,13 @@ export struct AlbumSetPage {
     private tabsController: TabsController = new TabsController();
     private currentIndex: number = Constants.LOCAL_TAB_INDEX;
     private needNotify = false;
-    private barModel: AlbumBarModel = new AlbumBarModel()
-    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
-    private distributedDataSource: DistributedDataSource = new DistributedDataSource()
-    private isMediaLibDataChanged: boolean = true
+    private barModel: AlbumBarModel = new AlbumBarModel();
+    private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
+    private distributedDataSource: DistributedDataSource = new DistributedDataSource();
+    private isMediaLibDataChanged: boolean = true;
 
     onMenuClicked(action: Action, arg: any[]) {
-        logInfo(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
         switch (action) {
@@ -136,41 +136,41 @@ export struct AlbumSetPage {
     }
 
     onOperationStart(): void {
-        logDebug(TAG, `onOperationStart`);
-        mediaObserver.unregisterObserver(this.dataObserver)
+        Log.debug(TAG, `onOperationStart`);
+        mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     private onDeleteEnd(): void {
-        this.isAlbumSetSelectedMode = false
-        this.albumsDataSource.dataRemove()
+        this.isAlbumSetSelectedMode = false;
+        this.albumsDataSource.dataRemove();
         mediaObserver.registerObserver(this.dataObserver);
     }
 
     onNewEnd() {
-        logDebug(TAG, `onNewEnd`);
-        this.isAlbumSetSelectedMode = false
+        Log.debug(TAG, `onNewEnd`);
+        this.isAlbumSetSelectedMode = false;
         mediaObserver.registerObserver(this.dataObserver);
     }
 
     onRenameEnd() {
-        logDebug(TAG, `onRenameEnd`);
-        this.isAlbumSetSelectedMode = false
-        this.albumsDataSource.notifyDataReload()
+        Log.debug(TAG, `onRenameEnd`);
+        this.isAlbumSetSelectedMode = false;
+        this.albumsDataSource.notifyDataReload();
         mediaObserver.registerObserver(this.dataObserver);
     }
 
     onOperationEnd(): void {
-        logDebug(TAG, `onOperationEnd`);
-        this.isAlbumSetSelectedMode = false
-        this.isMediaLibDataChanged = true
-        this.loadItem()
-        mediaObserver.registerObserver(this.dataObserver)
+        Log.debug(TAG, `onOperationEnd`);
+        this.isAlbumSetSelectedMode = false;
+        this.isMediaLibDataChanged = true;
+        this.loadItem();
+        mediaObserver.registerObserver(this.dataObserver);
         AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
     }
 
     aboutToAppear(): void {
         startTrace('AlbumSetPageAboutToAppear');
-        logInfo(TAG, `AlbumSetPageAboutToAppear`);
+        Log.info(TAG, `AlbumSetPageAboutToAppear`);
         this.appBroadcast.on(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
         this.appBroadcast.on(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
 
@@ -197,8 +197,8 @@ export struct AlbumSetPage {
             this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = true;
         }
         this.distributedDataSource.reloadAlbumItemData().then((change: number) => {
-            this.onUpdateRemoteDevice(change)
-            this.distributedDataSource.notifyDataReload()
+            this.onUpdateRemoteDevice(change);
+            this.distributedDataSource.notifyDataReload();
         })
         finishTrace('AlbumSetPageAboutToAppear');
     }
@@ -213,7 +213,7 @@ export struct AlbumSetPage {
 
     // Callback when the page is show.
     onIndexPageShow() {
-        logInfo(TAG, `onIndexPageShow`)
+        Log.info(TAG, `onIndexPageShow`);
         if (this.isShow && this.isInCurrentTab) {
             this.onActive();
             this.createAlbum();
@@ -221,6 +221,7 @@ export struct AlbumSetPage {
         } else if (!this.isShow && this.isInCurrentTab) {
             this.onInActive();
         } else {
+            Log.info(TAG, `other condition`);
         }
     }
 
@@ -237,7 +238,7 @@ export struct AlbumSetPage {
         let mediaItems = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
         let targetAlbum = AppStorage.Get<SimpleAlbumDataItem>(Constants.APP_KEY_NEW_ALBUM_TARGET);
         if (mediaItems == undefined || targetAlbum == undefined) {
-            logWarn(TAG, `mediaItems is undefined ${mediaItems == undefined} targetAlbum is undefined ${targetAlbum == undefined}`)
+            Log.warn(TAG, `mediaItems is undefined ${mediaItems == undefined} targetAlbum is undefined ${targetAlbum == undefined}`)
             return;
         }
         let menuContext = new MenuContext();
@@ -267,10 +268,10 @@ export struct AlbumSetPage {
     }
 
     onModeChange() {
-        logInfo(TAG, `onModeChange ${this.isAlbumSetSelectedMode}`);
+        Log.info(TAG, `onModeChange ${this.isAlbumSetSelectedMode}`);
         if (!this.isAlbumSetSelectedMode) {
-            this.albumsDataSource.setSelect(false)
-            this.selectedAlbumsCount = 0
+            this.albumsDataSource.setSelect(false);
+            this.selectedAlbumsCount = 0;
         }
     }
 
@@ -304,19 +305,19 @@ export struct AlbumSetPage {
     // Callback when the page is in the foreground
     onActive() {
         if (!this.isActive) {
-            logInfo(TAG, 'onActive');
+            Log.info(TAG, 'onActive');
             this.isActive = true;
-            this.albumsDataSource.dataRemove()
-            this.distributedDataSource.dataRemove()
+            this.albumsDataSource.dataRemove();
+            this.distributedDataSource.dataRemove();
             this.showNotify();
         }
-        this.loadItem()
+        this.loadItem();
     }
 
     // Callback when the page is in the background
     onInActive() {
         if (this.isActive) {
-            logInfo(TAG, 'onInActive');
+            Log.info(TAG, 'onInActive');
             this.isActive = false;
         }
     }
@@ -324,7 +325,7 @@ export struct AlbumSetPage {
     private showNotify() {
         if (this.needNotify) {
             getResourceString($r('app.string.distributed_album_disconnected')).then((message: string) => {
-                showToast(message)
+                showToast(message);
             })
             this.needNotify = false;
         }
@@ -341,8 +342,8 @@ export struct AlbumSetPage {
     }
 
     initGridRowCount() {
-        logInfo(TAG, `get screen width is : ${screenManager.getWinWidth()}`);
-        logInfo(TAG, `get screen height is : ${screenManager.getWinHeight()}`);
+        Log.info(TAG, `get screen width is : ${screenManager.getWinWidth()}`);
+        Log.info(TAG, `get screen height is : ${screenManager.getWinHeight()}`);
 
         let sideBarWidth = this.isSidebar ? Constants.TAB_BAR_WIDTH : 0;
 
@@ -350,49 +351,50 @@ export struct AlbumSetPage {
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         this.gridColumnsCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
         / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
-        logInfo(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
+        Log.info(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
 
     }
 
     onMediaLibDataChange(changeType) {
-        logInfo(TAG, `onMediaLibDataChange type: ${changeType}`);
+        Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
         if (changeType == MediaConstants.MEDIA_TYPE_REMOTE) {
             this.distributedDataSource.reloadAlbumItemData().then((change: number) => {
                 this.onUpdateRemoteDevice(change)
                 this.distributedDataSource.notifyDataReload()
             })
         } else {
-            this.isMediaLibDataChanged = true
-            this.loadItem()
+            this.isMediaLibDataChanged = true;
+            this.albumsDataSource.resetLoadState();
+            this.loadItem();
         }
     }
 
     private loadItem() {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
-                this.isEmpty = isEmpty
-                this.albumsDataSource.notifyDataReload()
+                this.isEmpty = isEmpty;
+                this.albumsDataSource.notifyDataReload();
             })
         } else if (this.isActive) {
-            this.albumsDataSource.dataRemove()
+            this.albumsDataSource.dataRemove();
         }
     }
 
     private onUpdateRemoteDevice(change: number): void {
-        logInfo(TAG, `onUpdateRemoteDevice`);
+        Log.info(TAG, `onUpdateRemoteDevice`);
 
         if (change < 0) {
             this.needNotify = true;
         }
-        let size = this.distributedDataSource.totalCount()
-        logInfo(TAG, `onUpdateRemoteDevice length:${size} change: ${change}`);
+        let size = this.distributedDataSource.totalCount();
+        Log.info(TAG, `onUpdateRemoteDevice length:${size} change: ${change}`);
 
         if (size <= 0) {
-            this.onDistributedTabChanged(Constants.LOCAL_TAB_INDEX)
+            this.onDistributedTabChanged(Constants.LOCAL_TAB_INDEX);
             try {
                 this.tabsController.changeIndex(this.currentIndex);
             } catch (error) {
-                logError(TAG, `change tab index failed: ${error}`);
+                Log.error(TAG, `change tab index failed: ${error}`);
             }
             this.tabs[Constants.LOCAL_TAB_INDEX].isSelected = true;
             this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = false;
@@ -406,15 +408,15 @@ export struct AlbumSetPage {
     }
 
     private onSelect(index: number) {
-        this.selectedAlbumsCount = this.albumsDataSource.getSelectedCount()
-        this.albumsDataSource.notifyDataChange(index)
+        this.selectedAlbumsCount = this.albumsDataSource.getSelectedCount();
+        this.albumsDataSource.notifyDataChange(index);
     }
 
     private loadAlbums(isForce: boolean) {
         if (isForce || this.currentIndex == Constants.LOCAL_TAB_INDEX) {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
-                this.isEmpty = isEmpty
-                this.albumsDataSource.notifyDataReload()
+                this.isEmpty = isEmpty;
+                this.albumsDataSource.notifyDataReload();
             })
         }
         if (isForce || this.currentIndex == Constants.OTHER_EQUIPMENT_TAB_INDEX) {
@@ -445,12 +447,12 @@ export struct AlbumSetPage {
             }
             .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
             .padding({
-                left: $r('app.float.max_padding_start'),
-                right: $r('app.float.max_padding_end'),
+                left: $r('sys.float.ohos_id_card_margin_start'),
+                right: $r('sys.float.ohos_id_card_margin_end'),
                 top: $r('app.float.album_set_page_padding_top'),
                 bottom: this.isTabBarShow
                     ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
-                    : (this.isSidebar ? 0 : $r('app.float.album_set_page_padding_end'))
+                    : $r('app.float.album_set_page_padding_end')
             })
             .columnsGap($r('app.float.album_set_grid_column_gap'))
             .rowsGap($r('app.float.album_set_grid_row_gap'))
@@ -469,12 +471,12 @@ export struct AlbumSetPage {
         }
         .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
         .padding({
-            left: $r('app.float.max_padding_start'),
-            right: $r('app.float.max_padding_end'),
+            left: $r('sys.float.ohos_id_card_margin_start'),
+            right: $r('sys.float.ohos_id_card_margin_end'),
             top: $r('app.float.album_set_page_padding_top'),
             bottom: this.isTabBarShow
                 ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
-                : (this.isSidebar ? 0 : $r('app.float.album_set_page_padding_end'))
+                : $r('app.float.album_set_page_padding_end')
         })
         .columnsGap($r('app.float.album_set_grid_column_gap'))
         .rowsGap($r('app.float.album_set_grid_row_gap'))
@@ -526,7 +528,7 @@ export struct AlbumSetPage {
                         .barHeight(0)
                         .flexGrow(1)
                         .onChange((index: number) => {
-                            logInfo(TAG, `Switch to Tab ${index}.`);
+                            Log.info(TAG, `Switch to Tab ${index}.`);
                             this.onDistributedTabChanged(index);
                         })
                     }
@@ -551,5 +553,12 @@ export struct AlbumSetPage {
 
             CustomDialogView()
         }
+    }
+
+    pageTransition() {
+        PageTransitionExit({ type: RouteType.Push, duration: 1 })
+          .opacity(0)
+        PageTransitionEnter({ type: RouteType.Pop, duration: 1 })
+          .opacity(0)
     }
 }

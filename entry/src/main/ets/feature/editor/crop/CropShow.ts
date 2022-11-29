@@ -13,20 +13,20 @@
  * limitations under the License.
  */
 
-import { LineSegment } from '../base/Line'
-import { Point } from '../base/Point'
-import { RectF } from '../base/Rect'
-import { Ratio } from '../base/Ratio'
-import { Logger } from '../utils/Logger'
-import { CropRatioType, CropAngle } from './CropType'
-import { MathUtils } from './MathUtils'
-import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { LineSegment } from '../base/Line';
+import { Point } from '../base/Point';
+import { RectF } from '../base/Rect';
+import { Ratio } from '../base/Ratio';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { CropRatioType, CropAngle } from './CropType';
+import { MathUtils } from './MathUtils';
+import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 
 export class CropShow {
+    private TAG: string = 'CropShow';
     private static readonly DEFAULT_MIN_SIDE_LENGTH: number = 90;
     private static readonly DEFAULT_TOUCH_BOUND: number = 20;
     private static readonly BASE_SCALE_VALUE: number = 1.0;
-    private log: Logger = new Logger('CropShow');
     private limitRect: RectF = undefined;
     private cropRect: RectF = undefined;
     private imageRect: RectF = undefined;
@@ -158,7 +158,7 @@ export class CropShow {
                 this.ratio.set(2, 3);
                 break;
             default:
-                this.log.warn('setRatio: unknown ratio');
+               Log.warn(this.TAG, 'setRatio: unknown ratio');
                 break;
         }
         if (this.ratio.isValid()) {
@@ -240,7 +240,7 @@ export class CropShow {
             if (this.ratio.isValid()) {
                 this.fixSideToConner(x, y);
             }
-            this.log.debug(`isCropTouch: l[${this.isLeft}] r[${this.isRight}] t[${this.isTop}] b[${this.isBottom}]`);
+            Log.debug(this.TAG, `isCropTouch: l[${this.isLeft}] r[${this.isRight}] t[${this.isTop}] b[${this.isBottom}]`);
         }
         return this.isLeft || this.isRight || this.isTop || this.isBottom;
     }

@@ -27,7 +27,7 @@ export struct ActionBarButton {
     isFirst = false;
     isAutoTint = true;
     colorMode: ActionBarColorMode;
-    @State showPopup: boolean = false
+    @State showPopup: boolean = false;
     @Consume moreMenuList: Action[];
 
     aboutToAppear(): void {

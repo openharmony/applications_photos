@@ -12,24 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logError } from '../utils/LoggerUtils';
-import selectManager from '../manager/SelectManager'
-import mediaModel from '../model/MediaModel'
-import { MediaConstants } from '../constants/MediaConstants'
-import { MediaDataItem } from './MediaDataItem'
+import selectManager from '../manager/SelectManager';
+import mediaModel from '../model/MediaModel';
+import { Log } from '../utils/Log';
+import { MediaConstants } from '../constants/MediaConstants';
+import { MediaDataItem } from './MediaDataItem';
 
 const TAG = "TrashMediaDataItem"
 
 export class TrashMediaDataItem extends MediaDataItem {
     constructor(selections: string, selectionArgs: Array<string>, index: number) {
-        super(selections, selectionArgs, "", index)
-        this.setSelect(true)
+        super(selections, selectionArgs, "", index);
+        this.setSelect(false);
     }
 
     async loadFileAsset(): Promise<MediaLib.FileAsset> {
-        let fetchOption: MediaLib.MediaFetchOptions
+        let fetchOption: MediaLib.MediaFetchOptions;
         if (this.status == MediaConstants.UNDEFINED) {
             fetchOption = {
                 selections: this.selections,
@@ -43,32 +42,32 @@ export class TrashMediaDataItem extends MediaDataItem {
                 order: `date_added DESC`
             }
         }
-        return (await mediaModel.getAllTrashMediaItem(fetchOption, false)).fileAsset
+        return (await mediaModel.getAllTrashMediaItem(fetchOption, false)).fileAsset;
     }
 
     async onRecover(): Promise<boolean> {
         try {
-            let fileAsset = await this.loadFileAsset()
+            let fileAsset = await this.loadFileAsset();
 
-            await fileAsset.trash(false)
-            selectManager.deleteSelect(this.uri)
-            this.status = MediaConstants.TRASHED
-            return true
+            await fileAsset.trash(false);
+            selectManager.deleteSelect(this.uri);
+            this.status = MediaConstants.TRASHED;
+            return true;
         } catch (err) {
-            logError(TAG, `onRecover error: ${JSON.stringify(err)}`)
-            return false
+            Log.error(TAG, `onRecover error: ${JSON.stringify(err)}`);
+            return false;
         }
     }
 
     async onDelete(): Promise<boolean> {
         try {
-            await mediaModel.deleteOne(this.uri)
-            selectManager.deleteSelect(this.uri)
-            this.status = MediaConstants.TRASHED
-            return true
+            await mediaModel.deleteOne(this.uri);
+            selectManager.deleteSelect(this.uri);
+            this.status = MediaConstants.TRASHED;
+            return true;
         } catch (err) {
-            logError(TAG, `onDelete error: ${JSON.stringify(err)}`)
-            return false
+            Log.error(TAG, `onDelete error: ${JSON.stringify(err)}`);
+            return false;
         }
     }
 }

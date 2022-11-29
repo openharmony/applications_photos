@@ -13,24 +13,25 @@
  * limitations under the License.
  */
 
-import { Constants } from '../../common/model/common/Constants'
-import { PhotoEditCrop } from './crop/PhotoEditCrop'
-import { PhotoEditBase } from './base/PhotoEditBase'
-import { PhotoEditMode } from './base/PhotoEditType'
-import { PixelMapWrapper } from './base/PixelMapWrapper'
-import { ImageFilterStack } from './ImageFilterStack'
+import { Constants } from '../../common/model/common/Constants';
+import { PhotoEditCrop } from './crop/PhotoEditCrop';
+import { PhotoEditBase } from './base/PhotoEditBase';
+import { PhotoEditMode } from './base/PhotoEditType';
+import { PixelMapWrapper } from './base/PixelMapWrapper';
+import { ImageFilterStack } from './ImageFilterStack';
 import { MediaDataItem } from '../../../../../../common/base/src/main/ets/data/MediaDataItem';
-import { Loader } from './Loader'
-import { Save } from './Save'
-import { Logger } from './utils/Logger'
+import { Loader } from './Loader';
+import { Save } from './Save';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 
 export class PhotoEditorManager {
+    private TAG: string = 'PhotoEditorManager';
     private currentMode: PhotoEditMode = PhotoEditMode.EDIT_MODE_MAIN;
     private origin: PixelMapWrapper = undefined;
     private item: MediaDataItem = undefined;
     private editors: Array<PhotoEditBase> = undefined;
     private historyManager: ImageFilterStack = undefined;
-    private logger = new Logger('PhotoEditorManager');
+    isSaving: boolean = false;
 
     private constructor() {
         this.historyManager = new ImageFilterStack();
@@ -46,7 +47,7 @@ export class PhotoEditorManager {
     }
 
     initialize(item: MediaDataItem, mode: PhotoEditMode, errCallback?: any) {
-        this.logger.info(`initialize mode[${mode}]`);
+        Log.info(this.TAG, `initialize mode[${mode}]`);
         this.item = item;
         Loader.loadPixelMapWrapper(item, true).then((pixelMap) => {
             if (pixelMap) {
@@ -54,14 +55,14 @@ export class PhotoEditorManager {
                 this.historyManager.setOriginPixelMap(this.origin);
                 this.switchMode(mode);
             } else {
-                this.logger.error('initialize loadPixelMapWrapper failed');
+                Log.error(this.TAG, 'initialize loadPixelMapWrapper failed');
                 errCallback && errCallback();
             }
         })
     }
 
     clear() {
-        this.logger.debug('clear');
+        Log.debug(this.TAG, 'clear');
         this.editors[this.currentMode] && this.editors[this.currentMode].exit();
         this.item = undefined;
         this.origin && this.origin.release();
@@ -77,7 +78,7 @@ export class PhotoEditorManager {
 
     getLastPixelMap(): PixelMapWrapper {
         let position = this.historyManager.getPosition();
-        this.logger.debug(`getLastPixelMap position = ${position}`);
+        Log.debug(this.TAG, `getLastPixelMap position = ${position}`);
         if (position < 0) {
             return this.origin;
         } else {
@@ -86,7 +87,7 @@ export class PhotoEditorManager {
     }
 
     switchMode(mode: PhotoEditMode): PhotoEditMode {
-        this.logger.info(`switchMode: currentMode[${this.currentMode}] mode[${mode}]`);
+        Log.info(this.TAG, `switchMode: currentMode[${this.currentMode}] mode[${mode}]`);
         if (this.currentMode == mode) {
             return mode;
         }
@@ -143,11 +144,14 @@ export class PhotoEditorManager {
     }
 
     async save(isReplace: boolean): Promise<number> {
-        this.logger.info(`save enter isReplace = ${isReplace}`);
+        Log.info(this.TAG, `save enter isReplace = ${isReplace}`);
+        this.isSaving = true;
         const filter = this.editors[this.currentMode].exit();
         if (filter != undefined) {
             this.historyManager.push(filter);
         }
-        return await Save.save(this.item, this.historyManager, isReplace);
+        let result = await Save.save(this.item, this.historyManager, isReplace);
+        this.isSaving = false;
+        return result;
     }
 }

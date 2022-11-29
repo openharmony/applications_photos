@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import { logInfo } from '@ohos/base/src/main/ets/utils/LoggerUtils'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { TimelineDataItem } from '../data/TimelineDataItem';
-import { DateUtil } from '../../../../../../common/base/src/main/ets/utils/DateUtil'
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
+import { DateUtil } from '../../../../../../common/base/src/main/ets/utils/DateUtil';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 
 const TAG = "TimelineTitleComponent"
 // Group Title
@@ -25,15 +25,15 @@ const TAG = "TimelineTitleComponent"
 export struct TimelineTitleComponent {
     @Consume broadCast: Broadcast;
     @Consume isSelectedMode: boolean;
-    timelineDataItem: TimelineDataItem
+    timelineDataItem: TimelineDataItem;
     addresses = '';
 
     aboutToAppear(): void {
-        logInfo(TAG, `${this.timelineDataItem.dateAdded}`);
+        Log.info(TAG, `${this.timelineDataItem.dateAdded}`);
     }
 
     private selectStateChange() {
-        logInfo(TAG, `change selected ${this.isSelectedMode}`);
+        Log.info(TAG, `change selected ${this.isSelectedMode}`);
         if (this.isSelectedMode) {
             let isSelect = !this.timelineDataItem.isSelect()
             this.timelineDataItem.setSelect(isSelect)

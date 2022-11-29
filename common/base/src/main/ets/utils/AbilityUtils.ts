@@ -13,23 +13,23 @@
  * limitations under the License.
  */
 import Want from "@ohos.application.Want";
-import { logDebug, logError } from './LoggerUtils'
+import { Log } from '../utils/Log';
 
 const TAG = "AbilityUtils"
 
 export async function startAbility(want: Want): Promise<void> {
     try {
-        await globalThis.appContext.startAbility(want)
-        logDebug(TAG, 'raul startAbility complete');
+        await globalThis.appContext.startAbility(want);
+        Log.debug(TAG, 'raul startAbility complete');
     } catch (error) {
-        logError(TAG, `raul startAbility failed, error: ${JSON.stringify(error)}`);
+        Log.error(TAG, `raul startAbility failed, error: ${JSON.stringify(error)}`);
     }
 }
 
 export async function terminateSelf(): Promise<void> {
-    await globalThis.appContext.terminateSelf()
+    await globalThis.appContext.terminateSelf();
 }
 
 export async function terminateSelfWithResult(parameter): Promise<void> {
-    await globalThis.appContext.terminateSelfWithResult(parameter)
+    await globalThis.appContext.terminateSelfWithResult(parameter);
 }

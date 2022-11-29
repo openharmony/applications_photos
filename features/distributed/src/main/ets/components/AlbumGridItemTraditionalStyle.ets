@@ -14,7 +14,7 @@
  */
 
 import router from '@system.router';
-import { logDebug, logInfo } from '@ohos/base/src/main/ets/utils/LoggerUtils';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
@@ -28,9 +28,9 @@ const TAG = "AlbumGridItemTraditionalStyle"
 // There is no selection mode.
 @Component
 export struct AlbumGridItemTraditionalStyle {
-    item: AlbumDataItem
-    deviceName: string
-    deviceId: string
+    item: AlbumDataItem;
+    deviceName: string;
+    deviceId: string;
     @State isEmptyAlbum: boolean = false;
     @Provide isBigCard: boolean = false;
     @Provide gridHeight: number = 0;
@@ -38,12 +38,12 @@ export struct AlbumGridItemTraditionalStyle {
     @State cardWidth: number = 0;
     @State cardHeight: number = 0;
     @State transformV: number = 0;
-    @State thumbnail: string = ""
+    @State thumbnail: string = "";
     gridAspectRatio = WindowConstants.CARD_ASPECT_RATIO;
     albumCountMarginRight = WindowConstants.ALBUM_SET_NEW_ICON_SIZE + WindowConstants.ALBUM_SET_NEW_ICON_MARGIN * 2;
 
     aboutToAppear(): void {
-        logInfo(TAG, 'aboutToAppear new opp');
+        Log.info(TAG, 'aboutToAppear new opp');
 
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
             this.updateCardSize();
@@ -55,7 +55,7 @@ export struct AlbumGridItemTraditionalStyle {
     }
 
     updateCard() {
-        logDebug(TAG, 'Album changed and update card size.');
+        Log.debug(TAG, 'Album changed and update card size.');
         this.updateCardSize();
     }
 
@@ -89,7 +89,7 @@ export struct AlbumGridItemTraditionalStyle {
     }
 
     private async jumpToBrowser() {
-        logInfo(TAG, `After onClick : ${JSON.stringify(this.item)}`);
+        Log.info(TAG, `After onClick : ${JSON.stringify(this.item)}`);
         let name = this.deviceName ? `${this.deviceName}(${this.item.displayName})` : this.item.displayName;
         let relativePath = await this.item.getRelativePath()
         let simpleItem: SimpleAlbumDataItem = new SimpleAlbumDataItem(this.item.id, this.item.displayName, relativePath, this.deviceId, this.deviceName)
@@ -124,7 +124,7 @@ export struct AlbumGridItemTraditionalStyle {
                                 angle: this.item.orientation
                             })
                             .onError(() => {
-                                logDebug(TAG, 'album is empty or its cover is error');
+                                Log.debug(TAG, 'album is empty or its cover is error');
                                 this.isEmptyAlbum = true;
                             })
                             .onComplete((msg: {
@@ -133,7 +133,7 @@ export struct AlbumGridItemTraditionalStyle {
                                 componentWidth: number,
                                 componentHeight: number
                             }) => {
-                                logDebug(TAG, `image load success.Size: ${msg.componentWidth}x${msg.componentHeight}`);
+                                Log.debug(TAG, `image load success.Size: ${msg.componentWidth}x${msg.componentHeight}`);
                             })
                     }
                     .width(this.bigWidth)
@@ -154,7 +154,7 @@ export struct AlbumGridItemTraditionalStyle {
                                 angle: this.item.orientation
                             })
                             .onError(() => {
-                                logDebug(TAG, 'album is empty or its cover is error');
+                                Log.debug(TAG, 'album is empty or its cover is error');
                                 this.isEmptyAlbum = true;
                             })
                             .onComplete((msg: {
@@ -163,7 +163,7 @@ export struct AlbumGridItemTraditionalStyle {
                                 componentWidth: number,
                                 componentHeight: number
                             }) => {
-                                logDebug(TAG, `image load success. Size: ${msg.width}x${msg.height},\
+                                Log.debug(TAG, `image load success. Size: ${msg.width}x${msg.height},\
                                     componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
                             })
                     }

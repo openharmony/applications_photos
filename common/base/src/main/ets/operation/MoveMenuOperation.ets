@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import mediaModel from '../model/MediaModel'
-import { logInfo, logWarn, logError } from '../utils/LoggerUtils'
-import { MenuContext } from './MenuContext'
-import { ProcessMenuOperation, FindSameOperation } from './ProcessMenuOperation'
-import { MediaOperationType } from '../data/MediaOperationType'
+import mediaModel from '../model/MediaModel';
+import { Log } from '../utils/Log';
+import { MenuContext } from './MenuContext';
+import { ProcessMenuOperation, FindSameOperation } from './ProcessMenuOperation';
+import { MediaOperationType } from '../data/MediaOperationType';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { startTraceWithTaskId, finishTraceWithTaskId } from '../utils/TraceControllerUtils';
 import { ItemDataSource } from '../vm/ItemDataSource';
@@ -35,20 +35,20 @@ export class MoveMenuOperation extends ProcessMenuOperation {
     }
 
     doAction(): void {
-        logInfo(TAG, 'move doAction');
+        Log.info(TAG, 'move doAction');
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
 
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.count = this.menuContext.items.length
+            this.count = this.menuContext.items.length;
         } else {
             this.count = dataSource.getSelectedCount();
         }
         if (this.count <= 0) {
-            logWarn(TAG, 'count <= 0, return');
+            Log.warn(TAG, 'count <= 0, return');
             return;
         }
 
@@ -62,28 +62,28 @@ export class MoveMenuOperation extends ProcessMenuOperation {
         MediaOperationType.Move, this.cancelFunc.bind(this)]);
 
         if (dataSource == null) {
-            this.items = this.menuContext.items
+            this.items = this.menuContext.items;
         } else {
-            this.items = dataSource.getSelectedItems()
+            this.items = dataSource.getSelectedItems();
         }
-        this.processOperation()
+        this.processOperation();
     }
 
     requestOneBatchOperation() {
-        let item = this.items[this.currentBatch++] as MediaDataItem
-        this.moveOne(item)
+        let item = this.items[this.currentBatch++] as MediaDataItem;
+        this.moveOne(item);
     }
 
     private async moveOne(item: MediaDataItem) {
-        let fileAsset = await item.loadFileAsset()
-        let assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo)
+        let fileAsset = await item.loadFileAsset();
+        let assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo);
         if (assets.targetAsset) {
             if (assets.targetAsset.uri == assets.sourceAsset.uri) {
-                logInfo(TAG, 'move same fileAsset');
+                Log.info(TAG, 'move same fileAsset');
                 this.onOperateContinue();
                 return;
             }
-            logInfo(TAG, 'show find same file dialog');
+            Log.info(TAG, 'show find same file dialog');
             switch (this.findSameOperation) {
                 case FindSameOperation.NONE:
                     this.menuContext.broadCast.emit(BroadcastConstants.FIND_SAME_FILE_DIALOG,
@@ -99,11 +99,11 @@ export class MoveMenuOperation extends ProcessMenuOperation {
                     this.onOperateContinue();
                     break;
                 default:
-                    logWarn(TAG, `findSameOperation is error ${this.findSameOperation}`);
+                    Log.warn(TAG, `findSameOperation is error ${this.findSameOperation}`);
                     break;
             }
         } else {
-            this.move(assets.sourceAsset, this.albumInfo.relativePath)
+            this.move(assets.sourceAsset, this.albumInfo.relativePath);
         }
     }
 
@@ -113,18 +113,18 @@ export class MoveMenuOperation extends ProcessMenuOperation {
             if (targetFile) {
                 await mediaModel.deleteOne(targetFile.uri);
             }
-            file.relativePath = path
-            file.commitModify()
+            file.relativePath = path;
+            file.commitModify();
             finishTraceWithTaskId('move', this.currentBatch);
             this.onCompleted();
         } catch (error) {
-            logError(TAG, `move error: ${error}`)
+            Log.error(TAG, `move error: ${error}`)
             this.onError();
         }
     }
 
     cancelFunc(): void {
-        logInfo(TAG, `progress cancel`);
+        Log.info(TAG, `progress cancel`);
         this.onOperatePause();
         let cancelMessage = $r('app.string.move_cancel_message', this.getExpectProgress().toString());
         this.menuContext.broadCast && this.menuContext.broadCast.emit(BroadcastConstants.CANCEL_OPERATE,
@@ -133,7 +133,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
 
     // Move cancel callback
     onOperateContinue(): void {
-        logInfo(TAG, 'Operate Continue');
+        Log.info(TAG, 'Operate Continue');
         this.isPause = false;
         this.cyclicOperation();
     }

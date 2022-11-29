@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { AsyncCallback } from '../interface/AsyncCallback'
-import { logDebug, logInfo, logError } from '../utils/LoggerUtils'
-import { MenuOperationCallback } from './MenuOperationCallback'
-import { MenuOperation } from './MenuOperation'
-import { MenuContext } from './MenuContext'
+import { AsyncCallback } from '../interface/AsyncCallback';
+import { Log } from '../utils/Log';
+import { MenuOperationCallback } from './MenuOperationCallback';
+import { MenuOperation } from './MenuOperation';
+import { MenuContext } from './MenuContext';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { startTraceWithTaskId, finishTraceWithTaskId } from '../utils/TraceControllerUtils';
 import { getFetchOptionsByItem } from '../helper/MediaDataHelper';
 import { SimpleAlbumDataItem } from '../data/SimpleAlbumDataItem';
-import mediaModel from '../model/MediaModel'
+import mediaModel from '../model/MediaModel';
 
 export enum FindSameOperation {
     NONE,
@@ -38,7 +38,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
 
     // Maximum progress
     readonly MAX_PROGRESS: number = 100;
-    items: any[] = []
+    items: any[] = [];
     menuContext: MenuContext;
     uris: string[];
     count: number;
@@ -71,7 +71,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
     }
 
     onCompleted(): void {
-        logInfo(TAG, `onCompleted ${this.isPause}`);
+        Log.info(TAG, `onCompleted ${this.isPause}`);
         this.successBatch++;
         if (!this.isPause) {
             this.cyclicOperation();
@@ -79,20 +79,20 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
     }
 
     onError(): void {
-        logError(TAG, `Operate the ${this.currentBatch} batch data error, total ${this.totalBatches} batches`);
+        Log.error(TAG, `Operate the ${this.currentBatch} batch data error, total ${this.totalBatches} batches`);
         this.isError = true;
         this.cyclicOperation();
     }
 
     // Start processing operation
     processOperation(): void {
-        logInfo(TAG, 'processOperation start');
+        Log.info(TAG, 'processOperation start');
         startTraceWithTaskId('ProgressOperation', this.requestTime);
         let length = this.items.length;
-        logInfo(TAG, `selected count: ${this.count}, uris's length: ${length}`);
+        Log.info(TAG, `selected count: ${this.count}, uris's length: ${length}`);
         // Batch deletion
         this.totalBatches = Math.floor(length / this.BATCH_SIZE) + ((length % this.BATCH_SIZE) ? 1 : 0);
-        logInfo(TAG, `The count to be operate is ${length}, operate in ${this.totalBatches} batches`);
+        Log.info(TAG, `The count to be operate is ${length}, operate in ${this.totalBatches} batches`);
         if (this.isCancelled) {
             this.isCancelled = false;
         }
@@ -103,7 +103,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
 
     // Batch circular deletion
     cyclicOperation() {
-        logInfo(TAG, 'cyclicOperation');
+        Log.info(TAG, 'cyclicOperation');
         this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [this.getExpectProgress(), this.currentBatch]);
 
         if (this.isCancelled) {
@@ -123,11 +123,11 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
 
     onProcessDone(): void {
         this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [100]);
-        this.findSameOperation = FindSameOperation.NONE
+        this.findSameOperation = FindSameOperation.NONE;
         if (this.startTime != null) {
             let operateCount = this.currentBatch >= this.totalBatches ? this.count : this.currentBatch * this.BATCH_SIZE;
             let costTime = Date.now() - this.startTime;
-            logDebug(TAG, `process data operate done, operate ${operateCount} items, cost time ${costTime} ms,\
+            Log.debug(TAG, `process data operate done, operate ${operateCount} items, cost time ${costTime} ms,\
             average ${(costTime / operateCount)} ms/item.`);
         }
         this.isCancelled = false;
@@ -137,37 +137,37 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
 
     // Operate cancel callback
     onOperateCancelled(): void {
-        logInfo(TAG, 'Operate Cancel');
+        Log.info(TAG, 'Operate Cancel');
         this.isCancelled = true;
         this.onProcessDone();
     }
 
     // Operate cancel callback
     onOperatePause(): void {
-        logInfo(TAG, 'Operate Pause');
+        Log.info(TAG, 'Operate Pause');
         this.isPause = true;
     }
 
     // Calculate the operation progress according to the batch
     getExpectProgress(): number {
-        logInfo(TAG, 'getExpectProgress');
+        Log.info(TAG, 'getExpectProgress');
         let progress = Math.min(
         Math.floor(this.MAX_PROGRESS * this.currentBatch * this.BATCH_SIZE / this.count), this.MAX_PROGRESS);
         return progress;
     }
 
     setFindSameOperation(newOperation: number): void {
-        logInfo(TAG, `setFindSameOperation ${newOperation}`);
-        this.findSameOperation = newOperation
+        Log.info(TAG, `setFindSameOperation ${newOperation}`);
+        this.findSameOperation = newOperation;
     }
 
     async getFileCopyOrMoveInfo(fileAsset: MediaLib.FileAsset, albumInfo: SimpleAlbumDataItem) {
-        logDebug(TAG, 'getFileCopyOrMoveInfo start');
-        let item: SimpleAlbumDataItem = new SimpleAlbumDataItem("", fileAsset.displayName, albumInfo.relativePath, "", "")
-        let fetchOptions = await getFetchOptionsByItem(item)
-        let targetAsset = (await mediaModel.getAllCommonMediaItem(fetchOptions, false)).fileAsset
+        Log.debug(TAG, 'getFileCopyOrMoveInfo start');
+        let item: SimpleAlbumDataItem = new SimpleAlbumDataItem("", fileAsset.displayName, albumInfo.relativePath, "", "");
+        let fetchOptions = await getFetchOptionsByItem(item);
+        let targetAsset = (await mediaModel.getAllCommonMediaItem(fetchOptions, false)).fileAsset;
         if (targetAsset == null || targetAsset == undefined) {
-            logDebug(TAG, 'targetAsset not found');
+            Log.debug(TAG, 'targetAsset not found');
         }
 
         return { sourceAsset: fileAsset, targetAsset: targetAsset };

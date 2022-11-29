@@ -14,69 +14,69 @@
  */
 
 import createOrGet from '../utils/SingleInstanceUtils';
-import { logInfo, logWarn } from '../utils/LoggerUtils'
-import { MediaConstants } from '../constants/MediaConstants'
-import mediaModel from '../model/MediaModel'
+import { Log } from '../utils/Log';
+import { MediaConstants } from '../constants/MediaConstants';
+import mediaModel from '../model/MediaModel';
 import { MediaObserverCallback } from '../interface/MediaObserverCallback';
 
 const TAG = "MediaObserver"
 
 class MediaObserver {
     callbacks: MediaObserverCallback[] = [];
-    private static readonly OBSERVER_IMAGE_CHANGE: string = 'imageChange'
-    private static readonly OBSERVER_VIDEO_CHANGE: string = 'videoChange'
-    private static readonly OBSERVER_DEVICE_CHANGE: string = 'deviceChange'
-    private static readonly OBSERVER_ALBUM_CHANGE: string = 'albumChange'
-    private static readonly OBSERVER_REMOTE_FILE_CHANGE: string = 'remoteFileChange'
+    private static readonly OBSERVER_IMAGE_CHANGE: string = 'imageChange';
+    private static readonly OBSERVER_VIDEO_CHANGE: string = 'videoChange';
+    private static readonly OBSERVER_DEVICE_CHANGE: string = 'deviceChange';
+    private static readonly OBSERVER_ALBUM_CHANGE: string = 'albumChange';
+    private static readonly OBSERVER_REMOTE_FILE_CHANGE: string = 'remoteFileChange';
 
     registerObserver(callback: MediaObserverCallback) {
-        logInfo(TAG, 'registerObserver');
+        Log.info(TAG, 'registerObserver');
         if (callback == null) {
-            logWarn(TAG, 'registerObserver with empty callback');
+            Log.warn(TAG, 'registerObserver with empty callback');
             return;
         }
 
         if (this.callbacks.indexOf(callback) < 0) {
             this.callbacks.push(callback);
         } else {
-            logInfo(TAG, 'registerObserver already exist');
+            Log.info(TAG, 'registerObserver already exist');
             return;
         }
 
         if (this.callbacks.length == 1) {
-            logInfo(TAG, 'registerObserver register media');
+            Log.info(TAG, 'registerObserver register media');
             mediaModel.getMediaLibrary().on('imageChange', () => {
-                logInfo(TAG, 'registerObserver on image');
+                Log.info(TAG, 'registerObserver on image');
                 this.sendNotify(MediaConstants.MEDIA_TYPE_IMAGE);
             })
             mediaModel.getMediaLibrary().on('videoChange', () => {
-                logInfo(TAG, 'registerObserver on video');
+                Log.info(TAG, 'registerObserver on video');
                 this.sendNotify(MediaConstants.MEDIA_TYPE_VIDEO);
             })
             mediaModel.getMediaLibrary().on('deviceChange', () => {
-                logInfo(TAG, 'registerObserver on device');
+                Log.info(TAG, 'registerObserver on device');
                 this.sendNotify(MediaConstants.MEDIA_TYPE_DEVICE);
             })
             mediaModel.getMediaLibrary().on('albumChange', () => {
-                logInfo(TAG, 'registerObserver on album');
+                Log.info(TAG, 'registerObserver on album');
                 this.sendNotify(MediaConstants.MEDIA_TYPE_ALBUM);
             })
             mediaModel.getMediaLibrary().on('remoteFileChange', () => {
-                logInfo(TAG, 'registerObserver on remoteFile');
+                Log.info(TAG, 'registerObserver on remoteFile');
                 this.sendNotify(MediaConstants.MEDIA_TYPE_REMOTE);
             })
         }
     }
 
     sendNotify(mediaType: string) {
-        logInfo(TAG, `registerObserver sendNotify size: ${this.callbacks.length}`);
+        Log.info(TAG, `registerObserver sendNotify size: ${this.callbacks.length}`);
         for (let callback of this.callbacks) {
             callback.onChange(mediaType);
         }
     }
 
     unregisterObserver(callback: MediaObserverCallback) {
-        logInfo(TAG, 'unregisterObserver');
+        Log.info(TAG, 'unregisterObserver');
         const pos = this.callbacks.indexOf(callback);
         if (pos >= 0) {
             this.callbacks.splice(pos, 1);

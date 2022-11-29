@@ -14,25 +14,26 @@
  */
 
 import router from '@system.router';
-import { Logger } from '../utils/Logger'
-import { TitleBar } from './TitleBar'
-import { MainMenuBar } from './MainMenuBar'
-import { PhotoEditMode } from '../base/PhotoEditType'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { ToolBar } from './ToolBar'
-import { CropImageShow } from './CropImageShow'
-import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView'
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager'
-import { PhotoEditorManager } from '../PhotoEditorManager'
-import { PhotoEditCrop } from '../crop/PhotoEditCrop'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { TitleBar } from './TitleBar';
+import { MainMenuBar } from './MainMenuBar';
+import { PhotoEditMode } from '../base/PhotoEditType';
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { ToolBar } from './ToolBar';
+import { CropImageShow } from './CropImageShow';
+import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { PhotoEditorManager } from '../PhotoEditorManager';
+import { PhotoEditCrop } from '../crop/PhotoEditCrop';
 import { MediaDataItem } from '../../../../../../../common/base/src/main/ets/data/MediaDataItem';
-import { Constants } from '../../../common/model/common/Constants'
+import { Constants } from '../../../common/model/common/Constants';
 
 @Entry
 @Component
 export struct Edit {
+    private TAG: string = 'Edit'
     private mediaItem: MediaDataItem = globalThis.EditorMediaItem;
     @Provide editorManager: PhotoEditorManager = PhotoEditorManager.getInstance();
     @Provide('compare') isCompare: boolean = false;
@@ -58,7 +59,6 @@ export struct Edit {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @State imageScaleWidth: number = 0;
     appEventBus: Broadcast = broadcastManager.getBroadcast();
-    private log: Logger = new Logger('EditMain');
     private defaultWidth: number = Constants.DEFAULT_WIDTH;
     private isLoadFailed: boolean = false;
 
@@ -72,7 +72,7 @@ export struct Edit {
     }
 
     discardCallback() {
-        this.log.debug('discardCallback called');
+        Log.debug(this.TAG, 'discardCallback called');
     }
 
     loadFailedCallback() {
@@ -80,7 +80,7 @@ export struct Edit {
     }
 
     aboutToAppear() {
-        this.log.debug('EditMain init start');
+        Log.debug(this.TAG, 'EditMain init start');
         if (this.mediaItem) {
             this.isLoadFailed = false;
             this.editorManager.initialize(
@@ -101,7 +101,7 @@ export struct Edit {
             this.screenWidth = temp;
         }
 
-        this.log.debug(`EditMain this.isVerticalScreen: ${this.isVerticalScreen},\
+        Log.debug(this.TAG, `EditMain this.isVerticalScreen: ${this.isVerticalScreen},\
             leftBlank: ${JSON.stringify(this.leftBlank)}, screenSize: ${this.screenHeight},${this.screenWidth}`);
         this.imageScale = this.isVerticalScreen
             ? (this.screenHeight - this.titleSize - this.mainBottomSize) : (this.screenWidth - this.titleSize);
@@ -110,7 +110,7 @@ export struct Edit {
     }
 
     aboutToDisappear() {
-        this.log.debug('aboutToDisappear');
+        Log.debug(this.TAG, 'aboutToDisappear');
         globalThis.EditorMediaItem = undefined;
         PhotoEditorManager.getInstance().clear();
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000')

@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-import { Logger } from '../utils/Logger'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { ActionButton } from './ActionButton'
-import { ID } from './MainMenuInfo'
-import { Constants } from '../../../common/model/common/Constants'
-import { PhotoEditCrop } from '../crop/PhotoEditCrop'
-import { CropStyleBar } from './CropStyleBar'
-import { CropRulerBar } from './CropRulerBar'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { ActionButton } from './ActionButton';
+import { ID } from './MainMenuInfo';
+import { Constants } from '../../../common/model/common/Constants';
+import { PhotoEditCrop } from '../crop/PhotoEditCrop';
+import { CropStyleBar } from './CropStyleBar';
+import { CropRulerBar } from './CropRulerBar';
 
 @Component
 export struct CropModeBar {
@@ -32,7 +32,7 @@ export struct CropModeBar {
     @Consume isCropReset: boolean;
     @Consume screenWidth: number;
     @Consume screenHeight: number;
-    private log: Logger = new Logger('CropModeBar');
+    private TAG: string = 'CropModeBar'
     private rulerComponentSize: number = 0;
     private rulerChanged: any = undefined;
 
@@ -41,7 +41,7 @@ export struct CropModeBar {
         this.broadCast.on(Constants.RULER_CHANGED, this.rulerChanged);
         this.rulerComponentSize = this.isVerticalScreen ? this.screenWidth - Constants.PADDING_VERTICAL
                                                         : this.screenWidth - Constants.PADDING_HORIZONTAL;
-        this.log.debug(`this.rulerComponentSize = ${this.rulerComponentSize}`);
+        Log.debug(this.TAG, `this.rulerComponentSize = ${this.rulerComponentSize}`);
     }
 
     aboutToDisappear() {

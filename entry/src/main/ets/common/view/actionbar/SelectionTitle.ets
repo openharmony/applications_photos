@@ -13,19 +13,19 @@
  * limitations under the License.
  */
 
-import { ActionBarColorMode, ActionBarSelectionMode } from '../browserOperation/ActionBarMode'
-import { Logger } from '../../utils/Logger'
-import { ActionBarProp } from '../browserOperation/ActionBarProp'
+import { ActionBarColorMode, ActionBarSelectionMode } from '../browserOperation/ActionBarMode';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { ActionBarProp } from '../browserOperation/ActionBarProp';
 
 // Select the mode title, the content changes with the number of selections
 @Component
 export struct SelectionTitle {
+    private TAG: string = 'SelectionTitle';
     @State actionBarProp: ActionBarProp = new ActionBarProp();
     @Consume('selectedCount') count: number;
-    logger: Logger = new Logger('SelectionTitle');
 
     private onBuildDone(): void {
-        this.logger.info(`onBuildDone, count: ${this.count}`)
+        Log.info(this.TAG, `onBuildDone, count: ${this.count}`);
     }
 
     build() {

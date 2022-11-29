@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {LineSegment} from '../base/Line'
-import {Point} from '../base/Point'
-import {RectF} from '../base/Rect'
-import {CropAngle} from './CropType'
+import {LineSegment} from '../base/Line';
+import {Point} from '../base/Point';
+import {RectF} from '../base/Rect';
+import {CropAngle} from './CropType';
 
 export abstract class MathUtils {
     private static readonly EQUALITY_THRESHOLD = 0.0001;

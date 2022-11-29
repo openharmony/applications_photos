@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import { ActionButtonInfo } from './MainMenuInfo'
-import { Constants } from '../../../common/model/common/Constants'
+import { ActionButtonInfo } from './MainMenuInfo';
+import { Constants } from '../../../common/model/common/Constants';
 
 export class RefreshActionMenu {
     isChanged: number;

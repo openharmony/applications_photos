@@ -13,23 +13,24 @@
  * limitations under the License.
  */
 
-import { TimelinePage } from '../../../feature/timeline/view/TimelinePage'
-import { AlbumSetPage } from '../../../feature/album/view/AlbumSetPage'
-import { Logger } from '../../../common/utils/Logger'
-import { TabBar, DEVICE_TYPE } from '../../../common/view/TabBar'
-import { JumpSourceToMain } from '../../../../../../../common/base/src/main/ets/data/JumpSourceToMain'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager'
-import { Constants } from '../../../common/model/common/Constants'
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { startTrace, finishTrace } from '../../../../../../../common/base/src/main/ets/utils/TraceControllerUtils'
-import router from '@system.router'
+import { TimelinePage } from '../../../feature/timeline/view/TimelinePage';
+import { AlbumSetPage } from '../../../feature/album/view/AlbumSetPage';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { TabBar, DEVICE_TYPE } from '../../../common/view/TabBar';
+import { JumpSourceToMain } from '../../../../../../../common/base/src/main/ets/data/JumpSourceToMain';
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { Constants } from '../../../common/model/common/Constants';
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { startTrace, finishTrace } from '../../../../../../../common/base/src/main/ets/utils/TraceControllerUtils';
+import router from '@system.router';
 
 // Application entry
 @Entry
 @Component
 struct IndexPage {
+    private TAG: string = 'IndexPage'
     private preIndex: number = Constants.TIMELINE_PAGE_INDEX;
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
@@ -38,7 +39,6 @@ struct IndexPage {
     @Provide isAlbumSetSelectedMode: boolean = false;
     private currentIndex: number = this.preIndex;
     private tabsController: TabsController = new TabsController();
-    private logger: Logger = new Logger('IndexPage');
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private jumpSource: number;
     @StorageLink('entryFromHap') entryFromHap: number = Constants.ENTRY_FROM_NONE;
@@ -52,26 +52,26 @@ struct IndexPage {
     aboutToAppear(): void {
         startTrace('indexPageAppearToShow');
         if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
-            AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false)
+            AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false);
             this.currentIndex = Constants.ALBUM_PAGE_INDEX;
         }
         let param = router.getParams();
-        this.logger.debug(`param: ${JSON.stringify(param)}`);
+        Log.debug(this.TAG, `param: ${JSON.stringify(param)}`);
         if (param != null) {
             this.jumpSource = new Number(param.jumpSource).valueOf() || 0;
             if (this.jumpSource == JumpSourceToMain.CAMERA) {
                 this.entryFromHap = Constants.ENTRY_FROM_NONE;
                 this.currentIndex = Constants.TIMELINE_PAGE_INDEX;
-                this.logger.info(`Camera in, switch to Tab ${this.currentIndex}.`);
+                Log.info(this.TAG, `Camera in, switch to Tab ${this.currentIndex}.`);
             }
         }
     }
 
     onPageShow() {
-        this.logger.info(`IndexPage.onPageShow entryFromHap: ${this.entryFromHap}`);
+        Log.info(this.TAG, `IndexPage.onPageShow entryFromHap: ${this.entryFromHap}`);
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
-        this.isShow = true
-        this.logger.error(`IndexPage.onPageShow: router.clear ${this.jumpSource}`);
+        this.isShow = true;
+         Log.error(this.TAG, `IndexPage.onPageShow: router.clear ${this.jumpSource}`);
         if (this.jumpSource == JumpSourceToMain.CAMERA) {
             router.clear();
         } else if (this.jumpSource == JumpSourceToMain.ALBUM) {
@@ -81,7 +81,7 @@ struct IndexPage {
     }
 
     onPageHide() {
-        this.isShow = false
+        this.isShow = false;
     }
 
     onBackPress() {
@@ -132,7 +132,7 @@ struct IndexPage {
                 .onChange((index: number) => {
                     this.resetTabState(this.currentIndex)
                     this.onTabChanged(index);
-                    this.logger.info(`Switch to Tab ${this.currentIndex}.`)
+                    Log.info(this.TAG, `Switch to Tab ${this.currentIndex}.`)
                 })
                 .padding({ left: this.isSidebar ? $r('app.float.tab_bar_width') : 0 })
 

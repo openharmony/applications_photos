@@ -270,7 +270,7 @@ const TAG = "MoudleXXX"
 
 entry() {
     let input = 'hello'
-	 logInfo(TAG, `onPhotoChanged start ${input}`);
+	 Log.info(TAG, `onPhotoChanged start ${input}`);
 }
 ```
 上述log打印为：

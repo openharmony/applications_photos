@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logDebug, logInfo, logError } from '../utils/LoggerUtils'
-import { AnimationConstants } from '../constants/AnimationConstants'
-import { MediaDataItem } from '../data/MediaDataItem'
-import { DateUtil } from '../utils/DateUtil'
-import { Broadcast } from '../utils/Broadcast'
-import { BroadcastConstants } from '../constants/BroadcastConstants'
-import { startTrace } from '../utils/TraceControllerUtils'
-import { MediaConstants } from '../constants/MediaConstants'
-import { startTraceWithTaskId, finishTraceWithTaskId } from '../utils/TraceControllerUtils'
+import { Log } from '../utils/Log';
+import { AnimationConstants } from '../constants/AnimationConstants';
+import { MediaDataItem } from '../data/MediaDataItem';
+import { DateUtil } from '../utils/DateUtil';
+import { Broadcast } from '../utils/Broadcast';
+import { BroadcastConstants } from '../constants/BroadcastConstants';
+import { startTrace } from '../utils/TraceControllerUtils';
+import { MediaConstants } from '../constants/MediaConstants';
+import { startTraceWithTaskId, finishTraceWithTaskId } from '../utils/TraceControllerUtils';
 
 const TAG = "ImageGridItemComponent"
 // General grid picture control
@@ -30,10 +30,10 @@ export struct ImageGridItemComponent {
     @Consume broadCast: Broadcast;
     @Consume isSelectedMode: boolean;
     @Consume @Watch('onShow') isShow: boolean;
-    @State thumbnail: string = ""
-    @State isFavourite: boolean = false
+    @State thumbnail: string = "";
+    @State isFavourite: boolean = false;
     @State pressAnimScale: number = 1.0;
-    @State isError: boolean = false
+    @State isError: boolean = false;
     pageName = '';
     mediaItem: MediaDataItem;
     isThird = false;
@@ -45,26 +45,26 @@ export struct ImageGridItemComponent {
     }
 
     aboutToAppear(): void {
-        logDebug(TAG, 'aboutToAppear');
+        Log.debug(TAG, 'aboutToAppear');
         this.resetShow();
     }
 
     private resetShow() {
-        startTraceWithTaskId("load MediaItem", this.mediaItem.index)
+        startTraceWithTaskId("load MediaItem", this.mediaItem.index);
         this.mediaItem.load(false).then(() => {
-            finishTraceWithTaskId("load MediaItem", this.mediaItem.index)
-            this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE)
-            this.isError = false
-            logDebug(TAG, `getThumbnail ${this.thumbnail}`)
+            finishTraceWithTaskId("load MediaItem", this.mediaItem.index);
+            this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE);
+            this.isError = false;
+            Log.debug(TAG, `getThumbnail ${this.thumbnail}`);
             this.mediaItem.isFavor().then((status: boolean) => {
-                this.isFavourite = status
+                this.isFavourite = status;
             })
         })
         this.resetPressAnim();
     }
 
     aboutToDisappear(): void {
-        logDebug(TAG, `aboutToDisappear`);
+        Log.debug(TAG, `aboutToDisappear`);
         this.resetPressAnim();
     }
 
@@ -73,7 +73,7 @@ export struct ImageGridItemComponent {
     }
 
     async routePage(isError: boolean) {
-        logInfo(TAG, `routePage ${isError}`);
+        Log.info(TAG, `routePage ${isError}`);
         try {
             startTrace('enterPhotoBrowser');
             if (this.isThird) {
@@ -82,32 +82,32 @@ export struct ImageGridItemComponent {
                 this.broadCast.emit(BroadcastConstants.JUMP_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
             }
         } catch (err) {
-            logError(TAG, `fail callback, code: ${err.code}, msg: ${err.msg}`);
+            Log.error(TAG, `fail callback, code: ${err.code}, msg: ${err.msg}`);
         }
     }
 
     async routeToPreviewPage() {
         try {
-            logInfo(TAG, 'routeToPreviewPage');
+            Log.info(TAG, 'routeToPreviewPage');
             this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
         } catch (err) {
-            logError(TAG, `fail callback, code: ${err.code}, msg: ${err.msg}`);
+            Log.error(TAG, `fail callback, code: ${err.code}, msg: ${err.msg}`);
         }
     }
 
     private onSelected() {
-        logInfo(TAG, 'onSelected');
-        this.mediaItem.setSelect(!this.mediaItem.isSelect)
-        this.broadCast.emit(BroadcastConstants.SELECT, [this.mediaItem.index])
+        Log.info(TAG, 'onSelected');
+        this.mediaItem.setSelect(!this.mediaItem.isSelect);
+        this.broadCast.emit(BroadcastConstants.SELECT, [this.mediaItem.index]);
     }
 
     private selectStateChange() {
-        logInfo(TAG, `change selected ${this.isSelectedMode}`);
+        Log.info(TAG, `change selected ${this.isSelectedMode}`);
         if (!this.isSelectedMode) {
-            this.isSelectedMode = true
+            this.isSelectedMode = true;
             this.pressAnimScale = 1;
         }
-        this.onSelected()
+        this.onSelected();
     }
 
     build() {
@@ -118,11 +118,11 @@ export struct ImageGridItemComponent {
                 .objectFit(ImageFit.Cover)
                 .autoResize(false)
                 .onComplete(() => {
-                    logDebug(TAG, `Draw the image! ${this.thumbnail}`);
+                    Log.debug(TAG, `Draw the image! ${this.thumbnail}`);
                 })
 
                 .onError(() => {
-                    logError(TAG, `alt Image ${this.mediaItem.index} error :${this.thumbnail}`);
+                    Log.error(TAG, `alt Image ${this.mediaItem.index} error :${this.thumbnail}`);
                     if (this.thumbnail.length == 0 || this.mediaItem.width == 0 || this.mediaItem.height == 0) {
                         this.resetShow()
                     } else {
@@ -175,7 +175,7 @@ export struct ImageGridItemComponent {
                     if (this.isSelectedMode) {
                         this.onSelected();
                     } else {
-                        logInfo(TAG, 'item onClick loadBmp');
+                        Log.info(TAG, 'item onClick loadBmp');
                         if (this.isThird) {
                             this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
                         } else {
@@ -188,7 +188,7 @@ export struct ImageGridItemComponent {
                 Image($r('app.media.ic_photo_preview'))
                     .onClick(() => {
                         this.routeToPreviewPage();
-                        logInfo(TAG, 'expand.');
+                        Log.info(TAG, 'expand.');
                     })
                     .height($r('app.float.icon_size_hot'))
                     .width($r('app.float.icon_size_hot'))
@@ -218,7 +218,7 @@ export struct ImageGridItemComponent {
             curve: Curve.Ease
         })
         .onTouch(event => {
-            logInfo(TAG, `onTouch trigger: isSelectedMode: ${this.isSelectedMode},
+            Log.info(TAG, `onTouch trigger: isSelectedMode: ${this.isSelectedMode},
                     isEnteringPhoto: ${this.isEnteringPhoto}, ${JSON.stringify(event)}`);
             if (this.isSelectedMode) {
                 return;
@@ -235,7 +235,7 @@ export struct ImageGridItemComponent {
         })
         .gesture(LongPressGesture().onAction((event: GestureEvent) => {
             if (!this.isThird) {
-                logInfo(TAG, `LongPressGesture ${this.isSelectedMode}`);
+                Log.info(TAG, `LongPressGesture ${this.isSelectedMode}`);
                 this.selectStateChange();
             }
         }))

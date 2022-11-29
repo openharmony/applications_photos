@@ -17,52 +17,62 @@ import { ItemDataSource } from './ItemDataSource'
 import { PeerDataItem } from '../data/PeerDataItem'
 
 export class DistributedDataSource extends ItemDataSource {
-    private peerDataItems: PeerDataItem[] = []
-    private distributedDataImpl: DistributedDataImpl = new DistributedDataImpl()
+    private peerDataItems: PeerDataItem[] = [];
+    private distributedDataImpl: DistributedDataImpl = new DistributedDataImpl();
 
     totalCount(): number {
-        return this.peerDataItems.length
+        return this.peerDataItems.length;
     }
 
     getData(index: number): any{
-        this.peerDataItems[index].index = index
-        return this.peerDataItems[index]
+        this.peerDataItems[index].index = index;
+        return this.peerDataItems[index];
     }
 
     isSelect(): boolean {
-        let isSelect = true
+        let isSelect = true;
         for (let i = 0;i < this.peerDataItems.length; i++) {
             if (!this.peerDataItems[i].isSelect) {
-                isSelect = false
-                break
+                isSelect = false;
+                break;
             }
         }
-        return isSelect
+        return isSelect;
     }
 
     setSelect(isSelect: boolean) {
         this.peerDataItems.forEach((item: PeerDataItem) => {
-            item.setSelect(isSelect)
+            item.setSelect(isSelect);
         })
     }
 
+    getSelectedUris(): string[]{
+        let uris: string[] = [];
+        this.peerDataItems.forEach((item: PeerDataItem) => {
+            if (item.isSelect) {
+                uris.push(item.uri);
+            }
+        })
+        return uris;
+    }
+
     getSelectedCount(): number {
-        let count = 0
+        let count = 0;
         for (let i = 0;i < this.peerDataItems.length; i++) {
             if (this.peerDataItems[i].isSelect) {
-                count++
+                count++;
             }
         }
-        return count
+        return count;
     }
 
     getSelectedItems(): any[]{
-        return []
+        return [];
     }
 
     dataReload(): void {
         this.reloadAlbumItemData().then((isEmpty: number) => {
-            this.notifyDataReload()
+            this.notifyDataReload();
         })
     }
 
@@ -70,8 +80,8 @@ export class DistributedDataSource extends ItemDataSource {
     }
 
     async reloadAlbumItemData(): Promise<number> {
-        let before = this.peerDataItems.length
-        this.peerDataItems = await this.distributedDataImpl.reloadAlbumItemData()
-        return this.peerDataItems.length - before
+        let before = this.peerDataItems.length;
+        this.peerDataItems = await this.distributedDataImpl.reloadAlbumItemData();
+        return this.peerDataItems.length - before;
     }
 }

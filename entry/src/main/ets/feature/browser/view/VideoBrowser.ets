@@ -12,13 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import router from '@system.router'
-import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil'
-import { Logger } from '../../../common/utils/Logger';
+import router from '@system.router';
+import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action'
-import { MenuOperation } from '../../../../../../../common/base/src/main/ets/operation/MenuOperation'
-import { PhotoBrowserActionBar } from './PhotoBrowserActionBar'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
+import { MenuOperation } from '../../../../../../../common/base/src/main/ets/operation/MenuOperation';
+import { PhotoBrowserActionBar } from './PhotoBrowserActionBar';
+import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
 import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
 import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
 import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
@@ -27,6 +27,7 @@ import { startTrace, finishTrace } from '../../../../../../../common/base/src/ma
 @Entry
 @Component
 struct VideoBrowser {
+    private TAG: string = 'VideoBrowser';
     @Provide('dateTitle') photoDate: string = '';
     @Provide('timeLocationTitle') timeAndLocation: string = '';
     @Provide isShowBar: boolean = false;
@@ -34,19 +35,18 @@ struct VideoBrowser {
     @Provide moreMenuList: Array<Action> = new Array<Action>();
     private broadCast: Broadcast = new Broadcast();
     private myVideoController: VideoController = new VideoController();
-    private logger: Logger = new Logger('VideoBrowser');
     private uri = '';
     private dateAdded = 0;
     private previewUri = null;
 
     onBackPress() {
-        this.logger.info('onBackPress');
+        Log.info(this.TAG, 'onBackPress');
         router.back();
         return true;
     }
 
     private onMenuClicked(action: Action) {
-        this.logger.info(`onMenuClicked, action: ${action.actionID}`);
+        Log.info(this.TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuOperation: MenuOperation;
         switch (action) {
             case Action.BACK:
@@ -67,7 +67,7 @@ struct VideoBrowser {
         if (this.uri == undefined) {
             return;
         }
-        this.logger.info(`uri is ${this.uri}`);
+        Log.info(this.TAG, `uri is ${this.uri}`);
         this.photoDate = DateUtil.getLocalizedDate(this.dateAdded);
         this.timeAndLocation = DateUtil.getLocalizedTime(this.dateAdded);
         this.onMenuClicked = this.onMenuClicked.bind(this);

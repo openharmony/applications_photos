@@ -13,18 +13,18 @@
  * limitations under the License.
  */
 
-import { Logger } from '../utils/Logger'
-import { PhotoEditBase } from '../base/PhotoEditBase'
-import { PhotoEditMode } from '../base/PhotoEditType'
-import { ImageFilterBase } from '../base/ImageFilterBase'
-import { PixelMapWrapper } from '../base/PixelMapWrapper'
-import { Point } from '../base/Point'
-import { RectF } from '../base/Rect'
-import { CropRatioType, CropTouchState, CropAngle } from './CropType'
-import { ImageFilterCrop } from './ImageFilterCrop'
-import { CropShow } from './CropShow'
-import { MathUtils } from './MathUtils'
-import { DrawingUtils } from './DrawingUtils'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { PhotoEditBase } from '../base/PhotoEditBase';
+import { PhotoEditMode } from '../base/PhotoEditType';
+import { ImageFilterBase } from '../base/ImageFilterBase';
+import { PixelMapWrapper } from '../base/PixelMapWrapper';
+import { Point } from '../base/Point';
+import { RectF } from '../base/Rect';
+import { CropRatioType, CropTouchState, CropAngle } from './CropType';
+import { ImageFilterCrop } from './ImageFilterCrop';
+import { CropShow } from './CropShow';
+import { MathUtils } from './MathUtils';
+import { DrawingUtils } from './DrawingUtils';
 
 export class PhotoEditCrop extends PhotoEditBase {
     private static readonly BASE_SCALE_VALUE: number = 1.0;
@@ -34,7 +34,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     private static readonly DEFAULT_MARGIN_LENGTH: number = 20;
     private static readonly DEFAULT_TIMEOUT_MILLISECOND_1000: number = 1000;
     private static readonly DEFAULT_SPLIT_FRACTION: number = 3;
-    private log: Logger = new Logger('PhotoEditCrop');
+    private TAG: string = 'PhotoEditCrop';
     private filter: ImageFilterCrop = undefined;
     private input: PixelMapWrapper = undefined;
     private isFlipHorizontal: boolean = false;
@@ -70,7 +70,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         if (undefined == pixelMap) {
             return;
         }
-        this.log.info(`entry pixelMap: ${JSON.stringify(pixelMap)}`);
+        Log.info(this.TAG, `entry pixelMap: ${JSON.stringify(pixelMap)}`);
         this.input = pixelMap;
         this.filter = new ImageFilterCrop();
         this.initialize(this.input);
@@ -100,7 +100,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     exit(): ImageFilterBase {
-        this.log.info('exit');
+        Log.info(this.TAG, 'exit');
         this.saveFinalOperation();
         this.isCropShowInitialized = false;
         this.input = undefined;
@@ -134,13 +134,13 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     setCanvasContext(context: CanvasRenderingContext2D) {
-        this.log.info('setCanvasContext');
+        Log.info(this.TAG, 'setCanvasContext');
         this.ctx = context;
         this.refresh();
     }
 
     setCanvasSize(width: number, height: number) {
-        this.log.info(`setCanvasSize: width[${width}], height[${height}]`);
+        Log.info(this.TAG, `setCanvasSize: width[${width}], height[${height}]`);
         this.displayWidth = width;
         this.displayHeight = height;
         let limit = this.calcNewLimit();
@@ -213,7 +213,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onMirrorChange() {
-        this.log.debug('onMirrorChange');
+        Log.debug(this.TAG, 'onMirrorChange');
         if (this.isWaitingRefresh) {
             this.clearDelayRefresh();
             this.cropShow.enlargeCropArea();
@@ -229,7 +229,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onRotationAngleChange() {
-        this.log.debug('onRotationAngleChange');
+        Log.debug(this.TAG, 'onRotationAngleChange');
         if (this.isWaitingRefresh) {
             this.clearDelayRefresh();
             this.cropShow.enlargeCropArea();
@@ -241,7 +241,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onSliderAngleChange(angle: number) {
-        this.log.debug(`onSliderAngleChange: angle[${angle}]`);
+        Log.debug(this.TAG, `onSliderAngleChange: angle[${angle}]`);
         if (this.isWaitingRefresh) {
             this.clearDelayRefresh();
             this.cropShow.enlargeCropArea();
@@ -253,7 +253,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onFixedRatioChange(ratio: CropRatioType) {
-        this.log.debug(`onFixedRatioChange: ratio[${ratio}]`);
+        Log.debug(this.TAG, `onFixedRatioChange: ratio[${ratio}]`);
         if (this.isWaitingRefresh) {
             this.clearDelayRefresh();
             this.cropShow.enlargeCropArea();
@@ -265,7 +265,7 @@ export class PhotoEditCrop extends PhotoEditBase {
 
     onTouchStart(x: number, y: number) {
         if (this.state != CropTouchState.NONE) {
-            this.log.debug(`onTouchStart: touch state is not none!`);
+            Log.debug(this.TAG, `onTouchStart: touch state is not none!`);
             return;
         }
 
@@ -273,7 +273,7 @@ export class PhotoEditCrop extends PhotoEditBase {
             this.clearDelayRefresh();
         }
 
-        this.log.debug(`onTouchStart: [x: ${x}, y: ${y}]`);
+        Log.debug(this.TAG, `onTouchStart: [x: ${x}, y: ${y}]`);
         if (this.cropShow.isCropRectTouch(x, y)) {
             this.state = CropTouchState.CROP_MOVE;
         } else {
@@ -283,7 +283,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onTouchMove(x: number, y: number) {
-        this.log.debug(`onTouchMove: [state: ${this.state}] [x: ${x}, y: ${y}]`);
+        Log.debug(this.TAG, `onTouchMove: [state: ${this.state}] [x: ${x}, y: ${y}]`);
         let offsetX = x - this.touchPoint.x;
         let offsetY = y - this.touchPoint.y;
         if (this.state == CropTouchState.CROP_MOVE) {
@@ -298,7 +298,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onTouchEnd() {
-        this.log.debug(`onTouchEnd: [state: ${this.state}]`);
+        Log.debug(this.TAG, `onTouchEnd: [state: ${this.state}]`);
         if (this.state == CropTouchState.CROP_MOVE) {
             this.cropShow.endCropRectMove();
         } else if (this.state == CropTouchState.IMAGE_DRAG) {
@@ -342,14 +342,14 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onPinchStart(x: number, y: number, scale: number) {
-        this.log.debug(`onPinchStart: event[x: ${x}, y: ${y}]`);
+        Log.debug(this.TAG, `onPinchStart: event[x: ${x}, y: ${y}]`);
         this.state = CropTouchState.IMAGE_SCALE;
         this.pinchPoint.set(x, y);
         this.scale = scale;
     }
 
     onPinchUpdate(scale: number) {
-        this.log.debug(`onPinchUpdate: scale[${scale}]`);
+        Log.debug(this.TAG, `onPinchUpdate: scale[${scale}]`);
         if (this.state == CropTouchState.IMAGE_SCALE) {
             let factor = scale / this.scale;
             if (!this.cropShow.couldEnlargeImage()) {
@@ -364,7 +364,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onPinchEnd() {
-        this.log.debug('onPinchEnd');
+        Log.debug(this.TAG, 'onPinchEnd');
         let crop = this.cropShow.getCropRect();
         let points = MathUtils.rectToPoints(crop);
         let tX = this.isFlipHorizontal ? -1 : 1;
@@ -409,7 +409,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     reset() {
-        this.log.debug('reset');
+        Log.debug(this.TAG, 'reset');
         let limit = this.calcNewLimit();
         this.cropShow.init(limit, this.imageRatio);
         this.initialize(this.input);

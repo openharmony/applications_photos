@@ -15,12 +15,12 @@
 
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { MediaConstants } from '../constants/MediaConstants';
-import { logInfo, logWarn, logError } from '../utils/LoggerUtils'
-import { MenuContext } from './MenuContext'
-import { ProcessMenuOperation, FindSameOperation } from './ProcessMenuOperation'
+import { Log } from '../utils/Log';
+import { MenuContext } from './MenuContext';
+import { ProcessMenuOperation, FindSameOperation } from './ProcessMenuOperation';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
-import mediaModel from '../model/MediaModel'
-import { MediaOperationType } from '../data/MediaOperationType'
+import mediaModel from '../model/MediaModel';
+import { MediaOperationType } from '../data/MediaOperationType';
 import { startTraceWithTaskId, finishTraceWithTaskId } from '../utils/TraceControllerUtils';
 import { ItemDataSource } from '../vm/ItemDataSource';
 import { MediaDataItem } from '../data/MediaDataItem';
@@ -37,20 +37,20 @@ export class CopyMenuOperation extends ProcessMenuOperation {
     }
 
     doAction(): void {
-        logInfo(TAG, 'copy doAction');
+        Log.info(TAG, 'copy doAction');
         if (this.menuContext == null) {
-            logWarn(TAG, 'menuContext is null, return');
+            Log.warn(TAG, 'menuContext is null, return');
             return;
         }
 
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         if (dataSource == null) {
-            this.count = this.menuContext.items.length
+            this.count = this.menuContext.items.length;
         } else {
             this.count = dataSource.getSelectedCount();
         }
         if (this.count <= 0) {
-            logWarn(TAG, 'count <= 0, return');
+            Log.warn(TAG, 'count <= 0, return');
             return;
         }
 
@@ -70,26 +70,26 @@ export class CopyMenuOperation extends ProcessMenuOperation {
         }
 
         if (dataSource == null) {
-            this.items = this.menuContext.items
+            this.items = this.menuContext.items;
         } else {
-            this.items = dataSource.getSelectedItems()
+            this.items = dataSource.getSelectedItems();
         }
         this.processOperation();
     }
 
     requestOneBatchOperation() {
-        let item = this.items[this.currentBatch++] as MediaDataItem
-        this.copyOne(item)
+        let item = this.items[this.currentBatch++] as MediaDataItem;
+        this.copyOne(item);
     }
 
     private async copyOne(item: MediaDataItem) {
         if (this.menuContext.deviceId) {
-            let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + MediaConstants.REMOTE_ALBUM_PATH + "/"
-            this.albumInfo = new SimpleAlbumDataItem("", "", path, "", "")
+            let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + MediaConstants.REMOTE_ALBUM_PATH + "/";
+            this.albumInfo = new SimpleAlbumDataItem("", "", path, "", "");
 
         }
-        let fileAsset = await item.loadFileAsset()
-        let assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo)
+        let fileAsset = await item.loadFileAsset();
+        let assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo);
         if (this.menuContext.deviceId) {
             let displayName = assets.sourceAsset.displayName;
             let index = displayName.lastIndexOf('.');
@@ -104,11 +104,11 @@ export class CopyMenuOperation extends ProcessMenuOperation {
         }
         if (assets.targetAsset) {
             if (assets.targetAsset.uri == assets.sourceAsset.uri) {
-                logInfo(TAG, 'copy same fileAsset');
+                Log.info(TAG, 'copy same fileAsset');
                 this.onOperateContinue();
                 return;
             }
-            logInfo(TAG, 'show find same file dialog');
+            Log.info(TAG, 'show find same file dialog');
             switch (this.findSameOperation) {
                 case FindSameOperation.NONE:
                     this.menuContext.broadCast.emit(BroadcastConstants.FIND_SAME_FILE_DIALOG,
@@ -124,7 +124,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
                     this.onOperateContinue();
                     break;
                 default:
-                    logWarn(TAG, `findSameOperation is error ${this.findSameOperation}`);
+                    Log.warn(TAG, `findSameOperation is error ${this.findSameOperation}`);
                     break;
             }
         } else {
@@ -139,28 +139,28 @@ export class CopyMenuOperation extends ProcessMenuOperation {
     async copy(source, target, param?) {
         try {
             if (!target) {
-                startTraceWithTaskId('create', this.currentBatch)
+                startTraceWithTaskId('create', this.currentBatch);
                 target = await mediaModel.createOne(param.mediaType, param.name, param.path);
                 finishTraceWithTaskId('create', this.currentBatch);
                 if (target == null) {
-                    logWarn(TAG, `Target file creat failed when copyFile!`);
+                    Log.warn(TAG, `Target file creat failed when copyFile!`);
                     this.onError();
                     return;
                 }
             }
-            startTraceWithTaskId('openWriteClose', this.currentBatch)
+            startTraceWithTaskId('openWriteClose', this.currentBatch);
             await mediaModel.copyOne(source, target);
-            finishTraceWithTaskId('openWriteClose', this.currentBatch)
+            finishTraceWithTaskId('openWriteClose', this.currentBatch);
             this.onCompleted();
         } catch (error) {
             finishTraceWithTaskId('create', this.currentBatch);
-            logError(TAG, `copyFile is error ${error}`);
+            Log.error(TAG, `copyFile is error ${error}`);
             this.onError();
         }
     }
 
     cancelFunc(): void {
-        logInfo(TAG, `progress cancel`);
+        Log.info(TAG, `progress cancel`);
         this.onOperatePause();
         let cancelMessage = $r('app.string.copy_cancel_message', this.getExpectProgress().toString());
 
@@ -175,7 +175,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
 
     // Copy cancel callback
     onOperateContinue(): void {
-        logInfo(TAG, 'Operate Continue');
+        Log.info(TAG, 'Operate Continue');
         this.isPause = false;
         this.cyclicOperation();
     }

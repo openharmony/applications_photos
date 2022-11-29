@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { logInfo } from './LoggerUtils'
+import { Log } from '../utils/Log';
 
 const TAG = "ImageUtil"
 const MAX_BIT = 30;
@@ -28,7 +28,7 @@ export function computeSampleSize(width: number, height: number, minSideLength: 
         return 2;
     }
     let initialSize = computeInitialSampleSize(width, height, minSideLength, maxNumOfPixels);
-    logInfo(TAG, `initialSize:  ${initialSize}`);
+    Log.info(TAG, `initialSize:  ${initialSize}`);
     return initialSize <= 8 ? nextPowerOf2(initialSize) : Math.floor((initialSize + 8 - 1) / 8) * 8;
 }
 
@@ -37,7 +37,7 @@ function computeInitialSampleSize(width: number, height: number, minSideLength: 
         return 1;
     }
     let lowerBound: number = (maxNumOfPixels == -1) ? 1 : Math.ceil(Math.sqrt((width * height) / maxNumOfPixels));
-    logInfo(TAG, `lowerBound: ${lowerBound}`);
+    Log.info(TAG, `lowerBound: ${lowerBound}`);
     if (minSideLength == -1) {
         return lowerBound;
     } else {
@@ -56,6 +56,6 @@ function nextPowerOf2(value: number): number {
     useValue |= useValue >> BIT_FOUR;
     useValue |= useValue >> BIT_TWO;
     useValue |= useValue >> BIT_ONE;
-    logInfo(TAG, `nextPowerOf2:${useValue}`);
+    Log.info(TAG, `nextPowerOf2:${useValue}`);
     return useValue + 1;
 }

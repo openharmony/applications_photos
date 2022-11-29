@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { DialogCallback } from '../../model/common/DialogUtil'
-import { Logger } from '../../utils/Logger'
-import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil'
-import { FindSameOperation } from '../../../../../../../common/base/src/main/ets/operation/ProcessMenuOperation'
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { Constants } from '../../model/common/Constants'
+import { DialogCallback } from '../../model/common/DialogUtil';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil';
+import { FindSameOperation } from '../../../../../../../common/base/src/main/ets/operation/ProcessMenuOperation';
+import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class FindSameNameParam {
@@ -32,6 +32,7 @@ export class FindSameNameParam {
 
 @CustomDialog
 export struct FindSameNameDialog {
+    private TAG: string = 'FindSameNameDialog'
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
@@ -41,14 +42,13 @@ export struct FindSameNameDialog {
     @Consume findSameNameParam: FindSameNameParam;
     sourceDetails: any;
     targetDetails: any;
-    logger: Logger = new Logger('FindSameNameDialog');
     controller: CustomDialogController;
     dataTime: string;
     targetDataTime: string;
     timeConvert = 1000;
 
     getTitle(name) {
-        this.logger.info(`getTitle ${name}`);
+        Log.info(this.TAG, `getTitle ${name}`);
         if (name) {
             let index = name.lastIndexOf('.');
             if (index == -1) {
@@ -150,7 +150,7 @@ export struct FindSameNameDialog {
 
             Row() {
                 Image(this.isDoSameAction ? $r('app.media.ic_gallery_public_checkbox_filled')
-                                          : $r('app.media.ic_checkbox_off_overlay'))
+                                          : $r('app.media.ic_checkbox_off_black_bg'))
                     .height($r('app.float.icon_size'))
                     .width($r('app.float.icon_size'))
                     .margin({
@@ -185,7 +185,7 @@ export struct FindSameNameDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        this.logger.debug(`replaceCallback`);
+                        Log.debug(this.TAG, `replaceCallback`);
                         if (this.isDoSameAction) {
                             this.findSameNameParam.doSameFunc
                             && this.findSameNameParam.doSameFunc(FindSameOperation.REPLACE);
@@ -219,7 +219,7 @@ export struct FindSameNameDialog {
                         .backgroundColor($r('app.color.transparent'))
                         .height($r('app.float.details_dialog_button_height'))
                         .onClick(() => {
-                            this.logger.debug(`skipCallback`);
+                            Log.debug(this.TAG, `skipCallback`);
                             if (this.isDoSameAction) {
                                 this.findSameNameParam.doSameFunc
                                 && this.findSameNameParam.doSameFunc(FindSameOperation.SKIP);
@@ -253,7 +253,7 @@ export struct FindSameNameDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        this.logger.debug(`cancelFunc`);
+                        Log.debug(this.TAG, `cancelFunc`);
                         this.findSameNameParam.cancelFunc && this.findSameNameParam.cancelFunc();
                         this.controller.close();
                     })

@@ -13,28 +13,28 @@
  * limitations under the License.
  */
 
-import { Logger } from '../../utils/Logger'
-import { ActionBarProp } from '../browserOperation/ActionBarProp'
-import { Action } from '../browserOperation/Action'
-import { ActionBarMode } from '../browserOperation/ActionBarMode'
-import { SingleTitle } from './SingleTitle'
-import { DetailTitle } from './DetailTitle'
-import { SelectionTitle } from './SelectionTitle'
-import { DetailMenuPanel } from './DetailMenuPanel'
-import { Constants } from '../../model/common/Constants'
-import { ActionBarButton } from './ActionBarButton'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { ActionBarProp } from '../browserOperation/ActionBarProp';
+import { Action } from '../browserOperation/Action';
+import { ActionBarMode } from '../browserOperation/ActionBarMode';
+import { SingleTitle } from './SingleTitle';
+import { DetailTitle } from './DetailTitle';
+import { SelectionTitle } from './SelectionTitle';
+import { DetailMenuPanel } from './DetailMenuPanel';
+import { Constants } from '../../model/common/Constants';
+import { ActionBarButton } from './ActionBarButton';
 
 // ActionBar，It consists of action on the left, title in the middle and menu panel on the right
 @Component
 export struct ActionBar {
+    private TAG: string = 'ActionBar';
     @Provide actionBarProp: ActionBarProp = new ActionBarProp();
     onMenuClicked: Function;
-    logger: Logger = new Logger('ActionBar');
     isVideoPage: boolean = false;
     @State hasTabBar: boolean = this.actionBarProp.getHasTabBar();
 
     private onBuildDone(): void {
-        this.logger.info(`onBuildDone,actionBarProp:${this.actionBarProp.getHasTabBar()}`);
+        Log.info(this.TAG, `onBuildDone,actionBarProp:${this.actionBarProp.getHasTabBar()}`);
     }
 
     build() {

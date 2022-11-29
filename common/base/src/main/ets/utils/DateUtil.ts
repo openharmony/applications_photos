@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { logInfo, logWarn } from './LoggerUtils'
+import { Log } from './Log';
 import i18n from '@ohos.i18n';
 import Intl from '@ohos.intl';
 
@@ -24,7 +24,7 @@ export class DateUtil {
         'zh': 'zh-CN',
         'en': 'en-US'
     };
-    private static readonly FORMAT_DECIMAL: number = 10
+    private static readonly FORMAT_DECIMAL: number = 10;
     public static readonly MILLISECONDS_PER_SECOND: number = 1000;
     public static readonly SECONDS_PER_MINUTE: number = 60;
     public static readonly SECONDS_PER_HOUR: number = 3600;
@@ -93,10 +93,16 @@ export class DateUtil {
         return new Intl.DateTimeFormat(locales, this.buildDateTimeOpt('numeric', 'long', '', '', '')).format(new Date(milliseconds));
     }
 
+    public static getLocalizedYearString(milliseconds: number): string {
+        let locales: string = this.getLocales();
+
+        return new Intl.DateTimeFormat(locales, this.buildDateTimeOpt('numeric', '', '', '', '')).format(new Date(milliseconds)).toString();
+    }
+
     public static getLocalizedTime(milliseconds: number): string {
         let locales: string = this.getLocales();
         let is24HourClock = i18n.is24HourClock();
-        logInfo(TAG, `get is24HourClock ${is24HourClock}`);
+        Log.info(TAG, `get is24HourClock ${is24HourClock}`);
 
         return new Intl.DateTimeFormat(locales, this.buildDateTimeOpt('', '', '', (!is24HourClock ? '2-digit' : 'numeric'), '2-digit')).format(new Date(milliseconds));
     }
@@ -114,11 +120,11 @@ export class DateUtil {
     // Format duration
     public static getFormattedDuration(milliSecond: number): string {
         if (milliSecond == null) {
-            logWarn(TAG, 'getFormattedDuration, input is null!');
+            Log.warn(TAG, 'getFormattedDuration, input is null!');
             return '00:00';
         }
         if (milliSecond <= 0) {
-            logWarn(TAG, 'getFormattedDuration, input is negative number!');
+            Log.warn(TAG, 'getFormattedDuration, input is negative number!');
             return '00:00';
         }
         if (milliSecond < this.MILLISECONDS_PER_SECOND) {
@@ -137,7 +143,7 @@ export class DateUtil {
 
     private static checkTime(time: number): string{
         if (time < 0) {
-            logWarn(TAG, 'checkTime, input is negative number!');
+            Log.warn(TAG, 'checkTime, input is negative number!');
             return '00';
         }
         let formatTime: string = time.toString();

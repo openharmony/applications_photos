@@ -13,23 +13,23 @@
  * limitations under the License.
  */
 
-import router from '@system.router'
-import formBindingData from '@ohos.application.formBindingData'
-import formProvider from '@ohos.application.formProvider'
+import router from '@system.router';
+import formBindingData from '@ohos.application.formBindingData';
+import formProvider from '@ohos.application.formProvider';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logDebug, logInfo, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils'
-import { Constants } from '../../../../../../../features/formEditor/src/main/ets/constants/Constants'
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Constants } from '../../../../../../../features/formEditor/src/main/ets/constants/Constants';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
-import dataStore from '@ohos/base/src/main/ets/utils/DataStoreUtil'
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel'
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import dataStore from '@ohos/base/src/main/ets/utils/DataStoreUtil';
+import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import { terminateSelf } from '@ohos/base/src/main/ets/utils/AbilityUtils';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { getFetchOptions } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
-import { SettingDialog } from '../../../../../../../features/formEditor/src/main/ets/components/SettingDialog'
+import { SettingDialog } from '../../../../../../../features/formEditor/src/main/ets/components/SettingDialog';
 
 const TAG = "FormEditorPage"
 
@@ -62,22 +62,22 @@ struct FormEditorPage {
     })
 
     async GetMediaData(albumId: string, index: number) {
-        logDebug(TAG, `GetMediaData start`)
-        this.currentIndex = index
-        let fetchOpt = await getFetchOptions(MediaConstants.SELECT_TYPE_IMAGE, albumId, "")
-        fetchOpt.order = `date_added DESC LIMIT ${index},1`
-        this.fileAsset = (await mediaModel.getAllMediaItem(albumId, fetchOpt, false)).fileAsset
+        Log.debug(TAG, `GetMediaData start`);
+        this.currentIndex = index;
+        let fetchOpt = await getFetchOptions(MediaConstants.SELECT_TYPE_IMAGE, albumId, "");
+        fetchOpt.order = `date_added DESC LIMIT ${index},1`;
+        this.fileAsset = (await mediaModel.getAllMediaItem(albumId, fetchOpt, false)).fileAsset;
     }
 
     async openCurrentFd() {
-        logInfo(TAG, `open fd, fileAsset is valid ${this.fileAsset != null}`)
+        Log.info(TAG, `open fd, fileAsset is valid ${this.fileAsset != null}`);
         this.fd = (this.fileAsset != null) ? await  mediaModel.openAsset('R', this.fileAsset) : -1;
     }
 
     bindFormData(): any {
-        logDebug(TAG, `bindFormData start formId: ${this.formId}`)
+        Log.debug(TAG, `bindFormData start formId: ${this.formId}`);
         let image = "image_" + this.fd + "_formId_" + this.formId;
-        logDebug(TAG, `bindFormData start image: ${image}`)
+        Log.debug(TAG, `bindFormData start image: ${image}`);
         let dataObj1: any = {
             "fd": this.fd == -1 ? false : true,
             "image1": "memory://" + image,
@@ -86,69 +86,69 @@ struct FormEditorPage {
             "isShow": this.isShow,
             "formImages": JSON.parse(`{ "${image}": ${this.fd} }`)
         };
-        let dataObj = JSON.stringify(dataObj1)
-        logInfo(TAG, `bindFormData, createFormBindingData dataObj2.data: ${dataObj}`);
+        let dataObj = JSON.stringify(dataObj1);
+        Log.info(TAG, `bindFormData, createFormBindingData dataObj2.data: ${dataObj}`);
         let obj = formBindingData.createFormBindingData(dataObj);
-        logDebug(TAG, `bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
+        Log.debug(TAG, `bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
         return obj;
     }
 
     updateRefreshTime() {
-        logDebug(TAG, `updateRefreshTime isShow ${this.isShow}`);
+        Log.debug(TAG, `updateRefreshTime isShow ${this.isShow}`);
         if (!this.isShow) {
             return;
         }
         formProvider.setFormNextRefreshTime(this.formId, this.time).then(() => {
-            logInfo(TAG, `setFormNextRefreshTime sucessfully`);
+            Log.info(TAG, `setFormNextRefreshTime sucessfully`);
         }).catch((err) => {
-            logError(TAG, `init err ${err}`);
+            Log.error(TAG, `init err ${err}`);
         })
     }
 
     terminate() {
-        terminateSelf()
+        terminateSelf();
     }
 
     updateFormData(): void {
-        logDebug(TAG, `updateFormData formId: ${JSON.stringify(this.formId)}`);
+        Log.debug(TAG, `updateFormData formId: ${JSON.stringify(this.formId)}`);
         let obj3 = this.bindFormData();
-        logDebug(TAG, `updateFormData obj: ${JSON.stringify(obj3)}`);
+        Log.debug(TAG, `updateFormData obj: ${JSON.stringify(obj3)}`);
         formProvider.updateForm(this.formId, obj3).then((data) => {
-            logInfo(TAG, `updateFormData, data: ${JSON.stringify(data)}`);
+            Log.info(TAG, `updateFormData, data: ${JSON.stringify(data)}`);
             if (this.isShow) {
                 formProvider.setFormNextRefreshTime(this.formId, this.time).then(() => {
                     this.terminate();
                 }).catch((err) => {
-                    logError(TAG, `init err ${err}`);
+                    Log.error(TAG, `init err ${err}`);
                     this.terminate();
                 })
             } else {
                 this.terminate();
             }
         }).catch((error) => {
-            logError(TAG, `updateForm failed. Cause: ${JSON.stringify(error)}`);
+            Log.error(TAG, `updateForm failed. Cause: ${JSON.stringify(error)}`);
             this.terminate();
         });
     }
 
     async saveData(albumName: string, albumId: string, displayName, index: number, isShow: boolean) {
-        logDebug(TAG, `saveData start! ${albumName} ${displayName} ${index}`)
+        Log.debug(TAG, `saveData start! ${albumName} ${displayName} ${index}`);
         let msgDisplayName = '';
         if (displayName instanceof Object) {
-            logDebug(TAG, `saveData object ${displayName}`);
+            Log.debug(TAG, `saveData object ${displayName}`);
             msgDisplayName = await getResourceString(displayName);
         } else {
             msgDisplayName = displayName;
         }
         this.isShow = isShow;
         this.displayName = msgDisplayName;
-        logDebug(TAG, `saveData msgDisplayName ${msgDisplayName}`);
+        Log.debug(TAG, `saveData msgDisplayName ${msgDisplayName}`);
         await dataStore.init();
         await this.GetMediaData(albumId, index);
         await this.openCurrentFd();
         let formIdKey = 'formId_' + this.formId;
         let hasFormId = await dataStore.hasData(formIdKey);
-        logDebug(TAG, `The value of hasFormId is ${hasFormId}`);
+        Log.debug(TAG, `The value of hasFormId is ${hasFormId}`);
         if (hasFormId) {
             let displayNameKey = 'displayName_' + this.formId;
             await dataStore.putData(displayNameKey, msgDisplayName);
@@ -169,9 +169,9 @@ struct FormEditorPage {
             await dataStore.flush();
             this.updateFormData();
         } else {
-            terminateSelf()
+            terminateSelf();
         }
-        logDebug(TAG, 'saveData end!');
+        Log.debug(TAG, 'saveData end!');
     }
 
     routerPhotos(isSelectPhoto: boolean) {
@@ -199,7 +199,7 @@ struct FormEditorPage {
     }
 
     aboutToAppear(): void {
-        logDebug(TAG, 'aboutToAppear start!')
+        Log.debug(TAG, 'aboutToAppear start!');
         this.appBroadcast.on(BroadcastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
         this.appBroadcast.on(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
         dataStore.init().then(() => {
@@ -234,17 +234,17 @@ struct FormEditorPage {
         this.time = value;
         this.setIntervalTime();
         AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);
-        this.updateTime()
+        this.updateTime();
     }
 
     async updateTime() {
-        logDebug(TAG, `updateTime start! ${this.time}`)
+        Log.debug(TAG, `updateTime start! ${this.time}`);
         await dataStore.init();
         let intervalTimeKey = 'intervalTime';
         await dataStore.putData(intervalTimeKey, this.time);
         await dataStore.flush();
         this.updateRefreshTime();
-        logDebug(TAG, 'updateTime end!');
+        Log.debug(TAG, 'updateTime end!');
     }
 
     onPageShow() {
@@ -253,13 +253,13 @@ struct FormEditorPage {
 
     private setIntervalTime(): void{
         if (this.time == undefined) {
-            this.intervalTime = $r('app.string.fa_play_interval_time_30')
+            this.intervalTime = $r('app.string.fa_play_interval_time_30');
         } else if (this.time / Constants.DEFAULT_TIME == 3) {
-            this.intervalTime = $r('app.string.fa_play_interval_time_90')
+            this.intervalTime = $r('app.string.fa_play_interval_time_90');
         } else if (this.time / Constants.DEFAULT_TIME == 2) {
-            this.intervalTime = $r('app.string.fa_play_interval_time_60')
+            this.intervalTime = $r('app.string.fa_play_interval_time_60');
         } else {
-            this.intervalTime = $r('app.string.fa_play_interval_time_30')
+            this.intervalTime = $r('app.string.fa_play_interval_time_30');
         }
     }
 

@@ -12,14 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import { Log } from '../utils/Log';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { logDebug, logInfo, logWarn, logError } from '../utils/LoggerUtils'
-import { ViewType } from '../data/ViewType'
-import mediaModel from '../model/MediaModel'
-import { MediaConstants } from '../constants/MediaConstants'
-import { setOrientation } from '../helper/MediaDataHelper'
-import selectManager from '../manager/SelectManager'
+import { ViewType } from '../data/ViewType';
+import mediaModel from '../model/MediaModel';
+import { MediaConstants } from '../constants/MediaConstants';
+import { setOrientation } from '../helper/MediaDataHelper';
+import selectManager from '../manager/SelectManager';
 
 const TAG = "MediaDataItem"
 
@@ -64,8 +63,8 @@ export class MediaDataItem {
     }
 
     getHashCode(): string {
-        //角度，收藏状态变更，都需要刷新界面，所以返回值包含这两项
-        return this.status == MediaConstants.UNDEFINED ? `${this.hashIndex}` : `${this.uri} ${this.orientation} ${this.favouriteStatus}`
+        //时间线界面角度，收藏状态变更，都需要刷新界面；大图浏览界面角度变更，需要刷新界面
+        return this.status == MediaConstants.UNDEFINED ? `${this.hashIndex}` : `${this.uri} ${this.orientation}`
     }
 
     async loadFileAsset(): Promise<MediaLib.FileAsset> {
@@ -90,7 +89,7 @@ export class MediaDataItem {
     }
 
     async load(isForce: boolean): Promise<void> {
-        logInfo(TAG, `load ${this.status}`)
+        Log.info(TAG, `load ${this.status}`)
         if (this.status > (isForce ? MediaConstants.PART_LOADED : MediaConstants.UNDEFINED)) {
             return
         }
@@ -102,11 +101,11 @@ export class MediaDataItem {
     }
 
     update(fileAsset: MediaLib.FileAsset) {
-        this.id = fileAsset.id
-        this.uri = fileAsset.uri
-        this.orientation = fileAsset.orientation
-        this.mediaType = fileAsset.mediaType
-        this.duration = fileAsset.duration
+        this.id = fileAsset.id;
+        this.uri = fileAsset.uri;
+        this.orientation = fileAsset.orientation;
+        this.mediaType = fileAsset.mediaType;
+        this.duration = fileAsset.duration;
         this.size = fileAsset.size;
         if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
             this.width = fileAsset.height;
@@ -117,105 +116,105 @@ export class MediaDataItem {
         }
         this.imgWidth = this.width;
         this.imgHeight = this.height;
-        this.path = fileAsset.relativePath
+        this.path = fileAsset.relativePath;
         this.title = fileAsset.title;
-        this.displayName = fileAsset.displayName
-        this.dateAdded = fileAsset.dateAdded * 1000
-        this.dateModified = fileAsset.dateModified * 1000
-        this.dateTaken = fileAsset.dateTaken * 1000
-        this.isSelect = selectManager.isSelect(this.uri, this.isSelect)
+        this.displayName = fileAsset.displayName;
+        this.dateAdded = fileAsset.dateAdded * 1000;
+        this.dateModified = fileAsset.dateModified * 1000;
+        this.dateTaken = fileAsset.dateTaken * 1000;
+        this.isSelect = selectManager.isSelect(this.uri, this.isSelect);
 
         // may change
-        fileAsset.isFavorite().then((isFavor: boolean) => this.favouriteStatus = (isFavor) ? STATUS_TRUE : STATUS_FALSE)
+        fileAsset.isFavorite().then((isFavor: boolean) => this.favouriteStatus = (isFavor) ? STATUS_TRUE : STATUS_FALSE);
 
         if (this.width > 0 && this.height > 0) {
-            this.status = MediaConstants.LOADED
+            this.status = MediaConstants.LOADED;
         } else {
-            this.status = MediaConstants.PART_LOADED
+            this.status = MediaConstants.PART_LOADED;
         }
     }
 
-    getThumbnail(width: number, height: number): string{
-        logDebug(TAG, `getThumbnail ${this.status}`)
+    getThumbnail(width: number, height: number): string {
+        Log.debug(TAG, `getThumbnail ${this.status}`);
         if (this.status != MediaConstants.LOADED) {
-            logWarn(TAG, `getThumbnail fail as status: ${this.status}`)
-            return ""
+            Log.warn(TAG, `getThumbnail fail as status: ${this.status}`);
+            return "";
         }
-        logDebug(TAG, `this.uri ${this.uri}`)
-        return this.uri + `/thumbnail/${width}/${height}`
+        Log.debug(TAG, `this.uri ${this.uri}`);
+        return this.uri + `/thumbnail/${width}/${height}`;
     }
 
-    getAlt(): Resource{
+    getAlt(): Resource {
         if (this.mediaType == MediaLib.MediaType.VIDEO) {
-            return $r('app.media.alt_video_placeholder')
+            return $r('app.media.alt_video_placeholder');
         } else {
-            return $r('app.media.alt_placeholder')
+            return $r('app.media.alt_placeholder');
         }
     }
 
     setSelect(isSelect: boolean) {
-        this.isSelect = isSelect
-        selectManager.setSelect(this.uri, this.isSelect)
+        this.isSelect = isSelect;
+        selectManager.setSelect(this.uri, this.isSelect);
     }
 
     async onDelete(): Promise<boolean> {
         try {
-            let fileAsset = await this.loadFileAsset()
-            await fileAsset.trash(true)
-            selectManager.deleteSelect(this.uri)
-            this.status = MediaConstants.TRASHED
-            return true
+            let fileAsset = await this.loadFileAsset();
+            await fileAsset.trash(true);
+            selectManager.deleteSelect(this.uri);
+            this.status = MediaConstants.TRASHED;
+            return true;
         } catch (err) {
-            logError(TAG, `onDelete ${this.index} error: ${JSON.stringify(err)}`)
-            return false
+            Log.error(TAG, `onDelete ${this.index} error: ${JSON.stringify(err)}`);
+            return false;
         }
     }
 
     isDeleted(): boolean {
-        return this.status == MediaConstants.TRASHED
+        return this.status == MediaConstants.TRASHED;
     }
 
     async isFavor(): Promise<boolean> {
         if (this.favouriteStatus == STATUS_UNDEFINED) {
-            let fileAsset = await this.loadFileAsset()
-            this.favouriteStatus = (await fileAsset.isFavorite()) ? STATUS_TRUE : STATUS_FALSE
+            let fileAsset = await this.loadFileAsset();
+            this.favouriteStatus = (await fileAsset.isFavorite()) ? STATUS_TRUE : STATUS_FALSE;
         }
-        return this.favouriteStatus == STATUS_TRUE
+        return this.favouriteStatus == STATUS_TRUE;
     }
 
     async setFavor(): Promise<boolean> {
-        let status = !(await this.isFavor())
+        let status = !(await this.isFavor());
         try {
-            let fileAsset = await this.loadFileAsset()
-            await fileAsset.favorite(status)
-            await fileAsset.commitModify()
-            this.favouriteStatus = status ? STATUS_TRUE : STATUS_FALSE
-            return true
+            let fileAsset = await this.loadFileAsset();
+            await fileAsset.favorite(status);
+            await fileAsset.commitModify();
+            this.favouriteStatus = status ? STATUS_TRUE : STATUS_FALSE;
+            return true;
         } catch (err) {
-            return false
+            return false;
         }
     }
 
     async setOrientation(): Promise<void> {
-        let fileAsset = await this.loadFileAsset()
-        this.orientation = (this.orientation + MediaConstants.ROTATE_ONCE) % MediaConstants.ROTATE_AROUND
-        await setOrientation(fileAsset, this.orientation)
-        let tmp = this.width
-        this.width = this.height
-        this.height = tmp
+        let fileAsset = await this.loadFileAsset();
+        this.orientation = (this.orientation + MediaConstants.ROTATE_ONCE) % MediaConstants.ROTATE_AROUND;
+        await setOrientation(fileAsset, this.orientation);
+        let tmp = this.width;
+        this.width = this.height;
+        this.height = tmp;
     }
 
     async setName(name: string): Promise<void> {
-        let fileAsset = await this.loadFileAsset()
+        let fileAsset = await this.loadFileAsset();
         let displayName = fileAsset.displayName;
         let index = displayName.lastIndexOf('.');
         displayName = name + displayName.slice(index);
 
-        this.displayName = displayName
+        this.displayName = displayName;
         fileAsset.displayName = displayName;
 
-        this.title = name
-        fileAsset.title = name;
-        await fileAsset.commitModify()
+        this.title = name;
+        fileAsset.title = name;;
+        await fileAsset.commitModify();
     }
 }

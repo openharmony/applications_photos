@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants'
+import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { TimelineDataItem } from '../data/TimelineDataItem';
-import { logWarn } from '@ohos/base/src/main/ets/utils/LoggerUtils'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import { TimelineItemDataSource } from '../vm/TimelineItemDataSource'
+import { TimelineItemDataSource } from '../vm/TimelineItemDataSource';
 
 const TAG = "TimelineScrollBar"
 
@@ -36,7 +36,7 @@ export struct TimelineScrollBar {
     }
 
     nodeGap(count: number): number {
-        let windowHeight: number = screenManager.getWinHeight() - WindowConstants.TOOL_BAR_SIZE
+        let windowHeight: number = screenManager.getWinHeight() - WindowConstants.TOOL_BAR_SIZE;
         let gridHeight: number = windowHeight - WindowConstants.SCROLL_MARGIN * 2;
         let gapS = Math.ceil(gridHeight * count / this.dataSource.childCount() - WindowConstants.SCROLL_MARGIN * 2);
         if (gapS >= WindowConstants.SCROLL_BAR_SIDE_MIN_GAP) {
@@ -46,11 +46,18 @@ export struct TimelineScrollBar {
     }
 
     private isFirst(item: TimelineDataItem): boolean {
-        return this.dataSource.groupItem.indexOf(item) == 0
+        return this.dataSource.groupItem.indexOf(item) == 0;
     }
 
     private isLast(item: TimelineDataItem): boolean {
-        return this.dataSource.groupItem.indexOf(item) == this.dataSource.groupItem.length - 1
+        return this.dataSource.groupItem.indexOf(item) == this.dataSource.groupItem.length - 1;
+    }
+
+    private isShowLocalizedYear(item: TimelineDataItem): boolean {
+        if (this.dataSource.groupItem.indexOf(item) > 0) {
+            return DateUtil.getLocalizedYearString(item.dateAdded) != DateUtil.getLocalizedYearString(this.dataSource.getData(this.dataSource.groupItem.indexOf(item) - 1).dateAdded);
+        }
+        return true;
     }
 
     build() {
@@ -83,6 +90,7 @@ export struct TimelineScrollBar {
                             .margin({
                                 bottom: this.nodeGap(year.groupChild.length)
                             })
+                            .visibility(this.isShowLocalizedYear(year) ? Visibility.Visible : Visibility.Hidden)
                         }
                     }, year => JSON.stringify(year))
                 }
@@ -151,17 +159,17 @@ export struct TimelineScrollBar {
                     ? $r('app.float.scroll_press_all_width') : $r('app.float.scroll_bar_small_width'),
                 y: 0
             })
-            .onTouch((event: TouchEvent) => {
-                if (this.dateText == '') {
-                    logWarn(TAG, `dateText is null`)
-                    this.broadCast.emit(BroadcastConstants.INIT_DATE_TEXT, [])
-                }
-                if (event.type == TouchType.Down) {
-                    this.isClickScrollBar = true;
-                } else if (event.type == TouchType.Up) {
-                    this.isClickScrollBar = false;
-                }
-            })
         }
+        .onTouch((event: TouchEvent) => {
+            if (this.dateText == '') {
+                Log.warn(TAG, `dateText is null`)
+                this.broadCast.emit(BroadcastConstants.INIT_DATE_TEXT, [])
+            }
+            if (event.type == TouchType.Down) {
+                this.isClickScrollBar = true;
+            } else if (event.type == TouchType.Up) {
+                this.isClickScrollBar = false;
+            }
+        })
     }
 }

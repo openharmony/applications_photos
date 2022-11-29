@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import { logDebug, logInfo, logWarn, logError } from '@ohos/base/src/main/ets/utils/LoggerUtils';
-import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 
@@ -22,19 +22,19 @@ const TAG = "AlbumListCard"
 
 @Component
 export struct AlbumListCard {
-    @State useAlt: boolean = false
+    @State useAlt: boolean = false;
     @Consume broadCast: Broadcast;
     item: AlbumDataItem;
-    @State thumbnail: string = ""
-    @State mediaRes: Resource = undefined
+    @State thumbnail: string = "";
+    @State mediaRes: Resource = undefined;
 
     aboutToAppear(): void {
-        logInfo(TAG, `album mediaSet ${JSON.stringify(this.item)}`);
+        Log.info(TAG, `album mediaSet ${JSON.stringify(this.item)}`);
         this.item.load().then(() => {
-            this.thumbnail = this.item.getThumbnail()
+            this.thumbnail = this.item.getThumbnail();
         })
         this.item.getVideoCount().then((videoCount: number) => {
-            this.mediaRes = this.showMediaRes(videoCount)
+            this.mediaRes = this.showMediaRes(videoCount);
         })
     }
 
@@ -79,7 +79,7 @@ export struct AlbumListCard {
                         if (this.thumbnail) {
                             this.useAlt = true;
                         }
-                        logError(TAG, 'alt Image error');
+                        Log.error(TAG, 'alt Image error');
                     })
             }
             Column() {

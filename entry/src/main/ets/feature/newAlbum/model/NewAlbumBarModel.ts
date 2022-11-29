@@ -17,10 +17,10 @@ import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/brow
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 
 export class NewAlbumBarModel {
-    createActionBar(): ActionBarProp {
+    createActionBar(isSelectedMode: boolean, selectedCount: number): ActionBarProp {
         let menuList: Array<Action> = new Array<Action>();
         let actionBarProp: ActionBarProp = new ActionBarProp();
-        menuList.push(Action.OK);
+        menuList.push(Boolean(selectedCount) ? Action.OK : Action.OK_DISABLE)
         actionBarProp
             .setLeftAction(Action.CANCEL)
             .setMode(ActionBarMode.SELECTION_MODE)

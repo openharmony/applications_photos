@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-import { Logger } from '../utils/Logger'
-import { RectF } from '../base/Rect'
-import { ImageFilterBase } from '../base/ImageFilterBase'
-import { PixelMapWrapper } from '../base/PixelMapWrapper'
-import { MathUtils } from './MathUtils'
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { RectF } from '../base/Rect';
+import { ImageFilterBase } from '../base/ImageFilterBase';
+import { PixelMapWrapper } from '../base/PixelMapWrapper';
+import { MathUtils } from './MathUtils';
 
 export class ImageFilterCrop extends ImageFilterBase {
     private static readonly FILTER_NAME: string = 'FilterCrop';
-    private log: Logger = new Logger('ImageFilterCrop');
+    private TAG: string = 'ImageFilterCrop';
     private isFlipHorizontal: boolean = false;
     private isFlipVertically: boolean = false;
     private rotationAngle: number = 0;
@@ -34,14 +34,14 @@ export class ImageFilterCrop extends ImageFilterBase {
     }
 
     render(pixelMap: PixelMapWrapper): PixelMapWrapper {
-        this.log.debug(`render input wrapper: ${JSON.stringify(pixelMap)}`);
+        Log.debug(this.TAG, `render input wrapper: ${JSON.stringify(pixelMap)}`);
         let width = pixelMap.width;
         let height = pixelMap.height;
         let realCropRect = new RectF();
         realCropRect.set(this.cropRect.left, this.cropRect.top, this.cropRect.right, this.cropRect.bottom);
         MathUtils.revertRect(realCropRect, width, height);
         MathUtils.roundRect(realCropRect);
-        this.log.debug(`realCropRect: ${JSON.stringify(realCropRect)}`);
+        Log.debug(this.TAG, `realCropRect: ${JSON.stringify(realCropRect)}`);
 
         let offWidth = realCropRect.getWidth();
         let offHeight = realCropRect.getHeight();
@@ -65,7 +65,7 @@ export class ImageFilterCrop extends ImageFilterBase {
         offCtx.restore();
         let outputPixelMap = offCtx.getPixelMap(0, 0, offWidth, offHeight);
         let output = new PixelMapWrapper(outputPixelMap, offWidth, offHeight);
-        this.log.debug(`render output wrapper: ${JSON.stringify(output)}`);
+        Log.debug(this.TAG, `render output wrapper: ${JSON.stringify(output)}`);
         return output;
     }
 
