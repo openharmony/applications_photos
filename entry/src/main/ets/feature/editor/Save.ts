@@ -21,6 +21,7 @@ import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { ImageFilterStack } from './ImageFilterStack';
 import { DateUtil } from './utils/DateUtil';
 import { Loader } from './Loader';
+import { PhotoEditorManager } from './PhotoEditorManager';
 
 const TAG = "Save"
 
@@ -54,6 +55,7 @@ export class Save {
                 return -1;
             }
             await fileIO.write(fd, buffer);
+            PhotoEditorManager.getInstance().isSaving = false;
             Log.info(TAG, 'write jpg file end.');
             let newId = fileAsset.id;
             await mediaModel.closeAsset(fd, fileAsset);

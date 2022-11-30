@@ -62,7 +62,9 @@ export class GroupItemDataSource extends ItemDataSource {
             Log.warn(TAG, `${index}/${this.groupDataItem.length}`);
             return undefined;
         }
-        this.groupDataItem[index].index = index;
+        if (this.groupDataItem[index] != null && this.groupDataItem[index] != undefined) {
+            this.groupDataItem[index].index = index;
+        }
         return this.groupDataItem[index];
     }
 
