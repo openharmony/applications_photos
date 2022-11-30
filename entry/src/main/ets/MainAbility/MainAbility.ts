@@ -25,6 +25,7 @@ import { startTrace, finishTrace } from '../../../../../common/base/src/main/ets
 import { BroadcastConstants } from '../../../../../common/base/src/main/ets/constants/BroadcastConstants';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import router from '@system.router';
+import { GroupItemDataSource } from '../../../../../common/base/src/main/ets/vm/GroupItemDataSource';
 
 let isFromCard = false;
 let appBroadcast = broadcastManager.getBroadcast();
@@ -36,6 +37,7 @@ export default class MainAbility extends Ability {
     private static readonly ACTION_URI_SINGLE_SELECT = 'singleselect';
     private static readonly ACTION_URI_MULTIPLE_SELECT = 'multipleselect';
     private static readonly ACTION_URI_PHOTO_DETAIL = 'photodetail';
+    private browserDataSource : GroupItemDataSource = new GroupItemDataSource();
 
     onCreate(want, launchParam) {
         Log.info(this.TAG, 'Application onCreate');
@@ -46,6 +48,11 @@ export default class MainAbility extends Ability {
         let action = want.parameters;
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
+            this.browserDataSource.reloadGroupItemData(false).then(()=> {
+                if (this.browserDataSource.groupDataItem.length == 0) {
+                    this.onDestroy();
+                }
+            })
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
