@@ -22,6 +22,7 @@ import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { startTrace } from '../utils/TraceControllerUtils';
 import { MediaConstants } from '../constants/MediaConstants';
 import { startTraceWithTaskId, finishTraceWithTaskId } from '../utils/TraceControllerUtils';
+import Curves from '@ohos.curves'
 
 const TAG = "ImageGridItemComponent"
 // General grid picture control
@@ -49,6 +50,34 @@ export struct ImageGridItemComponent {
         this.resetShow();
     }
 
+    calcThumbnail(uri: string, imageHeight: number, imageWidth: number, orientation?: number): string {
+        Log.info(TAG, `calcThumbnail satrt`);
+        if(uri == null) {
+            return "";
+        }
+        if(!imageWidth || !imageHeight) {
+            return `${uri}/thumbnail/256/256`;
+        }
+        if(imageHeight < MediaConstants.DEFAULT_THUMBNAIL_SIZE || imageWidth < MediaConstants.DEFAULT_THUMBNAIL_SIZE) {
+            return `${uri}/thumbnail/${imageWidth}/${imageHeight}`;
+        }
+        let width = 0;
+        let height = 0;
+        if(orientation != null && (orientation == MediaConstants.ROTATE_ONCE || orientation == MediaConstants.ROTATE_THIRD)) {
+            let temp = imageWidth;
+            imageWidth = imageHeight;
+            imageHeight = temp;
+        }
+        if(imageHeight < imageWidth) {
+            height = MediaConstants.DEFAULT_THUMBNAIL_SIZE;
+            width = Math.round(height * imageWidth / imageHeight);
+        }else {
+            width = MediaConstants.DEFAULT_THUMBNAIL_SIZE;
+            height = Math.round(width * imageHeight / imageWidth);
+        }
+        return `${uri}/thumbnail/${width}/${height}`;
+    }
+
     private resetShow() {
         startTraceWithTaskId("load MediaItem", this.mediaItem.index);
         this.mediaItem.load(false).then(() => {
@@ -69,7 +98,7 @@ export struct ImageGridItemComponent {
     }
 
     private onShow(): void {
-        this.resetShow();
+        this.resetPressAnim();
     }
 
     async routePage(isError: boolean) {
@@ -130,7 +159,8 @@ export struct ImageGridItemComponent {
                     }
                 })
                 .sharedTransition(this.pageName + this.mediaItem.getHashCode(), {
-                    duration: AnimationConstants.SHARE_TRANSITION_DURATION
+                    duration: AnimationConstants.SHARE_TRANSITION_DURATION,
+                    curve:Curves.cubicBezier(0.2, 0.0, 0.2, 1.0),
                 })
 
             if (this.mediaItem.mediaType == MediaLib.MediaType.VIDEO) {
@@ -176,6 +206,8 @@ export struct ImageGridItemComponent {
                         this.onSelected();
                     } else {
                         Log.info(TAG, 'item onClick loadBmp');
+                        this.thumbnail = this.calcThumbnail(this.mediaItem.uri, this.mediaItem.height, this.mediaItem.width, this.mediaItem.orientation)
+                        Log.info(TAG, `item onClick ${this.thumbnail}`);
                         if (this.isThird) {
                             this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
                         } else {
@@ -187,6 +219,7 @@ export struct ImageGridItemComponent {
             if (this.isSelectedMode) {
                 Image($r('app.media.ic_photo_preview'))
                     .onClick(() => {
+                        this.thumbnail = this.calcThumbnail(this.mediaItem.uri, this.mediaItem.height, this.mediaItem.width, this.mediaItem.orientation)
                         this.routeToPreviewPage();
                         Log.info(TAG, 'expand.');
                     })
