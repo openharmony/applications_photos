@@ -17,6 +17,7 @@ import router from '@system.router';
 import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
+import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import {
     AlbumGridItemTraditionalStyle
 } from '../../../../../../../features/distributed/src/main/ets/components/AlbumGridItemTraditionalStyle';
@@ -33,6 +34,7 @@ import { DistributedAlbumBarModel } from '../model/DistributedAlbumBarModel';
 import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { PeerDataItem } from '@ohos/base/src/main/ets/data/PeerDataItem';
+import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 
 const TAG = "DistributedAlbumSetPage"
 
@@ -54,6 +56,11 @@ export struct DistributedAlbumSetPage {
     private barModel: DistributedAlbumBarModel = new DistributedAlbumBarModel();
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
     private isMediaLibDataChanged: boolean = true;
+    @State actionBarProp: ActionBarProp = new ActionBarProp();
+
+    updateActionBar(): void {
+        this.actionBarProp = this.barModel.createActionBar(this.title);
+    }
 
     onMenuClicked(action: Action, arg: any[]) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
@@ -94,6 +101,8 @@ export struct DistributedAlbumSetPage {
         this.gridColumnsCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
         / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
         Log.info(TAG, `the grid count in a line is : ${this.gridColumnsCount}`);
+
+        this.updateActionBar();
     }
 
     aboutToDisappear(): void {
@@ -178,7 +187,7 @@ export struct DistributedAlbumSetPage {
             alignItems: ItemAlign.Start
         }) {
             ActionBar({
-                actionBarProp: this.barModel.createActionBar(this.title),
+                actionBarProp: $actionBarProp,
                 onMenuClicked: this.onMenuClicked
             })
 
@@ -187,27 +196,29 @@ export struct DistributedAlbumSetPage {
                     NoPhotoIndexComponent({ index: Constants.DISTRIBUTED_ALBUM_PAGE_INDEX })
                 } else {
                     Grid(this.scroller) {
-                        LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {
-                            if (item && item.index == 0) {
-                                GridItem() {
-                                    AlbumGridItemTraditionalStyle({
-                                        item: item,
-                                        deviceName: this.title,
-                                        deviceId: this.deviceId,
-                                        isBigCard: true
-                                    })
-                                }.columnStart(0).columnEnd(1)
-                            } else {
-                                GridItem() {
-                                    AlbumGridItemTraditionalStyle({
-                                        item: item,
-                                        deviceName: this.title,
-                                        deviceId: this.deviceId,
-                                        isBigCard: false
-                                    })
+                        LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
+                            if (item && item.get()){
+                                if (item && item.index == 0) {
+                                    GridItem() {
+                                        AlbumGridItemTraditionalStyle({
+                                            item: item.get(),
+                                            deviceName: this.title,
+                                            deviceId: this.deviceId,
+                                            isBigCard: true
+                                        })
+                                    }.columnStart(0).columnEnd(1)
+                                } else {
+                                    GridItem() {
+                                        AlbumGridItemTraditionalStyle({
+                                            item: item.get(),
+                                            deviceName: this.title,
+                                            deviceId: this.deviceId,
+                                            isBigCard: false
+                                        })
+                                    }
                                 }
                             }
-                        }, (item: AlbumDataItem) => item ? item.getHashCode() : JSON.stringify(item))
+                        }, (item: LazyItem<AlbumDataItem>) => item && item.get() ? item.getHashCode() : JSON.stringify(item))
                     }
                     .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
                     .padding({

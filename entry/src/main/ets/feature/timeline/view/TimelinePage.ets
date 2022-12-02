@@ -46,9 +46,11 @@ import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import { TimelinePageBarModel } from '../model/TimelinePageBarModel';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
+import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import {
     TimelineItemDataSource
 } from '../../../../../../../features/timeline/src/main/ets/vm/TimelineItemDataSource';
+import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 import { TimelineDataItem } from '../../../../../../../features/timeline/src/main/ets/data/TimelineDataItem';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { PhotoEditorManager } from '../../editor/PhotoEditorManager';
@@ -62,9 +64,9 @@ export struct TimelinePage {
     @StorageProp('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageProp('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     @State gridRowCount: number = 0;
-    @Consume isSelectedMode: boolean;
-    @Provide isAllSelected: boolean = false;
-    @Provide('selectedCount') totalSelectedCount: number = 0;
+    @Consume @Watch('updateActionBar') isSelectedMode: boolean;
+    @Provide @Watch('updateActionBar') isAllSelected: boolean = false;
+    @Provide('selectedCount') @Watch('updateActionBar') totalSelectedCount: number = 0;
     @Provide broadCast: Broadcast = new Broadcast();
     @Consume @Watch('onIndexPageShow') isShow: boolean;
     @StorageLink('TimelinePageIndex') @Watch('onIndexChange') TimelinePageIndex: number = Constants.INVALID;
@@ -80,6 +82,12 @@ export struct TimelinePage {
     private timelineDataSource: TimelineItemDataSource = new TimelineItemDataSource();
     private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
     private isMediaLibDataChanged: boolean = true;
+    @State actionBarProp: ActionBarProp = new ActionBarProp();
+
+    updateActionBar(): void {
+        this.actionBarProp = this.barModel.createActionBar(this.isSelectedMode,
+                                        this.totalSelectedCount, this.isAllSelected);
+    }
 
     aboutToAppear(): void {
         startTrace('TimelinePageAboutToAppear');
@@ -117,6 +125,8 @@ export struct TimelinePage {
 
         this.isInCurrentTab = true;
         this.initGridRowCount();
+        this.onIndexPageShow();	//TabContent uses lazy loading, call onIndexPageShow() the first time
+        this.updateActionBar();
         finishTrace('TimelinePageAboutToAppear');
     }
 
@@ -484,38 +494,37 @@ export struct TimelinePage {
                 }
                 if (this.initLoadFinish && !this.isEmpty) {
                     ActionBar({
-                        actionBarProp: this.barModel.createActionBar(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected),
+                        actionBarProp: $actionBarProp,
                         onMenuClicked: this.onMenuClicked.bind(this)
                     })
 
                     Stack() {
                         Grid(this.scroller) {
-                            LazyForEach(this.timelineDataSource, (item: TimelineDataItem | MediaDataItem) => {
-                                if (item && item.viewType == ViewType.GROUP_TITLE) {
+                            LazyForEach(this.timelineDataSource, (item: LazyItem<TimelineDataItem> | LazyItem<MediaDataItem>) => {
+                                if (item && item.get() && item.get().viewType == ViewType.GROUP_TITLE) {
                                     GridItem() {
                                         TimelineTitleComponent({
-                                            timelineDataItem: item
+                                            lazyItem: (item as LazyItem<TimelineDataItem>),
+                                            timelineDataItem: (item as LazyItem<TimelineDataItem>).get()
                                         })
                                     }.columnStart(0).columnEnd(this.gridRowCount - 1)
-                                } else if (item && item.viewType == ViewType.ITEM) {
+                                } else if (item && item.get() && item.get().viewType == ViewType.ITEM) {
                                     GridItem() {
                                         ImageGridItemComponent({
-                                            mediaItem: item,
+                                            lazyItem: (item as LazyItem<MediaDataItem>),
+                                            mediaItem: (item as LazyItem<MediaDataItem>).get(),
                                             pageName: Constants.PHOTO_TRANSITION_TIMELINE
                                         })
                                     }
-                                    .columnStart(item.index % this.gridRowCount)
-                                    .columnEnd(item.index % this.gridRowCount)
+                                    .aspectRatio(1)
+                                    .columnStart((item as LazyItem<MediaDataItem>).get().index % this.gridRowCount)
+                                    .columnEnd((item as LazyItem<MediaDataItem>).get().index % this.gridRowCount)
                                 }
                             }, (item) => {
-                                if (item == null) {
+                                if (item == null || item.get() == null) {
                                     return JSON.stringify(item)
                                 }
-                                if (item.viewType === ViewType.ITEM) {
-                                    return item.uri + item.favouriteStatus + item.orientation
-                                } else if (item.viewType === ViewType.GROUP_TITLE) {
-                                    return item.getHashCode()
-                                }
+                                return item.getHashCode()
                             })
                         }
                         .columnsTemplate('1fr '.repeat(this.gridRowCount))
@@ -524,7 +533,7 @@ export struct TimelinePage {
                         .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
                         .onScrollIndex((index: number) => {
                             Log.debug(TAG, `onScrollIndex index ${index}`)
-                            let item: TimelineDataItem | MediaDataItem = this.timelineDataSource.getData(index);
+                            let item: TimelineDataItem | MediaDataItem = this.timelineDataSource.getDataByIndex(index);
                             if (item) {
                                 this.dateText = DateUtil.getLocalizedYearAndMonth(item.dateAdded);
                             } else {

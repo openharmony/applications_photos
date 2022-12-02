@@ -14,7 +14,7 @@
  */
 import { Log } from '../utils/Log';
 import { GroupDataImpl } from '../model/GroupDataImpl';
-import { ItemDataSource } from '../vm/ItemDataSource';
+import { LazyItem, ItemDataSource } from '../vm/ItemDataSource';
 import { MediaDataItem } from '../data/MediaDataItem';
 
 const TAG = "GroupItemDataSource"
@@ -57,14 +57,21 @@ export class GroupItemDataSource extends ItemDataSource {
         return index;
     }
 
-    getData(index: number): any {
+    getData(index: number): LazyItem<MediaDataItem> {
         if (index < 0 || index >= this.groupDataItem.length) {
             Log.warn(TAG, `${index}/${this.groupDataItem.length}`);
             return undefined;
         }
-        if (this.groupDataItem[index] != null && this.groupDataItem[index] != undefined) {
-            this.groupDataItem[index].index = index;
+        this.groupDataItem[index].index = index;
+        return new LazyItem<MediaDataItem>(this.groupDataItem[index], index, this.onDataUpdate.bind(this));
+    }
+
+    getDataByIndex(index: number): MediaDataItem {
+        if (index < 0 || index >= this.groupDataItem.length) {
+            Log.warn(TAG, `${index}/${this.groupDataItem.length}`);
+            return undefined;
         }
+        this.groupDataItem[index].index = index;
         return this.groupDataItem[index];
     }
 
@@ -121,11 +128,19 @@ export class GroupItemDataSource extends ItemDataSource {
         this.groupDataItem.forEach((item: MediaDataItem) => {
             item.setSelect(isSelect);
         })
+        this.notifyDataReload();
     }
 
     async reloadGroupItemData(isGrid: boolean): Promise<boolean> {
         this.groupDataItem = await this.groupDataImpl.reloadGroupItemData(isGrid);
         return this.groupDataItem.length == 0;
+    }
+    
+    onDataUpdate(index: number): void {
+        Log.debug(TAG, `onDataUpdate ${index}`);
+        if (index != -1) {
+            this.notifyDataChange(index);
+        }
     }
 
     dataReload(isGrid: boolean) {
@@ -136,7 +151,7 @@ export class GroupItemDataSource extends ItemDataSource {
 
     dataRemove() {
         for (let i = this.groupDataItem.length - 1;i >= 0; i--) {
-            if (this.groupDataItem[i] != undefined && this.groupDataItem[i].isDeleted()) {
+            if (this.groupDataItem[i].isDeleted()) {
                 this.groupDataItem.splice(i, 1);
                 super.notifyDataDelete(i);
             }

@@ -16,6 +16,12 @@
     "installationFree": false,
     "pages": "$profile:main_pages",
     "uiSyntax": "ets",
+    "metadata": [
+      {
+        "name": "ArkTSPartialUpdate",
+        "value": "true",
+      }
+    ],
     "requestPermissions": [
       {
         "name": "ohos.permission.START_ABILITIES_FROM_BACKGROUND"

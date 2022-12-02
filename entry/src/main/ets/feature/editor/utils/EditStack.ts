@@ -64,8 +64,8 @@ export class EditStack<T> {
         this.currentPosition = this.stack.push(obj) - 1;
     }
 
-    forEach(action: any, count: number = this.currentPosition) {
-        for (let i = 0; i <= count; ++i) {
+    executeEach(action: Function, count: number) {
+        for (let i = 0; i < count; ++i) {
             action(this.stack[i]);
         }
     }

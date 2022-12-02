@@ -179,7 +179,7 @@ struct ThirdSelectPhotoBrowser {
     }
 
     getCurrentPhoto(): MediaDataItem {
-        return this.browserDataSource.getData(this.currentIndex);
+        return this.browserDataSource.getDataByIndex(this.currentIndex);
     }
 
     onBackPress() {

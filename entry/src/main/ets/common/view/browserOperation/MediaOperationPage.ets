@@ -19,7 +19,7 @@ import { MediaOperationActionBar } from './MediaOperationActionBar';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { AlbumSetNewMenuOperation } from '@ohos/base/src/main/ets/operation/AlbumSetNewMenuOperation';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import { AlbumListCard } from '../../../../../../../features/mediaOperation/src/main/ets/components/AlbumListCard';
+import { AlbumListCard } from '../../../../../../../features/mediaoperation/src/main/ets/components/AlbumListCard';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { Action } from './Action';
 import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
@@ -30,6 +30,7 @@ import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource'
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
+import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 
 const TAG = "MediaOperationPage"
 
@@ -170,11 +171,11 @@ struct MediaOperationPage {
                         alignItems: ItemAlign.Center
                     }) {
                         List() {
-                            LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {
+                            LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
                                 ListItem() {
-                                    AlbumListCard({ item: item })
+                                    AlbumListCard({ item: item.get() })
                                 }
-                            }, (item: AlbumDataItem) => item ? item.getHashCode() : JSON.stringify(item))
+                            }, (item: LazyItem<AlbumDataItem>) => item == null && item.get() ? JSON.stringify(item) : item.getHashCode())
                         }
                         .divider({
                             strokeWidth: 1,

@@ -26,6 +26,7 @@ export struct MediaOperationActionBar {
     @Consume loadingFinish: boolean;
     onMenuClicked: Function;
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
+    @State actionBarProp: ActionBarProp = new ActionBarProp();
 
     private createActionBar(): ActionBarProp {
         let menuList: Array<Action> = new Array<Action>();
@@ -42,10 +43,14 @@ export struct MediaOperationActionBar {
         return actionBarProp;
     }
 
+    aboutToAppear(): void {
+        this.actionBarProp = this.createActionBar();
+    }
+
     build() {
         Column() {
             ActionBar({
-                actionBarProp: this.createActionBar(),
+                actionBarProp: $actionBarProp,
                 onMenuClicked: this.onMenuClicked
             })
         }

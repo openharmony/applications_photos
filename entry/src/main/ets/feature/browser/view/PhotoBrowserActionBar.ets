@@ -17,14 +17,20 @@ import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import { ActionBarMode, ActionBarColorMode } from '../../../common/view/browserOperation/ActionBarMode';
-import Curves from '@ohos.curves'
+import { Constants } from '../../../common/model/common/Constants';
+import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 
 @Component
 export struct PhotoBrowserActionBar {
-    @Consume menuList: Action[];
+    @Consume @Watch('updateActionBar') menuList: Action[];
     onMenuClicked: Function;
     isVideoPage: boolean = false;
-    static SHARE_DURATION: number = 300;
+    @State actionBarProp: ActionBarProp = new ActionBarProp();
+
+    updateActionBar(): void {
+        Log.info('PhotoBrowserActionBar', 'updateActionBar');
+        this.actionBarProp = this.createActionBar();
+    }
 
     private createActionBar(): ActionBarProp {
         let actionBarProp: ActionBarProp = new ActionBarProp();
@@ -38,20 +44,23 @@ export struct PhotoBrowserActionBar {
         return actionBarProp;
     }
 
+    aboutToAppear(): void {
+        this.actionBarProp = this.createActionBar();
+    }
+
     build() {
         Column() {
             ActionBar({
-                actionBarProp: this.createActionBar(),
+                actionBarProp: $actionBarProp,
                 onMenuClicked: this.onMenuClicked,
                 isVideoPage: this.isVideoPage
-            })
+            }).sharedTransition("actionBar", {
+                    type:SharedTransitionEffectType.Static,
+                    duration: Constants.SHARE_TRANSITION_DURATION,
+                    zIndex: 2,
+                })
+
         }
-        .sharedTransition('ActionBar', {
-            duration: PhotoBrowserActionBar.SHARE_DURATION,
-            type: SharedTransitionEffectType.Static,
-            zIndex: 2,
-            curve:Curves.cubicBezier(0.2, 0.0, 0.2, 1.0)
-        })
         .markAnchor({ x: '0%', y: '0%' })
         .position({ x: '0%', y: '0%' })
     }

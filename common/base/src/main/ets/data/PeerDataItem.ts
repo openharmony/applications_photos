@@ -36,7 +36,7 @@ export class PeerDataItem {
     }
 
     getHashCode() {
-        return `${this.networkId} ${this.orientation}`;
+        return `${this.networkId} ${this.orientation} ${this.isSelect}`;
     }
 
     getThumbnail(): string {

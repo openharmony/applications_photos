@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 export class AnimationConstants {
-    static readonly SHARE_TRANSITION_DURATION = 300;
+    static readonly SHARE_TRANSITION_DURATION = 200;
     static readonly DELETE_ANIMATE_DURATION: number = 150;
     // Press animation duration
     static readonly PRESS_ANIM_DURATION = 100;

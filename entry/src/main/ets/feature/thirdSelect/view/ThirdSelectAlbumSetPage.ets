@@ -32,6 +32,7 @@ import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
+import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 
 const TAG = "ThirdSelectAlbumSetPage"
 // Third Select AlbumSet Page
@@ -41,8 +42,8 @@ export struct ThirdSelectAlbumSetPage {
     @State isEmpty: boolean = false;
     @Provide selectedCount: number = 0;
     @Provide broadCast: Broadcast = new Broadcast();
-    @Provide('isSelectedMode') isMultiPick: boolean = false;
-    @Provide maxSelectCount: number = Constants.DEFAULT_MAX_THIRD_SELECT_COUNT;
+    @Provide('isSelectedMode') @Watch('updateActionBar') isMultiPick: boolean = false;
+    @Provide @Watch('updateActionBar') maxSelectCount: number = Constants.DEFAULT_MAX_THIRD_SELECT_COUNT;
     @Provide moreMenuList: Array<Action> = new Array<Action>();
     isFromWallpaper = false; // Whether the current interface is opened from the wallpaper
     type: string;
@@ -61,6 +62,12 @@ export struct ThirdSelectAlbumSetPage {
     @Provide isHideScrollBar: boolean = true;
     @Provide('tabBarShow') isTabBarShow: boolean = false;
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
+    @State actionBarProp: ActionBarProp = new ActionBarProp();
+
+    updateActionBar(): void {
+        this.actionBarProp = this.barModel.createActionBar(this.leftAction, this.title,
+                                            this.isMultiPick, 0, this.maxSelectCount);
+    }
 
     aboutToAppear(): void {
         let param = router.getParams();
@@ -104,6 +111,7 @@ export struct ThirdSelectAlbumSetPage {
         });
 
         this.initGridRowCount();
+        this.updateActionBar();
     }
 
     private loadAlbums() {
@@ -174,12 +182,7 @@ export struct ThirdSelectAlbumSetPage {
             alignItems: ItemAlign.Start
         }) {
             ActionBar({
-                actionBarProp: this.barModel.createActionBar(
-                    this.leftAction,
-                    this.title,
-                    this.isMultiPick,
-                    0,
-                    this.maxSelectCount),
+                actionBarProp: $actionBarProp,
                 onMenuClicked: this.onMenuClicked
             })
 
@@ -188,22 +191,22 @@ export struct ThirdSelectAlbumSetPage {
                     NoPhotoIndexComponent({ index: Constants.ALBUM_PAGE_INDEX })
                 }
                 Grid(this.scroller) {
-                    LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {
-                        if (item.id != MediaConstants.ALBUM_ID_RECYCLE) {
-                            if (item && item.index == 0) {
+                    LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
+                        if (item && item.get() && item.get().id != MediaConstants.ALBUM_ID_RECYCLE) {
+                            if ( item.get().index == 0) {
                                 GridItem() {
                                     ThirdAlbumGridItem({
-                                        item: item,
+                                        item: item.get(),
                                         isBigCard: true,
                                         isFromWallpaper: this.isFromWallpaper,
                                         isFromFa: this.isFromFa,
                                         isFromFaPhoto: this.isFromFaPhoto
                                     })
                                 }.columnStart(0).columnEnd(1)
-                            } else if (item) {
+                            } else {
                                 GridItem() {
                                     ThirdAlbumGridItem({
-                                        item: item,
+                                        item: item.get(),
                                         isBigCard: false,
                                         isFromWallpaper: this.isFromWallpaper,
                                         isFromFa: this.isFromFa,
@@ -212,7 +215,7 @@ export struct ThirdSelectAlbumSetPage {
                                 }
                             }
                         }
-                    }, (item: AlbumDataItem) => item ? item.getHashCode() : JSON.stringify(item))
+                    }, (item: LazyItem<AlbumDataItem>) => item && item.get() ? item.getHashCode() : JSON.stringify(item))
                 }
                 .columnsTemplate('1fr '.repeat(this.gridRowCount))
                 .padding({

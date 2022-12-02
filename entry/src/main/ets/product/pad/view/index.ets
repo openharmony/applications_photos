@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import app from '@system.app'
 import { TimelinePage } from '../../../feature/timeline/view/TimelinePage';
 import { AlbumSetPage } from '../../../feature/album/view/AlbumSetPage';
 import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
@@ -51,6 +52,8 @@ struct IndexPage {
 
     aboutToAppear(): void {
         startTrace('indexPageAppearToShow');
+        app.setImageCacheCount(100);
+        app.setImageRawDataCacheSize(100*1024*1024);
         if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
             AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false);
             this.currentIndex = Constants.ALBUM_PAGE_INDEX;
@@ -130,9 +133,9 @@ struct IndexPage {
                 .barHeight(0)
                 .flexGrow(1)
                 .onChange((index: number) => {
-                    this.resetTabState(this.currentIndex)
+                    this.resetTabState(this.currentIndex);
                     this.onTabChanged(index);
-                    Log.info(this.TAG, `Switch to Tab ${this.currentIndex}.`)
+                    Log.info(this.TAG, `Switch to Tab ${this.currentIndex}.`);
                 })
                 .padding({ left: this.isSidebar ? $r('app.float.tab_bar_width') : 0 })
 
