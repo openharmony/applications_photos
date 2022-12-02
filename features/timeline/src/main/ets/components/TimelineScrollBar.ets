@@ -55,7 +55,7 @@ export struct TimelineScrollBar {
 
     private isShowLocalizedYear(item: TimelineDataItem): boolean {
         if (this.dataSource.groupItem.indexOf(item) > 0) {
-            return DateUtil.getLocalizedYearString(item.dateAdded) != DateUtil.getLocalizedYearString(this.dataSource.getData(this.dataSource.groupItem.indexOf(item) - 1).dateAdded);
+            return DateUtil.getLocalizedYearString(item.dateAdded) != DateUtil.getLocalizedYearString(this.dataSource.getDataByIndex(this.dataSource.groupItem.indexOf(item) - 1).dateAdded);
         }
         return true;
     }
@@ -153,12 +153,6 @@ export struct TimelineScrollBar {
             .height('100%')
             .width(this.isClickScrollBar
                 ? $r('app.float.scroll_bar_margin_small') : $r('app.float.scroll_bar_small_width'),)
-            .position({ x: '100%', y: 0 })
-            .markAnchor({
-                x: this.isClickScrollBar
-                    ? $r('app.float.scroll_press_all_width') : $r('app.float.scroll_bar_small_width'),
-                y: 0
-            })
         }
         .onTouch((event: TouchEvent) => {
             if (this.dateText == '') {

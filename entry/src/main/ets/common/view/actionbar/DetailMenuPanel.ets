@@ -20,7 +20,7 @@ import { ActionBarButton } from './ActionBarButton';
 // Large picture button for dynamic refresh
 @Component
 export struct DetailMenuPanel {
-    @Consume actionBarProp: ActionBarProp;
+    @Link actionBarProp: ActionBarProp;
     onMenuClicked: Function;
 
     build() {
@@ -33,7 +33,7 @@ export struct DetailMenuPanel {
                     isAutoTint: menu.isAutoTint,
                     colorMode: this.actionBarProp.getColorMode()
                 })
-            }, menu => (menu.actionType ? menu.actionType.id : menu.actionID))
+            }, menu => JSON.stringify(menu.actionID))
         }.alignItems(VerticalAlign.Center)
     }
 }

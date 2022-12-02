@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
-import { ItemDataSource } from '@ohos/base/src/main/ets/vm/ItemDataSource';
+import { LazyItem, ItemDataSource } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { TimelineDataImpl } from '../model/TimelineDataImpl';
 import { TimelineDataItem } from '../data/TimelineDataItem';
@@ -80,7 +80,7 @@ export class TimelineItemDataSource extends ItemDataSource {
         return index
     }
 
-    getData(index: number): TimelineDataItem | MediaDataItem {
+    getDataByIndex(index: number): TimelineDataItem | MediaDataItem {
         let item: TimelineDataItem | MediaDataItem = undefined;
         let count = 0;
         for (let i = 0;i < this.groupItem.length; i++) {
@@ -91,11 +91,32 @@ export class TimelineItemDataSource extends ItemDataSource {
                 break;
             } else if (index <= childLength) {
                 item = groupItem.groupChild[index-1];
-                item.index = count + index - 1;
+                item.index = index - 1;
                 break;
             } else {
                 index -= (1 + childLength);
-                count += childLength;
+                count += childLength + 1;
+            }
+        }
+        return item;
+    }
+
+    getData(index: number): LazyItem<TimelineDataItem> | LazyItem<MediaDataItem> {
+        let item: LazyItem<TimelineDataItem> | LazyItem<MediaDataItem> = undefined;
+        let count = 0;
+        for (let i = 0;i < this.groupItem.length; i++) {
+            let groupItem: TimelineDataItem = this.groupItem[i]
+            let childLength = groupItem.groupChild.length;
+            if (index == 0) {
+                item = new LazyItem<TimelineDataItem>(groupItem, index, this.onTimelineDataUpdate.bind(this));
+                break;
+            } else if (index <= childLength) {
+                item = new LazyItem<MediaDataItem>(groupItem.groupChild[index-1], count + index, this.onMediaDataUpdate.bind(this));
+                groupItem.groupChild[index-1].index = index - 1;
+                break;
+            } else {
+                index -= (1 + childLength);
+                count += childLength + 1;
             }
         }
         return item;
@@ -123,6 +144,8 @@ export class TimelineItemDataSource extends ItemDataSource {
         this.groupItem.forEach((child: TimelineDataItem) => {
             child.setSelect(isSelect);
         })
+        Log.info(TAG, "setSelect");
+        this.notifyDataReload();
     }
 
     getSelectedCount(): number {
@@ -165,6 +188,19 @@ export class TimelineItemDataSource extends ItemDataSource {
             })
         })
         return uris;
+    }
+
+    onTimelineDataUpdate(index: number, item: TimelineDataItem): void {
+        this.notifyDataChange(index);
+        Log.info(TAG, `onTimelineDataUpdate ${index}`);
+        for (let i = 0; i < item.groupChild.length; i++) {
+            this.notifyDataChange(index + 1 + i);
+        }
+    }
+
+    onMediaDataUpdate(index: number, item: MediaDataItem): void {
+        Log.info(TAG, `onMediaDataUpdate ${index}`);
+        this.notifyDataChange(index);
     }
 
     dataReload(): void {

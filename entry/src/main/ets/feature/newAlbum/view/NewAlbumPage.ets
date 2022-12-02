@@ -18,6 +18,7 @@ import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
+import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
@@ -35,6 +36,7 @@ import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSou
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
+import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 
 const TAG = "NewAlbumPage"
 
@@ -44,9 +46,9 @@ export struct NewAlbumPage {
     @State isEmpty: boolean = false;
     @State isHideScrollBar: boolean = true;
     @State gridRowCount: number = 0;
-    @Provide isSelectedMode: boolean = true;
+    @Provide @Watch('updateActionBar') isSelectedMode: boolean = true;
     @Provide isAllSelected: boolean = false;
-    @Provide('selectedCount') totalSelectedCount: number = 0;
+    @Provide('selectedCount') @Watch('updateActionBar') totalSelectedCount: number = 0;
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @Provide broadCast: Broadcast = new Broadcast();
     @Provide isShow: boolean = true;
@@ -62,6 +64,11 @@ export struct NewAlbumPage {
     private targetAlbum: SimpleAlbumDataItem = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_TARGET);
     private barModel: NewAlbumBarModel = new NewAlbumBarModel();
     private groupDataSource: GroupItemDataSource = new GroupItemDataSource();
+    @State actionBarProp: ActionBarProp = new ActionBarProp();
+
+    updateActionBar(): void {
+        this.actionBarProp = this.barModel.createActionBar(this.isSelectedMode, this.totalSelectedCount);
+    }
 
     onIndexChange() {
         Log.info(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
@@ -217,6 +224,8 @@ export struct NewAlbumPage {
         this.initGridRowCount();
         this.moreMenuList = [];
         this.moreMenuList.push(Action.INFO);
+
+        this.updateActionBar();
         finishTrace('PhotoGridPageAboutToAppear');
     }
 
@@ -279,7 +288,7 @@ export struct NewAlbumPage {
     build() {
         Column() {
             ActionBar({
-                actionBarProp: this.barModel.createActionBar(this.isSelectedMode, this.totalSelectedCount),
+                actionBarProp: $actionBarProp,
                 onMenuClicked: this.onMenuClicked
             })
             if (this.isEmpty) {
@@ -289,16 +298,18 @@ export struct NewAlbumPage {
             } else {
                 Stack() {
                     Grid(this.scroller) {
-                        LazyForEach(this.groupDataSource, (item: MediaDataItem) => {
+                        LazyForEach(this.groupDataSource, (item: LazyItem<MediaDataItem>) => {
                             GridItem() {
                                 ImageGridItemComponent({
-                                    mediaItem: item,
+                                    lazyItem: item,
+                                    mediaItem: item.get(),
                                     pageName: Constants.PHOTO_TRANSITION_ALBUM
                                 })
                             }
-                            .columnStart(item.index % this.gridRowCount)
-                            .columnEnd(item.index % this.gridRowCount)
-                        }, (item: MediaDataItem) => item == null ? JSON.stringify(item) : item.getHashCode())
+                            .aspectRatio(1)
+                            .columnStart(item.get().index % this.gridRowCount)
+                            .columnEnd(item.get().index % this.gridRowCount)
+                        }, (item: LazyItem<MediaDataItem>) => item == null && item.get() ? JSON.stringify(item) : item.getHashCode())
                     }
                     .columnsTemplate('1fr '.repeat(this.gridRowCount))
                     .columnsGap(Constants.GRID_GUTTER)

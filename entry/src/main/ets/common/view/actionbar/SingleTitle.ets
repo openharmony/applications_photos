@@ -21,7 +21,7 @@ import { Action } from '../browserOperation/Action';
 @Component
 export struct SingleTitle {
     private TAG: string = 'SingleTitle';
-    @State actionBarProp: ActionBarProp = new ActionBarProp();
+    @Link actionBarProp: ActionBarProp;
 
     private onBuildDone(): void {
         Log.info(this.TAG, `onBuildDone, title: ${this.actionBarProp.getTitle()}`);

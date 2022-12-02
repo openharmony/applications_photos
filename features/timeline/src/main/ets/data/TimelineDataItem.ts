@@ -18,6 +18,7 @@ import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 import { ViewType } from '@ohos/base/src/main/ets/data/ViewType';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import mediaDataItemCache from '@ohos/base/src/main/ets/data/MediaDataItemCache';
+import { ItemDataSource } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 
 const TAG = "TimelineDataItem"
 
@@ -46,7 +47,7 @@ export class TimelineDataItem {
     }
 
     getHashCode(): string {
-        return `${this.dateAdded}`;
+        return `${this.dateAdded}` + `${this.isSelect()}`;
     }
 
     isSelect(): boolean {

@@ -22,7 +22,7 @@ import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { startTrace } from '../utils/TraceControllerUtils';
 import { MediaConstants } from '../constants/MediaConstants';
 import { startTraceWithTaskId, finishTraceWithTaskId } from '../utils/TraceControllerUtils';
-import Curves from '@ohos.curves'
+import { LazyItem} from '../vm/ItemDataSource';
 
 const TAG = "ImageGridItemComponent"
 // General grid picture control
@@ -36,9 +36,12 @@ export struct ImageGridItemComponent {
     @State pressAnimScale: number = 1.0;
     @State isError: boolean = false;
     pageName = '';
+    lazyItem: LazyItem<MediaDataItem>
     mediaItem: MediaDataItem;
     isThird = false;
     private isEnteringPhoto = false;
+    private isChangeSource = false;
+    private isPush = false;
 
     private resetPressAnim(): void {
         this.pressAnimScale = 1;
@@ -50,46 +53,28 @@ export struct ImageGridItemComponent {
         this.resetShow();
     }
 
-    calcThumbnail(uri: string, imageHeight: number, imageWidth: number, orientation?: number): string {
-        Log.info(TAG, `calcThumbnail satrt`);
-        if(uri == null) {
-            return "";
-        }
-        if(!imageWidth || !imageHeight) {
-            return `${uri}/thumbnail/256/256`;
-        }
-        if(imageHeight < MediaConstants.DEFAULT_THUMBNAIL_SIZE || imageWidth < MediaConstants.DEFAULT_THUMBNAIL_SIZE) {
-            return `${uri}/thumbnail/${imageWidth}/${imageHeight}`;
-        }
-        let width = 0;
-        let height = 0;
-        if(orientation != null && (orientation == MediaConstants.ROTATE_ONCE || orientation == MediaConstants.ROTATE_THIRD)) {
-            let temp = imageWidth;
-            imageWidth = imageHeight;
-            imageHeight = temp;
-        }
-        if(imageHeight < imageWidth) {
-            height = MediaConstants.DEFAULT_THUMBNAIL_SIZE;
-            width = Math.round(height * imageWidth / imageHeight);
-        }else {
-            width = MediaConstants.DEFAULT_THUMBNAIL_SIZE;
-            height = Math.round(width * imageHeight / imageWidth);
-        }
-        return `${uri}/thumbnail/${width}/${height}`;
-    }
-
-    private resetShow() {
-        startTraceWithTaskId("load MediaItem", this.mediaItem.index);
-        this.mediaItem.load(false).then(() => {
-            finishTraceWithTaskId("load MediaItem", this.mediaItem.index);
+    private resetShow() {    
+        Log.info(TAG, `getThumbnail1 ${this.thumbnail}`);
+        if (this.mediaItem.isLoad()) {
             this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE);
-            this.isError = false;
-            Log.debug(TAG, `getThumbnail ${this.thumbnail}`);
             this.mediaItem.isFavor().then((status: boolean) => {
                 this.isFavourite = status;
             })
-        })
+        } else {
+	    startTraceWithTaskId("load MediaItem", this.mediaItem.index);
+            this.mediaItem.load(false).then(() => {
+                finishTraceWithTaskId("load MediaItem", this.mediaItem.index);
+                this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE);
+                this.isError = false;
+                Log.info(TAG, `getThumbnail2 ${this.thumbnail}`);
+                this.mediaItem.isFavor().then((status: boolean) => {
+                    this.isFavourite = status;
+                })
+            })
+        }
         this.resetPressAnim();
+        this.isChangeSource = false;
+        this.isPush = false;
     }
 
     aboutToDisappear(): void {
@@ -127,6 +112,9 @@ export struct ImageGridItemComponent {
     private onSelected() {
         Log.info(TAG, 'onSelected');
         this.mediaItem.setSelect(!this.mediaItem.isSelect);
+        if (this.lazyItem) {
+            this.lazyItem.update(this.mediaItem)
+        }
         this.broadCast.emit(BroadcastConstants.SELECT, [this.mediaItem.index]);
     }
 
@@ -138,6 +126,23 @@ export struct ImageGridItemComponent {
         }
         this.onSelected();
     }
+    
+    jumpToPhotoBrowser() {
+        this.isEnteringPhoto = true;
+        if (this.isChangeSource == false) {
+            this.thumbnail = this.mediaItem.getThumbnail(this.mediaItem.imgWidth, this.mediaItem.imgHeight);
+            console.info("column click, first change source:"+this.thumbnail)
+            this.isChangeSource = true
+            this.isPush = true;
+        } else {
+            console.info("column click to broadCast, thumbnail:"+this.thumbnail)
+            if (this.isThird) {
+                this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
+            } else {
+                this.broadCast.emit(BroadcastConstants.JUMP_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
+            }
+        }
+    }
 
     build() {
         Stack({ alignContent: Alignment.Start }) {
@@ -148,8 +153,17 @@ export struct ImageGridItemComponent {
                 .autoResize(false)
                 .onComplete(() => {
                     Log.debug(TAG, `Draw the image! ${this.thumbnail}`);
-                })
+                    if (this.isChangeSource && this.isPush) {
+                        Log.info(TAG, "image onComplete, broadCast, thumbnail:"+this.thumbnail);
+                        this.isPush = false;
+                        if (this.isThird) {
+                            this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
+                        } else {
+                            this.broadCast.emit(BroadcastConstants.JUMP_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
+                        }
+                    }
 
+                })
                 .onError(() => {
                     Log.error(TAG, `alt Image ${this.mediaItem.index} error :${this.thumbnail}`);
                     if (this.thumbnail.length == 0 || this.mediaItem.width == 0 || this.mediaItem.height == 0) {
@@ -159,8 +173,7 @@ export struct ImageGridItemComponent {
                     }
                 })
                 .sharedTransition(this.pageName + this.mediaItem.getHashCode(), {
-                    duration: AnimationConstants.SHARE_TRANSITION_DURATION,
-                    curve:Curves.cubicBezier(0.2, 0.0, 0.2, 1.0),
+                    duration: AnimationConstants.SHARE_TRANSITION_DURATION
                 })
 
             if (this.mediaItem.mediaType == MediaLib.MediaType.VIDEO) {
@@ -204,23 +217,14 @@ export struct ImageGridItemComponent {
                 .onClick(() => {
                     if (this.isSelectedMode) {
                         this.onSelected();
-                    } else {
-                        Log.info(TAG, 'item onClick loadBmp');
-                        this.thumbnail = this.calcThumbnail(this.mediaItem.uri, this.mediaItem.height, this.mediaItem.width, this.mediaItem.orientation)
-                        Log.info(TAG, `item onClick ${this.thumbnail}`);
-                        if (this.isThird) {
-                            this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
-                        } else {
-                            this.broadCast.emit(BroadcastConstants.JUMP_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
-                        }
-                        this.isEnteringPhoto = true;
-                    }
+                     } else {
+                         this.jumpToPhotoBrowser();
+                     }
                 })
             if (this.isSelectedMode) {
                 Image($r('app.media.ic_photo_preview'))
                     .onClick(() => {
-                        this.thumbnail = this.calcThumbnail(this.mediaItem.uri, this.mediaItem.height, this.mediaItem.width, this.mediaItem.orientation)
-                        this.routeToPreviewPage();
+                        this.jumpToPhotoBrowser();
                         Log.info(TAG, 'expand.');
                     })
                     .height($r('app.float.icon_size_hot'))
@@ -242,6 +246,7 @@ export struct ImageGridItemComponent {
                     })
             }
         }
+        .aspectRatio(1)
         .scale({
             x: this.pressAnimScale,
             y: this.pressAnimScale

@@ -78,7 +78,7 @@ export class Action {
         textRes: $r('app.string.action_ok')
     });
     public static OK_DISABLE = new Action({
-        id: ActionID.OK,
+        id: ActionID.OK_DISABLE,
         iconRes: $r('app.media.ic_gallery_public_ok'),
         textRes: $r('app.string.action_ok'),
         fillColor: $r('app.color.icon_disabled_color')
@@ -134,7 +134,7 @@ export class Action {
         iconRes: $r('app.media.ic_gallery_public_delete_line'),
         textRes: $r('app.string.action_delete'),
         fillColor: $r('app.color.icon_disabled_color'),
-        actionType: $r('app.string.action_delete')
+        actionType: $r('app.string.action_delete_invalid')
     });
     public static RECOVER = new Action({
         id: ActionID.RECOVER,
@@ -160,13 +160,13 @@ export class Action {
         id: ActionID.NOT_FAVORITE,
         iconRes: $r('app.media.ic_gallery_public_favorite_line'),
         textRes: $r('app.string.action_not_favorite'),
-        actionType: $r('app.string.action_favorite')
+        actionType: $r('app.string.action_not_favorite')
     });
     public static UN_SELECTED = new Action({
         id: ActionID.UN_SELECTED,
         iconRes: $r('app.media.ic_checkbox_off'),
         textRes: $r('app.string.action_unselected'),
-        actionType: $r('app.string.action_selected')
+        actionType: $r('app.string.action_unselected')
     });
     public static SELECTED = new Action({
         id: ActionID.SELECTED,

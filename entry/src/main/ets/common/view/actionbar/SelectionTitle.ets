@@ -21,7 +21,7 @@ import { ActionBarProp } from '../browserOperation/ActionBarProp';
 @Component
 export struct SelectionTitle {
     private TAG: string = 'SelectionTitle';
-    @State actionBarProp: ActionBarProp = new ActionBarProp();
+    @Link actionBarProp: ActionBarProp;
     @Consume('selectedCount') count: number;
 
     private onBuildDone(): void {

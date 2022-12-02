@@ -18,6 +18,7 @@ import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
 import { ImageGridItemComponent } from '../../../../../../../common/base/src/main/ets/components/ImageGridItemComponent';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
+import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
 import { Constants } from '../../../common/model/common/Constants';
@@ -30,6 +31,7 @@ import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSou
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
+import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 // Third Select Album Page
 
 const TAG = "ThirdSelectPhotoGridPage"
@@ -37,8 +39,8 @@ const TAG = "ThirdSelectPhotoGridPage"
 @Entry
 @Component
 export struct ThirdSelectPhotoGridPage {
-    @Provide selectedCount: number = 0;
-    @Provide('isSelectedMode') isMultiPick: boolean = false;
+    @Provide @Watch('updateActionBar') selectedCount: number = 0;
+    @Provide('isSelectedMode') @Watch('updateActionBar') isMultiPick: boolean = false;
     @Provide moreMenuList: Array<Action> = new Array<Action>();
     @Provide broadCast: Broadcast = new Broadcast();
     @Provide isShow: boolean = true;
@@ -49,7 +51,7 @@ export struct ThirdSelectPhotoGridPage {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     DEFAULT_TOAST_DURATION = 2000;
     isFromWallpaper: boolean;
-    @Provide maxSelectCount: number = Constants.DEFAULT_MAX_THIRD_SELECT_COUNT;
+    @Provide @Watch('updateActionBar') maxSelectCount: number = Constants.DEFAULT_MAX_THIRD_SELECT_COUNT;
     @State gridRowCount: number = 0;
     @State isHideScrollBar: boolean = true;
     isFromFa: boolean = false;
@@ -58,6 +60,12 @@ export struct ThirdSelectPhotoGridPage {
     private barModel: ThirdSelectBarModel = new ThirdSelectBarModel();
     private groupDataSource: GroupItemDataSource = new GroupItemDataSource();
     private albumId: string;
+    @State actionBarProp: ActionBarProp = new ActionBarProp();
+
+    updateActionBar(): void {
+        this.actionBarProp = this.barModel.createActionBar(Action.BACK, this.title, this.isMultiPick,
+                                                    this.selectedCount, this.maxSelectCount);
+    }
 
     onMenuClicked(action: Action) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
@@ -125,6 +133,8 @@ export struct ThirdSelectPhotoGridPage {
                 Log.info(TAG, `isEmpty: ${this.isEmpty}`)
             });
         this.isActive = true;
+
+        this.updateActionBar();
     }
 
     onPageShow() {
@@ -184,27 +194,24 @@ export struct ThirdSelectPhotoGridPage {
     build() {
         Column() {
             ActionBar({
-                actionBarProp: this.barModel.createActionBar(
-                    Action.BACK,
-                    this.title,
-                    this.isMultiPick,
-                    this.selectedCount,
-                    this.maxSelectCount),
+                actionBarProp: $actionBarProp,
                 onMenuClicked: this.onMenuClicked
             })
             if (this.isEmpty) {
                 NoPhotoComponent({ title: $r('app.string.no_distributed_photo_head_title_album') })
             }
             Grid(this.scroller) {
-                LazyForEach(this.groupDataSource, (item: MediaDataItem) => {
+                LazyForEach(this.groupDataSource, (item: LazyItem<MediaDataItem>) => {
                     GridItem() {
                         ImageGridItemComponent({
-                            mediaItem: item,
+                            lazyItem: item,
+                            mediaItem: item.get(),
                             pageName: Constants.PHOTO_TRANSITION_ALBUM,
                             isThird: true
                         })
                     }
-                }, (item: MediaDataItem) => item == null ? JSON.stringify(item) : item.getHashCode())
+		    .aspectRatio(1)
+                }, (item: LazyItem<MediaDataItem>) => item == null && item.get() ? JSON.stringify(item) : item.getHashCode())
             }
             .columnsTemplate('1fr '.repeat(this.gridRowCount))
             .columnsGap(Constants.GRID_GUTTER)

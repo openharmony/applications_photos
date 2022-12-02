@@ -19,7 +19,7 @@ import mediaModel from '../model/MediaModel';
 import { MediaConstants } from '../constants/MediaConstants';
 import { setOrientation } from '../helper/MediaDataHelper';
 import selectManager from '../manager/SelectManager';
-
+import { ItemDataSource } from '../vm/ItemDataSource'
 const TAG = "MediaDataItem"
 
 const STATUS_UNDEFINED = -1
@@ -64,7 +64,9 @@ export class MediaDataItem {
 
     getHashCode(): string {
         //时间线界面角度，收藏状态变更，都需要刷新界面；大图浏览界面角度变更，需要刷新界面
-        return this.status == MediaConstants.UNDEFINED ? `${this.hashIndex}` : `${this.uri} ${this.orientation}`
+        return this.status == MediaConstants.UNDEFINED ?
+                `${this.hashIndex}` :
+                `${this.uri}${this.favouriteStatus} ${this.orientation} ${this.isSelect}`
     }
 
     async loadFileAsset(): Promise<MediaLib.FileAsset> {
@@ -86,6 +88,13 @@ export class MediaDataItem {
             fetchOption['networkId'] = this.deviceId
         }
         return (await mediaModel.getAllCommonMediaItem(fetchOption, false)).fileAsset
+    }
+
+    isLoad():boolean {
+        if (this.status > MediaConstants.UNDEFINED) {
+            return true
+        }
+        return false
     }
 
     async load(isForce: boolean): Promise<void> {

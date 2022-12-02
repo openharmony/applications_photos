@@ -27,7 +27,7 @@ import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceCont
 import { LoadingPanel } from './LoadingPanel';
 import { VideoIcon } from './VideoIcon';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
-import Curves from '@ohos.curves'
+import { getThumbnail } from '../model/ThumbnailModel';
 
 const TAG = "PhotoItem"
 
@@ -38,6 +38,7 @@ export struct PhotoItem {
     @State matrix: Matrix4.Matrix4Transit = Matrix4.identity().copy();
     @State photoItemDirection: PanDirection = PanDirection.Vertical;
     @Consume broadCast: Broadcast;
+    @State objectFit: ImageFit = ImageFit.Contain;
     @State thumbnail: string = '';
     @State ratio: number = 1.0;
     @State showError: boolean = false;
@@ -54,6 +55,7 @@ export struct PhotoItem {
 
     onTransitionChange() {
         Log.info(TAG, `onTransitionChange, ${this.updateTransition} ${this.item.index}`);
+        this.updateThumbnail()
         if (this.updateTransition == this.item.index) {
             this.broadCast.emit(Constants.PHOTO_SHOW_STATE, [!this.showError]);
         } else {
@@ -79,7 +81,12 @@ export struct PhotoItem {
         this.matrix = Matrix4.identity().copy();
         this.firstLoad = true;
         this.isLoading = true;
-
+        this.thumbnail = this.item.getThumbnail(this.item.imgWidth, this.item.imgHeight);
+        this.item.load(true).then(() => {
+            this.isLoading = false
+            this.updateThumbnail()
+            Log.info(TAG, `aboutToAppear loadFinish thumbnail ${this.thumbnail}`);
+        })
         // register event handling
         this.broadCast.on(Constants.TOUCH_EVENT + this.item.uri, (matrix: any) => {
             this.matrix = matrix;
@@ -97,18 +104,13 @@ export struct PhotoItem {
         });
         this.onTransitionChange();
         this.onViewDataChanged();
-        Log.info(TAG, `photoItem aboutToAppear ${this.item.uri} end`);
+        Log.info(TAG, `photoItem aboutToAppear ${this.item.uri} end ${this.item.orientation}}`);
     }
 
-    calcRatio(info: any): number {
-        if(info == null || info == undefined) {
-            return 1;
-        }
-        if(info.width == 0 || info.height == 0) {
-            return 1;
-        }
-        let orientation = info.orientation || 0;
-        return orientation == 0 || orientation == 180 ? info.width / info.height : info.height / info.width;
+    private updateThumbnail() {
+        getThumbnail(this.item, this.updateTransition == this.item.index).then((thumbnail: string) => {
+            this.thumbnail = thumbnail
+        })
     }
 
     aboutToDisappear(): void {
@@ -152,6 +154,7 @@ export struct PhotoItem {
             this.eventPipeline && this.eventPipeline.setDefaultScale(scale);
         } else {
             this.matrix = Matrix4.identity().copy();
+            this.objectFit = ImageFit.Contain;
             this.eventPipeline && this.eventPipeline.setDefaultScale(1);
         }
         this.eventPipeline && this.eventPipeline.onDataChanged(this.item)
@@ -160,6 +163,17 @@ export struct PhotoItem {
         this.preItem.width = this.item.imgWidth;
         this.preItem.height = this.item.imgHeight;
         Log.debug(TAG, `onViewDataChanged thumbnail:${JSON.stringify(this.thumbnail)}`);
+    }
+
+    calcRatio(info: any): number {
+        if (info == null || info == undefined) {
+            return 1;
+        }
+        if (info.width == 0 || info.height == 0) {
+            return 1;
+        }
+        let orientation = info.orientation || 0;
+        return orientation == 0 || orientation == 180 ? info.width / info.height : info.height / info.width;
     }
 
     build() {
@@ -172,14 +186,22 @@ export struct PhotoItem {
 
             Row() {
                 Image(this.thumbnail)
-                    .aspectRatio(this.ratio)
-                    .objectFit(ImageFit.Cover)
                     .rotate({ x: 0, y: 0, z: 1, angle: this.item.orientation })
                     .transform(this.matrix)
                     .autoResize(false)
+                    .fitOriginalSize(false)
+                    .aspectRatio(this.ratio)
+                    .objectFit(ImageFit.Cover)
+                    .width("100%")
+                    .height("100%")
+                    .constraintSize({maxWidth:"100%", maxHeight:"100%"})
+                    .sharedTransition(this.item.index == this.updateTransition ? this.pageName + this.item.getHashCode() : Constants.DEFAULT_TRANSITION_ID, {
+                        duration: Constants.SHARE_TRANSITION_DURATION,
+                        zIndex:1
+                    })
                     .onComplete(() => {
-                        startTrace(`PhotoItemComplete_${this.item.index}`);
-                        Log.info(TAG, `onComplete finish index: ${this.item.index}, uri: ${this.thumbnail}.`);
+                        startTrace(`PhotoItemComplete_${this.item}`);
+                        Log.info(TAG, `onComplete finish index: ${JSON.stringify(this.item)}, uri: ${this.thumbnail}.`);
                         this.showError = false;
                         this.isLoading = false;
                         if (this.updateTransition == this.item.index) {
@@ -190,6 +212,7 @@ export struct PhotoItem {
                     .onError(() => {
                         Log.error(TAG, `image show error ${this.thumbnail} ${this.item.width} ${this.item.height}`);
                         if (this.thumbnail.length == 0 || this.item.width == 0 || this.item.height == 0) {
+                            this.updateThumbnail()
                             return
                         }
                         this.showError = true;
@@ -197,11 +220,6 @@ export struct PhotoItem {
                         if (this.updateTransition == this.item.index) {
                             this.broadCast.emit(Constants.PHOTO_SHOW_STATE, [false]);
                         }
-                    })
-                    .sharedTransition(this.item.index == this.updateTransition ? this.pageName + this.item.getHashCode() : Constants.DEFAULT_TRANSITION_ID, {
-                        duration: Constants.SHARE_TRANSITION_DURATION,
-                        zIndex: 1,
-                        curve:Curves.cubicBezier(0.2, 0.0, 0.2, 1.0)
                     })
             }
             .width('100%')
@@ -380,9 +398,7 @@ export struct PhotoItem {
         }.width('100%')
         .height('100%')
         .sharedTransition(this.item.index == this.updateTransition ? this.pageName + this.item.getHashCode() : Constants.DEFAULT_TRANSITION_ID, {
-            duration: Constants.SHARE_TRANSITION_DURATION,
-            zIndex: 1,
-            curve:Curves.cubicBezier(0.2, 0.0, 0.2, 1.0)
+            duration: Constants.SHARE_TRANSITION_DURATION
         })
     }
 

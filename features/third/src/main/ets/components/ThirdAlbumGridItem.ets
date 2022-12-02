@@ -188,6 +188,7 @@ export struct ThirdAlbumGridItem {
                 .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                 .backgroundColor($r('app.color.transparent'))
         }
+        .height(this.gridHeight)
         .border({
             radius: $r('sys.float.ohos_id_corner_radius_default_l'),
             width: $r('app.float.album_cover_stroke_width'),
