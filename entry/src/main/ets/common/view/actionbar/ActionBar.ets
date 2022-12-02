@@ -24,35 +24,49 @@ import { DetailMenuPanel } from './DetailMenuPanel';
 import { Constants } from '../../model/common/Constants';
 import { ActionBarButton } from './ActionBarButton';
 
+const TAG: string = 'ActionBar';
+
 // ActionBar，It consists of action on the left, title in the middle and menu panel on the right
 @Component
 export struct ActionBar {
-    private TAG: string = 'ActionBar';
-    @Provide actionBarProp: ActionBarProp = new ActionBarProp();
+    @Link actionBarProp: ActionBarProp;
     onMenuClicked: Function;
     isVideoPage: boolean = false;
-    @State hasTabBar: boolean = this.actionBarProp.getHasTabBar();
+    @State hasTabBar: boolean = false;
 
     private onBuildDone(): void {
-        Log.info(this.TAG, `onBuildDone,actionBarProp:${this.actionBarProp.getHasTabBar()}`);
+        Log.info(TAG, `onBuildDone,actionBarProp:${this.actionBarProp.getHasTabBar()}`);
+    }
+
+    aboutToAppear(): void {
+        Log.info(TAG, `aboutToAppear`);
+        this.hasTabBar = this.actionBarProp.getHasTabBar();
+    }
+
+    createArray(): ActionBarProp[] {
+        let actionBarProp = new Array<ActionBarProp>();
+        actionBarProp.push(this.actionBarProp);
+        return actionBarProp;
     }
 
     build() {
         Row() {
             if (!this.actionBarProp.getLeftAction().equals(Action.NONE)) {
-                ActionBarButton({
-                    res: this.actionBarProp.getLeftAction().iconRes,
-                    action: this.actionBarProp.getLeftAction(),
-                    onMenuClicked: this.onMenuClicked,
-                    isAutoTint: this.actionBarProp.getLeftAction().isAutoTint,
-                    colorMode: this.actionBarProp.getColorMode(),
-                    isFirst: true
-                })
+                ForEach(this.createArray(), (item)=>{
+                    ActionBarButton({
+                        res: item.getLeftAction().iconRes,
+                        action: item.getLeftAction(),
+                        onMenuClicked: this.onMenuClicked,
+                        isAutoTint: item.getLeftAction().isAutoTint,
+                        colorMode: item.getColorMode(),
+                        isFirst: true
+                    })
+                }, (item: ActionBarProp) => {return item.getLeftAction().actionID.toString()})
             }
             if (this.actionBarProp.getMode() === ActionBarMode.DETAIL_MODE) {
             } else if (this.actionBarProp.getMode() === ActionBarMode.SELECTION_MODE) {
                 Stack({ alignContent: Alignment.Start }) {
-                    SelectionTitle({ actionBarProp: this.actionBarProp })
+                    SelectionTitle({ actionBarProp: $actionBarProp })
                 }.flexGrow(1)
             } else if (this.actionBarProp.getMode() === ActionBarMode.TOP_MODE) {
                 Stack({ alignContent: Alignment.Start }) {
@@ -60,10 +74,10 @@ export struct ActionBar {
                 }.flexGrow(1)
             } else {
                 Stack({ alignContent: Alignment.Start }) {
-                    SingleTitle({ actionBarProp: this.actionBarProp })
+                    SingleTitle({ actionBarProp: $actionBarProp })
                 }.flexGrow(1)
             }
-            DetailMenuPanel({ onMenuClicked: this.onMenuClicked })
+            DetailMenuPanel({ actionBarProp: $actionBarProp, onMenuClicked: this.onMenuClicked })
         }
         .height(Constants.ActionBarHeight)
         .alignItems(VerticalAlign.Center)

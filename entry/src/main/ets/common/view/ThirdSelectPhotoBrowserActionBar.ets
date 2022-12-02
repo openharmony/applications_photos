@@ -22,8 +22,17 @@ import { ActionBarMode, ActionBarColorMode, ActionBarSelectionMode } from './bro
 export struct ThirdSelectPhotoBrowserActionBar {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @State isMultiPick: boolean = false;
-    @Consume isSelected: boolean;
+    @Consume @Watch('updateActionBar') isSelected: boolean;
     onMenuClicked: Function;
+    @State actionBarProp: ActionBarProp = new ActionBarProp;
+
+    aboutToAppear(): void {
+        this.actionBarProp = this.createActionBar();
+    }
+
+    updateActionBar(): void {
+        this.actionBarProp = this.createActionBar();
+    }
 
     private createActionBar(): ActionBarProp {
         let actionBarProp: ActionBarProp = new ActionBarProp();
@@ -44,10 +53,11 @@ export struct ThirdSelectPhotoBrowserActionBar {
             Image($r('app.media.gradientBasePlate')).width('100%')
                 .height('100%').objectFit(ImageFit.Fill)
             ActionBar({
-                actionBarProp: this.createActionBar(),
+                actionBarProp: $actionBarProp,
                 onMenuClicked: this.onMenuClicked
             })
         }
+        .hitTestBehavior(HitTestMode.Transparent)
         .markAnchor({ x: '0%', y: '0%' })
         .position({ x: '0%', y: '0%' })
     }

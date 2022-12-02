@@ -18,17 +18,29 @@ import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/brow
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 
 export class TimelinePageBarModel {
-    createActionBar(isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean): ActionBarProp  {
+    createActionBar(isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean): ActionBarProp {
+        let actionBarProp: ActionBarProp = new ActionBarProp();
         let isHorizontal = screenManager.isHorizontal();
         if (isHorizontal) {
-            return this.createHorizontalActionBar(isSelectedMode, selectedCount, isAllSelected);
+            this.updateHorizontalActionBar(actionBarProp, isSelectedMode, selectedCount, isAllSelected);
         } else {
-            return this.createVerticalActionBar(isSelectedMode);
+            this.updateVerticalActionBar(actionBarProp, isSelectedMode);
+        }
+        return actionBarProp;
+    }
+
+    updateActionBar(actionBarProp: ActionBarProp, isSelectedMode: boolean,
+                    selectedCount: number, isAllSelected: boolean): void {
+        let isHorizontal = screenManager.isHorizontal();
+        if (isHorizontal) {
+            this.updateHorizontalActionBar(actionBarProp, isSelectedMode, selectedCount, isAllSelected);
+        } else {
+            this.updateVerticalActionBar(actionBarProp, isSelectedMode);
         }
     }
 
-    private createHorizontalActionBar(isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean): ActionBarProp  {
-        let actionBarProp: ActionBarProp = new ActionBarProp();
+    private updateHorizontalActionBar(actionBarProp: ActionBarProp, isSelectedMode: boolean,
+                                      selectedCount: number, isAllSelected: boolean): ActionBarProp {
         actionBarProp
             .setHasTabBar(true)
             .setTitle($r('app.string.tab_timeline'))
@@ -44,9 +56,8 @@ export class TimelinePageBarModel {
         return actionBarProp;
     }
 
-    private createVerticalActionBar(isSelectedMode: boolean): ActionBarProp  {
+    private updateVerticalActionBar(actionBarProp: ActionBarProp, isSelectedMode: boolean): void {
         let isSidebar: boolean = screenManager.isSidebar();
-        let actionBarProp: ActionBarProp = new ActionBarProp();
         actionBarProp
             .setHasTabBar(isSidebar)
             .setTitle($r('app.string.tab_timeline'))
@@ -58,7 +69,6 @@ export class TimelinePageBarModel {
                 .setMode(ActionBarMode.SELECTION_MODE)
                 .setSelectionMode(ActionBarSelectionMode.MULTI);
         }
-        return actionBarProp;
     }
 
     getMenuList(isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean): Array<Action> {

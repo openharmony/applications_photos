@@ -22,6 +22,8 @@ import { getFetchOptions } from '../helper/MediaDataHelper';
 
 const TAG = "AlbumDataItem"
 
+let objectIndex = 0
+
 export class AlbumDataItem {
     index: number;
     id: string;
@@ -37,6 +39,7 @@ export class AlbumDataItem {
     deviceId: string = "";
     isSelect: boolean = false;
     status: number = MediaConstants.UNDEFINED;
+    objectIndex: number
 
     constructor(id: string, count: number, displayName: string, selectType: number, deviceId: string) {
         this.id = id;
@@ -46,10 +49,11 @@ export class AlbumDataItem {
         this.isDisableDelete = MediaConstants.ALBUM_DISABLE_DELETE_LIST.has(id);
         this.selectType = selectType;
         this.deviceId = deviceId;
+        this.objectIndex = objectIndex++
     }
 
     getHashCode(): string {
-        return `${this.id} ${this.orientation}`;
+        return `${this.objectIndex}${this.id} ${this.orientation} ${this.isSelect}`
     }
 
     async load(): Promise<void> {

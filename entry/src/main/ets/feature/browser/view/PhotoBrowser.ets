@@ -87,7 +87,7 @@ struct PhotoBrowser {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @StorageLink('entryFromHap') entryFromHap: number = Constants.ENTRY_FROM_NONE;
     photoBrowserTransition: string;
-    private isDataChanged = true;
+    @State isDataChanged:boolean = true;
     private isFromCard = false;
 
     // swiper currentIndex, there may not be onChanged callback during data refresh, so mediaItem cannot be saved
@@ -186,7 +186,6 @@ struct PhotoBrowser {
                     .withOperationEndCallback(this.onDeleteEnd)
                     .withBroadCast(this.broadCast)
                 menuOperation = new BatchRecoverMenuOperation(menuContext);
-                menuOperation.doAction();
                 break;
             case Action.GOTO_PHOTOS:
                 menuContext.withJumpSourceToMain(this.jumpSourceToMain);
@@ -258,10 +257,9 @@ struct PhotoBrowser {
         if (this.currentIndex == 0 || AppStorage.Get("isLeftSwiper") == 0) {
             this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, []);
         } else {
-            setTimeout(()=> {
-                Log.info(TAG, `onDeleteEnd curIndex : ` + this.currentIndex);
-                this.currentIndex--;
-            },1);
+            Log.info(TAG, `onDeleteEnd curIndex : ` + this.currentIndex);
+            this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, []);
+            this.currentIndex--;
         }
     }
 
@@ -408,11 +406,11 @@ struct PhotoBrowser {
     }
 
     getCurrentPhoto(): MediaDataItem {
-        return this.browserDataSource.getData(this.currentIndex);
+        return this.browserDataSource.getDataByIndex(this.currentIndex);
     }
 
     getPhotoByIndex(index: number): MediaDataItem {
-        return this.browserDataSource.getData(index);
+        return this.browserDataSource.getDataByIndex(index);
     }
 
     async onMoveEnd(err, count, total) {

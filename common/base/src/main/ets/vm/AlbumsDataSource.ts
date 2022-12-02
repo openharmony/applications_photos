@@ -14,7 +14,7 @@
  */
 import { Log } from '../utils/Log';
 import { AlbumDataImpl } from '../model/AlbumDataImpl';
-import { ItemDataSource } from './ItemDataSource';
+import { LazyItem, ItemDataSource } from './ItemDataSource';
 import { AlbumDataItem } from '../data/AlbumDataItem';
 import { MediaConstants } from '../constants/MediaConstants'
 
@@ -40,13 +40,17 @@ export class AlbumsDataSource extends ItemDataSource {
         return this.albumDataItems.length;
     }
 
-    getData(index: number): any {
+    getData(index: number): LazyItem<AlbumDataItem> {
+        return new LazyItem<AlbumDataItem>(this.getDataByIndex(index), index, this.onDataUpdate.bind(this))
+    }
+
+    getDataByIndex(index: number): AlbumDataItem {
         if (index < 0 || index >= this.albumDataItems.length) {
             Log.warn(TAG, `${index}/${this.albumDataItems.length}`);
             return undefined;
         }
         this.albumDataItems[index].index = index;
-        return this.albumDataItems[index];
+        return this.albumDataItems[index]
     }
 
     isSelect(): boolean {
@@ -124,6 +128,11 @@ export class AlbumsDataSource extends ItemDataSource {
             }
         })
         return items;
+    }
+
+    onDataUpdate(index: number): void {
+        Log.info(TAG, `onDataUpdate ${index}`);
+        this.notifyDataChange(index);
     }
 
     dataReload() {

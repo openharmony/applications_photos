@@ -29,9 +29,9 @@ export class ImageFilterStack extends EditStack<ImageFilterBase> {
     private origin: PixelMapWrapper = undefined;
 
     apply(pixelMap: PixelMapWrapper): PixelMapWrapper {
-        super.forEach((filter: ImageFilterBase) => {
+        super.executeEach((filter: ImageFilterBase) => {
             pixelMap = filter.render(pixelMap);
-        });
+        }, super.getLength());
         return pixelMap;
     }
 
@@ -41,7 +41,7 @@ export class ImageFilterStack extends EditStack<ImageFilterBase> {
     }
 
     releaseAll() {
-        super.forEach((filter: ImageFilterBase) => {
+        super.executeEach((filter: ImageFilterBase) => {
             filter && filter.release();
         }, super.getLength());
         super.reset();

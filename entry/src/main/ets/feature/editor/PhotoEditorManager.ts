@@ -19,7 +19,7 @@ import { PhotoEditBase } from './base/PhotoEditBase';
 import { PhotoEditMode } from './base/PhotoEditType';
 import { PixelMapWrapper } from './base/PixelMapWrapper';
 import { ImageFilterStack } from './ImageFilterStack';
-import { MediaDataItem } from '../../../../../../common/base/src/main/ets/data/MediaDataItem';
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { Loader } from './Loader';
 import { Save } from './Save';
 import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';

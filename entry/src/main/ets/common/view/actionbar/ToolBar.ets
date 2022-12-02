@@ -35,7 +35,7 @@ export struct ToolBar {
     @State showPopup: boolean = false;
     private isFromPhotoBrowser = false;
     onMenuClicked: Function;
-    actionBarProp: ActionBarProp = new ActionBarProp();
+    @State actionBarProp: ActionBarProp = new ActionBarProp();
 
     private createActionBar(): ActionBarProp {
         let actionBarProp: ActionBarProp = new ActionBarProp();

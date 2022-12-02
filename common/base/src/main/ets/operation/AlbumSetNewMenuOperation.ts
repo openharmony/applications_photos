@@ -27,6 +27,7 @@ import { getFetchOptionsByItem } from '../helper/MediaDataHelper';
 import { showToast } from '../utils/UiUtil';
 import mediaModel from '../model/MediaModel';
 import { AlbumDataItem } from '../data/AlbumDataItem';
+import { LazyItem } from '../vm/ItemDataSource';
 
 const TAG = "AlbumSetNewMenuOperation"
 
@@ -116,7 +117,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     private async getNewAlbumDefaultName(root: string, prefixName: string): Promise<string> {
         let numbers = [];
         for (let i = 0; i < this.menuContext.dataSource.totalCount(); i++) {
-            let item = this.menuContext.dataSource.getData(i) as AlbumDataItem;
+            let item = (this.menuContext.dataSource.getData(i) as LazyItem<AlbumDataItem>).get();
             let res = (await item.getRelativePath()).match(new RegExp(`^${root}${prefixName}[1-9][0-9]*${"/"}$`));
             if (res != null) {
                 let number = res[0].match(new RegExp(`[1-9][0-9]*`));

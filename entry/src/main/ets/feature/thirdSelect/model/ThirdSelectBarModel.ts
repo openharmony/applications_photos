@@ -17,7 +17,8 @@ import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarPr
 import { ActionBarMode } from '../../../common/view/browserOperation/ActionBarMode';
 
 export class ThirdSelectBarModel {
-    createActionBar(originLeftAction: Action, originTitle: string | Resource, isMultiPick: boolean, selectedCount: number, maxSelectCount: number): ActionBarProp {
+    createActionBar(originLeftAction: Action, originTitle: string | Resource, isMultiPick: boolean,
+		    selectedCount: number, maxSelectCount: number): ActionBarProp {
         let leftAction: Action = originLeftAction;
         let title: string | Resource = originTitle;
         let menuList: Action[] = [];

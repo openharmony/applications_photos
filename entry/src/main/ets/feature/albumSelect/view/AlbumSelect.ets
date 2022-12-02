@@ -25,6 +25,7 @@ import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
+import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import { UiUtil } from '../utils/UiUtil';
 import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
 import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
@@ -32,6 +33,7 @@ import { AlbumSelectBarModel } from '../model/AlbumSelectBarModel';
 import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar';
 import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
+import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 
 const TAG = "AlbumSelect"
 
@@ -50,6 +52,11 @@ export struct AlbumSelect {
     private scroller: Scroller = new Scroller();
     private barModel: AlbumSelectBarModel = new AlbumSelectBarModel();
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
+    @State actionBarProp: ActionBarProp = new ActionBarProp();
+
+    updateActionBar(): void {
+        this.actionBarProp = this.barModel.createActionBar();
+    }
 
     aboutToAppear(): void {
         startTrace('AlbumSetPageAboutToAppear');
@@ -83,6 +90,7 @@ export struct AlbumSelect {
 
         this.loadAlbums();
         this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.updateActionBar();
         finishTrace('AlbumSetPageAboutToAppear');
     }
 
@@ -150,7 +158,7 @@ export struct AlbumSelect {
             alignItems: ItemAlign.Start
         }) {
             ActionBar({
-                actionBarProp: this.barModel.createActionBar(),
+                actionBarProp: $actionBarProp,
                 onMenuClicked: this.onMenuClicked
             })
 
@@ -159,23 +167,25 @@ export struct AlbumSelect {
                     NoPhotoComponent({ title: $r('app.string.title_no_albums') })
                 }
                 Grid(this.scroller) {
-                    LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {
-                        if (item && item.index == 0) {
-                            GridItem() {
-                                AlbumSelectGridItemNewStyle({
-                                    item: item,
-                                    isBigCard: true,
-                                })
-                            }.columnStart(0).columnEnd(1)
-                        } else if (item) {
-                            GridItem() {
-                                AlbumSelectGridItemNewStyle({
-                                    item: item,
-                                    isBigCard: false,
-                                })
+                    LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
+                        if (item && item.get()) {
+                            if (item.index == 0){
+                                GridItem() {
+                                    AlbumSelectGridItemNewStyle({
+                                        item: item.get(),
+                                        isBigCard: true,
+                                    })
+                                }.columnStart(0).columnEnd(1)
+                            } else if (item) {
+                                GridItem() {
+                                    AlbumSelectGridItemNewStyle({
+                                        item: item.get(),
+                                        isBigCard: false,
+                                    })
+                                }
                             }
                         }
-                    }, (item: AlbumDataItem) => item ? item.getHashCode() : JSON.stringify(item))
+                    }, (item: LazyItem<AlbumDataItem>) => item && item.get() ? item.getHashCode() : JSON.stringify(item))
                 }
                 .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
                 .padding({

@@ -22,7 +22,7 @@ import { ActionBarButton } from './ActionBarButton';
 @Component
 export struct MenuPanel {
     private TAG: string = 'MenuPanel';
-    @State actionBarProp: ActionBarProp = new ActionBarProp();
+    @Link actionBarProp: ActionBarProp;
     @State menuList: Action[] = [];
     onMenuClicked: Function;
 
@@ -53,7 +53,7 @@ export struct MenuPanel {
                     isAutoTint: menu.isAutoTint,
                     colorMode: this.actionBarProp.getColorMode()
                 })
-            }, menu => (menu.actionType ? menu.actionType.id : menu.actionID))
+            }, menu => JSON.stringify(menu.actionID))
         }
         .alignItems(VerticalAlign.Center)
     }

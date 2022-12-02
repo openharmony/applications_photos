@@ -18,6 +18,7 @@ import { TimelineDataItem } from '../data/TimelineDataItem';
 import { DateUtil } from '../../../../../../common/base/src/main/ets/utils/DateUtil';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import { LazyItem} from '@ohos/base/src/main/ets/vm/ItemDataSource';
 
 const TAG = "TimelineTitleComponent"
 // Group Title
@@ -25,6 +26,7 @@ const TAG = "TimelineTitleComponent"
 export struct TimelineTitleComponent {
     @Consume broadCast: Broadcast;
     @Consume isSelectedMode: boolean;
+    lazyItem: LazyItem<TimelineDataItem>
     timelineDataItem: TimelineDataItem;
     addresses = '';
 
@@ -37,6 +39,9 @@ export struct TimelineTitleComponent {
         if (this.isSelectedMode) {
             let isSelect = !this.timelineDataItem.isSelect()
             this.timelineDataItem.setSelect(isSelect)
+            if (this.lazyItem) {
+                this.lazyItem.update(this.timelineDataItem)
+            }
             this.broadCast.emit(BroadcastConstants.GROUP_SELECT, []);
         }
     }

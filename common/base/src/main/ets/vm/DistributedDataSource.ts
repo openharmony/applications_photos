@@ -15,6 +15,9 @@
 import { DistributedDataImpl } from '../model/DistributedDataImpl'
 import { ItemDataSource } from './ItemDataSource'
 import { PeerDataItem } from '../data/PeerDataItem'
+import { Log } from '../utils/Log';
+
+const TAG = "DistributedDataSource"
 
 export class DistributedDataSource extends ItemDataSource {
     private peerDataItems: PeerDataItem[] = [];
@@ -68,6 +71,11 @@ export class DistributedDataSource extends ItemDataSource {
 
     getSelectedItems(): any[]{
         return [];
+    }
+
+    onDataUpdate(index: number): void {
+        Log.info(TAG, `onDataUpdate ${index}`);
+        this.notifyDataChange(index);
     }
 
     dataReload(): void {

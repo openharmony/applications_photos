@@ -24,6 +24,8 @@ import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstan
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
+import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
+
 // The item of album grid, and it's new style.
 const TAG = "AlbumGridItemNewStyle"
 
@@ -34,6 +36,7 @@ export struct AlbumGridItemNewStyle {
         [MediaConstants.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
     ]);
     item: AlbumDataItem
+    lazyItem: LazyItem<AlbumDataItem>
     @State isEmptyAlbum: boolean = false;
     @State selectable: boolean = true;
     @State icHeight: number = 0;
@@ -125,6 +128,9 @@ export struct AlbumGridItemNewStyle {
 
         if (this.selectable) {
             this.item.setSelect(!this.item.isSelect);
+            if (this.lazyItem) {
+                this.lazyItem.update(this.item)
+            }
             this.broadCast.emit(BroadcastConstants.SELECT, [this.item.index]);
 
         }
@@ -281,6 +287,7 @@ export struct AlbumGridItemNewStyle {
                     color: $r('app.color.album_cover_stroke_color')
                 })
         }
+        .height(this.gridHeight)
         .gesture(
         LongPressGesture()
             .onAction(() => {

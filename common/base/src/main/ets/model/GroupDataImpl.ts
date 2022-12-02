@@ -93,13 +93,12 @@ export class GroupDataImpl {
         } else {
             count = (await mediaModel.getAllCommonMediaItem(fetchOption, true)).counts;
             for (let i = 0;i < count; i++) {
-                let mediaItem: MediaDataItem;
+                let mediaItem: MediaDataItem = new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i);
                 if (i < mediaFileAssets.length) {
                     if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
                         mediaItem = mediaDataItemCache.get(mediaFileAssets[i].uri);
                     } else {
-                        mediaItem = new MediaDataItem(fetchOption.selections, fetchOption.selectionArgs, this.deviceId, i);
-                        mediaDataItemCache.set(mediaFileAssets[i].uri, mediaItem);
+		        mediaDataItemCache.set(mediaFileAssets[i].uri, mediaItem);
                     }
                     mediaItem.update(mediaFileAssets[i]);
                 }

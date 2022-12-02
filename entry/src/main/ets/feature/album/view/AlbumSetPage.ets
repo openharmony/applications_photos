@@ -31,6 +31,7 @@ import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
+import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
 import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
@@ -54,6 +55,7 @@ import {
 import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
+import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 import { DistributedDataSource } from '@ohos/base/src/main/ets/vm/DistributedDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { PeerDataItem } from '@ohos/base/src/main/ets/data/PeerDataItem';
@@ -66,8 +68,8 @@ export struct AlbumSetPage {
         new TabItemWithText($r('app.string.local'), false),
         new TabItemWithText($r('app.string.other_equipment'), false)
     ];
-    @Consume @Watch('onModeChange') isAlbumSetSelectedMode: boolean;
-    @Provide('selectedCount') selectedAlbumsCount: number = 0;
+    @Consume @Watch('onModeChange') @Watch('updateActionBar') isAlbumSetSelectedMode: boolean;
+    @Provide('selectedCount') @Watch('updateActionBar') selectedAlbumsCount: number = 0;
     @Provide isHideScrollBar: boolean = true;
     @State isEmpty: boolean = true;
     @Provide gridColumnsCount: number = 0;
@@ -91,6 +93,17 @@ export struct AlbumSetPage {
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
     private distributedDataSource: DistributedDataSource = new DistributedDataSource();
     private isMediaLibDataChanged: boolean = true;
+
+    @State actionBarProp: ActionBarProp = new ActionBarProp();
+
+    updateActionBar(): void {
+        this.actionBarProp = this.barModel.createActionBar(
+            this.isAlbumSetSelectedMode,
+            this.selectedAlbumsCount,
+            this.albumsDataSource.isDisableRename(),
+            this.albumsDataSource.isDisableDelete(),
+        );
+    }
 
     onMenuClicked(action: Action, arg: any[]) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
@@ -200,6 +213,7 @@ export struct AlbumSetPage {
             this.onUpdateRemoteDevice(change);
             this.distributedDataSource.notifyDataReload();
         })
+        this.updateActionBar();
         finishTrace('AlbumSetPageAboutToAppear');
     }
 
@@ -273,6 +287,7 @@ export struct AlbumSetPage {
             this.albumsDataSource.setSelect(false);
             this.selectedAlbumsCount = 0;
         }
+        this.updateActionBar();
     }
 
     onIndexBackPress(callback: Function): void {
@@ -427,23 +442,24 @@ export struct AlbumSetPage {
     @Builder LocalAlbumSet() {
         Stack() {
             Grid(this.scroller) {
-                LazyForEach(this.albumsDataSource, (item: AlbumDataItem) => {
-                    if (item && item.index == 0) {
+                LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
+                    if (item && item.get() && item.get().index == 0) {
                         GridItem() {
                             AlbumGridItemNewStyle({
-                                item: item,
+                                lazyItem: item,
+                                item: item.get(),
                                 isBigCard: true,
                             })
                         }.columnStart(0).columnEnd(1)
-                    } else if (item) {
+                    } else if (item && item.get()) {
                         GridItem() {
                             AlbumGridItemNewStyle({
-                                item: item,
+                                item: item.get(),
                                 isBigCard: false,
                             })
                         }
                     }
-                }, (item: AlbumDataItem) => item ? item.getHashCode() : JSON.stringify(item))
+                }, (item: LazyItem<AlbumDataItem>) => item && item.get()? item.getHashCode() : JSON.stringify(item))
             }
             .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
             .padding({
@@ -489,11 +505,7 @@ export struct AlbumSetPage {
             Column() {
                 if (!this.isEmpty || this.isTabBarShow) {
                     ActionBar({
-                        actionBarProp: this.barModel.createActionBar(
-                            this.isAlbumSetSelectedMode,
-                            this.selectedAlbumsCount,
-                        this.albumsDataSource.isDisableRename(),
-                        this.albumsDataSource.isDisableDelete()),
+                        actionBarProp: $actionBarProp,
                         onMenuClicked: this.onMenuClicked
                     })
                     Column() {

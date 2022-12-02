@@ -19,18 +19,33 @@ import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/brow
 import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
 
 export class AlbumBarModel {
-    createActionBar(isAlbumSetSelectedMode: boolean, selectedAlbumsCount: number, isDisableRename: boolean, isDisableDelete: boolean): ActionBarProp  {
+    createActionBar(isAlbumSetSelectedMode: boolean, selectedAlbumsCount: number,
+					isDisableRename: boolean, isDisableDelete: boolean): ActionBarProp {
+	let actionBarProp: ActionBarProp = new ActionBarProp();
+	let isHorizontal = screenManager.isHorizontal();
+        if (isHorizontal) {
+            this.updateHorizontalActionBar(actionBarProp, isAlbumSetSelectedMode,
+	    selectedAlbumsCount, isDisableRename, isDisableDelete);
+        } else {
+            this.updateVerticalActionBar(actionBarProp, isAlbumSetSelectedMode);
+        }
+	return actionBarProp;
+    }
+
+    updateActionBar(actionBarProp: ActionBarProp, isAlbumSetSelectedMode: boolean,
+                    selectedAlbumsCount: number, isDisableRename: boolean, isDisableDelete: boolean): void {
         let isHorizontal = screenManager.isHorizontal();
         if (isHorizontal) {
-            return this.createHorizontalActionBar(isAlbumSetSelectedMode, selectedAlbumsCount, isDisableRename, isDisableDelete);
+            this.updateHorizontalActionBar(actionBarProp, isAlbumSetSelectedMode,
+                selectedAlbumsCount, isDisableRename, isDisableDelete);
         } else {
-            return this.createVerticalActionBar(isAlbumSetSelectedMode);
+            this.updateVerticalActionBar(actionBarProp, isAlbumSetSelectedMode);
         }
     }
 
-    private createHorizontalActionBar(isAlbumSetSelectedMode: boolean, selectedAlbumsCount: number, isDisableRename: boolean, isDisableDelete: boolean): ActionBarProp {
+    private updateHorizontalActionBar(actionBarProp: ActionBarProp, isAlbumSetSelectedMode: boolean, selectedAlbumsCount: number,
+                                      isDisableRename: boolean, isDisableDelete: boolean): ActionBarProp {
         let isSidebar: boolean = screenManager.isSidebar();
-        let actionBarProp: ActionBarProp = new ActionBarProp();
         actionBarProp
             .setHasTabBar(isSidebar)
             .setTitle($r('app.string.tab_albums'))
@@ -51,11 +66,10 @@ export class AlbumBarModel {
         return actionBarProp;
     }
 
-    private createVerticalActionBar(isAlbumSetSelectedMode: boolean): ActionBarProp {
+    private updateVerticalActionBar(actionBarProp: ActionBarProp, isAlbumSetSelectedMode: boolean): ActionBarProp {
         let menuList: Array<Action> = new Array<Action>();
         menuList.push(Action.NEW);
         let isSidebar: boolean = screenManager.isSidebar();
-        let actionBarProp: ActionBarProp = new ActionBarProp();
         actionBarProp
             .setHasTabBar(isSidebar)
             .setTitle($r('app.string.tab_albums'))

@@ -21,6 +21,7 @@ import { AnimationConstants } from '@ohos/base/src/main/ets/constants/AnimationC
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { Constants } from '../constants/Constants';
+import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 
 const TAG = "PhotoSwiper"
 
@@ -57,18 +58,15 @@ export struct PhotoSwiper {
 
     build() {
         Swiper(this.swiperController) {
-            LazyForEach(this.dataSource, (item: MediaDataItem) => {
-                if (item) {
+            LazyForEach(this.dataSource, (item: LazyItem<MediaDataItem>) => {
+                if (item && item.get()) {
                     PhotoItem({
-                        item: item,
-                        thumbnail: `${item.uri}/thumbnail/${item.width}/${item.height}`,
+                        item: item.get(),
                         pageName: this.photoSwiperTransition
                     })
                     .zIndex(item && item.index == this.currentIndex ? 2 : 1)
                 }
-            }, (item: MediaDataItem) => {
-                return item ? item.getHashCode() : JSON.stringify(item)
-            })
+            }, (item: LazyItem<MediaDataItem>) => item == null && item.get() ? JSON.stringify(item) : item.getHashCode())
         }
         .itemSpace('8vp')
         .gesture(PanGesture({
