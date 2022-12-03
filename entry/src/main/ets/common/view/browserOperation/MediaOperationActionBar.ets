@@ -23,10 +23,14 @@ import { MediaOperationType } from '../../../../../../../common/base/src/main/et
 @Component
 export struct MediaOperationActionBar {
     @Consume pageType: string;
-    @Consume loadingFinish: boolean;
+    @Consume @Watch('updateActionBar') loadingFinish: boolean;
     onMenuClicked: Function;
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @State actionBarProp: ActionBarProp = new ActionBarProp();
+
+    updateActionBar(): void{
+        this.actionBarProp = this.createActionBar();
+    }
 
     private createActionBar(): ActionBarProp {
         let menuList: Array<Action> = new Array<Action>();

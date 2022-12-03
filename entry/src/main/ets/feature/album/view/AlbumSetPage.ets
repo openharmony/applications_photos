@@ -68,7 +68,7 @@ export struct AlbumSetPage {
         new TabItemWithText($r('app.string.local'), false),
         new TabItemWithText($r('app.string.other_equipment'), false)
     ];
-    @Consume @Watch('onModeChange') @Watch('updateActionBar') isAlbumSetSelectedMode: boolean;
+    @Consume @Watch('onModeChange') isAlbumSetSelectedMode: boolean;
     @Provide('selectedCount') @Watch('updateActionBar') selectedAlbumsCount: number = 0;
     @Provide isHideScrollBar: boolean = true;
     @State isEmpty: boolean = true;
@@ -87,7 +87,7 @@ export struct AlbumSetPage {
     @Provide('tabBarShow') isTabBarShow: boolean = false;
     @Provide moreMenuList: Action[] = new Array<Action>();
     private tabsController: TabsController = new TabsController();
-    private currentIndex: number = Constants.LOCAL_TAB_INDEX;
+    @State currentIndex: number = Constants.LOCAL_TAB_INDEX;
     private needNotify = false;
     private barModel: AlbumBarModel = new AlbumBarModel();
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
@@ -176,6 +176,7 @@ export struct AlbumSetPage {
         Log.debug(TAG, `onOperationEnd`);
         this.isAlbumSetSelectedMode = false;
         this.isMediaLibDataChanged = true;
+        this.selectedAlbumsCount = 0;
         this.loadItem();
         mediaObserver.registerObserver(this.dataObserver);
         AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
@@ -376,6 +377,7 @@ export struct AlbumSetPage {
             this.distributedDataSource.reloadAlbumItemData().then((change: number) => {
                 this.onUpdateRemoteDevice(change)
                 this.distributedDataSource.notifyDataReload()
+                this.selectedAlbumsCount = 0
             })
         } else {
             this.isMediaLibDataChanged = true;
@@ -389,6 +391,7 @@ export struct AlbumSetPage {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
                 this.isEmpty = isEmpty;
                 this.albumsDataSource.notifyDataReload();
+                this.selectedAlbumsCount = 0
             })
         } else if (this.isActive) {
             this.albumsDataSource.dataRemove();
@@ -478,26 +481,28 @@ export struct AlbumSetPage {
     }
 
     @Builder OtherEquipmentAlbumSet() {
-        Grid(this.scroller) {
-            LazyForEach(this.distributedDataSource, (item: PeerDataItem) => {
-                GridItem() {
-                    DistributedAlbumGriItem({ item: item })
-                }
-            }, (item: PeerDataItem) => item ? item.getHashCode() : JSON.stringify(item))
-        }
-        .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
-        .padding({
-            left: $r('sys.float.ohos_id_card_margin_start'),
-            right: $r('sys.float.ohos_id_card_margin_end'),
-            top: $r('app.float.album_set_page_padding_top'),
-            bottom: this.isTabBarShow
-                ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
-                : $r('app.float.album_set_page_padding_end')
-        })
-        .columnsGap($r('app.float.album_set_grid_column_gap'))
-        .rowsGap($r('app.float.album_set_grid_row_gap'))
+        Stack() {
+            Grid(this.scroller) {
+                LazyForEach(this.distributedDataSource, (item: PeerDataItem) => {
+                    GridItem() {
+                        DistributedAlbumGriItem({ item: item })
+                    }
+                }, (item: PeerDataItem) => item ? item.getHashCode() : JSON.stringify(item))
+            }
+            .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
+            .padding({
+                left: $r('sys.float.ohos_id_card_margin_start'),
+                right: $r('sys.float.ohos_id_card_margin_end'),
+                top: $r('app.float.album_set_page_padding_top'),
+                bottom: this.isTabBarShow
+                    ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
+                    : $r('app.float.album_set_page_padding_end')
+            })
+            .columnsGap($r('app.float.album_set_grid_column_gap'))
+            .rowsGap($r('app.float.album_set_grid_row_gap'))
 
-        AlbumScrollBar({ scroller: this.scroller, hasSideBar: this.isSidebar })
+            AlbumScrollBar({ scroller: this.scroller, hasSideBar: this.isSidebar })
+        }
     }
 
     build() {
