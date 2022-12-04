@@ -671,6 +671,7 @@ struct PhotoBrowser {
            await this.browserDataSource.groupDataItem[i].load(false);
         }
         this.onPhotoChanged(this.currentIndex);
+		this.browserDataSource.notifyDataChange(this.currentIndex);
         if (this.isToEdit) {
             this.isToEdit = false;
             this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
