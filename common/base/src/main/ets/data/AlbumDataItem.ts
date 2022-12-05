@@ -71,6 +71,7 @@ export class AlbumDataItem {
         this.relativePath = fileAsset.relativePath;
 
         this.status = MediaConstants.LOADED;
+        this.isSelect = selectManager.isSelect(this.uri, this.isSelect);
     }
 
     async getRelativePath(): Promise<string> {
