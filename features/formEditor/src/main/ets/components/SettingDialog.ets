@@ -69,7 +69,6 @@ export struct SettingDialog {
                                 }) {
                                     Radio({ group: 'timeGroup', value: item.value })
                                         .checked(item.checked)
-                                        .offset({ x: $r('app.float.form_card_radius_offset') })
                                         .onChange((checked: boolean) => {
                                             item.checked = checked;
                                             if (checked) {
