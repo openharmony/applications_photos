@@ -70,7 +70,6 @@ export struct TitleBar {
             router.back();
         } else {
             this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
-            router.back();
         }
     }
 

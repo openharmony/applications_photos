@@ -28,7 +28,7 @@ export struct MediaOperationActionBar {
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @State actionBarProp: ActionBarProp = new ActionBarProp();
 
-    updateActionBar(): void{
+    updateActionBar(): void {
         this.actionBarProp = this.createActionBar();
     }
 

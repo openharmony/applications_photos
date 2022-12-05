@@ -201,6 +201,7 @@ export class TimelineItemDataSource extends ItemDataSource {
     onMediaDataUpdate(index: number, item: MediaDataItem): void {
         Log.info(TAG, `onMediaDataUpdate ${index}`);
         this.notifyDataChange(index);
+        this.notifyDataChange(index - item.index - 1);
     }
 
     dataReload(): void {
