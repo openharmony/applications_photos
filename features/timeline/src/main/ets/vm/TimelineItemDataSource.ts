@@ -91,11 +91,11 @@ export class TimelineItemDataSource extends ItemDataSource {
                 break;
             } else if (index <= childLength) {
                 item = groupItem.groupChild[index-1];
-                item.index = index - 1;
+                item.index = count + index - 1;
                 break;
             } else {
                 index -= (1 + childLength);
-                count += childLength + 1;
+                count += childLength;
             }
         }
         return item;
@@ -104,19 +104,20 @@ export class TimelineItemDataSource extends ItemDataSource {
     getData(index: number): LazyItem<TimelineDataItem> | LazyItem<MediaDataItem> {
         let item: LazyItem<TimelineDataItem> | LazyItem<MediaDataItem> = undefined;
         let count = 0;
+        let lazyIndex = index;
         for (let i = 0;i < this.groupItem.length; i++) {
             let groupItem: TimelineDataItem = this.groupItem[i]
             let childLength = groupItem.groupChild.length;
             if (index == 0) {
-                item = new LazyItem<TimelineDataItem>(groupItem, index, this.onTimelineDataUpdate.bind(this));
+                item = new LazyItem<TimelineDataItem>(groupItem, lazyIndex, this.onTimelineDataUpdate.bind(this));
                 break;
             } else if (index <= childLength) {
-                item = new LazyItem<MediaDataItem>(groupItem.groupChild[index-1], count + index, this.onMediaDataUpdate.bind(this));
-                groupItem.groupChild[index-1].index = index - 1;
+                item = new LazyItem<MediaDataItem>(groupItem.groupChild[index-1], lazyIndex, this.onMediaDataUpdate.bind(this));
+                groupItem.groupChild[index-1].index = count + index - 1;
                 break;
             } else {
                 index -= (1 + childLength);
-                count += childLength + 1;
+                count += childLength;
             }
         }
         return item;
