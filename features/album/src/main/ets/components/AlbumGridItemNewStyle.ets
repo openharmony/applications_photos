@@ -162,7 +162,7 @@ export struct AlbumGridItemNewStyle {
                     .alignItems(HorizontalAlign.Start)
                 } else {
                     Row() {
-                        Image(this.thumbnail)
+                        Image(this.item.getThumbnail())
                             .width(this.cardWidth)
                             .height(this.cardHeight)
                             .transform({ y: this.transformV })
@@ -203,7 +203,7 @@ export struct AlbumGridItemNewStyle {
                     .alignItems(HorizontalAlign.Start)
                 } else {
                     Row() {
-                        Image(this.thumbnail)
+                        Image(this.item.getThumbnail())
                             .width(this.cardWidth)
                             .height(this.cardHeight)
                             .translate({ x: this.transformV })
