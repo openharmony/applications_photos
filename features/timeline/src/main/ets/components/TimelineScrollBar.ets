@@ -152,7 +152,7 @@ export struct TimelineScrollBar {
             }
             .height('100%')
             .width(this.isClickScrollBar
-                ? $r('app.float.scroll_bar_margin_small') : $r('app.float.scroll_bar_small_width'),)
+                ? $r('app.float.scroll_press_all_width') : $r('app.float.scroll_bar_small_width'),)
         }
         .onTouch((event: TouchEvent) => {
             if (this.dateText == '') {
