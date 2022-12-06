@@ -197,7 +197,7 @@ export struct PhotoItem {
                     .constraintSize({maxWidth:"100%", maxHeight:"100%"})
                     .sharedTransition(this.item.index == this.updateTransition ? this.pageName + this.item.getHashCode() : Constants.DEFAULT_TRANSITION_ID, {
                         duration: Constants.SHARE_TRANSITION_DURATION,
-                        zIndex:1
+                        zIndex: 0,
                     })
                     .onComplete(() => {
                         startTrace(`PhotoItemComplete_${this.item}`);

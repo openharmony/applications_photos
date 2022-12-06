@@ -208,6 +208,10 @@ struct SelectPhotoBrowser {
             ThirdSelectPhotoBrowserActionBar({
                 isMultiPick: this.isMultiPick,
                 onMenuClicked: this.onMenuClicked
+            }).sharedTransition("selectPhotoBrowserActionBar", {
+                type: SharedTransitionEffectType.Static,
+                duration: Constants.SHARE_TRANSITION_DURATION,
+                zIndex: 2,
             })
         }
     }
