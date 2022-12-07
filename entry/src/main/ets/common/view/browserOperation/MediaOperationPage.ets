@@ -19,7 +19,7 @@ import { MediaOperationActionBar } from './MediaOperationActionBar';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { AlbumSetNewMenuOperation } from '@ohos/base/src/main/ets/operation/AlbumSetNewMenuOperation';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import { AlbumListCard } from '../../../../../../../features/mediaoperation/src/main/ets/components/AlbumListCard';
+import { AlbumListCard } from '../../../../../../../features/mediaOperation/src/main/ets/components/AlbumListCard';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { Action } from './Action';
 import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
