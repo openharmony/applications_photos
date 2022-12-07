@@ -122,6 +122,7 @@ export struct DistributedAlbumGriItem {
                 bottom: $r('app.float.album_set_count_margin_bottom')
             })
         }
+        .height(this.gridHeight)
         .border({
             radius: $r('sys.float.ohos_id_corner_radius_default_l'),
             width: $r('app.float.album_cover_stroke_width'),

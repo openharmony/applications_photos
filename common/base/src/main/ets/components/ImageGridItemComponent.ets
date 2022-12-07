@@ -42,6 +42,7 @@ export struct ImageGridItemComponent {
     private isEnteringPhoto = false;
     private isChangeSource = false;
     private isPush = false;
+    private isPreview = false;
 
     private resetPressAnim(): void {
         this.pressAnimScale = 1;
@@ -83,14 +84,18 @@ export struct ImageGridItemComponent {
     }
 
     private onShow(): void {
-        this.resetPressAnim();
+        if (this.isShow && this.isChangeSource) {
+            this.resetShow();
+        } else {
+            this.resetPressAnim();
+        }
     }
 
     async routePage(isError: boolean) {
         Log.info(TAG, `routePage ${isError}`);
         try {
             startTrace('enterPhotoBrowser');
-            if (this.isThird) {
+            if (this.isThird || this.isPreview) {
                 this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
             } else {
                 this.broadCast.emit(BroadcastConstants.JUMP_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
@@ -136,7 +141,7 @@ export struct ImageGridItemComponent {
             this.isPush = true;
         } else {
             console.info("column click to broadCast, thumbnail:"+this.thumbnail)
-            if (this.isThird) {
+            if (this.isThird || this.isPreview) {
                 this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
             } else {
                 this.broadCast.emit(BroadcastConstants.JUMP_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
@@ -156,7 +161,7 @@ export struct ImageGridItemComponent {
                     if (this.isChangeSource && this.isPush) {
                         Log.info(TAG, "image onComplete, broadCast, thumbnail:"+this.thumbnail);
                         this.isPush = false;
-                        if (this.isThird) {
+                        if (this.isThird || this.isPreview) {
                             this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
                         } else {
                             this.broadCast.emit(BroadcastConstants.JUMP_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
@@ -173,7 +178,8 @@ export struct ImageGridItemComponent {
                     }
                 })
                 .sharedTransition(this.pageName + this.mediaItem.getHashCode(), {
-                    duration: AnimationConstants.SHARE_TRANSITION_DURATION
+                    duration: AnimationConstants.SHARE_TRANSITION_DURATION,
+                    zIndex: 0,
                 })
 
             if (this.mediaItem.mediaType == MediaLib.MediaType.VIDEO) {
@@ -218,12 +224,14 @@ export struct ImageGridItemComponent {
                     if (this.isSelectedMode) {
                         this.onSelected();
                      } else {
-                         this.jumpToPhotoBrowser();
+                        this.isPreview = false;
+                        this.jumpToPhotoBrowser();
                      }
                 })
             if (this.isSelectedMode) {
                 Image($r('app.media.ic_photo_preview'))
                     .onClick(() => {
+                        this.isPreview = true;
                         this.jumpToPhotoBrowser();
                         Log.info(TAG, 'expand.');
                     })

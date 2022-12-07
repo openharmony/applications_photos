@@ -17,6 +17,7 @@ import { Action } from './browserOperation/Action';
 import { ActionBar } from './actionbar/ActionBar';
 import { ActionBarProp } from './browserOperation/ActionBarProp';
 import { ActionBarMode, ActionBarColorMode, ActionBarSelectionMode } from './browserOperation/ActionBarMode';
+import { Constants } from '../model/common/Constants';
 
 @Component
 export struct ThirdSelectPhotoBrowserActionBar {
@@ -57,6 +58,7 @@ export struct ThirdSelectPhotoBrowserActionBar {
                 onMenuClicked: this.onMenuClicked
             })
         }
+        .height(Constants.ActionBarHeight)
         .hitTestBehavior(HitTestMode.Transparent)
         .markAnchor({ x: '0%', y: '0%' })
         .position({ x: '0%', y: '0%' })

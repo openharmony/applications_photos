@@ -62,7 +62,9 @@ export class GroupItemDataSource extends ItemDataSource {
             Log.warn(TAG, `${index}/${this.groupDataItem.length}`);
             return undefined;
         }
-        this.groupDataItem[index].index = index;
+        if (this.groupDataItem[index] != null && this.groupDataItem[index] != undefined) {
+            this.groupDataItem[index].index = index;
+        }
         return new LazyItem<MediaDataItem>(this.groupDataItem[index], index, this.onDataUpdate.bind(this));
     }
 
@@ -71,7 +73,9 @@ export class GroupItemDataSource extends ItemDataSource {
             Log.warn(TAG, `${index}/${this.groupDataItem.length}`);
             return undefined;
         }
-        this.groupDataItem[index].index = index;
+        if (this.groupDataItem[index] != null && this.groupDataItem[index] != undefined) {
+            this.groupDataItem[index].index = index;
+        }
         return this.groupDataItem[index];
     }
 
@@ -151,7 +155,7 @@ export class GroupItemDataSource extends ItemDataSource {
 
     dataRemove() {
         for (let i = this.groupDataItem.length - 1;i >= 0; i--) {
-            if (this.groupDataItem[i].isDeleted()) {
+            if (this.groupDataItem[i] != undefined && this.groupDataItem[i].isDeleted()) {
                 this.groupDataItem.splice(i, 1);
                 super.notifyDataDelete(i);
             }
