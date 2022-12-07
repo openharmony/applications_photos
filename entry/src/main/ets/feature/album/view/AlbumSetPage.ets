@@ -214,6 +214,7 @@ export struct AlbumSetPage {
             this.onUpdateRemoteDevice(change);
             this.distributedDataSource.notifyDataReload();
         })
+        this.onIndexPageShow();	//TabContent uses lazy loading, call onIndexPageShow() the first time
         this.updateActionBar();
         finishTrace('AlbumSetPageAboutToAppear');
     }
