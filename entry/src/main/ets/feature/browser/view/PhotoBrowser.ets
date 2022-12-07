@@ -560,14 +560,15 @@ struct PhotoBrowser {
                 items = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER);
             }
 
-            this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean) => {
-                if (items) {
-                    this.onPhotoChanged(new Number(param.position).valueOf() || 0);
-                } else {
+            if (items && !this.isFromCamera) {
+                this.browserDataSource.groupDataItem = items;
+                this.onPhotoChanged(new Number(param.position).valueOf() || 0);
+            } else {
+                this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean) => {
                     this.onPhotoChanged(0);
                     this.browserDataSource.notifyDataReload();
-                }
-            })
+                })
+            }
 
             this.photoBrowserTransition = (this.isFromCamera || this.isFromViewData)
                 ? Constants.PHOTO_TRANSITION_CAMERA : (param.transition ? param.transition.toString() : '');
