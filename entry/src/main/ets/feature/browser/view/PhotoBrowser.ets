@@ -560,15 +560,14 @@ struct PhotoBrowser {
                 items = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER);
             }
 
-            if (items) {
-                this.browserDataSource.groupDataItem = items;
-                this.onPhotoChanged(new Number(param.position).valueOf() || 0);
-            } else {
-                this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean) => {
+            this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean) => {
+                if (items) {
+                    this.onPhotoChanged(new Number(param.position).valueOf() || 0);
+                } else {
                     this.onPhotoChanged(0);
                     this.browserDataSource.notifyDataReload();
-                })
-            }
+                }
+            })
 
             this.photoBrowserTransition = (this.isFromCamera || this.isFromViewData)
                 ? Constants.PHOTO_TRANSITION_CAMERA : (param.transition ? param.transition.toString() : '');
@@ -661,17 +660,12 @@ struct PhotoBrowser {
     }
 
     private async dataSourceLoadFinish() {
-        let newMediaDataItems: MediaDataItem[] = this.browserDataSource.groupDataItem;
         await this.browserDataSource.reloadGroupItemData(false);
-        if (this.isToEdit) {
-            newMediaDataItems[this.currentIndex] = this.browserDataSource.groupDataItem[0];
-            this.browserDataSource.groupDataItem = newMediaDataItems;
-        }
         for(let i = 0;i < this.browserDataSource.groupDataItem.length;i++) {
            await this.browserDataSource.groupDataItem[i].load(false);
         }
         this.onPhotoChanged(this.currentIndex);
-		this.browserDataSource.notifyDataChange(this.currentIndex);
+		    this.browserDataSource.notifyDataChange(this.currentIndex);
         if (this.isToEdit) {
             this.isToEdit = false;
             this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
