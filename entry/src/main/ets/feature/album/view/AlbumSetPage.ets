@@ -315,6 +315,9 @@ export struct AlbumSetPage {
             this.onActive();
         } else {
             this.isInCurrentTab = false;
+            if (this.isAlbumSetSelectedMode) {
+                this.isAlbumSetSelectedMode = false;
+            }
             this.onInActive();
         }
     }
