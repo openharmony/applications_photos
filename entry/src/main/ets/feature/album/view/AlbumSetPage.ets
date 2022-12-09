@@ -381,7 +381,6 @@ export struct AlbumSetPage {
             this.distributedDataSource.reloadAlbumItemData().then((change: number) => {
                 this.onUpdateRemoteDevice(change)
                 this.distributedDataSource.notifyDataReload()
-                this.selectedAlbumsCount = 0
             })
         } else {
             this.isMediaLibDataChanged = true;
@@ -395,7 +394,6 @@ export struct AlbumSetPage {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
                 this.isEmpty = isEmpty;
                 this.albumsDataSource.notifyDataReload();
-                this.selectedAlbumsCount = 0
             })
         } else if (this.isActive) {
             this.albumsDataSource.dataRemove();
