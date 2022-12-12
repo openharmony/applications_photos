@@ -83,10 +83,13 @@ export struct TimelinePage {
     private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
     private isMediaLibDataChanged: boolean = true;
     @State actionBarProp: ActionBarProp = new ActionBarProp();
+    @State toolBarMenuList: Action[] = new Array<Action>();
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar(this.isSelectedMode,
                                         this.totalSelectedCount, this.isAllSelected);
+		this.toolBarMenuList = this.barModel.getMenuList(this.isSelectedMode,
+								this.totalSelectedCount, this.isAllSelected);
     }
 
     aboutToAppear(): void {
@@ -566,7 +569,7 @@ export struct TimelinePage {
 
             if (this.isSelectedMode) {
                 ToolBar({
-                    toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected),
+                    toolMenuList: $toolBarMenuList,
                     onMenuClicked: this.onMenuClicked.bind(this)
                 })
             }
