@@ -71,7 +71,7 @@ export class AlbumDataItem {
         this.relativePath = fileAsset.relativePath;
 
         this.status = MediaConstants.LOADED;
-        this.isSelect = selectManager.isSelect(this.uri, this.isSelect);
+        this.isSelect = selectManager.isSelect(this.id, this.isSelect);
     }
 
     async getRelativePath(): Promise<string> {
@@ -94,7 +94,7 @@ export class AlbumDataItem {
 
     setSelect(isSelect: boolean) {
         this.isSelect = isSelect;
-        selectManager.setSelect(this.uri, this.isSelect);
+        selectManager.setSelect(this.id, this.isSelect);
     }
 
     async onDelete(): Promise<boolean> {
