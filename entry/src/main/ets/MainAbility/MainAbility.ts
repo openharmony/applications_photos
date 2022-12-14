@@ -74,32 +74,6 @@ export default class MainAbility extends Ability {
         } else {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
-
-        let requestPermissionList: Array<string> = [
-            "ohos.permission.READ_MEDIA",
-            "ohos.permission.WRITE_MEDIA",
-            "ohos.permission.MEDIA_LOCATION",
-            "ohos.permission.DISTRIBUTED_DATASYNC"
-        ];
-        startTrace('requestPermissionsFromUser');
-        this.context.requestPermissionsFromUser(requestPermissionList).then(function (data) {
-            Log.info(this.TAG, `requestPermissionsFromUser data:  ${JSON.stringify(data)}`);
-            let result = 0;
-            for (let i = 0; i < data.authResults.length; i++) {
-                result += data.authResults[i]
-            }
-            if (result >= 0) {
-                // Improve cold startup performance. Initialize the timeline in advance
-                AppStorage.SetOrCreate(Constants.PERMISSION_STATUS, true);
-                finishTrace('requestPermissionsFromUser');
-                finishTrace('onCreate');
-            } else {
-                AppStorage.SetOrCreate(Constants.PERMISSION_STATUS, false);
-            }
-        }, (err) => {
-            Log.error(this.TAG, `Failed to requestPermissionsFromUser, ${err.code}`);
-        });
-
         appBroadcast.on(BroadcastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
         Log.info(this.TAG, 'Application onCreate end');
     }
@@ -173,8 +147,6 @@ export default class MainAbility extends Ability {
 
     thirdRouterPage() {
         let entryFrom = AppStorage.Get(Constants.ENTRY_FROM_HAP);
-        let permission = AppStorage.Get(Constants.PERMISSION_STATUS);
-        Log.info(this.TAG, `thirdRouterPage entryFromHap: ${entryFrom} permission: ${permission}`);
         if (entryFrom == Constants.ENTRY_FROM_NONE) {
             return;
         }
