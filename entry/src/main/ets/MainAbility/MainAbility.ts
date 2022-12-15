@@ -76,12 +76,11 @@ export default class MainAbility extends Ability {
         } else {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
-        bundleManager.getApplicationInfo("com.ohos.photos", 0, (error, appInfo) => {
+        bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0, (error, appInfo) => {
            if (error) {
                 Log.error(this.TAG, `getApplicationInfo error: ${error}`);
                 return;
             }
-           Log.info(this.TAG, `getApplicationInfo success , accessTokenId: ${appInfo.accessTokenId}`);
            let requestPermissionList: Array<string> = [
                "ohos.permission.READ_MEDIA",
                "ohos.permission.WRITE_MEDIA",
