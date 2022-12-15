@@ -95,6 +95,7 @@ export struct AlbumSetPage {
     private isMediaLibDataChanged: boolean = true;
 
     @State actionBarProp: ActionBarProp = new ActionBarProp();
+    @State toolBarMenuList: Action[] = new Array<Action>();
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar(
@@ -103,6 +104,11 @@ export struct AlbumSetPage {
             this.albumsDataSource.isDisableRename(),
             this.albumsDataSource.isDisableDelete(),
         );
+        this.toolBarMenuList = this.barModel.getMenuList(
+            this.isAlbumSetSelectedMode,
+            this.selectedAlbumsCount,
+            this.albumsDataSource.isDisableRename(),
+            this.albumsDataSource.isDisableDelete());
     }
 
     onMenuClicked(action: Action, arg: any[]) {
@@ -554,11 +560,7 @@ export struct AlbumSetPage {
                 }
                 if (this.isAlbumSetSelectedMode) {
                     ToolBar({
-                        toolMenuList: this.barModel.getMenuList(
-                            this.isAlbumSetSelectedMode,
-                            this.selectedAlbumsCount,
-                        this.albumsDataSource.isDisableRename(),
-                        this.albumsDataSource.isDisableDelete()),
+                        toolMenuList: $toolBarMenuList,
                         onMenuClicked: this.onMenuClicked
                     })
                 }
