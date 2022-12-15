@@ -74,6 +74,7 @@ export default class MainAbility extends Ability {
         } else {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
+        finishTrace('onCreate');
         appBroadcast.on(BroadcastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
         Log.info(this.TAG, 'Application onCreate end');
     }
@@ -147,6 +148,7 @@ export default class MainAbility extends Ability {
 
     thirdRouterPage() {
         let entryFrom = AppStorage.Get(Constants.ENTRY_FROM_HAP);
+        Log.info(this.TAG, `thirdRouterPage entryFromHap: ${entryFrom}`);
         if (entryFrom == Constants.ENTRY_FROM_NONE) {
             return;
         }
