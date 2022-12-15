@@ -26,6 +26,8 @@ import { BroadcastConstants } from '../../../../../common/base/src/main/ets/cons
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import router from '@system.router';
 import { GroupItemDataSource } from '../../../../../common/base/src/main/ets/vm/GroupItemDataSource';
+import atManager from '@ohos.abilityAccessCtrl';
+import bundleManager from '@ohos.bundle.bundleManager';
 
 let isFromCard = false;
 let appBroadcast = broadcastManager.getBroadcast();
@@ -74,6 +76,26 @@ export default class MainAbility extends Ability {
         } else {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
+        bundleManager.getApplicationInfo("com.ohos.photos", 0, (error, appInfo) => {
+           if (error) {
+                Log.error(this.TAG, `getApplicationInfo error: ${error}`);
+                return;
+            }
+           Log.info(this.TAG, `getApplicationInfo success , accessTokenId: ${appInfo.accessTokenId}`);
+           let requestPermissionList: Array<string> = [
+               "ohos.permission.READ_MEDIA",
+               "ohos.permission.WRITE_MEDIA",
+               "ohos.permission.MEDIA_LOCATION",
+               "ohos.permission.DISTRIBUTED_DATASYNC"
+           ];
+           for (let permission of requestPermissionList) {
+               atManager.createAtManager().checkAccessToken(appInfo.accessTokenId, permission).then((status) => {
+                   if (status == atManager.GrantStatus.PERMISSION_DENIED) {
+                       Log.error(this.TAG, `Failed to checkAccessToken permission = ${permission}`);
+                   }
+               })
+           }
+       })
         finishTrace('onCreate');
         appBroadcast.on(BroadcastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
         Log.info(this.TAG, 'Application onCreate end');
