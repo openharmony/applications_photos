@@ -309,4 +309,7 @@ export class Constants {
     static readonly PROGRESS_LENGTH_DIFF: number = 88;
     static readonly ALBUM_NAME_MAX_LENGTH = 82;
     static readonly BACK_FROM_FORM_DETAIL: string = 'back_from_form_detail';
+
+    // ApplictionInfo
+    static readonly BUNDLE_NAME: string = 'com.ohos.photos';
 }
