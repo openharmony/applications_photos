@@ -299,7 +299,6 @@ export class Constants {
     static readonly FA_SETTING_FROM_ID: string = 'FASetting_FormId';
     static readonly VIEW_DATA_URI: string = 'viewDataUri';
     static readonly VIEW_DATA_POS: string = 'viewDataPos';
-    static readonly PERMISSION_STATUS: string = 'permissionStatus';
 
     static readonly FORM_ITEM_NAME: string = 'form_itemName';
     static readonly FORM_ITEM_ALBUM_ID: string = 'form_itemAlbumId';
