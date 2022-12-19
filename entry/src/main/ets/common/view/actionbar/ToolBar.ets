@@ -29,7 +29,7 @@ export class MenuItem {
 export struct ToolBar {
     @StorageLink('isSplitMode') isSplitMode: boolean = screenManager.isSplitMode();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
-    toolMenuList: Action[] = [];
+    @Link toolMenuList: Action[];
     @Consume moreMenuList: Action[];
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @State showPopup: boolean = false;
@@ -155,7 +155,7 @@ export struct ToolBar {
                 .padding(this.toolMenuList.length > 4 ? {} : { left: $r('app.float.actionbar_margin_horizontal'),
                                                                  right: $r('app.float.actionbar_margin_horizontal') })
             }
-            .margin({
+            .padding({
                 bottom: this.isFromPhotoBrowser ? px2vp(this.leftBlank[3]) : 0
             })
             .width('100%')

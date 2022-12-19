@@ -171,7 +171,7 @@ export struct Edit {
                         }
                     }
                     .height(this.isVerticalScreen ? this.barScale : this.imageScale)
-                    .width(this.isVerticalScreen ? this.defaultWidth : this.barScale)
+                    .width(this.isVerticalScreen ? "100%" : this.barScale)
 
                     Column() {
                         if (this.selectedMode == PhotoEditMode.EDIT_MODE_CROP) {
