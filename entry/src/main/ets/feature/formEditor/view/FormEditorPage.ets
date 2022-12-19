@@ -266,7 +266,7 @@ struct FormEditorPage {
     build() {
         Column() {
             Row() {
-                Image($r('app.media.ic_gallery_public_back'))
+                Image($r('app.media.ic_gallery_public_cancel'))
                     .fillColor($r('app.color.white'))
                     .width($r('app.float.FA_back_size'))
                     .height($r('app.float.FA_back_size'))

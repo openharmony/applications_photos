@@ -1,3 +1,4 @@
+import { MediaConstants } from '../constants/MediaConstants';
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -49,17 +50,22 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
         this.cancelCallback = this.cancelCallback.bind(this);
 
         let resource: Resource = this.getDeleteMessageResource(dataSource);
-        this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [resource, this.confirmCallback, this.cancelCallback]);
+        let deleteResource: Resource = this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.dialog_recycle') : $r('app.string.dialog_delete');
+        this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [resource, deleteResource, this.confirmCallback, this.cancelCallback]);
     }
 
     getDeleteMessageResource(dataSource: ItemDataSource): Resource {
         let resource: Resource;
-        if (dataSource && dataSource.isSelect()) {
-            resource = $r('app.string.recycle_all_files_tips');
-        } else if (this.count == 1) {
-            resource = $r('app.string.recycle_single_file_tips');
+        if (this.menuContext.deletePageFromType == BroadcastConstants.DELETE_FROM_BROWSER) {
+            resource = this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_single_file_tips') : $r('app.string.delete_single_file_tips');
         } else {
-            resource = $r('app.string.recycle_files_tips', this.count);
+            if (dataSource && dataSource.isSelect()) {
+                resource = this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_all_files_tips') : $r('app.string.delete_all_files_tips');
+            } else if (this.count == 1) {
+                resource = this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_single_file_tips') : $r('app.string.delete_single_file_tips');
+            } else {
+                resource = this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_files_tips', this.count) : $r('app.string.delete_files_tips', this.count);
+            }
         }
         return resource;
     }

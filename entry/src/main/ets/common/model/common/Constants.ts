@@ -242,6 +242,8 @@ export class Constants {
     static readonly NUMBER_0: number = 0;
 
     // Grid Constants
+    static readonly DELETE_FROM_BROWSER: number = 0;
+    static readonly DELETE_FROM_GRID: number = 1;
     static readonly TAB_BAR_WIDTH: number = 96;
     static readonly GRID_GUTTER: number = 2;
     static readonly GRID_IMAGE_SIZE: number = 256;
