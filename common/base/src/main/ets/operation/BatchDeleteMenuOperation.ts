@@ -1,4 +1,3 @@
-import { MediaConstants } from '../constants/MediaConstants';
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +19,7 @@ import { MenuContext } from './MenuContext';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { ProcessMenuOperation } from './ProcessMenuOperation';
 import { MediaDataItem } from '../data/MediaDataItem';
+import { MediaConstants } from '../constants/MediaConstants';
 
 const TAG = "BatchDeleteMenuOperation"
 

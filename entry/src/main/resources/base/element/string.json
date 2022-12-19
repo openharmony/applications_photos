@@ -206,7 +206,7 @@
     },
     {
       "name": "delete_files_tips",
-      "value": "Delete %d items？"
+      "value": "Delete %d items?"
     },
     {
       "name": "recycle_all_files_tips",
@@ -218,7 +218,7 @@
     },
     {
       "name": "recycle_files_tips",
-      "value": "Permanently delete %d items？"
+      "value": "Permanently delete %d items?"
     },
     {
       "name": "recycle_single_album_with_photos_tips",
