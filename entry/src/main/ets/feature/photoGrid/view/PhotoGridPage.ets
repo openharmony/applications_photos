@@ -85,10 +85,13 @@ export struct PhotoGridPage {
     private groupDataSource: GroupItemDataSource = new GroupItemDataSource();
     private isMediaLibDataChanged: boolean = true;
     @State actionBarProp: ActionBarProp = new ActionBarProp();
+    @State toolBarMenuList: Action[] = new Array<Action>();
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar(this.title, this.isSelectedMode,
-                                this.totalSelectedCount, this.isAllSelected, this.isEmpty)
+                                this.totalSelectedCount, this.isAllSelected, this.isEmpty);
+        this.toolBarMenuList = this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount,
+                                this.isAllSelected, this.isEmpty);
     }
 
     onIndexChange() {
@@ -634,7 +637,7 @@ export struct PhotoGridPage {
             CustomDialogView();
             if (this.isSelectedMode || (this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) && !this.isEmpty) {
                 ToolBar({
-                    toolMenuList: this.barModel.getMenuList(this.isSelectedMode, this.totalSelectedCount, this.isAllSelected, this.isEmpty),
+                    toolMenuList: $toolBarMenuList,
                     onMenuClicked: this.onMenuClicked
                 })
             }

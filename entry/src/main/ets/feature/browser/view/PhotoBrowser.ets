@@ -770,7 +770,7 @@ struct PhotoBrowser {
                         onMenuClicked: this.onMenuClicked,
                     })
                     ToolBar({
-                        toolMenuList: this.toolMenuList,
+                        toolMenuList: $toolMenuList,
                         onMenuClicked: this.onMenuClicked,
                         isFromPhotoBrowser: true
                     })
