@@ -163,7 +163,7 @@ struct PhotoBrowser {
                     return;
                 }
                 menuContext.withItems([currentPhoto])
-                    .withDeletePageFromType(Constants.DELETE_FROM_BROWSER)
+                    .withDeletePageFromType(BroadcastConstants.DELETE_FROM_BROWSER)
                     .withAlbumId(this.albumInfo && this.albumInfo.id)
                     .withBroadCast(this.broadCast)
                     .withOperationEndCallback(this.onDeleteEnd.bind(this))
