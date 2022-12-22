@@ -80,7 +80,7 @@ struct MediaOperationPage {
     }
 
     private loadAlbums() {
-        this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
+        this.albumsDataSource.reloadAlbumListItemData().then((isEmpty: boolean) => {
             this.loadingFinish = true
             this.albumsDataSource.notifyDataReload()
         })
