@@ -163,6 +163,8 @@ struct PhotoBrowser {
                     return;
                 }
                 menuContext.withItems([currentPhoto])
+                    .withDeletePageFromType(BroadcastConstants.DELETE_FROM_BROWSER)
+                    .withAlbumId(this.albumInfo && this.albumInfo.id)
                     .withBroadCast(this.broadCast)
                     .withOperationEndCallback(this.onDeleteEnd.bind(this))
                 menuOperation = new BatchDeleteMenuOperation(menuContext);
@@ -374,7 +376,7 @@ struct PhotoBrowser {
     private async getActionList(currentPhoto: MediaDataItem): Promise<Array<Action>> {
         let list: Array<Action> = new Array<Action>();
         if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
-            list.push(Action.RECOVER, Action.CLEAR_RECYCLE);
+            list.push(Action.RECOVER, Action.DELETE);
         } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
             list.push(Action.SHARE, Action.DOWNLOAD);
         } else {

@@ -127,6 +127,8 @@ export struct PhotoGridPage {
                 this.onDeleteStart = this.onDeleteStart.bind(this);
                 this.onDeleteEnd = this.onDeleteEnd.bind(this);
                 menuContext
+                    .withDeletePageFromType(BroadcastConstants.DELETE_FROM_GRID)
+                    .withAlbumId(this.albumInfo.id)
                     .withDataSource(this.groupDataSource)
                     .withOperationStartCallback(this.onDeleteStart)
                     .withOperationEndCallback(this.onDeleteEnd)

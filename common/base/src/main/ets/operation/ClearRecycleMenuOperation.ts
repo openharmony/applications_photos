@@ -47,8 +47,7 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
         this.confirmCallback = this.confirmCallback.bind(this);
         this.cancelCallback = this.cancelCallback.bind(this);
 
-        let resource: Resource = this.getDeleteMessageResource(dataSource);
-        this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [resource, this.confirmCallback, this.cancelCallback]);
+        this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [$r('app.string.recycleAlbum_clear_message'), $r('app.string.dialog_clear'), this.confirmCallback, this.cancelCallback]);
     }
 
     confirmCallback(): void {
@@ -74,11 +73,4 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
         this.processOperation();
     }
 
-    getDeleteMessageResource(dataSource: ItemDataSource): Resource {
-        if (dataSource && dataSource.isSelect()) {
-            return $r('app.string.recycleAlbum_clear_message');
-        } else {
-            return $r('app.plural.recycleAlbum_delete_message', this.count);
-        }
-    }
 }

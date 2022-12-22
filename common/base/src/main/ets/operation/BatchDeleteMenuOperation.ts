@@ -19,6 +19,7 @@ import { MenuContext } from './MenuContext';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { ProcessMenuOperation } from './ProcessMenuOperation';
 import { MediaDataItem } from '../data/MediaDataItem';
+import { MediaConstants } from '../constants/MediaConstants';
 
 const TAG = "BatchDeleteMenuOperation"
 
@@ -49,17 +50,30 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
         this.cancelCallback = this.cancelCallback.bind(this);
 
         let resource: Resource = this.getDeleteMessageResource(dataSource);
-        this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [resource, this.confirmCallback, this.cancelCallback]);
+        let deleteResource: Resource = this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.dialog_recycle') : $r('app.string.dialog_delete');
+        this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [resource, deleteResource, this.confirmCallback, this.cancelCallback]);
+    }
+
+    getResourceFromBrowser(): Resource {
+        return this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_single_file_tips') : $r('app.string.delete_single_file_tips')
+    }
+
+    getResourceFromGrid(dataSource: ItemDataSource): Resource {
+        if (dataSource && dataSource.isSelect()) {
+            return this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_all_files_tips') : $r('app.string.delete_all_files_tips');
+        } else if (this.count == 1) {
+            return this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_single_file_tips') : $r('app.string.delete_single_file_tips');
+        } else {
+            return this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_files_tips', this.count) : $r('app.string.delete_files_tips', this.count);
+        }
     }
 
     getDeleteMessageResource(dataSource: ItemDataSource): Resource {
         let resource: Resource;
-        if (dataSource && dataSource.isSelect()) {
-            resource = $r('app.string.recycle_all_files_tips');
-        } else if (this.count == 1) {
-            resource = $r('app.string.recycle_single_file_tips');
+        if (this.menuContext.deletePageFromType == BroadcastConstants.DELETE_FROM_BROWSER) {
+            resource = this.getResourceFromBrowser();
         } else {
-            resource = $r('app.string.recycle_files_tips', this.count);
+            resource = this.getResourceFromGrid(dataSource);
         }
         return resource;
     }
