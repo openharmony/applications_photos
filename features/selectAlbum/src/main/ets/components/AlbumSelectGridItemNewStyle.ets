@@ -45,11 +45,12 @@ export struct AlbumSelectGridItemNewStyle {
     @State thumbnail: string = "";
 
     aboutToAppear(): void {
-        Log.info(TAG, `aboutToAppear + ${this.item.uri}`);
-        this.updateCardSize();
+        Log.debug(TAG, `aboutToAppear + ${this.item.uri}`);
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.updateCardSize());
         this.item.load().then(() => {
             this.thumbnail = this.item.getThumbnail()
         })
+        this.updateCardSize();
     }
 
     private updateCardSize() {
