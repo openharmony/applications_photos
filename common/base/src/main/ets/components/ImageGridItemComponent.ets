@@ -40,7 +40,6 @@ export struct ImageGridItemComponent {
     mediaItem: MediaDataItem;
     isThird = false;
     private isEnteringPhoto = false;
-    private isChangeSource = false;
     private isPush = false;
     private isPreview = false;
 
@@ -74,7 +73,6 @@ export struct ImageGridItemComponent {
             })
         }
         this.resetPressAnim();
-        this.isChangeSource = false;
         this.isPush = false;
     }
 
@@ -84,7 +82,10 @@ export struct ImageGridItemComponent {
     }
 
     private onShow(): void {
-        if (this.isShow && this.isChangeSource) {
+        if(!this.isShow){
+            return;
+        }
+        if (this.isEnteringPhoto) {
             this.resetShow();
         } else {
             this.resetPressAnim();
@@ -133,20 +134,13 @@ export struct ImageGridItemComponent {
     }
     
     jumpToPhotoBrowser() {
-        this.isEnteringPhoto = true;
-        if (this.isChangeSource == false) {
-            this.thumbnail = this.mediaItem.getThumbnail(this.mediaItem.imgWidth, this.mediaItem.imgHeight);
-            console.info("column click, first change source:"+this.thumbnail)
-            this.isChangeSource = true
-            this.isPush = true;
-        } else {
-            console.info("column click to broadCast, thumbnail:"+this.thumbnail)
-            if (this.isThird || this.isPreview) {
-                this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
-            } else {
-                this.broadCast.emit(BroadcastConstants.JUMP_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
-            }
+        if(this.isEnteringPhoto){
+            return;
         }
+        this.isEnteringPhoto = true;
+        this.thumbnail = this.mediaItem.getThumbnail(this.mediaItem.imgWidth, this.mediaItem.imgHeight);
+        console.info("column click, first change source:"+this.thumbnail)
+        this.isPush = true;
     }
 
     build() {
@@ -158,7 +152,7 @@ export struct ImageGridItemComponent {
                 .autoResize(false)
                 .onComplete(() => {
                     Log.debug(TAG, `Draw the image! ${this.thumbnail}`);
-                    if (this.isChangeSource && this.isPush) {
+                    if (this.isEnteringPhoto && this.isPush) {
                         Log.info(TAG, "image onComplete, broadCast, thumbnail:"+this.thumbnail);
                         this.isPush = false;
                         if (this.isThird || this.isPreview) {
