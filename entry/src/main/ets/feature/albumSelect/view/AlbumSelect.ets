@@ -20,6 +20,7 @@ import {
     AlbumSelectGridItemNewStyle
 } from '../../../../../../../features/selectAlbum/src/main/ets/components/AlbumSelectGridItemNewStyle';
 import { Constants } from '../../../common/model/common/Constants';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
 import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
@@ -65,6 +66,10 @@ export struct AlbumSelect {
             this.isEmpty = size == 0;
             this.isHideScrollBar = (size <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         });
+        let self = this;
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
+            self.initGridRowCount();
+        });
         this.onActive();
 
         this.gridColumnsCount = UiUtil.getAlbumGridCount(false);
@@ -99,6 +104,18 @@ export struct AlbumSelect {
             this.isEmpty = isEmpty;
             this.albumsDataSource.notifyDataReload();
         })
+    }
+
+    initGridRowCount() {
+        Log.info(TAG, `get screen width is : ${screenManager.getWinWidth()}`);
+        Log.info(TAG, `get screen height is : ${screenManager.getWinHeight()}`);
+
+        let contentWidth = screenManager.getWinWidth();
+        let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
+        this.gridColumnsCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
+        / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
+        Log.info(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
+
     }
 
     aboutToDisappear(): void {
