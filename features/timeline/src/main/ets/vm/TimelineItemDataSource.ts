@@ -199,10 +199,27 @@ export class TimelineItemDataSource extends ItemDataSource {
         }
     }
 
+    getIndexByMediaIndex(index:number) : number{
+        let TimeLineTitleIndex = 0;
+        for (let i = 0;i < this.groupItem.length; i++) {
+            let groupItem: TimelineDataItem = this.groupItem[i]
+            let childLength = groupItem.groupChild.length;
+            if (index == 0) {
+                break;
+            } else if (index <= childLength) {
+                break;
+            } else {
+                index -= (1 + childLength);
+                TimeLineTitleIndex += childLength + 1;
+            }
+        }
+        return TimeLineTitleIndex;
+    }
+
     onMediaDataUpdate(index: number, item: MediaDataItem): void {
         Log.info(TAG, `onMediaDataUpdate ${index}`);
         this.notifyDataChange(index);
-        this.notifyDataChange(index - item.index - 1);
+        this.notifyDataChange(this.getIndexByMediaIndex(index));
     }
 
     dataReload(): void {
