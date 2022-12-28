@@ -260,6 +260,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         }
         this.cropRatio = ratio;
         this.cropShow.setRatio(ratio);
+        this.endImageDrag();
         this.refresh();
     }
 
