@@ -203,7 +203,7 @@ export class CropShow {
         let angle = this.rotationAngle * tX * tY + this.horizontalAngle;
         let rotated = MathUtils.rotatePoints([preCenter], -angle, origin);
 
-        this.imageCropCompare()
+        this.imageCropCompare();
         MathUtils.scaleRectBasedOnPoint(this.imageRect, rotated[0], scale);
 
         let offsetX = newCrop.getCenterX() - preCenter.x;
@@ -225,11 +225,11 @@ export class CropShow {
         let getCropRectHeight = getCropRect.getHeight();
         if (getImageRectWidth < getCropRectWidth) {
             let scaleRatio = getCropRectWidth / getImageRectWidth;
-            this.imageRect.scale(scaleRatio)
+            this.imageRect.scale(scaleRatio);
         }
         if (getImageRectHeight < getCropRectHeight) {
             let scaleRatio = getCropRectHeight / getImageRectHeight;
-            this.imageRect.scale(scaleRatio)
+            this.imageRect.scale(scaleRatio);
         }
 
     }
