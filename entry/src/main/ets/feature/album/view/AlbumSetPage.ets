@@ -477,9 +477,7 @@ export struct AlbumSetPage {
                 left: $r('sys.float.ohos_id_card_margin_start'),
                 right: $r('sys.float.ohos_id_card_margin_end'),
                 top: $r('app.float.album_set_page_padding_top'),
-                bottom: this.isTabBarShow
-                    ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
-                    : $r('app.float.album_set_page_padding_end')
+                bottom: (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
             })
             .columnsGap($r('app.float.album_set_grid_column_gap'))
             .rowsGap($r('app.float.album_set_grid_row_gap'))
@@ -502,9 +500,7 @@ export struct AlbumSetPage {
                 left: $r('sys.float.ohos_id_card_margin_start'),
                 right: $r('sys.float.ohos_id_card_margin_end'),
                 top: $r('app.float.album_set_page_padding_top'),
-                bottom: this.isTabBarShow
-                    ? (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
-                    : $r('app.float.album_set_page_padding_end')
+                bottom: (this.isSidebar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
             })
             .columnsGap($r('app.float.album_set_grid_column_gap'))
             .rowsGap($r('app.float.album_set_grid_row_gap'))
