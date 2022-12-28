@@ -29,7 +29,7 @@ const TAG = "ImageGridItemComponent"
 @Component
 export struct ImageGridItemComponent {
     @Consume broadCast: Broadcast;
-    @Consume  @Watch('restPress')isSelectedMode: boolean;
+    @Consume  @Watch('restPress') isSelectedMode: boolean;
     @Consume @Watch('onShow') isShow: boolean;
     @State thumbnail: string = "";
     @State isFavourite: boolean = false;
