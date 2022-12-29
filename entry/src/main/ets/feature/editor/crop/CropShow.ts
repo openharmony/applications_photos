@@ -216,7 +216,7 @@ export class CropShow {
         this.cropRect.set(newCrop.left, newCrop.top, newCrop.right, newCrop.bottom);
     }
 
-    imageCropCompare() {
+    imageCropCompare(): void {
         let imageRect = this.getImageRect();
         let cropRect = this.getCropRect();
         let imageRectWidth = imageRect.getWidth();
