@@ -76,7 +76,7 @@ struct FormEditorPage {
 
     bindFormData(): any {
         Log.debug(TAG, `bindFormData start formId: ${this.formId}`);
-        let image = "image_" + this.fd + "_formId_" + this.formId;
+        let image = "image_" + this.fd + "_formId_" + this.formId + this.arkUri;
         Log.debug(TAG, `bindFormData start image: ${image}`);
         let dataObj1: any = {
             "fd": this.fd == -1 ? false : true,

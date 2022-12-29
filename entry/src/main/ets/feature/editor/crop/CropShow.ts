@@ -217,18 +217,18 @@ export class CropShow {
     }
 
     imageCropCompare() {
-        let getImageRect = this.getImageRect();
-        let getCropRect = this.getCropRect();
-        let getImageRectWidth = getImageRect.getWidth();
-        let getImageRectHeight = getImageRect.getHeight();
-        let getCropRectWidth = getCropRect.getWidth();
-        let getCropRectHeight = getCropRect.getHeight();
-        if (getImageRectWidth < getCropRectWidth) {
-            let scaleRatio = getCropRectWidth / getImageRectWidth;
+        let imageRect = this.getImageRect();
+        let cropRect = this.getCropRect();
+        let imageRectWidth = imageRect.getWidth();
+        let imageRectHeight = imageRect.getHeight();
+        let cropRectWidth = cropRect.getWidth();
+        let cropRectHeight = cropRect.getHeight();
+        if (imageRectWidth < cropRectWidth) {
+            let scaleRatio = cropRectWidth / imageRectWidth;
             this.imageRect.scale(scaleRatio);
         }
-        if (getImageRectHeight < getCropRectHeight) {
-            let scaleRatio = getCropRectHeight / getImageRectHeight;
+        if (imageRectHeight < cropRectHeight) {
+            let scaleRatio = cropRectHeight / imageRectHeight;
             this.imageRect.scale(scaleRatio);
         }
 
