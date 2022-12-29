@@ -26,6 +26,7 @@ export class MenuContext {
     broadCast: Broadcast;
     onOperationStart: Function;
     onOperationEnd: Function;
+    onRegisterObserverStart: Function;
 
     jumpSourceToMain: number;
     deviceId: string;
@@ -50,6 +51,11 @@ export class MenuContext {
 
     withDataSource(dataSource): MenuContext{
         this.dataSource = dataSource;
+        return this;
+    }
+
+    withRegisterObserverStart(onRegisterObserverStart): MenuContext{
+        this.onRegisterObserverStart = onRegisterObserverStart;
         return this;
     }
 
