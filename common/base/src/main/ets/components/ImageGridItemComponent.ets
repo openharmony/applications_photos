@@ -29,7 +29,7 @@ const TAG = "ImageGridItemComponent"
 @Component
 export struct ImageGridItemComponent {
     @Consume broadCast: Broadcast;
-    @Consume isSelectedMode: boolean;
+    @Consume  @Watch('restPress') isSelectedMode: boolean;
     @Consume @Watch('onShow') isShow: boolean;
     @State thumbnail: string = "";
     @State isFavourite: boolean = false;
@@ -46,6 +46,10 @@ export struct ImageGridItemComponent {
     private resetPressAnim(): void {
         this.pressAnimScale = 1;
         this.isEnteringPhoto = false;
+    }
+
+    private restPress(): void {
+        this.pressAnimScale = 1;
     }
 
     aboutToAppear(): void {
