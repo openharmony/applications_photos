@@ -43,7 +43,6 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
     uris: string[];
     count: number;
     onOperationEnd: Function;
-    onRegisterObserverStart: Function;
 
     // Total batches operated
     totalBatches: number;
