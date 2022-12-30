@@ -54,7 +54,6 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
         Log.info(TAG, 'Clear Recycle confirm');
         // 1. Variable initialization
         this.onOperationEnd = this.menuContext.onOperationEnd;
-        this.onRegisterObserverStart = this.menuContext.onRegisterObserverStart;
 
         // 2. onDeleteStart exit selection mode
         let onOperationStart: Function = this.menuContext.onOperationStart;
