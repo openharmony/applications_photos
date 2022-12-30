@@ -149,9 +149,7 @@ export struct PhotoGridPage {
                 menuContext = new MenuContext();
                 this.onDeleteStart = this.onDeleteStart.bind(this);
                 this.onDeleteEnd = this.onDeleteEnd.bind(this);
-                this.onRegisterObserverStart = this.onRegisterObserverStart.bind(this);
                 menuContext
-                    .withRegisterObserverStart(this.onRegisterObserverStart)
                     .withDataSource(this.groupDataSource)
                     .withOperationStartCallback(this.onDeleteStart)
                     .withOperationEndCallback(this.onDeleteEnd)
@@ -313,10 +311,6 @@ export struct PhotoGridPage {
     onDeleteStart(): void {
         Log.info(TAG, `onDeleteStart`);
         mediaObserver.unregisterObserver(this.dataObserver);
-    }
-
-    onRegisterObserverStart(): void {
-        mediaObserver.registerObserver(this.dataObserver);
     }
 
     onDeleteEnd(err): void {
