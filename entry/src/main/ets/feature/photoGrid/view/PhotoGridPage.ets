@@ -229,7 +229,7 @@ export struct PhotoGridPage {
             uri: 'common/view/browserOperation/MediaOperationPage',
             params: {
                 pageType: pageType,
-                albumId: this.albumInfo.id
+                albumInfo: JSON.stringify(this.albumInfo)
             }
         });
     }
