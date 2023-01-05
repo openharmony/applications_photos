@@ -305,7 +305,7 @@ struct PhotoBrowser {
             uri: 'common/view/browserOperation/MediaOperationPage',
             params: {
                 pageType: pageType,
-                albumId: this.albumInfo ? this.albumInfo.id : MediaConstants.ALBUM_ID_ALL
+                albumInfo: JSON.stringify(this.albumInfo)
             }
         });
     }

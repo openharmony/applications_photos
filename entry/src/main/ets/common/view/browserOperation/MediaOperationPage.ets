@@ -46,6 +46,7 @@ struct MediaOperationPage {
     @State listCardWidth: number = 0;
     isActive: boolean = false; // Whether the page is in the foreground
     sourceAlbumId: string;
+    private albumInfo: SimpleAlbumDataItem;
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource()
     private scroller: Scroller = new Scroller();
@@ -54,11 +55,12 @@ struct MediaOperationPage {
         let blackList = Array.from(MediaConstants.ALBUM_DISABLE_COPY_LIST)
         let param = router.getParams();
         if (param) {
-            Log.info(TAG, `router getParams ${JSON.stringify(param)}`);
             this.pageType = param.pageType.toString();
-            if (param.albumId) {
-                this.sourceAlbumId = param.albumId.toString();
+            if (param.albumInfo) {
+                this.albumInfo = JSON.parse(param.albumInfo.toString()) as SimpleAlbumDataItem;
+                this.sourceAlbumId = this.albumInfo.id;
                 blackList.push(this.sourceAlbumId)
+                Log.info(TAG, `router getParams pageType:${this.pageType},Album:${this.sourceAlbumId}`);
             }
         }
         this.albumsDataSource.setBlackList(blackList)
@@ -113,6 +115,7 @@ struct MediaOperationPage {
             .withOperationStartCallback(this.onOperationStart)
             .withOperationEndCallback(this.onOperationEnd)
             .withDataSource(this.albumsDataSource)
+            .withAlbumInfo(this.albumInfo)
             .withBroadCast(this.broadCast)
             .withJumpSourceToMain(JumpSourceToMain.ALBUM);
         let menuOperation = new AlbumSetNewMenuOperation(menuContext);
