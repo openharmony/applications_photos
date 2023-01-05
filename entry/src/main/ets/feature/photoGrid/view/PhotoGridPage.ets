@@ -319,6 +319,7 @@ export struct PhotoGridPage {
         mediaObserver.registerObserver(this.dataObserver);
         animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => {
             this.groupDataSource.dataRemove();
+            this.isEmpty = this.groupDataSource.groupDataItem.length==0 ? true : false;
             this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
         })
     }
@@ -522,6 +523,7 @@ export struct PhotoGridPage {
             })
         } else if (this.isActive) {
             this.groupDataSource.dataRemove();
+            this.isEmpty = this.groupDataSource.groupDataItem.length==0 ? true : false;
         }
     }
 
