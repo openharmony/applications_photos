@@ -74,6 +74,9 @@ export class EventPipeline {
     // item
     private item: MediaDataItem;
 
+    // timeStamp
+    private timeStamp: string;
+
     // width
     private width: number;
 
@@ -93,9 +96,10 @@ export class EventPipeline {
     private isExiting = false;
     private orientation = 0;
 
-    constructor(broadCastParam: Broadcast, item: MediaDataItem) {
+    constructor(broadCastParam: Broadcast, item: MediaDataItem, timeStamp: string) {
         this.broadCast = broadCastParam;
         this.item = item;
+        this.timeStamp = timeStamp;
         this.width = this.item.imgWidth == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgWidth;
         this.height = this.item.imgHeight == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgHeight;
         this.orientation = this.item.orientation || 0;
@@ -198,7 +202,7 @@ export class EventPipeline {
         } else {
             this.broadCast.emit(Constants.SET_DISABLE_SWIPE, [true]);
         }
-        this.broadCast.emit(Constants.DIRECTION_CHANGE + this.item.uri, [direction]);
+        this.broadCast.emit(Constants.DIRECTION_CHANGE + this.item.uri + this.timeStamp, [direction]);
     }
 
     private evaluateOffset(): [number, number] {
@@ -257,7 +261,7 @@ export class EventPipeline {
             .copy();
         Log.debug(TAG, `emitTouchEvent lastOffset: ${this.lastOffset}, offset: ${this.offset},\
         center: ${this.center}, scale: ${[this.lastScale, this.scale]}`);
-        this.broadCast.emit(Constants.TOUCH_EVENT + this.item.uri, [matrix]);
+        this.broadCast.emit(Constants.TOUCH_EVENT + this.item.uri + this.timeStamp, [matrix]);
         this.evaluateBounds();
     }
 
@@ -723,7 +727,7 @@ export class EventPipeline {
             curve: Curve.Ease
         };
         Log.debug(TAG, `animationEndMatrix: ${animationEndMatrix.matrix4x4}`);
-        this.broadCast.emit(Constants.ANIMATION_EVENT + this.item.uri, [animationOption, animationEndMatrix]);
+        this.broadCast.emit(Constants.ANIMATION_EVENT + this.item.uri + this.timeStamp, [animationOption, animationEndMatrix]);
     }
 
     /**
