@@ -228,6 +228,6 @@ export default class MainAbility extends Ability {
         setTimeout(() => {
             router.clear();
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, 0)
-        }, 50);
+        }, 10);
     }
 }
