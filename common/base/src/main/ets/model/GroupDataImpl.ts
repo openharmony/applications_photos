@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,6 +23,7 @@ import { MediaDataItem } from '../data/MediaDataItem';
 import { FavorMediaDataItem } from '../data/FavorMediaDataItem';
 import { TrashMediaDataItem } from '../data/TrashMediaDataItem';
 import mediaDataItemCache from '../data/MediaDataItemCache';
+import trashMediaDataItemCache from '../data/TrashMediaDataItemCache';
 
 
 const TAG = "GroupDataImpl"
@@ -125,8 +126,10 @@ export class GroupDataImpl {
                 let item = new FavorMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i);
                 if (i < mediaFileAssets.length) {
                     if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
-                        item.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus;
-                        item.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation;
+                        item = mediaDataItemCache.get(mediaFileAssets[i].uri);
+                    }
+                    else {
+                        mediaDataItemCache.set(mediaFileAssets[i].uri, item);
                     }
                     item.update(mediaFileAssets[i]);
                 }
@@ -137,9 +140,12 @@ export class GroupDataImpl {
             for (let i = 0;i < count; i++) {
                 let item = new TrashMediaDataItem(fetchOption.selections, fetchOption.selectionArgs, i);
                 if (i < mediaFileAssets.length) {
-                    if (mediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
-                        item.favouriteStatus = mediaDataItemCache.get(mediaFileAssets[i].uri).favouriteStatus;
-                        item.orientation = mediaDataItemCache.get(mediaFileAssets[i].uri).orientation;
+                    if (trashMediaDataItemCache.hasKey(mediaFileAssets[i].uri)) {
+                        item = trashMediaDataItemCache.get(mediaFileAssets[i].uri);
+                    }
+                    else
+                    {
+                        trashMediaDataItemCache.set(mediaFileAssets[i].uri, item);
                     }
                     item.update(mediaFileAssets[i]);
                 }
