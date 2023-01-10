@@ -32,6 +32,11 @@ import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
 import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
+import { CameraGridItemComponent } from './CameraGridItemComponent'
+import { SelectUtil } from '../../../../../../../common/base/src/main/ets/utils/SelectUtil';
+import { ThirdSelectedPanel } from './ThirdSelectedPanel';
+import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
+import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
 // Third Select Album Page
 
 const TAG = "ThirdSelectPhotoGridPage"
@@ -61,10 +66,14 @@ export struct ThirdSelectPhotoGridPage {
     private groupDataSource: GroupItemDataSource = new GroupItemDataSource();
     private albumId: string;
     @State actionBarProp: ActionBarProp = new ActionBarProp();
+    bundleName: string = "";
+    filterMediaType: number = MediaConstants.SELECT_TYPE_ALL;
+    isSelectPhotoGrid: boolean = true;
+    @Provide isOriginalChecked: boolean = false;
 
     updateActionBar(): void {
-        this.actionBarProp = this.barModel.createActionBar(Action.BACK, this.title, this.isMultiPick,
-                                                    this.selectedCount, this.maxSelectCount);
+        this.actionBarProp = this.barModel.createActionBar(this.bundleName == "" ? Action.BACK : Action.CANCEL, this.title, this.isMultiPick,
+                                                    this.selectedCount, this.maxSelectCount, this.isSelectPhotoGrid);
     }
 
     onMenuClicked(action: Action) {
@@ -72,9 +81,30 @@ export struct ThirdSelectPhotoGridPage {
         switch (action) {
             case Action.BACK:
                 router.back();
+            case Action.CANCEL:
+                Log.info(TAG, 'click cancel');
+                let abilityResult = {
+                    'resultCode': 0,
+                    'want': {
+                        'parameters': {
+                            'select-item-list': ''
+                        }
+                    }
+                };
+                terminateSelfWithResult(abilityResult)
                 break;
             case Action.OK:
                 this.setPickResult();
+                break;
+            case Action.NAVIGATION_ALBUMS:
+                router.push({
+                    uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
+                    params: {
+                        isMultiPick: this.isMultiPick,
+                        isFromFa: this.isFromFa,
+                        isFromFaPhoto: true,
+                    }
+                });
                 break;
             default:
                 break;
@@ -99,20 +129,26 @@ export struct ThirdSelectPhotoGridPage {
                 this.groupDataSource.setAlbumId(param.itemId.toString());
                 this.albumId = param.itemId.toString()
             }
+            this.bundleName = new String(param.bundleName).valueOf();
             this.isMultiPick = new Boolean(param.isMultiPick).valueOf();
             this.isFromFa = new Boolean(param.isFromFa).valueOf();
-            if (param.isFromWallpaper) {
+            if (!!param.maxSelectCount && param.maxSelectCount > 0) {
                 this.maxSelectCount = new Number(param.maxSelectCount).valueOf() || 0
             }
-            Log.info(TAG, `ThirdSelectPhotoGridPage isMultiPick: ${this.isMultiPick},\
-                isFromWallpaper: ${param.isFromWallpaper}, maxSelectCount: ${this.maxSelectCount}`);
+            if (param.filterMediaType) {
+                this.filterMediaType = new Number(param.filterMediaType).valueOf();
+                Log.info(TAG, `filterMediaType: ${this.filterMediaType}`)
+            }
         }
         if (this.isFromFa) {
-            this.groupDataSource.setSelectType(MediaConstants.SELECT_TYPE_IMAGE)
+            this.filterMediaType = MediaConstants.SELECT_TYPE_IMAGE;
             AppStorage.SetOrCreate(Constants.FORM_ITEM_NAME, param.itemName);
             AppStorage.SetOrCreate(Constants.FORM_ITEM_ALBUM_ID, param.itemId);
             AppStorage.SetOrCreate(Constants.FORM_ITEM_DISPLAY_NAME, param.itemDisplayName);
         }
+        this.groupDataSource.setSelectType(this.filterMediaType);
+        Log.info(TAG, `ThirdSelectPhotoGridPage isMultiPick: ${this.isMultiPick},\
+                isFromWallpaper: ${param.isFromWallpaper}, maxSelectCount: ${this.maxSelectCount}, filterMediaType: ${this.filterMediaType}`);
         this.groupDataSource.reloadGroupItemData(true).then((isEmpty: boolean) => {
             this.isEmpty = isEmpty;
             this.selectedCount = this.groupDataSource.getSelectedCount();
@@ -164,7 +200,14 @@ export struct ThirdSelectPhotoGridPage {
 
     private onSelect(index: number) {
         Log.info(TAG, "onSelect");
+        if (this.selectedCount >= this.maxSelectCount) {
+            getResourceString($r('app.string.up_to_limit_tips')).then((message: string) => {
+                showToast(message);
+                return;
+            })
+        }
         this.selectedCount = this.groupDataSource.getSelectedCount();
+        this.groupDataSource.onDataUpdate(index);
     }
 
     private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem) {
@@ -179,6 +222,7 @@ export struct ThirdSelectPhotoGridPage {
             uri: 'feature/thirdSelect/view/ThirdSelectPhotoBrowser',
             params: {
                 position: targetIndex,
+                bundleName: this.bundleName,
                 transition: name,
                 isFromFa: this.isFromFa,
                 albumId: this.albumId,
@@ -197,10 +241,19 @@ export struct ThirdSelectPhotoGridPage {
                 actionBarProp: $actionBarProp,
                 onMenuClicked: this.onMenuClicked
             })
-            if (this.isEmpty) {
+            if (this.isEmpty && this.isFromFa) {
                 NoPhotoComponent({ title: $r('app.string.no_distributed_photo_head_title_album') })
             }
             Grid(this.scroller) {
+                if (!this.isFromFa) {
+                    GridItem() {
+                        CameraGridItemComponent({
+                            bundleName: this.bundleName,
+                            filterMediaType: this.filterMediaType
+                        })
+                    }
+                    .aspectRatio(1)
+                }
                 LazyForEach(this.groupDataSource, (item: LazyItem<MediaDataItem>) => {
                     GridItem() {
                         ImageGridItemComponent({
@@ -219,6 +272,17 @@ export struct ThirdSelectPhotoGridPage {
             .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
             .layoutWeight(1)
 
+            if (this.isMultiPick) {
+                Column() {
+                    ThirdSelectedPanel({
+                        onMenuClicked: this.onMenuClicked,
+                        groupDataSource: this.groupDataSource
+                    })
+                }
+                .width("100%")
+                .height($r('app.float.third_selected_panel_height'))
+            }
+
             GridScrollBar({ scroller: this.scroller, isHideScrollBar: $isHideScrollBar});
         }
         .backgroundColor($r('app.color.default_background_color'))
@@ -234,11 +298,26 @@ export struct ThirdSelectPhotoGridPage {
             'resultCode': 0,
             'want': {
                 'parameters': {
-                    'select-item-list': uriArray
+                    'select-item-list': uriArray,
+                    'isOriginal': this.isOriginalChecked
                 }
             }
         };
         Log.info(TAG, `uri: ${uriArray}`)
-        terminateSelfWithResult(abilityResult)
+        let self = this;
+        if (uriArray == null && uriArray == undefined) {
+            globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
+                Log.info(TAG, `terminateSelfWithResult result: ${result}`);
+            });
+        } else {
+            SelectUtil.grantPermissionForUris(uriArray, self.bundleName).then(function() {
+                Log.info(TAG, `grant permission success.`);
+                globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
+                    Log.info(TAG, `terminateSelfWithResult result: ${result}`);
+                });
+            }).catch(function(err) {
+                Log.info(TAG, `grant permission error: ${JSON.stringify(err)}`);
+            });
+        }
     }
 }
