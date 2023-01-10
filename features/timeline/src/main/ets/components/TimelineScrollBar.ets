@@ -62,7 +62,7 @@ export struct TimelineScrollBar {
 
     build() {
         Stack({ alignContent: Alignment.End }) {
-            if (this.isClickScrollBar) {
+            if (this.isClickScrollBar && !this.isHideScrollBar) {
                 Column() {
                     ForEach(this.dataSource.groupItem, (year: TimelineDataItem) => {
                         if (this.nodeGap(year.groupChild.length) > 0 || this.isFirst(year) || this.isLast(year)) {
