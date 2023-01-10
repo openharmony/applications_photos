@@ -72,6 +72,16 @@ export class AlbumsDataSource extends ItemDataSource {
         }
     }
 
+    getAlbumDataItemById(id: string): AlbumDataItem {
+        let albumDataItem: AlbumDataItem = undefined;
+        for (let i = 0;i < this.albumDataItems.length; i++) {
+            if (this.albumDataItems[i].id == id) {
+                albumDataItem = this.albumDataItems[i];
+            }
+        }
+        return albumDataItem;
+    }
+
     getSelectedUris(): string[] {
         let uris: string[] = [];
         this.albumDataItems.forEach((item: AlbumDataItem) => {
