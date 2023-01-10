@@ -28,8 +28,12 @@ import router from '@system.router';
 import { GroupItemDataSource } from '../../../../../common/base/src/main/ets/vm/GroupItemDataSource';
 import atManager from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
+import { MediaConstants } from '../../../../../common/base/src/main/ets/constants/MediaConstants';
 
 let isFromCard = false;
+let mCallerUid: number = 0;
+let mMaxSelectCount: number = 0;
+let mFilterMediaType: number = MediaConstants.SELECT_TYPE_ALL;
 let appBroadcast = broadcastManager.getBroadcast();
 var pagePath: string = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 'product/phone/view/index' : 'product/pad/view/index';
 
@@ -48,6 +52,13 @@ export default class MainAbility extends Ability {
         globalThis.appContext = this.context;
         mediaModel.onCreate(this.context);
         let action = want.parameters;
+        if (action != null && action != undefined && action?.filterMediaType == MediaConstants.FILTER_MEDIA_TYPE_IMAGE) {
+            mFilterMediaType = MediaConstants.SELECT_TYPE_IMAGE;
+        } else if (action?.filterMediaType == MediaConstants.FILTER_MEDIA_TYPE_VIDEO) {
+            mFilterMediaType = MediaConstants.SELECT_TYPE_VIDEO;
+        } else {
+            mFilterMediaType = MediaConstants.SELECT_TYPE_ALL;
+        }
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
             this.browserDataSource.reloadGroupItemData(false).then(()=> {
@@ -56,8 +67,12 @@ export default class MainAbility extends Ability {
                 }
             })
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
+            mCallerUid = action[Constants.KEY_WANT_PARAMETERS_CALLERUID];
+            mMaxSelectCount = action?.maxSelectCount;
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
+            mCallerUid = action[Constants.KEY_WANT_PARAMETERS_CALLERUID];
+            mMaxSelectCount = action?.maxSelectCount;
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
         } else if (action != null && action != undefined && action.uri == Constants.ACTION_URI_FORM_ABILITY) {
             isFromCard = true;
@@ -106,8 +121,14 @@ export default class MainAbility extends Ability {
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
+            mCallerUid = action[Constants.KEY_WANT_PARAMETERS_CALLERUID];
+            mMaxSelectCount = action?.maxSelectCount;
+            mFilterMediaType = action?.filterMediaType;
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
+            mCallerUid = action[Constants.KEY_WANT_PARAMETERS_CALLERUID];
+            mMaxSelectCount = action?.maxSelectCount;
+            mFilterMediaType = action?.filterMediaType;
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
         } else if (action != null && action != undefined && action.uri == Constants.ACTION_URI_FORM_ABILITY) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY);
@@ -167,7 +188,7 @@ export default class MainAbility extends Ability {
     onBackground() {
     }
 
-    thirdRouterPage() {
+    async thirdRouterPage() {
         let entryFrom = AppStorage.Get(Constants.ENTRY_FROM_HAP);
         Log.info(this.TAG, `thirdRouterPage entryFromHap: ${entryFrom}`);
         if (entryFrom == Constants.ENTRY_FROM_NONE) {
@@ -182,18 +203,28 @@ export default class MainAbility extends Ability {
             };
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_SINGLE_SELECT) {
+            let bundleName: string = await bundleManager.getBundleNameByUid(mCallerUid);
             let options = {
                 uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
                 params: {
                     isMultiPick: false,
+                    isFromThird: true,
+                    bundleName: bundleName,
+                    filterMediaType: mFilterMediaType,
+                    maxSelectCount: mMaxSelectCount
                 }
             };
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_MULTIPLE_SELECT) {
+            let bundleName: string = await bundleManager.getBundleNameByUid(mCallerUid);
             let options = {
                 uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
                 params: {
                     isMultiPick: true,
+                    isFromThird: true,
+                    bundleName: bundleName,
+                    filterMediaType: mFilterMediaType,
+                    maxSelectCount: mMaxSelectCount
                 }
             };
             router.replace(options);
