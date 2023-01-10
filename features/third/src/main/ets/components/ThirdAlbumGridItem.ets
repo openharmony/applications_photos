@@ -99,11 +99,7 @@ export struct ThirdAlbumGridItem {
             }
 
             if (this.isBigCard) {
-                Flex({
-                    direction: FlexDirection.Row,
-                    justifyContent: FlexAlign.Center,
-                    alignItems: ItemAlign.Center
-                }) {
+                Row() {
                     Image(this.thumbnail)
                         .alt($r('app.media.ic_goto_photos'))
                         .width(this.cardWidth)
@@ -124,12 +120,10 @@ export struct ThirdAlbumGridItem {
                 }
                 .width(this.bigWidth)
                 .height(this.gridHeight)
+                .justifyContent(FlexAlign.Center)
+                .alignItems(VerticalAlign.Center)
             } else {
-                Flex({
-                    direction: FlexDirection.Row,
-                    justifyContent: FlexAlign.Center,
-                    alignItems: ItemAlign.Center
-                }) {
+                Row() {
                     Image(this.thumbnail)
                         .alt($r('app.media.ic_goto_photos'))
                         .width(this.cardWidth)
@@ -149,6 +143,8 @@ export struct ThirdAlbumGridItem {
                         })
                 }
                 .height(this.gridHeight)
+                .justifyContent(FlexAlign.Center)
+                .alignItems(VerticalAlign.Center)
             }
 
             Column() {
