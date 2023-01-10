@@ -30,6 +30,7 @@ import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSou
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
+import { SelectUtil } from '../../../../../../../common/base/src/main/ets/utils/SelectUtil';
 // third selection photoBrowser
 
 const TAG = "ThirdSelectPhotoBrowser"
@@ -40,7 +41,7 @@ struct ThirdSelectPhotoBrowser {
     @Provide browserBackgroundColor: Resource = $r('app.color.default_background_color');
     @Provide('selectedCount') totalSelectedCount: number = 0;
     @Provide broadCast: Broadcast = new Broadcast();
-    @Provide isSelected: boolean = true;
+    @Provide isSelected: boolean = false;
     @Provide isShowBar: boolean = true;
     @Provide isPullingDown: boolean = false;
     @Provide moreMenuList: Array<Action> = new Array<Action>();
@@ -51,6 +52,7 @@ struct ThirdSelectPhotoBrowser {
     controller: SwiperController = new SwiperController();
     @Provide('transitionIndex') currentIndex: number = 0;
     isFromFa: boolean = false;
+    bundleName: string = "";
 
     // position
     thirdSelectPosition: number;
@@ -83,6 +85,7 @@ struct ThirdSelectPhotoBrowser {
             this.browserDataSource.setSelectType(params.isFromFa ? MediaConstants.SELECT_TYPE_IMAGE : MediaConstants.SELECT_TYPE_ALL);
             this.browserDataSource.setAlbumId(params.albumId ? params.albumId.toString() : "");
             this.isMultiPick = params.isMultiPick as boolean;
+            this.bundleName = params.bundleName.toString();
         }
         this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER);
         if (this.isMultiPick == true) {
@@ -144,7 +147,9 @@ struct ThirdSelectPhotoBrowser {
             return;
         }
         currentPhoto.setSelect(!currentPhoto.isSelect);
+        this.isSelected = currentPhoto.isSelect;
         this.totalSelectedCount = this.browserDataSource.getSelectedCount();
+        this.broadCast.emit(BroadcastConstants.SELECT, [this.currentIndex]);
         Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
     }
 
@@ -226,6 +231,12 @@ struct ThirdSelectPhotoBrowser {
             }
             uriArray = currentPhoto.uri;
         }
+        let promise: Promise<void> = null;
+        if (this.isMultiPick) {
+            promise = SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
+        } else {
+            promise = SelectUtil.grantPermissionForUri(uriArray, this.bundleName);
+        }
         let abilityResult = {
             'resultCode': 0,
             'want': {
@@ -235,7 +246,14 @@ struct ThirdSelectPhotoBrowser {
             }
         };
         Log.info(TAG, `terminateSelfWithResult result: ${JSON.stringify(abilityResult)}`);
-        terminateSelfWithResult(abilityResult);
+        promise.then(function() {
+            Log.info(TAG, `grant permission success.`);
+            globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
+                Log.info(TAG, `terminateSelf result: ${result}`);
+            });
+        }).catch(function(err) {
+            Log.error(TAG, `grant permission error: ${JSON.stringify(err)}`);
+        });
     }
 
     pageTransition() {

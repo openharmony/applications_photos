@@ -43,6 +43,14 @@
     {
       "name": "no",
       "value": "取消"
+    },
+    {
+      "name": "camera_btn_text_photo",
+      "value": "拍照"
+    },
+    {
+      "name": "selected_photos_count",
+      "value": "%1$d/%2$d"
     }
   ]
 }

@@ -50,6 +50,8 @@ export struct ThirdAlbumGridItem {
     @State transformV: number = 0;
     @State isEmptyAlbum: boolean = false;
     @State thumbnail: string = "";
+    bundleName: string = "";
+    filterMediaType: number;
 
     aboutToAppear(): void {
         Log.info(TAG, `aboutToAppear + ${this.item.uri}`)
@@ -205,7 +207,9 @@ export struct ThirdAlbumGridItem {
                         isFromWallpaper: this.isFromWallpaper,
                         maxSelectCount: this.maxSelectCount,
                         itemDisplayName: this.item.displayName,
-                        isFromFa: this.isFromFa
+                        isFromFa: this.isFromFa,
+                        bundleName: this.bundleName,
+                        filterMediaType: this.filterMediaType
                     }
                 });
             }

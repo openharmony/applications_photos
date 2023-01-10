@@ -312,4 +312,22 @@ export class Constants {
 
     // ApplictionInfo
     static readonly BUNDLE_NAME: string = 'com.ohos.photos';
+
+    // get want info with key
+    static readonly KEY_WANT_PARAMETERS_CALLERUID: string = "ohos.aafwk.param.callerUid";
+
+    // camera mainAbility
+    static readonly CAMERA_TYPE_CAPTURE: string = "capture";
+
+    // camera mainAbility
+    static readonly CAMERA_TYPE_VIDEO: string = "video";
+
+    // camera bundleName
+    static readonly CAMERA_BUNDLE_NAME: string = "com.ohos.camera";
+
+    // camera mainAbility
+    static readonly CAMERA_MAIN_ABILITY: string = "com.ohos.camera.MainAbility";
+
+    // maximum number limit of external selection pages
+    static readonly LIMIT_MAX_THIRD_SELECT_COUNT: number = 500;
 }

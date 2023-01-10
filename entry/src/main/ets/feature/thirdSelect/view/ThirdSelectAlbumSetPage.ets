@@ -33,6 +33,7 @@ import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
 import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
+import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
 
 const TAG = "ThirdSelectAlbumSetPage"
 // Third Select AlbumSet Page
@@ -54,6 +55,7 @@ export struct ThirdSelectAlbumSetPage {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     isFromFaPhoto: boolean = false;
+    isFromThird: boolean = false;
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private barModel: ThirdSelectBarModel = new ThirdSelectBarModel();
     private leftAction: Action = Action.BACK;
@@ -63,15 +65,19 @@ export struct ThirdSelectAlbumSetPage {
     @Provide('tabBarShow') isTabBarShow: boolean = false;
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
     @State actionBarProp: ActionBarProp = new ActionBarProp();
+    filterMediaType: number = MediaConstants.SELECT_TYPE_ALL;
+    bundleName: string = "";
+    isSelectPhotoGrid: boolean = false;
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar(this.leftAction, this.title,
-                                            this.isMultiPick, 0, this.maxSelectCount);
+                                            this.isMultiPick, 0, this.maxSelectCount, this.isSelectPhotoGrid);
     }
 
     aboutToAppear(): void {
         let param = router.getParams();
         if (param != null) {
+            this.bundleName = new String(param.bundleName).valueOf();
             this.isMultiPick = new Boolean(param.isMultiPick).valueOf();
             param.type && (this.type = param.type.toString());
             if (param.isFromFa != undefined || param.isFromFa != null) {
@@ -80,9 +86,20 @@ export struct ThirdSelectAlbumSetPage {
             if (param.isFromFaPhoto != undefined || param.isFromFaPhoto != null) {
                 this.isFromFaPhoto = new Boolean(param.isFromFaPhoto).valueOf();
             }
+            if (param.isFromThird != undefined || param.isFromThird != null) {
+                this.isFromThird = new Boolean(param.isFromThird).valueOf();
+            }
+            if (param.filterMediaType != undefined || param.filterMediaType != null) {
+                this.filterMediaType = new Number(param.filterMediaType).valueOf();
+            }
             this.isFromWallpaper = new Boolean(param.isFromWallpaper).valueOf();
             if (this.isFromWallpaper) {
                 this.maxSelectCount = new Number(param.remainingOfWallpapers).valueOf() || 0
+            } else if (!!param.maxSelectCount && param.maxSelectCount > 0) {
+                let selectCount = new Number(param.maxSelectCount).valueOf();
+                this.maxSelectCount = selectCount > Constants.LIMIT_MAX_THIRD_SELECT_COUNT
+                    ? Constants.LIMIT_MAX_THIRD_SELECT_COUNT
+                    : selectCount;
             }
         }
         Log.info(TAG, `isFromFa: ${this.isFromFa} isFromFaPhoto ${this.isFromFaPhoto}`);
@@ -90,6 +107,10 @@ export struct ThirdSelectAlbumSetPage {
             this.albumsDataSource.setSelectType(MediaConstants.SELECT_TYPE_IMAGE)
             this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_VIDEO, MediaConstants.ALBUM_ID_RECYCLE]);
         } else {
+            this.albumsDataSource.setSelectType(this.filterMediaType);
+            if (this.filterMediaType == MediaConstants.SELECT_TYPE_IMAGE) {
+                this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_VIDEO]);
+            }
             this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_RECYCLE]);
         }
         this.loadAlbums()
@@ -100,6 +121,7 @@ export struct ThirdSelectAlbumSetPage {
         Log.info(TAG, `type: ${this.type}`);
         Log.info(TAG, `ThirdSelectAlbumSetPage isFromWallpaper: ${this.isFromWallpaper}`);
         Log.info(TAG, `ThirdSelectAlbumSetPage maxSelectCount: ${this.maxSelectCount}`);
+        Log.info(TAG, `ThirdSelectAlbumSetPage filterMediaType: ${this.filterMediaType}`);
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
             Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
             this.isEmpty = size == 0;
@@ -112,12 +134,39 @@ export struct ThirdSelectAlbumSetPage {
 
         this.initGridRowCount();
         this.updateActionBar();
+        AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
     }
 
-    private loadAlbums() {
-        this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
-            this.isEmpty = isEmpty
-            this.albumsDataSource.notifyDataReload()
+    private jumpToAllAlbumGridPage(allAlbumDataItem: AlbumDataItem) {
+        router.push({
+            uri: 'feature/thirdSelect/view/ThirdSelectPhotoGridPage',
+            params: {
+                itemCoverUri: allAlbumDataItem.uri,
+                itemId: allAlbumDataItem.id,
+                itemCount: allAlbumDataItem.count,
+                isMultiPick: this.isMultiPick,
+                isFromWallpaper: this.isFromWallpaper,
+                maxSelectCount: this.maxSelectCount,
+                itemDisplayName: allAlbumDataItem.displayName,
+                isFromFa: this.isFromFa,
+                filterMediaType: this.filterMediaType
+            }
+        });
+    }
+
+     private async loadAlbums() {
+         let displayName = await getResourceString($r('app.string.album_all'));
+         this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
+             this.isEmpty = isEmpty
+             this.albumsDataSource.notifyDataReload()
+            // 从三方拉起，直接跳转到所有相册
+            if (this.isFromThird) {
+                let allAlbumDataItem: AlbumDataItem = this.albumsDataSource.getAlbumDataItemById(MediaConstants.ALBUM_ID_ALL);
+                if (allAlbumDataItem == undefined) {
+                    allAlbumDataItem = new AlbumDataItem(MediaConstants.ALBUM_ID_ALL, 0, displayName, this.filterMediaType, '');
+                }
+                this.jumpToAllAlbumGridPage(allAlbumDataItem);
+            }
         })
     }
 
@@ -200,7 +249,9 @@ export struct ThirdSelectAlbumSetPage {
                                         isBigCard: true,
                                         isFromWallpaper: this.isFromWallpaper,
                                         isFromFa: this.isFromFa,
-                                        isFromFaPhoto: this.isFromFaPhoto
+                                        isFromFaPhoto: this.isFromFaPhoto,
+                                        filterMediaType: this.filterMediaType,
+                                        bundleName: this.bundleName
                                     })
                                 }.columnStart(0).columnEnd(1)
                             } else {
@@ -210,7 +261,9 @@ export struct ThirdSelectAlbumSetPage {
                                         isBigCard: false,
                                         isFromWallpaper: this.isFromWallpaper,
                                         isFromFa: this.isFromFa,
-                                        isFromFaPhoto: this.isFromFaPhoto
+                                        isFromFaPhoto: this.isFromFaPhoto,
+                                        filterMediaType: this.filterMediaType,
+                                        bundleName: this.bundleName
                                     })
                                 }
                             }

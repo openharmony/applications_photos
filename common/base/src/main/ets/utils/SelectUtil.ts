@@ -12,8 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+//@ts-ignore
+import fileshare from '@ohos.fileshare';
+import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 
+const TAG = "SelectUtil"
 export class SelectUtil {
+    static readonly THIRD_URI_READ_PERMISSIONS: string = "r";
+
     static getUriArray(selectedPhotos: Set<string>): Array<string> {
         let uriArray = new Array<string>();
         if (selectedPhotos == undefined) {
@@ -23,5 +29,23 @@ export class SelectUtil {
             uriArray.push(uri);
         })
         return uriArray;
+    }
+
+    static async grantPermissionForUri(uri: string, bundleName: string): Promise<void> {
+        Log.debug(TAG, `start uri grant. bundleName: ${bundleName}`);
+        await fileshare.grantUriPermission(uri, bundleName, SelectUtil.THIRD_URI_READ_PERMISSIONS);
+    }
+
+    static async grantPermissionForUris(uris: Array<string>, bundleName: string): Promise<void> {
+        Log.info(TAG, `start uris grant. bundleName: ${bundleName}`);
+        let promises: Array<Promise<void>> = [];
+        for (let uri of uris) {
+            try {
+                promises.push(SelectUtil.grantPermissionForUri(uri, bundleName));
+            } catch(err) {
+                Log.error(TAG, `grant permission error: ${JSON.stringify(err)}`);
+            }
+        }
+        await Promise.all(promises);
     }
 }
