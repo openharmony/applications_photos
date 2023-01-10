@@ -87,4 +87,9 @@ export class MediaConstants {
     static readonly CAMERA_ALBUM_PATH = 'Camera'
     static readonly REMOTE_ALBUM_PATH = 'FromOtherDevices'
     static readonly SNAPSHOT_ALBUM_PATH = 'Screenshots'
+
+    // 需要过滤的媒体文件类型
+    static readonly FILTER_MEDIA_TYPE_ALL: string = 'FILTER_MEDIA_TYPE_ALL';
+    static readonly FILTER_MEDIA_TYPE_IMAGE: string = 'FILTER_MEDIA_TYPE_IMAGE';
+    static readonly FILTER_MEDIA_TYPE_VIDEO: string = 'FILTER_MEDIA_TYPE_VIDEO';
 }
