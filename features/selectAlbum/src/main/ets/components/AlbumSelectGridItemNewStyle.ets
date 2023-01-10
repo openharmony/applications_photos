@@ -95,11 +95,7 @@ export struct AlbumSelectGridItemNewStyle {
             }
 
             if (this.isBigCard) {
-                Flex({
-                    direction: FlexDirection.Row,
-                    justifyContent: FlexAlign.Center,
-                    alignItems: ItemAlign.Center
-                }) {
+                Row() {
                     Image(this.thumbnail)
                         .width(this.cardWidth)
                         .height(this.cardHeight)
@@ -116,14 +112,12 @@ export struct AlbumSelectGridItemNewStyle {
                             this.isEmptyAlbum = true;
                         })
                 }
+                .justifyContent(FlexAlign.Center)
+                .alignItems(VerticalAlign.Center)
                 .width(this.bigWidth)
                 .height(this.gridHeight)
             } else {
-                Flex({
-                    direction: FlexDirection.Row,
-                    justifyContent: FlexAlign.Center,
-                    alignItems: ItemAlign.Center
-                }) {
+                Row() {
                     Image(this.thumbnail)
                         .width(this.cardWidth)
                         .height(this.cardHeight)
@@ -140,6 +134,8 @@ export struct AlbumSelectGridItemNewStyle {
                             this.isEmptyAlbum = true;
                         })
                 }
+                .justifyContent(FlexAlign.Center)
+                .alignItems(VerticalAlign.Center)
                 .height(this.gridHeight)
             }
 
