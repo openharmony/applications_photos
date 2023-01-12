@@ -70,6 +70,7 @@ export struct ThirdSelectPhotoGridPage {
     filterMediaType: number = MediaConstants.SELECT_TYPE_ALL;
     isSelectPhotoGrid: boolean = true;
     @Provide isOriginalChecked: boolean = false;
+    @State isSelectUpperLimited: boolean = false;
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar(this.bundleName == "" ? Action.BACK : Action.CANCEL, this.title, this.isMultiPick,
@@ -198,15 +199,16 @@ export struct ThirdSelectPhotoGridPage {
         }
     }
 
-    private onSelect(index: number) {
+    private async onSelect(index: number) {
         Log.info(TAG, "onSelect");
-        if (this.selectedCount >= this.maxSelectCount) {
-            getResourceString($r('app.string.up_to_limit_tips')).then((message: string) => {
-                showToast(message);
-                return;
-            })
-        }
+        let lastSelectedCount = this.selectedCount;
         this.selectedCount = this.groupDataSource.getSelectedCount();
+        if (lastSelectedCount == this.selectedCount && this.selectedCount >= this.maxSelectCount) {
+            let toastMsg = await getResourceString($r('app.string.up_to_limit_tips'));
+            showToast(toastMsg);
+            return;
+        }
+        this.isSelectUpperLimited = this.selectedCount >= this.maxSelectCount;
         this.groupDataSource.onDataUpdate(index);
     }
 
@@ -260,7 +262,8 @@ export struct ThirdSelectPhotoGridPage {
                             lazyItem: item,
                             mediaItem: item.get(),
                             pageName: Constants.PHOTO_TRANSITION_ALBUM,
-                            isThird: true
+                            isThird: true,
+                            isSelectUpperLimited: $isSelectUpperLimited
                         })
                     }
 		    .aspectRatio(1)
