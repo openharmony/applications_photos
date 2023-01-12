@@ -18,7 +18,7 @@ import WantConstant from '@ohos.ability.wantConstant';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { Constants } from '../../../common/model/common/Constants';
 
-const TAG = "ThirdSelectAlbumSetPage"
+const TAG = "CameraGridItemComponent"
 
 // Camera entrance of the pick page
 @Component
@@ -104,7 +104,7 @@ export struct CameraGridItemComponent {
       'resultCode': 0,
       'want': {
         'parameters': {
-          'select-item-list': [uri],
+          'select-item-list': uri,
         }
       }
     };
