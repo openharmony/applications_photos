@@ -45,11 +45,12 @@ export struct AlbumSelectGridItemNewStyle {
     @State thumbnail: string = "";
 
     aboutToAppear(): void {
-        Log.info(TAG, `aboutToAppear + ${this.item.uri}`);
-        this.updateCardSize();
+        Log.debug(TAG, `aboutToAppear + ${this.item.uri}`);
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.updateCardSize());
         this.item.load().then(() => {
             this.thumbnail = this.item.getThumbnail()
         })
+        this.updateCardSize();
     }
 
     private updateCardSize() {
@@ -94,11 +95,7 @@ export struct AlbumSelectGridItemNewStyle {
             }
 
             if (this.isBigCard) {
-                Flex({
-                    direction: FlexDirection.Row,
-                    justifyContent: FlexAlign.Center,
-                    alignItems: ItemAlign.Center
-                }) {
+                Row() {
                     Image(this.thumbnail)
                         .width(this.cardWidth)
                         .height(this.cardHeight)
@@ -115,14 +112,12 @@ export struct AlbumSelectGridItemNewStyle {
                             this.isEmptyAlbum = true;
                         })
                 }
+                .justifyContent(FlexAlign.Center)
+                .alignItems(VerticalAlign.Center)
                 .width(this.bigWidth)
                 .height(this.gridHeight)
             } else {
-                Flex({
-                    direction: FlexDirection.Row,
-                    justifyContent: FlexAlign.Center,
-                    alignItems: ItemAlign.Center
-                }) {
+                Row() {
                     Image(this.thumbnail)
                         .width(this.cardWidth)
                         .height(this.cardHeight)
@@ -139,6 +134,8 @@ export struct AlbumSelectGridItemNewStyle {
                             this.isEmptyAlbum = true;
                         })
                 }
+                .justifyContent(FlexAlign.Center)
+                .alignItems(VerticalAlign.Center)
                 .height(this.gridHeight)
             }
 

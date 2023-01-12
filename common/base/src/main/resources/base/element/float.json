@@ -139,6 +139,38 @@
     {
       "name": "details_dialog_button_height",
       "value": "40vp"
+    },
+    {
+      "name": "camera_icon_side",
+      "value": "24vp"
+    },
+    {
+      "name": "third_selected_panel_height",
+      "value": "152vp"
+    },
+    {
+      "name": "third_selected_panel_original_markAnchor",
+      "value": "-11vp"
+    },
+    {
+      "name": "third_selected_toggle_icon_margin_right",
+      "value": "4vp"
+    },
+    {
+      "name": "third_selected_panel_title_height",
+      "value": "48vp"
+    },
+    {
+      "name": "third_selected_panel_image_height",
+      "value": "104vp"
+    },
+    {
+      "name": "third_selected_panel_image_padding_top",
+      "value": "8vp"
+    },
+    {
+      "name": "edit_reset_margin_bottom",
+      "value": "6vp"
     }
   ]
 }

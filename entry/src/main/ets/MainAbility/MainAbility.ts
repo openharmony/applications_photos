@@ -26,8 +26,14 @@ import { BroadcastConstants } from '../../../../../common/base/src/main/ets/cons
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import router from '@system.router';
 import { GroupItemDataSource } from '../../../../../common/base/src/main/ets/vm/GroupItemDataSource';
+import atManager from '@ohos.abilityAccessCtrl';
+import bundleManager from '@ohos.bundle.bundleManager';
+import { MediaConstants } from '../../../../../common/base/src/main/ets/constants/MediaConstants';
 
 let isFromCard = false;
+let mCallerUid: number = 0;
+let mMaxSelectCount: number = 0;
+let mFilterMediaType: number = MediaConstants.SELECT_TYPE_ALL;
 let appBroadcast = broadcastManager.getBroadcast();
 var pagePath: string = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 'product/phone/view/index' : 'product/pad/view/index';
 
@@ -46,6 +52,13 @@ export default class MainAbility extends Ability {
         globalThis.appContext = this.context;
         mediaModel.onCreate(this.context);
         let action = want.parameters;
+        if (action != null && action != undefined && action?.filterMediaType == MediaConstants.FILTER_MEDIA_TYPE_IMAGE) {
+            mFilterMediaType = MediaConstants.SELECT_TYPE_IMAGE;
+        } else if (action?.filterMediaType == MediaConstants.FILTER_MEDIA_TYPE_VIDEO) {
+            mFilterMediaType = MediaConstants.SELECT_TYPE_VIDEO;
+        } else {
+            mFilterMediaType = MediaConstants.SELECT_TYPE_ALL;
+        }
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
             this.browserDataSource.reloadGroupItemData(false).then(()=> {
@@ -54,8 +67,12 @@ export default class MainAbility extends Ability {
                 }
             })
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
+            mCallerUid = action[Constants.KEY_WANT_PARAMETERS_CALLERUID];
+            mMaxSelectCount = action?.maxSelectCount;
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
+            mCallerUid = action[Constants.KEY_WANT_PARAMETERS_CALLERUID];
+            mMaxSelectCount = action?.maxSelectCount;
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
         } else if (action != null && action != undefined && action.uri == Constants.ACTION_URI_FORM_ABILITY) {
             isFromCard = true;
@@ -74,32 +91,26 @@ export default class MainAbility extends Ability {
         } else {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
-
-        let requestPermissionList: Array<string> = [
-            "ohos.permission.READ_MEDIA",
-            "ohos.permission.WRITE_MEDIA",
-            "ohos.permission.MEDIA_LOCATION",
-            "ohos.permission.DISTRIBUTED_DATASYNC"
-        ];
-        startTrace('requestPermissionsFromUser');
-        this.context.requestPermissionsFromUser(requestPermissionList).then(function (data) {
-            Log.info(this.TAG, `requestPermissionsFromUser data:  ${JSON.stringify(data)}`);
-            let result = 0;
-            for (let i = 0; i < data.authResults.length; i++) {
-                result += data.authResults[i]
+        bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0, (error, appInfo) => {
+           if (error) {
+                Log.error(this.TAG, `getApplicationInfo error: ${error}`);
+                return;
             }
-            if (result >= 0) {
-                // Improve cold startup performance. Initialize the timeline in advance
-                AppStorage.SetOrCreate(Constants.PERMISSION_STATUS, true);
-                finishTrace('requestPermissionsFromUser');
-                finishTrace('onCreate');
-            } else {
-                AppStorage.SetOrCreate(Constants.PERMISSION_STATUS, false);
-            }
-        }, (err) => {
-            Log.error(this.TAG, `Failed to requestPermissionsFromUser, ${err.code}`);
-        });
-
+           let requestPermissionList: Array<string> = [
+               "ohos.permission.READ_MEDIA",
+               "ohos.permission.WRITE_MEDIA",
+               "ohos.permission.MEDIA_LOCATION",
+               "ohos.permission.DISTRIBUTED_DATASYNC"
+           ];
+           for (let permission of requestPermissionList) {
+               atManager.createAtManager().checkAccessToken(appInfo.accessTokenId, permission).then((status) => {
+                   if (status == atManager.GrantStatus.PERMISSION_DENIED) {
+                       Log.error(this.TAG, `Failed to checkAccessToken permission = ${permission}`);
+                   }
+               })
+           }
+       })
+        finishTrace('onCreate');
         appBroadcast.on(BroadcastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
         Log.info(this.TAG, 'Application onCreate end');
     }
@@ -110,8 +121,14 @@ export default class MainAbility extends Ability {
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
+            mCallerUid = action[Constants.KEY_WANT_PARAMETERS_CALLERUID];
+            mMaxSelectCount = action?.maxSelectCount;
+            mFilterMediaType = action?.filterMediaType;
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
         } else if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
+            mCallerUid = action[Constants.KEY_WANT_PARAMETERS_CALLERUID];
+            mMaxSelectCount = action?.maxSelectCount;
+            mFilterMediaType = action?.filterMediaType;
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
         } else if (action != null && action != undefined && action.uri == Constants.ACTION_URI_FORM_ABILITY) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY);
@@ -171,10 +188,9 @@ export default class MainAbility extends Ability {
     onBackground() {
     }
 
-    thirdRouterPage() {
+    async thirdRouterPage() {
         let entryFrom = AppStorage.Get(Constants.ENTRY_FROM_HAP);
-        let permission = AppStorage.Get(Constants.PERMISSION_STATUS);
-        Log.info(this.TAG, `thirdRouterPage entryFromHap: ${entryFrom} permission: ${permission}`);
+        Log.info(this.TAG, `thirdRouterPage entryFromHap: ${entryFrom}`);
         if (entryFrom == Constants.ENTRY_FROM_NONE) {
             return;
         }
@@ -187,18 +203,28 @@ export default class MainAbility extends Ability {
             };
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_SINGLE_SELECT) {
+            let bundleName: string = await bundleManager.getBundleNameByUid(mCallerUid);
             let options = {
                 uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
                 params: {
                     isMultiPick: false,
+                    isFromThird: true,
+                    bundleName: bundleName,
+                    filterMediaType: mFilterMediaType,
+                    maxSelectCount: mMaxSelectCount
                 }
             };
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_MULTIPLE_SELECT) {
+            let bundleName: string = await bundleManager.getBundleNameByUid(mCallerUid);
             let options = {
                 uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
                 params: {
                     isMultiPick: true,
+                    isFromThird: true,
+                    bundleName: bundleName,
+                    filterMediaType: mFilterMediaType,
+                    maxSelectCount: mMaxSelectCount
                 }
             };
             router.replace(options);
@@ -233,6 +259,6 @@ export default class MainAbility extends Ability {
         setTimeout(() => {
             router.clear();
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, 0)
-        }, 50);
+        }, 10);
     }
 }

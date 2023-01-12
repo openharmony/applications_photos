@@ -18,13 +18,19 @@ import { ActionBarMode } from '../../../common/view/browserOperation/ActionBarMo
 
 export class ThirdSelectBarModel {
     createActionBar(originLeftAction: Action, originTitle: string | Resource, isMultiPick: boolean,
-		    selectedCount: number, maxSelectCount: number): ActionBarProp {
+		    selectedCount: number, maxSelectCount: number, isSelectPhotoGrid: boolean): ActionBarProp {
         let leftAction: Action = originLeftAction;
         let title: string | Resource = originTitle;
-        let menuList: Action[] = [];
-        if (isMultiPick && selectedCount > 0 && maxSelectCount > 0) {
-            title = ActionBarProp.getCountDetailExternalSelectedTitle(selectedCount, maxSelectCount);
-            menuList = [Action.OK];
+        let menuList: Action[];
+        if (isSelectPhotoGrid == true) {
+            menuList = [Action.NAVIGATION_ALBUMS];
+        } else {
+            if (isMultiPick && selectedCount > 0 && maxSelectCount > 0) {
+                title = ActionBarProp.getCountDetailExternalSelectedTitle(selectedCount, maxSelectCount);
+                menuList = [Action.OK];
+            } else {
+                menuList = [];
+            }
         }
 
         let actionBarProp: ActionBarProp = new ActionBarProp();

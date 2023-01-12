@@ -52,6 +52,7 @@ export struct PhotoItem {
     private imgScale: number = 1;
     private firstLoad: boolean = true;
     private preItem = { rotate: 0, height: 0, width: 0 };
+    private timeStamp: string = '';
 
     onTransitionChange() {
         Log.info(TAG, `onTransitionChange, ${this.updateTransition} ${this.item.index}`);
@@ -77,7 +78,8 @@ export struct PhotoItem {
 
     aboutToAppear(): void {
         Log.info(TAG, `aboutToAppear`);
-        this.eventPipeline = new EventPipeline(this.broadCast, this.item);
+        this.timeStamp = (new Date()).valueOf().toString();
+        this.eventPipeline = new EventPipeline(this.broadCast, this.item, this.timeStamp);
         this.matrix = Matrix4.identity().copy();
         this.firstLoad = true;
         this.isLoading = true;
@@ -88,16 +90,16 @@ export struct PhotoItem {
             Log.info(TAG, `aboutToAppear loadFinish thumbnail ${this.thumbnail}`);
         })
         // register event handling
-        this.broadCast.on(Constants.TOUCH_EVENT + this.item.uri, (matrix: any) => {
+        this.broadCast.on(Constants.TOUCH_EVENT + this.item.uri + this.timeStamp, (matrix: any) => {
             this.matrix = matrix;
         });
 
-        this.broadCast.on(Constants.DIRECTION_CHANGE + this.item.uri, (direction: PanDirection) => {
+        this.broadCast.on(Constants.DIRECTION_CHANGE + this.item.uri + this.timeStamp, (direction: PanDirection) => {
             Log.info(TAG, `direction: ${direction}`);
             this.photoItemDirection = direction;
         });
 
-        this.broadCast.on(Constants.ANIMATION_EVENT + this.item.uri, (animationOption: any, animationEndMatrix: any) => {
+        this.broadCast.on(Constants.ANIMATION_EVENT + this.item.uri + this.timeStamp, (animationOption: any, animationEndMatrix: any) => {
             Log.info(TAG, `animationOption: ${JSON.stringify(animationOption)}`);
             this.animationOption = animationOption;
             this.animationEndMatrix = animationEndMatrix;
@@ -116,9 +118,9 @@ export struct PhotoItem {
     aboutToDisappear(): void {
         Log.info(TAG, `aboutToDisappear ${this.item.uri}/${this.thumbnail}`);
         // clean up event registration
-        this.broadCast.off(Constants.TOUCH_EVENT + this.item.uri, null);
-        this.broadCast.off(Constants.DIRECTION_CHANGE + this.item.uri, null);
-        this.broadCast.off(Constants.ANIMATION_EVENT + this.item.uri, null);
+        this.broadCast.off(Constants.TOUCH_EVENT + this.item.uri + this.timeStamp, null);
+        this.broadCast.off(Constants.DIRECTION_CHANGE + this.item.uri + this.timeStamp, null);
+        this.broadCast.off(Constants.ANIMATION_EVENT + this.item.uri + this.timeStamp, null);
         this.isPullingDown = false;
         Log.info(TAG, `aboutToDisappear ${this.item.uri}/${this.thumbnail} end`);
     }

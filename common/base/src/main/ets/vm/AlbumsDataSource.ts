@@ -72,7 +72,17 @@ export class AlbumsDataSource extends ItemDataSource {
         }
     }
 
-    getSelectedUris(): string[]{
+    getAlbumDataItemById(id: string): AlbumDataItem {
+        let albumDataItem: AlbumDataItem = undefined;
+        for (let i = 0;i < this.albumDataItems.length; i++) {
+            if (this.albumDataItems[i].id == id) {
+                albumDataItem = this.albumDataItems[i];
+            }
+        }
+        return albumDataItem;
+    }
+
+    getSelectedUris(): string[] {
         let uris: string[] = [];
         this.albumDataItems.forEach((item: AlbumDataItem) => {
             if (item.isSelect) {
@@ -153,5 +163,23 @@ export class AlbumsDataSource extends ItemDataSource {
     async reloadAlbumItemData(): Promise<boolean> {
         this.albumDataItems = await this.albumDataImpl.reloadAlbumItemData();
         return this.albumDataItems.length == 0;
+    }
+
+    async reloadAlbumListItemData(): Promise<boolean> {
+        Log.info(TAG, `reloadAlbumListItemData`);
+        this.albumDataItems = await this.albumDataImpl.reloadAlbumListItemData();
+        this.reloadResetAlbumItemData().then((count: number) => {
+            Log.info(TAG, `reloadResetAlbumItemData reset: ${count}`);
+        })
+        return this.albumDataItems.length == 0;
+    }
+
+    async reloadResetAlbumItemData(): Promise<number> {
+        let albumResetDataItems = await this.albumDataImpl.reloadResetAlbumItemData();
+        albumResetDataItems.forEach((item: AlbumDataItem) => {
+            this.albumDataItems.push(item);
+        });
+        this.notifyDataReload();
+        return albumResetDataItems.length;
     }
 }

@@ -50,6 +50,8 @@ export struct ThirdAlbumGridItem {
     @State transformV: number = 0;
     @State isEmptyAlbum: boolean = false;
     @State thumbnail: string = "";
+    bundleName: string = "";
+    filterMediaType: number;
 
     aboutToAppear(): void {
         Log.info(TAG, `aboutToAppear + ${this.item.uri}`)
@@ -99,11 +101,7 @@ export struct ThirdAlbumGridItem {
             }
 
             if (this.isBigCard) {
-                Flex({
-                    direction: FlexDirection.Row,
-                    justifyContent: FlexAlign.Center,
-                    alignItems: ItemAlign.Center
-                }) {
+                Row() {
                     Image(this.thumbnail)
                         .alt($r('app.media.ic_goto_photos'))
                         .width(this.cardWidth)
@@ -124,12 +122,10 @@ export struct ThirdAlbumGridItem {
                 }
                 .width(this.bigWidth)
                 .height(this.gridHeight)
+                .justifyContent(FlexAlign.Center)
+                .alignItems(VerticalAlign.Center)
             } else {
-                Flex({
-                    direction: FlexDirection.Row,
-                    justifyContent: FlexAlign.Center,
-                    alignItems: ItemAlign.Center
-                }) {
+                Row() {
                     Image(this.thumbnail)
                         .alt($r('app.media.ic_goto_photos'))
                         .width(this.cardWidth)
@@ -149,6 +145,8 @@ export struct ThirdAlbumGridItem {
                         })
                 }
                 .height(this.gridHeight)
+                .justifyContent(FlexAlign.Center)
+                .alignItems(VerticalAlign.Center)
             }
 
             Column() {
@@ -209,7 +207,9 @@ export struct ThirdAlbumGridItem {
                         isFromWallpaper: this.isFromWallpaper,
                         maxSelectCount: this.maxSelectCount,
                         itemDisplayName: this.item.displayName,
-                        isFromFa: this.isFromFa
+                        isFromFa: this.isFromFa,
+                        bundleName: this.bundleName,
+                        filterMediaType: this.filterMediaType
                     }
                 });
             }

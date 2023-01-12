@@ -299,7 +299,6 @@ export class Constants {
     static readonly FA_SETTING_FROM_ID: string = 'FASetting_FormId';
     static readonly VIEW_DATA_URI: string = 'viewDataUri';
     static readonly VIEW_DATA_POS: string = 'viewDataPos';
-    static readonly PERMISSION_STATUS: string = 'permissionStatus';
 
     static readonly FORM_ITEM_NAME: string = 'form_itemName';
     static readonly FORM_ITEM_ALBUM_ID: string = 'form_itemAlbumId';
@@ -310,4 +309,25 @@ export class Constants {
     static readonly PROGRESS_LENGTH_DIFF: number = 88;
     static readonly ALBUM_NAME_MAX_LENGTH = 82;
     static readonly BACK_FROM_FORM_DETAIL: string = 'back_from_form_detail';
+
+    // ApplictionInfo
+    static readonly BUNDLE_NAME: string = 'com.ohos.photos';
+
+    // get want info with key
+    static readonly KEY_WANT_PARAMETERS_CALLERUID: string = "ohos.aafwk.param.callerUid";
+
+    // camera mainAbility
+    static readonly CAMERA_TYPE_CAPTURE: string = "capture";
+
+    // camera mainAbility
+    static readonly CAMERA_TYPE_VIDEO: string = "video";
+
+    // camera bundleName
+    static readonly CAMERA_BUNDLE_NAME: string = "com.ohos.camera";
+
+    // camera mainAbility
+    static readonly CAMERA_MAIN_ABILITY: string = "com.ohos.camera.MainAbility";
+
+    // maximum number limit of external selection pages
+    static readonly LIMIT_MAX_THIRD_SELECT_COUNT: number = 500;
 }

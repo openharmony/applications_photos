@@ -57,6 +57,13 @@ export class RectF {
         return (x >= this.left && x <= this.right && y >= this.top && y <= this.bottom);
     }
 
+    scale(scale: number) {
+        this.left *= scale;
+        this.right *= scale;
+        this.top *= scale;
+        this.bottom *= scale;
+    }
+
     move(offsetX: number, offsetY: number) {
         this.left += offsetX;
         this.right += offsetX;
