@@ -55,6 +55,7 @@ const TAG = "PhotoGridPage"
 @Entry
 @Component
 export struct PhotoGridPage {
+    @State isSelectUpperLimited: boolean = false;
     @State isHideScrollBar: boolean = true;
     @Provide @Watch('updateActionBar') isEmpty: boolean = false;
     @State gridRowCount: number = 0;
@@ -618,6 +619,7 @@ export struct PhotoGridPage {
                                     lazyItem: item,
                                     mediaItem: item.get(),
                                     pageName: Constants.PHOTO_TRANSITION_ALBUM,
+                                    isSelectUpperLimited: $isSelectUpperLimited
                                 })
                             }
                             .aspectRatio(1)
