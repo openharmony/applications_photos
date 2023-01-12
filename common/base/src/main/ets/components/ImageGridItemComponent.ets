@@ -42,6 +42,7 @@ export struct ImageGridItemComponent {
     private isEnteringPhoto = false;
     private isPush = false;
     private isPreview = false;
+    @Link isSelectUpperLimited : boolean;
 
     private resetPressAnim(): void {
         this.pressAnimScale = 1;
@@ -121,9 +122,11 @@ export struct ImageGridItemComponent {
 
     private onSelected() {
         Log.info(TAG, 'onSelected');
-        this.mediaItem.setSelect(!this.mediaItem.isSelect);
-        if (this.lazyItem) {
-            this.lazyItem.update(this.mediaItem)
+        if ((this.isSelectUpperLimited != undefined && !this.isSelectUpperLimited) || this.mediaItem.isSelect) {
+            this.mediaItem.setSelect(!this.mediaItem.isSelect);
+            if (this.lazyItem) {
+                this.lazyItem.update(this.mediaItem)
+            }
         }
         this.broadCast.emit(BroadcastConstants.SELECT, [this.mediaItem.index]);
     }
