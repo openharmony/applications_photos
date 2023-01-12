@@ -59,6 +59,7 @@ const TAG = "TimelinePage"
 // PHOTO Page
 @Component
 export struct TimelinePage {
+    @State isSelectUpperLimited: boolean = false;
     @State isEmpty: boolean = false;
     @State isHideScrollBar: boolean = true;
     @StorageProp('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
@@ -516,7 +517,8 @@ export struct TimelinePage {
                                         ImageGridItemComponent({
                                             lazyItem: (item as LazyItem<MediaDataItem>),
                                             mediaItem: (item as LazyItem<MediaDataItem>).get(),
-                                            pageName: Constants.PHOTO_TRANSITION_TIMELINE
+                                            pageName: Constants.PHOTO_TRANSITION_TIMELINE,
+                                            isSelectUpperLimited: $isSelectUpperLimited
                                         })
                                     }
                                     .aspectRatio(1)
