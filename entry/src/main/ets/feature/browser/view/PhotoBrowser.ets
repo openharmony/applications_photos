@@ -163,6 +163,8 @@ struct PhotoBrowser {
                     return;
                 }
                 menuContext.withItems([currentPhoto])
+                    .withDeletePageFromType(BroadcastConstants.DELETE_FROM_BROWSER)
+                    .withAlbumId(this.albumInfo && this.albumInfo.id)
                     .withBroadCast(this.broadCast)
                     .withOperationEndCallback(this.onDeleteEnd.bind(this))
                 menuOperation = new BatchDeleteMenuOperation(menuContext);
@@ -303,7 +305,7 @@ struct PhotoBrowser {
             uri: 'common/view/browserOperation/MediaOperationPage',
             params: {
                 pageType: pageType,
-                albumId: this.albumInfo ? this.albumInfo.id : MediaConstants.ALBUM_ID_ALL
+                albumInfo: JSON.stringify(this.albumInfo)
             }
         });
     }
@@ -311,7 +313,7 @@ struct PhotoBrowser {
     onPhotoChanged(index: number): void{
         index = Math.min(index, this.browserDataSource.totalCount() - 1);
         Log.info(TAG, `onPhotoChanged start ${index}`);
-        this.currentIndex = index;
+        this.currentIndex = this.isToEdit ? 0 : index;
         this.updateActionBar();
     }
 
@@ -374,7 +376,7 @@ struct PhotoBrowser {
     private async getActionList(currentPhoto: MediaDataItem): Promise<Array<Action>> {
         let list: Array<Action> = new Array<Action>();
         if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
-            list.push(Action.RECOVER, Action.CLEAR_RECYCLE);
+            list.push(Action.RECOVER, Action.DELETE);
         } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
             list.push(Action.SHARE, Action.DOWNLOAD);
         } else {

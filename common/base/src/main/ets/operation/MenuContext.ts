@@ -31,6 +31,12 @@ export class MenuContext {
     deviceId: string;
 
     albumId: string;
+    deletePageFromType: number;       // 0. photoBrowser  1. photoGridPage
+
+    withDeletePageFromType(deletePageFromType: number): MenuContext {
+        this.deletePageFromType = deletePageFromType;
+        return this;
+    }
 
     withItems(items: MediaDataItem[]): MenuContext {
         this.items = items;

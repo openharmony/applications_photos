@@ -42,6 +42,7 @@ const TAG: string = 'CustomDialogView'
 export struct CustomDialogView {
     @State isShow: boolean = false;
     @Provide dialogMessage: Resource = $r('app.string.common_place_holder', String(''));
+    @Provide dialogDeleteMessage: Resource = $r('app.string.common_place_holder', String(''));
     @Provide progressMessage: Resource = $r('app.string.common_place_holder', String(''));
     @Provide dialogCallback: DialogCallback = { confirmCallback: null, cancelCallback: null };
     @Provide saveDialogCallback: SaveDialogCallback = { saveAsNewCallback: null, replaceOriginalCallback: null };
@@ -254,9 +255,10 @@ export struct CustomDialogView {
             });
 
         this.broadCast.on(BroadcastConstants.SHOW_DELETE_DIALOG,
-            function (deleteMessage: Resource, confirmCallback: Function, cancelCallback?: Function) {
+            function (deleteMessage: Resource, dialogDeleteMessage: Resource, confirmCallback: Function, cancelCallback?: Function) {
                Log.info(TAG, 'SHOW_DELETE_DIALOG ');
                 self.dialogMessage = deleteMessage;
+                self.dialogDeleteMessage = dialogDeleteMessage;
                 self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
                 self.deleteDialogController.open();
             });

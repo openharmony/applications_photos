@@ -25,6 +25,7 @@ export struct DeleteDialog {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @Consume dialogCallback: DialogCallback;
     @Consume dialogMessage: Resource;
+    @Consume dialogDeleteMessage: Resource;
     controller: CustomDialogController;
 
     aboutToAppear() {
@@ -74,7 +75,7 @@ export struct DeleteDialog {
                     .alignItems(VerticalAlign.Center)
 
                     Button() {
-                        Text($r('app.string.dialog_delete'))
+                        Text(this.dialogDeleteMessage)
                             .fontSize($r('sys.float.ohos_id_text_size_button1'))
                             .fontColor($r('sys.color.ohos_id_color_warning'))
                             .fontWeight(FontWeight.Medium)

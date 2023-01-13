@@ -47,6 +47,14 @@
     {
       "name": "no",
       "value": "CANCEL"
+    },
+    {
+      "name": "camera_btn_text_photo",
+      "value": "Photo"
+    },
+    {
+      "name": "selected_photos_count",
+      "value": "%1$d/%2$d"
     }
   ]
 }

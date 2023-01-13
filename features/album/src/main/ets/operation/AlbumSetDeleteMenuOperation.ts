@@ -48,8 +48,9 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
         this.confirmCallback = this.confirmCallback.bind(this);
         this.cancelCallback = this.cancelCallback.bind(this);
 
+        let deleteResource: Resource = $r('app.string.dialog_delete');
         this.getDialogTitle().then(dialogTitle => {
-            this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [dialogTitle, this.confirmCallback, this.cancelCallback]);
+            this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [dialogTitle, deleteResource, this.confirmCallback, this.cancelCallback]);
         })
     }
 

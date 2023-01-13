@@ -177,6 +177,14 @@
       "value": "DELETE"
     },
     {
+      "name": "dialog_recycle",
+      "value": "DELETE"
+    },
+    {
+      "name": "dialog_clear",
+      "value": "CLEAR"
+    },
+    {
       "name": "dialog_cancel",
       "value": "CANCEL"
     },
@@ -189,16 +197,28 @@
       "value": "Delete this video?"
     },
     {
-      "name": "recycle_all_files_tips",
+      "name": "delete_all_files_tips",
       "value": "Delete all items?"
     },
     {
-      "name": "recycle_single_file_tips",
+      "name": "delete_single_file_tips",
       "value": "Delete this item?"
     },
     {
+      "name": "delete_files_tips",
+      "value": "Delete %d items?"
+    },
+    {
+      "name": "recycle_all_files_tips",
+      "value": "Permanently delete all items?"
+    },
+    {
+      "name": "recycle_single_file_tips",
+      "value": "Permanently delete this item?"
+    },
+    {
       "name": "recycle_files_tips",
-      "value": "Delete %d items？"
+      "value": "Permanently delete %d items?"
     },
     {
       "name": "recycle_single_album_with_photos_tips",

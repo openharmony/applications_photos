@@ -43,6 +43,7 @@ const TAG = "NewAlbumPage"
 @Entry
 @Component
 export struct NewAlbumPage {
+    @State isSelectUpperLimited: boolean = false;
     @State isEmpty: boolean = false;
     @State isHideScrollBar: boolean = true;
     @State gridRowCount: number = 0;
@@ -303,7 +304,8 @@ export struct NewAlbumPage {
                                 ImageGridItemComponent({
                                     lazyItem: item,
                                     mediaItem: item.get(),
-                                    pageName: Constants.PHOTO_TRANSITION_ALBUM
+                                    pageName: Constants.PHOTO_TRANSITION_ALBUM,
+                                    isSelectUpperLimited: $isSelectUpperLimited
                                 })
                             }
                             .aspectRatio(1)

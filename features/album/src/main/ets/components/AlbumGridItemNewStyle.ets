@@ -90,9 +90,7 @@ export struct AlbumGridItemNewStyle {
         - WindowConstants.ALBUM_SET_GUTTER;
         this.gridHeight = gridWidth / this.gridAspectRatio;
         this.bigWidth = gridWidth * 2 + WindowConstants.ALBUM_SET_GUTTER;
-        let numberHeight = px2vp(fp2px(WindowConstants.TEXT_SIZE_BODY2));
-        let nameHeight = px2vp(fp2px(WindowConstants.TEXT_SIZE_SUB_TITLE1));
-        this.icHeight = this.gridHeight - WindowConstants.ALBUM_SET_NEW_ICON_MARGIN - numberHeight - nameHeight;
+        this.icHeight = this.gridHeight - WindowConstants.ALBUM_SET_NEW_ICON_MARGIN - WindowConstants.TEXT_SIZE_BODY2 - WindowConstants.TEXT_SIZE_SUB_TITLE1;
 
         if (this.item.orientation == MediaConstants.ROTATE_ONCE || this.item.orientation == MediaConstants.ROTATE_THIRD) {
             this.cardWidth = this.gridHeight;
@@ -151,7 +149,7 @@ export struct AlbumGridItemNewStyle {
                                 .height($r('app.float.recycle_album_cover_icon_size'))
                                 .fillColor($r('app.color.empty_or_recycle_album_icon'))
                         }
-                        .height(this.gridHeight)
+                        .height(this.icHeight)
                         .width('100%')
                     }
                     .height(this.gridHeight)
@@ -195,8 +193,8 @@ export struct AlbumGridItemNewStyle {
                         .height(this.icHeight)
                         .width('100%')
                     }
+                    .width(this.cardWidth)
                     .height(this.gridHeight)
-                    .aspectRatio(this.gridAspectRatio)
                     .backgroundColor($r('app.color.empty_or_recycle_album_back'))
                     .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
                     .justifyContent(FlexAlign.Start)
@@ -227,7 +225,7 @@ export struct AlbumGridItemNewStyle {
             if (!this.item.isSelect || !this.isAlbumSetSelectedMode || !this.selectable) {
                 Image($r('app.media.gradient_mask_layer'))
                     .height('50%')
-                    .width('100%')
+                    .width(this.cardWidth)
                     .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
             }
             Column() {
@@ -280,7 +278,7 @@ export struct AlbumGridItemNewStyle {
 
             Column()
                 .height('100%')
-                .width('100%')
+                .width(this.cardWidth)
                 .border({
                     radius: $r('sys.float.ohos_id_corner_radius_default_l'),
                     width: $r('app.float.album_cover_stroke_width'),

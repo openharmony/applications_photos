@@ -203,6 +203,7 @@ export class CropShow {
         let angle = this.rotationAngle * tX * tY + this.horizontalAngle;
         let rotated = MathUtils.rotatePoints([preCenter], -angle, origin);
 
+        this.imageCropCompare();
         MathUtils.scaleRectBasedOnPoint(this.imageRect, rotated[0], scale);
 
         let offsetX = newCrop.getCenterX() - preCenter.x;
@@ -213,6 +214,24 @@ export class CropShow {
         this.imageRect.move(x, y);
 
         this.cropRect.set(newCrop.left, newCrop.top, newCrop.right, newCrop.bottom);
+    }
+
+    imageCropCompare(): void {
+        let imageRect = this.getImageRect();
+        let cropRect = this.getCropRect();
+        let imageRectWidth = imageRect.getWidth();
+        let imageRectHeight = imageRect.getHeight();
+        let cropRectWidth = cropRect.getWidth();
+        let cropRectHeight = cropRect.getHeight();
+        if (imageRectWidth < cropRectWidth) {
+            let scaleRatio = cropRectWidth / imageRectWidth;
+            this.imageRect.scale(scaleRatio);
+        }
+        if (imageRectHeight < cropRectHeight) {
+            let scaleRatio = cropRectHeight / imageRectHeight;
+            this.imageRect.scale(scaleRatio);
+        }
+
     }
 
     isCropRectTouch(x: number, y: number): boolean {

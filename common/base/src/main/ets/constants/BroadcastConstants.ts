@@ -14,6 +14,8 @@
  */
 
 export class BroadcastConstants {
+    static readonly DELETE_FROM_BROWSER: number = 0;
+    static readonly DELETE_FROM_GRID: number = 1;
     static readonly SELECT = 'select';
     static readonly GROUP_SELECT = 'groupSelect';
     static readonly JUMP_PHOTO_BROWSER = 'JumpPhotoPage';

@@ -76,7 +76,7 @@ struct FormEditorPage {
 
     bindFormData(): any {
         Log.debug(TAG, `bindFormData start formId: ${this.formId}`);
-        let image = "image_" + this.fd + "_formId_" + this.formId;
+        let image = "image_" + this.fd + "_formId_" + this.formId + this.arkUri;
         Log.debug(TAG, `bindFormData start image: ${image}`);
         let dataObj1: any = {
             "fd": this.fd == -1 ? false : true,
@@ -266,7 +266,7 @@ struct FormEditorPage {
     build() {
         Column() {
             Row() {
-                Image($r('app.media.ic_gallery_public_back'))
+                Image($r('app.media.ic_gallery_public_cancel'))
                     .fillColor($r('app.color.white'))
                     .width($r('app.float.FA_back_size'))
                     .height($r('app.float.FA_back_size'))

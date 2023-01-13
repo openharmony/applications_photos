@@ -55,6 +55,7 @@ const TAG = "PhotoGridPage"
 @Entry
 @Component
 export struct PhotoGridPage {
+    @State isSelectUpperLimited: boolean = false;
     @State isHideScrollBar: boolean = true;
     @Provide @Watch('updateActionBar') isEmpty: boolean = false;
     @State gridRowCount: number = 0;
@@ -127,6 +128,8 @@ export struct PhotoGridPage {
                 this.onDeleteStart = this.onDeleteStart.bind(this);
                 this.onDeleteEnd = this.onDeleteEnd.bind(this);
                 menuContext
+                    .withDeletePageFromType(BroadcastConstants.DELETE_FROM_GRID)
+                    .withAlbumId(this.albumInfo.id)
                     .withDataSource(this.groupDataSource)
                     .withOperationStartCallback(this.onDeleteStart)
                     .withOperationEndCallback(this.onDeleteEnd)
@@ -227,7 +230,7 @@ export struct PhotoGridPage {
             uri: 'common/view/browserOperation/MediaOperationPage',
             params: {
                 pageType: pageType,
-                albumId: this.albumInfo.id
+                albumInfo: JSON.stringify(this.albumInfo)
             }
         });
     }
@@ -317,6 +320,7 @@ export struct PhotoGridPage {
         mediaObserver.registerObserver(this.dataObserver);
         animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => {
             this.groupDataSource.dataRemove();
+            this.isEmpty = this.groupDataSource.groupDataItem.length==0 ? true : false;
             this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
         })
     }
@@ -520,6 +524,7 @@ export struct PhotoGridPage {
             })
         } else if (this.isActive) {
             this.groupDataSource.dataRemove();
+            this.isEmpty = this.groupDataSource.groupDataItem.length==0 ? true : false;
         }
     }
 
@@ -614,6 +619,7 @@ export struct PhotoGridPage {
                                     lazyItem: item,
                                     mediaItem: item.get(),
                                     pageName: Constants.PHOTO_TRANSITION_ALBUM,
+                                    isSelectUpperLimited: $isSelectUpperLimited
                                 })
                             }
                             .aspectRatio(1)
