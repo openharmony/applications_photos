@@ -79,7 +79,7 @@ export struct PhotoItem {
     aboutToAppear(): void {
         Log.info(TAG, `aboutToAppear`);
         this.timeStamp = (new Date()).valueOf().toString();
-        this.eventPipeline = new EventPipeline(this.broadCast, this.item, this.timeStamp);
+        this.eventPipeline = new EventPipeline(this.broadCast, this.item, this.timeStamp, this.updateMatrix.bind(this));
         this.matrix = Matrix4.identity().copy();
         this.firstLoad = true;
         this.isLoading = true;
@@ -107,6 +107,11 @@ export struct PhotoItem {
         this.onTransitionChange();
         this.onViewDataChanged();
         Log.info(TAG, `photoItem aboutToAppear ${this.item.uri} end ${this.item.orientation}}`);
+    }
+
+    private updateMatrix(matrix) {
+        Log.info(TAG, `updateMatrix start ${matrix}`);
+        this.matrix = matrix;
     }
 
     private updateThumbnail() {
