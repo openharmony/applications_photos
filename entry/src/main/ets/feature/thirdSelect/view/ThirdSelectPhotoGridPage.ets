@@ -228,7 +228,8 @@ export struct ThirdSelectPhotoGridPage {
                 transition: name,
                 isFromFa: this.isFromFa,
                 albumId: this.albumId,
-                isMultiPick: this.isMultiPick
+                isMultiPick: this.isMultiPick,
+                isSelectUpperLimited: this.isSelectUpperLimited
             }
         })
     }
