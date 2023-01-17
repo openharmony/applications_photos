@@ -31,6 +31,8 @@ import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
 import { SelectUtil } from '../../../../../../../common/base/src/main/ets/utils/SelectUtil';
+import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
+import { showToast } from '../../../../../../../common/base/src/main/ets/utils/UiUtil';
 // third selection photoBrowser
 
 const TAG = "ThirdSelectPhotoBrowser"
@@ -53,6 +55,7 @@ struct ThirdSelectPhotoBrowser {
     @Provide('transitionIndex') currentIndex: number = 0;
     isFromFa: boolean = false;
     bundleName: string = "";
+    isSelectUpperLimited: boolean = false;
 
     // position
     thirdSelectPosition: number;
@@ -86,6 +89,7 @@ struct ThirdSelectPhotoBrowser {
             this.browserDataSource.setAlbumId(params.albumId ? params.albumId.toString() : "");
             this.isMultiPick = params.isMultiPick as boolean;
             this.bundleName = params.bundleName.toString();
+            this.isSelectUpperLimited = params.isSelectUpperLimited  as boolean;
         }
         this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER);
         if (this.isMultiPick == true) {
@@ -140,15 +144,20 @@ struct ThirdSelectPhotoBrowser {
         }
     }
 
-    selectStateChange() {
+    async selectStateChange() {
         Log.info(TAG, 'change selected.');
         let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined) {
             return;
         }
-        currentPhoto.setSelect(!currentPhoto.isSelect);
-        this.isSelected = currentPhoto.isSelect;
-        this.totalSelectedCount = this.browserDataSource.getSelectedCount();
+        if (!this.isSelectUpperLimited || currentPhoto.isSelect) {
+            currentPhoto.setSelect(!currentPhoto.isSelect);
+            this.isSelected = currentPhoto.isSelect;
+            this.totalSelectedCount = this.browserDataSource.getSelectedCount();
+        } else {
+            let toastMsg = await getResourceString($r('app.string.up_to_limit_tips'));
+            showToast(toastMsg);
+        }
         this.broadCast.emit(BroadcastConstants.SELECT, [this.currentIndex]);
         Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
     }
