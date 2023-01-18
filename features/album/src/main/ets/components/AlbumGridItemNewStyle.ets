@@ -225,7 +225,7 @@ export struct AlbumGridItemNewStyle {
             if (!this.item.isSelect || !this.isAlbumSetSelectedMode || !this.selectable) {
                 Image($r('app.media.gradient_mask_layer'))
                     .height('50%')
-                    .width(this.cardWidth)
+                    .width('100%')
                     .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
             }
             Column() {
@@ -278,7 +278,7 @@ export struct AlbumGridItemNewStyle {
 
             Column()
                 .height('100%')
-                .width(this.cardWidth)
+                .width('100%')
                 .border({
                     radius: $r('sys.float.ohos_id_corner_radius_default_l'),
                     width: $r('app.float.album_cover_stroke_width'),

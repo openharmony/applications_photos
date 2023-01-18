@@ -165,6 +165,7 @@ export class CropShow {
             MathUtils.computeMaxRectWithinLimit(this.cropRect, this.limitRect, this.ratio.getRate());
             let imageLines = this.getCurrentImageLines();
             MathUtils.limitRectInRotated(this.cropRect, imageLines);
+            this.imageCropCompare();
             this.enlargeCropArea();
         }
     }
@@ -203,7 +204,6 @@ export class CropShow {
         let angle = this.rotationAngle * tX * tY + this.horizontalAngle;
         let rotated = MathUtils.rotatePoints([preCenter], -angle, origin);
 
-        this.imageCropCompare();
         MathUtils.scaleRectBasedOnPoint(this.imageRect, rotated[0], scale);
 
         let offsetX = newCrop.getCenterX() - preCenter.x;
