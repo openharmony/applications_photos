@@ -29,6 +29,7 @@ import { GroupItemDataSource } from '../../../../../common/base/src/main/ets/vm/
 import atManager from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import { MediaConstants } from '../../../../../common/base/src/main/ets/constants/MediaConstants';
+import { getResourceString } from '../../../../../common/base/src/main/ets/utils/ResourceUtils';
 
 let isFromCard = false;
 let mCallerUid: number = 0;
@@ -202,29 +203,22 @@ export default class MainAbility extends Ability {
                 }
             };
             router.replace(options);
-        } else if (entryFrom == Constants.ENTRY_FROM_SINGLE_SELECT) {
+        } else if (entryFrom == Constants.ENTRY_FROM_SINGLE_SELECT || entryFrom == Constants.ENTRY_FROM_MULTIPLE_SELECT) {
             let bundleName: string = await bundleManager.getBundleNameByUid(mCallerUid);
+            let displayName = await getResourceString($r('app.string.album_all'));
             let options = {
-                uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
+                uri: 'feature/thirdSelect/view/ThirdSelectPhotoGridPage',
                 params: {
-                    isMultiPick: false,
-                    isFromThird: true,
+                    itemCoverUri: '',
+                    itemId: MediaConstants.ALBUM_ID_ALL,
+                    itemCount: 0,
+                    isMultiPick: entryFrom == Constants.ENTRY_FROM_MULTIPLE_SELECT ? true : false,
+                    isFromWallpaper: false,
+                    maxSelectCount: mMaxSelectCount,
+                    itemDisplayName: displayName,
+                    isFromFa: false,
                     bundleName: bundleName,
-                    filterMediaType: mFilterMediaType,
-                    maxSelectCount: mMaxSelectCount
-                }
-            };
-            router.replace(options);
-        } else if (entryFrom == Constants.ENTRY_FROM_MULTIPLE_SELECT) {
-            let bundleName: string = await bundleManager.getBundleNameByUid(mCallerUid);
-            let options = {
-                uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
-                params: {
-                    isMultiPick: true,
-                    isFromThird: true,
-                    bundleName: bundleName,
-                    filterMediaType: mFilterMediaType,
-                    maxSelectCount: mMaxSelectCount
+                    filterMediaType: mFilterMediaType
                 }
             };
             router.replace(options);
