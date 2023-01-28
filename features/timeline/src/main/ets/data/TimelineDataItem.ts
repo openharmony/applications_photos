@@ -47,7 +47,7 @@ export class TimelineDataItem {
     }
 
     getHashCode(): string {
-        return `${this.dateAdded}` + `${this.isSelect()}`;
+        return `${this.dateAdded}` + `${this.isSelect()}` + `${this.groupChild.length}`;
     }
 
     isSelect(): boolean {
