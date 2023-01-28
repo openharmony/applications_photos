@@ -145,7 +145,7 @@ export class MediaDataItem {
 
     getThumbnail(width: number, height: number): string {
         Log.debug(TAG, `getThumbnail ${this.status}`);
-        if (this.status != MediaConstants.LOADED) {
+        if (this.status != MediaConstants.LOADED && this.status != MediaConstants.PART_LOADED) {
             Log.warn(TAG, `getThumbnail fail as status: ${this.status}`);
             return "";
         }
