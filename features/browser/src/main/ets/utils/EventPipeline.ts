@@ -96,10 +96,13 @@ export class EventPipeline {
     private isExiting = false;
     private orientation = 0;
 
-    constructor(broadCastParam: Broadcast, item: MediaDataItem, timeStamp: string) {
+		private updateMatrix: Function;
+
+    constructor(broadCastParam: Broadcast, item: MediaDataItem, timeStamp: string, updateMatrix: Function) {
         this.broadCast = broadCastParam;
         this.item = item;
         this.timeStamp = timeStamp;
+				this.updateMatrix = updateMatrix;
         this.width = this.item.imgWidth == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgWidth;
         this.height = this.item.imgHeight == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgHeight;
         this.orientation = this.item.orientation || 0;
@@ -261,7 +264,7 @@ export class EventPipeline {
             .copy();
         Log.debug(TAG, `emitTouchEvent lastOffset: ${this.lastOffset}, offset: ${this.offset},\
         center: ${this.center}, scale: ${[this.lastScale, this.scale]}`);
-        this.broadCast.emit(Constants.TOUCH_EVENT + this.item.uri + this.timeStamp, [matrix]);
+				this.updateMatrix(matrix);
         this.evaluateBounds();
     }
 
