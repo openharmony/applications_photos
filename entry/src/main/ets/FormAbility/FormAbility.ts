@@ -23,15 +23,15 @@ import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 export default class FormAbility extends FormExtension {
     private TAG: string = 'FormAbility';
     onAddForm(want) {
-        Log.info(this.TAG, `form onCreate. want ${JSON.stringify(want)}`);
+        Log.info(this.TAG, `form onAddForm. want ${JSON.stringify(want)}`);
         this.init();
         let param = want.parameters;
         let formId = param['ohos.extra.param.key.form_identity'];
-        Log.info(this.TAG, `form onCreate formId: ${formId}`);
+        Log.info(this.TAG, `form onAddForm formId: ${formId}`);
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE).then(() => {
             let formController: FormController = formControllerManager.getController(formId);
-            Log.info(this.TAG, `form onCreate. formController ${formController}`);
+            Log.info(this.TAG, `form onAddForm. formController ${formController}`);
             formController = (formController == null) ? formControllerManager.createFormController(formId,
                 Constants.PHOTOS_FORM_OPERATION_MODE_NONE) : formController;
             if (formController == null) {
