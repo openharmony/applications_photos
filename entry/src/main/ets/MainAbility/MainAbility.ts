@@ -15,7 +15,7 @@
 
 import deviceInfo from '@ohos.deviceInfo';
 import window from '@ohos.window';
-import Ability from '@ohos.application.Ability';
+import Ability from '@ohos.app.ability.UIAbility';
 import wantConstant from '@ohos.ability.wantConstant';
 import { Log } from '../../../../../common/base/src/main/ets/utils/Log';
 import screenManager from '../../../../../common/base/src/main/ets/manager/ScreenManager';
@@ -104,6 +104,7 @@ export default class MainAbility extends Ability {
                "ohos.permission.DISTRIBUTED_DATASYNC"
            ];
            for (let permission of requestPermissionList) {
+               // @ts-ignore
                atManager.createAtManager().checkAccessToken(appInfo.accessTokenId, permission).then((status) => {
                    if (status == atManager.GrantStatus.PERMISSION_DENIED) {
                        Log.error(this.TAG, `Failed to checkAccessToken permission = ${permission}`);
