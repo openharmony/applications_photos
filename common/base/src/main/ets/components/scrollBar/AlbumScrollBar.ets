@@ -48,8 +48,8 @@ export struct AlbumScrollBar {
         })
         .padding({
             bottom: this.hasTabBarShow
-                ? (this.hasSideBar ? $r('app.float.album_set_page_padding_end') : $r('app.float.album_set_page_padding_end_112'))
-                : (this.hasSideBar ? 0 : $r('app.float.album_set_tab_bar_height'))
+                ? (this.hasSideBar ? $r('app.float.album_set_page_padding_end_112') : $r('app.float.album_set_page_padding_end_168'))
+                : (this.hasSideBar ? $r('app.float.album_set_tab_bar_height') : $r('app.float.album_set_page_padding_end_112'))
         })
     }
 }
