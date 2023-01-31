@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import FormExtension from '@ohos.application.FormExtension';
+import FormExtension from '@ohos.app.form.FormExtensionAbility';
 import { Log } from '../../../../../common/base/src/main/ets/utils/Log';
 import { FormControllerManager } from './controller/FormControllerManager';
 import { FormController } from './controller/FormController';
@@ -22,16 +22,16 @@ import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 
 export default class FormAbility extends FormExtension {
     private TAG: string = 'FormAbility';
-    onCreate(want) {
-        Log.info(this.TAG, `form onCreate. want ${JSON.stringify(want)}`);
+    onAddForm(want) {
+        Log.info(this.TAG, `form onAddForm. want ${JSON.stringify(want)}`);
         this.init();
         let param = want.parameters;
         let formId = param['ohos.extra.param.key.form_identity'];
-        Log.info(this.TAG, `form onCreate formId: ${formId}`);
+        Log.info(this.TAG, `form onAddForm formId: ${formId}`);
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE).then(() => {
             let formController: FormController = formControllerManager.getController(formId);
-            Log.info(this.TAG, `form onCreate. formController ${formController}`);
+            Log.info(this.TAG, `form onAddForm. formController ${formController}`);
             formController = (formController == null) ? formControllerManager.createFormController(formId,
                 Constants.PHOTOS_FORM_OPERATION_MODE_NONE) : formController;
             if (formController == null) {
@@ -45,40 +45,40 @@ export default class FormAbility extends FormExtension {
         return null;
     }
 
-    onCastToNormal(formId) {
-        Log.info(this.TAG, `onCastToNormal, formId: ${formId}`);
+    onCastToNormalForm(formId) {
+        Log.info(this.TAG, `onCastToNormalForm, formId: ${formId}`);
     }
 
-    onUpdate(formId) {
-        Log.info(this.TAG, `onUpdate, formId: ${formId} context ${JSON.stringify(this.context)}`);
+    onUpdateForm(formId) {
+        Log.info(this.TAG, `onUpdateForm, formId: ${formId} context ${JSON.stringify(this.context)}`);
         // 经常起来后可能直接走onUpdate， 所以要初始化一下
         this.init();
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.updateController(formId);
     }
 
-    onVisibilityChange(newStatus) {
-        Log.info(this.TAG, `onVisibilityChange, newStatus: ${JSON.stringify(newStatus)}`);
-        // 经常起来后可能直接走onVisibilityChange， 所以要初始化一下
+    onChangeFormVisibility(newStatus) {
+        Log.info(this.TAG, `onChangeFormVisibility, newStatus: ${JSON.stringify(newStatus)}`);
+        // 经常起来后可能直接走onChangeFormVisibility， 所以要初始化一下
         this.init();
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         for (let key in newStatus) {
-            Log.info(this.TAG, `onVisibilityChange, key:${key}  value ${newStatus[key]}`);
+            Log.info(this.TAG, `onChangeFormVisibility, key:${key}  value ${newStatus[key]}`);
             let formId = key;
             formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE);
         }
     }
 
-    onEvent(formId, message) {
-        Log.info(this.TAG, `onEvent, formId: ${formId}, message: ${message}`);
+    onFormEvent(formId, message) {
+        Log.info(this.TAG, `onFormEvent, formId: ${formId}, message: ${message}`);
         // 经常起来后可能直接走onEvent， 所以要初始化一下
         this.init();
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.onEvent(formId, message);
     }
 
-    onDestroy(formId) {
-        Log.info(this.TAG, `onDestroy, formId: ${formId}`);
+    onRemoveForm(formId) {
+        Log.info(this.TAG, `onRemoveForm, formId: ${formId}`);
         // 经常起来后可能直接走onDestroy， 所以要初始化一下
         this.init();
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();

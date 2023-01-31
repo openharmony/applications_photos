@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 //@ts-ignore
-import fileshare from '@ohos.fileshare';
+import fileShare from '@ohos.fileshare';
 import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 
 const TAG = "SelectUtil"
@@ -33,7 +33,8 @@ export class SelectUtil {
 
     static async grantPermissionForUri(uri: string, bundleName: string): Promise<void> {
         Log.debug(TAG, `start uri grant. bundleName: ${bundleName}`);
-        await fileshare.grantUriPermission(uri, bundleName, SelectUtil.THIRD_URI_READ_PERMISSIONS);
+        // @ts-ignore
+        await fileShare.grantUriPermission(uri, bundleName, SelectUtil.THIRD_URI_READ_PERMISSIONS);
     }
 
     static async grantPermissionForUris(uris: Array<string>, bundleName: string): Promise<void> {
