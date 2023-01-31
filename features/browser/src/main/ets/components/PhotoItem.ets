@@ -236,7 +236,7 @@ export struct PhotoItem {
             .onClick(() => {
                 this.broadCast.emit(Constants.TOGGLE_BAR, [null]);
             })
-            .gesture(
+            .parallelGesture(
             GestureGroup(GestureMode.Parallel,
             PinchGesture({
                 fingers: 2,
