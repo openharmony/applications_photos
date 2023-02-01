@@ -239,7 +239,6 @@ export struct AlbumSetPage {
         if (this.isShow && this.isInCurrentTab) {
             this.onActive();
             this.createAlbum();
-            this.isHideScrollBar = (this.albumsDataSource.totalCount() <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         } else if (!this.isShow && this.isInCurrentTab) {
             this.onInActive();
         } else {
@@ -400,6 +399,7 @@ export struct AlbumSetPage {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
                 this.isEmpty = isEmpty;
                 this.albumsDataSource.notifyDataReload();
+                this.isHideScrollBar = (this.albumsDataSource.totalCount() <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
             })
         } else if (this.isActive) {
             this.albumsDataSource.dataRemove();
