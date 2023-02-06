@@ -104,7 +104,7 @@ export struct CameraGridItemComponent {
       'resultCode': 0,
       'want': {
         'parameters': {
-          'select-item-list': uri,
+          'select-item-list': [uri],
         }
       }
     };
