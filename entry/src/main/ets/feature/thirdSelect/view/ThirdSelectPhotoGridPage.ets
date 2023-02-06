@@ -88,7 +88,7 @@ export struct ThirdSelectPhotoGridPage {
                     'resultCode': 0,
                     'want': {
                         'parameters': {
-                            'select-item-list': ''
+                            'select-item-list': []
                         }
                     }
                 };
