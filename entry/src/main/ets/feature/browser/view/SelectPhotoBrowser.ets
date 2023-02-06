@@ -217,7 +217,7 @@ struct SelectPhotoBrowser {
     }
 
     private setPickResult(): void {
-        let uriArray: string | string[];
+        let uriArray: string[] = [];
         if (this.isMultiPick) {
             uriArray = this.browserDataSource.getSelectedUris();
             Log.debug(TAG, `uri size: ${uriArray}`);
@@ -226,7 +226,7 @@ struct SelectPhotoBrowser {
             if (currentPhoto == undefined) {
                 return;
             }
-            uriArray = currentPhoto.uri;
+            uriArray = [currentPhoto.uri];
         }
         let abilityResult = {
             'resultCode': 0,
