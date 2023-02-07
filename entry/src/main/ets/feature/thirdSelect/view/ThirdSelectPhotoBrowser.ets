@@ -229,7 +229,7 @@ struct ThirdSelectPhotoBrowser {
                 AppStorage.Get(Constants.FORM_ITEM_DISPLAY_NAME), this.currentIndex, false]);
             return;
         }
-        let uriArray;
+        let uriArray = new Array<string>();
         if (this.isMultiPick) {
             uriArray = this.browserDataSource.getSelectedUris();
             Log.info(TAG, `uri size: ${uriArray}`);
@@ -238,14 +238,10 @@ struct ThirdSelectPhotoBrowser {
             if (currentPhoto == undefined) {
                 return;
             }
-            uriArray = currentPhoto.uri;
+            uriArray = [currentPhoto.uri];
         }
         let promise: Promise<void> = null;
-        if (this.isMultiPick) {
-            promise = SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
-        } else {
-            promise = SelectUtil.grantPermissionForUri(uriArray, this.bundleName);
-        }
+        promise = SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
         let abilityResult = {
             'resultCode': 0,
             'want': {
