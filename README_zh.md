@@ -142,7 +142,7 @@
        console.info(`test select single ${JSON.stringify(param)}`);
        if (param != null && param != undefined) {
          let uri = param['select-item-list'];
-         console.info(`test select single ${uri}`);
+         console.info(`test select single ${uri[0]}`);
        }
      }
    }, (error) => {
