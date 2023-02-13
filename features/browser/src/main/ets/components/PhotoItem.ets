@@ -144,11 +144,11 @@ export struct PhotoItem {
         if (this.item.orientation == MediaConstants.ROTATE_ONCE || this.item.orientation == MediaConstants.ROTATE_THIRD) {
             let componentWidth = vp2px(screenManager.getWinWidth());
             let componentHeight = vp2px(screenManager.getWinHeight());
-            let widthScale = componentWidth / (this.item.imgWidth == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgWidth);
-            let heightScale = componentHeight / (this.item.imgHeight == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgHeight);
+            let widthScale = componentWidth / (this.item.width == 0 ? MediaConstants.DEFAULT_SIZE : this.item.width);
+            let heightScale = componentHeight / (this.item.height == 0 ? MediaConstants.DEFAULT_SIZE : this.item.height);
             let screenScale = widthScale > heightScale ? heightScale : widthScale;
-            let reWidthScale = componentWidth / (this.item.imgHeight == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgHeight);
-            let reHeightScale = componentHeight / (this.item.imgWidth == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgWidth);
+            let reWidthScale = componentWidth / (this.item.height == 0 ? MediaConstants.DEFAULT_SIZE : this.item.height);
+            let reHeightScale = componentHeight / (this.item.width == 0 ? MediaConstants.DEFAULT_SIZE : this.item.width);
             let reScale = reWidthScale > reHeightScale ? reHeightScale : reWidthScale;
             let scale = screenScale / reScale;
             this.imgScale = scale;
