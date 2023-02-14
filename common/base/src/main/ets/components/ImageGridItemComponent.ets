@@ -154,7 +154,6 @@ export struct ImageGridItemComponent {
         Stack({ alignContent: Alignment.Start }) {
             Image(this.isError ? this.mediaItem.getAlt() : this.thumbnail)
                 .aspectRatio(1)
-                .rotate({ x: 0, y: 0, z: 1, angle: this.isError ? 0 : this.mediaItem.orientation })
                 .objectFit(ImageFit.Cover)
                 .autoResize(false)
                 .onComplete(() => {
