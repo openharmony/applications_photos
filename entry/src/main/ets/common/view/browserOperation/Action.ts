@@ -120,7 +120,7 @@ export class Action {
         id: ActionID.CLEAR_RECYCLE,
         iconRes: $r('app.media.ic_gallery_public_delete_line'),
         textRes: $r('app.string.action_clear_recycle'),
-        actionType: $r('app.string.action_delete')
+        actionType: $r('app.string.action_clear_recycle')
     });
     public static CLEAR_RECYCLE_INVALID = new Action({
         id: ActionID.CLEAR_RECYCLE_INVALID,
@@ -185,7 +185,7 @@ export class Action {
         id: ActionID.DESELECT_ALL,
         iconRes: $r('app.media.ic_gallery_public_select_all_action'),
         textRes: $r('app.string.action_deselect_all'),
-        actionType: $r('app.string.action_select_all')
+        actionType: $r('app.string.action_deselect_all')
     });
     public static SETTING = new Action({
         id: ActionID.SETTING,
