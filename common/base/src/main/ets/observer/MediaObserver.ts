@@ -45,26 +45,30 @@ class MediaObserver {
 
         if (this.callbacks.length == 1) {
             Log.info(TAG, 'registerObserver register media');
-            mediaModel.getMediaLibrary().on('imageChange', () => {
-                Log.info(TAG, 'registerObserver on image');
-                this.sendNotify(MediaConstants.MEDIA_TYPE_IMAGE);
-            })
-            mediaModel.getMediaLibrary().on('videoChange', () => {
-                Log.info(TAG, 'registerObserver on video');
-                this.sendNotify(MediaConstants.MEDIA_TYPE_VIDEO);
-            })
-            mediaModel.getMediaLibrary().on('deviceChange', () => {
-                Log.info(TAG, 'registerObserver on device');
-                this.sendNotify(MediaConstants.MEDIA_TYPE_DEVICE);
-            })
-            mediaModel.getMediaLibrary().on('albumChange', () => {
-                Log.info(TAG, 'registerObserver on album');
-                this.sendNotify(MediaConstants.MEDIA_TYPE_ALBUM);
-            })
-            mediaModel.getMediaLibrary().on('remoteFileChange', () => {
-                Log.info(TAG, 'registerObserver on remoteFile');
-                this.sendNotify(MediaConstants.MEDIA_TYPE_REMOTE);
-            })
+            try {
+                mediaModel.getMediaLibrary().on('imageChange', () => {
+                    Log.info(TAG, 'registerObserver on image');
+                    this.sendNotify(MediaConstants.MEDIA_TYPE_IMAGE);
+                })
+                mediaModel.getMediaLibrary().on('videoChange', () => {
+                    Log.info(TAG, 'registerObserver on video');
+                    this.sendNotify(MediaConstants.MEDIA_TYPE_VIDEO);
+                })
+                mediaModel.getMediaLibrary().on('deviceChange', () => {
+                    Log.info(TAG, 'registerObserver on device');
+                    this.sendNotify(MediaConstants.MEDIA_TYPE_DEVICE);
+                })
+                mediaModel.getMediaLibrary().on('albumChange', () => {
+                    Log.info(TAG, 'registerObserver on album');
+                    this.sendNotify(MediaConstants.MEDIA_TYPE_ALBUM);
+                })
+                mediaModel.getMediaLibrary().on('remoteFileChange', () => {
+                    Log.info(TAG, 'registerObserver on remoteFile');
+                    this.sendNotify(MediaConstants.MEDIA_TYPE_REMOTE);
+                })
+            } catch (err) {
+                Log.error(TAG, `registerObserver faild, err: ${JSON.stringify(err)}`);
+            }
         }
     }
 
