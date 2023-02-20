@@ -161,6 +161,7 @@ export struct AlbumGridItemNewStyle {
                 } else {
                     Row() {
                         Image(this.item.getThumbnail())
+                            .syncLoad(true)
                             .width(this.cardWidth)
                             .height(this.cardHeight)
                             .transform({ y: this.transformV })
@@ -202,6 +203,7 @@ export struct AlbumGridItemNewStyle {
                 } else {
                     Row() {
                         Image(this.item.getThumbnail())
+                            .syncLoad(true)
                             .width(this.cardWidth)
                             .height(this.cardHeight)
                             .translate({ x: this.transformV })
