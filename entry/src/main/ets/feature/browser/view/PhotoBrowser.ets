@@ -259,7 +259,7 @@ struct PhotoBrowser {
         if (this.currentIndex == 0 || AppStorage.Get("isLeftSwiper") == 0) {
             this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, []);
         } else {
-            Log.info(TAG, `onDeleteEnd curIndex : ` + this.currentIndex);
+            Log.info(TAG, `operateEnd curIndex : ` + this.currentIndex);
             this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, []);
             this.currentIndex--;
         }
