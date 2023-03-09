@@ -14,6 +14,7 @@
  */
 //@ts-ignore
 import fileShare from '@ohos.fileshare';
+import wantConstant from '@ohos.app.ability.wantConstant';
 import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
 
 const TAG = "SelectUtil"
@@ -31,10 +32,10 @@ export class SelectUtil {
         return uriArray;
     }
 
-    static async grantPermissionForUri(uri: string, bundleName: string): Promise<void> {
+    private static async grantPermissionForUri(uri: string, bundleName: string): Promise<void> {
         Log.debug(TAG, `start uri grant. bundleName: ${bundleName}`);
         // @ts-ignore
-        await fileShare.grantUriPermission(uri, bundleName, SelectUtil.THIRD_URI_READ_PERMISSIONS);
+        await fileShare.grantUriPermission(uri, bundleName, wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION);
     }
 
     static async grantPermissionForUris(uris: Array<string>, bundleName: string): Promise<void> {
