@@ -247,15 +247,13 @@ struct PhotoBrowser {
                 mediaDataItemCache.get(currentPhoto.uri).favouriteStatus = currentPhoto.favouriteStatus;
             }
             // 收藏相册进入大图，点击取消收藏会导致Item成员变少，所以要dataRemove
-            this.browserDataSource.dataRemove();
+            this.operateEnd();
             this.updateMenu();
             this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
         }
     }
 
-    private onDeleteEnd() {
-        Log.debug(TAG, `onDeleteEnd start`);
-        AppStorage.SetOrCreate("isDelete", 0);
+    private operateEnd() {
         if (this.currentIndex == 0 || AppStorage.Get("isLeftSwiper") == 0) {
             this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, []);
         } else {
@@ -263,6 +261,12 @@ struct PhotoBrowser {
             this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, []);
             this.currentIndex--;
         }
+    }
+
+    private onDeleteEnd() {
+        Log.debug(TAG, `onDeleteEnd start`);
+        AppStorage.SetOrCreate("isDelete", 0);
+        this.operateEnd();
     }
 
     private setOrientation() {
