@@ -65,7 +65,23 @@
               "entity.system.home"
             ],
             "actions": [
-              "action.system.home"
+              "action.system.home",
+              "ohos.want.action.viewData",
+              "ohos.want.action.photoPicker"
+            ],
+            "uris": [
+              {
+                "type": "image/*"
+              },
+              {
+                "type": "video/*"
+              },
+              {
+                "type": "multipleselect"
+              },
+              {
+                "type": "singleselect"
+              }
             ]
           }
         ]
