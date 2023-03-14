@@ -108,9 +108,18 @@ export struct TabBar {
 // single tab
 @Component
 struct Tab {
-  @ObjectLink tabItem: TabItem;
+  tabItem: TabItem;
+  @State isSelected: boolean = false;
   index: number;
   onTabSelected: Function;
+  appBroadcast: Broadcast = broadcastManager.getBroadcast();
+
+  aboutToAppear() {
+    this.isSelected = this.tabItem.isSelected;
+    this.appBroadcast.on(BroadcastConstants.RESET_TABBAR_SELECTED_STATUE, (pageNumber: number) => {
+      this.isSelected = this.index == pageNumber;
+    })
+  }
 
   build() {
     Flex({
@@ -119,7 +128,7 @@ struct Tab {
       justifyContent: FlexAlign.Center
     }) {
       Stack() {
-        Image(this.tabItem.getIcon(this.tabItem.isSelected))
+        Image(this.tabItem.getIcon(this.isSelected))
           .height($r('app.float.icon_size'))
           .width($r('app.float.icon_size'))
           .objectFit(ImageFit.Fill)
@@ -128,7 +137,7 @@ struct Tab {
       Text(this.tabItem.name)
         .fontSize($r('sys.float.ohos_id_text_size_caption1'))
         .fontFamily($r('app.string.id_text_font_family_medium'))
-        .fontColor(this.tabItem.getTextColor())
+        .fontColor(this.tabItem.getTextColor(this.isSelected))
         .padding({
           top: $r('app.float.tab_bar_text_padding_top'),
           right: $r('app.float.tab_bar_text_padding_horizontal'),
@@ -138,6 +147,7 @@ struct Tab {
     .onClick(() => {
       this.onTabSelected && this.onTabSelected(this.index);
       this.tabItem.isSelected = true;
+      this.appBroadcast.emit(BroadcastConstants.RESET_TABBAR_SELECTED_STATUE, [this.index]);
     })
   }
 }
