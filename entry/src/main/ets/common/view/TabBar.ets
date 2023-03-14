@@ -216,7 +216,7 @@ export struct TabBarForAlbumSet {
 struct TabWithText {
   private TAG: string = 'TabWithText'
   @Consume isAlbumSetSelectedMode: boolean;
-  @ObjectLink tabItemWithText: TabItemWithText;
+  tabItemWithText: TabItemWithText;
   @State TabWidth: number = 0;
   index: number;
   onTabSelected: Function;
