@@ -256,9 +256,9 @@ struct ThirdSelectPhotoBrowser {
             globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
                 Log.info(TAG, `terminateSelf result: ${result}`);
             });
-        } catch(function(err) {
+        } catch (err) {
             Log.error(TAG, `grant permission error: ${JSON.stringify(err)}`);
-        });
+        };
     }
 
     pageTransition() {
