@@ -251,12 +251,12 @@ struct ThirdSelectPhotoBrowser {
             }
         };
         Log.info(TAG, `terminateSelfWithResult result: ${JSON.stringify(abilityResult)}`);
-        promise.then(function() {
+        try {
             Log.info(TAG, `grant permission success.`);
             globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
                 Log.info(TAG, `terminateSelf result: ${result}`);
             });
-        }).catch(function(err) {
+        } catch(function(err) {
             Log.error(TAG, `grant permission error: ${JSON.stringify(err)}`);
         });
     }
