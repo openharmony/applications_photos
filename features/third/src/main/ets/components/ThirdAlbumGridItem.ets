@@ -72,23 +72,13 @@ export struct ThirdAlbumGridItem {
         this.gridHeight = gridWidth / this.gridAspectRatio;
         this.bigWidth = gridWidth * 2 + WindowConstants.ALBUM_SET_GUTTER;
 
-        if (this.item.orientation == MediaConstants.ROTATE_ONCE || this.item.orientation == MediaConstants.ROTATE_THIRD) {
-            this.cardWidth = this.gridHeight;
-            if (this.isBigCard) {
-                this.cardHeight = this.bigWidth;
-            } else {
-                this.cardHeight = gridWidth;
-            }
-            this.transformV = (this.cardHeight - this.cardWidth) / 2;
+        if (this.isBigCard) {
+            this.cardWidth = this.bigWidth;
         } else {
-            if (this.isBigCard) {
-                this.cardWidth = this.bigWidth;
-            } else {
-                this.cardWidth = gridWidth;
-            }
-            this.cardHeight = this.gridHeight;
-            this.transformV = 0;
+            this.cardWidth = gridWidth;
         }
+        this.cardHeight = this.gridHeight;
+        this.transformV = 0;
 
         Log.info(TAG, `is big card : ${this.isBigCard}`);
         Log.info(TAG, `little grid size is: ${gridWidth}x${this.gridHeight}`);
@@ -112,7 +102,7 @@ export struct ThirdAlbumGridItem {
                             centerX: this.cardWidth / 2,
                             centerY: this.cardHeight / 2,
                             z: 1,
-                            angle: this.item.orientation
+                            angle: 0
                         })
                         .fillColor($r('app.color.empty_or_recycle_album_icon'))
                         .onError(() => {
@@ -136,7 +126,7 @@ export struct ThirdAlbumGridItem {
                             centerX: this.cardWidth / 2,
                             centerY: this.cardHeight / 2,
                             z: 1,
-                            angle: this.item.orientation
+                            angle: 0
                         })
                         .fillColor($r('app.color.empty_or_recycle_album_icon'))
                         .onError(() => {

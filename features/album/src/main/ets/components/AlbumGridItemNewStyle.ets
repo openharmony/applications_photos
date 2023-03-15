@@ -92,23 +92,13 @@ export struct AlbumGridItemNewStyle {
         this.bigWidth = gridWidth * 2 + WindowConstants.ALBUM_SET_GUTTER;
         this.icHeight = this.gridHeight - WindowConstants.ALBUM_SET_NEW_ICON_MARGIN - WindowConstants.TEXT_SIZE_BODY2 - WindowConstants.TEXT_SIZE_SUB_TITLE1;
 
-        if (this.item.orientation == MediaConstants.ROTATE_ONCE || this.item.orientation == MediaConstants.ROTATE_THIRD) {
-            this.cardWidth = this.gridHeight;
-            if (this.isBigCard) {
-                this.cardHeight = this.bigWidth;
-            } else {
-                this.cardHeight = gridWidth;
-            }
-            this.transformV = (this.cardHeight - this.cardWidth) / 2;
+        if (this.isBigCard) {
+            this.cardWidth = this.bigWidth;
         } else {
-            if (this.isBigCard) {
-                this.cardWidth = this.bigWidth;
-            } else {
-                this.cardWidth = gridWidth;
-            }
-            this.cardHeight = this.gridHeight;
-            this.transformV = 0;
+            this.cardWidth = gridWidth;
         }
+        this.cardHeight = this.gridHeight;
+        this.transformV = 0;
     }
 
     onModeChange(): void {
@@ -170,7 +160,7 @@ export struct AlbumGridItemNewStyle {
                                 centerX: this.cardWidth / 2,
                                 centerY: this.cardHeight / 2,
                                 z: 1,
-                                angle: this.item.orientation
+                                angle: 0
                             })
                             .onError(() => {
                                 Log.debug(TAG, 'album is empty or its cover is error');
@@ -212,7 +202,7 @@ export struct AlbumGridItemNewStyle {
                                 centerX: this.cardWidth / 2,
                                 centerY: this.cardHeight / 2,
                                 z: 1,
-                                angle: this.item.orientation
+                                angle: 0
                             })
                             .onError(() => {
                                 Log.error(TAG, `album is empty or its cover is error ${this.thumbnail}`);
