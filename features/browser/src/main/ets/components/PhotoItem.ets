@@ -186,7 +186,7 @@ export struct PhotoItem {
                     })
                     .onComplete(() => {
                         startTrace(`PhotoItemComplete_${this.item}`);
-                        Log.info(TAG, `onComplete finish index: ${JSON.stringify(this.item)}, uri: ${this.thumbnail}.`);
+                        Log.info(TAG, `onComplete finish, index: ${this.item.index}, item: ${JSON.stringify(this.item)}, uri: ${this.thumbnail}.`);
                         this.showError = false;
                         this.isLoading = false;
                         if (this.updateTransition == this.item.index) {
