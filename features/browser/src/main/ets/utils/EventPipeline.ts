@@ -94,7 +94,6 @@ export class EventPipeline {
 
     // pull down to return flag to prevent multiple triggers
     private isExiting = false;
-    private orientation = 0;
 
 		private updateMatrix: Function;
 
@@ -105,7 +104,6 @@ export class EventPipeline {
 				this.updateMatrix = updateMatrix;
         this.width = this.item.imgWidth == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgWidth;
         this.height = this.item.imgHeight == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgHeight;
-        this.orientation = this.item.orientation || 0;
         this.evaluateScales();
     }
 
@@ -113,7 +111,6 @@ export class EventPipeline {
         this.item = item;
         this.width = this.item.imgWidth == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgWidth;
         this.height = this.item.imgHeight == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgHeight;
-        this.orientation = this.item.orientation || 0;
         this.evaluateScales();
     }
 
@@ -159,39 +156,11 @@ export class EventPipeline {
         if (!this.hasReachLeft && !this.hasReachRight && isEnlarged) {
             direction = PanDirection.All;
         } else if (!this.hasReachLeft && this.hasReachRight && isEnlarged) {
-            if (this.orientation == MediaConstants.ROTATE_TWICE) {
-                direction = PanDirection.Vertical | PanDirection.Left;
-            } else {
-                direction = PanDirection.Vertical | PanDirection.Right;
-            }
+            direction = PanDirection.Vertical | PanDirection.Right;
         } else if (this.hasReachLeft && !this.hasReachRight && isEnlarged) {
-            if (this.orientation == MediaConstants.ROTATE_TWICE) {
-                direction = PanDirection.Vertical | PanDirection.Right;
-            } else {
-                direction = PanDirection.Vertical | PanDirection.Left;
-            }
+            direction = PanDirection.Vertical | PanDirection.Left;
         } else {
             direction = PanDirection.Vertical;
-        }
-
-        if ((this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) && isEnlarged) {
-            if (!this.hasReachTop && !this.hasReachBottom) {
-                direction = PanDirection.All;
-            } else if (this.hasReachTop && !this.hasReachBottom) {
-                if (this.orientation == MediaConstants.ROTATE_THIRD) {
-                    direction = PanDirection.Vertical | PanDirection.Left;
-                } else {
-                    direction = PanDirection.Vertical | PanDirection.Right;
-                }
-            } else if (!this.hasReachTop && this.hasReachBottom) {
-                if (this.orientation == MediaConstants.ROTATE_THIRD) {
-                    direction = PanDirection.Vertical | PanDirection.Right;
-                } else {
-                    direction = PanDirection.Vertical | PanDirection.Left;
-                }
-            } else {
-                direction = PanDirection.Vertical;
-            }
         }
 
         Log.info(TAG, `emitDirectionChange reaches: ${[this.hasReachLeft, this.hasReachRight, this.hasReachTop, this.hasReachBottom]}, scale ${scale}, direction: ${direction}`);
@@ -225,25 +194,13 @@ export class EventPipeline {
             let limits = this.evaluateOffsetRange(scale);
             offset = this.evaluateOffset();
             // the offset in the X direction is always limited for non shrinking scenes
-            if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-                offset[0] = clamp(offset[0], limits[2], limits[3]);
-            } else {
-                offset[0] = clamp(offset[0], limits[0], limits[1]);
-            }
+            offset[0] = clamp(offset[0], limits[0], limits[1]);
             if (Number(scale.toFixed(Constants.RESERVED_DIGITS)) > Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) {
                 // cannot pull down to return, limit y
-                if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-                    offset[1] = clamp(offset[1], limits[0], limits[1]);
-                } else {
-                    offset[1] = clamp(offset[1], limits[2], limits[3]);
-                }
+                offset[1] = clamp(offset[1], limits[2], limits[3]);
             } else {
                 // can pull down to return to the scene, and only limit y to drag upward, limit the lower bound
-                if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-                    offset[1] = Math.max(limits[0], offset[1]);
-                } else {
-                    offset[1] = Math.max(limits[2], offset[1]);
-                }
+                offset[1] = Math.max(limits[2], offset[1]);
             }
         } else {
             // When zooming in, adjust the zoom center to the display center point
@@ -320,9 +277,6 @@ export class EventPipeline {
         let heightScale = this.componentHeight / this.item.imgHeight;
         screenScale = widthScale > heightScale ? heightScale : widthScale;
         let scale = this.lastScale * this.scale * screenScale;
-        if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-            scale = this.lastScale * this.scale;
-        }
         let imgDisplayWidth = 0;
         let imgDisplayHeight = 0;
         imgDisplayWidth = this.width * scale;
@@ -364,14 +318,6 @@ export class EventPipeline {
         let imgLeftBound = imgDisplayBounds[0];
         this.hasReachLeft = imgLeftBound > -1;
         this.hasReachRight = imgLeftBound + imgDisplayWidth < this.componentWidth + 1;
-
-        if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-            let offset = this.evaluateOffset();
-            let limits = this.evaluateOffsetRange(this.scale * this.lastScale);
-            let offsetY = offset[1];
-            this.hasReachTop = offsetY > 0 && offsetY >= limits[1];
-            this.hasReachBottom = offsetY < 0 && offsetY <= limits[0];
-        }
     }
 
     /**
@@ -383,15 +329,9 @@ export class EventPipeline {
     private evaluateOffsetRange(scale: number): [number, number, number, number] {
         let result: [number, number, number, number] = [0, 0, 0, 0];
         let screenScale = 1;
-        if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-            let widthScale = this.componentWidth / this.item.imgHeight;
-            let heightScale = this.componentHeight / this.item.imgWidth;
-            screenScale = widthScale > heightScale ? heightScale : widthScale;
-        } else {
-            let widthScale = this.componentWidth / this.item.imgWidth;
-            let heightScale = this.componentHeight / this.item.imgHeight;
-            screenScale = widthScale > heightScale ? heightScale : widthScale;
-        }
+        let widthScale = this.componentWidth / this.item.imgWidth;
+        let heightScale = this.componentHeight / this.item.imgHeight;
+        screenScale = widthScale > heightScale ? heightScale : widthScale;
         let left = (screenScale * scale * this.width - this.componentWidth) / Constants.NUMBER_2;
         let top = (screenScale * scale * this.height - this.componentHeight) / Constants.NUMBER_2;
         top = Math.max(top, 0);
@@ -441,7 +381,6 @@ export class EventPipeline {
      * @param offsetY offsetY
      */
     onMove(offsetX: number, offsetY: number) {
-        Log.debug(TAG, `onMove orientation: ${this.orientation}`)
         if (this.isInAnimation || this.isExiting) {
             return;
         }
@@ -453,39 +392,17 @@ export class EventPipeline {
         * (this.defaultScale - this.scale) * this.lastScale;
         let moveX = offsetX;
         let moveY = offsetY;
-        if (this.orientation == MediaConstants.ROTATE_ONCE) {
-            moveX = offsetY;
-            moveY = -1 * offsetX;
-        } else if (this.orientation == MediaConstants.ROTATE_TWICE) {
-            moveX = -1 * offsetX;
-            moveY = -1 * offsetY;
-        } else if (this.orientation == MediaConstants.ROTATE_THIRD) {
-            moveX = -1 * offsetY;
-            moveY = offsetX;
-        }
         let offX = measureX + moveX;
         let offY = measureY + moveY;
         if (Number(scale.toFixed(Constants.RESERVED_DIGITS)) > Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) {
             // The offset in the X direction is always limited for non shrinking scenes
-            if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-                offX = clamp(offX, limits[Constants.NUMBER_2], limits[Constants.NUMBER_3]);
-            } else {
-                offX = clamp(offX, limits[0], limits[1]);
-            }
+            offX = clamp(offX, limits[0], limits[1]);
             if (Number(scale.toFixed(Constants.RESERVED_DIGITS)) > Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) {
                 // cannot drop down to return to the scene, limit y
-                if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-                    offY = clamp(offY, limits[0], limits[1]);
-                } else {
-                    offY = clamp(offY, limits[Constants.NUMBER_2], limits[Constants.NUMBER_3]);
-                }
+                offY = clamp(offY, limits[Constants.NUMBER_2], limits[Constants.NUMBER_3]);
             } else {
                 // pull down to return to the scene, and only limit y to drag upward, that is, limit the lower bound
-                if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-                    offY = Math.max(limits[0], offY);
-                } else {
-                    offY = Math.max(limits[Constants.NUMBER_2], offY);
-                }
+                offY = Math.max(limits[Constants.NUMBER_2], offY);
             }
         }
         let tmpX = offX - measureX;
@@ -624,26 +541,14 @@ export class EventPipeline {
         if (Number(scale.toFixed(Constants.RESERVED_DIGITS)) > Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) {
             let limits = this.evaluateOffsetRange(scale);
             // The offset in the X direction is always limited for non shrinking scenes
-            if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-                offset[0] = clamp(offset[0], limits[Constants.NUMBER_2], limits[Constants.NUMBER_3]);
-            } else {
-                offset[0] = clamp(offset[0], limits[0], limits[1]);
-            }
+            offset[0] = clamp(offset[0], limits[0], limits[1]);
             if (Number(scale.toFixed(Constants.RESERVED_DIGITS)) > Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) {
                 // Cannot drop down to return to the scene, limit y
-                if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-                    offset[1] = clamp(offset[1], limits[0], limits[1]);
-                } else {
-                    offset[1] = clamp(offset[1], limits[Constants.NUMBER_2], limits[Constants.NUMBER_3]);
-                }
+                offset[1] = clamp(offset[1], limits[Constants.NUMBER_2], limits[Constants.NUMBER_3]);
             } else {
                 // You can pull down to return to the scene, and only limit y to drag upward,
                 // that is, limit the lower bound
-                if (this.orientation == MediaConstants.ROTATE_ONCE || this.orientation == MediaConstants.ROTATE_THIRD) {
-                    offset[1] = Math.max(limits[0], offset[1]);
-                } else {
-                    offset[1] = Math.max(limits[Constants.NUMBER_2], offset[1]);
-                }
+                offset[1] = Math.max(limits[Constants.NUMBER_2], offset[1]);
             }
         } else {
             // When zooming in, adjust the zoom center to the display center point
