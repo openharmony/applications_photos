@@ -221,7 +221,7 @@ struct ThirdSelectPhotoBrowser {
         }
     }
 
-    private setPickResult(): void {
+    private async setPickResult() {
         Log.debug(TAG, `setPickResult ${this.isFromFa}`);
         if (this.isFromFa) {
             this.appBroadcast.emit(BroadcastConstants.SAVE_FORM_EDITOR_DATA,
@@ -240,8 +240,7 @@ struct ThirdSelectPhotoBrowser {
             }
             uriArray = [currentPhoto.uri];
         }
-        let promise: Promise<void> = null;
-        promise = SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
+
         let abilityResult = {
             'resultCode': 0,
             'want': {
@@ -252,6 +251,7 @@ struct ThirdSelectPhotoBrowser {
         };
         Log.info(TAG, `terminateSelfWithResult result: ${JSON.stringify(abilityResult)}`);
         try {
+            await SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
             Log.info(TAG, `grant permission success.`);
             globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
                 Log.info(TAG, `terminateSelf result: ${result}`);
