@@ -221,7 +221,7 @@ struct ThirdSelectPhotoBrowser {
         }
     }
 
-    private async setPickResult() {
+    private setPickResult() {
         Log.debug(TAG, `setPickResult ${this.isFromFa}`);
         if (this.isFromFa) {
             this.appBroadcast.emit(BroadcastConstants.SAVE_FORM_EDITOR_DATA,
@@ -250,8 +250,8 @@ struct ThirdSelectPhotoBrowser {
             }
         };
         Log.info(TAG, `terminateSelfWithResult result: ${JSON.stringify(abilityResult)}`);
+        SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
         try {
-            await SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
             Log.info(TAG, `grant permission success.`);
             globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
                 Log.info(TAG, `terminateSelf result: ${result}`);
