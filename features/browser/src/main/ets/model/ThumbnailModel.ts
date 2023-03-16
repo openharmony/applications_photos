@@ -19,9 +19,8 @@ import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants
 
 export async function getThumbnail(mediaItem: MediaDataItem, isCurrent: boolean): Promise<string> {
     await mediaItem.load(true);
-    let orientation = mediaItem.orientation || 0;
-    let imgWidth = orientation == 0 || orientation == MediaConstants.ROTATE_TWICE ? mediaItem.width : mediaItem.height;
-    let imgHeight = orientation == 0 || orientation == MediaConstants.ROTATE_TWICE ? mediaItem.height : mediaItem.width;
+    let imgWidth = mediaItem.width;
+    let imgHeight = mediaItem.height;
     let scale = generateSampleSize(imgWidth, imgHeight, isCurrent);
     mediaItem.imgWidth = Math.ceil(mediaItem.width / scale);
     mediaItem.imgHeight = Math.ceil(mediaItem.height / scale);

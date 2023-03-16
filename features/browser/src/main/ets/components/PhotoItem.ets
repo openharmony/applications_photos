@@ -141,32 +141,10 @@ export struct PhotoItem {
             this.eventPipeline && this.eventPipeline.onDataChanged(this.item)
             return;
         }
-        if (this.item.orientation == MediaConstants.ROTATE_ONCE || this.item.orientation == MediaConstants.ROTATE_THIRD) {
-            let componentWidth = vp2px(screenManager.getWinWidth());
-            let componentHeight = vp2px(screenManager.getWinHeight());
-            let widthScale = componentWidth / (this.item.width == 0 ? MediaConstants.DEFAULT_SIZE : this.item.width);
-            let heightScale = componentHeight / (this.item.height == 0 ? MediaConstants.DEFAULT_SIZE : this.item.height);
-            let screenScale = widthScale > heightScale ? heightScale : widthScale;
-            let reWidthScale = componentWidth / (this.item.height == 0 ? MediaConstants.DEFAULT_SIZE : this.item.height);
-            let reHeightScale = componentHeight / (this.item.width == 0 ? MediaConstants.DEFAULT_SIZE : this.item.width);
-            let reScale = reWidthScale > reHeightScale ? reHeightScale : reWidthScale;
-            let scale = screenScale / reScale;
-            this.imgScale = scale;
-            this.matrix = Matrix4.identity().scale({
-                x: scale,
-                y: scale
-            }).copy();
-            Log.debug(TAG, `onViewDataChanged scale:${scale}, componentSize:${componentWidth}x${componentHeight}\
-                width: ${this.item.imgWidth}, height: ${this.item.imgHeight}`);
-            this.eventPipeline && this.eventPipeline.setDefaultScale(scale);
-        } else {
-            this.matrix = Matrix4.identity().copy();
-            this.objectFit = ImageFit.Contain;
-            this.eventPipeline && this.eventPipeline.setDefaultScale(1);
-        }
+        this.matrix = Matrix4.identity().copy();
+        this.eventPipeline && this.eventPipeline.setDefaultScale(1);
         this.eventPipeline && this.eventPipeline.onDataChanged(this.item)
         this.firstLoad = false;
-        this.preItem.rotate = this.item.orientation;
         this.preItem.width = this.item.imgWidth;
         this.preItem.height = this.item.imgHeight;
         Log.debug(TAG, `onViewDataChanged thumbnail:${JSON.stringify(this.thumbnail)}`);
@@ -179,8 +157,7 @@ export struct PhotoItem {
         if (info.width == 0 || info.height == 0) {
             return 1;
         }
-        let orientation = info.orientation || 0;
-        return orientation == 0 || orientation == 180 ? info.width / info.height : info.height / info.width;
+        return  info.width / info.height;
     }
 
     build() {
@@ -193,7 +170,7 @@ export struct PhotoItem {
 
             Row() {
                 Image(this.thumbnail)
-                    .rotate({ x: 0, y: 0, z: 1, angle: this.item.orientation })
+                    .rotate({ x: 0, y: 0, z: 1, angle: 0 })
                     .syncLoad(true)
                     .transform(this.matrix)
                     .autoResize(false)
@@ -209,7 +186,7 @@ export struct PhotoItem {
                     })
                     .onComplete(() => {
                         startTrace(`PhotoItemComplete_${this.item}`);
-                        Log.info(TAG, `onComplete finish index: ${JSON.stringify(this.item)}, uri: ${this.thumbnail}.`);
+                        Log.info(TAG, `onComplete finish, index: ${this.item.index}, item: ${JSON.stringify(this.item)}, uri: ${this.thumbnail}.`);
                         this.showError = false;
                         this.isLoading = false;
                         if (this.updateTransition == this.item.index) {
