@@ -68,10 +68,7 @@ export class Loader {
         let context = new OffscreenCanvasRenderingContext2D(offWidth, offHeight, setting);
 
         context.save();
-        context.translate(offWidth / 2, offHeight / 2);
-        context.rotate(MathUtils.formulaAngle(orientation));
-        context.translate(-image.width / 2, -image.height / 2);
-        context.drawImage(image.pixelMap, 0, 0, image.width, image.height);
+        context.drawImage(image.pixelMap, 0, 0, offWidth, offHeight);
         context.restore();
 
         image.pixelMap && image.pixelMap.release();

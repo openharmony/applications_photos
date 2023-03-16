@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-import app from '@system.app'
 import { TimelinePage } from '../../../feature/timeline/view/TimelinePage';
 import { AlbumSetPage } from '../../../feature/album/view/AlbumSetPage';
 import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
@@ -52,8 +51,6 @@ struct IndexPage {
 
     aboutToAppear(): void {
         startTrace('indexPageAppearToShow');
-        app.setImageCacheCount(100);
-        app.setImageRawDataCacheSize(100*1024*1024);
         if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
             AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false);
             this.currentIndex = Constants.ALBUM_PAGE_INDEX;
