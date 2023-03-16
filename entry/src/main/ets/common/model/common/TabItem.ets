@@ -39,8 +39,8 @@ export class TabItem {
         return isSelected ? this.iconSelectedResource : this.iconResource;
     }
 
-    getTextColor(): Resource {
-        return this.isSelected ? this.textColorSelected : this.textColorDefault;
+    getTextColor(isSelected: boolean): Resource {
+        return isSelected ? this.textColorSelected : this.textColorDefault;
     }
 }
 

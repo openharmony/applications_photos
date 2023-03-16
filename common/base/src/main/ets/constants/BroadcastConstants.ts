@@ -56,4 +56,5 @@ export class BroadcastConstants {
     static readonly CHANGE_SWIPER_DURATION = 'change_swiper_duration';
     // USED for AppStorage
     static readonly LEFT_BLANK: string = 'leftBlank';
+    static readonly RESET_TABBAR_SELECTED_STATUE: string = 'reset_tabbar_selected_statue';
 }
