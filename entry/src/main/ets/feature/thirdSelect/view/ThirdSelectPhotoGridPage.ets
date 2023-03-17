@@ -314,14 +314,15 @@ export struct ThirdSelectPhotoGridPage {
                 Log.info(TAG, `terminateSelfWithResult result: ${result}`);
             });
         } else {
-            SelectUtil.grantPermissionForUris(uriArray, self.bundleName).then(function() {
+            SelectUtil.grantPermissionForUris(uriArray, self.bundleName);
+            try {
                 Log.info(TAG, `grant permission success.`);
                 globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
                     Log.info(TAG, `terminateSelfWithResult result: ${result}`);
                 });
-            }).catch(function(err) {
+            } catch (err) {
                 Log.info(TAG, `grant permission error: ${JSON.stringify(err)}`);
-            });
+            }
         }
     }
 }
