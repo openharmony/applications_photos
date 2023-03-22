@@ -46,6 +46,7 @@ struct FormEditorPage {
     fd: number = -1;
     fileAsset: MediaLib.FileAsset = null;
     displayName: string = '';
+    albumId: string = '';
     @State time: number = 30;
     @State intervalTime: Resource = $r('app.string.fa_play_interval_time_30');
     private saveDataFunc = this.saveData.bind(this);
@@ -76,7 +77,7 @@ struct FormEditorPage {
 
     bindFormData(): any {
         Log.debug(TAG, `bindFormData start formId: ${this.formId}`);
-        let image = "image_" + this.fd + "_formId_" + this.formId + this.arkUri;
+        let image = "image_" + this.fd + "_formId_" + this.formId + "_arkUri_" + this.arkUri + "_currentUri_" + this.fileAsset.uri;
         Log.debug(TAG, `bindFormData start image: ${image}`);
         let dataObj1: any = {
             "fd": this.fd == -1 ? false : true,
@@ -84,7 +85,10 @@ struct FormEditorPage {
             "albumName": this.displayName,
             "currentIndex": this.currentIndex,
             "isShow": this.isShow,
-            "formImages": JSON.parse(`{ "${image}": ${this.fd} }`)
+            "formImages": JSON.parse(`{ "${image}": ${this.fd} }`),
+            'uri': (this.fileAsset.uri != '') ? Constants.ACTION_URI_FORM_ABILITY : Constants.ACTION_URI_FORM_ABILITY_NONE,
+            'albumId': this.albumId,
+            'currentUri': this.fileAsset.uri
         };
         let dataObj = JSON.stringify(dataObj1);
         Log.info(TAG, `bindFormData, createFormBindingData dataObj2.data: ${dataObj}`);
@@ -141,6 +145,7 @@ struct FormEditorPage {
             msgDisplayName = displayName;
         }
         this.isShow = isShow;
+        this.albumId = albumId;
         this.displayName = msgDisplayName;
         Log.debug(TAG, `saveData msgDisplayName ${msgDisplayName}`);
         await dataStore.init();
@@ -155,7 +160,7 @@ struct FormEditorPage {
             let albumNameKey = 'albumName_' + this.formId;
             await dataStore.putData(albumNameKey, albumName);
             let albumIdKey = 'albumId_' + this.formId;
-            await dataStore.putData(albumIdKey, albumId);
+            await dataStore.putData(albumIdKey, this.albumId);
             let currentUriKey = 'currentUri_' + this.formId;
             await dataStore.putData(currentUriKey, this.fileAsset.uri);
             let intervalTimeKey = 'intervalTime_' + this.formId;

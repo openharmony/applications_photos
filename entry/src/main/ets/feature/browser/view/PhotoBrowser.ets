@@ -247,7 +247,9 @@ struct PhotoBrowser {
                 mediaDataItemCache.get(currentPhoto.uri).favouriteStatus = currentPhoto.favouriteStatus;
             }
             // 收藏相册进入大图，点击取消收藏会导致Item成员变少，所以要dataRemove
-            this.operateEnd();
+            this.browserDataSource.reloadGroupItemData(false).then(() => {
+                this.operateEnd();
+            });
             this.updateMenu();
             this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
         }
