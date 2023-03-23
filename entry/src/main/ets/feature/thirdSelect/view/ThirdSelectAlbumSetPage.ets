@@ -14,8 +14,8 @@
  */
 
 import router from '@system.router';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
-import { ThirdAlbumGridItem } from '../../../../../../../features/third/src/main/ets/components/ThirdAlbumGridItem';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import { ThirdAlbumGridItem } from '@ohos/third/src/main/ets/components/ThirdAlbumGridItem';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
@@ -27,13 +27,13 @@ import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { ThirdSelectBarModel } from '../model/ThirdSelectBarModel';
-import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar';
+import { AlbumScrollBar } from '@ohos/base/src/main/ets/components/scrollBar/AlbumScrollBar';
 import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
-import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
+import { terminateSelfWithResult } from '@ohos/base/src/main/ets/utils/AbilityUtils';
 import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
-import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
+import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 
 const TAG = "ThirdSelectAlbumSetPage"
 // Third Select AlbumSet Page
