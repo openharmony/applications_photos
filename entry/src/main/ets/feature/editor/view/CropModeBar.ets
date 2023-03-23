@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { ActionButton } from './ActionButton';
 import { ID } from './MainMenuInfo';
 import { Constants } from '../../../common/model/common/Constants';
