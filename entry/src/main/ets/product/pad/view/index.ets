@@ -15,15 +15,15 @@
 
 import { TimelinePage } from '../../../feature/timeline/view/TimelinePage';
 import { AlbumSetPage } from '../../../feature/album/view/AlbumSetPage';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { TabBar, DEVICE_TYPE } from '../../../common/view/TabBar';
-import { JumpSourceToMain } from '../../../../../../../common/base/src/main/ets/data/JumpSourceToMain';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { Constants } from '../../../common/model/common/Constants';
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
-import { startTrace, finishTrace } from '../../../../../../../common/base/src/main/ets/utils/TraceControllerUtils';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import router from '@system.router';
 
 // Application entry
