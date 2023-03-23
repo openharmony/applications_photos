@@ -43,7 +43,7 @@ const TAG = "ThirdSelectPhotoGridPage"
 
 @Entry
 @Component
-export struct ThirdSelectPhotoGridPage {
+struct ThirdSelectPhotoGridPage {
     @Provide @Watch('updateActionBar') selectedCount: number = 0;
     @Provide('isSelectedMode') @Watch('updateActionBar') isMultiPick: boolean = false;
     @Provide moreMenuList: Array<Action> = new Array<Action>();
