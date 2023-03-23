@@ -12,26 +12,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
-import { MediaConstants } from '../../../../../../../common/base/src/main/ets/constants/MediaConstants';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import router from '@system.router';
 import {
     AlbumSelectGridItemNewStyle
-} from '../../../../../../../features/selectAlbum/src/main/ets/components/AlbumSelectGridItemNewStyle';
+} from '@ohos/selectAlbums/src/main/ets/components/AlbumSelectGridItemNewStyle';
 import { Constants } from '../../../common/model/common/Constants';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import { UiUtil } from '../utils/UiUtil';
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { AlbumSelectBarModel } from '../model/AlbumSelectBarModel';
-import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar';
+import { AlbumScrollBar } from '@ohos/base/src/main/ets/components/scrollBar/AlbumScrollBar';
 import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
