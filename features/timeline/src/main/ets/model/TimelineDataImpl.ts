@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
