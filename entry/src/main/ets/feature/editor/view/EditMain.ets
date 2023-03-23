@@ -32,7 +32,7 @@ import { Constants } from '../../../common/model/common/Constants';
 
 @Entry
 @Component
-export struct Edit {
+struct Edit {
     private TAG: string = 'Edit'
     private mediaItem: MediaDataItem = globalThis.EditorMediaItem;
     @Provide editorManager: PhotoEditorManager = PhotoEditorManager.getInstance();
