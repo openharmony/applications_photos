@@ -15,7 +15,7 @@
 
 import { CropModeBar } from './CropModeBar'
 import { PhotoEditMode } from '../base/PhotoEditType'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
 
 @Component
 export struct MainMenuBar {
