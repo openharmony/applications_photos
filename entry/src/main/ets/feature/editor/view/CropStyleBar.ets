@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { ActionButton } from './ActionButton';
 import { ActionButtonInfo, ID } from './MainMenuInfo';
 import { RefreshActionMenu, ActionChangedEvent } from './RefreshMenu';

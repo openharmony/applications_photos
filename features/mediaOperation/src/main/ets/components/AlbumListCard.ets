@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';

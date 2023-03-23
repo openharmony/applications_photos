@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { TabItem, TabItemWithText } from '../model/common/TabItem';
-import broadcastManager from '../../../../../../common/base/src/main/ets/manager/BroadcastManager';
-import { Broadcast } from '../../../../../../common/base/src/main/ets/utils/Broadcast';
-import { BroadcastConstants } from '../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { Constants } from '../model/common/Constants';
-import screenManager, { ColumnSize } from '../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import screenManager, { ColumnSize } from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 export enum DEVICE_TYPE {
   DEVICE_PHONE,

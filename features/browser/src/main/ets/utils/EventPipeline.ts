@@ -15,7 +15,7 @@
 
 import Matrix4 from '@ohos.matrix4';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { clamp } from '@ohos/base/src/main/ets/utils/MathUtil';
 import { Constants } from '../constants/Constants';

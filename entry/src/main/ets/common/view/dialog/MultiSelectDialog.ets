@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
 @Observed

@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
-import { MediaDataItem } from '../../../../../../common/base/src/main/ets/data/MediaDataItem';
-import { Size } from '../../common/model/common/DataTypes';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
+import type { Size } from '../../common/model/common/DataTypes';
 import { PixelMapWrapper } from './base/PixelMapWrapper';
 import { MathUtils } from './crop/MathUtils';
 import { CropAngle } from './crop/CropType';
-import { computeSampleSize } from '../../../../../../common/base/src/main/ets/utils/ImageUtil';
-import screenManager from '../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { computeSampleSize } from '@ohos/base/src/main/ets/utils/ImageUtil';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 const TAG = "Loader"
 

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
 import { Constants } from '../../../common/model/common/Constants'
 
 @Component

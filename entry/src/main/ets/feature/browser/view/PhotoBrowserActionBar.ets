@@ -18,7 +18,7 @@ import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import { ActionBarMode, ActionBarColorMode } from '../../../common/view/browserOperation/ActionBarMode';
 import { Constants } from '../../../common/model/common/Constants';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 
 @Component
 export struct PhotoBrowserActionBar {

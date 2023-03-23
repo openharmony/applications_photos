@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { PhotoEditBase } from '../base/PhotoEditBase';
 import { PhotoEditMode } from '../base/PhotoEditType';
 import { ImageFilterBase } from '../base/ImageFilterBase';

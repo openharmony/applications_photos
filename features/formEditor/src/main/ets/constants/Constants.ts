@@ -17,4 +17,6 @@ export class Constants {
     static readonly DIALOG_BOTTOM_OFFSET: number = 12;
     static readonly FLEX_GROW = 2;
     static readonly FROM_PLAYBACK_INTERVAL = 'form_playback_interval';
+    static readonly ACTION_URI_FORM_ABILITY: string = 'formAbility';
+    static readonly ACTION_URI_FORM_ABILITY_NONE: string = 'formAbilityNone';
 }

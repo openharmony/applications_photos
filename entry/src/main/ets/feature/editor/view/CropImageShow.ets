@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { Constants } from '../../../common/model/common/Constants';
 import { PhotoEditCrop } from '../crop/PhotoEditCrop';
 import { CropResetBar } from './CropResetBar';
-import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 
 @Component
 export struct CropImageShow {

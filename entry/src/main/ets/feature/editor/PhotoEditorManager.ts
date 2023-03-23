@@ -22,7 +22,7 @@ import { ImageFilterStack } from './ImageFilterStack';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { Loader } from './Loader';
 import { Save } from './Save';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 
 export class PhotoEditorManager {
     private TAG: string = 'PhotoEditorManager';

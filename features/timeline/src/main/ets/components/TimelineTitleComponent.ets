@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { TimelineDataItem } from '../data/TimelineDataItem';
-import { DateUtil } from '../../../../../../common/base/src/main/ets/utils/DateUtil';
+import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { LazyItem} from '@ohos/base/src/main/ets/vm/ItemDataSource';

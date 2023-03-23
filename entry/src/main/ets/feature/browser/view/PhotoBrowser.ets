@@ -16,13 +16,13 @@
 import router from '@system.router';
 import Want from '@ohos.application.Want';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action';
-import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import {
     GotoPhotosMenuOperation
-} from '../../../../../../../features/browser/src/main/ets/operation/GotoPhotosMenuOperation';
+} from '@ohos/browser/src/main/ets/operation/GotoPhotosMenuOperation';
 import { BatchDeleteMenuOperation } from '@ohos/base/src/main/ets/operation/BatchDeleteMenuOperation';
 import { BatchRecoverMenuOperation } from '@ohos/base/src/main/ets/operation/BatchRecoverMenuOperation';
 import { ClearRecycleMenuOperation } from '@ohos/base/src/main/ets/operation/ClearRecycleMenuOperation';
@@ -35,14 +35,14 @@ import { Constants } from '../../../common/model/common/Constants';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
-import { Constants as PhotoConstants } from '../../../../../../../features/browser/src/main/ets/constants/Constants';
-import { PhotoBrowserBg } from '../../../../../../../features/browser/src/main/ets/components/PhotoBrowserBg';
+import { Constants as PhotoConstants } from '@ohos/browser/src/main/ets/constants/Constants';
+import { PhotoBrowserBg } from '@ohos/browser/src/main/ets/components/PhotoBrowserBg';
 import { PhotoBrowserActionBar } from './PhotoBrowserActionBar';
 import { ToolBar } from '../../../common/view/actionbar/ToolBar';
-import { PhotoSwiper } from '../../../../../../../features/browser/src/main/ets/components/PhotoSwiper';
+import { PhotoSwiper } from '@ohos/browser/src/main/ets/components/PhotoSwiper';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
-import { JumpSourceToMain } from '../../../../../../../common/base/src/main/ets/data/JumpSourceToMain';
-import { RenameMenuOperation } from '../../../../../../../features/browser/src/main/ets/operation/RenameMenuOperation';
+import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
+import { RenameMenuOperation } from '@ohos/browser/src/main/ets/operation/RenameMenuOperation';
 import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
@@ -52,10 +52,10 @@ import mMultimodalInputManager from '@ohos/base/src/main/ets/manager/MultimodalI
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
-import { InnerMediaDataItem } from '../../../../../../../features/browser/src/main/ets/data/InnerMediaDataItem';
+import { InnerMediaDataItem } from '@ohos/browser/src/main/ets/data/InnerMediaDataItem';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import { getAlbumDisplayName } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
-import { startAbility, terminateSelf } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
+import { startAbility, terminateSelf } from '@ohos/base/src/main/ets/utils/AbilityUtils';
 import mediaDataItemCache from '@ohos/base/src/main/ets/data/MediaDataItemCache';
 import { PhotoEditorManager } from '../../editor/PhotoEditorManager';
 // page of large photo
@@ -247,7 +247,9 @@ struct PhotoBrowser {
                 mediaDataItemCache.get(currentPhoto.uri).favouriteStatus = currentPhoto.favouriteStatus;
             }
             // 收藏相册进入大图，点击取消收藏会导致Item成员变少，所以要dataRemove
-            this.operateEnd();
+            this.browserDataSource.reloadGroupItemData(false).then(() => {
+                this.operateEnd();
+            });
             this.updateMenu();
             this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
         }

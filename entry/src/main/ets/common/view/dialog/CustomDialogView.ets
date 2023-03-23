@@ -15,14 +15,14 @@
 
 import { DownloadCancelOperationDialog } from './DownloadCancelOperationDialog';
 import { Constants } from '../../model/common/Constants';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { MediaDetails, DetailsDialog } from './DetailsDialog';
 import { MultiSelectDetails, MultiSelectDialog } from './MultiSelectDialog';
 import { DeleteDialog } from './DeleteDialog';
-import { DialogCallback } from '../../model/common/DialogUtil';
-import { MediaDataItem } from '../../../../../../../common/base/src/main/ets/data/MediaDataItem';
+import type { DialogCallback } from '../../model/common/DialogUtil';
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { CancelOperationDialog, CancelParam } from './CancelOperationDialog';
 import { RenameDialog } from './RenameDialog';
 import { AddNotesDialog } from './AddNotesDialog';
@@ -33,7 +33,7 @@ import { EditExitDialog, EditExitDialogCallback } from './EditExitDialog';
 import { NewAlbumDialog } from './NewAlbumDialog';
 import { CopyOrMoveDialog, OperateParam } from './CopyOrMoveDialog';
 import { FindSameNameDialog, FindSameNameParam } from './FindSameNameDialog';
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { SaveImageDialog } from './SaveImageDialog';
 
 const TAG: string = 'CustomDialogView'

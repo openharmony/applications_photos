@@ -14,7 +14,7 @@
  */
 
 import { ActionBarColorMode, ActionBarSelectionMode } from '../browserOperation/ActionBarMode';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ActionBarProp } from '../browserOperation/ActionBarProp';
 
 // Select the mode title, the content changes with the number of selections

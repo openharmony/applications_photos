@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 import router from '@system.router';
-import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action'
-import { MenuOperation } from '../../../../../../../common/base/src/main/ets/operation/MenuOperation';
+import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { PhotoBrowserActionBar } from './PhotoBrowserActionBar';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
-import { startTrace, finishTrace } from '../../../../../../../common/base/src/main/ets/utils/TraceControllerUtils';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 
 @Entry
 @Component

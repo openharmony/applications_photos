@@ -14,36 +14,36 @@
  */
 
 import router from '@system.router';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
-import { ImageGridItemComponent } from '../../../../../../../common/base/src/main/ets/components/ImageGridItemComponent';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { Constants } from '../../../common/model/common/Constants';
 import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
-import { GridScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/GridScrollBar';
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { GridScrollBar } from '@ohos/base/src/main/ets/components/scrollBar/GridScrollBar';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { ThirdSelectBarModel } from '../model/ThirdSelectBarModel';
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
-import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
+import { terminateSelfWithResult } from '@ohos/base/src/main/ets/utils/AbilityUtils';
 import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 import { CameraGridItemComponent } from './CameraGridItemComponent'
-import { SelectUtil } from '../../../../../../../common/base/src/main/ets/utils/SelectUtil';
+import { SelectUtil } from '@ohos/base/src/main/ets/utils/SelectUtil';
 import { ThirdSelectedPanel } from './ThirdSelectedPanel';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
-import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
+import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 // Third Select Album Page
 
 const TAG = "ThirdSelectPhotoGridPage"
 
 @Entry
 @Component
-export struct ThirdSelectPhotoGridPage {
+struct ThirdSelectPhotoGridPage {
     @Provide @Watch('updateActionBar') selectedCount: number = 0;
     @Provide('isSelectedMode') @Watch('updateActionBar') isMultiPick: boolean = false;
     @Provide moreMenuList: Array<Action> = new Array<Action>();
@@ -314,14 +314,15 @@ export struct ThirdSelectPhotoGridPage {
                 Log.info(TAG, `terminateSelfWithResult result: ${result}`);
             });
         } else {
-            SelectUtil.grantPermissionForUris(uriArray, self.bundleName).then(function() {
+            SelectUtil.grantPermissionForUris(uriArray, self.bundleName);
+            try {
                 Log.info(TAG, `grant permission success.`);
                 globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
                     Log.info(TAG, `terminateSelfWithResult result: ${result}`);
                 });
-            }).catch(function(err) {
+            } catch (err) {
                 Log.info(TAG, `grant permission error: ${JSON.stringify(err)}`);
-            });
+            }
         }
     }
 }
