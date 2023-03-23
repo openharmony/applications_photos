@@ -39,7 +39,7 @@ const TAG = "ThirdSelectAlbumSetPage"
 // Third Select AlbumSet Page
 @Entry
 @Component
-export struct ThirdSelectAlbumSetPage {
+struct ThirdSelectAlbumSetPage {
     @State isEmpty: boolean = false;
     @Provide selectedCount: number = 0;
     @Provide broadCast: Broadcast = new Broadcast();
