@@ -40,7 +40,7 @@ const TAG = "DistributedAlbumSetPage"
 
 @Entry
 @Component
-export struct DistributedAlbumSetPage {
+struct DistributedAlbumSetPage {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @State isEmpty: boolean = false;
     @State gridColumnsCount: number = 0;
