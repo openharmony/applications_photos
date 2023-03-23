@@ -17,10 +17,10 @@ import { LineSegment } from '../base/Line';
 import { Point } from '../base/Point';
 import { RectF } from '../base/Rect';
 import { Ratio } from '../base/Ratio';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { CropRatioType, CropAngle } from './CropType';
 import { MathUtils } from './MathUtils';
-import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 export class CropShow {
     private TAG: string = 'CropShow';
