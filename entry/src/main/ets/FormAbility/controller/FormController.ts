@@ -50,7 +50,7 @@ export class FormController {
             "formImages": JSON.parse(`{ "${image}": ${fd} }`),
             'uri': (
                        this.mediaDataManager.getMediaData()
-                       .currentUri != '') ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
+                       .currentUri !== '') ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
             'albumId': `${this.mediaDataManager.getMediaData().albumId}`,
             'currentUri': this.mediaDataManager.getMediaData().currentUri
         };
