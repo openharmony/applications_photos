@@ -40,7 +40,7 @@ const TAG = "AlbumSelect"
 
 @Entry
 @Component
-export struct AlbumSelect {
+struct AlbumSelect {
     @State isEmpty: boolean = false;
     @State gridColumnsCount: number = 0;
     @Provide broadCast: Broadcast = new Broadcast();
