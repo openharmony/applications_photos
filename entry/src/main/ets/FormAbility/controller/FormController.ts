@@ -41,7 +41,7 @@ export class FormController {
         Log.info(TAG, `bindFormData start formId: ${formId}`)
         let fd = this.mediaDataManager.getCurrentFd();
         let mediaData = this.mediaDataManager.getMediaData();
-        let image = "image_" + fd + "_formId_" + formId + "_uri_" + mediaData.currentUri;
+        let image: string = "image_" + fd + "_formId_" + formId + "_uri_" + mediaData.currentUri;
         let dataObj1: any = {
             "fd": fd == -1 ? false : true,
             "image1": "memory://" + image,
