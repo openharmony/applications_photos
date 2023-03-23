@@ -14,16 +14,16 @@
  */
 
 import { PhotoEditMode } from '../base/PhotoEditType';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { Constants } from '../../../common/model/common/Constants';
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { PhotoEditorManager } from '../PhotoEditorManager';
 import { PhotoEditCrop } from '../crop/PhotoEditCrop';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import router from '@system.router'
-import { showToast } from '../../../../../../../common/base/src/main/ets/utils/UiUtil';
-import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
+import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
+import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 
 @Component
 export struct TitleBar {
