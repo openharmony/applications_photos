@@ -14,7 +14,7 @@
  */
 
 import router from '@system.router';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
@@ -30,7 +30,7 @@ import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation';
 import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
-import { GridScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/GridScrollBar';
+import { GridScrollBar } from '@ohos/base/src/main/ets/components/scrollBar/GridScrollBar';
 import { NewAlbumBarModel } from '../model/NewAlbumBarModel';
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
