@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { DialogCallback } from '../../model/common/DialogUtil';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
-import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil';
-import { FindSameOperation } from '../../../../../../../common/base/src/main/ets/operation/ProcessMenuOperation';
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import type { DialogCallback } from '../../model/common/DialogUtil';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
+import { FindSameOperation } from '@ohos/base/src/main/ets/operation/ProcessMenuOperation';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
 @Observed
