@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
 import { Constants } from '../../model/common/Constants';
 
 @CustomDialog
