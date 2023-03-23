@@ -86,7 +86,7 @@ struct FormEditorPage {
             "currentIndex": this.currentIndex,
             "isShow": this.isShow,
             "formImages": JSON.parse(`{ "${image}": ${this.fd} }`),
-            'uri': (this.fileAsset.uri != '') ? Constants.ACTION_URI_FORM_ABILITY : Constants.ACTION_URI_FORM_ABILITY_NONE,
+            'uri': (this.fileAsset.uri !== '') ? Constants.ACTION_URI_FORM_ABILITY : Constants.ACTION_URI_FORM_ABILITY_NONE,
             'albumId': this.albumId,
             'currentUri': this.fileAsset.uri
         };
