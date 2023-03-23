@@ -14,12 +14,12 @@
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ItemDataSource } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import { MenuOperationCallback } from '@ohos/base/src/main/ets/operation/MenuOperationCallback';
-import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import type { MenuOperationCallback } from '@ohos/base/src/main/ets/operation/MenuOperationCallback';
+import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
