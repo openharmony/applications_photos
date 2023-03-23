@@ -216,6 +216,7 @@ export struct AlbumGridItemNewStyle {
             }
             if (!this.item.isSelect || !this.isAlbumSetSelectedMode || !this.selectable) {
                 Image($r('app.media.gradient_mask_layer'))
+                    .syncLoad(true)
                     .height('50%')
                     .width('100%')
                     .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
