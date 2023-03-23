@@ -14,7 +14,7 @@
  */
 
 import FormExtension from '@ohos.app.form.FormExtensionAbility';
-import { Log } from '../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { FormControllerManager } from './controller/FormControllerManager';
 import { FormController } from './controller/FormController';
 import { Constants } from './common/Constants';
