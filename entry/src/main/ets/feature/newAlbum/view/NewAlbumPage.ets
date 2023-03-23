@@ -42,7 +42,7 @@ const TAG = "NewAlbumPage"
 
 @Entry
 @Component
-export struct NewAlbumPage {
+struct NewAlbumPage {
     @State isSelectUpperLimited: boolean = false;
     @State isEmpty: boolean = false;
     @State isHideScrollBar: boolean = true;
