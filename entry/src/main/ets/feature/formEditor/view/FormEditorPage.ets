@@ -17,8 +17,8 @@ import router from '@system.router';
 import formBindingData from '@ohos.application.formBindingData';
 import formProvider from '@ohos.application.formProvider';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
-import { Constants } from '../../../../../../../features/formEditor/src/main/ets/constants/Constants';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import { Constants } from '@ohos/formEditor/src/main/ets/constants/Constants';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
@@ -29,7 +29,7 @@ import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import { terminateSelf } from '@ohos/base/src/main/ets/utils/AbilityUtils';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { getFetchOptions } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
-import { SettingDialog } from '../../../../../../../features/formEditor/src/main/ets/components/SettingDialog';
+import { SettingDialog } from '@ohos/formEditor/src/main/ets/components/SettingDialog';
 
 const TAG = "FormEditorPage"
 
