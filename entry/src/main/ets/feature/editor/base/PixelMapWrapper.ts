@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { Releasable } from '../../../common/model/common/Releasable'
+import type { Releasable } from '../../../common/model/common/Releasable'
 
 export class PixelMapWrapper implements Releasable {
     pixelMap: PixelMap = undefined;
