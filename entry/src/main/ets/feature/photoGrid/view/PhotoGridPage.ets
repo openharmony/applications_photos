@@ -54,7 +54,7 @@ const TAG = "PhotoGridPage"
 // Album Page
 @Entry
 @Component
-export struct PhotoGridPage {
+struct PhotoGridPage {
     @State isSelectUpperLimited: boolean = false;
     @State isHideScrollBar: boolean = true;
     @Provide @Watch('updateActionBar') isEmpty: boolean = false;
