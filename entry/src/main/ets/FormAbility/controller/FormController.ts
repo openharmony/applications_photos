@@ -40,7 +40,8 @@ export class FormController {
     bindFormData(formId: string): any {
         Log.info(TAG, `bindFormData start formId: ${formId}`)
         let fd = this.mediaDataManager.getCurrentFd();
-        let image: string = this.imageHashCode(fd, formId);
+        let mediaData = this.mediaDataManager.getMediaData();
+        let image = "image_" + fd + "_formId_" + formId + "_uri_" + mediaData.currentUri;
         let dataObj1: any = {
             "fd": fd == -1 ? false : true,
             "image1": "memory://" + image,
@@ -48,21 +49,14 @@ export class FormController {
             "currentIndex": this.mediaDataManager.getCurrentIndex(),
             "isShow": this.mediaDataManager.getIsShowAlbumName(),
             "formImages": JSON.parse(`{ "${image}": ${fd} }`),
-            'uri': (
-                       this.mediaDataManager.getMediaData()
-                       .currentUri !== '') ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
-            'albumId': `${this.mediaDataManager.getMediaData().albumId}`,
-            'currentUri': this.mediaDataManager.getMediaData().currentUri
+            'uri': (mediaData.currentUri !== '') ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
+            'albumId': `${mediaData.albumId}`,
+            'currentUri': mediaData.currentUri
         };
         Log.debug(TAG, `bindFormData, createFormBindingData dataObj2.data: ${JSON.stringify(dataObj1)}`);
         let obj = formBindingData.createFormBindingData(JSON.stringify(dataObj1));
         Log.debug(TAG, `bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
         return obj;
-    }
-
-    imageHashCode(fd: number, formId: string) {
-        let mediaData = this.mediaDataManager.getMediaData();
-        return "image_" + fd + "_formId_" + formId + "_uri_" + mediaData.currentUri;
     }
 
     updateFormData(formId: string, vars: string[]): void {
