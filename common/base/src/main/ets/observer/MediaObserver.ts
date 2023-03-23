@@ -17,7 +17,7 @@ import createOrGet from '../utils/SingleInstanceUtils';
 import { Log } from '../utils/Log';
 import { MediaConstants } from '../constants/MediaConstants';
 import mediaModel from '../model/MediaModel';
-import { MediaObserverCallback } from '../interface/MediaObserverCallback';
+import type { MediaObserverCallback } from '../interface/MediaObserverCallback';
 
 const TAG = "MediaObserver"
 
