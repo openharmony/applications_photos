@@ -27,7 +27,7 @@ import { TabBarForAlbumSet } from '../../../common/view/TabBar';
 import { TabItemWithText } from '../../../common/model/common/TabItem';
 import { AlbumSetNewMenuOperation } from '@ohos/base/src/main/ets/operation/AlbumSetNewMenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
-import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
@@ -37,22 +37,22 @@ import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { AlbumBarModel } from '../model/AlbumBarModel';
 import { ToolBar } from '../../../common/view/actionbar/ToolBar';
 import {
     AlbumGridItemNewStyle
-} from '../../../../../../../features/album/src/main/ets/components/AlbumGridItemNewStyle';
+} from '@ohos/album/src/main/ets/components/AlbumGridItemNewStyle';
 import {
     DistributedAlbumGriItem
-} from '../../../../../../../features/album/src/main/ets/components/DistributedAlbumGriItem';
+} from '@ohos/album/src/main/ets/components/DistributedAlbumGriItem';
 import {
     AlbumSetDeleteMenuOperation
-} from '../../../../../../../features/album/src/main/ets/operation/AlbumSetDeleteMenuOperation';
+} from '@ohos/album/src/main/ets/operation/AlbumSetDeleteMenuOperation';
 import {
     AlbumSetRenameMenuOperation
-} from '../../../../../../../features/album/src/main/ets/operation/AlbumSetRenameMenuOperation';
-import { AlbumScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/AlbumScrollBar';
+} from '@ohos/album/src/main/ets/operation/AlbumSetRenameMenuOperation';
+import { AlbumScrollBar } from '@ohos/base/src/main/ets/components/scrollBar/AlbumScrollBar';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
 import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
@@ -239,7 +239,6 @@ export struct AlbumSetPage {
         if (this.isShow && this.isInCurrentTab) {
             this.onActive();
             this.createAlbum();
-            this.isHideScrollBar = (this.albumsDataSource.totalCount() <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         } else if (!this.isShow && this.isInCurrentTab) {
             this.onInActive();
         } else {
@@ -400,6 +399,7 @@ export struct AlbumSetPage {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
                 this.isEmpty = isEmpty;
                 this.albumsDataSource.notifyDataReload();
+                this.isHideScrollBar = (this.albumsDataSource.totalCount() <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
             })
         } else if (this.isActive) {
             this.albumsDataSource.dataRemove();

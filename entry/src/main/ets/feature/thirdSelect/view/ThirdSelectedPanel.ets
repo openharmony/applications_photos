@@ -14,16 +14,16 @@
  */
 
 import { Action } from '../../../common/view/browserOperation/Action';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { Constants } from '../../../common/model/common/Constants';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
-import { SelectUtil } from '../../../../../../../common/base/src/main/ets/utils/SelectUtil';
-import { MediaConstants } from '../../../../../../../common/base/src/main/ets/constants/MediaConstants';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import { SelectUtil } from '@ohos/base/src/main/ets/utils/SelectUtil';
+import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
-import { MediaDataItem } from '../../../../../../../common/base/src/main/ets/data/MediaDataItem';
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil';
+import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 
 const TAG = "ThirdSelectedPanel"
 @Component

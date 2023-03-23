@@ -16,7 +16,7 @@
 import { EmptyAlbumComponent } from '@ohos/base/src/main/ets/components/EmptyAlbumComponent';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import router from '@system.router';
@@ -216,6 +216,7 @@ export struct AlbumGridItemNewStyle {
             }
             if (!this.item.isSelect || !this.isAlbumSetSelectedMode || !this.selectable) {
                 Image($r('app.media.gradient_mask_layer'))
+                    .syncLoad(true)
                     .height('50%')
                     .width('100%')
                     .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ViewType } from '@ohos/base/src/main/ets/data/ViewType';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import mediaDataItemCache from '@ohos/base/src/main/ets/data/MediaDataItemCache';

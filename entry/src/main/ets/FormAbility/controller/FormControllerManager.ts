@@ -14,8 +14,8 @@
  */
 import { Constants } from '../common/Constants';
 import { FormController } from './FormController';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
-import dataStore from '../../../../../../common/base/src/main/ets/utils/DataStoreUtil';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import dataStore from '@ohos/base/src/main/ets/utils/DataStoreUtil';
 
 export class FormControllerManager {
     private TAG: string = 'FormControllerManager';

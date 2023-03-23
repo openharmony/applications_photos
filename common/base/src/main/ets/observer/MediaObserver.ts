@@ -17,7 +17,7 @@ import createOrGet from '../utils/SingleInstanceUtils';
 import { Log } from '../utils/Log';
 import { MediaConstants } from '../constants/MediaConstants';
 import mediaModel from '../model/MediaModel';
-import { MediaObserverCallback } from '../interface/MediaObserverCallback';
+import type { MediaObserverCallback } from '../interface/MediaObserverCallback';
 
 const TAG = "MediaObserver"
 
@@ -45,7 +45,7 @@ class MediaObserver {
 
         if (this.callbacks.length == 1) {
             Log.info(TAG, 'registerObserver register media');
-            try {
+              try {
                 mediaModel.getMediaLibrary().on('imageChange', () => {
                     Log.info(TAG, 'registerObserver on image');
                     this.sendNotify(MediaConstants.MEDIA_TYPE_IMAGE);

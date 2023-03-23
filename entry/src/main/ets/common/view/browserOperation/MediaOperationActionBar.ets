@@ -17,8 +17,8 @@ import { Action } from './Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from './ActionBarProp';
 import { ActionBarMode } from './ActionBarMode';
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
-import { MediaOperationType } from '../../../../../../../common/base/src/main/ets/data/MediaOperationType';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType';
 
 @Component
 export struct MediaOperationActionBar {

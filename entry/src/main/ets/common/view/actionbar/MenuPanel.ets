@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ActionBarProp } from '../browserOperation/ActionBarProp';
 import { Action } from '../browserOperation/Action';
 import { ActionBarButton } from './ActionBarButton';

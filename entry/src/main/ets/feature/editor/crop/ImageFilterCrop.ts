@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { RectF } from '../base/Rect';
 import { ImageFilterBase } from '../base/ImageFilterBase';
 import { PixelMapWrapper } from '../base/PixelMapWrapper';

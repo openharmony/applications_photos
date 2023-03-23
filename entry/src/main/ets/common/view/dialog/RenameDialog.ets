@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
-import { DialogCallback } from '../../model/common/DialogUtil';
-import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import type { DialogCallback } from '../../model/common/DialogUtil';
+import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
-import { showToast } from '../../../../../../../common/base/src/main/ets/utils/UiUtil';
-import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
+import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
+import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 
 @CustomDialog
 export struct RenameDialog {

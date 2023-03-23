@@ -15,7 +15,7 @@
 //@ts-ignore
 import fileShare from '@ohos.fileshare';
 import wantConstant from '@ohos.app.ability.wantConstant';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from './Log';
 
 const TAG = "SelectUtil"
 export class SelectUtil {

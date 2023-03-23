@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import WantConstant from '@ohos.ability.wantConstant';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { Constants } from '../../../common/model/common/Constants';

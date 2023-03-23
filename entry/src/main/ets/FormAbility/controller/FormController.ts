@@ -14,8 +14,8 @@
  */
 import Want from '@ohos.application.Want';
 import { MediaDataManager } from '../data/MediaDataManager';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
-import { startAbility } from '../../../../../../common/base/src/main/ets/utils/AbilityUtils';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import { startAbility } from '@ohos/base/src/main/ets/utils/AbilityUtils';
 import formBindingData from '@ohos.application.formBindingData';
 import { Constants } from '../common/Constants';
 import formProvider from '@ohos.application.formProvider';
@@ -40,14 +40,18 @@ export class FormController {
     bindFormData(formId: string): any {
         Log.info(TAG, `bindFormData start formId: ${formId}`)
         let fd = this.mediaDataManager.getCurrentFd();
-        let image: string = "image_" + fd + "_formId_" + this.mediaDataManager.getMediaData().formId;
+        let mediaData = this.mediaDataManager.getMediaData();
+        let image: string = "image_" + fd + "_formId_" + formId + "_uri_" + mediaData.currentUri;
         let dataObj1: any = {
             "fd": fd == -1 ? false : true,
             "image1": "memory://" + image,
             "albumName": this.mediaDataManager.getCurrentAlbumName(),
             "currentIndex": this.mediaDataManager.getCurrentIndex(),
             "isShow": this.mediaDataManager.getIsShowAlbumName(),
-            "formImages": JSON.parse(`{ "${image}": ${fd} }`)
+            "formImages": JSON.parse(`{ "${image}": ${fd} }`),
+            'uri': (mediaData.currentUri !== '') ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
+            'albumId': `${mediaData.albumId}`,
+            'currentUri': mediaData.currentUri
         };
         Log.debug(TAG, `bindFormData, createFormBindingData dataObj2.data: ${JSON.stringify(dataObj1)}`);
         let obj = formBindingData.createFormBindingData(JSON.stringify(dataObj1));

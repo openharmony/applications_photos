@@ -15,7 +15,7 @@
 import Want from '@ohos.application.Want';
 import { Log } from '../utils/Log';
 import { startAbility } from '../utils/AbilityUtils';
-import { MenuOperation } from './MenuOperation';
+import type { MenuOperation } from './MenuOperation';
 import { MenuContext } from './MenuContext';
 import { ItemDataSource } from '../vm/ItemDataSource';
 

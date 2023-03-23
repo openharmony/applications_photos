@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast'
-import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager'
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants'
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
+import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
 import { Constants } from '../../model/common/Constants';
-import { DateUtil } from '../../../../../../../common/base/src/main/ets/utils/DateUtil';
+import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 
 
 @Observed

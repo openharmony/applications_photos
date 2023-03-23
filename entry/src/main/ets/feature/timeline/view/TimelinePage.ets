@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent';
 import {
     TimelineTitleComponent
-} from '../../../../../../../features/timeline/src/main/ets/components/TimelineTitleComponent';
+} from '@ohos/timeline/src/main/ets/components/TimelineTitleComponent';
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
 import { ToolBar } from '../../../common/view/actionbar/ToolBar';
 import { Constants } from '../../../common/model/common/Constants';
-import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { BatchDeleteMenuOperation } from '@ohos/base/src/main/ets/operation/BatchDeleteMenuOperation';
 import { ViewType } from '@ohos/base/src/main/ets/data/ViewType';
@@ -41,7 +41,7 @@ import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType';
 import { MoveMenuOperation } from '@ohos/base/src/main/ets/operation/MoveMenuOperation';
 import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation';
-import { TimelineScrollBar } from '../../../../../../../features/timeline/src/main/ets/components/TimelineScrollBar';
+import { TimelineScrollBar } from '@ohos/timeline/src/main/ets/components/TimelineScrollBar';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import { TimelinePageBarModel } from '../model/TimelinePageBarModel';
@@ -49,9 +49,9 @@ import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import {
     TimelineItemDataSource
-} from '../../../../../../../features/timeline/src/main/ets/vm/TimelineItemDataSource';
+} from '@ohos/timeline/src/main/ets/vm/TimelineItemDataSource';
 import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
-import { TimelineDataItem } from '../../../../../../../features/timeline/src/main/ets/data/TimelineDataItem';
+import { TimelineDataItem } from '@ohos/timeline/src/main/ets/data/TimelineDataItem';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { PhotoEditorManager } from '../../editor/PhotoEditorManager';
 
