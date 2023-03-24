@@ -14,25 +14,25 @@
  */
 
 import router from '@system.router';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { Constants } from '../../../common/model/common/Constants';
 import { ThirdSelectPhotoBrowserActionBar } from '../../../common/view/ThirdSelectPhotoBrowserActionBar';
-import { PhotoBrowserBg } from '../../../../../../../features/browser/src/main/ets/components/PhotoBrowserBg';
-import { Constants as PhotoConstants } from '../../../../../../../features/browser/src/main/ets/constants/Constants';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
-import { PhotoSwiper } from '../../../../../../../features/browser/src/main/ets/components/PhotoSwiper';
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
-import mMultimodalInputManager from '../../../../../../../common/base/src/main/ets/manager/MultimodalInputManager';
+import { PhotoBrowserBg } from '@ohos/browser/src/main/ets/components/PhotoBrowserBg';
+import { Constants as PhotoConstants } from '@ohos/browser/src/main/ets/constants/Constants';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import { PhotoSwiper } from '@ohos/browser/src/main/ets/components/PhotoSwiper';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import mMultimodalInputManager from '@ohos/base/src/main/ets/manager/MultimodalInputManager';
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
-import { terminateSelfWithResult } from '../../../../../../../common/base/src/main/ets/utils/AbilityUtils';
-import { SelectUtil } from '../../../../../../../common/base/src/main/ets/utils/SelectUtil';
-import { getResourceString } from '../../../../../../../common/base/src/main/ets/utils/ResourceUtils';
-import { showToast } from '../../../../../../../common/base/src/main/ets/utils/UiUtil';
+import { terminateSelfWithResult } from '@ohos/base/src/main/ets/utils/AbilityUtils';
+import { SelectUtil } from '@ohos/base/src/main/ets/utils/SelectUtil';
+import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
+import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 // third selection photoBrowser
 
 const TAG = "ThirdSelectPhotoBrowser"

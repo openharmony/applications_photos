@@ -14,8 +14,8 @@
  */
 import Want from '@ohos.application.Want';
 import { MediaDataManager } from '../data/MediaDataManager';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
-import { startAbility } from '../../../../../../common/base/src/main/ets/utils/AbilityUtils';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
+import { startAbility } from '@ohos/base/src/main/ets/utils/AbilityUtils';
 import formBindingData from '@ohos.application.formBindingData';
 import { Constants } from '../common/Constants';
 import formProvider from '@ohos.application.formProvider';

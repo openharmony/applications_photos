@@ -14,25 +14,25 @@
  */
 
 import router from '@system.router';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { TitleBar } from './TitleBar';
 import { MainMenuBar } from './MainMenuBar';
 import { PhotoEditMode } from '../base/PhotoEditType';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { ToolBar } from './ToolBar';
 import { CropImageShow } from './CropImageShow';
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { PhotoEditorManager } from '../PhotoEditorManager';
 import { PhotoEditCrop } from '../crop/PhotoEditCrop';
-import { MediaDataItem } from '../../../../../../../common/base/src/main/ets/data/MediaDataItem';
+import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { Constants } from '../../../common/model/common/Constants';
 
 @Entry
 @Component
-export struct Edit {
+struct Edit {
     private TAG: string = 'Edit'
     private mediaItem: MediaDataItem = globalThis.EditorMediaItem;
     @Provide editorManager: PhotoEditorManager = PhotoEditorManager.getInstance();

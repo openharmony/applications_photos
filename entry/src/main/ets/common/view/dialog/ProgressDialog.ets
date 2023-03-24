@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import { MediaOperationType } from '../../../../../../../common/base/src/main/ets/data/MediaOperationType'
-import  screenManager  from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
+import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType'
+import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
 @Observed

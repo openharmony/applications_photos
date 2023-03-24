@@ -16,7 +16,7 @@ import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstan
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { TimelineDataItem } from '../data/TimelineDataItem';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { TimelineItemDataSource } from '../vm/TimelineItemDataSource';

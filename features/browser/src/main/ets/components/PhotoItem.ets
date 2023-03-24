@@ -19,7 +19,7 @@ import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { EventPipeline } from '../utils/EventPipeline';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Constants } from '../constants/Constants';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { RouterConstants } from '@ohos/base/src/main/ets/constants/RouterConstants';

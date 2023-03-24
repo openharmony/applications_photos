@@ -16,8 +16,8 @@
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/browserOperation/ActionBarMode';
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
-import { MediaConstants } from '../../../../../../../common/base/src/main/ets/constants/MediaConstants';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 
 export class PhotoGridBarModel {
     private isDistributedAlbum: boolean = false;

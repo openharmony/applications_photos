@@ -14,21 +14,21 @@
  */
 
 import router from '@system.router';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import {
     AlbumGridItemTraditionalStyle
-} from '../../../../../../../features/distributed/src/main/ets/components/AlbumGridItemTraditionalStyle';
+} from '@ohos/distributed/src/main/ets/components/AlbumGridItemTraditionalStyle';
 import { Constants } from '../../../common/model/common/Constants';
-import screenManager from '../../../../../../../common/base/src/main/ets/manager/ScreenManager';
-import { Broadcast } from '../../../../../../../common/base/src/main/ets/utils/Broadcast';
+import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent';
-import { JumpSourceToMain } from '../../../../../../../common/base/src/main/ets/data/JumpSourceToMain';
-import broadcastManager from '../../../../../../../common/base/src/main/ets/manager/BroadcastManager';
-import { BroadcastConstants } from '../../../../../../../common/base/src/main/ets/constants/BroadcastConstants';
-import { CommonObserverCallback } from '../../../../../../../common/base/src/main/ets/observer/CommonObserverCallback';
+import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
+import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
 import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
 import { DistributedAlbumBarModel } from '../model/DistributedAlbumBarModel';
 import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
@@ -40,7 +40,7 @@ const TAG = "DistributedAlbumSetPage"
 
 @Entry
 @Component
-export struct DistributedAlbumSetPage {
+struct DistributedAlbumSetPage {
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     @State isEmpty: boolean = false;
     @State gridColumnsCount: number = 0;

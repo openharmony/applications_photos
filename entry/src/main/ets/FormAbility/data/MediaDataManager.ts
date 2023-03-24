@@ -15,11 +15,11 @@
 import { MediaData } from './MediaData';
 import { Constants } from '../common/Constants';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
-import dataStore from '../../../../../../common/base/src/main/ets/utils/DataStoreUtil';
+import dataStore from '@ohos/base/src/main/ets/utils/DataStoreUtil';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { getAlbumDisplayName, getFetchOptions } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 
 const TAG = "MediaDataManager"
 

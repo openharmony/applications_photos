@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import router from '@system.router';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { EmptyAlbumComponent } from '@ohos/base/src/main/ets/components/EmptyAlbumComponent';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';

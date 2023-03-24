@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
-import { computeSampleSize } from '@ohos/base/src/main/ets//utils/ImageUtil';
+import { computeSampleSize } from '@ohos/base/src/main/ets/utils/ImageUtil';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 

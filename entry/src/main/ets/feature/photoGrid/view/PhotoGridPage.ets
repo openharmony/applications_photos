@@ -14,7 +14,7 @@
  */
 
 import router from '@system.router';
-import { Log } from '../../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { ToolBar } from '../../../common/view/actionbar/ToolBar';
 import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent';
@@ -25,7 +25,7 @@ import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { Constants } from '../../../common/model/common/Constants';
-import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { BatchDeleteMenuOperation } from '@ohos/base/src/main/ets/operation/BatchDeleteMenuOperation';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
@@ -37,7 +37,7 @@ import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType';
 import { CopyMenuOperation } from '@ohos/base/src/main/ets/operation/CopyMenuOperation';
 import { MoveMenuOperation } from '@ohos/base/src/main/ets/operation/MoveMenuOperation';
-import { GridScrollBar } from '../../../../../../../common/base/src/main/ets/components/scrollBar/GridScrollBar';
+import { GridScrollBar } from '@ohos/base/src/main/ets/components/scrollBar/GridScrollBar';
 import { BatchRecoverMenuOperation } from '@ohos/base/src/main/ets/operation/BatchRecoverMenuOperation';
 import { ClearRecycleMenuOperation } from '@ohos/base/src/main/ets/operation/ClearRecycleMenuOperation';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
@@ -54,7 +54,7 @@ const TAG = "PhotoGridPage"
 // Album Page
 @Entry
 @Component
-export struct PhotoGridPage {
+struct PhotoGridPage {
     @State isSelectUpperLimited: boolean = false;
     @State isHideScrollBar: boolean = true;
     @Provide @Watch('updateActionBar') isEmpty: boolean = false;

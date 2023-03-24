@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import router from '@system.router';
-import { Log } from '../../../../../../common/base/src/main/ets/utils/Log';
+import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
