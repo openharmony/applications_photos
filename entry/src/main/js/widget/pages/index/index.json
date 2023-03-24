@@ -20,7 +20,7 @@
         "albumId": "{{albumId}}",
         "displayName": "{{albumName}}",
         "currentUri": "{{currentUri}}",
-        "currentIndex": "{{currentIndex}]"
+        "currentIndex": "{{currentIndex}}"
       }
     }
   }
