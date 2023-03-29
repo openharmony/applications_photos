@@ -24,7 +24,6 @@ class DataStoreUtil {
     private static readonly FROM_DATA_STORE_UTIL = 'form_data_store_util';
 
     constructor() {
-        
         Log.info(TAG, 'constructor');
     }
 
