@@ -19,6 +19,7 @@ import { FormControllerManager } from './controller/FormControllerManager';
 import { FormController } from './controller/FormController';
 import { Constants } from './common/Constants';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
+import  DataStoreUtil  from '@ohos/base/src/main/ets/utils/DataStoreUtil';
 
 export default class FormAbility extends FormExtension {
     private TAG: string = 'FormAbility';
@@ -61,13 +62,24 @@ export default class FormAbility extends FormExtension {
         Log.info(this.TAG, `onChangeFormVisibility, newStatus: ${JSON.stringify(newStatus)}`);
         // 经常起来后可能直接走onChangeFormVisibility， 所以要初始化一下
         this.init();
-        let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
-        for (let key in newStatus) {
-            Log.info(this.TAG, `onChangeFormVisibility, key:${key}  value ${newStatus[key]}`);
-            let formId = key;
-            formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE);
+        this.clearCache(newStatus);
+    }
+
+    private async clearCache(newStatus) {
+        try {
+            let dataStore = DataStoreUtil.getInstance();
+            await dataStore.removeCache();
+            let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
+            for (let key in newStatus) {
+                Log.info(this.TAG, `onVisibilityChange, key:${key}  value ${newStatus[key]}`);
+                let formId = key;
+                formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE);
+            }
+        } catch (err) {
+            Log.error(this.TAG, `clearCache err:` + JSON.stringify(err));
         }
     }
+
 
     onFormEvent(formId, message) {
         Log.info(this.TAG, `onFormEvent, formId: ${formId}, message: ${message}`);
