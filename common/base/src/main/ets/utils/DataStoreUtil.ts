@@ -35,7 +35,7 @@ class DataStoreUtil {
     }
 
     public async init(): Promise<void> {
-        Log.info(TAG, 'init start!');
+        Log.debug(TAG, 'init start!');
         if (this.preferences != undefined) {
             Log.info(TAG, `init preferences before`);
             return;
@@ -47,7 +47,7 @@ class DataStoreUtil {
         } catch (err) {
             Log.error(TAG, `init err ${err}`);
         }
-        Log.info(TAG, 'init end!');
+        Log.debug(TAG, 'init end!');
     }
 
     public async getData(key: string, defValue) {
@@ -59,7 +59,7 @@ class DataStoreUtil {
         let temValue = defValue;
         try {
             temValue = await this.preferences.get(key, defValue);
-            Log.info(TAG, "The value of startup is " + temValue);
+            Log.debug(TAG, "The value of startup is " + temValue);
         } catch (err) {
             Log.error(TAG, `Get the value failed with err: ${err}`);
         }
@@ -67,7 +67,7 @@ class DataStoreUtil {
     }
 
     public async putData(key: string, value) {
-        Log.info(TAG, 'putData start!');
+        Log.debug(TAG, 'putData start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, 'putData preferences is undefined');
             await this.init();
@@ -75,28 +75,28 @@ class DataStoreUtil {
 
         try {
             await this.preferences.put(key, value);
-            Log.info(TAG, 'Put the value successfully.');
+            Log.debug(TAG, 'Put the value successfully.');
         } catch (err) {
             Log.error(TAG, `Put the value failed with err: ${err}`);
         }
     }
 
     public async delData(key: string) {
-        Log.info(TAG, 'delData start!');
+        Log.debug(TAG, 'delData start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, `delData preferences is undefined`);
             await this.init();
         }
         try {
             await this.preferences.delete(key);
-            Log.info(TAG, "Delete the value successfully.");
+            Log.debug(TAG, "Delete the value successfully.");
         } catch (err) {
             Log.error(TAG, `Delete the value failed with err: ${err}`);
         }
     }
 
     public async flush() {
-        Log.info(TAG, 'flush start!');
+        Log.debug(TAG, 'flush start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, `flush preferences is undefined`);
             await this.init();
@@ -105,7 +105,6 @@ class DataStoreUtil {
     }
 
     public async hasData(key: string) {
-        Log.info(TAG, `hasData start! preferences ${this.preferences}`);
         let ret = false;
         if (this.preferences == undefined) {
             Log.warn(TAG, `hasData preferences is undefined`);
@@ -113,7 +112,7 @@ class DataStoreUtil {
         }
         try {
             ret = await this.preferences.has(key);
-            Log.info(TAG, "hasData the value successfully.");
+           Log.debug(TAG, "hasData the value successfully.");
         } catch (err) {
             ret = false;
             Log.error(TAG, `hasData the value failed with err: ${err}`);
