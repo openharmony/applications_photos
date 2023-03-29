@@ -80,7 +80,6 @@ export default class FormAbility extends FormExtension {
         }
     }
 
-
     onFormEvent(formId, message) {
         Log.info(this.TAG, `onFormEvent, formId: ${formId}, message: ${message}`);
         // 经常起来后可能直接走onEvent， 所以要初始化一下
