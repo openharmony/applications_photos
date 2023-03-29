@@ -20,6 +20,7 @@ import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { TimelineItemDataSource } from '../vm/TimelineItemDataSource';
+private startY: number = 0;
 
 const TAG = "TimelineScrollBar"
 
@@ -160,9 +161,14 @@ export struct TimelineScrollBar {
                 this.broadCast.emit(BroadcastConstants.INIT_DATE_TEXT, [])
             }
             if (event.type == TouchType.Down) {
-                this.isClickScrollBar = true;
+                this.isClickScrollBar = false;
+                this.startY = event.touches[0].y
             } else if (event.type == TouchType.Up) {
                 this.isClickScrollBar = false;
+            } else if (event.type == TouchType.Move) {
+                if (Math.abs(event.touches[0].y - this.startY) > 50){
+                    this.isClickScrollBar = true;
+                }
             }
         })
     }
