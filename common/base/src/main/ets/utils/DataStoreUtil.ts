@@ -132,7 +132,6 @@ class DataStoreUtil {
             Log.info(TAG,"removeCache failed with err: " + err)
         })
     }
-
 }
 
 let dataStore = createOrGet(DataStoreUtil, TAG);
