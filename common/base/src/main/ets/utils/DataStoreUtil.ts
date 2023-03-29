@@ -51,7 +51,7 @@ class DataStoreUtil {
     }
 
     public async getData(key: string, defValue) {
-        Log.info(TAG, 'getData start!');
+        Log.debug(TAG, 'getData start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, `getData preferences is undefined`);
             await this.init();
@@ -105,6 +105,7 @@ class DataStoreUtil {
     }
 
     public async hasData(key: string) {
+        Log.debug(TAG, `hasData start! preferences ${this.preferences}`);
         let ret = false;
         if (this.preferences == undefined) {
             Log.warn(TAG, `hasData preferences is undefined`);
@@ -112,7 +113,7 @@ class DataStoreUtil {
         }
         try {
             ret = await this.preferences.has(key);
-           Log.debug(TAG, "hasData the value successfully.");
+            Log.debug(TAG, "hasData the value successfully.");
         } catch (err) {
             ret = false;
             Log.error(TAG, `hasData the value failed with err: ${err}`);
