@@ -31,6 +31,7 @@ export struct TimelineScrollBar {
     @State isClickScrollBar: boolean = false;
     @Consume dateText: string;
     @Consume broadCast: Broadcast;
+    private startY: number = 0;
 
     aboutToAppear(): void {
     }
@@ -160,9 +161,14 @@ export struct TimelineScrollBar {
                 this.broadCast.emit(BroadcastConstants.INIT_DATE_TEXT, [])
             }
             if (event.type == TouchType.Down) {
-                this.isClickScrollBar = true;
+                this.isClickScrollBar = false;
+                this.startY = event.touches[0].y
             } else if (event.type == TouchType.Up) {
                 this.isClickScrollBar = false;
+            } else if (event.type == TouchType.Move) {
+                if (Math.abs(event.touches[0].y - this.startY) > 50){
+                    this.isClickScrollBar = true;
+                }
             }
         })
     }
