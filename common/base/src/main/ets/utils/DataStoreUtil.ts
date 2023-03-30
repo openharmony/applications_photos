@@ -27,6 +27,13 @@ class DataStoreUtil {
         Log.info(TAG, 'constructor');
     }
 
+     public  getInstance(): DataStoreUtil {
+        if (AppStorage.Get( DataStoreUtil.FROM_DATA_STORE_UTIL) == null) {
+            AppStorage.SetOrCreate( DataStoreUtil.FROM_DATA_STORE_UTIL, new DataStoreUtil());
+        }
+        return AppStorage.Get( DataStoreUtil.FROM_DATA_STORE_UTIL);
+    }
+
     public async init(): Promise<void> {
         Log.debug(TAG, 'init start!');
         if (this.preferences != undefined) {
