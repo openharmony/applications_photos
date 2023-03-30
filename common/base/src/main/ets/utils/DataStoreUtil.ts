@@ -27,7 +27,7 @@ class DataStoreUtil {
         Log.info(TAG, 'constructor');
     }
 
-     public  getInstance(): DataStoreUtil {
+     public getInstance(): DataStoreUtil {
         if (AppStorage.Get( DataStoreUtil.FROM_DATA_STORE_UTIL) == null) {
             AppStorage.SetOrCreate( DataStoreUtil.FROM_DATA_STORE_UTIL, new DataStoreUtil());
         }
@@ -121,7 +121,7 @@ class DataStoreUtil {
         return ret;
     }
 
-    public async  removeCache() {
+    public async removeCache() {
         Log.info(TAG,'removeCache start!');
         let context = globalThis.applicationContext;
         await preferences.removePreferencesFromCache(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE).then(() => {
