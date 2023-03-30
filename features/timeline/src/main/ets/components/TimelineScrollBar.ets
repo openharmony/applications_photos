@@ -20,7 +20,6 @@ import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { TimelineItemDataSource } from '../vm/TimelineItemDataSource';
-private startY: number = 0;
 
 const TAG = "TimelineScrollBar"
 
@@ -32,6 +31,7 @@ export struct TimelineScrollBar {
     @State isClickScrollBar: boolean = false;
     @Consume dateText: string;
     @Consume broadCast: Broadcast;
+    private startY: number = 0;
 
     aboutToAppear(): void {
     }
