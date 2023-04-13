@@ -19,10 +19,19 @@ import createOrGet from './SingleInstanceUtils';
 const TAG = "DataStoreUtil"
 
 class DataStoreUtil {
-    private preferences: preferences.Preferences = undefined;
+    private preferences: any = undefined;
     private static readonly PREFERENCES_KEY_MY_FORM_STORE = 'myFormStore';
+    private static readonly FROM_DATA_STORE_UTIL = 'form_data_store_util';
 
     constructor() {
+        Log.info(TAG, 'constructor');
+    }
+
+     public getInstance(): DataStoreUtil {
+        if (AppStorage.Get( DataStoreUtil.FROM_DATA_STORE_UTIL) == null) {
+            AppStorage.SetOrCreate( DataStoreUtil.FROM_DATA_STORE_UTIL, new DataStoreUtil());
+        }
+        return AppStorage.Get( DataStoreUtil.FROM_DATA_STORE_UTIL);
     }
 
     public async init(): Promise<void> {
@@ -45,7 +54,7 @@ class DataStoreUtil {
         Log.debug(TAG, 'getData start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, `getData preferences is undefined`);
-            return defValue;
+            await this.init();
         }
         let temValue = defValue;
         try {
@@ -61,7 +70,7 @@ class DataStoreUtil {
         Log.debug(TAG, 'putData start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, 'putData preferences is undefined');
-            return;
+            await this.init();
         }
 
         try {
@@ -76,6 +85,7 @@ class DataStoreUtil {
         Log.debug(TAG, 'delData start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, `delData preferences is undefined`);
+            await this.init();
         }
         try {
             await this.preferences.delete(key);
@@ -89,6 +99,7 @@ class DataStoreUtil {
         Log.debug(TAG, 'flush start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, `flush preferences is undefined`);
+            await this.init();
         }
         await this.preferences.flush();
     }
@@ -98,7 +109,7 @@ class DataStoreUtil {
         let ret = false;
         if (this.preferences == undefined) {
             Log.warn(TAG, `hasData preferences is undefined`);
-            return ret;
+            await this.init();
         }
         try {
             ret = await this.preferences.has(key);
@@ -108,6 +119,18 @@ class DataStoreUtil {
             Log.error(TAG, `hasData the value failed with err: ${err}`);
         }
         return ret;
+    }
+
+    public async removeCache() {
+        Log.info(TAG,'removeCache start!');
+        let context = globalThis.applicationContext;
+        await preferences.removePreferencesFromCache(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE).then(() => {
+            Log.info(TAG,`this.preferences = ${this.preferences}`);
+            this.preferences = undefined;
+            Log.info(TAG,"removeCache successfully.")
+        }).catch((err) => {
+            Log.info(TAG,"removeCache failed with err: " + err)
+        })
     }
 }
 
