@@ -62,15 +62,15 @@ export class TabItemWithText {
         this.isSelected = isSelected;
     }
 
-    getTextSize(): Resource {
-        return this.isSelected ? this.textSizeSelected : this.textSizeDefault;
+    getTextSize(isSelected: boolean): Resource {
+        return isSelected ? this.textSizeSelected : this.textSizeDefault;
     }
 
-    getTextWeight(): FontWeight {
-        return this.isSelected ? this.textWeightSelected : this.textWeightDefault;
+    getTextWeight(isSelected: boolean): FontWeight {
+        return isSelected ? this.textWeightSelected : this.textWeightDefault;
     }
 
-    getTextColor(): Resource {
-        return this.isSelected ? this.textColorSelected : this.textColorDefault;
+    getTextColor(isSelected: boolean): Resource {
+        return isSelected ? this.textColorSelected : this.textColorDefault;
     }
 }
