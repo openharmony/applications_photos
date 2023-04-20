@@ -116,7 +116,7 @@ struct Tab {
 
   aboutToAppear() {
     this.isSelected = this.tabItem.isSelected;
-    this.appBroadcast.on(BroadcastConstants.RESET_TABBAR_SELECTED_STATUE, (pageNumber: number) => {
+    this.appBroadcast.on(BroadcastConstants.RESET_TAB_SELECTED_STATUE, (pageNumber: number) => {
       this.isSelected = this.index == pageNumber;
     })
   }
@@ -147,7 +147,7 @@ struct Tab {
     .onClick(() => {
       this.onTabSelected && this.onTabSelected(this.index);
       this.tabItem.isSelected = true;
-      this.appBroadcast.emit(BroadcastConstants.RESET_TABBAR_SELECTED_STATUE, [this.index]);
+      this.appBroadcast.emit(BroadcastConstants.RESET_TAB_SELECTED_STATUE, [this.index]);
     })
   }
 }
@@ -227,9 +227,11 @@ struct TabWithText {
   private TAG: string = 'TabWithText'
   @Consume isAlbumSetSelectedMode: boolean;
   tabItemWithText: TabItemWithText;
+  @State isSelected: boolean = false;
   @State TabWidth: number = 0;
   index: number;
   onTabSelected: Function;
+  appBroadcast: Broadcast = broadcastManager.getBroadcast();
 
   aboutToAppear(): void {
     // Determine the length of the underline based on the font length
@@ -239,6 +241,10 @@ struct TabWithText {
       this.TabWidth = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE2)) * 4;
     }
     Log.info(this.TAG, `index is ${this.index} and TabWidth is ${this.TabWidth}`);
+    this.isSelected = this.tabItemWithText.isSelected;
+    this.appBroadcast.on(BroadcastConstants.RESET_TAB_SELECTED_TEXT, (pageNumber: number) => {
+      this.isSelected = this.index == pageNumber;
+    })
   }
 
   build() {
@@ -248,9 +254,9 @@ struct TabWithText {
       alignItems: ItemAlign.Center
     }) {
       Text(this.tabItemWithText.name)
-        .fontSize(this.tabItemWithText.getTextSize())
-        .fontWeight(this.tabItemWithText.getTextWeight())
-        .fontColor(this.tabItemWithText.getTextColor())
+        .fontSize(this.tabItemWithText.getTextSize(this.isSelected))
+        .fontWeight(this.tabItemWithText.getTextWeight(this.isSelected))
+        .fontColor(this.tabItemWithText.getTextColor(this.isSelected))
         .maxLines(1)
         .margin({ top: $r('app.float.tab_bar_line_margin_top'),
           left: $r('app.float.single_tab_margin'),
@@ -260,7 +266,7 @@ struct TabWithText {
         .width(this.TabWidth)
         .height($r('app.float.tab_bar_line_height'))
         .borderRadius($r('app.float.tab_bar_line_radius'))
-        .backgroundColor(this.tabItemWithText.getTextColor())
+        .backgroundColor(this.tabItemWithText.getTextColor(this.isSelected))
         .visibility(this.tabItemWithText.isSelected ? Visibility.Visible : Visibility.Hidden)
     }
     .height('100%')
@@ -268,7 +274,8 @@ struct TabWithText {
     .onClick(() => {
       if (!this.isAlbumSetSelectedMode) {
         this.onTabSelected && this.onTabSelected(this.index)
-        this.tabItemWithText.isSelected = true
+        this.tabItemWithText.isSelected = true;
+        this.appBroadcast.emit(BroadcastConstants.RESET_TAB_SELECTED_TEXT, [this.index]);
       }
     })
   }
