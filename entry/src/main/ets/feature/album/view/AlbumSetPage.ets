@@ -430,7 +430,7 @@ export struct AlbumSetPage {
             }
         }
 
-        this.isTabBarShow = (size > 0);
+        this.isTabBarShow = false;
     }
 
     private onSelect(index: number) {
