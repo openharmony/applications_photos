@@ -80,6 +80,7 @@ class ScreenManager {
         this.mainWindow = win;
         this.setMainWindow(win)
         await this.checkWindowMode();
+        this.getWindowProperties(win);
     }
 
     /**
@@ -204,6 +205,20 @@ class ScreenManager {
             this.checkWindowMode()
             this.onWinSizeChanged(data);
         })
+    }
+
+    private getWindowProperties(win: window.Window) {
+        Log.debug(TAG, 'getWindowProperties');
+        try {
+            let properties = win.getWindowProperties();
+            if(properties.windowRect.width !== 0 && properties.windowRect.height !== 0){
+                this.winWidth = properties.windowRect.width;
+                this.winHeight = properties.windowRect.height;
+            }
+            Log.debug(TAG, `this.winWidth = ${this.winWidth} this.winHeight = ${this.winHeight}`);
+        } catch (exception) {
+            console.error('Failed to obtain the window properties. Cause: ' + JSON.stringify(exception));
+        }
     }
 
     private async setFullScreen() {
