@@ -49,7 +49,8 @@ export class AlbumDataItem {
         this.isDisableDelete = MediaConstants.ALBUM_DISABLE_DELETE_LIST.has(id);
         this.selectType = selectType;
         this.deviceId = deviceId;
-        this.objectIndex = objectIndex++
+        this.objectIndex = objectIndex++;
+        this.load();
     }
 
     getHashCode(): string {
