@@ -28,18 +28,15 @@
 | photos | 视图层 | ThirdSelectAlbumSetPage  | 图库三方选择相册视图层逻辑控制类     |
 | photos | 视图层 | ThirdSelectPhotoGridPage | 图库三方选择宫格视图层逻辑控制类     |
 | photos | 视图层 | ThirdSelectPhotoBrowser  | 图库三方选择大图浏览视图层逻辑控制类 |
-| photos | 展现层 | PhotoDataSource          | 图库列大图浏览展现层数据逻辑类       |
-| photos | 展现层 | TimelineDataSource       | 图库日试图展现层数据逻辑类           |
-| photos | 展现层 | AlbumSetDataSource       | 图库相册展现层数据逻辑类             |
-| photos | 展现层 | MediaDataSource          | 图库宫格展现层数据逻辑类             |
-| photos | 展现层 | TimelineSelectManager    | 图库日试图展现层选择逻辑类           |
-| photos | 展现层 | ThirdSelectManager       | 图库三方选择展现层选择逻辑类         |
-| photos | 展现层 | AlbumSetSelectManager    | 图库相册展现层选择逻辑类             |
+| photos | 展现层 | GroupItemDataSource      | 图库列大图浏览展现层数据逻辑类       |
+| photos | 展现层 | TimelineItemDataSource   | 图库日试图展现层数据逻辑类           |
+| photos | 展现层 | AlbumsDataSource         | 图库相册展现层数据逻辑类             |
+| photos | 展现层 | GroupItemDataSource      | 图库宫格展现层数据逻辑类             |
 | photos | 展现层 | SelectManager            | 图库展现层选择逻辑类                 |
 | photos | 展现层 | BroadCast                | 图库展现层消息分发类                 |
-| photos | 模型层 | AlbumInfo                | 图库模型层相册信息类                 |
-| photos | 模型层 | MediaItem                | 图库模型层媒体信息类                 |
-| photos | 模型层 | Thumbnail                | 图库模型层媒体缩略信息类             |
+| photos | 模型层 | AlbumDataItem            | 图库模型层相册信息类                 |
+| photos | 模型层 | MediaDataItem            | 图库模型层媒体信息类                 |
+| photos | 模型层 | TimelineDataItem         | 图库模型层日试图信息类              |
 
 
 
@@ -50,43 +47,50 @@
 ├── src
 │   └── main
 │       ├── ets    # ets代码目录
-│           ├── MainAbility
+│               ├── MainAbility
 │               ├── common # 共同代码目录
-│ 					├── access # 媒体库接口目录
-│ 					├── model # model目录
-│						├── browser # 浏览model目录
-│							├── album # 相册model目录
-│							├── dataObserver # 数据注册model目录
-│							├── interface # 接口model目录
-│							├── operation # 操作项model目录
-│							└──	photo # 照片model目录
-│						└── common #共同业务逻辑和实体模型目录
-│ 					├── utils # 共同工具目录
-│ 					└──  view # 共同视图组件
-│ 						├── actionbar 共同标题栏、底层栏和工具栏组件目录
-│						├── dialog 共同对话框目录。
-│                       └── mediaOperation 共同相册选择页目录
+│ 		    ├── model # model目录
+│			    ├── common # 共同业务逻辑和实体模型目录
+│ 		    └──  view # 共同视图组件
+│ 			    ├── actionbar # 共同标题栏、底层栏和工具栏组件目录
+│ 			    ├── browserOperation # 共同操作项目录
+│			    └── dialog # 共同对话框目录
 │               ├── feature # 功能模块目录
+│                   ├── album # 相册组件目录
+│ 			    ├── model # 相册model目录
+│ 			    └── view # 相册视图组件目录
+│                   ├── albumSelect # 相册视图目录
+│ 			    ├── model # 三方相册选择model目录
+│ 			    ├── utils # 三方相册选择工具目录
+│ 			    └── view # 三方相册选择视图组件目录
 │                   ├── brower # 图库浏览功能目录
-│  						├── utils # 图库浏览工具目录
-│  						└──	view # 图库浏览视图目录
-│							├── album # 相册视图目录
-│							├── photo # 照片视图目录
-│							└── photoGrid # 照片宫格目录
+│ 			    ├── view # 图库浏览视图组件目录
+│                   ├── editor # 图库图片编辑功能目录
+│ 			    ├── base # 
+│ 			    ├── crop # 
+│ 			    ├── utils # 图片编辑工具目录
+│ 			    └── view # 图片编辑视图组件目录
+│                   ├── formEditor # 图库FA卡片编辑功能目录
+│ 			    ├── view # 图库FA卡片编辑视图组件目录
+│                   ├── newAlbum # 新建相册功能目录
+│ 			    ├── model # 新建相册model目录
+│ 			    └── view # 新建相册视图组件目录
+│                   ├── photoGrid # 图片宫格功能目录
+│ 			    ├── model # 图片宫格model目录
+│ 			    └── view # 图片宫格视图组件目录
 │                   ├── thirdSelect # 第三方选择功能目录
-│ 						├── utils # 第三方选择工具目录
-│						└──	view # 第三方视图目录
+│ 			    ├── model # 第三方选择model目录
+│ 			    └── view # 第三方选择视图组件目录
 │                   └── timeline # 日视图宫格功能目录
-│  						├── model # 日视图model目录
-│ 						├── utils # 日试图工具目录
-│ 						└── view # 日试图视图目录
+│  			    ├── model # 日视图model目录
+│ 			    └── view # 日试图视图目录
 │               ├── product # 产品模块目录
 │                   ├── pad # pad模块目录
-│   					└── view # pad模块视图目录
+│   			    └── view # pad模块视图目录
 │                   └── phone # phone模块目录
-│  						└── view # phone模块视图目录
-│       ├── resources    # 资源目录
-│       └── config.json    # 项目配置信息
+│  			    └── view # phone模块视图目录
+│       ├── resources # 资源目录
+│       └── module.json5 # 项目配置信息
 ```
 ### 
 
