@@ -118,7 +118,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         let image = this.cropShow.getImageRect();
         crop.move(-image.left, -image.top);
         MathUtils.normalizeRect(crop, image.getWidth(), image.getHeight());
-        this.filter.setCropRect(crop);
+        crop && this.filter.setCropRect(crop);
         this.filter.setRotationAngle(this.rotationAngle);
         this.filter.setHorizontalAngle(this.sliderAngle);
         this.filter.setFlipHorizontal(this.isFlipHorizontal);
