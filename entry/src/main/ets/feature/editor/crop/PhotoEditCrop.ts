@@ -101,7 +101,7 @@ export class PhotoEditCrop extends PhotoEditBase {
 
     exit(): ImageFilterBase {
         Log.info(this.TAG, 'exit');
-        this.saveFinalOperation();
+        this.filter && this.saveFinalOperation();
         this.isCropShowInitialized = false;
         this.input = undefined;
         this.clearCanvas();
@@ -118,7 +118,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         let image = this.cropShow.getImageRect();
         crop.move(-image.left, -image.top);
         MathUtils.normalizeRect(crop, image.getWidth(), image.getHeight());
-        crop && this.filter.setCropRect(crop);
+        this.filter.setCropRect(crop);
         this.filter.setRotationAngle(this.rotationAngle);
         this.filter.setHorizontalAngle(this.sliderAngle);
         this.filter.setFlipHorizontal(this.isFlipHorizontal);
@@ -176,7 +176,9 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     private clearCanvas() {
-        this.ctx.clearRect(0, 0, this.displayWidth, this.displayHeight);
+        if (this.ctx != undefined) {
+            this.ctx.clearRect(0, 0, this.displayWidth, this.displayHeight);
+        }
     }
 
     private drawImage() {
