@@ -40,7 +40,7 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
             this.count = dataSource.getSelectedCount();
             this.items = dataSource.getSelectedItems();
         }
-        if (this.count <= 0) {
+        if (this.count as number <= 0) {
             Log.warn(TAG, 'count <= 0, return');
             return;
         }
@@ -63,7 +63,7 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
             photoCount += (this.items[i].count - itemVideoCount);
         }
 
-        if (this.count == 1) {
+        if (this.count as number == 1) {
             if (videoCount > 0 && photoCount > 0) {
                 return $r('app.string.recycle_single_album_tips', photoCount, videoCount);
             }
