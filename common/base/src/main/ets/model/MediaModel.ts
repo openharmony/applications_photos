@@ -115,8 +115,9 @@ class MediaModel {
     async deleteAll(fetchOption: MediaLib.MediaFetchOptions) {
         Log.info(TAG, 'deleteAll');
         startTrace('deleteAll');
+        let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
-            let fetchFileResult: MediaLib.FetchFileResult = await this.media.getFileAssets(fetchOption);
+            fetchFileResult = await this.media.getFileAssets(fetchOption);
             Log.debug(TAG, `deleteAll getFileAssets`);
             let deleteAllGetAllObject = hiSysEventDataQueryTimedOut('deleteAllGetAllObject')
             let fileAssets: MediaLib.FileAsset[] = await fetchFileResult.getAllObject();
@@ -128,7 +129,9 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, `deleteAll error:${JSON.stringify(err)}`);
         } finally {
-            fetchFileResult.close();
+             if (fetchFileResult) {
+                fetchFileResult.close();
+            }
         }
         finishTrace('deleteAll');
         Log.debug(TAG, 'deleteAll finish');
@@ -138,8 +141,9 @@ class MediaModel {
         Log.info(TAG, 'getAllMediaItems');
         startTrace('getAllMediaItems');
         let fileAssets: Array<MediaLib.FileAsset> = [];
+        let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
-            let fetchFileResult: MediaLib.FetchFileResult = await this.media.getFileAssets(fetchOption);
+            fetchFileResult = await this.media.getFileAssets(fetchOption);
             Log.debug(TAG, `getAllMediaItems getFileAssets:${fetchFileResult.getCount()}`);
             let getAllMediaItemsGetAllObject = hiSysEventDataQueryTimedOut('getAllMediaItemsGetAllObject')
             fileAssets = await fetchFileResult.getAllObject();
@@ -148,7 +152,9 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, `getAllMediaItems error:${JSON.stringify(err)}`);
         }  finally {
-            fetchFileResult.close();
+            if (fetchFileResult) {
+                fetchFileResult.close();
+            }
         }
         finishTrace('getAllMediaItems');
         Log.debug(TAG, 'getAllMediaItems finish');
@@ -159,12 +165,13 @@ class MediaModel {
         Log.info(TAG, 'getAllFavorMediaItems');
         startTrace('getAllFavorMediaItems');
         let fileAssets: Array<MediaLib.FileAsset> = [];
+        let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
             let getPrivateAlbumGetAllFavors = hiSysEventDataQueryTimedOut('getPrivateAlbumGetAllFavors')
             let albums = await this.media.getPrivateAlbum(MediaLib.PrivateAlbumType.TYPE_FAVORITE);
             clearTimeout(getPrivateAlbumGetAllFavors);
             if (albums.length > 0) {
-                let fetchFileResult: MediaLib.FetchFileResult = await albums[0].getFileAssets(fetchOption);
+                fetchFileResult = await albums[0].getFileAssets(fetchOption);
                 Log.debug(TAG, `getAllFavorMediaItems getFileAssets`);
                 let getAllObjectGetAllFavors = hiSysEventDataQueryTimedOut('getAllObjectGetAllFavors')
                 fileAssets = await fetchFileResult.getAllObject();
@@ -174,7 +181,9 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, `getAllFavorMediaItems error:${JSON.stringify(err)}`);
         } finally {
-            fetchFileResult.close();
+            if (fetchFileResult) {
+                fetchFileResult.close();
+            }
         }
         finishTrace('getAllFavorMediaItems');
         Log.debug(TAG, 'getAllFavorMediaItems finish');
@@ -185,12 +194,13 @@ class MediaModel {
         Log.info(TAG, 'getAllTrashMediaItems');
         startTrace('getAllTrashMediaItems');
         let fileAssets: Array<MediaLib.FileAsset> = [];
+        let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
             let getPrivateAlbumGetAllTrashItems = hiSysEventDataQueryTimedOut('getPrivateAlbumGetAllTrashItems')
             let albums = await this.media.getPrivateAlbum(MediaLib.PrivateAlbumType.TYPE_TRASH);
             clearTimeout(getPrivateAlbumGetAllTrashItems);
             if (albums.length > 0) {
-                let fetchFileResult: MediaLib.FetchFileResult = await albums[0].getFileAssets(fetchOption);
+                fetchFileResult = await albums[0].getFileAssets(fetchOption);
                 Log.debug(TAG, `getAllTrashMediaItems getFileAssets`);
                 let getAllObjectGetAllTrashItems = hiSysEventDataQueryTimedOut('getAllObjectGetAllTrashItems')
                 fileAssets = await fetchFileResult.getAllObject();
@@ -200,7 +210,9 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, `getAllTrashMediaItems error:${JSON.stringify(err)}`);
         } finally {
-            fetchFileResult.close();
+            if (fetchFileResult) {
+                fetchFileResult.close();
+            }
         }
         finishTrace('getAllTrashMediaItems');
         Log.debug(TAG, 'getAllTrashMediaItems finish');
@@ -221,8 +233,9 @@ class MediaModel {
         Log.info(TAG, 'getAllCommonMediaItem');
         startTrace('getAllCommonMediaItem');
         let item: MediaModelItem = new MediaModelItem();
+        let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
-            let fetchFileResult: MediaLib.FetchFileResult = await this.media.getFileAssets(fetchOption);
+            fetchFileResult = await this.media.getFileAssets(fetchOption);
             Log.debug(TAG, `getAllCommonMediaItem getFileAssets`);
             item.counts = await fetchFileResult.getCount();
             if (!isCountOnly && item.counts > 0) {
@@ -234,7 +247,9 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, `getAllCommonMediaItem error:${JSON.stringify(err)}`);
         } finally {
-            fetchFileResult.close();
+            if (fetchFileResult) {
+                fetchFileResult.close();
+            }
         }
         finishTrace('getAllCommonMediaItem');
         Log.debug(TAG, 'getAllCommonMediaItem finish');
@@ -245,12 +260,13 @@ class MediaModel {
         Log.info(TAG, 'getAllFavorMediaItem');
         startTrace('getAllFavorMediaItem');
         let item: MediaModelItem = new MediaModelItem();
+        let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
             let getPrivateAlbumGetAllFavorItem = hiSysEventDataQueryTimedOut('getPrivateAlbumGetAllFavorItem')
             let albums = await this.media.getPrivateAlbum(MediaLib.PrivateAlbumType.TYPE_FAVORITE);
             clearTimeout(getPrivateAlbumGetAllFavorItem);
             if (albums.length > 0) {
-                let fetchFileResult: MediaLib.FetchFileResult = await albums[0].getFileAssets(fetchOption);
+                fetchFileResult = await albums[0].getFileAssets(fetchOption);
                 Log.debug(TAG, `getAllFavorMediaItem getFileAssets`);
                 item.counts = await fetchFileResult.getCount();
                 if (!isCountOnly && item.counts > 0) {
@@ -263,7 +279,9 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, `getAllFavorMediaItem error:${JSON.stringify(err)}`);
         } finally {
-            fetchFileResult.close();
+            if (fetchFileResult) {
+                fetchFileResult.close();
+            }
         }
         finishTrace('getAllFavorMediaItem');
         Log.debug(TAG, 'getAllFavorMediaItem finish');
@@ -274,12 +292,13 @@ class MediaModel {
         Log.info(TAG, 'getAllTrashMediaItem');
         startTrace('getAllTrashMediaItem');
         let item: MediaModelItem = new MediaModelItem();
+        let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
             let getPrivateAlbumGetAllTrashItem = hiSysEventDataQueryTimedOut('getPrivateAlbumGetAllTrashItem')
             let albums = await this.media.getPrivateAlbum(MediaLib.PrivateAlbumType.TYPE_TRASH);
             clearTimeout(getPrivateAlbumGetAllTrashItem);
             if (albums.length > 0) {
-                let fetchFileResult: MediaLib.FetchFileResult = await albums[0].getFileAssets(fetchOption);
+                fetchFileResult = await albums[0].getFileAssets(fetchOption);
                 Log.debug(TAG, `getAllTrashMediaItem getFileAssets`);
                 item.counts = await fetchFileResult.getCount();
                 if (!isCountOnly && item.counts > 0) {
@@ -292,7 +311,9 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, `getAllTrashMediaItem error:${JSON.stringify(err)}`);
         } finally {
-            fetchFileResult.close();
+            if (fetchFileResult) {
+                fetchFileResult.close();
+            }
         }
         finishTrace('getAllTrashMediaItem');
         Log.debug(TAG, 'getAllTrashMediaItem finish');
@@ -303,6 +324,7 @@ class MediaModel {
         Log.info(TAG, 'getAlbumCount');
         startTrace('getAlbumCount');
         let count = 0;
+        let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
             let getAlbumsGetAlbumCount = hiSysEventDataQueryTimedOut('getAlbumsGetAlbumCount')
             let albums: Array<MediaLib.Album> = await this.media.getAlbums(fetchOption);
@@ -310,12 +332,14 @@ class MediaModel {
             if (albums.length == 0) {
                 return count;
             }
-            let fetchFileResult: MediaLib.FetchFileResult = await albums[0].getFileAssets();
+            fetchFileResult = await albums[0].getFileAssets();
             count = fetchFileResult.getCount();
         } catch (err) {
             Log.error(TAG, `getAlbumCount error:${JSON.stringify(err)}`);
         } finally {
-            fetchFileResult.close();
+            if (fetchFileResult) {
+                fetchFileResult.close();
+            }
         }
         finishTrace('getAlbumCount');
         Log.debug(TAG, 'getAlbumCount finish');
@@ -359,12 +383,13 @@ class MediaModel {
         Log.info(TAG, 'getTrashMedia');
         startTrace('getTrashMedia');
         let fileAsset: MediaLib.FileAsset = undefined;
+        let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
             let getPrivateAlbumGetTrash = hiSysEventDataQueryTimedOut('getPrivateAlbumGetTrash')
             let albums = await this.media.getPrivateAlbum(MediaLib.PrivateAlbumType.TYPE_TRASH);
             clearTimeout(getPrivateAlbumGetTrash);
             if (albums.length > 0) {
-                let fetchFileResult: MediaLib.FetchFileResult = await albums[0].getFileAssets(fetchOption);
+                fetchFileResult = await albums[0].getFileAssets(fetchOption);
                 Log.debug(TAG, `getTrashMedia getFileAssets`);
                 if (fetchFileResult.getCount() > 0) {
                     let getFirstObjectGetTrash = hiSysEventDataQueryTimedOut('getFirstObjectGetTrash')
@@ -376,7 +401,9 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, `getTrashMedia error:${JSON.stringify(err)}`);
         } finally {
-            fetchFileResult.close();
+            if (fetchFileResult) {
+                fetchFileResult.close();
+            }
         }
         finishTrace('getTrashMedia');
         Log.debug(TAG, 'getTrashMedia finish');
