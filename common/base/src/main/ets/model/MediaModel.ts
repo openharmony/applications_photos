@@ -125,9 +125,10 @@ class MediaModel {
                 await fileAssets[i].trash(true);
             }
             Log.debug(TAG, `deleteAll getFirstObject`);
-            fetchFileResult.close();
         } catch (err) {
             Log.error(TAG, `deleteAll error:${JSON.stringify(err)}`);
+        } finally {
+            fetchFileResult.close();
         }
         finishTrace('deleteAll');
         Log.debug(TAG, 'deleteAll finish');
@@ -144,9 +145,10 @@ class MediaModel {
             fileAssets = await fetchFileResult.getAllObject();
             clearTimeout(getAllMediaItemsGetAllObject);
             Log.debug(TAG, `getAllMediaItems getAllObject:${fileAssets.length}`);
-            fetchFileResult.close();
         } catch (err) {
             Log.error(TAG, `getAllMediaItems error:${JSON.stringify(err)}`);
+        } finally {
+            fetchFileResult.close();
         }
         finishTrace('getAllMediaItems');
         Log.debug(TAG, 'getAllMediaItems finish');
@@ -168,11 +170,11 @@ class MediaModel {
                 fileAssets = await fetchFileResult.getAllObject();
                 clearTimeout(getAllObjectGetAllFavors);
                 Log.debug(TAG, `getAllFavorMediaItems getFirstObject`);
-                fetchFileResult.close();
             }
-            fetchFileResult.close();
         } catch (err) {
             Log.error(TAG, `getAllFavorMediaItems error:${JSON.stringify(err)}`);
+        } finally {
+            fetchFileResult.close();
         }
         finishTrace('getAllFavorMediaItems');
         Log.debug(TAG, 'getAllFavorMediaItems finish');
@@ -194,11 +196,11 @@ class MediaModel {
                 fileAssets = await fetchFileResult.getAllObject();
                 clearTimeout(getAllObjectGetAllTrashItems);
                 Log.debug(TAG, `getAllTrashMediaItems getFirstObject`);
-                fetchFileResult.close();
             }
-            fetchFileResult.close();
         } catch (err) {
             Log.error(TAG, `getAllTrashMediaItems error:${JSON.stringify(err)}`);
+        } finally {
+            fetchFileResult.close();
         }
         finishTrace('getAllTrashMediaItems');
         Log.debug(TAG, 'getAllTrashMediaItems finish');
@@ -229,9 +231,10 @@ class MediaModel {
                 clearTimeout(getFirstObjectGetAllCommon);
             }
             Log.debug(TAG, `getAllCommonMediaItem getFirstObject`);
-            fetchFileResult.close();
         } catch (err) {
             Log.error(TAG, `getAllCommonMediaItem error:${JSON.stringify(err)}`);
+        } finally {
+            fetchFileResult.close();
         }
         finishTrace('getAllCommonMediaItem');
         Log.debug(TAG, 'getAllCommonMediaItem finish');
@@ -256,10 +259,11 @@ class MediaModel {
                     clearTimeout(getFirstObjectGetAllFavorItem);
                 }
                 Log.debug(TAG, `getAllFavorMediaItem getFirstObject`);
-                fetchFileResult.close();
             }
         } catch (err) {
             Log.error(TAG, `getAllFavorMediaItem error:${JSON.stringify(err)}`);
+        } finally {
+            fetchFileResult.close();
         }
         finishTrace('getAllFavorMediaItem');
         Log.debug(TAG, 'getAllFavorMediaItem finish');
@@ -284,10 +288,11 @@ class MediaModel {
                     clearTimeout(getFirstObjectGetAllTrashItem);
                 }
                 Log.debug(TAG, `getAllTrashMediaItem getFirstObject`);
-                fetchFileResult.close();
             }
         } catch (err) {
             Log.error(TAG, `getAllTrashMediaItem error:${JSON.stringify(err)}`);
+        } finally {
+            fetchFileResult.close();
         }
         finishTrace('getAllTrashMediaItem');
         Log.debug(TAG, 'getAllTrashMediaItem finish');
@@ -307,9 +312,10 @@ class MediaModel {
             }
             let fetchFileResult: MediaLib.FetchFileResult = await albums[0].getFileAssets();
             count = fetchFileResult.getCount();
-            fetchFileResult.close();
         } catch (err) {
             Log.error(TAG, `getAlbumCount error:${JSON.stringify(err)}`);
+        } finally {
+            fetchFileResult.close();
         }
         finishTrace('getAlbumCount');
         Log.debug(TAG, 'getAlbumCount finish');
@@ -366,10 +372,11 @@ class MediaModel {
                     clearTimeout(getFirstObjectGetTrash);
                 }
                 Log.debug(TAG, `getTrashMedia getFirstObject`);
-                fetchFileResult.close();
             }
         } catch (err) {
             Log.error(TAG, `getTrashMedia error:${JSON.stringify(err)}`);
+        } finally {
+            fetchFileResult.close();
         }
         finishTrace('getTrashMedia');
         Log.debug(TAG, 'getTrashMedia finish');
