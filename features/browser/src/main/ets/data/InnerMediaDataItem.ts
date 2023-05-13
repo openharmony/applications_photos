@@ -19,7 +19,7 @@ import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 export class InnerMediaDataItem extends MediaDataItem {
     constructor(uri: string, index: number) {
-        super("", [], "", index)
+        super("", [] as string[], "", index)
         this.mediaType = MediaLib.MediaType.IMAGE
         this.uri = uri
         this.size = 256
