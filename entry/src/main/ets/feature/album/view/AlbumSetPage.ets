@@ -226,11 +226,17 @@ export struct AlbumSetPage {
     }
 
     aboutToDisappear(): void {
+        Log.info(TAG, `aboutToDisappear`);
+        this.broadCast.off(null, null);
         this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
         this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
         this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
         this.appBroadcast.off(BroadcastConstants.RESET_ZERO, this.onResetZero.bind(this));
         mediaObserver.unregisterObserver(this.dataObserver);
+        this.dataObserver = undefined;
+        this.scroller = undefined;
+        this.tabsController = undefined;
+        this.barModel = undefined;
     }
 
     // Callback when the page is show.
