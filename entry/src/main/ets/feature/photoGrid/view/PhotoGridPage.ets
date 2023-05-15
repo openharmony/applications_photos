@@ -602,6 +602,7 @@ struct PhotoGridPage {
         this.dataObserver = undefined;
         this.scroller = undefined;
         this.barModel = undefined;
+        this.barModel = undefined;
     }
 
     build() {
