@@ -68,7 +68,6 @@ export class AlbumDataItem {
 
     update(fileAsset: MediaLib.FileAsset) {
         this.uri = fileAsset.uri;
-        this.orientation = fileAsset.orientation;
         this.relativePath = fileAsset.relativePath;
 
         this.status = MediaConstants.LOADED;
