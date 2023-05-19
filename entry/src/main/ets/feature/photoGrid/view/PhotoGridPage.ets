@@ -599,6 +599,9 @@ struct PhotoGridPage {
         this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
         this.appBroadcast.off(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
         mediaObserver.unregisterObserver(this.dataObserver);
+        this.dataObserver = undefined;
+        this.scroller = undefined;
+        this.barModel = undefined;
     }
 
     build() {

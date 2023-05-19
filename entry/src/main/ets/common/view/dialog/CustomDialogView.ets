@@ -97,148 +97,194 @@ export struct CustomDialogView {
     };
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
-    dialogController: CustomDialogController = new CustomDialogController({
-        builder: DetailsDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset: {
-            dx: 0,
-            dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
-        },
-        customStyle: true
-    });
-    multiSelectDialog: CustomDialogController = new CustomDialogController({
-        builder: MultiSelectDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset: {
-            dx: 0,
-            dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
-        },
-        customStyle: true
-    });
-    deleteDialogController: CustomDialogController = new CustomDialogController({
-        builder: DeleteDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset: {
-            dx: 0,
-            dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
-        },
-        customStyle: true
-    });
-    deleteProgressDialogController: CustomDialogController = new CustomDialogController({
-        builder: DeleteProgressDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset: {
-            dx: 0,
-            dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
-        },
-        customStyle: true
-    });
-    progressDialogController: CustomDialogController = new CustomDialogController({
-        builder: ProgressDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset: {
-            dx: 0,
-            dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
-        },
-        customStyle: true
-    });
-    cancelDialogController: CustomDialogController = new CustomDialogController({
-        builder: CancelOperationDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset: {
-            dx: 0,
-            dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
-        },
-        customStyle: true
-    });
-    renameFileDialogController: CustomDialogController = new CustomDialogController({
-        builder: RenameDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset: {
-            dx: 0,
-            dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
-        },
-        customStyle: true
-    });
-    saveDialogController: CustomDialogController = new CustomDialogController({
-        builder: SaveDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        customStyle: true
-    });
-    editExitDialogController: CustomDialogController = new CustomDialogController({
-        builder: EditExitDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        customStyle: true
-    });
-    addNotesDialogController: CustomDialogController = new CustomDialogController({
-        builder: AddNotesDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        customStyle: true
-    });
-    newAlbumDialogController: CustomDialogController = new CustomDialogController({
-        builder: NewAlbumDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset: {
-            dx: 0,
-            dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
-        },
-        customStyle: true
-    });
-    copyOrMoveDialogController: CustomDialogController = new CustomDialogController({
-        builder: CopyOrMoveDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset: {
-            dx: 0,
-            dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
-        },
-        customStyle: true
-    });
-    findSameNameDialog: CustomDialogController = new CustomDialogController({
-        builder: FindSameNameDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset: {
-            dx: 0,
-            dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
-        },
-        customStyle: true
-    });
-    downloadCancelOperationDialog: CustomDialogController = new CustomDialogController({
-        builder: DownloadCancelOperationDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        offset: {
-            dx: 0,
-            dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
-        },
-        customStyle: true
-    });
-    saveImageDialogController: CustomDialogController = new CustomDialogController({
-        builder: SaveImageDialog(),
-        autoCancel: false,
-        alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
-        customStyle: true
-    });
-
+    dialogController: CustomDialogController;
+    multiSelectDialog: CustomDialogController;
+    deleteDialogController: CustomDialogController;
+    deleteProgressDialogController: CustomDialogController;
+    progressDialogController: CustomDialogController;
+    cancelDialogController: CustomDialogController;
+    renameFileDialogController: CustomDialogController;
+    saveDialogController: CustomDialogController;
+    editExitDialogController: CustomDialogController;
+    addNotesDialogController: CustomDialogController;
+    newAlbumDialogController: CustomDialogController;
+    copyOrMoveDialogController: CustomDialogController;
+    findSameNameDialog: CustomDialogController;
+    downloadCancelOperationDialog: CustomDialogController;
+    saveImageDialogController: CustomDialogController;
+    
     aboutToDisappear(): void {
         Log.info(TAG, 'aboutToDisappear');
+        delete this.dialogController;
+        this.dialogController = undefined;
+        delete this.multiSelectDialog;
+        this.multiSelectDialog = undefined;
+        delete this.deleteDialogController;
+        this.deleteDialogController = undefined;
+        delete this.deleteProgressDialogController;
+        this.deleteProgressDialogController = undefined;
+        delete this.progressDialogController;
+        this.progressDialogController = undefined;
+        delete this.cancelDialogController;
+        this.cancelDialogController = undefined;
+        delete this.renameFileDialogController;
+        this.renameFileDialogController = undefined;
+        delete this.saveDialogController;
+        this.saveDialogController = undefined;
+        delete this.editExitDialogController;
+        this.editExitDialogController = undefined;
+        delete this.addNotesDialogController;
+        this.addNotesDialogController = undefined;
+        delete this.newAlbumDialogController;
+        this.newAlbumDialogController = undefined;
+        delete this.copyOrMoveDialogController;
+        this.copyOrMoveDialogController = undefined;
+        delete this.findSameNameDialog;
+        this.findSameNameDialog = undefined;
+        delete this.downloadCancelOperationDialog;
+        this.downloadCancelOperationDialog = undefined;
+        delete this.saveImageDialogController;
+        this.saveImageDialogController = undefined;
     }
 
     aboutToAppear(): void {
         Log.info(TAG, 'aboutToAppear');
         let self = this;
+        this.dialogController = new CustomDialogController({
+            builder: DetailsDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.multiSelectDialog = new CustomDialogController({
+            builder: MultiSelectDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.deleteDialogController = new CustomDialogController({
+            builder: DeleteDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.deleteProgressDialogController = new CustomDialogController({
+            builder: DeleteProgressDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.progressDialogController = new CustomDialogController({
+            builder: ProgressDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.cancelDialogController = new CustomDialogController({
+            builder: CancelOperationDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.renameFileDialogController = new CustomDialogController({
+            builder: RenameDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.saveDialogController = new CustomDialogController({
+            builder: SaveDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            customStyle: true
+        });
+        this.editExitDialogController = new CustomDialogController({
+            builder: EditExitDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            customStyle: true
+        });
+        this.addNotesDialogController = new CustomDialogController({
+            builder: AddNotesDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            customStyle: true
+        });
+        this.newAlbumDialogController = new CustomDialogController({
+            builder: NewAlbumDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.copyOrMoveDialogController = new CustomDialogController({
+            builder: CopyOrMoveDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.findSameNameDialog = new CustomDialogController({
+            builder: FindSameNameDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.downloadCancelOperationDialog = new CustomDialogController({
+            builder: DownloadCancelOperationDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.saveImageDialogController = new CustomDialogController({
+            builder: SaveImageDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            customStyle: true
+        });
+        
         this.broadCast.on(BroadcastConstants.SHOW_DETAIL_DIALOG, (item: MediaDataItem, isDistributed: boolean) => {
             this.showDetailDialog(item, isDistributed)
         });
