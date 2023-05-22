@@ -74,6 +74,7 @@ export struct CustomDialogView {
         duration: 0,
         title: '',
         dateTaken: 0,
+        dateAdded: 0,
         uri: '',
         displayName: '',
         dateModified: 0
@@ -87,6 +88,7 @@ export struct CustomDialogView {
         duration: 0,
         title: '',
         dateTaken: 0,
+        dateAdded: 0,
         uri: '',
         displayName: '',
         dateModified: 0
@@ -450,6 +452,7 @@ export struct CustomDialogView {
                 duration: item.duration,
                 title: item.title,
                 dateTaken: item.dateTaken,
+                dateAdded: item.dateAdded,
                 uri: item.uri,
                 displayName: item.displayName,
                 dateModified: item.dateModified
