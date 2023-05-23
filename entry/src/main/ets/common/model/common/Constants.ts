@@ -250,8 +250,8 @@ export class Constants {
     static readonly GRID_MIN_COUNT: number = 2;
     static readonly SCROLL_BAR_SIDE_MIN_GAP: number = 12;
     static readonly SCROLL_MARGIN: number = 24;
-    static readonly SCROLL_BAR_VISIBLE_THRESHOLD: number = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 29 : 33;
-    static readonly GRID_SCROLL_BAR_VISIBLE_THRESHOLD: number = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 25 : 45;
+    static readonly SCROLL_BAR_VISIBLE_THRESHOLD: number = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 7 : 9;
+    static readonly GRID_SCROLL_BAR_VISIBLE_THRESHOLD: number = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 7 : 13;
 
     // Column Constants
 
