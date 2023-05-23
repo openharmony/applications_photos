@@ -46,7 +46,7 @@ export default class MainAbility extends Ability {
     private static readonly ACTION_URI_PHOTO_DETAIL = 'photodetail';
     private browserDataSource : GroupItemDataSource = new GroupItemDataSource();
 
-    onCreate(want, launchParam) {
+    onCreate(want, launchParam): void {
         Log.info(this.TAG, 'Application onCreate');
         startTrace('onCreate');
         // Ability is creating, initialize resources for this ability
@@ -117,7 +117,7 @@ export default class MainAbility extends Ability {
         Log.info(this.TAG, 'Application onCreate end');
     }
 
-    onNewWant(want) {
+    onNewWant(want): void {
         startTrace('onNewWant');
         let action = want.parameters;
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
@@ -151,13 +151,13 @@ export default class MainAbility extends Ability {
         finishTrace('onNewWant');
     }
 
-    onDestroy() {
+    onDestroy(): void {
         // Ability is creating, release resources for this ability
         Log.info(this.TAG, 'Application onDestroy');
         AppStorage.Delete(Constants.ENTRY_FROM_HAP);
     }
 
-    onWindowStageCreate(windowStage) {
+    onWindowStageCreate(windowStage): void {
         startTrace('onWindowStageCreate');
         // Main window is created, set main page for this ability
         Log.info(this.TAG, 'Application onWindowStageCreate');
@@ -181,16 +181,16 @@ export default class MainAbility extends Ability {
         });
     }
 
-    onWindowStageDestroy() {
+    onWindowStageDestroy(): void {
     }
 
-    onForeground() {
+    onForeground(): void {
     }
 
-    onBackground() {
+    onBackground(): void {
     }
 
-    async thirdRouterPage() {
+    async thirdRouterPage(): Promise<void> {
         let entryFrom = AppStorage.Get(Constants.ENTRY_FROM_HAP);
         Log.info(this.TAG, `thirdRouterPage entryFromHap: ${entryFrom}`);
         if (entryFrom == Constants.ENTRY_FROM_NONE) {

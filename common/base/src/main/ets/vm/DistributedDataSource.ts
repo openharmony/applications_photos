@@ -43,7 +43,7 @@ export class DistributedDataSource extends ItemDataSource {
         return isSelect;
     }
 
-    setSelect(isSelect: boolean) {
+    setSelect(isSelect: boolean): void {
         this.peerDataItems.forEach((item: PeerDataItem): void => {
             item.setSelect(isSelect);
         })

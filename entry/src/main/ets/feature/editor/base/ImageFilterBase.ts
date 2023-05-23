@@ -26,7 +26,7 @@ export abstract class ImageFilterBase implements Releasable {
 
     abstract render(pixelMap: PixelMapWrapper): PixelMapWrapper;
 
-    setCache(pixelMap: PixelMapWrapper) {
+    setCache(pixelMap: PixelMapWrapper): void {
         this.release();
         this.cache = pixelMap;
     }

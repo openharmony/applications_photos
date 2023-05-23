@@ -67,7 +67,7 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
             [this.item.displayName, this.confirmCallback, this.cancelCallback]);
     }
 
-    private async confirmCallback(newName: string) {
+    private async confirmCallback(newName: string): Promise<void> {
         Log.info(TAG, `AlbumSet rename confirm and the new name is: ${newName}`);
 
         this.onOperationEnd = this.menuContext.onOperationEnd;
@@ -77,7 +77,7 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
         this.rename(newName);
     }
 
-    private async rename(name) {
+    private async rename(name): Promise<void> {
         try {
             let fetchOption: MediaLib.MediaFetchOptions = await  getFetchOptions(this.item.selectType, this.item.id, "")
             let albums: MediaLib.Album[] = await mediaModel.getAlbums(fetchOption)
@@ -102,12 +102,12 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
         Log.info(TAG, 'AlbumSet rename cancel');
     }
 
-    onCompleted(): void{
+    onCompleted(): void {
         Log.info(TAG, 'Rename data succeed!');
         this.onOperationEnd && this.onOperationEnd();
     }
 
-    onError(): void{
+    onError(): void {
         Log.error(TAG, 'Rename data failed!');
         this.onOperationEnd && this.onOperationEnd();
     }

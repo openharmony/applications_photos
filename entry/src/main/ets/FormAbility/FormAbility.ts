@@ -14,6 +14,7 @@
  */
 
 import FormExtension from '@ohos.app.form.FormExtensionAbility';
+import formBindingData from "@ohos.app.form.formBindingData";
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { FormControllerManager } from './controller/FormControllerManager';
 import { FormController } from './controller/FormController';
@@ -23,7 +24,7 @@ import  DataStoreUtil  from '@ohos/base/src/main/ets/utils/DataStoreUtil';
 
 export default class FormAbility extends FormExtension {
     private TAG: string = 'FormAbility';
-    onAddForm(want) {
+    onAddForm(want): formBindingData.FormBindingData | null {
         Log.info(this.TAG, `form onAddForm. want ${JSON.stringify(want)}`);
         this.init();
         let param = want.parameters;
@@ -46,11 +47,11 @@ export default class FormAbility extends FormExtension {
         return null;
     }
 
-    onCastToNormalForm(formId) {
+    onCastToNormalForm(formId): void {
         Log.info(this.TAG, `onCastToNormalForm, formId: ${formId}`);
     }
 
-    onUpdateForm(formId) {
+    onUpdateForm(formId): void {
         Log.info(this.TAG, `onUpdateForm, formId: ${formId} context ${JSON.stringify(this.context)}`);
         // 经常起来后可能直接走onUpdate， 所以要初始化一下
         this.init();
@@ -58,14 +59,14 @@ export default class FormAbility extends FormExtension {
         formControllerManager.updateController(formId);
     }
 
-    onChangeFormVisibility(newStatus) {
+    onChangeFormVisibility(newStatus): void {
         Log.info(this.TAG, `onChangeFormVisibility, newStatus: ${JSON.stringify(newStatus)}`);
         // 经常起来后可能直接走onChangeFormVisibility， 所以要初始化一下
         this.init();
         this.clearCache(newStatus);
     }
 
-    private async clearCache(newStatus) {
+    private async clearCache(newStatus): Promise<void> {
         try {
             let dataStore = DataStoreUtil.getInstance();
             await dataStore.removeCache();
@@ -80,7 +81,7 @@ export default class FormAbility extends FormExtension {
         }
     }
 
-    onFormEvent(formId, message) {
+    onFormEvent(formId, message): void {
         Log.info(this.TAG, `onFormEvent, formId: ${formId}, message: ${message}`);
         // 经常起来后可能直接走onEvent， 所以要初始化一下
         this.init();
@@ -88,7 +89,7 @@ export default class FormAbility extends FormExtension {
         formControllerManager.onEvent(formId, message);
     }
 
-    onRemoveForm(formId) {
+    onRemoveForm(formId): void {
         Log.info(this.TAG, `onRemoveForm, formId: ${formId}`);
         // 经常起来后可能直接走onDestroy， 所以要初始化一下
         this.init();
@@ -96,7 +97,7 @@ export default class FormAbility extends FormExtension {
         formControllerManager.destroyController(formId);
     }
 
-    private init() {
+    private init(): void {
         mediaModel.onCreate(this.context);
         globalThis.appContext = this.context;
     }

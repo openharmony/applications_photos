@@ -89,7 +89,7 @@ class ScreenManager {
      * @param event
      * @param fn
      */
-    on(event, fn) {
+    on(event, fn): void {
         if (Array.isArray(event)) {
             for (let i = 0, l = event.length; i < l; i++) {
                 this.on(event[i], fn);
@@ -105,7 +105,7 @@ class ScreenManager {
      * @param event
      * @param fn
      */
-    off(event, fn) {
+    off(event, fn): void {
         if (event == null || event == undefined) {
             return;
         }
@@ -132,7 +132,7 @@ class ScreenManager {
         }
     }
 
-    private emit(event, argument: any[]) {
+    private emit(event, argument: any[]): void {
         let _self = this;
         if (!this.events[event]) {
             return;
@@ -174,7 +174,7 @@ class ScreenManager {
         return px2vp(this.naviBarHeight);
     }
 
-    async initWindowMode() {
+    async initWindowMode(): Promise<void> {
         Log.debug(TAG, `start to initialize photos application window mode: ${this.windowMode}`);
     }
 
@@ -182,7 +182,7 @@ class ScreenManager {
         return (WindowMode.PRIMARY == this.windowMode || WindowMode.SECONDARY == this.windowMode)
     }
 
-    async checkWindowMode() {
+    async checkWindowMode(): Promise<void> {
         let before = this.windowMode;
         let mode = await globalThis.photosWindowStage.getWindowMode();
         Log.info(TAG, `photos application before/current window mode: ${before}/${mode}`);
@@ -198,7 +198,7 @@ class ScreenManager {
         }
     }
 
-    private setMainWindow(win: window.Window) {
+    private setMainWindow(win: window.Window): void {
         Log.debug(TAG, 'setMainWindow');
         win.on('windowSizeChange', (data): void => {
             Log.debug(TAG, `windowSizeChange ${JSON.stringify(data)}`);
@@ -207,7 +207,7 @@ class ScreenManager {
         })
     }
 
-private getWindowProperties(win: window.Window) {
+    private getWindowProperties(win: window.Window): void {
         Log.debug(TAG, 'getWindowProperties');
         try {
             let properties = win.getWindowProperties();
@@ -221,7 +221,7 @@ private getWindowProperties(win: window.Window) {
         }
     }
 
-    private async setFullScreen() {
+    private async setFullScreen(): Promise<void> {
         let topWindow: any = AppStorage.Get(WindowConstants.MAIN_WINDOW);
         Log.debug(TAG, 'getTopWindow start');
         try {
@@ -233,7 +233,7 @@ private getWindowProperties(win: window.Window) {
         }
     }
 
-    setSplitScreen() {
+    setSplitScreen(): void {
         try {
             this.statusBarHeight = 0;
             this.naviBarHeight = 0;
@@ -244,7 +244,7 @@ private getWindowProperties(win: window.Window) {
         }
     }
 
-    private async hideStatusBar(topWindow: any) {
+    private async hideStatusBar(topWindow: any): Promise<void> {
         Log.debug(TAG, 'hideStatusBar start');
         let names = ['navigation'];
         Log.debug(TAG, `getTopWindow names: ${names} end`);
@@ -272,7 +272,7 @@ private getWindowProperties(win: window.Window) {
         }
     }
 
-    async setNavigationBarColor(barColor: string, barContentColor: string) {
+    async setNavigationBarColor(barColor: string, barContentColor: string): Promise<void> {
         Log.debug(TAG, 'setNavigationBarColor start');
         let topWindow: any = AppStorage.Get(WindowConstants.MAIN_WINDOW);
         try {
@@ -312,7 +312,7 @@ private getWindowProperties(win: window.Window) {
         }
     }
 
-    private onLeftBlankChanged(area) {
+    private onLeftBlankChanged(area): void {
         if (area == null || area == undefined || area.bottomRect.height == 0) {
             return;
         }
@@ -329,7 +329,7 @@ private getWindowProperties(win: window.Window) {
         }
     }
 
-    private onWinSizeChanged(size) {
+    private onWinSizeChanged(size): void {
         Log.info(TAG, `onWinSizeChanged ${JSON.stringify(size)}`);
         if (size == null || size == undefined) {
             return;
@@ -348,7 +348,7 @@ private getWindowProperties(win: window.Window) {
         }
     }
 
-    private onRotationAngleChanged(angle) {
+    private onRotationAngleChanged(angle): void {
         if (angle == null || angle == undefined) {
             return;
         }
@@ -393,7 +393,7 @@ private getWindowProperties(win: window.Window) {
         }
     }
 
-    setKeepScreenOn() {
+    setKeepScreenOn(): void {
         Log.info(TAG, 'setKeepScreenOn start');
         let topWindow: any = AppStorage.Get('mainWindow');
         try {
@@ -403,7 +403,7 @@ private getWindowProperties(win: window.Window) {
         }
     }
 
-    setKeepScreenOff() {
+    setKeepScreenOff(): void {
         Log.info(TAG, 'setKeepScreenOff start');
         let topWindow: any = AppStorage.Get('mainWindow');
         try {

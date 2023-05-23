@@ -17,6 +17,7 @@ import { Constants } from '../common/Constants';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import dataStore from '@ohos/base/src/main/ets/utils/DataStoreUtil';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
+import MediaLib from "@ohos.multimedia.mediaLibrary";
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { getAlbumDisplayName, getFetchOptions } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
@@ -40,7 +41,7 @@ export class MediaDataManager {
         this.initData(formId);
     }
 
-    async initData(formId: string) {
+    async initData(formId: string): Promise<void> {
         Log.info(TAG, `initData formId ${formId}`);
         await this.storageRead(formId);
         if (this.mediaData == null || this.mediaData == undefined) {
@@ -60,7 +61,7 @@ export class MediaDataManager {
         await this.loadData();
     }
 
-    async saveData() {
+    async saveData(): Promise<void> {
         Log.debug(TAG, 'saveData');
         this.updateMediaData();
         if (((this.operationMode != Constants.PHOTOS_FORM_OPERATION_MODE_EVENT)
@@ -77,7 +78,7 @@ export class MediaDataManager {
         this.operationFormController();
     }
 
-    operationFormController() {
+    operationFormController(): void {
         Log.debug(TAG, `operFormControllerOper operationMode ${this.operationMode}`);
         switch (this.operationMode) {
             case Constants.PHOTOS_FORM_OPERATION_MODE_DESTROY:
@@ -103,7 +104,7 @@ export class MediaDataManager {
         Log.debug(TAG, 'operationFormController end!');
     }
 
-    async storageRead(formId: string) {
+    async storageRead(formId: string): Promise<void> {
         Log.debug(TAG, 'storageRead start!');
         let formIdKey: string = 'formId_' + formId
         let hasFormId = await dataStore.hasData(formIdKey);
@@ -144,7 +145,7 @@ export class MediaDataManager {
         Log.debug(TAG, 'storageRead end!');
     }
 
-    async storageSet() {
+    async storageSet(): Promise<void> {
         Log.debug(TAG, 'storageSet start!');
         let formIdKey = 'formId_' + this.mediaData.formId;
         await dataStore.putData(formIdKey, this.mediaData.formId);
@@ -168,7 +169,7 @@ export class MediaDataManager {
         Log.debug(TAG, 'storageSet end!');
     }
 
-    async storageDelete() {
+    async storageDelete(): Promise<void> {
         Log.debug(TAG, 'storageDelete start!');
         let formIdKey = 'formId_' + this.mediaData.formId;
         if (await dataStore.hasData(formIdKey)) {
@@ -219,7 +220,7 @@ export class MediaDataManager {
         Log.debug(TAG, 'storageDelete end!');
     }
 
-    updateMediaData() {
+    updateMediaData(): void {
         Log.debug(TAG, 'updateMediaData start! index ${this.mediaData.currentIndex}');
         if (this.mediaData.currentIndex == -1) {
             this.mediaData.currentIndex = 0;
@@ -255,11 +256,11 @@ export class MediaDataManager {
         Log.debug(TAG, 'updateMediaData end!');
     }
 
-    getUpdateTag() {
+    getUpdateTag(): boolean {
         return this.isUpdate;
     }
 
-    setUpdateTag(isUpdate: boolean) {
+    setUpdateTag(isUpdate: boolean): void {
         this.isUpdate = isUpdate;
     }
 
@@ -289,7 +290,7 @@ export class MediaDataManager {
         return this.mediaData.intervalTime;
     }
 
-    setNextIndex() {
+    setNextIndex(): void {
         Log.debug(TAG, `setNextIndex start old index ${this.mediaData.currentIndex} flag ${this.isNextFag}`);
         // this.mediaData.isShowAlbumName == false means select a photo instead of a album
         if (this.isNextFag && this.mediaData.isShowAlbumName) {
@@ -327,8 +328,8 @@ export class MediaDataManager {
         return this.fd;
     }
 
-    async closeFd() {
-         Log.info(TAG, `close the fd: ${this.fd}`);
+    async closeFd(): Promise<void> {
+        Log.info(TAG, `close the fd: ${this.fd}`);
         let fileAsset = this.getCurrentItem();
         if (fileAsset != null && this.fd != -1) {
             await mediaModel.closeAsset(this.fd, fileAsset);
@@ -336,7 +337,7 @@ export class MediaDataManager {
         }
     }
 
-    async loadData() {
+    async loadData(): Promise<void> {
         Log.debug(TAG, 'loadData start!');
         this.items = await this.getItems(this.mediaData.albumId);
         if (this.items == null) {
@@ -347,7 +348,7 @@ export class MediaDataManager {
         Log.debug(TAG, 'loadData end!');
     }
 
-    async getItems(albumId: string) {
+    async getItems(albumId: string): Promise<Array<MediaLib.FileAsset>> {
          Log.info(TAG, 'getItems start!');
         let fetchOpt = await getFetchOptions(MediaConstants.SELECT_TYPE_IMAGE, albumId, "")
         if (albumId == MediaConstants.ALBUM_ID_FAVOR) {

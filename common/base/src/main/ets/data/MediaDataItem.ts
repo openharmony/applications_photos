@@ -114,7 +114,7 @@ export class MediaDataItem implements DateAdded {
         return
     }
 
-    update(fileAsset: MediaLib.FileAsset) {
+    update(fileAsset: MediaLib.FileAsset): void {
         this.id = fileAsset.id;
         this.uri = fileAsset.uri;
         this.orientation = fileAsset.orientation;
@@ -166,7 +166,7 @@ export class MediaDataItem implements DateAdded {
         }
     }
 
-    setSelect(isSelect: boolean) {
+    setSelect(isSelect: boolean): void {
         this.isSelect = isSelect;
         selectManager.setSelect(this.uri, this.isSelect);
     }

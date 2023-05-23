@@ -19,7 +19,7 @@ const TAG = ""
 class SelectManager {
     private status: Map<string, boolean> = new Map();
 
-    isSelect(key: string, defaultValue: boolean): boolean{
+    isSelect(key: string, defaultValue: boolean): boolean {
         if (this.status.has(key)) {
             return this.status.get(key);
         } else {
@@ -27,11 +27,11 @@ class SelectManager {
         }
     }
 
-    setSelect(key: string, value: boolean) {
+    setSelect(key: string, value: boolean): void {
         this.status.set(key, value);
     }
 
-    deleteSelect(key: string) {
+    deleteSelect(key: string): void {
         this.status.delete(key);
     }
 }

@@ -27,7 +27,7 @@ const TAG = "Loader"
 export class Loader {
     private static readonly MIN_PIXEL_MAP_SIZE: number = 1024;
 
-    private static getPixelMapPreviewSize(size: Size) {
+    private static getPixelMapPreviewSize(size: Size): void {
         let width = screenManager.getWinWidth();
         let height = screenManager.getWinHeight();
         Log.debug(TAG, `picture real size: ${size.width} ${size.height}`);
@@ -56,9 +56,9 @@ export class Loader {
         return wrapper;
     }
 
-    private static translatePixelMap(image: PixelMapWrapper, orientation: number) {
+    private static translatePixelMap(image: PixelMapWrapper, orientation: number): void {
         if (0 == orientation % CropAngle.CIRCLE_ANGLE) {
-            return image;
+            return;
         }
 
         let size = Loader.swapSize(image, orientation);

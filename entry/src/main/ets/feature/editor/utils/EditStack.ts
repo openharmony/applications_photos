@@ -39,7 +39,7 @@ export class EditStack<T> {
         return this.currentPosition;
     }
 
-    reset() {
+    reset(): void {
         this.stack.length = 0;
         this.currentPosition = -1;
     }
@@ -56,7 +56,7 @@ export class EditStack<T> {
         return this.stack[index];
     }
 
-    push(obj: T) {
+    push(obj: T): void {
         let reserveLength = this.currentPosition + 1;
         if (reserveLength < this.stack.length) {
             this.stack.length = reserveLength;
@@ -64,7 +64,7 @@ export class EditStack<T> {
         this.currentPosition = this.stack.push(obj) - 1;
     }
 
-    executeEach(action: Function, count: number) {
+    executeEach(action: Function, count: number): void {
         for (let i = 0; i < count; ++i) {
             action(this.stack[i]);
         }

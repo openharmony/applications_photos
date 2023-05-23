@@ -25,31 +25,31 @@ export class Log {
     public static readonly LEVEL_FATAL = HiLog.LogLevel.FATAL;
     public static LOG_LEVEL = Log.LEVEL_INFO;
     
-    public static debug(TAG: string, message: string) {
+    public static debug(TAG: string, message: string): void {
         if (this.LOG_LEVEL <= this.LEVEL_DEBUG) {
             HiLog.debug(this.DOMAIN, this.TAG, "[" + TAG + "]: " + message);
         }
     }
 
-    public static info(TAG: string, message: string) {
+    public static info(TAG: string, message: string): void {
         if (this.LOG_LEVEL <= this.LEVEL_INFO) {
             HiLog.info(this.DOMAIN, this.TAG, "[" + TAG + "]: " + message);
         }
     }
 
-    public static warn(TAG: string, message: string) {
+    public static warn(TAG: string, message: string): void {
         if (this.LOG_LEVEL <= this.LEVEL_WARN) {
             HiLog.warn(this.DOMAIN, this.TAG, "[" + TAG + "]: " + message);
         }
     }
 
-    public static error(TAG: string, message: string) {
+    public static error(TAG: string, message: string): void {
         if (this.LOG_LEVEL <= this.LEVEL_ERROR) {
             HiLog.error(this.DOMAIN, this.TAG, "[" + TAG + "]: " + message);
         }
     }
 
-    public static fatal(TAG: string, message: string) {
+    public static fatal(TAG: string, message: string): void {
         if (this.LOG_LEVEL <= this.LEVEL_FATAL) {
             HiLog.info(this.DOMAIN, this.TAG, "[" + TAG + "]: " + message);
         }

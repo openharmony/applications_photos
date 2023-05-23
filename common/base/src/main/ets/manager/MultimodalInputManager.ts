@@ -42,7 +42,7 @@ export class MultimodalInputManager {
         'finalKeyDownDuration': 0
     };
 
-    async registerListener(callback) {
+    async registerListener(callback): Promise<void> {
         Log.debug(TAG, `registerListener start`);
         inputConsumer.on('key', this.leftKeyOptions, (data): void => {
             Log.debug(TAG, `notificationRegister data: ${JSON.stringify(data)}`);
@@ -59,7 +59,7 @@ export class MultimodalInputManager {
         Log.debug(TAG, `registerListener end`);
     }
 
-    async unregisterListener() {
+    async unregisterListener(): Promise<void> {
         Log.debug(TAG, `unregisterListener start`);
         inputConsumer.off('key', this.leftKeyOptions, (data): void  => {
             Log.debug(TAG, `notificationUnregister data: ${JSON.stringify(data)}`);

@@ -22,7 +22,7 @@ export class Ratio {
         this.h = h;
     }
 
-    set(w: number, h: number) {
+    set(w: number, h: number): void {
         this.w = w;
         this.h = h;
     }

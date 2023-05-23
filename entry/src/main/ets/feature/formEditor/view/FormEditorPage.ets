@@ -210,13 +210,13 @@ struct FormEditorPage {
         dataStore.init().then(() => {
             let intervalTimeKey = 'intervalTime';
             dataStore.getData(intervalTimeKey, this.time).then((d) => {
-                this.time = d;
+                this.time = d as number;
                 this.setIntervalTime();
                 AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);
             })
             let isShowKey = 'isShow_' + this.formId;
             dataStore.getData(isShowKey, this.isShow).then((d) => {
-                this.isShow = d;
+                this.isShow = d as boolean;
             })
             let arkUriKey = 'arkUri_' + this.formId;
             dataStore.getData(arkUriKey, this.arkUri).then((d) => {
@@ -225,7 +225,7 @@ struct FormEditorPage {
                 } else {
                     d = 0;
                 }
-                this.arkUri = d;
+                this.arkUri = d as number;
             })
         })
     }

@@ -27,22 +27,22 @@ export class LazyItem<T> {
         this.index = index
     }
 
-    update(item: T){
+    update(item: T): void {
         if (this.onItemUpdate && this.index != -1) {
             this.onItemUpdate(this.index, item)
         }
     }
 
-    getHashCode(): string{
+    getHashCode(): string {
         // @ts-ignore
         return `${this.index}` + this.item.getHashCode()
     }
 
-    get() :T{
+    get(): T {
         return this.item
     }
 
-    set(item:T){
+    set(item:T): void {
         this.item = item
     }
 

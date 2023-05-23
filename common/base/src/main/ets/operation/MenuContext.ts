@@ -73,12 +73,12 @@ export class MenuContext {
         return this;
     }
 
-    withRemoteDevice(deviceId) {
+    withRemoteDevice(deviceId): MenuContext {
         this.deviceId = deviceId;
         return this;
     }
 
-    withAlbumInfo(albumInfo: SimpleAlbumDataItem) {
+    withAlbumInfo(albumInfo: SimpleAlbumDataItem): MenuContext {
         this.albumInfo = albumInfo;
         return this;
     }
