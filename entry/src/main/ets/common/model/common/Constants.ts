@@ -246,7 +246,8 @@ export class Constants {
     static readonly GRID_GUTTER: number = 2;
     static readonly GRID_IMAGE_SIZE: number = 256;
     static readonly GRID_MAX_SIZE_RATIO: number = 1.2;
-    static readonly GRID_MIN_COUNT: number = 4;
+    TIME_GRID_MAX_SIZE_RATIO: number = 1.5;
+    static readonly GRID_MIN_COUNT: number = 2;
     static readonly SCROLL_BAR_SIDE_MIN_GAP: number = 12;
     static readonly SCROLL_MARGIN: number = 24;
     static readonly SCROLL_BAR_VISIBLE_THRESHOLD: number = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 29 : 33;
