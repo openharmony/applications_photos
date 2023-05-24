@@ -193,7 +193,7 @@ export class TimelineItemDataSource extends ItemDataSource {
 
     onTimelineDataUpdate(index: number, item: TimelineDataItem): void {
         this.notifyDataChange(index);
-        Log.info(TAG, `onTimelineDataUpdate ${index}`);
+        Log.info(TAG, "onTimelineDataUpdate " + index);
         for (let i = 0; i < item.groupChild.length; i++) {
             this.notifyDataChange(index + 1 + i);
         }
@@ -217,7 +217,7 @@ export class TimelineItemDataSource extends ItemDataSource {
     }
 
     onMediaDataUpdate(index: number, item: MediaDataItem): void {
-        Log.info(TAG, `onMediaDataUpdate ${index}`);
+        Log.info(TAG, "onMediaDataUpdate " + index);
         this.notifyDataChange(index);
         this.notifyDataChange(this.getIndexByMediaIndex(index));
     }

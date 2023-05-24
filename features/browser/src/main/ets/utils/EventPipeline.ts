@@ -124,7 +124,7 @@ export class EventPipeline {
     }
 
     onTouch(event: TouchEvent) {
-        Log.debug(TAG, `onTouch trigger: ${event.type}, ${[this.isInAnimation, this.isExiting]}`);
+        Log.debug(TAG, "onTouch trigger: " + event.type + ", " + this.isInAnimation + this.isExiting);
         if (this.isInAnimation || this.isExiting) {
             return;
         }
@@ -163,7 +163,7 @@ export class EventPipeline {
             direction = PanDirection.Vertical;
         }
 
-        Log.info(TAG, `emitDirectionChange reaches: ${[this.hasReachLeft, this.hasReachRight, this.hasReachTop, this.hasReachBottom]}, scale ${scale}, direction: ${direction}`);
+        Log.info(TAG, "emitDirectionChange reaches: " + this.hasReachLeft + this.hasReachRight + this.hasReachTop + this.hasReachBottom + ", scale " + scale + ", direction: " + direction);
         if (this.isExiting) {
             return;
         }
@@ -178,12 +178,12 @@ export class EventPipeline {
     }
 
     private evaluateOffset(): [number, number] {
-        Log.info(TAG, `evaluateOffset lastOffset: ${this.lastOffset}, offset: ${this.offset}`);
+        Log.info(TAG, "evaluateOffset lastOffset: " + this.lastOffset + ", offset: " + this.offset);
         let centerX = (this.center[0] - Constants.CENTER_DEFAULT) * this.componentWidth * (this.defaultScale - this.scale) * this.lastScale;
         let centerY = (this.center[1] - Constants.CENTER_DEFAULT) * this.componentHeight * (this.defaultScale - this.scale) * this.lastScale;
         let offsetX = this.lastOffset[0] + this.offset[0] + centerX;
         let offsetY = this.lastOffset[1] + this.offset[1] + centerY;
-        Log.debug(TAG, `evaluateOffset offsetX: ${offsetX}, offsetY: ${offsetY}`);
+        Log.debug(TAG, "evaluateOffset offsetX: " + offsetX + ", offsetY: " + offsetY);
         return [offsetX, offsetY];
     }
 
@@ -208,7 +208,7 @@ export class EventPipeline {
         }
         let moveX = offset[0];
         let moveY = offset[1];
-        Log.debug(TAG, `emitTouchEvent moveX: ${moveX}, moveY: ${moveY}`);
+        Log.debug(TAG, "emitTouchEvent moveX: " + moveX + ", moveY: " + moveY);
         let matrix = Matrix4.identity()
             .scale({
                 x: scale,
@@ -219,8 +219,8 @@ export class EventPipeline {
                 y: moveY
             })
             .copy();
-        Log.debug(TAG, `emitTouchEvent lastOffset: ${this.lastOffset}, offset: ${this.offset},\
-        center: ${this.center}, scale: ${[this.lastScale, this.scale]}`);
+        Log.debug(TAG, "emitTouchEvent lastOffset: " + this.lastOffset + ", offset: " + this.offset +
+        ",center: " + this.center + ", scale: " + this.lastScale + this.scale);
 				this.updateMatrix(matrix);
         this.evaluateBounds();
     }
@@ -255,9 +255,9 @@ export class EventPipeline {
         if (this.doubleTapScale > this.maxScale) {
             this.maxScale = this.doubleTapScale * Constants.MAX_SCALE_EXTRA_FACTOR;
         }
-        Log.debug(TAG, `evaluateScales: ${this.width}*${this.height} &\
-        ${this.componentWidth}*${this.componentHeight},\
-        max: ${this.maxScale}, most: [${this.leftMost},${this.topMost}], double: ${this.doubleTapScale}`);
+        Log.debug(TAG, "evaluateScales: " + this.width + "*" + this.height + " &" +
+        this.componentWidth + "*" + this.componentHeight +
+        ",max: " + this.maxScale + ", most: [" + this.leftMost + "," + this.topMost + "], double: " + this.doubleTapScale);
     }
 
     private evaluateCompBounds(): [number, number] {
@@ -267,7 +267,7 @@ export class EventPipeline {
             offset[0] - this.componentWidth * (Number(scale.toFixed(Constants.RESERVED_DIGITS)) - Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) / Constants.NUMBER_2,
             offset[1] - this.componentHeight * (Number(scale.toFixed(Constants.RESERVED_DIGITS)) - Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) / Constants.NUMBER_2
         ];
-        Log.debug(TAG, `evaluateCompBounds: ${result}`);
+        Log.debug(TAG, "evaluateCompBounds: " + result);
         return result;
     }
 
@@ -337,14 +337,14 @@ export class EventPipeline {
         top = Math.max(top, 0);
         left = Math.max(left, 0);
         result = [-left, left, -top, top];
-        Log.debug(TAG, `evaluateOffsetRange scale: ${scale}, defaultScale: ${this.defaultScale}, result: ${result}`);
+        Log.debug(TAG, "evaluateOffsetRange scale: " + scale + ", defaultScale: " + this.defaultScale + ", result: " + result);
         return result;
     }
 
     private emitPullDownToBackEvent(): void {
         Log.debug(TAG, 'emitPullDownToBackEvent');
         if (this.isExiting) {
-            Log.info(TAG, `emitPullDownToBack isExiting: ${this.isExiting}`);
+            Log.info(TAG, "emitPullDownToBack isExiting: " + this.isExiting);
             return;
         }
         this.broadCast.emit(Constants.PULL_DOWN_END, []);
@@ -416,7 +416,7 @@ export class EventPipeline {
             return;
         }
         let scale = this.lastScale * this.scale;
-        Log.debug(TAG, `onMoveEnd: scale is ${scale} offsetY is ${offsetY}`);
+        Log.debug(TAG, "onMoveEnd: scale is " + scale + " offsetY is " + offsetY);
         if (scale.toFixed(Constants.RESERVED_DIGITS) == this.defaultScale.toFixed(Constants.RESERVED_DIGITS) && offsetY > Constants.PULL_DOWN_THRESHOLD) {
             this.emitPullDownToBackEvent();
         } else if (scale.toFixed(Constants.RESERVED_DIGITS) == this.defaultScale.toFixed(Constants.RESERVED_DIGITS)) {
@@ -432,7 +432,7 @@ export class EventPipeline {
     }
 
     onScaleStart(scale: number, centerX: number, centerY: number) {
-        Log.info(TAG, `onScaleStart: ${[this.isInAnimation, this.isExiting]}`);
+        Log.info(TAG, "onScaleStart: " + this.isInAnimation + this.isExiting);
         if (this.isInAnimation || this.isExiting) {
             return;
         }
@@ -483,14 +483,14 @@ export class EventPipeline {
 
         // Calculate the percentage of the center point of the touch
         let center: [number, number] = [cxRelativeToComp, cyRelativeToComp];
-        Log.debug(TAG, `evaluateCenter center: ${center}, ${[centerX, centerY]},\
-        size: ${imgDisplaySize}, bounds: ${imgDisplayBounds}, leftTop: ${leftTop},\
-        compSize: ${[this.componentWidth * scale, this.componentHeight * scale]}`);
+        Log.debug(TAG, "evaluateCenter center: " + center + ", " + centerX + "," + centerY +
+        ",size: " + imgDisplaySize + ", bounds: " + imgDisplayBounds + ", leftTop: " + leftTop +
+       	",compSize: " + this.componentWidth * scale + "," + this.componentHeight * scale);
         return center;
     }
 
     onScale(scale: number) {
-        Log.debug(TAG, `onScale: ${[this.isInAnimation, this.isExiting]}, scale: ${scale}`);
+        Log.debug(TAG, "onScale: " + this.isInAnimation + ", " + this.isExiting + ", scale: " + scale);
         if (this.isInAnimation || this.isExiting) {
             return;
         }
@@ -506,14 +506,14 @@ export class EventPipeline {
     }
 
     onScaleEnd() {
-        Log.info(TAG, `onScaleEnd: ${[this.isInAnimation, this.isExiting]}`);
+        Log.info(TAG, "onScaleEnd: " + this.isInAnimation + ", " + this.isExiting);
         if (this.isInAnimation || this.isExiting) {
             return;
         }
         this.evaluateBounds();
         let scale = this.lastScale * this.scale;
         if (Number(scale.toFixed(Constants.RESERVED_DIGITS)) >= Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS)) && scale <= this.maxScale) {
-            Log.info(TAG, `does not need to do animation: ${scale}`);
+            Log.info(TAG, "does not need to do animation: " + scale);
             this.emitDirectionChange();
             return;
         }
@@ -565,7 +565,7 @@ export class EventPipeline {
                 y: offset[1]
             })
             .copy();
-        Log.debug(TAG, `evaluateAnimeMatrix scale:${scale}, center:${center}`);
+        Log.debug(TAG, "evaluateAnimeMatrix scale:" + scale + ", center:" + center);
         return animationEndMatrix;
     }
 
@@ -579,13 +579,13 @@ export class EventPipeline {
      */
     onDoubleTap(centerX: number, centerY: number) {
         if (this.isInAnimation || this.isExiting) {
-            Log.debug(TAG, `onDoubleTap not avaliable: ${[this.isInAnimation, this.isExiting]}`);
+            Log.debug(TAG, "onDoubleTap not avaliable: " + this.isInAnimation + ", " + this.isExiting);
             return;
         }
         // Adjust action bar status
         this.broadCast.emit(Constants.HIDE_BARS, []);
         let matrix;
-        Log.debug(TAG, `onDoubleTap lastScale: ${this.lastScale}, scale: ${this.scale}, defaultScale: ${this.defaultScale}`);
+        Log.debug(TAG, "onDoubleTap lastScale: " + this.lastScale + ", scale: " + this.scale + ", defaultScale: " + this.defaultScale);
         if (Number(this.lastScale.toFixed(Constants.RESERVED_DIGITS)) * this.scale > Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) {
             // Scale to original state when scale is greater than 1
             matrix = Matrix4.identity().scale({
@@ -606,7 +606,7 @@ export class EventPipeline {
             }
             matrix = this.evaluateAnimeMatrix(this.doubleTapScale * this.defaultScale, center);
         }
-        Log.debug(TAG, `onDoubleTap matrix: ${matrix.matrix4x4}`);
+        Log.debug(TAG, "onDoubleTap matrix: " + matrix.matrix4x4);
         this.startAnimation(matrix);
     }
 
@@ -634,7 +634,7 @@ export class EventPipeline {
             duration: Constants.OVER_SCALE_ANIME_DURATION,
             curve: Curve.Ease
         };
-        Log.debug(TAG, `animationEndMatrix: ${animationEndMatrix.matrix4x4}`);
+        Log.debug(TAG, "animationEndMatrix: " + animationEndMatrix.matrix4x4);
         this.broadCast.emit(Constants.ANIMATION_EVENT + this.item.uri + this.timeStamp, [animationOption, animationEndMatrix]);
     }
 
@@ -647,7 +647,7 @@ export class EventPipeline {
      */
     onAnimationEnd(animationEndMatrix: any): void {
         if (animationEndMatrix) {
-            Log.info(TAG, `onAnimationEnd: ${animationEndMatrix.matrix4x4}`);
+            Log.info(TAG, "onAnimationEnd: " + animationEndMatrix.matrix4x4);
             this.lastScale = animationEndMatrix.matrix4x4[0];
             this.scale = 1;
             this.lastOffset = [animationEndMatrix.matrix4x4[Constants.NUMBER_12], animationEndMatrix.matrix4x4[Constants.NUMBER_13]];

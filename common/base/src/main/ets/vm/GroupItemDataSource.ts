@@ -32,12 +32,12 @@ export class GroupItemDataSource extends ItemDataSource {
     }
 
     setAlbumId(id: string) {
-        Log.info(TAG, `setAlbumId: ${id}`);
+        Log.info(TAG, "setAlbumId: " + id);
         this.groupDataImpl.setAlbumId(id);
     }
 
     setDeviceId(id: string) {
-        Log.info(TAG, `setDeviceId: ${id}`);
+        Log.info(TAG, "setDeviceId: " + id);
         this.groupDataImpl.setDeviceId(id);
     }
 
@@ -59,7 +59,7 @@ export class GroupItemDataSource extends ItemDataSource {
 
     getData(index: number): LazyItem<MediaDataItem> {
         if (index < 0 || index >= this.groupDataItem.length) {
-            Log.warn(TAG, `${index}/${this.groupDataItem.length}`);
+            Log.warn(TAG, index + "/" + this.groupDataItem.length);
             return undefined;
         }
         if (this.groupDataItem[index] != null && this.groupDataItem[index] != undefined) {
@@ -70,7 +70,7 @@ export class GroupItemDataSource extends ItemDataSource {
 
     getDataByIndex(index: number): MediaDataItem {
         if (index < 0 || index >= this.groupDataItem.length) {
-            Log.warn(TAG, `${index}/${this.groupDataItem.length}`);
+            Log.warn(TAG, index + "/" + this.groupDataItem.length);
             return undefined;
         }
         if (this.groupDataItem[index] != null && this.groupDataItem[index] != undefined) {
@@ -141,7 +141,7 @@ export class GroupItemDataSource extends ItemDataSource {
     }
     
     onDataUpdate(index: number): void {
-        Log.debug(TAG, `onDataUpdate ${index}`);
+        Log.debug(TAG, "onDataUpdate " + index);
         if (index != -1) {
             this.notifyDataChange(index);
         }

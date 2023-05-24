@@ -46,9 +46,9 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
             return;
         }
         getResourceString($r('app.string.album_new_album')).then((name: string) => {
-            Log.info(TAG, `The display name is ${name}`);
+            Log.info(TAG, "The display name is " + name);
             this.getNewAlbumDisplayName(name).then((newAlbumDisplayName: string) => {
-                Log.info(TAG, `The display name of new album is ${newAlbumDisplayName}`);
+                Log.info(TAG, "The display name of new album is " + newAlbumDisplayName);
 
                 this.confirmCallback = this.confirmCallback.bind(this);
                 this.cancelCallback = this.cancelCallback.bind(this);
@@ -65,7 +65,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     }
 
     private async confirmCallback(displayName: string) {
-        Log.info(TAG, `AlbumSet new album confirm and the new name is: ${displayName}`);
+        Log.info(TAG, "AlbumSet new album confirm and the new name is: " + displayName);
         let relativePath = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + displayName + "/";
         let simpleAlbumDataItem: SimpleAlbumDataItem = new SimpleAlbumDataItem("", displayName, relativePath, "", "");
         if (displayName != undefined && displayName != null) {
@@ -116,9 +116,9 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     }
 
     private matchAlbumDefaultName(albumInfo: string, numbers: Array<number>, root: string, prefixName: string) {
-        let res = albumInfo.match(new RegExp(`^${root}${prefixName}[1-9][0-9]*${"/"}$`));
+        let res = albumInfo.match(new RegExp("^" + root + prefixName + "[1-9][0-9]*/$"));
         if (res != null) {
-            let number = res[0].match(new RegExp(`[1-9][0-9]*`));
+            let number = res[0].match(new RegExp("[1-9][0-9]*"));
             numbers.push(parseInt(number[0]));
         }
     }
@@ -135,15 +135,15 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
         if (this.menuContext.albumInfo) {
             this.matchAlbumDefaultName(this.menuContext.albumInfo.relativePath, numbers, root, prefixName);
         }
-        Log.debug(TAG, `${JSON.stringify(numbers)}`);
+        Log.debug(TAG, JSON.stringify(numbers));
 
         if (numbers.length <= 0) {
-            return `${prefixName}1`;
+            return prefixName + "1";
         } else if (numbers.length == 1) {
             if (numbers[0] - 1 > 0) {
-                return `${prefixName}1`;
+                return prefixName + "1";
             } else {
-                return `${prefixName}${numbers[0] + 1}`;
+                return prefixName + (numbers[0] + 1);
             }
         }
 
@@ -152,15 +152,15 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
         });
 
         if (numbers[0] - 1 > 0) {
-            return `${prefixName}1`;
+            return prefixName + "1";
         }
 
         for (let i = 1; i < numbers.length; i++) {
             let res = numbers[i - 1] + 1;
             if (res < numbers[i]) {
-                return `${prefixName}${res}`;
+                return prefixName + res;
             }
         }
-        return `${prefixName}${numbers[numbers.length - 1] + 1}`;
+        return prefixName + (numbers[numbers.length - 1] + 1);
     }
 }

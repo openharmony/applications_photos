@@ -36,7 +36,7 @@ export class GotoPhotosMenuOperation implements MenuOperation {
             return;
         }
         let jumpSourceToMain = this.menuContext.jumpSourceToMain;
-        Log.info(TAG, `router to pages/index, jumpSource: ${jumpSourceToMain}`);
+        Log.info(TAG, "router to pages/index, jumpSource: " + jumpSourceToMain);
         let leftPos = screenManager.isSidebar();
         let pageFrom = RouterConstants.ENTRY_FROM.NORMAL;
         if (jumpSourceToMain == JumpSourceToMain.CAMERA) {

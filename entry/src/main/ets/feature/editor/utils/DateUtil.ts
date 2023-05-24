@@ -44,7 +44,7 @@ export class DateUtil {
 
     public static nameByDate(isReplace: Boolean, name?: string): string {
         if (isReplace) {
-            return (!name) ? null : (name.indexOf(`${DateUtil.NEW_NAME_EDIT}`) == -1 ? name.split('.')[0] + '_' + DateUtil.NEW_NAME_EDIT + DateUtil.formats() : name.split('.')[0]);
+            return (!name) ? null : (name.indexOf(DateUtil.NEW_NAME_EDIT) == -1 ? name.split('.')[0] + '_' + DateUtil.NEW_NAME_EDIT + DateUtil.formats() : name.split('.')[0]);
         } else {
             return DateUtil.NEW_NAME_IMG + DateUtil.formats('yyyyMMdd_HHmmss');
         }

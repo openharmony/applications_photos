@@ -33,13 +33,13 @@ export class TrashMediaDataItem extends MediaDataItem {
             fetchOption = {
                 selections: this.selections,
                 selectionArgs: this.selectionArgs,
-                order: `date_added DESC LIMIT ${this.index},1`
+                order: "date_added DESC LIMIT " + this.index + ",1"
             }
         } else {
             fetchOption = {
-                selections: `${MediaLib.FileKey.ID} = ?`,
+                selections: MediaLib.FileKey.ID + " = ?",
                 selectionArgs: [this.id.toString()],
-                order: `date_added DESC`
+                order: "date_added DESC"
             }
         }
         return (await mediaModel.getAllTrashMediaItem(fetchOption, false)).fileAsset;
@@ -54,7 +54,7 @@ export class TrashMediaDataItem extends MediaDataItem {
             this.status = MediaConstants.TRASHED;
             return true;
         } catch (err) {
-            Log.error(TAG, `onRecover error: ${JSON.stringify(err)}`);
+            Log.error(TAG, "onRecover error: " + JSON.stringify(err));
             return false;
         }
     }
@@ -66,7 +66,7 @@ export class TrashMediaDataItem extends MediaDataItem {
             this.status = MediaConstants.TRASHED;
             return true;
         } catch (err) {
-            Log.error(TAG, `onDelete error: ${JSON.stringify(err)}`);
+            Log.error(TAG, "onDelete error: " + JSON.stringify(err));
             return false;
         }
     }

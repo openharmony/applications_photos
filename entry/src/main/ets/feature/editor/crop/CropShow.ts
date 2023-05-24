@@ -259,7 +259,7 @@ export class CropShow {
             if (this.ratio.isValid()) {
                 this.fixSideToConner(x, y);
             }
-            Log.debug(this.TAG, `isCropTouch: l[${this.isLeft}] r[${this.isRight}] t[${this.isTop}] b[${this.isBottom}]`);
+            Log.debug(this.TAG, "isCropTouch: l[" + this.isLeft + "] r[" + this.isRight + "] t[" + this.isTop + "] b[" + this.isBottom + "]");
         }
         return this.isLeft || this.isRight || this.isTop || this.isBottom;
     }

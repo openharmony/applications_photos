@@ -28,7 +28,7 @@ export class TimelineDataItem {
     groupChild: MediaDataItem[] = [];
 
     constructor(fileAssert: MediaLib.FileAsset, mediaFileAsset: Array<MediaLib.FileAsset>, index: number) {
-        Log.info(TAG, `construct ${fileAssert.dateAdded}:${fileAssert.count}`);
+        Log.info(TAG, "construct " + fileAssert.dateAdded + ":" + fileAssert.count);
         this.dateAdded = fileAssert.dateAdded * 1000;
         this.groupChild = new Array(fileAssert.count);
         let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?';
@@ -47,7 +47,7 @@ export class TimelineDataItem {
     }
 
     getHashCode(): string {
-        return `${this.dateAdded}` + `${this.isSelect()}` + `${this.groupChild.length}`;
+        return this.dateAdded + "" + this.isSelect() + "" + this.groupChild.length;
     }
 
     isSelect(): boolean {

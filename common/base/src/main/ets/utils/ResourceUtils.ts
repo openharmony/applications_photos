@@ -20,16 +20,16 @@ const TAG = "ResourceUtils"
 
 export async function getResourceString(resource: Resource): Promise<string> {
     try {
-        Log.debug(TAG, `getResourceString: ${JSON.stringify(resource)}`);
+        Log.debug(TAG, "getResourceString: " + JSON.stringify(resource));
         let mgr: resourceManager.ResourceManager = await resourceManager.getResourceManager(globalThis.appContext);
         if (mgr != null || mgr != undefined) {
             return await mgr.getString(resource.id);
         } else {
-            Log.warn(TAG, `getResourceManager instance is none`);
+            Log.warn(TAG, "getResourceManager instance is none");
             return null;
         }
     } catch (error) {
-        Log.error(TAG, `getResourceString error: ${error}`);
+        Log.error(TAG, "getResourceString error: " + error);
         return null;
     }
 }

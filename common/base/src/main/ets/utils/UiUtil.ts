@@ -20,10 +20,10 @@ const TAG = "UiUtil"
 const TOAST_DURATION = 3000;
 export function showToast(message: string) {
     let naviBarHeight = screenManager.getNaviBarHeight()
-    Log.debug(TAG, `showToast: ${message}`);
+    Log.debug(TAG, "showToast: " + message);
     prompt.showToast({
         message: message,
         duration: TOAST_DURATION,
-        bottom: `${64 + naviBarHeight}vp`
+        bottom: (64 + naviBarHeight) + "vp"
     });
 }

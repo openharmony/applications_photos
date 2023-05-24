@@ -32,7 +32,7 @@ export class Save {
     }
 
     public static async save(item: MediaDataItem, optStack: ImageFilterStack, isReplace: Boolean): Promise<number> {
-        Log.info(TAG, `${JSON.stringify(item)} ${isReplace}`);
+        Log.info(TAG, JSON.stringify(item) + " " + isReplace);
         try {
             let wrapper = await Loader.loadPixelMapWrapper(item);
             wrapper = optStack.apply(wrapper);
@@ -48,7 +48,7 @@ export class Save {
             Log.info(TAG, 'Format pixelMap data to jpg data end.');
 
             let fileAsset = await this.createFileAsset(item, isReplace);
-            Log.info(TAG, `create fileAsset succeed`);
+            Log.info(TAG, "create fileAsset succeed");
             let fd = await mediaModel.openAsset('RW', fileAsset);
             if (fd < 0) {
                 Log.warn(TAG, 'open asset failed.');
@@ -62,10 +62,10 @@ export class Save {
 
             await packer.release();
             wrapper && wrapper.release();
-            Log.info(TAG, `end`);
+            Log.info(TAG, "end");
             return newId
         } catch (e) {
-            Log.error(TAG, `save catch error: ${JSON.stringify(e)}`);
+            Log.error(TAG, "save catch error: " + JSON.stringify(e));
             return -1
         }
     }
@@ -79,16 +79,16 @@ export class Save {
         }
         let title = DateUtil.nameByDate(isReplace, fileAsset.displayName);
         if (null == title) {
-            Log.warn(TAG, `create picture name failed.`);
+            Log.warn(TAG, "create picture name failed.");
             return null;
         }
         let displayName = title + '.jpg';
-        Log.debug(TAG, `file displayname = ${displayName}, file path = ${fileAsset.relativePath}`);
+        Log.debug(TAG, "file displayname = " + displayName + ", file path = " + fileAsset.relativePath);
         let favorite = false;
         if (isReplace) {
             favorite = await fileAsset.isFavorite();
             await item.onDelete();
-            Log.debug(TAG, `trash picture file id ${item.id} end.`);
+            Log.debug(TAG, "trash picture file id " + item.id + " end.");
         }
         fileAsset = await mediaModel.createOne(fileAsset.mediaType, displayName, fileAsset.relativePath);
         if (favorite) {

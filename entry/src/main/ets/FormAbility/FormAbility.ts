@@ -24,34 +24,34 @@ import  DataStoreUtil  from '@ohos/base/src/main/ets/utils/DataStoreUtil';
 export default class FormAbility extends FormExtension {
     private TAG: string = 'FormAbility';
     onAddForm(want) {
-        Log.info(this.TAG, `form onAddForm. want ${JSON.stringify(want)}`);
+        Log.info(this.TAG, "form onAddForm. want " + JSON.stringify(want));
         this.init();
         let param = want.parameters;
         let formId = param['ohos.extra.param.key.form_identity'];
-        Log.info(this.TAG, `form onAddForm formId: ${formId}`);
+        Log.info(this.TAG, "form onAddForm formId: " + formId);
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE).then(() => {
             let formController: FormController = formControllerManager.getController(formId);
-            Log.info(this.TAG, `form onAddForm. formController ${formController}`);
+            Log.info(this.TAG, "form onAddForm. formController " + formController);
             formController = (formController == null) ? formControllerManager.createFormController(formId,
                 Constants.PHOTOS_FORM_OPERATION_MODE_NONE) : formController;
             if (formController == null) {
-                 Log.error(this.TAG, `Get null controller. formId: ${formId}`);
+                 Log.error(this.TAG, "Get null controller. formId: " + formId);
                 return null;
             }
             return formController.bindFormData(formId);
         }).catch((err) => {
-             Log.error(this.TAG, `init err ${err}`);
+             Log.error(this.TAG, "init err " + err);
         })
         return null;
     }
 
     onCastToNormalForm(formId) {
-        Log.info(this.TAG, `onCastToNormalForm, formId: ${formId}`);
+        Log.info(this.TAG, "onCastToNormalForm, formId: " + formId);
     }
 
     onUpdateForm(formId) {
-        Log.info(this.TAG, `onUpdateForm, formId: ${formId} context ${JSON.stringify(this.context)}`);
+        Log.info(this.TAG, "onUpdateForm, formId: " + formId + " context " + JSON.stringify(this.context));
         // 经常起来后可能直接走onUpdate， 所以要初始化一下
         this.init();
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
@@ -59,7 +59,7 @@ export default class FormAbility extends FormExtension {
     }
 
     onChangeFormVisibility(newStatus) {
-        Log.info(this.TAG, `onChangeFormVisibility, newStatus: ${JSON.stringify(newStatus)}`);
+        Log.info(this.TAG, "onChangeFormVisibility, newStatus: " + JSON.stringify(newStatus));
         // 经常起来后可能直接走onChangeFormVisibility， 所以要初始化一下
         this.init();
         this.clearCache(newStatus);
@@ -71,17 +71,17 @@ export default class FormAbility extends FormExtension {
             await dataStore.removeCache();
             let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
             for (let key in newStatus) {
-                Log.info(this.TAG, `onVisibilityChange, key:${key}  value ${newStatus[key]}`);
+                Log.info(this.TAG, "onVisibilityChange, key:" + key + "  value " + newStatus[key]);
                 let formId = key;
                 formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE);
             }
         } catch (err) {
-            Log.error(this.TAG, `clearCache err:` + JSON.stringify(err));
+            Log.error(this.TAG, "clearCache err:" + JSON.stringify(err));
         }
     }
 
     onFormEvent(formId, message) {
-        Log.info(this.TAG, `onFormEvent, formId: ${formId}, message: ${message}`);
+        Log.info(this.TAG, "onFormEvent, formId: " + formId + ", message: " + message);
         // 经常起来后可能直接走onEvent， 所以要初始化一下
         this.init();
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
@@ -89,7 +89,7 @@ export default class FormAbility extends FormExtension {
     }
 
     onRemoveForm(formId) {
-        Log.info(this.TAG, `onRemoveForm, formId: ${formId}`);
+        Log.info(this.TAG, "onRemoveForm, formId: " + formId);
         // 经常起来后可能直接走onDestroy， 所以要初始化一下
         this.init();
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();

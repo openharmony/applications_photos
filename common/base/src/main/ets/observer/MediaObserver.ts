@@ -67,13 +67,13 @@ class MediaObserver {
                     this.sendNotify(MediaConstants.MEDIA_TYPE_REMOTE);
                 })
             } catch (err) {
-                Log.error(TAG, `registerObserver faild, err: ${JSON.stringify(err)}`);
+                Log.error(TAG, "registerObserver faild, err: " + JSON.stringify(err));
             }
         }
     }
 
     sendNotify(mediaType: string) {
-        Log.info(TAG, `registerObserver sendNotify size: ${this.callbacks.length}`);
+        Log.info(TAG, "registerObserver sendNotify size: " + this.callbacks.length);
         for (let callback of this.callbacks) {
             callback.onChange(mediaType);
         }

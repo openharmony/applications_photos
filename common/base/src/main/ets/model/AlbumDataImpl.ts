@@ -54,7 +54,7 @@ export class AlbumDataImpl {
         if (fetchOption == undefined) {
             return;
         }
-        fetchOption.selections = `(${fetchOption.selections}) and (${MediaLib.FileKey.ALBUM_NAME} <> ? and ${MediaLib.FileKey.ALBUM_NAME} <> ?)`;
+        fetchOption.selections = "(" + fetchOption.selections + ") and (" + MediaLib.FileKey.ALBUM_NAME + " <> ? and " + MediaLib.FileKey.ALBUM_NAME + " <> ?)";
         fetchOption.selectionArgs.push('Camera', 'Screenshots');
         let albums: MediaLib.Album[] = await mediaModel.getAlbums(fetchOption);
         for (let i = 0;i < albums.length; i++) {
@@ -72,7 +72,7 @@ export class AlbumDataImpl {
                 item.update(await fetchFileResult.getFirstObject());
                 albumDataItems.push(item);
             } catch (err) {
-                Log.error(TAG, `on err: ${JSON.stringify(err)}`);
+                Log.error(TAG, "on err: " + JSON.stringify(err));
             } finally {
                 fetchFileResult.close();
             }
@@ -81,21 +81,21 @@ export class AlbumDataImpl {
 
     private async getAlbumItem(id: string, albumDataItems: AlbumDataItem[]): Promise<void> {
         if (this.blackList.indexOf(id) >= 0) {
-            Log.debug(TAG, `no need as in black list`);
+            Log.debug(TAG, "no need as in black list");
             return;
         }
         if (this.deviceId.length > 0 && (id != MediaConstants.ALBUM_ID_SNAPSHOT && id != MediaConstants.ALBUM_ID_CAMERA)) {
-            Log.debug(TAG, `no need`);
+            Log.debug(TAG, "no need");
             return;
         }
         let fetchOption: MediaLib.MediaFetchOptions = await getFetchOptions(this.selectType, id, this.deviceId);
         if (fetchOption == undefined) {
-            Log.warn(TAG, `${id} fetchOption is undefined`);
+            Log.warn(TAG, id + " fetchOption is undefined");
             return;
         }
         let item = await mediaModel.getAllMediaItem(id, fetchOption, false);
         if (item.counts == 0) {
-            Log.warn(TAG, `${id} is empty`);
+            Log.warn(TAG, id + " is empty");
             return;
         }
 
@@ -149,7 +149,7 @@ export class AlbumDataImpl {
                 item.update(await fetchFileResult.getFirstObject());
                 albumDataItems.push(item);
             } catch (err) {
-                Log.error(TAG, `on err: ${JSON.stringify(err)}`);
+                Log.error(TAG, "on err: " + JSON.stringify(err));
             } finally {
                 fetchFileResult.close();
             }
@@ -161,14 +161,14 @@ export class AlbumDataImpl {
         if (fetchOption == undefined) {
             return;
         }
-        fetchOption.selections = `(${fetchOption.selections}) and (${MediaLib.FileKey.ALBUM_NAME} <> ? and ${MediaLib.FileKey.ALBUM_NAME} <> ?)`;
+        fetchOption.selections = "(" + fetchOption.selections + ") and (" + MediaLib.FileKey.ALBUM_NAME + " <> ? and " + MediaLib.FileKey.ALBUM_NAME + " <> ?)";
         fetchOption.selectionArgs.push('Camera', 'Screenshots');
-        fetchOption.order = `bucket_id DESC LIMIT ${start},${count}`;
+        fetchOption.order = "bucket_id DESC LIMIT " + start + "," + count;
         return fetchOption;
     }
 
     private async loadAlbumReset(albumDataItems: AlbumDataItem[], count) {
-        Log.info(TAG, `loadReset satrt`);
+        Log.info(TAG, "loadReset satrt");
         for (let i = 1;; i++) {
             let fetchOption: MediaLib.MediaFetchOptions = await this.getLimitCountFetchOption(i * count, count);
             if (fetchOption == undefined) {
@@ -178,7 +178,7 @@ export class AlbumDataImpl {
             await this.addAlbumDataItem(albumDataItems, albums);
             //last page
             if (albums.length < count) {
-                Log.info(TAG, `loadReset last ROUND : ${i}}`);
+                Log.info(TAG, "loadReset last ROUND : " + i);
                 break;
             }
         }

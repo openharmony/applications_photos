@@ -175,7 +175,7 @@ class ScreenManager {
     }
 
     async initWindowMode() {
-        Log.debug(TAG, `start to initialize photos application window mode: ${this.windowMode}`);
+        Log.debug(TAG, "start to initialize photos application window mode: " + this.windowMode);
     }
 
     isSplitMode(): boolean {
@@ -185,7 +185,7 @@ class ScreenManager {
     async checkWindowMode() {
         let before = this.windowMode;
         let mode = await globalThis.photosWindowStage.getWindowMode();
-        Log.info(TAG, `photos application before/current window mode: ${before}/${mode}`);
+        Log.info(TAG, "photos application before/current window mode: " + before + "/" + mode);
 
         if (before == mode) {
             return;
@@ -201,7 +201,7 @@ class ScreenManager {
     private setMainWindow(win: window.Window) {
         Log.debug(TAG, 'setMainWindow');
         win.on('windowSizeChange', (data) => {
-            Log.debug(TAG, `windowSizeChange ${JSON.stringify(data)}`);
+            Log.debug(TAG, "windowSizeChange " + JSON.stringify(data));
             this.checkWindowMode()
             this.onWinSizeChanged(data);
         })
@@ -215,9 +215,9 @@ private getWindowProperties(win: window.Window) {
                 this.winWidth = properties.windowRect.width;
                 this.winHeight = properties.windowRect.height;
             }
-            Log.debug(TAG, `this.winWidth = ${this.winWidth} this.winHeight = ${this.winHeight}`);
+            Log.debug(TAG, "this.winWidth = " + this.winWidth + " this.winHeight = " + this.winHeight);
         } catch (exception) {
-            console.error('Failed to obtain the window properties. Cause: ' + JSON.stringify(exception));
+            console.error("Failed to obtain the window properties. Cause: " + JSON.stringify(exception));
         }
     }
 
@@ -229,7 +229,7 @@ private getWindowProperties(win: window.Window) {
             Log.debug(TAG, 'setFullScreen true Succeeded');
             await this.hideStatusBar(topWindow);
         } catch (err) {
-            Log.error(TAG, `setFullScreen err: ${err}`);
+            Log.error(TAG, "setFullScreen err: " + err);
         }
     }
 
@@ -240,19 +240,19 @@ private getWindowProperties(win: window.Window) {
             this.leftBlank = [0, 0, 0, 0];
             AppStorage.SetOrCreate(BroadcastConstants.LEFT_BLANK, this.leftBlank);
         } catch (err) {
-            Log.error(TAG, `setSplitScreen err: ${err}`);
+            Log.error(TAG, "setSplitScreen err: " + err);
         }
     }
 
     private async hideStatusBar(topWindow: any) {
         Log.debug(TAG, 'hideStatusBar start');
         let names = ['navigation'];
-        Log.debug(TAG, `getTopWindow names: ${names} end`);
+        Log.debug(TAG, "getTopWindow names: " + names + " end");
         try {
             await topWindow.setSystemBarEnable(names)
             Log.debug(TAG, 'hideStatusBar Succeeded');
             let data = await topWindow.getAvoidArea(0)
-            Log.debug(TAG, `Succeeded in obtaining the area. Data: ${JSON.stringify(data)}`);
+            Log.debug(TAG, "Succeeded in obtaining the area. Data: " + JSON.stringify(data));
             this.onLeftBlankChanged(data);
             let barColor = await getResourceString($r('app.color.default_background_color'));
             let barContentColor = await getResourceString($r('app.color.default_bar_content_color'));
@@ -268,7 +268,7 @@ private getWindowProperties(win: window.Window) {
             });
             Log.info(TAG, 'setStatusBarColor done');
         } catch (err) {
-            Log.error(TAG, `hideStatusBar err: ${err}`);
+            Log.error(TAG, "hideStatusBar err: " + err);
         }
     }
 
@@ -284,7 +284,7 @@ private getWindowProperties(win: window.Window) {
                 () => Log.info(TAG, 'setStatusBarColor done')
             );
         } catch (err) {
-            Log.error(TAG, `setNavigationBarColor err: ${err}`);
+            Log.error(TAG, "setNavigationBarColor err: " + err);
         }
     }
 
@@ -296,7 +296,7 @@ private getWindowProperties(win: window.Window) {
         if (!isShowBar) {
             names = [];
         }
-        Log.debug(TAG, `getTopWindow names: ${names} end`);
+        Log.debug(TAG, "getTopWindow names: " + names + " end");
         try {
             topWindow.setSystemBarEnable(names, () => {
                 Log.debug(TAG, 'setFullScreen Succeeded');
@@ -308,7 +308,7 @@ private getWindowProperties(win: window.Window) {
                 }
             })
         } catch (err) {
-            Log.error(TAG, `setSystemUi err: ${err}`);
+            Log.error(TAG, "setSystemUi err: " + err);
         }
     }
 
@@ -324,13 +324,13 @@ private getWindowProperties(win: window.Window) {
         this.naviBarHeight = area.bottomRect.height;
         this.leftBlank = [this.leftBlank[0], this.leftBlank[1], this.leftBlank[2], area.bottomRect.height];
         if (leftBlankBefore.status != this.statusBarHeight || leftBlankBefore.navi != this.naviBarHeight) {
-            Log.info(TAG, `leftBlank changed: ${JSON.stringify(leftBlankBefore)}-${JSON.stringify(this.leftBlank)}`)
+            Log.info(TAG, "leftBlank changed: " + JSON.stringify(leftBlankBefore) + "-" + JSON.stringify(this.leftBlank))
             AppStorage.SetOrCreate(BroadcastConstants.LEFT_BLANK, this.leftBlank);
         }
     }
 
     private onWinSizeChanged(size) {
-        Log.info(TAG, `onWinSizeChanged ${JSON.stringify(size)}`);
+        Log.info(TAG, "onWinSizeChanged " + ${JSON.stringify(size));
         if (size == null || size == undefined) {
             return;
         }
@@ -343,7 +343,7 @@ private getWindowProperties(win: window.Window) {
 
 
         if (sizeBefore.width != this.winWidth || sizeBefore.height != this.winHeight) {
-            Log.info(TAG, `winSize changed: ${JSON.stringify(sizeBefore)} -> ${JSON.stringify(size)}`);
+            Log.info(TAG, "winSize changed: " + JSON.stringify(sizeBefore) + " -> " + JSON.stringify(size));
             this.emit(screenManager.ON_WIN_SIZE_CHANGED, [size]);
         }
     }
@@ -377,7 +377,7 @@ private getWindowProperties(win: window.Window) {
 
     getColumnsWidth(count: number): number {
         let columns = this.getScreenColumns()
-        Log.info(TAG, `getColumnsWidth count is ${count} colunms is ${columns}`);
+        Log.info(TAG, "getColumnsWidth count is " + count + " colunms is " + columns);
         let columnWidth = (px2vp(this.winWidth) - COLUMN_MARGIN) / columns;
         return columnWidth * count - COLUMN_GUTTER;
     }
@@ -399,7 +399,7 @@ private getWindowProperties(win: window.Window) {
         try {
             topWindow.setKeepScreenOn(true, () => Log.info(TAG, 'setKeepScreenOn Succeeded'))
         } catch (err) {
-            Log.error(TAG, `setKeepScreenOn err: ${err}`);
+            Log.error(TAG, "setKeepScreenOn err: " + err);
         }
     }
 
@@ -409,7 +409,7 @@ private getWindowProperties(win: window.Window) {
         try {
             topWindow.setKeepScreenOn(false, () => Log.info(TAG, 'setKeepScreenOff Succeeded'))
         } catch (err) {
-            Log.error(TAG, `setKeepScreenOff err: ${err}`);
+            Log.error(TAG, "setKeepScreenOff err: " + err);
         }
     }
 }

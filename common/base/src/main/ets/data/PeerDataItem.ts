@@ -36,12 +36,12 @@ export class PeerDataItem {
     }
 
     getHashCode() {
-        return `${this.networkId} ${this.orientation} ${this.isSelect}`;
+        return this.networkId + " " + this.orientation + " " + this.isSelect;
     }
 
     getThumbnail(): string {
-        Log.debug(TAG, `this.uri ${this.uri}`);
-        return this.uri + `/thumbnail/256/256`;
+        Log.debug(TAG, "this.uri " + this.uri);
+        return this.uri + "/thumbnail/256/256";
     }
 
     setSelect(isSelect: boolean) {

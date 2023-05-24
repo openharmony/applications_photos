@@ -25,7 +25,7 @@ export function hiSysEventDataQueryTimedOut(interfaceName: string): number {
                 eventType: hiSysEvent.EventType.FAULT,
                 params: {
                     FAULT_ID: "DATA_QUERY_OVERTIME",
-                    MSG: `${interfaceName} Querying 1s data timed out.`
+                    MSG: interfaceName + " Querying 1s data timed out."
                 }
             }, (err) => {
                 if(err) {

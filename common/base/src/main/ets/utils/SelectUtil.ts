@@ -33,19 +33,19 @@ export class SelectUtil {
     }
 
     private static async grantPermissionForUri(uri: string, bundleName: string): Promise<void> {
-        Log.debug(TAG, `start uri grant. bundleName: ${bundleName}`);
+        Log.debug(TAG, "start uri grant. bundleName: " + bundleName);
         // @ts-ignore
         await fileShare.grantUriPermission(uri, bundleName, wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION);
     }
 
     static async grantPermissionForUris(uris: Array<string>, bundleName: string): Promise<void> {
-        Log.info(TAG, `start uris grant. bundleName: ${bundleName}`);
+        Log.info(TAG, "start uris grant. bundleName: " + bundleName);
         let promises: Array<Promise<void>> = [];
         for (let uri of uris) {
             try {
                 promises.push(SelectUtil.grantPermissionForUri(uri, bundleName));
             } catch(err) {
-                Log.error(TAG, `grant permission error: ${JSON.stringify(err)}`);
+                Log.error(TAG, "grant permission error: " + JSON.stringify(err));
             }
         }
         await Promise.all(promises);

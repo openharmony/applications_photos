@@ -30,15 +30,15 @@ export class Loader {
     private static getPixelMapPreviewSize(size: Size) {
         let width = screenManager.getWinWidth();
         let height = screenManager.getWinHeight();
-        Log.debug(TAG, `picture real size: ${size.width} ${size.height}`);
+        Log.debug(TAG, "picture real size: " + size.width + " " + size.height);
         let scale = computeSampleSize(size.width, size.height, Loader.MIN_PIXEL_MAP_SIZE, width * height * 2);
         size.width = Math.ceil(size.width / scale);
         size.height = Math.ceil(size.height / scale);
-        Log.debug(TAG, `picture scale: ${scale} size: ${JSON.stringify(size)}`);
+        Log.debug(TAG, "picture scale: " + scale + " size: " + JSON.stringify(size));
     }
 
     static async loadPixelMapWrapper(mediaItem: MediaDataItem, isPreview: boolean = false): Promise<PixelMapWrapper> {
-        Log.debug(TAG, `Photo: loadPixelMap id = ${mediaItem.id}`);
+        Log.debug(TAG, "Photo: loadPixelMap id = " + mediaItem.id);
         let fileAsset: MediaLib.FileAsset = await mediaItem.loadFileAsset()
         let size = {
             width: fileAsset.width,
@@ -48,11 +48,11 @@ export class Loader {
 
         let thumbnail = await fileAsset.getThumbnail(size);
         let wrapper = new PixelMapWrapper(thumbnail, px2vp(size.width), px2vp(size.height));
-        Log.info(TAG, `Photo: loadPixelMap: size[${JSON.stringify(size)}] wrapper[${JSON.stringify(wrapper)}]`);
+        Log.info(TAG, "Photo: loadPixelMap: size[" + JSON.stringify(size) + "] wrapper[" + JSON.stringify(wrapper) + "]");
 
         let orientation = mediaItem.orientation || 0;
         await Loader.translatePixelMap(wrapper, orientation);
-        Log.info(TAG, `Photo: loadPixelMap: final wrapper[${JSON.stringify(wrapper)}]`);
+        Log.info(TAG, "Photo: loadPixelMap: final wrapper[" + JSON.stringify(wrapper) + "]");
         return wrapper;
     }
 

@@ -71,7 +71,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
     }
 
     onCompleted(): void {
-        Log.info(TAG, `onCompleted ${this.isPause}`);
+        Log.info(TAG, "onCompleted " + this.isPause);
         this.successBatch++;
         if (!this.isPause) {
             this.cyclicOperation();
@@ -79,7 +79,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
     }
 
     onError(): void {
-        Log.error(TAG, `Operate the ${this.currentBatch} batch data error, total ${this.totalBatches} batches`);
+        Log.error(TAG, "Operate the " + this.currentBatch + " batch data error, total " + this.totalBatches + " batches");
         this.isError = true;
         this.cyclicOperation();
     }
@@ -89,10 +89,10 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
         Log.info(TAG, 'processOperation start');
         startTraceWithTaskId('ProgressOperation', this.requestTime);
         let length = this.items.length;
-        Log.info(TAG, `selected count: ${this.count}, uris's length: ${length}`);
+        Log.info(TAG, "selected count: " + this.count + ", uris's length: " + length);
         // Batch deletion
         this.totalBatches = Math.floor(length / this.BATCH_SIZE) + ((length % this.BATCH_SIZE) ? 1 : 0);
-        Log.info(TAG, `The count to be operate is ${length}, operate in ${this.totalBatches} batches`);
+        Log.info(TAG, "The count to be operate is " + length + ", operate in " + this.totalBatches + " batches");
         if (this.isCancelled) {
             this.isCancelled = false;
         }
@@ -127,8 +127,8 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
         if (this.startTime != null) {
             let operateCount = this.currentBatch >= this.totalBatches ? this.count : this.currentBatch * this.BATCH_SIZE;
             let costTime = Date.now() - this.startTime;
-            Log.debug(TAG, `process data operate done, operate ${operateCount} items, cost time ${costTime} ms,\
-            average ${(costTime / operateCount)} ms/item.`);
+            Log.debug(TAG, "process data operate done, operate " + operateCount + " items, cost time " + costTime +
+            " ms, average " + (costTime / operateCount) + " ms/item.");
         }
         this.isCancelled = false;
         finishTraceWithTaskId('ProgressOperation', this.requestTime);
@@ -157,7 +157,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
     }
 
     setFindSameOperation(newOperation: number): void {
-        Log.info(TAG, `setFindSameOperation ${newOperation}`);
+        Log.info(TAG, "setFindSameOperation " + newOperation);
         this.findSameOperation = newOperation;
     }
 

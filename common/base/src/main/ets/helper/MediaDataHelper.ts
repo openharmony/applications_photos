@@ -28,7 +28,7 @@ export class Rotatable {
 }
 
 export async function setOrientation(fileAsset: MediaLib.FileAsset, orientation: number): Promise<void> {
-    Log.info(TAG, `setOrientation`)
+    Log.info(TAG, "setOrientation")
     try {
         let fd: number = await mediaModel.openAsset('RW', fileAsset);
         let imageSourceApi: image.ImageSource = image.createImageSource(fd);
@@ -36,14 +36,14 @@ export async function setOrientation(fileAsset: MediaLib.FileAsset, orientation:
         imageSourceApi.release();
         mediaModel.closeAsset(fd, fileAsset);
     } catch (err) {
-        Log.error(TAG, `setOrientation err ${JSON.stringify(err)}`);
+        Log.error(TAG, "setOrientation err " + JSON.stringify(err));
         fileAsset.orientation = orientation;
         await fileAsset.commitModify();
     }
 }
 
 function getPropertyValidOrientation(orientation: number): string {
-    Log.info(TAG, `getPropertyValidOrientation ${orientation}`);
+    Log.info(TAG, "getPropertyValidOrientation " + orientation);
     switch (orientation) {
         case MediaConstants.ROTATE_NONE:
             return "1";
@@ -83,7 +83,7 @@ export async function getAlbumDisplayName(name: string): Promise<string> {
 export async function getFetchOptions(selectType: number, albumId: string, deviceId: string): Promise<MediaLib.MediaFetchOptions> {
     let selections: string = "";
     let selectionArgs: Array<string> = [];
-    let order: string = `date_added DESC`;
+    let order: string = "date_added DESC";
     if (selectType == MediaConstants.SELECT_TYPE_VIDEO || albumId == MediaConstants.ALBUM_ID_VIDEO) {
         selections = MediaLib.FileKey.MEDIA_TYPE + ' = ?';
         selectionArgs = [MediaLib.MediaType.VIDEO.toString()];
@@ -98,14 +98,14 @@ export async function getFetchOptions(selectType: number, albumId: string, devic
     }
     if (albumId == MediaConstants.ALBUM_ID_CAMERA) {
         let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA);
-        selections = `(${selections}) and ${MediaLib.FileKey.ALBUM_NAME} = ?`;
+        selections = "(" + selections + ") and " + MediaLib.FileKey.ALBUM_NAME + " = ?";
         selectionArgs.push(path.substr(0, path.length - 1));
     } else if (albumId == MediaConstants.ALBUM_ID_SNAPSHOT) {
         let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_IMAGE) + "Screenshots/";
-        selections = `(${selections}) and ${MediaLib.FileKey.RELATIVE_PATH} = ?`;
+        selections = "(" + selections + ") and " + MediaLib.FileKey.RELATIVE_PATH + " = ?";
         selectionArgs.push(path);
     } else if ((new Number(albumId).valueOf() || 0) > 0) {
-        selections = `(${selections}) and ${MediaLib.FileKey.ALBUM_ID} = ?`;
+        selections = "(" + selections + ") and " + MediaLib.FileKey.ALBUM_ID + " = ?";
         selectionArgs.push(albumId);
     }
 
@@ -122,23 +122,23 @@ export async function getFetchOptions(selectType: number, albumId: string, devic
 }
 
 export async function getFetchOptionsByItem(item: SimpleAlbumDataItem): Promise<MediaLib.MediaFetchOptions> {
-    let selections: string = `${MediaLib.FileKey.MEDIA_TYPE} = ? or ${MediaLib.FileKey.MEDIA_TYPE} = ?`;
+    let selections: string = MediaLib.FileKey.MEDIA_TYPE + " = ? or " + MediaLib.FileKey.MEDIA_TYPE + " = ?";
     let selectionArgs: string[] = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
 
     if (item.displayName.length > 0) {
-        selections = `(${selections}) and ${MediaLib.FileKey.DISPLAY_NAME} = ?`;
+        selections = "(" + selections + ") and " + MediaLib.FileKey.DISPLAY_NAME + " = ?";
         selectionArgs.push(item.displayName);
     }
 
     if (item.relativePath.length > 0) {
-        selections = `(${selections}) and ${MediaLib.FileKey.RELATIVE_PATH} = ?`;
+        selections = "(" + selections + ") and " + MediaLib.FileKey.RELATIVE_PATH + " = ?";
         selectionArgs.push(item.relativePath);
     }
 
     let fetchOption: MediaLib.MediaFetchOptions = {
         selections: selections,
         selectionArgs: selectionArgs,
-        order: `date_added DESC`
+        order: "date_added DESC"
     };
     return fetchOption;
 }

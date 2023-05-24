@@ -94,7 +94,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
             let displayName = assets.sourceAsset.displayName;
             let index = displayName.lastIndexOf('.');
             let start = displayName.lastIndexOf('_');
-            displayName = `${displayName.slice(0, start)}_${new Date().getTime()}${displayName.slice(index)}`;
+            displayName = displayName.slice(0, start) + "_$" + new Date().getTime() + "$" + displayName.slice(index);
             this.copy(assets.sourceAsset, null, {
                 mediaType: assets.sourceAsset.mediaType,
                 name: displayName,
@@ -124,7 +124,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
                     this.onOperateContinue();
                     break;
                 default:
-                    Log.warn(TAG, `findSameOperation is error ${this.findSameOperation}`);
+                    Log.warn(TAG, "findSameOperation is error " + this.findSameOperation);
                     break;
             }
         } else {
@@ -143,7 +143,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
                 target = await mediaModel.createOne(param.mediaType, param.name, param.path);
                 finishTraceWithTaskId('create', this.currentBatch);
                 if (target == null) {
-                    Log.warn(TAG, `Target file creat failed when copyFile!`);
+                    Log.warn(TAG, "Target file creat failed when copyFile!");
                     this.onError();
                     return;
                 }
@@ -154,13 +154,13 @@ export class CopyMenuOperation extends ProcessMenuOperation {
             this.onCompleted();
         } catch (error) {
             finishTraceWithTaskId('create', this.currentBatch);
-            Log.error(TAG, `copyFile is error ${error}`);
+            Log.error(TAG, "copyFile is error " + error);
             this.onError();
         }
     }
 
     cancelFunc(): void {
-        Log.info(TAG, `progress cancel`);
+        Log.info(TAG, "progress cancel");
         this.onOperatePause();
         let cancelMessage = $r('app.string.copy_cancel_message', this.getExpectProgress().toString());
 

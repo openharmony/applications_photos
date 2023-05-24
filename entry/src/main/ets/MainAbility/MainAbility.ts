@@ -94,7 +94,7 @@ export default class MainAbility extends Ability {
         }
         bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0, (error, appInfo) => {
            if (error) {
-                Log.error(this.TAG, `getApplicationInfo error: ${error}`);
+                Log.error(this.TAG, "getApplicationInfo error: " + error);
                 return;
             }
            let requestPermissionList: Array<string> = [
@@ -107,7 +107,7 @@ export default class MainAbility extends Ability {
                // @ts-ignore
                atManager.createAtManager().checkAccessToken(appInfo.accessTokenId, permission).then((status) => {
                    if (status == atManager.GrantStatus.PERMISSION_DENIED) {
-                       Log.error(this.TAG, `Failed to checkAccessToken permission = ${permission}`);
+                       Log.error(this.TAG, "Failed to checkAccessToken permission = " + permission);
                    }
                })
            }
@@ -176,7 +176,7 @@ export default class MainAbility extends Ability {
                 }
                 finishTrace('onWindowStageCreate');
             }).catch(() => {
-                Log.error(this.TAG, `get device screen info failed.`);
+                Log.error(this.TAG, "get device screen info failed.");
             });
         });
     }
@@ -192,7 +192,7 @@ export default class MainAbility extends Ability {
 
     async thirdRouterPage() {
         let entryFrom = AppStorage.Get(Constants.ENTRY_FROM_HAP);
-        Log.info(this.TAG, `thirdRouterPage entryFromHap: ${entryFrom}`);
+        Log.info(this.TAG, "thirdRouterPage entryFromHap: " + entryFrom);
         if (entryFrom == Constants.ENTRY_FROM_NONE) {
             return;
         }

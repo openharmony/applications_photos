@@ -68,7 +68,7 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
     }
 
     private async confirmCallback(title: string) {
-        Log.info(TAG, `Rename confirm new name: ${title}`);
+        Log.info(TAG, "Rename confirm new name: " + title);
         let mediaItem = (this.menuContext.items[0] as MediaDataItem);
         if (mediaItem == null) {
             Log.warn(TAG, 'mediaItem is null, return');
@@ -85,10 +85,10 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
         }
         try {
             let result = await this.rename(mediaItem, title);
-            Log.info(TAG, `Rename confirm result: ${result}`);
+            Log.info(TAG, "Rename confirm result: " + result);
             this.menuContext.broadCast.emit(Constants.RENAME, [result]);
         } catch (err) {
-            Log.error(TAG, `Rename error: ${err}`);
+            Log.error(TAG, "Rename error: " + err);
             getResourceString($r('app.string.rename_failed')).then((message: string) => {
                 showToast(message);
             })
