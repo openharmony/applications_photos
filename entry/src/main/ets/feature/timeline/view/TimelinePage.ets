@@ -52,7 +52,7 @@ import {
 } from '@ohos/timeline/src/main/ets/vm/TimelineItemDataSource';
 import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 import { TimelineDataItem } from '@ohos/timeline/src/main/ets/data/TimelineDataItem';
-import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
+import { MediaDataItem, DateAdded } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { PhotoEditorManager } from '../../editor/PhotoEditorManager';
 
 const TAG = "TimelinePage"
@@ -504,7 +504,7 @@ export struct TimelinePage {
 
                     Stack() {
                         Grid(this.scroller) {
-                            LazyForEach(this.timelineDataSource, (item: LazyItem<TimelineDataItem> | LazyItem<MediaDataItem>) => {
+                            LazyForEach(this.timelineDataSource, (item: LazyItem<DateAdded>) => {
                                 if (item && item.get() && item.get().viewType == ViewType.GROUP_TITLE) {
                                     GridItem() {
                                         TimelineTitleComponent({
@@ -538,7 +538,7 @@ export struct TimelinePage {
                         .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
                         .onScrollIndex((index: number) => {
                             Log.debug(TAG, `onScrollIndex index ${index}`)
-                            let item: TimelineDataItem | MediaDataItem = this.timelineDataSource.getDataByIndex(index);
+                            let item: DateAdded = this.timelineDataSource.getDataByIndex(index);
                             if (item) {
                                 this.dateText = DateUtil.getLocalizedYearAndMonth(item.dateAdded);
                             } else {

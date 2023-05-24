@@ -14,7 +14,7 @@
  */
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { LazyItem, ItemDataSource } from '@ohos/base/src/main/ets/vm/ItemDataSource';
-import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
+import { MediaDataItem, DateAdded } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { TimelineDataImpl } from '../model/TimelineDataImpl';
 import { TimelineDataItem } from '../data/TimelineDataItem';
 
@@ -80,8 +80,8 @@ export class TimelineItemDataSource extends ItemDataSource {
         return index
     }
 
-    getDataByIndex(index: number): TimelineDataItem | MediaDataItem {
-        let item: TimelineDataItem | MediaDataItem = undefined;
+    getDataByIndex(index: number): DateAdded {
+        let item: DateAdded = undefined;
         let count = 0;
         for (let i = 0;i < this.groupItem.length; i++) {
             let groupItem: TimelineDataItem = this.groupItem[i]
@@ -90,8 +90,9 @@ export class TimelineItemDataSource extends ItemDataSource {
                 item = groupItem;
                 break;
             } else if (index <= childLength) {
-                item = groupItem.groupChild[index-1];
-                item.index = count + index - 1;
+                let media_data_item: MediaDataItem = groupItem.groupChild[index-1] as MediaDataItem;
+                media_data_item.index = count + index - 1;
+                item = media_data_item;
                 break;
             } else {
                 index -= (1 + childLength);
@@ -101,8 +102,8 @@ export class TimelineItemDataSource extends ItemDataSource {
         return item;
     }
 
-    getData(index: number): LazyItem<TimelineDataItem> | LazyItem<MediaDataItem> {
-        let item: LazyItem<TimelineDataItem> | LazyItem<MediaDataItem> = undefined;
+    getData(index: number): LazyItem<DateAdded> {
+        let item: LazyItem<DateAdded> = undefined;
         let count = 0;
         let lazyIndex = index;
         for (let i = 0;i < this.groupItem.length; i++) {

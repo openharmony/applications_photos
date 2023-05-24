@@ -39,8 +39,8 @@ export class ActionBarProp {
     private hasTabBar = false;
     private leftAction = Action.NONE;
     private isHeadTitle = false;
-    private title: Resource | string = null;
-    private subTitle: Resource | string = null;
+    private title: Object = null;
+    private subTitle: Object = null;
     private menuList: Action[] = [];
     private backgroundColor: Resource = ActionBarProp.NORMAL_BACKGROUND_COLOR;
     private alpha = 1;
@@ -92,21 +92,21 @@ export class ActionBarProp {
         return this.isHeadTitle;
     }
 
-    public setTitle(title: Resource | string): ActionBarProp {
+    public setTitle(title: Object): ActionBarProp {
         this.title = title;
         return this;
     }
 
-    public getTitle(): Resource | string {
+    public getTitle(): Object {
         return this.title;
     }
 
-    public setSubTitle(subTitle: Resource | string): ActionBarProp {
+    public setSubTitle(subTitle: Object): ActionBarProp {
         this.subTitle = subTitle;
         return this;
     }
 
-    public getSubTitle(): Resource | string {
+    public getSubTitle(): Object {
         return this.subTitle;
     }
 
