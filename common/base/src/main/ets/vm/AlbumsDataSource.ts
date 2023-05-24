@@ -84,7 +84,7 @@ export class AlbumsDataSource extends ItemDataSource {
 
     getSelectedUris(): string[] {
         let uris: string[] = [];
-        this.albumDataItems.forEach((item: AlbumDataItem) => {
+        this.albumDataItems.forEach((item: AlbumDataItem): void => {
             if (item.isSelect) {
                 uris.push(item.uri);
             }
@@ -115,7 +115,7 @@ export class AlbumsDataSource extends ItemDataSource {
     }
 
     setSelect(isSelect: boolean) {
-        this.albumDataItems.forEach((item: AlbumDataItem) => {
+        this.albumDataItems.forEach((item: AlbumDataItem): void => {
             item.setSelect(isSelect);
         })
     }
@@ -132,7 +132,7 @@ export class AlbumsDataSource extends ItemDataSource {
 
     getSelectedItems(): AlbumDataItem[] {
         let items: AlbumDataItem[] = [];
-        this.albumDataItems.forEach((item: AlbumDataItem) => {
+        this.albumDataItems.forEach((item: AlbumDataItem): void => {
             if (item.isSelect) {
                 items.push(item);
             }
@@ -146,7 +146,7 @@ export class AlbumsDataSource extends ItemDataSource {
     }
 
     dataReload() {
-        this.reloadAlbumItemData().then((isEmpty: boolean) => {
+        this.reloadAlbumItemData().then((isEmpty: boolean): void => {
             this.notifyDataReload();
         })
     }
@@ -168,7 +168,7 @@ export class AlbumsDataSource extends ItemDataSource {
     async reloadAlbumListItemData(): Promise<boolean> {
         Log.info(TAG, `reloadAlbumListItemData`);
         this.albumDataItems = await this.albumDataImpl.reloadAlbumListItemData();
-        this.reloadResetAlbumItemData().then((count: number) => {
+        this.reloadResetAlbumItemData().then((count: number): void => {
             Log.info(TAG, `reloadResetAlbumItemData reset: ${count}`);
         })
         return this.albumDataItems.length == 0;
@@ -176,7 +176,7 @@ export class AlbumsDataSource extends ItemDataSource {
 
     async reloadResetAlbumItemData(): Promise<number> {
         let albumResetDataItems = await this.albumDataImpl.reloadResetAlbumItemData();
-        albumResetDataItems.forEach((item: AlbumDataItem) => {
+        albumResetDataItems.forEach((item: AlbumDataItem): void => {
             this.albumDataItems.push(item);
         });
         this.notifyDataReload();

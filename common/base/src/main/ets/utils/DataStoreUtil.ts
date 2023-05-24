@@ -124,11 +124,11 @@ class DataStoreUtil {
     public async  removeCache() {
         Log.info(TAG,'removeCache start!');
         let context = globalThis.applicationContext;
-        await preferences.removePreferencesFromCache(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE).then(() => {
+        await preferences.removePreferencesFromCache(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE).then((): void => {
             Log.info(TAG,`this.preferences = ${this.preferences}`);
             this.preferences = undefined;
             Log.info(TAG,"removeCache successfully.")
-        }).catch((err) => {
+        }).catch((err): void => {
             Log.info(TAG,"removeCache failed with err: " + err)
         })
     }

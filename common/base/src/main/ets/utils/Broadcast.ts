@@ -65,7 +65,7 @@ export class Broadcast {
     }
 
     public release() {
-        this.callBackArray.forEach((array) => {
+        this.callBackArray.forEach((array): void => {
             array.length = 0;
         });
         this.callBackArray.length = 0;

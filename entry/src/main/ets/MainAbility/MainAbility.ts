@@ -62,7 +62,7 @@ export default class MainAbility extends Ability {
         }
         if (action != null && action != undefined && action.uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
-            this.browserDataSource.reloadGroupItemData(false).then(()=> {
+            this.browserDataSource.reloadGroupItemData(false).then((): void => {
                 if (this.browserDataSource.groupDataItem.length == 0) {
                     this.onDestroy();
                 }
@@ -92,7 +92,7 @@ export default class MainAbility extends Ability {
         } else {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
-        bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0, (error, appInfo) => {
+        bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0, (error, appInfo): void => {
            if (error) {
                 Log.error(this.TAG, `getApplicationInfo error: ${error}`);
                 return;
@@ -105,7 +105,7 @@ export default class MainAbility extends Ability {
            ];
            for (let permission of requestPermissionList) {
                // @ts-ignore
-               atManager.createAtManager().checkAccessToken(appInfo.accessTokenId, permission).then((status) => {
+               atManager.createAtManager().checkAccessToken(appInfo.accessTokenId, permission).then((status): void => {
                    if (status == atManager.GrantStatus.PERMISSION_DENIED) {
                        Log.error(this.TAG, `Failed to checkAccessToken permission = ${permission}`);
                    }
@@ -163,11 +163,11 @@ export default class MainAbility extends Ability {
         Log.info(this.TAG, 'Application onWindowStageCreate');
         globalThis.photosWindowStage = windowStage;
         startTrace('getMainWindow');
-        windowStage.getMainWindow().then((win: window.Window) => {
+        windowStage.getMainWindow().then((win: window.Window): void => {
             AppStorage.SetOrCreate(Constants.MAIN_WINDOW, win);
             finishTrace('getMainWindow');
             startTrace('initializationSize');
-            screenManager.initializationSize(win).then(() => {
+            screenManager.initializationSize(win).then((): void => {
                 finishTrace('initializationSize');
                 if (isFromCard) {
                     windowStage.setUIContent(this.context, 'feature/browser/view/PhotoBrowser', null);
@@ -175,7 +175,7 @@ export default class MainAbility extends Ability {
                     windowStage.setUIContent(this.context, pagePath, null);
                 }
                 finishTrace('onWindowStageCreate');
-            }).catch(() => {
+            }).catch((): void => {
                 Log.error(this.TAG, `get device screen info failed.`);
             });
         });
@@ -251,7 +251,7 @@ export default class MainAbility extends Ability {
         }
 
         //router.clear()需要等页面跳转完成后调用，如果不延时调用会发生崩溃。
-        setTimeout(() => {
+        setTimeout((): void => {
             router.clear();
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, 0)
         }, 10);

@@ -82,7 +82,7 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
             let fetchOption: MediaLib.MediaFetchOptions = await  getFetchOptions(this.item.selectType, this.item.id, "")
             let albums: MediaLib.Album[] = await mediaModel.getAlbums(fetchOption)
             if (albums.length == 0) {
-                getResourceString($r('app.string.name_already_use')).then((message: string) => {
+                getResourceString($r('app.string.name_already_use')).then((message: string): void => {
                     showToast(message)
                 })
                 Log.warn(TAG, `album is miss`)

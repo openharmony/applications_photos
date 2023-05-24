@@ -112,7 +112,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
             switch (this.findSameOperation) {
                 case FindSameOperation.NONE:
                     this.menuContext.broadCast.emit(BroadcastConstants.FIND_SAME_FILE_DIALOG,
-                        [assets, this.count, () => {
+                        [assets, this.count, (): void => {
                             this.copy(assets.sourceAsset, assets.targetAsset);
                         }, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this),
                         this.setFindSameOperation.bind(this)]);
