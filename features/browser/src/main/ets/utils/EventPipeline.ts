@@ -124,7 +124,7 @@ export class EventPipeline {
     }
 
     onTouch(event: TouchEvent) {
-        Log.debug(TAG, "onTouch trigger: " + event.type + ", " + this.isInAnimation + this.isExiting);
+        Log.debug(TAG, "onTouch trigger: " + event.type + ", " + this.isInAnimation + ", " + this.isExiting);
         if (this.isInAnimation || this.isExiting) {
             return;
         }
@@ -163,7 +163,8 @@ export class EventPipeline {
             direction = PanDirection.Vertical;
         }
 
-        Log.info(TAG, "emitDirectionChange reaches: " + this.hasReachLeft + this.hasReachRight + this.hasReachTop + this.hasReachBottom + ", scale " + scale + ", direction: " + direction);
+        Log.info(TAG, "emitDirectionChange reaches: " + this.hasReachLeft + ", " +  this.hasReachRight + ", " + this.hasReachTop + ", " + this.hasReachBottom +
+                 ", scale " + scale + ", direction: " + direction);
         if (this.isExiting) {
             return;
         }
@@ -220,7 +221,7 @@ export class EventPipeline {
             })
             .copy();
         Log.debug(TAG, "emitTouchEvent lastOffset: " + this.lastOffset + ", offset: " + this.offset +
-        ",center: " + this.center + ", scale: " + this.lastScale + this.scale);
+        ",center: " + this.center + ", scale: " + this.lastScale + ", " + this.scale);
 				this.updateMatrix(matrix);
         this.evaluateBounds();
     }
@@ -432,7 +433,7 @@ export class EventPipeline {
     }
 
     onScaleStart(scale: number, centerX: number, centerY: number) {
-        Log.info(TAG, "onScaleStart: " + this.isInAnimation + this.isExiting);
+        Log.info(TAG, "onScaleStart: " + this.isInAnimation + ", " + this.isExiting);
         if (this.isInAnimation || this.isExiting) {
             return;
         }
