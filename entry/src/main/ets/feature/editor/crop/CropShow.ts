@@ -237,7 +237,8 @@ export class CropShow {
     isCropRectTouch(x: number, y: number): boolean {
         let w = this.touchBound;
         let h = this.touchBound;
-        let crop = { ...this.cropRect };
+        let crop = new RectF();
+        crop.set(this.cropRect.left, this.cropRect.top, this.cropRect.right, this.cropRect.bottom);
         let outer = new RectF();
         outer.set(crop.left - w, crop.top - h, crop.right + w, crop.bottom + h);
         let inner = new RectF();
@@ -284,7 +285,8 @@ export class CropShow {
 
     getCurrentFlipImage(): RectF {
         let center = this.getDisplayCenter();
-        let image = { ...this.imageRect };
+        let image = new RectF()
+        image.set(this.imageRect.left, this.imageRect.top, this.imageRect.right, this.imageRect.bottom);
         let flipImage = new RectF();
         flipImage.left = this.isFlipHorizontal ? (2 * center.x - image.right) : image.left;
         flipImage.top = this.isFlipVertically ? (2 * center.y - image.bottom) : image.top;
@@ -374,7 +376,8 @@ export class CropShow {
         let rate = this.ratio.getRate();
         let rect = new RectF();
         if (isEnlarge) {
-            let limit = { ...this.limitRect };
+            let limit = new RectF();
+            limit.set(this.limitRect.left, this.limitRect.top, this.limitRect.right, this.limitRect.bottom);
             let size = MathUtils.getMaxFixedRectSize(rate, crop.right - limit.left, crop.bottom - limit.top);
             rect.set(crop.right - size[0], crop.bottom - size[1], crop.right, crop.bottom);
             let imageLines = this.getCurrentImageLines();
@@ -399,7 +402,8 @@ export class CropShow {
         let rate = this.ratio.getRate();
         let rect = new RectF();
         if (isEnlarge) {
-            let limit = { ...this.limitRect };
+            let limit = new RectF();
+            limit.set(this.limitRect.left, this.limitRect.top, this.limitRect.right, this.limitRect.bottom);
             let size = MathUtils.getMaxFixedRectSize(rate, crop.right - limit.left, limit.bottom - crop.top);
             rect.set(crop.right - size[0], crop.top, crop.right, crop.top + size[1]);
             let imageLines = this.getCurrentImageLines();
@@ -424,7 +428,8 @@ export class CropShow {
         let rate = this.ratio.getRate();
         let rect = new RectF();
         if (isEnlarge) {
-            let limit = { ...this.limitRect };
+            let limit = new RectF();
+            limit.set(this.limitRect.left, this.limitRect.top, this.limitRect.right, this.limitRect.bottom);
             let size = MathUtils.getMaxFixedRectSize(rate, limit.right - crop.left, crop.bottom - limit.top);
             rect.set(crop.left, crop.bottom - size[1], crop.left + size[0], crop.bottom);
             let imageLines = this.getCurrentImageLines();
@@ -449,7 +454,8 @@ export class CropShow {
         let rate = this.ratio.getRate();
         let rect = new RectF();
         if (isEnlarge) {
-            let limit = { ...this.limitRect };
+            let limit = new RectF();
+            limit.set(this.limitRect.left, this.limitRect.top, this.limitRect.right, this.limitRect.bottom);
             let size = MathUtils.getMaxFixedRectSize(rate, limit.right - crop.left, limit.bottom - crop.top);
             rect.set(crop.left, crop.top, crop.left + size[0], crop.top + size[1]);
             let imageLines = this.getCurrentImageLines();
@@ -471,7 +477,8 @@ export class CropShow {
 
     private moveInFreeMode(offsetX: number, offsetY: number) {
         let crop = this.getCropRect();
-        let limit = { ...this.limitRect };
+        let limit = new RectF();
+        limit.set(this.limitRect.left, this.limitRect.top, this.limitRect.right, this.limitRect.bottom);
         let image = this.getCurrentRotatedImage();
         let minLength = this.minSideLength;
         let imageLines = this.getCurrentImageLines();

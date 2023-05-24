@@ -22,7 +22,8 @@ export abstract class MathUtils {
     private static readonly EQUALITY_THRESHOLD = 0.0001;
 
     static roundRect(rect: RectF) {
-        let copy = { ...rect };
+        let copy = new RectF();
+        copy.set(rect.left, rect.top, rect.right, rect.bottom);
         rect.set(Math.round(copy.left), Math.round(copy.top), Math.round(copy.right), Math.round(copy.bottom));
     }
 
@@ -93,7 +94,7 @@ export abstract class MathUtils {
     }
 
     static scaleRectBasedOnPoint(rect: RectF, p: Point, scale: number) {
-        let operate = { ...rect };
+        let operate = new RectF();
         operate.left = (rect.left - p.x) * scale + p.x;
         operate.right = (rect.right - p.x) * scale + p.x;
         operate.top = (rect.top - p.y) * scale + p.y;
