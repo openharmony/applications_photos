@@ -56,7 +56,7 @@ struct Edit {
     @Provide mainBottomSize: number = Constants.BOTTOM_TOOL_BAR_SIZE;
     @Provide titleSize: number = Constants.TOP_BAR_SIZE;
     @Provide filterBottomSize: number = Constants.FILTER_BOTTOM_TOOL_BAR_SIZE;
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @State imageScaleWidth: number = 0;
     appEventBus: Broadcast = broadcastManager.getBroadcast();
     private defaultWidth: number = Constants.DEFAULT_WIDTH;

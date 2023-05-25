@@ -85,7 +85,7 @@ struct PhotoBrowser {
     @StorageLink('TimelinePageIndex') TimelinePageIndex: number = Constants.INVALID;
     @StorageLink('PhotoGridPageIndex') PhotoGridPageIndex: number = Constants.INVALID;
     @StorageLink('isSplitMode') isSplitMode: boolean = screenManager.isSplitMode();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @StorageLink('entryFromHap') entryFromHap: number = Constants.ENTRY_FROM_NONE;
     photoBrowserTransition: string;
     @State isDataChanged:boolean = true;

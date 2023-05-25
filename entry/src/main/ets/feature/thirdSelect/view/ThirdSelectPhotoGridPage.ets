@@ -53,7 +53,7 @@ struct ThirdSelectPhotoGridPage {
     title: Object;
     @State isEmpty: boolean = false;
     @StorageLink('isSplitMode') isSplitMode: boolean = screenManager.isSplitMode();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     DEFAULT_TOAST_DURATION = 2000;
     isFromWallpaper: boolean;
     @Provide @Watch('updateActionBar') maxSelectCount: number = Constants.DEFAULT_MAX_THIRD_SELECT_COUNT;

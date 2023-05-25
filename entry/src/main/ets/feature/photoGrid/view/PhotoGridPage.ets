@@ -70,7 +70,7 @@ struct PhotoGridPage {
     @Provide moreMenuList: Array<Action> = new Array<Action>();
     @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
     @StorageLink('isSplitMode') isSplitMode: boolean = screenManager.isSplitMode();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     private albumInfo: SimpleAlbumDataItem;
     title: string;
     deviceName: string;

@@ -22,7 +22,7 @@ import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 export struct SettingDialog {
     private broadCast: Broadcast = broadcastManager.getBroadcast();
     @StorageLink('form_playback_interval') time: number = AppStorage.Get(Constants.FROM_PLAYBACK_INTERVAL);
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     controller: CustomDialogController;

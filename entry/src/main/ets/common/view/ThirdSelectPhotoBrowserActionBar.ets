@@ -21,7 +21,7 @@ import { Constants } from '../model/common/Constants';
 
 @Component
 export struct ThirdSelectPhotoBrowserActionBar {
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @State isMultiPick: boolean = false;
     @Consume @Watch('updateActionBar') isSelected: boolean;
     onMenuClicked: Function;

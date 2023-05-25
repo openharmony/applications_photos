@@ -28,7 +28,7 @@ export class MenuItem {
 @Component
 export struct ToolBar {
     @StorageLink('isSplitMode') isSplitMode: boolean = screenManager.isSplitMode();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @Link toolMenuList: Action[];
     @Consume moreMenuList: Action[];
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
