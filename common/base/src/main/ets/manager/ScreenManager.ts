@@ -330,7 +330,7 @@ private getWindowProperties(win: window.Window) {
     }
 
     private onWinSizeChanged(size) {
-        Log.info(TAG, "onWinSizeChanged " + ${JSON.stringify(size));
+        Log.info(TAG, "onWinSizeChanged " + JSON.stringify(size));
         if (size == null || size == undefined) {
             return;
         }
