@@ -163,7 +163,7 @@ export class PhotoEditCrop extends PhotoEditBase {
 
     private delayRefresh(delay: number) {
         this.isWaitingRefresh = true;
-        this.timeoutId = setTimeout(() => {
+        this.timeoutId = setTimeout((): void => {
             this.cropShow.enlargeCropArea();
             this.refresh();
             this.isWaitingRefresh = false;

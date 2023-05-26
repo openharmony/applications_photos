@@ -30,7 +30,7 @@ export default class FormAbility extends FormExtension {
         let formId = param['ohos.extra.param.key.form_identity'];
         Log.info(this.TAG, `form onAddForm formId: ${formId}`);
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
-        formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE).then(() => {
+        formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE).then((): Object | null => {
             let formController: FormController = formControllerManager.getController(formId);
             Log.info(this.TAG, `form onAddForm. formController ${formController}`);
             formController = (formController == null) ? formControllerManager.createFormController(formId,
@@ -40,7 +40,7 @@ export default class FormAbility extends FormExtension {
                 return null;
             }
             return formController.bindFormData(formId);
-        }).catch((err) => {
+        }).catch((err): void => {
              Log.error(this.TAG, `init err ${err}`);
         })
         return null;
