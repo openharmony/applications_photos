@@ -377,7 +377,7 @@ private getWindowProperties(win: window.Window) {
 
     getColumnsWidth(count: number): number {
         let columns = this.getScreenColumns()
-        Log.info(TAG, "getColumnsWidth count is " + count + " colunms is " + columns);
+        Log.info(TAG, "getColumnsWidth count is " + count + " columns: " + columns);
         let columnWidth = (px2vp(this.winWidth) - COLUMN_MARGIN) / columns;
         return columnWidth * count - COLUMN_GUTTER;
     }

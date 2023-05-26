@@ -168,7 +168,7 @@ export class AlbumDataImpl {
     }
 
     private async loadAlbumReset(albumDataItems: AlbumDataItem[], count) {
-        Log.info(TAG, "loadReset satrt");
+        Log.info(TAG, "loadReset start");
         for (let i = 1;; i++) {
             let fetchOption: MediaLib.MediaFetchOptions = await this.getLimitCountFetchOption(i * count, count);
             if (fetchOption == undefined) {
