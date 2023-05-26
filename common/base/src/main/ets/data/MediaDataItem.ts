@@ -26,11 +26,16 @@ const STATUS_UNDEFINED = -1
 const STATUS_FALSE = 0
 const STATUS_TRUE = 1
 
-export class MediaDataItem {
-    readonly viewType = ViewType.ITEM
+export interface DateAdded {
+    dateAdded: number;
+    viewType: ViewType;
+}
+
+export class MediaDataItem implements DateAdded {
+    viewType: ViewType = ViewType.ITEM
     readonly hashIndex: number
     index: number
-    dateAdded: number
+    dateAdded: number | null = null
     dateModified: number
     dateTaken: number
     status: number = MediaConstants.UNDEFINED

@@ -17,10 +17,10 @@ import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarPr
 import { ActionBarMode } from '../../../common/view/browserOperation/ActionBarMode';
 
 export class ThirdSelectBarModel {
-    createActionBar(originLeftAction: Action, originTitle: string | Resource, isMultiPick: boolean,
+    createActionBar(originLeftAction: Action, originTitle: Object, isMultiPick: boolean,
 		    selectedCount: number, maxSelectCount: number, isSelectPhotoGrid: boolean): ActionBarProp {
         let leftAction: Action = originLeftAction;
-        let title: string | Resource = originTitle;
+        let title: Object = originTitle;
         let menuList: Action[];
         if (isSelectPhotoGrid == true) {
             menuList = [Action.NAVIGATION_ALBUMS];

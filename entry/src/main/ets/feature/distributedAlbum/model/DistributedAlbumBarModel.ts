@@ -18,7 +18,7 @@ import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarPr
 import { ActionBarMode } from '../../../common/view/browserOperation/ActionBarMode'
 
 export class DistributedAlbumBarModel {
-    createActionBar(name: Resource | string): ActionBarProp {
+    createActionBar(name: Object): ActionBarProp {
         let actionBarProp: ActionBarProp = new ActionBarProp();
         actionBarProp
             .setLeftAction(Action.BACK)

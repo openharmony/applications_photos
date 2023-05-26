@@ -25,7 +25,7 @@ export enum ID {
 interface ActionInfo {
     src ?: Resource;
     isActive ?: boolean;
-    actionID: number | PhotoEditMode;
+    actionID: number;
     text ?: Resource;
     mode ?: number;
     height ?: Resource;

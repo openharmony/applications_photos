@@ -29,7 +29,7 @@ export struct SingleTitle {
 
     build() {
         Row() {
-            Text(this.actionBarProp.getTitle())
+            Text(this.actionBarProp.getTitle() as string)
                 .fontSize(this.actionBarProp.getIsHeadTitle()
                     ? ActionBarProp.HEAD_TITLE_ONE_LINE_TEXT_SIZE : ActionBarProp.TITLE_TEXT_SIZE)
                 .fontWeight(FontWeight.Bold)
