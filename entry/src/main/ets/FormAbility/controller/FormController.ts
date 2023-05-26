@@ -64,16 +64,16 @@ export class FormController {
         let obj3 = this.bindFormData(formId);
         Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
         formProvider.updateForm(formId, obj3)
-            .then((data) => {
+            .then((data): void => {
                 Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
                 if (this.mediaDataManager.getIsShowAlbumName()) {
-                    formProvider.setFormNextRefreshTime(formId, this.mediaDataManager.getIntervalTime()).then(() => {
+                    formProvider.setFormNextRefreshTime(formId, this.mediaDataManager.getIntervalTime()).then((): void => {
                          Log.error(TAG, "setFormNextRefreshTime successfully!");
                         if (this.callback != null) {
                             this.callback.call(this.callback);
                         }
                         this.onDestroy();
-                    }).catch((err) => {
+                    }).catch((err): void => {
                          Log.error(TAG, "init err " + err);
                     })
                 } else {
@@ -82,7 +82,7 @@ export class FormController {
                     }
                     this.onDestroy();
                 }
-            }).catch((error) => {
+            }).catch((error): void => {
              Log.error(TAG, "updateForm failed. Cause: " + JSON.stringify(error));
             this.mediaDataManager.closeFd();
         });
@@ -114,7 +114,7 @@ export class FormController {
             }
         };
         Log.debug(TAG, "routerPhotoBrowser parm " + JSON.stringify(param));
-        startAbility(param).then(() => {
+        startAbility(param).then((): void => {
             AppStorage.Delete(Constants.FROM_CONTROLLER_MANAGER);
         })
         this.onDestroy();
@@ -140,10 +140,10 @@ export class FormController {
                 Log.debug(TAG, "updateFormData formId: " + JSON.stringify(formId));
                 let obj3 = this.bindFormData(formId);
                 Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
-                formProvider.updateForm(formId, obj3).then((data) => {
+                formProvider.updateForm(formId, obj3).then((data): void => {
                     Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
                     this.onTriggerFormEvent(formId, this.callback.call(this.callback));
-                }).catch((error) => {
+                }).catch((error): void => {
                     this.onTriggerFormEvent(formId, this.callback.call(this.callback));
                 });
             } else {

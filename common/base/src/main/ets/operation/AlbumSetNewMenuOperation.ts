@@ -23,7 +23,7 @@ import type { MenuOperation } from './MenuOperation';
 import { MenuContext } from './MenuContext';
 import { JumpSourceToMain } from '../data/JumpSourceToMain';
 import { SimpleAlbumDataItem } from '../data/SimpleAlbumDataItem';
-import { getFetchOptionsByItem } from '../helper/MediaDataHelper';
+import { getFetchOptionsByAlbumItem } from '../helper/MediaDataHelper';
 import { showToast } from '../utils/UiUtil';
 import mediaModel from '../model/MediaModel';
 import { AlbumDataItem } from '../data/AlbumDataItem';
@@ -45,9 +45,9 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
             Log.warn(TAG, 'menuContext is null, return');
             return;
         }
-        getResourceString($r('app.string.album_new_album')).then((name: string) => {
+        getResourceString($r('app.string.album_new_album')).then((name: string): void => {
             Log.info(TAG, "The display name is " + name);
-            this.getNewAlbumDisplayName(name).then((newAlbumDisplayName: string) => {
+            this.getNewAlbumDisplayName(name).then((newAlbumDisplayName: string): void => {
                 Log.info(TAG, "The display name of new album is " + newAlbumDisplayName);
 
                 this.confirmCallback = this.confirmCallback.bind(this);
@@ -71,7 +71,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
         if (displayName != undefined && displayName != null) {
             let isExit = await this.checkAlbumExit(simpleAlbumDataItem);
             if (isExit) {
-                getResourceString($r('app.string.name_already_use')).then((message: string) => {
+                getResourceString($r('app.string.name_already_use')).then((message: string): void => {
                     showToast(message);
                 })
                 return;
@@ -97,7 +97,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     }
 
     private async checkAlbumExit(simpleAlbumDataItem: SimpleAlbumDataItem): Promise<boolean> {
-        let fetchOptions: MediaLib.MediaFetchOptions = await getFetchOptionsByItem(simpleAlbumDataItem);
+        let fetchOptions: MediaLib.MediaFetchOptions = await getFetchOptionsByAlbumItem(simpleAlbumDataItem);
         return await mediaModel.getAlbumCount(fetchOptions) > 0;
     }
 

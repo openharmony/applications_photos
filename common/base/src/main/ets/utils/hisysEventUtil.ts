@@ -18,7 +18,7 @@ import { Log } from './Log';
 const TAG = "hisysEventUtil"
 
 export function hiSysEventDataQueryTimedOut(interfaceName: string): number {
-       let timeOutId = setTimeout(() => {
+       let timeOutId = setTimeout((): void => {
             hiSysEvent.write({
                 domain: "PHOTOS_APP",
                 name: "PHOTOS_FAULT",
@@ -27,7 +27,7 @@ export function hiSysEventDataQueryTimedOut(interfaceName: string): number {
                     FAULT_ID: "DATA_QUERY_OVERTIME",
                     MSG: interfaceName + " Querying 1s data timed out."
                 }
-            }, (err) => {
+            }, (err): void => {
                 if(err) {
                     Log.error(TAG, 'fail to return hiSysEvent');
                 }

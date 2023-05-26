@@ -92,7 +92,7 @@ export class GroupItemDataSource extends ItemDataSource {
 
     getSelectedCount(): number {
         let count = 0;
-        this.groupDataItem.forEach((item: MediaDataItem) => {
+        this.groupDataItem.forEach((item: MediaDataItem): void => {
             if (item.isSelect) {
                 count++;
             }
@@ -102,7 +102,7 @@ export class GroupItemDataSource extends ItemDataSource {
 
     getItems(): MediaDataItem[] {
         let items: MediaDataItem[] = [];
-        this.groupDataItem.forEach((item: MediaDataItem) => {
+        this.groupDataItem.forEach((item: MediaDataItem): void => {
             items.push(item);
         })
         return items;
@@ -110,7 +110,7 @@ export class GroupItemDataSource extends ItemDataSource {
 
     getSelectedItems(): MediaDataItem[] {
         let items: MediaDataItem[] = [];
-        this.groupDataItem.forEach((item: MediaDataItem) => {
+        this.groupDataItem.forEach((item: MediaDataItem): void => {
             if (item.isSelect) {
                 items.push(item);
             }
@@ -120,7 +120,7 @@ export class GroupItemDataSource extends ItemDataSource {
 
     getSelectedUris(): string[] {
         let uris: string[] = [];
-        this.groupDataItem.forEach((item: MediaDataItem) => {
+        this.groupDataItem.forEach((item: MediaDataItem): void => {
             if (item.isSelect) {
                 uris.push(item.uri);
             }
@@ -129,7 +129,7 @@ export class GroupItemDataSource extends ItemDataSource {
     }
 
     setSelect(isSelect: boolean) {
-        this.groupDataItem.forEach((item: MediaDataItem) => {
+        this.groupDataItem.forEach((item: MediaDataItem): void => {
             item.setSelect(isSelect);
         })
         this.notifyDataReload();
@@ -148,7 +148,7 @@ export class GroupItemDataSource extends ItemDataSource {
     }
 
     dataReload(isGrid: boolean) {
-        this.reloadGroupItemData(isGrid).then((isEmpty: boolean) => {
+        this.reloadGroupItemData(isGrid).then((isEmpty: boolean): void => {
             this.notifyDataReload();
         })
     }
@@ -163,7 +163,7 @@ export class GroupItemDataSource extends ItemDataSource {
     }
 
     dataDelete(uri: string) {
-        const mediaDataItemIndex = this.groupDataItem.findIndex((item: MediaDataItem) => {
+        const mediaDataItemIndex = this.groupDataItem.findIndex((item: MediaDataItem): boolean => {
             return item.uri === uri;
         })
         if (mediaDataItemIndex != -1 && this.groupDataItem[mediaDataItemIndex].isDeleted()) {

@@ -26,7 +26,7 @@ export class SelectUtil {
         if (selectedPhotos == undefined) {
             return uriArray;
         }
-        selectedPhotos.forEach((uri) => {
+        selectedPhotos.forEach((uri): void => {
             uriArray.push(uri);
         })
         return uriArray;

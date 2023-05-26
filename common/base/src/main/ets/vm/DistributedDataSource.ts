@@ -44,14 +44,14 @@ export class DistributedDataSource extends ItemDataSource {
     }
 
     setSelect(isSelect: boolean) {
-        this.peerDataItems.forEach((item: PeerDataItem) => {
+        this.peerDataItems.forEach((item: PeerDataItem): void => {
             item.setSelect(isSelect);
         })
     }
 
     getSelectedUris(): string[]{
         let uris: string[] = [];
-        this.peerDataItems.forEach((item: PeerDataItem) => {
+        this.peerDataItems.forEach((item: PeerDataItem): void => {
             if (item.isSelect) {
                 uris.push(item.uri);
             }
@@ -79,7 +79,7 @@ export class DistributedDataSource extends ItemDataSource {
     }
 
     dataReload(): void {
-        this.reloadAlbumItemData().then((isEmpty: number) => {
+        this.reloadAlbumItemData().then((isEmpty: number): void => {
             this.notifyDataReload();
         })
     }

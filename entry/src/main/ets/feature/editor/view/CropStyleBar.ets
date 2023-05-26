@@ -58,7 +58,7 @@ export struct CropStyleBar {
         ActionChangedEvent.isActiveNotChanged(this.menuChanged);
     }
 
-    onMenuClicked(actionID: number | CropRatioType) {
+    onMenuClicked(actionID: number) {
         if (this.selectedMode != PhotoEditMode.EDIT_MODE_CROP) {
             return;
         }
@@ -73,7 +73,7 @@ export struct CropStyleBar {
         for (let i = 0; i < this.menuChanged.menuArray.length; i++) {
             if (actionID === this.menuChanged.menuArray[i].actionID) {
                 this.menuChanged.isChanged = i;
-                this.cropEdit.onFixedRatioChange(actionID);
+                this.cropEdit.onFixedRatioChange(actionID as CropRatioType);
                 this.isCropReset = this.cropEdit.couldReset();
             }
         }

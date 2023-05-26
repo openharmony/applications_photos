@@ -31,7 +31,7 @@ export class PhotoGridBarModel {
         this.isDistributedAlbum = isDistributedAlbum;
     }
 
-    createActionBar(title: string | Resource, isSelectedMode: boolean, selectedCount: number,
+    createActionBar(title: Object, isSelectedMode: boolean, selectedCount: number,
                     isAllSelected: boolean, isEmpty: boolean): ActionBarProp {
         let actionBarProp: ActionBarProp = new ActionBarProp();
         let isHorizontal = screenManager.isHorizontal()
@@ -43,7 +43,7 @@ export class PhotoGridBarModel {
         return actionBarProp;
     }
 
-    updateActionBar(actionBarProp: ActionBarProp, title: string | Resource, isSelectedMode: boolean,
+    updateActionBar(actionBarProp: ActionBarProp, title: Object, isSelectedMode: boolean,
                     selectedCount: number, isAllSelected: boolean, isEmpty: boolean): void {
         let isHorizontal = screenManager.isHorizontal()
         if (isHorizontal) {
@@ -53,7 +53,7 @@ export class PhotoGridBarModel {
         }
     }
 
-    private updateHorizontalActionBar(actionBarProp: ActionBarProp, title: string | Resource, isSelectedMode: boolean,
+    private updateHorizontalActionBar(actionBarProp: ActionBarProp, title: Object, isSelectedMode: boolean,
                                       selectedCount: number, isAllSelected: boolean, isEmpty: boolean): ActionBarProp {
         actionBarProp
             .setLeftAction(Action.BACK)
@@ -74,7 +74,7 @@ export class PhotoGridBarModel {
         return actionBarProp;
     }
 
-    private updateVerticalActionBar(actionBarProp: ActionBarProp, title: string | Resource, isSelectedMode: boolean): ActionBarProp {
+    private updateVerticalActionBar(actionBarProp: ActionBarProp, title: Object, isSelectedMode: boolean): ActionBarProp {
         let menuList: Array<Action> = new Array<Action>();
 
         if (!MediaConstants.ALBUM_DISABLE_NEW_LIST.has(this.albumId) && !this.isDistributedAlbum) {

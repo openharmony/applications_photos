@@ -16,14 +16,14 @@
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ViewType } from '@ohos/base/src/main/ets/data/ViewType';
-import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
+import { MediaDataItem, DateAdded } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import mediaDataItemCache from '@ohos/base/src/main/ets/data/MediaDataItemCache';
 import { ItemDataSource } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 
 const TAG = "TimelineDataItem"
 
-export class TimelineDataItem {
-    readonly viewType = ViewType.GROUP_TITLE;
+export class TimelineDataItem implements DateAdded {
+    viewType: ViewType = ViewType.GROUP_TITLE;
     dateAdded: number;
     groupChild: MediaDataItem[] = [];
 
@@ -62,14 +62,14 @@ export class TimelineDataItem {
     }
 
     setSelect(isSelect: boolean) {
-        this.groupChild.forEach((child: MediaDataItem) => {
+        this.groupChild.forEach((child: MediaDataItem): void => {
             child.setSelect(isSelect);
         })
     }
 
     getSelectedCount(): number{
         let count = 0;
-        this.groupChild.forEach((child: MediaDataItem) => {
+        this.groupChild.forEach((child: MediaDataItem): void => {
             if (child.isSelect) {
                 count++;
             }

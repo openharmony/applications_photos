@@ -200,7 +200,7 @@ class ScreenManager {
 
     private setMainWindow(win: window.Window) {
         Log.debug(TAG, 'setMainWindow');
-        win.on('windowSizeChange', (data) => {
+        win.on('windowSizeChange', (data): void => {
             Log.debug(TAG, "windowSizeChange " + JSON.stringify(data));
             this.checkWindowMode()
             this.onWinSizeChanged(data);
@@ -281,7 +281,7 @@ private getWindowProperties(win: window.Window) {
                     navigationBarColor: barColor,
                     navigationBarContentColor: barContentColor
                 },
-                () => Log.info(TAG, 'setStatusBarColor done')
+                (): void  => Log.info(TAG, 'setStatusBarColor done')
             );
         } catch (err) {
             Log.error(TAG, "setNavigationBarColor err: " + err);
@@ -298,10 +298,10 @@ private getWindowProperties(win: window.Window) {
         }
         Log.debug(TAG, "getTopWindow names: " + names + " end");
         try {
-            topWindow.setSystemBarEnable(names, () => {
+            topWindow.setSystemBarEnable(names, (): void => {
                 Log.debug(TAG, 'setFullScreen Succeeded');
                 if (isShowBar) {
-                    topWindow.getAvoidArea(0, (err, data) => {
+                    topWindow.getAvoidArea(0, (err, data): void => {
                         Log.info(TAG, 'Succeeded in obtaining the area. Data:' + JSON.stringify(data));
                         this.onLeftBlankChanged(data);
                     });
@@ -397,7 +397,7 @@ private getWindowProperties(win: window.Window) {
         Log.info(TAG, 'setKeepScreenOn start');
         let topWindow: any = AppStorage.Get('mainWindow');
         try {
-            topWindow.setKeepScreenOn(true, () => Log.info(TAG, 'setKeepScreenOn Succeeded'))
+            topWindow.setKeepScreenOn(true, (): void => Log.info(TAG, 'setKeepScreenOn Succeeded'))
         } catch (err) {
             Log.error(TAG, "setKeepScreenOn err: " + err);
         }
@@ -407,7 +407,7 @@ private getWindowProperties(win: window.Window) {
         Log.info(TAG, 'setKeepScreenOff start');
         let topWindow: any = AppStorage.Get('mainWindow');
         try {
-            topWindow.setKeepScreenOn(false, () => Log.info(TAG, 'setKeepScreenOff Succeeded'))
+            topWindow.setKeepScreenOn(false, (): void => Log.info(TAG, 'setKeepScreenOff Succeeded'))
         } catch (err) {
             Log.error(TAG, "setKeepScreenOff err: " + err);
         }

@@ -26,11 +26,16 @@ const STATUS_UNDEFINED = -1
 const STATUS_FALSE = 0
 const STATUS_TRUE = 1
 
-export class MediaDataItem {
-    readonly viewType = ViewType.ITEM
+export interface DateAdded {
+    dateAdded: number;
+    viewType: ViewType;
+}
+
+export class MediaDataItem implements DateAdded {
+    viewType: ViewType = ViewType.ITEM
     readonly hashIndex: number
     index: number
-    dateAdded: number
+    dateAdded: number | null = null
     dateModified: number
     dateTaken: number
     status: number = MediaConstants.UNDEFINED
@@ -134,7 +139,7 @@ export class MediaDataItem {
         this.isSelect = selectManager.isSelect(this.uri, this.isSelect);
 
         // may change
-        fileAsset.isFavorite().then((isFavor: boolean) => this.favouriteStatus = (isFavor) ? STATUS_TRUE : STATUS_FALSE);
+        fileAsset.isFavorite().then((isFavor: boolean): void => {this.favouriteStatus = (isFavor) ? STATUS_TRUE : STATUS_FALSE});
 
         if (this.width > 0 && this.height > 0) {
             this.status = MediaConstants.LOADED;

@@ -59,7 +59,7 @@ struct ThirdSelectAlbumSetPage {
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private barModel: ThirdSelectBarModel = new ThirdSelectBarModel();
     private leftAction: Action = Action.BACK;
-    private title: string | Resource = ""
+    private title: Object = ""
     private scroller: Scroller = new Scroller();
     @Provide isHideScrollBar: boolean = true;
     @Provide('tabBarShow') isTabBarShow: boolean = false;

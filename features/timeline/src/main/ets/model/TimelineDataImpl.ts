@@ -31,7 +31,7 @@ export class TimelineDataImpl {
         let mediaFileAsset: Array<MediaLib.FileAsset> = await this.getMediaItemFileAssets(0, count);
         let itemGroup: TimelineDataItem[] = [];
         let index = 0;
-        fileAssets.forEach((fileAsset: MediaLib.FileAsset) => {
+        fileAssets.forEach((fileAsset: MediaLib.FileAsset): void => {
             let item: TimelineDataItem = new TimelineDataItem(fileAsset, mediaFileAsset, index);
             index += item.groupChild.length;
             itemGroup.push(item);
@@ -77,8 +77,8 @@ export class TimelineDataImpl {
 
     private async loadReset(itemGroup: TimelineDataItem[], count) {
         let items: MediaDataItem[] = [];
-        itemGroup.forEach((group: TimelineDataItem) => {
-            group.groupChild.forEach((child: MediaDataItem) => {
+        itemGroup.forEach((group: TimelineDataItem): void => {
+            group.groupChild.forEach((child: MediaDataItem): void => {
                 items.push(child);
             })
         })

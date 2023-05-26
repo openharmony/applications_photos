@@ -46,23 +46,23 @@ class MediaObserver {
         if (this.callbacks.length == 1) {
             Log.info(TAG, 'registerObserver register media');
               try {
-                mediaModel.getMediaLibrary().on('imageChange', () => {
+                mediaModel.getMediaLibrary().on('imageChange', (): void => {
                     Log.info(TAG, 'registerObserver on image');
                     this.sendNotify(MediaConstants.MEDIA_TYPE_IMAGE);
                 })
-                mediaModel.getMediaLibrary().on('videoChange', () => {
+                mediaModel.getMediaLibrary().on('videoChange', (): void => {
                     Log.info(TAG, 'registerObserver on video');
                     this.sendNotify(MediaConstants.MEDIA_TYPE_VIDEO);
                 })
-                mediaModel.getMediaLibrary().on('deviceChange', () => {
+                mediaModel.getMediaLibrary().on('deviceChange', (): void => {
                     Log.info(TAG, 'registerObserver on device');
                     this.sendNotify(MediaConstants.MEDIA_TYPE_DEVICE);
                 })
-                mediaModel.getMediaLibrary().on('albumChange', () => {
+                mediaModel.getMediaLibrary().on('albumChange', (): void => {
                     Log.info(TAG, 'registerObserver on album');
                     this.sendNotify(MediaConstants.MEDIA_TYPE_ALBUM);
                 })
-                mediaModel.getMediaLibrary().on('remoteFileChange', () => {
+                mediaModel.getMediaLibrary().on('remoteFileChange', (): void => {
                     Log.info(TAG, 'registerObserver on remoteFile');
                     this.sendNotify(MediaConstants.MEDIA_TYPE_REMOTE);
                 })
