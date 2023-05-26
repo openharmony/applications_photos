@@ -173,6 +173,10 @@
       "value": "重命名"
     },
     {
+      "name": "action_deRename",
+      "value": "重命名"
+    },
+    {
       "name": "dialog_delete",
       "value": "删除"
     },
