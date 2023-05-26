@@ -121,6 +121,23 @@ export async function getFetchOptions(selectType: number, albumId: string, devic
     return fetchOption;
 }
 
+export async function getFetchOptionsByAlbumItem(item: SimpleAlbumDataItem): Promise<MediaLib.MediaFetchOptions> {
+    let selections: string = ``;
+    let selectionArgs: string[] = [];
+
+    if (item.displayName.length > 0) {
+        selections = `${MediaLib.FileKey.ALBUM_NAME}` + '= ?';
+        selectionArgs.push(item.displayName);
+    }
+
+    let fetchOption: MediaLib.MediaFetchOptions = {
+        selections: selections,
+        selectionArgs: selectionArgs,
+        order: `date_added DESC`
+    };
+    return fetchOption;
+}
+
 export async function getFetchOptionsByItem(item: SimpleAlbumDataItem): Promise<MediaLib.MediaFetchOptions> {
     let selections: string = `${MediaLib.FileKey.MEDIA_TYPE} = ? or ${MediaLib.FileKey.MEDIA_TYPE} = ?`;
     let selectionArgs: string[] = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
