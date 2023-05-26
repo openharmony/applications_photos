@@ -45,9 +45,9 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
             Log.warn(TAG, 'menuContext is null, return');
             return;
         }
-        getResourceString($r('app.string.album_new_album')).then((name: string) => {
+        getResourceString($r('app.string.album_new_album')).then((name: string): void => {
             Log.info(TAG, `The display name is ${name}`);
-            this.getNewAlbumDisplayName(name).then((newAlbumDisplayName: string) => {
+            this.getNewAlbumDisplayName(name).then((newAlbumDisplayName: string): void => {
                 Log.info(TAG, `The display name of new album is ${newAlbumDisplayName}`);
 
                 this.confirmCallback = this.confirmCallback.bind(this);
@@ -71,7 +71,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
         if (displayName != undefined && displayName != null) {
             let isExit = await this.checkAlbumExit(simpleAlbumDataItem);
             if (isExit) {
-                getResourceString($r('app.string.name_already_use')).then((message: string) => {
+                getResourceString($r('app.string.name_already_use')).then((message: string): void => {
                     showToast(message);
                 })
                 return;

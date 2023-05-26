@@ -63,7 +63,7 @@ export class BatchRecoverMenuOperation extends ProcessMenuOperation {
     // Delete a batch of data
     requestOneBatchOperation(): void {
         let item = this.items[this.currentBatch] as TrashMediaDataItem;
-        item.onRecover().then(() => {
+        item.onRecover().then((): void => {
             this.currentBatch++;
             this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [this.getExpectProgress(), this.currentBatch]);
             this.cyclicOperation();

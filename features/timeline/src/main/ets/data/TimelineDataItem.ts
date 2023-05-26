@@ -62,14 +62,14 @@ export class TimelineDataItem {
     }
 
     setSelect(isSelect: boolean) {
-        this.groupChild.forEach((child: MediaDataItem) => {
+        this.groupChild.forEach((child: MediaDataItem): void => {
             child.setSelect(isSelect);
         })
     }
 
     getSelectedCount(): number{
         let count = 0;
-        this.groupChild.forEach((child: MediaDataItem) => {
+        this.groupChild.forEach((child: MediaDataItem): void => {
             if (child.isSelect) {
                 count++;
             }

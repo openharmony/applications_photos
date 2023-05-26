@@ -49,7 +49,7 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
         this.cancelCallback = this.cancelCallback.bind(this);
 
         let deleteResource: Resource = $r('app.string.dialog_delete');
-        this.getDialogTitle().then(dialogTitle => {
+        this.getDialogTitle().then((dialogTitle): void => {
             this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [dialogTitle, deleteResource, this.confirmCallback, this.cancelCallback]);
         })
     }
@@ -89,11 +89,11 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
     // Delete a batch of data
     requestOneBatchOperation(): void {
         let item = this.items[this.currentBatch] as AlbumDataItem;
-        item.onDelete().then(() => {
+        item.onDelete().then((): void => {
             this.currentBatch++
             this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [this.getExpectProgress(), this.currentBatch]);
             this.cyclicOperation();
-        }).catch(() => {
+        }).catch((): void => {
             this.onError();
         })
     }
