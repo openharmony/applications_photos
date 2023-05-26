@@ -28,6 +28,7 @@ export class BroadcastConstants {
     static readonly ON_TAB_CHANGED = 'onTabChanged';
     static readonly RESET_ZERO = 'resetZero';
     static readonly SHOW_DETAIL_DIALOG = 'showDetailDialog';
+    static readonly SHOW_THIRD_DELETE_DIALOG = 'showThirdDeleteDialog';
     static readonly SHOW_MULTI_SELECT_DIALOG = 'showMultiSelectDialog';
     static readonly UPDATE_DATA_SOURCE = 'updateDataSource';
     static readonly SHOW_PROGRESS_DIALOG = 'showProgressDialog';

@@ -21,6 +21,7 @@ import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { MediaDetails, DetailsDialog } from './DetailsDialog';
 import { MultiSelectDetails, MultiSelectDialog } from './MultiSelectDialog';
 import { DeleteDialog } from './DeleteDialog';
+import { ThirdDeleteDialog } from './ThirdDeleteDialog';
 import type { DialogCallback } from '../../model/common/DialogUtil';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { CancelOperationDialog, CancelParam } from './CancelOperationDialog';
@@ -102,6 +103,7 @@ export struct CustomDialogView {
     dialogController: CustomDialogController;
     multiSelectDialog: CustomDialogController;
     deleteDialogController: CustomDialogController;
+    thirdDeleteDialogController: CustomDialogController;
     deleteProgressDialogController: CustomDialogController;
     progressDialogController: CustomDialogController;
     cancelDialogController: CustomDialogController;
@@ -123,6 +125,8 @@ export struct CustomDialogView {
         this.multiSelectDialog = undefined;
         delete this.deleteDialogController;
         this.deleteDialogController = undefined;
+        delete this.thirdDeleteDialogController;
+        this.thirdDeleteDialogController = undefined;
         delete this.deleteProgressDialogController;
         this.deleteProgressDialogController = undefined;
         delete this.progressDialogController;
@@ -176,6 +180,16 @@ export struct CustomDialogView {
             builder: DeleteDialog(),
             autoCancel: false,
             alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+            offset: {
+                dx: 0,
+                dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+            },
+            customStyle: true
+        });
+        this.thirdDeleteDialogController = new CustomDialogController({
+            builder: ThirdDeleteDialog(),
+            autoCancel: false,
+            alignment: this.isHorizontal ? DialogAlignment.Center : DialogAlignment.Bottom,
             offset: {
                 dx: 0,
                 dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
@@ -309,6 +323,14 @@ export struct CustomDialogView {
                 self.dialogDeleteMessage = dialogDeleteMessage;
                 self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
                 self.deleteDialogController.open();
+            });
+        this.broadCast.on(BroadcastConstants.SHOW_THIRD_DELETE_DIALOG,
+            function (deleteMessage: Resource, dialogDeleteMessage: Resource, confirmCallback: Function, cancelCallback?: Function) {
+               Log.info(TAG, 'SHOW_DELETE_DIALOG ');
+                self.dialogMessage = deleteMessage;
+                self.dialogDeleteMessage = dialogDeleteMessage;
+                self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
+                self.thirdDeleteDialogController.open();
             });
         this.broadCast.on(BroadcastConstants.SHOW_RENAME_PHOTO_DIALOG,
             function (fileName: string, confirmCallback: Function, cancelCallback?: Function) {
