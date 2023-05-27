@@ -51,6 +51,10 @@
     {
       "name": "selected_photos_count",
       "value": "%1$d/%2$d"
+    },
+    {
+      "name": "third_delete_dialog_message",
+      "value": "是否允许 %s 删除 %d 个文件？"
     }
   ]
 }

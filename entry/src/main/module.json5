@@ -96,6 +96,14 @@
             "resource": "$profile:form_config"
           }
         ]
+      },
+      {
+        "name": "com.ohos.photos.ServiceExtAbility",
+        "srcEntrance": "./ets/ServiceExt/ServiceExtAbility.ts",
+        "icon": "$media:ohos_gallery",
+        "description": "$string:app_name",
+        "type": "service",
+        "visible": true
       }
     ]
   },

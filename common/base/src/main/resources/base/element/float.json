@@ -175,6 +175,54 @@
     {
       "name": "edit_reset_margin_bottom",
       "value": "6vp"
+    },
+    {
+      "name": "third_delete_dialog_ico_height",
+      "value": "180vp"
+    },
+    {
+      "name": "third_delete_dialog_ico_height_multi",
+      "value": "172vp"
+    },
+    {
+      "name": "third_delete_dialog_second_ico_margin",
+      "value": "16vp"
+    },
+    {
+      "name": "third_delete_dialog_button_area_height",
+      "value": "56vp"
+    },
+    {
+      "name": "third_delete_dialog_ico_margin_bottom_single",
+      "value": "0vp"
+    },
+    {
+      "name": "third_delete_dialog_ico_margin_bottom_multi",
+      "value": "8vp"
+    },
+    {
+      "name": "dialog_button_and_text_margin",
+      "value": "8vp"
+    },
+    {
+      "name": "dialog_double_buttons_margin",
+      "value": "8vp"
+    },
+    {
+      "name": "dialog_default_shadow_m_radius",
+      "value": "50"
+    },
+    {
+      "name": "dialog_default_shadow_m_offsetX",
+      "value": "0"
+    },
+    {
+      "name": "dialog_default_shadow_m_offsetY",
+      "value": "10"
+    },
+    {
+      "name": "first_delete_dialog_ico_margin_bottom",
+      "value": "16vp"
     }
   ]
 }

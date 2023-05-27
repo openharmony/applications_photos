@@ -25,6 +25,7 @@ export class MenuContext {
 
     broadCast: Broadcast;
     onOperationStart: Function;
+    onOperationCancel: Function;
     onOperationEnd: Function;
 
     jumpSourceToMain: number;
@@ -60,6 +61,11 @@ export class MenuContext {
 
     withOperationEndCallback(onOperationEnd: Function): MenuContext {
         this.onOperationEnd = onOperationEnd;
+        return this;
+    }
+
+    withOperationCancelCallback(onOperationCancel: Function): MenuContext {
+        this.onOperationCancel = onOperationCancel;
         return this;
     }
 

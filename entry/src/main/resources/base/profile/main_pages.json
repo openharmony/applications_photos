@@ -14,6 +14,7 @@
     "feature/newAlbum/view/NewAlbumPage",
     "feature/albumSelect/view/AlbumSelect",
     "feature/editor/view/EditMain",
-    "feature/formEditor/view/FormEditorPage"
+    "feature/formEditor/view/FormEditorPage",
+    "pages/ResourceDeletePage"
   ]
 }

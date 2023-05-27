@@ -13,3 +13,4 @@
  * limitations under the License.
  */
 export { MainPage } from './src/main/ets/components/MainPage/MainPage'
+export { ThirdDeleteOperation } from './src/main/ets/operation/ThirdDeleteOperation'
