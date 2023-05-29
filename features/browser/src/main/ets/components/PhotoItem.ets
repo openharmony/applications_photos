@@ -171,7 +171,6 @@ export struct PhotoItem {
             Row() {
                 Image(this.thumbnail)
                     .rotate({ x: 0, y: 0, z: 1, angle: 0 })
-                    .syncLoad(true)
                     .transform(this.matrix)
                     .autoResize(false)
                     .fitOriginalSize(false)

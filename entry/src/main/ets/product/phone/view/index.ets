@@ -24,6 +24,7 @@ import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { Constants } from '../../../common/model/common/Constants';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import router from '@system.router';
+import app from '@system.app';
 
 @Entry
 @Component
@@ -49,6 +50,8 @@ struct IndexPage {
 
     aboutToAppear(): void {
         startTrace('indexPageAppearToShow');
+        app.setImageCacheCount(100);
+        app.setImageRawDataCacheSize(100*1024*1024);
         if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
             AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false);
             this.currentIndex = Constants.ALBUM_PAGE_INDEX;

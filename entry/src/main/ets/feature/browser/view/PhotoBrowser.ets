@@ -406,11 +406,6 @@ struct PhotoBrowser {
         if (currentPhoto == undefined) {
             return;
         }
-        if (currentPhoto.mediaType == MediaLib.MediaType.IMAGE) {
-            if (this.currentShow) {
-                this.moreMenuList.push(Action.ROTATE);
-            }
-        }
     }
 
     getCurrentPhoto(): MediaDataItem {
