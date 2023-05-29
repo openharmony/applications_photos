@@ -151,7 +151,6 @@ export struct AlbumGridItemNewStyle {
                 } else {
                     Row() {
                         Image(this.thumbnail)
-                            .syncLoad(true)
                             .width(this.cardWidth)
                             .height(this.cardHeight)
                             .transform({ y: this.transformV })
@@ -193,7 +192,6 @@ export struct AlbumGridItemNewStyle {
                 } else {
                     Row() {
                         Image(this.thumbnail)
-                            .syncLoad(true)
                             .width(this.cardWidth)
                             .height(this.cardHeight)
                             .translate({ x: this.transformV })
@@ -216,7 +214,6 @@ export struct AlbumGridItemNewStyle {
             }
             if (!this.item.isSelect || !this.isAlbumSetSelectedMode || !this.selectable) {
                 Image($r('app.media.gradient_mask_layer'))
-                    .syncLoad(true)
                     .height('50%')
                     .width('100%')
                     .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
