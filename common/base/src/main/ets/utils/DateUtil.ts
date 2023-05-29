@@ -37,7 +37,7 @@ export class DateUtil {
     }
 
     public static format(time: Date, format_s?: string): string {
-        if (!format_s) {
+        if (!Boolean(format_s).valueOf()) {
             return time.valueOf().toString();
         }
         let opts = {
@@ -104,7 +104,7 @@ export class DateUtil {
         let is24HourClock = i18n.is24HourClock();
         Log.info(TAG, "get is24HourClock " + is24HourClock);
 
-        return new Intl.DateTimeFormat(locales, this.buildDateTimeOpt('', '', '', (!is24HourClock ? '2-digit' : 'numeric'), '2-digit')).format(new Date(milliseconds));
+        return new Intl.DateTimeFormat(locales, this.buildDateTimeOpt('', '', '', (!Boolean(is24HourClock).valueOf() ? '2-digit' : 'numeric'), '2-digit')).format(new Date(milliseconds));
     }
 
     static getLocales(): string {

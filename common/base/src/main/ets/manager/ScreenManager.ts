@@ -115,7 +115,7 @@ class ScreenManager {
             }
         }
         const cbs = this.events[event];
-        if (!cbs) {
+        if (!Boolean(cbs).valueOf()) {
             return;
         }
         if (fn == null || fn == undefined) {
@@ -134,7 +134,7 @@ class ScreenManager {
 
     private emit(event, argument: any[]): void {
         let _self = this;
-        if (!this.events[event]) {
+        if (!Boolean(this.events[event]).valueOf()) {
             return;
         }
         let cbs = [...this.events[event]];
@@ -260,10 +260,10 @@ class ScreenManager {
             this.onLeftBlankChanged(data);
             let barColor = await getResourceString($r('app.color.default_background_color'));
             let barContentColor = await getResourceString($r('app.color.default_bar_content_color'));
-            if (!barColor) {
+            if (!Boolean(barColor).valueOf()) {
                 barColor = '#00FFFFFF';
             }
-            if (!barContentColor) {
+            if (!Boolean(barContentColor).valueOf()) {
                 barContentColor = '#FF000000';
             }
             await topWindow.setSystemBarProperties({

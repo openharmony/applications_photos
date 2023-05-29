@@ -18,7 +18,7 @@ import { Log } from '../utils/Log';
 const TAG = "SingleInstanceHelper";
 
 export default function createOrGet<T>(objectClass: { new(): T }, storageKey: string): T {
-    if (!globalThis[storageKey]) {
+    if (!Boolean(globalThis[storageKey]).valueOf()) {
         globalThis[storageKey] = new objectClass();
         Log.debug(TAG, "Create key of " + storageKey);
     }

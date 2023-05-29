@@ -74,7 +74,7 @@ export class Save {
     private static async createFileAsset(item: MediaDataItem, isReplace: Boolean): Promise<MediaLib.FileAsset> | null {
         let fileAsset = await item.loadFileAsset();
 
-        if (!fileAsset) {
+        if (!Boolean(fileAsset).valueOf()) {
             Log.warn(TAG, 'get file error');
             return null;
         }
