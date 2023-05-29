@@ -92,7 +92,7 @@ struct NewAlbumPage {
                 }
                 Log.info(TAG, `onMenuClicked, action: ${action.actionID} newAlbum: ${this.isNewAlbum}`);
                 if (this.isNewAlbum) {
-                    AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.groupDataSource.getSelectedItems());
+                    AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.groupDataSource.getSelectedItems() as MediaDataItem[]);
                     this.groupDataSource.setSelect(false)
                     let url = this.isHorizontal ? 'product/pad/view/index' : 'product/phone/view/index'
                     router.back({

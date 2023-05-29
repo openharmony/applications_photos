@@ -39,8 +39,8 @@ export struct ToolBar {
     @Consume titleSize: number;
     @Consume isRedo: boolean;
     @Consume isUndo: boolean;
-    private menuClick: any = undefined;
-    private immersiveClick: any = undefined;
+    private menuClick: Function | null = null;
+    private immersiveClick: Function | null = null;
     mainMenuList: Array<ActionButtonInfo> = [];
     @State @Watch('clickEvent') menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
 

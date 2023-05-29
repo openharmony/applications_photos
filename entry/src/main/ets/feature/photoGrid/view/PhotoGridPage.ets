@@ -42,6 +42,7 @@ import { BatchRecoverMenuOperation } from '@ohos/base/src/main/ets/operation/Bat
 import { ClearRecycleMenuOperation } from '@ohos/base/src/main/ets/operation/ClearRecycleMenuOperation';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
+import { MediaLibDataChangeCallback } from '@ohos/base/src/main/ets/interface/MediaLibDataChangeCallback';
 import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
 import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
 import { PhotoGridBarModel } from '../model/PhotoGridBarModel';
@@ -80,7 +81,7 @@ struct PhotoGridPage {
     deleteMode: boolean = false;
     deleteReady = true;
     routerStart = false;
-    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
+    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this as MediaLibDataChangeCallback);
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private barModel: PhotoGridBarModel = new PhotoGridBarModel();
     private groupDataSource: GroupItemDataSource = new GroupItemDataSource();
@@ -198,7 +199,7 @@ struct PhotoGridPage {
     }
 
     async openDetailsDialog(): Promise<void> {
-        let items: MediaDataItem[] = this.groupDataSource.getSelectedItems();
+        let items: MediaDataItem[] = this.groupDataSource.getSelectedItems() as MediaDataItem[];
         if (items.length == 0) {
             Log.warn(TAG, 'no select error');
         } else if (items.length == 1) {

@@ -34,7 +34,7 @@ export struct CropModeBar {
     @Consume screenHeight: number;
     private TAG: string = 'CropModeBar'
     private rulerComponentSize: number = 0;
-    private rulerChanged: any = undefined;
+    private rulerChanged: Function | null = null;
 
     aboutToAppear() {
         this.rulerChanged = this.onRulerChanged.bind(this);

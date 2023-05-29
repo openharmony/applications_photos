@@ -37,12 +37,12 @@ export class FormController {
         this.mediaDataManager = new MediaDataManager(formId, operationMode, this);
     }
 
-    bindFormData(formId: string): any {
+    bindFormData(formId: string): formBindingData.FormBindingData {
         Log.info(TAG, "bindFormData start formId: " + formId)
         let fd = this.mediaDataManager.getCurrentFd();
         let mediaData = this.mediaDataManager.getMediaData();
         let image: string = "image_" + fd + "_formId_" + formId + "_uri_" + mediaData.currentUri;
-        let dataObj1: any = {
+        let dataObj1: Object = {
             "fd": fd == -1 ? false : true,
             "image1": "memory://" + image,
             "albumName": this.mediaDataManager.getCurrentAlbumName(),
@@ -56,7 +56,7 @@ export class FormController {
         Log.debug(TAG, "bindFormData, createFormBindingData dataObj2.data: " + JSON.stringify(dataObj1));
         let obj = formBindingData.createFormBindingData(JSON.stringify(dataObj1));
         Log.debug(TAG, "bindFormData, createFormBindingData obj2.data: " + JSON.stringify(obj.data));
-        return obj;
+        return obj as formBindingData.FormBindingData;
     }
 
     updateFormData(formId: string, vars: string[]): void {
@@ -153,7 +153,7 @@ export class FormController {
         Log.debug(TAG, 'onEvent end!');
     }
 
-    onCallback(): void {
+    onCallback(formId: string): void {
         Log.debug(TAG, 'onCallback start!');
         if (this.callback != null) {
             this.callback.call(this.callback);

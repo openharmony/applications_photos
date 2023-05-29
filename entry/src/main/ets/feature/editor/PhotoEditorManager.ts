@@ -46,7 +46,7 @@ export class PhotoEditorManager {
         return AppStorage.Get(Constants.PHOTO_EDITOR_MANAGER);
     }
 
-    initialize(item: MediaDataItem, mode: PhotoEditMode, errCallback?: any): void {
+    initialize(item: MediaDataItem, mode: PhotoEditMode, errCallback?: Function): void {
         Log.info(this.TAG, "initialize mode[" + mode + "]");
         this.item = item;
         Loader.loadPixelMapWrapper(item, true).then((pixelMap): void => {

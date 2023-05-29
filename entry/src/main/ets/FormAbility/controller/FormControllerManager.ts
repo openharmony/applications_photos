@@ -74,7 +74,7 @@ export class FormControllerManager {
     }
 
     public onEvent(formId: string, message: string): void {
-        this.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_EVENT, function (): any {
+        this.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_EVENT, function (): string {
             return message;
         })
     }

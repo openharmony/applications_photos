@@ -19,7 +19,7 @@ import createOrGet from './SingleInstanceUtils';
 const TAG = "DataStoreUtil"
 
 class DataStoreUtil {
-    private preferences: any = undefined;
+    private preferences: preferences.Preferences | null = null;
     private static readonly PREFERENCES_KEY_MY_FORM_STORE = 'myFormStore';
     private static readonly FROM_DATA_STORE_UTIL = 'form_data_store_util';
 

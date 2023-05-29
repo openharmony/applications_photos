@@ -53,15 +53,15 @@ export abstract class ItemDataSource implements IDataSource {
 
     abstract totalCount(): number;
 
-    abstract getData(index: number): any;
+    abstract getData(index: number): Object;
 
     abstract isSelect(): boolean;
 
     abstract getSelectedCount(): number;
 
-    abstract getSelectedItems(): any[];
+    abstract getSelectedItems(): Object[];
 
-    abstract getSelectedUris(): any[];
+    abstract getSelectedUris(): string[];
 
     abstract dataRemove(): void;
 

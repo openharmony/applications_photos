@@ -43,7 +43,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
 
     // Maximum progress
     readonly MAX_PROGRESS: number = 100;
-    items: any[] = [];
+    items: Object[] = [];
     menuContext: MenuContext;
     uris: string[];
     count: number;

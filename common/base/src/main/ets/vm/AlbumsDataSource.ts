@@ -130,7 +130,7 @@ export class AlbumsDataSource extends ItemDataSource {
         return count;
     }
 
-    getSelectedItems(): AlbumDataItem[] {
+    getSelectedItems(): Object[] {
         let items: AlbumDataItem[] = [];
         this.albumDataItems.forEach((item: AlbumDataItem): void => {
             if (item.isSelect) {

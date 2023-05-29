@@ -28,6 +28,7 @@ import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponen
 import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
 import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
+import { MediaLibDataChangeCallback } from '@ohos/base/src/main/ets/interface/MediaLibDataChangeCallback';
 import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
 import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
 import { DistributedAlbumBarModel } from '../model/DistributedAlbumBarModel';
@@ -48,10 +49,10 @@ struct DistributedAlbumSetPage {
     @Provide isAlbumSetSelectedMode: boolean = false;
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @Provide moreMenuList: Action[] = [];
-    title: any;
+    title: Object;
     isActive: boolean = false; // Whether the page is in the foreground
     scroller: Scroller = new Scroller();
-    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
+    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this as MediaLibDataChangeCallback);
     private deviceId: string = '';
     private barModel: DistributedAlbumBarModel = new DistributedAlbumBarModel();
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
@@ -62,7 +63,7 @@ struct DistributedAlbumSetPage {
         this.actionBarProp = this.barModel.createActionBar(this.title);
     }
 
-    onMenuClicked(action: Action, arg: any[]) {
+    onMenuClicked(action: Action, arg: Object[]) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         switch (action) {
             case Action.BACK:
@@ -202,7 +203,7 @@ struct DistributedAlbumSetPage {
                                     GridItem() {
                                         AlbumGridItemTraditionalStyle({
                                             item: item.get(),
-                                            deviceName: this.title,
+                                            deviceName: this.title as string,
                                             deviceId: this.deviceId,
                                             isBigCard: true
                                         })
@@ -211,7 +212,7 @@ struct DistributedAlbumSetPage {
                                     GridItem() {
                                         AlbumGridItemTraditionalStyle({
                                             item: item.get(),
-                                            deviceName: this.title,
+                                            deviceName: this.title as string,
                                             deviceId: this.deviceId,
                                             isBigCard: false
                                         })

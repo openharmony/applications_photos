@@ -13,11 +13,12 @@
  * limitations under the License.
  */
 import { MediaData } from './MediaData';
+import { FormController } from '../controller/FormController';
 import { Constants } from '../common/Constants';
+import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import dataStore from '@ohos/base/src/main/ets/utils/DataStoreUtil';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
-import MediaLib from "@ohos.multimedia.mediaLibrary";
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { getAlbumDisplayName, getFetchOptions } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
@@ -26,8 +27,8 @@ const TAG = "MediaDataManager"
 
 export class MediaDataManager {
     private mediaData: MediaData = null;
-    private formController: any = null;
-    private items: any[];
+    private formController: FormController = null;
+    private items: MediaLib.FileAsset[];
     private hasNewChange: boolean = false;
     private fd: number = -1;
     private key: string = '';
@@ -35,7 +36,7 @@ export class MediaDataManager {
     private isNextFag: boolean = true;
     private isUpdate: boolean = false;
 
-    constructor(formId: string, operationMode: number, formController: any) {
+    constructor(formId: string, operationMode: number, formController: FormController) {
         this.formController = formController;
         this.operationMode = operationMode;
         this.initData(formId);
@@ -264,7 +265,7 @@ export class MediaDataManager {
         this.isUpdate = isUpdate;
     }
 
-    getCurrentItem(): any {
+    getCurrentItem(): MediaLib.FileAsset {
         if ((this.mediaData.currentIndex < this.items.length) &&
         (this.mediaData.currentUri != '')) {
             return this.items[this.mediaData.currentIndex];

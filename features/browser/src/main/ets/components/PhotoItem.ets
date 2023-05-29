@@ -17,7 +17,7 @@ import Matrix4 from '@ohos.matrix4';
 import router from '@system.router';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
-import { EventPipeline } from '../utils/EventPipeline';
+import { EventPipeline, AnimationOption, Matrix4TransitWithMatrix4x4 } from '../utils/EventPipeline';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Constants } from '../constants/Constants';
@@ -46,8 +46,8 @@ export struct PhotoItem {
     @Consume pageFrom: number;
     @Consume('transitionIndex') @Watch('onTransitionChange') updateTransition: number;
     private eventPipeline: EventPipeline;
-    private animationOption: any = null;
-    private animationEndMatrix: any = null;
+    private animationOption: AnimationOption | null = null;
+    private animationEndMatrix: Matrix4TransitWithMatrix4x4 | null = null;
     @Provide isLoading: boolean = true;
     private imgScale: number = 1;
     private firstLoad: boolean = true;
@@ -90,7 +90,7 @@ export struct PhotoItem {
             Log.info(TAG, `aboutToAppear loadFinish thumbnail ${this.thumbnail}`);
         })
         // register event handling
-        this.broadCast.on(Constants.TOUCH_EVENT + this.item.uri + this.timeStamp, (matrix: any) => {
+        this.broadCast.on(Constants.TOUCH_EVENT + this.item.uri + this.timeStamp, (matrix: Matrix4.Matrix4Transit) => {
             this.matrix = matrix;
         });
 
@@ -99,7 +99,7 @@ export struct PhotoItem {
             this.photoItemDirection = direction;
         });
 
-        this.broadCast.on(Constants.ANIMATION_EVENT + this.item.uri + this.timeStamp, (animationOption: any, animationEndMatrix: any) => {
+        this.broadCast.on(Constants.ANIMATION_EVENT + this.item.uri + this.timeStamp, (animationOption: AnimationOption, animationEndMatrix: Matrix4TransitWithMatrix4x4) => {
             Log.info(TAG, `animationOption: ${JSON.stringify(animationOption)}`);
             this.animationOption = animationOption;
             this.animationEndMatrix = animationEndMatrix;
@@ -150,7 +150,7 @@ export struct PhotoItem {
         Log.debug(TAG, `onViewDataChanged thumbnail:${JSON.stringify(this.thumbnail)}`);
     }
 
-    calcRatio(info: any): number {
+    calcRatio(info: MediaDataItem): number {
         if (info == null || info == undefined) {
             return 1;
         }
