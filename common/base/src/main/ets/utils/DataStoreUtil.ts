@@ -50,7 +50,7 @@ class DataStoreUtil {
         Log.debug(TAG, 'init end!');
     }
 
-    public async getData(key: string, defValue) {
+    public async getData(key: string, defValue): Promise<Object> {
         Log.debug(TAG, 'getData start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, "getData preferences is undefined");
@@ -66,7 +66,7 @@ class DataStoreUtil {
         return temValue;
     }
 
-    public async putData(key: string, value) {
+    public async putData(key: string, value): Promise<void> {
         Log.debug(TAG, 'putData start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, 'putData preferences is undefined');
@@ -81,7 +81,7 @@ class DataStoreUtil {
         }
     }
 
-    public async delData(key: string) {
+    public async delData(key: string): Promise<void> {
         Log.debug(TAG, 'delData start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, "delData preferences is undefined");
@@ -95,7 +95,7 @@ class DataStoreUtil {
         }
     }
 
-    public async flush() {
+    public async flush(): Promise<void> {
         Log.debug(TAG, 'flush start!');
         if (this.preferences == undefined) {
             Log.warn(TAG, "flush preferences is undefined");
@@ -104,7 +104,7 @@ class DataStoreUtil {
         await this.preferences.flush();
     }
 
-    public async hasData(key: string) {
+    public async hasData(key: string): Promise<boolean> {
         Log.debug(TAG, "hasData start! preferences " + this.preferences);
         let ret = false;
         if (this.preferences == undefined) {
@@ -121,7 +121,7 @@ class DataStoreUtil {
         return ret;
     }
 
-    public async  removeCache() {
+    public async  removeCache(): Promise<void> {
         Log.info(TAG,'removeCache start!');
         let context = globalThis.applicationContext;
         await preferences.removePreferencesFromCache(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE).then((): void => {

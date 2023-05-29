@@ -23,11 +23,11 @@ export class PhotoGridBarModel {
     private isDistributedAlbum: boolean = false;
     private albumId: string = '';
 
-    setAlbumId(albumId: string) {
+    setAlbumId(albumId: string): void {
         this.albumId = albumId;
     }
 
-    setDistributedAlbum(isDistributedAlbum: boolean) {
+    setDistributedAlbum(isDistributedAlbum: boolean): void {
         this.isDistributedAlbum = isDistributedAlbum;
     }
 

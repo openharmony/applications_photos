@@ -24,15 +24,15 @@ export class AlbumsDataSource extends ItemDataSource {
     private albumDataItems: AlbumDataItem[] = [];
     private albumDataImpl: AlbumDataImpl = new AlbumDataImpl();
 
-    setBlackList(blackList: string[]) {
+    setBlackList(blackList: string[]): void {
         this.albumDataImpl.setBlackList(blackList);
     }
 
-    setSelectType(selectType: number) {
+    setSelectType(selectType: number): void {
         this.albumDataImpl.setSelectType(selectType);
     }
 
-    setDeviceId(deviceId: string) {
+    setDeviceId(deviceId: string): void {
         this.albumDataImpl.setDeviceId(deviceId);
     }
 
@@ -114,7 +114,7 @@ export class AlbumsDataSource extends ItemDataSource {
         return isDisableDelete;
     }
 
-    setSelect(isSelect: boolean) {
+    setSelect(isSelect: boolean): void {
         this.albumDataItems.forEach((item: AlbumDataItem): void => {
             item.setSelect(isSelect);
         })
@@ -145,13 +145,13 @@ export class AlbumsDataSource extends ItemDataSource {
         this.notifyDataChange(index);
     }
 
-    dataReload() {
+    dataReload(): void {
         this.reloadAlbumItemData().then((isEmpty: boolean): void => {
             this.notifyDataReload();
         })
     }
 
-    dataRemove() {
+    dataRemove(): void {
         for (let i = this.albumDataItems.length - 1;i >= 0; i--) {
             if (this.albumDataItems[i].isDeleted()) {
                 this.albumDataItems.splice(i, 1);

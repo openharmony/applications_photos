@@ -107,23 +107,23 @@ export class EventPipeline {
         this.evaluateScales();
     }
 
-    onDataChanged(item: MediaDataItem) {
+    onDataChanged(item: MediaDataItem): void {
         this.item = item;
         this.width = this.item.imgWidth == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgWidth;
         this.height = this.item.imgHeight == 0 ? MediaConstants.DEFAULT_SIZE : this.item.imgHeight;
         this.evaluateScales();
     }
 
-    setDefaultScale(scale) {
+    setDefaultScale(scale): void {
         this.defaultScale = scale;
         this.lastScale = scale;
     }
 
-    onComponentSizeChanged() {
+    onComponentSizeChanged(): void {
         this.evaluateScales();
     }
 
-    onTouch(event: TouchEvent) {
+    onTouch(event: TouchEvent): void {
         Log.debug(TAG, "onTouch trigger: " + event.type + ", " + this.isInAnimation + ", " + this.isExiting);
         if (this.isInAnimation || this.isExiting) {
             return;
@@ -357,7 +357,7 @@ export class EventPipeline {
         this.broadCast.emit(Constants.PULL_DOWN_CANCEL, []);
     }
 
-    onMoveStart(offsetX: number, offsetY: number) {
+    onMoveStart(offsetX: number, offsetY: number): void {
         if (this.isInAnimation || this.isExiting) {
             return;
         }
@@ -381,7 +381,7 @@ export class EventPipeline {
      * @param offsetX offsetX
      * @param offsetY offsetY
      */
-    onMove(offsetX: number, offsetY: number) {
+    onMove(offsetX: number, offsetY: number): void {
         if (this.isInAnimation || this.isExiting) {
             return;
         }
@@ -412,7 +412,7 @@ export class EventPipeline {
         this.emitTouchEvent();
     }
 
-    onMoveEnd(offsetX, offsetY) {
+    onMoveEnd(offsetX, offsetY): void {
         if (this.isInAnimation || this.isExiting) {
             return;
         }
@@ -432,7 +432,7 @@ export class EventPipeline {
         }
     }
 
-    onScaleStart(scale: number, centerX: number, centerY: number) {
+    onScaleStart(scale: number, centerX: number, centerY: number): void {
         Log.info(TAG, "onScaleStart: " + this.isInAnimation + ", " + this.isExiting);
         if (this.isInAnimation || this.isExiting) {
             return;
@@ -490,7 +490,7 @@ export class EventPipeline {
         return center;
     }
 
-    onScale(scale: number) {
+    onScale(scale: number): void {
         Log.debug(TAG, "onScale: " + this.isInAnimation + ", " + this.isExiting + ", scale: " + scale);
         if (this.isInAnimation || this.isExiting) {
             return;
@@ -506,7 +506,7 @@ export class EventPipeline {
         this.emitTouchEvent();
     }
 
-    onScaleEnd() {
+    onScaleEnd(): void {
         Log.info(TAG, "onScaleEnd: " + this.isInAnimation + ", " + this.isExiting);
         if (this.isInAnimation || this.isExiting) {
             return;
@@ -578,7 +578,7 @@ export class EventPipeline {
      * @param centerX the location of double click
      * @param centerY the location of double click
      */
-    onDoubleTap(centerX: number, centerY: number) {
+    onDoubleTap(centerX: number, centerY: number): void {
         if (this.isInAnimation || this.isExiting) {
             Log.debug(TAG, "onDoubleTap not avaliable: " + this.isInAnimation + ", " + this.isExiting);
             return;
@@ -611,7 +611,7 @@ export class EventPipeline {
         this.startAnimation(matrix);
     }
 
-    reset() {
+    reset(): void {
         this.lastOffset = [0, 0];
         this.offset = [0, 0];
         this.lastScale = 1.0;
@@ -625,7 +625,7 @@ export class EventPipeline {
         this.emitDirectionChange();
     }
 
-    onDisAppear() {
+    onDisAppear(): void {
         Log.info(TAG, 'onDisAppear');
     }
 

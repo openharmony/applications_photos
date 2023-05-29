@@ -67,7 +67,7 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
         Log.error(TAG, 'Rename data failed!');
     }
 
-    private async confirmCallback(title: string) {
+    private async confirmCallback(title: string): Promise<void> {
         Log.info(TAG, "Rename confirm new name: " + title);
         let mediaItem = (this.menuContext.items[0] as MediaDataItem);
         if (mediaItem == null) {
@@ -96,13 +96,13 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
 
     }
 
-    private async rename(item: MediaDataItem, name: string) {
+    private async rename(item: MediaDataItem, name: string): Promise<Object[]> {
         Log.info(TAG, 'renameSinglePhoto start');
         item.setName(name);
         return [item.title, item.displayName];
     }
 
-    private async hasSameNameAsset(item: MediaDataItem, name: string) {
+    private async hasSameNameAsset(item: MediaDataItem, name: string): Promise<boolean> {
        Log.debug(TAG, 'hasSameNameAsset start');
         let fileAsset = await item.loadFileAsset();
         let displayName = fileAsset.displayName;
@@ -118,7 +118,7 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
             return false;
         }
 
-       Log.debug(TAG, 'hasSameNameAsset true');
+        Log.debug(TAG, 'hasSameNameAsset true');
         return true;
     }
 

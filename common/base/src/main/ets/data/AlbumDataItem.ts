@@ -66,7 +66,7 @@ export class AlbumDataItem {
         this.update(fileAsset);
     }
 
-    update(fileAsset: MediaLib.FileAsset) {
+    update(fileAsset: MediaLib.FileAsset): void {
         this.uri = fileAsset.uri;
         this.relativePath = fileAsset.relativePath;
 
@@ -92,7 +92,7 @@ export class AlbumDataItem {
         return (await mediaModel.getAllMediaItem(this.id, videoFetchOption, true)).counts;
     }
 
-    setSelect(isSelect: boolean) {
+    setSelect(isSelect: boolean): void {
         this.isSelect = isSelect;
         selectManager.setSelect(this.id, this.isSelect);
     }

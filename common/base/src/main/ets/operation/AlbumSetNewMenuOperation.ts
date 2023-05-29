@@ -40,7 +40,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
         this.menuContext = menuContext;
     }
 
-    doAction() {
+    doAction(): void {
         if (this.menuContext == null) {
             Log.warn(TAG, 'menuContext is null, return');
             return;
@@ -64,7 +64,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
         return await this.getNewAlbumDefaultName(relativeRoot, name);
     }
 
-    private async confirmCallback(displayName: string) {
+    private async confirmCallback(displayName: string): Promise<void> {
         Log.info(TAG, "AlbumSet new album confirm and the new name is: " + displayName);
         let relativePath = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + displayName + "/";
         let simpleAlbumDataItem: SimpleAlbumDataItem = new SimpleAlbumDataItem("", displayName, relativePath, "", "");
@@ -115,7 +115,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
         this.onOperationEnd && this.onOperationEnd();
     }
 
-    private matchAlbumDefaultName(albumInfo: string, numbers: Array<number>, root: string, prefixName: string) {
+    private matchAlbumDefaultName(albumInfo: string, numbers: Array<number>, root: string, prefixName: string): void {
         let res = albumInfo.match(new RegExp("^" + root + prefixName + "[1-9][0-9]*/$"));
         if (res != null) {
             let number = res[0].match(new RegExp("[1-9][0-9]*"));

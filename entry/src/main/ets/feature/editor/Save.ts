@@ -17,6 +17,7 @@ import image from '@ohos.multimedia.image';
 import fileIO from '@ohos.fileio';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
+import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { ImageFilterStack } from './ImageFilterStack';
 import { DateUtil } from './utils/DateUtil';
@@ -70,8 +71,8 @@ export class Save {
         }
     }
 
-    private static async createFileAsset(item: MediaDataItem, isReplace: Boolean) {
-        let fileAsset =await item.loadFileAsset();
+    private static async createFileAsset(item: MediaDataItem, isReplace: Boolean): Promise<MediaLib.FileAsset> | null {
+        let fileAsset = await item.loadFileAsset();
 
         if (!fileAsset) {
             Log.warn(TAG, 'get file error');

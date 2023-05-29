@@ -30,6 +30,11 @@ export enum FindSameOperation {
     SKIP
 }
 
+export interface Assets {
+    sourceAsset: MediaLib.FileAsset,
+    targetAsset: MediaLib.FileAsset
+}
+
 const TAG = "ProcessMenuOperation"
 
 export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String[]>, MenuOperationCallback {
@@ -102,7 +107,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
     }
 
     // Batch circular deletion
-    cyclicOperation() {
+    cyclicOperation(): void {
         Log.info(TAG, 'cyclicOperation');
         this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [this.getExpectProgress(), this.currentBatch]);
 
@@ -161,7 +166,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
         this.findSameOperation = newOperation;
     }
 
-    async getFileCopyOrMoveInfo(fileAsset: MediaLib.FileAsset, albumInfo: SimpleAlbumDataItem) {
+    async getFileCopyOrMoveInfo(fileAsset: MediaLib.FileAsset, albumInfo: SimpleAlbumDataItem): Promise<Assets> {
         Log.debug(TAG, 'getFileCopyOrMoveInfo start');
         let item: SimpleAlbumDataItem = new SimpleAlbumDataItem("", fileAsset.displayName, albumInfo.relativePath, "", "");
         let fetchOptions = await getFetchOptionsByItem(item);

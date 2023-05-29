@@ -29,7 +29,7 @@ class MediaObserver {
     private static readonly OBSERVER_ALBUM_CHANGE: string = 'albumChange';
     private static readonly OBSERVER_REMOTE_FILE_CHANGE: string = 'remoteFileChange';
 
-    registerObserver(callback: MediaObserverCallback) {
+    registerObserver(callback: MediaObserverCallback): void {
         Log.info(TAG, 'registerObserver');
         if (callback == null) {
             Log.warn(TAG, 'registerObserver with empty callback');
@@ -72,14 +72,14 @@ class MediaObserver {
         }
     }
 
-    sendNotify(mediaType: string) {
+    sendNotify(mediaType: string): void {
         Log.info(TAG, "registerObserver sendNotify size: " + this.callbacks.length);
         for (let callback of this.callbacks) {
             callback.onChange(mediaType);
         }
     }
 
-    unregisterObserver(callback: MediaObserverCallback) {
+    unregisterObserver(callback: MediaObserverCallback): void {
         Log.info(TAG, 'unregisterObserver');
         const pos = this.callbacks.indexOf(callback);
         if (pos >= 0) {

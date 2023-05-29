@@ -172,7 +172,7 @@ export class DateUtil {
         return startYear === endYear ? true : false;
     }
 
-    public static buildDateTimeOpt(year: string, month: string, day: string, hour: string, minute: string) {
+    public static buildDateTimeOpt(year: string, month: string, day: string, hour: string, minute: string): Object {
         return {
             locale: '',
             dateStyle: '',

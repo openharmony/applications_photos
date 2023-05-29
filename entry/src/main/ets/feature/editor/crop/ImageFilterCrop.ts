@@ -69,23 +69,23 @@ export class ImageFilterCrop extends ImageFilterBase {
         return output;
     }
 
-    setFlipHorizontal(isFlip: boolean) {
+    setFlipHorizontal(isFlip: boolean): void {
         this.isFlipHorizontal = isFlip;
     }
 
-    setFlipVertically(isFlip: boolean) {
+    setFlipVertically(isFlip: boolean): void {
         this.isFlipVertically = isFlip;
     }
 
-    setRotationAngle(angle: number) {
+    setRotationAngle(angle: number): void {
         this.rotationAngle = angle;
     }
 
-    setHorizontalAngle(angle: number) {
+    setHorizontalAngle(angle: number): void {
         this.horizontalAngle = angle;
     }
 
-    setCropRect(rect: RectF) {
+    setCropRect(rect: RectF): void {
         this.cropRect.set(rect.left, rect.top, rect.right, rect.bottom);
     }
 }

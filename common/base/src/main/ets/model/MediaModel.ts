@@ -36,7 +36,7 @@ class MediaModel {
     constructor() {
     }
 
-    onCreate(context) {
+    onCreate(context): void {
         if (this.media == undefined) {
             this.media = MediaLib.getMediaLibrary(context);
         }
@@ -75,7 +75,7 @@ class MediaModel {
         return await this.media.createAsset(mediaType, displayName, relativePath);
     }
 
-    async copyOne(source: MediaLib.FileAsset, target: MediaLib.FileAsset) {
+    async copyOne(source: MediaLib.FileAsset, target: MediaLib.FileAsset): Promise<void> {
         Log.info(TAG, "copy start: src:" + source.uri + " target: " + target.uri);
         startTrace('openAssetR');
         let fd = await this.openAsset('R', source);
@@ -107,12 +107,12 @@ class MediaModel {
         Log.debug(TAG, 'copy end');
     }
 
-    async deleteOne(uri: string) {
+    async deleteOne(uri: string): Promise<void> {
         Log.debug(TAG, "deleteAsset uri: " + uri);
         await this.media.deleteAsset(uri);
     }
 
-    async deleteAll(fetchOption: MediaLib.MediaFetchOptions) {
+    async deleteAll(fetchOption: MediaLib.MediaFetchOptions): Promise<void> {
         Log.info(TAG, 'deleteAll');
         startTrace('deleteAll');
         let fetchFileResult: MediaLib.FetchFileResult = undefined;
@@ -410,7 +410,7 @@ class MediaModel {
         return fileAsset;
     }
 
-    async openAsset(mode: string, fileAsset: MediaLib.FileAsset) {
+    async openAsset(mode: string, fileAsset: MediaLib.FileAsset): Promise<number> {
         Log.debug(TAG, 'openAsset start');
         let fd: number = await fileAsset.open(mode);
         Log.info(TAG, "openAsset end. fd: " + fd);
@@ -420,7 +420,7 @@ class MediaModel {
         return fd;
     }
 
-    async closeAsset(fd: number, fileAsset: MediaLib.FileAsset) {
+    async closeAsset(fd: number, fileAsset: MediaLib.FileAsset): Promise<void> {
         Log.debug(TAG, 'closeAsset start');
         await fileAsset.close(fd);
     }

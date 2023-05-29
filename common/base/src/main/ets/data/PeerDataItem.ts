@@ -35,7 +35,7 @@ export class PeerDataItem {
         this.networkId = peer.networkId;
     }
 
-    getHashCode() {
+    getHashCode(): string {
         return this.networkId + " " + this.orientation + " " + this.isSelect;
     }
 
@@ -44,7 +44,7 @@ export class PeerDataItem {
         return this.uri + "/thumbnail/256/256";
     }
 
-    setSelect(isSelect: boolean) {
+    setSelect(isSelect: boolean): void {
         this.isSelect = isSelect;
         selectManager.setSelect(this.uri, this.isSelect);
     }

@@ -19,11 +19,11 @@ export class Broadcast {
     constructor() {
     }
 
-    public on(event, callback) {
+    public on(event, callback): void {
         (this.callBackArray[event] || (this.callBackArray[event] = [])).push(callback);
     }
 
-    public off(event, callback) {
+    public off(event, callback): void {
         if (event == null) {
             this.callBackArray = [];
         }
@@ -46,7 +46,7 @@ export class Broadcast {
         }
     }
 
-    public emit(event, args: any[]) {
+    public emit(event, args: any[]): void {
         let _self = this;
         if (!this.callBackArray[event]) {
             return;
@@ -64,7 +64,7 @@ export class Broadcast {
         }
     }
 
-    public release() {
+    public release(): void {
         this.callBackArray.forEach((array): void => {
             array.length = 0;
         });

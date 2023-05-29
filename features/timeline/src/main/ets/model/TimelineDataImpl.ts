@@ -75,7 +75,7 @@ export class TimelineDataImpl {
         return columns * rows
     }
 
-    private async loadReset(itemGroup: TimelineDataItem[], count) {
+    private async loadReset(itemGroup: TimelineDataItem[], count): Promise<void> {
         let items: MediaDataItem[] = [];
         itemGroup.forEach((group: TimelineDataItem): void => {
             group.groupChild.forEach((child: MediaDataItem): void => {

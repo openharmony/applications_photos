@@ -27,15 +27,15 @@ export class AlbumDataImpl {
     private selectType: number = MediaConstants.SELECT_TYPE_ALL;
     private deviceId: string = '';
 
-    setBlackList(blackList: string[]) {
+    setBlackList(blackList: string[]): void {
         this.blackList = blackList;
     }
 
-    setSelectType(selectType: number) {
+    setSelectType(selectType: number): void {
         this.selectType = selectType;
     }
 
-    setDeviceId(deviceId: string) {
+    setDeviceId(deviceId: string): void {
         this.deviceId = deviceId;
     }
 
@@ -133,7 +133,7 @@ export class AlbumDataImpl {
         await this.addAlbumDataItem(albumDataItems, albums);
     }
 
-    private async addAlbumDataItem(albumDataItems: AlbumDataItem[], albums: MediaLib.Album[]) {
+    private async addAlbumDataItem(albumDataItems: AlbumDataItem[], albums: MediaLib.Album[]): Promise<void> {
         for (let i = 0;i < albums.length; i++) {
             let album: MediaLib.Album = albums[i];
             if (this.blackList.indexOf(album.albumId.toString()) >= 0) {
@@ -168,6 +168,7 @@ export class AlbumDataImpl {
     }
 
     private async loadAlbumReset(albumDataItems: AlbumDataItem[], count) {
+    private async loadAlbumReset(albumDataItems: AlbumDataItem[], count): Promise<void> {
         Log.info(TAG, "loadReset start");
         for (let i = 1;; i++) {
             let fetchOption: MediaLib.MediaFetchOptions = await this.getLimitCountFetchOption(i * count, count);

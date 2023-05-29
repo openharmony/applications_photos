@@ -17,7 +17,7 @@ import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { MediaConstants } from '../constants/MediaConstants';
 import { Log } from '../utils/Log';
 import { MenuContext } from './MenuContext';
-import { ProcessMenuOperation, FindSameOperation } from './ProcessMenuOperation';
+import { ProcessMenuOperation, FindSameOperation, Assets } from './ProcessMenuOperation';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 import mediaModel from '../model/MediaModel';
 import { MediaOperationType } from '../data/MediaOperationType';
@@ -77,19 +77,19 @@ export class CopyMenuOperation extends ProcessMenuOperation {
         this.processOperation();
     }
 
-    requestOneBatchOperation() {
+    requestOneBatchOperation(): void {
         let item = this.items[this.currentBatch++] as MediaDataItem;
         this.copyOne(item);
     }
 
-    private async copyOne(item: MediaDataItem) {
+    private async copyOne(item: MediaDataItem): Promise<void> {
         if (this.menuContext.deviceId) {
             let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + MediaConstants.REMOTE_ALBUM_PATH + "/";
             this.albumInfo = new SimpleAlbumDataItem("", "", path, "", "");
 
         }
         let fileAsset = await item.loadFileAsset();
-        let assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo);
+        let assets: Assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo);
         if (this.menuContext.deviceId) {
             let displayName = assets.sourceAsset.displayName;
             let index = displayName.lastIndexOf('.');
@@ -136,7 +136,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
         }
     }
 
-    async copy(source, target, param?) {
+    async copy(source, target, param?): Promise<void> {
         try {
             if (!target) {
                 startTraceWithTaskId('create', this.currentBatch);

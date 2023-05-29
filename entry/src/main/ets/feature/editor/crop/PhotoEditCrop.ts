@@ -66,7 +66,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.pinchPoint = new Point(0, 0);
     }
 
-    entry(pixelMap: PixelMapWrapper) {
+    entry(pixelMap: PixelMapWrapper): void {
         if (undefined == pixelMap) {
             return;
         }
@@ -81,7 +81,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.refresh();
     }
 
-    private initialize(pixelMap: PixelMapWrapper) {
+    private initialize(pixelMap: PixelMapWrapper): void {
         this.imageRatio = pixelMap.width / pixelMap.height;
         this.determineMaxScaleFactor(pixelMap);
         this.clear();
@@ -93,7 +93,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         return limit;
     }
 
-    private determineMaxScaleFactor(pixelMap: PixelMapWrapper) {
+    private determineMaxScaleFactor(pixelMap: PixelMapWrapper): void {
         let scaleFactorW = pixelMap.width / px2vp(PhotoEditCrop.DEFAULT_MIN_SIDE_LENGTH);
         let scaleFactorH = pixelMap.height / px2vp(PhotoEditCrop.DEFAULT_MIN_SIDE_LENGTH);
         this.cropShow.setMaxScaleFactor(scaleFactorW, scaleFactorH);
@@ -113,7 +113,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         return this.filter;
     }
 
-    private saveFinalOperation() {
+    private saveFinalOperation(): void {
         let crop = this.cropShow.getCropRect();
         let image = this.cropShow.getImageRect();
         crop.move(-image.left, -image.top);
@@ -125,7 +125,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.filter.setFlipVertically(this.isFlipVertically);
     }
 
-    private clear() {
+    private clear(): void {
         this.cropRatio = CropRatioType.RATIO_TYPE_FREE;
         this.isFlipHorizontal = false;
         this.isFlipVertically = false;
@@ -133,13 +133,13 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.sliderAngle = 0;
     }
 
-    setCanvasContext(context: CanvasRenderingContext2D) {
+    setCanvasContext(context: CanvasRenderingContext2D): void {
         Log.info(this.TAG, 'setCanvasContext');
         this.ctx = context;
         this.refresh();
     }
 
-    setCanvasSize(width: number, height: number) {
+    setCanvasSize(width: number, height: number): void {
         Log.info(this.TAG, "setCanvasSize: width[" + width + "], height[" + height + "]");
         this.displayWidth = width;
         this.displayHeight = height;
@@ -154,14 +154,14 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.refresh();
     }
 
-    private refresh() {
+    private refresh(): void {
         if (this.ctx != undefined && this.input != undefined) {
             this.drawImage();
             this.drawCrop();
         }
     }
 
-    private delayRefresh(delay: number) {
+    private delayRefresh(delay: number): void {
         this.isWaitingRefresh = true;
         this.timeoutId = setTimeout((): void => {
             this.cropShow.enlargeCropArea();
@@ -170,18 +170,18 @@ export class PhotoEditCrop extends PhotoEditBase {
         }, delay);
     }
 
-    private clearDelayRefresh() {
+    private clearDelayRefresh(): void {
         clearTimeout(this.timeoutId);
         this.isWaitingRefresh = false;
     }
 
-    private clearCanvas() {
+    private clearCanvas(): void {
         if (this.ctx != undefined) {
             this.ctx.clearRect(0, 0, this.displayWidth, this.displayHeight);
         }
     }
 
-    private drawImage() {
+    private drawImage(): void {
         this.ctx.save();
         this.clearCanvas();
 
@@ -203,7 +203,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.ctx.restore();
     }
 
-    private drawCrop() {
+    private drawCrop(): void {
         let crop = this.cropShow.getCropRect();
         MathUtils.roundRect(crop);
         let display = new RectF();
@@ -214,7 +214,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         DrawingUtils.drawCropButton(this.ctx, crop);
     }
 
-    onMirrorChange() {
+    onMirrorChange(): void {
         Log.debug(this.TAG, 'onMirrorChange');
         if (this.isWaitingRefresh) {
             this.clearDelayRefresh();
@@ -230,7 +230,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.refresh();
     }
 
-    onRotationAngleChange() {
+    onRotationAngleChange(): void {
         Log.debug(this.TAG, 'onRotationAngleChange');
         if (this.isWaitingRefresh) {
             this.clearDelayRefresh();
@@ -242,7 +242,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.refresh();
     }
 
-    onSliderAngleChange(angle: number) {
+    onSliderAngleChange(angle: number): void {
         Log.debug(this.TAG, "onSliderAngleChange: angle[" + angle + "]");
         if (this.isWaitingRefresh) {
             this.clearDelayRefresh();
@@ -254,7 +254,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.refresh();
     }
 
-    onFixedRatioChange(ratio: CropRatioType) {
+    onFixedRatioChange(ratio: CropRatioType): void {
         Log.debug(this.TAG, "onFixedRatioChange: ratio[" + ratio + "]");
         if (this.isWaitingRefresh) {
             this.clearDelayRefresh();
@@ -266,7 +266,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.refresh();
     }
 
-    onTouchStart(x: number, y: number) {
+    onTouchStart(x: number, y: number): void {
         if (this.state != CropTouchState.NONE) {
             Log.debug(this.TAG, "onTouchStart: touch state is not none!");
             return;
@@ -285,7 +285,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.touchPoint.set(x, y);
     }
 
-    onTouchMove(x: number, y: number) {
+    onTouchMove(x: number, y: number): void {
         Log.debug(this.TAG, "onTouchMove: [state: " + this.state + "] [x: " + x + ", y: " + y + "]");
         let offsetX = x - this.touchPoint.x;
         let offsetY = y - this.touchPoint.y;
@@ -300,7 +300,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.touchPoint.set(x, y);
     }
 
-    onTouchEnd() {
+    onTouchEnd(): void {
         Log.debug(this.TAG, "onTouchEnd: [state: " + this.state + "]");
         if (this.state == CropTouchState.CROP_MOVE) {
             this.cropShow.endCropRectMove();
@@ -317,7 +317,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.delayRefresh(this.timeout);
     }
 
-    private onImageDrag(offsetX: number, offsetY: number) {
+    private onImageDrag(offsetX: number, offsetY: number): void {
         let tX = this.isFlipHorizontal ? -1 : 1;
         let tY = this.isFlipVertically ? -1 : 1;
         let alpha = MathUtils.formulaAngle(this.rotationAngle * tX * tY + this.sliderAngle);
@@ -328,7 +328,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.cropShow.setImageRect(image);
     }
 
-    private endImageDrag() {
+    private endImageDrag(): void {
         let crop = this.cropShow.getCropRect();
         let points = MathUtils.rectToPoints(crop);
         let tX = this.isFlipHorizontal ? -1 : 1;
@@ -344,14 +344,14 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.cropShow.setImageRect(image);
     }
 
-    onPinchStart(x: number, y: number, scale: number) {
+    onPinchStart(x: number, y: number, scale: number): void {
         Log.debug(this.TAG, "onPinchStart: event[x: " + x + ", y: " + y + "]");
         this.state = CropTouchState.IMAGE_SCALE;
         this.pinchPoint.set(x, y);
         this.scale = scale;
     }
 
-    onPinchUpdate(scale: number) {
+    onPinchUpdate(scale: number): void {
         Log.debug(this.TAG, "onPinchUpdate: scale[" + scale + "]");
         if (this.state == CropTouchState.IMAGE_SCALE) {
             let factor = scale / this.scale;
@@ -366,7 +366,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         }
     }
 
-    onPinchEnd() {
+    onPinchEnd(): void {
         Log.debug(this.TAG, 'onPinchEnd');
         let crop = this.cropShow.getCropRect();
         let points = MathUtils.rectToPoints(crop);
@@ -411,7 +411,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         return false;
     }
 
-    reset() {
+    reset(): void {
         Log.debug(this.TAG, 'reset');
         let limit = this.calcNewLimit();
         this.cropShow.init(limit, this.imageRatio);

@@ -60,7 +60,7 @@ export class CropShow {
         this.screenMinSide = Math.min(screenWidth, screenHeight);
     }
 
-    init(limit: RectF, imageRatio: number) {
+    init(limit: RectF, imageRatio: number): void {
         this.limitRect.set(limit.left, limit.top, limit.right, limit.bottom);
         MathUtils.computeMaxRectWithinLimit(this.imageRect, limit, imageRatio);
         this.cropRect.set(this.imageRect.left, this.imageRect.top, this.imageRect.right, this.imageRect.bottom);
@@ -71,7 +71,7 @@ export class CropShow {
         this.isFlipVertically = false;
     }
 
-    syncLimitRect(limit: RectF) {
+    syncLimitRect(limit: RectF): void {
         this.limitRect.set(limit.left, limit.top, limit.right, limit.bottom);
         this.enlargeCropArea();
     }
@@ -88,18 +88,18 @@ export class CropShow {
         return image;
     }
 
-    setImageRect(image: RectF) {
+    setImageRect(image: RectF): void {
         this.imageRect.set(image.left, image.top, image.right, image.bottom);
     }
 
-    syncRotationAngle(angle: number) {
+    syncRotationAngle(angle: number): void {
         this.rotationAngle = angle;
         MathUtils.swapWidthHeight(this.cropRect);
         this.swapCurrentRatio();
         this.enlargeCropArea();
     }
 
-    private swapCurrentRatio() {
+    private swapCurrentRatio(): void {
         let W = this.ratio.getW();
         let H = this.ratio.getH();
         this.ratio.set(H, W);
@@ -109,7 +109,7 @@ export class CropShow {
         return new Point(this.limitRect.getCenterX(), this.limitRect.getCenterY());
     }
 
-    syncHorizontalAngle(angle: number) {
+    syncHorizontalAngle(angle: number): void {
         this.horizontalAngle = angle;
 
         let points = MathUtils.rectToPoints(this.cropRect);
@@ -120,12 +120,12 @@ export class CropShow {
         MathUtils.scaleRectBasedOnPoint(this.imageRect, origin, scale);
     }
 
-    setFlip(isFlipHorizontal: boolean, isFlipVertically: boolean) {
+    setFlip(isFlipHorizontal: boolean, isFlipVertically: boolean): void {
         this.isFlipHorizontal = isFlipHorizontal;
         this.isFlipVertically = isFlipVertically;
     }
 
-    setRatio(ratio: CropRatioType) {
+    setRatio(ratio: CropRatioType): void {
         switch (ratio) {
             case CropRatioType.RATIO_TYPE_FREE:
                 this.ratio.set(-1, -1);
@@ -170,7 +170,7 @@ export class CropShow {
         }
     }
 
-    setMaxScaleFactor(factorW: number, factorH: number) {
+    setMaxScaleFactor(factorW: number, factorH: number): void {
         this.maxScaleFactorW = factorW;
         this.maxScaleFactorH = factorH;
     }
@@ -189,7 +189,7 @@ export class CropShow {
         return (scaleFactorH >= this.maxScaleFactorH ? false : true);
     }
 
-    enlargeCropArea() {
+    enlargeCropArea(): void {
         let newCrop = new RectF();
         let cropRatio = this.cropRect.getWidth() / this.cropRect.getHeight();
         MathUtils.computeMaxRectWithinLimit(newCrop, this.limitRect, cropRatio);
@@ -265,7 +265,7 @@ export class CropShow {
         return this.isLeft || this.isRight || this.isTop || this.isBottom;
     }
 
-    private fixSideToConner(x: number, y: number) {
+    private fixSideToConner(x: number, y: number): void {
         if ((this.isLeft || this.isRight) && !this.isTop && !this.isBottom) {
             if (y < this.cropRect.getCenterY()) {
                 this.isTop = true;
@@ -325,7 +325,7 @@ export class CropShow {
         return imageLines;
     }
 
-    moveCropRect(offsetX: number, offsetY: number) {
+    moveCropRect(offsetX: number, offsetY: number): void {
         // crop rect in fixed mode
         if (this.ratio.isValid()) {
             this.moveInFixedMode(offsetX, offsetY);
@@ -334,7 +334,7 @@ export class CropShow {
         }
     }
 
-    private moveInFixedMode(offsetX: number, offsetY: number) {
+    private moveInFixedMode(offsetX: number, offsetY: number): void {
         let x = offsetX;
         let y = offsetY;
         if (this.isHorizontalSide) {
@@ -371,7 +371,7 @@ export class CropShow {
         }
     }
 
-    private fixLeftTopInFixedMode(offsetHypot: number, isEnlarge: boolean) {
+    private fixLeftTopInFixedMode(offsetHypot: number, isEnlarge: boolean): void {
         let crop = this.getCropRect();
         let rate = this.ratio.getRate();
         let rect = new RectF();
@@ -397,7 +397,7 @@ export class CropShow {
         this.cropRect.top += finalOffsetHypot * tY * this.ratio.getH() / ratioHypot;
     }
 
-    private fixLeftBottomInFixedMode(offsetHypot: number, isEnlarge: boolean) {
+    private fixLeftBottomInFixedMode(offsetHypot: number, isEnlarge: boolean): void {
         let crop = this.getCropRect();
         let rate = this.ratio.getRate();
         let rect = new RectF();
@@ -423,7 +423,7 @@ export class CropShow {
         this.cropRect.bottom += finalOffsetHypot * tY * this.ratio.getH() / ratioHypot;
     }
 
-    private fixRightTopInFixedMode(offsetHypot: number, isEnlarge: boolean) {
+    private fixRightTopInFixedMode(offsetHypot: number, isEnlarge: boolean): void {
         let crop = this.getCropRect();
         let rate = this.ratio.getRate();
         let rect = new RectF();
@@ -449,7 +449,7 @@ export class CropShow {
         this.cropRect.top += finalOffsetHypot * tY * this.ratio.getH() / ratioHypot;
     }
 
-    private fixRightBottomInFixedMode(offsetHypot: number, isEnlarge: boolean) {
+    private fixRightBottomInFixedMode(offsetHypot: number, isEnlarge: boolean): void {
         let crop = this.getCropRect();
         let rate = this.ratio.getRate();
         let rect = new RectF();
@@ -475,7 +475,7 @@ export class CropShow {
         this.cropRect.bottom += finalOffsetHypot * tY * this.ratio.getH() / ratioHypot;
     }
 
-    private moveInFreeMode(offsetX: number, offsetY: number) {
+    private moveInFreeMode(offsetX: number, offsetY: number): void {
         let crop = this.getCropRect();
         let limit = new RectF();
         limit.set(this.limitRect.left, this.limitRect.top, this.limitRect.right, this.limitRect.bottom);
@@ -589,7 +589,7 @@ export class CropShow {
         return fixedSide;
     }
 
-    endCropRectMove() {
+    endCropRectMove(): void {
         this.isLeft = false;
         this.isRight = false;
         this.isTop = false;
