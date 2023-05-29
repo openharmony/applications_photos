@@ -161,6 +161,10 @@ class ScreenManager {
         return px2vp(this.winWidth);
     }
 
+    setWinWidth(width: number): void{
+        this.winWidth = width;
+    }
+
     // Unit：vp
     getWinHeight(): number {
         return px2vp(this.winHeight);

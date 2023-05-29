@@ -55,6 +55,10 @@
     {
       "name": "selected_photos_count",
       "value": "%1$d/%2$d"
+    },
+    {
+      "name": "third_delete_dialog_message",
+      "value": "Whether allow %s to delete %d files？"
     }
   ]
 }

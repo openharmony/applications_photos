@@ -132,6 +132,9 @@ export class Constants {
     // Other equipment tab index
     static readonly OTHER_EQUIPMENT_TAB_INDEX: number = 1;
 
+    //the constant for action of the want
+    static readonly ACTION_DELETE_DATA: string = 'ohos.want.action.deleteDialog';
+
     // editor used
     static readonly UPDATE_MENU = 'updateMenu';
     static readonly UPDATE_DOODLE_STYLE = "update_doodle_style";
@@ -315,6 +318,7 @@ export class Constants {
     static readonly BUNDLE_NAME: string = 'com.ohos.photos';
 
     // get want info with key
+    static readonly KEY_WANT_PARAMETERS_CALLER_BUNDLE_NAME: string = "ohos.aafwk.param.callerBundleName";
     static readonly KEY_WANT_PARAMETERS_CALLERUID: string = "ohos.aafwk.param.callerUid";
 
     // camera mainAbility
@@ -331,4 +335,7 @@ export class Constants {
 
     // maximum number limit of external selection pages
     static readonly LIMIT_MAX_THIRD_SELECT_COUNT: number = 500;
+
+    static readonly DEFAULT_DIVIDER_COLOR: string = 'rgb(207, 195, 195)';
+    static readonly DEFAULT_DIVIDER_HEIGHT: string = '24vp';
 }

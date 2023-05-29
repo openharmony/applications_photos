@@ -47,6 +47,10 @@
     {
       "name": "color_control_highlight",
       "value": "#007DFF"
+    },
+    {
+      "name": "dialog_default_shadow_m_color",
+      "value": "#2600001E"
     }
   ]
 }
