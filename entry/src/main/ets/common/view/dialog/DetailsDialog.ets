@@ -28,6 +28,7 @@ export class MediaDetails {
     duration: number
     title: string
     dateTaken: number
+    dateAdded: number
     uri: string
     displayName: string
     dateModified: number
@@ -46,8 +47,8 @@ export struct DetailsDialog {
     @Consume isDistributedAlbum: boolean;
 
     aboutToAppear() {
-        let localizedDate = DateUtil.getLocalizedDate(this.mediaDetails.dateTaken);
-        let localizedTime = DateUtil.getLocalizedTime(this.mediaDetails.dateTaken);
+        let localizedDate = DateUtil.getLocalizedDate(this.mediaDetails.dateAdded);
+        let localizedTime = DateUtil.getLocalizedTime(this.mediaDetails.dateAdded);
         this.dataTime = `${localizedDate} ${localizedTime}`;
     }
 
