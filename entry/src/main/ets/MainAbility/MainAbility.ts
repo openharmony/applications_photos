@@ -251,9 +251,9 @@ export default class MainAbility extends Ability {
         }
 
         //router.clear()需要等页面跳转完成后调用，如果不延时调用会发生崩溃。
-        setTimeout(() => {
+        AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, 0)
+         setTimeout((): void => {
             router.clear();
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, 0)
         }, 10);
     }
 }
