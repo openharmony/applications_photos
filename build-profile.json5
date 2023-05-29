@@ -8,7 +8,7 @@
         "compileSdkVersion": 10,
         "compatibleSdkVersion": 10,
         "runtimeOS": "OpenHarmony"
-      }
+      },
     ],
     "buildModeSet": [
       {
@@ -27,10 +27,10 @@
         {
           "name": "default",
           "applyToProducts": [
-            "default"
-          ]
-        }
-      ]
+            "default",
+          ],
+        },
+      ],
     },
     {
       "name": "base",
@@ -72,5 +72,5 @@
       "name": "formEditor",
       "srcPath": "./features/formEditor"
     }
-  ]
+  ],
 }
