@@ -18,7 +18,7 @@ import screenManager from '../manager/ScreenManager';
 
 const TAG = "UiUtil"
 const TOAST_DURATION = 3000;
-export function showToast(message: string) {
+export function showToast(message: string): void {
     let naviBarHeight = screenManager.getNaviBarHeight()
     Log.debug(TAG, `showToast: ${message}`);
     prompt.showToast({

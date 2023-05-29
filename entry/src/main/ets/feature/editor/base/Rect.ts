@@ -26,7 +26,7 @@ export class RectF {
         this.bottom = 0;
     }
 
-    set(left: number, top: number, right: number, bottom: number) {
+    set(left: number, top: number, right: number, bottom: number): void {
         this.left = left;
         this.top = top;
         this.right = right;
@@ -57,14 +57,14 @@ export class RectF {
         return (x >= this.left && x <= this.right && y >= this.top && y <= this.bottom);
     }
 
-    scale(scale: number) {
+    scale(scale: number): void {
         this.left *= scale;
         this.right *= scale;
         this.top *= scale;
         this.bottom *= scale;
     }
 
-    move(offsetX: number, offsetY: number) {
+    move(offsetX: number, offsetY: number): void {
         this.left += offsetX;
         this.right += offsetX;
         this.top += offsetY;

@@ -27,16 +27,16 @@ export class GroupItemDataSource extends ItemDataSource {
         super()
     }
 
-    setSelectType(selectType: number) {
+    setSelectType(selectType: number): void {
         this.groupDataImpl.setSelectType(selectType);
     }
 
-    setAlbumId(id: string) {
+    setAlbumId(id: string): void {
         Log.info(TAG, `setAlbumId: ${id}`);
         this.groupDataImpl.setAlbumId(id);
     }
 
-    setDeviceId(id: string) {
+    setDeviceId(id: string): void {
         Log.info(TAG, `setDeviceId: ${id}`);
         this.groupDataImpl.setDeviceId(id);
     }
@@ -128,7 +128,7 @@ export class GroupItemDataSource extends ItemDataSource {
         return uris;
     }
 
-    setSelect(isSelect: boolean) {
+    setSelect(isSelect: boolean): void {
         this.groupDataItem.forEach((item: MediaDataItem): void => {
             item.setSelect(isSelect);
         })
@@ -147,13 +147,13 @@ export class GroupItemDataSource extends ItemDataSource {
         }
     }
 
-    dataReload(isGrid: boolean) {
+    dataReload(isGrid: boolean): void {
         this.reloadGroupItemData(isGrid).then((isEmpty: boolean): void => {
             this.notifyDataReload();
         })
     }
 
-    dataRemove() {
+    dataRemove(): void {
         for (let i = this.groupDataItem.length - 1;i >= 0; i--) {
             if (this.groupDataItem[i] != undefined && this.groupDataItem[i].isDeleted()) {
                 this.groupDataItem.splice(i, 1);
@@ -162,7 +162,7 @@ export class GroupItemDataSource extends ItemDataSource {
         }
     }
 
-    dataDelete(uri: string) {
+    dataDelete(uri: string): void {
         const mediaDataItemIndex = this.groupDataItem.findIndex((item: MediaDataItem): boolean => {
             return item.uri === uri;
         })

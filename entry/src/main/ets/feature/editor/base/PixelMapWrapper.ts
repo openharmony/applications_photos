@@ -26,7 +26,7 @@ export class PixelMapWrapper implements Releasable {
         this.height = height;
     }
 
-    release() {
+    release(): void {
         if (this.pixelMap != null && this.pixelMap != undefined) {
             this.pixelMap.release();
         }

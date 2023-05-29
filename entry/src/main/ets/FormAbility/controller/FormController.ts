@@ -88,7 +88,7 @@ export class FormController {
         });
     }
 
-    onDestroy() {
+    onDestroy(): void {
         Log.info(TAG, 'onDestroy start!');
         this.mediaDataManager.closeFd();
         this.callback = null;
@@ -100,7 +100,7 @@ export class FormController {
         this.mediaDataManager.setNextIndex();
     }
 
-    routerPhotoBrowser() {
+    routerPhotoBrowser(): void {
         Log.debug(TAG, 'routerPhotoBrowser start!');
         let param: Want = {
             'bundleName': 'com.ohos.photos',

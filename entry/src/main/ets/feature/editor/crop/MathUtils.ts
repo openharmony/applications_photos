@@ -21,20 +21,20 @@ import {CropAngle} from './CropType';
 export abstract class MathUtils {
     private static readonly EQUALITY_THRESHOLD = 0.0001;
 
-    static roundRect(rect: RectF) {
+    static roundRect(rect: RectF): void {
         let copy = new RectF();
         copy.set(rect.left, rect.top, rect.right, rect.bottom);
         rect.set(Math.round(copy.left), Math.round(copy.top), Math.round(copy.right), Math.round(copy.bottom));
     }
 
-    static normalizeRect(rect: RectF, width: number, height: number) {
+    static normalizeRect(rect: RectF, width: number, height: number): void {
         rect.left /= width;
         rect.right /= width;
         rect.top /= height;
         rect.bottom /= height;
     }
 
-    static revertRect(rect: RectF, width: number, height: number) {
+    static revertRect(rect: RectF, width: number, height: number): void {
         rect.left *= width;
         rect.right *= width;
         rect.top *= height;
@@ -50,7 +50,7 @@ export abstract class MathUtils {
         return points;
     }
 
-    static swapWidthHeight(rect: RectF) {
+    static swapWidthHeight(rect: RectF): void {
         let centerX = rect.getCenterX();
         let centerY = rect.getCenterY();
         let halfWidth = rect.getWidth() / 2;
@@ -75,7 +75,7 @@ export abstract class MathUtils {
         return outputs;
     }
 
-    static computeMaxRectWithinLimit(rect: RectF, limit: RectF, rate: number) {
+    static computeMaxRectWithinLimit(rect: RectF, limit: RectF, rate: number): void {
         let limitWidth = limit.getWidth();
         let limitHeight = limit.getHeight();
         let width = limitWidth;
@@ -93,7 +93,7 @@ export abstract class MathUtils {
         rect.bottom = rect.top + height;
     }
 
-    static scaleRectBasedOnPoint(rect: RectF, p: Point, scale: number) {
+    static scaleRectBasedOnPoint(rect: RectF, p: Point, scale: number): void {
         let operate = new RectF();
         operate.left = (rect.left - p.x) * scale + p.x;
         operate.right = (rect.right - p.x) * scale + p.x;
@@ -194,7 +194,7 @@ export abstract class MathUtils {
         return false;
     }
 
-    static limitCornerIfLineIntersect(outerLine, diagonal, rect) {
+    static limitCornerIfLineIntersect(outerLine, diagonal, rect): void {
         let origin = new Point(rect.getCenterX(), rect.getCenterY());
         if (MathUtils.hasIntersection(outerLine, diagonal)) {
             let intersection = MathUtils.getIntersection(outerLine, diagonal);
@@ -214,7 +214,7 @@ export abstract class MathUtils {
         }
     }
 
-    static limitRectInRotated(rect: RectF, outerLines: Array<LineSegment>) {
+    static limitRectInRotated(rect: RectF, outerLines: Array<LineSegment>): void {
         let copy = new RectF();
         copy.set(rect.left, rect.top, rect.right, rect.bottom);
         let diagonal1 = new LineSegment(new Point(copy.left, copy.top), new Point(copy.right, copy.bottom));
@@ -229,7 +229,7 @@ export abstract class MathUtils {
         rect.set(copy.left, copy.top, copy.right, copy.bottom);
     }
 
-    static limitRectInRotatedBasedOnPoint(baseIndex: number, rect: RectF, rotatedLines: Array<LineSegment>) {
+    static limitRectInRotatedBasedOnPoint(baseIndex: number, rect: RectF, rotatedLines: Array<LineSegment>): void {
         let points = MathUtils.rectToPoints(rect);
         let base = points[baseIndex];
         points.splice(baseIndex, 1);

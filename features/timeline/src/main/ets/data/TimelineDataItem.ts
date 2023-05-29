@@ -61,13 +61,13 @@ export class TimelineDataItem implements DateAdded {
         return status;
     }
 
-    setSelect(isSelect: boolean) {
+    setSelect(isSelect: boolean): void {
         this.groupChild.forEach((child: MediaDataItem): void => {
             child.setSelect(isSelect);
         })
     }
 
-    getSelectedCount(): number{
+    getSelectedCount(): number {
         let count = 0;
         this.groupChild.forEach((child: MediaDataItem): void => {
             if (child.isSelect) {

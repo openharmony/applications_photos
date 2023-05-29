@@ -142,7 +142,7 @@ export class TimelineItemDataSource extends ItemDataSource {
         return status;
     }
 
-    setSelect(isSelect: boolean) {
+    setSelect(isSelect: boolean): void {
         this.groupItem.forEach((child: TimelineDataItem): void => {
             child.setSelect(isSelect);
         })
@@ -200,7 +200,7 @@ export class TimelineItemDataSource extends ItemDataSource {
         }
     }
 
-    getIndexByMediaIndex(index:number) : number{
+    getIndexByMediaIndex(index:number) : number {
         let TimeLineTitleIndex = 0;
         for (let i = 0;i < this.groupItem.length; i++) {
             let groupItem: TimelineDataItem = this.groupItem[i]

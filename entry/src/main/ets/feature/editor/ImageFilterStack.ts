@@ -35,12 +35,12 @@ export class ImageFilterStack extends EditStack<ImageFilterBase> {
         return pixelMap;
     }
 
-    push(filter: ImageFilterBase) {
+    push(filter: ImageFilterBase): void {
         super.push(filter);
         this.updateCache(CacheDirection.FORWARD);
     }
 
-    releaseAll() {
+    releaseAll(): void {
         super.executeEach((filter: ImageFilterBase): void => {
             filter && filter.release();
         }, super.getLength());
@@ -49,7 +49,7 @@ export class ImageFilterStack extends EditStack<ImageFilterBase> {
         this.cacheEnd = 0;
     }
 
-    setOriginPixelMap(origin: PixelMapWrapper) {
+    setOriginPixelMap(origin: PixelMapWrapper): void {
         this.origin = origin;
     }
 
@@ -69,7 +69,7 @@ export class ImageFilterStack extends EditStack<ImageFilterBase> {
         return (this.cacheEnd - this.cacheStart >= ImageFilterStack.CACHE_MAX);
     }
 
-    private updateCache(direction: CacheDirection) {
+    private updateCache(direction: CacheDirection): void {
         let position = super.getPosition();
         let filter = super.at(position);
         if (direction == CacheDirection.BACKWARD) {

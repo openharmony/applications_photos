@@ -25,7 +25,7 @@ export abstract class DrawingUtils {
     private static readonly DEFAULT_BUTTON_COLOR: string = 'white';
     private static readonly DEFAULT_MASK_STYLE: string = 'rgba(0, 0, 0, 0.3)';
 
-    static drawMask(ctx: CanvasRenderingContext2D, outer: RectF, inner: RectF) {
+    static drawMask(ctx: CanvasRenderingContext2D, outer: RectF, inner: RectF): void {
         ctx.fillStyle = DrawingUtils.DEFAULT_MASK_STYLE;
         ctx.fillRect(outer.left, outer.top, outer.getWidth(), inner.top - outer.top);
         ctx.fillRect(outer.left, inner.top, inner.left - outer.left, inner.getHeight());
@@ -33,7 +33,7 @@ export abstract class DrawingUtils {
         ctx.fillRect(outer.left, inner.bottom, outer.getWidth(), outer.bottom - inner.bottom);
     }
 
-    static drawCropButton(ctx: CanvasRenderingContext2D, crop: RectF) {
+    static drawCropButton(ctx: CanvasRenderingContext2D, crop: RectF): void {
         let vp3 = DrawingUtils.DEFAULT_BUTTON_WIDTH;
         let padding = DrawingUtils.DEFAULT_BUTTON_PADDING;
         ctx.lineWidth = vp3;
@@ -44,7 +44,7 @@ export abstract class DrawingUtils {
     }
 
     private static drawCornerButton(ctx: CanvasRenderingContext2D, crop: RectF,
-                                    vp3: number, padding: number, cornerLength: number) {
+                                    vp3: number, padding: number, cornerLength: number): void {
         // left top conner button
         let startX = crop.left - vp3 - padding;
         let startY = crop.top - vp3;
@@ -95,7 +95,7 @@ export abstract class DrawingUtils {
     }
 
     private static drawLineButton(ctx: CanvasRenderingContext2D, crop: RectF,
-                                  vp3: number, padding: number, cornerLength: number) {
+                                  vp3: number, padding: number, cornerLength: number): void {
         // top button
         let startX = crop.getCenterX() - cornerLength / 2;
         let startY = crop.top - vp3;
@@ -125,7 +125,7 @@ export abstract class DrawingUtils {
         DrawingUtils.drawLine(ctx, startX, startY, stopX, stopY);
     }
 
-    static drawRect(ctx: CanvasRenderingContext2D, crop: RectF) {
+    static drawRect(ctx: CanvasRenderingContext2D, crop: RectF): void {
         ctx.lineWidth = DrawingUtils.DEFAULT_LINE_WIDTH;
         ctx.strokeStyle = DrawingUtils.DEFAULT_LINE_COLOR;
         let points = MathUtils.rectToPoints(crop);
@@ -135,7 +135,7 @@ export abstract class DrawingUtils {
         }
     }
 
-    static drawSplitLine(ctx: CanvasRenderingContext2D, crop: RectF, split) {
+    static drawSplitLine(ctx: CanvasRenderingContext2D, crop: RectF, split): void {
         ctx.lineWidth = DrawingUtils.DEFAULT_LINE_WIDTH;
         ctx.strokeStyle = DrawingUtils.DEFAULT_LINE_COLOR;
         let w = Math.ceil(crop.getWidth() / split);
@@ -148,7 +148,7 @@ export abstract class DrawingUtils {
         }
     }
 
-    static drawLine(ctx: CanvasRenderingContext2D, srcX: number, srcY: number, dstX: number, dstY: number) {
+    static drawLine(ctx: CanvasRenderingContext2D, srcX: number, srcY: number, dstX: number, dstY: number): void {
         ctx.beginPath();
         ctx.moveTo(srcX, srcY);
         ctx.lineTo(dstX, dstY);

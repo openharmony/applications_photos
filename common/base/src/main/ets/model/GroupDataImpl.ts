@@ -33,16 +33,16 @@ export class GroupDataImpl {
     private albumId: string = "";
     private deviceId: string = "";
 
-    setSelectType(selectType: number) {
+    setSelectType(selectType: number): void {
         this.selectType = selectType;
     }
 
-    setAlbumId(id: string) {
+    setAlbumId(id: string): void {
         Log.info(TAG, `setAlbumId: ${id}`);
         this.albumId = id;
     }
 
-    setDeviceId(id: string) {
+    setDeviceId(id: string): void {
         Log.info(TAG, `setDeviceId: ${id}`);
         this.deviceId = id;
     }
@@ -200,7 +200,7 @@ export class GroupDataImpl {
         return columns * rows;
     }
 
-    private async loadReset(fetchOption: MediaLib.MediaFetchOptions, items: MediaDataItem[], count) {
+    private async loadReset(fetchOption: MediaLib.MediaFetchOptions, items: MediaDataItem[], count): Promise<void> {
         let itemLen = items.length;
         let countLen = Math.ceil(itemLen / count);
         for (let i = 1;i < countLen; i++) {

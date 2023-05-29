@@ -42,7 +42,7 @@ export class ShareMenuOperation implements MenuOperation {
         this.shareFileAsset();
     }
 
-    shareFileAsset() {
+    shareFileAsset(): void {
         Log.info(TAG, 'shareFileAsset');
         let want: Want = {
             'action': 'com.huawei.intent.action.hwCHOOSER',
