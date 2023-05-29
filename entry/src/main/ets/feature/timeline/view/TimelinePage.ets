@@ -194,7 +194,7 @@ export struct TimelinePage {
         let sideBarWidth = this.isSidebar ? Constants.TAB_BAR_WIDTH : 0;
         let contentWidth = screenManager.getWinWidth() - sideBarWidth;
         let margin = 0;
-         let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.TIME_GRID_MAX_SIZE_RATIO;
+        let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.TIME_GRID_MAX_SIZE_RATIO;
         let newCount = Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin) + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
         if (newCount != this.gridRowCount) {
             if (this.gridRowCount == 0) {
