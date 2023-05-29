@@ -28,8 +28,8 @@ export struct CropStyleBar {
     @Consume('selected') selectedMode: number;
     @Consume isCropReset: boolean;
     @Consume cropEdit: PhotoEditCrop;
-    private menuClick: any = undefined;
-    private resetClick: any = undefined;
+    private menuClick: Function | null = null;
+    private resetClick: Function | null = null;
     mainMenuList: Array<ActionButtonInfo> = [
         new ActionButtonInfo({
             src: $r('app.media.ic_edit_photo_crop_freedom'),

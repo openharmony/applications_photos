@@ -32,6 +32,7 @@ import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
+import { MediaLibDataChangeCallback } from '@ohos/base/src/main/ets/interface/MediaLibDataChangeCallback';
 import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
 import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
@@ -75,7 +76,7 @@ export struct AlbumSetPage {
     @Provide gridColumnsCount: number = 0;
     @Provide broadCast: Broadcast = new Broadcast();
     @Consume @Watch('onIndexPageShow') isShow: boolean;
-    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
+    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this as MediaLibDataChangeCallback);
     appBroadcast: Broadcast = broadcastManager.getBroadcast();
     isInCurrentTab = false;
     isActive = false; // Whether the page is in the foreground
@@ -111,7 +112,7 @@ export struct AlbumSetPage {
             this.albumsDataSource.isDisableDelete());
     }
 
-    onMenuClicked(action: Action, arg: any[]) {
+    onMenuClicked(action: Action, arg: Object[]) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;

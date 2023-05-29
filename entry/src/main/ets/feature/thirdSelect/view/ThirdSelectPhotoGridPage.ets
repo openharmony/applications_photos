@@ -50,7 +50,7 @@ struct ThirdSelectPhotoGridPage {
     @Provide broadCast: Broadcast = new Broadcast();
     @Provide isShow: boolean = true;
     isActive = false;
-    title: any;
+    title: Object;
     @State isEmpty: boolean = false;
     @StorageLink('isSplitMode') isSplitMode: boolean = screenManager.isSplitMode();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];

@@ -132,7 +132,7 @@ class ScreenManager {
         }
     }
 
-    private emit(event, argument: any[]): void {
+    private emit(event, argument: Object[]): void {
         let _self = this;
         if (!this.events[event]) {
             return;
@@ -226,7 +226,7 @@ class ScreenManager {
     }
 
     private async setFullScreen(): Promise<void> {
-        let topWindow: any = AppStorage.Get(WindowConstants.MAIN_WINDOW);
+        let topWindow: window.Window = AppStorage.Get(WindowConstants.MAIN_WINDOW);
         Log.debug(TAG, 'getTopWindow start');
         try {
             await topWindow.setLayoutFullScreen(true)
@@ -248,11 +248,12 @@ class ScreenManager {
         }
     }
 
-    private async hideStatusBar(topWindow: any): Promise<void> {
+    private async hideStatusBar(topWindow: window.Window): Promise<void> {
         Log.debug(TAG, 'hideStatusBar start');
         let names = ['navigation'];
         Log.debug(TAG, "getTopWindow names: " + names + " end");
         try {
+            // @ts-ignore
             await topWindow.setSystemBarEnable(names)
             Log.debug(TAG, 'hideStatusBar Succeeded');
             let data = await topWindow.getAvoidArea(0)
@@ -278,7 +279,7 @@ class ScreenManager {
 
     async setNavigationBarColor(barColor: string, barContentColor: string): Promise<void> {
         Log.debug(TAG, 'setNavigationBarColor start');
-        let topWindow: any = AppStorage.Get(WindowConstants.MAIN_WINDOW);
+        let topWindow: window.Window = AppStorage.Get(WindowConstants.MAIN_WINDOW);
         try {
             topWindow.setSystemBarProperties(
                 {
@@ -294,7 +295,7 @@ class ScreenManager {
 
     setSystemUi(isShowBar: boolean): void {
         Log.debug(TAG, 'setSystemUi start');
-        let topWindow: any = AppStorage.Get(WindowConstants.MAIN_WINDOW);
+        let topWindow: window.Window = AppStorage.Get(WindowConstants.MAIN_WINDOW);
         Log.debug(TAG, 'getTopWindow start');
         let names = ["navigation"];
         if (!isShowBar) {
@@ -302,6 +303,7 @@ class ScreenManager {
         }
         Log.debug(TAG, "getTopWindow names: " + names + " end");
         try {
+            // @ts-ignore
             topWindow.setSystemBarEnable(names, (): void => {
                 Log.debug(TAG, 'setFullScreen Succeeded');
                 if (isShowBar) {
@@ -399,7 +401,7 @@ class ScreenManager {
 
     setKeepScreenOn(): void {
         Log.info(TAG, 'setKeepScreenOn start');
-        let topWindow: any = AppStorage.Get('mainWindow');
+        let topWindow: window.Window = AppStorage.Get('mainWindow');
         try {
             topWindow.setKeepScreenOn(true, (): void => Log.info(TAG, 'setKeepScreenOn Succeeded'))
         } catch (err) {
@@ -409,7 +411,7 @@ class ScreenManager {
 
     setKeepScreenOff(): void {
         Log.info(TAG, 'setKeepScreenOff start');
-        let topWindow: any = AppStorage.Get('mainWindow');
+        let topWindow: window.Window = AppStorage.Get('mainWindow');
         try {
             topWindow.setKeepScreenOn(false, (): void => Log.info(TAG, 'setKeepScreenOff Succeeded'))
         } catch (err) {

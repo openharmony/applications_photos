@@ -60,7 +60,7 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
         for (let i = 0; i < this.items.length; i++) {
             let itemVideoCount = await  (this.items[i] as AlbumDataItem).getVideoCount();
             videoCount += itemVideoCount;
-            photoCount += (this.items[i].count - itemVideoCount);
+            photoCount += ((this.items[i] as AlbumDataItem).count - itemVideoCount);
         }
 
         if (this.count as number == 1) {

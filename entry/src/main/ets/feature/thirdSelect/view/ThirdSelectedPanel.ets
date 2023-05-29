@@ -40,7 +40,7 @@ export struct ThirdSelectedPanel {
   private groupDataSource: GroupItemDataSource;
 
   onSelectedCountChanged() {
-    this.selectedMediaDataArray = this.groupDataSource.getSelectedItems();
+    this.selectedMediaDataArray = this.groupDataSource.getSelectedItems() as MediaDataItem[];
     this.selectedScroller.scrollEdge(Edge.End);
   }
 

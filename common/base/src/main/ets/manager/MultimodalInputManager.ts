@@ -21,7 +21,7 @@ const TAG = "MultimodalInputManager"
 export class MultimodalInputManager {
 
     //win + N
-    leftKeyOptions: any = {
+    leftKeyOptions: inputConsumer.KeyOptions = {
         'preKeys': [],
         'finalKey': 2014,
         'isFinalKeyDown': true,
@@ -29,13 +29,13 @@ export class MultimodalInputManager {
     };
 
     //win + I
-    rightKeyOptions: any = {
+    rightKeyOptions: inputConsumer.KeyOptions = {
         'preKeys': [],
         'finalKey': 2015,
         'isFinalKeyDown': true,
         'finalKeyDownDuration': 0
     };
-    escKeyOptions: any = {
+    escKeyOptions: inputConsumer.KeyOptions = {
         'preKeys': [],
         'finalKey': 2070,
         'isFinalKeyDown': true,

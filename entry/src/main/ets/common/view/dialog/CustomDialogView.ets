@@ -16,6 +16,7 @@
 import { DownloadCancelOperationDialog } from './DownloadCancelOperationDialog';
 import { Constants } from '../../model/common/Constants';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
+import { Assets } from '@ohos/base/src/main/ets/operation/ProcessMenuOperation';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { MediaDetails, DetailsDialog } from './DetailsDialog';
@@ -437,7 +438,7 @@ export struct CustomDialogView {
             });
 
         this.broadCast.on(BroadcastConstants.FIND_SAME_FILE_DIALOG,
-            function (assets: any, count: number, replaceFunc: Function, skipFunc: Function,
+            function (assets: Assets, count: number, replaceFunc: Function, skipFunc: Function,
                       cancelFunc: Function, doSameFunc: Function) {
                Log.info(TAG, 'FIND_SAME_FILE_DIALOG');
                 self.findSameNameParam.sourceFileAsset = assets.sourceAsset;

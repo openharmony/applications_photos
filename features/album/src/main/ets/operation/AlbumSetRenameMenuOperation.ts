@@ -43,7 +43,7 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
         }
         let dataSource: ItemDataSource = this.menuContext.dataSource;
         let count: number;
-        let items: any[];
+        let items: Object[];
         if (dataSource == null) {
             count = this.menuContext.items.length;
             items = this.menuContext.items;

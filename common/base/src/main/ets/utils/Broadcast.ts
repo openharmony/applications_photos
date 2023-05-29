@@ -46,7 +46,7 @@ export class Broadcast {
         }
     }
 
-    public emit(event, args: any[]): void {
+    public emit(event, args: Object[]): void {
         let _self = this;
         if (!this.callBackArray[event]) {
             return;

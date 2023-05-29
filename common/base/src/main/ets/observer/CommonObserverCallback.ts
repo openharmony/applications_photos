@@ -14,11 +14,12 @@
  */
 
 import type { MediaObserverCallback } from '../interface/MediaObserverCallback';
+import type { MediaLibDataChangeCallback } from '../interface/MediaLibDataChangeCallback';
 
 export class CommonObserverCallback implements MediaObserverCallback {
-    private source: any;
+    private source: MediaLibDataChangeCallback;
 
-    constructor(source: any) {
+    constructor(source: MediaLibDataChangeCallback) {
         this.source = source;
     }
 

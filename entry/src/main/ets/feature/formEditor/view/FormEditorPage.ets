@@ -75,11 +75,11 @@ struct FormEditorPage {
         this.fd = (this.fileAsset != null) ? await  mediaModel.openAsset('R', this.fileAsset) : -1;
     }
 
-    bindFormData(): any {
+    bindFormData(): formBindingData.FormBindingData {
         Log.debug(TAG, `bindFormData start formId: ${this.formId}`);
         let image = "image_" + this.fd + "_formId_" + this.formId + "_arkUri_" + this.arkUri + "_currentUri_" + this.fileAsset.uri;
         Log.debug(TAG, `bindFormData start image: ${image}`);
-        let dataObj1: any = {
+        let dataObj1: Object = {
             "fd": this.fd == -1 ? false : true,
             "image1": "memory://" + image,
             "albumName": this.displayName,
@@ -94,7 +94,7 @@ struct FormEditorPage {
         Log.info(TAG, `bindFormData, createFormBindingData dataObj2.data: ${dataObj}`);
         let obj = formBindingData.createFormBindingData(dataObj);
         Log.debug(TAG, `bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
-        return obj;
+        return obj as formBindingData.FormBindingData;
     }
 
     updateRefreshTime() {

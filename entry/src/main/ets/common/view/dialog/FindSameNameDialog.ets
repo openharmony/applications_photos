@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import MediaLib from '@ohos.multimedia.mediaLibrary';
 import type { DialogCallback } from '../../model/common/DialogUtil';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
@@ -21,8 +22,8 @@ import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class FindSameNameParam {
-    sourceFileAsset: any
-    targetFileAsset: any
+    sourceFileAsset: MediaLib.FileAsset
+    targetFileAsset: MediaLib.FileAsset
     replaceFunc: Function
     skipFunc: Function
     cancelFunc: Function
@@ -40,8 +41,8 @@ export struct FindSameNameDialog {
     @Consume dialogCallback: DialogCallback;
     @Consume dialogMessage: Resource;
     @Consume findSameNameParam: FindSameNameParam;
-    sourceDetails: any;
-    targetDetails: any;
+    sourceDetails: MediaLib.FileAsset;
+    targetDetails: MediaLib.FileAsset;
     controller: CustomDialogController;
     dataTime: string;
     targetDataTime: string;

@@ -168,7 +168,7 @@ export class TimelineItemDataSource extends ItemDataSource {
         return items;
     }
 
-    getSelectedItems(): MediaDataItem[] {
+    getSelectedItems(): Object[] {
         let items: MediaDataItem[] = [];
         this.groupItem.forEach((group: TimelineDataItem): void => {
             group.groupChild.forEach((child: MediaDataItem): void => {

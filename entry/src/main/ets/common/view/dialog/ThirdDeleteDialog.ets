@@ -27,7 +27,7 @@ export struct ThirdDeleteDialog {
   @Consume dialogDeleteMessage: Resource;
   controller: CustomDialogController;
 
-  private uris: any;
+  private uris: string[];
   private thirdAppName: string;
 
   aboutToAppear() {

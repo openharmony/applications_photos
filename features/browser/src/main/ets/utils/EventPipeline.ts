@@ -24,6 +24,15 @@ import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants
 
 const TAG = "EventPipeline"
 
+export interface Matrix4TransitWithMatrix4x4 extends Matrix4.Matrix4Transit {
+    matrix4x4: number[];
+}
+
+export interface AnimationOption {
+    duration: number,
+    curve: Curve
+}
+
 export class EventPipeline {
 
     // last offset
@@ -425,7 +434,7 @@ export class EventPipeline {
             this.startAnimation(Matrix4.identity().scale({
                 x: this.defaultScale,
                 y: this.defaultScale
-            }).copy());
+            }).copy() as Matrix4TransitWithMatrix4x4);
             this.emitPullDownCancelEvent();
         } else {
             this.emitDirectionChange();
@@ -518,7 +527,7 @@ export class EventPipeline {
             this.emitDirectionChange();
             return;
         }
-        let animationEndMatrix: any = null;
+        let animationEndMatrix: Matrix4.Matrix4Transit = null;
         if (Number(scale.toFixed(Constants.RESERVED_DIGITS)) <= Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) {
             // Zoom out too small to trigger the restored animation
             animationEndMatrix = Matrix4.identity().scale({
@@ -529,10 +538,10 @@ export class EventPipeline {
             // Do the animation of retracting maxScale when zooming in
             animationEndMatrix = this.evaluateAnimeMatrix(this.maxScale, this.center);
         }
-        this.startAnimation(animationEndMatrix);
+        this.startAnimation(animationEndMatrix as Matrix4TransitWithMatrix4x4);
     }
 
-    private evaluateAnimeMatrix(scale: number, center: [number, number]): any {
+    private evaluateAnimeMatrix(scale: number, center: [number, number]): Matrix4.Matrix4Transit {
         let offset = [
             this.lastOffset[0] + this.offset[0] + (center[0] - Constants.CENTER_DEFAULT) * this.componentWidth
             * (this.defaultScale - scale / this.lastScale) * this.lastScale,
@@ -585,14 +594,14 @@ export class EventPipeline {
         }
         // Adjust action bar status
         this.broadCast.emit(Constants.HIDE_BARS, []);
-        let matrix;
+        let matrix: Matrix4TransitWithMatrix4x4;
         Log.debug(TAG, "onDoubleTap lastScale: " + this.lastScale + ", scale: " + this.scale + ", defaultScale: " + this.defaultScale);
         if (Number(this.lastScale.toFixed(Constants.RESERVED_DIGITS)) * this.scale > Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) {
             // Scale to original state when scale is greater than 1
             matrix = Matrix4.identity().scale({
                 x: this.defaultScale,
                 y: this.defaultScale
-            }).copy();
+            }).copy() as Matrix4TransitWithMatrix4x4;
         } else {
             // The zoom in status calculates the zoom in center according to the click position
             let center = this.evaluateCenter(centerX, centerY);
@@ -605,7 +614,7 @@ export class EventPipeline {
             } else {
                 center = [center[0], Constants.CENTER_DEFAULT];
             }
-            matrix = this.evaluateAnimeMatrix(this.doubleTapScale * this.defaultScale, center);
+            matrix = this.evaluateAnimeMatrix(this.doubleTapScale * this.defaultScale, center) as Matrix4TransitWithMatrix4x4;
         }
         Log.debug(TAG, "onDoubleTap matrix: " + matrix.matrix4x4);
         this.startAnimation(matrix);
@@ -629,9 +638,9 @@ export class EventPipeline {
         Log.info(TAG, 'onDisAppear');
     }
 
-    private startAnimation(animationEndMatrix: any): void {
+    private startAnimation(animationEndMatrix: Matrix4TransitWithMatrix4x4): void {
         this.isInAnimation = true;
-        let animationOption: any = {
+        let animationOption: AnimationOption = {
             duration: Constants.OVER_SCALE_ANIME_DURATION,
             curve: Curve.Ease
         };
@@ -646,7 +655,7 @@ export class EventPipeline {
      *
      * @param animationEndMatrix Transformation matrix at end
      */
-    onAnimationEnd(animationEndMatrix: any): void {
+    onAnimationEnd(animationEndMatrix: Matrix4TransitWithMatrix4x4): void {
         if (animationEndMatrix) {
             Log.info(TAG, "onAnimationEnd: " + animationEndMatrix.matrix4x4);
             this.lastScale = animationEndMatrix.matrix4x4[0];

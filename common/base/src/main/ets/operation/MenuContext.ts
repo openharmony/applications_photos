@@ -18,7 +18,7 @@ import { Broadcast } from '../utils/Broadcast'
 import { SimpleAlbumDataItem } from '../data/SimpleAlbumDataItem';
 
 export class MenuContext {
-    items: any[] = [];
+    items: MediaDataItem[] = [];
     dataSource: ItemDataSource;
 
     albumInfo: SimpleAlbumDataItem;

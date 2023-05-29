@@ -27,7 +27,7 @@ export class DistributedDataSource extends ItemDataSource {
         return this.peerDataItems.length;
     }
 
-    getData(index: number): any{
+    getData(index: number): PeerDataItem {
         this.peerDataItems[index].index = index;
         return this.peerDataItems[index];
     }
@@ -69,7 +69,7 @@ export class DistributedDataSource extends ItemDataSource {
         return count;
     }
 
-    getSelectedItems(): any[]{
+    getSelectedItems(): Object[]{
         return [];
     }
 

@@ -34,6 +34,7 @@ import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import router from '@system.router';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import { ShareMenuOperation } from '@ohos/base/src/main/ets/operation/ShareMenuOperation';
+import { MediaLibDataChangeCallback } from '@ohos/base/src/main/ets/interface/MediaLibDataChangeCallback';
 import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
 import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
@@ -81,7 +82,7 @@ export struct TimelinePage {
     @Provide dateText: string = '';
     private barModel = new TimelinePageBarModel();
     private timelineDataSource: TimelineItemDataSource = new TimelineItemDataSource();
-    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
+    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this as MediaLibDataChangeCallback);
     private isMediaLibDataChanged: boolean = true;
     @State actionBarProp: ActionBarProp = new ActionBarProp();
     @State toolBarMenuList: Action[] = new Array<Action>();
@@ -359,7 +360,7 @@ export struct TimelinePage {
     }
 
     async openDetailsDialog(): Promise<void> {
-        let items: MediaDataItem[] = this.timelineDataSource.getSelectedItems()
+        let items: MediaDataItem[] = this.timelineDataSource.getSelectedItems() as MediaDataItem[];
         if (items.length == 0) {
             Log.warn(TAG, 'no select error');
         } else if (items.length == 1) {
@@ -455,10 +456,10 @@ export struct TimelinePage {
                 Log.info(TAG, `MediaOperation back ${JSON.stringify(params)}`)
                 switch (params.pageType) {
                     case MediaOperationType.Move:
-                        this.moveOperation(JSON.parse(params.albumInfo.toString()));
+                        this.moveOperation(JSON.parse(params.albumInfo.toString()) as SimpleAlbumDataItem);
                         break;
                     case MediaOperationType.Copy:
-                        this.copyOperation(JSON.parse(params.albumInfo.toString()));
+                        this.copyOperation(JSON.parse(params.albumInfo.toString()) as SimpleAlbumDataItem);
                         break;
                     default:
                         break;

@@ -108,7 +108,7 @@ export class GroupItemDataSource extends ItemDataSource {
         return items;
     }
 
-    getSelectedItems(): MediaDataItem[] {
+    getSelectedItems(): Object[] {
         let items: MediaDataItem[] = [];
         this.groupDataItem.forEach((item: MediaDataItem): void => {
             if (item.isSelect) {

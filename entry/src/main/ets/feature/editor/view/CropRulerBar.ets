@@ -28,7 +28,7 @@ export struct CropRulerBar {
     @State cHeight: number = 60;
     private setting: RenderingContextSettings = new RenderingContextSettings(true);
     private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.setting);
-    private resetClicked: any = undefined;
+    private resetClicked: Function | null = null;
     private previous: number = 0;
     private rulerLength: number = 0;
     private rulerWidth: number = 0;
