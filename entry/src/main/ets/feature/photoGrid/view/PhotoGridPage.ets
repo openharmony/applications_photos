@@ -482,7 +482,7 @@ struct PhotoGridPage {
     private initGridRowCount(): void {
         let contentWidth = screenManager.getWinWidth();
         let margin = 0;
-        let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
+        let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.TIME_GRID_MAX_SIZE_RATIO;
         this.gridRowCount = Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
         + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
         Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
