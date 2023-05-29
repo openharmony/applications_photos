@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { Constants } from '../../../common/model/common/Constants';
@@ -75,18 +75,23 @@ struct SelectPhotoBrowser {
                 this.onBackPress();
             }
         });
-        let param = router.getParams();
-        if (param.pageFrom) {
+        let param: ParamsInterface = router.getParams();
+        if (param.pageFrom != null) {
             this.pageFrom = new Number(param.pageFrom).valueOf() || 0;
         }
         if (this.pageFrom == RouterConstants.ENTRY_FROM.DISTRIBUTED) {
-            this.browserDataSource.setDeviceId(param.deviceId ? param.deviceId.toString() : '');
+            if(param.deviceId != undefined && param.deviceId != null) {
+                this.browserDataSource.setDeviceId(param.deviceId.toString());
+            } else {
+                this.browserDataSource.setDeviceId('');
+            }
+
         }
 
         if (this.isMultiPick == true) {
             this.totalSelectedCount = this.browserDataSource.getSelectedCount();
         }
-        if (param.albumInfo) {
+        if (param.albumInfo != null) {
             this.browserDataSource.setAlbumId((param.albumInfo as SimpleAlbumDataItem).id);
         }
 
@@ -94,7 +99,11 @@ struct SelectPhotoBrowser {
         this.onPhotoChanged(new Number(param.position).valueOf() || 0);
         this.isSelected = this.getCurrentPhoto().isSelect;
         this.totalSelectedCount = this.browserDataSource.getSelectedCount();
-        this.selectPhotoTransition = param.transition ? param.transition.toString() : '';
+        if (param.transition != null) {
+            this.selectPhotoTransition = param.transition.toString();
+        } else {
+            this.selectPhotoTransition = '';
+        }
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
         // register event handling

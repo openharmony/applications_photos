@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
@@ -75,8 +75,8 @@ struct DistributedAlbumSetPage {
     }
 
     aboutToAppear(): void {
-        let param = router.getParams();
-        if (param.item) {
+        let param: ParamsInterface = router.getParams();
+        if (param.item != null) {
             Log.debug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
             let item = JSON.parse(param.item.toString()) as PeerDataItem;
             this.title = item.deviceName;

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent';
 import { Action } from '../../../common/view/browserOperation/Action';
@@ -198,8 +198,8 @@ struct NewAlbumPage {
 
     aboutToAppear(): void {
         startTrace('PhotoGridPageAboutToAppear');
-        let param = router.getParams();
-        if (param.item) {
+        let param: ParamsInterface = router.getParams();
+        if (param.item != null) {
             Log.debug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
             let item = JSON.parse(param.item.toString()) as AlbumDataItem;
             this.groupDataSource.setAlbumId(item.id)

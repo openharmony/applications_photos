@@ -48,7 +48,7 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
         this.confirmCallback = this.confirmCallback.bind(this);
         this.cancelCallback = this.cancelCallback.bind(this);
         let fileName = '';
-        if (mediaItem.title) {
+        if (mediaItem.title != null) {
             fileName = mediaItem.title;
         } else {
             let index = mediaItem.displayName.lastIndexOf('.');

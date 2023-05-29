@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { Constants } from '../../../common/model/common/Constants';
@@ -80,13 +80,13 @@ struct ThirdSelectPhotoBrowser {
                 this.onBackPress();
             }
         });
-        let params = router.getParams();
+        let params: ParamsInterface = router.getParams();
         if (params) {
             this.onPhotoChanged(parseInt(params.position.toString()));
             this.thirdSelectTransition = params.transition.toString();
-            this.isFromFa = params.isFromFa && true;
-            this.browserDataSource.setSelectType(params.isFromFa ? MediaConstants.SELECT_TYPE_IMAGE : MediaConstants.SELECT_TYPE_ALL);
-            this.browserDataSource.setAlbumId(params.albumId ? params.albumId.toString() : "");
+            this.isFromFa = params.isFromFa != null && params.isFromFa != null && params.isFromFa == true ? true : false;
+            this.browserDataSource.setSelectType(this.isFromFa ? MediaConstants.SELECT_TYPE_IMAGE : MediaConstants.SELECT_TYPE_ALL);
+            this.browserDataSource.setAlbumId(params.albumId != null ? params.albumId.toString() : "");
             this.isMultiPick = params.isMultiPick as boolean;
             this.bundleName = params.bundleName.toString();
             this.isSelectUpperLimited = params.isSelectUpperLimited  as boolean;
