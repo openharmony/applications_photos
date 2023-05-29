@@ -1,14 +1,23 @@
 {
   "app": {
     "signingConfigs": [],
-    "compileSdkVersion": 10,
-    "compatibleSdkVersion": 10,
     "products": [
       {
         "name": "default",
-        "signingConfig": "default"
-      },
+        "signingConfig": "default",
+        "compileSdkVersion": 10,
+        "compatibleSdkVersion": 10,
+        "runtimeOS": "OpenHarmony"
+      }
     ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
   },
   "modules": [
     {
@@ -18,10 +27,10 @@
         {
           "name": "default",
           "applyToProducts": [
-            "default",
-          ],
-        },
-      ],
+            "default"
+          ]
+        }
+      ]
     },
     {
       "name": "base",
@@ -63,5 +72,5 @@
       "name": "formEditor",
       "srcPath": "./features/formEditor"
     }
-  ],
+  ]
 }
