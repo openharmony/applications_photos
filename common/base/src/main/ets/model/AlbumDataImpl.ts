@@ -167,7 +167,6 @@ export class AlbumDataImpl {
         return fetchOption;
     }
 
-    private async loadAlbumReset(albumDataItems: AlbumDataItem[], count) {
     private async loadAlbumReset(albumDataItems: AlbumDataItem[], count): Promise<void> {
         Log.info(TAG, "loadReset start");
         for (let i = 1;; i++) {
