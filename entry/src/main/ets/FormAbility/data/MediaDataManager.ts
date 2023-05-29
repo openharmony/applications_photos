@@ -42,7 +42,7 @@ export class MediaDataManager {
     }
 
     async initData(formId: string): Promise<void> {
-        Log.info(TAG, `initData formId ${formId}`);
+        Log.info(TAG, "initData formId " + formId);
         await this.storageRead(formId);
         if (this.mediaData == null || this.mediaData == undefined) {
             Log.info(TAG, 'initData new MediaData!');
@@ -51,8 +51,8 @@ export class MediaDataManager {
                 Constants.PHOTOS_FORM_CAMERA_NAME, MediaConstants.ALBUM_ID_CAMERA, '', 0,
                 Constants.PHOTOS_FORM_DEFAULT_PERIOD, 1, 0);
         }
-        Log.info(TAG, `initData formId ${this.mediaData.formId}
-            albumName ${this.mediaData.albumName} currentIndex ${this.mediaData.currentIndex}`);
+        Log.info(TAG, "initData formId " + this.mediaData.formId +
+            "albumName " + this.mediaData.albumName + " currentIndex " + this.mediaData.currentIndex);
         let displayName = await getAlbumDisplayName(this.mediaData.albumId);
         if (displayName != null) {
             this.mediaData.displayName = displayName;
@@ -70,16 +70,16 @@ export class MediaDataManager {
             try {
                 this.fd = await this.openCurrentFd();
             } catch (error) {
-                 Log.error(TAG, `open Fd failed: ${error}`);
+                 Log.error(TAG, "open Fd failed: " + error);
             }
         }
-        Log.debug(TAG, `saveData fd: ${this.fd}`);
+        Log.debug(TAG, "saveData fd: " + this.fd);
         await this.storageSet();
         this.operationFormController();
     }
 
     operationFormController(): void {
-        Log.debug(TAG, `operFormControllerOper operationMode ${this.operationMode}`);
+        Log.debug(TAG, "operFormControllerOper operationMode " + this.operationMode);
         switch (this.operationMode) {
             case Constants.PHOTOS_FORM_OPERATION_MODE_DESTROY:
                 this.operationMode = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
@@ -108,32 +108,32 @@ export class MediaDataManager {
         Log.debug(TAG, 'storageRead start!');
         let formIdKey: string = 'formId_' + formId
         let hasFormId = await dataStore.hasData(formIdKey);
-        Log.debug(TAG, `The value of hasFormId is ${hasFormId}`)
+        Log.debug(TAG, "The value of hasFormId is " + hasFormId)
         if (hasFormId) {
             let displayNameKey = 'displayName_' + formId;
             let displayName = await dataStore.getData(displayNameKey, '') as string;
-            Log.debug(TAG, `The value of albumName is ${displayName}`);
+            Log.debug(TAG, "The value of albumName is " + displayName);
             let albumNameKey = 'albumName_' + formId;
             let albumName = await dataStore.getData(albumNameKey, '') as string;
-            Log.debug(TAG, `The value of albumName is ${albumName}`);
+            Log.debug(TAG, "The value of albumName is " + albumName);
             let albumIdKey = 'albumId_' + formId;
             let albumId = await dataStore.getData(albumIdKey, '') as string;
-            Log.debug(TAG, `The value of albumId is ${albumId}`);
+            Log.debug(TAG, "The value of albumId is " + albumId);
             let currentUriKey = 'currentUri_' + formId;
             let currentUri = await dataStore.getData(currentUriKey, '') as string;
-            Log.debug(TAG, `The value of currentUri is ${currentUri}`);
+            Log.debug(TAG, "The value of currentUri is " + currentUri);
             let currentIndexKey = 'currentIndex_' + formId;
             let currentIndex = await dataStore.getData(currentIndexKey, 0) as number;
-            Log.debug(TAG, `The value of currentIndex is ${currentIndex}`);
+            Log.debug(TAG, "The value of currentIndex is " + currentIndex);
             let intervalTimeKey = 'intervalTime_' + formId;
             let intervalTime = await dataStore.getData(intervalTimeKey, 0) as number;
-            Log.debug(TAG, `The value of intervalTime is ${intervalTime}`);
+            Log.debug(TAG, "The value of intervalTime is " + intervalTime);
             let isShowKey = 'isShow_' + formId;
             let isShow = await dataStore.getData(isShowKey, 0) as number;
-            Log.debug(TAG, `The value of isShow is ${isShow}`);
+            Log.debug(TAG, "The value of isShow is " + isShow);
             let arkUriKey = 'arkUri_' + formId;
             let arkUri = await dataStore.getData(arkUriKey, 0) as number;
-            Log.debug(TAG, `The value of arkUri is ${arkUri}`);
+            Log.debug(TAG, "The value of arkUri is " + arkUri);
             if (arkUri == 0) {
                 arkUri = 1;
             } else {
@@ -286,12 +286,12 @@ export class MediaDataManager {
     }
 
     getIntervalTime(): number {
-        Log.debug(TAG, `getIntervalTime time ${this.mediaData.intervalTime}`);
+        Log.debug(TAG, "getIntervalTime time " + this.mediaData.intervalTime);
         return this.mediaData.intervalTime;
     }
 
     setNextIndex(): void {
-        Log.debug(TAG, `setNextIndex start old index ${this.mediaData.currentIndex} flag ${this.isNextFag}`);
+        Log.debug(TAG, "setNextIndex start old index " + this.mediaData.currentIndex + " flag " + this.isNextFag);
         // this.mediaData.isShowAlbumName == false means select a photo instead of a album
         if (this.isNextFag && this.mediaData.isShowAlbumName) {
             let index = this.mediaData.currentIndex;
@@ -307,7 +307,7 @@ export class MediaDataManager {
                 this.mediaData.currentUri = '';
             }
         }
-        Log.debug(TAG, `setNextIndex index ${this.mediaData.currentIndex} uri ${this.mediaData.currentUri}`);
+        Log.debug(TAG, "setNextIndex index " + this.mediaData.currentIndex + " uri " + this.mediaData.currentUri);
         this.saveData();
         Log.debug(TAG, 'setNextIndex end!');
     }
@@ -318,9 +318,9 @@ export class MediaDataManager {
 
     async openCurrentFd(): Promise<number> {
         let fileAsset = this.getCurrentItem();
-        Log.info(TAG, `openCurrentFd uri: ${this.mediaData.currentUri}`);
+        Log.info(TAG, "openCurrentFd uri: " + this.mediaData.currentUri);
         let fd = (fileAsset != null) ? await  mediaModel.openAsset('R', fileAsset) : -1;
-         Log.info(TAG, `openCurrentFd the fd: ${fd}`);
+         Log.info(TAG, "openCurrentFd the fd: " + fd);
         return fd;
     }
 
@@ -329,7 +329,7 @@ export class MediaDataManager {
     }
 
     async closeFd(): Promise<void> {
-        Log.info(TAG, `close the fd: ${this.fd}`);
+        Log.info(TAG, "close the fd: " + this.fd);
         let fileAsset = this.getCurrentItem();
         if (fileAsset != null && this.fd != -1) {
             await mediaModel.closeAsset(this.fd, fileAsset);
@@ -343,7 +343,7 @@ export class MediaDataManager {
         if (this.items == null) {
             this.items = [];
         }
-         Log.info(TAG, `get album objects: Name:${this.mediaData.albumName} length: ${this.items.length}`);
+         Log.info(TAG, "get album objects: Name:" + this.mediaData.albumName + " length: " + this.items.length);
         await this.saveData();
         Log.debug(TAG, 'loadData end!');
     }

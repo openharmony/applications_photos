@@ -49,7 +49,7 @@ export class TimelineDataImpl {
             selections: selections,
             selectionArgs: selectionArgs,
             extendArgs: 'DATE(date_added,"unixepoch")',
-            order: `date_added DESC`
+            order: "date_added DESC"
         };
         return await mediaModel.getAllMediaItems(fetchOption);
     }
@@ -60,7 +60,7 @@ export class TimelineDataImpl {
         let fetchOption: MediaLib.MediaFetchOptions = {
             selections: selections,
             selectionArgs: selectionArgs,
-            order: `date_added DESC LIMIT ${start},${count}`
+            order: "date_added DESC LIMIT " + start + "," + count
         };
         return await mediaModel.getAllMediaItems(fetchOption);
     }

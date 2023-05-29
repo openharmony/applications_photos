@@ -70,7 +70,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         if (undefined == pixelMap) {
             return;
         }
-        Log.info(this.TAG, `entry pixelMap: ${JSON.stringify(pixelMap)}`);
+        Log.info(this.TAG, "entry pixelMap: " + JSON.stringify(pixelMap));
         this.input = pixelMap;
         this.filter = new ImageFilterCrop();
         this.initialize(this.input);
@@ -140,7 +140,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     setCanvasSize(width: number, height: number): void {
-        Log.info(this.TAG, `setCanvasSize: width[${width}], height[${height}]`);
+        Log.info(this.TAG, "setCanvasSize: width[" + width + "], height[" + height + "]");
         this.displayWidth = width;
         this.displayHeight = height;
         let limit = this.calcNewLimit();
@@ -243,7 +243,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onSliderAngleChange(angle: number): void {
-        Log.debug(this.TAG, `onSliderAngleChange: angle[${angle}]`);
+        Log.debug(this.TAG, "onSliderAngleChange: angle[" + angle + "]");
         if (this.isWaitingRefresh) {
             this.clearDelayRefresh();
             this.cropShow.enlargeCropArea();
@@ -255,7 +255,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onFixedRatioChange(ratio: CropRatioType): void {
-        Log.debug(this.TAG, `onFixedRatioChange: ratio[${ratio}]`);
+        Log.debug(this.TAG, "onFixedRatioChange: ratio[" + ratio + "]");
         if (this.isWaitingRefresh) {
             this.clearDelayRefresh();
             this.cropShow.enlargeCropArea();
@@ -268,7 +268,7 @@ export class PhotoEditCrop extends PhotoEditBase {
 
     onTouchStart(x: number, y: number): void {
         if (this.state != CropTouchState.NONE) {
-            Log.debug(this.TAG, `onTouchStart: touch state is not none!`);
+            Log.debug(this.TAG, "onTouchStart: touch state is not none!");
             return;
         }
 
@@ -276,7 +276,7 @@ export class PhotoEditCrop extends PhotoEditBase {
             this.clearDelayRefresh();
         }
 
-        Log.debug(this.TAG, `onTouchStart: [x: ${x}, y: ${y}]`);
+        Log.debug(this.TAG, "onTouchStart: [x: " + x + ", y: " + y + "]");
         if (this.cropShow.isCropRectTouch(x, y)) {
             this.state = CropTouchState.CROP_MOVE;
         } else {
@@ -286,7 +286,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onTouchMove(x: number, y: number): void {
-        Log.debug(this.TAG, `onTouchMove: [state: ${this.state}] [x: ${x}, y: ${y}]`);
+        Log.debug(this.TAG, "onTouchMove: [state: " + this.state + "] [x: " + x + ", y: " + y + "]");
         let offsetX = x - this.touchPoint.x;
         let offsetY = y - this.touchPoint.y;
         if (this.state == CropTouchState.CROP_MOVE) {
@@ -301,7 +301,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onTouchEnd(): void {
-        Log.debug(this.TAG, `onTouchEnd: [state: ${this.state}]`);
+        Log.debug(this.TAG, "onTouchEnd: [state: " + this.state + "]");
         if (this.state == CropTouchState.CROP_MOVE) {
             this.cropShow.endCropRectMove();
         } else if (this.state == CropTouchState.IMAGE_DRAG) {
@@ -345,14 +345,14 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     onPinchStart(x: number, y: number, scale: number): void {
-        Log.debug(this.TAG, `onPinchStart: event[x: ${x}, y: ${y}]`);
+        Log.debug(this.TAG, "onPinchStart: event[x: " + x + ", y: " + y + "]");
         this.state = CropTouchState.IMAGE_SCALE;
         this.pinchPoint.set(x, y);
         this.scale = scale;
     }
 
     onPinchUpdate(scale: number): void {
-        Log.debug(this.TAG, `onPinchUpdate: scale[${scale}]`);
+        Log.debug(this.TAG, "onPinchUpdate: scale[" + scale + "]");
         if (this.state == CropTouchState.IMAGE_SCALE) {
             let factor = scale / this.scale;
             if (!this.cropShow.couldEnlargeImage()) {

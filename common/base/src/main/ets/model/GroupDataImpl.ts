@@ -38,12 +38,12 @@ export class GroupDataImpl {
     }
 
     setAlbumId(id: string): void {
-        Log.info(TAG, `setAlbumId: ${id}`);
+        Log.info(TAG, "setAlbumId: " + id);
         this.albumId = id;
     }
 
     setDeviceId(id: string): void {
-        Log.info(TAG, `setDeviceId: ${id}`);
+        Log.info(TAG, "setDeviceId: " + id);
         this.deviceId = id;
     }
 
@@ -56,7 +56,7 @@ export class GroupDataImpl {
     }
 
     async reloadBrowserGroupItemData(): Promise<MediaDataItem[]> {
-        Log.debug(TAG, `reloadBrowserGroupItemData`);
+        Log.debug(TAG, "reloadBrowserGroupItemData");
         let groupDataItem = [];
         let fetchOption = await getFetchOptions(this.selectType, this.albumId, this.deviceId);
         if (fetchOption == undefined) {
@@ -107,12 +107,12 @@ export class GroupDataImpl {
             }
         }
 
-        Log.debug(TAG, `reload finish count:${count}`);
+        Log.debug(TAG, "reload finish count:" + count);
         return groupDataItem;
     }
 
     async reloadGridGroupItemData(): Promise<MediaDataItem[]> {
-        Log.debug(TAG, `reloadGridGroupItemData`);
+        Log.debug(TAG, "reloadGridGroupItemData");
         let groupDataItem = [];
         let fetchOption = await getFetchOptions(this.selectType, this.albumId, this.deviceId);
         if (fetchOption == undefined) {
@@ -169,7 +169,7 @@ export class GroupDataImpl {
         // do not use await to avoid load cost too much time
         this.loadReset(fetchOption, groupDataItem, groupCount);
 
-        Log.debug(TAG, `reload finish`);
+        Log.debug(TAG, "reload finish");
         return groupDataItem;
     }
 
@@ -177,7 +177,7 @@ export class GroupDataImpl {
         let fetchOption: MediaLib.MediaFetchOptions = {
             selections: baseFetchOption.selections,
             selectionArgs: baseFetchOption.selectionArgs,
-            order: `date_added DESC LIMIT ${start},${count}`
+            order: "date_added DESC LIMIT " + start + "," + count
         }
         if (this.deviceId.length > 0) {
             fetchOption['networkId'] = this.deviceId;

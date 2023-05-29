@@ -46,7 +46,7 @@ export class AlbumsDataSource extends ItemDataSource {
 
     getDataByIndex(index: number): AlbumDataItem {
         if (index < 0 || index >= this.albumDataItems.length) {
-            Log.warn(TAG, `${index}/${this.albumDataItems.length}`);
+            Log.warn(TAG, index + "/" + this.albumDataItems.length);
             return undefined;
         }
         this.albumDataItems[index].index = index;
@@ -141,7 +141,7 @@ export class AlbumsDataSource extends ItemDataSource {
     }
 
     onDataUpdate(index: number): void {
-        Log.info(TAG, `onDataUpdate ${index}`);
+        Log.info(TAG, "onDataUpdate " + index);
         this.notifyDataChange(index);
     }
 
@@ -166,10 +166,10 @@ export class AlbumsDataSource extends ItemDataSource {
     }
 
     async reloadAlbumListItemData(): Promise<boolean> {
-        Log.info(TAG, `reloadAlbumListItemData`);
+        Log.info(TAG, "reloadAlbumListItemData");
         this.albumDataItems = await this.albumDataImpl.reloadAlbumListItemData();
         this.reloadResetAlbumItemData().then((count: number): void => {
-            Log.info(TAG, `reloadResetAlbumItemData reset: ${count}`);
+            Log.info(TAG, "reloadResetAlbumItemData reset: " + count);
         })
         return this.albumDataItems.length == 0;
     }

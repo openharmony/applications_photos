@@ -54,7 +54,7 @@ export class AlbumDataItem {
     }
 
     getHashCode(): string {
-        return `${this.objectIndex}${this.id} ${this.orientation} ${this.isSelect}`
+        return this.objectIndex + "" + this.id + " " + this.orientation + " " + this.isSelect
     }
 
     async load(): Promise<void> {
@@ -80,8 +80,8 @@ export class AlbumDataItem {
     }
 
     getThumbnail(): string {
-        Log.debug(TAG, `this.uri ${this.uri}`);
-        return this.uri + `/thumbnail/256/256`;
+        Log.debug(TAG, "this.uri " + this.uri);
+        return this.uri + "/thumbnail/256/256";
     }
 
     async getVideoCount(): Promise<number> {
@@ -105,7 +105,7 @@ export class AlbumDataItem {
             this.status = MediaConstants.TRASHED;
             return true;
         } catch (err) {
-            Log.error(TAG, `onDelete error: ${JSON.stringify(err)}`);
+            Log.error(TAG, "onDelete error: " + JSON.stringify(err));
             return false;
         }
     }

@@ -70,8 +70,8 @@ export class MediaDataItem implements DateAdded {
     getHashCode(): string {
         //时间线界面角度，收藏状态变更，都需要刷新界面；大图浏览界面角度变更，需要刷新界面
         return this.status == MediaConstants.UNDEFINED ?
-                `${this.hashIndex}` :
-                `${this.uri}${this.favouriteStatus} ${this.orientation} ${this.isSelect}`
+                "" + this.hashIndex :
+                this.uri + this.favouriteStatus + " " + this.orientation + " " + this.isSelect
     }
 
     async loadFileAsset(): Promise<MediaLib.FileAsset> {
@@ -80,13 +80,13 @@ export class MediaDataItem implements DateAdded {
             fetchOption = {
                 selections: this.selections,
                 selectionArgs: this.selectionArgs,
-                order: `date_added DESC LIMIT ${this.index},1`
+                order: "date_added DESC LIMIT " + this.index + ",1"
             };
         } else {
             fetchOption = {
-                selections: `${MediaLib.FileKey.ID} = ?`,
+                selections: MediaLib.FileKey.ID + " = ?",
                 selectionArgs: [this.id.toString()],
-                order: `date_added DESC`
+                order: "date_added DESC"
             }
         }
         if (this.deviceId.length > 0) {
@@ -103,7 +103,7 @@ export class MediaDataItem implements DateAdded {
     }
 
     async load(isForce: boolean): Promise<void> {
-        Log.info(TAG, `load ${this.status}`)
+        Log.info(TAG, "load " + this.status)
         if (this.status > (isForce ? MediaConstants.PART_LOADED : MediaConstants.UNDEFINED)) {
             return
         }
@@ -149,13 +149,13 @@ export class MediaDataItem implements DateAdded {
     }
 
     getThumbnail(width: number, height: number): string {
-        Log.debug(TAG, `getThumbnail ${this.status}`);
+        Log.debug(TAG, "getThumbnail " + this.status);
         if (this.status != MediaConstants.LOADED && this.status != MediaConstants.PART_LOADED) {
-            Log.warn(TAG, `getThumbnail fail as status: ${this.status}`);
+            Log.warn(TAG, "getThumbnail fail as status: " + this.status);
             return "";
         }
-        Log.debug(TAG, `this.uri ${this.uri}`);
-        return this.uri + `/thumbnail/${width}/${height}`;
+        Log.debug(TAG, "this.uri " + this.uri);
+        return this.uri + "/thumbnail/" + width + "/" + height;
     }
 
     getAlt(): Resource {
@@ -179,7 +179,7 @@ export class MediaDataItem implements DateAdded {
             this.status = MediaConstants.TRASHED;
             return true;
         } catch (err) {
-            Log.error(TAG, `onDelete ${this.index} error: ${JSON.stringify(err)}`);
+            Log.error(TAG, "onDelete " + this.index + " error: " + JSON.stringify(err));
             return false;
         }
     }

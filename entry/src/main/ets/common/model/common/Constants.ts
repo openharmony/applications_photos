@@ -294,7 +294,7 @@ export class Constants {
 
     // Percent
     static readonly PERCENT_HUNDRED: number = 100;
-    static readonly PERCENT_ONE_THIRD: string = `${100 / 3}%`;
+    static readonly PERCENT_ONE_THIRD: string = (100 / 3) + "%";
 
     // AppStorage constants
     static readonly ENTRY_FROM_HAP: string = 'entryFromHap';

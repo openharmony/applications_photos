@@ -61,14 +61,14 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
         this.confirmCallback = this.confirmCallback.bind(this);
         this.cancelCallback = this.cancelCallback.bind(this);
 
-        Log.info(TAG, `The name of clicked album is ${this.item.displayName}`);
+        Log.info(TAG, "The name of clicked album is " + this.item.displayName);
 
         this.menuContext.broadCast.emit(BroadcastConstants.SHOW_RENAME_PHOTO_DIALOG,
             [this.item.displayName, this.confirmCallback, this.cancelCallback]);
     }
 
     private async confirmCallback(newName: string): Promise<void> {
-        Log.info(TAG, `AlbumSet rename confirm and the new name is: ${newName}`);
+        Log.info(TAG, "AlbumSet rename confirm and the new name is: " + newName);
 
         this.onOperationEnd = this.menuContext.onOperationEnd;
         let onOperationStart: Function = this.menuContext.onOperationStart;
@@ -85,7 +85,7 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
                 getResourceString($r('app.string.name_already_use')).then((message: string): void => {
                     showToast(message)
                 })
-                Log.warn(TAG, `album is miss`)
+                Log.warn(TAG, "album is miss")
                 this.onError();
                 return;
             }
@@ -93,7 +93,7 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
             await albums[0].commitModify()
             this.onCompleted();
         } catch (error) {
-            Log.error(TAG, `AlbumSet rename failed: ${error}`);
+            Log.error(TAG, "AlbumSet rename failed: " + error);
             this.onError();
         }
     }

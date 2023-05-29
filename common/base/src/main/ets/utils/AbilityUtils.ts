@@ -22,7 +22,7 @@ export async function startAbility(want: Want): Promise<void> {
         await globalThis.appContext.startAbility(want);
         Log.debug(TAG, 'raul startAbility complete');
     } catch (error) {
-        Log.error(TAG, `raul startAbility failed, error: ${JSON.stringify(error)}`);
+        Log.error(TAG, "raul startAbility failed, error: " + JSON.stringify(error));
     }
 }
 

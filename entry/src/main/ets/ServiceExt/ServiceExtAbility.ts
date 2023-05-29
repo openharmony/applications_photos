@@ -32,7 +32,7 @@ const TAG: string = 'ServiceExtAbility';
 export default class ServiceExtAbility extends Extension {
 
   onCreate(want) {
-    Log.info(TAG, `ServiceExtAbility want param : ${JSON.stringify(want)}`);
+    Log.info(TAG, "ServiceExtAbility want param : " + JSON.stringify(want));
     globalThis.windowClass = null;
     globalThis.photoAbilityContext = this.context;
   }
@@ -45,7 +45,7 @@ export default class ServiceExtAbility extends Extension {
     let wantParam: {[key:string]: object} = want.parameters;
     let uris: any = wantParam?.uris;
     let appName: string = wantParam?.appName as unknown as string;
-    Log.info(TAG, `get delete data : ${JSON.stringify(wantParam)}}`);
+    Log.info(TAG, "get delete data : " + JSON.stringify(wantParam));
     if (uris == undefined || uris.length ===0) {
       return;
     }
@@ -60,38 +60,38 @@ export default class ServiceExtAbility extends Extension {
       try {
         Window.createWindow(config, (err, data) => {
           if (err.code) {
-            Log.info(TAG, `Failed to create the window. Cause : ${JSON.stringify(err)}`);
+            Log.info(TAG, "Failed to create the window. Cause : " + JSON.stringify(err));
             return;
           }
           windowClass = data;
-          Log.info(TAG, `Success ded in creating the window. Data : ${JSON.stringify(data)}`);
+          Log.info(TAG, "Success ded in creating the window. Data : " + JSON.stringify(data));
           try {
             let requestInfo = dialogRequest.getRequestInfo(want);
-            Log.info(TAG, `requestInfo param : ${JSON.stringify(requestInfo)}`);
+            Log.info(TAG, "requestInfo param : " + JSON.stringify(requestInfo));
 
             var requestCallback = dialogRequest.getRequestCallback(want);
             AppStorage.SetOrCreate("requestCallback", requestCallback);
-            Log.info(TAG, `Succeeded in get requestCallback`);
+            Log.info(TAG, "Succeeded in get requestCallback");
 
             windowClass.bindDialogTarget(requestInfo, () => {
               Log.info(TAG, 'Dialog Window Need Destroy.');
             }, (err) => {
               Log.error(TAG, 'Dialog bindDialogTarget err');
               if (err.code) {
-                Log.error(TAG, `Failed to bind dialog target. Cause : ${JSON.stringify(err)}`);
+                Log.error(TAG, "Failed to bind dialog target. Cause : " + JSON.stringify(err));
                 return;
               }
               Log.error(TAG, 'Succeeded in binding dialog target.');
               try {
                 windowClass.setUIContent('pages/ResourceDeletePage', (err) => {
                   if (err.code) {
-                    Log.error(TAG, `Failed to load the content. Cause : ${JSON.stringify(err)}`);
+                    Log.error(TAG, "Failed to load the content. Cause : " + JSON.stringify(err));
                     return;
                   }
-                  Log.error(TAG, `Succeeded in loading the content`);
+                  Log.error(TAG, "Succeeded in loading the content");
                   let promise = display.getDefaultDisplay();
                   promise.then((data) => {
-                    Log.error(TAG, `Succeeded in loading the content, width : ${data.width},  height : ${data.height}`);
+                    Log.error(TAG, "Succeeded in loading the content, width : " + data.width + ",  height : " + data.height);
                     ScreenManager.setWinWidth(data.width)
                     windowClass.resetSize(data.width, data.height);
                     windowClass.setBackgroundColor('#00000000');
@@ -99,19 +99,19 @@ export default class ServiceExtAbility extends Extension {
                   })
                 })
               } catch (err) {
-                Log.error(TAG, `getDefaultDisplay fail : ${JSON.stringify(err)}`);
+                Log.error(TAG, "getDefaultDisplay fail : " + JSON.stringify(err));
               }
             })
             Log.info(TAG, 'bindDialogTarget done');
           } catch (exception) {
-            Log.error(TAG, `Failed to load the content. Cause : ${JSON.stringify(exception)}`);
+            Log.error(TAG, "Failed to load the content. Cause : " + JSON.stringify(exception));
           }
         })
       } catch (exception) {
-        Log.error(TAG, `Failed to bind the window. Cause : ${JSON.stringify(exception)}`);
+        Log.error(TAG, "Failed to bind the window. Cause : " + JSON.stringify(exception));
       }
     } catch {
-      Log.error(TAG, `Failed`);
+      Log.error(TAG, "Failed");
     }
 
     Log.info(TAG, 'done');
@@ -121,21 +121,21 @@ export default class ServiceExtAbility extends Extension {
         Log.info(TAG, 'test start1');
         windowClass.destroyWindow((err) => {
           if (err.code) {
-            Log.info(TAG, `Failed to destroy the window. Cause : ${JSON.stringify(err)}`);
+            Log.info(TAG, "Failed to destroy the window. Cause : " + JSON.stringify(err));
             return;
           }
-          Log.info(TAG, `Succeeded in destroying the window.`);
+          Log.info(TAG, "Succeeded in destroying the window.");
           windowClass = null;
         });
         Log.info(TAG, 'test done1');
       } catch (e) {
-        Log.info(TAG, `Failed 1 : ${JSON.stringify(e)}`);
+        Log.info(TAG, "Failed 1 : " + JSON.stringify(e));
       }
     });
   }
 
   onDisconnect(want) {
-    Log.info(TAG, `onDisconnect, want: ${want.abilityName}`);
+    Log.info(TAG, "onDisconnect, want: " + want.abilityName);
   }
 
   onDestroy() {

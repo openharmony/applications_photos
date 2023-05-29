@@ -47,7 +47,7 @@ export class PhotoEditorManager {
     }
 
     initialize(item: MediaDataItem, mode: PhotoEditMode, errCallback?: any): void {
-        Log.info(this.TAG, `initialize mode[${mode}]`);
+        Log.info(this.TAG, "initialize mode[" + mode + "]");
         this.item = item;
         Loader.loadPixelMapWrapper(item, true).then((pixelMap): void => {
             if (pixelMap) {
@@ -78,7 +78,7 @@ export class PhotoEditorManager {
 
     getLastPixelMap(): PixelMapWrapper {
         let position = this.historyManager.getPosition();
-        Log.debug(this.TAG, `getLastPixelMap position = ${position}`);
+        Log.debug(this.TAG, "getLastPixelMap position = " + position);
         if (position < 0) {
             return this.origin;
         } else {
@@ -87,7 +87,7 @@ export class PhotoEditorManager {
     }
 
     switchMode(mode: PhotoEditMode): PhotoEditMode {
-        Log.info(this.TAG, `switchMode: currentMode[${this.currentMode}] mode[${mode}]`);
+        Log.info(this.TAG, "switchMode: currentMode[" + this.currentMode + "] mode[" + mode + "]");
         if (this.currentMode == mode) {
             return mode;
         }
@@ -144,7 +144,7 @@ export class PhotoEditorManager {
     }
 
     async save(isReplace: boolean): Promise<number> {
-        Log.info(this.TAG, `save enter isReplace = ${isReplace}`);
+        Log.info(this.TAG, "save enter isReplace = " + isReplace);
         this.isSaving = true;
         const filter = this.editors[this.currentMode].exit();
         if (filter != undefined) {

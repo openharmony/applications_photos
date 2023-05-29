@@ -74,7 +74,7 @@ export class DistributedDataSource extends ItemDataSource {
     }
 
     onDataUpdate(index: number): void {
-        Log.info(TAG, `onDataUpdate ${index}`);
+        Log.info(TAG, "onDataUpdate " + index);
         this.notifyDataChange(index);
     }
 

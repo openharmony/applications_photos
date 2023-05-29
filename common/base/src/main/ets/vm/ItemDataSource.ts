@@ -35,7 +35,7 @@ export class LazyItem<T> {
 
     getHashCode(): string {
         // @ts-ignore
-        return `${this.index}` + this.item.getHashCode()
+        return this.index + "" + this.item.getHashCode()
     }
 
     get(): T {
@@ -69,7 +69,7 @@ export abstract class ItemDataSource implements IDataSource {
         Log.info(TAG, 'registerDataChangeListener');
         if (this.listeners.indexOf(listener) < 0) {
             this.listeners.push(listener);
-            Log.info(TAG, `registerDataChangeListener, add listener, length: ${this.listeners.length}`);
+            Log.info(TAG, "registerDataChangeListener, add listener, length: " + this.listeners.length);
         }
     }
 
@@ -78,7 +78,7 @@ export abstract class ItemDataSource implements IDataSource {
         const pos = this.listeners.indexOf(listener);
         if (pos >= 0) {
             this.listeners.splice(pos, 1);
-            Log.info(TAG, `registerDataChangeListener, remove listener, length: ${this.listeners.length}`);
+            Log.info(TAG, "registerDataChangeListener, remove listener, length: " + this.listeners.length);
         }
     }
 

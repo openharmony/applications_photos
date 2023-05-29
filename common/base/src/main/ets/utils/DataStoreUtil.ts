@@ -37,15 +37,15 @@ class DataStoreUtil {
     public async init(): Promise<void> {
         Log.debug(TAG, 'init start!');
         if (this.preferences != undefined) {
-            Log.info(TAG, `init preferences before`);
+            Log.info(TAG, "init preferences before");
             return;
         }
         try {
             let context = globalThis.applicationContext;
             this.preferences = await preferences.getPreferences(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE);
-            Log.info(TAG, `init preferences ${preferences}`);
+            Log.info(TAG, "init preferences " + preferences);
         } catch (err) {
-            Log.error(TAG, `init err ${err}`);
+            Log.error(TAG, "init err " + err);
         }
         Log.debug(TAG, 'init end!');
     }
@@ -53,7 +53,7 @@ class DataStoreUtil {
     public async getData(key: string, defValue): Promise<Object> {
         Log.debug(TAG, 'getData start!');
         if (this.preferences == undefined) {
-            Log.warn(TAG, `getData preferences is undefined`);
+            Log.warn(TAG, "getData preferences is undefined");
             await this.init();
         }
         let temValue = defValue;
@@ -61,7 +61,7 @@ class DataStoreUtil {
             temValue = await this.preferences.get(key, defValue);
             Log.debug(TAG, "The value of startup is " + temValue);
         } catch (err) {
-            Log.error(TAG, `Get the value failed with err: ${err}`);
+            Log.error(TAG, "Get the value failed with err: " + err);
         }
         return temValue;
     }
@@ -77,38 +77,38 @@ class DataStoreUtil {
             await this.preferences.put(key, value);
             Log.debug(TAG, 'Put the value successfully.');
         } catch (err) {
-            Log.error(TAG, `Put the value failed with err: ${err}`);
+            Log.error(TAG, "Put the value failed with err: " + err);
         }
     }
 
     public async delData(key: string): Promise<void> {
         Log.debug(TAG, 'delData start!');
         if (this.preferences == undefined) {
-            Log.warn(TAG, `delData preferences is undefined`);
+            Log.warn(TAG, "delData preferences is undefined");
             await this.init();
         }
         try {
             await this.preferences.delete(key);
             Log.debug(TAG, "Delete the value successfully.");
         } catch (err) {
-            Log.error(TAG, `Delete the value failed with err: ${err}`);
+            Log.error(TAG, "Delete the value failed with err: " + err);
         }
     }
 
     public async flush(): Promise<void> {
         Log.debug(TAG, 'flush start!');
         if (this.preferences == undefined) {
-            Log.warn(TAG, `flush preferences is undefined`);
+            Log.warn(TAG, "flush preferences is undefined");
             await this.init();
         }
         await this.preferences.flush();
     }
 
     public async hasData(key: string): Promise<boolean> {
-        Log.debug(TAG, `hasData start! preferences ${this.preferences}`);
+        Log.debug(TAG, "hasData start! preferences " + this.preferences);
         let ret = false;
         if (this.preferences == undefined) {
-            Log.warn(TAG, `hasData preferences is undefined`);
+            Log.warn(TAG, "hasData preferences is undefined");
             await this.init();
         }
         try {
@@ -116,7 +116,7 @@ class DataStoreUtil {
             Log.debug(TAG, "hasData the value successfully.");
         } catch (err) {
             ret = false;
-            Log.error(TAG, `hasData the value failed with err: ${err}`);
+            Log.error(TAG, "hasData the value failed with err: " + err);
         }
         return ret;
     }
@@ -125,7 +125,7 @@ class DataStoreUtil {
         Log.info(TAG,'removeCache start!');
         let context = globalThis.applicationContext;
         await preferences.removePreferencesFromCache(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE).then((): void => {
-            Log.info(TAG,`this.preferences = ${this.preferences}`);
+            Log.info(TAG, "this.preferences = " + this.preferences);
             this.preferences = undefined;
             Log.info(TAG,"removeCache successfully.")
         }).catch((err): void => {

@@ -34,14 +34,14 @@ export class ImageFilterCrop extends ImageFilterBase {
     }
 
     render(pixelMap: PixelMapWrapper): PixelMapWrapper {
-        Log.debug(this.TAG, `render input wrapper: ${JSON.stringify(pixelMap)}`);
+        Log.debug(this.TAG, "render input wrapper: " + JSON.stringify(pixelMap));
         let width = pixelMap.width;
         let height = pixelMap.height;
         let realCropRect = new RectF();
         realCropRect.set(this.cropRect.left, this.cropRect.top, this.cropRect.right, this.cropRect.bottom);
         MathUtils.revertRect(realCropRect, width, height);
         MathUtils.roundRect(realCropRect);
-        Log.debug(this.TAG, `realCropRect: ${JSON.stringify(realCropRect)}`);
+        Log.debug(this.TAG, "realCropRect: " + JSON.stringify(realCropRect));
 
         let offWidth = realCropRect.getWidth();
         let offHeight = realCropRect.getHeight();
@@ -65,7 +65,7 @@ export class ImageFilterCrop extends ImageFilterBase {
         offCtx.restore();
         let outputPixelMap = offCtx.getPixelMap(0, 0, offWidth, offHeight);
         let output = new PixelMapWrapper(outputPixelMap, offWidth, offHeight);
-        Log.debug(this.TAG, `render output wrapper: ${JSON.stringify(output)}`);
+        Log.debug(this.TAG, "render output wrapper: " + JSON.stringify(output));
         return output;
     }
 

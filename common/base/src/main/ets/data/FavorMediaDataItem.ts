@@ -29,13 +29,13 @@ export class FavorMediaDataItem extends MediaDataItem {
             fetchOption = {
                 selections: this.selections,
                 selectionArgs: this.selectionArgs,
-                order: `date_added DESC LIMIT ${this.index},1`
+                order: "date_added DESC LIMIT " + this.index + ",1"
             };
         } else {
             fetchOption = {
-                selections: `${MediaLib.FileKey.ID} = ?`,
+                selections: MediaLib.FileKey.ID + " = ?",
                 selectionArgs: [this.id.toString()],
-                order: `date_added DESC`
+                order: "date_added DESC"
             }
         }
         return (await mediaModel.getAllFavorMediaItem(fetchOption, false)).fileAsset;

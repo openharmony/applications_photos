@@ -102,7 +102,7 @@ export class DateUtil {
     public static getLocalizedTime(milliseconds: number): string {
         let locales: string = this.getLocales();
         let is24HourClock = i18n.is24HourClock();
-        Log.info(TAG, `get is24HourClock ${is24HourClock}`);
+        Log.info(TAG, "get is24HourClock " + is24HourClock);
 
         return new Intl.DateTimeFormat(locales, this.buildDateTimeOpt('', '', '', (!is24HourClock ? '2-digit' : 'numeric'), '2-digit')).format(new Date(milliseconds));
     }
@@ -135,9 +135,9 @@ export class DateUtil {
         let minuteTime: number = Math.floor(Math.floor(seconds / this.SECONDS_PER_MINUTE) % this.SECONDS_PER_MINUTE);
         let secondTime: number = Math.floor(seconds % this.SECONDS_PER_MINUTE);
         if (hourTime > 0) {
-            return `${hourTime}:${this.checkTime(minuteTime)}:${this.checkTime(secondTime)}`;
+            return hourTime + ":" + this.checkTime(minuteTime) + ":" + this.checkTime(secondTime);
         } else {
-            return `${this.checkTime(minuteTime)}:${this.checkTime(secondTime)}`;
+            return this.checkTime(minuteTime) + ":" + this.checkTime(secondTime);
         }
     }
 

@@ -38,7 +38,7 @@ export class FormController {
     }
 
     bindFormData(formId: string): any {
-        Log.info(TAG, `bindFormData start formId: ${formId}`)
+        Log.info(TAG, "bindFormData start formId: " + formId)
         let fd = this.mediaDataManager.getCurrentFd();
         let mediaData = this.mediaDataManager.getMediaData();
         let image: string = "image_" + fd + "_formId_" + formId + "_uri_" + mediaData.currentUri;
@@ -48,33 +48,33 @@ export class FormController {
             "albumName": this.mediaDataManager.getCurrentAlbumName(),
             "currentIndex": this.mediaDataManager.getCurrentIndex(),
             "isShow": this.mediaDataManager.getIsShowAlbumName(),
-            "formImages": JSON.parse(`{ "${image}": ${fd} }`),
+            "formImages": JSON.parse("{ " + image + ": " + fd + " }"),
             'uri': (mediaData.currentUri !== '') ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
-            'albumId': `${mediaData.albumId}`,
+            'albumId': "" + mediaData.albumId,
             'currentUri': mediaData.currentUri
         };
-        Log.debug(TAG, `bindFormData, createFormBindingData dataObj2.data: ${JSON.stringify(dataObj1)}`);
+        Log.debug(TAG, "bindFormData, createFormBindingData dataObj2.data: " + JSON.stringify(dataObj1));
         let obj = formBindingData.createFormBindingData(JSON.stringify(dataObj1));
-        Log.debug(TAG, `bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
+        Log.debug(TAG, "bindFormData, createFormBindingData obj2.data: " + JSON.stringify(obj.data));
         return obj;
     }
 
     updateFormData(formId: string, vars: string[]): void {
-        Log.debug(TAG, `updateFormData formId: ${JSON.stringify(formId)}`);
+        Log.debug(TAG, "updateFormData formId: " + JSON.stringify(formId));
         let obj3 = this.bindFormData(formId);
-        Log.debug(TAG, `updateFormData obj: ${JSON.stringify(obj3)}`);
+        Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
         formProvider.updateForm(formId, obj3)
             .then((data): void => {
-                Log.info(TAG, `updateFormData, data: ${JSON.stringify(data)}`);
+                Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
                 if (this.mediaDataManager.getIsShowAlbumName()) {
                     formProvider.setFormNextRefreshTime(formId, this.mediaDataManager.getIntervalTime()).then((): void => {
-                         Log.error(TAG, `setFormNextRefreshTime successfully!`);
+                         Log.error(TAG, "setFormNextRefreshTime successfully!");
                         if (this.callback != null) {
                             this.callback.call(this.callback);
                         }
                         this.onDestroy();
                     }).catch((err): void => {
-                         Log.error(TAG, `init err ${err}`);
+                         Log.error(TAG, "init err " + err);
                     })
                 } else {
                     if (this.callback != null) {
@@ -83,7 +83,7 @@ export class FormController {
                     this.onDestroy();
                 }
             }).catch((error): void => {
-             Log.error(TAG, `updateForm failed. Cause: ${JSON.stringify(error)}`);
+             Log.error(TAG, "updateForm failed. Cause: " + JSON.stringify(error));
             this.mediaDataManager.closeFd();
         });
     }
@@ -96,7 +96,7 @@ export class FormController {
     }
 
     onUpdateFormData(formId: string): void {
-        Log.debug(TAG, `onUpdateFormData formId: ${formId}`);
+        Log.debug(TAG, "onUpdateFormData formId: " + formId);
         this.mediaDataManager.setNextIndex();
     }
 
@@ -109,11 +109,11 @@ export class FormController {
                 'uri': (
                            this.mediaDataManager.getMediaData()
                            .currentUri != '') ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
-                'albumId': `${this.mediaDataManager.getMediaData().albumId}`,
+                'albumId': this.mediaDataManager.getMediaData().albumId,
                 'currentIndex': this.mediaDataManager.getMediaData().currentIndex
             }
         };
-        Log.debug(TAG, `routerPhotoBrowser parm ${JSON.stringify(param)}`);
+        Log.debug(TAG, "routerPhotoBrowser parm " + JSON.stringify(param));
         startAbility(param).then((): void => {
             AppStorage.Delete(Constants.FROM_CONTROLLER_MANAGER);
         })
@@ -122,11 +122,11 @@ export class FormController {
     }
 
     onTriggerFormEvent(formId: string, message): void {
-        Log.debug(TAG, `onTriggerFormEvent ${formId} ${message}`);
+        Log.debug(TAG, "onTriggerFormEvent " + formId + " " + message);
         let msgObj = JSON.parse(message);
         let param = msgObj["params"];
         let msg = param["message"];
-        Log.debug(TAG, `onTriggerFormEvent ${param} ${msg}`);
+        Log.debug(TAG, "onTriggerFormEvent " + param + " " + msg);
         if (msg == FormController.MSG_ROUTER_PHOTOS) {
             this.routerPhotoBrowser();
         }
@@ -137,11 +137,11 @@ export class FormController {
         if (this.callback != null) {
             if (this.mediaDataManager.getUpdateTag()) {
                 this.mediaDataManager.setUpdateTag(false)
-                Log.debug(TAG, `updateFormData formId: ${JSON.stringify(formId)}`);
+                Log.debug(TAG, "updateFormData formId: " + JSON.stringify(formId));
                 let obj3 = this.bindFormData(formId);
-                Log.debug(TAG, `updateFormData obj: ${JSON.stringify(obj3)}`);
+                Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
                 formProvider.updateForm(formId, obj3).then((data): void => {
-                    Log.info(TAG, `updateFormData, data: ${JSON.stringify(data)}`);
+                    Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
                     this.onTriggerFormEvent(formId, this.callback.call(this.callback));
                 }).catch((error): void => {
                     this.onTriggerFormEvent(formId, this.callback.call(this.callback));
