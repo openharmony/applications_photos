@@ -21,6 +21,7 @@ import { FormController } from './controller/FormController';
 import { Constants } from './common/Constants';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import  DataStoreUtil  from '@ohos/base/src/main/ets/utils/DataStoreUtil';
+import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 
 export default class FormAbility extends FormExtension {
     private TAG: string = 'FormAbility';
@@ -99,6 +100,6 @@ export default class FormAbility extends FormExtension {
 
     private init(): void {
         mediaModel.onCreate(this.context);
-        globalThis.appContext = this.context;
+        GlobalContext.getContext().setObject("appContext", this.context);
     }
 };

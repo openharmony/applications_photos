@@ -17,12 +17,15 @@ import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import WantConstant from '@ohos.ability.wantConstant';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { Constants } from '../../../common/model/common/Constants';
+import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 
 const TAG = "CameraGridItemComponent"
 
 // Camera entrance of the pick page
 @Component
 export struct CameraGridItemComponent {
+  private globalThis = GlobalContext.getContext();
+
   bundleName: string = "";
   filterMediaType: number = MediaConstants.SELECT_TYPE_ALL;
   resultUri: string = "";
@@ -91,7 +94,7 @@ export struct CameraGridItemComponent {
       }
     };
     Log.debug(TAG, `jump camera want: ${JSON.stringify(want)}`);
-    let result = await globalThis.appContext .startAbilityForResult(want);
+    let result = await this.globalThis.getObject("appContext").startAbilityForResult(want);
     return result;
   }
 
@@ -108,7 +111,7 @@ export struct CameraGridItemComponent {
         }
       }
     };
-    globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
+    this.globalThis.getObject("appContext").terminateSelfWithResult(abilityResult).then((result) => {
       Log.info(TAG, `terminateSelf result: ${result}`);
     });
   }

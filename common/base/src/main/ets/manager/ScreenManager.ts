@@ -19,6 +19,7 @@ import { Log } from '../utils/Log';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { WindowConstants } from '../constants/WindowConstants';
 import { getResourceString } from '../utils/ResourceUtils';
+import { GlobalContext } from '../utils/GlobalContext';
 
 export enum ColumnSize {
     COLUMN_TWO = 2,
@@ -64,6 +65,7 @@ class ScreenManager {
     private leftBlank: number[] = [0, 0, 0, 0];
     private events = [];
     private mainWindow: window.Window = undefined;
+    private globalThis = GlobalContext.getContext();
 
     // Default orientation
     private horizontal = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? false : true;
@@ -188,7 +190,7 @@ class ScreenManager {
 
     async checkWindowMode(): Promise<void> {
         let before = this.windowMode;
-        let mode = await globalThis.photosWindowStage.getWindowMode();
+        let mode = await this.globalThis.getObject("photosWindowStage").getWindowMode();
         Log.info(TAG, "photos application before/current window mode: " + before + "/" + mode);
 
         if (before == mode) {

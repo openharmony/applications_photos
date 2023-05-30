@@ -59,6 +59,7 @@ import { getAlbumDisplayName } from '@ohos/base/src/main/ets/helper/MediaDataHel
 import { startAbility, terminateSelf } from '@ohos/base/src/main/ets/utils/AbilityUtils';
 import mediaDataItemCache from '@ohos/base/src/main/ets/data/MediaDataItemCache';
 import { PhotoEditorManager } from '../../editor/PhotoEditorManager';
+import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 // page of large photo
 
 const TAG = "PhotoBrowser"
@@ -115,6 +116,7 @@ struct PhotoBrowser {
     private pullDownFlag: boolean = false;
     private browserDataSource: GroupItemDataSource = new GroupItemDataSource()
     private isToEdit = false;
+    private globalThis = GlobalContext.getContext();
 
     onMenuClicked(action: Action) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}, isPullingDown: ${this.isPullingDown}`);
@@ -199,7 +201,7 @@ struct PhotoBrowser {
                     return;
                 }
                 this.isToEdit = true
-                globalThis.EditorMediaItem = currentPhoto;
+                this.globalThis.setObject("EditorMediaItem", currentPhoto);
                 router.push({
                     uri: 'feature/editor/view/EditMain'
                 })

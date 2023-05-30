@@ -26,15 +26,17 @@ import { Constants } from '../common/model/common/Constants';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import uri from '@ohos.uri';
 import ScreenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 
 const TAG: string = 'ServiceExtAbility';
 
 export default class ServiceExtAbility extends Extension {
+  private globalThis = GlobalContext.getContext();
 
   onCreate(want) {
     Log.info(TAG, "ServiceExtAbility want param : " + JSON.stringify(want));
-    globalThis.windowClass = null;
-    globalThis.photoAbilityContext = this.context;
+    this.globalThis.setObject("windowClass", null);
+    this.globalThis.setObject("photoAbilityContext", this.context);
   }
 
   onRequest(want, startId) {
@@ -52,7 +54,7 @@ export default class ServiceExtAbility extends Extension {
     AppStorage.SetOrCreate("uris", uris);
     AppStorage.SetOrCreate("appName", appName);
 
-    let windowClass = globalThis.windowClassg;
+    let windowClass = this.globalThis.getObject("windowClass");
     try {
       let config = {
         name: "DeleteDialog " + appName + Math.random(), windowType: Window.WindowType.TYPE_DIALOG, ctx: this.context
@@ -116,7 +118,8 @@ export default class ServiceExtAbility extends Extension {
 
     Log.info(TAG, 'done');
 
-    globalThis.onStart1 = (() => {
+    let onStart = this.globalThis.getObject("onStart1");
+    onStart = (() => {
       try {
         Log.info(TAG, 'test start1');
         windowClass.destroyWindow((err) => {

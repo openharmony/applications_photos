@@ -30,6 +30,7 @@ import atManager from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
+import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 
 let isFromCard = false;
 let mCallerUid: number = 0;
@@ -50,7 +51,7 @@ export default class MainAbility extends Ability {
         Log.info(this.TAG, 'Application onCreate');
         startTrace('onCreate');
         // Ability is creating, initialize resources for this ability
-        globalThis.appContext = this.context;
+        GlobalContext.getContext().setObject("appContext", this.context);
         mediaModel.onCreate(this.context);
         let action = want.parameters;
         if (action != null && action != undefined && action?.filterMediaType == MediaConstants.FILTER_MEDIA_TYPE_IMAGE) {
@@ -161,7 +162,7 @@ export default class MainAbility extends Ability {
         startTrace('onWindowStageCreate');
         // Main window is created, set main page for this ability
         Log.info(this.TAG, 'Application onWindowStageCreate');
-        globalThis.photosWindowStage = windowStage;
+        GlobalContext.getContext().setObject("photosWindowStage", windowStage);
         startTrace('getMainWindow');
         windowStage.getMainWindow().then((win: window.Window): void => {
             AppStorage.SetOrCreate(Constants.MAIN_WINDOW, win);
