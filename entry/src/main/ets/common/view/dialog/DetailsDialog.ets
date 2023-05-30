@@ -39,7 +39,7 @@ export struct DetailsDialog {
     private TAG: string = 'DetailsDialog'
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     sizeConvert = 1024;
     controller: CustomDialogController;
     dataTime: string;

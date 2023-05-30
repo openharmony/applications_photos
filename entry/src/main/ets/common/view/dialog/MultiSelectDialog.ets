@@ -26,7 +26,7 @@ export class MultiSelectDetails {
 export struct MultiSelectDialog {
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     controller: CustomDialogController;
     @Consume multiSelectDetails: MultiSelectDetails;
 

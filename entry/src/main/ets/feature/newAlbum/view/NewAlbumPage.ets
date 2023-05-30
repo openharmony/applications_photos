@@ -57,7 +57,7 @@ struct NewAlbumPage {
     @Provide moreMenuList: Array<Action> = new Array<Action>();
     @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
     @StorageLink('isSplitMode') isSplitMode: boolean = screenManager.isSplitMode();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     private scroller: Scroller = new Scroller();
     private isActive = false;
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();

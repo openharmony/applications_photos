@@ -31,7 +31,7 @@ import app from '@system.app';
 struct IndexPage {
     private TAG: string = 'IndexPage';
     private preIndex: number = Constants.TIMELINE_PAGE_INDEX;
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @Provide isShow: boolean = false;
     @Provide isSelectedMode: boolean = false;
     @Provide isAlbumSetSelectedMode: boolean = false;

@@ -42,7 +42,7 @@ const TAG = "DistributedAlbumSetPage"
 @Entry
 @Component
 struct DistributedAlbumSetPage {
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @State isEmpty: boolean = false;
     @State gridColumnsCount: number = 0;
     @Provide broadCast: Broadcast = new Broadcast();

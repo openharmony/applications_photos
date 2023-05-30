@@ -38,7 +38,7 @@ const TAG = "MediaOperationPage"
 @Component
 struct MediaOperationPage {
     @StorageLink('screenColumns') screenColumns: number = screenManager.getScreenColumns();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @Provide pageType: string = MediaOperationType.Move;
     @Provide broadCast: Broadcast = new Broadcast();
     @Provide moreMenuList: Action[] = new Array<Action>();

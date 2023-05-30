@@ -36,10 +36,10 @@ export interface AnimationOption {
 export class EventPipeline {
 
     // last offset
-    private lastOffset: [number, number] = [0, 0];
+    private lastOffset: number[] = [0, 0];
 
     // offset
-    private offset: [number, number] = [0, 0];
+    private offset: number[] = [0, 0];
 
     // default scale
     private defaultScale = 1.0;
@@ -51,7 +51,7 @@ export class EventPipeline {
     private scale = 1.0;
 
     // the zoom center point is a percentage position relative to the control, not an absolute position
-    private center: [number, number] = [Constants.CENTER_DEFAULT, Constants.CENTER_DEFAULT];
+    private center: number[] = [Constants.CENTER_DEFAULT, Constants.CENTER_DEFAULT];
 
     // leftmost zoom Center，(1 - leftMost)is rightmost zoom Center
     private leftMost = 0.0;
@@ -187,7 +187,7 @@ export class EventPipeline {
         this.broadCast.emit(Constants.DIRECTION_CHANGE + this.item.uri + this.timeStamp, [direction]);
     }
 
-    private evaluateOffset(): [number, number] {
+    private evaluateOffset(): number[] {
         Log.info(TAG, "evaluateOffset lastOffset: " + this.lastOffset + ", offset: " + this.offset);
         let centerX = (this.center[0] - Constants.CENTER_DEFAULT) * this.componentWidth * (this.defaultScale - this.scale) * this.lastScale;
         let centerY = (this.center[1] - Constants.CENTER_DEFAULT) * this.componentHeight * (this.defaultScale - this.scale) * this.lastScale;
@@ -198,7 +198,7 @@ export class EventPipeline {
     }
 
     private emitTouchEvent(): void {
-        let offset: [number, number];
+        let offset: number[];
         let scale = this.lastScale * this.scale;
         if (Number(scale.toFixed(Constants.RESERVED_DIGITS)) > Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) {
             let limits = this.evaluateOffsetRange(scale);
@@ -270,10 +270,10 @@ export class EventPipeline {
         ",max: " + this.maxScale + ", most: [" + this.leftMost + "," + this.topMost + "], double: " + this.doubleTapScale);
     }
 
-    private evaluateCompBounds(): [number, number] {
+    private evaluateCompBounds(): number[] {
         let scale = this.lastScale * this.scale;
         let offset = this.evaluateOffset();
-        let result: [number, number] = [
+        let result: number[] = [
             offset[0] - this.componentWidth * (Number(scale.toFixed(Constants.RESERVED_DIGITS)) - Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) / Constants.NUMBER_2,
             offset[1] - this.componentHeight * (Number(scale.toFixed(Constants.RESERVED_DIGITS)) - Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) / Constants.NUMBER_2
         ];
@@ -281,7 +281,7 @@ export class EventPipeline {
         return result;
     }
 
-    private evaluateImgDisplaySize(): [number, number] {
+    private evaluateImgDisplaySize(): number[] {
         let screenScale = 1;
         let widthScale = this.componentWidth / this.item.imgWidth;
         let heightScale = this.componentHeight / this.item.imgHeight;
@@ -294,14 +294,14 @@ export class EventPipeline {
         return [imgDisplayWidth, imgDisplayHeight];
     }
 
-    private evaluateImgDisplayBounds(): [number, number] {
+    private evaluateImgDisplayBounds(): number[] {
         // For the left boundary of the component,
         // the offset caused by amplification is - compw * (scale-1) / 2,
         // plus the offset of the gesture to obtain the left boundary of the control.
         // The same is true for the upper boundary
         let scale = this.lastScale * this.scale;
         let leftTop = this.evaluateCompBounds();
-        let imgDisplaySize: [number, number] = this.evaluateImgDisplaySize();
+        let imgDisplaySize: number[] = this.evaluateImgDisplaySize();
         let imgDisplayWidth = imgDisplaySize[0];
         let imgDisplayHeight = imgDisplaySize[1];
         let imgLeftBound = 0;
@@ -321,7 +321,7 @@ export class EventPipeline {
 
     // Calculate picture display boundary
     private evaluateBounds(): void {
-        let imgDisplaySize: [number, number] = this.evaluateImgDisplaySize();
+        let imgDisplaySize: number[] = this.evaluateImgDisplaySize();
         let imgDisplayWidth = imgDisplaySize[0];
 
         let imgDisplayBounds = this.evaluateImgDisplayBounds();
@@ -336,8 +336,8 @@ export class EventPipeline {
      * @param scale The display magnification of the current control, usually this.lastScale * this.scale
      * @returns 0&1 X-direction offset lower & upper bound, 2&3 Y-direction offset lower & upper bound
      */
-    private evaluateOffsetRange(scale: number): [number, number, number, number] {
-        let result: [number, number, number, number] = [0, 0, 0, 0];
+    private evaluateOffsetRange(scale: number): number[] {
+        let result: number[] = [0, 0, 0, 0];
         let screenScale = 1;
         let widthScale = this.componentWidth / this.item.imgWidth;
         let heightScale = this.componentHeight / this.item.imgHeight;
@@ -460,7 +460,7 @@ export class EventPipeline {
      * @param centerY The absolute position of the touch point on the screen
      * @returns The percentage position of the current zoom center relative to the control
      */
-    private evaluateCenter(centerX: number, centerY: number): [number, number] {
+    private evaluateCenter(centerX: number, centerY: number): number[] {
         // Calculate the coordinates of the upper left corner of the control relative to
         // the upper left corner of the current display
         let scale = this.lastScale * this.scale;
@@ -472,7 +472,7 @@ export class EventPipeline {
         let cyRelativeToComp = clamp((centerY - leftTop[1])
         / (this.componentHeight * scale), this.topMost, 1 - this.topMost);
 
-        let imgDisplaySize: [number, number] = this.evaluateImgDisplaySize();
+        let imgDisplaySize: number[] = this.evaluateImgDisplaySize();
         let imgDisplayWidth = imgDisplaySize[0];
         let imgDisplayHeight = imgDisplaySize[1];
 
@@ -492,7 +492,7 @@ export class EventPipeline {
         }
 
         // Calculate the percentage of the center point of the touch
-        let center: [number, number] = [cxRelativeToComp, cyRelativeToComp];
+        let center: number[] = [cxRelativeToComp, cyRelativeToComp];
         Log.debug(TAG, "evaluateCenter center: " + center + ", " + centerX + "," + centerY +
         ",size: " + imgDisplaySize + ", bounds: " + imgDisplayBounds + ", leftTop: " + leftTop +
        	",compSize: " + this.componentWidth * scale + "," + this.componentHeight * scale);
@@ -541,7 +541,7 @@ export class EventPipeline {
         this.startAnimation(animationEndMatrix as Matrix4TransitWithMatrix4x4);
     }
 
-    private evaluateAnimeMatrix(scale: number, center: [number, number]): Matrix4.Matrix4Transit {
+    private evaluateAnimeMatrix(scale: number, center: number[]): Matrix4.Matrix4Transit {
         let offset = [
             this.lastOffset[0] + this.offset[0] + (center[0] - Constants.CENTER_DEFAULT) * this.componentWidth
             * (this.defaultScale - scale / this.lastScale) * this.lastScale,

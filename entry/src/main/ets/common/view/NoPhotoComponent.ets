@@ -27,7 +27,7 @@ export struct NoPhotoComponent {
     @State offSetY: number = Constants.EMPTY_PAGE_DEFAULT_OFFSET;
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @State bigScreen: boolean = false;
 
     aboutToAppear(): void {

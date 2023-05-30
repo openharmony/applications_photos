@@ -52,7 +52,7 @@ struct ThirdSelectAlbumSetPage {
     @State gridRowCount: number = 3;
     isActive = false;
     @StorageLink('isSplitMode') isSplitMode: boolean = screenManager.isSplitMode();
-    @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     isFromFaPhoto: boolean = false;
     isFromThird: boolean = false;

@@ -61,7 +61,7 @@ class ScreenManager {
     private winHeight = 0.0;
     private statusBarHeight = 0;
     private naviBarHeight = 0;
-    private leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    private leftBlank: number[] = [0, 0, 0, 0];
     private events = [];
     private mainWindow: window.Window = undefined;
 
