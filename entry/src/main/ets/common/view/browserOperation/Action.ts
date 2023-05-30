@@ -252,7 +252,7 @@ export class Action {
         iconRes: $r('app.media.ic_gallery_public_rename'),
         textRes: $r('app.string.action_rename'),
         fillColor: $r('app.color.icon_disabled_color'),
-        actionType: $r('app.string.action_rename')
+        actionType: $r('app.string.action_deRename')
     });
     public static ROTATE = new Action({
         id: ActionID.ROTATE,

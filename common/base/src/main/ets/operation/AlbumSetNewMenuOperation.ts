@@ -23,7 +23,7 @@ import type { MenuOperation } from './MenuOperation';
 import { MenuContext } from './MenuContext';
 import { JumpSourceToMain } from '../data/JumpSourceToMain';
 import { SimpleAlbumDataItem } from '../data/SimpleAlbumDataItem';
-import { getFetchOptionsByItem } from '../helper/MediaDataHelper';
+import { getFetchOptionsByAlbumItem } from '../helper/MediaDataHelper';
 import { showToast } from '../utils/UiUtil';
 import mediaModel from '../model/MediaModel';
 import { AlbumDataItem } from '../data/AlbumDataItem';
@@ -97,7 +97,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     }
 
     private async checkAlbumExit(simpleAlbumDataItem: SimpleAlbumDataItem): Promise<boolean> {
-        let fetchOptions: MediaLib.MediaFetchOptions = await getFetchOptionsByItem(simpleAlbumDataItem);
+        let fetchOptions: MediaLib.MediaFetchOptions = await getFetchOptionsByAlbumItem(simpleAlbumDataItem);
         return await mediaModel.getAlbumCount(fetchOptions) > 0;
     }
 
