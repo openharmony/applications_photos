@@ -29,7 +29,7 @@ export class Broadcast {
         }
 
         const cbs = this.callBackArray[event];
-        if (!cbs) {
+        if (!Boolean(cbs).valueOf()) {
             return;
         }
         if (callback == null) {
@@ -48,7 +48,7 @@ export class Broadcast {
 
     public emit(event, args: Object[]): void {
         let _self = this;
-        if (!this.callBackArray[event]) {
+        if (!Boolean(this.callBackArray[event]).valueOf()) {
             return;
         }
         let cbs = [...this.callBackArray[event]];
