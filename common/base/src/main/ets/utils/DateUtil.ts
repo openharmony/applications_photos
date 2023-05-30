@@ -20,14 +20,17 @@ import Intl from '@ohos.intl';
 const TAG = "DateUtil"
 
 export class DateUtil {
-    private static LANGUAGE_LOCALES_MAP = {
-        'zh': 'zh-CN',
-        'en': 'en-US'
-    };
+    private static LANGUAGE_LOCALES_MAP: Map<string, string> = new Map();
+
     private static readonly FORMAT_DECIMAL: number = 10;
     public static readonly MILLISECONDS_PER_SECOND: number = 1000;
     public static readonly SECONDS_PER_MINUTE: number = 60;
     public static readonly SECONDS_PER_HOUR: number = 3600;
+
+    public static initLanguageLocalesMap(): void {
+        DateUtil.LANGUAGE_LOCALES_MAP.set("zh", "zh-CN");
+        DateUtil.LANGUAGE_LOCALES_MAP.set("en", "en-US");
+    }
 
     // Get the date after localization (year-month-day)
     public static getLocalizedDate(milliseconds: number): string {
@@ -40,22 +43,24 @@ export class DateUtil {
         if (!Boolean(format_s).valueOf()) {
             return time.valueOf().toString();
         }
-        let opts = {
-            'MM': time.getMonth() + 1,
-            'dd': time.getDate(),
-            'HH': time.getHours(),
-            'mm': time.getMinutes(),
-            'ss': time.getSeconds()
-        }
+        let opts: Map<string, number> = new Map();
+        opts.set('MM', time.getMonth() + 1);
+        opts.set('dd', time.getDate());
+        opts.set('HH', time.getHours());
+        opts.set('mm', time.getMinutes());
+        opts.set('ss', time.getSeconds());
+
         let check: RegExp = new RegExp("/(y+)/");
         if (check.test(format_s)) {
             format_s = format_s.replace('yyyy', time.getFullYear().toString().substr(0));
         }
-        for (let f in opts) {
+        for (let f of opts.keys()) {
             if (new RegExp('(' + f + ')').test(format_s)) {
-                format_s = format_s.replace(f, (f.length == 1) ? opts[f] : (('00' + opts[f]).substr(
-                    opts[f].toString()
-                    .length)))
+                format_s = format_s.replace(f,
+                    (f.length == 1)
+                    ? opts.get(f).toString()
+                    : (("00" + opts.get(f)).substr(opts.get(f).toString().length))
+                );
             }
         }
         return format_s;
@@ -108,11 +113,11 @@ export class DateUtil {
     }
 
     static getLocales(): string {
-        let systemLocale = i18n.getSystemLanguage();
+        let systemLocale: string = i18n.getSystemLanguage().toString();
         let language = systemLocale.split('-')[0];
-        let locales: string = this.LANGUAGE_LOCALES_MAP['en'];
-        if (this.LANGUAGE_LOCALES_MAP[language]) {
-            locales = this.LANGUAGE_LOCALES_MAP[language];
+        let locales: string = this.LANGUAGE_LOCALES_MAP.get("en");
+        if (this.LANGUAGE_LOCALES_MAP.get(language)) {
+            locales = this.LANGUAGE_LOCALES_MAP.get(language);
         }
         return locales;
     }
@@ -196,3 +201,5 @@ export class DateUtil {
         }
     }
 }
+
+DateUtil.initLanguageLocalesMap()
