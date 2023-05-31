@@ -29,12 +29,14 @@ import { PhotoEditorManager } from '../PhotoEditorManager';
 import { PhotoEditCrop } from '../crop/PhotoEditCrop';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { Constants } from '../../../common/model/common/Constants';
+import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 
 @Entry
 @Component
 struct Edit {
     private TAG: string = 'Edit'
-    private mediaItem: MediaDataItem = globalThis.EditorMediaItem;
+    private globalThis = GlobalContext.getContext();
+    private mediaItem: MediaDataItem = this.globalThis.getObject("EditorMediaItem");
     @Provide editorManager: PhotoEditorManager = PhotoEditorManager.getInstance();
     @Provide('compare') isCompare: boolean = false;
     @Provide('angle') rotateAngle: number = 0;
@@ -111,7 +113,7 @@ struct Edit {
 
     aboutToDisappear() {
         Log.debug(this.TAG, 'aboutToDisappear');
-        globalThis.EditorMediaItem = undefined;
+        this.globalThis.setObject("EditorMediaItem", undefined);
         PhotoEditorManager.getInstance().clear();
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000')
     }

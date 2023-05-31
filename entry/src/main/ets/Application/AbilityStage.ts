@@ -14,9 +14,10 @@
  */
 
 import AbilityStage from "@ohos.app.ability.AbilityStage"
+import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 
 export default class PhotosAbilityStage extends AbilityStage {
     onCreate(): void {
-        globalThis.applicationContext = this.context;
+        GlobalContext.getContext().setObject("applicationContext", this.context);
     }
 }

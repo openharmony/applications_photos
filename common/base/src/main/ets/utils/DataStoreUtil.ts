@@ -15,6 +15,7 @@
 import preferences from '@ohos.data.preferences';
 import { Log } from '../utils/Log';
 import createOrGet from './SingleInstanceUtils';
+import { GlobalContext } from '../utils/GlobalContext';
 
 const TAG = "DataStoreUtil"
 
@@ -22,6 +23,7 @@ class DataStoreUtil {
     private preferences: preferences.Preferences | null = null;
     private static readonly PREFERENCES_KEY_MY_FORM_STORE = 'myFormStore';
     private static readonly FROM_DATA_STORE_UTIL = 'form_data_store_util';
+    private globalThis = GlobalContext.getContext();
 
     constructor() {
         Log.info(TAG, 'constructor');
@@ -41,7 +43,7 @@ class DataStoreUtil {
             return;
         }
         try {
-            let context = globalThis.applicationContext;
+            let context = this.globalThis.getObject("applicationContext");
             this.preferences = await preferences.getPreferences(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE);
             Log.info(TAG, "init preferences " + preferences);
         } catch (err) {
@@ -123,7 +125,7 @@ class DataStoreUtil {
 
     public async  removeCache(): Promise<void> {
         Log.info(TAG,'removeCache start!');
-        let context = globalThis.applicationContext;
+        let context = this.globalThis.getObject("applicationContext");
         await preferences.removePreferencesFromCache(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE).then((): void => {
             Log.info(TAG, "this.preferences = " + this.preferences);
             this.preferences = undefined;

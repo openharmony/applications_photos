@@ -15,13 +15,15 @@
  */
 import resourceManager from '@ohos.resourceManager';
 import { Log } from '../utils/Log';
+import { GlobalContext } from '../utils/GlobalContext';
 
 const TAG = "ResourceUtils"
 
 export async function getResourceString(resource: Resource): Promise<string> {
     try {
         Log.debug(TAG, "getResourceString: " + JSON.stringify(resource));
-        let mgr: resourceManager.ResourceManager = await resourceManager.getResourceManager(globalThis.appContext);
+        let context = GlobalContext.getContext().getObject("appContext");
+        let mgr: resourceManager.ResourceManager = await resourceManager.getResourceManager(context);
         if (mgr != null || mgr != undefined) {
             return await mgr.getString(resource.id);
         } else {

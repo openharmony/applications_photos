@@ -37,6 +37,7 @@ import { SelectUtil } from '@ohos/base/src/main/ets/utils/SelectUtil';
 import { ThirdSelectedPanel } from './ThirdSelectedPanel';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
+import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 // Third Select Album Page
 
 const TAG = "ThirdSelectPhotoGridPage"
@@ -44,6 +45,7 @@ const TAG = "ThirdSelectPhotoGridPage"
 @Entry
 @Component
 struct ThirdSelectPhotoGridPage {
+    private globalThis = GlobalContext.getContext();
     @Provide @Watch('updateActionBar') selectedCount: number = 0;
     @Provide('isSelectedMode') @Watch('updateActionBar') isMultiPick: boolean = false;
     @Provide moreMenuList: Array<Action> = new Array<Action>();
@@ -310,14 +312,14 @@ struct ThirdSelectPhotoGridPage {
         Log.info(TAG, `uri: ${uriArray}`)
         let self = this;
         if (uriArray == null && uriArray == undefined) {
-            globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
+            this.globalThis.getObject("appContext").terminateSelfWithResult(abilityResult).then((result) => {
                 Log.info(TAG, `terminateSelfWithResult result: ${result}`);
             });
         } else {
             SelectUtil.grantPermissionForUris(uriArray, self.bundleName);
             try {
                 Log.info(TAG, `grant permission success.`);
-                globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
+                this.globalThis.getObject("appContext").terminateSelfWithResult(abilityResult).then((result) => {
                     Log.info(TAG, `terminateSelfWithResult result: ${result}`);
                 });
             } catch (err) {

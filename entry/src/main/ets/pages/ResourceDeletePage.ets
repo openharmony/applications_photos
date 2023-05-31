@@ -23,6 +23,7 @@ import dialogRequest from '@ohos.app.ability.dialogRequest';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { getIdFromUri } from '@ohos/base/src/main/ets/utils/StringUtil';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
+import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 
 const TAG: string = 'ResourceDeletePage';
 
@@ -106,7 +107,7 @@ struct ResourceDeletePage {
       }
       // @ts-ignore
       requestCallback.setRequestResult(myResult);
-      globalThis.photoAbilityContext.terminateSelf();
+      GlobalContext.getContext().getObject("photoAbilityContext").terminateSelf();
     } catch(err) {
       Log.info(TAG, `getRequestInfo err : ${JSON.stringify(err)}`);
     }

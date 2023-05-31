@@ -33,6 +33,7 @@ import { terminateSelfWithResult } from '@ohos/base/src/main/ets/utils/AbilityUt
 import { SelectUtil } from '@ohos/base/src/main/ets/utils/SelectUtil';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
+import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 // third selection photoBrowser
 
 const TAG = "ThirdSelectPhotoBrowser"
@@ -40,6 +41,7 @@ const TAG = "ThirdSelectPhotoBrowser"
 @Entry
 @Component
 struct ThirdSelectPhotoBrowser {
+    private globalThis = GlobalContext.getContext();
     @Provide browserBackgroundColor: Resource = $r('app.color.default_background_color');
     @Provide('selectedCount') totalSelectedCount: number = 0;
     @Provide broadCast: Broadcast = new Broadcast();
@@ -253,7 +255,7 @@ struct ThirdSelectPhotoBrowser {
         SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
         try {
             Log.info(TAG, `grant permission success.`);
-            globalThis.appContext.terminateSelfWithResult(abilityResult).then((result) => {
+            this.globalThis.getObject("appContext").terminateSelfWithResult(abilityResult).then((result) => {
                 Log.info(TAG, `terminateSelf result: ${result}`);
             });
         } catch (err) {

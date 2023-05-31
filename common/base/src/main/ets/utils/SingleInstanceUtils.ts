@@ -14,13 +14,15 @@
  */
 
 import { Log } from '../utils/Log';
+import { GlobalContext } from '../utils/GlobalContext';
 
 const TAG = "SingleInstanceHelper";
+let globalThis = GlobalContext.getContext();
 
 export default function createOrGet<T>(objectClass: { new(): T }, storageKey: string): T {
-    if (!Boolean(globalThis[storageKey]).valueOf()) {
-        globalThis[storageKey] = new objectClass();
+    if (!Boolean(globalThis.getObject(storageKey)).valueOf()) {
+        globalThis.setObject(storageKey, new objectClass());
         Log.debug(TAG, "Create key of " + storageKey);
     }
-    return globalThis[storageKey];
+    return globalThis.getObject(storageKey);
 }
