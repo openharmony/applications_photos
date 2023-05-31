@@ -14,7 +14,7 @@
  */
 import deviceInfo from '@ohos.deviceInfo';
 import window from '@ohos.window';
-import createOrGet from '../utils/SingleInstanceUtils';
+import stashOrGetObject from '../utils/SingleInstanceUtils';
 import { Log } from '../utils/Log';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { WindowConstants } from '../constants/WindowConstants';
@@ -422,6 +422,6 @@ class ScreenManager {
     }
 }
 
-let screenManager = createOrGet(ScreenManager, TAG);
+let screenManager: ScreenManager = stashOrGetObject(new ScreenManager(), TAG);
 
 export default screenManager as ScreenManager;

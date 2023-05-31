@@ -14,7 +14,7 @@
  */
 import preferences from '@ohos.data.preferences';
 import { Log } from '../utils/Log';
-import createOrGet from './SingleInstanceUtils';
+import stashOrGetObject from './SingleInstanceUtils';
 import { GlobalContext } from '../utils/GlobalContext';
 
 const TAG = "DataStoreUtil"
@@ -136,7 +136,7 @@ class DataStoreUtil {
     }
 }
 
-let dataStore = createOrGet(DataStoreUtil, TAG);
+let dataStore: DataStoreUtil = stashOrGetObject(new DataStoreUtil(), TAG);
 
 export default dataStore as DataStoreUtil;
 

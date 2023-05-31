@@ -19,10 +19,10 @@ import { GlobalContext } from '../utils/GlobalContext';
 const TAG = "SingleInstanceHelper";
 let globalThis = GlobalContext.getContext();
 
-export default function createOrGet<T>(objectClass: { new(): T }, storageKey: string): T {
+export default function stashOrGetObjectObject<T>(objectClass: object, storageKey: string): T {
     if (!Boolean(globalThis.getObject(storageKey)).valueOf()) {
-        globalThis.setObject(storageKey, new objectClass());
+        globalThis.setObject(storageKey, objectClass);
         Log.debug(TAG, "Create key of " + storageKey);
     }
-    return globalThis.getObject(storageKey);
+    return globalThis.getObject(storageKey) as T;
 }

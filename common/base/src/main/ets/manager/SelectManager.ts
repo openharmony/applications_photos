@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import createOrGet from '../utils/SingleInstanceUtils';
+import stashOrGetObject from '../utils/SingleInstanceUtils';
 
 const TAG = ""
 
@@ -36,6 +36,6 @@ class SelectManager {
     }
 }
 
-let selectManager = createOrGet(SelectManager, TAG);
+let selectManager: SelectManager = stashOrGetObject(new SelectManager(), TAG);
 
 export default selectManager as SelectManager;

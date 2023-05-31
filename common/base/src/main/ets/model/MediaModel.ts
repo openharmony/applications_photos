@@ -16,7 +16,7 @@
 import fileIO from '@ohos.fileio';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { MediaConstants } from '../constants/MediaConstants';
-import createOrGet from '../utils/SingleInstanceUtils';
+import stashOrGetObject from '../utils/SingleInstanceUtils';
 import { Log } from '../utils/Log';
 import { startTrace, finishTrace } from '../utils/TraceControllerUtils';
 import { hiSysEventDataQueryTimedOut } from '../utils/hisysEventUtil';
@@ -426,6 +426,6 @@ class MediaModel {
     }
 }
 
-let mediaModel = createOrGet(MediaModel, TAG);
+let mediaModel: MediaModel = stashOrGetObject(new MediaModel(), TAG);
 
 export default mediaModel as MediaModel;
