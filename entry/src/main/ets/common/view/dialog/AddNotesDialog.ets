@@ -70,7 +70,7 @@ export struct AddNotesDialog {
                     }.height($r('app.float.icon_size'))
                     .width($r('app.float.icon_size'))
                     .onClick(() => {
-                        let check = /[\\.\\\\/:*?<>\"|\[\]{}\s]/;
+                        let check: RegExp = new RegExp("/[\\.\\\\/:*?<>\"|\[\]{}\s]/");
                         let passCheck = check.test(this.inputNote)
                         if (passCheck) {
                             getResourceString($r('app.string.specific_characters_not_supported'))
