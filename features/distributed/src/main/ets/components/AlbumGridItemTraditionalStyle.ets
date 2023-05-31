@@ -24,6 +24,15 @@ import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 const TAG = "AlbumGridItemTraditionalStyle"
 
+class Obj {
+    width: number = 0;
+    height: number = 0;
+    componentWidth: number = 0;
+    componentHeight: number = 0;
+}
+
+const obj = new Obj;
+
 // Traditional style grid item for distributed album set page
 // There is no selection mode.
 @Component
@@ -117,12 +126,7 @@ export struct AlbumGridItemTraditionalStyle {
                                 Log.debug(TAG, 'album is empty or its cover is error');
                                 this.isEmptyAlbum = true;
                             })
-                            .onComplete((msg: {
-                                width: number,
-                                height: number,
-                                componentWidth: number,
-                                componentHeight: number
-                            }) => {
+                            .onComplete((msg: typeof obj) => {
                                 Log.debug(TAG, `image load success.Size: ${msg.componentWidth}x${msg.componentHeight}`);
                             })
                     }

@@ -21,6 +21,15 @@ import { PeerDataItem } from '@ohos/base/src/main/ets/data/PeerDataItem';
 
 const TAG = "DistributedAlbumGriItem"
 
+class Obj {
+    width: number = 0;
+    height: number = 0;
+    componentWidth: number = 0;
+    componentHeight: number = 0;
+}
+
+const obj = new Obj;
+
 @Component
 export struct DistributedAlbumGriItem {
     item: PeerDataItem
@@ -67,12 +76,7 @@ export struct DistributedAlbumGriItem {
                         Log.error(TAG, 'album is empty or its cover is error');
                         this.isEmptyAlbum = true;
                     })
-                    .onComplete((msg: {
-                        width: number,
-                        height: number,
-                        componentWidth: number,
-                        componentHeight: number
-                    }) => {
+                    .onComplete((msg: typeof obj) => {
                         Log.debug(TAG, `image load success. Size: ${msg.width}x${msg.height},\
                             componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
                     })
@@ -85,12 +89,7 @@ export struct DistributedAlbumGriItem {
                         Log.error(TAG, 'album is empty or its cover is error');
                         this.isEmptyAlbum = true;
                     })
-                    .onComplete((msg: {
-                        width: number,
-                        height: number,
-                        componentWidth: number,
-                        componentHeight: number
-                    }) => {
+                    .onComplete((msg: typeof obj) => {
                         Log.debug(TAG, `image load success. Size: ${msg.width}x${msg.height},\
                             componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
                     })
