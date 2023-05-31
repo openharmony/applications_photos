@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import Want from '@ohos.application.Want';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
@@ -531,11 +531,11 @@ struct PhotoBrowser {
                 this.onBackPress();
             }
         });
-        let param = router.getParams();
+        let param: ParamsInterface = router.getParams();
         if (param) {
             Log.info(TAG, `photoBrowser start with param`);
             Log.debug(TAG, `param: ${JSON.stringify(param)}`);
-            if (param.pageFrom) {
+            if (param.pageFrom != null) {
                 this.pageFrom = parseInt(param.pageFrom.toString());
             }
             if (this.pageFrom == Constants.ENTRY_FROM.CAMERA) {
@@ -547,7 +547,7 @@ struct PhotoBrowser {
                 this.isFromViewData = true;
             }
 
-            if (param.albumInfo) {
+            if (param.albumInfo != null) {
                 this.albumInfo = param.albumInfo as SimpleAlbumDataItem;
                 this.deviceName = this.albumInfo.deviceName;
                 this.browserDataSource.setAlbumId(this.albumInfo.id)
@@ -555,7 +555,7 @@ struct PhotoBrowser {
             }
 
             let items: MediaDataItem[];
-            if (param.viewData) {
+            if (param.viewData != null) {
                 items = []
                 let uriArr: string[] = String(param.viewData).split(',');
                 for (let i = 0;i < uriArr.length; i++) {
@@ -574,9 +574,12 @@ struct PhotoBrowser {
                     this.browserDataSource.notifyDataReload();
                 })
             }
-
+            let transition: string = '';
+            if(param.transition != null) {
+                transition = param.transition.toString();
+            }
             this.photoBrowserTransition = (this.isFromCamera || this.isFromViewData)
-                ? Constants.PHOTO_TRANSITION_CAMERA : (param.transition ? param.transition.toString() : '');
+                ? Constants.PHOTO_TRANSITION_CAMERA : transition;
         } else {
             Log.info(TAG, `photoBrowser start without param`);
             if (this.entryFromHap == Constants.ENTRY_FROM_FORM_ABILITY) {

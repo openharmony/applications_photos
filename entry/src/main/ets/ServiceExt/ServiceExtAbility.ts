@@ -61,7 +61,7 @@ export default class ServiceExtAbility extends Extension {
       }
       try {
         Window.createWindow(config, (err, data) => {
-          if (err.code) {
+          if (err.code != null) {
             Log.info(TAG, "Failed to create the window. Cause : " + JSON.stringify(err));
             return;
           }
