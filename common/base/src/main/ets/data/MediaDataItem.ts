@@ -81,16 +81,16 @@ export class MediaDataItem implements DateAdded {
                 selections: this.selections,
                 selectionArgs: this.selectionArgs,
                 order: "date_added DESC LIMIT " + this.index + ",1"
-            };
+            } as MediaLib.MediaFetchOptions;
         } else {
             fetchOption = {
                 selections: MediaLib.FileKey.ID + " = ?",
                 selectionArgs: [this.id.toString()],
                 order: "date_added DESC"
-            }
+            } as MediaLib.MediaFetchOptions;
         }
         if (this.deviceId.length > 0) {
-            fetchOption['networkId'] = this.deviceId
+            fetchOption.networkId = this.deviceId
         }
         return (await mediaModel.getAllCommonMediaItem(fetchOption, false)).fileAsset
     }

@@ -123,9 +123,9 @@ export class FormController {
 
     onTriggerFormEvent(formId: string, message): void {
         Log.debug(TAG, "onTriggerFormEvent " + formId + " " + message);
-        let msgObj = JSON.parse(message);
-        let param = msgObj["params"];
-        let msg = param["message"];
+        let msgObj: Map<string, object> = JSON.parse(message);
+        let param: Map<string, object> = new Map(Object.entries(msgObj.get("params")));
+        let msg: string = param.get("message").toString();
         Log.debug(TAG, "onTriggerFormEvent " + param + " " + msg);
         if (msg == FormController.MSG_ROUTER_PHOTOS) {
             this.routerPhotoBrowser();
