@@ -5,7 +5,7 @@ export class GlobalContext {
     private _objects = new Map<string, any>();
 
     public static getContext(): GlobalContext {
-        if (!GlobalContext.instance) {
+        if (!Boolean(GlobalContext.instance).valueOf()) {
             GlobalContext.instance = new GlobalContext();
         }
         return GlobalContext.instance;
