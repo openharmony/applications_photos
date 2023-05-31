@@ -12,4 +12,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export {MainPage} from './src/main/ets/components/MainPage/MainPage'
+import {MainPage} from './src/main/ets/components/MainPage/MainPage'
