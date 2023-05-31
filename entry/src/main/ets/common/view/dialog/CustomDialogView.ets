@@ -62,7 +62,7 @@ export struct CustomDialogView {
         singlePhoto: null,
         doSameFunc: null
     };
-    @Provide cancelMessage: Resource = $r('app.string.common_place_holder', String(''));
+    @State cancelMessage: Resource = $r('app.string.common_place_holder', String(''));
     @Provide renameFileName: string = '';
     @Provide isDistributedAlbum: boolean = false;
     @Provide mediaDetails: MediaDetails = {
@@ -148,7 +148,9 @@ export struct CustomDialogView {
         customStyle: true
     });
     cancelDialogController: CustomDialogController = new CustomDialogController({
-        builder: CancelOperationDialog(),
+        builder: CancelOperationDialog({
+            cancelMessage: $cancelMessage
+        }),
         autoCancel: false,
         alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
         offset: {
