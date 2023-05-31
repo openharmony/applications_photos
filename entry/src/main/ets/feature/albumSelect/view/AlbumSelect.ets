@@ -15,7 +15,7 @@
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import {
     AlbumSelectGridItemNewStyle
 } from '@ohos/selectAlbums/src/main/ets/components/AlbumSelectGridItemNewStyle';
@@ -75,14 +75,17 @@ struct AlbumSelect {
         this.gridColumnsCount = UiUtil.getAlbumGridCount(false);
         Log.info(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
 
-        let param = router.getParams();
+        let param: ParamsInterface = router.getParams();
         if (param) {
-            if (param.isNewAlbum) {
+            if (param.isNewAlbum != null && param.isNewAlbum == true) {
                 AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, true);
             } else {
                 AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, false);
             }
-            let albumInfo: SimpleAlbumDataItem = param.albumInfo ? JSON.parse(param.albumInfo.toString()) : undefined;
+            let albumInfo: SimpleAlbumDataItem = undefined;
+            if(param.albumInfo != null) {
+                albumInfo = JSON.parse(param.albumInfo.toString());
+            }
             if (albumInfo) {
                 this.albumsDataSource.setBlackList([albumInfo.id, MediaConstants.ALBUM_ID_RECYCLE]);
                 Log.debug(TAG, `the album Id is: ${albumInfo.id}`);

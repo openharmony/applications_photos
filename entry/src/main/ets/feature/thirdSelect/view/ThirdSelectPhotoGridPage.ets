@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent';
 import { Action } from '../../../common/view/browserOperation/Action';
@@ -124,11 +124,11 @@ struct ThirdSelectPhotoGridPage {
     }
 
     aboutToAppear(): void {
-        let param = router.getParams();
+        let param: ParamsInterface = router.getParams();
         if (param != null) {
             Log.info(TAG, `itemId: ${param.itemId}`);
             this.title = param.itemDisplayName;
-            if (param.itemId) {
+            if (param.itemId != null) {
                 this.groupDataSource.setAlbumId(param.itemId.toString());
                 this.albumId = param.itemId.toString()
             }
@@ -138,7 +138,7 @@ struct ThirdSelectPhotoGridPage {
             if (Boolean(param.maxSelectCount).valueOf() && param.maxSelectCount > 0) {
                 this.maxSelectCount = new Number(param.maxSelectCount).valueOf() || 0
             }
-            if (param.filterMediaType) {
+            if (param.filterMediaType != null) {
                 this.filterMediaType = new Number(param.filterMediaType).valueOf();
                 Log.info(TAG, `filterMediaType: ${this.filterMediaType}`)
             }

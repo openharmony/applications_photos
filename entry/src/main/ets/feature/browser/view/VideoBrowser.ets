@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action'
@@ -60,8 +60,8 @@ struct VideoBrowser {
 
     aboutToAppear() {
         startTrace('VideoBrowserAboutToAppear');
-        let param = router.getParams();
-        param.uri && (this.uri = param.uri.toString());
+        let param: ParamsInterface = router.getParams();
+        if(param.uri != null ) this.uri = param.uri.toString();
         this.dateAdded = new Number(param.dateAdded).valueOf() || 0;
         this.previewUri = param.previewUri;
         if (this.uri == undefined) {

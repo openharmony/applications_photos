@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { ToolBar } from '../../../common/view/actionbar/ToolBar';
@@ -341,8 +341,10 @@ struct PhotoGridPage {
     onPageShow() {
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.isShow = true;
-        let params = router.getParams();
-        if (this.routerStart && params && params.pageType && params.albumInfo) {
+        let params: ParamsInterface = router.getParams();
+        if (this.routerStart && params != null
+            && params.pageType != null
+            && params.albumInfo != null) {
             Log.info(TAG, 'MediaOperation back');
             switch (params.pageType) {
                 case MediaOperationType.Move:
@@ -432,17 +434,19 @@ struct PhotoGridPage {
 
     aboutToAppear(): void {
         startTrace('PhotoGridPageAboutToAppear');
-        let param = router.getParams();
-        if (param.item) {
+        let param: ParamsInterface = router.getParams();
+        if (param.item != undefined && param.item != null) {
             Log.debug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
             this.albumInfo = JSON.parse(param.item.toString()) as SimpleAlbumDataItem;
             this.title = this.albumInfo.displayName;
             this.barModel.setAlbumId(this.albumInfo.id)
             this.groupDataSource.setAlbumId(this.albumInfo.id)
-            if (param.isDistributedAlbum) {
+            if (param.isDistributedAlbum != null) {
                 this.isDistributedAlbum = new Boolean(param.isDistributedAlbum).valueOf();
                 this.barModel.setDistributedAlbum(this.isDistributedAlbum)
-                param.distributedAlbumName && (this.title = param.distributedAlbumName.toString());
+                if (param.distributedAlbumName != null) {
+                    this.title = param.distributedAlbumName.toString();
+                }
                 this.groupDataSource.setDeviceId(this.albumInfo.deviceId);
             }
         }

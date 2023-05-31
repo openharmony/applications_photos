@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ThirdAlbumGridItem } from '@ohos/third/src/main/ets/components/ThirdAlbumGridItem';
 import { Action } from '../../../common/view/browserOperation/Action';
@@ -75,11 +75,13 @@ struct ThirdSelectAlbumSetPage {
     }
 
     aboutToAppear(): void {
-        let param = router.getParams();
+        let param: ParamsInterface = router.getParams();
         if (param != null) {
             this.bundleName = new String(param.bundleName).valueOf();
             this.isMultiPick = new Boolean(param.isMultiPick).valueOf();
-            param.type && (this.type = param.type.toString());
+            if(param.type != null) {
+                this.type = param.type.toString();
+            }
             if (param.isFromFa != undefined || param.isFromFa != null) {
                 this.isFromFa = new Boolean(param.isFromFa).valueOf();
             }

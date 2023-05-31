@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType';
 import { MediaOperationActionBar } from './MediaOperationActionBar';
@@ -53,10 +53,10 @@ struct MediaOperationPage {
 
     aboutToAppear(): void {
         let blackList = Array.from(MediaConstants.ALBUM_DISABLE_COPY_LIST)
-        let param = router.getParams();
+        let param: ParamsInterface = router.getParams();
         if (param) {
             this.pageType = param.pageType.toString();
-            if (param.albumInfo) {
+            if (param.albumInfo != null) {
                 this.albumInfo = JSON.parse(param.albumInfo.toString()) as SimpleAlbumDataItem;
                 this.sourceAlbumId = this.albumInfo.id;
                 blackList.push(this.sourceAlbumId)

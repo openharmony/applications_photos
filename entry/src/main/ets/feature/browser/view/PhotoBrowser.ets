@@ -46,7 +46,6 @@ import { RenameMenuOperation } from '@ohos/browser/src/main/ets/operation/Rename
 import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
-import { MediaLibDataChangeCallback } from '@ohos/base/src/main/ets/interface/MediaLibDataChangeCallback';
 import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
 import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
 import mMultimodalInputManager from '@ohos/base/src/main/ets/manager/MultimodalInputManager';
@@ -95,7 +94,7 @@ struct PhotoBrowser {
     // swiper currentIndex, there may not be onChanged callback during data refresh, so mediaItem cannot be saved
     @Provide('transitionIndex') currentIndex: number = 0;
     controller: SwiperController = new SwiperController();
-    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this as MediaLibDataChangeCallback);
+    private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
 
     // The global Broadcast of the application process. Event registration and destruction should be paired
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
@@ -693,12 +692,16 @@ struct PhotoBrowser {
                 Log.warn(TAG, 'MediaOperation currentPhoto is undefined');
                 return;
             }
+            let albumInfo: string = '';
+            if(params.albumInfo != null) {
+                albumInfo = params.albumInfo.toString();
+            }
             switch (params.pageType) {
                 case MediaOperationType.Move:
                     this.onMoveEnd = this.onMoveEnd.bind(this);
                     menuContext.withItems([currentPhoto])
                         .withBroadCast(this.broadCast)
-                        .withAlbumInfo(JSON.parse(params.albumInfo ? params.albumInfo.toString() : '') as SimpleAlbumDataItem)
+                        .withAlbumInfo(JSON.parse(albumInfo) as SimpleAlbumDataItem)
                         .withOperationEndCallback(this.onMoveEnd);
                     menuOperation = new MoveMenuOperation(menuContext);
                     break;
@@ -706,7 +709,7 @@ struct PhotoBrowser {
                     this.onCopyEnd = this.onCopyEnd.bind(this);
                     menuContext.withItems([currentPhoto])
                         .withBroadCast(this.broadCast)
-                        .withAlbumInfo(JSON.parse(params.albumInfo ? params.albumInfo.toString() : '') as SimpleAlbumDataItem)
+                        .withAlbumInfo(JSON.parse(albumInfo) as SimpleAlbumDataItem)
                         .withOperationEndCallback(this.onCopyEnd);
                     menuOperation = new CopyMenuOperation(menuContext);
                     break;
