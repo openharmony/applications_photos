@@ -31,7 +31,7 @@ export struct CancelOperationDialog {
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
     controller: CustomDialogController;
-    @Consume cancelMessage: Resource;
+    @Link cancelMessage: Resource;
     @Consume broadCast: Broadcast;
     @Consume deleteProgress: number;
     @Consume cancelParam: CancelParam;
