@@ -44,10 +44,10 @@ export default class ServiceExtAbility extends Extension {
       return;
     }
     mediaModel.onCreate(this.context);
-    let wantParam: {[key:string]: object} = want.parameters;
-    let uris: string[] | null = wantParam?.uris as string[];
-    let appName: string = wantParam?.appName as unknown as string;
-    Log.info(TAG, "get delete data : " + JSON.stringify(wantParam));
+
+    let uris: string[] | null = want.parameters?.uris as string[];
+    let appName: string = want.parameters?.appName as unknown as string;
+    Log.info(TAG, "get delete data : " + JSON.stringify(want.parameters));
     if (uris == undefined || uris.length ===0) {
       return;
     }
