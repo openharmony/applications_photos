@@ -93,7 +93,7 @@ export class EventPipeline {
     private height: number;
 
     // Large display control width
-    private componentWidth = vp2px(screenManager.getWinWidth());
+    private componentWidth: number = vp2px(screenManager.getWinWidth());
 
     // Large display control height
     private componentHeight = vp2px(screenManager.getWinHeight());
