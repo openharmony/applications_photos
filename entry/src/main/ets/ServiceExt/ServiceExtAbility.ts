@@ -17,7 +17,7 @@
 
 import display from '@ohos.display';
 import Extension from '@ohos.app.ability.ServiceExtensionAbility';
-import Window from '@ohos.window';
+import window from '@ohos.window';
 import dialogRequest from '@ohos.app.ability.dialogRequest';
 import deviceInfo from '@ohos.deviceInfo';
 import bundleManager from '@ohos.bundle.bundleManager';
@@ -54,18 +54,18 @@ export default class ServiceExtAbility extends Extension {
     AppStorage.SetOrCreate("uris", uris);
     AppStorage.SetOrCreate("appName", appName);
 
-    let windowClass = this.globalThis.getObject("windowClass");
+    let windowClass: window.Window = this.globalThis.getObject("windowClass") as window.Window;
     try {
       let config = {
-        name: "DeleteDialog " + appName + Math.random(), windowType: Window.WindowType.TYPE_DIALOG, ctx: this.context
+        name: "DeleteDialog " + appName + Math.random(), windowType: window.WindowType.TYPE_DIALOG, ctx: this.context
       }
       try {
-        Window.createWindow(config, (err, data) => {
+        window.createWindow(config, (err, data) => {
           if (err.code != null) {
             Log.info(TAG, "Failed to create the window. Cause : " + JSON.stringify(err));
             return;
           }
-          windowClass = data;
+          windowClass = data as window.Window;
           Log.info(TAG, "Success ded in creating the window. Data : " + JSON.stringify(data));
           try {
             let requestInfo = dialogRequest.getRequestInfo(want);

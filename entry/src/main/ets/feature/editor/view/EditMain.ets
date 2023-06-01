@@ -36,7 +36,7 @@ import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 struct Edit {
     private TAG: string = 'Edit'
     private globalThis = GlobalContext.getContext();
-    private mediaItem: MediaDataItem = this.globalThis.getObject("EditorMediaItem");
+    private mediaItem: MediaDataItem = this.globalThis.getObject("EditorMediaItem") as MediaDataItem;
     @Provide editorManager: PhotoEditorManager = PhotoEditorManager.getInstance();
     @Provide('compare') isCompare: boolean = false;
     @Provide('angle') rotateAngle: number = 0;

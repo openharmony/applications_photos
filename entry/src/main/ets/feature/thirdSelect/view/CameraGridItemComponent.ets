@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import common from '@ohos.app.ability.common';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import WantConstant from '@ohos.ability.wantConstant';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
@@ -67,16 +68,16 @@ export struct CameraGridItemComponent {
     .justifyContent(FlexAlign.Center)
     .alignItems(HorizontalAlign.Center)
     .onClick((event: ClickEvent) => {
-      this.jumpCameraTakephoto().then((result) => {
+      this.jumpCameraTakephoto().then((result: common.AbilityResult) => {
         Log.info(TAG, `resourceUri = ${result?.want?.parameters?.resourceUri}`);
-        this.resultUri = result?.want?.parameters?.resourceUri;
+        this.resultUri = result?.want?.parameters?.resourceUri as string;
       }).catch((err) => {
         Log.error(TAG, `jumpCameraTakephoto err: ${err}`);
       });
     })
   }
 
-  private async jumpCameraTakephoto(): Promise<any> {
+  private async jumpCameraTakephoto(): Promise<common.AbilityResult> {
     // Currently, only photo pick is supported.
     let action = this.filterMediaType == MediaConstants.SELECT_TYPE_VIDEO
       ? WantConstant.Action.ACTION_IMAGE_CAPTURE
@@ -94,8 +95,8 @@ export struct CameraGridItemComponent {
       }
     };
     Log.debug(TAG, `jump camera want: ${JSON.stringify(want)}`);
-    let result = await this.globalThis.getObject("appContext").startAbilityForResult(want);
-    return result;
+    let appContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
+    return await appContext.startAbilityForResult(want);
   }
 
   private setPickResult(uri: string): void {
@@ -111,7 +112,8 @@ export struct CameraGridItemComponent {
         }
       }
     };
-    this.globalThis.getObject("appContext").terminateSelfWithResult(abilityResult).then((result) => {
+    let appContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
+    appContext.terminateSelfWithResult(abilityResult).then((result) => {
       Log.info(TAG, `terminateSelf result: ${result}`);
     });
   }

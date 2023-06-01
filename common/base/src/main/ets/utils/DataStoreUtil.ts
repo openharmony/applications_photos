@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 import preferences from '@ohos.data.preferences';
+import common from '@ohos.app.ability.common';
 import { Log } from '../utils/Log';
 import createOrGet from './SingleInstanceUtils';
 import { GlobalContext } from '../utils/GlobalContext';
@@ -43,7 +44,7 @@ class DataStoreUtil {
             return;
         }
         try {
-            let context = this.globalThis.getObject("applicationContext");
+            let context: common.Context = this.globalThis.getObject("applicationContext") as common.Context;
             this.preferences = await preferences.getPreferences(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE);
             Log.info(TAG, "init preferences " + preferences);
         } catch (err) {
@@ -125,7 +126,7 @@ class DataStoreUtil {
 
     public async  removeCache(): Promise<void> {
         Log.info(TAG,'removeCache start!');
-        let context = this.globalThis.getObject("applicationContext");
+        let context: common.Context = this.globalThis.getObject("applicationContext") as common.Context;
         await preferences.removePreferencesFromCache(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE).then((): void => {
             Log.info(TAG, "this.preferences = " + this.preferences);
             this.preferences = undefined;
