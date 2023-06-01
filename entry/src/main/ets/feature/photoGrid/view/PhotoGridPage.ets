@@ -107,94 +107,78 @@ struct PhotoGridPage {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
-        switch (action) {
-            case Action.BACK:
-                if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
-                    this.routerAlbumSetPage();
-                } else {
-                    router.back();
-                }
-                break;
-            case Action.CANCEL:
+        if (action == Action.BACK) {
+            if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
+                this.routerAlbumSetPage();
+            } else {
+                router.back();
+            }
+        } else if (action == Action.CANCEL) {
                 this.onModeChange();
-                break;
-            case Action.SELECT_ALL:
-            case Action.DESELECT_ALL:
-                this.isAllSelected = !this.groupDataSource.isSelect()
-                this.groupDataSource.setSelect(this.isAllSelected)
-                this.onSelect()
-                break;
-            case Action.DELETE:
-                menuContext = new MenuContext();
-                this.onDeleteStart = this.onDeleteStart.bind(this);
-                this.onDeleteEnd = this.onDeleteEnd.bind(this);
-                menuContext
-                    .withDeletePageFromType(BroadcastConstants.DELETE_FROM_GRID)
-                    .withAlbumId(this.albumInfo.id)
-                    .withDataSource(this.groupDataSource)
-                    .withOperationStartCallback(this.onDeleteStart)
-                    .withOperationEndCallback(this.onDeleteEnd)
-                    .withBroadCast(this.broadCast)
-                menuOperation = new BatchDeleteMenuOperation(menuContext);
-                menuOperation.doAction();
-                break;
-            case Action.SHARE:
-                menuContext = new MenuContext();
-                menuContext.withDataSource(this.groupDataSource);
-                menuOperation = new ShareMenuOperation(menuContext);
-                menuOperation.doAction();
-                break;
-            case Action.INFO:
-                this.openDetailsDialog();
-                break;
-            case Action.CLEAR_RECYCLE:
-                menuContext = new MenuContext();
-                this.onDeleteStart = this.onDeleteStart.bind(this);
-                this.onDeleteEnd = this.onDeleteEnd.bind(this);
-                menuContext
-                    .withDataSource(this.groupDataSource)
-                    .withOperationStartCallback(this.onDeleteStart)
-                    .withOperationEndCallback(this.onDeleteEnd)
-                    .withBroadCast(this.broadCast)
-                menuOperation = new ClearRecycleMenuOperation(menuContext)
-                menuOperation.doAction();
-                break;
-            case Action.RECOVER:
-                menuContext = new MenuContext();
-                this.onDeleteStart = this.onDeleteStart.bind(this);
-                this.onDeleteEnd = this.onDeleteEnd.bind(this);
-                menuContext
-                    .withDataSource(this.groupDataSource)
-                    .withOperationStartCallback(this.onDeleteStart)
-                    .withOperationEndCallback(this.onDeleteEnd)
-                    .withBroadCast(this.broadCast)
-                menuOperation = new BatchRecoverMenuOperation(menuContext);
-                menuOperation.doAction();
-                break;
-            case Action.MOVE:
-                this.routeSelectAlbumPage(MediaOperationType.Move);
-                break;
-            case Action.COPY:
-                this.routeSelectAlbumPage(MediaOperationType.Copy);
-                break;
-            case Action.NEW:
-                this.routeToAddMediaPage();
-                break;
-            case Action.DOWNLOAD:
-                this.onDownloadStart = this.onDownloadStart.bind(this);
-                this.onDownloadEnd = this.onDownloadEnd.bind(this);
-                menuContext = new MenuContext();
-                menuContext
-                    .withDataSource(this.groupDataSource)
-                    .withOperationStartCallback(this.onDownloadStart)
-                    .withOperationEndCallback(this.onDownloadEnd)
-                    .withBroadCast(this.broadCast)
-                    .withRemoteDevice(this.albumInfo.deviceId);
-                menuOperation = new CopyMenuOperation(menuContext);
-                menuOperation.doAction();
-                break;
-            default:
-                break;
+        } else if (action == Action.SELECT_ALL || action == Action.DESELECT_ALL) {
+            this.isAllSelected = !this.groupDataSource.isSelect()
+            this.groupDataSource.setSelect(this.isAllSelected)
+            this.onSelect()
+        } else if (action == Action.DELETE) {
+            menuContext = new MenuContext();
+            this.onDeleteStart = this.onDeleteStart.bind(this);
+            this.onDeleteEnd = this.onDeleteEnd.bind(this);
+            menuContext
+                .withDeletePageFromType(BroadcastConstants.DELETE_FROM_GRID)
+                .withAlbumId(this.albumInfo.id)
+                .withDataSource(this.groupDataSource)
+                .withOperationStartCallback(this.onDeleteStart)
+                .withOperationEndCallback(this.onDeleteEnd)
+                .withBroadCast(this.broadCast)
+            menuOperation = new BatchDeleteMenuOperation(menuContext);
+            menuOperation.doAction();
+        } else if (action == Action.SHARE) {
+            menuContext = new MenuContext();
+            menuContext.withDataSource(this.groupDataSource);
+            menuOperation = new ShareMenuOperation(menuContext);
+            menuOperation.doAction();
+        } else if (action == Action.INFO) {
+            this.openDetailsDialog();
+        } else if (action == Action.CLEAR_RECYCLE) {
+            menuContext = new MenuContext();
+            this.onDeleteStart = this.onDeleteStart.bind(this);
+            this.onDeleteEnd = this.onDeleteEnd.bind(this);
+            menuContext
+                .withDataSource(this.groupDataSource)
+                .withOperationStartCallback(this.onDeleteStart)
+                .withOperationEndCallback(this.onDeleteEnd)
+                .withBroadCast(this.broadCast)
+            menuOperation = new ClearRecycleMenuOperation(menuContext)
+            menuOperation.doAction();
+        } else if (action == Action.RECOVER) {
+            menuContext = new MenuContext();
+            this.onDeleteStart = this.onDeleteStart.bind(this);
+            this.onDeleteEnd = this.onDeleteEnd.bind(this);
+            menuContext
+                .withDataSource(this.groupDataSource)
+                .withOperationStartCallback(this.onDeleteStart)
+                .withOperationEndCallback(this.onDeleteEnd)
+                .withBroadCast(this.broadCast)
+            menuOperation = new BatchRecoverMenuOperation(menuContext);
+            menuOperation.doAction();
+        } else if (action == Action.MOVE) {
+            this.routeSelectAlbumPage(MediaOperationType.Move);
+        } else if (action == Action.COPY) {
+            this.routeSelectAlbumPage(MediaOperationType.Copy);
+        } else if (action == Action.NEW) {
+            this.routeToAddMediaPage();
+        } else if (action == Action.DOWNLOAD) {
+            this.onDownloadStart = this.onDownloadStart.bind(this);
+            this.onDownloadEnd = this.onDownloadEnd.bind(this);
+            menuContext = new MenuContext();
+            menuContext
+                .withDataSource(this.groupDataSource)
+                .withOperationStartCallback(this.onDownloadStart)
+                .withOperationEndCallback(this.onDownloadEnd)
+                .withBroadCast(this.broadCast)
+                .withRemoteDevice(this.albumInfo.deviceId);
+            menuOperation = new CopyMenuOperation(menuContext);
+            menuOperation.doAction();
         }
     }
 
@@ -346,15 +330,10 @@ struct PhotoGridPage {
             && params.pageType != null
             && params.albumInfo != null) {
             Log.info(TAG, 'MediaOperation back');
-            switch (params.pageType) {
-                case MediaOperationType.Move:
-                    this.moveOperation(JSON.parse(params.albumInfo.toString()));
-                    break;
-                case MediaOperationType.Copy:
-                    this.copyOperation(JSON.parse(params.albumInfo.toString()));
-                    break;
-                default:
-                    break;
+            if (params.pageType == MediaOperationType.Move) {
+                this.moveOperation(JSON.parse(params.albumInfo.toString()));
+            } else if (params.pageType == MediaOperationType.Copy) {
+                this.copyOperation(JSON.parse(params.albumInfo.toString()));
             }
         }
         this.routerStart = false;

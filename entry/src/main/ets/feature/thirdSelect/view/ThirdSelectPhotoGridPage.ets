@@ -81,36 +81,30 @@ struct ThirdSelectPhotoGridPage {
 
     onMenuClicked(action: Action) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
-        switch (action) {
-            case Action.BACK:
-                router.back();
-            case Action.CANCEL:
-                Log.info(TAG, 'click cancel');
-                let abilityResult = {
-                    'resultCode': 0,
-                    'want': {
-                        'parameters': {
-                            'select-item-list': []
-                        }
+        if (action == Action.BACK) {
+            router.back();
+        } else if (action == Action.CANCEL) {
+            Log.info(TAG, 'click cancel');
+            let abilityResult = {
+                'resultCode': 0,
+                'want': {
+                    'parameters': {
+                        'select-item-list': []
                     }
-                };
-                terminateSelfWithResult(abilityResult)
-                break;
-            case Action.OK:
-                this.setPickResult();
-                break;
-            case Action.NAVIGATION_ALBUMS:
-                router.push({
-                    uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
-                    params: {
-                        isMultiPick: this.isMultiPick,
-                        isFromFa: this.isFromFa,
-                        isFromFaPhoto: true,
-                    }
-                });
-                break;
-            default:
-                break;
+                }
+            };
+            terminateSelfWithResult(abilityResult)
+        } else if (action == Action.OK) {
+            this.setPickResult();
+        } else if (action == Action.NAVIGATION_ALBUMS) {
+            router.push({
+                uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
+                params: {
+                    isMultiPick: this.isMultiPick,
+                    isFromFa: this.isFromFa,
+                    isFromFaPhoto: true,
+                }
+            });
         }
     }
 

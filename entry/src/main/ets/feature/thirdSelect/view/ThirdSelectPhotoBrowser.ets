@@ -173,24 +173,20 @@ struct ThirdSelectPhotoBrowser {
 
     onMenuClicked(action: Action) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
-        switch (action) {
-            case Action.BACK:
-                this.onBackPress();
-                return;
-            case Action.MATERIAL_SELECT:
-                Log.info(TAG, 'click UN_SELECTED');
-                this.selectStateChange();
-                return;
-            case Action.SELECTED:
-                Log.info(TAG, 'click SELECTED');
-                this.selectStateChange();
-                return;
-            case Action.OK:
-                Log.info(TAG, 'click OK');
-                this.setPickResult();
-                break;
-            default:
-                break;
+        if (action == Action.BACK) {
+            this.onBackPress();
+            return;
+        } else if (action == Action.MATERIAL_SELECT) {
+            Log.info(TAG, 'click UN_SELECTED');
+            this.selectStateChange();
+            return;
+        } else if (action == Action.SELECTED) {
+            Log.info(TAG, 'click SELECTED');
+            this.selectStateChange();
+            return;
+        } else if (action == Action.OK) {
+            Log.info(TAG, 'click OK');
+            this.setPickResult();
         }
     }
 

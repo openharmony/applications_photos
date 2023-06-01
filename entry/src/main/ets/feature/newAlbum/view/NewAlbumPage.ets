@@ -80,17 +80,14 @@ struct NewAlbumPage {
 
     onMenuClicked(action: Action) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
-        switch (action) {
-            case Action.CANCEL:
-                this.groupDataSource.setSelect(false)
-                router.back();
-                break;
-            case Action.OK:
-                if (this.groupDataSource.getSelectedCount() == 0) {
-                    Log.info(TAG, `onMenuClicked, action: ${action.actionID}, count = 0`);
-                    break;
-                }
-                Log.info(TAG, `onMenuClicked, action: ${action.actionID} newAlbum: ${this.isNewAlbum}`);
+        if (action == Action.CANCEL) {
+            this.groupDataSource.setSelect(false)
+            router.back();
+	} else if (action == Action.OK) {
+            if (this.groupDataSource.getSelectedCount() == 0) {
+                Log.info(TAG, `onMenuClicked, action: ${action.actionID}, count = 0`);
+            } else {
+		Log.info(TAG, `onMenuClicked, action: ${action.actionID} newAlbum: ${this.isNewAlbum}`);
                 if (this.isNewAlbum) {
                     AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.groupDataSource.getSelectedItems() as MediaDataItem[]);
                     this.groupDataSource.setSelect(false)
@@ -104,9 +101,7 @@ struct NewAlbumPage {
                 } else {
                     this.copyOperation();
                 }
-                break;
-            default:
-                break;
+	    }
         }
     }
 

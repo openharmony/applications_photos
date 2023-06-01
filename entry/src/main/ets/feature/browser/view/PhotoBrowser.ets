@@ -125,114 +125,107 @@ struct PhotoBrowser {
         let menuOperation: MenuOperation;
         let menuContext: MenuContext = new MenuContext();
         let currentPhoto = this.getCurrentPhoto();
-        switch (action) {
-            case Action.BACK:
-                this.onBackPress();
+        if (action == Action.BACK) {
+            this.onBackPress();
+            return;
+        } else if (action == Action.INFO) {
+            if (currentPhoto == undefined) {
                 return;
-            case Action.INFO:
-                if (currentPhoto == undefined) {
-                    return;
-                }
-                this.broadCast.emit(BroadcastConstants.SHOW_DETAIL_DIALOG, [currentPhoto, this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED]);
+            }
+            this.broadCast.emit(BroadcastConstants.SHOW_DETAIL_DIALOG, [currentPhoto, this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED]);
+            return;
+        } else if (action == Action.SHARE) {
+            if (currentPhoto == undefined) {
                 return;
-            case Action.SHARE:
-                if (currentPhoto == undefined) {
-                    return;
-                }
-                let want: Want = {
-                    'action': 'com.huawei.intent.action.hwCHOOSER',
-                    'parameters': {
-                        'ability.want.params.INTENT': {
-                            'action': 'ability.intent.SEND_DATA',
-                            'type': '*/*',
-                            'parameters': {
-                                'ability.params.stream': currentPhoto.uri
-                            }
+            }
+            let want: Want = {
+                'action': 'com.huawei.intent.action.hwCHOOSER',
+                'parameters': {
+                    'ability.want.params.INTENT': {
+                        'action': 'ability.intent.SEND_DATA',
+                        'type': '*/*',
+                        'parameters': {
+                            'ability.params.stream': currentPhoto.uri
                         }
                     }
                 }
-                startAbility(want)
+            }
+            startAbility(want)
+            return;
+        } else if (action == Action.NOT_FAVORITE || action == Action.FAVORITE) {
+            if (currentPhoto == undefined) {
                 return;
-            case Action.NOT_FAVORITE:
-            case Action.FAVORITE:
-                if (currentPhoto == undefined) {
-                    return;
-                }
-                currentPhoto.setFavor().then((isSuccess: boolean) => this.setFavourite(isSuccess))
+            }
+            currentPhoto.setFavor().then((isSuccess: boolean) => this.setFavourite(isSuccess))
+            return;
+        } else if (action == Action.DELETE) {
+            if (currentPhoto == undefined) {
                 return;
-            case Action.DELETE:
-                if (currentPhoto == undefined) {
-                    return;
-                }
-                menuContext.withItems([currentPhoto])
-                    .withDeletePageFromType(BroadcastConstants.DELETE_FROM_BROWSER)
-                    .withAlbumId(this.albumInfo && this.albumInfo.id)
-                    .withBroadCast(this.broadCast)
-                    .withOperationEndCallback(this.onDeleteEnd.bind(this))
-                menuOperation = new BatchDeleteMenuOperation(menuContext);
-                break;
-            case Action.CLEAR_RECYCLE:
-                if (currentPhoto == undefined) {
-                    return;
-                }
-                menuContext.withItems([currentPhoto])
-                    .withBroadCast(this.broadCast)
-                    .withOperationEndCallback(this.onDeleteEnd.bind(this))
-                menuOperation = new ClearRecycleMenuOperation(menuContext);
-                break;
-            case Action.RECOVER:
-                if (currentPhoto == undefined) {
-                    return;
-                }
-                menuContext = new MenuContext();
-                this.onDeleteEnd = this.onDeleteEnd.bind(this);
-                menuContext.withItems([currentPhoto])
-                    .withOperationEndCallback(this.onDeleteEnd)
-                    .withBroadCast(this.broadCast)
-                menuOperation = new BatchRecoverMenuOperation(menuContext);
-                break;
-            case Action.GOTO_PHOTOS:
-                menuContext.withJumpSourceToMain(this.jumpSourceToMain);
-                menuOperation = new GotoPhotosMenuOperation(menuContext);
-                break;
-            case Action.EDIT:
-                if (currentPhoto == undefined || currentPhoto.size == 0) {
-                    return;
-                }
-                this.isToEdit = true
-                this.globalThis.setObject("EditorMediaItem", currentPhoto);
-                router.push({
-                    uri: 'feature/editor/view/EditMain'
-                })
+            }
+            menuContext.withItems([currentPhoto])
+                .withDeletePageFromType(BroadcastConstants.DELETE_FROM_BROWSER)
+                .withAlbumId(this.albumInfo && this.albumInfo.id)
+                .withBroadCast(this.broadCast)
+                .withOperationEndCallback(this.onDeleteEnd.bind(this))
+            menuOperation = new BatchDeleteMenuOperation(menuContext);
+        } else if (action == Action.CLEAR_RECYCLE) {
+            if (currentPhoto == undefined) {
                 return;
-            case Action.RENAME:
-                if (currentPhoto == undefined) {
-                    return;
-                }
-                menuContext.withItems([currentPhoto])
-                    .withBroadCast(this.broadCast)
-                    .withAlbumInfo(this.albumInfo);
-                menuOperation = new RenameMenuOperation(menuContext);
-                break;
-            case Action.ROTATE:
-                if (currentPhoto == undefined) {
-                    return;
-                }
-                currentPhoto.setOrientation().then(() => this.setOrientation())
+            }
+            menuContext.withItems([currentPhoto])
+                .withBroadCast(this.broadCast)
+                .withOperationEndCallback(this.onDeleteEnd.bind(this))
+            menuOperation = new ClearRecycleMenuOperation(menuContext);
+        } else if (action == Action.RECOVER) {
+            if (currentPhoto == undefined) {
                 return;
-            case Action.MOVE:
-                this.backFromCopy = true;
-                this.routeSelectAlbumPage(MediaOperationType.Move);
+            }
+            menuContext = new MenuContext();
+            this.onDeleteEnd = this.onDeleteEnd.bind(this);
+            menuContext.withItems([currentPhoto])
+                .withOperationEndCallback(this.onDeleteEnd)
+                .withBroadCast(this.broadCast)
+            menuOperation = new BatchRecoverMenuOperation(menuContext);
+        } else if (action == Action.GOTO_PHOTOS) {
+            menuContext.withJumpSourceToMain(this.jumpSourceToMain);
+            menuOperation = new GotoPhotosMenuOperation(menuContext);
+
+        } else if (action == Action.EDIT) {
+            if (currentPhoto == undefined || currentPhoto.size == 0) {
                 return;
-            case Action.COPY:
-                this.backFromCopy = true;
-                this.routeSelectAlbumPage(MediaOperationType.Copy);
+            }
+            this.isToEdit = true
+            this.globalThis.setObject("EditorMediaItem", currentPhoto);
+            router.push({
+                uri: 'feature/editor/view/EditMain'
+            })
+            return;
+        } else if (action == Action.RENAME) {
+            if (currentPhoto == undefined) {
                 return;
-            case Action.DOWNLOAD:
-                this.downLoad();
+            }
+            menuContext.withItems([currentPhoto])
+                .withBroadCast(this.broadCast)
+                .withAlbumInfo(this.albumInfo);
+            menuOperation = new RenameMenuOperation(menuContext);
+        } else if (action == Action.ROTATE) {
+            if (currentPhoto == undefined) {
                 return;
-            default:
-                return;
+            }
+            currentPhoto.setOrientation().then(() => this.setOrientation())
+            return;
+        } else if (action == Action.MOVE) {
+            this.backFromCopy = true;
+            this.routeSelectAlbumPage(MediaOperationType.Move);
+            return;
+        } else if (action == Action.COPY) {
+            this.backFromCopy = true;
+            this.routeSelectAlbumPage(MediaOperationType.Copy);
+        } else if (action == Action.DOWNLOAD) {
+            this.downLoad();
+            return;
+        } else {
+            return;
         }
         menuOperation.doAction();
     }
@@ -696,23 +689,20 @@ struct PhotoBrowser {
             if(params.albumInfo != null) {
                 albumInfo = params.albumInfo.toString();
             }
-            switch (params.pageType) {
-                case MediaOperationType.Move:
-                    this.onMoveEnd = this.onMoveEnd.bind(this);
-                    menuContext.withItems([currentPhoto])
-                        .withBroadCast(this.broadCast)
-                        .withAlbumInfo(JSON.parse(albumInfo) as SimpleAlbumDataItem)
-                        .withOperationEndCallback(this.onMoveEnd);
-                    menuOperation = new MoveMenuOperation(menuContext);
-                    break;
-                case MediaOperationType.Copy:
-                    this.onCopyEnd = this.onCopyEnd.bind(this);
-                    menuContext.withItems([currentPhoto])
-                        .withBroadCast(this.broadCast)
-                        .withAlbumInfo(JSON.parse(albumInfo) as SimpleAlbumDataItem)
-                        .withOperationEndCallback(this.onCopyEnd);
-                    menuOperation = new CopyMenuOperation(menuContext);
-                    break;
+            if (params.pageType == MediaOperationType.Move) {
+                this.onMoveEnd = this.onMoveEnd.bind(this);
+                menuContext.withItems([currentPhoto])
+                    .withBroadCast(this.broadCast)
+                    .withAlbumInfo(JSON.parse(albumInfo) as SimpleAlbumDataItem)
+                    .withOperationEndCallback(this.onMoveEnd);
+                menuOperation = new MoveMenuOperation(menuContext);
+            } else if (params.pageType == MediaOperationType.Copy) {
+                this.onCopyEnd = this.onCopyEnd.bind(this);
+                menuContext.withItems([currentPhoto])
+                    .withBroadCast(this.broadCast)
+                    .withAlbumInfo(JSON.parse(albumInfo) as SimpleAlbumDataItem)
+                    .withOperationEndCallback(this.onCopyEnd);
+                menuOperation = new CopyMenuOperation(menuContext);
             }
             menuOperation.doAction();
         }
