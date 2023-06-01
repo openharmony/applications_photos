@@ -135,14 +135,14 @@ struct FormEditorPage {
         });
     }
 
-    async saveData(albumName: string, albumId: string, displayName, index: number, isShow: boolean) {
+    async saveData(albumName: string, albumId: string, displayName: object, index: number, isShow: boolean) {
         Log.debug(TAG, `saveData start! ${albumName} ${displayName} ${index}`);
         let msgDisplayName = '';
-        if (displayName instanceof Object) {
-            Log.debug(TAG, `saveData object ${displayName}`);
-            msgDisplayName = await getResourceString(displayName);
+        if (displayName instanceof String) {
+            msgDisplayName = displayName.toString();
         } else {
-            msgDisplayName = displayName;
+            Log.debug(TAG, `saveData object ${displayName}`);
+            msgDisplayName = await getResourceString(displayName as Resource);
         }
         this.isShow = isShow;
         this.albumId = albumId;
