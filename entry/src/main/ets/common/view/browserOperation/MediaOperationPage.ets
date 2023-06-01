@@ -91,12 +91,12 @@ struct MediaOperationPage {
     onMenuClicked(action: Action) {
         Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
 
-        if (action == Action.CANCEL) {
+        if (action === Action.CANCEL) {
             router.back({
                 uri: '',
                 params: {}
             });
-        } else if (action == Action.NEW) {
+        } else if (action === Action.NEW) {
             this.createNewAlbum();
         }
     }

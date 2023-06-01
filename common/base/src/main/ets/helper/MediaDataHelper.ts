@@ -44,38 +44,33 @@ export async function setOrientation(fileAsset: MediaLib.FileAsset, orientation:
 
 function getPropertyValidOrientation(orientation: number): string {
     Log.info(TAG, "getPropertyValidOrientation " + orientation);
-    switch (orientation) {
-        case MediaConstants.ROTATE_NONE:
-            return "1";
-        case MediaConstants.ROTATE_THIRD:
-            return "8";
-        case MediaConstants.ROTATE_TWICE:
-            return "3";
-        case MediaConstants.ROTATE_ONCE:
-            return "6";
-        default:
-            return "";
+    if (orientation === MediaConstants.ROTATE_NONE) {
+        return "1";
+    } else if (orientation === MediaConstants.ROTATE_THIRD) {
+        return "8";
+    } else if (orientation === MediaConstants.ROTATE_TWICE) {
+        return "3";
+    } else if (orientation === MediaConstants.ROTATE_ONCE) {
+        return "6";
     }
+    return "";
 }
 
 export async function getAlbumDisplayName(name: string): Promise<string> {
-    switch (name) {
-        case MediaConstants.ALBUM_ID_ALL:
-            return await getResourceString($r('app.string.album_all'));
-        case MediaConstants.ALBUM_ID_VIDEO:
-            return await getResourceString($r('app.string.album_video'));
-        case MediaConstants.ALBUM_ID_RECYCLE:
-            return await getResourceString($r('app.string.album_recycle'));
-        case MediaConstants.ALBUM_ID_CAMERA:
-            return await getResourceString($r('app.string.album_camera'));
-        case MediaConstants.ALBUM_ID_FAVOR:
-            return await getResourceString($r('app.string.album_favor'));
-        case MediaConstants.ALBUM_ID_REMOTE:
-            return await getResourceString($r('app.string.album_remote_device'));
-        case MediaConstants.ALBUM_ID_SNAPSHOT:
-            return await getResourceString($r('app.string.album_screen_shot'));
-        default:
-            break;
+    if (name === MediaConstants.ALBUM_ID_ALL) {
+        return await getResourceString($r('app.string.album_all'));
+    } else if (name === MediaConstants.ALBUM_ID_VIDEO) {
+        return await getResourceString($r('app.string.album_video'));
+    } else if (name === MediaConstants.ALBUM_ID_RECYCLE) {
+        return await getResourceString($r('app.string.album_recycle'));
+    } else if (name === MediaConstants.ALBUM_ID_CAMERA) {
+        return await getResourceString($r('app.string.album_camera'));
+    } else if (name === MediaConstants.ALBUM_ID_FAVOR) {
+        return await getResourceString($r('app.string.album_favor'));
+    } else if (name === MediaConstants.ALBUM_ID_REMOTE) {
+        return await getResourceString($r('app.string.album_remote_device'));
+    } else if (name === MediaConstants.ALBUM_ID_SNAPSHOT) {
+        return await getResourceString($r('app.string.album_screen_shot'));
     }
     return null;
 }

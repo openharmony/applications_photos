@@ -48,7 +48,7 @@ export class FormController {
             "albumName": this.mediaDataManager.getCurrentAlbumName(),
             "currentIndex": this.mediaDataManager.getCurrentIndex(),
             "isShow": this.mediaDataManager.getIsShowAlbumName(),
-            "formImages": JSON.parse(`{ "${image}": ${fd} }`),
+            "formImages": JSON.parse("{ \"" + image + "\": " + fd + " }"),
             'uri': (mediaData.currentUri !== '') ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
             'albumId': mediaData.albumId,
             'currentUri': mediaData.currentUri

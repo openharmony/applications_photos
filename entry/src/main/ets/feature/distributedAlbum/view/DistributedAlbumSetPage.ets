@@ -65,7 +65,7 @@ struct DistributedAlbumSetPage {
 
     onMenuClicked(action: Action, arg: Object[]) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
-        if (action == Action.BACK) {
+        if (action === Action.BACK) {
             router.back();
         }
     }
