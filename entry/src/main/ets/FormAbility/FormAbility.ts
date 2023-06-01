@@ -64,16 +64,17 @@ export default class FormAbility extends FormExtension {
         Log.info(this.TAG, "onChangeFormVisibility, newStatus: " + JSON.stringify(newStatus));
         // 经常起来后可能直接走onChangeFormVisibility， 所以要初始化一下
         this.init();
-        this.clearCache(newStatus);
+        let ns: Map<string, number> = new Map(Object.entries(newStatus));
+        this.clearCache(ns);
     }
 
-    private async clearCache(newStatus): Promise<void> {
+    private async clearCache(newStatus: Map<string, number>): Promise<void> {
         try {
             let dataStore = DataStoreUtil.getInstance();
             await dataStore.removeCache();
             let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
-            for (let key in newStatus) {
-                Log.info(this.TAG, "onVisibilityChange, key:" + key + "  value " + newStatus[key]);
+            for (let key of newStatus.keys()) {
+                Log.info(this.TAG, "onVisibilityChange, key:" + key + "  value " + newStatus.get(key));
                 let formId = key;
                 formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE);
             }
@@ -102,4 +103,4 @@ export default class FormAbility extends FormExtension {
         mediaModel.onCreate(this.context);
         GlobalContext.getContext().setObject("appContext", this.context);
     }
-};
+}
