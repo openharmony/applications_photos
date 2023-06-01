@@ -29,8 +29,8 @@ export class DateUtil {
             'mm': time.getMinutes(),
             'ss': time.getSeconds()
         };
-
-        if (/(y+)/.test(format)) {
+        let check: RegExp = new RegExp("/(y+)/");
+        if (check.test(format)) {
             format = format.replace('yyyy', time.getFullYear().toString().substr(0));
         }
         for (let f in opts) {

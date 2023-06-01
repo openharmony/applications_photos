@@ -130,7 +130,7 @@ export struct RenameDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        let check = /[\\.\\\\/:*?<>\"|\[\]{}\s]/;
+                        let check: RegExp = new RegExp("/[\\.\\\\/:*?<>\"|\[\]{}\s]/");
                         let passCheck = check.test(this.inputName);
                         if (passCheck) {
                             getResourceString($r('app.string.specific_characters_not_supported')).then((message: string) => {
