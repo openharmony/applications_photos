@@ -13,27 +13,31 @@
  * limitations under the License.
  */
 
+type CallbackType = Function
+
 export class Broadcast {
-    private callBackArray = [];
+    private callBackArray: Map<string, CallbackType[]> = new Map();
 
     constructor() {
     }
 
-    public on(event, callback): void {
-        (this.callBackArray[event] || (this.callBackArray[event] = [])).push(callback);
+    public on(event: string, callback: CallbackType): void {
+        if(this.callBackArray.get(event) === null || this.callBackArray.get(event) === undefined){
+            this.callBackArray.set(event, [callback])
+        }
     }
 
-    public off(event, callback): void {
+    public off(event: string | null, callback: CallbackType | null): void {
         if (event == null) {
-            this.callBackArray = [];
+            this.callBackArray.clear();
         }
 
-        const cbs = this.callBackArray[event];
+        const cbs: CallbackType[] = this.callBackArray.get(event);
         if (!Boolean(cbs).valueOf()) {
             return;
         }
         if (callback == null) {
-            this.callBackArray[event] = null;
+            this.callBackArray.set(event, null);
         }
         let cb;
         let l = cbs.length;
@@ -46,15 +50,15 @@ export class Broadcast {
         }
     }
 
-    public emit(event, args: Object[]): void {
+    public emit(event: string, args: Object[]): void {
         let _self = this;
-        if (!Boolean(this.callBackArray[event]).valueOf()) {
+        if (!Boolean(this.callBackArray.get(event)).valueOf()) {
             return;
         }
 
-        let cbs: Function[] = [];
-        for (let i = 0; i < this.callBackArray[event].length; i++) {
-            cbs.push(this.callBackArray[event][i])
+        let cbs: CallbackType[] = [];
+        for (let i = 0; i < this.callBackArray.get(event).length; i++) {
+            cbs.push(this.callBackArray.get(event)[i])
         }
 
         if (cbs) {
@@ -73,7 +77,6 @@ export class Broadcast {
         this.callBackArray.forEach((array): void => {
             array.length = 0;
         });
-        this.callBackArray.length = 0;
-        this.callBackArray = [];
+        this.callBackArray.clear();
     }
 }

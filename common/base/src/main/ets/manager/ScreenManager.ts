@@ -56,6 +56,8 @@ const SCREEN_SIDEBAR: string = 'isSidebar';
 const COLUMN_MARGIN: number = 12;
 const COLUMN_GUTTER: number = 12;
 
+type CallbackType = Function
+
 class ScreenManager {
     readonly ON_WIN_SIZE_CHANGED = 'on_win_size_changed';
     readonly ON_LEFT_BLANK_CHANGED = 'on_left_blank_changed';
@@ -67,7 +69,7 @@ class ScreenManager {
     private statusBarHeight = 0;
     private naviBarHeight = 0;
     private leftBlank: number[] = [0, 0, 0, 0];
-    private events = [];
+    private events: Map<string, CallbackType[]> = new Map();
     private mainWindow: window.Window = undefined;
     private globalThis = GlobalContext.getContext();
 
@@ -101,7 +103,9 @@ class ScreenManager {
                 this.on(event[i], fn);
             }
         } else {
-            (this.events[event] || (this.events[event] = [])).push(fn);
+            if(this.events.get(event) === null || this.events.get(event) === undefined){
+                this.events.set(event, [fn])
+            }
         }
     }
 
@@ -120,7 +124,7 @@ class ScreenManager {
                 this.off(event[i], fn);
             }
         }
-        const cbs = this.events[event];
+        const cbs: CallbackType[] = this.events.get(event);
         if (!Boolean(cbs).valueOf()) {
             return;
         }
@@ -140,13 +144,13 @@ class ScreenManager {
 
     private emit(event, argument: Object[]): void {
         let _self = this;
-        if (!Boolean(this.events[event]).valueOf()) {
+        if (!Boolean(this.events.get(event)).valueOf()) {
             return;
         }
 
-        let cbs: Function[] = [];
-        for (let i = 0; i < this.events[event].length; i++) {
-            cbs.push(this.events[event][i])
+        let cbs: CallbackType[] = [];
+        for (let i = 0; i < this.events.get(event).length; i++) {
+            cbs.push(this.events.get(event)[i])
         }
 
         if (cbs) {
