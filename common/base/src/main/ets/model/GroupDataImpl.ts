@@ -178,9 +178,9 @@ export class GroupDataImpl {
             selections: baseFetchOption.selections,
             selectionArgs: baseFetchOption.selectionArgs,
             order: "date_added DESC LIMIT " + start + "," + count
-        }
+        } as MediaLib.MediaFetchOptions;
         if (this.deviceId.length > 0) {
-            fetchOption['networkId'] = this.deviceId;
+            fetchOption.networkId = this.deviceId;
         }
         if (this.albumId == MediaConstants.ALBUM_ID_FAVOR) {
             return await mediaModel.getAllFavorMediaItems(fetchOption);

@@ -21,7 +21,7 @@ import { Constants } from '../../model/common/Constants';
 export struct ThirdDeleteDialog {
   private TAG: string = 'DeleteDialog'
   @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+  @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
   @Consume dialogCallback: DialogCallback;
   @Consume dialogMessage: Resource;
   @Consume dialogDeleteMessage: Resource;

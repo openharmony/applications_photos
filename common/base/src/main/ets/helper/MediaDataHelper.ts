@@ -113,10 +113,10 @@ export async function getFetchOptions(selectType: number, albumId: string, devic
         selections: selections,
         selectionArgs: selectionArgs,
         order: order
-    };
+    } as MediaLib.MediaFetchOptions;
 
     if (deviceId.length > 0) {
-        fetchOption['networkId'] = deviceId;
+        fetchOption.networkId = deviceId;
     }
     return fetchOption;
 }
