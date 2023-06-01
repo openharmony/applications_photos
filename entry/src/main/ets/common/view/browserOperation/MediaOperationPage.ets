@@ -41,7 +41,7 @@ struct MediaOperationPage {
     @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @Provide pageType: string = MediaOperationType.Move;
     @Provide broadCast: Broadcast = new Broadcast();
-    @Provide moreMenuList: Action[] = new Array<Action>();
+    @Provide moreMenuList: Action[] = [];
     @Provide loadingFinish: boolean = false;
     @State listCardWidth: number = 0;
     isActive: boolean = false; // Whether the page is in the foreground

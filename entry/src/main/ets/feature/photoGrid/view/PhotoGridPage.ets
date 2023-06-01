@@ -67,7 +67,7 @@ struct PhotoGridPage {
     @Provide broadCast: Broadcast = new Broadcast();
     @Provide isShow: boolean = true;
     @Provide isShowBar: boolean = true;
-    @Provide moreMenuList: Array<Action> = new Array<Action>();
+    @Provide moreMenuList: Action[] = [];
     @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
     @StorageLink('isSplitMode') isSplitMode: boolean = screenManager.isSplitMode();
     @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
@@ -87,7 +87,7 @@ struct PhotoGridPage {
     private groupDataSource: GroupItemDataSource = new GroupItemDataSource();
     private isMediaLibDataChanged: boolean = true;
     @State actionBarProp: ActionBarProp = new ActionBarProp();
-    @State toolBarMenuList: Action[] = new Array<Action>();
+    @State toolBarMenuList: Action[] = [];
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar(this.title, this.isSelectedMode,

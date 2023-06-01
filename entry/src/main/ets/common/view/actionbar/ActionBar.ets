@@ -44,7 +44,7 @@ export struct ActionBar {
     }
 
     createArray(): ActionBarProp[] {
-        let actionBarProp = new Array<ActionBarProp>();
+        let actionBarProp: ActionBarProp[] = [];
         actionBarProp.push(this.actionBarProp);
         return actionBarProp;
     }

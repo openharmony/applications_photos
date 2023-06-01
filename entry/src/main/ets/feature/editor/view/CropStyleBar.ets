@@ -30,7 +30,7 @@ export struct CropStyleBar {
     @Consume cropEdit: PhotoEditCrop;
     private menuClick: Function | null = null;
     private resetClick: Function | null = null;
-    mainMenuList: Array<ActionButtonInfo> = [
+    mainMenuList: ActionButtonInfo[] = [
         new ActionButtonInfo({
             src: $r('app.media.ic_edit_photo_crop_freedom'),
             actionID: CropRatioType.RATIO_TYPE_FREE,

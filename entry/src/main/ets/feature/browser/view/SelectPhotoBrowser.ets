@@ -43,7 +43,7 @@ struct SelectPhotoBrowser {
     @Provide isSelected: boolean = true;
     @Provide isShowBar: boolean = true;
     @Provide isPullingDown: boolean = false;
-    @Provide moreMenuList: Array<Action> = new Array<Action>();
+    @Provide moreMenuList: Action[] = [];
     @Provide pageFrom: number = RouterConstants.ENTRY_FROM.NORMAL;
     @Provide canSwipe: boolean = true;
     isMultiPick = true;

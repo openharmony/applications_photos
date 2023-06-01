@@ -18,9 +18,9 @@ import { Constants } from '../../../common/model/common/Constants';
 
 export class RefreshActionMenu {
     isChanged: number;
-    menuArray: Array<ActionButtonInfo>;
+    menuArray: ActionButtonInfo[] = [];
 
-    constructor(isChanged: number, menuArray: Array<ActionButtonInfo>) {
+    constructor(isChanged: number, menuArray: ActionButtonInfo[]) {
         this.isChanged = isChanged;
         this.menuArray = menuArray;
     }

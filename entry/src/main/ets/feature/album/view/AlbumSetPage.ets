@@ -86,7 +86,7 @@ export struct AlbumSetPage {
 
     // the switch of distributed page
     @Provide('tabBarShow') isTabBarShow: boolean = false;
-    @Provide moreMenuList: Action[] = new Array<Action>();
+    @Provide moreMenuList: Action[] = [];
     private tabsController: TabsController = new TabsController();
     @State currentIndex: number = Constants.LOCAL_TAB_INDEX;
     private needNotify = false;
@@ -96,7 +96,7 @@ export struct AlbumSetPage {
     private isMediaLibDataChanged: boolean = true;
 
     @State actionBarProp: ActionBarProp = new ActionBarProp();
-    @State toolBarMenuList: Action[] = new Array<Action>();
+    @State toolBarMenuList: Action[] = [];
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar(

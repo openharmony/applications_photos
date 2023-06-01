@@ -46,7 +46,7 @@ struct AlbumSelect {
     @Provide broadCast: Broadcast = new Broadcast();
     @Provide('selectedCount') totalSelectedCount: number = 0;
     @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
-    @Provide moreMenuList: Action[] = new Array<Action>();
+    @Provide moreMenuList: Action[] = [];
     @Provide isHideScrollBar: boolean = true;
     @Provide('tabBarShow') isTabBarShow: boolean = false;
     private isActive = false;

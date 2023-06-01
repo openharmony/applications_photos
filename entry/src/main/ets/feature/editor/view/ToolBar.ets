@@ -41,7 +41,7 @@ export struct ToolBar {
     @Consume isUndo: boolean;
     private menuClick: Function | null = null;
     private immersiveClick: Function | null = null;
-    mainMenuList: Array<ActionButtonInfo> = [];
+    mainMenuList: ActionButtonInfo[] = [];
     @State @Watch('clickEvent') menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
 
     clickEvent() {

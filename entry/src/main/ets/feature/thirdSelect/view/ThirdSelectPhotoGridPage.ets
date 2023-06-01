@@ -48,7 +48,7 @@ struct ThirdSelectPhotoGridPage {
     private globalThis = GlobalContext.getContext();
     @Provide @Watch('updateActionBar') selectedCount: number = 0;
     @Provide('isSelectedMode') @Watch('updateActionBar') isMultiPick: boolean = false;
-    @Provide moreMenuList: Array<Action> = new Array<Action>();
+    @Provide moreMenuList: Action[] = [];
     @Provide broadCast: Broadcast = new Broadcast();
     @Provide isShow: boolean = true;
     isActive = false;

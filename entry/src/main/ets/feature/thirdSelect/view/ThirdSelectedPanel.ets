@@ -34,7 +34,7 @@ export struct ThirdSelectedPanel {
   onMenuClicked: Function;
   @Consume maxSelectCount: number;
   @Consume @Watch('onSelectedCountChanged') selectedCount: number;
-  @State selectedMediaDataArray: Array<MediaDataItem> = [];
+  @State selectedMediaDataArray: MediaDataItem[] = [];
   @Consume isOriginalChecked: boolean;
   @Consume broadCast: Broadcast;
   private groupDataSource: GroupItemDataSource;
