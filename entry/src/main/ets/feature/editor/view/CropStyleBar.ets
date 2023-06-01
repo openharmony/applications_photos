@@ -33,24 +33,114 @@ export struct CropStyleBar {
     mainMenuList: Array<ActionButtonInfo> = [
         new ActionButtonInfo({
             src: $r('app.media.ic_edit_photo_crop_freedom'),
+            isActive: true,
             actionID: CropRatioType.RATIO_TYPE_FREE,
-            isActive: true
+            text: null,
+            mode: null,
+            height: null,
+            width: null,
+            color: null,
+            uri: null
         }),
         new ActionButtonInfo({
             src: $r("app.media.ic_edit_photo_crop_land_full"),
-            actionID: CropRatioType.RATIO_TYPE_HORIZONTAL
+            isActive: null,
+            actionID: CropRatioType.RATIO_TYPE_HORIZONTAL,
+            text: null,
+            mode: null,
+            height: null,
+            width: null,
+            color: null,
+            uri: null
         }),
         new ActionButtonInfo({
             src: $r("app.media.ic_edit_photo_crop_port_full"),
-            actionID: CropRatioType.RATIO_TYPE_VERTICAL
+            isActive: null,
+            actionID: CropRatioType.RATIO_TYPE_VERTICAL,
+            text: null,
+            mode: null,
+            height: null,
+            width: null,
+            color: null,
+            uri: null
         }),
-        new ActionButtonInfo({ src: $r('app.media.ic_edit_photo_crop_1_1'), actionID: CropRatioType.RATIO_TYPE_1_1 }),
-        new ActionButtonInfo({ src: $r('app.media.ic_edit_photo_crop_16_9'), actionID: CropRatioType.RATIO_TYPE_16_9 }),
-        new ActionButtonInfo({ src: $r('app.media.ic_edit_photo_crop_9_16'), actionID: CropRatioType.RATIO_TYPE_9_16 }),
-        new ActionButtonInfo({ src: $r('app.media.ic_edit_photo_crop_4_3'), actionID: CropRatioType.RATIO_TYPE_4_3 }),
-        new ActionButtonInfo({ src: $r('app.media.ic_edit_photo_crop_3_4'), actionID: CropRatioType.RATIO_TYPE_3_4 }),
-        new ActionButtonInfo({ src: $r('app.media.ic_edit_photo_crop_3_2'), actionID: CropRatioType.RATIO_TYPE_3_2 }),
-        new ActionButtonInfo({ src: $r('app.media.ic_edit_photo_crop_2_3'), actionID: CropRatioType.RATIO_TYPE_2_3 }),
+        new ActionButtonInfo({
+            src: $r('app.media.ic_edit_photo_crop_1_1'),
+            isActive: null,
+            actionID: CropRatioType.RATIO_TYPE_1_1,
+            text: null,
+            mode: null,
+            height: null,
+            width: null,
+            color: null,
+            uri: null
+        }),
+        new ActionButtonInfo({
+            src: $r('app.media.ic_edit_photo_crop_16_9'),
+            isActive: null,
+            actionID: CropRatioType.RATIO_TYPE_16_9,
+            text: null,
+            mode: null,
+            height: null,
+            width: null,
+            color: null,
+            uri: null
+        }),
+        new ActionButtonInfo({
+            src: $r('app.media.ic_edit_photo_crop_9_16'),
+            isActive: null,
+            actionID: CropRatioType.RATIO_TYPE_9_16,
+            text: null,
+            mode: null,
+            height: null,
+            width: null,
+            color: null,
+            uri: null
+        }),
+        new ActionButtonInfo({
+            src: $r('app.media.ic_edit_photo_crop_4_3'),
+            isActive: null,
+            actionID: CropRatioType.RATIO_TYPE_4_3,
+            text: null,
+            mode: null,
+            height: null,
+            width: null,
+            color: null,
+            uri: null
+        }),
+        new ActionButtonInfo({
+            src: $r('app.media.ic_edit_photo_crop_3_4'),
+            isActive: null,
+            actionID: CropRatioType.RATIO_TYPE_3_4,
+            text: null,
+            mode: null,
+            height: null,
+            width: null,
+            color: null,
+            uri: null
+        }),
+        new ActionButtonInfo({
+            src: $r('app.media.ic_edit_photo_crop_3_2'),
+            isActive: null,
+            actionID: CropRatioType.RATIO_TYPE_3_2,
+            text: null,
+            mode: null,
+            height: null,
+            width: null,
+            color: null,
+            uri: null
+        }),
+        new ActionButtonInfo({
+            src: $r('app.media.ic_edit_photo_crop_2_3'),
+            isActive: null,
+            actionID: CropRatioType.RATIO_TYPE_2_3,
+            text: null,
+            mode: null,
+            height: null,
+            width: null,
+            color: null,
+            uri: null
+        }),
     ];
     @State @Watch('clickEvent') menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
 

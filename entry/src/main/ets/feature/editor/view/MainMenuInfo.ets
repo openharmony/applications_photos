@@ -22,16 +22,16 @@ export enum ID {
     DEFAULT
 }
 
-interface ActionInfo {
-    src ?: Resource;
-    isActive ?: boolean;
-    actionID: number;
-    text ?: Resource;
-    mode ?: number;
-    height ?: Resource;
-    width ?: Resource
-    color ?: Resource;
-    uri ?: string;
+class ActionInfo {
+    src : Resource | null = null;
+    isActive : boolean | null = null;
+    actionID: number | null = null;
+    text : Resource | null = null;
+    mode : number | null = null;
+    height : Resource | null = null;
+    width : Resource | null = null;
+    color : Resource | null = null;
+    uri : string | null = null;
 }
 
 export class ActionButtonInfo {
@@ -47,30 +47,30 @@ export class ActionButtonInfo {
     uri: string;
 
     constructor(action: ActionInfo) {
-        this.src = action.src == undefined ? undefined : action.src;
+        this.src = action.src == null ? null : action.src;
         this.actionID = action.actionID;
         this.isDoubleClicked = false;
-        if (action.isActive != undefined) {
+        if (action.isActive != null) {
             this.isActive = action.isActive;
         } else {
             this.isActive = false;
         }
-        if (action.text != undefined) {
+        if (action.text != null) {
             this.text = action.text;
         }
-        if (action.mode != undefined) {
+        if (action.mode != null) {
             this.mode = action.mode;
         }
-        if (action.height != undefined) {
+        if (action.height != null) {
             this.height = action.height;
         }
-        if (action.width != undefined) {
+        if (action.width != null) {
             this.width = action.width;
         }
-        if (action.color != undefined) {
+        if (action.color != null) {
             this.color = action.color;
         }
-        if (action.uri != undefined) {
+        if (action.uri != null) {
             this.uri = action.uri;
         }
     }
