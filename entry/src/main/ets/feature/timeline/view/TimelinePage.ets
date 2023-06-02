@@ -78,14 +78,14 @@ export struct TimelinePage {
     isActive = false; // Is the page active
     @State initLoadFinish: boolean = false; // Is first patch load finished
     routerStart = false; // Is move or copy router page
-    @Provide moreMenuList: Action[] = new Array<Action>();
+    @Provide moreMenuList: Action[] = [];
     @Provide dateText: string = '';
     private barModel = new TimelinePageBarModel();
     private timelineDataSource: TimelineItemDataSource = new TimelineItemDataSource();
     private dataObserver: CommonObserverCallback = new CommonObserverCallback(this as MediaLibDataChangeCallback);
     private isMediaLibDataChanged: boolean = true;
     @State actionBarProp: ActionBarProp = new ActionBarProp();
-    @State toolBarMenuList: Action[] = new Array<Action>();
+    @State toolBarMenuList: Action[] = [];
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar(this.isSelectedMode,

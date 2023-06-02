@@ -54,7 +54,7 @@ struct NewAlbumPage {
     @Provide broadCast: Broadcast = new Broadcast();
     @Provide isShow: boolean = true;
     @Provide isShowBar: boolean = true;
-    @Provide moreMenuList: Array<Action> = new Array<Action>();
+    @Provide moreMenuList: Action[] = [];
     @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
     @StorageLink('isSplitMode') isSplitMode: boolean = screenManager.isSplitMode();
     @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];

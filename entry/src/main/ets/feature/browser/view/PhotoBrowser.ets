@@ -70,10 +70,10 @@ struct PhotoBrowser {
     @Provide browserBackgroundColor: Resource = $r('app.color.default_background_color');
     @Provide('dateTitle') photoDate: string = '';
     @Provide('timeLocationTitle') timeAndLocation: string = '';
-    @Provide menuList: Array<Action> = new Array<Action>();
-    @State toolMenuList: Array<Action> = new Array<Action>();
-    @Provide topMenuList: Array<Action> = new Array<Action>();
-    @Provide moreMenuList: Array<Action> = new Array<Action>();
+    @Provide menuList: Action[] = [];
+    @State toolMenuList: Action[] = [];
+    @Provide topMenuList: Action[] = [];
+    @Provide moreMenuList: Action[] = [];
     @Provide broadCast: Broadcast = new Broadcast();
     @Provide isShowBar: boolean = true;
     @Provide isPullingDown: boolean = false;
@@ -364,7 +364,7 @@ struct PhotoBrowser {
             return;
         }
         this.toolMenuList = [];
-        this.getActionList(currentPhoto).then((list: Array<Action>) => {
+        this.getActionList(currentPhoto).then((list: Action[]) => {
             if (this.pageFrom == Constants.ENTRY_FROM.CAMERA || this.pageFrom == Constants.ENTRY_FROM.CARD) {
                 this.menuList = [Action.GOTO_PHOTOS, Action.INFO];
             } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
@@ -381,8 +381,8 @@ struct PhotoBrowser {
         })
     }
 
-    private async getActionList(currentPhoto: MediaDataItem): Promise<Array<Action>> {
-        let list: Array<Action> = new Array<Action>();
+    private async getActionList(currentPhoto: MediaDataItem): Promise<Action[]> {
+        let list: Action[] = [];
         if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
             list.push(Action.RECOVER, Action.DELETE);
         } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {

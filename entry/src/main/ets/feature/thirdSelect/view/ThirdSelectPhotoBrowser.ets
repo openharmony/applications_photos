@@ -49,7 +49,7 @@ struct ThirdSelectPhotoBrowser {
     @Provide isSelected: boolean = false;
     @Provide isShowBar: boolean = true;
     @Provide isPullingDown: boolean = false;
-    @Provide moreMenuList: Array<Action> = new Array<Action>();
+    @Provide moreMenuList: Action[] = [];
     @Provide pageFrom: number = Constants.ENTRY_FROM.NORMAL;
     @Provide canSwipe: boolean = true;
     isMultiPick = true;
@@ -232,7 +232,7 @@ struct ThirdSelectPhotoBrowser {
                 AppStorage.Get(Constants.FORM_ITEM_DISPLAY_NAME), this.currentIndex, false]);
             return;
         }
-        let uriArray = new Array<string>();
+        let uriArray: string[] = [];
         if (this.isMultiPick) {
             uriArray = this.browserDataSource.getSelectedUris();
             Log.info(TAG, `uri size: ${uriArray}`);

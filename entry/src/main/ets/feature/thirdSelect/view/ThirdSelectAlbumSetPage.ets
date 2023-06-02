@@ -45,7 +45,7 @@ struct ThirdSelectAlbumSetPage {
     @Provide broadCast: Broadcast = new Broadcast();
     @Provide('isSelectedMode') @Watch('updateActionBar') isMultiPick: boolean = false;
     @Provide @Watch('updateActionBar') maxSelectCount: number = Constants.DEFAULT_MAX_THIRD_SELECT_COUNT;
-    @Provide moreMenuList: Array<Action> = new Array<Action>();
+    @Provide moreMenuList: Action[] = [];
     isFromWallpaper = false; // Whether the current interface is opened from the wallpaper
     type: string;
     isFromFa: boolean = false;

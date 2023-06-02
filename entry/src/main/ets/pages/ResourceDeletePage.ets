@@ -58,11 +58,11 @@ struct ResourceDeletePage {
   private getMediaItems(): MediaDataItem[] {
     let uris: [] = AppStorage.Get('uris');
     Log.error(TAG, `aboutToAppear uris : ${JSON.stringify(uris)}`);
-    let mediaDataItems: MediaDataItem[] = new Array<MediaDataItem>();
+    let mediaDataItems: MediaDataItem[] = [];
     if (uris != undefined && uris.length > 0) {
       uris.forEach((uri: string, index: number) => {
 
-        let nullArray: Array<string> =new Array();
+        let nullArray: string[] = [];
         let mediaDataItem: MediaDataItem = new MediaDataItem("",nullArray,"",1);
         mediaDataItem.id =  getIdFromUri(uri);
         mediaDataItem.status = MediaConstants.PART_LOADED;

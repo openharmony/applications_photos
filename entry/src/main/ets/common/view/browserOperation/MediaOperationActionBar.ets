@@ -33,7 +33,7 @@ export struct MediaOperationActionBar {
     }
 
     private createActionBar(): ActionBarProp {
-        let menuList: Array<Action> = new Array<Action>();
+        let menuList: Action[] = [];
         let actionBarProp: ActionBarProp = new ActionBarProp();
         if (this.loadingFinish) {
             menuList.push(Action.NEW);
