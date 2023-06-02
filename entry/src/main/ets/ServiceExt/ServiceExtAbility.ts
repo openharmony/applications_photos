@@ -79,14 +79,14 @@ export default class ServiceExtAbility extends Extension {
               Log.info(TAG, 'Dialog Window Need Destroy.');
             }, (err) => {
               Log.error(TAG, 'Dialog bindDialogTarget err');
-              if (err.code) {
+              if (err.code != null) {
                 Log.error(TAG, "Failed to bind dialog target. Cause : " + JSON.stringify(err));
                 return;
               }
               Log.error(TAG, 'Succeeded in binding dialog target.');
               try {
                 windowClass.setUIContent('pages/ResourceDeletePage', (err) => {
-                  if (err.code) {
+                  if (err.code != null) {
                     Log.error(TAG, "Failed to load the content. Cause : " + JSON.stringify(err));
                     return;
                   }
@@ -123,7 +123,7 @@ export default class ServiceExtAbility extends Extension {
       try {
         Log.info(TAG, 'test start1');
         windowClass.destroyWindow((err) => {
-          if (err.code) {
+          if (err.code != null) {
             Log.info(TAG, "Failed to destroy the window. Cause : " + JSON.stringify(err));
             return;
           }
