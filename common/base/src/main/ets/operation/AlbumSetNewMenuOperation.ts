@@ -124,7 +124,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     }
 
     private async getNewAlbumDefaultName(root: string, prefixName: string): Promise<string> {
-        let numbers = [];
+        let numbers : number[] = [];
         for (let i = 0; i < this.menuContext.dataSource.totalCount(); i++) {
             let item = (this.menuContext.dataSource.getData(i) as LazyItem<AlbumDataItem>).get();
             if (MediaConstants.ALBUM_ID_RECYCLE == item.id) {

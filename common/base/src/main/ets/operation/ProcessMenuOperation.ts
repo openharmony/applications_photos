@@ -96,7 +96,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
         let length = this.items.length;
         Log.info(TAG, "selected count: " + this.count + ", uris's length: " + length);
         // Batch deletion
-        this.totalBatches = Math.floor(length / this.BATCH_SIZE) + ((length % this.BATCH_SIZE) ? 1 : 0);
+        this.totalBatches = Math.floor(length / this.BATCH_SIZE) + (((length % this.BATCH_SIZE) ? 1 : 0) as number);
         Log.info(TAG, "The count to be operate is " + length + ", operate in " + this.totalBatches + " batches");
         if (this.isCancelled) {
             this.isCancelled = false;
