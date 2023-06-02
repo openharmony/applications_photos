@@ -24,6 +24,8 @@ import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { getFetchOptions } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
+import { getFetchOptionsByAlbumItem } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
+import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 
 const TAG = "AlbumSetRenameMenuOperation"
 
@@ -77,18 +79,28 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
         this.rename(newName);
     }
 
+    private async checkAlbumExit(simpleAlbumDataItem: SimpleAlbumDataItem): Promise<boolean> {
+        let fetchOptions: MediaLib.MediaFetchOptions = await getFetchOptionsByAlbumItem(simpleAlbumDataItem);
+        return await mediaModel.getAlbumCount(fetchOptions) > 0;
+    }
+
     private async rename(name): Promise<void> {
         try {
+            let relativePath = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + name + "/";
+            let simpleAlbumDataItem: SimpleAlbumDataItem = new SimpleAlbumDataItem("", name, relativePath, "", "");
+            if (name != undefined && name != null) {
+                let isExit = await this.checkAlbumExit(simpleAlbumDataItem);
+                if (isExit) {
+                    getResourceString($r('app.string.name_already_use')).then((message: string): void => {
+                        showToast(message)
+                    })
+                    Log.warn(TAG, "album is miss")
+                    this.onError();
+                    return;
+                }
+            }
             let fetchOption: MediaLib.MediaFetchOptions = await  getFetchOptions(this.item.selectType, this.item.id, "")
             let albums: MediaLib.Album[] = await mediaModel.getAlbums(fetchOption)
-            if (albums.length > 0) {
-                getResourceString($r('app.string.name_already_use')).then((message: string): void => {
-                    showToast(message)
-                })
-                Log.warn(TAG, "album is miss")
-                this.onError();
-                return;
-            }
             albums[0].albumName = name
             await albums[0].commitModify()
             this.onCompleted();
