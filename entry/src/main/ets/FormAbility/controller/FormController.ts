@@ -38,7 +38,7 @@ export class FormController {
     }
 
     bindFormData(formId: string): any {
-        Log.info(TAG, `bindFormData start formId: ${formId}`)
+        Log.info(TAG, "bindFormData start formId: " + formId)
         let fd = this.mediaDataManager.getCurrentFd();
         let mediaData = this.mediaDataManager.getMediaData();
         let image: string = "image_" + fd + "_formId_" + formId + "_uri_" + mediaData.currentUri;
@@ -48,14 +48,14 @@ export class FormController {
             "albumName": this.mediaDataManager.getCurrentAlbumName(),
             "currentIndex": this.mediaDataManager.getCurrentIndex(),
             "isShow": this.mediaDataManager.getIsShowAlbumName(),
-            "formImages": JSON.parse(`{ "${image}": ${fd} }`),
+            "formImages": JSON.parse("{ " + image + ": " + fd + " }"),
             'uri': (mediaData.currentUri !== '') ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
-            'albumId': `${mediaData.albumId}`,
+            'albumId': "" + mediaData.albumId,
             'currentUri': mediaData.currentUri
         };
-        Log.debug(TAG, `bindFormData, createFormBindingData dataObj2.data: ${JSON.stringify(dataObj1)}`);
+        Log.debug(TAG, "bindFormData, createFormBindingData dataObj2.data: " + JSON.stringify(dataObj1));
         let obj = formBindingData.createFormBindingData(JSON.stringify(dataObj1));
-        Log.debug(TAG, `bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
+        Log.debug(TAG, "bindFormData, createFormBindingData obj2.data: " + JSON.stringify(obj.data));
         return obj;
     }
 
