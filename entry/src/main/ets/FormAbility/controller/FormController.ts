@@ -38,7 +38,7 @@ export class FormController {
     }
 
     bindFormData(formId: string): any {
-        Log.info(TAG, "wx bindFormData start formId: " + formId)
+        Log.info(TAG, "bindFormData start formId: " + formId)
         let fd = this.mediaDataManager.getCurrentFd();
         let mediaData = this.mediaDataManager.getMediaData();
         let image: string = "image_" + fd + "_formId_" + formId + "_uri_" + mediaData.currentUri;
