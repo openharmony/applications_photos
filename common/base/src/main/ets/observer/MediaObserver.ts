@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import createOrGet from '../utils/SingleInstanceUtils';
+import stashOrGetObject from '../utils/SingleInstanceUtils';
 import { Log } from '../utils/Log';
 import { MediaConstants } from '../constants/MediaConstants';
 import mediaModel from '../model/MediaModel';
@@ -88,6 +88,6 @@ class MediaObserver {
     }
 }
 
-let mediaObserver = createOrGet(MediaObserver, TAG);
+let mediaObserver: MediaObserver = stashOrGetObject(new MediaObserver(), TAG);
 
 export default mediaObserver as MediaObserver;

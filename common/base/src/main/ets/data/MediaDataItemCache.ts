@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { MediaDataItem } from './MediaDataItem';
-import createOrGet from '../utils/SingleInstanceUtils';
+import stashOrGetObject from '../utils/SingleInstanceUtils';
 
 const TAG = "MediaDataItemCache"
 
@@ -41,6 +41,6 @@ class MediaDataItemCache {
     }
 }
 
-let mediaDataItemCache = createOrGet(MediaDataItemCache, TAG);
+let mediaDataItemCache: MediaDataItemCache = stashOrGetObject(new MediaDataItemCache(), TAG);
 
 export default mediaDataItemCache as MediaDataItemCache;
