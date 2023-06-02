@@ -80,15 +80,15 @@ struct FormEditorPage {
         let image = "image_" + this.fd + "_formId_" + this.formId + "_arkUri_" + this.arkUri + "_currentUri_" + this.fileAsset.uri;
         Log.debug(TAG, "bindFormData start image: " + image);
         let dataObj1: Object = {
-            "fd": this.fd == -1 ? false : true,
-            "image1": "memory://" + image,
-            "albumName": this.displayName,
-            "currentIndex": this.currentIndex,
-            "isShow": this.isShow,
-            "formImages": JSON.parse("{ " + image + ": " + this.fd + " }"),
-            'uri': (this.fileAsset.uri !== '') ? Constants.ACTION_URI_FORM_ABILITY : Constants.ACTION_URI_FORM_ABILITY_NONE,
-            'albumId': this.albumId,
-            'currentUri': this.fileAsset.uri
+            fd: this.fd == -1 ? false : true,
+            image1: "memory://" + image,
+            albumName: this.displayName,
+            currentIndex: this.currentIndex,
+            isShow: this.isShow,
+            formImages: JSON.parse("{ " + image + ": " + this.fd + " }"),
+            uri: (this.fileAsset.uri !== '') ? Constants.ACTION_URI_FORM_ABILITY : Constants.ACTION_URI_FORM_ABILITY_NONE,
+            albumId: this.albumId,
+            currentUri: this.fileAsset.uri
         };
         let dataObj = JSON.stringify(dataObj1);
         Log.info(TAG, "bindFormData, createFormBindingData dataObj2.data: " + dataObj);

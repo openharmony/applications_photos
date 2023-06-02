@@ -19,6 +19,7 @@ import WantConstant from '@ohos.ability.wantConstant';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { Constants } from '../../../common/model/common/Constants';
 import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
+import Want from '@ohos.application.Want';
 
 const TAG = "CameraGridItemComponent"
 
@@ -85,14 +86,14 @@ export struct CameraGridItemComponent {
     let uri = this.filterMediaType == MediaConstants.SELECT_TYPE_VIDEO
       ? Constants.CAMERA_TYPE_CAPTURE
       : Constants.CAMERA_TYPE_CAPTURE;
-    let want = {
-      "action": action,
-      "bundleName": Constants.CAMERA_BUNDLE_NAME,
-      "abilityName": Constants.CAMERA_MAIN_ABILITY,
-      "parameters": {
+    let want: Want = {
+      action: action,
+      bundleName: Constants.CAMERA_BUNDLE_NAME,
+      abilityName: Constants.CAMERA_MAIN_ABILITY,
+      parameters: {
         uri: uri,
         callBundleName: this.bundleName
-      }
+      } as Object
     };
     Log.debug(TAG, `jump camera want: ${JSON.stringify(want)}`);
     let appContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
@@ -104,13 +105,13 @@ export struct CameraGridItemComponent {
       Log.error(TAG, `no valid uri!`);
       return;
     }
+    let param1: Map<string, string[]> = new Map();
+    param1.set('select-item-list', [uri]);
     let abilityResult = {
-      'resultCode': 0,
-      'want': {
-        'parameters': {
-          'select-item-list': [uri],
-        }
-      }
+        resultCode: 0,
+        want: {
+            parameters: Object.fromEntries(param1)
+        } as Object
     };
     let appContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
     appContext.terminateSelfWithResult(abilityResult).then((result) => {

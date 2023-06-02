@@ -207,13 +207,13 @@ struct ThirdSelectAlbumSetPage {
         Log.info(TAG, "onMenuClicked, action: " + action.actionID);
         if (action === Action.CANCEL) {
             Log.info(TAG, 'click cancel');
-            let abilityResult = {
-                'resultCode': 0,
-                'want': {
-                    'parameters': {
-                        'select-item-list': []
-                    }
-                }
+            let param1: Map<string, string[]> = new Map();
+            param1.set('select-item-list', [] as string[]);
+            let abilityResult: object = {
+                resultCode: 0,
+                want: {
+                    parameters: Object.fromEntries(param1)
+                } as object
             };
             terminateSelfWithResult(abilityResult)
         } else if (action === Action.BACK) {

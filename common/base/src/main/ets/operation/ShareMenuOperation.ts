@@ -44,18 +44,18 @@ export class ShareMenuOperation implements MenuOperation {
 
     shareFileAsset(): void {
         Log.info(TAG, 'shareFileAsset');
+        let param1: Map<string, string[]> = new Map();
+        param1.set('ability.params.stream', this.uris);
+        let param2: Map<string, Object> = new Map();
+        param2.set('action', 'ability.intent.SEND_DATA');
+        param2.set('type', '*/*');
+        param2.set('parameters', Object.fromEntries(param1));
+        let param3: Map<string, Object> = new Map();
+        param3.set('ability.want.params.INTENT', Object.fromEntries(param2));
         let want: Want = {
-            'action': 'com.huawei.intent.action.hwCHOOSER',
-            'parameters': {
-                'ability.want.params.INTENT': {
-                    'action': 'ability.intent.SEND_DATA',
-                    'type': '*/*',
-                    'parameters': {
-                        'ability.params.stream': this.uris
-                    }
-                }
-            }
-        }
+            action: 'com.huawei.intent.action.hwCHOOSER',
+            parameters: Object.fromEntries(param3)
+        };
         startAbility(want);
     }
 }
