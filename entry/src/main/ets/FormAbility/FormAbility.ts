@@ -20,16 +20,17 @@ import { FormControllerManager } from './controller/FormControllerManager';
 import { FormController } from './controller/FormController';
 import { Constants } from './common/Constants';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
-import  DataStoreUtil  from '@ohos/base/src/main/ets/utils/DataStoreUtil';
+import DataStoreUtil  from '@ohos/base/src/main/ets/utils/DataStoreUtil';
+import Want from '@ohos.app.ability.Want';
 import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 
 export default class FormAbility extends FormExtension {
     private TAG: string = 'FormAbility';
-    onAddForm(want): formBindingData.FormBindingData | null {
+    onAddForm(want: Want): formBindingData.FormBindingData | null {
         Log.info(this.TAG, "form onAddForm. want " + JSON.stringify(want));
         this.init();
-        let param = want.parameters;
-        let formId = param['ohos.extra.param.key.form_identity'];
+        let param: Map<string, object> = new Map(Object.entries(want.parameters));
+        let formId: string = param.get('ohos.extra.param.key.form_identity').toString();
         Log.info(this.TAG, "form onAddForm formId: " + formId);
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
         formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE).then((): Object | null => {

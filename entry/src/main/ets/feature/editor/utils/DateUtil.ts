@@ -22,21 +22,23 @@ export class DateUtil {
         if (!Boolean(format).valueOf()) {
             return time.valueOf().toString();
         }
-        let opts = {
-            'MM': time.getMonth() + 1,
-            'dd': time.getDate(),
-            'HH': time.getHours(),
-            'mm': time.getMinutes(),
-            'ss': time.getSeconds()
-        };
-        let check: RegExp = new RegExp("/(y+)/");
-        if (check.test(format)) {
+        let opts: Map<string, number> = new Map();
+        opts.set('MM', time.getMonth() + 1);
+        opts.set('dd', time.getDate());
+        opts.set('HH', time.getHours());
+        opts.set('mm', time.getMinutes());
+        opts.set('ss', time.getSeconds());
+
+        if (/(y+)/.test(format)) {
             format = format.replace('yyyy', time.getFullYear().toString().substr(0));
         }
-        for (let f in opts) {
+        for (let f of opts.keys()) {
             if (new RegExp('(' + f + ')').test(format)) {
-                format = format.replace(f, (f.length == 1) ? opts[f] : (('00' + opts[f]).substr(
-                    opts[f].toString().length)));
+                format = format.replace(f,
+                    (f.length == 1)
+                    ? opts.get(f).toString()
+                    : (("00" + opts.get(f)).substr(opts.get(f).toString().length))
+                );
             }
         }
         return format;
