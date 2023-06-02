@@ -53,7 +53,7 @@ export struct AlbumSelectGridItemNewStyle {
         this.updateCardSize();
     }
 
-    private updateCardSize() {
+    private updateCardSize(): void {
         let contentWidth = screenManager.getWinWidth();
         let maxCardWidth = WindowConstants.ALBUM_SET_COVER_SIZE * WindowConstants.GRID_MAX_SIZE_RATIO;
         let count: number = Math.ceil((contentWidth - WindowConstants.ALBUM_SET_MARGIN * 2 + WindowConstants.ALBUM_SET_GUTTER) /
@@ -83,7 +83,7 @@ export struct AlbumSelectGridItemNewStyle {
         }
     }
 
-    updateCard() {
+    updateCard(): void {
         Log.debug(TAG, 'Album changed and update card size.');
         this.updateCardSize();
     }

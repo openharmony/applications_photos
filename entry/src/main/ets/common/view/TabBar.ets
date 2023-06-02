@@ -49,7 +49,7 @@ export struct TabBar {
     });
   }
 
-  private onTabSelected(index: number) {
+  private onTabSelected(index: number): void {
     Log.debug(this.TAG, `this.currentIndex: ${this.currentIndex} index: ${index}`);
     if (this.currentIndex == index) {
       Log.error(this.TAG, `it is same: ${index}`);
@@ -114,7 +114,7 @@ struct Tab {
   onTabSelected: Function;
   appBroadcast: Broadcast = broadcastManager.getBroadcast();
 
-  aboutToAppear() {
+  aboutToAppear(): void {
     this.isSelected = this.tabItem.isSelected;
     this.appBroadcast.on(BroadcastConstants.RESET_TAB_SELECTED_STATUE, (pageNumber: number) => {
       this.isSelected = this.index == pageNumber;
@@ -182,7 +182,7 @@ export struct TabBarForAlbumSet {
     Log.info(this.TAG, `album tabs item width: ${this.tabWidth}, col: ${col}`);
   }
 
-  private onTabSelected(index: number) {
+  private onTabSelected(index: number): void {
     Log.info(this.TAG, `this.currentIndex: ${this.currentIndex} index: ${index}`);
     this.currentIndex = index;
     this.controller.changeIndex(this.currentIndex);

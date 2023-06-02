@@ -26,11 +26,11 @@ export struct SaveImageDialog {
     @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     controller: CustomDialogController;
 
-    controllerClose() {
+    controllerClose(): void {
         this.controller.close()
     }
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         this.broadCast.on(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, this.controllerClose.bind(this));
     }
 

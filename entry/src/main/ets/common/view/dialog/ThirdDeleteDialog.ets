@@ -30,7 +30,7 @@ export struct ThirdDeleteDialog {
   private uris: string[];
   private thirdAppName: string;
 
-  aboutToAppear() {
+  aboutToAppear(): void {
     this.uris = AppStorage.Get("uris");
     this.thirdAppName = AppStorage.Get("appName");
   }

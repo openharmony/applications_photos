@@ -75,12 +75,12 @@ export struct AlbumGridItemNewStyle {
         })
     }
 
-    updateCard() {
+    updateCard(): void {
         Log.debug(TAG, 'Album changed and update card size.');
         this.updateCardSize();
     }
 
-    updateCardSize() {
+    updateCardSize(): void {
         let sideBarWidth = this.isSidebar ? WindowConstants.TAB_BAR_WIDTH : 0;
         let contentWidth = screenManager.getWinWidth() - sideBarWidth;
         let maxCardWidth = WindowConstants.ALBUM_SET_COVER_SIZE * WindowConstants.GRID_MAX_SIZE_RATIO;
@@ -107,7 +107,7 @@ export struct AlbumGridItemNewStyle {
         }
     }
 
-    selectStateChange() {
+    selectStateChange(): void {
         Log.info(TAG, `change selected.`);
 
         if (!this.isAlbumSetSelectedMode) {

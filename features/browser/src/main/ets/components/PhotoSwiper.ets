@@ -36,7 +36,7 @@ export struct PhotoSwiper {
     onPhotoChanged: Function;
     private swiperController: SwiperController;
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         this.broadCast.on(BroadcastConstants.ON_DATA_RELOADED, () => {
             Log.debug(TAG, 'animate to data reloaded start');
             animateTo({

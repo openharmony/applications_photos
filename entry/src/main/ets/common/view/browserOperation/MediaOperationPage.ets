@@ -81,14 +81,14 @@ struct MediaOperationPage {
         this.updateListCardWidth();
     }
 
-    private loadAlbums() {
+    private loadAlbums(): void {
         this.albumsDataSource.reloadAlbumListItemData().then((isEmpty: boolean) => {
             this.loadingFinish = true
             this.albumsDataSource.notifyDataReload()
         })
     }
 
-    onMenuClicked(action: Action) {
+    onMenuClicked(action: Action): void {
         Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
 
         if (action == Action.CANCEL) {
@@ -101,7 +101,7 @@ struct MediaOperationPage {
         }
     }
 
-    createNewAlbum() {
+    createNewAlbum(): void {
         Log.info(TAG, 'createNewAlbum');
         let menuContext = new MenuContext();
         this.onOperationStart = this.onOperationStart.bind(this);
@@ -117,10 +117,10 @@ struct MediaOperationPage {
         menuOperation.doAction();
     }
 
-    onOperationStart() {
+    onOperationStart(): void {
     }
 
-    onOperationEnd() {
+    onOperationEnd(): void {
     }
 
     updateListCardWidth(): void {
@@ -138,14 +138,14 @@ struct MediaOperationPage {
     }
 
     // Callback when the page is in the foreground
-    onActive() {
+    onActive(): void {
         if (!this.isActive) {
             Log.info(TAG, 'onActive');
             this.isActive = true;
         }
     }
 
-    onBackPress() {
+    onBackPress(): boolean {
         Log.info(TAG, 'onBackPress');
         router.back({
             uri: '',
@@ -154,7 +154,7 @@ struct MediaOperationPage {
         return true;
     }
 
-    onPageShow() {
+    onPageShow(): void {
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
     }
 
@@ -207,7 +207,7 @@ struct MediaOperationPage {
         })
     }
 
-    pageTransition() {
+    pageTransition(): void {
         PageTransitionEnter({ type: RouteType.None, duration: 1 })
             .opacity(0)
         PageTransitionExit({ type: RouteType.None, duration: 1 })

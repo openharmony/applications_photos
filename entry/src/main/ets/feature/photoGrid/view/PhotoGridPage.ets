@@ -96,14 +96,14 @@ struct PhotoGridPage {
                                 this.isAllSelected, this.isEmpty);
     }
 
-    onIndexChange() {
+    onIndexChange(): void {
         Log.info(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
         if (this.PhotoGridPageIndex != Constants.INVALID) {
             this.scroller.scrollToIndex(this.PhotoGridPageIndex);
         }
     }
 
-    onMenuClicked(action: Action) {
+    onMenuClicked(action: Action): void {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
@@ -200,7 +200,7 @@ struct PhotoGridPage {
         }
     }
 
-    private routerAlbumSetPage() {
+    private routerAlbumSetPage(): void {
         router.replace({
             uri: this.isHorizontal === true ? 'product/pad/view/index' : 'product/phone/view/index',
             params: {
@@ -253,7 +253,7 @@ struct PhotoGridPage {
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
-    async onDownloadEnd(err, count, total) {
+    async onDownloadEnd(err, count, total): Promise<void> {
         Log.info(TAG, `onDownloadEnd count: ${count}, total: ${total}`);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
@@ -313,7 +313,7 @@ struct PhotoGridPage {
     /**
      * Just change select mode to false
      */
-    onModeChange() {
+    onModeChange(): void {
         Log.info(TAG, 'onModeChange');
         if (this.isSelectedMode) {
             this.isSelectedMode = false;
@@ -322,7 +322,7 @@ struct PhotoGridPage {
         }
     }
 
-    onPageShow() {
+    onPageShow(): void {
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.isShow = true;
         let params: ParamsInterface = router.getParams();
@@ -340,13 +340,13 @@ struct PhotoGridPage {
         this.onActive();
     }
 
-    onPageHide() {
+    onPageHide(): void {
         this.isShow = false;
         this.onInActive();
     }
 
     // The callback when current page is in the foreground
-    onActive() {
+    onActive(): void {
         if (!this.isActive) {
             Log.info(TAG, 'onActive');
             this.isActive = true;
@@ -355,7 +355,7 @@ struct PhotoGridPage {
     }
 
     // The callback when current page is in the background
-    onInActive() {
+    onInActive(): void {
         if (this.isActive) {
             Log.info(TAG, 'onInActive');
             this.isActive = false;
@@ -375,7 +375,7 @@ struct PhotoGridPage {
         }
     }
 
-    onBackPress() {
+    onBackPress(): boolean {
         if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
             this.routerAlbumSetPage();
             return true;
@@ -387,7 +387,7 @@ struct PhotoGridPage {
         return false;
     }
 
-    private moveOperation(albumInfo: SimpleAlbumDataItem) {
+    private moveOperation(albumInfo: SimpleAlbumDataItem): void {
         let menuContext = new MenuContext();
         this.onMoveStart = this.onMoveStart.bind(this);
         this.onMoveEnd = this.onMoveEnd.bind(this);
@@ -400,7 +400,7 @@ struct PhotoGridPage {
         menuOperation.doAction();
     }
 
-    private copyOperation(albumInfo: SimpleAlbumDataItem) {
+    private copyOperation(albumInfo: SimpleAlbumDataItem): void {
         let menuContext = new MenuContext();
         menuContext.withDataSource(this.groupDataSource)
             .withOperationStartCallback(this.onCopyStart.bind(this))
@@ -492,13 +492,13 @@ struct PhotoGridPage {
         }
     }
 
-    onMediaLibDataChange(changeType) {
+    onMediaLibDataChange(changeType): void {
         Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
         this.isMediaLibDataChanged = true;
         this.loadItem();
     }
 
-    private loadItem() {
+    private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.groupDataSource.reloadGroupItemData(true).then((isEmpty) => {
                 Log.info(TAG, `onMediaLibDataChange load finish`);
@@ -512,7 +512,7 @@ struct PhotoGridPage {
         }
     }
 
-    private onSelect() {
+    private onSelect(): void {
         Log.info(TAG, "onSelect");
         this.totalSelectedCount = this.groupDataSource.getSelectedCount();
         this.isAllSelected = this.groupDataSource.isSelect();
@@ -523,7 +523,7 @@ struct PhotoGridPage {
         }
     }
 
-    private jumpToPhotoBrowser(name: string, item: MediaDataItem) {
+    private jumpToPhotoBrowser(name: string, item: MediaDataItem): void {
         let children: MediaDataItem[] = this.groupDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
@@ -550,7 +550,7 @@ struct PhotoGridPage {
         });
     }
 
-    private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem) {
+    private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem): void {
         let children: MediaDataItem[] = this.groupDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
@@ -642,7 +642,7 @@ struct PhotoGridPage {
         })
     }
 
-    pageTransition() {
+    pageTransition(): void {
         PageTransitionEnter({ type: RouteType.None, duration: 1 })
             .opacity(0)
         PageTransitionExit({ type: RouteType.None, duration: 1 })

@@ -39,12 +39,12 @@ export struct ThirdSelectedPanel {
   @Consume broadCast: Broadcast;
   private groupDataSource: GroupItemDataSource;
 
-  onSelectedCountChanged() {
+  onSelectedCountChanged(): void {
     this.selectedMediaDataArray = this.groupDataSource.getSelectedItems() as MediaDataItem[];
     this.selectedScroller.scrollEdge(Edge.End);
   }
 
-  getThumbnailSafe(sourceUri: string, size?) {
+  getThumbnailSafe(sourceUri: string, size?): string | null {
     try{
       if (size) {
         return `${sourceUri}/thumbnail/${size.width}/${size.height}`;

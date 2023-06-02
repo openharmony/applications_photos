@@ -71,14 +71,14 @@ struct NewAlbumPage {
         this.actionBarProp = this.barModel.createActionBar(this.isSelectedMode, this.totalSelectedCount);
     }
 
-    onIndexChange() {
+    onIndexChange(): void {
         Log.info(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
         if (this.PhotoGridPageIndex != Constants.INVALID) {
             this.scroller.scrollToIndex(this.PhotoGridPageIndex);
         }
     }
 
-    onMenuClicked(action: Action) {
+    onMenuClicked(action: Action): void {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         if (action == Action.CANCEL) {
             this.groupDataSource.setSelect(false)
@@ -105,23 +105,23 @@ struct NewAlbumPage {
         }
     }
 
-    onModeChange() {
+    onModeChange(): void {
         Log.info(TAG, 'onModeChange');
     }
 
-    onPageShow() {
+    onPageShow(): void {
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.isShow = true;
         this.onActive();
     }
 
-    onPageHide() {
+    onPageHide(): void {
         this.isShow = false;
         this.onInActive();
     }
 
     // The callback when current page is in the foreground
-    onActive() {
+    onActive(): void {
         if (!this.isActive) {
             Log.info(TAG, 'onActive');
             this.isActive = true;
@@ -130,7 +130,7 @@ struct NewAlbumPage {
     }
 
     // The callback when current page is in the background
-    onInActive() {
+    onInActive(): void {
         if (this.isActive) {
             Log.info(TAG, 'onInActive');
             this.isActive = false;
@@ -142,7 +142,7 @@ struct NewAlbumPage {
         this.onSelect(this.groupDataSource.getIndexByItem(item));
     }
 
-    onUpdateFavorState(item: MediaDataItem) {
+    onUpdateFavorState(item: MediaDataItem): void {
         Log.debug(TAG, 'onUpdateFavorState');
         let index = this.groupDataSource.getIndexByItem(item);
         if (index != -1) {
@@ -150,7 +150,7 @@ struct NewAlbumPage {
         }
     }
 
-    onBackPress() {
+    onBackPress(): boolean {
         this.groupDataSource.setSelect(false);
         return false;
     }
@@ -177,7 +177,7 @@ struct NewAlbumPage {
         }
     }
 
-    private copyOperation() {
+    private copyOperation(): void {
         let menuContext = new MenuContext();
         this.onOperationStart = this.onOperationStart.bind(this);
         this.onOperationEnd = this.onOperationEnd.bind(this);
@@ -234,14 +234,14 @@ struct NewAlbumPage {
         Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
     }
 
-    private onSelect(index: number) {
+    private onSelect(index: number): void {
         Log.info(TAG, "onSelect");
         this.totalSelectedCount = this.groupDataSource.getSelectedCount();
         this.isAllSelected = this.groupDataSource.isSelect();
         this.groupDataSource.notifyDataChange(index);
     }
 
-    private jumpToPhotoBrowser(name: string, item: MediaDataItem) {
+    private jumpToPhotoBrowser(name: string, item: MediaDataItem): void {
         let children: MediaDataItem[] = this.groupDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
@@ -259,7 +259,7 @@ struct NewAlbumPage {
         });
     }
 
-    private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem) {
+    private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem): void {
         let children: MediaDataItem[] = this.groupDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
@@ -326,7 +326,7 @@ struct NewAlbumPage {
         })
     }
 
-    pageTransition() {
+    pageTransition(): void {
         PageTransitionEnter({ type: RouteType.Push, duration: 300 }).slide(SlideEffect.Right)
           .opacity(0)
         PageTransitionExit({ type: RouteType.Pop, duration: 300 }).slide(SlideEffect.Right)

@@ -46,7 +46,7 @@ export struct DetailsDialog {
     @Consume mediaDetails: MediaDetails;
     @Consume isDistributedAlbum: boolean;
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         let localizedDate = DateUtil.getLocalizedDate(this.mediaDetails.dateAdded);
         let localizedTime = DateUtil.getLocalizedTime(this.mediaDetails.dateAdded);
         this.dataTime = `${localizedDate} ${localizedTime}`;
@@ -56,7 +56,7 @@ export struct DetailsDialog {
         return `${width}x${height}`;
     }
 
-    getTitle() {
+    getTitle(): string {
         Log.info(this.TAG, 'getTitle');
         if (this.mediaDetails.title) {
             return this.mediaDetails.title;

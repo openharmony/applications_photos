@@ -117,7 +117,7 @@ struct PhotoBrowser {
     private isToEdit = false;
     private globalThis = GlobalContext.getContext();
 
-    onMenuClicked(action: Action) {
+    onMenuClicked(action: Action): void {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}, isPullingDown: ${this.isPullingDown}`);
         if (this.isPullingDown) {
             return;
@@ -230,7 +230,7 @@ struct PhotoBrowser {
         menuOperation.doAction();
     }
 
-    private setFavourite(isSuccess: boolean) {
+    private setFavourite(isSuccess: boolean): void {
         Log.debug(TAG, 'set favor !');
 
         if (isSuccess) {
@@ -250,7 +250,7 @@ struct PhotoBrowser {
         }
     }
 
-    private operateEnd() {
+    private operateEnd(): void {
         if (this.currentIndex == 0 || AppStorage.Get("isLeftSwiper") == 0) {
             this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, []);
         } else {
@@ -260,13 +260,13 @@ struct PhotoBrowser {
         }
     }
 
-    private onDeleteEnd() {
+    private onDeleteEnd(): void {
         Log.debug(TAG, `onDeleteEnd start`);
         AppStorage.SetOrCreate("isDelete", 0);
         this.operateEnd();
     }
 
-    private setOrientation() {
+    private setOrientation(): void {
         Log.debug(TAG, `setOrientation`);
         let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined) {
@@ -276,7 +276,7 @@ struct PhotoBrowser {
         this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
     }
 
-    onToggleBars() {
+    onToggleBars(): void {
         if (this.isShowBar) {
             this.hideBars();
         } else {
@@ -311,7 +311,7 @@ struct PhotoBrowser {
         });
     }
 
-    onPhotoChanged(index: number): void{
+    onPhotoChanged(index: number): void {
         index = Math.min(index, this.browserDataSource.totalCount() - 1);
         Log.info(TAG, `onPhotoChanged start ${index}`);
         this.currentIndex = this.isToEdit ? 0 : index;
@@ -332,7 +332,7 @@ struct PhotoBrowser {
         }
     }
 
-    updateActionBar() {
+    updateActionBar(): void {
         let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined || this.isFromViewData) {
             Log.warn(TAG, `currentPhoto is undefined:${currentPhoto == undefined} this.isFromViewData:${this.isFromViewData} `)
@@ -351,7 +351,7 @@ struct PhotoBrowser {
         })
     }
 
-    updateMenu(): void{
+    updateMenu(): void {
         let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined) {
             return;
@@ -391,11 +391,11 @@ struct PhotoBrowser {
         return list;
     }
 
-    private currentShowChange() {
+    private currentShowChange(): void {
         this.updateMoreMenu();
     }
 
-    private updateMoreMenu() {
+    private updateMoreMenu(): void {
         let currentPhoto = this.getCurrentPhoto();
         this.moreMenuList = [Action.MOVE, Action.COPY, Action.RENAME];
         if (currentPhoto == undefined) {
@@ -411,7 +411,7 @@ struct PhotoBrowser {
         return this.browserDataSource.getDataByIndex(index);
     }
 
-    async onMoveEnd(err, count, total) {
+    async onMoveEnd(err, count, total): Promise<void> {
         Log.debug(TAG, `onMoveEnd count: ${count}, total: ${total}`);
         if (err) {
             getResourceString($r('app.string.move_failed_single')).then((message: string) => {
@@ -437,7 +437,7 @@ struct PhotoBrowser {
         }
     }
 
-    async onDownloadEnd(err, count, total) {
+    async onDownloadEnd(err, count, total): Promise<void> {
         Log.debug(TAG, `onDownloadEnd count: ${count}, total: ${total}`);
         if (err) {
             getResourceString($r('app.string.download_failed_single')).then((message: string) => {
@@ -450,7 +450,7 @@ struct PhotoBrowser {
         }
     }
 
-    onBackPress() {
+    onBackPress(): boolean {
         Log.info(TAG, 'onBackPress');
         this.controller.finishAnimation(this.onBackPressInner.bind(this));
         return true;
@@ -661,7 +661,7 @@ struct PhotoBrowser {
         finishTrace('PhotoBrowserAboutToAppear');
     }
 
-    private async dataSourceLoadFinish() {
+    private async dataSourceLoadFinish(): Promise<void> {
         await this.browserDataSource.reloadGroupItemData(false);
         for(let i = 0;i < this.browserDataSource.groupDataItem.length;i++) {
            await this.browserDataSource.groupDataItem[i].load(false);
@@ -674,7 +674,7 @@ struct PhotoBrowser {
         }
     }
 
-    onPageShow() {
+    onPageShow(): void {
         startTrace('PhotoBrowserOnPageShow');
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.broadCast.emit(BroadcastConstants.CHANGE_SWIPER_DURATION, [400]);
@@ -713,7 +713,7 @@ struct PhotoBrowser {
         finishTrace('PhotoBrowserOnPageShow');
     }
 
-    private downLoad() {
+    private downLoad(): void {
         Log.info(TAG, 'downLoad run');
         let menuContext = new MenuContext();
         let menuOperation: MenuOperation;
@@ -731,18 +731,18 @@ struct PhotoBrowser {
         menuOperation.doAction();
     }
 
-    onPageHide() {
+    onPageHide(): void {
         this.showBars();
     }
 
-    onMediaLibDataChange(changeType) {
+    onMediaLibDataChange(changeType): void {
         Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
         if (!PhotoEditorManager.getInstance().isSaving) {
             this.dataSourceLoadFinish();
         }
     }
 
-    async routerGridPaged() {
+    async routerGridPaged(): Promise<void> {
         AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, true);
         let displayName = await getAlbumDisplayName(MediaConstants.ALBUM_ID_CAMERA)
         let item: SimpleAlbumDataItem = new SimpleAlbumDataItem(MediaConstants.ALBUM_ID_CAMERA, displayName, "", "", "")
@@ -799,7 +799,7 @@ struct PhotoBrowser {
         }
     }
 
-    pageTransition() {
+    pageTransition(): void {
         PageTransitionEnter({ type: RouteType.None, duration: PhotoConstants.PAGE_SHOW_ANIMATION_DURATION })
             .opacity(0)
         PageTransitionExit({ duration: PhotoConstants.PAGE_SHOW_ANIMATION_DURATION })

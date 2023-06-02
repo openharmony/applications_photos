@@ -30,7 +30,7 @@ export struct MultiSelectDialog {
     controller: CustomDialogController;
     @Consume multiSelectDetails: MultiSelectDetails;
 
-    aboutToAppear() {
+    aboutToAppear(): void {
     }
 
     build() {

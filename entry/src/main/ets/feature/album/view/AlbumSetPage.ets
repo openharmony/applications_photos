@@ -112,7 +112,7 @@ export struct AlbumSetPage {
             this.albumsDataSource.isDisableDelete());
     }
 
-    onMenuClicked(action: Action, arg: Object[]) {
+    onMenuClicked(action: Action, arg: Object[]): void {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
@@ -159,13 +159,13 @@ export struct AlbumSetPage {
         mediaObserver.registerObserver(this.dataObserver);
     }
 
-    onNewEnd() {
+    onNewEnd(): void {
         Log.debug(TAG, `onNewEnd`);
         this.isAlbumSetSelectedMode = false;
         mediaObserver.registerObserver(this.dataObserver);
     }
 
-    onRenameEnd() {
+    onRenameEnd(): void {
         Log.debug(TAG, `onRenameEnd`);
         this.isAlbumSetSelectedMode = false;
         this.albumsDataSource.notifyDataReload();
@@ -234,7 +234,7 @@ export struct AlbumSetPage {
     }
 
     // Callback when the page is show.
-    onIndexPageShow() {
+    onIndexPageShow(): void {
         Log.info(TAG, `onIndexPageShow`);
         if (this.isShow && this.isInCurrentTab) {
             this.onActive();
@@ -246,7 +246,7 @@ export struct AlbumSetPage {
         }
     }
 
-    createAlbum() {
+    createAlbum(): void {
         let newAlbum = AppStorage.Get<boolean>(Constants.APP_KEY_NEW_ALBUM);
         if (newAlbum) {
             AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
@@ -255,7 +255,7 @@ export struct AlbumSetPage {
         }
     }
 
-    private copyOperation() {
+    private copyOperation(): void {
         let mediaItems = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
         let targetAlbum = AppStorage.Get<SimpleAlbumDataItem>(Constants.APP_KEY_NEW_ALBUM_TARGET);
         if (mediaItems == undefined || targetAlbum == undefined) {
@@ -272,7 +272,7 @@ export struct AlbumSetPage {
         menuOperation.doAction();
     }
 
-    private moveOperation() {
+    private moveOperation(): void {
         let mediaItems = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
         let targetAlbum = AppStorage.Get<SimpleAlbumDataItem>(Constants.APP_KEY_NEW_ALBUM_TARGET);
         if (mediaItems == undefined || undefined == targetAlbum) {
@@ -288,7 +288,7 @@ export struct AlbumSetPage {
         menuOperation.doAction();
     }
 
-    onModeChange() {
+    onModeChange(): void {
         Log.info(TAG, `onModeChange ${this.isAlbumSetSelectedMode}`);
         if (!this.isAlbumSetSelectedMode) {
             this.albumsDataSource.setSelect(false);
@@ -328,7 +328,7 @@ export struct AlbumSetPage {
     }
 
     // Callback when the page is in the foreground
-    onActive() {
+    onActive(): void {
         if (!this.isActive) {
             Log.info(TAG, 'onActive');
             this.isActive = true;
@@ -340,14 +340,14 @@ export struct AlbumSetPage {
     }
 
     // Callback when the page is in the background
-    onInActive() {
+    onInActive(): void {
         if (this.isActive) {
             Log.info(TAG, 'onInActive');
             this.isActive = false;
         }
     }
 
-    private showNotify() {
+    private showNotify(): void {
         if (this.needNotify) {
             getResourceString($r('app.string.distributed_album_disconnected')).then((message: string) => {
                 showToast(message);
@@ -356,17 +356,17 @@ export struct AlbumSetPage {
         }
     }
 
-    private onDistributedTabChanged(index: number) {
+    private onDistributedTabChanged(index: number): void {
         this.currentIndex = index;
     }
 
-    onResetZero(pageNumber: number) {
+    onResetZero(pageNumber: number): void {
         if (pageNumber == Constants.ALBUM_PAGE_INDEX) {
             this.scroller.scrollEdge(Edge.Top);
         }
     }
 
-    initGridRowCount() {
+    initGridRowCount(): void {
         Log.info(TAG, `get screen width is : ${screenManager.getWinWidth()}`);
         Log.info(TAG, `get screen height is : ${screenManager.getWinHeight()}`);
 
@@ -380,7 +380,7 @@ export struct AlbumSetPage {
 
     }
 
-    onMediaLibDataChange(changeType) {
+    onMediaLibDataChange(changeType): void {
         Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
         if (changeType == MediaConstants.MEDIA_TYPE_REMOTE) {
             this.distributedDataSource.reloadAlbumItemData().then((change: number) => {
@@ -394,7 +394,7 @@ export struct AlbumSetPage {
         }
     }
 
-    private loadItem() {
+    private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
                 this.isEmpty = isEmpty;
@@ -433,12 +433,12 @@ export struct AlbumSetPage {
         this.isTabBarShow = false;
     }
 
-    private onSelect(index: number) {
+    private onSelect(index: number): void {
         this.selectedAlbumsCount = this.albumsDataSource.getSelectedCount();
         this.albumsDataSource.notifyDataChange(index);
     }
 
-    private loadAlbums(isForce: boolean) {
+    private loadAlbums(isForce: boolean): void {
         if (isForce || this.currentIndex == Constants.LOCAL_TAB_INDEX) {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
                 this.isEmpty = isEmpty;
@@ -572,7 +572,7 @@ export struct AlbumSetPage {
         }
     }
 
-    pageTransition() {
+    pageTransition(): void {
         PageTransitionExit({ type: RouteType.Push, duration: 1 })
           .opacity(0)
         PageTransitionEnter({ type: RouteType.Pop, duration: 1 })

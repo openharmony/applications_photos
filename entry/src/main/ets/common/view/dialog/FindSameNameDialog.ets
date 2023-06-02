@@ -48,7 +48,7 @@ export struct FindSameNameDialog {
     targetDataTime: string;
     timeConvert = 1000;
 
-    getTitle(name) {
+    getTitle(name): string {
         Log.info(this.TAG, `getTitle ${name}`);
         if (name) {
             let index = name.lastIndexOf('.');
@@ -61,7 +61,7 @@ export struct FindSameNameDialog {
         }
     }
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         this.sourceDetails = this.findSameNameParam.sourceFileAsset;
         this.targetDetails = this.findSameNameParam.targetFileAsset;
         this.dataTime = DateUtil.getDateTimeFormat(this.sourceDetails.dateModified * this.timeConvert);

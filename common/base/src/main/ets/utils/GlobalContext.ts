@@ -15,7 +15,7 @@ export class GlobalContext {
         return this._objects.get(value);
     }
 
-    setObject(key: string, objectClass: Object) {
+    setObject(key: string, objectClass: Object): void {
         this._objects.set(key, objectClass);
     }
 }

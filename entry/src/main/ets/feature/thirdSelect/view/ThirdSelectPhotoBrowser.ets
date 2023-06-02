@@ -126,7 +126,7 @@ struct ThirdSelectPhotoBrowser {
         mMultimodalInputManager.unregisterListener();
     }
 
-    onToggleBars() {
+    onToggleBars(): void {
     }
 
     onDataSizeChanged(size: number): void {
@@ -147,7 +147,7 @@ struct ThirdSelectPhotoBrowser {
         }
     }
 
-    async selectStateChange() {
+    async selectStateChange(): Promise<void> {
         Log.info(TAG, 'change selected.');
         let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined) {
@@ -165,14 +165,14 @@ struct ThirdSelectPhotoBrowser {
         Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
     }
 
-    onPageShow() {
+    onPageShow(): void {
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
     }
 
-    onPageHide() {
+    onPageHide(): void {
     }
 
-    onMenuClicked(action: Action) {
+    onMenuClicked(action: Action): void {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         if (action == Action.BACK) {
             this.onBackPress();
@@ -195,7 +195,7 @@ struct ThirdSelectPhotoBrowser {
         return this.browserDataSource.getDataByIndex(this.currentIndex);
     }
 
-    onBackPress() {
+    onBackPress(): boolean {
         router.back({ params: { index: this.currentIndex } });
         return true;
     }
@@ -220,7 +220,7 @@ struct ThirdSelectPhotoBrowser {
         }
     }
 
-    private setPickResult() {
+    private setPickResult(): void {
         Log.debug(TAG, `setPickResult ${this.isFromFa}`);
         if (this.isFromFa) {
             this.appBroadcast.emit(BroadcastConstants.SAVE_FORM_EDITOR_DATA,
@@ -261,7 +261,7 @@ struct ThirdSelectPhotoBrowser {
         };
     }
 
-    pageTransition() {
+    pageTransition(): void {
         PageTransitionEnter({ type: RouteType.None, duration: PhotoConstants.PAGE_SHOW_ANIMATION_DURATION })
             .opacity(0)
         PageTransitionExit({ duration: PhotoConstants.PAGE_SHOW_ANIMATION_DURATION })

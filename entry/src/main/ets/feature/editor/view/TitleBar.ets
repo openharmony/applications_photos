@@ -42,25 +42,25 @@ export struct TitleBar {
     private immersiveClick: Function = undefined;
     private onBackAfterSaveComplete: Function = undefined;
 
-    saveAsNewCallback() {
+    saveAsNewCallback(): void {
         Log.debug(this.TAG, 'saveAsNewCallback called');
         PhotoEditorManager.getInstance().save(false).then((id: number) => {
             this.saveImageCallback(id)
         });
     }
 
-    replaceOriginalCallback() {
+    replaceOriginalCallback(): void {
         Log.debug(this.TAG, 'replaceOriginalCallback called');
         PhotoEditorManager.getInstance().save(true).then((id: number) => {
             this.saveImageCallback(id)
         });
     }
 
-    discardCallback() {
+    discardCallback(): void {
         Log.debug(this.TAG, 'discardCallback called');
     }
 
-    saveImageCallback(id: number) {
+    saveImageCallback(id: number): void {
         Log.info(this.TAG,`saveImageCallback id = ${id}`);
         if (id < 0) {
             this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
@@ -73,29 +73,29 @@ export struct TitleBar {
         }
     }
 
-    backAfterSaveComplete() {
+    backAfterSaveComplete(): void {
         Log.debug(this.TAG, `backAfterSaveComplete called`);
         this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
         router.back();
     }
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         this.immersiveClick = this.immersive.bind(this);
         this.broadCast.on(Constants.IS_IMMERSIVE, this.immersiveClick);
         this.onBackAfterSaveComplete = this.backAfterSaveComplete.bind(this);
         this.appBroadcast.on(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, this.onBackAfterSaveComplete);
     }
 
-    aboutToDisappear() {
+    aboutToDisappear(): void {
         this.broadCast.off(Constants.IS_IMMERSIVE, this.immersiveClick);
         this.appBroadcast.off(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, this.onBackAfterSaveComplete);
     }
 
-    immersive(isImmersive: boolean) {
+    immersive(isImmersive: boolean): void {
         this.isImmersive = isImmersive;
     }
 
-    onBackClicked() {
+    onBackClicked(): void {
         Log.debug(this.TAG, 'back clicked');
         if (this.isRedo || this.isUndo) {
             this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
@@ -106,7 +106,7 @@ export struct TitleBar {
         }
     }
 
-    onSaveClicked() {
+    onSaveClicked(): void {
         Log.debug(this.TAG, 'save clicked');
         if (this.isRedo || this.isRedo) {
             this.broadCast.emit(BroadcastConstants.SHOW_SAVE_PHOTO_DIALOG,

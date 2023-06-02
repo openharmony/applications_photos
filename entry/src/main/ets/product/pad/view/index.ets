@@ -46,7 +46,7 @@ struct IndexPage {
     @StorageLink('permissionStatus') @Watch('onUpdate') permission: boolean = false;
     @State isUpdate: boolean = false;
 
-    onUpdate() {
+    onUpdate(): void {
         this.isUpdate = !this.isUpdate;
     }
 
@@ -70,7 +70,7 @@ struct IndexPage {
         }
     }
 
-    onPageShow() {
+    onPageShow(): void {
         Log.info(this.TAG, `IndexPage.onPageShow entryFromHap: ${this.entryFromHap}`);
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.isShow = true;
@@ -83,11 +83,11 @@ struct IndexPage {
         finishTrace('indexPageAppearToShow');
     }
 
-    onPageHide() {
+    onPageHide(): void {
         this.isShow = false;
     }
 
-    onBackPress() {
+    onBackPress(): boolean {
         let isProcessed = false;
         this.appBroadcast.emit(BroadcastConstants.BACK_PRESS_EVENT, [function(isModeChanged: boolean){
             isProcessed = isModeChanged;
@@ -96,12 +96,12 @@ struct IndexPage {
     }
 
     // Reset the status of the removed tab. It is currently in the selection mode status (index is before switching)
-    private resetTabState(index: number) {
+    private resetTabState(index: number): void {
         this.appBroadcast.emit(BroadcastConstants.RESET_STATE_EVENT, [index]);
     }
 
     // Tab page switching callback (index after switching)
-    private onTabChanged(index: number) {
+    private onTabChanged(index: number): void {
         this.currentIndex = index;
         this.preIndex = this.currentIndex;
         this.appBroadcast.emit(BroadcastConstants.ON_TAB_CHANGED, [index]);
@@ -153,7 +153,7 @@ struct IndexPage {
         })
     }
 
-    pageTransition() {
+    pageTransition(): void {
         PageTransitionEnter({ type: RouteType.None, duration: 1 })
             .opacity(0)
         PageTransitionExit({ type: RouteType.None, duration: 1 })

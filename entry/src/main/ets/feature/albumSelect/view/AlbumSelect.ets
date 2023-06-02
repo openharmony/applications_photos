@@ -102,14 +102,14 @@ struct AlbumSelect {
         finishTrace('AlbumSetPageAboutToAppear');
     }
 
-    private loadAlbums() {
+    private loadAlbums(): void {
         this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
             this.isEmpty = isEmpty;
             this.albumsDataSource.notifyDataReload();
         })
     }
 
-    initGridRowCount() {
+    initGridRowCount(): void {
         Log.info(TAG, `get screen width is : ${screenManager.getWinWidth()}`);
         Log.info(TAG, `get screen height is : ${screenManager.getWinHeight()}`);
 
@@ -124,24 +124,24 @@ struct AlbumSelect {
     aboutToDisappear(): void {
     }
 
-    onPageShow() {
+    onPageShow(): void {
         broadcastManager.getBroadcast().emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.onActive();
         this.isHideScrollBar = (this.albumsDataSource.totalCount() < (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
     }
 
-    onPageHide() {
+    onPageHide(): void {
         this.onInActive();
     }
 
-    onBackPress() {
+    onBackPress(): boolean {
         AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
         AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
         return false;
     }
 
     // Callback when the page is in the foreground
-    onActive() {
+    onActive(): void {
         if (!this.isActive) {
             Log.info(TAG, 'onActive');
             this.isActive = true;
@@ -149,7 +149,7 @@ struct AlbumSelect {
     }
 
     // Callback when the page is in the background
-    onInActive() {
+    onInActive(): void {
         if (this.isActive) {
             Log.info(TAG, 'onInActive');
             this.isActive = false;
@@ -222,7 +222,7 @@ struct AlbumSelect {
         })
     }
 
-    pageTransition() {
+    pageTransition(): void {
         PageTransitionEnter({ type: RouteType.Push, duration: 300 }).slide(SlideEffect.Right)
           .opacity(0)
         PageTransitionEnter({ type: RouteType.Pop, duration: 1 })

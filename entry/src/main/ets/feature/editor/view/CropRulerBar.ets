@@ -33,7 +33,7 @@ export struct CropRulerBar {
     private rulerLength: number = 0;
     private rulerWidth: number = 0;
 
-    iniSize() {
+    iniSize(): void {
         if (this.isVerticalScreen) {
             this.cWidth = this.screenWidth - Constants.PADDING_HORIZONTAL;
             this.cHeight = Constants.LITTLE_CANVAS_SIZE;
@@ -47,7 +47,7 @@ export struct CropRulerBar {
         }
     }
 
-    multiScreenAdaptation() {
+    multiScreenAdaptation(): void {
         if (vp2px(Constants.NUMBER_1) == Constants.NUMBER_1) {
             this.context.font = Constants.RULER_CONTEXT_FONT_10PX
         } else if (vp2px(Constants.NUMBER_1) == Constants.NUMBER_2) {
@@ -59,7 +59,7 @@ export struct CropRulerBar {
         }
     }
 
-    drawMidLine() {
+    drawMidLine(): void {
         const mid_x = Math.floor(this.rulerLength / Constants.NUMBER_2);
         this.context.beginPath();
         this.context.fillStyle = Constants.RULER_FILL_STYLE_100;
@@ -74,7 +74,7 @@ export struct CropRulerBar {
         this.context.closePath();
     }
 
-    drawIntegerLine(cur_x: number, cur_num: number) {
+    drawIntegerLine(cur_x: number, cur_num: number): void {
         if (this.isVerticalScreen) {
             this.context.moveTo(cur_x, (this.rulerWidth * Constants.NUMBER_8_5) / Constants.NUMBER_15);
         } else {
@@ -114,7 +114,7 @@ export struct CropRulerBar {
 
     }
 
-    drawLine() {
+    drawLine(): void {
         let begin_num = this.current_def - (this.rulerLength / Constants.NUMBER_2) / Constants.NUMBER_5;
         let cur_x = 0;
         let cur_num = 0;
@@ -161,7 +161,7 @@ export struct CropRulerBar {
         }
     }
 
-    onTouchEvent(event: TouchEvent) {
+    onTouchEvent(event: TouchEvent): void {
         if (event.type == TouchType.Down) {
             if (this.isVerticalScreen) {
                 this.startPos = (event.touches[0].x);
@@ -195,7 +195,7 @@ export struct CropRulerBar {
         }
     }
 
-    onResetClicked() {
+    onResetClicked(): void {
         this.current_def = 0;
         this.drawRuler();
     }
@@ -225,19 +225,19 @@ export struct CropRulerBar {
         }
     }
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         this.resetClicked = this.onResetClicked.bind(this);
         this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClicked);
         this.iniSize()
     }
 
-    drawRuler() {
+    drawRuler(): void {
         this.context.clearRect(0, 0, this.cWidth, this.cHeight);
         this.drawMidLine()
         this.drawLine()
     }
 
-    aboutToDisappear() {
+    aboutToDisappear(): void {
         this.broadCast.off(Constants.CROP_RESET_CLICKED, this.resetClicked);
     }
 
