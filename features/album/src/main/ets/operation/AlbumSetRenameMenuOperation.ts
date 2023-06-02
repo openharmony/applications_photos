@@ -27,7 +27,6 @@ import { getFetchOptions } from '@ohos/base/src/main/ets/helper/MediaDataHelper'
 import { getFetchOptionsByAlbumItem } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 
-
 const TAG = "AlbumSetRenameMenuOperation"
 
 export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperationCallback {
