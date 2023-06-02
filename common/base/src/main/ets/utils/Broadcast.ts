@@ -51,7 +51,12 @@ export class Broadcast {
         if (!Boolean(this.callBackArray[event]).valueOf()) {
             return;
         }
-        let cbs = [...this.callBackArray[event]];
+
+        let cbs: Function[] = [];
+        for (let i = 0; i < this.callBackArray[event].length; i++) {
+            cbs.push(this.callBackArray[event][i])
+        }
+
         if (cbs) {
             let l = cbs.length;
             for (let i = 0; i < l; i++) {

@@ -143,7 +143,12 @@ class ScreenManager {
         if (!Boolean(this.events[event]).valueOf()) {
             return;
         }
-        let cbs = [...this.events[event]];
+
+        let cbs: Function[] = [];
+        for (let i = 0; i < this.events[event].length; i++) {
+            cbs.push(this.events[event][i])
+        }
+
         if (cbs) {
             for (let i = 0, l = cbs.length; i < l; i++) {
                 let ref = cbs[i];
