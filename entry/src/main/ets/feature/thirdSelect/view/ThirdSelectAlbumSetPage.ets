@@ -205,24 +205,19 @@ struct ThirdSelectAlbumSetPage {
 
     onMenuClicked(action: Action) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
-        switch (action) {
-            case Action.CANCEL:
-                Log.info(TAG, 'click cancel');
-                let abilityResult = {
-                    'resultCode': 0,
-                    'want': {
-                        'parameters': {
-                            'select-item-list': []
-                        }
+        if (action == Action.CANCEL) {
+            Log.info(TAG, 'click cancel');
+            let abilityResult = {
+                'resultCode': 0,
+                'want': {
+                    'parameters': {
+                        'select-item-list': []
                     }
-                };
-                terminateSelfWithResult(abilityResult)
-                break;
-            case Action.BACK:
-                router.back();
-                break;
-            default:
-                break;
+                }
+            };
+            terminateSelfWithResult(abilityResult)
+        } else if (action == Action.BACK) {
+            router.back();
         }
     }
 

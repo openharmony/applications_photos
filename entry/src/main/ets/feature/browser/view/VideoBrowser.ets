@@ -48,12 +48,9 @@ struct VideoBrowser {
     private onMenuClicked(action: Action) {
         Log.info(this.TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuOperation: MenuOperation;
-        switch (action) {
-            case Action.BACK:
-                this.onBackPress();
-                return;
-            default:
-                break;
+	if (action == Action.BACK) {
+            this.onBackPress();
+            return;
         }
         menuOperation.doAction();
     }

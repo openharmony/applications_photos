@@ -282,45 +282,34 @@ export struct TimelinePage {
         Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
-        switch (action) {
-            case Action.CANCEL:
-                this.onModeChange();
-                break;
-            case Action.SELECT_ALL:
-            case Action.DESELECT_ALL:
-                this.isAllSelected = !this.timelineDataSource.isSelect()
-                this.timelineDataSource.setSelect(this.isAllSelected)
-                this.onSelect()
-                break;
-            case Action.DELETE:
-                menuContext = new MenuContext();
-                this.onDeleteStart = this.onDeleteStart.bind(this);
-                this.onDeleteEnd = this.onDeleteEnd.bind(this);
-                menuContext
-                    .withDataSource(this.timelineDataSource)
-                    .withOperationStartCallback(this.onDeleteStart)
-                    .withOperationEndCallback(this.onDeleteEnd)
-                    .withBroadCast(this.broadCast);
-                menuOperation = new BatchDeleteMenuOperation(menuContext);
-                menuOperation.doAction();
-                break;
-            case Action.SHARE:
-                menuContext = new MenuContext();
-                menuContext.withDataSource(this.timelineDataSource);
-                menuOperation = new ShareMenuOperation(menuContext);
-                menuOperation.doAction();
-                break;
-            case Action.INFO:
-                this.openDetailsDialog();
-                break;
-            case Action.MOVE:
-                this.routeSelectAlbumPage(MediaOperationType.Move);
-                break;
-            case Action.COPY:
-                this.routeSelectAlbumPage(MediaOperationType.Copy);
-                break;
-            default:
-                break;
+        if (action == Action.CANCEL) {
+            this.onModeChange();
+        } else if (action == Action.SELECT_ALL || action == Action.DESELECT_ALL) {
+            this.isAllSelected = !this.timelineDataSource.isSelect()
+            this.timelineDataSource.setSelect(this.isAllSelected)
+            this.onSelect()
+        } else if (action == Action.DELETE) {
+            menuContext = new MenuContext();
+            this.onDeleteStart = this.onDeleteStart.bind(this);
+            this.onDeleteEnd = this.onDeleteEnd.bind(this);
+            menuContext
+                .withDataSource(this.timelineDataSource)
+                .withOperationStartCallback(this.onDeleteStart)
+                .withOperationEndCallback(this.onDeleteEnd)
+                .withBroadCast(this.broadCast);
+            menuOperation = new BatchDeleteMenuOperation(menuContext);
+            menuOperation.doAction();
+        } else if (action == Action.SHARE) {
+            menuContext = new MenuContext();
+            menuContext.withDataSource(this.timelineDataSource);
+            menuOperation = new ShareMenuOperation(menuContext);
+            menuOperation.doAction();
+        } else if (action == Action.INFO) {
+            this.openDetailsDialog();
+        } else if (action == Action.MOVE) {
+            this.routeSelectAlbumPage(MediaOperationType.Move);
+	} else if (action == Action.COPY) {
+            this.routeSelectAlbumPage(MediaOperationType.Copy);
         }
     }
 

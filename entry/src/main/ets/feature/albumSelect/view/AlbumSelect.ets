@@ -158,15 +158,11 @@ struct AlbumSelect {
 
     private onMenuClicked(action: Action): void {
         Log.debug(TAG, `onMenuClicked, action: ${action.actionID}`);
-        switch (action) {
-            case Action.CANCEL:
-                Log.info(TAG, 'clear SelectManager data');
-                AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
-                AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
-                router.back();
-                break;
-            default:
-                break;
+        if (action == Action.CANCEL) {
+            Log.info(TAG, 'clear SelectManager data');
+            AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
+            AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
+            router.back();
         }
         return;
     }

@@ -116,42 +116,35 @@ export struct AlbumSetPage {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
-        switch (action) {
-            case Action.NEW:
-                menuContext = new MenuContext();
-                menuContext
-                    .withOperationStartCallback(this.onOperationStart.bind(this))
-                    .withOperationEndCallback(this.onNewEnd.bind(this))
-                    .withDataSource(this.albumsDataSource)
-                    .withBroadCast(this.broadCast);
-                menuOperation = new AlbumSetNewMenuOperation(menuContext);
-                menuOperation.doAction();
-                break;
-            case Action.CANCEL:
-                this.isAlbumSetSelectedMode = false;
-                break;
-            case Action.RENAME:
-                menuContext = new MenuContext();
-                menuContext
-                    .withDataSource(this.albumsDataSource)
-                    .withOperationStartCallback(this.onOperationStart.bind(this))
-                    .withOperationEndCallback(this.onRenameEnd.bind(this))
-                    .withBroadCast(this.broadCast);
-                menuOperation = new AlbumSetRenameMenuOperation(menuContext);
-                menuOperation.doAction();
-                break;
-            case Action.DELETE:
-                menuContext = new MenuContext();
-                menuContext
-                    .withDataSource(this.albumsDataSource)
-                    .withOperationStartCallback(this.onOperationStart.bind(this))
-                    .withOperationEndCallback(this.onDeleteEnd.bind(this))
-                    .withBroadCast(this.broadCast);
-                menuOperation = new AlbumSetDeleteMenuOperation(menuContext);
-                menuOperation.doAction();
-                break;
-            default:
-                break;
+        if (action == Action.NEW) {
+            menuContext = new MenuContext();
+            menuContext
+                .withOperationStartCallback(this.onOperationStart.bind(this))
+                .withOperationEndCallback(this.onNewEnd.bind(this))
+                .withDataSource(this.albumsDataSource)
+                .withBroadCast(this.broadCast);
+            menuOperation = new AlbumSetNewMenuOperation(menuContext);
+            menuOperation.doAction();
+        } else if (action == Action.CANCEL) {
+            this.isAlbumSetSelectedMode = false;
+        } else if (action == Action.RENAME) {
+            menuContext = new MenuContext();
+            menuContext
+                .withDataSource(this.albumsDataSource)
+                .withOperationStartCallback(this.onOperationStart.bind(this))
+                .withOperationEndCallback(this.onRenameEnd.bind(this))
+                .withBroadCast(this.broadCast);
+            menuOperation = new AlbumSetRenameMenuOperation(menuContext);
+            menuOperation.doAction();
+        } else if (action == Action.DELETE) {
+            menuContext = new MenuContext();
+            menuContext
+                .withDataSource(this.albumsDataSource)
+                .withOperationStartCallback(this.onOperationStart.bind(this))
+                .withOperationEndCallback(this.onDeleteEnd.bind(this))
+                .withBroadCast(this.broadCast);
+            menuOperation = new AlbumSetDeleteMenuOperation(menuContext);
+            menuOperation.doAction();
         }
     }
 
