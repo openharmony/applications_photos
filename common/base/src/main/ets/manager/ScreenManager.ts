@@ -42,6 +42,10 @@ enum WindowMode {
     FLOATING
 }
 
+interface GetWindowMode {
+    getWindowMode(): Promise<WindowMode>
+}
+
 const TAG = "ScreenManager"
 
 const APP_KEY_SCREEN_MANAGER = 'app_key_screen_manager';
@@ -190,7 +194,8 @@ class ScreenManager {
 
     async checkWindowMode(): Promise<void> {
         let before = this.windowMode;
-        let mode = await this.globalThis.getObject("photosWindowStage").getWindowMode();
+        let photosWindowStage = this.globalThis.getObject("photosWindowStage") as GetWindowMode;
+        let mode = await photosWindowStage.getWindowMode();
         Log.info(TAG, "photos application before/current window mode: " + before + "/" + mode);
 
         if (before == mode) {

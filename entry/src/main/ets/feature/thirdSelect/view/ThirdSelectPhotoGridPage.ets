@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import common from '@ohos.app.ability.common';
 import router, { ParamsInterface } from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ImageGridItemComponent } from '@ohos/base/src/main/ets/components/ImageGridItemComponent';
@@ -312,14 +313,16 @@ struct ThirdSelectPhotoGridPage {
         Log.info(TAG, `uri: ${uriArray}`)
         let self = this;
         if (uriArray == null && uriArray == undefined) {
-            this.globalThis.getObject("appContext").terminateSelfWithResult(abilityResult).then((result) => {
+            let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
+            appContext.terminateSelfWithResult(abilityResult).then((result) => {
                 Log.info(TAG, `terminateSelfWithResult result: ${result}`);
             });
         } else {
             SelectUtil.grantPermissionForUris(uriArray, self.bundleName);
             try {
                 Log.info(TAG, `grant permission success.`);
-                this.globalThis.getObject("appContext").terminateSelfWithResult(abilityResult).then((result) => {
+                let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
+                appContext.terminateSelfWithResult(abilityResult).then((result) => {
                     Log.info(TAG, `terminateSelfWithResult result: ${result}`);
                 });
             } catch (err) {

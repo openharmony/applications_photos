@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 import Want from "@ohos.application.Want";
+import common from '@ohos.app.ability.common';
 import { Log } from '../utils/Log';
 import { GlobalContext } from "../utils/GlobalContext";
 
@@ -20,7 +21,8 @@ const TAG = "AbilityUtils"
 
 export async function startAbility(want: Want): Promise<void> {
     try {
-        await GlobalContext.getContext().getObject("appContext").startAbility(want);
+        let appContext: common.UIAbilityContext = GlobalContext.getContext().getObject("appContext") as common.UIAbilityContext;
+        await appContext.startAbility(want);
         Log.debug(TAG, 'raul startAbility complete');
     } catch (error) {
         Log.error(TAG, "raul startAbility failed, error: " + JSON.stringify(error));
@@ -28,9 +30,11 @@ export async function startAbility(want: Want): Promise<void> {
 }
 
 export async function terminateSelf(): Promise<void> {
-    await GlobalContext.getContext().getObject("appContext").terminateSelf();
+    let appContext: common.UIAbilityContext = GlobalContext.getContext().getObject("appContext") as common.UIAbilityContext;
+    await appContext.terminateSelf();
 }
 
 export async function terminateSelfWithResult(parameter): Promise<void> {
-    await GlobalContext.getContext().getObject("appContext").terminateSelfWithResult(parameter);
+    let appContext: common.UIAbilityContext = GlobalContext.getContext().getObject("appContext") as common.UIAbilityContext;
+    await appContext.terminateSelfWithResult(parameter);
 }

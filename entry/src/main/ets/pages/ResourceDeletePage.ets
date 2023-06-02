@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import common from '@ohos.app.ability.common';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
@@ -107,7 +108,8 @@ struct ResourceDeletePage {
       }
       // @ts-ignore
       requestCallback.setRequestResult(myResult);
-      GlobalContext.getContext().getObject("photoAbilityContext").terminateSelf();
+      let photoAbilityContext: common.ServiceExtensionContext = GlobalContext.getContext().getObject("photoAbilityContext") as common.ServiceExtensionContext;
+      photoAbilityContext.terminateSelf();
     } catch(err) {
       Log.info(TAG, `getRequestInfo err : ${JSON.stringify(err)}`);
     }

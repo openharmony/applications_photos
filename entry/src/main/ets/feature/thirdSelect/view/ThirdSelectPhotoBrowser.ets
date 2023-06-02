@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import common from '@ohos.app.ability.common';
 import router, { ParamsInterface } from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action';
@@ -255,7 +256,8 @@ struct ThirdSelectPhotoBrowser {
         SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
         try {
             Log.info(TAG, `grant permission success.`);
-            this.globalThis.getObject("appContext").terminateSelfWithResult(abilityResult).then((result) => {
+            let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
+            appContext.terminateSelfWithResult(abilityResult).then((result) => {
                 Log.info(TAG, `terminateSelf result: ${result}`);
             });
         } catch (err) {

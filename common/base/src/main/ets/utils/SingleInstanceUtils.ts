@@ -24,5 +24,5 @@ export default function createOrGet<T>(objectClass: { new(): T }, storageKey: st
         globalThis.setObject(storageKey, new objectClass());
         Log.debug(TAG, "Create key of " + storageKey);
     }
-    return globalThis.getObject(storageKey);
+    return globalThis.getObject(storageKey) as T;
 }
