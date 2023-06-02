@@ -165,9 +165,9 @@ export class EventPipeline {
         if (!this.hasReachLeft && !this.hasReachRight && isEnlarged) {
             direction = PanDirection.All;
         } else if (!this.hasReachLeft && this.hasReachRight && isEnlarged) {
-            direction = PanDirection.Vertical | PanDirection.Right;
+            direction = (PanDirection.Vertical as number) | (PanDirection.Right as number);
         } else if (this.hasReachLeft && !this.hasReachRight && isEnlarged) {
-            direction = PanDirection.Vertical | PanDirection.Left;
+            direction = (PanDirection.Vertical as number) | (PanDirection.Left as number);
         } else {
             direction = PanDirection.Vertical;
         }
@@ -178,8 +178,8 @@ export class EventPipeline {
             return;
         }
 
-        if (direction == PanDirection.Vertical || direction == (PanDirection.Vertical | PanDirection.Left) ||
-        direction == (PanDirection.Vertical | PanDirection.Right)) {
+        if (direction == (PanDirection.Vertical as number) || direction == ((PanDirection.Vertical as number) | (PanDirection.Left as number)) ||
+        direction == ((PanDirection.Vertical as number) | (PanDirection.Right as number))) {
             this.broadCast.emit(Constants.SET_DISABLE_SWIPE, [false]);
         } else {
             this.broadCast.emit(Constants.SET_DISABLE_SWIPE, [true]);
