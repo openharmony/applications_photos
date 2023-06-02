@@ -57,75 +57,101 @@ enum ActionID {
     CLEAR_RECYCLE_INVALID
 }
 
-interface ActionOptions {
-    id: number;
-    textRes: Resource;
-    iconRes?: Resource;
-    isAutoTint?: boolean;
-    fillColor?: Resource;
-    actionType?: Resource;
+class ActionOptions {
+    id: number = ActionID.NONE;
+    iconRes: Resource | null = null;
+    textRes: Resource | null = null;
+    isAutoTint: boolean | null = null;
+    fillColor: Resource | null = null;
+    actionType: Resource | null = null;
 }
 
 export class Action {
     public static NONE = new Action({
         id: ActionID.NONE,
         iconRes: null,
-        textRes: null
+        textRes: null,
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static OK = new Action({
         id: ActionID.OK,
         iconRes: $r('app.media.ic_gallery_public_ok'),
-        textRes: $r('app.string.action_ok')
+        textRes: $r('app.string.action_ok'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static OK_DISABLE = new Action({
         id: ActionID.OK_DISABLE,
         iconRes: $r('app.media.ic_gallery_public_ok'),
         textRes: $r('app.string.action_ok'),
-        fillColor: $r('app.color.icon_disabled_color')
+        isAutoTint: null,
+        fillColor: $r('app.color.icon_disabled_color'),
+        actionType: null
     });
     public static CANCEL = new Action({
         id: ActionID.CANCEL,
         iconRes: $r('app.media.ic_gallery_public_cancel'),
-        textRes: $r('app.string.action_cancel')
+        textRes: $r('app.string.action_cancel'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static BACK = new Action({
         id: ActionID.BACK,
         iconRes: $r('app.media.ic_gallery_public_back'),
-        textRes: $r('app.string.action_back')
+        textRes: $r('app.string.action_back'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static INFO = new Action({
         id: ActionID.INFO,
         iconRes: $r('app.media.ic_gallery_public_details'),
-        textRes: $r('app.string.action_info')
+        textRes: $r('app.string.action_info'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static INFO_INVALID = new Action({
         id: ActionID.INFO,
         iconRes: $r('app.media.ic_gallery_public_details'),
         textRes: $r('app.string.action_info'),
-        fillColor: $r('app.color.icon_disabled_color')
+        isAutoTint: null,
+        fillColor: $r('app.color.icon_disabled_color'),
+        actionType: null
     });
     public static DELETE = new Action({
         id: ActionID.DELETE,
         iconRes: $r('app.media.ic_gallery_public_delete_line'),
         textRes: $r('app.string.action_delete'),
+        isAutoTint: null,
+        fillColor: null,
         actionType: $r('app.string.action_delete')
     });
     public static DELETE_RECYCLE = new Action({
         id: ActionID.DELETE_RECYCLE,
         iconRes: $r('app.media.ic_gallery_public_delete_line'),
         textRes: $r('app.string.action_delete'),
+        isAutoTint: null,
+        fillColor: null,
         actionType: $r('app.string.action_delete')
     });
     public static CLEAR_RECYCLE = new Action({
         id: ActionID.CLEAR_RECYCLE,
         iconRes: $r('app.media.ic_gallery_public_delete_line'),
         textRes: $r('app.string.action_clear_recycle'),
+        isAutoTint: null,
+        fillColor: null,
         actionType: $r('app.string.action_clear_recycle')
     });
     public static CLEAR_RECYCLE_INVALID = new Action({
         id: ActionID.CLEAR_RECYCLE_INVALID,
         iconRes: $r('app.media.ic_gallery_public_delete_line'),
         textRes: $r('app.string.action_clear_recycle'),
+        isAutoTint: null,
         fillColor: $r('app.color.icon_disabled_color'),
         actionType: $r('app.string.action_delete')
     });
@@ -133,6 +159,7 @@ export class Action {
         id: ActionID.DELETE_INVALID,
         iconRes: $r('app.media.ic_gallery_public_delete_line'),
         textRes: $r('app.string.action_delete'),
+        isAutoTint: null,
         fillColor: $r('app.color.icon_disabled_color'),
         actionType: $r('app.string.action_delete_invalid')
     });
@@ -140,12 +167,15 @@ export class Action {
         id: ActionID.RECOVER,
         iconRes: $r('app.media.ic_gallery_public_undo'),
         textRes: $r('app.string.action_recover'),
+        isAutoTint: null,
+        fillColor: null,
         actionType: $r('app.string.action_recover')
     });
     public static RECOVER_INVALID = new Action({
         id: ActionID.RECOVER_INVALID,
         iconRes: $r('app.media.ic_gallery_public_undo'),
         textRes: $r('app.string.action_recover'),
+        isAutoTint: null,
         fillColor: $r('app.color.icon_disabled_color'),
         actionType: $r('app.string.action_recover')
     });
@@ -153,6 +183,7 @@ export class Action {
         id: ActionID.FAVORITE,
         iconRes: $r('app.media.ic_gallery_public_Favorite_filled'),
         textRes: $r('app.string.action_favorite'),
+        isAutoTint: null,
         fillColor: $r('app.color.color_system_highlight'),
         actionType: $r('app.string.action_favorite')
     });
@@ -160,12 +191,16 @@ export class Action {
         id: ActionID.NOT_FAVORITE,
         iconRes: $r('app.media.ic_gallery_public_favorite_line'),
         textRes: $r('app.string.action_not_favorite'),
+        isAutoTint: null,
+        fillColor: null,
         actionType: $r('app.string.action_not_favorite')
     });
     public static UN_SELECTED = new Action({
         id: ActionID.UN_SELECTED,
         iconRes: $r('app.media.ic_checkbox_off'),
         textRes: $r('app.string.action_unselected'),
+        isAutoTint: null,
+        fillColor: null,
         actionType: $r('app.string.action_unselected')
     });
     public static SELECTED = new Action({
@@ -173,84 +208,118 @@ export class Action {
         iconRes: $r('app.media.ic_gallery_public_checkbox_filled'),
         textRes: $r('app.string.action_selected'),
         isAutoTint: false,
+        fillColor: null,
         actionType: $r('app.string.action_selected')
     });
     public static SELECT_ALL = new Action({
         id: ActionID.SELECT_ALL,
         iconRes: $r('app.media.ic_gallery_public_select_all'),
         textRes: $r('app.string.action_select_all'),
+        isAutoTint: null,
+        fillColor: null,
         actionType: $r('app.string.action_select_all')
     });
     public static DESELECT_ALL = new Action({
         id: ActionID.DESELECT_ALL,
         iconRes: $r('app.media.ic_gallery_public_select_all_action'),
         textRes: $r('app.string.action_deselect_all'),
+        isAutoTint: null,
+        fillColor: null,
         actionType: $r('app.string.action_deselect_all')
     });
     public static SETTING = new Action({
         id: ActionID.SETTING,
-        textRes: $r('app.string.action_setting')
+        iconRes: null,
+        textRes: $r('app.string.action_setting'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static NAVIGATION = new Action({
         id: ActionID.NAVIGATION,
-        textRes: $r('app.string.action_navigation')
+        iconRes: null,
+        textRes: $r('app.string.action_navigation'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static MATERIAL_SELECT = new Action({
         id: ActionID.MATERIAL_SELECT,
         iconRes: $r('app.media.ic_checkbox_off_overlay'),
         textRes: $r('app.string.action_material_select'),
         isAutoTint: false,
+        fillColor: null,
         actionType: $r('app.string.action_selected')
     });
     public static GOTO_PHOTOS = new Action({
         id: ActionID.GOTO_PHOTOS,
         iconRes: $r('app.media.ic_goto_photos'),
-        textRes: $r('app.string.action_goto_photos')
+        textRes: $r('app.string.action_goto_photos'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static SHARE = new Action({
         id: ActionID.SHARE,
         iconRes: $r('app.media.ic_gallery_public_share'),
         textRes: $r('app.string.action_share'),
+        isAutoTint: null,
+        fillColor: null,
         actionType: $r('app.string.action_share')
     });
     public static SHARE_INVALID = new Action({
         id: ActionID.SHARE_INVALID,
         iconRes: $r('app.media.ic_gallery_public_share'),
-        fillColor: $r('app.color.icon_disabled_color'),
         textRes: $r('app.string.action_share'),
+        isAutoTint: null,
+        fillColor: $r('app.color.icon_disabled_color'),
         actionType: $r('app.string.action_share')
     });
     public static EDIT = new Action({
         id: ActionID.EDIT,
         iconRes: $r('app.media.ic_gallery_public_edit'),
-        textRes: $r('app.string.action_edit')
+        textRes: $r('app.string.action_edit'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static EDIT_INVALID = new Action({
         id: ActionID.EDIT_INVALID,
         iconRes: $r('app.media.ic_gallery_public_edit_disable'),
         textRes: $r('app.string.action_edit'),
-        fillColor: $r('app.color.icon_disabled_color')
+        isAutoTint: null,
+        fillColor: $r('app.color.icon_disabled_color'),
+        actionType: null
     });
     public static MORE = new Action({
         id: ActionID.MORE,
         iconRes: $r('app.media.ic_gallery_public_more'),
-        textRes: $r('app.string.action_more')
+        textRes: $r('app.string.action_more'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static NEW = new Action({
         id: ActionID.NEW,
         iconRes: $r('app.media.ic_gallery_public_new'),
-        textRes: $r('app.string.action_new')
+        textRes: $r('app.string.action_new'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static RENAME = new Action({
         id: ActionID.RENAME,
         iconRes: $r('app.media.ic_gallery_public_rename'),
         textRes: $r('app.string.action_rename'),
+        isAutoTint: null,
+        fillColor: null,
         actionType: $r('app.string.action_rename')
     });
     public static RENAME_INVALID = new Action({
         id: ActionID.RENAME_INVALID,
         iconRes: $r('app.media.ic_gallery_public_rename'),
         textRes: $r('app.string.action_rename'),
+        isAutoTint: null,
         fillColor: $r('app.color.icon_disabled_color'),
         actionType: $r('app.string.action_deRename')
     });
@@ -258,46 +327,73 @@ export class Action {
         id: ActionID.ROTATE,
         iconRes: $r('app.media.ic_edit_photo_crop_rotate'),
         textRes: $r('app.string.rotate_text'),
+        isAutoTint: null,
+        fillColor: null,
         actionType: $r('app.string.rotate_text')
     });
     public static ADD_NOTES = new Action({
         id: ActionID.ADD_NOTES,
         iconRes: null,
-        textRes: $r('app.string.add_notes')
+        textRes: $r('app.string.add_notes'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static MOVE = new Action({
         id: ActionID.MOVE,
-        textRes: $r('app.string.action_move_to_album')
+        iconRes: null,
+        textRes: $r('app.string.action_move_to_album'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static MOVE_INVALID = new Action({
         id: ActionID.MOVE_INVALID,
+        iconRes: null,
         textRes: $r('app.string.action_move_to_album'),
-        fillColor: $r('app.color.icon_disabled_color')
+        isAutoTint: null,
+        fillColor: $r('app.color.icon_disabled_color'),
+        actionType: null
     });
     public static COPY = new Action({
         id: ActionID.COPY,
-        textRes: $r('app.string.action_copy_to_album')
+        iconRes: null,
+        textRes: $r('app.string.action_copy_to_album'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static COPY_INVALID = new Action({
         id: ActionID.COPY_INVALID,
+        iconRes: null,
         textRes: $r('app.string.action_copy_to_album'),
-        fillColor: $r('app.color.icon_disabled_color')
+        isAutoTint: null,
+        fillColor: $r('app.color.icon_disabled_color'),
+        actionType: null
     });
     public static NAVIGATION_ALBUMS = new Action({
         id: ActionID.NAVIGATION_ALBUMS,
         iconRes: $r('app.media.ic_navigation_albums_line'),
-        textRes: $r('app.string.rotate_text')
+        textRes: $r('app.string.rotate_text'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static DOWNLOAD = new Action({
         id: ActionID.DOWNLOAD,
         iconRes: $r('app.media.download'),
-        textRes: $r('app.string.save_to_local')
+        textRes: $r('app.string.save_to_local'),
+        isAutoTint: null,
+        fillColor: null,
+        actionType: null
     });
     public static DOWNLOAD_INVALID = new Action({
         id: ActionID.DOWNLOAD_INVALID,
         iconRes: $r('app.media.download'),
         textRes: $r('app.string.save_to_local'),
-        fillColor: $r('app.color.icon_disabled_color')
+        isAutoTint: null,
+        fillColor: $r('app.color.icon_disabled_color'),
+        actionType: null
     });
     public static ICON_DEFAULT_COLOR: Resource = $r('app.color.icon_default_color');
     public static ICON_DEFAULT_COLOR_CONTRARY: Resource = $r('app.color.icon_default_color_contrary');
@@ -311,16 +407,16 @@ export class Action {
     constructor(options: ActionOptions) {
         this.actionID = options.id;
         this.textRes = options.textRes;
-        if (options.iconRes != undefined) {
+        if (options.iconRes != null) {
             this.iconRes = options.iconRes;
         }
-        if (options.isAutoTint != undefined) {
+        if (options.isAutoTint != null) {
             this.isAutoTint = options.isAutoTint;
         }
-        if (options.fillColor != undefined) {
+        if (options.fillColor != null) {
             this.fillColor = options.fillColor;
         }
-        if (options.actionType != undefined) {
+        if (options.actionType != null) {
             this.actionType = options.actionType;
         }
     }
