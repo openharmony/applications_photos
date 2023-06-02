@@ -42,7 +42,7 @@ export class FormController {
         let fd = this.mediaDataManager.getCurrentFd();
         let mediaData = this.mediaDataManager.getMediaData();
         let image: string = "image_" + fd + "_formId_" + formId + "_uri_" + mediaData.currentUri;
-        let dataObj1: Object = {
+        let dataObj1: any = {
             "fd": fd == -1 ? false : true,
             "image1": "memory://" + image,
             "albumName": this.mediaDataManager.getCurrentAlbumName(),
