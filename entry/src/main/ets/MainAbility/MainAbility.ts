@@ -55,34 +55,36 @@ export default class MainAbility extends Ability {
         GlobalContext.getContext().setObject("appContext", this.context);
         mediaModel.onCreate(this.context);
         let action: Map<string, object> = new Map(Object.entries(want.parameters));
-        if (action != null && action != undefined && action.get("filterMediaType").toString() == MediaConstants.FILTER_MEDIA_TYPE_IMAGE) {
+        let filterMediaType = action?.get("filterMediaType")?.toString()
+        if (action != null && action != undefined && filterMediaType == MediaConstants.FILTER_MEDIA_TYPE_IMAGE) {
             mFilterMediaType = MediaConstants.SELECT_TYPE_IMAGE;
-        } else if (action != null && action != undefined && action.get("filterMediaType").toString() == MediaConstants.FILTER_MEDIA_TYPE_VIDEO) {
+        } else if (action != null && action != undefined && filterMediaType == MediaConstants.FILTER_MEDIA_TYPE_VIDEO) {
             mFilterMediaType = MediaConstants.SELECT_TYPE_VIDEO;
         } else {
             mFilterMediaType = MediaConstants.SELECT_TYPE_ALL;
         }
-        if (action != null && action != undefined && action.get("uri").toString() == MainAbility.ACTION_URI_PHOTO_DETAIL) {
+        let uri = action?.get("uri")?.toString()
+        if (action != null && action != undefined && uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
             this.browserDataSource.reloadGroupItemData(false).then((): void => {
                 if (this.browserDataSource.groupDataItem.length == 0) {
                     this.onDestroy();
                 }
             })
-        } else if (action != null && action != undefined && action.get("uri").toString() == MainAbility.ACTION_URI_SINGLE_SELECT) {
+        } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
             mCallerUid = +action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID);
             mMaxSelectCount = +action.get("maxSelectCount");
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
-        } else if (action != null && action != undefined && action.get("uri").toString() == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
+        } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
             mCallerUid = +action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID);
             mMaxSelectCount = +action.get("maxSelectCount");
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
-        } else if (action != null && action != undefined && action.get("uri").toString() == Constants.ACTION_URI_FORM_ABILITY) {
+        } else if (action != null && action != undefined && uri == Constants.ACTION_URI_FORM_ABILITY) {
             isFromCard = true;
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY);
             AppStorage.SetOrCreate(Constants.FROM_ALBUM_ID, action.get("albumId"));
             AppStorage.SetOrCreate(Constants.FROM_CURRENT_INDEX, action.get("currentIndex"));
-        } else if (action != null && action != undefined && action.get("uri").toString() == Constants.ACTION_URI_FORM_ABILITY_NONE) {
+        } else if (action != null && action != undefined && uri == Constants.ACTION_URI_FORM_ABILITY_NONE) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY_NONE);
         } else if (action != null && action != undefined && action.get('formId') != null) {
             AppStorage.SetOrCreate(Constants.FA_SETTING_FROM_ID, action.get('formId'));
@@ -122,23 +124,24 @@ export default class MainAbility extends Ability {
     onNewWant(want: Want): void {
         startTrace('onNewWant');
         let action: Map<string, object> = new Map(Object.entries(want.parameters));
-        if (action != null && action != undefined && action.get("uri").toString() == MainAbility.ACTION_URI_PHOTO_DETAIL) {
+        let uri = action?.get("uri")?.toString()
+        if (action != null && action != undefined && uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
-        } else if (action != null && action != undefined && action.get("uri").toString() == MainAbility.ACTION_URI_SINGLE_SELECT) {
+        } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
             mCallerUid = +action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID);
             mMaxSelectCount = +action.get("maxSelectCount");
             mFilterMediaType = +action.get("filterMediaType");
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
-        } else if (action != null && action != undefined && action.get("uri").toString() == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
+        } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
             mCallerUid = +action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID);
             mMaxSelectCount = +action.get("maxSelectCount");
             mFilterMediaType = +action.get("filterMediaType");
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
-        } else if (action != null && action != undefined && action.get("uri").toString() == Constants.ACTION_URI_FORM_ABILITY) {
+        } else if (action != null && action != undefined && uri == Constants.ACTION_URI_FORM_ABILITY) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY);
             AppStorage.SetOrCreate(Constants.FROM_ALBUM_ID, action.get("albumId"));
             AppStorage.SetOrCreate(Constants.FROM_CURRENT_INDEX, action.get("currentIndex"));
-        } else if (action != null && action != undefined && action.get("uri").toString() == Constants.ACTION_URI_FORM_ABILITY_NONE) {
+        } else if (action != null && action != undefined && uri == Constants.ACTION_URI_FORM_ABILITY_NONE) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY_NONE);
         } else if (action != null && action != undefined && action.get('formId') != null) {
             AppStorage.SetOrCreate(Constants.FA_SETTING_FROM_ID, action.get('formId'));
