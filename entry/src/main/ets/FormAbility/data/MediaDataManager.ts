@@ -222,7 +222,7 @@ export class MediaDataManager {
     }
 
     updateMediaData(): void {
-        Log.debug(TAG, 'updateMediaData start! index ${this.mediaData.currentIndex}');
+        Log.debug(TAG, 'updateMediaData start! index ' + this.mediaData.currentIndex);
         if (this.mediaData.currentIndex == -1) {
             this.mediaData.currentIndex = 0;
             this.isNextFag = false;
