@@ -78,19 +78,17 @@ class MediaModel {
     async copyOne(source: MediaLib.FileAsset, target: MediaLib.FileAsset): Promise<void> {
         Log.info(TAG, "copy start: src:" + source.uri + " target: " + target.uri);
         startTrace('openAssetR');
-        let fd = await this.openAsset('R', source);
+        let fd: Number = await this.openAsset('R', source);
         finishTrace('openAssetR');
         if (fd <= 0) {
-            throw 'fd is invalid';
-            return;
+            throw new Error('fd is invalid');
         }
 
         startTrace('openAssetRW');
-        let targetFd = await this.openAsset('RW', target);
+        let targetFd: Number = await this.openAsset('RW', target);
         finishTrace('openAssetRW');
         if (targetFd <= 0) {
-            throw 'targetFd is invalid';
-            return;
+            throw new Error('targetFd is invalid');
         }
 
         startTrace('copyFile');
