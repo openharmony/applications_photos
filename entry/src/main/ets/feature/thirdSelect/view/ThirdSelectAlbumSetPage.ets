@@ -104,7 +104,7 @@ struct ThirdSelectAlbumSetPage {
                     : selectCount;
             }
         }
-        Log.info(TAG, `isFromFa: ${this.isFromFa} isFromFaPhoto ${this.isFromFaPhoto}`);
+        Log.info(TAG, "isFromFa: " + this.isFromFa + " isFromFaPhoto " + this.isFromFaPhoto);
         if (this.isFromFa) {
             this.albumsDataSource.setSelectType(MediaConstants.SELECT_TYPE_IMAGE)
             this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_VIDEO, MediaConstants.ALBUM_ID_RECYCLE]);
@@ -119,13 +119,13 @@ struct ThirdSelectAlbumSetPage {
         this.leftAction = this.isFromFa ? Action.BACK : Action.CANCEL
         this.title = (this.isFromFa && !this.isFromFaPhoto) ? ActionBarProp.SINGLE_SELECT_ALBUM_TITLE : ActionBarProp.SINGLE_UNSELECT_TITLE
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        Log.info(TAG, `isMultiPick: ${this.isMultiPick}`);
-        Log.info(TAG, `type: ${this.type}`);
-        Log.info(TAG, `ThirdSelectAlbumSetPage isFromWallpaper: ${this.isFromWallpaper}`);
-        Log.info(TAG, `ThirdSelectAlbumSetPage maxSelectCount: ${this.maxSelectCount}`);
-        Log.info(TAG, `ThirdSelectAlbumSetPage filterMediaType: ${this.filterMediaType}`);
+        Log.info(TAG, "isMultiPick: " + this.isMultiPick);
+        Log.info(TAG, "type: " + this.type);
+        Log.info(TAG, "ThirdSelectAlbumSetPage isFromWallpaper: " + this.isFromWallpaper);
+        Log.info(TAG, "ThirdSelectAlbumSetPage maxSelectCount: " + this.maxSelectCount);
+        Log.info(TAG, "ThirdSelectAlbumSetPage filterMediaType: " + this.filterMediaType);
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
+            Log.info(TAG, "ON_LOADING_FINISHED size: " + size);
             this.isEmpty = size == 0;
             this.isHideScrollBar = (size <= (this.gridRowCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         });
@@ -177,7 +177,7 @@ struct ThirdSelectAlbumSetPage {
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         this.gridRowCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
         / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
-        Log.info(TAG, `initGridRowCount gridRowCount: ${this.gridRowCount}`);
+        Log.info(TAG, "initGridRowCount gridRowCount: " + this.gridRowCount);
     }
 
     onPageShow(): void {
@@ -204,7 +204,7 @@ struct ThirdSelectAlbumSetPage {
     }
 
     onMenuClicked(action: Action): void {
-        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, "onMenuClicked, action: " + action.actionID);
         if (action === Action.CANCEL) {
             Log.info(TAG, 'click cancel');
             let abilityResult = {

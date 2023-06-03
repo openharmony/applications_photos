@@ -70,7 +70,7 @@ struct ThirdSelectPhotoBrowser {
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000');
         this.browserBackgroundColor = $r('app.color.black');
         mMultimodalInputManager.registerListener((control: number) => {
-            Log.info(TAG, `key control : ${control} index ${this.currentIndex}`);
+            Log.info(TAG, "key control : " + control + " index " + this.currentIndex);
             if (control == 0) {
                 if (this.currentIndex > 0) {
                     this.onPhotoChanged(this.currentIndex - 1);
@@ -115,7 +115,7 @@ struct ThirdSelectPhotoBrowser {
             this.onPhotoChanged(this.currentIndex);
         });
         this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean) => {
-            Log.info(TAG, `set swiper swipe ${value}`);
+            Log.info(TAG, "set swiper swipe " + value);
             this.canSwipe = value;
         });
     }
@@ -130,7 +130,7 @@ struct ThirdSelectPhotoBrowser {
     }
 
     onDataSizeChanged(size: number): void {
-        Log.info(TAG, `onDataSizeChanged, size is ${size}`);
+        Log.info(TAG, "onDataSizeChanged, size is " + size);
         if (size == 0) {
             this.onBackPress();
         }
@@ -143,7 +143,7 @@ struct ThirdSelectPhotoBrowser {
             Log.warn(TAG, 'onPhotoChanged, item is undefined');
         } else {
             this.isSelected = currentPhoto.isSelect;
-            Log.info(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri}`);
+            Log.info(TAG, "onPhotoChanged, index: " + index + ", currentPhoto: " + currentPhoto.uri);
         }
     }
 
@@ -162,7 +162,7 @@ struct ThirdSelectPhotoBrowser {
             showToast(toastMsg);
         }
         this.broadCast.emit(BroadcastConstants.SELECT, [this.currentIndex]);
-        Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
+        Log.info(TAG, "totalSelectedCount: " + this.totalSelectedCount + " after state change");
     }
 
     onPageShow(): void {
@@ -173,7 +173,7 @@ struct ThirdSelectPhotoBrowser {
     }
 
     onMenuClicked(action: Action): void {
-        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, "onMenuClicked, action: " + action.actionID);
         if (action == Action.BACK) {
             this.onBackPress();
             return;
@@ -221,7 +221,7 @@ struct ThirdSelectPhotoBrowser {
     }
 
     private setPickResult(): void {
-        Log.debug(TAG, `setPickResult ${this.isFromFa}`);
+        Log.debug(TAG, "setPickResult " + this.isFromFa);
         if (this.isFromFa) {
             this.appBroadcast.emit(BroadcastConstants.SAVE_FORM_EDITOR_DATA,
                 [AppStorage.Get(Constants.FORM_ITEM_NAME), AppStorage.Get(Constants.FORM_ITEM_ALBUM_ID),
@@ -231,7 +231,7 @@ struct ThirdSelectPhotoBrowser {
         let uriArray: string[] = [];
         if (this.isMultiPick) {
             uriArray = this.browserDataSource.getSelectedUris();
-            Log.info(TAG, `uri size: ${uriArray}`);
+            Log.info(TAG, "uri size: " + uriArray);
         } else {
             let currentPhoto = this.getCurrentPhoto();
             if (currentPhoto == undefined) {
@@ -248,16 +248,16 @@ struct ThirdSelectPhotoBrowser {
                 }
             }
         };
-        Log.info(TAG, `terminateSelfWithResult result: ${JSON.stringify(abilityResult)}`);
+        Log.info(TAG, "terminateSelfWithResult result: " + JSON.stringify(abilityResult));
         SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
         try {
-            Log.info(TAG, `grant permission success.`);
+            Log.info(TAG, "grant permission success.");
             let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
             appContext.terminateSelfWithResult(abilityResult).then((result) => {
-                Log.info(TAG, `terminateSelf result: ${result}`);
+                Log.info(TAG, "terminateSelf result: " + result);
             });
         } catch (err) {
-            Log.error(TAG, `grant permission error: ${JSON.stringify(err)}`);
+            Log.error(TAG, "grant permission error: " + JSON.stringify(err));
         };
     }
 

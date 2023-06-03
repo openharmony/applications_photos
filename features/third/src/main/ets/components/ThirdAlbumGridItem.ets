@@ -54,7 +54,7 @@ export struct ThirdAlbumGridItem {
     filterMediaType: number;
 
     aboutToAppear(): void {
-        Log.info(TAG, `aboutToAppear + ${this.item.uri}`)
+        Log.info(TAG, "aboutToAppear + " + this.item.uri)
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (size) => this.updateCardSize())
         this.updateCardSize();
         this.item.load().then(() => {
@@ -80,8 +80,8 @@ export struct ThirdAlbumGridItem {
         this.cardHeight = this.gridHeight;
         this.transformV = 0;
 
-        Log.info(TAG, `is big card : ${this.isBigCard}`);
-        Log.info(TAG, `little grid size is: ${gridWidth}x${this.gridHeight}`);
+        Log.info(TAG, "is big card : " + this.isBigCard);
+        Log.info(TAG, "little grid size is: " + gridWidth + "x" + this.gridHeight);
     }
 
     build() {

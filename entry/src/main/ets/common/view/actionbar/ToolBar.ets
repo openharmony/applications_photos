@@ -104,7 +104,7 @@ export struct ToolBar {
                                         .fontColor(menu.fillColor)
                                 }.margin({ top: $r('sys.float.ohos_id_text_margin_vertical') })
                             }
-                            .width(`${Constants.PERCENT_HUNDRED / this.toolMenuList.length}%`)
+                            .width(Constants.PERCENT_HUNDRED / this.toolMenuList.length + "%")
                             .height('100%')
                             .onClick(() => {
                                 this.showPopup = !this.showPopup
@@ -145,7 +145,7 @@ export struct ToolBar {
                             .onClick(() => {
                                 this.onMenuClicked && this.onMenuClicked(menu)
                             })
-                            .width(`${Constants.PERCENT_HUNDRED / this.toolMenuList.length}%`)
+                            .width(Constants.PERCENT_HUNDRED / this.toolMenuList.length + "%")
                             .height('100%')
                         }
                     }, menu => (menu.actionType != null ? menu.actionType.id : menu.actionID))

@@ -61,7 +61,7 @@ export struct TitleBar {
     }
 
     saveImageCallback(id: number): void {
-        Log.info(this.TAG,`saveImageCallback id = ${id}`);
+        Log.info(this.TAG, "saveImageCallback id = " + id);
         if (id < 0) {
             this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
             getResourceString($r('app.string.edit_photo_save_fail')).then((message: string) => {
@@ -74,7 +74,7 @@ export struct TitleBar {
     }
 
     backAfterSaveComplete(): void {
-        Log.debug(this.TAG, `backAfterSaveComplete called`);
+        Log.debug(this.TAG, "backAfterSaveComplete called");
         this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
         router.back();
     }

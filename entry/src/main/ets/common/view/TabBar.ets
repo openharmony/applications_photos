@@ -45,14 +45,14 @@ export struct TabBar {
     this.onTabSelected = this.onTabSelected.bind(this);
     this.tabs[this.currentIndex].isSelected = true;
     this.tabs.forEach((tab: TabItem) => {
-      Log.info(this.TAG, `${JSON.stringify(tab.name)} , ${tab.iconSelected}`);
+      Log.info(this.TAG, JSON.stringify(tab.name) + " , " + tab.iconSelected);
     });
   }
 
   private onTabSelected(index: number): void {
-    Log.debug(this.TAG, `this.currentIndex: ${this.currentIndex} index: ${index}`);
+    Log.debug(this.TAG, "this.currentIndex: " + this.currentIndex + " index: " + index);
     if (this.currentIndex == index) {
-      Log.error(this.TAG, `it is same: ${index}`);
+      Log.error(this.TAG, "it is same: " + index);
       this.appBroadcast.emit(BroadcastConstants.RESET_ZERO, [index]);
     }
     this.currentIndex = index;
@@ -61,7 +61,7 @@ export struct TabBar {
       tab.isSelected = false;
     })
 
-    Log.info(this.TAG, `select ${this.currentIndex}`);
+    Log.info(this.TAG, "select " + this.currentIndex);
   }
 
   build() {
@@ -168,7 +168,7 @@ export struct TabBarForAlbumSet {
     this.onTabSelected = this.onTabSelected.bind(this);
     this.tabs[this.currentIndex].isSelected = true;
     this.tabs.forEach((tab: TabItemWithText) => {
-      Log.info(this.TAG, `${JSON.stringify(tab.name)}, ${tab.isSelected}`);
+      Log.info(this.TAG, JSON.stringify(tab.name) + ", " + tab.isSelected);
     });
     let col = screenManager.getScreenColumns();
     if (col < ColumnSize.COLUMN_EIGHT) {
@@ -179,17 +179,17 @@ export struct TabBarForAlbumSet {
       this.tabWidth = (screenManager.getWinWidth() - sideWidth) / Constants.NUMBER_2 + 'vp';
       this.tabCol = $r('app.float.album_tab_col_8_gap');
     }
-    Log.info(this.TAG, `album tabs item width: ${this.tabWidth}, col: ${col}`);
+    Log.info(this.TAG, "album tabs item width: " + this.tabWidth + ", col: " + col);
   }
 
   private onTabSelected(index: number): void {
-    Log.info(this.TAG, `this.currentIndex: ${this.currentIndex} index: ${index}`);
+    Log.info(this.TAG, "this.currentIndex: " + this.currentIndex + " index: " + index);
     this.currentIndex = index;
     this.controller.changeIndex(this.currentIndex);
     this.tabs.forEach((tab: TabItemWithText) => {
       tab.isSelected = false;
     })
-    Log.info(this.TAG, `select ${this.currentIndex}`);
+    Log.info(this.TAG, "select " + this.currentIndex);
   }
 
   build() {
@@ -240,7 +240,7 @@ struct TabWithText {
     } else {
       this.TabWidth = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE2)) * 4;
     }
-    Log.info(this.TAG, `index is ${this.index} and TabWidth is ${this.TabWidth}`);
+    Log.info(this.TAG, "index is " + this.index + " and TabWidth is " + this.TabWidth);
     this.isSelected = this.tabItemWithText.isSelected;
     this.appBroadcast.on(BroadcastConstants.RESET_TAB_SELECTED_TEXT, (pageNumber: number) => {
       this.isSelected = this.index == pageNumber;

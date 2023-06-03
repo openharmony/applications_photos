@@ -46,7 +46,7 @@ struct VideoBrowser {
     }
 
     private onMenuClicked(action: Action): void {
-        Log.info(this.TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(this.TAG, "onMenuClicked, action: " + action.actionID);
         let menuOperation: MenuOperation;
         if (action === Action.BACK) {
             this.onBackPress();
@@ -64,7 +64,7 @@ struct VideoBrowser {
         if (this.uri == undefined) {
             return;
         }
-        Log.info(this.TAG, `uri is ${this.uri}`);
+        Log.info(this.TAG, "uri is " + this.uri);
         this.photoDate = DateUtil.getLocalizedDate(this.dateAdded);
         this.timeAndLocation = DateUtil.getLocalizedTime(this.dateAdded);
         this.onMenuClicked = this.onMenuClicked.bind(this);

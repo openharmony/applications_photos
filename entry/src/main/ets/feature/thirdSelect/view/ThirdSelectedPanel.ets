@@ -47,12 +47,12 @@ export struct ThirdSelectedPanel {
   getThumbnailSafe(sourceUri: string, size?): string | null {
     try{
       if (size) {
-        return `${sourceUri}/thumbnail/${size.width}/${size.height}`;
+        return sourceUri + "/thumbnail/" + size.width + "/" + size.height;
       } else {
-        return `${sourceUri}/thumbnail/${MediaConstants.DEFAULT_SIZE}/${MediaConstants.DEFAULT_SIZE}`;
+        return sourceUri + "/thumbnail/" + MediaConstants.DEFAULT_SIZE + "/" + MediaConstants.DEFAULT_SIZE;
       }
     } catch (err) {
-      Log.warn(TAG, `get Thumbnail Failed! msg:${err}`);
+      Log.warn(TAG, "get Thumbnail Failed! msg:" + err);
       return null;
     }
   }
@@ -121,7 +121,7 @@ export struct ThirdSelectedPanel {
                     Log.error(TAG, 'item Image error');
                   })
                   .onComplete(() => {
-                    Log.debug(TAG, `Draw the image! ${this.getThumbnailSafe(selectedItem.uri)}`);
+                    Log.debug(TAG, "Draw the image! " + this.getThumbnailSafe(selectedItem.uri));
                   })
 
                 if (selectedItem.mediaType == MediaLib.MediaType.VIDEO) {

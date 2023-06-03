@@ -157,7 +157,7 @@ export struct TimelineScrollBar {
         }
         .onTouch((event: TouchEvent) => {
             if (this.dateText == '') {
-                Log.warn(TAG, `dateText is null`)
+                Log.warn(TAG, "dateText is null")
                 this.broadCast.emit(BroadcastConstants.INIT_DATE_TEXT, [])
             }
             if (event.type == TouchType.Down) {
