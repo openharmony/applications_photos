@@ -20,16 +20,19 @@ import Intl from '@ohos.intl';
 const TAG = "DateUtil"
 
 export class DateUtil {
-    private static LANGUAGE_LOCALES_MAP: Map<string, string> = new Map();
+    private static LANGUAGE_LOCALES_MAP: Map<string, string> = null;
 
     private static readonly FORMAT_DECIMAL: number = 10;
     public static readonly MILLISECONDS_PER_SECOND: number = 1000;
     public static readonly SECONDS_PER_MINUTE: number = 60;
     public static readonly SECONDS_PER_HOUR: number = 3600;
 
-    public static initLanguageLocalesMap(): void {
-        DateUtil.LANGUAGE_LOCALES_MAP.set("zh", "zh-CN");
-        DateUtil.LANGUAGE_LOCALES_MAP.set("en", "en-US");
+    private static initLanguageLocalesMap(): void {
+        if (DateUtil.LANGUAGE_LOCALES_MAP == null) {
+            DateUtil.LANGUAGE_LOCALES_MAP = new Map();
+            DateUtil.LANGUAGE_LOCALES_MAP.set("zh", "zh-CN");
+            DateUtil.LANGUAGE_LOCALES_MAP.set("en", "en-US");
+        }
     }
 
     // Get the date after localization (year-month-day)
@@ -113,6 +116,7 @@ export class DateUtil {
     }
 
     static getLocales(): string {
+        DateUtil.initLanguageLocalesMap();
         let systemLocale: string = i18n.getSystemLanguage().toString();
         let language = systemLocale.split('-')[0];
         let locales: string = this.LANGUAGE_LOCALES_MAP.get("en");
@@ -201,5 +205,3 @@ export class DateUtil {
         }
     }
 }
-
-DateUtil.initLanguageLocalesMap()
