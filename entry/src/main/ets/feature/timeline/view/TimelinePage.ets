@@ -282,13 +282,13 @@ export struct TimelinePage {
         Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
-        if (action == Action.CANCEL) {
+        if (action === Action.CANCEL) {
             this.onModeChange();
-        } else if (action == Action.SELECT_ALL || action == Action.DESELECT_ALL) {
+        } else if (action === Action.SELECT_ALL || action === Action.DESELECT_ALL) {
             this.isAllSelected = !this.timelineDataSource.isSelect()
             this.timelineDataSource.setSelect(this.isAllSelected)
             this.onSelect()
-        } else if (action == Action.DELETE) {
+        } else if (action === Action.DELETE) {
             menuContext = new MenuContext();
             this.onDeleteStart = this.onDeleteStart.bind(this);
             this.onDeleteEnd = this.onDeleteEnd.bind(this);
@@ -299,16 +299,16 @@ export struct TimelinePage {
                 .withBroadCast(this.broadCast);
             menuOperation = new BatchDeleteMenuOperation(menuContext);
             menuOperation.doAction();
-        } else if (action == Action.SHARE) {
+        } else if (action === Action.SHARE) {
             menuContext = new MenuContext();
             menuContext.withDataSource(this.timelineDataSource);
             menuOperation = new ShareMenuOperation(menuContext);
             menuOperation.doAction();
-        } else if (action == Action.INFO) {
+        } else if (action === Action.INFO) {
             this.openDetailsDialog();
-        } else if (action == Action.MOVE) {
+        } else if (action === Action.MOVE) {
             this.routeSelectAlbumPage(MediaOperationType.Move);
-	} else if (action == Action.COPY) {
+        } else if (action === Action.COPY) {
             this.routeSelectAlbumPage(MediaOperationType.Copy);
         }
     }
@@ -443,15 +443,10 @@ export struct TimelinePage {
             let params = router.getParams();
             if (this.routerStart && params != null && params.pageType != null) {
                 Log.info(TAG, `MediaOperation back ${JSON.stringify(params)}`)
-                switch (params.pageType) {
-                    case MediaOperationType.Move:
-                        this.moveOperation(JSON.parse(params.albumInfo.toString()) as SimpleAlbumDataItem);
-                        break;
-                    case MediaOperationType.Copy:
-                        this.copyOperation(JSON.parse(params.albumInfo.toString()) as SimpleAlbumDataItem);
-                        break;
-                    default:
-                        break;
+                if (params.pageType === MediaOperationType.Move) {
+                    this.moveOperation(JSON.parse(params.albumInfo.toString()) as SimpleAlbumDataItem);
+                } else if (params.pageType === MediaOperationType.Copy) {
+                    this.copyOperation(JSON.parse(params.albumInfo.toString()) as SimpleAlbumDataItem);
                 }
             }
             this.routerStart = false;

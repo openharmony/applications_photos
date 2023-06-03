@@ -205,7 +205,7 @@ struct ThirdSelectAlbumSetPage {
 
     onMenuClicked(action: Action) {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
-        if (action == Action.CANCEL) {
+        if (action === Action.CANCEL) {
             Log.info(TAG, 'click cancel');
             let abilityResult = {
                 'resultCode': 0,
@@ -216,7 +216,7 @@ struct ThirdSelectAlbumSetPage {
                 }
             };
             terminateSelfWithResult(abilityResult)
-        } else if (action == Action.BACK) {
+        } else if (action === Action.BACK) {
             router.back();
         }
     }

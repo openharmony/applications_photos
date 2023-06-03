@@ -116,7 +116,7 @@ export struct AlbumSetPage {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
-        if (action == Action.NEW) {
+        if (action === Action.NEW) {
             menuContext = new MenuContext();
             menuContext
                 .withOperationStartCallback(this.onOperationStart.bind(this))
@@ -125,9 +125,9 @@ export struct AlbumSetPage {
                 .withBroadCast(this.broadCast);
             menuOperation = new AlbumSetNewMenuOperation(menuContext);
             menuOperation.doAction();
-        } else if (action == Action.CANCEL) {
+        } else if (action === Action.CANCEL) {
             this.isAlbumSetSelectedMode = false;
-        } else if (action == Action.RENAME) {
+        } else if (action === Action.RENAME) {
             menuContext = new MenuContext();
             menuContext
                 .withDataSource(this.albumsDataSource)
@@ -136,7 +136,7 @@ export struct AlbumSetPage {
                 .withBroadCast(this.broadCast);
             menuOperation = new AlbumSetRenameMenuOperation(menuContext);
             menuOperation.doAction();
-        } else if (action == Action.DELETE) {
+        } else if (action === Action.DELETE) {
             menuContext = new MenuContext();
             menuContext
                 .withDataSource(this.albumsDataSource)

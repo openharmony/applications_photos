@@ -48,7 +48,7 @@ struct VideoBrowser {
     private onMenuClicked(action: Action) {
         Log.info(this.TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuOperation: MenuOperation;
-	if (action == Action.BACK) {
+        if (action === Action.BACK) {
             this.onBackPress();
             return;
         }

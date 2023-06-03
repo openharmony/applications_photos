@@ -81,26 +81,20 @@ export class MediaDataManager {
 
     operationFormController(): void {
         Log.debug(TAG, "operFormControllerOper operationMode " + this.operationMode);
-        switch (this.operationMode) {
-            case Constants.PHOTOS_FORM_OPERATION_MODE_DESTROY:
-                this.operationMode = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
-                this.formController.onDeleteForm(this.mediaData.formId);
-                break;
-            case Constants.PHOTOS_FORM_OPERATION_MODE_UPDATE:
-                this.operationMode = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
-                this.formController.onUpdateFormData(this.mediaData.formId);
-                break;
-            case Constants.PHOTOS_FORM_OPERATION_MODE_EVENT:
-                this.operationMode = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
-                this.formController.onEvent(this.mediaData.formId);
-                break;
-            case Constants.PHOTOS_FORM_OPERATION_MODE_CALLBACK:
-                this.operationMode = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
-                this.formController.onCallback(this.mediaData.formId);
-                break;
-            default:
-                this.formController.updateFormData(this.mediaData.formId, []);
-                break;
+        if (this.operationMode === Constants.PHOTOS_FORM_OPERATION_MODE_DESTROY) {
+            this.operationMode = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
+            this.formController.onDeleteForm(this.mediaData.formId);
+        } else if (this.operationMode === Constants.PHOTOS_FORM_OPERATION_MODE_UPDATE) {
+            this.operationMode = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
+            this.formController.onUpdateFormData(this.mediaData.formId);
+        } else if (this.operationMode === Constants.PHOTOS_FORM_OPERATION_MODE_EVENT) {
+            this.operationMode = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
+            this.formController.onEvent(this.mediaData.formId);
+        } else if (this.operationMode === Constants.PHOTOS_FORM_OPERATION_MODE_CALLBACK) {
+            this.operationMode = Constants.PHOTOS_FORM_OPERATION_MODE_NONE;
+            this.formController.onCallback(this.mediaData.formId);
+        } else {
+            this.formController.updateFormData(this.mediaData.formId, []);
         }
         Log.debug(TAG, 'operationFormController end!');
     }

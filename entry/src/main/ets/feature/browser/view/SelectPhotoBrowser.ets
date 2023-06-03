@@ -178,12 +178,12 @@ struct SelectPhotoBrowser {
 
     onMenuClicked(action: Action) {
         Log.debug(TAG, `onMenuClicked, action: ${action.actionID}`);
-        if (action == Action.BACK) {
+        if (action === Action.BACK) {
             this.onBackPress();
-        } else if (action == Action.MATERIAL_SELECT || action == Action.SELECTED) {
+        } else if (action === Action.MATERIAL_SELECT || action === Action.SELECTED) {
             this.selectStateChange();
             return;
-        } else if (action == Action.OK) {
+        } else if (action === Action.OK) {
             Log.info(TAG, 'click OK');
             this.setPickResult();
         }

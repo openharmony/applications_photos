@@ -125,16 +125,16 @@ struct PhotoBrowser {
         let menuOperation: MenuOperation;
         let menuContext: MenuContext = new MenuContext();
         let currentPhoto = this.getCurrentPhoto();
-        if (action == Action.BACK) {
+        if (action === Action.BACK) {
             this.onBackPress();
             return;
-        } else if (action == Action.INFO) {
+        } else if (action === Action.INFO) {
             if (currentPhoto == undefined) {
                 return;
             }
             this.broadCast.emit(BroadcastConstants.SHOW_DETAIL_DIALOG, [currentPhoto, this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED]);
             return;
-        } else if (action == Action.SHARE) {
+        } else if (action === Action.SHARE) {
             if (currentPhoto == undefined) {
                 return;
             }
@@ -152,13 +152,13 @@ struct PhotoBrowser {
             }
             startAbility(want)
             return;
-        } else if (action == Action.NOT_FAVORITE || action == Action.FAVORITE) {
+        } else if (action === Action.NOT_FAVORITE || action === Action.FAVORITE) {
             if (currentPhoto == undefined) {
                 return;
             }
             currentPhoto.setFavor().then((isSuccess: boolean) => this.setFavourite(isSuccess))
             return;
-        } else if (action == Action.DELETE) {
+        } else if (action === Action.DELETE) {
             if (currentPhoto == undefined) {
                 return;
             }
@@ -168,7 +168,7 @@ struct PhotoBrowser {
                 .withBroadCast(this.broadCast)
                 .withOperationEndCallback(this.onDeleteEnd.bind(this))
             menuOperation = new BatchDeleteMenuOperation(menuContext);
-        } else if (action == Action.CLEAR_RECYCLE) {
+        } else if (action === Action.CLEAR_RECYCLE) {
             if (currentPhoto == undefined) {
                 return;
             }
@@ -176,7 +176,7 @@ struct PhotoBrowser {
                 .withBroadCast(this.broadCast)
                 .withOperationEndCallback(this.onDeleteEnd.bind(this))
             menuOperation = new ClearRecycleMenuOperation(menuContext);
-        } else if (action == Action.RECOVER) {
+        } else if (action === Action.RECOVER) {
             if (currentPhoto == undefined) {
                 return;
             }
@@ -186,11 +186,10 @@ struct PhotoBrowser {
                 .withOperationEndCallback(this.onDeleteEnd)
                 .withBroadCast(this.broadCast)
             menuOperation = new BatchRecoverMenuOperation(menuContext);
-        } else if (action == Action.GOTO_PHOTOS) {
+        } else if (action === Action.GOTO_PHOTOS) {
             menuContext.withJumpSourceToMain(this.jumpSourceToMain);
             menuOperation = new GotoPhotosMenuOperation(menuContext);
-
-        } else if (action == Action.EDIT) {
+        } else if (action === Action.EDIT) {
             if (currentPhoto == undefined || currentPhoto.size == 0) {
                 return;
             }
@@ -200,7 +199,7 @@ struct PhotoBrowser {
                 uri: 'feature/editor/view/EditMain'
             })
             return;
-        } else if (action == Action.RENAME) {
+        } else if (action === Action.RENAME) {
             if (currentPhoto == undefined) {
                 return;
             }
@@ -208,20 +207,21 @@ struct PhotoBrowser {
                 .withBroadCast(this.broadCast)
                 .withAlbumInfo(this.albumInfo);
             menuOperation = new RenameMenuOperation(menuContext);
-        } else if (action == Action.ROTATE) {
+        } else if (action === Action.ROTATE) {
             if (currentPhoto == undefined) {
                 return;
             }
             currentPhoto.setOrientation().then(() => this.setOrientation())
             return;
-        } else if (action == Action.MOVE) {
+        } else if (action === Action.MOVE) {
             this.backFromCopy = true;
             this.routeSelectAlbumPage(MediaOperationType.Move);
             return;
-        } else if (action == Action.COPY) {
+        } else if (action === Action.COPY) {
             this.backFromCopy = true;
             this.routeSelectAlbumPage(MediaOperationType.Copy);
-        } else if (action == Action.DOWNLOAD) {
+            return;
+        } else if (action === Action.DOWNLOAD) {
             this.downLoad();
             return;
         } else {
@@ -458,29 +458,24 @@ struct PhotoBrowser {
 
     onBackPressInner(): void {
         Log.info(TAG, `onBackPressInner ${this.checkedTransition}`);
-        switch (this.checkedTransition) {
-            case Constants.PHOTO_TRANSITION_TIMELINE:
-                Log.info(TAG, 'onBackPress TimelinePage');
-                this.TimelinePageIndex = this.currentIndex; // call scrollTo
-                break;
-            case Constants.PHOTO_TRANSITION_ALBUM:
-                Log.info(TAG, 'onBackPress PhotoGridPage');
-                this.PhotoGridPageIndex = this.currentIndex; // call scrollTo
-                break;
-            case Constants.PHOTO_TRANSITION_CAMERA:
-                Log.info(TAG, 'onBackPress Camera');
-                if (this.pageFrom == Constants.ENTRY_FROM.CARD && !this.pullDownFlag) {
-                    this.routerGridPaged();
-                } else {
-                    if (this.pullDownFlag) {
-                        this.pullDownFlag = false;
-                    }
-                    // Entering from the camera does not need to return to close directly
-                    terminateSelf();
+        if (this.checkedTransition === Constants.PHOTO_TRANSITION_TIMELINE) {
+            Log.info(TAG, 'onBackPress TimelinePage');
+            this.TimelinePageIndex = this.currentIndex; // call scrollTo
+        } else if (this.checkedTransition === Constants.PHOTO_TRANSITION_ALBUM) {
+            Log.info(TAG, 'onBackPress PhotoGridPage');
+            this.PhotoGridPageIndex = this.currentIndex; // call scrollTo
+        } else if (this.checkedTransition === Constants.PHOTO_TRANSITION_CAMERA) {
+            Log.info(TAG, 'onBackPress Camera');
+            if (this.pageFrom == Constants.ENTRY_FROM.CARD && !this.pullDownFlag) {
+                this.routerGridPaged();
+            } else {
+                if (this.pullDownFlag) {
+                    this.pullDownFlag = false;
                 }
-                return;
-            default:
-                break
+                // Entering from the camera does not need to return to close directly
+                terminateSelf();
+            }
+            return;
         }
         router.back({
             params: {
@@ -692,14 +687,14 @@ struct PhotoBrowser {
             if(params.albumInfo != null) {
                 albumInfo = params.albumInfo.toString();
             }
-            if (params.pageType == MediaOperationType.Move) {
+            if (params.pageType === MediaOperationType.Move) {
                 this.onMoveEnd = this.onMoveEnd.bind(this);
                 menuContext.withItems([currentPhoto])
                     .withBroadCast(this.broadCast)
                     .withAlbumInfo(JSON.parse(albumInfo) as SimpleAlbumDataItem)
                     .withOperationEndCallback(this.onMoveEnd);
                 menuOperation = new MoveMenuOperation(menuContext);
-            } else if (params.pageType == MediaOperationType.Copy) {
+            } else if (params.pageType === MediaOperationType.Copy) {
                 this.onCopyEnd = this.onCopyEnd.bind(this);
                 menuContext.withItems([currentPhoto])
                     .withBroadCast(this.broadCast)

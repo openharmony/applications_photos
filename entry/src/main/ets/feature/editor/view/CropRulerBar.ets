@@ -201,27 +201,24 @@ export struct CropRulerBar {
     }
 
     integerAngleToString(currentAngle: number): string {
-        switch (currentAngle) {
-            case -Constants.NUMBER_40:
-                return Constants.NEGATIVE_FORTY;
-            case -Constants.NUMBER_30:
-                return Constants.NEGATIVE_THIRTY;
-            case -Constants.NUMBER_20:
-                return Constants.NEGATIVE_TWENTY;
-            case -Constants.NUMBER_10:
-                return Constants.NEGATIVE_TEN;
-            case Constants.NUMBER_0:
-                return Constants.ZERO_STR;
-            case Constants.NUMBER_10:
-                return Constants.POSITIVE_TEN;
-            case Constants.NUMBER_20:
-                return Constants.POSITIVE_TWENTY;
-            case Constants.NUMBER_30:
-                return Constants.POSITIVE_THIRTY;
-            case Constants.NUMBER_40:
-                return Constants.POSITIVE_FORTY;
-            default:
-                break;
+        if (currentAngle === -Constants.NUMBER_40) {
+            return Constants.NEGATIVE_FORTY;
+        } else if (currentAngle === -Constants.NUMBER_30) {
+            return Constants.NEGATIVE_THIRTY;
+        } else if (currentAngle === -Constants.NUMBER_20) {
+            return Constants.NEGATIVE_TWENTY;
+        } else if (currentAngle === -Constants.NUMBER_10) {
+            return Constants.NEGATIVE_TEN;
+        } else if (currentAngle === Constants.NUMBER_0) {
+            return Constants.ZERO_STR;
+        } else if (currentAngle === Constants.NUMBER_10) {
+            return Constants.POSITIVE_TEN;
+        } else if (currentAngle === Constants.NUMBER_20) {
+            return Constants.POSITIVE_TWENTY;
+        } else if (currentAngle === Constants.NUMBER_30) {
+            return Constants.POSITIVE_THIRTY;
+        } else if (currentAngle === Constants.NUMBER_40) {
+            return Constants.POSITIVE_FORTY;
         }
     }
 
