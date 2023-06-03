@@ -59,7 +59,7 @@ export struct ImageGridItemComponent {
     }
 
     private resetShow() {    
-        Log.info(TAG, `getThumbnail1 ${this.thumbnail}`);
+        Log.info(TAG, "getThumbnail1 " + this.thumbnail);
         if (this.mediaItem.isLoad()) {
             this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE);
             this.mediaItem.isFavor().then((status: boolean) => {
@@ -71,7 +71,7 @@ export struct ImageGridItemComponent {
                 finishTraceWithTaskId("load MediaItem", this.mediaItem.index);
                 this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE);
                 this.isError = false;
-                Log.info(TAG, `getThumbnail2 ${this.thumbnail}`);
+                Log.info(TAG, "getThumbnail2 " + this.thumbnail);
                 this.mediaItem.isFavor().then((status: boolean) => {
                     this.isFavourite = status;
                 })
@@ -82,7 +82,7 @@ export struct ImageGridItemComponent {
     }
 
     aboutToDisappear(): void {
-        Log.debug(TAG, `aboutToDisappear`);
+        Log.debug(TAG, "aboutToDisappear");
         this.resetPressAnim();
     }
 
@@ -98,7 +98,7 @@ export struct ImageGridItemComponent {
     }
 
     async routePage(isError: boolean): Promise<void> {
-        Log.info(TAG, `routePage ${isError}`);
+        Log.info(TAG, "routePage " + isError);
         try {
             startTrace('enterPhotoBrowser');
             if (this.isThird || this.isPreview) {
@@ -107,7 +107,7 @@ export struct ImageGridItemComponent {
                 this.broadCast.emit(BroadcastConstants.JUMP_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
             }
         } catch (err) {
-            Log.error(TAG, `fail callback, code: ${err.code}, msg: ${err.msg}`);
+            Log.error(TAG, "fail callback, code: " + err.code + ", msg: " + err.msg);
         }
     }
 
@@ -116,7 +116,7 @@ export struct ImageGridItemComponent {
             Log.info(TAG, 'routeToPreviewPage');
             this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
         } catch (err) {
-            Log.error(TAG, `fail callback, code: ${err.code}, msg: ${err.msg}`);
+            Log.error(TAG, "fail callback, code: " + err.code + ", msg: " + err.msg);
         }
     }
 
@@ -132,7 +132,7 @@ export struct ImageGridItemComponent {
     }
 
     private selectStateChange(): void {
-        Log.info(TAG, `change selected ${this.isSelectedMode}`);
+        Log.info(TAG, "change selected " + this.isSelectedMode);
         if (!this.isSelectedMode) {
             this.isSelectedMode = true;
             this.pressAnimScale = 1;
@@ -158,7 +158,7 @@ export struct ImageGridItemComponent {
                 .objectFit(ImageFit.Cover)
                 .autoResize(false)
                 .onComplete(() => {
-                    Log.debug(TAG, `Draw the image! ${this.thumbnail}`);
+                    Log.debug(TAG, "Draw the image! " + this.thumbnail);
                     if (this.isEnteringPhoto && this.isPush) {
                         Log.info(TAG, "image onComplete, broadCast, thumbnail:"+this.thumbnail);
                         this.isPush = false;
@@ -171,7 +171,7 @@ export struct ImageGridItemComponent {
 
                 })
                 .onError(() => {
-                    Log.error(TAG, `alt Image ${this.mediaItem.index} error :${this.thumbnail}`);
+                    Log.error(TAG, "alt Image " + this.mediaItem.index + " error :" + this.thumbnail);
                     if (this.thumbnail.length == 0 || this.mediaItem.width == 0 || this.mediaItem.height == 0) {
                         this.resetShow()
                     } else {
@@ -265,8 +265,8 @@ export struct ImageGridItemComponent {
             curve: Curve.Ease
         })
         .onTouch(event => {
-            Log.info(TAG, `onTouch trigger: isSelectedMode: ${this.isSelectedMode},
-                    isEnteringPhoto: ${this.isEnteringPhoto}, ${JSON.stringify(event)}`);
+            Log.info(TAG, "onTouch trigger: isSelectedMode: " + this.isSelectedMode + 
+            ", isEnteringPhoto: " + this.isEnteringPhoto + ", " + JSON.stringify(event));
             if (this.isSelectedMode) {
                 return;
             }
@@ -282,7 +282,7 @@ export struct ImageGridItemComponent {
         })
         .gesture(LongPressGesture().onAction((event: GestureEvent) => {
             if (!this.isThird) {
-                Log.info(TAG, `LongPressGesture ${this.isSelectedMode}`);
+                Log.info(TAG, "LongPressGesture " + this.isSelectedMode);
                 this.selectStateChange();
             }
         }))

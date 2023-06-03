@@ -49,7 +49,7 @@ export struct FindSameNameDialog {
     timeConvert = 1000;
 
     getTitle(name): string {
-        Log.info(this.TAG, `getTitle ${name}`);
+        Log.info(this.TAG, "getTitle " + name);
         if (name) {
             let index = name.lastIndexOf('.');
             if (index == -1) {
@@ -101,7 +101,7 @@ export struct FindSameNameDialog {
 
             Row() {
                 Column() {
-                    Text($r('app.string.file_size_location', `${(this.sourceDetails.size / Constants.BYTE_TO_MB).toFixed(2)}MB`))
+                    Text($r('app.string.file_size_location', (this.sourceDetails.size / Constants.BYTE_TO_MB).toFixed(2) + "MB"))
                         .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
                         .fontWeight(FontWeight.Regular)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
@@ -131,7 +131,7 @@ export struct FindSameNameDialog {
 
             Row() {
                 Column() {
-                    Text($r('app.string.file_size_location', `${(this.targetDetails.size / Constants.BYTE_TO_MB).toFixed(2)}MB`))
+                    Text($r('app.string.file_size_location', (this.targetDetails.size / Constants.BYTE_TO_MB).toFixed(2) + "MB"))
                         .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
                         .fontWeight(FontWeight.Regular)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
@@ -186,7 +186,7 @@ export struct FindSameNameDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        Log.debug(this.TAG, `replaceCallback`);
+                        Log.debug(this.TAG, "replaceCallback");
                         if (this.isDoSameAction) {
                             this.findSameNameParam.doSameFunc
                             && this.findSameNameParam.doSameFunc(FindSameOperation.REPLACE);
@@ -220,7 +220,7 @@ export struct FindSameNameDialog {
                         .backgroundColor($r('app.color.transparent'))
                         .height($r('app.float.details_dialog_button_height'))
                         .onClick(() => {
-                            Log.debug(this.TAG, `skipCallback`);
+                            Log.debug(this.TAG, "skipCallback");
                             if (this.isDoSameAction) {
                                 this.findSameNameParam.doSameFunc
                                 && this.findSameNameParam.doSameFunc(FindSameOperation.SKIP);
@@ -254,7 +254,7 @@ export struct FindSameNameDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        Log.debug(this.TAG, `cancelFunc`);
+                        Log.debug(this.TAG, "cancelFunc");
                         this.findSameNameParam.cancelFunc && this.findSameNameParam.cancelFunc();
                         this.controller.close();
                     })

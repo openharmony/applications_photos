@@ -99,7 +99,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
                     this.onOperateContinue();
                     break;
                 default:
-                    Log.warn(TAG, `findSameOperation is error ${this.findSameOperation}`);
+                    Log.warn(TAG, "findSameOperation is error " + this.findSameOperation);
                     break;
             }
         } else {
@@ -118,13 +118,13 @@ export class MoveMenuOperation extends ProcessMenuOperation {
             finishTraceWithTaskId('move', this.currentBatch);
             this.onCompleted();
         } catch (error) {
-            Log.error(TAG, `move error: ${error}`)
+            Log.error(TAG, "move error: " + error)
             this.onError();
         }
     }
 
     cancelFunc(): void {
-        Log.info(TAG, `progress cancel`);
+        Log.info(TAG, "progress cancel");
         this.onOperatePause();
         let cancelMessage = $r('app.string.move_cancel_message', this.getExpectProgress().toString());
         this.menuContext.broadCast && this.menuContext.broadCast.emit(BroadcastConstants.CANCEL_OPERATE,

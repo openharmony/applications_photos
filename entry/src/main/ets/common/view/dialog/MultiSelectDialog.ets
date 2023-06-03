@@ -71,7 +71,7 @@ export struct MultiSelectDialog {
                 }
 
                 Column() {
-                    Text(`${(this.multiSelectDetails.size / Constants.BYTE_TO_MB).toFixed(2)}MB`)
+                    Text((this.multiSelectDetails.size / Constants.BYTE_TO_MB).toFixed(2) + "MB")
                         .fontSize($r('sys.float.ohos_id_text_size_body2'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
                         .fontColor($r('sys.color.ohos_id_color_text_secondary'))

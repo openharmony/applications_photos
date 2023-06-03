@@ -43,7 +43,7 @@ export struct NoPhotoIndexComponent {
         let winHeightHalf = screenManager.getWinHeight() / 2;
         this.imageSize
         = (winWidth < winHeightHalf) ? (winWidth * IMAGE_SCREEN_RATIO) : (winHeightHalf * IMAGE_SCREEN_RATIO);
-        Log.info(this.TAG, `window size: ${winWidth}, ${winHeightHalf}  ,empty photos or album picture size = ${this.imageSize}`);
+        Log.info(this.TAG, "window size: " + winWidth + ", " + winHeightHalf + "  ,empty photos or album picture size = " + this.imageSize);
     }
 
     build() {

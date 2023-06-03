@@ -33,14 +33,14 @@ export struct MenuPanel {
 
     private onActionBarPropChanged(): void {
         this.menuList = this.actionBarProp.getMenuList();
-        Log.info(this.TAG, `onActionBarPropChanged, menu's size: ${this.menuList.length}`);
+        Log.info(this.TAG, "onActionBarPropChanged, menu's size: " + this.menuList.length);
         this.menuList.forEach((menu: Action) => {
-            Log.info(this.TAG, `ActionId: ${menu.actionID}`);
+            Log.info(this.TAG, "ActionId: " + menu.actionID);
         })
     }
 
     private onBuildDone(): void {
-        Log.info(this.TAG, `onBuildDone, menu's size: ${this.menuList.length}`);
+        Log.info(this.TAG, "onBuildDone, menu's size: " + this.menuList.length);
     }
 
     build() {

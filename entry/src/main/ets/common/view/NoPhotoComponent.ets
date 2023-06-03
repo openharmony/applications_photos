@@ -31,7 +31,7 @@ export struct NoPhotoComponent {
     @State bigScreen: boolean = false;
 
     aboutToAppear(): void {
-        Log.info(TAG, `aboutToAppear`);
+        Log.info(TAG, "aboutToAppear");
         this.bigScreen = Math.min(screenManager.getWinHeight(), screenManager
             .getWinWidth()) > Constants.BIG_SCREEN_WIDTH;
         let halfImageHeight = this.bigScreen ? Constants.BIG_EMPTY_ICON_SIZE / 2 : Constants.SMALL_EMPTY_ICON_SIZE / 2;
@@ -50,7 +50,7 @@ export struct NoPhotoComponent {
             Constants.ActionBarHeight - halfImageHeight;
         }
 
-         Log.info(TAG, `isHorizontal: ${this.isHorizontal}, offSetY: ${this.offSetY}, bigScreen: ${this.bigScreen}`);
+         Log.info(TAG, "isHorizontal: " + this.isHorizontal + ", offSetY: " + this.offSetY + ", bigScreen: " + this.bigScreen);
     }
 
     build() {
