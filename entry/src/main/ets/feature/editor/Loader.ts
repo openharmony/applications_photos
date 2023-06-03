@@ -15,7 +15,7 @@
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
-import type { Size } from '../../common/model/common/DataTypes';
+import { Size } from '../../common/model/common/DataTypes';
 import { PixelMapWrapper } from './base/PixelMapWrapper';
 import { MathUtils } from './crop/MathUtils';
 import { CropAngle } from './crop/CropType';

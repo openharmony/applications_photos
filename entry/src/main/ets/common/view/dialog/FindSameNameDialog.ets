@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import type { DialogCallback } from '../../model/common/DialogUtil';
+import { DialogCallback } from '../../model/common/DialogUtil';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { FindSameOperation } from '@ohos/base/src/main/ets/operation/ProcessMenuOperation';

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
-import type { DialogCallback } from '../../model/common/DialogUtil';
+import { DialogCallback } from '../../model/common/DialogUtil';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
