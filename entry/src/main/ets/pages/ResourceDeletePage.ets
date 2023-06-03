@@ -56,7 +56,7 @@ struct ResourceDeletePage {
   }
 
   private getMediaItems(): MediaDataItem[] {
-    let uris: [] = AppStorage.Get('uris');
+    let uris: string[] = AppStorage.Get<string[]>('uris');
     Log.error(TAG, `aboutToAppear uris : ${JSON.stringify(uris)}`);
     let mediaDataItems: MediaDataItem[] = [];
     if (uris != undefined && uris.length > 0) {
