@@ -57,15 +57,15 @@ export class DateUtil {
         if (check.test(format_s)) {
             format_s = format_s.replace('yyyy', time.getFullYear().toString().substr(0));
         }
-        for (let f of opts.keys()) {
-            if (new RegExp('(' + f + ')').test(format_s)) {
-                format_s = format_s.replace(f,
-                    (f.length == 1)
-                    ? opts.get(f).toString()
-                    : (("00" + opts.get(f)).substr(opts.get(f).toString().length))
+        opts.forEach((value: number, key: string): void => {
+            if (new RegExp('(' + key + ')').test(format_s)) {
+                format_s = format_s.replace(key,
+                    (key.length == 1)
+                    ? value.toString()
+                    : (("00" + value).substr(value.toString().length))
                 );
             }
-        }
+        });
         return format_s;
     }
 

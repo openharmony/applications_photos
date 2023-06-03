@@ -32,15 +32,15 @@ export class DateUtil {
         if (new RegExp("/(y+)/").test(format)) {
             format = format.replace('yyyy', time.getFullYear().toString().substr(0));
         }
-        for (let f of opts.keys()) {
-            if (new RegExp('(' + f + ')').test(format)) {
+        opts.forEach((value: number, key: string): void => {
+            if (new RegExp('(' + key + ')').test(format)) {
                 format = format.replace(f,
-                    (f.length == 1)
-                    ? opts.get(f).toString()
-                    : (("00" + opts.get(f)).substr(opts.get(f).toString().length))
+                    (key.length == 1)
+                    ? value.toString()
+                    : (("00" + value).substr(value.toString().length))
                 );
             }
-        }
+        });
         return format;
     }
 
