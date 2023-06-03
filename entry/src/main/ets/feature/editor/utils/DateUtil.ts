@@ -34,7 +34,7 @@ export class DateUtil {
         }
         opts.forEach((value: number, key: string): void => {
             if (new RegExp('(' + key + ')').test(format)) {
-                format = format.replace(f,
+                format = format.replace(key,
                     (key.length == 1)
                     ? value.toString()
                     : (("00" + value).substr(value.toString().length))
