@@ -37,7 +37,7 @@ export struct ThirdSelectPhotoBrowserActionBar {
 
     private createActionBar(): ActionBarProp {
         let actionBarProp: ActionBarProp = new ActionBarProp();
-        let menuList
+        let menuList: Action[]
             = [this.isMultiPick ? (this.isSelected ? Action.SELECTED : Action.MATERIAL_SELECT) : Action.OK];
         actionBarProp
             .setLeftAction(Action.BACK)

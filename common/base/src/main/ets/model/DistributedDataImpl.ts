@@ -22,7 +22,7 @@ const TAG = "DistributedDataImpl"
 
 export class DistributedDataImpl {
     async reloadAlbumItemData(): Promise<PeerDataItem[]> {
-        let peerDataItems = [];
+        let peerDataItems: PeerDataItem[] = [];
         let peers: MediaLib.PeerInfo[] = await mediaModel.getActivePeers();
         Log.info(TAG, "peers： " + JSON.stringify(peers));
         for (let i = 0;i < peers.length; i++) {

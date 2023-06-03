@@ -99,7 +99,7 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
     private async rename(item: MediaDataItem, name: string): Promise<Object[]> {
         Log.info(TAG, 'renameSinglePhoto start');
         item.setName(name);
-        return [item.title, item.displayName];
+        return [item.title, item.displayName] as Object[];
     }
 
     private async hasSameNameAsset(item: MediaDataItem, name: string): Promise<boolean> {

@@ -35,6 +35,7 @@ import { SelectUtil } from '@ohos/base/src/main/ets/utils/SelectUtil';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
+import Want from '@ohos.app.ability.Want'
 // third selection photoBrowser
 
 const TAG = "ThirdSelectPhotoBrowser"
@@ -242,11 +243,11 @@ struct ThirdSelectPhotoBrowser {
 
         let param1: Map<string, string[]> = new Map();
         param1.set('select-item-list', uriArray);
-        let abilityResult = {
+        let abilityResult: common.AbilityResult = {
             resultCode: 0,
             want: {
                 parameters: Object.fromEntries(param1)
-            } as Object
+            } as Want
         };
         Log.info(TAG, "terminateSelfWithResult result: " + JSON.stringify(abilityResult));
         SelectUtil.grantPermissionForUris(uriArray, this.bundleName);

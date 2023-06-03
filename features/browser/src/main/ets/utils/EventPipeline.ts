@@ -542,7 +542,7 @@ export class EventPipeline {
     }
 
     private evaluateAnimeMatrix(scale: number, center: number[]): Matrix4.Matrix4Transit {
-        let offset = [
+        let offset: number[] = [
             this.lastOffset[0] + this.offset[0] + (center[0] - Constants.CENTER_DEFAULT) * this.componentWidth
             * (this.defaultScale - scale / this.lastScale) * this.lastScale,
             this.lastOffset[1] + this.offset[1] + (center[1] - Constants.CENTER_DEFAULT) * this.componentHeight

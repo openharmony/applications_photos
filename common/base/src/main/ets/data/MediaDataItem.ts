@@ -83,9 +83,10 @@ export class MediaDataItem implements DateAdded {
                 order: "date_added DESC LIMIT " + this.index + ",1"
             } as MediaLib.MediaFetchOptions;
         } else {
+            let selectionArgs: string [] = [this.id.toString()];
             fetchOption = {
                 selections: MediaLib.FileKey.ID + " = ?",
-                selectionArgs: [this.id.toString()],
+                selectionArgs: selectionArgs,
                 order: "date_added DESC"
             } as MediaLib.MediaFetchOptions;
         }

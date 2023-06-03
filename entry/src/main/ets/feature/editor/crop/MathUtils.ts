@@ -42,7 +42,7 @@ export abstract class MathUtils {
     }
 
     static rectToPoints(rect: RectF): Array<Point> {
-        let points = [];
+        let points: Point[] = [];
         points.push(new Point(rect.left, rect.top));
         points.push(new Point(rect.right, rect.top));
         points.push(new Point(rect.right, rect.bottom));
@@ -63,7 +63,7 @@ export abstract class MathUtils {
 
     static rotatePoints(inputs: Array<Point>, angle: number, origin: Point): Array<Point> {
         let alpha = MathUtils.formulaAngle(-angle);
-        let outputs = [];
+        let outputs: Point[] = [];
         for (let input of inputs) {
             let dx = input.x - origin.x;
             let dy = input.y - origin.y;

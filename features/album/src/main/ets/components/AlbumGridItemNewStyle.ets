@@ -31,10 +31,18 @@ const TAG = "AlbumGridItemNewStyle"
 
 @Component
 export struct AlbumGridItemNewStyle {
-    private staticIconList = new Map([
-        [MediaConstants.ALBUM_ID_VIDEO, $r('app.media.ic_video')],
-        [MediaConstants.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
-    ]);
+    private staticIconList: Map<string, Resource> = null;
+
+    private getStaticIconList(): Map<string, Resource> {
+        if(this.staticIconList === null) {
+            let icons: Map<string, Resource> = new Map();
+            icons.set(MediaConstants.ALBUM_ID_VIDEO, $r('app.media.ic_video'));
+            icons.set(MediaConstants.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay'));
+            this.staticIconList = icons;
+        }
+        return this.staticIconList;
+    };
+
     item: AlbumDataItem
     lazyItem: LazyItem<AlbumDataItem>
     @State isEmptyAlbum: boolean = false;
@@ -243,8 +251,8 @@ export struct AlbumGridItemNewStyle {
                 bottom: $r('app.float.album_set_count_margin_bottom')
             })
 
-            if (this.staticIconList.has(this.item.id) && !this.isAlbumSetSelectedMode) {
-                Image(this.staticIconList.get(this.item.id))
+            if (this.getStaticIconList().has(this.item.id) && !this.isAlbumSetSelectedMode) {
+                Image(this.getStaticIconList().get(this.item.id))
                     .height($r('app.float.album_set_new_style_icon'))
                     .aspectRatio(1)
                     .position({ x: '100%', y: '100%' })

@@ -267,7 +267,7 @@ class ScreenManager {
 
     private async hideStatusBar(topWindow: window.Window): Promise<void> {
         Log.debug(TAG, 'hideStatusBar start');
-        let names = ['navigation'];
+        let names: string[] = ['navigation'];
         Log.debug(TAG, "getTopWindow names: " + names + " end");
         try {
             // @ts-ignore
@@ -314,7 +314,7 @@ class ScreenManager {
         Log.debug(TAG, 'setSystemUi start');
         let topWindow: window.Window = AppStorage.Get(WindowConstants.MAIN_WINDOW);
         Log.debug(TAG, 'getTopWindow start');
-        let names = ["navigation"];
+        let names: string[] = ["navigation"];
         if (!isShowBar) {
             names = [];
         }
