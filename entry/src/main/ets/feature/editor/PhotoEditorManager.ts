@@ -49,7 +49,7 @@ export class PhotoEditorManager {
     initialize(item: MediaDataItem, mode: PhotoEditMode, errCallback?: Function): void {
         Log.info(this.TAG, "initialize mode[" + mode + "]");
         this.item = item;
-        Loader.loadPixelMapWrapper(item, true).then((pixelMap): void => {
+        Loader.loadPixelMapWrapper(item, true).then((pixelMap: PixelMapWrapper): void => {
             if (pixelMap) {
                 this.origin = pixelMap;
                 this.historyManager.setOriginPixelMap(this.origin);

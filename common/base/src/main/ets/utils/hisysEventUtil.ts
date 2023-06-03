@@ -27,7 +27,7 @@ export function hiSysEventDataQueryTimedOut(interfaceName: string): number {
                     FAULT_ID: "DATA_QUERY_OVERTIME",
                     MSG: interfaceName + " Querying 1s data timed out."
                 }
-            }, (err): void => {
+            }, (err: Error): void => {
                 if(err) {
                     Log.error(TAG, 'fail to return hiSysEvent');
                 }

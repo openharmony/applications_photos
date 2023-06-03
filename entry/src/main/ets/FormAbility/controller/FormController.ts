@@ -64,7 +64,7 @@ export class FormController {
         let obj3 = this.bindFormData(formId);
         Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
         formProvider.updateForm(formId, obj3)
-            .then((data): void => {
+            .then((data: void): void => {
                 Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
                 if (this.mediaDataManager.getIsShowAlbumName()) {
                     formProvider.setFormNextRefreshTime(formId, this.mediaDataManager.getIntervalTime()).then((): void => {
@@ -73,7 +73,7 @@ export class FormController {
                             this.callback.call(this.callback);
                         }
                         this.onDestroy();
-                    }).catch((err): void => {
+                    }).catch((err: Error): void => {
                          Log.error(TAG, "init err " + err);
                     })
                 } else {
@@ -82,7 +82,7 @@ export class FormController {
                     }
                     this.onDestroy();
                 }
-            }).catch((error): void => {
+            }).catch((error: Error): void => {
              Log.error(TAG, "updateForm failed. Cause: " + JSON.stringify(error));
             this.mediaDataManager.closeFd();
         });
@@ -140,10 +140,10 @@ export class FormController {
                 Log.debug(TAG, "updateFormData formId: " + JSON.stringify(formId));
                 let obj3 = this.bindFormData(formId);
                 Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
-                formProvider.updateForm(formId, obj3).then((data): void => {
+                formProvider.updateForm(formId, obj3).then((data: void): void => {
                     Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
                     this.onTriggerFormEvent(formId, this.callback.call(this.callback));
-                }).catch((error): void => {
+                }).catch((error: Error): void => {
                     this.onTriggerFormEvent(formId, this.callback.call(this.callback));
                 });
             } else {
