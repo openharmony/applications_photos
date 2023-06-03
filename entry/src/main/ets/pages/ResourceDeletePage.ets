@@ -57,7 +57,7 @@ struct ResourceDeletePage {
 
   private getMediaItems(): MediaDataItem[] {
     let uris: string[] = AppStorage.Get<string[]>('uris');
-    Log.error(TAG, `aboutToAppear uris : ${JSON.stringify(uris)}`);
+    Log.error(TAG, "aboutToAppear uris : " + JSON.stringify(uris));
     let mediaDataItems: MediaDataItem[] = [];
     if (uris != undefined && uris.length > 0) {
       uris.forEach((uri: string, index: number) => {
@@ -100,7 +100,7 @@ struct ResourceDeletePage {
   }
 
   private setDeleteResult(result: dialogRequest.ResultCode): void {
-    Log.info(TAG, `start to setDeleteResult : ${result}}`);
+    Log.info(TAG, "start to setDeleteResult : " + result);
     try {
       let requestCallback = AppStorage.Get("requestCallback");
       let myResult = {
@@ -111,7 +111,7 @@ struct ResourceDeletePage {
       let photoAbilityContext: common.ServiceExtensionContext = GlobalContext.getContext().getObject("photoAbilityContext") as common.ServiceExtensionContext;
       photoAbilityContext.terminateSelf();
     } catch(err) {
-      Log.info(TAG, `getRequestInfo err : ${JSON.stringify(err)}`);
+      Log.info(TAG, "getRequestInfo err : " + JSON.stringify(err));
     }
   }
 }

@@ -62,7 +62,7 @@ struct SelectPhotoBrowser {
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000');
         this.browserBackgroundColor = $r('app.color.black');
         mMultimodalInputManager.registerListener((control: number) => {
-            Log.info(TAG, `key control : ${control} index ${this.currentIndex}`);
+            Log.info(TAG, "key control : " + control + " index " + this.currentIndex);
             if (control == 0) {
                 if (this.currentIndex > 0) {
                     this.onPhotoChanged(this.currentIndex - 1);
@@ -108,11 +108,11 @@ struct SelectPhotoBrowser {
 
         // register event handling
         this.broadCast.on(PhotoConstants.TOGGLE_BAR, (event) => {
-            Log.info(TAG, `TOGGLE_BAR : ${JSON.stringify(event)}`);
+            Log.info(TAG, "TOGGLE_BAR : " + JSON.stringify(event));
         });
 
         this.broadCast.on(PhotoConstants.PULL_DOWN_END, (event) => {
-            Log.info(TAG, `PULL_DOWN_END : ${JSON.stringify(event)}`);
+            Log.info(TAG, "PULL_DOWN_END : " + JSON.stringify(event));
             this.onBackPress();
         });
 
@@ -122,12 +122,12 @@ struct SelectPhotoBrowser {
 
         this.broadCast.on(PhotoConstants.DATA_CONTENT_CHANGED, (size: number) => {
             // onContentChanged only the current item is updated
-            Log.info(TAG, `DATA_CONTENT_CHANGED : ${size}`);
+            Log.info(TAG, "DATA_CONTENT_CHANGED : " + size);
             this.onPhotoChanged(this.currentIndex);
         });
 
         this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean) => {
-            Log.info(TAG, `set swiper swipe ${value}`);
+            Log.info(TAG, "set swiper swipe " + value);
             this.canSwipe = value;
         });
     }
@@ -142,7 +142,7 @@ struct SelectPhotoBrowser {
     }
 
     onDataSizeChanged(size: number): void {
-        Log.info(TAG, `onDataSizeChanged, size is ${size}`);
+        Log.info(TAG, "onDataSizeChanged, size is " + size);
         if (size == 0) {
             this.onBackPress();
         }
@@ -164,7 +164,7 @@ struct SelectPhotoBrowser {
         this.isSelected = currentPhoto.isSelect;
         this.totalSelectedCount = this.browserDataSource.getSelectedCount();
         this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
-        Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
+        Log.info(TAG, "totalSelectedCount: " + this.totalSelectedCount + " after state change");
     }
 
     onPageShow(): void {
@@ -177,7 +177,7 @@ struct SelectPhotoBrowser {
     }
 
     onMenuClicked(action: Action): void {
-        Log.debug(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.debug(TAG, "onMenuClicked, action: " + action.actionID);
         if (action === Action.BACK) {
             this.onBackPress();
         } else if (action === Action.MATERIAL_SELECT || action === Action.SELECTED) {
@@ -223,7 +223,7 @@ struct SelectPhotoBrowser {
         let uriArray: string[];
         if (this.isMultiPick) {
             uriArray = this.browserDataSource.getSelectedUris();
-            Log.debug(TAG, `uri size: ${uriArray}`);
+            Log.debug(TAG, "uri size: " + uriArray);
         } else {
             let currentPhoto = this.getCurrentPhoto();
             if (currentPhoto == undefined) {

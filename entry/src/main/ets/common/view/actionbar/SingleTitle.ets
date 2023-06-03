@@ -24,7 +24,7 @@ export struct SingleTitle {
     @Link actionBarProp: ActionBarProp;
 
     private onBuildDone(): void {
-        Log.info(this.TAG, `onBuildDone, title: ${this.actionBarProp.getTitle()}`);
+        Log.info(this.TAG, "onBuildDone, title: " + this.actionBarProp.getTitle());
     }
 
     build() {
