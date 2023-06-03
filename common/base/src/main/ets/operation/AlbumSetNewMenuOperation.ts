@@ -147,7 +147,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
             }
         }
 
-        numbers.sort(function (a, b) {
+        numbers.sort((a: number, b: number): number => {
             return a - b;
         });
 

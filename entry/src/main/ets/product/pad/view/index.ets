@@ -89,9 +89,10 @@ struct IndexPage {
 
     onBackPress(): boolean {
         let isProcessed = false;
-        this.appBroadcast.emit(BroadcastConstants.BACK_PRESS_EVENT, [function(isModeChanged: boolean){
+        let func = (isModeChanged: boolean): void => {
             isProcessed = isModeChanged;
-        }.bind(this)]);
+        }
+        this.appBroadcast.emit(BroadcastConstants.BACK_PRESS_EVENT, [func]);
         return isProcessed;
     }
 
