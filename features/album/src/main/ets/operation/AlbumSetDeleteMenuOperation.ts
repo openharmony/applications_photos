@@ -104,7 +104,7 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
         this.onOperationEnd = this.menuContext.onOperationEnd;
         let onOperationStart: Function = this.menuContext.onOperationStart;
 
-        onOperationStart && onOperationStart();
+        if(onOperationStart != null) onOperationStart();
 
         this.menuContext.broadCast.emit(BroadcastConstants.DELETE_PROGRESS_DIALOG, [$r('app.string.action_delete'), this.count]);
         this.processOperation();

@@ -74,7 +74,7 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
 
         this.onOperationEnd = this.menuContext.onOperationEnd;
         let onOperationStart: Function = this.menuContext.onOperationStart;
-        onOperationStart && onOperationStart();
+        if(onOperationStart != null) onOperationStart();
 
         this.rename(newName);
     }
@@ -116,11 +116,11 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
 
     onCompleted(): void {
         Log.info(TAG, 'Rename data succeed!');
-        this.onOperationEnd && this.onOperationEnd();
+        if(this.onOperationEnd != null) this.onOperationEnd();
     }
 
     onError(): void {
         Log.error(TAG, 'Rename data failed!');
-        this.onOperationEnd && this.onOperationEnd();
+        if(this.onOperationEnd != null) this.onOperationEnd();
     }
 }

@@ -76,7 +76,7 @@ struct MediaOperationPage {
                     albumInfo: JSON.stringify(albumInfo)
                 }
             });
-            completedFunc && completedFunc();
+            if(completedFunc != null) completedFunc();
         });
         this.updateListCardWidth();
     }

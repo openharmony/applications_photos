@@ -62,7 +62,7 @@ export class Save {
             await mediaModel.closeAsset(fd, fileAsset);
 
             await packer.release();
-            wrapper && wrapper.release();
+            if(wrapper != null) wrapper.release();
             Log.info(TAG, "end");
             return newId
         } catch (e) {

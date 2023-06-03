@@ -84,7 +84,7 @@ export struct SaveDialog {
                             .onClick(() => {
                                 this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                                 this.controller.close()
-                                this.saveDialogCallback && this.saveDialogCallback.replaceOriginalCallback()
+                                if(this.saveDialogCallback != null) this.saveDialogCallback.replaceOriginalCallback()
                             }).backgroundColor($r('app.color.transparent'))
                         }.width(Constants.PERCENT_ONE_THIRD)
                         .padding({
@@ -113,7 +113,7 @@ export struct SaveDialog {
                             .onClick(() => {
                                 this.controller.close()
                                 this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
-                                this.saveDialogCallback && this.saveDialogCallback.saveAsNewCallback()
+                                if(this.saveDialogCallback != null) this.saveDialogCallback.saveAsNewCallback()
                             }).backgroundColor($r('app.color.transparent'))
                         }
                         .width(Constants.PERCENT_ONE_THIRD)
@@ -139,7 +139,7 @@ export struct SaveDialog {
                     .onClick(() => {
                         this.controller.close()
                         this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
-                        this.saveDialogCallback && this.saveDialogCallback.saveAsNewCallback()
+                        if(this.saveDialogCallback != null) this.saveDialogCallback.saveAsNewCallback()
                     }).backgroundColor($r('app.color.transparent'))
 
                     Button() {
@@ -153,7 +153,7 @@ export struct SaveDialog {
                     .onClick(() => {
                         this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                         this.controller.close()
-                        this.saveDialogCallback && this.saveDialogCallback.replaceOriginalCallback()
+                        if(this.saveDialogCallback != null) this.saveDialogCallback.replaceOriginalCallback()
                     }).backgroundColor($r('app.color.transparent'))
 
                     Button() {

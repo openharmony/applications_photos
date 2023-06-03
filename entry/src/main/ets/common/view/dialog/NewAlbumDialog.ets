@@ -103,7 +103,7 @@ export struct NewAlbumDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        this.dialogCallback && this.dialogCallback.cancelCallback();
+                        if(this.dialogCallback != null) this.dialogCallback.cancelCallback();
                         this.controller.close()
                     })
 
@@ -137,7 +137,7 @@ export struct NewAlbumDialog {
                             })
                             return
                         }
-                        this.dialogCallback && this.dialogCallback.confirmCallback(this.inputName);
+                        if(this.dialogCallback != null) this.dialogCallback.confirmCallback(this.inputName);
                         this.controller.close()
                     })
                 }

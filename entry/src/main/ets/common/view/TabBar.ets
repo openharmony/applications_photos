@@ -145,7 +145,7 @@ struct Tab {
         })
     }
     .onClick(() => {
-      this.onTabSelected && this.onTabSelected(this.index);
+      if(this.onTabSelected != null) this.onTabSelected(this.index);
       this.tabItem.isSelected = true;
       this.appBroadcast.emit(BroadcastConstants.RESET_TAB_SELECTED_STATUE, [this.index]);
     })
@@ -273,7 +273,7 @@ struct TabWithText {
     .width('100%')
     .onClick(() => {
       if (!this.isAlbumSetSelectedMode) {
-        this.onTabSelected && this.onTabSelected(this.index)
+        if(this.onTabSelected != null) this.onTabSelected(this.index)
         this.tabItemWithText.isSelected = true;
         this.appBroadcast.emit(BroadcastConstants.RESET_TAB_SELECTED_TEXT, [this.index]);
       }

@@ -56,7 +56,7 @@ export class PhotoEditorManager {
                 this.switchMode(mode);
             } else {
                 Log.error(this.TAG, 'initialize loadPixelMapWrapper failed');
-                errCallback && errCallback();
+                if(errCallback != null) errCallback();
             }
         })
     }
@@ -65,7 +65,7 @@ export class PhotoEditorManager {
         Log.debug(this.TAG, 'clear');
         this.editors[this.currentMode] && this.editors[this.currentMode].exit();
         this.item = undefined;
-        this.origin && this.origin.release();
+        if(this.origin != null) this.origin.release();
         this.origin = undefined;
         this.historyManager.setOriginPixelMap(undefined);
         this.historyManager.releaseAll();
@@ -107,7 +107,7 @@ export class PhotoEditorManager {
 
         // entry next edit mode
         let input = this.getLastPixelMap();
-        if (input && this.editors[mode] != undefined) {
+        if (input != null && this.editors[mode] != undefined) {
             this.editors[mode].entry(input);
             // update current edit mode
             this.currentMode = mode;

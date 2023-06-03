@@ -55,7 +55,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
         this.onOperationEnd = this.menuContext.onOperationEnd;
         let onOperationStart = this.menuContext.onOperationStart;
 
-        onOperationStart && onOperationStart();
+        if(onOperationStart != null) onOperationStart();
 
         this.menuContext.broadCast.emit(
             BroadcastConstants.SHOW_PROGRESS_DIALOG, [$r('app.string.move_progress_message', this.albumInfo.displayName),
@@ -127,8 +127,10 @@ export class MoveMenuOperation extends ProcessMenuOperation {
         Log.info(TAG, "progress cancel");
         this.onOperatePause();
         let cancelMessage = $r('app.string.move_cancel_message', this.getExpectProgress().toString());
-        this.menuContext.broadCast && this.menuContext.broadCast.emit(BroadcastConstants.CANCEL_OPERATE,
-            [cancelMessage, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this)]);
+        if(this.menuContext.broadCast != null) {
+            this.menuContext.broadCast.emit(BroadcastConstants.CANCEL_OPERATE,
+                        [cancelMessage, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this)]);
+        }
     }
 
     // Move cancel callback

@@ -62,7 +62,7 @@ export struct DeleteDialog {
                     .onClick(() => {
                         Log.debug(this.TAG, 'cancelCallback');
                         this.controller.close();
-                        this.dialogCallback && this.dialogCallback.cancelCallback();
+                        if(this.dialogCallback != null) this.dialogCallback.cancelCallback();
                     })
 
                     Row() {
@@ -91,7 +91,7 @@ export struct DeleteDialog {
                     .onClick(() => {
                         Log.debug(this.TAG, 'confirmCallback');
                         this.controller.close();
-                        this.dialogCallback && this.dialogCallback.confirmCallback();
+                        if(this.dialogCallback != null) this.dialogCallback.confirmCallback();
                     })
                 }
             }

@@ -59,7 +59,7 @@ export struct ToolBar {
                     .fontSize($r('sys.float.ohos_id_text_size_body1'))
                     .onClick(() => {
                         this.showPopup = false;
-                        this.onMenuClicked && this.onMenuClicked(menu);
+                        if(this.onMenuClicked != null) this.onMenuClicked(menu);
                     })
                 if (this.moreMenuList.indexOf(menu) != this.moreMenuList.length - 1) {
                     Divider()
@@ -143,7 +143,7 @@ export struct ToolBar {
                                 .margin({ top: $r('sys.float.ohos_id_text_margin_vertical') })
                             }
                             .onClick(() => {
-                                this.onMenuClicked && this.onMenuClicked(menu)
+                                if(this.onMenuClicked != null) this.onMenuClicked(menu)
                             })
                             .width(Constants.PERCENT_HUNDRED / this.toolMenuList.length + "%")
                             .height('100%')

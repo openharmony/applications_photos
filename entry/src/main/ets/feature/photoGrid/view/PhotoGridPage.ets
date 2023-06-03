@@ -532,7 +532,7 @@ struct PhotoGridPage {
         }
         AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
         let pageEntryFrom
-        if (this.albumInfo && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
+        if (this.albumInfo != null && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
             pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
         } else if (this.isDistributedAlbum) {
             pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
@@ -559,7 +559,7 @@ struct PhotoGridPage {
         }
         AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
         let pageEntryFrom;
-        if (this.albumInfo && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
+        if (this.albumInfo != null && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
             pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
         } else if (this.isDistributedAlbum) {
             pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;

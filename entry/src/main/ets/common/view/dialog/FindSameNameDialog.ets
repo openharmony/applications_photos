@@ -187,11 +187,10 @@ export struct FindSameNameDialog {
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
                         Log.debug(this.TAG, "replaceCallback");
-                        if (this.isDoSameAction) {
-                            this.findSameNameParam.doSameFunc
-                            && this.findSameNameParam.doSameFunc(FindSameOperation.REPLACE);
+                        if (this.isDoSameAction && this.findSameNameParam.doSameFunc != null) {
+                            this.findSameNameParam.doSameFunc(FindSameOperation.REPLACE);
                         }
-                        this.findSameNameParam.replaceFunc && this.findSameNameParam.replaceFunc();
+                        if(this.findSameNameParam.replaceFunc != null) this.findSameNameParam.replaceFunc();
                         this.controller.close();
                     })
 
@@ -220,12 +219,18 @@ export struct FindSameNameDialog {
                         .backgroundColor($r('app.color.transparent'))
                         .height($r('app.float.details_dialog_button_height'))
                         .onClick(() => {
+<<<<<<< HEAD
                             Log.debug(this.TAG, "skipCallback");
                             if (this.isDoSameAction) {
                                 this.findSameNameParam.doSameFunc
                                 && this.findSameNameParam.doSameFunc(FindSameOperation.SKIP);
+=======
+                            Log.debug(this.TAG, `skipCallback`);
+                            if (this.isDoSameAction && this.findSameNameParam.doSameFunc != null) {
+                                this.findSameNameParam.doSameFunc(FindSameOperation.SKIP);
+>>>>>>> Boolean operators fix
                             }
-                            this.findSameNameParam.skipFunc && this.findSameNameParam.skipFunc();
+                            if(this.findSameNameParam.skipFunc != null) this.findSameNameParam.skipFunc();
                             this.controller.close();
                         })
 
@@ -254,8 +259,13 @@ export struct FindSameNameDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
+<<<<<<< HEAD
                         Log.debug(this.TAG, "cancelFunc");
                         this.findSameNameParam.cancelFunc && this.findSameNameParam.cancelFunc();
+=======
+                        Log.debug(this.TAG, `cancelFunc`);
+                        if(this.findSameNameParam.cancelFunc != null) this.findSameNameParam.cancelFunc();
+>>>>>>> Boolean operators fix
                         this.controller.close();
                     })
                 }

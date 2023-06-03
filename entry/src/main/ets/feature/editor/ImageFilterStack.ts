@@ -42,7 +42,7 @@ export class ImageFilterStack extends EditStack<ImageFilterBase> {
 
     releaseAll(): void {
         super.executeEach((filter: ImageFilterBase): void => {
-            filter && filter.release();
+            if(filter != null) filter.release();
         }, super.getLength());
         super.reset();
         this.cacheStart = 0;
