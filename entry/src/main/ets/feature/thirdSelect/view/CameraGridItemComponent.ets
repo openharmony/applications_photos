@@ -33,18 +33,18 @@ export struct CameraGridItemComponent {
   @Consume @Watch('onShow') isShow: boolean;
 
   aboutToAppear(): void {
-    Log.info(TAG, `aboutToAppear`);
+    Log.info(TAG, 'aboutToAppear');
   }
 
   private onShow(): void {
-    Log.info(TAG, `onShow: isShow=${this.isShow}, uri=${this.resultUri}`);
+    Log.info(TAG, 'onShow: isShow=' + this.isShow + ', uri=' + this.resultUri);
     if (this.isShow && this.resultUri?.length > 0) {
       this.setPickResult(this.resultUri);
     }
   }
 
   aboutToDisappear(): void {
-    Log.info(TAG, `aboutToDisappear`);
+    Log.info(TAG, 'aboutToDisappear');
   }
 
   build() {
@@ -69,10 +69,10 @@ export struct CameraGridItemComponent {
     .alignItems(HorizontalAlign.Center)
     .onClick((event: ClickEvent) => {
       this.jumpCameraTakephoto().then((result: common.AbilityResult) => {
-        Log.info(TAG, `resourceUri = ${result?.want?.parameters?.resourceUri}`);
+        Log.info(TAG, 'resourceUri = ' + result?.want?.parameters?.resourceUri);
         this.resultUri = result?.want?.parameters?.resourceUri as string;
       }).catch((err) => {
-        Log.error(TAG, `jumpCameraTakephoto err: ${err}`);
+        Log.error(TAG, 'jumpCameraTakephoto err: ' + err);
       });
     })
   }
@@ -94,14 +94,14 @@ export struct CameraGridItemComponent {
         callBundleName: this.bundleName
       }
     };
-    Log.debug(TAG, `jump camera want: ${JSON.stringify(want)}`);
+    Log.debug(TAG, 'jump camera want: ' + JSON.stringify(want));
     let appContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
     return await appContext.startAbilityForResult(want);
   }
 
   private setPickResult(uri: string): void {
     if (uri == null || uri == undefined) {
-      Log.error(TAG, `no valid uri!`);
+      Log.error(TAG, 'no valid uri!');
       return;
     }
     let abilityResult = {
@@ -114,7 +114,7 @@ export struct CameraGridItemComponent {
     };
     let appContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
     appContext.terminateSelfWithResult(abilityResult).then((result) => {
-      Log.info(TAG, `terminateSelf result: ${result}`);
+      Log.info(TAG, 'terminateSelf result: ' + result);
     });
   }
 }

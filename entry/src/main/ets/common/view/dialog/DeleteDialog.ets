@@ -60,7 +60,7 @@ export struct DeleteDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        Log.debug(this.TAG, `cancelCallback`);
+                        Log.debug(this.TAG, 'cancelCallback');
                         this.controller.close();
                         this.dialogCallback && this.dialogCallback.cancelCallback();
                     })
@@ -89,7 +89,7 @@ export struct DeleteDialog {
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
-                        Log.debug(this.TAG, `confirmCallback`);
+                        Log.debug(this.TAG, 'confirmCallback');
                         this.controller.close();
                         this.dialogCallback && this.dialogCallback.confirmCallback();
                     })

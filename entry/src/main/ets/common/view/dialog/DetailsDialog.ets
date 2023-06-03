@@ -49,11 +49,11 @@ export struct DetailsDialog {
     aboutToAppear(): void {
         let localizedDate = DateUtil.getLocalizedDate(this.mediaDetails.dateAdded);
         let localizedTime = DateUtil.getLocalizedTime(this.mediaDetails.dateAdded);
-        this.dataTime = `${localizedDate} ${localizedTime}`;
+        this.dataTime = localizedDate + ' ' + localizedTime;
     }
 
     getResolution(height: number, width: number): string {
-        return `${width}x${height}`;
+        return width + 'x' + height;
     }
 
     getTitle(): string {
@@ -66,15 +66,15 @@ export struct DetailsDialog {
     }
 
     getDisplayPath(): string {
-        let showPath = `${this.mediaDetails.path}${this.mediaDetails.displayName}`;
+        let showPath = this.mediaDetails.path.toString() + this.mediaDetails.displayName.toString();
         return showPath;
     }
 
     getSize(size: number): string {
         if (size / (this.sizeConvert * this.sizeConvert) > 1) {
-            return `${(size / (this.sizeConvert * this.sizeConvert)).toFixed(2)}MB`;
+            return (size / (this.sizeConvert * this.sizeConvert)).toFixed(2) + 'MB';
         } else {
-            return `${(size / this.sizeConvert).toFixed(2)}KB`;
+            return (size / this.sizeConvert).toFixed(2) + 'KB';
         }
     }
 
@@ -134,7 +134,7 @@ export struct DetailsDialog {
                 }
 
                 Column() {
-                    Text(`${this.getSize(this.mediaDetails.size)}`)
+                    Text(this.getSize(this.mediaDetails.size).toString())
                         .fontSize($r('sys.float.ohos_id_text_size_body2'))
                         .fontFamily($r('app.string.id_text_font_family_regular'))
                         .fontColor($r('sys.color.ohos_id_color_text_secondary'))
