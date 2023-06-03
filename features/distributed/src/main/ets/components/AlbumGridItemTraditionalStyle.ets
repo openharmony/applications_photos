@@ -63,12 +63,12 @@ export struct AlbumGridItemTraditionalStyle {
         })
     }
 
-    updateCard() {
+    updateCard(): void {
         Log.debug(TAG, 'Album changed and update card size.');
         this.updateCardSize();
     }
 
-    updateCardSize() {
+    updateCardSize(): void {
         let contentWidth = screenManager.getWinWidth();
         let maxCardWidth = WindowConstants.ALBUM_SET_COVER_SIZE * WindowConstants.GRID_MAX_SIZE_RATIO;
         let count: number = Math.ceil((contentWidth - WindowConstants.ALBUM_SET_MARGIN * 2 + WindowConstants.ALBUM_SET_GUTTER) /
@@ -87,7 +87,7 @@ export struct AlbumGridItemTraditionalStyle {
         this.transformV = 0;
     }
 
-    private async jumpToBrowser() {
+    private async jumpToBrowser(): Promise<void> {
         Log.info(TAG, `After onClick : ${JSON.stringify(this.item)}`);
         let name = this.deviceName ? `${this.deviceName}(${this.item.displayName})` : this.item.displayName;
         let relativePath = await this.item.getRelativePath()

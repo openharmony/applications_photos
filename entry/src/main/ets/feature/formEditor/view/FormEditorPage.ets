@@ -62,7 +62,7 @@ struct FormEditorPage {
         customStyle: true
     })
 
-    async GetMediaData(albumId: string, index: number) {
+    async GetMediaData(albumId: string, index: number): Promise<void> {
         Log.debug(TAG, `GetMediaData start`);
         this.currentIndex = index;
         let fetchOpt = await getFetchOptions(MediaConstants.SELECT_TYPE_IMAGE, albumId, "");
@@ -70,7 +70,7 @@ struct FormEditorPage {
         this.fileAsset = (await mediaModel.getAllMediaItem(albumId, fetchOpt, false)).fileAsset;
     }
 
-    async openCurrentFd() {
+    async openCurrentFd(): Promise<void> {
         Log.info(TAG, `open fd, fileAsset is valid ${this.fileAsset != null}`);
         this.fd = (this.fileAsset != null) ? await  mediaModel.openAsset('R', this.fileAsset) : -1;
     }
@@ -97,7 +97,7 @@ struct FormEditorPage {
         return obj as formBindingData.FormBindingData;
     }
 
-    updateRefreshTime() {
+    updateRefreshTime(): void {
         Log.debug(TAG, `updateRefreshTime isShow ${this.isShow}`);
         if (!this.isShow) {
             return;
@@ -109,7 +109,7 @@ struct FormEditorPage {
         })
     }
 
-    terminate() {
+    terminate(): void {
         terminateSelf();
     }
 
@@ -135,7 +135,7 @@ struct FormEditorPage {
         });
     }
 
-    async saveData(albumName: string, albumId: string, displayName: object, index: number, isShow: boolean) {
+    async saveData(albumName: string, albumId: string, displayName: object, index: number, isShow: boolean): Promise<void> {
         Log.debug(TAG, `saveData start! ${albumName} ${displayName} ${index}`);
         let msgDisplayName = '';
         if (displayName instanceof String) {
@@ -179,7 +179,7 @@ struct FormEditorPage {
         Log.debug(TAG, 'saveData end!');
     }
 
-    routerPhotos(isSelectPhoto: boolean) {
+    routerPhotos(isSelectPhoto: boolean): void {
         let options = {
             uri: 'feature/thirdSelect/view/ThirdSelectAlbumSetPage',
             params: {
@@ -191,15 +191,15 @@ struct FormEditorPage {
         router.push(options);
     }
 
-    selectAlbum() {
+    selectAlbum(): void {
         this.routerPhotos(false);
     }
 
-    selectPhoto() {
+    selectPhoto(): void {
         this.routerPhotos(true);
     }
 
-    setPlayInterval() {
+    setPlayInterval(): void {
         this.settingController.open();
     }
 
@@ -230,19 +230,19 @@ struct FormEditorPage {
         })
     }
 
-    aboutToDisappear() {
+    aboutToDisappear(): void {
         this.appBroadcast.off(BroadcastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
         this.appBroadcast.off(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
     }
 
-    onChange(value) {
+    onChange(value): void {
         this.time = value;
         this.setIntervalTime();
         AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);
         this.updateTime();
     }
 
-    async updateTime() {
+    async updateTime(): Promise<void> {
         Log.debug(TAG, `updateTime start! ${this.time}`);
         await dataStore.init();
         let intervalTimeKey = 'intervalTime';
@@ -252,11 +252,11 @@ struct FormEditorPage {
         Log.debug(TAG, 'updateTime end!');
     }
 
-    onPageShow() {
+    onPageShow(): void {
         broadcastManager.getBroadcast().emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
     }
 
-    private setIntervalTime(): void{
+    private setIntervalTime(): void {
         if (this.time == undefined) {
             this.intervalTime = $r('app.string.fa_play_interval_time_30');
         } else if (this.time / Constants.DEFAULT_TIME == 3) {

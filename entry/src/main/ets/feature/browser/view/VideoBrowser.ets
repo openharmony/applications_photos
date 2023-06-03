@@ -39,13 +39,13 @@ struct VideoBrowser {
     private dateAdded = 0;
     private previewUri = null;
 
-    onBackPress() {
+    onBackPress(): boolean {
         Log.info(this.TAG, 'onBackPress');
         router.back();
         return true;
     }
 
-    private onMenuClicked(action: Action) {
+    private onMenuClicked(action: Action): void {
         Log.info(this.TAG, `onMenuClicked, action: ${action.actionID}`);
         let menuOperation: MenuOperation;
         if (action === Action.BACK) {
@@ -55,7 +55,7 @@ struct VideoBrowser {
         menuOperation.doAction();
     }
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         startTrace('VideoBrowserAboutToAppear');
         let param: ParamsInterface = router.getParams();
         if(param.uri != null ) this.uri = param.uri.toString();
@@ -77,7 +77,7 @@ struct VideoBrowser {
         screenManager.setSystemUi(true);
     }
 
-    onPageShow() {
+    onPageShow(): void {
         this.photoDate = DateUtil.getLocalizedDate(this.dateAdded);
         this.timeAndLocation = DateUtil.getLocalizedTime(this.dateAdded);
         broadcastManager.getBroadcast().emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
@@ -111,7 +111,7 @@ struct VideoBrowser {
         .backgroundColor($r('app.color.black'))
     }
 
-    pageTransition() {
+    pageTransition(): void {
         PageTransitionEnter({ type: RouteType.None, duration: 0 })
             .opacity(0)
         PageTransitionExit({ type: RouteType.None, duration: 0 })

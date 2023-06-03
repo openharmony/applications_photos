@@ -138,7 +138,7 @@ struct SelectPhotoBrowser {
         mMultimodalInputManager.unregisterListener();
     }
 
-    onToggleBars() {
+    onToggleBars(): void {
     }
 
     onDataSizeChanged(size: number): void {
@@ -148,13 +148,13 @@ struct SelectPhotoBrowser {
         }
     }
 
-    onPhotoChanged(index: number): void{
+    onPhotoChanged(index: number): void {
         this.currentIndex = index;
         this.isSelected = this.getCurrentPhoto().isSelect;
         this.browserDataSource.notifyDataChange(index);
     }
 
-    private selectStateChange() {
+    private selectStateChange(): void {
         Log.info(TAG, 'change selected');
         let currentPhoto = this.getCurrentPhoto();
         if (currentPhoto == undefined) {
@@ -167,16 +167,16 @@ struct SelectPhotoBrowser {
         Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
     }
 
-    onPageShow() {
+    onPageShow(): void {
         Log.info(TAG, 'onPageShow');
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
     }
 
-    onPageHide() {
+    onPageHide(): void {
         Log.info(TAG, 'onPageHide');
     }
 
-    onMenuClicked(action: Action) {
+    onMenuClicked(action: Action): void {
         Log.debug(TAG, `onMenuClicked, action: ${action.actionID}`);
         if (action === Action.BACK) {
             this.onBackPress();
@@ -193,7 +193,7 @@ struct SelectPhotoBrowser {
         return this.browserDataSource.groupDataItem[this.currentIndex];
     }
 
-    onBackPress() {
+    onBackPress(): boolean {
         Log.info(TAG, 'onBackPress');
         router.back({ params: { index: this.currentIndex } });
         return true;
@@ -242,7 +242,7 @@ struct SelectPhotoBrowser {
         terminateSelfWithResult(abilityResult);
     }
 
-    pageTransition() {
+    pageTransition(): void {
         PageTransitionEnter({ type: RouteType.None, duration: PhotoConstants.PAGE_SHOW_ANIMATION_DURATION })
             .opacity(0)
         PageTransitionExit({ duration: PhotoConstants.PAGE_SHOW_ANIMATION_DURATION })

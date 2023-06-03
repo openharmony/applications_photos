@@ -63,7 +63,7 @@ struct DistributedAlbumSetPage {
         this.actionBarProp = this.barModel.createActionBar(this.title);
     }
 
-    onMenuClicked(action: Action, arg: Object[]) {
+    onMenuClicked(action: Action, arg: Object[]): void {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         if (action === Action.BACK) {
             router.back();
@@ -108,17 +108,17 @@ struct DistributedAlbumSetPage {
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
-    onPageShow() {
+    onPageShow(): void {
         broadcastManager.getBroadcast().emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.onActive();
     }
 
-    onPageHide() {
+    onPageHide(): void {
         this.onInActive();
     }
 
     // Callback when the page is in the foreground
-    onActive() {
+    onActive(): void {
         if (!this.isActive) {
             Log.info(TAG, 'onActive');
             this.isActive = true;
@@ -127,7 +127,7 @@ struct DistributedAlbumSetPage {
     }
 
     // Callback when the page is in the background
-    onInActive() {
+    onInActive(): void {
         if (this.isActive) {
             Log.info(TAG, 'onInActive');
             this.isActive = false;
@@ -160,13 +160,13 @@ struct DistributedAlbumSetPage {
         }
     }
 
-    onMediaLibDataChange(changeType) {
+    onMediaLibDataChange(changeType): void {
         Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
         this.isMediaLibDataChanged = true;
         this.loadItem();
     }
 
-    private loadItem() {
+    private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
                 this.isEmpty = isEmpty;

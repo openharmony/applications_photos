@@ -69,12 +69,12 @@ export class MoveMenuOperation extends ProcessMenuOperation {
         this.processOperation();
     }
 
-    requestOneBatchOperation() {
+    requestOneBatchOperation(): void {
         let item = this.items[this.currentBatch++] as MediaDataItem;
         this.moveOne(item);
     }
 
-    private async moveOne(item: MediaDataItem) {
+    private async moveOne(item: MediaDataItem): Promise<void> {
         let fileAsset = await item.loadFileAsset();
         let assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo);
         if (assets.targetAsset) {
@@ -107,7 +107,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
         }
     }
 
-    async move(file: MediaLib.FileAsset, path: string, targetFile?) {
+    async move(file: MediaLib.FileAsset, path: string, targetFile?): Promise<void> {
         startTraceWithTaskId('move', this.currentBatch);
         try {
             if (targetFile) {

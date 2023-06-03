@@ -64,7 +64,7 @@ struct Edit {
     private defaultWidth: number = Constants.DEFAULT_WIDTH;
     private isLoadFailed: boolean = false;
 
-    onBackPress() {
+    onBackPress(): boolean {
         if (this.isCropReset) {
             this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
         } else {
@@ -73,15 +73,15 @@ struct Edit {
         return true;
     }
 
-    discardCallback() {
+    discardCallback(): void {
         Log.debug(this.TAG, 'discardCallback called');
     }
 
-    loadFailedCallback() {
+    loadFailedCallback(): void {
         this.isLoadFailed = true;
     }
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         Log.debug(this.TAG, 'EditMain init start');
         if (this.mediaItem) {
             this.isLoadFailed = false;
@@ -111,14 +111,14 @@ struct Edit {
         screenManager.setNavigationBarColor('#00FFFFFF', '#FFFFFFFF')
     }
 
-    aboutToDisappear() {
+    aboutToDisappear(): void {
         Log.debug(this.TAG, 'aboutToDisappear');
         this.globalThis.setObject("EditorMediaItem", undefined);
         PhotoEditorManager.getInstance().clear();
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000')
     }
 
-    onPageShow() {
+    onPageShow(): void {
         this.appEventBus.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         if (this.isLoadFailed) {
             router.back();

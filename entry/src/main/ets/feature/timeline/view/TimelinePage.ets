@@ -135,7 +135,7 @@ export struct TimelinePage {
         finishTrace('TimelinePageAboutToAppear');
     }
 
-    private onSelect() {
+    private onSelect(): void {
         Log.info(TAG, "onSelect");
         this.totalSelectedCount = this.timelineDataSource.getSelectedCount();
         this.isAllSelected = this.timelineDataSource.isSelect();
@@ -146,7 +146,7 @@ export struct TimelinePage {
         }
     }
 
-    private jumpToPhotoBrowser(name: string, item: MediaDataItem) {
+    private jumpToPhotoBrowser(name: string, item: MediaDataItem): void {
         let children: MediaDataItem[] = this.timelineDataSource.getItems()
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
@@ -163,7 +163,7 @@ export struct TimelinePage {
         });
     }
 
-    private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem) {
+    private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem): void {
         let children: MediaDataItem[] = this.timelineDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {
@@ -208,7 +208,7 @@ export struct TimelinePage {
         Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
     }
 
-    private moveOperation(albumInfo: SimpleAlbumDataItem) {
+    private moveOperation(albumInfo: SimpleAlbumDataItem): void {
         let menuContext = new MenuContext();
         this.onMoveStart = this.onMoveStart.bind(this);
         this.onMoveEnd = this.onMoveEnd.bind(this);
@@ -221,7 +221,7 @@ export struct TimelinePage {
         menuOperation.doAction();
     }
 
-    private copyOperation(albumInfo: SimpleAlbumDataItem) {
+    private copyOperation(albumInfo: SimpleAlbumDataItem): void {
         let menuContext = new MenuContext();
         this.onCopyStart = this.onCopyStart.bind(this);
         this.onCopyEnd = this.onCopyEnd.bind(this);
@@ -234,7 +234,7 @@ export struct TimelinePage {
         menuOperation.doAction();
     }
 
-    onIndexChange() {
+    onIndexChange(): void {
         Log.info(TAG, `onIndexChange ${this.TimelinePageIndex}`);
         if (this.TimelinePageIndex != Constants.INVALID) {
             let rollToIndex = this.timelineDataSource.getIndexByChildIndex(this.TimelinePageIndex)
@@ -278,7 +278,7 @@ export struct TimelinePage {
         }
     }
 
-    onMenuClicked(action: Action) {
+    onMenuClicked(action: Action): void {
         Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
@@ -323,7 +323,7 @@ export struct TimelinePage {
         this.routerStart = true;
     }
 
-    onMediaLibDataChange(changeType) {
+    onMediaLibDataChange(changeType): void {
         Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
         if (!PhotoEditorManager.getInstance().isSaving) {
             this.isMediaLibDataChanged = true
@@ -331,7 +331,7 @@ export struct TimelinePage {
         }
     }
 
-    private loadItem() {
+    private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.isMediaLibDataChanged = false
             startTrace("reloadTimelineItemData")
@@ -425,7 +425,7 @@ export struct TimelinePage {
         }
     }
 
-    onModeChange() {
+    onModeChange(): boolean {
         Log.debug(TAG, 'onModeChange');
         if (this.isSelectedMode) {
             this.isSelectedMode = false;
@@ -437,7 +437,7 @@ export struct TimelinePage {
     }
 
     // The callbacks after index page shows
-    onIndexPageShow() {
+    onIndexPageShow(): void {
         Log.info(TAG, `onIndexPageShow`)
         if (this.isShow && this.isInCurrentTab) {
             let params = router.getParams();
@@ -459,7 +459,7 @@ export struct TimelinePage {
     }
 
     // The callback when current page is in the foreground
-    onActive() {
+    onActive(): void {
         if (!this.isActive) {
             Log.info(TAG, 'onActive');
             this.isActive = true;
@@ -468,7 +468,7 @@ export struct TimelinePage {
     }
 
     // The callback when current page is in the background
-    onInActive() {
+    onInActive(): void {
         if (this.isActive) {
             Log.info(TAG, 'onInActive');
             this.isActive = false;

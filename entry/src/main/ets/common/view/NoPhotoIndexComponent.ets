@@ -34,11 +34,11 @@ export struct NoPhotoIndexComponent {
         this.updateImageSize();
     }
 
-    reSizeLayout() {
+    reSizeLayout(): void {
         this.updateImageSize();
     }
 
-    updateImageSize() {
+    updateImageSize(): void {
         let winWidth = screenManager.getWinWidth();
         let winHeightHalf = screenManager.getWinHeight() / 2;
         this.imageSize

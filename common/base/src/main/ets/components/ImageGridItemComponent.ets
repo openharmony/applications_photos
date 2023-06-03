@@ -97,7 +97,7 @@ export struct ImageGridItemComponent {
         }
     }
 
-    async routePage(isError: boolean) {
+    async routePage(isError: boolean): Promise<void> {
         Log.info(TAG, `routePage ${isError}`);
         try {
             startTrace('enterPhotoBrowser');
@@ -111,7 +111,7 @@ export struct ImageGridItemComponent {
         }
     }
 
-    async routeToPreviewPage() {
+    async routeToPreviewPage(): Promise<void> {
         try {
             Log.info(TAG, 'routeToPreviewPage');
             this.broadCast.emit(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, [this.pageName, this.mediaItem]);
@@ -120,7 +120,7 @@ export struct ImageGridItemComponent {
         }
     }
 
-    private onSelected() {
+    private onSelected(): void {
         Log.info(TAG, 'onSelected');
         if ((this.isSelectUpperLimited != undefined && !this.isSelectUpperLimited) || this.mediaItem.isSelect) {
             this.mediaItem.setSelect(!this.mediaItem.isSelect);
@@ -131,7 +131,7 @@ export struct ImageGridItemComponent {
         this.broadCast.emit(BroadcastConstants.SELECT, [this.mediaItem.index]);
     }
 
-    private selectStateChange() {
+    private selectStateChange(): void {
         Log.info(TAG, `change selected ${this.isSelectedMode}`);
         if (!this.isSelectedMode) {
             this.isSelectedMode = true;
@@ -140,7 +140,7 @@ export struct ImageGridItemComponent {
         this.onSelected();
     }
     
-    jumpToPhotoBrowser() {
+    jumpToPhotoBrowser(): void {
         if(this.isEnteringPhoto){
             return;
         }

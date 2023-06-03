@@ -33,13 +33,13 @@ const TAG: string = 'ServiceExtAbility';
 export default class ServiceExtAbility extends Extension {
   private globalThis = GlobalContext.getContext();
 
-  onCreate(want) {
+  onCreate(want): void {
     Log.info(TAG, "ServiceExtAbility want param : " + JSON.stringify(want));
     this.globalThis.setObject("windowClass", null);
     this.globalThis.setObject("photoAbilityContext", this.context);
   }
 
-  onRequest(want, startId) {
+  onRequest(want, startId): void {
     if (want.action != Constants.ACTION_DELETE_DATA) {
       return;
     }
@@ -137,11 +137,11 @@ export default class ServiceExtAbility extends Extension {
     });
   }
 
-  onDisconnect(want) {
+  onDisconnect(want): void {
     Log.info(TAG, "onDisconnect, want: " + want.abilityName);
   }
 
-  onDestroy() {
+  onDestroy(): void {
     Log.info(TAG, 'onDestroy');
   }
 

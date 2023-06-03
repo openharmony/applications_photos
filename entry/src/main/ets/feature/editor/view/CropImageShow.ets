@@ -39,14 +39,14 @@ export struct CropImageShow {
     private preTouch: number = 0;
     private prePinch: number = 0;
 
-    onCropResetClicked() {
+    onCropResetClicked(): void {
         Log.debug(this.TAG, 'crop reset is clicked');
         this.cropEdit.reset();
         this.isCropReset = this.cropEdit.couldReset();
         this.broadCast.emit(Constants.RULER_BAR_INTI, []);
     }
 
-    onTouchStart(event: TouchEvent) {
+    onTouchStart(event: TouchEvent): void {
         let x = event.touches[0].x;
         let y = event.touches[0].y;
         switch (event.type) {
@@ -71,7 +71,7 @@ export struct CropImageShow {
         }
     }
 
-    onPinchGestureStart(event: GestureEvent) {
+    onPinchGestureStart(event: GestureEvent): void {
         Log.debug(this.TAG, 'cropMode onPinchGestureStart called');
         this.prePinch = new Date().getTime();
         let x = 0;
@@ -86,7 +86,7 @@ export struct CropImageShow {
         this.cropEdit.onPinchStart(x, y, event.scale);
     }
 
-    onPinchGestureUpdate(event: GestureEvent) {
+    onPinchGestureUpdate(event: GestureEvent): void {
         let now = new Date().getTime();
         if (now - this.prePinch >= Constants.TIMEOUT) {
             this.prePinch = now;
@@ -94,13 +94,13 @@ export struct CropImageShow {
         }
     }
 
-    onPinchGestureEnd() {
+    onPinchGestureEnd(): void {
         Log.debug(this.TAG, 'cropMode onPinchGestureEnd called');
         this.cropEdit.onPinchEnd();
         this.isCropReset = this.cropEdit.couldReset();
     }
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         Log.debug(this.TAG, 'Photo CropImageShow called');
         this.broadCast.on(Constants.CROP_RESET_CLICKED, this.onCropResetClicked.bind(this));
         this.flexHeight = this.isVerticalScreen
@@ -116,7 +116,7 @@ export struct CropImageShow {
         Log.debug(this.TAG, `CropImageShow this.screenHeight = ${this.flexHeight}, this.screenWidth = ${this.flexWidth}`);
     }
 
-    aboutToDisappear() {
+    aboutToDisappear(): void {
 
     }
 

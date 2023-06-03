@@ -144,11 +144,11 @@ export struct CropStyleBar {
     ];
     @State @Watch('clickEvent') menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
 
-    clickEvent() {
+    clickEvent(): void {
         ActionChangedEvent.isActiveNotChanged(this.menuChanged);
     }
 
-    onMenuClicked(actionID: number) {
+    onMenuClicked(actionID: number): void {
         if (this.selectedMode != PhotoEditMode.EDIT_MODE_CROP) {
             return;
         }
@@ -169,7 +169,7 @@ export struct CropStyleBar {
         }
     }
 
-    onRotateClicked() {
+    onRotateClicked(): void {
         let id = -1;
         for (let i = 0; i < this.menuChanged.menuArray.length; i++) {
             if (this.menuChanged.menuArray[i].isActive) {
@@ -205,24 +205,24 @@ export struct CropStyleBar {
         this.isCropReset = this.cropEdit.couldReset();
     }
 
-    onMirrorClicked() {
+    onMirrorClicked(): void {
         this.cropEdit.onMirrorChange();
         this.isCropReset = this.cropEdit.couldReset();
     }
 
-    onResetClicked() {
+    onResetClicked(): void {
         this.menuChanged.isChanged = 0;
         this.isCropReset = this.cropEdit.couldReset();
     }
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         this.menuClick = this.onMenuClicked.bind(this);
         this.resetClick = this.onResetClicked.bind(this);
         this.broadCast.on(Constants.UPDATE_MENU, this.menuClick);
         this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClick);
     }
 
-    aboutToDisappear() {
+    aboutToDisappear(): void {
         this.broadCast.off(Constants.UPDATE_MENU, this.menuClick);
         this.broadCast.off(Constants.CROP_RESET_CLICKED, this.resetClick);
     }

@@ -27,7 +27,7 @@ export class RefreshActionMenu {
 }
 
 export class ActionChangedEvent {
-    static allChanged(menuChanged: RefreshActionMenu) {
+    static allChanged(menuChanged: RefreshActionMenu): void {
         if (menuChanged.isChanged == Constants.NEGATIVE_1 || menuChanged.isChanged > menuChanged.menuArray.length
         || menuChanged.isChanged == Constants.NEGATIVE_2) {
             menuChanged.isChanged = Constants.NEGATIVE_1;
@@ -43,7 +43,7 @@ export class ActionChangedEvent {
         menuChanged.isChanged = Constants.NEGATIVE_1;
     }
 
-    static itselfChanged(menuChanged: RefreshActionMenu) {
+    static itselfChanged(menuChanged: RefreshActionMenu): void {
         if (menuChanged.isChanged == Constants.NEGATIVE_1 || menuChanged.isChanged > menuChanged.menuArray.length) {
             return;
         }
@@ -55,7 +55,7 @@ export class ActionChangedEvent {
         menuChanged.isChanged = Constants.NEGATIVE_1;
     }
 
-    static isActiveNotChanged(menuChanged: RefreshActionMenu) {
+    static isActiveNotChanged(menuChanged: RefreshActionMenu): void {
         if (menuChanged.isChanged == Constants.NEGATIVE_1 || menuChanged.isChanged > menuChanged.menuArray.length) {
             return;
         }

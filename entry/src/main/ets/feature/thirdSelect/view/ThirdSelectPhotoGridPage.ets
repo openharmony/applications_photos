@@ -80,7 +80,7 @@ struct ThirdSelectPhotoGridPage {
                                                     this.selectedCount, this.maxSelectCount, this.isSelectPhotoGrid);
     }
 
-    onMenuClicked(action: Action) {
+    onMenuClicked(action: Action): void {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         if (action == Action.BACK) {
             router.back();
@@ -171,32 +171,32 @@ struct ThirdSelectPhotoGridPage {
         this.updateActionBar();
     }
 
-    onPageShow() {
+    onPageShow(): void {
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.isShow = true;
         this.onActive();
     }
 
-    onPageHide() {
+    onPageHide(): void {
         this.isShow = false;
         this.onInActive();
     }
 
-    private onActive() {
+    private onActive(): void {
         if (!this.isActive) {
             Log.info(TAG, 'onActive');
             this.isActive = true;
         }
     }
 
-    private onInActive() {
+    private onInActive(): void {
         if (this.isActive) {
             Log.info(TAG, 'onInActive');
             this.isActive = false;
         }
     }
 
-    private async onSelect(index: number) {
+    private async onSelect(index: number): Promise<void> {
         Log.info(TAG, "onSelect");
         let lastSelectedCount = this.selectedCount;
         this.selectedCount = this.groupDataSource.getSelectedCount();
@@ -209,7 +209,7 @@ struct ThirdSelectPhotoGridPage {
         this.groupDataSource.onDataUpdate(index);
     }
 
-    private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem) {
+    private jumpToThirdPhotoBrowser(name: string, item: MediaDataItem): void {
         let children: MediaDataItem[] = this.groupDataSource.getItems();
         let targetIndex = children.indexOf(item);
         if (targetIndex == Constants.NOT_FOUND) {

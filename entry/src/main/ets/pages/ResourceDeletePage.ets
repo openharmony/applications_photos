@@ -36,7 +36,7 @@ struct ResourceDeletePage {
   isShow: boolean = false;
   mediaDataItems: MediaDataItem[];
 
-  onPageShow() {
+  onPageShow(): void {
     if (this.isShow) {
       return;
     }
@@ -72,11 +72,11 @@ struct ResourceDeletePage {
     return mediaDataItems;
   }
 
-  aboutToAppear() {
+  aboutToAppear(): void {
     this.mediaDataItems = this.getMediaItems();
   }
 
-  aboutToDisappear() {
+  aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
   }
 
@@ -91,15 +91,15 @@ struct ResourceDeletePage {
     .height('100%');
   }
 
-  onOperationEnd () {
+  onOperationEnd (): void {
     this.setDeleteResult(dialogRequest.ResultCode.RESULT_OK);
   }
 
-  onOperationCancel () {
+  onOperationCancel (): void {
     this.setDeleteResult(dialogRequest.ResultCode.RESULT_CANCEL);
   }
 
-  private setDeleteResult(result: dialogRequest.ResultCode) {
+  private setDeleteResult(result: dialogRequest.ResultCode): void {
     Log.info(TAG, `start to setDeleteResult : ${result}}`);
     try {
       var requestCallback = AppStorage.Get("requestCallback");

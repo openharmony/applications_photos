@@ -27,7 +27,7 @@ export struct ActionButton {
     widthOfActionButton: Resource = $r('app.float.actionButton_default');
     @Consume broadCast: Broadcast;
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         if (this.text == undefined) {
             this.heightOfActionButton = $r('app.float.buttonWithoutText');
             this.widthOfActionButton = $r('app.float.buttonWithoutText');

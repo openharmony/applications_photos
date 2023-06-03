@@ -32,7 +32,7 @@ export struct SettingDialog {
         { title: $r('app.string.fa_play_interval_time_90'), value: '90', checked: false }
     ];
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         this.settings.forEach((item) => {
             if (this.time == parseInt(item.value)) {
                 item.checked = true;

@@ -34,7 +34,7 @@ export struct TimelineTitleComponent {
         Log.info(TAG, `${this.timelineDataItem.dateAdded}`);
     }
 
-    private selectStateChange() {
+    private selectStateChange(): void {
         Log.info(TAG, `change selected ${this.isSelectedMode}`);
         if (this.isSelectedMode) {
             let isSelect = !this.timelineDataItem.isSelect()

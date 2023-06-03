@@ -44,11 +44,11 @@ export struct ToolBar {
     mainMenuList: ActionButtonInfo[] = [];
     @State @Watch('clickEvent') menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
 
-    clickEvent() {
+    clickEvent(): void {
         ActionChangedEvent.isActiveNotChanged(this.menuChanged);
     }
 
-    onMenuClick(actionID: number) {
+    onMenuClick(actionID: number): void {
         for (let i = 0; i < this.menuChanged.menuArray.length; i++) {
             if (actionID == this.menuChanged.menuArray[i].actionID) {
                 this.selectedMode = this.menuChanged.menuArray[i].mode;
@@ -78,11 +78,11 @@ export struct ToolBar {
         }
     }
 
-    immersive(isImmersive: boolean) {
+    immersive(isImmersive: boolean): void {
         this.isImmersive = isImmersive;
     }
 
-    aboutToAppear() {
+    aboutToAppear(): void {
         this.menuClick = this.onMenuClick.bind(this);
         this.immersiveClick = this.immersive.bind(this);
         this.broadCast.on(Constants.UPDATE_MENU, this.menuClick);
@@ -96,7 +96,7 @@ export struct ToolBar {
         }
     }
 
-    aboutToDisappear() {
+    aboutToDisappear(): void {
         this.broadCast.off(Constants.UPDATE_MENU, this.menuClick);
         this.broadCast.off(Constants.IS_IMMERSIVE, this.immersiveClick);
     }

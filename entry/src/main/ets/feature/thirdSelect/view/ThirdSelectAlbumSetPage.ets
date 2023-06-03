@@ -139,7 +139,7 @@ struct ThirdSelectAlbumSetPage {
         AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
     }
 
-    private jumpToAllAlbumGridPage(allAlbumDataItem: AlbumDataItem) {
+    private jumpToAllAlbumGridPage(allAlbumDataItem: AlbumDataItem): void {
         router.push({
             uri: 'feature/thirdSelect/view/ThirdSelectPhotoGridPage',
             params: {
@@ -156,7 +156,7 @@ struct ThirdSelectAlbumSetPage {
         });
     }
 
-     private async loadAlbums() {
+     private async loadAlbums(): Promise<void> {
          let displayName = await getResourceString($r('app.string.album_all'));
          this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
              this.isEmpty = isEmpty
@@ -180,30 +180,30 @@ struct ThirdSelectAlbumSetPage {
         Log.info(TAG, `initGridRowCount gridRowCount: ${this.gridRowCount}`);
     }
 
-    onPageShow() {
+    onPageShow(): void {
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.onActive();
     }
 
-    onPageHide() {
+    onPageHide(): void {
         this.onInActive();
     }
 
-    private onActive() {
+    private onActive(): void {
         if (!this.isActive) {
             Log.info(TAG, 'onActive');
             this.isActive = true;
         }
     }
 
-    private onInActive() {
+    private onInActive(): void {
         if (this.isActive) {
             Log.info(TAG, 'onInActive');
             this.isActive = false;
         }
     }
 
-    onMenuClicked(action: Action) {
+    onMenuClicked(action: Action): void {
         Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
         if (action === Action.CANCEL) {
             Log.info(TAG, 'click cancel');

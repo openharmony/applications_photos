@@ -28,7 +28,7 @@ export struct DeleteDialog {
     @Consume dialogDeleteMessage: Resource;
     controller: CustomDialogController;
 
-    aboutToAppear() {
+    aboutToAppear(): void {
     }
 
     build() {

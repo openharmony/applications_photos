@@ -31,7 +31,7 @@ export struct CopyOrMoveDialog {
     dataTime: string;
     @Consume operateParam: OperateParam;
 
-    aboutToAppear() {
+    aboutToAppear(): void {
 
     }
 
