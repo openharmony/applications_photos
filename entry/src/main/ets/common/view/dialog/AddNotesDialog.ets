@@ -58,7 +58,7 @@ export struct AddNotesDialog {
                         .maxLength(Constants.ADD_NOTES_MAX_LENGTH)
                         .enterKeyType(EnterKeyType.Done)
                         .onChange((value: string) => {
-                            Log.info(this.TAG, `TextInput onChange : ${value}`)
+                            Log.info(this.TAG, 'TextInput onChange : ' + value)
                             this.inputNote = value
                             this.isNull = this.inputNote === '';
                         })

@@ -88,8 +88,8 @@ export struct AlbumGridItemTraditionalStyle {
     }
 
     private async jumpToBrowser(): Promise<void> {
-        Log.info(TAG, `After onClick : ${JSON.stringify(this.item)}`);
-        let name = this.deviceName ? `${this.deviceName}(${this.item.displayName})` : this.item.displayName;
+        Log.info(TAG, 'After onClick : ' + JSON.stringify(this.item));
+        let name = this.deviceName ? this.deviceName + '(' + this.item.displayName + ')' : this.item.displayName;
         let relativePath = await this.item.getRelativePath()
         let simpleItem: SimpleAlbumDataItem = new SimpleAlbumDataItem(this.item.id, this.item.displayName, relativePath, this.deviceId, this.deviceName)
         router.push({
@@ -127,7 +127,7 @@ export struct AlbumGridItemTraditionalStyle {
                                 this.isEmptyAlbum = true;
                             })
                             .onComplete((msg: typeof obj) => {
-                                Log.debug(TAG, `image load success.Size: ${msg.componentWidth}x${msg.componentHeight}`);
+                                Log.debug(TAG, 'image load success.Size: ' + msg.componentWidth + 'x' + msg.componentHeight);
                             })
                     }
                     .width(this.bigWidth)
@@ -157,8 +157,8 @@ export struct AlbumGridItemTraditionalStyle {
                                 componentWidth: number,
                                 componentHeight: number
                             }) => {
-                                Log.debug(TAG, `image load success. Size: ${msg.width}x${msg.height},\
-                                    componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
+                                Log.debug(TAG, 'image load success. Size: ' + msg.width + 'x' + msg.height +
+                                    ' componentSize: ' + msg.componentWidth + 'x' + msg.componentHeight);
                             })
                     }
                     .height(this.gridHeight)

@@ -62,7 +62,7 @@ struct AlbumSelect {
     aboutToAppear(): void {
         startTrace('AlbumSetPageAboutToAppear');
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
+            Log.info(TAG, 'ON_LOADING_FINISHED size: ' + size);
             this.isEmpty = size == 0;
             this.isHideScrollBar = (size <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         });
@@ -73,7 +73,7 @@ struct AlbumSelect {
         this.onActive();
 
         this.gridColumnsCount = UiUtil.getAlbumGridCount(false);
-        Log.info(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
+        Log.info(TAG, 'the grid count in a line is: ' + this.gridColumnsCount);
 
         let param: ParamsInterface = router.getParams();
         if (param) {
@@ -88,7 +88,7 @@ struct AlbumSelect {
             }
             if (albumInfo) {
                 this.albumsDataSource.setBlackList([albumInfo.id, MediaConstants.ALBUM_ID_RECYCLE]);
-                Log.debug(TAG, `the album Id is: ${albumInfo.id}`);
+                Log.debug(TAG, 'the album Id is: ' + albumInfo.id);
             } else {
                 this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_RECYCLE]);
             }
@@ -110,14 +110,14 @@ struct AlbumSelect {
     }
 
     initGridRowCount(): void {
-        Log.info(TAG, `get screen width is : ${screenManager.getWinWidth()}`);
-        Log.info(TAG, `get screen height is : ${screenManager.getWinHeight()}`);
+        Log.info(TAG, 'get screen width is : ' + screenManager.getWinWidth());
+        Log.info(TAG, 'get screen height is : ' + screenManager.getWinHeight());
 
         let contentWidth = screenManager.getWinWidth();
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         this.gridColumnsCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
         / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
-        Log.info(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
+        Log.info(TAG, 'the grid count in a line is: ' + this.gridColumnsCount);
 
     }
 
@@ -157,7 +157,7 @@ struct AlbumSelect {
     }
 
     private onMenuClicked(action: Action): void {
-        Log.debug(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.debug(TAG, 'onMenuClicked, action: ' + action.actionID);
         if (action === Action.CANCEL) {
             Log.info(TAG, 'clear SelectManager data');
             AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);

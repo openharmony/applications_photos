@@ -113,7 +113,7 @@ export struct AlbumSetPage {
     }
 
     onMenuClicked(action: Action, arg: Object[]): void {
-        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, 'onMenuClicked, action: ' + action.actionID);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
         if (action === Action.NEW) {
@@ -149,7 +149,7 @@ export struct AlbumSetPage {
     }
 
     onOperationStart(): void {
-        Log.debug(TAG, `onOperationStart`);
+        Log.debug(TAG, 'onOperationStart');
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
@@ -160,20 +160,20 @@ export struct AlbumSetPage {
     }
 
     onNewEnd(): void {
-        Log.debug(TAG, `onNewEnd`);
+        Log.debug(TAG, 'onNewEnd');
         this.isAlbumSetSelectedMode = false;
         mediaObserver.registerObserver(this.dataObserver);
     }
 
     onRenameEnd(): void {
-        Log.debug(TAG, `onRenameEnd`);
+        Log.debug(TAG, 'onRenameEnd');
         this.isAlbumSetSelectedMode = false;
         this.albumsDataSource.notifyDataReload();
         mediaObserver.registerObserver(this.dataObserver);
     }
 
     onOperationEnd(): void {
-        Log.debug(TAG, `onOperationEnd`);
+        Log.debug(TAG, 'onOperationEnd');
         this.isAlbumSetSelectedMode = false;
         this.isMediaLibDataChanged = true;
         this.selectedAlbumsCount = 0;
@@ -184,7 +184,7 @@ export struct AlbumSetPage {
 
     aboutToAppear(): void {
         startTrace('AlbumSetPageAboutToAppear');
-        Log.info(TAG, `AlbumSetPageAboutToAppear`);
+        Log.info(TAG, 'AlbumSetPageAboutToAppear');
         this.appBroadcast.on(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
         this.appBroadcast.on(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
 
@@ -220,7 +220,7 @@ export struct AlbumSetPage {
     }
 
     aboutToDisappear(): void {
-        Log.info(TAG, `aboutToDisappear`);
+        Log.info(TAG, 'aboutToDisappear');
         this.broadCast.off(null, null);
         this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
         this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
@@ -235,14 +235,14 @@ export struct AlbumSetPage {
 
     // Callback when the page is show.
     onIndexPageShow(): void {
-        Log.info(TAG, `onIndexPageShow`);
+        Log.info(TAG, 'onIndexPageShow');
         if (this.isShow && this.isInCurrentTab) {
             this.onActive();
             this.createAlbum();
         } else if (!this.isShow && this.isInCurrentTab) {
             this.onInActive();
         } else {
-            Log.info(TAG, `other condition`);
+            Log.info(TAG, 'other condition');
         }
     }
 
@@ -259,7 +259,7 @@ export struct AlbumSetPage {
         let mediaItems = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
         let targetAlbum = AppStorage.Get<SimpleAlbumDataItem>(Constants.APP_KEY_NEW_ALBUM_TARGET);
         if (mediaItems == undefined || targetAlbum == undefined) {
-            Log.warn(TAG, `mediaItems is undefined ${mediaItems == undefined} targetAlbum is undefined ${targetAlbum == undefined}`)
+            Log.warn(TAG, 'mediaItems is undefined ' + (mediaItems == undefined) + ' targetAlbum is undefined ' + (targetAlbum == undefined))
             return;
         }
         let menuContext = new MenuContext();
@@ -289,7 +289,7 @@ export struct AlbumSetPage {
     }
 
     onModeChange(): void {
-        Log.info(TAG, `onModeChange ${this.isAlbumSetSelectedMode}`);
+        Log.info(TAG, 'onModeChange ' + this.isAlbumSetSelectedMode);
         if (!this.isAlbumSetSelectedMode) {
             this.albumsDataSource.setSelect(false);
             this.selectedAlbumsCount = 0;
@@ -367,8 +367,8 @@ export struct AlbumSetPage {
     }
 
     initGridRowCount(): void {
-        Log.info(TAG, `get screen width is : ${screenManager.getWinWidth()}`);
-        Log.info(TAG, `get screen height is : ${screenManager.getWinHeight()}`);
+        Log.info(TAG, 'get screen width is : ' + screenManager.getWinWidth());
+        Log.info(TAG, 'get screen height is : ' + screenManager.getWinHeight());
 
         let sideBarWidth = this.isSidebar ? Constants.TAB_BAR_WIDTH : 0;
 
@@ -376,12 +376,12 @@ export struct AlbumSetPage {
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         this.gridColumnsCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
         / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
-        Log.info(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
+        Log.info(TAG, 'the grid count in a line is: ' + this.gridColumnsCount);
 
     }
 
     onMediaLibDataChange(changeType): void {
-        Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
+        Log.info(TAG, 'onMediaLibDataChange type: ' + changeType);
         if (changeType == MediaConstants.MEDIA_TYPE_REMOTE) {
             this.distributedDataSource.reloadAlbumItemData().then((change: number) => {
                 this.onUpdateRemoteDevice(change)
@@ -407,20 +407,20 @@ export struct AlbumSetPage {
     }
 
     private onUpdateRemoteDevice(change: number): void {
-        Log.info(TAG, `onUpdateRemoteDevice`);
+        Log.info(TAG, 'onUpdateRemoteDevice');
 
         if (change < 0) {
             this.needNotify = true;
         }
         let size = this.distributedDataSource.totalCount();
-        Log.info(TAG, `onUpdateRemoteDevice length:${size} change: ${change}`);
+        Log.info(TAG, 'onUpdateRemoteDevice length:' + size + ' change: ' + change);
 
         if (size <= 0) {
             this.onDistributedTabChanged(Constants.LOCAL_TAB_INDEX);
             try {
                 this.tabsController.changeIndex(this.currentIndex);
             } catch (error) {
-                Log.error(TAG, `change tab index failed: ${error}`);
+                Log.error(TAG, 'change tab index failed: ' + error);
             }
             this.tabs[Constants.LOCAL_TAB_INDEX].isSelected = true;
             this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = false;
@@ -549,7 +549,7 @@ export struct AlbumSetPage {
                         .barHeight(0)
                         .flexGrow(1)
                         .onChange((index: number) => {
-                            Log.info(TAG, `Switch to Tab ${index}.`);
+                            Log.info(TAG, 'Switch to Tab ' + index + '.');
                             this.onDistributedTabChanged(index);
                         })
                     }

@@ -35,11 +35,11 @@ export struct ActionBar {
     @State hasTabBar: boolean = false;
 
     private onBuildDone(): void {
-        Log.info(TAG, `onBuildDone,actionBarProp:${this.actionBarProp.getHasTabBar()}`);
+        Log.info(TAG, 'onBuildDone,actionBarProp:' + this.actionBarProp.getHasTabBar());
     }
 
     aboutToAppear(): void {
-        Log.info(TAG, `aboutToAppear`);
+        Log.info(TAG, 'aboutToAppear');
         this.hasTabBar = this.actionBarProp.getHasTabBar();
     }
 

@@ -45,7 +45,7 @@ export struct AlbumSelectGridItemNewStyle {
     @State thumbnail: string = "";
 
     aboutToAppear(): void {
-        Log.debug(TAG, `aboutToAppear + ${this.item.uri}`);
+        Log.debug(TAG, 'aboutToAppear + ' + this.item.uri);
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.updateCardSize());
         this.item.load().then(() => {
             this.thumbnail = this.item.getThumbnail()
@@ -62,7 +62,7 @@ export struct AlbumSelectGridItemNewStyle {
         WindowConstants.ALBUM_SET_GUTTER;
         this.gridHeight = gridWidth / this.gridAspectRatio;
         this.bigWidth = gridWidth * 2 + WindowConstants.ALBUM_SET_GUTTER;
-        Log.info(TAG, `is big card : ${this.isBigCard}`);
+        Log.info(TAG, 'is big card : ' + this.isBigCard);
 
         if (MediaConstants.ROTATE_ONCE == this.item.orientation || MediaConstants.ROTATE_THIRD == this.item.orientation) {
             this.cardWidth = this.gridHeight;
@@ -182,7 +182,7 @@ export struct AlbumSelectGridItemNewStyle {
             color: $r('app.color.album_cover_stroke_color')
         })
         .onClick(() => {
-            Log.info(TAG, `After onClick, MediaSet is: ${JSON.stringify(this.item)}`);
+            Log.info(TAG, 'After onClick, MediaSet is: ' + JSON.stringify(this.item));
             router.push({
                 uri: 'feature/newAlbum/view/NewAlbumPage',
                 params: {
