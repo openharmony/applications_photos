@@ -29,7 +29,7 @@ export class DateUtil {
         opts.set('mm', time.getMinutes());
         opts.set('ss', time.getSeconds());
 
-        if (/(y+)/.test(format)) {
+        if (new RegExp("/(y+)/").test(format)) {
             format = format.replace('yyyy', time.getFullYear().toString().substr(0));
         }
         for (let f of opts.keys()) {
