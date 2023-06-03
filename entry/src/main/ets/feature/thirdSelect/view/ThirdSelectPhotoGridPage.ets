@@ -131,7 +131,10 @@ struct ThirdSelectPhotoGridPage {
             this.isMultiPick = new Boolean(param.isMultiPick).valueOf();
             this.isFromFa = new Boolean(param.isFromFa).valueOf();
             if (Boolean(param.maxSelectCount).valueOf() && param.maxSelectCount > 0) {
-                this.maxSelectCount = new Number(param.maxSelectCount).valueOf() || 0
+                this.maxSelectCount = 0;
+                if (!Number.isNaN(param.maxSelectCount)) {
+                    this.maxSelectCount = new Number(param.maxSelectCount).valueOf()
+                }
             }
             if (param.filterMediaType != null) {
                 this.filterMediaType = new Number(param.filterMediaType).valueOf();
@@ -264,8 +267,8 @@ struct ThirdSelectPhotoGridPage {
                             isSelectUpperLimited: $isSelectUpperLimited
                         })
                     }
-		    .aspectRatio(1)
-                }, (item: LazyItem<MediaDataItem>) => item == null && item.get() ? JSON.stringify(item) : item.getHashCode())
+            .aspectRatio(1)
+                }, (item: LazyItem<MediaDataItem>) => item == null && (item.get() != undefined && item.get() != null) ? JSON.stringify(item) : item.getHashCode())
             }
             .columnsTemplate('1fr '.repeat(this.gridRowCount))
             .columnsGap(Constants.GRID_GUTTER)

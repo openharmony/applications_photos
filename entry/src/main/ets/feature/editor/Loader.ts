@@ -50,7 +50,10 @@ export class Loader {
         let wrapper = new PixelMapWrapper(thumbnail, px2vp(size.width), px2vp(size.height));
         Log.info(TAG, "Photo: loadPixelMap: size[" + JSON.stringify(size) + "] wrapper[" + JSON.stringify(wrapper) + "]");
 
-        let orientation = mediaItem.orientation || 0;
+        let orientation = 0;
+        if (mediaItem.orientation != undefined && mediaItem.orientation != null && mediaItem.orientation != NaN) {
+            orientation = mediaItem.orientation
+        }
         await Loader.translatePixelMap(wrapper, orientation);
         Log.info(TAG, "Photo: loadPixelMap: final wrapper[" + JSON.stringify(wrapper) + "]");
         return wrapper;

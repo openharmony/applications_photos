@@ -99,7 +99,7 @@ export async function getFetchOptions(selectType: number, albumId: string, devic
         let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_IMAGE) + "Screenshots/";
         selections = "(" + selections + ") and " + MediaLib.FileKey.RELATIVE_PATH + " = ?";
         selectionArgs.push(path);
-    } else if ((new Number(albumId).valueOf() || 0) > 0) {
+    } else if (!Number.isNaN(new Number(albumId).valueOf()) && (new Number(albumId).valueOf() > 0)) {
         selections = "(" + selections + ") and " + MediaLib.FileKey.ALBUM_ID + " = ?";
         selectionArgs.push(albumId);
     }

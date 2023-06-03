@@ -288,7 +288,7 @@ export class MediaDataManager {
     setNextIndex(): void {
         Log.debug(TAG, "setNextIndex start old index " + this.mediaData.currentIndex + " flag " + this.isNextFag);
         // this.mediaData.isShowAlbumName == false means select a photo instead of a album
-        if (this.isNextFag && this.mediaData.isShowAlbumName) {
+        if (this.isNextFag && this.getIsShowAlbumName()) {
             let index = this.mediaData.currentIndex;
             if ((this.items.length != 0) && (index < this.items.length - 1)) {
                 index = index + 1;

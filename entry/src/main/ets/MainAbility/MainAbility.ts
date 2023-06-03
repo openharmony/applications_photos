@@ -92,7 +92,9 @@ export default class MainAbility extends Ability {
         } else if (want.action == wantConstant.Action.ACTION_VIEW_DATA) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_VIEW_DATA);
             AppStorage.SetOrCreate(Constants.VIEW_DATA_URI, want.uri);
-            action && AppStorage.SetOrCreate(Constants.VIEW_DATA_POS, action.get("index"));
+            if (action != null && action != undefined) {
+                AppStorage.SetOrCreate(Constants.VIEW_DATA_POS, action.get("index"));
+            }
         } else {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
@@ -149,7 +151,9 @@ export default class MainAbility extends Ability {
         } else if (want.action == wantConstant.Action.ACTION_VIEW_DATA) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_VIEW_DATA);
             AppStorage.SetOrCreate(Constants.VIEW_DATA_URI, want.uri);
-            action && AppStorage.SetOrCreate(Constants.VIEW_DATA_POS, action.get("index"));
+            if (action != null && action != undefined) {
+                AppStorage.SetOrCreate(Constants.VIEW_DATA_POS, action.get("index"));
+            }
         } else {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }

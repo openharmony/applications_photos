@@ -194,8 +194,8 @@ struct DistributedAlbumSetPage {
                 } else {
                     Grid(this.scroller) {
                         LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
-                            if (item && item.get()){
-                                if (item && item.index == 0) {
+                            if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null)){
+                                if ((item != undefined && item != null) && item.index == 0) {
                                     GridItem() {
                                         AlbumGridItemTraditionalStyle({
                                             item: item.get(),
@@ -215,7 +215,8 @@ struct DistributedAlbumSetPage {
                                     }
                                 }
                             }
-                        }, (item: LazyItem<AlbumDataItem>) => item && item.get() ? item.getHashCode() : JSON.stringify(item))
+                        }, (item: LazyItem<AlbumDataItem>) => (item != undefined && item != null) && (item.get() != undefined && item.get() != null) ?
+                            item.getHashCode() : JSON.stringify(item))
                     }
                     .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
                     .padding({

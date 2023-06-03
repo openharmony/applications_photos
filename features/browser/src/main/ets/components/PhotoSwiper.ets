@@ -56,17 +56,26 @@ export struct PhotoSwiper {
         });
     }
 
+    private getIndex(item: LazyItem<MediaDataItem>): number {
+        let ind = 1
+        if (item != undefined && item != null && item.index == this.currentIndex) {
+            ind = 2
+        }
+        return ind
+    }
+
     build() {
         Swiper(this.swiperController) {
             LazyForEach(this.dataSource, (item: LazyItem<MediaDataItem>) => {
-                if (item && item.get()) {
+                if (item != undefined && item != null && item.get() != undefined && item.get() != null) {
                     PhotoItem({
                         item: item.get(),
                         pageName: this.photoSwiperTransition
                     })
-                    .zIndex(item && item.index == this.currentIndex ? 2 : 1)
+                    .zIndex(this.getIndex(item))
                 }
-            }, (item: LazyItem<MediaDataItem>) => item == null && item.get() ? JSON.stringify(item) : item.getHashCode())
+            }, (item: LazyItem<MediaDataItem>) => item == null && (item.get() != undefined && item.get() != null) ?
+                JSON.stringify(item) : item.getHashCode())
         }
         .itemSpace('8vp')
         .gesture(PanGesture({

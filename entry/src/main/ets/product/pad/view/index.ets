@@ -61,7 +61,11 @@ struct IndexPage {
         let param: ParamsInterface = router.getParams();
         Log.debug(this.TAG, "param: " + JSON.stringify(param));
         if (param != null) {
-            this.jumpSource = new Number(param.jumpSource).valueOf() || 0;
+            if (param.jumpSource != undefined && param.jumpSource != null && !Number.isNaN(param.jumpSource)) {
+                this.jumpSource = new Number(param.jumpSource).valueOf()
+            } else {
+                this.jumpSource = 0
+            }
             if (this.jumpSource == JumpSourceToMain.CAMERA) {
                 this.entryFromHap = Constants.ENTRY_FROM_NONE;
                 this.currentIndex = Constants.TIMELINE_PAGE_INDEX;

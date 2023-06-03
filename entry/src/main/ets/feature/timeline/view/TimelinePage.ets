@@ -490,14 +490,16 @@ export struct TimelinePage {
                     Stack() {
                         Grid(this.scroller) {
                             LazyForEach(this.timelineDataSource, (item: LazyItem<DateAdded>) => {
-                                if (item && item.get() && item.get().viewType == ViewType.GROUP_TITLE) {
+                                if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null) &&
+                                    item.get().viewType == ViewType.GROUP_TITLE) {
                                     GridItem() {
                                         TimelineTitleComponent({
                                             lazyItem: (item as LazyItem<TimelineDataItem>),
                                             timelineDataItem: (item as LazyItem<TimelineDataItem>).get()
                                         })
                                     }.columnStart(0).columnEnd(this.gridRowCount - 1)
-                                } else if (item && item.get() && item.get().viewType == ViewType.ITEM) {
+                                } else if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null) &&
+                                    item.get().viewType == ViewType.ITEM) {
                                     GridItem() {
                                         ImageGridItemComponent({
                                             lazyItem: (item as LazyItem<MediaDataItem>),

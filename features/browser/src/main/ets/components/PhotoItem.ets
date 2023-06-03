@@ -138,7 +138,9 @@ export struct PhotoItem {
             this.preItem.rotate = this.item.orientation;
             this.preItem.width = this.item.imgWidth;
             this.preItem.height = this.item.imgHeight;
-            this.eventPipeline && this.eventPipeline.onDataChanged(this.item)
+            if (this.eventPipeline != undefined && this.eventPipeline != null) {
+                this.eventPipeline.onDataChanged(this.item)
+            }
             return;
         }
         this.matrix = Matrix4.identity().copy();
@@ -388,6 +390,6 @@ export struct PhotoItem {
 
     private isVideoPlayBtnShow(): boolean {
         Log.debug(TAG, "isVideoPlayBtnShow: " + this.item.mediaType);
-        return ((this.item) && (this.item.mediaType == MediaLib.MediaType.VIDEO));
+        return ((this.item != undefined && this.item != null) && (this.item.mediaType == MediaLib.MediaType.VIDEO));
     }
 }
