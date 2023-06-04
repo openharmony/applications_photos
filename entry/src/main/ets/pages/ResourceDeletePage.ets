@@ -102,7 +102,7 @@ struct ResourceDeletePage {
   private setDeleteResult(result: dialogRequest.ResultCode): void {
     Log.info(TAG, `start to setDeleteResult : ${result}}`);
     try {
-      var requestCallback = AppStorage.Get("requestCallback");
+      let requestCallback = AppStorage.Get("requestCallback");
       let myResult = {
         result: result,
       }

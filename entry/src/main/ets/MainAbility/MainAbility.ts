@@ -38,7 +38,7 @@ let mCallerUid: number = 0;
 let mMaxSelectCount: number = 0;
 let mFilterMediaType: number = MediaConstants.SELECT_TYPE_ALL;
 let appBroadcast = broadcastManager.getBroadcast();
-var pagePath: string = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 'product/phone/view/index' : 'product/pad/view/index';
+let pagePath: string = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 'product/phone/view/index' : 'product/pad/view/index';
 
 export default class MainAbility extends Ability {
     private TAG: string = 'MainAbility';

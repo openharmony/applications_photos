@@ -72,7 +72,7 @@ export default class ServiceExtAbility extends Extension {
             let requestInfo = dialogRequest.getRequestInfo(want);
             Log.info(TAG, "requestInfo param : " + JSON.stringify(requestInfo));
 
-            var requestCallback = dialogRequest.getRequestCallback(want);
+            let requestCallback = dialogRequest.getRequestCallback(want);
             AppStorage.SetOrCreate("requestCallback", requestCallback);
             Log.info(TAG, "Succeeded in get requestCallback");
 
