@@ -60,7 +60,7 @@ struct MediaOperationPage {
                 this.albumInfo = JSON.parse(param.albumInfo.toString()) as SimpleAlbumDataItem;
                 this.sourceAlbumId = this.albumInfo.id;
                 blackList.push(this.sourceAlbumId)
-                Log.info(TAG, `router getParams pageType:${this.pageType},Album:${this.sourceAlbumId}`);
+                Log.info(TAG, "router getParams pageType:" + this.pageType + ",Album:" + this.sourceAlbumId);
             }
         }
         this.albumsDataSource.setBlackList(blackList)
@@ -89,7 +89,7 @@ struct MediaOperationPage {
     }
 
     onMenuClicked(action: Action): void {
-        Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
+        Log.info(TAG, "onMenuClicked, actionID: " + action.actionID);
 
         if (action === Action.CANCEL) {
             router.back({
@@ -124,7 +124,7 @@ struct MediaOperationPage {
     }
 
     updateListCardWidth(): void {
-        Log.info(TAG, `updateListCardWidth start ${this.screenColumns}`);
+        Log.info(TAG, "updateListCardWidth start " + this.screenColumns);
         if (this.screenColumns == ColumnSize.COLUMN_FOUR) {
             this.listCardWidth = screenManager.getColumnsWidth(ColumnSize.COLUMN_FOUR);
         } else if (this.screenColumns == ColumnSize.COLUMN_EIGHT) {
@@ -134,7 +134,7 @@ struct MediaOperationPage {
         } else {
             Log.warn(TAG, 'screenColumns is not init');
         }
-        Log.info(TAG, `updateListCardWidth ${this.listCardWidth}`);
+        Log.info(TAG, "updateListCardWidth " + this.listCardWidth);
     }
 
     // Callback when the page is in the foreground

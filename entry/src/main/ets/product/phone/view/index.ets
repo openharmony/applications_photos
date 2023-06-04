@@ -57,22 +57,22 @@ struct IndexPage {
             this.currentIndex = Constants.ALBUM_PAGE_INDEX;
         }
         let param = router.getParams();
-        Log.info(this.TAG, `param: ${JSON.stringify(param)}`);
+        Log.info(this.TAG, "param: " + JSON.stringify(param));
         if (param != null) {
             this.jumpSource = new Number(param.jumpSource).valueOf() || 0
             if (this.jumpSource == JumpSourceToMain.CAMERA) {
                 this.currentIndex = Constants.TIMELINE_PAGE_INDEX;
                 this.entryFromHap = Constants.ENTRY_FROM_NONE;
-                Log.info(this.TAG, `Camera in, switch to Tab ${this.currentIndex}.`);
+                Log.info(this.TAG, "Camera in, switch to Tab " + this.currentIndex + ".");
             }
         }
     }
 
     onPageShow(): void {
-        Log.debug(this.TAG, `IndexPage.onPageShow entryFromHap: ${this.entryFromHap}`);
+        Log.debug(this.TAG, "IndexPage.onPageShow entryFromHap: " + this.entryFromHap);
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
         this.isShow = true;
-         Log.error(this.TAG, `IndexPage.onPageShow: router.clear ${this.jumpSource}`);
+         Log.error(this.TAG, "IndexPage.onPageShow: router.clear " + this.jumpSource);
         if (this.jumpSource == JumpSourceToMain.CAMERA) {
             router.clear();
         } else if (this.jumpSource == JumpSourceToMain.ALBUM) {
@@ -129,7 +129,7 @@ struct IndexPage {
                 .onChange((index: number) => {
                     this.resetTabState(this.currentIndex)
                     this.onTabChanged(index);
-                    Log.info(this.TAG, `Switch to Tab ${this.currentIndex}.`)
+                    Log.info(this.TAG, "Switch to Tab " + this.currentIndex + ".")
                 })
 
                 TabBar({

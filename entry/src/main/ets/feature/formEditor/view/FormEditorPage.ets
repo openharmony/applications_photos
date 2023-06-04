@@ -63,49 +63,49 @@ struct FormEditorPage {
     })
 
     async GetMediaData(albumId: string, index: number): Promise<void> {
-        Log.debug(TAG, `GetMediaData start`);
+        Log.debug(TAG, "GetMediaData start");
         this.currentIndex = index;
         let fetchOpt = await getFetchOptions(MediaConstants.SELECT_TYPE_IMAGE, albumId, "");
-        fetchOpt.order = `date_added DESC LIMIT ${index},1`;
+        fetchOpt.order = "date_added DESC LIMIT " + index + ",1";
         this.fileAsset = (await mediaModel.getAllMediaItem(albumId, fetchOpt, false)).fileAsset;
     }
 
     async openCurrentFd(): Promise<void> {
-        Log.info(TAG, `open fd, fileAsset is valid ${this.fileAsset != null}`);
+        Log.info(TAG, "open fd, fileAsset is valid " + (this.fileAsset != null));
         this.fd = (this.fileAsset != null) ? await  mediaModel.openAsset('R', this.fileAsset) : -1;
     }
 
     bindFormData(): formBindingData.FormBindingData {
-        Log.debug(TAG, `bindFormData start formId: ${this.formId}`);
+        Log.debug(TAG, "bindFormData start formId: " + this.formId);
         let image = "image_" + this.fd + "_formId_" + this.formId + "_arkUri_" + this.arkUri + "_currentUri_" + this.fileAsset.uri;
-        Log.debug(TAG, `bindFormData start image: ${image}`);
+        Log.debug(TAG, "bindFormData start image: " + image);
         let dataObj1: Object = {
             "fd": this.fd == -1 ? false : true,
             "image1": "memory://" + image,
             "albumName": this.displayName,
             "currentIndex": this.currentIndex,
             "isShow": this.isShow,
-            "formImages": JSON.parse(`{ "${image}": ${this.fd} }`),
+            "formImages": JSON.parse("{ " + image + ": " + this.fd + " }"),
             'uri': (this.fileAsset.uri !== '') ? Constants.ACTION_URI_FORM_ABILITY : Constants.ACTION_URI_FORM_ABILITY_NONE,
             'albumId': this.albumId,
             'currentUri': this.fileAsset.uri
         };
         let dataObj = JSON.stringify(dataObj1);
-        Log.info(TAG, `bindFormData, createFormBindingData dataObj2.data: ${dataObj}`);
+        Log.info(TAG, "bindFormData, createFormBindingData dataObj2.data: " + dataObj);
         let obj = formBindingData.createFormBindingData(dataObj);
-        Log.debug(TAG, `bindFormData, createFormBindingData obj2.data: ${JSON.stringify(obj.data)}`);
+        Log.debug(TAG, "bindFormData, createFormBindingData obj2.data: " + JSON.stringify(obj.data));
         return obj as formBindingData.FormBindingData;
     }
 
     updateRefreshTime(): void {
-        Log.debug(TAG, `updateRefreshTime isShow ${this.isShow}`);
+        Log.debug(TAG, "updateRefreshTime isShow " + this.isShow);
         if (!this.isShow) {
             return;
         }
         formProvider.setFormNextRefreshTime(this.formId, this.time).then(() => {
-            Log.info(TAG, `setFormNextRefreshTime sucessfully`);
+            Log.info(TAG, "setFormNextRefreshTime sucessfully");
         }).catch((err) => {
-            Log.error(TAG, `init err ${err}`);
+            Log.error(TAG, "init err " + err);
         })
     }
 
@@ -114,46 +114,46 @@ struct FormEditorPage {
     }
 
     updateFormData(): void {
-        Log.debug(TAG, `updateFormData formId: ${JSON.stringify(this.formId)}`);
+        Log.debug(TAG, "updateFormData formId: " + JSON.stringify(this.formId));
         let obj3 = this.bindFormData();
-        Log.debug(TAG, `updateFormData obj: ${JSON.stringify(obj3)}`);
+        Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
         formProvider.updateForm(this.formId, obj3).then((data) => {
-            Log.info(TAG, `updateFormData, data: ${JSON.stringify(data)}`);
+            Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
             if (this.isShow) {
                 formProvider.setFormNextRefreshTime(this.formId, this.time).then(() => {
                     this.terminate();
                 }).catch((err) => {
-                    Log.error(TAG, `init err ${err}`);
+                    Log.error(TAG, "init err " + err);
                     this.terminate();
                 })
             } else {
                 this.terminate();
             }
         }).catch((error) => {
-            Log.error(TAG, `updateForm failed. Cause: ${JSON.stringify(error)}`);
+            Log.error(TAG, "updateForm failed. Cause: " + JSON.stringify(error));
             this.terminate();
         });
     }
 
     async saveData(albumName: string, albumId: string, displayName: object, index: number, isShow: boolean): Promise<void> {
-        Log.debug(TAG, `saveData start! ${albumName} ${displayName} ${index}`);
+        Log.debug(TAG, "saveData start! " + albumName + " " + displayName + " " + index);
         let msgDisplayName = '';
         if (displayName instanceof String) {
             msgDisplayName = displayName.toString();
         } else {
-            Log.debug(TAG, `saveData object ${displayName}`);
+            Log.debug(TAG, "saveData object " + displayName);
             msgDisplayName = await getResourceString(displayName as Resource);
         }
         this.isShow = isShow;
         this.albumId = albumId;
         this.displayName = msgDisplayName;
-        Log.debug(TAG, `saveData msgDisplayName ${msgDisplayName}`);
+        Log.debug(TAG, "saveData msgDisplayName " + msgDisplayName);
         await dataStore.init();
         await this.GetMediaData(albumId, index);
         await this.openCurrentFd();
         let formIdKey = 'formId_' + this.formId;
         let hasFormId = await dataStore.hasData(formIdKey);
-        Log.debug(TAG, `The value of hasFormId is ${hasFormId}`);
+        Log.debug(TAG, "The value of hasFormId is " + hasFormId);
         if (hasFormId) {
             let displayNameKey = 'displayName_' + this.formId;
             await dataStore.putData(displayNameKey, msgDisplayName);
@@ -243,7 +243,7 @@ struct FormEditorPage {
     }
 
     async updateTime(): Promise<void> {
-        Log.debug(TAG, `updateTime start! ${this.time}`);
+        Log.debug(TAG, "updateTime start! " + this.time);
         await dataStore.init();
         let intervalTimeKey = 'intervalTime';
         await dataStore.putData(intervalTimeKey, this.time);

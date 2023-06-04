@@ -72,22 +72,22 @@ struct NewAlbumPage {
     }
 
     onIndexChange(): void {
-        Log.info(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
+        Log.info(TAG, "onIndexChange " + this.PhotoGridPageIndex)
         if (this.PhotoGridPageIndex != Constants.INVALID) {
             this.scroller.scrollToIndex(this.PhotoGridPageIndex);
         }
     }
 
     onMenuClicked(action: Action): void {
-        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, "onMenuClicked, action: " + action.actionID);
         if (action === Action.CANCEL) {
             this.groupDataSource.setSelect(false)
             router.back();
         } else if (action === Action.OK) {
             if (this.groupDataSource.getSelectedCount() == 0) {
-                Log.info(TAG, `onMenuClicked, action: ${action.actionID}, count = 0`);
+                Log.info(TAG, "onMenuClicked, action: " + action.actionID + ", count = 0");
             } else {
-                Log.info(TAG, `onMenuClicked, action: ${action.actionID} newAlbum: ${this.isNewAlbum}`);
+                Log.info(TAG, "onMenuClicked, action: " + action.actionID + " newAlbum: " + this.isNewAlbum);
                 if (this.isNewAlbum) {
                     AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.groupDataSource.getSelectedItems() as MediaDataItem[]);
                     this.groupDataSource.setSelect(false)
@@ -195,7 +195,7 @@ struct NewAlbumPage {
         startTrace('PhotoGridPageAboutToAppear');
         let param: ParamsInterface = router.getParams();
         if (param.item != null) {
-            Log.debug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
+            Log.debug(TAG, "After router.getParams, param is: " + JSON.stringify(param));
             let item = JSON.parse(param.item.toString()) as AlbumDataItem;
             this.groupDataSource.setAlbumId(item.id)
         }
@@ -231,7 +231,7 @@ struct NewAlbumPage {
         let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
         this.gridRowCount = Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
         + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
-        Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
+        Log.info(TAG, "initGridRowCount contentWidth: " + contentWidth);
     }
 
     private onSelect(index: number): void {
@@ -248,7 +248,7 @@ struct NewAlbumPage {
             Log.warn(TAG, 'targetIndex is not found');
             return;
         }
-        Log.info(TAG, `jump to photo browser at index: ${targetIndex}`);
+        Log.info(TAG, "jump to photo browser at index: " + targetIndex);
         AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
         router.push({
             uri: 'feature/browser/view/PhotoBrowser',
