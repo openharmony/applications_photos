@@ -22,24 +22,24 @@ export class MultimodalInputManager {
 
     //win + N
     leftKeyOptions: inputConsumer.KeyOptions = {
-        'preKeys': [],
-        'finalKey': 2014,
-        'isFinalKeyDown': true,
-        'finalKeyDownDuration': 0
+        preKeys: Array<number>(),
+        finalKey: 2014,
+        isFinalKeyDown: true,
+        finalKeyDownDuration: 0
     };
 
     //win + I
     rightKeyOptions: inputConsumer.KeyOptions = {
-        'preKeys': [],
-        'finalKey': 2015,
-        'isFinalKeyDown': true,
-        'finalKeyDownDuration': 0
+        preKeys: Array<number>(),
+        finalKey: 2015,
+        isFinalKeyDown: true,
+        finalKeyDownDuration: 0
     };
     escKeyOptions: inputConsumer.KeyOptions = {
-        'preKeys': [],
-        'finalKey': 2070,
-        'isFinalKeyDown': true,
-        'finalKeyDownDuration': 0
+        preKeys: Array<number>(),
+        finalKey: 2070,
+        isFinalKeyDown: true,
+        finalKeyDownDuration: 0
     };
 
     async registerListener(callback): Promise<void> {
