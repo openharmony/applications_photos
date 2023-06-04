@@ -14,8 +14,8 @@
  */
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import type { MenuOperationCallback } from '@ohos/base/src/main/ets/operation/MenuOperationCallback';
-import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import { MenuOperationCallback } from '@ohos/base/src/main/ets/operation/MenuOperationCallback';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import { getFetchOptionsByItem } from '@ohos/base/src/main/ets/helper/MediaDataHelper';

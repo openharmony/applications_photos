@@ -16,7 +16,7 @@ import router, { ParamsInterface } from '@system.router';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Action } from '../../../common/view/browserOperation/Action'
-import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { PhotoBrowserActionBar } from './PhotoBrowserActionBar';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';

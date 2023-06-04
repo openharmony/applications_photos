@@ -23,7 +23,7 @@ import { MediaDetails, DetailsDialog } from './DetailsDialog';
 import { MultiSelectDetails, MultiSelectDialog } from './MultiSelectDialog';
 import { DeleteDialog } from './DeleteDialog';
 import { ThirdDeleteDialog } from './ThirdDeleteDialog';
-import type { DialogCallback } from '../../model/common/DialogUtil';
+import { DialogCallback } from '../../model/common/DialogUtil';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { CancelOperationDialog, CancelParam } from './CancelOperationDialog';
 import { RenameDialog } from './RenameDialog';

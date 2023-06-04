@@ -27,7 +27,7 @@ import { TabBarForAlbumSet } from '../../../common/view/TabBar';
 import { TabItemWithText } from '../../../common/model/common/TabItem';
 import { AlbumSetNewMenuOperation } from '@ohos/base/src/main/ets/operation/AlbumSetNewMenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
-import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';

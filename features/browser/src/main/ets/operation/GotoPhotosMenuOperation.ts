@@ -15,7 +15,7 @@
 
 import router from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
-import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';

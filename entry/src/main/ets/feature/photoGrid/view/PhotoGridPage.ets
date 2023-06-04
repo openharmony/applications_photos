@@ -25,7 +25,7 @@ import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { Constants } from '../../../common/model/common/Constants';
-import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { BatchDeleteMenuOperation } from '@ohos/base/src/main/ets/operation/BatchDeleteMenuOperation';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';

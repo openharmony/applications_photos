@@ -21,7 +21,7 @@ import {
 import { CustomDialogView } from '../../../common/view/dialog/CustomDialogView';
 import { ToolBar } from '../../../common/view/actionbar/ToolBar';
 import { Constants } from '../../../common/model/common/Constants';
-import type { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
+import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { BatchDeleteMenuOperation } from '@ohos/base/src/main/ets/operation/BatchDeleteMenuOperation';
 import { ViewType } from '@ohos/base/src/main/ets/data/ViewType';

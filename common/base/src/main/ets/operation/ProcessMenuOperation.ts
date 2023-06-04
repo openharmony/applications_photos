@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import type { AsyncCallback } from '../interface/AsyncCallback';
+import { AsyncCallback } from '../interface/AsyncCallback';
 import { Log } from '../utils/Log';
-import type { MenuOperationCallback } from './MenuOperationCallback';
-import type { MenuOperation } from './MenuOperation';
+import { MenuOperationCallback } from './MenuOperationCallback';
+import { MenuOperation } from './MenuOperation';
 import { MenuContext } from './MenuContext';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { startTraceWithTaskId, finishTraceWithTaskId } from '../utils/TraceControllerUtils';

@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import type { MediaObserverCallback } from '../interface/MediaObserverCallback';
-import type { MediaLibDataChangeCallback } from '../interface/MediaLibDataChangeCallback';
+import { MediaObserverCallback } from '../interface/MediaObserverCallback';
+import { MediaLibDataChangeCallback } from '../interface/MediaLibDataChangeCallback';
 
 export class CommonObserverCallback implements MediaObserverCallback {
     private source: MediaLibDataChangeCallback;
