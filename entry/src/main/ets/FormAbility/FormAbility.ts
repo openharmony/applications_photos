@@ -74,11 +74,10 @@ export default class FormAbility extends FormExtension {
             let dataStore = DataStoreUtil.getInstance();
             await dataStore.removeCache();
             let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
-            for (let key of newStatus.keys()) {
-                Log.info(this.TAG, "onVisibilityChange, key:" + key + "  value " + newStatus.get(key));
-                let formId = key;
-                formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE);
-            }
+            newStatus.forEach((value: number, key: string):void => {
+                Log.info(this.TAG, "onVisibilityChange, key:" + key + "  value " + value);
+                formControllerManager.initData(key, Constants.PHOTOS_FORM_OPERATION_MODE_NONE);
+            });
         } catch (err) {
             Log.error(this.TAG, "clearCache err:" + JSON.stringify(err));
         }
