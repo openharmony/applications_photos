@@ -96,7 +96,7 @@ export default class MainAbility extends Ability {
         } else {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
-        bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0, (error, appInfo): void => {
+        bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0, (error: Error, appInfo: bundleManager.ApplicationInfo): void => {
            if (error) {
                 Log.error(this.TAG, "getApplicationInfo error: " + error);
                 return;
@@ -109,7 +109,7 @@ export default class MainAbility extends Ability {
            ];
            for (let permission of requestPermissionList) {
                // @ts-ignore
-               atManager.createAtManager().checkAccessToken(appInfo.accessTokenId, permission).then((status): void => {
+               atManager.createAtManager().checkAccessToken(appInfo.accessTokenId, permission).then((status: atManager.GrantStatus): void => {
                    if (status == atManager.GrantStatus.PERMISSION_DENIED) {
                        Log.error(this.TAG, "Failed to checkAccessToken permission = " + permission);
                    }

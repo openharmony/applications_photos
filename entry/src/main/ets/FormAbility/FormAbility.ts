@@ -43,7 +43,7 @@ export default class FormAbility extends FormExtension {
                 return null;
             }
             return formController.bindFormData(formId);
-        }).catch((err): void => {
+        }).catch((err: Error): void => {
              Log.error(this.TAG, "init err " + err);
         })
         return null;

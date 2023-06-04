@@ -220,7 +220,7 @@ class ScreenManager {
 
     private setMainWindow(win: window.Window): void {
         Log.debug(TAG, 'setMainWindow');
-        win.on('windowSizeChange', (data): void => {
+        win.on('windowSizeChange', (data: window.Size): void => {
             Log.debug(TAG, "windowSizeChange " + JSON.stringify(data));
             this.checkWindowMode()
             this.onWinSizeChanged(data);
@@ -323,7 +323,7 @@ class ScreenManager {
             topWindow.setSystemBarEnable(names, (): void => {
                 Log.debug(TAG, 'setFullScreen Succeeded');
                 if (isShowBar) {
-                    topWindow.getAvoidArea(0, (err, data): void => {
+                    topWindow.getAvoidArea(0, (err: Error, data: window.AvoidArea): void => {
                         Log.info(TAG, 'Succeeded in obtaining the area. Data:' + JSON.stringify(data));
                         this.onLeftBlankChanged(data);
                     });
@@ -334,7 +334,7 @@ class ScreenManager {
         }
     }
 
-    private onLeftBlankChanged(area): void {
+    private onLeftBlankChanged(area: window.AvoidArea): void {
         if (area == null || area == undefined || area.bottomRect.height == 0) {
             return;
         }
