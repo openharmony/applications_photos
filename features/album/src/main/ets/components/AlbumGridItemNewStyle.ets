@@ -58,7 +58,7 @@ export struct AlbumGridItemNewStyle {
     @State thumbnail: string = "";
 
     aboutToAppear(): void {
-        Log.debug(TAG, `aboutToAppear`);
+        Log.debug(TAG, 'aboutToAppear');
         this.selectable = this.item.id != MediaConstants.ALBUM_ID_RECYCLE;
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.updateCardSize());
         startTrace("loadAlbumItem");
@@ -108,7 +108,7 @@ export struct AlbumGridItemNewStyle {
     }
 
     selectStateChange(): void {
-        Log.info(TAG, `change selected.`);
+        Log.info(TAG, 'change selected.');
 
         if (!this.isAlbumSetSelectedMode) {
             this.isAlbumSetSelectedMode = true;
@@ -203,7 +203,7 @@ export struct AlbumGridItemNewStyle {
                                 angle: 0
                             })
                             .onError(() => {
-                                Log.error(TAG, `album is empty or its cover is error ${this.thumbnail}`);
+                                Log.error(TAG, 'album is empty or its cover is error ' + this.thumbnail);
                                 this.isEmptyAlbum = true;
                             })
                     }
@@ -286,7 +286,7 @@ export struct AlbumGridItemNewStyle {
             if (this.isAlbumSetSelectedMode) {
                 this.selectStateChange();
             } else {
-                Log.info(TAG, `After onClick, MediaSet is: ${JSON.stringify(this.item)}`);
+                Log.info(TAG, 'After onClick, MediaSet is: ' + JSON.stringify(this.item));
                 router.push({
                     uri: 'feature/photoGrid/view/PhotoGridPage',
                     params: {

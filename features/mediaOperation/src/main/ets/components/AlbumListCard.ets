@@ -29,7 +29,7 @@ export struct AlbumListCard {
     @State mediaRes: Resource = undefined;
 
     aboutToAppear(): void {
-        Log.info(TAG, `album mediaSet ${JSON.stringify(this.item)}`);
+        Log.info(TAG, 'album mediaSet ' + JSON.stringify(this.item));
         this.item.load().then(() => {
             this.thumbnail = this.item.getThumbnail();
         })
