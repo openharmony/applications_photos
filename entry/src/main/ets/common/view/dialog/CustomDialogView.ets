@@ -291,7 +291,7 @@ export struct CustomDialogView {
         });
 
         this.broadCast.on(BroadcastConstants.SHOW_MULTI_SELECT_DIALOG,
-            function (count: number, size: number) {
+            (count: number, size: number): void => {
                 Log.info(TAG, 'SHOW_MULTI_SELECT_DIALOG ');
                 self.multiSelectDetails = {
                     size: size,
@@ -302,39 +302,39 @@ export struct CustomDialogView {
             });
 
         this.broadCast.on(BroadcastConstants.SHOW_DELETE_DIALOG,
-            function (deleteMessage: Resource, dialogDeleteMessage: Resource, confirmCallback: Function, cancelCallback?: Function) {
-               Log.info(TAG, 'SHOW_DELETE_DIALOG ');
+            (deleteMessage: Resource, dialogDeleteMessage: Resource, confirmCallback: Function, cancelCallback?: Function): void => {
+                Log.info(TAG, 'SHOW_DELETE_DIALOG ');
                 self.dialogMessage = deleteMessage;
                 self.dialogDeleteMessage = dialogDeleteMessage;
                 self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
                 self.deleteDialogController.open();
             });
         this.broadCast.on(BroadcastConstants.SHOW_THIRD_DELETE_DIALOG,
-            function (deleteMessage: Resource, dialogDeleteMessage: Resource, confirmCallback: Function, cancelCallback?: Function) {
-               Log.info(TAG, 'SHOW_DELETE_DIALOG ');
+            (deleteMessage: Resource, dialogDeleteMessage: Resource, confirmCallback: Function, cancelCallback?: Function): void => {
+                Log.info(TAG, 'SHOW_DELETE_DIALOG ');
                 self.dialogMessage = deleteMessage;
                 self.dialogDeleteMessage = dialogDeleteMessage;
                 self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
                 self.thirdDeleteDialogController.open();
             });
         this.broadCast.on(BroadcastConstants.SHOW_RENAME_PHOTO_DIALOG,
-            function (fileName: string, confirmCallback: Function, cancelCallback?: Function) {
-               Log.info(TAG, 'SHOW_RENAME_PHOTO_DIALOG ');
+            (fileName: string, confirmCallback: Function, cancelCallback?: Function): void => {
+                Log.info(TAG, 'SHOW_RENAME_PHOTO_DIALOG ');
                 self.renameFileName = fileName;
                 self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
                 self.renameFileDialogController.open();
             });
 
         this.broadCast.on(BroadcastConstants.SHOW_ADD_NOTES_PHOTO_DIALOG,
-            function (confirmCallback: Function, cancelCallback?: Function) {
-               Log.info(TAG, 'SHOW_ADD_NOTES_PHOTO_DIALOG ');
+            (confirmCallback: Function, cancelCallback?: Function): void => {
+                Log.info(TAG, 'SHOW_ADD_NOTES_PHOTO_DIALOG ');
                 self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
                 self.addNotesDialogController.open();
             });
 
         this.broadCast.on(BroadcastConstants.SHOW_PROGRESS_DIALOG,
-            function (message: Resource, operationType: string, cancelFunc?: Function) {
-               Log.info(TAG, 'SHOW_PROGRESS_DIALOG');
+            (message: Resource, operationType: string, cancelFunc?: Function): void => {
+                Log.info(TAG, 'SHOW_PROGRESS_DIALOG');
                 if (message != null) {
                     self.progressMessage = message;
                 }
@@ -351,13 +351,13 @@ export struct CustomDialogView {
             });
 
         this.broadCast.on(BroadcastConstants.UPDATE_PROGRESS,
-            function (progress: number, currentCount: number) {
-               Log.info(TAG, `UPDATE_PROGRESS ${progress}, ${currentCount}`);
+            (progress: number, currentCount: number): void => {
+                Log.info(TAG, `UPDATE_PROGRESS ${progress}, ${currentCount}`);
                 self.deleteProgress = progress;
                 self.deleteProgressParam.deleteProgress = progress;
                 self.deleteProgressParam.currentCount = currentCount;
                 if (progress == Constants.PROGRESS_MAX) {
-                   Log.info(TAG, 'Update progress 100%');
+                    Log.info(TAG, 'Update progress 100%');
                     self.progressDialogController.close();
                     self.deleteProgress = 0;
                     self.deleteProgressParam.deleteProgress = 0;
@@ -367,64 +367,64 @@ export struct CustomDialogView {
             });
 
         this.broadCast.on(BroadcastConstants.CANCEL_OPERATE,
-            function (cancelMessage: Resource, continueFunc: Function, cancelFunc: Function) {
+            (cancelMessage: Resource, continueFunc: Function, cancelFunc: Function): void => {
                 self.cancelMessage = cancelMessage;
                 self.cancelParam.continueFunc = continueFunc;
                 self.cancelParam.cancelFunc = cancelFunc;
-               Log.info(TAG, 'CANCEL_OPERATE');
+                Log.info(TAG, 'CANCEL_OPERATE');
                 self.cancelDialogController.open();
             });
 
         this.broadCast.on(BroadcastConstants.DOWNLOAD_CANCEL_OPERATE,
-            function (cancelMessage: Resource, continueFunc: Function, cancelFunc: Function) {
+            (cancelMessage: Resource, continueFunc: Function, cancelFunc: Function): void => {
                 self.cancelMessage = cancelMessage;
                 self.cancelParam.continueFunc = continueFunc;
                 self.cancelParam.cancelFunc = cancelFunc;
-               Log.info(TAG, 'DOWNLOAD_CANCEL_OPERATE');
+                Log.info(TAG, 'DOWNLOAD_CANCEL_OPERATE');
                 self.downloadCancelOperationDialog.open();
             });
 
         this.broadCast.on(BroadcastConstants.SHOW_SAVE_PHOTO_DIALOG,
-            function (saveAsNewCallback: Function, replaceOriginalCallback: Function) {
-               Log.info(TAG, 'SHOW_SAVE_PHOTO_DIALOG');
+            (saveAsNewCallback: Function, replaceOriginalCallback: Function): void => {
+                Log.info(TAG, 'SHOW_SAVE_PHOTO_DIALOG');
                 self.saveDialogCallback
                 = { saveAsNewCallback: saveAsNewCallback, replaceOriginalCallback: replaceOriginalCallback };
                 self.saveDialogController.open();
             });
 
         this.broadCast.on(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG,
-            function (discardCallback: Function) {
-               Log.info(TAG, 'SHOW_EDIT_EXIT_PHOTO_DIALOG');
+            (discardCallback: Function): void => {
+                Log.info(TAG, 'SHOW_EDIT_EXIT_PHOTO_DIALOG');
                 self.editExitDialogCallback = { discardCallback: discardCallback };
                 self.editExitDialogController.open();
             });
 
         this.broadCast.on(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG,
-            function () {
-               Log.info(TAG, 'SHOW_EDIT_SAVE_PROGRESS_DIALOG');
+            (): void => {
+                Log.info(TAG, 'SHOW_EDIT_SAVE_PROGRESS_DIALOG');
                 self.saveImageDialogController.open();
             });
 
         this.broadCast.on(BroadcastConstants.SHOW_NEW_ALBUM_PHOTO_DIALOG,
-            function (fileName: string, confirmCallback: Function, cancelCallback?: Function) {
-               Log.info(TAG, 'SHOW_NEW_ALBUM_PHOTO_DIALOG');
+            (fileName: string, confirmCallback: Function, cancelCallback?: Function): void => {
+                Log.info(TAG, 'SHOW_NEW_ALBUM_PHOTO_DIALOG');
                 self.renameFileName = fileName;
                 self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
                 self.newAlbumDialogController.open();
             });
 
         this.broadCast.on(BroadcastConstants.SHOW_COPY_OR_MOVE_DIALOG,
-            function (moveFunc: Function, copyFunc: Function) {
-               Log.info(TAG, 'SHOW_COPY_OR_MOVE_DIALOG');
+            (moveFunc: Function, copyFunc: Function): void => {
+                Log.info(TAG, 'SHOW_COPY_OR_MOVE_DIALOG');
                 self.operateParam.moveFunc = moveFunc;
                 self.operateParam.copyFunc = copyFunc;
                 self.copyOrMoveDialogController.open();
             });
 
         this.broadCast.on(BroadcastConstants.FIND_SAME_FILE_DIALOG,
-            function (assets: Assets, count: number, replaceFunc: Function, skipFunc: Function,
-                      cancelFunc: Function, doSameFunc: Function) {
-               Log.info(TAG, 'FIND_SAME_FILE_DIALOG');
+            (assets: Assets, count: number, replaceFunc: Function, skipFunc: Function,
+                      cancelFunc: Function, doSameFunc: Function): void => {
+                Log.info(TAG, 'FIND_SAME_FILE_DIALOG');
                 self.findSameNameParam.sourceFileAsset = assets.sourceAsset;
                 self.findSameNameParam.targetFileAsset = assets.targetAsset;
                 self.findSameNameParam.replaceFunc = replaceFunc;
@@ -436,8 +436,8 @@ export struct CustomDialogView {
             });
 
         this.broadCast.on(BroadcastConstants.DELETE_PROGRESS_DIALOG,
-            function (message: Resource, totalCount: number) {
-               Log.info(TAG, 'DELETE_PROGRESS_DIALOG');
+            (message: Resource, totalCount: number): void => {
+                Log.info(TAG, 'DELETE_PROGRESS_DIALOG');
                 self.deleteProgressParam.currentCount = 0;
                 self.deleteProgressParam.totalCount = totalCount;
                 self.deleteProgressParam.message = message;
