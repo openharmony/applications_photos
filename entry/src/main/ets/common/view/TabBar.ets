@@ -76,7 +76,7 @@ export struct TabBar {
             Stack() {
               Tab({ tabItem: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
             }.layoutWeight(1)
-          }, tab => tab.name.id)
+          }, (tab): string => tab.name.id)
         }
         .height(DEVICE_TYPE.DEVICE_PAD == this.deviceType ? $r('app.float.horizontal_width') : '100%')
       }
@@ -94,7 +94,7 @@ export struct TabBar {
           Stack() {
             Tab({ tabItem: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
           }.layoutWeight(1)
-        }, tab => tab.name.id)
+        }, (tab): string => tab.name.id)
       }
       .markAnchor({ x: '0%', y: '100%' })
       .position({ x: '0%', y: '100%' })
@@ -207,7 +207,7 @@ export struct TabBarForAlbumSet {
               onTabSelected: this.onTabSelected
             })
           }
-        }, tab => tab.name.id)
+        }, (tab): string => tab.name.id)
       }
       .width(this.tabWidth)
       .columnsTemplate('1fr '.repeat(this.tabs.length))

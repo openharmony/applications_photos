@@ -510,7 +510,7 @@ export struct TimelinePage {
                                     .columnStart((item as LazyItem<MediaDataItem>).get().index % this.gridRowCount)
                                     .columnEnd((item as LazyItem<MediaDataItem>).get().index % this.gridRowCount)
                                 }
-                            }, (item) => {
+                            }, (item): string => {
                                 if (item == null || item.get() == null) {
                                     return JSON.stringify(item)
                                 }

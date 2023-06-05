@@ -68,7 +68,7 @@ export struct ToolBar {
                         .color($r('sys.color.ohos_id_color_list_separator'))
                 }
 
-            }, menu => (menu.actionType != null ? menu.actionType.id : menu.actionID))
+            }, (menu): string => (menu.actionType != null ? menu.actionType.id : menu.actionID))
         }.width(screenManager.getColumnsWidth(ColumnSize.COLUMN_TWO))
         .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
         .padding({
@@ -148,7 +148,7 @@ export struct ToolBar {
                             .width(Constants.PERCENT_HUNDRED / this.toolMenuList.length + "%")
                             .height('100%')
                         }
-                    }, menu => (menu.actionType != null ? menu.actionType.id : menu.actionID))
+                    }, (menu): string => (menu.actionType != null ? menu.actionType.id : menu.actionID))
                 }
                 .width('100%')
                 .height(Constants.ActionBarHeight)
