@@ -25,7 +25,7 @@ export struct SelectionTitle {
     @Consume('selectedCount') count: number;
 
     private onBuildDone(): void {
-        Log.info(this.TAG, `onBuildDone, count: ${this.count}`);
+        Log.info(this.TAG, "onBuildDone, count: " + this.count);
     }
 
     build() {

@@ -97,14 +97,14 @@ struct PhotoGridPage {
     }
 
     onIndexChange(): void {
-        Log.info(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
+        Log.info(TAG, "onIndexChange " + this.PhotoGridPageIndex)
         if (this.PhotoGridPageIndex != Constants.INVALID) {
             this.scroller.scrollToIndex(this.PhotoGridPageIndex);
         }
     }
 
     onMenuClicked(action: Action): void {
-        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, "onMenuClicked, action: " + action.actionID);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
         if (action === Action.BACK) {
@@ -192,10 +192,10 @@ struct PhotoGridPage {
         } else {
             let size = 0;
             items.forEach((item) => {
-                Log.debug(TAG, `openDetailsDialog item.size: ${item.size}`);
+                Log.debug(TAG, "openDetailsDialog item.size: " + item.size);
                 size = size + item.size;
             })
-            Log.info(TAG, `openDetailsDialog size: ${size}`);
+            Log.info(TAG, "openDetailsDialog size: " + size);
             this.broadCast.emit(BroadcastConstants.SHOW_MULTI_SELECT_DIALOG, [items.length, size]);
         }
     }
@@ -230,12 +230,12 @@ struct PhotoGridPage {
     }
 
     onCopyStart(): void {
-        Log.info(TAG, `onCopyStart`);
+        Log.info(TAG, "onCopyStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onCopyEnd(err, count, total): void {
-        Log.info(TAG, `onCopyEnd count: ${count}, total: ${total}`);
+        Log.info(TAG, "onCopyEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
         if (err) {
@@ -249,17 +249,17 @@ struct PhotoGridPage {
     }
 
     onDownloadStart(): void {
-        Log.info(TAG, `onDownloadStart`);
+        Log.info(TAG, "onDownloadStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     async onDownloadEnd(err, count, total): Promise<void> {
-        Log.info(TAG, `onDownloadEnd count: ${count}, total: ${total}`);
+        Log.info(TAG, "onDownloadEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
         if (err) {
             if (total > 1) {
-                Log.warn(TAG, `get selectItems is error ${count}`);
+                Log.warn(TAG, "get selectItems is error " + count);
                 let str = await getResourceString($r('app.string.download_failed_multi'));
                 let message = str.replace('%d', count.toString());
                 showToast(message);
@@ -277,12 +277,12 @@ struct PhotoGridPage {
     }
 
     onMoveStart(): void {
-        Log.info(TAG, `onMoveStart`);
+        Log.info(TAG, "onMoveStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onMoveEnd(err, count, total): void {
-        Log.info(TAG, `onMoveEnd count: ${count}, total: ${total}`);
+        Log.info(TAG, "onMoveEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
         if (err) {
@@ -295,12 +295,12 @@ struct PhotoGridPage {
     }
 
     onDeleteStart(): void {
-        Log.info(TAG, `onDeleteStart`);
+        Log.info(TAG, "onDeleteStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onDeleteEnd(err): void {
-        Log.info(TAG, `onDeleteEnd`);
+        Log.info(TAG, "onDeleteEnd");
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
         animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => {
@@ -415,7 +415,7 @@ struct PhotoGridPage {
         startTrace('PhotoGridPageAboutToAppear');
         let param: ParamsInterface = router.getParams();
         if (param.item != undefined && param.item != null) {
-            Log.debug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
+            Log.debug(TAG, "After router.getParams, param is: " + JSON.stringify(param));
             this.albumInfo = JSON.parse(param.item.toString()) as SimpleAlbumDataItem;
             this.title = this.albumInfo.displayName;
             this.barModel.setAlbumId(this.albumInfo.id)
@@ -443,12 +443,12 @@ struct PhotoGridPage {
             this.jumpToThirdPhotoBrowser(name, item);
         });
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
+            Log.info(TAG, "ON_LOADING_FINISHED size: " + size);
         });
         this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
 
         if (this.albumInfo.deviceId) {
-            Log.info(TAG, `deviceId size: ${this.albumInfo.deviceId}`);
+            Log.info(TAG, "deviceId size: " + this.albumInfo.deviceId);
             this.appBroadcast.on(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
         }
 
@@ -469,17 +469,17 @@ struct PhotoGridPage {
         let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.TIME_GRID_MAX_SIZE_RATIO;
         this.gridRowCount = Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
         + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
-        Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
+        Log.info(TAG, "initGridRowCount contentWidth: " + contentWidth);
     }
 
     private onUpdateRemoteDevice(res, deviceId): void {
-        Log.info(TAG, `onUpdateRemoteDevice`);
+        Log.info(TAG, "onUpdateRemoteDevice");
         if (deviceId != this.albumInfo.deviceId || this.isActive == false) {
-            Log.debug(TAG, `other device`);
+            Log.debug(TAG, "other device");
             return;
         }
         if (res == Constants.DEVICE_STATE_OFFLINE) {
-            Log.debug(TAG, `device offline route to album main`);
+            Log.debug(TAG, "device offline route to album main");
             router.back({
                 uri: this.isHorizontal === true ? 'product/pad/view/index' : 'product/phone/view/index',
                 params: {
@@ -487,13 +487,13 @@ struct PhotoGridPage {
                 }
             });
         } else {
-            Log.warn(TAG, `res code is err ${res}`);
+            Log.warn(TAG, "res code is err " + res);
             return;
         }
     }
 
     onMediaLibDataChange(changeType): void {
-        Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
+        Log.info(TAG, "onMediaLibDataChange type: " + changeType);
         this.isMediaLibDataChanged = true;
         this.loadItem();
     }
@@ -501,7 +501,7 @@ struct PhotoGridPage {
     private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.groupDataSource.reloadGroupItemData(true).then((isEmpty) => {
-                Log.info(TAG, `onMediaLibDataChange load finish`);
+                Log.info(TAG, "onMediaLibDataChange load finish");
                 this.isEmpty = isEmpty;
                 this.groupDataSource.notifyDataReload();
                 this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
@@ -578,7 +578,7 @@ struct PhotoGridPage {
     }
 
     aboutToDisappear(): void {
-        Log.info(TAG, `aboutToDisappear`);
+        Log.info(TAG, "aboutToDisappear");
         this.broadCast.off(null, null);
         this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
         this.appBroadcast.off(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));

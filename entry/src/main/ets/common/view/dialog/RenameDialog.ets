@@ -68,7 +68,7 @@ export struct RenameDialog {
                         .enterKeyType(EnterKeyType.Done)
                         .backgroundColor($r('app.color.transparent'))
                         .onChange((value: string) => {
-                            Log.info(this.TAG, `TextInput onChange : ${value}`)
+                            Log.info(this.TAG, "TextInput onChange : " + value)
                             this.inputName = value
                             if (value.length === Constants.RENAME_MAX_LENGTH) {
                                 getResourceString($r('app.string.Maximum_length_reached')).then((message: string) => {

@@ -51,7 +51,7 @@ export struct PhotoSwiper {
         });
 
         this.broadCast.on(BroadcastConstants.CHANGE_SWIPER_DURATION, (value) => {
-            Log.debug(TAG, `change duration start ${value}`);
+            Log.debug(TAG, "change duration start " + value);
             this.duration = value;
         });
     }

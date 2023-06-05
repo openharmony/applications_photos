@@ -43,7 +43,7 @@ export struct ProgressDialog {
                     .fontColor($r('sys.color.ohos_id_color_text_primary'))
                     .maxLines(2)
                     .textOverflow({ overflow: TextOverflow.Ellipsis })
-                Text(`${this.deleteProgress}%`)
+                Text("" + this.deleteProgress + "%")
                     .fontSize($r('sys.float.ohos_id_text_size_body2'))
                     .fontFamily($r('app.string.id_text_font_family_regular'))
                     .fontColor($r('sys.color.ohos_id_color_text_secondary'))
