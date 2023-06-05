@@ -231,13 +231,13 @@ struct SelectPhotoBrowser {
             }
             uriArray = [currentPhoto.uri];
         }
-        let abilityResult = {
-            'resultCode': 0,
-            'want': {
-                'parameters': {
-                    'select-item-list': uriArray
-                }
-            }
+        let param1: Map<string, string[]> = new Map();
+        param1.set('select-item-list', uriArray);
+        let abilityResult: Object = {
+            resultCode: 0,
+            want: {
+                parameters: Object.fromEntries(param1)
+            } as Object
         };
         terminateSelfWithResult(abilityResult);
     }

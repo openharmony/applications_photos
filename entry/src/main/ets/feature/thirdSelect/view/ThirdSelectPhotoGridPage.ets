@@ -86,13 +86,13 @@ struct ThirdSelectPhotoGridPage {
             router.back();
         } else if (action == Action.CANCEL) {
             Log.info(TAG, 'click cancel');
-            let abilityResult = {
-                'resultCode': 0,
-                'want': {
-                    'parameters': {
-                        'select-item-list': []
-                    }
-                }
+            let param1: Map<string, string[]> = new Map();
+            param1.set('select-item-list', [] as string[]);
+            let abilityResult: object = {
+                resultCode: 0,
+                want: {
+                    parameters: Object.fromEntries(param1)
+                } as object
             };
             terminateSelfWithResult(abilityResult)
         } else if (action == Action.OK) {
@@ -295,14 +295,14 @@ struct ThirdSelectPhotoGridPage {
 
     private setPickResult(): void {
         let uriArray = this.groupDataSource.getSelectedUris()
+        let param1: Map<string, Object> = new Map();
+        param1.set('select-item-list', uriArray);
+        param1.set('isOriginal', this.isOriginalChecked);
         let abilityResult = {
-            'resultCode': 0,
-            'want': {
-                'parameters': {
-                    'select-item-list': uriArray,
-                    'isOriginal': this.isOriginalChecked
-                }
-            }
+            resultCode: 0,
+            want: {
+                parameters: Object.fromEntries(param1)
+            } as Object
         };
         Log.info(TAG, "uri: " + uriArray)
         let self = this;
