@@ -76,7 +76,7 @@ export struct AlbumListCard {
                     .width($r('app.float.list_card_image_size'))
                     .borderRadius($r('sys.float.ohos_id_corner_radius_default_s'))
                     .onError(() => {
-                        if (this.thumbnail) {
+                        if (this.thumbnail != null) {
                             this.useAlt = true;
                         }
                         Log.error(TAG, 'alt Image error');

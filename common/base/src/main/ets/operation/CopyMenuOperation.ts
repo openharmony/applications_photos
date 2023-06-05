@@ -59,7 +59,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
 
         onOperationStart && onOperationStart();
 
-        if (this.menuContext.deviceId) {
+        if (this.menuContext.deviceId != null) {
             this.menuContext.broadCast.emit(BroadcastConstants.SHOW_PROGRESS_DIALOG,
                 [$r('app.string.download_progress_message'),
                 MediaOperationType.Copy, this.cancelFunc.bind(this)]);
@@ -83,14 +83,14 @@ export class CopyMenuOperation extends ProcessMenuOperation {
     }
 
     private async copyOne(item: MediaDataItem): Promise<void> {
-        if (this.menuContext.deviceId) {
+        if (this.menuContext.deviceId != null) {
             let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + MediaConstants.REMOTE_ALBUM_PATH + "/";
             this.albumInfo = new SimpleAlbumDataItem("", "", path, "", "");
 
         }
         let fileAsset = await item.loadFileAsset();
         let assets: Assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo);
-        if (this.menuContext.deviceId) {
+        if (this.menuContext.deviceId != null) {
             let displayName = assets.sourceAsset.displayName;
             let index = displayName.lastIndexOf('.');
             let start = displayName.lastIndexOf('_');
@@ -102,7 +102,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
             });
             return;
         }
-        if (assets.targetAsset) {
+        if (assets.targetAsset != null) {
             if (assets.targetAsset.uri == assets.sourceAsset.uri) {
                 Log.info(TAG, 'copy same fileAsset');
                 this.onOperateContinue();
@@ -164,7 +164,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
         this.onOperatePause();
         let cancelMessage = $r('app.string.copy_cancel_message', this.getExpectProgress().toString());
 
-        if (this.menuContext.deviceId) {
+        if (this.menuContext.deviceId != null) {
             this.menuContext.broadCast && this.menuContext.broadCast.emit(BroadcastConstants.DOWNLOAD_CANCEL_OPERATE,
                 [cancelMessage, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this)]);
         } else {

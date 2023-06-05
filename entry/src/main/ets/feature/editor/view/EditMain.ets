@@ -83,7 +83,7 @@ struct Edit {
 
     aboutToAppear(): void {
         Log.debug(this.TAG, 'EditMain init start');
-        if (this.mediaItem) {
+        if (this.mediaItem != null) {
             this.isLoadFailed = false;
             this.editorManager.initialize(
                 this.mediaItem, PhotoEditMode.EDIT_MODE_CROP, this.loadFailedCallback.bind(this));

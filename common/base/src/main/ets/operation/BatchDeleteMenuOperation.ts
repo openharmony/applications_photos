@@ -104,7 +104,7 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
 
     requestOneBatchOperation(): void {
         let item = this.items[this.currentBatch] as MediaDataItem;
-        if (item) {
+        if (item != null) {
             item.onDelete().then((): void => {
                 this.currentBatch++;
                 this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [this.getExpectProgress(), this.currentBatch]);

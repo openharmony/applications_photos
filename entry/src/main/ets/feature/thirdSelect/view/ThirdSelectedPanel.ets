@@ -46,7 +46,7 @@ export struct ThirdSelectedPanel {
 
   getThumbnailSafe(sourceUri: string, size?): string | null {
     try{
-      if (size) {
+      if (size != null) {
         return sourceUri + "/thumbnail/" + size.width + "/" + size.height;
       } else {
         return sourceUri + "/thumbnail/" + MediaConstants.DEFAULT_SIZE + "/" + MediaConstants.DEFAULT_SIZE;

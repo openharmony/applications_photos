@@ -132,7 +132,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
             }
             this.matchAlbumDefaultName(await item.getRelativePath(), numbers, root, prefixName);
         }
-        if (this.menuContext.albumInfo) {
+        if (this.menuContext.albumInfo != null) {
             this.matchAlbumDefaultName(this.menuContext.albumInfo.relativePath, numbers, root, prefixName);
         }
         Log.debug(TAG, JSON.stringify(numbers));

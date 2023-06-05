@@ -76,7 +76,7 @@ struct AlbumSelect {
         Log.info(TAG, 'the grid count in a line is: ' + this.gridColumnsCount);
 
         let param: ParamsInterface = router.getParams();
-        if (param) {
+        if (param != null) {
             if (param.isNewAlbum != null && param.isNewAlbum == true) {
                 AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, true);
             } else {
@@ -86,7 +86,7 @@ struct AlbumSelect {
             if(param.albumInfo != null) {
                 albumInfo = JSON.parse(param.albumInfo.toString());
             }
-            if (albumInfo) {
+            if (albumInfo != null) {
                 this.albumsDataSource.setBlackList([albumInfo.id, MediaConstants.ALBUM_ID_RECYCLE]);
                 Log.debug(TAG, 'the album Id is: ' + albumInfo.id);
             } else {
@@ -192,7 +192,7 @@ struct AlbumSelect {
                                         isBigCard: true,
                                     })
                                 }.columnStart(0).columnEnd(1)
-                            } else if (item) {
+                            } else if (item != null) {
                                 GridItem() {
                                     AlbumSelectGridItemNewStyle({
                                         item: item.get(),

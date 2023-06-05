@@ -120,7 +120,7 @@ export class DateUtil {
         let systemLocale: string = i18n.getSystemLanguage().toString();
         let language = systemLocale.split('-')[0];
         let locales: string = this.LANGUAGE_LOCALES_MAP.get("en");
-        if (this.LANGUAGE_LOCALES_MAP.get(language)) {
+        if (this.LANGUAGE_LOCALES_MAP.has(language)) {
             locales = this.LANGUAGE_LOCALES_MAP.get(language);
         }
         return locales;

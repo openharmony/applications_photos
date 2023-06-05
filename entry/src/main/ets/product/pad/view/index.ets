@@ -24,7 +24,7 @@ import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { Constants } from '../../../common/model/common/Constants';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
-import router from '@system.router';
+import router, { ParamsInterface } from '@system.router';
 import app from '@system.app';
 
 // Application entry
@@ -54,11 +54,11 @@ struct IndexPage {
         startTrace('indexPageAppearToShow');
         app.setImageCacheCount(100);
         app.setImageRawDataCacheSize(100*1024*1024);
-        if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
+        if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL) != null) {
             AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false);
             this.currentIndex = Constants.ALBUM_PAGE_INDEX;
         }
-        let param = router.getParams();
+        let param: ParamsInterface = router.getParams();
         Log.debug(this.TAG, "param: " + JSON.stringify(param));
         if (param != null) {
             this.jumpSource = new Number(param.jumpSource).valueOf() || 0;

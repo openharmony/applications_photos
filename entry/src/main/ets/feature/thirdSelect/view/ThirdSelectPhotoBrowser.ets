@@ -84,7 +84,7 @@ struct ThirdSelectPhotoBrowser {
             }
         });
         let params: ParamsInterface = router.getParams();
-        if (params) {
+        if (params != null) {
             this.onPhotoChanged(parseInt(params.position.toString()));
             this.thirdSelectTransition = params.transition.toString();
             this.isFromFa = params.isFromFa != null && params.isFromFa != null && params.isFromFa == true ? true : false;

@@ -54,7 +54,7 @@ struct MediaOperationPage {
     aboutToAppear(): void {
         let blackList = Array.from(MediaConstants.ALBUM_DISABLE_COPY_LIST)
         let param: ParamsInterface = router.getParams();
-        if (param) {
+        if (param != null) {
             this.pageType = param.pageType.toString();
             if (param.albumInfo != null) {
                 this.albumInfo = JSON.parse(param.albumInfo.toString()) as SimpleAlbumDataItem;

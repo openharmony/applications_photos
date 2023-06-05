@@ -58,7 +58,7 @@ export struct DetailsDialog {
 
     getTitle(): string {
         Log.info(this.TAG, 'getTitle');
-        if (this.mediaDetails.title) {
+        if (this.mediaDetails.title != null) {
             return this.mediaDetails.title;
         }
         let index = this.mediaDetails.displayName.lastIndexOf('.');

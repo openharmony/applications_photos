@@ -127,7 +127,7 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, "deleteAll error:" + JSON.stringify(err));
         } finally {
-             if (fetchFileResult) {
+             if (fetchFileResult != null) {
                 fetchFileResult.close();
             }
         }
@@ -150,7 +150,7 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, "getAllMediaItems error:" + JSON.stringify(err));
         }  finally {
-            if (fetchFileResult) {
+            if (fetchFileResult != null) {
                 fetchFileResult.close();
             }
         }
@@ -179,7 +179,7 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, "getAllFavorMediaItems error:" + JSON.stringify(err));
         } finally {
-            if (fetchFileResult) {
+            if (fetchFileResult != null) {
                 fetchFileResult.close();
             }
         }
@@ -208,7 +208,7 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, "getAllTrashMediaItems error:" + JSON.stringify(err));
         } finally {
-            if (fetchFileResult) {
+            if (fetchFileResult != null) {
                 fetchFileResult.close();
             }
         }
@@ -245,7 +245,7 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, "getAllCommonMediaItem error:" + JSON.stringify(err));
         } finally {
-            if (fetchFileResult) {
+            if (fetchFileResult != null) {
                 fetchFileResult.close();
             }
         }
@@ -277,7 +277,7 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, "getAllFavorMediaItem error:" + JSON.stringify(err));
         } finally {
-            if (fetchFileResult) {
+            if (fetchFileResult != null) {
                 fetchFileResult.close();
             }
         }
@@ -309,7 +309,7 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, "getAllTrashMediaItem error:" + JSON.stringify(err));
         } finally {
-            if (fetchFileResult) {
+            if (fetchFileResult != null) {
                 fetchFileResult.close();
             }
         }
@@ -335,7 +335,7 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, "getAlbumCount error:" + JSON.stringify(err));
         } finally {
-            if (fetchFileResult) {
+            if (fetchFileResult != null) {
                 fetchFileResult.close();
             }
         }
@@ -399,7 +399,7 @@ class MediaModel {
         } catch (err) {
             Log.error(TAG, "getTrashMedia error:" + JSON.stringify(err));
         } finally {
-            if (fetchFileResult) {
+            if (fetchFileResult != null) {
                 fetchFileResult.close();
             }
         }

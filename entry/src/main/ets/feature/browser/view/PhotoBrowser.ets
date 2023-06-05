@@ -413,7 +413,7 @@ struct PhotoBrowser {
 
     async onMoveEnd(err, count, total): Promise<void> {
         Log.debug(TAG, "onMoveEnd count: " + count + ", total: " + total);
-        if (err) {
+        if (err != null) {
             getResourceString($r('app.string.move_failed_single')).then((message: string) => {
                 showToast(message)
             })
@@ -430,7 +430,7 @@ struct PhotoBrowser {
     onCopyEnd(err, count, total): void {
         Log.debug(TAG, "onCopyEnd count: " + count + ", total: " + total);
         this.dataSourceLoadFinish()
-        if (err) {
+        if (err != null) {
             getResourceString($r('app.string.copy_failed_single')).then((message: string) => {
                 showToast(message);
             })
@@ -439,7 +439,7 @@ struct PhotoBrowser {
 
     async onDownloadEnd(err, count, total): Promise<void> {
         Log.debug(TAG, "onDownloadEnd count: " + count + ", total: " + total);
-        if (err) {
+        if (err != null) {
             getResourceString($r('app.string.download_failed_single')).then((message: string) => {
                 showToast(message);
             })
@@ -520,7 +520,7 @@ struct PhotoBrowser {
             }
         });
         let param: ParamsInterface = router.getParams();
-        if (param) {
+        if (param != null) {
             Log.info(TAG, "photoBrowser start with param");
             Log.debug(TAG, "param: " + JSON.stringify(param));
             if (param.pageFrom != null) {

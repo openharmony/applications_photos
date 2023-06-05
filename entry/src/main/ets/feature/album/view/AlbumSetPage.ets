@@ -248,7 +248,7 @@ export struct AlbumSetPage {
 
     createAlbum(): void {
         let newAlbum = AppStorage.Get<boolean>(Constants.APP_KEY_NEW_ALBUM);
-        if (newAlbum) {
+        if (newAlbum != null) {
             AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
             this.broadCast.emit(BroadcastConstants.SHOW_COPY_OR_MOVE_DIALOG,
                 [this.moveOperation.bind(this), this.copyOperation.bind(this)]);
