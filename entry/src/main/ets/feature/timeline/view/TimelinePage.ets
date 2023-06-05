@@ -111,7 +111,7 @@ export struct TimelinePage {
             }
         });
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
+            Log.info(TAG, "ON_LOADING_FINISHED size: " + size);
         });
         this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect());
         this.broadCast.on(BroadcastConstants.GROUP_SELECT, () => this.onSelect());
@@ -205,7 +205,7 @@ export struct TimelinePage {
                 this.timelineDataSource.notifyDataReload();
             }
         }
-        Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
+        Log.info(TAG, "initGridRowCount contentWidth: " + contentWidth);
     }
 
     private moveOperation(albumInfo: SimpleAlbumDataItem): void {
@@ -235,10 +235,10 @@ export struct TimelinePage {
     }
 
     onIndexChange(): void {
-        Log.info(TAG, `onIndexChange ${this.TimelinePageIndex}`);
+        Log.info(TAG, "onIndexChange " + this.TimelinePageIndex);
         if (this.TimelinePageIndex != Constants.INVALID) {
             let rollToIndex = this.timelineDataSource.getIndexByChildIndex(this.TimelinePageIndex)
-            Log.info(TAG, `onIndexChange ${this.TimelinePageIndex} roll to ${rollToIndex}`)
+            Log.info(TAG, "onIndexChange " + this.TimelinePageIndex + " roll to " + rollToIndex)
             this.scroller.scrollToIndex(rollToIndex);
         }
     }
@@ -279,7 +279,7 @@ export struct TimelinePage {
     }
 
     onMenuClicked(action: Action): void {
-        Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
+        Log.info(TAG, "onMenuClicked, actionID: " + action.actionID);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
         if (action === Action.CANCEL) {
@@ -324,7 +324,7 @@ export struct TimelinePage {
     }
 
     onMediaLibDataChange(changeType): void {
-        Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
+        Log.info(TAG, "onMediaLibDataChange type: " + changeType);
         if (!PhotoEditorManager.getInstance().isSaving) {
             this.isMediaLibDataChanged = true
             this.loadItem()
@@ -337,7 +337,7 @@ export struct TimelinePage {
             startTrace("reloadTimelineItemData")
             this.timelineDataSource.reloadTimelineItemData().then((isEmpty) => {
                 finishTrace("reloadTimelineItemData");
-                Log.info(TAG, `onMediaLibDataChange load finish`);
+                Log.info(TAG, "onMediaLibDataChange load finish");
                 this.initLoadFinish = true;
                 this.isEmpty = isEmpty;
                 this.timelineDataSource.notifyDataReload();
@@ -358,21 +358,21 @@ export struct TimelinePage {
         } else {
             let size = 0;
             items.forEach((item) => {
-                Log.debug(TAG, `openDetailsDialog item.size: ${item.size}`);
+                Log.debug(TAG, "openDetailsDialog item.size: " + item.size);
                 size = size + item.size;
             })
-            Log.info(TAG, `openDetailsDialog size: ${size}`);
+            Log.info(TAG, "openDetailsDialog size: " + size);
             this.broadCast.emit(BroadcastConstants.SHOW_MULTI_SELECT_DIALOG, [items.length, size]);
         }
     }
 
     onDeleteStart(): void {
-        Log.info(TAG, `onDeleteStart`);
+        Log.info(TAG, "onDeleteStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onDeleteEnd(err): void {
-        Log.info(TAG, `onDeleteEnd`);
+        Log.info(TAG, "onDeleteEnd");
         startTrace('onModeChange');
         this.onModeChange();
         finishTrace('onModeChange');
@@ -386,13 +386,13 @@ export struct TimelinePage {
     }
 
     onCopyStart(): void {
-        Log.info(TAG, `onCopyStart`);
+        Log.info(TAG, "onCopyStart");
         mediaObserver.unregisterObserver(this.dataObserver);
 
     }
 
     onCopyEnd(err, count, total): void {
-        Log.info(TAG, `onCopyEnd count: ${count}, total: ${total}`);
+        Log.info(TAG, "onCopyEnd count: " + count + ", total: " + total);
         startTrace('onModeChange');
         this.onModeChange();
         finishTrace('onModeChange');
@@ -408,12 +408,12 @@ export struct TimelinePage {
     }
 
     onMoveStart(): void {
-        Log.info(TAG, `onMoveStart`);
+        Log.info(TAG, "onMoveStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     onMoveEnd(err, count, total): void {
-        Log.info(TAG, `onMoveEnd count: ${count}, total: ${total}`);
+        Log.info(TAG, "onMoveEnd count: " + count + ", total: " + total);
         startTrace('onModeChange');
         this.onModeChange();
         finishTrace('onModeChange');
@@ -438,11 +438,11 @@ export struct TimelinePage {
 
     // The callbacks after index page shows
     onIndexPageShow(): void {
-        Log.info(TAG, `onIndexPageShow`)
+        Log.info(TAG, "onIndexPageShow")
         if (this.isShow && this.isInCurrentTab) {
             let params = router.getParams();
             if (this.routerStart && params != null && params.pageType != null) {
-                Log.info(TAG, `MediaOperation back ${JSON.stringify(params)}`)
+                Log.info(TAG, "MediaOperation back " + JSON.stringify(params))
                 if (params.pageType === MediaOperationType.Move) {
                     this.moveOperation(JSON.parse(params.albumInfo.toString()) as SimpleAlbumDataItem);
                 } else if (params.pageType === MediaOperationType.Copy) {
@@ -454,7 +454,7 @@ export struct TimelinePage {
         } else if (!this.isShow && this.isInCurrentTab) {
             this.onInActive();
         } else {
-            Log.info(TAG, `other condition`)
+            Log.info(TAG, "other condition")
         }
     }
 
@@ -522,7 +522,7 @@ export struct TimelinePage {
                         .rowsGap(Constants.GRID_GUTTER)
                         .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
                         .onScrollIndex((index: number) => {
-                            Log.debug(TAG, `onScrollIndex index ${index}`)
+                            Log.debug(TAG, "onScrollIndex index " + index)
                             let item: DateAdded = this.timelineDataSource.getDataByIndex(index);
                             if (item) {
                                 this.dateText = DateUtil.getLocalizedYearAndMonth(item.dateAdded);

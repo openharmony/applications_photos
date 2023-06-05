@@ -31,11 +31,11 @@ export struct TimelineTitleComponent {
     addresses = '';
 
     aboutToAppear(): void {
-        Log.info(TAG, `${this.timelineDataItem.dateAdded}`);
+        Log.info(TAG, this.timelineDataItem.dateAdded.toString());
     }
 
     private selectStateChange(): void {
-        Log.info(TAG, `change selected ${this.isSelectedMode}`);
+        Log.info(TAG, "change selected " + this.isSelectedMode);
         if (this.isSelectedMode) {
             let isSelect = !this.timelineDataItem.isSelect()
             this.timelineDataItem.setSelect(isSelect)

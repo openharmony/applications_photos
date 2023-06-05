@@ -81,7 +81,7 @@ struct ThirdSelectPhotoGridPage {
     }
 
     onMenuClicked(action: Action): void {
-        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, "onMenuClicked, action: " + action.actionID);
         if (action == Action.BACK) {
             router.back();
         } else if (action == Action.CANCEL) {
@@ -115,13 +115,13 @@ struct ThirdSelectPhotoGridPage {
         let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
         this.gridRowCount = Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
         + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
-        Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
+        Log.info(TAG, "initGridRowCount contentWidth: " + contentWidth);
     }
 
     aboutToAppear(): void {
         let param: ParamsInterface = router.getParams();
         if (param != null) {
-            Log.info(TAG, `itemId: ${param.itemId}`);
+            Log.info(TAG, "itemId: " + param.itemId);
             this.title = param.itemDisplayName;
             if (param.itemId != null) {
                 this.groupDataSource.setAlbumId(param.itemId.toString());
@@ -135,7 +135,7 @@ struct ThirdSelectPhotoGridPage {
             }
             if (param.filterMediaType != null) {
                 this.filterMediaType = new Number(param.filterMediaType).valueOf();
-                Log.info(TAG, `filterMediaType: ${this.filterMediaType}`)
+                Log.info(TAG, "filterMediaType: " + this.filterMediaType)
             }
         }
         if (this.isFromFa) {
@@ -145,8 +145,8 @@ struct ThirdSelectPhotoGridPage {
             AppStorage.SetOrCreate(Constants.FORM_ITEM_DISPLAY_NAME, param.itemDisplayName);
         }
         this.groupDataSource.setSelectType(this.filterMediaType);
-        Log.info(TAG, `ThirdSelectPhotoGridPage isMultiPick: ${this.isMultiPick},\
-                isFromWallpaper: ${param.isFromWallpaper}, maxSelectCount: ${this.maxSelectCount}, filterMediaType: ${this.filterMediaType}`);
+        Log.info(TAG, "ThirdSelectPhotoGridPage isMultiPick: " + this.isMultiPick + ", " +
+                "isFromWallpaper: " + param.isFromWallpaper + ", maxSelectCount: " + this.maxSelectCount + ", filterMediaType: " + this.filterMediaType);
         this.groupDataSource.reloadGroupItemData(true).then((isEmpty: boolean) => {
             this.isEmpty = isEmpty;
             this.selectedCount = this.groupDataSource.getSelectedCount();
@@ -162,7 +162,7 @@ struct ThirdSelectPhotoGridPage {
         })
         this.broadCast.on(Constants.ON_LOADING_FINISHED,
             (size: number) => {
-                Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
+                Log.info(TAG, "ON_LOADING_FINISHED size: " + size);
                 this.isEmpty = size == 0;
                 Log.info(TAG, `isEmpty: ${this.isEmpty}`)
             });
@@ -304,23 +304,23 @@ struct ThirdSelectPhotoGridPage {
                 }
             }
         };
-        Log.info(TAG, `uri: ${uriArray}`)
+        Log.info(TAG, "uri: " + uriArray)
         let self = this;
         if (uriArray == null && uriArray == undefined) {
             let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
             appContext.terminateSelfWithResult(abilityResult).then((result) => {
-                Log.info(TAG, `terminateSelfWithResult result: ${result}`);
+                Log.info(TAG, "terminateSelfWithResult result: " + result);
             });
         } else {
             SelectUtil.grantPermissionForUris(uriArray, self.bundleName);
             try {
-                Log.info(TAG, `grant permission success.`);
+                Log.info(TAG, "grant permission success.");
                 let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
                 appContext.terminateSelfWithResult(abilityResult).then((result) => {
-                    Log.info(TAG, `terminateSelfWithResult result: ${result}`);
+                    Log.info(TAG, "terminateSelfWithResult result: " + result);
                 });
             } catch (err) {
-                Log.info(TAG, `grant permission error: ${JSON.stringify(err)}`);
+                Log.info(TAG, "grant permission error: " + JSON.stringify(err));
             }
         }
     }
