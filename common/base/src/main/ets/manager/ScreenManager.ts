@@ -104,8 +104,9 @@ class ScreenManager {
             }
         } else {
             if(this.events.get(event) === null || this.events.get(event) === undefined){
-                this.events.set(event, [fn])
+                this.events.set(event, [])
             }
+            this.events.get(event).push(fn)
         }
     }
 
