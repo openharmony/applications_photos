@@ -113,7 +113,7 @@ export struct CropImageShow {
         this.displayWidth = this.isVerticalScreen
             ? this.screenWidth : this.screenHeight - (Constants.BOTTOM_TOOL_BAR_SIZE + Constants.RESET_SIZE_HORIZONTAL);
         this.cropEdit.setCanvasSize(this.displayWidth, this.displayHeight);
-        Log.debug(this.TAG, `CropImageShow this.screenHeight = ${this.flexHeight}, this.screenWidth = ${this.flexWidth}`);
+        Log.debug(this.TAG, 'CropImageShow this.screenHeight = ' + this.flexHeight + ', this.screenWidth = ' + this.flexWidth);
     }
 
     aboutToDisappear(): void {

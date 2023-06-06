@@ -64,7 +64,7 @@ struct DistributedAlbumSetPage {
     }
 
     onMenuClicked(action: Action, arg: Object[]): void {
-        Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
+        Log.info(TAG, 'onMenuClicked, action: ' + action.actionID);
         if (action === Action.BACK) {
             router.back();
         }
@@ -73,18 +73,18 @@ struct DistributedAlbumSetPage {
     aboutToAppear(): void {
         let param: ParamsInterface = router.getParams();
         if (param.item != null) {
-            Log.debug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
+            Log.debug(TAG, 'After router.getParams, param is: ' + JSON.stringify(param));
             let item = JSON.parse(param.item.toString()) as PeerDataItem;
             this.title = item.deviceName;
             this.deviceId = item.networkId;
             this.albumsDataSource.setDeviceId(item.networkId);
         } else {
-            Log.warn(TAG, `param is error`);
+            Log.warn(TAG, 'param is error');
         }
 
         this.onMenuClicked = this.onMenuClicked.bind(this);
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-            Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
+            Log.info(TAG, 'ON_LOADING_FINISHED size: ' + size);
             this.isEmpty = size == 0;
         });
 
@@ -97,7 +97,7 @@ struct DistributedAlbumSetPage {
         let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
         this.gridColumnsCount = Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * 2 + Constants.ALBUM_SET_GUTTER)
         / (maxCardWidth + Constants.ALBUM_SET_GUTTER));
-        Log.info(TAG, `the grid count in a line is : ${this.gridColumnsCount}`);
+        Log.info(TAG, 'the grid count in a line is : ' + this.gridColumnsCount);
 
         this.updateActionBar();
     }
@@ -135,19 +135,19 @@ struct DistributedAlbumSetPage {
     }
 
     private onUpdateRemoteDevice(res, deviceId): void {
-        Log.debug(TAG, `onUpdateRemoteDevice`);
+        Log.debug(TAG, 'onUpdateRemoteDevice');
 
         if (!this.isActive) {
             return;
         }
 
         if (deviceId != this.deviceId) {
-            Log.debug(TAG, `other device`);
+            Log.debug(TAG, 'other device');
             return;
         }
 
         if (res == Constants.DEVICE_STATE_OFFLINE) {
-            Log.debug(TAG, `device offline route to album main`);
+            Log.debug(TAG, 'device offline route to album main');
             router.back({
                 uri: this.isHorizontal === true ? 'product/pad/view/index' : 'product/phone/view/index',
                 params: {
@@ -155,13 +155,13 @@ struct DistributedAlbumSetPage {
                 }
             })
         } else {
-            Log.info(TAG, `ignore typy: ${res}`);
+            Log.info(TAG, 'ignore typy: ' + res);
             return;
         }
     }
 
     onMediaLibDataChange(changeType): void {
-        Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
+        Log.info(TAG, 'onMediaLibDataChange type: ' + changeType);
         this.isMediaLibDataChanged = true;
         this.loadItem();
     }

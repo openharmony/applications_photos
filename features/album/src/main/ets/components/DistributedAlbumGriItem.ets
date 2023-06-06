@@ -77,8 +77,8 @@ export struct DistributedAlbumGriItem {
                         this.isEmptyAlbum = true;
                     })
                     .onComplete((msg: typeof obj) => {
-                        Log.debug(TAG, `image load success. Size: ${msg.width}x${msg.height},\
-                            componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
+                        Log.debug(TAG, 'image load success. Size: ' + msg.width + 'x' + msg.height +
+                            ', componentSize: ' + msg.componentWidth + 'x' + msg.componentHeight);
                     })
             } else {
                 Image(this.item.getThumbnail())
@@ -90,8 +90,8 @@ export struct DistributedAlbumGriItem {
                         this.isEmptyAlbum = true;
                     })
                     .onComplete((msg: typeof obj) => {
-                        Log.debug(TAG, `image load success. Size: ${msg.width}x${msg.height},\
-                            componentSize: ${msg.componentWidth}x${msg.componentHeight}`);
+                        Log.debug(TAG, 'image load success. Size: ' + msg.width + 'x' + msg.height +
+                            ', componentSize: ' + msg.componentWidth + 'x' + msg.componentHeight);
                     })
             }
 
@@ -127,7 +127,7 @@ export struct DistributedAlbumGriItem {
             color: $r('app.color.album_cover_stroke_color')
         })
         .onClick(() => {
-            Log.info(TAG, `After onClick: ${JSON.stringify(this.item)}`);
+            Log.info(TAG, 'After onClick: ' + JSON.stringify(this.item));
             router.push({
                 uri: 'feature/distributedAlbum/view/DistributedAlbumSetPage',
                 params: {

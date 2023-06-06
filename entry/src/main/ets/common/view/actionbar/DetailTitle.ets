@@ -25,7 +25,7 @@ export struct DetailTitle {
     isVideoPage: boolean = false;
 
     private onBuildDone(): void {
-        Log.debug(this.TAG, `onBuildDone, title: ${this.title}, subTitle: ${this.subTitle}`);
+        Log.debug(this.TAG, 'onBuildDone, title: ' + this.title + ', subTitle: ' + this.subTitle);
     }
 
     build() {

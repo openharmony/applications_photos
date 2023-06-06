@@ -103,8 +103,9 @@ struct Edit {
             this.screenWidth = temp;
         }
 
-        Log.debug(this.TAG, `EditMain this.isVerticalScreen: ${this.isVerticalScreen},\
-            leftBlank: ${JSON.stringify(this.leftBlank)}, screenSize: ${this.screenHeight},${this.screenWidth}`);
+        Log.debug(this.TAG, 'EditMain this.isVerticalScreen: ' + this.isVerticalScreen +
+            ', leftBlank: ' + JSON.stringify(this.leftBlank) + ', screenSize: ' + this.screenHeight +
+            ',' + this.screenWidth);
         this.imageScale = this.isVerticalScreen
             ? (this.screenHeight - this.titleSize - this.mainBottomSize) : (this.screenWidth - this.titleSize);
         this.imageScaleWidth = this.isVerticalScreen ? this.screenWidth : (this.screenHeight - this.mainBottomSize);

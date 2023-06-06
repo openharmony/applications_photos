@@ -352,7 +352,7 @@ export struct CustomDialogView {
 
         this.broadCast.on(BroadcastConstants.UPDATE_PROGRESS,
             (progress: number, currentCount: number): void => {
-                Log.info(TAG, `UPDATE_PROGRESS ${progress}, ${currentCount}`);
+               Log.info(TAG, 'UPDATE_PROGRESS ' + progress + ', ' + currentCount);
                 self.deleteProgress = progress;
                 self.deleteProgressParam.deleteProgress = progress;
                 self.deleteProgressParam.currentCount = currentCount;

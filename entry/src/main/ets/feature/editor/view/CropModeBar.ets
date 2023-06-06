@@ -41,7 +41,7 @@ export struct CropModeBar {
         this.broadCast.on(Constants.RULER_CHANGED, this.rulerChanged);
         this.rulerComponentSize = this.isVerticalScreen ? this.screenWidth - Constants.PADDING_VERTICAL
                                                         : this.screenWidth - Constants.PADDING_HORIZONTAL;
-        Log.debug(this.TAG, `this.rulerComponentSize = ${this.rulerComponentSize}`);
+        Log.debug(this.TAG, 'this.rulerComponentSize = ' + this.rulerComponentSize);
     }
 
     aboutToDisappear(): void {
