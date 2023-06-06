@@ -30,7 +30,7 @@ export function hiSysEventDataQueryTimedOut(interfaceName: string): number {
                 params: params
             };
             hiSysEvent.write(info, (err: Error): void => {
-                if(err) {
+                if(err != null) {
                     Log.error(TAG, 'fail to return hiSysEvent');
                 }
             });
