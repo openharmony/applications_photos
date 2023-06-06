@@ -31,8 +31,6 @@ class Obj {
     componentHeight: number = 0;
 }
 
-const obj = new Obj;
-
 // Traditional style grid item for distributed album set page
 // There is no selection mode.
 @Component
@@ -126,8 +124,8 @@ export struct AlbumGridItemTraditionalStyle {
                                 Log.debug(TAG, 'album is empty or its cover is error');
                                 this.isEmptyAlbum = true;
                             })
-                            .onComplete((msg: typeof obj) => {
-                                Log.debug(TAG, 'image load success.Size: ' + msg.componentWidth + 'x' + msg.componentHeight);
+                            .onComplete((msg: Obj) => {
+                                Log.debug(TAG, "image load success.Size: " + msg.componentWidth + "x" + msg.componentHeight);
                             })
                     }
                     .width(this.bigWidth)
@@ -151,14 +149,9 @@ export struct AlbumGridItemTraditionalStyle {
                                 Log.debug(TAG, 'album is empty or its cover is error');
                                 this.isEmptyAlbum = true;
                             })
-                            .onComplete((msg: {
-                                width: number,
-                                height: number,
-                                componentWidth: number,
-                                componentHeight: number
-                            }) => {
-                                Log.debug(TAG, 'image load success. Size: ' + msg.width + 'x' + msg.height +
-                                    ' componentSize: ' + msg.componentWidth + 'x' + msg.componentHeight);
+                            .onComplete((msg: Obj) => {
+                                Log.debug(TAG, "image load success. Size: " + msg.width + "x" + msg.height +
+                                     ", componentSize: " + msg.componentWidth + "x" + msg.componentHeight);
                             })
                     }
                     .height(this.gridHeight)
