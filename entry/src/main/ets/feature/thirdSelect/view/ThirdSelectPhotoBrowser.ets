@@ -241,7 +241,7 @@ struct ThirdSelectPhotoBrowser {
             uriArray = [currentPhoto.uri];
         }
 
-        let param1: Map<string, string[]> = new Map();
+        let param1: Map<string, string[]> = new Map<string, string[]>();
         param1.set('select-item-list', uriArray);
         let abilityResult: common.AbilityResult = {
             resultCode: 0,

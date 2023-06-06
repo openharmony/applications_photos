@@ -39,9 +39,9 @@ export struct RenameDialog {
         this.inputName = this.renameFileName;
         this.isNull = this.inputName === '';
         if (this.inputName.length === Constants.RENAME_MAX_LENGTH) {
-            getResourceString($r('app.string.Maximum_length_reached')).then((message: string) => {
+            getResourceString($r('app.string.Maximum_length_reached')).then<void, void>((message: string) => {
                 showToast(message)
-            })
+            });
         }
     }
 
@@ -71,9 +71,9 @@ export struct RenameDialog {
                             Log.info(this.TAG, "TextInput onChange : " + value)
                             this.inputName = value
                             if (value.length === Constants.RENAME_MAX_LENGTH) {
-                                getResourceString($r('app.string.Maximum_length_reached')).then((message: string) => {
+                                getResourceString($r('app.string.Maximum_length_reached')).then<void, void>((message: string) => {
                                     showToast(message)
-                                })
+                                });
                             }
                             this.isNull = this.inputName === '';
                         })
@@ -133,9 +133,9 @@ export struct RenameDialog {
                         let check: RegExp = new RegExp("/[\\.\\\\/:*?<>\"|\[\]{}\s]/");
                         let passCheck = check.test(this.inputName);
                         if (passCheck) {
-                            getResourceString($r('app.string.specific_characters_not_supported')).then((message: string) => {
+                            getResourceString($r('app.string.specific_characters_not_supported')).then<void, void>((message: string) => {
                                 showToast(message)
-                            })
+                            });
                             return;
                         }
                         if (this.inputName == this.renameFileName) {

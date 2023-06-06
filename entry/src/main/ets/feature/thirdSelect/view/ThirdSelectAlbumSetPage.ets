@@ -163,7 +163,7 @@ struct ThirdSelectAlbumSetPage {
 
      private async loadAlbums(): Promise<void> {
          let displayName = await getResourceString($r('app.string.album_all'));
-         this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
+         this.albumsDataSource.reloadAlbumItemData().then<void, void>((isEmpty: boolean) => {
              this.isEmpty = isEmpty
              this.albumsDataSource.notifyDataReload()
             // 从三方拉起，直接跳转到所有相册
@@ -212,7 +212,7 @@ struct ThirdSelectAlbumSetPage {
         Log.info(TAG, "onMenuClicked, action: " + action.actionID);
         if (action === Action.CANCEL) {
             Log.info(TAG, 'click cancel');
-            let param1: Map<string, string[]> = new Map();
+            let param1: Map<string, string[]> = new Map<string, string[]>();
             param1.set('select-item-list', [] as string[]);
             let abilityResult: common.AbilityResult = {
                 resultCode: 0,

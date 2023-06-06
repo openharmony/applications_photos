@@ -224,7 +224,7 @@ export class TimelineItemDataSource extends ItemDataSource {
     }
 
     dataReload(): void {
-        this.reloadTimelineItemData().then((isEmpty: boolean): void => {
+        this.reloadTimelineItemData().then<void, void>((isEmpty: boolean): void => {
             this.notifyDataReload();
         })
     }

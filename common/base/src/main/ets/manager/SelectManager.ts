@@ -17,7 +17,7 @@ import stashOrGetObject from '../utils/SingleInstanceUtils';
 const TAG = ""
 
 class SelectManager {
-    private status: Map<string, boolean> = new Map();
+    private status: Map<string, boolean> = new Map<string, boolean>();
 
     isSelect(key: string, defaultValue: boolean): boolean {
         if (this.status.has(key)) {

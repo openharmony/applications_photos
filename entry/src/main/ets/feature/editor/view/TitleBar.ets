@@ -44,14 +44,14 @@ export struct TitleBar {
 
     saveAsNewCallback(): void {
         Log.debug(this.TAG, 'saveAsNewCallback called');
-        PhotoEditorManager.getInstance().save(false).then((id: number) => {
+        PhotoEditorManager.getInstance().save(false).then<void, void>((id: number) => {
             this.saveImageCallback(id)
         });
     }
 
     replaceOriginalCallback(): void {
         Log.debug(this.TAG, 'replaceOriginalCallback called');
-        PhotoEditorManager.getInstance().save(true).then((id: number) => {
+        PhotoEditorManager.getInstance().save(true).then<void, void>((id: number) => {
             this.saveImageCallback(id)
         });
     }
@@ -64,7 +64,7 @@ export struct TitleBar {
         Log.info(this.TAG, "saveImageCallback id = " + id);
         if (id < 0) {
             this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
-            getResourceString($r('app.string.edit_photo_save_fail')).then((message: string) => {
+            getResourceString($r('app.string.edit_photo_save_fail')).then<void, void>((message: string) => {
                 showToast(message)
             })
             router.back();
