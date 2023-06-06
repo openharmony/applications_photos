@@ -77,7 +77,7 @@ export async function getAlbumDisplayName(name: string): Promise<string> {
 
 export async function getFetchOptions(selectType: number, albumId: string, deviceId: string): Promise<MediaLib.MediaFetchOptions> {
     let selections: string = "";
-    let selectionArgs: Array<string> = [];
+    let selectionArgs: string[] = [];
     let order: string = "date_added DESC";
     if (selectType == MediaConstants.SELECT_TYPE_VIDEO || albumId == MediaConstants.ALBUM_ID_VIDEO) {
         selections = MediaLib.FileKey.MEDIA_TYPE + ' = ?';

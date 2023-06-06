@@ -103,7 +103,7 @@ export default class MainAbility extends Ability {
                 Log.error(this.TAG, "getApplicationInfo error: " + error);
                 return;
             }
-           let requestPermissionList: Array<string> = [
+           let requestPermissionList: string[] = [
                "ohos.permission.READ_MEDIA",
                "ohos.permission.WRITE_MEDIA",
                "ohos.permission.MEDIA_LOCATION",

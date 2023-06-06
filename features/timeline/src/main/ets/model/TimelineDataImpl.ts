@@ -25,10 +25,10 @@ const TAG = "TimelineDataImpl"
 export class TimelineDataImpl {
     async getTimelineItemData(): Promise<TimelineDataItem[]> {
         Log.info(TAG, "getTimelineItemData");
-        let fileAssets: Array<MediaLib.FileAsset> = await this.getTimelineItemFileAssets();
+        let fileAssets: MediaLib.FileAsset[] = await this.getTimelineItemFileAssets();
 
         let count = this.getCount();
-        let mediaFileAsset: Array<MediaLib.FileAsset> = await this.getMediaItemFileAssets(0, count);
+        let mediaFileAsset: MediaLib.FileAsset[] = await this.getMediaItemFileAssets(0, count);
         let itemGroup: TimelineDataItem[] = [];
         let index = 0;
         fileAssets.forEach((fileAsset: MediaLib.FileAsset): void => {
@@ -44,7 +44,7 @@ export class TimelineDataImpl {
 
     private async getTimelineItemFileAssets(): Promise<MediaLib.FileAsset[]> {
         let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?';
-        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
+        let selectionArgs: string[] = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
         let fetchOption: MediaLib.MediaFetchOptions = {
             selections: selections,
             selectionArgs: selectionArgs,
@@ -56,7 +56,7 @@ export class TimelineDataImpl {
 
     private async getMediaItemFileAssets(start: number, count: number): Promise<MediaLib.FileAsset[]> {
         let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?';
-        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
+        let selectionArgs: string[] = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
         let fetchOption: MediaLib.MediaFetchOptions = {
             selections: selections,
             selectionArgs: selectionArgs,
@@ -85,7 +85,7 @@ export class TimelineDataImpl {
         let itemLen = items.length;
         let countLen = Math.ceil(itemLen / count);
         for (let i = 1;i < countLen; i++) {
-            let mediaFileAsset: Array<MediaLib.FileAsset> = await this.getMediaItemFileAssets(i * count, count)
+            let mediaFileAsset: MediaLib.FileAsset[] = await this.getMediaItemFileAssets(i * count, count)
             for (let j = 0;j < count; j++) {
                 if (i * count + j >= itemLen) {
                     return;

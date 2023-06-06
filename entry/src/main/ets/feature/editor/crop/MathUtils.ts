@@ -41,7 +41,7 @@ export abstract class MathUtils {
         rect.bottom *= height;
     }
 
-    static rectToPoints(rect: RectF): Array<Point> {
+    static rectToPoints(rect: RectF): Point[] {
         let points: Point[] = [];
         points.push(new Point(rect.left, rect.top));
         points.push(new Point(rect.right, rect.top));
@@ -61,7 +61,7 @@ export abstract class MathUtils {
         rect.bottom = centerY + halfWidth;
     }
 
-    static rotatePoints(inputs: Array<Point>, angle: number, origin: Point): Array<Point> {
+    static rotatePoints(inputs: Point[], angle: number, origin: Point): Point[] {
         let alpha = MathUtils.formulaAngle(-angle);
         let outputs: Point[] = [];
         for (let input of inputs) {
@@ -145,7 +145,7 @@ export abstract class MathUtils {
         return new Point(x, y);
     }
 
-    static findSuitableScale(points: Array<Point>, rect: RectF, origin: Point): number {
+    static findSuitableScale(points: Point[], rect: RectF, origin: Point): number {
         let scale = 1;
         let temp = 1;
         for (let point of points) {
@@ -169,7 +169,7 @@ export abstract class MathUtils {
         return scale;
     }
 
-    static fixImageMove(rotated: Array<Point>, flipImage: RectF): Array<number> {
+    static fixImageMove(rotated: Point[], flipImage: RectF): number[] {
         let offsetX = 0;
         let offsetY = 0;
         for (let point of rotated) {
@@ -214,7 +214,7 @@ export abstract class MathUtils {
         }
     }
 
-    static limitRectInRotated(rect: RectF, outerLines: Array<LineSegment>): void {
+    static limitRectInRotated(rect: RectF, outerLines: LineSegment[]): void {
         let copy = new RectF();
         copy.set(rect.left, rect.top, rect.right, rect.bottom);
         let diagonal1 = new LineSegment(new Point(copy.left, copy.top), new Point(copy.right, copy.bottom));
@@ -229,7 +229,7 @@ export abstract class MathUtils {
         rect.set(copy.left, copy.top, copy.right, copy.bottom);
     }
 
-    static limitRectInRotatedBasedOnPoint(baseIndex: number, rect: RectF, rotatedLines: Array<LineSegment>): void {
+    static limitRectInRotatedBasedOnPoint(baseIndex: number, rect: RectF, rotatedLines: LineSegment[]): void {
         let points = MathUtils.rectToPoints(rect);
         let base = points[baseIndex];
         points.splice(baseIndex, 1);
@@ -251,7 +251,7 @@ export abstract class MathUtils {
         MathUtils.scaleRectBasedOnPoint(rect, base, scale);
     }
 
-    static getMaxFixedRectSize(rate: number, maxWidth: number, maxHeight: number): Array<number> {
+    static getMaxFixedRectSize(rate: number, maxWidth: number, maxHeight: number): number[] {
         let width = 0;
         let height = 0;
         if (rate > (maxWidth / maxHeight)) {
@@ -264,7 +264,7 @@ export abstract class MathUtils {
         return [width, height];
     }
 
-    static getMinFixedRectSize(rate: number, minLength: number): Array<number> {
+    static getMinFixedRectSize(rate: number, minLength: number): number[] {
         let width = minLength;
         let height = minLength;
         if (rate > 1) {

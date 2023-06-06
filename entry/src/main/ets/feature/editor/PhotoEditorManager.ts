@@ -29,7 +29,7 @@ export class PhotoEditorManager {
     private currentMode: PhotoEditMode = PhotoEditMode.EDIT_MODE_MAIN;
     private origin: PixelMapWrapper = undefined;
     private item: MediaDataItem = undefined;
-    private editors: Array<PhotoEditBase> = undefined;
+    private editors: PhotoEditBase[] = [];
     private historyManager: ImageFilterStack = undefined;
     isSaving: boolean = false;
 
