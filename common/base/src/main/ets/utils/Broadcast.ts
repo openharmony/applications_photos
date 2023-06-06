@@ -23,8 +23,9 @@ export class Broadcast {
 
     public on(event: string, callback: CallbackType): void {
         if(this.callBackArray.get(event) === null || this.callBackArray.get(event) === undefined){
-            this.callBackArray.set(event, [callback])
+            this.callBackArray.set(event, [])
         }
+        this.callBackArray.get(event).push(callback)
     }
 
     public off(event: string | null, callback: CallbackType | null): void {
