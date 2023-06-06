@@ -15,7 +15,7 @@
  */
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { DialogCallback } from '../../model/common/DialogUtil';
-import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';

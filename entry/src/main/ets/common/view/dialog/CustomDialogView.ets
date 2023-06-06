@@ -35,7 +35,7 @@ import { EditExitDialog, EditExitDialogCallback } from './EditExitDialog';
 import { NewAlbumDialog } from './NewAlbumDialog';
 import { CopyOrMoveDialog, OperateParam } from './CopyOrMoveDialog';
 import { FindSameNameDialog, FindSameNameParam } from './FindSameNameDialog';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { SaveImageDialog } from './SaveImageDialog';
 
 const TAG: string = 'CustomDialogView'

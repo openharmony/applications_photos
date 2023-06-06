@@ -19,7 +19,7 @@ import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { clamp } from '@ohos/base/src/main/ets/utils/MathUtil';
 import { Constants } from '../constants/Constants';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 
 const TAG = "EventPipeline"

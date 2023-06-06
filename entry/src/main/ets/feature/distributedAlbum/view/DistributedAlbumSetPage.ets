@@ -22,15 +22,15 @@ import {
     AlbumGridItemTraditionalStyle
 } from '@ohos/distributed/src/main/ets/components/AlbumGridItemTraditionalStyle';
 import { Constants } from '../../../common/model/common/Constants';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { NoPhotoIndexComponent } from '../../../common/view/NoPhotoIndexComponent';
 import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { broadcastManager } from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { MediaLibDataChangeCallback } from '@ohos/base/src/main/ets/interface/MediaLibDataChangeCallback';
 import { CommonObserverCallback } from '@ohos/base/src/main/ets/observer/CommonObserverCallback';
-import mediaObserver from '@ohos/base/src/main/ets/observer/MediaObserver';
+import { mediaObserver } from '@ohos/base/src/main/ets/observer/MediaObserver';
 import { DistributedAlbumBarModel } from '../model/DistributedAlbumBarModel';
 import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';

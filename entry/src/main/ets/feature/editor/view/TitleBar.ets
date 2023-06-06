@@ -17,7 +17,7 @@ import { PhotoEditMode } from '../base/PhotoEditType';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { Constants } from '../../../common/model/common/Constants';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { broadcastManager } from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { PhotoEditorManager } from '../PhotoEditorManager';
 import { PhotoEditCrop } from '../crop/PhotoEditCrop';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';

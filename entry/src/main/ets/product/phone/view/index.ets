@@ -20,7 +20,7 @@ import { TabBar } from '../../../common/view/TabBar';
 import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { broadcastManager } from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { Constants } from '../../../common/model/common/Constants';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import router, { ParamsInterface } from '@system.router';

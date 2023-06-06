@@ -17,7 +17,7 @@ import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ViewType } from '@ohos/base/src/main/ets/data/ViewType';
 import { MediaDataItem, DateAdded } from '@ohos/base/src/main/ets/data/MediaDataItem';
-import mediaDataItemCache from '@ohos/base/src/main/ets/data/MediaDataItemCache';
+import { mediaDataItemCache } from '@ohos/base/src/main/ets/data/MediaDataItemCache';
 import { ItemDataSource } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 
 const TAG = "TimelineDataItem"

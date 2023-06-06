@@ -16,7 +16,7 @@
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/browserOperation/ActionBarMode';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 
 export class PhotoGridBarModel {

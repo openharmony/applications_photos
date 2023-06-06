@@ -17,7 +17,7 @@ import { DialogCallback } from '../../model/common/DialogUtil';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { FindSameOperation } from '@ohos/base/src/main/ets/operation/ProcessMenuOperation';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
 @Observed

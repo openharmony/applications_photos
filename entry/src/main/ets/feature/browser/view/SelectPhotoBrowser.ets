@@ -23,10 +23,10 @@ import { PhotoBrowserBg } from '@ohos/browser/src/main/ets/components/PhotoBrows
 import { Constants as PhotoConstants } from '@ohos/browser/src/main/ets/constants/Constants';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { broadcastManager } from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { PhotoSwiper } from '@ohos/browser/src/main/ets/components/PhotoSwiper';
-import mMultimodalInputManager from '@ohos/base/src/main/ets/manager/MultimodalInputManager';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { mMultimodalInputManager } from '@ohos/base/src/main/ets/manager/MultimodalInputManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';

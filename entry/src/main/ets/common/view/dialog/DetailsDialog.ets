@@ -15,7 +15,7 @@
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
 @Observed

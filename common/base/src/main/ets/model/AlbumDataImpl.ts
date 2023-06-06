@@ -16,7 +16,7 @@ import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { Log } from '../utils/Log';
 import { AlbumDataItem } from '../data/AlbumDataItem';
 import { MediaConstants } from '../constants/MediaConstants';
-import mediaModel from '../model/MediaModel';
+import { mediaModel } from '../model/MediaModel';
 import { getAlbumDisplayName, getFetchOptions } from '../helper/MediaDataHelper';
 import { QueryConstants } from '../constants/QueryConstants';
 

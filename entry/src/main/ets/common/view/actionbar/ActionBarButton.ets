@@ -16,7 +16,7 @@
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Action } from '../browserOperation/Action'
 import { ActionBarColorMode } from '../browserOperation/ActionBarMode'
-import screenManager, { ColumnSize } from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager, ColumnSize } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
 @Component

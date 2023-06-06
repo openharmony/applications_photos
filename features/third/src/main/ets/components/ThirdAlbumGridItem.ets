@@ -14,12 +14,12 @@
  */
 import router from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager'
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { broadcastManager } from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { EmptyAlbumComponent } from '@ohos/base/src/main/ets/components/EmptyAlbumComponent';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 // The item of album grid, and it's new style.

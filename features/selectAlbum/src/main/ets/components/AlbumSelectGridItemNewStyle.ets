@@ -19,7 +19,7 @@ import { EmptyAlbumComponent } from '@ohos/base/src/main/ets/components/EmptyAlb
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 const TAG = "AlbumSelectGridItemNewStyle"
 // The item of album grid, and it's new style.

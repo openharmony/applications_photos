@@ -24,14 +24,14 @@ import deviceInfo from '@ohos.deviceInfo';
 import bundleManager from '@ohos.bundle.bundleManager';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Constants } from '../common/model/common/Constants';
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
+import { mediaModel } from '@ohos/base/src/main/ets/model/MediaModel';
 import uri from '@ohos.uri';
-import ScreenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 
 const TAG: string = 'ServiceExtAbility';
 
-export default class ServiceExtAbility extends Extension {
+export class ServiceExtAbility extends Extension {
   private globalThis = GlobalContext.getContext();
 
   onCreate(want): void {
@@ -95,7 +95,7 @@ export default class ServiceExtAbility extends Extension {
                   let promise = display.getDefaultDisplay();
                   promise.then((data: display.Display) => {
                     Log.error(TAG, "Succeeded in loading the content, width : " + data.width + ",  height : " + data.height);
-                    ScreenManager.setWinWidth(data.width)
+                    screenManager.setWinWidth(data.width)
                     windowClass.resetSize(data.width, data.height);
                     windowClass.setBackgroundColor('#00000000');
                     windowClass.show();

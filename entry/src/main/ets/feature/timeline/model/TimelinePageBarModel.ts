@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBarMode, ActionBarSelectionMode } from '../../../common/view/browserOperation/ActionBarMode';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';

@@ -15,7 +15,7 @@
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 export class InnerMediaDataItem extends MediaDataItem {
     constructor(uri: string, index: number) {

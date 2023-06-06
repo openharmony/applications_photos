@@ -25,7 +25,7 @@ import { JumpSourceToMain } from '../data/JumpSourceToMain';
 import { SimpleAlbumDataItem } from '../data/SimpleAlbumDataItem';
 import { getFetchOptionsByAlbumItem } from '../helper/MediaDataHelper';
 import { showToast } from '../utils/UiUtil';
-import mediaModel from '../model/MediaModel';
+import { mediaModel } from '../model/MediaModel';
 import { AlbumDataItem } from '../data/AlbumDataItem';
 import { LazyItem } from '../vm/ItemDataSource';
 import { MediaConstants } from '../constants/MediaConstants';

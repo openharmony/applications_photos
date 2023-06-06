@@ -15,7 +15,7 @@
 import router from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { EmptyAlbumComponent } from '@ohos/base/src/main/ets/components/EmptyAlbumComponent';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
 import { PeerDataItem } from '@ohos/base/src/main/ets/data/PeerDataItem';
 

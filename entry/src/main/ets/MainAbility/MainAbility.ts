@@ -18,12 +18,12 @@ import window from '@ohos.window';
 import Ability from '@ohos.app.ability.UIAbility';
 import wantConstant from '@ohos.ability.wantConstant';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../common/model/common/Constants';
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { broadcastManager } from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
+import { mediaModel } from '@ohos/base/src/main/ets/model/MediaModel';
 import router from '@system.router';
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import atManager from '@ohos.abilityAccessCtrl';
@@ -40,7 +40,7 @@ let mFilterMediaType: number = MediaConstants.SELECT_TYPE_ALL;
 let appBroadcast = broadcastManager.getBroadcast();
 let pagePath: string = deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? 'product/phone/view/index' : 'product/pad/view/index';
 
-export default class MainAbility extends Ability {
+export class MainAbility extends Ability {
     private TAG: string = 'MainAbility';
     private static readonly RETRY_MAX_TIMES = 100;
     private static readonly ACTION_URI_SINGLE_SELECT = 'singleselect';

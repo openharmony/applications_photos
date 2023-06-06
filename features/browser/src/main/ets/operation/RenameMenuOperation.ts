@@ -17,7 +17,7 @@ import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastC
 import { MenuOperationCallback } from '@ohos/base/src/main/ets/operation/MenuOperationCallback';
 import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
+import { mediaModel } from '@ohos/base/src/main/ets/model/MediaModel';
 import { getFetchOptionsByItem } from '@ohos/base/src/main/ets/helper/MediaDataHelper';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import { Constants } from '../constants/Constants';

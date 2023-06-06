@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';
 import { TimelineDataItem } from '../data/TimelineDataItem';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';

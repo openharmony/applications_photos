@@ -16,7 +16,7 @@
 import image from '@ohos.multimedia.image';
 import fileIO from '@ohos.fileio';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
+import { mediaModel } from '@ohos/base/src/main/ets/model/MediaModel';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { ImageFilterStack } from './ImageFilterStack';

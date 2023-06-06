@@ -14,7 +14,7 @@
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { Log } from '../utils/Log';
-import selectManager from '../manager/SelectManager';
+import { selectManager } from '../manager/SelectManager';
 
 const TAG = "PeerDataItem"
 

@@ -21,7 +21,7 @@ import { EventPipeline, AnimationOption, Matrix4TransitWithMatrix4x4 } from '../
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Constants } from '../constants/Constants';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { RouterConstants } from '@ohos/base/src/main/ets/constants/RouterConstants';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 import { LoadingPanel } from './LoadingPanel';

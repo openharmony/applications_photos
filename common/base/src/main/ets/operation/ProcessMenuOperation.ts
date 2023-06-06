@@ -22,7 +22,7 @@ import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { startTraceWithTaskId, finishTraceWithTaskId } from '../utils/TraceControllerUtils';
 import { getFetchOptionsByItem } from '../helper/MediaDataHelper';
 import { SimpleAlbumDataItem } from '../data/SimpleAlbumDataItem';
-import mediaModel from '../model/MediaModel';
+import { mediaModel } from '../model/MediaModel';
 
 export enum FindSameOperation {
     NONE,
