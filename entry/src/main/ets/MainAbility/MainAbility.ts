@@ -97,7 +97,7 @@ export default class MainAbility extends Ability {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
         bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0, (error: Error, appInfo: bundleManager.ApplicationInfo): void => {
-           if (error) {
+           if (error != null) {
                 Log.error(this.TAG, "getApplicationInfo error: " + error);
                 return;
             }

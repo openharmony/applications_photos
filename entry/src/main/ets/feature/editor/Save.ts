@@ -86,7 +86,7 @@ export class Save {
         let displayName = title + '.jpg';
         Log.debug(TAG, "file displayname = " + displayName + ", file path = " + fileAsset.relativePath);
         let favorite = false;
-        if (isReplace) {
+        if (isReplace != null && isReplace == true) {
             favorite = await fileAsset.isFavorite();
             await item.onDelete();
             Log.debug(TAG, "trash picture file id " + item.id + " end.");

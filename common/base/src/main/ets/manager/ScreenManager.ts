@@ -154,10 +154,10 @@ class ScreenManager {
             cbs.push(this.events.get(event)[i])
         }
 
-        if (cbs) {
+        if (cbs.length > 0) {
             for (let i = 0, l = cbs.length; i < l; i++) {
                 let ref = cbs[i];
-                if (ref) {
+                if (ref != null) {
                     try {
                         ref.apply(_self, argument);
                     } catch (e) {

@@ -124,7 +124,7 @@ export struct ImageGridItemComponent {
         Log.info(TAG, 'onSelected');
         if ((this.isSelectUpperLimited != undefined && !this.isSelectUpperLimited) || this.mediaItem.isSelect) {
             this.mediaItem.setSelect(!this.mediaItem.isSelect);
-            if (this.lazyItem) {
+            if (this.lazyItem != null) {
                 this.lazyItem.update(this.mediaItem)
             }
         }

@@ -105,7 +105,7 @@ export class ThirdDeleteOperation extends ProcessMenuOperation {
       return;
     }
     let item = this.items[this.currentBatch] as MediaDataItem;
-    if (item) {
+    if (item != null) {
       item.onDelete().then(() => {
         this.currentBatch++;
         this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [this.getExpectProgress(), this.currentBatch]);

@@ -77,7 +77,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
     private async moveOne(item: MediaDataItem): Promise<void> {
         let fileAsset = await item.loadFileAsset();
         let assets = await this.getFileCopyOrMoveInfo(fileAsset, this.albumInfo);
-        if (assets.targetAsset) {
+        if (assets.targetAsset != null) {
             if (assets.targetAsset.uri == assets.sourceAsset.uri) {
                 Log.info(TAG, 'move same fileAsset');
                 this.onOperateContinue();
@@ -110,7 +110,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
     async move(file: MediaLib.FileAsset, path: string, targetFile?): Promise<void> {
         startTraceWithTaskId('move', this.currentBatch);
         try {
-            if (targetFile) {
+            if (targetFile != null) {
                 await mediaModel.deleteOne(targetFile.uri);
             }
             file.relativePath = path;

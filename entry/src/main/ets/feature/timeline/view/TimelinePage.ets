@@ -397,7 +397,7 @@ export struct TimelinePage {
         this.onModeChange();
         finishTrace('onModeChange');
         mediaObserver.registerObserver(this.dataObserver);
-        if (err) {
+        if (err != null) {
             getResourceString($r('app.string.copy_failed_single')).then((message: string) => {
                 showToast(message)
             })
@@ -418,7 +418,7 @@ export struct TimelinePage {
         this.onModeChange();
         finishTrace('onModeChange');
         mediaObserver.registerObserver(this.dataObserver);
-        if (err) {
+        if (err != null) {
             getResourceString($r('app.string.move_failed_single')).then((message: string) => {
                 showToast(message)
             })
@@ -524,7 +524,7 @@ export struct TimelinePage {
                         .onScrollIndex((index: number) => {
                             Log.debug(TAG, "onScrollIndex index " + index)
                             let item: DateAdded = this.timelineDataSource.getDataByIndex(index);
-                            if (item) {
+                            if (item != null) {
                                 this.dateText = DateUtil.getLocalizedYearAndMonth(item.dateAdded);
                             } else {
                                 Log.warn(TAG, 'index out of active window');

@@ -50,7 +50,7 @@ export class PhotoEditorManager {
         Log.info(this.TAG, "initialize mode[" + mode + "]");
         this.item = item;
         Loader.loadPixelMapWrapper(item, true).then((pixelMap: PixelMapWrapper): void => {
-            if (pixelMap) {
+            if (pixelMap != null) {
                 this.origin = pixelMap;
                 this.historyManager.setOriginPixelMap(this.origin);
                 this.switchMode(mode);

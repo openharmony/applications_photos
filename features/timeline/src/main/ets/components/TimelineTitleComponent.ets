@@ -39,7 +39,7 @@ export struct TimelineTitleComponent {
         if (this.isSelectedMode) {
             let isSelect = !this.timelineDataItem.isSelect()
             this.timelineDataItem.setSelect(isSelect)
-            if (this.lazyItem) {
+            if (this.lazyItem != null) {
                 this.lazyItem.update(this.timelineDataItem)
             }
             this.broadCast.emit(BroadcastConstants.GROUP_SELECT, []);

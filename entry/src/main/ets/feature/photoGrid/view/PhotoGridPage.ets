@@ -108,7 +108,7 @@ struct PhotoGridPage {
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
         if (action === Action.BACK) {
-            if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
+            if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL) != null) {
                 this.routerAlbumSetPage();
             } else {
                 router.back();
@@ -238,7 +238,7 @@ struct PhotoGridPage {
         Log.info(TAG, "onCopyEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
-        if (err) {
+        if (err != null) {
             getResourceString($r('app.string.copy_failed_single')).then((message: string) => {
                 showToast(message);
             })
@@ -257,7 +257,7 @@ struct PhotoGridPage {
         Log.info(TAG, "onDownloadEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
-        if (err) {
+        if (err != null) {
             if (total > 1) {
                 Log.warn(TAG, "get selectItems is error " + count);
                 let str = await getResourceString($r('app.string.download_failed_multi'));
@@ -285,7 +285,7 @@ struct PhotoGridPage {
         Log.info(TAG, "onMoveEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
-        if (err) {
+        if (err != null) {
             getResourceString($r('app.string.move_failed_single')).then((message: string) => {
                 showToast(message);
             })
@@ -376,7 +376,7 @@ struct PhotoGridPage {
     }
 
     onBackPress(): boolean {
-        if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL)) {
+        if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL) != null) {
             this.routerAlbumSetPage();
             return true;
         }
@@ -447,7 +447,7 @@ struct PhotoGridPage {
         });
         this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
 
-        if (this.albumInfo.deviceId) {
+        if (this.albumInfo.deviceId != null) {
             Log.info(TAG, "deviceId size: " + this.albumInfo.deviceId);
             this.appBroadcast.on(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
         }

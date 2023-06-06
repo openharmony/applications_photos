@@ -62,7 +62,7 @@ export class Broadcast {
             cbs.push(this.callBackArray.get(event)[i])
         }
 
-        if (cbs) {
+        if (cbs != null) {
             let l = cbs.length;
             for (let i = 0; i < l; i++) {
                 try {

@@ -656,7 +656,7 @@ export class EventPipeline {
      * @param animationEndMatrix Transformation matrix at end
      */
     onAnimationEnd(animationEndMatrix: Matrix4TransitWithMatrix4x4): void {
-        if (animationEndMatrix) {
+        if (animationEndMatrix != null) {
             Log.info(TAG, "onAnimationEnd: " + animationEndMatrix.matrix4x4);
             this.lastScale = animationEndMatrix.matrix4x4[0];
             this.scale = 1;

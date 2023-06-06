@@ -50,7 +50,7 @@ export struct FindSameNameDialog {
 
     getTitle(name): string {
         Log.info(this.TAG, "getTitle " + name);
-        if (name) {
+        if (name != null) {
             let index = name.lastIndexOf('.');
             if (index == -1) {
                 return name;

@@ -108,7 +108,7 @@ export class MediaDataItem implements DateAdded {
             return
         }
         let fileAsset = await this.loadFileAsset()
-        if (fileAsset) {
+        if (fileAsset != null) {
             this.update(fileAsset)
         }
         return

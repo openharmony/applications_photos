@@ -116,7 +116,7 @@ export struct AlbumGridItemNewStyle {
 
         if (this.selectable) {
             this.item.setSelect(!this.item.isSelect);
-            if (this.lazyItem) {
+            if (this.lazyItem != null) {
                 this.lazyItem.update(this.item)
             }
             this.broadCast.emit(BroadcastConstants.SELECT, [this.item.index]);

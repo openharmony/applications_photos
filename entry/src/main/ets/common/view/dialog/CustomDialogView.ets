@@ -339,11 +339,11 @@ export struct CustomDialogView {
                     self.progressMessage = message;
                 }
 
-                if (operationType) {
+                if (operationType != null) {
                     self.progressParam.operationType = operationType;
                 }
 
-                if (cancelFunc) {
+                if (cancelFunc != null) {
                     self.progressParam.cancelFunc = cancelFunc;
                 }
 
