@@ -18,6 +18,12 @@ import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 
+interface SettingsType {
+    title: Resource,
+    value: string,
+    checked: boolean
+}
+
 @CustomDialog
 export struct SettingDialog {
     private broadCast: Broadcast = broadcastManager.getBroadcast();
@@ -26,10 +32,10 @@ export struct SettingDialog {
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     controller: CustomDialogController;
-    private settings = [
-        { title: $r('app.string.fa_play_interval_time_30'), value: '30', checked: false },
-        { title: $r('app.string.fa_play_interval_time_60'), value: '60', checked: false },
-        { title: $r('app.string.fa_play_interval_time_90'), value: '90', checked: false }
+    private settings: SettingsType[] = [
+        { title: $r('app.string.fa_play_interval_time_30'), value: '30', checked: false } as SettingsType,
+        { title: $r('app.string.fa_play_interval_time_60'), value: '60', checked: false } as SettingsType,
+        { title: $r('app.string.fa_play_interval_time_90'), value: '90', checked: false } as SettingsType
     ];
 
     aboutToAppear(): void {

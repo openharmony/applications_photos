@@ -36,9 +36,10 @@ export class TrashMediaDataItem extends MediaDataItem {
                 order: "date_added DESC LIMIT " + this.index + ",1"
             }
         } else {
+            let selectionArgs: string [] = [this.id.toString()];
             fetchOption = {
                 selections: MediaLib.FileKey.ID + " = ?",
-                selectionArgs: [this.id.toString()],
+                selectionArgs: selectionArgs,
                 order: "date_added DESC"
             }
         }

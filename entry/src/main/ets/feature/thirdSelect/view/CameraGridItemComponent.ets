@@ -107,11 +107,11 @@ export struct CameraGridItemComponent {
     }
     let param1: Map<string, string[]> = new Map();
     param1.set('select-item-list', [uri]);
-    let abilityResult = {
+    let abilityResult: common.AbilityResult = {
         resultCode: 0,
         want: {
             parameters: Object.fromEntries(param1)
-        } as Object
+        } as Want
     };
     let appContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
     appContext.terminateSelfWithResult(abilityResult).then((result) => {

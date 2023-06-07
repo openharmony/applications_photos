@@ -39,6 +39,7 @@ import { ThirdSelectedPanel } from './ThirdSelectedPanel';
 import { showToast } from '@ohos/base/src/main/ets/utils/UiUtil';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
 import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
+import Want from '@ohos.app.ability.Want'
 // Third Select Album Page
 
 const TAG = "ThirdSelectPhotoGridPage"
@@ -88,11 +89,11 @@ struct ThirdSelectPhotoGridPage {
             Log.info(TAG, 'click cancel');
             let param1: Map<string, string[]> = new Map();
             param1.set('select-item-list', [] as string[]);
-            let abilityResult: object = {
+            let abilityResult: common.AbilityResult = {
                 resultCode: 0,
                 want: {
                     parameters: Object.fromEntries(param1)
-                } as object
+                } as Want
             };
             terminateSelfWithResult(abilityResult)
         } else if (action == Action.OK) {
@@ -301,11 +302,11 @@ struct ThirdSelectPhotoGridPage {
         let param1: Map<string, Object> = new Map();
         param1.set('select-item-list', uriArray);
         param1.set('isOriginal', this.isOriginalChecked);
-        let abilityResult = {
+        let abilityResult: common.AbilityResult = {
             resultCode: 0,
             want: {
                 parameters: Object.fromEntries(param1)
-            } as Object
+            } as Want
         };
         Log.info(TAG, "uri: " + uriArray)
         let self = this;

@@ -40,7 +40,7 @@ export class AlbumDataImpl {
     }
 
     async reloadAlbumItemData(): Promise<AlbumDataItem[]> {
-        let albumDataItems = [];
+        let albumDataItems: AlbumDataItem[] = [];
         for (let i = 0;i < MediaConstants.ALBUM_DEFAULT_SORT_LIST.length; i++) {
             await this.getAlbumItem(MediaConstants.ALBUM_DEFAULT_SORT_LIST[i], albumDataItems);
         }
@@ -108,7 +108,7 @@ export class AlbumDataImpl {
 
     async reloadAlbumListItemData(): Promise<AlbumDataItem[]> {
         Log.info(TAG, 'reloadAlbumListItemData start');
-        let albumDataItems = [];
+        let albumDataItems: AlbumDataItem[] = [];
         for (let i = 0;i < MediaConstants.ALBUM_DEFAULT_SORT_LIST.length; i++) {
             await this.getAlbumItem(MediaConstants.ALBUM_DEFAULT_SORT_LIST[i], albumDataItems);
         }
@@ -118,7 +118,7 @@ export class AlbumDataImpl {
 
     async reloadResetAlbumItemData(): Promise<AlbumDataItem[]> {
         Log.info(TAG, 'reloadResetAlbumItemData start');
-        let albumResetDataItems = [];
+        let albumResetDataItems: AlbumDataItem[] = [];
         await this.loadAlbumReset(albumResetDataItems, QueryConstants.ALBUM_COPY_FIRST_PAGE_QUERY_LENGTH);
         await this.getAlbumItem(MediaConstants.ALBUM_ID_RECYCLE, albumResetDataItems);
         return albumResetDataItems;

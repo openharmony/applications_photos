@@ -31,6 +31,8 @@ import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDat
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { terminateSelfWithResult } from '@ohos/base/src/main/ets/utils/AbilityUtils';
+import Want from '@ohos.app.ability.Want'
+import common from '@ohos.app.ability.common'
 
 const TAG = "SelectPhotoBrowser"
 // select mode
@@ -240,11 +242,11 @@ struct SelectPhotoBrowser {
         }
         let param1: Map<string, string[]> = new Map();
         param1.set('select-item-list', uriArray);
-        let abilityResult: Object = {
+        let abilityResult: common.AbilityResult = {
             resultCode: 0,
             want: {
                 parameters: Object.fromEntries(param1)
-            } as Object
+            } as Want
         };
         terminateSelfWithResult(abilityResult);
     }

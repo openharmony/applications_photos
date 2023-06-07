@@ -131,7 +131,10 @@ export struct ThirdSelectedPanel {
                     .width('100%')
                     .linearGradient({
                       angle: 0,
-                      colors: [[$r('app.color.album_cover_gradient_start_color'), 0], [$r('app.color.transparent'), 1.0]]
+                      colors: [
+                        [$r('app.color.album_cover_gradient_start_color'), 0] as object[],
+                        [$r('app.color.transparent'), 1.0] as object[]
+                      ] as object[]
                     })
                   Text(DateUtil.getFormattedDuration(selectedItem.duration))
                     .fontSize($r('sys.float.ohos_id_text_size_caption'))

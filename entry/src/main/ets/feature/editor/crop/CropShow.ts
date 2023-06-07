@@ -316,7 +316,7 @@ export class CropShow {
         let angle = this.rotationAngle * tX * tY + this.horizontalAngle;
         let rotated = MathUtils.rotatePoints(imagePoints, angle, origin);
 
-        let imageLines = [];
+        let imageLines: LineSegment[] = [];
         for (let i = 0; i < rotated.length; i++) {
             let j = (i + 1) % rotated.length;
             imageLines.push(
@@ -514,7 +514,7 @@ export class CropShow {
 
     private fixLeftInFreeMode(left: number, crop: RectF, imageLines: Array<LineSegment>): number {
         let leftLine = new LineSegment(new Point(left, crop.top), new Point(left, crop.bottom));
-        let adjacentLines = [];
+        let adjacentLines: LineSegment[] = [];
         adjacentLines.push(new LineSegment(new Point(left, crop.top), new Point(crop.right, crop.top)));
         adjacentLines.push(new LineSegment(new Point(left, crop.bottom), new Point(crop.right, crop.bottom)));
         let fixedLeft = left;
@@ -529,7 +529,7 @@ export class CropShow {
 
     private fixRightInFreeMode(right: number, crop: RectF, imageLines: Array<LineSegment>): number {
         let rightLine = new LineSegment(new Point(right, crop.top), new Point(right, crop.bottom));
-        let adjacentLines = [];
+        let adjacentLines: LineSegment[] = [];
         adjacentLines.push(new LineSegment(new Point(crop.left, crop.top), new Point(right, crop.top)));
         adjacentLines.push(new LineSegment(new Point(crop.left, crop.bottom), new Point(right, crop.bottom)));
         let fixedRight = right;
@@ -544,7 +544,7 @@ export class CropShow {
 
     private fixTopInFreeMode(top: number, crop: RectF, imageLines: Array<LineSegment>): number {
         let topLine = new LineSegment(new Point(crop.left, top), new Point(crop.right, top));
-        let adjacentLines = [];
+        let adjacentLines: LineSegment[] = [];
         adjacentLines.push(new LineSegment(new Point(crop.left, top), new Point(crop.left, crop.bottom)));
         adjacentLines.push(new LineSegment(new Point(crop.right, top), new Point(crop.right, crop.bottom)));
         let fixedTop = top;
@@ -559,7 +559,7 @@ export class CropShow {
 
     private fixBottomInFreeMode(bottom: number, crop: RectF, imageLines: Array<LineSegment>): number {
         let bottomLine = new LineSegment(new Point(crop.left, bottom), new Point(crop.right, bottom));
-        let adjacentLines = [];
+        let adjacentLines: LineSegment[] = [];
         adjacentLines.push(new LineSegment(new Point(crop.left, crop.top), new Point(crop.left, bottom)));
         adjacentLines.push(new LineSegment(new Point(crop.right, crop.top), new Point(crop.right, bottom)));
         let fixedBottom = bottom;

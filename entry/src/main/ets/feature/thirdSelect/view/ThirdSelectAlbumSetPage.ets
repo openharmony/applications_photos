@@ -34,6 +34,8 @@ import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants
 import { terminateSelfWithResult } from '@ohos/base/src/main/ets/utils/AbilityUtils';
 import { LazyItem } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 import { getResourceString } from '@ohos/base/src/main/ets/utils/ResourceUtils';
+import Want from '@ohos.app.ability.Want'
+import common from '@ohos.app.ability.common'
 
 const TAG = "ThirdSelectAlbumSetPage"
 // Third Select AlbumSet Page
@@ -212,11 +214,11 @@ struct ThirdSelectAlbumSetPage {
             Log.info(TAG, 'click cancel');
             let param1: Map<string, string[]> = new Map();
             param1.set('select-item-list', [] as string[]);
-            let abilityResult: object = {
+            let abilityResult: common.AbilityResult = {
                 resultCode: 0,
                 want: {
                     parameters: Object.fromEntries(param1)
-                } as object
+                } as Want
             };
             terminateSelfWithResult(abilityResult)
         } else if (action === Action.BACK) {

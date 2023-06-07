@@ -57,10 +57,10 @@ export class GroupDataImpl {
 
     async reloadBrowserGroupItemData(): Promise<MediaDataItem[]> {
         Log.debug(TAG, "reloadBrowserGroupItemData");
-        let groupDataItem = [];
+        let groupDataItem: MediaDataItem[] = [];
         let fetchOption = await getFetchOptions(this.selectType, this.albumId, this.deviceId);
         if (fetchOption == undefined) {
-            return [];
+            return [] as MediaDataItem[];
         }
         let count: number = 0;
         let groupCount: number = this.getCount();
@@ -113,10 +113,10 @@ export class GroupDataImpl {
 
     async reloadGridGroupItemData(): Promise<MediaDataItem[]> {
         Log.debug(TAG, "reloadGridGroupItemData");
-        let groupDataItem = [];
+        let groupDataItem: MediaDataItem[] = [];
         let fetchOption = await getFetchOptions(this.selectType, this.albumId, this.deviceId);
         if (fetchOption == undefined) {
-            return [];
+            return [] as MediaDataItem[];
         }
         let groupCount: number = this.getCount();
         let mediaFileAssets = await this.getMediaItemFileAssets(fetchOption, 0, groupCount);
