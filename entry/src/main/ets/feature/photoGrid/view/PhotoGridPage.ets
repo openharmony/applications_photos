@@ -108,7 +108,7 @@ struct PhotoGridPage {
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
         if (action === Action.BACK) {
-            if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL) != null) {
+            if (AppStorage.Get<boolean>(Constants.BACK_FROM_FORM_DETAIL) != null) {
                 this.routerAlbumSetPage();
             } else {
                 router.back();
@@ -239,7 +239,7 @@ struct PhotoGridPage {
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
         if (err != null) {
-            getResourceString($r('app.string.copy_failed_single')).then((message: string): void => {
+            getResourceString($r('app.string.copy_failed_single')).then<void, void>((message: string): void => {
                 showToast(message);
             })
         } else {
@@ -264,13 +264,13 @@ struct PhotoGridPage {
                 let message = str.replace('%d', count.toString());
                 showToast(message);
             } else {
-                getResourceString($r('app.string.download_failed_single')).then((message: string): void => {
+                getResourceString($r('app.string.download_failed_single')).then<void, void>((message: string): void => {
                     showToast(message);
                 })
             }
             ;
         } else {
-            getResourceString($r('app.string.download_progress_done')).then((message: string): void => {
+            getResourceString($r('app.string.download_progress_done')).then<void, void>((message: string): void => {
                 showToast(message);
             })
         }
@@ -286,7 +286,7 @@ struct PhotoGridPage {
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
         if (err != null) {
-            getResourceString($r('app.string.move_failed_single')).then((message: string): void => {
+            getResourceString($r('app.string.move_failed_single')).then<void, void>((message: string): void => {
                 showToast(message);
             })
         } else {
@@ -376,7 +376,7 @@ struct PhotoGridPage {
     }
 
     onBackPress(): boolean {
-        if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL) != null) {
+        if (AppStorage.Get<boolean>(Constants.BACK_FROM_FORM_DETAIL) != null) {
             this.routerAlbumSetPage();
             return true;
         }
@@ -500,7 +500,7 @@ struct PhotoGridPage {
 
     private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
-            this.groupDataSource.reloadGroupItemData(true).then((isEmpty: boolean): void => {
+            this.groupDataSource.reloadGroupItemData(true).then<void, void>((isEmpty): void => {
                 Log.info(TAG, "onMediaLibDataChange load finish");
                 this.isEmpty = isEmpty;
                 this.groupDataSource.notifyDataReload();
@@ -530,7 +530,7 @@ struct PhotoGridPage {
             Log.warn(TAG, 'targetIndex is not found');
             return;
         }
-        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
+        AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER, children);
         let pageEntryFrom
         if (this.albumInfo != null && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
             pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
@@ -557,7 +557,7 @@ struct PhotoGridPage {
             Log.warn(TAG, 'targetIndex is not found');
             return;
         }
-        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
+        AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER, children);
         let pageEntryFrom;
         if (this.albumInfo != null && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
             pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;

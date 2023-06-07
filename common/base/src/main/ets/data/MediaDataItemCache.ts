@@ -41,6 +41,6 @@ class MediaDataItemCache {
     }
 }
 
-let mediaDataItemCache: MediaDataItemCache = stashOrGetObject(new MediaDataItemCache(), TAG);
+let mediaDataItemCache: MediaDataItemCache = stashOrGetObject<MediaDataItemCache>(new MediaDataItemCache(), TAG);
 
 export { mediaDataItemCache };

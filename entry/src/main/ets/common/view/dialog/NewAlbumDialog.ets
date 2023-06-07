@@ -38,7 +38,7 @@ export struct NewAlbumDialog {
         this.inputName = this.renameFileName;
         this.isNull = this.inputName === '';
         if (this.inputName.length === Constants.ALBUM_NAME_MAX_LENGTH) {
-            getResourceString($r('app.string.Maximum_length_reached')).then((message: string): void => {
+            getResourceString($r('app.string.Maximum_length_reached')).then<void, void>((message: string): void => {
                 showToast(message)
             })
         }
@@ -70,7 +70,7 @@ export struct NewAlbumDialog {
                             Log.info(this.TAG, "TextInput onChange : " + value)
                             this.inputName = value
                             if (value.length === Constants.ALBUM_NAME_MAX_LENGTH) {
-                                getResourceString($r('app.string.Maximum_length_reached')).then((message: string): void => {
+                                getResourceString($r('app.string.Maximum_length_reached')).then<void, void>((message: string): void => {
                                     showToast(message)
                                 })
                             }
@@ -132,7 +132,7 @@ export struct NewAlbumDialog {
                         let check: RegExp = new RegExp("/[\\.\\\\/:*?<>\"|\[\]{}\s]/");
                         let passCheck = check.test(this.inputName)
                         if (passCheck) {
-                            getResourceString($r('app.string.specific_characters_not_supported')).then((message: string): void => {
+                            getResourceString($r('app.string.specific_characters_not_supported')).then<void, void>((message: string): void => {
                                 showToast(message)
                             })
                             return

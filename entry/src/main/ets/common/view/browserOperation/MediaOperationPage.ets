@@ -52,7 +52,7 @@ struct MediaOperationPage {
     private scroller: Scroller = new Scroller();
 
     aboutToAppear(): void {
-        let blackList = Array.from(MediaConstants.ALBUM_DISABLE_COPY_LIST)
+        let blackList = Array.from<string>(MediaConstants.ALBUM_DISABLE_COPY_LIST)
         let param: ParamsInterface = router.getParams();
         if (param != null) {
             this.pageType = param.pageType.toString();
@@ -82,7 +82,7 @@ struct MediaOperationPage {
     }
 
     private loadAlbums(): void {
-        this.albumsDataSource.reloadAlbumListItemData().then((isEmpty: boolean): void => {
+        this.albumsDataSource.reloadAlbumListItemData().then<void, void>((isEmpty: boolean): void => {
             this.loadingFinish = true
             this.albumsDataSource.notifyDataReload()
         })

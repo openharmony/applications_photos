@@ -102,17 +102,17 @@ export class PhotoGridBarModel {
         let menuList: Action[] = [];
         if (isSelectedMode) {
             if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE) {
-                menuList.push(Boolean(selectedCount) ? Action.RECOVER : Action.RECOVER_INVALID);
-                menuList.push(Boolean(selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
+                menuList.push((new Boolean(selectedCount)) ? Action.RECOVER : Action.RECOVER_INVALID);
+                menuList.push((new Boolean(selectedCount)) ? Action.DELETE : Action.DELETE_INVALID);
                 menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL);
             } else if (this.isDistributedAlbum) {
                 menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL);
-                menuList.push(Boolean(selectedCount) ? Action.SHARE : Action.SHARE_INVALID);
-                menuList.push(Boolean(selectedCount) ? Action.DOWNLOAD : Action.DOWNLOAD_INVALID);
+                menuList.push((new Boolean(selectedCount)) ? Action.SHARE : Action.SHARE_INVALID);
+                menuList.push((new Boolean(selectedCount)) ? Action.DOWNLOAD : Action.DOWNLOAD_INVALID);
             } else {
-                menuList.push(Boolean(selectedCount) ? Action.SHARE : Action.SHARE_INVALID);
+                menuList.push((new Boolean(selectedCount)) ? Action.SHARE : Action.SHARE_INVALID);
                 menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL);
-                menuList.push(Boolean(selectedCount) ? Action.DELETE : Action.DELETE_INVALID, Action.MORE);
+                menuList.push((new Boolean(selectedCount)) ? Action.DELETE : Action.DELETE_INVALID, Action.MORE);
             }
         } else {
             if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE && !isEmpty) {

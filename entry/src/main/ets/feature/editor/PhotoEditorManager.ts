@@ -40,16 +40,16 @@ export class PhotoEditorManager {
     }
 
     static getInstance(): PhotoEditorManager {
-        if (AppStorage.Get(Constants.PHOTO_EDITOR_MANAGER) == null) {
-            AppStorage.SetOrCreate(Constants.PHOTO_EDITOR_MANAGER, new PhotoEditorManager());
+        if (AppStorage.Get<PhotoEditorManager>(Constants.PHOTO_EDITOR_MANAGER) == null) {
+            AppStorage.SetOrCreate<PhotoEditorManager>(Constants.PHOTO_EDITOR_MANAGER, new PhotoEditorManager());
         }
-        return AppStorage.Get(Constants.PHOTO_EDITOR_MANAGER);
+        return AppStorage.Get<PhotoEditorManager>(Constants.PHOTO_EDITOR_MANAGER);
     }
 
     initialize(item: MediaDataItem, mode: PhotoEditMode, errCallback?: Function): void {
         Log.info(this.TAG, "initialize mode[" + mode + "]");
         this.item = item;
-        Loader.loadPixelMapWrapper(item, true).then((pixelMap: PixelMapWrapper): void => {
+        Loader.loadPixelMapWrapper(item, true).then<void, void>((pixelMap: PixelMapWrapper): void => {
             if (pixelMap != null) {
                 this.origin = pixelMap;
                 this.historyManager.setOriginPixelMap(this.origin);

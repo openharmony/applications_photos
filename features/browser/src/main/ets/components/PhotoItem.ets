@@ -84,7 +84,7 @@ export struct PhotoItem {
         this.firstLoad = true;
         this.isLoading = true;
         this.thumbnail = this.item.getThumbnail(this.item.imgWidth, this.item.imgHeight);
-        this.item.load(true).then((): void => {
+        this.item.load(true).then<void, void>((): void => {
             this.isLoading = false
             this.updateThumbnail()
             Log.info(TAG, "aboutToAppear loadFinish thumbnail " + this.thumbnail);
@@ -119,7 +119,7 @@ export struct PhotoItem {
     }
 
     private updateThumbnail() {
-        getThumbnail(this.item, this.updateTransition == this.item.index).then((thumbnail: string): void => {
+        getThumbnail(this.item, this.updateTransition == this.item.index).then<void, void>((thumbnail: string): void => {
             this.thumbnail = thumbnail
         })
     }
