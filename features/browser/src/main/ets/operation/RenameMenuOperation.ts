@@ -45,8 +45,8 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
             return;
         }
 
-        this.confirmCallback = this.confirmCallback.bind(this);
-        this.cancelCallback = this.cancelCallback.bind(this);
+        this.confirmCallback = (title: string): Promise<void> => this.confirmCallbackBindImpl(title);
+        this.cancelCallback = (): void => this.cancelCallbackBindImpl();
         let fileName = '';
         if (mediaItem.title != null) {
             fileName = mediaItem.title;
@@ -68,6 +68,10 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
     }
 
     private async confirmCallback(title: string): Promise<void> {
+        return await this.confirmCallbackBindImpl(title)
+    }
+
+    private async confirmCallbackBindImpl(title: string): Promise<void> {
         Log.info(TAG, "Rename confirm new name: " + title);
         let mediaItem = (this.menuContext.items[0] as MediaDataItem);
         if (mediaItem == null) {
@@ -123,6 +127,10 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
     }
 
     private cancelCallback(): void {
+        this.cancelCallbackBindImpl()
+    }
+
+    private cancelCallbackBindImpl(): void {
         Log.info(TAG, 'Rename cancel');
     }
 }
