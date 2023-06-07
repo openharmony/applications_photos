@@ -37,7 +37,7 @@ export struct CropModeBar {
     private rulerChanged: Function | null = null;
 
     aboutToAppear(): void {
-        this.rulerChanged = this.onRulerChanged.bind(this);
+        this.rulerChanged = (n: number): void => this.onRulerChangedBindImpl(n);
         this.broadCast.on(Constants.RULER_CHANGED, this.rulerChanged);
         this.rulerComponentSize = this.isVerticalScreen ? this.screenWidth - Constants.PADDING_VERTICAL
                                                         : this.screenWidth - Constants.PADDING_HORIZONTAL;
@@ -50,6 +50,10 @@ export struct CropModeBar {
     }
 
     onRulerChanged(number: number): void {
+        this.onRulerChangedBindImpl(number)
+    }
+
+    private onRulerChangedBindImpl(number: number): void {
         this.rotateAngle = number;
         this.cropEdit.onSliderAngleChange(this.rotateAngle);
         this.isCropReset = this.cropEdit.couldReset();

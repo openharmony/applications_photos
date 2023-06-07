@@ -43,6 +43,10 @@ export struct TitleBar {
     private onBackAfterSaveComplete: Function = undefined;
 
     saveAsNewCallback(): void {
+        this.saveAsNewCallbackBindImpl()
+    }
+
+    private saveAsNewCallbackBindImpl(): void {
         Log.debug(this.TAG, 'saveAsNewCallback called');
         PhotoEditorManager.getInstance().save(false).then((id: number) => {
             this.saveImageCallback(id)
@@ -50,6 +54,10 @@ export struct TitleBar {
     }
 
     replaceOriginalCallback(): void {
+        this.replaceOriginalCallbackBindImpl()
+    }
+
+    private replaceOriginalCallbackBindImpl(): void {
         Log.debug(this.TAG, 'replaceOriginalCallback called');
         PhotoEditorManager.getInstance().save(true).then((id: number) => {
             this.saveImageCallback(id)
@@ -57,6 +65,10 @@ export struct TitleBar {
     }
 
     discardCallback(): void {
+        this.discardCallbackBindImpl()
+    }
+
+    private discardCallbackBindImpl(): void {
         Log.debug(this.TAG, 'discardCallback called');
     }
 
@@ -74,15 +86,19 @@ export struct TitleBar {
     }
 
     backAfterSaveComplete(): void {
+        this.backAfterSaveCompleteBindImpl()
+    }
+
+    private backAfterSaveCompleteBindImpl(): void {
         Log.debug(this.TAG, "backAfterSaveComplete called");
         this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
         router.back();
     }
 
     aboutToAppear(): void {
-        this.immersiveClick = this.immersive.bind(this);
+        this.immersiveClick = (isImmersive: boolean): void => this.immersiveBindImpl(isImmersive);
         this.broadCast.on(Constants.IS_IMMERSIVE, this.immersiveClick);
-        this.onBackAfterSaveComplete = this.backAfterSaveComplete.bind(this);
+        this.onBackAfterSaveComplete = (): void => this.backAfterSaveCompleteBindImpl();
         this.appBroadcast.on(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, this.onBackAfterSaveComplete);
     }
 
@@ -92,15 +108,19 @@ export struct TitleBar {
     }
 
     immersive(isImmersive: boolean): void {
+        this.immersive(isImmersive)
+    }
+
+    private immersiveBindImpl(isImmersive: boolean): void {
         this.isImmersive = isImmersive;
     }
 
     onBackClicked(): void {
         Log.debug(this.TAG, 'back clicked');
         if (this.isRedo || this.isUndo) {
-            this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
+            this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [(): void => this.discardCallbackBindImpl()]);
         } else if (this.selectedMode == PhotoEditMode.EDIT_MODE_CROP && this.cropEdit.couldReset()) {
-            this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
+            this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [(): void => this.discardCallbackBindImpl()]);
         } else {
             router.back();
         }
@@ -110,10 +130,10 @@ export struct TitleBar {
         Log.debug(this.TAG, 'save clicked');
         if (this.isRedo || this.isRedo) {
             this.broadCast.emit(BroadcastConstants.SHOW_SAVE_PHOTO_DIALOG,
-                [this.saveAsNewCallback.bind(this), this.replaceOriginalCallback.bind(this)]);
+                [(): void => this.saveAsNewCallbackBindImpl(), (): void => this.replaceOriginalCallbackBindImpl()]);
         } else if (this.selectedMode == PhotoEditMode.EDIT_MODE_CROP && this.cropEdit.couldReset()) {
             this.broadCast.emit(BroadcastConstants.SHOW_SAVE_PHOTO_DIALOG,
-                [this.saveAsNewCallback.bind(this), this.replaceOriginalCallback.bind(this)]);
+                [(): void => this.saveAsNewCallbackBindImpl(), (): void => this.replaceOriginalCallbackBindImpl()]);
         } else {
             router.back();
         }

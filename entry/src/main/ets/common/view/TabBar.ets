@@ -42,7 +42,7 @@ export struct TabBar {
   deviceType: DEVICE_TYPE = DEVICE_TYPE.DEVICE_PHONE;
 
   aboutToAppear(): void {
-    this.onTabSelected = this.onTabSelected.bind(this);
+    this.onTabSelected = (index: number): void => this.onTabSelectedBindImpl(index);
     this.tabs[this.currentIndex].isSelected = true;
     this.tabs.forEach((tab: TabItem) => {
       Log.info(this.TAG, JSON.stringify(tab.name) + " , " + tab.iconSelected);
@@ -50,6 +50,10 @@ export struct TabBar {
   }
 
   private onTabSelected(index: number): void {
+    this.onTabSelectedBindImpl(index);
+  }
+
+  private onTabSelectedBindImpl(index: number): void {
     Log.debug(this.TAG, "this.currentIndex: " + this.currentIndex + " index: " + index);
     if (this.currentIndex == index) {
       Log.error(this.TAG, "it is same: " + index);
@@ -165,7 +169,7 @@ export struct TabBarForAlbumSet {
   @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
 
   aboutToAppear(): void {
-    this.onTabSelected = this.onTabSelected.bind(this);
+    this.onTabSelected = (index: number): void => this.onTabSelectedBindImpl(index);
     this.tabs[this.currentIndex].isSelected = true;
     this.tabs.forEach((tab: TabItemWithText) => {
       Log.info(this.TAG, JSON.stringify(tab.name) + ", " + tab.isSelected);
@@ -183,6 +187,10 @@ export struct TabBarForAlbumSet {
   }
 
   private onTabSelected(index: number): void {
+    this.onTabSelectedBindImpl(index)
+  }
+
+  private onTabSelectedBindImpl(index: number): void {
     Log.info(this.TAG, "this.currentIndex: " + this.currentIndex + " index: " + index);
     this.currentIndex = index;
     this.controller.changeIndex(this.currentIndex);
