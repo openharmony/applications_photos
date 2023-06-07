@@ -41,6 +41,6 @@ class TrashMediaDataItemCache {
     }
 }
 
-let trashMediaDataItemCache: TrashMediaDataItemCache = stashOrGetObject(new TrashMediaDataItemCache(), TAG);
+let trashMediaDataItemCache: TrashMediaDataItemCache = stashOrGetObject<TrashMediaDataItemCache>(new TrashMediaDataItemCache(), TAG);
 
 export { trashMediaDataItemCache };

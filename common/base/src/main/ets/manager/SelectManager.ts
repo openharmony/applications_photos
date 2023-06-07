@@ -36,6 +36,6 @@ class SelectManager {
     }
 }
 
-let selectManager: SelectManager = stashOrGetObject(new SelectManager(), TAG);
+let selectManager: SelectManager = stashOrGetObject<SelectManager>(new SelectManager(), TAG);
 
 export { selectManager };

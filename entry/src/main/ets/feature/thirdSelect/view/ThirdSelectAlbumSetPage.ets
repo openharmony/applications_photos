@@ -141,7 +141,7 @@ struct ThirdSelectAlbumSetPage {
 
         this.initGridRowCount();
         this.updateActionBar();
-        AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
+        AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
     }
 
     private jumpToAllAlbumGridPage(allAlbumDataItem: AlbumDataItem): void {

@@ -95,7 +95,7 @@ struct ThirdSelectPhotoBrowser {
             this.bundleName = params.bundleName.toString();
             this.isSelectUpperLimited = params.isSelectUpperLimited  as boolean;
         }
-        this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER);
+        this.browserDataSource.groupDataItem = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER);
         if (this.isMultiPick == true) {
             this.totalSelectedCount = this.browserDataSource.getSelectedCount();
         }
@@ -225,8 +225,8 @@ struct ThirdSelectPhotoBrowser {
         Log.debug(TAG, "setPickResult " + this.isFromFa);
         if (this.isFromFa) {
             this.appBroadcast.emit(BroadcastConstants.SAVE_FORM_EDITOR_DATA,
-                [AppStorage.Get(Constants.FORM_ITEM_NAME), AppStorage.Get(Constants.FORM_ITEM_ALBUM_ID),
-                AppStorage.Get(Constants.FORM_ITEM_DISPLAY_NAME), this.currentIndex, false]);
+                [AppStorage.Get<object>(Constants.FORM_ITEM_NAME), AppStorage.Get<object>(Constants.FORM_ITEM_ALBUM_ID),
+                AppStorage.Get<object>(Constants.FORM_ITEM_DISPLAY_NAME), this.currentIndex, false]);
             return;
         }
         let uriArray: string[] = [];

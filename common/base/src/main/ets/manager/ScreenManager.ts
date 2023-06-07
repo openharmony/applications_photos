@@ -253,7 +253,7 @@ class ScreenManager {
     }
 
     private async setFullScreen(): Promise<void> {
-        let topWindow: window.Window = AppStorage.Get(WindowConstants.MAIN_WINDOW);
+        let topWindow: window.Window = AppStorage.Get<window.Window>(WindowConstants.MAIN_WINDOW);
         Log.debug(TAG, 'getTopWindow start');
         try {
             await topWindow.setLayoutFullScreen(true)
@@ -269,7 +269,7 @@ class ScreenManager {
             this.statusBarHeight = 0;
             this.naviBarHeight = 0;
             this.leftBlank = [0, 0, 0, 0];
-            AppStorage.SetOrCreate(BroadcastConstants.LEFT_BLANK, this.leftBlank);
+            AppStorage.SetOrCreate<number[]>(BroadcastConstants.LEFT_BLANK, this.leftBlank);
         } catch (err) {
             Log.error(TAG, "setSplitScreen err: " + err);
         }
@@ -307,7 +307,7 @@ class ScreenManager {
 
     async setNavigationBarColor(barColor: string, barContentColor: string): Promise<void> {
         Log.debug(TAG, 'setNavigationBarColor start');
-        let topWindow: window.Window = AppStorage.Get(WindowConstants.MAIN_WINDOW);
+        let topWindow: window.Window = AppStorage.Get<window.Window>(WindowConstants.MAIN_WINDOW);
         try {
             let systemBarProperties: window.SystemBarProperties = {
                 navigationBarColor: barColor,
@@ -324,7 +324,7 @@ class ScreenManager {
 
     setSystemUi(isShowBar: boolean): void {
         Log.debug(TAG, 'setSystemUi start');
-        let topWindow: window.Window = AppStorage.Get(WindowConstants.MAIN_WINDOW);
+        let topWindow: window.Window = AppStorage.Get<window.Window>(WindowConstants.MAIN_WINDOW);
         Log.debug(TAG, 'getTopWindow start');
         let names: string[] = ["navigation"];
         if (!isShowBar) {
@@ -360,7 +360,7 @@ class ScreenManager {
         this.leftBlank = [this.leftBlank[0], this.leftBlank[1], this.leftBlank[2], area.bottomRect.height];
         if (leftBlankBefore.status != this.statusBarHeight || leftBlankBefore.navi != this.naviBarHeight) {
             Log.info(TAG, "leftBlank changed: " + JSON.stringify(leftBlankBefore) + "-" + JSON.stringify(this.leftBlank))
-            AppStorage.SetOrCreate(BroadcastConstants.LEFT_BLANK, this.leftBlank);
+            AppStorage.SetOrCreate<number[]>(BroadcastConstants.LEFT_BLANK, this.leftBlank);
         }
     }
 
@@ -393,21 +393,21 @@ class ScreenManager {
         } else {
             this.horizontal = true;
         }
-        AppStorage.SetOrCreate(SCREEN_ORIENTATION_HORIZONTAL, this.horizontal);
+        AppStorage.SetOrCreate<boolean>(SCREEN_ORIENTATION_HORIZONTAL, this.horizontal);
     }
 
     isHorizontal(): boolean {
-        if (AppStorage.Get(SCREEN_ORIENTATION_HORIZONTAL) == null) {
-            AppStorage.SetOrCreate(SCREEN_ORIENTATION_HORIZONTAL, this.horizontal);
+        if (AppStorage.Get<boolean>(SCREEN_ORIENTATION_HORIZONTAL) == null) {
+            AppStorage.SetOrCreate<boolean>(SCREEN_ORIENTATION_HORIZONTAL, this.horizontal);
         }
-        return AppStorage.Get(SCREEN_ORIENTATION_HORIZONTAL);
+        return AppStorage.Get<boolean>(SCREEN_ORIENTATION_HORIZONTAL);
     }
 
     isSidebar(): boolean {
-        if (AppStorage.Get(SCREEN_SIDEBAR) == null) {
-            AppStorage.SetOrCreate(SCREEN_SIDEBAR, this.sidebar);
+        if (AppStorage.Get<boolean>(SCREEN_SIDEBAR) == null) {
+            AppStorage.SetOrCreate<boolean>(SCREEN_SIDEBAR, this.sidebar);
         }
-        return AppStorage.Get(SCREEN_SIDEBAR);
+        return AppStorage.Get<boolean>(SCREEN_SIDEBAR);
     }
 
     getColumnsWidth(count: number): number {
@@ -430,7 +430,7 @@ class ScreenManager {
 
     setKeepScreenOn(): void {
         Log.info(TAG, 'setKeepScreenOn start');
-        let topWindow: window.Window = AppStorage.Get('mainWindow');
+        let topWindow: window.Window = AppStorage.Get<window.Window>('mainWindow');
         try {
             topWindow.setKeepScreenOn(true, (): void => Log.info(TAG, 'setKeepScreenOn Succeeded'))
         } catch (err) {
@@ -440,7 +440,7 @@ class ScreenManager {
 
     setKeepScreenOff(): void {
         Log.info(TAG, 'setKeepScreenOff start');
-        let topWindow: window.Window = AppStorage.Get('mainWindow');
+        let topWindow: window.Window = AppStorage.Get<window.Window>('mainWindow');
         try {
             topWindow.setKeepScreenOn(false, (): void => Log.info(TAG, 'setKeepScreenOff Succeeded'))
         } catch (err) {
@@ -449,6 +449,6 @@ class ScreenManager {
     }
 }
 
-let screenManager: ScreenManager = stashOrGetObject(new ScreenManager(), TAG);
+let screenManager: ScreenManager = stashOrGetObject<ScreenManager>(new ScreenManager(), TAG);
 
 export { screenManager };

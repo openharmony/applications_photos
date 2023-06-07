@@ -27,7 +27,7 @@ interface SettingsType {
 @CustomDialog
 export struct SettingDialog {
     private broadCast: Broadcast = broadcastManager.getBroadcast();
-    @StorageLink('form_playback_interval') time: number = AppStorage.Get(Constants.FROM_PLAYBACK_INTERVAL);
+    @StorageLink('form_playback_interval') time: number = AppStorage.Get<number>(Constants.FROM_PLAYBACK_INTERVAL);
     @StorageLink('leftBlank') leftBlank: number[] = [0, 0, 0, 0];
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();

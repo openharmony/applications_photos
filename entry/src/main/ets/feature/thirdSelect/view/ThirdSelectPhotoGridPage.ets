@@ -144,9 +144,9 @@ struct ThirdSelectPhotoGridPage {
         }
         if (this.isFromFa) {
             this.filterMediaType = MediaConstants.SELECT_TYPE_IMAGE;
-            AppStorage.SetOrCreate(Constants.FORM_ITEM_NAME, param.itemName);
-            AppStorage.SetOrCreate(Constants.FORM_ITEM_ALBUM_ID, param.itemId);
-            AppStorage.SetOrCreate(Constants.FORM_ITEM_DISPLAY_NAME, param.itemDisplayName);
+            AppStorage.SetOrCreate<object>(Constants.FORM_ITEM_NAME, param.itemName);
+            AppStorage.SetOrCreate<object>(Constants.FORM_ITEM_ALBUM_ID, param.itemId);
+            AppStorage.SetOrCreate<object>(Constants.FORM_ITEM_DISPLAY_NAME, param.itemDisplayName);
         }
         this.groupDataSource.setSelectType(this.filterMediaType);
         Log.info(TAG, "ThirdSelectPhotoGridPage isMultiPick: " + this.isMultiPick + ", " +
@@ -220,7 +220,7 @@ struct ThirdSelectPhotoGridPage {
             Log.warn(TAG, 'targetIndex is not found');
             return;
         }
-        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
+        AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER, children);
         router.push({
             uri: 'feature/thirdSelect/view/ThirdSelectPhotoBrowser',
             params: {
