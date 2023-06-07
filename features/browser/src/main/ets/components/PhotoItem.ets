@@ -68,10 +68,10 @@ export struct PhotoItem {
                 x: this.imgScale,
                 y: this.imgScale
             }).copy();
-            this.eventPipeline && this.eventPipeline.setDefaultScale(this.imgScale);
+            if(this.eventPipeline != null) this.eventPipeline.setDefaultScale(this.imgScale);
         } else {
             this.matrix = Matrix4.identity().copy();
-            this.eventPipeline && this.eventPipeline.reset();
+            if(this.eventPipeline != null)  this.eventPipeline.reset();
         }
         Log.info(TAG, "onTransitionChange end, " + this.updateTransition + " " + this.item.index);
     }
@@ -138,12 +138,17 @@ export struct PhotoItem {
             this.preItem.rotate = this.item.orientation;
             this.preItem.width = this.item.imgWidth;
             this.preItem.height = this.item.imgHeight;
-            this.eventPipeline && this.eventPipeline.onDataChanged(this.item)
+            if (this.eventPipeline != undefined && this.eventPipeline != null) {
+                this.eventPipeline.onDataChanged(this.item)
+            }
             return;
         }
         this.matrix = Matrix4.identity().copy();
-        this.eventPipeline && this.eventPipeline.setDefaultScale(1);
-        this.eventPipeline && this.eventPipeline.onDataChanged(this.item)
+        if(this.eventPipeline != null) {
+            this.eventPipeline.setDefaultScale(1);
+            this.eventPipeline.onDataChanged(this.item);
+        }
+
         this.firstLoad = false;
         this.preItem.width = this.item.imgWidth;
         this.preItem.height = this.item.imgHeight;
@@ -385,6 +390,6 @@ export struct PhotoItem {
 
     private isVideoPlayBtnShow(): boolean {
         Log.debug(TAG, "isVideoPlayBtnShow: " + this.item.mediaType);
-        return ((this.item) && (this.item.mediaType == MediaLib.MediaType.VIDEO));
+        return ((this.item != undefined && this.item != null) && (this.item.mediaType == MediaLib.MediaType.VIDEO));
     }
 }

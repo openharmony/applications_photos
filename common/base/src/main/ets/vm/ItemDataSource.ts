@@ -28,7 +28,7 @@ export class LazyItem<T> {
     }
 
     update(item: T): void {
-        if (this.onItemUpdate && this.index != -1) {
+        if (this.onItemUpdate != null && this.index != -1) {
             this.onItemUpdate(this.index, item)
         }
     }

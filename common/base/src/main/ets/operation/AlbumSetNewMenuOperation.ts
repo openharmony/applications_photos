@@ -79,7 +79,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
         }
         this.onOperationEnd = this.menuContext.onOperationEnd;
         let onOperationStart: Function = this.menuContext.onOperationStart;
-        onOperationStart && onOperationStart();
+        if(onOperationStart != null) onOperationStart();
 
         if (this.menuContext.jumpSourceToMain == JumpSourceToMain.ALBUM) {
             Log.info(TAG, 'go back to photo grid');
@@ -107,12 +107,12 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
 
     onCompleted(): void {
         Log.info(TAG, 'new album data succeed!');
-        this.onOperationEnd && this.onOperationEnd();
+        if(this.onOperationEnd != null) this.onOperationEnd();
     }
 
     onError(): void {
         Log.error(TAG, 'new album data failed!');
-        this.onOperationEnd && this.onOperationEnd();
+        if(this.onOperationEnd != null) this.onOperationEnd();
     }
 
     private matchAlbumDefaultName(albumInfo: string, numbers: Array<number>, root: string, prefixName: string): void {

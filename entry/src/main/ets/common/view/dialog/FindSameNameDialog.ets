@@ -187,11 +187,10 @@ export struct FindSameNameDialog {
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
                         Log.debug(this.TAG, "replaceCallback");
-                        if (this.isDoSameAction) {
-                            this.findSameNameParam.doSameFunc
-                            && this.findSameNameParam.doSameFunc(FindSameOperation.REPLACE);
+                        if (this.isDoSameAction && this.findSameNameParam.doSameFunc != null) {
+                            this.findSameNameParam.doSameFunc(FindSameOperation.REPLACE);
                         }
-                        this.findSameNameParam.replaceFunc && this.findSameNameParam.replaceFunc();
+                        if(this.findSameNameParam.replaceFunc != null) this.findSameNameParam.replaceFunc();
                         this.controller.close();
                     })
 
@@ -221,11 +220,10 @@ export struct FindSameNameDialog {
                         .height($r('app.float.details_dialog_button_height'))
                         .onClick(() => {
                             Log.debug(this.TAG, "skipCallback");
-                            if (this.isDoSameAction) {
-                                this.findSameNameParam.doSameFunc
-                                && this.findSameNameParam.doSameFunc(FindSameOperation.SKIP);
+                            if (this.isDoSameAction && this.findSameNameParam.doSameFunc != null) {
+                                this.findSameNameParam.doSameFunc(FindSameOperation.SKIP);
                             }
-                            this.findSameNameParam.skipFunc && this.findSameNameParam.skipFunc();
+                            if(this.findSameNameParam.skipFunc != null) this.findSameNameParam.skipFunc();
                             this.controller.close();
                         })
 
@@ -255,7 +253,7 @@ export struct FindSameNameDialog {
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
                         Log.debug(this.TAG, "cancelFunc");
-                        this.findSameNameParam.cancelFunc && this.findSameNameParam.cancelFunc();
+                        if(this.findSameNameParam.cancelFunc != null) this.findSameNameParam.cancelFunc();
                         this.controller.close();
                     })
                 }

@@ -532,7 +532,7 @@ struct PhotoGridPage {
         }
         AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
         let pageEntryFrom
-        if (this.albumInfo && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
+        if (this.albumInfo != null && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
             pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
         } else if (this.isDistributedAlbum) {
             pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
@@ -559,7 +559,7 @@ struct PhotoGridPage {
         }
         AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
         let pageEntryFrom;
-        if (this.albumInfo && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
+        if (this.albumInfo != null && this.albumInfo.id == MediaConstants.ALBUM_ID_RECYCLE) {
             pageEntryFrom = Constants.ENTRY_FROM.RECYCLE;
         } else if (this.isDistributedAlbum) {
             pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
@@ -612,7 +612,8 @@ struct PhotoGridPage {
                             .aspectRatio(1)
                             .columnStart(item.get().index % this.gridRowCount)
                             .columnEnd(item.get().index % this.gridRowCount)
-                        }, (item: LazyItem<MediaDataItem>) => item == null && item.get() ? JSON.stringify(item) : item.getHashCode())
+                        }, (item: LazyItem<MediaDataItem>) => item == null && (item.get() != undefined && item.get() != null) ?
+                            JSON.stringify(item) : item.getHashCode())
                     }
                     .columnsTemplate('1fr '.repeat(this.gridRowCount))
                     .columnsGap(Constants.GRID_GUTTER)

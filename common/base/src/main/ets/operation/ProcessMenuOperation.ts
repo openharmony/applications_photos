@@ -137,7 +137,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
         }
         this.isCancelled = false;
         finishTraceWithTaskId('ProgressOperation', this.requestTime);
-        this.onOperationEnd && this.onOperationEnd(this.isError, this.successBatch, this.count);
+        if(this.onOperationEnd != null) this.onOperationEnd(this.isError, this.successBatch, this.count);
     }
 
     // Operate cancel callback

@@ -57,7 +57,7 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
 
         // 2. onDeleteStart exit selection mode
         let onOperationStart: Function = this.menuContext.onOperationStart;
-        onOperationStart && onOperationStart();
+        if(onOperationStart != null) onOperationStart();
 
         this.menuContext.broadCast.emit(BroadcastConstants.DELETE_PROGRESS_DIALOG,
             [$r('app.string.action_delete'), this.count]);

@@ -96,7 +96,10 @@ struct ThirdSelectAlbumSetPage {
             }
             this.isFromWallpaper = new Boolean(param.isFromWallpaper).valueOf();
             if (this.isFromWallpaper) {
-                this.maxSelectCount = new Number(param.remainingOfWallpapers).valueOf() || 0
+                this.maxSelectCount = 0;
+                if (!Number.isNaN(param.remainingOfWallpapers)) {
+                    this.maxSelectCount = new Number(param.remainingOfWallpapers).valueOf()
+                }
             } else if (Boolean(param.maxSelectCount).valueOf() && param.maxSelectCount > 0) {
                 let selectCount = new Number(param.maxSelectCount).valueOf();
                 this.maxSelectCount = selectCount > Constants.LIMIT_MAX_THIRD_SELECT_COUNT
@@ -238,7 +241,8 @@ struct ThirdSelectAlbumSetPage {
                 }
                 Grid(this.scroller) {
                     LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
-                        if (item && item.get() && item.get().id != MediaConstants.ALBUM_ID_RECYCLE) {
+                        if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null) &&
+                            item.get().id != MediaConstants.ALBUM_ID_RECYCLE) {
                             if ( item.get().index == 0) {
                                 GridItem() {
                                     ThirdAlbumGridItem({
@@ -265,7 +269,8 @@ struct ThirdSelectAlbumSetPage {
                                 }
                             }
                         }
-                    }, (item: LazyItem<AlbumDataItem>) => item && item.get() ? item.getHashCode() : JSON.stringify(item))
+                    }, (item: LazyItem<AlbumDataItem>) => (item != undefined && item != null) && (item.get() != undefined && item.get() != null) ?
+                        item.getHashCode() : JSON.stringify(item))
                 }
                 .columnsTemplate('1fr '.repeat(this.gridRowCount))
                 .padding({

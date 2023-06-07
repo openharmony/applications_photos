@@ -101,7 +101,7 @@ export class PhotoEditCrop extends PhotoEditBase {
 
     exit(): ImageFilterBase {
         Log.info(this.TAG, 'exit');
-        this.filter && this.saveFinalOperation();
+        if(this.filter != null) this.saveFinalOperation();
         this.isCropShowInitialized = false;
         this.input = undefined;
         this.clearCanvas();
@@ -146,7 +146,7 @@ export class PhotoEditCrop extends PhotoEditBase {
         let limit = this.calcNewLimit();
         if (this.isCropShowInitialized) {
             this.cropShow.syncLimitRect(limit);
-            this.input && this.determineMaxScaleFactor(this.input);
+            if(this.input != null) this.determineMaxScaleFactor(this.input);
         } else {
             this.cropShow.init(limit, this.imageRatio);
             this.isCropShowInitialized = true;

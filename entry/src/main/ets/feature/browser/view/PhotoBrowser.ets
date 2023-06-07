@@ -162,9 +162,20 @@ struct PhotoBrowser {
             if (currentPhoto == undefined) {
                 return;
             }
+            // Hack with TS type system
+            let info: object | string = null
+            if (this.albumInfo != undefined && this.albumInfo != null && this.albumInfo.id != undefined && this.albumInfo.id != null) {
+                info = this.albumInfo.id
+            } else { 
+                if (this.albumInfo != undefined && this.albumInfo != null) {
+                    info = this.albumInfo.id
+                } else {
+                    info = this.albumInfo
+                }
+            }
             menuContext.withItems([currentPhoto])
                 .withDeletePageFromType(BroadcastConstants.DELETE_FROM_BROWSER)
-                .withAlbumId(this.albumInfo && this.albumInfo.id)
+                .withAlbumId(info as string)
                 .withBroadCast(this.broadCast)
                 .withOperationEndCallback(this.onDeleteEnd.bind(this))
             menuOperation = new BatchDeleteMenuOperation(menuContext);
@@ -553,9 +564,13 @@ struct PhotoBrowser {
                 items = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER);
             }
 
-            if (items && !this.isFromCamera) {
+            if ((items != null && items != undefined) && !this.isFromCamera) {
                 this.browserDataSource.groupDataItem = items;
-                this.onPhotoChanged(new Number(param.position).valueOf() || 0);
+                if (!Number.isNaN(param.position)) {
+                    this.onPhotoChanged(new Number(param.position).valueOf());
+                } else {
+                    this.onPhotoChanged(0);
+                }
             } else {
                 this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean) => {
                     this.onPhotoChanged(0);
@@ -582,7 +597,11 @@ struct PhotoBrowser {
             this.browserDataSource.setAlbumId(this.albumInfo.id);
             this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean) => {
                 this.isDataChanged = isEmpty;
-                this.onPhotoChanged(AppStorage.Get(Constants.FROM_CURRENT_INDEX) || 0);
+                if (!Number.isNaN(AppStorage.Get(Constants.FROM_CURRENT_INDEX))) {
+                    this.onPhotoChanged(AppStorage.Get(Constants.FROM_CURRENT_INDEX));
+                } else {
+                    this.onPhotoChanged(0);
+                }
                 this.browserDataSource.notifyDataReload()
             });
             this.isFromCamera = true;

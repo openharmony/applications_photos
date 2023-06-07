@@ -454,7 +454,7 @@ export struct AlbumSetPage {
         Stack() {
             Grid(this.scroller) {
                 LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
-                    if (item && item.get() && item.get().index == 0) {
+                    if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null) && item.get().index == 0) {
                         GridItem() {
                             AlbumGridItemNewStyle({
                                 lazyItem: item,
@@ -462,7 +462,7 @@ export struct AlbumSetPage {
                                 isBigCard: true,
                             })
                         }.columnStart(0).columnEnd(1)
-                    } else if (item && item.get()) {
+                    } else if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null)) {
                         GridItem() {
                             AlbumGridItemNewStyle({
                                 item: item.get(),
@@ -470,7 +470,8 @@ export struct AlbumSetPage {
                             })
                         }
                     }
-                }, (item: LazyItem<AlbumDataItem>) => item && item.get()? item.getHashCode() : JSON.stringify(item))
+                }, (item: LazyItem<AlbumDataItem>) => (item != undefined && item != null) && (item.get() != undefined && item.get() != null) ?
+                    item.getHashCode() : JSON.stringify(item))
             }
             .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
             .padding({

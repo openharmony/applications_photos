@@ -46,7 +46,7 @@ export class BatchRecoverMenuOperation extends ProcessMenuOperation {
 
         this.onOperationEnd = this.menuContext.onOperationEnd;
         let onOperationStart = this.menuContext.onOperationStart;
-        onOperationStart && onOperationStart();
+        if(onOperationStart != null) onOperationStart();
 
         this.menuContext.broadCast.emit(BroadcastConstants.DELETE_PROGRESS_DIALOG,
             [$r('app.string.action_recover'), this.count]);

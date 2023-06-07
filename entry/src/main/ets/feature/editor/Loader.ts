@@ -44,13 +44,16 @@ export class Loader {
             width: fileAsset.width,
             height: fileAsset.height
         };
-        isPreview && Loader.getPixelMapPreviewSize(size);
+        if(isPreview) Loader.getPixelMapPreviewSize(size);
 
         let thumbnail = await fileAsset.getThumbnail(size);
         let wrapper = new PixelMapWrapper(thumbnail, px2vp(size.width), px2vp(size.height));
         Log.info(TAG, "Photo: loadPixelMap: size[" + JSON.stringify(size) + "] wrapper[" + JSON.stringify(wrapper) + "]");
 
-        let orientation = mediaItem.orientation || 0;
+        let orientation = 0;
+        if (mediaItem.orientation != undefined && mediaItem.orientation != null && mediaItem.orientation != NaN) {
+            orientation = mediaItem.orientation
+        }
         await Loader.translatePixelMap(wrapper, orientation);
         Log.info(TAG, "Photo: loadPixelMap: final wrapper[" + JSON.stringify(wrapper) + "]");
         return wrapper;
@@ -71,7 +74,7 @@ export class Loader {
         context.drawImage(image.pixelMap, 0, 0, offWidth, offHeight);
         context.restore();
 
-        image.pixelMap && image.pixelMap.release();
+        if(image.pixelMap != null) image.pixelMap.release();
         image.pixelMap = context.getPixelMap(0, 0, offWidth, offHeight);
         image.width = size.width;
         image.height = size.height;

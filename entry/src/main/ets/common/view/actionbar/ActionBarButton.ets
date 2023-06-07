@@ -41,7 +41,7 @@ export struct ActionBarButton {
                     .fontSize($r('sys.float.ohos_id_text_size_body1'))
                     .onClick(() => {
                         this.showPopup = false;
-                        this.onMenuClicked && this.onMenuClicked(menu);
+                        if(this.onMenuClicked != null) this.onMenuClicked(menu);
                     })
                 if (this.moreMenuList.indexOf(menu) != this.moreMenuList.length - 1) {
                     Divider()
@@ -109,7 +109,7 @@ export struct ActionBarButton {
                 this.ActionBarButtonBuilder()
             }
             .onClick(() => {
-                this.onMenuClicked && this.onMenuClicked(this.action)
+                if(this.onMenuClicked != null) this.onMenuClicked(this.action)
             })
         }
     }

@@ -59,7 +59,10 @@ struct VideoBrowser {
         startTrace('VideoBrowserAboutToAppear');
         let param: ParamsInterface = router.getParams();
         if(param.uri != null ) this.uri = param.uri.toString();
-        this.dateAdded = new Number(param.dateAdded).valueOf() || 0;
+        this.dateAdded = 0;
+        if (!Number.isNaN(param.dateAdded)) {
+            this.dateAdded = new Number(param.dateAdded).valueOf()
+        }
         this.previewUri = param.previewUri;
         if (this.uri == undefined) {
             return;

@@ -77,7 +77,10 @@ struct SelectPhotoBrowser {
         });
         let param: ParamsInterface = router.getParams();
         if (param.pageFrom != null) {
-            this.pageFrom = new Number(param.pageFrom).valueOf() || 0;
+            this.pageFrom = 0
+            if (!Number.isNaN(param.pageFrom)) {
+                this.pageFrom = new Number(param.pageFrom).valueOf();
+            }
         }
         if (this.pageFrom == RouterConstants.ENTRY_FROM.DISTRIBUTED) {
             if(param.deviceId != undefined && param.deviceId != null) {
@@ -96,7 +99,11 @@ struct SelectPhotoBrowser {
         }
 
         this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER);
-        this.onPhotoChanged(new Number(param.position).valueOf() || 0);
+        let pos = 0;
+        if (!Number.isNaN(param.position)) {
+            pos = new Number(param.position).valueOf()
+        }
+        this.onPhotoChanged(pos);
         this.isSelected = this.getCurrentPhoto().isSelect;
         this.totalSelectedCount = this.browserDataSource.getSelectedCount();
         if (param.transition != null) {

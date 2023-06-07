@@ -57,7 +57,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
         this.onOperationEnd = this.menuContext.onOperationEnd;
         let onOperationStart = this.menuContext.onOperationStart;
 
-        onOperationStart && onOperationStart();
+        if(onOperationStart != null) onOperationStart();
 
         if (this.menuContext.deviceId != null) {
             this.menuContext.broadCast.emit(BroadcastConstants.SHOW_PROGRESS_DIALOG,
@@ -164,13 +164,16 @@ export class CopyMenuOperation extends ProcessMenuOperation {
         this.onOperatePause();
         let cancelMessage = $r('app.string.copy_cancel_message', this.getExpectProgress().toString());
 
-        if (this.menuContext.deviceId != null) {
-            this.menuContext.broadCast && this.menuContext.broadCast.emit(BroadcastConstants.DOWNLOAD_CANCEL_OPERATE,
-                [cancelMessage, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this)]);
-        } else {
-            this.menuContext.broadCast && this.menuContext.broadCast.emit(BroadcastConstants.CANCEL_OPERATE,
-                [cancelMessage, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this)]);
+        if(this.menuContext.broadCast != null) {
+            if (this.menuContext.deviceId != null) {
+                 this.menuContext.broadCast.emit(BroadcastConstants.DOWNLOAD_CANCEL_OPERATE,
+                    [cancelMessage, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this)]);
+            } else {
+                this.menuContext.broadCast.emit(BroadcastConstants.CANCEL_OPERATE,
+                    [cancelMessage, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this)]);
+            }
         }
+
     }
 
     // Copy cancel callback

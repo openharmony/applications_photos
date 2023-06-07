@@ -87,7 +87,7 @@ export struct EditExitDialog {
                     .height($r('app.float.details_dialog_button_height'))
                     .onClick(() => {
                         this.controller.close();
-                        this.editExitDialogCallback && this.editExitDialogCallback.discardCallback();
+                        if(this.editExitDialogCallback != null) this.editExitDialogCallback.discardCallback();
                         router.back()
                     })
                 }
