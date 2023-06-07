@@ -168,7 +168,7 @@ struct ThirdSelectPhotoGridPage {
             (size: number) => {
                 Log.info(TAG, "ON_LOADING_FINISHED size: " + size);
                 this.isEmpty = size == 0;
-                Log.info(TAG, `isEmpty: ${this.isEmpty}`)
+                Log.info(TAG, "isEmpty: " + this.isEmpty)
             });
         this.isActive = true;
 
