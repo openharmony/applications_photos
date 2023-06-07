@@ -65,7 +65,7 @@ export struct ThirdAlbumGridItem {
         Log.info(TAG, "aboutToAppear + " + this.item.uri)
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (size) => this.updateCardSize())
         this.updateCardSize();
-        this.item.load().then(() => {
+        this.item.load().then<void, void>(() => {
             this.thumbnail = this.item.getThumbnail()
         })
     }

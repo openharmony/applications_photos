@@ -335,7 +335,7 @@ export struct TimelinePage {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.isMediaLibDataChanged = false
             startTrace("reloadTimelineItemData")
-            this.timelineDataSource.reloadTimelineItemData().then((isEmpty) => {
+            this.timelineDataSource.reloadTimelineItemData().then<void, void>((isEmpty) => {
                 finishTrace("reloadTimelineItemData");
                 Log.info(TAG, "onMediaLibDataChange load finish");
                 this.initLoadFinish = true;
@@ -398,7 +398,7 @@ export struct TimelinePage {
         finishTrace('onModeChange');
         mediaObserver.registerObserver(this.dataObserver);
         if (err != null) {
-            getResourceString($r('app.string.copy_failed_single')).then((message: string) => {
+            getResourceString($r('app.string.copy_failed_single')).then<void, void>((message: string) => {
                 showToast(message)
             })
         } else {
@@ -419,7 +419,7 @@ export struct TimelinePage {
         finishTrace('onModeChange');
         mediaObserver.registerObserver(this.dataObserver);
         if (err != null) {
-            getResourceString($r('app.string.move_failed_single')).then((message: string) => {
+            getResourceString($r('app.string.move_failed_single')).then<void, void>((message: string) => {
                 showToast(message)
             })
         }

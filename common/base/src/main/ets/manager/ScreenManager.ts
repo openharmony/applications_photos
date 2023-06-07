@@ -69,7 +69,7 @@ class ScreenManager {
     private statusBarHeight = 0;
     private naviBarHeight = 0;
     private leftBlank: number[] = [0, 0, 0, 0];
-    private events: Map<string, CallbackType[]> = new Map();
+    private events: Map<string, CallbackType[]> = new Map<string, CallbackType[]>();
     private mainWindow: window.Window = undefined;
     private globalThis = GlobalContext.getContext();
 

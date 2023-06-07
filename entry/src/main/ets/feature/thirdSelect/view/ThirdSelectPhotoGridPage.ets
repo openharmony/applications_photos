@@ -87,7 +87,7 @@ struct ThirdSelectPhotoGridPage {
             router.back();
         } else if (action == Action.CANCEL) {
             Log.info(TAG, 'click cancel');
-            let param1: Map<string, string[]> = new Map();
+            let param1: Map<string, string[]> = new Map<string, string[]>();
             param1.set('select-item-list', [] as string[]);
             let abilityResult: common.AbilityResult = {
                 resultCode: 0,
@@ -151,7 +151,7 @@ struct ThirdSelectPhotoGridPage {
         this.groupDataSource.setSelectType(this.filterMediaType);
         Log.info(TAG, "ThirdSelectPhotoGridPage isMultiPick: " + this.isMultiPick + ", " +
                 "isFromWallpaper: " + param.isFromWallpaper + ", maxSelectCount: " + this.maxSelectCount + ", filterMediaType: " + this.filterMediaType);
-        this.groupDataSource.reloadGroupItemData(true).then((isEmpty: boolean) => {
+        this.groupDataSource.reloadGroupItemData(true).then<void, void>((isEmpty: boolean) => {
             this.isEmpty = isEmpty;
             this.selectedCount = this.groupDataSource.getSelectedCount();
             this.groupDataSource.notifyDataReload();
@@ -299,7 +299,7 @@ struct ThirdSelectPhotoGridPage {
 
     private setPickResult(): void {
         let uriArray = this.groupDataSource.getSelectedUris()
-        let param1: Map<string, Object> = new Map();
+        let param1: Map<string, Object> = new Map<string, Object>();
         param1.set('select-item-list', uriArray);
         param1.set('isOriginal', this.isOriginalChecked);
         let abilityResult: common.AbilityResult = {
