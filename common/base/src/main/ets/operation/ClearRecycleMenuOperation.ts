@@ -44,13 +44,17 @@ export class ClearRecycleMenuOperation extends BatchDeleteMenuOperation {
             return;
         }
 
-        this.confirmCallback = this.confirmCallback.bind(this);
-        this.cancelCallback = this.cancelCallback.bind(this);
+        this.confirmCallback = (): void => this.confirmCallbackBindImpl();
+        this.cancelCallback = (): void => this.cancelCallbackBindImpl();
 
         this.menuContext.broadCast.emit(BroadcastConstants.SHOW_DELETE_DIALOG, [$r('app.string.recycleAlbum_clear_message'), $r('app.string.dialog_clear'), this.confirmCallback, this.cancelCallback]);
     }
 
     confirmCallback(): void {
+        this.confirmCallbackBindImpl()
+    }
+
+    protected confirmCallbackBindImpl(): void {
         Log.info(TAG, 'Clear Recycle confirm');
         // 1. Variable initialization
         this.onOperationEnd = this.menuContext.onOperationEnd;

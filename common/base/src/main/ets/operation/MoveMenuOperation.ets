@@ -59,7 +59,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
 
         this.menuContext.broadCast.emit(
             BroadcastConstants.SHOW_PROGRESS_DIALOG, [$r('app.string.move_progress_message', this.albumInfo.displayName),
-        MediaOperationType.Move, this.cancelFunc.bind(this)]);
+        MediaOperationType.Move, (): void => this.cancelFuncBindImpl()]);
 
         if (dataSource == null) {
             this.items = this.menuContext.items;
@@ -89,8 +89,8 @@ export class MoveMenuOperation extends ProcessMenuOperation {
                     this.menuContext.broadCast.emit(BroadcastConstants.FIND_SAME_FILE_DIALOG,
                         [assets, this.count, () => {
                             this.move(assets.sourceAsset, this.albumInfo.relativePath, assets.targetAsset);
-                        }, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this),
-                        this.setFindSameOperation.bind(this)]);
+                        }, (): void => this.onOperateContinueBindImpl(), (): void => this.onOperateCancelledBindImpl(),
+                        (newOp: number): void => this.setFindSameOperationBindImpl(newOp)]);
                     break;
                 case FindSameOperation.REPLACE:
                     this.move(assets.sourceAsset, this.albumInfo.relativePath, assets.targetAsset);
@@ -124,17 +124,25 @@ export class MoveMenuOperation extends ProcessMenuOperation {
     }
 
     cancelFunc(): void {
+        this.cancelFuncBindImpl()
+    }
+
+    private cancelFuncBindImpl(): void {
         Log.info(TAG, "progress cancel");
         this.onOperatePause();
         let cancelMessage = $r('app.string.move_cancel_message', this.getExpectProgress().toString());
         if(this.menuContext.broadCast != null) {
             this.menuContext.broadCast.emit(BroadcastConstants.CANCEL_OPERATE,
-                        [cancelMessage, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this)]);
+                        [cancelMessage, (): void => this.onOperateContinueBindImpl(), (): void => this.onOperateCancelledBindImpl()]);
         }
     }
 
     // Move cancel callback
     onOperateContinue(): void {
+        this.onOperateContinueBindImpl()
+    }
+
+    private onOperateContinueBindImpl(): void {
         Log.info(TAG, 'Operate Continue');
         this.isPause = false;
         this.cyclicOperation();

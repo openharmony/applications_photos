@@ -72,7 +72,10 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
 
     // Asynchronous callback for getSelection
     callback(uris: string[]): void {
+        this.callbackBindImpl(uris)
+    }
 
+    protected callbackBindImpl(uris: string[]): void {
     }
 
     onCompleted(): void {
@@ -142,6 +145,10 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
 
     // Operate cancel callback
     onOperateCancelled(): void {
+        this.onOperateCancelledBindImpl()
+    }
+
+    protected onOperateCancelledBindImpl(): void {
         Log.info(TAG, 'Operate Cancel');
         this.isCancelled = true;
         this.onProcessDone();
@@ -162,6 +169,10 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
     }
 
     setFindSameOperation(newOperation: number): void {
+        this.setFindSameOperationBindImpl(newOperation)
+    }
+
+    protected setFindSameOperationBindImpl(newOperation: number): void {
         Log.info(TAG, "setFindSameOperation " + newOperation);
         this.findSameOperation = newOperation;
     }

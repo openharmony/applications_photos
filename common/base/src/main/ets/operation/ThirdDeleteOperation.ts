@@ -27,7 +27,7 @@ const TAG = "ThirdDeleteMenuOperation"
 export class ThirdDeleteOperation extends ProcessMenuOperation {
   constructor(menuContext: MenuContext) {
     super(menuContext);
-    this.callback = this.callback.bind(this);
+    this.callback = (uris: string[]): void => this.callbackBindImpl(uris);
   }
 
   doAction(): void {
@@ -48,8 +48,8 @@ export class ThirdDeleteOperation extends ProcessMenuOperation {
       return;
     }
 
-    this.confirmCallback = this.confirmCallback.bind(this);
-    this.cancelCallback = this.cancelCallback.bind(this);
+    this.confirmCallback = (): void => this.confirmCallbackBindImpl();
+    this.cancelCallback = (): void => this.cancelCallbackBindImpl();
 
     let resource: Resource = this.getDeleteMessageResource(dataSource);
     let deleteResource: Resource = $r('app.string.dialog_delete');
@@ -76,6 +76,10 @@ export class ThirdDeleteOperation extends ProcessMenuOperation {
   }
 
   confirmCallback(): void {
+    this.confirmCallbackBindImpl()
+  }
+
+  private confirmCallbackBindImpl(): void {
     Log.info(TAG, 'Batch delete confirm');
     AppStorage.SetOrCreate("isDelete", 1);
 
@@ -115,6 +119,10 @@ export class ThirdDeleteOperation extends ProcessMenuOperation {
   }
 
   cancelCallback(): void {
+    this.cancelCallbackBindImpl()
+  }
+
+  private cancelCallbackBindImpl(): void {
     Log.info(TAG, 'Batch delete cancel');
     let onOperationCancel: Function = this.menuContext.onOperationCancel;
     if(onOperationCancel != null) onOperationCancel();
