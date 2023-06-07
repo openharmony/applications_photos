@@ -162,20 +162,9 @@ struct PhotoBrowser {
             if (currentPhoto == undefined) {
                 return;
             }
-            // Hack with TS type system
-            let info: object | string = null
-            if (this.albumInfo != undefined && this.albumInfo != null && this.albumInfo.id != undefined && this.albumInfo.id != null) {
-                info = this.albumInfo.id
-            } else { 
-                if (this.albumInfo != undefined && this.albumInfo != null) {
-                    info = this.albumInfo.id
-                } else {
-                    info = this.albumInfo
-                }
-            }
             menuContext.withItems([currentPhoto])
                 .withDeletePageFromType(BroadcastConstants.DELETE_FROM_BROWSER)
-                .withAlbumId(info as string)
+                .withAlbumId( Boolean<string>(this.albumInfo.id).valueOf() ? this.albumInfo.id : (Boolean<SimpleAlbumDataItem>(this.albumInfo).valueOf() ? this.albumInfo.toString() : "") )
                 .withBroadCast(this.broadCast)
                 .withOperationEndCallback(this.onDeleteEnd.bind(this))
             menuOperation = new BatchDeleteMenuOperation(menuContext);
