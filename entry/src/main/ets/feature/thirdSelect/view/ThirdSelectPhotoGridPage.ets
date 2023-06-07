@@ -131,7 +131,7 @@ struct ThirdSelectPhotoGridPage {
             this.bundleName = new String(param.bundleName).valueOf();
             this.isMultiPick = new Boolean(param.isMultiPick).valueOf();
             this.isFromFa = new Boolean(param.isFromFa).valueOf();
-            if (Boolean(param.maxSelectCount).valueOf() && param.maxSelectCount > 0) {
+            if (new Boolean(param.maxSelectCount).valueOf() && param.maxSelectCount > 0) {
                 this.maxSelectCount = 0;
                 if (!Number.isNaN(param.maxSelectCount)) {
                     this.maxSelectCount = new Number(param.maxSelectCount).valueOf()
