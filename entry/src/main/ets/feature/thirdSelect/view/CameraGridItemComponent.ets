@@ -68,11 +68,11 @@ export struct CameraGridItemComponent {
     .backgroundColor($r("app.color.recycle_album_bg_color"))
     .justifyContent(FlexAlign.Center)
     .alignItems(HorizontalAlign.Center)
-    .onClick((event: ClickEvent) => {
-      this.jumpCameraTakephoto().then((result: common.AbilityResult) => {
+    .onClick((event: ClickEvent): void => {
+      this.jumpCameraTakephoto().then((result: common.AbilityResult): void => {
         Log.info(TAG, 'resourceUri = ' + result?.want?.parameters?.resourceUri);
         this.resultUri = result?.want?.parameters?.resourceUri as string;
-      }).catch((err) => {
+      }).catch((err: Error): void => {
         Log.error(TAG, 'jumpCameraTakephoto err: ' + err);
       });
     })
@@ -114,7 +114,7 @@ export struct CameraGridItemComponent {
         } as Want
     };
     let appContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
-    appContext.terminateSelfWithResult(abilityResult).then((result) => {
+    appContext.terminateSelfWithResult(abilityResult).then((result: void): void => {
       Log.info(TAG, 'terminateSelf result: ' + result);
     });
   }

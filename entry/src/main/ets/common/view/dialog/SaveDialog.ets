@@ -55,7 +55,7 @@ export struct SaveDialog {
                             }
                             .height($r('app.float.details_dialog_button_height'))
                             .width('100%')
-                            .onClick(() => {
+                            .onClick((): void => {
                                 this.controller.close()
                             }).backgroundColor($r('app.color.transparent'))
                         }
@@ -81,7 +81,7 @@ export struct SaveDialog {
                             }
                             .height($r('app.float.details_dialog_button_height'))
                             .width('100%')
-                            .onClick(() => {
+                            .onClick((): void => {
                                 this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                                 this.controller.close()
                                 if(this.saveDialogCallback != null) this.saveDialogCallback.replaceOriginalCallback()
@@ -110,7 +110,7 @@ export struct SaveDialog {
                             }
                             .height($r('app.float.details_dialog_button_height'))
                             .width('100%')
-                            .onClick(() => {
+                            .onClick((): void => {
                                 this.controller.close()
                                 this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                                 if(this.saveDialogCallback != null) this.saveDialogCallback.saveAsNewCallback()
@@ -136,7 +136,7 @@ export struct SaveDialog {
                     }
                     .height($r('app.float.details_dialog_button_height'))
                     .margin({ bottom: $r('app.float.adjust_text_margin_bottom') })
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.controller.close()
                         this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                         if(this.saveDialogCallback != null) this.saveDialogCallback.saveAsNewCallback()
@@ -150,7 +150,7 @@ export struct SaveDialog {
                     }
                     .height($r('app.float.details_dialog_button_height'))
                     .margin({ bottom: $r('app.float.adjust_text_margin_bottom') })
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                         this.controller.close()
                         if(this.saveDialogCallback != null) this.saveDialogCallback.replaceOriginalCallback()
@@ -164,7 +164,7 @@ export struct SaveDialog {
                     }
                     .height($r('app.float.details_dialog_button_height'))
                     .margin({ bottom: $r('app.float.adjust_text_padding_bottom_isVertical') })
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.controller.close()
                     }).backgroundColor($r('app.color.transparent'))
                 }

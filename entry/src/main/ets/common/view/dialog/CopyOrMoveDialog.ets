@@ -56,7 +56,7 @@ export struct CopyOrMoveDialog {
             }.alignItems(VerticalAlign.Center)
             .height($r('app.float.dialog_list_card_height'))
             .width('100%')
-            .onClick(() => {
+            .onClick((): void => {
                 this.controller.close()
                 this.operateParam.copyFunc();
             })
@@ -83,7 +83,7 @@ export struct CopyOrMoveDialog {
             .width('100%')
             .margin({
                 bottom: $r('app.float.select_model_dialog_margin') })
-            .onClick(() => {
+            .onClick((): void => {
                 this.controller.close()
                 this.operateParam.moveFunc();
             })
@@ -99,7 +99,7 @@ export struct CopyOrMoveDialog {
                 }
                 .backgroundColor($r('app.color.transparent'))
                 .height($r('app.float.details_dialog_button_height'))
-                .onClick(() => {
+                .onClick((): void => {
                     this.controller.close()
                 })
             }.width('100%')

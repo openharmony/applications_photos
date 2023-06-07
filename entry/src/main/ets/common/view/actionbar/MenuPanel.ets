@@ -34,7 +34,7 @@ export struct MenuPanel {
     private onActionBarPropChanged(): void {
         this.menuList = this.actionBarProp.getMenuList();
         Log.info(this.TAG, "onActionBarPropChanged, menu's size: " + this.menuList.length);
-        this.menuList.forEach((menu: Action) => {
+        this.menuList.forEach((menu: Action): void => {
             Log.info(this.TAG, "ActionId: " + menu.actionID);
         })
     }
@@ -45,7 +45,7 @@ export struct MenuPanel {
 
     build() {
         Row() {
-            ForEach(this.actionBarProp.getMenuList(), (menu: Action) => {
+            ForEach(this.actionBarProp.getMenuList(), (menu: Action): void => {
                 ActionBarButton({
                     res: menu.iconRes,
                     action: menu,
@@ -53,7 +53,7 @@ export struct MenuPanel {
                     isAutoTint: menu.isAutoTint,
                     colorMode: this.actionBarProp.getColorMode()
                 })
-            }, menu => JSON.stringify(menu.actionID))
+            }, (menu: Action): string => { return JSON.stringify(menu.actionID) })
         }
         .alignItems(VerticalAlign.Center)
     }

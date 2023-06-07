@@ -99,32 +99,32 @@ export struct TimelinePage {
         Log.info(TAG, 'aboutToAppear');
         this.moreMenuList = [Action.MOVE_INVALID, Action.COPY_INVALID, Action.INFO_INVALID];
         mediaObserver.registerObserver(this.dataObserver);
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.initGridRowCount());
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => this.initGridRowCount());
 
         this.appBroadcast.on(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
         this.appBroadcast.on(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
         this.appBroadcast.on(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
         this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
-        this.appBroadcast.on(BroadcastConstants.RESET_ZERO, (pageNumber: number) => {
+        this.appBroadcast.on(BroadcastConstants.RESET_ZERO, (pageNumber: number): void => {
             if (pageNumber == Constants.TIMELINE_PAGE_INDEX) {
                 this.scroller.scrollEdge(Edge.Top);
             }
         });
-        this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
+        this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number): void => {
             Log.info(TAG, "ON_LOADING_FINISHED size: " + size);
         });
-        this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect());
-        this.broadCast.on(BroadcastConstants.GROUP_SELECT, () => this.onSelect());
+        this.broadCast.on(BroadcastConstants.SELECT, (index: number): void => this.onSelect());
+        this.broadCast.on(BroadcastConstants.GROUP_SELECT, (): void => this.onSelect());
 
-        this.broadCast.on(BroadcastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
+        this.broadCast.on(BroadcastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaDataItem): void => {
             this.jumpToPhotoBrowser(name, item)
         });
 
-        this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
+        this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem): void => {
             this.jumpToThirdPhotoBrowser(name, item)
         });
 
-        this.broadCast.on(BroadcastConstants.INIT_DATE_TEXT, () => {
+        this.broadCast.on(BroadcastConstants.INIT_DATE_TEXT, (): void => {
             this.dateText = DateUtil.getLocalizedYearAndMonth(this.timelineDataSource.groupItem[0].dateAdded);
         })
 
@@ -335,7 +335,7 @@ export struct TimelinePage {
         if (this.isActive && this.isMediaLibDataChanged) {
             this.isMediaLibDataChanged = false
             startTrace("reloadTimelineItemData")
-            this.timelineDataSource.reloadTimelineItemData().then<void, void>((isEmpty) => {
+            this.timelineDataSource.reloadTimelineItemData().then<void, void>((isEmpty: boolean): void => {
                 finishTrace("reloadTimelineItemData");
                 Log.info(TAG, "onMediaLibDataChange load finish");
                 this.initLoadFinish = true;
@@ -357,7 +357,7 @@ export struct TimelinePage {
             this.broadCast.emit(BroadcastConstants.SHOW_DETAIL_DIALOG, [items[0], false]);
         } else {
             let size = 0;
-            items.forEach((item) => {
+            items.forEach((item: MediaDataItem): void => {
                 Log.debug(TAG, "openDetailsDialog item.size: " + item.size);
                 size = size + item.size;
             })
@@ -379,7 +379,7 @@ export struct TimelinePage {
         mediaObserver.registerObserver(this.dataObserver);
         animateTo({
             duration: Constants.DELETE_ANIMATE_DURATION
-        }, () => {
+        }, (): void => {
             this.timelineDataSource.dataRemove();
             this.isHideScrollBar = (this.timelineDataSource.totalCount() <= Constants.SCROLL_BAR_VISIBLE_THRESHOLD);
         })
@@ -398,11 +398,11 @@ export struct TimelinePage {
         finishTrace('onModeChange');
         mediaObserver.registerObserver(this.dataObserver);
         if (err != null) {
-            getResourceString($r('app.string.copy_failed_single')).then<void, void>((message: string) => {
+            getResourceString($r('app.string.copy_failed_single')).then<void, void>((message: string): void => {
                 showToast(message)
             })
         } else {
-            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.timelineDataSource.dataReload());
+            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, (): void => this.timelineDataSource.dataReload());
             this.isHideScrollBar = (this.timelineDataSource.totalCount() <= Constants.SCROLL_BAR_VISIBLE_THRESHOLD);
         }
     }
@@ -419,7 +419,7 @@ export struct TimelinePage {
         finishTrace('onModeChange');
         mediaObserver.registerObserver(this.dataObserver);
         if (err != null) {
-            getResourceString($r('app.string.move_failed_single')).then<void, void>((message: string) => {
+            getResourceString($r('app.string.move_failed_single')).then<void, void>((message: string): void => {
                 showToast(message)
             })
         }
@@ -489,9 +489,8 @@ export struct TimelinePage {
 
                     Stack() {
                         Grid(this.scroller) {
-                            LazyForEach(this.timelineDataSource, (item: LazyItem<DateAdded>) => {
-                                if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null) &&
-                                    item.get().viewType == ViewType.GROUP_TITLE) {
+                            LazyForEach(this.timelineDataSource, (item: LazyItem<DateAdded>): void => {
+                                if (item != null && item.get() != null && item.get().viewType == ViewType.GROUP_TITLE) {
                                     GridItem() {
                                         TimelineTitleComponent({
                                             lazyItem: (item as LazyItem<TimelineDataItem>),
@@ -512,7 +511,7 @@ export struct TimelinePage {
                                     .columnStart((item as LazyItem<MediaDataItem>).get().index % this.gridRowCount)
                                     .columnEnd((item as LazyItem<MediaDataItem>).get().index % this.gridRowCount)
                                 }
-                            }, (item): string => {
+                            }, (item: LazyItem<DateAdded>): string => {
                                 if (item == null || item.get() == null) {
                                     return JSON.stringify(item)
                                 }
@@ -523,7 +522,7 @@ export struct TimelinePage {
                         .columnsGap(Constants.GRID_GUTTER)
                         .rowsGap(Constants.GRID_GUTTER)
                         .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
-                        .onScrollIndex((index: number) => {
+                        .onScrollIndex((index: number): void => {
                             Log.debug(TAG, "onScrollIndex index " + index)
                             let item: DateAdded = this.timelineDataSource.getDataByIndex(index);
                             if (item != null) {

@@ -63,7 +63,7 @@ export struct CancelOperationDialog {
                     })
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         Log.info(this.TAG, 'click continue')
                         this.cancelParam.continueFunc();
                         this.controller.close()
@@ -92,7 +92,7 @@ export struct CancelOperationDialog {
                     })
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         Log.info(this.TAG, 'click cancel')
                         this.cancelParam.cancelFunc();
                         this.controller.close()

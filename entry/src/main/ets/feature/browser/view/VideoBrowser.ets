@@ -91,15 +91,15 @@ struct VideoBrowser {
             Video({ src: this.uri, controller: this.myVideoController })
                 .controls(this.isShowBar)
                 .objectFit(ImageFit.Contain)
-                .onClick(() => {
+                .onClick((): void => {
                     this.isShowBar = !this.isShowBar;
                 })
-                .onStart(() => {
+                .onStart((): void => {
                     screenManager.setKeepScreenOn();
                 })
-                .onPause(() => {
+                .onPause((): void => {
                 })
-                .onFinish(() => {
+                .onFinish((): void => {
                     this.isShowBar = true;
                     screenManager.setKeepScreenOff();
                 })

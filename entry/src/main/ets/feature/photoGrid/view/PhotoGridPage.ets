@@ -191,7 +191,7 @@ struct PhotoGridPage {
             this.broadCast.emit(BroadcastConstants.SHOW_DETAIL_DIALOG, [items[0], false]);
         } else {
             let size = 0;
-            items.forEach((item) => {
+            items.forEach((item: MediaDataItem): void => {
                 Log.debug(TAG, "openDetailsDialog item.size: " + item.size);
                 size = size + item.size;
             })
@@ -239,11 +239,11 @@ struct PhotoGridPage {
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
         if (err != null) {
-            getResourceString($r('app.string.copy_failed_single')).then((message: string) => {
+            getResourceString($r('app.string.copy_failed_single')).then((message: string): void => {
                 showToast(message);
             })
         } else {
-            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.groupDataSource.dataReload(true));
+            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, (): void => this.groupDataSource.dataReload(true));
             this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
         }
     }
@@ -264,13 +264,13 @@ struct PhotoGridPage {
                 let message = str.replace('%d', count.toString());
                 showToast(message);
             } else {
-                getResourceString($r('app.string.download_failed_single')).then((message: string) => {
+                getResourceString($r('app.string.download_failed_single')).then((message: string): void => {
                     showToast(message);
                 })
             }
             ;
         } else {
-            getResourceString($r('app.string.download_progress_done')).then((message: string) => {
+            getResourceString($r('app.string.download_progress_done')).then((message: string): void => {
                 showToast(message);
             })
         }
@@ -286,11 +286,11 @@ struct PhotoGridPage {
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
         if (err != null) {
-            getResourceString($r('app.string.move_failed_single')).then((message: string) => {
+            getResourceString($r('app.string.move_failed_single')).then((message: string): void => {
                 showToast(message);
             })
         } else {
-            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => this.groupDataSource.dataReload(true));
+            animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, (): void => this.groupDataSource.dataReload(true));
         }
     }
 
@@ -303,7 +303,7 @@ struct PhotoGridPage {
         Log.info(TAG, "onDeleteEnd");
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
-        animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, () => {
+        animateTo({ duration: Constants.DELETE_ANIMATE_DURATION }, (): void => {
             this.groupDataSource.dataRemove();
             this.isEmpty = this.groupDataSource.groupDataItem.length==0 ? true : false;
             this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
@@ -434,15 +434,15 @@ struct PhotoGridPage {
         this.onMenuClicked = this.onMenuClicked.bind(this);
         mediaObserver.registerObserver(this.dataObserver);
 
-        this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect());
-        this.broadCast.on(BroadcastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
+        this.broadCast.on(BroadcastConstants.SELECT, (index: number): void => { this.onSelect() });
+        this.broadCast.on(BroadcastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaDataItem): void => {
             this.jumpToPhotoBrowser(name, item);
         });
 
-        this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
+        this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem): void => {
             this.jumpToThirdPhotoBrowser(name, item);
         });
-        this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
+        this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number): void => {
             Log.info(TAG, "ON_LOADING_FINISHED size: " + size);
         });
         this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
@@ -452,7 +452,7 @@ struct PhotoGridPage {
             this.appBroadcast.on(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
         }
 
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => {
             this.initGridRowCount();
         });
 
@@ -500,7 +500,7 @@ struct PhotoGridPage {
 
     private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
-            this.groupDataSource.reloadGroupItemData(true).then((isEmpty) => {
+            this.groupDataSource.reloadGroupItemData(true).then((isEmpty: boolean): void => {
                 Log.info(TAG, "onMediaLibDataChange load finish");
                 this.isEmpty = isEmpty;
                 this.groupDataSource.notifyDataReload();
@@ -600,7 +600,7 @@ struct PhotoGridPage {
             } else {
                 Stack() {
                     Grid(this.scroller) {
-                        LazyForEach(this.groupDataSource, (item: LazyItem<MediaDataItem>) => {
+                        LazyForEach(this.groupDataSource, (item: LazyItem<MediaDataItem>): void => {
                             GridItem() {
                                 ImageGridItemComponent({
                                     lazyItem: item,
@@ -612,8 +612,7 @@ struct PhotoGridPage {
                             .aspectRatio(1)
                             .columnStart(item.get().index % this.gridRowCount)
                             .columnEnd(item.get().index % this.gridRowCount)
-                        }, (item: LazyItem<MediaDataItem>) => item == null && (item.get() != undefined && item.get() != null) ?
-                            JSON.stringify(item) : item.getHashCode())
+                        }, (item: LazyItem<MediaDataItem>): string => item == null && item.get() != null ? JSON.stringify(item) : item.getHashCode())
                     }
                     .columnsTemplate('1fr '.repeat(this.gridRowCount))
                     .columnsGap(Constants.GRID_GUTTER)

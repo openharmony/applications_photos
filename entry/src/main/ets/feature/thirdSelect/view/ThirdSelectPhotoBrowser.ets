@@ -70,7 +70,7 @@ struct ThirdSelectPhotoBrowser {
         Log.info(TAG, 'photoBrowser aboutToAppear');
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000');
         this.browserBackgroundColor = $r('app.color.black');
-        mMultimodalInputManager.registerListener((control: number) => {
+        mMultimodalInputManager.registerListener((control: number): void => {
             Log.info(TAG, "key control : " + control + " index " + this.currentIndex);
             if (control == 0) {
                 if (this.currentIndex > 0) {
@@ -102,20 +102,20 @@ struct ThirdSelectPhotoBrowser {
 
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
-        this.broadCast.on(PhotoConstants.TOGGLE_BAR, () => {
+        this.broadCast.on(PhotoConstants.TOGGLE_BAR, (): void => {
             this.onToggleBars();
         });
-        this.broadCast.on(PhotoConstants.PULL_DOWN_END, () => {
+        this.broadCast.on(PhotoConstants.PULL_DOWN_END, (): void => {
             this.onBackPress();
         });
 
-        this.broadCast.on(PhotoConstants.DATA_SIZE_CHANGED, (size: number) => {
+        this.broadCast.on(PhotoConstants.DATA_SIZE_CHANGED, (size: number): void => {
             this.onDataSizeChanged(size);
         });
-        this.broadCast.on(PhotoConstants.DATA_CONTENT_CHANGED, () => {
+        this.broadCast.on(PhotoConstants.DATA_CONTENT_CHANGED, (): void => {
             this.onPhotoChanged(this.currentIndex);
         });
-        this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean) => {
+        this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean): void => {
             Log.info(TAG, "set swiper swipe " + value);
             this.canSwipe = value;
         });
@@ -254,7 +254,7 @@ struct ThirdSelectPhotoBrowser {
         try {
             Log.info(TAG, "grant permission success.");
             let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
-            appContext.terminateSelfWithResult(abilityResult).then((result) => {
+            appContext.terminateSelfWithResult(abilityResult).then((result: void): void => {
                 Log.info(TAG, "terminateSelf result: " + result);
             });
         } catch (err) {

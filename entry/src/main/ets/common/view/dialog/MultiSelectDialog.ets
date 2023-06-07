@@ -93,7 +93,7 @@ export struct MultiSelectDialog {
                 }
                 .backgroundColor($r('app.color.transparent'))
                 .height($r('app.float.details_dialog_button_height'))
-                .onClick(() => {
+                .onClick((): void => {
                     this.controller.close()
                 })
             }

@@ -151,7 +151,7 @@ struct ThirdSelectPhotoGridPage {
         this.groupDataSource.setSelectType(this.filterMediaType);
         Log.info(TAG, "ThirdSelectPhotoGridPage isMultiPick: " + this.isMultiPick + ", " +
                 "isFromWallpaper: " + param.isFromWallpaper + ", maxSelectCount: " + this.maxSelectCount + ", filterMediaType: " + this.filterMediaType);
-        this.groupDataSource.reloadGroupItemData(true).then<void, void>((isEmpty: boolean) => {
+        this.groupDataSource.reloadGroupItemData(true).then<void, void>((isEmpty: boolean): void => {
             this.isEmpty = isEmpty;
             this.selectedCount = this.groupDataSource.getSelectedCount();
             this.groupDataSource.notifyDataReload();
@@ -160,12 +160,12 @@ struct ThirdSelectPhotoGridPage {
         this.initGridRowCount();
 
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect(index));
-        this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
+        this.broadCast.on(BroadcastConstants.SELECT, (index: number): Promise<void> => { return this.onSelect(index) });
+        this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem): void => {
             this.jumpToThirdPhotoBrowser(name, item);
         })
         this.broadCast.on(Constants.ON_LOADING_FINISHED,
-            (size: number) => {
+            (size: number): void => {
                 Log.info(TAG, "ON_LOADING_FINISHED size: " + size);
                 this.isEmpty = size == 0;
                 Log.info(TAG, `isEmpty: ${this.isEmpty}`)
@@ -258,7 +258,7 @@ struct ThirdSelectPhotoGridPage {
                     }
                     .aspectRatio(1)
                 }
-                LazyForEach(this.groupDataSource, (item: LazyItem<MediaDataItem>) => {
+                LazyForEach(this.groupDataSource, (item: LazyItem<MediaDataItem>): void => {
                     GridItem() {
                         ImageGridItemComponent({
                             lazyItem: item,
@@ -268,8 +268,8 @@ struct ThirdSelectPhotoGridPage {
                             isSelectUpperLimited: $isSelectUpperLimited
                         })
                     }
-            .aspectRatio(1)
-                }, (item: LazyItem<MediaDataItem>) => item == null && (item.get() != undefined && item.get() != null) ? JSON.stringify(item) : item.getHashCode())
+		    .aspectRatio(1)
+                }, (item: LazyItem<MediaDataItem>): string => item == null && item.get() != null ? JSON.stringify(item) : item.getHashCode())
             }
             .columnsTemplate('1fr '.repeat(this.gridRowCount))
             .columnsGap(Constants.GRID_GUTTER)
@@ -312,7 +312,7 @@ struct ThirdSelectPhotoGridPage {
         let self = this;
         if (uriArray == null && uriArray == undefined) {
             let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
-            appContext.terminateSelfWithResult(abilityResult).then((result) => {
+            appContext.terminateSelfWithResult(abilityResult).then((result: void): void => {
                 Log.info(TAG, "terminateSelfWithResult result: " + result);
             });
         } else {
@@ -320,7 +320,7 @@ struct ThirdSelectPhotoGridPage {
             try {
                 Log.info(TAG, "grant permission success.");
                 let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
-                appContext.terminateSelfWithResult(abilityResult).then((result) => {
+                appContext.terminateSelfWithResult(abilityResult).then((result: void): void => {
                     Log.info(TAG, "terminateSelfWithResult result: " + result);
                 });
             } catch (err) {

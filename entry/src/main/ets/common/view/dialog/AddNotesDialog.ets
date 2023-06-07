@@ -44,7 +44,7 @@ export struct AddNotesDialog {
                         Image($r('app.media.ic_gallery_public_cancel'))
                     }.height($r('app.float.icon_size'))
                     .width($r('app.float.icon_size'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         if(this.dialogCallback != null) this.dialogCallback.cancelCallback();
                         this.controller.close()
                     })
@@ -57,7 +57,7 @@ export struct AddNotesDialog {
                         .fontColor($r('app.color.text_input_font_color_182431'))
                         .maxLength(Constants.ADD_NOTES_MAX_LENGTH)
                         .enterKeyType(EnterKeyType.Done)
-                        .onChange((value: string) => {
+                        .onChange((value: string): void => {
                             Log.info(this.TAG, 'TextInput onChange : ' + value)
                             this.inputNote = value
                             this.isNull = this.inputNote === '';
@@ -69,12 +69,12 @@ export struct AddNotesDialog {
                         Image($r('app.media.ic_gallery_public_ok'))
                     }.height($r('app.float.icon_size'))
                     .width($r('app.float.icon_size'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         let check: RegExp = new RegExp("/[\\.\\\\/:*?<>\"|\[\]{}\s]/");
                         let passCheck = check.test(this.inputNote)
                         if (passCheck) {
                             getResourceString($r('app.string.specific_characters_not_supported'))
-                                .then((message: string) => {
+                                .then((message: string): void => {
                                     showToast(message)
                                 })
                             this.controller.close()

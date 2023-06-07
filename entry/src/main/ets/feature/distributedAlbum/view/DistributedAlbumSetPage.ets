@@ -83,7 +83,7 @@ struct DistributedAlbumSetPage {
         }
 
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
+        this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number): void => {
             Log.info(TAG, 'ON_LOADING_FINISHED size: ' + size);
             this.isEmpty = size == 0;
         });
@@ -168,7 +168,7 @@ struct DistributedAlbumSetPage {
 
     private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
-            this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
+            this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean): void => {
                 this.isEmpty = isEmpty;
                 this.albumsDataSource.notifyDataReload();
             })
@@ -193,9 +193,9 @@ struct DistributedAlbumSetPage {
                     NoPhotoIndexComponent({ index: Constants.DISTRIBUTED_ALBUM_PAGE_INDEX })
                 } else {
                     Grid(this.scroller) {
-                        LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
-                            if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null)){
-                                if ((item != undefined && item != null) && item.index == 0) {
+                        LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>): void => {
+                            if (item != null && item.get() != null) {
+                                if (item != null && item.index == 0) {
                                     GridItem() {
                                         AlbumGridItemTraditionalStyle({
                                             item: item.get(),
@@ -215,8 +215,7 @@ struct DistributedAlbumSetPage {
                                     }
                                 }
                             }
-                        }, (item: LazyItem<AlbumDataItem>) => (item != undefined && item != null) && (item.get() != undefined && item.get() != null) ?
-                            item.getHashCode() : JSON.stringify(item))
+                        }, (item: LazyItem<AlbumDataItem>): string => item != null && item.get() != null ? item.getHashCode() : JSON.stringify(item))
                     }
                     .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
                     .padding({

@@ -68,7 +68,7 @@ struct MediaOperationPage {
         this.loadAlbums()
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
-        this.broadCast.on(BroadcastConstants.MEDIA_OPERATION, (albumInfo: SimpleAlbumDataItem, completedFunc?: Function) => {
+        this.broadCast.on(BroadcastConstants.MEDIA_OPERATION, (albumInfo: SimpleAlbumDataItem, completedFunc?: Function): void => {
             router.back({
                 uri: '',
                 params: {
@@ -82,7 +82,7 @@ struct MediaOperationPage {
     }
 
     private loadAlbums(): void {
-        this.albumsDataSource.reloadAlbumListItemData().then((isEmpty: boolean) => {
+        this.albumsDataSource.reloadAlbumListItemData().then((isEmpty: boolean): void => {
             this.loadingFinish = true
             this.albumsDataSource.notifyDataReload()
         })
@@ -169,12 +169,11 @@ struct MediaOperationPage {
                         alignItems: ItemAlign.Center
                     }) {
                         List() {
-                            LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
+                            LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>): void => {
                                 ListItem() {
                                     AlbumListCard({ item: item.get() })
                                 }
-                            }, (item: LazyItem<AlbumDataItem>) => (item == null) && (item.get() != undefined && item.get() != null) ?
-                                JSON.stringify(item) : item.getHashCode())
+                            }, (item: LazyItem<AlbumDataItem>): string => (item == null) && item.get() != null ? JSON.stringify(item) : item.getHashCode())
                         }
                         .divider({
                             strokeWidth: 1,

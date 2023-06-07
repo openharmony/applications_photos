@@ -39,7 +39,7 @@ export struct RenameDialog {
         this.inputName = this.renameFileName;
         this.isNull = this.inputName === '';
         if (this.inputName.length === Constants.RENAME_MAX_LENGTH) {
-            getResourceString($r('app.string.Maximum_length_reached')).then<void, void>((message: string) => {
+            getResourceString($r('app.string.Maximum_length_reached')).then<void, void>((message: string): void => {
                 showToast(message)
             });
         }
@@ -67,11 +67,11 @@ export struct RenameDialog {
                         .maxLength(Constants.RENAME_MAX_LENGTH)
                         .enterKeyType(EnterKeyType.Done)
                         .backgroundColor($r('app.color.transparent'))
-                        .onChange((value: string) => {
+                        .onChange((value: string): void => {
                             Log.info(this.TAG, "TextInput onChange : " + value)
                             this.inputName = value
                             if (value.length === Constants.RENAME_MAX_LENGTH) {
-                                getResourceString($r('app.string.Maximum_length_reached')).then<void, void>((message: string) => {
+                                getResourceString($r('app.string.Maximum_length_reached')).then<void, void>((message: string): void => {
                                     showToast(message)
                                 });
                             }
@@ -103,7 +103,7 @@ export struct RenameDialog {
                     .margin({ right: $r('app.float.details_dialog_button_margin_right') })
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         if(this.dialogCallback != null) this.dialogCallback.cancelCallback();
                         this.controller.close()
                     })
@@ -129,11 +129,11 @@ export struct RenameDialog {
                     .margin({ right: $r('app.float.details_dialog_button_margin_left') })
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         let check: RegExp = new RegExp("/[\\.\\\\/:*?<>\"|\[\]{}\s]/");
                         let passCheck = check.test(this.inputName);
                         if (passCheck) {
-                            getResourceString($r('app.string.specific_characters_not_supported')).then<void, void>((message: string) => {
+                            getResourceString($r('app.string.specific_characters_not_supported')).then<void, void>((message: string): void => {
                                 showToast(message)
                             });
                             return;

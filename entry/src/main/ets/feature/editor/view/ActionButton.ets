@@ -65,7 +65,7 @@ export struct ActionButton {
         }
         .height(this.text != undefined ? this.heightOfActionButton : $r('app.float.buttonWithoutText'))
         .width(this.text != undefined ? this.widthOfActionButton : $r('app.float.buttonWithoutText'))
-        .onClick(() => {
+        .onClick((): void => {
             this.broadCast.emit(Constants.UPDATE_MENU, [this.actionID]);
         })
     }

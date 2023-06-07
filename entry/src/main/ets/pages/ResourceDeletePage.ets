@@ -60,7 +60,7 @@ struct ResourceDeletePage {
     Log.error(TAG, "aboutToAppear uris : " + JSON.stringify(uris));
     let mediaDataItems: MediaDataItem[] = [];
     if (uris != undefined && uris.length > 0) {
-      uris.forEach((uri: string, index: number) => {
+      uris.forEach((uri: string, index: number): void => {
 
         let nullArray: string[] = [];
         let mediaDataItem: MediaDataItem = new MediaDataItem("",nullArray,"",1);

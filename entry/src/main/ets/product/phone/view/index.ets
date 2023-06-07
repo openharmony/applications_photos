@@ -131,7 +131,7 @@ struct IndexPage {
                 .barWidth(0)
                 .barHeight(0)
                 .flexGrow(1)
-                .onChange((index: number) => {
+                .onChange((index: number): void => {
                     this.resetTabState(this.currentIndex)
                     this.onTabChanged(index);
                     Log.info(this.TAG, "Switch to Tab " + this.currentIndex + ".")

@@ -44,14 +44,14 @@ export struct TitleBar {
 
     saveAsNewCallback(): void {
         Log.debug(this.TAG, 'saveAsNewCallback called');
-        PhotoEditorManager.getInstance().save(false).then<void, void>((id: number) => {
+        PhotoEditorManager.getInstance().save(false).then<void, void>((id: number): void => {
             this.saveImageCallback(id)
         });
     }
 
     replaceOriginalCallback(): void {
         Log.debug(this.TAG, 'replaceOriginalCallback called');
-        PhotoEditorManager.getInstance().save(true).then<void, void>((id: number) => {
+        PhotoEditorManager.getInstance().save(true).then<void, void>((id: number): void => {
             this.saveImageCallback(id)
         });
     }
@@ -64,7 +64,7 @@ export struct TitleBar {
         Log.info(this.TAG, "saveImageCallback id = " + id);
         if (id < 0) {
             this.broadCast.emit(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
-            getResourceString($r('app.string.edit_photo_save_fail')).then<void, void>((message: string) => {
+            getResourceString($r('app.string.edit_photo_save_fail')).then<void, void>((message: string): void => {
                 showToast(message)
             })
             router.back();
@@ -140,7 +140,7 @@ export struct TitleBar {
                             left: $r('app.float.bottom_bar_padding'),
                             right: $r('app.float.adjust_text_margin_left')
                         })
-                        .onClick(() => {
+                        .onClick((): void => {
                             this.onBackClicked()
                         })
 
@@ -177,7 +177,7 @@ export struct TitleBar {
                         .height($r('app.float.buttonWithoutText'))
                         .width($r('app.float.buttonWithoutText'))
                         .margin({ right: $r('app.float.bottom_bar_padding') })
-                        .onClick(() => {
+                        .onClick((): void => {
                             this.onSaveClicked()
                         })
                     }

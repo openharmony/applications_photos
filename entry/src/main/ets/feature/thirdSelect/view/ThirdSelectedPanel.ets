@@ -68,7 +68,7 @@ export struct ThirdSelectedPanel {
         Row() {
           Radio({ value: "", group: "" })
             .checked(this.isOriginalChecked)
-            .onClick(() => {
+            .onClick((): void => {
               this.isOriginalChecked = !this.isOriginalChecked;
             })
 
@@ -93,7 +93,7 @@ export struct ThirdSelectedPanel {
           .fontWeight(FontWeight.Medium)
           .enabled(this.selectedCount > 0 ? true : false)
           .opacity(this.selectedCount > 0 ? 1 : $r('app.float.disable_button_opacity'))
-          .onClick(() => {
+          .onClick((): void => {
             this.onMenuClicked(Action.OK);
           })
       }
@@ -110,17 +110,17 @@ export struct ThirdSelectedPanel {
       if (this.selectedCount > 0) {
         Scroll(this.selectedScroller) {
           Row({ space: 8 }) {
-            ForEach(this.selectedMediaDataArray, (selectedItem: MediaDataItem) => {
+            ForEach(this.selectedMediaDataArray, (selectedItem: MediaDataItem): void => {
               Stack({ alignContent: Alignment.Start }) {
                 Image(this.getThumbnailSafe(selectedItem.uri))
                   .height("100%")
                   .aspectRatio(1)
                   .objectFit(ImageFit.Cover)
                   .autoResize(false)
-                  .onError(() => {
+                  .onError((): void => {
                     Log.error(TAG, 'item Image error');
                   })
-                  .onComplete(() => {
+                  .onComplete((): void => {
                     Log.debug(TAG, "Draw the image! " + this.getThumbnailSafe(selectedItem.uri));
                   })
 
@@ -170,14 +170,14 @@ export struct ThirdSelectedPanel {
                     x: $r('app.float.grid_item_favor_markAnchor_x'),
                     y: $r('app.float.grid_item_favor_markAnchor_y')
                   })
-                  .onClick(() => {
+                  .onClick((): void => {
                     selectedItem.setSelect(false);
                     this.broadCast.emit(BroadcastConstants.SELECT, [selectedItem.index]);
                   })
               }
               .height("100%")
               .aspectRatio(1)
-            }, item => JSON.stringify(item))
+            }, (item: MediaDataItem): string => { return JSON.stringify(item) })
           }
           .margin({
             left: $r('sys.float.ohos_id_max_padding_start'),

@@ -229,7 +229,7 @@ export class MediaDataItem implements DateAdded {
         fileAsset.displayName = displayName;
 
         this.title = name;
-        fileAsset.title = name;;
+        fileAsset.title = name;
         await fileAsset.commitModify();
     }
 }
