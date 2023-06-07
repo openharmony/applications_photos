@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import prompt from '@system.prompt';
+import prompt, { ShowToastOptions } from '@system.prompt';
 import { Log } from '../utils/Log';
 import screenManager from '../manager/ScreenManager';
 
@@ -21,9 +21,10 @@ const TOAST_DURATION = 3000;
 export function showToast(message: string): void {
     let naviBarHeight = screenManager.getNaviBarHeight()
     Log.debug(TAG, "showToast: " + message);
-    prompt.showToast({
+    let showToastOptions: ShowToastOptions = {
         message: message,
         duration: TOAST_DURATION,
         bottom: (64 + naviBarHeight) + "vp"
-    });
+    };
+    prompt.showToast(showToastOptions);
 }

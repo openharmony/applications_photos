@@ -57,7 +57,7 @@ export default class ServiceExtAbility extends Extension {
 
     let windowClass: window.Window = this.globalThis.getObject("windowClass") as window.Window;
     try {
-      let config = {
+      let config: window.Configuration = {
         name: "DeleteDialog " + appName + Math.random(), windowType: window.WindowType.TYPE_DIALOG, ctx: this.context
       }
       try {

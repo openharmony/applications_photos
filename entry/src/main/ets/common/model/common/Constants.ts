@@ -14,6 +14,17 @@
  */
 import deviceInfo from '@ohos.deviceInfo';
 
+enum EntryForm {
+    NORMAL = 0,
+    CAMERA = 1,
+    SINGLE_SELECT = 2,
+    MULTIPLE_SELECT = 3,
+    RECYCLE = 4,
+    DISTRIBUTED = 5,
+    CARD = 6,
+    VIEW_DATA = 7
+}
+
 export class Constants {
     // illegal value
     static readonly INVALID = -1;
@@ -114,16 +125,7 @@ export class Constants {
     static readonly ENTRY_FROM_FORM_FORM_EDITOR = 8;
     static readonly ENTRY_FROM_VIEW_DATA = 9;
     static readonly ENTRY_FROM_FORM_ABILITY_NONE = 12;
-    static readonly ENTRY_FROM = {
-        NORMAL: 0,
-        CAMERA: 1,
-        SINGLE_SELECT: 2,
-        MULTIPLE_SELECT: 3,
-        RECYCLE: 4,
-        DISTRIBUTED: 5,
-        CARD: 6,
-        VIEW_DATA: 7
-    }
+    static readonly ENTRY_FROM = EntryForm;
     static readonly DIALOG_BOTTOM_OFFSET: number = 16;
 
     // Local tab index

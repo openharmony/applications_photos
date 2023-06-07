@@ -14,6 +14,7 @@
  */
 
 import router from '@system.router';
+import { RouterOptions } from '@system.router';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { Log } from '../utils/Log';
 import { getResourceString } from '../utils/ResourceUtils';
@@ -85,13 +86,15 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
             Log.info(TAG, 'go back to photo grid');
             this.menuContext.broadCast.emit(BroadcastConstants.MEDIA_OPERATION, [simpleAlbumDataItem, this.onCompleted.bind(this)]);
         } else {
-            router.push({
+            let params: Object = {
+                albumInfo: JSON.stringify(simpleAlbumDataItem),
+                isNewAlbum: true
+            };
+            let routerOptions: RouterOptions = {
                 uri: 'feature/albumSelect/view/AlbumSelect',
-                params: {
-                    albumInfo: JSON.stringify(simpleAlbumDataItem),
-                    isNewAlbum: true
-                }
-            });
+                params: params
+            };
+            router.push(routerOptions);
             this.onCompleted();
         }
     }

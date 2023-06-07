@@ -219,15 +219,17 @@ export class EventPipeline {
         let moveX = offset[0];
         let moveY = offset[1];
         Log.debug(TAG, "emitTouchEvent moveX: " + moveX + ", moveY: " + moveY);
+        let scaleOption: Matrix4.ScaleOption = {
+            x: scale,
+            y: scale,
+        };
+        let translateOption: Matrix4.TranslateOption = {
+            x: moveX,
+            y: moveY
+        };
         let matrix = Matrix4.identity()
-            .scale({
-                x: scale,
-                y: scale,
-            })
-            .translate({
-                x: moveX,
-                y: moveY
-            })
+            .scale(scaleOption)
+            .translate(translateOption)
             .copy();
         Log.debug(TAG, "emitTouchEvent lastOffset: " + this.lastOffset + ", offset: " + this.offset +
         ",center: " + this.center + ", scale: " + this.lastScale + ", " + this.scale);
@@ -431,10 +433,11 @@ export class EventPipeline {
             this.emitPullDownToBackEvent();
         } else if (scale.toFixed(Constants.RESERVED_DIGITS) == this.defaultScale.toFixed(Constants.RESERVED_DIGITS)) {
             // The reset animation is triggered when the threshold is not reached
-            this.startAnimation(Matrix4.identity().scale({
+            let scaleOption: Matrix4.ScaleOption = {
                 x: this.defaultScale,
                 y: this.defaultScale
-            }).copy() as Matrix4TransitWithMatrix4x4);
+            };
+            this.startAnimation(Matrix4.identity().scale(scaleOption).copy() as Matrix4TransitWithMatrix4x4);
             this.emitPullDownCancelEvent();
         } else {
             this.emitDirectionChange();
@@ -530,10 +533,11 @@ export class EventPipeline {
         let animationEndMatrix: Matrix4.Matrix4Transit = null;
         if (Number(scale.toFixed(Constants.RESERVED_DIGITS)) <= Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) {
             // Zoom out too small to trigger the restored animation
-            animationEndMatrix = Matrix4.identity().scale({
+            let scaleOption: Matrix4.ScaleOption = {
                 x: this.defaultScale,
                 y: this.defaultScale
-            }).copy();
+            };
+            animationEndMatrix = Matrix4.identity().scale(scaleOption).copy();
         } else {
             // Do the animation of retracting maxScale when zooming in
             animationEndMatrix = this.evaluateAnimeMatrix(this.maxScale, this.center);
@@ -564,16 +568,18 @@ export class EventPipeline {
             // When zooming in, adjust the zoom center to the display center point
             offset = [0, 0];
         }
+        let scaleOption: Matrix4.ScaleOption = {
+            x: scale,
+            y: scale,
+        };
+        let translateOption: Matrix4.TranslateOption = {
+            x: offset[0],
+            y: offset[1]
+        };
         let animationEndMatrix = Matrix4.identity()
             .copy()
-            .scale({
-                x: scale,
-                y: scale,
-            })
-            .translate({
-                x: offset[0],
-                y: offset[1]
-            })
+            .scale(scaleOption)
+            .translate(translateOption)
             .copy();
         Log.debug(TAG, "evaluateAnimeMatrix scale:" + scale + ", center:" + center);
         return animationEndMatrix;
@@ -598,10 +604,11 @@ export class EventPipeline {
         Log.debug(TAG, "onDoubleTap lastScale: " + this.lastScale + ", scale: " + this.scale + ", defaultScale: " + this.defaultScale);
         if (Number(this.lastScale.toFixed(Constants.RESERVED_DIGITS)) * this.scale > Number(this.defaultScale.toFixed(Constants.RESERVED_DIGITS))) {
             // Scale to original state when scale is greater than 1
-            matrix = Matrix4.identity().scale({
+            let scaleOption: Matrix4.ScaleOption = {
                 x: this.defaultScale,
                 y: this.defaultScale
-            }).copy() as Matrix4TransitWithMatrix4x4;
+            };
+            matrix = Matrix4.identity().scale(scaleOption).copy() as Matrix4TransitWithMatrix4x4;
         } else {
             // The zoom in status calculates the zoom in center according to the click position
             let center = this.evaluateCenter(centerX, centerY);

@@ -42,6 +42,16 @@ enum WindowMode {
     FLOATING
 }
 
+interface Size {
+    width: number;
+    height: number;
+}
+
+interface StatusNaviHeight {
+    status: number;
+    navi: number;
+}
+
 interface GetWindowMode {
     getWindowMode(): Promise<WindowMode>
 }
@@ -284,10 +294,11 @@ class ScreenManager {
             if (!Boolean(barContentColor).valueOf()) {
                 barContentColor = '#FF000000';
             }
-            await topWindow.setSystemBarProperties({
+            let systemBarProperties: window.SystemBarProperties = {
                 navigationBarColor: barColor,
                 navigationBarContentColor: barContentColor
-            });
+            };
+            await topWindow.setSystemBarProperties(systemBarProperties);
             Log.info(TAG, 'setStatusBarColor done');
         } catch (err) {
             Log.error(TAG, "hideStatusBar err: " + err);
@@ -298,11 +309,12 @@ class ScreenManager {
         Log.debug(TAG, 'setNavigationBarColor start');
         let topWindow: window.Window = AppStorage.Get(WindowConstants.MAIN_WINDOW);
         try {
+            let systemBarProperties: window.SystemBarProperties = {
+                navigationBarColor: barColor,
+                navigationBarContentColor: barContentColor
+            };
             topWindow.setSystemBarProperties(
-                {
-                    navigationBarColor: barColor,
-                    navigationBarContentColor: barContentColor
-                },
+                systemBarProperties,
                 (): void  => Log.info(TAG, 'setStatusBarColor done')
             );
         } catch (err) {
@@ -339,7 +351,7 @@ class ScreenManager {
         if (area == null || area == undefined || area.bottomRect.height == 0) {
             return;
         }
-        let leftBlankBefore = {
+        let leftBlankBefore: StatusNaviHeight = {
             status: this.statusBarHeight,
             navi: this.naviBarHeight
         };
@@ -357,7 +369,7 @@ class ScreenManager {
         if (size == null || size == undefined) {
             return;
         }
-        let sizeBefore = {
+        let sizeBefore: Size = {
             width: this.winWidth,
             height: this.winHeight
         };

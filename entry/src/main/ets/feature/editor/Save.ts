@@ -39,7 +39,7 @@ export class Save {
             wrapper = optStack.apply(wrapper);
             Log.debug(TAG, 'Edit and restore operation execution end.');
 
-            let options = {
+            let options: image.PackingOption = {
                 format: 'image/jpeg',
                 quality: Save.QUALITY_100
             };

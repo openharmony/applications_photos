@@ -95,11 +95,12 @@ export class CopyMenuOperation extends ProcessMenuOperation {
             let index = displayName.lastIndexOf('.');
             let start = displayName.lastIndexOf('_');
             displayName = displayName.slice(0, start) + "_$" + new Date().getTime() + "$" + displayName.slice(index);
-            this.copy(assets.sourceAsset, null, {
+            let params: Object = {
                 mediaType: assets.sourceAsset.mediaType,
                 name: displayName,
                 path: this.albumInfo.relativePath
-            });
+            };
+            this.copy(assets.sourceAsset, null, params);
             return;
         }
         if (assets.targetAsset != null) {
@@ -128,11 +129,12 @@ export class CopyMenuOperation extends ProcessMenuOperation {
                     break;
             }
         } else {
-            this.copy(assets.sourceAsset, null, {
+            let params: Object = {
                 mediaType: assets.sourceAsset.mediaType,
                 name: assets.sourceAsset.displayName,
                 path: this.albumInfo.relativePath
-            });
+            };
+            this.copy(assets.sourceAsset, null, params);
         }
     }
 

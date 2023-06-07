@@ -182,7 +182,7 @@ export class DateUtil {
     }
 
     public static buildDateTimeOpt(year: string, month: string, day: string, hour: string, minute: string): Object {
-        return {
+        let obj: Object = {
             locale: '',
             dateStyle: '',
             timeStyle: '',
@@ -202,6 +202,7 @@ export class DateUtil {
             dayPeriod: '',
             localeMatcher: '',
             formatMatcher: '',
-        }
+        };
+        return obj;
     }
 }

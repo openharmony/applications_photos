@@ -25,6 +25,7 @@ import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceCont
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
 import router from '@system.router';
+import { RouterOptions } from '@system.router';
 import { GroupItemDataSource } from '@ohos/base/src/main/ets/vm/GroupItemDataSource';
 import atManager from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
@@ -206,55 +207,58 @@ export default class MainAbility extends Ability {
             return;
         }
         if (entryFrom == Constants.ENTRY_FROM_CAMERA) {
-            let options = {
+            let params: Object = {
+                pageFrom: Constants.ENTRY_FROM.CAMERA
+            };
+            let options: RouterOptions = {
                 uri: 'feature/browser/view/PhotoBrowser',
-                params: {
-                    pageFrom: Constants.ENTRY_FROM.CAMERA
-                }
+                params: params
             };
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_SINGLE_SELECT || entryFrom == Constants.ENTRY_FROM_MULTIPLE_SELECT) {
             let bundleName: string = await bundleManager.getBundleNameByUid(mCallerUid);
             let displayName = await getResourceString($r('app.string.album_all'));
-            let options = {
+            let params: Object = {
+                itemCoverUri: '',
+                itemId: MediaConstants.ALBUM_ID_ALL,
+                itemCount: 0,
+                isMultiPick: entryFrom == Constants.ENTRY_FROM_MULTIPLE_SELECT ? true : false,
+                isFromWallpaper: false,
+                maxSelectCount: mMaxSelectCount,
+                itemDisplayName: displayName,
+                isFromFa: false,
+                bundleName: bundleName,
+                filterMediaType: mFilterMediaType
+            };
+            let options: RouterOptions = {
                 uri: 'feature/thirdSelect/view/ThirdSelectPhotoGridPage',
-                params: {
-                    itemCoverUri: '',
-                    itemId: MediaConstants.ALBUM_ID_ALL,
-                    itemCount: 0,
-                    isMultiPick: entryFrom == Constants.ENTRY_FROM_MULTIPLE_SELECT ? true : false,
-                    isFromWallpaper: false,
-                    maxSelectCount: mMaxSelectCount,
-                    itemDisplayName: displayName,
-                    isFromFa: false,
-                    bundleName: bundleName,
-                    filterMediaType: mFilterMediaType
-                }
+                params: params
             };
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_FORM_ABILITY) {
-            let options = {
+            let options: RouterOptions = {
                 uri: 'feature/browser/view/PhotoBrowser',
             };
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_FORM_ABILITY_NONE) {
-            let options = {
+            let options: RouterOptions = {
                 uri: pagePath
             }
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_FORM_FORM_EDITOR) {
-            let options = {
+            let options: RouterOptions = {
                 uri: 'feature/formEditor/view/FormEditorPage'
             }
             router.replace(options);
         } else if (entryFrom == Constants.ENTRY_FROM_VIEW_DATA) {
-            let options = {
+            let params: Object = {
+                pageFrom: Constants.ENTRY_FROM.VIEW_DATA,
+                viewData: AppStorage.Get(Constants.VIEW_DATA_URI),
+                position: AppStorage.Get(Constants.VIEW_DATA_POS),
+            };
+            let options: RouterOptions = {
                 uri: 'feature/browser/view/PhotoBrowser',
-                params: {
-                    pageFrom: Constants.ENTRY_FROM.VIEW_DATA,
-                    viewData: AppStorage.Get(Constants.VIEW_DATA_URI),
-                    position: AppStorage.Get(Constants.VIEW_DATA_POS),
-                }
+                params: params
             };
             router.replace(options);
         }
