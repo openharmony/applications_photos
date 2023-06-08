@@ -102,7 +102,7 @@ struct ThirdSelectAlbumSetPage {
                 if (!Number.isNaN(param.remainingOfWallpapers)) {
                     this.maxSelectCount = new Number(param.remainingOfWallpapers).valueOf()
                 }
-            } else if (Boolean(param.maxSelectCount).valueOf() && param.maxSelectCount > 0) {
+            } else if (new Boolean(param.maxSelectCount).valueOf() && param.maxSelectCount > 0) {
                 let selectCount = new Number(param.maxSelectCount).valueOf();
                 this.maxSelectCount = selectCount > Constants.LIMIT_MAX_THIRD_SELECT_COUNT
                     ? Constants.LIMIT_MAX_THIRD_SELECT_COUNT

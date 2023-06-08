@@ -20,7 +20,7 @@ const TAG = "SingleInstanceHelper";
 let globalThis = GlobalContext.getContext();
 
 export function stashOrGetObject<T>(objectClass: object, storageKey: string): T {
-    if (!Boolean(globalThis.getObject(storageKey)).valueOf()) {
+    if (! new Boolean(globalThis.getObject(storageKey)).valueOf()) {
         globalThis.setObject(storageKey, objectClass);
         Log.debug(TAG, "Create key of " + storageKey);
     }

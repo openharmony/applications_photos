@@ -73,9 +73,9 @@ export class TimelinePageBarModel {
 
     getMenuList(isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean): Action[] {
         let menuList: Action[] = [];
-        menuList.push(Boolean(selectedCount) ? Action.SHARE : Action.SHARE_INVALID)
+        menuList.push(new Boolean(selectedCount) ? Action.SHARE : Action.SHARE_INVALID)
         menuList.push(isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL)
-        menuList.push(Boolean(selectedCount) ? Action.DELETE : Action.DELETE_INVALID, Action.MORE)
+        menuList.push(new Boolean(selectedCount) ? Action.DELETE : Action.DELETE_INVALID, Action.MORE)
         return menuList
     }
 }
