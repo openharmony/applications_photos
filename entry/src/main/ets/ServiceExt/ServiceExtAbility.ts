@@ -52,8 +52,8 @@ export class ServiceExtAbility extends Extension {
     if (uris == undefined || uris.length ===0) {
       return;
     }
-    AppStorage.SetOrCreate("uris", uris);
-    AppStorage.SetOrCreate("appName", appName);
+    AppStorage.SetOrCreate<string[]>("uris", uris);
+    AppStorage.SetOrCreate<string>("appName", appName);
 
     let windowClass: window.Window = this.globalThis.getObject("windowClass") as window.Window;
     try {
@@ -72,8 +72,8 @@ export class ServiceExtAbility extends Extension {
             let requestInfo = dialogRequest.getRequestInfo(want);
             Log.info(TAG, "requestInfo param : " + JSON.stringify(requestInfo));
 
-            let requestCallback = dialogRequest.getRequestCallback(want);
-            AppStorage.SetOrCreate("requestCallback", requestCallback);
+            let requestCallback: dialogRequest.RequestCallback = dialogRequest.getRequestCallback(want);
+            AppStorage.SetOrCreate<dialogRequest.RequestCallback>("requestCallback", requestCallback);
             Log.info(TAG, "Succeeded in get requestCallback");
 
             windowClass.bindDialogTarget(requestInfo, (): void => {

@@ -153,7 +153,7 @@ export struct TimelinePage {
             Log.warn(TAG, 'targetIndex is not found');
             return;
         }
-        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
+        AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER, children);
         router.push({
             uri: 'feature/browser/view/PhotoBrowser',
             params: {
@@ -170,7 +170,7 @@ export struct TimelinePage {
             Log.warn(TAG, 'targetIndex is not found');
             return;
         }
-        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
+        AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER, children);
         router.push({
             uri: 'feature/browser/view/SelectPhotoBrowser',
             params: {

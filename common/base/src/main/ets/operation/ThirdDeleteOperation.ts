@@ -81,7 +81,7 @@ export class ThirdDeleteOperation extends ProcessMenuOperation {
 
   private confirmCallbackBindImpl(): void {
     Log.info(TAG, 'Batch delete confirm');
-    AppStorage.SetOrCreate("isDelete", 1);
+    AppStorage.SetOrCreate<number>("isDelete", 1);
 
     // 1. Variable initialization
     this.onOperationEnd = this.menuContext.onOperationEnd;

@@ -100,7 +100,7 @@ struct SelectPhotoBrowser {
             this.browserDataSource.setAlbumId((param.albumInfo as SimpleAlbumDataItem).id);
         }
 
-        this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER);
+        this.browserDataSource.groupDataItem = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER);
         let pos = 0;
         if (!Number.isNaN(param.position)) {
             pos = new Number(param.position).valueOf()

@@ -274,7 +274,7 @@ export class MediaDataManager {
 
     getCurrentIndex(): number {
         return this.mediaData.currentIndex;
-    }Scree
+    }
 
     getIsShowAlbumName(): boolean {
         return this.mediaData.isShowAlbumName == 1 ? true : false;
