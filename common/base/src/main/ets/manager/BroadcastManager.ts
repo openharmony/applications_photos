@@ -15,7 +15,7 @@
 
 import { Log } from '../utils/Log';
 import { Broadcast } from '../utils/Broadcast';
-import stashOrGetObject from '../utils/SingleInstanceUtils';
+import { stashOrGetObject } from '../utils/SingleInstanceUtils';
 
 const TAG = "BroadcastManager"
 
@@ -35,4 +35,4 @@ export class BroadcastManager {
 
 let broadcastManager: BroadcastManager = stashOrGetObject(new BroadcastManager(), TAG);
 
-export default broadcastManager as BroadcastManager;
+export { broadcastManager };

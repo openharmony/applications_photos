@@ -15,10 +15,10 @@
 
 import { EmptyAlbumComponent } from '@ohos/base/src/main/ets/components/EmptyAlbumComponent';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { broadcastManager } from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import router from '@system.router';
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { computeSampleSize } from '@ohos/base/src/main/ets/utils/ImageUtil';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';

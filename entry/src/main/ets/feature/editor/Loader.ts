@@ -20,7 +20,7 @@ import { PixelMapWrapper } from './base/PixelMapWrapper';
 import { MathUtils } from './crop/MathUtils';
 import { CropAngle } from './crop/CropType';
 import { computeSampleSize } from '@ohos/base/src/main/ets/utils/ImageUtil';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 const TAG = "Loader"
 

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { TrashMediaDataItem } from './TrashMediaDataItem';
-import stashOrGetObject from '../utils/SingleInstanceUtils';
+import { stashOrGetObject } from '../utils/SingleInstanceUtils';
 
 const TAG = "TrashMediaDataItemCache"
 
@@ -43,4 +43,4 @@ class TrashMediaDataItemCache {
 
 let trashMediaDataItemCache: TrashMediaDataItemCache = stashOrGetObject(new TrashMediaDataItemCache(), TAG);
 
-export default trashMediaDataItemCache as TrashMediaDataItemCache;
+export { trashMediaDataItemCache };

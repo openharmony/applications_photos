@@ -15,8 +15,8 @@
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { WindowConstants } from '@ohos/base/src/main/ets/constants/WindowConstants';
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { mediaModel } from '@ohos/base/src/main/ets/model/MediaModel';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { TimelineDataItem } from '../data/TimelineDataItem';
 import { MediaDataItem } from '@ohos/base/src/main/ets/data/MediaDataItem';
 

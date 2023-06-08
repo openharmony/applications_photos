@@ -20,7 +20,7 @@ import { Ratio } from '../base/Ratio';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { CropRatioType, CropAngle } from './CropType';
 import { MathUtils } from './MathUtils';
-import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 export class CropShow {
     private TAG: string = 'CropShow';

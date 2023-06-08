@@ -14,7 +14,7 @@
  */
 
 import { MediaOperationType } from '@ohos/base/src/main/ets/data/MediaOperationType'
-import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
 @Observed

@@ -15,10 +15,10 @@
 import { Log } from '../utils/Log';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { ViewType } from '../data/ViewType';
-import mediaModel from '../model/MediaModel';
+import { mediaModel } from '../model/MediaModel';
 import { MediaConstants } from '../constants/MediaConstants';
 import { setOrientation } from '../helper/MediaDataHelper';
-import selectManager from '../manager/SelectManager';
+import { selectManager } from '../manager/SelectManager';
 import { ItemDataSource } from '../vm/ItemDataSource'
 const TAG = "MediaDataItem"
 

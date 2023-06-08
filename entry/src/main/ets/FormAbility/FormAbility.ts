@@ -19,12 +19,12 @@ import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { FormControllerManager } from './controller/FormControllerManager';
 import { FormController } from './controller/FormController';
 import { Constants } from './common/Constants';
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
-import DataStoreUtil  from '@ohos/base/src/main/ets/utils/DataStoreUtil';
+import { mediaModel } from '@ohos/base/src/main/ets/model/MediaModel';
+import { dataStore } from '@ohos/base/src/main/ets/utils/DataStoreUtil';
 import Want from '@ohos.app.ability.Want';
 import { GlobalContext } from '@ohos/base/src/main/ets/utils/GlobalContext';
 
-export default class FormAbility extends FormExtension {
+export class FormAbility extends FormExtension {
     private TAG: string = 'FormAbility';
     onAddForm(want: Want): formBindingData.FormBindingData | null {
         Log.info(this.TAG, "form onAddForm. want " + JSON.stringify(want));
@@ -71,8 +71,8 @@ export default class FormAbility extends FormExtension {
 
     private async clearCache(newStatus: Map<string, number>): Promise<void> {
         try {
-            let dataStore = DataStoreUtil.getInstance();
-            await dataStore.removeCache();
+            let dataStoreInst = dataStore.getInstance();
+            await dataStoreInst.removeCache();
             let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
             newStatus.forEach((value: number, key: string):void => {
                 Log.info(this.TAG, "onVisibilityChange, key:" + key + "  value " + value);

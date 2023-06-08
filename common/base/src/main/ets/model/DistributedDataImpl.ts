@@ -15,7 +15,7 @@
 
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { Log } from '../utils/Log';
-import mediaModel from '../model/MediaModel';
+import { mediaModel } from '../model/MediaModel';
 import { PeerDataItem } from '../data/PeerDataItem';
 
 const TAG = "DistributedDataImpl"

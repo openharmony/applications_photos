@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import screenManager, { ColumnSize } from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager, ColumnSize } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { ToolBarButton } from './ToolBarButton';
 import { EventVisibility } from './ActionBarButton';
 import { Constants } from '../../model/common/Constants';

@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import stashOrGetObject from '../utils/SingleInstanceUtils';
+import { stashOrGetObject } from '../utils/SingleInstanceUtils';
 import { Log } from '../utils/Log';
 import { MediaConstants } from '../constants/MediaConstants';
-import mediaModel from '../model/MediaModel';
+import { mediaModel } from '../model/MediaModel';
 import { MediaObserverCallback } from '../interface/MediaObserverCallback';
 
 const TAG = "MediaObserver"
@@ -90,4 +90,4 @@ class MediaObserver {
 
 let mediaObserver: MediaObserver = stashOrGetObject(new MediaObserver(), TAG);
 
-export default mediaObserver as MediaObserver;
+export { mediaObserver };

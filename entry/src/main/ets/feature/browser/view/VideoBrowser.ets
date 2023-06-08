@@ -19,8 +19,8 @@ import { Action } from '../../../common/view/browserOperation/Action'
 import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { PhotoBrowserActionBar } from './PhotoBrowserActionBar';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { broadcastManager } from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
 

@@ -20,7 +20,7 @@ import {
     AlbumSelectGridItemNewStyle
 } from '@ohos/selectAlbums/src/main/ets/components/AlbumSelectGridItemNewStyle';
 import { Constants } from '../../../common/model/common/Constants';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { NoPhotoComponent } from '../../../common/view/NoPhotoComponent';
 import { startTrace, finishTrace } from '@ohos/base/src/main/ets/utils/TraceControllerUtils';
@@ -28,7 +28,7 @@ import { Action } from '../../../common/view/browserOperation/Action';
 import { ActionBar } from '../../../common/view/actionbar/ActionBar';
 import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarProp';
 import { UiUtil } from '../utils/UiUtil';
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { broadcastManager } from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants';
 import { AlbumSelectBarModel } from '../model/AlbumSelectBarModel';
 import { AlbumScrollBar } from '@ohos/base/src/main/ets/components/scrollBar/AlbumScrollBar';

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import stashOrGetObject from '../utils/SingleInstanceUtils';
+import { stashOrGetObject } from '../utils/SingleInstanceUtils';
 
 const TAG = ""
 
@@ -38,4 +38,4 @@ class SelectManager {
 
 let selectManager: SelectManager = stashOrGetObject(new SelectManager(), TAG);
 
-export default selectManager as SelectManager;
+export { selectManager };

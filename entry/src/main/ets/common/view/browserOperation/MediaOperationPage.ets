@@ -24,8 +24,8 @@ import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
 import { Action } from './Action';
 import { JumpSourceToMain } from '@ohos/base/src/main/ets/data/JumpSourceToMain';
 import { CustomDialogView } from '../dialog/CustomDialogView';
-import screenManager, { ColumnSize } from '@ohos/base/src/main/ets/manager/ScreenManager';
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { screenManager, ColumnSize } from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { broadcastManager } from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import { AlbumsDataSource } from '@ohos/base/src/main/ets/vm/AlbumsDataSource'
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants';

@@ -14,7 +14,7 @@
  */
 
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager'
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
 import { Constants } from '../../model/common/Constants';
 import { DateUtil } from '@ohos/base/src/main/ets/utils/DateUtil';

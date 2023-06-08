@@ -15,15 +15,15 @@
 import MediaLib from '@ohos.multimedia.mediaLibrary';
 import { Log } from '../utils/Log';
 import { WindowConstants } from '../constants/WindowConstants';
-import mediaModel from '../model/MediaModel';
-import screenManager from '../manager/ScreenManager';
+import { mediaModel } from '../model/MediaModel';
+import { screenManager } from '../manager/ScreenManager';
 import { MediaConstants } from '../constants/MediaConstants';
 import { getFetchOptions } from '../helper/MediaDataHelper';
 import { MediaDataItem } from '../data/MediaDataItem';
 import { FavorMediaDataItem } from '../data/FavorMediaDataItem';
 import { TrashMediaDataItem } from '../data/TrashMediaDataItem';
-import mediaDataItemCache from '../data/MediaDataItemCache';
-import trashMediaDataItemCache from '../data/TrashMediaDataItemCache';
+import { mediaDataItemCache } from '../data/MediaDataItemCache';
+import { trashMediaDataItemCache } from '../data/TrashMediaDataItemCache';
 
 
 const TAG = "GroupDataImpl"

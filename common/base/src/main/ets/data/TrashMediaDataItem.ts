@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import selectManager from '../manager/SelectManager';
-import mediaModel from '../model/MediaModel';
+import { selectManager } from '../manager/SelectManager';
+import { mediaModel } from '../model/MediaModel';
 import { Log } from '../utils/Log';
 import { MediaConstants } from '../constants/MediaConstants';
 import { MediaDataItem } from './MediaDataItem';

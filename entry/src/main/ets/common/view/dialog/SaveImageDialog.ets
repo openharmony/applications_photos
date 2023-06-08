@@ -15,7 +15,7 @@
 
 import { BroadcastConstants } from '@ohos/base/src/main/ets/constants/BroadcastConstants'
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast'
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager'
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager'
 import { Constants } from '../../model/common/Constants';
 
 @CustomDialog

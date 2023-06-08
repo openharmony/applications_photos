@@ -20,7 +20,7 @@ import { MediaConstants } from '@ohos/base/src/main/ets/constants/MediaConstants
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
 import { SimpleAlbumDataItem } from '@ohos/base/src/main/ets/data/SimpleAlbumDataItem';
 import { EmptyAlbumComponent } from '@ohos/base/src/main/ets/components/EmptyAlbumComponent';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 const TAG = "AlbumGridItemTraditionalStyle"
 

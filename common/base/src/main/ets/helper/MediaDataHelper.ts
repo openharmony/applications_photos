@@ -14,7 +14,7 @@
  */
 import image from '@ohos.multimedia.image';
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import mediaModel from '../model/MediaModel';
+import { mediaModel } from '../model/MediaModel';
 import { Log } from '../utils/Log';
 import { MediaConstants } from '../constants/MediaConstants';
 import { getResourceString } from '../utils/ResourceUtils';

@@ -76,4 +76,4 @@ export class MultimodalInputManager {
 
 let mMultimodalInputManager = new MultimodalInputManager();
 
-export default mMultimodalInputManager as MultimodalInputManager;
+export { mMultimodalInputManager };

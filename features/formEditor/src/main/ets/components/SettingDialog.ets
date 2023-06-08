@@ -15,8 +15,8 @@
 
 import { Constants } from '../constants/Constants';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
-import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
-import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { broadcastManager } from '@ohos/base/src/main/ets/manager/BroadcastManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 interface SettingsType {
     title: Resource;

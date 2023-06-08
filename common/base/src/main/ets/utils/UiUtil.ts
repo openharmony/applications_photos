@@ -14,7 +14,7 @@
  */
 import prompt from '@system.prompt';
 import { Log } from '../utils/Log';
-import screenManager from '../manager/ScreenManager';
+import { screenManager } from '../manager/ScreenManager';
 
 const TAG = "UiUtil"
 const TOAST_DURATION = 3000;

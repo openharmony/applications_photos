@@ -19,7 +19,7 @@ import { Log } from '../utils/Log';
 import { MenuContext } from './MenuContext';
 import { ProcessMenuOperation, FindSameOperation, Assets } from './ProcessMenuOperation';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
-import mediaModel from '../model/MediaModel';
+import { mediaModel } from '../model/MediaModel';
 import { MediaOperationType } from '../data/MediaOperationType';
 import { startTraceWithTaskId, finishTraceWithTaskId } from '../utils/TraceControllerUtils';
 import { ItemDataSource } from '../vm/ItemDataSource';

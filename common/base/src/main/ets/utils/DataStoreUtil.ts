@@ -15,7 +15,7 @@
 import preferences from '@ohos.data.preferences';
 import common from '@ohos.app.ability.common';
 import { Log } from '../utils/Log';
-import stashOrGetObject from './SingleInstanceUtils';
+import { stashOrGetObject } from './SingleInstanceUtils';
 import { GlobalContext } from '../utils/GlobalContext';
 
 const TAG = "DataStoreUtil"
@@ -139,5 +139,5 @@ class DataStoreUtil {
 
 let dataStore: DataStoreUtil = stashOrGetObject(new DataStoreUtil(), TAG);
 
-export default dataStore as DataStoreUtil;
+export { dataStore };
 

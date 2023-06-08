@@ -16,7 +16,7 @@ import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import { Constants } from '../../../common/model/common/Constants';
 import { PhotoEditCrop } from '../crop/PhotoEditCrop';
 import { CropResetBar } from './CropResetBar';
-import  screenManager  from '@ohos/base/src/main/ets/manager/ScreenManager';
+import { screenManager } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 
 @Component

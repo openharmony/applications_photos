@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import MediaLib from '@ohos.multimedia.mediaLibrary';
-import mediaModel from '@ohos/base/src/main/ets/model/MediaModel';
+import { mediaModel } from '@ohos/base/src/main/ets/model/MediaModel';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { ItemDataSource } from '@ohos/base/src/main/ets/vm/ItemDataSource';
 import { AlbumDataItem } from '@ohos/base/src/main/ets/data/AlbumDataItem';
