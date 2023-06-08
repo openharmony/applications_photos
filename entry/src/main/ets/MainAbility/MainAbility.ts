@@ -73,12 +73,12 @@ export class MainAbility extends Ability {
                 }
             })
         } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
-            mCallerUid = Number.parseInt(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID).toString());
-            mMaxSelectCount = Number.parseInt(action.get("maxSelectCount").toString());
+            mCallerUid = Number(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID));
+            mMaxSelectCount = Number(action.get("maxSelectCount"));
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
         } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
-            mCallerUid = Number.parseInt(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID).toString());
-            mMaxSelectCount = Number.parseInt(action.get("maxSelectCount").toString());
+            mCallerUid = Number(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID));
+            mMaxSelectCount = Number(action.get("maxSelectCount"));
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
         } else if (action != null && action != undefined && uri == Constants.ACTION_URI_FORM_ABILITY) {
             isFromCard = true;
@@ -131,14 +131,14 @@ export class MainAbility extends Ability {
         if (action != null && action != undefined && uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
         } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
-            mCallerUid = Number.parseInt(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID).toString());
-            mMaxSelectCount = Number.parseInt(action.get("maxSelectCount").toString());
-            mFilterMediaType = Number.parseInt(action.get("filterMediaType").toString());
+            mCallerUid = Number(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID));
+            mMaxSelectCount = Number(action.get("maxSelectCount"));
+            mFilterMediaType = Number(action.get("filterMediaType"));
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
         } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
-            mCallerUid = Number.parseInt(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID).toString());
-            mMaxSelectCount = Number.parseInt(action.get("maxSelectCount").toString());
-            mFilterMediaType = Number.parseInt(action.get("filterMediaType").toString());
+            mCallerUid = Number(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID));
+            mMaxSelectCount = Number(action.get("maxSelectCount"));
+            mFilterMediaType = Number(action.get("filterMediaType"));
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
         } else if (action != null && action != undefined && uri == Constants.ACTION_URI_FORM_ABILITY) {
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY);
