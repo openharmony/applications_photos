@@ -31,10 +31,10 @@ class DataStoreUtil {
     }
 
     public  getInstance(): DataStoreUtil {
-        if (AppStorage.Get( DataStoreUtil.FROM_DATA_STORE_UTIL) == null) {
-            AppStorage.SetOrCreate( DataStoreUtil.FROM_DATA_STORE_UTIL, new DataStoreUtil());
+        if (AppStorage.Get<void>( DataStoreUtil.FROM_DATA_STORE_UTIL) == null) {
+            AppStorage.SetOrCreate<DataStoreUtil>( DataStoreUtil.FROM_DATA_STORE_UTIL, new DataStoreUtil());
         }
-        return AppStorage.Get( DataStoreUtil.FROM_DATA_STORE_UTIL);
+        return AppStorage.Get<DataStoreUtil>( DataStoreUtil.FROM_DATA_STORE_UTIL);
     }
 
     public async init(): Promise<void> {
@@ -137,7 +137,7 @@ class DataStoreUtil {
     }
 }
 
-let dataStore: DataStoreUtil = stashOrGetObject(new DataStoreUtil(), TAG);
+let dataStore: DataStoreUtil = stashOrGetObject<DataStoreUtil>(new DataStoreUtil(), TAG);
 
 export { dataStore };
 

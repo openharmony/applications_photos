@@ -54,8 +54,8 @@ export struct AlbumSelectGridItemNewStyle {
 
     aboutToAppear(): void {
         Log.debug(TAG, 'aboutToAppear + ' + this.item.uri);
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => this.updateCardSize());
-        this.item.load().then((): void => {
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void  => this.updateCardSize());
+        this.item.load().then<void, void>((): void  => {
             this.thumbnail = this.item.getThumbnail()
         })
         this.updateCardSize();

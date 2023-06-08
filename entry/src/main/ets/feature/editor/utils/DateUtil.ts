@@ -19,10 +19,10 @@ export class DateUtil {
 
     public static formats(format?: string): string {
         let time = new Date();
-        if (!Boolean(format).valueOf()) {
+        if (!Boolean<string>(format).valueOf()) {
             return time.valueOf().toString();
         }
-        let opts: Map<string, number> = new Map();
+        let opts: Map<string, number> = new Map<string, number>();
         opts.set('MM', time.getMonth() + 1);
         opts.set('dd', time.getDate());
         opts.set('HH', time.getHours());
@@ -46,7 +46,7 @@ export class DateUtil {
 
     public static nameByDate(isReplace: Boolean, name?: string): string {
         if (isReplace != null && isReplace == true) {
-            return (!Boolean(name).valueOf()) ? null : (name.indexOf(DateUtil.NEW_NAME_EDIT) == -1 ? name.split('.')[0] + '_' + DateUtil.NEW_NAME_EDIT + DateUtil.formats() : name.split('.')[0]);
+            return (!Boolean<string>(name).valueOf()) ? null : (name.indexOf(DateUtil.NEW_NAME_EDIT) == -1 ? name.split('.')[0] + '_' + DateUtil.NEW_NAME_EDIT + DateUtil.formats() : name.split('.')[0]);
         } else {
             return DateUtil.NEW_NAME_IMG + DateUtil.formats('yyyyMMdd_HHmmss');
         }

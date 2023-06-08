@@ -79,7 +79,7 @@ export class DistributedDataSource extends ItemDataSource {
     }
 
     dataReload(): void {
-        this.reloadAlbumItemData().then((isEmpty: number): void => {
+        this.reloadAlbumItemData().then<void, void>((isEmpty: number): void => {
             this.notifyDataReload();
         })
     }

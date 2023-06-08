@@ -29,11 +29,12 @@ export class FormAbility extends FormExtension {
     onAddForm(want: Want): formBindingData.FormBindingData | null {
         Log.info(this.TAG, "form onAddForm. want " + JSON.stringify(want));
         this.init();
-        let param: Map<string, object> = new Map(Object.entries(want.parameters));
+        let param: Map<string, object> = new Map<string, object>(Object.entries<object>(want.parameters));
         let formId: string = param.get('ohos.extra.param.key.form_identity').toString();
         Log.info(this.TAG, "form onAddForm formId: " + formId);
         let formControllerManager: FormControllerManager = FormControllerManager.getInstance();
-        formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE).then((): Object | null => {
+        let promise: Promise<void> = formControllerManager.initData(formId, Constants.PHOTOS_FORM_OPERATION_MODE_NONE);
+        promise.then<object, never>((): Object | null => {
             let formController: FormController = formControllerManager.getController(formId);
             Log.info(this.TAG, "form onAddForm. formController " + formController);
             formController = (formController == null) ? formControllerManager.createFormController(formId,
@@ -43,7 +44,7 @@ export class FormAbility extends FormExtension {
                 return null;
             }
             return formController.bindFormData(formId);
-        }).catch((err: Error): void => {
+        }).catch<void>((err: Error): void => {
              Log.error(this.TAG, "init err " + err);
         })
         return null;
@@ -65,7 +66,7 @@ export class FormAbility extends FormExtension {
         Log.info(this.TAG, "onChangeFormVisibility, newStatus: " + JSON.stringify(newStatus));
         // 经常起来后可能直接走onChangeFormVisibility， 所以要初始化一下
         this.init();
-        let ns: Map<string, number> = new Map(Object.entries(newStatus));
+        let ns: Map<string, number> = new Map<string, number>(Object.entries<number>(newStatus));
         this.clearCache(ns);
     }
 

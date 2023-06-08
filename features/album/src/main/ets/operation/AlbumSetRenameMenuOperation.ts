@@ -95,7 +95,7 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
             if (name != null) {
                 let isExit = await this.checkAlbumExit(simpleAlbumDataItem);
                 if (isExit) {
-                    getResourceString($r('app.string.name_already_use')).then((message: string): void => {
+                    getResourceString($r('app.string.name_already_use')).then<void, void>((message: string): void => {
                         showToast(message)
                     })
                     Log.warn(TAG, "album is miss")

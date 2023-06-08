@@ -33,6 +33,6 @@ export class BroadcastManager {
     }
 }
 
-let broadcastManager: BroadcastManager = stashOrGetObject(new BroadcastManager(), TAG);
+let broadcastManager: BroadcastManager = stashOrGetObject<BroadcastManager>(new BroadcastManager(), TAG);
 
 export { broadcastManager };

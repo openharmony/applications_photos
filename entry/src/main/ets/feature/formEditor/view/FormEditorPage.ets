@@ -207,19 +207,20 @@ struct FormEditorPage {
         Log.debug(TAG, 'aboutToAppear start!');
         this.appBroadcast.on(BroadcastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
         this.appBroadcast.on(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
-        dataStore.init().then((): void => {
+        dataStore.init().then<void, void>((): void => {
             let intervalTimeKey = 'intervalTime';
-            dataStore.getData(intervalTimeKey, this.time).then((d: Object): void => {
-                this.time = d as number;
+            let promise: Promise<object> = dataStore.getData(intervalTimeKey, this.time);
+            promise.then<void, void>((d: Object): void => {
+                this.time = d as unknown as number;
                 this.setIntervalTime();
-                AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);
+                AppStorage.SetOrCreate<number>(Constants.FROM_PLAYBACK_INTERVAL, this.time);
             })
             let isShowKey = 'isShow_' + this.formId;
-            dataStore.getData(isShowKey, this.isShow).then((d: Object): void => {
+            dataStore.getData(isShowKey, this.isShow).then<void, void>((d: Object): void => {
                 this.isShow = d as boolean;
             })
             let arkUriKey = 'arkUri_' + this.formId;
-            dataStore.getData(arkUriKey, this.arkUri).then((d: Object): void => {
+            dataStore.getData(arkUriKey, this.arkUri).then<void, void>((d: Object): void => {
                 if (d == 0) {
                     d = 1;
                 } else {
@@ -238,7 +239,7 @@ struct FormEditorPage {
     onChange(value): void {
         this.time = value;
         this.setIntervalTime();
-        AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);
+        AppStorage.SetOrCreate<number>(Constants.FROM_PLAYBACK_INTERVAL, this.time);
         this.updateTime();
     }
 

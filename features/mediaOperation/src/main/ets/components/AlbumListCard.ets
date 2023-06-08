@@ -30,10 +30,10 @@ export struct AlbumListCard {
 
     aboutToAppear(): void {
         Log.info(TAG, 'album mediaSet ' + JSON.stringify(this.item));
-        this.item.load().then((): void => {
+        this.item.load().then<void, void>((): void  => {
             this.thumbnail = this.item.getThumbnail();
         })
-        this.item.getVideoCount().then((videoCount: number): void => {
+        this.item.getVideoCount().then<void, void>((videoCount: number): void  => {
             this.mediaRes = this.showMediaRes(videoCount);
         })
     }

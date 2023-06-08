@@ -73,10 +73,10 @@ export struct AddNotesDialog {
                         let check: RegExp = new RegExp("/[\\.\\\\/:*?<>\"|\[\]{}\s]/");
                         let passCheck = check.test(this.inputNote)
                         if (passCheck) {
-                            getResourceString($r('app.string.specific_characters_not_supported'))
-                                .then((message: string): void => {
-                                    showToast(message)
-                                })
+                            let p: Promise<string> = getResourceString($r('app.string.specific_characters_not_supported'));
+                            p.then<void, void>((message: string): void => {
+                                showToast(message)
+                            });
                             this.controller.close()
                             return
                         }

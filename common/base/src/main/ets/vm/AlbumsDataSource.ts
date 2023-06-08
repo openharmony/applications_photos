@@ -150,7 +150,7 @@ export class AlbumsDataSource extends ItemDataSource {
     }
 
     dataReload(): void {
-        this.reloadAlbumItemData().then((isEmpty: boolean): void => {
+        this.reloadAlbumItemData().then<void, void>((isEmpty: boolean): void => {
             this.notifyDataReload();
         })
     }
@@ -172,7 +172,7 @@ export class AlbumsDataSource extends ItemDataSource {
     async reloadAlbumListItemData(): Promise<boolean> {
         Log.info(TAG, "reloadAlbumListItemData");
         this.albumDataItems = await this.albumDataImpl.reloadAlbumListItemData();
-        this.reloadResetAlbumItemData().then((count: number): void => {
+        this.reloadResetAlbumItemData().then<void, void>((count: number): void => {
             Log.info(TAG, "reloadResetAlbumItemData reset: " + count);
         })
         return this.albumDataItems.length == 0;

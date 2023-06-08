@@ -29,7 +29,7 @@ export class DateUtil {
 
     private static initLanguageLocalesMap(): void {
         if (DateUtil.LANGUAGE_LOCALES_MAP == null) {
-            DateUtil.LANGUAGE_LOCALES_MAP = new Map();
+            DateUtil.LANGUAGE_LOCALES_MAP = new Map<string, string>();
             DateUtil.LANGUAGE_LOCALES_MAP.set("zh", "zh-CN");
             DateUtil.LANGUAGE_LOCALES_MAP.set("en", "en-US");
         }
@@ -43,10 +43,10 @@ export class DateUtil {
     }
 
     public static format(time: Date, format_s?: string): string {
-        if (!Boolean(format_s).valueOf()) {
+        if (!Boolean<string>(format_s).valueOf()) {
             return time.valueOf().toString();
         }
-        let opts: Map<string, number> = new Map();
+        let opts: Map<string, number> = new Map<string, number>();
         opts.set('MM', time.getMonth() + 1);
         opts.set('dd', time.getDate());
         opts.set('HH', time.getHours());
@@ -112,7 +112,7 @@ export class DateUtil {
         let is24HourClock = i18n.is24HourClock();
         Log.info(TAG, "get is24HourClock " + is24HourClock);
 
-        return new Intl.DateTimeFormat(locales, this.buildDateTimeOpt('', '', '', (!Boolean(is24HourClock).valueOf() ? '2-digit' : 'numeric'), '2-digit')).format(new Date(milliseconds));
+        return new Intl.DateTimeFormat(locales, this.buildDateTimeOpt('', '', '', (!Boolean<boolean>(is24HourClock).valueOf() ? '2-digit' : 'numeric'), '2-digit')).format(new Date(milliseconds));
     }
 
     static getLocales(): string {
