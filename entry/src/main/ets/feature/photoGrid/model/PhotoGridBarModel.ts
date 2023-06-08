@@ -59,7 +59,7 @@ export class PhotoGridBarModel {
             .setLeftAction(Action.BACK)
             .setTitle(title)
             .setMode(ActionBarMode.STANDARD_MODE);
-        let menuList: Array<Action> = this.getMenuList(isSelectedMode, selectedCount, isAllSelected, isEmpty);
+        let menuList: Action[] = this.getMenuList(isSelectedMode, selectedCount, isAllSelected, isEmpty);
         if (isSelectedMode) {
             actionBarProp
                 .setLeftAction(Action.CANCEL)
@@ -75,7 +75,7 @@ export class PhotoGridBarModel {
     }
 
     private updateVerticalActionBar(actionBarProp: ActionBarProp, title: Object, isSelectedMode: boolean): ActionBarProp {
-        let menuList: Array<Action> = new Array<Action>();
+        let menuList: Action[] = [];
 
         if (!MediaConstants.ALBUM_DISABLE_NEW_LIST.has(this.albumId) && !this.isDistributedAlbum) {
             menuList.push(Action.NEW);
@@ -98,8 +98,8 @@ export class PhotoGridBarModel {
         return actionBarProp;
     }
 
-    getMenuList(isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean, isEmpty: boolean): Array<Action> {
-        let menuList: Array<Action> = new Array<Action>();
+    getMenuList(isSelectedMode: boolean, selectedCount: number, isAllSelected: boolean, isEmpty: boolean): Action[] {
+        let menuList: Action[] = [];
         if (isSelectedMode) {
             if (this.albumId == MediaConstants.ALBUM_ID_RECYCLE) {
                 menuList.push(Boolean(selectedCount) ? Action.RECOVER : Action.RECOVER_INVALID);

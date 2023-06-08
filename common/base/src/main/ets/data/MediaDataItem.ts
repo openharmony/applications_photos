@@ -56,10 +56,10 @@ export class MediaDataItem implements DateAdded {
     favouriteStatus: number = STATUS_UNDEFINED
     canRotate: number = STATUS_UNDEFINED
     selections: string = ""
-    selectionArgs: Array<string> = new Array()
+    selectionArgs: string[] = [];
     deviceId: string = ''
 
-    constructor(selections: string, selectionArgs: Array<string>, deviceId: string, index: number) {
+    constructor(selections: string, selectionArgs: string[], deviceId: string, index: number) {
         this.selections = selections
         this.selectionArgs = selectionArgs
         this.deviceId = deviceId

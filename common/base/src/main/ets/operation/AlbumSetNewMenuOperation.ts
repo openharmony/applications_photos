@@ -118,7 +118,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
         if(this.onOperationEnd != null) this.onOperationEnd();
     }
 
-    private matchAlbumDefaultName(albumInfo: string, numbers: Array<number>, root: string, prefixName: string): void {
+    private matchAlbumDefaultName(albumInfo: string, numbers: number[], root: string, prefixName: string): void {
         let res: RegExpMatchArray = albumInfo.match(new RegExp("^" + root + prefixName + "[1-9][0-9]*/$"));
         if (res != null) {
             let number: RegExpMatchArray = res[0].match(new RegExp("[1-9][0-9]*"));

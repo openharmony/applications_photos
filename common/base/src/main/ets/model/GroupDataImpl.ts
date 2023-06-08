@@ -204,7 +204,7 @@ export class GroupDataImpl {
         let itemLen = items.length;
         let countLen = Math.ceil(itemLen / count);
         for (let i = 1;i < countLen; i++) {
-            let mediaFileAsset: Array<MediaLib.FileAsset> = await this.getMediaItemFileAssets(fetchOption, i * count, count);
+            let mediaFileAsset: MediaLib.FileAsset[] = await this.getMediaItemFileAssets(fetchOption, i * count, count);
             for (let j = 0;j < count; j++) {
                 if (i * count + j >= itemLen) {
                     return;

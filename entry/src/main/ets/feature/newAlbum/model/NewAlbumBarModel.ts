@@ -18,7 +18,7 @@ import { ActionBarProp } from '../../../common/view/browserOperation/ActionBarPr
 
 export class NewAlbumBarModel {
     createActionBar(isSelectedMode: boolean, selectedCount: number): ActionBarProp {
-        let menuList: Array<Action> = new Array<Action>();
+        let menuList: Action[] = [];
         let actionBarProp: ActionBarProp = new ActionBarProp();
         menuList.push(Boolean(selectedCount) ? Action.OK : Action.OK_DISABLE)
         actionBarProp

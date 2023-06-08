@@ -343,7 +343,7 @@ export class MediaDataManager {
         Log.debug(TAG, 'loadData end!');
     }
 
-    async getItems(albumId: string): Promise<Array<MediaLib.FileAsset>> {
+    async getItems(albumId: string): Promise<MediaLib.FileAsset[]> {
          Log.info(TAG, 'getItems start!');
         let fetchOpt = await getFetchOptions(MediaConstants.SELECT_TYPE_IMAGE, albumId, "")
         if (albumId == MediaConstants.ALBUM_ID_FAVOR) {

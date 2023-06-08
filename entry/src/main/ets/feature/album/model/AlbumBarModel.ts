@@ -50,7 +50,7 @@ export class AlbumBarModel {
             .setHasTabBar(isSidebar)
             .setTitle($r('app.string.tab_albums'))
             .setIsHeadTitle(true);
-        let menuList: Array<Action> = this.getMenuList(isAlbumSetSelectedMode, selectedAlbumsCount, isDisableRename, isDisableDelete);
+        let menuList: Action[] = this.getMenuList(isAlbumSetSelectedMode, selectedAlbumsCount, isDisableRename, isDisableDelete);
         if (isAlbumSetSelectedMode) {
             actionBarProp
                 .setLeftAction(Action.CANCEL)
@@ -67,7 +67,7 @@ export class AlbumBarModel {
     }
 
     private updateVerticalActionBar(actionBarProp: ActionBarProp, isAlbumSetSelectedMode: boolean): ActionBarProp {
-        let menuList: Array<Action> = new Array<Action>();
+        let menuList: Action[] = [];
         menuList.push(Action.NEW);
         let isSidebar: boolean = screenManager.isSidebar();
         actionBarProp
@@ -89,8 +89,8 @@ export class AlbumBarModel {
         return actionBarProp;
     }
 
-    getMenuList(isAlbumSetSelectedMode: boolean, selectedAlbumsCount: number, isDisableRename: boolean, isDisableDelete: boolean): Array<Action> {
-        let menuList: Array<Action> = new Array<Action>();
+    getMenuList(isAlbumSetSelectedMode: boolean, selectedAlbumsCount: number, isDisableRename: boolean, isDisableDelete: boolean): Action[] {
+        let menuList: Action[] = [];
         if (isAlbumSetSelectedMode) {
             menuList.push((!isDisableRename && selectedAlbumsCount == 1) ? Action.RENAME : Action.RENAME_INVALID);
             menuList.push((!isDisableDelete && selectedAlbumsCount > 0) ? Action.DELETE : Action.DELETE_INVALID);

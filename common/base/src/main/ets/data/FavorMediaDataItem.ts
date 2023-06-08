@@ -19,7 +19,7 @@ import { MediaConstants } from '../constants/MediaConstants';
 import { MediaDataItem } from './MediaDataItem';
 
 export class FavorMediaDataItem extends MediaDataItem {
-    constructor(selections: string, selectionArgs: Array<string>, index: number) {
+    constructor(selections: string, selectionArgs: string[], index: number) {
         super(selections, selectionArgs, "", index)
     }
 

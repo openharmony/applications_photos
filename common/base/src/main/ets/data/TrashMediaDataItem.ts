@@ -22,7 +22,7 @@ import { MediaDataItem } from './MediaDataItem';
 const TAG = "TrashMediaDataItem"
 
 export class TrashMediaDataItem extends MediaDataItem {
-    constructor(selections: string, selectionArgs: Array<string>, index: number) {
+    constructor(selections: string, selectionArgs: string[], index: number) {
         super(selections, selectionArgs, "", index);
         this.setSelect(false);
     }

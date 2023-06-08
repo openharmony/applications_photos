@@ -21,8 +21,8 @@ const TAG = "SelectUtil"
 export class SelectUtil {
     static readonly THIRD_URI_READ_PERMISSIONS: string = "r";
 
-    static getUriArray(selectedPhotos: Set<string>): Array<string> {
-        let uriArray = new Array<string>();
+    static getUriArray(selectedPhotos: Set<string>): string[] {
+        let uriArray: string[] = [];
         if (selectedPhotos == undefined) {
             return uriArray;
         }
@@ -38,9 +38,9 @@ export class SelectUtil {
         await fileShare.grantUriPermission(uri, bundleName, wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION);
     }
 
-    static async grantPermissionForUris(uris: Array<string>, bundleName: string): Promise<void> {
+    static async grantPermissionForUris(uris: string[], bundleName: string): Promise<void> {
         Log.info(TAG, "start uris grant. bundleName: " + bundleName);
-        let promises: Array<Promise<void>> = [];
+        let promises: Promise<void>[] = [];
         for (let uri of uris) {
             try {
                 promises.push(SelectUtil.grantPermissionForUri(uri, bundleName));

@@ -135,10 +135,10 @@ class MediaModel {
         Log.debug(TAG, 'deleteAll finish');
     }
 
-    async getAllMediaItems(fetchOption: MediaLib.MediaFetchOptions): Promise<Array<MediaLib.FileAsset>> {
+    async getAllMediaItems(fetchOption: MediaLib.MediaFetchOptions): Promise<MediaLib.FileAsset[]> {
         Log.info(TAG, 'getAllMediaItems');
         startTrace('getAllMediaItems');
-        let fileAssets: Array<MediaLib.FileAsset> = [];
+        let fileAssets: MediaLib.FileAsset[] = [];
         let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
             fetchFileResult = await this.media.getFileAssets(fetchOption);
@@ -159,10 +159,10 @@ class MediaModel {
         return fileAssets;
     }
 
-    async getAllFavorMediaItems(fetchOption: MediaLib.MediaFetchOptions): Promise<Array<MediaLib.FileAsset>> {
+    async getAllFavorMediaItems(fetchOption: MediaLib.MediaFetchOptions): Promise<MediaLib.FileAsset[]> {
         Log.info(TAG, 'getAllFavorMediaItems');
         startTrace('getAllFavorMediaItems');
-        let fileAssets: Array<MediaLib.FileAsset> = [];
+        let fileAssets: MediaLib.FileAsset[] = [];
         let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
             let getPrivateAlbumGetAllFavors = hiSysEventDataQueryTimedOut('getPrivateAlbumGetAllFavors')
@@ -188,10 +188,10 @@ class MediaModel {
         return fileAssets;
     }
 
-    async getAllTrashMediaItems(fetchOption: MediaLib.MediaFetchOptions): Promise<Array<MediaLib.FileAsset>> {
+    async getAllTrashMediaItems(fetchOption: MediaLib.MediaFetchOptions): Promise<MediaLib.FileAsset[]> {
         Log.info(TAG, 'getAllTrashMediaItems');
         startTrace('getAllTrashMediaItems');
-        let fileAssets: Array<MediaLib.FileAsset> = [];
+        let fileAssets: MediaLib.FileAsset[] = [];
         let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
             let getPrivateAlbumGetAllTrashItems = hiSysEventDataQueryTimedOut('getPrivateAlbumGetAllTrashItems')
@@ -325,7 +325,7 @@ class MediaModel {
         let fetchFileResult: MediaLib.FetchFileResult = undefined;
         try {
             let getAlbumsGetAlbumCount = hiSysEventDataQueryTimedOut('getAlbumsGetAlbumCount')
-            let albums: Array<MediaLib.Album> = await this.media.getAlbums(fetchOption);
+            let albums: MediaLib.Album[] = await this.media.getAlbums(fetchOption);
             clearTimeout(getAlbumsGetAlbumCount);
             if (albums.length == 0) {
                 return count;
@@ -344,10 +344,10 @@ class MediaModel {
         return count;
     }
 
-    async getActivePeers(): Promise<Array<MediaLib.PeerInfo>> {
+    async getActivePeers(): Promise<MediaLib.PeerInfo[]> {
         Log.info(TAG, 'getActivePeers');
         startTrace('getActivePeers');
-        let peers: Array<MediaLib.PeerInfo> = undefined;
+        let peers: MediaLib.PeerInfo[] = [];
         try {
             let getActivePeers = hiSysEventDataQueryTimedOut('getActivePeers')
             peers = await this.media.getActivePeers();
@@ -360,10 +360,10 @@ class MediaModel {
         return peers;
     }
 
-    async getAlbums(fetchOption: MediaLib.MediaFetchOptions): Promise<Array<MediaLib.Album>> {
+    async getAlbums(fetchOption: MediaLib.MediaFetchOptions): Promise<MediaLib.Album[]> {
         Log.info(TAG, 'getAlbums');
         startTrace('getAlbums');
-        let albums: Array<MediaLib.Album> = undefined;
+        let albums: MediaLib.Album[] = [];
         try {
             let getAlbums = hiSysEventDataQueryTimedOut('getAlbums')
             albums = await this.media.getAlbums(fetchOption);
