@@ -101,10 +101,10 @@ export struct TimelinePage {
         mediaObserver.registerObserver(this.dataObserver);
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => this.initGridRowCount());
 
-        this.appBroadcast.on(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-        this.appBroadcast.on(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-        this.appBroadcast.on(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
+        this.appBroadcast.on(BroadcastConstants.BACK_PRESS_EVENT, (clbk: Function): void => this.onIndexBackPressBindImpl(clbk));
+        this.appBroadcast.on(BroadcastConstants.ON_TAB_CHANGED, (index: number): void => this.onTabChangedBindImpl(index));
+        this.appBroadcast.on(BroadcastConstants.RESET_STATE_EVENT, (index: number): void => this.onStateResetBindImpl(index));
+        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, (item: MediaDataItem): void => this.onUpdateFavorAndSelectStateBindImpl(item));
         this.appBroadcast.on(BroadcastConstants.RESET_ZERO, (pageNumber: number): void => {
             if (pageNumber == Constants.TIMELINE_PAGE_INDEX) {
                 this.scroller.scrollEdge(Edge.Top);
@@ -182,10 +182,10 @@ export struct TimelinePage {
 
     aboutToDisappear(): void {
         Log.info(TAG, 'TimelinePageAboutToDisappear');
-        this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-        this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-        this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
+        this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, (clbk: Function): void => this.onIndexBackPressBindImpl(clbk));
+        this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, (index: number): void => this.onTabChangedBindImpl(index));
+        this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, (index: number): void => this.onStateResetBindImpl(index));
+        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, (item: MediaDataItem): void => this.onUpdateFavorAndSelectStateBindImpl(item));
         mediaObserver.unregisterObserver(this.dataObserver);
         this.broadCast.off(null, null);
     }
@@ -210,8 +210,8 @@ export struct TimelinePage {
 
     private moveOperation(albumInfo: SimpleAlbumDataItem): void {
         let menuContext = new MenuContext();
-        this.onMoveStart = this.onMoveStart.bind(this);
-        this.onMoveEnd = this.onMoveEnd.bind(this);
+        this.onMoveStart = (): void => this.onMoveStartBindImpl();
+        this.onMoveEnd = (err: object, count: number, total: number): void => this.onMoveEndBindImpl(err, count, total);
         menuContext.withDataSource(this.timelineDataSource)
             .withOperationStartCallback(this.onMoveStart)
             .withOperationEndCallback(this.onMoveEnd)
@@ -223,8 +223,8 @@ export struct TimelinePage {
 
     private copyOperation(albumInfo: SimpleAlbumDataItem): void {
         let menuContext = new MenuContext();
-        this.onCopyStart = this.onCopyStart.bind(this);
-        this.onCopyEnd = this.onCopyEnd.bind(this);
+        this.onCopyStart = (): void => this.onCopyStartBindImpl();
+        this.onCopyEnd = (err: object, count: number, total: number): void => this.onCopyEndBindImpl(err, count, total);
         menuContext.withDataSource(this.timelineDataSource)
             .withOperationStartCallback(this.onCopyStart)
             .withOperationEndCallback(this.onCopyEnd)
@@ -244,12 +244,20 @@ export struct TimelinePage {
     }
 
     onIndexBackPress(callback: Function): void {
+        this.onIndexBackPressBindImpl(callback)
+    }
+
+    private onIndexBackPressBindImpl(callback: Function): void {
         if (this.isInCurrentTab) {
             callback(this.onModeChange());
         }
     }
 
     private onUpdateFavorAndSelectState(item: MediaDataItem): void {
+        this.onUpdateFavorAndSelectStateBindImpl(item)
+    }
+
+    private onUpdateFavorAndSelectStateBindImpl(item: MediaDataItem): void {
        this.onUpdateFavorState(item);
         this.onSelect();
     }
@@ -263,6 +271,10 @@ export struct TimelinePage {
     }
 
     onTabChanged(index: number): void {
+        this.onTabChangedBindImpl(index)
+    }
+
+    private onTabChangedBindImpl(index: number): void {
         if (index == Constants.TIMELINE_PAGE_INDEX) {
             this.isInCurrentTab = true;
             this.onActive();
@@ -273,12 +285,20 @@ export struct TimelinePage {
     }
 
     onStateReset(index: number): void {
+        this.onStateResetBindImpl(index)
+    }
+
+    private onStateResetBindImpl(index: number): void {
         if (index == Constants.TIMELINE_PAGE_INDEX) {
             this.onModeChange();
         }
     }
 
     onMenuClicked(action: Action): void {
+        this.onMenuClickedBindImpl(action)
+    }
+
+    private onMenuClickedBindImpl(action: Action): void {
         Log.info(TAG, "onMenuClicked, actionID: " + action.actionID);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
@@ -290,8 +310,8 @@ export struct TimelinePage {
             this.onSelect()
         } else if (action === Action.DELETE) {
             menuContext = new MenuContext();
-            this.onDeleteStart = this.onDeleteStart.bind(this);
-            this.onDeleteEnd = this.onDeleteEnd.bind(this);
+            this.onDeleteStart = (): void => this.onDeleteStartBindImpl();
+            this.onDeleteEnd = (err: object): void => this.onDeleteEndBindImpl(err);
             menuContext
                 .withDataSource(this.timelineDataSource)
                 .withOperationStartCallback(this.onDeleteStart)
@@ -367,11 +387,19 @@ export struct TimelinePage {
     }
 
     onDeleteStart(): void {
+        this.onDeleteStartBindImpl()
+    }
+
+    private onDeleteStartBindImpl(): void {
         Log.info(TAG, "onDeleteStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
-    onDeleteEnd(err): void {
+    onDeleteEnd(err: object): void {
+        this.onDeleteEndBindImpl(err)
+    }
+
+    private onDeleteEndBindImpl(err: object): void {
         Log.info(TAG, "onDeleteEnd");
         startTrace('onModeChange');
         this.onModeChange();
@@ -386,12 +414,20 @@ export struct TimelinePage {
     }
 
     onCopyStart(): void {
+        this.onCopyStartBindImpl()
+    }
+
+    private onCopyStartBindImpl(): void {
         Log.info(TAG, "onCopyStart");
         mediaObserver.unregisterObserver(this.dataObserver);
 
     }
 
-    onCopyEnd(err, count, total): void {
+    onCopyEnd(err: object, count: number, total: number): void {
+        this.onCopyEndBindImpl(err, count, total)
+    }
+
+    private onCopyEndBindImpl(err: object, count: number, total: number): void {
         Log.info(TAG, "onCopyEnd count: " + count + ", total: " + total);
         startTrace('onModeChange');
         this.onModeChange();
@@ -408,11 +444,19 @@ export struct TimelinePage {
     }
 
     onMoveStart(): void {
+        this.onMoveStartBindImpl()
+    }
+
+    private onMoveStartBindImpl(): void {
         Log.info(TAG, "onMoveStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
-    onMoveEnd(err, count, total): void {
+    onMoveEnd(err: object, count: number, total: number): void {
+        this.onMoveEndBindImpl(err, count, total)
+    }
+
+    private onMoveEndBindImpl(err: object, count: number, total: number): void {
         Log.info(TAG, "onMoveEnd count: " + count + ", total: " + total);
         startTrace('onModeChange');
         this.onModeChange();
@@ -484,7 +528,7 @@ export struct TimelinePage {
                 if (this.initLoadFinish && !this.isEmpty) {
                     ActionBar({
                         actionBarProp: $actionBarProp,
-                        onMenuClicked: this.onMenuClicked.bind(this)
+                        onMenuClicked: (action: Action): void => this.onMenuClickedBindImpl(action)
                     })
 
                     Stack() {
@@ -558,7 +602,7 @@ export struct TimelinePage {
             if (this.isSelectedMode) {
                 ToolBar({
                     toolMenuList: $toolBarMenuList,
-                    onMenuClicked: this.onMenuClicked.bind(this)
+                    onMenuClicked: (action: Action): void => this.onMenuClickedBindImpl(action)
                 })
             }
             CustomDialogView()

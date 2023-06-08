@@ -82,6 +82,10 @@ struct ThirdSelectPhotoGridPage {
     }
 
     onMenuClicked(action: Action): void {
+        this.onMenuClickedBindImpl(action)
+    }
+
+    private onMenuClickedBindImpl(action: Action): void {
         Log.info(TAG, "onMenuClicked, action: " + action.actionID);
         if (action == Action.BACK) {
             router.back();
@@ -159,7 +163,7 @@ struct ThirdSelectPhotoGridPage {
         })
         this.initGridRowCount();
 
-        this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.onMenuClicked = (action: Action): void => this.onMenuClickedBindImpl(action);
         this.broadCast.on(BroadcastConstants.SELECT, (index: number): Promise<void> => { return this.onSelect(index) });
         this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem): void => {
             this.jumpToThirdPhotoBrowser(name, item);

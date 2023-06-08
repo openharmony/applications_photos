@@ -49,8 +49,9 @@ struct FormEditorPage {
     albumId: string = '';
     @State time: number = 30;
     @State intervalTime: Resource = $r('app.string.fa_play_interval_time_30');
-    private saveDataFunc = this.saveData.bind(this);
-    private onChangeFunc = this.onChange.bind(this);
+    private saveDataFunc = (albumName: string, albumId: string, displayName: object, index: number, isShow: boolean): Promise<void> =>
+        this.saveDataBindImpl(albumName, albumId, displayName, index, isShow);
+    private onChangeFunc = (value: number): void => this.onTabChangedBindImpl(value);
     settingController: CustomDialogController = new CustomDialogController({
         builder: SettingDialog(),
         autoCancel: false,
@@ -136,6 +137,10 @@ struct FormEditorPage {
     }
 
     async saveData(albumName: string, albumId: string, displayName: object, index: number, isShow: boolean): Promise<void> {
+        return await this.saveDataBindImpl(albumName, albumId, displayName, index, isShow)
+    }
+
+    async saveDataBindImpl(albumName: string, albumId: string, displayName: object, index: number, isShow: boolean): Promise<void> {
         Log.debug(TAG, "saveData start! " + albumName + " " + displayName + " " + index);
         let msgDisplayName = '';
         if (displayName instanceof String) {
@@ -235,7 +240,11 @@ struct FormEditorPage {
         this.appBroadcast.off(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
     }
 
-    onChange(value): void {
+    onChange(value: number): void {
+        this.onTabChangedBindImpl(value)
+    }
+
+    private onTabChangedBindImpl(value: number): void {
         this.time = value;
         this.setIntervalTime();
         AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);

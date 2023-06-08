@@ -66,7 +66,7 @@ struct MediaOperationPage {
         this.albumsDataSource.setBlackList(blackList)
         this.onActive();
         this.loadAlbums()
-        this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.onMenuClicked = (action: Action): void => this.onMenuClickedBindImpl(action);
 
         this.broadCast.on(BroadcastConstants.MEDIA_OPERATION, (albumInfo: SimpleAlbumDataItem, completedFunc?: Function): void => {
             router.back({
@@ -89,6 +89,10 @@ struct MediaOperationPage {
     }
 
     onMenuClicked(action: Action): void {
+        this.onMenuClickedBindImpl(action)
+    }
+
+    private onMenuClickedBindImpl(action: Action): void {
         Log.info(TAG, "onMenuClicked, actionID: " + action.actionID);
 
         if (action === Action.CANCEL) {
@@ -104,8 +108,8 @@ struct MediaOperationPage {
     createNewAlbum(): void {
         Log.info(TAG, 'createNewAlbum');
         let menuContext = new MenuContext();
-        this.onOperationStart = this.onOperationStart.bind(this);
-        this.onOperationEnd = this.onOperationEnd.bind(this);
+        this.onOperationStart = (): void => this.onOperationStartBindImpl();
+        this.onOperationEnd = (): void => this.onOperationEndBindImpl();
         menuContext
             .withOperationStartCallback(this.onOperationStart)
             .withOperationEndCallback(this.onOperationEnd)
@@ -118,9 +122,17 @@ struct MediaOperationPage {
     }
 
     onOperationStart(): void {
+        this.onOperationStartBindImpl()
+    }
+
+    private onOperationStartBindImpl(): void {
     }
 
     onOperationEnd(): void {
+        this.onOperationEndBindImpl()
+    }
+
+    private onOperationEndBindImpl(): void {
     }
 
     updateListCardWidth(): void {

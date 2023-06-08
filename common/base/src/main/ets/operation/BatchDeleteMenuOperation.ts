@@ -59,7 +59,7 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
     }
 
     getResourceFromGrid(dataSource: ItemDataSource): Resource {
-        if (dataSource && dataSource.isSelect()) {
+        if (dataSource != null && dataSource.isSelect()) {
             return this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_all_files_tips') : $r('app.string.delete_all_files_tips');
         } else if (this.count == 1) {
             return this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_single_file_tips') : $r('app.string.delete_single_file_tips');
@@ -91,7 +91,9 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
 
         // 2. onDeleteStart exit selection mode
         let onOperationStart: Function = this.menuContext.onOperationStart;
-        onOperationStart && onOperationStart();
+        if (onOperationStart != null) {
+            onOperationStart()
+        }
 
         this.menuContext.broadCast.emit(BroadcastConstants.DELETE_PROGRESS_DIALOG,
             [$r('app.string.action_delete'), this.count]);

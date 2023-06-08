@@ -118,6 +118,10 @@ struct PhotoBrowser {
     private globalThis = GlobalContext.getContext();
 
     onMenuClicked(action: Action): void {
+        this.onMenuClickedBindImpl(action)
+    }
+
+    private onMenuClickedBindImpl(action: Action): void {
         Log.info(TAG, "onMenuClicked, action: " + action.actionID + ", isPullingDown: " + this.isPullingDown);
         if (this.isPullingDown) {
             return;
@@ -166,7 +170,7 @@ struct PhotoBrowser {
                 .withDeletePageFromType(BroadcastConstants.DELETE_FROM_BROWSER)
                 .withAlbumId( Boolean<string>(this.albumInfo.id).valueOf() ? this.albumInfo.id : (Boolean<SimpleAlbumDataItem>(this.albumInfo).valueOf() ? this.albumInfo.toString() : "") )
                 .withBroadCast(this.broadCast)
-                .withOperationEndCallback(this.onDeleteEnd.bind(this))
+                .withOperationEndCallback((): void => this.onDeleteEndBindImpl())
             menuOperation = new BatchDeleteMenuOperation(menuContext);
         } else if (action === Action.CLEAR_RECYCLE) {
             if (currentPhoto == undefined) {
@@ -174,14 +178,14 @@ struct PhotoBrowser {
             }
             menuContext.withItems([currentPhoto])
                 .withBroadCast(this.broadCast)
-                .withOperationEndCallback(this.onDeleteEnd.bind(this))
+                .withOperationEndCallback((): void => this.onDeleteEndBindImpl())
             menuOperation = new ClearRecycleMenuOperation(menuContext);
         } else if (action === Action.RECOVER) {
             if (currentPhoto == undefined) {
                 return;
             }
             menuContext = new MenuContext();
-            this.onDeleteEnd = this.onDeleteEnd.bind(this);
+            this.onDeleteEnd = (): void => this.onDeleteEndBindImpl();
             menuContext.withItems([currentPhoto])
                 .withOperationEndCallback(this.onDeleteEnd)
                 .withBroadCast(this.broadCast)
@@ -261,6 +265,10 @@ struct PhotoBrowser {
     }
 
     private onDeleteEnd(): void {
+        this.onDeleteEndBindImpl()
+    }
+
+    private onDeleteEndBindImpl(): void {
         Log.debug(TAG, "onDeleteEnd start");
         AppStorage.SetOrCreate<number>("isDelete", 0);
         this.operateEnd();
@@ -312,6 +320,10 @@ struct PhotoBrowser {
     }
 
     onPhotoChanged(index: number): void {
+        this.onPhotoChangedBindImpl(index)
+    }
+
+    private onPhotoChangedBindImpl(index: number): void {
         index = Math.min(index, this.browserDataSource.totalCount() - 1);
         Log.info(TAG, "onPhotoChanged start " + index);
         this.currentIndex = this.isToEdit ? 0 : index;
@@ -411,7 +423,11 @@ struct PhotoBrowser {
         return this.browserDataSource.getDataByIndex(index);
     }
 
-    async onMoveEnd(err, count, total): Promise<void> {
+    async onMoveEnd(err: object, count: number, total: number): Promise<void> {
+        return await this.onMoveEndBindImpl(err, count, total)
+    }
+
+    async onMoveEndBindImpl(err: object, count: number, total: number): Promise<void> {
         Log.debug(TAG, "onMoveEnd count: " + count + ", total: " + total);
         if (err != null) {
             getResourceString($r('app.string.move_failed_single')).then<void, void>((message: string): void => {
@@ -427,7 +443,11 @@ struct PhotoBrowser {
         this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
     }
 
-    onCopyEnd(err, count, total): void {
+    onCopyEnd(err: object, count: number, total: number): void {
+        this.onCopyEndBindImpl(err, count, total)
+    }
+
+    private onCopyEndBindImpl(err: object, count: number, total: number): void {
         Log.debug(TAG, "onCopyEnd count: " + count + ", total: " + total);
         this.dataSourceLoadFinish()
         if (err != null) {
@@ -437,7 +457,11 @@ struct PhotoBrowser {
         }
     }
 
-    async onDownloadEnd(err, count, total): Promise<void> {
+    async onDownloadEnd(err: object, count: number, total: number): Promise<void> {
+        return await this.onDownloadEndBindImpl(err, count, total)
+    }
+
+    async onDownloadEndBindImpl(err: object, count: number, total: number): Promise<void> {
         Log.debug(TAG, "onDownloadEnd count: " + count + ", total: " + total);
         if (err != null) {
             getResourceString($r('app.string.download_failed_single')).then<void, void>((message: string): void => {
@@ -452,11 +476,15 @@ struct PhotoBrowser {
 
     onBackPress(): boolean {
         Log.info(TAG, 'onBackPress');
-        this.controller.finishAnimation(this.onBackPressInner.bind(this));
+        this.controller.finishAnimation((): void => this.onBackPressInnerBindImpl());
         return true;
     }
 
     onBackPressInner(): void {
+        this.onBackPressInnerBindImpl()
+    }
+
+    private onBackPressInnerBindImpl(): void {
         Log.info(TAG, "onBackPressInner " + this.checkedTransition);
         if (this.checkedTransition === Constants.PHOTO_TRANSITION_TIMELINE) {
             Log.info(TAG, 'onBackPress TimelinePage');
@@ -602,7 +630,7 @@ struct PhotoBrowser {
         mediaObserver.registerObserver(this.dataObserver);
         this.checkedTransition = this.photoBrowserTransition;
 
-        this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.onMenuClicked = (action: Action): void => this.onMenuClickedBindImpl(action);
 
         // register event handling
         this.broadCast.on(PhotoConstants.TOGGLE_BAR, (): void => {
@@ -696,14 +724,14 @@ struct PhotoBrowser {
                 albumInfo = params.albumInfo.toString();
             }
             if (params.pageType === MediaOperationType.Move) {
-                this.onMoveEnd = this.onMoveEnd.bind(this);
+                this.onMoveEnd = (err: object, count: number, total: number): Promise<void> => this.onMoveEndBindImpl(err, count, total);
                 menuContext.withItems([currentPhoto])
                     .withBroadCast(this.broadCast)
                     .withAlbumInfo(JSON.parse(albumInfo) as SimpleAlbumDataItem)
                     .withOperationEndCallback(this.onMoveEnd);
                 menuOperation = new MoveMenuOperation(menuContext);
             } else if (params.pageType === MediaOperationType.Copy) {
-                this.onCopyEnd = this.onCopyEnd.bind(this);
+                this.onCopyEnd = (err: object, count: number, total: number): void => this.onCopyEndBindImpl(err, count, total);
                 menuContext.withItems([currentPhoto])
                     .withBroadCast(this.broadCast)
                     .withAlbumInfo(JSON.parse(albumInfo) as SimpleAlbumDataItem)
@@ -721,7 +749,7 @@ struct PhotoBrowser {
         let menuContext = new MenuContext();
         let menuOperation: MenuOperation;
         let currentPhoto = this.getCurrentPhoto();
-        this.onDownloadEnd = this.onDownloadEnd.bind(this);
+        this.onDownloadEnd = (err: object, count: number, total: number): Promise<void> => this.onDownloadEndBindImpl(err, count, total);
         if (currentPhoto == undefined) {
             Log.warn(TAG, 'MediaOperation currentPhoto is undefined');
             return;
@@ -766,7 +794,7 @@ struct PhotoBrowser {
                     dataSource: this.browserDataSource,
                     photoSwiperTransition: this.photoBrowserTransition,
                     swiperController: this.controller,
-                    onPhotoChanged: this.onPhotoChanged.bind(this)
+                    onPhotoChanged: (index: number): void => this.onPhotoChangedBindImpl(index)
                 })
             }
             if (!this.isFromViewData) {

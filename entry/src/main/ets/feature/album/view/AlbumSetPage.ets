@@ -113,14 +113,18 @@ export struct AlbumSetPage {
     }
 
     onMenuClicked(action: Action, arg: Object[]): void {
+        this.onMenuClickedBindImpl(action, arg)
+    }
+
+    private onMenuClickedBindImpl(action: Action, arg: Object[]): void {
         Log.info(TAG, 'onMenuClicked, action: ' + action.actionID);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
         if (action === Action.NEW) {
             menuContext = new MenuContext();
             menuContext
-                .withOperationStartCallback(this.onOperationStart.bind(this))
-                .withOperationEndCallback(this.onNewEnd.bind(this))
+                .withOperationStartCallback((): void => this.onOperationStartBindImpl())
+                .withOperationEndCallback((): void => this.onNewEndBindImpl())
                 .withDataSource(this.albumsDataSource)
                 .withBroadCast(this.broadCast);
             menuOperation = new AlbumSetNewMenuOperation(menuContext);
@@ -131,8 +135,8 @@ export struct AlbumSetPage {
             menuContext = new MenuContext();
             menuContext
                 .withDataSource(this.albumsDataSource)
-                .withOperationStartCallback(this.onOperationStart.bind(this))
-                .withOperationEndCallback(this.onRenameEnd.bind(this))
+                .withOperationStartCallback((): void => this.onOperationStartBindImpl())
+                .withOperationEndCallback((): void => this.onRenameEndBindImpl())
                 .withBroadCast(this.broadCast);
             menuOperation = new AlbumSetRenameMenuOperation(menuContext);
             menuOperation.doAction();
@@ -140,8 +144,8 @@ export struct AlbumSetPage {
             menuContext = new MenuContext();
             menuContext
                 .withDataSource(this.albumsDataSource)
-                .withOperationStartCallback(this.onOperationStart.bind(this))
-                .withOperationEndCallback(this.onDeleteEnd.bind(this))
+                .withOperationStartCallback((): void => this.onOperationStartBindImpl())
+                .withOperationEndCallback((): void => this.onDeleteEndBindImpl())
                 .withBroadCast(this.broadCast);
             menuOperation = new AlbumSetDeleteMenuOperation(menuContext);
             menuOperation.doAction();
@@ -149,23 +153,39 @@ export struct AlbumSetPage {
     }
 
     onOperationStart(): void {
+        this.onOperationStartBindImpl()
+    }
+
+    private onOperationStartBindImpl(): void {
         Log.debug(TAG, 'onOperationStart');
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
     private onDeleteEnd(): void {
+        this.onDeleteEndBindImpl()
+    }
+
+    private onDeleteEndBindImpl(): void {
         this.isAlbumSetSelectedMode = false;
         this.albumsDataSource.dataRemove();
         mediaObserver.registerObserver(this.dataObserver);
     }
 
     onNewEnd(): void {
+        this.onNewEndBindImpl()
+    }
+
+    private onNewEndBindImpl(): void {
         Log.debug(TAG, 'onNewEnd');
         this.isAlbumSetSelectedMode = false;
         mediaObserver.registerObserver(this.dataObserver);
     }
 
     onRenameEnd(): void {
+        this.onRenameEndBindImpl()
+    }
+
+    private onRenameEndBindImpl(): void {
         Log.debug(TAG, 'onRenameEnd');
         this.isAlbumSetSelectedMode = false;
         this.albumsDataSource.notifyDataReload();
@@ -173,6 +193,10 @@ export struct AlbumSetPage {
     }
 
     onOperationEnd(): void {
+        this.onOperationEndBindImpl()
+    }
+
+    private onOperationEndBindImpl(): void {
         Log.debug(TAG, 'onOperationEnd');
         this.isAlbumSetSelectedMode = false;
         this.isMediaLibDataChanged = true;
@@ -185,10 +209,10 @@ export struct AlbumSetPage {
     aboutToAppear(): void {
         startTrace('AlbumSetPageAboutToAppear');
         Log.info(TAG, 'AlbumSetPageAboutToAppear');
-        this.appBroadcast.on(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-        this.appBroadcast.on(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
+        this.appBroadcast.on(BroadcastConstants.BACK_PRESS_EVENT, (clbk: Function): void => this.onIndexBackPressBindImpl(clbk));
+        this.appBroadcast.on(BroadcastConstants.ON_TAB_CHANGED, (index: number): void => this.onTabChangedBindImpl(index));
 
-        this.appBroadcast.on(BroadcastConstants.RESET_ZERO, this.onResetZero.bind(this));
+        this.appBroadcast.on(BroadcastConstants.RESET_ZERO, (pageNumber: number): void => this.onResetZeroBindImpl(pageNumber));
 
         this.isInCurrentTab = true;
 
@@ -197,7 +221,7 @@ export struct AlbumSetPage {
         this.initGridRowCount();
 
         let self = this;
-        this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.onMenuClicked = (action: Action, args: Object[]): void => this.onMenuClickedBindImpl(action, args);
         this.broadCast.on(BroadcastConstants.SELECT, (index: number): void => this.onSelect(index));
 
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => {
@@ -222,10 +246,10 @@ export struct AlbumSetPage {
     aboutToDisappear(): void {
         Log.info(TAG, 'aboutToDisappear');
         this.broadCast.off(null, null);
-        this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-        this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-        this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        this.appBroadcast.off(BroadcastConstants.RESET_ZERO, this.onResetZero.bind(this));
+        this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, (clbk: Function): void => this.onIndexBackPressBindImpl(clbk));
+        this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, (index: number): void => this.onTabChangedBindImpl(index));
+        this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, (index: number): void => this.onStateResetBindImpl(index));
+        this.appBroadcast.off(BroadcastConstants.RESET_ZERO, (pageNumber: number): void => this.onResetZeroBindImpl(pageNumber));
         mediaObserver.unregisterObserver(this.dataObserver);
         this.dataObserver = undefined;
         this.scroller = undefined;
@@ -251,11 +275,15 @@ export struct AlbumSetPage {
         if (newAlbum != null) {
             AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
             this.broadCast.emit(BroadcastConstants.SHOW_COPY_OR_MOVE_DIALOG,
-                [this.moveOperation.bind(this), this.copyOperation.bind(this)]);
+                [(): void => this.moveOperationBindImpl(), (): void => this.copyOperationBindImpl()]);
         }
     }
 
     private copyOperation(): void {
+        this.copyOperationBindImpl()
+    }
+
+    private copyOperationBindImpl(): void {
         let mediaItems = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
         let targetAlbum = AppStorage.Get<SimpleAlbumDataItem>(Constants.APP_KEY_NEW_ALBUM_TARGET);
         if (mediaItems == undefined || targetAlbum == undefined) {
@@ -264,8 +292,8 @@ export struct AlbumSetPage {
         }
         let menuContext = new MenuContext();
         menuContext.withItems(mediaItems)
-            .withOperationStartCallback(this.onOperationStart.bind(this))
-            .withOperationEndCallback(this.onOperationEnd.bind(this))
+            .withOperationStartCallback((): void => this.onOperationStartBindImpl())
+            .withOperationEndCallback((): void => this.onOperationEndBindImpl())
             .withBroadCast(this.broadCast)
             .withAlbumInfo(targetAlbum);
         let menuOperation = new CopyMenuOperation(menuContext);
@@ -273,6 +301,10 @@ export struct AlbumSetPage {
     }
 
     private moveOperation(): void {
+        this.moveOperationBindImpl()
+    }
+
+    private moveOperationBindImpl(): void {
         let mediaItems = AppStorage.Get<MediaDataItem[]>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
         let targetAlbum = AppStorage.Get<SimpleAlbumDataItem>(Constants.APP_KEY_NEW_ALBUM_TARGET);
         if (mediaItems == undefined || undefined == targetAlbum) {
@@ -280,8 +312,8 @@ export struct AlbumSetPage {
         }
         let menuContext = new MenuContext();
         menuContext.withItems(mediaItems)
-            .withOperationStartCallback(this.onOperationStart.bind(this))
-            .withOperationEndCallback(this.onOperationEnd.bind(this))
+            .withOperationStartCallback((): void => this.onOperationStartBindImpl())
+            .withOperationEndCallback((): void => this.onOperationEndBindImpl())
             .withBroadCast(this.broadCast)
             .withAlbumInfo(targetAlbum);
         let menuOperation = new MoveMenuOperation(menuContext);
@@ -298,6 +330,10 @@ export struct AlbumSetPage {
     }
 
     onIndexBackPress(callback: Function): void {
+        this.onIndexBackPressBindImpl(callback)
+    }
+
+    private onIndexBackPressBindImpl(callback: Function): void {
         if (this.isInCurrentTab) {
             if (this.isAlbumSetSelectedMode) {
                 callback(true);
@@ -309,12 +345,20 @@ export struct AlbumSetPage {
     }
 
     onStateReset(index: number): void {
+        this.onStateResetBindImpl(index)
+    }
+
+    private onStateResetBindImpl(index: number): void {
         if (index == Constants.ALBUM_PAGE_INDEX) {
             this.isAlbumSetSelectedMode = false;
         }
     }
 
     onTabChanged(index: number): void {
+        this.onTabChangedBindImpl(index)
+    }
+
+    private onTabChangedBindImpl(index: number): void {
         if (index == Constants.ALBUM_PAGE_INDEX) {
             this.isInCurrentTab = true;
             this.onActive();
@@ -361,6 +405,10 @@ export struct AlbumSetPage {
     }
 
     onResetZero(pageNumber: number): void {
+        this.onResetZeroBindImpl(pageNumber)
+    }
+
+    private onResetZeroBindImpl(pageNumber: number): void {
         if (pageNumber == Constants.ALBUM_PAGE_INDEX) {
             this.scroller.scrollEdge(Edge.Top);
         }

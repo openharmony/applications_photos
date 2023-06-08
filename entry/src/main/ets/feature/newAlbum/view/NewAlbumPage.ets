@@ -79,6 +79,10 @@ struct NewAlbumPage {
     }
 
     onMenuClicked(action: Action): void {
+        this.onMenuClickedBindImpl(action)
+    }
+
+    private onMenuClickedBindImpl(action: Action): void {
         Log.info(TAG, "onMenuClicked, action: " + action.actionID);
         if (action === Action.CANCEL) {
             this.groupDataSource.setSelect(false)
@@ -138,6 +142,10 @@ struct NewAlbumPage {
     }
 
     onUpdateFavorAndSelectState(item: MediaDataItem): void {
+        this.onUpdateFavorAndSelectStateBindImpl(item)
+    }
+
+    private onUpdateFavorAndSelectStateBindImpl(item: MediaDataItem): void {
         this.onUpdateFavorState(item);
         this.onSelect(this.groupDataSource.getIndexByItem(item));
     }
@@ -156,9 +164,17 @@ struct NewAlbumPage {
     }
 
     onOperationStart(): void {
+        this.onOperationStartBindImpl()
+    }
+
+    private onOperationStartBindImpl(): void {
     }
 
     onOperationEnd(): void {
+        this.onOperationEndBindImpl()
+    }
+
+    private onOperationEndBindImpl(): void {
         if (this.isNewAlbum) {
             AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
             AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
@@ -179,8 +195,8 @@ struct NewAlbumPage {
 
     private copyOperation(): void {
         let menuContext = new MenuContext();
-        this.onOperationStart = this.onOperationStart.bind(this);
-        this.onOperationEnd = this.onOperationEnd.bind(this);
+        this.onOperationStart = (): void => this.onOperationStartBindImpl();
+        this.onOperationEnd = (): void => this.onOperationEndBindImpl();
         menuContext
             .withDataSource(this.groupDataSource)
             .withOperationStartCallback(this.onOperationStart)
@@ -204,7 +220,7 @@ struct NewAlbumPage {
             this.groupDataSource.notifyDataReload()
             this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
         })
-        this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.onMenuClicked = (action: Action): void => this.onMenuClickedBindImpl(action);
         this.broadCast.on(BroadcastConstants.SELECT, (index: number): void => this.onSelect(index));
 
         this.broadCast.on(BroadcastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaDataItem): void => {
@@ -215,7 +231,7 @@ struct NewAlbumPage {
             this.jumpToThirdPhotoBrowser(name, item)
         })
 
-        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
+        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, (item: MediaDataItem): void => this.onUpdateFavorAndSelectStateBindImpl(item));
 
         this.initGridRowCount();
         this.moreMenuList = [];
@@ -278,7 +294,7 @@ struct NewAlbumPage {
 
     aboutToDisappear(): void {
         this.broadCast.off(null, null);
-        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
+        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, (item: MediaDataItem): void => this.onUpdateFavorAndSelectStateBindImpl(item));
     }
 
     build() {

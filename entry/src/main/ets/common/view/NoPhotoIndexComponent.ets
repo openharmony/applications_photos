@@ -26,7 +26,7 @@ export struct NoPhotoIndexComponent {
 
     // set an initial value temporarily, later change to 0.
     @State imageSize: number = 0;
-    private reSizeFunc = this.reSizeLayout.bind(this);
+    private reSizeFunc = (): void => this.reSizeLayoutBindImpl();
 
     aboutToAppear(): void {
         Log.info(this.TAG, 'aboutToAppear');
@@ -35,6 +35,10 @@ export struct NoPhotoIndexComponent {
     }
 
     reSizeLayout(): void {
+        this.reSizeLayoutBindImpl()
+    }
+
+    private reSizeLayoutBindImpl(): void {
         this.updateImageSize();
     }
 

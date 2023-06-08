@@ -104,6 +104,10 @@ struct PhotoGridPage {
     }
 
     onMenuClicked(action: Action): void {
+        this.onMenuClickedBindImpl(action)
+    }
+
+    private onMenuClickedBindImpl(action: Action): void {
         Log.info(TAG, "onMenuClicked, action: " + action.actionID);
         let menuContext: MenuContext;
         let menuOperation: MenuOperation;
@@ -121,8 +125,8 @@ struct PhotoGridPage {
             this.onSelect()
         } else if (action === Action.DELETE) {
             menuContext = new MenuContext();
-            this.onDeleteStart = this.onDeleteStart.bind(this);
-            this.onDeleteEnd = this.onDeleteEnd.bind(this);
+            this.onDeleteStart = (): void => this.onDeleteStartBindImpl();
+            this.onDeleteEnd = (err: object): void => this.onDeleteEndBindImpl(err);
             menuContext
                 .withDeletePageFromType(BroadcastConstants.DELETE_FROM_GRID)
                 .withAlbumId(this.albumInfo.id)
@@ -141,8 +145,8 @@ struct PhotoGridPage {
             this.openDetailsDialog();
         } else if (action === Action.CLEAR_RECYCLE) {
             menuContext = new MenuContext();
-            this.onDeleteStart = this.onDeleteStart.bind(this);
-            this.onDeleteEnd = this.onDeleteEnd.bind(this);
+            this.onDeleteStart = (): void => this.onDeleteStartBindImpl();
+            this.onDeleteEnd = (err: object): void => this.onDeleteEndBindImpl(err);
             menuContext
                 .withDataSource(this.groupDataSource)
                 .withOperationStartCallback(this.onDeleteStart)
@@ -152,8 +156,8 @@ struct PhotoGridPage {
             menuOperation.doAction();
         } else if (action === Action.RECOVER) {
             menuContext = new MenuContext();
-            this.onDeleteStart = this.onDeleteStart.bind(this);
-            this.onDeleteEnd = this.onDeleteEnd.bind(this);
+            this.onDeleteStart = (): void => this.onDeleteStartBindImpl();
+            this.onDeleteEnd = (err: object): void => this.onDeleteEndBindImpl(err);
             menuContext
                 .withDataSource(this.groupDataSource)
                 .withOperationStartCallback(this.onDeleteStart)
@@ -168,8 +172,8 @@ struct PhotoGridPage {
         } else if (action === Action.NEW) {
             this.routeToAddMediaPage();
         } else if (action === Action.DOWNLOAD) {
-            this.onDownloadStart = this.onDownloadStart.bind(this);
-            this.onDownloadEnd = this.onDownloadEnd.bind(this);
+            this.onDownloadStart = (): void => this.onDownloadStartBindImpl();
+            this.onDownloadEnd = (err: object, count: number, total: number): Promise<void> => this.onDownloadEndBindImpl(err, count, total);
             menuContext = new MenuContext();
             menuContext
                 .withDataSource(this.groupDataSource)
@@ -230,11 +234,19 @@ struct PhotoGridPage {
     }
 
     onCopyStart(): void {
+        this.onCopyStartBindImpl()
+    }
+
+    private onCopyStartBindImpl(): void {
         Log.info(TAG, "onCopyStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
-    onCopyEnd(err, count, total): void {
+    onCopyEnd(err: object, count: number, total: number): void {
+        this.onCopyEndBindImpl(err, count, total)
+    }
+
+    onCopyEndBindImpl(err, count, total): void {
         Log.info(TAG, "onCopyEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
@@ -249,11 +261,19 @@ struct PhotoGridPage {
     }
 
     onDownloadStart(): void {
+        this.onDownloadStartBindImpl()
+    }
+
+    private onDownloadStartBindImpl(): void {
         Log.info(TAG, "onDownloadStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
-    async onDownloadEnd(err, count, total): Promise<void> {
+    async onDownloadEnd(err: object, count: number, total: number): Promise<void> {
+        return await this.onDownloadEndBindImpl(err, count, total)
+    }
+
+    async onDownloadEndBindImpl(err: object, count: number, total: number): Promise<void> {
         Log.info(TAG, "onDownloadEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
@@ -277,11 +297,19 @@ struct PhotoGridPage {
     }
 
     onMoveStart(): void {
+        this.onMoveStartBindImpl()
+    }
+
+    private onMoveStartBindImpl(): void {
         Log.info(TAG, "onMoveStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
-    onMoveEnd(err, count, total): void {
+    onMoveEnd(err: object, count: number, total: number): void {
+        this.onMoveEndBindImpl(err, count, total)
+    }
+
+    private onMoveEndBindImpl(err: object, count: number, total: number): void {
         Log.info(TAG, "onMoveEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
@@ -295,11 +323,19 @@ struct PhotoGridPage {
     }
 
     onDeleteStart(): void {
+        this.onDeleteStartBindImpl()
+    }
+
+    private onDeleteStartBindImpl(): void {
         Log.info(TAG, "onDeleteStart");
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
-    onDeleteEnd(err): void {
+    onDeleteEnd(err: object): void {
+        this.onDeleteEndBindImpl(err)
+    }
+
+    private onDeleteEndBindImpl(err: object): void {
         Log.info(TAG, "onDeleteEnd");
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
@@ -363,6 +399,10 @@ struct PhotoGridPage {
     }
 
     private onUpdateFavorAndSelectState(item: MediaDataItem): void {
+        this.onUpdateFavorAndSelectStateBindImpl(item)
+    }
+
+    private onUpdateFavorAndSelectStateBindImpl(item: MediaDataItem): void {
         this.onUpdateFavorState(item);
         this.onSelect();
     }
@@ -389,8 +429,8 @@ struct PhotoGridPage {
 
     private moveOperation(albumInfo: SimpleAlbumDataItem): void {
         let menuContext = new MenuContext();
-        this.onMoveStart = this.onMoveStart.bind(this);
-        this.onMoveEnd = this.onMoveEnd.bind(this);
+        this.onMoveStart = (): void => this.onMoveStartBindImpl();
+        this.onMoveEnd = (err: object, count: number, total: number): void => this.onMoveEndBindImpl(err, count, total);
         menuContext.withDataSource(this.groupDataSource)
             .withOperationStartCallback(this.onMoveStart)
             .withOperationEndCallback(this.onMoveEnd)
@@ -403,8 +443,8 @@ struct PhotoGridPage {
     private copyOperation(albumInfo: SimpleAlbumDataItem): void {
         let menuContext = new MenuContext();
         menuContext.withDataSource(this.groupDataSource)
-            .withOperationStartCallback(this.onCopyStart.bind(this))
-            .withOperationEndCallback(this.onCopyEnd.bind(this))
+            .withOperationStartCallback((): void => this.onCopyStartBindImpl())
+            .withOperationEndCallback((err: object, count: number, total: number): void => this.onCopyEndBindImpl(err, count, total))
             .withBroadCast(this.broadCast)
             .withAlbumInfo(albumInfo);
         let menuOperation = new CopyMenuOperation(menuContext);
@@ -431,7 +471,7 @@ struct PhotoGridPage {
         }
         Log.info(TAG, "reloadGroupItemData");
 
-        this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.onMenuClicked = (action: Action) => this.onMenuClickedBindImpl(action);
         mediaObserver.registerObserver(this.dataObserver);
 
         this.broadCast.on(BroadcastConstants.SELECT, (index: number): void => { this.onSelect() });
@@ -445,11 +485,11 @@ struct PhotoGridPage {
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number): void => {
             Log.info(TAG, "ON_LOADING_FINISHED size: " + size);
         });
-        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
+        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, (item: MediaDataItem): void => this.onUpdateFavorAndSelectStateBindImpl(item));
 
         if (this.albumInfo.deviceId != null) {
             Log.info(TAG, "deviceId size: " + this.albumInfo.deviceId);
-            this.appBroadcast.on(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
+            this.appBroadcast.on(BroadcastConstants.ON_REMOTE_CHANGED, (res: string, deviceId: number): void => this.onUpdateRemoteDeviceBindImpl(res, deviceId));
         }
 
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => {
@@ -472,7 +512,11 @@ struct PhotoGridPage {
         Log.info(TAG, "initGridRowCount contentWidth: " + contentWidth);
     }
 
-    private onUpdateRemoteDevice(res, deviceId): void {
+    private onUpdateRemoteDevice(res: string, deviceId: number): void {
+        this.onUpdateRemoteDeviceBindImpl(res, deviceId)
+    }
+
+    private onUpdateRemoteDeviceBindImpl(res: string, deviceId: number|string): void {
         Log.info(TAG, "onUpdateRemoteDevice");
         if (deviceId != this.albumInfo.deviceId || this.isActive == false) {
             Log.debug(TAG, "other device");
@@ -580,8 +624,8 @@ struct PhotoGridPage {
     aboutToDisappear(): void {
         Log.info(TAG, "aboutToDisappear");
         this.broadCast.off(null, null);
-        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
-        this.appBroadcast.off(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
+        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, (item: MediaDataItem): void => this.onUpdateFavorAndSelectStateBindImpl(item));
+        this.appBroadcast.off(BroadcastConstants.ON_REMOTE_CHANGED, (res: string, deviceId: number): void => this.onUpdateRemoteDeviceBindImpl(res, deviceId));
         mediaObserver.unregisterObserver(this.dataObserver);
         this.dataObserver = undefined;
         this.scroller = undefined;
