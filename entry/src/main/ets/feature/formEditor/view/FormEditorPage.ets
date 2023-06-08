@@ -102,9 +102,9 @@ struct FormEditorPage {
         if (!this.isShow) {
             return;
         }
-        formProvider.setFormNextRefreshTime(this.formId, this.time).then(() => {
+        formProvider.setFormNextRefreshTime(this.formId, this.time).then((): void => {
             Log.info(TAG, "setFormNextRefreshTime sucessfully");
-        }).catch((err) => {
+        }).catch((err: Error): void => {
             Log.error(TAG, "init err " + err);
         })
     }
@@ -117,19 +117,19 @@ struct FormEditorPage {
         Log.debug(TAG, "updateFormData formId: " + JSON.stringify(this.formId));
         let obj3 = this.bindFormData();
         Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
-        formProvider.updateForm(this.formId, obj3).then((data) => {
+        formProvider.updateForm(this.formId, obj3).then((data: void): void => {
             Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
             if (this.isShow) {
-                formProvider.setFormNextRefreshTime(this.formId, this.time).then(() => {
+                formProvider.setFormNextRefreshTime(this.formId, this.time).then((): void => {
                     this.terminate();
-                }).catch((err) => {
+                }).catch((err: Error): void => {
                     Log.error(TAG, "init err " + err);
                     this.terminate();
                 })
             } else {
                 this.terminate();
             }
-        }).catch((error) => {
+        }).catch((error): void => {
             Log.error(TAG, "updateForm failed. Cause: " + JSON.stringify(error));
             this.terminate();
         });
@@ -207,19 +207,19 @@ struct FormEditorPage {
         Log.debug(TAG, 'aboutToAppear start!');
         this.appBroadcast.on(BroadcastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
         this.appBroadcast.on(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
-        dataStore.init().then(() => {
+        dataStore.init().then((): void => {
             let intervalTimeKey = 'intervalTime';
-            dataStore.getData(intervalTimeKey, this.time).then((d) => {
+            dataStore.getData(intervalTimeKey, this.time).then((d: Object): void => {
                 this.time = d as number;
                 this.setIntervalTime();
                 AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);
             })
             let isShowKey = 'isShow_' + this.formId;
-            dataStore.getData(isShowKey, this.isShow).then((d) => {
+            dataStore.getData(isShowKey, this.isShow).then((d: Object): void => {
                 this.isShow = d as boolean;
             })
             let arkUriKey = 'arkUri_' + this.formId;
-            dataStore.getData(arkUriKey, this.arkUri).then((d) => {
+            dataStore.getData(arkUriKey, this.arkUri).then((d: Object): void => {
                 if (d == 0) {
                     d = 1;
                 } else {
@@ -280,7 +280,7 @@ struct FormEditorPage {
             .height($r('app.float.title_default'))
             .alignItems(VerticalAlign.Center)
             .width('100%')
-            .onClick(() => {
+            .onClick((): void => {
                 this.terminate();
             })
 
@@ -326,7 +326,7 @@ struct FormEditorPage {
                     })
                     .backgroundColor($r('app.color.white'))
                     .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.selectPhoto();
                     })
                 }
@@ -360,7 +360,7 @@ struct FormEditorPage {
                     })
                     .backgroundColor($r('app.color.white'))
                     .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.selectAlbum();
                     })
                 }
@@ -417,7 +417,7 @@ struct FormEditorPage {
                     })
                     .backgroundColor($r('app.color.white'))
                     .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.setPlayInterval()
                     })
                 }

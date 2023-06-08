@@ -156,7 +156,7 @@ struct PhotoBrowser {
             if (currentPhoto == undefined) {
                 return;
             }
-            currentPhoto.setFavor().then((isSuccess: boolean) => this.setFavourite(isSuccess))
+            currentPhoto.setFavor().then((isSuccess: boolean): void => { return this.setFavourite(isSuccess) })
             return;
         } else if (action === Action.DELETE) {
             if (currentPhoto == undefined) {
@@ -222,7 +222,7 @@ struct PhotoBrowser {
             if (currentPhoto == undefined) {
                 return;
             }
-            currentPhoto.setOrientation().then(() => this.setOrientation())
+            currentPhoto.setOrientation().then((): void => this.setOrientation())
             return;
         } else if (action === Action.MOVE) {
             this.backFromCopy = true;
@@ -253,7 +253,7 @@ struct PhotoBrowser {
                 mediaDataItemCache.get(currentPhoto.uri).favouriteStatus = currentPhoto.favouriteStatus;
             }
             // 收藏相册进入大图，点击取消收藏会导致Item成员变少，所以要dataRemove
-            this.browserDataSource.reloadGroupItemData(false).then(() => {
+            this.browserDataSource.reloadGroupItemData(false).then((): void => {
                 this.operateEnd();
             });
             this.updateMenu();
@@ -351,7 +351,7 @@ struct PhotoBrowser {
         }
 
         // PhotoItems 和 这里都会有load, 极端情况下可能产生一次无效的load
-        currentPhoto.load(false).then(() => {
+        currentPhoto.load(false).then((): void => {
             this.photoDate = DateUtil.getLocalizedDate(currentPhoto.dateAdded);
             if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
                 this.timeAndLocation = "" + this.deviceName + "/" + DateUtil.getLocalizedTime(currentPhoto.dateAdded);
@@ -368,7 +368,7 @@ struct PhotoBrowser {
             return;
         }
         this.toolMenuList = [];
-        this.getActionList(currentPhoto).then((list: Action[]) => {
+        this.getActionList(currentPhoto).then((list: Action[]): void => {
             if (this.pageFrom == Constants.ENTRY_FROM.CAMERA || this.pageFrom == Constants.ENTRY_FROM.CARD) {
                 this.menuList = [Action.GOTO_PHOTOS, Action.INFO];
             } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
@@ -425,7 +425,7 @@ struct PhotoBrowser {
     async onMoveEnd(err, count, total): Promise<void> {
         Log.debug(TAG, "onMoveEnd count: " + count + ", total: " + total);
         if (err != null) {
-            getResourceString($r('app.string.move_failed_single')).then((message: string) => {
+            getResourceString($r('app.string.move_failed_single')).then((message: string): void => {
                 showToast(message)
             })
             return;
@@ -442,7 +442,7 @@ struct PhotoBrowser {
         Log.debug(TAG, "onCopyEnd count: " + count + ", total: " + total);
         this.dataSourceLoadFinish()
         if (err != null) {
-            getResourceString($r('app.string.copy_failed_single')).then((message: string) => {
+            getResourceString($r('app.string.copy_failed_single')).then((message: string): void => {
                 showToast(message);
             })
         }
@@ -451,11 +451,11 @@ struct PhotoBrowser {
     async onDownloadEnd(err, count, total): Promise<void> {
         Log.debug(TAG, "onDownloadEnd count: " + count + ", total: " + total);
         if (err != null) {
-            getResourceString($r('app.string.download_failed_single')).then((message: string) => {
+            getResourceString($r('app.string.download_failed_single')).then((message: string): void => {
                 showToast(message);
             })
         } else {
-            getResourceString($r('app.string.download_progress_done')).then((message: string) => {
+            getResourceString($r('app.string.download_progress_done')).then((message: string): void => {
                 showToast(message);
             })
         }
@@ -516,7 +516,7 @@ struct PhotoBrowser {
         AppStorage.SetOrCreate("isLeftSwiper", 0);
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000');
         this.hasAppeared = true;
-        mMultimodalInputManager.registerListener((control: number) => {
+        mMultimodalInputManager.registerListener((control: number): void => {
             Log.info(TAG, "key control: " + control + " index " + this.currentIndex);
             if (control == 0) {
                 if (this.currentIndex > 0) {
@@ -572,7 +572,7 @@ struct PhotoBrowser {
                     this.onPhotoChanged(0);
                 }
             } else {
-                this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean) => {
+                this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean): void => {
                     this.onPhotoChanged(0);
                     this.browserDataSource.notifyDataReload();
                 })
@@ -595,7 +595,7 @@ struct PhotoBrowser {
             }
             AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
             this.browserDataSource.setAlbumId(this.albumInfo.id);
-            this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean) => {
+            this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean): void => {
                 this.isDataChanged = isEmpty;
                 if (!Number.isNaN(AppStorage.Get(Constants.FROM_CURRENT_INDEX))) {
                     this.onPhotoChanged(AppStorage.Get(Constants.FROM_CURRENT_INDEX));
@@ -616,32 +616,32 @@ struct PhotoBrowser {
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
         // register event handling
-        this.broadCast.on(PhotoConstants.TOGGLE_BAR, () => {
+        this.broadCast.on(PhotoConstants.TOGGLE_BAR, (): void => {
             this.onToggleBars();
         });
 
-        this.broadCast.on(PhotoConstants.HIDE_BARS, () => {
+        this.broadCast.on(PhotoConstants.HIDE_BARS, (): void => {
             this.hideBars();
         });
 
-        this.broadCast.on(PhotoConstants.PULL_DOWN_START, () => {
+        this.broadCast.on(PhotoConstants.PULL_DOWN_START, (): void => {
             Log.info(TAG, 'pulling down start');
         });
 
-        this.broadCast.on(PhotoConstants.PULL_DOWN_END, () => {
+        this.broadCast.on(PhotoConstants.PULL_DOWN_END, (): void => {
             this.pullDownFlag = true;
             this.onBackPress();
         });
 
-        this.broadCast.on(PhotoConstants.DATA_SIZE_CHANGED, (size: number) => {
+        this.broadCast.on(PhotoConstants.DATA_SIZE_CHANGED, (size: number): void => {
             this.onDataSizeChanged(size);
         });
 
-        this.broadCast.on(PhotoConstants.DATA_CONTENT_CHANGED, () => {
+        this.broadCast.on(PhotoConstants.DATA_CONTENT_CHANGED, (): void => {
             this.onPhotoChanged(this.currentIndex);
         });
 
-        this.broadCast.on(PhotoConstants.RENAME, (result: string[]) => {
+        this.broadCast.on(PhotoConstants.RENAME, (result: string[]): void => {
             Log.info(TAG, "rename refresh: " + result[0] + ", " + result[1]);
             let currentPhoto = this.getCurrentPhoto();
             if (currentPhoto == undefined) {
@@ -652,22 +652,22 @@ struct PhotoBrowser {
             this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
         });
 
-        this.broadCast.on(PhotoConstants.PULL_DOWN_START, (event) => {
+        this.broadCast.on(PhotoConstants.PULL_DOWN_START, (event: Object): void => {
             Log.debug(TAG, "pulling down start: " + JSON.stringify(event));
             this.isPullingDown = true;
         })
 
-        this.broadCast.on(PhotoConstants.PULL_DOWN_CANCEL, () => {
+        this.broadCast.on(PhotoConstants.PULL_DOWN_CANCEL, (): void => {
             Log.info(TAG, 'pulling down cancel');
             this.isPullingDown = false;
         })
 
-        this.broadCast.on(PhotoConstants.PHOTO_SHOW_STATE, (state: boolean) => {
+        this.broadCast.on(PhotoConstants.PHOTO_SHOW_STATE, (state: boolean): void => {
             Log.debug(TAG, 'current photo show state change');
             this.currentShow = state;
         });
 
-        this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean) => {
+        this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean): void => {
             Log.info(TAG, "set swiper swipe " + value);
             this.canSwipe = value;
         });
@@ -796,7 +796,7 @@ struct PhotoBrowser {
                 Column() {
                     if (this.isShowBar) {
                         PhotoBrowserActionBar({
-                            onMenuClicked: (action) => this.onMenuClicked(action)
+                            onMenuClicked: (action: Action): void => { this.onMenuClicked(action) }
                         })
                     }
                 Text("" + (this.currentIndex + 1) + "/" + this.browserDataSource.totalCount())

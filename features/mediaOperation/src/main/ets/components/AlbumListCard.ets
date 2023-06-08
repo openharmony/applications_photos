@@ -30,10 +30,10 @@ export struct AlbumListCard {
 
     aboutToAppear(): void {
         Log.info(TAG, 'album mediaSet ' + JSON.stringify(this.item));
-        this.item.load().then(() => {
+        this.item.load().then((): void => {
             this.thumbnail = this.item.getThumbnail();
         })
-        this.item.getVideoCount().then((videoCount: number) => {
+        this.item.getVideoCount().then((videoCount: number): void => {
             this.mediaRes = this.showMediaRes(videoCount);
         })
     }
@@ -75,7 +75,7 @@ export struct AlbumListCard {
                     .height($r('app.float.list_card_image_size'))
                     .width($r('app.float.list_card_image_size'))
                     .borderRadius($r('sys.float.ohos_id_corner_radius_default_s'))
-                    .onError(() => {
+                    .onError((): void => {
                         if (this.thumbnail != null) {
                             this.useAlt = true;
                         }
@@ -103,7 +103,7 @@ export struct AlbumListCard {
         .alignItems(VerticalAlign.Center)
         .width('100%')
         .height($r('app.float.list_card_height'))
-        .onClick(() => {
+        .onClick((): void => {
             this.mediaOperation();
         })
     }

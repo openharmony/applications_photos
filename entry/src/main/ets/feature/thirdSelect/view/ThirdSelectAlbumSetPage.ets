@@ -129,13 +129,13 @@ struct ThirdSelectAlbumSetPage {
         Log.info(TAG, "ThirdSelectAlbumSetPage isFromWallpaper: " + this.isFromWallpaper);
         Log.info(TAG, "ThirdSelectAlbumSetPage maxSelectCount: " + this.maxSelectCount);
         Log.info(TAG, "ThirdSelectAlbumSetPage filterMediaType: " + this.filterMediaType);
-        this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
+        this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number): void => {
             Log.info(TAG, "ON_LOADING_FINISHED size: " + size);
             this.isEmpty = size == 0;
             this.isHideScrollBar = (size <= (this.gridRowCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         });
 
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => {
             this.initGridRowCount();
         });
 
@@ -163,7 +163,7 @@ struct ThirdSelectAlbumSetPage {
 
      private async loadAlbums(): Promise<void> {
          let displayName = await getResourceString($r('app.string.album_all'));
-         this.albumsDataSource.reloadAlbumItemData().then<void, void>((isEmpty: boolean) => {
+         this.albumsDataSource.reloadAlbumItemData().then<void, void>((isEmpty: boolean): void => {
              this.isEmpty = isEmpty
              this.albumsDataSource.notifyDataReload()
             // 从三方拉起，直接跳转到所有相册
@@ -242,9 +242,8 @@ struct ThirdSelectAlbumSetPage {
                     NoPhotoIndexComponent({ index: Constants.ALBUM_PAGE_INDEX })
                 }
                 Grid(this.scroller) {
-                    LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
-                        if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null) &&
-                            item.get().id != MediaConstants.ALBUM_ID_RECYCLE) {
+                    LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>): void => {
+                        if (item != null && item.get() != null && item.get().id != MediaConstants.ALBUM_ID_RECYCLE) {
                             if ( item.get().index == 0) {
                                 GridItem() {
                                     ThirdAlbumGridItem({
@@ -271,8 +270,7 @@ struct ThirdSelectAlbumSetPage {
                                 }
                             }
                         }
-                    }, (item: LazyItem<AlbumDataItem>) => (item != undefined && item != null) && (item.get() != undefined && item.get() != null) ?
-                        item.getHashCode() : JSON.stringify(item))
+                    }, (item: LazyItem<AlbumDataItem>): string => item != null && item.get() != null ? item.getHashCode() : JSON.stringify(item))
                 }
                 .columnsTemplate('1fr '.repeat(this.gridRowCount))
                 .padding({

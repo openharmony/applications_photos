@@ -61,7 +61,7 @@ export default class ServiceExtAbility extends Extension {
         name: "DeleteDialog " + appName + Math.random(), windowType: window.WindowType.TYPE_DIALOG, ctx: this.context
       }
       try {
-        window.createWindow(config, (err: BusinessError, data: window.Window) => {
+        window.createWindow(config, (err: BusinessError, data: window.Window): void => {
           if (err.code != null) {
             Log.info(TAG, "Failed to create the window. Cause : " + JSON.stringify(err));
             return;
@@ -76,9 +76,9 @@ export default class ServiceExtAbility extends Extension {
             AppStorage.SetOrCreate("requestCallback", requestCallback);
             Log.info(TAG, "Succeeded in get requestCallback");
 
-            windowClass.bindDialogTarget(requestInfo, () => {
+            windowClass.bindDialogTarget(requestInfo, (): void => {
               Log.info(TAG, 'Dialog Window Need Destroy.');
-            }, (err: BusinessError) => {
+            }, (err: BusinessError): void => {
               Log.error(TAG, 'Dialog bindDialogTarget err');
               if (err.code != null) {
                 Log.error(TAG, "Failed to bind dialog target. Cause : " + JSON.stringify(err));
@@ -86,14 +86,14 @@ export default class ServiceExtAbility extends Extension {
               }
               Log.error(TAG, 'Succeeded in binding dialog target.');
               try {
-                windowClass.setUIContent('pages/ResourceDeletePage', (err: BusinessError) => {
+                windowClass.setUIContent('pages/ResourceDeletePage', (err: BusinessError): void => {
                   if (err.code != null) {
                     Log.error(TAG, "Failed to load the content. Cause : " + JSON.stringify(err));
                     return;
                   }
                   Log.error(TAG, "Succeeded in loading the content");
                   let promise = display.getDefaultDisplay();
-                  promise.then((data: display.Display) => {
+                  promise.then((data: display.Display): void => {
                     Log.error(TAG, "Succeeded in loading the content, width : " + data.width + ",  height : " + data.height);
                     ScreenManager.setWinWidth(data.width)
                     windowClass.resetSize(data.width, data.height);
@@ -120,10 +120,10 @@ export default class ServiceExtAbility extends Extension {
     Log.info(TAG, 'done');
 
     let onStart = this.globalThis.getObject("onStart1");
-    onStart = (() => {
+    onStart = ((): void => {
       try {
         Log.info(TAG, 'test start1');
-        windowClass.destroyWindow((err: BusinessError) => {
+        windowClass.destroyWindow((err: BusinessError): void => {
           if (err.code != null) {
             Log.info(TAG, "Failed to destroy the window. Cause : " + JSON.stringify(err));
             return;

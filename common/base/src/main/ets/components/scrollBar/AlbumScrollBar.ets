@@ -39,7 +39,7 @@ export struct AlbumScrollBar {
                 ? $r('app.float.album_scrollbar_select_size') : $r('app.float.album_scrollbar_normal_size'),
             y: 0
         })
-        .onTouch((event: TouchEvent) => {
+        .onTouch((event: TouchEvent): void => {
             if (event.type == TouchType.Down) {
                 this.isClickScrollBar = true;
             } else if (event.type == TouchType.Up) {

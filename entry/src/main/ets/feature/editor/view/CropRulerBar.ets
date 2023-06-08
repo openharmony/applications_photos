@@ -247,11 +247,11 @@ export struct CropRulerBar {
             Canvas(this.context)
                 .width(this.cWidth)
                 .height(this.cHeight)
-                .onReady(() => {
+                .onReady((): void => {
                     this.drawRuler()
                 })
         }
-        .onTouch((event) => {
+        .onTouch((event: TouchEvent): void => {
             this.onTouchEvent(event);
         })
     }

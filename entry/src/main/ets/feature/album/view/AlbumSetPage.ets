@@ -198,9 +198,9 @@ export struct AlbumSetPage {
 
         let self = this;
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect(index));
+        this.broadCast.on(BroadcastConstants.SELECT, (index: number): void => this.onSelect(index));
 
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => {
             self.initGridRowCount();
         });
         if (this.currentIndex == Constants.LOCAL_TAB_INDEX) {
@@ -210,7 +210,7 @@ export struct AlbumSetPage {
             this.tabs[Constants.LOCAL_TAB_INDEX].isSelected = false;
             this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = true;
         }
-        this.distributedDataSource.reloadAlbumItemData().then((change: number) => {
+        this.distributedDataSource.reloadAlbumItemData().then((change: number): void => {
             this.onUpdateRemoteDevice(change);
             this.distributedDataSource.notifyDataReload();
         })
@@ -349,7 +349,7 @@ export struct AlbumSetPage {
 
     private showNotify(): void {
         if (this.needNotify) {
-            getResourceString($r('app.string.distributed_album_disconnected')).then((message: string) => {
+            getResourceString($r('app.string.distributed_album_disconnected')).then((message: string): void => {
                 showToast(message);
             })
             this.needNotify = false;
@@ -383,7 +383,7 @@ export struct AlbumSetPage {
     onMediaLibDataChange(changeType): void {
         Log.info(TAG, 'onMediaLibDataChange type: ' + changeType);
         if (changeType == MediaConstants.MEDIA_TYPE_REMOTE) {
-            this.distributedDataSource.reloadAlbumItemData().then((change: number) => {
+            this.distributedDataSource.reloadAlbumItemData().then((change: number): void => {
                 this.onUpdateRemoteDevice(change)
                 this.distributedDataSource.notifyDataReload()
             })
@@ -396,7 +396,7 @@ export struct AlbumSetPage {
 
     private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
-            this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
+            this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean): void => {
                 this.isEmpty = isEmpty;
                 this.albumsDataSource.notifyDataReload();
                 this.isHideScrollBar = (this.albumsDataSource.totalCount() <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
@@ -440,7 +440,7 @@ export struct AlbumSetPage {
 
     private loadAlbums(isForce: boolean): void {
         if (isForce || this.currentIndex == Constants.LOCAL_TAB_INDEX) {
-            this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean) => {
+            this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean): void => {
                 this.isEmpty = isEmpty;
                 this.albumsDataSource.notifyDataReload();
             })
@@ -453,7 +453,7 @@ export struct AlbumSetPage {
     @Builder LocalAlbumSet() {
         Stack() {
             Grid(this.scroller) {
-                LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>) => {
+                LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>): void => {
                     if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null) && item.get().index == 0) {
                         GridItem() {
                             AlbumGridItemNewStyle({
@@ -470,8 +470,7 @@ export struct AlbumSetPage {
                             })
                         }
                     }
-                }, (item: LazyItem<AlbumDataItem>) => (item != undefined && item != null) && (item.get() != undefined && item.get() != null) ?
-                    item.getHashCode() : JSON.stringify(item))
+                }, (item: LazyItem<AlbumDataItem>): string => item != null && item.get() != null ? item.getHashCode() : JSON.stringify(item))
             }
             .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
             .padding({
@@ -490,11 +489,11 @@ export struct AlbumSetPage {
     @Builder OtherEquipmentAlbumSet() {
         Stack() {
             Grid(this.scroller) {
-                LazyForEach(this.distributedDataSource, (item: PeerDataItem) => {
+                LazyForEach(this.distributedDataSource, (item: PeerDataItem): void => {
                     GridItem() {
                         DistributedAlbumGriItem({ item: item })
                     }
-                }, (item: PeerDataItem) => item ? item.getHashCode() : JSON.stringify(item))
+                }, (item: PeerDataItem): string => item ? item.getHashCode() : JSON.stringify(item))
             }
             .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
             .padding({
@@ -549,7 +548,7 @@ export struct AlbumSetPage {
                         .barWidth(0)
                         .barHeight(0)
                         .flexGrow(1)
-                        .onChange((index: number) => {
+                        .onChange((index: number): void => {
                             Log.info(TAG, 'Switch to Tab ' + index + '.');
                             this.onDistributedTabChanged(index);
                         })

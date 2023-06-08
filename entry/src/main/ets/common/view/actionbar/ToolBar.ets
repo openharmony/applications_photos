@@ -15,6 +15,7 @@
 
 import screenManager, { ColumnSize } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { ToolBarButton } from './ToolBarButton';
+import { EventVisibility } from './ActionBarButton';
 import { Constants } from '../../model/common/Constants';
 import { ActionBarProp } from '../browserOperation/ActionBarProp';
 import { Action } from '../browserOperation/Action';
@@ -51,13 +52,13 @@ export struct ToolBar {
 
     @Builder PopupBuilder() {
         Column() {
-            ForEach(this.moreMenuList, (menu: Action) => {
+            ForEach(this.moreMenuList, (menu: Action): void => {
                 Text(menu.textRes)
                     .width('100%')
                     .height($r('app.float.menu_height'))
                     .fontColor(menu.fillColor)
                     .fontSize($r('sys.float.ohos_id_text_size_body1'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.showPopup = false;
                         if(this.onMenuClicked != null) this.onMenuClicked(menu);
                     })
@@ -67,8 +68,7 @@ export struct ToolBar {
                         .strokeWidth(Constants.MENU_DIVIDER_STROKE_WIDTH)
                         .color($r('sys.color.ohos_id_color_list_separator'))
                 }
-
-            }, (menu): string => (menu.actionType != null ? menu.actionType.id : menu.actionID))
+            }, (menu: Action): string => { return (menu.actionType != null ? menu.actionType.id.toString() : menu.actionID.toString())})
         }.width(screenManager.getColumnsWidth(ColumnSize.COLUMN_TWO))
         .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
         .padding({
@@ -84,7 +84,7 @@ export struct ToolBar {
         if (!this.isHorizontal) {
             Row() {
                 Row() {
-                    ForEach(this.toolMenuList, (menu: Action) => {
+                    ForEach(this.toolMenuList, (menu: Action): void => {
                         if (menu == Action.MORE) {
                             Column() {
                                 Row() {
@@ -106,7 +106,7 @@ export struct ToolBar {
                             }
                             .width(Constants.PERCENT_HUNDRED / this.toolMenuList.length + "%")
                             .height('100%')
-                            .onClick(() => {
+                            .onClick((): void => {
                                 this.showPopup = !this.showPopup
                             })
                             .bindPopup(this.showPopup, {
@@ -115,7 +115,7 @@ export struct ToolBar {
                                 maskColor: 0x33000000,
                                 popupColor: '#00FFFFFF',
                                 enableArrow: false,
-                                onStateChange: (e) => {
+                                onStateChange: (e: EventVisibility): void => {
                                     if (!e.isVisible) {
                                         this.showPopup = false
                                     }
@@ -142,13 +142,13 @@ export struct ToolBar {
                                 }
                                 .margin({ top: $r('sys.float.ohos_id_text_margin_vertical') })
                             }
-                            .onClick(() => {
+                            .onClick((): void => {
                                 if(this.onMenuClicked != null) this.onMenuClicked(menu)
                             })
                             .width(Constants.PERCENT_HUNDRED / this.toolMenuList.length + "%")
                             .height('100%')
                         }
-                    }, (menu): string => (menu.actionType != null ? menu.actionType.id : menu.actionID))
+                    }, (menu: Action): string => { return (menu.actionType != null ? menu.actionType.id.toString() : menu.actionID.toString()) })
                 }
                 .width('100%')
                 .height(Constants.ActionBarHeight)

@@ -65,7 +65,7 @@ export struct TimelineScrollBar {
         Stack({ alignContent: Alignment.End }) {
             if (this.isClickScrollBar && !this.isHideScrollBar) {
                 Column() {
-                    ForEach(this.dataSource.groupItem, (year: TimelineDataItem) => {
+                    ForEach(this.dataSource.groupItem, (year: TimelineDataItem): void => {
                         if (this.nodeGap(year.groupChild.length) > 0 || this.isFirst(year) || this.isLast(year)) {
                             Row() {
                                 Text(DateUtil.getLocalizedYear(year.dateAdded))
@@ -93,7 +93,7 @@ export struct TimelineScrollBar {
                             })
                             .visibility(this.isShowLocalizedYear(year) ? Visibility.Visible : Visibility.Hidden)
                         }
-                    }, year => JSON.stringify(year))
+                    }, (year: TimelineDataItem): string => { return JSON.stringify(year) })
                 }
                 .height('100%')
                 .margin({
@@ -155,7 +155,7 @@ export struct TimelineScrollBar {
             .width(this.isClickScrollBar
                 ? $r('app.float.scroll_press_all_width') : $r('app.float.scroll_bar_small_width'),)
         }
-        .onTouch((event: TouchEvent) => {
+        .onTouch((event: TouchEvent): void => {
             if (this.dateText == '') {
                 Log.warn(TAG, "dateText is null")
                 this.broadCast.emit(BroadcastConstants.INIT_DATE_TEXT, [])

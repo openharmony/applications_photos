@@ -129,7 +129,7 @@ export struct CropImageShow {
             Canvas(this.context)
                 .width(this.displayWidth)
                 .height(this.displayHeight)
-                .onReady(() => {
+                .onReady((): void => {
                     this.cropEdit.setCanvasContext(this.context)
                 })
             Column() {
@@ -138,18 +138,18 @@ export struct CropImageShow {
         }
         .width(this.flexWidth)
         .height(this.flexHeight)
-        .onTouch((event) => {
+        .onTouch((event: TouchEvent): void => {
             this.onTouchStart(event);
         })
         .gesture(
         PinchGesture()
-            .onActionStart((event: GestureEvent) => {
+            .onActionStart((event: GestureEvent): void => {
                 this.onPinchGestureStart(event);
             })
-            .onActionUpdate((event: GestureEvent) => {
+            .onActionUpdate((event: GestureEvent): void => {
                 this.onPinchGestureUpdate(event);
             })
-            .onActionEnd(() => {
+            .onActionEnd((): void => {
                 this.onPinchGestureEnd();
             })
         )

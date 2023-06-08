@@ -19,6 +19,10 @@ import { ActionBarColorMode } from '../browserOperation/ActionBarMode'
 import screenManager, { ColumnSize } from '@ohos/base/src/main/ets/manager/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 
+export interface EventVisibility {
+    isVisible: boolean;
+}
+
 @Component
 export struct ActionBarButton {
     @StorageLink('isHorizontal') isHorizontal: boolean = screenManager.isHorizontal();
@@ -33,13 +37,13 @@ export struct ActionBarButton {
 
     @Builder PopupBuilder() {
         Column() {
-            ForEach(this.moreMenuList, (menu: Action) => {
+            ForEach(this.moreMenuList, (menu: Action): void => {
                 Text(menu.textRes)
                     .width('100%')
                     .height($r('app.float.menu_height'))
                     .fontColor(menu.fillColor)
                     .fontSize($r('sys.float.ohos_id_text_size_body1'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.showPopup = false;
                         if(this.onMenuClicked != null) this.onMenuClicked(menu);
                     })
@@ -49,7 +53,7 @@ export struct ActionBarButton {
                         .strokeWidth(Constants.MENU_DIVIDER_STROKE_WIDTH)
                         .color($r('sys.color.ohos_id_color_list_separator'))
                 }
-            }, menu => JSON.stringify(menu.actionID))
+            }, (menu: Action): string => { return JSON.stringify(menu.actionID) })
         }.width(screenManager.getColumnsWidth(ColumnSize.COLUMN_TWO))
         .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
         .padding({
@@ -89,7 +93,7 @@ export struct ActionBarButton {
             Row() {
                 this.ActionBarButtonBuilder()
             }
-            .onClick(() => {
+            .onClick((): void => {
                 this.showPopup = !this.showPopup
             })
             .bindPopup(this.showPopup, {
@@ -98,7 +102,7 @@ export struct ActionBarButton {
                 maskColor: 0x33000000,
                 popupColor: '#00FFFFFF',
                 enableArrow: false,
-                onStateChange: (e) => {
+                onStateChange: (e: EventVisibility): void => {
                     if (!e.isVisible) {
                         this.showPopup = false
                     }
@@ -108,7 +112,7 @@ export struct ActionBarButton {
             Row() {
                 this.ActionBarButtonBuilder()
             }
-            .onClick(() => {
+            .onClick((): void => {
                 if(this.onMenuClicked != null) this.onMenuClicked(this.action)
             })
         }

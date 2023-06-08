@@ -21,14 +21,13 @@ import { PeerDataItem } from '@ohos/base/src/main/ets/data/PeerDataItem';
 
 const TAG = "DistributedAlbumGriItem"
 
-class Obj {
-    width: number = 0;
-    height: number = 0;
-    componentWidth: number = 0;
-    componentHeight: number = 0;
+interface Event {
+    width: number;
+    height: number;
+    componentWidth: number;
+    componentHeight: number;
+    loadingStatus: number;
 }
-
-const obj = new Obj;
 
 @Component
 export struct DistributedAlbumGriItem {
@@ -44,7 +43,7 @@ export struct DistributedAlbumGriItem {
         Log.info(TAG, 'aboutToAppear new opp');
 
         let self = this;
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => {
             self.updateCardSize();
         })
         this.updateCardSize();
@@ -72,11 +71,11 @@ export struct DistributedAlbumGriItem {
                     .height(this.gridHeight)
                     .offset({ x: 0, y: 0 })
                     .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
-                    .onError(() => {
+                    .onError((): void => {
                         Log.error(TAG, 'album is empty or its cover is error');
                         this.isEmptyAlbum = true;
                     })
-                    .onComplete((msg: typeof obj) => {
+                    .onComplete((msg: Event): void => {
                         Log.debug(TAG, 'image load success. Size: ' + msg.width + 'x' + msg.height +
                             ', componentSize: ' + msg.componentWidth + 'x' + msg.componentHeight);
                     })
@@ -85,11 +84,11 @@ export struct DistributedAlbumGriItem {
                     .aspectRatio(this.gridAspectRatio)
                     .offset({ x: 0, y: 0 })
                     .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
-                    .onError(() => {
+                    .onError((): void => {
                         Log.error(TAG, 'album is empty or its cover is error');
                         this.isEmptyAlbum = true;
                     })
-                    .onComplete((msg: typeof obj) => {
+                    .onComplete((msg: Event): void => {
                         Log.debug(TAG, 'image load success. Size: ' + msg.width + 'x' + msg.height +
                             ', componentSize: ' + msg.componentWidth + 'x' + msg.componentHeight);
                     })
@@ -126,7 +125,7 @@ export struct DistributedAlbumGriItem {
             width: $r('app.float.album_cover_stroke_width'),
             color: $r('app.color.album_cover_stroke_color')
         })
-        .onClick(() => {
+        .onClick((): void => {
             Log.info(TAG, 'After onClick: ' + JSON.stringify(this.item));
             router.push({
                 uri: 'feature/distributedAlbum/view/DistributedAlbumSetPage',

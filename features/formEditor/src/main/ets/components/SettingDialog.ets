@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-import { Constants } from '../constants//Constants';
+import { Constants } from '../constants/Constants';
 import { Broadcast } from '@ohos/base/src/main/ets/utils/Broadcast';
 import broadcastManager from '@ohos/base/src/main/ets/manager/BroadcastManager';
 import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 interface SettingsType {
-    title: Resource,
-    value: string,
-    checked: boolean
+    title: Resource;
+    value: string;
+    checked: boolean;
 }
 
 @CustomDialog
@@ -39,7 +39,7 @@ export struct SettingDialog {
     ];
 
     aboutToAppear(): void {
-        this.settings.forEach((item) => {
+        this.settings.forEach((item: SettingsType): void => {
             if (this.time == parseInt(item.value)) {
                 item.checked = true;
             } else {
@@ -60,7 +60,7 @@ export struct SettingDialog {
             .height($r('app.float.dialog_title_height'))
 
             List() {
-                ForEach(this.settings, (item, index) => {
+                ForEach(this.settings, (item: SettingsType, index: number): void => {
                     ListItem() {
                         Column() {
                             Row() {
@@ -75,7 +75,7 @@ export struct SettingDialog {
                                 }) {
                                     Radio({ group: 'timeGroup', value: item.value })
                                         .checked(item.checked)
-                                        .onChange((checked: boolean) => {
+                                        .onChange((checked: boolean): void => {
                                             item.checked = checked;
                                             if (checked) {
                                                 this.broadCast.emit(Constants.FROM_PLAYBACK_INTERVAL, [parseInt(item.value)]);
@@ -107,7 +107,7 @@ export struct SettingDialog {
             .height($r('app.float.details_dialog_button_height'))
             .width('100%')
             .margin({ bottom: $r('sys.float.ohos_id_text_paragraph_margin_s') })
-            .onClick(() => {
+            .onClick((): void => {
                 this.controller.close();
             })
         }

@@ -58,7 +58,7 @@ export struct EditExitDialog {
                     })
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.controller.close();
                     })
 
@@ -85,7 +85,7 @@ export struct EditExitDialog {
                     })
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.controller.close();
                         if(this.editExitDialogCallback != null) this.editExitDialogCallback.discardCallback();
                         router.back()

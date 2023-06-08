@@ -52,7 +52,7 @@ export struct ActionBar {
     build() {
         Row() {
             if (!this.actionBarProp.getLeftAction().equals(Action.NONE)) {
-                ForEach(this.createArray(), (item)=>{
+                ForEach(this.createArray(), (item: ActionBarProp): void => {
                     ActionBarButton({
                         res: item.getLeftAction().iconRes,
                         action: item.getLeftAction(),
@@ -61,7 +61,7 @@ export struct ActionBar {
                         colorMode: item.getColorMode(),
                         isFirst: true
                     })
-                }, (item: ActionBarProp) => {return item.getLeftAction().actionID.toString()})
+                }, (item: ActionBarProp): string => {return item.getLeftAction().actionID.toString()})
             }
             if (this.actionBarProp.getMode() === ActionBarMode.DETAIL_MODE) {
             } else if (this.actionBarProp.getMode() === ActionBarMode.SELECTION_MODE) {

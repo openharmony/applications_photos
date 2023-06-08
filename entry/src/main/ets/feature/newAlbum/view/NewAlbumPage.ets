@@ -199,19 +199,19 @@ struct NewAlbumPage {
             let item = JSON.parse(param.item.toString()) as AlbumDataItem;
             this.groupDataSource.setAlbumId(item.id)
         }
-        this.groupDataSource.reloadGroupItemData(true).then((isEmpty: boolean) => {
+        this.groupDataSource.reloadGroupItemData(true).then((isEmpty: boolean): void => {
             this.isEmpty = isEmpty
             this.groupDataSource.notifyDataReload()
             this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
         })
         this.onMenuClicked = this.onMenuClicked.bind(this);
-        this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect(index));
+        this.broadCast.on(BroadcastConstants.SELECT, (index: number): void => this.onSelect(index));
 
-        this.broadCast.on(BroadcastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
+        this.broadCast.on(BroadcastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaDataItem): void => {
             this.jumpToPhotoBrowser(name, item)
         })
 
-        this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
+        this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem): void => {
             this.jumpToThirdPhotoBrowser(name, item)
         })
 
@@ -294,7 +294,7 @@ struct NewAlbumPage {
             } else {
                 Stack() {
                     Grid(this.scroller) {
-                        LazyForEach(this.groupDataSource, (item: LazyItem<MediaDataItem>) => {
+                        LazyForEach(this.groupDataSource, (item: LazyItem<MediaDataItem>): void => {
                             GridItem() {
                                 ImageGridItemComponent({
                                     lazyItem: item,
@@ -306,8 +306,7 @@ struct NewAlbumPage {
                             .aspectRatio(1)
                             .columnStart(item.get().index % this.gridRowCount)
                             .columnEnd(item.get().index % this.gridRowCount)
-                        }, (item: LazyItem<AlbumDataItem>) => (item == null) && (item.get() != undefined && item.get() != null) ?
-                                JSON.stringify(item) : item.getHashCode())
+                        }, (item: LazyItem<AlbumDataItem>): string => (item == null) && item.get() != null ? JSON.stringify(item) : item.getHashCode())
                     }
                     .columnsTemplate('1fr '.repeat(this.gridRowCount))
                     .columnsGap(Constants.GRID_GUTTER)

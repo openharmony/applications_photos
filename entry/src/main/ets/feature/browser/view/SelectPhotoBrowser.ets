@@ -63,7 +63,7 @@ struct SelectPhotoBrowser {
         Log.info(TAG, 'photoBrowser aboutToAppear');
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000');
         this.browserBackgroundColor = $r('app.color.black');
-        mMultimodalInputManager.registerListener((control: number) => {
+        mMultimodalInputManager.registerListener((control: number): void => {
             Log.info(TAG, "key control : " + control + " index " + this.currentIndex);
             if (control == 0) {
                 if (this.currentIndex > 0) {
@@ -116,26 +116,26 @@ struct SelectPhotoBrowser {
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
         // register event handling
-        this.broadCast.on(PhotoConstants.TOGGLE_BAR, (event) => {
+        this.broadCast.on(PhotoConstants.TOGGLE_BAR, (event: Object): void => {
             Log.info(TAG, "TOGGLE_BAR : " + JSON.stringify(event));
         });
 
-        this.broadCast.on(PhotoConstants.PULL_DOWN_END, (event) => {
+        this.broadCast.on(PhotoConstants.PULL_DOWN_END, (event: Object): void => {
             Log.info(TAG, "PULL_DOWN_END : " + JSON.stringify(event));
             this.onBackPress();
         });
 
-        this.broadCast.on(PhotoConstants.DATA_SIZE_CHANGED, (size: number) => {
+        this.broadCast.on(PhotoConstants.DATA_SIZE_CHANGED, (size: number): void => {
             this.onDataSizeChanged(size);
         });
 
-        this.broadCast.on(PhotoConstants.DATA_CONTENT_CHANGED, (size: number) => {
+        this.broadCast.on(PhotoConstants.DATA_CONTENT_CHANGED, (size: number): void => {
             // onContentChanged only the current item is updated
             Log.info(TAG, "DATA_CONTENT_CHANGED : " + size);
             this.onPhotoChanged(this.currentIndex);
         });
 
-        this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean) => {
+        this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean): void => {
             Log.info(TAG, "set swiper swipe " + value);
             this.canSwipe = value;
         });

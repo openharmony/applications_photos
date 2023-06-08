@@ -67,7 +67,7 @@ export struct ProgressDialog {
                     Image($r('app.media.ic_progress_cancel'))
                         .width($r('app.float.icon_size'))
                         .height($r('app.float.icon_size'))
-                        .onClick(() => {
+                        .onClick((): void => {
                             this.progressParam.cancelFunc();
                         })
                 }

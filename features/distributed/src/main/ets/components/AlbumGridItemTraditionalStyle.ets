@@ -24,11 +24,12 @@ import screenManager from '@ohos/base/src/main/ets/manager/ScreenManager';
 
 const TAG = "AlbumGridItemTraditionalStyle"
 
-class Obj {
-    width: number = 0;
-    height: number = 0;
-    componentWidth: number = 0;
-    componentHeight: number = 0;
+interface Event {
+    width: number;
+    height: number;
+    componentWidth: number;
+    componentHeight: number;
+    loadingStatus: number;
 }
 
 // Traditional style grid item for distributed album set page
@@ -52,11 +53,11 @@ export struct AlbumGridItemTraditionalStyle {
     aboutToAppear(): void {
         Log.info(TAG, 'aboutToAppear new opp');
 
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => {
             this.updateCardSize();
         })
         this.updateCardSize();
-        this.item.load().then(() => {
+        this.item.load().then((): void => {
             this.thumbnail = this.item.getThumbnail()
         })
     }
@@ -120,11 +121,11 @@ export struct AlbumGridItemTraditionalStyle {
                                 z: 1,
                                 angle: 0
                             })
-                            .onError(() => {
+                            .onError((): void => {
                                 Log.debug(TAG, 'album is empty or its cover is error');
                                 this.isEmptyAlbum = true;
                             })
-                            .onComplete((msg: Obj) => {
+                            .onComplete((msg: Event): void => {
                                 Log.debug(TAG, "image load success.Size: " + msg.componentWidth + "x" + msg.componentHeight);
                             })
                     }
@@ -145,11 +146,11 @@ export struct AlbumGridItemTraditionalStyle {
                                 z: 1,
                                 angle: 0
                             })
-                            .onError(() => {
+                            .onError((): void => {
                                 Log.debug(TAG, 'album is empty or its cover is error');
                                 this.isEmptyAlbum = true;
                             })
-                            .onComplete((msg: Obj) => {
+                            .onComplete((msg: Event): void => {
                                 Log.debug(TAG, "image load success. Size: " + msg.width + "x" + msg.height +
                                      ", componentSize: " + msg.componentWidth + "x" + msg.componentHeight);
                             })
@@ -188,7 +189,7 @@ export struct AlbumGridItemTraditionalStyle {
                 width: $r('app.float.album_cover_stroke_width'),
                 color: $r('app.color.album_cover_stroke_color')
             })
-            .onClick(() => {
+            .onClick((): void => {
                 this.jumpToBrowser()
             })
         }

@@ -43,7 +43,7 @@ export struct GridScrollBar {
             x: this.isClickScrollBar ? $r('app.float.scroll_bar_big_width') : $r('app.float.scroll_bar_small_width'),
             y: 0
         })
-        .onTouch((event: TouchEvent) => {
+        .onTouch((event: TouchEvent): void => {
             if (event.type == TouchType.Down) {
                 this.isClickScrollBar = true;
             } else if (event.type == TouchType.Up) {

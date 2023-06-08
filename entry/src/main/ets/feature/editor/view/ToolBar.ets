@@ -107,7 +107,7 @@ export struct ToolBar {
             alignItems: ItemAlign.Center,
             justifyContent: FlexAlign.Center
         }) {
-            ForEach(this.menuChanged.menuArray, (item: ActionButtonInfo) => {
+            ForEach(this.menuChanged.menuArray, (item: ActionButtonInfo): void => {
                 ActionButton({
                     src: item.src,
                     text: item.text,

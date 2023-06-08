@@ -63,9 +63,9 @@ export struct ThirdAlbumGridItem {
 
     aboutToAppear(): void {
         Log.info(TAG, "aboutToAppear + " + this.item.uri)
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (size) => this.updateCardSize())
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (size: number): void => this.updateCardSize())
         this.updateCardSize();
-        this.item.load().then<void, void>(() => {
+        this.item.load().then<void, void>((): void => {
             this.thumbnail = this.item.getThumbnail()
         })
     }
@@ -113,7 +113,7 @@ export struct ThirdAlbumGridItem {
                             angle: 0
                         })
                         .fillColor($r('app.color.empty_or_recycle_album_icon'))
-                        .onError(() => {
+                        .onError((): void => {
                             Log.error(TAG, 'album is empty or its cover is error');
                             this.isEmptyAlbum = true;
                         })
@@ -137,7 +137,7 @@ export struct ThirdAlbumGridItem {
                             angle: 0
                         })
                         .fillColor($r('app.color.empty_or_recycle_album_icon'))
-                        .onError(() => {
+                        .onError((): void => {
                             Log.error(TAG, 'album is empty or its cover is error');
                             this.isEmptyAlbum = true;
                         })
@@ -190,7 +190,7 @@ export struct ThirdAlbumGridItem {
             width: $r('app.float.album_cover_stroke_width'),
             color: $r('app.color.album_cover_stroke_color')
         })
-        .onClick(() => {
+        .onClick((): void => {
             if (this.isFromFa && (!this.isFromFaPhoto)) {
                 this.appBroadcast.emit(BroadcastConstants.SAVE_FORM_EDITOR_DATA,
                     [this.item.displayName, this.item.id, this.item.displayName, 0, true]);

@@ -72,7 +72,7 @@ export struct TimelineTitleComponent {
                 .padding({
                     left: $r('app.float.group_title_padding_bottom'),
                 })
-                .onClick(() => {
+                .onClick((): void => {
                     this.selectStateChange()
                 })
             }

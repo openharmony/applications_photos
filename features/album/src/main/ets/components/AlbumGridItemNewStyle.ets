@@ -68,9 +68,9 @@ export struct AlbumGridItemNewStyle {
     aboutToAppear(): void {
         Log.debug(TAG, 'aboutToAppear');
         this.selectable = this.item.id != MediaConstants.ALBUM_ID_RECYCLE;
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.updateCardSize());
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => this.updateCardSize());
         startTrace("loadAlbumItem");
-        this.item.load().then(() => {
+        this.item.load().then((): void => {
             finishTrace("loadAlbumItem");
             this.thumbnail = this.item.getThumbnail();
         })
@@ -78,7 +78,7 @@ export struct AlbumGridItemNewStyle {
     }
 
     onIndexPageShow(): void {
-        this.item.load().then(() => {
+        this.item.load().then((): void => {
             this.thumbnail = this.item.getThumbnail();
         })
     }
@@ -169,7 +169,7 @@ export struct AlbumGridItemNewStyle {
                                 z: 1,
                                 angle: 0
                             })
-                            .onError(() => {
+                            .onError((): void => {
                                 Log.debug(TAG, 'album is empty or its cover is error');
                                 this.isEmptyAlbum = true;
                             })
@@ -210,7 +210,7 @@ export struct AlbumGridItemNewStyle {
                                 z: 1,
                                 angle: 0
                             })
-                            .onError(() => {
+                            .onError((): void => {
                                 Log.error(TAG, 'album is empty or its cover is error ' + this.thumbnail);
                                 this.isEmptyAlbum = true;
                             })
@@ -286,11 +286,11 @@ export struct AlbumGridItemNewStyle {
         .height(this.gridHeight)
         .gesture(
         LongPressGesture()
-            .onAction(() => {
+            .onAction((): void => {
                 this.selectStateChange();
             })
         )
-        .onClick(() => {
+        .onClick((): void => {
             if (this.isAlbumSetSelectedMode) {
                 this.selectStateChange();
             } else {

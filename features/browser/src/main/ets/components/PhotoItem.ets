@@ -84,22 +84,22 @@ export struct PhotoItem {
         this.firstLoad = true;
         this.isLoading = true;
         this.thumbnail = this.item.getThumbnail(this.item.imgWidth, this.item.imgHeight);
-        this.item.load(true).then(() => {
+        this.item.load(true).then((): void => {
             this.isLoading = false
             this.updateThumbnail()
             Log.info(TAG, "aboutToAppear loadFinish thumbnail " + this.thumbnail);
         })
         // register event handling
-        this.broadCast.on(Constants.TOUCH_EVENT + this.item.uri + this.timeStamp, (matrix: Matrix4.Matrix4Transit) => {
+        this.broadCast.on(Constants.TOUCH_EVENT + this.item.uri + this.timeStamp, (matrix: Matrix4.Matrix4Transit): void => {
             this.matrix = matrix;
         });
 
-        this.broadCast.on(Constants.DIRECTION_CHANGE + this.item.uri + this.timeStamp, (direction: PanDirection) => {
+        this.broadCast.on(Constants.DIRECTION_CHANGE + this.item.uri + this.timeStamp, (direction: PanDirection): void => {
             Log.info(TAG, "direction: " + direction);
             this.photoItemDirection = direction;
         });
 
-        this.broadCast.on(Constants.ANIMATION_EVENT + this.item.uri + this.timeStamp, (animationOption: AnimationOption, animationEndMatrix: Matrix4TransitWithMatrix4x4) => {
+        this.broadCast.on(Constants.ANIMATION_EVENT + this.item.uri + this.timeStamp, (animationOption: AnimationOption, animationEndMatrix: Matrix4TransitWithMatrix4x4): void => {
             Log.info(TAG, "animationOption: " + JSON.stringify(animationOption));
             this.animationOption = animationOption;
             this.animationEndMatrix = animationEndMatrix;
@@ -115,7 +115,7 @@ export struct PhotoItem {
     }
 
     private updateThumbnail() {
-        getThumbnail(this.item, this.updateTransition == this.item.index).then((thumbnail: string) => {
+        getThumbnail(this.item, this.updateTransition == this.item.index).then((thumbnail: string): void => {
             this.thumbnail = thumbnail
         })
     }
@@ -138,7 +138,7 @@ export struct PhotoItem {
             this.preItem.rotate = this.item.orientation;
             this.preItem.width = this.item.imgWidth;
             this.preItem.height = this.item.imgHeight;
-            if (this.eventPipeline != undefined && this.eventPipeline != null) {
+            if (this.eventPipeline != null) {
                 this.eventPipeline.onDataChanged(this.item)
             }
             return;
@@ -156,7 +156,7 @@ export struct PhotoItem {
     }
 
     calcRatio(info: MediaDataItem): number {
-        if (info == null || info == undefined) {
+        if (info == null) {
             return 1;
         }
         if (info.width == 0 || info.height == 0) {
@@ -188,7 +188,7 @@ export struct PhotoItem {
                         duration: Constants.SHARE_TRANSITION_DURATION,
                         zIndex: 0,
                     })
-                    .onComplete(() => {
+                    .onComplete((): void => {
                         startTrace("PhotoItemComplete_" + this.item);
                         Log.info(TAG, "onComplete finish, index: " + this.item.index +", item: " + JSON.stringify(this.item) + ", uri: " + this.thumbnail + ".");
                         this.showError = false;
@@ -198,7 +198,7 @@ export struct PhotoItem {
                         }
                         finishTrace("PhotoItemComplete_" + this.item.index);
                     })
-                    .onError(() => {
+                    .onError((): void => {
                         Log.error(TAG, "image show error " + this.thumbnail + " " + this.item.width + " " + this.item.height);
                         if (this.thumbnail.length == 0 || this.item.width == 0 || this.item.height == 0) {
                             this.updateThumbnail()
@@ -215,7 +215,7 @@ export struct PhotoItem {
             .height('100%')
             .justifyContent(FlexAlign.Center)
             .alignItems(VerticalAlign.Center)
-            .onClick(() => {
+            .onClick((): void => {
                 this.broadCast.emit(Constants.TOGGLE_BAR, [null]);
             })
             .parallelGesture(
@@ -224,7 +224,7 @@ export struct PhotoItem {
                 fingers: 2,
                 distance: 1
             })
-                .onActionStart((event: GestureEvent) => {
+                .onActionStart((event: GestureEvent): void => {
                     Log.debug(TAG, 'PinchGesture onActionStart');
                     startTrace("PinchGesture onActionStart")
                     if (this.isPullingDown) {
@@ -239,7 +239,7 @@ export struct PhotoItem {
                     }
                     finishTrace("PinchGesture onActionStart")
                 })
-                .onActionUpdate((event) => {
+                .onActionUpdate((event: GestureEvent): void => {
                     Log.debug(TAG, "PinchGesture onActionUpdate scale: " + event.scale);
                     startTrace("PinchGesture onActionUpdate")
                     if (this.isPullingDown) {
@@ -252,7 +252,7 @@ export struct PhotoItem {
                     }
                     finishTrace("PinchGesture onActionUpdate")
                 })
-                .onActionEnd(() => {
+                .onActionEnd((): void => {
                     Log.debug(TAG, 'PinchGesture onActionEnd');
                     startTrace("PinchGesture onActionEnd")
                     if (this.isPullingDown) {
@@ -266,12 +266,12 @@ export struct PhotoItem {
                             animateTo({
                                 duration: this.animationOption.duration,
                                 curve: this.animationOption.curve,
-                                onFinish: () => {
+                                onFinish: (): void => {
                                     this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
                                     this.animationOption = null;
                                     this.animationEndMatrix = null;
                                 }
-                            }, () => {
+                            }, (): void => {
                                 this.matrix = this.animationEndMatrix;
                             })
                         }
@@ -281,21 +281,21 @@ export struct PhotoItem {
             PanGesture({
                 direction: this.photoItemDirection
             })
-                .onActionStart((event: GestureEvent) => {
+                .onActionStart((event: GestureEvent): void => {
                     startTrace("PanGesture onActionStart")
                     Log.debug(TAG, "PanGesture start offsetX: " +
                                     vp2px(event.offsetX) + ", offsetY: " + vp2px(event.offsetY));
                     this.eventPipeline.onMoveStart(vp2px(event.offsetX), vp2px(event.offsetY));
                     finishTrace("PanGesture onActionStart")
                 })
-                .onActionUpdate((event: GestureEvent) => {
+                .onActionUpdate((event: GestureEvent): void => {
                     startTrace("PanGesture onActionUpdate")
                     Log.debug(TAG, "PanGesture update offsetX: " +
                                     vp2px(event.offsetX) + ", offsetY: " + vp2px(event.offsetY));
                     this.eventPipeline.onMove(vp2px(event.offsetX), vp2px(event.offsetY));
                     finishTrace("PanGesture onActionUpdate")
                 })
-                .onActionEnd((event: GestureEvent) => {
+                .onActionEnd((event: GestureEvent): void => {
                     startTrace("PanGesture onActionEnd")
                     Log.debug(TAG, "PanGesture end offsetX: " +
                                     vp2px(event.offsetX) + ", offsetY: " + vp2px(event.offsetY));
@@ -304,12 +304,12 @@ export struct PhotoItem {
                         animateTo({
                             duration: this.animationOption.duration,
                             curve: this.animationOption.curve,
-                            onFinish: () => {
+                            onFinish: (): void => {
                                 this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
                                 this.animationOption = null;
                                 this.animationEndMatrix = null;
                             }
-                        }, () => {
+                        }, (): void => {
                             this.matrix = this.animationEndMatrix;
                         })
                     }
@@ -318,7 +318,7 @@ export struct PhotoItem {
             TapGesture({
                 count: 2
             })
-                .onAction((event: GestureEvent) => {
+                .onAction((event: GestureEvent): void => {
                     if (this.isPullingDown) {
                         Log.debug(TAG, 'Not allow to double tap when pullingDown');
                         return;
@@ -333,12 +333,12 @@ export struct PhotoItem {
                         animateTo({
                             duration: this.animationOption.duration,
                             curve: this.animationOption.curve,
-                            onFinish: () => {
+                            onFinish: (): void => {
                                 this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
                                 this.animationOption = null;
                                 this.animationEndMatrix = null;
                             }
-                        }, () => {
+                        }, (): void => {
                             this.matrix = this.animationEndMatrix;
                         })
                     }
@@ -346,7 +346,7 @@ export struct PhotoItem {
             )
             )
             .clip(true)
-            .onTouch((event) => {
+            .onTouch((event: TouchEvent): void => {
                 this.eventPipeline.onTouch(event);
             })
             // TODO Remind users when pictures of other devices cannot be show
@@ -370,8 +370,8 @@ export struct PhotoItem {
                 }
                 .width($r('app.float.icon_video_size'))
                 .height($r('app.float.icon_video_size'))
-                .onClick(() => {
-                    if (this.item != undefined) {
+                .onClick((): void => {
+                    if (this.item != null) {
                         router.push({
                             uri: 'feature/browser/view/VideoBrowser',
                             params: {
@@ -390,6 +390,6 @@ export struct PhotoItem {
 
     private isVideoPlayBtnShow(): boolean {
         Log.debug(TAG, "isVideoPlayBtnShow: " + this.item.mediaType);
-        return ((this.item != undefined && this.item != null) && (this.item.mediaType == MediaLib.MediaType.VIDEO));
+        return (this.item != null && (this.item.mediaType == MediaLib.MediaType.VIDEO));
     }
 }

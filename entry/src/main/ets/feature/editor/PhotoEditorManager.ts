@@ -153,6 +153,6 @@ export class PhotoEditorManager {
         if (filter != undefined) {
             this.historyManager.push(filter);
         }
-        return await Save.save(this.item, this.historyManager, isReplace);;
+        return await Save.save(this.item, this.historyManager, isReplace);
     }
 }

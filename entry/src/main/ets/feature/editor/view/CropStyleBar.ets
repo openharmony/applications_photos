@@ -229,7 +229,7 @@ export struct CropStyleBar {
 
     build() {
         List() {
-            ForEach(this.menuChanged.menuArray, (item: ActionButtonInfo) => {
+            ForEach(this.menuChanged.menuArray, (item: ActionButtonInfo): void => {
                 ListItem() {
                     ActionButton({
                         src: item.src,

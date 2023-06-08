@@ -25,7 +25,7 @@ export struct DetailMenuPanel {
 
     build() {
         Row() {
-            ForEach(this.actionBarProp.getMenuList(), (menu: Action) => {
+            ForEach(this.actionBarProp.getMenuList(), (menu: Action): void => {
                 ActionBarButton({
                     res: menu.iconRes,
                     action: menu,
@@ -33,7 +33,7 @@ export struct DetailMenuPanel {
                     isAutoTint: menu.isAutoTint,
                     colorMode: this.actionBarProp.getColorMode()
                 })
-            }, menu => JSON.stringify(menu.actionID))
+            }, (menu: Action): string => { return JSON.stringify(menu.actionID) })
         }.alignItems(VerticalAlign.Center)
     }
 }

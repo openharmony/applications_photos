@@ -286,7 +286,7 @@ export struct CustomDialogView {
             customStyle: true
         });
         
-        this.broadCast.on(BroadcastConstants.SHOW_DETAIL_DIALOG, (item: MediaDataItem, isDistributed: boolean) => {
+        this.broadCast.on(BroadcastConstants.SHOW_DETAIL_DIALOG, (item: MediaDataItem, isDistributed: boolean): void => {
             this.showDetailDialog(item, isDistributed)
         });
 
@@ -449,7 +449,7 @@ export struct CustomDialogView {
 
     private showDetailDialog(item: MediaDataItem, isDistributed: boolean): void {
         Log.info(TAG, 'SHOW_DETAIL_DIALOG ');
-        item.load(true).then(() => {
+        item.load(true).then((): void => {
             this.mediaDetails = {
                 mediaType: item.mediaType,
                 height: item.height,

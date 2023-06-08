@@ -156,7 +156,7 @@ export struct FindSameNameDialog {
                     .width($r('app.float.icon_size'))
                     .margin({
                         right: $r('app.float.details_dialog_button_margin_right') })
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.isDoSameAction = !this.isDoSameAction
                     })
 
@@ -185,7 +185,7 @@ export struct FindSameNameDialog {
                     })
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         Log.debug(this.TAG, "replaceCallback");
                         if (this.isDoSameAction && this.findSameNameParam.doSameFunc != null) {
                             this.findSameNameParam.doSameFunc(FindSameOperation.REPLACE);
@@ -218,7 +218,7 @@ export struct FindSameNameDialog {
                         })
                         .backgroundColor($r('app.color.transparent'))
                         .height($r('app.float.details_dialog_button_height'))
-                        .onClick(() => {
+                        .onClick((): void => {
                             Log.debug(this.TAG, "skipCallback");
                             if (this.isDoSameAction && this.findSameNameParam.doSameFunc != null) {
                                 this.findSameNameParam.doSameFunc(FindSameOperation.SKIP);
@@ -251,7 +251,7 @@ export struct FindSameNameDialog {
                     })
                     .backgroundColor($r('app.color.transparent'))
                     .height($r('app.float.details_dialog_button_height'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         Log.debug(this.TAG, "cancelFunc");
                         if(this.findSameNameParam.cancelFunc != null) this.findSameNameParam.cancelFunc();
                         this.controller.close();

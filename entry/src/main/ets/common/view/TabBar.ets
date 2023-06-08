@@ -44,7 +44,7 @@ export struct TabBar {
   aboutToAppear(): void {
     this.onTabSelected = this.onTabSelected.bind(this);
     this.tabs[this.currentIndex].isSelected = true;
-    this.tabs.forEach((tab: TabItem) => {
+    this.tabs.forEach((tab: TabItem): void => {
       Log.info(this.TAG, JSON.stringify(tab.name) + " , " + tab.iconSelected);
     });
   }
@@ -57,7 +57,7 @@ export struct TabBar {
     }
     this.currentIndex = index;
     this.controller.changeIndex(this.currentIndex);
-    this.tabs.forEach((tab: TabItem) => {
+    this.tabs.forEach((tab: TabItem): void => {
       tab.isSelected = false;
     })
 
@@ -72,11 +72,11 @@ export struct TabBar {
         justifyContent: FlexAlign.Center
       }) {
         Column() {
-          ForEach(this.tabs, (tab: TabItem) => {
+          ForEach(this.tabs, (tab: TabItem): void => {
             Stack() {
               Tab({ tabItem: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
             }.layoutWeight(1)
-          }, (tab): string => tab.name.id)
+          }, (tab: TabItem): string => { return tab.name.id.toString() })
         }
         .height(DEVICE_TYPE.DEVICE_PAD == this.deviceType ? $r('app.float.horizontal_width') : '100%')
       }
@@ -90,11 +90,11 @@ export struct TabBar {
         alignItems: ItemAlign.Center,
         justifyContent: FlexAlign.Center
       }) {
-        ForEach(this.tabs, (tab: TabItem) => {
+        ForEach(this.tabs, (tab: TabItem): void => {
           Stack() {
             Tab({ tabItem: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
           }.layoutWeight(1)
-        }, (tab): string => tab.name.id)
+        }, (tab: TabItem): string => { return tab.name.id.toString() })
       }
       .markAnchor({ x: '0%', y: '100%' })
       .position({ x: '0%', y: '100%' })
@@ -116,7 +116,7 @@ struct Tab {
 
   aboutToAppear(): void {
     this.isSelected = this.tabItem.isSelected;
-    this.appBroadcast.on(BroadcastConstants.RESET_TAB_SELECTED_STATUE, (pageNumber: number) => {
+    this.appBroadcast.on(BroadcastConstants.RESET_TAB_SELECTED_STATUE, (pageNumber: number): void => {
       this.isSelected = this.index == pageNumber;
     })
   }
@@ -144,7 +144,7 @@ struct Tab {
           left: $r('app.float.tab_bar_text_padding_horizontal')
         })
     }
-    .onClick(() => {
+    .onClick((): void => {
       if(this.onTabSelected != null) this.onTabSelected(this.index);
       this.tabItem.isSelected = true;
       this.appBroadcast.emit(BroadcastConstants.RESET_TAB_SELECTED_STATUE, [this.index]);
@@ -167,7 +167,7 @@ export struct TabBarForAlbumSet {
   aboutToAppear(): void {
     this.onTabSelected = this.onTabSelected.bind(this);
     this.tabs[this.currentIndex].isSelected = true;
-    this.tabs.forEach((tab: TabItemWithText) => {
+    this.tabs.forEach((tab: TabItemWithText): void => {
       Log.info(this.TAG, JSON.stringify(tab.name) + ", " + tab.isSelected);
     });
     let col = screenManager.getScreenColumns();
@@ -186,7 +186,7 @@ export struct TabBarForAlbumSet {
     Log.info(this.TAG, "this.currentIndex: " + this.currentIndex + " index: " + index);
     this.currentIndex = index;
     this.controller.changeIndex(this.currentIndex);
-    this.tabs.forEach((tab: TabItemWithText) => {
+    this.tabs.forEach((tab: TabItemWithText): void => {
       tab.isSelected = false;
     })
     Log.info(this.TAG, "select " + this.currentIndex);
@@ -199,7 +199,7 @@ export struct TabBarForAlbumSet {
       alignItems: ItemAlign.Start
     }) {
       Grid() {
-        ForEach(this.tabs, (tab: TabItemWithText) => {
+        ForEach(this.tabs, (tab: TabItemWithText): void => {
           GridItem() {
             TabWithText({
               tabItemWithText: tab,
@@ -207,7 +207,7 @@ export struct TabBarForAlbumSet {
               onTabSelected: this.onTabSelected
             })
           }
-        }, (tab): string => tab.name.id)
+        }, (tab: TabItem): string => { return tab.name.id.toString() })
       }
       .width(this.tabWidth)
       .columnsTemplate('1fr '.repeat(this.tabs.length))
@@ -242,7 +242,7 @@ struct TabWithText {
     }
     Log.info(this.TAG, "index is " + this.index + " and TabWidth is " + this.TabWidth);
     this.isSelected = this.tabItemWithText.isSelected;
-    this.appBroadcast.on(BroadcastConstants.RESET_TAB_SELECTED_TEXT, (pageNumber: number) => {
+    this.appBroadcast.on(BroadcastConstants.RESET_TAB_SELECTED_TEXT, (pageNumber: number): void => {
       this.isSelected = this.index == pageNumber;
     })
   }
@@ -271,7 +271,7 @@ struct TabWithText {
     }
     .height('100%')
     .width('100%')
-    .onClick(() => {
+    .onClick((): void => {
       if (!this.isAlbumSetSelectedMode) {
         if(this.onTabSelected != null) this.onTabSelected(this.index)
         this.tabItemWithText.isSelected = true;

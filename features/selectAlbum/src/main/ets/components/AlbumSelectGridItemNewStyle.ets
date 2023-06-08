@@ -54,8 +54,8 @@ export struct AlbumSelectGridItemNewStyle {
 
     aboutToAppear(): void {
         Log.debug(TAG, 'aboutToAppear + ' + this.item.uri);
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.updateCardSize());
-        this.item.load().then(() => {
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => this.updateCardSize());
+        this.item.load().then((): void => {
             this.thumbnail = this.item.getThumbnail()
         })
         this.updateCardSize();
@@ -115,7 +115,7 @@ export struct AlbumSelectGridItemNewStyle {
                             z: 1,
                             angle: this.item.orientation
                         })
-                        .onError(() => {
+                        .onError((): void => {
                             Log.debug(TAG, 'album is empty or its cover is error');
                             this.isEmptyAlbum = true;
                         })
@@ -137,7 +137,7 @@ export struct AlbumSelectGridItemNewStyle {
                             angle: this.item.orientation
                         })
                         .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
-                        .onError(() => {
+                        .onError((): void => {
                             Log.debug(TAG, 'album is empty or its cover is error');
                             this.isEmptyAlbum = true;
                         })
@@ -189,7 +189,7 @@ export struct AlbumSelectGridItemNewStyle {
             width: $r('app.float.album_cover_stroke_width'),
             color: $r('app.color.album_cover_stroke_color')
         })
-        .onClick(() => {
+        .onClick((): void => {
             Log.info(TAG, 'After onClick, MediaSet is: ' + JSON.stringify(this.item));
             router.push({
                 uri: 'feature/newAlbum/view/NewAlbumPage',

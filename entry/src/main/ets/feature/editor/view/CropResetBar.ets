@@ -37,7 +37,7 @@ export struct CropResetBar {
         .width(this.isVerticalScreen
             ? $r('app.float.edit_horizontal_toolBar_size') : $r('app.float.default_button_size'))
         .height(this.isVerticalScreen ? $r('app.float.offSet_size_1') : $r('app.float.default_button_size'))
-        .onClick(() => {
+        .onClick((): void => {
             this.broadCast.emit(Constants.CROP_RESET_CLICKED, []);
         })
     }

@@ -62,17 +62,17 @@ export struct ImageGridItemComponent {
         Log.info(TAG, "getThumbnail1 " + this.thumbnail);
         if (this.mediaItem.isLoad()) {
             this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE);
-            this.mediaItem.isFavor().then((status: boolean) => {
+            this.mediaItem.isFavor().then((status: boolean): void => {
                 this.isFavourite = status;
             })
         } else {
 	    startTraceWithTaskId("load MediaItem", this.mediaItem.index);
-            this.mediaItem.load(false).then(() => {
+            this.mediaItem.load(false).then((): void => {
                 finishTraceWithTaskId("load MediaItem", this.mediaItem.index);
                 this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE);
                 this.isError = false;
                 Log.info(TAG, "getThumbnail2 " + this.thumbnail);
-                this.mediaItem.isFavor().then((status: boolean) => {
+                this.mediaItem.isFavor().then((status: boolean): void => {
                     this.isFavourite = status;
                 })
             })
@@ -157,7 +157,7 @@ export struct ImageGridItemComponent {
                 .rotate({ x: 0, y: 0, z: 1, angle: 0 })
                 .objectFit(ImageFit.Cover)
                 .autoResize(false)
-                .onComplete(() => {
+                .onComplete((): void => {
                     Log.debug(TAG, "Draw the image! " + this.thumbnail);
                     if (this.isEnteringPhoto && this.isPush) {
                         Log.info(TAG, "image onComplete, broadCast, thumbnail:"+this.thumbnail);
@@ -170,7 +170,7 @@ export struct ImageGridItemComponent {
                     }
 
                 })
-                .onError(() => {
+                .onError((): void => {
                     Log.error(TAG, "alt Image " + this.mediaItem.index + " error :" + this.thumbnail);
                     if (this.thumbnail.length == 0 || this.mediaItem.width == 0 || this.mediaItem.height == 0) {
                         this.resetShow()
@@ -224,7 +224,7 @@ export struct ImageGridItemComponent {
                 .width('100%')
                 .backgroundColor(this.isSelectedMode && this.mediaItem.isSelect ?
                 $r('app.color.item_selection_bg_color') : $r('app.color.transparent'))
-                .onClick(() => {
+                .onClick((): void => {
                     if (this.isSelectedMode) {
                         this.onSelected();
                      } else {
@@ -234,7 +234,7 @@ export struct ImageGridItemComponent {
                 })
             if (this.isSelectedMode) {
                 Image($r('app.media.ic_photo_preview'))
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.isPreview = true;
                         this.jumpToPhotoBrowser();
                         Log.info(TAG, 'expand.');
@@ -253,7 +253,7 @@ export struct ImageGridItemComponent {
                         x: $r('app.float.grid_item_checkbox_markAnchor'),
                         y: $r('app.float.grid_item_checkbox_markAnchor')
                     })
-                    .onClick(() => {
+                    .onClick((): void => {
                         this.onSelected();
                     })
             }
@@ -267,7 +267,7 @@ export struct ImageGridItemComponent {
             duration: AnimationConstants.PRESS_ANIM_DURATION,
             curve: Curve.Ease
         })
-        .onTouch(event => {
+        .onTouch((event: TouchEvent): void => {
             Log.info(TAG, "onTouch trigger: isSelectedMode: " + this.isSelectedMode + 
             ", isEnteringPhoto: " + this.isEnteringPhoto + ", " + JSON.stringify(event));
             if (this.isSelectedMode) {
@@ -283,7 +283,7 @@ export struct ImageGridItemComponent {
                 this.pressAnimScale = 1;
             }
         })
-        .gesture(LongPressGesture().onAction((event: GestureEvent) => {
+        .gesture(LongPressGesture().onAction((event: GestureEvent): void => {
             if (!this.isThird) {
                 Log.info(TAG, "LongPressGesture " + this.isSelectedMode);
                 this.selectStateChange();
