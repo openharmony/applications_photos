@@ -60,8 +60,8 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
 
         this.item = items[0] as AlbumDataItem;
 
-        this.confirmCallback = this.confirmCallback.bind(this);
-        this.cancelCallback = this.cancelCallback.bind(this);
+        this.confirmCallback = (newName: string): Promise<void> => this.confirmCallbackBindImpl(newName);
+        this.cancelCallback = (): void => this.cancelCallbackBindImpl();
 
         Log.info(TAG, "The name of clicked album is " + this.item.displayName);
 
@@ -70,6 +70,10 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
     }
 
     private async confirmCallback(newName: string): Promise<void> {
+        return await this.confirmCallbackBindImpl(newName)
+    }
+
+    private async confirmCallbackBindImpl(newName: string): Promise<void> {
         Log.info(TAG, "AlbumSet rename confirm and the new name is: " + newName);
 
         this.onOperationEnd = this.menuContext.onOperationEnd;
@@ -111,6 +115,10 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
     }
 
     private cancelCallback(): void {
+        this.cancelCallbackBindImpl()
+    }
+
+    private cancelCallbackBindImpl(): void {
         Log.info(TAG, 'AlbumSet rename cancel');
     }
 

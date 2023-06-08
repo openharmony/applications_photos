@@ -45,8 +45,8 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
             return;
         }
 
-        this.confirmCallback = this.confirmCallback.bind(this);
-        this.cancelCallback = this.cancelCallback.bind(this);
+        this.confirmCallback = (): void => this.confirmCallbackBindImpl();
+        this.cancelCallback = (): void => this.cancelCallbackBindImpl();
 
         let deleteResource: Resource = $r('app.string.dialog_delete');
         this.getDialogTitle().then((dialogTitle: Resource): void => {
@@ -99,6 +99,10 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
     }
 
     private confirmCallback(): void {
+        this.confirmCallbackBindImpl()
+    }
+
+    private confirmCallbackBindImpl(): void {
         Log.info(TAG, 'AlbumSet delete confirm');
         // 1. Variable initialization
         this.onOperationEnd = this.menuContext.onOperationEnd;
@@ -111,6 +115,10 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
     }
 
     private cancelCallback(): void {
+        this.cancelCallbackBindImpl()
+    }
+
+    private cancelCallbackBindImpl(): void {
         Log.info(TAG, 'AlbumSet delete cancel');
     }
 }

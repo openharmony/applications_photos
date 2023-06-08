@@ -110,10 +110,12 @@ export class TimelineItemDataSource extends ItemDataSource {
             let groupItem: TimelineDataItem = this.groupItem[i]
             let childLength = groupItem.groupChild.length;
             if (index == 0) {
-                item = new LazyItem<TimelineDataItem>(groupItem, lazyIndex, this.onTimelineDataUpdate.bind(this));
+                item = new LazyItem<TimelineDataItem>(groupItem, lazyIndex,
+                    (index: number, item: TimelineDataItem): void => this.onTimelineDataUpdateBindImpl(index, item));
                 break;
             } else if (index <= childLength) {
-                item = new LazyItem<MediaDataItem>(groupItem.groupChild[index-1], lazyIndex, this.onMediaDataUpdate.bind(this));
+                item = new LazyItem<MediaDataItem>(groupItem.groupChild[index-1], lazyIndex,
+                    (index: number, item: MediaDataItem): void => this.onMediaDataUpdateBindImpl(index, item));
                 groupItem.groupChild[index-1].index = count + index - 1;
                 break;
             } else {
@@ -193,6 +195,10 @@ export class TimelineItemDataSource extends ItemDataSource {
     }
 
     onTimelineDataUpdate(index: number, item: TimelineDataItem): void {
+        this.onTimelineDataUpdateBindImpl(index, item)
+    }
+
+    private onTimelineDataUpdateBindImpl(index: number, item: TimelineDataItem): void {
         this.notifyDataChange(index);
         Log.info(TAG, "onTimelineDataUpdate " + index);
         for (let i = 0; i < item.groupChild.length; i++) {
@@ -218,6 +224,10 @@ export class TimelineItemDataSource extends ItemDataSource {
     }
 
     onMediaDataUpdate(index: number, item: MediaDataItem): void {
+        this.onMediaDataUpdateBindImpl(index, item)
+    }
+
+    private onMediaDataUpdateBindImpl(index: number, item: MediaDataItem): void {
         Log.info(TAG, "onMediaDataUpdate " + index);
         this.notifyDataChange(index);
         this.notifyDataChange(this.getIndexByMediaIndex(index));
