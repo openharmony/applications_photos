@@ -424,6 +424,4 @@ class MediaModel {
     }
 }
 
-let mediaModel: MediaModel = stashOrGetObject<MediaModel>(new MediaModel(), TAG);
-
-export { mediaModel };
+export let mediaModel: MediaModel = stashOrGetObject<MediaModel>(new MediaModel(), TAG);

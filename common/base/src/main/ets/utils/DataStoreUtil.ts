@@ -137,7 +137,4 @@ class DataStoreUtil {
     }
 }
 
-let dataStore: DataStoreUtil = stashOrGetObject<DataStoreUtil>(new DataStoreUtil(), TAG);
-
-export { dataStore };
-
+export let dataStore: DataStoreUtil = stashOrGetObject<DataStoreUtil>(new DataStoreUtil(), TAG);
