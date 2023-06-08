@@ -65,7 +65,7 @@ export class GroupItemDataSource extends ItemDataSource {
         if (this.groupDataItem[index] != null && this.groupDataItem[index] != undefined) {
             this.groupDataItem[index].index = index;
         }
-        return new LazyItem<MediaDataItem>(this.groupDataItem[index], index, this.onDataUpdate.bind(this));
+        return new LazyItem<MediaDataItem>(this.groupDataItem[index], index, (index: number): void => this.onDataUpdateBindImpl(index));
     }
 
     getDataByIndex(index: number): MediaDataItem {
@@ -139,8 +139,12 @@ export class GroupItemDataSource extends ItemDataSource {
         this.groupDataItem = await this.groupDataImpl.reloadGroupItemData(isGrid);
         return this.groupDataItem.length == 0;
     }
-    
+
     onDataUpdate(index: number): void {
+        this.onDataUpdateBindImpl(index)
+    }
+
+    private onDataUpdateBindImpl(index: number): void {
         Log.debug(TAG, "onDataUpdate " + index);
         if (index != -1) {
             this.notifyDataChange(index);

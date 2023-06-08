@@ -41,7 +41,7 @@ export class AlbumsDataSource extends ItemDataSource {
     }
 
     getData(index: number): LazyItem<AlbumDataItem> {
-        return new LazyItem<AlbumDataItem>(this.getDataByIndex(index), index, this.onDataUpdate.bind(this))
+        return new LazyItem<AlbumDataItem>(this.getDataByIndex(index), index, (index: number): void => this.onDataUpdateBindImpl(index))
     }
 
     getDataByIndex(index: number): AlbumDataItem {
@@ -141,6 +141,10 @@ export class AlbumsDataSource extends ItemDataSource {
     }
 
     onDataUpdate(index: number): void {
+        this.onDataUpdateBindImpl(index)
+    }
+
+    private onDataUpdateBindImpl(index: number): void {
         Log.info(TAG, "onDataUpdate " + index);
         this.notifyDataChange(index);
     }

@@ -51,8 +51,8 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
             this.getNewAlbumDisplayName(name).then((newAlbumDisplayName: string): void => {
                 Log.info(TAG, "The display name of new album is " + newAlbumDisplayName);
 
-                this.confirmCallback = this.confirmCallback.bind(this);
-                this.cancelCallback = this.cancelCallback.bind(this);
+                this.confirmCallback = (displayName: string): Promise<void> => this.confirmCallbackBindImpl(displayName);
+                this.cancelCallback = (): void => this.cancelCallbackBindImpl();
 
                 this.menuContext.broadCast.emit(BroadcastConstants.SHOW_NEW_ALBUM_PHOTO_DIALOG,
                     [newAlbumDisplayName, this.confirmCallback, this.cancelCallback]);
@@ -66,6 +66,10 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     }
 
     private async confirmCallback(displayName: string): Promise<void> {
+        return await this.confirmCallbackBindImpl(displayName)
+    }
+
+    private async confirmCallbackBindImpl(displayName: string): Promise<void> {
         Log.info(TAG, "AlbumSet new album confirm and the new name is: " + displayName);
         let relativePath = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + displayName + "/";
         let simpleAlbumDataItem: SimpleAlbumDataItem = new SimpleAlbumDataItem("", displayName, relativePath, "", "");
@@ -84,7 +88,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
 
         if (this.menuContext.jumpSourceToMain == JumpSourceToMain.ALBUM) {
             Log.info(TAG, 'go back to photo grid');
-            this.menuContext.broadCast.emit(BroadcastConstants.MEDIA_OPERATION, [simpleAlbumDataItem, this.onCompleted.bind(this)]);
+            this.menuContext.broadCast.emit(BroadcastConstants.MEDIA_OPERATION, [simpleAlbumDataItem, (): void => this.onCompletedBindImpl()]);
         } else {
             let params: Object = {
                 albumInfo: JSON.stringify(simpleAlbumDataItem),
@@ -105,10 +109,18 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     }
 
     private cancelCallback(): void {
+        this.cancelCallbackBindImpl()
+    }
+
+    private cancelCallbackBindImpl(): void {
         Log.info(TAG, 'AlbumSet new album cancel');
     }
 
     onCompleted(): void {
+        this.onCompletedBindImpl()
+    }
+
+    private onCompletedBindImpl(): void {
         Log.info(TAG, 'new album data succeed!');
         if(this.onOperationEnd != null) this.onOperationEnd();
     }

@@ -62,11 +62,11 @@ export class CopyMenuOperation extends ProcessMenuOperation {
         if (this.menuContext.deviceId != null) {
             this.menuContext.broadCast.emit(BroadcastConstants.SHOW_PROGRESS_DIALOG,
                 [$r('app.string.download_progress_message'),
-                MediaOperationType.Copy, this.cancelFunc.bind(this)]);
+                MediaOperationType.Copy, (): void => this.cancelFuncBindImpl()]);
         } else {
             this.menuContext.broadCast.emit(BroadcastConstants.SHOW_PROGRESS_DIALOG,
                 [$r('app.string.copy_progress_message', this.albumInfo.displayName),
-                MediaOperationType.Copy, this.cancelFunc.bind(this)]);
+                MediaOperationType.Copy, (): void => this.cancelFuncBindImpl()]);
         }
 
         if (dataSource == null) {
@@ -115,8 +115,8 @@ export class CopyMenuOperation extends ProcessMenuOperation {
                     this.menuContext.broadCast.emit(BroadcastConstants.FIND_SAME_FILE_DIALOG,
                         [assets, this.count, (): void => {
                             this.copy(assets.sourceAsset, assets.targetAsset);
-                        }, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this),
-                        this.setFindSameOperation.bind(this)]);
+                        }, (): void => this.onOperateContinueBindImpl(), (): void => this.onOperateCancelledBindImpl(),
+                        (newOp: number): void => this.setFindSameOperation(newOp)]);
                     break;
                 case FindSameOperation.REPLACE:
                     this.copy(assets.sourceAsset, assets.targetAsset);
@@ -162,6 +162,10 @@ export class CopyMenuOperation extends ProcessMenuOperation {
     }
 
     cancelFunc(): void {
+        this.cancelFuncBindImpl()
+    }
+
+    private cancelFuncBindImpl(): void {
         Log.info(TAG, "progress cancel");
         this.onOperatePause();
         let cancelMessage = $r('app.string.copy_cancel_message', this.getExpectProgress().toString());
@@ -169,10 +173,10 @@ export class CopyMenuOperation extends ProcessMenuOperation {
         if(this.menuContext.broadCast != null) {
             if (this.menuContext.deviceId != null) {
                  this.menuContext.broadCast.emit(BroadcastConstants.DOWNLOAD_CANCEL_OPERATE,
-                    [cancelMessage, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this)]);
+                    [cancelMessage, (): void => this.onOperateContinueBindImpl(), (): void => this.onOperateCancelledBindImpl()]);
             } else {
                 this.menuContext.broadCast.emit(BroadcastConstants.CANCEL_OPERATE,
-                    [cancelMessage, this.onOperateContinue.bind(this), this.onOperateCancelled.bind(this)]);
+                    [cancelMessage, (): void => this.onOperateContinueBindImpl(), (): void => this.onOperateCancelledBindImpl()]);
             }
         }
 
@@ -180,6 +184,10 @@ export class CopyMenuOperation extends ProcessMenuOperation {
 
     // Copy cancel callback
     onOperateContinue(): void {
+        this.onOperateContinueBindImpl()
+    }
+
+    private onOperateContinueBindImpl(): void {
         Log.info(TAG, 'Operate Continue');
         this.isPause = false;
         this.cyclicOperation();

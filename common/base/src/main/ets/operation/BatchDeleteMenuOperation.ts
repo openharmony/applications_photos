@@ -46,8 +46,8 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
             return;
         }
 
-        this.confirmCallback = this.confirmCallback.bind(this);
-        this.cancelCallback = this.cancelCallback.bind(this);
+        this.confirmCallback = (): void => this.confirmCallbackBindImpl();
+        this.cancelCallback = (): void => this.cancelCallbackBindImpl();
 
         let resource: Resource = this.getDeleteMessageResource(dataSource);
         let deleteResource: Resource = this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.dialog_recycle') : $r('app.string.dialog_delete');
@@ -59,7 +59,7 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
     }
 
     getResourceFromGrid(dataSource: ItemDataSource): Resource {
-        if (dataSource != null && dataSource.isSelect()) {
+        if (dataSource && dataSource.isSelect()) {
             return this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_all_files_tips') : $r('app.string.delete_all_files_tips');
         } else if (this.count == 1) {
             return this.menuContext.albumId == MediaConstants.ALBUM_ID_RECYCLE ? $r('app.string.recycle_single_file_tips') : $r('app.string.delete_single_file_tips');
@@ -79,6 +79,10 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
     }
 
     confirmCallback(): void {
+        this.confirmCallbackBindImpl()
+    }
+
+    protected confirmCallbackBindImpl(): void {
         Log.info(TAG, 'Batch delete confirm');
         AppStorage.SetOrCreate("isDelete", 1);
 
@@ -87,7 +91,7 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
 
         // 2. onDeleteStart exit selection mode
         let onOperationStart: Function = this.menuContext.onOperationStart;
-        if(onOperationStart != null) onOperationStart();
+        onOperationStart && onOperationStart();
 
         this.menuContext.broadCast.emit(BroadcastConstants.DELETE_PROGRESS_DIALOG,
             [$r('app.string.action_delete'), this.count]);
@@ -114,6 +118,10 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
     }
 
     cancelCallback(): void {
+        this.cancelCallbackBindImpl()
+    }
+
+    protected cancelCallbackBindImpl(): void {
         Log.info(TAG, 'Batch delete cancel');
     }
 }
