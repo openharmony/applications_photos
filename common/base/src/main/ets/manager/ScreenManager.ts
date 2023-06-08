@@ -134,7 +134,7 @@ class ScreenManager {
         }
         let cb;
         let i = cbs.length;
-        while (i--) {
+        while (i-- != 0) {
             cb = cbs[i];
             if (cb === fn || cb.fn === fn) {
                 cbs.splice(i, 1);
