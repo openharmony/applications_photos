@@ -49,6 +49,10 @@ export struct ToolBar {
     }
 
     onMenuClick(actionID: number): void {
+        this.onMenuClickedBindImpl(actionID)
+    }
+
+    private onMenuClickedBindImpl(actionID: number): void {
         for (let i = 0; i < this.menuChanged.menuArray.length; i++) {
             if (actionID == this.menuChanged.menuArray[i].actionID) {
                 this.selectedMode = this.menuChanged.menuArray[i].mode;
@@ -79,12 +83,16 @@ export struct ToolBar {
     }
 
     immersive(isImmersive: boolean): void {
+        this.immersiveBindImpl(isImmersive)
+    }
+
+    private immersiveBindImpl(isImmersive: boolean): void {
         this.isImmersive = isImmersive;
     }
 
     aboutToAppear(): void {
-        this.menuClick = this.onMenuClick.bind(this);
-        this.immersiveClick = this.immersive.bind(this);
+        this.menuClick = (actionID: number): void => this.onMenuClickedBindImpl(actionID);
+        this.immersiveClick = (isImmersive: boolean): void => this.immersiveBindImpl(isImmersive);
         this.broadCast.on(Constants.UPDATE_MENU, this.menuClick);
         this.broadCast.on(Constants.IS_IMMERSIVE, this.immersiveClick);
 

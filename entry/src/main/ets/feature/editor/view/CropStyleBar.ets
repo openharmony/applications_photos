@@ -149,6 +149,10 @@ export struct CropStyleBar {
     }
 
     onMenuClicked(actionID: number): void {
+        this.onMenuClickedBindImpl(actionID)
+    }
+
+    private onMenuClickedBindImpl(actionID: number): void {
         if (this.selectedMode != PhotoEditMode.EDIT_MODE_CROP) {
             return;
         }
@@ -211,13 +215,17 @@ export struct CropStyleBar {
     }
 
     onResetClicked(): void {
+        this.onResetClickedBindImpl()
+    }
+
+    private onResetClickedBindImpl(): void {
         this.menuChanged.isChanged = 0;
         this.isCropReset = this.cropEdit.couldReset();
     }
 
     aboutToAppear(): void {
-        this.menuClick = this.onMenuClicked.bind(this);
-        this.resetClick = this.onResetClicked.bind(this);
+        this.menuClick = (actionID: number): void => this.onMenuClickedBindImpl(actionID);
+        this.resetClick = (): void => this.onResetClickedBindImpl();
         this.broadCast.on(Constants.UPDATE_MENU, this.menuClick);
         this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClick);
     }

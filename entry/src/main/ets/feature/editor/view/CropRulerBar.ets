@@ -196,6 +196,10 @@ export struct CropRulerBar {
     }
 
     onResetClicked(): void {
+        this.onResetClickedBindImpl()
+    }
+
+    private onResetClickedBindImpl(): void {
         this.current_def = 0;
         this.drawRuler();
     }
@@ -223,7 +227,7 @@ export struct CropRulerBar {
     }
 
     aboutToAppear(): void {
-        this.resetClicked = this.onResetClicked.bind(this);
+        this.resetClicked = (): void => this.onResetClickedBindImpl();
         this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClicked);
         this.iniSize()
     }
