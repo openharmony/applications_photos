@@ -462,7 +462,7 @@ export struct AlbumSetPage {
                                 isBigCard: true,
                             })
                         }.columnStart(0).columnEnd(1)
-                    } else if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null)) {
+                    } else if (item != null && item.get() != null) {
                         GridItem() {
                             AlbumGridItemNewStyle({
                                 item: item.get(),
