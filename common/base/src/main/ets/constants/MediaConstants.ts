@@ -48,20 +48,20 @@ export class MediaConstants {
     static readonly ALBUM_ID_FAVOR = 'default_favor';
     static readonly ALBUM_ID_SNAPSHOT = 'default_snapshot';
     static readonly ALBUM_ID_REMOTE = 'default_remote';
-    static readonly ALBUM_DISABLE_COPY_LIST: Set<string> = new Set([
+    static readonly ALBUM_DISABLE_COPY_LIST: Set<string> = new Set<string>([
         MediaConstants.ALBUM_ID_ALL,
         MediaConstants.ALBUM_ID_VIDEO,
         MediaConstants.ALBUM_ID_RECYCLE,
         MediaConstants.ALBUM_ID_FAVOR
     ] as string[]);
-    static readonly ALBUM_DISABLE_DELETE_LIST: Set<string> = new Set([
+    static readonly ALBUM_DISABLE_DELETE_LIST: Set<string> = new Set<string>([
         MediaConstants.ALBUM_ID_ALL,
         MediaConstants.ALBUM_ID_CAMERA,
         MediaConstants.ALBUM_ID_VIDEO,
         MediaConstants.ALBUM_ID_RECYCLE,
         MediaConstants.ALBUM_ID_FAVOR
     ] as string[]);
-    static readonly ALBUM_DISABLE_NEW_LIST: Set<string> = new Set([
+    static readonly ALBUM_DISABLE_NEW_LIST: Set<string> = new Set<string>([
         MediaConstants.ALBUM_ID_ALL,
         MediaConstants.ALBUM_ID_CAMERA,
         MediaConstants.ALBUM_ID_VIDEO,
@@ -69,7 +69,7 @@ export class MediaConstants {
         MediaConstants.ALBUM_ID_FAVOR,
         MediaConstants.ALBUM_ID_SNAPSHOT
     ] as string[]);
-    static readonly ALBUM_DISABLE_RENAME_LIST: Set<string> = new Set([
+    static readonly ALBUM_DISABLE_RENAME_LIST: Set<string> = new Set<string>([
         MediaConstants.ALBUM_ID_ALL,
         MediaConstants.ALBUM_ID_CAMERA,
         MediaConstants.ALBUM_ID_VIDEO,

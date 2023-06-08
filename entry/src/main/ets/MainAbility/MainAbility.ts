@@ -55,7 +55,7 @@ export class MainAbility extends Ability {
         // Ability is creating, initialize resources for this ability
         GlobalContext.getContext().setObject("appContext", this.context);
         mediaModel.onCreate(this.context);
-        let action: Map<string, object> = new Map(Object.entries(want.parameters));
+        let action: Map<string, object> = new Map<string, object>(Object.entries<object>(want.parameters));
         let filterMediaType = action?.get("filterMediaType")?.toString()
         if (action != null && action != undefined && filterMediaType == MediaConstants.FILTER_MEDIA_TYPE_IMAGE) {
             mFilterMediaType = MediaConstants.SELECT_TYPE_IMAGE;
@@ -66,8 +66,8 @@ export class MainAbility extends Ability {
         }
         let uri = action?.get("uri")?.toString()
         if (action != null && action != undefined && uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
-            this.browserDataSource.reloadGroupItemData(false).then((): void => {
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
+            this.browserDataSource.reloadGroupItemData(false).then<void, void>((): void => {
                 if (this.browserDataSource.groupDataItem.length == 0) {
                     this.onDestroy();
                 }
@@ -75,29 +75,29 @@ export class MainAbility extends Ability {
         } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
             mCallerUid = Number(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID));
             mMaxSelectCount = Number(action.get("maxSelectCount"));
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
         } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
             mCallerUid = Number(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID));
             mMaxSelectCount = Number(action.get("maxSelectCount"));
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
         } else if (action != null && action != undefined && uri == Constants.ACTION_URI_FORM_ABILITY) {
             isFromCard = true;
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY);
-            AppStorage.SetOrCreate(Constants.FROM_ALBUM_ID, action.get("albumId"));
-            AppStorage.SetOrCreate(Constants.FROM_CURRENT_INDEX, action.get("currentIndex"));
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY);
+            AppStorage.SetOrCreate<string>(Constants.FROM_ALBUM_ID, action.get("albumId")?.toString());
+            AppStorage.SetOrCreate<number>(Constants.FROM_CURRENT_INDEX, Number.parseInt(action.get("currentIndex")?.toString()));
         } else if (action != null && action != undefined && uri == Constants.ACTION_URI_FORM_ABILITY_NONE) {
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY_NONE);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY_NONE);
         } else if (action != null && action != undefined && action.get('formId') != null) {
-            AppStorage.SetOrCreate(Constants.FA_SETTING_FROM_ID, action.get('formId'));
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_FORM_EDITOR);
+            AppStorage.SetOrCreate<number>(Constants.FA_SETTING_FROM_ID, Number.parseInt(action.get('formId')?.toString()));
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_FORM_EDITOR);
         } else if (want.action == wantConstant.Action.ACTION_VIEW_DATA) {
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_VIEW_DATA);
-            AppStorage.SetOrCreate(Constants.VIEW_DATA_URI, want.uri);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_VIEW_DATA);
+            AppStorage.SetOrCreate<string>(Constants.VIEW_DATA_URI, want.uri);
             if (action != null && action != undefined) {
-                AppStorage.SetOrCreate(Constants.VIEW_DATA_POS, action.get("index"));
+                AppStorage.SetOrCreate<number>(Constants.VIEW_DATA_POS, Number.parseInt(action.get("index")?.toString()));
             }
         } else {
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
         bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0, (error: Error, appInfo: bundleManager.ApplicationInfo): void => {
            if (error != null) {
@@ -126,37 +126,37 @@ export class MainAbility extends Ability {
 
     onNewWant(want: Want): void {
         startTrace('onNewWant');
-        let action: Map<string, object> = new Map(Object.entries(want.parameters));
+        let action: Map<string, object> = new Map<string, object>(Object.entries<object>(want.parameters));
         let uri = action?.get("uri")?.toString()
         if (action != null && action != undefined && uri == MainAbility.ACTION_URI_PHOTO_DETAIL) {
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_CAMERA);
         } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_SINGLE_SELECT) {
             mCallerUid = Number(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID));
             mMaxSelectCount = Number(action.get("maxSelectCount"));
             mFilterMediaType = Number(action.get("filterMediaType"));
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_SINGLE_SELECT);
         } else if (action != null && action != undefined && uri == MainAbility.ACTION_URI_MULTIPLE_SELECT) {
             mCallerUid = Number(action.get(Constants.KEY_WANT_PARAMETERS_CALLERUID));
             mMaxSelectCount = Number(action.get("maxSelectCount"));
             mFilterMediaType = Number(action.get("filterMediaType"));
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_MULTIPLE_SELECT);
         } else if (action != null && action != undefined && uri == Constants.ACTION_URI_FORM_ABILITY) {
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY);
-            AppStorage.SetOrCreate(Constants.FROM_ALBUM_ID, action.get("albumId"));
-            AppStorage.SetOrCreate(Constants.FROM_CURRENT_INDEX, action.get("currentIndex"));
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY);
+            AppStorage.SetOrCreate<string>(Constants.FROM_ALBUM_ID, action.get("albumId")?.toString());
+            AppStorage.SetOrCreate<number>(Constants.FROM_CURRENT_INDEX, Number.parseInt(action.get("currentIndex")?.toString()));
         } else if (action != null && action != undefined && uri == Constants.ACTION_URI_FORM_ABILITY_NONE) {
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY_NONE);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_ABILITY_NONE);
         } else if (action != null && action != undefined && action.get('formId') != null) {
-            AppStorage.SetOrCreate(Constants.FA_SETTING_FROM_ID, action.get('formId'));
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_FORM_EDITOR);
+            AppStorage.SetOrCreate<number>(Constants.FA_SETTING_FROM_ID, Number.parseInt(action.get('formId')?.toString()));
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_FORM_FORM_EDITOR);
         } else if (want.action == wantConstant.Action.ACTION_VIEW_DATA) {
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_VIEW_DATA);
-            AppStorage.SetOrCreate(Constants.VIEW_DATA_URI, want.uri);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_VIEW_DATA);
+            AppStorage.SetOrCreate<string>(Constants.VIEW_DATA_URI, want.uri);
             if (action != null && action != undefined) {
-                AppStorage.SetOrCreate(Constants.VIEW_DATA_POS, action.get("index"));
+                AppStorage.SetOrCreate<number>(Constants.VIEW_DATA_POS, Number.parseInt(action.get("index")?.toString()));
             }
         } else {
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
         }
         finishTrace('onNewWant');
     }
@@ -174,10 +174,10 @@ export class MainAbility extends Ability {
         GlobalContext.getContext().setObject("photosWindowStage", windowStage);
         startTrace('getMainWindow');
         windowStage.getMainWindow().then((win: window.Window): void => {
-            AppStorage.SetOrCreate(Constants.MAIN_WINDOW, win);
+            AppStorage.SetOrCreate<window.Window>(Constants.MAIN_WINDOW, win);
             finishTrace('getMainWindow');
             startTrace('initializationSize');
-            screenManager.initializationSize(win).then((): void => {
+            screenManager.initializationSize(win).then<void, void>((): void => {
                 finishTrace('initializationSize');
                 if (isFromCard) {
                     windowStage.setUIContent(this.context, 'feature/browser/view/PhotoBrowser', null);
@@ -201,7 +201,7 @@ export class MainAbility extends Ability {
     }
 
     async thirdRouterPage(): Promise<void> {
-        let entryFrom = AppStorage.Get(Constants.ENTRY_FROM_HAP);
+        let entryFrom: number = AppStorage.Get<number>(Constants.ENTRY_FROM_HAP);
         Log.info(this.TAG, "thirdRouterPage entryFromHap: " + entryFrom);
         if (entryFrom == Constants.ENTRY_FROM_NONE) {
             return;
@@ -253,8 +253,8 @@ export class MainAbility extends Ability {
         } else if (entryFrom == Constants.ENTRY_FROM_VIEW_DATA) {
             let params: Object = {
                 pageFrom: Constants.ENTRY_FROM.VIEW_DATA,
-                viewData: AppStorage.Get(Constants.VIEW_DATA_URI),
-                position: AppStorage.Get(Constants.VIEW_DATA_POS),
+                viewData: AppStorage.Get<string>(Constants.VIEW_DATA_URI),
+                position: AppStorage.Get<number>(Constants.VIEW_DATA_POS),
             };
             let options: RouterOptions = {
                 uri: 'feature/browser/view/PhotoBrowser',
@@ -264,7 +264,7 @@ export class MainAbility extends Ability {
         }
 
         //router.clear()需要等页面跳转完成后调用，如果不延时调用会发生崩溃。
-        AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, 0)
+        AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, 0)
         setTimeout((): void => {
             router.clear();
         }, 10);

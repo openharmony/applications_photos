@@ -88,6 +88,6 @@ class MediaObserver {
     }
 }
 
-let mediaObserver: MediaObserver = stashOrGetObject(new MediaObserver(), TAG);
+let mediaObserver: MediaObserver = stashOrGetObject<MediaObserver>(new MediaObserver(), TAG);
 
 export { mediaObserver };

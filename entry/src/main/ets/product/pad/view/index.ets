@@ -54,8 +54,8 @@ struct IndexPage {
         startTrace('indexPageAppearToShow');
         app.setImageCacheCount(100);
         app.setImageRawDataCacheSize(100*1024*1024);
-        if (AppStorage.Get(Constants.BACK_FROM_FORM_DETAIL) != null) {
-            AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, false);
+        if (AppStorage.Get<boolean>(Constants.BACK_FROM_FORM_DETAIL) != null) {
+            AppStorage.SetOrCreate<boolean>(Constants.BACK_FROM_FORM_DETAIL, false);
             this.currentIndex = Constants.ALBUM_PAGE_INDEX;
         }
         let param: ParamsInterface = router.getParams();

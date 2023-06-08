@@ -20,7 +20,7 @@ export class NewAlbumBarModel {
     createActionBar(isSelectedMode: boolean, selectedCount: number): ActionBarProp {
         let menuList: Action[] = [];
         let actionBarProp: ActionBarProp = new ActionBarProp();
-        menuList.push(Boolean(selectedCount) ? Action.OK : Action.OK_DISABLE)
+        menuList.push((new Boolean(selectedCount)) ? Action.OK : Action.OK_DISABLE)
         actionBarProp
             .setLeftAction(Action.CANCEL)
             .setMode(ActionBarMode.SELECTION_MODE)

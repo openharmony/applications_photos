@@ -152,7 +152,7 @@ export class GroupItemDataSource extends ItemDataSource {
     }
 
     dataReload(isGrid: boolean): void {
-        this.reloadGroupItemData(isGrid).then((isEmpty: boolean): void => {
+        this.reloadGroupItemData(isGrid).then<void, void>((isEmpty: boolean): void => {
             this.notifyDataReload();
         })
     }

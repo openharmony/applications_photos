@@ -84,11 +84,11 @@ export struct PhotoSwiper {
         .indicator(false)
         .loop(false)
         .onChange((index: number): void => {
-            if (AppStorage.Get("isDelete") == 0) {
+            if (AppStorage.Get<number>("isDelete") == 0) {
                 if (this.currentIndex - index == 1) {
-                    AppStorage.SetOrCreate("isLeftSwiper", 1);
+                    AppStorage.SetOrCreate<number>("isLeftSwiper", 1);
                 } else if (this.currentIndex - index == -1) {
-                    AppStorage.SetOrCreate("isLeftSwiper", 0);
+                    AppStorage.SetOrCreate<number>("isLeftSwiper", 0);
                 }
             }
             if (this.duration != 0) {

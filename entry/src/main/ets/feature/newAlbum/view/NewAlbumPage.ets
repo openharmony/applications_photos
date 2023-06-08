@@ -61,8 +61,8 @@ struct NewAlbumPage {
     private scroller: Scroller = new Scroller();
     private isActive = false;
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
-    private isNewAlbum: boolean = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM);
-    private targetAlbum: SimpleAlbumDataItem = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_TARGET);
+    private isNewAlbum: boolean = AppStorage.Get<boolean>(Constants.APP_KEY_NEW_ALBUM);
+    private targetAlbum: SimpleAlbumDataItem = AppStorage.Get<SimpleAlbumDataItem>(Constants.APP_KEY_NEW_ALBUM_TARGET);
     private barModel: NewAlbumBarModel = new NewAlbumBarModel();
     private groupDataSource: GroupItemDataSource = new GroupItemDataSource();
     @State actionBarProp: ActionBarProp = new ActionBarProp();
@@ -199,7 +199,7 @@ struct NewAlbumPage {
             let item = JSON.parse(param.item.toString()) as AlbumDataItem;
             this.groupDataSource.setAlbumId(item.id)
         }
-        this.groupDataSource.reloadGroupItemData(true).then((isEmpty: boolean): void => {
+        this.groupDataSource.reloadGroupItemData(true).then<void, void>((isEmpty: boolean): void => {
             this.isEmpty = isEmpty
             this.groupDataSource.notifyDataReload()
             this.isHideScrollBar = (this.groupDataSource.totalCount() <= Constants.GRID_SCROLL_BAR_VISIBLE_THRESHOLD)
@@ -249,7 +249,7 @@ struct NewAlbumPage {
             return;
         }
         Log.info(TAG, "jump to photo browser at index: " + targetIndex);
-        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
+        AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER, children);
         router.push({
             uri: 'feature/browser/view/PhotoBrowser',
             params: {
@@ -266,7 +266,7 @@ struct NewAlbumPage {
             Log.warn(TAG, 'targetIndex is not found');
             return;
         }
-        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, children);
+        AppStorage.SetOrCreate<MediaDataItem[]>(Constants.APP_KEY_PHOTO_BROWSER, children);
         router.push({
             uri: 'feature/browser/view/SelectPhotoBrowser',
             params: {

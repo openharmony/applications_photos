@@ -62,17 +62,17 @@ export struct ImageGridItemComponent {
         Log.info(TAG, "getThumbnail1 " + this.thumbnail);
         if (this.mediaItem.isLoad()) {
             this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE);
-            this.mediaItem.isFavor().then((status: boolean): void => {
+            this.mediaItem.isFavor().then<void, void>((status: boolean): void => {
                 this.isFavourite = status;
             })
         } else {
 	    startTraceWithTaskId("load MediaItem", this.mediaItem.index);
-            this.mediaItem.load(false).then((): void => {
+            this.mediaItem.load(false).then<void, void>((): void => {
                 finishTraceWithTaskId("load MediaItem", this.mediaItem.index);
                 this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE);
                 this.isError = false;
                 Log.info(TAG, "getThumbnail2 " + this.thumbnail);
-                this.mediaItem.isFavor().then((status: boolean): void => {
+                this.mediaItem.isFavor().then<void, void>((status: boolean): void => {
                     this.isFavourite = status;
                 })
             })

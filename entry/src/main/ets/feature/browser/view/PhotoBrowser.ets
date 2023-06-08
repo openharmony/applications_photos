@@ -138,17 +138,17 @@ struct PhotoBrowser {
             if (currentPhoto == undefined) {
                 return;
             }
-            let param1: Map<string, string> = new Map();
+            let param1: Map<string, string> = new Map<string, string>();
             param1.set('ability.params.stream', currentPhoto.uri);
-            let param2: Map<string, Object> = new Map();
+            let param2: Map<string, Object> = new Map<string, Object>();
             param2.set('action', 'ability.intent.SEND_DATA');
             param2.set('type', '*/*');
-            param2.set('parameters', Object.fromEntries(param1));
-            let param3: Map<string, Object> = new Map();
-            param3.set('ability.want.params.INTENT', Object.fromEntries(param2));
+            param2.set('parameters', Object.fromEntries<string>(param1));
+            let param3: Map<string, Object> = new Map<string, Object>();
+            param3.set('ability.want.params.INTENT', Object.fromEntries<Object>(param2));
             let want: Want = {
                 action: 'com.huawei.intent.action.hwCHOOSER',
-                parameters: Object.fromEntries(param3)
+                parameters: Object.fromEntries<Object>(param3)
             };
             startAbility(want)
             return;
@@ -156,7 +156,7 @@ struct PhotoBrowser {
             if (currentPhoto == undefined) {
                 return;
             }
-            currentPhoto.setFavor().then((isSuccess: boolean): void => { return this.setFavourite(isSuccess) })
+            currentPhoto.setFavor().then<void, void>((isSuccess: boolean): void => { return this.setFavourite(isSuccess) })
             return;
         } else if (action === Action.DELETE) {
             if (currentPhoto == undefined) {
@@ -211,7 +211,7 @@ struct PhotoBrowser {
             if (currentPhoto == undefined) {
                 return;
             }
-            currentPhoto.setOrientation().then((): void => this.setOrientation())
+            currentPhoto.setOrientation().then<void, void>((): void => this.setOrientation())
             return;
         } else if (action === Action.MOVE) {
             this.backFromCopy = true;
@@ -242,7 +242,7 @@ struct PhotoBrowser {
                 mediaDataItemCache.get(currentPhoto.uri).favouriteStatus = currentPhoto.favouriteStatus;
             }
             // 收藏相册进入大图，点击取消收藏会导致Item成员变少，所以要dataRemove
-            this.browserDataSource.reloadGroupItemData(false).then((): void => {
+            this.browserDataSource.reloadGroupItemData(false).then<void, void>((): void => {
                 this.operateEnd();
             });
             this.updateMenu();
@@ -251,7 +251,7 @@ struct PhotoBrowser {
     }
 
     private operateEnd(): void {
-        if (this.currentIndex == 0 || AppStorage.Get("isLeftSwiper") == 0) {
+        if (this.currentIndex == 0 || AppStorage.Get<number>("isLeftSwiper") == 0) {
             this.broadCast.emit(BroadcastConstants.ON_DATA_RELOADED, []);
         } else {
             Log.info(TAG, "operateEnd curIndex : " + this.currentIndex);
@@ -262,7 +262,7 @@ struct PhotoBrowser {
 
     private onDeleteEnd(): void {
         Log.debug(TAG, "onDeleteEnd start");
-        AppStorage.SetOrCreate("isDelete", 0);
+        AppStorage.SetOrCreate<number>("isDelete", 0);
         this.operateEnd();
     }
 
@@ -340,7 +340,7 @@ struct PhotoBrowser {
         }
 
         // PhotoItems 和 这里都会有load, 极端情况下可能产生一次无效的load
-        currentPhoto.load(false).then((): void => {
+        currentPhoto.load(false).then<void, void>((): void => {
             this.photoDate = DateUtil.getLocalizedDate(currentPhoto.dateAdded);
             if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
                 this.timeAndLocation = "" + this.deviceName + "/" + DateUtil.getLocalizedTime(currentPhoto.dateAdded);
@@ -357,7 +357,7 @@ struct PhotoBrowser {
             return;
         }
         this.toolMenuList = [];
-        this.getActionList(currentPhoto).then((list: Action[]): void => {
+        this.getActionList(currentPhoto).then<void, void>((list: Action[]): void => {
             if (this.pageFrom == Constants.ENTRY_FROM.CAMERA || this.pageFrom == Constants.ENTRY_FROM.CARD) {
                 this.menuList = [Action.GOTO_PHOTOS, Action.INFO];
             } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
@@ -414,7 +414,7 @@ struct PhotoBrowser {
     async onMoveEnd(err, count, total): Promise<void> {
         Log.debug(TAG, "onMoveEnd count: " + count + ", total: " + total);
         if (err != null) {
-            getResourceString($r('app.string.move_failed_single')).then((message: string): void => {
+            getResourceString($r('app.string.move_failed_single')).then<void, void>((message: string): void => {
                 showToast(message)
             })
             return;
@@ -431,7 +431,7 @@ struct PhotoBrowser {
         Log.debug(TAG, "onCopyEnd count: " + count + ", total: " + total);
         this.dataSourceLoadFinish()
         if (err != null) {
-            getResourceString($r('app.string.copy_failed_single')).then((message: string): void => {
+            getResourceString($r('app.string.copy_failed_single')).then<void, void>((message: string): void => {
                 showToast(message);
             })
         }
@@ -440,11 +440,11 @@ struct PhotoBrowser {
     async onDownloadEnd(err, count, total): Promise<void> {
         Log.debug(TAG, "onDownloadEnd count: " + count + ", total: " + total);
         if (err != null) {
-            getResourceString($r('app.string.download_failed_single')).then((message: string): void => {
+            getResourceString($r('app.string.download_failed_single')).then<void, void>((message: string): void => {
                 showToast(message);
             })
         } else {
-            getResourceString($r('app.string.download_progress_done')).then((message: string): void => {
+            getResourceString($r('app.string.download_progress_done')).then<void, void>((message: string): void => {
                 showToast(message);
             })
         }
@@ -501,8 +501,8 @@ struct PhotoBrowser {
     aboutToAppear(): void {
         startTrace('PhotoBrowserAboutToAppear');
         Log.info(TAG, 'photoBrowser aboutToAppear');
-        AppStorage.SetOrCreate("isDelete", 0);
-        AppStorage.SetOrCreate("isLeftSwiper", 0);
+        AppStorage.SetOrCreate<number>("isDelete", 0);
+        AppStorage.SetOrCreate<number>("isLeftSwiper", 0);
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000');
         this.hasAppeared = true;
         mMultimodalInputManager.registerListener((control: number): void => {
@@ -561,7 +561,7 @@ struct PhotoBrowser {
                     this.onPhotoChanged(0);
                 }
             } else {
-                this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean): void => {
+                this.browserDataSource.reloadGroupItemData(false).then<void, void>((isEmpty: boolean): void => {
                     this.onPhotoChanged(0);
                     this.browserDataSource.notifyDataReload();
                 })
@@ -577,17 +577,17 @@ struct PhotoBrowser {
             if (this.entryFromHap == Constants.ENTRY_FROM_FORM_ABILITY) {
                 this.isFromCard = true;
                 this.pageFrom = Constants.ENTRY_FROM.CARD;
-                this.albumInfo = new SimpleAlbumDataItem(AppStorage.Get(Constants.FROM_ALBUM_ID), "", "", "", "");
+                this.albumInfo = new SimpleAlbumDataItem(AppStorage.Get<string>(Constants.FROM_ALBUM_ID), "", "", "", "");
             } else {
                 this.pageFrom = Constants.ENTRY_FROM.CAMERA;
                 this.albumInfo = new SimpleAlbumDataItem(MediaConstants.ALBUM_ID_CAMERA, "", "", "", "");
             }
-            AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
+            AppStorage.SetOrCreate<number>(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
             this.browserDataSource.setAlbumId(this.albumInfo.id);
-            this.browserDataSource.reloadGroupItemData(false).then((isEmpty: boolean): void => {
+            this.browserDataSource.reloadGroupItemData(false).then<void, void>((isEmpty: boolean): void => {
                 this.isDataChanged = isEmpty;
-                if (!Number.isNaN(AppStorage.Get(Constants.FROM_CURRENT_INDEX))) {
-                    this.onPhotoChanged(AppStorage.Get(Constants.FROM_CURRENT_INDEX));
+                if (!Number.isNaN(AppStorage.Get<number>(Constants.FROM_CURRENT_INDEX))) {
+                    this.onPhotoChanged(AppStorage.Get<number>(Constants.FROM_CURRENT_INDEX));
                 } else {
                     this.onPhotoChanged(0);
                 }
@@ -746,7 +746,7 @@ struct PhotoBrowser {
     }
 
     async routerGridPaged(): Promise<void> {
-        AppStorage.SetOrCreate(Constants.BACK_FROM_FORM_DETAIL, true);
+        AppStorage.SetOrCreate<boolean>(Constants.BACK_FROM_FORM_DETAIL, true);
         let displayName = await getAlbumDisplayName(MediaConstants.ALBUM_ID_CAMERA)
         let item: SimpleAlbumDataItem = new SimpleAlbumDataItem(MediaConstants.ALBUM_ID_CAMERA, displayName, "", "", "")
         Log.info(TAG, "item.displayName: " + item.displayName + " item " + JSON.stringify(item));
