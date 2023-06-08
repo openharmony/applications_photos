@@ -102,16 +102,18 @@ export class FormController {
 
     routerPhotoBrowser(): void {
         Log.debug(TAG, 'routerPhotoBrowser start!');
+        let wantParameters: Object = {
+            uri: (
+                       this.mediaDataManager.getMediaData()
+                       .currentUri != '') ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
+            albumId: this.mediaDataManager.getMediaData().albumId,
+            currentIndex: this.mediaDataManager.getMediaData().currentIndex
+        };
         let param: Want = {
-            bundleName: 'com.ohos.photos',
-            abilityName: 'com.ohos.photos.MainAbility',
-            parameters: {
-                uri: (
-                           this.mediaDataManager.getMediaData()
-                           .currentUri != '') ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
-                albumId: this.mediaDataManager.getMediaData().albumId,
-                currentIndex: this.mediaDataManager.getMediaData().currentIndex
-            } as object
+            'bundleName': 'com.ohos.photos',
+            'abilityName': 'com.ohos.photos.MainAbility',
+            'parameters': wantParameters
+
         };
         Log.debug(TAG, "routerPhotoBrowser parm " + JSON.stringify(param));
         startAbility(param).then((): void => {

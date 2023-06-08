@@ -12,6 +12,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+enum EntryForm {
+    NORMAL = 0,
+    CAMERA = 1,
+    SINGLE_SELECT = 2,
+    MULTIPLE_SELECT = 3,
+    RECYCLE = 4,
+    DISTRIBUTED = 5,
+    CARD = 6,
+    VIEW_DATA = 7
+}
+
 export class RouterConstants {
     static readonly ENTRY_FROM_NONE = 0;
     static readonly ENTRY_FROM_CAMERA = 1;
@@ -24,14 +36,5 @@ export class RouterConstants {
     static readonly ENTRY_FROM_FORM_FORM_EDITOR = 8;
     static readonly ENTRY_FROM_VIEW_DATA = 9;
     static readonly ENTRY_FROM_FORM_ABILITY_NONE = 12;
-    static readonly ENTRY_FROM = {
-        NORMAL: 0,
-        CAMERA: 1,
-        SINGLE_SELECT: 2,
-        MULTIPLE_SELECT: 3,
-        RECYCLE: 4,
-        DISTRIBUTED: 5,
-        CARD: 6,
-        VIEW_DATA: 7
-    }
+    static readonly ENTRY_FROM = EntryForm;
 }

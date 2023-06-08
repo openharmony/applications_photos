@@ -40,7 +40,7 @@ export class Loader {
     static async loadPixelMapWrapper(mediaItem: MediaDataItem, isPreview: boolean = false): Promise<PixelMapWrapper> {
         Log.debug(TAG, "Photo: loadPixelMap id = " + mediaItem.id);
         let fileAsset: MediaLib.FileAsset = await mediaItem.loadFileAsset()
-        let size = {
+        let size: Size = {
             width: fileAsset.width,
             height: fileAsset.height
         };
@@ -82,7 +82,7 @@ export class Loader {
 
     private static swapSize(image: PixelMapWrapper, orientation: number): Size {
         let angle = orientation % CropAngle.HALF_CIRCLE_ANGLE;
-        let size = {
+        let size: Size = {
             width: image.width,
             height: image.height
         };

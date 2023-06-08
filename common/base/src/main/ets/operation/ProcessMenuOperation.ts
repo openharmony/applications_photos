@@ -175,6 +175,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
             Log.debug(TAG, 'targetAsset not found');
         }
 
-        return { sourceAsset: fileAsset, targetAsset: targetAsset };
+        let assets: Assets = { sourceAsset: fileAsset, targetAsset: targetAsset };
+        return assets;
     }
 }

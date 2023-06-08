@@ -14,6 +14,7 @@
  */
 
 import router from '@system.router';
+import { RouterOptions } from '@system.router';
 import { Log } from '@ohos/base/src/main/ets/utils/Log';
 import { MenuOperation } from '@ohos/base/src/main/ets/operation/MenuOperation';
 import { MenuContext } from '@ohos/base/src/main/ets/operation/MenuContext';
@@ -42,12 +43,14 @@ export class GotoPhotosMenuOperation implements MenuOperation {
         if (jumpSourceToMain == JumpSourceToMain.CAMERA) {
             pageFrom = RouterConstants.ENTRY_FROM_CAMERA;
         }
-        router.replace({
+        let params: Object = {
+            jumpSource: jumpSourceToMain,
+            pageFrom: pageFrom
+        };
+        let routerOptions: RouterOptions = {
             uri: leftPos === true ? 'product/pad/view/index' : 'product/phone/view/index',
-            params: {
-                jumpSource: jumpSourceToMain,
-                pageFrom: pageFrom
-            }
-        });
+            params: params
+        };
+        router.replace(routerOptions);
     }
 }
