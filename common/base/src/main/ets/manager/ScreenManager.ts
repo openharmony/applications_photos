@@ -449,6 +449,4 @@ class ScreenManager {
     }
 }
 
-let screenManager: ScreenManager = stashOrGetObject<ScreenManager>(new ScreenManager(), TAG);
-
-export { screenManager };
+export let screenManager: ScreenManager = stashOrGetObject<ScreenManager>(new ScreenManager(), TAG);

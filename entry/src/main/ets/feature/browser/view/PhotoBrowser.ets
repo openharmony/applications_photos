@@ -168,7 +168,7 @@ struct PhotoBrowser {
             }
             menuContext.withItems([currentPhoto])
                 .withDeletePageFromType(BroadcastConstants.DELETE_FROM_BROWSER)
-                .withAlbumId( Boolean<string>(this.albumInfo.id).valueOf() ? this.albumInfo.id : (Boolean<SimpleAlbumDataItem>(this.albumInfo).valueOf() ? this.albumInfo.toString() : "") )
+                .withAlbumId( Boolean<SimpleAlbumDataItem>(this.albumInfo) ? ( Boolean<string>(this.albumInfo.id) ? this.albumInfo.id : this.albumInfo.toString() ) : "")
                 .withBroadCast(this.broadCast)
                 .withOperationEndCallback((): void => this.onDeleteEndBindImpl())
             menuOperation = new BatchDeleteMenuOperation(menuContext);

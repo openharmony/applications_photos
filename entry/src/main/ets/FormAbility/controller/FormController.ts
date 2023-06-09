@@ -110,9 +110,9 @@ export class FormController {
             currentIndex: this.mediaDataManager.getMediaData().currentIndex
         };
         let param: Want = {
-            'bundleName': 'com.ohos.photos',
-            'abilityName': 'com.ohos.photos.MainAbility',
-            'parameters': wantParameters
+            bundleName: 'com.ohos.photos',
+            abilityName: 'com.ohos.photos.MainAbility',
+            parameters: wantParameters
 
         };
         Log.debug(TAG, "routerPhotoBrowser parm " + JSON.stringify(param));
