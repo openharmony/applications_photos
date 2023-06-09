@@ -44,8 +44,8 @@ struct ResourceDeletePage {
     Log.info(TAG, 'onPageShow');
     let menuOperation: MenuOperation;
     let menuContext: MenuContext = new MenuContext();
-    this.onOperationEnd = this.onOperationEnd.bind(this);
-    this.onOperationCancel = this.onOperationCancel.bind(this);
+    this.onOperationEnd = (): void => this.onOperationEndBindImpl();
+    this.onOperationCancel = (): void => this.onOperationCancelBindImpl();
     menuContext
       .withItems(this.mediaDataItems)
       .withOperationEndCallback(this.onOperationEnd)
@@ -91,11 +91,19 @@ struct ResourceDeletePage {
     .height('100%');
   }
 
-  onOperationEnd (): void {
+  onOperationEnd(): void {
+    this.onOperationEndBindImpl()
+  }
+
+  private onOperationEndBindImpl(): void {
     this.setDeleteResult(dialogRequest.ResultCode.RESULT_OK);
   }
 
-  onOperationCancel (): void {
+  onOperationCancel(): void {
+    this.onOperationCancelBindImpl()
+  }
+
+  private onOperationCancelBindImpl(): void {
     this.setDeleteResult(dialogRequest.ResultCode.RESULT_CANCEL);
   }
 

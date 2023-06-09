@@ -123,7 +123,7 @@ struct ThirdSelectAlbumSetPage {
         this.loadAlbums()
         this.leftAction = this.isFromFa ? Action.BACK : Action.CANCEL
         this.title = (this.isFromFa && !this.isFromFaPhoto) ? ActionBarProp.SINGLE_SELECT_ALBUM_TITLE : ActionBarProp.SINGLE_UNSELECT_TITLE
-        this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.onMenuClicked = (action: Action): void => this.onMenuClickedBindImpl(action);
         Log.info(TAG, "isMultiPick: " + this.isMultiPick);
         Log.info(TAG, "type: " + this.type);
         Log.info(TAG, "ThirdSelectAlbumSetPage isFromWallpaper: " + this.isFromWallpaper);
@@ -209,6 +209,10 @@ struct ThirdSelectAlbumSetPage {
     }
 
     onMenuClicked(action: Action): void {
+        this.onMenuClickedBindImpl(action)
+    }
+
+    private onMenuClickedBindImpl(action: Action): void {
         Log.info(TAG, "onMenuClicked, action: " + action.actionID);
         if (action === Action.CANCEL) {
             Log.info(TAG, 'click cancel');

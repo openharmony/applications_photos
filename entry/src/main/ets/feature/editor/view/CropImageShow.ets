@@ -40,6 +40,10 @@ export struct CropImageShow {
     private prePinch: number = 0;
 
     onCropResetClicked(): void {
+        this.onCropResetClickedBindImpl()
+    }
+
+    private onCropResetClickedBindImpl(): void {
         Log.debug(this.TAG, 'crop reset is clicked');
         this.cropEdit.reset();
         this.isCropReset = this.cropEdit.couldReset();
@@ -102,7 +106,7 @@ export struct CropImageShow {
 
     aboutToAppear(): void {
         Log.debug(this.TAG, 'Photo CropImageShow called');
-        this.broadCast.on(Constants.CROP_RESET_CLICKED, this.onCropResetClicked.bind(this));
+        this.broadCast.on(Constants.CROP_RESET_CLICKED, (): void => this.onCropResetClickedBindImpl());
         this.flexHeight = this.isVerticalScreen
             ? this.screenHeight - Constants.TOP_BAR_SIZE - Constants.BOTTOM_TOOL_BAR_SIZE
             : this.screenWidth - Constants.TOP_BAR_SIZE;

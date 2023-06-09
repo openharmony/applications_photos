@@ -46,6 +46,10 @@ struct VideoBrowser {
     }
 
     private onMenuClicked(action: Action): void {
+        this.onMenuClickedBindImpl(action)
+    }
+
+    private onMenuClickedBindImpl(action: Action): void {
         Log.info(this.TAG, "onMenuClicked, action: " + action.actionID);
         let menuOperation: MenuOperation;
         if (action === Action.BACK) {
@@ -70,7 +74,7 @@ struct VideoBrowser {
         Log.info(this.TAG, "uri is " + this.uri);
         this.photoDate = DateUtil.getLocalizedDate(this.dateAdded);
         this.timeAndLocation = DateUtil.getLocalizedTime(this.dateAdded);
-        this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.onMenuClicked = (action: Action): void => this.onMenuClickedBindImpl(action);
         screenManager.setSystemUi(false);
         finishTrace('VideoBrowserAboutToAppear');
     }

@@ -64,6 +64,10 @@ struct DistributedAlbumSetPage {
     }
 
     onMenuClicked(action: Action, arg: Object[]): void {
+        this.onMenuClickedBindImpl(action, arg)
+    }
+
+    private onMenuClickedBindImpl(action: Action, arg: Object[]): void {
         Log.info(TAG, 'onMenuClicked, action: ' + action.actionID);
         if (action === Action.BACK) {
             router.back();
@@ -82,14 +86,14 @@ struct DistributedAlbumSetPage {
             Log.warn(TAG, 'param is error');
         }
 
-        this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.onMenuClicked = (action: Action, args: Object[]): void => this.onMenuClickedBindImpl(action, args);
         this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number): void => {
             Log.info(TAG, 'ON_LOADING_FINISHED size: ' + size);
             this.isEmpty = size == 0;
         });
 
         broadcastManager.getBroadcast().on(BroadcastConstants.ON_REMOTE_CHANGED,
-        this.onUpdateRemoteDevice.bind(this));
+            (res: string, deviceId: number): void => this.onUpdateRemoteDeviceBindImpl(res, deviceId));
 
         mediaObserver.registerObserver(this.dataObserver);
 
@@ -104,7 +108,7 @@ struct DistributedAlbumSetPage {
 
     aboutToDisappear(): void {
         broadcastManager.getBroadcast().off(BroadcastConstants.ON_REMOTE_CHANGED,
-        this.onUpdateRemoteDevice.bind(this));
+            (res: string, deviceId: number): void => this.onUpdateRemoteDeviceBindImpl(res, deviceId));
         mediaObserver.unregisterObserver(this.dataObserver);
     }
 
@@ -135,6 +139,10 @@ struct DistributedAlbumSetPage {
     }
 
     private onUpdateRemoteDevice(res, deviceId): void {
+        this.onUpdateRemoteDeviceBindImpl(res, deviceId)
+    }
+
+    private onUpdateRemoteDeviceBindImpl(res, deviceId): void {
         Log.debug(TAG, 'onUpdateRemoteDevice');
 
         if (!this.isActive) {

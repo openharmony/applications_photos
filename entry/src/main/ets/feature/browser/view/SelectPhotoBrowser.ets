@@ -113,7 +113,7 @@ struct SelectPhotoBrowser {
         } else {
             this.selectPhotoTransition = '';
         }
-        this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.onMenuClicked = (action: Action): void => this.onMenuClickedBindImpl(action);
 
         // register event handling
         this.broadCast.on(PhotoConstants.TOGGLE_BAR, (event: Object): void => {
@@ -158,6 +158,10 @@ struct SelectPhotoBrowser {
     }
 
     onPhotoChanged(index: number): void {
+        this.onPhotoChangedBindImpl(index)
+    }
+
+    private onPhotoChangedBindImpl(index: number): void {
         this.currentIndex = index;
         this.isSelected = this.getCurrentPhoto().isSelect;
         this.browserDataSource.notifyDataChange(index);
@@ -186,6 +190,10 @@ struct SelectPhotoBrowser {
     }
 
     onMenuClicked(action: Action): void {
+        this.onMenuClickedBindImpl(action)
+    }
+
+    private onMenuClickedBindImpl(action: Action): void {
         Log.debug(TAG, "onMenuClicked, action: " + action.actionID);
         if (action === Action.BACK) {
             this.onBackPress();
@@ -214,7 +222,7 @@ struct SelectPhotoBrowser {
             PhotoSwiper({
                 dataSource: this.browserDataSource,
                 photoSwiperTransition: this.selectPhotoTransition,
-                onPhotoChanged: this.onPhotoChanged.bind(this),
+                onPhotoChanged: (index: number): void => this.onPhotoChanged(index),
                 swiperController: this.controller
             })
             ThirdSelectPhotoBrowserActionBar({

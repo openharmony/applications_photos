@@ -120,7 +120,7 @@ export class MainAbility extends Ability {
            }
        })
         finishTrace('onCreate');
-        appBroadcast.on(BroadcastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
+        appBroadcast.on(BroadcastConstants.THIRD_ROUTE_PAGE, (): Promise<void> => this.thirdRouterPageBindImpl());
         Log.info(this.TAG, 'Application onCreate end');
     }
 
@@ -201,7 +201,11 @@ export class MainAbility extends Ability {
     }
 
     async thirdRouterPage(): Promise<void> {
-        let entryFrom: number = AppStorage.Get<number>(Constants.ENTRY_FROM_HAP);
+        return await this.thirdRouterPageBindImpl()
+    }
+
+    private async thirdRouterPageBindImpl(): Promise<void> {
+        let entryFrom = AppStorage.Get<number>(Constants.ENTRY_FROM_HAP);
         Log.info(this.TAG, "thirdRouterPage entryFromHap: " + entryFrom);
         if (entryFrom == Constants.ENTRY_FROM_NONE) {
             return;

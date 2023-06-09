@@ -97,7 +97,7 @@ struct AlbumSelect {
         }
 
         this.loadAlbums();
-        this.onMenuClicked = this.onMenuClicked.bind(this);
+        this.onMenuClicked = (action: Action): void => this.onMenuClickedBindImpl(action);
         this.updateActionBar();
         finishTrace('AlbumSetPageAboutToAppear');
     }
@@ -157,6 +157,10 @@ struct AlbumSelect {
     }
 
     private onMenuClicked(action: Action): void {
+        this.onMenuClickedBindImpl(action)
+    }
+
+    private onMenuClickedBindImpl(action: Action): void {
         Log.debug(TAG, 'onMenuClicked, action: ' + action.actionID);
         if (action === Action.CANCEL) {
             Log.info(TAG, 'clear SelectManager data');

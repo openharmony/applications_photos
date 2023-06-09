@@ -66,7 +66,7 @@ struct Edit {
 
     onBackPress(): boolean {
         if (this.isCropReset) {
-            this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
+            this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [(): void => this.discardCallbackBindImpl()]);
         } else {
             router.back();
         }
@@ -74,10 +74,18 @@ struct Edit {
     }
 
     discardCallback(): void {
+        this.discardCallbackBindImpl()
+    }
+
+    private discardCallbackBindImpl(): void {
         Log.debug(this.TAG, 'discardCallback called');
     }
 
     loadFailedCallback(): void {
+        this.loadFailedCallbackBindImpl()
+    }
+
+    private loadFailedCallbackBindImpl(): void {
         this.isLoadFailed = true;
     }
 
@@ -86,7 +94,7 @@ struct Edit {
         if (this.mediaItem != null) {
             this.isLoadFailed = false;
             this.editorManager.initialize(
-                this.mediaItem, PhotoEditMode.EDIT_MODE_CROP, this.loadFailedCallback.bind(this));
+                this.mediaItem, PhotoEditMode.EDIT_MODE_CROP, (): void => this.loadFailedCallbackBindImpl());
         }
         this.cropEdit = this.editorManager.getPhotoEditBaseInstance(PhotoEditMode.EDIT_MODE_CROP) as PhotoEditCrop;
         if (this.isVerticalScreen) {

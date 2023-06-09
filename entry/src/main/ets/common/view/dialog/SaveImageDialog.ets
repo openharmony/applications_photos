@@ -27,11 +27,15 @@ export struct SaveImageDialog {
     controller: CustomDialogController;
 
     controllerClose(): void {
+        this.controllerCloseBindImpl()
+    }
+
+    private controllerCloseBindImpl(): void {
         this.controller.close()
     }
 
     aboutToAppear(): void {
-        this.broadCast.on(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, this.controllerClose.bind(this));
+        this.broadCast.on(BroadcastConstants.EXIT_SAVE_PROGRESS_CLOSE, (): void => this.controllerCloseBindImpl());
     }
 
     build() {
