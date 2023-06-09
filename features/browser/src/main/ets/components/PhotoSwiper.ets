@@ -43,7 +43,7 @@ export struct PhotoSwiper {
                 duration: AnimationConstants.DELETE_ANIMATE_DURATION,
                 onFinish: (): void => {
                 } }, (): void => {
-                if (this.dataSource != null) {
+                if (this.dataSource != null && this.dataSource != undefined) {
                     this.dataSource.dataRemove();
                     this.broadCast.emit(Constants.DATA_SIZE_CHANGED,[this.dataSource.totalCount()]);
                 }
@@ -58,7 +58,7 @@ export struct PhotoSwiper {
 
     private getIndex(item: LazyItem<MediaDataItem>): number {
         let ind = 1
-        if (item != null && item.index == this.currentIndex) {
+        if (item != undefined && item != null && item.index == this.currentIndex) {
             ind = 2
         }
         return ind
@@ -67,14 +67,15 @@ export struct PhotoSwiper {
     build() {
         Swiper(this.swiperController) {
             LazyForEach(this.dataSource, (item: LazyItem<MediaDataItem>): void => {
-                if (item != null && item.get() != null) {
+                if (item != undefined && item != null && item.get() != undefined && item.get() != null) {
                     PhotoItem({
                         item: item.get(),
                         pageName: this.photoSwiperTransition
                     })
                     .zIndex(this.getIndex(item))
                 }
-            }, (item: LazyItem<MediaDataItem>): string => item == null && item.get() != null ? JSON.stringify(item) : item.getHashCode())
+            }, (item: LazyItem<MediaDataItem>): string => item == null && (item.get() != undefined && item.get() != null) ?
+                JSON.stringify(item) : item.getHashCode())
         }
         .itemSpace('8vp')
         .gesture(PanGesture({

@@ -471,7 +471,7 @@ struct PhotoGridPage {
         }
         Log.info(TAG, "reloadGroupItemData");
 
-        this.onMenuClicked = (action: Action) => this.onMenuClickedBindImpl(action);
+        this.onMenuClicked = (action: Action): void => this.onMenuClickedBindImpl(action);
         mediaObserver.registerObserver(this.dataObserver);
 
         this.broadCast.on(BroadcastConstants.SELECT, (index: number): void => { this.onSelect() });
@@ -516,9 +516,9 @@ struct PhotoGridPage {
         this.onUpdateRemoteDeviceBindImpl(res, deviceId)
     }
 
-    private onUpdateRemoteDeviceBindImpl(res: string, deviceId: number|string): void {
+    private onUpdateRemoteDeviceBindImpl(res: string, deviceId: Object): void {
         Log.info(TAG, "onUpdateRemoteDevice");
-        if (deviceId != this.albumInfo.deviceId || this.isActive == false) {
+        if (String(deviceId) != this.albumInfo.deviceId || this.isActive == false) {
             Log.debug(TAG, "other device");
             return;
         }
@@ -544,7 +544,7 @@ struct PhotoGridPage {
 
     private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
-            this.groupDataSource.reloadGroupItemData(true).then<void, void>((isEmpty): void => {
+            this.groupDataSource.reloadGroupItemData(true).then<void, void>((isEmpty: boolean): void => {
                 Log.info(TAG, "onMediaLibDataChange load finish");
                 this.isEmpty = isEmpty;
                 this.groupDataSource.notifyDataReload();
@@ -656,7 +656,8 @@ struct PhotoGridPage {
                             .aspectRatio(1)
                             .columnStart(item.get().index % this.gridRowCount)
                             .columnEnd(item.get().index % this.gridRowCount)
-                        }, (item: LazyItem<MediaDataItem>): string => item == null && item.get() != null ? JSON.stringify(item) : item.getHashCode())
+                        }, (item: LazyItem<MediaDataItem>): string => item == null && (item.get() != undefined && item.get() != null) ?
+                            JSON.stringify(item) : item.getHashCode())
                     }
                     .columnsTemplate('1fr '.repeat(this.gridRowCount))
                     .columnsGap(Constants.GRID_GUTTER)

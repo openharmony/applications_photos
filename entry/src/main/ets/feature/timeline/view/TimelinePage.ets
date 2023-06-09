@@ -534,7 +534,8 @@ export struct TimelinePage {
                     Stack() {
                         Grid(this.scroller) {
                             LazyForEach(this.timelineDataSource, (item: LazyItem<DateAdded>): void => {
-                                if (item != null && item.get() != null && item.get().viewType == ViewType.GROUP_TITLE) {
+                                if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null) &&
+                                    item.get().viewType == ViewType.GROUP_TITLE) {
                                     GridItem() {
                                         TimelineTitleComponent({
                                             lazyItem: (item as LazyItem<TimelineDataItem>),

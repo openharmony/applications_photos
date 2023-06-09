@@ -520,7 +520,8 @@ export struct AlbumSetPage {
                             })
                         }
                     }
-                }, (item: LazyItem<AlbumDataItem>): string => item != null && item.get() != null ? item.getHashCode() : JSON.stringify(item))
+                }, (item: LazyItem<AlbumDataItem>): string => (item != undefined && item != null) && (item.get() != undefined && item.get() != null) ?
+                    item.getHashCode() : JSON.stringify(item))
             }
             .columnsTemplate('1fr '.repeat(this.gridColumnsCount))
             .padding({

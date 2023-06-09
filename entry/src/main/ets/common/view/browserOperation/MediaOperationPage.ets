@@ -185,7 +185,8 @@ struct MediaOperationPage {
                                 ListItem() {
                                     AlbumListCard({ item: item.get() })
                                 }
-                            }, (item: LazyItem<AlbumDataItem>): string => (item == null) && item.get() != null ? JSON.stringify(item) : item.getHashCode())
+                            }, (item: LazyItem<AlbumDataItem>): string => (item == null) && (item.get() != undefined && item.get() != null) ?
+                                JSON.stringify(item) : item.getHashCode())
                         }
                         .divider({
                             strokeWidth: 1,

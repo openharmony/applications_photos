@@ -92,7 +92,7 @@ export class AlbumSetRenameMenuOperation implements MenuOperation, MenuOperation
         try {
             let relativePath = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA) + name + "/";
             let simpleAlbumDataItem: SimpleAlbumDataItem = new SimpleAlbumDataItem("", name, relativePath, "", "");
-            if (name != null) {
+            if (name != undefined && name != null) {
                 let isExit = await this.checkAlbumExit(simpleAlbumDataItem);
                 if (isExit) {
                     getResourceString($r('app.string.name_already_use')).then<void, void>((message: string): void => {

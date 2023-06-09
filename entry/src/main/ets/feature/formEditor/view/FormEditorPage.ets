@@ -130,7 +130,7 @@ struct FormEditorPage {
             } else {
                 this.terminate();
             }
-        }).catch((error): void => {
+        }).catch((error: Error): void => {
             Log.error(TAG, "updateForm failed. Cause: " + JSON.stringify(error));
             this.terminate();
         });

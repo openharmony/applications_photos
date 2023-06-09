@@ -247,7 +247,8 @@ struct ThirdSelectAlbumSetPage {
                 }
                 Grid(this.scroller) {
                     LazyForEach(this.albumsDataSource, (item: LazyItem<AlbumDataItem>): void => {
-                        if (item != null && item.get() != null && item.get().id != MediaConstants.ALBUM_ID_RECYCLE) {
+                        if ((item != undefined && item != null) && (item.get() != undefined && item.get() != null) &&
+                            item.get().id != MediaConstants.ALBUM_ID_RECYCLE) {
                             if ( item.get().index == 0) {
                                 GridItem() {
                                     ThirdAlbumGridItem({
@@ -274,7 +275,8 @@ struct ThirdSelectAlbumSetPage {
                                 }
                             }
                         }
-                    }, (item: LazyItem<AlbumDataItem>): string => item != null && item.get() != null ? item.getHashCode() : JSON.stringify(item))
+                    }, (item: LazyItem<AlbumDataItem>): string => (item != undefined && item != null) && (item.get() != undefined && item.get() != null) ?
+                        item.getHashCode() : JSON.stringify(item))
                 }
                 .columnsTemplate('1fr '.repeat(this.gridRowCount))
                 .padding({

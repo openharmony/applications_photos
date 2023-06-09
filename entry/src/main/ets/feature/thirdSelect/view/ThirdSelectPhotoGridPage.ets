@@ -273,7 +273,8 @@ struct ThirdSelectPhotoGridPage {
                         })
                     }
 		    .aspectRatio(1)
-                }, (item: LazyItem<MediaDataItem>): string => item == null && item.get() != null ? JSON.stringify(item) : item.getHashCode())
+                }, (item: LazyItem<MediaDataItem>): string => item == null && (item.get() != undefined && item.get() != null) ?
+                    JSON.stringify(item) : item.getHashCode())
             }
             .columnsTemplate('1fr '.repeat(this.gridRowCount))
             .columnsGap(Constants.GRID_GUTTER)

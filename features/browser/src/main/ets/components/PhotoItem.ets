@@ -142,7 +142,7 @@ export struct PhotoItem {
             this.preItem.rotate = this.item.orientation;
             this.preItem.width = this.item.imgWidth;
             this.preItem.height = this.item.imgHeight;
-            if (this.eventPipeline != null) {
+            if (this.eventPipeline != undefined && this.eventPipeline != null) {
                 this.eventPipeline.onDataChanged(this.item)
             }
             return;
@@ -160,7 +160,7 @@ export struct PhotoItem {
     }
 
     calcRatio(info: MediaDataItem): number {
-        if (info == null) {
+        if (info == null || info == undefined) {
             return 1;
         }
         if (info.width == 0 || info.height == 0) {
@@ -375,7 +375,7 @@ export struct PhotoItem {
                 .width($r('app.float.icon_video_size'))
                 .height($r('app.float.icon_video_size'))
                 .onClick((): void => {
-                    if (this.item != null) {
+                    if (this.item != undefined) {
                         router.push({
                             uri: 'feature/browser/view/VideoBrowser',
                             params: {
@@ -394,6 +394,6 @@ export struct PhotoItem {
 
     private isVideoPlayBtnShow(): boolean {
         Log.debug(TAG, "isVideoPlayBtnShow: " + this.item.mediaType);
-        return (this.item != null && (this.item.mediaType == MediaLib.MediaType.VIDEO));
+        return ((this.item != undefined && this.item != null) && (this.item.mediaType == MediaLib.MediaType.VIDEO));
     }
 }
