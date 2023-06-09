@@ -176,7 +176,7 @@ struct DistributedAlbumSetPage {
 
     private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
-            this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean): void => {
+            this.albumsDataSource.reloadAlbumItemData().then<void, void>((isEmpty: boolean): void => {
                 this.isEmpty = isEmpty;
                 this.albumsDataSource.notifyDataReload();
             })

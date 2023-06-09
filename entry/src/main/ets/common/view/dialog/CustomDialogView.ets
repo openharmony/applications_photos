@@ -449,7 +449,7 @@ export struct CustomDialogView {
 
     private showDetailDialog(item: MediaDataItem, isDistributed: boolean): void {
         Log.info(TAG, 'SHOW_DETAIL_DIALOG ');
-        item.load(true).then((): void => {
+        item.load(true).then<void, void>((): void => {
             this.mediaDetails = {
                 mediaType: item.mediaType,
                 height: item.height,

@@ -57,7 +57,7 @@ export struct AlbumGridItemTraditionalStyle {
             this.updateCardSize();
         })
         this.updateCardSize();
-        this.item.load().then((): void => {
+        this.item.load().then<void, void>((): void => {
             this.thumbnail = this.item.getThumbnail()
         })
     }

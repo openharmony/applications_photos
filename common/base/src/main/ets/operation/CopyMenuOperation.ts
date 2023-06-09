@@ -140,7 +140,7 @@ export class CopyMenuOperation extends ProcessMenuOperation {
 
     async copy(source, target, param?): Promise<void> {
         try {
-            if (!Boolean(target).valueOf()) {
+            if (!Boolean<object>(target).valueOf()) {
                 startTraceWithTaskId('create', this.currentBatch);
                 target = await mediaModel.createOne(param.mediaType, param.name, param.path);
                 finishTraceWithTaskId('create', this.currentBatch);

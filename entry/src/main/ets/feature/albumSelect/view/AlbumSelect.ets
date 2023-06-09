@@ -78,9 +78,9 @@ struct AlbumSelect {
         let param: ParamsInterface = router.getParams();
         if (param != null) {
             if (param.isNewAlbum != null && param.isNewAlbum == true) {
-                AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, true);
+                AppStorage.SetOrCreate<boolean>(Constants.APP_KEY_NEW_ALBUM, true);
             } else {
-                AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, false);
+                AppStorage.SetOrCreate<boolean>(Constants.APP_KEY_NEW_ALBUM, false);
             }
             let albumInfo: SimpleAlbumDataItem = undefined;
             if(param.albumInfo != null) {
@@ -93,7 +93,7 @@ struct AlbumSelect {
                 this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_RECYCLE]);
             }
 
-            AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_TARGET, albumInfo);
+            AppStorage.SetOrCreate<SimpleAlbumDataItem>(Constants.APP_KEY_NEW_ALBUM_TARGET, albumInfo);
         }
 
         this.loadAlbums();
@@ -103,7 +103,7 @@ struct AlbumSelect {
     }
 
     private loadAlbums(): void {
-        this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean): void => {
+        this.albumsDataSource.reloadAlbumItemData().then<void, void>((isEmpty: boolean): void => {
             this.isEmpty = isEmpty;
             this.albumsDataSource.notifyDataReload();
         })

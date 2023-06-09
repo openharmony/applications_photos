@@ -16,7 +16,7 @@
 type CallbackType = Function
 
 export class Broadcast {
-    private callBackArray: Map<string, CallbackType[]> = new Map();
+    private callBackArray: Map<string, CallbackType[]> = new Map<string, CallbackType[]>();
 
     constructor() {
     }
@@ -34,7 +34,7 @@ export class Broadcast {
         }
 
         const cbs: CallbackType[] = this.callBackArray.get(event);
-        if (!Boolean(cbs).valueOf()) {
+        if (!Boolean<Function[]>(cbs).valueOf()) {
             return;
         }
         if (callback == null) {
@@ -53,7 +53,7 @@ export class Broadcast {
 
     public emit(event: string, args: Object[]): void {
         let _self = this;
-        if (!Boolean(this.callBackArray.get(event)).valueOf()) {
+        if (!Boolean<Function[]>(this.callBackArray.get(event)).valueOf()) {
             return;
         }
 

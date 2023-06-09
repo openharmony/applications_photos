@@ -19,17 +19,17 @@ import { dataStore } from '@ohos/base/src/main/ets/utils/DataStoreUtil';
 
 export class FormControllerManager {
     private TAG: string = 'FormControllerManager';
-    private formControllerMap = new Map();
+    private formControllerMap = new Map<string, FormController>();
 
     private constructor() {
         Log.info(this.TAG, 'new FormControllerManager');
     }
 
     public static getInstance(): FormControllerManager {
-        if (AppStorage.Get(Constants.FROM_CONTROLLER_MANAGER) == null) {
-            AppStorage.SetOrCreate(Constants.FROM_CONTROLLER_MANAGER, new FormControllerManager());
+        if (AppStorage.Get<void>(Constants.FROM_CONTROLLER_MANAGER) == null) {
+            AppStorage.SetOrCreate<FormControllerManager>(Constants.FROM_CONTROLLER_MANAGER, new FormControllerManager());
         }
-        return AppStorage.Get(Constants.FROM_CONTROLLER_MANAGER);
+        return AppStorage.Get<FormControllerManager>(Constants.FROM_CONTROLLER_MANAGER);
     }
 
     public createFormController(formId: string, operationMode: number, callback?: Function): FormController {

@@ -70,7 +70,7 @@ export struct AlbumGridItemNewStyle {
         this.selectable = this.item.id != MediaConstants.ALBUM_ID_RECYCLE;
         screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (): void => this.updateCardSize());
         startTrace("loadAlbumItem");
-        this.item.load().then((): void => {
+        this.item.load().then<void, void>((): void => {
             finishTrace("loadAlbumItem");
             this.thumbnail = this.item.getThumbnail();
         })
@@ -78,7 +78,7 @@ export struct AlbumGridItemNewStyle {
     }
 
     onIndexPageShow(): void {
-        this.item.load().then((): void => {
+        this.item.load().then<void, void>((): void => {
             this.thumbnail = this.item.getThumbnail();
         })
     }

@@ -69,7 +69,8 @@ export struct CameraGridItemComponent {
     .justifyContent(FlexAlign.Center)
     .alignItems(HorizontalAlign.Center)
     .onClick((event: ClickEvent): void => {
-      this.jumpCameraTakephoto().then((result: common.AbilityResult): void => {
+      let promise: Promise<object> = this.jumpCameraTakephoto();
+      promise.then<void, void>((result: common.AbilityResult): void => {
         Log.info(TAG, 'resourceUri = ' + result?.want?.parameters?.resourceUri);
         this.resultUri = result?.want?.parameters?.resourceUri as string;
       }).catch((err: Error): void => {

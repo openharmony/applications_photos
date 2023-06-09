@@ -116,7 +116,7 @@ export class FormController {
 
         };
         Log.debug(TAG, "routerPhotoBrowser parm " + JSON.stringify(param));
-        startAbility(param).then((): void => {
+        startAbility(param).then<void, void>((): void => {
             AppStorage.Delete(Constants.FROM_CONTROLLER_MANAGER);
         })
         this.onDestroy();
@@ -126,7 +126,8 @@ export class FormController {
     onTriggerFormEvent(formId: string, message): void {
         Log.debug(TAG, "onTriggerFormEvent " + formId + " " + message);
         let msgObj: Map<string, object> = JSON.parse(message);
-        let param: Map<string, object> = new Map(Object.entries(msgObj.get("params")));
+        let entries = Object.entries<Object[]>(msgObj.get("params") as ArrayLike<Object[]>);
+        let param: Map<string, object> = new Map<string, object>(entries);
         let msg: string = param.get("message").toString();
         Log.debug(TAG, "onTriggerFormEvent " + param + " " + msg);
         if (msg == FormController.MSG_ROUTER_PHOTOS) {

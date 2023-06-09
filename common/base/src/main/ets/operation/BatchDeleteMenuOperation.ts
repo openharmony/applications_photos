@@ -84,7 +84,7 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
 
     protected confirmCallbackBindImpl(): void {
         Log.info(TAG, 'Batch delete confirm');
-        AppStorage.SetOrCreate("isDelete", 1);
+        AppStorage.SetOrCreate<number>("isDelete", 1);
 
         // 1. Variable initialization
         this.onOperationEnd = this.menuContext.onOperationEnd;
@@ -111,7 +111,7 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
     requestOneBatchOperation(): void {
         let item = this.items[this.currentBatch] as MediaDataItem;
         if (item != null) {
-            item.onDelete().then((): void => {
+            item.onDelete().then<void, void>((): void => {
                 this.currentBatch++;
                 this.menuContext.broadCast.emit(BroadcastConstants.UPDATE_PROGRESS, [this.getExpectProgress(), this.currentBatch]);
                 this.cyclicOperation();

@@ -234,7 +234,8 @@ export struct AlbumSetPage {
             this.tabs[Constants.LOCAL_TAB_INDEX].isSelected = false;
             this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = true;
         }
-        this.distributedDataSource.reloadAlbumItemData().then((change: number): void => {
+        let promise: Promise<number> = this.distributedDataSource.reloadAlbumItemData();
+        promise.then<void, void>((change: number): void => {
             this.onUpdateRemoteDevice(change);
             this.distributedDataSource.notifyDataReload();
         })
@@ -393,7 +394,8 @@ export struct AlbumSetPage {
 
     private showNotify(): void {
         if (this.needNotify) {
-            getResourceString($r('app.string.distributed_album_disconnected')).then((message: string): void => {
+            let promise: Promise<string> = getResourceString($r('app.string.distributed_album_disconnected'));
+            promise.then<void, void>((message: string): void => {
                 showToast(message);
             })
             this.needNotify = false;
@@ -431,7 +433,7 @@ export struct AlbumSetPage {
     onMediaLibDataChange(changeType): void {
         Log.info(TAG, 'onMediaLibDataChange type: ' + changeType);
         if (changeType == MediaConstants.MEDIA_TYPE_REMOTE) {
-            this.distributedDataSource.reloadAlbumItemData().then((change: number): void => {
+            this.distributedDataSource.reloadAlbumItemData().then<void, void>((change: number): void => {
                 this.onUpdateRemoteDevice(change)
                 this.distributedDataSource.notifyDataReload()
             })
@@ -444,7 +446,7 @@ export struct AlbumSetPage {
 
     private loadItem(): void {
         if (this.isActive && this.isMediaLibDataChanged) {
-            this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean): void => {
+            this.albumsDataSource.reloadAlbumItemData().then<void, void>((isEmpty: boolean): void => {
                 this.isEmpty = isEmpty;
                 this.albumsDataSource.notifyDataReload();
                 this.isHideScrollBar = (this.albumsDataSource.totalCount() <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
@@ -488,7 +490,7 @@ export struct AlbumSetPage {
 
     private loadAlbums(isForce: boolean): void {
         if (isForce || this.currentIndex == Constants.LOCAL_TAB_INDEX) {
-            this.albumsDataSource.reloadAlbumItemData().then((isEmpty: boolean): void => {
+            this.albumsDataSource.reloadAlbumItemData().then<void, void>((isEmpty: boolean): void => {
                 this.isEmpty = isEmpty;
                 this.albumsDataSource.notifyDataReload();
             })
