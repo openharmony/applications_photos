@@ -254,7 +254,7 @@ struct ThirdSelectPhotoBrowser {
         let abilityResult: common.AbilityResult = {
             resultCode: 0,
             want: {
-                parameters: Object.fromEntries(param1)
+                parameters: Object.fromEntries<string[]>(param1)
             } as Want
         };
         Log.info(TAG, "terminateSelfWithResult result: " + JSON.stringify(abilityResult));
@@ -262,7 +262,7 @@ struct ThirdSelectPhotoBrowser {
         try {
             Log.info(TAG, "grant permission success.");
             let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
-            appContext.terminateSelfWithResult(abilityResult).then((result: void): void => {
+            appContext.terminateSelfWithResult(abilityResult).then<void, void>((result: void): void => {
                 Log.info(TAG, "terminateSelf result: " + result);
             });
         } catch (err) {

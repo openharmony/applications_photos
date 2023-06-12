@@ -248,12 +248,12 @@ struct SelectPhotoBrowser {
             }
             uriArray = [currentPhoto.uri];
         }
-        let param1: Map<string, string[]> = new Map();
+        let param1: Map<string, string[]> = new Map<string, string[]>();
         param1.set('select-item-list', uriArray);
         let abilityResult: common.AbilityResult = {
             resultCode: 0,
             want: {
-                parameters: Object.fromEntries(param1)
+                parameters: Object.fromEntries<string[]>(param1)
             } as Want
         };
         terminateSelfWithResult(abilityResult);

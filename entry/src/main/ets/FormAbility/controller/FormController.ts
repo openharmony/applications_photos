@@ -64,16 +64,16 @@ export class FormController {
         let obj3 = this.bindFormData(formId);
         Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
         formProvider.updateForm(formId, obj3)
-            .then((data: void): void => {
+            .then<void, void>((data: void): void => {
                 Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
                 if (this.mediaDataManager.getIsShowAlbumName()) {
-                    formProvider.setFormNextRefreshTime(formId, this.mediaDataManager.getIntervalTime()).then((): void => {
+                    formProvider.setFormNextRefreshTime(formId, this.mediaDataManager.getIntervalTime()).then<void, void>((): void => {
                          Log.error(TAG, "setFormNextRefreshTime successfully!");
                         if (this.callback != null) {
                             this.callback.call(this.callback);
                         }
                         this.onDestroy();
-                    }).catch((err: Error): void => {
+                    }).catch<void>((err: Error): void => {
                          Log.error(TAG, "init err " + err);
                     })
                 } else {
@@ -143,10 +143,10 @@ export class FormController {
                 Log.debug(TAG, "updateFormData formId: " + JSON.stringify(formId));
                 let obj3 = this.bindFormData(formId);
                 Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
-                formProvider.updateForm(formId, obj3).then((data: void): void => {
+                formProvider.updateForm(formId, obj3).then<void, void>((data: void): void => {
                     Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
                     this.onTriggerFormEvent(formId, this.callback.call(this.callback));
-                }).catch((error: Error): void => {
+                }).catch<void>((error: Error): void => {
                     this.onTriggerFormEvent(formId, this.callback.call(this.callback));
                 });
             } else {

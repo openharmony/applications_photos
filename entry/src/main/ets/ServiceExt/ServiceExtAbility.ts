@@ -93,7 +93,7 @@ export class ServiceExtAbility extends Extension {
                   }
                   Log.error(TAG, "Succeeded in loading the content");
                   let promise = display.getDefaultDisplay();
-                  promise.then((data: display.Display): void => {
+                  promise.then<void, void>((data: display.Display): void => {
                     Log.error(TAG, "Succeeded in loading the content, width : " + data.width + ",  height : " + data.height);
                     screenManager.setWinWidth(data.width)
                     windowClass.resetSize(data.width, data.height);

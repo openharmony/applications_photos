@@ -48,6 +48,6 @@ export class SelectUtil {
                 Log.error(TAG, "grant permission error: " + JSON.stringify(err));
             }
         }
-        await Promise.all(promises);
+        await Promise.all<void>(promises);
     }
 }
