@@ -221,7 +221,7 @@ struct ThirdSelectAlbumSetPage {
             let abilityResult: common.AbilityResult = {
                 resultCode: 0,
                 want: {
-                    parameters: Object.fromEntries(param1)
+                    parameters: Object.fromEntries<string[]>(param1)
                 } as Want
             };
             terminateSelfWithResult(abilityResult)

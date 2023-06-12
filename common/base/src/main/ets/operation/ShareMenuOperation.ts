@@ -49,12 +49,12 @@ export class ShareMenuOperation implements MenuOperation {
         let param2: Map<string, Object> = new Map<string, Object>();
         param2.set('action', 'ability.intent.SEND_DATA');
         param2.set('type', '*/*');
-        param2.set('parameters', Object.fromEntries(param1));
+        param2.set('parameters', Object.fromEntries<Object>(param1));
         let param3: Map<string, Object> = new Map<string, Object>();
-        param3.set('ability.want.params.INTENT', Object.fromEntries(param2));
+        param3.set('ability.want.params.INTENT', Object.fromEntries<Object>(param2));
         let want: Want = {
             action: 'com.huawei.intent.action.hwCHOOSER',
-            parameters: Object.fromEntries(param3)
+            parameters: Object.fromEntries<Object>(param3)
         };
         startAbility(want);
     }

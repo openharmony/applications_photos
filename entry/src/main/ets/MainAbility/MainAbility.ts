@@ -112,7 +112,7 @@ export class MainAbility extends Ability {
            ];
            for (let permission of requestPermissionList) {
                // @ts-ignore
-               atManager.createAtManager().checkAccessToken(appInfo.accessTokenId, permission).then((status: atManager.GrantStatus): void => {
+               atManager.createAtManager().checkAccessToken(appInfo.accessTokenId, permission).then<void, void>((status: atManager.GrantStatus): void => {
                    if (status == atManager.GrantStatus.PERMISSION_DENIED) {
                        Log.error(this.TAG, "Failed to checkAccessToken permission = " + permission);
                    }
@@ -185,7 +185,7 @@ export class MainAbility extends Ability {
                     windowStage.setUIContent(this.context, pagePath, null);
                 }
                 finishTrace('onWindowStageCreate');
-            }).catch((): void => {
+            }).catch<void>((): void => {
                 Log.error(this.TAG, "get device screen info failed.");
             });
         });

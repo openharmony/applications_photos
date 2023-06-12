@@ -31,7 +31,7 @@ export struct ThirdAlbumGridItem {
 
     private getStaticIconList(): Map<string, Resource> {
         if(this.staticIconList === null) {
-            let icons: Map<string, Resource> = new Map();
+            let icons: Map<string, Resource> = new Map<string, Resource>();
             icons.set(MediaConstants.ALBUM_ID_VIDEO, $r('app.media.ic_video'));
             icons.set(MediaConstants.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay'));
             this.staticIconList = icons;

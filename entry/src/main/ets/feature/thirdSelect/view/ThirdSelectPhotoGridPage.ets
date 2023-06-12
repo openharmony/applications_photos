@@ -96,7 +96,7 @@ struct ThirdSelectPhotoGridPage {
             let abilityResult: common.AbilityResult = {
                 resultCode: 0,
                 want: {
-                    parameters: Object.fromEntries(param1)
+                    parameters: Object.fromEntries<string[]>(param1)
                 } as Want
             };
             terminateSelfWithResult(abilityResult)
@@ -310,14 +310,14 @@ struct ThirdSelectPhotoGridPage {
         let abilityResult: common.AbilityResult = {
             resultCode: 0,
             want: {
-                parameters: Object.fromEntries(param1)
+                parameters: Object.fromEntries<Object>(param1)
             } as Want
         };
         Log.info(TAG, "uri: " + uriArray)
         let self = this;
         if (uriArray == null && uriArray == undefined) {
             let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
-            appContext.terminateSelfWithResult(abilityResult).then((result: void): void => {
+            appContext.terminateSelfWithResult(abilityResult).then<void, void>((result: void): void => {
                 Log.info(TAG, "terminateSelfWithResult result: " + result);
             });
         } else {
@@ -325,7 +325,7 @@ struct ThirdSelectPhotoGridPage {
             try {
                 Log.info(TAG, "grant permission success.");
                 let appContext: common.UIAbilityContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
-                appContext.terminateSelfWithResult(abilityResult).then((result: void): void => {
+                appContext.terminateSelfWithResult(abilityResult).then<void, void>((result: void): void => {
                     Log.info(TAG, "terminateSelfWithResult result: " + result);
                 });
             } catch (err) {

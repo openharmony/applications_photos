@@ -250,7 +250,7 @@ struct PhotoGridPage {
         Log.info(TAG, "onCopyEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
-        if (err != null) {
+        if (new Boolean(err).valueOf()) {
             getResourceString($r('app.string.copy_failed_single')).then<void, void>((message: string): void => {
                 showToast(message);
             })
@@ -277,7 +277,7 @@ struct PhotoGridPage {
         Log.info(TAG, "onDownloadEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
-        if (err != null) {
+        if (new Boolean(err).valueOf()) {
             if (total > 1) {
                 Log.warn(TAG, "get selectItems is error " + count);
                 let str = await getResourceString($r('app.string.download_failed_multi'));
@@ -313,7 +313,7 @@ struct PhotoGridPage {
         Log.info(TAG, "onMoveEnd count: " + count + ", total: " + total);
         this.onModeChange();
         mediaObserver.registerObserver(this.dataObserver);
-        if (err != null) {
+        if (new Boolean(err).valueOf()) {
             getResourceString($r('app.string.move_failed_single')).then<void, void>((message: string): void => {
                 showToast(message);
             })

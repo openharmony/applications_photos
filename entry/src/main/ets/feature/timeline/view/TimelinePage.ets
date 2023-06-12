@@ -433,7 +433,7 @@ export struct TimelinePage {
         this.onModeChange();
         finishTrace('onModeChange');
         mediaObserver.registerObserver(this.dataObserver);
-        if (err != null) {
+        if (new Boolean(err).valueOf()) {
             getResourceString($r('app.string.copy_failed_single')).then<void, void>((message: string): void => {
                 showToast(message)
             })
@@ -462,7 +462,7 @@ export struct TimelinePage {
         this.onModeChange();
         finishTrace('onModeChange');
         mediaObserver.registerObserver(this.dataObserver);
-        if (err != null) {
+        if (new Boolean(err).valueOf()) {
             getResourceString($r('app.string.move_failed_single')).then<void, void>((message: string): void => {
                 showToast(message)
             })

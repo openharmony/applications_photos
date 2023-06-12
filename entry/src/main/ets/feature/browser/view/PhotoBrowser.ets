@@ -429,7 +429,7 @@ struct PhotoBrowser {
 
     async onMoveEndBindImpl(err: object, count: number, total: number): Promise<void> {
         Log.debug(TAG, "onMoveEnd count: " + count + ", total: " + total);
-        if (err != null) {
+        if (new Boolean(err).valueOf()) {
             getResourceString($r('app.string.move_failed_single')).then<void, void>((message: string): void => {
                 showToast(message)
             })
@@ -450,7 +450,7 @@ struct PhotoBrowser {
     private onCopyEndBindImpl(err: object, count: number, total: number): void {
         Log.debug(TAG, "onCopyEnd count: " + count + ", total: " + total);
         this.dataSourceLoadFinish()
-        if (err != null) {
+        if (new Boolean(err).valueOf()) {
             getResourceString($r('app.string.copy_failed_single')).then<void, void>((message: string): void => {
                 showToast(message);
             })
@@ -463,7 +463,7 @@ struct PhotoBrowser {
 
     async onDownloadEndBindImpl(err: object, count: number, total: number): Promise<void> {
         Log.debug(TAG, "onDownloadEnd count: " + count + ", total: " + total);
-        if (err != null) {
+        if (new Boolean(err).valueOf()) {
             getResourceString($r('app.string.download_failed_single')).then<void, void>((message: string): void => {
                 showToast(message);
             })

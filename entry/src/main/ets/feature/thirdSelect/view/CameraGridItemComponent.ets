@@ -73,7 +73,7 @@ export struct CameraGridItemComponent {
       promise.then<void, void>((result: common.AbilityResult): void => {
         Log.info(TAG, 'resourceUri = ' + result?.want?.parameters?.resourceUri);
         this.resultUri = result?.want?.parameters?.resourceUri as string;
-      }).catch((err: Error): void => {
+      }).catch<void>((err: Error): void => {
         Log.error(TAG, 'jumpCameraTakephoto err: ' + err);
       });
     })
@@ -106,16 +106,16 @@ export struct CameraGridItemComponent {
       Log.error(TAG, 'no valid uri!');
       return;
     }
-    let param1: Map<string, string[]> = new Map();
+    let param1: Map<string, string[]> = new Map<string, string[]>();
     param1.set('select-item-list', [uri]);
     let abilityResult: common.AbilityResult = {
         resultCode: 0,
         want: {
-            parameters: Object.fromEntries(param1)
+          parameters: Object.fromEntries<string[]>(param1)
         } as Want
     };
     let appContext = this.globalThis.getObject("appContext") as common.UIAbilityContext;
-    appContext.terminateSelfWithResult(abilityResult).then((result: void): void => {
+    appContext.terminateSelfWithResult(abilityResult).then<void, void>((result: void): void => {
       Log.info(TAG, 'terminateSelf result: ' + result);
     });
   }

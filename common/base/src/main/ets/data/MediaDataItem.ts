@@ -140,8 +140,7 @@ export class MediaDataItem implements DateAdded {
         this.isSelect = selectManager.isSelect(this.uri, this.isSelect);
 
         // may change
-        fileAsset.isFavorite().then((isFavor: boolean): void => {this.favouriteStatus = (isFavor) ? STATUS_TRUE : STATUS_FALSE});
-
+        fileAsset.isFavorite().then<void, void>((isFavor: boolean): void => {this.favouriteStatus = (isFavor) ? STATUS_TRUE : STATUS_FALSE});
         if (this.width > 0 && this.height > 0) {
             this.status = MediaConstants.LOADED;
         } else {

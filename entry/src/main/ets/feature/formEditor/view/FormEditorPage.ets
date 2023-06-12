@@ -102,9 +102,9 @@ struct FormEditorPage {
         if (!this.isShow) {
             return;
         }
-        formProvider.setFormNextRefreshTime(this.formId, this.time).then((): void => {
+        formProvider.setFormNextRefreshTime(this.formId, this.time).then<void, void>((): void => {
             Log.info(TAG, "setFormNextRefreshTime sucessfully");
-        }).catch((err: Error): void => {
+        }).catch<void>((err: Error): void => {
             Log.error(TAG, "init err " + err);
         })
     }
@@ -120,9 +120,9 @@ struct FormEditorPage {
         formProvider.updateForm(this.formId.toString(), obj3).then((data: void): void => {
             Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
             if (this.isShow) {
-                formProvider.setFormNextRefreshTime(this.formId, this.time).then((): void => {
+                formProvider.setFormNextRefreshTime(this.formId, this.time).then<void, void>((): void => {
                     this.terminate();
-                }).catch((err: Error): void => {
+                }).catch<void>((err: Error): void => {
                     Log.error(TAG, "init err " + err);
                     this.terminate();
                 })

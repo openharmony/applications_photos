@@ -127,7 +127,7 @@ class DataStoreUtil {
     public async  removeCache(): Promise<void> {
         Log.info(TAG,'removeCache start!');
         let context: common.Context = this.globalThis.getObject("applicationContext") as common.Context;
-        await preferences.removePreferencesFromCache(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE).then((): void => {
+        await preferences.removePreferencesFromCache(context, DataStoreUtil.PREFERENCES_KEY_MY_FORM_STORE).then<void, void>((): void => {
             Log.info(TAG, "this.preferences = " + this.preferences);
             this.preferences = undefined;
             Log.info(TAG,"removeCache successfully.")
