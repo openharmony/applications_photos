@@ -49,9 +49,8 @@ struct FormEditorPage {
     albumId: string = '';
     @State time: number = 30;
     @State intervalTime: Resource = $r('app.string.fa_play_interval_time_30');
-    private saveDataFunc = (albumName: string, albumId: string, displayName: object, index: number, isShow: boolean): Promise<void> =>
-        this.saveDataBindImpl(albumName, albumId, displayName, index, isShow);
-    private onChangeFunc = (value: number): void => this.onTabChangedBindImpl(value);
+    private saveDataFunc = this.saveData.bind(this);
+    private onChangeFunc = this.onChange.bind(this);
     settingController: CustomDialogController = new CustomDialogController({
         builder: SettingDialog(),
         autoCancel: false,
@@ -115,10 +114,10 @@ struct FormEditorPage {
     }
 
     updateFormData(): void {
-        Log.debug(TAG, "updateFormData formId: " + JSON.stringify(this.formId));
+       Log.debug(TAG, "updateFormData formId: " + JSON.stringify(this.formId));
         let obj3 = this.bindFormData();
         Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
-        formProvider.updateForm(this.formId, obj3).then((data: void): void => {
+        formProvider.updateForm(this.formId.toString(), obj3).then((data: void): void => {
             Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
             if (this.isShow) {
                 formProvider.setFormNextRefreshTime(this.formId, this.time).then((): void => {
@@ -130,24 +129,20 @@ struct FormEditorPage {
             } else {
                 this.terminate();
             }
-        }).catch((error: Error): void => {
+        }).catch((error): void => {
             Log.error(TAG, "updateForm failed. Cause: " + JSON.stringify(error));
             this.terminate();
         });
     }
 
-    async saveData(albumName: string, albumId: string, displayName: object, index: number, isShow: boolean): Promise<void> {
-        return await this.saveDataBindImpl(albumName, albumId, displayName, index, isShow)
-    }
-
-    async saveDataBindImpl(albumName: string, albumId: string, displayName: object, index: number, isShow: boolean): Promise<void> {
+    async saveData(albumName: string, albumId: string, displayName, index: number, isShow: boolean) {
         Log.debug(TAG, "saveData start! " + albumName + " " + displayName + " " + index);
         let msgDisplayName = '';
-        if (displayName instanceof String) {
-            msgDisplayName = displayName.toString();
-        } else {
+        if (displayName instanceof Object) {
             Log.debug(TAG, "saveData object " + displayName);
-            msgDisplayName = await getResourceString(displayName as Resource);
+            msgDisplayName = await getResourceString(displayName);
+        } else {
+            msgDisplayName = displayName;
         }
         this.isShow = isShow;
         this.albumId = albumId;
