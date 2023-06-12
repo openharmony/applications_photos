@@ -58,7 +58,7 @@ export struct ImageGridItemComponent {
         this.resetShow();
     }
 
-    private resetShow() {    
+    private resetShow(): void {
         Log.info(TAG, "getThumbnail1 " + this.thumbnail);
         if (this.mediaItem.isLoad()) {
             this.thumbnail = this.mediaItem.getThumbnail(MediaConstants.DEFAULT_SIZE, MediaConstants.DEFAULT_SIZE);

@@ -87,7 +87,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
             switch (this.findSameOperation) {
                 case FindSameOperation.NONE:
                     this.menuContext.broadCast.emit(BroadcastConstants.FIND_SAME_FILE_DIALOG,
-                        [assets, this.count, () => {
+                        [assets, this.count, (): void => {
                             this.move(assets.sourceAsset, this.albumInfo.relativePath, assets.targetAsset);
                         }, (): void => this.onOperateContinueBindImpl(), (): void => this.onOperateCancelledBindImpl(),
                         (newOp: number): void => this.setFindSameOperationBindImpl(newOp)]);

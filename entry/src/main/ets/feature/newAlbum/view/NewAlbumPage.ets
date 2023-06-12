@@ -322,7 +322,8 @@ struct NewAlbumPage {
                             .aspectRatio(1)
                             .columnStart(item.get().index % this.gridRowCount)
                             .columnEnd(item.get().index % this.gridRowCount)
-                        }, (item: LazyItem<AlbumDataItem>): string => (item == null) && item.get() != null ? JSON.stringify(item) : item.getHashCode())
+                        }, (item: LazyItem<AlbumDataItem>): string => (item == null) && (item.get() != undefined && item.get() != null) ?
+                            JSON.stringify(item) : item.getHashCode())
                     }
                     .columnsTemplate('1fr '.repeat(this.gridRowCount))
                     .columnsGap(Constants.GRID_GUTTER)
