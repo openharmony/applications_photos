@@ -103,7 +103,22 @@
         "icon": "$media:ohos_gallery",
         "description": "$string:app_name",
         "type": "service",
-        "visible": true
+        "visible": true,
+        "skills": [
+          {
+            "actions": [
+              "ohos.want.action.deleteDialog"
+            ],
+            "uris": [
+              {
+                "type": "image/*"
+              },
+              {
+                "type": "video/*"
+              }
+            ]
+          }
+        ],
       }
     ]
   },
