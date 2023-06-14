@@ -49,8 +49,9 @@ struct FormEditorPage {
     albumId: string = '';
     @State time: number = 30;
     @State intervalTime: Resource = $r('app.string.fa_play_interval_time_30');
-    private saveDataFunc = this.saveData.bind(this);
-    private onChangeFunc = this.onChange.bind(this);
+    private saveDataFunc = (albumName: string, albumId: string, displayName: Object, index: number, isShow: boolean): Promise<void> =>
+        this.saveDataBindImpl(albumName, albumId, displayName, index, isShow);
+    private onChangeFunc = (value: number): void => this.onTabChangedBindImpl(value);
     settingController: CustomDialogController = new CustomDialogController({
         builder: SettingDialog(),
         autoCancel: false,
@@ -117,7 +118,7 @@ struct FormEditorPage {
        Log.debug(TAG, "updateFormData formId: " + JSON.stringify(this.formId));
         let obj3 = this.bindFormData();
         Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
-        formProvider.updateForm(this.formId.toString(), obj3).then((data: void): void => {
+        formProvider.updateForm(this.formId.toString(), obj3).then<void, void>((data: void): void => {
             Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
             if (this.isShow) {
                 formProvider.setFormNextRefreshTime(this.formId, this.time).then<void, void>((): void => {
@@ -129,18 +130,22 @@ struct FormEditorPage {
             } else {
                 this.terminate();
             }
-        }).catch((error): void => {
+        }).catch<void>((error: Error): void => {
             Log.error(TAG, "updateForm failed. Cause: " + JSON.stringify(error));
             this.terminate();
         });
     }
 
-    async saveData(albumName: string, albumId: string, displayName, index: number, isShow: boolean) {
+    async saveData(albumName: string, albumId: string, displayName: Object, index: number, isShow: boolean): Promise<void> {
+        return await this.saveDataBindImpl(albumName, albumId, displayName, index, isShow);
+    }
+
+    async saveDataBindImpl(albumName: string, albumId: string, displayName: Object, index: number, isShow: boolean): Promise<void> {
         Log.debug(TAG, "saveData start! " + albumName + " " + displayName + " " + index);
         let msgDisplayName = '';
         if (displayName instanceof Object) {
             Log.debug(TAG, "saveData object " + displayName);
-            msgDisplayName = await getResourceString(displayName);
+            msgDisplayName = await getResourceString(displayName as Resource);
         } else {
             msgDisplayName = displayName;
         }
@@ -211,7 +216,7 @@ struct FormEditorPage {
             let intervalTimeKey = 'intervalTime';
             let promise: Promise<object> = dataStore.getData(intervalTimeKey, this.time);
             promise.then<void, void>((d: Object): void => {
-                this.time = d as unknown as number;
+                this.time = d as number;
                 this.setIntervalTime();
                 AppStorage.SetOrCreate<number>(Constants.FROM_PLAYBACK_INTERVAL, this.time);
             })

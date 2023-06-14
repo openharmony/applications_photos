@@ -30,11 +30,11 @@ export class TimelineDataItem implements DateAdded {
     constructor(fileAssert: MediaLib.FileAsset, mediaFileAsset: MediaLib.FileAsset[], index: number) {
         Log.info(TAG, "construct " + fileAssert.dateAdded + ":" + fileAssert.count);
         this.dateAdded = fileAssert.dateAdded * 1000;
-        this.groupChild = new Array<MediaDataItem>(fileAssert.count);
+        this.groupChild = [];
         let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?';
         let selectionArgs: string[] = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
-        for (let i = 0;i < this.groupChild.length; i++) {
-            this.groupChild[i] = new MediaDataItem(selections, selectionArgs, "", index + i)
+        for (let i = 0; i < fileAssert.count; i++) {
+            this.groupChild.push(new MediaDataItem(selections, selectionArgs, "", index + i));
             if (index + i < mediaFileAsset.length) {
                 if (mediaDataItemCache.hasKey(mediaFileAsset[index+i].uri)) {
                     this.groupChild[i] = mediaDataItemCache.get(mediaFileAsset[index+i].uri);

@@ -63,8 +63,7 @@ export class FormController {
         Log.debug(TAG, "updateFormData formId: " + JSON.stringify(formId));
         let obj3 = this.bindFormData(formId);
         Log.debug(TAG, "updateFormData obj: " + JSON.stringify(obj3));
-        formProvider.updateForm(formId, obj3)
-            .then<void, void>((data: void): void => {
+        formProvider.updateForm(formId, obj3).then<void, void>((data: void): void => {
                 Log.info(TAG, "updateFormData, data: " + JSON.stringify(data));
                 if (this.mediaDataManager.getIsShowAlbumName()) {
                     formProvider.setFormNextRefreshTime(formId, this.mediaDataManager.getIntervalTime()).then<void, void>((): void => {
@@ -82,7 +81,7 @@ export class FormController {
                     }
                     this.onDestroy();
                 }
-            }).catch((error: Error): void => {
+            }).catch<void>((error: Error): void => {
              Log.error(TAG, "updateForm failed. Cause: " + JSON.stringify(error));
             this.mediaDataManager.closeFd();
         });
