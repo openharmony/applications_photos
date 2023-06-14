@@ -67,10 +67,10 @@ export class PhotoEditorManager {
             this.editors[this.currentMode].exit();
         }
 
-        this.item = undefined;
+        this.item = null;
         if(this.origin != null) this.origin.release();
-        this.origin = undefined;
-        this.historyManager.setOriginPixelMap(undefined);
+        this.origin = null;
+        this.historyManager.setOriginPixelMap(null);
         this.historyManager.releaseAll();
         this.currentMode = PhotoEditMode.EDIT_MODE_MAIN;
     }
@@ -98,7 +98,7 @@ export class PhotoEditorManager {
         // exit current edit mode
         if (this.editors[this.currentMode] != undefined) {
             const filter = this.editors[this.currentMode].exit();
-            if (filter != undefined) {
+            if (filter != null) {
                 // save cache
                 if (!filter.isCached()) {
                     const prePixelMap = this.getLastPixelMap();
@@ -150,7 +150,7 @@ export class PhotoEditorManager {
         Log.info(this.TAG, "save enter isReplace = " + isReplace);
         this.isSaving = true;
         const filter = this.editors[this.currentMode].exit();
-        if (filter != undefined) {
+        if (filter != null) {
             this.historyManager.push(filter);
         }
         return await Save.save(this.item, this.historyManager, isReplace);

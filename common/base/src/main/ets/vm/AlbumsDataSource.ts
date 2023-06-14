@@ -72,8 +72,8 @@ export class AlbumsDataSource extends ItemDataSource {
         }
     }
 
-    getAlbumDataItemById(id: string): AlbumDataItem {
-        let albumDataItem: AlbumDataItem = undefined;
+    getAlbumDataItemById(id: string): AlbumDataItem | null {
+        let albumDataItem: AlbumDataItem = null;
         for (let i = 0;i < this.albumDataItems.length; i++) {
             if (this.albumDataItems[i].id == id) {
                 albumDataItem = this.albumDataItems[i];

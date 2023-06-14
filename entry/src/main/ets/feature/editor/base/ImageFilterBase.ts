@@ -18,7 +18,7 @@ import { PixelMapWrapper } from './PixelMapWrapper'
 
 export abstract class ImageFilterBase implements Releasable {
     private filterName: string;
-    private cache: PixelMapWrapper = undefined;
+    private cache: PixelMapWrapper = null;
 
     constructor(name: string) {
         this.filterName = name;

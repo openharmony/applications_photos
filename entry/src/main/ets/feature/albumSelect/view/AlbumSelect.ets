@@ -82,7 +82,7 @@ struct AlbumSelect {
             } else {
                 AppStorage.SetOrCreate<boolean>(Constants.APP_KEY_NEW_ALBUM, false);
             }
-            let albumInfo: SimpleAlbumDataItem = undefined;
+            let albumInfo: SimpleAlbumDataItem = null;
             if(param.albumInfo != null) {
                 albumInfo = JSON.parse(param.albumInfo.toString());
             }

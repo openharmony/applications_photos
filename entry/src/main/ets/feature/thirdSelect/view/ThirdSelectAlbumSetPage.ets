@@ -169,7 +169,7 @@ struct ThirdSelectAlbumSetPage {
             // 从三方拉起，直接跳转到所有相册
             if (this.isFromThird) {
                 let allAlbumDataItem: AlbumDataItem = this.albumsDataSource.getAlbumDataItemById(MediaConstants.ALBUM_ID_ALL);
-                if (allAlbumDataItem == undefined) {
+                if (allAlbumDataItem == null) {
                     allAlbumDataItem = new AlbumDataItem(MediaConstants.ALBUM_ID_ALL, 0, displayName, this.filterMediaType, '');
                 }
                 this.jumpToAllAlbumGridPage(allAlbumDataItem);

@@ -122,7 +122,7 @@ struct Edit {
 
     aboutToDisappear(): void {
         Log.debug(this.TAG, 'aboutToDisappear');
-        this.globalThis.setObject("EditorMediaItem", undefined);
+        this.globalThis.setObject("EditorMediaItem", null);
         PhotoEditorManager.getInstance().clear();
         screenManager.setNavigationBarColor('#FFF1F3F5', '#FF000000')
     }
