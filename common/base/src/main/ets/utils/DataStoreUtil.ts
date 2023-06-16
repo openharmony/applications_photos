@@ -131,7 +131,7 @@ class DataStoreUtil {
             Log.info(TAG, "this.preferences = " + this.preferences);
             this.preferences = undefined;
             Log.info(TAG,"removeCache successfully.")
-        }).catch((err: Error): void => {
+        }).catch<void>((err: Error): void => {
             Log.info(TAG,"removeCache failed with err: " + err)
         })
     }
