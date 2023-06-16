@@ -211,7 +211,7 @@ struct FormEditorPage {
             let intervalTimeKey = 'intervalTime';
             let promise: Promise<object> = dataStore.getData(intervalTimeKey, this.time);
             promise.then<void, void>((d: Object): void => {
-                this.time = d as unknown as number;
+                this.time = d as number;
                 this.setIntervalTime();
                 AppStorage.SetOrCreate<number>(Constants.FROM_PLAYBACK_INTERVAL, this.time);
             })

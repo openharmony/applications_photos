@@ -99,16 +99,16 @@ export class PhotoEditCrop extends PhotoEditBase {
         this.cropShow.setMaxScaleFactor(scaleFactorW, scaleFactorH);
     }
 
-    exit(): ImageFilterBase {
+    exit(): ImageFilterBase | null {
         Log.info(this.TAG, 'exit');
         if(this.filter != null) this.saveFinalOperation();
         this.isCropShowInitialized = false;
-        this.input = undefined;
+        this.input = null;
         this.clearCanvas();
         if (this.couldReset()) {
             this.clear();
         } else {
-            this.filter = undefined;
+            this.filter = null;
         }
         return this.filter;
     }
@@ -155,7 +155,7 @@ export class PhotoEditCrop extends PhotoEditBase {
     }
 
     private refresh(): void {
-        if (this.ctx != undefined && this.input != undefined) {
+        if (this.ctx != undefined && this.input != null) {
             this.drawImage();
             this.drawCrop();
         }

@@ -80,8 +80,8 @@ export class TimelineItemDataSource extends ItemDataSource {
         return index
     }
 
-    getDataByIndex(index: number): DateAdded {
-        let item: DateAdded = undefined;
+    getDataByIndex(index: number): DateAdded | null {
+        let item: DateAdded = null;
         let count = 0;
         for (let i = 0;i < this.groupItem.length; i++) {
             let groupItem: TimelineDataItem = this.groupItem[i]
@@ -102,8 +102,8 @@ export class TimelineItemDataSource extends ItemDataSource {
         return item;
     }
 
-    getData(index: number): LazyItem<DateAdded> {
-        let item: LazyItem<DateAdded> = undefined;
+    getData(index: number): LazyItem<DateAdded> | null {
+        let item: LazyItem<DateAdded> = null;
         let count = 0;
         let lazyIndex = index;
         for (let i = 0;i < this.groupItem.length; i++) {

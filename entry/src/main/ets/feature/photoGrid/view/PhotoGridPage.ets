@@ -627,9 +627,9 @@ struct PhotoGridPage {
         this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, (item: MediaDataItem): void => this.onUpdateFavorAndSelectStateBindImpl(item));
         this.appBroadcast.off(BroadcastConstants.ON_REMOTE_CHANGED, (res: string, deviceId: number): void => this.onUpdateRemoteDeviceBindImpl(res, deviceId));
         mediaObserver.unregisterObserver(this.dataObserver);
-        this.dataObserver = undefined;
-        this.scroller = undefined;
-        this.barModel = undefined;
+        this.dataObserver = null;
+        this.scroller = null;
+        this.barModel = null;
     }
 
     build() {

@@ -252,10 +252,10 @@ export struct AlbumSetPage {
         this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, (index: number): void => this.onStateResetBindImpl(index));
         this.appBroadcast.off(BroadcastConstants.RESET_ZERO, (pageNumber: number): void => this.onResetZeroBindImpl(pageNumber));
         mediaObserver.unregisterObserver(this.dataObserver);
-        this.dataObserver = undefined;
-        this.scroller = undefined;
-        this.tabsController = undefined;
-        this.barModel = undefined;
+        this.dataObserver = null;
+        this.scroller = null;
+        this.tabsController = null;
+        this.barModel = null;
     }
 
     // Callback when the page is show.
