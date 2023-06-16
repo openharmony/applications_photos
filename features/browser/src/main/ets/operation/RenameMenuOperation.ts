@@ -48,16 +48,12 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
         this.confirmCallback = (title: string): Promise<void> => this.confirmCallbackBindImpl(title);
         this.cancelCallback = (): void => this.cancelCallbackBindImpl();
         let fileName = '';
-        try {
-            if (mediaItem.title != null) {
-                fileName = mediaItem.title;
-            } else {
-                let index = mediaItem.displayName.lastIndexOf('.');
-                fileName = mediaItem.displayName.substr(0, index);
-            }
-        } catch (err) {
-            Log.error(TAG, "mediaItem  is null, code: " + err.code + ", msg: " + err.msg);
-        }
+        if (mediaItem.title != null) {
+            fileName = mediaItem.title;
+        } else if (mediaItem.displayName != null) {
+            let index = mediaItem.displayName.lastIndexOf('.');
+            fileName = mediaItem.displayName.substr(0, index);
+        }             
 
         this.menuContext.broadCast.emit(BroadcastConstants.SHOW_RENAME_PHOTO_DIALOG,
             [fileName, this.confirmCallback, this.cancelCallback]);
