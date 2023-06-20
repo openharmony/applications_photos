@@ -50,10 +50,10 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
         let fileName = '';
         if (mediaItem.title != null) {
             fileName = mediaItem.title;
-        } else {
+        } else if (mediaItem.displayName != null) {
             let index = mediaItem.displayName.lastIndexOf('.');
             fileName = mediaItem.displayName.substr(0, index);
-        }
+        }             
 
         this.menuContext.broadCast.emit(BroadcastConstants.SHOW_RENAME_PHOTO_DIALOG,
             [fileName, this.confirmCallback, this.cancelCallback]);
