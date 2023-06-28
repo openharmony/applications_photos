@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "init_horizontal",
+      "value": "false"
+    },
+    {
+      "name": "init_sidebar",
+      "value": "false"
+    }
+  ]
+}

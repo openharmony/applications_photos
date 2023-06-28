@@ -1,0 +1,28 @@
+{
+  "color": [
+    {
+      "name": "ohos_id_color_white_icon",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "ohos_id_color_black_icon",
+      "value": "#E6000000"
+    },
+    {
+      "name": "ohos_id_color_whiteIcon_blackPlane",
+      "value": "#33000000"
+    },
+    {
+      "name": "ohos_id_color_blackIcon_whitePlane",
+      "value": "#33FFFFFF"
+    },
+    {
+      "name": "ohos_id_color_whiteIcon_blackPlane_hover",
+      "value": "#40000000"
+    },
+    {
+      "name": "ohos_id_color_blackIcon_whitePlane_hover",
+      "value": "#40FFFFFF"
+    }
+  ]
+}

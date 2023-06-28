@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "photos_thirdselect",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "uiSyntax": "ets"
+  }
+}

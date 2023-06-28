@@ -1,0 +1,378 @@
+{
+    "plural":[
+        {
+            "name":"recycleAlbum_delete_message",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_787222]_Permanently delete this item?"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_787219]_Permanently delete these items?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_787220]_Permanently delete these items?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_787221]_Permanently delete these items?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_787218]_Permanently delete these items?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_787223]_Permanently delete these items?"
+                }
+            ]
+        },
+        {
+            "name":"action_remove_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_802448]_Remove %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_802445]_Remove %d items"
+                }
+            ]
+        },
+        {
+            "name":"action_delete_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_802448]_Delete %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_802445]_Delete %d items"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_802440]_Delete %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_802446]_Delete %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_802439]_Delete %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_802431]_Delete %d items"
+                }
+            ]
+        },
+        {
+            "name":"action_recover_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_802443]_Restore %d items"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_802451]_Restore %d item"
+                }
+            ]
+        },
+        {
+            "name":"recycle_days",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_802176]_%1$d day"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_802178]_%1$d days"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_802177]_%1$d days"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_802179]_%1$d days"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_802180]_%1$d days"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_802181]_%1$d days"
+                }
+            ]
+        },
+        {
+            "name":"move_to_album_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_802437]_Move %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_802429]_Move %d items"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_802433]_Move %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_802450]_Move %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_802432]_Move %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_802430]_Move %d items"
+                }
+            ]
+        },
+        {
+            "name":"copy_to_album_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_802435]_Copy %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_802428]_Copy %d items"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_802441]_Copy %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_802449]_Copy %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_802442]_Copy %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_802438]_Copy %d items"
+                }
+            ]
+        },
+        {
+            "name":"recycleAlbum_delete_multiple_images_message",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_818397]_Permanently delete %d item?"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_818408]_Permanently delete %d items?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_818402]_Permanently delete %d items?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_818405]_Permanently delete %d items?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_818400]_Permanently delete %d items?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_818398]_Permanently delete %d items?"
+                }
+            ]
+        },
+        {
+            "name":"count_details_selected",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_772022]_%d items selected"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_772014]_%d item selected"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_771967]_%d items selected"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_771972]_%d items selected"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_772012]_%d items selected"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_772026]_%d items selected"
+                }
+            ]
+        },
+        {
+            "name":"first_delete_message",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_837544]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_837545]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d day."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_837548]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_837543]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_837547]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_837546]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                }
+            ]
+        },
+        {
+            "name":"show_video_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_788708]_%d videos"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_788715]_%d video"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_788711]_%d videos"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_788702]_%d videos"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_788693]_%d videos"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_788695]_%d videos"
+                }
+            ]
+        },
+        {
+            "name":"show_one_video_with_photo_num",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_788705]_%d photo，1 video"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_788701]_%d photos，1 video"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_788686]_%d photos，1 video"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_788709]_%d photos，1 video"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_788698]_%d photos，1 video"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_788714]_%d photos，1 video"
+                }
+            ]
+        },
+        {
+            "name":"show_multi_video_with_photo_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_788707]_%d photos，%d videos"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_788689]_%d photo，%d videos"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_788712]_%d photos，%d videos"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_788710]_%d photos，%d videos"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_788692]_%d photos，%d videos"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_788706]_%d photos，%d videos"
+                }
+            ]
+        },
+        {
+            "name":"show_photo_num",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_788699]_%d photo"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_788713]_%d photos"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_788694]_%d photos"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_788691]_%d photos"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_788704]_%d photos"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_788703]_%d photos"
+                }
+            ]
+        }
+    ]
+}

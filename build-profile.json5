@@ -1,80 +1,122 @@
 {
   "app": {
-    "signingConfigs": [
-	  {
-        "name": "default",
+	"signingConfigs": [
+      {
+        "name": "debug",
         "material": {
-          "certpath": "./signature/OpenHarmonyApplication.cer",
-          "storePassword": "00000016139B93BBCA1641496EA2EDC04012D36AAF788805480483B92ED8CC7F2367472558F1",
+          //该方案的签名材料
+          "certpath": "signature/OpenHarmonyApplication.cer",
+          //调试或发布证书文件，格式为.cer,
+          "storePassword": "000000166348AFD6C93C5F2D2233C88FB2C5643A9D9DC9B4AFA4E9015CB42D471D34812358D7",
+          //密钥库密码，以密文形式呈现,
           "keyAlias": "OpenHarmony Application Release",
-          "keyPassword": "000000165E797840E4487C9186CD743D2640A6732F892B14D2B6517D2FBFA7D1C705E55EAB6D",
-          "profile": "./signature/photos.p7b",
+          //密钥别名信息,
+          "keyPassword": "000000166146A16C62C98E5BB0A445915F2A4B6FEF2F3A16B46CA44799D2120224FF6696BD94",
+          //密钥密码，以密文形式呈现,
+          "profile": "signature/Photos.p7b",
+          //调试或发布证书Profile文件，格式为.p7b,
           "signAlg": "SHA256withECDSA",
-          "storeFile": "./signature/OpenHarmony.p12"
+          //密钥库signAlg参数
+          "storeFile": "signature/OpenHarmony.p12"
+          //密钥库文件，格式为.p12
         }
       }
-	],
+    ],
     "compileSdkVersion": 10,
     "compatibleSdkVersion": 10,
     "products": [
       {
         "name": "default",
-        "signingConfig": "default"
+        "signingConfig": "debug"
       },
     ],
   },
   "modules": [
     {
-      "name": "entry",
-      "srcPath": "./entry",
+      "name": "photos_common",
+      "srcPath": "./common",
       "targets": [
         {
           "name": "default",
           "applyToProducts": [
             "default",
-          ],
-        },
-      ],
+            "tablet"
+          ]
+        }
+      ]
     },
     {
-      "name": "base",
-      "srcPath": "./common/base"
+      "name": "photos_browser",
+      "srcPath": "./feature/browser",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default",
+            "tablet"
+          ]
+        }
+      ]
     },
     {
-      "name": "timeline",
-      "srcPath": "./features/timeline"
+      "name": "photos_editor",
+      "srcPath": "./feature/editor",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     },
     {
-      "name": "browser",
-      "srcPath": "./features/browser"
+      "name": "photos_formAbility",
+      "srcPath": "./feature/formAbility",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     },
     {
-      "name": "grid",
-      "srcPath": "./features/grid"
+      "name": "photos_thirdselect",
+      "srcPath": "./feature/thirdselect",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     },
     {
-      "name": "album",
-      "srcPath": "./features/album"
+      "name": "photos_timeline",
+      "srcPath": "./feature/timeline",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     },
     {
-      "name": "selectAlbum",
-      "srcPath": "./features/selectAlbum"
+      "name": "phone_photos",
+      "srcPath": "./product/phone",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     },
-    {
-      "name": "third",
-      "srcPath": "./features/third"
-    },
-    {
-      "name": "mediaOperation",
-      "srcPath": "./features/mediaOperation"
-    },
-    {
-      "name": "distributed",
-      "srcPath": "./features/distributed"
-    },
-    {
-      "name": "formEditor",
-      "srcPath": "./features/formEditor"
-    }
   ],
 }

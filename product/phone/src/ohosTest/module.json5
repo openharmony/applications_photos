@@ -1,0 +1,36 @@
+{
+  "module": {
+    "name": "phone_photos_test",
+    "type": "feature",
+    "srcEntrance": "./ets/TestAbility/TestAbility.ts",
+    "description": "$string:entry_test_desc",
+    "mainElement": "TestAbility",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:test_pages",
+    "uiSyntax": "ets",
+    "abilities": [
+      {
+        "name": "TestAbility",
+        "srcEntrance": "./ets/TestAbility/TestAbility.ts",
+        "description": "$string:TestAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:TestAbility_label",
+        "visible": true,
+        "skills": [
+          {
+            "actions": [
+              "action.system.home"
+            ],
+            "entities": [
+              "entity.system.home"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

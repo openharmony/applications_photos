@@ -1,0 +1,99 @@
+{
+  "module": {
+    "name": "phone_photos",
+    "type": "entry",
+    "srcEntrance": "./ets/Application/AbilityStage.ts",
+    "description": "$string:mainability_description",
+    "mainElement": "MainAbility",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "uiSyntax": "ets",
+    "metadata": [
+      {
+        "name": "ArkTSPartialUpdate",
+        "value": "true"
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.READ_IMAGEVIDEO"
+      },
+      {
+        "name": "ohos.permission.WRITE_IMAGEVIDEO"
+      },
+      {
+        "name": "ohos.permission.READ_MEDIA"
+      },
+      {
+        "name": "ohos.permission.WRITE_MEDIA"
+      },
+      {
+        "name": "ohos.permission.MEDIA_LOCATION"
+      },
+      {
+        "name": "ohos.permission.START_ABILITIES_FROM_BACKGROUND"
+      },
+      {
+        "name": "ohos.permission.GET_BUNDLE_INFO"
+      }
+    ],
+    "abilities": [
+      {
+        "startWindowIcon": "$media:startWindow_Bg",
+        "startWindowBackground": "$color:white",
+        "name": "com.ohos.photos.MainAbility",
+        "srcEntrance": "./ets/MainAbility/MainAbility.ts",
+        "description": "$string:description_mainability",
+        "icon": "$media:ohos_gallery",
+        "label": "$string:app_name",
+        "visible": true,
+        "launchType": "singleton",
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home","ohos.want.action.viewData","ohos.want.action.photoPicker"
+            ],
+            "uris": [
+              {
+                "type": "image/*"
+              },
+              {
+                "type": "video/*"
+              },
+              {
+                "type": "multipleselect"
+              },
+              {
+                "type": "singleselect"
+              }
+            ]
+          }
+        ],
+        "supportWindowMode": ["fullscreen"]
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "com.ohos.photos.FormAbility",
+        "srcEntrance": "./ets/FormAbility/FormAbility.ts",
+        "label": "$string:form_FormAbility_label",
+        "description": "$string:app_name",
+        "type": "form",
+        "metadata": [
+          {
+            "name": "ohos.extension.form",
+            "resource": "$profile:form_config"
+          }
+        ]
+      }
+    ]
+  },
+}

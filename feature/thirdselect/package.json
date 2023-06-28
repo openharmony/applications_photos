@@ -1,0 +1,16 @@
+{
+  "name": "@ohos/thirdselect",
+  "version": "1.0.0",
+  "ohos": {
+    "org": "huawei",
+    "buildTool": "hvigor",
+    "directoryLevel": "module"
+  },
+  "description": "a npm package which contains thirdSelect feature",
+  "main": "index.ts",
+  "dependencies": {
+    "@ohos/common": "../../common",
+    "@ohos/browser": "../browser"
+  },
+  "type": "module"
+}
