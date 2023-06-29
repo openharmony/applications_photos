@@ -13,7 +13,7 @@
           //密钥别名信息,
           "keyPassword": "000000166146A16C62C98E5BB0A445915F2A4B6FEF2F3A16B46CA44799D2120224FF6696BD94",
           //密钥密码，以密文形式呈现,
-          "profile": "signature/Photos.p7b",
+          "profile": "signature/photos.p7b",
           //调试或发布证书Profile文件，格式为.p7b,
           "signAlg": "SHA256withECDSA",
           //密钥库signAlg参数
