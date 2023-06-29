@@ -1,0 +1,28 @@
+{
+  "data": {
+    "fd": false,
+    "image0": "memory://image0",
+    "image1": "memory://image0",
+    "albumName": this.$t('strings.albumName'),
+    "isShow": true,
+    "currentIndex": 0,
+    "indexValue": 0,
+    "defaultImage": "/common/form_bg.png",
+    "uri": "",
+    "albumUri": "",
+    "currentUri": ""
+  },
+  "actions": {
+    "routerEvent": {
+      "action": "router",
+      "bundleName": "com.ohos.photos",
+      "abilityName": "com.ohos.photos.MainAbility",
+      "params": {
+        "uri": "{{uri}}",
+        "albumUri": "{{albumUri}}",
+        "displayName": "{{albumName}}",
+        "currentUri": "{{currentUri}}"
+      }
+    }
+  }
+}

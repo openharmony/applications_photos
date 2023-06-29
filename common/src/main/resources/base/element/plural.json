@@ -1,0 +1,186 @@
+{
+    "plural":[
+        {
+            "name":"count_details_selected",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d item selected"
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d items selected"
+                }
+            ]
+        },
+        {
+            "name":"recycle_days",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d day"
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d days"
+                }
+            ]
+        },
+        {
+            "name":"show_photo_num",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d photo"
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d photos"
+                }
+            ]
+        },
+        {
+            "name":"action_recover_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Restore %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"Restore %d items"
+                }
+            ]
+        },
+        {
+            "name":"action_delete_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Delete %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"Delete %d items"
+                }
+            ]
+        },
+        {
+            "name":"move_to_album_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Move %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"Move %d items"
+                }
+            ]
+        },
+        {
+            "name":"add_to_album_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Add %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"Add %d items"
+                }
+            ]
+        },
+        {
+            "name":"copy_to_album_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Copy %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"Copy %d items"
+                }
+            ]
+        },
+        {
+            "name":"show_video_num",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d video"
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d videos"
+                }
+            ]
+        },
+        {
+            "name":"show_one_video_with_photo_num",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d photo，1 video"
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d photos，1 video"
+                }
+            ]
+        },
+        {
+            "name":"show_multi_video_with_photo_num",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d photo，%d videos"
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d photos，%d videos"
+                }
+            ]
+        },
+        {
+            "name":"recycleAlbum_delete_message",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Permanently delete this item?"
+                },
+                {
+                    "quantity":"other",
+                    "value":"Permanently delete these items?"
+                }
+            ]
+        },
+        {
+            "name":"recycleAlbum_delete_multiple_images_message",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Permanently delete %d item?"
+                },
+                {
+                    "quantity":"other",
+                    "value":"Permanently delete %d items?"
+                }
+            ]
+        },
+        {
+            "name":"first_delete_message",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Deleted items are moved into the Recently deleted folder and permanently deleted after %d day."
+                },
+                {
+                    "quantity":"other",
+                    "value":"Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                }
+            ]
+        }
+    ]
+}

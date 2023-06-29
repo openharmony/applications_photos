@@ -1,0 +1,11 @@
+<div class="container" on:click ="routerEvent">
+    <stack>
+        <div class="container-img">
+            <swiper class="img_div" index="{{indexValue}}" indicator="false" loop="true" digital="false" autoplay="false"
+                    interval="3000" duration="500" animationopacity="false" >
+                <image src="{{ fd? image0: defaultImage }}" alt="/common/form_bg.png" class="bg-img" />
+                <image src="{{ fd? image1: defaultImage }}" alt="/common/form_bg.png" class="bg-img" />
+            </swiper>
+        </div>
+    </stack>
+</div>

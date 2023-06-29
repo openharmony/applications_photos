@@ -1,0 +1,119 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { MediaOperationType } from '../../model/common/MediaOperationType';
+import { Log } from '../../utils/Log';
+import { ColumnSize, ScreenManager } from '../../model/common/ScreenManager';
+import { Constants } from '../../model/common/Constants';
+
+const TAG: string = 'common_ProgressDialog';
+
+@Observed
+export class ProgressParam {
+  cancelFunc: Function
+  operationType: string
+}
+
+@CustomDialog
+export struct ProgressDialog {
+  @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
+  @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
+  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  controller: CustomDialogController
+  @Consume progressMessage: Resource;
+  @Consume deleteProgress: number;
+  @Consume progressParam: ProgressParam;
+
+  /**
+   * 122 = Progress宽度（ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_FOUR) -  88） - deleteProgress宽度(34)
+   */
+  readonly progressMessageWidth: number = 122
+
+  /**
+   * 88 = 左右padding（24 * 2） + 关闭图片宽度（24） + 图片与Progress间距(16)
+   */
+  readonly progressWidth: number = 88
+
+  build() {
+    Column() {
+      Row() {
+        Text(this.progressMessage)
+          .fontSize($r('sys.float.ohos_id_text_size_body2'))
+          .fontFamily($r('app.string.id_text_font_family_regular'))
+          .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_FOUR) - this.progressMessageWidth)
+          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .maxLines(2)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+        Text(`${this.deleteProgress}%`)
+          .fontSize($r('sys.float.ohos_id_text_size_body2'))
+          .fontFamily($r('app.string.id_text_font_family_regular'))
+          .width($r('app.float.progress_percentage_text_width'))
+          .textAlign(TextAlign.End)
+          .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+      }
+      .width('100%')
+      .margin({
+        top: $r('app.float.process_bar_text_margin_top'),
+        bottom: $r('app.float.process_bar_text_margin_bottom')
+      })
+
+      Row() {
+        Progress({ value: 0, total: 100, style: ProgressStyle.Linear })
+          .value(this.deleteProgress)
+          .color($r('app.color.color_control_highlight'))
+          .flexGrow(1)
+          .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_FOUR) - this.progressWidth)
+          .margin({
+            right: $r('app.float.progress_image_right_margin')
+          })
+        if (this.progressParam.operationType != MediaOperationType.Delete &&
+        this.progressParam.operationType != MediaOperationType.Recover) {
+          Image($r('app.media.ic_progress_cancel'))
+            .width($r('app.float.icon_size'))
+            .height($r('app.float.icon_size'))
+            .onClick(() => {
+              this.progressParam.cancelFunc();
+            })
+        }
+      }
+      .width('100%')
+      .margin({
+        top: $r('app.float.process_bar_progress_margin_top'),
+        bottom: $r('app.float.process_bar_progress_margin_bottom')
+      })
+    }
+    .padding({
+      left: $r('app.float.max_padding_start'),
+      right: $r('app.float.max_padding_end'),
+      top: $r('app.float.max_padding_start'),
+      bottom: $r('app.float.max_padding_end'),
+    })
+    .border({ radius: $r('sys.float.ohos_id_corner_radius_default_l') })
+    .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
+    .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_FOUR))
+    .margin({
+      right: $r('app.float.dialog_content_margin'),
+      left: $r('app.float.dialog_content_margin'),
+      bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
+    })
+    .shadow({
+      radius: $r('app.float.dialog_defult_shadow_m_radio'),
+      color: $r('app.color.dialog_defult_shadow_m_color'),
+      offsetX: $r('app.float.dialog_defult_shadow_m_offsetX'),
+      offsetY: $r('app.float.dialog_defult_shadow_m_offsetY')
+    })
+  }
+}

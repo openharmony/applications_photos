@@ -1,0 +1,121 @@
+{
+  "plural":[
+    {
+      "name":"count_details_selected",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"已选择 %d 项"
+        }
+      ]
+    },
+    {
+      "name":"recycle_days",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"%1$d 天"
+        }
+      ]
+    },
+    {
+      "name":"show_photo_num",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"%d 张照片"
+        }
+      ]
+    },
+    {
+      "name":"action_recover_count",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"恢复 %d 项"
+        }
+      ]
+    },
+    {
+      "name":"action_delete_count",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"删除 %d 项"
+        }
+      ]
+    },
+    {
+      "name":"move_to_album_count",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"移动 %d 项到相册"
+        }
+      ]
+    },
+    {
+      "name":"copy_to_album_count",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"复制 %d 项到相册"
+        }
+      ]
+    },
+    {
+      "name":"show_video_num",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"%d 个视频"
+        }
+      ]
+    },
+    {
+      "name":"show_one_video_with_photo_num",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"%d 张照片，1 个视频"
+        }
+      ]
+    },
+    {
+      "name":"show_multi_video_with_photo_num",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"%d 张照片，%d 个视频"
+        }
+      ]
+    },
+    {
+      "name":"recycleAlbum_delete_message",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"所选设备上的文件将被永久删除，无法恢复。是否删除？"
+        }
+      ]
+    },
+    {
+      "name":"recycleAlbum_delete_multiple_images_message",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"所选 %d 个文件将被永久删除，无法恢复。是否删除？"
+        }
+      ]
+    },
+    {
+      "name":"first_delete_message",
+      "value":[
+        {
+          "quantity":"other",
+          "value":"您可在 %d 天内从最近删除中恢复或彻底删除"
+        }
+      ]
+    }
+  ]
+}

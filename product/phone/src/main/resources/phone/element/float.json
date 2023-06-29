@@ -1,0 +1,24 @@
+{
+  "float": [
+    {
+      "name": "album_set_page_action_bar_padding_left",
+      "value": "24vp"
+    },
+    {
+      "name": "album_set_page_action_bar_padding_top",
+      "value": "32vp"
+    },
+    {
+      "name":"default_actionbar_padding_right",
+      "value": "24vp"
+    },
+    {
+      "name": "dialog_double_buttons_margin_right",
+      "value": "4vp"
+    },
+    {
+      "name": "dialog_double_buttons_margin_left",
+      "value": "4vp"
+    }
+  ]
+}
