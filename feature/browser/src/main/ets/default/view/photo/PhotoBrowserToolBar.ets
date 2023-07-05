@@ -34,6 +34,7 @@ export struct PhotoBrowserToolBar {
   noAnimation: boolean = true;
   @Consume hidePopup: boolean;
   private isFromPhotoBrowser = false;
+  private isFromTrash: boolean;
 
   aboutToAppear(): void {
     Log.debug(TAG, `isShowBar=${this.isShowBar}, isHorizontal=${this.isHorizontal}`);
@@ -68,12 +69,10 @@ export struct PhotoBrowserToolBar {
     Stack() {
       ToolBar({
         onMenuClicked: this.onMenuClicked,
-        isFromPhotoBrowser: this.isFromPhotoBrowser
+        isFromPhotoBrowser: this.isFromPhotoBrowser,
+        isFromTrash:this.isFromTrash
       })
     }
-    .margin({
-      bottom: this.isFromPhotoBrowser ? this.leftBlank[0] : Constants.NUMBER_0
-    })
     .width(Constants.PERCENT_100)
     .visibility(this.isVisibility ? Visibility.Visible : Visibility.Hidden)
     .opacity(this.opacityValue)
