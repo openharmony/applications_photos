@@ -186,9 +186,11 @@ export struct TimelinePage {
         this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, null);
         this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, null);
         this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, null);
+        this.appBroadcast.off(BroadcastConstants.RESET_ZERO, null);
         screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
         this.onWindowSizeChangeCallBack = null;
         mediaObserver.unregisterObserver(this.dataObserver);
+        this.dataObserver.clearSource();
         this.broadCast.off(null, null);
     }
 
