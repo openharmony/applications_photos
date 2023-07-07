@@ -511,6 +511,7 @@ struct PhotoBrowser {
         }
         mediaObserver.unregisterObserver(this.dataObserver);
         mMultimodalInputManager.unregisterListener();
+        this.controller = undefined;
     }
 
     aboutToAppear(): void {
