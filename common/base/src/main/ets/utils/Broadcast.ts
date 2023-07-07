@@ -36,8 +36,8 @@ export class Broadcast {
             this.callBackArray[event] = null;
         }
         let cb;
-        let l = cbs.length;
-        for (let i = 0; i < l; i++) {
+        let i = cbs.length;
+        while (i-- > 0) {
             cb = cbs[i];
             if (cb === callback || cb.fn === callback) {
                 cbs.splice(i, 1);
