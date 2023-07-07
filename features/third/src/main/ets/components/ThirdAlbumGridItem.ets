@@ -52,14 +52,20 @@ export struct ThirdAlbumGridItem {
     @State thumbnail: string = "";
     bundleName: string = "";
     filterMediaType: number;
+    onWindowSizeChangeCallBack = () => this.updateCardSize();
 
     aboutToAppear(): void {
         Log.info(TAG, `aboutToAppear + ${this.item.uri}`)
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, (size) => this.updateCardSize())
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
         this.updateCardSize();
         this.item.load().then(() => {
             this.thumbnail = this.item.getThumbnail()
         })
+    }
+
+    aboutToDisappear(): void {
+        screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+        this.onWindowSizeChangeCallBack = null;
     }
 
     updateCardSize() {
