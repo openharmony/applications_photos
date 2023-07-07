@@ -56,6 +56,10 @@ export struct PhotoSwiper {
         });
     }
 
+    aboutToDisappear(): void {
+        this.swiperController = undefined;
+    }
+
     build() {
         Swiper(this.swiperController) {
             LazyForEach(this.dataSource, (item: LazyItem<MediaDataItem>) => {
