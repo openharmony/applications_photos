@@ -68,6 +68,7 @@ struct ThirdSelectAlbumSetPage {
     filterMediaType: number = MediaConstants.SELECT_TYPE_ALL;
     bundleName: string = "";
     isSelectPhotoGrid: boolean = false;
+    onWindowSizeChangeCallBack = () => this.initGridRowCount();
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar(this.leftAction, this.title,
@@ -128,13 +129,16 @@ struct ThirdSelectAlbumSetPage {
             this.isHideScrollBar = (size <= (this.gridRowCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         });
 
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
-            this.initGridRowCount();
-        });
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
 
         this.initGridRowCount();
         this.updateActionBar();
         AppStorage.SetOrCreate(Constants.ENTRY_FROM_HAP, Constants.ENTRY_FROM_NONE);
+    }
+
+    aboutToDisappear(): void {
+        screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+        this.onWindowSizeChangeCallBack = null;
     }
 
     private jumpToAllAlbumGridPage(allAlbumDataItem: AlbumDataItem) {
