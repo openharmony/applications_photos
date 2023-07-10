@@ -19,6 +19,7 @@ import { Log } from '../utils/Log';
 import { BroadcastConstants } from '../constants/BroadcastConstants';
 import { WindowConstants } from '../constants/WindowConstants';
 import { getResourceString } from '../utils/ResourceUtils';
+import { Broadcast } from '../utils/Broadcast';
 
 export enum ColumnSize {
     COLUMN_TWO = 2,
@@ -62,6 +63,7 @@ class ScreenManager {
     private statusBarHeight = 0;
     private naviBarHeight = 0;
     private leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+    private broadcast: Broadcast = new Broadcast();
     private events = [];
     private mainWindow: window.Window = undefined;
 
@@ -90,13 +92,7 @@ class ScreenManager {
      * @param fn
      */
     on(event, fn) {
-        if (Array.isArray(event)) {
-            for (let i = 0, l = event.length; i < l; i++) {
-                this.on(event[i], fn);
-            }
-        } else {
-            (this.events[event] || (this.events[event] = [])).push(fn);
-        }
+        this.broadcast.on(event, fn);
     }
 
     /**
@@ -106,50 +102,11 @@ class ScreenManager {
      * @param fn
      */
     off(event, fn) {
-        if (event == null || event == undefined) {
-            return;
-        }
-        if (Array.isArray(event)) {
-            for (let i = 0, l = event.length; i < l; i++) {
-                this.off(event[i], fn);
-            }
-        }
-        const cbs = this.events[event];
-        if (!cbs) {
-            return;
-        }
-        if (fn == null || fn == undefined) {
-            return;
-        }
-        let cb;
-        let i = cbs.length;
-        while (i--) {
-            cb = cbs[i];
-            if (cb === fn || cb.fn === fn) {
-                cbs.splice(i, 1);
-                break;
-            }
-        }
+        this.broadcast.off(event, fn);
     }
 
     private emit(event, argument: any[]) {
-        let _self = this;
-        if (!this.events[event]) {
-            return;
-        }
-        let cbs = [...this.events[event]];
-        if (cbs) {
-            for (let i = 0, l = cbs.length; i < l; i++) {
-                let ref = cbs[i];
-                if (ref) {
-                    try {
-                        ref.apply(_self, argument);
-                    } catch (e) {
-                        new Error(e);
-                    }
-                }
-            }
-        }
+        this.broadcast.emit(event, argument);
     }
 
     private isLeftBlankInitialized(): boolean {
