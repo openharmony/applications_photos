@@ -231,8 +231,8 @@ struct FormEditorPage {
     }
 
     aboutToDisappear() {
-        this.appBroadcast.off(BroadcastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
-        this.appBroadcast.off(Constants.FROM_PLAYBACK_INTERVAL, this.onChangeFunc);
+        this.appBroadcast.off(BroadcastConstants.SAVE_FORM_EDITOR_DATA, null);
+        this.appBroadcast.off(Constants.FROM_PLAYBACK_INTERVAL, null);
     }
 
     onChange(value) {
