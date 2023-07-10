@@ -600,6 +600,7 @@ struct PhotoGridPage {
         screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
         this.onWindowSizeChangeCallBack = null;
         mediaObserver.unregisterObserver(this.dataObserver);
+        this.dataObserver.clearSource();
     }
 
     build() {
