@@ -106,9 +106,10 @@ struct DistributedAlbumSetPage {
     }
 
     aboutToDisappear(): void {
-        broadcastManager.getBroadcast().off(BroadcastConstants.ON_REMOTE_CHANGED,
-        this.onUpdateRemoteDevice.bind(this));
+        this.broadCast.off(null, null);
+        broadcastManager.getBroadcast().off(BroadcastConstants.ON_REMOTE_CHANGED, null);
         mediaObserver.unregisterObserver(this.dataObserver);
+        this.dataObserver.clearSource();
     }
 
     onPageShow() {
