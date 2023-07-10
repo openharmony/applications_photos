@@ -117,6 +117,7 @@ struct AlbumSelect {
     }
 
     aboutToDisappear(): void {
+        this.broadCast.off(null, null);
         screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
         this.onWindowSizeChangeCallBack = null;
     }
