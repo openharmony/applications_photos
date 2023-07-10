@@ -121,6 +121,10 @@ struct Tab {
     })
   }
 
+  aboutToDisappear() {
+    this.appBroadcast.off(BroadcastConstants.RESET_TAB_SELECTED_STATUE, null);
+  }
+
   build() {
     Flex({
       direction: FlexDirection.Column,
