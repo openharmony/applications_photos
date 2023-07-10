@@ -229,11 +229,11 @@ export struct AlbumSetPage {
         this.broadCast.off(null, null);
         this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, null);
         this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, null);
-        this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, null);
         this.appBroadcast.off(BroadcastConstants.RESET_ZERO, null);
         screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
         this.onWindowSizeChangeCallBack = null;
         mediaObserver.unregisterObserver(this.dataObserver);
+        this.dataObserver.clearSource();
     }
 
     // Callback when the page is show.
