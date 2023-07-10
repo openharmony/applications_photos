@@ -283,7 +283,7 @@ struct NewAlbumPage {
 
     aboutToDisappear(): void {
         this.broadCast.off(null, null);
-        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
+        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, null);
     }
 
     build() {
