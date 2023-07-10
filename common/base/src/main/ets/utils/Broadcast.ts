@@ -14,61 +14,60 @@
  */
 
 export class Broadcast {
-    private callBackArray = [];
+    private callBackArray: Map<string, Function[]> = new Map();
 
     constructor() {
     }
 
-    public on(event, callback) {
-        (this.callBackArray[event] || (this.callBackArray[event] = [])).push(callback);
+    public on(event: string, callback: Function): void {
+        let cbs = this.callBackArray.get(event);
+        if (!cbs) {
+            cbs = new Array<Function>();
+            this.callBackArray.set(event, cbs);
+        }
+        cbs.push(callback);
     }
 
-    public off(event, callback) {
+    public off(event: string, callback: Function): void {
         if (event == null) {
-            this.callBackArray = [];
-        }
-
-        const cbs = this.callBackArray[event];
-        if (!cbs) {
+            this.callBackArray = new Map();
             return;
         }
         if (callback == null) {
-            this.callBackArray[event] = null;
+            this.callBackArray.delete(event);
+            return;
         }
-        let cb;
-        let i = cbs.length;
-        while (i-- > 0) {
-            cb = cbs[i];
-            if (cb === callback || cb.fn === callback) {
+
+        const cbs = this.callBackArray.get(event);
+        if (!cbs) {
+            return;
+        }
+        let length = cbs.length;
+        for (let i = 0; i < length; i++) {
+            let cb = cbs[i];
+            if (cb === callback) {
                 cbs.splice(i, 1);
                 break;
             }
         }
     }
 
-    public emit(event, args: any[]) {
-        let _self = this;
-        if (!this.callBackArray[event]) {
+    public emit(event: string, args: unknown[]): void {
+        let cbs = this.callBackArray.get(event);
+        if (!cbs) {
             return;
         }
-        let cbs = [...this.callBackArray[event]];
-        if (cbs) {
-            let l = cbs.length;
-            for (let i = 0; i < l; i++) {
-                try {
-                    cbs[i].apply(_self, args);
-                } catch (e) {
-                    new Error(e);
-                }
+        let l = cbs.length;
+        for (let i = 0; i < l; i++) {
+            try {
+                cbs[i].apply(this, args);
+            } catch (e) {
+                new Error(e);
             }
         }
     }
 
-    public release() {
-        this.callBackArray.forEach((array) => {
-            array.length = 0;
-        });
-        this.callBackArray.length = 0;
-        this.callBackArray = [];
+    public release(): void {
+        this.callBackArray.clear();
     }
 }
