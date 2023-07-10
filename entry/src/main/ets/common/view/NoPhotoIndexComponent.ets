@@ -34,6 +34,11 @@ export struct NoPhotoIndexComponent {
         this.updateImageSize();
     }
 
+    aboutToDisappear(): void {
+        screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.reSizeFunc);
+        this.reSizeFunc = null;
+    }
+
     reSizeLayout() {
         this.updateImageSize();
     }

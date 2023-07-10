@@ -87,6 +87,7 @@ struct PhotoGridPage {
     private isMediaLibDataChanged: boolean = true;
     @State actionBarProp: ActionBarProp = new ActionBarProp();
     @State toolBarMenuList: Action[] = new Array<Action>();
+    onWindowSizeChangeCallBack = () => this.initGridRowCount();
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar(this.title, this.isSelectedMode,
@@ -468,9 +469,7 @@ struct PhotoGridPage {
             this.appBroadcast.on(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
         }
 
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
-            this.initGridRowCount();
-        });
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
 
         this.initGridRowCount();
         this.moreMenuList = [Action.MOVE, Action.COPY, Action.INFO];
@@ -596,12 +595,12 @@ struct PhotoGridPage {
     aboutToDisappear(): void {
         Log.info(TAG, `aboutToDisappear`);
         this.broadCast.off(null, null);
-        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
-        this.appBroadcast.off(BroadcastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
+        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, null);
+        this.appBroadcast.off(BroadcastConstants.ON_REMOTE_CHANGED, null);
+        screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+        this.onWindowSizeChangeCallBack = null;
         mediaObserver.unregisterObserver(this.dataObserver);
-        this.dataObserver = undefined;
-        this.scroller = undefined;
-        this.barModel = undefined;
+        this.dataObserver.clearSource();
     }
 
     build() {

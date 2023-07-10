@@ -118,9 +118,11 @@ struct ThirdSelectPhotoBrowser {
     }
 
     aboutToDisappear(): void {
+        this.broadCast.off(null, null);
         screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000');
         this.broadCast.release();
         mMultimodalInputManager.unregisterListener();
+        this.controller = undefined;
     }
 
     onToggleBars() {

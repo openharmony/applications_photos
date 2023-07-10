@@ -42,17 +42,21 @@ export class MultimodalInputManager {
         'finalKeyDownDuration': 0
     };
 
+    leftKeyCallback;
+    rightKeyCallback;
+    escKeyCallback;
+
     async registerListener(callback) {
         Log.debug(TAG, `registerListener start`);
-        inputConsumer.on('key', this.leftKeyOptions, (data) => {
+        inputConsumer.on('key', this.leftKeyOptions, this.leftKeyCallback = (data) => {
             Log.debug(TAG, `notificationRegister data: ${JSON.stringify(data)}`);
             callback(0);
         });
-        inputConsumer.on('key', this.rightKeyOptions, (data) => {
+        inputConsumer.on('key', this.rightKeyOptions, this.rightKeyCallback = (data) => {
             Log.debug(TAG, `controlRegister data: ${JSON.stringify(data)}`);
             callback(1);
         });
-        inputConsumer.on('key', this.escKeyOptions, (data) => {
+        inputConsumer.on('key', this.escKeyOptions, this.escKeyCallback = (data) => {
             Log.debug(TAG, `escRegister data: ${JSON.stringify(data)}`);
             callback(2);
         });
@@ -61,15 +65,12 @@ export class MultimodalInputManager {
 
     async unregisterListener() {
         Log.debug(TAG, `unregisterListener start`);
-        inputConsumer.off('key', this.leftKeyOptions, (data) => {
-            Log.debug(TAG, `notificationUnregister data: ${JSON.stringify(data)}`);
-        });
-        inputConsumer.off('key', this.rightKeyOptions, (data) => {
-            Log.debug(TAG, `controlUnregister data: ${JSON.stringify(data)}`);
-        });
-        inputConsumer.off('key', this.escKeyOptions, (data) => {
-            Log.debug(TAG, `escUnregister data: ${JSON.stringify(data)}`);
-        });
+        inputConsumer.off('key', this.leftKeyOptions, this.leftKeyCallback);
+        this.leftKeyCallback = undefined;
+        inputConsumer.off('key', this.rightKeyOptions, this.rightKeyCallback);
+        this.rightKeyCallback = undefined;
+        inputConsumer.off('key', this.escKeyOptions, this.escKeyCallback);
+        this.escKeyCallback = undefined;
         Log.debug(TAG, `unregisterListener end`);
     }
 }

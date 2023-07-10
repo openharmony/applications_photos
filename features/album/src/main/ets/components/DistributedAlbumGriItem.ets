@@ -31,15 +31,18 @@ export struct DistributedAlbumGriItem {
     @StorageLink('isSidebar') isSidebar: boolean = screenManager.isSidebar();
     gridAspectRatio = WindowConstants.CARD_ASPECT_RATIO;
     albumCountMarginRight = WindowConstants.ALBUM_SET_NEW_ICON_SIZE + WindowConstants.ALBUM_SET_NEW_ICON_MARGIN * 2;
+    onWindowSizeChangeCallBack = () => this.updateCardSize();
 
     aboutToAppear(): void {
         Log.info(TAG, 'aboutToAppear new opp');
 
-        let self = this;
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
-            self.updateCardSize();
-        })
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
         this.updateCardSize();
+    }
+
+    aboutToDisappear(): void {
+        screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+        this.onWindowSizeChangeCallBack = null;
     }
 
     updateCardSize() {

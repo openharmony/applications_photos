@@ -127,6 +127,7 @@ struct SelectPhotoBrowser {
         screenManager.setNavigationBarColor('#00FFFFFF', '#FF000000');
         this.broadCast.release();
         mMultimodalInputManager.unregisterListener();
+        this.controller = undefined;
     }
 
     onToggleBars() {

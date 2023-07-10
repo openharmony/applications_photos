@@ -93,6 +93,7 @@ export struct AlbumSetPage {
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
     private distributedDataSource: DistributedDataSource = new DistributedDataSource();
     private isMediaLibDataChanged: boolean = true;
+    onWindowSizeChangeCallBack = () => this.initGridRowCount();
 
     @State actionBarProp: ActionBarProp = new ActionBarProp();
     @State toolBarMenuList: Action[] = new Array<Action>();
@@ -206,9 +207,7 @@ export struct AlbumSetPage {
         this.onMenuClicked = this.onMenuClicked.bind(this);
         this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect(index));
 
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
-            self.initGridRowCount();
-        });
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
         if (this.currentIndex == Constants.LOCAL_TAB_INDEX) {
             this.tabs[Constants.LOCAL_TAB_INDEX].isSelected = true;
             this.tabs[Constants.OTHER_EQUIPMENT_TAB_INDEX].isSelected = false;
@@ -228,15 +227,13 @@ export struct AlbumSetPage {
     aboutToDisappear(): void {
         Log.info(TAG, `aboutToDisappear`);
         this.broadCast.off(null, null);
-        this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-        this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-        this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        this.appBroadcast.off(BroadcastConstants.RESET_ZERO, this.onResetZero.bind(this));
+        this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, null);
+        this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, null);
+        this.appBroadcast.off(BroadcastConstants.RESET_ZERO, null);
+        screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+        this.onWindowSizeChangeCallBack = null;
         mediaObserver.unregisterObserver(this.dataObserver);
-        this.dataObserver = undefined;
-        this.scroller = undefined;
-        this.tabsController = undefined;
-        this.barModel = undefined;
+        this.dataObserver.clearSource();
     }
 
     // Callback when the page is show.

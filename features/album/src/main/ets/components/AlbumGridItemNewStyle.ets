@@ -56,17 +56,23 @@ export struct AlbumGridItemNewStyle {
     @State cardWidth: number = 0;
     @State cardHeight: number = 0;
     @State thumbnail: string = "";
+    onWindowSizeChangeCallBack = () => this.updateCardSize();
 
     aboutToAppear(): void {
         Log.debug(TAG, `aboutToAppear`);
         this.selectable = this.item.id != MediaConstants.ALBUM_ID_RECYCLE;
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.updateCardSize());
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
         startTrace("loadAlbumItem");
         this.item.load().then(() => {
             finishTrace("loadAlbumItem");
             this.thumbnail = this.item.getThumbnail();
         })
         this.updateCardSize();
+    }
+
+    aboutToDisappear(): void {
+        screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+        this.onWindowSizeChangeCallBack = null;
     }
 
     onIndexPageShow(): void {

@@ -510,7 +510,10 @@ struct PhotoBrowser {
             return;
         }
         mediaObserver.unregisterObserver(this.dataObserver);
+        this.dataObserver.clearSource();
         mMultimodalInputManager.unregisterListener();
+        this.broadCast.off(null, null);
+        this.controller = undefined;
     }
 
     aboutToAppear(): void {

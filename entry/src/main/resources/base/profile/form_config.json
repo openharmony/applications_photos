@@ -13,7 +13,6 @@
       "isDefault": true,
       "updateEnabled": true,
       "scheduledUpdateTime": "10:30",
-      "updateDuration": 1,
       "formConfigAbility": "ability://com.ohos.photos.MainAbility",
       "defaultDimension": "2*2",
       "supportDimensions": [
@@ -33,7 +32,6 @@
       "isDefault": true,
       "updateEnabled": true,
       "scheduledUpdateTime": "10:30",
-      "updateDuration": 1,
       "formConfigAbility": "ability://com.ohos.photos.MainAbility",
       "defaultDimension": "2*4",
       "supportDimensions": [
@@ -53,7 +51,6 @@
       "isDefault": true,
       "updateEnabled": true,
       "scheduledUpdateTime": "10:30",
-      "updateDuration": 1,
       "formConfigAbility": "ability://com.ohos.photos.MainAbility",
       "defaultDimension": "4*4",
       "supportDimensions": [

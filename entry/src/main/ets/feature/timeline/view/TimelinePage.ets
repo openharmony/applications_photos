@@ -85,6 +85,7 @@ export struct TimelinePage {
     private isMediaLibDataChanged: boolean = true;
     @State actionBarProp: ActionBarProp = new ActionBarProp();
     @State toolBarMenuList: Action[] = new Array<Action>();
+    onWindowSizeChangeCallBack = () => this.initGridRowCount();
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar(this.isSelectedMode,
@@ -98,7 +99,7 @@ export struct TimelinePage {
         Log.info(TAG, 'aboutToAppear');
         this.moreMenuList = [Action.MOVE_INVALID, Action.COPY_INVALID, Action.INFO_INVALID];
         mediaObserver.registerObserver(this.dataObserver);
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => this.initGridRowCount());
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
 
         this.appBroadcast.on(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
         this.appBroadcast.on(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
@@ -181,11 +182,15 @@ export struct TimelinePage {
 
     aboutToDisappear(): void {
         Log.info(TAG, 'TimelinePageAboutToDisappear');
-        this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-        this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-        this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorAndSelectState.bind(this));
+        this.appBroadcast.off(BroadcastConstants.BACK_PRESS_EVENT, null);
+        this.appBroadcast.off(BroadcastConstants.ON_TAB_CHANGED, null);
+        this.appBroadcast.off(BroadcastConstants.RESET_STATE_EVENT, null);
+        this.appBroadcast.off(BroadcastConstants.UPDATE_DATA_SOURCE, null);
+        this.appBroadcast.off(BroadcastConstants.RESET_ZERO, null);
+        screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+        this.onWindowSizeChangeCallBack = null;
         mediaObserver.unregisterObserver(this.dataObserver);
+        this.dataObserver.clearSource();
         this.broadCast.off(null, null);
     }
 

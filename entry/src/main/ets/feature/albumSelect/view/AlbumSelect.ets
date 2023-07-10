@@ -54,6 +54,7 @@ struct AlbumSelect {
     private barModel: AlbumSelectBarModel = new AlbumSelectBarModel();
     private albumsDataSource: AlbumsDataSource = new AlbumsDataSource();
     @State actionBarProp: ActionBarProp = new ActionBarProp();
+    onWindowSizeChangeCallBack = this.initGridRowCount();
 
     updateActionBar(): void {
         this.actionBarProp = this.barModel.createActionBar();
@@ -66,10 +67,7 @@ struct AlbumSelect {
             this.isEmpty = size == 0;
             this.isHideScrollBar = (size <= (this.gridColumnsCount * Constants.NUMBER_3 - Constants.NUMBER_1));
         });
-        let self = this;
-        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, () => {
-            self.initGridRowCount();
-        });
+        screenManager.on(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
         this.onActive();
 
         this.gridColumnsCount = UiUtil.getAlbumGridCount(false);
@@ -119,6 +117,9 @@ struct AlbumSelect {
     }
 
     aboutToDisappear(): void {
+        this.broadCast.off(null, null);
+        screenManager.off(screenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+        this.onWindowSizeChangeCallBack = null;
     }
 
     onPageShow() {

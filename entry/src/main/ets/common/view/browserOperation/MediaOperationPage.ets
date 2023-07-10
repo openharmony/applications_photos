@@ -159,6 +159,11 @@ struct MediaOperationPage {
         return true;
     }
 
+    aboutToDisappear(): void {
+        Log.info(TAG, `aboutToDisappear`);
+        this.broadCast.off(null, null);
+    }
+
     onPageShow() {
         this.appBroadcast.emit(BroadcastConstants.THIRD_ROUTE_PAGE, []);
     }
