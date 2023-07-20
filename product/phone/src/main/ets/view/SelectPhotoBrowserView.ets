@@ -84,7 +84,6 @@ export struct SelectPhotoBrowserView {
 
   aboutToAppear(): void {
     Log.info(TAG, 'photoBrowser aboutToAppear');
-    this.hideBars();
     this.geometryTransitionId = AppStorage.Get('geometryTransitionBrowserId')
     Log.info(TAG, `photoBrowser aboutToAppear  ${this.geometryTransitionId}`);
     this.backgroundColorResource = $r('app.color.black');
@@ -151,21 +150,10 @@ export struct SelectPhotoBrowserView {
   }
 
   aboutToDisappear(): void {
-    this.showBars()
     this.broadCast.release();
     this.dataSource.release();
     mMultimodalInputManager.unregisterListener();
     this.appBroadCast.off(BroadCastConstants.SELECT_PHOTO_BROWSER_BACK_PRESS_EVENT, null);
-  }
-
-  showBars(): void {
-    this.backgroundColorResource = $r('app.color.default_background_color');
-    ScreenManager.getInstance().setSystemUi(true);
-  }
-
-  hideBars(): void {
-    this.backgroundColorResource = $r('app.color.black');
-    ScreenManager.getInstance().setSystemUi(false);
   }
 
   onDataSizeChanged(size: number): void {
@@ -282,6 +270,7 @@ export struct SelectPhotoBrowserView {
           // @ts-ignore
         .transition(TransitionEffect.opacity(0))
     }
+    .padding({ bottom: $r('app.float.title_default') })
   }
 
   pageTransition() {
