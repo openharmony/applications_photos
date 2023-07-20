@@ -49,17 +49,20 @@ export class MediaConstants {
     static readonly ALBUM_ID_SNAPSHOT = 'default_snapshot';
     static readonly ALBUM_ID_REMOTE = 'default_remote';
     static readonly ALBUM_DISABLE_COPY_LIST = new Set([
+        MediaConstants.ALBUM_ID_CAMERA,
         MediaConstants.ALBUM_ID_ALL,
         MediaConstants.ALBUM_ID_VIDEO,
         MediaConstants.ALBUM_ID_RECYCLE,
-        MediaConstants.ALBUM_ID_FAVOR
+        MediaConstants.ALBUM_ID_FAVOR,
+        MediaConstants.ALBUM_ID_SNAPSHOT
     ]);
     static readonly ALBUM_DISABLE_DELETE_LIST = new Set([
         MediaConstants.ALBUM_ID_ALL,
         MediaConstants.ALBUM_ID_CAMERA,
         MediaConstants.ALBUM_ID_VIDEO,
         MediaConstants.ALBUM_ID_RECYCLE,
-        MediaConstants.ALBUM_ID_FAVOR
+        MediaConstants.ALBUM_ID_FAVOR,
+        MediaConstants.ALBUM_ID_SNAPSHOT
     ]);
     static readonly ALBUM_DISABLE_NEW_LIST = new Set([
         MediaConstants.ALBUM_ID_ALL,
