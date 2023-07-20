@@ -126,8 +126,6 @@ export struct ThirdSelectPhotoBrowserBase {
 
     this.dataSource.setBroadCast(this.broadCast);
 
-    this.broadCast.on(BrowserConstants.TOGGLE_BAR, this.toggleBars.bind(this));
-    this.broadCast.on(BrowserConstants.HIDE_BARS, this.hideBars.bind(this));
     this.broadCast.on(BrowserConstants.PULL_DOWN_END, this.onBackPress.bind(this));
     this.broadCast.on(BrowserConstants.DATA_SIZE_CHANGED, this.onDataSizeChanged.bind(this));
     this.broadCast.on(BroadCastConstants.SELECT, this.selectCallback.bind(this));
@@ -146,26 +144,6 @@ export struct ThirdSelectPhotoBrowserBase {
     this.broadCast.release();
     this.dataSource.release();
     mMultimodalInputManager.unregisterListener();
-  }
-
-  toggleBars() {
-    if (this.isShowBar) {
-      this.hideBars();
-    } else {
-      this.showBars();
-    }
-  }
-
-  showBars(): void {
-    if (!this.isShowBar) {
-      this.isShowBar = true;
-    }
-  }
-
-  hideBars() {
-    if (this.isShowBar) {
-      this.isShowBar = false;
-    }
   }
 
   onDataSizeChanged(size: number): void {
@@ -231,8 +209,6 @@ export struct ThirdSelectPhotoBrowserBase {
 
   onPageShow() {
     Log.debug(TAG, 'onPageShow');
-    // hide status bar
-    ScreenManager.getInstance().setSystemUi(false);
     this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
     this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [true, this.mTransition]);
   }
@@ -377,6 +353,7 @@ export struct ThirdSelectPhotoBrowserBase {
       this.buildCheckBox()
       this.buildPanel()
     }
+    .padding({ bottom: $r('app.float.title_default') })
   }
 
   pageTransition() {
@@ -418,7 +395,7 @@ export struct ThirdSelectPhotoBrowserBase {
         Log.debug(TAG, `setPickResult. updateFormData obj: ${currentPhoto.uri}  currentIndex: ${this.currentIndex}`);
         this.appBroadCast.emit(BroadCastConstants.SAVE_FORM_EDITOR_DATA,
           ["", AppStorage.Get(FormConstants.FORM_ITEM_ALBUM_URI), AppStorage.Get(FormConstants.FORM_ITEM_DISPLAY_NAME),
-            currentPhoto.uri, false]);
+          currentPhoto.uri, false]);
       } else {
         Log.error(TAG, 'Fa setPickResult is null');
       }
