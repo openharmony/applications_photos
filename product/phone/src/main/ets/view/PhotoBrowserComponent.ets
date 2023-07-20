@@ -93,7 +93,7 @@ export struct PhotoBrowserComponent {
   @StorageLink('PhotoGridPageIndex') PhotoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0,0];
+    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @StorageLink('entryFromHap') entryFromHap: number = Constants.ENTRY_FROM_NONE;
   mTransition: string;
   albumUri = '';
