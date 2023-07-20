@@ -1098,7 +1098,7 @@ export struct PhotoBrowserComponent {
       });
     }
     this.updateActionBar();
-	if (!this.isHorizontal) {
+    if (!this.isHorizontal) {
       ScreenManager.getInstance().setSystemUi(true);
     }
     this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
@@ -1194,9 +1194,10 @@ export struct PhotoBrowserComponent {
 
         if (!this.isHorizontal) {
           PhotoBrowserToolBar({
-            onMenuClicked: this.onMenuClicked.bind(this), 
+            onMenuClicked: this.onMenuClicked.bind(this),
             isFromPhotoBrowser: true,
-            isFromTrash:this.isFromTrash
+            isFromTrash: this.isFromTrash,
+            isFromFACard: this.isFromFACard
           })
             .opacity(this.geometryOpacity)
               // @ts-ignore
