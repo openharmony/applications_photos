@@ -93,7 +93,7 @@ export struct PhotoBrowserComponent {
   @StorageLink('PhotoGridPageIndex') PhotoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0,0];
   @StorageLink('entryFromHap') entryFromHap: number = Constants.ENTRY_FROM_NONE;
   mTransition: string;
   albumUri = '';
@@ -1098,7 +1098,7 @@ export struct PhotoBrowserComponent {
       });
     }
     this.updateActionBar();
-	if (!this.isHorizontal) {
+    if (!this.isHorizontal) {
       ScreenManager.getInstance().setSystemUi(true);
     }
     this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
@@ -1194,9 +1194,10 @@ export struct PhotoBrowserComponent {
 
         if (!this.isHorizontal) {
           PhotoBrowserToolBar({
-            onMenuClicked: this.onMenuClicked.bind(this), 
+            onMenuClicked: this.onMenuClicked.bind(this),
             isFromPhotoBrowser: true,
-            isFromTrash:this.isFromTrash
+            isFromTrash: this.isFromTrash,
+            isFromFACard: this.isFromFACard
           })
             .opacity(this.geometryOpacity)
               // @ts-ignore
