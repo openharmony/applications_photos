@@ -945,8 +945,7 @@ export struct PhotoGridView {
     .opacity(this.photoGridViewOpacity)
     .backgroundColor($r('app.color.default_background_color'))
     .padding({
-      top: this.leftBlank[1],
-      bottom: this.leftBlank[3]
+      top: this.leftBlank[1]
     })
   }
 
