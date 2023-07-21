@@ -138,7 +138,6 @@ export struct PhotoBrowserComponent {
   private theDeleteItem: MediaItem;
   private geometryTransitionEnable: boolean = false;
   private isShowMenuFromThirdView: boolean = true;
-  @State isFromTrash: boolean = false;
 
   onPageChanged() {
     Log.info(TAG, `call page status changed ${this.pageStatus}`)
@@ -764,7 +763,6 @@ export struct PhotoBrowserComponent {
         this.isFromFACard = true;
         this.geometryTransitionEnable = true;
       } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
-        this.isFromTrash = true;
         this.dataSource.setAlbumUri(this.albumUri);
         this.dataSource.setAlbumDataSource(AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER));
       } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
@@ -1196,7 +1194,7 @@ export struct PhotoBrowserComponent {
           PhotoBrowserToolBar({
             onMenuClicked: this.onMenuClicked.bind(this),
             isFromPhotoBrowser: true,
-            isFromTrash: this.isFromTrash,
+            isFromCamera: this.isFromCamera,
             isFromFACard: this.isFromFACard
           })
             .opacity(this.geometryOpacity)
