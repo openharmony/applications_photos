@@ -8,7 +8,7 @@
         "designWidth": 720,
         "autoDesignWidth": true
       },
-      "formVisibleNotify": true,
+
       "colorMode": "auto",
       "isDefault": true,
       "updateEnabled": true,
@@ -27,7 +27,7 @@
         "designWidth": 720,
         "autoDesignWidth": true
       },
-      "formVisibleNotify": true,
+
       "colorMode": "auto",
       "isDefault": true,
       "updateEnabled": true,
@@ -46,7 +46,6 @@
         "designWidth": 720,
         "autoDesignWidth": true
       },
-      "formVisibleNotify": true,
       "colorMode": "auto",
       "isDefault": true,
       "updateEnabled": true,
