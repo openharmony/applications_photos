@@ -34,7 +34,7 @@ export struct PhotoBrowserToolBar {
   noAnimation: boolean = true;
   @Consume hidePopup: boolean;
   private isFromPhotoBrowser = false;
-  private isFromTrash: boolean;
+  private isFromCamera: boolean;
   private isFromFACard: boolean;
 
   aboutToAppear(): void {
@@ -71,7 +71,7 @@ export struct PhotoBrowserToolBar {
       ToolBar({
         onMenuClicked: this.onMenuClicked,
         isFromPhotoBrowser: this.isFromPhotoBrowser,
-        isFromTrash: this.isFromTrash,
+        isFromCamera: this.isFromCamera,
         isFromFACard: this.isFromFACard
       })
     }
