@@ -67,7 +67,6 @@ export class FormController {
             .then((data) => {
                 Log.info(TAG, `updateFormData, data: ${JSON.stringify(data)}`);
                 if (this.mediaDataManager.getIsShowAlbumName()) {
-                    Log.debug(TAG, `this.time111 111 updateRefreshTime ${this.mediaDataManager.getIntervalTime()}`);
                     formProvider.setFormNextRefreshTime(formId, this.mediaDataManager.getIntervalTime()).then(() => {
                          Log.error(TAG, `setFormNextRefreshTime successfully!`);
                         if (this.callback != null) {
