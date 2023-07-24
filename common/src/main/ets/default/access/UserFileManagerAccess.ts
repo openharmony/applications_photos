@@ -715,7 +715,7 @@ export class UserFileManagerAccess {
   }
 
   isPhotoAlbum(album: Album): boolean {
-    return album.albumSubType == UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE;
+    return album.albumSubType === UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE;
   }
 
   isVideoAlbum(album: Album): boolean {
