@@ -77,6 +77,3 @@ export class AlbumInfo {
     return `${this.uri}_${this.coverUri}_${this.count}_${this.albumName}`;
   }
 }
-function fileAsset(fileAsset: any): boolean {
-throw new Error('Function not implemented.');
-}
