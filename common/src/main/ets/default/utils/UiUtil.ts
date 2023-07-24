@@ -212,7 +212,7 @@ export class UiUtil {
     AppStorage.SetOrCreate<string>('geometryTransitionBrowserId',
       geometryTransitionString);
     Log.debug(TAG, 'this.geometryTransitionId = ' + geometryTransitionString +
-      ', placeholderIndex = ' + geometryTapIndex);
+    ', placeholderIndex = ' + geometryTapIndex);
   }
 
   static getRouterParams(params: Object): Object {
@@ -240,35 +240,5 @@ export class UiUtil {
       }
     }
     return true;
-  }
-
-  static getDisplayNameResourceByAlbumId(albumId: string): Resource {
-    let res: Resource = null;
-    switch (albumId) {
-      case AlbumDefine.ALBUM_ID_ALL:
-        res = $r('app.string.album_all');
-        break;
-      case AlbumDefine.ALBUM_ID_VIDEO:
-        res = $r('app.string.album_video');
-        break;
-      case AlbumDefine.ALBUM_ID_RECYCLE:
-        res = $r('app.string.album_recycle');
-        break;
-      case AlbumDefine.ALBUM_ID_CAMERA:
-        res = $r('app.string.album_camera');
-        break;
-      case AlbumDefine.ALBUM_ID_FAVOR:
-        res = $r('app.string.album_favor');
-        break;
-      case AlbumDefine.ALBUM_ID_REMOTE:
-        res = $r('app.string.album_remote_device');
-        break;
-      case AlbumDefine.ALBUM_ID_SNAPSHOT:
-        res = $r('app.string.album_screen_shot');
-        break;
-      default:
-        break;
-    }
-    return res;
   }
 }
