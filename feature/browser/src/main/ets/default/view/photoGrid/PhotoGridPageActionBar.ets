@@ -22,7 +22,8 @@ import {
   AlbumInfo,
   Constants,
   Log,
-  ScreenManager
+  ScreenManager,
+  UiUtil
 } from '@ohos/common';
 
 const TAG: string = 'browser_PhotoGridPageActionBar';
@@ -77,7 +78,7 @@ export struct PhotoGridPageActionBar {
 
     actionBarProp
       .setLeftAction(Action.BACK)
-      .setTitle(this.albumInfo.albumName)
+      .setTitle(this.getTitle(this.albumInfo))
       .setMode(ActionBarMode.STANDARD_MODE);
     if (this.isSelectedMode) {
       if (this.isRecycle) {
@@ -124,7 +125,7 @@ export struct PhotoGridPageActionBar {
 
     actionBarProp
       .setLeftAction(Action.BACK)
-      .setTitle(this.albumInfo.albumName)
+      .setTitle(this.getTitle(this.albumInfo))
       .setMenuList(menuList)
       .setMode(ActionBarMode.STANDARD_MODE);
     Log.info(TAG, `createActionBar, isSelectedMode: ${this.isSelectedMode}`);
@@ -138,5 +139,13 @@ export struct PhotoGridPageActionBar {
     }
 
     return actionBarProp;
+  }
+
+  private getTitle(albumInfo: AlbumInfo): Resource | string {
+    let res = UiUtil.getDisplayNameResourceByAlbumInfo(albumInfo);
+    if (res != null) {
+      return res;
+    }
+    return this.title;
   }
 }
