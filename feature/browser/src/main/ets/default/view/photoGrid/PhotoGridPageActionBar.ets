@@ -22,8 +22,7 @@ import {
   AlbumInfo,
   Constants,
   Log,
-  ScreenManager,
-  UserFileManagerAccess
+  ScreenManager
 } from '@ohos/common';
 
 const TAG: string = 'browser_PhotoGridPageActionBar';
