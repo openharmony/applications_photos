@@ -20,7 +20,7 @@ import { ScreenManager } from '../model/common/ScreenManager';
 import prompt from '@system.prompt';
 import type window from '@ohos.window';
 import type { Action } from '../view/browserOperation/Action';
-import { AlbumDefine } from '../model/browser/AlbumDefine';
+import { AlbumInfo } from '../model/browser/album/AlbumInfo';
 
 const TAG: string = 'common_UiUtil';
 
@@ -242,33 +242,20 @@ export class UiUtil {
     return true;
   }
 
-  static getDisplayNameResourceByAlbumId(albumId: string): Resource {
+  static getDisplayNameResourceByAlbumInfo(albumInfo: AlbumInfo): Resource {
     let res: Resource = null;
-    switch (albumId) {
-      case AlbumDefine.ALBUM_ID_ALL:
-        res = $r('app.string.album_all');
-        break;
-      case AlbumDefine.ALBUM_ID_VIDEO:
-        res = $r('app.string.album_video');
-        break;
-      case AlbumDefine.ALBUM_ID_RECYCLE:
-        res = $r('app.string.album_recycle');
-        break;
-      case AlbumDefine.ALBUM_ID_CAMERA:
-        res = $r('app.string.album_camera');
-        break;
-      case AlbumDefine.ALBUM_ID_FAVOR:
-        res = $r('app.string.album_favor');
-        break;
-      case AlbumDefine.ALBUM_ID_REMOTE:
-        res = $r('app.string.album_remote_device');
-        break;
-      case AlbumDefine.ALBUM_ID_SNAPSHOT:
-        res = $r('app.string.album_screen_shot');
-        break;
-      default:
-        break;
+    if (albumInfo.isPhotoAlbum) {
+      return $r('app.string.album_photos');
+    } else if (albumInfo.isFavorAlbum) {
+      return $r('app.string.album_favor');
+    } else if (albumInfo.isVideoAlbum) {
+      return $r('app.string.album_video');
+    } else if (albumInfo.isTrashAlbum) {
+      return $r('app.string.album_recycle');
+    } else if (albumInfo.isScreenShotAlbum) {
+      return $r('app.string.album_screen_shot');
+    } else {
+      return res;
     }
-    return res;
   }
 }

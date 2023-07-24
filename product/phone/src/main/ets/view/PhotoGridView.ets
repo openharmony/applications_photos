@@ -800,6 +800,7 @@ export struct PhotoGridView {
     Column() {
       PhotoGridPageActionBar({
         title: this.title,
+        albumInfo: this.albumInfo,
         isSystemAlbum: this.albumInfo.isSystemAlbum,
         onMenuClicked: this.onMenuClicked,
         isRecycle: this.albumInfo.isTrashAlbum,
