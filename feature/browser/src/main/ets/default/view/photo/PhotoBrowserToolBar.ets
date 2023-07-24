@@ -35,7 +35,6 @@ export struct PhotoBrowserToolBar {
   @Consume hidePopup: boolean;
   private isFromPhotoBrowser = false;
   private isFromTrash: boolean;
-  private isFromFACard: boolean;
 
   aboutToAppear(): void {
     Log.debug(TAG, `isShowBar=${this.isShowBar}, isHorizontal=${this.isHorizontal}`);
@@ -71,8 +70,7 @@ export struct PhotoBrowserToolBar {
       ToolBar({
         onMenuClicked: this.onMenuClicked,
         isFromPhotoBrowser: this.isFromPhotoBrowser,
-        isFromTrash: this.isFromTrash,
-        isFromFACard: this.isFromFACard
+        isFromTrash: this.isFromTrash
       })
     }
     .width(Constants.PERCENT_100)

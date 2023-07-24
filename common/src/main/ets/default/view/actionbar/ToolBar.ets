@@ -40,7 +40,6 @@ export struct ToolBar {
   @Consume @Watch("isNeedHidePopup") hidePopup: boolean;
   private isFromPhotoBrowser = false;
   private isFromTrash: boolean;
-  private isFromFACard: boolean;
 
   aboutToAppear(): void {
     this.actionBarProp = this.createActionBar();
@@ -167,7 +166,7 @@ export struct ToolBar {
                                                       right: $r('app.float.actionbar_margin_horizontal') })
     }
     .margin({
-      bottom: this.isFromTrash || this.isFromFACard  ? this.leftBlank[3] : Constants.NUMBER_0
+      bottom: this.isFromTrash ? this.leftBlank[3] : Constants.NUMBER_0
     })
     .width(Constants.PERCENT_100)
     .backgroundColor(this.isFromPhotoBrowser ? $r('app.color.transparent') : this.actionBarProp.getBackgroundColor())

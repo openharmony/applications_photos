@@ -138,7 +138,7 @@ export struct PhotoBrowserComponent {
   private theDeleteItem: MediaItem;
   private geometryTransitionEnable: boolean = false;
   private isShowMenuFromThirdView: boolean = true;
-  @State isFromTrash: boolean = false;
+  private isFromTrash = false;
 
   onPageChanged() {
     Log.info(TAG, `call page status changed ${this.pageStatus}`)
@@ -1196,8 +1196,7 @@ export struct PhotoBrowserComponent {
           PhotoBrowserToolBar({
             onMenuClicked: this.onMenuClicked.bind(this),
             isFromPhotoBrowser: true,
-            isFromTrash: this.isFromTrash,
-            isFromFACard: this.isFromFACard
+            isFromTrash: this.isFromTrash
           })
             .opacity(this.geometryOpacity)
               // @ts-ignore

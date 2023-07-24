@@ -81,6 +81,7 @@ export struct PhotoGridPage {
           browserController: this.browserController
         })
       }
+      .padding({ bottom: $r('app.float.title_default') })
 
       if (this.browserController.isBrowserShow) {
         Column() {
