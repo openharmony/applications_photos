@@ -515,12 +515,4 @@ export struct AlbumGridItemNewStyle {
       return this.currentRightClickMenuList.length > 0
     }
   }
-
-  // private getDisplayName(albumInfo : AlbumInfo): Resource | string {
-  //   let res = UiUtil.getDisplayNameResourceByAlbumInfo(albumInfo);
-  //   if (res != null) {
-  //     return res;
-  //   }
-  //   return this.item.albumName;
-  // }
 }
