@@ -19,9 +19,11 @@ import {
   ActionBarMode,
   ActionBarProp,
   ActionBarSelectionMode,
+  AlbumInfo,
   Constants,
   Log,
-  ScreenManager
+  ScreenManager,
+  UserFileManagerAccess
 } from '@ohos/common';
 
 const TAG: string = 'browser_PhotoGridPageActionBar';
@@ -36,6 +38,7 @@ export struct PhotoGridPageActionBar {
   @Link @Watch('updateActionBarProp') totalSelectedCount: number;
   @Consume isEmpty: boolean;
   title: string;
+  albumInfo: AlbumInfo;
   isSystemAlbum: boolean;
   isRecycle: boolean;
   onMenuClicked: Function;
@@ -75,7 +78,7 @@ export struct PhotoGridPageActionBar {
 
     actionBarProp
       .setLeftAction(Action.BACK)
-      .setTitle(this.title)
+      .setTitle(this.albumInfo.albumName)
       .setMode(ActionBarMode.STANDARD_MODE);
     if (this.isSelectedMode) {
       if (this.isRecycle) {
@@ -122,7 +125,7 @@ export struct PhotoGridPageActionBar {
 
     actionBarProp
       .setLeftAction(Action.BACK)
-      .setTitle(this.title)
+      .setTitle(this.albumInfo.albumName)
       .setMenuList(menuList)
       .setMode(ActionBarMode.STANDARD_MODE);
     Log.info(TAG, `createActionBar, isSelectedMode: ${this.isSelectedMode}`);
