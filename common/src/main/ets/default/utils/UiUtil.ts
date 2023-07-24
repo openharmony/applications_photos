@@ -212,7 +212,7 @@ export class UiUtil {
     AppStorage.SetOrCreate<string>('geometryTransitionBrowserId',
       geometryTransitionString);
     Log.debug(TAG, 'this.geometryTransitionId = ' + geometryTransitionString +
-    ', placeholderIndex = ' + geometryTapIndex);
+      ', placeholderIndex = ' + geometryTapIndex);
   }
 
   static getRouterParams(params: Object): Object {
