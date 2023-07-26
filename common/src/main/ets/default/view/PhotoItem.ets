@@ -94,6 +94,7 @@ export struct PhotoItem {
   private isFromFACard: boolean = false;
   private dataSource: PhotoDataSource;
   private isDefaultFA: boolean = false;
+  onWindowSizeChangeCallBack = () => this.onWindowSizeChanged();
 
   onGeometryIdChange() {
     this.geometryTransitionId = (this.mPosition === this.currentIndex) ? this.geometryTransitionBrowserId : 'default_id';
@@ -117,32 +118,7 @@ export struct PhotoItem {
         }
       });
     }
-    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-      let winLayoutW = ScreenManager.getInstance().getWinLayoutWidth();
-      let winLayoutH = ScreenManager.getInstance().getWinLayoutHeight();
-      if (this.windowLayoutWidth !== winLayoutW || this.windowLayoutHeight !== winLayoutH) {
-        Log.debug(TAG, `size change. oldWH: [${this.windowLayoutWidth}, ${this.windowLayoutHeight}]`
-        + `, newWH: [${winLayoutW}, ${winLayoutH}]`);
-        this.windowLayoutWidth = winLayoutW;
-        this.windowLayoutHeight = winLayoutH;
-        this.windowColumns = ScreenManager.getInstance().getScreenColumns();
-        // 跟随屏幕旋转动效同时对Image的宽高重新赋值
-        animateTo({
-          duration: Constants.SCREEN_ROTATE_DURATION,
-          curve: PhotoConstants.PHOTO_TRANSITION_CURVE,
-          onFinish: () => {
-            this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
-            this.animationOption = null;
-            this.animationEndMatrix = null;
-          }
-        }, () => {
-          this.eventPipelineSizeChange();
-          this.matrix = this.animationEndMatrix;
-          this.calculateImagePos();
-          this.updateListCardWidth();
-        });
-      }
-    });
+    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     this.broadCast.on(PhotoConstants.RESET_DEFAULT_SCALE + this.item.uri, () => {
       this.resetScaleAnimation(Matrix4.identity().copy());
     });
@@ -165,6 +141,33 @@ export struct PhotoItem {
     Log.info(TAG, `aboutToAppear ${this.item.uri} end`);
   }
 
+  onWindowSizeChanged(): void {
+    let winLayoutW = ScreenManager.getInstance().getWinLayoutWidth();
+    let winLayoutH = ScreenManager.getInstance().getWinLayoutHeight();
+    if (this.windowLayoutWidth !== winLayoutW || this.windowLayoutHeight !== winLayoutH) {
+      Log.debug(TAG, `size change. oldWH: [${this.windowLayoutWidth}, ${this.windowLayoutHeight}]`
+      + `, newWH: [${winLayoutW}, ${winLayoutH}]`);
+      this.windowLayoutWidth = winLayoutW;
+      this.windowLayoutHeight = winLayoutH;
+      this.windowColumns = ScreenManager.getInstance().getScreenColumns();
+      // 跟随屏幕旋转动效同时对Image的宽高重新赋值
+      animateTo({
+        duration: Constants.SCREEN_ROTATE_DURATION,
+        curve: PhotoConstants.PHOTO_TRANSITION_CURVE,
+        onFinish: () => {
+          this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
+          this.animationOption = null;
+          this.animationEndMatrix = null;
+        }
+      }, () => {
+        this.eventPipelineSizeChange();
+        this.matrix = this.animationEndMatrix;
+        this.calculateImagePos();
+        this.updateListCardWidth();
+      });
+    }
+  }
+
   eventPipelineSizeChange(): void {
     this.eventPipeline.onComponentSizeChanged(vp2px(this.windowLayoutWidth), vp2px(this.windowLayoutHeight));
   }
@@ -175,17 +178,12 @@ export struct PhotoItem {
       AppStorage.Delete(PhotoConstants.MATRIX);
     }
     if (this.dataSource) {
-      this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, (addCount) => {
-      });
+      this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, null);
     }
-    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-      this.eventPipelineSizeChange();
-      this.calculateImagePos();
-      this.updateListCardWidth();
-    });
-    this.broadCast.off(PhotoConstants.RESET_DEFAULT_SCALE + this.item.uri, () => {
-      this.resetScaleAnimation(Matrix4.identity().copy());
-    });
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+    this.onWindowSizeChangeCallBack = null;
+    this.broadCast.off(PhotoConstants.RESET_DEFAULT_SCALE + this.item.uri, null);
+    this.broadCast.off(PhotoConstants.SAVE_SCALE, null);
     this.lcdPixelMapUpdate = false;
     Log.info(TAG, `aboutToDisappear ${this.item.uri} end`);
   }
@@ -573,7 +571,7 @@ export struct PhotoItem {
                   url: 'pages/VideoBrowser',
                   params: {
                     uri: this.item.uri,
-                    dateTaken: this.item.dateTaken,
+                    dateTaken: this.item.getDataTaken(),
                     previewUri: this.thumbnail
                   }
                 })
@@ -714,7 +712,7 @@ export struct PhotoItem {
               url: 'pages/VideoBrowser',
               params: {
                 uri: this.item.uri,
-                dateTaken: this.item.dateTaken,
+                dateTaken: this.item.getDataTaken(),
                 previewUri: this.thumbnail
               }
             })
