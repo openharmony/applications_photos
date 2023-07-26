@@ -16,189 +16,188 @@
 import router from '@ohos.router';
 import {
   Action,
-  AlbumDefine,
   BigDataConstants,
   BroadCast,
   BroadCastConstants,
   BroadCastManager,
+  BrowserConstants,
   BrowserController,
-  CommonObserverCallback,
   Constants,
-  GridScrollBar,
-  ImageGridItemComponent,
   Log,
-  MediaDataSource,
   MediaItem,
-  MediaObserver,
-  NoPhotoIndexComponent,
-  PhotoDataImpl,
+  mMultimodalInputManager,
+  PhotoBrowserBg,
+  PhotoDataSource,
+  PhotoSwiper,
   ReportToBigDataUtil,
   ScreenManager,
   SelectUtil,
   ThirdSelectManager,
-  UiUtil,
-  UserFileManagerAccess,
-  ViewData,
+  ThirdSelectPhotoBrowserActionBar,
 } from '@ohos/common';
-import { ThirdSelectedPageActionBar } from './ThirdSelectedPageActionBar';
+import { FormConstants, IS_HORIZONTAL } from '../utils/ThirdSelectConstants';
 import { ThirdSelectedPanel } from './ThirdSelectedPanel';
-import { CameraGridItemComponent } from './CameraGridItemComponent';
-import {
-  FormConstants,
-  IS_HORIZONTAL,
-  IS_SPLIT_MODE,
-  LEFT_BLANK,
-  SelectParams,
-  THIRD_SELECT_IS_ORIGIN
-} from '../utils/ThirdSelectConstants';
+import { MouseTurnPageOperation } from '@ohos/browser';
 
-const TAG: string = 'thiSel_ThirdSelectPhotoGridBase';
+const TAG: string = 'thiSel_ThirdSelectPhotoBrowserBase';
 
-// Third Select Album Page
+// third selection photoBrowser
 @Component
-export struct ThirdSelectPhotoGridBase {
-  @State selectedCount: number = 0;
-  @Provide isSelectedMode: boolean = true;
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
-  @Provide rightClickMenuList: Array<Action> = new Array<Action>();
-  PhotoDataImpl: PhotoDataImpl;
-  dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
+export struct ThirdSelectPhotoBrowserBase {
+  @Provide backgroundColorResource: Resource = $r('app.color.default_background_color');
+  @State totalSelectedCount: number = 0;
   @Provide broadCast: BroadCast = new BroadCast();
-  @Provide isShow: boolean = true;
+  @Provide isSelected: boolean = true;
+  @State isShowBar: boolean = true;
+  @Provide isDefaultBackgroundColor: boolean = true;
+  @State isPhotoScaled: boolean = false;
+  @Provide pageFrom: number = Constants.ENTRY_FROM.NORMAL;
   selectManager: ThirdSelectManager;
-  isActive = false;
-  @State title: string = '';
-  @State isEmpty: boolean = false;
-  @StorageLink(IS_SPLIT_MODE) isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink(LEFT_BLANK) leftBlank: [number, number, number, number]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  @StorageLink(IS_HORIZONTAL) isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  DEFAULT_TOAST_DURATION = 2000;
-  @State gridRowCount: number = 0;
-  @State isShowScrollBar: boolean = false;
+  bundleName: string = '';
+  isMultiPick = true;
+  mTransition: string;
+  controller: SwiperController = new SwiperController();
+  @Provide('transitionIndex') currentIndex: number = 0;
   @State currentUri: string = '';
-  @Provide isShowBar: boolean = true;
-  scroller: Scroller = new Scroller();
-  isFirstEnter: boolean = false;
+  isFromFa: boolean = false;
+  @Provide canSwipe: boolean = true;
+  // position
+  mPosition: number;
+  @State title: string = '';
   @Prop @Watch('onPageChanged') pageStatus: boolean;
-  backFuncBinder: Function;
-  @State selectParams: SelectParams = SelectParams.defaultParam();
-  @State screenHeight: number = ScreenManager.getInstance().getWinHeight();
-  @StorageLink('placeholderIndex') @Watch('onPlaceholderChanged') placeholderIndex: number = -1;
-  @ObjectLink @Watch('onBrowserControllerChanged') browserController: BrowserController;
+  @StorageLink(IS_HORIZONTAL) isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
+  maxSelectCount: number;
+  @StorageLink('geometryOpacity') geometryOpacity: number = 1;
+  @State @Watch('onGeometryChanged') geometryTransitionId: string = 'default_id';
+  @Link isRunningAnimation: boolean;
+  @ObjectLink browserController: BrowserController;
+  @Provide isDeleting: boolean = false;
+  // DataSource
+  private dataSource: ThirdBrowserDataSource = new ThirdBrowserDataSource();
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
-  private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
-  private selectFromCameraFunc: () => void;
-  private itemId: string = undefined;
-  private isItemIdChange: boolean = false;
-  onWindowSizeChangeCallBack = () => this.initGridRowCount();
+  private geometryTransitionEnable: boolean = false;
+  private isSelectMode: boolean;
 
-  onPlaceholderChanged() {
-    Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
-    if (this.placeholderIndex != -1) {
-      this.scroller.scrollToIndex(this.placeholderIndex);
-    }
-  }
-
-  onBrowserControllerChanged(): void {
-    if (!this.browserController.isBrowserShow) {
-      ScreenManager.getInstance().setSystemUi(true);
-    }
-  }
-
-  onMenuClicked(action: Action) {
-    Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
-    switch (action.actionID) {
-      case Action.BACK.actionID:
-        this.goBackFormEditor();
-        break;
-      case Action.CANCEL.actionID:
-        this.setPickResult(null);
-        break;
-      case Action.OK.actionID:
-        this.setPickResult(SelectUtil.getUriArray(this.selectManager.clickedSet));
-        break;
-      case Action.NAVIGATION_ALBUMS.actionID:
-        let params: any = this.selectParams;
-        params.isFirstEnter = false;
-        let options = {
-          url: 'pages/ThirdSelectAlbumSetPage',
-          params: params
-        }
-        router.pushUrl(options);
-        ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_SWITCH_ALBUM, null);
-        break;
-      default:
-        break;
-    }
+  onGeometryChanged() {
+    AppStorage.SetOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
   }
 
   aboutToAppear(): void {
-    let param: any = router.getParams();
-    this.initSelectParams(param);
-    if (this.selectParams.isFromFa) {
-      this.selectParams.filterMediaType = AlbumDefine.FILTER_MEDIA_TYPE_IMAGE;
-      AppStorage.SetOrCreate(FormConstants.FORM_ITEM_ALBUM_URI, param.uri);
-      AppStorage.SetOrCreate(FormConstants.FORM_ITEM_DISPLAY_NAME, param.itemDisplayName);
+    Log.info(TAG, 'photoBrowser aboutToAppear');
+    this.backgroundColorResource = $r('app.color.black');
+    this.isDefaultBackgroundColor = false;
+    this.geometryTransitionId = AppStorage.Get('geometryTransitionBrowserId');
+    this.browserController.browserBackFunc = this.onBackPress.bind(this);
+    mMultimodalInputManager.registerListener((control: number) => {
+      Log.info(TAG, `key control : ${control} index ${this.currentIndex}`);
+      if (control == 0) {
+        if (this.currentIndex > 0) {
+          this.onPhotoChanged(this.currentIndex - 1);
+        }
+      } else if (control == 1) {
+        if (this.currentIndex < this.dataSource.totalCount() - 1) {
+          this.onPhotoChanged(this.currentIndex + 1);
+        }
+      } else {
+        this.onBackPress();
+      }
+    });
+    this.selectManager = AppStorage.Get(Constants.THIRD_SELECT_MANAGER);
+    this.dataSource.setAlbumDataSource(AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER));
+    this.isMultiPick = this.selectManager.getIsMultiPick();
+    if (this.isMultiPick == true) {
+      this.totalSelectedCount = this.selectManager.getSelectedCount();
+    } else {
+      this.totalSelectedCount = Constants.NUMBER_1;
     }
-    this.dataSource.setFilterMediaType(this.selectParams.filterMediaType);
-    this.initSelectManager();
-    this.selectManager.setIsMultiPick(this.selectParams.isMultiPick);
 
-    let self = this;
-    // 后续phone缩略图支持横竖屏后再放开
-    if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-        self.initGridRowCount();
-      });
+    let param: any = this.browserController.browserParam;
+    this.isFromFa = param.isFromFa;
+    this.isSelectMode = param.selectMode;
+    if (param.selectMode) {
+      this.dataSource.setSelectMode(this.selectManager);
     }
-    this.initGridRowCount();
+    this.onPhotoChanged(param.position);
+    this.mTransition = param.transition;
+    this.bundleName = param.bundleName;
+    this.title = param.title;
+    this.maxSelectCount = param.maxSelectCount;
     this.onMenuClicked = this.onMenuClicked.bind(this);
+
     this.dataSource.setBroadCast(this.broadCast);
-    this.broadCast.on(BroadCastConstants.SELECT, this.onSelectCallback.bind(this));
+
+    this.broadCast.on(BrowserConstants.PULL_DOWN_END, this.onBackPress.bind(this));
+    this.broadCast.on(BrowserConstants.DATA_SIZE_CHANGED, this.onDataSizeChanged.bind(this));
+    this.broadCast.on(BroadCastConstants.SELECT, this.selectCallback.bind(this));
+    this.broadCast.on(BrowserConstants.DATA_CONTENT_CHANGED, this.onPhotoChanged.bind(this, this.currentIndex));
     this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpBrowserCallback.bind(this));
-    this.broadCast.on(Constants.ON_LOADING_FINISHED,
-      (size: number) => {
-        this.onLoadFinishedCallback(size, this.updateTitle.bind(this, param));
-      });
-    this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onReloadFinishedCallback.bind(this));
-    this.selectManager.registerCallback('updateCount',
-      (newState: number) => {
-        Log.info(TAG, `updateSelectedCount ${newState}`);
-        self.selectedCount = newState;
-        self.selectManager.emitCallback('thirdSelectUpdateCount', [newState]);
-      });
-    this.dataSource.registerCallback('updateCount',
-      (newState: number) => {
-        Log.info(TAG, `updateTotalCount ${newState}`);
-        self.isShowScrollBar = (newState > Constants.PHOTOS_CNT_FOR_HIDE_SCROLL_BAR);
-        self.selectManager.setTotalCount(newState);
-      });
-    MediaObserver.getInstance().registerObserver(this.dataObserver);
-    this.isActive = true;
-
-    Log.error(TAG, 'meow data count = ' + this.dataSource.totalCount());
+    this.broadCast.on(BrowserConstants.SET_DISABLE_SWIPE, (value: boolean) => {
+      Log.info(TAG, `set swiper swipe ${value}`);
+      this.canSwipe = value;
+    });
+    if (this.pageStatus) {
+      this.onPageShow();
+    }
   }
 
-  onBackPress() {
-    this.onMenuClicked(this.selectParams.isFromFa ? Action.BACK : Action.CANCEL);
+  aboutToDisappear(): void {
+    this.broadCast.release();
+    this.dataSource.release();
+    mMultimodalInputManager.unregisterListener();
+    this.controller = undefined;
   }
 
-  onPageShow() {
-    Log.debug(TAG, 'onPageShow');
-    let param: any = router.getParams();
-    this.isItemIdChange = this.itemId && param && this.itemId !== param.itemId;
-    if (this.isItemIdChange) {
-      this.initSelectParams(param);
+  onDataSizeChanged(size: number): void {
+    Log.info(TAG, `onDataSizeChanged, size is ${size}`);
+    if (size == 0) {
+      this.onBackPress();
     }
+  }
 
-    MediaObserver.getInstance().registerObserver(this.dataObserver);
-    this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
-    this.isShow = true;
-    if (!this.browserController.isBrowserShow) {
-      ScreenManager.getInstance().setSystemUi(true);
+  onPhotoChanged(index: number): void {
+    this.currentIndex = index;
+    let currentPhoto = this.getCurrentPhoto();
+    if (currentPhoto == undefined) {
+      Log.error(TAG, 'onPhotoChanged, item is undefined');
+    } else {
+      this.isSelected = this.selectManager.isItemSelected(currentPhoto.uri);
+      this.currentUri = currentPhoto.uri;
+
+      let dataSourceIndex = this.isSelectMode ? this.selectManager.getSelectItemDataSourceIndex(currentPhoto) : index;
+      let timelineIndex = this.dataSource.getPositionByIndex(dataSourceIndex);
+      AppStorage.SetOrCreate<number>('placeholderIndex', timelineIndex);
+      this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
+      Log.info(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri}, \
+        geometryTransitionId = ${this.geometryTransitionId}, placeholderIndex = ${timelineIndex}`);
     }
-    this.onActive();
+  }
+
+  selectStateChange() {
+    Log.info(TAG, 'change selected.');
+    let currentPhoto = this.getCurrentPhoto();
+    if (currentPhoto == undefined) {
+      return;
+    }
+    this.isSelected = !this.isSelected;
+    if (this.isSelected) {
+      this.selectManager.toggle(currentPhoto.uri, true);
+    } else {
+      this.selectManager.toggle(currentPhoto.uri, false);
+    }
+    this.totalSelectedCount = this.selectManager.getSelectedCount();
+    this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
+    Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change geometryTransitionId ${this.geometryTransitionId}`);
+  }
+
+  selectCallback(position: number, key: string, value: boolean) {
+    if (key === this.currentUri) {
+      this.isSelected = value;
+    }
+    if (this.selectManager) {
+      this.selectManager.toggle(key, value);
+    }
+    this.totalSelectedCount = this.selectManager.getSelectedCount();
+    Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after select callback`);
   }
 
   onPageChanged() {
@@ -209,358 +208,255 @@ export struct ThirdSelectPhotoGridBase {
     }
   }
 
+  onPageShow() {
+    Log.debug(TAG, 'onPageShow');
+    this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
+    this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [true, this.mTransition]);
+  }
+
   onPageHide() {
     Log.debug(TAG, 'onPageHide');
-    this.isShow = false;
-    this.onInActive();
+    this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, this.mTransition]);
   }
 
-  aboutToDisappear(): void {
-    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.onWindowSizeChangeCallBack = null;
-    MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-    this.dataObserver.clearSource();
-    this.broadCast.off(null, null);
-    this.dataSource.releaseBroadCast();
-    Log.info(TAG, `call aboutToDisappear`)
-  }
-
-  onMediaLibDataChange(changeType) {
-    Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
-    this.dataSource.onChange(changeType);
-  }
-
-  getGeometryTransitionId(item: ViewData, index: number): string {
-    return TAG + item.mediaItem.getHashCode() + this.selectManager.isItemSelected(item?.mediaItem?.uri);
-  }
-
-  @Builder buildGrid() {
-    Grid(this.scroller) {
-      if (!this.selectParams.isFromFa) {
-        GridItem() {
-          CameraGridItemComponent({
-            selectParams: this.selectParams,
-            updateDataFunc: (uri: string) => {
-              Log.debug(TAG, `get camera callback, uri ${uri}`)
-              this.dataSource.initData();
-              this.selectFromCameraFunc = () => {
-                this.onSelectCallback(0, uri, true, null);
-              }
-            }
-          })
+  onMenuClicked(action: Action) {
+    Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
+    switch (action.actionID) {
+      case Action.BACK.actionID:
+        let msg = {
+          'From': BigDataConstants.BY_CLICK,
         }
-        .aspectRatio(1)
-      }
-      LazyForEach(this.dataSource, (item, index?: number) => {
-        if (!!item) {
-          GridItem() {
-            ImageGridItemComponent({
-              dataSource: this.dataSource,
-              item: item?.mediaItem,
-              isSelected: this.selectManager.isItemSelected(item?.mediaItem?.uri),
-              pageName: Constants.PHOTO_TRANSITION_ALBUM,
-              isThird: true,
-              mPosition: item?.viewIndex,
-              isThirdMultiPick: this.selectParams.isMultiPick,
-              geometryTransitionString: this.getGeometryTransitionId(item, index),
-              selectedCount: $selectedCount
-            })
-          }
-          .aspectRatio(1)
-          .zIndex(index === this.placeholderIndex ? 1 : 0)
-        }
-      }, (item, index) => {
-        if (item == null || item == undefined) {
-          return JSON.stringify(item) + index;
-        }
-        return this.getGeometryTransitionId(item, index);
-      })
+        ReportToBigDataUtil.report(BigDataConstants.ESC_PHOTO_BROWSER_WAY, msg);
+        this.onBackPress();
+        return;
+      case Action.MATERIAL_SELECT.actionID:
+        Log.info(TAG, 'click UN_SELECTED');
+        this.selectStateChange();
+        return;
+      case Action.SELECTED.actionID:
+        Log.info(TAG, 'click SELECTED');
+        this.selectStateChange();
+        return;
+      case Action.OK.actionID:
+        Log.info(TAG, 'click OK');
+        this.setPickResult();
+        break;
+      default:
+        break;
     }
-    .edgeEffect(EdgeEffect.Spring)
-    .scrollBar(BarState.Off)
-    .gridStyle(this.gridRowCount)
+  }
+
+  getCurrentPhoto(): MediaItem {
+    return this.dataSource.getData(this.currentIndex).data;
+  }
+
+  onBackPress() {
+    if (this.geometryTransitionEnable) {
+      this.controller.finishAnimation(this.onBackPressInner.bind(this));
+    } else {
+      router.back({
+        url: '',
+        params: { index: this.currentIndex }
+      });
+    }
+    return true;
+  }
+
+  @Builder buildCheckBox() {
+    if (this.isMultiPick) {
+      Row() {
+        Image(this.isSelected ? $r('app.media.picker_checkbox_selected_dark') : $r('app.media.picker_checkbox_unselected_dark'))
+          .width($r('app.float.icon_size'))
+          .aspectRatio(1)
+          .key('Checkbox_' + this.currentIndex)
+          .margin({
+            right: $r('sys.float.ohos_id_max_padding_end'),
+            bottom: $r('app.float.picker_browser_checkbox_margin_bottom')
+          })
+          .onClick(() => {
+            this.selectStateChange();
+          })
+      }
+      .justifyContent(FlexAlign.End)
+      .width('100%')
+      .visibility(this.isShowBar ? Visibility.Visible : Visibility.Hidden)
+      .opacity(this.geometryOpacity)
+      // @ts-ignore
+      .transition(TransitionEffect.opacity(0))
+      .hitTestBehavior(HitTestMode.Transparent)
+    }
+  }
+
+  @Builder buildPanel() {
+    ThirdSelectedPanel({
+      maxSelectCount: this.maxSelectCount,
+      onMenuClicked: this.onMenuClicked,
+      isBrowserMode: true,
+      isMultiPick: this.isMultiPick,
+      mTransition: TAG,
+      isFromFa: this.isFromFa,
+      currentUri: this.currentUri,
+      isShowBar: $isShowBar,
+      totalSelectedCount: $totalSelectedCount
+    })
+      .opacity(this.geometryOpacity)
+        // @ts-ignore
+      .transition(TransitionEffect.opacity(0))
+      .hitTestBehavior(HitTestMode.Transparent)
   }
 
   build() {
-    Column() {
-      ThirdSelectedPageActionBar({
-        leftAction: this.selectParams.isFromFa ? Action.BACK : Action.CANCEL,
-        isSelectPhotoGrid: true,
-        title: $title,
-        selectParams: this.selectParams,
-        onMenuClicked: this.onMenuClicked,
-        isFirstEnter: this.isFirstEnter,
-        totalSelectedCount: $selectedCount
-      })
+    Stack({ alignContent: Alignment.Bottom }) {
+      Stack({ alignContent: Alignment.TopStart }) {
+        PhotoBrowserBg({ isShowBar: $isShowBar })
+          .opacity(this.geometryOpacity)
+            // @ts-ignore
+          .transition(TransitionEffect.opacity(0))
 
-      if (this.selectParams.isFromFa && this.isEmpty) {
-        NoPhotoIndexComponent({ index: Constants.TIMELINE_PAGE_INDEX, hasBarSpace: false })
-      }
-      Stack() {
-        this.buildGrid()
-        if (this.isShowScrollBar) {
-          GridScrollBar({ scroller: this.scroller });
-        }
-      }
-      .layoutWeight(1)
-
-      if (this.selectParams.isMultiPick) {
-        ThirdSelectedPanel({
-          maxSelectCount: this.selectParams.maxSelectCount,
-          onMenuClicked: this.onMenuClicked,
-          mTransition: TAG,
-          currentUri: this.currentUri,
-          isShowBar: $isShowBar,
-          totalSelectedCount: $selectedCount,
-          dataSource: this.dataSource
+        PhotoSwiper({
+          dataSource: this.dataSource,
+          mTransition: this.mTransition,
+          onPhotoChanged: this.onPhotoChanged.bind(this),
+          swiperController: this.controller,
+          verifyPhotoScaledFunc: this.verifyPhotoScaled.bind(this),
+          geometryTransitionEnable: true,
+          broadCast: $broadCast,
+          isRunningAnimation: $isRunningAnimation
         })
+
+        if (this.isHorizontal) {
+          MouseTurnPageOperation({
+            dataSource: this.dataSource,
+            controller: this.controller,
+            isPhotoScaled: this.isPhotoScaled,
+            isShowBar: this.isShowBar
+          })
+            .opacity(this.geometryOpacity)
+              // @ts-ignore
+            .transition(TransitionEffect.opacity(0))
+            .hitTestBehavior(HitTestMode.Transparent)
+
+        }
+        ThirdSelectPhotoBrowserActionBar({
+          isMultiPick: this.isMultiPick,
+          onMenuClicked: this.onMenuClicked,
+          title: this.title,
+          isThird: true,
+          isShowBar: $isShowBar,
+          totalSelectedCount: $totalSelectedCount
+        })
+          .opacity(this.geometryOpacity)
+            // @ts-ignore
+          .transition(TransitionEffect.opacity(0))
+          .hitTestBehavior(HitTestMode.Transparent)
       }
+
+      this.buildCheckBox()
+      this.buildPanel()
     }
-    .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
-    .padding({
-      top: this.leftBlank[1],
-      bottom: this.leftBlank[3]
-    })
+    .padding({ bottom: $r('app.float.title_default') })
   }
 
-  jumpToBrowserNormal(targetIndex: number, name: string, item: MediaItem, isSelectMode = false): void {
-    router.pushUrl({
-      url: 'pages/ThirdSelectPhotoBrowser',
-      params: {
-        position: targetIndex,
-        bundleName: this.selectParams.bundleName,
-        transition: name,
-        title: this.title,
-        selectMode: isSelectMode,
-        maxSelectCount: this.selectParams.maxSelectCount,
-        isFromFa: this.selectParams.isFromFa
-      }
-    });
+  pageTransition() {
+    PageTransitionEnter({ type: RouteType.None, duration: BrowserConstants.PAGE_SHOW_ANIMATION_DURATION })
+      .opacity(0)
+    PageTransitionExit({ duration: BrowserConstants.PAGE_SHOW_ANIMATION_DURATION })
+      .opacity(0)
   }
 
-  jumpToBrowserGeometryTransition(targetIndex: number, name: string, item: MediaItem, isSelectMode = false,
-                                  geometryTapIndex: number = undefined,
-                                  geometryTransitionString: string = undefined): void {
-    this.browserController.showBrowser(geometryTapIndex, geometryTransitionString, TAG, {
-      position: targetIndex,
-      bundleName: this.selectParams.bundleName,
-      transition: name,
-      title: this.title,
-      selectMode: isSelectMode,
-      maxSelectCount: this.selectParams.maxSelectCount,
-      isFromFa: this.selectParams.isFromFa
-    });
-  }
-
-  private initGridRowCount(): void {
-    let contentWidth = ScreenManager.getInstance().getWinWidth();
-    let margin = 0;
-    let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
-    let calCount = Math.round(
-      ((contentWidth - Constants.NUMBER_2 * margin) + Constants.GRID_GUTTER)
-      / (maxThumbWidth + Constants.GRID_GUTTER));
-    let newCount = Math.max(Constants.GRID_MIN_COUNT, calCount);
-    if (newCount != this.gridRowCount) {
-      this.gridRowCount = newCount;
-    }
-    Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}, row count ${this.gridRowCount}`);
-  }
-
-  private initSelectParams(param) {
-    if (param != null) {
-      this.isItemIdChange = this.itemId && this.itemId !== param.itemId;
-      this.itemId = param.itemId == undefined ? AlbumDefine.ALBUM_ID_ALL : param.itemId;
-      this.dataSource.setAlbumUri(this.itemId);
-
-      let albumUri = param.uri == undefined ?
-        UserFileManagerAccess.getInstance().getSystemAlbumUri(UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE) :
-        param.uri;
-      this.dataSource.setAlbumUri(albumUri);
-      this.updateTitle(param);
-      this.selectParams.bundleName = param.bundleName;
-      this.selectParams.isMultiPick = param.isMultiPick;
-      if (param.isFromFa != undefined || param.isFromFa != null) {
-        this.selectParams.isFromFa = param.isFromFa;
-      }
-      if (param.isFromFaPhoto != undefined || param.isFromFaPhoto != null) {
-        this.selectParams.isFromFaPhoto = param.isFromFaPhoto;
-      }
-      if (param.isFirstEnter != undefined || param.isFirstEnter != null) {
-        this.isFirstEnter = param.isFirstEnter;
-      }
-      if (!!param.filterMediaType) {
-        this.selectParams.filterMediaType = param.filterMediaType;
-      }
-      this.selectParams.isFromWallpaper = param.isFromWallpaper;
-      if (this.selectParams.isFromWallpaper) {
-        this.selectParams.maxSelectCount = param.remainingOfWallpapers;
-      } else if (!!param.maxSelectCount && param.maxSelectCount > 0) {
-        this.selectParams.maxSelectCount = param.maxSelectCount > Constants.LIMIT_MAX_THIRD_SELECT_COUNT
-          ? Constants.LIMIT_MAX_THIRD_SELECT_COUNT
-          : param.maxSelectCount;
-      }
-      if (this.backFuncBinder) {
-        this.backFuncBinder(this.onBackPress.bind(this));
-      }
-      Log.debug(TAG, `select param ${JSON.stringify(this.selectParams)}`);
-    }
-    this.isSelectedMode = this.selectParams.isMultiPick;
-    Log.debug(TAG, `select param ${JSON.stringify(this.selectParams)}, select mode ${this.isSelectedMode}`);
-  }
-
-  private updateTitle(param) {
-    let displayName = param.itemDisplayName == undefined ? $r('app.string.album_all') : param.itemDisplayName;
-    if (typeof displayName === 'object') {
-      UiUtil.getResourceString(displayName).then((stringResource) => {
-        this.title = stringResource;
-      })
+  verifyPhotoScaled(matrix: any) {
+    if (!!matrix) {
+      let mat = matrix.copy().matrix4x4
+      let xScale = mat[Constants.NUMBER_0]
+      let yScale = mat[Constants.NUMBER_5]
+      Log.info(TAG, `photo in PhotoItem has Scaled x scale: ${xScale}, y scale: ${yScale}, mat: ${mat}`)
+      this.isPhotoScaled = xScale != 1 || yScale != 1
     } else {
-      this.title = displayName;
+      this.isPhotoScaled = false
+      Log.info(TAG, `photo in PhotoItem has not Scaled isPhotoScaled: ${this.isPhotoScaled}`)
     }
-    Log.debug(TAG, `update title ${this.title}`);
   }
 
-  private onSelectCallback(position: number, key: string, value: boolean, callback: Function) {
-    Log.debug(TAG, `isHorizontal ${this.isHorizontal}, position ${position}, uri ${key}, select ${value}`)
-    let isMultiPick = this.selectParams.isMultiPick;
-    if (value && isMultiPick && this.selectedCount >= this.selectParams.maxSelectCount) {
-      if (!this.isHorizontal) {
-        UiUtil.showToast($r('app.string.up_to_limit_tips'));
+  private onBackPressInner(): void {
+    this.browserController.hideBrowser();
+  }
+
+  private jumpBrowserCallback(name: string, item: MediaItem, isSelectMode = false) {
+    if (this.dataSource && item && this.currentUri != item.uri) {
+      let tgtIndex = this.dataSource.getDataIndex(item);
+      Log.debug(TAG, `jump to index ${tgtIndex}`)
+      this.onPhotoChanged(tgtIndex);
+    }
+  }
+
+  private setPickResult(): void {
+    if (this.isFromFa) {
+      let currentPhoto = this.getCurrentPhoto();
+      if (currentPhoto) {
+        Log.debug(TAG, `setPickResult. updateFormData obj: ${currentPhoto.uri}  currentIndex: ${this.currentIndex}`);
+        this.appBroadCast.emit(BroadCastConstants.SAVE_FORM_EDITOR_DATA,
+          ["", AppStorage.Get(FormConstants.FORM_ITEM_ALBUM_URI), AppStorage.Get(FormConstants.FORM_ITEM_DISPLAY_NAME),
+          currentPhoto.uri, false]);
+      } else {
+        Log.error(TAG, 'Fa setPickResult is null');
       }
       return;
     }
-    if (!isMultiPick) {
-      // update correct status from select manager
-      value = !this.selectManager.isItemSelected(key);
-      this.selectManager.deSelectAll();
-    }
-    if (this.selectManager.toggle(key, value, position)) {
-      Log.info(TAG, 'enter event process');
-      this.dataSource.onDataChanged(this.dataSource.getDataIndexByUri(key));
-      callback && callback(value);
-    }
-  }
-
-  private jumpBrowserCallback(name: string, item: MediaItem, geometryTapIndex: number = undefined,
-                              geometryTransitionString: string = undefined, isSelectMode = false) {
-    let targetIndex = isSelectMode ? this.selectManager.getSelectItemIndex(item) : this.dataSource.getDataIndex(item);
-    Log.info(TAG, `jump to photo browser at index: ${targetIndex}, transition: ${name}`);
-    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
-    if (geometryTapIndex != undefined && geometryTransitionString != undefined) {
-      this.jumpToBrowserGeometryTransition(
-        targetIndex, name, item, isSelectMode, geometryTapIndex, geometryTransitionString);
+    let uriArray;
+    if (this.isMultiPick) {
+      uriArray = SelectUtil.getUriArray(this.selectManager.clickedSet);
+      Log.info(TAG, `uri size: ${uriArray}`);
     } else {
-      this.jumpToBrowserNormal(targetIndex, name, item, isSelectMode);
-    }
-    ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_CLICK_PREVIEW, null);
-  }
-
-  private onReloadFinishedCallback() {
-    Log.info(TAG, 'ON_DATA_RELOADED');
-    this.dataSource.onDataReloaded();
-    this.selectFromCameraFunc && this.selectFromCameraFunc();
-    this.selectFromCameraFunc = undefined;
-  }
-
-  private onLoadFinishedCallback(size: number, updateTitle: Function) {
-    Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
-    this.isEmpty = size == 0;
-    if (this.isEmpty && updateTitle) {
-      updateTitle();
-    }
-    Log.info(TAG, `isEmpty: ${this.isEmpty}`)
-    this.dataSource.onDataReloaded();
-  }
-
-  private initSelectManager() {
-    let manager: ThirdSelectManager = AppStorage.Get(Constants.THIRD_SELECT_MANAGER);
-    if (manager && manager.getClassName() === 'ThirdSelectManager') {
-      Log.debug(TAG, `use cached select manager, current select count ${manager.getSelectedCount()}`);
-      this.selectManager = manager;
-    } else {
-      Log.debug(TAG, 'create new select manager');
-      this.selectManager = new ThirdSelectManager();
-      AppStorage.SetOrCreate(Constants.THIRD_SELECT_MANAGER, this.selectManager);
-    }
-    if (this.isFirstEnter) {
-      Log.debug(TAG, 'clear select manager');
-      this.selectManager.deSelectAll();
-      AppStorage.SetOrCreate(THIRD_SELECT_IS_ORIGIN, false);
-    }
-    this.selectManager.setGetMediaItemFunc(this.dataSource.getMediaItemByUri.bind(this.dataSource));
-  }
-
-  private onActive() {
-    if (this.isItemIdChange) {
-      this.isActive = false;
-      this.dataSource && this.dataSource.initData();
-    }
-
-    if (!this.isActive) {
-      Log.info(TAG, 'onActive');
-      this.isActive = true;
-      this.dataSource && this.dataSource.onActive();
-      if (this.selectParams.isMultiPick) {
-        this.dataSource.forceUpdate();
+      let currentPhoto = this.getCurrentPhoto();
+      if (currentPhoto == undefined) {
+        return;
       }
+      uriArray = [currentPhoto.uri];
     }
-  }
-
-  private onInActive() {
-    if (this.isActive) {
-      Log.info(TAG, 'onInActive');
-      this.isActive = false;
-      this.dataSource && this.dataSource.onInActive();
-    }
-  }
-
-  private setPickResult(uriArray: Array<string>): void {
-    let isOrigin: boolean = AppStorage.Get(THIRD_SELECT_IS_ORIGIN);
-    if (isOrigin == undefined) {
-      isOrigin = false;
-    }
+    let promise: Promise<void> = SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
     let abilityResult = {
       'resultCode': 0,
       'want': {
         'parameters': {
           'select-item-list': uriArray,
-          'isOriginal': isOrigin
         }
       }
     };
-    let self = this;
-    let uriLength = 0;
-    if (uriArray == null && uriArray == undefined) {
+    promise.then(function () {
+      Log.info(TAG, `grant permission success.`);
       globalThis.photosAbilityContext.terminateSelfWithResult(abilityResult).then((result) => {
-        Log.debug(TAG, `terminateSelfWithResult result: ${result}, self result ${JSON.stringify(abilityResult)}`);
+        Log.info(TAG, `terminateSelf result: ${result}`);
       });
-    } else {
-      uriLength = uriArray.length;
-      SelectUtil.grantPermissionForUris(uriArray, self.selectParams.bundleName).then(function () {
-        Log.info(TAG, `grant permission success.`);
-        globalThis.photosAbilityContext.terminateSelfWithResult(abilityResult).then((result) => {
-          Log.debug(TAG, `terminateSelfWithResult result: ${result}, self result ${JSON.stringify(abilityResult)}`);
-        });
-      }).catch(function (err) {
-        Log.error(TAG, `grant permission error: ${JSON.stringify(err)}, self result ${JSON.stringify(abilityResult)}`);
-      });
-    }
-    ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_RESULT,
-      { "isOriginalChecked": isOrigin, "selectItemSize": uriLength });
-  }
-
-  private goBackFormEditor() {
-    let formEditorOption = {
-      url: 'pages/FormEditorPage'
-    };
-    router.replaceUrl(formEditorOption);
+    }).catch(function (err) {
+      Log.error(TAG, `grant permission error: ${JSON.stringify(err)}`);
+    });
   }
 }
 
-@Extend(Grid) function gridStyle(gridCount: number) {
-  .columnsTemplate('1fr '.repeat(gridCount))
-  .columnsGap(Constants.GRID_GUTTER)
-  .rowsGap(Constants.GRID_GUTTER)
-  .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
-  .layoutWeight(1)
+/**
+ * 用于预览已选中的图片的dataSource
+ * 数据源取自selectManager的当前已选中图片
+ */
+class ThirdBrowserDataSource extends PhotoDataSource {
+  private isSelectMode = false;
+  private selectedItems: MediaItem[] = new Array<MediaItem>();
+
+  totalCount() {
+    if (this.isSelectMode) {
+      return this.selectedItems.length;
+    }
+    return super.totalCount();
+  }
+
+  getData(index: number): any {
+    if (this.isSelectMode) {
+      return this.packData(index, this.selectedItems[index]);
+    }
+    return super.getData(index);
+  }
+
+  setSelectMode(manager: ThirdSelectManager) {
+    this.isSelectMode = true;
+    this.selectedItems = manager.getSelectItems();
+  }
 }
