@@ -91,7 +91,6 @@ export struct ThirdSelectPhotoGridBase {
   private selectFromCameraFunc: () => void;
   private itemId: string = undefined;
   private isItemIdChange: boolean = false;
-  onWindowSizeChangeCallBack = () => this.initGridRowCount();
 
   onPlaceholderChanged() {
     Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
@@ -148,7 +147,9 @@ export struct ThirdSelectPhotoGridBase {
     let self = this;
     // 后续phone缩略图支持横竖屏后再放开
     if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
+        self.initGridRowCount();
+      });
     }
     this.initGridRowCount();
     this.onMenuClicked = this.onMenuClicked.bind(this);
@@ -214,10 +215,7 @@ export struct ThirdSelectPhotoGridBase {
   }
 
   aboutToDisappear(): void {
-    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.onWindowSizeChangeCallBack = null;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-    this.dataObserver.clearSource();
     this.broadCast.off(null, null);
     this.dataSource.releaseBroadCast();
     Log.info(TAG, `call aboutToDisappear`)
