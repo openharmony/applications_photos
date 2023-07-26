@@ -91,6 +91,7 @@ export struct ThirdSelectPhotoGridBase {
   private selectFromCameraFunc: () => void;
   private itemId: string = undefined;
   private isItemIdChange: boolean = false;
+  onWindowSizeChangeCallBack = () => this.initGridRowCount();
 
   onPlaceholderChanged() {
     Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
@@ -147,9 +148,7 @@ export struct ThirdSelectPhotoGridBase {
     let self = this;
     // 后续phone缩略图支持横竖屏后再放开
     if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-        self.initGridRowCount();
-      });
+      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     }
     this.initGridRowCount();
     this.onMenuClicked = this.onMenuClicked.bind(this);
@@ -215,7 +214,10 @@ export struct ThirdSelectPhotoGridBase {
   }
 
   aboutToDisappear(): void {
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+    this.onWindowSizeChangeCallBack = null;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+    this.dataObserver.clearSource();
     this.broadCast.off(null, null);
     this.dataSource.releaseBroadCast();
     Log.info(TAG, `call aboutToDisappear`)
@@ -369,8 +371,8 @@ export struct ThirdSelectPhotoGridBase {
       this.dataSource.setAlbumUri(this.itemId);
 
       let albumUri = param.uri == undefined ?
-        UserFileManagerAccess.getInstance().getSystemAlbumUri(UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE) :
-        param.uri;
+      UserFileManagerAccess.getInstance().getSystemAlbumUri(UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE) :
+      param.uri;
       this.dataSource.setAlbumUri(albumUri);
       this.updateTitle(param);
       this.selectParams.bundleName = param.bundleName;
