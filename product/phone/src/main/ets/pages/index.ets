@@ -96,7 +96,7 @@ struct IndexPage {
     }
     animateTo({
       duration: this.isShowPhotoGridView ?
-      BrowserConstants.PHONE_LINK_IN_TAB_BAR_DURATION : BrowserConstants.PHONE_LINK_OUT_TAB_BAR_DURATION,
+        BrowserConstants.PHONE_LINK_IN_TAB_BAR_DURATION : BrowserConstants.PHONE_LINK_OUT_TAB_BAR_DURATION,
       curve: Curve.Sharp
     }, () => {
       this.isShowTabBar = !this.isShowTabBar;
@@ -361,6 +361,8 @@ struct IndexPage {
       let permissionList: Array<string> = [
         "ohos.permission.READ_IMAGEVIDEO",
         "ohos.permission.WRITE_IMAGEVIDEO",
+        "ohos.permission.READ_MEDIA",
+        "ohos.permission.WRITE_MEDIA",
         "ohos.permission.MEDIA_LOCATION"
       ];
       let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
