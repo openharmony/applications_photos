@@ -177,10 +177,10 @@ export class TimelineDataSource extends MediaDataSource {
       return groupDataList;
     }
     let groupCount = 1;
-    let startTime = mediaItems[0].dateTaken;
-    let endTime = mediaItems[0].dateTaken;
+    let startTime = mediaItems[0].getDataTaken();
+    let endTime = mediaItems[0].getDataTaken();
     for (let i = 1; i < mediaItems.length; i++) {
-      let dateTaken = mediaItems[i].dateTaken;
+      let dateTaken = mediaItems[i].getDataTaken();
       if (DateUtil.isTheSameDay(startTime, dateTaken)) {
         groupCount++;
         endTime = dateTaken;
@@ -281,7 +281,7 @@ export class TimelineDataSource extends MediaDataSource {
     if (!item) {
       return groupCount;
     }
-    let itemTime: number = item.dateTaken;
+    let itemTime: number = item.getDataTaken();
     for (let index = 0; index < this.groups.length; index++) {
       const group: TimelineData = this.groups[index];
       if (DateUtil.isTheSameDay(itemTime, group.startDate)) {
