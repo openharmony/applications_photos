@@ -92,6 +92,7 @@ export struct TimelinePage {
   // 选择模式下，鼠标对着未勾选项按右键弹框时，移动和复制菜单点击事件的标识位
   private isMvOrCpSeparatesItem: boolean = false;
   private mvOrCpSeparatesItem: MediaItem = null;
+  onWindowSizeChangeCallBack = () => this.initGridRowCount();
 
   onPlaceholderChanged() {
     Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
@@ -126,9 +127,7 @@ export struct TimelinePage {
 
     // 后续phone缩略图支持横竖屏后再放开
     if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-        self.initGridRowCount();
-      });
+      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     }
 
     this.appBroadCast.on(BroadCastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
@@ -214,7 +213,7 @@ export struct TimelinePage {
 
     this.broadCast.on(BroadCastConstants.INIT_DATE_TEXT, () => {
       let scrollMediaItem = this.dataSource.getMediaItemByPosition(0);
-      this.dateText = DateUtil.getLocalizedYearAndMonth(scrollMediaItem.dateTaken);
+      this.dateText = DateUtil.getLocalizedYearAndMonth(scrollMediaItem.getDataTaken());
     })
 
     this.mSelectManager.registerCallback('allSelect', this.freezeAdapter((newState: boolean) => {
@@ -285,15 +284,19 @@ export struct TimelinePage {
 
   aboutToDisappear(): void {
     Log.debug(TAG, 'aboutToDisappear');
+    this.broadCast.off(null, null);
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+    this.onWindowSizeChangeCallBack = null;
     if (this.dataSource != null) {
       this.dataSource.unregisterCallback('updateGroupData');
       this.dataSource.unregisterCallback('updateCount');
     }
     if (this.appBroadCast != null) {
-      this.appBroadCast.off(BroadCastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-      this.appBroadCast.off(BroadCastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-      this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-      this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+      this.appBroadCast.off(BroadCastConstants.BACK_PRESS_EVENT, null);
+      this.appBroadCast.off(BroadCastConstants.ON_TAB_CHANGED, null);
+      this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, null);
+      this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, null);
+      this.appBroadCast.off(BroadCastConstants.RESET_ZERO, null);
     }
   }
 
@@ -670,9 +673,9 @@ export struct TimelinePage {
             .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
             .onScrollIndex((first) => {
               let scrollMediaItem = this.dataSource.getMediaItemByPosition(first);
-              if (scrollMediaItem?.dateTaken) {
-                this.dateText = DateUtil.getLocalizedYearAndMonth(scrollMediaItem.dateTaken);
-                Log.debug(TAG, `scrollIndex=${first}, dateTaken=${scrollMediaItem.dateTaken}`);
+              if (scrollMediaItem?.getDataTaken()) {
+                this.dateText = DateUtil.getLocalizedYearAndMonth(scrollMediaItem.getDataTaken());
+                Log.debug(TAG, `scrollIndex=${first}, dateTaken=${scrollMediaItem.getDataTaken()}`);
               } else {
                 Log.warn(TAG, `scrollIndex ${first} out of active window`);
               }

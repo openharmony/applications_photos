@@ -144,6 +144,7 @@ export struct ThirdSelectPhotoBrowserBase {
     this.broadCast.release();
     this.dataSource.release();
     mMultimodalInputManager.unregisterListener();
+    this.controller = undefined;
   }
 
   onDataSizeChanged(size: number): void {

@@ -153,6 +153,8 @@ export struct SelectPhotoBrowserView {
     this.broadCast.release();
     this.dataSource.release();
     mMultimodalInputManager.unregisterListener();
+    this.controller = undefined;
+    this.broadCast.off(null, null);
     this.appBroadCast.off(BroadCastConstants.SELECT_PHOTO_BROWSER_BACK_PRESS_EVENT, null);
   }
 
