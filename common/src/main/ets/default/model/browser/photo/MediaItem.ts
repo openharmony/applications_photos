@@ -27,10 +27,10 @@ export class MediaItem {
   uri: string;
   thumbnail: string;
   duration: number;
-  title: string;
+  private title: string;
   size: number;
-  dateTaken: number;
-  dateModified: number;
+  private dateTaken: number;
+  private dateModified: number;
   orientation: number;
   width: number;
   height: number;
@@ -39,8 +39,9 @@ export class MediaItem {
   isFavor: boolean;
   displayName: string;
   dateTrashed: number;
-  position: userFileManager.PositionType;
+  private position: userFileManager.PositionType;
   hashCode: string;
+  private data: userFileManager.FileAsset;
 
   constructor(data: userFileManager.FileAsset) {
     if (!data) {
@@ -50,11 +51,11 @@ export class MediaItem {
     this.mediaType = data.fileType;
     this.uri = data.uri;
     this.displayName = data.displayName;
-    this.duration = Number(data.get(userFileManager.ImageVideoKey.DURATION.toString()));
-    this.title = String(data.get(userFileManager.ImageVideoKey.TITLE.toString()));
+    this.data = data;
+    if (this.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
+      this.duration = Number(data.get(userFileManager.ImageVideoKey.DURATION.toString()));
+    }
     this.size = Number(data.get("size"));
-    this.dateTaken = Number(data.get(userFileManager.ImageVideoKey.DATE_ADDED.toString())) * DateUtil.MILLISECONDS_PER_SECOND; // TODO dateTaken is not supported, use dateAdded
-    this.dateModified = Number(data.get(userFileManager.ImageVideoKey.DATE_MODIFIED.toString())) * DateUtil.MILLISECONDS_PER_SECOND;
     this.orientation = Number(data.get(userFileManager.ImageVideoKey.ORIENTATION.toString()));
     if (this.orientation == Constants.ANGLE_90 || this.orientation == Constants.ANGLE_270) {
       this.width = Number(data.get(userFileManager.ImageVideoKey.HEIGHT.toString()));
@@ -67,7 +68,6 @@ export class MediaItem {
     this.imgHeight = this.height;
     this.dateTrashed = Number(data.get(userFileManager.ImageVideoKey.DATE_TRASHED.toString()));
     this.isFavor = Boolean(data.get(userFileManager.ImageVideoKey.FAVORITE.toString()));
-    this.position = data.get(userFileManager.ImageVideoKey.POSITION.toString()) as userFileManager.PositionType;
     this.hashCode = `${this.uri}_${this.size}_${this.orientation}_${this.isFavor}`
   }
 
@@ -93,5 +93,55 @@ export class MediaItem {
 
   getHashCode(): string {
     return `${this.uri}_${this.size}_${this.orientation}_${this.isFavor}`
+  }
+
+  getTitle(): string {
+    if (!this.data) {
+      return undefined;
+    }
+    if (!this.title) {
+      this.title = String(this.data.get(userFileManager.ImageVideoKey.TITLE.toString()));
+    }
+    return this.title;
+  }
+
+  setTitle(title: string) {
+    this.title = title;
+  }
+
+  getDataTaken(): number {
+    if (!this.data) {
+      return undefined;
+    }
+    if (!this.dateTaken) {
+      this.dateTaken = Number(this.data.get(userFileManager.ImageVideoKey.DATE_ADDED.toString())) *
+      DateUtil.MILLISECONDS_PER_SECOND; // Waiting: dateTaken is not supported, use dateAdded
+    }
+    return this.dateTaken;
+  }
+
+  setDataTaken(dateTaken: number) {
+    this.dateTaken = dateTaken;
+  }
+
+  getDateModified(): number {
+    if (!this.data) {
+      return undefined;
+    }
+    if (!this.dateModified) {
+      this.dateModified = Number(this.data.get(userFileManager.ImageVideoKey.DATE_MODIFIED.toString())) *
+      DateUtil.MILLISECONDS_PER_SECOND;
+    }
+    return this.dateModified;
+  }
+
+  getPosition(): userFileManager.PositionType {
+    if (!this.data) {
+      return undefined;
+    }
+    if (!this.position) {
+      this.position = this.data.get(userFileManager.ImageVideoKey.POSITION.toString()) as userFileManager.PositionType;
+    }
+    return this.position;
   }
 }

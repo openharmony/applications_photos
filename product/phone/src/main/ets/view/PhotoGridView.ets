@@ -542,22 +542,23 @@ export struct PhotoGridView {
       this.onModeChange();
     }
     this.rightClickMenuList = new Array<Action>();
-    let isRecycleAlbum: boolean = this.albumInfo.isTrashAlbum;
-    if (isRecycleAlbum) {
-      this.rightClickMenuList = [Action.RECOVER, Action.DELETE,
-        this.isSelectedMode ? Action.MULTISELECT_INVALID : Action.MULTISELECT];
-    } else {
-      if (!this.isSelectedMode) {
-        this.rightClickMenuList.push(Action.MULTISELECT)
+    if(this.albumInfo) {
+      let isRecycleAlbum: boolean = this.albumInfo.isTrashAlbum;
+      if (isRecycleAlbum) {
+        this.rightClickMenuList = [Action.RECOVER, Action.DELETE,
+          this.isSelectedMode ? Action.MULTISELECT_INVALID : Action.MULTISELECT];
+      } else {
+        if (!this.isSelectedMode) {
+          this.rightClickMenuList.push(Action.MULTISELECT)
+        }
+        this.rightClickMenuList.push(Action.DELETE);
+        if (!this.albumInfo.isSystemAlbum) {
+          this.rightClickMenuList.push(Action.MOVE);
+          this.rightClickMenuList.push(Action.REMOVE_FROM);
+        }
+        this.rightClickMenuList.push(Action.ADD, Action.INFO);
       }
-      this.rightClickMenuList.push(Action.DELETE);
-      if (!this.albumInfo.isSystemAlbum) {
-        this.rightClickMenuList.push(Action.MOVE);
-        this.rightClickMenuList.push(Action.REMOVE_FROM);
-      }
-      this.rightClickMenuList.push(Action.ADD, Action.INFO);
     }
-
   }
 
   aboutToAppear(): void {
@@ -800,6 +801,7 @@ export struct PhotoGridView {
     Column() {
       PhotoGridPageActionBar({
         title: this.title,
+        albumInfo: this.albumInfo,
         isSystemAlbum: this.albumInfo.isSystemAlbum,
         onMenuClicked: this.onMenuClicked,
         isRecycle: this.albumInfo.isTrashAlbum,
@@ -945,8 +947,7 @@ export struct PhotoGridView {
     .opacity(this.photoGridViewOpacity)
     .backgroundColor($r('app.color.default_background_color'))
     .padding({
-      top: this.leftBlank[1],
-      bottom: this.leftBlank[3]
+      top: this.leftBlank[1]
     })
   }
 

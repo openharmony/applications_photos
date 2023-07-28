@@ -661,6 +661,10 @@
       "value": "51vp"
     },
     {
+      "name": "selected_photos_list_bar",
+      "value": "50vp"
+    },
+    {
       "name": "selected_photos_list_body",
       "value": "100vp"
     },

@@ -144,8 +144,9 @@ export class ShareMenuOperation implements MenuOperation, AsyncCallback<MediaIte
   }
 
   private getTitle(item: MediaItem): string {
-    if (!!item.title) {
-      return item.title;
+    let title = item.getTitle();
+    if (!!title) {
+      return title;
     }
     if (!!item.displayName) {
       return item.displayName.substr(0, item.displayName.lastIndexOf('.'));

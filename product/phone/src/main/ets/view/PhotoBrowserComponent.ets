@@ -138,7 +138,6 @@ export struct PhotoBrowserComponent {
   private theDeleteItem: MediaItem;
   private geometryTransitionEnable: boolean = false;
   private isShowMenuFromThirdView: boolean = true;
-  @State isFromTrash: boolean = false;
 
   onPageChanged() {
     Log.info(TAG, `call page status changed ${this.pageStatus}`)
@@ -433,11 +432,11 @@ export struct PhotoBrowserComponent {
     if (currentPhoto == undefined || this.isFromViewDataWithThirdUri) {
       return;
     }
-    this.photoDate = DateUtil.getLocalizedDate(currentPhoto.dateTaken);
+    this.photoDate = DateUtil.getLocalizedDate(currentPhoto.getDataTaken());
     if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
-      this.timeAndLocation = `${this.deviceName}/${DateUtil.getLocalizedTime(currentPhoto.dateTaken)}`;
+      this.timeAndLocation = `${this.deviceName}/${DateUtil.getLocalizedTime(currentPhoto.getDataTaken())}`;
     } else {
-      this.timeAndLocation = DateUtil.getLocalizedTime(currentPhoto.dateTaken);
+      this.timeAndLocation = DateUtil.getLocalizedTime(currentPhoto.getDataTaken());
     }
     this.updateMenu();
   }
@@ -669,14 +668,14 @@ export struct PhotoBrowserComponent {
 
   updatePhotoName(result: {title: string, displayName: string}): void {
     let currentPhoto = this.getCurrentPhoto();
-    currentPhoto.title = result.title;
+    currentPhoto.setTitle(result.title);
     currentPhoto.displayName = result.displayName;
     this.appBroadCast.emit(BroadCastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
   }
 
   aboutToDisappear(): void {
     Log.info(TAG, 'photoBrowser aboutToDisappear');
-
+    this.controller = undefined;
     this.favorCacheItemsMap.forEach((item) => {
       let menuFavorContext = new MenuContext().withMediaItem(item).withBroadCast(this.broadCast);
       let menuFavorOperation = MenuOperationFactory.getInstance()
@@ -692,12 +691,14 @@ export struct PhotoBrowserComponent {
       return;
     }
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+    this.dataObserver.clearSource();
 
     if (!this.isFromFACard) {
       this.breakpointSystem.unregisterOrientationChange();
       WindowUtil.setPreferredOrientation(globalThis.photosAbilityContext,
         window.Orientation.UNSPECIFIED);
     }
+    this.broadCast.off(null, null);
     this.appBroadCast.off(BroadCastConstants.PHOTO_BROWSER_BACK_PRESS_EVENT, null);
   }
 
@@ -764,7 +765,6 @@ export struct PhotoBrowserComponent {
         this.isFromFACard = true;
         this.geometryTransitionEnable = true;
       } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
-        this.isFromTrash = true;
         this.dataSource.setAlbumUri(this.albumUri);
         this.dataSource.setAlbumDataSource(AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER));
       } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
@@ -1195,9 +1195,7 @@ export struct PhotoBrowserComponent {
         if (!this.isHorizontal) {
           PhotoBrowserToolBar({
             onMenuClicked: this.onMenuClicked.bind(this),
-            isFromPhotoBrowser: true,
-            isFromTrash: this.isFromTrash,
-            isFromFACard: this.isFromFACard
+            isFromPhotoBrowser: true
           })
             .opacity(this.geometryOpacity)
               // @ts-ignore

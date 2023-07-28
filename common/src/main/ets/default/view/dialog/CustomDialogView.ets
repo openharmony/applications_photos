@@ -270,7 +270,39 @@ export struct CustomDialogView {
 
   aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
-    this.broadCast.off(null, null)
+    this.broadCast.off(null, null);
+    delete this.dialogController;
+    this.dialogController = undefined;
+    delete this.multiSelectDialog;
+    this.multiSelectDialog = undefined;
+    delete this.deleteDialogController;
+    this.deleteDialogController = undefined;
+    delete this.removeDialogController;
+    this.removeDialogController = undefined;
+    delete this.deleteProgressDialogController;
+    this.deleteProgressDialogController = undefined;
+    delete this.removeProgressDialogController;
+    this.removeProgressDialogController = undefined;
+    delete this.progressDialogController;
+    this.progressDialogController = undefined;
+    delete this.cancelDialogController;
+    this.cancelDialogController = undefined;
+    delete this.renameFileDialogController;
+    this.renameFileDialogController = undefined;
+    delete this.saveDialogController;
+    this.saveDialogController = undefined;
+    delete this.editExitDialogController;
+    this.editExitDialogController = undefined;
+    delete this.addNotesDialogController;
+    this.addNotesDialogController = undefined;
+    delete this.newAlbumDialogController;
+    this.newAlbumDialogController = undefined;
+    delete this.copyOrMoveDialogController;
+    this.copyOrMoveDialogController = undefined;
+    delete this.downloadCancelOperationDialog;
+    this.downloadCancelOperationDialog = undefined;
+    delete this.saveImageDialogController;
+    this.saveImageDialogController = undefined;
   }
 
   aboutToAppear(): void {
@@ -286,11 +318,11 @@ export struct CustomDialogView {
           width: item.width,
           size: item.size,
           duration: item.duration,
-          title: item.title,
-          dateTaken: item.dateTaken,
+          title: item.getTitle(),
+          dateTaken: item.getDataTaken(),
           uri: item.uri,
           displayName: item.displayName,
-          dateModified: item.dateModified
+          dateModified: item.getDateModified()
         };
         self.isDistributedAlbum = isDistributed;
         self.dialogController.open();
