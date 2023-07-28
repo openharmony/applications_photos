@@ -247,7 +247,9 @@ export struct ThirdSelectPhotoBrowserBase {
   }
 
   getCurrentPhoto(): MediaItem {
-    return this.dataSource.getData(this.currentIndex).data;
+    if(this.dataSource) {
+      return this.dataSource.getData(this.currentIndex).data;
+    }
   }
 
   onBackPress() {
