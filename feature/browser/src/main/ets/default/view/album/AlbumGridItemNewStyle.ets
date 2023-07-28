@@ -342,7 +342,7 @@ export struct AlbumGridItemNewStyle {
 
   @Builder albumCardInfo() {
     Column() {
-      Text(this.item.albumName)
+      Text(this.getDisplayName(this.item))
         .key('AlbumCardDisplayName')
         .margin({ right: $r('app.float.album_set_name_margin_right') })
         .textOverflow({ overflow: TextOverflow.Ellipsis })
@@ -514,5 +514,13 @@ export struct AlbumGridItemNewStyle {
       Log.debug(TAG, `Album ${this.item?.albumName} length2: ${this.currentRightClickMenuList.length}`);
       return this.currentRightClickMenuList.length > 0
     }
+  }
+
+  private getDisplayName(albumInfo : AlbumInfo): Resource | string {
+    let res = UiUtil.getDisplayNameResourceByAlbumInfo(albumInfo);
+    if (res != null) {
+      return res;
+    }
+    return this.item.albumName;
   }
 }

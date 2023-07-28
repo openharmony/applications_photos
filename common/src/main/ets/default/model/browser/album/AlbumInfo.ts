@@ -28,6 +28,7 @@ export class AlbumInfo {
   isFavorAlbum: boolean;
   isVideoAlbum: boolean;
   isScreenShotAlbum: boolean;
+  isPhotoAlbum: boolean;
   filterMediaType: string;
   dateModified: number;
   videoCount: number;
@@ -41,6 +42,8 @@ export class AlbumInfo {
       this.isTrashAlbum = UserFileManagerAccess.getInstance().isTrashAlbum(album);
       this.isFavorAlbum = UserFileManagerAccess.getInstance().isFavorAlbum(album);
       this.isVideoAlbum = UserFileManagerAccess.getInstance().isVideoAlbum(album);
+      this.isScreenShotAlbum = UserFileManagerAccess.getInstance().isScreenShotAlbum(album);
+      this.isPhotoAlbum = UserFileManagerAccess.getInstance().isPhotoAlbum(album);
       this.count = album.count; // TODO 相册count都是0
       this.dateModified = album.dateModified;
     }

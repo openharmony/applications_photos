@@ -119,7 +119,9 @@ export class PhotoEditCrop extends PhotoEditBase {
   }
 
   clearCanvas(): void {
-    this.ctx.clearRect(0, 0, this.displayWidth, this.displayHeight);
+    if (this.ctx != undefined) {
+      this.ctx.clearRect(0, 0, this.displayWidth, this.displayHeight);
+    }
   }
 
   onMirrorChange(): void {

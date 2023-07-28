@@ -92,7 +92,7 @@ export default class MainAbility extends Ability {
     let wantParamUri: string = wantParam?.uri as string;
     if (wantParamUri === Constants.WANT_PARAM_URI_DETAIL) {
       isFromCamera = true;
-      if (isOnNewWant) {
+      if (isOnNewWant && globalThis.photosWindowStage) {
         AppStorage.SetOrCreate('entryFromHapCamera', Constants.ENTRY_FROM_CAMERA);
         globalThis.photosWindowStage.loadContent('pages/PhotoBrowser', (err, data) => {
           if (err.code) {

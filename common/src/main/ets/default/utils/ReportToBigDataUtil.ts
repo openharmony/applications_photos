@@ -68,7 +68,7 @@ export class ReportToBigDataUtil {
     if (mediaItem == null) {
       return '';
     }
-    let name = mediaItem.title;
+    let name = mediaItem.getTitle();
     if (name == null) {
       return '';
     }

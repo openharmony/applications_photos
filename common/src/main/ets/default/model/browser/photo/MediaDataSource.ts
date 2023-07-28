@@ -450,7 +450,7 @@ export class MediaDataSource extends AbsDataSource {
 
     for (let i = fromIndex; i < endIndex; i++) {
       this.items[i - this.activeStart] = mediaItems[i - start];
-      Log.debug(TAG, `updateMediaData ${this.layoutIndexes[i]}, ${mediaItems[i - start].uri}, ${mediaItems[i - start].title}`);
+      Log.debug(TAG, `updateMediaData ${this.layoutIndexes[i]}, ${mediaItems[i - start].uri}, ${mediaItems[i - start].getTitle()}`);
     }
 
     if (this.isCountChanged || this.isRefresh) {

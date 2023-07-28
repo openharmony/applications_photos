@@ -75,21 +75,21 @@ export class UserFileManagerAccess {
   static readonly NOTIFY_ALBUM_REMOVE_ASSET = userFileManager.NotifyType.NOTIFY_ALBUM_REMOVE_ASSET;
 
   static readonly ALL_IMAGE_VIDEO_FETCH_COLUMNS: Array<string> = [
-    userFileManager.ImageVideoKey.URI.toString(),
-    userFileManager.ImageVideoKey.FILE_TYPE.toString(),
-    userFileManager.ImageVideoKey.DISPLAY_NAME.toString(),
-    userFileManager.ImageVideoKey.DATE_ADDED.toString(),
-    userFileManager.ImageVideoKey.DATE_MODIFIED.toString(),
-    userFileManager.ImageVideoKey.TITLE.toString(),
-    userFileManager.ImageVideoKey.DURATION.toString(),
-    userFileManager.ImageVideoKey.WIDTH.toString(),
-    userFileManager.ImageVideoKey.HEIGHT.toString(),
-    userFileManager.ImageVideoKey.DATE_TAKEN.toString(),
-    userFileManager.ImageVideoKey.ORIENTATION.toString(),
-    userFileManager.ImageVideoKey.FAVORITE.toString(),
-    userFileManager.ImageVideoKey.POSITION.toString(),
-    userFileManager.ImageVideoKey.DATE_TRASHED.toString(),
-    userFileManager.ImageVideoKey.HIDDEN.toString(),
+  userFileManager.ImageVideoKey.URI.toString(),
+  userFileManager.ImageVideoKey.FILE_TYPE.toString(),
+  userFileManager.ImageVideoKey.DISPLAY_NAME.toString(),
+  userFileManager.ImageVideoKey.DATE_ADDED.toString(),
+  userFileManager.ImageVideoKey.DATE_MODIFIED.toString(),
+  userFileManager.ImageVideoKey.TITLE.toString(),
+  userFileManager.ImageVideoKey.DURATION.toString(),
+  userFileManager.ImageVideoKey.WIDTH.toString(),
+  userFileManager.ImageVideoKey.HEIGHT.toString(),
+  userFileManager.ImageVideoKey.DATE_TAKEN.toString(),
+  userFileManager.ImageVideoKey.ORIENTATION.toString(),
+  userFileManager.ImageVideoKey.FAVORITE.toString(),
+  userFileManager.ImageVideoKey.POSITION.toString(),
+  userFileManager.ImageVideoKey.DATE_TRASHED.toString(),
+  userFileManager.ImageVideoKey.HIDDEN.toString(),
     "size" // TODO 等媒体库枚举字段上库
   ]
 
@@ -114,10 +114,10 @@ export class UserFileManagerAccess {
   ]
 
   static readonly SYSTEM_BEFORE_USER_ALBUM_LIST: Array<AlbumSubType> = [
-    UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE,
-    UserFileManagerAccess.VIDEO_ALBUM_SUB_TYPE,
-    UserFileManagerAccess.SCREENSHOT_ALBUM_SUB_TYPE,
-    UserFileManagerAccess.FAVORITE_ALBUM_SUB_TYPE
+  UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE,
+  UserFileManagerAccess.VIDEO_ALBUM_SUB_TYPE,
+  UserFileManagerAccess.SCREENSHOT_ALBUM_SUB_TYPE,
+  UserFileManagerAccess.FAVORITE_ALBUM_SUB_TYPE
   ]
 
   static readonly SYSTEM_AFTER_USER_ALBUM_LIST: Array<AlbumSubType> = [
@@ -712,6 +712,10 @@ export class UserFileManagerAccess {
 
   isScreenShotAlbum(album: Album): boolean {
     return album.albumSubType === userFileManager.AlbumSubType.SCREENSHOT;
+  }
+
+  isPhotoAlbum(album: Album): boolean {
+    return album.albumSubType === UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE;
   }
 
   isVideoAlbum(album: Album): boolean {

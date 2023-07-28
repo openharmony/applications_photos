@@ -153,6 +153,8 @@ export struct SelectPhotoBrowserView {
     this.broadCast.release();
     this.dataSource.release();
     mMultimodalInputManager.unregisterListener();
+    this.controller = undefined;
+    this.broadCast.off(null, null);
     this.appBroadCast.off(BroadCastConstants.SELECT_PHOTO_BROWSER_BACK_PRESS_EVENT, null);
   }
 
@@ -270,7 +272,7 @@ export struct SelectPhotoBrowserView {
           // @ts-ignore
         .transition(TransitionEffect.opacity(0))
     }
-    .padding({ bottom: $r('app.float.title_default') })
+    .padding({ bottom: $r('app.float.selected_photos_list_bar') })
   }
 
   pageTransition() {
