@@ -39,7 +39,6 @@ export struct ToolBar {
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @Consume @Watch("isNeedHidePopup") hidePopup: boolean;
   private isFromPhotoBrowser = false;
-  private isFromTrash: boolean;
 
   aboutToAppear(): void {
     this.actionBarProp = this.createActionBar();
@@ -165,9 +164,6 @@ export struct ToolBar {
       .padding(this.toolMenuList.length >= 4 ? {} : { left: $r('app.float.actionbar_margin_horizontal'),
                                                       right: $r('app.float.actionbar_margin_horizontal') })
     }
-    .margin({
-      bottom: this.isFromTrash ? this.leftBlank[3] : Constants.NUMBER_0
-    })
     .width(Constants.PERCENT_100)
     .backgroundColor(this.isFromPhotoBrowser ? $r('app.color.transparent') : this.actionBarProp.getBackgroundColor())
     .opacity(this.actionBarProp.getAlpha())
