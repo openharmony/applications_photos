@@ -41,8 +41,8 @@ export struct NoPhotoIndexComponent {
 
   aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
-    let self = this;
-    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.reSizeFunc)
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.reSizeFunc);
+    this.reSizeFunc = null;
   }
 
   updateImageSize() {
