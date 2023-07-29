@@ -123,7 +123,11 @@ export struct ThirdSelectAlbumPageBase {
   }
 
   aboutToDisappear() {
+    this.broadCast.off(null, null);
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.initGridRowCount);
+    this.initGridRowCount = null;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+    this.dataObserver.clearSource();
   }
 
   onMediaLibDataChange(changeType) {
