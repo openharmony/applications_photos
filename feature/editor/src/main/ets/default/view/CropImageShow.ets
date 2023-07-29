@@ -93,7 +93,8 @@ export struct CropImageShow {
 
   aboutToAppear(): void {
     Log.debug(TAG, 'Photo CropImageShow called');
-    this.broadCast.on(Constants.CROP_RESET_CLICKED, this.onCropResetClicked.bind(this));
+    this.onCropResetClicked = this.onCropResetClicked.bind(this);
+    this.broadCast.on(Constants.CROP_RESET_CLICKED, this.onCropResetClicked);
     this.adjustLayout();
   }
 
@@ -104,7 +105,8 @@ export struct CropImageShow {
   }
 
   aboutToDisappear(): void {
-    this.cropEdit.setCanvasReady(false)
+    this.cropEdit.setCanvasReady(false);
+    this.broadCast.off(Constants.CROP_RESET_CLICKED, this.onCropResetClicked);
   }
 
   build() {
