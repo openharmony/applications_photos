@@ -75,6 +75,10 @@ export struct NewAlbumPage {
   private isActive = false;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private isNewAlbum: boolean = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM);
+  onWindowSizeChangeCallBack = () => {
+    // 后续phone缩略图支持横竖屏后再放开
+    // this.initGridRowCount;
+  }
 
   onIndexChange() {
     Log.info(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
@@ -224,10 +228,7 @@ export struct NewAlbumPage {
     this.mSelectManager.setPhotoDataImpl();
     this.initGridRowCount = this.initGridRowCount.bind(this);
     this.initGridRowCount();
-    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-      // 后续phone缩略图支持横竖屏后再放开
-      // this.initGridRowCount;
-    });
+    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     this.broadCast.on(BroadCastConstants.SELECT,
       (position: number, key: string, value: boolean, callback: Function) => {
         if (self.mSelectManager.toggle(key, value, position)) {
@@ -314,11 +315,10 @@ export struct NewAlbumPage {
 
   aboutToDisappear(): void {
     this.broadCast.off(null, null);
-    this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+    this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, null);
     this.dataSource.releaseBroadCast();
-    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-      Log.info(TAG, 'off ON_WIN_SIZE_CHANGED');
-    });
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+    this.onWindowSizeChangeCallBack = null;
     AppStorage.Delete(Constants.PHOTO_GRID_SELECT_MANAGER);
   }
 
