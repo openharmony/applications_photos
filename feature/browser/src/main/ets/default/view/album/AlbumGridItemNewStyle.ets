@@ -184,7 +184,8 @@ export struct AlbumGridItemNewStyle {
   aboutToDisappear(): void {
     // 后续phone缩略图支持横竖屏后再放开
     if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateCardSize.bind);
+      ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateCardSize);
+      this.updateCardSize = null;
     }
   }
 
@@ -342,7 +343,7 @@ export struct AlbumGridItemNewStyle {
 
   @Builder albumCardInfo() {
     Column() {
-      Text(this.getDisplayName(this.item))
+      Text(this.item.albumName)
         .key('AlbumCardDisplayName')
         .margin({ right: $r('app.float.album_set_name_margin_right') })
         .textOverflow({ overflow: TextOverflow.Ellipsis })
@@ -514,13 +515,5 @@ export struct AlbumGridItemNewStyle {
       Log.debug(TAG, `Album ${this.item?.albumName} length2: ${this.currentRightClickMenuList.length}`);
       return this.currentRightClickMenuList.length > 0
     }
-  }
-
-  private getDisplayName(albumInfo : AlbumInfo): Resource | string {
-    let res = UiUtil.getDisplayNameResourceByAlbumInfo(albumInfo);
-    if (res != null) {
-      return res;
-    }
-    return this.item.albumName;
   }
 }
