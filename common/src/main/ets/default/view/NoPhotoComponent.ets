@@ -41,6 +41,7 @@ export struct NoPhotoComponent {
   aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateImageLayout);
+    this.updateImageLayout = null;
   }
 
   build() {
