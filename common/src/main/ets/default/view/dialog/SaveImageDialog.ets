@@ -36,6 +36,10 @@ export struct SaveImageDialog {
     this.broadCast.on(BroadCastConstants.EXIT_SAVE_PROGRESS_CLOSE, this.controllerClose.bind(this));
   }
 
+  aboutToDisappear(): void {
+    this.broadCast.off(null, null);
+  }
+
   build() {
     Column() {
       Row() {
