@@ -51,15 +51,21 @@ export struct DetailsDialog {
   @Consume isDistributedAlbum: boolean;
   @State refresh: boolean = false;
   private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  onWindowSizeChangeCallBack = () => this.updateDialogSize();
 
   aboutToAppear() {
     let localizedDate = DateUtil.getLocalizedDate(this.mediaDetails.dateTaken);
     let localizedTime = DateUtil.getLocalizedTime(this.mediaDetails.dateTaken);
     this.dataTime = `${localizedDate} ${localizedTime}`;
     let self = this;
-    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-      self.updateDialogSize();
-    });
+
+    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+  }
+
+  aboutToDisappear(): void {
+    Log.info(TAG, 'aboutToDisappear');
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+    this.onWindowSizeChangeCallBack = null;
   }
 
   getResolution(height: number, width: number): string {
