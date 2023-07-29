@@ -343,7 +343,7 @@ export struct AlbumGridItemNewStyle {
 
   @Builder albumCardInfo() {
     Column() {
-      Text(this.item.albumName)
+      Text(this.getDisplayName(this.item))
         .key('AlbumCardDisplayName')
         .margin({ right: $r('app.float.album_set_name_margin_right') })
         .textOverflow({ overflow: TextOverflow.Ellipsis })
