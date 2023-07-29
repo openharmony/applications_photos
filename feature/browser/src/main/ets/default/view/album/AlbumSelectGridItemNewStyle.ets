@@ -53,6 +53,7 @@ export struct AlbumSelectGridItemNewStyle {
     // 后续phone缩略图支持横竖屏后再放开
     if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
       ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateCardSize);
+      this.updateCardSize = null;
     }
   }
 
