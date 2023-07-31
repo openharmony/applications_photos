@@ -516,4 +516,7 @@ export class Constants {
 
   static readonly IS_ON_SWIPER_ANIMATION: string = 'isOnSwiperAnimation';
   static readonly NAME_PATTERN: RegExp = /[\\.\\\\/:*?"'`<>|\[\]{}]/;
+
+  // fileAsset path data
+  static readonly KEY_FILE_DATA: string = 'data';
 }
