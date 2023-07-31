@@ -45,7 +45,7 @@ export class UriDataSource extends PhotoDataSource {
     this.mItems = uriArr.map((uri) => {
       let item = new InnerMediaItem(uri);
       if (uri.startsWith(MEDIA_ABILITY)) {
-        item.setThumbnail(this.photoDataImpl.getThumbnail(item.uri, {
+        item.setThumbnail(this.photoDataImpl.getThumbnail(item.uri, item.path, {
           height: item.height,
           width: item.width
         }));
