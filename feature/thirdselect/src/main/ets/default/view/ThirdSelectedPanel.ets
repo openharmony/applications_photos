@@ -62,17 +62,17 @@ export struct ThirdSelectedPanel {
     this.selectedScroller.scrollEdge(Edge.End);
   }
 
-  getThumbnailSafe(sourceUri: string, size?) {
+  getThumbnailSafe(sourceUri: string, path: string, size?) {
     try {
       if (size) {
         if (size.width != 0 && size.height != 0) {
-          return `${sourceUri}/thumbnail/${size.width}/${size.height}`;
+          return `${sourceUri}?oper=thumbnail&width=${size.width}&height=${size.height}&path=${path}`;
         } else {
           Log.warn(TAG, 'getThumbnailSafe with width==0 and height==0, so do not use thumbnail' + JSON.stringify(size));
           return `${sourceUri}`;
         }
       } else {
-        return `${sourceUri}/thumbnail/${THUMBNAIL_WIDTH}/${THUMBNAIL_WIDTH}`;
+        return `${sourceUri}?oper=thumbnail&width=${THUMBNAIL_WIDTH}&height=${THUMBNAIL_WIDTH}&path=${path}`;
       }
     } catch (err) {
       Log.warn(TAG, `get Thumbnail Failed! msg:${err}`);
