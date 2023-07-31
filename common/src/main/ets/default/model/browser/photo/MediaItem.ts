@@ -42,6 +42,7 @@ export class MediaItem {
   private position: userFileManager.PositionType;
   hashCode: string;
   private data: userFileManager.FileAsset;
+  path: string;
 
   constructor(data: userFileManager.FileAsset) {
     if (!data) {
@@ -49,7 +50,6 @@ export class MediaItem {
     }
 
     this.mediaType = data.fileType;
-    this.uri = data.uri;
     this.displayName = data.displayName;
     this.data = data;
     if (this.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
@@ -64,6 +64,8 @@ export class MediaItem {
       this.width = Number(data.get(userFileManager.ImageVideoKey.WIDTH.toString()));
       this.height = Number(data.get(userFileManager.ImageVideoKey.HEIGHT.toString()));
     }
+    this.uri = data.uri;
+    this.path = String(data.get(Constants.KEY_FILE_DATA));
     this.imgWidth = this.width;
     this.imgHeight = this.height;
     this.dateTrashed = Number(data.get(userFileManager.ImageVideoKey.DATE_TRASHED.toString()));
