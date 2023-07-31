@@ -112,6 +112,10 @@ export struct PhotoGridView {
   private photoTotalCount: number;
   private params: any;
   private scrollIndex: number = 0;
+  onWindowSizeChangeCallBack = () => {
+    // 后续phone缩略图支持横竖屏后再放开
+    // this.initGridRowCount;
+  }
 
   onPlaceholderChanged() {
     Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
@@ -361,6 +365,7 @@ export struct PhotoGridView {
     Log.info(TAG, `onCopyStart`);
     this.isDataFreeze = true;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+    this.dataObserver.clearSource();
     this.dataSource.freeze();
   }
 
@@ -380,6 +385,7 @@ export struct PhotoGridView {
     Log.info(TAG, `onDownloadStart`);
     this.isDataFreeze = true;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+    this.dataObserver.clearSource();
     this.dataSource.freeze();
   }
 
@@ -412,6 +418,7 @@ export struct PhotoGridView {
     Log.info(TAG, `onMoveStart`);
     this.isDataFreeze = true;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+    this.dataObserver.clearSource();
     this.dataSource.freeze();
   }
 
@@ -433,6 +440,7 @@ export struct PhotoGridView {
     this.deleteMode = true;
     this.isDataFreeze = true;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+    this.dataObserver.clearSource();
     this.dataSource.freeze();
   }
 
@@ -450,6 +458,7 @@ export struct PhotoGridView {
     this.deleteMode = true;
     this.isDataFreeze = true;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+    this.dataObserver.clearSource();
     this.dataSource.freeze();
   }
 
@@ -542,7 +551,7 @@ export struct PhotoGridView {
       this.onModeChange();
     }
     this.rightClickMenuList = new Array<Action>();
-    if(this.albumInfo) {
+    if (this.albumInfo) {
       let isRecycleAlbum: boolean = this.albumInfo.isTrashAlbum;
       if (isRecycleAlbum) {
         this.rightClickMenuList = [Action.RECOVER, Action.DELETE,
@@ -702,10 +711,7 @@ export struct PhotoGridView {
       }
     });
 
-    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-      // 后续phone缩略图支持横竖屏后再放开
-      // self.initGridRowCount();
-    });
+    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
 
     this.initGridRowCount();
     this.moreMenuList = this.albumInfo.isSystemAlbum ? [Action.ADD, Action.INFO] : [Action.MOVE, Action.ADD, Action.REMOVE_FROM, Action.INFO];
@@ -781,11 +787,15 @@ export struct PhotoGridView {
 
   aboutToDisappear(): void {
     Log.info(TAG, `aboutToDisappear`);
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+    this.onWindowSizeChangeCallBack = null;
     this.broadCast.off(null, null);
-    this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
-    this.appBroadCast.off(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
+    this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, null);
+    this.appBroadCast.off(BroadCastConstants.ON_REMOTE_CHANGED, null);
+    this.appBroadCast.off(BroadCastConstants.DO_ANIMATION, null);
     this.dataSource.releaseBroadCast();
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+    this.dataObserver.clearSource();
   }
 
   isSameTransitionId(item): boolean {
