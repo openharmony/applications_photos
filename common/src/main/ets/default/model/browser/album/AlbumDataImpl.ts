@@ -159,6 +159,15 @@ export class AlbumDataImpl extends BrowserDataImpl {
               albumInfo.setCoverUri(this.getThumbnailSafe(obj.uri));
             }
           });
+        } else {
+          await UserFileManagerAccess.getInstance().getFirstObject(AlbumDefine.getFileFetchOptByUri(album.coverUri)).then((obj) => {
+            if (obj) {
+              let mediaItem = new MediaItem(obj.obj);
+              mediaItem.setThumbnail(this.getThumbnailSafe(obj.obj.uri));
+              albumInfo.setMediaItem(mediaItem);
+              albumInfo.setCoverUri(this.getThumbnailSafe(obj.obj.uri));
+            }
+          });
         }
         let count = await this.getItemsCount(album.albumUri);
         albumInfo.setCount(count); // TODO album.count不为0时，在构造函数里直接获取
@@ -206,6 +215,15 @@ export class AlbumDataImpl extends BrowserDataImpl {
               mediaItem.setThumbnail(this.getThumbnailSafe(obj.uri));
               albumInfo.setMediaItem(mediaItem);
               albumInfo.setCoverUri(this.getThumbnailSafe(obj.uri));
+            }
+          });
+        } else {
+          await UserFileManagerAccess.getInstance().getFirstObject(AlbumDefine.getFileFetchOptByUri(album.coverUri)).then((obj) => {
+            if (obj) {
+              let mediaItem = new MediaItem(obj.obj);
+              mediaItem.setThumbnail(this.getThumbnailSafe(obj.obj.uri));
+              albumInfo.setMediaItem(mediaItem);
+              albumInfo.setCoverUri(this.getThumbnailSafe(obj.obj.uri));
             }
           });
         }
