@@ -227,15 +227,18 @@ export struct AlbumSetPage {
 
   aboutToDisappear(): void {
     this.onInActive();
-    this.appBroadCast.off(BroadCastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-    this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-    this.appBroadCast.off(BroadCastConstants.RESET_ZERO, this.onResetZero.bind(this));
-    this.appBroadCast.off(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
-    this.appBroadCast.off(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, this.onSendMoveCopyBroadCast.bind(this));
+    this.broadCast.off(null, null);
+    this.appBroadCast.off(BroadCastConstants.ON_TAB_CHANGED, null);
+    this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, null);
+    this.appBroadCast.off(BroadCastConstants.RESET_ZERO, null);
+    this.appBroadCast.off(BroadCastConstants.ON_REMOTE_CHANGED, null);
+    this.appBroadCast.off(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, null);
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+    this.dataObserver.clearSource();
     // 后续phone缩略图支持横竖屏后再放开
     if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
       ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.initGridRowCount);
+      this.initGridRowCount = null;
     }
   }
 

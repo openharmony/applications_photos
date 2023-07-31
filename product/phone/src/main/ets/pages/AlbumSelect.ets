@@ -50,6 +50,10 @@ export struct AlbumSelect {
   private mSelectManager = new SelectManager();
   private currentAlbumUri: string;
   private newAlbumName: string;
+  onWindowSizeChangeCallBack = () => {
+    // 后续phone缩略图支持横竖屏后再放开
+    // this.gridColumnsCount = UiUtil.getAlbumGridCount(false);
+  }
 
   aboutToAppear(): void {
     TraceControllerUtils.startTrace('AlbumSetPageAboutToAppear');
@@ -61,10 +65,7 @@ export struct AlbumSelect {
     this.onActive();
     this.gridColumnsCount = UiUtil.getAlbumGridCount(false);
     Log.info(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
-    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-      // 后续phone缩略图支持横竖屏后再放开
-      // this.gridColumnsCount = UiUtil.getAlbumGridCount(false);
-    });
+    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
 
     let param: any = router.getParams();
     if (param) {
@@ -87,6 +88,9 @@ export struct AlbumSelect {
   }
 
   aboutToDisappear(): void {
+    this.broadCast.off(null, null);
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+    this.onWindowSizeChangeCallBack = null;
     this.albums.setBlackList([]);
     this.dataSource.releaseBroadCast();
   }

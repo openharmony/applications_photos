@@ -52,17 +52,21 @@ export struct ThirdAlbumGridItem {
   ]);
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private fp2vpUnit: number = px2vp(fp2px(Constants.NUMBER_1));
+  onWindowSizeChangeCallBack = () => this.updateCardSize();
 
   aboutToAppear(): void {
     Log.info(TAG, `aboutToAppear + ${this.item.coverUri}, select param ${JSON.stringify(this.selectParams)}`)
-    let self = this
     // 后续phone缩略图支持横竖屏后再放开
     if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-        self.updateCardSize();
-      })
+      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     }
     this.updateCardSize();
+  }
+
+  aboutToDisappear(): void {
+    Log.info(TAG, 'aboutToDisappear');
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+    this.onWindowSizeChangeCallBack = null;
   }
 
   updateCardSize() {

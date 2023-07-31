@@ -57,6 +57,7 @@ export struct MediaOperationBasePage {
   private selectedItems: Array<MediaItem> = [];
   private mediaType: number;
   private listCardBorderRadius: number = 16;
+  onWindowSizeChangeCallBack = () => this.updateListCardWidth();
 
   aboutToAppear(): void {
     Log.info(TAG, `aboutToAppear`);
@@ -96,9 +97,7 @@ export struct MediaOperationBasePage {
       this.loadingFinish = true;
     });
 
-    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, () => {
-      this.updateListCardWidth();
-    });
+    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
 
     this.broadCast.on(BroadCastConstants.MEDIA_OPERATION, (displayName: string, albumUri: string, completedFunc?: Function) => {
       Log.info(TAG, `broadCast on mediaOperation, albumName: ${displayName}, albumUri: ${albumUri}`);
@@ -115,6 +114,13 @@ export struct MediaOperationBasePage {
     this.albums.updateAlbumMediaCount();
     this.updateListCardWidth();
     Log.info(TAG, `album mediaSet ${this.albums.mediaSetList}`);
+  }
+
+  aboutToDisappear(): void {
+    Log.info(TAG, 'aboutToDisappear');
+    this.broadCast.off(null, null);
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
+    this.onWindowSizeChangeCallBack = null;
   }
 
   onMenuClicked(action: Action) {

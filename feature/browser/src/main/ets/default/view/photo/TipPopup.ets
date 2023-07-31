@@ -28,6 +28,10 @@ export struct TipPopup {
     });
   }
 
+  aboutToDisappear(): void {
+    this.broadCast.off(null, null);
+  }
+
   build() {
     if (this.isShowPop) {
       Row() {
