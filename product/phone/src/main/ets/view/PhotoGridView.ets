@@ -365,7 +365,6 @@ export struct PhotoGridView {
     Log.info(TAG, `onCopyStart`);
     this.isDataFreeze = true;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-    this.dataObserver.clearSource();
     this.dataSource.freeze();
   }
 
@@ -385,7 +384,6 @@ export struct PhotoGridView {
     Log.info(TAG, `onDownloadStart`);
     this.isDataFreeze = true;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-    this.dataObserver.clearSource();
     this.dataSource.freeze();
   }
 
@@ -418,7 +416,6 @@ export struct PhotoGridView {
     Log.info(TAG, `onMoveStart`);
     this.isDataFreeze = true;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-    this.dataObserver.clearSource();
     this.dataSource.freeze();
   }
 
@@ -440,7 +437,6 @@ export struct PhotoGridView {
     this.deleteMode = true;
     this.isDataFreeze = true;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-    this.dataObserver.clearSource();
     this.dataSource.freeze();
   }
 
@@ -458,7 +454,6 @@ export struct PhotoGridView {
     this.deleteMode = true;
     this.isDataFreeze = true;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-    this.dataObserver.clearSource();
     this.dataSource.freeze();
   }
 
