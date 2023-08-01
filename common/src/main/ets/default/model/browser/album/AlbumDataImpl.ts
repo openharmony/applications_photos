@@ -150,7 +150,7 @@ export class AlbumDataImpl extends BrowserDataImpl {
         albumInfo.setAlbumName(albumName);
         albumInfo.setFilterMediaType(filterMediaType);
         // 没有相册，设置为第一张
-        if (album.coverUri) {
+        if (!album.coverUri) {
           await UserFileManagerAccess.getInstance().getAlbumFirstObject(album).then((obj) => {
             if (obj) {
               let mediaItem = new MediaItem(obj);
@@ -208,7 +208,7 @@ export class AlbumDataImpl extends BrowserDataImpl {
         let albumName: string = await UserFileManagerAccess.getInstance().getAlbumName(album);
         albumInfo.setAlbumName(albumName);
         albumInfo.setFilterMediaType(filterMediaType);
-        if (album.coverUri) {
+        if (!album.coverUri) {
           await UserFileManagerAccess.getInstance().getAlbumFirstObject(album).then((obj) => {
             if (obj) {
               let mediaItem = new MediaItem(obj);
