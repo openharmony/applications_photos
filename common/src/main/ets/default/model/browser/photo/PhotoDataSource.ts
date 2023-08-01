@@ -184,7 +184,7 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
     return {
       data: mediaItem,
       pos: index,
-      thumbnail: this.photoDataImpl.getThumbnail(mediaItem.uri, { height: imgHeight, width: imgWidth })
+      thumbnail: this.photoDataImpl.getThumbnail(mediaItem.uri, mediaItem.path, { height: imgHeight, width: imgWidth })
     };
   }
 

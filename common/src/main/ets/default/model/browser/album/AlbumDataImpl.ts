@@ -154,18 +154,18 @@ export class AlbumDataImpl extends BrowserDataImpl {
           await UserFileManagerAccess.getInstance().getAlbumFirstObject(album).then((obj) => {
             if (obj) {
               let mediaItem = new MediaItem(obj);
-              mediaItem.setThumbnail(this.getThumbnailSafe(obj.uri));
+              mediaItem.setThumbnail(this.getThumbnailSafe(obj.uri, String(obj.get(Constants.KEY_FILE_DATA))));
               albumInfo.setMediaItem(mediaItem);
-              albumInfo.setCoverUri(this.getThumbnailSafe(obj.uri));
+              albumInfo.setCoverUri(this.getThumbnailSafe(obj.uri, String(obj.get(Constants.KEY_FILE_DATA))));
             }
           });
         } else {
           await UserFileManagerAccess.getInstance().getFirstObject(AlbumDefine.getFileFetchOptByUri(album.coverUri)).then((obj) => {
             if (obj) {
               let mediaItem = new MediaItem(obj.obj);
-              mediaItem.setThumbnail(this.getThumbnailSafe(obj.obj.uri));
+              mediaItem.setThumbnail(this.getThumbnailSafe(obj.obj.uri, String(obj.obj.get(Constants.KEY_FILE_DATA))));
               albumInfo.setMediaItem(mediaItem);
-              albumInfo.setCoverUri(this.getThumbnailSafe(obj.obj.uri));
+              albumInfo.setCoverUri(this.getThumbnailSafe(obj.obj.uri, String(obj.obj.get(Constants.KEY_FILE_DATA))));
             }
           });
         }
@@ -212,18 +212,18 @@ export class AlbumDataImpl extends BrowserDataImpl {
           await UserFileManagerAccess.getInstance().getAlbumFirstObject(album).then((obj) => {
             if (obj) {
               let mediaItem = new MediaItem(obj);
-              mediaItem.setThumbnail(this.getThumbnailSafe(obj.uri));
+              mediaItem.setThumbnail(this.getThumbnailSafe(obj.uri, String(obj.get(Constants.KEY_FILE_DATA))));
               albumInfo.setMediaItem(mediaItem);
-              albumInfo.setCoverUri(this.getThumbnailSafe(obj.uri));
+              albumInfo.setCoverUri(this.getThumbnailSafe(obj.uri, String(obj.get(Constants.KEY_FILE_DATA))));
             }
           });
         } else {
           await UserFileManagerAccess.getInstance().getFirstObject(AlbumDefine.getFileFetchOptByUri(album.coverUri)).then((obj) => {
             if (obj) {
               let mediaItem = new MediaItem(obj.obj);
-              mediaItem.setThumbnail(this.getThumbnailSafe(obj.obj.uri));
+              mediaItem.setThumbnail(this.getThumbnailSafe(obj.obj.uri, String(obj.obj.get(Constants.KEY_FILE_DATA))));
               albumInfo.setMediaItem(mediaItem);
-              albumInfo.setCoverUri(this.getThumbnailSafe(obj.obj.uri));
+              albumInfo.setCoverUri(this.getThumbnailSafe(obj.obj.uri, String(obj.obj.get(Constants.KEY_FILE_DATA))));
             }
           });
         }
