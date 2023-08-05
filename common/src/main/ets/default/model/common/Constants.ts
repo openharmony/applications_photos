@@ -175,6 +175,9 @@ export class Constants {
   // Other equipment tab index
   static readonly OTHER_EQUIPMENT_TAB_INDEX: number = 1;
 
+  //the constant for action of the want
+  static readonly ACTION_DELETE_DATA: string = 'ohos.want.action.deleteDialog';
+
   // editor used
   static readonly UPDATE_MENU: string = 'updateMenu';
   static readonly UPDATE_DOODLE_STYLE: string = 'update_doodle_style';

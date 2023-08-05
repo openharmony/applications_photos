@@ -13,6 +13,7 @@
     "pages/NewAlbumPage",
     "pages/AlbumSelect",
     "pages/EditMain",
-    "pages/FormEditorPage"
+    "pages/FormEditorPage",
+    "pages/ResourceDeletePage"
   ]
 }

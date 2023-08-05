@@ -20,6 +20,7 @@ import { Log } from '../../utils/Log';
 import { DetailsDialog, MediaDetails } from './DetailsDialog';
 import { MultiSelectDetails, MultiSelectDialog } from './MultiSelectDialog';
 import { DeleteDialog } from './DeleteDialog';
+import { ThirdDeleteDialog } from './ThirdDeleteDialog';
 import { RemoveDialog } from './RemoveDialog';
 import type { DialogCallback } from '../../model/common/DialogUtil';
 import { MediaItem } from '../../model/browser/photo/MediaItem';
@@ -92,6 +93,7 @@ export struct CustomDialogView {
   dialogController: CustomDialogController;
   multiSelectDialog: CustomDialogController;
   deleteDialogController: CustomDialogController;
+  thirdDeleteDialogController: CustomDialogController;
   removeDialogController: CustomDialogController;
   deleteProgressDialogController: CustomDialogController;
   removeProgressDialogController: CustomDialogController;
@@ -133,6 +135,17 @@ export struct CustomDialogView {
       builder: DeleteDialog(),
       autoCancel: false,
       alignment: this.isHorizontal || this.isSidebar ? DialogAlignment.Center : DialogAlignment.Bottom,
+      offset: {
+        dx: 0,
+        dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
+      },
+      customStyle: true
+    });
+
+    this.thirdDeleteDialogController = new CustomDialogController({
+      builder: ThirdDeleteDialog(),
+      autoCancel: false,
+      alignment: this.isHorizontal ? DialogAlignment.Center : DialogAlignment.Bottom,
       offset: {
         dx: 0,
         dy: this.isHorizontal || this.isSidebar ? 0 : $r('app.float.dialog_offset_bottom')
@@ -277,6 +290,8 @@ export struct CustomDialogView {
     this.multiSelectDialog = undefined;
     delete this.deleteDialogController;
     this.deleteDialogController = undefined;
+    delete this.thirdDeleteDialogController;
+    this.thirdDeleteDialogController = undefined;
     delete this.removeDialogController;
     this.removeDialogController = undefined;
     delete this.deleteProgressDialogController;
@@ -345,6 +360,14 @@ export struct CustomDialogView {
         self.dialogMessage = deleteMessage;
         self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
         self.deleteDialogController.open();
+      });
+
+    this.broadCast.on(BroadCastConstants.SHOW_THIRD_DELETE_DIALOG,
+      function (deleteMessage: Resource, confirmCallback: Function, cancelCallback?: Function) {
+        Log.info(TAG, 'SHOW_THIRD_DELETE_DIALOG ');
+        self.dialogMessage = deleteMessage;
+        self.dialogCallback = { confirmCallback: confirmCallback, cancelCallback: cancelCallback };
+        self.thirdDeleteDialogController.open();
       });
 
     this.broadCast.on(BroadCastConstants.SHOW_REMOVE_DIALOG,
