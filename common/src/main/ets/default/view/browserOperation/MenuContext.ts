@@ -24,6 +24,7 @@ export class MenuContext {
   albumUri: string;
   selectManager: SelectManager;
   onOperationStart: Function;
+  onOperationCancel: Function;
   onOperationEnd: Function;
   broadCast: BroadCast
   latlng: number[];
@@ -51,6 +52,11 @@ export class MenuContext {
 
   withOperationStartCallback(onOperationStart: Function): MenuContext {
     this.onOperationStart = onOperationStart;
+    return this;
+  }
+
+  withOperationCancelCallback(onOperationCancel: Function): MenuContext {
+    this.onOperationCancel = onOperationCancel;
     return this;
   }
 

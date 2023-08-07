@@ -188,6 +188,8 @@ export { AlbumSetNewMenuOperation } from './src/main/ets/default/view/browserOpe
 
 export { BatchDeleteMenuOperation } from './src/main/ets/default/view/browserOperation/BatchDeleteMenuOperation';
 
+export { ThirdDeleteOperation } from './src/main/ets/default/view/browserOperation/ThirdDeleteOperation';
+
 export { DeleteMenuOperation } from './src/main/ets/default/view/browserOperation/DeleteMenuOperation';
 
 export { AddMenuOperation } from './src/main/ets/default/view/browserOperation/AddMenuOperation';

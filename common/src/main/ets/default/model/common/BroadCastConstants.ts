@@ -18,6 +18,7 @@ export class BroadCastConstants {
   static readonly GROUP_SELECT: string = 'groupSelect';
   static readonly JUMP_PHOTO_BROWSER: string = 'JumpPhotoPage';
   static readonly SHOW_DELETE_DIALOG: string = 'showDeleteDialog';
+  static readonly SHOW_THIRD_DELETE_DIALOG = 'showThirdDeleteDialog';
   static readonly SHOW_REMOVE_DIALOG: string = 'showRemoveDialog';
   static readonly UPDATE_PROGRESS: string = 'updateProgress';
   static readonly CANCEL_DELETE: string = 'cancelDelete';

@@ -1307,6 +1307,26 @@
     {
       "name": "FA_ListCard_toggle_height",
       "value": "20vp"
+    },
+    {
+      "name": "third_delete_dialog_ico_height",
+      "value": "180vp"
+    },
+    {
+      "name": "third_delete_dialog_ico_height_multi",
+      "value": "172vp"
+    },
+    {
+      "name": "third_delete_dialog_second_ico_margin",
+      "value": "16vp"
+    },
+    {
+      "name": "third_delete_dialog_button_area_height",
+      "value": "56vp"
+    },
+    {
+      "name": "ohos_id_corner_radius_default_m",
+      "value": "12vp"
     }
   ]
 }

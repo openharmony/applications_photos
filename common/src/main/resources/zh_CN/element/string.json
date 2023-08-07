@@ -723,6 +723,10 @@
         {
             "name":"album_photos",
             "value":"图片"
+        },
+        {
+            "name": "third_delete_dialog_message",
+            "value": "是否允许 %s 删除 %d 个文件？"
         }
     ]
 }

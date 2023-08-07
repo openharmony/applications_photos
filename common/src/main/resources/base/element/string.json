@@ -723,6 +723,10 @@
         {
             "name":"album_photos",
             "value":"Photos"
+        },
+        {
+            "name": "third_delete_dialog_message",
+            "value": "Whether allow %s to delete %d files？"
         }
     ]
 }

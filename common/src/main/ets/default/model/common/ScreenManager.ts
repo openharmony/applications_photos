@@ -74,12 +74,8 @@ export class ScreenManager {
 
   private constructor() {
     Log.info(TAG, 'constructor');
-    UiUtil.getResourceString($r('app.string.init_horizontal')).then((value: string) => {
-      this.horizontal = 'true' === value;
-    })
-    UiUtil.getResourceString($r('app.string.init_sidebar')).then((value: string) => {
-      this.sidebar = 'true' === value;
-    })
+    this.horizontal = false;
+    this.sidebar = false;
   }
 
   static getInstance(): ScreenManager {
@@ -138,6 +134,10 @@ export class ScreenManager {
    */
   off(event: string, fn: Function): void {
     this.broadcast.off(event, fn);
+  }
+
+  setWinWidth(width: number): void{
+    this.winWidth = width;
   }
 
   // Unit：vp
@@ -350,9 +350,10 @@ export class ScreenManager {
   }
 
   getColumnsWidth(count: number): number {
-    Log.info(TAG, `getColumnsWidth count is ${count} colunms is ${this.columns}`);
     let columnWidth: number = (this.winWidth - Constants.COLUMN_MARGIN) / this.columns;
-    return parseInt((columnWidth * count - Constants.COLUMN_GUTTER) + '');
+    columnWidth = parseInt((columnWidth * count - Constants.COLUMN_GUTTER) + '');
+    Log.info(TAG, `getColumnsWidth count is ${count} colunms is ${this.columns}, columnWidth is ${columnWidth} `);
+    return columnWidth;
   }
 
   getScreenColumns(): number {
