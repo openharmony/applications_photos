@@ -1,0 +1,13 @@
+{
+  "name": "photos",
+  "description": "",
+  "version": "1.0.0",
+  "dependencies": {
+    "@ohos/editor": "../../feature/editor",
+    "@ohos/browser": "../../feature/browser",
+    "@ohos/thirdselect": "../../feature/thirdselect",
+    "@ohos/formAbility": "../../feature/formAbility",
+    "@ohos/common": "../../common",
+    "@ohos/timeline": "../../feature/timeline"
+  }
+}
