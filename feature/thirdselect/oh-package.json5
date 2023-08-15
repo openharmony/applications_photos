@@ -1,0 +1,10 @@
+{
+  "name": "@ohos/thirdselect",
+  "description": "a npm package which contains thirdSelect feature",
+  "main": "index.ts",
+  "version": "1.0.0",
+  "dependencies": {
+    "@ohos/browser": "../browser",
+    "@ohos/common": "../../common"
+  }
+}

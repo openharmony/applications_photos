@@ -1,15 +1,9 @@
 {
   "name": "@ohos/browser",
   "description": "a npm package which contains browser feature",
-  "ohos": {
-    "org": "huawei",
-    "buildTool": "hvigor",
-    "directoryLevel": "module"
-  },
-  "version": "1.0.0",
   "main": "index.ts",
+  "version": "1.0.0",
   "dependencies": {
     "@ohos/common": "../../common"
-  },
-  "type": "module"
+  }
 }
