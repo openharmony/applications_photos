@@ -2,7 +2,7 @@
   "module": {
     "name": "phone_photos",
     "type": "entry",
-    "srcEntrance": "./ets/Application/AbilityStage.ts",
+    "srcEntry": "./ets/Application/AbilityStage.ts",
     "description": "$string:mainability_description",
     "mainElement": "MainAbility",
     "deviceTypes": [
@@ -12,7 +12,6 @@
     "deliveryWithInstall": true,
     "installationFree": false,
     "pages": "$profile:main_pages",
-    "uiSyntax": "ets",
     "metadata": [
       {
         "name": "ArkTSPartialUpdate",
@@ -47,7 +46,7 @@
         "startWindowIcon": "$media:startWindow_Bg",
         "startWindowBackground": "$color:white",
         "name": "com.ohos.photos.MainAbility",
-        "srcEntrance": "./ets/MainAbility/MainAbility.ts",
+        "srcEntry": "./ets/MainAbility/MainAbility.ts",
         "description": "$string:description_mainability",
         "icon": "$media:ohos_gallery",
         "label": "$string:app_name",
@@ -83,7 +82,7 @@
     "extensionAbilities": [
       {
         "name": "com.ohos.photos.FormAbility",
-        "srcEntrance": "./ets/FormAbility/FormAbility.ts",
+        "srcEntry": "./ets/FormAbility/FormAbility.ts",
         "label": "$string:form_FormAbility_label",
         "description": "$string:app_name",
         "type": "form",
@@ -96,7 +95,7 @@
       },
       {
         "name": "com.ohos.photos.ServiceExtAbility",
-        "srcEntrance": "./ets/ServiceExt/ServiceExtAbility.ts",
+        "srcEntry": "./ets/ServiceExt/ServiceExtAbility.ts",
         "icon": "$media:ohos_gallery",
         "description": "$string:app_name",
         "type": "service",
