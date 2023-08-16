@@ -178,7 +178,7 @@ export struct PhotoItem {
       AppStorage.Delete(PhotoConstants.MATRIX);
     }
     if (this.dataSource) {
-      this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, null);
+      this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, () => {});
     }
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     this.onWindowSizeChangeCallBack = null;
