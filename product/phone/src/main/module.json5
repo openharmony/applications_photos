@@ -20,16 +20,13 @@
     ],
     "requestPermissions": [
       {
+        "name": "ohos.permission.PROXY_AUTHORIZATION_URI"
+      },
+      {
         "name": "ohos.permission.READ_IMAGEVIDEO"
       },
       {
         "name": "ohos.permission.WRITE_IMAGEVIDEO"
-      },
-      {
-        "name": "ohos.permission.READ_MEDIA"
-      },
-      {
-        "name": "ohos.permission.WRITE_MEDIA"
       },
       {
         "name": "ohos.permission.MEDIA_LOCATION"
