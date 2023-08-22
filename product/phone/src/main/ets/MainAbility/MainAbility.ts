@@ -135,7 +135,6 @@ export default class MainAbility extends Ability {
       } else {
         AppStorage.SetOrCreate('viewDataUri', wantParamUri);
       }
-      // AppStorage.SetOrCreate('viewDataUri', wantParamUri);
       if (wantParam?.albumUri) {
         AppStorage.SetOrCreate('viewDataAlbumUri', wantParam.albumUri);
       } else {
