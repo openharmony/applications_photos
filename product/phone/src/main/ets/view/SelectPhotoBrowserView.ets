@@ -113,7 +113,7 @@ export struct SelectPhotoBrowserView {
     }
 
     this.dataSource.setAlbumDataSource(AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER));
-    if (this.isMultiPick == true) {
+    if (this.isMultiPick == true && this.selectManager) {
       this.selectedCount = this.selectManager.getSelectedCount();
     }
 
@@ -154,8 +154,6 @@ export struct SelectPhotoBrowserView {
     this.dataSource.release();
     mMultimodalInputManager.unregisterListener();
     this.controller = undefined;
-    this.broadCast.off(null, null);
-    this.appBroadCast.off(BroadCastConstants.SELECT_PHOTO_BROWSER_BACK_PRESS_EVENT, null);
   }
 
   onDataSizeChanged(size: number): void {
