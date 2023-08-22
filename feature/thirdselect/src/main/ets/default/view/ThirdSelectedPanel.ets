@@ -283,7 +283,7 @@ export struct ThirdSelectedPanel {
   }
 
   private getPosition(item: MediaItem): number {
-    if (this.dataSource){
+    if (this.dataSource) {
       return this.dataSource.getDataIndex(item) + this.dataSource.getGroupCountBeforeItem(item);
     }
   }
