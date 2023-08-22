@@ -60,6 +60,7 @@ struct ThirdSelectPhotoGridPage {
     @State gridRowCount: number = 0;
     @State isHideScrollBar: boolean = true;
     isFromFa: boolean = false;
+    isFromFaPhoto: boolean = false;
     scroller: Scroller = new Scroller();
     private appBroadcast: Broadcast = broadcastManager.getBroadcast();
     private barModel: ThirdSelectBarModel = new ThirdSelectBarModel();
@@ -133,6 +134,7 @@ struct ThirdSelectPhotoGridPage {
             this.bundleName = new String(param.bundleName).valueOf();
             this.isMultiPick = new Boolean(param.isMultiPick).valueOf();
             this.isFromFa = new Boolean(param.isFromFa).valueOf();
+            this.isFromFaPhoto = new Boolean(param.isFromFaPhoto).valueOf();
             if (!!param.maxSelectCount && param.maxSelectCount > 0) {
                 this.maxSelectCount = new Number(param.maxSelectCount).valueOf() || 0
             }
@@ -141,11 +143,14 @@ struct ThirdSelectPhotoGridPage {
                 Log.info(TAG, `filterMediaType: ${this.filterMediaType}`)
             }
         }
-        if (this.isFromFa) {
+        if (this.isFromFa || this.isFromFaPhoto) {
             this.filterMediaType = MediaConstants.SELECT_TYPE_IMAGE;
             AppStorage.SetOrCreate(Constants.FORM_ITEM_NAME, param.itemName);
             AppStorage.SetOrCreate(Constants.FORM_ITEM_ALBUM_ID, param.itemId);
             AppStorage.SetOrCreate(Constants.FORM_ITEM_DISPLAY_NAME, param.itemDisplayName);
+        }
+        if(this.maxSelectCount) {
+            this.filterMediaType = MediaConstants.SELECT_TYPE_IMAGE;
         }
         this.groupDataSource.setSelectType(this.filterMediaType);
         Log.info(TAG, `ThirdSelectPhotoGridPage isMultiPick: ${this.isMultiPick},\
