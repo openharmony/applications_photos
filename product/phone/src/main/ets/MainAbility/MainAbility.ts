@@ -130,7 +130,11 @@ export default class MainAbility extends Ability {
     } else if (want.action === wantConstant.Action.ACTION_VIEW_DATA) {
       isShowMenuFromThirdView = wantParam.isShowMenu as boolean;
       AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_VIEW_DATA);
-      AppStorage.SetOrCreate('viewDataUri', wantParamUri);
+      if (want.uri) {
+        AppStorage.SetOrCreate('viewDataUri', want.uri);
+      } else {
+        AppStorage.SetOrCreate('viewDataUri', wantParamUri);
+      }
       if (wantParam?.albumUri) {
         AppStorage.SetOrCreate('viewDataAlbumUri', wantParam.albumUri);
       } else {

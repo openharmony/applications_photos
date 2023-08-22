@@ -283,7 +283,9 @@ export struct ThirdSelectedPanel {
   }
 
   private getPosition(item: MediaItem): number {
-    return this.dataSource.getDataIndex(item) + this.dataSource.getGroupCountBeforeItem(item);
+    if (this.dataSource) {
+      return this.dataSource.getDataIndex(item) + this.dataSource.getGroupCountBeforeItem(item);
+    }
   }
 
   private selectTextColor() {

@@ -113,7 +113,7 @@ export struct SelectPhotoBrowserView {
     }
 
     this.dataSource.setAlbumDataSource(AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER));
-    if (this.isMultiPick == true) {
+    if (this.isMultiPick == true && this.selectManager) {
       this.selectedCount = this.selectManager.getSelectedCount();
     }
 
