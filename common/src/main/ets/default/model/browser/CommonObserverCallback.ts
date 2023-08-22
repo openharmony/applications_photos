@@ -31,6 +31,8 @@ export class CommonObserverCallback implements MediaObserverCallback {
   }
 
   onChange(mediaType: string) {
-    this.source.onMediaLibDataChange(mediaType);
+    if(this.source) {
+      this.source.onMediaLibDataChange(mediaType);
+    }
   }
 }
