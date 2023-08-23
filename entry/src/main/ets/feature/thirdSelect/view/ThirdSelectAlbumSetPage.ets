@@ -104,7 +104,8 @@ struct ThirdSelectAlbumSetPage {
             }
         }
         Log.info(TAG, `isFromFa: ${this.isFromFa} isFromFaPhoto ${this.isFromFaPhoto}`);
-        if (this.isFromFa) {
+        
+        if (this.isFromFa || this.isFromFaPhoto) {
             this.albumsDataSource.setSelectType(MediaConstants.SELECT_TYPE_IMAGE)
             this.albumsDataSource.setBlackList([MediaConstants.ALBUM_ID_VIDEO, MediaConstants.ALBUM_ID_RECYCLE]);
         } else {

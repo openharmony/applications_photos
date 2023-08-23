@@ -204,6 +204,7 @@ export struct ThirdAlbumGridItem {
                         maxSelectCount: this.maxSelectCount,
                         itemDisplayName: this.item.displayName,
                         isFromFa: this.isFromFa,
+                        isFromFaPhoto: this.isFromFaPhoto,
                         bundleName: this.bundleName,
                         filterMediaType: this.filterMediaType
                     }
