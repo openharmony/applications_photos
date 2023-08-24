@@ -57,6 +57,7 @@ export struct TitleBar {
     }
 
     discardCallback() {
+        AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 0);
         Log.debug(this.TAG, 'discardCallback called');
     }
 
@@ -102,6 +103,7 @@ export struct TitleBar {
         } else if (this.selectedMode == PhotoEditMode.EDIT_MODE_CROP && this.cropEdit.couldReset()) {
             this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
         } else {
+            AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 0);
             router.back();
         }
     }
