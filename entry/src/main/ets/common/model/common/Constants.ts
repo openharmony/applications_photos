@@ -126,6 +126,8 @@ export class Constants {
     }
     static readonly DIALOG_BOTTOM_OFFSET: number = 16;
 
+    static readonly EDIT_REPLACE = 'edit_replace';
+
     // Local tab index
     static readonly LOCAL_TAB_INDEX: number = 0;
 
