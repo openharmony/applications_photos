@@ -51,6 +51,7 @@ export struct TitleBar {
 
     replaceOriginalCallback() {
         Log.debug(this.TAG, 'replaceOriginalCallback called');
+        AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 1);
         PhotoEditorManager.getInstance().save(true).then((id: number) => {
             this.saveImageCallback(id)
         });
@@ -117,6 +118,7 @@ export struct TitleBar {
             this.broadCast.emit(BroadcastConstants.SHOW_SAVE_PHOTO_DIALOG,
                 [this.saveAsNewCallback.bind(this), this.replaceOriginalCallback.bind(this)]);
         } else {
+            AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 1);
             router.back();
         }
     }
