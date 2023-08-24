@@ -247,9 +247,11 @@ struct PhotoBrowser {
                 mediaDataItemCache.get(currentPhoto.uri).favouriteStatus = currentPhoto.favouriteStatus;
             }
             // 收藏相册进入大图，点击取消收藏会导致Item成员变少，所以要dataRemove
-            this.browserDataSource.reloadGroupItemData(false).then(() => {
-                this.operateEnd();
-            });
+            if(this.albumInfo.id === MediaConstants.ALBUM_ID_FAVOR) {
+                this.browserDataSource.reloadGroupItemData(false).then(() => {
+                    this.operateEnd();
+                });
+            }
             this.updateMenu();
             this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
         }
@@ -676,10 +678,15 @@ struct PhotoBrowser {
         for(let i = 0;i < this.browserDataSource.groupDataItem.length;i++) {
            await this.browserDataSource.groupDataItem[i].load(false);
         }
+        if(AppStorage.Get(Constants.EDIT_REPLACE) == 0) {
+            this.isToEdit = false;
+        }
         this.onPhotoChanged(this.currentIndex);
 		    this.browserDataSource.notifyDataChange(this.currentIndex);
         if (this.isToEdit) {
             this.isToEdit = false;
+            this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
+        } else {
             this.appBroadcast.emit(BroadcastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
         }
     }
