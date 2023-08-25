@@ -59,6 +59,22 @@
             ],
             "uris": [
               {
+                "type": "image/*",
+                "scheme": 'file'
+              },
+              {
+                "type": "video/*",
+                "scheme": 'file'
+              },
+              {
+                "type": "multipleselect",
+                "scheme": 'file'
+              },
+              {
+                "type": "singleselect",
+                "scheme": 'file'
+              },
+              {
                 "type": "image/*"
               },
               {
