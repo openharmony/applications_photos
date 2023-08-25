@@ -88,6 +88,7 @@ export struct EditExitDialog {
                     .onClick(() => {
                         this.controller.close();
                         this.editExitDialogCallback && this.editExitDialogCallback.discardCallback();
+                        AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 0);
                         router.back()
                     })
                 }

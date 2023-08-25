@@ -51,12 +51,14 @@ export struct TitleBar {
 
     replaceOriginalCallback() {
         Log.debug(this.TAG, 'replaceOriginalCallback called');
+        AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 1);
         PhotoEditorManager.getInstance().save(true).then((id: number) => {
             this.saveImageCallback(id)
         });
     }
 
     discardCallback() {
+        AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 0);
         Log.debug(this.TAG, 'discardCallback called');
     }
 
@@ -102,6 +104,7 @@ export struct TitleBar {
         } else if (this.selectedMode == PhotoEditMode.EDIT_MODE_CROP && this.cropEdit.couldReset()) {
             this.broadCast.emit(BroadcastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
         } else {
+            AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 0);
             router.back();
         }
     }
@@ -115,6 +118,7 @@ export struct TitleBar {
             this.broadCast.emit(BroadcastConstants.SHOW_SAVE_PHOTO_DIALOG,
                 [this.saveAsNewCallback.bind(this), this.replaceOriginalCallback.bind(this)]);
         } else {
+            AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 1);
             router.back();
         }
     }

@@ -85,6 +85,7 @@ export struct SaveDialog {
                                 this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                                 this.controller.close()
                                 this.saveDialogCallback && this.saveDialogCallback.replaceOriginalCallback()
+                                AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 1);
                             }).backgroundColor($r('app.color.transparent'))
                         }.width(Constants.PERCENT_ONE_THIRD)
                         .padding({
@@ -114,6 +115,7 @@ export struct SaveDialog {
                                 this.controller.close()
                                 this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                                 this.saveDialogCallback && this.saveDialogCallback.saveAsNewCallback()
+                                AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 1);
                             }).backgroundColor($r('app.color.transparent'))
                         }
                         .width(Constants.PERCENT_ONE_THIRD)
@@ -140,6 +142,7 @@ export struct SaveDialog {
                         this.controller.close()
                         this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                         this.saveDialogCallback && this.saveDialogCallback.saveAsNewCallback()
+                        AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 1);
                     }).backgroundColor($r('app.color.transparent'))
 
                     Button() {
@@ -154,6 +157,7 @@ export struct SaveDialog {
                         this.broadCast.emit(BroadcastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
                         this.controller.close()
                         this.saveDialogCallback && this.saveDialogCallback.replaceOriginalCallback()
+                        AppStorage.SetOrCreate(Constants.EDIT_REPLACE, 1);
                     }).backgroundColor($r('app.color.transparent'))
 
                     Button() {
