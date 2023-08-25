@@ -272,7 +272,6 @@ export struct SelectPhotoBrowserView {
           // @ts-ignore
         .transition(TransitionEffect.opacity(0))
     }
-    .padding({ bottom: $r('app.float.selected_photos_list_bar') })
   }
 
   pageTransition() {
