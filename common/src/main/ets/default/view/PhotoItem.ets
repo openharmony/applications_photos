@@ -94,12 +94,34 @@ export struct PhotoItem {
   private isFromFACard: boolean = false;
   private dataSource: PhotoDataSource;
   private isDefaultFA: boolean = false;
-  onWindowSizeChangeCallBack = () => this.onWindowSizeChanged();
+  private onWindowSizeChangeCallBack = () => this.onWindowSizeChanged();
+  private onDataReloadFunc: Function = this.onDataReload.bind(this);
+  private resetDefaultScaleFunc: Function = this.resetDefaultScale.bind(this);
+  private saveScaleFunc: Function = this.saveScale.bind(this);
 
   onGeometryIdChange() {
     this.geometryTransitionId = (this.mPosition === this.currentIndex) ? this.geometryTransitionBrowserId : 'default_id';
     Log.debug(TAG, 'geometryTransitionId = ' + this.geometryTransitionId + ', this.mPosition = ' + this.mPosition +
     ', this.currentIndex = ' + this.currentIndex);
+  }
+
+  private onDataReload(addCount: KeyEvent): void {
+    Log.info(TAG, `onDataReload ${this.item.uri}`);
+    let item: MediaItem = this.dataSource.getItemByUri(this.item.uri) as MediaItem;
+    if (item) {
+      this.item = item;
+      Log.debug(TAG, `Item[${this.item.uri}] is changed`);
+    }
+  }
+
+  private resetDefaultScale(): void {
+    this.resetScaleAnimation(Matrix4.identity().copy());
+  }
+
+  private saveScale(): void {
+    if (this.currentIndex == this.mPosition) {
+      AppStorage.SetOrCreate(PhotoConstants.MATRIX, this.matrix);
+    }
   }
 
   aboutToAppear(): void {
@@ -110,23 +132,11 @@ export struct PhotoItem {
     this.firstLoad = true;
     this.eventPipelineSizeChange = this.eventPipelineSizeChange.bind(this)
     if (this.dataSource) {
-      this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, (addCount) => {
-        let item: MediaItem = this.dataSource.getItemByUri(this.item.uri);
-        if (item) {
-          this.item = item;
-          Log.debug(TAG, `Item[${this.item.uri}] is changed`);
-        }
-      });
+      this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadFunc);
     }
     ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.broadCast.on(PhotoConstants.RESET_DEFAULT_SCALE + this.item.uri, () => {
-      this.resetScaleAnimation(Matrix4.identity().copy());
-    });
-    this.broadCast.on(PhotoConstants.SAVE_SCALE, () => {
-      if (this.currentIndex == this.mPosition) {
-        AppStorage.SetOrCreate(PhotoConstants.MATRIX, this.matrix);
-      }
-    });
+    this.broadCast.on(PhotoConstants.RESET_DEFAULT_SCALE + this.item.uri, this.resetDefaultScaleFunc);
+    this.broadCast.on(PhotoConstants.SAVE_SCALE, this.saveScaleFunc);
     this.onTransitionChange();
     this.onViewDataChanged();
     this.updateListCardWidth();
@@ -178,12 +188,12 @@ export struct PhotoItem {
       AppStorage.Delete(PhotoConstants.MATRIX);
     }
     if (this.dataSource) {
-      this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, () => {});
+      this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadFunc);
     }
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     this.onWindowSizeChangeCallBack = null;
-    this.broadCast.off(PhotoConstants.RESET_DEFAULT_SCALE + this.item.uri, null);
-    this.broadCast.off(PhotoConstants.SAVE_SCALE, null);
+    this.broadCast.off(PhotoConstants.RESET_DEFAULT_SCALE + this.item.uri, this.resetDefaultScaleFunc);
+    this.broadCast.off(PhotoConstants.SAVE_SCALE, this.saveScaleFunc);
     this.lcdPixelMapUpdate = false;
     Log.info(TAG, `aboutToDisappear ${this.item.uri} end`);
   }
