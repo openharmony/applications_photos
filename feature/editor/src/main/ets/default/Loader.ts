@@ -34,8 +34,6 @@ export class Loader {
       return null;
     }
 
-    Log.error(TAG, 'get file asset failed.');
-
     let size = {
       width: result.get(userFileManager.ImageVideoKey.WIDTH.toString()) as number,
       height: result.get(userFileManager.ImageVideoKey.HEIGHT.toString()) as number

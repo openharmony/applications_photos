@@ -68,6 +68,7 @@ export struct EditMain {
   private mediaItem: MediaItem = globalThis.EditorMediaItem;
   private screenManager = ScreenManager.getInstance();
   private isLoadFailed: boolean = false;
+  private albumUri: string = globalThis.EditorAlbumUri;
   onWindowSizeChangeCallBack = () => this.updateIsVerticalScreen();
 
   updateIsVerticalScreen(): void {
@@ -114,7 +115,7 @@ export struct EditMain {
     if (this.mediaItem) {
       this.isLoadFailed = false;
       this.editorManager.initialize(
-        this.mediaItem, PhotoEditMode.EDIT_MODE_CROP, this.loadFailedCallback.bind(this));
+        this.mediaItem, this.albumUri, PhotoEditMode.EDIT_MODE_CROP, this.loadFailedCallback.bind(this));
     }
     this.cropEdit = this.editorManager.getPhotoEditBaseInstance(PhotoEditMode.EDIT_MODE_CROP) as PhotoEditCrop;
     ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);

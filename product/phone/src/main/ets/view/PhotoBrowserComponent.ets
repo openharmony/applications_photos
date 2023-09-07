@@ -138,6 +138,8 @@ export struct PhotoBrowserComponent {
   private theDeleteItem: MediaItem;
   private geometryTransitionEnable: boolean = false;
   private isShowMenuFromThirdView: boolean = true;
+  private isToEdit = false;
+  private photoBrowserBackFunc: Function = this.photoBrowserBack.bind(this);
 
   onPageChanged() {
     Log.info(TAG, `call page status changed ${this.pageStatus}`)
@@ -262,6 +264,7 @@ export struct PhotoBrowserComponent {
         router.pushUrl({
           url: 'pages/EditMain'
         })
+        this.isToEdit = true;
         return;
       case Action.EDIT_INVALID.actionID:
         if (currentPhoto == undefined || currentPhoto.size == 0) {
@@ -407,7 +410,7 @@ export struct PhotoBrowserComponent {
 
   onDataSizeChanged(size: number): void {
     Log.info(TAG, `onDataSizeChanged, size is ${size}`);
-    if (size == 0) {
+    if (size == 0 && !this.isToEdit) {
       if (this.uriFromThirdPartyApp) {
         return;
       }
@@ -699,7 +702,7 @@ export struct PhotoBrowserComponent {
         window.Orientation.UNSPECIFIED);
     }
     this.broadCast.off(null, null);
-    this.appBroadCast.off(BroadCastConstants.PHOTO_BROWSER_BACK_PRESS_EVENT, null);
+    this.appBroadCast.off(BroadCastConstants.PHOTO_BROWSER_BACK_PRESS_EVENT, this.photoBrowserBackFunc);
   }
 
   getAlbumUriByUri(albumUri: string) {
@@ -980,6 +983,7 @@ export struct PhotoBrowserComponent {
 
     this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED_WITH_EDIT, () => {
       Log.debug(TAG, 'animate to data reloaded start with edit');
+      this.isToEdit = false;
       try {
         let uri: string = AppStorage.Get(BroadCastConstants.PHOTO_EDIT_SAVE_URI);
         Log.debug(TAG, `data reloaded start with edit by uri ${uri}`);
@@ -1006,10 +1010,7 @@ export struct PhotoBrowserComponent {
       }
     });
 
-    this.appBroadCast.on(BroadCastConstants.PHOTO_BROWSER_BACK_PRESS_EVENT, () => {
-      Log.debug(TAG, 'hook back press from page.');
-      this.onBackPress();
-    });
+    this.appBroadCast.on(BroadCastConstants.PHOTO_BROWSER_BACK_PRESS_EVENT, this.photoBrowserBackFunc);
 
     let msg = {
       'From': BigDataConstants.LOCAL_MEDIA,
@@ -1018,6 +1019,11 @@ export struct PhotoBrowserComponent {
     ReportToBigDataUtil.report(BigDataConstants.ENTER_PHOTO_BROWSER_ID, msg);
     this.breakpointSystem.registerOrientationChange();
     TraceControllerUtils.finishTrace('PhotoBrowserAboutToAppear');
+  }
+
+  private photoBrowserBack(): void {
+    Log.debug(TAG, 'hook back press from page.');
+    this.onBackPress();
   }
 
   onGetItemIndexByUri(index: number): void {
