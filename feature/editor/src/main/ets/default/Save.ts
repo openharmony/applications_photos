@@ -82,7 +82,6 @@ export class Save {
   }
 
   private static async createFileAsset(uri: string, albumUri: string,  isReplace: Boolean) {
-    Log.info(TAG, `liujuan = ${albumUri} 222 = ${JSON.stringify(albumUri)}`);
     let dataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
     let fileAsset = await dataImpl.getDataByUri(uri);
 
