@@ -14,7 +14,8 @@
  */
 
 import router from '@ohos.router';
-import { BrowserConstants, BrowserController } from '@ohos/common';
+import { BrowserConstants } from '@ohos/common';
+import { BrowserController } from '@ohos/common/CommonComponents';
 import { ThirdSelectPhotoBrowserBase } from '@ohos/thirdselect';
 
 // third selection photoBrowser

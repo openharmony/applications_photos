@@ -27,7 +27,7 @@ import {
   UiUtil,
   WindowUtil
 } from '@ohos/common';
-import { PhotoBrowserActionBar } from '@ohos/browser';
+import { PhotoBrowserActionBar } from '@ohos/browser/BrowserComponents';
 
 const TAG: string = 'VideoBrowser';
 

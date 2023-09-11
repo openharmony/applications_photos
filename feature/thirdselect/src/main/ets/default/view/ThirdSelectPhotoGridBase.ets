@@ -21,16 +21,12 @@ import {
   BroadCast,
   BroadCastConstants,
   BroadCastManager,
-  BrowserController,
   CommonObserverCallback,
   Constants,
-  GridScrollBar,
-  ImageGridItemComponent,
   Log,
   MediaDataSource,
   MediaItem,
   MediaObserver,
-  NoPhotoIndexComponent,
   PhotoDataImpl,
   ReportToBigDataUtil,
   ScreenManager,
@@ -40,6 +36,12 @@ import {
   UserFileManagerAccess,
   ViewData,
 } from '@ohos/common';
+import {
+  BrowserController,
+  GridScrollBar,
+  ImageGridItemComponent,
+  NoPhotoIndexComponent
+} from '@ohos/common/CommonComponents';
 import { ThirdSelectedPageActionBar } from './ThirdSelectedPageActionBar';
 import { ThirdSelectedPanel } from './ThirdSelectedPanel';
 import { CameraGridItemComponent } from './CameraGridItemComponent';

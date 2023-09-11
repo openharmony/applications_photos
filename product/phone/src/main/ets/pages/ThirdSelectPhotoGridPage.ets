@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 
-import { BrowserConstants, BrowserController } from '@ohos/common';
+import { BrowserConstants } from '@ohos/common';
+import { BrowserController } from '@ohos/common/CommonComponents';
 import { ThirdSelectPhotoBrowserBase, ThirdSelectPhotoGridBase } from '@ohos/thirdselect';
 
 // Third Select Album Page

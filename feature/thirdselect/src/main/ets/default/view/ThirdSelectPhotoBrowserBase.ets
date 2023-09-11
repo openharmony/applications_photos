@@ -21,23 +21,26 @@ import {
   BroadCastConstants,
   BroadCastManager,
   BrowserConstants,
-  BrowserController,
   Constants,
   Log,
   MediaItem,
   mMultimodalInputManager,
-  PhotoBrowserBg,
   PhotoDataSource,
-  PhotoSwiper,
   ReportToBigDataUtil,
   ScreenManager,
   SelectUtil,
-  ThirdSelectManager,
-  ThirdSelectPhotoBrowserActionBar,
+  ThirdSelectManager
 } from '@ohos/common';
+import {
+  BrowserController,
+  PhotoBrowserBg,
+  PhotoSwiper,
+  ThirdSelectPhotoBrowserActionBar
+} from '@ohos/common/CommonComponents';
+
 import { FormConstants, IS_HORIZONTAL } from '../utils/ThirdSelectConstants';
 import { ThirdSelectedPanel } from './ThirdSelectedPanel';
-import { MouseTurnPageOperation } from '@ohos/browser';
+import { MouseTurnPageOperation } from '@ohos/browser/BrowserComponents';
 
 const TAG: string = 'thiSel_ThirdSelectPhotoBrowserBase';
 

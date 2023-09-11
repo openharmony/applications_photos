@@ -20,13 +20,3 @@ export { GetTimelineDataCallback } from './src/main/ets/model/GetTimelineDataCal
 export { TimelineDataSource } from './src/main/ets/model/TimelineDataSource';
 
 export { TimelineDataSourceManager } from './src/main/ets/model/TimelineDataSourceManager';
-
-export { TimelinePage } from './src/main/ets/view/TimelinePage';
-
-export { TimelinePageActionBar } from './src/main/ets/view/TimelinePageActionBar';
-
-export { TimelinePageToolBar } from './src/main/ets/view/TimelinePageToolBar';
-
-export { TimelineScrollBar } from './src/main/ets/view/TimelineScrollBar';
-
-export { TimelineTitleComponent } from './src/main/ets/view/TimelineTitleComponent';

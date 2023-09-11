@@ -19,24 +19,26 @@ import {
   BroadCast,
   BroadCastConstants,
   BroadCastManager,
-  BrowserController,
   Constants,
-  CustomDialogView,
-  GridScrollBar,
-  ImageGridItemComponent,
   JumpSourceToMain,
   Log,
   MediaDataSource,
   MediaItem,
-  MoveOrCopyBroadCastProp,
-  NoPhotoComponent,
   ScreenManager,
   SelectManager,
   TraceControllerUtils,
   UiUtil,
   ViewData,
 } from '@ohos/common';
-import { AlbumSelectActionBar } from '@ohos/browser';
+import {
+  BrowserController,
+  CustomDialogView,
+  GridScrollBar,
+  ImageGridItemComponent,
+  MoveOrCopyBroadCastProp,
+  NoPhotoComponent
+} from '@ohos/common/CommonComponents';
+import { AlbumSelectActionBar } from '@ohos/browser/BrowserComponents';
 import { PhotoBrowserComponent } from '../view/PhotoBrowserComponent';
 import { SelectPhotoBrowserView } from '../view/SelectPhotoBrowserView';
 

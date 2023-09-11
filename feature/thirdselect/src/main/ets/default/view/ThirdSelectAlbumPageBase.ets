@@ -27,12 +27,12 @@ import {
   Constants,
   Log,
   MediaObserver,
-  NoPhotoIndexComponent,
   ScreenManager,
   ThirdSelectManager,
   UiUtil,
   UserFileManagerAccess
 } from '@ohos/common';
+import { NoPhotoIndexComponent } from '@ohos/common/CommonComponents';
 import { ThirdAlbumGridItem } from './ThirdAlbumGridItem';
 import { ThirdSelectedPageActionBar } from './ThirdSelectedPageActionBar';
 import { IS_SIDE_BAR, IS_SPLIT_MODE, LEFT_BLANK, SelectParams } from '../utils/ThirdSelectConstants';

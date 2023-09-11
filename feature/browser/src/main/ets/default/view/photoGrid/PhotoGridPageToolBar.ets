@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 
-import { Action, Log, ToolBar } from '@ohos/common';
+import { Action, Log } from '@ohos/common';
+import { ToolBar } from '@ohos/common/CommonComponents';
 
 const TAG: string = 'browser_PhotoGridPageToolBar';
 

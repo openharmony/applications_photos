@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 
-import { BrowserConstants, Constants, Log, ScreenManager, ToolBar } from '@ohos/common';
+import { BrowserConstants, Constants, Log, ScreenManager } from '@ohos/common';
+import { ToolBar } from '@ohos/common/CommonComponents';
 import Curves from '@ohos.curves';
 
 const TAG: string = 'browser_PhotoBrowserToolBar';

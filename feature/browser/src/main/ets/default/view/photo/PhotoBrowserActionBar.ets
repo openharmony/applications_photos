@@ -15,7 +15,6 @@
 
 import {
   Action,
-  ActionBar,
   ActionBarColorMode,
   ActionBarMode,
   ActionBarProp,
@@ -24,6 +23,7 @@ import {
   Log,
   ScreenManager
 } from '@ohos/common';
+import { ActionBar } from '@ohos/common/CommonComponents';
 import Curves from '@ohos.curves';
 
 const TAG: string = 'browser_PhotoBrowserActionBar';

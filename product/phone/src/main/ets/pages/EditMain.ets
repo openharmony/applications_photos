@@ -20,14 +20,15 @@ import {
   BroadCastConstants,
   BroadCastManager,
   Constants,
-  CustomDialogView,
   Log,
   MediaItem,
   ReportToBigDataUtil,
   ScreenManager,
   UiUtil
 } from '@ohos/common';
-import { CropImageShow, MainMenuBar, PhotoEditCrop, PhotoEditMode, PhotoEditorManager, TitleBar } from '@ohos/editor';
+import { CustomDialogView } from '@ohos/common/CommonComponents';
+import { PhotoEditCrop, PhotoEditMode, PhotoEditorManager } from '@ohos/editor';
+import { CropImageShow, MainMenuBar, TitleBar } from '@ohos/editor/EditorComponnts';
 
 const TAG: string = 'EditMain';
 

@@ -19,25 +19,27 @@ import {
   AlbumInfo,
   AlbumSetDataInfo,
   AlbumSetDataSource,
-  AlbumSetNewMenuOperation,
   AlbumSetSelectManager,
   BroadCast,
   BroadCastConstants,
   BroadCastManager,
   CommonObserverCallback,
   Constants,
-  CustomDialogView,
   Log,
   MediaObserver,
   MenuContext,
   MenuOperationFactory,
-  MoveOrCopyBroadCastProp,
-  NoPhotoIndexComponent,
   ScreenManager,
-  TabItemWithText,
   TraceControllerUtils,
   UiUtil
 } from '@ohos/common';
+import {
+  AlbumSetNewMenuOperation,
+  CustomDialogView,
+  MoveOrCopyBroadCastProp,
+  NoPhotoIndexComponent,
+  TabItemWithText
+} from '@ohos/common/CommonComponents';
 import { AlbumSetPageActionBar } from './AlbumSetPageActionBar';
 import { AlbumSetPageToolBar } from './AlbumSetPageToolBar';
 import { AlbumGridItemNewStyle } from './AlbumGridItemNewStyle';
