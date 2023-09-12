@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import type { MenuOperation } from '@ohos/common';
+import { MenuOperation } from '@ohos/common';
 import {
   Action,
   AlbumInfo,

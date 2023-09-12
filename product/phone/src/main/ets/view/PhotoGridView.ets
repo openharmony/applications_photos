@@ -16,7 +16,7 @@
 import router from '@ohos.router';
 import prompt from '@system.prompt';
 import Curves from '@ohos.curves';
-import type { MenuOperation } from '@ohos/common';
+import { MenuOperation } from '@ohos/common';
 import {
   Action,
   AddMenuOperation,

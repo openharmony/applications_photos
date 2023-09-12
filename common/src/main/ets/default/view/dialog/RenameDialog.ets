@@ -14,7 +14,7 @@
  */
 
 import { Log } from '../../utils/Log';
-import type { DialogCallback } from '../../model/common/DialogUtil';
+import { DialogCallback } from '../../model/common/DialogUtil';
 import { ColumnSize, ScreenManager } from '../../model/common/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 import { UiUtil } from '../../utils/UiUtil';

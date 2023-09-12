@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import router from '@ohos.router';
-import type { MenuOperation } from '@ohos/common';
+import { MenuOperation } from '@ohos/common';
 import {
   Action,
   BroadCast,

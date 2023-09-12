@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import type { DialogCallback } from '../../model/common/DialogUtil';
+import { DialogCallback } from '../../model/common/DialogUtil';
 import { Log } from '../../utils/Log';
 import { ColumnSize, ScreenManager } from '../../model/common/ScreenManager';
 import { Constants } from '../../model/common/Constants';
