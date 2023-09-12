@@ -15,7 +15,6 @@
 
 import {
   Action,
-  ActionBar,
   ActionBarMode,
   ActionBarProp,
   ActionBarSelectionMode,
@@ -25,6 +24,7 @@ import {
   ScreenManager,
   UiUtil
 } from '@ohos/common';
+import { ActionBar } from '@ohos/common/CommonComponents';
 
 const TAG: string = 'browser_PhotoGridPageActionBar';
 

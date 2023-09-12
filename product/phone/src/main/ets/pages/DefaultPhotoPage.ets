@@ -16,7 +16,6 @@
 import router from '@ohos.router';
 import {
   Action,
-  ActionBar,
   ActionBarMode,
   ActionBarProp,
   BroadCast,
@@ -26,10 +25,13 @@ import {
   Log,
   MediaItem,
   BrowserConstants as PhotoConstants,
-  PhotoItem,
   ScreenManager,
   UiUtil
 } from '@ohos/common';
+import {
+  ActionBar,
+  PhotoItem
+} from '@ohos/common/CommonComponents';
 
 const TAG: string = 'DefaultPhotoPage';
 

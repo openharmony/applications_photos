@@ -27,7 +27,7 @@
     "products": [
       {
         "name": "default",
-        "signingConfig": "debug"
+        "signingConfig": "debug" 
       },
     ],
   },

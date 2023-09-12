@@ -13,8 +13,9 @@
  * limitations under the License.
  */
 
-import { BrowserController, Constants, Log } from '@ohos/common';
-import { TimelinePage } from '@ohos/timeline';
+import { Constants, Log } from '@ohos/common';
+import { BrowserController } from '@ohos/common/CommonComponents';
+import { TimelinePage } from '@ohos/timeline/TimelineComponents';
 import { PhotoBrowserComponent } from './PhotoBrowserComponent';
 import { SelectPhotoBrowserView } from './SelectPhotoBrowserView';
 

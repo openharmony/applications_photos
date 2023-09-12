@@ -22,18 +22,14 @@ import {
   BroadCast,
   BroadCastConstants,
   BroadCastManager,
-  BrowserController,
   Constants,
-  CustomDialogView,
   DateUtil,
   DeleteMenuOperation,
-  ImageGridItemComponent,
   Log,
   MediaItem,
   MediaOperationType,
   MenuContext,
   MenuOperationFactory,
-  NoPhotoIndexComponent,
   ScreenManager,
   ShareMenuOperation,
   TimelineData,
@@ -43,6 +39,12 @@ import {
   ViewData,
   ViewType
 } from '@ohos/common';
+import {
+  BrowserController,
+  CustomDialogView,
+  ImageGridItemComponent,
+  NoPhotoIndexComponent,
+} from '@ohos/common/CommonComponents';
 import { TimelineDataSource } from '../model/TimelineDataSource';
 import { TimelineTitleComponent } from './TimelineTitleComponent';
 import { TimelinePageActionBar } from './TimelinePageActionBar';

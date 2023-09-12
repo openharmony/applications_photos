@@ -19,21 +19,23 @@ import {
   BroadCast,
   BroadCastConstants,
   BroadCastManager,
-  BrowserController,
   Constants,
   Log,
   MediaItem,
   mMultimodalInputManager,
-  PhotoBrowserBg,
   BrowserConstants as PhotoConstants,
   PhotoDataSource,
-  PhotoSwiper,
   ScreenManager,
   SelectManager,
   SelectUtil,
-  ThirdSelectPhotoBrowserActionBar,
   UiUtil
 } from '@ohos/common';
+import {
+  BrowserController,
+  PhotoBrowserBg,
+  PhotoSwiper,
+  ThirdSelectPhotoBrowserActionBar
+} from '@ohos/common/CommonComponents';
 
 const TAG: string = 'SelectPhotoBrowserView';
 

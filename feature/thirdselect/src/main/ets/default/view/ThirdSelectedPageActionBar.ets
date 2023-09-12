@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 
-import { Action, ActionBar, ActionBarMode, ActionBarProp, Constants, ScreenManager } from '@ohos/common';
+import { Action, ActionBarMode, ActionBarProp, Constants, ScreenManager } from '@ohos/common';
+import { ActionBar } from '@ohos/common/CommonComponents';
 import { IS_HORIZONTAL, SelectParams } from '../utils/ThirdSelectConstants';
 
 @Component

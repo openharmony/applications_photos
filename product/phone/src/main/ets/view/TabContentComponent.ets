@@ -13,9 +13,10 @@
  * limitations under the License.
  */
 
-import { AlbumSetPage } from '@ohos/browser';
+import { AlbumSetPage } from '@ohos/browser/BrowserComponents';
 import { PhotoGridView } from './PhotoGridView';
-import { BrowserController, Constants, Log } from '@ohos/common';
+import { Constants, Log } from '@ohos/common';
+import { BrowserController } from '@ohos/common/CommonComponents';
 import { PhotoBrowserComponent } from './PhotoBrowserComponent';
 import { SelectPhotoBrowserView } from './SelectPhotoBrowserView';
 

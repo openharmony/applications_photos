@@ -28,13 +28,9 @@ import {
   BroadCastConstants,
   BroadCastManager,
   BrowserConstants,
-  BrowserController,
   CommonObserverCallback,
   Constants,
-  CustomDialogView,
   DeleteMenuOperation,
-  GridScrollBar,
-  ImageGridItemComponent,
   ImageUtil,
   JumpSourceToMain,
   Log,
@@ -45,7 +41,6 @@ import {
   MenuContext,
   MenuOperationFactory,
   MoveMenuOperation,
-  NoPhotoComponent,
   RemoveMenuOperation,
   ScreenManager,
   SelectManager,
@@ -56,12 +51,20 @@ import {
   ViewData
 } from '@ohos/common';
 import {
+  BrowserController,
+  CustomDialogView,
+  GridScrollBar,
+  ImageGridItemComponent,
+  NoPhotoComponent
+} from '@ohos/common/CommonComponents';
+import { RecoverMenuOperation } from '@ohos/browser';
+import {
   BatchRecoverMenuOperation,
   ClearRecycleMenuOperation,
   PhotoGridPageActionBar,
-  PhotoGridPageToolBar,
-  RecoverMenuOperation
-} from '@ohos/browser';
+  PhotoGridPageToolBar
+} from '@ohos/browser/BrowserComponents';
+
 
 const TAG: string = 'PhotoGridView';
 AppStorage.SetOrCreate('PhotoGridPageIndex', Constants.INVALID);

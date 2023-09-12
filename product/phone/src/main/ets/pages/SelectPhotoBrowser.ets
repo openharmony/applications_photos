@@ -14,7 +14,8 @@
  */
 
 import router from '@ohos.router';
-import { BrowserConstants, BrowserController } from '@ohos/common';
+import { BrowserConstants } from '@ohos/common';
+import { BrowserController } from '@ohos/common/CommonComponents';
 import { SelectPhotoBrowserView } from '../view/SelectPhotoBrowserView';
 
 const TAG: string = 'SelectPhotoBrowser';

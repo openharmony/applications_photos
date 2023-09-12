@@ -23,17 +23,19 @@ import {
   BroadCastConstants,
   BroadCastManager,
   BrowserConstants,
-  BrowserController,
   Constants,
-  DEVICE_TYPE,
   JumpSourceToMain,
   Log,
   ReportToBigDataUtil,
   ScreenManager,
-  TabBar,
-  TabItem,
   TraceControllerUtils
 } from '@ohos/common';
+import {
+  BrowserController,
+  DEVICE_TYPE,
+  TabBar,
+  TabItem
+} from '@ohos/common/CommonComponents';
 import router from '@ohos.router';
 import { PhotoGridView } from '../view/PhotoGridView';
 import { TabContentComponent } from '../view/TabContentComponent';

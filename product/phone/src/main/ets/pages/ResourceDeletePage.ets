@@ -18,11 +18,11 @@ import {
   ThirdDeleteOperation ,
   MenuOperationFactory,
   Log ,
-  CustomDialogView ,
   BroadCast,
   SelectManager ,
   MediaObserver
 } from '@ohos/common';
+import { CustomDialogView } from '@ohos/common/CommonComponents';
 import type { MenuOperation } from '@ohos/common';
 import dialogRequest from '@ohos.app.ability.dialogRequest';
 import uri from '@ohos.uri';

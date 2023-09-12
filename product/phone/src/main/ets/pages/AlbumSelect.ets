@@ -14,7 +14,7 @@
  */
 
 import router from '@ohos.router';
-import { AlbumSelectGridItemNewStyle, NewAlbumPageActionBar } from '@ohos/browser';
+import { AlbumSelectGridItemNewStyle, NewAlbumPageActionBar } from '@ohos/browser/BrowserComponents';
 import {
   Action,
   AlbumSetDataSource,
@@ -24,13 +24,13 @@ import {
   Constants,
   Log,
   MediaDataSource,
-  NoPhotoComponent,
   ScreenManager,
   SelectManager,
   TraceControllerUtils,
   UiUtil,
   UserFileManagerAccess
 } from '@ohos/common';
+import { NoPhotoComponent } from '@ohos/common/CommonComponents';
 
 const TAG: string = 'AlbumSelect';
 

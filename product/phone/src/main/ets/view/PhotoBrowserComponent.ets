@@ -28,10 +28,8 @@ import {
   BroadCast,
   BroadCastConstants,
   BroadCastManager,
-  BrowserController,
   CommonObserverCallback,
   Constants,
-  CustomDialogView,
   DateUtil,
   DeleteMenuOperation,
   JumpSourceToMain,
@@ -43,11 +41,8 @@ import {
   MenuContext,
   MenuOperationFactory,
   MoveMenuOperation,
-  PhotoBrowserComponentBg,
-  PhotoBrowserHolder,
   BrowserConstants as PhotoConstants,
   PhotoDataSource,
-  PhotoSwiper,
   RemoveMenuOperation,
   ReportToBigDataUtil,
   ScreenManager,
@@ -59,15 +54,24 @@ import {
   WindowUtil
 } from '@ohos/common';
 import {
+  BrowserController,
+  CustomDialogView,
+  PhotoBrowserComponentBg,
+  PhotoBrowserHolder,
+  PhotoSwiper
+} from '@ohos/common/CommonComponents';
+import {
   AddNotesMenuOperation,
   FavoriteMenuOperation,
   GotoPhotosMenuOperation,
-  PhotoBrowserActionBar,
-  PhotoBrowserToolBar,
   RecoverMenuOperation,
   RenameMenuOperation,
   RotateMenuOperation
 } from '@ohos/browser';
+import {
+  PhotoBrowserActionBar,
+  PhotoBrowserToolBar
+} from '@ohos/browser/BrowserComponents';
 
 const TAG: string = 'PhotoBrowserComponent';
 

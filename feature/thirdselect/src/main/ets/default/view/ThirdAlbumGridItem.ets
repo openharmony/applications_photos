@@ -26,7 +26,7 @@ import {
 } from '@ohos/common';
 import router from '@ohos.router';
 import { SelectParams } from '../utils/ThirdSelectConstants';
-import { EmptyAlbumComponent } from '@ohos/browser';
+import { EmptyAlbumComponent } from '@ohos/browser/BrowserComponents';
 import Router from '@system.router';
 
 const TAG: string = 'thiSel_ThirdAlbumGridItem';

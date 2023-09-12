@@ -15,7 +15,6 @@
 
 import {
   Action,
-  ActionBar,
   ActionBarMode,
   ActionBarProp,
   ActionBarSelectionMode,
@@ -23,6 +22,7 @@ import {
   Log,
   ScreenManager
 } from '@ohos/common';
+import { ActionBar } from '@ohos/common/CommonComponents';
 
 const TAG: string = 'browser_AlbumSelectActionBar';
 
