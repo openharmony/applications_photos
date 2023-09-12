@@ -40,7 +40,7 @@ const TAG: string = 'common_MediaOperationBasePage';
 
 @Component
 export struct MediaOperationBasePage {
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Provide pageType: string = MediaOperationType.Move;
   @Provide broadCast: BroadCast = new BroadCast();

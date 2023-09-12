@@ -57,7 +57,7 @@ const IMAGE_CACHE_SIZE: number = 1024 * 1024 * IMAGE_CACHE_COUNT;
 struct IndexPage {
   @StorageLink('app_key_tabs_index') preIndex: number = Constants.TIMELINE_PAGE_INDEX;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [
   Constants.NUMBER_0,
   ScreenManager.getInstance().getStatusBarHeight(),

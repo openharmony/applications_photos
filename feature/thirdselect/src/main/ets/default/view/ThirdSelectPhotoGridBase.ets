@@ -72,7 +72,7 @@ export struct ThirdSelectPhotoGridBase {
   @State title: string = '';
   @State isEmpty: boolean = false;
   @StorageLink(IS_SPLIT_MODE) isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink(LEFT_BLANK) leftBlank: [number, number, number, number]
+  @StorageLink(LEFT_BLANK) leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @StorageLink(IS_HORIZONTAL) isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   DEFAULT_TOAST_DURATION = 2000;

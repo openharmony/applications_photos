@@ -56,7 +56,7 @@ export struct EditMain {
   @Provide mainBottomSize: number = Constants.BOTTOM_TOOL_BAR_SIZE;
   @Provide titleSize: number = Constants.TOP_BAR_SIZE;
   @Provide filterBottomSize: number = Constants.FILTER_BOTTOM_TOOL_BAR_SIZE;
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [
   Constants.NUMBER_0,
   ScreenManager.getInstance().getStatusBarHeight(),

@@ -86,7 +86,7 @@ export struct PhotoGridView {
   @Provide rightClickMenuList: Array<Action> = new Array<Action>();
   @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Prop @Watch('onPageChanged') pageStatus: boolean;
   @State gridItemWidth: number = 0;

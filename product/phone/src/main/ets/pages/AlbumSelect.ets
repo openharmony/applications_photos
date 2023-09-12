@@ -41,7 +41,7 @@ export struct AlbumSelect {
   @State gridColumnsCount: number = 0;
   @Provide broadCast: BroadCast = new BroadCast();
   @Provide('selectedCount') totalSelectedCount: number = 0;
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   private isActive = false;
   private scroller: Scroller = new Scroller();
