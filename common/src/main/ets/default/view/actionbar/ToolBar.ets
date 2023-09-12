@@ -29,7 +29,7 @@ export class MenuItem {
 export struct ToolBar {
   @Consume isShowBar: boolean;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Consume toolMenuList: Action[];
   @Consume moreMenuList: Action[];

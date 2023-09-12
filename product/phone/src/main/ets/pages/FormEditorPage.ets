@@ -42,7 +42,7 @@ struct FormEditorPage {
   @StorageLink('FASetting_FormId') formId: string = '0';
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   currentIndex: number = 0;
   @State isShowName: boolean = true;

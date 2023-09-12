@@ -24,7 +24,7 @@ const TAG: string = 'common_ThirdSelectPhotoBrowserActionBar';
 
 @Component
 export struct ThirdSelectPhotoBrowserActionBar {
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @State isMultiPick: boolean = false;
   @Consume @Watch('createActionBar') isSelected: boolean;

@@ -71,7 +71,7 @@ export struct TimelinePage {
   @Consume @Watch('onIndexPageShow') isShow: boolean;
   @StorageLink('TimelinePageIndex') @Watch('onIndexChange') TimelinePageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   dataSource: TimelineDataSource;
   mSelectManager: TimelineSelectManager = new TimelineSelectManager();

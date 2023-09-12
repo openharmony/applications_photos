@@ -42,7 +42,7 @@ export class SaveDialogCallback {
 export struct SaveDialog {
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Consume broadCast: BroadCast;
   @Consume saveDialogCallback: SaveDialogCallback;

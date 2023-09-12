@@ -26,7 +26,7 @@ const TAG: string = 'common_NewAlbumDialog';
 export struct NewAlbumDialog {
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   controller: CustomDialogController;
   @Consume renameFileName: string;

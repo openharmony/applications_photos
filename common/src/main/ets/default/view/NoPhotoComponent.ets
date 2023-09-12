@@ -27,7 +27,7 @@ export struct NoPhotoComponent {
   @State offSetY: number = Constants.EMPTY_PAGE_DEFAULT_OFFSET;
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @State bigScreen: boolean = false;
 

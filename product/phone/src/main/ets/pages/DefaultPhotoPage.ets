@@ -46,7 +46,7 @@ export struct DefaultPhotoPage {
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   defaultMediaItem: MediaItem;
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;

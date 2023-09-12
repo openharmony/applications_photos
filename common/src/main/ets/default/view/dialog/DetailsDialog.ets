@@ -42,7 +42,7 @@ export struct DetailsDialog {
   static readonly EXTERNAL_PREFIX_NUM = 2;
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   sizeConvert = 1024;
   controller: CustomDialogController;
