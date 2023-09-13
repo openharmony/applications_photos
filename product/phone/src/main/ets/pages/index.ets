@@ -41,7 +41,7 @@ import { PhotoGridView } from '../view/PhotoGridView';
 import { TabContentComponent } from '../view/TabContentComponent';
 import { TimelineTabContentComponent } from '../view/TimelineContentComponent';
 
-import type data_preferences from '@ohos.data.preferences';
+import data_preferences from '@ohos.data.preferences';
 
 export type Preferences = data_preferences.Preferences;
 

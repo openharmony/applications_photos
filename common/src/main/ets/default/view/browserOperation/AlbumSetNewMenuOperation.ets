@@ -15,8 +15,8 @@
 
 import { Log } from '../../utils/Log';
 import { BroadCastConstants } from '../../model/common/BroadCastConstants';
-import type { MenuOperationCallback } from './MenuOperationCallback';
-import type { MenuOperation } from './MenuOperation';
+import { MenuOperationCallback } from './MenuOperationCallback';
+import { MenuOperation } from './MenuOperation';
 import { MenuContext } from './MenuContext';
 import { JumpSourceToMain } from '../../model/browser/photo/JumpSourceToMain';
 import { AlbumInfo } from '../../model/browser/album/AlbumInfo';

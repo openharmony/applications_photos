@@ -17,7 +17,7 @@ import resourceManager from '@ohos.resourceManager';
 import Matrix4 from '@ohos.matrix4';
 import router from '@ohos.router';
 import { MediaItem } from '../model/browser/photo/MediaItem';
-import type { AnimationParam } from '../model/browser/photo/EventPipeline';
+import { AnimationParam } from '../model/browser/photo/EventPipeline';
 import { EventPipeline } from '../model/browser/photo/EventPipeline';
 import { BroadCast } from '../utils/BroadCast';
 import { Log } from '../utils/Log';

@@ -22,8 +22,8 @@ import { MoveMenuOperation } from './MoveMenuOperation';
 import { Log } from '../../utils/Log';
 import router from '@ohos.router';
 import { AlbumInfo } from '../../model/browser/album/AlbumInfo';
-import type { BroadCast } from '../../utils/BroadCast';
-import type { SelectManager } from '../../model/browser/SelectManager';
+import { BroadCast } from '../../utils/BroadCast';
+import { SelectManager } from '../../model/browser/SelectManager';
 import { UserFileManagerAccess } from '../../access/UserFileManagerAccess';
 import { AlbumDefine } from '../../model/browser/AlbumDefine';
 

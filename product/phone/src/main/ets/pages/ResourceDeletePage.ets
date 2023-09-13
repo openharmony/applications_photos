@@ -23,7 +23,7 @@ import {
   MediaObserver
 } from '@ohos/common';
 import { CustomDialogView } from '@ohos/common/CommonComponents';
-import type { MenuOperation } from '@ohos/common';
+import { MenuOperation } from '@ohos/common';
 import dialogRequest from '@ohos.app.ability.dialogRequest';
 import uri from '@ohos.uri';
 

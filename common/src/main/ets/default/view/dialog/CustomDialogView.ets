@@ -22,7 +22,7 @@ import { MultiSelectDetails, MultiSelectDialog } from './MultiSelectDialog';
 import { DeleteDialog } from './DeleteDialog';
 import { ThirdDeleteDialog } from './ThirdDeleteDialog';
 import { RemoveDialog } from './RemoveDialog';
-import type { DialogCallback } from '../../model/common/DialogUtil';
+import { DialogCallback } from '../../model/common/DialogUtil';
 import { MediaItem } from '../../model/browser/photo/MediaItem';
 
 import { CancelOperationDialog, CancelParam } from './CancelOperationDialog';
