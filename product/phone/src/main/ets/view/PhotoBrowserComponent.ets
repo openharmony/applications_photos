@@ -786,9 +786,9 @@ export struct PhotoBrowserComponent {
         Log.info(TAG, `Found viewIndex: ${String(param.viewDataIndex).length}`);
         if (String(param.viewDataIndex).length > 0) {
           Log.debug(TAG, `Found viewIndex`);
-          this.dataSource = new UriDataSource(String(param.viewData).split(','));
+          this.dataSource = new UriDataSource(String(param.viewData).split('?'));
           let viewIndex = parseInt(param.viewDataIndex);
-          if (viewIndex == NaN || viewIndex <= 0 || viewIndex > String(param.viewData).split(',').length) {
+          if (Number.isNaN(viewIndex) || viewIndex <= 0 || viewIndex > String(param.viewData).split('?').length) {
             viewIndex = 0;
           } else {
             viewIndex -= 1;
