@@ -76,6 +76,7 @@ export class BrowserController {
       this.browserParam = undefined;
       this.isAnimating = true;
       AppStorage.SetOrCreate<number>('placeholderIndex', -1);
+      Log.info(TAG, `placeholderIndex ${AppStorage.get('placeholderIndex')}`);
     });
   }
 
