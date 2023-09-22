@@ -127,11 +127,8 @@ export abstract class BrowserDataImpl implements BrowserDataInterface {
       realAlbumUri = "";
     }
     Log.debug(TAG, `getItemIndexByUri real album uri: ${realAlbumUri}`);
-    allObject = await this.getItems(realAlbumUri);
-    if (allObject) {
-      Log.debug(TAG, `getItemIndexByUri count: ${allObject.length}`);
-      index = allObject.findIndex((item: FileAsset) => item.uri == realUri);
-    }
+    index = await UserFileManagerAccess.getInstance().getPhotoIndexByUri(realUri, realAlbumUri);
+    Log.debug(TAG, `getItemIndexByUri index: ${index}`);
 
     return index;
   }
