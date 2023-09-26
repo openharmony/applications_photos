@@ -64,11 +64,11 @@ export struct ImageGridItemComponent {
   onMenuClicked: Function;
   onMenuClickedForSingleItem: Function;
   @State geometryTransitionString: string = 'default_id';
+  @State geometryTransitionBrowserId: string = '';
   @State isTap: boolean = false;
-  @StorageLink('placeholderIndex') @Watch('verifyTapStatus') placeholderIndex: number = -1;
-  @StorageLink('geometryTransitionBrowserId') @Watch('verifyTapStatus') geometryTransitionBrowserId: string = '';
   private imageThumbnail: string = undefined;
   private transitionId: string;
+  private broadCount = 0;
   private isEnteringPhoto = false;
   private isThird = false;
   private isThirdMultiPick: boolean = false;
@@ -94,25 +94,28 @@ export struct ImageGridItemComponent {
   private dataSource: MediaDataSource;
   private geometryTapIndex: number;
   private isTapStatusChange: boolean = false;
+  private verifyTapStatusFun: Function = (isTap: boolean): void => this.verifyTapStatus(isTap);
+  private onGeometryIdChangeFun: Function = (geometryTransitionBrowserId: string): void => this.onGeometryIdChange(geometryTransitionBrowserId);
 
-  verifyTapStatus() {
-    if (this.placeholderIndex === Constants.INVALID) {
-      this.isTap = false;
-      return;
-    }
-    this.updateGeometryTapInfo();
-    let pageFromGlobal = this.geometryTransitionBrowserId.split(':')[0];
-    let pageFrom = this.geometryTransitionString.split(':')[0];
+  verifyTapStatus(isTap: boolean): void {
+    Log.debug(TAG, 'verifyTapStatus isTap ' + isTap + ' oldTapStatus ' + this.isTap);
     let oldTapStatus = this.isTap;
-    let newTapStatus = (pageFromGlobal === pageFrom) && (this.placeholderIndex === this.geometryTapIndex);
-    this.isTapStatusChange = oldTapStatus !== newTapStatus;
-    this.isTap = newTapStatus;
-    if (this.isTap) {
-      this.geometryTransitionString = this.geometryTransitionBrowserId;
-      Log.debug(TAG, 'update placeholderIndex = ' + this.placeholderIndex +
-        'geometryTapIndex = ' + this.geometryTapIndex + ', isTap = ' + this.isTap +
-        ', geometryTransitionString = ' + this.geometryTransitionString);
+    this.isTap = isTap;
+    this.isTapStatusChange = oldTapStatus !== isTap;
+  }
+
+  onGeometryIdChange(geometryTransitionBrowserId: string): void {
+    let oldTapStatus = this.isTap;
+    if (geometryTransitionBrowserId === '') {
+      this.isTap = false;
+    } else {
+      this.isTap = true;
+      this.geometryTransitionString = geometryTransitionBrowserId;
     }
+    this.geometryTransitionBrowserId = geometryTransitionBrowserId;
+    this.isTapStatusChange = oldTapStatus !== this.isTap;
+    Log.debug(TAG, 'onGeometryIdChange geometryTransitionBrowserId: ' + geometryTransitionBrowserId +
+      ' geometryTransitionString ' + this.geometryTransitionString + ' isTapStatusChange ' + this.isTapStatusChange);
   }
 
   aboutToAppear(): void {
@@ -126,13 +129,26 @@ export struct ImageGridItemComponent {
     if (this.isRecycle) {
       this.calculateRecycleDays();
     }
-    Log.info(TAG, `transitionId: ${this.transitionId}`);
-    this.isTap = this.geometryTransitionString === this.geometryTransitionBrowserId;
+    if (this.broadCount === 0) {
+      this.broadCount = this.broadCount + 1;
+      if (this.item != null) {
+        this.broadCast.on(this.item.uri + Constants.KEY_OF_PLACE_HOLDER_INDEX, this.verifyTapStatusFun);
+        this.broadCast.on(this.item.uri + Constants.KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT, this.onGeometryIdChangeFun);
+      }
+    }
+
+    let id: string = AppStorage.Get<string>('geometryTransitionBrowserId') as string;
+    this.isTap = this.geometryTransitionString === id;
+    Log.info(TAG, `transitionId: ${this.transitionId} this.geometryTransitionString:` + this.geometryTransitionString + ' this.isTap: ' + this.isTap + ' this.imageThumbnail: ' + this.imageThumbnail);
   }
 
   aboutToDisappear(): void {
     Log.debug(TAG, `aboutToDisappear: ${this.item.uri}`);
     this.resetPressAnim();
+    if (this.item != null) {
+      this.broadCast.off(this.item.uri + Constants.KEY_OF_PLACE_HOLDER_INDEX, this.verifyTapStatusFun);
+      this.broadCast.off(this.item.uri + Constants.KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT, this.onGeometryIdChangeFun);
+    }
   }
 
   onModeChange(newMode: boolean): void {
@@ -227,6 +243,7 @@ export struct ImageGridItemComponent {
       bottom: $r('app.float.menu_margin_bottom')
     })
   }
+
 
   build() {
     Column() {

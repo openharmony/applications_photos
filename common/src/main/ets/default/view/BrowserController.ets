@@ -62,7 +62,7 @@ export class BrowserController {
     });
   }
 
-  hideBrowser() {
+  hideBrowser(position: number): void {
     Log.debug(TAG, 'call hide browser');
     animateTo({
       curve: Constants.SPRING_MOTION_CURVE, // 大图进出阻尼曲线参数
@@ -75,7 +75,7 @@ export class BrowserController {
       this.isBrowserShow = false;
       this.browserParam = undefined;
       this.isAnimating = true;
-      AppStorage.SetOrCreate<number>('placeholderIndex', -1);
+      AppStorage.SetOrCreate<number>('placeholderIndex', -(position + 1));
       Log.info(TAG, `placeholderIndex ${AppStorage.get('placeholderIndex')}`);
     });
   }
@@ -98,7 +98,7 @@ export class BrowserController {
     });
   }
 
-  hideSelectBrowser() {
+  hideSelectBrowser(position: number): void {
     Log.debug(TAG, 'call hide select browser');
     animateTo({
       curve: Constants.SPRING_MOTION_CURVE, // 大图进出阻尼曲线参数
@@ -111,7 +111,7 @@ export class BrowserController {
       this.isSelectBrowserShow = false;
       this.selectBrowserParam = undefined;
       this.isAnimating = true;
-      AppStorage.SetOrCreate<number>('placeholderIndex', -1);
+      AppStorage.SetOrCreate<number>('placeholderIndex', -(position + 1));
     });
   }
 

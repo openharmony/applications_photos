@@ -237,7 +237,8 @@ export struct SelectPhotoBrowserView {
   onBackPress() {
     Log.info(TAG, 'onBackPress');
     if (this.geometryTransitionEnable) {
-      this.browserController.hideSelectBrowser();
+      let dataIndex = this.dataSource.getPositionByIndex(this.currentIndex) as number;
+      this.browserController.hideSelectBrowser(dataIndex);
     } else {
       router.back({
         url: '',

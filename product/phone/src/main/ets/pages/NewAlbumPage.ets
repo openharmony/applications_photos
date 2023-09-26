@@ -91,9 +91,10 @@ export struct NewAlbumPage {
 
   onPlaceholderChanged() {
     Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
-    if (this.placeholderIndex != -1) {
+    if (this.placeholderIndex >= 0) {
       this.scroller.scrollToIndex(this.placeholderIndex);
     }
+    UiUtil.emitByPlaceholderIndex(this.placeholderIndex, this.dataSource, this.broadCast);
   }
 
   onMenuClicked(action: Action) {

@@ -461,6 +461,7 @@ export class Constants {
   static readonly KEY_OF_ALBUM_HEIGHT: string = 'albumHeight';
   static readonly KEY_OF_ALBUM_WIDTH: string = 'albumWidth';
   static readonly KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT: string = 'geometryTransitionId';
+  static readonly KEY_OF_PLACE_HOLDER_INDEX: string = 'placeHolderIndex';
   static readonly KEY_OF_SELECTED_ALBUM_INDEX: string = 'selectedAlbumIndex';
   static readonly KEY_OF_IS_SHOW_PHOTO_GRID_VIEW: string = 'isShowPhotoGridView';
   static readonly KEY_OF_PHOTO_COUNT_IN_ALBUM: string = 'photoCount';

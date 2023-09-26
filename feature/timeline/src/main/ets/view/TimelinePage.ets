@@ -89,6 +89,8 @@ export struct TimelinePage {
   @Provide dateText: string = '';
   @Provide isShowBar: boolean = true;
   @StorageLink('placeholderIndex') @Watch('onPlaceholderChanged') placeholderIndex: number = -1;
+  @StorageLink('geometryTransitionBrowserId') @Watch('onGeometryIdChange') geometryTransitionBrowserId: string = '';
+  private geometryTransitionUri: string = '';
   @ObjectLink browserController: BrowserController;
   @Provide hidePopup: boolean = false;
   // 选择模式下，鼠标对着未勾选项按右键弹框时，移动和复制菜单点击事件的标识位
@@ -98,9 +100,20 @@ export struct TimelinePage {
 
   onPlaceholderChanged() {
     Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
-    if (this.placeholderIndex != -1) {
-      this.scroller.scrollToIndex(this.placeholderIndex);
+    if (this.placeholderIndex >= 0) {
+      // 照片页顶部信息也占一个GridItem，目标index应为图片的index+1
+      this.scroller.scrollToIndex(this.placeholderIndex + 1);
     }
+    UiUtil.emitByPlaceholderIndex(this.placeholderIndex, this.dataSource, this.broadCast);
+  }
+
+  onGeometryIdChange(): void {
+    if (!this.isInCurrentTab && !this.isActive) {
+      return;
+    }
+    Log.debug(TAG, 'onGeometryIdChange geometryTransitionBrowserId is ' + this.geometryTransitionBrowserId);
+    this.geometryTransitionUri =
+    UiUtil.getGeometryTransitionUri(this.geometryTransitionBrowserId, this.geometryTransitionUri, this.broadCast);
   }
 
   aboutToAppear(): void {
