@@ -25,6 +25,7 @@ import display from '@ohos.display';
 import Extension from '@ohos.app.ability.ServiceExtensionAbility';
 import Window from '@ohos.window';
 import dialogRequest from '@ohos.app.ability.dialogRequest';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'ServiceExtAbility';
 
