@@ -25,6 +25,7 @@ import display from '@ohos.display';
 import Extension from '@ohos.app.ability.ServiceExtensionAbility';
 import Window from '@ohos.window';
 import dialogRequest from '@ohos.app.ability.dialogRequest';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'ServiceExtAbility';
 
@@ -32,8 +33,8 @@ export default class ServiceExtAbility extends Extension {
 
   onCreate(want) {
     Log.info(TAG, `ServiceExtAbility want param : ${JSON.stringify(want)}`);
-    globalThis.windowClass = null;
-    globalThis.photoAbilityContext = this.context;
+    AppStorage.setOrCreate('windowClass', null);
+    AppStorage.setOrCreate('photosAbilityContext', this.context);
     AppStorage.SetOrCreate(Constants.SCREEN_SIDEBAR, false);
     AppStorage.SetOrCreate("deviceType", Constants.DEFAULT_DEVICE_TYPE);
   }
@@ -42,7 +43,7 @@ export default class ServiceExtAbility extends Extension {
     if (want.action != Constants.ACTION_DELETE_DATA) {
       return;
     }
-    UserFileManagerAccess.getInstance().onCreate(globalThis.photosAbilityContext);
+    UserFileManagerAccess.getInstance().onCreate(AppStorage.get<common.UIAbilityContext>('photosAbilityContext'));
     MediaObserver.getInstance().registerForAllPhotos();
     MediaObserver.getInstance().registerForAllAlbums();
 
