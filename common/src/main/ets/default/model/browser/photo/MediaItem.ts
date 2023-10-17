@@ -44,7 +44,7 @@ export class MediaItem {
   private data: userFileManager.FileAsset;
   path: string;
 
-  constructor(data: userFileManager.FileAsset) {
+  constructor(data?: userFileManager.FileAsset) {
     if (!data) {
       return;
     }
