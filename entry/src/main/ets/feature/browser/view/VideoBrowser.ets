@@ -95,9 +95,11 @@ struct VideoBrowser {
                     this.isShowBar = !this.isShowBar;
                 })
                 .onStart(() => {
+                    screenManager.setSystemUi(false);
                     screenManager.setKeepScreenOn();
                 })
                 .onPause(() => {
+                    screenManager.setSystemUi(false);
                 })
                 .onFinish(() => {
                     this.isShowBar = true;
