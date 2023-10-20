@@ -85,16 +85,16 @@ export async function getFetchOptions(selectType: number, albumId: string, devic
     let selectionArgs: Array<string> = [];
     let order: string = `date_added DESC`;
     if (selectType == MediaConstants.SELECT_TYPE_VIDEO || albumId == MediaConstants.ALBUM_ID_VIDEO) {
-        selections = MediaLib.FileKey.MEDIA_TYPE + ' = ?';
-        selectionArgs = [MediaLib.MediaType.VIDEO.toString()];
+        selections = MediaLib.FileKey.MEDIA_TYPE + ' = ? and ' + MediaLib.FileKey.MIME_TYPE + ' != ?';
+        selectionArgs = [MediaLib.MediaType.VIDEO.toString(), 'video/mp2ts'];
     } else if (selectType == MediaConstants.SELECT_TYPE_IMAGE && albumId != MediaConstants.ALBUM_ID_VIDEO) {
         selections = MediaLib.FileKey.MEDIA_TYPE + ' = ?';
         selectionArgs = [MediaLib.MediaType.IMAGE.toString()];
     } else if (selectType == MediaConstants.SELECT_TYPE_IMAGE && albumId == MediaConstants.ALBUM_ID_VIDEO) {
         return undefined;
     } else {
-        selections = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?';
-        selectionArgs = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
+        selections = '( ' + MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?' + ' ) and ' + MediaLib.FileKey.MIME_TYPE + ' != ?' ;
+        selectionArgs  = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString(), 'video/mp2ts'];
     }
     if (albumId == MediaConstants.ALBUM_ID_CAMERA) {
         let path = await mediaModel.getPublicDirectory(MediaLib.DirectoryType.DIR_CAMERA);
@@ -139,8 +139,8 @@ export async function getFetchOptionsByAlbumItem(item: SimpleAlbumDataItem): Pro
 }
 
 export async function getFetchOptionsByItem(item: SimpleAlbumDataItem): Promise<MediaLib.MediaFetchOptions> {
-    let selections: string = `${MediaLib.FileKey.MEDIA_TYPE} = ? or ${MediaLib.FileKey.MEDIA_TYPE} = ?`;
-    let selectionArgs: string[] = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
+    let selections: string = '( ' + MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?' + ' ) and ' + MediaLib.FileKey.MIME_TYPE + ' != ?' ;
+    let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString(), 'video/mp2ts'];
 
     if (item.displayName.length > 0) {
         selections = `(${selections}) and ${MediaLib.FileKey.DISPLAY_NAME} = ?`;
