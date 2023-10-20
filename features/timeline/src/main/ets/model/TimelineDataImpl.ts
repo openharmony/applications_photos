@@ -43,8 +43,8 @@ export class TimelineDataImpl {
     }
 
     private async getTimelineItemFileAssets(): Promise<MediaLib.FileAsset[]> {
-        let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?';
-        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
+        let selections: string = '( ' + MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?' + ' ) and ' + MediaLib.FileKey.MIME_TYPE + ' != ?' ;
+        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString(), 'video/mp2ts'];
         let fetchOption: MediaLib.MediaFetchOptions = {
             selections: selections,
             selectionArgs: selectionArgs,
@@ -55,8 +55,8 @@ export class TimelineDataImpl {
     }
 
     private async getMediaItemFileAssets(start: number, count: number): Promise<MediaLib.FileAsset[]> {
-        let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?';
-        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
+        let selections: string = '( ' + MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?' + ' ) and ' + MediaLib.FileKey.MIME_TYPE + ' != ?' ;
+        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString(), 'video/mp2ts'];
         let fetchOption: MediaLib.MediaFetchOptions = {
             selections: selections,
             selectionArgs: selectionArgs,
