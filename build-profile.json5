@@ -22,12 +22,12 @@
         }
       }
     ],
-    "compileSdkVersion": 10,
-    "compatibleSdkVersion": 10,
     "products": [
       {
         "name": "default",
-        "signingConfig": "debug" 
+        "signingConfig": "debug" ,
+        "compileSdkVersion": 10,
+        "compatibleSdkVersion": 10,
       },
     ],
   },
