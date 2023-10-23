@@ -31,8 +31,8 @@ export class TimelineDataItem {
         Log.info(TAG, `construct ${fileAssert.dateAdded}:${fileAssert.count}`);
         this.dateAdded = fileAssert.dateAdded * 1000;
         this.groupChild = new Array(fileAssert.count);
-        let selections: string = MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?';
-        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString()];
+        let selections: string = '( ' + MediaLib.FileKey.MEDIA_TYPE + ' = ? or ' + MediaLib.FileKey.MEDIA_TYPE + ' = ?' + ' ) and ' + MediaLib.FileKey.MIME_TYPE + ' != ?' ;
+        let selectionArgs: Array<string> = [MediaLib.MediaType.IMAGE.toString(), MediaLib.MediaType.VIDEO.toString(), 'video/mp2ts'];
         for (let i = 0;i < this.groupChild.length; i++) {
             this.groupChild[i] = new MediaDataItem(selections, selectionArgs, "", index + i)
             if (index + i < mediaFileAsset.length) {
