@@ -253,13 +253,10 @@ export struct TimelinePage {
     let currentTitleIndex = 0;
     let count: number[] = [];
     count.push(currentTitleIndex);
-    Log.info(TAG, `liujuan count = ${count}`);
 
     for (let index = 0; index < groups.length - 1; index++) {
-      Log.info(TAG, `liujuan 111 groups[index].count = ${groups[index].count}`);
       currentTitleIndex = currentTitleIndex + groups[index].count + 1;
       count.push(currentTitleIndex);
-      Log.info(TAG, `liujuan 111 count = ${count}`);
     }
 
     this.layoutOptions = {
