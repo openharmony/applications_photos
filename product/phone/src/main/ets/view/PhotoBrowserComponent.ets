@@ -662,8 +662,7 @@ export struct PhotoBrowserComponent {
         break
     }
     if (this.geometryTransitionEnable) {
-      let timelineIndex = this.dataSource.getPositionByIndex(this.currentIndex) as number;
-      this.browserController.hideBrowser(timelineIndex);
+      this.browserController.hideBrowser();
     } else {
       router.back({
         url: '',

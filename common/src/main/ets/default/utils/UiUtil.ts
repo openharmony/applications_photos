@@ -21,10 +21,6 @@ import prompt from '@system.prompt';
 import type window from '@ohos.window';
 import type { Action } from '../view/browserOperation/Action';
 import { AlbumInfo } from '../model/browser/album/AlbumInfo';
-import { MediaDataSource } from '../model/browser/photo/MediaDataSource';
-import { BroadCast } from './BroadCast';
-import { ViewData } from '../model/browser/photo/ViewData';
-import { ViewType } from '../model/browser/photo/ViewType';
 
 const TAG: string = 'common_UiUtil';
 
@@ -217,48 +213,6 @@ export class UiUtil {
       geometryTransitionString);
     Log.debug(TAG, 'this.geometryTransitionId = ' + geometryTransitionString +
       ', placeholderIndex = ' + geometryTapIndex);
-  }
-
-  static getGeometryTransitionUri(geometryTransitionBrowserId: string,
-                                  geometryTransitionUri: string, broadCast: BroadCast): string {
-    if (geometryTransitionBrowserId === '') {
-      broadCast.emit(geometryTransitionUri + Constants.KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT, ['']);
-      return '';
-    }
-
-    let uriStartIndex = geometryTransitionBrowserId.indexOf('file');
-    let uriEndIndex = geometryTransitionBrowserId.indexOf('????');
-    let uri = geometryTransitionBrowserId.substring(uriStartIndex, uriEndIndex);
-    if (geometryTransitionUri !== '' && geometryTransitionUri !== uri) {
-      broadCast.emit(geometryTransitionUri + Constants.KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT, ['']);
-    }
-    broadCast.emit(uri + Constants.KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT, [geometryTransitionBrowserId]);
-    return uri;
-  }
-
-  static emitByPlaceholderIndex(placeholderIndex: number, dataSource: MediaDataSource, broadCast: BroadCast): void {
-    if (placeholderIndex >= 0) {
-      let viewData: ViewData = dataSource.getWrappedData(placeholderIndex) as ViewData;
-      if (viewData && viewData.viewType === ViewType.ITEM && viewData.mediaItem) {
-        broadCast.emit(viewData.mediaItem.uri + Constants.KEY_OF_PLACE_HOLDER_INDEX, [true]);
-      }
-
-      let leftData: ViewData = dataSource.getWrappedData(placeholderIndex - 1) as ViewData;
-      if (leftData && leftData.viewType === ViewType.ITEM && leftData.mediaItem) {
-        broadCast.emit(leftData.mediaItem.uri + Constants.KEY_OF_PLACE_HOLDER_INDEX, [false]);
-      }
-
-      let rightData: ViewData = dataSource.getWrappedData(placeholderIndex + 1) as ViewData;
-      if (rightData && rightData.viewType === ViewType.ITEM && rightData.mediaItem) {
-        broadCast.emit(rightData.mediaItem.uri + Constants.KEY_OF_PLACE_HOLDER_INDEX, [false]);
-      }
-    } else {
-      let pos = -placeholderIndex - 1;
-      let viewData: ViewData = dataSource.getWrappedData(pos) as ViewData;
-      if (viewData && viewData.viewType === ViewType.ITEM && viewData.mediaItem) {
-        broadCast.emit(viewData.mediaItem.uri + Constants.KEY_OF_PLACE_HOLDER_INDEX, [false]);
-      }
-    }
   }
 
   static getRouterParams(params: Object): Object {

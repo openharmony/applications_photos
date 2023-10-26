@@ -788,22 +788,6 @@ export class UserFileManagerAccess {
     }
   }
 
-  async getPhotoIndexByUri(photoUri: string, albumUri: string): Promise<number> {
-    Log.debug(TAG, 'getPhotoIndexByUri albumUri is ' + albumUri + ', photoUri is ' + photoUri);
-    if (!this.media) {
-      Log.error(TAG, 'getPhotoIndexByUri media resource is null!');
-      return undefined;
-    }
-    try {
-      let fileFetchOpt = AlbumDefine.getFileFetchOptWithEmptyColumn(Constants.INVALID, Constants.INVALID, undefined);
-      let index: number = await this.media.getPhotoIndex(photoUri, albumUri, fileFetchOpt);
-      return index - 1;
-    } catch (err) {
-      Log.error(TAG, `getAlbumByUri Get Album by uri exception! msg:  ${err}`);
-      return 0;
-    }
-  }
-
   async getAlbumByName(albumName: string): Promise<Album> {
     if (!this.media) {
       Log.error(TAG, 'getAlbumByName media resource is null!');
