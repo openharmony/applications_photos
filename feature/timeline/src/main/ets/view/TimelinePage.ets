@@ -92,7 +92,11 @@ export struct TimelinePage {
   // 选择模式下，鼠标对着未勾选项按右键弹框时，移动和复制菜单点击事件的标识位
   private isMvOrCpSeparatesItem: boolean = false;
   private mvOrCpSeparatesItem: MediaItem = null;
-  onWindowSizeChangeCallBack = () => this.initGridRowCount();
+  private onWindowSizeChangeCallBack = () => this.initGridRowCount();
+  @State layoutOptions: GridLayoutOptions = {
+    regularSize: [1, 1],
+    irregularIndexes: [],
+  }
 
   onPlaceholderChanged() {
     Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
@@ -117,6 +121,7 @@ export struct TimelinePage {
     this.dataSource.registerCallback('updateGroupData', (newState: TimelineData[]) => {
       self.mSelectManager.updateGroupData(newState);
       self.updateYearMap();
+      self.updateLayoutOptions(newState);
     });
     this.dataSource.registerCallback('updateCount', (newState: number) => {
       Log.info(TAG, `updateCount ${newState}`);
@@ -237,7 +242,25 @@ export struct TimelinePage {
     this.updateGroupSelectMode();
     this.updateYearMap();
     this.onActive();
+    this.updateLayoutOptions(this.dataSource.groups);
     TraceControllerUtils.finishTrace('TimelinePageAboutToAppear');
+  }
+
+  updateLayoutOptions(groups: TimelineData[]): void {
+    this.layoutOptions.irregularIndexes.pop();
+    let currentTitleIndex = 0;
+    let count: number[] = [];
+    count.push(currentTitleIndex);
+
+    for (let index = 0; index < groups.length - 1; index++) {
+      currentTitleIndex = currentTitleIndex + groups[index].count + 1;
+      count.push(currentTitleIndex);
+    }
+
+    this.layoutOptions = {
+      regularSize: [1, 1],
+      irregularIndexes: count,
+    };
   }
 
   jumpToPhotoBrowserNormal(targetIndex: number, name: string, item: MediaItem) {
@@ -623,7 +646,7 @@ export struct TimelinePage {
           });
 
           Stack() {
-            Grid(this.scroller) {
+            Grid(this.scroller, this.layoutOptions) {
               LazyForEach(this.dataSource, (item: ViewData, index?: number) => {
                 if (!!item) {
                   if (item.viewType == ViewType.GROUP_TITLE) {
@@ -633,7 +656,7 @@ export struct TimelinePage {
                         mPosition: item.viewIndex,
                         isSelected: this.groupSelectMode[item.viewIndex]
                       })
-                    }.columnStart(0).columnEnd(this.gridRowCount - 1)
+                    }
                     .key('TimelinePage_GridItem' + index)
                   } else if (item.viewType == ViewType.ITEM) {
                     GridItem() {
