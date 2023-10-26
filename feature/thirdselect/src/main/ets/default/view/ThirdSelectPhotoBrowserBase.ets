@@ -382,8 +382,7 @@ export struct ThirdSelectPhotoBrowserBase {
   }
 
   private onBackPressInner(): void {
-    let timelineIndex = this.dataSource.getPositionByIndex(this.currentIndex) as number;
-    this.browserController.hideBrowser(timelineIndex);
+    this.browserController.hideBrowser();
   }
 
   private jumpBrowserCallback(name: string, item: MediaItem, isSelectMode = false) {
