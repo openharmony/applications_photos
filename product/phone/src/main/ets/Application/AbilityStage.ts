@@ -17,6 +17,6 @@ import AbilityStage from '@ohos.app.ability.AbilityStage';
 
 export default class PhotosAbilityStage extends AbilityStage {
   onCreate() {
-    globalThis.photosGlobalContext = this.context;
+    AppStorage.setOrCreate('photosGlobalContext', this.context);
   }
 }

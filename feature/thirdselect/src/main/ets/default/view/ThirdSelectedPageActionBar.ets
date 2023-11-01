@@ -25,8 +25,8 @@ export struct ThirdSelectedPageActionBar {
   selectParams: SelectParams = SelectParams.defaultParam();
   @Provide selectedCount: number = 0;
   @Link @Watch('onSelectedCountChanged') totalSelectedCount: number;
-  isSelectPhotoGrid: boolean;
-  onMenuClicked: Function;
+  isSelectPhotoGrid: boolean = false;
+  onMenuClicked: Function = (): void => {};
   leftAction: Action = Action.BACK;
   @Link @Watch('onSelectedCountChanged') title: string;
   @State actionBarProp: ActionBarProp = new ActionBarProp();

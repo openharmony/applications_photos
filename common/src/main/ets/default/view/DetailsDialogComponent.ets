@@ -16,8 +16,8 @@ import { Constants } from '../model/common/Constants';
 
 @Component
 export struct DetailsDialogComponent {
-  title: Resource;
-  content: string | Resource;
+  title?: Resource;
+  content: string | Resource = '';
   colon: string = ': ';
   isLast: boolean = false;
   keyForAutoTest: string = '';

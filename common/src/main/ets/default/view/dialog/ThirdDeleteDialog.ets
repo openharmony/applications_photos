@@ -26,14 +26,15 @@ export struct ThirdDeleteDialog {
   @Consume dialogCallback: DialogCallback;
   @Consume dialogMessage: Resource;
   @StorageLink('confirmText') confirmText: Resource = $r('app.string.dialog_delete');
-  controller: CustomDialogController;
+  controller?: CustomDialogController;
 
-  private uris: any;
-  private thirdAppName: string;
+  private uris: string[] = [];
+  private thirdAppName: string | undefined = '';
 
   aboutToAppear() {
-    this.uris = AppStorage.Get("uris");
-    this.thirdAppName = AppStorage.Get("appName");
+    let stored = AppStorage.get<string[]>('uris');
+    this.uris = stored === undefined ? [] : stored;
+    this.thirdAppName = AppStorage.get<string>('appName');
   }
 
   build() {
@@ -94,7 +95,7 @@ export struct ThirdDeleteDialog {
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
               Log.debug(this.TAG, `cancelCallback`);
-              this.controller.close();
+              this.controller?.close();
               this.dialogCallback && this.dialogCallback.cancelCallback();
             })
           }.width('50%')
@@ -121,7 +122,7 @@ export struct ThirdDeleteDialog {
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
               Log.debug(this.TAG, `confirmCallback`);
-              this.controller.close();
+              this.controller?.close();
               this.dialogCallback && this.dialogCallback.confirmCallback();
             })
           }.width('50%')

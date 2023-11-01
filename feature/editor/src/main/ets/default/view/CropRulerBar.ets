@@ -17,6 +17,11 @@ import { BroadCast, Constants, Log, ScreenManager } from '@ohos/common';
 
 const TAG: string = 'editor_CropRulerBar';
 
+interface RulerProperties {
+  rulerWidth: number;
+  rulerHeight: number;
+}
+
 @Component
 export struct CropRulerBar {
   @Consume broadCast: BroadCast;
@@ -32,17 +37,14 @@ export struct CropRulerBar {
   private startPos: number = Constants.NUMBER_0;
   private setting: RenderingContextSettings = new RenderingContextSettings(true);
   private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.setting);
-  private resetClicked: Function = undefined;
+  private resetClicked: Function = (): void => {};
   private previous: number = Constants.NUMBER_0;
 
-  setRulerProperties(rulerWidth: number, rulerHeight: number) {
-    AppStorage.SetOrCreate<{
-      rulerWidth: number,
-      rulerHeight: number
-    }>('rulerProperties', {
+  setRulerProperties(rulerWidth: number, rulerHeight: number): void {
+    AppStorage.SetOrCreate<RulerProperties>('rulerProperties', {
       rulerWidth: rulerWidth,
       rulerHeight: rulerHeight
-    })
+    } as RulerProperties)
   }
 
   iniSize(): void {
@@ -89,9 +91,9 @@ export struct CropRulerBar {
 
   drawIntegerLine(cur_x: number, cur_num: number): void {
     if (!this.isVerticalScreen) {
-      this.context.moveTo((this.rulerWidth * Constants.NUMBER_8_5) / Constants.NUMBER_15, cur_x);
+      this.context.moveTo((this.rulerWidth *  8.5) / 15, cur_x);
     } else {
-      this.context.moveTo(cur_x, (this.rulerWidth * Constants.NUMBER_8_5) / Constants.NUMBER_15);
+      this.context.moveTo(cur_x, (this.rulerWidth *  8.5) / 15);
     }
 
     if (Math.abs(cur_num) > Constants.EDGE_ANGLE) {
@@ -104,26 +106,26 @@ export struct CropRulerBar {
     this.context.shadowBlur = Constants.RULER_LINE_WIDTH
     if (Math.round(cur_num) == Math.round(this.current_def)) {
       if (!this.isVerticalScreen) {
-        this.context.fillText(this.integerAngleToString(Math.round(cur_num)),
-          (this.rulerWidth * Constants.NUMBER_6) / Constants.NUMBER_15, cur_x);
+        this.context.fillText(this.integerAngleToString(Math.round(cur_num)) as string,
+          (this.rulerWidth * 6) / 15, cur_x);
       } else {
-        this.context.fillText(this.integerAngleToString(Math.round(cur_num)), cur_x,
-          (this.rulerWidth * Constants.NUMBER_6) / Constants.NUMBER_15);
+        this.context.fillText(this.integerAngleToString(Math.round(cur_num)) as string, cur_x,
+          (this.rulerWidth * 6) / 15);
       }
     } else {
       if (!this.isVerticalScreen) {
         this.context.fillText((-cur_num).toString(),
-          (this.rulerWidth * Constants.NUMBER_6) / Constants.NUMBER_15, cur_x);
+          (this.rulerWidth * 6) / 15, cur_x);
       } else {
         this.context.fillText(cur_num.toString(), cur_x,
-          (this.rulerWidth * Constants.NUMBER_6) / Constants.NUMBER_15);
+          (this.rulerWidth * 6) / 15);
       }
 
     }
     if (!this.isVerticalScreen) {
-      this.context.lineTo(this.rulerWidth * Constants.NUMBER_10_5 / Constants.NUMBER_15, cur_x);
+      this.context.lineTo(this.rulerWidth *  10.5 / 15, cur_x);
     } else {
-      this.context.lineTo(cur_x, this.rulerWidth * Constants.NUMBER_10_5 / Constants.NUMBER_15);
+      this.context.lineTo(cur_x, this.rulerWidth *  10.5 / 15);
     }
   }
 
@@ -175,36 +177,30 @@ export struct CropRulerBar {
   }
 
   onTouchEvent(event: TouchEvent): void {
-    if (event.type == TouchType.Down) {
-      if (this.isVerticalScreen) {
-        this.startPos = (event.touches[0].x);
-      } else {
-        this.startPos = (event.touches[0].y);
-      }
+    let axis = this.isVerticalScreen ? 'x' : 'y';
+    if (event.type === TouchType.Down) {
+      this.startPos = event.touches[0][axis];
       this.previous = new Date().getTime();
     }
-
-    if (event.type == TouchType.Move) {
-      let now = new Date().getTime();
-      if (now - this.previous >= Constants.TIMEOUT) {
-        this.previous = now;
-      } else {
-        return;
-      }
-
-      let dir = this.isVerticalScreen ? this.startPos - (event.touches[0].x) :
-        this.startPos - (event.touches[0].y);
-      if (Math.abs(dir / Constants.NUMBER_5) >= Constants.NUMBER_1) {
-        this.current_def += parseInt((dir / Constants.NUMBER_5).toFixed(0));
-        this.startPos = this.isVerticalScreen ? (event.touches[0].x) : (event.touches[0].y);
-        if (Math.abs(this.current_def) > Constants.EDGE_ANGLE) {
-          this.current_def = this.current_def > Constants.EDGE_ANGLE ?
-          Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
-        }
-        this.drawRuler();
-        this.broadCast.emit(Constants.RULER_CHANGED, [this.current_def]);
-      }
+    if (event.type !== TouchType.Move) {
+      return;
     }
+    let now = new Date().getTime();
+    if (now - this.previous < Constants.TIMEOUT) {
+      return;
+    }
+    this.previous = now;
+    let dir = this.startPos - event.touches[0][axis];
+    if (Math.abs(dir / 5) < 1) {
+      return;
+    }
+    this.current_def += Number.parseInt((dir / 5).toFixed(0));
+    this.startPos = event.touches[0][axis];
+    if (Math.abs(this.current_def) > Constants.EDGE_ANGLE) {
+      this.current_def = this.current_def > Constants.EDGE_ANGLE ? Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
+    }
+    this.drawRuler();
+    this.broadCast.emit(Constants.RULER_CHANGED, [this.current_def]);
   }
 
   onResetClicked(): void {
@@ -212,33 +208,16 @@ export struct CropRulerBar {
     this.drawRuler();
   }
 
-  integerAngleToString(currentAngle: number): string {
-    switch (currentAngle) {
-      case -Constants.NUMBER_40:
-        return Constants.NEGATIVE_FORTY;
-      case -Constants.NUMBER_30:
-        return Constants.NEGATIVE_THIRTY;
-      case -Constants.NUMBER_20:
-        return Constants.NEGATIVE_TWENTY;
-      case -Constants.NUMBER_10:
-        return Constants.NEGATIVE_TEN;
-      case Constants.NUMBER_0:
-        return Constants.ZERO_STR;
-      case Constants.NUMBER_10:
-        return Constants.POSITIVE_TEN;
-      case Constants.NUMBER_20:
-        return Constants.POSITIVE_TWENTY;
-      case Constants.NUMBER_30:
-        return Constants.POSITIVE_THIRTY;
-      case Constants.NUMBER_40:
-        return Constants.POSITIVE_FORTY;
-      default:
-        break;
+  integerAngleToString(currentAngle: number): string | undefined{
+    if (currentAngle % 10 === 0 && Math.abs(currentAngle) <= 40) {
+      return currentAngle.toString();
     }
+
+    return undefined;
   }
 
   aboutToAppear(): void {
-    this.resetClicked = this.onResetClicked.bind(this);
+    this.resetClicked = (): void => this.onResetClicked();
     this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClicked);
     this.iniSize();
   }
@@ -265,8 +244,8 @@ export struct CropRulerBar {
             this.drawRuler();
           })
       }
-      .onTouch((event) => {
-        this.onTouchEvent(event);
+      .onTouch((event?: TouchEvent) => {
+        this.onTouchEvent(event as TouchEvent);
       })
       .width(this.isVerticalScreen ? this.rulerLength : Constants.CROP_RULER_WIDTH)
       .height(this.isVerticalScreen ? this.rulerWidth : this.rulerLength)

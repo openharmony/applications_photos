@@ -37,7 +37,7 @@ export struct PhotoBrowserActionBar {
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   isVideoPage: boolean = false;
   @StorageLink('isHorizontal') isHorizontal: boolean
     = ScreenManager.getInstance().isHorizontal();

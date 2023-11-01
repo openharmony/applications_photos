@@ -36,6 +36,7 @@ import deviceInfo from '@ohos.deviceInfo';
 import type Want from '@ohos.app.ability.Want';
 import type window from '@ohos.window';
 import type AbilityConstant from '@ohos.app.ability.AbilityConstant';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'MainAbility';
 let isFromCard = false;
@@ -52,14 +53,14 @@ export default class MainAbility extends Ability {
   private isOnDestroy: boolean = false;
 
   onCreate(want: Want, param: AbilityConstant.LaunchParam): void {
-    globalThis.photosAbilityContext = this.context;
-    globalThis.formContext = this.context
+    AppStorage.setOrCreate('photosAbilityContext', this.context);
+    AppStorage.setOrCreate('formContext', this.context);
     this.isOnDestroy = false;
     this.initPhotosPref();
 
     this.parseWantParameter(false, want);
 
-    UserFileManagerAccess.getInstance().onCreate(globalThis.photosAbilityContext);
+    UserFileManagerAccess.getInstance().onCreate(AppStorage.get<common.UIAbilityContext>('photosAbilityContext'));
     MediaObserver.getInstance().registerForAllPhotos();
     MediaObserver.getInstance().registerForAllAlbums();
     if (!isFromCard && !isFromCamera) {
@@ -92,9 +93,9 @@ export default class MainAbility extends Ability {
     let wantParamUri: string = wantParam?.uri as string;
     if (wantParamUri === Constants.WANT_PARAM_URI_DETAIL) {
       isFromCamera = true;
-      if (isOnNewWant && globalThis.photosWindowStage) {
+      if (isOnNewWant) {
         AppStorage.SetOrCreate('entryFromHapCamera', Constants.ENTRY_FROM_CAMERA);
-        globalThis.photosWindowStage.loadContent('pages/PhotoBrowser', (err, data) => {
+        AppStorage.get<window.WindowStage>('photosWindowStage').loadContent('pages/PhotoBrowser', (err, data) => {
           if (err.code) {
             Log.error(TAG, 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
             return;
@@ -167,7 +168,7 @@ export default class MainAbility extends Ability {
   onWindowStageCreate(windowStage: window.WindowStage): void {
     // Main window is created, set main page for this ability
     Log.info(TAG, 'Application onWindowStageCreate');
-    globalThis.photosWindowStage = windowStage;
+    AppStorage.setOrCreate('photosWindowStage', windowStage);
     AppStorage.SetOrCreate('deviceType',
         deviceInfo.deviceType == ('phone' || 'default') ? Constants.DEFAULT_DEVICE_TYPE : Constants.PAD_DEVICE_TYPE);
     ScreenManager.getInstance().on(ScreenManager.ON_LEFT_BLANK_CHANGED, data => {
@@ -322,7 +323,7 @@ export default class MainAbility extends Ability {
 
   private initPhotosPref(): void {
     Log.info(TAG, 'Application initPhotosPref start');
-    data_preferences.getPreferences(globalThis.photosAbilityContext, Constants.PHOTOS_STORE_KEY)
+    data_preferences.getPreferences(AppStorage.get<common.UIAbilityContext>('photosAbilityContext'), Constants.PHOTOS_STORE_KEY)
       .then((pref: data_preferences.Preferences) => {
         pref.get(Constants.IS_FIRST_TIME_DELETE, true).then((data: boolean) => {
           AppStorage.SetOrCreate<boolean>(Constants.IS_FIRST_TIME_DELETE, data);

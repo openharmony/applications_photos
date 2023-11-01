@@ -21,8 +21,8 @@ const TAG: string = 'common_CopyOrMoveDialog';
 
 @Observed
 export class OperateParam {
-  moveFunc: Function
-  copyFunc: Function
+  moveFunc: Function = (): void => {};
+  copyFunc: Function = (): void => {};
 }
 
 @CustomDialog
@@ -33,10 +33,10 @@ export struct CopyOrMoveDialog {
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
   @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller: CustomDialogController;
-  dataTime: string;
+  controller?: CustomDialogController;
+  dataTime: string = '';
   @Consume operateParam: OperateParam;
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   aboutToAppear() {
 
@@ -65,7 +65,7 @@ export struct CopyOrMoveDialog {
       .width('100%')
       .key('Copy')
       .onClick(() => {
-        this.controller.close()
+        this.controller?.close();
         this.operateParam.copyFunc();
       })
 
@@ -87,7 +87,7 @@ export struct CopyOrMoveDialog {
       .height($r('app.float.dialog_list_card_height'))
       .width('100%')
       .onClick(() => {
-        this.controller.close()
+        this.controller?.close();
         this.operateParam.moveFunc();
       })
 
@@ -105,7 +105,7 @@ export struct CopyOrMoveDialog {
         .height($r('app.float.details_dialog_button_height'))
         .key('Cancel')
         .onClick(() => {
-          this.controller.close()
+          this.controller?.close();
         })
         .margin({
           left: $r('app.float.dialog_single_button_indent_margin'),

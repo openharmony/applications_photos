@@ -17,7 +17,7 @@ import { Log } from '../../utils/Log';
 import { BroadCastConstants } from '../../model/common/BroadCastConstants';
 import { MenuOperationCallback } from './MenuOperationCallback';
 import { MenuOperation } from './MenuOperation';
-import { MenuContext } from './MenuContext';
+import { MenuContext, SourceSceneType } from './MenuContext';
 import { JumpSourceToMain } from '../../model/browser/photo/JumpSourceToMain';
 import { AlbumInfo } from '../../model/browser/album/AlbumInfo';
 import router from '@ohos.router';
@@ -26,13 +26,14 @@ import { AlbumDefine } from '../../model/browser/AlbumDefine';
 import { BrowserDataFactory } from '../../interface/BrowserDataFactory';
 import { BigDataConstants, ReportToBigDataUtil } from '../../utils/ReportToBigDataUtil';
 import { Album, UserFileManagerAccess } from '../../access/UserFileManagerAccess';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'common_AlbumSetNewMenuOperation';
 
 export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCallback {
   private menuContext: MenuContext;
-  private defaultAlbumName: string;
-  private onOperationEnd: Function;
+  private defaultAlbumName: string = '';
+  private onOperationEnd: Function = (): void => {};
 
   constructor(menuContext: MenuContext) {
     this.menuContext = menuContext;
@@ -43,8 +44,11 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
       Log.error(TAG, 'menuContext is null, return');
       return;
     }
-    let msg = {
-      'Type': BigDataConstants.ALBUM_CREATE
+    interface Msg1 {
+      type: string
+    }
+    let msg: Msg1 = {
+      type: BigDataConstants.ALBUM_CREATE
     };
     ReportToBigDataUtil.report(BigDataConstants.ALBUM_OPERATION_ID, msg);
 
@@ -52,8 +56,10 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     Log.info(TAG, `The display name from resource ${JSON.stringify(a)}`);
     this.defaultAlbumName = '';
     try {
-      let context = globalThis.photosAbilityContext;
-      if (context == null || context === 'undefined') {
+      let contextName: string = this.menuContext.sourceScene === SourceSceneType.BIG_PHOTO_COMPONENT ?
+        'photoLibraryContext' : 'photosAbilityContext';
+      let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>(contextName) as common.UIAbilityContext;
+      if (context == null || context === undefined) {
         Log.info(TAG, 'context is null!');
       } else {
         this.defaultAlbumName = await context.resourceManager.getString(a.id);
@@ -62,16 +68,18 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
           = this.getNewAlbumDefaultName(this.defaultAlbumName);
         Log.info(TAG, `The display name of new album is ${newAlbumDisplayName}`);
 
-        this.confirmCallback = this.confirmCallback.bind(this);
-        this.cancelCallback = this.cancelCallback.bind(this);
-
         this.menuContext.broadCast.emit(BroadCastConstants.SHOW_NEW_ALBUM_PHOTO_DIALOG,
-          [newAlbumDisplayName, this.confirmCallback, this.cancelCallback]);
+          [newAlbumDisplayName, async (displayName: string): Promise<boolean> => await this.confirmCallbackBindImpl(displayName),
+            (): void => this.cancelCallbackBindImpl()]);
       }
     } catch (error) {
-      let msg = {
-        'Type': BigDataConstants.ALBUM_CREATE_ERROR,
-        'errMsg': JSON.stringify(error)
+      interface Msg2 {
+        type: string
+        errMsg: string
+      }
+      let msg: Msg2 = {
+        type: BigDataConstants.ALBUM_CREATE_ERROR,
+        errMsg: JSON.stringify(error)
       };
       ReportToBigDataUtil.errEventReport(BigDataConstants.ALBUM_OPERATION_ERROR_ID, msg);
       Log.info(TAG, `The display name error ${error}`);
@@ -89,6 +97,10 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
   }
 
   private async confirmCallback(displayName: string): Promise<boolean> {
+    return await this.confirmCallbackBindImpl(displayName);
+  }
+
+  private async confirmCallbackBindImpl(displayName: string): Promise<boolean> {
     Log.info(TAG, `AlbumSet new album confirm and the new name is: ${displayName}`);
     if (displayName) {
       // 过滤用户相册
@@ -109,7 +121,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     if (this.menuContext.jumpSourceToMain == JumpSourceToMain.ALBUM) {
       Log.info(TAG, 'go back to photo grid');
       this.menuContext.broadCast.emit(BroadCastConstants.MEDIA_OPERATION,
-        [displayName, album.albumUri, this.onCompleted.bind(this)]);
+        [displayName, album.albumUri, (): void => this.onCompleted()]);
     } else {
       router.pushUrl({
         url: 'pages/AlbumSelect',
@@ -125,15 +137,25 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
   }
 
   private cancelCallback(): void {
+    this.cancelCallbackBindImpl();
+  }
+
+  private cancelCallbackBindImpl(): void {
     Log.info(TAG, 'AlbumSet new album cancel');
   }
 
   private checkAndAddNumber(albumInfo: AlbumInfo, prefixName: string, numbers: number[]): void {
-    let res = albumInfo.albumName.match(new RegExp('^' + prefixName + '[1-9][0-9]*$'));
+    if (!albumInfo || !albumInfo.albumName) {
+      Log.warn(TAG, 'album is empty');
+      return;
+    }
+    let res: string[] = albumInfo.albumName.match(new RegExp('^' + prefixName + '[1-9][0-9]*$')) as string[];
     Log.info(TAG, `check name res ${res}`)
     if (res) {
-      let number = res[0].match(new RegExp(`[1-9][0-9]*`));
-      numbers.push(parseInt(number[0]));
+      let number: string[] = res[0].match(new RegExp('[1-9][0-9]*')) as string[];
+      if (number != null && number[0] != null) {
+        numbers.push(Number.parseInt(number[0]));
+      }
     }
   }
 
@@ -159,7 +181,7 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
       }
     }
 
-    numbers.sort(function (a, b) {
+    numbers.sort((a: number, b: number) => {
       return a - b;
     });
 

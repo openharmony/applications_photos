@@ -29,10 +29,10 @@ export class BroadCastManager {
   }
 
   public static getInstance(): BroadCastManager {
-    if (AppStorage.Get(Constants.APP_KEY_EVENT_BUS) == null) {
+    if (AppStorage.get(Constants.APP_KEY_EVENT_BUS) == null) {
       AppStorage.SetOrCreate(Constants.APP_KEY_EVENT_BUS, new BroadCastManager());
     }
-    return AppStorage.Get(Constants.APP_KEY_EVENT_BUS);
+    return AppStorage.get(Constants.APP_KEY_EVENT_BUS);
   }
 
   public getBroadCast(): BroadCast {

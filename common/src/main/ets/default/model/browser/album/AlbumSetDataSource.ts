@@ -43,7 +43,9 @@ export class AlbumSetDataSource extends AbsDataSource {
     super();
 
     Log.debug(TAG, `constructor ${JSON.stringify(param)}`);
-    this.broadCast_ = broadCast;
+    if (broadCast) {
+      this.broadCast_ = broadCast;
+    }
     this.albumDataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_ALBUM, param);
 
     if (param && param.deviceId) {
@@ -62,7 +64,8 @@ export class AlbumSetDataSource extends AbsDataSource {
     if (this.albumDataImpl != null) {
       let callback: AlbumSetCallback = new AlbumSetCallback(this);
       this.albumDataImpl.getData(callback,
-        (this.filterMediaType == undefined) ? null : { filterMediaType: this.filterMediaType });
+        (this.filterMediaType === undefined || this.filterMediaType === null) ?
+          null : { filterMediaType: this.filterMediaType });
     }
   }
 

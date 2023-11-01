@@ -15,7 +15,7 @@
 
 import { ActionButton } from './ActionButton';
 import { BroadCast, Constants, Log } from '@ohos/common';
-import { ActionButtonInfo } from './MainMenuInfo';
+import { ActionButtonInfo, ActionInfo } from './MainMenuInfo';
 import { ActionChangedEvent, RefreshActionMenu } from './RefreshMenu';
 import { PhotoEditMode } from '../base/PhotoEditType';
 import { PhotoEditorManager } from '../PhotoEditorManager';
@@ -40,22 +40,22 @@ export struct ToolBar {
   @Consume titleSize: number;
   @Consume isRedo: boolean;
   @Consume isUndo: boolean;
+  private actionInfo: ActionInfo = {
+    src: $r('app.media.ic_edit_photo_toolbar_crop'),
+    // 加入其它按钮时改为PhotoEditMode.EDIT_MODE_CROP
+    actionID: PhotoEditMode.EDIT_MODE_CROP,
+    text: $r('app.string.crop_text'),
+    isActive: true,
+    componentKey: COMPONENT_KEY_Edit_CROP
+  };
   mainMenuList: Array<ActionButtonInfo> = [
-    new ActionButtonInfo({
-      src: $r('app.media.ic_edit_photo_toolbar_crop'),
-
-      // 加入其它按钮时改为PhotoEditMode.EDIT_MODE_CROP
-      actionID: undefined,
-      text: $r('app.string.crop_text'),
-      isActive: true,
-      componentKey: COMPONENT_KEY_Edit_CROP
-    })
+    new ActionButtonInfo(this.actionInfo)
   ];
   // 2022年8月11日 @Watch('clickEvent')打包报错    @State @Watch('clickEvent') menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
   @State menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
   private textSize: number | Resource = $r('app.float.buttonActionTextSize_default');
-  private menuClick: Function = undefined;
-  private immersiveClick: Function = undefined;
+  private menuClick: Function = (): void => {};
+  private immersiveClick: Function = (): void => {};
 
   clickEvent() {
     ActionChangedEvent.isActiveNotChanged(this.menuChanged);
@@ -96,8 +96,8 @@ export struct ToolBar {
   }
 
   aboutToAppear() {
-    this.menuClick = this.onMenuClick.bind(this);
-    this.immersiveClick = this.immersive.bind(this);
+    this.menuClick = (actionID: number): void => this.onMenuClick(actionID);
+    this.immersiveClick = (isImmersive: boolean): void => this.immersive(isImmersive);
     this.broadCast.on(Constants.UPDATE_MENU, this.menuClick);
     this.broadCast.on(Constants.IS_IMMERSIVE, this.immersiveClick);
 

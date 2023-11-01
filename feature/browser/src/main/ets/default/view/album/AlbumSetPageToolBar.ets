@@ -27,7 +27,7 @@ export struct AlbumSetPageToolBar {
   @Consume('selectedCount') @Watch('updateToolbar') selectedAlbumsCount: number;
   @Consume isDisableRename: boolean;
   @Consume isDisableDelete: boolean;
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @Provide hidePopup: boolean = false;
 
   aboutToAppear(): void {

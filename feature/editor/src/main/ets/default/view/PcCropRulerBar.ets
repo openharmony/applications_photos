@@ -29,7 +29,7 @@ export struct PcCropRulerBar {
   private startPos: number = 0;
   private setting: RenderingContextSettings = new RenderingContextSettings(true);
   private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.setting);
-  private resetClicked: Function = undefined;
+  private resetClicked: Function = (): void => {};
   private previous: number = 0;
   private rulerLength: number = 0
   private rulerWidth: number = 0
@@ -154,38 +154,31 @@ export struct PcCropRulerBar {
     }
   }
 
-  onTouchEvent(event: TouchEvent) {
-    if (event.type == TouchType.Down) {
-      if (this.isVerticalScreen) {
-        this.startPos = (event.touches[0].x);
-      } else {
-        this.startPos = (event.touches[0].y);
-      }
+  onTouchEvent(event: TouchEvent): void {
+    let axis = this.isVerticalScreen ? 'x' : 'y';
+    if (event.type === TouchType.Down) {
+      this.startPos = event.touches[0][axis];
       this.previous = new Date().getTime();
     }
-
-    if (event.type == TouchType.Move) {
-      let now = new Date().getTime();
-      if (now - this.previous >= Constants.TIMEOUT) {
-        this.previous = now;
-      } else {
-        return;
-      }
-
-      let dir = this.isVerticalScreen ? this.startPos - (event.touches[0].x) :
-        this.startPos - (event.touches[0].y);
-      if (Math.abs(dir / Constants.NUMBER_5) >= Constants.NUMBER_1) {
-        this.current_def += parseInt((dir / Constants.NUMBER_5).toFixed(0));
-        this.startPos = this.isVerticalScreen ? (event.touches[0].x) : (event.touches[0].y)
-        if (Math.abs(this.current_def) > Constants.EDGE_ANGLE) {
-          this.current_def = this.current_def > Constants.EDGE_ANGLE ?
-          Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
-        }
-
-        this.drawRuler();
-        this.broadCast.emit(Constants.RULER_CHANGED, [this.current_def]);
-      }
+    if (event.type !== TouchType.Move) {
+      return;
     }
+    let now = new Date().getTime();
+    if (now - this.previous < Constants.TIMEOUT) {
+      return;
+    }
+    this.previous = now;
+    let dir = this.startPos - event.touches[0][axis];
+    if (Math.abs(dir / 5) < 1) {
+      return;
+    }
+    this.current_def += Number.parseInt((dir / 5).toFixed(0));
+    this.startPos = event.touches[0][axis];
+    if (Math.abs(this.current_def) > Constants.EDGE_ANGLE) {
+      this.current_def = this.current_def > Constants.EDGE_ANGLE ? Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
+    }
+    this.drawRuler();
+    this.broadCast.emit(Constants.RULER_CHANGED, [this.current_def]);
   }
 
   onResetClicked() {
@@ -193,33 +186,16 @@ export struct PcCropRulerBar {
     this.drawRuler();
   }
 
-  integerAngleToString(currentAngle: number): string {
-    switch (currentAngle) {
-      case -Constants.NUMBER_40:
-        return Constants.NEGATIVE_FORTY;
-      case -Constants.NUMBER_30:
-        return Constants.NEGATIVE_THIRTY;
-      case -Constants.NUMBER_20:
-        return Constants.NEGATIVE_TWENTY;
-      case -Constants.NUMBER_10:
-        return Constants.NEGATIVE_TEN;
-      case Constants.NUMBER_0:
-        return Constants.ZERO_STR;
-      case Constants.NUMBER_10:
-        return Constants.POSITIVE_TEN;
-      case Constants.NUMBER_20:
-        return Constants.POSITIVE_TWENTY;
-      case Constants.NUMBER_30:
-        return Constants.POSITIVE_THIRTY;
-      case Constants.NUMBER_40:
-        return Constants.POSITIVE_FORTY;
-      default:
-        break;
+  integerAngleToString(currentAngle: number): string | undefined {
+    if (currentAngle % 10 === 0 && Math.abs(currentAngle) <= 40) {
+      return currentAngle.toString();
     }
+
+    return undefined;
   }
 
   aboutToAppear() {
-    this.resetClicked = this.onResetClicked.bind(this);
+    this.resetClicked = (): void => this.onResetClicked();
     this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClicked);
     this.iniSize()
   }
@@ -247,8 +223,8 @@ export struct PcCropRulerBar {
           this.drawRuler()
         })
     }
-    .onTouch((event) => {
-      this.onTouchEvent(event);
+    .onTouch((event?: TouchEvent) => {
+      this.onTouchEvent(event as TouchEvent);
     })
     .backgroundColor('#33000000')
     .borderRadius($r('app.float.edit_menu_item_radius'))

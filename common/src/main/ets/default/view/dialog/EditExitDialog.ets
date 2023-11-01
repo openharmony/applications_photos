@@ -19,7 +19,7 @@ import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class EditExitDialogCallback {
-  discardCallback: Function
+  discardCallback: Function = (): void => {};
 }
 
 @CustomDialog
@@ -29,8 +29,8 @@ export struct EditExitDialog {
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
   @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller: CustomDialogController;
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  controller?: CustomDialogController;
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   build() {
     Column() {
@@ -65,7 +65,7 @@ export struct EditExitDialog {
             .borderRadius($r('sys.float.ohos_id_corner_radius_button'))
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
-              this.controller.close()
+              this.controller?.close();
             })
           }.width('50%')
 
@@ -93,7 +93,7 @@ export struct EditExitDialog {
             .borderRadius($r('sys.float.ohos_id_corner_radius_button'))
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
-              this.controller.close()
+              this.controller?.close();
               this.editExitDialogCallback && this.editExitDialogCallback.discardCallback()
               router.back()
             })

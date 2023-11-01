@@ -28,7 +28,7 @@ import { ImageUtil } from '../../../utils/ImageUtil';
 import { ScreenManager } from '../../common/ScreenManager';
 
 import display from '@ohos.display';
-import { UserFileManagerAccess } from '../../../access/UserFileManagerAccess';
+import { FileAsset, UserFileManagerAccess } from '../../../access/UserFileManagerAccess';
 
 const TAG: string = 'common_PhotoDataSource';
 
@@ -285,8 +285,9 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
     }
   }
 
-  async getDataByUri(uri) {
-    return await this.photoDataImpl.getDataByUri(uri);
+  async getDataByUri(uri: string): Promise<FileAsset> {
+    let tmp: FileAsset = await this.photoDataImpl.getDataByUri(uri) as FileAsset;
+    return tmp;
   }
 
   getItemByUri(uri: string): any {

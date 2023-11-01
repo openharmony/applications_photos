@@ -22,12 +22,12 @@ const TAG: string = 'browser_AlbumSelectGridItemNewStyle';
 // The item of album grid, and it's new style.
 @Component
 export struct AlbumSelectGridItemNewStyle {
-  @State @Watch('updateCard') item: AlbumInfo = undefined;
+  @State @Watch('updateCard') item: AlbumInfo = new AlbumInfo();
   @State isEmptyAlbum: boolean = false;
   @Provide gridHeight: number = 0;
   @Provide gridWidth: number = 0;
   @Consume broadCast: BroadCast;
-  mSelectManager: SelectManager;
+  mSelectManager: SelectManager | null = null;
   gridAspectRatio = Constants.CARD_ASPECT_RATIO;
   albumCountMarginRight = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN * 2;
   iconMarkAnchorX = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
@@ -38,22 +38,21 @@ export struct AlbumSelectGridItemNewStyle {
     [AlbumDefine.ALBUM_ID_VIDEO, $r('app.media.ic_video')],
     [AlbumDefine.ALBUM_ID_FAVOR, $r('app.media.ic_favorite_overlay')]
   ]);
+  private updateCardSizeFunc: Function = (): void => this.updateCardSize()
 
   aboutToAppear(): void {
     Log.info(TAG, `aboutToAppear + ${this.item.coverUri}`);
-    this.updateCardSize = this.updateCardSize.bind(this);
     this.updateCardSize();
     // 后续phone缩略图支持横竖屏后再放开
-    if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateCardSize);
+    if (AppStorage.get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
+      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateCardSizeFunc);
     }
   }
 
   aboutToDisappear(): void {
     // 后续phone缩略图支持横竖屏后再放开
-    if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateCardSize);
-      this.updateCardSize = null;
+    if (AppStorage.get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
+      ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateCardSizeFunc);
     }
   }
 

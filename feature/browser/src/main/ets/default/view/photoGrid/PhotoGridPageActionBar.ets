@@ -37,12 +37,12 @@ export struct PhotoGridPageActionBar {
   @Provide selectedCount: number = 0;
   @Link @Watch('updateActionBarProp') totalSelectedCount: number;
   @Consume isEmpty: boolean;
-  title: string;
-  albumInfo: AlbumInfo;
-  isSystemAlbum: boolean;
-  isRecycle: boolean;
-  onMenuClicked: Function;
-  isDistributedAlbum: boolean;
+  title: string = '';
+  albumInfo: AlbumInfo | null = null;
+  isSystemAlbum: boolean = true;
+  isRecycle: boolean = false;
+  onMenuClicked: Function = (): void => {};
+  isDistributedAlbum: boolean = false;
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
 
@@ -141,10 +141,12 @@ export struct PhotoGridPageActionBar {
     return actionBarProp;
   }
 
-  private getTitle(albumInfo: AlbumInfo): Resource | string {
-    let res = UiUtil.getDisplayNameResourceByAlbumInfo(albumInfo);
-    if (res != null) {
-      return res;
+  private getTitle(albumInfo: AlbumInfo | null): Resource | string {
+    if (albumInfo) {
+      let res = UiUtil.getDisplayNameResourceByAlbumInfo(albumInfo);
+      if (res != null) {
+        return res;
+      }
     }
     return this.title;
   }

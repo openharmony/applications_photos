@@ -30,10 +30,10 @@ export class PixelMapManager {
   }
 
   public static getInstance(): PixelMapManager {
-    if (AppStorage.Get(Constants.PIXEL_MAP_MANAGER) == null) {
+    if (AppStorage.get(Constants.PIXEL_MAP_MANAGER) == null) {
       AppStorage.SetOrCreate(Constants.PIXEL_MAP_MANAGER, new PixelMapManager());
     }
-    return AppStorage.Get(Constants.PIXEL_MAP_MANAGER);
+    return AppStorage.get(Constants.PIXEL_MAP_MANAGER);
   }
 
   public getFifoCache(): FifoCache<Thumbnail> {

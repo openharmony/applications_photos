@@ -37,15 +37,19 @@ const TAG: string = 'common_ImageGridItemComponent';
 @Extend(Image) function focusSetting(uri: string, handleEvent: Function) {
   .key('ImageGridFocus_' + uri)
   .focusable(true)
-  .onKeyEvent((event: KeyEvent) => {
-    handleEvent(event);
+  .onKeyEvent((event?: KeyEvent) => {
+    handleEvent((event as KeyEvent));
   })
+}
+
+interface Msg {
+  from: string;
 }
 
 // General grid picture control
 @Component
 export struct ImageGridItemComponent {
-  item: MediaItem;
+  item: MediaItem | null = null;
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @Consume @Watch('onModeChange') isSelectedMode: boolean;
   @State isSelected: boolean = false;
@@ -55,44 +59,26 @@ export struct ImageGridItemComponent {
   @Link selectedCount: number;
   @State autoResize: boolean = true;
   loaded = false;
-  mPosition: number;
+  mPosition: number = 0;
   pageName = '';
   @State isLoadImageError: boolean = false;
   @State pressAnimScale: number = 1.0;
   @State recycleDays: number = 0;
   @Consume rightClickMenuList: Array<Action>;
-  onMenuClicked: Function;
-  onMenuClickedForSingleItem: Function;
+  onMenuClicked: Function = (): void => {};
+  onMenuClickedForSingleItem: Function = (): void => {};
   @State geometryTransitionString: string = 'default_id';
   @State isTap: boolean = false;
   @StorageLink('placeholderIndex') @Watch('verifyTapStatus') placeholderIndex: number = -1;
   @StorageLink('geometryTransitionBrowserId') @Watch('verifyTapStatus') geometryTransitionBrowserId: string = '';
-  private imageThumbnail: string = undefined;
-  private transitionId: string;
+  private imageThumbnail: string = '';
+  private transitionId: string = '';
   private isEnteringPhoto = false;
   private isThird = false;
   private isThirdMultiPick: boolean = false;
-  private OPTS = {
-    'sampleSize': 1,
-    'rotateDegrees': 0,
-    'editable': false,
-    'desiredSize': {
-      'width': 0,
-      'height': 0
-    },
-    'desiredRegion': {
-      'size': {
-        'width': 0,
-        'height': 0
-      },
-      'x': 0,
-      'y': 0
-    },
-    'desiredPixelFormat': 3,
-  };
   private albumUri: string = '';
-  private dataSource: MediaDataSource;
-  private geometryTapIndex: number;
+  private dataSource: MediaDataSource | null = null;
+  private geometryTapIndex: number = 0;
   private isTapStatusChange: boolean = false;
 
   verifyTapStatus() {
@@ -116,12 +102,14 @@ export struct ImageGridItemComponent {
   }
 
   aboutToAppear(): void {
-    this.imageThumbnail = this.item?.thumbnail;
-    this.albumUri = AppStorage.Get<string>(Constants.KEY_OF_ALBUM_URI);
-    if (this.isSelected) {
-      this.transitionId = `${this.item.hashCode}_${this.albumUri}_${this.isSelected}`;
-    } else {
-      this.transitionId = `${this.item.hashCode}_${this.albumUri}`;
+    this.imageThumbnail = this.item?.thumbnail ?? '';
+    this.albumUri = AppStorage.get<string>(Constants.KEY_OF_ALBUM_URI) as string;
+    if (this.item != null) {
+      if (this.isSelected) {
+        this.transitionId = `${this.item.hashCode}_${this.albumUri}_${this.isSelected}`;
+      } else {
+        this.transitionId = `${this.item.hashCode}_${this.albumUri}`;
+      }
     }
     if (this.isRecycle) {
       this.calculateRecycleDays();
@@ -131,7 +119,6 @@ export struct ImageGridItemComponent {
   }
 
   aboutToDisappear(): void {
-    Log.debug(TAG, `aboutToDisappear: ${this.item.uri}`);
     this.resetPressAnim();
   }
 
@@ -176,12 +163,13 @@ export struct ImageGridItemComponent {
     Log.info(TAG, 'change selected.');
     let newState = !this.isSelected;
     AppStorage.SetOrCreate('focusUpdate', true);
-    if (this.item.uri) {
+    if (this.item != null && this.item.uri) {
       this.mPosition = this.getPosition();
-      this.broadCast.emit(BroadCastConstants.SELECT, [this.mPosition, this.item.uri, newState, function(isSelected){
-        Log.info(TAG, `enter callback, select status ${this.mPosition} ${this.item.uri} ${newState} ${this.isSelected}`);
+      this.broadCast.emit(BroadCastConstants.SELECT, [this.mPosition, this.item.uri, newState,  (isSelected: boolean): void => {
+        let itemUri: string = this.item == null ? '' : this.item.uri;
+        Log.info(TAG, `enter callback, select status ${this.mPosition} ${itemUri} ${newState} ${this.isSelected}`);
         this.isSelected = isSelected == undefined ? newState : isSelected;
-      }.bind(this)]);
+      }]);
     }
   }
 
@@ -211,7 +199,7 @@ export struct ImageGridItemComponent {
               }
             }
           })
-      }, menu => menu.actionID.toString())
+      }, (item: Action) => JSON.stringify(item))
     }
     .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
     .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
@@ -227,6 +215,7 @@ export struct ImageGridItemComponent {
       bottom: $r('app.float.menu_margin_bottom')
     })
   }
+
 
   build() {
     Column() {
@@ -252,7 +241,7 @@ export struct ImageGridItemComponent {
       .rotate({ x: 0, y: 0, z: 1, angle: 0 })
       .objectFit(ImageFit.Cover)
       .autoResize(false)
-      .focusSetting(this.item.uri, this.handleKeyEvent.bind(this))
+      .focusSetting(this.item == null ? '' : this.item.uri, (event: KeyEvent): void => this.handleKeyEvent(event))
       .onError(() => {
         this.isLoadImageError = true;
         AppStorage.SetOrCreate('focusUpdate', true);
@@ -265,11 +254,8 @@ export struct ImageGridItemComponent {
         this.requestFocus('ImageGridFocus_');
       })
       .geometryTransition(this.geometryTransitionString)
-        // @ts-ignore
       .transition(TransitionEffect.asymmetric(
-        // @ts-ignore
-        TransitionEffect.scale({ x: AppStorage.Get('geometryScale'), y: AppStorage.Get('geometryScale') }),
-        // @ts-ignore
+        TransitionEffect.scale({ x: AppStorage.get('geometryScale'), y: AppStorage.get('geometryScale') }),
         TransitionEffect.opacity(0.99)))
 
     if (this.geometryTransitionBrowserId === '' || !this.isTapStatusChange) {
@@ -279,10 +265,10 @@ export struct ImageGridItemComponent {
 
   @Builder
   buildIcon() {
-    if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO || this.isRecycle) {
+    if (this.item != null && this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO || this.isRecycle) {
       Row() {
         // 缩略图左下角视频时长
-        if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
+        if (this.item != null && this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
           Text(DateUtil.getFormattedDuration(this.item.duration))
             .fontSize($r('sys.float.ohos_id_text_size_caption'))
             .fontFamily($r('app.string.id_text_font_family_regular'))
@@ -317,7 +303,7 @@ export struct ImageGridItemComponent {
       [[$r('app.color.album_cover_gradient_start_color'), 0], [$r('app.color.transparent'), 1.0]] })
     }
 
-    if (this.item.isFavor) {
+    if (this.item != null && this.item.isFavor) {
       Image($r('app.media.ic_favorite_overlay'))
         .height($r('app.float.overlay_icon_size'))
         .width($r('app.float.overlay_icon_size'))
@@ -377,13 +363,13 @@ export struct ImageGridItemComponent {
     Stack({ alignContent: Alignment.Start }) {
       // 缩略图
       if (this.isLoadImageError) {
-        Image((this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO)
+        Image((this.item != null && this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO)
           ? $r('app.media.alt_video_placeholder') : $r('app.media.alt_placeholder'))
           .aspectRatio(1)
           .rotate({ x: 0, y: 0, z: 1, angle: 0 })
           .objectFit(ImageFit.Cover)
           .autoResize(false)
-          .focusSetting(this.item.uri, this.handleKeyEvent.bind(this))
+          .focusSetting(this.item == null ? '' : this.item.uri, (event: KeyEvent): void => this.handleKeyEvent(event))
           .onAppear(() => {
             Log.debug(TAG, `appear the default image!`);
           })
@@ -422,7 +408,7 @@ export struct ImageGridItemComponent {
       }
 
       // Press animation
-      if (event.type == TouchType.Down) {
+      if (event?.type === TouchType.Down) {
         animateTo({
           duration: Constants.PRESS_ANIM_DURATION,
           curve: Curve.Ease
@@ -431,7 +417,7 @@ export struct ImageGridItemComponent {
         })
       }
 
-      if ((event.type == TouchType.Up || event.type == TouchType.Cancel) && this.pressAnimScale != 1) {
+      if ((event?.type == TouchType.Up || event?.type == TouchType.Cancel) && this.pressAnimScale != 1) {
         animateTo({
           duration: Constants.PRESS_ANIM_DURATION,
           curve: Curve.Ease
@@ -441,19 +427,20 @@ export struct ImageGridItemComponent {
       }
     })
     .gesture(GestureGroup(GestureMode.Exclusive,
-      TapGesture().onAction((event: GestureEvent) => {
-        let ret: Boolean = focusControl.requestFocus('ImageGridFocus_' + this.item.uri);
+      TapGesture().onAction((event?: GestureEvent) => {
+        let ret: boolean = focusControl.requestFocus('ImageGridFocus_' + (this.item == null ? '' : this.item.uri));
         if (ret !== true) {
-          Log.error(TAG, `requestFocus${'ImageGridFocus_' + this.item.uri}, ret:${ret}`);
+          let itemUri: string = this.item == null ? '' : this.item.uri;
+          Log.error(TAG, `requestFocus${'ImageGridFocus_' + itemUri}, ret:${ret}`);
         }
-        let msg = {
-          'From': BigDataConstants.BY_CLICK,
+        let msg: Msg = {
+          from: BigDataConstants.BY_CLICK,
         }
         ReportToBigDataUtil.report(BigDataConstants.ENTER_PHOTO_BROWSER_WAY, msg);
         this.openPhotoBrowser();
       }),
-      LongPressGesture().onAction((event: GestureEvent) => {
-        Log.info(TAG, `LongPressGesture ${event}`);
+      LongPressGesture().onAction((event?: GestureEvent) => {
+        Log.info(TAG, `LongPressGesture ${event as GestureEvent}`);
         this.selectStateChange();
         this.pressAnimScale = 1;
       })
@@ -504,24 +491,25 @@ export struct ImageGridItemComponent {
   // 获取最近删除中，待回收照片倒计天数
   private calculateRecycleDays(): void {
     let currentTimeSeconds: number = new Date().getTime() / 1000;
-    let trashedDay = DateUtil.convertSecondsToDays(currentTimeSeconds - this.item.dateTrashed);
-    Log.debug(TAG, `currentSec=${currentTimeSeconds}, trashedSec=${this.item.dateTrashed}, trashedDay=${trashedDay}`);
+    let itemDateTrashed: number = this.item == null ? 0 : this.item.dateTrashed;
+    let trashedDay = DateUtil.convertSecondsToDays(currentTimeSeconds - itemDateTrashed);
+    Log.debug(TAG, `currentSec=${currentTimeSeconds}, trashedSec=${itemDateTrashed}, trashedDay=${trashedDay}`);
     if (trashedDay > Constants.RECYCLE_DAYS_MAX) {
       this.recycleDays = 0;
     } else if (trashedDay <= 0) {
       this.recycleDays = Constants.RECYCLE_DAYS_MAX - 1;
     } else {
-      this.recycleDays = parseInt((Constants.RECYCLE_DAYS_MAX - trashedDay) + '');
+      this.recycleDays = Number.parseInt((Constants.RECYCLE_DAYS_MAX - trashedDay) + '');
     }
   }
 
   private requestFocus(keyName: string): void {
-    if (AppStorage.Get('deviceType') == Constants.DEFAULT_DEVICE_TYPE) {
+    if (AppStorage.get<string>('deviceType') == Constants.DEFAULT_DEVICE_TYPE) {
       return;
     }
-    let positionUri = AppStorage.Get('focusPosition');
-    let isUpdate = AppStorage.Get('focusUpdate');
-    if (isUpdate && positionUri === this.item.uri) {
+    let positionUri = AppStorage.get<string>('focusPosition');
+    let isUpdate = AppStorage.get<boolean>('focusUpdate');
+    if (this.item !== null && isUpdate && positionUri === this.item.uri) {
       let ret: Boolean = focusControl.requestFocus(keyName + this.item.uri);
       if (ret !== true) {
         Log.error(TAG, `requestFocus${keyName + this.item.uri}, ret:${ret}`);
@@ -552,8 +540,8 @@ export struct ImageGridItemComponent {
     if (KeyType.Up == event.type) {
       switch (event.keyCode) {
         case MultimodalInputManager.KEY_CODE_KEYBOARD_ENTER:
-          let msg = {
-            'From': BigDataConstants.BY_KEYBOARD,
+          let msg: Msg = {
+            from: BigDataConstants.BY_KEYBOARD,
           }
           ReportToBigDataUtil.report(BigDataConstants.ENTER_PHOTO_BROWSER_WAY, msg);
           this.openPhotoBrowser();
@@ -573,6 +561,7 @@ export struct ImageGridItemComponent {
   }
 
   private getPosition(): number {
+    if (this.dataSource == null || this.item == null) return 0;
     return this.dataSource.getDataIndex(this.item) + this.dataSource.getGroupCountBeforeItem(this.item);
   }
 }

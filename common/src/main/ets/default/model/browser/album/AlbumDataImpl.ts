@@ -22,6 +22,7 @@ import { UserFileManagerAccess } from '../../../access/UserFileManagerAccess';
 import { Log } from '../../../utils/Log';
 import { Constants } from '../../common/Constants';
 import { MediaItem } from '../photo/MediaItem';
+import { ImageUtil } from '../../../utils/ImageUtil';
 
 const TAG: string = 'common_AlbumDataImpl';
 
@@ -139,52 +140,57 @@ export class AlbumDataImpl extends BrowserDataImpl {
   }
 
   private async getUserAlbumsInfo(albumArray: Array<AlbumInfo>, filterMediaType?: string): Promise<void> {
-    Log.debug(TAG, 'getUserAlbumsInfo');
-
+    Log.info(TAG, 'getUserAlbumsInfo start');
     let albums: Album[] = await UserFileManagerAccess.getInstance().getUserAlbums();
-    Log.debug(TAG, `getUserAlbumsInfo albums is : ${albums}`);
-    if (albums) {
+    if (!albums) {
+      Log.error(TAG, 'getUserAlbumsInfo, albums undefined');
+    }
+    Log.info(TAG, `getUserAlbumsInfo fetch albums length : ${albums.length}`);
+    try {
       for (let album of albums) {
         let albumInfo: AlbumInfo = new AlbumInfo(album);
         let albumName: string = await UserFileManagerAccess.getInstance().getAlbumName(album);
         albumInfo.setAlbumName(albumName);
-        albumInfo.setFilterMediaType(filterMediaType);
-        // 没有相册，设置为第一张
-        if (!album.coverUri) {
-          await UserFileManagerAccess.getInstance().getAlbumFirstObject(album).then((obj) => {
-            if (obj) {
-              let mediaItem = new MediaItem(obj);
-              mediaItem.setThumbnail(this.getThumbnailSafe(obj.uri, String(obj.get(Constants.KEY_FILE_DATA))));
-              albumInfo.setMediaItem(mediaItem);
-              albumInfo.setCoverUri(this.getThumbnailSafe(obj.uri, String(obj.get(Constants.KEY_FILE_DATA))));
-            }
-          });
-        } else {
-          await UserFileManagerAccess.getInstance().getFirstObject(AlbumDefine.getFileFetchOptByUri(album.coverUri)).then((obj) => {
-            if (obj) {
-              let mediaItem = new MediaItem(obj.obj);
-              mediaItem.setThumbnail(this.getThumbnailSafe(obj.obj.uri, String(obj.obj.get(Constants.KEY_FILE_DATA))));
-              albumInfo.setMediaItem(mediaItem);
-              albumInfo.setCoverUri(this.getThumbnailSafe(obj.obj.uri, String(obj.obj.get(Constants.KEY_FILE_DATA))));
-            }
-          });
+        albumInfo.setFilterMediaType(filterMediaType as string);
+        let count = albumInfo.count;
+        albumInfo.setCount(count); // Waiting: album.count不为0时，在构造函数里直接获取
+        let videoCount = 0;
+        if (count > 0) {
+          // 没有相册，设置为第一张
+          let hasCoverUri: Boolean = false;
+          if (album.coverUri) {
+            await UserFileManagerAccess.getInstance().getFirstObject(AlbumDefine.getFileFetchOptByUri(album.coverUri)).then((obj) => {
+              if (obj && obj.obj) {
+                let mediaItem = new MediaItem(obj.obj);
+                mediaItem.setThumbnail(this.getThumbnailSafe(obj.obj.uri, String(obj.obj.get(Constants.KEY_FILE_DATA))));
+                albumInfo.setMediaItem(mediaItem);
+                albumInfo.setCoverUri(ImageUtil.calcThumbnail(obj.obj.uri, mediaItem.height, mediaItem.width));
+                hasCoverUri = true;
+              }
+            });
+          }
+          if (!hasCoverUri) {
+            await UserFileManagerAccess.getInstance().getAlbumFirstObject(album).then((obj) => {
+              if (obj) {
+                let mediaItem = new MediaItem(obj);
+                mediaItem.setThumbnail(this.getThumbnailSafe(obj.uri, String(obj.get(Constants.KEY_FILE_DATA))));
+                albumInfo.setMediaItem(mediaItem);
+                albumInfo.setCoverUri(ImageUtil.calcThumbnail(obj.uri, mediaItem.height, mediaItem.width));
+              }
+            });
+          }
+          // 相册的视频数量
+          videoCount = await this.getItemsCountOfAlbum(album, AlbumDefine.FILTER_MEDIA_TYPE_VIDEO);
         }
-        let count = await this.getItemsCount(album.albumUri);
-        albumInfo.setCount(count); // TODO album.count不为0时，在构造函数里直接获取
-        // 相册的视频数量
-        let videoCount = await this.getItemsCount(album.albumUri, AlbumDefine.FILTER_MEDIA_TYPE_VIDEO);
         albumInfo.setVideoCount(videoCount);
-        Log.debug(TAG, `getUserAlbumsInfo albumInfo is : ${albumInfo}`);
         albumArray.push(albumInfo);
-        Log.debug(TAG, `getUserAlbumsInfo albumArray length is : ${albumArray.length}`);
+        Log.info(TAG, `getUserAlbumsInfo done, albumInfo : ${JSON.stringify(albumInfo)}, albumArray length: ${albumArray.length}`);
       }
-    } else {
-      Log.error(TAG, 'Failed getUserAlbumsInfo');
+    } catch (error) {
+      Log.error(TAG, `getUserAlbumsInfo error occured: ${error}`);
     }
-
-    Log.debug(TAG, 'getUserAlbumsInfo done');
+    Log.info(TAG, 'getUserAlbumsInfo done');
   }
-
 
   private async getSystemAlbumsInfo(albumArray: Array<AlbumInfo>, filterMediaType?: string): Promise<void> {
     Log.debug(TAG, 'getSystemAlbumsInfo');
@@ -239,23 +245,23 @@ export class AlbumDataImpl extends BrowserDataImpl {
   }
 
   private async getTrashAlbumInfo(albumArray: Array<AlbumInfo>, filterMediaType?: string): Promise<void> {
-    Log.debug(TAG, 'getTrashAlbumInfo');
-    let album: Album = await UserFileManagerAccess.getInstance().getTrashAlbum();
-    Log.debug(TAG, `getTrashAlbumInfo albums is : ${album}`);
+    Log.info(TAG, 'getTrashAlbumInfo start');
+    let album: Album = await UserFileManagerAccess.getInstance().getTrashAlbum() as Album;
+    if (!album) {
+      Log.error(TAG, 'getTrashAlbumInfo, get album undefined');
+    }
     let albumInfo: AlbumInfo = new AlbumInfo(album);
-    let count = await this.getItemsCount(album.albumUri);
+    let count = albumInfo.count;
     // 系统相册为空时不展示
     if (count === 0) {
       Log.warn(TAG, 'getTrashAlbumInfo count is 0');
       return;
     }
     albumInfo.setCount(count);
-    let albumName: string = await UserFileManagerAccess.getInstance().getAlbumName(album);
+    let albumName: string = await UserFileManagerAccess.getInstance().getAlbumName(album) as string;
     albumInfo.setAlbumName(albumName);
-    albumInfo.setFilterMediaType(filterMediaType);
-    Log.debug(TAG, `getTrashAlbumInfo albumArray albumInfo is : ${albumInfo}`);
+    albumInfo.setFilterMediaType(filterMediaType as string);
     albumArray.push(albumInfo);
-    Log.debug(TAG, `getTrashAlbumInfo albumArray length is : ${albumArray.length}`);
-    Log.debug(TAG, 'getSystemAlbumsInfo done');
+    Log.info(TAG, `getTrashAlbumInfo done, albumInfo : ${JSON.stringify(albumInfo)}, albumArray length: ${albumArray.length}`);
   }
 }

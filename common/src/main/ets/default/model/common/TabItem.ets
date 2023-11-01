@@ -20,7 +20,7 @@ export class TabItem {
   iconResource: Resource;
   iconSelectedResource: Resource;
   iconDefault: Resource = $r('sys.color.ohos_id_color_bottom_tab_icon_off');
-  iconSelected: Resource;
+  iconSelected: Resource | null = null;
   textColorDefault: Resource = $r('sys.color.ohos_id_color_text_primary');
   textColorSelected: Resource = $r('sys.color.ohos_id_color_bottom_tab_text_on');
   textFamilyDefault: Resource = $r('sys.string.ohos_id_text_font_family_medium');
@@ -38,7 +38,7 @@ export class TabItem {
   }
 
   getConditionIcon(isSelected: boolean): Resource {
-    return isSelected ? this.iconSelected : this.iconDefault;
+    return isSelected ? this.iconSelected as Resource : this.iconDefault;
   }
 
   getIcon(isSelected: boolean): Resource {

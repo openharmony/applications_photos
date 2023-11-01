@@ -34,6 +34,10 @@ const COMPONENT_KEY_EDIT_CROP_16_9: string = 'EditCrop_16_9';
 const COMPONENT_KEY_EDIT_CROP_PORT_FULL: string = 'PortFull';
 const COMPONENT_KEY_EDIT_CROP_LAND_FULL: string = 'LandFull';
 
+interface Msg {
+  type: string
+}
+
 @Component
 export struct CropStyleBar {
   @Consume broadCast: BroadCast;
@@ -95,8 +99,8 @@ export struct CropStyleBar {
     }),
   ];
   @State @Watch('clickEvent') menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
-  private menuClick: Function = undefined;
-  private resetClick: Function = undefined;
+  private menuClick: Function = (): void => {};
+  private resetClick: Function = (): void => {};
 
   clickEvent(): void {
     ActionChangedEvent.isActiveNotChanged(this.menuChanged);
@@ -127,7 +131,7 @@ export struct CropStyleBar {
     let id = -1;
     for (let i = 0; i < this.menuChanged.menuArray.length; i++) {
       if (this.menuChanged.menuArray[i].isActive) {
-        id = this.menuChanged.menuArray[i].actionID;
+        id = this.menuChanged.menuArray[i].actionID as number;
       }
     }
 
@@ -158,8 +162,8 @@ export struct CropStyleBar {
     this.cropEdit.onRotationAngleChange();
     this.isCropReset = this.cropEdit.couldReset();
 
-    let msg = {
-      'Type': BigDataConstants.PHOTO_EDIT_ROTATE
+    let msg: Msg = {
+      type: BigDataConstants.PHOTO_EDIT_ROTATE
     };
     ReportToBigDataUtil.report(BigDataConstants.PHOTO_EDIT_TYPE_ID, msg);
   }
@@ -167,8 +171,8 @@ export struct CropStyleBar {
   onMirrorClicked(): void {
     this.cropEdit.onMirrorChange();
     this.isCropReset = this.cropEdit.couldReset();
-    let msg = {
-      'Type': BigDataConstants.PHOTO_EDIT_MIRROR
+    let msg: Msg = {
+      type: BigDataConstants.PHOTO_EDIT_MIRROR
     };
     ReportToBigDataUtil.report(BigDataConstants.PHOTO_EDIT_TYPE_ID, msg);
   }
@@ -176,15 +180,15 @@ export struct CropStyleBar {
   onResetClicked(): void {
     this.menuChanged.isChanged = 0;
     this.isCropReset = this.cropEdit.couldReset();
-    let msg = {
-      'Type': BigDataConstants.PHOTO_EDIT_RESET
+    let msg: Msg = {
+      type: BigDataConstants.PHOTO_EDIT_RESET
     };
     ReportToBigDataUtil.report(BigDataConstants.PHOTO_EDIT_TYPE_ID, msg);
   }
 
   aboutToAppear(): void {
-    this.menuClick = this.onMenuClicked.bind(this);
-    this.resetClick = this.onResetClicked.bind(this);
+    this.menuClick = (actionID: number | CropRatioType): void => this.onMenuClicked(actionID);
+    this.resetClick = (): void => this.onResetClicked();
     this.broadCast.on(Constants.UPDATE_MENU, this.menuClick);
     this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClick);
   }

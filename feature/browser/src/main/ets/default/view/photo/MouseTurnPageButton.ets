@@ -19,8 +19,8 @@ export struct MouseTurnPageButton {
   @State buttonBackgroundColor: Resource = $r('app.color.ohos_id_color_whiteIcon_blackPlane')
   @State isButtonHover: boolean = false
   @Consume @Watch('handleIconColor') isDefaultBackgroundColor: boolean
-  private isStart: boolean
-  private imageResource: Resource
+  private isStart: boolean = false;
+  private imageResource: Resource | null = null;
 
   aboutToAppear() {
     this.imageResource = this.isStart ? $r('app.media.ic_public_arrow_left_swiper')
@@ -58,8 +58,10 @@ export struct MouseTurnPageButton {
       width: $r('app.float.mouse_turn_page_button_response_size'),
       height: $r('app.float.mouse_turn_page_button_response_size')
     })
-    .onHover((isHover: boolean) => {
-      this.isButtonHover = isHover
+    .onHover((isHover?: boolean) => {
+      if (isHover != null) {
+        this.isButtonHover = isHover
+      }
       this.handleIconColor()
     })
   }

@@ -24,10 +24,10 @@ import {
   ScreenManager,
   UiUtil
 } from '@ohos/common';
-import router from '@ohos.router';
 import { SelectParams } from '../utils/ThirdSelectConstants';
 import { EmptyAlbumComponent } from '@ohos/browser/BrowserComponents';
-import Router from '@system.router';
+import { Router } from '@ohos.arkui.UIContext';
+import router from '@ohos.router';
 
 const TAG: string = 'thiSel_ThirdAlbumGridItem';
 
@@ -44,7 +44,7 @@ export struct ThirdAlbumGridItem {
   MASK_LAYER_HEIGHT = '50%';
   @State transformV: number = 0;
   @State isEmptyAlbum: boolean = false;
-  isFirstEnter: boolean;
+  isFirstEnter: boolean = false;
   @Consume selectParams: SelectParams;
   private staticIconList = new Map([
     [AlbumDefine.ALBUM_ID_VIDEO, $r('app.media.ic_video')],
@@ -52,7 +52,7 @@ export struct ThirdAlbumGridItem {
   ]);
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private fp2vpUnit: number = px2vp(fp2px(Constants.NUMBER_1));
-  onWindowSizeChangeCallBack = () => this.updateCardSize();
+  private onWindowSizeChangeCallBack: Function = (): void  => this.updateCardSize();
 
   aboutToAppear(): void {
     Log.info(TAG, `aboutToAppear + ${this.item.coverUri}, select param ${JSON.stringify(this.selectParams)}`)
@@ -66,7 +66,6 @@ export struct ThirdAlbumGridItem {
   aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.onWindowSizeChangeCallBack = null;
   }
 
   updateCardSize() {
@@ -169,15 +168,16 @@ export struct ThirdAlbumGridItem {
     .border({
       radius: $r('sys.float.ohos_id_corner_radius_default_m')
     })
-    .onClick(this.handleClick.bind(this))
+    .onClick((): void => this.handleClick())
+
   }
 
-  private handleClick() {
+  private handleClick(): void {
     if (this.selectParams.isFromFa && (!this.selectParams.isFromFaPhoto)) {
       this.appBroadCast.emit(BroadCastConstants.SAVE_FORM_EDITOR_DATA,
         [this.item.albumName, this.item.uri, this.item.albumName, '', true]);
     } else {
-      let params: any = this.selectParams;
+      let params: SelectParams = this.selectParams;
       params.isFirstEnter = false;
       params.itemDisplayName = this.item.albumName;
       params.itemCount = this.item.count;
@@ -186,7 +186,7 @@ export struct ThirdAlbumGridItem {
       router.pushUrl({
         url: 'pages/ThirdSelectPhotoGridPage',
         params: params
-      }, router.RouterMode.Single);
+      });
     }
   }
 }

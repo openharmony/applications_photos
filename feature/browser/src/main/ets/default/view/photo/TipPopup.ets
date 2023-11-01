@@ -18,18 +18,27 @@ import { BroadCast, BrowserConstants as PhotoConstants } from '@ohos/common';
 export struct TipPopup {
   @State isShowPop: boolean = false;
   @Consume broadCast: BroadCast;
+  private popAppearFunc: Function = (): void => this.popAppear();
+  private popDisappearFunc: Function = (): void => this.popDisappear();
+
+  private popAppear(): void {
+    this.isShowPop = true;
+  }
+
+  private popDisappear(): void {
+    this.isShowPop = false;
+  }
 
   aboutToAppear() {
-    this.broadCast.on(PhotoConstants.POP_APPEAR, () => {
-      this.isShowPop = true;
-    });
-    this.broadCast.on(PhotoConstants.POP_DISAPPEAR, () => {
-      this.isShowPop = false;
-    });
+    this.broadCast.on(PhotoConstants.POP_APPEAR, this.popAppearFunc);
+    this.broadCast.on(PhotoConstants.POP_DISAPPEAR, this.popDisappearFunc);
   }
 
   aboutToDisappear(): void {
-    this.broadCast.off(null, null);
+    if (this.broadCast) {
+      this.broadCast.off(PhotoConstants.POP_APPEAR, this.popAppearFunc);
+      this.broadCast.off(PhotoConstants.POP_DISAPPEAR, this.popDisappearFunc);
+    }
   }
 
   build() {

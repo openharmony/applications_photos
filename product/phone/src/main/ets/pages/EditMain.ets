@@ -38,7 +38,6 @@ export struct EditMain {
   @Provide editorManager: PhotoEditorManager = PhotoEditorManager.getInstance();
   @Provide('compare') isCompare: boolean = false;
   @Provide('angle') rotateAngle: number = Constants.NUMBER_0;
-  @Provide confirmToolBarText: Resource = undefined;
   @Provide isCropReset: boolean = false;
   @Provide isBigTextShow: boolean = false;
   @Provide bigText: string = '';
@@ -49,7 +48,7 @@ export struct EditMain {
   @Provide('verticalScreen') isVerticalScreen: boolean = !ScreenManager.getInstance().isHorizontal();
   @Provide screenWidth: number = Constants.NUMBER_0;
   @Provide screenHeight: number = Constants.NUMBER_0;
-  @Provide cropEdit: PhotoEditCrop = undefined;
+  @Provide cropEdit: PhotoEditCrop | undefined = undefined;
   @Provide isRedo: boolean = false;
   @Provide isUndo: boolean = false;
   @Provide isMagnifier: boolean = false;
@@ -66,11 +65,11 @@ export struct EditMain {
   @State imageScaleWidth: number = Constants.NUMBER_0;
   appEventBus: BroadCast = BroadCastManager.getInstance().getBroadCast();
   @StorageLink('currentBreakpoint') @Watch('updateIsVerticalScreen') currentBreakpoint: string = Constants.BREAKPOINT_MD;
-  private mediaItem: MediaItem = globalThis.EditorMediaItem;
+  private mediaItem: MediaItem = AppStorage.get<MediaItem>('EditorMediaItem') as MediaItem;
   private screenManager = ScreenManager.getInstance();
   private isLoadFailed: boolean = false;
-  private albumUri: string = globalThis.EditorAlbumUri;
-  onWindowSizeChangeCallBack = () => this.updateIsVerticalScreen();
+  private albumUri: string = AppStorage.get<string>('EditorAlbumUri') as string;
+  private onWindowSizeChangeCallBack: Function = (): void => this.updateIsVerticalScreen();
 
   updateIsVerticalScreen(): void {
     if (this.currentBreakpoint == Constants.BREAKPOINT_LG) {
@@ -95,7 +94,7 @@ export struct EditMain {
 
   onBackPress(): boolean {
     if (this.isCropReset) {
-      this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
+      this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [(): void => this.discardCallback()]);
     } else {
       router.back();
     }
@@ -116,19 +115,19 @@ export struct EditMain {
     if (this.mediaItem) {
       this.isLoadFailed = false;
       this.editorManager.initialize(
-        this.mediaItem, this.albumUri, PhotoEditMode.EDIT_MODE_CROP, this.loadFailedCallback.bind(this));
+        this.mediaItem, this.albumUri, PhotoEditMode.EDIT_MODE_CROP, (): void => this.loadFailedCallback());
     }
     this.cropEdit = this.editorManager.getPhotoEditBaseInstance(PhotoEditMode.EDIT_MODE_CROP) as PhotoEditCrop;
     ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     this.updateIsVerticalScreen();
-    ReportToBigDataUtil.report(BigDataConstants.ENTER_PHOTO_EDIT_ID, null);
+    ReportToBigDataUtil.report(BigDataConstants.ENTER_PHOTO_EDIT_ID, undefined);
   }
 
   aboutToDisappear(): void {
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.onWindowSizeChangeCallBack = null;
     Log.debug(TAG, 'aboutToDisappear');
-    globalThis.EditorMediaItem = undefined;
+
+    AppStorage.setOrCreate<MediaItem | undefined>('EditorMediaItem', undefined);
     PhotoEditorManager.getInstance().clear();
     ScreenManager.getInstance().setSystemUi(true);
   }

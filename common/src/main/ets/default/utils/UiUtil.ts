@@ -21,6 +21,7 @@ import prompt from '@system.prompt';
 import type window from '@ohos.window';
 import type { Action } from '../view/browserOperation/Action';
 import { AlbumInfo } from '../model/browser/album/AlbumInfo';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'common_UiUtil';
 
@@ -130,11 +131,12 @@ export class UiUtil {
   static async getResourceString(resource: Resource): Promise<string> {
     try {
       Log.info(TAG, `getResourceString: ${JSON.stringify(resource)}`);
-      if (globalThis.photosAbilityContext == null || globalThis.photosAbilityContext === 'undefined') {
+      if (AppStorage.get('photosAbilityContext') === null || AppStorage.get('photosAbilityContext') === 'undefined') {
         Log.error(TAG, 'getResourceString error: context is null');
         return null;
       }
-      let mgr = await globalThis.photosAbilityContext.resourceManager.getString(resource.id);
+      let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext');
+      let mgr: string = await context.resourceManager.getString(resource.id);
       if (mgr) {
         return mgr;
       } else {
@@ -156,11 +158,12 @@ export class UiUtil {
   static async getResourceNumber(resource: Resource): Promise<number> {
     try {
       Log.info(TAG, `getResourceNumber: ${JSON.stringify(resource)}`);
-      if (globalThis.photosAbilityContext == null || globalThis.photosAbilityContext === 'undefined') {
+      if (AppStorage.get('photosAbilityContext') === null || AppStorage.get('photosAbilityContext') === 'undefined') {
         Log.error(TAG, 'getResourceNumber error: context is null');
         return null;
       }
-      let mgr = await globalThis.photosAbilityContext.resourceManager.getNumber(resource.id);
+      let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext');
+      let mgr: number = context.resourceManager.getNumber(resource.id);
       if (mgr) {
         return mgr;
       } else {

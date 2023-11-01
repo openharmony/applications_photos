@@ -24,11 +24,11 @@ export class BrowserController {
   public geometryTransitionEnable: boolean = false;
   public isAnimating: boolean = false;
   public isBrowserShow: boolean = false;
-  public browserParam: Object = undefined;
-  public browserBackFunc: Function;
+  public browserParam?: Object;
+  public browserBackFunc: Function = (): void => {};
   public isSelectBrowserShow: boolean = false;
-  public selectBrowserParam: Object = undefined;
-  public pageFrom: string = undefined;
+  public selectBrowserParam?: Object;
+  public pageFrom: string = '';
 
   constructor(isGeometryEnable: boolean) {
     this.geometryTransitionEnable = isGeometryEnable;
@@ -73,10 +73,10 @@ export class BrowserController {
       }
     }, () => {
       this.isBrowserShow = false;
-      this.browserParam = undefined;
+      this.browserParam;
       this.isAnimating = true;
       AppStorage.SetOrCreate<number>('placeholderIndex', -1);
-      Log.info(TAG, `placeholderIndex ${AppStorage.get('placeholderIndex')}`);
+      Log.info(TAG, `placeholderIndex ${AppStorage.get<number>('placeholderIndex')}`);
     });
   }
 
@@ -109,7 +109,7 @@ export class BrowserController {
       }
     }, () => {
       this.isSelectBrowserShow = false;
-      this.selectBrowserParam = undefined;
+      this.selectBrowserParam;
       this.isAnimating = true;
       AppStorage.SetOrCreate<number>('placeholderIndex', -1);
     });

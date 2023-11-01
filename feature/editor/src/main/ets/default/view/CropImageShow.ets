@@ -34,6 +34,7 @@ export struct CropImageShow {
   private stateMenuSize: number = ScreenManager.getInstance().getStatusBarHeight();
   private preTouch: number = Constants.NUMBER_0;
   private prePinch: number = Constants.NUMBER_0;
+  private onCropResetClickedFunc: Function = (): void => this.onCropResetClicked()
 
   onCropResetClicked(): void {
     Log.debug(TAG, 'crop reset is clicked');
@@ -93,8 +94,8 @@ export struct CropImageShow {
 
   aboutToAppear(): void {
     Log.debug(TAG, 'Photo CropImageShow called');
-    this.onCropResetClicked = this.onCropResetClicked.bind(this);
-    this.broadCast.on(Constants.CROP_RESET_CLICKED, this.onCropResetClicked);
+
+    this.broadCast.on(Constants.CROP_RESET_CLICKED, this.onCropResetClickedFunc);
     this.adjustLayout();
   }
 
@@ -106,7 +107,7 @@ export struct CropImageShow {
 
   aboutToDisappear(): void {
     this.cropEdit.setCanvasReady(false);
-    this.broadCast.off(Constants.CROP_RESET_CLICKED, this.onCropResetClicked);
+    this.broadCast.off(Constants.CROP_RESET_CLICKED, this.onCropResetClickedFunc);
   }
 
   build() {
@@ -121,18 +122,18 @@ export struct CropImageShow {
           this.cropEdit.setCanvasReady(true);
         })
     }
-    .onTouch((event) => {
-      this.onTouchStart(event);
+    .onTouch((event?: TouchEvent) => {
+      this.onTouchStart(event as TouchEvent);
     })
     .gesture(
       PinchGesture()
-        .onActionStart((event: GestureEvent) => {
-          this.onPinchGestureStart(event);
+        .onActionStart((event?: GestureEvent) => {
+          this.onPinchGestureStart(event as GestureEvent);
         })
-        .onActionUpdate((event: GestureEvent) => {
-          this.onPinchGestureUpdate(event);
+        .onActionUpdate((event?: GestureEvent) => {
+          this.onPinchGestureUpdate(event as GestureEvent);
         })
-        .onActionEnd(() => {
+        .onActionEnd((): void => {
           this.onPinchGestureEnd();
         })
     )
