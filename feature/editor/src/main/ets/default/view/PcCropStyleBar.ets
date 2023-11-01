@@ -98,8 +98,8 @@ export struct PcCropStyleBar {
     }),
   ];
   @State @Watch('clickEvent') menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
-  private menuClick: Function = undefined;
-  private resetClick: Function = undefined;
+  private menuClick: Function = (): void => {};
+  private resetClick: Function = (): void => {};
 
   clickEvent() {
     ActionChangedEvent.isActiveNotChanged(this.menuChanged);
@@ -126,11 +126,11 @@ export struct PcCropStyleBar {
     }
   }
 
-  onRotateClicked() {
+  onRotateClicked(): void {
     let id = -1;
     for (let i = 0; i < this.menuChanged.menuArray.length; i++) {
       if (this.menuChanged.menuArray[i].isActive) {
-        id = this.menuChanged.menuArray[i].actionID;
+        id = this.menuChanged.menuArray[i].actionID as number;
       }
     }
 
@@ -173,8 +173,8 @@ export struct PcCropStyleBar {
   }
 
   aboutToAppear() {
-    this.menuClick = this.onMenuClicked.bind(this);
-    this.resetClick = this.onResetClicked.bind(this);
+    this.menuClick = (actionID: number | CropRatioType): void => this.onMenuClicked(actionID);
+    this.resetClick = (): void => this.onResetClicked();
     this.broadCast.on(Constants.UPDATE_MENU, this.menuClick);
     this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClick);
   }

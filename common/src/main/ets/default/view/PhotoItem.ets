@@ -31,12 +31,13 @@ import { BigDataConstants, ReportToBigDataUtil } from '../utils/ReportToBigDataU
 import { MultimodalInputManager } from '../model/common/MultimodalInputManager';
 import { BroadCastConstants } from '../model/common/BroadCastConstants';
 import { PhotoDataSource } from '../model/browser/photo/PhotoDataSource';
+import { Matrix4x4 } from '../utils/Matrix4x4';
 
 const TAG: string = 'common_PhotoItem';
 
 @Component
 export struct PhotoItem {
-  @State @Watch('onViewDataChanged') item: MediaItem = new MediaItem(null);
+  @State @Watch('onViewDataChanged') item: MediaItem = new MediaItem();
   @State matrix: Matrix4.Matrix4Transit = Matrix4.identity().copy();
   @State mDirection: PanDirection = PanDirection.Vertical;
   //  @Consume broadCast: BroadCast;
@@ -49,12 +50,13 @@ export struct PhotoItem {
   @State lcdPixelMapUpdate: boolean = false;
   @Consume pageFrom: number;
   @Consume('transitionIndex') @Watch('onTransitionChange') updateTransition: number;
-  mPosition: number;
-  transitionTag: string;
+  mPosition: number = 0;
+  transitionTag: string = '';
   @State isLoading: boolean = true;
   @State usePixmap: boolean = false;
   @Provide listCardWidth: number = 0;
-  verifyPhotoScaled: (matrix: Matrix4.Matrix4Transit) => void;
+  verifyPhotoScaled: (matrix: Matrix4.Matrix4Transit) => void = (matrix: Matrix4.Matrix4Transit): void => {
+  };
   @Consume currentIndex: number;
   @StorageLink('geometryScale') geometryScale: number = 1;
   @StorageLink('geometryOffsetX') geometryOffsetX: number = 0;
@@ -66,21 +68,21 @@ export struct PhotoItem {
     = ScreenManager.getInstance().isHorizontal();
   @State isPhotoScaled: boolean = false;
   @State justifyWidth: boolean = true;
-  @State imageWidth: string = Constants.PERCENT_100;
-  @State imageHeight: string = Constants.PERCENT_100;
+  @State imageWidth?: string = Constants.PERCENT_100;
+  @State imageHeight?: string = Constants.PERCENT_100;
   @State isEdgeTop: boolean = true;
   @Link isRunningAnimation: boolean;
   @State geometryTransitionId: string = 'default_id';
   @StorageLink('geometryTransitionBrowserId') @Watch('onGeometryIdChange') geometryTransitionBrowserId: string = '';
   private lastUpdateTransition: number = -1;
-  private eventPipeline: EventPipeline;
-  private animationOption: AnimationParam = null;
-  private animationEndMatrix: Matrix4.Matrix4Transit = null;
+  private eventPipeline: EventPipeline | null = null;
+  private animationOption?: AnimationParam;
+  private animationEndMatrix?: Matrix4.Matrix4Transit;
   private isHandlingTap: boolean = false;
-  private timerCounter: number;
+  private timerCounter: number = 0;
   private imgScale: number = 1;
   private firstLoad: boolean = true;
-  private preItem = { height: 0, width: 0 };
+  private preItem: PreItem = { height: 0, width: 0 };
   private albumUri: string = '';
   private imagePropertyComponentHeight: number = 578;
   private propertyHeightHorizontal: number = 300;
@@ -92,12 +94,12 @@ export struct PhotoItem {
   private windowLayoutHeight: number = ScreenManager.getInstance().getWinLayoutHeight();
   private windowColumns: number = ScreenManager.getInstance().getScreenColumns();
   private isFromFACard: boolean = false;
-  private dataSource: PhotoDataSource;
+  private dataSource: PhotoDataSource | null = null;
   private isDefaultFA: boolean = false;
   private onWindowSizeChangeCallBack = () => this.onWindowSizeChanged();
-  private onDataReloadFunc: Function = this.onDataReload.bind(this);
-  private resetDefaultScaleFunc: Function = this.resetDefaultScale.bind(this);
-  private saveScaleFunc: Function = this.saveScale.bind(this);
+  private onDataReloadFunc: Function = (addCount: KeyEvent): void => this.onDataReload(addCount);
+  private resetDefaultScaleFunc: Function = (): void => this.resetDefaultScale();
+  private saveScaleFunc: Function = (): void => this.saveScale();
 
   onGeometryIdChange() {
     this.geometryTransitionId = (this.mPosition === this.currentIndex) ? this.geometryTransitionBrowserId : 'default_id';
@@ -107,7 +109,7 @@ export struct PhotoItem {
 
   private onDataReload(addCount: KeyEvent): void {
     Log.info(TAG, `onDataReload ${this.item.uri}`);
-    let item: MediaItem = this.dataSource.getItemByUri(this.item.uri) as MediaItem;
+    let item: MediaItem | null = this.dataSource?.getItemByUri(this.item.uri) as MediaItem ?? null;
     if (item) {
       this.item = item;
       Log.debug(TAG, `Item[${this.item.uri}] is changed`);
@@ -130,7 +132,6 @@ export struct PhotoItem {
     this.matrix = Matrix4.identity().copy();
     this.isPhotoScaled = false;
     this.firstLoad = true;
-    this.eventPipelineSizeChange = this.eventPipelineSizeChange.bind(this)
     if (this.dataSource) {
       this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadFunc);
     }
@@ -143,7 +144,7 @@ export struct PhotoItem {
     this.calculateImagePos();
     this.onGeometryIdChange();
 
-    let matrix: Matrix4.Matrix4Transit = AppStorage.Get(PhotoConstants.MATRIX);
+    let matrix: Matrix4.Matrix4Transit = AppStorage.get<Matrix4.Matrix4Transit>(PhotoConstants.MATRIX) as Matrix4.Matrix4Transit;
     if (this.currentIndex == this.mPosition && matrix) {
       this.matrix = matrix;
       this.updatePhotoScaledStatus();
@@ -165,13 +166,13 @@ export struct PhotoItem {
         duration: Constants.SCREEN_ROTATE_DURATION,
         curve: PhotoConstants.PHOTO_TRANSITION_CURVE,
         onFinish: () => {
-          this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
-          this.animationOption = null;
-          this.animationEndMatrix = null;
+          this.eventPipeline?.onAnimationEnd(this.animationEndMatrix);
+          this.animationOption = undefined;
+          this.animationEndMatrix = undefined;
         }
       }, () => {
         this.eventPipelineSizeChange();
-        this.matrix = this.animationEndMatrix;
+        this.matrix = this.animationEndMatrix as Matrix4.Matrix4Transit;
         this.calculateImagePos();
         this.updateListCardWidth();
       });
@@ -179,7 +180,7 @@ export struct PhotoItem {
   }
 
   eventPipelineSizeChange(): void {
-    this.eventPipeline.onComponentSizeChanged(vp2px(this.windowLayoutWidth), vp2px(this.windowLayoutHeight));
+    this.eventPipeline?.onComponentSizeChanged(vp2px(this.windowLayoutWidth), vp2px(this.windowLayoutHeight));
   }
 
   aboutToDisappear(): void {
@@ -191,7 +192,6 @@ export struct PhotoItem {
       this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadFunc);
     }
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.onWindowSizeChangeCallBack = null;
     this.broadCast.off(PhotoConstants.RESET_DEFAULT_SCALE + this.item.uri, this.resetDefaultScaleFunc);
     this.broadCast.off(PhotoConstants.SAVE_SCALE, this.saveScaleFunc);
     this.lcdPixelMapUpdate = false;
@@ -241,20 +241,20 @@ export struct PhotoItem {
   }
 
   resetScaleAnimation(matrix: Matrix4.Matrix4Transit): void {
-    if (this.eventPipeline.isDefaultScale()) {
+    if (this.eventPipeline?.isDefaultScale()) {
       return;
     }
-    this.eventPipeline.startAnimation(matrix);
+    this.eventPipeline?.startAnimation(matrix);
     animateTo({
-      duration: this.animationOption.duration,
-      curve: this.animationOption.curve,
-      onFinish: () => {
-        this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
-        this.animationOption = null;
-        this.animationEndMatrix = null;
+      duration: (this.animationOption as AnimationParam).duration,
+      curve: (this.animationOption as AnimationParam).curve as Curve,
+      onFinish: (): void => {
+        this.eventPipeline?.onAnimationEnd(this.animationEndMatrix as Matrix4.Matrix4Transit);
+        this.animationOption = undefined;
+        this.animationEndMatrix = undefined;
       }
     }, () => {
-      this.matrix = this.animationEndMatrix;
+      this.matrix = this.animationEndMatrix as Matrix4.Matrix4Transit;
       this.updatePhotoScaledStatus();
     })
   }
@@ -266,13 +266,15 @@ export struct PhotoItem {
   }
 
   updatePhotoScaledStatus() {
-    let matrix: any = this.matrix;
+    let matrix: Matrix4.Matrix4Transit = this.matrix;
     if (!!matrix) {
-      let mat = matrix.copy().matrix4x4;
-      let xScale = mat[Constants.NUMBER_0];
-      let yScale = mat[Constants.NUMBER_5];
-      Log.debug(TAG, `photo in PhotoItem has Scaled x scale: ${xScale}, y scale: ${yScale}, mat: ${mat}`);
-      this.isPhotoScaled = (xScale != 1 || yScale != 1);
+      let mat: number[] | undefined = (matrix.copy() as Matrix4x4).matrix4x4;
+      if (mat) {
+        let xScale: number = mat[Constants.NUMBER_0];
+        let yScale: number = mat[Constants.NUMBER_5];
+        Log.debug(TAG, `photo in PhotoItem has Scaled x scale: ${xScale}, y scale: ${yScale}, mat: ${mat}`);
+        this.isPhotoScaled = (xScale != 1 || yScale != 1);
+      }
     } else {
       this.isPhotoScaled = false;
     }
@@ -302,11 +304,11 @@ export struct PhotoItem {
           this.broadCast.emit(PhotoConstants.PHOTO_SHOW_STATE, [false]);
         }
       })
-      .onKeyEvent((event: KeyEvent) => {
-        this.handleKeyEvent(event);
+      .onKeyEvent((event?: KeyEvent) => {
+        this.handleKeyEvent(event as KeyEvent);
       })
-      .width(this.imageWidth)
-      .height(this.imageHeight)
+      .width(this.imageWidth as string)
+      .height(this.imageHeight as string)
       .scale({
         x: this.geometryScale,
         y: this.geometryScale
@@ -316,15 +318,12 @@ export struct PhotoItem {
         y: this.geometryOffsetY
       })
       .geometryTransition(this.geometryTransitionId)
-        // @ts-ignore
       .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99),
-        // @ts-ignore
         TransitionEffect.scale({
           x: 1 / this.geometryScale,
           y: 1 / this.geometryScale,
           centerX: '50%',
           centerY: '50%' })
-          // @ts-ignore
           .combine(TransitionEffect.opacity(0.99))
       ))
       .onAppear(() => {
@@ -377,8 +376,8 @@ export struct PhotoItem {
                     this.broadCast.emit(PhotoConstants.PHOTO_SHOW_STATE, [false]);
                   }
                 })
-                .onKeyEvent((event: KeyEvent) => {
-                  this.handleKeyEvent(event);
+                .onKeyEvent((event?: KeyEvent) => {
+                  this.handleKeyEvent(event as KeyEvent);
                 })
                 .onAppear(() => {
                   if (this.currentIndex == this.mPosition) {
@@ -407,38 +406,38 @@ export struct PhotoItem {
             fingers: 2,
             distance: 1
           })
-            .onActionStart((event: GestureEvent) => {
+            .onActionStart((event?: GestureEvent) => {
               Log.info(TAG, 'PinchGesture onActionStart');
               Log.info(TAG, `PinchGesture onActionStart scale:\
-                          ${event.scale}, cx: ${event.pinchCenterX}, cy: ${event.pinchCenterY}`);
+                          ${(event as GestureEvent).scale}, cx: ${(event as GestureEvent).pinchCenterX}, cy: ${(event as GestureEvent).pinchCenterY}`);
               if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE
               || this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
-                this.eventPipeline.onScaleStart(event.scale, event.pinchCenterX, event.pinchCenterY);
+                this.eventPipeline?.onScaleStart((event as GestureEvent).scale, (event as GestureEvent).pinchCenterX, (event as GestureEvent).pinchCenterY);
               }
             })
-            .onActionUpdate((event) => {
-              Log.info(TAG, `PinchGesture onActionUpdate scale: ${event.scale}`);
+            .onActionUpdate((event?: GestureEvent) => {
+              Log.debug(TAG, `PinchGesture onActionUpdate scale: ${(event as GestureEvent).scale}`);
               if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE
               || this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
-                this.eventPipeline.onScale(event.scale);
+                this.eventPipeline?.onScale((event as GestureEvent).scale);
               }
             })
             .onActionEnd(() => {
               Log.info(TAG, 'PinchGesture onActionEnd');
               if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE
               || this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
-                this.eventPipeline.onScaleEnd();
+                this.eventPipeline?.onScaleEnd();
                 if (this.animationOption != null) {
                   animateTo({
                     duration: this.animationOption.duration,
                     curve: this.animationOption.curve,
                     onFinish: () => {
-                      this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
-                      this.animationOption = null;
-                      this.animationEndMatrix = null;
+                      this.eventPipeline?.onAnimationEnd(this.animationEndMatrix);
+                      this.animationOption = undefined;
+                      this.animationEndMatrix = undefined;
                     }
                   }, () => {
-                    this.matrix = this.animationEndMatrix;
+                    this.matrix = this.animationEndMatrix as Matrix4.Matrix4Transit;
                   })
                   if (!!this.verifyPhotoScaled) {
                     this.verifyPhotoScaled(this.matrix)
@@ -451,50 +450,50 @@ export struct PhotoItem {
           PanGesture({
             direction: this.mDirection
           })
-            .onActionStart((event: GestureEvent) => {
+            .onActionStart((event?: GestureEvent) => {
               Log.info(TAG, `PanGesture start offsetX:\
-                                  ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)}`);
-              if (this.isNeedShieldPullUpEvent(event)) {
+                                  ${vp2px((event as GestureEvent).offsetX)}, offsetY: ${vp2px((event as GestureEvent).offsetY)}`);
+              if (this.isNeedShieldPullUpEvent((event as GestureEvent))) {
                 Log.info(TAG, `shield pullup event, is album recycle = ${this.albumUri == UserFileManagerAccess.getInstance()
                   .getSystemAlbumUri(UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE)},\
-                                    is photo scaled = ${this.isPhotoScaled}, is pull Up = ${event.offsetY < 0}`);
+                                    is photo scaled = ${this.isPhotoScaled}, is pull Up = ${(event as GestureEvent).offsetY < 0}`);
                 return;
               }
-              this.eventPipeline.onMoveStart(vp2px(event.offsetX), vp2px(event.offsetY));
+              this.eventPipeline?.onMoveStart(vp2px((event as GestureEvent).offsetX), vp2px((event as GestureEvent).offsetY));
             })
-            .onActionUpdate((event: GestureEvent) => {
+            .onActionUpdate((event?: GestureEvent) => {
               Log.info(TAG, `PanGesture update offsetX:\
-                                  ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)}`);
-              if (this.isNeedShieldPullUpEvent(event)) {
+                                  ${vp2px((event as GestureEvent).offsetX)}, offsetY: ${vp2px((event as GestureEvent).offsetY)}`);
+              if (this.isNeedShieldPullUpEvent((event as GestureEvent))) {
                 return;
               }
-              this.eventPipeline.onMove(vp2px(event.offsetX), vp2px(event.offsetY));
-              this.isPullDownAndDragPhoto = this.eventPipeline.canPullDownAndDragPhoto();
+              this.eventPipeline?.onMove(vp2px((event as GestureEvent).offsetX), vp2px((event as GestureEvent).offsetY));
+              this.isPullDownAndDragPhoto = this.eventPipeline?.canPullDownAndDragPhoto() ?? false;
               if (this.isPullDownAndDragPhoto && this.geometryTransitionEnable &&
               !this.isOnSwiperAnimation && !this.isFromFACard) {
-                this.doDragPhoto(event.offsetX, event.offsetY);
+                this.doDragPhoto((event as GestureEvent).offsetX, (event as GestureEvent).offsetY);
               }
             })
-            .onActionEnd((event: GestureEvent) => {
+            .onActionEnd((event?: GestureEvent) => {
               Log.info(TAG, `PanGesture end offsetX:\
-                                  ${vp2px(event.offsetX)}, offsetY: ${vp2px(event.offsetY)} \
+                                  ${vp2px((event as GestureEvent).offsetX)}, offsetY: ${vp2px((event as GestureEvent).offsetY)} \
                                   this.isOnSwiperAnimation ${this.isOnSwiperAnimation}`);
-              if (this.isOnSwiperAnimation || this.isNeedShieldPullUpEvent(event)) {
+              if (this.isOnSwiperAnimation || this.isNeedShieldPullUpEvent((event as GestureEvent))) {
                 return;
               }
-              this.eventPipeline.onMoveEnd(vp2px(event.offsetX), vp2px(event.offsetY));
-              this.isPullDownAndDragPhoto = this.eventPipeline.canPullDownAndDragPhoto();
+              this.eventPipeline?.onMoveEnd(vp2px((event as GestureEvent).offsetX), vp2px((event as GestureEvent).offsetY));
+              this.isPullDownAndDragPhoto = this.eventPipeline?.canPullDownAndDragPhoto() ?? false;
               if (this.animationOption != null) {
                 animateTo({
                   duration: this.animationOption.duration,
                   curve: this.animationOption.curve,
                   onFinish: () => {
-                    this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
-                    this.animationOption = null;
-                    this.animationEndMatrix = null;
+                    this.eventPipeline?.onAnimationEnd(this.animationEndMatrix);
+                    this.animationOption = undefined;
+                    this.animationEndMatrix = undefined;
                   }
                 }, () => {
-                  this.matrix = this.animationEndMatrix;
+                  this.matrix = this.animationEndMatrix as Matrix4.Matrix4Transit;
                 })
                 if (!!this.verifyPhotoScaled) {
                   this.verifyPhotoScaled(this.matrix)
@@ -506,11 +505,11 @@ export struct PhotoItem {
           TapGesture({
             count: 1
           })
-            .onAction((event: GestureEvent) => {
+            .onAction((event?: GestureEvent) => {
               if (this.isHandlingTap) {
                 if (this.timerCounter != null) {
                   clearTimeout(this.timerCounter)
-                  this.timerCounter = null;
+                  this.timerCounter = 0;
                   this.isHandlingTap = false;
                 }
               } else {
@@ -522,19 +521,19 @@ export struct PhotoItem {
                 return;
               }
               Log.info(TAG, `onDoubleTap event: ${JSON.stringify(event)}`);
-              this.eventPipeline.onDoubleTap(event.fingerList[0].localX, event.fingerList[0].localY);
+              this.eventPipeline?.onDoubleTap((event as GestureEvent).fingerList[0].localX, (event as GestureEvent).fingerList[0].localY);
               if (this.animationOption != null) {
                 Log.info(TAG, 'TapGesture animateTo start');
                 animateTo({
                   duration: this.animationOption.duration,
                   curve: this.animationOption.curve,
                   onFinish: () => {
-                    this.eventPipeline.onAnimationEnd(this.animationEndMatrix);
-                    this.animationOption = null;
-                    this.animationEndMatrix = null;
+                    this.eventPipeline?.onAnimationEnd(this.animationEndMatrix);
+                    this.animationOption = undefined;
+                    this.animationEndMatrix = undefined;
                   }
                 }, () => {
-                  this.matrix = this.animationEndMatrix;
+                  this.matrix = this.animationEndMatrix as Matrix4.Matrix4Transit;
                 })
                 if (!!this.verifyPhotoScaled) {
                   this.verifyPhotoScaled(this.matrix)
@@ -545,9 +544,9 @@ export struct PhotoItem {
         )
       )
       .clip(true)
-      .onTouch((event) => {
-        this.dealTouchEvent(event);
-        this.eventPipeline.onTouch(event);
+      .onTouch((event?: TouchEvent) => {
+        this.dealTouchEvent(event as TouchEvent);
+        this.eventPipeline?.onTouch(event as TouchEvent);
       })
       // TODO Remind users when pictures of other devices cannot be show
       if ((this.showError || this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) &&
@@ -585,9 +584,13 @@ export struct PhotoItem {
                     previewUri: this.thumbnail
                   }
                 })
-                let msg = {
-                  'PhotoButton': BigDataConstants.PHOTO_BUTTON_VIDEO,
-                  'From': BigDataConstants.LOCAL_MEDIA,
+                interface Msg {
+                  photoButton: string;
+                  from: string;
+                }
+                let msg: Msg = {
+                  photoButton: BigDataConstants.PHOTO_BUTTON_VIDEO,
+                  from: BigDataConstants.LOCAL_MEDIA,
                 }
                 ReportToBigDataUtil.report(BigDataConstants.CLICK_PHOTO_BUTTON_ID, msg);
               }
@@ -686,6 +689,7 @@ export struct PhotoItem {
   }
 
   private dealTouchEvent(event: TouchEvent): void {
+    if (this.eventPipeline === null) return;
     if (!this.eventPipeline.canTouch() || this.isOnSwiperAnimation || event.touches.length > 1 || this.isPhotoScaled || this.isInSelectedMode || this.isDefaultFA) {
       return;
     }
@@ -707,11 +711,14 @@ export struct PhotoItem {
 
   private handleKeyEvent(event: KeyEvent): void {
     Log.info(TAG, `type=${event.type}, keyCode=${event.keyCode}`);
+    interface Msg {
+      from: string;
+    }
     if (KeyType.Up == event.type) {
       switch (event.keyCode) {
         case MultimodalInputManager.KEY_CODE_KEYBOARD_ESC:
-          let msg = {
-            'From': BigDataConstants.BY_KEYBOARD,
+          let msg: Msg = {
+            from: BigDataConstants.BY_KEYBOARD,
           }
           ReportToBigDataUtil.report(BigDataConstants.ESC_PHOTO_BROWSER_WAY, msg);
           this.broadCast.emit(PhotoConstants.PULL_DOWN_END, []);
@@ -726,10 +733,6 @@ export struct PhotoItem {
                 previewUri: this.thumbnail
               }
             })
-            let msg = {
-              'PhotoButton': BigDataConstants.PHOTO_BUTTON_VIDEO,
-              'From': BigDataConstants.LOCAL_MEDIA,
-            }
           }
           break;
         default:
@@ -743,4 +746,9 @@ export struct PhotoItem {
     return event.offsetY < 0 &&
     !this.isPhotoScaled;
   }
+}
+
+interface PreItem {
+  height: number;
+  width: number;
 }

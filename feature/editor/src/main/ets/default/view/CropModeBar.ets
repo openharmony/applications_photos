@@ -26,6 +26,10 @@ const TAG: string = 'editor_CropModeBar';
 
 const COMPONENT_KEY_ROTATE: string = 'Rotate';
 const COMPONENT_KEY_MIRROR: string = 'Mirror';
+interface RulerProperties {
+  rulerWidth: number;
+  rulerHeight: number;
+}
 
 @Component
 export struct CropModeBar {
@@ -39,18 +43,15 @@ export struct CropModeBar {
   @Consume screenHeight: number;
   @State rulerSwitchOn: boolean = true;
   @State frameStyleSwitchOn: boolean = true;
-  @StorageLink('rulerProperties') rulerProperties: {
-    rulerWidth: number,
-    rulerHeight: number
-  } = { rulerWidth: 0, rulerHeight: 0 }
-  private rulerChanged: Function = undefined;
-  private resetClicked: Function = undefined;
+  @StorageLink('rulerProperties') rulerProperties: RulerProperties = { rulerWidth: 0, rulerHeight: 0 };
+  private rulerChanged: Function = (): void => {};
+  private resetClicked: Function = (): void => {};
   private cropRulerBarHeight: number = Constants.VERTICAL_RULER_COMPONENT_HEIGHT;
 
   aboutToAppear(): void {
-    this.rulerChanged = this.onRulerChanged.bind(this);
-    this.broadCast.on(Constants.RULER_CHANGED, this.rulerChanged);
-    this.resetClicked = this.onResetClicked.bind(this);
+    this.rulerChanged = (number: number): void => this.onRulerChanged(number);
+    this.broadCast.on(Constants.RULER_CHANGED, (): void => this.rulerChanged());
+    this.resetClicked = (): void => this.onResetClicked();
     this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClicked);
   }
 

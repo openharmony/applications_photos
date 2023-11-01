@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { MenuOperation } from '@ohos/common';
+import { MenuOperation, WindowUtil } from '@ohos/common';
 import {
   Action,
   AlbumInfo,
@@ -73,7 +73,7 @@ export struct AlbumSetPage {
   @Provide rightClickMenuList: Array<Action> = new Array<Action>();
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
-  @StorageLink('deviceType') deviceType: string = AppStorage.Get('deviceType');
+  @StorageLink('deviceType') deviceType: string | undefined = AppStorage.get<string>('deviceType') ;
   @State pageStatus: boolean = false;
   @State bottomHeight: number = 0;
   @StorageLink('selectedAlbumUri') selectedAlbumUri: string = '';
@@ -90,61 +90,59 @@ export struct AlbumSetPage {
   private needNotify = false;
   private ignoreLocalNotify = false;
   private minGridColumnsCount: number = 2;
+  private onWinSizeChangedFunc: Function = (): void => this.initGridRowCount();
+  private onTabChangedFunc: Function = (index: number): void => this.onTabChanged(index);
+  private onStateResetFunc: Function = (index: number): void => this.onStateReset(index);
+  private onSendMoveCopyBroadCastFunc: Function = (index: number): void => this.onSendMoveCopyBroadCast(index);
+  private onLoadingFinishedFunc: Function = (size: number): void => this.onLoadingFinished(size);
+  private onResetZeroFunc: Function = (pageNumber: number): void => this.onResetZero(pageNumber);
+  private onUpdateRemoteDeviceFunc: Function = (res: string, deviceId: string, size: number): void =>
+  this.onUpdateRemoteDevice(res, deviceId, size);
+  private onMenuClickedFunc = (action: Action, arg: Object[]): void => this.onMenuClicked(action, arg);
+  private selectFunc = (
+    key: string, value: boolean, isDisableRename: boolean, isDisableDelete: boolean, callback: Function): void =>
+  this.select(key, value, isDisableRename, isDisableDelete, callback);
 
-  onMenuClicked(action: Action, arg: unknown[]) {
+  onMenuClicked(action: Action, arg: Object[]) {
     Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
     let menuContext: MenuContext;
     let menuOperation: MenuOperation;
-    switch (action.actionID) {
-      case Action.NEW.actionID:
-        menuContext = new MenuContext();
-        this.onOperationStart = this.onOperationStart.bind(this);
-        this.onOperationEnd = this.onOperationEnd.bind(this);
-        menuContext
-          .withOperationStartCallback(this.onOperationStart)
-          .withOperationEndCallback(this.onOperationEnd)
-          .withAlbumSetDataSource(this.albums)
-          .withBroadCast(this.broadCast);
-        menuOperation
+    if (action.actionID === Action.NEW.actionID) {
+      menuContext = new MenuContext();
+      menuContext
+        .withOperationStartCallback((): void => this.onOperationStart())
+        .withOperationEndCallback((): void => this.onOperationEnd())
+        .withAlbumSetDataSource(this.albums)
+        .withBroadCast(this.broadCast);
+      menuOperation
         = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetNewMenuOperation, menuContext);
-        menuOperation.doAction();
-        break;
-      case Action.CANCEL.actionID:
-        this.isAlbumSetSelectedMode = false;
-        break;
-      case Action.MULTISELECT.actionID:
-        this.isAlbumSetSelectedMode = true;
-        break;
-      case Action.RENAME.actionID:
-        menuContext = new MenuContext();
-        this.onOperationStart = this.onOperationStart.bind(this);
-        this.onOperationEnd = this.onOperationEnd.bind(this);
-        menuContext
-          .withFromSelectMode(true)
-          .withSelectManager(this.mSelectManager)
-          .withOperationStartCallback(this.onOperationStart)
-          .withOperationEndCallback(this.onOperationEnd)
-          .withBroadCast(this.broadCast);
-        menuOperation
+      menuOperation.doAction();
+    } else if (action.actionID === Action.CANCEL.actionID) {
+      this.isAlbumSetSelectedMode = false;
+    } else if (action.actionID === Action.MULTISELECT.actionID) {
+      this.isAlbumSetSelectedMode = true;
+    } else if (action.actionID === Action.RENAME.actionID) {
+      menuContext = new MenuContext();
+      menuContext
+        .withFromSelectMode(true)
+        .withSelectManager(this.mSelectManager)
+        .withOperationStartCallback((): void => this.onOperationStart())
+        .withOperationEndCallback((): void => this.onOperationEnd())
+        .withBroadCast(this.broadCast);
+      menuOperation
         = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetRenameMenuOperation, menuContext);
-        menuOperation.doAction();
-        break;
-      case Action.DELETE.actionID:
-        menuContext = new MenuContext();
-        this.onOperationStart = this.onOperationStart.bind(this);
-        this.onOperationEnd = this.onOperationEnd.bind(this);
-        menuContext
-          .withFromSelectMode(true)
-          .withSelectManager(this.mSelectManager)
-          .withOperationStartCallback(this.onOperationStart)
-          .withOperationEndCallback(this.onOperationEnd)
-          .withBroadCast(this.broadCast);
-        menuOperation
+      menuOperation.doAction();
+    } else if (action.actionID === Action.DELETE.actionID) {
+      menuContext = new MenuContext();
+      menuContext
+        .withFromSelectMode(true)
+        .withSelectManager(this.mSelectManager)
+        .withOperationStartCallback((): void => this.onOperationStart())
+        .withOperationEndCallback((): void => this.onOperationEnd())
+        .withBroadCast(this.broadCast);
+      menuOperation
         = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetDeleteMenuOperation, menuContext);
-        menuOperation.doAction();
-        break;
-      default:
-        break;
+      menuOperation.doAction();
     }
   }
 
@@ -166,55 +164,48 @@ export struct AlbumSetPage {
   aboutToAppear(): void {
     TraceControllerUtils.startTrace('AlbumSetPageAboutToAppear');
     Log.info(TAG, `AlbumSetPageAboutToAppear`);
-    this.appBroadCast.on(BroadCastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-    this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-    this.appBroadCast.on(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, this.onSendMoveCopyBroadCast.bind(this));
+    this.appBroadCast.on(BroadCastConstants.ON_TAB_CHANGED, this.onTabChangedFunc);
+    this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateResetFunc);
+    this.appBroadCast.on(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, this.onSendMoveCopyBroadCastFunc);
     AppStorage.SetOrCreate('setSelectManagerToAnother', this.mSelectManager);
-    this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-      this.isEmpty = (size == 0);
-    });
-
-    this.appBroadCast.on(BroadCastConstants.RESET_ZERO, this.onResetZero.bind(this));
-    this.appBroadCast.on(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDevice.bind(this));
+    this.broadCast.on(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
+    this.appBroadCast.on(BroadCastConstants.RESET_ZERO, this.onResetZeroFunc);
+    this.appBroadCast.on(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDeviceFunc);
 
     MediaObserver.getInstance().registerObserver(this.dataObserver);
 
     this.onActive();
 
     this.updateRightClickMenuList();
-    this.initGridRowCount = this.initGridRowCount.bind(this);
     this.initGridRowCount();
     // 后续phone缩略图支持横竖屏后再放开
-    if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.initGridRowCount);
+    if (AppStorage.get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
+      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWinSizeChangedFunc);
     }
 
     let self = this;
-    this.onMenuClicked = this.onMenuClicked.bind(this);
-    this.onMenuClickedForSingleItem = this.onMenuClickedForSingleItem.bind(this);
-    this.broadCast.on(BroadCastConstants.SELECT, function (
-        key: string, value: boolean, isDisableRename: boolean, isDisableDelete: boolean, callback: Function) {
-      self.mSelectManager.toolBarStateToggle(key, value, isDisableRename, isDisableDelete);
-      if (self.mSelectManager.toggle(key, value)) {
-        Log.info(TAG, 'enter event process');
-        callback();
+    this.broadCast.on(BroadCastConstants.SELECT, this.selectFunc);
+    this.mSelectManager.registerCallback('updateCount', (newState: number) => {
+      Log.info(TAG, `updateSelectedCount ${newState}`);
+      if (this.isDataFreeze) {
+        return;
+      }
+      if (this.selectedAlbumsCount === 0 && newState === 0) {
+        this.selectedAlbumsCount--;
+      } else {
+        this.selectedAlbumsCount = newState;
       }
     });
-    this.mSelectManager.registerCallback('updateCount', this.freezeAdapter(function (newState: number) {
-      Log.info(TAG, `updateSelectedCount ${newState}`);
-      if (self.selectedAlbumsCount === 0 && newState === 0) {
-        self.selectedAlbumsCount--;
-      } else {
-        self.selectedAlbumsCount = newState;
-      }
-    }));
-    this.mSelectManager.registerCallback('updateToolBarState', this.freezeAdapter(
-      function (isDisableRename: boolean, isDisableDelete: boolean) {
+    this.mSelectManager.registerCallback('updateToolBarState',
+      (isDisableRename: boolean, isDisableDelete: boolean) => {
+        if (this.isDataFreeze) {
+          return;
+        }
         Log.info(TAG, `updateToolBarState:\
                     isDisableRename: ${isDisableRename}, isDisableDelete: ${isDisableDelete}`);
-        self.isDisableRename = isDisableRename
-        self.isDisableDelete = isDisableDelete
-      })
+        this.isDisableRename = isDisableRename
+        this.isDisableDelete = isDisableDelete
+      }
     );
 
     if (Constants.LOCAL_TAB_INDEX == this.currentIndex) {
@@ -229,18 +220,18 @@ export struct AlbumSetPage {
 
   aboutToDisappear(): void {
     this.onInActive();
-    this.broadCast.off(null, null);
-    this.appBroadCast.off(BroadCastConstants.ON_TAB_CHANGED, null);
-    this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, null);
-    this.appBroadCast.off(BroadCastConstants.RESET_ZERO, null);
-    this.appBroadCast.off(BroadCastConstants.ON_REMOTE_CHANGED, null);
-    this.appBroadCast.off(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, null);
+    this.broadCast.off(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
+    this.broadCast.off(BroadCastConstants.SELECT, this.selectFunc);
+    this.appBroadCast.off(BroadCastConstants.ON_TAB_CHANGED, this.onTabChangedFunc);
+    this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, this.onStateResetFunc);
+    this.appBroadCast.off(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, this.onSendMoveCopyBroadCastFunc);
+    this.appBroadCast.off(BroadCastConstants.RESET_ZERO, this.onResetZeroFunc);
+    this.appBroadCast.off(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDeviceFunc);
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
     this.dataObserver.clearSource();
     // 后续phone缩略图支持横竖屏后再放开
-    if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.initGridRowCount);
-      this.initGridRowCount = null;
+    if (AppStorage.get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
+      ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWinSizeChangedFunc);
     }
   }
 
@@ -276,18 +267,6 @@ export struct AlbumSetPage {
     }
   }
 
-  freezeAdapter(fn): Function {
-    let self = this;
-    return function () {
-      if (self.isDataFreeze) {
-        return;
-      }
-      let context = this;
-      let args = arguments;
-      fn.apply(context, args);
-    }
-  }
-
   onStateReset(index: number): void {
     if (index == Constants.ALBUM_PAGE_INDEX) {
       this.isAlbumSetSelectedMode = false;
@@ -302,6 +281,18 @@ export struct AlbumSetPage {
       this.isInCurrentTab = false;
       this.isAlbumSetSelectedMode = false;
       this.onInActive();
+    }
+  }
+
+  onLoadingFinished(size: number): void {
+    this.isEmpty = (size == 0);
+  }
+
+  select(key: string, value: boolean, isDisableRename: boolean, isDisableDelete: boolean, callback: Function): void {
+    this.mSelectManager.toolBarStateToggle(key, value, isDisableRename, isDisableDelete);
+    if (this.mSelectManager.toggle(key, value)) {
+      Log.info(TAG, 'enter event process');
+      callback();
     }
   }
 
@@ -360,7 +351,7 @@ export struct AlbumSetPage {
   initGridRowCount(): void {
     Log.info(TAG, `get screen width is : ${ScreenManager.getInstance().getWinWidth()}`);
     Log.info(TAG, `get screen height is : ${ScreenManager.getInstance().getWinHeight()}`);
-    let currentBreakpoint = AppStorage.Get<string>('currentBreakpoint');
+    let currentBreakpoint = AppStorage.get<string>('currentBreakpoint');
     if (currentBreakpoint === Constants.BREAKPOINT_LG && this.deviceType == Constants.PAD_DEVICE_TYPE) {
       this.gridColumnsCount = UiUtil.getAlbumGridCount(true);
     } else {
@@ -369,7 +360,7 @@ export struct AlbumSetPage {
     Log.info(TAG, `the grid count in a line is: ${this.gridColumnsCount}`);
   }
 
-  onMediaLibDataChange(changeType) {
+  onMediaLibDataChange(changeType: string): void {
     Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
     if (!this.ignoreLocalNotify) {
       this.albums.onChange(changeType);
@@ -390,15 +381,16 @@ export struct AlbumSetPage {
                 Column() {
                 }
                 .width('100%')
-                .height(AppStorage.Get(Constants.KEY_OF_ALBUM_WIDTH))
+                .height(AppStorage.get<string>(Constants.KEY_OF_ALBUM_WIDTH) as string)
                 .key('' + index)
               } else {
                 AlbumGridItemNewStyle({
                   item: item.data,
                   isSelected: this.isAlbumSetSelectedMode ?
                   this.mSelectManager.isItemSelected(item.data.uri) : false,
-                  onMenuClicked: this.onMenuClicked,
-                  onMenuClickedForSingleItem: this.onMenuClickedForSingleItem,
+                  onMenuClicked: this.onMenuClickedFunc,
+                  onMenuClickedForSingleItem: (action: Action, currentAlbum: AlbumInfo): void =>
+                  this.onMenuClickedForSingleItem(action, currentAlbum),
                   keyIndex: index,
                   bottomHeight: $bottomHeight
                 })
@@ -442,7 +434,7 @@ export struct AlbumSetPage {
       }) {
         if (!this.isEmpty || this.isTabBarShow) {
           Column() {
-            AlbumSetPageActionBar({ onMenuClicked: this.onMenuClicked })
+            AlbumSetPageActionBar({ onMenuClicked: this.onMenuClickedFunc })
               .opacity(this.albumActionBarOpacity)
           }
           .backgroundColor($r('app.color.default_background_color'))
@@ -457,7 +449,7 @@ export struct AlbumSetPage {
         }
 
         if (this.isAlbumSetSelectedMode) {
-          AlbumSetPageToolBar({ onMenuClicked: this.onMenuClicked })
+          AlbumSetPageToolBar({ onMenuClicked: this.onMenuClickedFunc })
         }
 
         if (this.isEmpty && !this.isTabBarShow) {
@@ -476,37 +468,28 @@ export struct AlbumSetPage {
     }
     let menuContext: MenuContext;
     let menuOperation: MenuOperation;
-    switch (action.actionID) {
-      case Action.RENAME.actionID:
-        menuContext = new MenuContext();
-        this.onOperationStart = this.onOperationStart.bind(this);
-        this.onOperationEnd = this.onOperationEnd.bind(this);
-        menuContext
-          .withFromSelectMode(false)
-          .withAlbumInfo(currentAlbum)
-          .withOperationStartCallback(this.onOperationStart)
-          .withOperationEndCallback(this.onOperationEnd)
-          .withBroadCast(this.broadCast);
-        menuOperation = MenuOperationFactory.getInstance()
-          .createMenuOperation(AlbumSetRenameMenuOperation, menuContext);
-        menuOperation.doAction();
-        break;
-      case Action.DELETE.actionID:
-        menuContext = new MenuContext();
-        this.onOperationStart = this.onOperationStart.bind(this);
-        this.onOperationEnd = this.onOperationEnd.bind(this);
-        menuContext
-          .withFromSelectMode(false)
-          .withAlbumInfo(currentAlbum)
-          .withOperationStartCallback(this.onOperationStart)
-          .withOperationEndCallback(this.onOperationEnd)
-          .withBroadCast(this.broadCast);
-        menuOperation = MenuOperationFactory.getInstance()
-          .createMenuOperation(AlbumSetDeleteMenuOperation, menuContext);
-        menuOperation.doAction();
-        break;
-      default:
-        break;
+    if (action.actionID === Action.RENAME.actionID) {
+      menuContext = new MenuContext();
+      menuContext
+        .withFromSelectMode(false)
+        .withAlbumInfo(currentAlbum)
+        .withOperationStartCallback((): void => this.onOperationStart())
+        .withOperationEndCallback((): void => this.onOperationEnd())
+        .withBroadCast(this.broadCast);
+      menuOperation = MenuOperationFactory.getInstance()
+        .createMenuOperation(AlbumSetRenameMenuOperation, menuContext);
+      menuOperation.doAction();
+    } else if (action.actionID === Action.DELETE.actionID) {
+      menuContext = new MenuContext();
+      menuContext
+        .withFromSelectMode(false)
+        .withAlbumInfo(currentAlbum)
+        .withOperationStartCallback((): void => this.onOperationStart())
+        .withOperationEndCallback((): void => this.onOperationEnd())
+        .withBroadCast(this.broadCast);
+      menuOperation = MenuOperationFactory.getInstance()
+        .createMenuOperation(AlbumSetDeleteMenuOperation, menuContext);
+      menuOperation.doAction();
     }
   }
 
@@ -526,7 +509,7 @@ export struct AlbumSetPage {
     }
   }
 
-  private onUpdateRemoteDevice(res, deviceId, size): void {
+  private onUpdateRemoteDevice(res: string, deviceId: string, size: number): void {
     Log.info(TAG, `onUpdateRemoteDevice size: ${size} deviceId: ${deviceId} type: ${res}`);
 
     if (res == 'offline') {

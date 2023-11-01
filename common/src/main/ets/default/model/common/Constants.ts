@@ -74,6 +74,9 @@ export class Constants {
   static readonly IS_SHOW_MOVE_COPY_DIALOG: string = 'is_show_move_copy_dialog';
   static readonly INSTANCE_MOVE_OR_COPY_BROADCAST_PROP: string = 'instance_move_or_copy_broadcast_prop';
 
+  // used as album uri for creating album from picker page
+  static readonly APP_NEW_ALBUM_SOURCE_PICKER: string = 'picker_page';
+
   // BroadCast
   static readonly APP_KEY_EVENT_BUS: string = 'app_key_event_bus';
 

@@ -117,7 +117,7 @@ export class WorkerThreadPool {
     Log.info(TAG, 'thread pool start running, capacity: ' + WorkerThreadPool.CAPACITY);
     let groupCount = data.byteLength / byteLengthOfOneGroup;
     let byteLengthOfOneWorker = Math.floor(groupCount / WorkerThreadPool.CAPACITY) * byteLengthOfOneGroup;
-    let deviceType: string = AppStorage.Get('deviceType');
+    let deviceType: string = AppStorage.get('deviceType');
     const FIRST_INDEX = 0;
     for (let i = WorkerThreadPool.CAPACITY - 1; i >= 0; i--) {
       let workerInstance = WorkerThreadPool.createWorker(path, deviceType);

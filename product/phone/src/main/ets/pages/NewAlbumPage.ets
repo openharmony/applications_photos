@@ -16,6 +16,7 @@
 import router from '@ohos.router';
 import {
   Action,
+  AlbumInfo,
   BroadCast,
   BroadCastConstants,
   BroadCastManager,
@@ -45,6 +46,10 @@ import { SelectPhotoBrowserView } from '../view/SelectPhotoBrowserView';
 const TAG: string = 'NewAlbumPage';
 AppStorage.SetOrCreate('PhotoGridPageIndex', Constants.INVALID);
 
+interface Params {
+  item: string;
+}
+
 @Entry
 @Component
 export struct NewAlbumPage {
@@ -65,7 +70,7 @@ export struct NewAlbumPage {
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  title: string;
+  title: string = '';
   @StorageLink('placeholderIndex') @Watch('onPlaceholderChanged') placeholderIndex: number = -1;
   @State pageStatus: boolean = false;
   @State isRunningAnimation: boolean = false;
@@ -73,13 +78,82 @@ export struct NewAlbumPage {
   private dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
   private scroller: Scroller = new Scroller();
   private isDataFreeze = false;
-  private mSelectManager: SelectManager;
+  private mSelectManager: SelectManager | null = null;
   private isActive = false;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
-  private isNewAlbum: boolean = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM);
-  onWindowSizeChangeCallBack = () => {
+  private isNewAlbum: boolean = AppStorage.get<boolean>(Constants.APP_KEY_NEW_ALBUM) as boolean;
+  private onWindowSizeChangeCallBack: Function = () => {
     // 后续phone缩略图支持横竖屏后再放开
     // this.initGridRowCount;
+  }
+  private onUpdateFavorStateFunc: Function = (item: MediaItem): void => this.onUpdateFavorState(item);
+  private selectFunc: Function = (position: number, key: string, value: boolean, callback: Function): void => this.select(position, key, value, callback);
+  private jumpPhotoBrowserFunc: Function = (name: string, item: MediaItem): void => this.jumpPhotoBrowser(name, item);
+  private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void =>
+  this.jumpThirdPhotoBrowser(name, item, geometryTapIndex, geometryTransitionString);
+  private onDataReloadedFunc: Function = (size: number): void => this.onDataReloaded(size);
+  private onLoadingFinishedFunc: Function = (): void => this.onLoadingFinished();
+
+  private select(position: number, key: string, value: boolean, callback: Function): void {
+      if (this.mSelectManager?.toggle(key, value, position)) {
+      Log.info(TAG, 'enter event process');
+      callback();
+    }
+  }
+
+  private jumpPhotoBrowser(name: string, item: MediaItem): void {
+    let targetIndex = this.dataSource.getDataIndex(item);
+    if (targetIndex == Constants.NOT_FOUND) {
+      Log.error(TAG, 'targetIndex is not found');
+      return;
+    }
+    Log.info(TAG, `jump to photo browser at index: ${targetIndex}`);
+    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
+    interface Params {
+      position: number;
+      transition: string;
+      leftBlank: number[];
+    }
+    let params: Params = {
+      position: targetIndex,
+      transition: name,
+      leftBlank: this.leftBlank,
+    }
+    this.browserController.showBrowserWithNoAnimation(params);
+  }
+
+  private jumpThirdPhotoBrowser(name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void {
+    let targetIndex = this.dataSource.getDataIndex(item);
+    Log.info(TAG, `jump to photo browser, index: ${targetIndex}, transition: ${name}`);
+    AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
+    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
+    interface Params {
+      position: number;
+      transition: string;
+      leftBlank: number[];
+    }
+
+    const params: Params = {
+      position: targetIndex,
+      transition: name,
+      leftBlank: this.leftBlank,
+    };
+    if (geometryTapIndex && geometryTransitionString) {
+      this.browserController.showSelectBrowser(geometryTapIndex, geometryTransitionString, TAG, params);
+    } else {
+      this.browserController.showSelectBrowserWithNoAnimation(params);
+    }
+  }
+
+  private onDataReloaded(size: number): void {
+    Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
+    this.isEmpty = size == 0;
+    Log.info(TAG, `isEmpty: ${this.isEmpty}`);
+  }
+
+  private onLoadingFinished(): void {
+    Log.info(TAG, 'ON_DATA_RELOADED');
+    this.dataSource.onDataReloaded();
   }
 
   onIndexChange() {
@@ -98,44 +172,25 @@ export struct NewAlbumPage {
 
   onMenuClicked(action: Action) {
     Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
-    switch (action.actionID) {
-      case Action.CANCEL.actionID:
-        router.back();
-        break;
-      case Action.OK.actionID:
-        if (this.mSelectManager.getSelectedCount() == 0) {
-          Log.info(TAG, `onMenuClicked, action: ${action.actionID}, count = 0`);
-          break;
-        }
-        Log.info(TAG, `onMenuClicked, action: ${action.actionID} newAlbum: ${this.isNewAlbum}`);
-        if (this.isNewAlbum) {
-          AppStorage.SetOrCreate(Constants.IS_SHOW_MOVE_COPY_DIALOG, true);
-          let url = 'pages/index';
-          router.back({
-            url: url,
-            params: {
-              jumpSource: JumpSourceToMain.ALBUM,
-            }
-          })
-        } else {
-          MoveOrCopyBroadCastProp.getInstance().doAddOperation(this.broadCast);
-        }
-        break;
-      default:
-        break;
-    }
-  }
-
-  freezeAdapter(fn): Function {
-    let self = this;
-    return function () {
-      self.isDataFreeze = AppStorage.Get(Constants.IS_DATA_FREEZE);
-      if (self.isDataFreeze) {
-        return;
+    if (action.actionID === Action.CANCEL.actionID) {
+      router.back();
+    } else if (action.actionID === Action.OK.actionID) {
+      if (this.mSelectManager?.getSelectedCount() == 0) {
+        Log.info(TAG, `onMenuClicked, action: ${action.actionID}, count = 0`);
       }
-      let context = this;
-      let args = arguments;
-      fn.apply(context, args);
+      Log.info(TAG, `onMenuClicked, action: ${action.actionID} newAlbum: ${this.isNewAlbum}`);
+      if (this.isNewAlbum) {
+        AppStorage.SetOrCreate(Constants.IS_SHOW_MOVE_COPY_DIALOG, true);
+        let url = 'pages/index';
+        router.back({
+          url: url,
+          params: {
+            jumpSource: JumpSourceToMain.ALBUM,
+          }
+        })
+      } else {
+        MoveOrCopyBroadCastProp.getInstance().doAddOperation(this.broadCast);
+      }
     }
   }
 
@@ -162,7 +217,7 @@ export struct NewAlbumPage {
       this.isActive = true;
 
       this.dataSource && this.dataSource.onActive();
-      if (this.isSelectedMode) {
+      if (this.isSelectedMode && this.mSelectManager) {
         this.totalSelectedCount = this.mSelectManager.getSelectedCount();
         this.dataSource.forceUpdate();
       }
@@ -207,15 +262,15 @@ export struct NewAlbumPage {
 
   aboutToAppear(): void {
     TraceControllerUtils.startTrace('PhotoGridPageAboutToAppear');
-    this.mSelectManager = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+    this.mSelectManager = AppStorage.Get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
     if (this.mSelectManager == null) {
       this.mSelectManager = new SelectManager();
       AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.mSelectManager);
     }
-    let param: any = router.getParams();
+    let param: Params = router.getParams() as Params;
     if (param != null) {
       Log.debug(TAG, `After router.getParams, param is: ${JSON.stringify(param)}`);
-      let item = JSON.parse(param.item);
+      let item: AlbumInfo = JSON.parse(param.item) as AlbumInfo;
       this.title = item.albumName;
       this.dataSource.setAlbumUri(item.uri);
       AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_SOURCE, item.uri);
@@ -225,89 +280,49 @@ export struct NewAlbumPage {
     }
 
     let self = this;
-    this.onMenuClicked = this.onMenuClicked.bind(this);
     this.dataSource.setBroadCast(this.broadCast)
     this.mSelectManager.setPhotoDataImpl();
-    this.initGridRowCount = this.initGridRowCount.bind(this);
     this.initGridRowCount();
     ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.broadCast.on(BroadCastConstants.SELECT,
-      (position: number, key: string, value: boolean, callback: Function) => {
-        if (self.mSelectManager.toggle(key, value, position)) {
-          Log.info(TAG, 'enter event process');
-          callback();
-        }
-      });
+    this.broadCast.on(BroadCastConstants.SELECT, this.selectFunc);
+    this.broadCast.on(BroadCastConstants.JUMP_PHOTO_BROWSER, this.jumpPhotoBrowserFunc);
+    this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
+    this.broadCast.on(Constants.ON_LOADING_FINISHED, this.onDataReloadedFunc);
+    this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onLoadingFinishedFunc);
 
-    this.broadCast.on(BroadCastConstants.JUMP_PHOTO_BROWSER,
-      (name: string, item: MediaItem) => {
-        let targetIndex = self.dataSource.getDataIndex(item);
-        if (targetIndex == Constants.NOT_FOUND) {
-          Log.error(TAG, 'targetIndex is not found');
-          return;
-        }
-        Log.info(TAG, `jump to photo browser at index: ${targetIndex}`);
-        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
-        this.browserController.showBrowserWithNoAnimation({
-          position: targetIndex,
-          transition: name,
-          leftBlank: self.leftBlank,
-        });
-      })
-
-    this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER,
-      (name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string) => {
-        let targetIndex = self.dataSource.getDataIndex(item);
-        Log.info(TAG, `jump to photo browser, index: ${targetIndex}, transition: ${name}`);
-        AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, self.mSelectManager);
-        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
-        if (geometryTapIndex && geometryTransitionString) {
-          this.browserController.showSelectBrowser(geometryTapIndex, geometryTransitionString, TAG, {
-            position: targetIndex,
-            transition: name
-          });
-        } else {
-          this.browserController.showSelectBrowserWithNoAnimation({
-            position: targetIndex,
-            transition: name,
-          });
-        }
-      })
-
-    this.broadCast.on(Constants.ON_LOADING_FINISHED,
-      (size: number) => {
-        Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
-        this.isEmpty = size == 0;
-        Log.info(TAG, `isEmpty: ${this.isEmpty}`);
-      });
-
-    this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED,
-      () => {
-        Log.info(TAG, 'ON_DATA_RELOADED');
-        this.dataSource.onDataReloaded();
-      });
-
-    this.appBroadCast.on(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
+    this.appBroadCast.on(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorStateFunc);
     AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
-    this.mSelectManager.registerCallback('allSelect', this.freezeAdapter((newState: boolean) => {
+    this.mSelectManager.registerCallback('allSelect', (newState: boolean) => {
       Log.info(TAG, `allSelect ${newState}`);
-      self.isAllSelected = newState;
-      self.dataSource.forceUpdate();
-    }));
-    this.mSelectManager.registerCallback('select', this.freezeAdapter((newState: number) => {
+      this.isDataFreeze = AppStorage.get<boolean>(Constants.IS_DATA_FREEZE) as boolean;
+      if (this.isDataFreeze) {
+        return;
+      }
+      this.isAllSelected = newState;
+      this.dataSource.forceUpdate();
+    });
+    this.mSelectManager.registerCallback('select', (newState: number) => {
       Log.info(TAG, `select ${newState}`);
-      self.dataSource.onDataChanged(newState);
-    }));
-    this.mSelectManager.registerCallback('updateCount', this.freezeAdapter((newState: number) => {
+      this.isDataFreeze = AppStorage.get<boolean>(Constants.IS_DATA_FREEZE) as boolean;
+      if (this.isDataFreeze) {
+        return;
+      }
+      this.dataSource.onDataChanged(newState);
+    });
+    this.mSelectManager.registerCallback('updateCount', (newState: number) => {
       Log.info(TAG, `updateSelectedCount ${newState}`);
-      self.moreMenuList = [];
-      self.moreMenuList.push(Boolean(newState) ? Action.INFO : Action.INFO_INVALID);
-      self.totalSelectedCount = newState;
-    }));
+      this.isDataFreeze = AppStorage.get<boolean>(Constants.IS_DATA_FREEZE) as boolean;
+      if (this.isDataFreeze) {
+        return;
+      }
+      this.moreMenuList = [];
+      this.moreMenuList.push(Boolean(newState) ? Action.INFO : Action.INFO_INVALID);
+      this.totalSelectedCount = newState;
+    });
     this.dataSource.registerCallback('updateCount', (newState: number) => {
       Log.info(TAG, `updateTotalCount ${newState}`);
       self.isShowScrollBar = (newState > Constants.PHOTOS_CNT_FOR_HIDE_SCROLL_BAR);
-      self.mSelectManager.setTotalCount(newState);
+      self.mSelectManager?.setTotalCount(newState);
     })
 
     this.moreMenuList = [];
@@ -316,11 +331,16 @@ export struct NewAlbumPage {
   }
 
   aboutToDisappear(): void {
-    this.broadCast.off(null, null);
-    this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, null);
+    if(this.broadCast) {
+      this.broadCast.off(BroadCastConstants.SELECT, this.selectFunc);
+      this.broadCast.off(BroadCastConstants.JUMP_PHOTO_BROWSER, this.jumpPhotoBrowserFunc);
+      this.broadCast.off(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
+      this.broadCast.off(Constants.ON_LOADING_FINISHED, this.onDataReloadedFunc);
+      this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, this.onLoadingFinishedFunc);
+    }
+    this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorStateFunc);
     this.dataSource.releaseBroadCast();
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.onWindowSizeChangeCallBack = null;
     AppStorage.Delete(Constants.PHOTO_GRID_SELECT_MANAGER);
   }
 
@@ -328,7 +348,7 @@ export struct NewAlbumPage {
     Stack() {
       Column() {
         AlbumSelectActionBar({
-          onMenuClicked: this.onMenuClicked,
+          onMenuClicked: (action: Action): void => this.onMenuClicked(action),
           totalSelectedCount: $totalSelectedCount,
           menuList: $moreMenuList
         })
@@ -339,16 +359,16 @@ export struct NewAlbumPage {
         } else {
           Stack() {
             Grid(this.scroller) {
-              LazyForEach(this.dataSource, (item, index?: number) => {
+              LazyForEach(this.dataSource, (item: ViewData, index?: number) => {
                 if (!!item) {
                   GridItem() {
                     ImageGridItemComponent({
                       dataSource: this.dataSource,
                       item: item.mediaItem,
-                      isSelected: this.mSelectManager.isItemSelected(item.mediaItem.uri),
+                      isSelected: this.isSelectedMode ? this.mSelectManager?.isItemSelected((item.mediaItem as MediaItem).uri as string, item.viewIndex) : false,
                       pageName: Constants.PHOTO_TRANSITION_ALBUM,
                       mPosition: index,
-                      geometryTransitionString: this.getGeometryTransitionId(item, index),
+                      geometryTransitionString: this.getGeometryTransitionId(item, index as number),
                       selectedCount: $totalSelectedCount
                     })
                   }
@@ -358,11 +378,11 @@ export struct NewAlbumPage {
                   .key('NewAlbumPageImage' + index)
                   .zIndex(index === this.placeholderIndex ? 1 : 0)
                 }
-              }, (item, index) => {
+              },  (item: ViewData, index?: number) => {
                 if (item == null || item == undefined) {
                   return JSON.stringify(item) + index;
                 }
-                return this.getGeometryTransitionId(item, index);
+                return this.getGeometryTransitionId(item, index as number);
               })
             }
             .edgeEffect(EdgeEffect.Spring)
@@ -433,7 +453,12 @@ export struct NewAlbumPage {
   }
 
   private getGeometryTransitionId(item: ViewData, index: number): string {
-    return TAG + item.mediaItem.getHashCode() + this.mSelectManager.isItemSelected(item.mediaItem.uri, item.viewIndex);
+    let mediaItem = item.mediaItem as MediaItem;
+    if (mediaItem) {
+      return TAG + mediaItem.getHashCode() + (this.mSelectManager?.isItemSelected(mediaItem.uri as string) ?? false);
+    } else {
+      return TAG + item.viewIndex;
+    }
   }
 
   private initGridRowCount(): void {
@@ -441,7 +466,7 @@ export struct NewAlbumPage {
     let margin = 0;
     let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
     this.gridRowCount = Math.max(Math.round(((contentWidth - Constants.NUMBER_2 * margin)
-    + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)), Constants.DEFAULT_ALBUM_GRID_COLUMN_MIN_COUNT);
+      + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)), Constants.DEFAULT_ALBUM_GRID_COLUMN_MIN_COUNT);
     Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
   }
 }

@@ -22,8 +22,8 @@ const TAG: string = 'common_ProgressDialog';
 
 @Observed
 export class ProgressParam {
-  cancelFunc: Function
-  operationType: string
+  cancelFunc: Function = (): void => {};
+  operationType: string = '';
 }
 
 @CustomDialog
@@ -32,7 +32,7 @@ export struct ProgressDialog {
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
   @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller: CustomDialogController
+  controller?: CustomDialogController
   @Consume progressMessage: Resource;
   @Consume deleteProgress: number;
   @Consume progressParam: ProgressParam;

@@ -18,11 +18,11 @@ import { ActionBarColorMode } from '../browserOperation/ActionBarMode';
 
 @Component
 export struct ToolBarButton {
-  @State res: Resource = undefined;
-  action: Action;
+  @State res: Resource | undefined = undefined;
+  action: Action = Action.NONE;
   isLeft = true;
   isAutoTint = true;
-  colorMode: ActionBarColorMode;
+  colorMode: ActionBarColorMode = ActionBarColorMode.NORMAL;
 
   build() {
     Flex({

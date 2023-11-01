@@ -25,7 +25,7 @@ const TAG: string = 'common_MenuPanel';
 export struct MenuPanel {
   @Link @Watch('onActionBarPropChanged') actionBarProp: ActionBarProp;
   @State menuList: Action[] = [];
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
 
   aboutToAppear(): void {
     Log.info(TAG, 'aboutToAppear.');
@@ -44,7 +44,7 @@ export struct MenuPanel {
           colorMode: this.actionBarProp.getColorMode()
         })
           .margin({ right: $r('app.float.max_padding_end') })
-      }, menu => String(menu.actionID))
+      }, (menu: Action) => String(menu.actionID))
     }
     .alignItems(VerticalAlign.Center)
   }

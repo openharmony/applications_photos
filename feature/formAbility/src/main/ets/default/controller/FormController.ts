@@ -19,6 +19,7 @@ import formBindingData from '@ohos.application.formBindingData';
 import { Constants } from '../common/Constants';
 import formProvider from '@ohos.application.formProvider';
 import type Want from '@ohos.app.ability.Want';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'formA_The_FormController';
 
@@ -59,18 +60,18 @@ export class FormController implements FormListener {
     Log.info(TAG, `bindFormData start formId: ${formId}  fd:${fd}`);
     let image: string = this.imageHashCode(fd, formId);
     let dataObj: object = {
-      'fd': fd === -1 ? false : true,
-      'image0': 'memory://' + image,
-      'image1': 'memory://' + image,
-      'indexValue': this.indexValue,
-      'albumName': this.mediaDataManager.getCurrentAlbumName(),
-      'currentIndex': this.mediaDataManager.getCurrentIndex(),
-      'isShow': this.mediaDataManager.getIsShowAlbumName(),
-      'formImages': JSON.parse(`{ "${image}": ${fd} }`),
-      'uri': (this.mediaDataManager.getMediaData().currentUri !== '') ?
-        commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
-      'albumUri': `${this.mediaDataManager.getMediaData().albumUri}`,
-      'currentUri': this.mediaDataManager.getMediaData().currentUri
+      fd: fd !== -1,
+      image0: 'memory://' + image,
+      image1: 'memory://' + image,
+      indexValue: this.indexValue,
+      albumName: this.mediaDataManager.getCurrentAlbumName(),
+      currentIndex: this.mediaDataManager.getCurrentIndex(),
+      isShow: this.mediaDataManager.getIsShowAlbumName(),
+      formImages: JSON.parse(`{ "${image}": ${fd} }`),
+      uri: this.mediaDataManager.getMediaData().currentUri !==
+        '' ? commonConstants.ACTION_URI_FORM_ABILITY : commonConstants.ACTION_URI_FORM_ABILITY_NONE,
+      albumUri: `${this.mediaDataManager.getMediaData().albumUri}`,
+      currentUri: this.mediaDataManager.getMediaData().currentUri
     };
     Log.debug(TAG, `bindFormData, createFormBindingData dataObj2.data: ${JSON.stringify(dataObj)}`);
     let obj: formBindingData.FormBindingData = formBindingData.createFormBindingData(JSON.stringify(dataObj));
@@ -135,7 +136,8 @@ export class FormController implements FormListener {
     };
     Log.debug(TAG, `routerPhotoBrowser parm ${JSON.stringify(param)}`);
 
-    globalThis.formContext.startAbility(param).then(() => {
+    let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('formContext');
+    context.startAbility(param).then((): void => {
       AppStorage.Delete(Constants.FROM_CONTROLLER_MANAGER);
     })
 

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { Constants, Log, ScreenManager } from '@ohos/common';
+import { Constants, Log, PhotoDataSource, ScreenManager } from '@ohos/common';
 import { MouseTurnPageButton } from './MouseTurnPageButton';
 
 const TAG: string = 'browser_MouseTurnPageOperation';
@@ -23,11 +23,11 @@ export struct MouseTurnPageOperation {
   @State isOnLeftHover: boolean = false
   @State isOnRightHover: boolean = false
   @State isOnFirstHover: boolean = false
-  isShowBar: boolean
+  isShowBar: boolean = false
   @Consume('transitionIndex') currentIndex: number
-  @Prop isPhotoScaled: boolean
-  private controller
-  private dataSource
+  @Prop isPhotoScaled: boolean = false
+  private controller: SwiperController | null = null;
+  private dataSource: PhotoDataSource | null = null;
 
   aboutToAppear(): void {
     this.isOnFirstHover = true
@@ -46,7 +46,7 @@ export struct MouseTurnPageOperation {
         bottom: $r('app.float.mouse_turn_page_button_margin')
       })
       .hitTestBehavior(HitTestMode.Transparent)
-      .onMouse((event: MouseEvent) => {
+      .onMouse((event?: MouseEvent) => {
         if (this.isOnFirstHover) {
           this.isOnFirstHover = false
           this.isOnLeftHover = true
@@ -68,8 +68,10 @@ export struct MouseTurnPageOperation {
         Column()
           .width('100%')
           .height('100%')
-          .onHover((isHover: boolean) => {
-            this.isOnLeftHover = isHover
+          .onHover((isHover?: boolean) => {
+            if (isHover != null) {
+              this.isOnLeftHover = isHover
+            }
           })
       }
       .hitTestBehavior(HitTestMode.Transparent)
@@ -84,12 +86,16 @@ export struct MouseTurnPageOperation {
           MouseTurnPageButton({ isStart: true })
             .key('LeftMouseTurnPageButton')
             .onClick(() => {
-              this.controller.showPrevious();
+              if (this.controller != null) {
+                this.controller.showPrevious();
+              }
             })
         }
       }
-      .onHover((isHover: boolean) => {
-        this.isOnLeftHover = isHover
+      .onHover((isHover?: boolean) => {
+        if (isHover != null) {
+          this.isOnLeftHover = isHover
+        }
       })
       .width($r('app.float.mouse_turn_page_button_response_size'))
       .height($r('app.float.mouse_turn_page_button_response_size'))
@@ -106,8 +112,10 @@ export struct MouseTurnPageOperation {
         Column()
           .width('100%')
           .height('100%')
-          .onHover((isHover: boolean) => {
-            this.isOnRightHover = isHover
+          .onHover((isHover?: boolean) => {
+            if (isHover != null) {
+              this.isOnRightHover = isHover
+            }
           })
       }
       .hitTestBehavior(HitTestMode.Transparent)
@@ -117,17 +125,21 @@ export struct MouseTurnPageOperation {
       })
 
       Column() {
-        if (this.isOnRightHover &&
+        if (this.isOnRightHover && this.dataSource != null &&
         this.currentIndex < this.dataSource.totalCount() - Constants.NUMBER_1) {
           MouseTurnPageButton({ isStart: false })
             .key('RightMouseTurnPageButton')
             .onClick(() => {
-              this.controller.showNext();
+              if (this.controller != null) {
+                this.controller.showNext();
+              }
             })
         }
       }
-      .onHover((isHover: boolean) => {
-        this.isOnRightHover = isHover
+      .onHover((isHover?: boolean) => {
+        if (isHover != null) {
+          this.isOnRightHover = isHover
+        }
       })
       .width($r('app.float.mouse_turn_page_button_response_size'))
       .height($r('app.float.mouse_turn_page_button_response_size'))

@@ -24,10 +24,10 @@ export class MediaObserver {
   callbacks: Set<MediaObserverCallback> = new Set<MediaObserverCallback>();
 
   static getInstance(): MediaObserver {
-    if (AppStorage.Get(Constants.APP_KEY_MENU_USER_FILE_MANAGER_OBSERVER) == null) {
+    if (AppStorage.get(Constants.APP_KEY_MENU_USER_FILE_MANAGER_OBSERVER) == null) {
       AppStorage.SetOrCreate(Constants.APP_KEY_MENU_USER_FILE_MANAGER_OBSERVER, new MediaObserver());
     }
-    return AppStorage.Get(Constants.APP_KEY_MENU_USER_FILE_MANAGER_OBSERVER);
+    return AppStorage.get(Constants.APP_KEY_MENU_USER_FILE_MANAGER_OBSERVER);
   }
 
   registerObserver(callback: MediaObserverCallback) {

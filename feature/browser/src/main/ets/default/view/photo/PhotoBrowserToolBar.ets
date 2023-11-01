@@ -27,7 +27,7 @@ export struct PhotoBrowserToolBar {
   @State opacityValue: number = 1;
   @State isVisibility: boolean = true;
   @State currentBackgroundColor: Resource = $r('app.color.default_background_color');
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('leftBlank') leftBlank: number[]

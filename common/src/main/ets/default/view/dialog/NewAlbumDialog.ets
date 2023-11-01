@@ -28,7 +28,7 @@ export struct NewAlbumDialog {
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
   @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller: CustomDialogController;
+  controller?: CustomDialogController;
   @Consume renameFileName: string;
   @Consume dialogCallback: DialogCallback;
   @State isNull: boolean = false;
@@ -36,7 +36,7 @@ export struct NewAlbumDialog {
   @State dividerWidth: string = '1vp';
   @State isFocusable: boolean = true;
   private inputName: string = '';
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   aboutToAppear(): void {
     Log.info(TAG, 'aboutToAppear');
@@ -71,8 +71,8 @@ export struct NewAlbumDialog {
             .maxLength(Constants.RENAME_MAX_LENGTH)
             .enterKeyType(EnterKeyType.Done)
             .backgroundColor($r('app.color.transparent'))
-            .onTouch((event: TouchEvent) => {
-              if (event.type == TouchType.Down && !this.isFocusable) {
+            .onTouch((event?: TouchEvent) => {
+              if ((event as TouchEvent).type == TouchType.Down && !this.isFocusable) {
                 this.isFocusable = true;
               }
             })
@@ -115,7 +115,7 @@ export struct NewAlbumDialog {
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
               this.dialogCallback && this.dialogCallback.cancelCallback();
-              this.controller.close();
+              this.controller?.close();
             })
           }.width('50%')
 
@@ -178,12 +178,13 @@ export struct NewAlbumDialog {
 
   private handleConfirmCallback() {
     if (this.dialogCallback === null || this.dialogCallback === undefined) {
-      this.controller.close();
+      this.controller?.close();
       return;
     }
-    this.dialogCallback.confirmCallback(this.inputName).then((res) => {
+    let confirmCb: Promise<Function> = (this.dialogCallback as DialogCallback).confirmCallback(this.inputName) as Promise<Function>;
+    confirmCb.then((res: Function): void => {
       if (res) {
-        this.controller.close();
+        this.controller?.close();
         return;
       }
       Log.warn(TAG, 'new album name is not available!');

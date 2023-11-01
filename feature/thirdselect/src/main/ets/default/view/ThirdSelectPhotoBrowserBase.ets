@@ -14,6 +14,7 @@
  */
 
 import router from '@ohos.router';
+import Matrix4 from '@ohos.matrix4';
 import {
   Action,
   BigDataConstants,
@@ -23,6 +24,7 @@ import {
   BrowserConstants,
   Constants,
   Log,
+  MediaDataSource,
   MediaItem,
   mMultimodalInputManager,
   PhotoDataSource,
@@ -41,8 +43,22 @@ import {
 import { FormConstants, IS_HORIZONTAL } from '../utils/ThirdSelectConstants';
 import { ThirdSelectedPanel } from './ThirdSelectedPanel';
 import { MouseTurnPageOperation } from '@ohos/browser/BrowserComponents';
+import { Matrix4x4 } from '@ohos/common/src/main/ets/default/utils/Matrix4x4'
+import ability from '@ohos.ability.ability';
+import common from '@ohos.app.ability.common';
+import { Results } from '@ohos/common/src/main/ets/default/view/PhotoSwiper';
 
 const TAG: string = 'thiSel_ThirdSelectPhotoBrowserBase';
+
+interface Params {
+  isFromFa: boolean;
+  selectMode: boolean;
+  position: number;
+  transition: string;
+  bundleName: string;
+  title: string;
+  maxSelectCount: number;
+};
 
 // third selection photoBrowser
 @Component
@@ -55,21 +71,21 @@ export struct ThirdSelectPhotoBrowserBase {
   @Provide isDefaultBackgroundColor: boolean = true;
   @State isPhotoScaled: boolean = false;
   @Provide pageFrom: number = Constants.ENTRY_FROM.NORMAL;
-  selectManager: ThirdSelectManager;
+  selectManager: ThirdSelectManager | null = null;
   bundleName: string = '';
   isMultiPick = true;
-  mTransition: string;
+  mTransition: string = '';
   controller: SwiperController = new SwiperController();
   @Provide('transitionIndex') currentIndex: number = 0;
   @State currentUri: string = '';
   isFromFa: boolean = false;
   @Provide canSwipe: boolean = true;
   // position
-  mPosition: number;
+  mPosition: number = 0;
   @State title: string = '';
-  @Prop @Watch('onPageChanged') pageStatus: boolean;
+  @Prop @Watch('onPageChanged') pageStatus: boolean = false;
   @StorageLink(IS_HORIZONTAL) isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  maxSelectCount: number;
+  maxSelectCount: number = 0;
   @StorageLink('geometryOpacity') geometryOpacity: number = 1;
   @State @Watch('onGeometryChanged') geometryTransitionId: string = 'default_id';
   @Link isRunningAnimation: boolean;
@@ -79,7 +95,14 @@ export struct ThirdSelectPhotoBrowserBase {
   private dataSource: ThirdBrowserDataSource = new ThirdBrowserDataSource();
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private geometryTransitionEnable: boolean = false;
-  private isSelectMode: boolean;
+  private isSelectMode: boolean = false;
+  private pullDownFunc: Function = (): Boolean => this.onBackPress();
+  private dataSizeChangedFunc: Function = (size: number): void => this.onDataSizeChanged(size);
+  private selectFunc: Function = (position: number, key: string, value: boolean): void => this.selectCallback(position, key, value);
+  private dataContentChangedFunc: Function = (index: number): void => this.onPhotoChanged(index);
+  private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem, isSelectMode = false): void =>
+  this.jumpBrowserCallback(name, item, isSelectMode);
+  private setDisableSwipeFunc: Function = (value: boolean): void => this.setDisableSwipe(value);
 
   onGeometryChanged() {
     AppStorage.SetOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
@@ -89,8 +112,8 @@ export struct ThirdSelectPhotoBrowserBase {
     Log.info(TAG, 'photoBrowser aboutToAppear');
     this.backgroundColorResource = $r('app.color.black');
     this.isDefaultBackgroundColor = false;
-    this.geometryTransitionId = AppStorage.Get('geometryTransitionBrowserId');
-    this.browserController.browserBackFunc = this.onBackPress.bind(this);
+    this.geometryTransitionId = AppStorage.get<string>('geometryTransitionBrowserId') as string;
+    this.browserController.browserBackFunc = (): boolean => this.onBackPress();
     mMultimodalInputManager.registerListener((control: number) => {
       Log.info(TAG, `key control : ${control} index ${this.currentIndex}`);
       if (control == 0) {
@@ -105,16 +128,16 @@ export struct ThirdSelectPhotoBrowserBase {
         this.onBackPress();
       }
     });
-    this.selectManager = AppStorage.Get(Constants.THIRD_SELECT_MANAGER);
-    this.dataSource.setAlbumDataSource(AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER));
+    this.selectManager = AppStorage.get<ThirdSelectManager>(Constants.THIRD_SELECT_MANAGER) as ThirdSelectManager;
+    this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
     this.isMultiPick = this.selectManager.getIsMultiPick();
-    if (this.isMultiPick == true) {
-      this.totalSelectedCount = this.selectManager.getSelectedCount();
+    if (this.isMultiPick) {
+      this.totalSelectedCount = this.selectManager?.getSelectedCount() ?? 0;
     } else {
-      this.totalSelectedCount = Constants.NUMBER_1;
+      this.totalSelectedCount = 1;
     }
 
-    let param: any = this.browserController.browserParam;
+    let param: Params = this.browserController.browserParam as Params;
     this.isFromFa = param.isFromFa;
     this.isSelectMode = param.selectMode;
     if (param.selectMode) {
@@ -125,19 +148,16 @@ export struct ThirdSelectPhotoBrowserBase {
     this.bundleName = param.bundleName;
     this.title = param.title;
     this.maxSelectCount = param.maxSelectCount;
-    this.onMenuClicked = this.onMenuClicked.bind(this);
 
     this.dataSource.setBroadCast(this.broadCast);
 
-    this.broadCast.on(BrowserConstants.PULL_DOWN_END, this.onBackPress.bind(this));
-    this.broadCast.on(BrowserConstants.DATA_SIZE_CHANGED, this.onDataSizeChanged.bind(this));
-    this.broadCast.on(BroadCastConstants.SELECT, this.selectCallback.bind(this));
-    this.broadCast.on(BrowserConstants.DATA_CONTENT_CHANGED, this.onPhotoChanged.bind(this, this.currentIndex));
-    this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpBrowserCallback.bind(this));
-    this.broadCast.on(BrowserConstants.SET_DISABLE_SWIPE, (value: boolean) => {
-      Log.info(TAG, `set swiper swipe ${value}`);
-      this.canSwipe = value;
-    });
+    this.broadCast.on(BrowserConstants.PULL_DOWN_END, this.pullDownFunc);
+    this.broadCast.on(BrowserConstants.DATA_SIZE_CHANGED, this.dataSizeChangedFunc);
+    this.broadCast.on(BroadCastConstants.SELECT, this.selectFunc);
+    this.broadCast.on(BrowserConstants.DATA_CONTENT_CHANGED, this.dataContentChangedFunc);
+    this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
+    this.broadCast.on(BrowserConstants.SET_DISABLE_SWIPE, this.setDisableSwipeFunc);
+
     if (this.pageStatus) {
       this.onPageShow();
     }
@@ -145,9 +165,16 @@ export struct ThirdSelectPhotoBrowserBase {
 
   aboutToDisappear(): void {
     this.broadCast.release();
+    if(this.broadCast) {
+      this.broadCast.off(BrowserConstants.PULL_DOWN_END, this.pullDownFunc);
+      this.broadCast.off(BrowserConstants.DATA_SIZE_CHANGED, this.dataSizeChangedFunc);
+      this.broadCast.off(BroadCastConstants.SELECT, this.selectFunc);
+      this.broadCast.off(BrowserConstants.DATA_CONTENT_CHANGED, this.dataContentChangedFunc);
+      this.broadCast.off(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
+      this.broadCast.off(BrowserConstants.SET_DISABLE_SWIPE, this.setDisableSwipeFunc);
+    }
     this.dataSource.release();
     mMultimodalInputManager.unregisterListener();
-    this.controller = undefined;
   }
 
   onDataSizeChanged(size: number): void {
@@ -157,16 +184,21 @@ export struct ThirdSelectPhotoBrowserBase {
     }
   }
 
+  setDisableSwipe(value: boolean): void {
+    Log.info(TAG, `set swiper swipe ${value}`);
+    this.canSwipe = value;
+  }
+
   onPhotoChanged(index: number): void {
     this.currentIndex = index;
     let currentPhoto = this.getCurrentPhoto();
     if (currentPhoto == undefined) {
       Log.error(TAG, 'onPhotoChanged, item is undefined');
     } else {
-      this.isSelected = this.selectManager.isItemSelected(currentPhoto.uri);
+      this.isSelected = this.selectManager?.isItemSelected(currentPhoto.uri) ?? false;
       this.currentUri = currentPhoto.uri;
 
-      let dataSourceIndex = this.isSelectMode ? this.selectManager.getSelectItemDataSourceIndex(currentPhoto) : index;
+      let dataSourceIndex = this.isSelectMode ? (this.selectManager?.getSelectItemDataSourceIndex(currentPhoto) ?? Constants.INVALID) : index;
       let timelineIndex = this.dataSource.getPositionByIndex(dataSourceIndex);
       AppStorage.SetOrCreate<number>('placeholderIndex', timelineIndex);
       this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
@@ -183,11 +215,11 @@ export struct ThirdSelectPhotoBrowserBase {
     }
     this.isSelected = !this.isSelected;
     if (this.isSelected) {
-      this.selectManager.toggle(currentPhoto.uri, true);
+      this.selectManager?.toggle(currentPhoto.uri, true);
     } else {
-      this.selectManager.toggle(currentPhoto.uri, false);
+      this.selectManager?.toggle(currentPhoto.uri, false);
     }
-    this.totalSelectedCount = this.selectManager.getSelectedCount();
+    this.totalSelectedCount = this.selectManager?.getSelectedCount() ?? 0;
     this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
     Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change geometryTransitionId ${this.geometryTransitionId}`);
   }
@@ -199,7 +231,7 @@ export struct ThirdSelectPhotoBrowserBase {
     if (this.selectManager) {
       this.selectManager.toggle(key, value);
     }
-    this.totalSelectedCount = this.selectManager.getSelectedCount();
+    this.totalSelectedCount = this.selectManager?.getSelectedCount() ?? 0;
     Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after select callback`);
   }
 
@@ -224,28 +256,24 @@ export struct ThirdSelectPhotoBrowserBase {
 
   onMenuClicked(action: Action) {
     Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
-    switch (action.actionID) {
-      case Action.BACK.actionID:
-        let msg = {
-          'From': BigDataConstants.BY_CLICK,
-        }
-        ReportToBigDataUtil.report(BigDataConstants.ESC_PHOTO_BROWSER_WAY, msg);
-        this.onBackPress();
-        return;
-      case Action.MATERIAL_SELECT.actionID:
-        Log.info(TAG, 'click UN_SELECTED');
-        this.selectStateChange();
-        return;
-      case Action.SELECTED.actionID:
-        Log.info(TAG, 'click SELECTED');
-        this.selectStateChange();
-        return;
-      case Action.OK.actionID:
-        Log.info(TAG, 'click OK');
-        this.setPickResult();
-        break;
-      default:
-        break;
+    if (action.actionID === Action.BACK.actionID) {
+      interface Msg {
+        from: string;
+      }
+      let msg: Msg = {
+        from: BigDataConstants.BY_CLICK,
+      }
+      ReportToBigDataUtil.report(BigDataConstants.ESC_PHOTO_BROWSER_WAY, msg);
+      this.onBackPress();
+    } else if (action.actionID === Action.MATERIAL_SELECT.actionID) {
+      Log.info(TAG, 'click UN_SELECTED');
+      this.selectStateChange();
+    } else if (action.actionID === Action.SELECTED.actionID) {
+      Log.info(TAG, 'click SELECTED');
+      this.selectStateChange();
+    } else if (action.actionID === Action.OK.actionID) {
+      Log.info(TAG, 'click OK');
+      this.setPickResult();
     }
   }
 
@@ -256,7 +284,7 @@ export struct ThirdSelectPhotoBrowserBase {
 
   onBackPress() {
     if (this.geometryTransitionEnable) {
-      this.controller.finishAnimation(this.onBackPressInner.bind(this));
+      this.controller.finishAnimation((): void => this.onBackPressInner());
     } else {
       router.back({
         url: '',
@@ -294,7 +322,7 @@ export struct ThirdSelectPhotoBrowserBase {
   @Builder buildPanel() {
     ThirdSelectedPanel({
       maxSelectCount: this.maxSelectCount,
-      onMenuClicked: this.onMenuClicked,
+      onMenuClicked: (action: Action): void => this.onMenuClicked(action),
       isBrowserMode: true,
       isMultiPick: this.isMultiPick,
       mTransition: TAG,
@@ -320,9 +348,9 @@ export struct ThirdSelectPhotoBrowserBase {
         PhotoSwiper({
           dataSource: this.dataSource,
           mTransition: this.mTransition,
-          onPhotoChanged: this.onPhotoChanged.bind(this),
+          onPhotoChanged: (index: number): void => this.onPhotoChanged(index),
           swiperController: this.controller,
-          verifyPhotoScaledFunc: this.verifyPhotoScaled.bind(this),
+          verifyPhotoScaledFunc:  (matrix?: Matrix4.Matrix4Transit): void => this.verifyPhotoScaled(matrix),
           geometryTransitionEnable: true,
           broadCast: $broadCast,
           isRunningAnimation: $isRunningAnimation
@@ -343,7 +371,7 @@ export struct ThirdSelectPhotoBrowserBase {
         }
         ThirdSelectPhotoBrowserActionBar({
           isMultiPick: this.isMultiPick,
-          onMenuClicked: this.onMenuClicked,
+          onMenuClicked: (action: Action): void => this.onMenuClicked(action),
           title: this.title,
           isThird: true,
           isShowBar: $isShowBar,
@@ -368,21 +396,23 @@ export struct ThirdSelectPhotoBrowserBase {
       .opacity(0)
   }
 
-  verifyPhotoScaled(matrix: any) {
-    if (!!matrix) {
-      let mat = matrix.copy().matrix4x4
-      let xScale = mat[Constants.NUMBER_0]
-      let yScale = mat[Constants.NUMBER_5]
-      Log.info(TAG, `photo in PhotoItem has Scaled x scale: ${xScale}, y scale: ${yScale}, mat: ${mat}`)
-      this.isPhotoScaled = xScale != 1 || yScale != 1
+  verifyPhotoScaled(matrix?: Matrix4.Matrix4Transit): void {
+    if (matrix) {
+      let mat: number[] | undefined = (matrix.copy() as Matrix4x4).matrix4x4;
+      if (mat) {
+        let xScale: number = mat[0];
+        let yScale: number = mat[5];
+        Log.info(TAG, `photo in PhotoItem has Scaled x scale: ${xScale}, y scale: ${yScale}, mat: ${mat}`);
+        this.isPhotoScaled = xScale != 1 || yScale != 1
+      }
     } else {
       this.isPhotoScaled = false
-      Log.info(TAG, `photo in PhotoItem has not Scaled isPhotoScaled: ${this.isPhotoScaled}`)
+      Log.info(TAG, `photo in PhotoItem has not Scaled isPhotoScaled: ${this.isPhotoScaled}`);
     }
   }
 
   private onBackPressInner(): void {
-    this.browserController.hideBrowser();
+    let timelineIndex = this.dataSource.getPositionByIndex(this.currentIndex) as number;
   }
 
   private jumpBrowserCallback(name: string, item: MediaItem, isSelectMode = false) {
@@ -399,16 +429,20 @@ export struct ThirdSelectPhotoBrowserBase {
       if (currentPhoto) {
         Log.debug(TAG, `setPickResult. updateFormData obj: ${currentPhoto.uri}  currentIndex: ${this.currentIndex}`);
         this.appBroadCast.emit(BroadCastConstants.SAVE_FORM_EDITOR_DATA,
-          ["", AppStorage.Get(FormConstants.FORM_ITEM_ALBUM_URI), AppStorage.Get(FormConstants.FORM_ITEM_DISPLAY_NAME),
+          ['', AppStorage.get<string>(FormConstants.FORM_ITEM_ALBUM_URI), AppStorage.get<Resource>(FormConstants.FORM_ITEM_DISPLAY_NAME),
           currentPhoto.uri, false]);
       } else {
         Log.error(TAG, 'Fa setPickResult is null');
       }
       return;
     }
-    let uriArray;
+    let uriArray: Array<string>;
     if (this.isMultiPick) {
-      uriArray = SelectUtil.getUriArray(this.selectManager.clickedSet);
+      if (this.selectManager === null) {
+        Log.error(TAG, 'Select Manager empty');
+        return;
+      }
+      uriArray = SelectUtil.getUriArray(this.selectManager?.clickedSet ?? new Set());
       Log.info(TAG, `uri size: ${uriArray}`);
     } else {
       let currentPhoto = this.getCurrentPhoto();
@@ -418,21 +452,17 @@ export struct ThirdSelectPhotoBrowserBase {
       uriArray = [currentPhoto.uri];
     }
     let promise: Promise<void> = SelectUtil.grantPermissionForUris(uriArray, this.bundleName);
-    let abilityResult = {
-      'resultCode': 0,
-      'want': {
-        'parameters': {
+    let abilityResult: ability.AbilityResult = {
+      resultCode: 0,
+      want: {
+        parameters: {
           'select-item-list': uriArray,
         }
       }
     };
-    promise.then(function () {
-      Log.info(TAG, `grant permission success.`);
-      globalThis.photosAbilityContext.terminateSelfWithResult(abilityResult).then((result) => {
-        Log.info(TAG, `terminateSelf result: ${result}`);
-      });
-    }).catch(function (err) {
-      Log.error(TAG, `grant permission error: ${JSON.stringify(err)}`);
+    let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+    context.terminateSelfWithResult(abilityResult).then((result: void) => {
+      Log.info(TAG, `terminateSelf result: ${result}, self result ${JSON.stringify(abilityResult)}`);
     });
   }
 }
@@ -452,11 +482,11 @@ class ThirdBrowserDataSource extends PhotoDataSource {
     return super.totalCount();
   }
 
-  getData(index: number): any {
+  getData(index: number): Results {
     if (this.isSelectMode) {
-      return this.packData(index, this.selectedItems[index]);
+      return this.packData(index, this.selectedItems[index]) as Results;
     }
-    return super.getData(index);
+    return super.getData(index) as Results;
   }
 
   setSelectMode(manager: ThirdSelectManager) {

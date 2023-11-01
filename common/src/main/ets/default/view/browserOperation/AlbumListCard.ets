@@ -25,8 +25,8 @@ export struct AlbumListCard {
   @State isEmptyAlbum: boolean = false;
   @State useAlt: boolean = false;
   @Consume broadCast: BroadCast;
-  item: AlbumInfo;
-  index: number;
+  item: AlbumInfo | null = null;
+  index: number = 0;
   readonly imageCenterLength: number = 28;
   private dividerMarginRight = 12;
 
@@ -35,21 +35,25 @@ export struct AlbumListCard {
   }
 
   mediaOperation() {
-    this.broadCast.emit(BroadCastConstants.MEDIA_OPERATION, [this.item.albumName, this.item.uri]);
-  }
+    if (this.broadCast != null && this.item != null) {
+      this.broadCast.emit(BroadCastConstants.MEDIA_OPERATION, [this.item.albumName, this.item.uri]);
+    }  }
 
-  showMediaRes(): Resource {
-    if (this.item.videoCount == 0) {
-      return $r('app.plural.show_photo_num', this.item.count, this.item.count);
-    } else if (this.item.videoCount == this.item.count) {
-      return $r('app.plural.show_video_num', this.item.count, this.item.count);
-    } else if (this.item.videoCount == 1) {
-      return $r('app.plural.show_one_video_with_photo_num', this.item.count - this.item.videoCount,
-        this.item.count - this.item.videoCount, this.item.videoCount);
-    } else {
-      return $r('app.plural.show_multi_video_with_photo_num', this.item.count - this.item.videoCount,
-        this.item.count - this.item.videoCount, this.item.videoCount)
+  showMediaRes(): Resource | undefined {
+    if (this.item != null) {
+      if (this.item.videoCount == 0) {
+        return $r('app.plural.show_photo_num', this.item.count, this.item.count);
+      } else if (this.item.videoCount == this.item.count) {
+        return $r('app.plural.show_video_num', this.item.count, this.item.count);
+      } else if (this.item.videoCount == 1) {
+        return $r('app.plural.show_one_video_with_photo_num', this.item.count - this.item.videoCount,
+          this.item.count - this.item.videoCount, this.item.videoCount);
+      } else {
+        return $r('app.plural.show_multi_video_with_photo_num', this.item.count - this.item.videoCount,
+          this.item.count - this.item.videoCount, this.item.videoCount)
+      }
     }
+    return undefined;
   }
 
   build() {
@@ -80,7 +84,7 @@ export struct AlbumListCard {
           .border({ radius: $r('sys.float.ohos_id_corner_radius_default_m') })
           .flexShrink(0)
         } else {
-          Image(this.item.coverUri)
+          Image(this.item == null ? '' : this.item.coverUri)
             .aspectRatio(1)
             .autoResize(false)
             .objectFit(ImageFit.Cover)
@@ -101,7 +105,7 @@ export struct AlbumListCard {
         }
 
         Column() {
-          Text(this.item.albumName)
+          Text(this.item == null ? '' : this.item.albumName)
             .fontSize($r('sys.float.ohos_id_text_size_body1'))
             .fontColor($r('sys.color.ohos_id_color_primary'))
             .maxLines(1)
@@ -109,7 +113,7 @@ export struct AlbumListCard {
             .padding({
               bottom: $r('sys.float.ohos_id_text_margin_vertical')
             })
-          if (this.item.count != 0) {
+          if (this.item != null && this.item.count != 0) {
             Text(this.showMediaRes())
               .fontSize($r('sys.float.ohos_id_text_size_body2'))
               .fontColor($r('sys.color.ohos_id_color_text_secondary'))

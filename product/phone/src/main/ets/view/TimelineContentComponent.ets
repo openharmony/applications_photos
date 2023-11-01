@@ -24,7 +24,7 @@ const TAG = 'TimelineTabContentComponent';
 @Component
 export struct TimelineTabContentComponent {
   @State pageStatus: boolean = false;
-  @Prop currentIndex: number;
+  @Prop currentIndex: number = 0;
   @Link isShowTabBar: boolean;
   @State @Watch('updateIndexStatus') browserController: BrowserController = new BrowserController(true);
   @State isRunningAnimation: boolean = false;

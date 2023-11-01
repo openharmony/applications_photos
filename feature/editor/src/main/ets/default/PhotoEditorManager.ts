@@ -40,10 +40,10 @@ export class PhotoEditorManager {
   }
 
   static getInstance(): PhotoEditorManager {
-    if (AppStorage.Get(Constants.PHOTO_EDITOR_MANAGER) == null) {
+    if (AppStorage.get(Constants.PHOTO_EDITOR_MANAGER) == null) {
       AppStorage.SetOrCreate(Constants.PHOTO_EDITOR_MANAGER, new PhotoEditorManager());
     }
-    return AppStorage.Get(Constants.PHOTO_EDITOR_MANAGER);
+    return AppStorage.get(Constants.PHOTO_EDITOR_MANAGER);
   }
 
   initialize(item: MediaItem, albumUri: string, mode: PhotoEditMode, errCallback?: Function): void {

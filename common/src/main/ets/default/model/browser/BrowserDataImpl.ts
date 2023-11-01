@@ -85,6 +85,16 @@ export abstract class BrowserDataImpl implements BrowserDataInterface {
     return result;
   }
 
+  async getItemsCountOfAlbum(album: Album, filterMediaType?: string): Promise<number> {
+    let count = 0;
+    // 当前相册count始终为0，先通过查全部图片获取count
+    let fetchOpt = AlbumDefine.getFileFetchOptWithEmptyColumn(Constants.INVALID, Constants.INVALID, filterMediaType);
+    let fetchResult = await album.getPhotoAssets(fetchOpt);
+    count = fetchResult.getCount();
+    fetchResult.close();
+    return count;
+  }
+
   async getItemsCount(albumUri?: string, filterMediaType?: string): Promise<number> {
     let count = 0;
     if (albumUri) {
@@ -132,7 +142,6 @@ export abstract class BrowserDataImpl implements BrowserDataInterface {
       Log.debug(TAG, `getItemIndexByUri count: ${allObject.length}`);
       index = allObject.findIndex((item: FileAsset) => item.uri == realUri);
     }
-
     return index;
   }
 

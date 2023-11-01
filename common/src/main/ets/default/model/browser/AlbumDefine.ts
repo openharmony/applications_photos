@@ -12,8 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import userFileManager from '@ohos.filemanagement.userFileManager';
+import dataSharePredicates from '@ohos.data.dataSharePredicates';
 import type { FetchOptions } from '../../access/UserFileManagerAccess';
-
 import {
   AlbumFetchOptionBuilder,
   FileFetchOptionBuilder,
@@ -43,6 +44,22 @@ export class AlbumDefine {
       .order(UserFileManagerAccess.FILE_KEY_DATE_TAKEN.toString(), false)
     if (filterMediaType) {
       AlbumDefine.setFilterMediaType(builder, filterMediaType)
+    }
+    if (startIndex != undefined && count != undefined && startIndex >= 0 && count >= 0) {
+      builder.select(startIndex, count);
+    }
+    return builder.build();
+  }
+
+  static getFileFetchOptWithEmptyColumn(startIndex?: number, count?: number, filterMediaType?: string): FetchOptions {
+    let fetchOption: userFileManager.FetchOptions = {
+      predicates: new dataSharePredicates.DataSharePredicates(),
+      fetchColumns: []
+    };
+    let builder = new FileFetchOptionBuilder(fetchOption);
+    builder.order(UserFileManagerAccess.FILE_KEY_DATE_TAKEN.toString(), false);
+    if (filterMediaType) {
+      AlbumDefine.setFilterMediaType(builder, filterMediaType);
     }
     if (startIndex != undefined && count != undefined && startIndex >= 0 && count >= 0) {
       builder.select(startIndex, count);

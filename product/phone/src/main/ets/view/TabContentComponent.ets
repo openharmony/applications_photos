@@ -24,9 +24,9 @@ const TAG = 'TabContentComponent';
 
 @Component
 export struct TabContentComponent {
-  @Prop pageStatus: boolean;
+  @Prop pageStatus: boolean = false;
   @StorageLink('isShowPhotoGridView') isShowPhotoGridView: boolean = false;
-  @Prop currentIndex: number;
+  @Prop currentIndex: number = 0;
   @StorageLink('currentBreakpoint') currentBreakpoint: string = Constants.BREAKPOINT_MD;
   @Consume @Watch('onShowStatusChanged') isShow: boolean;
   @State @Watch('updateIndexStatus') browserController: BrowserController = new BrowserController(true);

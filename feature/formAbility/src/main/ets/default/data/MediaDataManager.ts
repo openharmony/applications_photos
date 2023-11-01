@@ -19,6 +19,7 @@ import { AlbumDefine, DataStoreUtil, Log, MediaConstants, UserFileManagerAccess,
 import resourceManager from '@ohos.resourceManager';
 import type { FormListener } from '../controller/FormController';
 import userFileManager from '@ohos.filemanagement.userFileManager';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'formA_MediaDataManager';
 
@@ -45,7 +46,8 @@ export class MediaDataManager {
     await this.initShowName();
     if (this.mediaData == null || this.mediaData == undefined) {
       Log.info(TAG, `initData new MediaData! form ${formId}`);
-      let mgr: resourceManager.ResourceManager = globalThis.formContext.resourceManager;
+      let context = AppStorage.get<common.FormExtensionContext>('formContext');
+      let mgr: resourceManager.ResourceManager = context.resourceManager as resourceManager.ResourceManager;
       let displayName = await mgr.getStringValue($r('app.string.album_photos').id);
       let albumUri = this.mediaModel.getSystemAlbumUri(UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE);
       this.mediaData = new MediaData(formId, displayName, displayName, albumUri, '', 0,

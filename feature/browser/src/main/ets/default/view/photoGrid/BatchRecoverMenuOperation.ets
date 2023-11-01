@@ -23,14 +23,17 @@ import {
   SelectManager,
   UserFileManagerAccess
 } from '@ohos/common';
+import { BusinessError } from '@ohos.base';
 
 const TAG: string = 'browser_BatchRecoverMenuOperation';
 
 export class BatchRecoverMenuOperation extends ProcessMenuOperation {
+  private callbackFunc?: Function;
+
   constructor(menuContext: MenuContext) {
     super(menuContext);
     //初始化绑定this指向
-    this.callback = this.callback.bind(this)
+    this.callbackFunc = (uris: string[]): void => this.callback(uris);
   }
 
   doAction(): void {
@@ -87,7 +90,7 @@ export class BatchRecoverMenuOperation extends ProcessMenuOperation {
     fileAssets.push(fileItem);
     operationImpl.recoverFromTrash(fileAssets).then(() => {
       this.onCompleted()
-    }).catch((error) => {
+    }).catch((error: BusinessError) => {
       Log.error(TAG, `recover error: ${error}`);
       this.onError();
     })

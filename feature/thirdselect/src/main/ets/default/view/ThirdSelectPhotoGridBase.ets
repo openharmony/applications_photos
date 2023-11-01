@@ -53,8 +53,26 @@ import {
   SelectParams,
   THIRD_SELECT_IS_ORIGIN
 } from '../utils/ThirdSelectConstants';
+import ability from '@ohos.ability.ability';
+import { Router } from '@ohos.arkui.UIContext';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'thiSel_ThirdSelectPhotoGridBase';
+
+interface Params {
+  uri: string;
+  itemDisplayName: string;
+  itemId: string;
+  bundleName: string;
+  isMultiPick: boolean;
+  isFromFa: boolean;
+  isFromFaPhoto: boolean;
+  filterMediaType?: string;
+  isFirstEnter: boolean;
+  isFromWallpaper: boolean;
+  remainingOfWallpapers: number;
+  maxSelectCount: number;
+};
 
 // Third Select Album Page
 @Component
@@ -63,11 +81,11 @@ export struct ThirdSelectPhotoGridBase {
   @Provide isSelectedMode: boolean = true;
   @Provide moreMenuList: Array<Action> = new Array<Action>();
   @Provide rightClickMenuList: Array<Action> = new Array<Action>();
-  PhotoDataImpl: PhotoDataImpl;
+  PhotoDataImpl: PhotoDataImpl | null = null;
   dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
   @Provide broadCast: BroadCast = new BroadCast();
   @Provide isShow: boolean = true;
-  selectManager: ThirdSelectManager;
+  selectManager: ThirdSelectManager | null = null;
   isActive = false;
   @State title: string = '';
   @State isEmpty: boolean = false;
@@ -82,18 +100,24 @@ export struct ThirdSelectPhotoGridBase {
   @Provide isShowBar: boolean = true;
   scroller: Scroller = new Scroller();
   isFirstEnter: boolean = false;
-  @Prop @Watch('onPageChanged') pageStatus: boolean;
-  backFuncBinder: Function;
+  @Prop @Watch('onPageChanged') pageStatus: boolean = false;
+  backFuncBinder: Function | null = null;
   @State selectParams: SelectParams = SelectParams.defaultParam();
   @State screenHeight: number = ScreenManager.getInstance().getWinHeight();
   @StorageLink('placeholderIndex') @Watch('onPlaceholderChanged') placeholderIndex: number = -1;
   @ObjectLink @Watch('onBrowserControllerChanged') browserController: BrowserController;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
-  private selectFromCameraFunc: () => void;
-  private itemId: string = undefined;
+  private selectFromCameraFunc: Function = (): void => {};
+  private itemId: string = '';
   private isItemIdChange: boolean = false;
-  onWindowSizeChangeCallBack = () => this.initGridRowCount();
+  private onWindowSizeChangeCallBack: Function = () => this.initGridRowCount();
+  private selectFunc: Function = (position: number, key: string, value: boolean, callback: Function): void =>
+  this.onSelectCallback(position, key, value, callback);
+  private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem, geometryTapIndex: number,
+                                                 geometryTransitionString: string, isSelectMode = false): void =>
+  this.jumpBrowserCallback(name, item, geometryTapIndex, geometryTransitionString, isSelectMode);
+  private onDataReloadedFunc: Function = (): void => this.onReloadFinishedCallback();
 
   onPlaceholderChanged() {
     Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
@@ -110,33 +134,29 @@ export struct ThirdSelectPhotoGridBase {
 
   onMenuClicked(action: Action) {
     Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
-    switch (action.actionID) {
-      case Action.BACK.actionID:
-        this.goBackFormEditor();
-        break;
-      case Action.CANCEL.actionID:
-        this.setPickResult(null);
-        break;
-      case Action.OK.actionID:
-        this.setPickResult(SelectUtil.getUriArray(this.selectManager.clickedSet));
-        break;
-      case Action.NAVIGATION_ALBUMS.actionID:
-        let params: any = this.selectParams;
-        params.isFirstEnter = false;
-        let options = {
-          url: 'pages/ThirdSelectAlbumSetPage',
-          params: params
-        }
-        router.pushUrl(options);
-        ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_SWITCH_ALBUM, null);
-        break;
-      default:
-        break;
+    if (action.actionID === Action.BACK.actionID) {
+      this.goBackFormEditor();
+    } else if (action.actionID === Action.CANCEL.actionID) {
+      this.setPickResult();
+    } else if (action.actionID === Action.OK.actionID) {
+      let uriArray: Array<string> = new Array<string>();
+      if (this.selectManager !== null) {
+        uriArray = SelectUtil.getUriArray(this.selectManager.clickedSet);
+      }
+      this.setPickResult(uriArray);
+    } else if (action.actionID === Action.NAVIGATION_ALBUMS.actionID) {
+      let params = this.selectParams;
+      params.isFirstEnter = false;
+      router.pushUrl({
+        url: 'pages/ThirdSelectAlbumSetPage',
+        params: this.selectParams
+      })
+      ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_SWITCH_ALBUM, undefined);
     }
   }
 
   aboutToAppear(): void {
-    let param: any = router.getParams();
+    let param: Params = router.getParams() as Params;
     this.initSelectParams(param);
     if (this.selectParams.isFromFa) {
       this.selectParams.filterMediaType = AlbumDefine.FILTER_MEDIA_TYPE_IMAGE;
@@ -145,7 +165,7 @@ export struct ThirdSelectPhotoGridBase {
     }
     this.dataSource.setFilterMediaType(this.selectParams.filterMediaType);
     this.initSelectManager();
-    this.selectManager.setIsMultiPick(this.selectParams.isMultiPick);
+    this.selectManager?.setIsMultiPick(this.selectParams.isMultiPick);
 
     let self = this;
     // 后续phone缩略图支持横竖屏后再放开
@@ -153,26 +173,25 @@ export struct ThirdSelectPhotoGridBase {
       ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     }
     this.initGridRowCount();
-    this.onMenuClicked = this.onMenuClicked.bind(this);
     this.dataSource.setBroadCast(this.broadCast);
-    this.broadCast.on(BroadCastConstants.SELECT, this.onSelectCallback.bind(this));
-    this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpBrowserCallback.bind(this));
+    this.broadCast.on(BroadCastConstants.SELECT, this.selectFunc);
+    this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
     this.broadCast.on(Constants.ON_LOADING_FINISHED,
       (size: number) => {
-        this.onLoadFinishedCallback(size, this.updateTitle.bind(this, param));
+        this.onLoadFinishedCallback(size, (param: Params): void => this.updateTitle(param));
       });
-    this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onReloadFinishedCallback.bind(this));
-    this.selectManager.registerCallback('updateCount',
+    this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
+    this.selectManager?.registerCallback('updateCount',
       (newState: number) => {
         Log.info(TAG, `updateSelectedCount ${newState}`);
         self.selectedCount = newState;
-        self.selectManager.emitCallback('thirdSelectUpdateCount', [newState]);
+        self.selectManager?.emitCallback('thirdSelectUpdateCount', [newState]);
       });
     this.dataSource.registerCallback('updateCount',
       (newState: number) => {
         Log.info(TAG, `updateTotalCount ${newState}`);
         self.isShowScrollBar = (newState > Constants.PHOTOS_CNT_FOR_HIDE_SCROLL_BAR);
-        self.selectManager.setTotalCount(newState);
+        self.selectManager?.setTotalCount(newState);
       });
     MediaObserver.getInstance().registerObserver(this.dataObserver);
     this.isActive = true;
@@ -186,8 +205,8 @@ export struct ThirdSelectPhotoGridBase {
 
   onPageShow() {
     Log.debug(TAG, 'onPageShow');
-    let param: any = router.getParams();
-    this.isItemIdChange = this.itemId && param && this.itemId !== param.itemId;
+    let param: Params = router.getParams() as Params;
+    this.isItemIdChange = (this.itemId && param && this.itemId !== param.itemId) as boolean;
     if (this.isItemIdChange) {
       this.initSelectParams(param);
     }
@@ -217,21 +236,29 @@ export struct ThirdSelectPhotoGridBase {
 
   aboutToDisappear(): void {
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.onWindowSizeChangeCallBack = null;
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
     this.dataObserver.clearSource();
-    this.broadCast.off(null, null);
+    if(this.broadCast) {
+      this.broadCast.off(BroadCastConstants.SELECT, this.selectFunc);
+      this.broadCast.off(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
+      this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
+    }
     this.dataSource.releaseBroadCast();
     Log.info(TAG, `call aboutToDisappear`)
   }
 
-  onMediaLibDataChange(changeType) {
+  onMediaLibDataChange(changeType: string): void {
     Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
     this.dataSource.onChange(changeType);
   }
 
   getGeometryTransitionId(item: ViewData, index: number): string {
-    return TAG + item.mediaItem.getHashCode() + this.selectManager.isItemSelected(item?.mediaItem?.uri);
+    let mediaItem = item.mediaItem as MediaItem;
+    if (mediaItem) {
+      return TAG + mediaItem.getHashCode() + (this.selectManager?.isItemSelected(mediaItem.uri as string) ?? false);
+    } else {
+      return TAG + item.viewIndex;
+    }
   }
 
   @Builder buildGrid() {
@@ -244,36 +271,36 @@ export struct ThirdSelectPhotoGridBase {
               Log.debug(TAG, `get camera callback, uri ${uri}`)
               this.dataSource.initData();
               this.selectFromCameraFunc = () => {
-                this.onSelectCallback(0, uri, true, null);
+                this.onSelectCallback(0, uri, true, () => {});
               }
             }
           })
         }
         .aspectRatio(1)
       }
-      LazyForEach(this.dataSource, (item, index?: number) => {
-        if (!!item) {
+      LazyForEach(this.dataSource, (item: ViewData, index?: number) => {
+        if (item?.mediaItem) {
           GridItem() {
             ImageGridItemComponent({
               dataSource: this.dataSource,
               item: item?.mediaItem,
-              isSelected: this.selectManager.isItemSelected(item?.mediaItem?.uri),
+              isSelected: this.selectManager?.isItemSelected((item.mediaItem as MediaItem).uri as string) ?? false,
               pageName: Constants.PHOTO_TRANSITION_ALBUM,
               isThird: true,
               mPosition: item?.viewIndex,
               isThirdMultiPick: this.selectParams.isMultiPick,
-              geometryTransitionString: this.getGeometryTransitionId(item, index),
+              geometryTransitionString: this.getGeometryTransitionId(item, index as number),
               selectedCount: $selectedCount
             })
           }
           .aspectRatio(1)
           .zIndex(index === this.placeholderIndex ? 1 : 0)
         }
-      }, (item, index) => {
+      }, (item: ViewData, index?: number) => {
         if (item == null || item == undefined) {
           return JSON.stringify(item) + index;
         }
-        return this.getGeometryTransitionId(item, index);
+        return this.getGeometryTransitionId(item, index as number);
       })
     }
     .edgeEffect(EdgeEffect.Spring)
@@ -288,7 +315,7 @@ export struct ThirdSelectPhotoGridBase {
         isSelectPhotoGrid: true,
         title: $title,
         selectParams: this.selectParams,
-        onMenuClicked: this.onMenuClicked,
+        onMenuClicked: (action: Action): void => this.onMenuClicked(action),
         isFirstEnter: this.isFirstEnter,
         totalSelectedCount: $selectedCount
       })
@@ -307,7 +334,7 @@ export struct ThirdSelectPhotoGridBase {
       if (this.selectParams.isMultiPick) {
         ThirdSelectedPanel({
           maxSelectCount: this.selectParams.maxSelectCount,
-          onMenuClicked: this.onMenuClicked,
+          onMenuClicked: (action: Action): void => this.onMenuClicked(action),
           mTransition: TAG,
           currentUri: this.currentUri,
           isShowBar: $isShowBar,
@@ -324,32 +351,54 @@ export struct ThirdSelectPhotoGridBase {
   }
 
   jumpToBrowserNormal(targetIndex: number, name: string, item: MediaItem, isSelectMode = false): void {
-    router.pushUrl({
-      url: 'pages/ThirdSelectPhotoBrowser',
-      params: {
-        position: targetIndex,
-        bundleName: this.selectParams.bundleName,
-        transition: name,
-        title: this.title,
-        selectMode: isSelectMode,
-        maxSelectCount: this.selectParams.maxSelectCount,
-        isFromFa: this.selectParams.isFromFa
-      }
-    });
-  }
-
-  jumpToBrowserGeometryTransition(targetIndex: number, name: string, item: MediaItem, isSelectMode = false,
-                                  geometryTapIndex: number = undefined,
-                                  geometryTransitionString: string = undefined): void {
-    this.browserController.showBrowser(geometryTapIndex, geometryTransitionString, TAG, {
+    interface AniParams {
+      position: number;
+      bundleName: string;
+      transition: string;
+      title: string;
+      selectMode: boolean;
+      maxSelectCount: number;
+      isFromFa: boolean;
+    }
+    let params: AniParams = {
       position: targetIndex,
       bundleName: this.selectParams.bundleName,
       transition: name,
       title: this.title,
       selectMode: isSelectMode,
       maxSelectCount: this.selectParams.maxSelectCount,
-      isFromFa: this.selectParams.isFromFa
+      isFromFa: this.selectParams.isFromFa,
+    };
+
+    router.pushUrl({
+      url: 'pages/ThirdSelectPhotoBrowser',
+      params: params
     });
+  }
+
+  jumpToBrowserGeometryTransition(targetIndex: number, name: string, item: MediaItem, isSelectMode = false,
+                                  geometryTapIndex: number,
+                                  geometryTransitionString: string): void {
+    interface AniParams {
+      position: number;
+      bundleName: string;
+      transition: string;
+      title: string;
+      selectMode: boolean;
+      maxSelectCount: number;
+      isFromFa: boolean;
+    }
+
+    let params: AniParams = {
+      position: targetIndex,
+      bundleName: this.selectParams.bundleName,
+      transition: name,
+      title: this.title,
+      selectMode: isSelectMode,
+      maxSelectCount: this.selectParams.maxSelectCount,
+      isFromFa: this.selectParams.isFromFa,
+    };
+    this.browserController.showBrowser(geometryTapIndex, geometryTransitionString, TAG, params);
   }
 
   private initGridRowCount(): void {
@@ -358,7 +407,7 @@ export struct ThirdSelectPhotoGridBase {
     let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
     let calCount = Math.round(
       ((contentWidth - Constants.NUMBER_2 * margin) + Constants.GRID_GUTTER)
-      / (maxThumbWidth + Constants.GRID_GUTTER));
+        / (maxThumbWidth + Constants.GRID_GUTTER));
     let newCount = Math.max(Constants.GRID_MIN_COUNT, calCount);
     if (newCount != this.gridRowCount) {
       this.gridRowCount = newCount;
@@ -366,13 +415,13 @@ export struct ThirdSelectPhotoGridBase {
     Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}, row count ${this.gridRowCount}`);
   }
 
-  private initSelectParams(param) {
-    if (param != null) {
-      this.isItemIdChange = this.itemId && this.itemId !== param.itemId;
+  private initSelectParams(param?: Params): void {
+    if (param) {
+      this.isItemIdChange = (this.itemId !== undefined && this.itemId !== null && this.itemId !== param.itemId) as boolean;
       this.itemId = param.itemId == undefined ? AlbumDefine.ALBUM_ID_ALL : param.itemId;
-      this.dataSource.setAlbumUri(this.itemId);
+      this.dataSource.setAlbumUri(this.itemId as string);
 
-      let albumUri = param.uri == undefined ?
+      let albumUri = param.uri === undefined ?
       UserFileManagerAccess.getInstance().getSystemAlbumUri(UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE) :
       param.uri;
       this.dataSource.setAlbumUri(albumUri);
@@ -400,7 +449,7 @@ export struct ThirdSelectPhotoGridBase {
           : param.maxSelectCount;
       }
       if (this.backFuncBinder) {
-        this.backFuncBinder(this.onBackPress.bind(this));
+        this.backFuncBinder((): void => this.onBackPress());
       }
       Log.debug(TAG, `select param ${JSON.stringify(this.selectParams)}`);
     }
@@ -408,19 +457,19 @@ export struct ThirdSelectPhotoGridBase {
     Log.debug(TAG, `select param ${JSON.stringify(this.selectParams)}, select mode ${this.isSelectedMode}`);
   }
 
-  private updateTitle(param) {
-    let displayName = param.itemDisplayName == undefined ? $r('app.string.album_all') : param.itemDisplayName;
+  private updateTitle(param?: Params): void {
+    let displayName = param?.itemDisplayName == undefined ? $r('app.string.album_all') : param.itemDisplayName;
     if (typeof displayName === 'object') {
-      UiUtil.getResourceString(displayName).then((stringResource) => {
+      UiUtil.getResourceString(displayName as Resource).then((stringResource: string) => {
         this.title = stringResource;
       })
     } else {
-      this.title = displayName;
+      this.title = displayName as string;
     }
     Log.debug(TAG, `update title ${this.title}`);
   }
 
-  private onSelectCallback(position: number, key: string, value: boolean, callback: Function) {
+  private onSelectCallback(position: number, key: string, value: boolean, callback: Function): void{
     Log.debug(TAG, `isHorizontal ${this.isHorizontal}, position ${position}, uri ${key}, select ${value}`)
     let isMultiPick = this.selectParams.isMultiPick;
     if (value && isMultiPick && this.selectedCount >= this.selectParams.maxSelectCount) {
@@ -431,35 +480,36 @@ export struct ThirdSelectPhotoGridBase {
     }
     if (!isMultiPick) {
       // update correct status from select manager
-      value = !this.selectManager.isItemSelected(key);
-      this.selectManager.deSelectAll();
+      value = !this.selectManager?.isItemSelected(key);
+      this.selectManager?.deSelectAll();
     }
-    if (this.selectManager.toggle(key, value, position)) {
+    if (this.selectManager?.toggle(key, value, position)) {
       Log.info(TAG, 'enter event process');
       this.dataSource.onDataChanged(this.dataSource.getDataIndexByUri(key));
       callback && callback(value);
     }
   }
 
-  private jumpBrowserCallback(name: string, item: MediaItem, geometryTapIndex: number = undefined,
-                              geometryTransitionString: string = undefined, isSelectMode = false) {
-    let targetIndex = isSelectMode ? this.selectManager.getSelectItemIndex(item) : this.dataSource.getDataIndex(item);
+  private jumpBrowserCallback(name: string, item: MediaItem, geometryTapIndex: number ,
+                              geometryTransitionString: string, isSelectMode = false) {
+    let selectItemIndex: number = this.selectManager?.getSelectItemIndex(item) ?? Constants.INVALID;
+    let targetIndex = isSelectMode ? selectItemIndex : this.dataSource.getDataIndex(item);
     Log.info(TAG, `jump to photo browser at index: ${targetIndex}, transition: ${name}`);
     AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
-    if (geometryTapIndex != undefined && geometryTransitionString != undefined) {
+    if (geometryTapIndex && geometryTransitionString) {
       this.jumpToBrowserGeometryTransition(
         targetIndex, name, item, isSelectMode, geometryTapIndex, geometryTransitionString);
     } else {
       this.jumpToBrowserNormal(targetIndex, name, item, isSelectMode);
     }
-    ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_CLICK_PREVIEW, null);
+    ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_CLICK_PREVIEW, undefined);
   }
 
-  private onReloadFinishedCallback() {
+  private onReloadFinishedCallback(): void {
     Log.info(TAG, 'ON_DATA_RELOADED');
     this.dataSource.onDataReloaded();
     this.selectFromCameraFunc && this.selectFromCameraFunc();
-    this.selectFromCameraFunc = undefined;
+    this.selectFromCameraFunc = () => {};
   }
 
   private onLoadFinishedCallback(size: number, updateTitle: Function) {
@@ -473,7 +523,7 @@ export struct ThirdSelectPhotoGridBase {
   }
 
   private initSelectManager() {
-    let manager: ThirdSelectManager = AppStorage.Get(Constants.THIRD_SELECT_MANAGER);
+    let manager: ThirdSelectManager = AppStorage.get<ThirdSelectManager>(Constants.THIRD_SELECT_MANAGER) as ThirdSelectManager;
     if (manager && manager.getClassName() === 'ThirdSelectManager') {
       Log.debug(TAG, `use cached select manager, current select count ${manager.getSelectedCount()}`);
       this.selectManager = manager;
@@ -487,7 +537,9 @@ export struct ThirdSelectPhotoGridBase {
       this.selectManager.deSelectAll();
       AppStorage.SetOrCreate(THIRD_SELECT_IS_ORIGIN, false);
     }
-    this.selectManager.setGetMediaItemFunc(this.dataSource.getMediaItemByUri.bind(this.dataSource));
+    this.selectManager.setGetMediaItemFunc((uri: string): MediaItem => {
+      return this.dataSource.getMediaItemByUri(uri);
+    });
   }
 
   private onActive() {
@@ -514,43 +566,52 @@ export struct ThirdSelectPhotoGridBase {
     }
   }
 
-  private setPickResult(uriArray: Array<string>): void {
-    let isOrigin: boolean = AppStorage.Get(THIRD_SELECT_IS_ORIGIN);
+  private setPickResult(uriArray?: Array<string>): void {
+    let isOrigin: boolean = AppStorage.get<boolean>(THIRD_SELECT_IS_ORIGIN) as boolean;
     if (isOrigin == undefined) {
       isOrigin = false;
     }
-    let abilityResult = {
-      'resultCode': 0,
-      'want': {
-        'parameters': {
-          'select-item-list': uriArray,
-          'isOriginal': isOrigin
+    let abilityResult: ability.AbilityResult = {
+      resultCode: (uriArray === null || uriArray === undefined) ? -1 : 0,
+      want: {
+        parameters: {
+          'select-item-list': uriArray as Object,
+          isOriginal: isOrigin
         }
       }
     };
     let self = this;
     let uriLength = 0;
     if (uriArray == null && uriArray == undefined) {
-      globalThis.photosAbilityContext.terminateSelfWithResult(abilityResult).then((result) => {
+      let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+      context.terminateSelfWithResult(abilityResult as ability.AbilityResult).then((result: void) => {
         Log.debug(TAG, `terminateSelfWithResult result: ${result}, self result ${JSON.stringify(abilityResult)}`);
       });
     } else {
       uriLength = uriArray.length;
-      SelectUtil.grantPermissionForUris(uriArray, self.selectParams.bundleName).then(function () {
+      SelectUtil.grantPermissionForUris(uriArray, self.selectParams.bundleName).then(() => {
         Log.info(TAG, `grant permission success.`);
-        globalThis.photosAbilityContext.terminateSelfWithResult(abilityResult).then((result) => {
+        let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+        context.terminateSelfWithResult(abilityResult as ability.AbilityResult).then((result: void) => {
           Log.debug(TAG, `terminateSelfWithResult result: ${result}, self result ${JSON.stringify(abilityResult)}`);
         });
-      }).catch(function (err) {
+      }).catch((err: Error) => {
         Log.error(TAG, `grant permission error: ${JSON.stringify(err)}, self result ${JSON.stringify(abilityResult)}`);
       });
     }
-    ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_RESULT,
-      { "isOriginalChecked": isOrigin, "selectItemSize": uriLength });
+    interface Msg {
+      isOriginalChecked: boolean;
+      selectItemSize: number;
+    }
+    let msg: Msg = {
+      isOriginalChecked: isOrigin,
+      selectItemSize: uriLength,
+    }
+    ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_RESULT, msg);
   }
 
-  private goBackFormEditor() {
-    let formEditorOption = {
+  private goBackFormEditor(): void {
+    let formEditorOption: router.RouterOptions = {
       url: 'pages/FormEditorPage'
     };
     router.replaceUrl(formEditorOption);

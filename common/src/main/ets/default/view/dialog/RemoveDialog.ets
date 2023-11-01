@@ -28,9 +28,9 @@ export struct RemoveDialog {
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Consume dialogCallback: DialogCallback;
   @Consume dialogMessage: Resource;
-  controller: CustomDialogController;
+  controller?: CustomDialogController;
   @StorageLink('confirmText') confirmText: Resource = $r('app.string.dialog_remove');
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   build() {
     Column() {
@@ -69,7 +69,7 @@ export struct RemoveDialog {
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
               Log.debug(TAG, `cancelCallback`);
-              this.controller.close();
+              this.controller?.close();
               this.dialogCallback && this.dialogCallback.cancelCallback();
             })
           }.width('50%')
@@ -99,7 +99,7 @@ export struct RemoveDialog {
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
               Log.debug(TAG, `confirmCallback`);
-              this.controller.close();
+              this.controller?.close();
               this.dialogCallback && this.dialogCallback.confirmCallback();
             })
           }.width('50%')

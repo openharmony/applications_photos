@@ -20,7 +20,7 @@ const TAG: string = 'timeline_TimelineTitleComponent';
 // Group Title
 @Component
 export struct TimelineTitleComponent {
-  @State groupData: TimelineData = new TimelineData(null, null, null);
+  @State groupData: TimelineData = new TimelineData();
   @Consume isSelectedMode: boolean;
   @State isSelected: boolean = false;
   @Consume broadCast: BroadCast;

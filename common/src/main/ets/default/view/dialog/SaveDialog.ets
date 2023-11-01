@@ -20,8 +20,8 @@ import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class SaveDialogCallback {
-  saveAsNewCallback: Function
-  replaceOriginalCallback: Function
+  saveAsNewCallback: Function = (): void => {};
+  replaceOriginalCallback: Function = (): void => {};
 }
 
 @Extend(Text) function buttonTextExtend() {
@@ -31,7 +31,7 @@ export class SaveDialogCallback {
   .fontWeight(FontWeight.Medium)
 }
 
-@Extend(Button) function verticalButtonExtend(isPcDevice) {
+@Extend(Button) function verticalButtonExtend(isPcDevice: boolean) {
   .width('100%')
   .height($r('app.float.details_dialog_button_height'))
   .borderRadius($r('sys.float.ohos_id_corner_radius_button'))
@@ -46,9 +46,9 @@ export struct SaveDialog {
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Consume broadCast: BroadCast;
   @Consume saveDialogCallback: SaveDialogCallback;
-  controller: CustomDialogController;
+  controller?: CustomDialogController;
   readonly buttonWidth: number = 100 / 3;
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   @Builder horizontalThreeButtons() {
     Stack({ alignContent: Alignment.Top }) {
@@ -64,7 +64,7 @@ export struct SaveDialog {
           .backgroundColor($r('app.color.transparent'))
           .height($r('app.float.details_dialog_button_height'))
           .onClick(() => {
-            this.controller.close()
+            this.controller?.close();
           })
         }.width(`${this.buttonWidth}%`)
 
@@ -83,7 +83,7 @@ export struct SaveDialog {
           .height($r('app.float.details_dialog_button_height'))
           .onClick(() => {
             this.broadCast.emit(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
-            this.controller.close()
+            this.controller?.close();
             this.saveDialogCallback && this.saveDialogCallback.replaceOriginalCallback()
           })
         }.width(`${this.buttonWidth}%`)
@@ -101,7 +101,7 @@ export struct SaveDialog {
           .backgroundColor($r('app.color.transparent'))
           .height($r('app.float.details_dialog_button_height'))
           .onClick(() => {
-            this.controller.close()
+            this.controller?.close();
             this.broadCast.emit(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
             this.saveDialogCallback && this.saveDialogCallback.saveAsNewCallback()
           })
@@ -126,7 +126,7 @@ export struct SaveDialog {
         .verticalButtonExtend(this.isPcDevice)
         .margin({ bottom: $r('app.float.vertical_three_buttons_margin_bottom') })
         .onClick(() => {
-          this.controller.close()
+          this.controller?.close();
           this.broadCast.emit(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
           this.saveDialogCallback && this.saveDialogCallback.saveAsNewCallback()
         })
@@ -142,7 +142,7 @@ export struct SaveDialog {
         .margin({ bottom: $r('app.float.vertical_three_buttons_margin_bottom') })
         .onClick(() => {
           this.broadCast.emit(BroadCastConstants.SHOW_EDIT_SAVE_PROGRESS_DIALOG, []);
-          this.controller.close()
+          this.controller?.close();
           this.saveDialogCallback && this.saveDialogCallback.replaceOriginalCallback()
         })
       }
@@ -155,7 +155,7 @@ export struct SaveDialog {
         .key('Cancel')
         .verticalButtonExtend(this.isPcDevice)
         .onClick(() => {
-          this.controller.close()
+          this.controller?.close();
         })
       }.width('100%')
     }

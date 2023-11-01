@@ -19,11 +19,11 @@ const TAG: string = 'common_GridScrollBar';
 
 @Component
 export struct GridScrollBar {
-  scroller: Scroller;
+  scroller: Scroller | null = null;
   @State isClickScrollBar: boolean = false;
 
   build() {
-    ScrollBar({ scroller: this.scroller, direction: ScrollBarDirection.Vertical,
+    ScrollBar({ scroller: this.scroller as Scroller, direction: ScrollBarDirection.Vertical,
       state: BarState.Auto }) {
       Row() {
         if (this.isClickScrollBar) {
@@ -46,12 +46,12 @@ export struct GridScrollBar {
       x: this.isClickScrollBar ? $r('app.float.scroll_bar_big_width') : $r('app.float.scroll_bar_small_width'),
       y: 0
     })
-    .onTouch((event: TouchEvent) => {
-      if (event.type == TouchType.Move && !this.isClickScrollBar) {
+    .onTouch((event?: TouchEvent) => {
+      if (event?.type == TouchType.Move && !this.isClickScrollBar) {
         Log.debug(TAG, `scrollBar first TouchType.Move`);
         this.isClickScrollBar = true;
-      } else if (event.type == TouchType.Up || event.type == TouchType.Cancel) {
-        Log.debug(TAG, `scrollBar TouchType.Up or Cancel. type=${event.type}`);
+      } else if (event?.type == TouchType.Up || event?.type == TouchType.Cancel) {
+        Log.debug(TAG, `scrollBar TouchType.Up or Cancel. type=${event?.type}`);
         this.isClickScrollBar = false;
       }
     })

@@ -21,7 +21,7 @@ const TAG: string = 'common_NoPhotoComponent';
 
 @Component
 export struct NoPhotoComponent {
-  title: Resource;
+  title?: Resource;
 
   // set an initial value temporarily, later change to 0.
   @State offSetY: number = Constants.EMPTY_PAGE_DEFAULT_OFFSET;
@@ -33,15 +33,13 @@ export struct NoPhotoComponent {
 
   aboutToAppear(): void {
     Log.info(TAG, `aboutToAppear`);
-    this.updateImageLayout = this.updateImageLayout.bind(this);
-    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateImageLayout);
+    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, (): void => this.updateImageLayout());
     this.updateImageLayout();
   }
 
   aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
-    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateImageLayout);
-    this.updateImageLayout = null;
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, (): void => this.updateImageLayout());
   }
 
   build() {

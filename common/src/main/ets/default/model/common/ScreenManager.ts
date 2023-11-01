@@ -79,10 +79,10 @@ export class ScreenManager {
   }
 
   static getInstance(): ScreenManager {
-    if (AppStorage.Get(Constants.APP_KEY_SCREEN_MANAGER) == null) {
+    if (AppStorage.get(Constants.APP_KEY_SCREEN_MANAGER) == null) {
       AppStorage.SetOrCreate(Constants.APP_KEY_SCREEN_MANAGER, new ScreenManager());
     }
-    let manager: ScreenManager = AppStorage.Get(Constants.APP_KEY_SCREEN_MANAGER);
+    let manager: ScreenManager = AppStorage.get(Constants.APP_KEY_SCREEN_MANAGER);
     return manager;
   }
 
@@ -157,7 +157,7 @@ export class ScreenManager {
 
   // Returns the height of the layout area (LayoutHeight = WindowHeight - WindowDecorHeight).
   getWinLayoutHeight(): number {
-    let deviceTp: string = AppStorage.Get('deviceType') as string;
+    let deviceTp: string = AppStorage.get('deviceType') as string;
     Log.debug(TAG, `deviceTp=${deviceTp}, isFull=${this.isFullScreen}, winH=${this.winHeight}`);
     if (deviceTp === Constants.DEFAULT_DEVICE_TYPE) {
       return this.winHeight;
@@ -191,7 +191,9 @@ export class ScreenManager {
 
   async checkWindowMode(): Promise<void> {
     let before = this.windowMode;
-    let mode = await globalThis.photosWindowStage.getWindowMode();
+    let windowStage: window.WindowStage = AppStorage.get<window.WindowStage>('photosWindowStage');
+    // @ts-ignore
+    let mode: WindowMode = await windowStage.getWindowMode() as WindowMode;
     Log.info(TAG, `photos application before/current window mode: ${before}/${mode}`);
 
     if (before == mode) {
@@ -241,7 +243,7 @@ export class ScreenManager {
     try {
       topWindow.setLayoutFullScreen(true, () => {
         Log.debug(TAG, 'setFullScreen true Succeeded');
-        if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
+        if (AppStorage.get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
           this.hideStatusBar();
         } else {
           this.setWindowBackgroundColorDefault(true);
@@ -308,7 +310,7 @@ export class ScreenManager {
   }
 
   setSystemUi(isShowBar: boolean): void {
-    let deviceTp: string = AppStorage.Get('deviceType') as string;
+    let deviceTp: string = AppStorage.get('deviceType') as string;
     Log.debug(TAG, `setSystemUi start, isShowBar=${isShowBar}, deviceType=${deviceTp}`);
     let topWindow: window.Window = this.getMainWindow();
     Log.debug(TAG, 'getTopWindow start');
@@ -336,17 +338,17 @@ export class ScreenManager {
   }
 
   isHorizontal(): boolean {
-    if (AppStorage.Get(Constants.SCREEN_ORIENTATION_HORIZONTAL) == null) {
+    if (AppStorage.get(Constants.SCREEN_ORIENTATION_HORIZONTAL) == null) {
       AppStorage.SetOrCreate(Constants.SCREEN_ORIENTATION_HORIZONTAL, this.horizontal);
     }
-    return AppStorage.Get(Constants.SCREEN_ORIENTATION_HORIZONTAL);
+    return AppStorage.get(Constants.SCREEN_ORIENTATION_HORIZONTAL);
   }
 
   isSidebar(): boolean {
-    if (AppStorage.Get(Constants.SCREEN_SIDEBAR) == null) {
+    if (AppStorage.get(Constants.SCREEN_SIDEBAR) == null) {
       AppStorage.SetOrCreate(Constants.SCREEN_SIDEBAR, this.sidebar);
     }
-    return AppStorage.Get(Constants.SCREEN_SIDEBAR);
+    return AppStorage.get(Constants.SCREEN_SIDEBAR);
   }
 
   getColumnsWidth(count: number): number {
@@ -370,7 +372,7 @@ export class ScreenManager {
   }
 
   private getMainWindow(): window.Window {
-    return AppStorage.Get<window.Window>('mainWindow');
+    return AppStorage.get<window.Window>('mainWindow');
   }
 
   private emit(event: string, argument: unknown[]): void {

@@ -17,6 +17,7 @@ import { Log } from '../../utils/Log';
 import { ColumnSize, ScreenManager } from '../../model/common/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 import data_preferences from '@ohos.data.preferences';
+import { BusinessError } from '@ohos.base';
 
 const TAG: string = 'common_DeleteDialog';
 
@@ -28,19 +29,19 @@ export struct DeleteDialog {
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Consume dialogCallback: DialogCallback;
   @Consume dialogMessage: Resource;
-  controller: CustomDialogController;
+  controller?: CustomDialogController;
   @StorageLink('isFirstTimeDelete') isFirstTimeDelete: boolean = false;
   @StorageLink('confirmText') confirmText: Resource = $r('app.string.dialog_delete');
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   aboutToDisappear() {
     if (this.isFirstTimeDelete) {
       AppStorage.SetOrCreate(Constants.IS_FIRST_TIME_DELETE, false);
-      let pref: data_preferences.Preferences = AppStorage.Get(Constants.PHOTOS_STORE_KEY);
+      let pref: data_preferences.Preferences = AppStorage.get<data_preferences.Preferences>(Constants.PHOTOS_STORE_KEY) as data_preferences.Preferences;
       pref.put(Constants.IS_FIRST_TIME_DELETE, false).then(() => {
         Log.debug(TAG, `Succeeded in putting the value of '${Constants.IS_FIRST_TIME_DELETE}'.`);
         pref.flush();
-      }).catch((err) => {
+      }).catch((err: BusinessError) => {
         Log.error(TAG, `Failed to put the value of '${Constants.IS_FIRST_TIME_DELETE}'. Cause: ${err}`);
       });
     }
@@ -102,7 +103,7 @@ export struct DeleteDialog {
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
               Log.debug(TAG, `cancelCallback`);
-              this.controller.close();
+              this.controller?.close();
               this.dialogCallback && this.dialogCallback.cancelCallback();
             })
           }.width('50%')
@@ -132,7 +133,7 @@ export struct DeleteDialog {
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
               Log.debug(TAG, `confirmCallback`);
-              this.controller.close();
+              this.controller?.close();
               this.dialogCallback && this.dialogCallback.confirmCallback();
             })
           }.width('50%')

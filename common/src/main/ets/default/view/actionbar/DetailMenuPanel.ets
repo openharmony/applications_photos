@@ -25,7 +25,7 @@ const TAG: string = 'common_DetailMenuPanel';
 export struct DetailMenuPanel {
   @Consume menuList: Action[];
   actionBarProp: ActionBarProp = new ActionBarProp();
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   isLeft = false;
 
   build() {
@@ -41,7 +41,7 @@ export struct DetailMenuPanel {
           colorMode: this.actionBarProp.getColorMode()
         })
           .margin({ right: $r('app.float.max_padding_end') })
-      }, menu => menu.actionID.toString())
+      }, (menu: Action) => menu.actionID.toString())
     }
     .key('DetailMenuPanel')
   }

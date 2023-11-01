@@ -25,9 +25,9 @@ export struct PhotoGridPageToolBar {
   @Link @Watch('updateToolbar') totalSelectedCount: number;
   @Provide selectedCount: number = 0;
   @Consume isEmpty: boolean;
-  isRecycleAlbum: boolean;
-  onMenuClicked: Function;
-  isDistributedAlbum: boolean;
+  isRecycleAlbum: boolean = false;
+  onMenuClicked: Function = (): void => {};
+  isDistributedAlbum: boolean = false;
   @Provide toolMenuList: Array<Action> = new Array<Action>();
   @Consume hidePopup: boolean;
 

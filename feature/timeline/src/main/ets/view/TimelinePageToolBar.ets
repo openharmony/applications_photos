@@ -24,7 +24,7 @@ export struct TimelinePageToolBar {
   @Consume @Watch('updateToolbar') isAllSelected: boolean;
   @Link @Watch('updateToolbar') totalSelectedCount: number;
   @Provide selectedCount: number = 0;
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @Provide toolMenuList: Array<Action> = new Array<Action>();
   @Consume moreMenuList: Action[];
   @Consume hidePopup: boolean;

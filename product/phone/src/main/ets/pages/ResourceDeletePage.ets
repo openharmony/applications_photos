@@ -26,6 +26,7 @@ import { CustomDialogView } from '@ohos/common/CommonComponents';
 import { MenuOperation } from '@ohos/common';
 import dialogRequest from '@ohos.app.ability.dialogRequest';
 import uri from '@ohos.uri';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'ResourceDeletePage';
 
@@ -35,7 +36,7 @@ struct ResourceDeletePage {
   @Provide broadCast: BroadCast = new BroadCast();
 
   isShow: boolean = false;
-  selectManager: SelectManager;
+  selectManager: SelectManager = new SelectManager();
 
   onPageShow() {
     if (this.isShow) {
@@ -44,30 +45,30 @@ struct ResourceDeletePage {
     this.isShow = true;
     Log.info(TAG, 'onPageShow');
     let menuOperation: MenuOperation;
-    let menuContext: MenuContext = new MenuContext();
-    this.onOperationEnd = this.onOperationEnd.bind(this);
-    this.onOperationCancel = this.onOperationCancel.bind(this);
+    let menuContext: MenuContext;
+    menuContext = new MenuContext();
     menuContext
       .withSelectManager(this.selectManager)
-      .withOperationEndCallback(this.onOperationEnd)
-      .withOperationCancelCallback(this.onOperationCancel)
+      .withOperationEndCallback((): void => this.onOperationEnd())
+      .withOperationCancelCallback((): void => this.onOperationCancel())
       .withBroadCast(this.broadCast);
     menuOperation = MenuOperationFactory.getInstance()
       .createMenuOperation(ThirdDeleteOperation, menuContext);
-    menuOperation.doAction()
+    menuOperation.doAction();
   }
 
   aboutToAppear() {
     this.selectManager = new SelectManager();
-    let uris: [] = AppStorage.Get("uris");
-    Log.info(TAG, `aboutToAppear uris : ${JSON.stringify(uris)}`);
-    if (uris != undefined && uris.length > 0) {
-      uris.forEach(uri => {
-        if (!this.selectManager.clickedSet.has(uri)) {
-          this.selectManager.clickedSet.add(uri);
-        }
-      })
+    let uris: string[] | undefined = AppStorage.get<string[]>('uris');
+    Log.info(TAG, 'aboutToAppear uris : ' + JSON.stringify(uris));
+    if (!uris?.length) {
+      return;
     }
+    uris.forEach((uri: string): void => {
+      if (this.selectManager !== null && !this.selectManager.clickedSet.has(uri)) {
+        this.selectManager.clickedSet.add(uri);
+      }
+    })
   }
 
   aboutToDisappear() {
@@ -95,18 +96,13 @@ struct ResourceDeletePage {
     this.setDeleteResult(dialogRequest.ResultCode.RESULT_CANCEL);
   }
 
-  private setDeleteResult(result: dialogRequest.ResultCode) {
-    Log.info(TAG, `start to setDeleteResult : ${result}}`);
+  private setDeleteResult(result: dialogRequest.ResultCode): void {
+    Log.info(TAG, 'start to setDeleteResult : ' + result);
     try {
-      var requestCallback = AppStorage.Get("requestCallback");
-      let myResult = {
-        result: result,
-      }
-      // @ts-ignore
-      requestCallback.setRequestResult(myResult);
-      globalThis.photoAbilityContext.terminateSelf();
-    } catch(err) {
-      Log.info(TAG, `getRequestInfo err : ${JSON.stringify(err)}`);
+      (AppStorage.get<dialogRequest.RequestCallback>('requestCallback') as dialogRequest.RequestCallback).setRequestResult({ result });
+      (AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext).terminateSelf();
+    } catch (err) {
+      Log.info(TAG, `getRequestInfo err= ${JSON.stringify(err)}`);
     }
   }
 }

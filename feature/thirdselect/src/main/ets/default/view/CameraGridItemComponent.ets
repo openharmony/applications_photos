@@ -16,6 +16,9 @@
 import { AlbumDefine, BigDataConstants, Constants, Log, ReportToBigDataUtil } from '@ohos/common';
 import wantConstant from '@ohos.ability.wantConstant';
 import { SelectParams } from '../utils/ThirdSelectConstants';
+import ability from '@ohos.ability.ability';
+import common from '@ohos.app.ability.common';
+import Want from '@ohos.app.ability.Want';
 
 const TAG: string = 'thiSel_CameraGridItemComponent';
 
@@ -24,7 +27,7 @@ export struct CameraGridItemComponent {
   selectParams: SelectParams = SelectParams.defaultParam();
   resultUri: string = '';
   @Consume @Watch('onShow') isShow: boolean;
-  updateDataFunc: Function;
+  updateDataFunc: Function = (): void => {};
 
   aboutToAppear(): void {
     Log.info(TAG, `aboutToAppear`);
@@ -64,11 +67,19 @@ export struct CameraGridItemComponent {
       .key('PickerCamera')
       .justifyContent(FlexAlign.Center)
       .alignItems(HorizontalAlign.Center)
-      .onClick((event: ClickEvent) => {
+      .onClick((event?: ClickEvent) => {
         this.jumpCameraTakePhoto().then((result) => {
           Log.info(TAG, `resourceUri = ${JSON.stringify(result)}`);
-          this.resultUri = result?.want?.parameters?.resourceUri;
-        }).catch((err) => {
+          let want: Want | null = result.want as Want;
+          if(want == null || want.parameters == null) return;
+          this.resultUri = want.parameters['resourceUri'] as string;
+
+          if (this.resultUri?.length > 0) {
+
+            this.isShow = true;
+            this.onShow();
+          }
+        }).catch((err: Error) => {
           Log.error(TAG, `jumpCameraTakephoto err: ${err}`);
         });
       })
@@ -88,20 +99,26 @@ export struct CameraGridItemComponent {
     }
   }
 
-  private async jumpCameraTakePhoto(): Promise<any> {
+  private async jumpCameraTakePhoto(): Promise<ability.AbilityResult> {
     let action = this.selectParams.filterMediaType == AlbumDefine.FILTER_MEDIA_TYPE_VIDEO
       ? wantConstant.Action.ACTION_VIDEO_CAPTURE
       : wantConstant.Action.ACTION_IMAGE_CAPTURE;
     let uri = this.selectParams.filterMediaType == AlbumDefine.FILTER_MEDIA_TYPE_VIDEO
       ? Constants.CAMERA_TYPE_VIDEO
       : Constants.CAMERA_TYPE_CAPTURE;
-    ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_CLICK_CAMERA_ID, { 'action': action });
+    interface Msg {
+      action: wantConstant.Action
+    }
+    let msg: Msg = {
+      action: action
+    }
+    ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_CLICK_CAMERA_ID, msg);
 
     let supportMultiMode: boolean = (this.selectParams.filterMediaType == AlbumDefine.FILTER_MEDIA_TYPE_ALL);
-    let want = {
-      'action': action,
-      'bundleName': Constants.CAMERA_BUNDLE_NAME,
-      'parameters': {
+    let want: Want = {
+      action: action,
+      bundleName: Constants.CAMERA_BUNDLE_NAME,
+      parameters: {
         uri: uri,
         supportMultiMode: supportMultiMode,
         callBundleName: this.selectParams.bundleName
@@ -109,7 +126,8 @@ export struct CameraGridItemComponent {
     };
 
     Log.debug(TAG, `jump camera want: ${JSON.stringify(want)}`);
-    let result = await globalThis.photosAbilityContext.startAbilityForResult(want);
+    let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+    let result = await context.startAbilityForResult(want);
     return result;
   }
 
@@ -118,16 +136,17 @@ export struct CameraGridItemComponent {
       Log.error(TAG, `no valid uri!`);
       return;
     }
-    let abilityResult = {
-      'resultCode': 0,
-      'want': {
-        'parameters': {
+    let abilityResult: ability.AbilityResult = {
+      resultCode: (uri == null || uri.length <= 0) ? -1 : 0,
+      want: {
+        parameters: {
           'select-item-list': [uri],
         }
       }
     };
-    globalThis.photosAbilityContext.terminateSelfWithResult(abilityResult).then((result) => {
-      Log.info(TAG, `terminateSelf result: ${result}`);
+    let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+    context.terminateSelfWithResult(abilityResult as ability.AbilityResult).then((result: void) => {
+      Log.info(TAG, `terminateSelfWithResult abilityResult: ${abilityResult} result: ${result}`);
     });
   }
 }
