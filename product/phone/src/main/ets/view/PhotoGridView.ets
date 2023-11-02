@@ -125,7 +125,6 @@ export struct PhotoGridView {
   private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void =>
   this.jumpThirdPhotoBrowser(name, item, geometryTapIndex, geometryTransitionString);
   private onLoadingFinishedFunc: Function = (size: number): void => this.onLoadingFinished(size);
-  private doAnimationFunc: Function = (): void => this.doAnimationFn();
   private onDataReloadedFunc: Function = (): void => this.onDataReloaded();
   private onUpdateFavorStateFunc: Function = (item: MediaItem): void => this.onUpdateFavorState(item);
 
@@ -571,8 +570,11 @@ export struct PhotoGridView {
     this.broadCast.on(BroadCastConstants.JUMP_PHOTO_BROWSER, this.jumpPhotoBrowserFunc);
     this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
     this.broadCast.on(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
-    this.broadCast.on(BroadCastConstants.DO_ANIMATION, this.doAnimationFunc);
     this.appBroadCast.on(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorStateFunc);
+    this.appBroadCast.on(BroadCastConstants.DO_ANIMATION, (): void => {
+      this.doAnimation();
+      this.appBroadCast.off(BroadCastConstants.DO_ANIMATION, null);
+    });
 
     AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
     this.mSelectManager.registerCallback('allSelect', (newState: boolean) => {
@@ -675,11 +677,6 @@ export struct PhotoGridView {
 
   private onLoadingFinished(size: number): void {
     Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
-  }
-
-  private doAnimationFn(): void {
-    this.doAnimation();
-    this.appBroadCast.off(BroadCastConstants.DO_ANIMATION, this.doAnimationFunc);
   }
 
   private onDataReloaded(): void {
@@ -786,7 +783,6 @@ export struct PhotoGridView {
     this.broadCast.off(BroadCastConstants.JUMP_PHOTO_BROWSER, this.jumpPhotoBrowserFunc);
     this.broadCast.off(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
     this.broadCast.off(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
-    this.broadCast.off(BroadCastConstants.DO_ANIMATION, this.doAnimationFunc);
     this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
     this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorStateFunc);
     this.dataSource.releaseBroadCast();
