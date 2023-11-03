@@ -14,11 +14,13 @@
  */
 import { Log } from './Log';
 import window from '@ohos.window';
+import { Router, UIContext } from '@ohos.arkui.UIContext';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'common_WindowUtil';
 
 export class WindowUtil {
-  static setWindowKeepScreenOn(context, isKeepScreenOn: boolean) {
+  static setWindowKeepScreenOn(context: common.UIAbilityContext, isKeepScreenOn: boolean): void {
     try {
       window.getLastWindow(context).then((windows) => {
         windows.setWindowKeepScreenOn(isKeepScreenOn).then(() => {
@@ -34,7 +36,7 @@ export class WindowUtil {
     }
   }
 
-  static setPreferredOrientation(context, orientation: number) {
+  static setPreferredOrientation(context: common.UIAbilityContext, orientation: number): void {
     try {
       window.getLastWindow(context, (err, data) => {
         if (err.code || !data) {
@@ -52,6 +54,24 @@ export class WindowUtil {
       });
     } catch (exception) {
       Log.error(TAG, 'Failed to set window orientation. Cause: ' + JSON.stringify(exception));
+    }
+  }
+
+  static prepareWinRouter(): void {
+    Log.debug(TAG, `prepareWinRouter AppStorage.get<Router>('router')=${AppStorage.get<Router>('router')}`);
+    if (AppStorage.get('router')) {
+      return;
+    }
+    try {
+      AppStorage.setOrCreate('uiContext', (AppStorage.get<window.Window>('mainWindow') as window.Window).getUIContext());
+    } catch (error) {
+      Log.error(TAG, `Failed to get UIContext, error: ${error}`);
+      return;
+    }
+    if (AppStorage.get('uiContext')) {
+      Log.info(TAG, `prepareWinRouter AppStorage.get<window.Window>('uiContext')=${AppStorage.get<window.Window>('uiContext')}`);
+      AppStorage.setOrCreate('router', (AppStorage.get<UIContext>('uiContext')).getRouter());
+      Log.info(TAG, `prepareWinRouter localRouter=${AppStorage.get<Router>('router')}`);
     }
   }
 }

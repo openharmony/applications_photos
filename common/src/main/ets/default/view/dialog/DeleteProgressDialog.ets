@@ -21,21 +21,21 @@ const TAG: string = 'common_DeleteProgressDialog';
 
 @Observed
 export class DeleteProgressParam {
-  currentCount: number
-  totalCount: number
-  message: Resource
+  currentCount: number = 0;
+  totalCount: number = 0;
+  message?: Resource
 }
 
 @CustomDialog
 export struct DeleteProgressDialog {
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller: CustomDialogController
+  controller?: CustomDialogController
   @Consume deleteProgress: number;
   @Consume deleteProgressParam: DeleteProgressParam;
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   build() {
     Column() {

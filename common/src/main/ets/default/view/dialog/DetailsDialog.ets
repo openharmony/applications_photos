@@ -24,16 +24,16 @@ const TAG: string = 'common_DetailsDialog';
 
 @Observed
 export class MediaDetails {
-  mediaType: number
-  height: number
-  width: number
-  size: number
-  duration: number
-  title: string
-  dateTaken: number
-  uri: string
-  displayName: string
-  dateModified: number
+  mediaType: number = 0;
+  height: number = 0;
+  width: number = 0;
+  size: number = 0;
+  duration: number = 0;
+  title: string = '';
+  dateTaken: number = 0;
+  uri: string = '';
+  displayName: string = '';
+  dateModified: number = 0;
 }
 
 @CustomDialog
@@ -42,16 +42,16 @@ export struct DetailsDialog {
   static readonly EXTERNAL_PREFIX_NUM = 2;
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   sizeConvert = 1024;
-  controller: CustomDialogController;
-  dataTime: string;
+  controller?: CustomDialogController;
+  dataTime: string = '';
   @Consume mediaDetails: MediaDetails;
   @Consume isDistributedAlbum: boolean;
   @State refresh: boolean = false;
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
-  onWindowSizeChangeCallBack = () => this.updateDialogSize();
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
+  onWindowSizeChangeCallBack = (): void => this.updateDialogSize();
 
   aboutToAppear() {
     let localizedDate = DateUtil.getLocalizedDate(this.mediaDetails.dateTaken);
@@ -65,7 +65,6 @@ export struct DetailsDialog {
   aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.onWindowSizeChangeCallBack = null;
   }
 
   getResolution(height: number, width: number): string {
@@ -151,7 +150,7 @@ export struct DetailsDialog {
         .backgroundColor(this.isPcDevice ? $r('sys.color.ohos_id_color_button_normal') : $r('app.color.transparent'))
         .height($r('app.float.details_dialog_button_height'))
         .onClick(() => {
-          this.controller.close()
+          this.controller?.close();
         })
         .margin({
           left: $r('app.float.dialog_single_button_indent_margin'),

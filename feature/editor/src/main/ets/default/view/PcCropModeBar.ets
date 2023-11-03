@@ -39,13 +39,13 @@ export struct PcCropModeBar {
   @State rulerSwitchOn: boolean = true;
   @State frameStyleSwitchOn: boolean = true;
   private rulerComponentSize: number = 0;
-  private rulerChanged: Function = undefined;
-  private resetClicked: Function = undefined;
+  private rulerChanged: Function = (): void => {};
+  private resetClicked: Function = (): void => {};
 
   aboutToAppear() {
-    this.rulerChanged = this.onRulerChanged.bind(this);
+    this.rulerChanged = (number: number): void => this.onRulerChanged(number);
     this.broadCast.on(Constants.RULER_CHANGED, this.rulerChanged);
-    this.resetClicked = this.onResetClicked.bind(this);
+    this.resetClicked = (): void => this.onResetClicked();
     this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClicked);
     this.rulerComponentSize = this.screenWidth;
     Log.debug(TAG, `this.rulerComponentSize = ${this.rulerComponentSize}`);
@@ -171,8 +171,8 @@ export struct PcCropModeBar {
       }
       .width('100%')
       .margin({ bottom: $r('app.float.crop_vertical_padding_right') })
-      .onClick(() => {
-        this.switchFrameStyle()
+      .onClick((): void => {
+        this.switchFrameStyle();
       })
 
       // 剪切风格bar

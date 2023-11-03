@@ -256,6 +256,7 @@ export class TimelineDataSource extends MediaDataSource {
   }
 
   onPhotoBrowserActive(isActive: boolean, transition: string): void {
+    Log.debug(TAG, `onPhotoBrowserActive ${isActive}, ${transition}`);
     if (transition == Constants.PHOTO_TRANSITION_TIMELINE) {
       if (isActive) {
         this.onActive();
@@ -265,6 +266,7 @@ export class TimelineDataSource extends MediaDataSource {
     } else if (transition == Constants.PHOTO_TRANSITION_EDIT) {
       if (isActive) {
         this.isEditSaveReload = true;
+        this.onActive();
       } else {
         this.isEditSaveReload = false;
       }

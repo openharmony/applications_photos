@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 
-import { Action, Log, ToolBar } from '@ohos/common';
+import { Action, Log } from '@ohos/common';
+import { ToolBar } from '@ohos/common/CommonComponents';
 
 const TAG: string = 'timeline_TimelinePageToolBar';
 
@@ -23,7 +24,7 @@ export struct TimelinePageToolBar {
   @Consume @Watch('updateToolbar') isAllSelected: boolean;
   @Link @Watch('updateToolbar') totalSelectedCount: number;
   @Provide selectedCount: number = 0;
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @Provide toolMenuList: Array<Action> = new Array<Action>();
   @Consume moreMenuList: Action[];
   @Consume hidePopup: boolean;

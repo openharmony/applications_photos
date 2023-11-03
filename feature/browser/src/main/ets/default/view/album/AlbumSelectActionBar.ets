@@ -15,7 +15,6 @@
 
 import {
   Action,
-  ActionBar,
   ActionBarMode,
   ActionBarProp,
   ActionBarSelectionMode,
@@ -23,6 +22,7 @@ import {
   Log,
   ScreenManager
 } from '@ohos/common';
+import { ActionBar } from '@ohos/common/CommonComponents';
 
 const TAG: string = 'browser_AlbumSelectActionBar';
 
@@ -34,7 +34,7 @@ export struct AlbumSelectActionBar {
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @Link @Watch('createActionBar') totalSelectedCount: number;
   @Provide selectedCount: number = 0;
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @Link @Watch('updateMenu') menuList: Action[];
   @Provide moreMenuList: Action[] = new Array<Action>();
   @Provide hidePopup: boolean = false;

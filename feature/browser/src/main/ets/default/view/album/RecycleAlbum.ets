@@ -17,6 +17,18 @@ import { Constants, Log } from '@ohos/common';
 
 const TAG: string = 'browser_RecycleAlbum';
 
+interface MsgOnError {
+  componentWidth: number;
+  componentHeight: number;
+}
+
+interface MsgOnComplete {
+  width: number;
+  height: number;
+  componentWidth: number;
+  componentHeight: number;
+}
+
 @Component
 export struct RecycleAlbum {
   @State icHeight: number = 0;
@@ -41,23 +53,19 @@ export struct RecycleAlbum {
           .width($r('app.float.recycle_album_cover_icon_size'))
           .height($r('app.float.recycle_album_cover_icon_size'))
           .fillColor($r('app.color.empty_or_recycle_album_icon'))
-          .onError((msg: {
-            componentWidth: number,
-            componentHeight: number
-          }) => {
-            Log.debug(TAG, `image load failed and its componentWidth is: ${msg.componentWidth}`);
-            Log.debug(TAG, `image load failed and its componentHeight is: ${msg.componentHeight}`);
+          .onError((msg?: MsgOnError) => {
+            if(msg){
+              Log.debug(TAG, `image load failed and its componentWidth is: ${msg.componentWidth}`);
+              Log.debug(TAG, `image load failed and its componentHeight is: ${msg.componentHeight}`);
+            }
           })
-          .onComplete((msg: {
-            width: number,
-            height: number,
-            componentWidth: number,
-            componentHeight: number
-          }) => {
-            Log.debug(TAG, `image load successfully and its width is: ${msg.width}`);
-            Log.debug(TAG, `image load successfully and its height is: ${msg.height}`);
-            Log.debug(TAG, `image load successfully and its componentWidth is: ${msg.componentWidth}`);
-            Log.debug(TAG, `image load successfully and its componentHeight is: ${msg.componentHeight}`);
+          .onComplete((msg?: MsgOnComplete) => {
+            if(msg){
+              Log.debug(TAG, `image load successfully and its width is: ${msg.width}`);
+              Log.debug(TAG, `image load successfully and its height is: ${msg.height}`);
+              Log.debug(TAG, `image load successfully and its componentWidth is: ${msg.componentWidth}`);
+              Log.debug(TAG, `image load successfully and its componentHeight is: ${msg.componentHeight}`);
+            }
           })
       }
       .height(this.icHeight)

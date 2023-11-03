@@ -15,7 +15,6 @@
 
 import {
   Action,
-  ActionBar,
   ActionBarMode,
   ActionBarProp,
   ActionBarSelectionMode,
@@ -23,6 +22,7 @@ import {
   Log,
   ScreenManager
 } from '@ohos/common';
+import { ActionBar } from '@ohos/common/CommonComponents';
 
 const TAG: string = 'timeline_TimelinePageActionBar';
 
@@ -34,7 +34,7 @@ export struct TimelinePageActionBar {
   @Link @Watch('updateActionBarProp') totalSelectedCount: number;
   @Provide selectedCount: number = 0;
   @Consume @Watch('updatePlaceholderStatus') isShowSideBar: boolean;
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @StorageLink('isHorizontal') @Watch('updateActionBarProp') isHorizontal: boolean
     = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
@@ -42,11 +42,10 @@ export struct TimelinePageActionBar {
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
   @State isNeedPlaceholder: boolean = true;
   @Consume moreMenuList: Action[];
-  private deviceType: string;
+  @StorageLink('deviceType') deviceType: string | undefined = AppStorage.get<string>('deviceType') ;
   private actionBarPaddingTop: number | Resource = 0;
 
   aboutToAppear(): void {
-    this.deviceType = AppStorage.Get<string>('deviceType');
     if (this.deviceType === Constants.PC_DEVICE_TYPE) {
       this.actionBarPaddingTop = $r('app.float.album_set_page_action_bar_padding_top');
     } else if (this.deviceType === Constants.PAD_DEVICE_TYPE) {
@@ -91,8 +90,7 @@ export struct TimelinePageActionBar {
   private createHorizontalActionBar(): ActionBarProp {
     let menuList: Array<Action> = new Array<Action>();
     let actionBarProp: ActionBarProp = new ActionBarProp();
-    const deviceType: string = AppStorage.Get('deviceType');
-    if (!this.isEmpty && deviceType === Constants.PC_DEVICE_TYPE) {
+    if (!this.isEmpty && this.deviceType === Constants.PC_DEVICE_TYPE) {
       menuList.push(Action.MULTISELECT);
     }
     actionBarProp

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import type { DialogCallback } from '../../model/common/DialogUtil';
+import { DialogCallback } from '../../model/common/DialogUtil';
 import { Log } from '../../utils/Log';
 import { ColumnSize, ScreenManager } from '../../model/common/ScreenManager';
 import { Constants } from '../../model/common/Constants';
@@ -21,18 +21,20 @@ import { Constants } from '../../model/common/Constants';
 export struct ThirdDeleteDialog {
   private TAG: string = 'DeleteDialog'
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number] = [0, 0, 0, 0];
+  @StorageLink('leftBlank') leftBlank: number[]
+    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Consume dialogCallback: DialogCallback;
   @Consume dialogMessage: Resource;
   @StorageLink('confirmText') confirmText: Resource = $r('app.string.dialog_delete');
-  controller: CustomDialogController;
+  controller?: CustomDialogController;
 
-  private uris: any;
-  private thirdAppName: string;
+  private uris: string[] = [];
+  private thirdAppName: string | undefined = '';
 
   aboutToAppear() {
-    this.uris = AppStorage.Get("uris");
-    this.thirdAppName = AppStorage.Get("appName");
+    let stored = AppStorage.get<string[]>('uris');
+    this.uris = stored === undefined ? [] : stored;
+    this.thirdAppName = AppStorage.get<string>('appName');
   }
 
   build() {
@@ -93,7 +95,7 @@ export struct ThirdDeleteDialog {
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
               Log.debug(this.TAG, `cancelCallback`);
-              this.controller.close();
+              this.controller?.close();
               this.dialogCallback && this.dialogCallback.cancelCallback();
             })
           }.width('50%')
@@ -120,7 +122,7 @@ export struct ThirdDeleteDialog {
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
               Log.debug(this.TAG, `confirmCallback`);
-              this.controller.close();
+              this.controller?.close();
               this.dialogCallback && this.dialogCallback.confirmCallback();
             })
           }.width('50%')

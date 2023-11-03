@@ -19,9 +19,9 @@ import {
   BroadCastConstants,
   BroadCastManager,
   BrowserConstants,
-  Log,
-  MediaOperationBasePage
+  Log
 } from '@ohos/common';
+import { MediaOperationBasePage } from '@ohos/common/CommonComponents';
 
 const TAG: string = 'MediaOperationPage';
 

@@ -14,7 +14,7 @@
  */
 
 import { Log } from '../../utils/Log';
-import type { DialogCallback } from '../../model/common/DialogUtil';
+import { DialogCallback } from '../../model/common/DialogUtil';
 import { ColumnSize, ScreenManager } from '../../model/common/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 import { UiUtil } from '../../utils/UiUtil';
@@ -26,16 +26,16 @@ const TAG: string = 'common_RenameDialog';
 export struct RenameDialog {
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller: CustomDialogController;
+  controller?: CustomDialogController;
   @Consume renameFileName: string;
   @Consume dialogCallback: DialogCallback;
   @State isNull: boolean = false;
   @State dividerColor: Resource = $r('app.color.dialog_divider_h_color_182431');
   @State dividerWidth: string = '1vp';
   private inputName: string = '';
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   aboutToAppear(): void {
     Log.info(TAG, 'aboutToAppear');
@@ -108,7 +108,7 @@ export struct RenameDialog {
             .height($r('app.float.details_dialog_button_height'))
             .onClick(() => {
               this.dialogCallback && this.dialogCallback.cancelCallback();
-              this.controller.close()
+              this.controller?.close();
             })
           }.width('50%')
 
@@ -142,11 +142,11 @@ export struct RenameDialog {
                 return;
               }
               if (this.inputName == this.renameFileName) {
-                this.controller.close();
+                this.controller?.close();
                 return;
               }
               this.dialogCallback && this.dialogCallback.confirmCallback(this.inputName);
-              this.controller.close();
+              this.controller?.close();
             })
           }.width('50%')
         }

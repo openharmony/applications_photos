@@ -30,39 +30,51 @@ import { IS_HORIZONTAL, THIRD_SELECT_IS_ORIGIN, THUMBNAIL_WIDTH } from '../utils
 
 const TAG: string = 'thiSel_ThirdSelectedPanel';
 
+interface WidthAndHeight {
+  height: number;
+  width: number;
+};
+
 @Component
 export struct ThirdSelectedPanel {
-  onMenuClicked: Function;
-  maxSelectCount: number;
+  onMenuClicked: Function = (): void => {};
+  maxSelectCount: number = 0;
   @Provide selectedCount: number = 0;
   @Link @Watch('onSelectedCountChanged') totalSelectedCount: number;
-  selectManager: ThirdSelectManager;
+  selectManager: ThirdSelectManager | null = null;
   @State itemArray: Array<MediaItem> = [];
   @StorageLink(THIRD_SELECT_IS_ORIGIN) isOriginalChecked: boolean = false;
   @StorageLink(IS_HORIZONTAL) isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @Consume broadCast: BroadCast;
   @Link isShowBar: boolean;
-  @Prop currentUri: string;
+  @Prop currentUri: string = '';
   isBrowserMode: boolean = false;
   isMultiPick = true;
   mTransition: string = '';
   isFromFa: boolean = false;
-  dataSource: MediaDataSource;
+  dataSource: MediaDataSource | null = null;
   private selectedScroller: Scroller = new Scroller();
 
   aboutToAppear(): void {
-    this.selectManager = AppStorage.Get(Constants.THIRD_SELECT_MANAGER);
+    this.selectManager = AppStorage.get<ThirdSelectManager>(Constants.THIRD_SELECT_MANAGER) as ThirdSelectManager;
     this.onSelectedCountChanged();
   }
 
-  onSelectedCountChanged() {
+  onSelectedCountChanged(): void {
     this.selectedCount = this.totalSelectedCount;
-    this.itemArray = this.selectManager.getSelectItems();
+    this.itemArray = this.selectManager == null ? [] : this.selectManager.getSelectItems();
+    Log.debug(TAG, `call scroll to edge, current count ${this.itemArray.length} this.selectedCount is: ${this.selectedCount}`);
+    this.selectedScroller.scrollEdge(Edge.End);
+  }
+
+  refreshSelectData(refresh: boolean): void {
+    this.selectedCount = this.totalSelectedCount;
+    this.itemArray = this.selectManager == null ? [] : this.selectManager.getSelectItems();
     Log.debug(TAG, `call scroll to edge, current count ${this.itemArray.length}`)
     this.selectedScroller.scrollEdge(Edge.End);
   }
 
-  getThumbnailSafe(sourceUri: string, path: string, size?) {
+  getThumbnailSafe(sourceUri: string, path: string, size?: WidthAndHeight): string {
     try {
       if (size) {
         if (size.width != 0 && size.height != 0) {
@@ -76,7 +88,7 @@ export struct ThirdSelectedPanel {
       }
     } catch (err) {
       Log.warn(TAG, `get Thumbnail Failed! msg:${err}`);
-      return null;
+      return '';
     }
   }
 
@@ -86,13 +98,13 @@ export struct ThirdSelectedPanel {
         .key('Original')
         .width($r('app.float.icon_size'))
         .aspectRatio(1)
-        .onClick(this.clickOriginButton.bind(this))
+        .onClick((): void => this.clickOriginButton())
     } else {
       Radio({ value: '', group: this.mTransition })
         .key('Original')
         .checked(this.isOriginalChecked)
         .margin(0)
-        .onClick(this.clickOriginButton.bind(this))
+        .onClick((): void => this.clickOriginButton())
     }
   }
 
@@ -212,9 +224,9 @@ export struct ThirdSelectedPanel {
 
   @Builder buildThumbnailList() {
     List({ scroller: this.selectedScroller, space: 8 }) {
-      ForEach(this.itemArray, (item: MediaItem, index: number) => {
+      ForEach(this.itemArray, (item: MediaItem, index?: number) => {
         ListItem() {
-          this.buildThumbnailItem(item, index)
+          this.buildThumbnailItem(item, index as number);
         }
         .width($r('app.float.third_selected_panel_image_height'))
         .aspectRatio(1)
@@ -222,7 +234,7 @@ export struct ThirdSelectedPanel {
           left: index == 0 ? $r('sys.float.ohos_id_max_padding_start') : 0,
           right: index == this.itemArray.length - 1 ? $r('sys.float.ohos_id_max_padding_end') : 0
         })
-      }, item => item.getHashCode())
+      }, (item: MediaItem) => item?.getHashCode())
     }
     .width('100%')
     .height('100%')
@@ -283,7 +295,11 @@ export struct ThirdSelectedPanel {
   }
 
   private getPosition(item: MediaItem): number {
-    return this.dataSource.getDataIndex(item) + this.dataSource.getGroupCountBeforeItem(item);
+    if (this.dataSource) {
+      return this.dataSource.getDataIndex(item) + this.dataSource.getGroupCountBeforeItem(item);
+    } else {
+      return Constants.NOT_FOUND;
+    }
   }
 
   private selectTextColor() {
@@ -301,7 +317,7 @@ export struct ThirdSelectedPanel {
     return!this.isMultiPick || this.selectedCount > 0;
   }
 
-  private clickOriginButton() {
+  private clickOriginButton(): void {
     this.isOriginalChecked = !this.isOriginalChecked;
     Log.info(TAG, `origin clicked: ${this.isOriginalChecked}`);
   }

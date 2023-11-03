@@ -18,10 +18,10 @@ import {
   BroadCastConstants,
   BroadCastManager,
   BrowserConstants,
-  BrowserController,
   Constants,
   Log
 } from '@ohos/common';
+import { BrowserController } from '@ohos/common/CommonComponents';
 import { PhotoGridView } from '../view/PhotoGridView';
 import { PhotoBrowserComponent } from '../view/PhotoBrowserComponent';
 import { SelectPhotoBrowserView } from '../view/SelectPhotoBrowserView';

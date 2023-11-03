@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 
-import { BrowserConstants, Constants, Log, ScreenManager, ToolBar } from '@ohos/common';
+import { BrowserConstants, Constants, Log, ScreenManager } from '@ohos/common';
+import { ToolBar } from '@ohos/common/CommonComponents';
 import Curves from '@ohos.curves';
 
 const TAG: string = 'browser_PhotoBrowserToolBar';
@@ -26,10 +27,10 @@ export struct PhotoBrowserToolBar {
   @State opacityValue: number = 1;
   @State isVisibility: boolean = true;
   @State currentBackgroundColor: Resource = $r('app.color.default_background_color');
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   noAnimation: boolean = true;
   @Consume hidePopup: boolean;

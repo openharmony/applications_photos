@@ -13,9 +13,10 @@
  * limitations under the License.
  */
 
-import { AlbumSetPage } from '@ohos/browser';
+import { AlbumSetPage } from '@ohos/browser/BrowserComponents';
 import { PhotoGridView } from './PhotoGridView';
-import { BrowserController, Constants, Log } from '@ohos/common';
+import { Constants, Log } from '@ohos/common';
+import { BrowserController } from '@ohos/common/CommonComponents';
 import { PhotoBrowserComponent } from './PhotoBrowserComponent';
 import { SelectPhotoBrowserView } from './SelectPhotoBrowserView';
 
@@ -23,9 +24,9 @@ const TAG = 'TabContentComponent';
 
 @Component
 export struct TabContentComponent {
-  @Prop pageStatus: boolean;
+  @Prop pageStatus: boolean = false;
   @StorageLink('isShowPhotoGridView') isShowPhotoGridView: boolean = false;
-  @Prop currentIndex: number;
+  @Prop currentIndex: number = 0;
   @StorageLink('currentBreakpoint') currentBreakpoint: string = Constants.BREAKPOINT_MD;
   @Consume @Watch('onShowStatusChanged') isShow: boolean;
   @State @Watch('updateIndexStatus') browserController: BrowserController = new BrowserController(true);

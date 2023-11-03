@@ -23,6 +23,7 @@ import { MediaItem } from '../../model/browser/photo/MediaItem';
 import { UserFileManagerAccess } from '../../access/UserFileManagerAccess';
 import { UiUtil } from '../../utils/UiUtil';
 import { BigDataConstants, ReportToBigDataUtil } from '../../utils/ReportToBigDataUtil';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'common_ShareMenuOperation';
 
@@ -114,13 +115,14 @@ export class ShareMenuOperation implements MenuOperation, AsyncCallback<MediaIte
     }
     let want = this.getParameters();
     this.reportToBigData(want.parameters['ability.picker.type'], imageCount, videoCount);
-    globalThis.photosAbilityContext?.startAbility(want);
+    let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext');
+    context.startAbility(want);
   }
 
   private reportToBigData(shareType: string, imageCount: number, videoCount: number): void {
     let count: number = 1;
-    if (AppStorage.Get('click_share_count') != null) {
-      let oldCount: number = AppStorage.Get('click_share_count');
+    if (AppStorage.get('click_share_count') != null) {
+      let oldCount: number = AppStorage.get('click_share_count');
       count = oldCount + 1;
     }
     AppStorage.SetOrCreate('click_share_count', count);

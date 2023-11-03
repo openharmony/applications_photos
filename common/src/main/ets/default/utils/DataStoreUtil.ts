@@ -16,6 +16,7 @@ import { Log } from './Log';
 import { Constants } from '../model/common/Constants';
 import data_preferences from '@ohos.data.preferences';
 import contextConstant from '@ohos.app.ability.contextConstant';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'common_DataStoreUtil';
 
@@ -28,10 +29,10 @@ export class DataStoreUtil {
   }
 
   public static getInstance(): DataStoreUtil {
-    if (AppStorage.Get(Constants.FROM_DATA_STORE_UTIL) == null) {
+    if (AppStorage.get(Constants.FROM_DATA_STORE_UTIL) == null) {
       AppStorage.SetOrCreate(Constants.FROM_DATA_STORE_UTIL, new DataStoreUtil());
     }
-    return AppStorage.Get(Constants.FROM_DATA_STORE_UTIL);
+    return AppStorage.get(Constants.FROM_DATA_STORE_UTIL);
   }
 
   public async init(): Promise<void> {
@@ -40,7 +41,7 @@ export class DataStoreUtil {
       Log.debug(TAG, 'init already!');
       return;
     }
-    let context = globalThis.photosGlobalContext;
+    let context: common.AbilityStageContext = AppStorage.get<common.AbilityStageContext>('photosGlobalContext');
     let area: contextConstant.AreaMode = context.area;
     context.area = contextConstant.AreaMode.EL1;
     try {
@@ -130,7 +131,7 @@ export class DataStoreUtil {
 
   public async removeCache() {
     Log.debug(TAG, 'removeCache start!');
-    let context = globalThis.photosGlobalContext;
+    let context: common.AbilityStageContext = AppStorage.get<common.AbilityStageContext>('photosGlobalContext');
     let area: contextConstant.AreaMode = context.area;
     context.area = contextConstant.AreaMode.EL1;
     try {

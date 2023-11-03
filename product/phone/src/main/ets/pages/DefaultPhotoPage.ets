@@ -16,7 +16,6 @@
 import router from '@ohos.router';
 import {
   Action,
-  ActionBar,
   ActionBarMode,
   ActionBarProp,
   BroadCast,
@@ -26,10 +25,13 @@ import {
   Log,
   MediaItem,
   BrowserConstants as PhotoConstants,
-  PhotoItem,
   ScreenManager,
   UiUtil
 } from '@ohos/common';
+import {
+  ActionBar,
+  PhotoItem
+} from '@ohos/common/CommonComponents';
 
 const TAG: string = 'DefaultPhotoPage';
 
@@ -44,9 +46,9 @@ export struct DefaultPhotoPage {
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  defaultMediaItem: MediaItem;
+  defaultMediaItem: MediaItem |  undefined = undefined;
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
   @State backgroundColorResource: Resource = $r('app.color.default_background_color');
   @State isShowBar: boolean = true;
@@ -56,17 +58,15 @@ export struct DefaultPhotoPage {
   @State isRunningAnimation: boolean = false;
   @State isOnSwiperAnimation: boolean = false;
   @Provide hidePopup: boolean = false;
+  private onToggleBarsFunc: Function = (): void => this.onToggleBars();
+  private hideBarsFunc: Function = (): void => this.hideBars();
 
   onMenuClicked(action: Action) {
     Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
-    switch (action.actionID) {
-      case Action.BACK.actionID:
-        router.replaceUrl({
-          url: 'pages/index',
-        });
-        break;
-      default:
-        break;
+    if (action.actionID === Action.BACK.actionID) {
+      router.replaceUrl({
+        url: 'pages/index',
+      });
     }
   }
 
@@ -74,18 +74,12 @@ export struct DefaultPhotoPage {
     if (!this.isShowBar) {
       ScreenManager.getInstance().setSystemUi(true);
     }
-    this.onMenuClicked = this.onMenuClicked.bind(this);
     this.defaultMediaItem = this.getDefaultMediaItem();
     this.actionBarProp
       .setLeftAction(Action.BACK)
       .setMode(ActionBarMode.STANDARD_MODE);
-    this.broadCast.on(PhotoConstants.TOGGLE_BAR, () => {
-      this.onToggleBars();
-    });
-
-    this.broadCast.on(PhotoConstants.HIDE_BARS, () => {
-      this.hideBars();
-    });
+    this.broadCast.on(PhotoConstants.TOGGLE_BAR, this.onToggleBarsFunc);
+    this.broadCast.on(PhotoConstants.HIDE_BARS, this.hideBarsFunc);
   }
 
   onPageShow() {
@@ -119,11 +113,14 @@ export struct DefaultPhotoPage {
   }
 
   aboutToDisappear(): void {
-    this.broadCast.off(null, null);
+    if (this.broadCast) {
+      this.broadCast.off(PhotoConstants.TOGGLE_BAR, this.onToggleBarsFunc);
+      this.broadCast.off(PhotoConstants.HIDE_BARS, this.hideBarsFunc);
+    }
   }
 
   getDefaultMediaItem(): MediaItem {
-    return new MediaItem(null)
+    return new MediaItem()
   }
 
   build() {
@@ -139,7 +136,7 @@ export struct DefaultPhotoPage {
         isDefaultFA: true
       })
       Column() {
-        ActionBar({ actionBarProp: $actionBarProp, onMenuClicked: this.onMenuClicked, isNeedPlaceholder: false })
+        ActionBar({ actionBarProp: $actionBarProp, onMenuClicked: (action: Action): void => this.onMenuClicked(action), isNeedPlaceholder: false })
       }
       .visibility(this.isShowBar ? Visibility.Visible : Visibility.Hidden)
       .padding({

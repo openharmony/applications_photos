@@ -19,6 +19,14 @@ import { BroadCast } from '../../utils/BroadCast';
 import { AlbumSetDataSource } from '../../model/browser/album/AlbumSetDataSource';
 import { AlbumInfo } from '../../model/browser/album/AlbumInfo';
 
+export enum SourceSceneType {
+  INVALID,
+  SYSTEM_ALBUM,
+  USER_ALBUM,
+  PICKER,
+  BIG_PHOTO_COMPONENT
+}
+
 export class MenuContext {
   mediaItem: MediaItem;
   albumUri: string;
@@ -34,6 +42,7 @@ export class MenuContext {
   albumInfo: AlbumInfo;
   fromSelectMode: boolean;
   targetAlbumName: string;
+  sourceScene: SourceSceneType = SourceSceneType.INVALID;
 
   withMediaItem(mediaItem: MediaItem): MenuContext {
     this.mediaItem = mediaItem;
@@ -80,7 +89,7 @@ export class MenuContext {
     return this;
   }
 
-  withAlbumSetDataSource(albumSetDataSource: AlbumSetDataSource): MenuContext {
+  withAlbumSetDataSource(albumSetDataSource: AlbumSetDataSource | null): MenuContext {
     this.albumSetDataSource = albumSetDataSource;
     return this;
   }
@@ -90,7 +99,7 @@ export class MenuContext {
     return this;
   }
 
-  withAlbumInfo(albumInfo) {
+  withAlbumInfo(albumInfo: AlbumInfo | null | undefined): MenuContext {
     this.albumInfo = albumInfo;
     return this;
   }

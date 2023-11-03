@@ -22,8 +22,8 @@ const TAG: string = 'common_MultiSelectDialog';
 
 @Observed
 export class MultiSelectDetails {
-  count: number;
-  size: number
+  count: number = 0;
+  size: number = 0;
 }
 
 @CustomDialog
@@ -32,11 +32,11 @@ export struct MultiSelectDialog {
   static readonly EXTERNAL_PREFIX_NUM = 2;
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller: CustomDialogController;
+  controller?: CustomDialogController;
   @Consume multiSelectDetails: MultiSelectDetails;
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   aboutToAppear() {
   }
@@ -95,7 +95,7 @@ export struct MultiSelectDialog {
         .backgroundColor($r('sys.color.ohos_id_color_button_normal'))
         .height($r('app.float.details_dialog_button_height'))
         .onClick(() => {
-          this.controller.close()
+          this.controller?.close();
         })
         .margin({
           left: $r('app.float.dialog_single_button_indent_margin'),

@@ -27,6 +27,7 @@ import fileIO from '@ohos.fileio';
 import { DateUtil } from './utils/DateUtil';
 import { Loader } from './Loader';
 import userFileManager from '@ohos.filemanagement.userFileManager';
+import type { Album, FileType } from '@ohos/common/src/main/ets/default/access/UserFileManagerAccess';
 
 const TAG: string = 'editor_Save';
 
@@ -36,7 +37,7 @@ export class Save {
   constructor() {
   }
 
-  public static async save(item: MediaItem, optStack: ImageFilterStack, isReplace: Boolean,
+  public static async save(item: MediaItem, albumUri: string, optStack: ImageFilterStack, isReplace: Boolean,
                            callback: Function): Promise<void> {
     Log.info(TAG, `${JSON.stringify(item)} ${isReplace}`);
     try {
@@ -44,7 +45,7 @@ export class Save {
       wrapper = optStack.apply(wrapper);
       Log.debug(TAG, 'Edit and restore operation execution end.');
 
-      let fileAsset = await this.createFileAsset(item.uri, isReplace);
+      let fileAsset = await this.createFileAsset(item.uri, albumUri, isReplace);
       Log.info(TAG, `create fileAsset succeed: [${fileAsset}]`);
       let fd = await UserFileManagerAccess.getInstance().openAsset('RW', fileAsset);
       if (fd < 0) {
@@ -63,11 +64,12 @@ export class Save {
       await fileIO.write(fd, buffer);
       Log.info(TAG, 'write jpg file end.');
       let newUri = fileAsset.uri;
+      Log.info(TAG, `New saved file: ${newUri}`);
+      callback && callback(newUri);
       await UserFileManagerAccess.getInstance().closeAsset(fd, fileAsset);
       wrapper && wrapper.release();
       await packer.release();
-      Log.info(TAG, `New saved file: ${newUri}`);
-      callback && callback(newUri);
+
     } catch (e) {
       Log.error(TAG, `save catch error: ${JSON.stringify(e)}`);
       let msg = {
@@ -79,7 +81,7 @@ export class Save {
     ;
   }
 
-  private static async createFileAsset(uri: string, isReplace: Boolean) {
+  private static async createFileAsset(uri: string, albumUri: string,  isReplace: Boolean) {
     let dataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
     let fileAsset = await dataImpl.getDataByUri(uri);
 
@@ -102,6 +104,11 @@ export class Save {
     }
     fileAsset = await UserFileManagerAccess.getInstance().createAsset(fileAsset.mediaType, displayName);
     await fileAsset.favorite(favorite);
+    let album: Album = await UserFileManagerAccess.getInstance().getAlbumByUri(albumUri);
+    let isSystemAlbum = UserFileManagerAccess.getInstance().isSystemAlbum(album);
+    if (!isSystemAlbum) {
+      await UserFileManagerAccess.getInstance().addFileToAlbum(albumUri, fileAsset);
+    }
     return fileAsset;
   }
 }

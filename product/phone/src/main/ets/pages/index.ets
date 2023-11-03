@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import app from '@system.app';
 import {
   BigDataConstants,
@@ -23,23 +23,29 @@ import {
   BroadCastConstants,
   BroadCastManager,
   BrowserConstants,
-  BrowserController,
   Constants,
-  DEVICE_TYPE,
   JumpSourceToMain,
   Log,
   ReportToBigDataUtil,
   ScreenManager,
-  TabBar,
-  TabItem,
-  TraceControllerUtils
+  TraceControllerUtils,
+  WindowUtil
 } from '@ohos/common';
+import {
+  BrowserController,
+  DEVICE_TYPE,
+  TabBar,
+  TabItem
+} from '@ohos/common/CommonComponents';
 import router from '@ohos.router';
 import { PhotoGridView } from '../view/PhotoGridView';
 import { TabContentComponent } from '../view/TabContentComponent';
 import { TimelineTabContentComponent } from '../view/TimelineContentComponent';
 
-import type data_preferences from '@ohos.data.preferences';
+import data_preferences from '@ohos.data.preferences';
+import common from '@ohos.app.ability.common';
+import { BusinessError } from '@ohos.base';
+import { Router } from '@ohos.arkui.UIContext';
 
 export type Preferences = data_preferences.Preferences;
 
@@ -49,13 +55,17 @@ const COMPONENT_KEY_ALBUMS: string = 'Albums';
 const IMAGE_CACHE_COUNT: number = 100;
 const IMAGE_CACHE_SIZE: number = 1024 * 1024 * IMAGE_CACHE_COUNT;
 
+interface Params {
+  jumpSource: number;
+};
+
 // Application entry
 @Entry
 @Component
 struct IndexPage {
   @StorageLink('app_key_tabs_index') preIndex: number = Constants.TIMELINE_PAGE_INDEX;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [
   Constants.NUMBER_0,
   ScreenManager.getInstance().getStatusBarHeight(),
@@ -72,7 +82,7 @@ struct IndexPage {
   @State currentIndex: number = this.preIndex;
   @StorageLink('entryFromHap') entryFromHap: number = Constants.ENTRY_FROM_NONE;
   @State controlButtonMarginLeft: number = 16;
-  @StorageLink('deviceType') deviceType: string = AppStorage.Get('deviceType');
+  @StorageLink('deviceType') deviceType: string = AppStorage.get<string>('deviceType') as string;
   @StorageLink('currentBreakpoint') @Watch('updateParameters') currentBreakpoint: string = Constants.BREAKPOINT_MD;
   @StorageLink('isShowPhotoGridView') @Watch('doAnimation') isShowPhotoGridView: boolean = false;
   @State isShowTabBar: boolean = true;
@@ -86,9 +96,9 @@ struct IndexPage {
   ];
   private tabsController: TabsController = new TabsController();
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
-  private jumpSource: number;
+  private jumpSource: number = 0;
   private breakpointSystem: BreakpointSystem = new BreakpointSystem();
-  private photosPreferences: Preferences;
+  private photosPreferences: Preferences | null = null;
 
   doAnimation(): void {
     if (this.isSidebar && this.currentBreakpoint !== Constants.BREAKPOINT_LG) {
@@ -117,12 +127,12 @@ struct IndexPage {
   }
 
   initPhotosStore() {
-    this.photosPreferences = AppStorage.Get(Constants.PHOTOS_STORE_KEY);
+    this.photosPreferences = AppStorage.get<Preferences>(Constants.PHOTOS_STORE_KEY) as Preferences;
     if (this.photosPreferences) {
-      this.photosPreferences.get('lastPage', 0).then((data: number) => {
-        this.preIndex = data;
+      this.photosPreferences.get('lastPage', 0).then((data: data_preferences.ValueType) => {
+        this.preIndex = data as number;
         this.currentIndex = this.preIndex;
-      }).catch((err) => {
+      }).catch((err: Error) => {
         this.updatePhotosStore('lastPage', 0);
       });
     } else {
@@ -130,12 +140,12 @@ struct IndexPage {
     }
   }
 
-  updatePhotosStore(key, value) {
+  updatePhotosStore(key: string, value: number): void {
     if (this.photosPreferences) {
-      this.photosPreferences.put(key, value).then(() => {
+      this.photosPreferences.put(key, value).then((): void => {
         Log.debug(TAG, `Succeeded in putting the value of '${key}'.`);
-        this.photosPreferences.flush();
-      }).catch((err) => {
+        this.photosPreferences?.flush();
+      }).catch((err: Error) => {
         Log.error(TAG, `Failed to put the value of '${key}'. Cause: ${err}`);
       });
     }
@@ -146,7 +156,7 @@ struct IndexPage {
     ScreenManager.getInstance().setSystemUi(true);
     this.breakpointSystem.register();
     this.updateParameters();
-    let param: any = router.getParams();
+    let param: Params = router.getParams() as Params;
     Log.info(TAG, `[aboutToAppear] param: ${JSON.stringify(param)}`);
     this.requestPermissions();
     if (param != null) {
@@ -155,8 +165,11 @@ struct IndexPage {
         this.entryFromHap = Constants.ENTRY_FROM_NONE;
         this.currentIndex = Constants.TIMELINE_PAGE_INDEX;
         Log.info(TAG, `Camera in, switch to Tab ${this.currentIndex}.`);
-        let msg = {
-          'Type': BigDataConstants.ENTER_BY_CAMERA
+        interface Msg {
+          type: string;
+        }
+        let msg: Msg = {
+          type: BigDataConstants.ENTER_BY_CAMERA
         };
         ReportToBigDataUtil.report(BigDataConstants.ENTER_PHOTOS_ID, msg);
       }
@@ -167,20 +180,20 @@ struct IndexPage {
 
   onPageShow(): void {
     Log.info(TAG, `[onPageShow] entryFromHap: ${this.entryFromHap}`);
-    if (typeof globalThis.IsSetImageRawDataCacheSize === 'undefined') {
+    if (typeof AppStorage.get<boolean|undefined>('IsSetImageRawDataCacheSize') === 'undefined') {
       Log.info(TAG, '[onPageShow] setImageRawDataCacheSize');
 
       // ImageCacheCount：缓存解码后的图片，默认为0
       app.setImageCacheCount(IMAGE_CACHE_COUNT);
       // ImageRawDataCache：缓存解码前的图片数据和缩略图的数据(datashare thumbnail格式）
       app.setImageRawDataCacheSize(IMAGE_CACHE_SIZE);
-      globalThis.IsSetImageRawDataCacheSize = true;
+      AppStorage.setOrCreate<boolean>('IsSetImageRawDataCacheSize', true);
     }
     this.appBroadCast.emit(BroadCastConstants.THIRD_ROUTE_PAGE, []);
     setTimeout(() => {
       this.isShow = true
     }, 50);
-    let param: any = router.getParams();
+    let param: Params =router.getParams() as Params;
     if (param != null) {
       this.jumpSource = param.jumpSource;
     }
@@ -191,7 +204,7 @@ struct IndexPage {
       router.clear();
 
       // To help AlbumSetPage show copy or move dialog
-      if (AppStorage.Get(Constants.IS_SHOW_MOVE_COPY_DIALOG)) {
+      if (AppStorage.get<boolean>(Constants.IS_SHOW_MOVE_COPY_DIALOG)) {
         this.appBroadCast.emit(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, [this.currentIndex]);
         AppStorage.SetOrCreate(Constants.IS_SHOW_MOVE_COPY_DIALOG, false);
       }
@@ -235,9 +248,8 @@ struct IndexPage {
       }
     }
     let isProcessed = false;
-    this.appBroadCast.emit(BroadCastConstants.BACK_PRESS_EVENT, [function(isModeChanged: boolean){
-      isProcessed = isModeChanged;
-    }.bind(this)]);
+    this.appBroadCast.emit(BroadCastConstants.BACK_PRESS_EVENT,
+      [(isModeChanged: boolean): void => { isProcessed = isModeChanged; }]);
     return isProcessed;
   }
 
@@ -349,7 +361,7 @@ struct IndexPage {
   }
 
   private async requestPermissions(): Promise<void> {
-    this.photosPreferences = AppStorage.Get<Preferences>(Constants.PHOTOS_STORE_KEY);
+    this.photosPreferences = AppStorage.get<Preferences>(Constants.PHOTOS_STORE_KEY) as Preferences;
     let isRequested: boolean = false;
     if (this.photosPreferences) {
       isRequested = await this.photosPreferences.get(Constants.PHOTOS_PERMISSION_FLAG, false) as boolean;
@@ -365,8 +377,8 @@ struct IndexPage {
       ];
       let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
       try {
-        // @ts-ignore
-        atManager.requestPermissionsFromUser(globalThis.photosAbilityContext, permissionList).then((data) => {
+        atManager.requestPermissionsFromUser(AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext,  permissionList as Permissions[])
+          .then((data) => {
           Log.debug(TAG, `permissions: ${JSON.stringify(data.permissions)}`
           + `, authResult: ${JSON.stringify(data.authResults)}`);
           let sum: number = 0;
@@ -377,12 +389,12 @@ struct IndexPage {
           if (this.photosPreferences) {
             this.photosPreferences.put(Constants.PHOTOS_PERMISSION_FLAG, true).then(() => {
               Log.debug(TAG, `Succeeded in putting the value of '${Constants.PHOTOS_PERMISSION_FLAG}'.`);
-              this.photosPreferences.flush();
-            }).catch((err) => {
+              this.photosPreferences?.flush();
+            }).catch((err: Error) => {
               Log.error(TAG, `Failed to put the value of '${Constants.PHOTOS_PERMISSION_FLAG}'. Cause: ${err}`);
             });
           }
-        }, (err) => {
+        }, (err: BusinessError) => {
           Log.error(TAG, `Failed to start ability err code: ${err.code}`);
         });
       } catch (error) {

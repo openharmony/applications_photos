@@ -22,11 +22,13 @@ import {
   Constants,
   Log,
   ReportToBigDataUtil,
-  UiUtil
+  UiUtil,
+  WindowUtil
 } from '@ohos/common';
 import { PhotoEditorManager } from '../PhotoEditorManager';
 import { PhotoEditCrop } from '../crop/PhotoEditCrop';
 import router from '@ohos.router';
+import { Router } from '@ohos.arkui.UIContext';
 
 const TAG: string = 'editor_TitleBar';
 
@@ -34,7 +36,7 @@ const TAG: string = 'editor_TitleBar';
 export struct TitleBar {
   @Consume isRedo: boolean;
   @Consume isUndo: boolean;
-  @State name: Resource = undefined;
+  @State name: Resource | undefined = undefined;
   @State isPcStyle: boolean = true;
   @Consume('selected') selectedMode: number;
   @Consume broadCast: BroadCast;
@@ -44,25 +46,31 @@ export struct TitleBar {
   @Consume cropEdit: PhotoEditCrop;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private newImageId: number = -1;
-  private immersiveClick: Function = undefined;
-  private onBackAfterSaveComplete: Function = undefined;
+  private immersiveClick: Function = (): void => {};
+  private onBackAfterSaveComplete: Function = (): void => {};
 
   saveAsNewCallback() {
     Log.debug(TAG, 'saveAsNewCallback called');
-    let msg = {
-      'SAVE_TYPE': BigDataConstants.SAVE_AS_NEW
+    interface Msg {
+      saveType: string;
+    }
+    let msg: Msg = {
+      saveType: BigDataConstants.SAVE_AS_NEW
     }
     ReportToBigDataUtil.report(BigDataConstants.PHOTO_EDIT_SAVE_ID, msg);
-    PhotoEditorManager.getInstance().save(false, this.saveImageCallback.bind(this));
+    PhotoEditorManager.getInstance().save(false, (uri: string): void => this.saveImageCallback(uri));
   }
 
-  replaceOriginalCallback() {
+  replaceOriginalCallback(): void {
     Log.debug(TAG, 'replaceOriginalCallback called');
-    let msg = {
-      'SAVE_TYPE': BigDataConstants.SAVE_REPLACE
+    interface Msg {
+      saveType: string;
+    }
+    let msg: Msg = {
+      saveType: BigDataConstants.SAVE_REPLACE
     }
     ReportToBigDataUtil.report(BigDataConstants.PHOTO_EDIT_SAVE_ID, msg);
-    PhotoEditorManager.getInstance().save(true, this.saveImageCallback.bind(this));
+    PhotoEditorManager.getInstance().save(true, (uri: string): void => this.saveImageCallback(uri));
   }
 
   discardCallback() {
@@ -90,9 +98,9 @@ export struct TitleBar {
   }
 
   aboutToAppear() {
-    this.immersiveClick = this.immersive.bind(this);
+    this.immersiveClick = (isImmersive: boolean): void => this.immersive(isImmersive);
     this.broadCast.on(Constants.IS_IMMERSIVE, this.immersiveClick);
-    this.onBackAfterSaveComplete = this.backAfterSaveComplete.bind(this);
+    this.onBackAfterSaveComplete = (): void => this.backAfterSaveComplete();
     this.appBroadCast.on(BroadCastConstants.PHOTO_EDIT_SAVE_COMPLETE, this.onBackAfterSaveComplete);
   }
 
@@ -105,27 +113,33 @@ export struct TitleBar {
     this.isImmersive = isImmersive;
   }
 
-  onBackClicked() {
+  onBackClicked(): void {
     Log.debug(TAG, 'back clicked');
     if (this.isRedo || this.isUndo) {
-      this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
+      this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [(): void => this.discardCallback()]);
     } else if (this.selectedMode == PhotoEditMode.EDIT_MODE_CROP && this.cropEdit.couldReset()) {
-      this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [this.discardCallback.bind(this)]);
+      this.broadCast.emit(BroadCastConstants.SHOW_EDIT_EXIT_PHOTO_DIALOG, [(): void => this.discardCallback()]);
     } else {
-      router.back();
+      router.back({
+        url: '',
+        params: {}
+      });
     }
   }
 
-  onSaveClicked() {
+  onSaveClicked(): void {
     Log.info(TAG, 'save clicked');
     if (this.isRedo || this.isRedo) {
       this.broadCast.emit(BroadCastConstants.SHOW_SAVE_PHOTO_DIALOG,
-        [this.saveAsNewCallback.bind(this), this.replaceOriginalCallback.bind(this)]);
+        [(): void => this.saveAsNewCallback(), (): void => this.replaceOriginalCallback()]);
     } else if (this.selectedMode == PhotoEditMode.EDIT_MODE_CROP && this.cropEdit.couldReset()) {
       this.broadCast.emit(BroadCastConstants.SHOW_SAVE_PHOTO_DIALOG,
-        [this.saveAsNewCallback.bind(this), this.replaceOriginalCallback.bind(this)]);
+        [(): void => this.saveAsNewCallback(), (): void => this.replaceOriginalCallback()]);
     } else {
-      router.back();
+      router.back({
+        url: '',
+        params: {}
+      });
     }
   }
 

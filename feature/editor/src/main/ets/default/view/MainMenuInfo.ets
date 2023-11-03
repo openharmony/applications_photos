@@ -22,10 +22,10 @@ export enum ID {
   DEFAULT
 }
 
-interface ActionInfo {
+export interface ActionInfo {
   src ?: Resource;
   isActive ?: boolean;
-  actionID: number | PhotoEditMode;
+  actionID?: number | PhotoEditMode;
   text ?: Resource;
   mode ?: number;
   height ?: Resource;
@@ -36,23 +36,23 @@ interface ActionInfo {
 }
 
 export class ActionButtonInfo {
-  src: Resource;
+  src?: Resource;
   isActive: boolean;
   isDoubleClicked: boolean;
-  actionID: number;
-  text: Resource;
-  mode: number;
-  height: Resource;
-  width: Resource
-  color: Resource
-  uri: string;
+  actionID?: number;
+  text: Resource | null = null;
+  mode: number = 0;
+  height: Resource | null = null;
+  width: Resource | null = null;
+  color: Resource | null = null;
+  uri: string = '';
   componentKey: string;
 
   constructor(action: ActionInfo) {
     this.src = action.src == undefined ? undefined : action.src;
-    this.actionID = action.actionID;
+    this.actionID = action.actionID as number;
     this.isDoubleClicked = false;
-    this.componentKey = action.componentKey;
+    this.componentKey = action.componentKey as string;
     if (action.isActive != undefined) {
       this.isActive = action.isActive;
     } else {

@@ -13,8 +13,9 @@
  * limitations under the License.
  */
 
-import { BrowserController, Constants, Log } from '@ohos/common';
-import { TimelinePage } from '@ohos/timeline';
+import { Constants, Log } from '@ohos/common';
+import { BrowserController } from '@ohos/common/CommonComponents';
+import { TimelinePage } from '@ohos/timeline/TimelineComponents';
 import { PhotoBrowserComponent } from './PhotoBrowserComponent';
 import { SelectPhotoBrowserView } from './SelectPhotoBrowserView';
 
@@ -23,7 +24,7 @@ const TAG = 'TimelineTabContentComponent';
 @Component
 export struct TimelineTabContentComponent {
   @State pageStatus: boolean = false;
-  @Prop currentIndex: number;
+  @Prop currentIndex: number = 0;
   @Link isShowTabBar: boolean;
   @State @Watch('updateIndexStatus') browserController: BrowserController = new BrowserController(true);
   @State isRunningAnimation: boolean = false;

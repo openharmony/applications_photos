@@ -24,11 +24,11 @@ const TAG: string = 'common_ThirdSelectPhotoBrowserActionBar';
 
 @Component
 export struct ThirdSelectPhotoBrowserActionBar {
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @State isMultiPick: boolean = false;
   @Consume @Watch('createActionBar') isSelected: boolean;
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @StorageLink('isHorizontal') @Watch('createActionBar') isHorizontal: boolean = ScreenManager.getInstance()
     .isHorizontal();
   @State actionBarProp: ActionBarProp = new ActionBarProp();
@@ -38,7 +38,7 @@ export struct ThirdSelectPhotoBrowserActionBar {
   @Link @Watch('onSelectedCountChanged') totalSelectedCount: number;
   @Provide moreMenuList: Action[] = new Array<Action>();
   @Provide hidePopup: boolean = false;
-  private title: string | Resource;
+  private title: string | Resource = '';
   private isThird: boolean = false;
 
   aboutToAppear() {

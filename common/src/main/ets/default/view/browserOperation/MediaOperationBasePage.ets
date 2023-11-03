@@ -38,9 +38,18 @@ import { UiUtil } from '../../utils/UiUtil';
 
 const TAG: string = 'common_MediaOperationBasePage';
 
+interface Params {
+  pageType: string;
+  pageFrom: string;
+  albumInfo: AlbumInfo;
+  mediaType: number;
+  selectedItems: Array<MediaItem>;
+  mediaUri?: string;
+};
+
 @Component
 export struct MediaOperationBasePage {
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Provide pageType: string = MediaOperationType.Move;
   @Provide broadCast: BroadCast = new BroadCast();
@@ -49,15 +58,36 @@ export struct MediaOperationBasePage {
   @State listCardWidth: number = 0;
   @State listCardPaddingBottom: number = 24;
   scroller: Scroller = new Scroller();
-  albums: AlbumSetDataSource;
+  albums: AlbumSetDataSource | null = null;
   isActive: boolean = false; // Whether the page is in the foreground
-  sourceAlbumUri: string;
-  currentAlbum: AlbumInfo;
-  private pageFrom: string;
+  sourceAlbumUri: string = '';
+  currentAlbum: AlbumInfo | null = null;
+  private pageFrom: string = '';
   private selectedItems: Array<MediaItem> = [];
-  private mediaType: number;
+  private mediaType: number = 0;
   private listCardBorderRadius: number = 16;
-  onWindowSizeChangeCallBack = () => this.updateListCardWidth();
+  private onWindowSizeChangeCallBack: Function = () => this.updateListCardWidth();
+  private funcOnMenuClicked: Function = (action: Action): void => this.onMenuClicked(action);
+  private onLoadingFinishedFunc: Function = (): void => this.onLoadingFinished();
+  private mediaOperationFunc: Function = (displayName: string, albumUri: string, completedFunc?: Function): void =>
+  this.mediaOperation(displayName, albumUri, completedFunc);
+
+  private onLoadingFinished(): void {
+    this.loadingFinish = true;
+  }
+
+  private mediaOperation(displayName: string, albumUri: string, completedFunc?: Function): void {
+    Log.info(TAG, `broadCast on mediaOperation, albumName: ${displayName}, albumUri: ${albumUri}`);
+    router.back({
+      url: '',
+      params: {
+        pageType: this.pageType,
+        albumName: displayName,
+        albumUri: albumUri
+      }
+    });
+    completedFunc && completedFunc();
+  }
 
   aboutToAppear(): void {
     Log.info(TAG, `aboutToAppear`);
@@ -66,7 +96,7 @@ export struct MediaOperationBasePage {
     });
     this.albums = new AlbumSetDataSource(this.broadCast, { moreInfo: true });
     this.albums.setMultiParameter(true);
-    let param: any = router.getParams();
+    let param: Params = router.getParams() as Params;
     if (param) {
       Log.info(TAG, `router getParams ${JSON.stringify(param)}`);
       this.pageType = param.pageType;
@@ -75,42 +105,22 @@ export struct MediaOperationBasePage {
       if (this.currentAlbum != null) {
         this.sourceAlbumUri = this.currentAlbum.uri;
       }
-      switch (this.pageFrom) {
-        case Constants.MEDIA_OPERATION_FROM_PHOTO_BROWSER:
-          this.mediaType = param.mediaType;
-          break;
-        case Constants.MEDIA_OPERATION_FROM_TIMELINE:
-          this.selectedItems = param.selectedItems;
-          break;
-        case Constants.MEDIA_OPERATION_FROM_PHOTO_GRID:
-          this.selectedItems = param.selectedItems;
-          break;
-        default:
-          break;
+      if (this.pageFrom === Constants.MEDIA_OPERATION_FROM_PHOTO_BROWSER) {
+        this.mediaType = param.mediaType;
+      } else if (this.pageFrom === Constants.MEDIA_OPERATION_FROM_TIMELINE) {
+        this.selectedItems = param.selectedItems;
+      }else if (this.pageFrom === Constants.MEDIA_OPERATION_FROM_PHOTO_GRID) {
+        this.selectedItems = param.selectedItems;
       }
     }
-    this.albums.setFilterAlbumsFunction(this.filterAlbumInList.bind(this));
+    this.albums.setFilterAlbumsFunction((mediaSetList: AlbumInfo[]): Array<AlbumInfo> => this.filterAlbumInList(mediaSetList));
     this.onActive();
-    this.onMenuClicked = this.onMenuClicked.bind(this);
 
-    this.broadCast.on(Constants.ON_LOADING_FINISHED, (totalCount) => {
-      this.loadingFinish = true;
-    });
+    this.broadCast.on(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
 
     ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
 
-    this.broadCast.on(BroadCastConstants.MEDIA_OPERATION, (displayName: string, albumUri: string, completedFunc?: Function) => {
-      Log.info(TAG, `broadCast on mediaOperation, albumName: ${displayName}, albumUri: ${albumUri}`);
-      router.back({
-        url: '',
-        params: {
-          pageType: this.pageType,
-          albumName: displayName,
-          albumUri: albumUri
-        }
-      });
-      completedFunc && completedFunc();
-    });
+    this.broadCast.on(BroadCastConstants.MEDIA_OPERATION, this.mediaOperationFunc);
     this.albums.updateAlbumMediaCount();
     this.updateListCardWidth();
     Log.info(TAG, `album mediaSet ${this.albums.mediaSetList}`);
@@ -118,37 +128,31 @@ export struct MediaOperationBasePage {
 
   aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
-    this.broadCast.off(null, null);
+    if(this.broadCast) {
+      this.broadCast.off(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
+      this.broadCast.off(BroadCastConstants.MEDIA_OPERATION, this.mediaOperationFunc);
+    }
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.onWindowSizeChangeCallBack = null;
   }
 
   onMenuClicked(action: Action) {
     Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
-
-    switch (action.actionID) {
-      case Action.CANCEL.actionID:
-        router.back({
-          url: '',
-          params: {}
-        });
-        break;
-      case Action.NEW.actionID:
-        this.createNewAlbum();
-        break;
-      default:
-        break;
+    if (action.actionID === Action.CANCEL.actionID) {
+      router.back({
+        url: '',
+        params: {}
+      });
+    } else if (action.actionID === Action.NEW.actionID) {
+      this.createNewAlbum();
     }
   }
 
   createNewAlbum() {
     Log.info(TAG, 'createNewAlbum');
     let menuContext = new MenuContext();
-    this.onOperationStart = this.onOperationStart.bind(this);
-    this.onOperationEnd = this.onOperationEnd.bind(this);
     menuContext
-      .withOperationStartCallback(this.onOperationStart)
-      .withOperationEndCallback(this.onOperationEnd)
+      .withOperationStartCallback((): void => this.onOperationStart())
+      .withOperationEndCallback((): void => this.onOperationEnd())
       .withAlbumSetDataSource(this.albums)
       .withAlbumInfo(this.currentAlbum)
       .withBroadCast(this.broadCast)
@@ -212,28 +216,29 @@ export struct MediaOperationBasePage {
     return res;
   }
 
-  getBorderRadius(index: number): BorderRadiuses {
-    if (index === 0 && index + 1 === this.albums.totalCount()) {
+  getBorderRadius(index: number): BorderRadiuses | undefined {
+    if (this.albums != null && index === 0 && index + 1 === this.albums.totalCount()) {
       return {
         topLeft: this.listCardBorderRadius,
         topRight: this.listCardBorderRadius,
         bottomLeft: this.listCardBorderRadius,
         bottomRight: this.listCardBorderRadius
       };
-    } else if (index + 1 === this.albums.totalCount()) {
+    } else if (this.albums != null && index + 1 === this.albums.totalCount()) {
       return { bottomLeft: this.listCardBorderRadius, bottomRight: this.listCardBorderRadius };
     } else if (index === 0) {
       return { topLeft: this.listCardBorderRadius, topRight: this.listCardBorderRadius };
     }
+    return undefined;
   }
 
   build() {
     Column() {
-      MediaOperationActionBar({ onMenuClicked: this.onMenuClicked })
+      MediaOperationActionBar({ onMenuClicked: this.funcOnMenuClicked })
 
       Stack() {
         List({ scroller: this.scroller }) {
-          LazyForEach(this.albums, (albumSetDataInfo: AlbumSetDataInfo, index?: number) => {
+          LazyForEach(this.albums as AlbumSetDataSource, (albumSetDataInfo: AlbumSetDataInfo, index?: number) => {
             ListItem() {
               AlbumListCard({
                 item: albumSetDataInfo.data,
@@ -246,8 +251,10 @@ export struct MediaOperationBasePage {
             .padding({
               left: $r('app.float.list_card_margin')
             })
-            .borderRadius(this.getBorderRadius(index))
-          }, (item) => item.data.id)
+            .borderRadius(this.getBorderRadius(index as number) as BorderRadiuses)
+          }, (item: AlbumSetDataInfo): string => {
+            return item.data.uri;
+          });
         }
         .alignListItem(ListItemAlign.Center)
         .padding({
@@ -255,10 +262,10 @@ export struct MediaOperationBasePage {
           bottom: this.leftBlank[3] + this.listCardPaddingBottom
         })
         .scrollBar(BarState.Auto)
-        .height(Constants.PERCENT_100)
-        .width(Constants.PERCENT_100)
+        .height(Constants.PERCENT_100 as string)
+        .width(Constants.PERCENT_100 as string)
       }
-      .height(Constants.PERCENT_100)
+      .height(Constants.PERCENT_100 as string)
 
       CustomDialogView({ broadCast: $broadCast })
     }

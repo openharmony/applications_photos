@@ -18,7 +18,7 @@ import { BroadCast, Constants } from '@ohos/common';
 @Component
 export struct ActionButton {
   src: Resource = $r('app.media.alt_placeholder');
-  text: Resource = undefined;
+  text: Resource | null = null;
   textSize: number | Resource = $r('app.float.buttonActionTextSize_default');
   isActive: boolean = false;
   actionID: number = Constants.NEGATIVE_1;
@@ -27,7 +27,7 @@ export struct ActionButton {
   widthOfActionButton: number | Resource = $r('app.float.actionButton_default');
   isCropStyleButton: boolean = false;
   @Consume broadCast: BroadCast;
-  componentKey: string;
+  componentKey: string = '';
 
   aboutToAppear() {
     if (this.text == undefined) {

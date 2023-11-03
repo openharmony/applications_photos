@@ -38,8 +38,19 @@ export class SelectParams {
   isMultiPick: boolean;
   /* caller bundle name */
   bundleName: string;
+  /* whether picker from Camera */
+  cameraAble: boolean;
+  /* whether picker can edit */
+  editAble: boolean;
+  uri: string;
+  itemDisplayName: unknown;
+  itemId: string;
+  isFirstEnter: boolean;
+  itemCount: number;
+  itemCoverUri: string;
+  remainingOfWallpapers: number;
 
-  static defaultParam() {
+  static defaultParam(): SelectParams {
     return {
       maxSelectCount: Constants.DEFAULT_MAX_THIRD_SELECT_COUNT,
       filterMediaType: AlbumDefine.FILTER_MEDIA_TYPE_ALL,
@@ -47,11 +58,19 @@ export class SelectParams {
       isFromFa: false,
       isFromFaPhoto: false,
       isMultiPick: false,
-      bundleName: ''
-    }
+      bundleName: '',
+      cameraAble: true,
+      editAble: true,
+      uri: '',
+      itemDisplayName: undefined,
+      itemId: '',
+      isFirstEnter: false,
+      itemCount: 0,
+      itemCoverUri: '',
+      remainingOfWallpapers: 0
+    };
   }
 }
-
 /* storage key begin */
 export const THIRD_SELECT_IS_ORIGIN = 'third_select_is_origin';
 

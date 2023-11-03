@@ -22,15 +22,20 @@ import { MoveMenuOperation } from './MoveMenuOperation';
 import { Log } from '../../utils/Log';
 import router from '@ohos.router';
 import { AlbumInfo } from '../../model/browser/album/AlbumInfo';
-import type { BroadCast } from '../../utils/BroadCast';
-import type { SelectManager } from '../../model/browser/SelectManager';
+import { BroadCast } from '../../utils/BroadCast';
+import { SelectManager } from '../../model/browser/SelectManager';
 import { UserFileManagerAccess } from '../../access/UserFileManagerAccess';
 import { AlbumDefine } from '../../model/browser/AlbumDefine';
 
 const TAG: string = 'common_MoveOrCopyBroadCastProp';
 
+interface ParamAlbumInfo {
+  item: string;
+  isFromFACard?: boolean;
+}
+
 export class MoveOrCopyBroadCastProp {
-  private broadCast: BroadCast;
+  private broadCast: BroadCast | null = null;
 
   private constructor() {
   }
@@ -39,10 +44,10 @@ export class MoveOrCopyBroadCastProp {
    * Get MoveOrCopyBroadCastProp instance
    */
   public static getInstance(): MoveOrCopyBroadCastProp {
-    if (AppStorage.Get(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) == null) {
+    if (AppStorage.get<MoveOrCopyBroadCastProp>(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) == null) {
       AppStorage.SetOrCreate(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP, new MoveOrCopyBroadCastProp());
     }
-    return AppStorage.Get(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP);
+    return AppStorage.get<MoveOrCopyBroadCastProp>(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) as MoveOrCopyBroadCastProp;
   }
 
   /**
@@ -50,28 +55,32 @@ export class MoveOrCopyBroadCastProp {
    *
    * @param broadCast broadCast
    */
-  public sendMoveOrAddBroadCast(broadCast: BroadCast) {
+  public sendMoveOrAddBroadCast(broadCast: BroadCast): void {
     if (broadCast === null || broadCast === undefined) {
       Log.error(TAG, 'sendMoveOrAddBroadCast error: null or undefined broadcast');
       return;
     }
     this.setBroadCast(broadCast);
 
-    // 如果是系统相册，则直接添加到，而不是弹窗选择添加还是移动
-    let isSystemAlbumSource: boolean = false;
-    let sourceAlbumUri: string = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_SOURCE);
-    let systemAlbumUris: IterableIterator<string> = UserFileManagerAccess.getInstance().getSystemAlbumUriMap().values();
-    for (let uri of systemAlbumUris) {
-      if (sourceAlbumUri === uri) {
-        isSystemAlbumSource = true;
-        break;
-      }
+    /// 如果是系统相册,或者是新建相册从PickerPage界面添加图片的场景，直接添加到，而不是弹窗选择添加还是移动
+    let sourceAlbumUri = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_SOURCE);
+    let isOnlyAddAlbumSource: boolean = sourceAlbumUri === Constants.APP_NEW_ALBUM_SOURCE_PICKER;
+    if (!isOnlyAddAlbumSource) {
+      UserFileManagerAccess.getInstance().getSystemAlbumUriMap().forEach(
+        (value: string) => {
+          if (sourceAlbumUri === value) {
+            isOnlyAddAlbumSource = true;
+            return;
+          }
+        });
     }
-    if (isSystemAlbumSource) {
+    if (isOnlyAddAlbumSource) {
       this.addOperation();
     } else {
-      this.broadCast.emit(BroadCastConstants.SHOW_COPY_OR_MOVE_DIALOG,
-        [this.moveOperation.bind(this), this.addOperation.bind(this)]);
+      if (this.broadCast != null) {
+        this.broadCast.emit(BroadCastConstants.SHOW_COPY_OR_MOVE_DIALOG,
+          [async (): Promise<void> => await this.moveOperation(), async (): Promise<void> => await this.addOperation()]);
+      }
     }
   }
 
@@ -94,21 +103,19 @@ export class MoveOrCopyBroadCastProp {
   }
 
   private async addOperation() {
-    let selectManager: SelectManager = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_SELECTED);
-    let targetAlbumName: string = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_TARGET);
-    let targetAlbumUri: string = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_TARGET_URI);
+    let selectManager: SelectManager = AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;;
+    let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;;
+    let targetAlbumUri: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET_URI)as string;
     if (this.broadCast === null || this.broadCast === undefined) {
       Log.error(TAG, 'addOperation error: null or undefined broadcast');
       return;
     }
 
     let menuContext = new MenuContext();
-    this.onOperationStart = this.onOperationStart.bind(this);
-    this.onOperationEnd = this.onOperationEnd.bind(this);
     menuContext
       .withSelectManager(selectManager)
-      .withOperationStartCallback(this.onOperationStart)
-      .withOperationEndCallback(this.onOperationEnd)
+      .withOperationStartCallback((): void => this.onOperationStartBindImpl())
+      .withOperationEndCallback(async (): Promise<void> => await this.onOperationEndBindImpl())
       .withBroadCast(this.broadCast)
     menuContext.withTargetAlbumName(targetAlbumName).withAlbumUri(targetAlbumUri);
     let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(AddMenuOperation, menuContext);
@@ -116,21 +123,19 @@ export class MoveOrCopyBroadCastProp {
   }
 
   private async moveOperation() {
-    let selectManager: SelectManager = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_SELECTED);
-    let targetAlbumName: string = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_TARGET);
-    let targetAlbumUri: string = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_TARGET_URI);
+    let selectManager: SelectManager = AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
+    let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;
+    let targetAlbumUri: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET_URI) as string;
     if (this.broadCast === null || this.broadCast === undefined) {
       Log.error(TAG, 'moveOperation error: null or undefined broadcast');
       return;
     }
 
     let menuContext = new MenuContext();
-    this.onOperationStart = this.onOperationStart.bind(this);
-    this.onOperationEnd = this.onOperationEnd.bind(this);
     menuContext
       .withSelectManager(selectManager)
-      .withOperationStartCallback(this.onOperationStart)
-      .withOperationEndCallback(this.onOperationEnd)
+      .withOperationStartCallback((): void => this.onOperationStartBindImpl())
+      .withOperationEndCallback(async (): Promise<void> => await this.onOperationEndBindImpl())
       .withBroadCast(this.broadCast)
     menuContext.withTargetAlbumName(targetAlbumName).withAlbumUri(targetAlbumUri);
     let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(MoveMenuOperation, menuContext);
@@ -138,14 +143,14 @@ export class MoveOrCopyBroadCastProp {
   }
 
   private onOperationStart(): void {
-    AppStorage.SetOrCreate(Constants.IS_DATA_FREEZE, true);
+    this.onOperationStartBindImpl();
   }
 
-  private async onOperationEnd(): Promise<void> {
+  private async onOperationEndBindImpl(): Promise<void> {
     AppStorage.SetOrCreate(Constants.IS_DATA_FREEZE, false);
-    let isNewAlbum: boolean = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM);
-    let selectManager: SelectManager = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_SELECTED);
-    let targetAlbumName: string = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_TARGET);
+    let isNewAlbum: boolean = AppStorage.get<boolean>(Constants.APP_KEY_NEW_ALBUM) as boolean;
+    let selectManager: SelectManager = AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
+    let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;
 
     let album = await UserFileManagerAccess.getInstance().getAlbumByName(targetAlbumName);
     let albumInfo: AlbumInfo = new AlbumInfo(album);
@@ -169,11 +174,21 @@ export class MoveOrCopyBroadCastProp {
         }
       });
     } else {
-      AppStorage.SetOrCreate(Constants.KEY_OF_PHOTO_GRID_VIEW_ALBUM_ITEM, { item: JSON.stringify(albumInfo) });
+      AppStorage.setOrCreate<ParamAlbumInfo>(Constants.KEY_OF_PHOTO_GRID_VIEW_ALBUM_ITEM, {
+        item: JSON.stringify(albumInfo)
+      });
       AppStorage.SetOrCreate(Constants.KEY_OF_ALBUM_URI, albumInfo.uri);
       router.back({
         url: 'pages/index',
       });
     }
+  }
+
+  private onOperationStartBindImpl(): void {
+    AppStorage.SetOrCreate(Constants.IS_DATA_FREEZE, true);
+  }
+
+  private async onOperationEnd(): Promise<void> {
+    await this.onOperationEndBindImpl();
   }
 }

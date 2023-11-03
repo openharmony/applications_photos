@@ -14,7 +14,7 @@
  */
 
 import Curves from '@ohos.curves';
-import type { MenuOperation } from '@ohos/common';
+import { MenuOperation, WindowUtil } from '@ohos/common';
 import {
   Action,
   AddMenuOperation,
@@ -22,18 +22,14 @@ import {
   BroadCast,
   BroadCastConstants,
   BroadCastManager,
-  BrowserController,
   Constants,
-  CustomDialogView,
   DateUtil,
   DeleteMenuOperation,
-  ImageGridItemComponent,
   Log,
   MediaItem,
   MediaOperationType,
   MenuContext,
   MenuOperationFactory,
-  NoPhotoIndexComponent,
   ScreenManager,
   ShareMenuOperation,
   TimelineData,
@@ -43,6 +39,12 @@ import {
   ViewData,
   ViewType
 } from '@ohos/common';
+import {
+  BrowserController,
+  CustomDialogView,
+  ImageGridItemComponent,
+  NoPhotoIndexComponent,
+} from '@ohos/common/CommonComponents';
 import { TimelineDataSource } from '../model/TimelineDataSource';
 import { TimelineTitleComponent } from './TimelineTitleComponent';
 import { TimelinePageActionBar } from './TimelinePageActionBar';
@@ -53,6 +55,13 @@ import { TimelineScrollBar } from './TimelineScrollBar';
 
 const TAG: string = 'TimelinePage';
 AppStorage.SetOrCreate('TimelinePageIndex', Constants.INVALID);
+
+interface Params {
+  albumName: string;
+  albumUri: string;
+  pageType: string;
+  pageFrom: number;
+};
 
 // PHOTO Page
 @Component
@@ -69,9 +78,9 @@ export struct TimelinePage {
   @Consume @Watch('onIndexPageShow') isShow: boolean;
   @StorageLink('TimelinePageIndex') @Watch('onIndexChange') TimelinePageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  dataSource: TimelineDataSource;
+  dataSource: TimelineDataSource | null = null;
   mSelectManager: TimelineSelectManager = new TimelineSelectManager();
   scroller: Scroller = new Scroller();
   appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
@@ -91,8 +100,22 @@ export struct TimelinePage {
   @Provide hidePopup: boolean = false;
   // 选择模式下，鼠标对着未勾选项按右键弹框时，移动和复制菜单点击事件的标识位
   private isMvOrCpSeparatesItem: boolean = false;
-  private mvOrCpSeparatesItem: MediaItem = null;
-  private onWindowSizeChangeCallBack = () => this.initGridRowCount();
+  private mvOrCpSeparatesItem?: MediaItem;
+  private onWindowSizeChangeCallBack: Function = (): void => this.initGridRowCount();
+  private backPressEventFunc: Function = (callback: Function): void => this.onIndexBackPress(callback);
+  private onTableChangedFunc: Function = (index: number): void => this.onTabChanged(index);
+  private resetStateEventFunc: Function = (index: number): void => this.onStateReset(index);
+  private updateDataSourceFunc: Function = (item: MediaItem): void => this.onUpdateFavorState(item);
+  private resetZeroFunc: Function = (pageNumber: number): void => this.resetZero(pageNumber);
+  private onLoadingFinishedFunc: Function = (size: number): void => this.onLoadingFinished(size);
+  private selectFunc: Function = (index: number, id: string, isSelected: boolean, callback?: Function): void => this.select(index, id, isSelected, callback);
+  private groupSelectFunc: Function = (position: number): void => this.groupSelect(position);
+  private jumpPhotoBrowserFunc: Function = (name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void =>
+  this.jumpPhotoBrowser(name, item, geometryTapIndex, geometryTransitionString);
+  private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void =>
+  this.jumpThirdPhotoBrowser(name, item, geometryTapIndex, geometryTransitionString);
+  private onDataReloadedFunc: Function = (): void => this.onDataReloaded();
+  private initDateTextFunc: Function = (): void => this.initDateText();
   @State layoutOptions: GridLayoutOptions = {
     regularSize: [1, 1],
     irregularIndexes: [],
@@ -110,7 +133,7 @@ export struct TimelinePage {
     Log.info(TAG, 'aboutToAppear begin');
     let self = this;
     this.dataSource = TimelineDataSourceManager.getInstance().getDataSource();
-    let params: any = router.getParams();
+    let params: Params = router.getParams() as Params;
     if (params != null && params.pageFrom && params.pageFrom == Constants.ENTRY_FROM.CAMERA) {
       this.dataSource.initData();
     }
@@ -135,109 +158,49 @@ export struct TimelinePage {
       ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     }
 
-    this.appBroadCast.on(BroadCastConstants.BACK_PRESS_EVENT, this.onIndexBackPress.bind(this));
-    this.appBroadCast.on(BroadCastConstants.ON_TAB_CHANGED, this.onTabChanged.bind(this));
-    this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateReset.bind(this));
-    this.appBroadCast.on(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorState.bind(this));
-    this.appBroadCast.on(BroadCastConstants.RESET_ZERO, (pageNumber: number) => {
-      if (pageNumber == Constants.TIMELINE_PAGE_INDEX) {
-        this.scroller.scrollEdge(Edge.Top);
-      }
-    });
-    this.broadCast.on(Constants.ON_LOADING_FINISHED, (size: number) => {
-      Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
-    });
+    this.appBroadCast.on(BroadCastConstants.BACK_PRESS_EVENT, this.backPressEventFunc);
+    this.appBroadCast.on(BroadCastConstants.ON_TAB_CHANGED, this.onTableChangedFunc);
+    this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.resetStateEventFunc);
+    this.appBroadCast.on(BroadCastConstants.UPDATE_DATA_SOURCE, this.updateDataSourceFunc);
+    this.appBroadCast.on(BroadCastConstants.RESET_ZERO, this.resetZeroFunc);
+    this.broadCast.on(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
 
-    this.onMenuClicked = this.onMenuClicked.bind(this);
-    this.onMenuClickedForSingleItem = this.onMenuClickedForSingleItem.bind(this);
     Log.info(TAG, 'aboutToAppear doing');
     this.mSelectManager.setPhotoDataImpl();
 
-    this.broadCast.on(BroadCastConstants.SELECT,
-      (index: number, id: string, isSelected: boolean, callback?: Function) => {
-        if (self.mSelectManager.toggle(id, isSelected, index)) {
-          if (!self.isSelectedMode) {
-            self.isSelectedMode = true;
-          }
-        }
-        callback();
-      });
-    this.broadCast.on(BroadCastConstants.GROUP_SELECT, (position: number) => {
-      Log.info(TAG, `GROUP_SELECT ${position}`);
-      if (self.mSelectManager.toggleGroup(self.mSelectManager.getTitleCoordinate(position))) {
-        self.totalSelectedCount = self.mSelectManager.getSelectedCount();
-      }
-    });
-    this.broadCast.on(BroadCastConstants.JUMP_PHOTO_BROWSER, (name: string, item: MediaItem, geometryTapIndex: number,
-                                                              geometryTransitionString: string) => {
-      let targetIndex = self.dataSource.getDataIndex(item);
-      if (targetIndex == Constants.NOT_FOUND) {
-        Log.error(TAG, 'targetIndex is not found');
-        return;
-      }
-      AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
-      if (geometryTapIndex !== undefined && geometryTransitionString !== undefined) {
-        this.jumpToPhotoBrowserGeometryTransition(targetIndex, name, item, geometryTapIndex, geometryTransitionString);
-      } else {
-        this.jumpToPhotoBrowserNormal(targetIndex, name, item);
-      }
-    });
-    this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaItem,
-                                                                    geometryTapIndex: number,
-                                                                    geometryTransitionString: string) => {
-      let targetIndex = self.dataSource.getDataIndex(item);
-      if (targetIndex == Constants.NOT_FOUND) {
-        Log.error(TAG, 'targetIndex is not found');
-        return;
-      }
-      Log.info(TAG, `JUMP_THIRD_PHOTO_BROWSER.index: ${targetIndex} transition: ${name}`);
-      AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, self.mSelectManager);
-      AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, self.dataSource);
-      if (geometryTapIndex !== undefined && geometryTransitionString !== undefined) {
-        this.jumpToSelectPhotoBrowserGeometryTransition(
-          targetIndex, name, item, geometryTapIndex, geometryTransitionString);
-      } else {
-        this.jumpToSelectPhotoBrowserNormal(targetIndex, name, item);
-      }
-    });
+    this.broadCast.on(BroadCastConstants.SELECT, this.selectFunc);
+    this.broadCast.on(BroadCastConstants.GROUP_SELECT, this.groupSelectFunc);
+    this.broadCast.on(BroadCastConstants.JUMP_PHOTO_BROWSER, this.jumpPhotoBrowserFunc);
+    this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
+    this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
+    this.broadCast.on(BroadCastConstants.INIT_DATE_TEXT, this.initDateTextFunc);
 
-    this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, () => {
-      Log.info(TAG, 'ON_DATA_RELOADED');
-      if (this.deleteMode) {
-        animateTo({
-          duration: 300, // 删除动画时长
-          curve: Curves.cubicBezier(0.0, 0.0, 0.2, 1.0) // 减速曲线参数
-        }, () => {
-          this.dataSource.onDataReloaded();
-        })
-        this.deleteMode = false;
-      } else {
-        this.dataSource.onDataReloaded();
-      }
-    });
-
-    this.broadCast.on(BroadCastConstants.INIT_DATE_TEXT, () => {
-      let scrollMediaItem = this.dataSource.getMediaItemByPosition(0);
-      this.dateText = DateUtil.getLocalizedYearAndMonth(scrollMediaItem.getDataTaken());
-    })
-
-    this.mSelectManager.registerCallback('allSelect', this.freezeAdapter((newState: boolean) => {
+    this.mSelectManager.registerCallback('allSelect', (newState: boolean) => {
       Log.info(TAG, `allSelect ${newState}`);
-      self.isAllSelected = newState;
-      self.dataSource.forceUpdate();
-    }));
+      if (this.isDataFreeze) {
+        return;
+      }
+      this.isAllSelected = newState;
+      if (this.dataSource != null) this.dataSource.forceUpdate();
+    });
 
-    this.mSelectManager.registerCallback('updateGroupCount', this.freezeAdapter(() => {
+    this.mSelectManager.registerCallback('updateGroupCount', () => {
       Log.info(TAG, 'updateGroupCount');
-      self.updateGroupSelectMode();
-    }));
+      if (this.isDataFreeze) {
+        return;
+      }
+      this.updateGroupSelectMode();
+    });
 
-    this.mSelectManager.registerCallback('updateCount', this.freezeAdapter((newState: number) => {
+    this.mSelectManager.registerCallback('updateCount', (newState: number) => {
       Log.info(TAG, `mSelectManager updateCount ${newState}`);
-      self.totalSelectedCount = newState;
-      self.moreMenuList = Boolean(newState) ? [Action.ADD, Action.INFO]
-                                            : [Action.ADD_INVALID, Action.INFO_INVALID];
-    }));
+      if (this.isDataFreeze) {
+        return;
+      }
+      this.totalSelectedCount = newState;
+      this.moreMenuList = Boolean(newState) ? [Action.ADD, Action.INFO]
+        : [Action.ADD_INVALID, Action.INFO_INVALID];
+    });
     this.initGridRowCount();
     this.updateGroupSelectMode();
     this.updateYearMap();
@@ -247,20 +210,91 @@ export struct TimelinePage {
   }
 
   updateLayoutOptions(groups: TimelineData[]): void {
-    this.layoutOptions.irregularIndexes.pop();
+    this.layoutOptions.irregularIndexes && this.layoutOptions.irregularIndexes.pop();
     let currentTitleIndex = 0;
     let count: number[] = [];
     count.push(currentTitleIndex);
-
     for (let index = 0; index < groups.length - 1; index++) {
       currentTitleIndex = currentTitleIndex + groups[index].count + 1;
       count.push(currentTitleIndex);
     }
-
     this.layoutOptions = {
       regularSize: [1, 1],
       irregularIndexes: count,
     };
+  }
+
+  private onLoadingFinished(size: number): void {
+    Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
+  }
+
+  private select(index: number, id: string, isSelected: boolean, callback?: Function): void {
+    if (this.mSelectManager.toggle(id, isSelected, index)) {
+      if (!this.isSelectedMode) {
+        this.isSelectedMode = true;
+      }
+    }
+    if (callback) {
+      callback();
+    }
+  }
+
+  private groupSelect(position: number): void {
+    Log.info(TAG, `GROUP_SELECT ${position}`);
+    if (this.mSelectManager.toggleGroup(this.mSelectManager.getTitleCoordinate(position))) {
+      this.totalSelectedCount = this.mSelectManager.getSelectedCount();
+    }
+  }
+
+  private jumpPhotoBrowser(name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void {
+    let targetIndex = this.dataSource == null ? Constants.NOT_FOUND : this.dataSource.getDataIndex(item);
+    if (targetIndex == Constants.NOT_FOUND) {
+      Log.error(TAG, 'targetIndex is not found');
+      return;
+    }
+    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
+    if (geometryTapIndex !== undefined && geometryTransitionString !== undefined) {
+      this.jumpToPhotoBrowserGeometryTransition(targetIndex, name, item, geometryTapIndex, geometryTransitionString);
+    } else {
+      this.jumpToPhotoBrowserNormal(targetIndex, name, item);
+    }
+  }
+
+  private jumpThirdPhotoBrowser(name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void {
+    let targetIndex = this.dataSource == null ? Constants.NOT_FOUND : this.dataSource.getDataIndex(item);
+    if (targetIndex == Constants.NOT_FOUND) {
+      Log.error(TAG, 'targetIndex is not found');
+      return;
+    }
+    Log.info(TAG, `JUMP_THIRD_PHOTO_BROWSER.index: ${targetIndex} transition: ${name}`);
+    AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
+    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
+    if (geometryTapIndex !== undefined && geometryTransitionString !== undefined) {
+      this.jumpToSelectPhotoBrowserGeometryTransition(
+        targetIndex, name, item, geometryTapIndex, geometryTransitionString);
+    } else {
+      this.jumpToSelectPhotoBrowserNormal(targetIndex, name, item);
+    }
+  }
+
+  private onDataReloaded(): void {
+    Log.info(TAG, 'ON_DATA_RELOADED');
+    if (this.deleteMode) {
+      animateTo({
+        duration: 300, // 删除动画时长
+        curve: Curves.cubicBezier(0.0, 0.0, 0.2, 1.0) // 减速曲线参数
+      }, (): void => {
+        this.dataSource?.onDataReloaded();
+      })
+      this.deleteMode = false;
+    } else {
+      if (this.dataSource != null) this.dataSource.onDataReloaded();
+    }
+  }
+
+  private initDateText(): void {
+    let scrollMediaItem: MediaItem = this.dataSource == null ? new MediaItem() : this.dataSource.getMediaItemByPosition(0) as MediaItem;
+    this.dateText = DateUtil.getLocalizedYearAndMonth(scrollMediaItem.getDataTaken());
   }
 
   jumpToPhotoBrowserNormal(targetIndex: number, name: string, item: MediaItem) {
@@ -276,11 +310,18 @@ export struct TimelinePage {
 
   jumpToPhotoBrowserGeometryTransition(targetIndex: number, name: string, item: MediaItem, geometryTapIndex: number,
                                        geometryTransitionString: string) {
-    this.browserController.showBrowser(geometryTapIndex, geometryTransitionString, TAG, {
+    interface Msg {
+      position: number;
+      transition: string;
+      leftBlank: number[];
+    }
+
+    const params: Msg = {
       position: targetIndex,
       transition: name,
       leftBlank: this.leftBlank,
-    });
+    };
+    this.browserController.showBrowser(geometryTapIndex, geometryTransitionString, TAG, params);
   }
 
   jumpToSelectPhotoBrowserNormal(targetIndex: number, name: string, item: MediaItem) {
@@ -295,11 +336,18 @@ export struct TimelinePage {
 
   jumpToSelectPhotoBrowserGeometryTransition(targetIndex: number, name: string, item: MediaItem,
                                              geometryTapIndex: number, geometryTransitionString: string) {
-    this.browserController.showSelectBrowser(geometryTapIndex, geometryTransitionString, TAG, {
+    interface Params {
+      position: number;
+      transition: string;
+      leftBlank: number[];
+    }
+
+    const params: Params = {
       position: targetIndex,
       transition: name,
       leftBlank: this.leftBlank,
-    });
+    };
+    this.browserController.showSelectBrowser(geometryTapIndex, geometryTransitionString, TAG, params);
   }
 
   onPageShow() {
@@ -307,31 +355,37 @@ export struct TimelinePage {
 
   aboutToDisappear(): void {
     Log.debug(TAG, 'aboutToDisappear');
-    this.broadCast.off(null, null);
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    this.onWindowSizeChangeCallBack = null;
-    if (this.dataSource != null) {
-      this.dataSource.unregisterCallback('updateGroupData');
-      this.dataSource.unregisterCallback('updateCount');
-    }
+    this.dataSource?.unregisterCallback('updateGroupData');
+    this.dataSource?.unregisterCallback('updateCount');
     if (this.appBroadCast != null) {
-      this.appBroadCast.off(BroadCastConstants.BACK_PRESS_EVENT, null);
-      this.appBroadCast.off(BroadCastConstants.ON_TAB_CHANGED, null);
-      this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, null);
-      this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, null);
-      this.appBroadCast.off(BroadCastConstants.RESET_ZERO, null);
+      this.appBroadCast.off(BroadCastConstants.BACK_PRESS_EVENT, this.backPressEventFunc);
+      this.appBroadCast.off(BroadCastConstants.ON_TAB_CHANGED, this.onTableChangedFunc);
+      this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, this.resetStateEventFunc);
+      this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.updateDataSourceFunc);
+      this.appBroadCast.off(BroadCastConstants.RESET_ZERO, this.resetZeroFunc);
+    }
+    if (this.broadCast != null) {
+      this.broadCast.off(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
+      this.broadCast.off(BroadCastConstants.SELECT, this.selectFunc);
+      this.broadCast.off(BroadCastConstants.GROUP_SELECT, this.groupSelectFunc);
+      this.broadCast.off(BroadCastConstants.JUMP_PHOTO_BROWSER, this.jumpPhotoBrowserFunc);
+      this.broadCast.off(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
+      this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
+      this.broadCast.off(BroadCastConstants.INIT_DATE_TEXT, this.initDateTextFunc);
     }
   }
 
-  updateGroupSelectMode() {
+  updateGroupSelectMode(): void {
+    let groups: TimelineData[] = this.dataSource == null ? [] : this.dataSource.groups;
     if (this.groupSelectMode.length == 0) {
-      Log.info(TAG, 'first updateGroupSelectMode')
-      for (let i = 0; i < this.dataSource.groups.length; i++) {
+      Log.info(TAG, 'first updateGroupSelectMode');
+      for (let i = 0; i < groups.length; i++) {
         this.groupSelectMode.push(this.mSelectManager.isGroupSelected(i));
       }
     } else {
-      Log.info(TAG, 'no first updateGroupSelectMode')
-      for (let i = 0; i < this.dataSource.groups.length; i++) {
+      Log.info(TAG, 'no first updateGroupSelectMode');
+      for (let i = 0; i < groups.length; i++) {
         Log.info(TAG, 'update one');
         this.groupSelectMode[i] = this.mSelectManager.isGroupSelected(i);
       }
@@ -344,25 +398,29 @@ export struct TimelinePage {
       : [Action.MULTISELECT, Action.DELETE, Action.ADD, Action.INFO];
   }
 
-  updateYearMap() {
+  updateYearMap(): void {
     Log.info(TAG, 'updateYearMap');
-    if (this.dataSource.groups.length == 0) {
+    let groups: TimelineData[] = this.dataSource == null ? [] : this.dataSource.groups;
+    if (groups.length == 0) {
       Log.error(TAG, 'year length is 0');
       return;
     }
     this.yearData = [];
-    let count = this.dataSource.groups[0].count;
-    let startTime = this.dataSource.groups[0].startDate;
-    let endTime = this.dataSource.groups[0].startDate;
-    for (let i = 1; i < this.dataSource.groups.length; i++) {
-      let dateTaken = this.dataSource.groups[i].startDate;
+
+    let startGroup: TimelineData = groups[0];
+    let count: number = startGroup.count as number;
+    let startTime: number = startGroup.startDate as number;
+    let endTime: number = startGroup.startDate as number;
+
+    for (let i = 1; i < groups.length; i++) {
+      let dateTaken: number = groups[i].startDate as number;
       if (DateUtil.isTheSameYear(startTime, dateTaken)) {
-        count = count + this.dataSource.groups[i].count;
+        count = count + groups[i].count as number;
         endTime = dateTaken;
       } else {
         let groupData = new TimelineData(startTime, endTime, count);
         this.yearData.push(groupData);
-        count = this.dataSource.groups[i].count;
+        count = groups[i].count as number;
         startTime = dateTaken;
         endTime = dateTaken;
       }
@@ -372,9 +430,9 @@ export struct TimelinePage {
     Log.info(TAG, 'updateYearMap end');
   }
 
-  onIndexChange() {
+  onIndexChange(): void {
     Log.info(TAG, `onIndexChange ${this.TimelinePageIndex}`);
-    if (this.TimelinePageIndex != Constants.INVALID) {
+    if (this.TimelinePageIndex != Constants.INVALID && this.dataSource != null) {
       this.scroller.scrollToIndex(this.dataSource.getPositionByIndex(this.TimelinePageIndex));
     }
   }
@@ -402,56 +460,49 @@ export struct TimelinePage {
     }
   }
 
-  onMenuClicked(action: Action) {
+  resetZero(pageNumber: number): void {
+    if (pageNumber == Constants.TIMELINE_PAGE_INDEX) {
+      this.scroller.scrollEdge(Edge.Top);
+    }
+  }
+
+  onMenuClicked(action: Action): void {
     Log.info(TAG, `onMenuClicked, actionID: ${action.actionID}`);
     let menuContext: MenuContext;
     let menuOperation: MenuOperation;
-    switch (action) {
-      case Action.CANCEL:
-        this.onModeChange();
-        break;
-      case Action.MULTISELECT:
-        this.isSelectedMode = true;
-        break;
-      case Action.SELECT_ALL:
-        this.mSelectManager.selectAll(true);
-        break;
-      case Action.DESELECT_ALL:
-        this.mSelectManager.deSelectAll();
-        break;
-      case Action.DELETE:
-        menuContext = new MenuContext();
-        this.onDeleteStart = this.onDeleteStart.bind(this);
-        this.onDeleteEnd = this.onDeleteEnd.bind(this);
-        menuContext
-          .withSelectManager(this.mSelectManager)
-          .withFromSelectMode(this.isSelectedMode)
-          .withOperationStartCallback(this.onDeleteStart)
-          .withOperationEndCallback(this.onDeleteEnd)
-          .withBroadCast(this.broadCast);
-        menuOperation = MenuOperationFactory.getInstance()
-          .createMenuOperation(BatchDeleteMenuOperation, menuContext);
-        menuOperation.doAction();
-        break;
-      case Action.SHARE:
-        menuContext = new MenuContext();
-        menuContext.withFromSelectMode(true).withSelectManager(this.mSelectManager);
-        menuOperation = MenuOperationFactory.getInstance()
-          .createMenuOperation(ShareMenuOperation, menuContext);
-        menuOperation.doAction();
-        break;
-      case Action.INFO:
-        this.hidePopup = true;
-        this.openDetailsDialog();
-        break;
-      case Action.ADD:
-        this.mSelectManager.getSelectedItems((selectedItems: Array<MediaItem>) => {
-          Log.info(TAG, `Get selected items success, size: ${selectedItems.length}`);
-          this.routeToSelectAlbumPage(MediaOperationType.Add, selectedItems);
-        })
-        break;
-      default:
-        break;
+    if (action === Action.CANCEL) {
+      this.onModeChange();
+    } else if (action === Action.MULTISELECT) {
+      this.isSelectedMode = true;
+    } else if (action === Action.SELECT_ALL) {
+      this.mSelectManager.selectAll(true);
+    } else if (action === Action.DESELECT_ALL) {
+      this.mSelectManager.deSelectAll();
+    } else if (action === Action.DELETE) {
+      menuContext = new MenuContext();
+      menuContext
+        .withSelectManager(this.mSelectManager)
+        .withFromSelectMode(this.isSelectedMode)
+        .withOperationStartCallback((): void => this.onDeleteStart())
+        .withOperationEndCallback((): void => this.onDeleteEnd())
+        .withBroadCast(this.broadCast);
+      menuOperation = MenuOperationFactory.getInstance()
+        .createMenuOperation(BatchDeleteMenuOperation, menuContext);
+      menuOperation.doAction();
+    } else if (action === Action.SHARE) {
+      menuContext = new MenuContext();
+      menuContext.withFromSelectMode(true).withSelectManager(this.mSelectManager);
+      menuOperation = MenuOperationFactory.getInstance()
+        .createMenuOperation(ShareMenuOperation, menuContext);
+      menuOperation.doAction();
+    } else if (action === Action.INFO) {
+      this.hidePopup = true;
+      this.openDetailsDialog();
+    } else if (action === Action.ADD) {
+      this.mSelectManager.getSelectedItems((selectedItems: Array<MediaItem>) => {
+        Log.info(TAG, `Get selected items success, size: ${selectedItems.length}`);
+        this.routeToSelectAlbumPage(MediaOperationType.Add, selectedItems);
+      })
     }
   }
 
@@ -506,34 +557,42 @@ export struct TimelinePage {
     Log.info(TAG, `onDeleteStart`);
     this.deleteMode = true;
     this.isDataFreeze = true;
-    this.dataSource.unregisterTimelineObserver();
-    this.dataSource.freeze();
+    if (this.dataSource != null) {
+      this.dataSource.unregisterTimelineObserver();
+      this.dataSource.freeze();
+    }
   }
 
   onDeleteEnd(): void {
     Log.info(TAG, `onDeleteEnd`);
     this.isDataFreeze = false;
     this.onModeChange();
-    this.dataSource.registerTimelineObserver();
-    this.dataSource.onChange('image');
-    this.dataSource.unfreeze();
+    if (this.dataSource != null) {
+      this.dataSource.registerTimelineObserver();
+      this.dataSource.onChange('image');
+      this.dataSource.unfreeze();
+    }
   }
 
   onCopyStart(): void {
     Log.info(TAG, `onCopyStart`);
     this.isDataFreeze = true;
-    this.dataSource.unregisterTimelineObserver();
-    this.dataSource.freeze();
+    if (this.dataSource != null) {
+      this.dataSource.unregisterTimelineObserver();
+      this.dataSource.freeze();
+    }
 
   }
 
-  onCopyEnd(err, count, total): void {
+  onCopyEnd(err: Object, count: number, total: number): void {
     Log.info(TAG, `onCopyEnd count: ${count}, total: ${total}`);
     this.isDataFreeze = false;
     this.onModeChange();
-    this.dataSource.registerTimelineObserver();
-    this.dataSource.onChange('image');
-    this.dataSource.unfreeze();
+    if (this.dataSource != null) {
+      this.dataSource.registerTimelineObserver();
+      this.dataSource.onChange('image');
+      this.dataSource.unfreeze();
+    }
     if (err) {
       UiUtil.showToast($r('app.string.copy_failed_single'));
     }
@@ -542,33 +601,24 @@ export struct TimelinePage {
   onMoveStart(): void {
     Log.info(TAG, `onMoveStart`);
     this.isDataFreeze = true;
-    this.dataSource.unregisterTimelineObserver();
-    this.dataSource.freeze();
-  }
-
-  onMoveEnd(err, count, total): void {
-    Log.info(TAG, `onMoveEnd count: ${count}, total: ${total}`);
-    this.isDataFreeze = false;
-    this.onModeChange();
-    this.dataSource.registerTimelineObserver();
-    this.dataSource.unfreeze();
-    this.dataSource.switchRefreshOn();
-    this.dataSource.onChange('image');
-    if (err) {
-      UiUtil.showToast($r('app.string.move_failed_single'));
+    if (this.dataSource != null) {
+      this.dataSource.unregisterTimelineObserver();
+      this.dataSource.freeze();
     }
   }
 
-  // If the interface is frozen, the adapter function will be executed only when the page is not frozen
-  freezeAdapter(fn): Function {
-    let self = this;
-    return function () {
-      if (self.isDataFreeze) {
-        return;
-      }
-      let context = this;
-      let args = arguments;
-      fn.apply(context, args);
+  onMoveEnd(err: Object, count: number, total: number): void {
+    Log.info(TAG, `onMoveEnd count: ${count}, total: ${total}`);
+    this.isDataFreeze = false;
+    this.onModeChange();
+    if (this.dataSource != null) {
+      this.dataSource.registerTimelineObserver();
+      this.dataSource.unfreeze();
+      this.dataSource.switchRefreshOn();
+      this.dataSource.onChange('image');
+    }
+    if (err) {
+      UiUtil.showToast($r('app.string.move_failed_single'));
     }
   }
 
@@ -588,15 +638,11 @@ export struct TimelinePage {
   onIndexPageShow() {
     Log.info(TAG, `[onIndexPageShow] isShow=${this.isShow}, isInCurrentTab=${this.isInCurrentTab}`);
     if (this.isShow && this.isInCurrentTab) {
-      let params: any = router.getParams();
+      let params: Params = router.getParams() as Params;
       if (this.routerStart && params != null && params.pageType != null) {
         Log.info(TAG, `MediaOperation back ${JSON.stringify(params)}`)
-        switch (params.pageType) {
-          case MediaOperationType.Add:
-            this.addOperation(params.albumName, params.albumUri);
-            break;
-          default:
-            break;
+        if (params.pageType = MediaOperationType.Add) {
+          this.addOperation(params.albumName, params.albumUri);
         }
       }
       this.routerStart = false;
@@ -613,10 +659,10 @@ export struct TimelinePage {
       Log.info(TAG, 'onActive');
       this.isActive = true;
 
-      this.dataSource.onActive();
+      this.dataSource?.onActive();
       if (this.isSelectedMode) {
         this.totalSelectedCount = this.mSelectManager.getSelectedCount();
-        this.dataSource.forceUpdate();
+        this.dataSource?.forceUpdate();
       }
     }
   }
@@ -626,12 +672,17 @@ export struct TimelinePage {
     if (this.isActive) {
       Log.info(TAG, 'onInActive');
       this.isActive = false;
-      this.dataSource.onInActive();
+      this.dataSource?.onInActive();
     }
   }
 
   getGeometryTransitionId(item: ViewData, index: number): string {
-    return TAG + item.mediaItem.getHashCode() + this.mSelectManager.isItemSelected(item.mediaItem.uri, item.viewIndex);
+    let mediaItem = item.mediaItem as MediaItem;
+    if (mediaItem) {
+      return TAG + mediaItem.getHashCode() + this.mSelectManager.isItemSelected(mediaItem.uri, item.viewIndex);
+    } else {
+      return TAG + item.viewIndex;
+    }
   }
 
   build() {
@@ -641,13 +692,13 @@ export struct TimelinePage {
           NoPhotoIndexComponent({ index: Constants.TIMELINE_PAGE_INDEX, hasBarSpace: true })
         } else {
           TimelinePageActionBar({
-            onMenuClicked: this.onMenuClicked,
+            onMenuClicked: (action: Action): void => this.onMenuClicked(action),
             totalSelectedCount: $totalSelectedCount
           });
 
           Stack() {
             Grid(this.scroller, this.layoutOptions) {
-              LazyForEach(this.dataSource, (item: ViewData, index?: number) => {
+              LazyForEach(this.dataSource as TimelineDataSource, (item: ViewData, index?: number) => {
                 if (!!item) {
                   if (item.viewType == ViewType.GROUP_TITLE) {
                     GridItem() {
@@ -664,11 +715,11 @@ export struct TimelinePage {
                         dataSource: this.dataSource,
                         item: item.mediaItem,
                         mPosition: item.viewIndex,
-                        isSelected: this.isSelectedMode ? this.mSelectManager.isItemSelected(item.mediaItem.uri, item.viewIndex) : false,
+                        isSelected: this.isSelectedMode ? this.mSelectManager.isItemSelected((item.mediaItem as MediaItem).uri as string, item.viewIndex) : false,
                         pageName: Constants.PHOTO_TRANSITION_TIMELINE,
-                        onMenuClicked: this.onMenuClicked,
-                        onMenuClickedForSingleItem: this.onMenuClickedForSingleItem,
-                        geometryTransitionString: this.getGeometryTransitionId(item, index),
+                        onMenuClicked: (action: Action): void => this.onMenuClicked(action),
+                        onMenuClickedForSingleItem: (action: Action, currentPhoto: MediaItem): void => this.onMenuClickedForSingleItem(action, currentPhoto),
+                        geometryTransitionString: this.getGeometryTransitionId(item, index as number),
                         selectedCount: $totalSelectedCount
                       })
                     }
@@ -679,12 +730,12 @@ export struct TimelinePage {
                 }
               }, (item: ViewData, index?: number) => {
                 if (item == null || item == undefined) {
-                  return JSON.stringify(item) + index;
+                  return (JSON.stringify(item) + index) as string;
                 }
                 if (item.viewType == ViewType.GROUP_TITLE) {
-                  return JSON.stringify(item.viewData) + this.groupSelectMode[item.viewIndex];
+                  return (JSON.stringify(item.viewData) + this.groupSelectMode[item.viewIndex]) as string;
                 } else {
-                  return this.getGeometryTransitionId(item, index);
+                  return this.getGeometryTransitionId(item, index as number) as string;
                 }
               })
             }
@@ -695,7 +746,7 @@ export struct TimelinePage {
             .rowsGap(Constants.GRID_GUTTER)
             .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
             .onScrollIndex((first) => {
-              let scrollMediaItem = this.dataSource.getMediaItemByPosition(first);
+              let scrollMediaItem: MediaItem | null = this.dataSource == null ? null : this.dataSource.getMediaItemByPosition(first) as MediaItem;
               if (scrollMediaItem?.getDataTaken()) {
                 this.dateText = DateUtil.getLocalizedYearAndMonth(scrollMediaItem.getDataTaken());
                 Log.debug(TAG, `scrollIndex=${first}, dateTaken=${scrollMediaItem.getDataTaken()}`);
@@ -719,7 +770,7 @@ export struct TimelinePage {
 
       if (this.isSelectedMode) {
         TimelinePageToolBar({
-          onMenuClicked: this.onMenuClicked,
+          onMenuClicked: (action: Action): void => this.onMenuClicked(action),
           totalSelectedCount: $totalSelectedCount
         })
       }
@@ -734,24 +785,18 @@ export struct TimelinePage {
     }
     let menuOperation: MenuOperation;
     let menuContext: MenuContext;
-    switch (action) {
-      case Action.DELETE:
-        menuContext = new MenuContext();
-        menuContext.withMediaItem(currentPhoto).withBroadCast(this.broadCast);
-        menuOperation = MenuOperationFactory.getInstance()
-          .createMenuOperation(DeleteMenuOperation, menuContext);
-        menuOperation.doAction();
-        break;
-      case Action.ADD:
-        this.isMvOrCpSeparatesItem = true;
-        this.mvOrCpSeparatesItem = currentPhoto;
-        this.routeToSelectAlbumPage(MediaOperationType.Add, [currentPhoto]);
-        break;
-      case Action.INFO:
-        this.broadCast.emit(BroadCastConstants.SHOW_DETAIL_DIALOG, [currentPhoto, false]);
-        break;
-      default:
-        break;
+    if (action === Action.DELETE) {
+      menuContext = new MenuContext();
+      menuContext.withMediaItem(currentPhoto).withBroadCast(this.broadCast);
+      menuOperation = MenuOperationFactory.getInstance()
+        .createMenuOperation(DeleteMenuOperation, menuContext);
+      menuOperation.doAction();
+    } else if (action === Action.ADD) {
+      this.isMvOrCpSeparatesItem = true;
+      this.mvOrCpSeparatesItem = currentPhoto;
+      this.routeToSelectAlbumPage(MediaOperationType.Add, [currentPhoto]);
+    } else if (action === Action.INFO) {
+      this.broadCast.emit(BroadCastConstants.SHOW_DETAIL_DIALOG, [currentPhoto, false]);
     }
   }
 
@@ -773,17 +818,17 @@ export struct TimelinePage {
 
   private async addOperation(albumName: string, albumUri: string) {
     let menuContext = new MenuContext();
-    this.onCopyStart = this.onCopyStart.bind(this);
-    this.onCopyEnd = this.onCopyEnd.bind(this);
+    let onCopyStartFunc =  (): void => this.onCopyStart();
     if (this.isMvOrCpSeparatesItem) {
-      menuContext.withMediaItem(this.mvOrCpSeparatesItem);
+      menuContext.withMediaItem(this.mvOrCpSeparatesItem as MediaItem);
       this.onCopyStart && this.onCopyStart();
       this.isMvOrCpSeparatesItem = false;
-      this.mvOrCpSeparatesItem = null;
+      this.mvOrCpSeparatesItem = undefined;
     } else {
-      menuContext.withSelectManager(this.mSelectManager).withOperationStartCallback(this.onCopyStart);
+      menuContext.withSelectManager(this.mSelectManager).withOperationStartCallback(onCopyStartFunc);
     }
-    menuContext.withOperationEndCallback(this.onCopyEnd).withBroadCast(this.broadCast)
+    menuContext.withOperationEndCallback((err: Object, count: number, total: number): void => this.onCopyEnd(err as Object, count, total))
+      .withBroadCast(this.broadCast)
       .withTargetAlbumName(albumName).withAlbumUri(albumUri);
     let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(AddMenuOperation, menuContext);
     menuOperation.doAction();
@@ -791,8 +836,9 @@ export struct TimelinePage {
 
   private onUpdateFavorState(item: MediaItem): void {
     Log.debug(TAG, 'onUpdateFavorState favor');
-    let index = this.dataSource.getIndexByMediaItem(item);
-    if (index != -1) {
+    if (this.dataSource != null) {
+      let index = this.dataSource.getIndexByMediaItem(item);
+      if (index == Constants.NOT_FOUND) return;
       let flushIndex = this.dataSource.getPositionByIndex(index);
       Log.debug(TAG, `onUpdateFavorState favor flushIndex ${flushIndex}`);
       this.dataSource.onDataChanged(flushIndex);
