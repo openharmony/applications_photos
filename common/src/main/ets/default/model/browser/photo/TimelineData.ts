@@ -18,7 +18,7 @@ export class TimelineData {
   startDate: number;
   endDate: number;
 
-  constructor(startDate: number, endDate: number, count: number) {
+  constructor(startDate?: number, endDate?: number, count?: number) {
     this.startDate = startDate;
     this.endDate = endDate;
     this.count = count;

@@ -32,11 +32,11 @@ const TAG: string = 'common_ActionBar';
 @Component
 export struct ActionBar {
   @Link actionBarProp: ActionBarProp;
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   isVideoPage: boolean = false;
   isFromPhotoBrowser: boolean = false;
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @Prop isNeedPlaceholder: boolean;
+  @Prop isNeedPlaceholder: boolean = false;
 
   createArray(): ActionBarProp[] {
     let actionBarProps = new Array<ActionBarProp>();
@@ -57,7 +57,7 @@ export struct ActionBar {
         .height(Constants.NUMBER_32)
       }
       if (!this.actionBarProp.getLeftAction().equals(Action.NONE)) {
-        ForEach(this.createArray(), (item) => {
+        ForEach(this.createArray(), (item: ActionBarProp) => {
           ActionBarButton({
             res: item.getLeftAction().iconRes,
             action: item.getLeftAction(),

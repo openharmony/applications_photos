@@ -31,6 +31,7 @@ export class PhotoEditorManager {
   private item: MediaItem = undefined;
   private editors: Array<PhotoEditBase> = undefined;
   private historyManager: ImageFilterStack = undefined;
+  private albumUri: string = '';
 
   private constructor() {
     this.historyManager = new ImageFilterStack();
@@ -39,25 +40,26 @@ export class PhotoEditorManager {
   }
 
   static getInstance(): PhotoEditorManager {
-    if (AppStorage.Get(Constants.PHOTO_EDITOR_MANAGER) == null) {
+    if (AppStorage.get(Constants.PHOTO_EDITOR_MANAGER) == null) {
       AppStorage.SetOrCreate(Constants.PHOTO_EDITOR_MANAGER, new PhotoEditorManager());
     }
-    return AppStorage.Get(Constants.PHOTO_EDITOR_MANAGER);
+    return AppStorage.get(Constants.PHOTO_EDITOR_MANAGER);
   }
 
-  initialize(item: MediaItem, mode: PhotoEditMode, errCallback?: Function): void {
-    Log.info(TAG, `initialize mode[${mode}]`);
+  initialize(item: MediaItem, albumUri: string, mode: PhotoEditMode, errCallback?: Function): void {
+    Log.info(TAG, `initialize mode[${mode}], item[${item.uri}] albumUri = ${albumUri}`);
     this.item = item;
+    this.albumUri = albumUri;
     Loader.loadPixelMapWrapper(item, true).then((pixelMap) => {
       if (pixelMap) {
         this.origin = pixelMap;
-        this.historyManager.setOriginPixelMap(this.origin);
+        (this.historyManager as ImageFilterStack).setOriginPixelMap(this.origin);
         this.switchMode(mode);
       } else {
         Log.error(TAG, 'initialize loadPixelMapWrapper failed');
         errCallback && errCallback();
       }
-    })
+    });
   }
 
   clear(): void {
@@ -153,7 +155,7 @@ export class PhotoEditorManager {
       if (filter != undefined) {
         this.historyManager.push(filter);
       }
-      Save.save(this.item, this.historyManager, isReplace, callback);
+      Save.save(this.item as MediaItem, this.albumUri, this.historyManager as ImageFilterStack, isReplace, callback);
     } else {
       Log.warn(TAG, `editor is undefined, currentMode = ${this.currentMode}`);
     }

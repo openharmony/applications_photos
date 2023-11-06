@@ -42,11 +42,11 @@ export class StatusBarColorController {
   }
 
   public static getInstance(): StatusBarColorController {
-    if (AppStorage.Get(Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER) == null) {
+    if (AppStorage.get(Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER) == null) {
       AppStorage.SetOrCreate(
         Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER, new StatusBarColorController());
     }
-    return AppStorage.Get(Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER);
+    return AppStorage.get(Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER);
   }
 
   public setMode(mode: StatusBarColorMode): void {

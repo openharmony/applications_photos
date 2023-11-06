@@ -38,6 +38,11 @@ const TAG: string = 'browser_AlbumGridItemNewStyle';
   .focusable(true)
 }
 
+interface ParamAlbumInfo {
+  item: string;
+  isFromFACard?: boolean;
+}
+
 // The item of album grid, and it's new style.
 @Component
 export struct AlbumGridItemNewStyle {
@@ -54,20 +59,21 @@ export struct AlbumGridItemNewStyle {
   @Consume('selectedCount') selectedCount: number;
   @Consume @Watch('onModeChange') isAlbumSetSelectedMode: boolean;
   @Consume rightClickMenuList: Array<Action>;
-  currentRightClickMenuList: Array<Action>;
-  onMenuClicked: Function;
-  onMenuClickedForSingleItem: Function;
+  currentRightClickMenuList: Array<Action> = [];
+  onMenuClicked: Function = (): void => {};
+  onMenuClickedForSingleItem: Function = (): void => {};
   gridAspectRatio = Constants.CARD_ASPECT_RATIO;
   albumCountMarginRight = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN * 2;
   iconMarkAnchorX = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
   iconMarkAnchorY = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
-  @StorageLink('deviceType') deviceType: string = AppStorage.Get('deviceType');
+  @StorageLink('deviceType') deviceType: string | undefined = AppStorage.get<string>('deviceType') ;
   @State transitionId: string = '';
   @StorageLink('isShowPhotoGridView') isShowPhotoGridView: boolean = false;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private keyIndex?: number;
   private fp2vpUnit: number = px2vp(fp2px(Constants.NUMBER_1));
   private recycleAlbumOfPhoneHeight: number = Constants.RECYCLE_ALBUM_OF_PHONE_HEIGHT;
+  private updateCardSizeFunc: Function = (): void => this.updateCardSize();
 
   doAnimation(): void {
     let albumToPhotoGridDuration: number;
@@ -93,14 +99,14 @@ export struct AlbumGridItemNewStyle {
       curve: Curve.Friction,
     }, () => {
       AppStorage.SetOrCreate<boolean>(Constants.KEY_OF_IS_SHOW_PHOTO_GRID_VIEW,!this.isShowPhotoGridView);
-      AppStorage.SetOrCreate<number>(Constants.KEY_OF_SELECTED_ALBUM_INDEX, this.keyIndex);
+      AppStorage.SetOrCreate<number>(Constants.KEY_OF_SELECTED_ALBUM_INDEX, this.keyIndex ? this.keyIndex : -1);
       AppStorage.SetOrCreate<string>(Constants.KEY_OF_SELECTED_ALBUM_URI, this.item.uri);
     })
     animateTo({
       duration: albumActionBarDuration,
       curve: Curve.Sharp
     }, () => {
-      if (AppStorage.Get('deviceType') !== Constants.PC_DEVICE_TYPE) {
+      if (AppStorage.get<string>('deviceType') !== Constants.PC_DEVICE_TYPE) {
         AppStorage.SetOrCreate<number>(Constants.KEY_OF_ALBUM_OPACITY, 0);
       }
       AppStorage.SetOrCreate<number>(Constants.KEY_OF_ALBUM_ACTIONBAR_OPACITY, 0);
@@ -110,7 +116,7 @@ export struct AlbumGridItemNewStyle {
       curve: Curve.Sharp,
       delay: BrowserConstants.LINK_IN_PHOTO_GRID_DELAY,
     }, () => {
-      if (AppStorage.Get('deviceType') !== Constants.PC_DEVICE_TYPE) {
+      if (AppStorage.get<string>('deviceType') !== Constants.PC_DEVICE_TYPE) {
         AppStorage.SetOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 1);
       }
     })
@@ -128,7 +134,7 @@ export struct AlbumGridItemNewStyle {
       AppStorage.SetOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_ACTIONBAR_OPACITY, 1);
     })
 
-    if (AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE) {
+    if (AppStorage.get<string>('deviceType') !== Constants.PC_DEVICE_TYPE) {
       animateTo({
         duration: BrowserConstants.PC_LINK_IN_PHOTO_GRID_DURATION,
         delay: BrowserConstants.LINK_IN_PHOTO_GRID_DELAY,
@@ -157,15 +163,14 @@ export struct AlbumGridItemNewStyle {
   aboutToAppear(): void {
     Log.debug(TAG, `aboutToAppear`);
     this.selectable = !this.item.isTrashAlbum;
-    this.updateCardSize = this.updateCardSize.bind(this)
 
     // 后续phone缩略图支持横竖屏后再放开
-    if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateCardSize);
+    if (AppStorage.get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
+      ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateCardSizeFunc);
     }
-    let isFirstPhotoItem = AppStorage.Get<boolean>(Constants.KEY_OF_IS_FIRST_PHOTO_ITEM);
-    let lastTransitionId = AppStorage.Get<string>(Constants.KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT);
-    if (!isFirstPhotoItem && this.item.uri === AppStorage.Get<string>(Constants.KEY_OF_ALBUM_URI)) {
+    let isFirstPhotoItem = AppStorage.get<boolean>(Constants.KEY_OF_IS_FIRST_PHOTO_ITEM);
+    let lastTransitionId = AppStorage.get<string>(Constants.KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT) as string;
+    if (!isFirstPhotoItem && this.item.uri === AppStorage.get<string>(Constants.KEY_OF_ALBUM_URI)) {
       this.transitionId = lastTransitionId;
     } else {
       if (!this.isRecycleAlbumOfPhoneLikeDevice() && this.item.mediaItem) {
@@ -183,9 +188,8 @@ export struct AlbumGridItemNewStyle {
 
   aboutToDisappear(): void {
     // 后续phone缩略图支持横竖屏后再放开
-    if (AppStorage.Get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
-      ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateCardSize);
-      this.updateCardSize = null;
+    if (AppStorage.get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
+      ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateCardSizeFunc);
     }
   }
 
@@ -197,7 +201,7 @@ export struct AlbumGridItemNewStyle {
   updateCardSize(): void {
     let sideBarWidth: number = 0;
     let count: number = 0;
-    let currentBreakpoint = AppStorage.Get<string>('currentBreakpoint');
+    let currentBreakpoint = AppStorage.get<string>('currentBreakpoint');
     if (currentBreakpoint === Constants.BREAKPOINT_LG && this.deviceType == Constants.PAD_DEVICE_TYPE) {
       sideBarWidth = Constants.PAD_TAB_BAR_WIDTH;
       count = UiUtil.getAlbumGridCount(true);
@@ -244,10 +248,10 @@ export struct AlbumGridItemNewStyle {
     if (this.selectable) {
       let newState: boolean = !this.isSelected;
       this.broadCast.emit(BroadCastConstants.SELECT,
-        [this.item.uri, newState, this.item.isSystemAlbum, this.item.isSystemAlbum, function(){
+        [this.item.uri, newState, this.item.isSystemAlbum, this.item.isSystemAlbum, (): void => {
           Log.info(TAG, 'enter callback');
           this.isSelected = newState;
-        }.bind(this)]);
+        }]);
     }
   }
 
@@ -288,7 +292,7 @@ export struct AlbumGridItemNewStyle {
                 }
               }
             })
-        }, menu => menu.actionID.toString())
+        }, (menu: Action) => menu.actionID.toString())
     }
     .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_ONE_POINT_FIVE))
     .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
@@ -449,8 +453,8 @@ export struct AlbumGridItemNewStyle {
       this.albumOnClick();
     })
     .bindContextMenu(this.RightClickMenuBuilder, this.showRightClickPopup() ? ResponseType.RightClick : -1)
-    .onKeyEvent((event: KeyEvent) => {
-      if (KeyType.Up == event.type) {
+    .onKeyEvent((event?: KeyEvent) => {
+      if (event != null && KeyType.Up == event.type) {
         switch (event.keyCode) {
           case MultimodalInputManager.KEY_CODE_KEYBOARD_ENTER:
             this.albumOnClick();
@@ -489,7 +493,7 @@ export struct AlbumGridItemNewStyle {
       this.selectStateChange();
     } else {
       Log.info(TAG, `After onClick, MediaSet is: ${JSON.stringify(this.item)}`);
-      if (this.item.isTrashAlbum && AppStorage.Get('deviceType') !== Constants.PC_DEVICE_TYPE) {
+      if (this.item.isTrashAlbum && (AppStorage.get<string>('deviceType') !== Constants.PC_DEVICE_TYPE)) {
         router.pushUrl({
           url: 'pages/PhotoGridPage',
           params: {
@@ -497,7 +501,8 @@ export struct AlbumGridItemNewStyle {
           }
         });
       } else if (!this.isShowPhotoGridView) {
-        AppStorage.SetOrCreate(Constants.KEY_OF_PHOTO_GRID_VIEW_ALBUM_ITEM, { item: JSON.stringify(this.item) });
+        let albumInfo: ParamAlbumInfo = { item: JSON.stringify(this.item) }
+        AppStorage.setOrCreate<ParamAlbumInfo>(Constants.KEY_OF_PHOTO_GRID_VIEW_ALBUM_ITEM, albumInfo);
         AppStorage.SetOrCreate(Constants.KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT, this.transitionId);
         AppStorage.SetOrCreate(Constants.KEY_OF_ALBUM_URI, this.item.uri);
         this.doAnimation();

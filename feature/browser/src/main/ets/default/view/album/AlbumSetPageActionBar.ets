@@ -15,7 +15,6 @@
 
 import {
   Action,
-  ActionBar,
   ActionBarMode,
   ActionBarProp,
   ActionBarSelectionMode,
@@ -23,6 +22,7 @@ import {
   Log,
   ScreenManager
 } from '@ohos/common';
+import { ActionBar } from '@ohos/common/CommonComponents';
 
 const TAG: string = 'browser_AlbumSetPageActionBar';
 
@@ -38,11 +38,11 @@ export struct AlbumSetPageActionBar {
     = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @State isNeedPlaceholder: boolean = true;
   @Provide moreMenuList: Action[] = new Array<Action>();
   @Provide hidePopup: boolean = false;
-  private deviceType: string;
+  private deviceType: string = '';
   private actionBarPaddingTop: number | Resource = 0;
 
   updatePlaceholderStatus(): void {
@@ -62,7 +62,7 @@ export struct AlbumSetPageActionBar {
   }
 
   aboutToAppear(): void {
-    this.deviceType = AppStorage.Get<string>('deviceType');
+    this.deviceType = AppStorage.get<string>('deviceType') as string;
     if (this.deviceType === Constants.PC_DEVICE_TYPE) {
       this.actionBarPaddingTop = $r('app.float.album_set_page_action_bar_padding_top');
     } else if (this.deviceType === Constants.PAD_DEVICE_TYPE) {
@@ -110,7 +110,7 @@ export struct AlbumSetPageActionBar {
         .setSelectionMode(ActionBarSelectionMode.MULTI);
     } else {
       menuList.push(Action.NEW)
-      const deviceType: string = AppStorage.Get('deviceType');
+      const deviceType: string = AppStorage.get('deviceType') as string;
       if (deviceType === Constants.PC_DEVICE_TYPE) {
         menuList.push(Action.MULTISELECT)
       }

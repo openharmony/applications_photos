@@ -25,7 +25,7 @@ export class ReportToBigDataUtil {
   private static PREFIX_NUMBER: number = 4;
   static readonly PHOTOS_DFX_DOMAIN: string = 'PHOTOS';
 
-  public static report(eventId: string, eventMsg: object): void {
+  public static report(eventId: string, eventMsg?: object): void {
     hiSysEvent.write({
       domain: ReportToBigDataUtil.PHOTOS_DFX_DOMAIN,
       name: eventId,
@@ -38,7 +38,7 @@ export class ReportToBigDataUtil {
     Log.info(TAG, `report, eventId: ${eventId} msg: ${JSON.stringify(eventMsg)}`);
   }
 
-  public static statisticReport(eventId: string, eventMsg: object): void {
+  public static statisticReport(eventId: string, eventMsg?: object): void {
     hiSysEvent.write({
       domain: ReportToBigDataUtil.PHOTOS_DFX_DOMAIN,
       name: eventId,
@@ -51,7 +51,7 @@ export class ReportToBigDataUtil {
     Log.info(TAG, `report, eventId: ${eventId} msg: ${JSON.stringify(eventMsg)}`);
   }
 
-  public static errEventReport(eventId: string, eventMsg: object): void {
+  public static errEventReport(eventId: string, eventMsg?: object): void {
     hiSysEvent.write({
       domain: ReportToBigDataUtil.PHOTOS_DFX_DOMAIN,
       name: eventId,

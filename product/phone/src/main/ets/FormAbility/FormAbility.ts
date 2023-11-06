@@ -101,7 +101,7 @@ export default class FormAbility extends FormExtension {
 
     // Init system album information
     UserFileManagerAccess.getInstance().prepareSystemAlbums();
-    globalThis.formContext = this.context;
+    AppStorage.setOrCreate('formContext', this.context);
   }
 
   private async clearCache(newStatus: FormVisibilityArray): Promise<void> {

@@ -19,23 +19,35 @@ import {
   BroadCast,
   BroadCastConstants,
   BroadCastManager,
-  BrowserController,
   Constants,
   Log,
   MediaItem,
   mMultimodalInputManager,
-  PhotoBrowserBg,
   BrowserConstants as PhotoConstants,
   PhotoDataSource,
-  PhotoSwiper,
   ScreenManager,
   SelectManager,
   SelectUtil,
-  ThirdSelectPhotoBrowserActionBar,
-  UiUtil
+  UiUtil,
+  MediaDataSource
 } from '@ohos/common';
+import {
+  BrowserController,
+  PhotoBrowserBg,
+  PhotoSwiper,
+  ThirdSelectPhotoBrowserActionBar
+} from '@ohos/common/CommonComponents';
+import ability from '@ohos.ability.ability';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'SelectPhotoBrowserView';
+
+interface Params {
+  pageFrom: number;
+  deviceId: string;
+  position: number;
+  transition: string;
+};
 
 // select mode
 @Component
@@ -47,9 +59,9 @@ export struct SelectPhotoBrowserView {
   @State isShowBar: boolean = true;
   @Provide pageFrom: number = Constants.ENTRY_FROM.NORMAL;
   @Provide canSwipe: boolean = true;
-  selectManager: SelectManager;
+  selectManager: SelectManager | null = null;
   isMultiPick = true;
-  mTransition: string;
+  mTransition: string = '';
   controller: SwiperController = new SwiperController();
   @Provide isDeleting: boolean = false;
 
@@ -57,9 +69,9 @@ export struct SelectPhotoBrowserView {
   @Provide('transitionIndex') currentIndex: number = 0;
 
   // position
-  mPosition: number;
+  mPosition: number = 0;
   timelineIndex: number = -1;
-  @Prop @Watch('onPageChanged') pageStatus: boolean;
+  @Prop @Watch('onPageChanged') pageStatus: boolean = false;
   @StorageLink('geometryOpacity') geometryOpacity: number = 1;
   @State @Watch('onGeometryChanged') geometryTransitionId: string = 'default_id';
   @Link isRunningAnimation: boolean;
@@ -69,6 +81,25 @@ export struct SelectPhotoBrowserView {
   // The global BroadCast of the application process. Event registration and destruction should be paired
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private geometryTransitionEnable: boolean = false;
+  private pullDownEndFunc: Function = (): void => this.pullDownEnd();
+  private dataSizeChangedFunc: Function = (size: number): void => this.onDataSizeChanged(size);;
+  private dataContentChangedFunc: Function = (size: number): void => this.dataContentChanged(size);
+  private setDisableSwipeFunc: Function = (value: boolean): void => this.setDisableSwipe(value);
+
+  private pullDownEnd(): void {
+    this.onBackPress();
+  }
+
+  private dataContentChanged(size: number): void {
+    // onContentChanged only the current item is updated
+    Log.info(TAG, `DATA_CONTENT_CHANGED : ${size}`);
+    this.onPhotoChanged(this.currentIndex);
+  }
+
+  private setDisableSwipe(value: boolean): void {
+    Log.info(TAG, `set swiper swipe ${value}`);
+    this.canSwipe = value;
+  }
 
   onPageChanged() {
     if (this.pageStatus) {
@@ -84,7 +115,7 @@ export struct SelectPhotoBrowserView {
 
   aboutToAppear(): void {
     Log.info(TAG, 'photoBrowser aboutToAppear');
-    this.geometryTransitionId = AppStorage.Get('geometryTransitionBrowserId')
+    this.geometryTransitionId = AppStorage.get<string>('geometryTransitionBrowserId') as string;
     Log.info(TAG, `photoBrowser aboutToAppear  ${this.geometryTransitionId}`);
     this.backgroundColorResource = $r('app.color.black');
     mMultimodalInputManager.registerListener((control: number) => {
@@ -101,8 +132,8 @@ export struct SelectPhotoBrowserView {
         this.onBackPress();
       }
     });
-    this.selectManager = AppStorage.Get(Constants.PHOTO_GRID_SELECT_MANAGER);
-    let param: any = this.browserController.selectBrowserParam;
+    this.selectManager = AppStorage.get<SelectManager>(Constants.PHOTO_GRID_SELECT_MANAGER) as SelectManager;
+    let param: Params = this.browserController.selectBrowserParam as Params;
     if (param.pageFrom) {
       this.pageFrom = param.pageFrom;
     }
@@ -112,50 +143,35 @@ export struct SelectPhotoBrowserView {
       this.dataSource.setDeviceId(param.deviceId);
     }
 
-    this.dataSource.setAlbumDataSource(AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER));
-    if (this.isMultiPick == true) {
+    this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+    if (this.isMultiPick == true && this.selectManager) {
       this.selectedCount = this.selectManager.getSelectedCount();
     }
 
     this.onPhotoChanged(param.position);
     this.mTransition = param.transition;
-    this.onMenuClicked = this.onMenuClicked.bind(this);
 
     this.dataSource.setBroadCast(this.broadCast);
 
-    this.broadCast.on(PhotoConstants.PULL_DOWN_END, (event) => {
-      Log.info(TAG, `PULL_DOWN_END : ${JSON.stringify(event)}`);
-      this.onBackPress();
-    });
+    this.broadCast.on(PhotoConstants.PULL_DOWN_END, this.pullDownEndFunc);
+    this.broadCast.on(PhotoConstants.DATA_SIZE_CHANGED, this.dataSizeChangedFunc);
+    this.broadCast.on(PhotoConstants.DATA_CONTENT_CHANGED, this.dataContentChangedFunc);
+    this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, this.setDisableSwipeFunc);
 
-    this.broadCast.on(PhotoConstants.DATA_SIZE_CHANGED, (size: number) => {
-      this.onDataSizeChanged(size);
-    });
-
-    this.broadCast.on(PhotoConstants.DATA_CONTENT_CHANGED, (size: number) => {
-      // onContentChanged only the current item is updated
-      Log.info(TAG, `DATA_CONTENT_CHANGED : ${size}`);
-      this.onPhotoChanged(this.currentIndex);
-    });
-
-    this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, (value: boolean) => {
-      Log.info(TAG, `set swiper swipe ${value}`);
-      this.canSwipe = value;
-    });
-
-    this.appBroadCast.on(BroadCastConstants.SELECT_PHOTO_BROWSER_BACK_PRESS_EVENT, () => {
-      Log.debug(TAG, 'hook back press from page.');
-      this.onBackPress();
-    });
+    this.appBroadCast.on(BroadCastConstants.SELECT_PHOTO_BROWSER_BACK_PRESS_EVENT, this.pullDownEndFunc);
   }
 
   aboutToDisappear(): void {
     this.broadCast.release();
     this.dataSource.release();
     mMultimodalInputManager.unregisterListener();
-    this.controller = undefined;
-    this.broadCast.off(null, null);
-    this.appBroadCast.off(BroadCastConstants.SELECT_PHOTO_BROWSER_BACK_PRESS_EVENT, null);
+    if(this.broadCast) {
+      this.broadCast.off(PhotoConstants.PULL_DOWN_END, this.pullDownEndFunc);
+      this.broadCast.off(PhotoConstants.DATA_SIZE_CHANGED, this.dataSizeChangedFunc);
+      this.broadCast.off(PhotoConstants.DATA_CONTENT_CHANGED, this.dataContentChangedFunc);
+      this.broadCast.off(PhotoConstants.SET_DISABLE_SWIPE, this.setDisableSwipeFunc);
+    }
+    this.appBroadCast.off(BroadCastConstants.SELECT_PHOTO_BROWSER_BACK_PRESS_EVENT, this.pullDownEndFunc);
   }
 
   onDataSizeChanged(size: number): void {
@@ -172,7 +188,7 @@ export struct SelectPhotoBrowserView {
     if (currentPhoto == undefined) {
       Log.error(TAG, 'onPhotoChanged, item is undefined');
     } else {
-      this.isSelected = this.selectManager.isItemSelected(currentPhoto.uri, this.timelineIndex);
+      this.isSelected = this.selectManager?.isItemSelected(currentPhoto.uri, this.timelineIndex) ?? false;
       AppStorage.SetOrCreate<number>('placeholderIndex', this.timelineIndex);
       this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
       Log.info(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri},\
@@ -187,8 +203,8 @@ export struct SelectPhotoBrowserView {
       return;
     }
     this.isSelected = !this.isSelected;
-    if (this.selectManager.toggle(currentPhoto.uri, this.isSelected, this.timelineIndex)) {
-      this.selectedCount = this.selectManager.getSelectedCount();
+    if (this.selectManager?.toggle(currentPhoto.uri, this.isSelected, this.timelineIndex)) {
+      this.selectedCount = this.selectManager?.getSelectedCount() ?? 0;
     }
     this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
     Log.info(TAG, `selectedCount: ${this.selectedCount} after state change`)
@@ -207,24 +223,17 @@ export struct SelectPhotoBrowserView {
 
   onMenuClicked(action: Action) {
     Log.debug(TAG, `onMenuClicked, action: ${action.actionID}`);
-    switch (action.actionID) {
-      case Action.BACK.actionID:
-        this.onBackPress();
-        return;
-      case Action.MATERIAL_SELECT.actionID:
-        Log.info(TAG, 'click UN_SELECTED');
-        this.selectStateChange();
-        return;
-      case Action.SELECTED.actionID:
-        Log.info(TAG, 'click SELECTED');
-        this.selectStateChange();
-        return;
-      case Action.OK.actionID:
-        Log.info(TAG, 'click OK');
-        this.setPickResult();
-        break;
-      default:
-        break;
+    if (action.actionID === Action.BACK.actionID) {
+      this.onBackPress();
+    } else if (action.actionID === Action.MATERIAL_SELECT.actionID) {
+      Log.info(TAG, 'click UN_SELECTED');
+      this.selectStateChange();
+    } else if (action.actionID === Action.SELECTED.actionID) {
+      Log.info(TAG, 'click SELECTED');
+      this.selectStateChange();
+    } else if (action.actionID === Action.OK.actionID) {
+      Log.info(TAG, 'click OK');
+      this.setPickResult();
     }
   }
 
@@ -254,7 +263,7 @@ export struct SelectPhotoBrowserView {
       PhotoSwiper({
         dataSource: this.dataSource,
         mTransition: this.mTransition,
-        onPhotoChanged: this.onPhotoChanged.bind(this),
+        onPhotoChanged: (index: number): void => this.onPhotoChanged(index),
         swiperController: this.controller,
         geometryTransitionEnable: this.geometryTransitionEnable,
         broadCast: $broadCast,
@@ -264,7 +273,7 @@ export struct SelectPhotoBrowserView {
 
       ThirdSelectPhotoBrowserActionBar({
         isMultiPick: this.isMultiPick,
-        onMenuClicked: this.onMenuClicked,
+        onMenuClicked: (action: Action): void => this.onMenuClicked(action),
         isShowBar: $isShowBar,
         totalSelectedCount: $selectedCount
       })
@@ -272,7 +281,6 @@ export struct SelectPhotoBrowserView {
           // @ts-ignore
         .transition(TransitionEffect.opacity(0))
     }
-    .padding({ bottom: $r('app.float.selected_photos_list_bar') })
   }
 
   pageTransition() {
@@ -283,26 +291,27 @@ export struct SelectPhotoBrowserView {
   }
 
   private setPickResult(): void {
-    let uriArray;
+    let uriArray: string[];
     if (this.isMultiPick) {
-      uriArray = SelectUtil.getUriArray(this.selectManager.clickedSet);
+      uriArray = SelectUtil.getUriArray(this.selectManager?.clickedSet ?? new Set());
       Log.debug(TAG, `uri size: ${uriArray}`);
     } else {
       let currentPhoto = this.getCurrentPhoto();
       if (currentPhoto == undefined) {
         return;
       }
-      uriArray = currentPhoto.uri;
+      uriArray = [currentPhoto.uri];
     }
-    let abilityResult = {
-      'resultCode': 0,
-      'want': {
-        'parameters': {
+    let abilityResult: ability.AbilityResult = {
+      resultCode: 0,
+      want: {
+        parameters: {
           'select-item-list': uriArray
         }
       }
     };
-    globalThis.photosAbilityContext.terminateSelfWithResult(abilityResult).then((result) => {
+    let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+    context.terminateSelfWithResult(abilityResult).then((result: void) => {
       Log.info(TAG, `terminateSelfWithResult result: ${result}`);
     });
   }

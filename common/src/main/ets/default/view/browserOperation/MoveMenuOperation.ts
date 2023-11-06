@@ -112,7 +112,7 @@ export class MoveMenuOperation extends ProcessMenuOperation {
     Log.debug(TAG, 'move file.mediaType:' + JSON.stringify(sourceAsset.fileType));
     try {
       TraceControllerUtils.startTraceWithTaskId('move', this.currentBatch);
-      let sourceAlbumUri: string = AppStorage.Get(Constants.APP_KEY_NEW_ALBUM_SOURCE);
+      let sourceAlbumUri: string = AppStorage.get(Constants.APP_KEY_NEW_ALBUM_SOURCE);
       let sourceAlbum: Album = await UserFileManagerAccess.getInstance().getAlbumByUri(sourceAlbumUri);
       await sourceAlbum.removePhotoAssets([sourceAsset]); // TODO 媒体库支持批量移除，传参后续整改
 

@@ -17,7 +17,7 @@ import { ScreenManager } from '../model/common/ScreenManager';
 @Component
 export struct PhotoBrowserHolder {
   @Consume isShowBar: boolean;
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
 
   build() {

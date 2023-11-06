@@ -28,7 +28,7 @@ const TAG: string = 'common_MediaOperationActionBar';
 export struct MediaOperationActionBar {
   @Consume pageType: string;
   @Consume @Watch('createActionBar') loadingFinish: boolean;
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @StorageLink('isHorizontal') @Watch('createActionBar') isHorizontal: boolean
     = ScreenManager.getInstance().isHorizontal();
   @State actionBarProp: ActionBarProp = new ActionBarProp();

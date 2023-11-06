@@ -15,7 +15,6 @@
 
 import {
   Action,
-  ActionBar,
   ActionBarMode,
   ActionBarProp,
   ActionBarSelectionMode,
@@ -23,12 +22,13 @@ import {
   Log,
   ScreenManager
 } from '@ohos/common';
+import { ActionBar } from '@ohos/common/CommonComponents';
 
 const TAG: string = 'browser_NewAlbumPageActionBar';
 
 @Component
 export struct NewAlbumPageActionBar {
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @StorageLink('isHorizontal') @Watch('createActionBar') isHorizontal: boolean = ScreenManager.getInstance()
     .isHorizontal();
   @State actionBarProp: ActionBarProp = new ActionBarProp();

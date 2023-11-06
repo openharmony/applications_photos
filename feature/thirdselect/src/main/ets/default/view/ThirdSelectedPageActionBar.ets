@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 
-import { Action, ActionBar, ActionBarMode, ActionBarProp, Constants, ScreenManager } from '@ohos/common';
+import { Action, ActionBarMode, ActionBarProp, Constants, ScreenManager } from '@ohos/common';
+import { ActionBar } from '@ohos/common/CommonComponents';
 import { IS_HORIZONTAL, SelectParams } from '../utils/ThirdSelectConstants';
 
 @Component
@@ -24,8 +25,8 @@ export struct ThirdSelectedPageActionBar {
   selectParams: SelectParams = SelectParams.defaultParam();
   @Provide selectedCount: number = 0;
   @Link @Watch('onSelectedCountChanged') totalSelectedCount: number;
-  isSelectPhotoGrid: boolean;
-  onMenuClicked: Function;
+  isSelectPhotoGrid: boolean = false;
+  onMenuClicked: Function = (): void => {};
   leftAction: Action = Action.BACK;
   @Link @Watch('onSelectedCountChanged') title: string;
   @State actionBarProp: ActionBarProp = new ActionBarProp();

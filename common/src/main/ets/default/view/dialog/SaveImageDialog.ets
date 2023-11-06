@@ -23,21 +23,21 @@ export struct SaveImageDialog {
   @Consume broadCast: BroadCast
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller: CustomDialogController;
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  controller?: CustomDialogController;
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   controllerClose() {
-    this.controller.close()
+    this.controller?.close();
   }
 
   aboutToAppear() {
-    this.broadCast.on(BroadCastConstants.EXIT_SAVE_PROGRESS_CLOSE, this.controllerClose.bind(this));
+    this.broadCast.on(BroadCastConstants.EXIT_SAVE_PROGRESS_CLOSE, (): void => this.controllerClose());
   }
 
   aboutToDisappear(): void {
-    this.broadCast.off(null, null);
+    this.broadCast.off(BroadCastConstants.EXIT_SAVE_PROGRESS_CLOSE, (): void => {});
   }
 
   build() {

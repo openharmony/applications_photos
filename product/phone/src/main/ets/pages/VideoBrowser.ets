@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import router from '@ohos.router';
-import type { MenuOperation } from '@ohos/common';
+import { MenuOperation } from '@ohos/common';
 import {
   Action,
   BroadCast,
@@ -27,9 +27,16 @@ import {
   UiUtil,
   WindowUtil
 } from '@ohos/common';
-import { PhotoBrowserActionBar } from '@ohos/browser';
+import { PhotoBrowserActionBar } from '@ohos/browser/BrowserComponents';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'VideoBrowser';
+
+interface Params {
+  uri: string;
+  dateTaken: number;
+  previewUri: string;
+}
 
 @Entry
 @Component
@@ -46,7 +53,7 @@ struct VideoBrowser {
   private isNeedRecoveryStatus: boolean = false;
   private uri = '';
   private dateTaken = 0;
-  private previewUri = null;
+  private previewUri = '';
 
   onBackPress() {
     Log.info(TAG, 'onBackPress');
@@ -56,7 +63,7 @@ struct VideoBrowser {
 
   aboutToAppear() {
     TraceControllerUtils.startTrace('VideoBrowserAboutToAppear');
-    let param: any = router.getParams();
+    let param: Params = router.getParams() as Params;
     this.uri = param.uri;
     this.dateTaken = param.dateTaken;
     this.previewUri = param.previewUri;
@@ -71,7 +78,6 @@ struct VideoBrowser {
     }
     this.photoDate = DateUtil.getLocalizedDate(this.dateTaken);
     this.timeAndLocation = DateUtil.getLocalizedTime(this.dateTaken);
-    this.onMenuClicked = this.onMenuClicked.bind(this);
     TraceControllerUtils.finishTrace('VideoBrowserAboutToAppear');
   }
 
@@ -108,26 +114,27 @@ struct VideoBrowser {
         })
         .onStart(() => {
           this.mVideoStatus = Constants.VIDEO_STATUS_PLAYING;
-          WindowUtil.setWindowKeepScreenOn(globalThis.photosAbilityContext, true);
+          WindowUtil.setWindowKeepScreenOn(AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext, true);
         })
         .onPause(() => {
           this.mVideoStatus = Constants.VIDEO_STATUS_PAUSE;
-          WindowUtil.setWindowKeepScreenOn(globalThis.photosAbilityContext, false);
+          WindowUtil.setWindowKeepScreenOn(AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext, false);
         })
         .onFinish(() => {
           this.mVideoStatus = Constants.VIDEO_STATUS_FINISH;
           this.isShowBar = true;
-          WindowUtil.setWindowKeepScreenOn(globalThis.photosAbilityContext, false);
+          WindowUtil.setWindowKeepScreenOn(AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext, false);
         })
         .onError(() => {
           this.mVideoStatus = Constants.VIDEO_STATUS_ERROR;
           this.isShowBar = true;
-          WindowUtil.setWindowKeepScreenOn(globalThis.photosAbilityContext, false);
+          WindowUtil.setWindowKeepScreenOn(AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext, false);
         })
         .autoPlay(true)
 
       PhotoBrowserActionBar({
-        onMenuClicked: this.onMenuClicked, isVideoPage: true
+        onMenuClicked: (action: Action): void => this.onMenuClicked(action),
+        isVideoPage: true
       })
     }
     .width('100%')
@@ -145,15 +152,8 @@ struct VideoBrowser {
   private onMenuClicked(action: Action) {
     Log.info(TAG, `onMenuClicked, action: ${action.actionID}`);
     let menuOperation: MenuOperation;
-    switch (action.actionID) {
-      case Action.BACK.actionID:
-        this.onBackPress();
-        return;
-      default:
-        break;
-    }
-    if (menuOperation != null) {
-      menuOperation.doAction();
+    if (action.actionID === Action.BACK.actionID) {
+      this.onBackPress();
     }
   }
 }

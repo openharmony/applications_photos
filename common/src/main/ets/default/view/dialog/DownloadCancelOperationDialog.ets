@@ -22,21 +22,21 @@ const TAG: string = 'common_DownloadCancelOperationDialog';
 
 @Observed
 export class CancelParam {
-  continueFunc: Function
-  cancelFunc: Function
+  continueFunc: Function = (): void => {};
+  cancelFunc: Function = (): void => {};
 }
 
 @CustomDialog
 export struct DownloadCancelOperationDialog {
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller: CustomDialogController;
+  controller?: CustomDialogController;
   @Consume broadCast: BroadCast;
   @Consume deleteProgress: number;
   @Consume cancelParam: CancelParam;
-  private isPcDevice: boolean = AppStorage.Get('deviceType') === Constants.PC_DEVICE_TYPE;
+  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   build() {
     Column() {
@@ -71,7 +71,7 @@ export struct DownloadCancelOperationDialog {
             .onClick(() => {
               Log.info(TAG, 'click continue')
               this.cancelParam.continueFunc();
-              this.controller.close()
+              this.controller?.close();
             })
           }.width('50%')
 
@@ -93,7 +93,7 @@ export struct DownloadCancelOperationDialog {
             .onClick(() => {
               Log.info(TAG, 'click cancel')
               this.cancelParam.cancelFunc();
-              this.controller.close()
+              this.controller?.close();
             })
           }.width('50%')
         }

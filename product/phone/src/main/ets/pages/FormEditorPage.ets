@@ -20,6 +20,7 @@ import {
   BroadCast,
   BroadCastConstants,
   BroadCastManager,
+  ColumnSize,
   Constants as Cons,
   DataStoreUtil,
   Log,
@@ -27,14 +28,20 @@ import {
   ScreenManager,
   UiUtil,
   UserFileManagerAccess,
+  WindowUtil
 } from '@ohos/common';
 import { Constants, FormControllerManager } from '@ohos/formAbility';
 import formBindingData from '@ohos.application.formBindingData';
 import formProvider from '@ohos.application.formProvider';
 import userFileManager from '@ohos.filemanagement.userFileManager';
+import common from '@ohos.app.ability.common';
+import { BusinessError } from '@ohos.base';
+import { Router } from '@ohos.arkui.UIContext';
 
 
 const TAG: string = 'FormEditorPage';
+declare type UnionType = number | boolean | string;
+declare type DisplayNameUnionType = Resource | string;
 
 @Entry
 @Component
@@ -42,29 +49,31 @@ struct FormEditorPage {
   @StorageLink('FASetting_FormId') formId: string = '0';
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   currentIndex: number = 0;
   @State isShowName: boolean = true;
   isShowAlbums: boolean = true;
   fd: number = Constants.FA_FD_NULL;
-  fileAsset: userFileManager.FileAsset = null;
+  fileAsset: userFileManager.FileAsset | null = null;
   displayName: string = '';
   albumUri: string = '';
   uri: string = '';
   @State time: number = 30;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
-  private saveDataFunc = this.saveData.bind(this);
+  private saveDataFunc = async (
+    albumName: string, albumUri: string, displayName: DisplayNameUnionType, uri: string, isShowAlbums: boolean
+  ): Promise<void> => await this.saveData(albumName, albumUri, displayName, uri, isShowAlbums);
   private indexValue: number = 0;
   @State private selectAlbumsStr: string = '';
 
   async getItems(albumUri?: string, startIndex?: number, count?: number, filterMediaType?: string):
     Promise<Array<userFileManager.FileAsset>> {
-    let result: Array<userFileManager.FileAsset> = null;
+    let result: Array<userFileManager.FileAsset> = [];
 
     // Get from target album if albumUri is not undefined, otherwise getAllObject
     if (albumUri) {
-      let album: userFileManager.Album = await UserFileManagerAccess.getInstance().getAlbumByUri(albumUri);
+      let album: userFileManager.Album = await UserFileManagerAccess.getInstance().getAlbumByUri(albumUri) as userFileManager.Album;
       let fetchOpt = AlbumDefine.getFileFetchOpt(startIndex, count, filterMediaType);
       let fetchResult = await album.getPhotoAssets(fetchOpt);
       result = await fetchResult.getAllObject();
@@ -77,8 +86,8 @@ struct FormEditorPage {
     return result;
   }
 
-  async GetMediaData(albumUri: string, uri: string) {
-    Log.debug(TAG, `GetMediaData start uri: ${uri} albumUri: ${albumUri}`)
+  async GetMediaData(albumUri: string, uri: string): Promise<void> {
+    Log.debug(TAG, `GetMediaData start uri: ${uri} albumUri: ${albumUri}`);
     let dataList = await this.getItems(albumUri);
     if (uri != '') {
       for (let i = 0; i < dataList.length; i++) {
@@ -95,26 +104,37 @@ struct FormEditorPage {
     Log.debug(TAG, 'GetMediaData fileAsset: ' + JSON.stringify(this.fileAsset));
   }
 
-  async openCurrentfd() {
-    this.fd = (this.fileAsset != null) ? await UserFileManagerAccess.getInstance().openAsset('R', this.fileAsset)
-                                       : Constants.FA_FD_NULL;
+  async openCurrentFd(): Promise<void> {
+    this.fd = (this.fileAsset != null) ? await UserFileManagerAccess.getInstance().openAsset('R', this.fileAsset) as number
+      : Constants.FA_FD_NULL;
   }
 
   bindFormData(): formBindingData.FormBindingData {
-    Log.debug(TAG, `bindFormData start formId: ${this.formId}`)
-    let image: string = 'image_' + this.fd + '_formId_' + this.formId;
-    let dataObj1: object = {
-      "fd": this.fd == Constants.FA_FD_NULL ? false : true,
-      "image0": "memory://" + image,
-      "image1": "memory://" + image,
-      "indexValue": this.indexValue,
-      "albumName": this.displayName,
-      "currentIndex": this.currentIndex,
-      "isShow": Boolean(this.isShowName) && Boolean(this.isShowAlbums),
-      "formImages": JSON.parse(`{ "${image}": ${this.fd} }`),
-      "uri": (this.uri != '') ? Cons.ACTION_URI_FORM_ABILITY : Cons.ACTION_URI_FORM_ABILITY_NONE,
-      "albumUri": `${this.albumUri}`,
-      "currentUri": this.uri
+    Log.debug(TAG, `bindFormData start formId: ${this.formId}`);
+    let image: string = 'image_' + this.fd + '_formId_' + this.formId + '_uri_' + this.uri;
+    interface DataObjectType {
+      fd: boolean;
+      image0: string;
+      image1: string;
+      albumName: string;
+      currentIndex: number;
+      isShow: boolean;
+      formImages: object;
+      uri: string;
+      albumUri: string;
+      currentUri: string;
+    }
+    let dataObj1: DataObjectType = {
+      fd: this.fd != Constants.FA_FD_NULL,
+      image0: 'memory://' + image,
+      image1: 'memory://' + image,
+      albumName: this.displayName,
+      currentIndex: this.currentIndex,
+      isShow: Boolean(this.isShowName) && Boolean(this.isShowAlbums),
+      formImages: JSON.parse(`{ "${image}": ${this.fd} }`) as object,
+      uri: (this.uri != '') ? Cons.ACTION_URI_FORM_ABILITY : Cons.ACTION_URI_FORM_ABILITY_NONE,
+      albumUri: `${this.albumUri}`,
+      currentUri: this.uri
     };
     Log.debug(TAG, `bindFormData, createFormBindingData dataObj2.data: ${JSON.stringify(dataObj1)}`);
     let obj = formBindingData.createFormBindingData(JSON.stringify(dataObj1));
@@ -122,48 +142,49 @@ struct FormEditorPage {
     return obj;
   }
 
-  terminate() {
-    globalThis.photosAbilityContext.terminateSelf((result) => {
+  terminate(): void {
+    let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+    context.terminateSelf((result: BusinessError<void>) => {
       Log.info(TAG, `terminateSelf result: ${JSON.stringify(result)}`);
     })
   }
 
-  async updateFormData() {
+  async updateFormData(): Promise<void> {
     Log.debug(TAG, `updateFormData formId: ${JSON.stringify(this.formId)}`);
     let dataStore = DataStoreUtil.getInstance();
     await dataStore.init();
-    let temp = await dataStore.getData(Constants.FA_INDEX_VALUE, 0);
-    this.indexValue = (temp + Constants.NUMBER_1) % Constants.NUMBER_2;
+    let temp: number = await dataStore.getData(Constants.FA_INDEX_VALUE, 0) as number;
+    this.indexValue = (temp + 1) % 2;
     await dataStore.putData(Constants.FA_INDEX_VALUE, this.indexValue);
     await dataStore.flush();
-    await this.GetMediaData(this.albumUri, this.uri);
-    await this.openCurrentfd();
     let obj3 = this.bindFormData();
     Log.debug(TAG, `updateFormData obj: ${JSON.stringify(obj3)}`);
-    Log.debug(TAG, `indexValueindexValueindexValue: ${this.indexValue}`);
     formProvider.updateForm(this.formId, obj3)
-      .then(() => {
-        Log.debug(TAG, `updateFormData, success`);
+      .then((): void => {
+        Log.debug(TAG, 'updateFormData, success');
         this.terminate();
-      }).catch((error) => {
+      }).catch((error: BusinessError) => {
       Log.error(TAG, `updateForm failed. Cause: ${JSON.stringify(error)}`);
-      let msg = {
-        'err': JSON.stringify(error)
+      interface Msg {
+        err: string;
+      }
+      let msg: Msg = {
+        err: JSON.stringify(error)
       }
       ReportToBigDataUtil.errEventReport(BigDataConstants.CHANGE_FA_CARD_IMAGE_ERROR, msg);
       this.terminate();
     });
   }
 
-  async saveData(albumName: string, albumUri: string, displayName, uri: string, isShowAlbums: boolean) {
-    Log.debug(TAG, `saveData start! ${albumUri} ${displayName}  ${uri}`)
-    ReportToBigDataUtil.report(BigDataConstants.CHANGE_FA_CARD_IMAGE_ID, null);
-    let msgDisplayName: string = '';
+  async saveData(albumName: string, albumUri: string, displayName: DisplayNameUnionType, uri: string, isShowAlbums: boolean): Promise<void> {
+    Log.debug(TAG, `saveData start! ${albumUri} ${displayName}  ${uri}`);
+    ReportToBigDataUtil.report(BigDataConstants.CHANGE_FA_CARD_IMAGE_ID, undefined);
+    let msgDisplayName = '';
     if (displayName instanceof Object) {
       Log.debug(TAG, `saveData object ${displayName}`);
-      msgDisplayName = await UiUtil.getResourceString(displayName);
+      msgDisplayName = await UiUtil.getResourceString(displayName as Resource) as string;
     } else {
-      msgDisplayName = displayName;
+      msgDisplayName = displayName as string;
     }
     this.isShowAlbums = isShowAlbums;
     this.displayName = msgDisplayName;
@@ -171,6 +192,8 @@ struct FormEditorPage {
     this.uri = uri;
     Log.debug(TAG, `saveData msgDisplayName ${msgDisplayName}`);
     await DataStoreUtil.getInstance().init();
+    await this.GetMediaData(albumUri, uri);
+    await this.openCurrentFd();
     let formIdKey = 'formId_' + this.formId;
     let hasFormId = await DataStoreUtil.getInstance().hasData(formIdKey);
     Log.debug(TAG, `The value of hasFormId is ${hasFormId}`);
@@ -183,66 +206,50 @@ struct FormEditorPage {
       await DataStoreUtil.getInstance().putData(albumUriKey, albumUri);
       let currentUriKey = 'currentUri_' + this.formId;
       await DataStoreUtil.getInstance().putData(currentUriKey, uri);
-      let intervalTimeKey = 'intervalTime_' + this.formId;
-      await DataStoreUtil.getInstance().putData(intervalTimeKey, this.time);
       let currentIndexKey = 'currentIndex_' + this.formId;
       await DataStoreUtil.getInstance().putData(currentIndexKey, this.currentIndex);
-      let isShowKey = 'isShowAlbums_' + this.formId;
-      await DataStoreUtil.getInstance().putData(isShowKey, this.isShowAlbums ? 1 : 0);
       await DataStoreUtil.getInstance().flush();
       this.updateFormData();
     } else {
-      globalThis.photosAbilityContext.terminateSelf((result) => {
+      let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+      context.terminateSelf((result: BusinessError<void>) => {
         Log.info(TAG, `terminateSelf result: ${JSON.stringify(result)}`);
       })
     }
-    Log.debug(TAG, 'meow saveData end!');
+    Log.debug(TAG, 'saveData end!');
   }
 
-  routerPhotos(isSelectPhoto: boolean) {
-    let options = {
-      url: 'pages/ThirdSelectPhotoGridPage',
-      params: {
-        itemCoverUri: '',
-        uri: "",
-        itemCount: 1,
-        bundleName: '',
-        isMultiPick: false,
-        filterMediaType: AlbumDefine.FILTER_MEDIA_TYPE_IMAGE,
-        maxSelectCount: Cons.NUMBER_1,
-        itemDisplayName: $r('app.string.album_all'),
-        isFromFa: isSelectPhoto,
-        isFromFaPhoto: isSelectPhoto,
-        isFirstEnter: true
-      }
-    }
-    router.pushUrl(options);
+  routerPhotos(isSelectPhoto: boolean): void {
+    let albumUriKey = 'albumUri_' + this.formId;
+    DataStoreUtil.getInstance().getData(albumUriKey, '').then((theAlbumUri: UnionType) => {
+      let options: router.RouterOptions = {
+        url: 'pages/ThirdSelectPhotoGridPage',
+        params: {
+          itemCoverUri: '',
+          uri: theAlbumUri,
+          itemCount: 1,
+          bundleName: '',
+          isMultiPick: false,
+          filterMediaType: AlbumDefine.FILTER_MEDIA_TYPE_IMAGE,
+          maxSelectCount: 1,
+          itemDisplayName: $r('app.string.album_photos'),
+          isFromFa: isSelectPhoto,
+          isFromFaPhoto: isSelectPhoto,
+          isFirstEnter: true
+        }
+      };
+      router.pushUrl(options);
+    })
   }
 
-  selectPhoto() {
+  selectPhoto(): void {
     this.routerPhotos(true);
   }
 
   aboutToAppear(): void {
-    Log.debug(TAG, 'aboutToAppear start!')
+    Log.debug(TAG, 'aboutToAppear start!');
     ScreenManager.getInstance().setSystemUi(false);
     this.appBroadCast.on(BroadCastConstants.SAVE_FORM_EDITOR_DATA, this.saveDataFunc);
-    DataStoreUtil.getInstance().init().then(() => {
-      let intervalTimeKey = 'intervalTime_' + this.formId;
-      DataStoreUtil.getInstance().getData(intervalTimeKey, this.time).then((intervalTime) => {
-        this.time = intervalTime;
-        AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_INTERVAL, this.time);
-      })
-      let isShowKey = Constants.FROM_PLAYBACK_ISSHOWNAME;
-      DataStoreUtil.getInstance().getData(isShowKey, this.isShowName).then((isShowName) => {
-        Log.debug(TAG, `aboutToAppear  isShowKey:` + JSON.stringify(isShowKey) + JSON.stringify(Boolean(isShowName)))
-        this.isShowName = isShowName;
-      })
-    })
-    UiUtil.getResourceString($r('app.string.fa_select_album_text')).then((stringResource) => {
-      Log.debug(TAG, `getResourceString ${stringResource}}`)
-      this.selectAlbumsStr = stringResource;
-    })
   }
 
   aboutToDisappear() {
@@ -313,7 +320,7 @@ struct FormEditorPage {
         })
         .backgroundColor($r('app.color.white'))
         .borderRadius($r('app.float.FA_ListCard_radius'))
-        .onClick(() => {
+        .onClick((): void => {
           this.selectPhoto();
         })
       }

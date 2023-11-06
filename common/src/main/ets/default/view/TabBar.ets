@@ -28,34 +28,35 @@ export enum DEVICE_TYPE {
   PC_LIKE
 }
 
-const TabMap = {
-  0: BigDataConstants.PHOTO_TAB,
-  1: BigDataConstants.ALBUM_TAB,
-}
+const TabMap = [
+BigDataConstants.PHOTO_TAB,
+BigDataConstants.ALBUM_TAB
+]
 
 @Component
 export struct TabBar {
   @Consume isSelectedMode: boolean;
   @Consume isAlbumSetSelectedMode: boolean;
   @Consume isShowSideBar: boolean;
-  @Link @Watch('updateCurrentIndex') currentIndex: number;
+  @Link @Watch('updateCurrentIndex') currentIndex: 0 | 1;
   @Link isSidebar: boolean;
   @StorageLink('sideBarBoundaryLineOpacity') sideBarBoundaryLineOpacity: number = 1;
   @StorageLink('sideBarOpacity') sideBarOpacity: number = 1;
   private tabs: TabItem[] = [];
-  private controller: TabsController;
+  private controller: TabsController | null = null;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private deviceType: DEVICE_TYPE = DEVICE_TYPE.PC_LIKE;
+  private funcOnTabSelected?: Function;
 
   aboutToAppear(): void {
-    this.onTabSelected = this.onTabSelected.bind(this);
+    this.funcOnTabSelected = (index: number): void => this.onTabSelected(index);
     this.tabs[this.currentIndex].isSelected = true;
     this.tabs.forEach((tab: TabItem) => {
-      Log.info(TAG, `${JSON.stringify(tab.name)} , ${tab.iconSelected}`)
+      Log.info(TAG, `${JSON.stringify(tab.name)} , ${tab.iconSelected}`);
     });
   }
 
-  updateCurrentIndex() {
+  updateCurrentIndex(): void {
     this.onTabSelected(this.currentIndex);
   }
 
@@ -72,23 +73,25 @@ export struct TabBar {
               Tab({
                 tabItem: tab,
                 index: this.tabs.indexOf(tab),
-                onTabSelected: this.onTabSelected,
+                onTabSelected: this.funcOnTabSelected,
                 isSidebar: $isSidebar,
                 deviceType: this.deviceType
               })
-            }, tab => tab.name.id)
+            }, (tab: TabItem): string => {
+              return (tab.name.id).toString();
+            })
           }
-          .padding({ left: Constants.NUMBER_16, top: Constants.NUMBER_96, right: Constants.NUMBER_16 })
-          .flexGrow(Constants.NUMBER_1)
+          .padding({ left: 16, top: 96, right: 16 })
+          .flexGrow(1)
           .backgroundColor($r('app.color.default_background_color'))
 
           // Sidebar boundary line
           if (this.isShowSideBar) {
             Row() {
             }
-            .width(Constants.NUMBER_0)
+            .width(0)
             .height(Constants.PERCENT_100)
-            .border({ width: Constants.NUMBER_0_5, color: $r('app.color.album_cover_gradient_start_color') })
+            .border({ width:  0.5, color: $r('app.color.album_cover_gradient_start_color') })
             .opacity(this.sideBarBoundaryLineOpacity)
           }
         }
@@ -104,13 +107,15 @@ export struct TabBar {
                 Tab({
                   tabItem: tab,
                   index: this.tabs.indexOf(tab),
-                  onTabSelected: this.onTabSelected,
+                  onTabSelected: this.funcOnTabSelected,
                   isSidebar: $isSidebar,
                   deviceType: this.deviceType
                 })
               }
-              .layoutWeight(Constants.NUMBER_1)
-            }, tab => tab.name.id)
+              .layoutWeight(1)
+            }, (tab: TabItem): string => {
+              return (tab.name.id).toString();
+            })
           }
           .height($r('app.float.horizontal_width'))
         }
@@ -126,14 +131,22 @@ export struct TabBar {
       }) {
         ForEach(this.tabs, (tab: TabItem) => {
           Stack() {
-            TabPhone({ tabItem: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
+            TabPhone({ tabItem: tab, index: this.tabs.indexOf(tab), onTabSelected: this.funcOnTabSelected })
           }
           .layoutWeight(1)
           .onClick(() => {
-            this.onTabSelected && this.onTabSelected(this.tabs.indexOf(tab));
+            if (this.funcOnTabSelected) {
+              if (this.currentIndex == this.tabs.indexOf(tab)) {
+                Log.debug(TAG, `it is same: ${this.currentIndex}`);
+                this.appBroadCast.emit(BroadCastConstants.RESET_ZERO, [this.currentIndex]);
+              }
+              this.funcOnTabSelected(this.tabs.indexOf(tab));
+            }
             tab.isSelected = true;
           })
-        }, tab => tab.name.id)
+        }, (tab: TabItem): string => {
+          return (tab.name.id).toString();
+        })
       }
       .visibility((this.isSelectedMode || this.isAlbumSetSelectedMode) ? Visibility.None : Visibility.Visible)
       .height($r('app.float.tab_bar_vertical_height'))
@@ -143,13 +156,9 @@ export struct TabBar {
   }
 
   private onTabSelected(index: number): void {
-    Log.debug(TAG, `this.currentIndex: ${this.currentIndex} index: ${index}`);
-    if (this.currentIndex == index) {
-      Log.error(TAG, `it is same: ${index}`);
-      this.appBroadCast.emit(BroadCastConstants.RESET_ZERO, [index]);
-    }
-    this.currentIndex = index;
-    this.controller.changeIndex(this.currentIndex);
+    Log.debug(TAG, `TabBar this.currentIndex: ${this.currentIndex} index: ${index}`);
+    this.currentIndex = index as 0 | 1;
+    if (this.controller != null) this.controller.changeIndex(this.currentIndex);
     this.tabs.forEach((tab: TabItem) => {
       if (this.tabs.indexOf(tab) == index) {
         tab.isSelected = true;
@@ -157,10 +166,14 @@ export struct TabBar {
         tab.isSelected = false;
       }
     })
-    let currentTab = TabMap[this.currentIndex] ? TabMap[this.currentIndex] : BigDataConstants.PHOTO_TAB;
-    let msg = {
-      'SwitchTab': BigDataConstants.CLICK_SWITCH,
-      'Current': currentTab,
+    let currentTab: string = TabMap[this.currentIndex] ? TabMap[this.currentIndex] : BigDataConstants.PHOTO_TAB;
+    interface Msg {
+      switchTab: string;
+      current: string;
+    }
+    let msg: Msg = {
+      switchTab: BigDataConstants.CLICK_SWITCH,
+      current: currentTab,
     }
     ReportToBigDataUtil.report(BigDataConstants.TAB_SWITCH_ID, msg);
     Log.info(TAG, `select ${this.currentIndex}`);
@@ -172,9 +185,9 @@ export struct TabBar {
 struct Tab {
   @ObjectLink tabItem: TabItem;
   @Link isSidebar: boolean;
-  index: number;
-  onTabSelected: Function;
-  private deviceType: number;
+  index: number = 0;
+  onTabSelected?: Function;
+  private deviceType: number = 0;
 
   build() {
     if (this.deviceType == DEVICE_TYPE.PC_LIKE) {
@@ -185,6 +198,7 @@ struct Tab {
       }) {
         Stack() {
           Image(this.tabItem.getIcon(this.tabItem.isSelected))
+            .draggable(false)
             .height($r('app.float.icon_size'))
             .width($r('app.float.icon_size'))
             .objectFit(ImageFit.Fill)
@@ -206,7 +220,7 @@ struct Tab {
       }
       .backgroundColor(this.tabItem.isSelected ? '#DAE2F5' : $r('app.color.transparent'))
       .borderRadius($r('app.float.single_tab_margin'))
-      .onClick(() => {
+      .onClick((): void => {
         this.onTabSelected && this.onTabSelected(this.index);
         this.tabItem.isSelected = true;
       })
@@ -218,12 +232,13 @@ struct Tab {
       }) {
         Stack() {
           Image(this.tabItem.getIcon(this.tabItem.isSelected))
+            .draggable(false)
             .height($r('app.float.icon_size'))
             .width($r('app.float.icon_size'))
             .objectFit(ImageFit.Fill)
         }
         .padding({
-          left: this.isSidebar ? Constants.NUMBER_0 : $r('app.float.tab_bar_text_padding_left'),
+          left: this.isSidebar ? 0 : $r('app.float.tab_bar_text_padding_left'),
         })
 
         Text(this.tabItem.name)
@@ -236,7 +251,7 @@ struct Tab {
             right: $r('app.float.tab_bar_text_padding_horizontal')
           })
       }
-      .onClick(() => {
+      .onClick((): void => {
         this.onTabSelected && this.onTabSelected(this.index);
         this.tabItem.isSelected = true;
       })
@@ -248,8 +263,8 @@ struct Tab {
 @Component
 struct TabPhone {
   @ObjectLink tabItem: TabItem;
-  index: number;
-  onTabSelected: Function;
+  index: number = 0;
+  onTabSelected?: Function;
 
   build() {
     Flex({
@@ -258,6 +273,7 @@ struct TabPhone {
       justifyContent: FlexAlign.Center
     }) {
       Image(this.tabItem.getIcon(this.tabItem.isSelected))
+        .draggable(false)
         .height($r('app.float.icon_size'))
         .width($r('app.float.icon_size'))
         .objectFit(ImageFit.Fill)
@@ -285,12 +301,13 @@ struct TabPhone {
 @Component
 export struct TabBarForAlbumSet {
   @Consume isTabBarShow: boolean;
-  private currentIndex: number;
+  private currentIndex: number = 0;
   private tabs: TabItemWithText[] = [];
-  private controller: TabsController;
+  private controller: TabsController | null = null;
+  private funcOnTabSelected?: Function;
 
   aboutToAppear(): void {
-    this.onTabSelected = this.onTabSelected.bind(this);
+    this.funcOnTabSelected = (index: number): void => this.onTabSelected(index);
     this.tabs[this.currentIndex].isSelected = true;
     this.tabs.forEach((tab: TabItemWithText) => {
       Log.info(TAG, `${JSON.stringify(tab.name)}, ${tab.isSelected}`);
@@ -305,8 +322,10 @@ export struct TabBarForAlbumSet {
         alignItems: ItemAlign.Start
       }) {
         ForEach(this.tabs, (tab: TabItemWithText) => {
-          TabWithText({ tabItemWithText: tab, index: this.tabs.indexOf(tab), onTabSelected: this.onTabSelected })
-        }, tab => tab.name.id)
+          TabWithText({ tabItemWithText: tab, index: this.tabs.indexOf(tab), onTabSelected: this.funcOnTabSelected })
+        }, (tab: TabItemWithText): string => {
+          return (tab.name.id).toString();
+        })
       }
       .width('100%')
       .height($r('app.float.album_set_tab_bar_height'))
@@ -315,10 +334,10 @@ export struct TabBarForAlbumSet {
     }
   }
 
-  private onTabSelected(index: number) {
-    Log.info(TAG, `this.currentIndex: ${this.currentIndex} index: ${index}`);
+  private onTabSelected(index: number): void {
+    Log.info(TAG, `TabBarForAlbumSet this.currentIndex: ${this.currentIndex} index: ${index}`);
     this.currentIndex = index;
-    this.controller.changeIndex(this.currentIndex);
+    if (this.controller != null) this.controller.changeIndex(this.currentIndex);
     this.tabs.forEach((tab: TabItemWithText) => {
       tab.isSelected = false;
     })
@@ -333,8 +352,8 @@ struct TabWithText {
   @Consume isAlbumSetSelectedMode: boolean;
   @ObjectLink tabItemWithText: TabItemWithText;
   @State TabWidth: number = 0;
-  index: number;
-  onTabSelected: Function;
+  index: number = 0;
+  onTabSelected?: Function;
 
   aboutToAppear(): void {
     // Determine the length of the underline based on the font length
@@ -371,7 +390,7 @@ struct TabWithText {
     .height('100%')
     .onClick(() => {
       if (!this.isAlbumSetSelectedMode) {
-        this.onTabSelected && this.onTabSelected(this.index)
+        this.onTabSelected && this.onTabSelected(this.index);
         this.tabItemWithText.isSelected = true
       }
     })

@@ -40,7 +40,7 @@ export default class TestAbility extends Ability {
     Log.info(TAG, 'TestAbility onWindowStageCreate')
     windowStage.setUIContent(this.context, 'TestAbility/pages/index', null)
 
-    globalThis.abilityContext = this.context;
+    AppStorage.setOrCreate('abilityContext', this.context);
   }
 
   onWindowStageDestroy(): void {

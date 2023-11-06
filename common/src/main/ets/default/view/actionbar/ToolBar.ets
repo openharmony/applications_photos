@@ -21,21 +21,21 @@ import { Action } from '../browserOperation/Action';
 import { ActionBarMode } from '../browserOperation/ActionBarMode';
 
 export class MenuItem {
-  value: string;
-  action: () => void;
+  value?: string;
+  action?: () => void;
 }
 
 @Component
 export struct ToolBar {
   @Consume isShowBar: boolean;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Consume toolMenuList: Action[];
   @Consume moreMenuList: Action[];
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @State showPopup: boolean = false;
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @Consume @Watch("isNeedHidePopup") hidePopup: boolean;
   private isFromPhotoBrowser = false;
@@ -69,7 +69,7 @@ export struct ToolBar {
             .strokeWidth(Constants.MENU_DIVIDER_STROKE_WIDTH)
             .color($r('sys.color.ohos_id_color_list_separator'))
         }
-      }, menu => menu.actionID.toString())
+      }, (menu: Action) => menu.actionID.toString())
     }
     .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
     .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
@@ -157,7 +157,7 @@ export struct ToolBar {
             .width(`${100 / this.toolMenuList.length}%`)
             .height(Constants.PERCENT_100)
           }
-        }, menu => menu.actionID.toString())
+        }, (menu: Action) => menu.actionID.toString())
       }
       .width(Constants.PERCENT_100)
       .height(Constants.ActionBarHeight)

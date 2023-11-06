@@ -21,20 +21,20 @@ import { Constants } from '../../model/common/Constants';
 @Component
 export struct ActionBarButton {
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @State res: Resource = undefined;
-  action: Action;
-  onMenuClicked: Function;
+  @State res: Resource | undefined = undefined;
+  action: Action = Action.NONE;
+  onMenuClicked: Function = (): void => {};
   isLeft = true;
   isFirst = false;
   isAutoTint = true;
-  colorMode: ActionBarColorMode;
+  colorMode: ActionBarColorMode = ActionBarColorMode.NORMAL;
   @State showPopup: boolean = false;
   @Consume moreMenuList: Action[];
   @Consume @Watch("isNeedHidePopup") hidePopup: boolean;
-  private isPadDeviceType: boolean;
+  private isPadDeviceType: boolean = false;
 
   aboutToAppear(): void {
-    this.isPadDeviceType = AppStorage.Get('deviceType') !== Constants.DEFAULT_DEVICE_TYPE;
+    this.isPadDeviceType = AppStorage.get<string>('deviceType') !== Constants.DEFAULT_DEVICE_TYPE;
   }
 
   isNeedHidePopup(): void {
@@ -62,7 +62,7 @@ export struct ActionBarButton {
             .color($r('sys.color.ohos_id_color_list_separator'))
             .key('ActionBarButton_Divider_' + menu.componentKey)
         }
-      }, menu => menu.actionID.toString())
+      }, (menu: Action) => menu.actionID.toString())
     }
     .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
     .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))

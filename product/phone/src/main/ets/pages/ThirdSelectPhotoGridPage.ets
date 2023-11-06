@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 
-import { BrowserConstants, BrowserController } from '@ohos/common';
+import { BrowserConstants } from '@ohos/common';
+import { BrowserController } from '@ohos/common/CommonComponents';
 import { ThirdSelectPhotoBrowserBase, ThirdSelectPhotoGridBase } from '@ohos/thirdselect';
 
 // Third Select Album Page
@@ -24,7 +25,7 @@ export struct ThirdSelectPhotoGridPage {
   @Provide albumId: string = '';
   @State @Watch('updateAnimationStatus') browserController: BrowserController = new BrowserController(true);
   @State isRunningAnimation: boolean = false;
-  private onBackFunc: Function;
+  private onBackFunc: Function = (): void => {};
 
   onPageShow() {
     this.pageStatus = true;
@@ -43,9 +44,10 @@ export struct ThirdSelectPhotoGridPage {
       this.onBackFunc();
       return true;
     }
+    return false;
   }
 
-  bindBackFunc(backFunc: Function) {
+  bindBackFunc(backFunc: Function): void {
     this.onBackFunc = backFunc;
   }
 
@@ -54,7 +56,7 @@ export struct ThirdSelectPhotoGridPage {
       Column() {
         ThirdSelectPhotoGridBase({
           pageStatus: this.pageStatus,
-          backFuncBinder: this.bindBackFunc.bind(this),
+          backFuncBinder: (backFunc: Function): void => this.bindBackFunc(backFunc),
           browserController: this.browserController
         })
           .transition({ type: TransitionType.All, opacity: 0 })

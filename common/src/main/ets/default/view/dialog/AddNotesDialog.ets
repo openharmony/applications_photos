@@ -14,7 +14,7 @@
  */
 
 import { Log } from '../../utils/Log';
-import type { DialogCallback } from '../../model/common/DialogUtil';
+import { DialogCallback } from '../../model/common/DialogUtil';
 import { ColumnSize, ScreenManager } from '../../model/common/ScreenManager';
 import { Constants } from '../../model/common/Constants';
 import { UiUtil } from '../../utils/UiUtil';
@@ -26,9 +26,9 @@ const TAG: string = 'common_AddNotesDialog';
 export struct AddNotesDialog {
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller: CustomDialogController;
+  controller?: CustomDialogController;
   @Consume dialogCallback: DialogCallback;
   @State isNull: boolean = false;
   private inputNote: string = '';
@@ -49,7 +49,7 @@ export struct AddNotesDialog {
           .width($r('app.float.icon_size'))
           .onClick(() => {
             this.dialogCallback && this.dialogCallback.cancelCallback();
-            this.controller.close()
+            this.controller?.close();
           })
         }.margin({ right: $r('app.float.dialog_icon_margin_horizontal') })
 
@@ -80,11 +80,11 @@ export struct AddNotesDialog {
             let passCheck = StringUtil.checkNameInvalid(this.inputNote);
             if (passCheck) {
               UiUtil.showToast($r('app.string.specific_characters_not_supported'));
-              this.controller.close()
+              this.controller?.close();
               return
             }
             this.dialogCallback && this.dialogCallback.confirmCallback(this.inputNote);
-            this.controller.close()
+            this.controller?.close();
           })
         }
       }.margin({ top: $r('sys.float.ohos_id_text_paragraph_margin_s'),

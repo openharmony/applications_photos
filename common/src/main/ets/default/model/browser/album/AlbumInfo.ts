@@ -33,8 +33,10 @@ export class AlbumInfo {
   dateModified: number;
   videoCount: number;
   mediaItem: MediaItem;
+  deviceName: string;
+  deviceId: string;
 
-  constructor(album: Album) {
+  constructor(album?: Album) {
     if (album) {
       this.uri = album.albumUri;
       this.coverUri = album.coverUri;

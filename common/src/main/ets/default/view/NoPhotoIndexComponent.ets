@@ -22,12 +22,12 @@ const TAG: string = 'common_NoPhotoIndexComponent';
 
 @Component
 export struct NoPhotoIndexComponent {
-  index: number;
-  hasBarSpace: boolean;
+  index: number = 0;
+  hasBarSpace: boolean = false;
 
   // set an initial value temporarily, later change to 0.
   @State imageSize: number = 0;
-  private reSizeFunc = this.reSizeLayout.bind(this);
+  private reSizeFunc = (): void => this.reSizeLayout();
 
   aboutToAppear(): void {
     Log.info(TAG, 'aboutToAppear');
@@ -35,14 +35,13 @@ export struct NoPhotoIndexComponent {
     this.updateImageSize();
   }
 
-  reSizeLayout() {
+    reSizeLayout() {
     this.updateImageSize();
   }
 
   aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.reSizeFunc);
-    this.reSizeFunc = null;
   }
 
   updateImageSize() {

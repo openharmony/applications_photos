@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 
-import { Action, Log, ToolBar } from '@ohos/common';
+import { Action, Log } from '@ohos/common';
+import { ToolBar } from '@ohos/common/CommonComponents';
 
 const TAG: string = 'browser_AlbumSetPageToolBar';
 
@@ -26,7 +27,7 @@ export struct AlbumSetPageToolBar {
   @Consume('selectedCount') @Watch('updateToolbar') selectedAlbumsCount: number;
   @Consume isDisableRename: boolean;
   @Consume isDisableDelete: boolean;
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   @Provide hidePopup: boolean = false;
 
   aboutToAppear(): void {

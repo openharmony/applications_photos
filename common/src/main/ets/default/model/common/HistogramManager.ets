@@ -198,7 +198,7 @@ export class HistogramManager {
    */
   private initializePixelArray(): void {
     Log.info(TAG, 'get pixel array by deserialize');
-    let serializedBuffer = AppStorage.Get<string>(Constants.HISTOGRAM_ARRAY_BUFFER_KEY);
+    let serializedBuffer = AppStorage.get<string>(Constants.HISTOGRAM_ARRAY_BUFFER_KEY);
     if (!serializedBuffer) {
       Log.error(TAG, 'initializePixelArray: serializedBuffer is undefined');
       return;

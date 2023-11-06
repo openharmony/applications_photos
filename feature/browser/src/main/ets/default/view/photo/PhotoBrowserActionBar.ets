@@ -15,7 +15,6 @@
 
 import {
   Action,
-  ActionBar,
   ActionBarColorMode,
   ActionBarMode,
   ActionBarProp,
@@ -24,6 +23,7 @@ import {
   Log,
   ScreenManager
 } from '@ohos/common';
+import { ActionBar } from '@ohos/common/CommonComponents';
 import Curves from '@ohos.curves';
 
 const TAG: string = 'browser_PhotoBrowserActionBar';
@@ -35,9 +35,9 @@ export struct PhotoBrowserActionBar {
   @State isVisibility: boolean = true;
   @State currentBackgroundColor: Resource = ActionBarProp.NORMAL_BACKGROUND_COLOR;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: [number, number, number, number]
+  @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  onMenuClicked: Function;
+  onMenuClicked: Function = (): void => {};
   isVideoPage: boolean = false;
   @StorageLink('isHorizontal') isHorizontal: boolean
     = ScreenManager.getInstance().isHorizontal();

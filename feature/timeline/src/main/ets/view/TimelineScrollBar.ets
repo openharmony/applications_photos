@@ -18,7 +18,7 @@ const TAG: string = 'timeline_TimelineScrollBar';
 
 @Component
 export struct TimelineScrollBar {
-  scroller: Scroller;
+  scroller: Scroller | null = null;
   @Consume @Watch('updateTotalNum') yearData: TimelineData[];
   @State isClickScrollBar: boolean = false;
   @Consume dateText: string;
@@ -83,7 +83,7 @@ export struct TimelineScrollBar {
                 bottom: this.nodeGap(year.count)
               })
             }
-          }, year => JSON.stringify(year))
+          }, (year: TimelineData) => JSON.stringify(year))
         }
         .height('100%')
         .margin({
@@ -93,7 +93,7 @@ export struct TimelineScrollBar {
         })
       }
 
-      ScrollBar({ scroller: this.scroller, direction: ScrollBarDirection.Vertical,
+      ScrollBar({ scroller: this.scroller as Scroller, direction: ScrollBarDirection.Vertical,
         state: BarState.Auto }) {
         Row() {
           if (this.isClickScrollBar) {
@@ -142,16 +142,16 @@ export struct TimelineScrollBar {
       }
       .height('100%')
       .width(this.isClickScrollBar ? $r('app.float.scroll_press_all_width') : $r('app.float.scroll_bar_small_width'))
-      .onTouch((event: TouchEvent) => {
+      .onTouch((event?: TouchEvent) => {
         if (this.dateText == '') {
           Log.debug(TAG, `dateText is null`)
           this.broadCast.emit(BroadCastConstants.INIT_DATE_TEXT, [])
         }
-        if (event.type == TouchType.Move && !this.isClickScrollBar) {
+        if ((event as TouchEvent).type == TouchType.Move && !this.isClickScrollBar) {
           Log.debug(TAG, `scrollBar first TouchType.Move`);
           this.isClickScrollBar = true;
-        } else if (event.type == TouchType.Up || event.type == TouchType.Cancel) {
-          Log.debug(TAG, `scrollBar TouchType.Up or Cancel. type=${event.type}`);
+        } else if ((event as TouchEvent).type == TouchType.Up || (event as TouchEvent).type == TouchType.Cancel) {
+          Log.debug(TAG, `scrollBar TouchType.Up or Cancel. type=${(event as TouchEvent).type}`);
           this.isClickScrollBar = false;
         }
       })
