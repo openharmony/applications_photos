@@ -48,7 +48,7 @@ export class TimelineDataImpl {
         let fetchOption: MediaLib.MediaFetchOptions = {
             selections: selections,
             selectionArgs: selectionArgs,
-            extendArgs: 'DATE(date_added,"unixepoch")',
+            extendArgs: 'DATE(date_added,"unixepoch","localtime")',
             order: `date_added DESC`
         };
         return await mediaModel.getAllMediaItems(fetchOption);
