@@ -88,7 +88,7 @@ export struct PhotoSwiper {
                 }
             }
             if (this.duration != 0) {
-                this.onPhotoChanged(index);
+                this.onPhotoChanged(index, true);
             }
         })
         .disableSwipe(this.canSwipe)
