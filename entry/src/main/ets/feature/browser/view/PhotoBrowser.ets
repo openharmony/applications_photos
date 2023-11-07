@@ -318,9 +318,12 @@ struct PhotoBrowser {
         });
     }
 
-    onPhotoChanged(index: number): void{
+    onPhotoChanged(index: number, isFromSwiper?: boolean): void{
         index = Math.min(index, this.browserDataSource.totalCount() - 1);
         Log.info(TAG, `onPhotoChanged start ${index}`);
+        if (isFromSwiper) {
+            this.isToEdit = false;
+        }
         this.currentIndex = this.isToEdit ? 0 : index;
         this.updateActionBar();
     }
