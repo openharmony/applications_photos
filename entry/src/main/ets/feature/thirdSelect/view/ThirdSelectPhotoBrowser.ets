@@ -81,21 +81,22 @@ struct ThirdSelectPhotoBrowser {
             }
         });
         let params = router.getParams();
-        if (params) {
-            this.onPhotoChanged(parseInt(params.position.toString()));
-            this.thirdSelectTransition = params.transition.toString();
-            this.isFromFa = params.isFromFa && true;
-            this.browserDataSource.setSelectType(params.isFromFa ? MediaConstants.SELECT_TYPE_IMAGE : MediaConstants.SELECT_TYPE_ALL);
-            this.browserDataSource.setAlbumId(params.albumId ? params.albumId.toString() : "");
-            this.isMultiPick = params.isMultiPick as boolean;
-            this.bundleName = params.bundleName.toString();
-            this.isSelectUpperLimited = params.isSelectUpperLimited  as boolean;
+        if (params.pageFrom) {
+            this.pageFrom = new Number(params.pageFrom).valueOf() || 0;
         }
+        this.isFromFa = params.isFromFa && true;
+        this.browserDataSource.setSelectType(params.isFromFa ? MediaConstants.SELECT_TYPE_IMAGE : MediaConstants.SELECT_TYPE_ALL);
+        this.browserDataSource.setAlbumId(params.albumId ? params.albumId.toString() : "");
+        this.isMultiPick = params.isMultiPick as boolean;
+        this.bundleName = params.bundleName.toString();
+        this.isSelectUpperLimited = params.isSelectUpperLimited  as boolean;
         this.browserDataSource.groupDataItem = AppStorage.Get(Constants.APP_KEY_PHOTO_BROWSER);
         if (this.isMultiPick == true) {
             this.totalSelectedCount = this.browserDataSource.getSelectedCount();
         }
-
+        this.onPhotoChanged(new Number(params.position).valueOf() || 0);
+        this.isSelected = this.getCurrentPhoto().isSelect;
+        this.thirdSelectTransition = params.transition ? params.transition.toString() : '';
         this.onMenuClicked = this.onMenuClicked.bind(this);
 
         this.broadCast.on(PhotoConstants.TOGGLE_BAR, () => {
@@ -136,14 +137,11 @@ struct ThirdSelectPhotoBrowser {
     }
 
     onPhotoChanged(index: number): void {
-        this.currentIndex = index;
         let currentPhoto = this.getCurrentPhoto();
-        if (currentPhoto == undefined) {
-            Log.warn(TAG, 'onPhotoChanged, item is undefined');
-        } else {
-            this.isSelected = currentPhoto.isSelect;
-            Log.info(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri}`);
-        }
+        Log.info(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri}`);
+        this.currentIndex = index;
+        this.isSelected = this.getCurrentPhoto().isSelect;
+        this.browserDataSource.notifyDataChange(index);
     }
 
     async selectStateChange() {
@@ -160,7 +158,7 @@ struct ThirdSelectPhotoBrowser {
             let toastMsg = await getResourceString($r('app.string.up_to_limit_tips'));
             showToast(toastMsg);
         }
-        this.broadCast.emit(BroadcastConstants.SELECT, [this.currentIndex]);
+        this.appBroadcast.emit(BroadcastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
         Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
     }
 
