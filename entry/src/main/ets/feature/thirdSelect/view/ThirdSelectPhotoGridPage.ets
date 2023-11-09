@@ -182,7 +182,6 @@ struct ThirdSelectPhotoGridPage {
 
     private onUpdateSelectState(item: MediaDataItem): void {
         let index = this.groupDataSource.getIndexByItem(item);
-        Log.info(TAG, `liujuan 333 onUpdateSelectState = ${index}`);
         this.onSelect(index);
     }
 
