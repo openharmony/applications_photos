@@ -167,7 +167,8 @@ struct ThirdSelectPhotoGridPage {
         this.broadCast.on(BroadcastConstants.SELECT, (index: number) => this.onSelect(index));
         this.broadCast.on(BroadcastConstants.JUMP_THIRD_PHOTO_BROWSER, (name: string, item: MediaDataItem) => {
             this.jumpToThirdPhotoBrowser(name, item);
-        })
+        });
+        this.appBroadcast.on(BroadcastConstants.UPDATE_DATA_SOURCE, this.onUpdateSelectState.bind(this));
         this.broadCast.on(Constants.ON_LOADING_FINISHED,
             (size: number) => {
                 Log.info(TAG, `ON_LOADING_FINISHED size: ${size}`);
@@ -177,6 +178,11 @@ struct ThirdSelectPhotoGridPage {
         this.isActive = true;
 
         this.updateActionBar();
+    }
+
+    private onUpdateSelectState(item: MediaDataItem): void {
+        let index = this.groupDataSource.getIndexByItem(item);
+        this.onSelect(index);
     }
 
     onPageShow() {

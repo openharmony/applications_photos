@@ -40,7 +40,6 @@ export class ImageFilterCrop extends ImageFilterBase {
         let realCropRect = new RectF();
         realCropRect.set(this.cropRect.left, this.cropRect.top, this.cropRect.right, this.cropRect.bottom);
         MathUtils.revertRect(realCropRect, width, height);
-        MathUtils.roundRect(realCropRect);
         Log.debug(this.TAG, `realCropRect: ${JSON.stringify(realCropRect)}`);
 
         let offWidth = realCropRect.getWidth();
