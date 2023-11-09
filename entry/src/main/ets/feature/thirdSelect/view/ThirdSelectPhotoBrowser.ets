@@ -140,7 +140,9 @@ struct ThirdSelectPhotoBrowser {
         let currentPhoto = this.getCurrentPhoto();
         Log.info(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri}`);
         this.currentIndex = index;
-        this.isSelected = this.getCurrentPhoto().isSelect;
+        if (currentPhoto) {
+            this.isSelected = currentPhoto.isSelect;
+        }
         this.browserDataSource.notifyDataChange(index);
     }
 
