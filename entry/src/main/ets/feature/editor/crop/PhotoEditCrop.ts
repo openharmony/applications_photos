@@ -403,7 +403,6 @@ export class PhotoEditCrop extends PhotoEditBase {
         let image = this.cropShow.getImageRect();
         MathUtils.roundRect(image);
         if (this.isFlipHorizontal && this.isFlipVertically && MathUtils.areRectSame(crop, image)) {
-            Log.debug(this.TAG, `liujuan 555 111111 ${MathUtils.areRectSame(crop, image)}`);
             return false;
         }
         if (this.isFlipHorizontal != false || this.isFlipVertically != false
