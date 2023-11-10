@@ -402,6 +402,9 @@ export class PhotoEditCrop extends PhotoEditBase {
         MathUtils.roundRect(crop);
         let image = this.cropShow.getImageRect();
         MathUtils.roundRect(image);
+        if (this.isFlipHorizontal && this.isFlipVertically && MathUtils.areRectSame(crop, image)) {
+            return false;
+        }
         if (this.isFlipHorizontal != false || this.isFlipVertically != false
         || this.rotationAngle != 0 || this.sliderAngle != 0
         || this.cropRatio != CropRatioType.RATIO_TYPE_FREE
