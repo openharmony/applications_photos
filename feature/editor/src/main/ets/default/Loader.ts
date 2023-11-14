@@ -18,6 +18,7 @@ import { BrowserDataFactory, ImageUtil, Log, ScreenManager } from '@ohos/common'
 import { PixelMapWrapper } from './base/PixelMapWrapper';
 import { CropAngle } from './crop/CropType';
 import userFileManager from '@ohos.filemanagement.userFileManager';
+import image from '@ohos.multimedia.image';
 
 const TAG: string = 'editor_Loader';
 
@@ -39,9 +40,24 @@ export class Loader {
       height: result.get(userFileManager.ImageVideoKey.HEIGHT.toString()) as number
     };
 
-    isPreview && Loader.getPixelMapPreviewSize(size);
+    let thumbnail = undefined;
+    if (isPreview) {
+      Loader.getPixelMapPreviewSize(size);
+      thumbnail = await result.getThumbnail(size);
+    } else {
+      let fd = undefined;
+      let imageSourceApi: image.ImageSource = undefined;
+      try {
+        fd = await result.open('rw');
+        imageSourceApi = image.createImageSource(fd);
+        thumbnail = await imageSourceApi.createPixelMap();
+      } catch (e) {
+        Log.error(TAG, "loadPixelMapWrapper: sth wrong, " + e);
+      } finally {
+        await result.close(fd);
+      }
+    }
 
-    let thumbnail = await result.getThumbnail(size);
     let wrapper = new PixelMapWrapper(thumbnail, px2vp(size.width), px2vp(size.height));
     Log.info(TAG, `Photo: loadPixelMap: size[${JSON.stringify(size)}] wrapper[${JSON.stringify(wrapper)}]`);
 
@@ -93,5 +109,31 @@ export class Loader {
       size.height = image.width;
     }
     return size;
+  }
+
+  static async getCompressedBitsPerPixel(mediaItem: MediaItem): Promise<number> {
+    return new Promise(async (resolve, reject)=> {
+      let dataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
+      let result = await dataImpl.getDataByUri(mediaItem.uri);
+      if (!result) {
+        Log.error(TAG, 'getCompressedBitsPerPixel: get file asset failed.');
+        reject();
+      }
+
+      let fd = await result.open('rw');
+      let imageSourceApi: image.ImageSource = image.createImageSource(fd);
+      imageSourceApi = image.createImageSource(fd);
+      imageSourceApi.getImageProperty("CompressedBitsPerPixel", (error, data) => {
+        if (error) {
+          Log.error(TAG, 'Failed to get the value of the specified attribute key of the image.');
+          result.close(fd);
+          reject();
+        } else {
+          Log.error(TAG, 'Succeeded in getting the value of the specified attribute key of the image. data is ' + data);
+          result.close(fd);
+          resolve(Number(data));
+        }
+      });
+    });
   }
 }
