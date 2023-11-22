@@ -1,0 +1,34 @@
+{
+  "name": "@ohos/photos",
+  "description": "Photos app for standard system.",
+  "version": "1.0.0",
+  "license": "ISC",
+  "publishAs": "code-segment",
+  "segment": {
+    "destPath": "applications/standard/photos"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "photos",
+    "subsystem": "applications",
+    "syscap": [
+      "SystemCapability.Applications.Photos"
+    ],
+    "features": [],
+    "adapted_system_type": [
+      "standard"
+    ],
+    "rom": "",
+    "ram": "",
+    "deps": {
+      "components": [],
+      "third_party": []
+    },
+    "build": {
+      "sub_component": [],
+      "inner_kits": [],
+      "test": []
+    }
+  }
+}
