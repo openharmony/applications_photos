@@ -2,7 +2,7 @@
   "name": "@ohos/photos",
   "description": "Photos app for standard system.",
   "version": "3.0",
-  "license": "ISC",
+  "license": "Apache License 2.0",
   "publishAs": "code-segment",
   "segment": {
     "destPath": "applications/standard/photos"
