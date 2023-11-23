@@ -1,7 +1,7 @@
 {
   "name": "@ohos/photos",
   "description": "Photos app for standard system.",
-  "version": "1.0.0",
+  "version": "3.0",
   "license": "ISC",
   "publishAs": "code-segment",
   "segment": {
@@ -12,9 +12,7 @@
   "component": {
     "name": "photos",
     "subsystem": "applications",
-    "syscap": [
-      "SystemCapability.Applications.Photos"
-    ],
+    "syscap": [],
     "features": [],
     "adapted_system_type": [
       "standard"
