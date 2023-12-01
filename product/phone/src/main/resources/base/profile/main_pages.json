@@ -14,6 +14,7 @@
     "pages/AlbumSelect",
     "pages/EditMain",
     "pages/FormEditorPage",
-    "pages/ResourceDeletePage"
+    "pages/ResourceDeletePage",
+    "pages/DeleteUIExtensionPage"
   ]
 }

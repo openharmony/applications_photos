@@ -124,6 +124,13 @@
               }
             ],
           }]
+      },
+      {
+        "name": "DeleteUIExtensionAbility",
+        "description": "DeleteUIExtensionAbility",
+        "type": "sysDialog/common",
+        "exported": true,
+        "srcEntry": "./ets/DeleteAbility/DeleteUIExtensionAbility.ets"
       }
     ]
   },
