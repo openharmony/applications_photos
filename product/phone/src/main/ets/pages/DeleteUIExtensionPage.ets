@@ -17,6 +17,10 @@ import ability from '@ohos.ability.ability';
 import { Constants, Log } from '@ohos/common';
 
 const TAG: string = 'DeleteUIExtensionPage';
+const FOREGROUND_PHOTO_WIDTH: number = 576;
+const BACKGROUND_PHOTO_WIDTH: number = 512;
+const FOREGROUND_PHOTO_HEIGHT: number = 344;
+const BACKGROUND_PHOTO_HEIGHT: number = 360;
 
 let storage = LocalStorage.getShared();
 
@@ -56,11 +60,11 @@ export struct DeleteUIExtensionPage {
       return '';
     }
     if (this.uris.length == 1) {
-      return `${this.uris[0]}?oper=thumbnail&width=${288 * 2}&height=${180 * 2}`;
+      return `${this.uris[0]}?oper=thumbnail&width=${FOREGROUND_PHOTO_WIDTH}&height=${BACKGROUND_PHOTO_HEIGHT}`;
     } else if (isForeground) {
-      return `${this.uris[0]}?oper=thumbnail&width=${288 * 2}&height=${172 * 2}`;
+      return `${this.uris[0]}?oper=thumbnail&width=${FOREGROUND_PHOTO_WIDTH}&height=${FOREGROUND_PHOTO_HEIGHT}`;
     } else {
-      return `${this.uris[1]}?oper=thumbnail&width=${256 * 2}&height=${180 * 2}`;
+      return `${this.uris[1]}?oper=thumbnail&width=${BACKGROUND_PHOTO_WIDTH}&height=${BACKGROUND_PHOTO_HEIGHT}`;
     }
   }
 
