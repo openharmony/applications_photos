@@ -44,20 +44,20 @@ export struct CropModeBar {
   @State rulerSwitchOn: boolean = true;
   @State frameStyleSwitchOn: boolean = true;
   @StorageLink('rulerProperties') rulerProperties: RulerProperties = { rulerWidth: 0, rulerHeight: 0 };
-  private rulerChanged: Function = (): void => {};
-  private resetClicked: Function = (): void => {};
+  private rulerChangedFunc: Function = (number: number): void => this.onRulerChanged(number);
+  private resetClickedFunc: Function = (): void => this.onResetClicked();
   private cropRulerBarHeight: number = Constants.VERTICAL_RULER_COMPONENT_HEIGHT;
 
+
+
   aboutToAppear(): void {
-    this.rulerChanged = (number: number): void => this.onRulerChanged(number);
-    this.broadCast.on(Constants.RULER_CHANGED, (): void => this.rulerChanged());
-    this.resetClicked = (): void => this.onResetClicked();
-    this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClicked);
+    this.broadCast.on(Constants.RULER_CHANGED, this.rulerChangedFunc);
+    this.broadCast.on(Constants.CROP_RESET_CLICKED, this.resetClickedFunc);
   }
 
   aboutToDisappear(): void {
-    this.broadCast.off(Constants.RULER_CHANGED, this.rulerChanged);
-    this.broadCast.off(Constants.CROP_RESET_CLICKED, this.resetClicked);
+    this.broadCast.off(Constants.RULER_CHANGED, this.rulerChangedFunc);
+    this.broadCast.off(Constants.CROP_RESET_CLICKED, this.resetClickedFunc);
     this.isCropReset = false;
   }
 
