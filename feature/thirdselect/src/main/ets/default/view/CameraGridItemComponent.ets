@@ -73,12 +73,6 @@ export struct CameraGridItemComponent {
           let want: Want | null = result.want as Want;
           if(want == null || want.parameters == null) return;
           this.resultUri = want.parameters['resourceUri'] as string;
-
-          if (this.resultUri?.length > 0) {
-
-            this.isShow = true;
-            this.onShow();
-          }
         }).catch((err: Error) => {
           Log.error(TAG, `jumpCameraTakephoto err: ${err}`);
         });

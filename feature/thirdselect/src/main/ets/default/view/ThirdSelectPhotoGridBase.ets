@@ -496,7 +496,7 @@ export struct ThirdSelectPhotoGridBase {
     let targetIndex = isSelectMode ? selectItemIndex : this.dataSource.getDataIndex(item);
     Log.info(TAG, `jump to photo browser at index: ${targetIndex}, transition: ${name}`);
     AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
-    if (geometryTapIndex && geometryTransitionString) {
+    if (geometryTapIndex != -1 && geometryTransitionString != '') {
       this.jumpToBrowserGeometryTransition(
         targetIndex, name, item, isSelectMode, geometryTapIndex, geometryTransitionString);
     } else {
