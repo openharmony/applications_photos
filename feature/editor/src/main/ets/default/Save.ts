@@ -32,7 +32,8 @@ import type { Album, FileType } from '@ohos/common/src/main/ets/default/access/U
 const TAG: string = 'editor_Save';
 
 export class Save {
-  private static readonly QUALITY_100: number = 100;
+  private static readonly QUALITY_95: number = 95;
+  private static readonly PERCENT_100: number = 100;
 
   constructor() {
   }
@@ -40,6 +41,15 @@ export class Save {
   public static async save(item: MediaItem, albumUri: string, optStack: ImageFilterStack, isReplace: Boolean,
                            callback: Function): Promise<void> {
     Log.info(TAG, `${JSON.stringify(item)} ${isReplace}`);
+
+    // Get quality of image first, making sure it's succeed even in replace mode
+    let finalQuality: number = await this.getImageQuality(item);
+    Log.debug(TAG, "save: final quality = " + finalQuality);
+    let options = {
+      format: 'image/jpeg',
+      quality: finalQuality
+    };
+
     try {
       let wrapper = await Loader.loadPixelMapWrapper(item);
       wrapper = optStack.apply(wrapper);
@@ -53,16 +63,22 @@ export class Save {
         return;
       }
 
-      let options = {
-        format: 'image/jpeg',
-        quality: Save.QUALITY_100
-      };
       let packer = image.createImagePacker();
       let buffer = await packer.packing(wrapper.pixelMap, options);
       Log.info(TAG, 'Format pixelMap data to jpg data end.');
 
       await fileIO.write(fd, buffer);
       Log.info(TAG, 'write jpg file end.');
+      try {
+        let imageSourceApi: image.ImageSource = image.createImageSource(fd);
+        await new Promise(async (resolve, reject) => {
+          imageSourceApi.modifyImageProperty('CompressedBitsPerPixel', String(finalQuality / Save.PERCENT_100));
+          resolve(Boolean(true));
+        });
+      } catch (e) {
+        Log.error(TAG, 'sth wrong when set CompressedBitsPerPixel value is ' + (finalQuality / Save.PERCENT_100) +
+          ', error is ' + JSON.stringify(e));
+      }
       let newUri = fileAsset.uri;
       Log.info(TAG, `New saved file: ${newUri}`);
       callback && callback(newUri);
@@ -78,7 +94,6 @@ export class Save {
       ReportToBigDataUtil.errEventReport(BigDataConstants.PHOTO_EDIT_SAVE_ERROR_ID, msg);
       callback && callback(undefined);
     }
-    ;
   }
 
   private static async createFileAsset(uri: string, albumUri: string,  isReplace: Boolean) {
@@ -110,5 +125,17 @@ export class Save {
       await UserFileManagerAccess.getInstance().addFileToAlbum(albumUri, fileAsset);
     }
     return fileAsset;
+  }
+
+  private static async getImageQuality(item: MediaItem): Promise<number> {
+    let quality = undefined;
+    try {
+      quality = await Loader.getCompressedBitsPerPixel(item);
+    } catch (e) {
+      Log.error(TAG, "sth wrong with getCompressedBitsPerPixel" + e);
+    }
+    let finalQuality: number = quality !== undefined ? quality * Save.PERCENT_100 : Save.QUALITY_95
+    Log.debug(TAG, "save: final quality = " + finalQuality);
+    return finalQuality;
   }
 }
