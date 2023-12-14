@@ -386,7 +386,7 @@ export struct ThirdSelectPhotoBrowserBase {
       this.buildCheckBox()
       this.buildPanel()
     }
-    .padding({ bottom: $r('app.float.title_default') })
+    .padding({ bottom: $r('app.float.buttonWithoutText') })
   }
 
   pageTransition() {
