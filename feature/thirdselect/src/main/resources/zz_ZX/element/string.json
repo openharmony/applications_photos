@@ -1,0 +1,24 @@
+{
+    "string":[
+        {
+            "name": "photo_all",
+            "value": "[TS_871234]_All"
+        },
+        {
+            "name": "photo_qr_code",
+            "value": "[TS_871236]_QR codes"
+        },
+        {
+            "name": "photo_bar_code",
+            "value": "[TS_871232]_Barcodes"
+        },
+        {
+            "name": "photo_id_card",
+            "value": "[TS_871233]_ID documents"
+        },
+        {
+            "name": "photo_profile_picture",
+            "value": "[TS_871235]_Profile pictures"
+        }
+    ]
+}

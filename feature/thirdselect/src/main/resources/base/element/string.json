@@ -1,0 +1,24 @@
+{
+    "string":[
+        {
+            "name": "photo_all",
+            "value": "All"
+        },
+        {
+            "name": "photo_qr_code",
+            "value": "QR codes"
+        },
+        {
+            "name": "photo_bar_code",
+            "value": "Barcodes"
+        },
+        {
+            "name": "photo_id_card",
+            "value": "ID Documents"
+        },
+        {
+            "name": "photo_profile_picture",
+            "value": "Profile"
+        }
+    ]
+}

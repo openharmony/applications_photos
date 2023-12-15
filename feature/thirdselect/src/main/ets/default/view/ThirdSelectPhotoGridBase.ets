@@ -24,7 +24,6 @@ import {
   CommonObserverCallback,
   Constants,
   Log,
-  MediaDataSource,
   MediaItem,
   MediaObserver,
   PhotoDataImpl,
@@ -35,6 +34,7 @@ import {
   UiUtil,
   UserFileManagerAccess,
   ViewData,
+  BrowserDataFactory
 } from '@ohos/common';
 import {
   BrowserController,
@@ -54,25 +54,20 @@ import {
   THIRD_SELECT_IS_ORIGIN
 } from '../utils/ThirdSelectConstants';
 import ability from '@ohos.ability.ability';
-import { Router } from '@ohos.arkui.UIContext';
 import common from '@ohos.app.ability.common';
+import SmartPickerRecommendInfo from '../common/SmartPickerRecommendInfo';
+import SmartPickerRecommendInfoObserver from '../common/SmartPickerRecommendInfoObserver';
+import { PickerMediaDataSource } from '../common/PickerMediaDataSource';
+import SmartPickerDataImpl from '../common/SmartPickerDataImpl';
+import SmartPickerRecommendTabInfo from '../common/SmartPickerRecommendTabInfo';
+import SmartPickerConstants from '../common/SmartPickerConstants';
+import { SmartPickerManager } from '../common/SmartPickerManager';
+import { ThirdSelectSmartRecommendTabBar } from './ThirdSelectSmartRecommendTabBar';
+import SmartPickerDataAdapter from '../common/SmartPickerDataAdapter';
 
 const TAG: string = 'thiSel_ThirdSelectPhotoGridBase';
 
-interface Params {
-  uri: string;
-  itemDisplayName: string;
-  itemId: string;
-  bundleName: string;
-  isMultiPick: boolean;
-  isFromFa: boolean;
-  isFromFaPhoto: boolean;
-  filterMediaType?: string;
-  isFirstEnter: boolean;
-  isFromWallpaper: boolean;
-  remainingOfWallpapers: number;
-  maxSelectCount: number;
-};
+let storage = LocalStorage.getShared();
 
 // Third Select Album Page
 @Component
@@ -81,8 +76,9 @@ export struct ThirdSelectPhotoGridBase {
   @Provide isSelectedMode: boolean = true;
   @Provide moreMenuList: Array<Action> = new Array<Action>();
   @Provide rightClickMenuList: Array<Action> = new Array<Action>();
-  PhotoDataImpl: PhotoDataImpl | null = null;
-  dataSource: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
+  photoDataImpl: PhotoDataImpl | undefined = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO) as PhotoDataImpl;
+  smartPickerDataImpl: SmartPickerDataImpl | undefined;
+  dataSource: PickerMediaDataSource = new PickerMediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE, this.photoDataImpl);
   @Provide broadCast: BroadCast = new BroadCast();
   @Provide isShow: boolean = true;
   selectManager: ThirdSelectManager | null = null;
@@ -106,6 +102,11 @@ export struct ThirdSelectPhotoGridBase {
   @State screenHeight: number = ScreenManager.getInstance().getWinHeight();
   @StorageLink('placeholderIndex') @Watch('onPlaceholderChanged') placeholderIndex: number = -1;
   @ObjectLink @Watch('onBrowserControllerChanged') browserController: BrowserController;
+  @State isShowSmartRecommendTabBar: boolean = false;
+  @State smartRecommendTabItems: Array<SmartPickerRecommendTabInfo> = [];
+  @State isAllMediaAlbum: boolean = true;
+  @State currentSmartRecommendTabIndex: number = 0;
+  private smartPickerRecommendInfoObserver: SmartPickerRecommendInfoObserver = new SmartPickerRecommendInfoObserver(this);
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
   private selectFromCameraFunc: Function = (): void => {};
@@ -118,12 +119,28 @@ export struct ThirdSelectPhotoGridBase {
                                                  geometryTransitionString: string, isSelectMode = false): void =>
   this.jumpBrowserCallback(name, item, geometryTapIndex, geometryTransitionString, isSelectMode);
   private onDataReloadedFunc: Function = (): void => this.onReloadFinishedCallback();
+  private onSwitchSmartRecommendTabFunc: Function = (index: number): void => this.onSwitchSmartRecommendTab(index);
 
   onPlaceholderChanged() {
     Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
     if (this.placeholderIndex != -1) {
       this.scroller.scrollToIndex(this.placeholderIndex);
     }
+  }
+
+  private onSwitchSmartRecommendTab(index: number): void {
+    Log.debug(TAG, ' onSwitchSmartRecommendTab index:' + index)
+    AppStorage.setOrCreate<number>('placeholderIndex', Constants.INVALID);
+    this.currentSmartRecommendTabIndex = index;
+    Log.debug(TAG, ' onSwitchSmartRecommendTab this.isShowSmartRecommendTabBar:' + this.isShowSmartRecommendTabBar)
+    if (this.isShowSmartRecommendTabBar) {
+      this.selectParams.cameraAble = this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].isCameraAble();
+    }
+    this.dataSource.changeDataImpl(this.currentSmartRecommendTabIndex == 0 ? this.photoDataImpl : this.smartPickerDataImpl);
+    this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].setUserClickTab(true);
+    this.dataSource.setAlbumUri(this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].getAlbumUri());
+    this.dataSource.resetActiveWindow();
+    this.dataSource.initData();
   }
 
   onBrowserControllerChanged(): void {
@@ -156,7 +173,7 @@ export struct ThirdSelectPhotoGridBase {
   }
 
   aboutToAppear(): void {
-    let param: Params = router.getParams() as Params;
+    let param: SelectParams = router.getParams() as SelectParams;
     this.initSelectParams(param);
     if (this.selectParams.isFromFa) {
       this.selectParams.filterMediaType = AlbumDefine.FILTER_MEDIA_TYPE_IMAGE;
@@ -173,12 +190,18 @@ export struct ThirdSelectPhotoGridBase {
       ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     }
     this.initGridRowCount();
+    if (storage && storage.has(SmartPickerConstants.SMART_PICKER_MANAGER)) {
+      let manager = storage.get<SmartPickerManager>(SmartPickerConstants.SMART_PICKER_MANAGER);
+      if (manager) {
+        manager.addPickerRecommendInfoListener(this.smartPickerRecommendInfoObserver);
+      }
+    }
     this.dataSource.setBroadCast(this.broadCast);
     this.broadCast.on(BroadCastConstants.SELECT, this.selectFunc);
     this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
     this.broadCast.on(Constants.ON_LOADING_FINISHED,
       (size: number) => {
-        this.onLoadFinishedCallback(size, (param: Params): void => this.updateTitle(param));
+        this.onLoadFinishedCallback(size, (param: SelectParams): void => this.updateTitle(param));
       });
     this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
     this.selectManager?.registerCallback('updateCount',
@@ -193,6 +216,7 @@ export struct ThirdSelectPhotoGridBase {
         self.isShowScrollBar = (newState > Constants.PHOTOS_CNT_FOR_HIDE_SCROLL_BAR);
         self.selectManager?.setTotalCount(newState);
       });
+    this.broadCast.on(BroadCastConstants.THIRD_PICKER_SWITCH_SMART_RECOMMEND_TAB, this.onSwitchSmartRecommendTabFunc);
     MediaObserver.getInstance().registerObserver(this.dataObserver);
     this.isActive = true;
 
@@ -205,7 +229,7 @@ export struct ThirdSelectPhotoGridBase {
 
   onPageShow() {
     Log.debug(TAG, 'onPageShow');
-    let param: Params = router.getParams() as Params;
+    let param: SelectParams = router.getParams() as SelectParams;
     this.isItemIdChange = (this.itemId && param && this.itemId !== param.itemId) as boolean;
     if (this.isItemIdChange) {
       this.initSelectParams(param);
@@ -237,14 +261,50 @@ export struct ThirdSelectPhotoGridBase {
   aboutToDisappear(): void {
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
+    if (storage && storage.has(SmartPickerConstants.SMART_PICKER_MANAGER)) {
+      let manager = storage.get<SmartPickerManager>(SmartPickerConstants.SMART_PICKER_MANAGER);
+      if (manager) {
+        manager.removePickerRecommendInfoListener(this.smartPickerRecommendInfoObserver);
+      }
+    }
     this.dataObserver.clearSource();
-    if(this.broadCast) {
+    if (this.broadCast) {
       this.broadCast.off(BroadCastConstants.SELECT, this.selectFunc);
       this.broadCast.off(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
       this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
+      this.broadCast.off(BroadCastConstants.THIRD_PICKER_SWITCH_SMART_RECOMMEND_TAB, this.onSwitchSmartRecommendTabFunc);
+      this.broadCast.off(BroadCastConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH);
     }
     this.dataSource.releaseBroadCast();
     Log.info(TAG, `call aboutToDisappear`)
+  }
+
+  onSmartPickerRecommendInfoListReady(pickerRecommendInfoList: SmartPickerRecommendInfo[], dataAdapter: SmartPickerDataAdapter): void {
+    let param: SelectParams = router.getParams() as SelectParams;
+    if (pickerRecommendInfoList == undefined || pickerRecommendInfoList == null || pickerRecommendInfoList.length == 0) {
+      return;
+    }
+    if (this.smartPickerDataImpl == undefined || this.smartPickerDataImpl == null) {
+      this.smartPickerDataImpl = new SmartPickerDataImpl();
+      this.smartPickerDataImpl.setDataAdapter(dataAdapter);
+    }
+    let tabInfo = new SmartPickerRecommendTabInfo();
+    tabInfo.setCameraAble(param ? param.cameraAble : this.selectParams.cameraAble);
+    tabInfo.setAlbumUri('');
+    tabInfo.setLabelId(SmartPickerConstants.LABEL_ALL_PHOTO);
+    this.smartRecommendTabItems.push(tabInfo);
+    pickerRecommendInfoList.forEach((item, index) => {
+      let tabInfo = new SmartPickerRecommendTabInfo();
+      tabInfo.setLabelId(item.getLabelId());
+      tabInfo.setRecommendType(item.getRecommendType());
+      tabInfo.setAlbumUri(item.getAlbumUri());
+      tabInfo.setTotalCount(item.getTotalCount());
+      tabInfo.setRecommendContent(item.getRecommendContent());
+      tabInfo.setCameraAble(false);
+      this.smartRecommendTabItems.push(tabInfo);
+    });
+    this.isShowSmartRecommendTabBar = true;
+    this.onSwitchSmartRecommendTab(this.currentSmartRecommendTabIndex);
   }
 
   onMediaLibDataChange(changeType: string): void {
@@ -263,7 +323,7 @@ export struct ThirdSelectPhotoGridBase {
 
   @Builder buildGrid() {
     Grid(this.scroller) {
-      if (!this.selectParams.isFromFa) {
+      if (!this.selectParams.isFromFa && this.selectParams.cameraAble) {
         GridItem() {
           CameraGridItemComponent({
             selectParams: this.selectParams,
@@ -322,6 +382,12 @@ export struct ThirdSelectPhotoGridBase {
 
       if (this.selectParams.isFromFa && this.isEmpty) {
         NoPhotoIndexComponent({ index: Constants.TIMELINE_PAGE_INDEX, hasBarSpace: false })
+      }
+      if (this.isShowSmartRecommendTabBar && this.isAllMediaAlbum) {
+        ThirdSelectSmartRecommendTabBar({
+          smartRecommendTabItems: this.smartRecommendTabItems,
+          currentTabIndex: this.currentSmartRecommendTabIndex
+        })
       }
       Stack() {
         this.buildGrid()
@@ -415,7 +481,7 @@ export struct ThirdSelectPhotoGridBase {
     Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}, row count ${this.gridRowCount}`);
   }
 
-  private initSelectParams(param?: Params): void {
+  private initSelectParams(param?: SelectParams): void {
     if (param) {
       this.isItemIdChange = (this.itemId !== undefined && this.itemId !== null && this.itemId !== param.itemId) as boolean;
       this.itemId = param.itemId == undefined ? AlbumDefine.ALBUM_ID_ALL : param.itemId;
@@ -424,7 +490,7 @@ export struct ThirdSelectPhotoGridBase {
       let albumUri = param.uri === undefined ?
       UserFileManagerAccess.getInstance().getSystemAlbumUri(UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE) :
       param.uri;
-      this.dataSource.setAlbumUri(albumUri);
+      this.dataSource.setAlbumUri(this.isShowSmartRecommendTabBar ? this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].getAlbumUri() :albumUri);
       this.updateTitle(param);
       this.selectParams.bundleName = param.bundleName;
       this.selectParams.isMultiPick = param.isMultiPick;
@@ -457,7 +523,7 @@ export struct ThirdSelectPhotoGridBase {
     Log.debug(TAG, `select param ${JSON.stringify(this.selectParams)}, select mode ${this.isSelectedMode}`);
   }
 
-  private updateTitle(param?: Params): void {
+  private updateTitle(param?: SelectParams): void {
     let displayName = param?.itemDisplayName == undefined ? $r('app.string.album_all') : param.itemDisplayName;
     if (typeof displayName === 'object') {
       UiUtil.getResourceString(displayName as Resource).then((stringResource: string) => {
@@ -477,6 +543,11 @@ export struct ThirdSelectPhotoGridBase {
         UiUtil.showToast($r('app.string.up_to_limit_tips'));
       }
       return;
+    }
+    if (this.isShowSmartRecommendTabBar && this.isAllMediaAlbum && value) {
+      if (this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].getUserPickUriList().indexOf(key) === -1) {
+        this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].getUserPickUriList().push(key);
+      }
     }
     if (!isMultiPick) {
       // update correct status from select manager

@@ -25,7 +25,6 @@ import { UserFileManagerAccess } from '../../../access/UserFileManagerAccess';
 const TAG: string = 'common_PhotoDataImpl';
 
 export class PhotoDataImpl extends BrowserDataImpl {
-  name: Resource;
 
   constructor() {
     super()
@@ -64,7 +63,7 @@ export class PhotoDataImpl extends BrowserDataImpl {
           }
         }
         Log.info(TAG, `getMediaItem item size: ${mediaItemList.length}`);
-        callback.callback(mediaItemList);
+        callback.callback(mediaItemList, param.albumUri);
       }
     });
   }
@@ -88,7 +87,7 @@ export class PhotoDataImpl extends BrowserDataImpl {
     Log.debug(TAG, `getMediaItemCount: ${JSON.stringify(param)}`);
     this.getItemsCount(param.albumUri, param?.filterMediaType).then((count) => {
       Log.debug(TAG, `getMediaItemCount callback: ${count}`);
-      callback.callback(count);
+      callback.callback(count, param.albumUri);
     });
   }
 

@@ -18,8 +18,12 @@ import { FileAsset, UserFileManagerAccess } from '../../../access/UserFileManage
 import { DateUtil } from '../../../utils/DateUtil';
 import { Constants } from '../../common/Constants';
 import { AlbumDefine } from '../AlbumDefine';
+import photoAccessHelper from '@ohos.file.photoAccessHelper';
 
 const TAG: string = 'common_MediaItem';
+
+export const isPhotoAsset =
+  (assets: FileAsset | photoAccessHelper.PhotoAsset): assets is photoAccessHelper.PhotoAsset => (<photoAccessHelper.PhotoAsset> assets).photoType !== undefined;
 
 export class MediaItem {
   index?: number;
@@ -41,15 +45,19 @@ export class MediaItem {
   dateTrashed: number;
   private position: userFileManager.PositionType;
   hashCode: string;
-  private data: userFileManager.FileAsset;
+  private data: userFileManager.FileAsset | photoAccessHelper.PhotoAsset;
   path: string;
 
-  constructor(data?: userFileManager.FileAsset) {
+  constructor(data?: userFileManager.FileAsset | photoAccessHelper.PhotoAsset) {
+    this.initialize(data);
+  }
+
+  initialize(data?: userFileManager.FileAsset | photoAccessHelper.PhotoAsset) {
     if (!data) {
       return;
     }
 
-    this.mediaType = data.fileType;
+    this.mediaType = isPhotoAsset(data) ? data.photoType : data.fileType;
     this.displayName = data.displayName;
     this.data = data;
     if (this.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {

@@ -96,4 +96,8 @@ export class StringUtil {
   static checkNameInvalid(inputName: string): boolean {
     return Constants.NAME_PATTERN.test(inputName);
   }
+
+  static isEmpty(value: string): boolean {
+    return value === undefined || value === '' || value === null;
+  }
 }

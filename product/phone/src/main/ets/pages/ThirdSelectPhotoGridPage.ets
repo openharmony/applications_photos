@@ -17,8 +17,10 @@ import { BrowserConstants } from '@ohos/common';
 import { BrowserController } from '@ohos/common/CommonComponents';
 import { ThirdSelectPhotoBrowserBase, ThirdSelectPhotoGridBase } from '@ohos/thirdselect';
 
+let storage = LocalStorage.getShared();
+
 // Third Select Album Page
-@Entry
+@Entry(storage)
 @Component
 export struct ThirdSelectPhotoGridPage {
   @State pageStatus: boolean = false;
