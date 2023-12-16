@@ -14,7 +14,7 @@
  */
 
 import { AlbumDefine, Constants } from '@ohos/common';
-import Want from '@ohos.app.ability.Want';
+import type Want from '@ohos.app.ability.Want';
 import type { RecommendationOptions } from '../common/SmartPickerManager';
 import { SmartPickerManager } from '../common/SmartPickerManager';
 import SmartPickerConstants from '../common/SmartPickerConstants';

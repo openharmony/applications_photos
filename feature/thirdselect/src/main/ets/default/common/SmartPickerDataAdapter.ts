@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import SmartPickerRecommendInfo from './SmartPickerRecommendInfo';
+import type SmartPickerRecommendInfo from './SmartPickerRecommendInfo';
 import { Log } from '@ohos/common/src/main/ets/default/utils/Log';
 import { StringUtil } from '@ohos/common/src/main/ets/default/utils/StringUtil';
 import type { SmartPickerDataInterface } from '../interface/SmartPickerDataInterface';

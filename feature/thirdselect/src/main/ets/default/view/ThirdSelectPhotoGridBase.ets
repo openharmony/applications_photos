@@ -67,7 +67,7 @@ import SmartPickerDataAdapter from '../common/SmartPickerDataAdapter';
 
 const TAG: string = 'thiSel_ThirdSelectPhotoGridBase';
 
-let storage = LocalStorage.getShared();
+let localStorage = LocalStorage.getShared();
 
 // Third Select Album Page
 @Component
@@ -107,6 +107,7 @@ export struct ThirdSelectPhotoGridBase {
   @State isAllMediaAlbum: boolean = true;
   @State currentSmartRecommendTabIndex: number = 0;
   private smartPickerRecommendInfoObserver: SmartPickerRecommendInfoObserver = new SmartPickerRecommendInfoObserver(this);
+  private smartPickerManager : SmartPickerManager | undefined;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
   private selectFromCameraFunc: Function = (): void => {};
@@ -190,10 +191,10 @@ export struct ThirdSelectPhotoGridBase {
       ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     }
     this.initGridRowCount();
-    if (storage && storage.has(SmartPickerConstants.SMART_PICKER_MANAGER)) {
-      let manager = storage.get<SmartPickerManager>(SmartPickerConstants.SMART_PICKER_MANAGER);
-      if (manager) {
-        manager.addPickerRecommendInfoListener(this.smartPickerRecommendInfoObserver);
+    if (localStorage && localStorage.has(SmartPickerConstants.SMART_PICKER_MANAGER)) {
+      this.smartPickerManager = localStorage.get<SmartPickerManager>(SmartPickerConstants.SMART_PICKER_MANAGER);
+      if (this.smartPickerManager) {
+        this.smartPickerManager.addPickerRecommendInfoListener(this.smartPickerRecommendInfoObserver);
       }
     }
     this.dataSource.setBroadCast(this.broadCast);
@@ -261,11 +262,8 @@ export struct ThirdSelectPhotoGridBase {
   aboutToDisappear(): void {
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
-    if (storage && storage.has(SmartPickerConstants.SMART_PICKER_MANAGER)) {
-      let manager = storage.get<SmartPickerManager>(SmartPickerConstants.SMART_PICKER_MANAGER);
-      if (manager) {
-        manager.removePickerRecommendInfoListener(this.smartPickerRecommendInfoObserver);
-      }
+    if (this.smartPickerManager) {
+      this.smartPickerManager.removePickerRecommendInfoListener(this.smartPickerRecommendInfoObserver);
     }
     this.dataObserver.clearSource();
     if (this.broadCast) {

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { SmartPickerDataInterface } from '../interface/SmartPickerDataInterface';
+import type { SmartPickerDataInterface } from '../interface/SmartPickerDataInterface';
 import type common from '@ohos.app.ability.common';
 import SmartPickerRecommendInfo from '../common/SmartPickerRecommendInfo';
 import SmartPickerConstants from '../common/SmartPickerConstants';

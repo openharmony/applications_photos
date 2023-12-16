@@ -60,12 +60,12 @@ export class MediaItem {
     this.mediaType = isPhotoAsset(data) ? data.photoType : data.fileType;
     this.displayName = data.displayName;
     this.data = data;
-    if (this.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
+    if (this.mediaType === UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
       this.duration = Number(data.get(userFileManager.ImageVideoKey.DURATION.toString()));
     }
     this.size = Number(data.get('size'));
     this.orientation = Number(data.get(userFileManager.ImageVideoKey.ORIENTATION.toString()));
-    if (this.orientation == Constants.ANGLE_90 || this.orientation == Constants.ANGLE_270) {
+    if (this.orientation === Constants.ANGLE_90 || this.orientation === Constants.ANGLE_270) {
       this.width = Number(data.get(userFileManager.ImageVideoKey.HEIGHT.toString()));
       this.height = Number(data.get(userFileManager.ImageVideoKey.WIDTH.toString()));
     } else {
