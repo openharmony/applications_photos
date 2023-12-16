@@ -14,7 +14,7 @@
  */
 
 import { MediaDataSource } from '@ohos/common/src/main/ets/default/model/browser/photo/MediaDataSource';
-import { PhotoDataImpl } from '@ohos/common/src/main/ets/default/model/browser/photo/PhotoDataImpl';
+import type { PhotoDataImpl } from '@ohos/common/src/main/ets/default/model/browser/photo/PhotoDataImpl';
 import type { BrowserDataInterface } from '@ohos/common/src/main/ets/default/interface/BrowserDataInterface';
 
 export class PickerMediaDataSource extends MediaDataSource {

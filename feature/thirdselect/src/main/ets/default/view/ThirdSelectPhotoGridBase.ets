@@ -136,7 +136,7 @@ export struct ThirdSelectPhotoGridBase {
     if (this.isShowSmartRecommendTabBar) {
       this.selectParams.cameraAble = this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].isCameraAble();
     }
-    this.dataSource.changeDataImpl(this.currentSmartRecommendTabIndex == 0 ? this.photoDataImpl : this.smartPickerDataImpl);
+    this.dataSource.changeDataImpl(this.currentSmartRecommendTabIndex === 0 ? this.photoDataImpl : this.smartPickerDataImpl);
     this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].setUserClickTab(true);
     this.dataSource.setAlbumUri(this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].getAlbumUri());
     this.dataSource.resetActiveWindow();
@@ -281,10 +281,10 @@ export struct ThirdSelectPhotoGridBase {
 
   onSmartPickerRecommendInfoListReady(pickerRecommendInfoList: SmartPickerRecommendInfo[], dataAdapter: SmartPickerDataAdapter): void {
     let param: SelectParams = router.getParams() as SelectParams;
-    if (pickerRecommendInfoList == undefined || pickerRecommendInfoList == null || pickerRecommendInfoList.length == 0) {
+    if (pickerRecommendInfoList === undefined || pickerRecommendInfoList === null || pickerRecommendInfoList.length === 0) {
       return;
     }
-    if (this.smartPickerDataImpl == undefined || this.smartPickerDataImpl == null) {
+    if (this.smartPickerDataImpl === undefined || this.smartPickerDataImpl === null) {
       this.smartPickerDataImpl = new SmartPickerDataImpl();
       this.smartPickerDataImpl.setDataAdapter(dataAdapter);
     }

@@ -49,29 +49,28 @@ export default class SmartPickerConstants {
     [SmartPickerConstants.NAME_QR_CODE, SmartPickerConstants.LABEL_QR_CODE],
     [SmartPickerConstants.NAME_BAR_CODE, SmartPickerConstants.LABEL_BAR_CODE],
     [SmartPickerConstants.NAME_AVATAR, SmartPickerConstants.LABEL_AVATAR],
-  ])
+  ]);
 
   static readonly LABEL_ID_KEY: string = 'album_name';
   static readonly RECOMMEND_TAB_BORDER_RADIUS: number = 20;
 
-
   static readonly ALL_IMAGE_VIDEO_FETCH_COLUMNS: Array<string> = [
-  photoAccessHelper.PhotoKeys.URI.toString(),
-  photoAccessHelper.PhotoKeys.PHOTO_TYPE.toString(),
-  photoAccessHelper.PhotoKeys.DISPLAY_NAME.toString(),
-  photoAccessHelper.PhotoKeys.DATE_ADDED.toString(),
-  photoAccessHelper.PhotoKeys.DATE_MODIFIED.toString(),
-  photoAccessHelper.PhotoKeys.TITLE.toString(),
-  photoAccessHelper.PhotoKeys.DURATION.toString(),
-  photoAccessHelper.PhotoKeys.WIDTH.toString(),
-  photoAccessHelper.PhotoKeys.HEIGHT.toString(),
-  photoAccessHelper.PhotoKeys.DATE_TAKEN.toString(),
-  photoAccessHelper.PhotoKeys.ORIENTATION.toString(),
-  photoAccessHelper.PhotoKeys.FAVORITE.toString(),
-  photoAccessHelper.PhotoKeys.POSITION.toString(),
-  photoAccessHelper.PhotoKeys.DATE_TRASHED.toString(),
-  photoAccessHelper.PhotoKeys.HIDDEN.toString(),
-  photoAccessHelper.PhotoKeys.SIZE.toString()
-  ]
+    photoAccessHelper.PhotoKeys.URI.toString(),
+    photoAccessHelper.PhotoKeys.PHOTO_TYPE.toString(),
+    photoAccessHelper.PhotoKeys.DISPLAY_NAME.toString(),
+    photoAccessHelper.PhotoKeys.DATE_ADDED.toString(),
+    photoAccessHelper.PhotoKeys.DATE_MODIFIED.toString(),
+    photoAccessHelper.PhotoKeys.TITLE.toString(),
+    photoAccessHelper.PhotoKeys.DURATION.toString(),
+    photoAccessHelper.PhotoKeys.WIDTH.toString(),
+    photoAccessHelper.PhotoKeys.HEIGHT.toString(),
+    photoAccessHelper.PhotoKeys.DATE_TAKEN.toString(),
+    photoAccessHelper.PhotoKeys.ORIENTATION.toString(),
+    photoAccessHelper.PhotoKeys.FAVORITE.toString(),
+    photoAccessHelper.PhotoKeys.POSITION.toString(),
+    photoAccessHelper.PhotoKeys.DATE_TRASHED.toString(),
+    photoAccessHelper.PhotoKeys.HIDDEN.toString(),
+    photoAccessHelper.PhotoKeys.SIZE.toString()
+  ];
 }
 

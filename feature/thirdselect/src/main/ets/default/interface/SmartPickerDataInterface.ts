@@ -13,13 +13,16 @@
  * limitations under the License.
  */
 
-import { RecommendationOptions } from '../common/SmartPickerManager';
-import SmartPickerRecommendInfo from '../common/SmartPickerRecommendInfo';
+import type { MediaItem } from '@ohos/common';
+import type { QueryParam } from '@ohos/common/src/main/ets/default/model/browser/BrowserDataImpl';
+import type { AsyncCallback } from '@ohos/common/src/main/ets/default/model/common/AsyncCallback';
+import type { RecommendationOptions } from '../common/SmartPickerManager';
+import type SmartPickerRecommendInfo from '../common/SmartPickerRecommendInfo';
 
 export interface SmartPickerDataInterface {
-  getTabInfoList(recommendationOptions: RecommendationOptions, param?: any): Promise<Array<SmartPickerRecommendInfo>>;
+  getTabInfoList(recommendationOptions: RecommendationOptions, param?: string): Promise<Array<SmartPickerRecommendInfo>>;
 
-  getData(callback: any, param: any): void;
+  getData(callback: AsyncCallback<MediaItem[]>, param: QueryParam): void;
 
-  getDataCount(callback: any, param: any): Promise<number>;
+  getDataCount(albumUri: string, filterMediaType?: string): Promise<number>;
 }

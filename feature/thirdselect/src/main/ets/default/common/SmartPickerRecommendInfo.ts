@@ -17,9 +17,9 @@ import SmartPickerConstants from './SmartPickerConstants';
 
 export default class SmartPickerRecommendInfo {
   private recommendType: number = SmartPickerConstants.INVALID;
-  private labelId: string = ''
-  private recommendContent: string = ''
-  private albumUri: string = ''
+  private labelId: string = '';
+  private recommendContent: string = '';
+  private albumUri: string = '';
   private totalCount: number = SmartPickerConstants.INVALID;
 
   constructor() {

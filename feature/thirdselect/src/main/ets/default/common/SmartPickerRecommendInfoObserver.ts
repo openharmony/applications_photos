@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 
-import SmartPickerDataAdapter from './SmartPickerDataAdapter';
-import SmartPickerRecommendInfo from './SmartPickerRecommendInfo';
-import SmartPickerRecommendInfoListener from './SmartPickerRecommendInfoListener';
+import type SmartPickerDataAdapter from './SmartPickerDataAdapter';
+import type SmartPickerRecommendInfo from './SmartPickerRecommendInfo';
+import type SmartPickerRecommendInfoListener from './SmartPickerRecommendInfoListener';
 
 interface SmartPickerRecommendInfoReadyCallback {
   onSmartPickerRecommendInfoListReady(smartPickerRecommendInfoList: SmartPickerRecommendInfo[], dataAdapter: SmartPickerDataAdapter) : void;
 }
 
 export default class SmartPickerRecommendInfoObserver implements SmartPickerRecommendInfoListener {
-  source: SmartPickerRecommendInfoReadyCallback
+  source: SmartPickerRecommendInfoReadyCallback;
 
   constructor(source: SmartPickerRecommendInfoReadyCallback) {
     this.source = source;
@@ -32,6 +32,6 @@ export default class SmartPickerRecommendInfoObserver implements SmartPickerReco
     this.source.onSmartPickerRecommendInfoListReady(smartPickerRecommendInfoList, dataAdapter);
   }
 
-  onDataChanged(smartPickerRecommendInfo: SmartPickerRecommendInfo) {
+  onDataChanged(smartPickerRecommendInfo: SmartPickerRecommendInfo): void {
   }
 }

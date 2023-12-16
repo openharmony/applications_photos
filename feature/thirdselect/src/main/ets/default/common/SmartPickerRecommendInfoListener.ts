@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import SmartPickerDataAdapter from './SmartPickerDataAdapter';
-import SmartPickerRecommendInfo from './SmartPickerRecommendInfo';
+import type SmartPickerDataAdapter from './SmartPickerDataAdapter';
+import type SmartPickerRecommendInfo from './SmartPickerRecommendInfo';
 
 export default interface SmartPickerRecommendInfoListener {
   onPickerRecommendInfoListReady(smartPickerRecommendInfoList: Array<SmartPickerRecommendInfo>, dataAdapter: SmartPickerDataAdapter): void;

@@ -14,8 +14,8 @@
  */
 
 import { Log } from '@ohos/common/src/main/ets/default/utils/Log';
-import SmartPickerRecommendInfo from './SmartPickerRecommendInfo';
-import SmartPickerRecommendInfoListener from './SmartPickerRecommendInfoListener';
+import type SmartPickerRecommendInfo from './SmartPickerRecommendInfo';
+import type SmartPickerRecommendInfoListener from './SmartPickerRecommendInfoListener';
 import SmartPickerConstants from './SmartPickerConstants';
 import SmartPickerRecommendInfoCallback from './SmartPickerRecommendInfoCallback';
 import SmartPickerDataAdapter from './SmartPickerDataAdapter';
@@ -57,18 +57,9 @@ export class SmartPickerManager {
     Log.info(TAG, 'addPickerRecommendInfoListener listener:' + listener);
     if (listener && this.pickerInfoListeners.indexOf(listener) === SmartPickerConstants.INVALID) {
       this.pickerInfoListeners.push(listener);
-      this.printTabInfoArray();
       if (!this.hansNotify && this.tabInfoArray !== undefined && this.tabInfoArray.length > 0) {
         this.notifyTabInfoFinished(this.tabInfoArray);
       }
-    }
-  }
-
-  private printTabInfoArray() {
-    Log.error(TAG, 'printTabInfoArray tabInfoArray.length:' + this.tabInfoArray.length);
-    for (let i = 0;i < this.tabInfoArray.length; i++) {
-      let tabInfo = this.tabInfoArray[i];
-      Log.info(TAG, 'printTabInfoArray getAlbumUri:' + tabInfo.getAlbumUri() + ' getLabelId:' + tabInfo.getLabelId());
     }
   }
 
@@ -95,7 +86,6 @@ export class SmartPickerManager {
         return;
       }
       if (!this.hansNotify) {
-        this.printTabInfoArray();
         for (let listener of this.pickerInfoListeners) {
           listener.onPickerRecommendInfoListReady(this.tabInfoArray, this.dataAdapter);
           break;

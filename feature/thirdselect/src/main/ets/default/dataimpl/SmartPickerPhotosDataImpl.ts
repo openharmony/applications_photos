@@ -14,19 +14,19 @@
  */
 
 import { SmartPickerDataInterface } from '../interface/SmartPickerDataInterface';
-import common from '@ohos.app.ability.common';
+import type common from '@ohos.app.ability.common';
 import SmartPickerRecommendInfo from '../common/SmartPickerRecommendInfo';
 import SmartPickerConstants from '../common/SmartPickerConstants';
 import { Log } from '@ohos/common/src/main/ets/default/utils/Log';
 import dataSharePredicates from '@ohos.data.dataSharePredicates';
-import { AsyncCallback } from '@ohos/common/src/main/ets/default/model/common/AsyncCallback';
+import type { AsyncCallback } from '@ohos/common/src/main/ets/default/model/common/AsyncCallback';
 import { MediaItem } from '@ohos/common/src/main/ets/default/model/browser/photo/MediaItem';
-import { QueryParam } from '@ohos/common/src/main/ets/default/model/browser/BrowserDataImpl';
+import type { QueryParam } from '@ohos/common/src/main/ets/default/model/browser/BrowserDataImpl';
 import { SmartPickerUtils } from '../utils/SmartPickerUtils';
 import { Constants } from '@ohos/common/src/main/ets/default/model/common/Constants';
 import photoAccessHelper from '@ohos.file.photoAccessHelper';
-import SmartPickerDataAdapter from '../common/SmartPickerDataAdapter';
-import { RecommendationOptions } from '../common/SmartPickerManager';
+import type SmartPickerDataAdapter from '../common/SmartPickerDataAdapter';
+import type { RecommendationOptions } from '../common/SmartPickerManager';
 import { StringUtil } from '@ohos/common/src/main/ets/default/utils/StringUtil';
 
 const TAG: string = 'SmartPickerPhotosDataImpl';
@@ -62,7 +62,7 @@ export class SmartPickerPhotosDataImpl implements SmartPickerDataInterface {
 
   private addLabelIdNameInfo(recommendationType?: number): void {
     try {
-      if (recommendationType != undefined) {
+      if (recommendationType !== undefined) {
         switch (recommendationType) {
           case SmartPickerConstants.QR_OR_BAR_CODE:
             this.labelIdNameMap.set(SmartPickerConstants.LABEL_QR_CODE, SmartPickerConstants.NAME_QR_CODE);
@@ -114,7 +114,7 @@ export class SmartPickerPhotosDataImpl implements SmartPickerDataInterface {
       let albumList = await albumsFetchResult.getAllObjects();
       albumsFetchResult.close();
       let pickerRecommendInfoList: SmartPickerRecommendInfo[] = [];
-      for (let i = 0;i < albumList.length; i++) {
+      for (let i = 0; i < albumList.length; i++) {
         let album: photoAccessHelper.Album = albumList[i];
         if (album.count > 0) {
           let tabInfo = this.buildTabInfoByAlbum(album);
@@ -148,7 +148,7 @@ export class SmartPickerPhotosDataImpl implements SmartPickerDataInterface {
     this.getLabelPhotoData(callback, albumUri, start, count, filterMediaType);
   }
 
-  private getLabelPhotoData(callback: AsyncCallback<MediaItem[]>, albumUri: string, startIndex?: number, count?: number, filterMediaType?: string) {
+  private getLabelPhotoData(callback: AsyncCallback<MediaItem[]>, albumUri: string, startIndex?: number, count?: number, filterMediaType?: string): void {
     if (StringUtil.isEmpty(albumUri)) {
       callback.callback([], albumUri);
       return;
@@ -164,7 +164,7 @@ export class SmartPickerPhotosDataImpl implements SmartPickerDataInterface {
         } else {
           callback.callback([], albumUri);
         }
-      })
+      });
     } catch (err) {
       Log.error(TAG, 'getLabelPhotoData err:' + err);
       callback.callback([], albumUri);

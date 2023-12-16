@@ -15,7 +15,8 @@
 
 import { AlbumDefine, Constants } from '@ohos/common';
 import Want from '@ohos.app.ability.Want';
-import { SmartPickerManager, RecommendationOptions } from '../common/SmartPickerManager';
+import type { RecommendationOptions } from '../common/SmartPickerManager';
+import { SmartPickerManager } from '../common/SmartPickerManager';
 import SmartPickerConstants from '../common/SmartPickerConstants';
 
 import { Log } from '@ohos/common/src/main/ets/default/utils/Log';
@@ -59,7 +60,7 @@ export class SmartPickerUtils {
   static getThumbnailSafe(sourceUri: string, path: string, size?): string {
     try {
       if (size) {
-        if (size.width != 0 && size.height != 0) {
+        if (size.width !== 0 && size.height !== 0) {
           return `${sourceUri}?oper=thumbnail&width=${size.width}&height=${size.height}&path=${path}`;
         } else {
           Log.warn(TAG, 'getThumbnailSafe with width==0 and height==0, so do not use thumbnail' + JSON.stringify(size));

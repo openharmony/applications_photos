@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import { AsyncCallback } from '@ohos/common/src/main/ets/default/model/common/AsyncCallback';
-import { SmartPickerManager } from './SmartPickerManager';
+import type { AsyncCallback } from '@ohos/common/src/main/ets/default/model/common/AsyncCallback';
+import type { SmartPickerManager } from './SmartPickerManager';
 
-import SmartPickerRecommendInfo from './SmartPickerRecommendInfo';
+import type SmartPickerRecommendInfo from './SmartPickerRecommendInfo';
 
 export default class SmartPickerRecommendInfoCallback implements AsyncCallback<SmartPickerRecommendInfo[]> {
   private manager: SmartPickerManager;

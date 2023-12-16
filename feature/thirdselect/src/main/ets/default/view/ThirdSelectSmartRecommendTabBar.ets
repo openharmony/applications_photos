@@ -39,16 +39,16 @@ export struct ThirdSelectSmartRecommendTabBar {
       ForEach(this.smartRecommendTabItems, (item: SmartPickerRecommendTabInfo, index: number) => {
         Row() {
           Text(this.getTabTitle(item))
-            .fontColor(this.currentTabIndex == index ? $r('sys.color.ohos_id_color_text_primary_dark') : $r('sys.color.ohos_id_color_text_secondary'))
+            .fontColor(this.currentTabIndex === index ? $r('sys.color.ohos_id_color_text_primary_dark') : $r('sys.color.ohos_id_color_text_secondary'))
             .fontSize($r('sys.float.ohos_id_text_size_button3'))
             .fontWeight(FontWeight.Regular)
             .draggable(false)
             .margin({ left: $r('app.float.picker_smart_recommend_tab_text_margin_left') })
             .lineHeight($r('app.float.picker_smart_recommend_tab_text_height'))
         }
-        .backgroundColor(this.currentTabIndex == index ? $r('sys.color.ohos_id_color_secondary') : $r('sys.color.ohos_id_color_button_normal'))
+        .backgroundColor(this.currentTabIndex === index ? $r('sys.color.ohos_id_color_secondary') : $r('sys.color.ohos_id_color_button_normal'))
         .height($r('app.float.picker_smart_recommend_tab_height'))
-        .margin({ left: index == 0 ? 0 : $r('app.float.picker_smart_recommend_tab_margin_left') })
+        .margin({ left: index === 0 ? 0 : $r('app.float.picker_smart_recommend_tab_margin_left') })
         .padding({ left: $r('app.float.picker_smart_recommend_tab_left_padding'), right: $r('app.float.picker_smart_recommend_tab_right_padding') })
         .borderRadius(SmartPickerConstants.RECOMMEND_TAB_BORDER_RADIUS)
         .key('pickerRecommendTab_' + index)

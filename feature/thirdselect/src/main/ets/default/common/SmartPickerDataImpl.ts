@@ -15,9 +15,10 @@
 
 import { Log } from '@ohos/common/src/main/ets/default/utils/Log';
 import { PhotoDataImpl } from '@ohos/common/src/main/ets/default/model/browser/photo/PhotoDataImpl';
-import { AsyncCallback, MediaItem, StringUtil } from '@ohos/common';
-import { QueryParam } from '@ohos/common/src/main/ets/default/model/browser/BrowserDataImpl';
-import SmartPickerDataAdapter from './SmartPickerDataAdapter';
+import type { AsyncCallback, MediaItem } from '@ohos/common';
+import { StringUtil } from '@ohos/common';
+import type { QueryParam } from '@ohos/common/src/main/ets/default/model/browser/BrowserDataImpl';
+import type SmartPickerDataAdapter from './SmartPickerDataAdapter';
 
 const TAG: string = 'SmartPickerDataImpl';
 
@@ -34,12 +35,12 @@ export default class SmartPickerDataImpl extends PhotoDataImpl {
 
   getData(callback: AsyncCallback<MediaItem[]>, param: QueryParam): void {
     Log.info(TAG, `getData start ${JSON.stringify(param)}`);
-    if (callback == null || callback == undefined) {
+    if (callback === null || callback === undefined) {
       Log.error(TAG, 'getData, param or callback is null, return!');
       return;
     }
     if (StringUtil.isEmpty(param?.albumUri)) {
-      return
+      return;
     }
     this.dataAdapter.getData(callback, param);
   }
@@ -48,7 +49,7 @@ export default class SmartPickerDataImpl extends PhotoDataImpl {
     Log.debug(TAG, `getDataCount: ${JSON.stringify(param)}`);
     this.dataAdapter.getDataCount(param.albumUri, param.filterMediaType).then((count): void => {
       callback.callback(count);
-    })
+    });
   }
 }
 

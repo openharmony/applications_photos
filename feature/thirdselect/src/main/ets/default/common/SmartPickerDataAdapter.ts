@@ -16,13 +16,13 @@
 import SmartPickerRecommendInfo from './SmartPickerRecommendInfo';
 import { Log } from '@ohos/common/src/main/ets/default/utils/Log';
 import { StringUtil } from '@ohos/common/src/main/ets/default/utils/StringUtil';
-import { SmartPickerDataInterface } from '../interface/SmartPickerDataInterface';
+import type { SmartPickerDataInterface } from '../interface/SmartPickerDataInterface';
 import SmartPickerConstants from './SmartPickerConstants';
-import { AsyncCallback } from '@ohos/common/src/main/ets/default/model/common/AsyncCallback';
+import type { AsyncCallback } from '@ohos/common/src/main/ets/default/model/common/AsyncCallback';
 import { SmartPickerDataFactory } from '../interface/SmartPickerDataFactory';
-import { MediaItem } from '@ohos/common';
-import { QueryParam } from '@ohos/common/src/main/ets/default/model/browser/BrowserDataImpl';
-import { RecommendationOptions } from './SmartPickerManager';
+import type { MediaItem } from '@ohos/common';
+import type { QueryParam } from '@ohos/common/src/main/ets/default/model/browser/BrowserDataImpl';
+import type { RecommendationOptions } from './SmartPickerManager';
 
 const TAG: string = 'SmartPickerDataAdapter';
 
@@ -34,14 +34,14 @@ export default class SmartPickerDataAdapter {
   }
 
   static getInstance(): SmartPickerDataAdapter {
-    if (AppStorage.get(SmartPickerConstants.SMART_PICKER_DATA_ADAPTER) == null) {
+    if (AppStorage.get(SmartPickerConstants.SMART_PICKER_DATA_ADAPTER) === null) {
       AppStorage.setOrCreate(SmartPickerConstants.SMART_PICKER_DATA_ADAPTER, new SmartPickerDataAdapter());
     }
     let manager: SmartPickerDataAdapter = AppStorage.get(SmartPickerConstants.SMART_PICKER_DATA_ADAPTER);
     return manager;
   }
 
-  getTabInfoList(callback: AsyncCallback<SmartPickerRecommendInfo[]>, recommendationOptions: RecommendationOptions, param?: string) {
+  getTabInfoList(callback: AsyncCallback<SmartPickerRecommendInfo[]>, recommendationOptions: RecommendationOptions, param?: string): void {
     try {
       let recommendationType = recommendationOptions.recommendationType;
       if (recommendationType >= SmartPickerConstants.QR_OR_BAR_CODE && recommendationType <= SmartPickerConstants.PROFILE_PICTURE) {
@@ -55,7 +55,7 @@ export default class SmartPickerDataAdapter {
           } else {
             Log.error(TAG, 'getTabInfoList tabInfoList is undefined');
           }
-        })
+        });
       }
     } catch (err) {
       Log.error(TAG, 'getTabInfoList err:' + err);
@@ -72,10 +72,10 @@ export default class SmartPickerDataAdapter {
         this.uriDataImplMap.set(tabInfo.getAlbumUri(), dataImpl);
       } else {
       }
-    })
+    });
   }
 
-  getData(callback: AsyncCallback<MediaItem[]>, param: QueryParam) {
+  getData(callback: AsyncCallback<MediaItem[]>, param: QueryParam): void {
     try {
       let albumUri = param?.albumUri;
       if (StringUtil.isEmpty(albumUri)) {
@@ -101,7 +101,7 @@ export default class SmartPickerDataAdapter {
     } else {
       return new Promise((resolve): void => {
         resolve(count);
-      })
+      });
     }
   }
 }

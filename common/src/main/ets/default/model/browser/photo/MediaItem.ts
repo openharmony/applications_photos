@@ -18,7 +18,7 @@ import { FileAsset, UserFileManagerAccess } from '../../../access/UserFileManage
 import { DateUtil } from '../../../utils/DateUtil';
 import { Constants } from '../../common/Constants';
 import { AlbumDefine } from '../AlbumDefine';
-import photoAccessHelper from '@ohos.file.photoAccessHelper';
+import type photoAccessHelper from '@ohos.file.photoAccessHelper';
 
 const TAG: string = 'common_MediaItem';
 
@@ -52,7 +52,7 @@ export class MediaItem {
     this.initialize(data);
   }
 
-  initialize(data?: userFileManager.FileAsset | photoAccessHelper.PhotoAsset) {
+  initialize(data?: userFileManager.FileAsset | photoAccessHelper.PhotoAsset): void {
     if (!data) {
       return;
     }
@@ -63,7 +63,7 @@ export class MediaItem {
     if (this.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
       this.duration = Number(data.get(userFileManager.ImageVideoKey.DURATION.toString()));
     }
-    this.size = Number(data.get("size"));
+    this.size = Number(data.get('size'));
     this.orientation = Number(data.get(userFileManager.ImageVideoKey.ORIENTATION.toString()));
     if (this.orientation == Constants.ANGLE_90 || this.orientation == Constants.ANGLE_270) {
       this.width = Number(data.get(userFileManager.ImageVideoKey.HEIGHT.toString()));
@@ -78,7 +78,7 @@ export class MediaItem {
     this.imgHeight = this.height;
     this.dateTrashed = Number(data.get(userFileManager.ImageVideoKey.DATE_TRASHED.toString()));
     this.isFavor = Boolean(data.get(userFileManager.ImageVideoKey.FAVORITE.toString()));
-    this.hashCode = `${this.uri}_${this.size}_${this.orientation}_${this.isFavor}`
+    this.hashCode = `${this.uri}_${this.size}_${this.orientation}_${this.isFavor}`;
   }
 
   async getObject(fetchOpt): Promise<FileAsset> {

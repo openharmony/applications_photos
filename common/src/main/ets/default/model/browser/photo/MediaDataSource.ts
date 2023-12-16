@@ -33,7 +33,7 @@ import type { QueryParam } from '../BrowserDataImpl';
 import type { ViewData } from './ViewData';
 import { GetItemIndexCallback } from './GetItemIndexCallback';
 import { FileAsset } from '../../../access/UserFileManagerAccess';
-import { PhotoDataImpl } from './PhotoDataImpl';
+import type { PhotoDataImpl } from './PhotoDataImpl';
 
 const TAG: string = 'common_MediaDataSource';
 
@@ -242,7 +242,7 @@ export class MediaDataSource extends AbsDataSource {
         Log.info(TAG, `took  ${(Date.now() - this.firstPatchDataRequestTime)}\
           milliseconds to load first batch: ${(assets == null ? 0 : assets.length)}`);
         if (this.isInvalidData(this.albumUri, dataAlbumUri)) {
-          Log.error(TAG, 'initData callback isInvalidData:this.albumUri:' + this.albumUri + ' dataAlbumUri:' + dataAlbumUri)
+          Log.error(TAG, 'initData callback isInvalidData:this.albumUri:' + this.albumUri + ' dataAlbumUri:' + dataAlbumUri);
           return;
         }
         if (assets?.length > 0) {
@@ -527,7 +527,7 @@ export class MediaDataSource extends AbsDataSource {
           Log.info(TAG, `took  ${(Date.now() - this.firstPatchDataRequestTime)}\
                      milliseconds to load first batch: ${(assets == null ? 0 : assets.length)}`);
           if (this.isInvalidData(this.albumUri, dataAlbumUri)) {
-            Log.error(TAG, 'updateSlidingWindow callback isInvalidData:this.albumUri:' + this.getAlbumUri() + ' dataAlbumUri:' + dataAlbumUri)
+            Log.error(TAG, 'updateSlidingWindow callback isInvalidData:this.albumUri:' + this.getAlbumUri() + ' dataAlbumUri:' + dataAlbumUri);
             return;
           }
           if (assets?.length > 0) {

@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 
-import common from '@ohos.app.ability.common';
-import SmartPickerDataAdapter from '../common/SmartPickerDataAdapter';
+import type common from '@ohos.app.ability.common';
+import type SmartPickerDataAdapter from '../common/SmartPickerDataAdapter';
 import { SmartPickerPhotosDataImpl } from '../dataimpl/SmartPickerPhotosDataImpl';
-import { SmartPickerDataInterface } from './SmartPickerDataInterface';
+import type { SmartPickerDataInterface } from './SmartPickerDataInterface';
 
 export class SmartPickerDataFactory {
   static readonly TYPE_LABEL = 'label';
 
   static getFeature(type: string, dataAdapter: SmartPickerDataAdapter): SmartPickerDataInterface {
-    if (type == SmartPickerDataFactory.TYPE_LABEL) {
+    if (type === SmartPickerDataFactory.TYPE_LABEL) {
       let context: common.Context = undefined;
       if (AppStorage.has('photosAbilityContext')) {
         context = AppStorage.get<common.UIAbilityContext>('photosAbilityContext');
