@@ -728,6 +728,9 @@ export class MediaDataSource extends AbsDataSource {
   }
 
   isInvalidData(requestUri: string, dataUri: string): boolean {
+    if (dataUri === '' || dataUri === undefined || dataUri === null) {
+      return false;
+    }
     return !(requestUri === dataUri);
   }
 }
