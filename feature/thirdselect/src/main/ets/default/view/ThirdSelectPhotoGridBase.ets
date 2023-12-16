@@ -107,7 +107,7 @@ export struct ThirdSelectPhotoGridBase {
   @State isAllMediaAlbum: boolean = true;
   @State currentSmartRecommendTabIndex: number = 0;
   private smartPickerRecommendInfoObserver: SmartPickerRecommendInfoObserver = new SmartPickerRecommendInfoObserver(this);
-  private smartPickerManager : SmartPickerManager | undefined;
+  private smartPickerManager: SmartPickerManager | undefined;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
   private selectFromCameraFunc: Function = (): void => {};
