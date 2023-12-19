@@ -146,13 +146,7 @@ export struct PhotoSwiper {
     .itemSpace(this.swiperItemSpace)
     .parallelGesture(PanGesture({
       direction: PanDirection.Horizontal
-    })
-      .onActionStart((event?: GestureEvent) => {
-        if (!this.canSwipe) {
-          this.isOnSwiperAnimation = true;
-        }
-      })
-    )
+    }))
     .index(this.currentIndex)
     .indicator(false)
     .loop(false)
