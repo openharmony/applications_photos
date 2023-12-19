@@ -43,7 +43,7 @@ export class SelectParams {
   /* whether picker can edit */
   editAble: boolean;
   uri: string;
-  itemDisplayName: unknown;
+  itemDisplayName: string;
   itemId: string;
   isFirstEnter: boolean;
   itemCount: number;

@@ -18,8 +18,12 @@ import { FileAsset, UserFileManagerAccess } from '../../../access/UserFileManage
 import { DateUtil } from '../../../utils/DateUtil';
 import { Constants } from '../../common/Constants';
 import { AlbumDefine } from '../AlbumDefine';
+import type photoAccessHelper from '@ohos.file.photoAccessHelper';
 
 const TAG: string = 'common_MediaItem';
+
+export const isPhotoAsset =
+  (assets: FileAsset | photoAccessHelper.PhotoAsset): assets is photoAccessHelper.PhotoAsset => (<photoAccessHelper.PhotoAsset> assets).photoType !== undefined;
 
 export class MediaItem {
   index?: number;
@@ -41,23 +45,27 @@ export class MediaItem {
   dateTrashed: number;
   private position: userFileManager.PositionType;
   hashCode: string;
-  private data: userFileManager.FileAsset;
+  private data: userFileManager.FileAsset | photoAccessHelper.PhotoAsset;
   path: string;
 
-  constructor(data?: userFileManager.FileAsset) {
+  constructor(data?: userFileManager.FileAsset | photoAccessHelper.PhotoAsset) {
+    this.initialize(data);
+  }
+
+  initialize(data?: userFileManager.FileAsset | photoAccessHelper.PhotoAsset): void {
     if (!data) {
       return;
     }
 
-    this.mediaType = data.fileType;
+    this.mediaType = isPhotoAsset(data) ? data.photoType : data.fileType;
     this.displayName = data.displayName;
     this.data = data;
-    if (this.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
+    if (this.mediaType === UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
       this.duration = Number(data.get(userFileManager.ImageVideoKey.DURATION.toString()));
     }
-    this.size = Number(data.get("size"));
+    this.size = Number(data.get('size'));
     this.orientation = Number(data.get(userFileManager.ImageVideoKey.ORIENTATION.toString()));
-    if (this.orientation == Constants.ANGLE_90 || this.orientation == Constants.ANGLE_270) {
+    if (this.orientation === Constants.ANGLE_90 || this.orientation === Constants.ANGLE_270) {
       this.width = Number(data.get(userFileManager.ImageVideoKey.HEIGHT.toString()));
       this.height = Number(data.get(userFileManager.ImageVideoKey.WIDTH.toString()));
     } else {
@@ -70,7 +78,7 @@ export class MediaItem {
     this.imgHeight = this.height;
     this.dateTrashed = Number(data.get(userFileManager.ImageVideoKey.DATE_TRASHED.toString()));
     this.isFavor = Boolean(data.get(userFileManager.ImageVideoKey.FAVORITE.toString()));
-    this.hashCode = `${this.uri}_${this.size}_${this.orientation}_${this.isFavor}`
+    this.hashCode = `${this.uri}_${this.size}_${this.orientation}_${this.isFavor}`;
   }
 
   async getObject(fetchOpt): Promise<FileAsset> {

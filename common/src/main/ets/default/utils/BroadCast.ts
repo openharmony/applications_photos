@@ -28,12 +28,12 @@ export class BroadCast {
     cbs.push(callback);
   }
 
-  public off(event: string, callback: Function): void {
-    if (event == null) {
+  public off(event: string, callback?: Function): void {
+    if (!event) {
       this.callBackArray = new Map();
       return;
     }
-    if (callback == null) {
+    if (!callback) {
       this.callBackArray.delete(event);
       return;
     }

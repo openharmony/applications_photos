@@ -26,3 +26,7 @@ export { ThirdSelectPhotoGridBase } from './src/main/ets/default/view/ThirdSelec
 export { ThirdSelectPhotoBrowserBase } from './src/main/ets/default/view/ThirdSelectPhotoBrowserBase';
 
 export { ThirdSelectedPanel } from './src/main/ets/default/view/ThirdSelectedPanel';
+
+export { SmartPickerUtils } from './src/main/ets/default/utils/SmartPickerUtils';
+
+export { SmartPickerManager } from './src/main/ets/default/common/SmartPickerManager';

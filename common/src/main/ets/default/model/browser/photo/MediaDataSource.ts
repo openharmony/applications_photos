@@ -33,6 +33,7 @@ import type { QueryParam } from '../BrowserDataImpl';
 import type { ViewData } from './ViewData';
 import { GetItemIndexCallback } from './GetItemIndexCallback';
 import { FileAsset } from '../../../access/UserFileManagerAccess';
+import type { PhotoDataImpl } from './PhotoDataImpl';
 
 const TAG: string = 'common_MediaDataSource';
 
@@ -101,9 +102,9 @@ export class MediaDataSource extends AbsDataSource {
   private browserActiveCallback: Function = this.onPhotoBrowserActive.bind(this);
   private enableGetDataFlag: boolean = true;
 
-  constructor(windowSize: number) {
+  constructor(windowSize: number, photoDataImpl?: PhotoDataImpl) {
     super();
-    this.photoDataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
+    this.photoDataImpl = photoDataImpl ?? BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO) as PhotoDataImpl;
     this.windowSize = windowSize;
     this.activeEnd = windowSize;
     this.items = new Array(windowSize);
@@ -237,22 +238,29 @@ export class MediaDataSource extends AbsDataSource {
     this.firstPatchDataRequestTime = Date.now();
     this.lastUpdateTime = this.firstPatchDataRequestTime;
     let firstPatchDataCallback = {
-      callback: (assets: MediaItem[]): void => {
+      callback: (assets: MediaItem[], dataAlbumUri?: string): void => {
         Log.info(TAG, `took  ${(Date.now() - this.firstPatchDataRequestTime)}\
           milliseconds to load first batch: ${(assets == null ? 0 : assets.length)}`);
-        if (assets.length > 0) {
-          this.updateMediaData(this.firstPatchDataRequestTime, start, assets);
-          let secondPatchDataCallback: GetItemsCallback = new GetItemsCallback(this, limit);
-          let secondParam: QueryParam = {
-            albumUri: this.albumUri,
-            start: limit,
-            count: this.windowSize - limit,
-          };
-          if (this.filterMediaType != undefined) {
-            secondParam.filterMediaType = this.filterMediaType;
-          }
-          this.photoDataImpl.getData(secondPatchDataCallback, secondParam);
+        if (this.isInvalidData(this.albumUri, dataAlbumUri)) {
+          Log.error(TAG, 'initData callback isInvalidData:this.albumUri:' + this.albumUri + ' dataAlbumUri:' + dataAlbumUri);
+          return;
         }
+        if (assets?.length > 0) {
+          this.updateMediaData(this.firstPatchDataRequestTime, start, assets);
+        }
+        if (assets?.length < limit) {
+          return;
+        }
+        let secondPatchDataCallback: GetItemsCallback = new GetItemsCallback(this, limit);
+        let secondParam: QueryParam = {
+          albumUri: this.albumUri,
+          start: limit,
+          count: this.windowSize - limit,
+        };
+        if (this.filterMediaType != undefined) {
+          secondParam.filterMediaType = this.filterMediaType;
+        }
+        this.photoDataImpl.getData(secondPatchDataCallback, secondParam);
       }
     };
     let firstParam: QueryParam = {
@@ -515,22 +523,29 @@ export class MediaDataSource extends AbsDataSource {
       this.firstPatchDataRequestTime = Date.now();
       this.lastUpdateTime = this.firstPatchDataRequestTime;
       let firstPatchDataCallback = {
-        callback: (assets: MediaItem[]): void => {
+        callback: (assets: MediaItem[], dataAlbumUri?: string): void => {
           Log.info(TAG, `took  ${(Date.now() - this.firstPatchDataRequestTime)}\
                      milliseconds to load first batch: ${(assets == null ? 0 : assets.length)}`);
-          if (assets.length > 0) {
-            this.updateMediaData(this.firstPatchDataRequestTime, start, assets);
-            let secondPatchDataCallback: GetItemsCallback = new GetItemsCallback(this, newActiveStart);
-            let secondParam: QueryParam = {
-              albumUri: this.albumUri,
-              start: newActiveStart,
-              count: this.windowSize
-            };
-            if (this.filterMediaType != undefined) {
-              secondParam.filterMediaType = this.filterMediaType;
-            }
-            this.photoDataImpl.getData(secondPatchDataCallback, secondParam);
+          if (this.isInvalidData(this.albumUri, dataAlbumUri)) {
+            Log.error(TAG, 'updateSlidingWindow callback isInvalidData:this.albumUri:' + this.getAlbumUri() + ' dataAlbumUri:' + dataAlbumUri);
+            return;
           }
+          if (assets?.length > 0) {
+            this.updateMediaData(this.firstPatchDataRequestTime, start, assets);
+          }
+          if (assets?.length < limit) {
+            return;
+          }
+          let secondPatchDataCallback: GetItemsCallback = new GetItemsCallback(this, newActiveStart);
+          let secondParam: QueryParam = {
+            albumUri: this.albumUri,
+            start: newActiveStart,
+            count: this.windowSize
+          };
+          if (this.filterMediaType != undefined) {
+            secondParam.filterMediaType = this.filterMediaType;
+          }
+          this.photoDataImpl.getData(secondPatchDataCallback, secondParam);
         }
       };
       let firstParam: QueryParam = {
@@ -604,6 +619,10 @@ export class MediaDataSource extends AbsDataSource {
   setAlbumUri(uri: string): void {
     Log.info(TAG, `setAlbumUri: ${uri}`)
     this.albumUri = uri;
+  }
+
+  getAlbumUri(): string {
+    return this.albumUri;
   }
 
   setFilterMediaType(filterMediaType: string): void {
@@ -706,5 +725,12 @@ export class MediaDataSource extends AbsDataSource {
       newData[i - newActiveStart] = this.items[i - this.activeStart];
     }
     this.items = newData;
+  }
+
+  isInvalidData(requestUri: string, dataUri: string): boolean {
+    if (dataUri === '' || dataUri === undefined || dataUri === null) {
+      return false;
+    }
+    return !(requestUri === dataUri);
   }
 }

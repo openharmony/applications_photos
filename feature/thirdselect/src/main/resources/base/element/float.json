@@ -1,0 +1,40 @@
+{
+  "float": [
+    {
+      "name": "picker_smart_recommend_tab_text_margin_left",
+      "value": "4vp"
+    },
+    {
+      "name": "picker_smart_recommend_tab_text_height",
+      "value": "16vp"
+    },
+    {
+      "name": "picker_smart_recommend_tab_height",
+      "value": "28vp"
+    },
+    {
+      "name": "picker_smart_recommend_tab_margin_left",
+      "value": "8vp"
+    },
+    {
+      "name": "picker_smart_recommend_tab_left_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "picker_smart_recommend_tab_right_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "picker_smart_recommend_tab_bar_margin_bottom",
+      "value": "8vp"
+    },
+    {
+      "name": "picker_smart_recommend_tab_bar_padding_top",
+      "value": "8vp"
+    },
+    {
+      "name": "picker_smart_recommend_tab_bar_padding_bottom",
+      "value": "8vp"
+    }
+  ]
+}

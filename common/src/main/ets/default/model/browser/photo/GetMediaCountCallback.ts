@@ -33,8 +33,12 @@ export class GetMediaCountCallback implements AsyncCallback<number> {
   }
 
   // Data callback
-  callback(count: number) {
+  callback(count: number, dataAlbumUri?: string): void {
     TraceControllerUtils.finishTraceWithTaskId('getMediaCount', this.requestTime);
+    if (this.source?.isInvalidData(this.source?.getAlbumUri(), dataAlbumUri)) {
+      Log.error(TAG, 'GetMediaCountCallback callback isInvalidData:this.albumUri:' + this.source?.getAlbumUri() + ' dataAlbumUri:' + dataAlbumUri);
+      return;
+    }
     this.source.updateMediaCount(this.requestTime, count);
   }
 }

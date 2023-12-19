@@ -1,0 +1,24 @@
+{
+    "string":[
+        {
+            "name": "photo_all",
+            "value": "全部"
+        },
+        {
+            "name": "photo_qr_code",
+            "value": "二维码"
+        },
+        {
+            "name": "photo_bar_code",
+            "value": "条码"
+        },
+        {
+            "name": "photo_id_card",
+            "value": "身份证"
+        },
+        {
+            "name": "photo_profile_picture",
+            "value": "头像"
+        }
+    ]
+}

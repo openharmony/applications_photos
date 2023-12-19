@@ -33,8 +33,12 @@ export class GetItemsCallback implements AsyncCallback<MediaItem[]> {
     TraceControllerUtils.startTraceWithTaskId('getMediaItems', this.requestTime);
   }
 
-  callback(assets: MediaItem[]) {
+  callback(assets: MediaItem[], dataAlbumUri?: string): void {
     TraceControllerUtils.finishTraceWithTaskId('getMediaItems', this.requestTime);
+    if (this.source?.isInvalidData(this.source?.getAlbumUri(), dataAlbumUri)) {
+      Log.error(TAG, 'GetItemsCallback callback isInvalidData:this.albumUri:' + this.source?.getAlbumUri() + ' dataAlbumUri:' + dataAlbumUri);
+      return;
+    }
     Log.info(TAG, `took ${Date.now() - this.requestTime} milliseconds to load data: ${assets.length}`);
     this.source.updateMediaData(this.requestTime, this.start, assets);
   }
