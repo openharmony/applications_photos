@@ -23,29 +23,24 @@ import { SmartPickerDataFactory } from '../interface/SmartPickerDataFactory';
 import type { MediaItem } from '@ohos/common';
 import type { QueryParam } from '@ohos/common/src/main/ets/default/model/browser/BrowserDataImpl';
 import type { RecommendationOptions } from './SmartPickerManager';
+import type common from '@ohos.app.ability.common';
 
 const TAG: string = 'SmartPickerDataAdapter';
 
 export default class SmartPickerDataAdapter {
   private photosDataInterface: SmartPickerDataInterface = undefined;
   private uriDataImplMap: Map<string, SmartPickerDataInterface> = new Map();
+  private context: common.Context;
 
-  constructor() {
-  }
-
-  static getInstance(): SmartPickerDataAdapter {
-    if (AppStorage.get(SmartPickerConstants.SMART_PICKER_DATA_ADAPTER) === null) {
-      AppStorage.setOrCreate(SmartPickerConstants.SMART_PICKER_DATA_ADAPTER, new SmartPickerDataAdapter());
-    }
-    let manager: SmartPickerDataAdapter = AppStorage.get(SmartPickerConstants.SMART_PICKER_DATA_ADAPTER);
-    return manager;
+  constructor(context: common.Context) {
+    this.context = context;
   }
 
   getTabInfoList(callback: AsyncCallback<SmartPickerRecommendInfo[]>, recommendationOptions: RecommendationOptions, param?: string): void {
     try {
       let recommendationType = recommendationOptions.recommendationType;
       if (recommendationType >= SmartPickerConstants.QR_OR_BAR_CODE && recommendationType <= SmartPickerConstants.PROFILE_PICTURE) {
-        this.photosDataInterface = SmartPickerDataFactory.getFeature(SmartPickerDataFactory.TYPE_LABEL, this);
+        this.photosDataInterface = SmartPickerDataFactory.getFeature(this.context, SmartPickerDataFactory.TYPE_LABEL, this);
         Log.debug(TAG, 'getTabInfoList this.photosDataInterface:' + this.photosDataInterface);
         this.photosDataInterface.getTabInfoList(recommendationOptions).then(async (tabInfoList: Array<SmartPickerRecommendInfo>) => {
           if (tabInfoList !== undefined && tabInfoList.length > 0) {

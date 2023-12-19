@@ -114,13 +114,13 @@ export default class MainAbility extends Ability {
       mMaxSelectCount = Constants.NUMBER_1;
       mFilterMediaType = wantParam?.filterMediaType as string;
       AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_SINGLE_SELECT);
-      SmartPickerUtils.initIfNeeded(want, this.localStorage);
+      SmartPickerUtils.initIfNeeded(this.context, want, this.localStorage);
     } else if (wantParamUri === Constants.WANT_PARAM_URI_SELECT_MULTIPLE) {
       mCallerBundleName = wantParam[Constants.KEY_WANT_PARAMETERS_CALLER_BUNDLE_NAME] as string;
       mMaxSelectCount = wantParam?.maxSelectCount as number;
       mFilterMediaType = wantParam?.filterMediaType as string;
       AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_MULTIPLE_SELECT);
-      SmartPickerUtils.initIfNeeded(want, this.localStorage);
+      SmartPickerUtils.initIfNeeded(this.context, want, this.localStorage);
     } else if (wantParamUri === Constants.WANT_PARAM_URI_FORM) {
       isFromCard = true;
       AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_FORM_ABILITY);

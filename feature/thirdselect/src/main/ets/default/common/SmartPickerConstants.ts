@@ -19,7 +19,6 @@ export default class SmartPickerConstants {
   static readonly INVALID: number = -1;
   static readonly INVALID_PHOTO_SELECT_TYPE: number = -1;
   static readonly SMART_PICKER_MANAGER: string = 'smart_picker_manager';
-  static readonly SMART_PICKER_DATA_ADAPTER: string = 'smart_picker_data_adapter';
   static readonly LABEL_ID_CARD: string = '4';
   static readonly LABEL_QR_CODE: string = '191';
   static readonly LABEL_BAR_CODE: string = '192';

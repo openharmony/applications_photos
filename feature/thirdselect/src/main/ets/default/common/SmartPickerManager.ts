@@ -19,6 +19,7 @@ import type SmartPickerRecommendInfoListener from './SmartPickerRecommendInfoLis
 import SmartPickerConstants from './SmartPickerConstants';
 import SmartPickerRecommendInfoCallback from './SmartPickerRecommendInfoCallback';
 import SmartPickerDataAdapter from './SmartPickerDataAdapter';
+import type common from '@ohos.app.ability.common';
 
 const TAG: string = 'SmartPickerManager';
 
@@ -28,9 +29,11 @@ export class SmartPickerManager {
   private pickerInfoListeners: Array<SmartPickerRecommendInfoListener> = new Array<SmartPickerRecommendInfoListener>();
   private hansNotify: boolean = false;
   private dataAdapter: SmartPickerDataAdapter = undefined;
+  private context: common.Context;
 
-  constructor(recommendationOptions: RecommendationOptions, callBundleName: string) {
+  constructor(context: common.Context, recommendationOptions: RecommendationOptions, callBundleName: string) {
     Log.debug(TAG, 'constructor');
+    this.context = context;
     this.init(recommendationOptions, callBundleName);
   }
 
@@ -46,7 +49,7 @@ export class SmartPickerManager {
     }
     try {
       let recommendInfoCallback: SmartPickerRecommendInfoCallback = new SmartPickerRecommendInfoCallback(this);
-      this.dataAdapter = new SmartPickerDataAdapter();
+      this.dataAdapter = new SmartPickerDataAdapter(this.context);
       this.dataAdapter.getTabInfoList(recommendInfoCallback, recommendationOptions);
     } catch (err) {
       Log.error(TAG, 'init err:' + err);

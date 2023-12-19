@@ -21,14 +21,8 @@ import type { SmartPickerDataInterface } from './SmartPickerDataInterface';
 export class SmartPickerDataFactory {
   static readonly TYPE_LABEL = 'label';
 
-  static getFeature(type: string, dataAdapter: SmartPickerDataAdapter): SmartPickerDataInterface {
+  static getFeature(context: common.Context, type: string, dataAdapter: SmartPickerDataAdapter): SmartPickerDataInterface {
     if (type === SmartPickerDataFactory.TYPE_LABEL) {
-      let context: common.Context = undefined;
-      if (AppStorage.has('photosAbilityContext')) {
-        context = AppStorage.get<common.UIAbilityContext>('photosAbilityContext');
-      } else {
-        context = AppStorage.get<common.Context>('photosAbilityContext');
-      }
       return new SmartPickerPhotosDataImpl(context, dataAdapter);
     }
     return undefined;

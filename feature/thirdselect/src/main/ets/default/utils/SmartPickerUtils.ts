@@ -20,13 +20,14 @@ import { SmartPickerManager } from '../common/SmartPickerManager';
 import SmartPickerConstants from '../common/SmartPickerConstants';
 
 import { Log } from '@ohos/common/src/main/ets/default/utils/Log';
+import type common from '@ohos.app.ability.common';
 
 const TAG: string = 'SmartPickerUtils';
 
 export class SmartPickerUtils {
   static readonly THUMBNAIL_WIDTH = 256;
 
-  static initIfNeeded(want: Want, storage: LocalStorage): boolean {
+  static initIfNeeded(context: common.Context, want: Want, storage: LocalStorage): boolean {
     try {
       let wantParam: Record<string, Object> = want.parameters as Record<string, Object>;
       let filterMediaType = wantParam?.filterMediaType as string;
@@ -47,7 +48,7 @@ export class SmartPickerUtils {
       let callerBundleName = wantParam[Constants.KEY_WANT_PARAMETERS_CALLER_BUNDLE_NAME] as string;
       Log.info(TAG, 'initIfNeeded callerBundleName:' + callerBundleName + ' storage:' + storage);
       if (storage) {
-        let smartPickerManager: SmartPickerManager = new SmartPickerManager(recommendationOptions, callerBundleName);
+        let smartPickerManager: SmartPickerManager = new SmartPickerManager(context, recommendationOptions, callerBundleName);
         storage.setOrCreate(SmartPickerConstants.SMART_PICKER_MANAGER, smartPickerManager);
       }
       return true;
