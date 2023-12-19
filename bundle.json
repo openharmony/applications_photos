@@ -12,7 +12,9 @@
   "component": {
     "name": "photos",
     "subsystem": "applications",
-    "syscap": [],
+    "syscap": [
+        "SystemCapability.FileManagement.UserFileService"
+    ],
     "features": [],
     "adapted_system_type": [
       "standard"
@@ -24,7 +26,9 @@
       "third_party": []
     },
     "build": {
-      "sub_component": [],
+      "sub_component": [
+          "//applications/standard/photos:Photos"
+      ],
       "inner_kits": [],
       "test": []
     }
