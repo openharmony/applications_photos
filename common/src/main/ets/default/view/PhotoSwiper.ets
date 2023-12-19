@@ -144,9 +144,11 @@ export struct PhotoSwiper {
     .cachedCount(this.SWIPE_CACHE_COUNT)
     .duration(BrowserConstants.PHOTO_SWIPE_DURATION)
     .itemSpace(this.swiperItemSpace)
-    .parallelGesture(PanGesture({
-      direction: PanDirection.Horizontal
-    }))
+    .onGestureSwipe(() => {
+      if (!this.isOnSwiperAnimation) {
+        this.isOnSwiperAnimation = true;
+      }
+    })
     .index(this.currentIndex)
     .indicator(false)
     .loop(false)
