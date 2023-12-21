@@ -17,7 +17,7 @@ import Curves from '@ohos.curves';
 
 export class Constants {
   // Immersive animation duration
-  static readonly IMMERSE_ANIM_DURATION = 200;
+  static readonly IMMERSE_ANIM_DURATION = 50;
   static readonly IMMERSE_ANIM_DELAY = 50;
 
   // click event
@@ -150,8 +150,8 @@ export class Constants {
   static readonly ROTATE_QUARTIC: number = 360;
   static readonly DEFAULT_SIZE: number = 256;
   static readonly OPERATION_EXIT_ANIMATION_DURATION: number = 100;
-  static readonly SHARE_TRANSITION_DURATION: number = 200;
-  static readonly PAGE_SHOW_ANIMATION_DURATION: number = 200;
+  static readonly SHARE_TRANSITION_DURATION: number = 50;
+  static readonly PAGE_SHOW_ANIMATION_DURATION: number = 50;
   static readonly PHOTO_GRID_ANIMATION_DURATION: number = 300;
   static readonly PHOTO_SWIPE_DURATION: number = 300;
   static readonly RESERVED_DIGITS: number = 6;
