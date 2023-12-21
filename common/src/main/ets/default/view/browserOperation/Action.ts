@@ -160,7 +160,7 @@ export class Action {
     componentKey: COMPONENT_KEY_INFO
   });
   public static INFO_INVALID = new Action({
-    id: ActionID.INFO,
+    id: ActionID.INFO_INVALID,
     iconRes: $r('app.media.ic_gallery_public_details'),
     textRes: $r('app.string.action_info'),
     fillColor: $r('app.color.icon_disabled_color'),
