@@ -17,7 +17,7 @@ import Curves from '@ohos.curves';
 
 export class Constants {
   // Immersive animation duration
-  static readonly IMMERSE_ANIM_DURATION = 50;
+  static readonly IMMERSE_ANIM_DURATION = 200;
   static readonly IMMERSE_ANIM_DELAY = 50;
 
   // click event
@@ -117,8 +117,8 @@ export class Constants {
   static readonly SAME_RATIO_SCALE_FACTOR: number = Constants.RATIO_SCALE_WIDTH / Constants.RATIO_SCALE_HEIGHT;
 
   static readonly CURVE_X1: number = 0.2;
-  static readonly CURVE_Y1: number = 0.0;
-  static readonly CURVE_X2: number = 0.2;
+  static readonly CURVE_Y1: number = 0.2;
+  static readonly CURVE_X2: number = 0.1;
   static readonly CURVE_Y2: number = 1.0;
   static readonly PHOTO_TRANSITION_CURVE: string =
     Curves.cubicBezier(Constants.CURVE_X1, Constants.CURVE_Y1, Constants.CURVE_X2, Constants.CURVE_Y2);
@@ -150,8 +150,8 @@ export class Constants {
   static readonly ROTATE_QUARTIC: number = 360;
   static readonly DEFAULT_SIZE: number = 256;
   static readonly OPERATION_EXIT_ANIMATION_DURATION: number = 100;
-  static readonly SHARE_TRANSITION_DURATION: number = 50;
-  static readonly PAGE_SHOW_ANIMATION_DURATION: number = 50;
+  static readonly SHARE_TRANSITION_DURATION: number = 200;
+  static readonly PAGE_SHOW_ANIMATION_DURATION: number = 200;
   static readonly PHOTO_GRID_ANIMATION_DURATION: number = 300;
   static readonly PHOTO_SWIPE_DURATION: number = 300;
   static readonly RESERVED_DIGITS: number = 6;
