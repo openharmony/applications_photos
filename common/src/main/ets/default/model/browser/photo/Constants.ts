@@ -117,8 +117,8 @@ export class Constants {
   static readonly SAME_RATIO_SCALE_FACTOR: number = Constants.RATIO_SCALE_WIDTH / Constants.RATIO_SCALE_HEIGHT;
 
   static readonly CURVE_X1: number = 0.2;
-  static readonly CURVE_Y1: number = 0.0;
-  static readonly CURVE_X2: number = 0.2;
+  static readonly CURVE_Y1: number = 0.2;
+  static readonly CURVE_X2: number = 0.1;
   static readonly CURVE_Y2: number = 1.0;
   static readonly PHOTO_TRANSITION_CURVE: string =
     Curves.cubicBezier(Constants.CURVE_X1, Constants.CURVE_Y1, Constants.CURVE_X2, Constants.CURVE_Y2);
