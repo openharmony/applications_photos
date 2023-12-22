@@ -221,6 +221,7 @@ export struct ThirdSelectPhotoBrowserBase {
     }
     this.totalSelectedCount = this.selectManager?.getSelectedCount() ?? 0;
     this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
+    this.appBroadCast.emit(BroadCastConstants.UPDATE_SELECT, [currentPhoto.uri, this.isSelected]);
     Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change geometryTransitionId ${this.geometryTransitionId}`);
   }
 
