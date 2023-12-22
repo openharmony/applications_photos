@@ -133,31 +133,30 @@ export struct SelectPhotoBrowserView {
       }
     });
     this.selectManager = AppStorage.get<SelectManager>(Constants.PHOTO_GRID_SELECT_MANAGER) as SelectManager;
-    let param: Params = this.browserController.selectBrowserParam as Params;
-    if (param.pageFrom) {
-      this.pageFrom = param.pageFrom;
+    try {
+      let param: Params = this.browserController.selectBrowserParam as Params;
+      if (param.pageFrom) {
+        this.pageFrom = param.pageFrom;
+      }
+      if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
+        this.dataSource = new PhotoDataSource('Recycle');
+      } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
+        this.dataSource.setDeviceId(param.deviceId);
+      }
+      this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+      if (this.isMultiPick == true && this.selectManager) {
+        this.selectedCount = this.selectManager.getSelectedCount();
+      }
+      this.onPhotoChanged(param.position);
+      this.mTransition = param.transition;
+    } catch (e) {
+      Log.error(TAG, `param error ${e}`);
     }
-    if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
-      this.dataSource = new PhotoDataSource('Recycle');
-    } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
-      this.dataSource.setDeviceId(param.deviceId);
-    }
-
-    this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
-    if (this.isMultiPick == true && this.selectManager) {
-      this.selectedCount = this.selectManager.getSelectedCount();
-    }
-
-    this.onPhotoChanged(param.position);
-    this.mTransition = param.transition;
-
     this.dataSource.setBroadCast(this.broadCast);
-
     this.broadCast.on(PhotoConstants.PULL_DOWN_END, this.pullDownEndFunc);
     this.broadCast.on(PhotoConstants.DATA_SIZE_CHANGED, this.dataSizeChangedFunc);
     this.broadCast.on(PhotoConstants.DATA_CONTENT_CHANGED, this.dataContentChangedFunc);
     this.broadCast.on(PhotoConstants.SET_DISABLE_SWIPE, this.setDisableSwipeFunc);
-
     this.appBroadCast.on(BroadCastConstants.SELECT_PHOTO_BROWSER_BACK_PRESS_EVENT, this.pullDownEndFunc);
   }
 
