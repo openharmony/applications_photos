@@ -128,6 +128,7 @@ export struct ImageGridItemComponent {
   }
 
   aboutToDisappear(): void {
+    this.appBroadCast.off(BroadCastConstants.UPDATE_SELECT, this.updateSelectFunc);
     this.resetPressAnim();
   }
 
