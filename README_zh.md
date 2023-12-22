@@ -202,9 +202,6 @@
 
 ![](./figures/signature_3.png)
 
-使用的SDK 3.2.2.5版本编译master仓代码，在/entry/package.json里手动触发npm install
-![](D:\workspace\readme\applications_photos\figures\npm.png)
-
 ### 打包
 DevEco Studio 支持 debug 与 release 两种打包类型。可以在 OhosBuild Variants 窗口中进行切换。
 
@@ -248,7 +245,7 @@ DevEco Studio 支持 debug 与 release 两种打包类型。可以在 OhosBuild 
 
 ![](./figures/cmd3.png)
 
-首次安装需要卸载系统自带的图库
+刷完版本后安装需要卸载系统自带的图库
 
 ```html
 hdc shell mount -o remount,rw /
