@@ -80,6 +80,8 @@ export struct ImageGridItemComponent {
   private dataSource: MediaDataSource | null = null;
   private geometryTapIndex: number = 0;
   private isTapStatusChange: boolean = false;
+  private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
+  private updateSelectFunc: Function = (updateUri: string, select: boolean): void => this.updateSelect(updateUri, select);
 
   verifyTapStatus() {
     if (this.placeholderIndex === Constants.INVALID) {
@@ -116,9 +118,17 @@ export struct ImageGridItemComponent {
     }
     Log.info(TAG, `transitionId: ${this.transitionId}`);
     this.isTap = this.geometryTransitionString === this.geometryTransitionBrowserId;
+    this.appBroadCast.on(BroadCastConstants.UPDATE_SELECT, this.updateSelectFunc);
+  }
+
+  updateSelect(updateUri: string, select: boolean): void {
+    if (updateUri === this.item?.uri) {
+      this.isSelected = select;
+    }
   }
 
   aboutToDisappear(): void {
+    this.appBroadCast.off(BroadCastConstants.UPDATE_SELECT, this.updateSelectFunc);
     this.resetPressAnim();
   }
 

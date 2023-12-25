@@ -182,7 +182,11 @@ export class ScreenManager {
 
   destroyWindowMode(): void {
     Log.debug(TAG, `start to destory photos application window mode: ${this.windowMode}`);
-    this.mainWindow && this.destroyMainWindow();
+    try {
+      this.mainWindow.off('windowSizeChange');
+    } catch (error) {
+      Log.error(TAG, `destroy window error: ${error}`);
+    }
   }
 
   isSplitMode(): boolean {
