@@ -99,6 +99,7 @@ struct IndexPage {
   private jumpSource: number = 0;
   private breakpointSystem: BreakpointSystem = new BreakpointSystem();
   private photosPreferences: Preferences | null = null;
+  @State isShowBar: boolean = true;
 
   doAnimation(): void {
     if (this.isSidebar && this.currentBreakpoint !== Constants.BREAKPOINT_LG) {
@@ -153,8 +154,17 @@ struct IndexPage {
 
   aboutToAppear(): void {
     TraceControllerUtils.startTrace('indexPageAppearToShow');
+    this.isShowBar = true;
     ScreenManager.getInstance().setSystemUi(true);
     this.breakpointSystem.register();
+    this.appBroadCast.on('hideBar', () => {
+      // this.isShowBar = false;
+      if (this.isShowBar) {
+        this.isShowBar = false;
+      } else {
+        this.isShowBar = true;
+      }
+    });
     this.updateParameters();
     let param: Params = router.getParams() as Params;
     Log.info(TAG, `[aboutToAppear] param: ${JSON.stringify(param)}`);
@@ -332,10 +342,14 @@ struct IndexPage {
         .flexGrow(Constants.NUMBER_1)
       }
     }
+    // .backgroundColor('black')
+    // .backgroundColor(this.isShowBar ? $r('app.color.default_background_color') : 'black')
     .backgroundColor($r('app.color.default_background_color'))
+    .borderWidth(1)
+    .borderColor('red')
     .padding({
       top: this.leftBlank[1],
-      bottom: this.leftBlank[3]
+      bottom: this.isShowBar ?  this.leftBlank[3] : 0
     })
 
   }
