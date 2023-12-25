@@ -72,6 +72,7 @@ export struct PhotoBrowserToolBar {
         isFromPhotoBrowser: this.isFromPhotoBrowser
       })
     }
+    .padding({ bottom: $r('app.float.title_default') })
     .width(Constants.PERCENT_100)
     .visibility(this.isVisibility ? Visibility.Visible : Visibility.Hidden)
     .opacity(this.opacityValue)
