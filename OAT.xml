@@ -62,12 +62,16 @@
                 <filteritem type="filename" name="publicity.xml" desc="Build Files"/>
                 <filteritem type="filename" name="hvigorw" desc="Build Files"/>
                 <filteritem type="filename" name="hvigorw.bat" desc="Build Files"/>
+                <filteritem type="filename" name="hvigor-config.json5" desc="Build Files"/>
+                <filteritem type="filename" name="hvigor-wrapper.js" desc="Build Files"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for LICENSE file policies">
                 <filteritem type="filename" name="*.json5" desc="json file"/>
                 <filteritem type="filename" name="publicity.xml" desc="Build Files"/>
                 <filteritem type="filename" name="hvigorw" desc="Build Files"/>
                 <filteritem type="filename" name="hvigorw.bat" desc="Build Files"/>
+                <filteritem type="filename" name="hvigor-config.json5" desc="Build Files"/>
+                <filteritem type="filename" name="hvigor-wrapper.js" desc="Build Files"/>
             </filefilter>
         </filefilterlist>
     </oatconfig>

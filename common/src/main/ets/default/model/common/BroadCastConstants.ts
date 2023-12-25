@@ -23,6 +23,7 @@ export class BroadCastConstants {
   static readonly UPDATE_PROGRESS: string = 'updateProgress';
   static readonly CANCEL_DELETE: string = 'cancelDelete';
   static readonly JUMP_THIRD_PHOTO_BROWSER: string = 'jumpThirdPhotoPage';
+  static readonly UPDATE_SELECT: string = 'updateSelect';
   static readonly BACK_PRESS_EVENT: string = 'back';
   static readonly RESET_STATE_EVENT: string = 'resetState';
   static readonly ON_TAB_CHANGED: string = 'onTabChanged';
