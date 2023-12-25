@@ -56,7 +56,6 @@ export struct PhotoBrowser {
         browserController: this.browserController
       })
     }
-    .padding({ bottom: $r('app.float.title_default') })
   }
 
   pageTransition() {
