@@ -158,7 +158,6 @@ struct IndexPage {
     ScreenManager.getInstance().setSystemUi(true);
     this.breakpointSystem.register();
     this.appBroadCast.on('hideBar', () => {
-      // this.isShowBar = false;
       if (this.isShowBar) {
         this.isShowBar = false;
       } else {
@@ -342,14 +341,10 @@ struct IndexPage {
         .flexGrow(Constants.NUMBER_1)
       }
     }
-    // .backgroundColor('black')
-    // .backgroundColor(this.isShowBar ? $r('app.color.default_background_color') : 'black')
     .backgroundColor($r('app.color.default_background_color'))
-    .borderWidth(1)
-    .borderColor('red')
     .padding({
       top: this.leftBlank[1],
-      bottom: this.isShowBar ?  this.leftBlank[3] : 0
+      bottom: this.isShowBar ?  this.leftBlank[3] : this.leftBlank[1]
     })
 
   }
