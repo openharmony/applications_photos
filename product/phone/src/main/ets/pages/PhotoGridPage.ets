@@ -94,7 +94,6 @@ export struct PhotoGridPage {
         }
         .width("100%")
         .height("100%")
-        .padding({ bottom: $r('app.float.title_default') })
         // Opacity must change for TransitionEffect taking effect
         // @ts-ignore
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))
