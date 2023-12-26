@@ -314,7 +314,6 @@ export struct ThirdSelectPhotoBrowserBase {
       .width('100%')
       .visibility(this.isShowBar ? Visibility.Visible : Visibility.Hidden)
       .opacity(this.geometryOpacity)
-      // @ts-ignore
       .transition(TransitionEffect.opacity(0))
       .hitTestBehavior(HitTestMode.Transparent)
     }
@@ -333,7 +332,6 @@ export struct ThirdSelectPhotoBrowserBase {
       totalSelectedCount: $totalSelectedCount
     })
       .opacity(this.geometryOpacity)
-        // @ts-ignore
       .transition(TransitionEffect.opacity(0))
       .hitTestBehavior(HitTestMode.Transparent)
   }
@@ -343,7 +341,6 @@ export struct ThirdSelectPhotoBrowserBase {
       Stack({ alignContent: Alignment.TopStart }) {
         PhotoBrowserBg({ isShowBar: $isShowBar })
           .opacity(this.geometryOpacity)
-            // @ts-ignore
           .transition(TransitionEffect.opacity(0))
 
         PhotoSwiper({
@@ -365,7 +362,6 @@ export struct ThirdSelectPhotoBrowserBase {
             isShowBar: this.isShowBar
           })
             .opacity(this.geometryOpacity)
-              // @ts-ignore
             .transition(TransitionEffect.opacity(0))
             .hitTestBehavior(HitTestMode.Transparent)
 
@@ -379,7 +375,6 @@ export struct ThirdSelectPhotoBrowserBase {
           totalSelectedCount: $totalSelectedCount
         })
           .opacity(this.geometryOpacity)
-            // @ts-ignore
           .transition(TransitionEffect.opacity(0))
           .hitTestBehavior(HitTestMode.Transparent)
       }
