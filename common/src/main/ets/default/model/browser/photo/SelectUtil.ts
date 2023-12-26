@@ -14,7 +14,7 @@
  */
 
 import fileShare from '@ohos.fileshare';
-import wantConstant from '@ohos.app.ability.wantConstant';
+import wantConstant from '@ohos.ability.wantConstant';
 import { Log } from '../../../utils/Log';
 
 const TAG: string = 'common_SelectUtil';

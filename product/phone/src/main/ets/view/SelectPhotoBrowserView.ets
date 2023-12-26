@@ -257,7 +257,6 @@ export struct SelectPhotoBrowserView {
     Stack({ alignContent: Alignment.TopStart }) {
       PhotoBrowserBg({ isShowBar: $isShowBar })
         .opacity(this.geometryOpacity)
-          // @ts-ignore
         .transition(TransitionEffect.opacity(0))
       PhotoSwiper({
         dataSource: this.dataSource,
@@ -277,7 +276,6 @@ export struct SelectPhotoBrowserView {
         totalSelectedCount: $selectedCount
       })
         .opacity(this.geometryOpacity)
-          // @ts-ignore
         .transition(TransitionEffect.opacity(0))
     }
   }

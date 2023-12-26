@@ -418,7 +418,6 @@ export struct NewAlbumPage {
         .height("100%")
 
         // Opacity must change for TransitionEffect taking effect
-        // @ts-ignore
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))
       }
 
@@ -435,7 +434,6 @@ export struct NewAlbumPage {
         .height("100%")
 
         // Opacity must change for TransitionEffect taking effect
-        // @ts-ignore
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))
       }
     }

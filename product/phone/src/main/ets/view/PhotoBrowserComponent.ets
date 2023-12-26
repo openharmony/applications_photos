@@ -1229,7 +1229,6 @@ export struct PhotoBrowserComponent {
     Stack({ alignContent: Alignment.TopStart }) {
       PhotoBrowserComponentBg({ isShowBar: $isShowBar, isFromPhotoBrowser: true })
         .opacity(this.geometryOpacity)
-          // @ts-ignore
         .transition(TransitionEffect.opacity(0))
 
       PhotoSwiper({
@@ -1248,7 +1247,6 @@ export struct PhotoBrowserComponent {
           onMenuClicked: (action: Action): void => this.onMenuClicked(action),
         })
           .opacity(this.geometryOpacity)
-            // @ts-ignore
           .transition(TransitionEffect.opacity(0))
 
         if (!this.isHorizontal) {
@@ -1257,7 +1255,6 @@ export struct PhotoBrowserComponent {
             isFromPhotoBrowser: true
           })
             .opacity(this.geometryOpacity)
-              // @ts-ignore
             .transition(TransitionEffect.opacity(0))
             .markAnchor({ x: Constants.PERCENT_0, y: Constants.PERCENT_100 })
             .position({ x: Constants.PERCENT_0, y: Constants.PERCENT_100 })
@@ -1265,7 +1262,6 @@ export struct PhotoBrowserComponent {
 
         CustomDialogView({ broadCast: $broadCast })
           .opacity(this.geometryOpacity)
-            // @ts-ignore
           .transition(TransitionEffect.opacity(0))
 
       } else {

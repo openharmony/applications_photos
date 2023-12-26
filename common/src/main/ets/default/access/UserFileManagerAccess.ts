@@ -104,13 +104,13 @@ export class UserFileManagerAccess {
   static readonly HIDDEN_ALBUM_SUB_TYPE: AlbumSubType = userFileManager.AlbumSubType.HIDDEN;
 
   static readonly ALL_SYSTEM_ALBUM_LIST: Array<AlbumSubType> = [
-  UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE,
-  UserFileManagerAccess.VIDEO_ALBUM_SUB_TYPE,
-  UserFileManagerAccess.SCREENSHOT_ALBUM_SUB_TYPE,
-  UserFileManagerAccess.FAVORITE_ALBUM_SUB_TYPE,
-  UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE,
-  UserFileManagerAccess.HIDDEN_ALBUM_SUB_TYPE,
-  UserFileManagerAccess.FAVORITE_ALBUM_SUB_TYPE,
+    UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE,
+    UserFileManagerAccess.VIDEO_ALBUM_SUB_TYPE,
+    UserFileManagerAccess.SCREENSHOT_ALBUM_SUB_TYPE,
+    UserFileManagerAccess.FAVORITE_ALBUM_SUB_TYPE,
+    UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE,
+    UserFileManagerAccess.HIDDEN_ALBUM_SUB_TYPE,
+    UserFileManagerAccess.FAVORITE_ALBUM_SUB_TYPE,
   ]
 
   static readonly SYSTEM_BEFORE_USER_ALBUM_LIST: Array<AlbumSubType> = [
@@ -121,8 +121,8 @@ export class UserFileManagerAccess {
   ]
 
   static readonly SYSTEM_AFTER_USER_ALBUM_LIST: Array<AlbumSubType> = [
-  UserFileManagerAccess.HIDDEN_ALBUM_SUB_TYPE,
-  UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE
+    UserFileManagerAccess.HIDDEN_ALBUM_SUB_TYPE,
+    UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE
   ]
 
   private media: userFileManager.UserFileManager = null;
@@ -135,10 +135,10 @@ export class UserFileManagerAccess {
   }
 
   public static getInstance(): UserFileManagerAccess {
-    if (AppStorage.Get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS) == null) {
-      AppStorage.SetOrCreate(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS, new UserFileManagerAccess());
+    if (AppStorage.get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS) == null) {
+      AppStorage.setOrCreate(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS, new UserFileManagerAccess());
     }
-    return AppStorage.Get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS);
+    return AppStorage.get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS);
   }
 
   onCreate(context) {
@@ -766,7 +766,7 @@ export class UserFileManagerAccess {
     try {
       let albumFetchOpt = AlbumDefine.getAlbumFetchOptByUri(albumUri);
       // @ts-ignore // TODO 支持不传入type时删掉 ts-ignore
-      let fetchResult = await this.media.getAlbums(albumFetchOpt);
+      let fetchResult: userFileManager.FetchResult<Album> = await this.media.getAlbums(albumFetchOpt);
       if (!fetchResult) {
         Log.warn(TAG, 'getAlbumByUri return null');
         return undefined;
@@ -796,8 +796,8 @@ export class UserFileManagerAccess {
     try {
       Log.info(TAG, `getAlbumByName name: ${albumName}`);
       let albumFetchOpt = AlbumDefine.getAlbumFetchOptByName(albumName);
-      // @ts-ignore // TODO 需要媒体库新开接口，支持仅传入fetchOpt
-      let fetchResult = await this.media.getAlbums(albumFetchOpt);
+      // @ts-ignore  // TODO 需要媒体库新开接口，支持仅传入fetchOpt
+      let fetchResult: userFileManager.FetchResult<Album> = await this.media.getAlbums(albumFetchOpt);
       if (!fetchResult) {
         Log.error(TAG, 'getAlbumByName fetchResult undefined')
         return undefined;
