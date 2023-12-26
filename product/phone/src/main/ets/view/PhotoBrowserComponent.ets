@@ -595,6 +595,7 @@ export struct PhotoBrowserComponent {
 
   onBackPress(): boolean {
     Log.info(TAG, 'onBackPress');
+    this.appBroadCast.emit('hideBar', []);
     this.controller.finishAnimation((): void => this.onBackPressInner());
     return true;
   }
@@ -731,7 +732,7 @@ export struct PhotoBrowserComponent {
 
     WindowUtil.setPreferredOrientation(AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext,
       window.Orientation.AUTO_ROTATION_RESTRICTED);
-
+    this.appBroadCast.emit('hideBar', []);
     let param: ParamBrowser = this.browserController.browserParam as ParamBrowser;
     let entryFromCamera = (AppStorage.get<number>('entryFromHapCamera')) as number == Constants.ENTRY_FROM_CAMERA;
     Log.info(TAG, `photoBrowser start with entryFrom ` + JSON.stringify(entryFromCamera));
