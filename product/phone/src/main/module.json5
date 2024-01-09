@@ -55,7 +55,9 @@
               "entity.system.home"
             ],
             "actions": [
-              "action.system.home","ohos.want.action.viewData","ohos.want.action.photoPicker"
+              "action.system.home",
+              "ohos.want.action.viewData",
+              "ohos.want.action.photoPicker"
             ],
             "uris": [
               {
@@ -89,7 +91,9 @@
             ]
           }
         ],
-        "supportWindowMode": ["fullscreen"]
+        "supportWindowMode": [
+          "fullscreen"
+        ]
       }
     ],
     "extensionAbilities": [
@@ -123,7 +127,15 @@
                 "type": "image/*"
               }
             ],
-          }]
+          }
+        ]
+      },
+      {
+        "name": "PickerUIExtensionAbility",
+        "description": "PickerUIExtensionAbility",
+        "type": "sysPicker/photoPicker",
+        "exported": true,
+        "srcEntry": "./ets/picker/PickerUIExtensionAbility.ets"
       },
       {
         "name": "DeleteUIExtensionAbility",

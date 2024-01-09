@@ -56,14 +56,15 @@ export struct ThirdSelectPhotoBrowserActionBar {
         isNeedPlaceholder: false
       })
         .padding({
-          top: this.isHorizontal ? Constants.NUMBER_0 : px2vp(this.statusBarHeight)
+          top: (this.isHorizontal && !ScreenManager.getInstance().isUIExtensionEnv()) ?
+            $r('app.float.third_selected_actionbar_padding_top') : px2vp(this.statusBarHeight)
         })
     }
     .height(this.isHorizontal ? Constants.ActionBarHeight * Constants.PHOTO_BAR_MULTIPLES_1_5
                               : Constants.ActionBarHeight * Constants.PHOTO_BAR_MULTIPLES_1_5
                                 + px2vp(this.statusBarHeight))
     .markAnchor({ x: Constants.PERCENT_0, y: Constants.PERCENT_0 })
-    .position({ x: Constants.PERCENT_0, y: this.leftBlank[1] })
+    .position({ x: Constants.PERCENT_0, y: Constants.PERCENT_0 })
     .visibility(this.isShowBar ? Visibility.Visible : Visibility.Hidden)
   }
 

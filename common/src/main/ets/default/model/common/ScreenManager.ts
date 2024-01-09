@@ -17,7 +17,8 @@ import { Log } from '../../utils/Log';
 import { Constants } from './Constants';
 import { UiUtil } from '../../utils/UiUtil';
 import { BroadCast } from '../../utils/BroadCast';
-import type window from '@ohos.window';
+import window from '@ohos.window';
+import uiExtensionHost from '@ohos.uiExtensionHost';
 
 const TAG: string = 'common_ScreenManager';
 
@@ -86,20 +87,22 @@ export class ScreenManager {
     return manager;
   }
 
-  initializationSize(win: window.Window): Promise<void> {
-    this.mainWindow = win;
-    let properties: window.WindowProperties = win.getWindowProperties();
-    this.isFullScreen = properties.isFullScreen;
+  initializationSize(win: window.Window | undefined): Promise<void> {
+    if (win) {
+      this.mainWindow = win;
+      let properties: window.WindowProperties = win.getWindowProperties();
+      this.isFullScreen = properties.isFullScreen;
+    }
+    let size: window.Rect = this.getWinRect();
 
     // Area data obtained through the system interface,
     // There is a possibility that the area data is incorrect.
-    const statusBarHeight: number = properties && properties.windowRect ? properties.windowRect.top : this.statusBarHeight;
+    const statusBarHeight: number = size ? size.top : this.statusBarHeight;
     AppStorage.SetOrCreate<number>('statusBarHeight', statusBarHeight);
     return new Promise<void>((resolve, reject) => {
-      if (!properties || !properties.windowRect) {
+      if (!size) {
         reject();
       }
-      let size: window.Rect = properties.windowRect;
       Log.info(TAG, `display screen windowRect: ${JSON.stringify(size)}`);
       this.winWidth = px2vp(size.width);
       this.winHeight = px2vp(size.height);
@@ -136,7 +139,7 @@ export class ScreenManager {
     this.broadcast.off(event, fn);
   }
 
-  setWinWidth(width: number): void{
+  setWinWidth(width: number): void {
     this.winWidth = width;
   }
 
@@ -177,13 +180,14 @@ export class ScreenManager {
   initWindowMode(): void {
     Log.debug(TAG, `start to initialize photos application window mode: ${this.windowMode}`);
     this.checkWindowMode();
-    this.mainWindow && this.setMainWindow();
+    this.getHost() && this.setMainWindow();
   }
 
   destroyWindowMode(): void {
     Log.debug(TAG, `start to destory photos application window mode: ${this.windowMode}`);
     try {
-      this.mainWindow.off('windowSizeChange');
+      this.getHost()?.off('windowSizeChange', (data: window.Size) => {
+      });
     } catch (error) {
       Log.error(TAG, `destroy window error: ${error}`);
     }
@@ -194,10 +198,13 @@ export class ScreenManager {
   }
 
   async checkWindowMode(): Promise<void> {
+    if (this.isUIExtensionEnv()) {
+      return;
+    }
     let before = this.windowMode;
     let windowStage: window.WindowStage = AppStorage.get<window.WindowStage>('photosWindowStage');
     // @ts-ignore
-    let mode: WindowMode = await windowStage.getWindowMode() as WindowMode;
+    let mode: WindowMode = await windowStage?.getWindowMode() as WindowMode;
     Log.info(TAG, `photos application before/current window mode: ${before}/${mode}`);
 
     if (before == mode) {
@@ -213,39 +220,46 @@ export class ScreenManager {
 
   setMainWindow(): void {
     Log.debug(TAG, 'setMainWindow');
-    this.mainWindow.on('windowSizeChange', (data: window.Size) => {
+    this.getHost()?.on('windowSizeChange', (data: window.Size) => {
       Log.debug(TAG, `windowSizeChange ${JSON.stringify(data)}`);
-      try {
-        let properties: window.WindowProperties = this.mainWindow.getWindowProperties();
-        this.isFullScreen = properties.isFullScreen;
-      } catch (exception) {
-        Log.error(TAG, 'Failed to obtain the area. Cause:' + JSON.stringify(exception));
+      if (!this.isUIExtensionEnv()) {
+        try {
+          let properties: window.WindowProperties = this.mainWindow.getWindowProperties();
+          this.isFullScreen = properties.isFullScreen;
+        } catch (exception) {
+          Log.error(TAG, 'Failed to obtain the area. Cause:' + JSON.stringify(exception));
+        }
       }
       this.onWinSizeChanged(data);
     })
-    this.mainWindow.getProperties().then((prop: window.WindowProperties) => {
-      Log.info(TAG, `Window prop: ${JSON.stringify(prop)}`);
-      this.onWinSizeChanged(prop.windowRect);
-    });
+    this.onWinSizeChanged(this.getWinRect());
   }
 
   destroyMainWindow(): void {
-    this.mainWindow.off('windowSizeChange');
-  }
-
-  getAvoidArea(): void {
-    let topWindow: window.Window = this.getMainWindow();
-    topWindow.getAvoidArea(0, (err, data: window.AvoidArea) => {
-      Log.info(TAG, 'Succeeded in obtaining the area. Data:' + JSON.stringify(data));
-      this.onLeftBlankChanged(data);
+    this.getHost()?.off('windowSizeChange', (data: window.Size) => {
     });
   }
 
+  getAvoidArea(): void {
+    if (this.isUIExtensionEnv()) {
+      this.onLeftBlankChanged(this.getHost()?.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM));
+    } else {
+      let topWindow: window.Window = this.getMainWindow();
+      topWindow?.getAvoidArea(0, (err, data: window.AvoidArea) => {
+        Log.info(TAG, 'Succeeded in obtaining the area. Data:' + JSON.stringify(data));
+        this.onLeftBlankChanged(data);
+      });
+    }
+  }
+
   setFullScreen(): void {
+    if (this.isUIExtensionEnv()) {
+      return;
+    }
     let topWindow: window.Window = this.getMainWindow();
     Log.debug(TAG, 'getTopWindow start');
     try {
-      topWindow.setLayoutFullScreen(true, () => {
+      topWindow?.setLayoutFullScreen(true, () => {
         Log.debug(TAG, 'setFullScreen true Succeeded');
         if (AppStorage.get('deviceType') as string !== Constants.DEFAULT_DEVICE_TYPE) {
           this.hideStatusBar();
@@ -259,7 +273,10 @@ export class ScreenManager {
   }
 
   setWindowBackgroundColorDefault(defaultColor: boolean): void {
-    this.getMainWindow().setWindowBackgroundColor(defaultColor ? '#F1F3F5' : '#000000');
+    if (this.isUIExtensionEnv()) {
+      return;
+    }
+    this.getMainWindow()?.setWindowBackgroundColor(defaultColor ? '#F1F3F5' : '#000000');
   }
 
   setSplitScreen(): void {
@@ -274,6 +291,9 @@ export class ScreenManager {
   }
 
   hideStatusBar(): void {
+    if (this.isUIExtensionEnv()) {
+      return;
+    }
     Log.debug(TAG, 'hideStatusBar start');
     let topWindow: window.Window = this.getMainWindow();
     Log.debug(TAG, 'getTopWindow start');
@@ -282,14 +302,14 @@ export class ScreenManager {
     try {
       topWindow.setSystemBarEnable(names, () => {
         Log.debug(TAG, 'hideStatusBar Succeeded');
-        topWindow.getAvoidArea(0, async (err, data: window.AvoidArea) => {
+        topWindow?.getAvoidArea(0, async (err, data: window.AvoidArea) => {
           Log.info(TAG, `Succeeded in obtaining the area. Data: ${JSON.stringify(data)}`);
           this.onLeftBlankChanged(data);
           let barColor: string = await UiUtil.getResourceString($r('app.color.transparent'));
           if (!barColor) {
             barColor = '#00000000';
           }
-          topWindow.setSystemBarProperties({ navigationBarColor: barColor }, () => {
+          topWindow?.setSystemBarProperties({ navigationBarColor: barColor }, () => {
             Log.info(TAG, 'setStatusBarColor done');
           });
         });
@@ -300,10 +320,13 @@ export class ScreenManager {
   }
 
   async setDefaultStatusBarProperties(): Promise<void> {
+    if (this.isUIExtensionEnv()) {
+      return;
+    }
     Log.debug(TAG, 'setStatusBarColor start');
     let topWindow: window.Window = this.getMainWindow();
     try {
-      topWindow.setSystemBarProperties(
+      topWindow?.setSystemBarProperties(
         { statusBarColor: Constants.STATUS_BAR_BACKGROUND_COLOR,
           statusBarContentColor: Constants.STATUS_BAR_CONTENT_COLOR }, () => {
         Log.info(TAG, 'setStatusBarColor done');
@@ -314,6 +337,9 @@ export class ScreenManager {
   }
 
   setSystemUi(isShowBar: boolean): void {
+    if (this.isUIExtensionEnv()) {
+      return;
+    }
     let deviceTp: string = AppStorage.get('deviceType') as string;
     Log.debug(TAG, `setSystemUi start, isShowBar=${isShowBar}, deviceType=${deviceTp}`);
     let topWindow: window.Window = this.getMainWindow();
@@ -327,7 +353,7 @@ export class ScreenManager {
     }
     Log.debug(TAG, `getTopWindow names: ${names} end`);
     try {
-      topWindow.setSystemBarEnable(names, () => {
+      topWindow?.setSystemBarEnable(names, () => {
         Log.debug(TAG, `setSystemUi Succeeded: ${names}`);
         if (isShowBar) {
           topWindow.getAvoidArea(0, (err, data: window.AvoidArea) => {
@@ -377,6 +403,10 @@ export class ScreenManager {
 
   private getMainWindow(): window.Window {
     return AppStorage.get<window.Window>('mainWindow');
+  }
+
+  private getProxy(): uiExtensionHost.UIExtensionHostWindowProxy {
+    return AppStorage.get<uiExtensionHost.UIExtensionHostWindowProxy>(Constants.PHOTO_PICKER_EXTENSION_WINDOW) as uiExtensionHost.UIExtensionHostWindowProxy;
   }
 
   private emit(event: string, argument: unknown[]): void {
@@ -441,5 +471,25 @@ export class ScreenManager {
       Log.info(TAG, `winSize changed: ${JSON.stringify(sizeBefore)} -> ${JSON.stringify(newSize)}`);
       this.emit(ScreenManager.ON_WIN_SIZE_CHANGED, [size]);
     }
+  }
+
+  isUIExtensionEnv(): boolean {
+    let uiExtensionStage: uiExtensionHost.UIExtensionHostWindowProxy = this.getProxy();
+    return uiExtensionStage ? true : false;
+  }
+
+  private getHost(): uiExtensionHost.UIExtensionHostWindowProxy | window.Window {
+    if (this.isUIExtensionEnv()) {
+      return this.getProxy();
+    } else {
+      return this.getMainWindow();
+    }
+  }
+
+  private getWinRect(): window.Rect {
+    if (this.isUIExtensionEnv()) {
+      return this.getProxy()?.properties?.uiExtensionHostWindowProxyRect;
+    }
+    return this.getMainWindow()?.getWindowProperties()?.windowRect;
   }
 }

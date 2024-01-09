@@ -40,6 +40,7 @@ import {
   BrowserController,
   GridScrollBar,
   ImageGridItemComponent,
+  NoPhotoComponent,
   NoPhotoIndexComponent
 } from '@ohos/common/CommonComponents';
 import { ThirdSelectedPageActionBar } from './ThirdSelectedPageActionBar';
@@ -64,6 +65,7 @@ import SmartPickerConstants from '../common/SmartPickerConstants';
 import { SmartPickerManager } from '../common/SmartPickerManager';
 import { ThirdSelectSmartRecommendTabBar } from './ThirdSelectSmartRecommendTabBar';
 import SmartPickerDataAdapter from '../common/SmartPickerDataAdapter';
+import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 
 const TAG: string = 'thiSel_ThirdSelectPhotoGridBase';
 
@@ -174,7 +176,12 @@ export struct ThirdSelectPhotoGridBase {
   }
 
   aboutToAppear(): void {
-    let param: SelectParams = router.getParams() as SelectParams;
+    let param: SelectParams;
+    if (localStorage?.has(Constants.PHOTO_PICKER_SESSION_KEY)) {
+      param = localStorage.get<SelectParams>(Constants.PHOTO_PICKER_PARAMS_KEY) as SelectParams;
+    } else {
+      param = router.getParams() as SelectParams;
+    }
     this.initSelectParams(param);
     if (this.selectParams.isFromFa) {
       this.selectParams.filterMediaType = AlbumDefine.FILTER_MEDIA_TYPE_IMAGE;
@@ -220,7 +227,7 @@ export struct ThirdSelectPhotoGridBase {
     this.broadCast.on(BroadCastConstants.THIRD_PICKER_SWITCH_SMART_RECOMMEND_TAB, this.onSwitchSmartRecommendTabFunc);
     MediaObserver.getInstance().registerObserver(this.dataObserver);
     this.isActive = true;
-
+    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     Log.error(TAG, 'meow data count = ' + this.dataSource.totalCount());
   }
 
@@ -274,6 +281,7 @@ export struct ThirdSelectPhotoGridBase {
       this.broadCast.off(BroadCastConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH);
     }
     this.dataSource.releaseBroadCast();
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     Log.info(TAG, `call aboutToDisappear`)
   }
 
@@ -378,6 +386,15 @@ export struct ThirdSelectPhotoGridBase {
         totalSelectedCount: $selectedCount
       })
 
+      if (this.isEmpty) {
+        if (this.selectParams.isFromFa) {
+          NoPhotoIndexComponent({ index: Constants.TIMELINE_PAGE_INDEX, hasBarSpace: false })
+        } else {
+          if (this.selectParams.cameraAble) {
+            NoPhotoComponent({ title: $r('app.string.no_distributed_photo_head_title_album') })
+          }
+        }
+      }
       if (this.selectParams.isFromFa && this.isEmpty) {
         NoPhotoIndexComponent({ index: Constants.TIMELINE_PAGE_INDEX, hasBarSpace: false })
       }
@@ -652,21 +669,47 @@ export struct ThirdSelectPhotoGridBase {
     let self = this;
     let uriLength = 0;
     if (uriArray == null && uriArray == undefined) {
-      let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
-      context.terminateSelfWithResult(abilityResult as ability.AbilityResult).then((result: void) => {
-        Log.debug(TAG, `terminateSelfWithResult result: ${result}, self result ${JSON.stringify(abilityResult)}`);
-      });
-    } else {
-      uriLength = uriArray.length;
-      SelectUtil.grantPermissionForUris(uriArray, self.selectParams.bundleName).then(() => {
-        Log.info(TAG, `grant permission success.`);
+      if (localStorage?.has(Constants.PHOTO_PICKER_SESSION_KEY)) {
+        let session = localStorage?.get<UIExtensionContentSession>(Constants.PHOTO_PICKER_SESSION_KEY);
+        session?.terminateSelfWithResult(abilityResult as ability.AbilityResult).then((result: void) => {
+          Log.debug(TAG, `session terminateSelfWithResult result: ${result}, self result ${JSON.stringify(abilityResult)}`);
+        });
+      } else {
         let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
         context.terminateSelfWithResult(abilityResult as ability.AbilityResult).then((result: void) => {
           Log.debug(TAG, `terminateSelfWithResult result: ${result}, self result ${JSON.stringify(abilityResult)}`);
         });
-      }).catch((err: Error) => {
-        Log.error(TAG, `grant permission error: ${JSON.stringify(err)}, self result ${JSON.stringify(abilityResult)}`);
-      });
+      }
+    } else {
+      uriLength = uriArray.length;
+      if (localStorage?.has(Constants.PHOTO_PICKER_SESSION_KEY)) {
+        let session = localStorage?.get<UIExtensionContentSession>(Constants.PHOTO_PICKER_SESSION_KEY);
+        let param = localStorage?.get<SelectParams>(Constants.PHOTO_PICKER_PARAMS_KEY);
+        if (param?.bundleName) {
+          SelectUtil.grantPermissionForUris(uriArray, param.bundleName).then(() => {
+            Log.info(TAG, `session grant permission success.`);
+            let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+            session?.terminateSelfWithResult(abilityResult as ability.AbilityResult).then((result: void) => {
+              Log.debug(TAG, `session terminateSelfWithResult result: ${result}, self result ${JSON.stringify(abilityResult)}`);
+            });
+          }).catch((err: Error) => {
+            Log.error(TAG, `session grant permission error: ${JSON.stringify(err)}, self result ${JSON.stringify(abilityResult)}`);
+            session?.terminateSelfWithResult(abilityResult as ability.AbilityResult).then((result: void) => {
+              Log.debug(TAG, `session terminateSelfWithResult result: ${result}, self result ${JSON.stringify(abilityResult)}`);
+            });
+          });
+        }
+      } else {
+        SelectUtil.grantPermissionForUris(uriArray, self.selectParams.bundleName).then(() => {
+          Log.info(TAG, `grant permission success.`);
+          let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+          context.terminateSelfWithResult(abilityResult as ability.AbilityResult).then((result: void) => {
+            Log.debug(TAG, `terminateSelfWithResult result: ${result}, self result ${JSON.stringify(abilityResult)}`);
+          });
+        }).catch((err: Error) => {
+          Log.error(TAG, `grant permission error: ${JSON.stringify(err)}, self result ${JSON.stringify(abilityResult)}`);
+        });
+      }
     }
     interface Msg {
       isOriginalChecked: boolean;

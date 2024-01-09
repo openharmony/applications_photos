@@ -19,6 +19,9 @@ import { SelectParams } from '../utils/ThirdSelectConstants';
 import ability from '@ohos.ability.ability';
 import common from '@ohos.app.ability.common';
 import Want from '@ohos.app.ability.Want';
+import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
+import fileShare from '@ohos.fileshare';
+import { BusinessError } from '@ohos.base';
 
 const TAG: string = 'thiSel_CameraGridItemComponent';
 
@@ -45,6 +48,16 @@ export struct CameraGridItemComponent {
       .height('100%')
       .backgroundColor($r('sys.color.ohos_id_color_primary'))
       .opacity($r('sys.float.ohos_id_alpha_inapptip_bg'))
+      .onClick((event?: ClickEvent) => {
+        this.jumpCameraTakePhoto().then((result) => {
+          Log.info(TAG, `resourceUri = ${JSON.stringify(result)}`);
+          let want: Want | null = result.want as Want;
+          if(want == null || want.parameters == null) return;
+          this.resultUri = want.parameters['resourceUri'] as string;
+        }).catch((err: Error) => {
+          Log.error(TAG, `jumpCameraTakephoto err: ${err}`);
+        });
+      })
 
       Column() {
         Image($r('app.media.ic_public_camera_grid_item'))
@@ -67,16 +80,7 @@ export struct CameraGridItemComponent {
       .key('PickerCamera')
       .justifyContent(FlexAlign.Center)
       .alignItems(HorizontalAlign.Center)
-      .onClick((event?: ClickEvent) => {
-        this.jumpCameraTakePhoto().then((result) => {
-          Log.info(TAG, `resourceUri = ${JSON.stringify(result)}`);
-          let want: Want | null = result.want as Want;
-          if(want == null || want.parameters == null) return;
-          this.resultUri = want.parameters['resourceUri'] as string;
-        }).catch((err: Error) => {
-          Log.error(TAG, `jumpCameraTakephoto err: ${err}`);
-        });
-      })
+      .hitTestBehavior(HitTestMode.Transparent)
     }
     .width('100%')
     .aspectRatio(1)
@@ -138,9 +142,34 @@ export struct CameraGridItemComponent {
         }
       }
     };
-    let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
-    context.terminateSelfWithResult(abilityResult as ability.AbilityResult).then((result: void) => {
-      Log.info(TAG, `terminateSelfWithResult abilityResult: ${abilityResult} result: ${result}`);
-    });
+    let storage = LocalStorage.getShared();
+    if (storage?.has(Constants.PHOTO_PICKER_SESSION_KEY)) {
+      let session = storage?.get<UIExtensionContentSession>(Constants.PHOTO_PICKER_SESSION_KEY);
+      let param = storage?.get<SelectParams>(Constants.PHOTO_PICKER_PARAMS_KEY);
+      try {
+        if (param?.bundleName) {
+          Log.debug(TAG, `grantUriPermission to ${param?.bundleName}`);
+          fileShare.grantUriPermission(uri,
+            param?.bundleName,
+            wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION|wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION,
+            (err: BusinessError):void => {
+              Log.error(TAG, `failed to grantUriPermission to ${param?.bundleName}`);
+              session?.terminateSelfWithResult(abilityResult).then((result: void) => {
+                Log.info(TAG, `session terminateSelfWithResult abilityResult: ${abilityResult} result: ${result}`);
+              });
+          });
+        }
+      } catch (err) {
+        Log.error(TAG, `err: ${JSON.stringify(err)}`);
+        session?.terminateSelfWithResult(abilityResult).then((result: void) => {
+          Log.info(TAG, `session terminateSelfWithResult abilityResult: ${abilityResult} result: ${result}`);
+        });
+      }
+    } else {
+      let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+      context.terminateSelfWithResult(abilityResult as ability.AbilityResult).then((result: void) => {
+        Log.info(TAG, `terminateSelfWithResult abilityResult: ${abilityResult} result: ${result}`);
+      });
+    }
   }
 }
