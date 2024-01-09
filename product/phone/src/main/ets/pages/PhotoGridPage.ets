@@ -19,12 +19,14 @@ import {
   BroadCastManager,
   BrowserConstants,
   Constants,
-  Log
+  Log,
+  ScreenManager
 } from '@ohos/common';
 import { BrowserController } from '@ohos/common/CommonComponents';
 import { PhotoGridView } from '../view/PhotoGridView';
 import { PhotoBrowserComponent } from '../view/PhotoBrowserComponent';
 import { SelectPhotoBrowserView } from '../view/SelectPhotoBrowserView';
+import { LEFT_BLANK } from '@ohos/thirdselect/src/main/ets/default/utils/ThirdSelectConstants';
 
 const TAG: string = 'PhotoGridPage';
 AppStorage.SetOrCreate('PhotoGridPageIndex', Constants.INVALID);
@@ -37,6 +39,8 @@ export struct PhotoGridPage {
   @Provide isSelectedMode: boolean = false;
   @Provide isShow: boolean = true;
   @State isRunningAnimation: boolean = false;
+  @StorageLink(LEFT_BLANK) leftBlank: number[]
+    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @State @Watch('updateAnimationStatus') browserController: BrowserController = new BrowserController(true);
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
 
@@ -81,7 +85,7 @@ export struct PhotoGridPage {
           browserController: this.browserController
         })
       }
-      .padding({ bottom: $r('app.float.title_default') })
+      .padding({ bottom: this.leftBlank[3] })
 
       if (this.browserController.isBrowserShow) {
         Column() {
