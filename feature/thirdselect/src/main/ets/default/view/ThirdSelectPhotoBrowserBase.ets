@@ -40,7 +40,7 @@ import {
   ThirdSelectPhotoBrowserActionBar
 } from '@ohos/common/CommonComponents';
 
-import { FormConstants, IS_HORIZONTAL } from '../utils/ThirdSelectConstants';
+import { FormConstants, IS_HORIZONTAL, LEFT_BLANK } from '../utils/ThirdSelectConstants';
 import { ThirdSelectedPanel } from './ThirdSelectedPanel';
 import { MouseTurnPageOperation } from '@ohos/browser/BrowserComponents';
 import { Matrix4x4 } from '@ohos/common/src/main/ets/default/utils/Matrix4x4'
@@ -84,6 +84,8 @@ export struct ThirdSelectPhotoBrowserBase {
   mPosition: number = 0;
   @State title: string = '';
   @Prop @Watch('onPageChanged') pageStatus: boolean = false;
+  @StorageLink(LEFT_BLANK) leftBlank: number[]
+    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @StorageLink(IS_HORIZONTAL) isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   maxSelectCount: number = 0;
   @StorageLink('geometryOpacity') geometryOpacity: number = 1;
@@ -382,7 +384,7 @@ export struct ThirdSelectPhotoBrowserBase {
       this.buildCheckBox()
       this.buildPanel()
     }
-    .padding({ bottom: $r('app.float.buttonWithoutText') })
+    .padding({ bottom: this.leftBlank[3] })
   }
 
   pageTransition() {
