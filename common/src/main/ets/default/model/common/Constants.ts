@@ -526,4 +526,8 @@ export class Constants {
 
   // fileAsset path data
   static readonly KEY_FILE_DATA: string = 'data';
+
+  static readonly PHOTO_PICKER_SESSION_KEY: string = 'photopicker_PickerUIExtensionAbility_session';
+  static readonly PHOTO_PICKER_PARAMS_KEY: string = 'photopicker_PickerUIExtensionAbility_params';
+  static readonly PHOTO_PICKER_EXTENSION_WINDOW: string = 'photopicker_PickerUIExtensionAbility_extension_window';
 }

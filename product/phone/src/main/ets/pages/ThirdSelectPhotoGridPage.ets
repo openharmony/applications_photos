@@ -13,9 +13,10 @@
  * limitations under the License.
  */
 
-import { BrowserConstants } from '@ohos/common';
+import { BreakpointSystem, BrowserConstants, Constants } from '@ohos/common';
 import { BrowserController } from '@ohos/common/CommonComponents';
 import { ThirdSelectPhotoBrowserBase, ThirdSelectPhotoGridBase } from '@ohos/thirdselect';
+import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 
 let localStorage = LocalStorage.getShared();
 
@@ -28,6 +29,19 @@ export struct ThirdSelectPhotoGridPage {
   @State @Watch('updateAnimationStatus') browserController: BrowserController = new BrowserController(true);
   @State isRunningAnimation: boolean = false;
   private onBackFunc: Function = (): void => {};
+  private breakpointSystem: BreakpointSystem = new BreakpointSystem();
+
+  aboutToAppear() {
+    if (localStorage?.has(Constants.PHOTO_PICKER_SESSION_KEY)) {
+      this.breakpointSystem.registerOrientationChange();
+    }
+  }
+
+  aboutToDisappear() {
+    if (localStorage?.has(Constants.PHOTO_PICKER_SESSION_KEY)) {
+      this.breakpointSystem.unregisterOrientationChange();
+    }
+  }
 
   onPageShow() {
     this.pageStatus = true;
@@ -44,6 +58,10 @@ export struct ThirdSelectPhotoGridPage {
     }
     if (this.onBackFunc) {
       this.onBackFunc();
+      if (localStorage?.has(Constants.PHOTO_PICKER_SESSION_KEY)) {
+        let session = localStorage?.get<UIExtensionContentSession>(Constants.PHOTO_PICKER_SESSION_KEY);
+        session?.terminateSelf();
+      }
       return true;
     }
     return false;

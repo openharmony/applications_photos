@@ -62,7 +62,9 @@ export struct ThirdSelectedPageActionBar {
       })
     }
     .padding({
-      top: this.isHorizontal ? Constants.NUMBER_0 : px2vp(this.statusBarHeight)
+      top: (this.isHorizontal && !ScreenManager.getInstance().isUIExtensionEnv()) ?
+        $r('app.float.third_selected_actionbar_padding_top') :
+        (this.statusBarHeight === 0) ? $r('app.float.third_selected_actionbar_padding_top') : px2vp(this.statusBarHeight)
     })
   }
 

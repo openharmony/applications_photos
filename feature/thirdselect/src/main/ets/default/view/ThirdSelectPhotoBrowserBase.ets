@@ -40,13 +40,17 @@ import {
   ThirdSelectPhotoBrowserActionBar
 } from '@ohos/common/CommonComponents';
 
-import { FormConstants, IS_HORIZONTAL, LEFT_BLANK } from '../utils/ThirdSelectConstants';
+import { FormConstants, IS_HORIZONTAL, LEFT_BLANK, SelectParams } from '../utils/ThirdSelectConstants';
 import { ThirdSelectedPanel } from './ThirdSelectedPanel';
 import { MouseTurnPageOperation } from '@ohos/browser/BrowserComponents';
 import { Matrix4x4 } from '@ohos/common/src/main/ets/default/utils/Matrix4x4'
 import ability from '@ohos.ability.ability';
 import common from '@ohos.app.ability.common';
 import { Results } from '@ohos/common/src/main/ets/default/view/PhotoSwiper';
+import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
+import fileShare from '@ohos.fileshare';
+import wantConstant from '@ohos.ability.wantConstant';
+import { BusinessError } from '@ohos.base';
 
 const TAG: string = 'thiSel_ThirdSelectPhotoBrowserBase';
 
@@ -458,10 +462,42 @@ export struct ThirdSelectPhotoBrowserBase {
         }
       }
     };
-    let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
-    context.terminateSelfWithResult(abilityResult).then((result: void) => {
-      Log.info(TAG, `terminateSelf result: ${result}, self result ${JSON.stringify(abilityResult)}`);
-    });
+    let localStorage = LocalStorage.getShared();
+    if (localStorage?.has(Constants.PHOTO_PICKER_SESSION_KEY)) {
+      let session = localStorage?.get<UIExtensionContentSession>(Constants.PHOTO_PICKER_SESSION_KEY);
+      let param = localStorage?.get<SelectParams>(Constants.PHOTO_PICKER_PARAMS_KEY);
+      if (uriArray === null || uriArray === undefined || uriArray?.length === 0) {
+        session?.terminateSelfWithResult(abilityResult).then((result: void) => {
+          Log.info(TAG, `session terminateSelfWithResult abilityResult: ${JSON.stringify(abilityResult)} result: ${result}`);
+        });
+      } else {
+        try {
+          if (param?.bundleName) {
+            Log.debug(TAG, `grantUriPermission to ${param?.bundleName}`);
+            uriArray.forEach(uri => {
+              fileShare.grantUriPermission(uri, param?.bundleName,
+                wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION | wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION,
+                (err: BusinessError): void => {
+                  Log.error(TAG, `failed to grantUriPermission to ${param?.bundleName}`);
+                  session?.terminateSelfWithResult(abilityResult).then((result: void) => {
+                    Log.info(TAG, `session terminateSelfWithResult abilityResult: ${JSON.stringify(abilityResult)} result: ${result}`);
+                  });
+                });
+            })
+          }
+        } catch (err) {
+          Log.error(TAG, `err: ${JSON.stringify(err)}`);
+          session?.terminateSelfWithResult(abilityResult).then((result: void) => {
+            Log.info(TAG, `session terminateSelfWithResult abilityResult: ${JSON.stringify(abilityResult)} result: ${result}`);
+          });
+        }
+      }
+    } else {
+      let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext;
+      context.terminateSelfWithResult(abilityResult).then((result: void) => {
+        Log.info(TAG, `terminateSelf result: ${result}, self result ${JSON.stringify(abilityResult)}`);
+      });
+    }
   }
 }
 
