@@ -232,7 +232,14 @@ export class ScreenManager {
       }
       this.onWinSizeChanged(data);
     })
-    this.onWinSizeChanged(this.getWinRect());
+    if (!this.isUIExtensionEnv()) {
+      this.mainWindow?.getProperties().then((prop: window.WindowProperties) => {
+        Log.info(TAG, `Window prop: ${JSON.stringify(prop)}`);
+        this.onWinSizeChanged(prop.windowRect);
+      });
+    } else {
+      this.onWinSizeChanged(this.getWinRect());
+    }
   }
 
   destroyMainWindow(): void {
