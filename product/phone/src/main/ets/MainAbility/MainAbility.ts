@@ -51,6 +51,7 @@ let isShowMenuFromThirdView: boolean;
 export default class MainAbility extends Ability {
   private formCurrentUri: string = '';
   private formAlbumUri: string = '';
+  private preselectedUris: Array<string> = [];
   private isOnDestroy: boolean = false;
   private localStorage: LocalStorage = new LocalStorage();
 
@@ -119,6 +120,7 @@ export default class MainAbility extends Ability {
       mCallerBundleName = wantParam[Constants.KEY_WANT_PARAMETERS_CALLER_BUNDLE_NAME] as string;
       mMaxSelectCount = wantParam?.maxSelectCount as number;
       mFilterMediaType = wantParam?.filterMediaType as string;
+      this.preselectedUris = wantParam?.preselectedUris as Array<string>;
       AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_MULTIPLE_SELECT);
       SmartPickerUtils.initIfNeeded(this.context, want, this.localStorage);
     } else if (wantParamUri === Constants.WANT_PARAM_URI_FORM) {
@@ -254,7 +256,8 @@ export default class MainAbility extends Ability {
           isMultiPick: true,
           filterMediaType: mFilterMediaType,
           isFirstEnter: true,
-          maxSelectCount: mMaxSelectCount
+          maxSelectCount: mMaxSelectCount,
+          preselectedUris: this.preselectedUris,
         }
       };
       router.replaceUrl(options);

@@ -42,6 +42,7 @@ export class SelectParams {
   cameraAble: boolean;
   /* whether picker can edit */
   editAble: boolean;
+  preselectedUris?: string[];
   uri: string;
   itemDisplayName: string;
   itemId: string;
