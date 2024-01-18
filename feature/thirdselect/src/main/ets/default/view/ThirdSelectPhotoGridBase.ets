@@ -183,6 +183,9 @@ export struct ThirdSelectPhotoGridBase {
       param = router.getParams() as SelectParams;
     }
     this.initSelectParams(param);
+    if (param && param.preselectedUris) {
+      this.selectParams.preselectedUris = param.preselectedUris;
+    }
     if (this.selectParams.isFromFa) {
       this.selectParams.filterMediaType = AlbumDefine.FILTER_MEDIA_TYPE_IMAGE;
       AppStorage.SetOrCreate(FormConstants.FORM_ITEM_ALBUM_URI, param.uri);
