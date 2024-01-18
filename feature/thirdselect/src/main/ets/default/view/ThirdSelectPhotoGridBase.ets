@@ -183,6 +183,9 @@ export struct ThirdSelectPhotoGridBase {
       param = router.getParams() as SelectParams;
     }
     this.initSelectParams(param);
+    if (param && param.preselectedUris) {
+      this.selectParams.preselectedUris = param.preselectedUris;
+    }
     if (this.selectParams.isFromFa) {
       this.selectParams.filterMediaType = AlbumDefine.FILTER_MEDIA_TYPE_IMAGE;
       AppStorage.SetOrCreate(FormConstants.FORM_ITEM_ALBUM_URI, param.uri);
@@ -606,6 +609,20 @@ export struct ThirdSelectPhotoGridBase {
     }
     Log.info(TAG, `isEmpty: ${this.isEmpty}`)
     this.dataSource.onDataReloaded();
+    this.modifyPhotoSelectStatus();
+  }
+
+  /**
+   * 图库预选择
+   */
+  private modifyPhotoSelectStatus(): void {
+    if (this.selectParams.preselectedUris.length > 0) {
+      if (this.selectParams.preselectedUris.length > this.selectParams.maxSelectCount) {
+        this.selectParams.preselectedUris = this.selectParams.preselectedUris.slice(0, this.selectParams.maxSelectCount);
+      }
+      this.selectManager?.initPreSelectPhotos(this.selectParams.preselectedUris);
+      this.selectParams.preselectedUris = [];
+    }
   }
 
   private initSelectManager() {

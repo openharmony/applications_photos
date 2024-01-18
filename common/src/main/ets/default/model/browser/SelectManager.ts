@@ -385,6 +385,49 @@ export class ThirdSelectManager extends SelectManager {
     return super.clickedSet;
   }
 
+  /**
+   * 初始化图库图片预选择
+   *
+   * @param targetIdList 预选择图库资源Id
+   */
+  public initPreSelectPhotos(targetIdList: string[]): void {
+    this.deSelectAll();
+    if (this.getMediaItemFunc) {
+      targetIdList.forEach((targetId: string): void => {
+        let containUri = this.selectedMap.has(targetId);
+        if (!containUri) {
+          this.getMediaItemFunc(targetId, (item) => {
+            this.toggleWithItem(targetId, true, item);
+          });
+        }
+      });
+    }
+  }
+
+  /**
+   * 针对指定mediaItem预加载缓存
+   *
+   * @param targetId 图库资源Id
+   * @param isSelected 图库资源是否被选中
+   * @param mediaItem mediaItem
+   * @returns 是否成功
+   */
+  public toggleWithItem(targetId: string, isSelected: boolean, mediaItem: MediaItem): boolean {
+    if (mediaItem) {
+      let containUri = this.selectedMap.has(targetId);
+      if (isSelected && !containUri) {
+        this.selectedMap.set(targetId, mediaItem);
+        this.indexMap.set(mediaItem, undefined);
+      }
+      if (!isSelected && containUri) {
+        this.selectedMap.delete(targetId);
+        this.indexMap.delete(mediaItem);
+      }
+      return super.toggle(targetId, isSelected, undefined);
+    }
+    return false;
+  }
+
   public toggle(targetId: string, isSelected: boolean, targetIndex?: number): boolean {
     if (this.getMediaItemFunc) {
       let containsUri = this.selectedMap.has(targetId);
