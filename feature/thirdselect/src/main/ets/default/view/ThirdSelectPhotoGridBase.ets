@@ -613,11 +613,11 @@ export struct ThirdSelectPhotoGridBase {
    * 图库预选择
    */
   private modifyPhotoSelectStatus(): void {
-    if (this.selectParams?.preselectedUris?.length > 0) {
+    if (this.selectParams.preselectedUris.length > 0) {
       if (this.selectParams.preselectedUris.length > this.selectParams.maxSelectCount) {
         this.selectParams.preselectedUris = this.selectParams.preselectedUris.slice(0, this.selectParams.maxSelectCount);
       }
-      this.selectManager.initPreSelectPhotos(this.selectParams.preselectedUris);
+      this.selectManager?.initPreSelectPhotos(this.selectParams.preselectedUris);
       this.selectParams.preselectedUris = [];
     }
   }

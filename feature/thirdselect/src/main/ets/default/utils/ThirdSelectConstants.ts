@@ -42,7 +42,7 @@ export class SelectParams {
   cameraAble: boolean;
   /* whether picker can edit */
   editAble: boolean;
-  preselectedUris?: string[];
+  preselectedUris: string[];
   uri: string;
   itemDisplayName: string;
   itemId: string;
@@ -62,6 +62,7 @@ export class SelectParams {
       bundleName: '',
       cameraAble: true,
       editAble: true,
+      preselectedUris: [],
       uri: '',
       itemDisplayName: undefined,
       itemId: '',
