@@ -393,13 +393,10 @@ export struct ThirdSelectPhotoGridBase {
         if (this.selectParams.isFromFa) {
           NoPhotoIndexComponent({ index: Constants.TIMELINE_PAGE_INDEX, hasBarSpace: false })
         } else {
-          if (this.selectParams.cameraAble) {
+          if (!this.selectParams.cameraAble) {
             NoPhotoComponent({ title: $r('app.string.no_distributed_photo_head_title_album') })
           }
         }
-      }
-      if (this.selectParams.isFromFa && this.isEmpty) {
-        NoPhotoIndexComponent({ index: Constants.TIMELINE_PAGE_INDEX, hasBarSpace: false })
       }
       if (this.isShowSmartRecommendTabBar && this.isAllMediaAlbum) {
         ThirdSelectSmartRecommendTabBar({
