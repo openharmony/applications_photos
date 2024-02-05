@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,129 +13,170 @@
  * limitations under the License.
  */
 
-import { ActionButton } from './ActionButton';
-import { BroadCast, Constants, Log } from '@ohos/common';
-import { ActionButtonInfo } from './MainMenuInfo';
-import { ActionChangedEvent, RefreshActionMenu } from './RefreshMenu';
-import { PhotoEditMode } from '../base/PhotoEditType';
-import { PhotoEditorManager } from '../PhotoEditorManager';
+import { ColumnSize, ScreenManager } from '../../model/common/ScreenManager';
+import { ToolBarButton } from './ToolBarButton';
+import { Constants } from '../../model/common/Constants';
+import { ActionBarProp } from '../browserOperation/ActionBarProp';
+import { Action } from '../browserOperation/Action';
+import { ActionBarMode } from '../browserOperation/ActionBarMode';
 
-const TAG: string = 'editor_ToolBar';
-
-const COMPONENT_KEY_Edit_CROP: string = 'EditToolBarCrop';
+export class MenuItem {
+  value?: string;
+  action?: () => void;
+}
 
 @Component
 export struct ToolBar {
-  @Consume editorManager: PhotoEditorManager;
-  @Consume('selected') selectedMode: number;
-  @Consume('scale') imageScale: number;
-  @Consume('barSize') barScale: Resource;
-  @Consume('compare') isCompare: boolean;
-  @Consume broadCast: BroadCast;
-  @State isImmersive: boolean = false;
-  @Consume('verticalScreen') isVerticalScreen: boolean;
-  @Consume screenWidth: number;
-  @Consume screenHeight: number;
-  @Consume mainBottomSize: number;
-  @Consume titleSize: number;
-  @Consume isRedo: boolean;
-  @Consume isUndo: boolean;
-  mainMenuList: Array<ActionButtonInfo> = [
-    new ActionButtonInfo({
-      src: $r('app.media.ic_edit_photo_toolbar_crop'),
+  @Consume isShowBar: boolean;
+  @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
+  @StorageLink('leftBlank') leftBlank: number[]
+    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @Consume toolMenuList: Action[];
+  @Consume moreMenuList: Action[];
+  @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
+  @State showPopup: boolean = false;
+  onMenuClicked: Function = (): void => {};
+  @State actionBarProp: ActionBarProp = new ActionBarProp();
+  @Consume @Watch("isNeedHidePopup") hidePopup: boolean;
+  private isFromPhotoBrowser = false;
 
-      // 加入其它按钮时改为PhotoEditMode.EDIT_MODE_CROP
-      actionID: undefined,
-      text: $r('app.string.crop_text'),
-      isActive: true,
-      componentKey: COMPONENT_KEY_Edit_CROP
-    })
-  ];
-  // 2022年8月11日 @Watch('clickEvent')打包报错    @State @Watch('clickEvent') menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
-  @State menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
-  private textSize: number | Resource = $r('app.float.buttonActionTextSize_default');
-  private menuClick: Function = (): void => {};
-  private immersiveClick: Function = (): void => {};
-
-  clickEvent() {
-    ActionChangedEvent.isActiveNotChanged(this.menuChanged);
+  aboutToAppear(): void {
+    this.actionBarProp = this.createActionBar();
   }
 
-  onMenuClick(actionID: number) {
-    for (let i = 0; i < this.menuChanged.menuArray.length; i++) {
-      if (actionID == this.menuChanged.menuArray[i].actionID) {
-        this.selectedMode = this.menuChanged.menuArray[i].mode;
-        Log.info(TAG, 'mainMenu onMenuClick mode = ' + this.selectedMode);
-        this.menuChanged.isChanged = i;
+  isNeedHidePopup(): void {
+    if (this.hidePopup) {
+      this.showPopup = false;
+    }
+  }
 
-        let canvasWidth = this.isVerticalScreen ? this.screenWidth : (this.screenHeight - this.mainBottomSize);
-        switch (this.selectedMode) {
-          case PhotoEditMode.EDIT_MODE_CROP:
-            this.imageScale = this.isVerticalScreen
-              ? (this.screenHeight - this.titleSize - this.mainBottomSize)
-              : (this.screenWidth - this.titleSize);
-            this.barScale = $r('app.float.menuBar_edit');
-            this.isCompare = false;
-            break;
-          default:
-            Log.info(TAG, 'this.selectedMode is not toolBar');
-            break;
+  @Builder PopupBuilder() {
+    Column() {
+      ForEach(this.moreMenuList, (menu: Action, index?: number) => {
+        Text(menu.textRes)
+          .key('ToolBarPopupBuilderTextOf' + menu.componentKey)
+          .width(Constants.PERCENT_100)
+          .height($r('app.float.menu_height'))
+          .fontColor(menu.fillColor)
+          .fontSize($r('sys.float.ohos_id_text_size_body1'))
+          .fontWeight(FontWeight.Regular)
+          .onClick(() => {
+            this.onMenuClicked && this.onMenuClicked(menu);
+          })
+        if (this.moreMenuList.indexOf(menu) != this.moreMenuList.length - 1) {
+          Divider()
+            .width(Constants.PERCENT_100)
+            .strokeWidth(Constants.MENU_DIVIDER_STROKE_WIDTH)
+            .color($r('sys.color.ohos_id_color_list_separator'))
         }
-
-        this.selectedMode = this.editorManager.switchMode(this.selectedMode);
-        this.isRedo = this.editorManager.isRedoValid();
-        this.isUndo = this.editorManager.isUndoValid();
-        this.editorManager.getPhotoEditBaseInstance(this.selectedMode)
-          .setCanvasSize(canvasWidth, this.imageScale);
-      }
+      }, (menu: Action) => menu.actionID.toString())
     }
-  }
-
-  immersive(isImmersive: boolean) {
-    this.isImmersive = isImmersive;
-  }
-
-  aboutToAppear() {
-    this.menuClick = (actionID: number): void => this.onMenuClick(actionID);
-    this.immersiveClick = (isImmersive: boolean): void => this.immersive(isImmersive);
-    this.broadCast.on(Constants.UPDATE_MENU, this.menuClick);
-    this.broadCast.on(Constants.IS_IMMERSIVE, this.immersiveClick);
-
-    for (let i = 0; i < this.menuChanged.menuArray.length; i++) {
-      if (this.selectedMode == this.menuChanged.menuArray[i].mode) {
-        Log.info(TAG, 'mainMenu onMenuClick mode = ' + this.selectedMode);
-        this.menuChanged.isChanged = i;
-      }
-    }
-  }
-
-  aboutToDisappear() {
-    this.broadCast.off(Constants.UPDATE_MENU, this.menuClick);
-    this.broadCast.off(Constants.IS_IMMERSIVE, this.immersiveClick);
+    .width(ScreenManager.getInstance().getColumnsWidth(ColumnSize.COLUMN_TWO))
+    .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
+    .padding({
+      top: $r('app.float.menu_padding_vertical'),
+      bottom: $r('app.float.menu_padding_vertical'),
+      left: $r('app.float.menu_padding_horizontal'),
+      right: $r('app.float.menu_padding_horizontal')
+    })
+    .backgroundColor(Color.White)
+    .margin({
+      right: $r('app.float.pop_window_margin_rihgt'),
+      bottom: $r('app.float.menu_margin_bottom')
+    })
   }
 
   build() {
-    Flex({
-      direction: this.isVerticalScreen ? FlexDirection.Row : FlexDirection.Column,
-      alignItems: ItemAlign.Center,
-      justifyContent: FlexAlign.Center
-    }) {
-      ForEach(this.menuChanged.menuArray, (item: ActionButtonInfo) => {
-        ActionButton({
-          src: item.src,
-          text: item.text,
-          textSize: this.textSize,
-          isActive: item.isActive,
-          actionID: item.actionID,
-          widthOfActionButton: this.isVerticalScreen
-            ? $r('app.float.edit_vertical_toolBar_size') : $r('app.float.actionButton_default'),
-          heightOfActionButton: this.isVerticalScreen
-            ? $r('app.float.actionButton_default') : $r('app.float.edit_horizontal_toolBar_size'),
-          componentKey: item.componentKey
-        })
-      })
+    Row() {
+      Row() {
+        ForEach(this.toolMenuList, (menu: Action, index?: number) => {
+          if (menu.actionID == Action.MORE.actionID) {
+            Column() {
+              Row() {
+                ToolBarButton({
+                  res: menu.iconRes,
+                  action: menu,
+                  isLeft: true,
+                  isAutoTint: menu.isAutoTint,
+                  colorMode: this.actionBarProp.getColorMode()
+                })
+              }.margin({ top: $r('app.float.id_icon_margin_vertical') })
+
+              Row() {
+                Text(menu.textRes)
+                  .key('ToolBar_Text' + menu.componentKey)
+                  .fontSize($r('sys.float.ohos_id_text_size_caption'))
+                  .fontFamily($r('app.string.id_text_font_family_regular'))
+                  .fontColor(menu.fillColor)
+              }.margin({ top: $r('app.float.tab_bar_image_bottom') })
+            }
+            .key('ToolBarButton' + menu.componentKey)
+            .width(`${100 / this.toolMenuList.length}%`)
+            .height(Constants.PERCENT_100)
+            .onClick(() => {
+              this.showPopup = !this.showPopup
+            })
+            .bindPopup(this.showPopup, {
+              builder: this.PopupBuilder,
+              placement: Placement.Top,
+              popupColor: '#00FFFFFF',
+              enableArrow: false,
+              onStateChange: (e) => {
+                if (!e.isVisible) {
+                  this.showPopup = false;
+                } else {
+                  this.hidePopup = false;
+                }
+              }
+            })
+
+          } else {
+            Column() {
+              Row() {
+                ToolBarButton({
+                  res: menu.iconRes,
+                  action: menu,
+                  isLeft: true,
+                  isAutoTint: menu.isAutoTint,
+                  colorMode: this.actionBarProp.getColorMode()
+                })
+              }.margin({ top: $r('app.float.id_icon_margin_vertical') })
+
+              Row() {
+                Text(menu.textRes)
+                  .fontSize($r('sys.float.ohos_id_text_size_caption'))
+                  .fontFamily($r('app.string.id_text_font_family_regular'))
+                  .fontColor(menu.fillColor)
+              }
+              .margin({ top: $r('sys.float.ohos_id_text_margin_vertical') })
+            }
+            .key('ToolBarButton' + menu.componentKey)
+            .onClick(() => {
+              this.onMenuClicked && this.onMenuClicked(menu)
+            })
+            .width(`${100 / this.toolMenuList.length}%`)
+            .height(Constants.PERCENT_100)
+          }
+        }, (menu: Action) => menu.actionID.toString())
+      }
+      .width(Constants.PERCENT_100)
+      .height(Constants.ActionBarHeight)
+      .padding(this.toolMenuList.length >= 4 ? {} : { left: $r('app.float.actionbar_margin_horizontal'),
+                                                      right: $r('app.float.actionbar_margin_horizontal') })
     }
     .width(Constants.PERCENT_100)
-    .height(Constants.PERCENT_100)
+    .backgroundColor(this.isFromPhotoBrowser ? $r('app.color.transparent') : this.actionBarProp.getBackgroundColor())
+    .opacity(this.actionBarProp.getAlpha())
+    .visibility((this.isShowBar || this.isFromPhotoBrowser) && !this.isHorizontal ? Visibility.Visible : Visibility.Hidden)
+    .markAnchor({ x: Constants.PERCENT_0, y: this.isFromPhotoBrowser ? Constants.PERCENT_0 : Constants.PERCENT_100 })
+    .position({ x: Constants.PERCENT_0, y: this.isFromPhotoBrowser ? Constants.PERCENT_0 : Constants.PERCENT_100 })
+  }
+
+  private createActionBar(): ActionBarProp {
+    let actionBarProp: ActionBarProp = new ActionBarProp();
+    actionBarProp
+      .setMode(ActionBarMode.DETAIL_MODE)
+      .setAlpha(ActionBarProp.PHOTO_BROWSER_ACTIONBAR_ALPHA)
+    return actionBarProp;
   }
 }
