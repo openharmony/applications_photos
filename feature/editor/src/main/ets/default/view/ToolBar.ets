@@ -15,7 +15,7 @@
 
 import { ActionButton } from './ActionButton';
 import { BroadCast, Constants, Log } from '@ohos/common';
-import { ActionButtonInfo, ActionInfo } from './MainMenuInfo';
+import { ActionButtonInfo } from './MainMenuInfo';
 import { ActionChangedEvent, RefreshActionMenu } from './RefreshMenu';
 import { PhotoEditMode } from '../base/PhotoEditType';
 import { PhotoEditorManager } from '../PhotoEditorManager';
@@ -40,16 +40,16 @@ export struct ToolBar {
   @Consume titleSize: number;
   @Consume isRedo: boolean;
   @Consume isUndo: boolean;
-  private actionInfo: ActionInfo = {
-    src: $r('app.media.ic_edit_photo_toolbar_crop'),
-    // 加入其它按钮时改为PhotoEditMode.EDIT_MODE_CROP
-    actionID: PhotoEditMode.EDIT_MODE_CROP,
-    text: $r('app.string.crop_text'),
-    isActive: true,
-    componentKey: COMPONENT_KEY_Edit_CROP
-  };
   mainMenuList: Array<ActionButtonInfo> = [
-    new ActionButtonInfo(this.actionInfo)
+    new ActionButtonInfo({
+      src: $r('app.media.ic_edit_photo_toolbar_crop'),
+
+      // 加入其它按钮时改为PhotoEditMode.EDIT_MODE_CROP
+      actionID: undefined,
+      text: $r('app.string.crop_text'),
+      isActive: true,
+      componentKey: COMPONENT_KEY_Edit_CROP
+    })
   ];
   // 2022年8月11日 @Watch('clickEvent')打包报错    @State @Watch('clickEvent') menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
   @State menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
