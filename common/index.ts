@@ -43,6 +43,10 @@ export { AlbumDefine } from './src/main/ets/default/model/browser/AlbumDefine';
 
 export { CommonObserverCallback } from './src/main/ets/default/model/browser/CommonObserverCallback';
 
+export { MediaObserverNfyType } from './src/main/ets/default/model/browser/dataObserver/MediaObserverCallback';
+
+export { MediaObserverNfyInfo } from './src/main/ets/default/model/browser/dataObserver/MediaObserverCallback';
+
 export { MediaObserver } from './src/main/ets/default/model/browser/dataObserver/MediaObserver';
 
 export type { LoadingListener } from './src/main/ets/default/model/browser/LoadingListener';
