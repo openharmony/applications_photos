@@ -16,6 +16,8 @@
 import fileShare from '@ohos.fileshare';
 import wantConstant from '@ohos.ability.wantConstant';
 import { Log } from '../../../utils/Log';
+import { UserFileManagerAccess } from '../../../access/UserFileManagerAccess';
+import { MediaItem } from './MediaItem';
 
 const TAG: string = 'common_SelectUtil';
 
@@ -29,6 +31,38 @@ export class SelectUtil {
       uriArray.push(uri);
     })
     return uriArray;
+  }
+
+  static getCountOfMedia(uriArray: Array<string>, selectedMap: Map<string, MediaItem>): Promise<Array<number>> {
+    let result = [0, 0];
+    if (uriArray === undefined || uriArray.length <= 0) {
+      Log.info(TAG, 'uriArray is null or empty!');
+      return new Promise((resolve) => {
+        resolve(result);
+      })
+    }
+
+    if (selectedMap === undefined || selectedMap.size <= 0) {
+      Log.info(TAG, 'selectedMap is null or empty!');
+      return new Promise((resolve) => {
+        resolve(result);
+      })
+    }
+
+    let imageCount: number = 0;
+    let videoCount: number = 0;
+    for (let i = 0; i < selectedMap.size; i++) {
+      let mediaItem: MediaItem = selectedMap.get(uriArray[i]);
+      if (mediaItem.mediaType === UserFileManagerAccess.MEDIA_TYPE_IMAGE) {
+        imageCount++;
+      } else if (mediaItem.mediaType === UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
+        videoCount++;
+      }
+    }
+    result = [imageCount, videoCount];
+    return new Promise((resolve) => {
+      resolve(result);
+    })
   }
 
   static async grantPermissionForUris(uris: Array<string>, bundleName: string): Promise<void> {
