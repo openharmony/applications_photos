@@ -71,5 +71,6 @@ export default class SmartPickerConstants {
     photoAccessHelper.PhotoKeys.HIDDEN.toString(),
     photoAccessHelper.PhotoKeys.SIZE.toString()
   ];
+  static readonly PICKER_INIT_DATA_FIRST_QUERY_FINISH: string = 'picker_init_data_first_query_finish';
 }
 
