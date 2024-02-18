@@ -65,4 +65,7 @@ export class BroadCastConstants {
   static readonly SELECT_PHOTO_BROWSER_BACK_PRESS_EVENT: string = 'select_photo_browser_back';
   static readonly THIRD_PICKER_SWITCH_SMART_RECOMMEND_TAB: string = 'third_select_switch_smart_recommend_tab';
   static readonly PICKER_INIT_DATA_FIRST_QUERY_FINISH: string = 'picker_init_data_first_query_finish';
+  static readonly UPDATE_PANEL_INDEX: string = 'updatePanelIndex';
+  static readonly PICKER_PAGE_DISAPPEAR: string = 'picker_page_disappear';
+  static readonly UPDATE_EDIT_ITEM: string = 'updateEditItem';
 }
