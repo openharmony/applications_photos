@@ -22,6 +22,9 @@ import type window from '@ohos.window';
 import type { Action } from '../view/browserOperation/Action';
 import { AlbumInfo } from '../model/browser/album/AlbumInfo';
 import common from '@ohos.app.ability.common';
+import resourceManager from '@ohos.resourceManager';
+import { UserFileManagerAccess } from '../access/UserFileManagerAccess';
+import { MediaItem } from '../model/browser/photo/MediaItem';
 
 const TAG: string = 'common_UiUtil';
 
@@ -149,12 +152,15 @@ export class UiUtil {
     }
   }
 
-  /**
-   * Get the content of the resource reference
-   *
-   * @param resource resource reference
-   * @returns resource Corresponding content number
-   */
+  private static getResourceManager(src: string = 'photosAbilityContext'): resourceManager.ResourceManager | undefined {
+    const resourceManager: resourceManager.ResourceManager | undefined =
+      AppStorage.get<common.UIAbilityContext>(src)?.resourceManager;
+    if (resourceManager === undefined) {
+      Log.error(TAG, JSON.stringify({ context: AppStorage.get<common.UIAbilityContext>(src), resourceManager }));
+    }
+    return resourceManager;
+  }
+
   static async getResourceNumber(resource: Resource): Promise<number> {
     try {
       Log.info(TAG, `getResourceNumber: ${JSON.stringify(resource)}`);
@@ -176,6 +182,74 @@ export class UiUtil {
     }
   }
 
+  /**
+   * 用于检查该文件是否可以编辑，用于控制编辑菜单是否灰化
+   *
+   * @param mediaItem 被检测的媒体
+   *
+   * @returns true 可以编辑，false 不可以编辑
+   */
+  static isEditedEnable(mediaItem: MediaItem): boolean {
+    if (mediaItem.mediaType !== UserFileManagerAccess.MEDIA_TYPE_IMAGE && mediaItem.mediaType !== UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
+      Log.warn(TAG, 'the mediaType is invalid, the type is ' + mediaItem.mediaType);
+      return false;
+    }
+    if (mediaItem.size === undefined || mediaItem.size === 0) {
+      Log.warn(TAG, 'the size is invalid, the size is ' + mediaItem.size);
+      return false;
+    }
+    if (mediaItem.width === undefined || mediaItem.width === 0) {
+      Log.warn(TAG, 'the width is invalid, the width is ' + mediaItem.width);
+      return false;
+    }
+    if (mediaItem.height === undefined || mediaItem.height === 0) {
+      Log.warn(TAG, 'the height is invalid, the height is ' + mediaItem.height);
+      return false;
+    }
+    if (mediaItem.mediaType === UserFileManagerAccess.MEDIA_TYPE_VIDEO && (mediaItem.duration === undefined || mediaItem.duration === 0)) {
+      Log.warn(TAG, 'the duration is invalid, the duration is ' + mediaItem.duration);
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Get the content of the resource reference
+   *
+   * @param resource resource reference
+   * @returns resource Corresponding content number
+   */
+  static getResourceNumberSync(resource: Resource): number {
+    Log.info(TAG, `getResourceNumber: ${JSON.stringify(resource)}`);
+    return this.getResourceManager()?.getNumber(resource.id) ?? Number.NaN;
+  }
+
+  /**
+   * Get the content of the resource reference
+   *
+   * @param resource resource reference
+   * @returns resource Corresponding content Color
+   */
+  static getResourceColorSync(resource: Resource): number {
+    try {
+      Log.info(TAG, `getResourceString: ${JSON.stringify(resource)}`);
+      if (globalThis.photosAbilityContext == null || globalThis.photosAbilityContext === 'undefined') {
+        Log.error(TAG, 'getResourceString error: context is null');
+        return null;
+      }
+      let mgr = globalThis.photosAbilityContext.resourceManager.getColorSync(resource.id);
+      if (mgr) {
+        return mgr;
+      } else {
+        Log.error(TAG, `getResourceManager instance is none`);
+        return null;
+      }
+    } catch (error) {
+      Log.error(TAG, `getResourceString error: ${error}`);
+      return null;
+    }
+  }
+
   static async showToast(resource: Resource): Promise<void> {
     let message = await UiUtil.getResourceString(resource);
     Log.debug(TAG, `showToast: ${message}`);
@@ -184,6 +258,20 @@ export class UiUtil {
       duration: UiUtil.TOAST_DURATION,
       bottom: '64vp'
     });
+  }
+
+  /**
+   * Get the content of the resource reference
+   *
+   * @param resource resource reference
+   * @returns resource Corresponding content string
+   */
+  static getResourceStringSync(resource: Resource): string {
+    Log.info(TAG, `getResourceString: ${JSON.stringify(resource)}`);
+    if (resource.moduleName === 'browserlibrary') {
+      return this.getResourceManager('photoLibraryContext')?.getStringSync(resource.id) ?? '';
+    }
+    return this.getResourceManager()?.getStringSync(resource.id) ?? '';
   }
 
   /**
@@ -198,7 +286,7 @@ export class UiUtil {
     let maxCardWidth = Constants.ALBUM_SET_COVER_SIZE * Constants.GRID_MAX_SIZE_RATIO;
     let gridColumnsCount = Math.max(Constants.DEFAULT_ALBUM_GRID_COLUMN_MIN_COUNT,
       Math.ceil((contentWidth - Constants.ALBUM_SET_MARGIN * Constants.NUMBER_2 + Constants.ALBUM_SET_GUTTER) /
-      (maxCardWidth + Constants.ALBUM_SET_GUTTER)));
+        (maxCardWidth + Constants.ALBUM_SET_GUTTER)));
     Log.info(TAG, `[getAlbumGridCount] contentWidth: ${contentWidth}, gridColumnsCount: ${gridColumnsCount}`);
     return gridColumnsCount;
   }
