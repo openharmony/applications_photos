@@ -34,7 +34,8 @@ import {
   UiUtil,
   UserFileManagerAccess,
   ViewData,
-  BrowserDataFactory
+  BrowserDataFactory,
+  MediaDataSource
 } from '@ohos/common';
 import {
   BrowserController,
@@ -186,6 +187,11 @@ export struct ThirdSelectPhotoGridBase {
     if (param && param.preselectedUris) {
       this.selectParams.preselectedUris = param.preselectedUris;
     }
+    this.selectParams.cameraAble = param.cameraAble;
+
+    // 更新编辑许可
+    this.selectParams.editAble = param.editAble;
+    AppStorage.SetOrCreate<boolean>(Constants.KEY_OF_IS_THIRD_EDITABLE, this.selectParams.editAble);
     if (this.selectParams.isFromFa) {
       this.selectParams.filterMediaType = AlbumDefine.FILTER_MEDIA_TYPE_IMAGE;
       AppStorage.SetOrCreate(FormConstants.FORM_ITEM_ALBUM_URI, param.uri);
@@ -215,6 +221,12 @@ export struct ThirdSelectPhotoGridBase {
         this.onLoadFinishedCallback(size, (param: SelectParams): void => this.updateTitle(param));
       });
     this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
+    this.broadCast.on(SmartPickerConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH, () => {
+      if (this.isShowSmartRecommendTabBar) {
+        this.selectParams.cameraAble
+          = this.smartRecommendTabItems[this.isAllMediaAlbum ? this.currentSmartRecommendTabIndex : 0].isCameraAble();
+      }
+    });
     this.selectManager?.registerCallback('updateCount',
       (newState: number) => {
         Log.info(TAG, `updateSelectedCount ${newState}`);
@@ -230,6 +242,11 @@ export struct ThirdSelectPhotoGridBase {
     this.broadCast.on(BroadCastConstants.THIRD_PICKER_SWITCH_SMART_RECOMMEND_TAB, this.onSwitchSmartRecommendTabFunc);
     MediaObserver.getInstance().registerObserver(this.dataObserver);
     this.isActive = true;
+
+    // save all photo dataSource
+    if (this.dataSource.albumUri === '' && AppStorage.get<MediaDataSource>(Constants.APP_KEY_ALL_PHOTO_DATASOURCE) === undefined) {
+      AppStorage.SetOrCreate(Constants.APP_KEY_ALL_PHOTO_DATASOURCE, this.dataSource);
+    }
     ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     Log.error(TAG, 'meow data count = ' + this.dataSource.totalCount());
   }
