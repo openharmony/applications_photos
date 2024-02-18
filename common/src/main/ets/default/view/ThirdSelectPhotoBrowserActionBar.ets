@@ -40,6 +40,7 @@ export struct ThirdSelectPhotoBrowserActionBar {
   @Provide hidePopup: boolean = false;
   private title: string | Resource = '';
   private isThird: boolean = false;
+  @Consume canEdit: boolean;
 
   aboutToAppear() {
     this.createActionBar();
@@ -74,6 +75,12 @@ export struct ThirdSelectPhotoBrowserActionBar {
 
   private createActionBar(): void {
     let actionBarProp: ActionBarProp = new ActionBarProp();
+
+    let menuList: Array<Action> = new Array<Action>();
+    if (this.canEdit) {
+      menuList.push(Action.EDIT);
+    }
+
     actionBarProp
       .setLeftAction(Action.BACK)
       .setMode(ActionBarMode.SELECTION_MODE)
@@ -82,9 +89,9 @@ export struct ThirdSelectPhotoBrowserActionBar {
       .setAlpha(ActionBarProp.PHOTO_BROWSER_ACTIONBAR_ALPHA)
 
     if (this.isMultiPick && !this.isThird) {
-      let menuList = [this.isSelected ? Action.SELECTED : Action.MATERIAL_SELECT];
-      actionBarProp.setMenuList(menuList)
+      menuList.push(this.isSelected ? Action.SELECTED : Action.MATERIAL_SELECT);
     }
+    actionBarProp.setMenuList(menuList)
 
     if (this.title) {
       actionBarProp

@@ -155,6 +155,7 @@ export class BigDataConstants {
   public static readonly EXPORT_RESULT_ID: string = 'EXPORT_RESULT';
   public static readonly CREATE_FA_CARD_ID: string = 'CREATE_FA_CARD';
   public static readonly DELETE_FA_CARD_ID: string = 'DELETE_FA_CARD';
+  public static readonly CREATE_THIRD_EDIT_SAVE: string = 'CREATE_THIRD_EDIT_SAVE';
   public static readonly CHANGE_FA_CARD_IMAGE_ID: string = 'CHANGE_FA_CARD_IMAGE';
   public static readonly SET_FA_CARD_CAROUSEL_ID: string = 'SET_FA_CARD_CAROUSEL';
   public static readonly SET_FA_CARD_IS_NAME_ID: string = 'SET_FA_CARD_IS_NAME';

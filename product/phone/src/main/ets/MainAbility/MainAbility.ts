@@ -47,11 +47,12 @@ let mMaxSelectCount: number = 0;
 let mFilterMediaType: string = AlbumDefine.FILTER_MEDIA_TYPE_ALL;
 let appBroadCast = BroadCastManager.getInstance().getBroadCast();
 let isShowMenuFromThirdView: boolean;
+let cameraAble: boolean = true;
+let editAble: boolean = true;
 
 export default class MainAbility extends Ability {
   private formCurrentUri: string = '';
   private formAlbumUri: string = '';
-  private preselectedUris: Array<string> = [];
   private isOnDestroy: boolean = false;
   private localStorage: LocalStorage = new LocalStorage();
 
@@ -115,13 +116,16 @@ export default class MainAbility extends Ability {
       mMaxSelectCount = Constants.NUMBER_1;
       mFilterMediaType = wantParam?.filterMediaType as string;
       AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_SINGLE_SELECT);
+      cameraAble = (wantParam?.isPhotoTakingSupported as boolean) ?? true;
+      editAble = (wantParam?.isEditSupported as boolean) ?? true;
       SmartPickerUtils.initIfNeeded(this.context, want, this.localStorage);
     } else if (wantParamUri === Constants.WANT_PARAM_URI_SELECT_MULTIPLE) {
       mCallerBundleName = wantParam[Constants.KEY_WANT_PARAMETERS_CALLER_BUNDLE_NAME] as string;
       mMaxSelectCount = wantParam?.maxSelectCount as number;
       mFilterMediaType = wantParam?.filterMediaType as string;
-      this.preselectedUris = wantParam?.preselectedUris as Array<string>;
       AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_MULTIPLE_SELECT);
+      cameraAble = (wantParam?.isPhotoTakingSupported as boolean) ?? true;
+      editAble = (wantParam?.isEditSupported as boolean) ?? true;
       SmartPickerUtils.initIfNeeded(this.context, want, this.localStorage);
     } else if (wantParamUri === Constants.WANT_PARAM_URI_FORM) {
       isFromCard = true;
@@ -176,7 +180,7 @@ export default class MainAbility extends Ability {
     Log.info(TAG, 'Application onWindowStageCreate');
     AppStorage.setOrCreate('photosWindowStage', windowStage);
     AppStorage.SetOrCreate('deviceType',
-        deviceInfo.deviceType == ('phone' || 'default') ? Constants.DEFAULT_DEVICE_TYPE : Constants.PAD_DEVICE_TYPE);
+    deviceInfo.deviceType == ('phone' || 'default') ? Constants.DEFAULT_DEVICE_TYPE : Constants.PAD_DEVICE_TYPE);
     ScreenManager.getInstance().on(ScreenManager.ON_LEFT_BLANK_CHANGED, data => {
       Log.info(TAG, `onleftBlankChanged: ${data}`);
       AppStorage.SetOrCreate('leftBlank', data);
@@ -239,7 +243,10 @@ export default class MainAbility extends Ability {
           isMultiPick: false,
           filterMediaType: mFilterMediaType,
           isFirstEnter: true,
-          maxSelectCount: mMaxSelectCount
+          maxSelectCount: mMaxSelectCount,
+          uri: '',
+          cameraAble: cameraAble,
+          editAble: editAble
         }
       };
       router.replaceUrl(options);
@@ -257,7 +264,9 @@ export default class MainAbility extends Ability {
           filterMediaType: mFilterMediaType,
           isFirstEnter: true,
           maxSelectCount: mMaxSelectCount,
-          preselectedUris: this.preselectedUris,
+          uri: '',
+          cameraAble: cameraAble,
+          editAble: editAble,
         }
       };
       router.replaceUrl(options);

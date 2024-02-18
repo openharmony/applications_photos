@@ -238,6 +238,13 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
     this.albumDataSource.addLoadingListener(this);
   }
 
+  getAlbumDataSource(): MediaDataSource | undefined {
+    if (this.albumDataSource) {
+      return this.albumDataSource;
+    }
+    return undefined;
+  }
+
   setBroadCast(broadCastParam: BroadCast): void {
     this.broadCast = broadCastParam;
   }

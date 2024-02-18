@@ -31,7 +31,12 @@ import {
   ReportToBigDataUtil,
   ScreenManager,
   SelectUtil,
-  ThirdSelectManager
+  ThirdSelectManager,
+  UiUtil,
+  BrowserDataFactory,
+  PhotoDataImpl,
+  UserFileManagerAccess,
+  MediaObserverNfyInfo
 } from '@ohos/common';
 import {
   BrowserController,
@@ -40,7 +45,8 @@ import {
   ThirdSelectPhotoBrowserActionBar
 } from '@ohos/common/CommonComponents';
 
-import { FormConstants, IS_HORIZONTAL, LEFT_BLANK, SelectParams } from '../utils/ThirdSelectConstants';
+import { FormConstants, IS_HORIZONTAL, LEFT_BLANK, SelectParams,
+  THIRD_SELECT_IS_ORIGIN } from '../utils/ThirdSelectConstants';
 import { ThirdSelectedPanel } from './ThirdSelectedPanel';
 import { MouseTurnPageOperation } from '@ohos/browser/BrowserComponents';
 import { Matrix4x4 } from '@ohos/common/src/main/ets/default/utils/Matrix4x4'
@@ -51,17 +57,19 @@ import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSessi
 import fileShare from '@ohos.fileshare';
 import wantConstant from '@ohos.ability.wantConstant';
 import { BusinessError } from '@ohos.base';
+import userFileManager from '@ohos.filemanagement.userFileManager';
 
 const TAG: string = 'thiSel_ThirdSelectPhotoBrowserBase';
 
 interface Params {
-  isFromFa: boolean;
   selectMode: boolean;
   position: number;
   transition: string;
   bundleName: string;
   title: string;
   maxSelectCount: number;
+  isFromFa: boolean;
+  isJustSelected: boolean
 };
 
 // third selection photoBrowser
@@ -102,6 +110,7 @@ export struct ThirdSelectPhotoBrowserBase {
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private geometryTransitionEnable: boolean = false;
   private isSelectMode: boolean = false;
+  @State isJustSelected: boolean = true;
   private pullDownFunc: Function = (): Boolean => this.onBackPress();
   private dataSizeChangedFunc: Function = (size: number): void => this.onDataSizeChanged(size);
   private selectFunc: Function = (position: number, key: string, value: boolean): void => this.selectCallback(position, key, value);
@@ -109,12 +118,38 @@ export struct ThirdSelectPhotoBrowserBase {
   private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem, isSelectMode = false): void =>
   this.jumpBrowserCallback(name, item, isSelectMode);
   private setDisableSwipeFunc: Function = (value: boolean): void => this.setDisableSwipe(value);
+  newMediaItem: MediaItem | undefined = undefined;
+  onEnterEdit: Function | undefined = undefined;
+  canEditVideo: boolean = false;
+  private editNewUri: string = '';
+  private photoUnEdit: MediaItem | undefined = undefined;
+  @Provide canEdit: boolean = false;
+  private swiperDuration: number = 400;
+  private panelId: string = 'ThirdSelectPhotoBrowserBase';
+  private waitingUpdateIndex: number = -1;
+  private waitingUpdateData: boolean = false;
+  private isToEdit = false;
+  albumUri = '';
+  // 页面销毁时，ThirdSelectPhotoBrowserBase作为子组件可能仍未销毁，然后ThirdSelectPhotoBrowserBase在disappear时会调用
+  // refreshData刷新panel，这时会导致Crash，该变量用于识别这种情况，并组织刷新panel
+  private isPageDisappear: boolean = false;
+  allPhotoDataSource: MediaDataSource | undefined = undefined;
+  private funcOnDataReloadWithEdit: Function = async (): Promise<void> => await this.onDataReloadWithEdit();
+  private funcPageDisappear: Function = (): void => this.pageDisappear();
+  private funcUpdateEditItem: Function = (): void => this.updateEditItem();
+
+
+  updateEditItem(): void {
+    let currentPhoto = this.getCurrentPhoto();
+    this.photoUnEdit = currentPhoto;
+  }
 
   onGeometryChanged() {
     AppStorage.SetOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
   }
 
   aboutToAppear(): void {
+    this.allPhotoDataSource = AppStorage.get<MediaDataSource>(Constants.APP_KEY_ALL_PHOTO_DATASOURCE);
     Log.info(TAG, 'photoBrowser aboutToAppear');
     this.backgroundColorResource = $r('app.color.black');
     this.isDefaultBackgroundColor = false;
@@ -150,6 +185,8 @@ export struct ThirdSelectPhotoBrowserBase {
       this.dataSource.setSelectMode(this.selectManager);
     }
     this.onPhotoChanged(param.position);
+    this.photoUnEdit = this.getCurrentPhoto();
+    this.canEdit = AppStorage.get<boolean>(Constants.KEY_OF_IS_THIRD_EDITABLE) as boolean
     this.mTransition = param.transition;
     this.bundleName = param.bundleName;
     this.title = param.title;
@@ -163,13 +200,297 @@ export struct ThirdSelectPhotoBrowserBase {
     this.broadCast.on(BrowserConstants.DATA_CONTENT_CHANGED, this.dataContentChangedFunc);
     this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
     this.broadCast.on(BrowserConstants.SET_DISABLE_SWIPE, this.setDisableSwipeFunc);
+    this.broadCast.on(BroadCastConstants.UPDATE_EDIT_ITEM, this.funcUpdateEditItem);
+    this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED_WITH_EDIT, this.funcOnDataReloadWithEdit);
+    this.broadCast.on(BroadCastConstants.PICKER_PAGE_DISAPPEAR, this.funcPageDisappear);
+
+    this.dataSource.getAlbumDataSource()?.setPhotoBroadCast(this.broadCast);
 
     if (this.pageStatus) {
       this.onPageShow();
     }
   }
 
+  private pageDisappear(): void {
+    this.isPageDisappear = true;
+    this.onBackPress();
+  }
+
+  async onDataReloadWithEdit(): Promise<void> {
+    Log.info(TAG, 'BroadCastConstants.ON_DATA_RELOADED_WITH_EDIT animate to data reloaded start with edit');
+    ReportToBigDataUtil.report(BigDataConstants.CREATE_THIRD_EDIT_SAVE, undefined);
+    try {
+      this.broadCast.emit(BroadCastConstants.CHANGE_SWIPER_DURATION, [0]);
+      let uri: string = AppStorage.get<string>(BroadCastConstants.PHOTO_EDIT_SAVE_URI) ?? '';
+
+      if (uri) {
+        // is in current album
+        let newIndex = this.dataSource.getDataIndexByUri(uri);
+
+        if (newIndex != Constants.NOT_FOUND) {
+          // Search for the position of new image/video after edit in current 500 items succeed
+          AppStorage.SetOrCreate<number>('placeholderIndex', newIndex);
+          if (!this.isMultiPick) {
+            this.currentIndex = newIndex;
+            this.photoUnEdit = this.getCurrentPhoto();
+          } else {
+            let currentSelectIndex: number = (this.photoUnEdit ? this.selectManager?.checkItemInSelectMap(this.photoUnEdit) : -1) ?? Constants.INVALID;
+            this.currentIndex = newIndex;
+            if (currentSelectIndex !== -1) {
+              this.broadCast.emit(Constants.UPDATE_SELECTED, [false, this.photoUnEdit?.uri ?? '']);
+              this.unSelectEditPhoto();
+            }
+
+            if (this.totalSelectedCount < this.maxSelectCount) {
+              this.selectStateChangeEdit();
+            }
+
+            if (this.dataSource.getSelectMode() && this.selectManager) {
+              this.dataSource.setSelectMode(this.selectManager);
+            }
+            this.photoUnEdit = this.getCurrentPhotoInTimeLine();
+          }
+          this.photoChangedByMediaItem(this.getCurrentPhotoInTimeLine());
+        } else { // is not in current album or over 500
+          // Search for the position of new image/video after edit in current 500 items failed
+          this.canEdit = false;
+
+          this.editNewUri = uri;
+          this.dataSource.enableGetData(false);
+          this.currentIndex = 0;
+          this.dataSource.getItemIndexByUri(
+            this.editNewUri,
+            (index: number): void => this.onGetItemIndexByNewEditUri(index));
+        }
+      }
+    } catch (e) {
+      Log.error(TAG, `ON_DATA_RELOADED_WITH_EDIT error ${e}`);
+    } finally {
+      this.appBroadCast.emit(BroadCastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
+      // this.broadCast.emit(BroadCastConstants.CHANGE_SWIPER_DURATION, [this.swiperDuration]);
+    }
+
+    this.dataSource.onDataReloaded();
+  }
+
+  photoChangedByMediaItem(mediaItem: MediaItem): void {
+    if (this.dataSource.getSelectMode()) {
+      this.currentIndex = this.dataSource.getDataIndex(mediaItem);
+    } else {
+      this.currentIndex = this.dataSource.getDataIndexByUri(this.photoUnEdit?.uri ?? '');
+      // 先暂时不更新编辑图片 this.photoUnEdit = mediaItem;
+    }
+
+    let currentPhoto = mediaItem;
+    this.canEdit = AppStorage.get<boolean>(Constants.KEY_OF_IS_THIRD_EDITABLE) as boolean && UiUtil.isEditedEnable(currentPhoto);
+
+    if (currentPhoto === undefined) {
+      Log.error(TAG, 'onPhotoChanged, item is undefined');
+    } else {
+      this.isSelected = this.selectManager?.isItemSelected(currentPhoto.uri) ?? false;
+      this.currentUri = currentPhoto.uri;
+
+      let dataSourceIndex = this.isSelectMode ? (this.selectManager?.getSelectItemDataSourceIndex(currentPhoto) ?? Constants.INVALID) : this.currentIndex;
+      let timelineIndex = this.dataSource.getPositionByIndex(dataSourceIndex);
+
+      if (this.geometryTransitionId !== undefined && this.geometryTransitionId !== '') {
+        AppStorage.setOrCreate<number>('placeholderIndex', timelineIndex as number);
+        this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
+        Log.info(TAG, `onPhotoChanged, index: ${this.currentIndex}, currentPhoto: ${currentPhoto.uri}, \
+        geometryTransitionId = ${this.geometryTransitionId}, placeholderIndex = ${timelineIndex}`);
+      }
+
+      if (this.totalSelectedCount < this.maxSelectCount) {
+        // 根据滑动方向 以及当前的位置 处理
+        this.broadCast.emit(this.panelId + BroadCastConstants.UPDATE_PANEL_INDEX, [this.currentUri]);
+
+        this.broadCast.emit(Constants.UPDATE_SELECTED, [true, this.currentUri]);
+      }
+    }
+  }
+
+  getCurrentPhotoInTimeLine(): MediaItem {
+    return this.dataSource.getDataInTimeLine(this.currentIndex)?.data;
+  }
+
+  selectStateChangeEdit(): void {
+    Log.info(TAG, 'change selected.');
+    let currentPhoto = this.getCurrentPhotoInTimeLine();
+    if (currentPhoto == undefined) {
+      return;
+    }
+    this.isSelected = true;
+    this.selectManager?.toggleEdit(currentPhoto.uri, true);
+    this.totalSelectedCount = this.selectManager?.getSelectedCount() ?? 0;
+
+    this.broadCast.emit(this.panelId + BroadCastConstants.UPDATE_SELECT, [currentPhoto.uri, this.isSelected]);
+  }
+
+  onGetItemIndexByNewEditUri(index: number): void {
+    Log.info(TAG, `onGetItemIndexByNewEditUri: index=${index}`);
+    if (this.editNewUri.length > 0) {
+      if (index != Constants.NOT_FOUND) { // over 500
+        Log.info(TAG, `data reloaded move to ${index}`);
+
+        AppStorage.SetOrCreate<number>('placeholderIndex', index);
+
+        this.dataSource.enableGetData(true);
+        this.dataSource.onDataReloaded();
+        let result: Results = this.dataSource.getDataInTimeLine(this.currentIndex);
+        if (result !== undefined) {
+          let mediaItem: MediaItem = result.data;
+          let pos: number = result.pos;
+          let thumbnail: string = result.thumbnail;
+          this.currentIndex = pos;
+          this.newMediaItem = mediaItem;
+          this.newMediaItem.setThumbnail(thumbnail);
+
+          this.currentUri = this.editNewUri;
+          this.editNewUri = '';
+
+          this.updateSelectItemByNewEditIndexFromDataSource(this.currentIndex);
+
+          if (this.dataSource.getSelectMode()) {
+            AppStorage.SetOrCreate<number>('placeholderIndex', Constants.INVALID);
+          }
+        } else {
+          this.waitingUpdateIndex = index;
+          this.waitingUpdateData = true;
+        }
+      } else { // other album and can not save new in this album
+        Log.error(TAG, `edit new uri ${this.editNewUri} is invalid`);
+        this.dataSource.enableGetData(true);
+        this.dataSource.onDataReloaded();
+
+
+        // 此时数据应当使用选中列表的数据
+        let dataImpl: PhotoDataImpl | undefined = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO) as PhotoDataImpl | undefined;
+        dataImpl?.getDataByUri(this.editNewUri).then((fileAsset: userFileManager.FileAsset | undefined): void => {
+          this.newMediaItem = new MediaItem(fileAsset);
+          this.newMediaItem.setThumbnail(dataImpl?.getThumbnailSafe(this.newMediaItem.uri, this.newMediaItem.path, this.newMediaItem.getDateModified()));
+
+          this.editNewUri = '';
+          this.updateSelectItemByNewEditItem(this.newMediaItem, this.currentIndex);
+
+          AppStorage.SetOrCreate<number>('placeholderIndex', Constants.INVALID);
+          this.geometryTransitionId = '';
+        });
+      }
+    }
+  }
+
+  updateSelectItemByNewEditItem(mediaItem: MediaItem, index?: number): void {
+    Log.info(TAG, `updateSelectItemByNewEditItem: index=${index}`);
+    AppStorage.SetOrCreate<number>('placeholderIndex', index as number); // timeLineIndex
+    if (!this.isMultiPick) {
+      this.currentIndex = index as number;
+      this.photoUnEdit = this.getCurrentPhoto();
+    } else {
+      let currentSelectIndex = (this.photoUnEdit ? this.selectManager?.checkItemInSelectMap(this.photoUnEdit) : -1) ?? Constants.INVALID;
+      this.currentIndex = index as number;
+      if (currentSelectIndex !== -1) {
+        this.broadCast.emit(Constants.UPDATE_SELECTED, [false, this.photoUnEdit?.uri ?? '']);
+        this.unSelectEditPhoto();
+      }
+
+      if (this.totalSelectedCount < this.maxSelectCount) {
+        this.isSelected = true;
+        this.selectManager?.toggleEditThree(mediaItem.uri, true, mediaItem);
+        this.totalSelectedCount = this.selectManager?.getSelectedCount() ?? 0;
+        this.broadCast.emit(this.panelId + BroadCastConstants.UPDATE_SELECT, [mediaItem.uri, this.isSelected]);
+      }
+
+      if (this.dataSource.getSelectMode() && this.selectManager) {
+        this.dataSource.setSelectMode(this.selectManager);
+        this.photoUnEdit = mediaItem;
+      }
+    }
+    this.photoChangedByMediaItem(mediaItem);
+    this.broadCast.emit(this.panelId + BroadCastConstants.UPDATE_SELECT, [this.photoUnEdit?.uri ?? '', this.isSelected]);
+  }
+
+  updateSelectItemByNewEditIndexFromDataSource(index: number): void {
+    Log.info(TAG, `updateSelectItemByNewEditIndexFromDataSource: index=${index}`);
+    AppStorage.SetOrCreate<number>('placeholderIndex', index); // timeLineIndex
+    if (!this.isMultiPick) {
+      this.currentIndex = index;
+      this.photoUnEdit = this.getCurrentPhoto();
+    } else {
+      let currentSelectIndex = (this.photoUnEdit ? this.selectManager?.checkItemInSelectMap(this.photoUnEdit) : -1) ?? Constants.INVALID;
+      this.currentIndex = index;
+      if (currentSelectIndex !== -1) {
+        this.broadCast.emit(Constants.UPDATE_SELECTED, [false, this.photoUnEdit?.uri ?? '']);
+        this.unSelectEditPhoto();
+      }
+
+      if (this.totalSelectedCount < this.maxSelectCount) {
+        this.selectStateChangeEdit();
+      }
+
+      if (this.dataSource.getSelectMode() && this.selectManager) {
+        this.dataSource.setSelectMode(this.selectManager);
+      }
+      this.photoUnEdit = this.getCurrentPhotoInTimeLine();
+    }
+    this.photoChangedByMediaItem(this.getCurrentPhotoInTimeLine());
+    this.broadCast.emit(this.panelId + BroadCastConstants.UPDATE_SELECT, [this.photoUnEdit.uri, this.isSelected]);
+  }
+
+  unSelectEditPhoto(): void {
+    Log.info(TAG, 'unSelectEditPhoto.');
+    this.selectManager?.toggleEdit(this.photoUnEdit?.uri ?? '', false);
+    this.isSelected = false;
+    this.totalSelectedCount = this.selectManager?.getSelectedCount() ?? 0;
+    Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
+  }
+
+  onMediaLibDataNfy(nfyInfo: MediaObserverNfyInfo): void {
+    Log.info(TAG, `onMediaLibDataNfy nfyInfo: ${JSON.stringify(nfyInfo)}`);
+    this.dataSource.onDataReloaded();
+
+    if (this.allPhotoDataSource !== undefined && this.allPhotoDataSource !== null) {
+      this.allPhotoDataSource.onDataReloaded();
+    }
+  }
+
+  onMediaLibDataChange(changeType: string): void {
+    Log.info(TAG, `onMediaLibDataChange type: ${changeType}`);
+    this.dataSource.onDataReloaded();
+
+    if (this.allPhotoDataSource !== undefined && this.allPhotoDataSource !== null) {
+      this.allPhotoDataSource.onDataReloaded();
+    }
+  }
+
   aboutToDisappear(): void {
+    Log.info(TAG, 'call aboutToDisappear');
+    // 数据清理以及重置
+    if (this.selectManager !== null) {
+      if (this.selectManager?.isPreview) {
+        this.selectManager.isPreview = false;
+        this.selectManager.clickedSet.clear();
+
+        this.selectManager.previewSet.forEach(
+          (value: string) => {
+            this.selectManager?.clickedSet.add(value);
+          });
+      }
+
+      this.selectManager?.selectedMap.forEach(
+        (value: MediaItem, key: string) => {
+          if (this.selectManager != null && !(this.selectManager.clickedSet.has(key))) {
+            if (value !== undefined) {
+              this.selectManager.indexMap.delete(value);
+            }
+            this.selectManager.selectedMap.delete(key);
+          }
+        });
+
+      // selectManager 多余数据处理
+      this.selectManager?.previewSet.clear();
+    }
+    this.selectManager?.refreshData();
+
     this.broadCast.release();
     if(this.broadCast) {
       this.broadCast.off(BrowserConstants.PULL_DOWN_END, this.pullDownFunc);
@@ -198,7 +519,8 @@ export struct ThirdSelectPhotoBrowserBase {
   onPhotoChanged(index: number): void {
     this.currentIndex = index;
     let currentPhoto = this.getCurrentPhoto();
-    if (currentPhoto == undefined) {
+    this.canEdit = (currentPhoto?.mediaType !==  UserFileManagerAccess.MEDIA_TYPE_VIDEO);
+    if (currentPhoto === undefined) {
       Log.error(TAG, 'onPhotoChanged, item is undefined');
     } else {
       this.isSelected = this.selectManager?.isItemSelected(currentPhoto.uri) ?? false;
@@ -227,8 +549,24 @@ export struct ThirdSelectPhotoBrowserBase {
     }
     this.totalSelectedCount = this.selectManager?.getSelectedCount() ?? 0;
     this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
-    this.appBroadCast.emit(BroadCastConstants.UPDATE_SELECT, [currentPhoto.uri, this.isSelected]);
+    this.broadCast.emit(BroadCastConstants.UPDATE_SELECT, [currentPhoto.uri, this.isSelected]);
     Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change geometryTransitionId ${this.geometryTransitionId}`);
+  }
+
+  selectEditPhoto(newIdIndex: number) {
+    this.currentIndex = newIdIndex;
+    this.dataSource.resetSelectMode();
+    let currentPhoto = this.getCurrentPhoto();
+    if (currentPhoto == undefined) {
+      return;
+    }
+
+    this.isSelected = false;
+
+    this.selectManager?.toggle(this.photoUnEdit?.uri ?? '', false);
+
+    this.totalSelectedCount = this.selectManager?.getSelectedCount() ?? 0;
+    Log.info(TAG, `totalSelectedCount: ${this.totalSelectedCount} after state change`);
   }
 
   selectCallback(position: number, key: string, value: boolean) {
@@ -259,6 +597,30 @@ export struct ThirdSelectPhotoBrowserBase {
   onPageHide() {
     Log.debug(TAG, 'onPageHide');
     this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, this.mTransition]);
+    // 数据清理以及重置
+
+    if (this.selectManager !== null) {
+      if (this.selectManager?.isPreview === true) {
+        this.selectManager.isPreview = false;
+        this.selectManager.clickedSet.clear();
+        for(let item of this.selectManager.previewSet) {
+          this.selectManager?.clickedSet.add(item);
+        }
+      }
+
+      this.selectManager?.selectedMap.forEach(
+        (value: MediaItem, key: string) => {
+          if (this.selectManager != null && !(this.selectManager.clickedSet.has(key))) {
+            if (value !== undefined) {
+              this.selectManager.indexMap.delete(value);
+            }
+            this.selectManager.selectedMap.delete(key);
+          }
+        });
+      // selectManager 多余数据处理
+      this.selectManager?.previewSet.clear();
+      this.selectManager?.refreshData();
+    }
   }
 
   onMenuClicked(action: Action) {
@@ -281,6 +643,19 @@ export struct ThirdSelectPhotoBrowserBase {
     } else if (action.actionID === Action.OK.actionID) {
       Log.info(TAG, 'click OK');
       this.setPickResult();
+    } else if (action.actionID === Action.EDIT.actionID) {
+      Log.info(TAG, 'click EDIT');
+      let currentPhoto = this.getCurrentPhoto();
+      if (currentPhoto == undefined || currentPhoto.size == 0) {
+        Log.warn(TAG, 'currentPhoto is undefined or size is 0.');
+        return;
+      }
+      AppStorage.setOrCreate<MediaItem | undefined>('EditorMediaItem', currentPhoto);
+      AppStorage.setOrCreate<string>('EditorAlbumUri', this.dataSource.getAlbumDataSource()?.albumUri);
+      router.pushUrl({
+        url: 'pages/EditMain'
+      })
+      this.isToEdit = true;
     }
   }
 
@@ -290,6 +665,9 @@ export struct ThirdSelectPhotoBrowserBase {
   }
 
   onBackPress() {
+    if (!this.isPageDisappear) {
+      this.selectManager?.refreshData();
+    }
     if (this.geometryTransitionEnable) {
       this.controller.finishAnimation((): void => this.onBackPressInner());
     } else {
@@ -352,12 +730,13 @@ export struct ThirdSelectPhotoBrowserBase {
         PhotoSwiper({
           dataSource: this.dataSource,
           mTransition: this.mTransition,
-          onPhotoChanged: (index: number): void => this.onPhotoChanged(index),
+          onPhotoChanged: (index: number) => this.onPhotoChanged(index),
           swiperController: this.controller,
-          verifyPhotoScaledFunc:  (matrix?: Matrix4.Matrix4Transit): void => this.verifyPhotoScaled(matrix),
+          verifyPhotoScaledFunc:  (matrix?: Matrix4.Matrix4Transit) => this.verifyPhotoScaled(matrix),
           geometryTransitionEnable: true,
           broadCast: $broadCast,
-          isRunningAnimation: $isRunningAnimation
+          isRunningAnimation: $isRunningAnimation,
+          isInSelectedMode: true
         })
 
         if (this.isHorizontal) {
@@ -417,12 +796,24 @@ export struct ThirdSelectPhotoBrowserBase {
     this.browserController.hideBrowser();
   }
 
-  private jumpBrowserCallback(name: string, item: MediaItem, isSelectMode = false) {
-    if (this.dataSource && item && this.currentUri != item.uri) {
-      let tgtIndex = this.dataSource.getDataIndex(item);
-      Log.debug(TAG, `jump to index ${tgtIndex}`)
-      this.onPhotoChanged(tgtIndex);
+  private jumpBrowserCallback(name: string, item: MediaItem, isSelectMode = false): void {
+    if (this.dataSource.getSelectMode() === false) {
+      if (this.selectManager) {
+        this.dataSource.setSelectMode(this.selectManager);
+      }
+      this.currentIndex = this.dataSource.getDataIndex(item);
+      this.onPhotoChanged(this.currentIndex);
+      this.dataSource.onDataReloaded();
+    } else {
+      if (this.dataSource && item && this.currentUri != item.uri) {
+        Log.debug(TAG, `jumpBrowserCallback jump to item.uri ${item.uri}, currentUri ${this.currentUri}`)
+        let tgtIndex = this.dataSource.getDataIndex(item);
+        Log.debug(TAG, `jump to index ${tgtIndex}`);
+        this.onPhotoChanged(tgtIndex);
+        this.dataSource.onDataReloaded();
+      }
     }
+    this.photoUnEdit = item;
   }
 
   private setPickResult(): void {
@@ -439,14 +830,20 @@ export struct ThirdSelectPhotoBrowserBase {
       return;
     }
     let uriArray: Array<string>;
+    let mediaType: number;
     if (this.isMultiPick) {
       if (this.selectManager === null) {
         Log.error(TAG, 'Select Manager empty');
         return;
       }
-      uriArray = SelectUtil.getUriArray(this.selectManager?.clickedSet ?? new Set());
+      if (this.selectManager.isPreview) {
+        uriArray = SelectUtil.getUriArray(this.selectManager?.previewSet ?? new Set());
+      } else {
+        uriArray = SelectUtil.getUriArray(this.selectManager?.clickedSet ?? new Set());
+      }
       Log.info(TAG, `uri size: ${uriArray}`);
     } else {
+      this.currentIndex = 0;
       let currentPhoto = this.getCurrentPhoto();
       if (currentPhoto == undefined) {
         return;
@@ -498,6 +895,28 @@ export struct ThirdSelectPhotoBrowserBase {
         Log.info(TAG, `terminateSelf result: ${result}, self result ${JSON.stringify(abilityResult)}`);
       });
     }
+    let selectedMap: Map<string, MediaItem> = this.selectManager?.selectedMap ?? new Map();
+    SelectUtil.getCountOfMedia(uriArray, selectedMap).then((result: number[]) => {
+      let isOrigin: boolean = AppStorage.get<boolean>(THIRD_SELECT_IS_ORIGIN) ?? false;
+      if (isOrigin == undefined) {
+        isOrigin = false;
+      }
+
+      interface Msg {
+        isOriginalChecked: boolean;
+        selectItemSize: number;
+        selectImageSize: number;
+        selectVideoSize: number;
+      }
+
+      let msg: Msg = {
+        isOriginalChecked: isOrigin,
+        selectItemSize: (uriArray === null || uriArray === undefined || uriArray.length <= 0) ? 0 : uriArray.length,
+        selectImageSize: this.isMultiPick ? result[0] : (mediaType === UserFileManagerAccess.MEDIA_TYPE_IMAGE ? 1 : 0),
+        selectVideoSize: this.isMultiPick ? result[1] : (mediaType === UserFileManagerAccess.MEDIA_TYPE_VIDEO ? 1 : 0)
+      }
+      ReportToBigDataUtil.report(BigDataConstants.SELECT_PICKER_RESULT, msg);
+    });
   }
 }
 
@@ -526,5 +945,30 @@ class ThirdBrowserDataSource extends PhotoDataSource {
   setSelectMode(manager: ThirdSelectManager) {
     this.isSelectMode = true;
     this.selectedItems = manager.getSelectItems();
+  }
+
+  getDataIndex(item: MediaItem): number {
+    if (this.isSelectMode) {
+      for (let i = 0; i < this.selectedItems.length; i++) {
+        let clicked: MediaItem = this.selectedItems[i];
+        if (clicked.uri === item.uri) {
+          return i;
+        }
+      }
+      return Constants.NOT_FOUND;
+    }
+    return super.getDataIndex(item);
+  }
+
+  getDataInTimeLine(index: number): Results {
+    return super.getData(index) as Results;
+  }
+
+  getSelectMode(): boolean {
+    return this.isSelectMode;
+  }
+
+  resetSelectMode() {
+    this.isSelectMode = false;
   }
 }

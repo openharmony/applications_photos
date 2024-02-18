@@ -12,6 +12,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+export enum MediaObserverNfyType {
+  NONE,
+  PHOTO_ADD = 1,
+  PHOTO_REMOVE,
+  PHOTO_UPDATE,
+  ALBUM_ADD = 11,
+  ALBUM_REMOVE,
+  ALBUM_UPDATE,
+  ADD_PHOTO_INTO_ALBUM = 21,
+  REMOVE_PHOTO_FROM_ALBUM,
+}
+
+export class MediaObserverNfyInfo {
+  type: number;
+  uris: Array<string>;
+  albumUris: Array<string>;
+
+  constructor() {
+    this.type = MediaObserverNfyType.NONE;
+    this.uris = [];
+    this.albumUris = [];
+  }
+}
 
 export interface MediaObserverCallback {
   onChange(mediaType: string): void;
