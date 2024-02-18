@@ -40,7 +40,7 @@ export class Thumbnail implements Releasable {
    */
   height?: number = 0;
 
-    constructor(url?: string, pixelMap?: image.PixelMap, width?: number, height?: number) {
+  constructor(url?: string, pixelMap?: image.PixelMap, width?: number, height?: number) {
     this.url = url ? url : '';
     this.pixelMap = pixelMap ? pixelMap : undefined;
     this.width = width;
