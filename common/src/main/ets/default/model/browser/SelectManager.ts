@@ -356,6 +356,8 @@ export class ThirdSelectManager extends SelectManager {
   selectedMap: Map<string, MediaItem> = new Map();
   getMediaItemFunc: Function;
   indexMap: Map<MediaItem, number> = new Map();
+  previewSet: Set<string> = new Set();
+  isPreview: boolean = false;
 
   constructor() {
     super();
@@ -440,7 +442,86 @@ export class ThirdSelectManager extends SelectManager {
         this.indexMap.delete(this.getMediaItemFunc(targetId));
       }
     }
+    if (this.isPreview) {
+      return this.togglePreview(targetId, isSelected, targetIndex);
+    }
     return super.toggle(targetId, isSelected, targetIndex);
+  }
+
+  public toggleEdit(targetId: string, isSelected: boolean, targetIndex?: number): boolean {
+    if (this.getMediaItemFunc) {
+      let containsUri = this.selectedMap.has(targetId);
+      if (isSelected && !containsUri) {
+        this.selectedMap.set(targetId, this.getMediaItemFunc(targetId));
+        this.indexMap.set(this.getMediaItemFunc(targetId), targetIndex as number);
+      }
+      if (!isSelected && containsUri) {
+        this.selectedMap.delete(targetId);
+        this.indexMap.delete(this.getMediaItemFunc(targetId));
+      }
+    }
+
+    if (this.isPreview) {
+      let result: boolean = this.togglePreview(targetId, isSelected, targetIndex);
+      // 优先将数据同步
+      this.clickedSet.clear();
+      for (let item of this.previewSet) {
+        this.clickedSet.add(item as string);
+      }
+      return result;
+    }
+
+    return super.toggle(targetId, isSelected, targetIndex);
+  }
+
+  public toggleEditThree(targetId: string, isSelected: boolean, mediaItem: MediaItem, targetIndex?: number): boolean {
+    let containsUri = this.selectedMap.has(targetId);
+    if (isSelected && !containsUri) {
+      this.selectedMap.set(targetId, mediaItem);
+      this.indexMap.set(mediaItem, targetIndex as number);
+    }
+    if (!isSelected && containsUri) {
+      this.selectedMap.delete(targetId);
+      this.indexMap.delete(mediaItem);
+    }
+
+    if (this.isPreview) {
+      let result: boolean = this.togglePreview(targetId, isSelected, targetIndex);
+      // 优先将数据同步
+      this.clickedSet.clear();
+      for (let item of this.previewSet) {
+        this.clickedSet.add(item as string);
+      }
+      return result;
+    }
+
+    return super.toggle(targetId, isSelected, targetIndex);
+  }
+
+  public togglePreview(targetId: string, isSelected: boolean, targetIndex?: number): boolean {
+    Log.info(TAG, `togglePreview ${targetId} ${isSelected} ${targetIndex}`);
+    if (targetId == null) {
+      return true;
+    }
+
+    if (isSelected) {
+      this.previewSet.add(targetId);
+      Log.info(TAG, `add targetID ${targetId}`);
+    } else {
+      this.previewSet.delete(targetId);
+    }
+    if (this.totalCount === this.getSelectedCount()) {
+      this.isAllSelected = true;
+      this.mCallbacks.has('allSelect') && this.mCallbacks.get('allSelect')?.(true);
+    } else {
+      this.isAllSelected = false;
+      this.mCallbacks.has('allSelect') && this.mCallbacks.get('allSelect')?.(false);
+    }
+    this.mCallbacks.has('updateCount') && this.mCallbacks.get('updateCount')?.(this.getSelectedCount());
+    if (targetIndex !== undefined) {
+      this.mCallbacks.has('select') && this.mCallbacks.get('select')?.(targetIndex);
+    }
+    return true;
   }
 
   public deSelectAll(): void {
@@ -464,6 +545,17 @@ export class ThirdSelectManager extends SelectManager {
     return this.indexMap.get(item) ? this.indexMap.get(item) : Constants.INVALID;
   }
 
+  public checkItemInSelectMap(item: MediaItem): number {
+    let index = -1;
+    for (let selectItem of this.selectedMap.values()) {
+      index++;
+      if (item.uri === selectItem.uri) {
+        return index;
+      }
+    }
+    return -1;
+  }
+
   public getSelectItems(): Array<MediaItem> {
     let itemArray = new Array<MediaItem>();
     if (this.selectedMap.size === 0) {
@@ -477,6 +569,10 @@ export class ThirdSelectManager extends SelectManager {
 
   public getClassName(): string {
     return 'ThirdSelectManager';
+  }
+
+  public refreshData(): void {
+    this.mCallbacks.has('refreshData') && this.mCallbacks.get('refreshData')(true);
   }
 }
 
