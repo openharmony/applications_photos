@@ -14,11 +14,16 @@
  */
 
 import type { Releasable } from '../../common/Releasable';
+import image from '@ohos.multimedia.image';
 
 /**
  * Thumbnail, view layer, data encapsulation
  */
 export class Thumbnail implements Releasable {
+  /**
+   * url
+   */
+  readonly url: string = '';
 
   /**
    * pixelMap
@@ -35,8 +40,9 @@ export class Thumbnail implements Releasable {
    */
   height?: number = 0;
 
-  constructor(pixelMap: any, width: number, height: number) {
-    this.pixelMap = pixelMap;
+    constructor(url?: string, pixelMap?: image.PixelMap, width?: number, height?: number) {
+    this.url = url ? url : '';
+    this.pixelMap = pixelMap ? pixelMap : undefined;
     this.width = width;
     this.height = height;
   }
