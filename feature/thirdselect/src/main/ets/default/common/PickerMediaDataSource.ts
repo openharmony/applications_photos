@@ -16,6 +16,8 @@
 import { MediaDataSource } from '@ohos/common/src/main/ets/default/model/browser/photo/MediaDataSource';
 import type { PhotoDataImpl } from '@ohos/common/src/main/ets/default/model/browser/photo/PhotoDataImpl';
 import type { BrowserDataInterface } from '@ohos/common/src/main/ets/default/interface/BrowserDataInterface';
+import { MediaItem } from '@ohos/common';
+import SmartPickerConstants from './SmartPickerConstants';
 
 export class PickerMediaDataSource extends MediaDataSource {
   constructor(windowSize: number, photoDataImpl?: PhotoDataImpl) {
@@ -24,6 +26,13 @@ export class PickerMediaDataSource extends MediaDataSource {
 
   changeDataImpl(dataImpl: BrowserDataInterface): void {
     this.photoDataImpl = dataImpl;
+  }
+
+  updateMediaData(requestTime: number, start: number, mediaItems: MediaItem[], onInit?: boolean): void {
+    super.updateMediaData(requestTime, start, mediaItems);
+    if (onInit) {
+      this.broadCast?.emit(SmartPickerConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH, []);
+    }
   }
 }
 
