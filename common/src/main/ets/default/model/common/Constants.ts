@@ -54,6 +54,7 @@ export class Constants {
   static readonly KEY_VIEW_DATA: string = 'data';
   static readonly ActionBarHeight: number = 56;
   static readonly APP_KEY_PHOTO_BROWSER: string = 'app_key_photo_browser';
+  static readonly APP_KEY_ALL_PHOTO_DATASOURCE: string = 'app_key_all_photo_datasource';
   static readonly APP_KEY_MENU_OPERATION_FACTORY: string = 'app_key_menu_operation_factory';
   static readonly APP_KEY_MENU_MEDIA_OBSERVER: string = 'app_key_menu_media_observer';
   static readonly APP_KEY_MENU_USER_FILE_MANAGER_OBSERVER: string = 'app_key_menu_user_file_manager_observer';
@@ -480,6 +481,7 @@ export class Constants {
   static readonly KEY_OF_PHOTO_GRID_VIEW_SCALE: string = 'photoGridViewScale';
   static readonly KEY_OF_IS_SHOW_VIDEO_MASK: string = 'isShowVideoMask';
   static readonly KEY_OF_SIDE_BAR_BOUNDARY_LINE_OPACITY: string = 'sideBarBoundaryLineOpacity';
+  static readonly KEY_OF_IS_THIRD_EDITABLE: string = 'isThirdEditAble';
 
   // Properties of image Properties component
   static readonly PHOTO_TITLE_LINE_HEIGHT: number = 19;
@@ -526,8 +528,8 @@ export class Constants {
 
   // fileAsset path data
   static readonly KEY_FILE_DATA: string = 'data';
-
   static readonly PHOTO_PICKER_SESSION_KEY: string = 'photopicker_PickerUIExtensionAbility_session';
   static readonly PHOTO_PICKER_PARAMS_KEY: string = 'photopicker_PickerUIExtensionAbility_params';
   static readonly PHOTO_PICKER_EXTENSION_WINDOW: string = 'photopicker_PickerUIExtensionAbility_extension_window';
+  static readonly UPDATE_SELECTED: string = 'update_selected';
 }
