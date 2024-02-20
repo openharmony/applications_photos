@@ -56,7 +56,6 @@
                 <filteritem type="filepath" name="product/pad/src/.*.png" desc="self developed image"/>
                 <filteritem type="filepath" name="product/phone/src/.*.png" desc="self developed image"/>
                 <filteritem type="filepath" name="gradle/wrapper/.*.jar" desc="Build Files"/>
-                <filteritem type="filepath" name="hvigor/.*.js" desc="Build Files"/>
             </filefilter>
             <filefilter name="copyrightPolicyFilter" desc="Filters for copyright header policies">
                 <filteritem type="filename" name="*.json5" desc="json file"/>
@@ -64,6 +63,7 @@
                 <filteritem type="filename" name="hvigorw" desc="Build Files"/>
                 <filteritem type="filename" name="hvigorw.bat" desc="Build Files"/>
                 <filteritem type="filename" name="hvigor-config.json5" desc="Build Files"/>
+                <filteritem type="filename" name="hvigor-wrapper.js" desc="Build Files"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for LICENSE file policies">
                 <filteritem type="filename" name="*.json5" desc="json file"/>
@@ -71,6 +71,10 @@
                 <filteritem type="filename" name="hvigorw" desc="Build Files"/>
                 <filteritem type="filename" name="hvigorw.bat" desc="Build Files"/>
                 <filteritem type="filename" name="hvigor-config.json5" desc="Build Files"/>
+                <filteritem type="filename" name="hvigor-wrapper.js" desc="Build Files"/>
+            </filefilter>
+            <filefilter name="keywordsFilter" desc="Filters for keywords file policies">
+                <filteritem type="filename" name="hvigor-wrapper.js" desc="Build Files"/>
             </filefilter>
         </filefilterlist>
     </oatconfig>
