@@ -28,7 +28,7 @@ import common from '@ohos.app.ability.common';
 const TAG: string = 'common_ShareMenuOperation';
 
 export class ShareMenuOperation implements MenuOperation, AsyncCallback<MediaItem[]> {
-  private static readonly ACTION_PHOTOS_SHARE_DATA: string = 'ability.intent.ACTION_PHOTOS_SHARE_DATA';
+  private static readonly ACTION_PHOTOS_SHARE_DATA: string = 'ability.ACTION_PHOTOS_SHARE_DATA';
   private static readonly SHARE_TYPE_IMAGE: string = 'image/*';
   private static readonly SHARE_TYPE_VIDEO: string = 'video/*';
   private static readonly SHARE_TYPE_MULTIPLE: string = 'application/*';
@@ -45,7 +45,7 @@ export class ShareMenuOperation implements MenuOperation, AsyncCallback<MediaIte
       'ability.picker.uri': '',
       'ability.picker.fileNames': [],
       'ability.picker.fileSizes': [],
-      'ability.want.params.INTENT': {
+      'ability.want.params': {
         'action': ShareMenuOperation.ACTION_PHOTOS_SHARE_DATA,
         'parameters': {
           'ability.params.streams': []
@@ -140,7 +140,7 @@ export class ShareMenuOperation implements MenuOperation, AsyncCallback<MediaIte
     newWant.parameters['ability.picker.type'] = this.getShareType();
     newWant.parameters['ability.picker.fileNames'] = this.fileNames;
     newWant.parameters['ability.picker.fileSizes'] = this.fileSizes;
-    newWant.parameters['ability.want.params.INTENT'].parameters['ability.params.streams'] = this.uris;
+    newWant.parameters['ability.want.params'].parameters['ability.params.streams'] = this.uris;
     Log.debug(TAG, `newWant: ${JSON.stringify(newWant)}`);
     return newWant;
   }
