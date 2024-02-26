@@ -419,14 +419,17 @@ export struct PhotoGridView {
     Log.info(TAG, `onDeleteStart`);
     this.deleteMode = true;
     this.isDataFreeze = true;
+    this.onModeChange();
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
     this.dataSource.freeze();
+    MediaObserver.getInstance().freezeNotify();
   }
 
   onDeleteEnd(): void {
     Log.info(TAG, `onDeleteEnd`);
     this.isDataFreeze = false;
-    this.onModeChange();
+    MediaObserver.getInstance().unfreezeNotify();
+    MediaObserver.getInstance().forceNotify();
     MediaObserver.getInstance().registerObserver(this.dataObserver);
     this.dataSource.onChange('image');
     this.dataSource.unfreeze();
@@ -452,8 +455,9 @@ export struct PhotoGridView {
   onModeChange(): void {
     Log.info(TAG, 'onModeChange');
     this.isSelectedMode = false;
+    this.isAllSelected = false;
     this.mSelectManager.onModeChange(false);
-    AppStorage.Delete(Constants.PHOTO_GRID_SELECT_MANAGER);
+    AppStorage.delete(Constants.PHOTO_GRID_SELECT_MANAGER);
   }
 
   onPageChanged(): void {
