@@ -75,7 +75,7 @@ export struct ThirdSelectPhotoBrowserBase {
   bundleName: string = '';
   isMultiPick = true;
   mTransition: string = '';
-  controller: SwiperController = new SwiperController();
+  controller?: SwiperController = new SwiperController();
   @Provide('transitionIndex') currentIndex: number = 0;
   @State currentUri: string = '';
   isFromFa: boolean = false;
@@ -177,6 +177,7 @@ export struct ThirdSelectPhotoBrowserBase {
     }
     this.dataSource.release();
     mMultimodalInputManager.unregisterListener();
+    this.controller = undefined;
   }
 
   onDataSizeChanged(size: number): void {
@@ -287,7 +288,7 @@ export struct ThirdSelectPhotoBrowserBase {
 
   onBackPress() {
     if (this.geometryTransitionEnable) {
-      this.controller.finishAnimation((): void => this.onBackPressInner());
+      this.controller?.finishAnimation((): void => this.onBackPressInner());
     } else {
       router.back({
         url: '',
