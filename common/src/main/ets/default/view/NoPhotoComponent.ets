@@ -30,16 +30,17 @@ export struct NoPhotoComponent {
   @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @State bigScreen: boolean = false;
+  private updateImageLayoutFunc: Function = (): void => this.updateImageLayout();
 
   aboutToAppear(): void {
     Log.info(TAG, `aboutToAppear`);
-    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, (): void => this.updateImageLayout());
+    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateImageLayoutFunc);
     this.updateImageLayout();
   }
 
   aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
-    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, (): void => this.updateImageLayout());
+    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateImageLayoutFunc);
   }
 
   build() {
