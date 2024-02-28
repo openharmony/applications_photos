@@ -132,7 +132,7 @@ export struct PhotoBrowserComponent {
   albumUri = '';
   // swiper currentIndex, there may not be onChanged callback during data refresh, so mediaItem cannot be saved
   @Provide('transitionIndex') currentIndex: number = Constants.NUMBER_0;
-  controller: SwiperController = new SwiperController();
+  controller?: SwiperController = new SwiperController();
   @Prop @Watch('onPageChanged') pageStatus: boolean = false;
   @StorageLink('geometryOpacity') geometryOpacity: number = 1;
   @State geometryTransitionId: string = '';
@@ -596,7 +596,7 @@ export struct PhotoBrowserComponent {
   onBackPress(): boolean {
     Log.info(TAG, 'onBackPress');
     this.appBroadCast.emit('hideBar', []);
-    this.controller.finishAnimation((): void => this.onBackPressInner());
+    this.controller?.finishAnimation((): void => this.onBackPressInner());
     return true;
   }
 
@@ -713,6 +713,8 @@ export struct PhotoBrowserComponent {
     this.broadCast.off(PhotoConstants.SET_DISABLE_SWIPE, this.setSwiperDisableFunc);
     this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED_WITH_EDIT, this.onDataReloadWithEditFunc);
     this.appBroadCast.off(BroadCastConstants.PHOTO_BROWSER_BACK_PRESS_EVENT, this.photoBrowserBackFunc);
+
+    this.controller = undefined;
   }
 
   getAlbumUriByUri(albumUri: string) {
