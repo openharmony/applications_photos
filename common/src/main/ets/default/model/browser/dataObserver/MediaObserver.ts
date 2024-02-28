@@ -22,6 +22,7 @@ const TAG: string = 'common_MediaObserver';
 
 export class MediaObserver {
   callbacks: Set<MediaObserverCallback> = new Set<MediaObserverCallback>();
+  private freezeFlag: boolean = false;
 
   static getInstance(): MediaObserver {
     if (AppStorage.get(Constants.APP_KEY_MENU_USER_FILE_MANAGER_OBSERVER) == null) {
@@ -58,8 +59,23 @@ export class MediaObserver {
     }
   }
 
+  freezeNotify(): void {
+    this.freezeFlag = true;
+  }
+
+  unfreezeNotify(): void {
+    this.freezeFlag = false;
+  }
+
+  forceNotify(): void {
+    this.sendNotify('image');
+  }
+
   sendNotify(mediaType: string) {
     Log.info(TAG, `sendNotify size: ${this.callbacks.size}`);
+    if (this.freezeFlag) {
+      return;
+    }
     for (let callback of this.callbacks) {
       callback.onChange(mediaType);
     }

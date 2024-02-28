@@ -64,6 +64,7 @@ export struct SelectPhotoBrowserView {
   mTransition: string = '';
   controller: SwiperController = new SwiperController();
   @Provide isDeleting: boolean = false;
+  @Provide canEdit: boolean = false;
 
   // swiper currentIndex, there may not be onChanged callback during data refresh, so mediaItem cannot be saved
   @Provide('transitionIndex') currentIndex: number = 0;
