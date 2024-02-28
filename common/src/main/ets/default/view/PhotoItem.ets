@@ -453,20 +453,11 @@ export struct PhotoItem {
             .onActionStart((event?: GestureEvent) => {
               Log.info(TAG, `PanGesture start offsetX:\
                                   ${vp2px((event as GestureEvent).offsetX)}, offsetY: ${vp2px((event as GestureEvent).offsetY)}`);
-              if (this.isNeedShieldPullUpEvent((event as GestureEvent))) {
-                Log.info(TAG, `shield pullup event, is album recycle = ${this.albumUri == UserFileManagerAccess.getInstance()
-                  .getSystemAlbumUri(UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE)},\
-                                    is photo scaled = ${this.isPhotoScaled}, is pull Up = ${(event as GestureEvent).offsetY < 0}`);
-                return;
-              }
               this.eventPipeline?.onMoveStart(vp2px((event as GestureEvent).offsetX), vp2px((event as GestureEvent).offsetY));
             })
             .onActionUpdate((event?: GestureEvent) => {
               Log.info(TAG, `PanGesture update offsetX:\
                                   ${vp2px((event as GestureEvent).offsetX)}, offsetY: ${vp2px((event as GestureEvent).offsetY)}`);
-              if (this.isNeedShieldPullUpEvent((event as GestureEvent))) {
-                return;
-              }
               this.eventPipeline?.onMove(vp2px((event as GestureEvent).offsetX), vp2px((event as GestureEvent).offsetY));
               this.isPullDownAndDragPhoto = this.eventPipeline?.canPullDownAndDragPhoto() ?? false;
               if (this.isPullDownAndDragPhoto && this.geometryTransitionEnable &&
@@ -478,7 +469,7 @@ export struct PhotoItem {
               Log.info(TAG, `PanGesture end offsetX:\
                                   ${vp2px((event as GestureEvent).offsetX)}, offsetY: ${vp2px((event as GestureEvent).offsetY)} \
                                   this.isOnSwiperAnimation ${this.isOnSwiperAnimation}`);
-              if (this.isOnSwiperAnimation || this.isNeedShieldPullUpEvent((event as GestureEvent))) {
+              if (this.isOnSwiperAnimation) {
                 return;
               }
               this.eventPipeline?.onMoveEnd(vp2px((event as GestureEvent).offsetX), vp2px((event as GestureEvent).offsetY));
