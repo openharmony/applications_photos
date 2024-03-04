@@ -29,7 +29,7 @@ import { SelectPhotoBrowserView } from '../view/SelectPhotoBrowserView';
 import { LEFT_BLANK } from '@ohos/thirdselect/src/main/ets/default/utils/ThirdSelectConstants';
 
 const TAG: string = 'PhotoGridPage';
-AppStorage.SetOrCreate('PhotoGridPageIndex', Constants.INVALID);
+AppStorage.setOrCreate('PhotoGridPageIndex', Constants.INVALID);
 
 // Album Page
 @Entry

@@ -215,7 +215,7 @@ struct IndexPage {
       // To help AlbumSetPage show copy or move dialog
       if (AppStorage.get<boolean>(Constants.IS_SHOW_MOVE_COPY_DIALOG)) {
         this.appBroadCast.emit(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, [this.currentIndex]);
-        AppStorage.SetOrCreate(Constants.IS_SHOW_MOVE_COPY_DIALOG, false);
+        AppStorage.setOrCreate(Constants.IS_SHOW_MOVE_COPY_DIALOG, false);
       }
     }
     this.pageStatus = true;
@@ -313,8 +313,8 @@ struct IndexPage {
           .barHeight(Constants.NUMBER_0)
           .flexGrow(Constants.NUMBER_1)
           .onChange((index: number) => {
-            AppStorage.SetOrCreate<string>(Constants.KEY_OF_ALBUM_ID, '');
-            AppStorage.SetOrCreate<string>(Constants.KEY_OF_ALBUM_URI, '');
+            AppStorage.setOrCreate<string>(Constants.KEY_OF_ALBUM_ID, '');
+            AppStorage.setOrCreate<string>(Constants.KEY_OF_ALBUM_URI, '');
             this.resetTabState(this.currentIndex)
             this.onTabChanged(index);
             Log.info(TAG, `Switch to Tab ${this.currentIndex}.`)

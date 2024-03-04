@@ -30,7 +30,7 @@ export class DataStoreUtil {
 
   public static getInstance(): DataStoreUtil {
     if (AppStorage.get(Constants.FROM_DATA_STORE_UTIL) == null) {
-      AppStorage.SetOrCreate(Constants.FROM_DATA_STORE_UTIL, new DataStoreUtil());
+      AppStorage.setOrCreate(Constants.FROM_DATA_STORE_UTIL, new DataStoreUtil());
     }
     return AppStorage.get(Constants.FROM_DATA_STORE_UTIL);
   }

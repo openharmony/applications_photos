@@ -60,7 +60,7 @@ export class MediaDataManager {
   async initShowName(): Promise<number> {
     let isShowKey = Constants.FROM_PLAYBACK_ISSHOWNAME;
     let isShow = await dataStore.getData(isShowKey, 1) as number;
-    AppStorage.SetOrCreate(Constants.FROM_PLAYBACK_ISSHOWNAME, isShow);
+    AppStorage.setOrCreate(Constants.FROM_PLAYBACK_ISSHOWNAME, isShow);
     Log.debug(TAG, `initShowName dataStoreData:${isShow}` +
       `storageData:${AppStorage.Get(Constants.FROM_PLAYBACK_ISSHOWNAME)}`);
     return isShow;

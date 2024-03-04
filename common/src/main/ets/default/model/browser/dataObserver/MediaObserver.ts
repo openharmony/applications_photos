@@ -26,7 +26,7 @@ export class MediaObserver {
 
   static getInstance(): MediaObserver {
     if (AppStorage.get(Constants.APP_KEY_MENU_USER_FILE_MANAGER_OBSERVER) == null) {
-      AppStorage.SetOrCreate(Constants.APP_KEY_MENU_USER_FILE_MANAGER_OBSERVER, new MediaObserver());
+      AppStorage.setOrCreate(Constants.APP_KEY_MENU_USER_FILE_MANAGER_OBSERVER, new MediaObserver());
     }
     return AppStorage.get(Constants.APP_KEY_MENU_USER_FILE_MANAGER_OBSERVER);
   }

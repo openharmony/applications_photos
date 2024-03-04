@@ -87,17 +87,17 @@ export struct AlbumSelect {
       this.newAlbumName = param.albumName;
       this.currentAlbumUri = param.albumUri;
       if (param.isNewAlbum) {
-        AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, true);
+        AppStorage.setOrCreate(Constants.APP_KEY_NEW_ALBUM, true);
       } else {
-        AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM, false);
+        AppStorage.setOrCreate(Constants.APP_KEY_NEW_ALBUM, false);
       }
     }
     this.albums.setBlackList([this.currentAlbumUri, UserFileManagerAccess.getInstance()
       .getSystemAlbumUri(UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE)]);
     Log.info(TAG, `the album uri is: ${this.currentAlbumUri}`);
-    AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_TARGET, this.newAlbumName);
-    AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_TARGET_URI, this.currentAlbumUri);
-    AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.mSelectManager);
+    AppStorage.setOrCreate(Constants.APP_KEY_NEW_ALBUM_TARGET, this.newAlbumName);
+    AppStorage.setOrCreate(Constants.APP_KEY_NEW_ALBUM_TARGET_URI, this.currentAlbumUri);
+    AppStorage.setOrCreate(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.mSelectManager);
     TraceControllerUtils.finishTrace('AlbumSetPageAboutToAppear');
   }
 

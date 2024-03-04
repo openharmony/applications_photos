@@ -98,18 +98,18 @@ export struct AlbumGridItemNewStyle {
       duration: albumToPhotoGridDuration,
       curve: Curve.Friction,
     }, () => {
-      AppStorage.SetOrCreate<boolean>(Constants.KEY_OF_IS_SHOW_PHOTO_GRID_VIEW,!this.isShowPhotoGridView);
-      AppStorage.SetOrCreate<number>(Constants.KEY_OF_SELECTED_ALBUM_INDEX, this.keyIndex ? this.keyIndex : -1);
-      AppStorage.SetOrCreate<string>(Constants.KEY_OF_SELECTED_ALBUM_URI, this.item.uri);
+      AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_SHOW_PHOTO_GRID_VIEW,!this.isShowPhotoGridView);
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_SELECTED_ALBUM_INDEX, this.keyIndex ? this.keyIndex : -1);
+      AppStorage.setOrCreate<string>(Constants.KEY_OF_SELECTED_ALBUM_URI, this.item.uri);
     })
     animateTo({
       duration: albumActionBarDuration,
       curve: Curve.Sharp
     }, () => {
       if (AppStorage.get<string>('deviceType') !== Constants.PC_DEVICE_TYPE) {
-        AppStorage.SetOrCreate<number>(Constants.KEY_OF_ALBUM_OPACITY, 0);
+        AppStorage.setOrCreate<number>(Constants.KEY_OF_ALBUM_OPACITY, 0);
       }
-      AppStorage.SetOrCreate<number>(Constants.KEY_OF_ALBUM_ACTIONBAR_OPACITY, 0);
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_ALBUM_ACTIONBAR_OPACITY, 0);
     })
     animateTo({
       duration: albumActionBarDuration,
@@ -117,21 +117,21 @@ export struct AlbumGridItemNewStyle {
       delay: BrowserConstants.LINK_IN_PHOTO_GRID_DELAY,
     }, () => {
       if (AppStorage.get<string>('deviceType') !== Constants.PC_DEVICE_TYPE) {
-        AppStorage.SetOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 1);
+        AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 1);
       }
     })
     animateTo({
       duration: albumToPhotoGridScaleDuration,
       curve: Curve.Friction
     }, () => {
-      AppStorage.SetOrCreate<number>(Constants.KEY_OF_ALBUM_OTHER_SCALE, BrowserConstants.Album_Scale);
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_ALBUM_OTHER_SCALE, BrowserConstants.Album_Scale);
     })
     animateTo({
       duration: photoGridActionBarDuration,
       delay: photoGridActionBarDelay,
       curve: Curve.Sharp
     }, () => {
-      AppStorage.SetOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_ACTIONBAR_OPACITY, 1);
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_ACTIONBAR_OPACITY, 1);
     })
 
     if (AppStorage.get<string>('deviceType') !== Constants.PC_DEVICE_TYPE) {
@@ -140,20 +140,20 @@ export struct AlbumGridItemNewStyle {
         delay: BrowserConstants.LINK_IN_PHOTO_GRID_DELAY,
         curve: Curve.Sharp
       }, () => {
-        AppStorage.SetOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 1);
+        AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 1);
       })
       animateTo({
         duration: BrowserConstants.PC_LINK_ALBUM_DURATION,
         curve: Curve.Sharp
       }, () => {
-        AppStorage.SetOrCreate<number>(Constants.KEY_OF_ALBUM_OPACITY, 0);
+        AppStorage.setOrCreate<number>(Constants.KEY_OF_ALBUM_OPACITY, 0);
       })
       animateTo({
         duration: BrowserConstants.PC_LINK_IN_SIDEBAR_DURATION,
         curve: Curve.Sharp
       }, () => {
-        AppStorage.SetOrCreate<number>(Constants.KEY_OF_SIDE_BAR_OPACITY, 0);
-        AppStorage.SetOrCreate<number>(Constants.KEY_OF_SIDE_BAR_BOUNDARY_LINE_OPACITY, 0);
+        AppStorage.setOrCreate<number>(Constants.KEY_OF_SIDE_BAR_OPACITY, 0);
+        AppStorage.setOrCreate<number>(Constants.KEY_OF_SIDE_BAR_BOUNDARY_LINE_OPACITY, 0);
       })
     }
 
@@ -220,8 +220,8 @@ export struct AlbumGridItemNewStyle {
 
       Log.info(TAG, 'updateCardSize gridWidth : ' + this.gridWidth + ',  gridHeight : ' + this.gridHeight);
 
-      AppStorage.SetOrCreate(Constants.KEY_OF_ALBUM_HEIGHT, this.gridHeight);
-      AppStorage.SetOrCreate(Constants.KEY_OF_ALBUM_WIDTH, this.gridWidth);
+      AppStorage.setOrCreate(Constants.KEY_OF_ALBUM_HEIGHT, this.gridHeight);
+      AppStorage.setOrCreate(Constants.KEY_OF_ALBUM_WIDTH, this.gridWidth);
     });
 
   }
@@ -503,8 +503,8 @@ export struct AlbumGridItemNewStyle {
       } else if (!this.isShowPhotoGridView) {
         let albumInfo: ParamAlbumInfo = { item: JSON.stringify(this.item) }
         AppStorage.setOrCreate<ParamAlbumInfo>(Constants.KEY_OF_PHOTO_GRID_VIEW_ALBUM_ITEM, albumInfo);
-        AppStorage.SetOrCreate(Constants.KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT, this.transitionId);
-        AppStorage.SetOrCreate(Constants.KEY_OF_ALBUM_URI, this.item.uri);
+        AppStorage.setOrCreate(Constants.KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT, this.transitionId);
+        AppStorage.setOrCreate(Constants.KEY_OF_ALBUM_URI, this.item.uri);
         this.doAnimation();
       } else {
         Log.info(TAG, `PhotoGridView is show, has no focus, Users need to manually activate the focus.`);

@@ -216,7 +216,7 @@ export class SelectManager {
     } else {
       this.isAllSelected = true;
     }
-    AppStorage.SetOrCreate('focusUpdate', true);
+    AppStorage.setOrCreate('focusUpdate', true);
     if (shouldCallSelectALl) {
       this.mCallbacks.has('allSelect') && this.mCallbacks.get('allSelect')(true);
     }
@@ -231,7 +231,7 @@ export class SelectManager {
     this.inverseSelection = false;
     this.isAllSelected = false;
     this.clickedSet.clear();
-    AppStorage.SetOrCreate('focusUpdate', true);
+    AppStorage.setOrCreate('focusUpdate', true);
     this.mCallbacks.has('allSelect') && this.mCallbacks.get('allSelect')(false);
     this.mCallbacks.has('updateCount') && this.mCallbacks.get('updateCount')(this.getSelectedCount());
   }
@@ -253,7 +253,7 @@ export class SelectManager {
       this.inverseSelection = false;
       this.isAllSelected = false;
       this.clickedSet.clear();
-      AppStorage.SetOrCreate('focusUpdate', true);
+      AppStorage.setOrCreate('focusUpdate', true);
       this.mCallbacks.has('allSelect') && this.mCallbacks.get('allSelect')(false);
       this.mCallbacks.has('updateCount') && this.mCallbacks.get('updateCount')(this.getSelectedCount());
     }
@@ -593,7 +593,7 @@ export class TimelineSelectManager extends SelectManager {
     } else {
       this.isAllSelected = true;
     }
-    AppStorage.SetOrCreate('focusUpdate', true);
+    AppStorage.setOrCreate('focusUpdate', true);
     this.mCallbacks.has('updateGroupCount') && this.mCallbacks.get('updateGroupCount')();
     this.mCallbacks.has('allSelect') && this.mCallbacks.get('allSelect')(true);
     this.mCallbacks.has('updateCount') && this.mCallbacks.get('updateCount')(this.getSelectedCount());
@@ -603,7 +603,7 @@ export class TimelineSelectManager extends SelectManager {
     this.inverseSelection = false;
     this.isAllSelected = false;
     this.clearEntryArray();
-    AppStorage.SetOrCreate('focusUpdate', true);
+    AppStorage.setOrCreate('focusUpdate', true);
     this.mCallbacks.has('updateGroupCount') && this.mCallbacks.get('updateGroupCount')();
     this.mCallbacks.has('allSelect') && this.mCallbacks.get('allSelect')(false);
     this.mCallbacks.has('updateCount') && this.mCallbacks.get('updateCount')(this.getSelectedCount());
@@ -696,7 +696,7 @@ export class TimelineSelectManager extends SelectManager {
       this.inverseSelection = false;
       this.isAllSelected = false;
       this.clearEntryArray();
-      AppStorage.SetOrCreate('focusUpdate', true);
+      AppStorage.setOrCreate('focusUpdate', true);
       this.mCallbacks.has('updateGroupCount') && this.mCallbacks.get('updateGroupCount')();
       this.mCallbacks.has('allSelect') && this.mCallbacks.get('allSelect')(false);
       this.mCallbacks.has('updateCount') && this.mCallbacks.get('updateCount')(this.getSelectedCount());

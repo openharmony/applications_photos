@@ -35,7 +35,7 @@ export struct Histogram {
 
   aboutToDisappear() {
     Log.info(TAG, 'histogram aboutToDisappear, ready status reset');
-    AppStorage.SetOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.PREPARING);
+    AppStorage.setOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.PREPARING);
     HistogramManager.getInstance().clear();
     WorkerThreadPool.getInstance().stop();
   }

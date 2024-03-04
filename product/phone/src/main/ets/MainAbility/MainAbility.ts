@@ -90,7 +90,7 @@ export default class MainAbility extends Ability {
 
   parseWantParameter(isOnNewWant: boolean, want: Want): void {
     Log.info(TAG, `Application isOnNewWant=${isOnNewWant}, want=${JSON.stringify(want)}`);
-    AppStorage.SetOrCreate('placeholderIndex', -1);
+    AppStorage.setOrCreate('placeholderIndex', -1);
     this.formCurrentUri = '';
     this.formAlbumUri = '';
     let wantParam: { [key: string]: Object } = want.parameters;
@@ -98,7 +98,7 @@ export default class MainAbility extends Ability {
     if (wantParamUri === Constants.WANT_PARAM_URI_DETAIL) {
       isFromCamera = true;
       if (isOnNewWant) {
-        AppStorage.SetOrCreate('entryFromHapCamera', Constants.ENTRY_FROM_CAMERA);
+        AppStorage.setOrCreate('entryFromHapCamera', Constants.ENTRY_FROM_CAMERA);
         AppStorage.get<window.WindowStage>('photosWindowStage').loadContent('pages/PhotoBrowser', (err, data) => {
           if (err.code) {
             Log.error(TAG, 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
@@ -107,7 +107,7 @@ export default class MainAbility extends Ability {
           Log.info(TAG, 'Succeeded in loading the content. Data: %{public}s', JSON.stringify(data) ?? '');
         });
       } else {
-        AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_CAMERA);
+        AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_CAMERA);
       }
     } else if (wantParamUri === Constants.WANT_PARAM_URI_SELECT_SINGLE) {
       mCallerBundleName = wantParam[Constants.KEY_WANT_PARAMETERS_CALLER_BUNDLE_NAME] as string;
@@ -115,7 +115,7 @@ export default class MainAbility extends Ability {
       // Max select count must be 1 in single select mode
       mMaxSelectCount = Constants.NUMBER_1;
       mFilterMediaType = wantParam?.filterMediaType as string;
-      AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_SINGLE_SELECT);
+      AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_SINGLE_SELECT);
       cameraAble = (wantParam?.isPhotoTakingSupported as boolean) ?? true;
       editAble = (wantParam?.isEditSupported as boolean) ?? true;
       SmartPickerUtils.initIfNeeded(this.context, want, this.localStorage);
@@ -123,43 +123,43 @@ export default class MainAbility extends Ability {
       mCallerBundleName = wantParam[Constants.KEY_WANT_PARAMETERS_CALLER_BUNDLE_NAME] as string;
       mMaxSelectCount = wantParam?.maxSelectCount as number;
       mFilterMediaType = wantParam?.filterMediaType as string;
-      AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_MULTIPLE_SELECT);
+      AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_MULTIPLE_SELECT);
       cameraAble = (wantParam?.isPhotoTakingSupported as boolean) ?? true;
       editAble = (wantParam?.isEditSupported as boolean) ?? true;
       SmartPickerUtils.initIfNeeded(this.context, want, this.localStorage);
     } else if (wantParamUri === Constants.WANT_PARAM_URI_FORM) {
       isFromCard = true;
-      AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_FORM_ABILITY);
-      AppStorage.SetOrCreate('form_albumUri', wantParam?.albumUri);
-      AppStorage.SetOrCreate('form_currentUri', wantParam?.currentUri);
-      AppStorage.SetOrCreate('form_displayName', wantParam?.displayName);
+      AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_FORM_ABILITY);
+      AppStorage.setOrCreate('form_albumUri', wantParam?.albumUri);
+      AppStorage.setOrCreate('form_currentUri', wantParam?.currentUri);
+      AppStorage.setOrCreate('form_displayName', wantParam?.displayName);
       this.formAlbumUri = wantParam?.albumUri as string;
       this.formCurrentUri = wantParam?.currentUri as string;
     } else if (wantParam?.formId) {
-      AppStorage.SetOrCreate('FASetting_FormId', wantParam.formId);
-      AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_FORM_FORM_EDITOR);
+      AppStorage.setOrCreate('FASetting_FormId', wantParam.formId);
+      AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_FORM_FORM_EDITOR);
     } else if (want.action === wantConstant.Action.ACTION_VIEW_DATA) {
       isShowMenuFromThirdView = wantParam.isShowMenu as boolean;
-      AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_VIEW_DATA);
+      AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_VIEW_DATA);
       if (want.uri) {
-        AppStorage.SetOrCreate('viewDataUri', want.uri);
+        AppStorage.setOrCreate('viewDataUri', want.uri);
       } else {
-        AppStorage.SetOrCreate('viewDataUri', wantParamUri);
+        AppStorage.setOrCreate('viewDataUri', wantParamUri);
       }
       if (wantParam?.albumUri) {
-        AppStorage.SetOrCreate('viewDataAlbumUri', wantParam.albumUri);
+        AppStorage.setOrCreate('viewDataAlbumUri', wantParam.albumUri);
       } else {
-        AppStorage.SetOrCreate('viewDataAlbumUri', '');
+        AppStorage.setOrCreate('viewDataAlbumUri', '');
       }
       if (wantParam?.viewIndex) {
-        AppStorage.SetOrCreate('viewDataIndex', wantParam.viewIndex);
+        AppStorage.setOrCreate('viewDataIndex', wantParam.viewIndex);
       } else {
-        AppStorage.SetOrCreate('viewDataIndex', '');
+        AppStorage.setOrCreate('viewDataIndex', '');
       }
     } else if (wantParamUri === Constants.WANT_PARAM_URI_FORM_NONE) {
-      AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_FORM_DEFAULT_ABILITY);
+      AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_FORM_DEFAULT_ABILITY);
     } else {
-      AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE);
+      AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE);
     }
   }
 
@@ -179,20 +179,20 @@ export default class MainAbility extends Ability {
     // Main window is created, set main page for this ability
     Log.info(TAG, 'Application onWindowStageCreate');
     AppStorage.setOrCreate('photosWindowStage', windowStage);
-    AppStorage.SetOrCreate('deviceType',
+    AppStorage.setOrCreate('deviceType',
     deviceInfo.deviceType == ('phone' || 'default') ? Constants.DEFAULT_DEVICE_TYPE : Constants.PAD_DEVICE_TYPE);
     ScreenManager.getInstance().on(ScreenManager.ON_LEFT_BLANK_CHANGED, data => {
       Log.info(TAG, `onleftBlankChanged: ${data}`);
-      AppStorage.SetOrCreate('leftBlank', data);
+      AppStorage.setOrCreate('leftBlank', data);
     });
     ScreenManager.getInstance().on(ScreenManager.ON_SPLIT_MODE_CHANGED, mode => {
       Log.info(TAG, `onSplitModeChanged: ${JSON.stringify(mode)}`);
       ReportToBigDataUtil.report(BigDataConstants.SPLIT_SCREEN_ID, null);
-      AppStorage.SetOrCreate('isSplitMode', mode);
+      AppStorage.setOrCreate('isSplitMode', mode);
     });
     Log.info(TAG, 'Application onCreate finish');
     windowStage.getMainWindow().then((win) => {
-      AppStorage.SetOrCreate('mainWindow', win);
+      AppStorage.setOrCreate('mainWindow', win);
       ScreenManager.getInstance().getAvoidArea();
       ScreenManager.getInstance().initializationSize(win).then(() => {
         ScreenManager.getInstance().initWindowMode();
@@ -285,7 +285,7 @@ export default class MainAbility extends Ability {
           new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
         dataSource.setAlbumUri(this.formAlbumUri);
         dataSource.initialize();
-        AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, dataSource);
+        AppStorage.setOrCreate(Constants.APP_KEY_PHOTO_BROWSER, dataSource);
       } else {
         let dataSource: MediaDataSource =
           new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
@@ -296,7 +296,7 @@ export default class MainAbility extends Ability {
         const DELAY_TIME: number = 50;
         let intervalId = setInterval(() => {
           if (dataSource.getRawData(0) || times >= COUNT_NUM) {
-            AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, dataSource);
+            AppStorage.setOrCreate(Constants.APP_KEY_PHOTO_BROWSER, dataSource);
             let options = {
               url: 'pages/PhotoBrowser',
               params: {
@@ -334,7 +334,7 @@ export default class MainAbility extends Ability {
       };
       router.replaceUrl(options);
     }
-    AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE)
+    AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE)
   }
 
   private initPhotosPref(): void {
@@ -342,11 +342,11 @@ export default class MainAbility extends Ability {
     data_preferences.getPreferences(AppStorage.get<common.UIAbilityContext>('photosAbilityContext'), Constants.PHOTOS_STORE_KEY)
       .then((pref: data_preferences.Preferences) => {
         pref.get(Constants.IS_FIRST_TIME_DELETE, true).then((data: boolean) => {
-          AppStorage.SetOrCreate<boolean>(Constants.IS_FIRST_TIME_DELETE, data);
+          AppStorage.setOrCreate<boolean>(Constants.IS_FIRST_TIME_DELETE, data);
         }).catch((err) => {
           Log.error(TAG, `Failed to get whether first time delete, err: ${err}`);
         });
-        AppStorage.SetOrCreate<data_preferences.Preferences>(Constants.PHOTOS_STORE_KEY, pref)
+        AppStorage.setOrCreate<data_preferences.Preferences>(Constants.PHOTOS_STORE_KEY, pref)
       })
       .catch((err) => {
         Log.error(TAG, 'Failed to get preferences.');

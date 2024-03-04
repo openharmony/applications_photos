@@ -41,7 +41,7 @@ export class PhotoEditorManager {
 
   static getInstance(): PhotoEditorManager {
     if (AppStorage.get(Constants.PHOTO_EDITOR_MANAGER) == null) {
-      AppStorage.SetOrCreate(Constants.PHOTO_EDITOR_MANAGER, new PhotoEditorManager());
+      AppStorage.setOrCreate(Constants.PHOTO_EDITOR_MANAGER, new PhotoEditorManager());
     }
     return AppStorage.get(Constants.PHOTO_EDITOR_MANAGER);
   }

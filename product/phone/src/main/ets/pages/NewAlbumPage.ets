@@ -44,7 +44,7 @@ import { PhotoBrowserComponent } from '../view/PhotoBrowserComponent';
 import { SelectPhotoBrowserView } from '../view/SelectPhotoBrowserView';
 
 const TAG: string = 'NewAlbumPage';
-AppStorage.SetOrCreate('PhotoGridPageIndex', Constants.INVALID);
+AppStorage.setOrCreate('PhotoGridPageIndex', Constants.INVALID);
 
 interface Params {
   item: string;
@@ -108,7 +108,7 @@ export struct NewAlbumPage {
       return;
     }
     Log.info(TAG, `jump to photo browser at index: ${targetIndex}`);
-    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
+    AppStorage.setOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
     interface Params {
       position: number;
       transition: string;
@@ -125,8 +125,8 @@ export struct NewAlbumPage {
   private jumpThirdPhotoBrowser(name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void {
     let targetIndex = this.dataSource.getDataIndex(item);
     Log.info(TAG, `jump to photo browser, index: ${targetIndex}, transition: ${name}`);
-    AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
-    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
+    AppStorage.setOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
+    AppStorage.setOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
     interface Params {
       position: number;
       transition: string;
@@ -180,7 +180,7 @@ export struct NewAlbumPage {
       }
       Log.info(TAG, `onMenuClicked, action: ${action.actionID} newAlbum: ${this.isNewAlbum}`);
       if (this.isNewAlbum) {
-        AppStorage.SetOrCreate(Constants.IS_SHOW_MOVE_COPY_DIALOG, true);
+        AppStorage.setOrCreate(Constants.IS_SHOW_MOVE_COPY_DIALOG, true);
         let url = 'pages/index';
         router.back({
           url: url,
@@ -265,7 +265,7 @@ export struct NewAlbumPage {
     this.mSelectManager = AppStorage.Get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
     if (this.mSelectManager == null) {
       this.mSelectManager = new SelectManager();
-      AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.mSelectManager);
+      AppStorage.setOrCreate(Constants.APP_KEY_NEW_ALBUM_SELECTED, this.mSelectManager);
     }
     let param: Params = router.getParams() as Params;
     if (param != null) {
@@ -273,7 +273,7 @@ export struct NewAlbumPage {
       let item: AlbumInfo = JSON.parse(param.item) as AlbumInfo;
       this.title = item.albumName;
       this.dataSource.setAlbumUri(item.uri);
-      AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_SOURCE, item.uri);
+      AppStorage.setOrCreate(Constants.APP_KEY_NEW_ALBUM_SOURCE, item.uri);
     } else {
       this.title = '';
       this.dataSource.setAlbumUri("");
@@ -291,7 +291,7 @@ export struct NewAlbumPage {
     this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onLoadingFinishedFunc);
 
     this.appBroadCast.on(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorStateFunc);
-    AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
+    AppStorage.setOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
     this.mSelectManager.registerCallback('allSelect', (newState: boolean) => {
       Log.info(TAG, `allSelect ${newState}`);
       this.isDataFreeze = AppStorage.get<boolean>(Constants.IS_DATA_FREEZE) as boolean;

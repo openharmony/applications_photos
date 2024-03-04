@@ -54,7 +54,7 @@ export class RemoveMenuOperation implements MenuOperation, MenuOperationCallback
   }
 
   setConfirmText(): void {
-    AppStorage.SetOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_remove'));
+    AppStorage.setOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_remove'));
   }
 
   onCompleted(): void {

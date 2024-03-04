@@ -270,7 +270,7 @@ export struct PhotoBrowserComponent {
       }
       this.updateMenu();
       this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + 'false';
-      AppStorage.SetOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
+      AppStorage.setOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
     } else if (actionID === Action.DELETE.actionID) {
       if (currentPhoto == undefined) {
         Log.warn(TAG, 'currentPhoto is undefined.');
@@ -397,9 +397,9 @@ export struct PhotoBrowserComponent {
       Log.error(TAG, 'onPhotoChanged, item is undefined');
     } else {
       let timelineIndex = this.dataSource.getPositionByIndex(index);
-      AppStorage.SetOrCreate<number>('placeholderIndex', timelineIndex);
+      AppStorage.setOrCreate<number>('placeholderIndex', timelineIndex);
       this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + 'false';
-      AppStorage.SetOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
+      AppStorage.setOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
       Log.debug(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri}, \
         placeholderIndex ${AppStorage.get<number>('placeholderIndex') as number},\
         geometryTransitionBrowserId ${this.geometryTransitionId}, this.mTransition ${this.mTransition}, \
@@ -742,7 +742,7 @@ export struct PhotoBrowserComponent {
       param = {
         pageFrom: Constants.ENTRY_FROM.CAMERA
       } as ParamBrowser;
-      AppStorage.SetOrCreate('entryFromHapCamera', Constants.ENTRY_FROM_NONE);
+      AppStorage.setOrCreate('entryFromHapCamera', Constants.ENTRY_FROM_NONE);
     }
 
     if (param) {
@@ -764,7 +764,7 @@ export struct PhotoBrowserComponent {
         this.albumUri = "";
         this.jumpSourceToMain = JumpSourceToMain.CAMERA;
         MediaObserver.getInstance().registerObserver(this.dataObserver);
-        AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE);
+        AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE);
       } else if (this.pageFrom == Constants.ENTRY_FROM.CARD) {
         this.dataSource = new PhotoDataSource();
         this.albumUri = param.albumUri;
@@ -863,7 +863,7 @@ export struct PhotoBrowserComponent {
         this.albumUri = UserFileManagerAccess.getInstance()
           .getSystemAlbumUri(UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE);
       }
-      AppStorage.SetOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE);
+      AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE);
       let albumDataSource: MediaDataSource = AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource;
       if (albumDataSource) {
         this.dataSource.setAlbumDataSource(albumDataSource);

@@ -30,8 +30,8 @@ export default class ServiceExtAbility extends Extension {
     Log.info(TAG, 'ServiceExtAbility want param:' + JSON.stringify(want));
     AppStorage.setOrCreate('windowClass', null);
     AppStorage.setOrCreate('photosAbilityContext', this.context);
-    AppStorage.SetOrCreate(Constants.SCREEN_SIDEBAR, false);
-    AppStorage.SetOrCreate('deviceType', Constants.PC_DEVICE_TYPE);
+    AppStorage.setOrCreate(Constants.SCREEN_SIDEBAR, false);
+    AppStorage.setOrCreate('deviceType', Constants.PC_DEVICE_TYPE);
   }
 
   onReconnect(want: Want): void {
@@ -70,8 +70,8 @@ export default class ServiceExtAbility extends Extension {
     if (!uris?.length) {
       return;
     }
-    AppStorage.SetOrCreate('uris', uris);
-    AppStorage.SetOrCreate('appName', appName);
+    AppStorage.setOrCreate('uris', uris);
+    AppStorage.setOrCreate('appName', appName);
     this.windowClass = AppStorage.get('windowClassg');
     let config: Window.Configuration = {
       name: 'DeleteDialog ' + appName + Math.random(), windowType: Window.WindowType.TYPE_DIALOG, ctx: this.context
@@ -97,7 +97,7 @@ export default class ServiceExtAbility extends Extension {
       Log.info(TAG, 'requestInfo param:' + JSON.stringify(requestInfo));
 
       let requestCallback: dialogRequest.RequestCallback = dialogRequest.getRequestCallback(want);
-      AppStorage.SetOrCreate('requestCallback', requestCallback);
+      AppStorage.setOrCreate('requestCallback', requestCallback);
 
       this.windowClass.bindDialogTarget(requestInfo, (): void => { //绑定模态窗口与目标窗口
         Log.info(TAG, 'Dialog Window Need Destroy.');

@@ -30,7 +30,7 @@ export class BroadCastManager {
 
   public static getInstance(): BroadCastManager {
     if (AppStorage.get(Constants.APP_KEY_EVENT_BUS) == null) {
-      AppStorage.SetOrCreate(Constants.APP_KEY_EVENT_BUS, new BroadCastManager());
+      AppStorage.setOrCreate(Constants.APP_KEY_EVENT_BUS, new BroadCastManager());
     }
     return AppStorage.get(Constants.APP_KEY_EVENT_BUS);
   }

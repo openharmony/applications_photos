@@ -32,7 +32,7 @@ export struct TimelineTitleComponent {
   }
 
   selectStateChange() {
-    AppStorage.SetOrCreate('focusUpdate', true);
+    AppStorage.setOrCreate('focusUpdate', true);
     Log.info(TAG, 'change selected.');
     this.broadCast.emit(BroadCastConstants.GROUP_SELECT, [this.mPosition]);
   }

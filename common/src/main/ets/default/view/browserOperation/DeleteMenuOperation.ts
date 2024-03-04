@@ -62,9 +62,9 @@ export class DeleteMenuOperation implements MenuOperation, MenuOperationCallback
 
   setConfirmText(): void {
     if (!this.isTrash) {
-      AppStorage.SetOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_delete_permanently'));
+      AppStorage.setOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_delete_permanently'));
     } else {
-      AppStorage.SetOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_delete'));
+      AppStorage.setOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_delete'));
     }
   }
 

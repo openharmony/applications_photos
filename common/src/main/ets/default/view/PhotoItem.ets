@@ -122,7 +122,7 @@ export struct PhotoItem {
 
   private saveScale(): void {
     if (this.currentIndex == this.mPosition) {
-      AppStorage.SetOrCreate(PhotoConstants.MATRIX, this.matrix);
+      AppStorage.setOrCreate(PhotoConstants.MATRIX, this.matrix);
     }
   }
 
@@ -613,7 +613,7 @@ export struct PhotoItem {
       // Calculate image opacity by distance Y, min opacity is 0
       let calcTouchOpacity = Constants.NUMBER_1 - distanceY * PhotoConstants.DRAG_OPACITY;
       let touchOpacity = calcTouchOpacity > Constants.NUMBER_0 ? calcTouchOpacity : Constants.NUMBER_0;
-      AppStorage.SetOrCreate<number>('geometryOpacity', touchOpacity);
+      AppStorage.setOrCreate<number>('geometryOpacity', touchOpacity);
     })
   }
 

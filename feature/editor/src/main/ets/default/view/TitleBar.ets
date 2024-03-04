@@ -84,7 +84,7 @@ export struct TitleBar {
       UiUtil.showToast($r('app.string.edit_photo_save_fail'));
       router.back();
     } else {
-      AppStorage.SetOrCreate(BroadCastConstants.PHOTO_EDIT_SAVE_URI, uri);
+      AppStorage.setOrCreate(BroadCastConstants.PHOTO_EDIT_SAVE_URI, uri);
       this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [true, Constants.PHOTO_TRANSITION_EDIT]);
     }
   }
@@ -93,7 +93,7 @@ export struct TitleBar {
     Log.debug(TAG, `backAfterSaveComplete called`);
     this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, Constants.PHOTO_TRANSITION_EDIT]);
     this.broadCast.emit(BroadCastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
-    AppStorage.SetOrCreate(BroadCastConstants.PHOTO_EDIT_SAVE_URI, "");
+    AppStorage.setOrCreate(BroadCastConstants.PHOTO_EDIT_SAVE_URI, "");
     router.back();
   }
 

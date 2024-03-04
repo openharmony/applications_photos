@@ -54,7 +54,7 @@ import { TimelineDataSourceManager } from '../model/TimelineDataSourceManager';
 import { TimelineScrollBar } from './TimelineScrollBar';
 
 const TAG: string = 'TimelinePage';
-AppStorage.SetOrCreate('TimelinePageIndex', Constants.INVALID);
+AppStorage.setOrCreate('TimelinePageIndex', Constants.INVALID);
 
 interface Params {
   albumName: string;
@@ -252,7 +252,7 @@ export struct TimelinePage {
       Log.error(TAG, 'targetIndex is not found');
       return;
     }
-    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
+    AppStorage.setOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
     if (geometryTapIndex !== undefined && geometryTransitionString !== undefined) {
       this.jumpToPhotoBrowserGeometryTransition(targetIndex, name, item, geometryTapIndex, geometryTransitionString);
     } else {
@@ -267,8 +267,8 @@ export struct TimelinePage {
       return;
     }
     Log.info(TAG, `JUMP_THIRD_PHOTO_BROWSER.index: ${targetIndex} transition: ${name}`);
-    AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
-    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
+    AppStorage.setOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
+    AppStorage.setOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
     if (geometryTapIndex !== undefined && geometryTransitionString !== undefined) {
       this.jumpToSelectPhotoBrowserGeometryTransition(
         targetIndex, name, item, geometryTapIndex, geometryTransitionString);

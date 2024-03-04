@@ -29,7 +29,7 @@ export class FormControllerManager {
 
   public static getInstance(): FormControllerManager {
     if (AppStorage.Get(Constants.FROM_CONTROLLER_MANAGER) == null) {
-      AppStorage.SetOrCreate(Constants.FROM_CONTROLLER_MANAGER, new FormControllerManager());
+      AppStorage.setOrCreate(Constants.FROM_CONTROLLER_MANAGER, new FormControllerManager());
     }
     return AppStorage.Get(Constants.FROM_CONTROLLER_MANAGER);
   }

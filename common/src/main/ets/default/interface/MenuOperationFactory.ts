@@ -27,7 +27,7 @@ export class MenuOperationFactory {
 
   public static getInstance(): MenuOperationFactory {
     if (AppStorage.Get(Constants.APP_KEY_MENU_OPERATION_FACTORY) == null) {
-      AppStorage.SetOrCreate(Constants.APP_KEY_MENU_OPERATION_FACTORY, new MenuOperationFactory());
+      AppStorage.setOrCreate(Constants.APP_KEY_MENU_OPERATION_FACTORY, new MenuOperationFactory());
     }
     return AppStorage.Get(Constants.APP_KEY_MENU_OPERATION_FACTORY);
   }

@@ -111,7 +111,7 @@ export struct SelectPhotoBrowserView {
   }
 
   onGeometryChanged() {
-    AppStorage.SetOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
+    AppStorage.setOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
   }
 
   aboutToAppear(): void {
@@ -189,7 +189,7 @@ export struct SelectPhotoBrowserView {
       Log.error(TAG, 'onPhotoChanged, item is undefined');
     } else {
       this.isSelected = this.selectManager?.isItemSelected(currentPhoto.uri, this.timelineIndex) ?? false;
-      AppStorage.SetOrCreate<number>('placeholderIndex', this.timelineIndex);
+      AppStorage.setOrCreate<number>('placeholderIndex', this.timelineIndex);
       this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
       Log.info(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri},\
         isSelected: ${this.isSelected}  geometryTransitionId ${this.geometryTransitionId}`);

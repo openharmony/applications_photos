@@ -292,15 +292,15 @@ export class UiUtil {
   }
 
   static resetGeometryTransitionParams(): void {
-    AppStorage.SetOrCreate<number>('geometryScale', 1);
-    AppStorage.SetOrCreate<number>('geometryOffsetX', 0);
-    AppStorage.SetOrCreate<number>('geometryOffsetY', 0);
-    AppStorage.SetOrCreate<number>('geometryOpacity', 1);
+    AppStorage.setOrCreate<number>('geometryScale', 1);
+    AppStorage.setOrCreate<number>('geometryOffsetX', 0);
+    AppStorage.setOrCreate<number>('geometryOffsetY', 0);
+    AppStorage.setOrCreate<number>('geometryOpacity', 1);
   }
 
   static updateGeometryTapInfo(geometryTapIndex: number, geometryTransitionString: string): void {
-    AppStorage.SetOrCreate<number>('placeholderIndex', geometryTapIndex);
-    AppStorage.SetOrCreate<string>('geometryTransitionBrowserId',
+    AppStorage.setOrCreate<number>('placeholderIndex', geometryTapIndex);
+    AppStorage.setOrCreate<string>('geometryTransitionBrowserId',
       geometryTransitionString);
     Log.debug(TAG, 'this.geometryTransitionId = ' + geometryTransitionString +
       ', placeholderIndex = ' + geometryTapIndex);
