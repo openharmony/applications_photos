@@ -125,7 +125,7 @@ export class ShareMenuOperation implements MenuOperation, AsyncCallback<MediaIte
       let oldCount: number = AppStorage.get('click_share_count');
       count = oldCount + 1;
     }
-    AppStorage.SetOrCreate('click_share_count', count);
+    AppStorage.setOrCreate('click_share_count', count);
     let msg = {
       'count': count,
       'shareType': shareType,

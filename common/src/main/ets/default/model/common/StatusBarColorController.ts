@@ -43,7 +43,7 @@ export class StatusBarColorController {
 
   public static getInstance(): StatusBarColorController {
     if (AppStorage.get(Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER) == null) {
-      AppStorage.SetOrCreate(
+      AppStorage.setOrCreate(
         Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER, new StatusBarColorController());
     }
     return AppStorage.get(Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER);
@@ -55,7 +55,7 @@ export class StatusBarColorController {
   }
 
   public release() {
-    AppStorage.Delete(Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER);
+    AppStorage.delete(Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER);
   }
 
   private invalidate(): void {

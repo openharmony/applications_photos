@@ -41,7 +41,7 @@ export struct CropRulerBar {
   private previous: number = Constants.NUMBER_0;
 
   setRulerProperties(rulerWidth: number, rulerHeight: number): void {
-    AppStorage.SetOrCreate<RulerProperties>('rulerProperties', {
+    AppStorage.setOrCreate<RulerProperties>('rulerProperties', {
       rulerWidth: rulerWidth,
       rulerHeight: rulerHeight
     } as RulerProperties)

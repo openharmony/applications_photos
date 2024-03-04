@@ -115,7 +115,7 @@ export class BreakpointSystem {
   private updateCurrentBreakpoint(breakpoint: string): void {
     if (this.currentBreakpoint !== breakpoint) {
       this.currentBreakpoint = breakpoint;
-      AppStorage.SetOrCreate<string>(this.breakpointStorageKey, this.currentBreakpoint);
+      AppStorage.setOrCreate<string>(this.breakpointStorageKey, this.currentBreakpoint);
       Log.debug(TAG, 'on current breakpoint: ' + this.currentBreakpoint);
     }
   }

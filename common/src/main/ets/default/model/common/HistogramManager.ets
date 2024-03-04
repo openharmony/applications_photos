@@ -164,11 +164,11 @@ export class HistogramManager {
         TraceControllerUtils.finishTrace('dataPrepare');
         Log.info(TAG, `histogram workers data process finished`);
         // 重置status，防止被上次任务回调干扰
-        AppStorage.SetOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.PREPARING);
+        AppStorage.setOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.PREPARING);
         // arrayBuffer直接传入，会丢失类型，需要转为string
         Log.info(TAG, 'serialize the pixel array for histogram draw, pixel array length: ' + resultArray.length);
-        AppStorage.SetOrCreate<string>(Constants.HISTOGRAM_ARRAY_BUFFER_KEY, StringUtil.arraybufferSerialize(resultArray.buffer));
-        AppStorage.SetOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.READY);
+        AppStorage.setOrCreate<string>(Constants.HISTOGRAM_ARRAY_BUFFER_KEY, StringUtil.arraybufferSerialize(resultArray.buffer));
+        AppStorage.setOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.READY);
       }
     }
 

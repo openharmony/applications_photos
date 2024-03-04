@@ -145,7 +145,7 @@ export struct ThirdSelectPhotoBrowserBase {
   }
 
   onGeometryChanged() {
-    AppStorage.SetOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
+    AppStorage.setOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
   }
 
   aboutToAppear(): void {
@@ -229,7 +229,7 @@ export struct ThirdSelectPhotoBrowserBase {
 
         if (newIndex != Constants.NOT_FOUND) {
           // Search for the position of new image/video after edit in current 500 items succeed
-          AppStorage.SetOrCreate<number>('placeholderIndex', newIndex);
+          AppStorage.setOrCreate<number>('placeholderIndex', newIndex);
           if (!this.isMultiPick) {
             this.currentIndex = newIndex;
             this.photoUnEdit = this.getCurrentPhoto();
@@ -332,7 +332,7 @@ export struct ThirdSelectPhotoBrowserBase {
       if (index != Constants.NOT_FOUND) { // over 500
         Log.info(TAG, `data reloaded move to ${index}`);
 
-        AppStorage.SetOrCreate<number>('placeholderIndex', index);
+        AppStorage.setOrCreate<number>('placeholderIndex', index);
 
         this.dataSource.enableGetData(true);
         this.dataSource.onDataReloaded();
@@ -351,7 +351,7 @@ export struct ThirdSelectPhotoBrowserBase {
           this.updateSelectItemByNewEditIndexFromDataSource(this.currentIndex);
 
           if (this.dataSource.getSelectMode()) {
-            AppStorage.SetOrCreate<number>('placeholderIndex', Constants.INVALID);
+            AppStorage.setOrCreate<number>('placeholderIndex', Constants.INVALID);
           }
         } else {
           this.waitingUpdateIndex = index;
@@ -372,7 +372,7 @@ export struct ThirdSelectPhotoBrowserBase {
           this.editNewUri = '';
           this.updateSelectItemByNewEditItem(this.newMediaItem, this.currentIndex);
 
-          AppStorage.SetOrCreate<number>('placeholderIndex', Constants.INVALID);
+          AppStorage.setOrCreate<number>('placeholderIndex', Constants.INVALID);
           this.geometryTransitionId = '';
         });
       }
@@ -381,7 +381,7 @@ export struct ThirdSelectPhotoBrowserBase {
 
   updateSelectItemByNewEditItem(mediaItem: MediaItem, index?: number): void {
     Log.info(TAG, `updateSelectItemByNewEditItem: index=${index}`);
-    AppStorage.SetOrCreate<number>('placeholderIndex', index as number); // timeLineIndex
+    AppStorage.setOrCreate<number>('placeholderIndex', index as number); // timeLineIndex
     if (!this.isMultiPick) {
       this.currentIndex = index as number;
       this.photoUnEdit = this.getCurrentPhoto();
@@ -411,7 +411,7 @@ export struct ThirdSelectPhotoBrowserBase {
 
   updateSelectItemByNewEditIndexFromDataSource(index: number): void {
     Log.info(TAG, `updateSelectItemByNewEditIndexFromDataSource: index=${index}`);
-    AppStorage.SetOrCreate<number>('placeholderIndex', index); // timeLineIndex
+    AppStorage.setOrCreate<number>('placeholderIndex', index); // timeLineIndex
     if (!this.isMultiPick) {
       this.currentIndex = index;
       this.photoUnEdit = this.getCurrentPhoto();
@@ -529,7 +529,7 @@ export struct ThirdSelectPhotoBrowserBase {
 
       let dataSourceIndex = this.isSelectMode ? (this.selectManager?.getSelectItemDataSourceIndex(currentPhoto) ?? Constants.INVALID) : index;
       let timelineIndex = this.dataSource.getPositionByIndex(dataSourceIndex);
-      AppStorage.SetOrCreate<number>('placeholderIndex', timelineIndex);
+      AppStorage.setOrCreate<number>('placeholderIndex', timelineIndex);
       this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
       Log.info(TAG, `onPhotoChanged, index: ${index}, currentPhoto: ${currentPhoto.uri}, \
         geometryTransitionId = ${this.geometryTransitionId}, placeholderIndex = ${timelineIndex}`);

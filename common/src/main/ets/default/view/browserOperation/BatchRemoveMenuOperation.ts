@@ -34,7 +34,7 @@ export class BatchRemoveMenuOperation extends ProcessMenuOperation {
   }
 
   setConfirmText(): void {
-    AppStorage.SetOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_remove'));
+    AppStorage.setOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_remove'));
   }
 
   doAction(): void {

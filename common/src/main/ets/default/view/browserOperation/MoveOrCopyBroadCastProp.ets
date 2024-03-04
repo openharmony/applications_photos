@@ -45,7 +45,7 @@ export class MoveOrCopyBroadCastProp {
    */
   public static getInstance(): MoveOrCopyBroadCastProp {
     if (AppStorage.get<MoveOrCopyBroadCastProp>(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) == null) {
-      AppStorage.SetOrCreate(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP, new MoveOrCopyBroadCastProp());
+      AppStorage.setOrCreate(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP, new MoveOrCopyBroadCastProp());
     }
     return AppStorage.get<MoveOrCopyBroadCastProp>(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) as MoveOrCopyBroadCastProp;
   }
@@ -147,7 +147,7 @@ export class MoveOrCopyBroadCastProp {
   }
 
   private async onOperationEndBindImpl(): Promise<void> {
-    AppStorage.SetOrCreate(Constants.IS_DATA_FREEZE, false);
+    AppStorage.setOrCreate(Constants.IS_DATA_FREEZE, false);
     let isNewAlbum: boolean = AppStorage.get<boolean>(Constants.APP_KEY_NEW_ALBUM) as boolean;
     let selectManager: SelectManager = AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
     let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;
@@ -163,10 +163,10 @@ export class MoveOrCopyBroadCastProp {
 
     if (isNewAlbum) {
       selectManager.onModeChange(false);
-      AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
-      AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
-      AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET_URI);
-      AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM);
+      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
+      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM_TARGET_URI);
+      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
       router.pushUrl({
         url: 'pages/PhotoGridPage',
         params: {
@@ -177,7 +177,7 @@ export class MoveOrCopyBroadCastProp {
       AppStorage.setOrCreate<ParamAlbumInfo>(Constants.KEY_OF_PHOTO_GRID_VIEW_ALBUM_ITEM, {
         item: JSON.stringify(albumInfo)
       });
-      AppStorage.SetOrCreate(Constants.KEY_OF_ALBUM_URI, albumInfo.uri);
+      AppStorage.setOrCreate(Constants.KEY_OF_ALBUM_URI, albumInfo.uri);
       router.back({
         url: 'pages/index',
       });
@@ -185,7 +185,7 @@ export class MoveOrCopyBroadCastProp {
   }
 
   private onOperationStartBindImpl(): void {
-    AppStorage.SetOrCreate(Constants.IS_DATA_FREEZE, true);
+    AppStorage.setOrCreate(Constants.IS_DATA_FREEZE, true);
   }
 
   private async onOperationEnd(): Promise<void> {

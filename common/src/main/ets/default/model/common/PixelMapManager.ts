@@ -31,7 +31,7 @@ export class PixelMapManager {
 
   public static getInstance(): PixelMapManager {
     if (AppStorage.get(Constants.PIXEL_MAP_MANAGER) == null) {
-      AppStorage.SetOrCreate(Constants.PIXEL_MAP_MANAGER, new PixelMapManager());
+      AppStorage.setOrCreate(Constants.PIXEL_MAP_MANAGER, new PixelMapManager());
     }
     return AppStorage.get(Constants.PIXEL_MAP_MANAGER);
   }

@@ -191,11 +191,11 @@ export struct ThirdSelectPhotoGridBase {
 
     // 更新编辑许可
     this.selectParams.editAble = param.editAble;
-    AppStorage.SetOrCreate<boolean>(Constants.KEY_OF_IS_THIRD_EDITABLE, this.selectParams.editAble);
+    AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_THIRD_EDITABLE, this.selectParams.editAble);
     if (this.selectParams.isFromFa) {
       this.selectParams.filterMediaType = AlbumDefine.FILTER_MEDIA_TYPE_IMAGE;
-      AppStorage.SetOrCreate(FormConstants.FORM_ITEM_ALBUM_URI, param.uri);
-      AppStorage.SetOrCreate(FormConstants.FORM_ITEM_DISPLAY_NAME, param.itemDisplayName);
+      AppStorage.setOrCreate(FormConstants.FORM_ITEM_ALBUM_URI, param.uri);
+      AppStorage.setOrCreate(FormConstants.FORM_ITEM_DISPLAY_NAME, param.itemDisplayName);
     }
     this.dataSource.setFilterMediaType(this.selectParams.filterMediaType);
     this.initSelectManager();
@@ -245,7 +245,7 @@ export struct ThirdSelectPhotoGridBase {
 
     // save all photo dataSource
     if (this.dataSource.albumUri === '' && AppStorage.get<MediaDataSource>(Constants.APP_KEY_ALL_PHOTO_DATASOURCE) === undefined) {
-      AppStorage.SetOrCreate(Constants.APP_KEY_ALL_PHOTO_DATASOURCE, this.dataSource);
+      AppStorage.setOrCreate(Constants.APP_KEY_ALL_PHOTO_DATASOURCE, this.dataSource);
     }
     ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     Log.error(TAG, 'meow data count = ' + this.dataSource.totalCount());
@@ -598,7 +598,7 @@ export struct ThirdSelectPhotoGridBase {
     let selectItemIndex: number = this.selectManager?.getSelectItemIndex(item) ?? Constants.INVALID;
     let targetIndex = isSelectMode ? selectItemIndex : this.dataSource.getDataIndex(item);
     Log.info(TAG, `jump to photo browser at index: ${targetIndex}, transition: ${name}`);
-    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
+    AppStorage.setOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
     if (geometryTapIndex != -1 && geometryTransitionString != '') {
       this.jumpToBrowserGeometryTransition(
         targetIndex, name, item, isSelectMode, geometryTapIndex, geometryTransitionString);
@@ -647,12 +647,12 @@ export struct ThirdSelectPhotoGridBase {
     } else {
       Log.debug(TAG, 'create new select manager');
       this.selectManager = new ThirdSelectManager();
-      AppStorage.SetOrCreate(Constants.THIRD_SELECT_MANAGER, this.selectManager);
+      AppStorage.setOrCreate(Constants.THIRD_SELECT_MANAGER, this.selectManager);
     }
     if (this.isFirstEnter) {
       Log.debug(TAG, 'clear select manager');
       this.selectManager.deSelectAll();
-      AppStorage.SetOrCreate(THIRD_SELECT_IS_ORIGIN, false);
+      AppStorage.setOrCreate(THIRD_SELECT_IS_ORIGIN, false);
     }
     this.selectManager.setGetMediaItemFunc((uri: string): MediaItem => {
       return this.dataSource.getMediaItemByUri(uri);

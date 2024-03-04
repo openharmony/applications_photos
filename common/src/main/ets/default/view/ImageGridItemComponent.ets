@@ -172,7 +172,7 @@ export struct ImageGridItemComponent {
   selectStateChange() {
     Log.info(TAG, 'change selected.');
     let newState = !this.isSelected;
-    AppStorage.SetOrCreate('focusUpdate', true);
+    AppStorage.setOrCreate('focusUpdate', true);
     if (this.item != null && this.item.uri) {
       this.mPosition = this.getPosition();
       this.broadCast.emit(BroadCastConstants.SELECT, [this.mPosition, this.item.uri, newState,  (isSelected: boolean): void => {
@@ -254,7 +254,7 @@ export struct ImageGridItemComponent {
       .focusSetting(this.item == null ? '' : this.item.uri, (event: KeyEvent): void => this.handleKeyEvent(event))
       .onError(() => {
         this.isLoadImageError = true;
-        AppStorage.SetOrCreate('focusUpdate', true);
+        AppStorage.setOrCreate('focusUpdate', true);
         Log.error(TAG, 'item Image error');
       })
       .onComplete(() => {
@@ -524,7 +524,7 @@ export struct ImageGridItemComponent {
       if (ret !== true) {
         Log.error(TAG, `requestFocus${keyName + this.item.uri}, ret:${ret}`);
       }
-      AppStorage.SetOrCreate('focusUpdate', false);
+      AppStorage.setOrCreate('focusUpdate', false);
     }
   }
 

@@ -32,7 +32,7 @@ export class TimelineDataSourceManager {
 
   public static getInstance(): TimelineDataSourceManager {
     if (AppStorage.Get(TimeLineConstants.APP_KEY_GROUP_DATA_SOURCE_MANAGER) == null) {
-      AppStorage.SetOrCreate(TimeLineConstants.APP_KEY_GROUP_DATA_SOURCE_MANAGER, new TimelineDataSourceManager());
+      AppStorage.setOrCreate(TimeLineConstants.APP_KEY_GROUP_DATA_SOURCE_MANAGER, new TimelineDataSourceManager());
     }
     return AppStorage.Get(TimeLineConstants.APP_KEY_GROUP_DATA_SOURCE_MANAGER);
   }

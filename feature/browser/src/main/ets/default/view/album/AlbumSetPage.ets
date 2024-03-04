@@ -167,7 +167,7 @@ export struct AlbumSetPage {
     this.appBroadCast.on(BroadCastConstants.ON_TAB_CHANGED, this.onTabChangedFunc);
     this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateResetFunc);
     this.appBroadCast.on(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, this.onSendMoveCopyBroadCastFunc);
-    AppStorage.SetOrCreate('setSelectManagerToAnother', this.mSelectManager);
+    AppStorage.setOrCreate('setSelectManagerToAnother', this.mSelectManager);
     this.broadCast.on(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
     this.appBroadCast.on(BroadCastConstants.RESET_ZERO, this.onResetZeroFunc);
     this.appBroadCast.on(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDeviceFunc);

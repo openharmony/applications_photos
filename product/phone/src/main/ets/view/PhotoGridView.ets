@@ -67,7 +67,7 @@ import {
 
 
 const TAG: string = 'PhotoGridView';
-AppStorage.SetOrCreate('PhotoGridPageIndex', Constants.INVALID);
+AppStorage.setOrCreate('PhotoGridPageIndex', Constants.INVALID);
 
 // Album View
 @Component
@@ -153,29 +153,29 @@ export struct PhotoGridView {
       delay: BrowserConstants.PHONE_LINK_ALBUM_ACTIONBAR_DELAY,
       curve: Curve.Sharp
     }, () => {
-      AppStorage.SetOrCreate<number>(Constants.KEY_OF_ALBUM_ACTIONBAR_OPACITY, 1);
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_ALBUM_ACTIONBAR_OPACITY, 1);
     })
     animateTo({
       duration: BrowserConstants.PHONE_LINK_OUT_PHOTO_GRID_ACTIONBAR_DURATION,
       curve: Curve.Sharp
     }, () => {
-      AppStorage.SetOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_ACTIONBAR_OPACITY, 0);
-      AppStorage.SetOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 0);
-      AppStorage.SetOrCreate<number>(Constants.KEY_OF_ALBUM_OPACITY, 1);
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_ACTIONBAR_OPACITY, 0);
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 0);
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_ALBUM_OPACITY, 1);
     })
     animateTo({
       duration: BrowserConstants.PHONE_LINK_PHOTO_GRID_TO_ALBUM_DURATION,
       curve: Curve.Friction
     }, () => {
-      AppStorage.SetOrCreate<number>(Constants.KEY_OF_SELECTED_ALBUM_INDEX, -1);
-      AppStorage.SetOrCreate<boolean>(Constants.KEY_OF_IS_SHOW_PHOTO_GRID_VIEW, false);
-      AppStorage.SetOrCreate<string>(Constants.KEY_OF_SELECTED_ALBUM_URI, '');
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_SELECTED_ALBUM_INDEX, -1);
+      AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_SHOW_PHOTO_GRID_VIEW, false);
+      AppStorage.setOrCreate<string>(Constants.KEY_OF_SELECTED_ALBUM_URI, '');
     })
     animateTo({
       duration: BrowserConstants.PHONE_LINK_PHOTO_GRID_TO_ALBUM_SCALE_DURATION,
       curve: Curve.Friction
     }, () => {
-      AppStorage.SetOrCreate<number>(Constants.KEY_OF_ALBUM_OTHER_SCALE, 1);
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_ALBUM_OTHER_SCALE, 1);
     })
   }
 
@@ -580,7 +580,7 @@ export struct PhotoGridView {
       this.appBroadCast.off(BroadCastConstants.DO_ANIMATION, null);
     });
 
-    AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
+    AppStorage.setOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
     this.mSelectManager.registerCallback('allSelect', (newState: boolean) => {
       Log.info(TAG, `allSelect ${newState}`);
       if (this.isDataFreeze) {
@@ -646,7 +646,7 @@ export struct PhotoGridView {
       pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
     }
 
-    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
+    AppStorage.setOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
     if (geometryTapIndex !== undefined && geometryTransitionString !== undefined) {
       this.jumpToPhotoBrowserGeometryTransition(
         targetIndex, name, pageEntryFrom, geometryTapIndex, geometryTransitionString);
@@ -669,8 +669,8 @@ export struct PhotoGridView {
     } else if (this.isDistributedAlbum) {
       pageEntryFrom = Constants.ENTRY_FROM.DISTRIBUTED;
     }
-    AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
-    AppStorage.SetOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
+    AppStorage.setOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
+    AppStorage.setOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.dataSource);
     if (geometryTapIndex !== undefined && geometryTransitionString !== undefined) {
       this.jumpToSelectPhotoBrowserGeometryTransition(
         targetIndex, name, pageEntryFrom, geometryTapIndex, geometryTransitionString);
@@ -698,7 +698,7 @@ export struct PhotoGridView {
 
   updateFirstPhotoItemInfo(item: MediaItem, isFirstPhotoItem: boolean): void {
     if (item) {
-      AppStorage.SetOrCreate<boolean>(Constants.KEY_OF_IS_FIRST_PHOTO_ITEM, isFirstPhotoItem);
+      AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_FIRST_PHOTO_ITEM, isFirstPhotoItem);
       let albumUri = AppStorage.Get<string>(Constants.KEY_OF_ALBUM_URI);
       let transitionId = `${item.hashCode}_${albumUri}`;
       Log.info(TAG, `updateFirstPhotoItemInfo transitionId: ${transitionId}`);
@@ -980,7 +980,7 @@ export struct PhotoGridView {
       .withTargetAlbumName(albumName)
       .withAlbumUri(albumUri);
     let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(MoveMenuOperation, menuContext);
-    AppStorage.SetOrCreate(Constants.APP_KEY_NEW_ALBUM_SOURCE, this.albumInfo.uri);
+    AppStorage.setOrCreate(Constants.APP_KEY_NEW_ALBUM_SOURCE, this.albumInfo.uri);
     menuOperation.doAction();
   }
 

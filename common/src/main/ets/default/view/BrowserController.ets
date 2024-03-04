@@ -67,7 +67,7 @@ export class BrowserController {
     animateTo({
       curve: Constants.SPRING_MOTION_CURVE, // 大图进出阻尼曲线参数
       onFinish: () => {
-        AppStorage.SetOrCreate<string>('geometryTransitionBrowserId', '');
+        AppStorage.setOrCreate<string>('geometryTransitionBrowserId', '');
         UiUtil.resetGeometryTransitionParams();
         this.finishAnimation();
       }
@@ -75,7 +75,7 @@ export class BrowserController {
       this.isBrowserShow = false;
       this.browserParam;
       this.isAnimating = true;
-      AppStorage.SetOrCreate<number>('placeholderIndex', -1);
+      AppStorage.setOrCreate<number>('placeholderIndex', -1);
       Log.info(TAG, `placeholderIndex ${AppStorage.get<number>('placeholderIndex')}`);
     });
   }
@@ -103,7 +103,7 @@ export class BrowserController {
     animateTo({
       curve: Constants.SPRING_MOTION_CURVE, // 大图进出阻尼曲线参数
       onFinish: () => {
-        AppStorage.SetOrCreate<string>('geometryTransitionBrowserId', '');
+        AppStorage.setOrCreate<string>('geometryTransitionBrowserId', '');
         UiUtil.resetGeometryTransitionParams();
         this.finishAnimation();
       }
@@ -111,7 +111,7 @@ export class BrowserController {
       this.isSelectBrowserShow = false;
       this.selectBrowserParam;
       this.isAnimating = true;
-      AppStorage.SetOrCreate<number>('placeholderIndex', -1);
+      AppStorage.setOrCreate<number>('placeholderIndex', -1);
     });
   }
 
