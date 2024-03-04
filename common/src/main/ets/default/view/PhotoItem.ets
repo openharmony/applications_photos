@@ -186,7 +186,7 @@ export struct PhotoItem {
   aboutToDisappear(): void {
     Log.info(TAG, `aboutToDisappear ${this.item.uri}`);
     if (this.currentIndex == this.mPosition) {
-      AppStorage.Delete(PhotoConstants.MATRIX);
+      AppStorage.delete(PhotoConstants.MATRIX);
     }
     if (this.dataSource) {
       this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadFunc);

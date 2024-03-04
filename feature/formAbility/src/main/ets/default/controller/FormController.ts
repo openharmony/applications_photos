@@ -138,7 +138,7 @@ export class FormController implements FormListener {
 
     let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>('formContext');
     context.startAbility(param).then((): void => {
-      AppStorage.Delete(Constants.FROM_CONTROLLER_MANAGER);
+      AppStorage.delete(Constants.FROM_CONTROLLER_MANAGER);
     })
 
     this.onDestroy();

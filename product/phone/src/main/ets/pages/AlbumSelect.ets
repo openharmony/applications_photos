@@ -184,7 +184,7 @@ export struct AlbumSelect {
     if (action.actionID === Action.CANCEL.actionID) {
       Log.info(TAG, 'clear SelectManager data');
       this.mSelectManager.onModeChange(false);
-      AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
       router.back();
     }
     return;

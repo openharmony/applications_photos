@@ -169,7 +169,7 @@ export default class MainAbility extends Ability {
     this.isOnDestroy = true;
     let statusBarColorController: StatusBarColorController = StatusBarColorController.getInstance();
     statusBarColorController.release();
-    AppStorage.Delete('entryFromHap');
+    AppStorage.delete('entryFromHap');
     MediaObserver.getInstance().unregisterForAllPhotos();
     MediaObserver.getInstance().unregisterForAllAlbums();
     UserFileManagerAccess.getInstance().onDestroy();

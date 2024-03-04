@@ -341,7 +341,7 @@ export struct NewAlbumPage {
     this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorStateFunc);
     this.dataSource.releaseBroadCast();
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
-    AppStorage.Delete(Constants.PHOTO_GRID_SELECT_MANAGER);
+    AppStorage.delete(Constants.PHOTO_GRID_SELECT_MANAGER);
   }
 
   build() {

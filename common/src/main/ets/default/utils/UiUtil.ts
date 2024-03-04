@@ -308,7 +308,7 @@ export class UiUtil {
 
   static getRouterParams(params: Object): Object {
     let fakeRouterParam: Object = AppStorage.Get('fakeRouterParam');
-    AppStorage.Delete('fakeRouterParam');
+    AppStorage.delete('fakeRouterParam');
     if (fakeRouterParam) {
       Log.debug(TAG, 'fakeRouterParam = ' + JSON.stringify(fakeRouterParam));
     }

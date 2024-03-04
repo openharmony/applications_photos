@@ -163,10 +163,10 @@ export class MoveOrCopyBroadCastProp {
 
     if (isNewAlbum) {
       selectManager.onModeChange(false);
-      AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM);
-      AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
-      AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_TARGET_URI);
-      AppStorage.Delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM);
+      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
+      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM_TARGET_URI);
+      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
       router.pushUrl({
         url: 'pages/PhotoGridPage',
         params: {

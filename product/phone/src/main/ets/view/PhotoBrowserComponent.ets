@@ -1367,7 +1367,7 @@ export struct PhotoBrowserComponent {
     } else {
       let key: string = 'renameResult' + currentPhoto.uri;
       renameResult = AppStorage.get<TitleName>(key) as TitleName;
-      AppStorage.Delete(key);
+      AppStorage.delete(key);
     }
     Log.debug(TAG, `syncPhotoName end, renameResult : ${JSON.stringify(renameResult)}`);
     return renameResult;

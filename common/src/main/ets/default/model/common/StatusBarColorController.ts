@@ -55,7 +55,7 @@ export class StatusBarColorController {
   }
 
   public release() {
-    AppStorage.Delete(Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER);
+    AppStorage.delete(Constants.APP_KEY_STATUS_BAR_COLOR_CONTROLLER);
   }
 
   private invalidate(): void {

@@ -628,7 +628,7 @@ export struct TimelinePage {
       this.isSelectedMode = false;
       this.mSelectManager.onModeChange(false);
       this.updateGroupSelectMode();
-      AppStorage.Delete(Constants.PHOTO_GRID_SELECT_MANAGER);
+      AppStorage.delete(Constants.PHOTO_GRID_SELECT_MANAGER);
       return true;
     }
     return false;
