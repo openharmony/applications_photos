@@ -103,6 +103,9 @@ export class AlbumDataImpl extends BrowserDataImpl {
   getDataIndexById(callback: AsyncCallback<unknown>, param: QueryAlbumParam, id: number): void {
   }
 
+  getMediaItemByUri(callback: AsyncCallback<unknown>, uri: string): void {
+  }
+
   private async genAlbumsInfo(cb: AsyncCallback<AlbumSimpleInfo>, uris: string[]): Promise<void> {
     Log.info(TAG, `genAlbumsInfo uris: ${JSON.stringify(uris)}`);
     Log.info(TAG, 'load data  genAlbumsInfo start');
