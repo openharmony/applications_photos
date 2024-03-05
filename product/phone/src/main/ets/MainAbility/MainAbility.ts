@@ -53,6 +53,7 @@ let editAble: boolean = true;
 export default class MainAbility extends Ability {
   private formCurrentUri: string = '';
   private formAlbumUri: string = '';
+  private preselectedUris: Array<string> = [];
   private isOnDestroy: boolean = false;
   private localStorage: LocalStorage = new LocalStorage();
 
@@ -123,6 +124,7 @@ export default class MainAbility extends Ability {
       mCallerBundleName = wantParam[Constants.KEY_WANT_PARAMETERS_CALLER_BUNDLE_NAME] as string;
       mMaxSelectCount = wantParam?.maxSelectCount as number;
       mFilterMediaType = wantParam?.filterMediaType as string;
+      this.preselectedUris = wantParam?.preselectedUris as Array<string>;
       AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_MULTIPLE_SELECT);
       cameraAble = (wantParam?.isPhotoTakingSupported as boolean) ?? true;
       editAble = (wantParam?.isEditSupported as boolean) ?? true;
@@ -169,7 +171,7 @@ export default class MainAbility extends Ability {
     this.isOnDestroy = true;
     let statusBarColorController: StatusBarColorController = StatusBarColorController.getInstance();
     statusBarColorController.release();
-    AppStorage.delete('entryFromHap');
+    AppStorage.Delete('entryFromHap');
     MediaObserver.getInstance().unregisterForAllPhotos();
     MediaObserver.getInstance().unregisterForAllAlbums();
     UserFileManagerAccess.getInstance().onDestroy();
@@ -179,7 +181,7 @@ export default class MainAbility extends Ability {
     // Main window is created, set main page for this ability
     Log.info(TAG, 'Application onWindowStageCreate');
     AppStorage.setOrCreate('photosWindowStage', windowStage);
-    AppStorage.setOrCreate('deviceType',
+    AppStorage.SetOrCreate('deviceType',
     deviceInfo.deviceType == ('phone' || 'default') ? Constants.DEFAULT_DEVICE_TYPE : Constants.PAD_DEVICE_TYPE);
     ScreenManager.getInstance().on(ScreenManager.ON_LEFT_BLANK_CHANGED, data => {
       Log.info(TAG, `onleftBlankChanged: ${data}`);
@@ -264,6 +266,7 @@ export default class MainAbility extends Ability {
           filterMediaType: mFilterMediaType,
           isFirstEnter: true,
           maxSelectCount: mMaxSelectCount,
+          preselectedUris: this.preselectedUris,
           uri: '',
           cameraAble: cameraAble,
           editAble: editAble,
