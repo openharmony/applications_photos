@@ -267,7 +267,6 @@ export struct ThirdSelectPhotoBrowserBase {
       Log.error(TAG, `ON_DATA_RELOADED_WITH_EDIT error ${e}`);
     } finally {
       this.appBroadCast.emit(BroadCastConstants.PHOTO_EDIT_SAVE_COMPLETE, []);
-      // this.broadCast.emit(BroadCastConstants.CHANGE_SWIPER_DURATION, [this.swiperDuration]);
     }
 
     this.dataSource.onDataReloaded();
@@ -844,7 +843,9 @@ export struct ThirdSelectPhotoBrowserBase {
       }
       Log.info(TAG, `uri size: ${uriArray}`);
     } else {
-      this.currentIndex = 0;
+      if (!AppStorage.get('isReplace')) {
+        this.currentIndex = 0;
+      }
       let currentPhoto = this.getCurrentPhoto();
       if (currentPhoto == undefined) {
         return;
