@@ -80,10 +80,6 @@ export struct ToolBar {
       right: $r('app.float.menu_padding_horizontal')
     })
     .backgroundColor(Color.White)
-    .margin({
-      right: $r('app.float.pop_window_margin_rihgt'),
-      bottom: $r('app.float.menu_margin_bottom')
-    })
   }
 
   build() {
