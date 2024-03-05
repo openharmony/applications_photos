@@ -56,7 +56,7 @@ export class PhotoDataImpl extends BrowserDataImpl {
         for (let item of dataList) {
           try {
             let mediaItem: MediaItem = new MediaItem(item);
-            mediaItem.setThumbnail(this.getThumbnailSafe(mediaItem.uri, mediaItem.path));
+            mediaItem.setThumbnail(this.getThumbnailSafe(mediaItem.uri, mediaItem.path, mediaItem.getDateModified()));
             mediaItemList.push(mediaItem);
           } catch (err) {
             Log.error(TAG, `getMediaItem error: ${err}`);
@@ -99,8 +99,22 @@ export class PhotoDataImpl extends BrowserDataImpl {
     });
   }
 
-  getThumbnail(sourceUri: string, path: string, size?): string {
-    return this.getThumbnailSafe(sourceUri, path, size);
+  getMediaItemByUri(callback: AsyncCallback<MediaItem>, uri: string): void {
+    Log.debug(TAG, `getMediaItemByUri: ${uri}`);
+
+    try {
+      this.getItemByUri(uri).then((result): void => {
+        let mediaItem: MediaItem = new MediaItem(result);
+        mediaItem.setThumbnail(this.getThumbnail(mediaItem.uri, mediaItem.path, mediaItem.getDateModified()));
+        callback.callback(mediaItem);
+      });
+    } catch (error) {
+      Log.error(TAG, 'getItemIndexByUri error');
+    }
+  }
+
+  getThumbnail(sourceUri: string, path: string, modifiedDate?: number, size?): string {
+    return this.getThumbnailSafe(sourceUri, path, modifiedDate, size);
   }
 
   async getDataByName(name: string, albumUri: string): Promise<FileAsset> {
