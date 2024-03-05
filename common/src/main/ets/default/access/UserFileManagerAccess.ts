@@ -138,7 +138,7 @@ export class UserFileManagerAccess {
 
   public static getInstance(): UserFileManagerAccess {
     if (AppStorage.get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS) == null) {
-      AppStorage.SetOrCreate(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS, new UserFileManagerAccess());
+      AppStorage.setOrCreate(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS, new UserFileManagerAccess());
     }
     return AppStorage.get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS);
   }
