@@ -42,6 +42,8 @@ export abstract class BrowserDataImpl implements BrowserDataInterface {
 
   abstract getDataIndexByUri(callback: AsyncCallback<unknown> | Function, param: QueryParam, uri: string): void;
 
+  abstract getMediaItemByUri(callback: AsyncCallback<unknown> | Function, uri: string): void;
+
   async getAllObject(fetchOpt): Promise<Array<FileAsset>> {
     Log.debug(TAG, `getAllObject ${fetchOpt}`);
     let allObject = await UserFileManagerAccess.getInstance().getAllObject(fetchOpt);
@@ -152,17 +154,17 @@ export abstract class BrowserDataImpl implements BrowserDataInterface {
     return object;
   }
 
-  getThumbnailSafe(sourceUri: string, path: string, size?): string {
+  getThumbnailSafe(sourceUri: string, path: string, modifiedDate?: number, size?): string {
     try {
       if (size) {
         if (size.width != 0 && size.height != 0) {
-          return `${sourceUri}?oper=thumbnail&width=${size.width}&height=${size.height}&path=${path}`;
+          return `${sourceUri}?timestampApp=${modifiedDate}&oper=thumbnail&width=${size.width}&height=${size.height}&path=${path}`;
         } else {
           Log.warn(TAG, 'getThumbnailSafe with width==0 and height==0, so do not use thumbnail' + JSON.stringify(size));
           return `${sourceUri}`;
         }
       } else {
-        return `${sourceUri}?oper=thumbnail&width=${BrowserDataImpl.THUMBNAIL_WIDTH}&height=${BrowserDataImpl.THUMBNAIL_WIDTH}&path=${path}`;
+        return `${sourceUri}?timestampApp=${modifiedDate}&oper=thumbnail&width=${BrowserDataImpl.THUMBNAIL_WIDTH}&height=${BrowserDataImpl.THUMBNAIL_WIDTH}&path=${path}`;
       }
     } catch (err) {
       Log.warn(TAG, `get Thumbnail Failed! msg:${err}`);
