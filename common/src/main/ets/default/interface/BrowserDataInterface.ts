@@ -25,4 +25,6 @@ export interface BrowserDataInterface {
   getFileAssets?(id: any, param: any): any;
 
   getDataIndexByUri(callback: unknown, param: unknown, uri: string): void;
+
+  getMediaItemByUri(callback: unknown, uri: string): void;
 }
