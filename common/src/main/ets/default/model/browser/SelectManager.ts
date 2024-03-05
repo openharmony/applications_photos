@@ -29,6 +29,7 @@ export class BucketSelectionEntry {
   private totalCount = 0;
   private inverseSelection = false;
   private groupSelect = false;
+  private selectedMap: Map<string, MediaItem> = new Map();
 
   public setGroupId(groupId: number): void {
     this.groupId = groupId;
@@ -58,6 +59,10 @@ export class BucketSelectionEntry {
     return this.clickedSet;
   }
 
+  public getSelectedMap(): Map<string, MediaItem> {
+    return this.selectedMap;
+  }
+
   public getSelectedCount(): number {
     if (this.inverseSelection) {
       return this.totalCount - this.clickedSet.size;
@@ -69,12 +74,14 @@ export class BucketSelectionEntry {
     this.inverseSelection = true;
     this.groupSelect = true;
     this.clickedSet.clear();
+    this.selectedMap.clear();
   }
 
   public deSelectAll(): void {
     this.inverseSelection = false;
     this.groupSelect = false;
     this.clickedSet.clear();
+    this.selectedMap.clear();
   }
 
   public isItemSelected(targetId: string): boolean {
@@ -140,6 +147,8 @@ export class SelectManager {
   selectManagerCallback: SelectManagerCallback;
   albumUri = undefined;
   deviceId = undefined;
+  selectedMap: Map<string, MediaItem> = new Map();
+  getMediaItemFunc: Function;
 
   constructor() {
     this.selectManagerCallback = new SelectManagerCallback(this);
@@ -190,9 +199,15 @@ export class SelectManager {
     }
     if (isSelected == (!this.inverseSelection)) {
       this.clickedSet.add(targetId);
+      if (this.getMediaItemFunc) {
+        this.selectedMap.set(targetId, this.getMediaItemFunc(targetId));
+      }
       Log.info(TAG, `add targetID ${targetId}`);
     } else {
       this.clickedSet.delete(targetId);
+      if (this.getMediaItemFunc) {
+        this.selectedMap.delete(targetId);
+      }
     }
     if (this.totalCount == this.getSelectedCount()) {
       this.isAllSelected = true;
@@ -212,11 +227,12 @@ export class SelectManager {
     if (reverseSelection) {
       this.inverseSelection = true;
       this.clickedSet.clear();
+      this.selectedMap.clear();
       this.isAllSelected = true;
     } else {
       this.isAllSelected = true;
     }
-    AppStorage.SetOrCreate('focusUpdate', true);
+    AppStorage.setOrCreate('focusUpdate', true);
     if (shouldCallSelectALl) {
       this.mCallbacks.has('allSelect') && this.mCallbacks.get('allSelect')(true);
     }
@@ -231,7 +247,8 @@ export class SelectManager {
     this.inverseSelection = false;
     this.isAllSelected = false;
     this.clickedSet.clear();
-    AppStorage.SetOrCreate('focusUpdate', true);
+    this.selectedMap.clear();
+    AppStorage.setOrCreate('focusUpdate', true);
     this.mCallbacks.has('allSelect') && this.mCallbacks.get('allSelect')(false);
     this.mCallbacks.has('updateCount') && this.mCallbacks.get('updateCount')(this.getSelectedCount());
   }
@@ -253,7 +270,8 @@ export class SelectManager {
       this.inverseSelection = false;
       this.isAllSelected = false;
       this.clickedSet.clear();
-      AppStorage.SetOrCreate('focusUpdate', true);
+      this.selectedMap.clear();
+      AppStorage.setOrCreate('focusUpdate', true);
       this.mCallbacks.has('allSelect') && this.mCallbacks.get('allSelect')(false);
       this.mCallbacks.has('updateCount') && this.mCallbacks.get('updateCount')(this.getSelectedCount());
     }
@@ -287,23 +305,22 @@ export class SelectManager {
 
   public async getSelectedItems(callback: Function): Promise<void> {
     let result = new Array<MediaItem>();
-    Log.info(TAG, 'getSelectedItems');
-    await this.getItems(this.photoDataImpl, 0, this.totalCount, (temp: MediaItem[]) => {
-      temp.forEach((item) => {
-        if (this.inverseSelection) {
-          Log.info(TAG, 'getSelectedItems inverseSelection');
+    Log.info(TAG, 'getSelectedItems this.inverseSelection: ' + this.inverseSelection);
+    if (this.inverseSelection) {
+      await this.getItems(this.photoDataImpl, 0, this.totalCount, (temp: MediaItem[]) => {
+        temp.forEach((item) => {
           if (item && !this.clickedSet.has(item.uri)) {
             result.push(item);
           }
-        } else {
-          if (this.clickedSet.has(item.uri)) {
-            result.push(item);
-          }
-        }
-      })
-      Log.info(TAG, `enter callback result ${result.length}`);
+        });
+        Log.info(TAG, `enter callback result ${result.length}`);
+        callback(result);
+      });
+    } else {
+      let result = [];
+      result = Array.from(this.selectedMap.values());
       callback(result);
-    })
+    }
   }
 
   public handleSelection(mediaItems: MediaItem[], callback: AsyncCallback<string[]>): void {
@@ -331,6 +348,10 @@ export class SelectManager {
   public getClassName(): string {
     return 'SelectManager';
   }
+
+  public setGetMediaItemFunc(func: Function): void {
+    this.getMediaItemFunc = func;
+  }
 }
 
 class SelectManagerCallback implements AsyncCallback<MediaItem[]> {
@@ -354,15 +375,10 @@ export class ThirdSelectManager extends SelectManager {
   type: string;
   isMultiPick: boolean;
   selectedMap: Map<string, MediaItem> = new Map();
-  getMediaItemFunc: Function;
   indexMap: Map<MediaItem, number> = new Map();
 
   constructor() {
     super();
-  }
-
-  public setGetMediaItemFunc(func: Function): void {
-    this.getMediaItemFunc = func;
   }
 
   public setType(type: string): void {
