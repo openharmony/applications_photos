@@ -171,7 +171,7 @@ export default class MainAbility extends Ability {
     this.isOnDestroy = true;
     let statusBarColorController: StatusBarColorController = StatusBarColorController.getInstance();
     statusBarColorController.release();
-    AppStorage.Delete('entryFromHap');
+    AppStorage.delete('entryFromHap');
     MediaObserver.getInstance().unregisterForAllPhotos();
     MediaObserver.getInstance().unregisterForAllAlbums();
     UserFileManagerAccess.getInstance().onDestroy();
@@ -181,7 +181,7 @@ export default class MainAbility extends Ability {
     // Main window is created, set main page for this ability
     Log.info(TAG, 'Application onWindowStageCreate');
     AppStorage.setOrCreate('photosWindowStage', windowStage);
-    AppStorage.SetOrCreate('deviceType',
+    AppStorage.setOrCreate('deviceType',
     deviceInfo.deviceType == ('phone' || 'default') ? Constants.DEFAULT_DEVICE_TYPE : Constants.PAD_DEVICE_TYPE);
     ScreenManager.getInstance().on(ScreenManager.ON_LEFT_BLANK_CHANGED, data => {
       Log.info(TAG, `onleftBlankChanged: ${data}`);
