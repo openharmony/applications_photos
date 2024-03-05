@@ -557,6 +557,7 @@ export struct TimelinePage {
     Log.info(TAG, `onDeleteStart`);
     this.deleteMode = true;
     this.isDataFreeze = true;
+    this.onModeChange();
     if (this.dataSource != null) {
       this.dataSource.unregisterTimelineObserver();
       this.dataSource.freeze();
@@ -566,7 +567,6 @@ export struct TimelinePage {
   onDeleteEnd(): void {
     Log.info(TAG, `onDeleteEnd`);
     this.isDataFreeze = false;
-    this.onModeChange();
     if (this.dataSource != null) {
       this.dataSource.registerTimelineObserver();
       this.dataSource.onChange('image');
@@ -626,6 +626,7 @@ export struct TimelinePage {
     Log.debug(TAG, `onModeChange current mode ${this.isSelectedMode}`);
     if (this.isSelectedMode) {
       this.isSelectedMode = false;
+      this.isAllSelected = false;
       this.mSelectManager.onModeChange(false);
       this.updateGroupSelectMode();
       AppStorage.delete(Constants.PHOTO_GRID_SELECT_MANAGER);
