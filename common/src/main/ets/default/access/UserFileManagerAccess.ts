@@ -20,6 +20,7 @@ import { TraceControllerUtils } from '../utils/TraceControllerUtils';
 import dataSharePredicates from '@ohos.data.dataSharePredicates';
 import { UiUtil } from '../utils/UiUtil';
 import { AlbumDefine } from '../model/browser/AlbumDefine';
+import photoAccessHelper from '@ohos.file.photoAccessHelper';
 
 const TAG: string = 'common_UserFileManagerAccess';
 
@@ -75,21 +76,21 @@ export class UserFileManagerAccess {
   static readonly NOTIFY_ALBUM_REMOVE_ASSET = userFileManager.NotifyType.NOTIFY_ALBUM_REMOVE_ASSET;
 
   static readonly ALL_IMAGE_VIDEO_FETCH_COLUMNS: Array<string> = [
-    userFileManager.ImageVideoKey.URI.toString(),
-    userFileManager.ImageVideoKey.FILE_TYPE.toString(),
-    userFileManager.ImageVideoKey.DISPLAY_NAME.toString(),
-    userFileManager.ImageVideoKey.DATE_ADDED.toString(),
-    userFileManager.ImageVideoKey.DATE_MODIFIED.toString(),
-    userFileManager.ImageVideoKey.TITLE.toString(),
-    userFileManager.ImageVideoKey.DURATION.toString(),
-    userFileManager.ImageVideoKey.WIDTH.toString(),
-    userFileManager.ImageVideoKey.HEIGHT.toString(),
-    userFileManager.ImageVideoKey.DATE_TAKEN.toString(),
-    userFileManager.ImageVideoKey.ORIENTATION.toString(),
-    userFileManager.ImageVideoKey.FAVORITE.toString(),
-    userFileManager.ImageVideoKey.POSITION.toString(),
-    userFileManager.ImageVideoKey.DATE_TRASHED.toString(),
-    userFileManager.ImageVideoKey.HIDDEN.toString(),
+  userFileManager.ImageVideoKey.URI.toString(),
+  userFileManager.ImageVideoKey.FILE_TYPE.toString(),
+  userFileManager.ImageVideoKey.DISPLAY_NAME.toString(),
+  userFileManager.ImageVideoKey.DATE_ADDED.toString(),
+  userFileManager.ImageVideoKey.DATE_MODIFIED.toString(),
+  userFileManager.ImageVideoKey.TITLE.toString(),
+  userFileManager.ImageVideoKey.DURATION.toString(),
+  userFileManager.ImageVideoKey.WIDTH.toString(),
+  userFileManager.ImageVideoKey.HEIGHT.toString(),
+  userFileManager.ImageVideoKey.DATE_TAKEN.toString(),
+  userFileManager.ImageVideoKey.ORIENTATION.toString(),
+  userFileManager.ImageVideoKey.FAVORITE.toString(),
+  userFileManager.ImageVideoKey.POSITION.toString(),
+  userFileManager.ImageVideoKey.DATE_TRASHED.toString(),
+  userFileManager.ImageVideoKey.HIDDEN.toString(),
     "size" // TODO 等媒体库枚举字段上库
   ]
 
@@ -114,10 +115,10 @@ export class UserFileManagerAccess {
   ]
 
   static readonly SYSTEM_BEFORE_USER_ALBUM_LIST: Array<AlbumSubType> = [
-    UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE,
-    UserFileManagerAccess.VIDEO_ALBUM_SUB_TYPE,
-    UserFileManagerAccess.SCREENSHOT_ALBUM_SUB_TYPE,
-    UserFileManagerAccess.FAVORITE_ALBUM_SUB_TYPE
+  UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE,
+  UserFileManagerAccess.VIDEO_ALBUM_SUB_TYPE,
+  UserFileManagerAccess.SCREENSHOT_ALBUM_SUB_TYPE,
+  UserFileManagerAccess.FAVORITE_ALBUM_SUB_TYPE
   ]
 
   static readonly SYSTEM_AFTER_USER_ALBUM_LIST: Array<AlbumSubType> = [
@@ -126,6 +127,7 @@ export class UserFileManagerAccess {
   ]
 
   private media: userFileManager.UserFileManager = null;
+  private photoAccessHelper?: photoAccessHelper.PhotoAccessHelper;
   private requestTime: number;
 
   private systemAlbumUriMap: Map<AlbumSubType, string> = new Map<AlbumSubType, string>();
@@ -135,10 +137,10 @@ export class UserFileManagerAccess {
   }
 
   public static getInstance(): UserFileManagerAccess {
-    if (AppStorage.Get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS) == null) {
-      AppStorage.SetOrCreate(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS, new UserFileManagerAccess());
+    if (AppStorage.get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS) == null) {
+      AppStorage.setOrCreate(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS, new UserFileManagerAccess());
     }
-    return AppStorage.Get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS);
+    return AppStorage.get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS);
   }
 
   onCreate(context) {
@@ -151,6 +153,14 @@ export class UserFileManagerAccess {
     Log.debug(TAG, 'Photos_UserFileManagerAccess onCreate end');
     if (!this.media) {
       Log.error(TAG, 'get media library instance failed!');
+    }
+    if (this.photoAccessHelper) {
+      Log.debug(TAG, 'photoAccessHelper onCreate already');
+      return;
+    }
+    this.photoAccessHelper = photoAccessHelper.getPhotoAccessHelper(context);
+    if (!this.photoAccessHelper) {
+      Log.error(TAG, 'get photoAccessHelper instance failed!');
     }
     Log.info(TAG, 'onCreate done');
   }
@@ -386,23 +396,38 @@ export class UserFileManagerAccess {
     }
   }
 
-  async deleteToTrash(uri: string): Promise<void> {
-    Log.debug(TAG, 'trashAsset start');
-    await this.media.delete(uri);
+  async deleteToTrash(uris: Array<string>): Promise<void> {
+    TraceControllerUtils.startTrace('deleteToTrash');
+    Log.info(TAG, 'deleteToTrash() start');
+    let startTime: number = Date.now();
+    try {
+      await this.photoAccessHelper.deleteAssets(uris);
+    } catch (error) {
+      Log.error(TAG, `photoAccessHelper deleteAssets error: ${error}, code: ${error?.code}`);
+    }
+    Log.info(TAG, 'deleteToTrash() cost: ' + (Date.now() - startTime));
+    TraceControllerUtils.finishTrace('deleteToTrash');
   }
 
   async deleteFromTrash(assets: Array<FileAsset>): Promise<void> {
-    let fetchResult = await this.media.getAlbums(userFileManager.AlbumType.SYSTEM, userFileManager.AlbumSubType.TRASH);
+    TraceControllerUtils.startTrace('deleteFromTrash');
+    Log.info(TAG, 'deleteFromTrash() start');
+    let startTime: number = Date.now();
+    let fetchResult = await (this.media as userFileManager.UserFileManager).getAlbums(userFileManager.AlbumType.SYSTEM, userFileManager.AlbumSubType.TRASH);
     let trashAlbum = await fetchResult.getFirstObject();
     await trashAlbum.deletePhotoAssets(assets);
     fetchResult.close();
+    Log.info(TAG, 'deleteFromTrash() cost: ' + (Date.now() - startTime));
+    TraceControllerUtils.finishTrace('deleteFromTrash');
   }
 
   async recoverFromTrash(assets: Array<FileAsset>): Promise<void> {
-    let fetchResult = await this.media.getAlbums(userFileManager.AlbumType.SYSTEM, userFileManager.AlbumSubType.TRASH);
+    let startTime: number = Date.now();
+    let fetchResult = await (this.media as userFileManager.UserFileManager).getAlbums(userFileManager.AlbumType.SYSTEM, userFileManager.AlbumSubType.TRASH);
     let trashAlbum = await fetchResult.getFirstObject();
     await trashAlbum.recoverPhotoAssets(assets);
     fetchResult.close();
+    Log.info(TAG, 'recoverFromTrash() cost: ' + (Date.now() - startTime));
   }
 
   async getTrashAssetByUri(assetUri: string): Promise<FileAsset> {
@@ -766,7 +791,7 @@ export class UserFileManagerAccess {
     try {
       let albumFetchOpt = AlbumDefine.getAlbumFetchOptByUri(albumUri);
       // @ts-ignore // TODO 支持不传入type时删掉 ts-ignore
-      let fetchResult = await this.media.getAlbums(albumFetchOpt);
+      let fetchResult: userFileManager.FetchResult<Album> = await this.media.getAlbums(albumFetchOpt);
       if (!fetchResult) {
         Log.warn(TAG, 'getAlbumByUri return null');
         return undefined;
@@ -796,8 +821,8 @@ export class UserFileManagerAccess {
     try {
       Log.info(TAG, `getAlbumByName name: ${albumName}`);
       let albumFetchOpt = AlbumDefine.getAlbumFetchOptByName(albumName);
-      // @ts-ignore // TODO 需要媒体库新开接口，支持仅传入fetchOpt
-      let fetchResult = await this.media.getAlbums(albumFetchOpt);
+      // @ts-ignore  // TODO 需要媒体库新开接口，支持仅传入fetchOpt
+      let fetchResult: userFileManager.FetchResult<Album> = await this.media.getAlbums(albumFetchOpt);
       if (!fetchResult) {
         Log.error(TAG, 'getAlbumByName fetchResult undefined')
         return undefined;

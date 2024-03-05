@@ -35,8 +35,6 @@ export { AlbumDataImpl } from './src/main/ets/default/model/browser/album/AlbumD
 
 export { AlbumInfo } from './src/main/ets/default/model/browser/album/AlbumInfo';
 
-export { AlbumOperationImpl } from './src/main/ets/default/model/browser/album/AlbumOperationImpl';
-
 export { AlbumSetDataSource } from './src/main/ets/default/model/browser/album/AlbumSetDataSource';
 
 export { AlbumDefine } from './src/main/ets/default/model/browser/AlbumDefine';

@@ -36,8 +36,8 @@ export class OperationImpl implements BrowserOperationInterface {
     }
   }
 
-  async delete(uri: string): Promise<void> {
-    await UserFileManagerAccess.getInstance().deleteToTrash(uri);
+  async delete(uris: Array<string>): Promise<void> {
+    await UserFileManagerAccess.getInstance().deleteToTrash(uris);
   }
 
   async deleteTrash(assets: Array<FileAsset>): Promise<void> {
@@ -71,17 +71,9 @@ export class OperationImpl implements BrowserOperationInterface {
     Log.debug(TAG, 'copy end')
   }
 
-  async trash(uri: string, isTrash: boolean): Promise<void> {
-    Log.debug(TAG, `trash start ${JSON.stringify(uri)}`);
-
-    let fileAsset;
-    if (isTrash) {
-      fileAsset = (await UserFileManagerAccess.getInstance().getFirstObject(AlbumDefine.getFileFetchOptByUri(uri))).obj;
-    } else {
-      fileAsset = (await UserFileManagerAccess.getInstance().getTrashObject(AlbumDefine.getFileFetchOptByUri(uri)))[0];
-    }
-    await this.delete(fileAsset.uri);
-    Log.debug(TAG, `trash end: ${isTrash}`);
+  async trash(uris: Array<string>): Promise<void> {
+    Log.debug(TAG, `trash start ${JSON.stringify(uris)}`);
+    await UserFileManagerAccess.getInstance().deleteToTrash(uris);
   }
 
   async remove(uris: Array<string>, albumUri: string): Promise<void> {

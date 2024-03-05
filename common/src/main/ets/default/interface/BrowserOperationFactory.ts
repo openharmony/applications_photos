@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 import { OperationImpl } from '../model/browser/photo/OperationImpl';
-import { AlbumOperationImpl } from '../model/browser/album/AlbumOperationImpl';
 import type { BrowserOperationInterface } from './BrowserOperationInterface';
 
 export class BrowserOperationFactory {
@@ -23,8 +22,6 @@ export class BrowserOperationFactory {
   static getFeature(type: string): BrowserOperationInterface {
     if (type == BrowserOperationFactory.TYPE_PHOTO) {
       return new OperationImpl();
-    } else if (type == BrowserOperationFactory.TYPE_ALBUM) {
-      return new AlbumOperationImpl();
     }
     return null;
   }

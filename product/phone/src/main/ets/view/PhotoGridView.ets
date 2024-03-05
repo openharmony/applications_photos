@@ -568,6 +568,10 @@ export struct PhotoGridView {
     this.dataSource.setBroadCast(this.broadCast)
     this.mSelectManager.setPhotoDataImpl();
     this.mSelectManager.setAlbumUri(this.albumInfo.uri);
+    this.mSelectManager.setGetMediaItemFunc(
+      (uri: string, itemNotifyCallback: Function): MediaItem | undefined => {
+        return this.dataSource?.getMediaItemByUriFromAll(uri, itemNotifyCallback);
+      });
     MediaObserver.getInstance().registerObserver(this.dataObserver);
 
     this.broadCast.on(BroadCastConstants.SELECT, this.selectFunc);

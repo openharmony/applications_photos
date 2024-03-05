@@ -21,17 +21,17 @@ export type CreateParam = {
 };
 
 export interface BrowserOperationInterface {
-  create(param: any): any;
+  create(param: CreateParam): Promise<FileAsset>;
 
-  delete(uri: string): any;
+  delete(uris: Array<string>): Promise<void>;
 
-  deleteTrash(assets: Array<FileAsset>): any;
+  deleteTrash(assets: Array<FileAsset>): Promise<void>;
 
-  recoverFromTrash(assets: Array<FileAsset>): any;
+  recoverFromTrash(assets: Array<FileAsset>): Promise<void>;
 
-  trash(uri: string, isTrash: boolean): any;
+  trash(uris: Array<string>): Promise<void>;
 
-  remove(uris: Array<string>, albumUri: string): any;
+  remove(uris: Array<string>, albumUri: string): Promise<void>
 
   copy(source: any, target: any): any;
 
