@@ -53,6 +53,7 @@ let editAble: boolean = true;
 export default class MainAbility extends Ability {
   private formCurrentUri: string = '';
   private formAlbumUri: string = '';
+  private preselectedUris: Array<string> = [];
   private isOnDestroy: boolean = false;
   private localStorage: LocalStorage = new LocalStorage();
 
@@ -123,6 +124,7 @@ export default class MainAbility extends Ability {
       mCallerBundleName = wantParam[Constants.KEY_WANT_PARAMETERS_CALLER_BUNDLE_NAME] as string;
       mMaxSelectCount = wantParam?.maxSelectCount as number;
       mFilterMediaType = wantParam?.filterMediaType as string;
+      this.preselectedUris = wantParam?.preselectedUris as Array<string>;
       AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_MULTIPLE_SELECT);
       cameraAble = (wantParam?.isPhotoTakingSupported as boolean) ?? true;
       editAble = (wantParam?.isEditSupported as boolean) ?? true;
@@ -264,6 +266,7 @@ export default class MainAbility extends Ability {
           filterMediaType: mFilterMediaType,
           isFirstEnter: true,
           maxSelectCount: mMaxSelectCount,
+          preselectedUris: this.preselectedUris,
           uri: '',
           cameraAble: cameraAble,
           editAble: editAble,

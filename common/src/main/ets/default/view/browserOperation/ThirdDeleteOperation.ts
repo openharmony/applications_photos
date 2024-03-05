@@ -84,13 +84,16 @@ export class ThirdDeleteOperation extends ProcessMenuOperation {
     }
     this.currentBatch++;
     let startIndex: number = (this.currentBatch - 1) * this.BATCH_SIZE;
-    let endIndex: number = this.currentBatch * this.BATCH_SIZE;
-    let batchUris: string[] = this.uris.slice(startIndex, Math.min(endIndex, this.uris.length));
+    const endIndex: number = Math.min(this.currentBatch * this.BATCH_SIZE, this.uris.length);
+    let batchUris: Array<string> = new Array();
+    for (let index = startIndex; index < endIndex; index++) {
+      batchUris.push(this.uris[index]);
+    }
 
     let operationImpl = BrowserOperationFactory.getFeature(BrowserOperationFactory.TYPE_PHOTO);
 
     TraceControllerUtils.startTraceWithTaskId('trash', this.currentBatch)
-    operationImpl.trash(batchUris[0], true).then(() => {
+    operationImpl.trash(batchUris).then(() => {
       TraceControllerUtils.finishTraceWithTaskId('trash', this.currentBatch)
       this.onCompleted()
     }).catch((error) => {

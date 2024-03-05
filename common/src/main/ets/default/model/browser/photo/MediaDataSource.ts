@@ -34,6 +34,7 @@ import type { ViewData } from './ViewData';
 import { GetItemIndexCallback } from './GetItemIndexCallback';
 import { FileAsset } from '../../../access/UserFileManagerAccess';
 import type { PhotoDataImpl } from './PhotoDataImpl';
+import { GetItemCallback } from './GetItemCallback';
 
 const TAG: string = 'common_MediaDataSource';
 
@@ -210,6 +211,26 @@ export class MediaDataSource extends AbsDataSource {
         return item;
       }
     }
+    return undefined;
+  }
+
+  getMediaItemByUriFromAll(uri: string, itemNotifyCallback: Function): MediaItem {
+    Log.info(TAG, `getMediaItemByUriFromAll uri ${uri}`);
+    if (this.items.length <= 0) {
+      return undefined;
+    }
+
+    for (let item of this.items) {
+      if (item?.uri === uri) {
+        return item;
+      }
+    }
+
+    // 若当前数据不存在于当前列表的处理
+    Log.info(TAG, `getMediaItemByUriFromAll, ${uri}`);
+    let itemIndexCallback: GetItemCallback = new GetItemCallback(this, itemNotifyCallback);
+    this.photoDataImpl.getMediaItemByUri(itemIndexCallback, uri);
+
     return undefined;
   }
 

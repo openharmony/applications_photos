@@ -20,6 +20,7 @@ import { TraceControllerUtils } from '../utils/TraceControllerUtils';
 import dataSharePredicates from '@ohos.data.dataSharePredicates';
 import { UiUtil } from '../utils/UiUtil';
 import { AlbumDefine } from '../model/browser/AlbumDefine';
+import photoAccessHelper from '@ohos.file.photoAccessHelper';
 
 const TAG: string = 'common_UserFileManagerAccess';
 
@@ -126,6 +127,7 @@ export class UserFileManagerAccess {
   ]
 
   private media: userFileManager.UserFileManager = null;
+  private photoAccessHelper?: photoAccessHelper.PhotoAccessHelper;
   private requestTime: number;
 
   private systemAlbumUriMap: Map<AlbumSubType, string> = new Map<AlbumSubType, string>();
@@ -151,6 +153,14 @@ export class UserFileManagerAccess {
     Log.debug(TAG, 'Photos_UserFileManagerAccess onCreate end');
     if (!this.media) {
       Log.error(TAG, 'get media library instance failed!');
+    }
+    if (this.photoAccessHelper) {
+      Log.debug(TAG, 'photoAccessHelper onCreate already');
+      return;
+    }
+    this.photoAccessHelper = photoAccessHelper.getPhotoAccessHelper(context);
+    if (!this.photoAccessHelper) {
+      Log.error(TAG, 'get photoAccessHelper instance failed!');
     }
     Log.info(TAG, 'onCreate done');
   }
@@ -386,23 +396,38 @@ export class UserFileManagerAccess {
     }
   }
 
-  async deleteToTrash(uri: string): Promise<void> {
-    Log.debug(TAG, 'trashAsset start');
-    await this.media.delete(uri);
+  async deleteToTrash(uris: Array<string>): Promise<void> {
+    TraceControllerUtils.startTrace('deleteToTrash');
+    Log.info(TAG, 'deleteToTrash() start');
+    let startTime: number = Date.now();
+    try {
+      await this.photoAccessHelper.deleteAssets(uris);
+    } catch (error) {
+      Log.error(TAG, `photoAccessHelper deleteAssets error: ${error}, code: ${error?.code}`);
+    }
+    Log.info(TAG, 'deleteToTrash() cost: ' + (Date.now() - startTime));
+    TraceControllerUtils.finishTrace('deleteToTrash');
   }
 
   async deleteFromTrash(assets: Array<FileAsset>): Promise<void> {
-    let fetchResult = await this.media.getAlbums(userFileManager.AlbumType.SYSTEM, userFileManager.AlbumSubType.TRASH);
+    TraceControllerUtils.startTrace('deleteFromTrash');
+    Log.info(TAG, 'deleteFromTrash() start');
+    let startTime: number = Date.now();
+    let fetchResult = await (this.media as userFileManager.UserFileManager).getAlbums(userFileManager.AlbumType.SYSTEM, userFileManager.AlbumSubType.TRASH);
     let trashAlbum = await fetchResult.getFirstObject();
     await trashAlbum.deletePhotoAssets(assets);
     fetchResult.close();
+    Log.info(TAG, 'deleteFromTrash() cost: ' + (Date.now() - startTime));
+    TraceControllerUtils.finishTrace('deleteFromTrash');
   }
 
   async recoverFromTrash(assets: Array<FileAsset>): Promise<void> {
-    let fetchResult = await this.media.getAlbums(userFileManager.AlbumType.SYSTEM, userFileManager.AlbumSubType.TRASH);
+    let startTime: number = Date.now();
+    let fetchResult = await (this.media as userFileManager.UserFileManager).getAlbums(userFileManager.AlbumType.SYSTEM, userFileManager.AlbumSubType.TRASH);
     let trashAlbum = await fetchResult.getFirstObject();
     await trashAlbum.recoverPhotoAssets(assets);
     fetchResult.close();
+    Log.info(TAG, 'recoverFromTrash() cost: ' + (Date.now() - startTime));
   }
 
   async getTrashAssetByUri(assetUri: string): Promise<FileAsset> {

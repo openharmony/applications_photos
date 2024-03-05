@@ -99,7 +99,8 @@ export class Save {
   private static async createFileAsset(uri: string, albumUri: string,  isReplace: Boolean) {
     let dataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
     let fileAsset = await dataImpl.getDataByUri(uri);
-
+    let batchUris: Array<string> = new Array();
+    batchUris.push(uri)
     if (!fileAsset) {
       Log.error(TAG, 'get file error');
       return null;
@@ -114,7 +115,7 @@ export class Save {
     let favorite: boolean = false;
     if (isReplace) {
       favorite = Boolean(await fileAsset.get(userFileManager.ImageVideoKey.FAVORITE.toString()));
-      await UserFileManagerAccess.getInstance().deleteToTrash(uri);
+      await UserFileManagerAccess.getInstance().deleteToTrash(batchUris);
       Log.debug(TAG, `trash picture file uri ${uri} end.`);
     }
     fileAsset = await UserFileManagerAccess.getInstance().createAsset(fileAsset.mediaType, displayName);
