@@ -62,9 +62,9 @@ export class DeleteMenuOperation implements MenuOperation, MenuOperationCallback
 
   setConfirmText(): void {
     if (!this.isTrash) {
-      AppStorage.setOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_delete_permanently'));
+      AppStorage.SetOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_delete_permanently'));
     } else {
-      AppStorage.setOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_delete'));
+      AppStorage.SetOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, $r('app.string.dialog_delete'));
     }
   }
 
@@ -86,10 +86,12 @@ export class DeleteMenuOperation implements MenuOperation, MenuOperationCallback
       Log.error(TAG, 'mediaItem is null, return');
       return;
     }
+    let batchUris: Array<string> = new Array();
+    batchUris.push(mediaItem.uri);
     let operationImpl = BrowserOperationFactory.getFeature(BrowserOperationFactory.TYPE_PHOTO);
     try {
       if (this.isTrash) {
-        await operationImpl.trash(mediaItem.uri, true);
+        await operationImpl.trash(batchUris);
       } else {
         let fileAssets = new Array<FileAsset>();
         fileAssets.push(await UserFileManagerAccess.getInstance().getTrashAssetByUri(mediaItem.uri));
