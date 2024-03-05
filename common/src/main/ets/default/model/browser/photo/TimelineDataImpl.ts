@@ -80,4 +80,7 @@ export class TimelineDataImpl extends BrowserDataImpl {
 
   getDataIndexByUri(callback: AsyncCallback<number>, param: unknown, uri: string): void {
   }
+
+  getMediaItemByUri(callback: AsyncCallback<unknown>, uri: string): void {
+  }
 }
