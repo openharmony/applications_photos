@@ -83,15 +83,21 @@ export class BatchRecoverMenuOperation extends ProcessMenuOperation {
     this.currentBatch++;
     let startIndex = (this.currentBatch - 1) * this.BATCH_SIZE;
     let endIndex = this.currentBatch * this.BATCH_SIZE;
-    let batchUris: string[] = this.uris.slice(startIndex, Math.min(endIndex, this.uris.length));
+    endIndex = Math.min(endIndex, this.uris.length);
     let operationImpl = BrowserOperationFactory.getFeature(BrowserOperationFactory.TYPE_PHOTO);
     let fileAssets = new Array<FileAsset>();
-    let fileItem = await UserFileManagerAccess.getInstance().getTrashAssetByUri(batchUris[0]);
-    fileAssets.push(fileItem);
+    let uris: Array<string> = new Array();
+    for (let index = startIndex; index < endIndex; index++) {
+      uris.push(this.uris[index]);
+
+      let fileItem = await UserFileManagerAccess.getInstance().getTrashAssetByUri(uris[index]);
+      fileAssets.push(fileItem);
+    }
+
     operationImpl.recoverFromTrash(fileAssets).then(() => {
-      this.onCompleted()
+      this.onCompleted();
     }).catch((error: BusinessError) => {
-      Log.error(TAG, `recover error: ${error}`);
+      Log.error(TAG, `recover error: ${error}, code: ${error?.code}`);
       this.onError();
     })
   }
