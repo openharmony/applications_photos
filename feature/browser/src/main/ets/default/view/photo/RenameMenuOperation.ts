@@ -13,142 +13,91 @@
  * limitations under the License.
  */
 
-import type { BrowserOperationInterface, CreateParam } from '../../../interface/BrowserOperationInterface';
-import { Log } from '../../../utils/Log';
-import type { FileAsset } from '../../../access/UserFileManagerAccess';
-import { Album, UserFileManagerAccess } from '../../../access/UserFileManagerAccess';
-import fileio from '@ohos.fileio';
-import { AlbumDefine } from '../AlbumDefine';
-import { StringUtil } from '../../../utils/StringUtil';
+import type { MenuOperation, MenuOperationCallback, } from '@ohos/common';
+import {
+  BroadCastConstants,
+  BrowserDataFactory,
+  BrowserOperationFactory,
+  BrowserConstants as Constants,
+  Log,
+  MenuContext,
+  UiUtil
+} from '@ohos/common';
 import userFileManager from '@ohos.filemanagement.userFileManager';
 
-const TAG: string = 'common_OperationImpl';
+const TAG: string = 'browser_RenameMenuOperation';
 
-export class OperationImpl implements BrowserOperationInterface {
-  async favor(uri: string, isFavor: boolean): Promise<boolean> {
-    Log.info(TAG, `favor, id ${uri}`);
+export class RenameMenuOperation implements MenuOperation, MenuOperationCallback {
+  private menuContext: MenuContext;
+
+  constructor(menuContext: MenuContext) {
+    this.menuContext = menuContext;
+  }
+
+  doAction(): void {
+    if (this.menuContext == null) {
+      Log.error(TAG, 'menuContext is null, return');
+      return;
+    }
+    let mediaItem = this.menuContext.mediaItem;
+    if (mediaItem == null) {
+      Log.error(TAG, 'mediaItem is null, return');
+      return;
+    }
+
+    this.confirmCallback = this.confirmCallback.bind(this);
+    this.cancelCallback = this.cancelCallback.bind(this);
+    let fileName = '';
+    let title: string = mediaItem.getTitle();
+    if (title) {
+      fileName = title;
+    } else {
+      let index = mediaItem.displayName.lastIndexOf('.');
+      fileName = mediaItem.displayName.substr(0, index)
+    }
+
+    this.menuContext.broadCast.emit(BroadCastConstants.SHOW_RENAME_PHOTO_DIALOG,
+      [fileName, this.confirmCallback, this.cancelCallback]);
+  }
+
+  onCompleted(result: {title: string, displayName: string}): void {
+    Log.info(TAG, 'Rename data succeed!');
+  }
+
+  onError(): void {
+    Log.error(TAG, 'Rename data failed!');
+  }
+
+  async rename(uri: string, name: string): Promise<{title: string, displayName: string}> {
+    Log.info(TAG, 'renameSinglePhoto start');
+    let operationImpl = BrowserOperationFactory.getFeature(BrowserOperationFactory.TYPE_PHOTO);
+    let dataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
+    let fileAsset = await dataImpl.getDataByUri(uri);
+    operationImpl.setName(fileAsset, name);
+    await operationImpl.change(fileAsset);
+    return { title: String(fileAsset.get(userFileManager.ImageVideoKey.TITLE.toString())),
+      displayName: fileAsset.displayName };
+  }
+
+  async confirmCallback(title: string): Promise<void> {
+    Log.info(TAG, `Rename confirm new name: ${title}`);
+    let mediaItem = this.menuContext.mediaItem;
+    if (mediaItem == null) {
+      Log.error(TAG, 'mediaItem is null, return');
+      return;
+    }
     try {
-      let fileAsset = (await UserFileManagerAccess.getInstance().getFirstObject(AlbumDefine.getFileFetchOptByUri(uri))).obj
-      fileAsset.favorite(isFavor);
-      return true;
-    } catch (e) {
-      Log.error(TAG, `favor error ${e}`);
-      return false;
+      let result = await this.rename(mediaItem.uri, title);
+      Log.info(TAG, `Rename confirm result: ${JSON.stringify(result)}`);
+      this.menuContext.broadCast.emit(Constants.RENAME, [result]);
+      this.onCompleted(result);
+    } catch (err) {
+      Log.error(TAG, `Rename error: ${err}`);
+      UiUtil.showToast($r('app.string.rename_failed'));
     }
   }
 
-  async delete(uris: Array<string>): Promise<void> {
-    await UserFileManagerAccess.getInstance().deleteToTrash(uris);
-  }
-
-  async deleteTrash(assets: Array<FileAsset>): Promise<void> {
-    await UserFileManagerAccess.getInstance().deleteFromTrash(assets);
-  }
-
-  async recoverFromTrash(assets: Array<FileAsset>): Promise<void> {
-    await UserFileManagerAccess.getInstance().recoverFromTrash(assets);
-  }
-
-  async copy(source: FileAsset, target: FileAsset): Promise<void> {
-    Log.info(TAG, `copy start: src:${source.uri} target: ${target.uri}`);
-
-    let fd = await UserFileManagerAccess.getInstance().openAsset('R', source);
-    if (fd <= 0) {
-      throw 'fd is invalid'
-      return;
-    }
-
-    let targetFd = await UserFileManagerAccess.getInstance().openAsset('RW', target);
-    if (targetFd <= 0) {
-      throw 'targetFd is invalid'
-      return;
-    }
-
-    await this.readAndWriteData(fd, targetFd);
-
-    await source.close(fd);
-    await target.close(targetFd);
-
-    Log.debug(TAG, 'copy end')
-  }
-
-  async trash(uris: Array<string>): Promise<void> {
-    Log.debug(TAG, `trash start ${JSON.stringify(uris)}`);
-    await UserFileManagerAccess.getInstance().deleteToTrash(uris);
-  }
-
-  async remove(uris: Array<string>, albumUri: string): Promise<void> {
-    Log.debug(TAG, `remove start ${JSON.stringify(uris)} from ${JSON.stringify(albumUri)}`);
-    let album: Album = await UserFileManagerAccess.getInstance().getAlbumByUri(albumUri);
-    if (album) {
-      let fileAssets: Array<FileAsset> = new Array<FileAsset>();
-      for (let i = 0; i < uris.length; i++) {
-        let fileAsset = (await UserFileManagerAccess.getInstance().getFirstObject(AlbumDefine.getFileFetchOptByUri(uris[i]))).obj;
-        if (fileAsset) {
-          fileAssets.push(fileAsset);
-        }
-      }
-      if (fileAssets.length > 0) {
-        await album.removePhotoAssets(fileAssets);
-      }
-    }
-    Log.debug(TAG, `remove end`);
-  }
-
-  async create(param: CreateParam): Promise<FileAsset> {
-    return await UserFileManagerAccess.getInstance().createAsset(param.fileType, param.name);
-  }
-
-  async change(file: FileAsset): Promise<void> {
-    await file.commitModify();
-  }
-
-  setName(source: FileAsset, name: string): void {
-    let displayName = source.displayName;
-    let index = displayName.lastIndexOf('.');
-    displayName = name + displayName.slice(index);
-    source.displayName = displayName;
-    source.set(userFileManager.ImageVideoKey.TITLE.toString(), name);
-    Log.info(TAG, `setName title: ${name}, displayName: ${displayName}`);
-  }
-
-  async readAndWriteData(srcFd: number, targetFd: number) {
-    Log.debug(TAG, 'readAndWriteData start!')
-    let stat = await fileio.fstat(srcFd);
-    Log.debug(TAG, `readAndWriteData read stat.size ${stat.size}`)
-    if (stat.size == 0) {
-      return;
-    }
-    let step = 10000000;
-    let last = stat.size % step;
-    let count = (stat.size - last) / step;
-    if (last > 0) {
-      count = count + 1;
-    }
-    Log.debug(TAG, `readAndWriteData read count ${count} last ${last}`)
-
-    for (let i = 0; i < count; i++) {
-      let rwSize = 0;
-      if (i == (count - 1)) {
-        rwSize = last;
-      } else {
-        rwSize = step;
-      }
-      let buf = new ArrayBuffer(rwSize);
-      let readOptions = {
-        offset: 0,
-        length: rwSize,
-        position: i * step
-      }
-      await fileio.read(srcFd, buf, readOptions);
-      let writeOptions = {
-        offset: 0,
-        length: rwSize,
-        position: i * step,
-        encoding: 'utf-8'
-      }
-      await fileio.write(targetFd, buf, writeOptions);
-    }
-    Log.debug(TAG, 'readAndWriteData end!')
+  private cancelCallback(): void {
+    Log.info(TAG, 'Rename cancel');
   }
 }
