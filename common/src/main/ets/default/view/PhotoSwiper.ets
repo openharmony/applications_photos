@@ -138,7 +138,7 @@ export struct PhotoSwiper {
         if (item == null || item == undefined) {
           return JSON.stringify(item) + index;
         }
-        return `${item.data.uri}_${item.data.size}_${item.data.orientation}_${index}`;
+        return `${item.data.path}_${item.data.size}_${item.data.orientation}_${index}`;
       })
     }
     .cachedCount(this.SWIPE_CACHE_COUNT)
