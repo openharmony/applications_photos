@@ -154,17 +154,17 @@ export abstract class BrowserDataImpl implements BrowserDataInterface {
     return object;
   }
 
-  getThumbnailSafe(sourceUri: string, path: string, modifiedDate?: number, size?): string {
+  getThumbnailSafe(sourceUri: string, path: string, size?): string {
     try {
       if (size) {
         if (size.width != 0 && size.height != 0) {
-          return `${sourceUri}?timestampApp=${modifiedDate}&oper=thumbnail&width=${size.width}&height=${size.height}&path=${path}`;
+          return `${sourceUri}?oper=thumbnail&width=${size.width}&height=${size.height}&path=${path}`;
         } else {
           Log.warn(TAG, 'getThumbnailSafe with width==0 and height==0, so do not use thumbnail' + JSON.stringify(size));
           return `${sourceUri}`;
         }
       } else {
-        return `${sourceUri}?timestampApp=${modifiedDate}&oper=thumbnail&width=${BrowserDataImpl.THUMBNAIL_WIDTH}&height=${BrowserDataImpl.THUMBNAIL_WIDTH}&path=${path}`;
+        return `${sourceUri}?oper=thumbnail&width=${BrowserDataImpl.THUMBNAIL_WIDTH}&height=${BrowserDataImpl.THUMBNAIL_WIDTH}&path=${path}`;
       }
     } catch (err) {
       Log.warn(TAG, `get Thumbnail Failed! msg:${err}`);
