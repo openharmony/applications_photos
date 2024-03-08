@@ -23,6 +23,7 @@ import {
   MenuContext,
   UiUtil
 } from '@ohos/common';
+import userFileManager from '@ohos.filemanagement.userFileManager';
 
 const TAG: string = 'browser_RenameMenuOperation';
 
@@ -74,7 +75,8 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
     let fileAsset = await dataImpl.getDataByUri(uri);
     operationImpl.setName(fileAsset, name);
     await operationImpl.change(fileAsset);
-    return { title: fileAsset.title, displayName: fileAsset.displayName };
+    return { title: String(fileAsset.get(userFileManager.ImageVideoKey.TITLE.toString())),
+      displayName: fileAsset.displayName };
   }
 
   async confirmCallback(title: string): Promise<void> {
