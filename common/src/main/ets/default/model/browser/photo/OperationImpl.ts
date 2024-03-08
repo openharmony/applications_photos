@@ -20,6 +20,7 @@ import { Album, UserFileManagerAccess } from '../../../access/UserFileManagerAcc
 import fileio from '@ohos.fileio';
 import { AlbumDefine } from '../AlbumDefine';
 import { StringUtil } from '../../../utils/StringUtil';
+import userFileManager from '@ohos.filemanagement.userFileManager';
 
 const TAG: string = 'common_OperationImpl';
 
@@ -106,9 +107,8 @@ export class OperationImpl implements BrowserOperationInterface {
     let displayName = source.displayName;
     let index = displayName.lastIndexOf('.');
     displayName = name + displayName.slice(index);
-
     source.displayName = displayName;
-
+    source.set(userFileManager.ImageVideoKey.TITLE.toString(), name);
     Log.info(TAG, `setName title: ${name}, displayName: ${displayName}`);
   }
 
