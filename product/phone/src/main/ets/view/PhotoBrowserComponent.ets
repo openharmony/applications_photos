@@ -114,7 +114,7 @@ export struct PhotoBrowserComponent {
   @Provide toolMenuList: Array<Action> = new Array<Action>();
   @Provide topMenuList: Array<Action> = new Array<Action>();
   @Provide moreMenuList: Array<Action> = new Array<Action>();
-  @State broadCast: BroadCast = new BroadCast();
+  @Provide broadCast: BroadCast = new BroadCast();
   @Provide isShowBar: boolean = true;
   @Provide onlyChangeBgColor: boolean = false;
   @Provide canSwipe: boolean = true;
