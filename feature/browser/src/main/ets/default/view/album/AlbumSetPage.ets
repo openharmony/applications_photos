@@ -96,8 +96,6 @@ export struct AlbumSetPage {
   private onSendMoveCopyBroadCastFunc: Function = (index: number): void => this.onSendMoveCopyBroadCast(index);
   private onLoadingFinishedFunc: Function = (size: number): void => this.onLoadingFinished(size);
   private onResetZeroFunc: Function = (pageNumber: number): void => this.onResetZero(pageNumber);
-  private onUpdateRemoteDeviceFunc: Function = (res: string, deviceId: string, size: number): void =>
-  this.onUpdateRemoteDevice(res, deviceId, size);
   private onMenuClickedFunc = (action: Action, arg: Object[]): void => this.onMenuClicked(action, arg);
   private selectFunc = (
     key: string, value: boolean, isDisableRename: boolean, isDisableDelete: boolean, callback: Function): void =>
@@ -170,7 +168,6 @@ export struct AlbumSetPage {
     AppStorage.setOrCreate('setSelectManagerToAnother', this.mSelectManager);
     this.broadCast.on(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
     this.appBroadCast.on(BroadCastConstants.RESET_ZERO, this.onResetZeroFunc);
-    this.appBroadCast.on(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDeviceFunc);
 
     MediaObserver.getInstance().registerObserver(this.dataObserver);
 
@@ -226,7 +223,6 @@ export struct AlbumSetPage {
     this.appBroadCast.off(BroadCastConstants.RESET_STATE_EVENT, this.onStateResetFunc);
     this.appBroadCast.off(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, this.onSendMoveCopyBroadCastFunc);
     this.appBroadCast.off(BroadCastConstants.RESET_ZERO, this.onResetZeroFunc);
-    this.appBroadCast.off(BroadCastConstants.ON_REMOTE_CHANGED, this.onUpdateRemoteDeviceFunc);
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
     this.dataObserver.clearSource();
     // 后续phone缩略图支持横竖屏后再放开
