@@ -149,6 +149,7 @@ export struct ThirdSelectPhotoBrowserBase {
   }
 
   aboutToAppear(): void {
+    AppStorage.setOrCreate('isReplace', true);
     this.allPhotoDataSource = AppStorage.get<MediaDataSource>(Constants.APP_KEY_ALL_PHOTO_DATASOURCE);
     Log.info(TAG, 'photoBrowser aboutToAppear');
     this.backgroundColorResource = $r('app.color.black');
