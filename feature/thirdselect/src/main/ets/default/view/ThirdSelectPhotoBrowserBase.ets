@@ -499,6 +499,9 @@ export struct ThirdSelectPhotoBrowserBase {
       this.broadCast.off(BrowserConstants.DATA_CONTENT_CHANGED, this.dataContentChangedFunc);
       this.broadCast.off(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
       this.broadCast.off(BrowserConstants.SET_DISABLE_SWIPE, this.setDisableSwipeFunc);
+      this.broadCast.off(BroadCastConstants.UPDATE_EDIT_ITEM, this.funcUpdateEditItem);
+      this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED_WITH_EDIT, this.funcOnDataReloadWithEdit);
+      this.broadCast.off(BroadCastConstants.PICKER_PAGE_DISAPPEAR, this.funcPageDisappear);
     }
     this.dataSource.release();
     mMultimodalInputManager.unregisterListener();
