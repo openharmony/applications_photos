@@ -21,7 +21,8 @@
         "uri": "{{uri}}",
         "albumUri": "{{albumUri}}",
         "displayName": "{{albumName}}",
-        "currentUri": "{{currentUri}}"
+        "currentUri": "{{currentUri}}",
+        "currentIndex": "{{currentIndex}}"
       }
     }
   }
