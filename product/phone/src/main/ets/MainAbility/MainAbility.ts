@@ -134,6 +134,7 @@ export default class MainAbility extends Ability {
       AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_FORM_ABILITY);
       AppStorage.setOrCreate('form_albumUri', wantParam?.albumUri);
       AppStorage.setOrCreate('form_currentUri', wantParam?.currentUri);
+      AppStorage.setOrCreate('form_currentIndex', wantParam?.currentIndex);
       AppStorage.setOrCreate('form_displayName', wantParam?.displayName);
       this.formAlbumUri = wantParam?.albumUri as string;
       this.formCurrentUri = wantParam?.currentUri as string;
@@ -304,8 +305,9 @@ export default class MainAbility extends Ability {
               url: 'pages/PhotoBrowser',
               params: {
                 pageFrom: Constants.ENTRY_FROM.CARD,
-                albumId: AppStorage.Get('form_albumUri'),
-                uri: AppStorage.Get('form_currentUri')
+                albumId: AppStorage.get('form_albumUri'),
+                uri: AppStorage.get('form_currentUri'),
+                index: AppStorage.get('form_currentIndex')
               }
             };
             router.replaceUrl(options);
