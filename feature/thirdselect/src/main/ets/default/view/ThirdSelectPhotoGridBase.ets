@@ -124,6 +124,8 @@ export struct ThirdSelectPhotoGridBase {
   this.jumpBrowserCallback(name, item, geometryTapIndex, geometryTransitionString, isSelectMode);
   private onDataReloadedFunc: Function = (): void => this.onReloadFinishedCallback();
   private onSwitchSmartRecommendTabFunc: Function = (index: number): void => this.onSwitchSmartRecommendTab(index);
+  private funcOnLoadingFinished: Function = (size: number): void => this.onLoadingFinished(size);
+  private pickerInitDataFirstQueryFinishFunc: Function = (): void => this.pickerInitDataFirstQueryFinish();
 
   onPlaceholderChanged() {
     Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
@@ -216,17 +218,9 @@ export struct ThirdSelectPhotoGridBase {
     this.dataSource.setBroadCast(this.broadCast);
     this.broadCast.on(BroadCastConstants.SELECT, this.selectFunc);
     this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
-    this.broadCast.on(Constants.ON_LOADING_FINISHED,
-      (size: number) => {
-        this.onLoadFinishedCallback(size, (param: SelectParams): void => this.updateTitle(param));
-      });
+    this.broadCast.on(Constants.ON_LOADING_FINISHED, this.funcOnLoadingFinished);
     this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
-    this.broadCast.on(SmartPickerConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH, () => {
-      if (this.isShowSmartRecommendTabBar) {
-        this.selectParams.cameraAble
-          = this.smartRecommendTabItems[this.isAllMediaAlbum ? this.currentSmartRecommendTabIndex : 0].isCameraAble();
-      }
-    });
+    this.broadCast.on(SmartPickerConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH, this.pickerInitDataFirstQueryFinishFunc);
     this.selectManager?.registerCallback('updateCount',
       (newState: number) => {
         Log.info(TAG, `updateSelectedCount ${newState}`);
@@ -247,7 +241,6 @@ export struct ThirdSelectPhotoGridBase {
     if (this.dataSource.albumUri === '' && AppStorage.get<MediaDataSource>(Constants.APP_KEY_ALL_PHOTO_DATASOURCE) === undefined) {
       AppStorage.setOrCreate(Constants.APP_KEY_ALL_PHOTO_DATASOURCE, this.dataSource);
     }
-    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     Log.error(TAG, 'meow data count = ' + this.dataSource.totalCount());
   }
 
@@ -298,10 +291,10 @@ export struct ThirdSelectPhotoGridBase {
       this.broadCast.off(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
       this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
       this.broadCast.off(BroadCastConstants.THIRD_PICKER_SWITCH_SMART_RECOMMEND_TAB, this.onSwitchSmartRecommendTabFunc);
-      this.broadCast.off(BroadCastConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH);
+      this.broadCast.off(SmartPickerConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH, this.pickerInitDataFirstQueryFinishFunc);
+      this.broadCast.off(Constants.ON_LOADING_FINISHED, this.funcOnLoadingFinished);
     }
     this.dataSource.releaseBroadCast();
-    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
     Log.info(TAG, `call aboutToDisappear`)
   }
 
@@ -613,6 +606,17 @@ export struct ThirdSelectPhotoGridBase {
     this.dataSource.onDataReloaded();
     this.selectFromCameraFunc && this.selectFromCameraFunc();
     this.selectFromCameraFunc = () => {};
+  }
+
+  private pickerInitDataFirstQueryFinish(): void {
+    if (this.isShowSmartRecommendTabBar) {
+      this.selectParams.cameraAble
+        = this.smartRecommendTabItems[this.isAllMediaAlbum ? this.currentSmartRecommendTabIndex : 0].isCameraAble();
+    }
+  }
+
+  private onLoadingFinished(size: number): void {
+    this.onLoadFinishedCallback(size, (param: SelectParams): void => this.updateTitle(param));
   }
 
   private onLoadFinishedCallback(size: number, updateTitle: Function) {
