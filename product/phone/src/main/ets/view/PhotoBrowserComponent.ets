@@ -82,6 +82,7 @@ interface ParamBrowser {
   albumInfo: AlbumInfo;
   clickThumbnailTime: number;
   albumUri: string;
+  index: number;
   uri: string;
   viewData: ViewData;
   viewDataIndex: string;
