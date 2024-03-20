@@ -295,6 +295,8 @@ export struct ThirdSelectPhotoGridBase {
       this.broadCast.off(Constants.ON_LOADING_FINISHED, this.funcOnLoadingFinished);
     }
     this.dataSource.releaseBroadCast();
+    this.selectManager?.releaseGetMediaItemFunc();
+    this.selectManager?.unregisterCallback('updateCount');
     Log.info(TAG, `call aboutToDisappear`)
   }
 
