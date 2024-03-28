@@ -127,6 +127,7 @@ export struct PhotoGridView {
   private onLoadingFinishedFunc: Function = (size: number): void => this.onLoadingFinished(size);
   private onDataReloadedFunc: Function = (): void => this.onDataReloaded();
   private onUpdateFavorStateFunc: Function = (item: MediaItem): void => this.onUpdateFavorState(item);
+  private onDoAnimationFunc: Function = (): void => this.onDoAnimation();
 
   onPlaceholderChanged() {
     Log.debug(TAG, 'onPlaceholderChanged placeholderIndex is ' + this.placeholderIndex);
@@ -579,10 +580,7 @@ export struct PhotoGridView {
     this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
     this.broadCast.on(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
     this.appBroadCast.on(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorStateFunc);
-    this.appBroadCast.on(BroadCastConstants.DO_ANIMATION, (): void => {
-      this.doAnimation();
-      this.appBroadCast.off(BroadCastConstants.DO_ANIMATION, null);
-    });
+    this.appBroadCast.on(BroadCastConstants.DO_ANIMATION, this.onDoAnimationFunc);
 
     AppStorage.SetOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
     this.mSelectManager.registerCallback('allSelect', (newState: boolean) => {
@@ -681,6 +679,11 @@ export struct PhotoGridView {
     } else {
       this.jumpToSelectPhotoBrowserNormal(targetIndex, name, pageEntryFrom);
     }
+  }
+
+  private onDoAnimation(): void {
+    this.doAnimation();
+    this.appBroadCast.off(BroadCastConstants.DO_ANIMATION, null);
   }
 
   private onLoadingFinished(size: number): void {
@@ -793,9 +796,16 @@ export struct PhotoGridView {
     this.broadCast.off(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
     this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
     this.appBroadCast.off(BroadCastConstants.UPDATE_DATA_SOURCE, this.onUpdateFavorStateFunc);
+    this.appBroadCast.off(BroadCastConstants.DO_ANIMATION, this.onDoAnimationFunc);
     this.dataSource.releaseBroadCast();
     MediaObserver.getInstance().unregisterObserver(this.dataObserver);
     this.dataObserver.clearSource();
+    if (this.mSelectManager) {
+      this.mSelectManager.releaseGetMediaItemFunc();
+      this.mSelectManager.unregisterCallback('allSelect');
+      this.mSelectManager.unregisterCallback('updateCount');
+      this.mSelectManager.unregisterCallback('select');
+    }
   }
 
   isSameTransitionId(item: MediaItem): boolean {
