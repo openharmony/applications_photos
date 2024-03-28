@@ -352,6 +352,10 @@ export class SelectManager {
   public setGetMediaItemFunc(func: Function): void {
     this.getMediaItemFunc = func;
   }
+
+  public releaseGetMediaItemFunc(): void {
+    this.getMediaItemFunc = undefined;
+  }
 }
 
 class SelectManagerCallback implements AsyncCallback<MediaItem[]> {
