@@ -729,6 +729,7 @@ export struct PhotoBrowserComponent {
   aboutToAppear(): void {
     TraceControllerUtils.startTrace('PhotoBrowserAboutToAppear');
     Log.info(TAG, 'photoBrowser aboutToAppear');
+    AppStorage.setOrCreate('isEditFunc', false);
     this.geometryTransitionId = AppStorage.get<string>('geometryTransitionBrowserId') as string;
     this.hasAppeared = true;
     this.updateIsHorizontal();
@@ -972,6 +973,9 @@ export struct PhotoBrowserComponent {
   private onDataContentChanged(): void {
     this.reportToBigDataForCameraIn();
     Log.debug(TAG, `PhotoConstants.DATA_CONTENT_CHANGED`);
+    if (AppStorage.get('isEditFunc')) {
+      this.currentIndex = 0;
+    }
     this.onPhotoChanged(this.currentIndex);
   }
 

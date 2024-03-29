@@ -152,6 +152,7 @@ export class PhotoEditorManager {
     if (this.editors[this.currentMode] != undefined) {
       Log.info(TAG, `save enter isReplace = ${isReplace}`);
       AppStorage.setOrCreate('isReplace', isReplace);
+      AppStorage.setOrCreate('isEditFunc', true);
       const filter = this.editors[this.currentMode].exit();
       if (filter != undefined) {
         this.historyManager.push(filter);
