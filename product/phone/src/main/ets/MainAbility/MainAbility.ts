@@ -183,7 +183,7 @@ export default class MainAbility extends Ability {
     Log.info(TAG, 'Application onWindowStageCreate');
     AppStorage.setOrCreate('photosWindowStage', windowStage);
     AppStorage.setOrCreate('deviceType',
-    deviceInfo.deviceType == ('phone' || 'default') ? Constants.DEFAULT_DEVICE_TYPE : Constants.PAD_DEVICE_TYPE);
+    deviceInfo.deviceType == 'phone' || deviceInfo.deviceType == 'default' ? Constants.DEFAULT_DEVICE_TYPE : Constants.PAD_DEVICE_TYPE);
     ScreenManager.getInstance().on(ScreenManager.ON_LEFT_BLANK_CHANGED, data => {
       Log.info(TAG, `onleftBlankChanged: ${data}`);
       AppStorage.setOrCreate('leftBlank', data);
