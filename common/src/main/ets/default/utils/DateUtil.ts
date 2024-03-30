@@ -31,6 +31,9 @@ export class DateUtil {
 
   // Get the date after localization (year-month-day)
   public static getLocalizedDate(milliseconds: number): string {
+    if(milliseconds === undefined){
+      milliseconds = new Date().getTime()
+    }
     let locales: string = this.getLocales();
     return new Intl.DateTimeFormat(locales, {
       year: 'numeric',
