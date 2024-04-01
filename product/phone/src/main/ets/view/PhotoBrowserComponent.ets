@@ -778,7 +778,7 @@ export struct PhotoBrowserComponent {
         MediaObserver.getInstance().registerObserver(this.dataObserver);
         this.uriFromThirdPartyApp = param.uri;
         this.currentIndex = param.index;
-        this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp, (index: number): void => this.onGetItemIndexByUri(this.currentIndex));
+        this.onGetItemIndexByUri(this.currentIndex)
         this.isFromFACard = true;
         this.geometryTransitionEnable = true;
       } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
