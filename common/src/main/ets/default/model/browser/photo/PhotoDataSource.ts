@@ -145,9 +145,12 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
       return undefined;
     }
     Log.info(TAG, `getData index ${index}`);
-    this.albumDataSource.updateSlidingWindow(index);
-    let mediaItem: MediaItem = this.albumDataSource.getRawData(index);
-    return this.packData(index, mediaItem);
+     if (this.albumDataSource) {
+       this.albumDataSource.updateSlidingWindow(index);
+       let mediaItem: MediaItem = this.albumDataSource.getRawData(index);
+       return this.packData(index, mediaItem);
+     }
+    return undefined;
   }
 
   packData(index: number, mediaItem: MediaItem) {
@@ -161,9 +164,9 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
         if (mediaItem.height == 0 || mediaItem.width == 0) {
           return;
         }
-        let index = this.albumDataSource.getIndexByMediaItem(mediaItem);
+        let index = this.albumDataSource?.getIndexByMediaItem(mediaItem) ?? -1;
         if (index != -1) {
-          this.albumDataSource.onDataChanged(index);
+          this.albumDataSource?.onDataChanged(index);
         }
         this.onDataChanged(index);
       })
@@ -234,6 +237,9 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
 
   setAlbumDataSource(albumDataSource: MediaDataSource): void {
     Log.debug(TAG, 'setAlbumDataSource');
+    if (!albumDataSource) {
+      Log.error(TAG, 'dataSource undefined');
+    }
     this.albumDataSource = albumDataSource;
     this.albumDataSource.addLoadingListener(this);
   }
@@ -264,7 +270,7 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
 
   onSizeLoadingFinished(size: number): void {
     Log.info(TAG, `onSizeLoadingFinished, current size: ${size}`);
-    this.broadCast && this.broadCast.emit(PhotoConstants.DATA_SIZE_CHANGED, [size]);
+    this.broadCast?.emit(PhotoConstants.DATA_SIZE_CHANGED, [size]);
   }
 
   onDataLoadingFinished(): void {
@@ -272,7 +278,7 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
     // swiper updates only the five mounted items
     Log.debug(TAG, `onDataLoadingFinished listeners size: ${this.albumDataSource.listeners.length}\
             totalCount: ${this.totalCount()}`);
-    this.broadCast && this.broadCast.emit(PhotoConstants.DATA_CONTENT_CHANGED, []);
+    this.broadCast?.emit(PhotoConstants.DATA_CONTENT_CHANGED, []);
   }
 
   onDataChanged(dataIndex: number): void {
