@@ -367,7 +367,7 @@ export struct ThirdSelectPhotoBrowserBase {
         let dataImpl: PhotoDataImpl | undefined = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO) as PhotoDataImpl | undefined;
         dataImpl?.getDataByUri(this.editNewUri).then((fileAsset: userFileManager.FileAsset | undefined): void => {
           this.newMediaItem = new MediaItem(fileAsset);
-          this.newMediaItem.setThumbnail(dataImpl?.getThumbnailSafe(this.newMediaItem.uri, this.newMediaItem.path, this.newMediaItem.getDateModified()));
+          this.newMediaItem.setThumbnail(dataImpl?.getThumbnailSafe(this.newMediaItem.uri, this.newMediaItem.path));
 
           this.editNewUri = '';
           this.updateSelectItemByNewEditItem(this.newMediaItem, this.currentIndex);
