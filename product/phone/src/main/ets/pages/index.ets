@@ -134,7 +134,7 @@ struct IndexPage {
         this.preIndex = data as number;
         this.currentIndex = this.preIndex;
       }).catch((err: Error) => {
-          this.updatePhotosStore('lastPage', 0);
+        this.updatePhotosStore('lastPage', 0);
       });
     } else {
       Log.info(TAG, 'photosPreferences is undefined');
@@ -302,7 +302,7 @@ struct IndexPage {
                 isShowSelectPhotoBrowser: $isShowSelectPhotoBrowser,
                 pageStatus: this.pageStatus
               })
-              .visibility(this.currentIndex === Constants.ALBUM_PAGE_INDEX ? Visibility.Visible : Visibility.Hidden)
+                .visibility(this.currentIndex === Constants.ALBUM_PAGE_INDEX ? Visibility.Visible : Visibility.Hidden)
             }
           }
           .animationDuration(Constants.NUMBER_0)
