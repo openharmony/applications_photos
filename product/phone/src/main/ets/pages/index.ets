@@ -130,13 +130,12 @@ struct IndexPage {
   initPhotosStore() {
     this.photosPreferences = AppStorage.get<Preferences>(Constants.PHOTOS_STORE_KEY) as Preferences;
     if (this.photosPreferences) {
-      try {
-        const data: data_preferences.ValueType = this.photosPreferences.getSync('lastPage', 0)
+      this.photosPreferences.get('lastPage', 0).then((data: data_preferences.ValueType) => {
         this.preIndex = data as number;
         this.currentIndex = this.preIndex;
-      } catch (err) {
-        this.updatePhotosStore('lastPage', 0);
-      }
+      }).catch((err: Error) => {
+          this.updatePhotosStore('lastPage', 0);
+      });
     } else {
       Log.info(TAG, 'photosPreferences is undefined');
     }
@@ -292,7 +291,7 @@ struct IndexPage {
               }
               .width('100%')
               .height('100%')
-
+              .visibility(this.currentIndex === Constants.TIMELINE_PAGE_INDEX ? Visibility.Visible : Visibility.Hidden)
             }
 
             TabContent() {
@@ -303,7 +302,7 @@ struct IndexPage {
                 isShowSelectPhotoBrowser: $isShowSelectPhotoBrowser,
                 pageStatus: this.pageStatus
               })
-
+              .visibility(this.currentIndex === Constants.ALBUM_PAGE_INDEX ? Visibility.Visible : Visibility.Hidden)
             }
           }
           .animationDuration(Constants.NUMBER_0)
