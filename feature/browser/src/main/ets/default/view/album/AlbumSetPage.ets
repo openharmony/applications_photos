@@ -56,7 +56,7 @@ export struct AlbumSetPage {
   @Provide('selectedCount') @Watch('updateRightClickMenuList') selectedAlbumsCount: number = 0;
   @Provide @Watch('updateRightClickMenuList') isDisableDelete: boolean = false;
   @Provide @Watch('updateRightClickMenuList') isDisableRename: boolean = false;
-  @State isEmpty: boolean = false;
+  @State isEmpty: boolean = true;
   @Provide gridColumnsCount: number = 0;
   @Provide broadCast: BroadCast = new BroadCast();
   @Consume @Watch('onIndexPageShow') isShow: boolean;
