@@ -40,6 +40,7 @@ import {
   NoPhotoIndexComponent,
   TabItemWithText
 } from '@ohos/common/CommonComponents';
+import { TimelineDataSourceManager } from '../../../../../../../timeline';
 import { AlbumSetPageActionBar } from './AlbumSetPageActionBar';
 import { AlbumSetPageToolBar } from './AlbumSetPageToolBar';
 import { AlbumGridItemNewStyle } from './AlbumGridItemNewStyle';
@@ -56,7 +57,7 @@ export struct AlbumSetPage {
   @Provide('selectedCount') @Watch('updateRightClickMenuList') selectedAlbumsCount: number = 0;
   @Provide @Watch('updateRightClickMenuList') isDisableDelete: boolean = false;
   @Provide @Watch('updateRightClickMenuList') isDisableRename: boolean = false;
-  @State isEmpty: boolean = true;
+  @State isEmpty: boolean = TimelineDataSourceManager.getInstance().getDataSource().isEmpty();
   @Provide gridColumnsCount: number = 0;
   @Provide broadCast: BroadCast = new BroadCast();
   @Consume @Watch('onIndexPageShow') isShow: boolean;
@@ -161,7 +162,7 @@ export struct AlbumSetPage {
 
   aboutToAppear(): void {
     TraceControllerUtils.startTrace('AlbumSetPageAboutToAppear');
-    Log.info(TAG, `AlbumSetPageAboutToAppear`);
+    Log.info(TAG, `liujuan AlbumSetPageAboutToAppear`);
     this.appBroadCast.on(BroadCastConstants.ON_TAB_CHANGED, this.onTabChangedFunc);
     this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateResetFunc);
     this.appBroadCast.on(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, this.onSendMoveCopyBroadCastFunc);
@@ -281,6 +282,7 @@ export struct AlbumSetPage {
   }
 
   onLoadingFinished(size: number): void {
+    Log.info(TAG, `liujuan onLoadingFinished is build this.isEmpty = ${this.isEmpty} size = ${size}`);
     this.isEmpty = (size == 0);
   }
 
@@ -363,6 +365,16 @@ export struct AlbumSetPage {
     }
   }
 
+  isBuild () {
+    Log.info(TAG, `liujuan is build this.isEmpty = ${this.isEmpty} this.isTabBarShow = ${this.isTabBarShow}`);
+    return true;
+  }
+
+  isBuild1 () {
+    Log.info(TAG, `liujuan 111 is build this.isEmpty = ${this.isEmpty} this.isTabBarShow = ${this.isTabBarShow}`);
+    return true;
+  }
+
   isRecycleAlbumOfPhoneLikeDevice(item: AlbumInfo): boolean {
     return this.deviceType != Constants.PC_DEVICE_TYPE && item.isTrashAlbum;
   }
@@ -429,12 +441,12 @@ export struct AlbumSetPage {
         alignItems: ItemAlign.Start
       }) {
         if (!this.isEmpty || this.isTabBarShow) {
+          if(this.isBuild1()) {}
           Column() {
             AlbumSetPageActionBar({ onMenuClicked: this.onMenuClickedFunc })
               .opacity(this.albumActionBarOpacity)
           }
           .backgroundColor($r('app.color.default_background_color'))
-
           Column() {
             this.LocalAlbumSet()
           }
@@ -443,12 +455,12 @@ export struct AlbumSetPage {
           .scale({ x: this.albumOtherScale, y: this.albumOtherScale })
           .layoutWeight(Constants.NUMBER_1)
         }
-
         if (this.isAlbumSetSelectedMode) {
           AlbumSetPageToolBar({ onMenuClicked: this.onMenuClickedFunc })
         }
 
         if (this.isEmpty && !this.isTabBarShow) {
+          if(this.isBuild()) {}
           NoPhotoIndexComponent({ index: Constants.ALBUM_PAGE_INDEX, hasBarSpace: true })
         }
       }
