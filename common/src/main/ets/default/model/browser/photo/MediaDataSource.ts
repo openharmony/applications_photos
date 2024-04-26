@@ -125,6 +125,10 @@ export class MediaDataSource extends AbsDataSource {
     return this.size;
   }
 
+  isEmpty(): boolean {
+    return this.totalCount() === 0 && (this.items.length <= 0 || this.items[0] === undefined);
+  }
+
   realTotalCount(): number {
     Log.info(TAG, `realTotalCount: ${this.size}, ${this.getItemCountFinish}`);
     if (this.getItemCountFinish == true) {
@@ -409,6 +413,7 @@ export class MediaDataSource extends AbsDataSource {
   }
 
   emitCountUpdateCallbacks(): void {
+    Log.info(TAG, 'liujuan updateCountPostProcess');
     this.mCallbacks['updateCount'] && this.mCallbacks['updateCount'](this.mediaCount);
     this.broadCast && this.broadCast.emit(Constants.ON_LOADING_FINISHED, [this.mediaCount]);
     this.notifySizeLoadingFinished(this.mediaCount);
