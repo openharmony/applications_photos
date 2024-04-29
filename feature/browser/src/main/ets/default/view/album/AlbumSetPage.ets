@@ -162,7 +162,7 @@ export struct AlbumSetPage {
 
   aboutToAppear(): void {
     TraceControllerUtils.startTrace('AlbumSetPageAboutToAppear');
-    Log.info(TAG, `liujuan AlbumSetPageAboutToAppear`);
+    Log.info(TAG, `AlbumSetPageAboutToAppear`);
     this.appBroadCast.on(BroadCastConstants.ON_TAB_CHANGED, this.onTabChangedFunc);
     this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateResetFunc);
     this.appBroadCast.on(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, this.onSendMoveCopyBroadCastFunc);
@@ -282,7 +282,6 @@ export struct AlbumSetPage {
   }
 
   onLoadingFinished(size: number): void {
-    Log.info(TAG, `liujuan onLoadingFinished is build this.isEmpty = ${this.isEmpty} size = ${size}`);
     this.isEmpty = (size == 0);
   }
 
@@ -365,16 +364,6 @@ export struct AlbumSetPage {
     }
   }
 
-  isBuild () {
-    Log.info(TAG, `liujuan is build this.isEmpty = ${this.isEmpty} this.isTabBarShow = ${this.isTabBarShow}`);
-    return true;
-  }
-
-  isBuild1 () {
-    Log.info(TAG, `liujuan 111 is build this.isEmpty = ${this.isEmpty} this.isTabBarShow = ${this.isTabBarShow}`);
-    return true;
-  }
-
   isRecycleAlbumOfPhoneLikeDevice(item: AlbumInfo): boolean {
     return this.deviceType != Constants.PC_DEVICE_TYPE && item.isTrashAlbum;
   }
@@ -441,7 +430,6 @@ export struct AlbumSetPage {
         alignItems: ItemAlign.Start
       }) {
         if (!this.isEmpty || this.isTabBarShow) {
-          if(this.isBuild1()) {}
           Column() {
             AlbumSetPageActionBar({ onMenuClicked: this.onMenuClickedFunc })
               .opacity(this.albumActionBarOpacity)
@@ -460,7 +448,6 @@ export struct AlbumSetPage {
         }
 
         if (this.isEmpty && !this.isTabBarShow) {
-          if(this.isBuild()) {}
           NoPhotoIndexComponent({ index: Constants.ALBUM_PAGE_INDEX, hasBarSpace: true })
         }
       }
