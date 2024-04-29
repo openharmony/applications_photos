@@ -413,7 +413,6 @@ export class MediaDataSource extends AbsDataSource {
   }
 
   emitCountUpdateCallbacks(): void {
-    Log.info(TAG, 'liujuan updateCountPostProcess');
     this.mCallbacks['updateCount'] && this.mCallbacks['updateCount'](this.mediaCount);
     this.broadCast && this.broadCast.emit(Constants.ON_LOADING_FINISHED, [this.mediaCount]);
     this.notifySizeLoadingFinished(this.mediaCount);
