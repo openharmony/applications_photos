@@ -125,6 +125,10 @@ export class MediaDataSource extends AbsDataSource {
     return this.size;
   }
 
+  isEmpty(): boolean {
+    return this.totalCount() === 0 && (this.items.length <= 0 || this.items[0] === undefined);
+  }
+
   realTotalCount(): number {
     Log.info(TAG, `realTotalCount: ${this.size}, ${this.getItemCountFinish}`);
     if (this.getItemCountFinish == true) {

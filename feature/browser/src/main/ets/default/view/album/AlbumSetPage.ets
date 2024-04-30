@@ -40,6 +40,7 @@ import {
   NoPhotoIndexComponent,
   TabItemWithText
 } from '@ohos/common/CommonComponents';
+import { TimelineDataSourceManager } from '../../../../../../../timeline';
 import { AlbumSetPageActionBar } from './AlbumSetPageActionBar';
 import { AlbumSetPageToolBar } from './AlbumSetPageToolBar';
 import { AlbumGridItemNewStyle } from './AlbumGridItemNewStyle';
@@ -56,7 +57,7 @@ export struct AlbumSetPage {
   @Provide('selectedCount') @Watch('updateRightClickMenuList') selectedAlbumsCount: number = 0;
   @Provide @Watch('updateRightClickMenuList') isDisableDelete: boolean = false;
   @Provide @Watch('updateRightClickMenuList') isDisableRename: boolean = false;
-  @State isEmpty: boolean = false;
+  @State isEmpty: boolean = TimelineDataSourceManager.getInstance().getDataSource().isEmpty();
   @Provide gridColumnsCount: number = 0;
   @Provide broadCast: BroadCast = new BroadCast();
   @Consume @Watch('onIndexPageShow') isShow: boolean;
@@ -434,7 +435,6 @@ export struct AlbumSetPage {
               .opacity(this.albumActionBarOpacity)
           }
           .backgroundColor($r('app.color.default_background_color'))
-
           Column() {
             this.LocalAlbumSet()
           }
@@ -443,7 +443,6 @@ export struct AlbumSetPage {
           .scale({ x: this.albumOtherScale, y: this.albumOtherScale })
           .layoutWeight(Constants.NUMBER_1)
         }
-
         if (this.isAlbumSetSelectedMode) {
           AlbumSetPageToolBar({ onMenuClicked: this.onMenuClickedFunc })
         }
