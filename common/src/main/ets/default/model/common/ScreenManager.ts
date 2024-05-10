@@ -351,7 +351,7 @@ export class ScreenManager {
     Log.debug(TAG, `setSystemUi start, isShowBar=${isShowBar}, deviceType=${deviceTp}`);
     let topWindow: window.Window = this.getMainWindow();
     Log.debug(TAG, 'getTopWindow start');
-    let names: Array<SystemBarKeys> = new Array<SystemBarKeys>('status', 'navigation');
+    let names: Array<SystemBarKeys> = new Array<SystemBarKeys>('navigation');
     if (deviceTp === Constants.PC_DEVICE_TYPE || deviceTp === Constants.PAD_DEVICE_TYPE) {
       names = new Array<SystemBarKeys>('navigation');
     }
