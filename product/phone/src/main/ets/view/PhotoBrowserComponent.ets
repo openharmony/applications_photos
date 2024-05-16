@@ -596,6 +596,8 @@ export struct PhotoBrowserComponent {
   onBackPress(): boolean {
     Log.info(TAG, 'onBackPress');
     this.appBroadCast.emit('hideBar', []);
+    let currentPhoto = this.getPhotoByIndex(this.currentIndex);
+    this.broadCast.emit(BrowserConstants.RESET_DEFAULT_SCALE + currentPhoto.uri, []);
     this.controller?.finishAnimation((): void => this.onBackPressInner());
     return true;
   }
