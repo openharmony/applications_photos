@@ -17,7 +17,7 @@ import router from '@ohos.router';
 import bundle from '@ohos.bundle';
 import CommonEvent from '@ohos.commonEvent';
 import window from '@ohos.window';
-import { MenuOperation, ViewData } from '@ohos/common';
+import { BrowserConstants, MenuOperation, ViewData } from '@ohos/common';
 import {
   Action,
   AddMenuOperation,
