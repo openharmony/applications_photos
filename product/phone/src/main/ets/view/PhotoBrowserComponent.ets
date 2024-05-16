@@ -17,7 +17,7 @@ import router from '@ohos.router';
 import bundle from '@ohos.bundle';
 import CommonEvent from '@ohos.commonEvent';
 import window from '@ohos.window';
-import { MenuOperation, ViewData } from '@ohos/common';
+import { BrowserConstants, MenuOperation, ViewData } from '@ohos/common';
 import {
   Action,
   AddMenuOperation,
@@ -596,6 +596,8 @@ export struct PhotoBrowserComponent {
   onBackPress(): boolean {
     Log.info(TAG, 'onBackPress');
     this.appBroadCast.emit('hideBar', []);
+    let currentPhoto = this.getPhotoByIndex(this.currentIndex);
+    this.broadCast.emit(BrowserConstants.RESET_DEFAULT_SCALE + currentPhoto.uri, []);
     this.controller?.finishAnimation((): void => this.onBackPressInner());
     return true;
   }
