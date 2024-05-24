@@ -42,7 +42,7 @@ export struct ThirdDeleteDialog {
       Column() {
         Stack({ alignContent: Alignment.Bottom}) {
 
-          if(this.uris.length > 1) {
+          if (this.uris.length > 1) {
             Image(this.uris[1])
               .objectFit(ImageFit.Cover)
               .border({ radius: $r('sys.float.ohos_id_corner_radius_default_m')})
@@ -56,7 +56,7 @@ export struct ThirdDeleteDialog {
           Image(this.uris[0])
             .objectFit(ImageFit.Cover)
             .border({ radius: $r('sys.float.ohos_id_corner_radius_default_m')})
-            .height(this.uris.length > 1 ? $r('app.float.third_delete_dialog_ico_height_multi'):
+            .height(this.uris.length > 1 ? $r('app.float.third_delete_dialog_ico_height_multi') :
             $r('app.float.third_delete_dialog_ico_height'))
             .width('100%')
             .margin({ bottom: this.uris.length > 1 ? $r('app.float.dialog_button_and_text_margin') :

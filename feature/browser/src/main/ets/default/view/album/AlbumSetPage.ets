@@ -74,7 +74,7 @@ export struct AlbumSetPage {
   @Provide rightClickMenuList: Array<Action> = new Array<Action>();
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
-  @StorageLink('deviceType') deviceType: string | undefined = AppStorage.get<string>('deviceType') ;
+  @StorageLink('deviceType') deviceType: string | undefined = AppStorage.get<string>('deviceType');
   @State pageStatus: boolean = false;
   @State bottomHeight: number = 0;
   @StorageLink('selectedAlbumUri') selectedAlbumUri: string = '';
@@ -368,7 +368,8 @@ export struct AlbumSetPage {
     return this.deviceType != Constants.PC_DEVICE_TYPE && item.isTrashAlbum;
   }
 
-  @Builder LocalAlbumSet() {
+  @Builder
+  LocalAlbumSet() {
     Stack() {
       if (!this.isEmpty) {
         Grid(this.scroller) {

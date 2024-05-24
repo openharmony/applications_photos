@@ -42,7 +42,7 @@ export struct TimelinePageActionBar {
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
   @State isNeedPlaceholder: boolean = true;
   @Consume moreMenuList: Action[];
-  @StorageLink('deviceType') deviceType: string | undefined = AppStorage.get<string>('deviceType') ;
+  @StorageLink('deviceType') deviceType: string | undefined = AppStorage.get<string>('deviceType');
   private actionBarPaddingTop: number | Resource = 0;
 
   aboutToAppear(): void {

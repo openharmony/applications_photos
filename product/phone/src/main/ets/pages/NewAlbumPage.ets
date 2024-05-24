@@ -331,7 +331,7 @@ export struct NewAlbumPage {
   }
 
   aboutToDisappear(): void {
-    if(this.broadCast) {
+    if (this.broadCast) {
       this.broadCast.off(BroadCastConstants.SELECT, this.selectFunc);
       this.broadCast.off(BroadCastConstants.JUMP_PHOTO_BROWSER, this.jumpPhotoBrowserFunc);
       this.broadCast.off(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
@@ -378,7 +378,7 @@ export struct NewAlbumPage {
                   .key('NewAlbumPageImage' + index)
                   .zIndex(index === this.placeholderIndex ? 1 : 0)
                 }
-              },  (item: ViewData, index?: number) => {
+              }, (item: ViewData, index?: number) => {
                 if (item == null || item == undefined) {
                   return JSON.stringify(item) + index;
                 }

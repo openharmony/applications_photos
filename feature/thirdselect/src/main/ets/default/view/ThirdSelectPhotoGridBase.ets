@@ -342,7 +342,8 @@ export struct ThirdSelectPhotoGridBase {
     }
   }
 
-  @Builder buildGrid() {
+  @Builder
+  buildGrid() {
     Grid(this.scroller) {
       if (!this.selectParams.isFromFa && this.selectParams.cameraAble) {
         GridItem() {
@@ -517,7 +518,7 @@ export struct ThirdSelectPhotoGridBase {
       let albumUri = param.uri === undefined ?
       UserFileManagerAccess.getInstance().getSystemAlbumUri(UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE) :
       param.uri;
-      this.dataSource.setAlbumUri(this.isShowSmartRecommendTabBar ? this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].getAlbumUri() :albumUri);
+      this.dataSource.setAlbumUri(this.isShowSmartRecommendTabBar ? this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].getAlbumUri() : albumUri);
       this.updateTitle(param);
       this.selectParams.bundleName = param.bundleName;
       this.selectParams.isMultiPick = param.isMultiPick;

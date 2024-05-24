@@ -50,7 +50,8 @@ export struct SaveDialog {
   readonly buttonWidth: number = 100 / 3;
   private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
-  @Builder horizontalThreeButtons() {
+  @Builder
+  horizontalThreeButtons() {
     Stack({ alignContent: Alignment.Top }) {
       Row() {
         Column() {
@@ -115,7 +116,8 @@ export struct SaveDialog {
     .height($r('app.float.details_dialog_button_area_height'))
   }
 
-  @Builder verticalThreeButtons() {
+  @Builder
+  verticalThreeButtons() {
     Column() {
       Column() {
         Button() {

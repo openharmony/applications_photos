@@ -50,7 +50,8 @@ export struct ToolBar {
     }
   }
 
-  @Builder PopupBuilder() {
+  @Builder
+  PopupBuilder() {
     Column() {
       ForEach(this.moreMenuList, (menu: Action, index?: number) => {
         Text(menu.textRes)
