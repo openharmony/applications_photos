@@ -768,7 +768,8 @@ export struct ThirdSelectPhotoGridBase {
   }
 }
 
-@Extend(Grid) function gridStyle(gridCount: number) {
+@Extend(Grid) 
+function gridStyle(gridCount: number) {
   .columnsTemplate('1fr '.repeat(gridCount))
   .columnsGap(Constants.GRID_GUTTER)
   .rowsGap(Constants.GRID_GUTTER)
