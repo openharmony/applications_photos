@@ -34,7 +34,8 @@ import { BroadCastManager } from '../model/common/BroadCastManager';
 
 const TAG: string = 'common_ImageGridItemComponent';
 
-@Extend(Image) function focusSetting(uri: string, handleEvent: Function) {
+@Extend(Image) 
+function focusSetting(uri: string, handleEvent: Function) {
   .key('ImageGridFocus_' + uri)
   .focusable(true)
   .onKeyEvent((event?: KeyEvent) => {
