@@ -158,7 +158,9 @@ export struct TabBar {
   private onTabSelected(index: number): void {
     Log.debug(TAG, `TabBar this.currentIndex: ${this.currentIndex} index: ${index}`);
     this.currentIndex = index as 0 | 1;
-    if (this.controller != null) this.controller.changeIndex(this.currentIndex);
+    if (this.controller != null) {
+        this.controller.changeIndex(this.currentIndex);
+    };
     this.tabs.forEach((tab: TabItem) => {
       if (this.tabs.indexOf(tab) == index) {
         tab.isSelected = true;
@@ -337,7 +339,9 @@ export struct TabBarForAlbumSet {
   private onTabSelected(index: number): void {
     Log.info(TAG, `TabBarForAlbumSet this.currentIndex: ${this.currentIndex} index: ${index}`);
     this.currentIndex = index;
-    if (this.controller != null) this.controller.changeIndex(this.currentIndex);
+    if (this.controller != null) {
+        this.controller.changeIndex(this.currentIndex);
+    };
     this.tabs.forEach((tab: TabItemWithText) => {
       tab.isSelected = false;
     })
