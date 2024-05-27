@@ -642,7 +642,7 @@ export struct TimelinePage {
       let params: Params = router.getParams() as Params;
       if (this.routerStart && params != null && params.pageType != null) {
         Log.info(TAG, `MediaOperation back ${JSON.stringify(params)}`)
-        if (params.pageType = MediaOperationType.Add) {
+        if (params.pageType === MediaOperationType.Add) {
           this.addOperation(params.albumName, params.albumUri);
         }
       }
