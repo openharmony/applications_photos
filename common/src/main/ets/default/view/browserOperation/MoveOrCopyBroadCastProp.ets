@@ -103,9 +103,9 @@ export class MoveOrCopyBroadCastProp {
   }
 
   private async addOperation() {
-    let selectManager: SelectManager = AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;;
-    let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;;
-    let targetAlbumUri: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET_URI)as string;
+    let selectManager: SelectManager = AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
+    let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;
+    let targetAlbumUri: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET_URI) as string;
     if (this.broadCast === null || this.broadCast === undefined) {
       Log.error(TAG, 'addOperation error: null or undefined broadcast');
       return;

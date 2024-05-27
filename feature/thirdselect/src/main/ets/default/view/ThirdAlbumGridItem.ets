@@ -84,7 +84,8 @@ export struct ThirdAlbumGridItem {
     });
   }
 
-  @Builder buildNormalCard() {
+  @Builder
+  buildNormalCard() {
     Flex({
       direction: FlexDirection.Row,
       justifyContent: FlexAlign.Center,
@@ -109,7 +110,8 @@ export struct ThirdAlbumGridItem {
     .height(this.gridHeight)
   }
 
-  @Builder buildOthers() {
+  @Builder
+  buildOthers() {
     Column() {
       Text(this.item.albumName)
         .margin({ right: $r('app.float.album_set_name_margin_right') })

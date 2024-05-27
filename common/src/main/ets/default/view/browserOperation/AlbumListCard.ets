@@ -37,7 +37,8 @@ export struct AlbumListCard {
   mediaOperation() {
     if (this.broadCast != null && this.item != null) {
       this.broadCast.emit(BroadCastConstants.MEDIA_OPERATION, [this.item.albumName, this.item.uri]);
-    }  }
+    }
+  }
 
   showMediaRes(): Resource | undefined {
     if (this.item != null) {

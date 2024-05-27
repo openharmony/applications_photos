@@ -117,7 +117,6 @@ export struct PhotoGridView {
   private scrollIndex: number = 0;
   private onWindowSizeChangeCallBack: Function = () => {
     // 后续phone缩略图支持横竖屏后再放开
-    // this.initGridRowCount;
   }
   private selectFunc: Function = (position: number, key: string, value: boolean, callback: Function): void => this.select(position, key, value, callback);
   private jumpPhotoBrowserFunc: Function = (name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void =>

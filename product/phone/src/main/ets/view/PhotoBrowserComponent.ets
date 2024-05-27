@@ -624,7 +624,6 @@ export struct PhotoBrowserComponent {
           let item: AlbumInfo = new AlbumInfo(undefined);
           item.uri = uri;
           item.albumName = displayName;
-          //item.innerId = uri;
           router.replaceUrl({
             url: 'pages/PhotoGridPage',
             params: {
@@ -1181,7 +1180,8 @@ export struct PhotoBrowserComponent {
       }
       if (params.pageType === MediaOperationType.Move) {
         let onMoveEndFunc = async (err: Error, count: number, total: number): Promise<void> => {
-          await this.onMoveEnd(err as Object, count, total)};
+          await this.onMoveEnd(err as Object, count, total);
+          }
         menuContext.withMediaItem(currentPhoto)
           .withBroadCast(this.broadCast)
           .withTargetAlbumName(params.albumName)
@@ -1191,7 +1191,8 @@ export struct PhotoBrowserComponent {
         AppStorage.setOrCreate<string | undefined>(Constants.APP_KEY_NEW_ALBUM_SOURCE, this.albumInfo?.uri);
       } else if (params.pageType === MediaOperationType.Remove) {
         let onMoveEndFunc = async (err: Error, count: number, total: number): Promise<void> => {
-          await this.onMoveEnd(err as Object, count, total)};
+          await this.onMoveEnd(err as Object, count, total);
+          }
         menuContext.withMediaItem(currentPhoto)
           .withBroadCast(this.broadCast)
           .withTargetAlbumName(params.albumName)
@@ -1202,7 +1203,8 @@ export struct PhotoBrowserComponent {
       } else if (params.pageType === MediaOperationType.Add) {
         // "添加到"不需要设置源相册
         let onCopyEndFunc = (err: Error, count: number, total: number): void => {
-          this.onCopyEnd(err as Object, count, total)};
+          this.onCopyEnd(err as Object, count, total);
+          }
         menuContext.withMediaItem(currentPhoto)
           .withBroadCast(this.broadCast)
           .withTargetAlbumName(params.albumName)
@@ -1308,7 +1310,8 @@ export struct PhotoBrowserComponent {
     let menuOperation: MenuOperation;
     let currentPhoto = this.getCurrentPhoto();
     let onDownloadEndFunc = async (err: Error, count: number, total: number): Promise<void> => {
-      await this.onDownloadEnd(err as Object, count, total)};
+      await this.onDownloadEnd(err as Object, count, total);
+      }
     if (currentPhoto == undefined) {
       Log.error(TAG, 'MediaOperation currentPhoto is undefined');
       return;

@@ -280,7 +280,8 @@ export struct PhotoItem {
     }
   }
 
-  @Builder buildImage() {
+  @Builder
+  buildImage() {
     Image(this.thumbnail)
       .key('browserFocus_' + this.thumbnail)
       .aspectRatio(this.ratio)
@@ -680,7 +681,9 @@ export struct PhotoItem {
   }
 
   private dealTouchEvent(event: TouchEvent): void {
-    if (this.eventPipeline === null) return;
+    if (this.eventPipeline === null) {
+        return;
+    };
     if (!this.eventPipeline.canTouch() || this.isOnSwiperAnimation || event.touches.length > 1 || this.isPhotoScaled || this.isInSelectedMode || this.isDefaultFA) {
       return;
     }

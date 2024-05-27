@@ -492,7 +492,7 @@ export struct ThirdSelectPhotoBrowserBase {
     this.selectManager?.refreshData();
 
     this.broadCast.release();
-    if(this.broadCast) {
+    if (this.broadCast) {
       this.broadCast.off(BrowserConstants.PULL_DOWN_END, this.pullDownFunc);
       this.broadCast.off(BrowserConstants.DATA_SIZE_CHANGED, this.dataSizeChangedFunc);
       this.broadCast.off(BroadCastConstants.SELECT, this.selectFunc);
@@ -523,7 +523,7 @@ export struct ThirdSelectPhotoBrowserBase {
   onPhotoChanged(index: number): void {
     this.currentIndex = index;
     let currentPhoto = this.getCurrentPhoto();
-    this.canEdit = (currentPhoto?.mediaType !==  UserFileManagerAccess.MEDIA_TYPE_VIDEO);
+    this.canEdit = (currentPhoto?.mediaType !== UserFileManagerAccess.MEDIA_TYPE_VIDEO);
     if (currentPhoto === undefined) {
       Log.error(TAG, 'onPhotoChanged, item is undefined');
     } else {
@@ -607,7 +607,7 @@ export struct ThirdSelectPhotoBrowserBase {
       if (this.selectManager?.isPreview === true) {
         this.selectManager.isPreview = false;
         this.selectManager.clickedSet.clear();
-        for(let item of this.selectManager.previewSet) {
+        for (let item of this.selectManager.previewSet) {
           this.selectManager?.clickedSet.add(item);
         }
       }
@@ -683,7 +683,8 @@ export struct ThirdSelectPhotoBrowserBase {
     return true;
   }
 
-  @Builder buildCheckBox() {
+  @Builder
+  buildCheckBox() {
     if (this.isMultiPick) {
       Row() {
         Image(this.isSelected ? $r('app.media.picker_checkbox_selected_dark') : $r('app.media.picker_checkbox_unselected_dark'))
@@ -707,7 +708,8 @@ export struct ThirdSelectPhotoBrowserBase {
     }
   }
 
-  @Builder buildPanel() {
+  @Builder
+  buildPanel() {
     ThirdSelectedPanel({
       maxSelectCount: this.maxSelectCount,
       onMenuClicked: (action: Action): void => this.onMenuClicked(action),

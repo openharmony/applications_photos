@@ -33,7 +33,8 @@ import router from '@ohos.router';
 
 const TAG: string = 'browser_AlbumGridItemNewStyle';
 
-@Extend(Image) function focusSetting(id: string) {
+@Extend(Image) 
+function focusSetting(id: string) {
   .key('AlbumFocus_' + id)
   .focusable(true)
 }
@@ -66,7 +67,7 @@ export struct AlbumGridItemNewStyle {
   albumCountMarginRight = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN * 2;
   iconMarkAnchorX = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
   iconMarkAnchorY = Constants.ALBUM_SET_NEW_ICON_SIZE + Constants.ALBUM_SET_NEW_ICON_MARGIN;
-  @StorageLink('deviceType') deviceType: string | undefined = AppStorage.get<string>('deviceType') ;
+  @StorageLink('deviceType') deviceType: string | undefined = AppStorage.get<string>('deviceType');
   @State transitionId: string = '';
   @StorageLink('isShowPhotoGridView') isShowPhotoGridView: boolean = false;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
@@ -266,7 +267,8 @@ export struct AlbumGridItemNewStyle {
     }
   }
 
-  @Builder RightClickMenuBuilder() {
+  @Builder
+  RightClickMenuBuilder() {
     Column() {
       ForEach(this.isAlbumSetSelectedMode && this.isSelected ? this.rightClickMenuList : this.currentRightClickMenuList,
         (menu: Action) => {
@@ -313,7 +315,8 @@ export struct AlbumGridItemNewStyle {
     return this.deviceType != Constants.PC_DEVICE_TYPE && this.item.isTrashAlbum;
   }
 
-  @Builder recycleCard() {
+  @Builder
+  recycleCard() {
     Flex({
       direction: FlexDirection.Row,
       justifyContent: FlexAlign.Center,
@@ -332,7 +335,7 @@ export struct AlbumGridItemNewStyle {
     })
   }
 
-  @Builder normalAlbumCard() {
+  normalAlbumCard() {
     Image(this.item.coverUri)
       .border({ radius: $r('sys.float.ohos_id_corner_radius_default_m') })
       .width('100%')
@@ -345,7 +348,8 @@ export struct AlbumGridItemNewStyle {
       .focusSetting(this.item.uri)
   }
 
-  @Builder albumCardInfo() {
+  @Builder
+  albumCardInfo() {
     Column() {
       Text(this.getDisplayName(this.item))
         .key('AlbumCardDisplayName')
@@ -374,7 +378,8 @@ export struct AlbumGridItemNewStyle {
     })
   }
 
-  @Builder selectedModeCheckBox() {
+  @Builder
+  selectedModeCheckBox() {
     Image(this.isSelected ? $r('app.media.ic_checkbox_on') : $r('app.media.ic_checkbox_off_overlay'))
       .height($r('app.float.album_set_new_style_icon'))
       .aspectRatio(1)
@@ -382,7 +387,8 @@ export struct AlbumGridItemNewStyle {
       .markAnchor({ x: this.iconMarkAnchorX, y: this.iconMarkAnchorY })
   }
 
-  @Builder favorAndVideoAlbumIcoDisplay() {
+  @Builder
+  favorAndVideoAlbumIcoDisplay() {
     Image(this.item.isFavorAlbum ? $r('app.media.ic_favorite_overlay') : $r('app.media.ic_video'))
       .height($r('app.float.album_set_new_style_icon'))
       .aspectRatio(1)
@@ -390,14 +396,16 @@ export struct AlbumGridItemNewStyle {
       .markAnchor({ x: 0 - Constants.ALBUM_SET_NEW_ICON_MARGIN, y: this.iconMarkAnchorY })
   }
 
-  @Builder maskLayer() {
+  @Builder
+  maskLayer() {
     Image($r('app.media.gradient_mask_layer'))
       .height('50%')
       .width('100%')
       .border({ radius: $r('sys.float.ohos_id_corner_radius_default_m') })
   }
 
-  @Builder selectedModeBg() {
+  @Builder
+  selectedModeBg() {
     Column()
       .height(this.gridWidth)
       .width(this.gridWidth)

@@ -84,7 +84,6 @@ export struct NewAlbumPage {
   private isNewAlbum: boolean = AppStorage.get<boolean>(Constants.APP_KEY_NEW_ALBUM) as boolean;
   private onWindowSizeChangeCallBack: Function = () => {
     // 后续phone缩略图支持横竖屏后再放开
-    // this.initGridRowCount;
   }
   private onUpdateFavorStateFunc: Function = (item: MediaItem): void => this.onUpdateFavorState(item);
   private selectFunc: Function = (position: number, key: string, value: boolean, callback: Function): void => this.select(position, key, value, callback);
@@ -331,7 +330,7 @@ export struct NewAlbumPage {
   }
 
   aboutToDisappear(): void {
-    if(this.broadCast) {
+    if (this.broadCast) {
       this.broadCast.off(BroadCastConstants.SELECT, this.selectFunc);
       this.broadCast.off(BroadCastConstants.JUMP_PHOTO_BROWSER, this.jumpPhotoBrowserFunc);
       this.broadCast.off(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
@@ -378,7 +377,7 @@ export struct NewAlbumPage {
                   .key('NewAlbumPageImage' + index)
                   .zIndex(index === this.placeholderIndex ? 1 : 0)
                 }
-              },  (item: ViewData, index?: number) => {
+              }, (item: ViewData, index?: number) => {
                 if (item == null || item == undefined) {
                   return JSON.stringify(item) + index;
                 }

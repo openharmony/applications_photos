@@ -181,7 +181,9 @@ export struct TimelinePage {
         return;
       }
       this.isAllSelected = newState;
-      if (this.dataSource != null) this.dataSource.forceUpdate();
+      if (this.dataSource != null) {
+          this.dataSource.forceUpdate();
+      }
     });
 
     this.mSelectManager.registerCallback('updateGroupCount', () => {
@@ -288,7 +290,9 @@ export struct TimelinePage {
       })
       this.deleteMode = false;
     } else {
-      if (this.dataSource != null) this.dataSource.onDataReloaded();
+      if (this.dataSource != null) {
+          this.dataSource.onDataReloaded();
+      }
     }
   }
 
@@ -642,7 +646,7 @@ export struct TimelinePage {
       let params: Params = router.getParams() as Params;
       if (this.routerStart && params != null && params.pageType != null) {
         Log.info(TAG, `MediaOperation back ${JSON.stringify(params)}`)
-        if (params.pageType = MediaOperationType.Add) {
+        if (params.pageType === MediaOperationType.Add) {
           this.addOperation(params.albumName, params.albumUri);
         }
       }
@@ -812,7 +816,6 @@ export struct TimelinePage {
       + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
     if (newCount != this.gridRowCount) {
       this.gridRowCount = newCount;
-      //            this.dataSource.forceUpdate();
     }
     Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
   }
@@ -839,7 +842,9 @@ export struct TimelinePage {
     Log.debug(TAG, 'onUpdateFavorState favor');
     if (this.dataSource != null) {
       let index = this.dataSource.getIndexByMediaItem(item);
-      if (index == Constants.NOT_FOUND) return;
+      if (index == Constants.NOT_FOUND) {
+          return;
+      }
       let flushIndex = this.dataSource.getPositionByIndex(index);
       Log.debug(TAG, `onUpdateFavorState favor flushIndex ${flushIndex}`);
       this.dataSource.onDataChanged(flushIndex);
