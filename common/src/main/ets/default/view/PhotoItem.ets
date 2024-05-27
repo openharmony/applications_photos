@@ -280,8 +280,7 @@ export struct PhotoItem {
     }
   }
 
-  @Builder
-  buildImage() {
+ @Builder buildImage() {
     Image(this.thumbnail)
       .key('browserFocus_' + this.thumbnail)
       .aspectRatio(this.ratio)
