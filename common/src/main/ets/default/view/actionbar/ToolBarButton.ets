@@ -45,7 +45,8 @@ export struct ToolBarButton {
   }
 }
 
-@Extend(Image) function commonButtonStyle() {
+@Extend(Image) 
+function commonButtonStyle() {
   .height($r('app.float.icon_size'))
   .width($r('app.float.icon_size'))
 }
