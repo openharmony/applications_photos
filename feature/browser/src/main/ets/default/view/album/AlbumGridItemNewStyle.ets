@@ -33,7 +33,8 @@ import router from '@ohos.router';
 
 const TAG: string = 'browser_AlbumGridItemNewStyle';
 
-@Extend(Image) function focusSetting(id: string) {
+@Extend(Image) 
+function focusSetting(id: string) {
   .key('AlbumFocus_' + id)
   .focusable(true)
 }
