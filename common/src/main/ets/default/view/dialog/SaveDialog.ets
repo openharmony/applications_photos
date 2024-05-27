@@ -24,14 +24,16 @@ export class SaveDialogCallback {
   replaceOriginalCallback: Function = (): void => {};
 }
 
-@Extend(Text) function buttonTextExtend() {
+@Extend(Text) 
+function buttonTextExtend() {
   .fontSize($r('sys.float.ohos_id_text_size_button1'))
   .fontColor($r('app.color.color_control_highlight'))
   .textAlign(TextAlign.Center)
   .fontWeight(FontWeight.Medium)
 }
 
-@Extend(Button) function verticalButtonExtend(isPcDevice: boolean) {
+@Extend(Button) 
+function verticalButtonExtend(isPcDevice: boolean) {
   .width('100%')
   .height($r('app.float.details_dialog_button_height'))
   .borderRadius($r('sys.float.ohos_id_corner_radius_button'))
