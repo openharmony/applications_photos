@@ -181,7 +181,9 @@ export struct TimelinePage {
         return;
       }
       this.isAllSelected = newState;
-      if (this.dataSource != null) this.dataSource.forceUpdate();
+      if (this.dataSource != null) {
+          this.dataSource.forceUpdate();
+      }
     });
 
     this.mSelectManager.registerCallback('updateGroupCount', () => {
@@ -288,7 +290,9 @@ export struct TimelinePage {
       })
       this.deleteMode = false;
     } else {
-      if (this.dataSource != null) this.dataSource.onDataReloaded();
+      if (this.dataSource != null) {
+          this.dataSource.onDataReloaded();
+      }
     }
   }
 
