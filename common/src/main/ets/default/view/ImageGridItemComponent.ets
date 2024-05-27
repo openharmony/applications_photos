@@ -183,8 +183,7 @@ export struct ImageGridItemComponent {
     }
   }
 
-  @Builder
-  RightClickMenuBuilder() {
+  @Builder RightClickMenuBuilder() {
     Column() {
       ForEach(this.rightClickMenuList, (menu: Action) => {
         Text(this.changeTextResToPlural(menu))
@@ -245,8 +244,7 @@ export struct ImageGridItemComponent {
     }
   }
 
-  @Builder
-  buildImage() {
+  @Builder buildImage() {
     Image(this.imageThumbnail)
       .width('100%')
       .height('100%')
