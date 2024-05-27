@@ -1310,7 +1310,8 @@ export struct PhotoBrowserComponent {
     let menuOperation: MenuOperation;
     let currentPhoto = this.getCurrentPhoto();
     let onDownloadEndFunc = async (err: Error, count: number, total: number): Promise<void> => {
-      await this.onDownloadEnd(err as Object, count, total)};
+      await this.onDownloadEnd(err as Object, count, total);
+      }
     if (currentPhoto == undefined) {
       Log.error(TAG, 'MediaOperation currentPhoto is undefined');
       return;
