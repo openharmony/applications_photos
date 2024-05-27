@@ -573,7 +573,9 @@ export struct ImageGridItemComponent {
   }
 
   private getPosition(): number {
-    if (this.dataSource == null || this.item == null) return 0;
+    if (this.dataSource == null || this.item == null) {
+        return 0;
+    }
     return this.dataSource.getDataIndex(this.item) + this.dataSource.getGroupCountBeforeItem(this.item);
   }
 }
