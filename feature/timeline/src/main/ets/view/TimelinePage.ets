@@ -812,7 +812,6 @@ export struct TimelinePage {
       + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
     if (newCount != this.gridRowCount) {
       this.gridRowCount = newCount;
-      //            this.dataSource.forceUpdate();
     }
     Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
   }
