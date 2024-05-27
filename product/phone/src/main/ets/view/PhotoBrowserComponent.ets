@@ -624,7 +624,6 @@ export struct PhotoBrowserComponent {
           let item: AlbumInfo = new AlbumInfo(undefined);
           item.uri = uri;
           item.albumName = displayName;
-          //item.innerId = uri;
           router.replaceUrl({
             url: 'pages/PhotoGridPage',
             params: {
