@@ -842,7 +842,9 @@ export struct TimelinePage {
     Log.debug(TAG, 'onUpdateFavorState favor');
     if (this.dataSource != null) {
       let index = this.dataSource.getIndexByMediaItem(item);
-      if (index == Constants.NOT_FOUND) return;
+      if (index == Constants.NOT_FOUND) {
+          return;
+      }
       let flushIndex = this.dataSource.getPositionByIndex(index);
       Log.debug(TAG, `onUpdateFavorState favor flushIndex ${flushIndex}`);
       this.dataSource.onDataChanged(flushIndex);
