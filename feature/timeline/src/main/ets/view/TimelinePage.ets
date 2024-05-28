@@ -832,7 +832,7 @@ export struct TimelinePage {
 
   private async addOperation(albumName: string, albumUri: string) {
     let menuContext = new MenuContext();
-    let onCopyStartFunc =  (): void => this.onCopyStart();
+    let onCopyStartFunc = (): void => this.onCopyStart();
     if (this.isMvOrCpSeparatesItem) {
       menuContext.withMediaItem(this.mvOrCpSeparatesItem as MediaItem);
       this.onCopyStart && this.onCopyStart();
