@@ -786,8 +786,8 @@ export struct PhotoBrowserComponent {
         this.geometryTransitionEnable = true;
       } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
         this.dataSource.setAlbumUri(this.albumUri);
-        this.dataSource.setAlbumDataSource
-        (AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+        this.dataSource.setAlbumDataSource(
+            AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
         this.dataSource.setDeviceId(param.albumInfo.deviceId);
         this.dataSource.setAlbumDataSource(
