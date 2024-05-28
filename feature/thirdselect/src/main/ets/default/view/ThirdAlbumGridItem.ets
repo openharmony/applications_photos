@@ -52,7 +52,7 @@ export struct ThirdAlbumGridItem {
   ]);
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private fp2vpUnit: number = px2vp(fp2px(Constants.NUMBER_1));
-  private onWindowSizeChangeCallBack: Function = (): void  => this.updateCardSize();
+  private onWindowSizeChangeCallBack: Function = (): void => this.updateCardSize();
 
   aboutToAppear(): void {
     Log.info(TAG, `aboutToAppear + ${this.item.coverUri}, select param ${JSON.stringify(this.selectParams)}`)
