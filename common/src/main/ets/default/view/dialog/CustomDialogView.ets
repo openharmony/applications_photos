@@ -49,7 +49,8 @@ export struct CustomDialogView {
   @Provide deleteProgress: number = 0;
   @Provide removeProgress: number = 0;
   @Provide dialogCallback: DialogCallback = { confirmCallback: (): void => {}, cancelCallback: () => {} };
-  @Provide saveDialogCallback: SaveDialogCallback = { saveAsNewCallback: (): void => {}, replaceOriginalCallback: () => {} };
+  @Provide saveDialogCallback: SaveDialogCallback = { saveAsNewCallback: (): void => {},
+    replaceOriginalCallback: () => {} };
   @Provide editExitDialogCallback: EditExitDialogCallback = { discardCallback: (): void => {} };
   @Link broadCast: BroadCast;
   @Provide progressParam: ProgressParam = { cancelFunc: (): void => {}, operationType: '' };
@@ -127,7 +128,8 @@ export struct CustomDialogView {
     (removeMessage: Resource, confirmCallback: Function, cancelCallback?: Function): void =>
     this.showRemoveDialog(removeMessage, confirmCallback, cancelCallback);
 
-  private showRenamePhotoDialogFunc:Function = (fileName: string, confirmCallback: Function, cancelCallback?: Function): void =>
+  private showRenamePhotoDialogFunc:Function =
+    (fileName: string, confirmCallback: Function, cancelCallback?: Function): void =>
   this.showRenamePhotoDialog(fileName, confirmCallback, cancelCallback);
 
   private showAddNotePhotoDialogFunc: Function = (confirmCallback: Function, cancelCallback?: Function): void =>
@@ -156,7 +158,8 @@ export struct CustomDialogView {
   private showEditSaveProgressDialogFunc: Function = (): void => this.showEditSaveProgressDialog();
 
   private showNewAlbumDialogFunc: Function =
-    (fileName: string, confirmCallback: Function, cancelCallback?: Function): void => this.showNewAlbumDialog(fileName, confirmCallback, cancelCallback);
+    (fileName: string, confirmCallback: Function, cancelCallback?: Function): void =>
+    this.showNewAlbumDialog(fileName, confirmCallback, cancelCallback);
 
   private showCopyOrMoveDialogFunc: Function = (moveFunc: Function, copyFunc: Function): void =>
   this.showCopyOrMoveDialog(moveFunc, copyFunc);

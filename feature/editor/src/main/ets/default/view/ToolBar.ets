@@ -51,7 +51,9 @@ export struct ToolBar {
       componentKey: COMPONENT_KEY_Edit_CROP
     })
   ];
-  // 2022年8月11日 @Watch('clickEvent')打包报错    @State @Watch('clickEvent') menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
+  // 2022年8月11日 @Watch('clickEvent')打包报错
+  // @State @Watch('clickEvent') menuChanged: RefreshActionMenu =
+  // new RefreshActionMenu(-1, this.mainMenuList);
   @State menuChanged: RefreshActionMenu = new RefreshActionMenu(-1, this.mainMenuList);
   private textSize: number | Resource = $r('app.float.buttonActionTextSize_default');
   private menuClick: Function = (): void => {};

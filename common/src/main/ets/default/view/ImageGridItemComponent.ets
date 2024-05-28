@@ -82,7 +82,8 @@ export struct ImageGridItemComponent {
   private geometryTapIndex: number = 0;
   private isTapStatusChange: boolean = false;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
-  private updateSelectFunc: Function = (updateUri: string, select: boolean): void => this.updateSelect(updateUri, select);
+  private updateSelectFunc: Function = (updateUri: string, select: boolean): void =>
+  this.updateSelect(updateUri, select);
 
   verifyTapStatus() {
     if (this.placeholderIndex === Constants.INVALID) {
@@ -176,7 +177,8 @@ export struct ImageGridItemComponent {
     AppStorage.setOrCreate('focusUpdate', true);
     if (this.item != null && this.item.uri) {
       this.mPosition = this.getPosition();
-      this.broadCast.emit(BroadCastConstants.SELECT, [this.mPosition, this.item.uri, newState,  (isSelected: boolean): void => {
+      this.broadCast.emit(BroadCastConstants.SELECT,
+        [this.mPosition, this.item.uri, newState,  (isSelected: boolean): void => {
         let itemUri: string = this.item == null ? '' : this.item.uri;
         Log.info(TAG, `enter callback, select status ${this.mPosition} ${itemUri} ${newState} ${this.isSelected}`);
         this.isSelected = isSelected == undefined ? newState : isSelected;

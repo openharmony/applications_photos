@@ -164,7 +164,8 @@ export struct ToolBar {
     .width(Constants.PERCENT_100)
     .backgroundColor(this.isFromPhotoBrowser ? $r('app.color.transparent') : this.actionBarProp.getBackgroundColor())
     .opacity(this.actionBarProp.getAlpha())
-    .visibility((this.isShowBar || this.isFromPhotoBrowser) && !this.isHorizontal ? Visibility.Visible : Visibility.Hidden)
+    .visibility((this.isShowBar || this.isFromPhotoBrowser) &&
+      !this.isHorizontal ? Visibility.Visible : Visibility.Hidden)
     .markAnchor({ x: Constants.PERCENT_0, y: this.isFromPhotoBrowser ? Constants.PERCENT_0 : Constants.PERCENT_100 })
     .position({ x: Constants.PERCENT_0, y: this.isFromPhotoBrowser ? Constants.PERCENT_0 : Constants.PERCENT_100 })
   }

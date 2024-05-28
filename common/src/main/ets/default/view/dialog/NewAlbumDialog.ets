@@ -181,7 +181,8 @@ export struct NewAlbumDialog {
       this.controller?.close();
       return;
     }
-    let confirmCb: Promise<Function> = (this.dialogCallback as DialogCallback).confirmCallback(this.inputName) as Promise<Function>;
+    let confirmCb: Promise<Function> =
+      (this.dialogCallback as DialogCallback).confirmCallback(this.inputName) as Promise<Function>;
     confirmCb.then((res: Function): void => {
       if (res) {
         this.controller?.close();

@@ -37,7 +37,8 @@ export struct DeleteDialog {
   aboutToDisappear() {
     if (this.isFirstTimeDelete) {
       AppStorage.setOrCreate(Constants.IS_FIRST_TIME_DELETE, false);
-      let pref: data_preferences.Preferences = AppStorage.get<data_preferences.Preferences>(Constants.PHOTOS_STORE_KEY) as data_preferences.Preferences;
+      let pref: data_preferences.Preferences =
+        AppStorage.get<data_preferences.Preferences>(Constants.PHOTOS_STORE_KEY) as data_preferences.Preferences;
       pref.put(Constants.IS_FIRST_TIME_DELETE, false).then(() => {
         Log.debug(TAG, `Succeeded in putting the value of '${Constants.IS_FIRST_TIME_DELETE}'.`);
         pref.flush();

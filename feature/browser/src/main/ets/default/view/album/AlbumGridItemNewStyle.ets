@@ -211,7 +211,8 @@ export struct AlbumGridItemNewStyle {
       count = UiUtil.getAlbumGridCount(this.isSidebar);
     }
     let contentWidth = ScreenManager.getInstance().getWinWidth() - sideBarWidth;
-    this.gridWidth = ((contentWidth - Constants.ALBUM_SET_MARGIN * 2 - (Constants.ALBUM_SET_GUTTER * (count - 1))) / count);
+    this.gridWidth = ((contentWidth - Constants.ALBUM_SET_MARGIN *
+      2 - (Constants.ALBUM_SET_GUTTER * (count - 1))) / count);
     let numberHeight = Constants.TEXT_SIZE_BODY2 * this.fp2vpUnit;
     let nameHeight = Constants.TEXT_SIZE_SUB_TITLE1 * this.fp2vpUnit;
 
@@ -427,7 +428,8 @@ export struct AlbumGridItemNewStyle {
           this.normalAlbumCard()
         }
 
-        if (!this.isSelected && (this.item.isFavorAlbum || this.item.isVideoAlbum || (this.isAlbumSetSelectedMode && this.selectable))) {
+        if (!this.isSelected && (this.item.isFavorAlbum || this.item.isVideoAlbum ||
+          (this.isAlbumSetSelectedMode && this.selectable))) {
           this.maskLayer()
         }
 

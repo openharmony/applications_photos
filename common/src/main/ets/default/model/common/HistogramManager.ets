@@ -167,7 +167,8 @@ export class HistogramManager {
         AppStorage.setOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.PREPARING);
         // arrayBuffer直接传入，会丢失类型，需要转为string
         Log.info(TAG, 'serialize the pixel array for histogram draw, pixel array length: ' + resultArray.length);
-        AppStorage.setOrCreate<string>(Constants.HISTOGRAM_ARRAY_BUFFER_KEY, StringUtil.arraybufferSerialize(resultArray.buffer));
+        AppStorage.setOrCreate<string>
+        (Constants.HISTOGRAM_ARRAY_BUFFER_KEY, StringUtil.arraybufferSerialize(resultArray.buffer));
         AppStorage.setOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.READY);
       }
     }
@@ -184,9 +185,12 @@ export class HistogramManager {
     TraceControllerUtils.startTrace('startDraw');
     this.initializePixelArray();
     const startIndex = 0;
-    this.drawSingleHistogram(this.pixelArray.slice(startIndex, Constants.HISTOGRAM_CONSTANT_256), Constants.HISTOGRAM_RED_FILL_COLOR);
-    this.drawSingleHistogram(this.pixelArray.slice(Constants.HISTOGRAM_CONSTANT_256, Constants.HISTOGRAM_CONSTANT_512), Constants.HISTOGRAM_GREEN_FILL_COLOR);
-    this.drawSingleHistogram(this.pixelArray.slice(Constants.HISTOGRAM_CONSTANT_512), Constants.HISTOGRAM_BLUE_FILL_COLOR);
+    this.drawSingleHistogram(this.pixelArray.slice(startIndex, Constants.HISTOGRAM_CONSTANT_256),
+      Constants.HISTOGRAM_RED_FILL_COLOR);
+    this.drawSingleHistogram(this.pixelArray.slice(Constants.HISTOGRAM_CONSTANT_256,
+      Constants.HISTOGRAM_CONSTANT_512), Constants.HISTOGRAM_GREEN_FILL_COLOR);
+    this.drawSingleHistogram(this.pixelArray.slice(Constants.HISTOGRAM_CONSTANT_512),
+      Constants.HISTOGRAM_BLUE_FILL_COLOR);
     this.internalStroke();
     this.endTime = Date.now();
     TraceControllerUtils.finishTrace('startDraw');
