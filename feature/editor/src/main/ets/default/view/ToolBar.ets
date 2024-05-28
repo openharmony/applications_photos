@@ -19,7 +19,7 @@ import { ActionButtonInfo } from './MainMenuInfo';
 import { ActionChangedEvent, RefreshActionMenu } from './RefreshMenu';
 import { PhotoEditMode } from '../base/PhotoEditType';
 import { PhotoEditorManager } from '../PhotoEditorManager';
-R
+
 const TAG: string = 'editor_ToolBar';
 
 const COMPONENT_KEY_Edit_CROP: string = 'EditToolBarCrop';
