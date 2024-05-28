@@ -47,8 +47,8 @@ export class MoveOrCopyBroadCastProp {
     if (AppStorage.get<MoveOrCopyBroadCastProp>(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) == null) {
       AppStorage.setOrCreate(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP, new MoveOrCopyBroadCastProp());
     }
-    return AppStorage.get<MoveOrCopyBroadCastProp>
-    (Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) as MoveOrCopyBroadCastProp;
+    return AppStorage.get<MoveOrCopyBroadCastProp>(
+      Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) as MoveOrCopyBroadCastProp;
   }
 
   /**

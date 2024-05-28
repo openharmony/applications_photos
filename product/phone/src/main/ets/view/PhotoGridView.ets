@@ -893,8 +893,8 @@ export struct PhotoGridView {
                 if (this.scrollIndex === 0) {
                   this.updateFirstPhotoItemInfo(item.mediaItem as MediaItem, true);
                 } else {
-                  this.updateFirstPhotoItemInfo
-                  ((this.dataSource.getData(this.scrollIndex) as ViewData)?.mediaItem as MediaItem, false);
+                  this.updateFirstPhotoItemInfo((
+                    this.dataSource.getData(this.scrollIndex) as ViewData)?.mediaItem as MediaItem, false);
                 }
               }
               return this.getGeometryTransitionId(item)

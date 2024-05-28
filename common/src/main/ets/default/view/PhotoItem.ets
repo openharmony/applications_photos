@@ -521,8 +521,8 @@ export struct PhotoItem {
                 return;
               }
               Log.info(TAG, `onDoubleTap event: ${JSON.stringify(event)}`);
-              this.eventPipeline?.onDoubleTap
-              ((event as GestureEvent).fingerList[0].localX, (event as GestureEvent).fingerList[0].localY);
+              this.eventPipeline?.onDoubleTap((event as GestureEvent).fingerList[0].localX,
+                (event as GestureEvent).fingerList[0].localY);
               if (this.animationOption != null) {
                 Log.info(TAG, 'TapGesture animateTo start');
                 animateTo({

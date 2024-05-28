@@ -172,8 +172,8 @@ export struct ThirdSelectPhotoBrowserBase {
       }
     });
     this.selectManager = AppStorage.get<ThirdSelectManager>(Constants.THIRD_SELECT_MANAGER) as ThirdSelectManager;
-    this.dataSource.setAlbumDataSource
-    (AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+    this.dataSource.setAlbumDataSource(
+      AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
     this.isMultiPick = this.selectManager.getIsMultiPick();
     if (this.isMultiPick) {
       this.totalSelectedCount = this.selectManager?.getSelectedCount() ?? 0;

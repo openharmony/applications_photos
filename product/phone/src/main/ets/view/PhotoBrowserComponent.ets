@@ -848,8 +848,8 @@ export struct PhotoBrowserComponent {
         }
       } else {
         MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.setAlbumDataSource
-        (AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+        this.dataSource.setAlbumDataSource(
+          AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       }
 
       this.onPhotoChanged(param.position || 0);

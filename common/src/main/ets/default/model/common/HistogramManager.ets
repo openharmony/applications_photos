@@ -167,8 +167,8 @@ export class HistogramManager {
         AppStorage.setOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.PREPARING);
         // arrayBuffer直接传入，会丢失类型，需要转为string
         Log.info(TAG, 'serialize the pixel array for histogram draw, pixel array length: ' + resultArray.length);
-        AppStorage.setOrCreate<string>
-        (Constants.HISTOGRAM_ARRAY_BUFFER_KEY, StringUtil.arraybufferSerialize(resultArray.buffer));
+        AppStorage.setOrCreate<string>(Constants.HISTOGRAM_ARRAY_BUFFER_KEY,
+          StringUtil.arraybufferSerialize(resultArray.buffer));
         AppStorage.setOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.READY);
       }
     }
