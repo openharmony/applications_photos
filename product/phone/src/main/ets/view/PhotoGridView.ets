@@ -117,12 +117,14 @@ export struct PhotoGridView {
   private scrollIndex: number = 0;
   private onWindowSizeChangeCallBack: Function = () => {
     // 后续phone缩略图支持横竖屏后再放开
-    // this.initGridRowCount;
   }
-  private selectFunc: Function = (position: number, key: string, value: boolean, callback: Function): void => this.select(position, key, value, callback);
-  private jumpPhotoBrowserFunc: Function = (name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void =>
+  private selectFunc: Function = (position: number, key: string, value: boolean, callback: Function): void =>
+  this.select(position, key, value, callback);
+  private jumpPhotoBrowserFunc: Function = (name: string, item: MediaItem,
+                                            geometryTapIndex: number, geometryTransitionString: string): void =>
   this.jumpPhotoBrowser(name, item, geometryTapIndex, geometryTransitionString);
-  private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void =>
+  private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem,
+                                                 geometryTapIndex: number, geometryTransitionString: string): void =>
   this.jumpThirdPhotoBrowser(name, item, geometryTapIndex, geometryTransitionString);
   private onLoadingFinishedFunc: Function = (size: number): void => this.onLoadingFinished(size);
   private onDataReloadedFunc: Function = (): void => this.onDataReloaded();
@@ -284,7 +286,8 @@ export struct PhotoGridView {
       menuContext
         .withSelectManager(this.mSelectManager)
         .withOperationStartCallback((): void => this.onDownloadStart())
-        .withOperationEndCallback(async (err: Error, count: number, total: number): Promise<void> => this.onDownloadEnd(err as Object, count, total))
+        .withOperationEndCallback(async (err: Error, count: number, total: number): Promise<void> =>
+        this.onDownloadEnd(err as Object, count, total))
         .withBroadCast(this.broadCast)
       menuOperation = MenuOperationFactory.getInstance().createMenuOperation(AddMenuOperation, menuContext);
       menuOperation.doAction();
@@ -596,8 +599,10 @@ export struct PhotoGridView {
       if (this.isDataFreeze) {
         return;
       }
-      this.moreMenuList = Boolean(newState) ? (this.albumInfo.isSystemAlbum ? [Action.ADD, Action.INFO] : [Action.MOVE, Action.ADD, Action.REMOVE_FROM, Action.INFO])
-        : (this.albumInfo.isSystemAlbum ? [Action.ADD_INVALID, Action.INFO_INVALID] : [Action.MOVE_INVALID, Action.ADD_INVALID, Action.REMOVE_FROM_INVALID, Action.INFO_INVALID]);
+      this.moreMenuList = Boolean(newState) ? (this.albumInfo.isSystemAlbum ?
+        [Action.ADD, Action.INFO] : [Action.MOVE, Action.ADD, Action.REMOVE_FROM, Action.INFO])
+        : (this.albumInfo.isSystemAlbum ? [Action.ADD_INVALID, Action.INFO_INVALID] :
+          [Action.MOVE_INVALID, Action.ADD_INVALID, Action.REMOVE_FROM_INVALID, Action.INFO_INVALID]);
       this.totalSelectedCount = newState;
     });
     this.mSelectManager.registerCallback('select', (newState: number) => {
@@ -619,7 +624,8 @@ export struct PhotoGridView {
     ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.onWindowSizeChangeCallBack);
 
     this.initGridRowCount();
-    this.moreMenuList = this.albumInfo.isSystemAlbum ? [Action.ADD, Action.INFO] : [Action.MOVE, Action.ADD, Action.REMOVE_FROM, Action.INFO];
+    this.moreMenuList = this.albumInfo.isSystemAlbum ?
+      [Action.ADD, Action.INFO] : [Action.MOVE, Action.ADD, Action.REMOVE_FROM, Action.INFO];
     this.updateRightClickMenuList();
     TraceControllerUtils.finishTrace('PhotoGridPageAboutToAppear');
   }
@@ -639,7 +645,8 @@ export struct PhotoGridView {
     }
   }
 
-  private jumpPhotoBrowser(name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void {
+  private jumpPhotoBrowser(name: string, item: MediaItem,
+                           geometryTapIndex: number, geometryTransitionString: string): void {
     let targetIndex = this.dataSource.getDataIndex(item);
     if (targetIndex == Constants.NOT_FOUND) {
       Log.error(TAG, 'targetIndex is not found');
@@ -662,7 +669,8 @@ export struct PhotoGridView {
     }
   }
 
-  private jumpThirdPhotoBrowser(name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void {
+  private jumpThirdPhotoBrowser(name: string, item: MediaItem,
+                                geometryTapIndex: number, geometryTransitionString: string): void {
     Log.info(TAG, 'JUMP_THIRD_PHOTO_BROWSER');
     let targetIndex = this.dataSource.getDataIndex(item);
     if (targetIndex == Constants.NOT_FOUND) {
@@ -812,7 +820,8 @@ export struct PhotoGridView {
   }
 
   getGeometryTransitionId(item: ViewData): string {
-    return TAG + (item.mediaItem as MediaItem).hashCode + this.mSelectManager.isItemSelected((item.mediaItem as MediaItem).uri);
+    return TAG + (item.mediaItem as MediaItem).hashCode +
+    this.mSelectManager.isItemSelected((item.mediaItem as MediaItem).uri);
   }
 
   build() {
@@ -884,7 +893,8 @@ export struct PhotoGridView {
                 if (this.scrollIndex === 0) {
                   this.updateFirstPhotoItemInfo(item.mediaItem as MediaItem, true);
                 } else {
-                  this.updateFirstPhotoItemInfo((this.dataSource.getData(this.scrollIndex) as ViewData)?.mediaItem as MediaItem, false);
+                  this.updateFirstPhotoItemInfo((
+                    this.dataSource.getData(this.scrollIndex) as ViewData)?.mediaItem as MediaItem, false);
                 }
               }
               return this.getGeometryTransitionId(item)
@@ -987,7 +997,8 @@ export struct PhotoGridView {
     } else {
       menuContext.withSelectManager(this.mSelectManager).withOperationStartCallback((): void => this.onMoveStart());
     }
-    menuContext.withOperationEndCallback((err: Error, count: number, total: number): void => this.onMoveEnd(err as Object, count, total))
+    menuContext.withOperationEndCallback((err: Error, count: number, total: number): void =>
+    this.onMoveEnd(err as Object, count, total))
       .withBroadCast(this.broadCast)
       .withTargetAlbumName(albumName)
       .withAlbumUri(albumUri);
@@ -1004,7 +1015,8 @@ export struct PhotoGridView {
     } else {
       menuContext.withSelectManager(this.mSelectManager).withOperationStartCallback((): void => this.onCopyStart());
     }
-    menuContext.withOperationEndCallback((err: Error, count: number, total: number): void => this.onCopyEnd(err as Object, count, total))
+    menuContext.withOperationEndCallback((err: Error, count: number, total: number): void =>
+    this.onCopyEnd(err as Object, count, total))
       .withBroadCast(this.broadCast)
       .withTargetAlbumName(albumName)
       .withAlbumUri(albumUri);

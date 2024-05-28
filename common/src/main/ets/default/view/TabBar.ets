@@ -23,7 +23,7 @@ import { BigDataConstants, ReportToBigDataUtil } from '../utils/ReportToBigDataU
 
 const TAG: string = 'common_TabBar';
 
-export enum DEVICE_TYPE {
+export enum DeviceType {
   PHONE_LIKE,
   PC_LIKE
 }
@@ -45,7 +45,7 @@ export struct TabBar {
   private tabs: TabItem[] = [];
   private controller: TabsController | null = null;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
-  private deviceType: DEVICE_TYPE = DEVICE_TYPE.PC_LIKE;
+  private deviceType: DeviceType = DeviceType.PC_LIKE;
   private funcOnTabSelected?: Function;
 
   aboutToAppear(): void {
@@ -62,7 +62,7 @@ export struct TabBar {
 
   build() {
     if (this.isSidebar) {
-      if (this.deviceType == DEVICE_TYPE.PC_LIKE) {
+      if (this.deviceType == DeviceType.PC_LIKE) {
         Row() {
           Flex({
             direction: FlexDirection.Column,
@@ -158,7 +158,9 @@ export struct TabBar {
   private onTabSelected(index: number): void {
     Log.debug(TAG, `TabBar this.currentIndex: ${this.currentIndex} index: ${index}`);
     this.currentIndex = index as 0 | 1;
-    if (this.controller != null) this.controller.changeIndex(this.currentIndex);
+    if (this.controller != null) {
+        this.controller.changeIndex(this.currentIndex);
+    };
     this.tabs.forEach((tab: TabItem) => {
       if (this.tabs.indexOf(tab) == index) {
         tab.isSelected = true;
@@ -190,7 +192,7 @@ struct Tab {
   private deviceType: number = 0;
 
   build() {
-    if (this.deviceType == DEVICE_TYPE.PC_LIKE) {
+    if (this.deviceType == DeviceType.PC_LIKE) {
       Flex({
         direction: FlexDirection.Row,
         alignItems: ItemAlign.Center,
@@ -337,7 +339,9 @@ export struct TabBarForAlbumSet {
   private onTabSelected(index: number): void {
     Log.info(TAG, `TabBarForAlbumSet this.currentIndex: ${this.currentIndex} index: ${index}`);
     this.currentIndex = index;
-    if (this.controller != null) this.controller.changeIndex(this.currentIndex);
+    if (this.controller != null) {
+        this.controller.changeIndex(this.currentIndex);
+    };
     this.tabs.forEach((tab: TabItemWithText) => {
       tab.isSelected = false;
     })

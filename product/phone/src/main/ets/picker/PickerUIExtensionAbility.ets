@@ -41,7 +41,8 @@ export default class PickerUIExtensionAbility extends UIExtensionAbility {
   }
 
   onSessionCreate(want: Want, session: UIExtensionContentSession): void {
-    let extensionWindow: uiExtensionHost.UIExtensionHostWindowProxy | undefined = session.getUIExtensionHostWindowProxy();
+    let extensionWindow: uiExtensionHost.UIExtensionHostWindowProxy | undefined =
+      session.getUIExtensionHostWindowProxy();
     AppStorage.setOrCreate('photosAbilityContext',this.context);
     AppStorage.setOrCreate(Constants.PHOTO_PICKER_EXTENSION_WINDOW, extensionWindow);
     let storage: LocalStorage = new LocalStorage();
@@ -74,8 +75,10 @@ export default class PickerUIExtensionAbility extends UIExtensionAbility {
       params.maxSelectCount = params.isMultiPick ? wantParam?.maxSelectCount as number : 1;
       params.bundleName = wantParam[Constants.KEY_WANT_PARAMETERS_CALLER_BUNDLE_NAME] as string;
       params.filterMediaType = wantParam?.filterMediaType as string;
-      params.cameraAble = (wantParam?.isPhotoTakingSupported as boolean) === undefined ? true : (wantParam?.isPhotoTakingSupported as boolean);
-      params.editAble = (wantParam?.isEditSupported as boolean) === undefined ? true : (wantParam?.isEditSupported as boolean);
+      params.cameraAble = (wantParam?.isPhotoTakingSupported as boolean) === undefined ?
+        true : (wantParam?.isPhotoTakingSupported as boolean);
+      params.editAble = (wantParam?.isEditSupported as boolean) === undefined ?
+        true : (wantParam?.isEditSupported as boolean);
       params.isFirstEnter = true;
     } else {
       Log.error(TAG, `invalid selectType: ${JSON.stringify(selectType)}`);

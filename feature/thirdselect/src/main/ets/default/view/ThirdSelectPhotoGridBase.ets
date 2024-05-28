@@ -79,7 +79,8 @@ export struct ThirdSelectPhotoGridBase {
   @Provide isSelectedMode: boolean = true;
   @Provide moreMenuList: Array<Action> = new Array<Action>();
   @Provide rightClickMenuList: Array<Action> = new Array<Action>();
-  photoDataImpl: PhotoDataImpl | undefined = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO) as PhotoDataImpl;
+  photoDataImpl: PhotoDataImpl | undefined =
+    BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO) as PhotoDataImpl;
   smartPickerDataImpl: SmartPickerDataImpl | undefined;
   dataSource: PickerMediaDataSource = new PickerMediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE, this.photoDataImpl);
   @Provide broadCast: BroadCast = new BroadCast();
@@ -109,7 +110,8 @@ export struct ThirdSelectPhotoGridBase {
   @State smartRecommendTabItems: Array<SmartPickerRecommendTabInfo> = [];
   @State isAllMediaAlbum: boolean = true;
   @State currentSmartRecommendTabIndex: number = 0;
-  private smartPickerRecommendInfoObserver: SmartPickerRecommendInfoObserver = new SmartPickerRecommendInfoObserver(this);
+  private smartPickerRecommendInfoObserver: SmartPickerRecommendInfoObserver =
+    new SmartPickerRecommendInfoObserver(this);
   private smartPickerManager: SmartPickerManager | undefined;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
@@ -142,7 +144,8 @@ export struct ThirdSelectPhotoGridBase {
     if (this.isShowSmartRecommendTabBar) {
       this.selectParams.cameraAble = this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].isCameraAble();
     }
-    this.dataSource.changeDataImpl(this.currentSmartRecommendTabIndex === 0 ? this.photoDataImpl : this.smartPickerDataImpl);
+    this.dataSource.changeDataImpl(this.currentSmartRecommendTabIndex === 0 ?
+    this.photoDataImpl : this.smartPickerDataImpl);
     this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].setUserClickTab(true);
     this.dataSource.setAlbumUri(this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].getAlbumUri());
     this.dataSource.resetActiveWindow();
@@ -220,7 +223,8 @@ export struct ThirdSelectPhotoGridBase {
     this.broadCast.on(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
     this.broadCast.on(Constants.ON_LOADING_FINISHED, this.funcOnLoadingFinished);
     this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
-    this.broadCast.on(SmartPickerConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH, this.pickerInitDataFirstQueryFinishFunc);
+    this.broadCast.on(SmartPickerConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH,
+      this.pickerInitDataFirstQueryFinishFunc);
     this.selectManager?.registerCallback('updateCount',
       (newState: number) => {
         Log.info(TAG, `updateSelectedCount ${newState}`);
@@ -290,8 +294,10 @@ export struct ThirdSelectPhotoGridBase {
       this.broadCast.off(BroadCastConstants.SELECT, this.selectFunc);
       this.broadCast.off(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, this.jumpThirdPhotoBrowserFunc);
       this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED, this.onDataReloadedFunc);
-      this.broadCast.off(BroadCastConstants.THIRD_PICKER_SWITCH_SMART_RECOMMEND_TAB, this.onSwitchSmartRecommendTabFunc);
-      this.broadCast.off(SmartPickerConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH, this.pickerInitDataFirstQueryFinishFunc);
+      this.broadCast.off(BroadCastConstants.THIRD_PICKER_SWITCH_SMART_RECOMMEND_TAB,
+        this.onSwitchSmartRecommendTabFunc);
+      this.broadCast.off(SmartPickerConstants.PICKER_INIT_DATA_FIRST_QUERY_FINISH,
+        this.pickerInitDataFirstQueryFinishFunc);
       this.broadCast.off(Constants.ON_LOADING_FINISHED, this.funcOnLoadingFinished);
     }
     this.dataSource.releaseBroadCast();
@@ -300,9 +306,11 @@ export struct ThirdSelectPhotoGridBase {
     Log.info(TAG, `call aboutToDisappear`)
   }
 
-  onSmartPickerRecommendInfoListReady(pickerRecommendInfoList: SmartPickerRecommendInfo[], dataAdapter: SmartPickerDataAdapter): void {
+  onSmartPickerRecommendInfoListReady(pickerRecommendInfoList: SmartPickerRecommendInfo[],
+                                      dataAdapter: SmartPickerDataAdapter): void {
     let param: SelectParams = router.getParams() as SelectParams;
-    if (pickerRecommendInfoList === undefined || pickerRecommendInfoList === null || pickerRecommendInfoList.length === 0) {
+    if (pickerRecommendInfoList === undefined || pickerRecommendInfoList === null ||
+      pickerRecommendInfoList.length === 0) {
       return;
     }
     if (this.smartPickerDataImpl === undefined || this.smartPickerDataImpl === null) {
@@ -342,7 +350,8 @@ export struct ThirdSelectPhotoGridBase {
     }
   }
 
-  @Builder buildGrid() {
+  @Builder
+  buildGrid() {
     Grid(this.scroller) {
       if (!this.selectParams.isFromFa && this.selectParams.cameraAble) {
         GridItem() {
@@ -510,14 +519,16 @@ export struct ThirdSelectPhotoGridBase {
 
   private initSelectParams(param?: SelectParams): void {
     if (param) {
-      this.isItemIdChange = (this.itemId !== undefined && this.itemId !== null && this.itemId !== param.itemId) as boolean;
+      this.isItemIdChange =
+        (this.itemId !== undefined && this.itemId !== null && this.itemId !== param.itemId) as boolean;
       this.itemId = param.itemId == undefined ? AlbumDefine.ALBUM_ID_ALL : param.itemId;
       this.dataSource.setAlbumUri(this.itemId as string);
 
       let albumUri = param.uri === undefined ?
       UserFileManagerAccess.getInstance().getSystemAlbumUri(UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE) :
       param.uri;
-      this.dataSource.setAlbumUri(this.isShowSmartRecommendTabBar ? this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].getAlbumUri() :albumUri);
+      this.dataSource.setAlbumUri(this.isShowSmartRecommendTabBar ?
+      this.smartRecommendTabItems[this.currentSmartRecommendTabIndex].getAlbumUri() : albumUri);
       this.updateTitle(param);
       this.selectParams.bundleName = param.bundleName;
       this.selectParams.isMultiPick = param.isMultiPick;
@@ -638,7 +649,8 @@ export struct ThirdSelectPhotoGridBase {
   private modifyPhotoSelectStatus(): void {
     if (this.selectParams.preselectedUris.length > 0) {
       if (this.selectParams.preselectedUris.length > this.selectParams.maxSelectCount) {
-        this.selectParams.preselectedUris = this.selectParams.preselectedUris.slice(0, this.selectParams.maxSelectCount);
+        this.selectParams.preselectedUris =
+          this.selectParams.preselectedUris.slice(0, this.selectParams.maxSelectCount);
       }
       this.selectManager?.initPreSelectPhotos(this.selectParams.preselectedUris);
       this.selectParams.preselectedUris = [];
@@ -646,7 +658,8 @@ export struct ThirdSelectPhotoGridBase {
   }
 
   private initSelectManager() {
-    let manager: ThirdSelectManager = AppStorage.get<ThirdSelectManager>(Constants.THIRD_SELECT_MANAGER) as ThirdSelectManager;
+    let manager: ThirdSelectManager =
+      AppStorage.get<ThirdSelectManager>(Constants.THIRD_SELECT_MANAGER) as ThirdSelectManager;
     if (manager && manager.getClassName() === 'ThirdSelectManager') {
       Log.debug(TAG, `use cached select manager, current select count ${manager.getSelectedCount()}`);
       this.selectManager = manager;
@@ -767,7 +780,8 @@ export struct ThirdSelectPhotoGridBase {
   }
 }
 
-@Extend(Grid) function gridStyle(gridCount: number) {
+@Extend(Grid) 
+function gridStyle(gridCount: number) {
   .columnsTemplate('1fr '.repeat(gridCount))
   .columnsGap(Constants.GRID_GUTTER)
   .rowsGap(Constants.GRID_GUTTER)

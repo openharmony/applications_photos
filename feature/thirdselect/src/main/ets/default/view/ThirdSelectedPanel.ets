@@ -92,7 +92,8 @@ export struct ThirdSelectedPanel {
     }
   }
 
-  @Builder buildRadio() {
+  @Builder
+  buildRadio() {
     if (this.isBrowserMode) {
       Image(this.isOriginalChecked ? $r('app.media.picker_radio_selected') : $r('app.media.picker_radio_unselected'))
         .key('Original')
@@ -108,7 +109,8 @@ export struct ThirdSelectedPanel {
     }
   }
 
-  @Builder buildTitle() {
+  @Builder
+  buildTitle() {
     Stack() {
       Row() {
         Text($r('app.string.selected_photos_count', this.selectedCount, this.maxSelectCount))
@@ -156,7 +158,8 @@ export struct ThirdSelectedPanel {
     }
   }
 
-  @Builder buildThumbnailItem(item: MediaItem, index: number) {
+  @Builder
+  buildThumbnailItem(item: MediaItem, index: number) {
     Stack({ alignContent: Alignment.Start }) {
       Image(item.thumbnail)
         .height('100%')
@@ -222,7 +225,8 @@ export struct ThirdSelectedPanel {
     .aspectRatio(1)
   }
 
-  @Builder buildThumbnailList() {
+  @Builder
+  buildThumbnailList() {
     List({ scroller: this.selectedScroller, space: 8 }) {
       ForEach(this.itemArray, (item: MediaItem, index?: number) => {
         ListItem() {
@@ -243,7 +247,8 @@ export struct ThirdSelectedPanel {
     .scrollBar(BarState.Off)
   }
 
-  @Builder buildDefault() {
+  @Builder
+  buildDefault() {
     Column() {
       Text($r('app.string.select_items_to_add'))
         .fontSize($r('sys.float.ohos_id_text_size_body2'))
@@ -314,7 +319,7 @@ export struct ThirdSelectedPanel {
   }
 
   private isButtonEnabled(): boolean {
-    return!this.isMultiPick || this.selectedCount > 0;
+    return !this.isMultiPick || this.selectedCount > 0;
   }
 
   private clickOriginButton(): void {

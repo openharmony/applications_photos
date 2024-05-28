@@ -190,7 +190,7 @@ struct IndexPage {
 
   onPageShow(): void {
     Log.info(TAG, `[onPageShow] entryFromHap: ${this.entryFromHap}`);
-    if (typeof AppStorage.get<boolean|undefined>('IsSetImageRawDataCacheSize') === 'undefined') {
+    if (typeof AppStorage.get<boolean | undefined>('IsSetImageRawDataCacheSize') === 'undefined') {
       Log.info(TAG, '[onPageShow] setImageRawDataCacheSize');
 
       // ImageCacheCount：缓存解码后的图片，默认为0
@@ -203,7 +203,7 @@ struct IndexPage {
     setTimeout(() => {
       this.isShow = true
     }, 50);
-    let param: Params =router.getParams() as Params;
+    let param: Params = router.getParams() as Params;
     if (param != null) {
       this.jumpSource = param.jumpSource;
     }
@@ -343,7 +343,7 @@ struct IndexPage {
     .backgroundColor($r('app.color.default_background_color'))
     .padding({
       top: this.leftBlank[1],
-      bottom: this.isShowBar ?  this.leftBlank[3] : this.leftBlank[1]
+      bottom: this.isShowBar ? this.leftBlank[3] : this.leftBlank[1]
     })
 
   }
@@ -385,7 +385,7 @@ struct IndexPage {
       ];
       let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
       try {
-        atManager.requestPermissionsFromUser(AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext,  permissionList as Permissions[])
+        atManager.requestPermissionsFromUser(AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext, permissionList as Permissions[])
           .then((data) => {
           Log.debug(TAG, `permissions: ${JSON.stringify(data.permissions)}`
           + `, authResult: ${JSON.stringify(data.authResults)}`);

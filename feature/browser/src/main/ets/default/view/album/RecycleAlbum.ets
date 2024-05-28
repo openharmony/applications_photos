@@ -7,7 +7,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an  "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -54,13 +54,13 @@ export struct RecycleAlbum {
           .height($r('app.float.recycle_album_cover_icon_size'))
           .fillColor($r('app.color.empty_or_recycle_album_icon'))
           .onError((msg?: MsgOnError) => {
-            if(msg){
+            if (msg) {
               Log.debug(TAG, `image load failed and its componentWidth is: ${msg.componentWidth}`);
               Log.debug(TAG, `image load failed and its componentHeight is: ${msg.componentHeight}`);
             }
           })
           .onComplete((msg?: MsgOnComplete) => {
-            if(msg){
+            if (msg) {
               Log.debug(TAG, `image load successfully and its width is: ${msg.width}`);
               Log.debug(TAG, `image load successfully and its height is: ${msg.height}`);
               Log.debug(TAG, `image load successfully and its componentWidth is: ${msg.componentWidth}`);

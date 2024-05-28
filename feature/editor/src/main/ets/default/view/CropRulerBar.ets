@@ -91,9 +91,9 @@ export struct CropRulerBar {
 
   drawIntegerLine(cur_x: number, cur_num: number): void {
     if (!this.isVerticalScreen) {
-      this.context.moveTo((this.rulerWidth *  8.5) / 15, cur_x);
+      this.context.moveTo((this.rulerWidth * 8.5) / 15, cur_x);
     } else {
-      this.context.moveTo(cur_x, (this.rulerWidth *  8.5) / 15);
+      this.context.moveTo(cur_x, (this.rulerWidth * 8.5) / 15);
     }
 
     if (Math.abs(cur_num) > Constants.EDGE_ANGLE) {
@@ -123,9 +123,9 @@ export struct CropRulerBar {
 
     }
     if (!this.isVerticalScreen) {
-      this.context.lineTo(this.rulerWidth *  10.5 / 15, cur_x);
+      this.context.lineTo(this.rulerWidth * 10.5 / 15, cur_x);
     } else {
-      this.context.lineTo(cur_x, this.rulerWidth *  10.5 / 15);
+      this.context.lineTo(cur_x, this.rulerWidth * 10.5 / 15);
     }
   }
 

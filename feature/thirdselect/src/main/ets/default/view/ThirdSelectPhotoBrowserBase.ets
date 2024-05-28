@@ -113,7 +113,8 @@ export struct ThirdSelectPhotoBrowserBase {
   @State isJustSelected: boolean = true;
   private pullDownFunc: Function = (): Boolean => this.onBackPress();
   private dataSizeChangedFunc: Function = (size: number): void => this.onDataSizeChanged(size);
-  private selectFunc: Function = (position: number, key: string, value: boolean): void => this.selectCallback(position, key, value);
+  private selectFunc: Function = (position: number, key: string, value: boolean): void =>
+  this.selectCallback(position, key, value);
   private dataContentChangedFunc: Function = (index: number): void => this.onPhotoChanged(index);
   private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem, isSelectMode = false): void =>
   this.jumpBrowserCallback(name, item, isSelectMode);
@@ -171,7 +172,8 @@ export struct ThirdSelectPhotoBrowserBase {
       }
     });
     this.selectManager = AppStorage.get<ThirdSelectManager>(Constants.THIRD_SELECT_MANAGER) as ThirdSelectManager;
-    this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+    this.dataSource.setAlbumDataSource(
+      AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
     this.isMultiPick = this.selectManager.getIsMultiPick();
     if (this.isMultiPick) {
       this.totalSelectedCount = this.selectManager?.getSelectedCount() ?? 0;
@@ -235,7 +237,9 @@ export struct ThirdSelectPhotoBrowserBase {
             this.currentIndex = newIndex;
             this.photoUnEdit = this.getCurrentPhoto();
           } else {
-            let currentSelectIndex: number = (this.photoUnEdit ? this.selectManager?.checkItemInSelectMap(this.photoUnEdit) : -1) ?? Constants.INVALID;
+            let currentSelectIndex: number =
+              (this.photoUnEdit ? this.selectManager?.checkItemInSelectMap(this.photoUnEdit) : -1) ??
+              Constants.INVALID;
             this.currentIndex = newIndex;
             if (currentSelectIndex !== -1) {
               this.broadCast.emit(Constants.UPDATE_SELECTED, [false, this.photoUnEdit?.uri ?? '']);
@@ -282,7 +286,8 @@ export struct ThirdSelectPhotoBrowserBase {
     }
 
     let currentPhoto = mediaItem;
-    this.canEdit = AppStorage.get<boolean>(Constants.KEY_OF_IS_THIRD_EDITABLE) as boolean && UiUtil.isEditedEnable(currentPhoto);
+    this.canEdit = AppStorage.get<boolean>(Constants.KEY_OF_IS_THIRD_EDITABLE) as boolean &&
+    UiUtil.isEditedEnable(currentPhoto);
 
     if (currentPhoto === undefined) {
       Log.error(TAG, 'onPhotoChanged, item is undefined');
@@ -290,7 +295,9 @@ export struct ThirdSelectPhotoBrowserBase {
       this.isSelected = this.selectManager?.isItemSelected(currentPhoto.uri) ?? false;
       this.currentUri = currentPhoto.uri;
 
-      let dataSourceIndex = this.isSelectMode ? (this.selectManager?.getSelectItemDataSourceIndex(currentPhoto) ?? Constants.INVALID) : this.currentIndex;
+      let dataSourceIndex = this.isSelectMode ?
+        (this.selectManager?.getSelectItemDataSourceIndex(currentPhoto) ?? Constants.INVALID) :
+      this.currentIndex;
       let timelineIndex = this.dataSource.getPositionByIndex(dataSourceIndex);
 
       if (this.geometryTransitionId !== undefined && this.geometryTransitionId !== '') {
@@ -364,7 +371,8 @@ export struct ThirdSelectPhotoBrowserBase {
 
 
         // 此时数据应当使用选中列表的数据
-        let dataImpl: PhotoDataImpl | undefined = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO) as PhotoDataImpl | undefined;
+        let dataImpl: PhotoDataImpl | undefined =
+          BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO) as PhotoDataImpl | undefined;
         dataImpl?.getDataByUri(this.editNewUri).then((fileAsset: userFileManager.FileAsset | undefined): void => {
           this.newMediaItem = new MediaItem(fileAsset);
           this.newMediaItem.setThumbnail(dataImpl?.getThumbnailSafe(this.newMediaItem.uri, this.newMediaItem.path));
@@ -386,7 +394,9 @@ export struct ThirdSelectPhotoBrowserBase {
       this.currentIndex = index as number;
       this.photoUnEdit = this.getCurrentPhoto();
     } else {
-      let currentSelectIndex = (this.photoUnEdit ? this.selectManager?.checkItemInSelectMap(this.photoUnEdit) : -1) ?? Constants.INVALID;
+      let currentSelectIndex =
+        (this.photoUnEdit ? this.selectManager?.checkItemInSelectMap(this.photoUnEdit) : -1) ??
+        Constants.INVALID;
       this.currentIndex = index as number;
       if (currentSelectIndex !== -1) {
         this.broadCast.emit(Constants.UPDATE_SELECTED, [false, this.photoUnEdit?.uri ?? '']);
@@ -416,7 +426,9 @@ export struct ThirdSelectPhotoBrowserBase {
       this.currentIndex = index;
       this.photoUnEdit = this.getCurrentPhoto();
     } else {
-      let currentSelectIndex = (this.photoUnEdit ? this.selectManager?.checkItemInSelectMap(this.photoUnEdit) : -1) ?? Constants.INVALID;
+      let currentSelectIndex =
+        (this.photoUnEdit ? this.selectManager?.checkItemInSelectMap(this.photoUnEdit) : -1) ??
+        Constants.INVALID;
       this.currentIndex = index;
       if (currentSelectIndex !== -1) {
         this.broadCast.emit(Constants.UPDATE_SELECTED, [false, this.photoUnEdit?.uri ?? '']);
@@ -492,7 +504,7 @@ export struct ThirdSelectPhotoBrowserBase {
     this.selectManager?.refreshData();
 
     this.broadCast.release();
-    if(this.broadCast) {
+    if (this.broadCast) {
       this.broadCast.off(BrowserConstants.PULL_DOWN_END, this.pullDownFunc);
       this.broadCast.off(BrowserConstants.DATA_SIZE_CHANGED, this.dataSizeChangedFunc);
       this.broadCast.off(BroadCastConstants.SELECT, this.selectFunc);
@@ -523,14 +535,15 @@ export struct ThirdSelectPhotoBrowserBase {
   onPhotoChanged(index: number): void {
     this.currentIndex = index;
     let currentPhoto = this.getCurrentPhoto();
-    this.canEdit = (currentPhoto?.mediaType !==  UserFileManagerAccess.MEDIA_TYPE_VIDEO);
+    this.canEdit = (currentPhoto?.mediaType !== UserFileManagerAccess.MEDIA_TYPE_VIDEO);
     if (currentPhoto === undefined) {
       Log.error(TAG, 'onPhotoChanged, item is undefined');
     } else {
       this.isSelected = this.selectManager?.isItemSelected(currentPhoto.uri) ?? false;
       this.currentUri = currentPhoto.uri;
 
-      let dataSourceIndex = this.isSelectMode ? (this.selectManager?.getSelectItemDataSourceIndex(currentPhoto) ?? Constants.INVALID) : index;
+      let dataSourceIndex = this.isSelectMode ?
+        (this.selectManager?.getSelectItemDataSourceIndex(currentPhoto) ?? Constants.INVALID) : index;
       let timelineIndex = this.dataSource.getPositionByIndex(dataSourceIndex);
       AppStorage.setOrCreate<number>('placeholderIndex', timelineIndex);
       this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
@@ -607,7 +620,7 @@ export struct ThirdSelectPhotoBrowserBase {
       if (this.selectManager?.isPreview === true) {
         this.selectManager.isPreview = false;
         this.selectManager.clickedSet.clear();
-        for(let item of this.selectManager.previewSet) {
+        for (let item of this.selectManager.previewSet) {
           this.selectManager?.clickedSet.add(item);
         }
       }
@@ -683,7 +696,8 @@ export struct ThirdSelectPhotoBrowserBase {
     return true;
   }
 
-  @Builder buildCheckBox() {
+  @Builder
+  buildCheckBox() {
     if (this.isMultiPick) {
       Row() {
         Image(this.isSelected ? $r('app.media.picker_checkbox_selected_dark') : $r('app.media.picker_checkbox_unselected_dark'))
@@ -707,7 +721,8 @@ export struct ThirdSelectPhotoBrowserBase {
     }
   }
 
-  @Builder buildPanel() {
+  @Builder
+  buildPanel() {
     ThirdSelectedPanel({
       maxSelectCount: this.maxSelectCount,
       onMenuClicked: (action: Action): void => this.onMenuClicked(action),
