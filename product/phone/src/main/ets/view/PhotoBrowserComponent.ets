@@ -17,7 +17,7 @@ import router from '@ohos.router';
 import bundle from '@ohos.bundle';
 import CommonEvent from '@ohos.commonEvent';
 import window from '@ohos.window';
-import { MenuOperation, ViewData } from '@ohos/common';
+import { BrowserConstants, MenuOperation, ViewData } from '@ohos/common';
 import {
   Action,
   AddMenuOperation,
@@ -218,7 +218,7 @@ export struct PhotoBrowserComponent {
     }
 
     if (!this.isFirstLoad) {
-      this.updateMenu();
+      this.updateMenu(this.currentIndex);
     } else {
       this.isFirstLoad = false;
     }
@@ -271,7 +271,7 @@ export struct PhotoBrowserComponent {
           this.favorCacheItemsMap.set(currentPhoto.uri, currentPhoto);
         }
       }
-      this.updateMenu();
+      this.updateMenu(this.currentIndex);
       this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + 'false';
       AppStorage.setOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
     } else if (actionID === Action.DELETE.actionID) {
@@ -394,8 +394,8 @@ export struct PhotoBrowserComponent {
     Log.info(TAG, `onPhotoChanged start, index=${index}`);
     this.reportToBigDataForPhotoSlide(index);
     this.currentIndex = index;
-    this.updateActionBar && this.updateActionBar();
-    let currentPhoto = this.getCurrentPhoto();
+    this.updateActionBar(index);
+    let currentPhoto: MediaItem | undefined = this.getPhotoByIndex(index);
     if (currentPhoto == undefined) {
       Log.error(TAG, 'onPhotoChanged, item is undefined');
     } else {
@@ -433,8 +433,8 @@ export struct PhotoBrowserComponent {
     this.dataSource.updatePixMapDataSource(this.currentIndex);
   }
 
-  updateActionBar(): void {
-    let currentPhoto = this.getCurrentPhoto();
+  updateActionBar(index: number): void {
+    let currentPhoto: MediaItem | undefined = this.getPhotoByIndex(index);
     if (currentPhoto == undefined || this.isFromViewDataWithThirdUri) {
       return;
     }
@@ -444,11 +444,11 @@ export struct PhotoBrowserComponent {
     } else {
       this.timeAndLocation = DateUtil.getLocalizedTime(currentPhoto.getDataTaken());
     }
-    this.updateMenu();
+    this.updateMenu(index);
   }
 
-  updateMenu(): void {
-    let currentPhoto = this.getCurrentPhoto();
+  updateMenu(index: number): void {
+    let currentPhoto: MediaItem | undefined = this.getPhotoByIndex(index);
     if (!currentPhoto) {
       return;
     }
@@ -551,7 +551,7 @@ export struct PhotoBrowserComponent {
         isShowMenuFromThirdView: BigDataConstants.UNDEFINED_IS_SHOW_MENU
       }
     }
-    this.updateMenu();
+    this.updateMenu(this.currentIndex);
     ReportToBigDataUtil.statisticReport(BigDataConstants.IS_SHOW_MENU_ID, isShowMenuMsg);
   }
 
@@ -599,6 +599,8 @@ export struct PhotoBrowserComponent {
   onBackPress(): boolean {
     Log.info(TAG, 'onBackPress');
     this.appBroadCast.emit('hideBar', []);
+    let currentPhoto = this.getPhotoByIndex(this.currentIndex);
+    this.broadCast.emit(BrowserConstants.RESET_DEFAULT_SCALE + currentPhoto.uri, []);
     this.controller?.finishAnimation((): void => this.onBackPressInner());
     return true;
   }
@@ -990,7 +992,7 @@ export struct PhotoBrowserComponent {
     let currentPhoto = this.getCurrentPhoto();
     if (!isFavor) {
       currentPhoto.isFavor = isFavor;
-      this.updateMenu();
+      this.updateMenu(this.currentIndex);
     } else {
       Log.debug(TAG, 'update favor !');
     }
@@ -1170,7 +1172,7 @@ export struct PhotoBrowserComponent {
         }
       });
     }
-    this.updateActionBar();
+    this.updateActionBar(this.currentIndex);
     if (!this.isHorizontal) {
       ScreenManager.getInstance().setSystemUi(true);
     }
