@@ -790,8 +790,8 @@ export struct PhotoBrowserComponent {
         (AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
         this.dataSource.setDeviceId(param.albumInfo.deviceId);
-        this.dataSource.setAlbumDataSource
-        (AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+        this.dataSource.setAlbumDataSource(
+            AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       } else if (this.pageFrom == Constants.ENTRY_FROM.VIEW_DATA) {
         if (String(param.viewData).length === 0) {
           Log.error(TAG, 'Invalid uri');
