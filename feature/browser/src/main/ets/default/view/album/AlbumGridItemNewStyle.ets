@@ -336,6 +336,7 @@ export struct AlbumGridItemNewStyle {
     })
   }
 
+  @Builder
   normalAlbumCard() {
     Image(this.item.coverUri)
       .border({ radius: $r('sys.float.ohos_id_corner_radius_default_m') })
