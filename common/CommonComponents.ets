@@ -92,7 +92,7 @@ export { PhotoItem } from './src/main/ets/default/view/PhotoItem';
 
 export { PhotoSwiper } from './src/main/ets/default/view/PhotoSwiper';
 
-export { TabBar, TabBarForAlbumSet, DEVICE_TYPE } from './src/main/ets/default/view/TabBar';
+export { TabBar, TabBarForAlbumSet, DeviceType } from './src/main/ets/default/view/TabBar';
 
 export { ThirdSelectPhotoBrowserActionBar } from './src/main/ets/default/view/ThirdSelectPhotoBrowserActionBar';
 
