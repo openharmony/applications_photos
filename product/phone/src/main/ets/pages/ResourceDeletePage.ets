@@ -84,7 +84,7 @@ struct ResourceDeletePage {
         .width('100%')
         .height('100%');
     }
-    .backgroundColor("#00000000")
+    .backgroundColor('#00000000')
     .height('100%');
   }
 

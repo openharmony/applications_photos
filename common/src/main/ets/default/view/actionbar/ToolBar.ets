@@ -37,7 +37,7 @@ export struct ToolBar {
   @State showPopup: boolean = false;
   onMenuClicked: Function = (): void => {};
   @State actionBarProp: ActionBarProp = new ActionBarProp();
-  @Consume @Watch("isNeedHidePopup") hidePopup: boolean;
+  @Consume @Watch('isNeedHidePopup') hidePopup: boolean;
   private isFromPhotoBrowser = false;
 
   aboutToAppear(): void {

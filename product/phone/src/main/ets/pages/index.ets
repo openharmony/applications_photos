@@ -379,9 +379,9 @@ struct IndexPage {
     Log.info(TAG, `Has permission been requested? ${isRequested}`);
     if (!isRequested) {
       let permissionList: Array<string> = [
-        "ohos.permission.READ_IMAGEVIDEO",
-        "ohos.permission.WRITE_IMAGEVIDEO",
-        "ohos.permission.MEDIA_LOCATION"
+        'ohos.permission.READ_IMAGEVIDEO',
+        'ohos.permission.WRITE_IMAGEVIDEO',
+        'ohos.permission.MEDIA_LOCATION'
       ];
       let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
       try {

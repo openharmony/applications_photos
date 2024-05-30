@@ -251,7 +251,7 @@ export class HistogramManager {
 
     // 闭包填充颜色
     this.context.fillStyle = color;
-    this.context.fill(region, "nonzero");
+    this.context.fill(region, 'nonzero');
   }
 
   /**
