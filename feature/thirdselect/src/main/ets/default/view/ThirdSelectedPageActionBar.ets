@@ -21,7 +21,7 @@ import { IS_HORIZONTAL, SelectParams } from '../utils/ThirdSelectConstants';
 export struct ThirdSelectedPageActionBar {
   @StorageLink(IS_HORIZONTAL) @Watch('createActionBar') isHorizontal: boolean = ScreenManager.getInstance()
     .isHorizontal();
-  @State menuList: Array<Action> = new Array<Action>();
+  @State menuList: Action[] = [];
   selectParams: SelectParams = SelectParams.defaultParam();
   @Provide selectedCount: number = 0;
   @Link @Watch('onSelectedCountChanged') totalSelectedCount: number;

@@ -63,8 +63,8 @@ export struct NewAlbumPage {
   @Provide broadCast: BroadCast = new BroadCast();
   @Provide isShow: boolean = true;
   @Provide isShowBar: boolean = true;
-  @State moreMenuList: Array<Action> = new Array<Action>();
-  @Provide rightClickMenuList: Array<Action> = new Array<Action>();
+  @State moreMenuList: Action[] = [];
+  @Provide rightClickMenuList: Action[] = [];
   @State isClickScrollBar: boolean = false;
   @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();

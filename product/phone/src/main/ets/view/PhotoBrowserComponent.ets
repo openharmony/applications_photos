@@ -111,10 +111,10 @@ export struct PhotoBrowserComponent {
   @Provide backgroundColorResource: Resource = $r('app.color.default_background_color');
   @Provide('dateTitle') photoDate: string = '';
   @Provide('timeLocationTitle') timeAndLocation: string = '';
-  @Provide menuList: Array<Action> = new Array<Action>();
-  @Provide toolMenuList: Array<Action> = new Array<Action>();
-  @Provide topMenuList: Array<Action> = new Array<Action>();
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
+  @Provide menuList: Action[] = [];
+  @Provide toolMenuList: Action[] = [];
+  @Provide topMenuList: Action[] = [];
+  @Provide moreMenuList: Action[] = [];
   @Provide broadCast: BroadCast = new BroadCast();
   @Provide isShowBar: boolean = true;
   @Provide onlyChangeBgColor: boolean = false;
@@ -471,7 +471,7 @@ export struct PhotoBrowserComponent {
 
     Log.info(TAG, `updateMenu album[${this.albumUri}]`);
 
-    let menuTemp: Array<Action> = new Array<Action>();
+    let menuTemp: Action[] = [];
     if (this.pageFrom == Constants.ENTRY_FROM.CAMERA ||
       this.pageFrom == Constants.ENTRY_FROM.CARD ||
       (this.isFromViewDataWithMediaUri == true &&
@@ -487,7 +487,7 @@ export struct PhotoBrowserComponent {
       this.menuList = menuTemp;
     }
 
-    let list: Array<Action> = new Array<Action>();
+    let list: Action[] = [];
     if (pageFrom === Constants.ENTRY_FROM.NORMAL || pageFrom === Constants.ENTRY_FROM.CAMERA) {
       list.push(currentPhoto.isFavor ? Action.FAVORITE : Action.NOT_FAVORITE,
         ((currentPhoto.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE))

@@ -947,7 +947,7 @@ export struct ThirdSelectPhotoBrowserBase {
  */
 class ThirdBrowserDataSource extends PhotoDataSource {
   private isSelectMode = false;
-  private selectedItems: MediaItem[] = new Array<MediaItem>();
+  private selectedItems: MediaItem[] = [];
 
   totalCount() {
     if (this.isSelectMode) {

@@ -82,8 +82,8 @@ export struct PhotoGridView {
   @Provide broadCast: BroadCast = new BroadCast();
   @Consume isShow: boolean;
   @Provide isShowBar: boolean = true;
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
-  @Provide rightClickMenuList: Array<Action> = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
+  @Provide rightClickMenuList: Action[] = [];
   @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('leftBlank') leftBlank: number[] =
@@ -519,7 +519,7 @@ export struct PhotoGridView {
     if (!this.isSelectedMode) {
       this.onModeChange();
     }
-    this.rightClickMenuList = new Array<Action>();
+    this.rightClickMenuList = [];
     if (this.albumInfo) {
       let isRecycleAlbum: boolean = this.albumInfo.isTrashAlbum;
       if (isRecycleAlbum) {

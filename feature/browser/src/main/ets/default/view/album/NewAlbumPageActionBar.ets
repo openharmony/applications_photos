@@ -32,7 +32,7 @@ export struct NewAlbumPageActionBar {
   @StorageLink('isHorizontal') @Watch('createActionBar') isHorizontal: boolean = ScreenManager.getInstance()
     .isHorizontal();
   @State actionBarProp: ActionBarProp = new ActionBarProp();
-  @Provide moreMenuList: Action[] = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
   @Provide hidePopup: boolean = false;
 
   aboutToAppear(): void {

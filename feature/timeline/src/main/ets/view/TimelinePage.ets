@@ -89,8 +89,8 @@ export struct TimelinePage {
   deleteMode = false; // Is delete mode
   isActive = false; // Is the page active
   routerStart = false; // Is move or copy router page
-  @Provide moreMenuList: Action[] = new Array<Action>();
-  @Provide rightClickMenuList: Array<Action> = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
+  @Provide rightClickMenuList: Action[] = [];
   @State groupSelectMode: boolean[] = [];
   @Provide yearData: TimelineData[] = [];
   @Provide dateText: string = '';
