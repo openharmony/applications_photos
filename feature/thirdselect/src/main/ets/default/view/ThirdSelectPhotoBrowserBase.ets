@@ -848,7 +848,7 @@ export struct ThirdSelectPhotoBrowserBase {
       }
       return;
     }
-    let uriArray: Array<string>;
+    let uriArray: string[] = [];
     let mediaType: number;
     if (this.isMultiPick) {
       if (this.selectManager === null) {

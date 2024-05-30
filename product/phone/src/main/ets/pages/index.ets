@@ -378,7 +378,7 @@ struct IndexPage {
     }
     Log.info(TAG, `Has permission been requested? ${isRequested}`);
     if (!isRequested) {
-      let permissionList: Array<string> = [
+      let permissionList: string[] = [
         'ohos.permission.READ_IMAGEVIDEO',
         'ohos.permission.WRITE_IMAGEVIDEO',
         'ohos.permission.MEDIA_LOCATION'

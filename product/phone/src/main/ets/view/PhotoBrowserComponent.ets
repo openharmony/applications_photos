@@ -516,7 +516,7 @@ export struct PhotoBrowserComponent {
         this.toolMenuList = [];
       }
     }
-    let menuTempList: Array<Action>;
+    let menuTempList: Action[] = [];
     if (!this.albumInfo) {
       // 照片页
       menuTempList = [Action.ADD, Action.RENAME];
