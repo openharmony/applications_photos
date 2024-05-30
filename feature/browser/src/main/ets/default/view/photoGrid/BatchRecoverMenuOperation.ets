@@ -85,8 +85,8 @@ export class BatchRecoverMenuOperation extends ProcessMenuOperation {
     let endIndex = this.currentBatch * this.BATCH_SIZE;
     endIndex = Math.min(endIndex, this.uris.length);
     let operationImpl = BrowserOperationFactory.getFeature(BrowserOperationFactory.TYPE_PHOTO);
-    let fileAssets = new Array<FileAsset>();
-    let uris: Array<string> = new Array();
+    let fileAssets: FileAsset[] = [];
+    let uris: string[] = [];
     for (let index = startIndex; index < endIndex; index++) {
       uris.push(this.uris[index]);
 

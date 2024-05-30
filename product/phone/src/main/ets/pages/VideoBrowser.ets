@@ -44,8 +44,8 @@ struct VideoBrowser {
   @Provide('dateTitle') photoDate: string = '';
   @Provide('timeLocationTitle') timeAndLocation: string = '';
   @Provide isShowBar: boolean = false;
-  @Provide menuList: Array<Action> = new Array<Action>();
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
+  @Provide menuList: Action[] = [];
+  @Provide moreMenuList: Action[] = [];
   @Provide hidePopup: boolean = false;
   private broadCast: BroadCast = new BroadCast();
   private myVideoController: VideoController = new VideoController();

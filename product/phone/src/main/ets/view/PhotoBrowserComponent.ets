@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,10 +111,10 @@ export struct PhotoBrowserComponent {
   @Provide backgroundColorResource: Resource = $r('app.color.default_background_color');
   @Provide('dateTitle') photoDate: string = '';
   @Provide('timeLocationTitle') timeAndLocation: string = '';
-  @Provide menuList: Array<Action> = new Array<Action>();
-  @Provide toolMenuList: Array<Action> = new Array<Action>();
-  @Provide topMenuList: Array<Action> = new Array<Action>();
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
+  @Provide menuList: Action[] = [];
+  @Provide toolMenuList: Action[] = [];
+  @Provide topMenuList: Action[] = [];
+  @Provide moreMenuList: Action[] = [];
   @Provide broadCast: BroadCast = new BroadCast();
   @Provide isShowBar: boolean = true;
   @Provide onlyChangeBgColor: boolean = false;
@@ -123,8 +123,8 @@ export struct PhotoBrowserComponent {
   @State @Watch('updateMoreMenu') currentShow: boolean = true;
   @StorageLink('isHorizontal') @Watch('updateIsHorizontal') isHorizontal: boolean = ScreenManager.getInstance()
     .isHorizontal();
-  @StorageLink('TimelinePageIndex') TimelinePageIndex: number = Constants.INVALID;
-  @StorageLink('PhotoGridPageIndex') PhotoGridPageIndex: number = Constants.INVALID;
+  @StorageLink('timelinePageIndex') timelinePageIndex: number = Constants.INVALID;
+  @StorageLink('photoGridPageIndex') photoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('leftBlank') leftBlank: number[] =
     [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
@@ -471,7 +471,7 @@ export struct PhotoBrowserComponent {
 
     Log.info(TAG, `updateMenu album[${this.albumUri}]`);
 
-    let menuTemp: Array<Action> = new Array<Action>();
+    let menuTemp: Action[] = [];
     if (this.pageFrom == Constants.ENTRY_FROM.CAMERA ||
       this.pageFrom == Constants.ENTRY_FROM.CARD ||
       (this.isFromViewDataWithMediaUri == true &&
@@ -487,7 +487,7 @@ export struct PhotoBrowserComponent {
       this.menuList = menuTemp;
     }
 
-    let list: Array<Action> = new Array<Action>();
+    let list: Action[] = [];
     if (pageFrom === Constants.ENTRY_FROM.NORMAL || pageFrom === Constants.ENTRY_FROM.CAMERA) {
       list.push(currentPhoto.isFavor ? Action.FAVORITE : Action.NOT_FAVORITE,
         ((currentPhoto.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE))
@@ -516,7 +516,7 @@ export struct PhotoBrowserComponent {
         this.toolMenuList = [];
       }
     }
-    let menuTempList: Array<Action>;
+    let menuTempList: Action[] = [];
     if (!this.albumInfo) {
       // 照片页
       menuTempList = [Action.ADD, Action.RENAME];
@@ -610,12 +610,12 @@ export struct PhotoBrowserComponent {
     this.dataSource.release();
     if (this.checkedTransition === Constants.PHOTO_TRANSITION_TIMELINE) {
       Log.info(TAG, 'onBackPress TimelinePage');
-      this.TimelinePageIndex = this.currentIndex; // call scrollTo
-      this.TimelinePageIndex = Constants.INVALID;
+      this.timelinePageIndex = this.currentIndex; // call scrollTo
+      this.timelinePageIndex = Constants.INVALID;
     } else if (this.checkedTransition === Constants.PHOTO_TRANSITION_ALBUM) {
       Log.info(TAG, 'onBackPress PhotoGridPage');
-      this.PhotoGridPageIndex = this.currentIndex; // call scrollTo
-      this.PhotoGridPageIndex = Constants.INVALID;
+      this.photoGridPageIndex = this.currentIndex; // call scrollTo
+      this.photoGridPageIndex = Constants.INVALID;
 
       if (this.isFromFACard) {
         if (this.isPullDown) {
@@ -1138,11 +1138,11 @@ export struct PhotoBrowserComponent {
         Log.info(TAG, `data reloaded move to ${index}`);
         this.currentIndex = index;
         if (this.checkedTransition == Constants.PHOTO_TRANSITION_TIMELINE) {
-          this.TimelinePageIndex = this.currentIndex; // call scrollTo
-          this.TimelinePageIndex = Constants.INVALID;
+          this.timelinePageIndex = this.currentIndex; // call scrollTo
+          this.timelinePageIndex = Constants.INVALID;
         } else if (this.checkedTransition == Constants.PHOTO_TRANSITION_ALBUM) {
-          this.PhotoGridPageIndex = this.currentIndex; // call scrollTo
-          this.PhotoGridPageIndex = Constants.INVALID;
+          this.photoGridPageIndex = this.currentIndex; // call scrollTo
+          this.photoGridPageIndex = Constants.INVALID;
         }
         this.dataSource.enableGetData(true);
         this.dataSource.getData(this.currentIndex);
@@ -1361,12 +1361,12 @@ export struct PhotoBrowserComponent {
     }
     interface Msg {
       clickThumbnailTime: number;
-      ShowSinglePhoto: number;
-      FileName?: string;
+      showSinglePhoto: number;
+      fileName?: string;
     }
     let msg: Msg = {
       clickThumbnailTime: this.clickThumbnailTime,
-      ShowSinglePhoto: Date.now()
+      showSinglePhoto: Date.now()
     }
     let fileName = ReportToBigDataUtil.getFileNameOfPhotoTakenByCamera(this.getPhotoByIndex(0));
     ReportToBigDataUtil.setFileNameProperty(msg, fileName);

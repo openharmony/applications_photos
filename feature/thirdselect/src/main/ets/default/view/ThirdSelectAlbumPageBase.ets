@@ -60,7 +60,7 @@ export struct ThirdSelectAlbumPageBase {
   @Provide broadCast: BroadCast = new BroadCast();
   private albums: AlbumSetDataSource = new AlbumSetDataSource(this.broadCast);
   @Provide isSelectedMode: boolean = true;
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
   selectManager?: ThirdSelectManager;
   @Provide gridColumnsCount: number = 3;
   isActive = false;

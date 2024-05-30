@@ -77,8 +77,8 @@ let localStorage = LocalStorage.getShared();
 export struct ThirdSelectPhotoGridBase {
   @State selectedCount: number = 0;
   @Provide isSelectedMode: boolean = true;
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
-  @Provide rightClickMenuList: Array<Action> = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
+  @Provide rightClickMenuList: Action[] = [];
   photoDataImpl: PhotoDataImpl | undefined =
     BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO) as PhotoDataImpl;
   smartPickerDataImpl: SmartPickerDataImpl | undefined;
@@ -165,7 +165,7 @@ export struct ThirdSelectPhotoGridBase {
     } else if (action.actionID === Action.CANCEL.actionID) {
       this.setPickResult();
     } else if (action.actionID === Action.OK.actionID) {
-      let uriArray: Array<string> = new Array<string>();
+      let uriArray: string[] = [];
       if (this.selectManager !== null) {
         uriArray = SelectUtil.getUriArray(this.selectManager.clickedSet);
       }

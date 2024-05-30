@@ -88,7 +88,7 @@ export struct TimelinePageActionBar {
   }
 
   private createHorizontalActionBar(): ActionBarProp {
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     let actionBarProp: ActionBarProp = new ActionBarProp();
     if (!this.isEmpty && this.deviceType === Constants.PC_DEVICE_TYPE) {
       menuList.push(Action.MULTISELECT);
@@ -102,7 +102,7 @@ export struct TimelinePageActionBar {
       .setMode(ActionBarMode.STANDARD_MODE);
     Log.info(TAG, `createActionBar, isSelectedMode: ${this.isSelectedMode}`);
     if (this.isSelectedMode) {
-      menuList = new Array<Action>();
+      menuList = [];
       menuList.push((this.isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL),
         Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID, Action.MORE);
       actionBarProp
@@ -115,7 +115,7 @@ export struct TimelinePageActionBar {
   }
 
   private createActionBar(): ActionBarProp {
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     let actionBarProp: ActionBarProp = new ActionBarProp();
     actionBarProp
       .setHasTabBar(this.isSidebar)
