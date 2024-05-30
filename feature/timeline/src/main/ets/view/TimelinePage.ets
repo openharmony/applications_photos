@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ import { TimelineDataSourceManager } from '../model/TimelineDataSourceManager';
 import { TimelineScrollBar } from './TimelineScrollBar';
 
 const TAG: string = 'TimelinePage';
-AppStorage.setOrCreate('TimelinePageIndex', Constants.INVALID);
+AppStorage.setOrCreate('timelinePageIndex', Constants.INVALID);
 
 interface Params {
   albumName: string;
@@ -76,7 +76,7 @@ export struct TimelinePage {
   @State totalSelectedCount: number = 0;
   @Provide broadCast: BroadCast = TimelineDataSourceManager.getInstance().getBroadCast();
   @Consume @Watch('onIndexPageShow') isShow: boolean;
-  @StorageLink('TimelinePageIndex') @Watch('onIndexChange') TimelinePageIndex: number = Constants.INVALID;
+  @StorageLink('timelinePageIndex') @Watch('onIndexChange') timelinePageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('leftBlank') leftBlank: number[] =
     [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
@@ -441,9 +441,9 @@ export struct TimelinePage {
   }
 
   onIndexChange(): void {
-    Log.info(TAG, `onIndexChange ${this.TimelinePageIndex}`);
-    if (this.TimelinePageIndex != Constants.INVALID && this.dataSource != null) {
-      this.scroller.scrollToIndex(this.dataSource.getPositionByIndex(this.TimelinePageIndex));
+    Log.info(TAG, `onIndexChange ${this.timelinePageIndex}`);
+    if (this.timelinePageIndex != Constants.INVALID && this.dataSource != null) {
+      this.scroller.scrollToIndex(this.dataSource.getPositionByIndex(this.timelinePageIndex));
     }
   }
 
