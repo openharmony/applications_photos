@@ -24,8 +24,8 @@ const TAG: string = 'common_ThirdSelectPhotoBrowserActionBar';
 
 @Component
 export struct ThirdSelectPhotoBrowserActionBar {
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @State isMultiPick: boolean = false;
   @Consume @Watch('createActionBar') isSelected: boolean;
   onMenuClicked: Function = (): void => {};
@@ -61,9 +61,9 @@ export struct ThirdSelectPhotoBrowserActionBar {
             $r('app.float.third_selected_actionbar_padding_top') : px2vp(this.statusBarHeight)
         })
     }
-    .height(this.isHorizontal ? Constants.ActionBarHeight * Constants.PHOTO_BAR_MULTIPLES_1_5
-                              : Constants.ActionBarHeight * Constants.PHOTO_BAR_MULTIPLES_1_5
-                                + px2vp(this.statusBarHeight))
+    .height(this.isHorizontal ? Constants.ActionBarHeight * Constants.PHOTO_BAR_MULTIPLES_1_5 :
+      Constants.ActionBarHeight * Constants.PHOTO_BAR_MULTIPLES_1_5 +
+      px2vp(this.statusBarHeight))
     .markAnchor({ x: Constants.PERCENT_0, y: Constants.PERCENT_0 })
     .position({ x: Constants.PERCENT_0, y: Constants.PERCENT_0 })
     .visibility(this.isShowBar ? Visibility.Visible : Visibility.Hidden)

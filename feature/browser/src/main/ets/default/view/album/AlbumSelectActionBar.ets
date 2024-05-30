@@ -28,8 +28,8 @@ const TAG: string = 'browser_AlbumSelectActionBar';
 
 @Component
 export struct AlbumSelectActionBar {
-  @StorageLink('isHorizontal') @Watch('createActionBar') isHorizontal: boolean
-    = ScreenManager.getInstance().isHorizontal();
+  @StorageLink('isHorizontal') @Watch('createActionBar') isHorizontal: boolean =
+    ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @Link @Watch('createActionBar') totalSelectedCount: number;

@@ -394,8 +394,8 @@ export struct ImageGridItemComponent {
         }
       } else {
         if (this.albumUri === UserFileManagerAccess.getInstance()
-          .getSystemAlbumUri(UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE)
-        || this.pageName === Constants.PHOTO_TRANSITION_TIMELINE) {
+          .getSystemAlbumUri(UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE) ||
+          this.pageName === Constants.PHOTO_TRANSITION_TIMELINE) {
           this.buildImage();
         } else {
           Stack() {

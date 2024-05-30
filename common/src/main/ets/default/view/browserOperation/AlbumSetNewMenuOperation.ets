@@ -65,8 +65,8 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
       } else {
         this.defaultAlbumName = await context.resourceManager.getString(a.id);
         Log.info(TAG, `The display name is ${this.defaultAlbumName}`);
-        let newAlbumDisplayName
-          = this.getNewAlbumDefaultName(this.defaultAlbumName);
+        let newAlbumDisplayName =
+          this.getNewAlbumDefaultName(this.defaultAlbumName);
         Log.info(TAG, `The display name of new album is ${newAlbumDisplayName}`);
 
         this.menuContext.broadCast.emit(BroadCastConstants.SHOW_NEW_ALBUM_PHOTO_DIALOG,

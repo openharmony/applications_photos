@@ -64,8 +64,8 @@ export struct PhotoItem {
   @State isPullDownAndDragPhoto: boolean = false;
   @Link isOnSwiperAnimation: boolean;
   @State imageTop: number = 0;
-  @StorageLink('isHorizontal') isHorizontal: boolean
-    = ScreenManager.getInstance().isHorizontal();
+  @StorageLink('isHorizontal') isHorizontal: boolean =
+    ScreenManager.getInstance().isHorizontal();
   @State isPhotoScaled: boolean = false;
   @State justifyWidth: boolean = true;
   @State imageWidth?: string = Constants.PERCENT_100;
@@ -157,8 +157,8 @@ export struct PhotoItem {
     let winLayoutW = ScreenManager.getInstance().getWinLayoutWidth();
     let winLayoutH = ScreenManager.getInstance().getWinLayoutHeight();
     if (this.windowLayoutWidth !== winLayoutW || this.windowLayoutHeight !== winLayoutH) {
-      Log.debug(TAG, `size change. oldWH: [${this.windowLayoutWidth}, ${this.windowLayoutHeight}]`
-      + `, newWH: [${winLayoutW}, ${winLayoutH}]`);
+      Log.debug(TAG, `size change. oldWH: [${this.windowLayoutWidth}, ${this.windowLayoutHeight}]` +
+        `, newWH: [${winLayoutW}, ${winLayoutH}]`);
       this.windowLayoutWidth = winLayoutW;
       this.windowLayoutHeight = winLayoutH;
       this.windowColumns = ScreenManager.getInstance().getScreenColumns();
@@ -223,8 +223,8 @@ export struct PhotoItem {
     this.firstLoad = false;
     this.preItem.width = this.item.imgWidth;
     this.preItem.height = this.item.imgHeight;
-    Log.info(TAG, 'onViewDataChanged, index: ' + this.mPosition + ', usePixmap: ' + this.usePixmap
-    + ', ratio: ' + this.ratio + ', thumbnail: ' + JSON.stringify(this.thumbnail));
+    Log.info(TAG, 'onViewDataChanged, index: ' + this.mPosition + ', usePixmap: ' + this.usePixmap +
+      ', ratio: ' + this.ratio + ', thumbnail: ' + JSON.stringify(this.thumbnail));
   }
 
   onTouchEventRespond(matrix: Matrix4.Matrix4Transit): void {
@@ -413,23 +413,23 @@ export struct PhotoItem {
               Log.info(TAG, `PinchGesture onActionStart scale:\
                           ${(event as GestureEvent).scale}, cx: ${(event as GestureEvent).pinchCenterX},
                           cy: ${(event as GestureEvent).pinchCenterY}`);
-              if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE
-              || this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
+              if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE ||
+                this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
                 this.eventPipeline?.onScaleStart((event as GestureEvent).scale,
                   (event as GestureEvent).pinchCenterX, (event as GestureEvent).pinchCenterY);
               }
             })
             .onActionUpdate((event?: GestureEvent) => {
               Log.debug(TAG, `PinchGesture onActionUpdate scale: ${(event as GestureEvent).scale}`);
-              if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE
-              || this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
+              if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE ||
+                this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
                 this.eventPipeline?.onScale((event as GestureEvent).scale);
               }
             })
             .onActionEnd(() => {
               Log.info(TAG, 'PinchGesture onActionEnd');
-              if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE
-              || this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
+              if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE ||
+                this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
                 this.eventPipeline?.onScaleEnd();
                 if (this.animationOption != null) {
                   animateTo({

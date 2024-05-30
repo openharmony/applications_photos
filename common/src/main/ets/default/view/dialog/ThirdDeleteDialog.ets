@@ -21,8 +21,8 @@ import { Constants } from '../../model/common/Constants';
 export struct ThirdDeleteDialog {
   private TAG: string = 'DeleteDialog'
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Consume dialogCallback: DialogCallback;
   @Consume dialogMessage: Resource;
   @StorageLink('confirmText') confirmText: Resource = $r('app.string.dialog_delete');
