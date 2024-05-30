@@ -278,7 +278,7 @@ export struct NewAlbumPage {
       AppStorage.setOrCreate(Constants.APP_KEY_NEW_ALBUM_SOURCE, item.uri);
     } else {
       this.title = '';
-      this.dataSource.setAlbumUri("");
+      this.dataSource.setAlbumUri('');
     }
 
     let self = this;
@@ -418,8 +418,8 @@ export struct NewAlbumPage {
             browserController: this.browserController
           })
         }
-        .width("100%")
-        .height("100%")
+        .width('100%')
+        .height('100%')
 
         // Opacity must change for TransitionEffect taking effect
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))
@@ -434,8 +434,8 @@ export struct NewAlbumPage {
             browserController: this.browserController
           })
         }
-        .width("100%")
-        .height("100%")
+        .width('100%')
+        .height('100%')
 
         // Opacity must change for TransitionEffect taking effect
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))

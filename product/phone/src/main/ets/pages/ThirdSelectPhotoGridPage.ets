@@ -91,8 +91,8 @@ export struct ThirdSelectPhotoGridPage {
             browserController: this.browserController
           })
         }
-        .width("100%")
-        .height("100%")
+        .width('100%')
+        .height('100%')
 
         // Opacity must change for TransitionEffect taking effect
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))

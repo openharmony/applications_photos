@@ -21,9 +21,9 @@ const TAG: string = 'common_RemoveProgressDialog';
 
 @Observed
 export class RemoveProgressParam {
-  currentCount: number = 0;
-  totalCount: number = 0;
-  message?: Resource
+  public currentCount: number = 0;
+  public totalCount: number = 0;
+  public message?: Resource
 }
 
 @CustomDialog

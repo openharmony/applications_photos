@@ -166,7 +166,7 @@ export struct PhotoBrowserComponent {
   private deviceName = '';
   private backFromCopy = false;
   private uriFromThirdPartyApp: string = '';
-  private editNewUri: string = "";
+  private editNewUri: string = '';
   private favorCacheItemsMap = new Map<String, MediaItem>()
   private breakpointSystem: BreakpointSystem = new BreakpointSystem();
   private theDeleteItem: MediaItem | null = null;
@@ -726,7 +726,7 @@ export struct PhotoBrowserComponent {
       return albumUri;
     }
 
-    return "";
+    return '';
   }
 
   aboutToAppear(): void {
@@ -766,7 +766,7 @@ export struct PhotoBrowserComponent {
         this.dataSource.initData();
         this.isFromCamera = true;
         this.clickThumbnailTime = param.clickThumbnailTime ? param.clickThumbnailTime : 0;
-        this.albumUri = "";
+        this.albumUri = '';
         this.jumpSourceToMain = JumpSourceToMain.CAMERA;
         MediaObserver.getInstance().registerObserver(this.dataObserver);
         AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE);
@@ -1116,13 +1116,13 @@ export struct PhotoBrowserComponent {
           this.uriFromThirdPartyApp = '';
           this.dataSource.enableGetData(true);
           this.setViewDataResult(false);
-        } else if (this.albumUri === "") {
+        } else if (this.albumUri === '') {
           this.resetAlbum(UserFileManagerAccess.getInstance()
             .getSystemAlbumUri(UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE));
           this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
             (index: number): void => this.onGetItemIndexByUri(index));
         } else {
-          this.resetAlbum("");
+          this.resetAlbum('');
           this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
             (index: number): void => this.onGetItemIndexByUri(index));
         }
@@ -1147,10 +1147,10 @@ export struct PhotoBrowserComponent {
         this.dataSource.enableGetData(true);
         this.dataSource.getData(this.currentIndex);
         this.dataSource.onDataReloaded();
-        this.editNewUri = "";
+        this.editNewUri = '';
       } else {
         Log.error(TAG, `edit new uri ${this.editNewUri} is invalid`);
-        this.editNewUri = "";
+        this.editNewUri = '';
         this.currentIndex = 0;
         this.dataSource.enableGetData(true);
       }

@@ -239,8 +239,8 @@ export struct ImageGridItemComponent {
         .aspectRatio(1)
         .rotate({ x: 0, y: 0, z: 1, angle: 0 })
         .backgroundColor($r('app.color.default_background_color'))
-        .width("100%")
-        .height("100%")
+        .width('100%')
+        .height('100%')
         .zIndex(-1)
       } else {
         this.buildNormal()

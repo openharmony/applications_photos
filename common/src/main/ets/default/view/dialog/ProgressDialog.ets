@@ -22,8 +22,8 @@ const TAG: string = 'common_ProgressDialog';
 
 @Observed
 export class ProgressParam {
-  cancelFunc: Function = (): void => {};
-  operationType: string = '';
+  public cancelFunc: Function = (): void => {};
+  public operationType: string = '';
 }
 
 @CustomDialog

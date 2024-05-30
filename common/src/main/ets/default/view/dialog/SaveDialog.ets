@@ -20,8 +20,8 @@ import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class SaveDialogCallback {
-  saveAsNewCallback: Function = (): void => {};
-  replaceOriginalCallback: Function = (): void => {};
+  public saveAsNewCallback: Function = (): void => {};
+  public replaceOriginalCallback: Function = (): void => {};
 }
 
 @Extend(Text) 

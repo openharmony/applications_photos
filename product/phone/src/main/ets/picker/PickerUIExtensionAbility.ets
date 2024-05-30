@@ -25,19 +25,19 @@ const TAG = '[PickerUIExtensionAbility]'
 
 export default class PickerUIExtensionAbility extends UIExtensionAbility {
   onCreate(): void {
-    Log.info(TAG, "onCreate");
+    Log.info(TAG, 'onCreate');
   }
 
   onDestroy(): void {
-    Log.info(TAG, "onDestroy");
+    Log.info(TAG, 'onDestroy');
   }
 
   onForeground(): void {
-    Log.info(TAG, "onForeground");
+    Log.info(TAG, 'onForeground');
   }
 
   onBackground(): void {
-    Log.info(TAG, "onBackground");
+    Log.info(TAG, 'onBackground');
   }
 
   onSessionCreate(want: Want, session: UIExtensionContentSession): void {
@@ -60,7 +60,7 @@ export default class PickerUIExtensionAbility extends UIExtensionAbility {
   }
 
   onSessionDestroy(session: UIExtensionContentSession) {
-    Log.info(TAG, "onSessionDestroy");
+    Log.info(TAG, 'onSessionDestroy');
     UserFileManagerAccess.getInstance().onDestroy();
     ScreenManager.getInstance().destroyMainWindow();
     AppStorage.delete(Constants.PHOTO_PICKER_EXTENSION_WINDOW);
