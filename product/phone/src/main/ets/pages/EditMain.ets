@@ -155,7 +155,8 @@ export struct EditMain {
           isPcStyle: false
         })
       }
-      .height(this.isVerticalScreen ? Constants.ActionBarHeight + Constants.PUNCH_HOLE_HEIGHT : Constants.ActionBarHeight)
+      .height(this.isVerticalScreen ? Constants.ActionBarHeight +
+      Constants.PUNCH_HOLE_HEIGHT : Constants.ActionBarHeight)
       .width(Constants.PERCENT_100)
       .backgroundColor($r('app.color.transparent'))
       .padding({ top: this.isVerticalScreen ? Constants.PUNCH_HOLE_HEIGHT : Constants.NUMBER_0 })

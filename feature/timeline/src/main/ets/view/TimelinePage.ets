@@ -108,11 +108,14 @@ export struct TimelinePage {
   private updateDataSourceFunc: Function = (item: MediaItem): void => this.onUpdateFavorState(item);
   private resetZeroFunc: Function = (pageNumber: number): void => this.resetZero(pageNumber);
   private onLoadingFinishedFunc: Function = (size: number): void => this.onLoadingFinished(size);
-  private selectFunc: Function = (index: number, id: string, isSelected: boolean, callback?: Function): void => this.select(index, id, isSelected, callback);
+  private selectFunc: Function = (index: number, id: string, isSelected: boolean, callback?: Function): void =>
+  this.select(index, id, isSelected, callback);
   private groupSelectFunc: Function = (position: number): void => this.groupSelect(position);
-  private jumpPhotoBrowserFunc: Function = (name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void =>
+  private jumpPhotoBrowserFunc: Function = (name: string, item: MediaItem,
+                                            geometryTapIndex: number, geometryTransitionString: string): void =>
   this.jumpPhotoBrowser(name, item, geometryTapIndex, geometryTransitionString);
-  private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void =>
+  private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem,
+                                                 geometryTapIndex: number, geometryTransitionString: string): void =>
   this.jumpThirdPhotoBrowser(name, item, geometryTapIndex, geometryTransitionString);
   private onDataReloadedFunc: Function = (): void => this.onDataReloaded();
   private initDateTextFunc: Function = (): void => this.initDateText();
@@ -248,7 +251,8 @@ export struct TimelinePage {
     }
   }
 
-  private jumpPhotoBrowser(name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void {
+  private jumpPhotoBrowser(name: string, item: MediaItem,
+                           geometryTapIndex: number, geometryTransitionString: string): void {
     let targetIndex = this.dataSource == null ? Constants.NOT_FOUND : this.dataSource.getDataIndex(item);
     if (targetIndex == Constants.NOT_FOUND) {
       Log.error(TAG, 'targetIndex is not found');
@@ -262,7 +266,8 @@ export struct TimelinePage {
     }
   }
 
-  private jumpThirdPhotoBrowser(name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void {
+  private jumpThirdPhotoBrowser(name: string, item: MediaItem,
+                                geometryTapIndex: number, geometryTransitionString: string): void {
     let targetIndex = this.dataSource == null ? Constants.NOT_FOUND : this.dataSource.getDataIndex(item);
     if (targetIndex == Constants.NOT_FOUND) {
       Log.error(TAG, 'targetIndex is not found');
@@ -297,7 +302,8 @@ export struct TimelinePage {
   }
 
   private initDateText(): void {
-    let scrollMediaItem: MediaItem = this.dataSource == null ? new MediaItem() : this.dataSource.getMediaItemByPosition(0) as MediaItem;
+    let scrollMediaItem: MediaItem = this.dataSource == null ? new MediaItem() :
+      this.dataSource.getMediaItemByPosition(0) as MediaItem;
     this.dateText = DateUtil.getLocalizedYearAndMonth(scrollMediaItem.getDataTaken());
   }
 
@@ -720,10 +726,13 @@ export struct TimelinePage {
                         dataSource: this.dataSource,
                         item: item.mediaItem,
                         mPosition: item.viewIndex,
-                        isSelected: this.isSelectedMode ? this.mSelectManager.isItemSelected((item.mediaItem as MediaItem).uri as string, item.viewIndex) : false,
+                        isSelected: this.isSelectedMode ?
+                        this.mSelectManager.isItemSelected((item.mediaItem as MediaItem).uri as string, item.viewIndex) :
+                          false,
                         pageName: Constants.PHOTO_TRANSITION_TIMELINE,
                         onMenuClicked: (action: Action): void => this.onMenuClicked(action),
-                        onMenuClickedForSingleItem: (action: Action, currentPhoto: MediaItem): void => this.onMenuClickedForSingleItem(action, currentPhoto),
+                        onMenuClickedForSingleItem: (action: Action, currentPhoto: MediaItem): void =>
+                        this.onMenuClickedForSingleItem(action, currentPhoto),
                         geometryTransitionString: this.getGeometryTransitionId(item, index as number),
                         selectedCount: $totalSelectedCount
                       })
@@ -751,7 +760,8 @@ export struct TimelinePage {
             .rowsGap(Constants.GRID_GUTTER)
             .cachedCount(Constants.GRID_CACHE_ROW_COUNT)
             .onScrollIndex((first) => {
-              let scrollMediaItem: MediaItem | null = this.dataSource == null ? null : this.dataSource.getMediaItemByPosition(first) as MediaItem;
+              let scrollMediaItem: MediaItem | null = this.dataSource == null ?
+                null : this.dataSource.getMediaItemByPosition(first) as MediaItem;
               if (scrollMediaItem?.getDataTaken()) {
                 this.dateText = DateUtil.getLocalizedYearAndMonth(scrollMediaItem.getDataTaken());
                 Log.debug(TAG, `scrollIndex=${first}, dateTaken=${scrollMediaItem.getDataTaken()}`);
@@ -822,7 +832,7 @@ export struct TimelinePage {
 
   private async addOperation(albumName: string, albumUri: string) {
     let menuContext = new MenuContext();
-    let onCopyStartFunc =  (): void => this.onCopyStart();
+    let onCopyStartFunc = (): void => this.onCopyStart();
     if (this.isMvOrCpSeparatesItem) {
       menuContext.withMediaItem(this.mvOrCpSeparatesItem as MediaItem);
       this.onCopyStart && this.onCopyStart();
@@ -831,7 +841,8 @@ export struct TimelinePage {
     } else {
       menuContext.withSelectManager(this.mSelectManager).withOperationStartCallback(onCopyStartFunc);
     }
-    menuContext.withOperationEndCallback((err: Object, count: number, total: number): void => this.onCopyEnd(err as Object, count, total))
+    menuContext.withOperationEndCallback((err: Object, count: number, total: number): void =>
+    this.onCopyEnd(err as Object, count, total))
       .withBroadCast(this.broadCast)
       .withTargetAlbumName(albumName).withAlbumUri(albumUri);
     let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(AddMenuOperation, menuContext);

@@ -144,7 +144,8 @@ export struct PhotoItem {
     this.calculateImagePos();
     this.onGeometryIdChange();
 
-    let matrix: Matrix4.Matrix4Transit = AppStorage.get<Matrix4.Matrix4Transit>(PhotoConstants.MATRIX) as Matrix4.Matrix4Transit;
+    let matrix: Matrix4.Matrix4Transit =
+      AppStorage.get<Matrix4.Matrix4Transit>(PhotoConstants.MATRIX) as Matrix4.Matrix4Transit;
     if (this.currentIndex == this.mPosition && matrix) {
       this.matrix = matrix;
       this.updatePhotoScaledStatus();
@@ -410,10 +411,12 @@ export struct PhotoItem {
             .onActionStart((event?: GestureEvent) => {
               Log.info(TAG, 'PinchGesture onActionStart');
               Log.info(TAG, `PinchGesture onActionStart scale:\
-                          ${(event as GestureEvent).scale}, cx: ${(event as GestureEvent).pinchCenterX}, cy: ${(event as GestureEvent).pinchCenterY}`);
+                          ${(event as GestureEvent).scale}, cx: ${(event as GestureEvent).pinchCenterX},
+                          cy: ${(event as GestureEvent).pinchCenterY}`);
               if (this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE
               || this.item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
-                this.eventPipeline?.onScaleStart((event as GestureEvent).scale, (event as GestureEvent).pinchCenterX, (event as GestureEvent).pinchCenterY);
+                this.eventPipeline?.onScaleStart((event as GestureEvent).scale,
+                  (event as GestureEvent).pinchCenterX, (event as GestureEvent).pinchCenterY);
               }
             })
             .onActionUpdate((event?: GestureEvent) => {
@@ -453,13 +456,17 @@ export struct PhotoItem {
           })
             .onActionStart((event?: GestureEvent) => {
               Log.info(TAG, `PanGesture start offsetX:\
-                                  ${vp2px((event as GestureEvent).offsetX)}, offsetY: ${vp2px((event as GestureEvent).offsetY)}`);
-              this.eventPipeline?.onMoveStart(vp2px((event as GestureEvent).offsetX), vp2px((event as GestureEvent).offsetY));
+                                  ${vp2px((event as GestureEvent).offsetX)},
+                                  offsetY: ${vp2px((event as GestureEvent).offsetY)}`);
+              this.eventPipeline?.onMoveStart(vp2px((event as GestureEvent).offsetX),
+                vp2px((event as GestureEvent).offsetY));
             })
             .onActionUpdate((event?: GestureEvent) => {
               Log.info(TAG, `PanGesture update offsetX:\
-                                  ${vp2px((event as GestureEvent).offsetX)}, offsetY: ${vp2px((event as GestureEvent).offsetY)}`);
-              this.eventPipeline?.onMove(vp2px((event as GestureEvent).offsetX), vp2px((event as GestureEvent).offsetY));
+                                  ${vp2px((event as GestureEvent).offsetX)},
+                                  offsetY: ${vp2px((event as GestureEvent).offsetY)}`);
+              this.eventPipeline?.onMove(vp2px((event as GestureEvent).offsetX),
+                vp2px((event as GestureEvent).offsetY));
               this.isPullDownAndDragPhoto = this.eventPipeline?.canPullDownAndDragPhoto() ?? false;
               if (this.isPullDownAndDragPhoto && this.geometryTransitionEnable &&
               !this.isOnSwiperAnimation && !this.isFromFACard) {
@@ -473,7 +480,8 @@ export struct PhotoItem {
               if (this.isOnSwiperAnimation) {
                 return;
               }
-              this.eventPipeline?.onMoveEnd(vp2px((event as GestureEvent).offsetX), vp2px((event as GestureEvent).offsetY));
+              this.eventPipeline?.onMoveEnd(vp2px((event as GestureEvent).offsetX),
+                vp2px((event as GestureEvent).offsetY));
               this.isPullDownAndDragPhoto = this.eventPipeline?.canPullDownAndDragPhoto() ?? false;
               if (this.animationOption != null) {
                 animateTo({
@@ -513,7 +521,8 @@ export struct PhotoItem {
                 return;
               }
               Log.info(TAG, `onDoubleTap event: ${JSON.stringify(event)}`);
-              this.eventPipeline?.onDoubleTap((event as GestureEvent).fingerList[0].localX, (event as GestureEvent).fingerList[0].localY);
+              this.eventPipeline?.onDoubleTap((event as GestureEvent).fingerList[0].localX,
+                (event as GestureEvent).fingerList[0].localY);
               if (this.animationOption != null) {
                 Log.info(TAG, 'TapGesture animateTo start');
                 animateTo({
@@ -684,7 +693,8 @@ export struct PhotoItem {
     if (this.eventPipeline === null) {
         return;
     };
-    if (!this.eventPipeline.canTouch() || this.isOnSwiperAnimation || event.touches.length > 1 || this.isPhotoScaled || this.isInSelectedMode || this.isDefaultFA) {
+    if (!this.eventPipeline.canTouch() || this.isOnSwiperAnimation || event.touches.length > 1 ||
+    this.isPhotoScaled || this.isInSelectedMode || this.isDefaultFA) {
       return;
     }
     if (event.type == TouchType.Move) {

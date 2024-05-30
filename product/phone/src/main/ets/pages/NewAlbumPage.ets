@@ -86,9 +86,11 @@ export struct NewAlbumPage {
     // 后续phone缩略图支持横竖屏后再放开
   }
   private onUpdateFavorStateFunc: Function = (item: MediaItem): void => this.onUpdateFavorState(item);
-  private selectFunc: Function = (position: number, key: string, value: boolean, callback: Function): void => this.select(position, key, value, callback);
+  private selectFunc: Function = (position: number, key: string, value: boolean, callback: Function): void =>
+  this.select(position, key, value, callback);
   private jumpPhotoBrowserFunc: Function = (name: string, item: MediaItem): void => this.jumpPhotoBrowser(name, item);
-  private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void =>
+  private jumpThirdPhotoBrowserFunc: Function = (name: string, item: MediaItem,
+                                                 geometryTapIndex: number, geometryTransitionString: string): void =>
   this.jumpThirdPhotoBrowser(name, item, geometryTapIndex, geometryTransitionString);
   private onDataReloadedFunc: Function = (size: number): void => this.onDataReloaded(size);
   private onLoadingFinishedFunc: Function = (): void => this.onLoadingFinished();
@@ -121,7 +123,8 @@ export struct NewAlbumPage {
     this.browserController.showBrowserWithNoAnimation(params);
   }
 
-  private jumpThirdPhotoBrowser(name: string, item: MediaItem, geometryTapIndex: number, geometryTransitionString: string): void {
+  private jumpThirdPhotoBrowser(name: string, item: MediaItem,
+                                geometryTapIndex: number, geometryTransitionString: string): void {
     let targetIndex = this.dataSource.getDataIndex(item);
     Log.info(TAG, `jump to photo browser, index: ${targetIndex}, transition: ${name}`);
     AppStorage.setOrCreate(Constants.PHOTO_GRID_SELECT_MANAGER, this.mSelectManager);
@@ -364,7 +367,9 @@ export struct NewAlbumPage {
                     ImageGridItemComponent({
                       dataSource: this.dataSource,
                       item: item.mediaItem,
-                      isSelected: this.isSelectedMode ? this.mSelectManager?.isItemSelected((item.mediaItem as MediaItem).uri as string, item.viewIndex) : false,
+                      isSelected: this.isSelectedMode ?
+                      this.mSelectManager?.isItemSelected((item.mediaItem as MediaItem).uri as string, item.viewIndex) :
+                        false,
                       pageName: Constants.PHOTO_TRANSITION_ALBUM,
                       mPosition: index,
                       geometryTransitionString: this.getGeometryTransitionId(item, index as number),
@@ -463,7 +468,8 @@ export struct NewAlbumPage {
     let margin = 0;
     let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
     this.gridRowCount = Math.max(Math.round(((contentWidth - Constants.NUMBER_2 * margin)
-      + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)), Constants.DEFAULT_ALBUM_GRID_COLUMN_MIN_COUNT);
+      + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)),
+      Constants.DEFAULT_ALBUM_GRID_COLUMN_MIN_COUNT);
     Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
   }
 }

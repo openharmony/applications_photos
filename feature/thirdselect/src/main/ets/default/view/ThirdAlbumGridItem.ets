@@ -52,7 +52,7 @@ export struct ThirdAlbumGridItem {
   ]);
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private fp2vpUnit: number = px2vp(fp2px(Constants.NUMBER_1));
-  private onWindowSizeChangeCallBack: Function = (): void  => this.updateCardSize();
+  private onWindowSizeChangeCallBack: Function = (): void => this.updateCardSize();
 
   aboutToAppear(): void {
     Log.info(TAG, `aboutToAppear + ${this.item.coverUri}, select param ${JSON.stringify(this.selectParams)}`)
@@ -71,7 +71,8 @@ export struct ThirdAlbumGridItem {
   updateCardSize() {
     let contentWidth = ScreenManager.getInstance().getWinWidth();
     let count: number = UiUtil.getAlbumGridCount(false);
-    this.gridWidth = ((contentWidth - Constants.ALBUM_SET_MARGIN * 2 - (Constants.ALBUM_SET_GUTTER * (count - 1))) / count);
+    this.gridWidth = ((contentWidth - Constants.ALBUM_SET_MARGIN * 2 -
+      (Constants.ALBUM_SET_GUTTER * (count - 1))) / count);
     let numberHeight = Constants.TEXT_SIZE_BODY2 * this.fp2vpUnit;
     let nameHeight = Constants.TEXT_SIZE_SUB_TITLE1 * this.fp2vpUnit;
 

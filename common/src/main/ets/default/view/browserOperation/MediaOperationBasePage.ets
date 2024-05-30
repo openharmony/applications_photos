@@ -113,7 +113,8 @@ export struct MediaOperationBasePage {
         this.selectedItems = param.selectedItems;
       }
     }
-    this.albums.setFilterAlbumsFunction((mediaSetList: AlbumInfo[]): Array<AlbumInfo> => this.filterAlbumInList(mediaSetList));
+    this.albums.setFilterAlbumsFunction((mediaSetList: AlbumInfo[]): Array<AlbumInfo> =>
+    this.filterAlbumInList(mediaSetList));
     this.onActive();
 
     this.broadCast.on(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);

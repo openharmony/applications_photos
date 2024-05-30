@@ -33,7 +33,7 @@ import {
 } from '@ohos/common';
 import {
   BrowserController,
-  DEVICE_TYPE,
+  DeviceType,
   TabBar,
   TabItem
 } from '@ohos/common/CommonComponents';
@@ -325,7 +325,7 @@ struct IndexPage {
             tabs: this.tabs,
             controller: this.tabsController,
             isSidebar: $isSidebar,
-            deviceType: DEVICE_TYPE.PHONE_LIKE
+            deviceType: DeviceType.PHONE_LIKE
           })
             .visibility(this.isShowTabBar ? Visibility.Visible : Visibility.Hidden)
           if (this.isShowPhotoGridView && this.currentBreakpoint == Constants.BREAKPOINT_LG) {

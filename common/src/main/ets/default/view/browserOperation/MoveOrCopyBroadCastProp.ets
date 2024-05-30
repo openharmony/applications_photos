@@ -47,7 +47,8 @@ export class MoveOrCopyBroadCastProp {
     if (AppStorage.get<MoveOrCopyBroadCastProp>(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) == null) {
       AppStorage.setOrCreate(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP, new MoveOrCopyBroadCastProp());
     }
-    return AppStorage.get<MoveOrCopyBroadCastProp>(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) as MoveOrCopyBroadCastProp;
+    return AppStorage.get<MoveOrCopyBroadCastProp>(
+      Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) as MoveOrCopyBroadCastProp;
   }
 
   /**
@@ -79,7 +80,8 @@ export class MoveOrCopyBroadCastProp {
     } else {
       if (this.broadCast != null) {
         this.broadCast.emit(BroadCastConstants.SHOW_COPY_OR_MOVE_DIALOG,
-          [async (): Promise<void> => await this.moveOperation(), async (): Promise<void> => await this.addOperation()]);
+          [async (): Promise<void> => await this.moveOperation(),
+            async (): Promise<void> => await this.addOperation()]);
       }
     }
   }
@@ -103,7 +105,8 @@ export class MoveOrCopyBroadCastProp {
   }
 
   private async addOperation() {
-    let selectManager: SelectManager = AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
+    let selectManager: SelectManager =
+      AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
     let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;
     let targetAlbumUri: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET_URI) as string;
     if (this.broadCast === null || this.broadCast === undefined) {
@@ -123,7 +126,8 @@ export class MoveOrCopyBroadCastProp {
   }
 
   private async moveOperation() {
-    let selectManager: SelectManager = AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
+    let selectManager: SelectManager =
+      AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
     let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;
     let targetAlbumUri: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET_URI) as string;
     if (this.broadCast === null || this.broadCast === undefined) {
@@ -149,7 +153,8 @@ export class MoveOrCopyBroadCastProp {
   private async onOperationEndBindImpl(): Promise<void> {
     AppStorage.setOrCreate(Constants.IS_DATA_FREEZE, false);
     let isNewAlbum: boolean = AppStorage.get<boolean>(Constants.APP_KEY_NEW_ALBUM) as boolean;
-    let selectManager: SelectManager = AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
+    let selectManager: SelectManager =
+      AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
     let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;
 
     let album = await UserFileManagerAccess.getInstance().getAlbumByName(targetAlbumName);

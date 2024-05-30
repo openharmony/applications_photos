@@ -58,7 +58,8 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     try {
       let contextName: string = this.menuContext.sourceScene === SourceSceneType.BIG_PHOTO_COMPONENT ?
         'photoLibraryContext' : 'photosAbilityContext';
-      let context: common.UIAbilityContext = AppStorage.get<common.UIAbilityContext>(contextName) as common.UIAbilityContext;
+      let context: common.UIAbilityContext =
+        AppStorage.get<common.UIAbilityContext>(contextName) as common.UIAbilityContext;
       if (context == null || context === undefined) {
         Log.info(TAG, 'context is null!');
       } else {
@@ -69,7 +70,8 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
         Log.info(TAG, `The display name of new album is ${newAlbumDisplayName}`);
 
         this.menuContext.broadCast.emit(BroadCastConstants.SHOW_NEW_ALBUM_PHOTO_DIALOG,
-          [newAlbumDisplayName, async (displayName: string): Promise<boolean> => await this.confirmCallbackBindImpl(displayName),
+          [newAlbumDisplayName, async (displayName: string): Promise<boolean> =>
+          await this.confirmCallbackBindImpl(displayName),
             (): void => this.cancelCallbackBindImpl()]);
       }
     } catch (error) {

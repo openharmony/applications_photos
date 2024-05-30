@@ -17,7 +17,7 @@ import router from '@ohos.router';
 import bundle from '@ohos.bundle';
 import CommonEvent from '@ohos.commonEvent';
 import window from '@ohos.window';
-import { MenuOperation, ViewData } from '@ohos/common';
+import { BrowserConstants, MenuOperation, ViewData } from '@ohos/common';
 import {
   Action,
   AddMenuOperation,
@@ -174,7 +174,8 @@ export struct PhotoBrowserComponent {
   private isShowMenuFromThirdView: boolean = true;
   private isToEdit = false;
   private photoBrowserBackFunc: Function = (): void => this.photoBrowserBack();
-  private onToggleBarsFunc: Function = (backgroundColorResource?: Resource): void => this.onToggleBars(backgroundColorResource);
+  private onToggleBarsFunc: Function = (backgroundColorResource?: Resource): void =>
+  this.onToggleBars(backgroundColorResource);
   private showBarsFunc: Function = (backgroundColorResource?: Resource): void => this.showBars(backgroundColorResource);
   private hideBarsFunc: Function = (backgroundColorResource?: Resource): void => this.hideBars(backgroundColorResource);
   private pullDownStartFunc: Function = (): void => this.pullDownStart();
@@ -217,7 +218,7 @@ export struct PhotoBrowserComponent {
     }
 
     if (!this.isFirstLoad) {
-      this.updateMenu();
+      this.updateMenu(this.currentIndex);
     } else {
       this.isFirstLoad = false;
     }
@@ -236,7 +237,8 @@ export struct PhotoBrowserComponent {
         Log.warn(TAG, 'currentPhoto is undefined');
         return;
       }
-      this.broadCast.emit(BroadCastConstants.SHOW_DETAIL_DIALOG, [currentPhoto, this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED]);
+      this.broadCast.emit(BroadCastConstants.SHOW_DETAIL_DIALOG,
+        [currentPhoto, this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED]);
     } else if (actionID === Action.SHARE.actionID) {
       if (currentPhoto == undefined) {
         Log.warn(TAG, 'currentPhoto is undefined');
@@ -269,7 +271,7 @@ export struct PhotoBrowserComponent {
           this.favorCacheItemsMap.set(currentPhoto.uri, currentPhoto);
         }
       }
-      this.updateMenu();
+      this.updateMenu(this.currentIndex);
       this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + 'false';
       AppStorage.setOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
     } else if (actionID === Action.DELETE.actionID) {
@@ -392,8 +394,8 @@ export struct PhotoBrowserComponent {
     Log.info(TAG, `onPhotoChanged start, index=${index}`);
     this.reportToBigDataForPhotoSlide(index);
     this.currentIndex = index;
-    this.updateActionBar && this.updateActionBar();
-    let currentPhoto = this.getCurrentPhoto();
+    this.updateActionBar(index);
+    let currentPhoto: MediaItem | undefined = this.getPhotoByIndex(index);
     if (currentPhoto == undefined) {
       Log.error(TAG, 'onPhotoChanged, item is undefined');
     } else {
@@ -431,8 +433,8 @@ export struct PhotoBrowserComponent {
     this.dataSource.updatePixMapDataSource(this.currentIndex);
   }
 
-  updateActionBar(): void {
-    let currentPhoto = this.getCurrentPhoto();
+  updateActionBar(index: number): void {
+    let currentPhoto: MediaItem | undefined = this.getPhotoByIndex(index);
     if (currentPhoto == undefined || this.isFromViewDataWithThirdUri) {
       return;
     }
@@ -442,11 +444,11 @@ export struct PhotoBrowserComponent {
     } else {
       this.timeAndLocation = DateUtil.getLocalizedTime(currentPhoto.getDataTaken());
     }
-    this.updateMenu();
+    this.updateMenu(index);
   }
 
-  updateMenu(): void {
-    let currentPhoto = this.getCurrentPhoto();
+  updateMenu(index: number): void {
+    let currentPhoto: MediaItem | undefined = this.getPhotoByIndex(index);
     if (!currentPhoto) {
       return;
     }
@@ -549,7 +551,7 @@ export struct PhotoBrowserComponent {
         isShowMenuFromThirdView: BigDataConstants.UNDEFINED_IS_SHOW_MENU
       }
     }
-    this.updateMenu();
+    this.updateMenu(this.currentIndex);
     ReportToBigDataUtil.statisticReport(BigDataConstants.IS_SHOW_MENU_ID, isShowMenuMsg);
   }
 
@@ -597,6 +599,8 @@ export struct PhotoBrowserComponent {
   onBackPress(): boolean {
     Log.info(TAG, 'onBackPress');
     this.appBroadCast.emit('hideBar', []);
+    let currentPhoto = this.getPhotoByIndex(this.currentIndex);
+    this.broadCast.emit(BrowserConstants.RESET_DEFAULT_SCALE + currentPhoto.uri, []);
     this.controller?.finishAnimation((): void => this.onBackPressInner());
     return true;
   }
@@ -782,10 +786,12 @@ export struct PhotoBrowserComponent {
         this.geometryTransitionEnable = true;
       } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
         this.dataSource.setAlbumUri(this.albumUri);
-        this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+        this.dataSource.setAlbumDataSource(
+            AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
         this.dataSource.setDeviceId(param.albumInfo.deviceId);
-        this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+        this.dataSource.setAlbumDataSource(
+          AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       } else if (this.pageFrom == Constants.ENTRY_FROM.VIEW_DATA) {
         if (String(param.viewData).length === 0) {
           Log.error(TAG, 'Invalid uri');
@@ -830,7 +836,8 @@ export struct PhotoBrowserComponent {
             MediaObserver.getInstance().registerObserver(this.dataObserver);
             this.uriFromThirdPartyApp = String(param.viewData);
             this.currentIndex = 0;
-            this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp, (index: number): void => this.onGetItemIndexByUri(index));
+            this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
+              (index: number): void => this.onGetItemIndexByUri(index));
             // 是否显示菜单栏并且处理大数据打点
             this.isShowMenuBigData(param.isShowMenuFromThirdView);
           } else {
@@ -841,7 +848,8 @@ export struct PhotoBrowserComponent {
         }
       } else {
         MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+        this.dataSource.setAlbumDataSource(
+          AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       }
 
       this.onPhotoChanged(param.position || 0);
@@ -865,7 +873,8 @@ export struct PhotoBrowserComponent {
           .getSystemAlbumUri(UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE);
       }
       AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE);
-      let albumDataSource: MediaDataSource = AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource;
+      let albumDataSource: MediaDataSource =
+        AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource;
       if (albumDataSource) {
         this.dataSource.setAlbumDataSource(albumDataSource);
       } else {
@@ -983,7 +992,7 @@ export struct PhotoBrowserComponent {
     let currentPhoto = this.getCurrentPhoto();
     if (!isFavor) {
       currentPhoto.isFavor = isFavor;
-      this.updateMenu();
+      this.updateMenu(this.currentIndex);
     } else {
       Log.debug(TAG, 'update favor !');
     }
@@ -1110,10 +1119,12 @@ export struct PhotoBrowserComponent {
         } else if (this.albumUri === "") {
           this.resetAlbum(UserFileManagerAccess.getInstance()
             .getSystemAlbumUri(UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE));
-          this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp, (index: number): void => this.onGetItemIndexByUri(index));
+          this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
+            (index: number): void => this.onGetItemIndexByUri(index));
         } else {
           this.resetAlbum("");
-          this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp, (index: number): void => this.onGetItemIndexByUri(index));
+          this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
+            (index: number): void => this.onGetItemIndexByUri(index));
         }
       }
       this.onPhotoChanged(this.currentIndex);
@@ -1161,7 +1172,7 @@ export struct PhotoBrowserComponent {
         }
       });
     }
-    this.updateActionBar();
+    this.updateActionBar(this.currentIndex);
     if (!this.isHorizontal) {
       ScreenManager.getInstance().setSystemUi(true);
     }

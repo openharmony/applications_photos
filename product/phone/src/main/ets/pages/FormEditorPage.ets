@@ -73,7 +73,8 @@ struct FormEditorPage {
 
     // Get from target album if albumUri is not undefined, otherwise getAllObject
     if (albumUri) {
-      let album: userFileManager.Album = await UserFileManagerAccess.getInstance().getAlbumByUri(albumUri) as userFileManager.Album;
+      let album: userFileManager.Album =
+        await UserFileManagerAccess.getInstance().getAlbumByUri(albumUri) as userFileManager.Album;
       let fetchOpt = AlbumDefine.getFileFetchOpt(startIndex, count, filterMediaType);
       let fetchResult = await album.getPhotoAssets(fetchOpt);
       result = await fetchResult.getAllObject();
@@ -176,7 +177,8 @@ struct FormEditorPage {
     });
   }
 
-  async saveData(albumName: string, albumUri: string, displayName: DisplayNameUnionType, uri: string, isShowAlbums: boolean): Promise<void> {
+  async saveData(albumName: string, albumUri: string, displayName: DisplayNameUnionType,
+                 uri: string, isShowAlbums: boolean): Promise<void> {
     Log.debug(TAG, `saveData start! ${albumUri} ${displayName}  ${uri}`);
     ReportToBigDataUtil.report(BigDataConstants.CHANGE_FA_CARD_IMAGE_ID, undefined);
     let msgDisplayName = '';
