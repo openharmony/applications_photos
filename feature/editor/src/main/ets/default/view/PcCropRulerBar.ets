@@ -62,8 +62,8 @@ export struct PcCropRulerBar {
     this.context.lineCap = 'round';
 
     this.context.lineWidth = Constants.MID_LINE_WIDTH;
-    this.context.moveTo(mid_x, this.rulerDrawHeight - Constants.EDITOR_LARGE_TICK_LINE_HEIGHT);
-    this.context.lineTo(mid_x, this.rulerDrawHeight - Constants.NUMBER_1);
+    this.context.moveTo(midX, this.rulerDrawHeight - Constants.EDITOR_LARGE_TICK_LINE_HEIGHT);
+    this.context.lineTo(midX, this.rulerDrawHeight - Constants.NUMBER_1);
 
     this.context.stroke();
     this.context.closePath();
@@ -73,7 +73,7 @@ export struct PcCropRulerBar {
     this.context.moveTo(curX, this.rulerDrawHeight - Constants.EDITOR_MIDDLE_TICK_LINE_HEIGHT);
     this.context.shadowBlur = Constants.RULER_LINE_WIDTH
     this.context.lineCap = 'round';
-    if (Math.round(curNum) != Math.round(this.current_def) && Math.round(curNum) == 0) {
+    if (Math.round(curNum) != Math.round(this.currentDef) && Math.round(curNum) == 0) {
       this.context.textBaseline = 'bottom'
       this.context.font = Constants.RULER_CONTEXT_FONT_25PX;
       this.context.fillText(curNum.toString(), curX, this.rulerDrawHeight - Constants.EDITOR_MIDDLE_TICK_LINE_HEIGHT);
@@ -84,8 +84,8 @@ export struct PcCropRulerBar {
 
   drawLine() {
     // 起始绘制位置
-    let beginNum = this.current_def - (this.rulerLength / Constants.NUMBER_2) / Constants.NUMBER_5;
-    let endNum = this.current_def + (this.rulerLength / Constants.NUMBER_2) / Constants.NUMBER_5;
+    let beginNum: number = this.currentDef - (this.rulerLength / Constants.NUMBER_2) / Constants.NUMBER_5;
+    let endNum: number = this.currentDef + (this.rulerLength / Constants.NUMBER_2) / Constants.NUMBER_5;
     let curX = 0;
     let curNum = 0;
     const scaleLen = Math.ceil((this.rulerLength) / Constants.NUMBER_5) + Constants.NUMBER_1;
@@ -100,24 +100,24 @@ export struct PcCropRulerBar {
       this.context.fillStyle = Constants.RULER_FILL_STYLE_40;
 
       // 边缘第三根线
-      if (curNum <= (beginNum + Constants.NUMBER_3) || curNum >= (end_num - Constants.NUMBER_3)) {
+      if (curNum <= (beginNum + Constants.NUMBER_3) || curNum >= (endNum - Constants.NUMBER_3)) {
         this.context.strokeStyle = Constants.RULER_FILL_STYLE_30;
         this.context.fillStyle = Constants.RULER_FILL_STYLE_30;
       }
 
       // 次边缘的线
-      if (curNum <= (beginNum + Constants.NUMBER_2) || curNum >= (end_num - Constants.NUMBER_2)) {
+      if (curNum <= (beginNum + Constants.NUMBER_2) || curNum >= (endNum - Constants.NUMBER_2)) {
         this.context.strokeStyle = Constants.RULER_FILL_STYLE_20;
         this.context.fillStyle = Constants.RULER_FILL_STYLE_20;
       }
       // 最边缘的线
-      if (curNum <= (beginNum + Constants.NUMBER_2) || curNum >= (end_num - Constants.NUMBER_2)) {
+      if (curNum <= (beginNum + Constants.NUMBER_2) || curNum >= (endNum - Constants.NUMBER_2)) {
         this.context.strokeStyle = Constants.RULER_FILL_STYLE_10;
         this.context.fillStyle = Constants.RULER_FILL_STYLE_10;
       }
 
       // 标尺0与当前数值之间的白色竖线
-      if ((curNum < this.current_def && curNum >= 0) || (curNum > this.current_def && curNum <= 0)) {
+      if ((curNum < this.currentDef && curNum >= 0) || (curNum > this.currentDef && curNum <= 0)) {
         this.context.strokeStyle = Constants.RULER_FILL_STYLE_100;
         this.context.fillStyle = Constants.RULER_FILL_STYLE_100;
       }
@@ -140,7 +140,7 @@ export struct PcCropRulerBar {
       if (Math.abs(curNum) % Constants.NUMBER_10 === 0) {
         // 每隔10个刻度绘制一个中刻度线
         this.drawIntegerLine(curX, curNum)
-      } else if ((curNum < this.current_def && curNum >= 0) || (curNum > this.current_def && curNum <= 0)) {
+      } else if ((curNum < this.currentDef && curNum >= 0) || (curNum > this.currentDef && curNum <= 0)) {
         // 0和当前刻度之间的线
         this.context.moveTo(curX, this.rulerDrawHeight - Constants.EDITOR_MIDDLE_TICK_LINE_HEIGHT);
         this.context.lineTo(curX, this.rulerDrawHeight);
@@ -172,17 +172,17 @@ export struct PcCropRulerBar {
     if (Math.abs(dir / 5) < 1) {
       return;
     }
-    this.current_def += Number.parseInt((dir / 5).toFixed(0));
+    this.currentDef += Number.parseInt((dir / 5).toFixed(0));
     this.startPos = event.touches[0][axis];
-    if (Math.abs(this.current_def) > Constants.EDGE_ANGLE) {
-      this.current_def = this.current_def > Constants.EDGE_ANGLE ? Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
+    if (Math.abs(this.currentDef) > Constants.EDGE_ANGLE) {
+      this.currentDef = this.currentDef > Constants.EDGE_ANGLE ? Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
     }
     this.drawRuler();
-    this.broadCast.emit(Constants.RULER_CHANGED, [this.current_def]);
+    this.broadCast.emit(Constants.RULER_CHANGED, [this.currentDef]);
   }
 
   onResetClicked() {
-    this.current_def = 0;
+    this.currentDef = 0;
     this.drawRuler();
   }
 
