@@ -21,8 +21,8 @@ const TAG: string = 'browser_AlbumSetPageToolBar';
 @Component
 export struct AlbumSetPageToolBar {
   @Provide isShowBar: boolean = true;
-  @Provide toolMenuList: Array<Action> = new Array<Action>();
-  @Provide moreMenuList: Action[] = new Array<Action>();
+  @Provide toolMenuList: Action[] = [];
+  @Provide moreMenuList: Action[] = [];
   @Consume @Watch('updateToolbar') isAlbumSetSelectedMode: boolean;
   @Consume('selectedCount') @Watch('updateToolbar') selectedAlbumsCount: number;
   @Consume isDisableRename: boolean;

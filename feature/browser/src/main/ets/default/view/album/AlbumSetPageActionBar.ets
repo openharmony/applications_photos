@@ -40,7 +40,7 @@ export struct AlbumSetPageActionBar {
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
   onMenuClicked: Function = (): void => {};
   @State isNeedPlaceholder: boolean = true;
-  @Provide moreMenuList: Action[] = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
   @Provide hidePopup: boolean = false;
   private deviceType: string = '';
   private actionBarPaddingTop: number | Resource = 0;
@@ -90,7 +90,7 @@ export struct AlbumSetPageActionBar {
   private createHorizontalActionBar(): ActionBarProp {
     Log.info(TAG, `createHorizontalActionBar, isAlbumSetSelectedMode: ${this.isAlbumSetSelectedMode}`);
 
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     let actionBarProp: ActionBarProp = new ActionBarProp();
 
     actionBarProp
@@ -125,7 +125,7 @@ export struct AlbumSetPageActionBar {
   private createActionBar(): ActionBarProp {
     Log.info(TAG, `createActionBar, isAlbumSetSelectedMode: ${this.isAlbumSetSelectedMode}`);
 
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     let actionBarProp: ActionBarProp = new ActionBarProp();
 
     menuList.push(Action.NEW);

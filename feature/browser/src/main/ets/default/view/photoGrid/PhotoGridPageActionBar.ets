@@ -73,7 +73,7 @@ export struct PhotoGridPageActionBar {
   }
 
   private createHorizontalActionBar(): ActionBarProp {
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     let actionBarProp: ActionBarProp = new ActionBarProp();
 
     actionBarProp
@@ -116,7 +116,7 @@ export struct PhotoGridPageActionBar {
   }
 
   private createActionBar(): ActionBarProp {
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     let actionBarProp: ActionBarProp = new ActionBarProp();
 
     if (!this.isSystemAlbum && this.isDistributedAlbum == false) {

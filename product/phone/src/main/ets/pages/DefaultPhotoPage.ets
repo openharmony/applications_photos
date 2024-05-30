@@ -42,7 +42,7 @@ export struct DefaultPhotoPage {
   @Provide pageFrom: number = Constants.ENTRY_FROM.NORMAL;
   @State broadCast: BroadCast = new BroadCast();
   @Provide('transitionIndex') currentIndex: number = Constants.NUMBER_0;
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();

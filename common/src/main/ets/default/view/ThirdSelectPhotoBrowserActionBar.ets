@@ -36,7 +36,7 @@ export struct ThirdSelectPhotoBrowserActionBar {
   @Link isShowBar: boolean;
   @Provide('selectedCount') selectedCount: number = 0;
   @Link @Watch('onSelectedCountChanged') totalSelectedCount: number;
-  @Provide moreMenuList: Action[] = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
   @Provide hidePopup: boolean = false;
   private title: string | Resource = '';
   private isThird: boolean = false;
@@ -76,7 +76,7 @@ export struct ThirdSelectPhotoBrowserActionBar {
   private createActionBar(): void {
     let actionBarProp: ActionBarProp = new ActionBarProp();
 
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     if (this.canEdit) {
       menuList.push(Action.EDIT);
     }

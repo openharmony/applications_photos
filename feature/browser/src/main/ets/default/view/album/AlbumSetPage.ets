@@ -71,7 +71,7 @@ export struct AlbumSetPage {
   isDataFreeze: boolean = false;
   // the switch of distributed page
   @Provide isTabBarShow: boolean = false;
-  @Provide rightClickMenuList: Array<Action> = new Array<Action>();
+  @Provide rightClickMenuList: Action[] = [];
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
   @StorageLink('deviceType') deviceType: string | undefined = AppStorage.get<string>('deviceType');
@@ -254,7 +254,7 @@ export struct AlbumSetPage {
 
   updateRightClickMenuList() {
     if (this.isAlbumSetSelectedMode) {
-      this.rightClickMenuList = new Array<Action>();
+      this.rightClickMenuList = [];
       if (!this.isDisableRename && this.selectedAlbumsCount == 1) {
         this.rightClickMenuList.push(Action.RENAME);
       }

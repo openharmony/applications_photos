@@ -221,21 +221,21 @@ export class HistogramManager {
   private drawSingleHistogram(array: Uint32Array, color: string): void {
     let width = this.width;
     let height = this.height;
-    const start_axis: number = 0;
+    const startAxis: number = 0;
     let peakPoint: number = Math.max(...array);
     if (peakPoint === 0) {
       Log.warn(TAG, 'peakPoint is zero');
       return;
     }
-    let x_step = width / Constants.PIXEL_NUMBER;
-    let y_step = height / peakPoint;
+    let xStep = width / Constants.PIXEL_NUMBER;
+    let yStep = height / peakPoint;
     let region = new Path2D();
     // 移动到起始位置
     region.moveTo(start_axis, height);
     let last = 0;
     for (let pixelValue = 0; pixelValue < array.length; pixelValue++) {
-      let v1 = pixelValue * x_step;
-      let v2 = y_step * array[pixelValue];
+      let v1 = pixelValue * xStep;
+      let v2 = yStep * array[pixelValue];
       let value = height - v2;
       region.lineTo(v1, value);
       last = v1;

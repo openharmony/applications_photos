@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ export enum DeviceType {
   PC_LIKE
 }
 
-const TabMap = [
+const tabMap = [
 BigDataConstants.PHOTO_TAB,
 BigDataConstants.ALBUM_TAB
 ]
@@ -168,7 +168,7 @@ export struct TabBar {
         tab.isSelected = false;
       }
     })
-    let currentTab: string = TabMap[this.currentIndex] ? TabMap[this.currentIndex] : BigDataConstants.PHOTO_TAB;
+    let currentTab: string = tabMap[this.currentIndex] ? tabMap[this.currentIndex] : BigDataConstants.PHOTO_TAB;
     interface Msg {
       switchTab: string;
       current: string;
@@ -355,18 +355,18 @@ export struct TabBarForAlbumSet {
 struct TabWithText {
   @Consume isAlbumSetSelectedMode: boolean;
   @ObjectLink tabItemWithText: TabItemWithText;
-  @State TabWidth: number = 0;
+  @State tabWidth: number = 0;
   index: number = 0;
   onTabSelected?: Function;
 
   aboutToAppear(): void {
     // Determine the length of the underline based on the font length
     if (this.index == 0) {
-      this.TabWidth = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE2)) * 2;
+      this.tabWidth = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE2)) * 2;
     } else {
-      this.TabWidth = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE2)) * 4;
+      this.tabWidth = px2vp(fp2px(Constants.TEXT_SIZE_SUB_TITLE2)) * 4;
     }
-    Log.info(TAG, `index is ${this.index} and TabWidth is ${this.TabWidth}`);
+    Log.info(TAG, `index is ${this.index} and tabWidth is ${this.tabWidth}`);
   }
 
   build() {
@@ -385,7 +385,7 @@ struct TabWithText {
           right: $r('app.float.single_tab_margin'),
           bottom: $r('app.float.tab_bar_line_margin_top') })
       Column()
-        .width(this.TabWidth)
+        .width(this.tabWidth)
         .height($r('app.float.tab_bar_line_height'))
         .borderRadius($r('app.float.tab_bar_line_radius'))
         .backgroundColor(this.tabItemWithText.getTextColor())

@@ -62,7 +62,7 @@ export struct AlbumSelectActionBar {
 
   private createActionBar(): void {
     this.selectedCount = this.totalSelectedCount;
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     let actionBarProp: ActionBarProp = new ActionBarProp();
     menuList.push(Boolean(this.totalSelectedCount) ? Action.OK : Action.OK_DISABLE);
     actionBarProp

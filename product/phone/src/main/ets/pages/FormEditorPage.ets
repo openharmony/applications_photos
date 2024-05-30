@@ -69,7 +69,7 @@ struct FormEditorPage {
 
   async getItems(albumUri?: string, startIndex?: number, count?: number, filterMediaType?: string):
     Promise<Array<userFileManager.FileAsset>> {
-    let result: Array<userFileManager.FileAsset> = [];
+    let result: userFileManager.FileAsset[] = [];
 
     // Get from target album if albumUri is not undefined, otherwise getAllObject
     if (albumUri) {

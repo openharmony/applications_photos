@@ -39,7 +39,7 @@ export struct ActionBar {
   @Prop isNeedPlaceholder: boolean = false;
 
   createArray(): ActionBarProp[] {
-    let actionBarProps = new Array<ActionBarProp>();
+    let actionBarProps: ActionBarProp[] = [];
     actionBarProps.push(this.actionBarProp);
     return actionBarProps;
   }

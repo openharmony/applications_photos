@@ -848,7 +848,7 @@ export struct ThirdSelectPhotoBrowserBase {
       }
       return;
     }
-    let uriArray: Array<string>;
+    let uriArray: string[] = [];
     let mediaType: number;
     if (this.isMultiPick) {
       if (this.selectManager === null) {
@@ -947,7 +947,7 @@ export struct ThirdSelectPhotoBrowserBase {
  */
 class ThirdBrowserDataSource extends PhotoDataSource {
   private isSelectMode = false;
-  private selectedItems: MediaItem[] = new Array<MediaItem>();
+  private selectedItems: MediaItem[] = [];
 
   totalCount() {
     if (this.isSelectMode) {
