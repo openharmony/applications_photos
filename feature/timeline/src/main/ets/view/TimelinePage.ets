@@ -727,8 +727,8 @@ export struct TimelinePage {
                         item: item.mediaItem,
                         mPosition: item.viewIndex,
                         isSelected: this.isSelectedMode ?
-                        this.mSelectManager.isItemSelected((item.mediaItem as MediaItem).uri as string, item.viewIndex) :
-                          false,
+                        this.mSelectManager.isItemSelected((item.mediaItem as MediaItem).uri as string,
+                          item.viewIndex) : false,
                         pageName: Constants.PHOTO_TRANSITION_TIMELINE,
                         onMenuClicked: (action: Action): void => this.onMenuClicked(action),
                         onMenuClickedForSingleItem: (action: Action, currentPhoto: MediaItem): void =>

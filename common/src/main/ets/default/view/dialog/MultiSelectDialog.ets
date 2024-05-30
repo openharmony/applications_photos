@@ -22,8 +22,8 @@ const TAG: string = 'common_MultiSelectDialog';
 
 @Observed
 export class MultiSelectDetails {
-  count: number = 0;
-  size: number = 0;
+  public count: number = 0;
+  public size: number = 0;
 }
 
 @CustomDialog

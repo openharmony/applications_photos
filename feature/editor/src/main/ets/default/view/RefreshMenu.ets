@@ -17,8 +17,8 @@ import { ActionButtonInfo } from './MainMenuInfo';
 import { Constants } from '@ohos/common';
 
 export class RefreshActionMenu {
-  isChanged: number;
-  menuArray: Array<ActionButtonInfo>;
+  public isChanged: number;
+  public menuArray: Array<ActionButtonInfo>;
 
   constructor(isChanged: number, menuArray: Array<ActionButtonInfo>) {
     this.isChanged = isChanged;

@@ -16,17 +16,17 @@ import { Constants } from './Constants';
 
 @Observed
 export class TabItem {
-  name: Resource;
-  iconResource: Resource;
-  iconSelectedResource: Resource;
-  iconDefault: Resource = $r('sys.color.ohos_id_color_bottom_tab_icon_off');
-  iconSelected: Resource | null = null;
-  textColorDefault: Resource = $r('sys.color.ohos_id_color_text_primary');
-  textColorSelected: Resource = $r('sys.color.ohos_id_color_bottom_tab_text_on');
-  textFamilyDefault: Resource = $r('sys.string.ohos_id_text_font_family_medium');
-  textFamilySelected: Resource = $r('sys.string.ohos_id_text_font_family_medium');
-  isSelected: boolean;
-  componentKey: string;
+  public name: Resource;
+  public iconResource: Resource;
+  public iconSelectedResource: Resource;
+  public iconDefault: Resource = $r('sys.color.ohos_id_color_bottom_tab_icon_off');
+  public iconSelected: Resource | null = null;
+  public textColorDefault: Resource = $r('sys.color.ohos_id_color_text_primary');
+  public textColorSelected: Resource = $r('sys.color.ohos_id_color_bottom_tab_text_on');
+  public textFamilyDefault: Resource = $r('sys.string.ohos_id_text_font_family_medium');
+  public textFamilySelected: Resource = $r('sys.string.ohos_id_text_font_family_medium');
+  public isSelected: boolean;
+  public componentKey: string;
 
   constructor(name: Resource, iconResource: Resource, iconSelectedResource: Resource,
               isSelected: boolean, textColorDefault: Resource, componentKey: string) {
@@ -59,14 +59,14 @@ export class TabItem {
 // For Album Set
 @Observed
 export class TabItemWithText {
-  name: Resource;
-  isSelected: boolean;
-  textSizeDefault: Resource = $r('sys.float.ohos_id_text_size_body1');
-  textSizeSelected: Resource = $r('sys.float.ohos_id_text_size_sub_title2');
-  textWeightDefault: FontWeight = FontWeight.Regular;
-  textWeightSelected: FontWeight = FontWeight.Medium;
-  textColorDefault: Resource = $r('sys.color.ohos_id_color_bottom_tab_text_off');
-  textColorSelected: Resource = $r('app.color.color_system_highlight');
+  public name: Resource;
+  public isSelected: boolean;
+  public textSizeDefault: Resource = $r('sys.float.ohos_id_text_size_body1');
+  public textSizeSelected: Resource = $r('sys.float.ohos_id_text_size_sub_title2');
+  public textWeightDefault: FontWeight = FontWeight.Regular;
+  public textWeightSelected: FontWeight = FontWeight.Medium;
+  public textColorDefault: Resource = $r('sys.color.ohos_id_color_bottom_tab_text_off');
+  public textColorSelected: Resource = $r('app.color.color_system_highlight');
 
   constructor(name: Resource, isSelected: boolean) {
     this.name = name;

@@ -22,8 +22,8 @@ const TAG: string = 'common_DownloadCancelOperationDialog';
 
 @Observed
 export class CancelParam {
-  continueFunc: Function = (): void => {};
-  cancelFunc: Function = (): void => {};
+  public continueFunc: Function = (): void => {};
+  public cancelFunc: Function = (): void => {};
 }
 
 @CustomDialog

@@ -21,8 +21,8 @@ const TAG: string = 'common_CopyOrMoveDialog';
 
 @Observed
 export class OperateParam {
-  moveFunc: Function = (): void => {};
-  copyFunc: Function = (): void => {};
+  public moveFunc: Function = (): void => {};
+  public copyFunc: Function = (): void => {};
 }
 
 @CustomDialog

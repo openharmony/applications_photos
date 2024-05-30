@@ -36,17 +36,17 @@ export interface ActionInfo {
 }
 
 export class ActionButtonInfo {
-  src?: Resource;
-  isActive: boolean;
-  isDoubleClicked: boolean;
-  actionID?: number;
-  text: Resource | null = null;
-  mode: number = 0;
-  height: Resource | null = null;
-  width: Resource | null = null;
-  color: Resource | null = null;
-  uri: string = '';
-  componentKey: string;
+  public src?: Resource;
+  public isActive: boolean;
+  public isDoubleClicked: boolean;
+  public actionID?: number;
+  public text: Resource | null = null;
+  public mode: number = 0;
+  public height: Resource | null = null;
+  public width: Resource | null = null;
+  public color: Resource | null = null;
+  public uri: string = '';
+  public componentKey: string;
 
   constructor(action: ActionInfo) {
     this.src = action.src == undefined ? undefined : action.src;

@@ -21,8 +21,8 @@ import { Action } from '../browserOperation/Action';
 import { ActionBarMode } from '../browserOperation/ActionBarMode';
 
 export class MenuItem {
-  value?: string;
-  action?: () => void;
+  public value?: string;
+  public action?: () => void;
 }
 
 @Component

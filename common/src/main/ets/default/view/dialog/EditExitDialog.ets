@@ -19,7 +19,7 @@ import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class EditExitDialogCallback {
-  discardCallback: Function = (): void => {};
+  public discardCallback: Function = (): void => {};
 }
 
 @CustomDialog
