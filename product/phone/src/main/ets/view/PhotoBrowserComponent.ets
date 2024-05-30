@@ -166,7 +166,7 @@ export struct PhotoBrowserComponent {
   private deviceName = '';
   private backFromCopy = false;
   private uriFromThirdPartyApp: string = '';
-  private editNewUri: string = ‘’;
+  private editNewUri: string = '';
   private favorCacheItemsMap = new Map<String, MediaItem>()
   private breakpointSystem: BreakpointSystem = new BreakpointSystem();
   private theDeleteItem: MediaItem | null = null;
