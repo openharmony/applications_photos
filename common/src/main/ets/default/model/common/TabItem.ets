@@ -28,7 +28,8 @@ export class TabItem {
   isSelected: boolean;
   componentKey: string;
 
-  constructor(name: Resource, iconResource: Resource, iconSelectedResource: Resource, isSelected: boolean, textColorDefault: Resource, componentKey: string) {
+  constructor(name: Resource, iconResource: Resource, iconSelectedResource: Resource,
+              isSelected: boolean, textColorDefault: Resource, componentKey: string) {
     this.name = name;
     this.iconResource = iconResource;
     this.iconSelectedResource = iconSelectedResource;

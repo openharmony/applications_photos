@@ -34,7 +34,8 @@ import { BroadCastManager } from '../model/common/BroadCastManager';
 
 const TAG: string = 'common_ImageGridItemComponent';
 
-@Extend(Image) function focusSetting(uri: string, handleEvent: Function) {
+@Extend(Image) 
+function focusSetting(uri: string, handleEvent: Function) {
   .key('ImageGridFocus_' + uri)
   .focusable(true)
   .onKeyEvent((event?: KeyEvent) => {
@@ -81,7 +82,8 @@ export struct ImageGridItemComponent {
   private geometryTapIndex: number = 0;
   private isTapStatusChange: boolean = false;
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
-  private updateSelectFunc: Function = (updateUri: string, select: boolean): void => this.updateSelect(updateUri, select);
+  private updateSelectFunc: Function = (updateUri: string, select: boolean): void =>
+  this.updateSelect(updateUri, select);
 
   verifyTapStatus() {
     if (this.placeholderIndex === Constants.INVALID) {
@@ -175,7 +177,8 @@ export struct ImageGridItemComponent {
     AppStorage.setOrCreate('focusUpdate', true);
     if (this.item != null && this.item.uri) {
       this.mPosition = this.getPosition();
-      this.broadCast.emit(BroadCastConstants.SELECT, [this.mPosition, this.item.uri, newState,  (isSelected: boolean): void => {
+      this.broadCast.emit(BroadCastConstants.SELECT,
+        [this.mPosition, this.item.uri, newState,  (isSelected: boolean): void => {
         let itemUri: string = this.item == null ? '' : this.item.uri;
         Log.info(TAG, `enter callback, select status ${this.mPosition} ${itemUri} ${newState} ${this.isSelected}`);
         this.isSelected = isSelected == undefined ? newState : isSelected;
@@ -183,7 +186,8 @@ export struct ImageGridItemComponent {
     }
   }
 
-  @Builder RightClickMenuBuilder() {
+  @Builder
+  RightClickMenuBuilder() {
     Column() {
       ForEach(this.rightClickMenuList, (menu: Action) => {
         Text(this.changeTextResToPlural(menu))
@@ -244,7 +248,8 @@ export struct ImageGridItemComponent {
     }
   }
 
-  @Builder buildImage() {
+  @Builder
+  buildImage() {
     Image(this.imageThumbnail)
       .width('100%')
       .height('100%')
@@ -571,7 +576,9 @@ export struct ImageGridItemComponent {
   }
 
   private getPosition(): number {
-    if (this.dataSource == null || this.item == null) return 0;
+    if (this.dataSource == null || this.item == null) {
+        return 0;
+    }
     return this.dataSource.getDataIndex(this.item) + this.dataSource.getGroupCountBeforeItem(this.item);
   }
 }

@@ -48,7 +48,7 @@ export struct DefaultPhotoPage {
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('leftBlank') leftBlank: number[]
     = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  defaultMediaItem: MediaItem |  undefined = undefined;
+  defaultMediaItem: MediaItem | undefined = undefined;
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
   @State backgroundColorResource: Resource = $r('app.color.default_background_color');
   @State isShowBar: boolean = true;
@@ -136,7 +136,8 @@ export struct DefaultPhotoPage {
         isDefaultFA: true
       })
       Column() {
-        ActionBar({ actionBarProp: $actionBarProp, onMenuClicked: (action: Action): void => this.onMenuClicked(action), isNeedPlaceholder: false })
+        ActionBar({ actionBarProp: $actionBarProp, onMenuClicked: (action: Action): void =>
+        this.onMenuClicked(action), isNeedPlaceholder: false })
       }
       .visibility(this.isShowBar ? Visibility.Visible : Visibility.Hidden)
       .padding({

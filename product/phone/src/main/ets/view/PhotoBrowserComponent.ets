@@ -174,7 +174,8 @@ export struct PhotoBrowserComponent {
   private isShowMenuFromThirdView: boolean = true;
   private isToEdit = false;
   private photoBrowserBackFunc: Function = (): void => this.photoBrowserBack();
-  private onToggleBarsFunc: Function = (backgroundColorResource?: Resource): void => this.onToggleBars(backgroundColorResource);
+  private onToggleBarsFunc: Function = (backgroundColorResource?: Resource): void =>
+  this.onToggleBars(backgroundColorResource);
   private showBarsFunc: Function = (backgroundColorResource?: Resource): void => this.showBars(backgroundColorResource);
   private hideBarsFunc: Function = (backgroundColorResource?: Resource): void => this.hideBars(backgroundColorResource);
   private pullDownStartFunc: Function = (): void => this.pullDownStart();
@@ -236,7 +237,8 @@ export struct PhotoBrowserComponent {
         Log.warn(TAG, 'currentPhoto is undefined');
         return;
       }
-      this.broadCast.emit(BroadCastConstants.SHOW_DETAIL_DIALOG, [currentPhoto, this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED]);
+      this.broadCast.emit(BroadCastConstants.SHOW_DETAIL_DIALOG,
+        [currentPhoto, this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED]);
     } else if (actionID === Action.SHARE.actionID) {
       if (currentPhoto == undefined) {
         Log.warn(TAG, 'currentPhoto is undefined');
@@ -450,6 +452,7 @@ export struct PhotoBrowserComponent {
     if (!currentPhoto) {
       return;
     }
+
     if (this.albumUri == UserFileManagerAccess.getInstance()
       .getSystemAlbumUri(UserFileManagerAccess.FAVORITE_ALBUM_SUB_TYPE)) {
       let key = currentPhoto.uri;
@@ -625,7 +628,6 @@ export struct PhotoBrowserComponent {
           let item: AlbumInfo = new AlbumInfo(undefined);
           item.uri = uri;
           item.albumName = displayName;
-          //item.innerId = uri;
           router.replaceUrl({
             url: 'pages/PhotoGridPage',
             params: {
@@ -784,10 +786,12 @@ export struct PhotoBrowserComponent {
         this.geometryTransitionEnable = true;
       } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
         this.dataSource.setAlbumUri(this.albumUri);
-        this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+        this.dataSource.setAlbumDataSource
+        (AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
         this.dataSource.setDeviceId(param.albumInfo.deviceId);
-        this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+        this.dataSource.setAlbumDataSource(
+            AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       } else if (this.pageFrom == Constants.ENTRY_FROM.VIEW_DATA) {
         if (String(param.viewData).length === 0) {
           Log.error(TAG, 'Invalid uri');
@@ -832,7 +836,8 @@ export struct PhotoBrowserComponent {
             MediaObserver.getInstance().registerObserver(this.dataObserver);
             this.uriFromThirdPartyApp = String(param.viewData);
             this.currentIndex = 0;
-            this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp, (index: number): void => this.onGetItemIndexByUri(index));
+            this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
+              (index: number): void => this.onGetItemIndexByUri(index));
             // 是否显示菜单栏并且处理大数据打点
             this.isShowMenuBigData(param.isShowMenuFromThirdView);
           } else {
@@ -843,7 +848,8 @@ export struct PhotoBrowserComponent {
         }
       } else {
         MediaObserver.getInstance().registerObserver(this.dataObserver);
-        this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+        this.dataSource.setAlbumDataSource(
+          AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       }
 
       this.onPhotoChanged(param.position || 0);
@@ -867,7 +873,8 @@ export struct PhotoBrowserComponent {
           .getSystemAlbumUri(UserFileManagerAccess.IMAGE_ALBUM_SUB_TYPE);
       }
       AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE);
-      let albumDataSource: MediaDataSource = AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource;
+      let albumDataSource: MediaDataSource =
+        AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource;
       if (albumDataSource) {
         this.dataSource.setAlbumDataSource(albumDataSource);
       } else {
@@ -1112,10 +1119,12 @@ export struct PhotoBrowserComponent {
         } else if (this.albumUri === "") {
           this.resetAlbum(UserFileManagerAccess.getInstance()
             .getSystemAlbumUri(UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE));
-          this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp, (index: number): void => this.onGetItemIndexByUri(index));
+          this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
+            (index: number): void => this.onGetItemIndexByUri(index));
         } else {
           this.resetAlbum("");
-          this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp, (index: number): void => this.onGetItemIndexByUri(index));
+          this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
+            (index: number): void => this.onGetItemIndexByUri(index));
         }
       }
       this.onPhotoChanged(this.currentIndex);
@@ -1182,7 +1191,8 @@ export struct PhotoBrowserComponent {
       }
       if (params.pageType === MediaOperationType.Move) {
         let onMoveEndFunc = async (err: Error, count: number, total: number): Promise<void> => {
-          await this.onMoveEnd(err as Object, count, total)};
+          await this.onMoveEnd(err as Object, count, total);
+          }
         menuContext.withMediaItem(currentPhoto)
           .withBroadCast(this.broadCast)
           .withTargetAlbumName(params.albumName)
@@ -1192,7 +1202,8 @@ export struct PhotoBrowserComponent {
         AppStorage.setOrCreate<string | undefined>(Constants.APP_KEY_NEW_ALBUM_SOURCE, this.albumInfo?.uri);
       } else if (params.pageType === MediaOperationType.Remove) {
         let onMoveEndFunc = async (err: Error, count: number, total: number): Promise<void> => {
-          await this.onMoveEnd(err as Object, count, total)};
+          await this.onMoveEnd(err as Object, count, total);
+          }
         menuContext.withMediaItem(currentPhoto)
           .withBroadCast(this.broadCast)
           .withTargetAlbumName(params.albumName)
@@ -1203,7 +1214,8 @@ export struct PhotoBrowserComponent {
       } else if (params.pageType === MediaOperationType.Add) {
         // "添加到"不需要设置源相册
         let onCopyEndFunc = (err: Error, count: number, total: number): void => {
-          this.onCopyEnd(err as Object, count, total)};
+          this.onCopyEnd(err as Object, count, total);
+          }
         menuContext.withMediaItem(currentPhoto)
           .withBroadCast(this.broadCast)
           .withTargetAlbumName(params.albumName)
@@ -1309,7 +1321,8 @@ export struct PhotoBrowserComponent {
     let menuOperation: MenuOperation;
     let currentPhoto = this.getCurrentPhoto();
     let onDownloadEndFunc = async (err: Error, count: number, total: number): Promise<void> => {
-      await this.onDownloadEnd(err as Object, count, total)};
+      await this.onDownloadEnd(err as Object, count, total);
+      }
     if (currentPhoto == undefined) {
       Log.error(TAG, 'MediaOperation currentPhoto is undefined');
       return;

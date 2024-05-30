@@ -109,11 +109,12 @@ export struct MediaOperationBasePage {
         this.mediaType = param.mediaType;
       } else if (this.pageFrom === Constants.MEDIA_OPERATION_FROM_TIMELINE) {
         this.selectedItems = param.selectedItems;
-      }else if (this.pageFrom === Constants.MEDIA_OPERATION_FROM_PHOTO_GRID) {
+      } else if (this.pageFrom === Constants.MEDIA_OPERATION_FROM_PHOTO_GRID) {
         this.selectedItems = param.selectedItems;
       }
     }
-    this.albums.setFilterAlbumsFunction((mediaSetList: AlbumInfo[]): Array<AlbumInfo> => this.filterAlbumInList(mediaSetList));
+    this.albums.setFilterAlbumsFunction((mediaSetList: AlbumInfo[]): Array<AlbumInfo> =>
+    this.filterAlbumInList(mediaSetList));
     this.onActive();
 
     this.broadCast.on(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
@@ -128,7 +129,7 @@ export struct MediaOperationBasePage {
 
   aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
-    if(this.broadCast) {
+    if (this.broadCast) {
       this.broadCast.off(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
       this.broadCast.off(BroadCastConstants.MEDIA_OPERATION, this.mediaOperationFunc);
     }
@@ -211,7 +212,7 @@ export struct MediaOperationBasePage {
       return [];
     }
     let res = mediaSetList.filter((item) => {
-      return!item.isSystemAlbum && item.uri !== this.sourceAlbumUri;
+      return !item.isSystemAlbum && item.uri !== this.sourceAlbumUri;
     });
     return res;
   }

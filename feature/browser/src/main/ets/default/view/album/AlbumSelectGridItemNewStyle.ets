@@ -134,7 +134,8 @@ export struct AlbumSelectGridItemNewStyle {
   private updateCardSize() {
     let contentWidth = ScreenManager.getInstance().getWinWidth();
     let count = UiUtil.getAlbumGridCount(false);
-    this.gridWidth = ((contentWidth - Constants.ALBUM_SET_MARGIN * 2 - (Constants.ALBUM_SET_GUTTER * (count - 1))) / count);
+    this.gridWidth = ((contentWidth - Constants.ALBUM_SET_MARGIN *
+      2 - (Constants.ALBUM_SET_GUTTER * (count - 1))) / count);
     let numberHeight = Constants.TEXT_SIZE_BODY2 * this.fp2vpUnit;
     let nameHeight = Constants.TEXT_SIZE_SUB_TITLE1 * this.fp2vpUnit;
 

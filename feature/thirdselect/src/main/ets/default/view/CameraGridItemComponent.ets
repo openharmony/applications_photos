@@ -52,7 +52,9 @@ export struct CameraGridItemComponent {
         this.jumpCameraTakePhoto().then((result) => {
           Log.info(TAG, `resourceUri = ${JSON.stringify(result)}`);
           let want: Want | null = result.want as Want;
-          if(want == null || want.parameters == null) return;
+          if (want == null || want.parameters == null) {
+            return;
+          };
           this.resultUri = want.parameters['resourceUri'] as string;
         }).catch((err: Error) => {
           Log.error(TAG, `jumpCameraTakephoto err: ${err}`);
@@ -151,7 +153,7 @@ export struct CameraGridItemComponent {
           Log.debug(TAG, `grantUriPermission to ${param?.bundleName}`);
           fileShare.grantUriPermission(uri,
             param?.bundleName,
-            wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION|wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION,
+            wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION | wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION,
             (err: BusinessError):void => {
               Log.error(TAG, `failed to grantUriPermission to ${param?.bundleName}`);
               session?.terminateSelfWithResult(abilityResult).then((result: void) => {

@@ -43,7 +43,8 @@ export struct ActionBarButton {
     }
   }
 
-  @Builder PopupBuilder() {
+  @Builder
+  PopupBuilder() {
     Column() {
       ForEach(this.moreMenuList, (menu: Action, index?: number) => {
         Text(menu.textRes)
@@ -79,7 +80,8 @@ export struct ActionBarButton {
     })
   }
 
-  @Builder ActionBarButtonBuilder() {
+  @Builder
+  ActionBarButtonBuilder() {
     Flex({
       direction: FlexDirection.Column,
       justifyContent: FlexAlign.Center,

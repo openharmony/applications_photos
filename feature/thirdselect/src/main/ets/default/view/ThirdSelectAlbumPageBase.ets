@@ -138,7 +138,7 @@ export struct ThirdSelectAlbumPageBase {
   }
 
   aboutToDisappear() {
-    if(this.broadCast) {
+    if (this.broadCast) {
       this.broadCast.off(Constants.ON_LOADING_FINISHED, this.onLoadingFinishedFunc);
     }
     ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.initGridRowCountFunc);
@@ -179,7 +179,8 @@ export struct ThirdSelectAlbumPageBase {
     }
   }
 
-  @Builder buildItem(item: AlbumSetDataInfo) {
+  @Builder
+  buildItem(item: AlbumSetDataInfo) {
     ThirdAlbumGridItem({
       item: item.data,
       isFirstEnter: this.isFirstEnter

@@ -89,7 +89,8 @@ export struct PhotoSwiper {
       if (this.dataSource != null && this.isDeleting) {
         this.dataSource.deleteData(this.currentIndex);
       }
-      if (this.dataSource != null && this.currentIndex === this.dataSource.totalCount() || (this.isDeleting && this.isLeftSwiper && this.currentIndex > 0)) {
+      if (this.dataSource != null && this.currentIndex === this.dataSource.totalCount() ||
+        (this.isDeleting && this.isLeftSwiper && this.currentIndex > 0)) {
         this.currentIndex--;
       }
       this.isDeleting = false;

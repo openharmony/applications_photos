@@ -83,7 +83,7 @@ export struct SelectPhotoBrowserView {
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   private geometryTransitionEnable: boolean = false;
   private pullDownEndFunc: Function = (): void => this.pullDownEnd();
-  private dataSizeChangedFunc: Function = (size: number): void => this.onDataSizeChanged(size);;
+  private dataSizeChangedFunc: Function = (size: number): void => this.onDataSizeChanged(size);
   private dataContentChangedFunc: Function = (size: number): void => this.dataContentChanged(size);
   private setDisableSwipeFunc: Function = (value: boolean): void => this.setDisableSwipe(value);
 
@@ -165,7 +165,7 @@ export struct SelectPhotoBrowserView {
     this.broadCast.release();
     this.dataSource.release();
     mMultimodalInputManager.unregisterListener();
-    if(this.broadCast) {
+    if (this.broadCast) {
       this.broadCast.off(PhotoConstants.PULL_DOWN_END, this.pullDownEndFunc);
       this.broadCast.off(PhotoConstants.DATA_SIZE_CHANGED, this.dataSizeChangedFunc);
       this.broadCast.off(PhotoConstants.DATA_CONTENT_CHANGED, this.dataContentChangedFunc);
