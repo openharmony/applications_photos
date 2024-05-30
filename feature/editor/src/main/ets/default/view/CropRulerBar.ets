@@ -104,7 +104,7 @@ export struct CropRulerBar {
       this.context.shadowColor = Constants.RULER_FILL_STYLE_90;
     }
     this.context.shadowBlur = Constants.RULER_LINE_WIDTH
-    if (Math.round(curNum) == Math.round(this.current_def)) {
+    if (Math.round(curNum) == Math.round(this.currentDef)) {
       if (!this.isVerticalScreen) {
         this.context.fillText(this.integerAngleToString(Math.round(curNum)) as string,
           (this.rulerWidth * 6) / 15, curX);
@@ -130,7 +130,7 @@ export struct CropRulerBar {
   }
 
   drawLine(): void {
-    let beginNum = this.current_def - (this.rulerLength / Constants.NUMBER_2) / Constants.NUMBER_5;
+    let beginNum = this.currentDef - (this.rulerLength / Constants.NUMBER_2) / Constants.NUMBER_5;
     let curX = 0;
     let curNum = 0;
     const scaleLen = Math.ceil((this.rulerLength) / Constants.NUMBER_5) + Constants.NUMBER_1;
@@ -194,17 +194,17 @@ export struct CropRulerBar {
     if (Math.abs(dir / 5) < 1) {
       return;
     }
-    this.current_def += Number.parseInt((dir / 5).toFixed(0));
+    this.currentDef += Number.parseInt((dir / 5).toFixed(0));
     this.startPos = event.touches[0][axis];
-    if (Math.abs(this.current_def) > Constants.EDGE_ANGLE) {
-      this.current_def = this.current_def > Constants.EDGE_ANGLE ? Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
+    if (Math.abs(this.currentDef) > Constants.EDGE_ANGLE) {
+      this.currentDef = this.currentDef > Constants.EDGE_ANGLE ? Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
     }
     this.drawRuler();
-    this.broadCast.emit(Constants.RULER_CHANGED, [this.current_def]);
+    this.broadCast.emit(Constants.RULER_CHANGED, [this.currentDef]);
   }
 
   onResetClicked(): void {
-    this.current_def = Constants.NUMBER_0;
+    this.currentDef = Constants.NUMBER_0;
     this.drawRuler();
   }
 
