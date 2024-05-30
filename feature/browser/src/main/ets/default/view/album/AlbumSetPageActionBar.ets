@@ -34,8 +34,8 @@ export struct AlbumSetPageActionBar {
   @Consume isDisableDelete: boolean;
   @Consume @Watch('updatePlaceholderStatus') isShowSideBar: boolean;
   @State actionBarProp: ActionBarProp = new ActionBarProp();
-  @StorageLink('isHorizontal') @Watch('updateActionBar') isHorizontal: boolean
-    = ScreenManager.getInstance().isHorizontal();
+  @StorageLink('isHorizontal') @Watch('updateActionBar') isHorizontal: boolean =
+    ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
   onMenuClicked: Function = (): void => {};

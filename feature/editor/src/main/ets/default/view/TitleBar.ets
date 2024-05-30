@@ -93,7 +93,7 @@ export struct TitleBar {
     Log.debug(TAG, `backAfterSaveComplete called`);
     this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_ACTIVE, [false, Constants.PHOTO_TRANSITION_EDIT]);
     this.broadCast.emit(BroadCastConstants.EXIT_SAVE_PROGRESS_CLOSE, []);
-    AppStorage.setOrCreate(BroadCastConstants.PHOTO_EDIT_SAVE_URI, "");
+    AppStorage.setOrCreate(BroadCastConstants.PHOTO_EDIT_SAVE_URI, '');
     router.back();
   }
 

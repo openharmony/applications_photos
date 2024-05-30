@@ -19,7 +19,7 @@ import { Constants } from '../../model/common/Constants';
 
 @Observed
 export class EditExitDialogCallback {
-  discardCallback: Function = (): void => {};
+  public discardCallback: Function = (): void => {};
 }
 
 @CustomDialog
@@ -27,8 +27,8 @@ export struct EditExitDialog {
   @Consume editExitDialogCallback: EditExitDialogCallback;
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   controller?: CustomDialogController;
   private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 

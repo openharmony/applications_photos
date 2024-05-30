@@ -21,8 +21,8 @@ const TAG: string = 'common_CopyOrMoveDialog';
 
 @Observed
 export class OperateParam {
-  moveFunc: Function = (): void => {};
-  copyFunc: Function = (): void => {};
+  public moveFunc: Function = (): void => {};
+  public copyFunc: Function = (): void => {};
 }
 
 @CustomDialog
@@ -31,8 +31,8 @@ export struct CopyOrMoveDialog {
   static readonly EXTERNAL_PREFIX_NUM = 2;
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   controller?: CustomDialogController;
   dataTime: string = '';
   @Consume operateParam: OperateParam;

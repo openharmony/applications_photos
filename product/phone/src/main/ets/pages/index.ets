@@ -65,8 +65,8 @@ interface Params {
 struct IndexPage {
   @StorageLink('app_key_tabs_index') preIndex: number = Constants.TIMELINE_PAGE_INDEX;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [
   Constants.NUMBER_0,
   ScreenManager.getInstance().getStatusBarHeight(),
   Constants.NUMBER_0,
@@ -379,16 +379,18 @@ struct IndexPage {
     Log.info(TAG, `Has permission been requested? ${isRequested}`);
     if (!isRequested) {
       let permissionList: Array<string> = [
-        "ohos.permission.READ_IMAGEVIDEO",
-        "ohos.permission.WRITE_IMAGEVIDEO",
-        "ohos.permission.MEDIA_LOCATION"
+        'ohos.permission.READ_IMAGEVIDEO',
+        'ohos.permission.WRITE_IMAGEVIDEO',
+        'ohos.permission.MEDIA_LOCATION'
       ];
       let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
       try {
-        atManager.requestPermissionsFromUser(AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext, permissionList as Permissions[])
+        atManager.requestPermissionsFromUser(
+          AppStorage.get<common.UIAbilityContext>('photosAbilityContext') as common.UIAbilityContext,
+          permissionList as Permissions[])
           .then((data) => {
-          Log.debug(TAG, `permissions: ${JSON.stringify(data.permissions)}`
-          + `, authResult: ${JSON.stringify(data.authResults)}`);
+          Log.debug(TAG, `permissions: ${JSON.stringify(data.permissions)}` +
+            `, authResult: ${JSON.stringify(data.authResults)}`);
           let sum: number = 0;
           for (let i = 0; i < data.authResults.length; i++) {
             sum += data.authResults[i];

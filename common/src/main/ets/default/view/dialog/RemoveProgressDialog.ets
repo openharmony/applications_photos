@@ -21,17 +21,17 @@ const TAG: string = 'common_RemoveProgressDialog';
 
 @Observed
 export class RemoveProgressParam {
-  currentCount: number = 0;
-  totalCount: number = 0;
-  message?: Resource
+  public currentCount: number = 0;
+  public totalCount: number = 0;
+  public message?: Resource
 }
 
 @CustomDialog
 export struct RemoveProgressDialog {
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   controller?: CustomDialogController
   @Consume removeProgress: number;
   @Consume removeProgressParam: RemoveProgressParam;

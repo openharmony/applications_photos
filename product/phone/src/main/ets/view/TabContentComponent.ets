@@ -37,8 +37,8 @@ export struct TabContentComponent {
 
   onShowStatusChanged() {
     this.pageStatus = this.isShow /*&& this.isInCurrentTab();*/
-    Log.error(TAG, 'this.pageStatus = ' + this.pageStatus
-    + ', this.isShow = ' + this.isShow + ', this.isInCurrentTab() = ' + this.isInCurrentTab()
+    Log.error(TAG, 'this.pageStatus = ' + this.pageStatus +
+      ', this.isShow = ' + this.isShow + ', this.isInCurrentTab() = ' + this.isInCurrentTab()
     );
   }
 
@@ -77,8 +77,8 @@ export struct TabContentComponent {
             browserController: this.browserController
           })
         }
-        .width("100%")
-        .height("100%")
+        .width('100%')
+        .height('100%')
 
         // Opacity must change for TransitionEffect taking effect
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))
@@ -93,8 +93,8 @@ export struct TabContentComponent {
             browserController: this.browserController
           })
         }
-        .width("100%")
-        .height("100%")
+        .width('100%')
+        .height('100%')
 
         // Opacity must change for TransitionEffect taking effect
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))

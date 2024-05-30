@@ -144,7 +144,8 @@ export struct SelectPhotoBrowserView {
       } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
         this.dataSource.setDeviceId(param.deviceId);
       }
-      this.dataSource.setAlbumDataSource(AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+      this.dataSource.setAlbumDataSource(
+        AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       if (this.isMultiPick == true && this.selectManager) {
         this.selectedCount = this.selectManager.getSelectedCount();
       }

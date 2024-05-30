@@ -35,8 +35,8 @@ export struct TimelinePageActionBar {
   @Provide selectedCount: number = 0;
   @Consume @Watch('updatePlaceholderStatus') isShowSideBar: boolean;
   onMenuClicked: Function = (): void => {};
-  @StorageLink('isHorizontal') @Watch('updateActionBarProp') isHorizontal: boolean
-    = ScreenManager.getInstance().isHorizontal();
+  @StorageLink('isHorizontal') @Watch('updateActionBarProp') isHorizontal: boolean =
+    ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;

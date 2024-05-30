@@ -46,8 +46,8 @@ export struct DefaultPhotoPage {
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   defaultMediaItem: MediaItem | undefined = undefined;
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
   @State backgroundColorResource: Resource = $r('app.color.default_background_color');

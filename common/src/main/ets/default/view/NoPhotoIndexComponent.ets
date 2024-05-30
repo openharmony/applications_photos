@@ -47,8 +47,8 @@ export struct NoPhotoIndexComponent {
   updateImageSize() {
     let winWidth = ScreenManager.getInstance().getWinWidth();
     let winHeightHalf = ScreenManager.getInstance().getWinHeight() / 2;
-    this.imageSize
-    = (winWidth < winHeightHalf) ? (winWidth * IMAGE_SCREEN_RATIO) : (winHeightHalf * IMAGE_SCREEN_RATIO)
+    this.imageSize =
+      (winWidth < winHeightHalf) ? (winWidth * IMAGE_SCREEN_RATIO) : (winHeightHalf * IMAGE_SCREEN_RATIO)
     Log.info(TAG, `window size: ${winWidth}, ${winHeightHalf} ,size = ${this.imageSize} index:${this.index}`);
   }
 

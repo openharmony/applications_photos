@@ -161,7 +161,7 @@ export struct ThirdSelectedPanel {
   @Builder
   buildThumbnailItem(item: MediaItem, index: number) {
     Stack({ alignContent: Alignment.Start }) {
-      Image(item.thumbnail)
+      Image(item?.thumbnail)
         .height('100%')
         .aspectRatio(1)
         .objectFit(ImageFit.Cover)
@@ -170,21 +170,21 @@ export struct ThirdSelectedPanel {
           Log.error(TAG, 'item Image error');
         })
         .onComplete(() => {
-          Log.debug(TAG, `Draw the image! ${item.uri}`);
+          Log.debug(TAG, `Draw the image! ${item?.uri}`);
         })
         .onClick(() => {
           this.broadCast.emit(BroadCastConstants.JUMP_THIRD_PHOTO_BROWSER, [
             '',
             item,
           this.getPosition(item),
-            'thiSel_ThirdSelectPhotoGridBase' + item.getHashCode() + true,
+            'thiSel_ThirdSelectPhotoGridBase' + item?.getHashCode() + true,
             true
           ]);
         })
       // video duration
-      if (item.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
+      if (item?.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
         Row() {
-          Text(DateUtil.getFormattedDuration(item.duration))
+          Text(DateUtil.getFormattedDuration(item?.duration))
             .fontSize($r('sys.float.ohos_id_text_size_caption'))
             .fontFamily($r('app.string.id_text_font_family_regular'))
             .fontColor($r('app.color.text_color_above_picture'))
@@ -202,15 +202,15 @@ export struct ThirdSelectedPanel {
       Image($r('app.media.ic_gallery_public_cancel_bg'))
         .height($r('app.float.icon_size'))
         .width($r('app.float.icon_size'))
-        .key('ThirdSelectCancel' + item.uri)
+        .key('ThirdSelectCancel' + item?.uri)
         .objectFit(ImageFit.Contain)
         .position({
           x: $r('app.float.picker_panel_cancel_x'),
           y: $r('app.float.picker_panel_cancel_y')
         })
         .onClick(() => {
-          Log.debug(TAG, `click cancel item ${item.uri}`);
-          this.broadCast.emit(BroadCastConstants.SELECT, [0, item.uri, false]);
+          Log.debug(TAG, `click cancel item ${item?.uri}`);
+          this.broadCast.emit(BroadCastConstants.SELECT, [0, item?.uri, false]);
         })
       Image($r('app.media.picker_border_img'))
         .height('100%')
@@ -218,7 +218,7 @@ export struct ThirdSelectedPanel {
         .fillColor($r('sys.color.ohos_id_color_focused_bg_dark'))
         .objectFit(ImageFit.Cover)
         .autoResize(false)
-        .visibility(item.uri === this.currentUri ? Visibility.Visible : Visibility.None)
+        .visibility(item?.uri === this.currentUri ? Visibility.Visible : Visibility.None)
         .hitTestBehavior(HitTestMode.None)
     }
     .height('100%')

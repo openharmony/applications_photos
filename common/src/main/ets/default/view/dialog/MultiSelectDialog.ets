@@ -22,8 +22,8 @@ const TAG: string = 'common_MultiSelectDialog';
 
 @Observed
 export class MultiSelectDetails {
-  count: number = 0;
-  size: number = 0;
+  public count: number = 0;
+  public size: number = 0;
 }
 
 @CustomDialog
@@ -32,8 +32,8 @@ export struct MultiSelectDialog {
   static readonly EXTERNAL_PREFIX_NUM = 2;
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   controller?: CustomDialogController;
   @Consume multiSelectDetails: MultiSelectDetails;
   private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;

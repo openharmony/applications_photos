@@ -126,8 +126,8 @@ export struct PhotoBrowserComponent {
   @StorageLink('TimelinePageIndex') TimelinePageIndex: number = Constants.INVALID;
   @StorageLink('PhotoGridPageIndex') PhotoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @StorageLink('entryFromHap') entryFromHap: number = Constants.ENTRY_FROM_NONE;
   mTransition: string = '';
   albumUri = '';
@@ -166,7 +166,7 @@ export struct PhotoBrowserComponent {
   private deviceName = '';
   private backFromCopy = false;
   private uriFromThirdPartyApp: string = '';
-  private editNewUri: string = "";
+  private editNewUri: string = '';
   private favorCacheItemsMap = new Map<String, MediaItem>()
   private breakpointSystem: BreakpointSystem = new BreakpointSystem();
   private theDeleteItem: MediaItem | null = null;
@@ -726,7 +726,7 @@ export struct PhotoBrowserComponent {
       return albumUri;
     }
 
-    return "";
+    return '';
   }
 
   aboutToAppear(): void {
@@ -766,7 +766,7 @@ export struct PhotoBrowserComponent {
         this.dataSource.initData();
         this.isFromCamera = true;
         this.clickThumbnailTime = param.clickThumbnailTime ? param.clickThumbnailTime : 0;
-        this.albumUri = "";
+        this.albumUri = '';
         this.jumpSourceToMain = JumpSourceToMain.CAMERA;
         MediaObserver.getInstance().registerObserver(this.dataObserver);
         AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE);
@@ -786,12 +786,12 @@ export struct PhotoBrowserComponent {
         this.geometryTransitionEnable = true;
       } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
         this.dataSource.setAlbumUri(this.albumUri);
-        this.dataSource.setAlbumDataSource(
-            AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+        this.dataSource.setAlbumDataSource
+        (AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
         this.dataSource.setDeviceId(param.albumInfo.deviceId);
         this.dataSource.setAlbumDataSource(
-          AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+            AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       } else if (this.pageFrom == Constants.ENTRY_FROM.VIEW_DATA) {
         if (String(param.viewData).length === 0) {
           Log.error(TAG, 'Invalid uri');
@@ -1116,13 +1116,13 @@ export struct PhotoBrowserComponent {
           this.uriFromThirdPartyApp = '';
           this.dataSource.enableGetData(true);
           this.setViewDataResult(false);
-        } else if (this.albumUri === "") {
+        } else if (this.albumUri === '') {
           this.resetAlbum(UserFileManagerAccess.getInstance()
             .getSystemAlbumUri(UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE));
           this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
             (index: number): void => this.onGetItemIndexByUri(index));
         } else {
-          this.resetAlbum("");
+          this.resetAlbum('');
           this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
             (index: number): void => this.onGetItemIndexByUri(index));
         }
@@ -1147,10 +1147,10 @@ export struct PhotoBrowserComponent {
         this.dataSource.enableGetData(true);
         this.dataSource.getData(this.currentIndex);
         this.dataSource.onDataReloaded();
-        this.editNewUri = "";
+        this.editNewUri = '';
       } else {
         Log.error(TAG, `edit new uri ${this.editNewUri} is invalid`);
-        this.editNewUri = "";
+        this.editNewUri = '';
         this.currentIndex = 0;
         this.dataSource.enableGetData(true);
       }

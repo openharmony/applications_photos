@@ -22,16 +22,16 @@ const TAG: string = 'common_ProgressDialog';
 
 @Observed
 export class ProgressParam {
-  cancelFunc: Function = (): void => {};
-  operationType: string = '';
+  public cancelFunc: Function = (): void => {};
+  public operationType: string = '';
 }
 
 @CustomDialog
 export struct ProgressDialog {
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   controller?: CustomDialogController
   @Consume progressMessage: Resource;
   @Consume deleteProgress: number;

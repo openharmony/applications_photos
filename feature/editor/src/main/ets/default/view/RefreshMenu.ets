@@ -17,8 +17,8 @@ import { ActionButtonInfo } from './MainMenuInfo';
 import { Constants } from '@ohos/common';
 
 export class RefreshActionMenu {
-  isChanged: number;
-  menuArray: Array<ActionButtonInfo>;
+  public isChanged: number;
+  public menuArray: Array<ActionButtonInfo>;
 
   constructor(isChanged: number, menuArray: Array<ActionButtonInfo>) {
     this.isChanged = isChanged;
@@ -28,8 +28,9 @@ export class RefreshActionMenu {
 
 export class ActionChangedEvent {
   static allChanged(menuChanged: RefreshActionMenu) {
-    if (menuChanged.isChanged == Constants.NEGATIVE_1 || menuChanged.isChanged > menuChanged.menuArray.length
-    || menuChanged.isChanged == Constants.NEGATIVE_2) {
+    if (menuChanged.isChanged == Constants.NEGATIVE_1 ||
+      menuChanged.isChanged > menuChanged.menuArray.length ||
+      menuChanged.isChanged == Constants.NEGATIVE_2) {
       menuChanged.isChanged = Constants.NEGATIVE_1;
       return;
     }

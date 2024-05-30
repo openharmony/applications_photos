@@ -96,8 +96,8 @@ export struct ThirdSelectPhotoBrowserBase {
   mPosition: number = 0;
   @State title: string = '';
   @Prop @Watch('onPageChanged') pageStatus: boolean = false;
-  @StorageLink(LEFT_BLANK) leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink(LEFT_BLANK) leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @StorageLink(IS_HORIZONTAL) isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   maxSelectCount: number = 0;
   @StorageLink('geometryOpacity') geometryOpacity: number = 1;

@@ -78,8 +78,8 @@ export struct TimelinePage {
   @Consume @Watch('onIndexPageShow') isShow: boolean;
   @StorageLink('TimelinePageIndex') @Watch('onIndexChange') TimelinePageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   dataSource: TimelineDataSource | null = null;
   mSelectManager: TimelineSelectManager = new TimelineSelectManager();
   scroller: Scroller = new Scroller();
@@ -727,8 +727,8 @@ export struct TimelinePage {
                         item: item.mediaItem,
                         mPosition: item.viewIndex,
                         isSelected: this.isSelectedMode ?
-                        this.mSelectManager.isItemSelected((item.mediaItem as MediaItem).uri as string, item.viewIndex) :
-                          false,
+                        this.mSelectManager.isItemSelected((item.mediaItem as MediaItem).uri as string,
+                          item.viewIndex) : false,
                         pageName: Constants.PHOTO_TRANSITION_TIMELINE,
                         onMenuClicked: (action: Action): void => this.onMenuClicked(action),
                         onMenuClickedForSingleItem: (action: Action, currentPhoto: MediaItem): void =>
@@ -822,8 +822,8 @@ export struct TimelinePage {
     let margin = 0;
     let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
     let newCount = Math.max(Constants.GRID_MIN_COUNT,
-      Math.round(((contentWidth - Constants.NUMBER_2 * margin)
-      + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
+      Math.round(((contentWidth - Constants.NUMBER_2 * margin) +
+      Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
     if (newCount != this.gridRowCount) {
       this.gridRowCount = newCount;
     }
