@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,7 +67,7 @@ import {
 
 
 const TAG: string = 'PhotoGridView';
-AppStorage.setOrCreate('PhotoGridPageIndex', Constants.INVALID);
+AppStorage.setOrCreate('photoGridPageIndex', Constants.INVALID);
 
 // Album View
 @Component
@@ -82,12 +82,12 @@ export struct PhotoGridView {
   @Provide broadCast: BroadCast = new BroadCast();
   @Consume isShow: boolean;
   @Provide isShowBar: boolean = true;
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
-  @Provide rightClickMenuList: Array<Action> = new Array<Action>();
-  @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
+  @Provide moreMenuList: Action[] = [];
+  @Provide rightClickMenuList: Action[] = [];
+  @StorageLink('photoGridPageIndex') @Watch('onIndexChange') photoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Prop @Watch('onPageChanged') pageStatus: boolean = false;
   @State gridItemWidth: number = 0;
   @StorageLink('photoGridActionBarOpacity') photoGridActionBarOpacity: number = 0;
@@ -144,9 +144,9 @@ export struct PhotoGridView {
   }
 
   onIndexChange(): void {
-    Log.info(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
-    if (this.PhotoGridPageIndex != Constants.INVALID) {
-      this.scroller.scrollToIndex(this.PhotoGridPageIndex);
+    Log.info(TAG, `onIndexChange ${this.photoGridPageIndex}`)
+    if (this.photoGridPageIndex != Constants.INVALID) {
+      this.scroller.scrollToIndex(this.photoGridPageIndex);
     }
   }
 
@@ -519,7 +519,7 @@ export struct PhotoGridView {
     if (!this.isSelectedMode) {
       this.onModeChange();
     }
-    this.rightClickMenuList = new Array<Action>();
+    this.rightClickMenuList = [];
     if (this.albumInfo) {
       let isRecycleAlbum: boolean = this.albumInfo.isTrashAlbum;
       if (isRecycleAlbum) {
@@ -1074,8 +1074,8 @@ export struct PhotoGridView {
     // 原型机竖屏为4不变，横屏需计算: currentBreakpoint == 'lg' 表示横屏
     const currentBreakpoint: string = AppStorage.get<string>('currentBreakpoint') as string;
     this.gridRowCount = currentBreakpoint == Constants.BREAKPOINT_LG ?
-    Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
-      + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER))) : Constants.GRID_MIN_COUNT;
+    Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin) +
+    Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER))) : Constants.GRID_MIN_COUNT;
     this.gridItemWidth = (contentWidth - (this.gridRowCount - 1) * Constants.GRID_GUTTER -
       Constants.NUMBER_2 * margin) / this.gridRowCount;
     Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);

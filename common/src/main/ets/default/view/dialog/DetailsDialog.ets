@@ -24,16 +24,16 @@ const TAG: string = 'common_DetailsDialog';
 
 @Observed
 export class MediaDetails {
-  mediaType: number = 0;
-  height: number = 0;
-  width: number = 0;
-  size: number = 0;
-  duration: number = 0;
-  title: string = '';
-  dateTaken: number = 0;
-  uri: string = '';
-  displayName: string = '';
-  dateModified: number = 0;
+  public mediaType: number = 0;
+  public height: number = 0;
+  public width: number = 0;
+  public size: number = 0;
+  public duration: number = 0;
+  public title: string = '';
+  public dateTaken: number = 0;
+  public uri: string = '';
+  public displayName: string = '';
+  public dateModified: number = 0;
 }
 
 @CustomDialog
@@ -42,8 +42,8 @@ export struct DetailsDialog {
   static readonly EXTERNAL_PREFIX_NUM = 2;
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   sizeConvert = 1024;
   controller?: CustomDialogController;
   dataTime: string = '';

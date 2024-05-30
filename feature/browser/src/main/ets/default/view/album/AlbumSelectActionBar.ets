@@ -28,8 +28,8 @@ const TAG: string = 'browser_AlbumSelectActionBar';
 
 @Component
 export struct AlbumSelectActionBar {
-  @StorageLink('isHorizontal') @Watch('createActionBar') isHorizontal: boolean
-    = ScreenManager.getInstance().isHorizontal();
+  @StorageLink('isHorizontal') @Watch('createActionBar') isHorizontal: boolean =
+    ScreenManager.getInstance().isHorizontal();
   @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @Link @Watch('createActionBar') totalSelectedCount: number;
@@ -62,7 +62,7 @@ export struct AlbumSelectActionBar {
 
   private createActionBar(): void {
     this.selectedCount = this.totalSelectedCount;
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     let actionBarProp: ActionBarProp = new ActionBarProp();
     menuList.push(Boolean(this.totalSelectedCount) ? Action.OK : Action.OK_DISABLE);
     actionBarProp

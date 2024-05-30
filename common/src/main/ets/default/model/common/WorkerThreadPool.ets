@@ -22,8 +22,8 @@ const TAG = 'WorkerThreadPool'
 
 // 跨模块调用worker路径前缀
 const crossModulePathPrefix: string = '@bundle:com.ohos.photos/';
-const PHONE_ENTRY_NAME: string = "phone_photos";
-const PC_ENTRY_NAME: string = "pc_photos";
+const PHONE_ENTRY_NAME: string = 'phone_photos';
+const PC_ENTRY_NAME: string = 'pc_photos';
 
 /**
  * 自定义worker线程池，负责worker线程的创建、启动、销毁

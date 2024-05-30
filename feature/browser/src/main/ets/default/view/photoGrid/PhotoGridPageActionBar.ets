@@ -32,8 +32,8 @@ const TAG: string = 'browser_PhotoGridPageActionBar';
 export struct PhotoGridPageActionBar {
   @Consume @Watch('updateActionBarProp') isSelectedMode: boolean;
   @Consume @Watch('updateActionBarProp') isAllSelected: boolean;
-  @StorageLink('isHorizontal') @Watch('updateActionBarProp') isHorizontal: boolean
-    = ScreenManager.getInstance().isHorizontal();
+  @StorageLink('isHorizontal') @Watch('updateActionBarProp') isHorizontal: boolean =
+    ScreenManager.getInstance().isHorizontal();
   @Provide selectedCount: number = 0;
   @Link @Watch('updateActionBarProp') totalSelectedCount: number;
   @Consume isEmpty: boolean;
@@ -73,7 +73,7 @@ export struct PhotoGridPageActionBar {
   }
 
   private createHorizontalActionBar(): ActionBarProp {
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     let actionBarProp: ActionBarProp = new ActionBarProp();
 
     actionBarProp
@@ -116,7 +116,7 @@ export struct PhotoGridPageActionBar {
   }
 
   private createActionBar(): ActionBarProp {
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     let actionBarProp: ActionBarProp = new ActionBarProp();
 
     if (!this.isSystemAlbum && this.isDistributedAlbum == false) {

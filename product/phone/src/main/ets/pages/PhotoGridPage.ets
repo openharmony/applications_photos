@@ -29,7 +29,7 @@ import { SelectPhotoBrowserView } from '../view/SelectPhotoBrowserView';
 import { LEFT_BLANK } from '@ohos/thirdselect/src/main/ets/default/utils/ThirdSelectConstants';
 
 const TAG: string = 'PhotoGridPage';
-AppStorage.setOrCreate('PhotoGridPageIndex', Constants.INVALID);
+AppStorage.setOrCreate('photoGridPageIndex', Constants.INVALID);
 
 // Album Page
 @Entry
@@ -39,8 +39,8 @@ export struct PhotoGridPage {
   @Provide isSelectedMode: boolean = false;
   @Provide isShow: boolean = true;
   @State isRunningAnimation: boolean = false;
-  @StorageLink(LEFT_BLANK) leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink(LEFT_BLANK) leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @State @Watch('updateAnimationStatus') browserController: BrowserController = new BrowserController(true);
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
 
@@ -96,8 +96,8 @@ export struct PhotoGridPage {
             browserController: this.browserController
           })
         }
-        .width("100%")
-        .height("100%")
+        .width('100%')
+        .height('100%')
         // Opacity must change for TransitionEffect taking effect
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))
       }
@@ -111,8 +111,8 @@ export struct PhotoGridPage {
             browserController: this.browserController
           })
         }
-        .width("100%")
-        .height("100%")
+        .width('100%')
+        .height('100%')
 
         // Opacity must change for TransitionEffect taking effect
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))

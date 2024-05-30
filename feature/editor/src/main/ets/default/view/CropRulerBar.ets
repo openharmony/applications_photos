@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ export struct CropRulerBar {
   @State rulerWidth: number = Constants.NUMBER_0;
   @Consume('verticalScreen') isVerticalScreen: boolean;
   private screenManager = ScreenManager.getInstance();
-  private current_def: number = Constants.NUMBER_0;
+  private currentDef: number = Constants.NUMBER_0;
   private startPos: number = Constants.NUMBER_0;
   private setting: RenderingContextSettings = new RenderingContextSettings(true);
   private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.setting);
@@ -73,30 +73,30 @@ export struct CropRulerBar {
   }
 
   drawMidLine(): void {
-    const mid_x = Math.floor(this.rulerLength / Constants.NUMBER_2);
+    const midX= Math.floor(this.rulerLength / Constants.NUMBER_2);
     this.context.beginPath();
     this.context.fillStyle = Constants.RULER_FILL_STYLE_100;
     if (this.isVerticalScreen) {
-      this.context.fillRect(mid_x - Constants.MID_LINE_WIDTH / Constants.NUMBER_2,
+      this.context.fillRect(midX- Constants.MID_LINE_WIDTH / Constants.NUMBER_2,
         this.rulerWidth * Constants.NUMBER_8 / Constants.NUMBER_15,
         Constants.MID_LINE_WIDTH, Constants.MID_LINE_HEIGHT);
     } else {
       this.context.fillRect(this.rulerWidth * Constants.NUMBER_8_5 / Constants.NUMBER_15,
-        mid_x - Constants.MID_LINE_WIDTH / Constants.NUMBER_2, Constants.MID_LINE_HEIGHT,
+        midX- Constants.MID_LINE_WIDTH / Constants.NUMBER_2, Constants.MID_LINE_HEIGHT,
         Constants.MID_LINE_WIDTH);
     }
     this.context.stroke();
     this.context.closePath();
   }
 
-  drawIntegerLine(cur_x: number, cur_num: number): void {
+  drawIntegerLine(curX: number, curNum: number): void {
     if (!this.isVerticalScreen) {
-      this.context.moveTo((this.rulerWidth * 8.5) / 15, cur_x);
+      this.context.moveTo((this.rulerWidth * 8.5) / 15, curX);
     } else {
-      this.context.moveTo(cur_x, (this.rulerWidth * 8.5) / 15);
+      this.context.moveTo(curX, (this.rulerWidth * 8.5) / 15);
     }
 
-    if (Math.abs(cur_num) > Constants.EDGE_ANGLE) {
+    if (Math.abs(curNum) > Constants.EDGE_ANGLE) {
       this.context.strokeStyle = Constants.RULER_FILL_STYLE_40;
       this.context.shadowColor = Constants.RULER_FILL_STYLE_40;
     } else {
@@ -104,38 +104,38 @@ export struct CropRulerBar {
       this.context.shadowColor = Constants.RULER_FILL_STYLE_90;
     }
     this.context.shadowBlur = Constants.RULER_LINE_WIDTH
-    if (Math.round(cur_num) == Math.round(this.current_def)) {
+    if (Math.round(curNum) == Math.round(this.currentDef)) {
       if (!this.isVerticalScreen) {
-        this.context.fillText(this.integerAngleToString(Math.round(cur_num)) as string,
-          (this.rulerWidth * 6) / 15, cur_x);
+        this.context.fillText(this.integerAngleToString(Math.round(curNum)) as string,
+          (this.rulerWidth * 6) / 15, curX);
       } else {
-        this.context.fillText(this.integerAngleToString(Math.round(cur_num)) as string, cur_x,
+        this.context.fillText(this.integerAngleToString(Math.round(curNum)) as string, curX,
           (this.rulerWidth * 6) / 15);
       }
     } else {
       if (!this.isVerticalScreen) {
-        this.context.fillText((-cur_num).toString(),
-          (this.rulerWidth * 6) / 15, cur_x);
+        this.context.fillText((-curNum).toString(),
+          (this.rulerWidth * 6) / 15, curX);
       } else {
-        this.context.fillText(cur_num.toString(), cur_x,
+        this.context.fillText(curNum.toString(), curX,
           (this.rulerWidth * 6) / 15);
       }
 
     }
     if (!this.isVerticalScreen) {
-      this.context.lineTo(this.rulerWidth * 10.5 / 15, cur_x);
+      this.context.lineTo(this.rulerWidth * 10.5 / 15, curX);
     } else {
-      this.context.lineTo(cur_x, this.rulerWidth * 10.5 / 15);
+      this.context.lineTo(curX, this.rulerWidth * 10.5 / 15);
     }
   }
 
   drawLine(): void {
-    let begin_num = this.current_def - (this.rulerLength / Constants.NUMBER_2) / Constants.NUMBER_5;
-    let cur_x = 0;
-    let cur_num = 0;
-    const scale_len = Math.ceil((this.rulerLength) / Constants.NUMBER_5) + Constants.NUMBER_1;
-    for (let i = 0; i < scale_len; i++) {
-      cur_num = begin_num + i;
+    let beginNum = this.currentDef - (this.rulerLength / Constants.NUMBER_2) / Constants.NUMBER_5;
+    let curX = 0;
+    let curNum = 0;
+    const scaleLen = Math.ceil((this.rulerLength) / Constants.NUMBER_5) + Constants.NUMBER_1;
+    for (let i = 0; i < scaleLen; i++) {
+      curNum = beginNum + i;
       this.context.beginPath();
       this.multiScreenAdaptation();
       this.context.textAlign = 'center';
@@ -143,7 +143,7 @@ export struct CropRulerBar {
         this.context.textAlign = 'end';
         this.context.textBaseline = 'middle';
       }
-      if (Math.abs(cur_num) > Constants.EDGE_ANGLE) {
+      if (Math.abs(curNum) > Constants.EDGE_ANGLE) {
         this.context.strokeStyle = Constants.RULER_FILL_STYLE_40;
         this.context.fillStyle = Constants.RULER_FILL_STYLE_40;
       } else {
@@ -151,24 +151,24 @@ export struct CropRulerBar {
         this.context.fillStyle = Constants.RULER_FILL_STYLE_90;
       }
       this.context.shadowBlur = 0;
-      cur_x = i * Constants.NUMBER_5;
-      if (cur_x == 0 || cur_x == this.rulerLength) {
+      curX = i * Constants.NUMBER_5;
+      if (curX == 0 || curX == this.rulerLength) {
         this.context.lineWidth = (Constants.RULER_LINE_WIDTH / Constants.NUMBER_2);
-        if (cur_x < 0) {
-          cur_x = 0;
+        if (curX < 0) {
+          curX = 0;
         }
       } else {
         this.context.lineWidth = Constants.RULER_LINE_WIDTH;
       }
-      if (Math.round(Math.abs(cur_num)) % Constants.NUMBER_10 == 0) {
-        this.drawIntegerLine(cur_x, cur_num);
+      if (Math.round(Math.abs(curNum)) % Constants.NUMBER_10 == 0) {
+        this.drawIntegerLine(curX, curNum);
       } else {
         if (!this.isVerticalScreen) {
-          this.context.moveTo((this.rulerWidth * Constants.NUMBER_9_5) / Constants.NUMBER_15, cur_x);
-          this.context.lineTo(this.rulerWidth * Constants.NUMBER_10_5 / Constants.NUMBER_15, cur_x);
+          this.context.moveTo((this.rulerWidth * Constants.NUMBER_9_5) / Constants.NUMBER_15, curX);
+          this.context.lineTo(this.rulerWidth * Constants.NUMBER_10_5 / Constants.NUMBER_15, curX);
         } else {
-          this.context.moveTo(cur_x, (this.rulerWidth * Constants.NUMBER_9_5) / Constants.NUMBER_15);
-          this.context.lineTo(cur_x, this.rulerWidth * Constants.NUMBER_10_5 / Constants.NUMBER_15);
+          this.context.moveTo(curX, (this.rulerWidth * Constants.NUMBER_9_5) / Constants.NUMBER_15);
+          this.context.lineTo(curX, this.rulerWidth * Constants.NUMBER_10_5 / Constants.NUMBER_15);
         }
       }
       this.context.stroke();
@@ -194,17 +194,17 @@ export struct CropRulerBar {
     if (Math.abs(dir / 5) < 1) {
       return;
     }
-    this.current_def += Number.parseInt((dir / 5).toFixed(0));
+    this.currentDef += Number.parseInt((dir / 5).toFixed(0));
     this.startPos = event.touches[0][axis];
-    if (Math.abs(this.current_def) > Constants.EDGE_ANGLE) {
-      this.current_def = this.current_def > Constants.EDGE_ANGLE ? Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
+    if (Math.abs(this.currentDef) > Constants.EDGE_ANGLE) {
+      this.currentDef = this.currentDef > Constants.EDGE_ANGLE ? Constants.EDGE_ANGLE : -Constants.EDGE_ANGLE;
     }
     this.drawRuler();
-    this.broadCast.emit(Constants.RULER_CHANGED, [this.current_def]);
+    this.broadCast.emit(Constants.RULER_CHANGED, [this.currentDef]);
   }
 
   onResetClicked(): void {
-    this.current_def = Constants.NUMBER_0;
+    this.currentDef = Constants.NUMBER_0;
     this.drawRuler();
   }
 

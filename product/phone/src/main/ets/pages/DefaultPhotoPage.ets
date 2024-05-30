@@ -42,12 +42,12 @@ export struct DefaultPhotoPage {
   @Provide pageFrom: number = Constants.ENTRY_FROM.NORMAL;
   @State broadCast: BroadCast = new BroadCast();
   @Provide('transitionIndex') currentIndex: number = Constants.NUMBER_0;
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   defaultMediaItem: MediaItem | undefined = undefined;
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
   @State backgroundColorResource: Resource = $r('app.color.default_background_color');

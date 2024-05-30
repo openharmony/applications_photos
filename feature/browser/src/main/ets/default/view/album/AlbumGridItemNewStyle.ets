@@ -258,7 +258,7 @@ export struct AlbumGridItemNewStyle {
   }
 
   initCurrentRightClickMenuList() {
-    this.currentRightClickMenuList = new Array<Action>();
+    this.currentRightClickMenuList = [];
     if (!this.isAlbumSetSelectedMode) {
       this.currentRightClickMenuList.push(Action.MULTISELECT);
     }

@@ -49,8 +49,8 @@ interface Params {
 
 @Component
 export struct MediaOperationBasePage {
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Provide pageType: string = MediaOperationType.Move;
   @Provide broadCast: BroadCast = new BroadCast();
   @Provide loadingFinish: boolean = false;
@@ -158,8 +158,8 @@ export struct MediaOperationBasePage {
       .withAlbumInfo(this.currentAlbum)
       .withBroadCast(this.broadCast)
       .withJumpSourceToMain(JumpSourceToMain.ALBUM);
-    let menuOperation
-      = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetNewMenuOperation, menuContext);
+    let menuOperation =
+      MenuOperationFactory.getInstance().createMenuOperation(AlbumSetNewMenuOperation, menuContext);
     menuOperation.doAction();
   }
 

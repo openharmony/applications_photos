@@ -60,13 +60,13 @@ export struct ThirdSelectAlbumPageBase {
   @Provide broadCast: BroadCast = new BroadCast();
   private albums: AlbumSetDataSource = new AlbumSetDataSource(this.broadCast);
   @Provide isSelectedMode: boolean = true;
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
   selectManager?: ThirdSelectManager;
   @Provide gridColumnsCount: number = 3;
   isActive = false;
   @StorageLink(IS_SPLIT_MODE) isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink(LEFT_BLANK) leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink(LEFT_BLANK) leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @StorageLink(IS_SIDE_BAR) isSidebar: boolean = ScreenManager.getInstance().isSidebar();
   dataObserver: CommonObserverCallback = new CommonObserverCallback(this);
   @State title: string = '';

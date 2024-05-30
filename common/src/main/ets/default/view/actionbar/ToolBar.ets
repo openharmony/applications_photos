@@ -21,23 +21,23 @@ import { Action } from '../browserOperation/Action';
 import { ActionBarMode } from '../browserOperation/ActionBarMode';
 
 export class MenuItem {
-  value?: string;
-  action?: () => void;
+  public value?: string;
+  public action?: () => void;
 }
 
 @Component
 export struct ToolBar {
   @Consume isShowBar: boolean;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Consume toolMenuList: Action[];
   @Consume moreMenuList: Action[];
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @State showPopup: boolean = false;
   onMenuClicked: Function = (): void => {};
   @State actionBarProp: ActionBarProp = new ActionBarProp();
-  @Consume @Watch("isNeedHidePopup") hidePopup: boolean;
+  @Consume @Watch('isNeedHidePopup') hidePopup: boolean;
   private isFromPhotoBrowser = false;
 
   aboutToAppear(): void {

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ import { PhotoBrowserComponent } from '../view/PhotoBrowserComponent';
 import { SelectPhotoBrowserView } from '../view/SelectPhotoBrowserView';
 
 const TAG: string = 'NewAlbumPage';
-AppStorage.setOrCreate('PhotoGridPageIndex', Constants.INVALID);
+AppStorage.setOrCreate('photoGridPageIndex', Constants.INVALID);
 
 interface Params {
   item: string;
@@ -63,13 +63,13 @@ export struct NewAlbumPage {
   @Provide broadCast: BroadCast = new BroadCast();
   @Provide isShow: boolean = true;
   @Provide isShowBar: boolean = true;
-  @State moreMenuList: Array<Action> = new Array<Action>();
-  @Provide rightClickMenuList: Array<Action> = new Array<Action>();
+  @State moreMenuList: Action[] = [];
+  @Provide rightClickMenuList: Action[] = [];
   @State isClickScrollBar: boolean = false;
-  @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
+  @StorageLink('photoGridPageIndex') @Watch('onIndexChange') photoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   title: string = '';
   @StorageLink('placeholderIndex') @Watch('onPlaceholderChanged') placeholderIndex: number = -1;
   @State pageStatus: boolean = false;
@@ -159,9 +159,9 @@ export struct NewAlbumPage {
   }
 
   onIndexChange() {
-    Log.info(TAG, `onIndexChange ${this.PhotoGridPageIndex}`)
-    if (this.PhotoGridPageIndex != Constants.INVALID) {
-      this.scroller.scrollToIndex(this.PhotoGridPageIndex);
+    Log.info(TAG, `onIndexChange ${this.photoGridPageIndex}`)
+    if (this.photoGridPageIndex != Constants.INVALID) {
+      this.scroller.scrollToIndex(this.photoGridPageIndex);
     }
   }
 
@@ -278,7 +278,7 @@ export struct NewAlbumPage {
       AppStorage.setOrCreate(Constants.APP_KEY_NEW_ALBUM_SOURCE, item.uri);
     } else {
       this.title = '';
-      this.dataSource.setAlbumUri("");
+      this.dataSource.setAlbumUri('');
     }
 
     let self = this;
@@ -418,8 +418,8 @@ export struct NewAlbumPage {
             browserController: this.browserController
           })
         }
-        .width("100%")
-        .height("100%")
+        .width('100%')
+        .height('100%')
 
         // Opacity must change for TransitionEffect taking effect
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))
@@ -434,8 +434,8 @@ export struct NewAlbumPage {
             browserController: this.browserController
           })
         }
-        .width("100%")
-        .height("100%")
+        .width('100%')
+        .height('100%')
 
         // Opacity must change for TransitionEffect taking effect
         .transition(TransitionEffect.asymmetric(TransitionEffect.opacity(0.99), TransitionEffect.opacity(0.99)))
@@ -467,8 +467,8 @@ export struct NewAlbumPage {
     let contentWidth = ScreenManager.getInstance().getWinWidth();
     let margin = 0;
     let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
-    this.gridRowCount = Math.max(Math.round(((contentWidth - Constants.NUMBER_2 * margin)
-      + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)),
+    this.gridRowCount = Math.max(Math.round(((contentWidth - Constants.NUMBER_2 * margin) +
+    Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)),
       Constants.DEFAULT_ALBUM_GRID_COLUMN_MIN_COUNT);
     Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
   }

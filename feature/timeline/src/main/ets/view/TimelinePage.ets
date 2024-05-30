@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ import { TimelineDataSourceManager } from '../model/TimelineDataSourceManager';
 import { TimelineScrollBar } from './TimelineScrollBar';
 
 const TAG: string = 'TimelinePage';
-AppStorage.setOrCreate('TimelinePageIndex', Constants.INVALID);
+AppStorage.setOrCreate('timelinePageIndex', Constants.INVALID);
 
 interface Params {
   albumName: string;
@@ -76,10 +76,10 @@ export struct TimelinePage {
   @State totalSelectedCount: number = 0;
   @Provide broadCast: BroadCast = TimelineDataSourceManager.getInstance().getBroadCast();
   @Consume @Watch('onIndexPageShow') isShow: boolean;
-  @StorageLink('TimelinePageIndex') @Watch('onIndexChange') TimelinePageIndex: number = Constants.INVALID;
+  @StorageLink('timelinePageIndex') @Watch('onIndexChange') timelinePageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   dataSource: TimelineDataSource | null = null;
   mSelectManager: TimelineSelectManager = new TimelineSelectManager();
   scroller: Scroller = new Scroller();
@@ -89,8 +89,8 @@ export struct TimelinePage {
   deleteMode = false; // Is delete mode
   isActive = false; // Is the page active
   routerStart = false; // Is move or copy router page
-  @Provide moreMenuList: Action[] = new Array<Action>();
-  @Provide rightClickMenuList: Array<Action> = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
+  @Provide rightClickMenuList: Action[] = [];
   @State groupSelectMode: boolean[] = [];
   @Provide yearData: TimelineData[] = [];
   @Provide dateText: string = '';
@@ -441,9 +441,9 @@ export struct TimelinePage {
   }
 
   onIndexChange(): void {
-    Log.info(TAG, `onIndexChange ${this.TimelinePageIndex}`);
-    if (this.TimelinePageIndex != Constants.INVALID && this.dataSource != null) {
-      this.scroller.scrollToIndex(this.dataSource.getPositionByIndex(this.TimelinePageIndex));
+    Log.info(TAG, `onIndexChange ${this.timelinePageIndex}`);
+    if (this.timelinePageIndex != Constants.INVALID && this.dataSource != null) {
+      this.scroller.scrollToIndex(this.dataSource.getPositionByIndex(this.timelinePageIndex));
     }
   }
 
@@ -727,8 +727,8 @@ export struct TimelinePage {
                         item: item.mediaItem,
                         mPosition: item.viewIndex,
                         isSelected: this.isSelectedMode ?
-                        this.mSelectManager.isItemSelected((item.mediaItem as MediaItem).uri as string, item.viewIndex) :
-                          false,
+                        this.mSelectManager.isItemSelected((item.mediaItem as MediaItem).uri as string,
+                          item.viewIndex) : false,
                         pageName: Constants.PHOTO_TRANSITION_TIMELINE,
                         onMenuClicked: (action: Action): void => this.onMenuClicked(action),
                         onMenuClickedForSingleItem: (action: Action, currentPhoto: MediaItem): void =>
@@ -822,8 +822,8 @@ export struct TimelinePage {
     let margin = 0;
     let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
     let newCount = Math.max(Constants.GRID_MIN_COUNT,
-      Math.round(((contentWidth - Constants.NUMBER_2 * margin)
-      + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
+      Math.round(((contentWidth - Constants.NUMBER_2 * margin) +
+      Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)));
     if (newCount != this.gridRowCount) {
       this.gridRowCount = newCount;
     }

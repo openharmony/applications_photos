@@ -24,8 +24,8 @@ const TAG: string = 'common_ThirdSelectPhotoBrowserActionBar';
 
 @Component
 export struct ThirdSelectPhotoBrowserActionBar {
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @State isMultiPick: boolean = false;
   @Consume @Watch('createActionBar') isSelected: boolean;
   onMenuClicked: Function = (): void => {};
@@ -36,7 +36,7 @@ export struct ThirdSelectPhotoBrowserActionBar {
   @Link isShowBar: boolean;
   @Provide('selectedCount') selectedCount: number = 0;
   @Link @Watch('onSelectedCountChanged') totalSelectedCount: number;
-  @Provide moreMenuList: Action[] = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
   @Provide hidePopup: boolean = false;
   private title: string | Resource = '';
   private isThird: boolean = false;
@@ -61,9 +61,9 @@ export struct ThirdSelectPhotoBrowserActionBar {
             $r('app.float.third_selected_actionbar_padding_top') : px2vp(this.statusBarHeight)
         })
     }
-    .height(this.isHorizontal ? Constants.ActionBarHeight * Constants.PHOTO_BAR_MULTIPLES_1_5
-                              : Constants.ActionBarHeight * Constants.PHOTO_BAR_MULTIPLES_1_5
-                                + px2vp(this.statusBarHeight))
+    .height(this.isHorizontal ? Constants.ActionBarHeight * Constants.PHOTO_BAR_MULTIPLES_1_5 :
+      Constants.ActionBarHeight * Constants.PHOTO_BAR_MULTIPLES_1_5 +
+      px2vp(this.statusBarHeight))
     .markAnchor({ x: Constants.PERCENT_0, y: Constants.PERCENT_0 })
     .position({ x: Constants.PERCENT_0, y: Constants.PERCENT_0 })
     .visibility(this.isShowBar ? Visibility.Visible : Visibility.Hidden)
@@ -76,7 +76,7 @@ export struct ThirdSelectPhotoBrowserActionBar {
   private createActionBar(): void {
     let actionBarProp: ActionBarProp = new ActionBarProp();
 
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     if (this.canEdit) {
       menuList.push(Action.EDIT);
     }

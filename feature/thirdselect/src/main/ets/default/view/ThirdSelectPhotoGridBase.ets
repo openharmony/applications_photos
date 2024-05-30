@@ -77,8 +77,8 @@ let localStorage = LocalStorage.getShared();
 export struct ThirdSelectPhotoGridBase {
   @State selectedCount: number = 0;
   @Provide isSelectedMode: boolean = true;
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
-  @Provide rightClickMenuList: Array<Action> = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
+  @Provide rightClickMenuList: Action[] = [];
   photoDataImpl: PhotoDataImpl | undefined =
     BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO) as PhotoDataImpl;
   smartPickerDataImpl: SmartPickerDataImpl | undefined;
@@ -90,8 +90,8 @@ export struct ThirdSelectPhotoGridBase {
   @State title: string = '';
   @State isEmpty: boolean = false;
   @StorageLink(IS_SPLIT_MODE) isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink(LEFT_BLANK) leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink(LEFT_BLANK) leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @StorageLink(IS_HORIZONTAL) isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   DEFAULT_TOAST_DURATION = 2000;
   @State gridRowCount: number = 0;
@@ -165,7 +165,7 @@ export struct ThirdSelectPhotoGridBase {
     } else if (action.actionID === Action.CANCEL.actionID) {
       this.setPickResult();
     } else if (action.actionID === Action.OK.actionID) {
-      let uriArray: Array<string> = new Array<string>();
+      let uriArray: string[] = [];
       if (this.selectManager !== null) {
         uriArray = SelectUtil.getUriArray(this.selectManager.clickedSet);
       }
@@ -508,8 +508,8 @@ export struct ThirdSelectPhotoGridBase {
     let margin = 0;
     let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
     let calCount = Math.round(
-      ((contentWidth - Constants.NUMBER_2 * margin) + Constants.GRID_GUTTER)
-        / (maxThumbWidth + Constants.GRID_GUTTER));
+      ((contentWidth - Constants.NUMBER_2 * margin) + Constants.GRID_GUTTER) /
+        (maxThumbWidth + Constants.GRID_GUTTER));
     let newCount = Math.max(Constants.GRID_MIN_COUNT, calCount);
     if (newCount != this.gridRowCount) {
       this.gridRowCount = newCount;
@@ -623,8 +623,8 @@ export struct ThirdSelectPhotoGridBase {
 
   private pickerInitDataFirstQueryFinish(): void {
     if (this.isShowSmartRecommendTabBar) {
-      this.selectParams.cameraAble
-        = this.smartRecommendTabItems[this.isAllMediaAlbum ? this.currentSmartRecommendTabIndex : 0].isCameraAble();
+      this.selectParams.cameraAble =
+        this.smartRecommendTabItems[this.isAllMediaAlbum ? this.currentSmartRecommendTabIndex : 0].isCameraAble();
     }
   }
 

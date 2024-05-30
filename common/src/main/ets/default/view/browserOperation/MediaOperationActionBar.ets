@@ -29,11 +29,11 @@ export struct MediaOperationActionBar {
   @Consume pageType: string;
   @Consume @Watch('createActionBar') loadingFinish: boolean;
   onMenuClicked: Function = (): void => {};
-  @StorageLink('isHorizontal') @Watch('createActionBar') isHorizontal: boolean
-    = ScreenManager.getInstance().isHorizontal();
+  @StorageLink('isHorizontal') @Watch('createActionBar') isHorizontal: boolean =
+    ScreenManager.getInstance().isHorizontal();
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
-  @Provide moreMenuList: Action[] = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
   @Provide hidePopup: boolean = false;
 
   aboutToAppear(): void {
@@ -54,7 +54,7 @@ export struct MediaOperationActionBar {
   }
 
   private createActionBar(): void {
-    let menuList: Array<Action> = new Array<Action>();
+    let menuList: Action[] = [];
     let actionBarProp: ActionBarProp = new ActionBarProp();
     if (this.loadingFinish) {
       menuList.push(Action.NEW);

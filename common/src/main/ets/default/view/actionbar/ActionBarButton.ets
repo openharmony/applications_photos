@@ -30,7 +30,7 @@ export struct ActionBarButton {
   colorMode: ActionBarColorMode = ActionBarColorMode.NORMAL;
   @State showPopup: boolean = false;
   @Consume moreMenuList: Action[];
-  @Consume @Watch("isNeedHidePopup") hidePopup: boolean;
+  @Consume @Watch('isNeedHidePopup') hidePopup: boolean;
   private isPadDeviceType: boolean = false;
 
   aboutToAppear(): void {

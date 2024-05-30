@@ -71,7 +71,7 @@ export struct AlbumSetPage {
   isDataFreeze: boolean = false;
   // the switch of distributed page
   @Provide isTabBarShow: boolean = false;
-  @Provide rightClickMenuList: Array<Action> = new Array<Action>();
+  @Provide rightClickMenuList: Action[] = [];
   @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
   @StorageLink('deviceType') deviceType: string | undefined = AppStorage.get<string>('deviceType');
@@ -113,8 +113,8 @@ export struct AlbumSetPage {
         .withOperationEndCallback((): void => this.onOperationEnd())
         .withAlbumSetDataSource(this.albums)
         .withBroadCast(this.broadCast);
-      menuOperation
-        = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetNewMenuOperation, menuContext);
+      menuOperation =
+        MenuOperationFactory.getInstance().createMenuOperation(AlbumSetNewMenuOperation, menuContext);
       menuOperation.doAction();
     } else if (action.actionID === Action.CANCEL.actionID) {
       this.isAlbumSetSelectedMode = false;
@@ -128,8 +128,8 @@ export struct AlbumSetPage {
         .withOperationStartCallback((): void => this.onOperationStart())
         .withOperationEndCallback((): void => this.onOperationEnd())
         .withBroadCast(this.broadCast);
-      menuOperation
-        = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetRenameMenuOperation, menuContext);
+      menuOperation =
+        MenuOperationFactory.getInstance().createMenuOperation(AlbumSetRenameMenuOperation, menuContext);
       menuOperation.doAction();
     } else if (action.actionID === Action.DELETE.actionID) {
       menuContext = new MenuContext();
@@ -139,8 +139,8 @@ export struct AlbumSetPage {
         .withOperationStartCallback((): void => this.onOperationStart())
         .withOperationEndCallback((): void => this.onOperationEnd())
         .withBroadCast(this.broadCast);
-      menuOperation
-        = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetDeleteMenuOperation, menuContext);
+      menuOperation =
+        MenuOperationFactory.getInstance().createMenuOperation(AlbumSetDeleteMenuOperation, menuContext);
       menuOperation.doAction();
     }
   }
@@ -254,7 +254,7 @@ export struct AlbumSetPage {
 
   updateRightClickMenuList() {
     if (this.isAlbumSetSelectedMode) {
-      this.rightClickMenuList = new Array<Action>();
+      this.rightClickMenuList = [];
       if (!this.isDisableRename && this.selectedAlbumsCount == 1) {
         this.rightClickMenuList.push(Action.RENAME);
       }

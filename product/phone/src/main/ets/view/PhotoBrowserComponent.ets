@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,10 +111,10 @@ export struct PhotoBrowserComponent {
   @Provide backgroundColorResource: Resource = $r('app.color.default_background_color');
   @Provide('dateTitle') photoDate: string = '';
   @Provide('timeLocationTitle') timeAndLocation: string = '';
-  @Provide menuList: Array<Action> = new Array<Action>();
-  @Provide toolMenuList: Array<Action> = new Array<Action>();
-  @Provide topMenuList: Array<Action> = new Array<Action>();
-  @Provide moreMenuList: Array<Action> = new Array<Action>();
+  @Provide menuList: Action[] = [];
+  @Provide toolMenuList: Action[] = [];
+  @Provide topMenuList: Action[] = [];
+  @Provide moreMenuList: Action[] = [];
   @Provide broadCast: BroadCast = new BroadCast();
   @Provide isShowBar: boolean = true;
   @Provide onlyChangeBgColor: boolean = false;
@@ -123,11 +123,11 @@ export struct PhotoBrowserComponent {
   @State @Watch('updateMoreMenu') currentShow: boolean = true;
   @StorageLink('isHorizontal') @Watch('updateIsHorizontal') isHorizontal: boolean = ScreenManager.getInstance()
     .isHorizontal();
-  @StorageLink('TimelinePageIndex') TimelinePageIndex: number = Constants.INVALID;
-  @StorageLink('PhotoGridPageIndex') PhotoGridPageIndex: number = Constants.INVALID;
+  @StorageLink('timelinePageIndex') timelinePageIndex: number = Constants.INVALID;
+  @StorageLink('photoGridPageIndex') photoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @StorageLink('entryFromHap') entryFromHap: number = Constants.ENTRY_FROM_NONE;
   mTransition: string = '';
   albumUri = '';
@@ -166,7 +166,7 @@ export struct PhotoBrowserComponent {
   private deviceName = '';
   private backFromCopy = false;
   private uriFromThirdPartyApp: string = '';
-  private editNewUri: string = "";
+  private editNewUri: string = '';
   private favorCacheItemsMap = new Map<String, MediaItem>()
   private breakpointSystem: BreakpointSystem = new BreakpointSystem();
   private theDeleteItem: MediaItem | null = null;
@@ -471,7 +471,7 @@ export struct PhotoBrowserComponent {
 
     Log.info(TAG, `updateMenu album[${this.albumUri}]`);
 
-    let menuTemp: Array<Action> = new Array<Action>();
+    let menuTemp: Action[] = [];
     if (this.pageFrom == Constants.ENTRY_FROM.CAMERA ||
       this.pageFrom == Constants.ENTRY_FROM.CARD ||
       (this.isFromViewDataWithMediaUri == true &&
@@ -487,7 +487,7 @@ export struct PhotoBrowserComponent {
       this.menuList = menuTemp;
     }
 
-    let list: Array<Action> = new Array<Action>();
+    let list: Action[] = [];
     if (pageFrom === Constants.ENTRY_FROM.NORMAL || pageFrom === Constants.ENTRY_FROM.CAMERA) {
       list.push(currentPhoto.isFavor ? Action.FAVORITE : Action.NOT_FAVORITE,
         ((currentPhoto.mediaType == UserFileManagerAccess.MEDIA_TYPE_IMAGE))
@@ -516,7 +516,7 @@ export struct PhotoBrowserComponent {
         this.toolMenuList = [];
       }
     }
-    let menuTempList: Array<Action>;
+    let menuTempList: Action[] = [];
     if (!this.albumInfo) {
       // 照片页
       menuTempList = [Action.ADD, Action.RENAME];
@@ -610,12 +610,12 @@ export struct PhotoBrowserComponent {
     this.dataSource.release();
     if (this.checkedTransition === Constants.PHOTO_TRANSITION_TIMELINE) {
       Log.info(TAG, 'onBackPress TimelinePage');
-      this.TimelinePageIndex = this.currentIndex; // call scrollTo
-      this.TimelinePageIndex = Constants.INVALID;
+      this.timelinePageIndex = this.currentIndex; // call scrollTo
+      this.timelinePageIndex = Constants.INVALID;
     } else if (this.checkedTransition === Constants.PHOTO_TRANSITION_ALBUM) {
       Log.info(TAG, 'onBackPress PhotoGridPage');
-      this.PhotoGridPageIndex = this.currentIndex; // call scrollTo
-      this.PhotoGridPageIndex = Constants.INVALID;
+      this.photoGridPageIndex = this.currentIndex; // call scrollTo
+      this.photoGridPageIndex = Constants.INVALID;
 
       if (this.isFromFACard) {
         if (this.isPullDown) {
@@ -726,7 +726,7 @@ export struct PhotoBrowserComponent {
       return albumUri;
     }
 
-    return "";
+    return '';
   }
 
   aboutToAppear(): void {
@@ -766,7 +766,7 @@ export struct PhotoBrowserComponent {
         this.dataSource.initData();
         this.isFromCamera = true;
         this.clickThumbnailTime = param.clickThumbnailTime ? param.clickThumbnailTime : 0;
-        this.albumUri = "";
+        this.albumUri = '';
         this.jumpSourceToMain = JumpSourceToMain.CAMERA;
         MediaObserver.getInstance().registerObserver(this.dataObserver);
         AppStorage.setOrCreate('entryFromHap', Constants.ENTRY_FROM_NONE);
@@ -786,12 +786,12 @@ export struct PhotoBrowserComponent {
         this.geometryTransitionEnable = true;
       } else if (this.pageFrom == Constants.ENTRY_FROM.RECYCLE) {
         this.dataSource.setAlbumUri(this.albumUri);
-        this.dataSource.setAlbumDataSource(
-            AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+        this.dataSource.setAlbumDataSource
+        (AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       } else if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
         this.dataSource.setDeviceId(param.albumInfo.deviceId);
         this.dataSource.setAlbumDataSource(
-          AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
+            AppStorage.get<MediaDataSource>(Constants.APP_KEY_PHOTO_BROWSER) as MediaDataSource);
       } else if (this.pageFrom == Constants.ENTRY_FROM.VIEW_DATA) {
         if (String(param.viewData).length === 0) {
           Log.error(TAG, 'Invalid uri');
@@ -1116,13 +1116,13 @@ export struct PhotoBrowserComponent {
           this.uriFromThirdPartyApp = '';
           this.dataSource.enableGetData(true);
           this.setViewDataResult(false);
-        } else if (this.albumUri === "") {
+        } else if (this.albumUri === '') {
           this.resetAlbum(UserFileManagerAccess.getInstance()
             .getSystemAlbumUri(UserFileManagerAccess.TRASH_ALBUM_SUB_TYPE));
           this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
             (index: number): void => this.onGetItemIndexByUri(index));
         } else {
-          this.resetAlbum("");
+          this.resetAlbum('');
           this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
             (index: number): void => this.onGetItemIndexByUri(index));
         }
@@ -1138,19 +1138,19 @@ export struct PhotoBrowserComponent {
         Log.info(TAG, `data reloaded move to ${index}`);
         this.currentIndex = index;
         if (this.checkedTransition == Constants.PHOTO_TRANSITION_TIMELINE) {
-          this.TimelinePageIndex = this.currentIndex; // call scrollTo
-          this.TimelinePageIndex = Constants.INVALID;
+          this.timelinePageIndex = this.currentIndex; // call scrollTo
+          this.timelinePageIndex = Constants.INVALID;
         } else if (this.checkedTransition == Constants.PHOTO_TRANSITION_ALBUM) {
-          this.PhotoGridPageIndex = this.currentIndex; // call scrollTo
-          this.PhotoGridPageIndex = Constants.INVALID;
+          this.photoGridPageIndex = this.currentIndex; // call scrollTo
+          this.photoGridPageIndex = Constants.INVALID;
         }
         this.dataSource.enableGetData(true);
         this.dataSource.getData(this.currentIndex);
         this.dataSource.onDataReloaded();
-        this.editNewUri = "";
+        this.editNewUri = '';
       } else {
         Log.error(TAG, `edit new uri ${this.editNewUri} is invalid`);
-        this.editNewUri = "";
+        this.editNewUri = '';
         this.currentIndex = 0;
         this.dataSource.enableGetData(true);
       }
@@ -1361,12 +1361,12 @@ export struct PhotoBrowserComponent {
     }
     interface Msg {
       clickThumbnailTime: number;
-      ShowSinglePhoto: number;
-      FileName?: string;
+      showSinglePhoto: number;
+      fileName?: string;
     }
     let msg: Msg = {
       clickThumbnailTime: this.clickThumbnailTime,
-      ShowSinglePhoto: Date.now()
+      showSinglePhoto: Date.now()
     }
     let fileName = ReportToBigDataUtil.getFileNameOfPhotoTakenByCamera(this.getPhotoByIndex(0));
     ReportToBigDataUtil.setFileNameProperty(msg, fileName);
