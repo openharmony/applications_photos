@@ -68,8 +68,8 @@ export struct NewAlbumPage {
   @State isClickScrollBar: boolean = false;
   @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   title: string = '';
   @StorageLink('placeholderIndex') @Watch('onPlaceholderChanged') placeholderIndex: number = -1;
   @State pageStatus: boolean = false;
@@ -467,8 +467,8 @@ export struct NewAlbumPage {
     let contentWidth = ScreenManager.getInstance().getWinWidth();
     let margin = 0;
     let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
-    this.gridRowCount = Math.max(Math.round(((contentWidth - Constants.NUMBER_2 * margin)
-      + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)),
+    this.gridRowCount = Math.max(Math.round(((contentWidth - Constants.NUMBER_2 * margin) +
+    Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER)),
       Constants.DEFAULT_ALBUM_GRID_COLUMN_MIN_COUNT);
     Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);
   }

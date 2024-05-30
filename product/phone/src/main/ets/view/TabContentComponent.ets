@@ -37,8 +37,8 @@ export struct TabContentComponent {
 
   onShowStatusChanged() {
     this.pageStatus = this.isShow /*&& this.isInCurrentTab();*/
-    Log.error(TAG, 'this.pageStatus = ' + this.pageStatus
-    + ', this.isShow = ' + this.isShow + ', this.isInCurrentTab() = ' + this.isInCurrentTab()
+    Log.error(TAG, 'this.pageStatus = ' + this.pageStatus +
+      ', this.isShow = ' + this.isShow + ', this.isInCurrentTab() = ' + this.isInCurrentTab()
     );
   }
 

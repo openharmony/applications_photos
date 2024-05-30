@@ -86,8 +86,8 @@ export struct PhotoGridView {
   @Provide rightClickMenuList: Array<Action> = new Array<Action>();
   @StorageLink('PhotoGridPageIndex') @Watch('onIndexChange') PhotoGridPageIndex: number = Constants.INVALID;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @Prop @Watch('onPageChanged') pageStatus: boolean = false;
   @State gridItemWidth: number = 0;
   @StorageLink('photoGridActionBarOpacity') photoGridActionBarOpacity: number = 0;
@@ -1074,8 +1074,8 @@ export struct PhotoGridView {
     // 原型机竖屏为4不变，横屏需计算: currentBreakpoint == 'lg' 表示横屏
     const currentBreakpoint: string = AppStorage.get<string>('currentBreakpoint') as string;
     this.gridRowCount = currentBreakpoint == Constants.BREAKPOINT_LG ?
-    Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin)
-      + Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER))) : Constants.GRID_MIN_COUNT;
+    Math.max(Constants.GRID_MIN_COUNT, Math.ceil(((contentWidth - Constants.NUMBER_2 * margin) +
+    Constants.GRID_GUTTER) / (maxThumbWidth + Constants.GRID_GUTTER))) : Constants.GRID_MIN_COUNT;
     this.gridItemWidth = (contentWidth - (this.gridRowCount - 1) * Constants.GRID_GUTTER -
       Constants.NUMBER_2 * margin) / this.gridRowCount;
     Log.info(TAG, `initGridRowCount contentWidth: ${contentWidth}`);

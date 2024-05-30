@@ -39,8 +39,8 @@ export struct PhotoGridPage {
   @Provide isSelectedMode: boolean = false;
   @Provide isShow: boolean = true;
   @State isRunningAnimation: boolean = false;
-  @StorageLink(LEFT_BLANK) leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink(LEFT_BLANK) leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @State @Watch('updateAnimationStatus') browserController: BrowserController = new BrowserController(true);
   private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
 

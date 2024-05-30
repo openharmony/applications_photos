@@ -113,8 +113,8 @@ export struct AlbumSetPage {
         .withOperationEndCallback((): void => this.onOperationEnd())
         .withAlbumSetDataSource(this.albums)
         .withBroadCast(this.broadCast);
-      menuOperation
-        = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetNewMenuOperation, menuContext);
+      menuOperation =
+        MenuOperationFactory.getInstance().createMenuOperation(AlbumSetNewMenuOperation, menuContext);
       menuOperation.doAction();
     } else if (action.actionID === Action.CANCEL.actionID) {
       this.isAlbumSetSelectedMode = false;
@@ -128,8 +128,8 @@ export struct AlbumSetPage {
         .withOperationStartCallback((): void => this.onOperationStart())
         .withOperationEndCallback((): void => this.onOperationEnd())
         .withBroadCast(this.broadCast);
-      menuOperation
-        = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetRenameMenuOperation, menuContext);
+      menuOperation =
+        MenuOperationFactory.getInstance().createMenuOperation(AlbumSetRenameMenuOperation, menuContext);
       menuOperation.doAction();
     } else if (action.actionID === Action.DELETE.actionID) {
       menuContext = new MenuContext();
@@ -139,8 +139,8 @@ export struct AlbumSetPage {
         .withOperationStartCallback((): void => this.onOperationStart())
         .withOperationEndCallback((): void => this.onOperationEnd())
         .withBroadCast(this.broadCast);
-      menuOperation
-        = MenuOperationFactory.getInstance().createMenuOperation(AlbumSetDeleteMenuOperation, menuContext);
+      menuOperation =
+        MenuOperationFactory.getInstance().createMenuOperation(AlbumSetDeleteMenuOperation, menuContext);
       menuOperation.doAction();
     }
   }

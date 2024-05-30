@@ -90,8 +90,8 @@ export struct ThirdSelectPhotoGridBase {
   @State title: string = '';
   @State isEmpty: boolean = false;
   @StorageLink(IS_SPLIT_MODE) isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink(LEFT_BLANK) leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink(LEFT_BLANK) leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   @StorageLink(IS_HORIZONTAL) isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
   DEFAULT_TOAST_DURATION = 2000;
   @State gridRowCount: number = 0;
@@ -508,8 +508,8 @@ export struct ThirdSelectPhotoGridBase {
     let margin = 0;
     let maxThumbWidth = px2vp(Constants.GRID_IMAGE_SIZE) * Constants.GRID_MAX_SIZE_RATIO;
     let calCount = Math.round(
-      ((contentWidth - Constants.NUMBER_2 * margin) + Constants.GRID_GUTTER)
-        / (maxThumbWidth + Constants.GRID_GUTTER));
+      ((contentWidth - Constants.NUMBER_2 * margin) + Constants.GRID_GUTTER) /
+        (maxThumbWidth + Constants.GRID_GUTTER));
     let newCount = Math.max(Constants.GRID_MIN_COUNT, calCount);
     if (newCount != this.gridRowCount) {
       this.gridRowCount = newCount;
@@ -623,8 +623,8 @@ export struct ThirdSelectPhotoGridBase {
 
   private pickerInitDataFirstQueryFinish(): void {
     if (this.isShowSmartRecommendTabBar) {
-      this.selectParams.cameraAble
-        = this.smartRecommendTabItems[this.isAllMediaAlbum ? this.currentSmartRecommendTabIndex : 0].isCameraAble();
+      this.selectParams.cameraAble =
+        this.smartRecommendTabItems[this.isAllMediaAlbum ? this.currentSmartRecommendTabIndex : 0].isCameraAble();
     }
   }
 

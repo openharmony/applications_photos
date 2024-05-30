@@ -35,12 +35,12 @@ export struct PhotoBrowserActionBar {
   @State isVisibility: boolean = true;
   @State currentBackgroundColor: Resource = ActionBarProp.NORMAL_BACKGROUND_COLOR;
   @StorageLink('isSplitMode') isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
-  @StorageLink('leftBlank') leftBlank: number[]
-    = [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] =
+    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
   onMenuClicked: Function = (): void => {};
   isVideoPage: boolean = false;
-  @StorageLink('isHorizontal') isHorizontal: boolean
-    = ScreenManager.getInstance().isHorizontal();
+  @StorageLink('isHorizontal') isHorizontal: boolean =
+    ScreenManager.getInstance().isHorizontal();
   @State actionBarProp: ActionBarProp = new ActionBarProp();
   @Consume @Watch('updateActionBarProp') menuList: Action[];
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;

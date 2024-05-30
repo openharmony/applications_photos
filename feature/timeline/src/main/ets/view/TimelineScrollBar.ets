@@ -54,8 +54,8 @@ export struct TimelineScrollBar {
       if (this.isClickScrollBar) {
         Column() {
           ForEach(this.yearData, (year: TimelineData, index?: number) => {
-            if (this.nodeGap(year.count) > 0 || this.yearData.indexOf(year) == 0
-            || this.yearData.indexOf(year) == this.yearData.length - 1) {
+            if (this.nodeGap(year.count) > 0 || this.yearData.indexOf(year) == 0 ||
+              this.yearData.indexOf(year) == this.yearData.length - 1) {
               Row() {
                 Text(DateUtil.getLocalizedYear(year.startDate))
                   .fontSize($r('sys.float.ohos_id_text_size_body3'))
