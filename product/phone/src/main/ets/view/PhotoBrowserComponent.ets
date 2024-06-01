@@ -1377,14 +1377,14 @@ export struct PhotoBrowserComponent {
   private async syncPhotoName(currentPhoto: MediaItem): Promise<TitleName> {
     Log.debug(TAG, 'syncPhotoName start');
     let renameResult: TitleName = {title: '', displayName: ''};
-    let fileAsset = await this.dataSource?.getDataByUri(currentPhoto.uri);
+    let fileAsset = await this.dataSource?.getDataByUri(currentPhoto?.uri);
     if (fileAsset) {
       renameResult = {
         title: fileAsset.get(UserFileManagerAccess.FILE_KEY_TITLE.toString()) as string,
         displayName: fileAsset.displayName
       };
     } else {
-      let key: string = 'renameResult' + currentPhoto.uri;
+      let key: string = 'renameResult' + currentPhoto?.uri;
       renameResult = AppStorage.get<TitleName>(key) as TitleName;
       AppStorage.delete(key);
     }
