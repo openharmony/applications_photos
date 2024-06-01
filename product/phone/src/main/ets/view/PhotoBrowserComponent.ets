@@ -438,11 +438,11 @@ export struct PhotoBrowserComponent {
     if (currentPhoto == undefined || this.isFromViewDataWithThirdUri) {
       return;
     }
-    this.photoDate = DateUtil.getLocalizedDate(currentPhoto.getDataTaken());
+    this.photoDate = DateUtil.getLocalizedDate(currentPhoto?.getDataTaken());
     if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
-      this.timeAndLocation = `${this.deviceName}/${DateUtil.getLocalizedTime(currentPhoto.getDataTaken())}`;
+      this.timeAndLocation = `${this.deviceName}/${DateUtil.getLocalizedTime(currentPhoto?.getDataTaken())}`;
     } else {
-      this.timeAndLocation = DateUtil.getLocalizedTime(currentPhoto.getDataTaken());
+      this.timeAndLocation = DateUtil.getLocalizedTime(currentPhoto?.getDataTaken());
     }
     this.updateMenu(index);
   }
@@ -561,11 +561,11 @@ export struct PhotoBrowserComponent {
   }
 
   getCurrentPhoto(): MediaItem {
-    return this.dataSource.getRawData(this.currentIndex).data;
+    return this.dataSource?.getRawData(this.currentIndex).data;
   }
 
   getPhotoByIndex(index: number): MediaItem {
-    return this.dataSource.getRawData(index).data;
+    return this.dataSource?.getRawData(index).data;
   }
 
   async onMoveEnd(err: Object, count: number, total: number): Promise<void> {

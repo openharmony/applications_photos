@@ -22,7 +22,7 @@ import { PhotoEditorManager } from '../PhotoEditorManager';
 
 const TAG: string = 'editor_ToolBar';
 
-const ComPonentKeyEditCrop: string = 'EditToolBarCrop';
+const comPonentKeyEditCrop: string = 'EditToolBarCrop';
 
 @Component
 export struct ToolBar {
@@ -48,7 +48,7 @@ export struct ToolBar {
       actionID: undefined,
       text: $r('app.string.crop_text'),
       isActive: true,
-      componentKey: ComPonentKeyEditCrop
+      componentKey: comPonentKeyEditCrop
     })
   ];
   /**
