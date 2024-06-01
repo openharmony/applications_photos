@@ -81,7 +81,7 @@ export class ScreenManager {
 
   static getInstance(): ScreenManager {
     if (AppStorage.get(Constants.APP_KEY_SCREEN_MANAGER) == null) {
-      AppStorage.SetOrCreate(Constants.APP_KEY_SCREEN_MANAGER, new ScreenManager());
+      AppStorage.setOrCreate(Constants.APP_KEY_SCREEN_MANAGER, new ScreenManager());
     }
     let manager: ScreenManager = AppStorage.get(Constants.APP_KEY_SCREEN_MANAGER);
     return manager;
@@ -98,7 +98,7 @@ export class ScreenManager {
     // Area data obtained through the system interface,
     // There is a possibility that the area data is incorrect.
     const statusBarHeight: number = size ? size.top : this.statusBarHeight;
-    AppStorage.SetOrCreate<number>('statusBarHeight', statusBarHeight);
+    AppStorage.setOrCreate<number>('statusBarHeight', statusBarHeight);
     return new Promise<void>((resolve, reject) => {
       if (!size) {
         reject();
@@ -283,7 +283,11 @@ export class ScreenManager {
     if (this.isUIExtensionEnv()) {
       return;
     }
-    this.getMainWindow()?.setWindowBackgroundColor(defaultColor ? '#F1F3F5' : '#000000');
+    try {
+      this.getMainWindow()?.setWindowBackgroundColor(defaultColor ? '#F1F3F5' : '#000000');
+    } catch (error) {
+      Log.error(TAG, 'setWindowBackgroundColorDefault: failed, error info is ' + error + ', code: ' + error?.code);
+    }
   }
 
   setSplitScreen(): void {
@@ -351,7 +355,7 @@ export class ScreenManager {
     Log.debug(TAG, `setSystemUi start, isShowBar=${isShowBar}, deviceType=${deviceTp}`);
     let topWindow: window.Window = this.getMainWindow();
     Log.debug(TAG, 'getTopWindow start');
-    let names: Array<SystemBarKeys> = new Array<SystemBarKeys>('status', 'navigation');
+    let names: Array<SystemBarKeys> = new Array<SystemBarKeys>('navigation');
     if (deviceTp === Constants.PC_DEVICE_TYPE || deviceTp === Constants.PAD_DEVICE_TYPE) {
       names = new Array<SystemBarKeys>('navigation');
     }
@@ -376,14 +380,14 @@ export class ScreenManager {
 
   isHorizontal(): boolean {
     if (AppStorage.get(Constants.SCREEN_ORIENTATION_HORIZONTAL) == null) {
-      AppStorage.SetOrCreate(Constants.SCREEN_ORIENTATION_HORIZONTAL, this.horizontal);
+      AppStorage.setOrCreate(Constants.SCREEN_ORIENTATION_HORIZONTAL, this.horizontal);
     }
     return AppStorage.get(Constants.SCREEN_ORIENTATION_HORIZONTAL);
   }
 
   isSidebar(): boolean {
     if (AppStorage.get(Constants.SCREEN_SIDEBAR) == null) {
-      AppStorage.SetOrCreate(Constants.SCREEN_SIDEBAR, this.sidebar);
+      AppStorage.setOrCreate(Constants.SCREEN_SIDEBAR, this.sidebar);
     }
     return AppStorage.get(Constants.SCREEN_SIDEBAR);
   }
@@ -405,7 +409,7 @@ export class ScreenManager {
       return;
     }
     this.horizontal = isH;
-    AppStorage.SetOrCreate(Constants.SCREEN_ORIENTATION_HORIZONTAL, this.horizontal);
+    AppStorage.setOrCreate(Constants.SCREEN_ORIENTATION_HORIZONTAL, this.horizontal);
   }
 
   private getMainWindow(): window.Window {
@@ -434,7 +438,7 @@ export class ScreenManager {
     };
     // Area data obtained through the system interface,
     // There is a possibility that the area data is incorrect.
-    AppStorage.SetOrCreate<number>('statusBarHeight', area.topRect.height);
+    AppStorage.setOrCreate<number>('statusBarHeight', area.topRect.height);
     this.statusBarHeight = px2vp(area.topRect.height);
     this.naviBarHeight = px2vp(area.bottomRect.height);
     this.leftBlank = [this.leftBlank[0], this.leftBlank[1], this.leftBlank[2], px2vp(area.bottomRect.height)];
