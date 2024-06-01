@@ -600,7 +600,7 @@ export struct PhotoBrowserComponent {
     Log.info(TAG, 'onBackPress');
     this.appBroadCast.emit('hideBar', []);
     let currentPhoto = this.getPhotoByIndex(this.currentIndex);
-    this.broadCast.emit(BrowserConstants.RESET_DEFAULT_SCALE + currentPhoto.uri, []);
+    this.broadCast.emit(BrowserConstants.RESET_DEFAULT_SCALE + currentPhoto?.uri, []);
     this.controller?.finishAnimation((): void => this.onBackPressInner());
     return true;
   }
@@ -668,7 +668,7 @@ export struct PhotoBrowserComponent {
 
   updatePhotoName(result: TitleName): void {
     let currentPhoto = this.getCurrentPhoto();
-    currentPhoto.setTitle(result.title);
+    currentPhoto?.setTitle(result.title);
     currentPhoto.displayName = result.displayName;
     this.appBroadCast.emit(BroadCastConstants.UPDATE_DATA_SOURCE, [currentPhoto]);
   }
@@ -1168,7 +1168,7 @@ export struct PhotoBrowserComponent {
       this.syncPhotoName(currentPhoto).then((result) => {
         if (result) {
           this.updatePhotoName(result);
-          this.broadCast.emit(PhotoConstants.UPDATE_PHOTO_NAME + currentPhoto.uri, [result.title]);
+          this.broadCast.emit(PhotoConstants.UPDATE_PHOTO_NAME + currentPhoto?.uri, [result.title]);
         }
       });
     }
@@ -1377,14 +1377,14 @@ export struct PhotoBrowserComponent {
   private async syncPhotoName(currentPhoto: MediaItem): Promise<TitleName> {
     Log.debug(TAG, 'syncPhotoName start');
     let renameResult: TitleName = {title: '', displayName: ''};
-    let fileAsset = await this.dataSource.getDataByUri(currentPhoto.uri);
+    let fileAsset = await this.dataSource?.getDataByUri(currentPhoto?.uri);
     if (fileAsset) {
       renameResult = {
         title: fileAsset.get(UserFileManagerAccess.FILE_KEY_TITLE.toString()) as string,
         displayName: fileAsset.displayName
       };
     } else {
-      let key: string = 'renameResult' + currentPhoto.uri;
+      let key: string = 'renameResult' + currentPhoto?.uri;
       renameResult = AppStorage.get<TitleName>(key) as TitleName;
       AppStorage.delete(key);
     }
