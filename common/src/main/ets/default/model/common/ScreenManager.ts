@@ -283,7 +283,11 @@ export class ScreenManager {
     if (this.isUIExtensionEnv()) {
       return;
     }
-    this.getMainWindow()?.setWindowBackgroundColor(defaultColor ? '#F1F3F5' : '#000000');
+    try {
+      this.getMainWindow()?.setWindowBackgroundColor(defaultColor ? '#F1F3F5' : '#000000');
+    } catch (error) {
+      Log.error(TAG, 'setWindowBackgroundColorDefault: failed, error info is ' + error + ', code: ' + error?.code);
+    }
   }
 
   setSplitScreen(): void {
