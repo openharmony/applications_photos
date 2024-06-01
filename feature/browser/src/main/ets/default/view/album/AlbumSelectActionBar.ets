@@ -36,7 +36,7 @@ export struct AlbumSelectActionBar {
   @Provide selectedCount: number = 0;
   onMenuClicked: Function = (): void => {};
   @Link @Watch('updateMenu') menuList: Action[];
-  @Provide moreMenuList: Action[] = new Array<Action>();
+  @Provide moreMenuList: Action[] = [];
   @Provide hidePopup: boolean = false;
 
   aboutToAppear(): void {
