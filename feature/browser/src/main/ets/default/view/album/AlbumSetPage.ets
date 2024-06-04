@@ -163,6 +163,7 @@ export struct AlbumSetPage {
   aboutToAppear(): void {
     TraceControllerUtils.startTrace('AlbumSetPageAboutToAppear');
     Log.info(TAG, `AlbumSetPageAboutToAppear`);
+    this.isEmpty = (this.albums.totalCount() == 0);
     this.appBroadCast.on(BroadCastConstants.ON_TAB_CHANGED, this.onTabChangedFunc);
     this.appBroadCast.on(BroadCastConstants.RESET_STATE_EVENT, this.onStateResetFunc);
     this.appBroadCast.on(BroadCastConstants.SEND_COPY_OR_MOVE_BROADCAST, this.onSendMoveCopyBroadCastFunc);
@@ -309,8 +310,10 @@ export struct AlbumSetPage {
       } else {
         this.onLocalAlbumSetInActive();
       }
-
       this.showNotify();
+      if (this.albums.totalCount() == 0) {
+        this.albums.loadData();
+      }
     }
   }
 
