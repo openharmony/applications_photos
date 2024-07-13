@@ -463,7 +463,6 @@ export struct AlbumGridItemNewStyle {
       }
       this.albumOnClick();
     })
-    .bindContextMenu(this.RightClickMenuBuilder, this.showRightClickPopup() ? ResponseType.RightClick : -1)
     .onKeyEvent((event?: KeyEvent) => {
       if (event != null && KeyType.Up == event.type) {
         switch (event.keyCode) {

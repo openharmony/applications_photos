@@ -410,7 +410,6 @@ export struct ImageGridItemComponent {
     .key('Gesture_' + this.mPosition)
     .height('100%')
     .width('100%')
-    .bindContextMenu(this.RightClickMenuBuilder, ResponseType.RightClick) // 右键点击菜单，后续整改至新组件
     .scale({
       x: this.pressAnimScale,
       y: this.pressAnimScale
