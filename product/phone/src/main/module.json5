@@ -143,13 +143,6 @@
         "type": "sysDialog/common",
         "exported": true,
         "srcEntry": "./ets/DeleteAbility/DeleteUIExtensionAbility.ets"
-      },
-      {
-        "name": "SaveUIExtensionAbility",
-        "description": "SaveUIExtensionAbility",
-        "type": "sysDialog/common",
-        "exported": true,
-        "srcEntry": "./ets/SaveAbility/SaveUIExtensionAbility.ets"
       }
     ]
   },
