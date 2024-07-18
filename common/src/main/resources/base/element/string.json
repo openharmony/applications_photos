@@ -217,6 +217,14 @@
             "value":"Cancel"
         },
         {
+            "name":"dialog_ban",
+            "value":"Ban"
+        },
+        {
+            "name":"dialog_allow",
+            "value":"Allow"
+        },
+        {
             "name":"remove_picture_tips",
             "value":"Remove this photo?"
         },
@@ -727,6 +735,18 @@
         {
             "name": "third_delete_dialog_message",
             "value": "Whether allow %s to delete %d files？"
+        },
+        {
+            "name": "third_save_dialog_picture",
+            "value": "Whether allow \"%s\" to save %d photos?"
+        },
+        {
+            "name": "third_save_dialog_video",
+            "value": "Whether allow \"%s\" to save %d videos?"
+        },
+        {
+            "name": "third_save_dialog_picture_and_video",
+            "value": "Whether allow \"%s\" to save %d files?"
         }
     ]
 }

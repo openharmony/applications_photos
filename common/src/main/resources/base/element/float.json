@@ -1331,6 +1331,38 @@
     {
       "name": "third_selected_actionbar_padding_top",
       "value": "8vp"
+    },
+    {
+      "name": "offset_6",
+      "value": "6vp"
+    },
+    {
+      "name": "padding_8",
+      "value": "8vp"
+    },
+    {
+      "name": "padding_16",
+      "value": "16vp"
+    },
+    {
+      "name": "padding_24",
+      "value": "24vp"
+    },
+    {
+      "name": "margin_8",
+      "value": "8vp"
+    },
+    {
+      "name": "radius_12",
+      "value": "12vp"
+    },
+    {
+      "name": "radius_24",
+      "value": "24vp"
+    },
+    {
+      "name": "save_image_border",
+      "value": "0.8vp"
     }
   ]
 }
