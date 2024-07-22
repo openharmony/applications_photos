@@ -217,6 +217,14 @@
             "value":"取消"
         },
         {
+            "name":"dialog_ban",
+            "value":"禁止"
+        },
+        {
+            "name":"dialog_allow",
+            "value":"允许"
+        },
+        {
             "name":"remove_picture_tips",
             "value":"是否移除此图片？"
         },
@@ -727,6 +735,18 @@
         {
             "name": "third_delete_dialog_message",
             "value": "是否允许 %s 删除 %d 个文件？"
+        },
+        {
+            "name": "third_save_dialog_picture",
+            "value": "是否允许“%s”保存 %d 张图片？"
+        },
+        {
+            "name": "third_save_dialog_video",
+            "value": "是否允许“%s”保存 %d 个视频？"
+        },
+        {
+            "name": "third_save_dialog_picture_and_video",
+            "value": "是否允许“%s”保存 %d 个文件？"
         }
     ]
 }
