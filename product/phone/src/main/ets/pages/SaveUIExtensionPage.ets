@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
+import fs from '@ohos.file.fs';
+import image from '@ohos.multimedia.image';
 import ability from '@ohos.ability.ability';
 import { Constants, Log } from '@ohos/common';
 import common from '@ohos.app.ability.common';
@@ -20,11 +22,6 @@ import photoAccessHelper from '@ohos.file.photoAccessHelper';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 
 const TAG: string = 'SaveUIExtension';
-const FOREGROUND_PHOTO_WIDTH: number = 576;
-const BACKGROUND_PHOTO_WIDTH: number = 512;
-const FOREGROUND_PHOTO_HEIGHT: number = 344;
-const BACKGROUND_PHOTO_HEIGHT: number = 360;
-
 let storage = LocalStorage.getShared();
 
 @Entry(storage)
@@ -40,6 +37,7 @@ export struct SaveUIExtensionPage {
   private wantParam: Record<string, Object> = storage.get('wantParam') as Record<string, Object>;
   private session: UIExtensionContentSession =
     storage.get<UIExtensionContentSession>('session') as UIExtensionContentSession;
+  @State private imageMaps: (string | image.PixelMap)[] = ['', ''];
 
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
@@ -102,8 +100,8 @@ export struct SaveUIExtensionPage {
 
       Stack({ alignContent: Alignment.Bottom }) {
         if (this.uris.length > 1) {
-          Image(this.getThumbnail(false))
-            .objectFit(ImageFit.Fill)
+          Image(this.imageMaps[1])
+            .objectFit(ImageFit.Cover)
             .border({
               radius: $r('app.float.radius_24'),
               color: $r('sys.color.ohos_id_color_click_effect'),
@@ -115,8 +113,8 @@ export struct SaveUIExtensionPage {
             .opacity(0.4)
         }
 
-        Image(this.getThumbnail(true))
-          .objectFit(ImageFit.Fill)
+        Image(this.imageMaps[0])
+          .objectFit(ImageFit.Cover)
           .border({
             radius: $r('app.float.radius_24'),
             color: $r('sys.color.ohos_id_color_click_effect'),
@@ -147,7 +145,7 @@ export struct SaveUIExtensionPage {
   }
 
   aboutToAppear() {
-    this.uris = this.wantParam?.srcFileUris as string[];
+    this.uris = this.wantParam?.['ability.params.stream'] as string[];
     this.bundleName = this.wantParam?.bundleName as string;
     this.appName = this.wantParam?.appName as string;
     this.appId = this.wantParam?.appId as string;
@@ -155,6 +153,8 @@ export struct SaveUIExtensionPage {
     let extensionArray = this.wantParam?.extensionArray as string[];
     let photoTypeArray = this.wantParam?.photoTypeArray as photoAccessHelper.PhotoType[];
     let photoSubtypeArray = this.wantParam?.photoSubTypeArray as photoAccessHelper.PhotoSubtype[];
+    this.getImageMaps(0);
+    this.getImageMaps(1);
     try {
       let imageArray = photoTypeArray.filter(type => type === photoAccessHelper.PhotoType.IMAGE);
       if (imageArray.length === photoTypeArray.length) {
@@ -214,16 +214,25 @@ export struct SaveUIExtensionPage {
     }
   }
 
-  private getThumbnail(isForeground: boolean): string {
-    if (this.uris.length == 0) {
-      return '';
+  private async getImageMaps(index: number) {
+    if (!this.uris) {
+      return;
     }
-    if (this.uris.length == 1) {
-      return `${this.uris[0]}?oper=thumbnail&width=${FOREGROUND_PHOTO_WIDTH}&height=${BACKGROUND_PHOTO_HEIGHT}`;
-    } else if (isForeground) {
-      return `${this.uris[0]}?oper=thumbnail&width=${FOREGROUND_PHOTO_WIDTH}&height=${FOREGROUND_PHOTO_HEIGHT}`;
-    } else {
-      return `${this.uris[1]}?oper=thumbnail&width=${BACKGROUND_PHOTO_WIDTH}&height=${BACKGROUND_PHOTO_HEIGHT}`;
+    if (index > this.uris.length - 1) {
+      return;
+    }
+    let uri: string = this.uris[index];
+    let imgFile: fs.File | undefined;
+    let imageSource: image.ImageSource | undefined;
+    try {
+      imgFile = fs.openSync(uri);
+      imageSource = image.createImageSource(imgFile.fd);
+      this.imageMaps[index] = imageSource.createPixelMapSync();
+    } catch (err) {
+      Log.error(TAG, `get PixelMap failed with error: ${err.code}, ${err.message}.`);
+    } finally {
+      imageSource?.release();
+      fs.closeSync(imgFile?.fd);
     }
   }
 }
