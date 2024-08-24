@@ -567,7 +567,6 @@ export struct TimelinePage {
     Log.info(TAG, `onDeleteStart`);
     this.deleteMode = true;
     this.isDataFreeze = true;
-    this.onModeChange();
     if (this.dataSource != null) {
       this.dataSource.unregisterTimelineObserver();
       this.dataSource.freeze();
@@ -577,6 +576,7 @@ export struct TimelinePage {
   onDeleteEnd(): void {
     Log.info(TAG, `onDeleteEnd`);
     this.isDataFreeze = false;
+    this.onModeChange();
     if (this.dataSource != null) {
       this.dataSource.registerTimelineObserver();
       this.dataSource.onChange('image');
