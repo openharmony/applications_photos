@@ -15,6 +15,7 @@
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import fs from '@ohos.file.fs';
 import image from '@ohos.multimedia.image';
+import media from '@ohos.multimedia.media';
 import ability from '@ohos.ability.ability';
 import { Constants, Log } from '@ohos/common';
 import common from '@ohos.app.ability.common';
@@ -32,6 +33,7 @@ export struct SaveUIExtensionPage {
   private bundleName: string = '';
   private appName: string = '';
   private appId: string = '';
+  private photoTypeArray: photoAccessHelper.PhotoType[] = [];
   private srcFileUris: Array<photoAccessHelper.PhotoCreationConfig> = [];
   private title: string = 'app.string.third_save_dialog_picture_and_video';
   private wantParam: Record<string, Object> = storage.get('wantParam') as Record<string, Object>;
@@ -153,6 +155,7 @@ export struct SaveUIExtensionPage {
     let extensionArray = this.wantParam?.extensionArray as string[];
     let photoTypeArray = this.wantParam?.photoTypeArray as photoAccessHelper.PhotoType[];
     let photoSubtypeArray = this.wantParam?.photoSubTypeArray as photoAccessHelper.PhotoSubtype[];
+    this.photoTypeArray = photoTypeArray;
     this.getImageMaps(0);
     this.getImageMaps(1);
     try {
@@ -222,17 +225,31 @@ export struct SaveUIExtensionPage {
       return;
     }
     let uri: string = this.uris[index];
+    let type: photoAccessHelper.PhotoType = this.photoTypeArray[index];
     let imgFile: fs.File | undefined;
     let imageSource: image.ImageSource | undefined;
+    let avImageGenerator: media.AVImageGenerator | undefined;
     try {
-      imgFile = fs.openSync(uri);
-      imageSource = image.createImageSource(imgFile.fd);
-      this.imageMaps[index] = imageSource.createPixelMapSync();
+      if (type === photoAccessHelper.PhotoType.IMAGE) {
+        imgFile = fs.openSync(uri);
+        imageSource = image.createImageSource(imgFile.fd);
+        this.imageMaps[index] = imageSource.createPixelMapSync();
+      } else {
+        avImageGenerator = await media.createAVImageGenerator();
+        avImageGenerator.fdSrc = fs.openSync(uri);
+        this.imageMaps[index] =
+          await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_CLOSEST_SYNC, {});
+      }
     } catch (err) {
       Log.error(TAG, `get PixelMap failed with error: ${err.code}, ${err.message}.`);
     } finally {
-      imageSource?.release();
-      fs.closeSync(imgFile?.fd);
+      if (type === photoAccessHelper.PhotoType.IMAGE) {
+        imageSource?.release();
+        fs.closeSync(imgFile?.fd);
+      } else {
+        fs.closeSync(avImageGenerator?.fdSrc?.fd);
+        avImageGenerator?.release();
+      }
     }
   }
 }
