@@ -102,17 +102,19 @@ export struct SaveUIExtensionPage {
 
       Stack({ alignContent: Alignment.Bottom }) {
         if (this.uris.length > 1) {
-          Image(this.imageMaps[1])
-            .objectFit(ImageFit.Cover)
-            .border({
-              radius: $r('app.float.radius_24'),
-              color: $r('sys.color.ohos_id_color_click_effect'),
-              width: $r('app.float.save_image_border')
-            })
-            .height('100%')
-            .width('100%')
-            .padding({ left: $r('app.float.padding_16'), right: $r('app.float.padding_16') })
-            .opacity(0.4)
+          Column() {
+            Image(this.imageMaps[1])
+              .objectFit(ImageFit.Cover)
+              .border({
+                radius: $r('app.float.radius_24'),
+                color: $r('sys.color.ohos_id_color_click_effect'),
+                width: $r('app.float.save_image_border')
+              })
+              .height('100%')
+              .width('100%')
+              .opacity(0.4)
+          }
+          .padding({ left: $r('app.float.padding_16'), right: $r('app.float.padding_16') })
         }
 
         Image(this.imageMaps[0])
