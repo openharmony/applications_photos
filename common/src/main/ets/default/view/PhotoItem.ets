@@ -546,6 +546,7 @@ export struct PhotoItem {
       )
       .clip(true)
       .onTouch((event?: TouchEvent) => {
+        this.dealTouchEvent(event as TouchEvent);
         this.eventPipeline?.onTouch(event as TouchEvent);
       })
       // TODO Remind users when pictures of other devices cannot be show
