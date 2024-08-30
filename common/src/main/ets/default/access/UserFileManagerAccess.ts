@@ -627,8 +627,6 @@ export class UserFileManagerAccess {
   }
 
   async prepareSystemAlbums(): Promise<void> {
-    Log.info(TAG, `prepareSystemAlbums before :${UserFileManagerAccess.SYSTEM_BEFORE_USER_ALBUM_LIST.length},
-     after :${UserFileManagerAccess.SYSTEM_AFTER_USER_ALBUM_LIST.length}`);
     if (!this.media) {
       Log.error(TAG, 'prepareSystemAlbums media resource is null!');
       return;
