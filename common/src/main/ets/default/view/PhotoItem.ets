@@ -546,7 +546,6 @@ export struct PhotoItem {
       )
       .clip(true)
       .onTouch((event?: TouchEvent) => {
-        Log.info(TAG, `onTouch start type=${event.type}`);
         this.dealTouchEvent(event as TouchEvent);
         this.eventPipeline?.onTouch(event as TouchEvent);
       })
