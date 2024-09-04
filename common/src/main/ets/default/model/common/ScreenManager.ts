@@ -243,8 +243,11 @@ export class ScreenManager {
   }
 
   destroyMainWindow(): void {
-    this.getHost()?.off('windowSizeChange', (data: window.Size) => {
-    });
+    try {
+      this.getHost()?.off('windowSizeChange');
+    } catch (error) {
+      Log.error(TAG, `destroy window error: ${error}, code: ${error?.code}`);
+    }
   }
 
   getAvoidArea(): void {
