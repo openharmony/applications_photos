@@ -280,13 +280,19 @@ export class ScreenManager {
   }
 
   setWindowBackgroundColorDefault(defaultColor: boolean): void {
-    if (this.isUIExtensionEnv()) {
-      return;
-    }
     try {
-      this.getMainWindow()?.setWindowBackgroundColor(defaultColor ? '#F1F3F5' : '#000000');
+      let mainWin: window.Window = this.getMainWindow();
+      if (this.isUIExtensionEnv() || mainWin === null || mainWin === undefined) {
+        return;
+      }
+      let color: string = '#000000';
+      if (defaultColor) {
+        color = '#F1F3F5';
+      }
+      mainWin.setWindowBackgroundColor(color);
+      console.info(TAG, `setWindowBackgroundColorDefault success`);
     } catch (error) {
-      Log.error(TAG, 'setWindowBackgroundColorDefault: failed, error info is ' + error + ', code: ' + error?.code);
+      console.error(TAG, `setWindowBackgroundColorDefault fail, err: ${JSON.stringify(error)}`);
     }
   }
 
