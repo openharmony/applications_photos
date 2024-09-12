@@ -251,7 +251,6 @@ export struct ImageGridItemComponent {
   @Builder
   buildImage() {
     Image(this.imageThumbnail)
-      .syncLoad(true)
       .width('100%')
       .height('100%')
       .rotate({ x: 0, y: 0, z: 1, angle: 0 })
