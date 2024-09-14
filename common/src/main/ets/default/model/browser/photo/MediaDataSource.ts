@@ -163,7 +163,7 @@ export class MediaDataSource extends AbsDataSource {
   // get DataIndex with item
   getDataIndex(item: MediaItem): number {
     for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i] != undefined && this.items[i].uri === item.uri) {
+      if (this.items[i] != undefined && this.items[i].uri === item?.uri) {
         return i + this.activeStart;
       }
     }
