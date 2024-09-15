@@ -93,7 +93,7 @@ export class DateUtil {
   }
 
   public static getLocalizedYear(milliseconds: number): Resource {
-    return $r('app.string.common_place_holder', this.yearFormat.format(new Date(milliseconds)));
+    return $r('app.string.common_place_holder', this.yearFormat.format(new Date(milliseconds)).toString());
   }
 
   public static getLocalizedYearAndMonth(milliseconds: number): string {
