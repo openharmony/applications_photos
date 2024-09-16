@@ -28,18 +28,25 @@ export class DateUtil {
     'en': 'en-US'
   };
   private static readonly SECONDS_OF_ONE_DAY: number = 24 * 60 * 60;
+  private static dateTimeFormat: Intl.DateTimeFormat = new Intl.DateTimeFormat(DateUtil.getLocales(), {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+  private static yearAndMonthFormat: Intl.DateTimeFormat = new Intl.DateTimeFormat(DateUtil.getLocales(), {
+    year: 'numeric',
+    month: 'long'
+  });
+  private static yearFormat: Intl.DateTimeFormat = new Intl.DateTimeFormat(DateUtil.getLocales(), {
+    year: 'numeric'
+  });
 
   // Get the date after localization (year-month-day)
   public static getLocalizedDate(milliseconds: number): string {
     if(milliseconds === undefined){
       milliseconds = new Date().getTime()
     }
-    let locales: string = this.getLocales();
-    return new Intl.DateTimeFormat(locales, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }).format(new Date(milliseconds));
+    return this.dateTimeFormat.format(new Date(milliseconds));
   }
 
   public static format(time: Date, format_s?: string): string {
@@ -86,19 +93,11 @@ export class DateUtil {
   }
 
   public static getLocalizedYear(milliseconds: number): Resource {
-    let locales: string = this.getLocales();
-    let yearText = new Intl.DateTimeFormat(locales, {
-      year: 'numeric'
-    }).format(new Date(milliseconds));
-    return $r('app.string.common_place_holder', yearText.toString());
+    return $r('app.string.common_place_holder', this.yearFormat.format(new Date(milliseconds)).toString());
   }
 
   public static getLocalizedYearAndMonth(milliseconds: number): string {
-    let locales: string = this.getLocales();
-    return new Intl.DateTimeFormat(locales, {
-      year: 'numeric',
-      month: 'long'
-    }).format(new Date(milliseconds));
+    return this.yearAndMonthFormat.format(new Date(milliseconds));
   }
 
   public static getLocalizedTime(milliseconds: number): string {
