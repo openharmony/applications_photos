@@ -105,8 +105,25 @@ export class CropShow {
     let points = MathUtils.rectToPoints(this.cropRect);
     let origin = this.getDisplayCenter();
     let totalAngle = -(this.rotationAngle + this.horizontalAngle);
+    let isLeft: boolean = true;
+    let rotationIndex = Constants.NUMBER_0;
+    const rotationAngleAbs = Math.abs(this.rotationAngle);
+    if (rotationAngleAbs === Constants.NUMBER_0) {
+      rotationIndex = angle > Constants.NUMBER_0 ? Constants.NUMBER_0 : Constants.NUMBER_1;
+      isLeft = angle > Constants.NUMBER_0;
+    } else if (rotationAngleAbs === Constants.ANGLE_90) {
+      rotationIndex = angle < Constants.NUMBER_0 ? Constants.NUMBER_0 : Constants.NUMBER_1;
+      isLeft = angle < Constants.NUMBER_0;
+    } else if (rotationAngleAbs === Constants.ANGLE_180) {
+      rotationIndex = angle > Constants.NUMBER_0 ? Constants.NUMBER_0 : Constants.NUMBER_1;
+      isLeft = angle < Constants.NUMBER_0;
+    } else if (rotationAngleAbs === Constants.ANGLE_270) {
+      rotationIndex = angle < Constants.NUMBER_0 ? Constants.NUMBER_0 : Constants.NUMBER_1;
+      isLeft = angle > Constants.NUMBER_0;
+    }
     let rotated = MathUtils.rotatePoints(points, totalAngle, origin);
-    let scale = MathUtils.findSuitableScale(rotated, this.imageRect, origin);
+    let curRotated = rotated[rotationIndex];
+    let scale = MathUtils.findRotationAngleScale(curRotated, this.imageRect, origin, isLeft);
     MathUtils.scaleRectBasedOnPoint(this.imageRect, origin, scale);
   }
 
@@ -175,6 +192,7 @@ export class CropShow {
     // Recalculate crop Rect.
     MathUtils.computeMaxRectWithinLimit(newCrop, this.limitRect, cropRatio);
     let scale: number = newCrop.getWidth() / this.cropRect.getWidth();
+    Log.info(TAG, `enlargeCropArea scale: ${scale}`);
 
     // Scale Image based on the midpoint of the last crop.
     let tX: number = this.isFlipHorizontal ? -1 : 1;
