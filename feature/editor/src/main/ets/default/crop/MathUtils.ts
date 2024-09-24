@@ -168,6 +168,17 @@ export abstract class MathUtils {
     return scale;
   }
 
+  static findRotationAngleScale(points: Point, rect: RectF, origin: Point,isLeft: boolean): number {
+    let scale = 1;
+
+    if (isLeft) {
+      scale = (points.x - origin.x) / (rect.left - origin.x)
+    }else {
+      scale = (points.x - origin.x) / (rect.right - origin.x)
+    }
+    return Math.abs(scale);
+  }
+
   static fixImageMove(rotated: Array<Point>, flipImage: RectF): Array<number> {
     let offsetX = 0;
     let offsetY = 0;
