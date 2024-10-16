@@ -281,6 +281,14 @@ export struct PhotoItem {
     }
   }
 
+  isFilterListEmpty(fingerList: FingerInfo[]): FingerInfo[] {
+    fingerList = fingerList.filter((item: FingerInfo) => item != undefined);
+    if (fingerList.length === 0) {
+      Log.error(TAG, 'all elements are undefined');
+    }
+    return fingerList;
+  }
+
   @Builder
   buildImage() {
     Image(this.thumbnail)
@@ -505,7 +513,7 @@ export struct PhotoItem {
           TapGesture({
             count: 1
           })
-            .onAction((event?: GestureEvent) => {
+            .onAction((event: GestureEvent) => {
               if (this.isHandlingTap) {
                 if (this.timerCounter != null) {
                   clearTimeout(this.timerCounter)
@@ -521,8 +529,11 @@ export struct PhotoItem {
                 return;
               }
               Log.info(TAG, `onDoubleTap event: ${JSON.stringify(event)}`);
-              this.eventPipeline?.onDoubleTap((event as GestureEvent).fingerList[0].localX,
-                (event as GestureEvent).fingerList[0].localY);
+              event.fingerList = this.isFilterListEmpty(event.fingerList);
+              if (event.fingerList.length > 0) {
+                this.eventPipeline?.onDoubleTap((event as GestureEvent).fingerList[0].localX,
+                  (event as GestureEvent).fingerList[0].localY);
+              }
               if (this.animationOption != null) {
                 Log.info(TAG, 'TapGesture animateTo start');
                 animateTo({
