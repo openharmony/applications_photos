@@ -24,6 +24,7 @@ import type { FileAsset } from '../../access/UserFileManagerAccess';
 import { Album, UserFileManagerAccess } from '../../access/UserFileManagerAccess';
 import { Constants } from '../../model/common/Constants';
 import { BigDataConstants, ReportToBigDataUtil } from '../../utils/ReportToBigDataUtil';
+import { BrowserOperationFactory } from '../../interface/BrowserOperationFactory';
 
 const TAG: string = 'common_MoveMenuOperation';
 
@@ -113,12 +114,13 @@ export class MoveMenuOperation extends ProcessMenuOperation {
     try {
       TraceControllerUtils.startTraceWithTaskId('move', this.currentBatch);
       let sourceAlbumUri: string = AppStorage.get(Constants.APP_KEY_NEW_ALBUM_SOURCE);
-      let sourceAlbum: Album = await UserFileManagerAccess.getInstance().getAlbumByUri(sourceAlbumUri);
-      await sourceAlbum.removePhotoAssets([sourceAsset]); // TODO 媒体库支持批量移除，传参后续整改
-
       let targetAlbum: Album = await UserFileManagerAccess.getInstance().getAlbumByUri(this.albumUri);
-      await targetAlbum.addPhotoAssets([sourceAsset]); // TODO 媒体库支持批量添加，传参后续整改
+      await targetAlbum.addPhotoAssets([sourceAsset]);
 
+      let sourceAlbum: Album = await UserFileManagerAccess.getInstance().getAlbumByUri(sourceAlbumUri);
+      await sourceAlbum.removePhotoAssets([sourceAsset]);
+      let operationImpl = BrowserOperationFactory.getFeature(BrowserOperationFactory.TYPE_PHOTO);
+      await operationImpl.deleteTrash([sourceAsset]);
 
       TraceControllerUtils.finishTraceWithTaskId('move', this.currentBatch);
       this.onCompleted();
