@@ -438,11 +438,11 @@ export struct PhotoBrowserComponent {
     if (currentPhoto == undefined || this.isFromViewDataWithThirdUri) {
       return;
     }
-    this.photoDate = DateUtil.getLocalizedDate(currentPhoto?.getDataTaken());
+    this.photoDate = DateUtil.getLocalizedDate(currentPhoto?.getDataTaken?.());
     if (this.pageFrom == Constants.ENTRY_FROM.DISTRIBUTED) {
-      this.timeAndLocation = `${this.deviceName}/${DateUtil.getLocalizedTime(currentPhoto?.getDataTaken())}`;
+      this.timeAndLocation = `${this.deviceName}/${DateUtil.getLocalizedTime(currentPhoto?.getDataTaken?.())}`;
     } else {
-      this.timeAndLocation = DateUtil.getLocalizedTime(currentPhoto?.getDataTaken());
+      this.timeAndLocation = DateUtil.getLocalizedTime(currentPhoto?.getDataTaken?.());
     }
     this.updateMenu(index);
   }
