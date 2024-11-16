@@ -396,10 +396,10 @@ export struct PhotoBrowserComponent {
     this.currentIndex = index;
     this.updateActionBar(index);
     let currentPhoto: MediaItem | undefined = this.getPhotoByIndex(index);
-    if (currentPhoto == undefined) {
+    if (!currentPhoto) {
       Log.error(TAG, 'onPhotoChanged, item is undefined');
     } else {
-      let timelineIndex = this.dataSource.getPositionByIndex(index);
+      const timelineIndex: number = this.dataSource.getPositionByIndex(index) ?? Number.NaN;
       AppStorage.setOrCreate<number>('placeholderIndex', timelineIndex);
       this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + 'false';
       AppStorage.setOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
