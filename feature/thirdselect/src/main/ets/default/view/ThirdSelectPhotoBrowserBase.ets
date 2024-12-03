@@ -843,7 +843,6 @@ export struct ThirdSelectPhotoBrowserBase {
       }
       Log.info(TAG, `uri size: ${uriArray}`);
     } else {
-      this.currentIndex = 0;
       let currentPhoto = this.getCurrentPhoto();
       if (currentPhoto == undefined) {
         return;
