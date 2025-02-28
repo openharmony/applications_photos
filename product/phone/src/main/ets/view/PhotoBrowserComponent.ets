@@ -518,10 +518,10 @@ export struct PhotoBrowserComponent {
     }
     let menuTempList: Action[] = [];
     if (!this.albumInfo) {
-      // 鐓х墖椤?
+      // 照片页
       menuTempList = [Action.ADD, Action.RENAME];
     } else {
-      // 鎸囧畾鐩稿唽
+      // 指定相册
       menuTempList = this.albumInfo.isSystemAlbum ?
         [Action.ADD, Action.RENAME] : [Action.MOVE, Action.ADD, Action.REMOVE_FROM, Action.RENAME];
     }
@@ -838,7 +838,7 @@ export struct PhotoBrowserComponent {
             this.currentIndex = 0;
             this.dataSource.getItemIndexByUri(this.uriFromThirdPartyApp,
               (index: number): void => this.onGetItemIndexByUri(index));
-            // 鏄惁鏄剧ず鑿滃崟鏍忓苟涓斿鐞嗗ぇ鏁版嵁鎵撶偣
+            // 是否显示菜单栏并且处理大数据打点
             this.isShowMenuBigData(param.isShowMenuFromThirdView);
           } else {
             Log.debug(TAG, `Not found media library uri`);
@@ -1213,7 +1213,7 @@ export struct PhotoBrowserComponent {
         menuOperation = MenuOperationFactory.getInstance().createMenuOperation(RemoveMenuOperation, menuContext);
         AppStorage.setOrCreate<string | undefined>(Constants.APP_KEY_NEW_ALBUM_SOURCE, this.albumInfo?.uri);
       } else if (params.pageType === MediaOperationType.Add) {
-        // "娣诲姞鍒?涓嶉渶瑕佽缃簮鐩稿唽
+        // "添加到"不需要设置源相册
         let onCopyEndFunc = (err: Error, count: number, total: number): void => {
           this.onCopyEnd(err as Object, count, total);
           }
