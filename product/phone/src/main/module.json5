@@ -23,13 +23,28 @@
         "name": "ohos.permission.PROXY_AUTHORIZATION_URI"
       },
       {
-        "name": "ohos.permission.READ_IMAGEVIDEO"
+        "name": "ohos.permission.READ_IMAGEVIDEO",
+        "reason": "$string:app_name",
+        "usedScene": {
+          "abilities": ["FormAbility"],
+          "when": "inuse"
+        }
       },
       {
-        "name": "ohos.permission.WRITE_IMAGEVIDEO"
+        "name": "ohos.permission.WRITE_IMAGEVIDEO",
+        "reason": "$string:app_name",
+        "usedScene": {
+          "abilities": ["FormAbility"],
+          "when": "inuse"
+        }
       },
       {
-        "name": "ohos.permission.MEDIA_LOCATION"
+        "name": "ohos.permission.MEDIA_LOCATION",
+        "reason": "$string:app_name",
+        "usedScene": {
+          "abilities": ["FormAbility"],
+          "when": "inuse"
+        }
       },
       {
         "name": "ohos.permission.START_ABILITIES_FROM_BACKGROUND"

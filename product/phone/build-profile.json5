@@ -1,7 +1,6 @@
 {
   "apiType": 'stageMode',
   "buildOption": {
-    "compileMode": "esmodule",
     "sourceOption": {
       "workers": [
         "./src/main/ets/workers/HistogramWorker.ts"
