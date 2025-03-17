@@ -561,11 +561,11 @@ export struct PhotoBrowserComponent {
   }
 
   getCurrentPhoto(): MediaItem {
-    return this.dataSource?.getRawData(this.currentIndex).data;
+    return this.dataSource.getRawData(this.currentIndex).data;
   }
 
   getPhotoByIndex(index: number): MediaItem {
-    return this.dataSource?.getRawData(index).data;
+    return this.dataSource.getRawData(index).data;
   }
 
   async onMoveEnd(err: Object, count: number, total: number): Promise<void> {
@@ -884,7 +884,8 @@ export struct PhotoBrowserComponent {
       this.isFromCamera = true;
       this.jumpSourceToMain = JumpSourceToMain.CAMERA;
       MediaObserver.getInstance().registerObserver(this.dataObserver);
-      this.onPhotoChanged(AppStorage.Get('form_currentIndex') || 0);
+      Log.info(TAG, `form_currentIndex ${AppStorage.get<number>('form_currentIndex')}`);
+      this.onPhotoChanged(AppStorage.get<number>('form_currentIndex') || 0);
       this.mTransition = Constants.PHOTO_TRANSITION_CAMERA;
     }
 
