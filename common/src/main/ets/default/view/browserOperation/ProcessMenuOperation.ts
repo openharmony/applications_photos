@@ -105,7 +105,7 @@ export class ProcessMenuOperation implements MenuOperation, AsyncCallback<String
   cyclicOperation() {
     Log.info(TAG, 'cyclicOperation');
     this.menuContext.broadCast.emit(BroadCastConstants.UPDATE_PROGRESS,
-      [this.getExpectProgress(), this.currentBatch]);
+      [this.getExpectProgress(), this.currentBatch * this.BATCH_SIZE]);
 
     if (this.isCancelled) {
       this.isCancelled = false;

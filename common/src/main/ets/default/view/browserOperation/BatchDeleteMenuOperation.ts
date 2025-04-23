@@ -29,6 +29,8 @@ const TAG: string = 'common_BatchDeleteMenuOperation';
 
 export class BatchDeleteMenuOperation extends ProcessMenuOperation {
   private isTrash = true;
+  // Number of data operated in a batch
+  readonly BATCH_SIZE: number = 100;
 
   constructor(menuContext: MenuContext) {
     super(menuContext);

@@ -100,7 +100,7 @@ export default class MainAbility extends Ability {
       isFromCamera = true;
       if (isOnNewWant) {
         AppStorage.setOrCreate('entryFromHapCamera', Constants.ENTRY_FROM_CAMERA);
-        AppStorage.get<window.WindowStage>('photosWindowStage').loadContent('pages/PhotoBrowser', (err, data) => {
+        AppStorage.get<window.WindowStage>('photosWindowStage')?.loadContent('pages/PhotoBrowser', (err, data) => {
           if (err.code) {
             Log.error(TAG, 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
             return;
