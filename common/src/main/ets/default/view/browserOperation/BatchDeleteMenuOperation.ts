@@ -107,7 +107,7 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
     }
     this.currentBatch++;
     let startIndex: number = (this.currentBatch - 1) * this.BATCH_SIZE;
-    let endIndex: number = this.currentBatch * this.BATCH_SIZE;
+    let endIndex: number = this.currentBatch < this.totalBatches ? this.currentBatch * this.BATCH_SIZE : this.count;;
     let batchUris: Array<string> = new Array();
     for (let index = startIndex; index < endIndex; index++) {
       batchUris.push(this.uris[index]);
