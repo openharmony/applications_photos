@@ -32,7 +32,7 @@ export struct SaveUIExtensionPage {
   private uris: Array<string> = [];
   private bundleName: string = '';
   private appName: string = '';
-  private appId: string = '';
+  private appId: number = 0;
   private photoTypeArray: photoAccessHelper.PhotoType[] = [];
   private srcFileUris: Array<photoAccessHelper.PhotoCreationConfig> = [];
   private title: string = 'app.string.third_save_dialog_picture_and_video';
@@ -152,7 +152,7 @@ export struct SaveUIExtensionPage {
     this.uris = this.wantParam?.['ability.params.stream'] as string[];
     this.bundleName = this.wantParam?.bundleName as string;
     this.appName = this.wantParam?.appName as string;
-    this.appId = this.wantParam?.appId as string;
+    this.appId = this.wantParam?.appId as number;
     let titleArray = this.wantParam?.titleArray as string[];
     let extensionArray = this.wantParam?.extensionArray as string[];
     let photoTypeArray = this.wantParam?.photoTypeArray as photoAccessHelper.PhotoType[];
