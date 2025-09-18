@@ -207,7 +207,7 @@ export struct SelectPhotoBrowserView {
     if (this.selectManager?.toggle(currentPhoto.uri, this.isSelected, this.timelineIndex)) {
       this.selectedCount = this.selectManager?.getSelectedCount() ?? 0;
     }
-    this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + this.isSelected;
+    this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode?.() + this.isSelected;
     Log.info(TAG, `selectedCount: ${this.selectedCount} after state change`)
   }
 
