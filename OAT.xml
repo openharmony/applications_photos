@@ -56,6 +56,7 @@
                 <filteritem type="filepath" name="product/pad/src/.*.png" desc="self developed image"/>
                 <filteritem type="filepath" name="product/phone/src/.*.png" desc="self developed image"/>
                 <filteritem type="filepath" name="gradle/wrapper/.*.jar" desc="Build Files"/>
+                <filteritem type="filepath" name="figures/.*.png" desc="self developed image"/>
             </filefilter>
             <filefilter name="copyrightPolicyFilter" desc="Filters for copyright header policies">
                 <filteritem type="filename" name="*.json5" desc="json file"/>

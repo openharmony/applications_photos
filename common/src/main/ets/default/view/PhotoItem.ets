@@ -593,7 +593,7 @@ export struct PhotoItem {
                   url: 'pages/VideoBrowser',
                   params: {
                     uri: this.item.uri,
-                    dateTaken: this.item.getDataTaken(),
+                    dateTaken: this.item?.getDataTaken(),
                     previewUri: this.thumbnail
                   }
                 })
@@ -745,7 +745,7 @@ export struct PhotoItem {
               url: 'pages/VideoBrowser',
               params: {
                 uri: this.item.uri,
-                dateTaken: this.item.getDataTaken(),
+                dateTaken: this.item?.getDataTaken(),
                 previewUri: this.thumbnail
               }
             })
