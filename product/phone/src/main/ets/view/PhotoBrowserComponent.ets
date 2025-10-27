@@ -272,7 +272,7 @@ export struct PhotoBrowserComponent {
         }
       }
       this.updateMenu(this.currentIndex);
-      this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode() + 'false';
+      this.geometryTransitionId = this.browserController.pageFrom + currentPhoto.getHashCode?.() + 'false';
       AppStorage.setOrCreate<string>('geometryTransitionBrowserId', this.geometryTransitionId);
     } else if (actionID === Action.DELETE.actionID) {
       if (currentPhoto == undefined) {
