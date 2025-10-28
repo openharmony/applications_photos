@@ -121,7 +121,6 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
         let fileItem = await UserFileManagerAccess.getInstance().getTrashAssetByUri(batchUris[index]);
         fileAssets.push(fileItem);
       }
-      fileAssets.push(fileItem);
       operationImpl.deleteTrash(fileAssets).then(() => {
         TraceControllerUtils.finishTraceWithTaskId('delete', this.currentBatch)
         this.onCompleted()
