@@ -117,8 +117,10 @@ export class BatchDeleteMenuOperation extends ProcessMenuOperation {
     if (this.menuContext.albumInfo && this.menuContext.albumInfo.isTrashAlbum) {
       TraceControllerUtils.startTraceWithTaskId('delete', this.currentBatch);
       let fileAssets = new Array<FileAsset>();
-      let fileItem = await UserFileManagerAccess.getInstance().getTrashAssetByUri(batchUris[0]);
-      fileAssets.push(fileItem);
+      for (let index = 0; index < batchUris.length; index++) {
+        let fileItem = await UserFileManagerAccess.getInstance().getTrashAssetByUri(batchUris[index]);
+        fileAssets.push(fileItem);
+      }
       operationImpl.deleteTrash(fileAssets).then(() => {
         TraceControllerUtils.finishTraceWithTaskId('delete', this.currentBatch)
         this.onCompleted()
