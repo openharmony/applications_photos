@@ -690,7 +690,7 @@ export struct TimelinePage {
   getGeometryTransitionId(item: ViewData, index: number): string {
     let mediaItem = item.mediaItem as MediaItem;
     if (mediaItem) {
-      return TAG + mediaItem.getHashCode() + this.mSelectManager.isItemSelected(mediaItem.uri, item.viewIndex);
+      return TAG + mediaItem.getHashCode() + this.mSelectManager.isItemSelected?.(mediaItem.uri, item.viewIndex);
     } else {
       return TAG + item.viewIndex;
     }
