@@ -65,9 +65,17 @@ export default class MainAbility extends Ability {
 
     this.parseWantParameter(false, want);
 
-    UserFileManagerAccess.getInstance().onCreate(AppStorage.get<common.UIAbilityContext>('photosAbilityContext'));
-    MediaObserver.getInstance().registerForAllPhotos();
-    MediaObserver.getInstance().registerForAllAlbums();
+    setTimeout(() => {
+      UserFileManagerAccess.getInstance()
+        .onCreate(AppStorage.get<common.UIAbilityContext>('photosAbilityContext'), (isForced?: boolean) => {
+          Log.info(TAG, `onCreate callback`)
+          MediaObserver.getInstance().registerForAllPhotos();
+          MediaObserver.getInstance().registerForAllAlbums();
+          if (isForced) {
+            MediaObserver.getInstance().forceNotify();
+          }
+        });
+    }, 0);
     if (!isFromCard && !isFromCamera) {
       TimelineDataSourceManager.getInstance();
     }

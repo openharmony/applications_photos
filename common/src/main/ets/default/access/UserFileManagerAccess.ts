@@ -129,6 +129,7 @@ export class UserFileManagerAccess {
   private media: userFileManager.UserFileManager = null;
   private photoAccessHelper?: photoAccessHelper.PhotoAccessHelper;
   private requestTime: number;
+  private count: number = 0;
 
   private systemAlbumUriMap: Map<AlbumSubType, string> = new Map<AlbumSubType, string>();
 
@@ -143,7 +144,7 @@ export class UserFileManagerAccess {
     return AppStorage.get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS);
   }
 
-  onCreate(context) {
+  onCreate(context, callback?: Function) {
     Log.debug(TAG, `Photos_UserFileManagerAccess onCreate ${context}`);
     if (this.media) {
       Log.debug(TAG, `Photos_UserFileManagerAccess onCreate already`);
@@ -161,8 +162,32 @@ export class UserFileManagerAccess {
     this.photoAccessHelper = photoAccessHelper.getPhotoAccessHelper(context);
     if (!this.photoAccessHelper) {
       Log.error(TAG, 'get photoAccessHelper instance failed!');
+      this.getPhotoAccess(context, callback);
+    }
+    else {
+      callback?.();
     }
     Log.info(TAG, 'onCreate done');
+  }
+
+  // 重试机制，每秒重试一次，最多重试三次
+  public getPhotoAccess(context, callback?: Function): void {
+    let interValid = setTimeout((): void => {
+      this.count++;
+      this.photoAccessHelper = photoAccessHelper.getPhotoAccessHelper(context);
+      Log.error(TAG, `Failed to get the photoAccessHelper instance for the ${this.count} time!`);
+      if (this.photoAccessHelper != undefined || this.count >= Constants.DELAY_RETRY_COUNT) {
+        Log.info(TAG, `photoAccessHelper: ${this.photoAccessHelper != undefined}`);
+        if (this.photoAccessHelper != undefined) {
+          callback?.(true);
+        }
+        Log.info(TAG, 'clearTimeout')
+        this.count = 0;
+        interValid && clearTimeout(interValid);
+      } else {
+        this.getPhotoAccess(context, callback);
+      }
+    }, Constants.DELAY_RETRY);
   }
 
   onDestroy() {

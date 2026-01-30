@@ -35,6 +35,9 @@ export class Constants {
   // delay 50ms
   static readonly DELAY_TWENTIETH_SECOND: number = 50;
 
+  static readonly DELAY_RETRY_COUNT: number = 3;
+  static readonly DELAY_RETRY: number = 1000;
+
   // Default sliding window size
   static readonly DEFAULT_SLIDING_WIN_SIZE: number = 500;
   static readonly DEFAULT_ROTATE_VALUE: number = 90;
