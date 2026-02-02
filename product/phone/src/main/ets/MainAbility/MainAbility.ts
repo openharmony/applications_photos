@@ -74,16 +74,13 @@ export default class MainAbility extends Ability {
           if (isForced) {
             MediaObserver.getInstance().forceNotify();
           }
+          if (!isFromCard && !isFromCamera) {
+            TimelineDataSourceManager.getInstance();
+          }
+          appBroadCast.on(BroadCastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
+          UserFileManagerAccess.getInstance().prepareSystemAlbums();
         });
-    }, 0);
-    if (!isFromCard && !isFromCamera) {
-      TimelineDataSourceManager.getInstance();
-    }
-
-    appBroadCast.on(BroadCastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
-
-    // Init system album information
-    UserFileManagerAccess.getInstance().prepareSystemAlbums();
+    }, 0); // Init system album information
     Log.info(TAG, 'Application onCreate end');
   }
 
