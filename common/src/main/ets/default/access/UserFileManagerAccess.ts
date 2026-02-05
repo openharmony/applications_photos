@@ -144,7 +144,7 @@ export class UserFileManagerAccess {
     return AppStorage.get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS);
   }
 
-  onCreate(context, callback?: Function) {
+  onCreate(context, callback?: () => void) {
     Log.debug(TAG, `Photos_UserFileManagerAccess onCreate ${context}`);
     if (this.media) {
       Log.debug(TAG, `Photos_UserFileManagerAccess onCreate already`);
