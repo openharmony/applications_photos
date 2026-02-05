@@ -77,7 +77,7 @@ export default class MainAbility extends Ability {
           if (!isFromCard && !isFromCamera) {
             TimelineDataSourceManager.getInstance();
           }
-          appBroadCast.on(BroadCastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
+          appBroadCast.on(BroadCastConstants.THIRD_ROUTE_PAGE, () => this.thirdRouterPage());
           UserFileManagerAccess.getInstance().prepareSystemAlbums();
         });
     }, 0); // Init system album information
