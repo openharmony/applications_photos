@@ -144,7 +144,7 @@ export class UserFileManagerAccess {
     return AppStorage.get(Constants.APP_KEY_INSTANCE_MEDIA_LIBRARY_ACCESS);
   }
 
-  onCreate(context, callback?: () => void) {
+  onCreate(context, callback?: (isForced?: boolean) => void) {
     Log.debug(TAG, `Photos_UserFileManagerAccess onCreate ${context}`);
     if (this.media) {
       Log.debug(TAG, `Photos_UserFileManagerAccess onCreate already`);
@@ -171,7 +171,7 @@ export class UserFileManagerAccess {
   }
 
   // 重试机制，每秒重试一次，最多重试三次
-  public getPhotoAccess(context, callback?: Function): void {
+  public getPhotoAccess(context, callback?: (isForced?: boolean) => void): void {
     let interValid = setTimeout((): void => {
       this.count++;
       this.photoAccessHelper = photoAccessHelper.getPhotoAccessHelper(context);
