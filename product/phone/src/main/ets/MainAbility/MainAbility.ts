@@ -180,6 +180,7 @@ export default class MainAbility extends Ability {
     AppStorage.delete('entryFromHap');
     MediaObserver.getInstance().unregisterForAllPhotos();
     MediaObserver.getInstance().unregisterForAllAlbums();
+    appBroadCast.off(BroadCastConstants.THIRD_ROUTE_PAGE, () => this.thirdRouterPage());
     UserFileManagerAccess.getInstance().onDestroy();
   }
 
