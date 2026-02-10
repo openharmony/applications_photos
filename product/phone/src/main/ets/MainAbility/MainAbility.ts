@@ -56,6 +56,7 @@ export default class MainAbility extends Ability {
   private preselectedUris: Array<string> = [];
   private isOnDestroy: boolean = false;
   private localStorage: LocalStorage = new LocalStorage();
+  private thirdRouterPageFunc: () => {} = () => this.thirdRouterPage();
 
   onCreate(want: Want, param: AbilityConstant.LaunchParam): void {
     AppStorage.setOrCreate('photosAbilityContext', this.context);
@@ -65,17 +66,22 @@ export default class MainAbility extends Ability {
 
     this.parseWantParameter(false, want);
 
-    UserFileManagerAccess.getInstance().onCreate(AppStorage.get<common.UIAbilityContext>('photosAbilityContext'));
-    MediaObserver.getInstance().registerForAllPhotos();
-    MediaObserver.getInstance().registerForAllAlbums();
-    if (!isFromCard && !isFromCamera) {
-      TimelineDataSourceManager.getInstance();
-    }
-
-    appBroadCast.on(BroadCastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPage.bind(this));
-
-    // Init system album information
-    UserFileManagerAccess.getInstance().prepareSystemAlbums();
+    setTimeout(() => {
+      UserFileManagerAccess.getInstance()
+        .onCreate(AppStorage.get<common.UIAbilityContext>('photosAbilityContext'), (isForced?: boolean) => {
+          Log.info(TAG, `onCreate callback`)
+          MediaObserver.getInstance().registerForAllPhotos();
+          MediaObserver.getInstance().registerForAllAlbums();
+          if (isForced) {
+            MediaObserver.getInstance().forceNotify();
+          }
+          if (!isFromCard && !isFromCamera) {
+            TimelineDataSourceManager.getInstance();
+          }
+          appBroadCast.on(BroadCastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPageFunc);
+          UserFileManagerAccess.getInstance().prepareSystemAlbums();
+        });
+    }, 0); // Init system album information
     Log.info(TAG, 'Application onCreate end');
   }
 
@@ -175,6 +181,7 @@ export default class MainAbility extends Ability {
     AppStorage.delete('entryFromHap');
     MediaObserver.getInstance().unregisterForAllPhotos();
     MediaObserver.getInstance().unregisterForAllAlbums();
+    appBroadCast.off(BroadCastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPageFunc);
     UserFileManagerAccess.getInstance().onDestroy();
   }
 
