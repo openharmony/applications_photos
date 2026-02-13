@@ -26,8 +26,8 @@
       {
         "name": "default",
         "signingConfig": "debug",
-        "compileSdkVersion": 23,
-        "compatibleSdkVersion": 23
+        "compileSdkVersion": 24,
+        "compatibleSdkVersion": 24
       },
     ],
   },
