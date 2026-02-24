@@ -1,0 +1,35 @@
+{
+  "apiType": 'stageMode',
+  "buildOption": {
+    "napiLibFilterOption": {
+      // 允许当.so重名冲突时，使用高优先级的.so文件覆盖低优先级的.so文件
+      "enableOverride": true,
+      "excludes": [
+        "**/libnetwork-api.so",
+        "**/libnetwork-hwhttp.so",
+        "**/libyundun.so",
+        "**/libnetwork-restclient-service.so"
+      ]
+    }
+  },
+  "buildOptionSet": [
+    {
+      "name": "release",
+      "arkOptions": {
+        "obfuscation": {
+          "ruleOptions": {
+            "enable": true,
+            "files": [
+              "./obfuscation-rules.txt"
+            ],
+          },
+        },
+      },
+    },
+  ],
+  "targets": [
+    {
+      "name": "default"
+    }
+  ]
+}

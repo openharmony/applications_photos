@@ -1,0 +1,40 @@
+{
+    "plural":[
+        {
+            "name":"third_save_picture",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"༼%1$s༽ཡིས་པར་རིས་ %2$d ཉར་ཚགས་བྱ་ཆོག་པར་བྱེད་དམ།",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_picture_and_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"༼%1$s༽ཡིས་ཡིག་ཆ་ %2$d ཉར་ཚགས་བྱ་ཆོག་པར་བྱེད་དམ།",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"༼%1$s༽ཡིས་བརྙན་ཟློས་ %2$d ཉར་ཚགས་བྱ་ཆོག་པར་བྱེད་དམ།",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

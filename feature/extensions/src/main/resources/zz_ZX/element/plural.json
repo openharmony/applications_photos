@@ -1,0 +1,91 @@
+{
+    "plural":[
+        {
+            "name":"third_save_picture",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_948120]_Allow %1$s to save %2$d images?"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_948124]_Allow %1$s to save %2$d image?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_948115]_Allow %1$s to save %2$d images?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_948116]_Allow %1$s to save %2$d images?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_948112]_Allow %1$s to save %2$d images?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_948118]_Allow %1$s to save %2$d images?"
+                }
+            ]
+        },
+        {
+            "name":"third_save_picture_and_video",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_948121]_Allow %1$s to save %2$d file?"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_948127]_Allow %1$s to save %2$d files?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_948122]_Allow %1$s to save %2$d files?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_948117]_Allow %1$s to save %2$d files?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_948129]_Allow %1$s to save %2$d files?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_948123]_Allow %1$s to save %2$d files?"
+                }
+            ]
+        },
+        {
+            "name":"third_save_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_948125]_Allow %1$s to save %2$d videos?"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_948119]_Allow %1$s to save %2$d video?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_948114]_Allow %1$s to save %2$d videos?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_948126]_Allow %1$s to save %2$d videos?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_948111]_Allow %1$s to save %2$d videos?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_948113]_Allow %1$s to save %2$d videos?"
+                }
+            ]
+        }
+    ]
+}

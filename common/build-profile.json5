@@ -1,5 +1,15 @@
 {
   "apiType": "stageMode",
   "buildOption": {
-  }
+    "sourceOption": {
+      "workers": [
+        "./src/main/ets/default/task/CreateThumbnailWorker.ets"
+      ]
+    }
+  },
+  "targets": [
+    {
+      "name": "default"
+    }
+  ]
 }

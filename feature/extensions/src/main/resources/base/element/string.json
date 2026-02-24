@@ -1,0 +1,32 @@
+{
+    "string":[
+        {
+            "name":"dialog_ban",
+            "value":"Deny",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_allow",
+            "value":"Allow",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"short_term_title",
+            "value":"Allow %s to save images and videos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_not_allowed",
+            "value":"Deny",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

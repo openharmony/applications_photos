@@ -1,0 +1,40 @@
+{
+    "plural":[
+        {
+            "name":"third_save_picture",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"允許「%1$s」儲存 %2$d 張圖片？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_picture_and_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"允許「%1$s」儲存 %2$d 個檔案？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"允許「%1$s」儲存 %2$d 個影片？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

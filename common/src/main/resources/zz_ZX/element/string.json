@@ -1,6 +1,138 @@
 {
     "string":[
         {
+            "name":"landscape_collage",
+            "value":"[TS_973285]_Collage in landscape orientation"
+        },
+        {
+            "name":"camera_metering_spot",
+            "value":"[TS_973286]_Spot"
+        },
+        {
+            "name":"deselected",
+            "value":"[TS_973287]_Not selected"
+        },
+        {
+            "name":"accessibility_event_click_action",
+            "value":"[TS_1010703]_Double tap to activate"
+        },
+        {
+            "name":"vertical_collage",
+            "value":"[TS_973288]_Vertical collage, long"
+        },
+        {
+            "name":"white_balance_auto",
+            "value":"[TS_973289]_Auto"
+        },
+        {
+            "name":"full_screen_browsing",
+            "value":"[TS_981969]_Browsing in full-screen mode"
+        },
+        {
+            "name":"compass",
+            "value":"[TS_982455]_Compass"
+        },
+        {
+            "name":"camera_metering_field",
+            "value":"[TS_973290]_Center"
+        },
+        {
+            "name":"random_collage",
+            "value":"[TS_973291]_Random collage %s"
+        },
+        {
+            "name":"white_balance_fluorescent",
+            "value":"[TS_973292]_Fluorescent"
+        },
+        {
+            "name":"white_balance_other",
+            "value":"[TS_973293]_Manual"
+        },
+        {
+            "name":"checkbox_deselected",
+            "value":"[TS_973294]_Unselected, check box, double tap with one finger to select"
+        },
+        {
+            "name":"favorited",
+            "value":"[TS_973295]_Favorited"
+        },
+        {
+            "name":"selected",
+            "value":"[TS_973296]_Selected"
+        },
+        {
+            "name":"disabled",
+            "value":"[TS_973297]_Not available"
+        },
+        {
+            "name":"white_balance_daylight",
+            "value":"[TS_973298]_Daylight"
+        },
+        {
+            "name":"picker_checkbox_selected",
+            "value":"[TS_1045853]_Selected, original image, checkbox, double tap to deselect"
+        },
+        {
+            "name":"picker_checkbox_deselected",
+            "value":"[TS_1045855]_Not selected, original image, checkbox, double tap to select"
+        },
+        {
+            "name":"checkbox_selected",
+            "value":"[TS_973299]_Checkbox, selected, double tap to deselect"
+        },
+        {
+            "name":"white_balance_cloudy",
+            "value":"[TS_973300]_Cloudy"
+        },
+        {
+            "name":"camera_flash_steady",
+            "value":"[TS_973301]_Flash, always on"
+        },
+        {
+            "name":"white_balance",
+            "value":"[TS_973302]_White balance %s"
+        },
+        {
+            "name":"camera_flash_on",
+            "value":"[TS_973303]_Flash, on"
+        },
+        {
+            "name":"camera_flash_off",
+            "value":"[TS_973304]_Flash, off"
+        },
+        {
+            "name":"cloud_image",
+            "value":"[TS_1127588]_Cloud"
+        },
+        {
+            "name":"local_image",
+            "value":"[TS_1127589]_Device"
+        },
+        {
+            "name":"selected_file_already_deleted",
+            "value":"[TS_1127586]_Selected items have already been deleted from this device."
+        },
+        {
+            "name":"filter_file",
+            "value":"[TS_1127587]_Filter"
+        },
+        {
+            "name":"all",
+            "value":"[TS_871234]_All"
+        },
+        {
+            "name":"camera_flash_auto",
+            "value":"[TS_973305]_Flash, auto"
+        },
+        {
+            "name":"camera_metering_center_weighted",
+            "value":"[TS_973306]_Matrix"
+        },
+        {
+            "name":"white_balance_tungsten_incandescent_light",
+            "value":"[TS_973307]_Incandescent"
+        },
+        {
             "name":"action_selected",
             "value":"[TS_771992]_Deselect"
         },
@@ -11,10 +143,6 @@
         {
             "name":"action_back",
             "value":"[TS_772033]_Go back"
-        },
-        {
-            "name":"action_delete_invalid",
-            "value":"[TS_771991]_Can't be deleted"
         },
         {
             "name":"action_cancel",
@@ -29,8 +157,20 @@
             "value":"[TS_771999]_Videos"
         },
         {
+            "name":"all_videos",
+            "value":"[TS_960288]_All videos"
+        },
+        {
+            "name":"action_switcher_square",
+            "value":"[TS_1118087]_Show thumbnails as squares"
+        },
+        {
+            "name":"action_switcher_rectangle",
+            "value":"[TS_1118086]_Show thumbnails in original aspect ratio"
+        },
+        {
             "name":"action_remove",
-            "value":"[TS_772001]_Remove"
+            "value":"[TS_843571]_Remove"
         },
         {
             "name":"action_delete",
@@ -41,24 +181,12 @@
             "value":"[TS_772028]_Restore"
         },
         {
-            "name":"action_info",
-            "value":"[CJ_862539]_Details"
-        },
-        {
             "name":"action_ok",
             "value":"[TS_772002]_Done"
         },
         {
             "name":"action_material_select",
             "value":"[TS_772010]_Select"
-        },
-        {
-            "name":"action_navigation",
-            "value":"[TS_772037]_Get directions to this location"
-        },
-        {
-            "name":"title_no_albums",
-            "value":"[TS_771971]_No albums"
         },
         {
             "name":"yes",
@@ -71,10 +199,6 @@
         {
             "name":"no",
             "value":"[TS_772025]_Cancel"
-        },
-        {
-            "name":"count_details_external_selected",
-            "value":"[TS_771997]_%1$d/%2$d selected"
         },
         {
             "name":"rotate_text",
@@ -114,7 +238,7 @@
         },
         {
             "name":"recycleAlbum_delete_message",
-            "value":"[TS_784067]_Permanently delete these items?"
+            "value":"[TS_784067]_This item will be permanently deleted."
         },
         {
             "name":"editBar_text",
@@ -154,7 +278,7 @@
         },
         {
             "name":"dialog_remove",
-            "value":"[TS_784081]_Remove"
+            "value":"[TS_843569]_Remove"
         },
         {
             "name":"dialog_delete",
@@ -171,6 +295,46 @@
         {
             "name":"tab_albums",
             "value":"[TS_772031]_Albums"
+        },
+        {
+            "name":"mobile_network_off",
+            "value":"[TS_948184]_No WLAN disabled. Update paused."
+        },
+        {
+            "name":"skip_current_file",
+            "value":"[TS_975163]_Skip"
+        },
+        {
+            "name":"move_files_cancel_message",
+            "value":"[TS_976072]_%1$s of items moved."
+        },
+        {
+            "name":"replace_with_new_file",
+            "value":"[TS_975165]_Replace"
+        },
+        {
+            "name":"move_file_to",
+            "value":"[TS_974729]_Move to"
+        },
+        {
+            "name":"target_has_same_name_file",
+            "value":"[TS_975338]_A file with this name already exists. Replace it?"
+        },
+        {
+            "name":"move_progress",
+            "value":"[TS_974731]_Moving…"
+        },
+        {
+            "name":"copy_progress",
+            "value":"[TS_1123736]_Copying…"
+        },
+        {
+            "name":"cancel_move",
+            "value":"[TS_975164]_Cancel"
+        },
+        {
+            "name":"tab_highlights",
+            "value":"[TS_914388]_Highlights"
         },
         {
             "name":"target_has_same_name",
@@ -201,16 +365,36 @@
             "value":"[TS_784083]_Saving picture\u2026"
         },
         {
-            "name":"recycle_single_album_tips",
-            "value":"[TS_783998]_Delete this album? (Photos: %1$d, Videos: %2$d)"
-        },
-        {
             "name":"specific_characters_not_supported",
-            "value":"[TS_784022]_' ` \" . \\ / : * ? < > | [ ] { } are not supported."
+            "value":"[TS_784022]_Cannot contain ' ` \" . \\ / : * ? < > | [ ] { }"
         },
         {
             "name":"copy_cancel_message",
-            "value":"[TS_784037]_%1$s copied. Stop copying the remaining files?"
+            "value":"[TS_784037]_%1$s of items added. Stop adding items?"
+        },
+        {
+            "name":"delete_cancel_message",
+            "value":"[TS_875358]_%1$s deleted. Stop deleting the remaining files?"
+        },
+        {
+            "name":"delete_permanently_cancel_message",
+            "value":"[TS_875361]_%1$s permanently deleted. Stop deleting the remaining files?"
+        },
+        {
+            "name":"remove_cancel_message",
+            "value":"[TS_875364]_%1$s removed. Stop removing the remaining items?"
+        },
+        {
+            "name":"hide_cancel_message",
+            "value":"[TS_875359]_%1$s hidden. Stop hiding the remaining files?"
+        },
+        {
+            "name":"unhide_cancel_message",
+            "value":"[TS_875360]_%1$s unhidden. Stop unhiding the remaining files?"
+        },
+        {
+            "name":"recover_cancel_message",
+            "value":"[TS_875357]_%1$s restored. Stop restoring the remaining files?"
         },
         {
             "name":"album_favor",
@@ -226,7 +410,7 @@
         },
         {
             "name":"add_progress_message",
-            "value":"[TS_784035]_Adding to %1$s…"
+            "value":"[TS_843575]_Adding to %1$s…"
         },
         {
             "name":"recycle_single_file_tips",
@@ -253,12 +437,8 @@
             "value":"[TS_784008]_Stop"
         },
         {
-            "name":"move_to_album",
-            "value":"[TS_784060]_Move to album"
-        },
-        {
             "name":"remove_picture_tips",
-            "value":"[TS_771993]_Remove this photo?"
+            "value":"[TS_843566]_Remove this photo?"
         },
         {
             "name":"recycle_picture_tips",
@@ -281,14 +461,6 @@
             "value":"[TS_784056]_Aspect ratio"
         },
         {
-            "name":"move_cancel_message",
-            "value":"[TS_784021]_%1$s moved. Stop moving the remaining files?"
-        },
-        {
-            "name":"recycle_single_album_with_videos_tips",
-            "value":"[TS_784040]_Delete this album? (Videos: %d)"
-        },
-        {
             "name":"no_photo_sub_title_album",
             "value":"[TS_784072]_Reliving your best memories has never been easier."
         },
@@ -298,15 +470,11 @@
         },
         {
             "name":"recycleAlbum_clear_message",
-            "value":"[TS_784076]_Permanently clear all items?"
+            "value":"[TS_784076]_All items will be permanently deleted."
         },
         {
             "name":"action_favorite",
             "value":"[TS_772000]_Unfavorite"
-        },
-        {
-            "name":"move",
-            "value":"[TS_784104]_Move"
         },
         {
             "name":"edit_exit_dialog_discard_text",
@@ -322,7 +490,7 @@
         },
         {
             "name":"multiselect",
-            "value":"[TS_784064]_Select multiple items"
+            "value":"[TS_784064]_Select multiple"
         },
         {
             "name":"save_dialog_title_text",
@@ -345,24 +513,12 @@
             "value":"[TS_784017]_Path"
         },
         {
-            "name":"move_to",
-            "value":"[TS_784038]_Move to"
-        },
-        {
-            "name":"move_progress_message",
-            "value":"[TS_783997]_Moving to %1$s…"
-        },
-        {
             "name":"no_photo_head_title_timeline",
             "value":"[TS_784002]_Take a stroll down memory lane"
         },
         {
             "name":"album_recycle",
             "value":"[TS_772013]_Recently deleted"
-        },
-        {
-            "name":"recycle_albums_with_videos_tips",
-            "value":"[TS_784122]_Delete %1$d albums? (Videos: %2$d)"
         },
         {
             "name":"tab_timeline",
@@ -375,10 +531,6 @@
         {
             "name":"cropModeReset_text",
             "value":"[TS_783982]_Reset"
-        },
-        {
-            "name":"recycle_files_tips",
-            "value":"[TS_772023]_Delete %d items?"
         },
         {
             "name":"save_dialog_context_text",
@@ -397,10 +549,6 @@
             "value":"[TS_772015]_Today"
         },
         {
-            "name":"album_camera",
-            "value":"[TS_771984]_Camera"
-        },
-        {
             "name":"action_not_favorite",
             "value":"[TS_771978]_Favorite"
         },
@@ -411,14 +559,6 @@
         {
             "name":"copy_to_album",
             "value":"[TS_784101]_Copy to album"
-        },
-        {
-            "name":"cancel_button",
-            "value":"[TS_772018]_Cancel"
-        },
-        {
-            "name":"recycle_albums_tips",
-            "value":"[TS_784069]_Delete %1$d albums? (Photos: %2$d, Videos: %3$d)"
         },
         {
             "name":"dialog_cancel",
@@ -445,12 +585,36 @@
             "value":"[TS_784128]_No photos or videos"
         },
         {
-            "name":"recycle_prompt_message",
-            "value":"[TS_802175]_Photos and videos will be permanently deleted after the number of days shown (up to %d days)."
+            "name":"no_more_portraits_currently",
+            "value":"[TS_945997]_No more people"
         },
         {
-            "name":"fa_play_interval_time_5",
-            "value":"[TS_802493]_%d min"
+            "name":"recycle_prompt_message",
+            "value":"[TS_802175]_Photos and videos are permanently deleted after the number of days shown (up to %d days)."
+        },
+        {
+            "name":"cover_edit_title",
+            "value":"[TS_1042352]_Edit cover"
+        },
+        {
+            "name":"cover_preview_title",
+            "value":"[TS_1042351]_Cover preview"
+        },
+        {
+            "name":"set_as_cover",
+            "value":"[TS_1053950]_Set as cover"
+        },
+        {
+            "name":"album_petalclip_video",
+            "value":"[TS_802036]_Petal Clip"
+        },
+        {
+            "name":"edit_video_dialog_show_petalClip_not_install",
+            "value":"[TS_802035]_Petal Clip is required to use this feature. Go download?"
+        },
+        {
+            "name":"edit_video_dialog_to_download_PetalClip",
+            "value":"[TS_802037]_Go"
         },
         {
             "name":"fa_show_isShowAlbumName",
@@ -461,20 +625,8 @@
             "value":"[TS_784026]_Rename"
         },
         {
-            "name":"fa_select_time",
-            "value":"[TS_784124]_Select interval"
-        },
-        {
-            "name":"move_failed_single",
-            "value":"[TS_784006]_Unable to move. Please try again."
-        },
-        {
             "name":"recycleAlbum_delete_all_images_message",
-            "value":"[TS_837549]_Permanently delete all items?"
-        },
-        {
-            "name":"fa_play_interval_time_60",
-            "value":"[TS_788687]_%1$d hour"
+            "value":"[TS_837549]_All items will be permanently deleted."
         },
         {
             "name":"fa_select_image_text",
@@ -482,23 +634,11 @@
         },
         {
             "name":"select_items_to_add",
-            "value":"[TS_784024]_Select items to add"
+            "value":"[TS_784024]_Select items to add."
         },
         {
             "name":"camera_btn_text_photo",
             "value":"[TS_814192]_Take photo"
-        },
-        {
-            "name":"fa_select_album_text",
-            "value":"[TS_784014]_Select an album"
-        },
-        {
-            "name":"fa_image_show_interval",
-            "value":"[TS_784009]_Slideshow interval"
-        },
-        {
-            "name":"fa_play_interval_time_30",
-            "value":"[TS_788690]_%1$d min"
         },
         {
             "name":"fa_subTitle_text",
@@ -517,52 +657,52 @@
             "value":"[TS_784089]_Gallery"
         },
         {
-            "name":"fa_play_interval_time_90",
-            "value":"[TS_788683]_%1$d hours"
-        },
-        {
-            "name":"fa_setting_text",
-            "value":"[TS_784043]_Settings"
-        },
-        {
             "name":"title_select_album",
             "value":"[TS_788685]_Select album"
-        },
-        {
-            "name":"edit_photo_save_fail",
-            "value":"[TS_788696]_Failed to save this photo."
         },
         {
             "name":"camera_btn_text_shooting",
             "value":"[TS_814193]_Take video"
         },
         {
-            "name":"add_notes",
-            "value":"[TS_784005]_Add notes"
-        },
-        {
-            "name":"album_remote_device",
-            "value":"[TS_784134]_From other devices"
-        },
-        {
-            "name":"crop_text",
-            "value":"[TS_784133]_Crop"
-        },
-        {
             "name":"complete",
             "value":"[TS_784063]_Done"
         },
         {
+            "name":"externalDisk",
+            "value":"[TS_1025135]_SD card"
+        },
+        {
+            "name":"external_Disk_toast",
+            "value":"[TS_1048310]_Install the Files app and try again."
+        },
+        {
+            "name":"viewing_storage_devices",
+            "value":"[TS_1046470]_View photos & videos on \"%s\""
+        },
+        {
+            "name":"go_to_check_out",
+            "value":"[TS_1015574]_Go view"
+        },
+        {
+            "name":"jump_to_file_management_tips",
+            "value":"[TS_1015575]_Go to Files > Browse > \"%s\" to view and manage photos and videos on this storage device."
+        },
+        {
             "name":"download_failed_single",
-            "value":"[TS_784066]_Saving has been failed."
+            "value":"[TS_784066]_Unable to save file."
         },
         {
             "name":"filter_original_text",
             "value":"[TS_784088]_Original"
         },
         {
+            "name":"only_selected_items_can_be_accessed",
+            "value":"[TS_958284]_This app can only access photos and videos you select"
+        },
+        {
             "name":"distributed_album_disconnected",
-            "value":"[TS_783986]_Other device disconnected."
+            "value":"[TS_783986]_Device disconnected."
         },
         {
             "name":"action_share",
@@ -570,15 +710,7 @@
         },
         {
             "name":"action_new",
-            "value":"[TS_784051]_New"
-        },
-        {
-            "name":"local",
-            "value":"[TS_783990]_Local"
-        },
-        {
-            "name":"download_progress_cancel",
-            "value":"[TS_784050]_YES"
+            "value":"[TS_784051]_New album"
         },
         {
             "name":"image_loading",
@@ -597,60 +729,16 @@
             "value":"[TS_784077]_ETS_Empty Ability"
         },
         {
-            "name":"download_progress_continue",
-            "value":"[TS_783991]_NO"
-        },
-        {
-            "name":"other_equipment",
-            "value":"[TS_784004]_Other equipment"
-        },
-        {
-            "name":"count",
-            "value":"[TS_784039]_Selected:"
-        },
-        {
-            "name":"items",
-            "value":"[TS_784033]_%d items"
-        },
-        {
-            "name":"no_distributed_photo_show_image",
-            "value":"[TS_784010]_Open a large image in the peer gallery, and then browse the image on the local gallery."
-        },
-        {
-            "name":"video_pause",
-            "value":"[TS_784065]_Paused"
-        },
-        {
-            "name":"no_distributed_photo_show_video",
-            "value":"[TS_784036]_Download the video file to the local computer for playback."
-        },
-        {
             "name":"selected_photos_count",
-            "value":"[TS_806878]_%1$d/%2$d"
-        },
-        {
-            "name":"download_cancel_message",
-            "value":"[TS_784074]_Cancel saving?"
+            "value":"[TS_806878]_Selected %1$d/%2$d"
         },
         {
             "name":"id_text_font_family_medium",
             "value":"[TS_783987]_HwChinese-medium"
         },
         {
-            "name":"storage_permission_description",
-            "value":"[TS_771986]_This is used to access photos and videos."
-        },
-        {
             "name":"action_setting",
             "value":"[TS_771987]_Settings"
-        },
-        {
-            "name":"download_failed_multi",
-            "value":"[TS_784125]_Saved %d, but failed other"
-        },
-        {
-            "name":"download_progress_message",
-            "value":"[TS_784112]_Downloading"
         },
         {
             "name":"id_text_font_family_regular",
@@ -670,11 +758,3175 @@
         },
         {
             "name":"number_of_shared_exceeds_the_limit_tips",
-            "value":"[TS_813907]_The number of images to be shared exceeds the upper limit. Sharing failed."
+            "value":"[TS_813907]_A maximum of %d items can be shared at a time."
         },
         {
             "name":"download_progress_done",
             "value":"[TS_783988]_Items saved."
+        },
+        {
+            "name":"recycle_single_empty_album_tips",
+            "value":"[TS_843565]_Delete this album?"
+        },
+        {
+            "name":"add_to_album",
+            "value":"[TS_843570]_Add to"
+        },
+        {
+            "name":"remove_from",
+            "value":"[TS_843574]_Remove from album"
+        },
+        {
+            "name":"add",
+            "value":"[TS_843573]_Add"
+        },
+        {
+            "name":"pause_none_battery_low",
+            "value":"[TS_850049]_Updating is paused to save battery power."
+        },
+        {
+            "name":"message_cloud_update",
+            "value":"[TS_850047]_Syncing…"
+        },
+        {
+            "name":"gallery_sync_cloud",
+            "value":"[TS_850051]_Sync albums to Cloud"
+        },
+        {
+            "name":"gallery_settings",
+            "value":"[TS_850055]_Settings"
+        },
+        {
+            "name":"photo_hide_albums",
+            "value":"[TS_994043]_Hidden items"
+        },
+        {
+            "name":"click_to_experience_the_hide_album_function",
+            "value":"[TS_995498]_Tap here to view hidden items."
+        },
+        {
+            "name":"add_to",
+            "value":"[TS_843576]_Add to"
+        },
+        {
+            "name":"gallery_cloud_data_sync_summary",
+            "value":"[TS_850065]_Automatically sync all your photos and videos to Cloud so you can access them on any of your devices."
+        },
+        {
+            "name":"close_hdc_dialog_title",
+            "value":"[TS_850054]_Disable cloud syncing"
+        },
+        {
+            "name":"remove_single_file_tips",
+            "value":"[TS_843577]_Remove this item?"
+        },
+        {
+            "name":"social_gallery_downloading_toast",
+            "value":"[TS_850058]_Downloading…"
+        },
+        {
+            "name":"open_hdc_dialog_content",
+            "value":"[TS_850061]_Gallery data on this device will be uploaded and merged with your Cloud data."
+        },
+        {
+            "name":"wait_none_no_wlan",
+            "value":"[TS_850042]_No WLAN connection. Sync paused."
+        },
+        {
+            "name":"close_hdc_dialog_content",
+            "value":"[TS_850053]_Your photos and videos will no longer be synced to your other devices. Disable anyway?"
+        },
+        {
+            "name":"enable_hicloud_gallery",
+            "value":"[TS_850067]_Sync photos and videos to the cloud."
+        },
+        {
+            "name":"remove_all_files_tips",
+            "value":"[TS_843572]_Remove all items?"
+        },
+        {
+            "name":"pause_upload_for_low_battery",
+            "value":"[TS_850038]_Battery lower than %s. Uploads paused."
+        },
+        {
+            "name":"download_failed",
+            "value":"[TS_850057]_Download failed."
+        },
+        {
+            "name":"stop_for_sync_cloud",
+            "value":"[TS_850046]_Battery lower than %s. Sync paused."
+        },
+        {
+            "name":"message_time_update",
+            "value":"[TS_850052]_Updated %1$s"
+        },
+        {
+            "name":"wait_none_no_network",
+            "value":"[TS_850059]_No network connection. Sync paused."
+        },
+        {
+            "name":"gallery_cloud_space_full",
+            "value":"[TS_850064]_Cloud storage full. Unable to upload any more photos or videos."
+        },
+        {
+            "name":"album_photos",
+            "value":"[TS_843578]_Photos"
+        },
+        {
+            "name":"all_photos",
+            "value":"[TS_960287]_All photos"
+        },
+        {
+            "name":"remove_video_tips",
+            "value":"[TS_843568]_Remove this video?"
+        },
+        {
+            "name":"sync",
+            "value":"[TS_850048]_Sync"
+        },
+        {
+            "name":"no_network",
+            "value":"[TS_850050]_No Internet connection available."
+        },
+        {
+            "name":"current_network_environment_poor",
+            "value":"[TS_1006133]_Poor network connection. Please try again."
+        },
+        {
+            "name":"read_imagevideo_desc",
+            "value":"[TS_858432]_Allows access to the images or video files in a user’s directory."
+        },
+        {
+            "name":"copy_to_pasteboard",
+            "value":"[TS_861388]_Copy to clipboard"
+        },
+        {
+            "name":"prompt_new_album_dialog_title",
+            "value":"[TS_855828]_No albums available"
+        },
+        {
+            "name":"recycle_single_album_tips",
+            "value":"[TS_783998]_Delete this album? (Photos: %1$d, Videos: %2$d)"
+        },
+        {
+            "name":"save_to_local",
+            "value":"[TS_783984]_Save"
+        },
+        {
+            "name":"recycle_empty_albums_tips",
+            "value":"[TS_850854]_Delete selected albums?"
+        },
+        {
+            "name":"recycle_selected_albums",
+            "value":"[TS_974696]_Delete selected albums?"
+        },
+        {
+            "name":"prompt_new_album_dialog_message",
+            "value":"[TS_855829]_There aren't any albums to move or copy to. Create a new album?"
+        },
+        {
+            "name":"album_new_album",
+            "value":"[TS_784061]_New album"
+        },
+        {
+            "name":"copy_success",
+            "value":"[TS_863794]_Copied."
+        },
+        {
+            "name":"collage_save_fail_tips",
+            "value":"[TS_931094]_Unable to save. Image not downloaded. Check your network and try again."
+        },
+        {
+            "name":"number_of_copied_exceeds_the_limit_tips",
+            "value":"[TS_863795]_A maximum of %d items can be copied at a time."
+        },
+        {
+            "name":"action_search",
+            "value":"[TS_850481]_Search"
+        },
+        {
+            "name":"add_note",
+            "value":"[TS_858436]_Add caption"
+        },
+        {
+            "name":"write_imagevideo_desc",
+            "value":"[TS_858434]_Allows modification to the images or video files in a user’s directory."
+        },
+        {
+            "name":"recycle_albums_tips",
+            "value":"[TS_784069]_Delete %1$d albums? (Photos: %2$d, Videos: %3$d)"
+        },
+        {
+            "name":"file_can_not_edited",
+            "value":"[TS_866911]_Unsupported or corrupted file. Unable to edit."
+        },
+        {
+            "name":"hide_single_file_tips",
+            "value":"[TS_869325]_Hide this item?"
+        },
+        {
+            "name":"hide_single_image_tips",
+            "value":"[TS_872195]_Hide this image?"
+        },
+        {
+            "name":"dialog_hide",
+            "value":"[TS_869332]_Hide"
+        },
+        {
+            "name":"grid_display",
+            "value":"[TS_869318]_Photo view"
+        },
+        {
+            "name":"lock_tips_password",
+            "value":"[TS_869316]_Set a screen lock to protect your hidden albums from unauthorized access."
+        },
+        {
+            "name":"print",
+            "value":"[TS_866498]_Print"
+        },
+        {
+            "name":"please_enter_the_password",
+            "value":"[TS_872242]_Enter PIN"
+        },
+        {
+            "name":"hide_no_tips",
+            "value":"[TS_869324]_Don't show again"
+        },
+        {
+            "name":"hidden_album",
+            "value":"[TS_869329]_Hidden items"
+        },
+        {
+            "name":"album_display",
+            "value":"[TS_869328]_Album view"
+        },
+        {
+            "name":"action_hide",
+            "value":"[TS_869321]_Hide"
+        },
+        {
+            "name":"view_albums",
+            "value":"[TS_869330]_View contents"
+        },
+        {
+            "name":"number_of_print_exceeds_the_limit_tips",
+            "value":"[TS_865973]_Max of %d items can be printed at a time."
+        },
+        {
+            "name":"hide_single_video_tips",
+            "value":"[TS_872196]_Hide this video?"
+        },
+        {
+            "name":"hide_all_files_tips",
+            "value":"[TS_869317]_Hide all items?"
+        },
+        {
+            "name":"hide_images_message",
+            "value":"[TS_869331]_Selected items will be moved to \"Hidden items\"."
+        },
+        {
+            "name":"cancel_hidden",
+            "value":"[TS_869322]_Unhide"
+        },
+        {
+            "name":"lock_tips_list",
+            "value":"[TS_869320]_Note"
+        },
+        {
+            "name":"to_set_up",
+            "value":"[TS_869319]_Go set"
+        },
+        {
+            "name":"verify_and_view_album",
+            "value":"[TS_869327]_Verify to view contents"
+        },
+        {
+            "name":"not_prompt_again",
+            "value":"[TS_869323]_Don't show again"
+        },
+        {
+            "name":"new_recycle_albums_tips",
+            "value":"[TS_862223]_Delete selected albums?\n\nPhotos and videos in these albums won't be deleted."
+        },
+        {
+            "name":"new_recycle_single_album_tips",
+            "value":"[TS_862222]_This won't delete the photos and videos inside it."
+        },
+        {
+            "name":"fail_to_beautify_please_try_again_later",
+            "value":"[TS_875772]_Unable to apply beauty effects. Try again later."
+        },
+        {
+            "name":"double_click_to_restore_the_original_size",
+            "value":"[TS_875773]_Double-tap to restore the original size."
+        },
+        {
+            "name":"current_picture_not_download_please_download_and_try_again",
+            "value":"[TS_878039]_Download the image first."
+        },
+        {
+            "name":"the_oriental_pearl_tower",
+            "value":"[TS_875988]_Oriental Pearl Tower"
+        },
+        {
+            "name":"app_version",
+            "value":"[TS_878411]_Version %1$d"
+        },
+        {
+            "name":"means_of_transportation",
+            "value":"[TS_876007]_Vehicles"
+        },
+        {
+            "name":"tab_city",
+            "value":"[TS_878412]_Cities"
+        },
+        {
+            "name":"portrait_me",
+            "value":"[TS_881490]_Me"
+        },
+        {
+            "name":"merge_invalid",
+            "value":"[TS_880543]_MergeInvalid"
+        },
+        {
+            "name":"document",
+            "value":"[TS_875997]_Documents"
+        },
+        {
+            "name":"blossom",
+            "value":"[TS_876016]_Flowers"
+        },
+        {
+            "name":"about",
+            "value":"[TS_878422]_About"
+        },
+        {
+            "name":"about_privacy_statement",
+            "value":"[TS_878400]_Statement About Location Albums and Privacy"
+        },
+        {
+            "name":"city_overlook",
+            "value":"[TS_875973]_Cityscapes"
+        },
+        {
+            "name":"size_of_compared_exceeds_the_limit_tips",
+            "value":"[TS_874471]_Some images are too large for comparison."
+        },
+        {
+            "name":"moving_picture",
+            "value":"[TS_880723]_Moving picture"
+        },
+        {
+            "name":"dynamic_photos_can_switched",
+            "value":"[TS_1000681]_Multiple playback effects are available. Tap here to switch between them."
+        },
+        {
+            "name":"learn_more",
+            "value":"[TS_981329]_Learn more"
+        },
+        {
+            "name":"end_of_service",
+            "value":"[TS_878392]_Disable service"
+        },
+        {
+            "name":"business_card",
+            "value":"[TS_876004]_Business cards"
+        },
+        {
+            "name":"remove_from_portrait_tips",
+            "value":"[TS_880545]_You can add them again at any time from the People album."
+        },
+        {
+            "name":"remove_from_album_tips",
+            "value":"[TS_1007402]_This photo will no longer be shown in this album."
+        },
+        {
+            "name":"more_portrait",
+            "value":"[TS_880535]_More people"
+        },
+        {
+            "name":"delete_permanently_clear_cancel_message",
+            "value":"[TS_880022]_%s cleared. Stop clearing the rest?"
+        },
+        {
+            "name":"picture_compare",
+            "value":"[TS_878425]_Compare"
+        },
+        {
+            "name":"birthday_cake",
+            "value":"[TS_876005]_Birthday cakes"
+        },
+        {
+            "name":"Remove_From_Portrait",
+            "value":"[TS_880530]_Remove from People"
+        },
+        {
+            "name":"flowing_shutter",
+            "value":"[TS_875999]_Light painting"
+        },
+        {
+            "name":"privacy_statement",
+            "value":"[TS_918839]_Statement About Gallery and Privacy"
+        },
+        {
+            "name":"Statue_of_liberty",
+            "value":"[TS_876000]_Statue of Liberty"
+        },
+        {
+            "name":"ppt",
+            "value":"[TS_876006]_Slides"
+        },
+        {
+            "name":"select_portrait_photo",
+            "value":"[TS_880998]_Select photos of you."
+        },
+        {
+            "name":"Tab_change_cover",
+            "value":"[TS_880532]_Select cover image"
+        },
+        {
+            "name":"displayed_agreeing_map",
+            "value":"[TS_882457]_Agree to the terms of service to view the map."
+        },
+        {
+            "name":"cats",
+            "value":"[TS_876002]_Cats"
+        },
+        {
+            "name":"waterfall",
+            "value":"[TS_875970]_Waterfalls"
+        },
+        {
+            "name":"remove_this_portrait",
+            "value":"[TS_880540]_Remove this person?"
+        },
+        {
+            "name":"gallery_local_space_release_summary",
+            "value":"[TS_875362]_To save storage space, local copies of photos and videos that have been uploaded to Cloud will be removed from this device."
+        },
+        {
+            "name":"photo_source",
+            "value":"[TS_875981]_Browse by app"
+        },
+        {
+            "name":"personal_information_collected",
+            "value":"[TS_880361]_Personal information collected"
+        },
+        {
+            "name":"show_less",
+            "value":"[TS_881005]_Show less"
+        },
+        {
+            "name":"map_album_service_description",
+            "value":"[TS_878416]_This service lets you browse your photos and videos by location. It requires the following permission, which you can revoke at any time in Settings > Apps & services > Apps."
+        },
+        {
+            "name":"id_card",
+            "value":"[TS_871233]_IDs"
+        },
+        {
+            "name":"merge",
+            "value":"[TS_880536]_Merge"
+        },
+        {
+            "name":"Tab_Portrait",
+            "value":"[TS_880528]_People"
+        },
+        {
+            "name":"third_sdk_list",
+            "value":"[TS_878414]_Third-party SDK list"
+        },
+        {
+            "name":"location_information",
+            "value":"[TS_878419]_Location"
+        },
+        {
+            "name":"manage_private_photos_desc",
+            "value":"[TS_879825]_Album private data management."
+        },
+        {
+            "name":"slow_motion_video",
+            "value":"[TS_876010]_Slow-mo"
+        },
+        {
+            "name":"shoot_album",
+            "value":"[TS_875969]_Camera modes"
+        },
+        {
+            "name":"replace_cover",
+            "value":"[TS_880525]_Change cover"
+        },
+        {
+            "name":"puzzle_frame",
+            "value":"[TS_880020]_Frame"
+        },
+        {
+            "name":"portrait_not_name_set_for_me",
+            "value":"[TS_898397]_Set this person as Me?"
+        },
+        {
+            "name":"bank_card",
+            "value":"[TS_876001]_Bank cards"
+        },
+        {
+            "name":"professional_photography",
+            "value":"[TS_875993]_Pro photo"
+        },
+        {
+            "name":"click_to_disable_the_photo_linkage_compare_effect",
+            "value":"[TS_878415]_Tap to unlink photos."
+        },
+        {
+            "name":"new_timeline_message_compose",
+            "value":"[TS_878714]_%1$s and %2$s"
+        },
+        {
+            "name":"action_compare",
+            "value":"[TS_874473]_Compare"
+        },
+        {
+            "name":"unsupported_video_type",
+            "value":"[TS_880996]_This format is not supported."
+        },
+        {
+            "name":"image_scale_error",
+            "value":"[TS_878405]_Some images are too large for collage."
+        },
+        {
+            "name":"portrait_replace_me",
+            "value":"[TS_883440]_Replace \"Me\""
+        },
+        {
+            "name":"graduation_photo",
+            "value":"[TS_875996]_Graduation"
+        },
+        {
+            "name":"on_network",
+            "value":"[TS_878420]_Internet"
+        },
+        {
+            "name":"delete_permanently_forever_cancel_message",
+            "value":"[TS_880021]_%s of files have been permanently deleted. Stop deleting the rest?"
+        },
+        {
+            "name":"portrait_add",
+            "value":"[TS_880995]_Add name"
+        },
+        {
+            "name":"wrist_watch",
+            "value":"[TS_875971]_Watches"
+        },
+        {
+            "name":"high_mountain",
+            "value":"[TS_875975]_Mountains"
+        },
+        {
+            "name":"day",
+            "value":"[TS_881707]_Days"
+        },
+        {
+            "name":"number_of_compared_exceeds_the_limit_tips",
+            "value":"[TS_874476]_Select %1$d–%2$d images."
+        },
+        {
+            "name":"super_macro",
+            "value":"[TS_875977]_Super macro"
+        },
+        {
+            "name":"determine_the_logic_for_starting_the_service_from_third_party_app",
+            "value":"[TS_881029]_Determine the logic for starting the service from other third-party applications"
+        },
+        {
+            "name":"no_distributed_photo_title_album",
+            "value":"[TS_878391]_No photos"
+        },
+        {
+            "name":"tab_map",
+            "value":"[TS_878398]_Map"
+        },
+        {
+            "name":"image_place",
+            "value":"[TS_878399]_Places"
+        },
+        {
+            "name":"tab_timeline_actionbar_title",
+            "value":"[TS_878716]_All photos"
+        },
+        {
+            "name":"read_cloud_sync_config_desc",
+            "value":"[TS_879826]_Allows apps to read user cloud-synced information."
+        },
+        {
+            "name":"video_not_jigsaw_puzzle",
+            "value":"[TS_878393]_Videos can't be used to create collages."
+        },
+        {
+            "name":"click_view_protocol",
+            "value":"[TS_882458]_Tap to view"
+        },
+        {
+            "name":"location_information_description",
+            "value":"[TS_878406]_This is used to provide location services."
+        },
+        {
+            "name":"number_of_selected_max",
+            "value":"[TS_874472]_Max of %d images can be compared at a time."
+        },
+        {
+            "name":"click_to_experience_the_image_compare_function",
+            "value":"[TS_878424]_Tap here to compare images."
+        },
+        {
+            "name":"ability_for_hide_album",
+            "value":"[TS_881028]_ability for the hide album"
+        },
+        {
+            "name":"portrait",
+            "value":"[TS_876011]_Portrait"
+        },
+        {
+            "name":"focal_length",
+            "value":"[TS_858430]_Focal length: %s"
+        },
+        {
+            "name":"month",
+            "value":"[TS_881705]_Months"
+        },
+        {
+            "name":"portrait_merge_to_me",
+            "value":"[TS_883441]_They'll be seen as the same person."
+        },
+        {
+            "name":"aircraft",
+            "value":"[TS_876008]_Aircraft"
+        },
+        {
+            "name":"portrait_merger",
+            "value":"[TS_880544]_Merge the selected people?"
+        },
+        {
+            "name":"gallery_local_space_release",
+            "value":"[TS_875363]_Optimize device storage"
+        },
+        {
+            "name":"high_pixel",
+            "value":"[TS_875980]_High-res"
+        },
+        {
+            "name":"remove_portrait",
+            "value":"[TS_880531]_Move"
+        },
+        {
+            "name":"image_format_compare_is_not_supported",
+            "value":"[TS_878409]_Image format does not support comparison."
+        },
+        {
+            "name":"action_hidden_process",
+            "value":"[TS_884381]_Hiding…"
+        },
+        {
+            "name":"dialog_consent",
+            "value":"[TS_878417]_Agree"
+        },
+        {
+            "name":"night_view",
+            "value":"[TS_875998]_Night"
+        },
+        {
+            "name":"action_collage",
+            "value":"[TS_878418]_Collage"
+        },
+        {
+            "name":"panda",
+            "value":"[TS_875985]_Pandas"
+        },
+        {
+            "name":"eiffel_tower",
+            "value":"[TS_875986]_Eiffel Tower"
+        },
+        {
+            "name":"access_hidden_albums",
+            "value":"[TS_877286]_to view hidden items"
+        },
+        {
+            "name":"Saved_to_Puzzle_Album",
+            "value":"[TS_878403]_Saved to album."
+        },
+        {
+            "name":"manage_cloud_sync_config_desc",
+            "value":"[TS_879824]_Allow applications to modify user cloud-synced information."
+        },
+        {
+            "name":"video_compare_is_not_supported",
+            "value":"[TS_878401]_Videos can't be compared."
+        },
+        {
+            "name":"portrait_select_cover",
+            "value":"[TS_880541]_Select cover"
+        },
+        {
+            "name":"image_specification_error",
+            "value":"[TS_878421]_Image format not supported."
+        },
+        {
+            "name":"action_delete_process",
+            "value":"[TS_880024]_Deleting…"
+        },
+        {
+            "name":"this_unction_requires",
+            "value":"[TS_878423]_This feature requires an %1$s connection and needs to access information about your device. By tapping Agree, you agree to these terms and the %2$s."
+        },
+        {
+            "name":"action_cancel_hidden_process",
+            "value":"[TS_884380]_Unhiding…"
+        },
+        {
+            "name":"action_recover_process",
+            "value":"[TS_880017]_Restoring…"
+        },
+        {
+            "name":"landscape",
+            "value":"[TS_875974]_Scenery"
+        },
+        {
+            "name":"video_player_cloud_io_error",
+            "value":"[TS_881706]_Playback failed. Try again later."
+        },
+        {
+            "name":"remove_portrait_invalid",
+            "value":"[TS_880538]_RemoveInvalid"
+        },
+        {
+            "name":"portrait_rename",
+            "value":"[TS_880999]_Enter their name"
+        },
+        {
+            "name":"fountain",
+            "value":"[TS_876013]_Fountains"
+        },
+        {
+            "name":"merge_check",
+            "value":"[TS_880542]_Merge"
+        },
+        {
+            "name":"year",
+            "value":"[TS_881708]_Years"
+        },
+        {
+            "name":"map_album_service",
+            "value":"[TS_878410]_Location Albums"
+        },
+        {
+            "name":"delicacy",
+            "value":"[TS_875991]_Food & drink"
+        },
+        {
+            "name":"rainbow",
+            "value":"[TS_875979]_Rainbows"
+        },
+        {
+            "name":"action_clear_process",
+            "value":"[TS_880023]_Clearing…"
+        },
+        {
+            "name":"end_of_service_note",
+            "value":"[TS_878413]_The Location Albums feature will no longer be available. Other features will not be affected. Disable anyway?"
+        },
+        {
+            "name":"portrait_name",
+            "value":"[TS_880526]_portrait name"
+        },
+        {
+            "name":"categorize",
+            "value":"[TS_875989]_Categories"
+        },
+        {
+            "name":"classified_album",
+            "value":"[TS_947125]_Categories"
+        },
+        {
+            "name":"expand",
+            "value":"[TS_947122]_Show more"
+        },
+        {
+            "name":"construct",
+            "value":"[TS_876003]_Buildings"
+        },
+        {
+            "name":"portrait_set_for_me",
+            "value":"[TS_898396]_Set \"%s\" as Me?"
+        },
+        {
+            "name":"start_of_service_location",
+            "value":"[TS_883549]_Allow Gallery to access your precise location in Settings"
+        },
+        {
+            "name":"fireworks",
+            "value":"[TS_880994]_Fireworks"
+        },
+        {
+            "name":"Set_Is_Me",
+            "value":"[TS_880527]_Set as Me"
+        },
+        {
+            "name":"dinner_party",
+            "value":"[TS_875987]_Group meals"
+        },
+        {
+            "name":"large_aperture",
+            "value":"[TS_875968]_Aperture"
+        },
+        {
+            "name":"action_remove_process",
+            "value":"[TS_880018]_Removing…"
+        },
+        {
+            "name":"select_items_two_nine",
+            "value":"[TS_878396]_Select %1$d–%2$d images."
+        },
+        {
+            "name":"motion",
+            "value":"[TS_876014]_Sports"
+        },
+        {
+            "name":"media_and_documents",
+            "value":"[TS_878394]_Media and files"
+        },
+        {
+            "name":"media_and_documents_description",
+            "value":"[TS_878407]_This is used to read photos and videos and display them by location."
+        },
+        {
+            "name":"access_medialib_thumb_db_desc",
+            "value":"[TS_908746]_Allows system applications to access and modify the media library database via sandbox path."
+        },
+        {
+            "name":"please_enter_name",
+            "value":"[TS_911429]_No name entered."
+        },
+        {
+            "name":"show_multi_video_and_photo_num",
+            "value":"[TS_910612]_%1$s, %2$s"
+        },
+        {
+            "name":"phone_rotate",
+            "value":"[TS_914389]_Rotate"
+        },
+        {
+            "name":"play",
+            "value":"[TS_914390]_Play"
+        },
+        {
+            "name":"pause",
+            "value":"[TS_914385]_Pause"
+        },
+        {
+            "name":"sound_filled",
+            "value":"[TS_914387]_Sound"
+        },
+        {
+            "name":"sound_off_filled",
+            "value":"[TS_914386]_Mute"
+        },
+        {
+            "name":"add_portrait",
+            "value":"[TS_916929]_Add people"
+        },
+        {
+            "name":"action_delete_album",
+            "value":"[TS_917752]_Delete"
+        },
+        {
+            "name":"action_rename_album",
+            "value":"[TS_917751]_Rename"
+        },
+        {
+            "name":"cast_mirror_title",
+            "value":"[TS_916927]_Projecting"
+        },
+        {
+            "name":"action_add_portrait_name",
+            "value":"[TS_976071]_Add name"
+        },
+        {
+            "name":"action_view_portrait",
+            "value":"[TS_976074]_View person"
+        },
+        {
+            "name":"Picker_Select",
+            "value":"[TS_917749]_Select"
+        },
+        {
+            "name":"Picker_Unselect",
+            "value":"[TS_917748]_Deselect"
+        },
+        {
+            "name":"action_add_photo",
+            "value":"[TS_917750]_Add photo"
+        },
+        {
+            "name":"picker_warning_title",
+            "value":"[TS_919910]_Private access to Gallery"
+        },
+        {
+            "name":"picker_view_toast_title",
+            "value":"[TS_956542]_Private access"
+        },
+        {
+            "name":"gallery_service_description",
+            "value":"[TS_918838]_This app requires the following permission:"
+        },
+        {
+            "name":"welcome_notify",
+            "value":"[TS_918836]_This app requires an %1$s connection and the %2$s permission to provide features such as image and video browsing, editing, and intelligent media analysis. By tapping Agree, you agree to these terms. For more details about how your personal information is processed, refer to the %3$s and %4$s."
+        },
+        {
+            "name":"favor_cancel_message",
+            "value":"[TS_918840]_%1$s favorited. Stop favoriting the rest?"
+        },
+        {
+            "name":"action_unfavor_process",
+            "value":"[TS_951856]_Removing from Favorites…"
+        },
+        {
+            "name":"unfavor_cancel_message",
+            "value":"[TS_951857]_%1$s of items have already been unfavorited."
+        },
+        {
+            "name":"cancel_process_title",
+            "value":"[TS_951858]_Stop this operation?"
+        },
+        {
+            "name":"pictures_and_videos",
+            "value":"[TS_919913]_Photos & videos"
+        },
+        {
+            "name":"gallery_right_access_statement",
+            "value":"[TS_918841]_Permissions Notice"
+        },
+        {
+            "name":"picker_warning_content",
+            "value":"[TS_919912]_Your photos and videos are shown here, but this app can only access the items that you select."
+        },
+        {
+            "name":"action_favor_process",
+            "value":"[TS_918843]_Saving to favorites…"
+        },
+        {
+            "name":"photo_and_video_desc",
+            "value":"[TS_918837]_This is used to access, edit, and store photos and videos."
+        },
+        {
+            "name":"download_failed_retry",
+            "value":"[TS_921498]_Network error. Check your network settings and try again."
+        },
+        {
+            "name":"night_shot",
+            "value":"[TS_921513]_Night shot"
+        },
+        {
+            "name":"action_motion_picture",
+            "value":"[TS_921044]_Moving picture"
+        },
+        {
+            "name":"extended_services",
+            "value":"[TS_924912]_Extended services"
+        },
+        {
+            "name":"start_of_media_analysis_service_note",
+            "value":"[TS_998791]_This service reads and analyzes images and videos in the background to provide smart features in Gallery."
+        },
+        {
+            "name":"end_of_media_analysis_service_note",
+            "value":"[TS_922392]_This service will stop reading and analyzing images and videos in the background."
+        },
+        {
+            "name":"media_analysis_service",
+            "value":"[TS_922393]_Media Analysis service"
+        },
+        {
+            "name":"focal_length_focalLengthIn35mmFilm",
+            "value":"[TS_924911]_Focal length: %1$s (%2$s equivalent focal length)"
+        },
+        {
+            "name":"no_photo_head_title_highlight",
+            "value":"[TS_922527]_Relive priceless memories"
+        },
+        {
+            "name":"video_duration",
+            "value":"[TS_925333]_Duration: %s"
+        },
+        {
+            "name":"no_photo_sub_title_highlight",
+            "value":"[TS_922525]_Take more photos to unlock your highlights."
+        },
+        {
+            "name":"highlight_setting_tips_show",
+            "value":"[TS_1020898]_Analysis takes place when your device is plugged in and the screen is off."
+        },
+        {
+            "name":"highlight_no_tips_show",
+            "value":"[TS_1020900]_You'll see Highlights here once Gallery has finished analyzing your photo library. Photo analysis takes place when your device is plugged in and the screen is off."
+        },
+        {
+            "name":"highlight_Personal_Portrait_tips_show",
+            "value":"[TS_1020897]_Photo analysis in progress (%1$s). Analysis takes place when your device is plugged in and the screen is off."
+        },
+        {
+            "name":"highlight_having_tips_show",
+            "value":"[TS_1020895]_Photo analysis in progress (%1$s). Gallery will create Highlights for you once it's finished analyzing your photos. Analysis takes place when your device is plugged in and the screen is off."
+        },
+        {
+            "name":"photo_analysis_progress",
+            "value":"[TS_1004693]_Analyzing photos…"
+        },
+        {
+            "name":"fast_face_beautify",
+            "value":"[TS_915119]_Enhance"
+        },
+        {
+            "name":"cancel_face_beautify",
+            "value":"[TS_915120]_Undo"
+        },
+        {
+            "name":"pull_down_back_tips_for_sub_display",
+            "value":"[TS_923014]_Swipe down to exit the photo preview"
+        },
+        {
+            "name":"cast_hint",
+            "value":"[TS_932032]_Watch on the big screen."
+        },
+        {
+            "name":"close_network_dialog_content",
+            "value":"[TS_944718]_If you disable this, you won't be able to see where photos were taken, browse your Cloud Gallery, or view thumbnails of images on the cloud."
+        },
+        {
+            "name":"setting_up_the_network",
+            "value":"[TS_944717]_Network settings"
+        },
+        {
+            "name":"gallery_network_connection_view_image",
+            "value":"[TS_944725]_Internet is required to access Cloud Gallery, download thumbnails, and get search suggestions."
+        },
+        {
+            "name":"enable_gallery_network_connection",
+            "value":"[TS_974835]_Allowing Internet access lets you see where photos and videos were taken, get search suggestions, browse cloud content, download thumbnails, and use features like AI cloud enhancement and AI content creation."
+        },
+        {
+            "name":"gallery_network_disabled_please_enable_it",
+            "value":"[TS_944723]_Gallery Internet access disabled"
+        },
+        {
+            "name":"gallery_open_network_link",
+            "value":"[TS_944720]_Enable Internet access for Gallery?"
+        },
+        {
+            "name":"gallery_network_connection",
+            "value":"[TS_944722]_Allow Internet access"
+        },
+        {
+            "name":"cloud_enhancing_status_updating",
+            "value":"[TS_974839]_Uploading (%1$s/%2$s)…"
+        },
+        {
+            "name":"AI_cloud_enhance",
+            "value":"[TS_971468]_AI cloud enhancement"
+        },
+        {
+            "name":"cloud_enhance_service_description",
+            "value":"[TS_971472]_Upload images to the cloud for image enhancement with AI."
+        },
+        {
+            "name":"cloud_enhancing_status_download",
+            "value":"[TS_974836]_Downloading (%1$s/%2$s)…"
+        },
+        {
+            "name":"ai_enhance_complete_tips",
+            "value":"[TS_974837]_AI cloud enhancement complete."
+        },
+        {
+            "name":"cloud_enhance_addimage_busy",
+            "value":"[TS_974841]_Server busy. Try again later."
+        },
+        {
+            "name":"end_of_cloud_enhance_service_note",
+            "value":"[TS_971481]_AI cloud enhancement will no longer be available. Disable anyway?"
+        },
+        {
+            "name":"cloud_enhance_image_symbol_enhanced",
+            "value":"[TS_971482]_After"
+        },
+        {
+            "name":"cloud_enhance_confirm_tips",
+            "value":"[TS_971469]_Got it"
+        },
+        {
+            "name":"ai_cloud_enhance_des_new",
+            "value":"[TS_999525]_Automatically enhance recent photos with the help of AI. Simply tap the magic wand icon above supported images. This feature is free for a limited time only."
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_extra",
+            "value":"[TS_999524]_Automatically enhance recent photos with the help of AI. Simply tap the magic wand icon above supported images. This feature is free for a limited time only."
+        },
+        {
+            "name":"add_watermark_after_enhance",
+            "value":"[TS_971471]_Add watermark"
+        },
+        {
+            "name":"album_cloud_enhance",
+            "value":"[TS_971470]_AI cloud enhancement"
+        },
+        {
+            "name":"cloud_enhance_addimage_network_error",
+            "value":"[TS_974846]_Network error. Check and try again."
+        },
+        {
+            "name":"cloud_enhance_addimage_temperature_high",
+            "value":"[TS_974847]_Device temperature too high. Try again later."
+        },
+        {
+            "name":"cloud_enhance_unction_requires",
+            "value":"[TS_971475]_This service requires an %1$s connection and needs to read and upload/transfer images to provide image enhancement. By tapping Agree, you agree to these terms. For details about how your personal information is processed, refer to the %2$s."
+        },
+        {
+            "name":"cloud_enhance_privacy_statement",
+            "value":"[TS_971484]_Statement About AI Cloud Enhancement and Privacy"
+        },
+        {
+            "name":"cloud_enhancing_status_download_error",
+            "value":"[TS_974848]_Downloading…"
+        },
+        {
+            "name":"cloud_enhance_image_symbol_initial",
+            "value":"[TS_971476]_Before"
+        },
+        {
+            "name":"cloud_enhance_service",
+            "value":"[TS_971474]_AI cloud enhancement"
+        },
+        {
+            "name":"ai_enhance_wait_tips",
+            "value":"[TS_974842]_This photo is being enhanced on the cloud. Please wait."
+        },
+        {
+            "name":"close_network_link_title",
+            "value":"[TS_944716]_Disable Internet access for Gallery?"
+        },
+        {
+            "name":"Switch_on",
+            "value":"[TS_944724]_Enable"
+        },
+        {
+            "name":"gallery_unlimited_use_mobile",
+            "value":"[TS_944719]_Sync photos and videos with mobile data when WLAN isn't available."
+        },
+        {
+            "name":"gallery_unlimited_use_mobile_network",
+            "value":"[TS_944721]_Use mobile data"
+        },
+        {
+            "name":"disable",
+            "value":"[TS_945998]_Disable"
+        },
+        {
+            "name":"media_location_desc",
+            "value":"[TS_858437]_Allows an application to access geographical locations in the user’s media file."
+        },
+        {
+            "name":"gallery_network_off",
+            "value":"[TS_948183]_Gallery isn't allowed to access the Internet. Sync paused."
+        },
+        {
+            "name":"clear_tips",
+            "value":"[TS_953160]_Clear all?"
+        },
+        {
+            "name":"cloud_single_file_recycle_delete_kept_tips",
+            "value":"[TS_953165]_This item will be deleted from this device, the cloud, and all synced devices. It will be kept in \"Recently deleted\" for %d days."
+        },
+        {
+            "name":"cloud_all_files_recycle_delete_kept_tips",
+            "value":"[TS_953159]_All items will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %d days."
+        },
+        {
+            "name":"cloud_all_files_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_953163]_All items will be permanently deleted from this device, the cloud, and all synced devices."
+        },
+        {
+            "name":"cloud_single_file_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_953164]_This item will be permanently deleted from this device, the cloud, and all synced devices."
+        },
+        {
+            "name":"highlight_learn_more",
+            "value":"[TS_955068]_Learn more"
+        },
+        {
+            "name":"recycle_delete_kept_tips",
+            "value":"[TS_952931]_Deleted items are kept in \"Recently deleted\" for %1$d days."
+        },
+        {
+            "name":"recycle_tips",
+            "value":"[TS_952934]_Delete?"
+        },
+        {
+            "name":"cloud_video_recycle_delete_kept_tips",
+            "value":"[TS_952932]_This video will be deleted from this device, the cloud, and all synced devices. It will be kept in \"Recently deleted\" for %1$d days."
+        },
+        {
+            "name":"cloud_video_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_952928]_This video will be permanently deleted from this device, the cloud, and all synced devices."
+        },
+        {
+            "name":"cloud_picture_recycle_delete_kept_tips",
+            "value":"[TS_952929]_This photo will be deleted from this device, the cloud, and all synced devices. It will be kept in \"Recently deleted\" for %1$d days."
+        },
+        {
+            "name":"cloud_picture_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_952927]_This photo will be permanently deleted from this device, the cloud, and all synced devices."
+        },
+        {
+            "name":"video_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_952930]_This video will be permanently deleted."
+        },
+        {
+            "name":"welcome_prompt2",
+            "value":"[TS_947127]_By tapping Agree, you agree to these terms. For more details about how your personal information is processed, refer to the %1$s and %2$s."
+        },
+        {
+            "name":"welcome_prompt1",
+            "value":"[TS_947120]_This app requires an %1$s connection and the %2$s permission to provide features such as image and video browsing, editing, and intelligent media analysis."
+        },
+        {
+            "name":"learn_how_to_use_your_data",
+            "value":"[TS_947121]_How we use your data"
+        },
+        {
+            "name":"picture_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_952933]_This photo will be permanently deleted."
+        },
+        {
+            "name":"not_support_wallpaper_edit",
+            "value":"[TS_958432]_Wallpapers can't be edited in small windows."
+        },
+        {
+            "name":"set_wallpaper",
+            "value":"[TS_958437]_Set as wallpaper"
+        },
+        {
+            "name":"saving_burst_photos_dialog_title",
+            "value":"[TS_958992]_Delete the original burst shot?"
+        },
+        {
+            "name":"saving_burst_photos_dialog_content",
+            "value":"[TS_958991]_Selected photos will be saved as individual photos."
+        },
+        {
+            "name":"saving_burst_photos",
+            "value":"[TS_958994]_Saving…"
+        },
+        {
+            "name":"burst_photos",
+            "value":"[TS_958993]_Burst"
+        },
+        {
+            "name":"discard_burst_photos_saving_progress",
+            "value":"[TS_958988]_Discard"
+        },
+        {
+            "name":"saving_burst_photos_dialog_save_btn",
+            "value":"[TS_958990]_Keep"
+        },
+        {
+            "name":"discard_saving_burst_photos_tip",
+            "value":"[TS_958989]_Discard changes?"
+        },
+        {
+            "name":"send",
+            "value":"[TS_958384]_Send"
+        },
+        {
+            "name":"intelligent_classification_description_tips",
+            "value":"[TS_958433]_Photos and videos are sorted into separate albums for easier browsing. You can also browse by people, places, and sources."
+        },
+        {
+            "name":"grid_layout_tips",
+            "value":"[TS_958436]_Immersive browsing"
+        },
+        {
+            "name":"moving_photo_multi_exposure",
+            "value":"[TS_958539]_Multi exposure"
+        },
+        {
+            "name":"moving_photo_long_exposure",
+            "value":"[TS_958544]_Long exposure"
+        },
+        {
+            "name":"moving_photo_close",
+            "value":"[TS_958543]_Off"
+        },
+        {
+            "name":"moving_photo_loop_play",
+            "value":"[TS_958546]_Loop"
+        },
+        {
+            "name":"moving_photo_bounce_play",
+            "value":"[TS_958547]_Bounce"
+        },
+        {
+            "name":"moving_photo_micro_motion",
+            "value":"[TS_958541]_Cinemagraph"
+        },
+        {
+            "name":"easy_editing_ai_description_tips",
+            "value":"[TS_958540]_Write or doodle freely with a selection of handy markup tools. You can also enhance your compositions further with the help of powerful AI tools."
+        },
+        {
+            "name":"easy_editing_tips",
+            "value":"[TS_958430]_Edit like a pro"
+        },
+        {
+            "name":"intelligent_classification_tips",
+            "value":"[TS_958431]_Smart organization"
+        },
+        {
+            "name":"experienc_tips",
+            "value":"[TS_958435]_Get started"
+        },
+        {
+            "name":"easy_editing_description_tips",
+            "value":"[TS_958434]_Write or doodle freely with a selection of handy markup tools."
+        },
+        {
+            "name":"grid_layout_description_tips",
+            "value":"[TS_958429]_Your Gallery now stretches across the whole screen for a more immersive experience.\n\nSwitch between day, month, and year views with a single tap."
+        },
+        {
+            "name":"my_albums",
+            "value":"[TS_958542]_My albums"
+        },
+        {
+            "name":"timeline_message_thumbnail_ready",
+            "value":"[TS_956073]_Synced: %s"
+        },
+        {
+            "name":"smart_albums",
+            "value":"[TS_958545]_Smart albums"
+        },
+        {
+            "name":"location_albums",
+            "value":"[TS_961747]_Places"
+        },
+        {
+            "name":"portrait_albums",
+            "value":"[TS_961748]_People"
+        },
+        {
+            "name":"ai_retouch_service",
+            "value":"[TS_963019]_AI content creation"
+        },
+        {
+            "name":"location_information_title",
+            "value":"[TS_974840]_Browse your photos by location."
+        },
+        {
+            "name":"location_information_content",
+            "value":"[TS_974833]_This app requires an %1$s connection and the Files permission. It also needs to access device and network information. We collect only personal information relevant to the features you use. By tapping Agree, you agree to these terms. For more details, refer to the %2$s."
+        },
+        {
+            "name":"ai_retouch_stop_confirm",
+            "value":"[TS_963014]_The AI retouching feature will no longer be available. Disable anyway?"
+        },
+        {
+            "name":"gallery_stop_ai_creation_service",
+            "value":"[TS_1119553]_AI Content Creation will no longer be available. Other features will not be affected. Disable now?"
+        },
+        {
+            "name":"ai_retouch_privacy_protocol",
+            "value":"[TS_963020]_Statement About AI Content Creation and Privacy"
+        },
+        {
+            "name":"ai_retouch_terms_and_protocol",
+            "value":"[TS_963017]_This service requires an %1$s connection and needs to read and upload images to provide AI-based image editing features. By tapping Agree, you agree to the %2$s. For more details about how your personal information is processed, refer to the %3$s. This service is provided free of charge for a limited time only."
+        },
+        {
+            "name":"ai_retouch_terms_and_protocol_new",
+            "value":"[TS_969173]_This service requires an %1$s connection and needs to read and upload images to provide AI-based image editing features. By tapping %2$s, you agree to the %3$s. For more details about how your personal information is processed, refer to the %4$s. This service is provided free of charge for a limited time only."
+        },
+        {
+            "name":"gallery_ai_creation_description",
+            "value":"[TS_1119552]_This service requires an %1$s connection, and needs to read videos and read and upload/transfer images. This is to provide AI image and video generation features. By tapping Agree, you agree to the above terms. For details about how your personal information is processed, refer to the %2$s."
+        },
+        {
+            "name":"ai_retouch_terms",
+            "value":"[TS_963018]_AI Retouch Generative AI Terms of Use"
+        },
+        {
+            "name":"ai_retouch_terms_new",
+            "value":"[TS_969174]_Terms of Use for Generative AI Capabilities of AI Retouch"
+        },
+        {
+            "name":"ai_retouch_access_description",
+            "value":"[TS_963015]_This is used to read images for AI-based editing."
+        },
+        {
+            "name":"ai_retouch_description",
+            "value":"[TS_963022]_This service uploads images you select to the cloud to perform AI-based editing. It requires the following permissions:"
+        },
+        {
+            "name":"ai_retouch_description_new",
+            "value":"[TS_969172]_This service uploads selected images to the cloud to perform AI-based editing."
+        },
+        {
+            "name":"gallery_ai_creation_subtitle",
+            "value":"[TS_1119551]_This service applies AI algorithms to images and videos. It can be used to retouch photos and automatically generate videos, among other applications."
+        },
+        {
+            "name":"ai_wallpaper",
+            "value":"[TS_963021]_AI Wallpaper"
+        },
+        {
+            "name":"ai_wallpaper_service_name",
+            "value":"[TS_966662]_AI Wallpaper Generation service"
+        },
+        {
+            "name":"ai_wallpaper_service_name_2",
+            "value":"[TS_966661]_Time Travel service"
+        },
+        {
+            "name":"ai_wallpaper_description",
+            "value":"[TS_963008]_Personalize your device with AI-generated wallpapers."
+        },
+        {
+            "name":"ai_wallpaper_limited",
+            "value":"[TS_963009]_This service is provided free of charge for a limited time only."
+        },
+        {
+            "name":"ai_wallpaper_access_statement",
+            "value":"[TS_963010]_AI Wallpaper Permissions"
+        },
+        {
+            "name":"ai_wallpaper_prompt1",
+            "value":"[TS_963012]_To provide related features, this app requires an %1$s connection and needs to read and upload/transfer images."
+        },
+        {
+            "name":"ai_wallpaper_prompt2",
+            "value":"[TS_963016]_By tapping Agree, you agree to the above terms. For more details about how your personal information is processed, refer to the %1$s and %2$s."
+        },
+        {
+            "name":"ai_wallpaper_service_stop_note",
+            "value":"[TS_966664]_Once disabled, this service will stop collecting user data on your device."
+        },
+        {
+            "name":"ai_wallpaper_privacy_statement",
+            "value":"[TS_963011]_Statement About AI Wallpaper and Privacy"
+        },
+        {
+            "name":"ai_wallpaper_service_enable_note",
+            "value":"[TS_966663]_When enabled, this service will read image files in the background to provide you with AI-based wallpaper generation features."
+        },
+        {
+            "name":"ai_wallpaper_service_description",
+            "value":"[TS_975443]_This app requires an %1$s connection and needs to read and upload/transfer images to provide AI Wallpaper features. We collect only personal information relevant to the features you use. For more information, refer to the %2$s. Please read the preceding statement carefully. By tapping Agree, you acknowledge and agree to these terms."
+        },
+        {
+            "name":"ai_wallpaper_service_subtitle",
+            "value":"[TS_975444]_Time Travel uses AI to create themed images based on portrait photos you upload."
+        },
+        {
+            "name":"ai_wallpaper_service_description_1",
+            "value":"[TS_989238]_This service requires an %1$s connection and needs to read and upload/transfer images to provide wallpaper-related features. By tapping Agree, you agree to these terms and the %2$s. For more details about how your personal information is processed, refer to the %3$s."
+        },
+        {
+            "name":"ai_wallpaper_service_name_3",
+            "value":"[TS_989237]_AI Wallpaper service"
+        },
+        {
+            "name":"ai_wallpaper_terms",
+            "value":"[TS_989241]_Terms of Use for Generative AI Capabilities of AI Wallpaper Service"
+        },
+        {
+            "name":"ai_wallpaper_service_stop_note_1",
+            "value":"[TS_989239]_This service will no longer be available if you disable it. Disable anyway?"
+        },
+        {
+            "name":"ai_wallpaper_service_permission_1",
+            "value":"[TS_989240]_This is used to read images for the purpose of generating wallpapers."
+        },
+        {
+            "name":"ai_wallpaper_privacy_statement_1",
+            "value":"[TS_989236]_Statement About AI Wallpaper Service and Privacy"
+        },
+        {
+            "name":"ai_wallpaper_service_subtitle_1",
+            "value":"[TS_989242]_This service uploads images you select to cloud servers to generate wallpapers using AI algorithms. It requires the following permissions:"
+        },
+        {
+            "name":"linkage",
+            "value":"[TS_903204]_Link"
+        },
+        {
+            "name":"cancel_linkage",
+            "value":"[TS_903205]_Unlink"
+        },
+        {
+            "name":"help_you_remind_memory_and_classify",
+            "value":"[TS_967651]_Relive your best moments."
+        },
+        {
+            "name":"share_highlight_as_video",
+            "value":"[TS_970126]_Share as video"
+        },
+        {
+            "name":"flash_shoot",
+            "value":"[TS_967974]_Snapshot"
+        },
+        {
+            "name":"front_night_shot_album",
+            "value":"[TS_967967]_Night shot"
+        },
+        {
+            "name":"snapshot",
+            "value":"[TS_967973]_Snapshot"
+        },
+        {
+            "name":"tail_light",
+            "value":"[TS_967972]_Traffic trails"
+        },
+        {
+            "name":"document_correction",
+            "value":"[TS_967970]_Documents"
+        },
+        {
+            "name":"fluorescence_photography",
+            "value":"[TS_967976]_Fluorescence"
+        },
+        {
+            "name":"star_track",
+            "value":"[TS_967975]_Light graffiti"
+        },
+        {
+            "name":"silky_water",
+            "value":"[TS_967969]_Silky water"
+        },
+        {
+            "name":"panorama",
+            "value":"[TS_967971]_Panorama"
+        },
+        {
+            "name":"light_graffiti",
+            "value":"[TS_967968]_Star trails"
+        },
+        {
+            "name":"share_highlight_cover",
+            "value":"[TS_970127]_Share cover"
+        },
+        {
+            "name":"delete_prompt_message",
+            "value":"[TS_963762]_Photos and videos are permanently deleted after the number of days shown (up to %d days)."
+        },
+        {
+            "name":"no_videos_head_title_videoAlbum",
+            "value":"[TS_963763]_No videos"
+        },
+        {
+            "name":"no_photos_videos_head_title_album",
+            "value":"[TS_963764]_No photos or videos"
+        },
+        {
+            "name":"no_photos_head_title_photoAlbum",
+            "value":"[TS_963765]_No photos"
+        },
+        {
+            "name":"business_privacy_statements",
+            "value":"[TS_974370]_Privacy statements"
+        },
+        {
+            "name":"merge_portrait_photo_content",
+            "value":"[TS_974527]_Once merged, they'll be treated as one person."
+        },
+        {
+            "name":"set_me_content",
+            "value":"[TS_974530]_Set this person as \"Me\"?"
+        },
+        {
+            "name":"select_portrait_photo_content",
+            "value":"[TS_974531]_This helps make this feature more accurate."
+        },
+        {
+            "name":"replace_me_content",
+            "value":"[TS_974532]_Images previously set as \"Me\" will be replaced."
+        },
+        {
+            "name":"rename_portrait_photo_title",
+            "value":"[TS_974528]_Rename this person"
+        },
+        {
+            "name":"name_portrait_photo_title",
+            "value":"[TS_974526]_Name this person"
+        },
+        {
+            "name":"merge_portrait_photo_title",
+            "value":"[TS_974534]_Merge?"
+        },
+        {
+            "name":"name_portrait_photo_placeholder",
+            "value":"[TS_974533]_Enter their name"
+        },
+        {
+            "name":"select_portrait_photo_title",
+            "value":"[TS_974529]_Select photos of yourself"
+        },
+        {
+            "name":"source_camera",
+            "value":"[TS_975512]_Camera"
+        },
+        {
+            "name":"source_screenshot",
+            "value":"[TS_1063949]_Screenshots"
+        },
+        {
+            "name":"source_screen_recording",
+            "value":"[TS_1063950]_Screen recordings"
+        },
+        {
+            "name":"picker_warning_content_more",
+            "value":"[TS_976713]_Your photos and videos are shown here, but this app can only access the items that you select. %s"
+        },
+        {
+            "name":"picker_view_learn_more_title",
+            "value":"[TS_976073]_Learn more"
+        },
+        {
+            "name":"search",
+            "value":"[TS_875084]_Search"
+        },
+        {
+            "name":"moving_photo_export_error",
+            "value":"[TS_978802]_Network error. Image download failed. Try again later."
+        },
+        {
+            "name":"moving_photo_export_success",
+            "value":"[TS_978801]_Export successful. View it in the Videos album."
+        },
+        {
+            "name":"action_export_to_video",
+            "value":"[TS_978803]_Export as video"
+        },
+        {
+            "name":"moving_photo_exporting",
+            "value":"[TS_978804]_Exporting…"
+        },
+        {
+            "name":"selected_photos_count_per_sum",
+            "value":"[TS_981710]_Selected (%1$d/%2$d)"
+        },
+        {
+            "name":"data_inherit_content",
+            "value":"[TS_981720]_You previously saved these items in this app. Please re-authorize access to the ones you still need."
+        },
+        {
+            "name":"data_inherit_photos_and_dideos",
+            "value":"[TS_981712]_Select images and videos"
+        },
+        {
+            "name":"data_inherit_authorization",
+            "value":"[TS_981713]_Authorize"
+        },
+        {
+            "name":"drag_picture_dialog_content",
+            "value":"[TS_978680]_Dropped items saved to \"Photos\"."
+        },
+        {
+            "name":"transfer_completed",
+            "value":"[TS_978677]_Transfer complete"
+        },
+        {
+            "name":"drag_file_dialog_content",
+            "value":"[TS_978678]_Dropped items saved to \"Photos\" and \"Videos\"."
+        },
+        {
+            "name":"check",
+            "value":"[TS_978681]_View"
+        },
+        {
+            "name":"drag_video_dialog_content",
+            "value":"[TS_978679]_Dropped items saved to \"Videos\"."
+        },
+        {
+            "name":"duplicate_name_merge_portrait_photo_title",
+            "value":"[TS_994031]_Merge people with the same name?"
+        },
+        {
+            "name":"duplicate_photo",
+            "value":"[TS_995260]_Duplicates"
+        },
+        {
+            "name":"not_support_wallpaper_change",
+            "value":"[TS_1129225]_Can't change wallpaper in this mode."
+        },
+        {
+            "name":"items_gallery_alwaysrotate",
+            "value":"[TS_1129665]_Auto-rotate"
+        },
+        {
+            "name":"items_gallery_followsystem",
+            "value":"[TS_1129670]_Follow system settings"
+        },
+        {
+            "name":"tips_gallery_roatesettings",
+            "value":"[TS_1129686]_Rotate photos when viewed in full screen mode."
+        },
+        {
+            "name":"settings_gallery_rotate",
+            "value":"[TS_1129659]_Photo orientation"
+        },
+        {
+            "name":"enable_sync_title_31",
+            "value":"[TS_999648]_Enable Gallery syncing"
+        },
+        {
+            "name":"enable_sync_content_31",
+            "value":"[TS_999649]_Your photos are your memories. Sync them to Cloud for safe keeping and easy access on any of your devices. This also helps free up local storage space."
+        },
+        {
+            "name":"start_enabled_now",
+            "value":"[TS_999647]_Enable"
+        },
+        {
+            "name":"drag_videos_to_timeline_merge",
+            "value":"[TS_997574]_%1$s %2$s"
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_merge",
+            "value":"[TS_997534]_%1$s %2$s"
+        },
+        {
+            "name":"drag_pictures_to_user_album_merge",
+            "value":"[TS_997542]_%1$s %2$s"
+        },
+        {
+            "name":"drag_files_to_system_album_merge",
+            "value":"[TS_997649]_%1$s %2$s %3$s"
+        },
+        {
+            "name":"drag_files_to_timeline_merge",
+            "value":"[TS_997562]_%1$s and %2$s saved to Gallery. %3$s"
+        },
+        {
+            "name":"drag_videos_to_system_album_merge",
+            "value":"[TS_997642]_%1$s %2$s"
+        },
+        {
+            "name":"drag_pictures_to_timeline_merge",
+            "value":"[TS_997605]_%1$s %2$s"
+        },
+        {
+            "name":"drag_pictures_to_system_album_merge",
+            "value":"[TS_997655]_%1$s %2$s"
+        },
+        {
+            "name":"drag_files_to_user_album_merge",
+            "value":"[TS_997626]_%1$s and %2$s saved to the selected album. %3$s"
+        },
+        {
+            "name":"drag_videos_to_user_album_merge",
+            "value":"[TS_997631]_%1$s %2$s"
+        },
+        {
+            "name":"collapse_menu_bar",
+            "value":"[TS_995754]_Close menu bar"
+        },
+        {
+            "name":"open_menu_bar",
+            "value":"[TS_995753]_Open menu bar"
+        },
+        {
+            "name":"paste_from_pasteboard",
+            "value":"[TS_996618]_Paste"
+        },
+        {
+            "name":"drag_not_support_tip",
+            "value":"[TS_990591]_Can't drag %1$d or more items at a time. Please reselect."
+        },
+        {
+            "name":"message_temperature_too_high",
+            "value":"[TS_988282]_Device too hot. Sync paused."
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_title",
+            "value":"[TS_988283]_Allow syncing with mobile data?"
+        },
+        {
+            "name":"message_use_mobile_newwork",
+            "value":"[TS_988284]_Use mobile data"
+        },
+        {
+            "name":"message_not_network",
+            "value":"[TS_988285]_No WLAN connection. %1$s not synced. %2$s"
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_content",
+            "value":"[TS_988286]_Mobile data will be used when WLAN isn't available. You can turn this off at any time in Settings."
+        },
+        {
+            "name":"message_cloud_update_latest",
+            "value":"[TS_988287]_Up to date"
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_button",
+            "value":"[TS_988288]_OK"
+        },
+        {
+            "name":"source_privacy_options",
+            "value":"[TS_1097429]_Privacy options"
+        },
+        {
+            "name":"source_privacy_protected",
+            "value":"[TS_1097426]_Privacy protection enabled"
+        },
+        {
+            "name":"source_remove_location_info",
+            "value":"[TS_1097428]_Remove location info"
+        },
+        {
+            "name":"source_tagged_geographic_data",
+            "value":"[TS_1097430]_Tagged geographic data."
+        },
+        {
+            "name":"source_remove_camera_info",
+            "value":"[TS_1097431]_Remove camera info"
+        },
+        {
+            "name":"source_device_and_camera_info",
+            "value":"[TS_1097427]_Device model and camera settings."
+        },
+        {
+            "name":"action_share_process",
+            "value":"[TS_957042]_Preparing content…"
+        },
+        {
+            "name":"share_cancel_message",
+            "value":"[TS_958142]_Preparation is %1$s complete."
+        },
+        {
+            "name":"edit_gallery_photo_and_video",
+            "value":"[TS_1011341]_%s edited images/videos in Gallery."
+        },
+        {
+            "name":"edit_gallery_photo",
+            "value":"[TS_1010781]_%s edited images in Gallery."
+        },
+        {
+            "name":"save_as_new_photo_and_video",
+            "value":"[TS_1011342]_%s saved images/videos to Gallery."
+        },
+        {
+            "name":"app_save_as_new_video",
+            "value":"[TS_1015981]_%s saved videos to Gallery."
+        },
+        {
+            "name":"app_save_as_new_photo",
+            "value":"[TS_1015980]_%s saved photos to Gallery."
+        },
+        {
+            "name":"edit_gallery_video",
+            "value":"[TS_1010783]_%s edited videos in Gallery."
+        },
+        {
+            "name":"unnamed_albums",
+            "value":"[TS_994032]_Unnamed album"
+        },
+        {
+            "name":"title_general_settings",
+            "value":"[TS_994034]_Settings"
+        },
+        {
+            "name":"slideshow_interval",
+            "value":"[TS_994033]_Slideshow interval"
+        },
+        {
+            "name":"portrait_remaining_prompt",
+            "value":"[TS_1021915]_Photo analyzed %1$s. Keep charging and turning off the screen to complete the analysis."
+        },
+        {
+            "name":"highlight_no_analysis_prompt",
+            "value":"[TS_1021914]_Keep charging and turning off the screen to start photo analysis, which will be used to present quality moment content."
+        },
+        {
+            "name":"remove_from_highlight",
+            "value":"[TS_1015514]_Remove from highlight"
+        },
+        {
+            "name":"recycle_single_highlight_tips",
+            "value":"[TS_1020899]_Delete this highlight?"
+        },
+        {
+            "name":"recycle_single_highlight_kept_tips",
+            "value":"[TS_1020896]_This will not delete any photos or videos from Gallery."
+        },
+        {
+            "name":"time_line_message_cloud_contains",
+            "value":"[TS_1024894]_%s on Cloud"
+        },
+        {
+            "name":"time_line_message_cloud_sync",
+            "value":"[TS_1024900]_All items synced (%s)"
+        },
+        {
+            "name":"time_line_message_loaded",
+            "value":"[TS_1025731]_Loaded %s in total"
+        },
+        {
+            "name":"gallery_splash_content_online",
+            "value":"[TS_1000690]_%s Lets you browse, share, and enjoy your photos and videos straight from the cloud."
+        },
+        {
+            "name":"gallery_near_full_card_content",
+            "value":"[TS_1000687]_New photos and videos will no longer be uploaded to Cloud once your storage is full."
+        },
+        {
+            "name":"gallery_full_card_content",
+            "value":"[TS_1000694]_%s not uploaded to Cloud."
+        },
+        {
+            "name":"gallery_splash_button_cancel",
+            "value":"[TS_1000675]_Maybe later"
+        },
+        {
+            "name":"album_cloud_data_all",
+            "value":"[TS_1000670]_%1$s and %2$s"
+        },
+        {
+            "name":"gallery_splash_title",
+            "value":"[TS_1000700]_Your Gallery, and much more"
+        },
+        {
+            "name":"gallery_near_full_card_title",
+            "value":"[TS_1000672]_Cloud storage almost full"
+        },
+        {
+            "name":"cloud_open_now",
+            "value":"[TS_1000695]_Enable"
+        },
+        {
+            "name":"gallery_splash_content_security",
+            "value":"[TS_1000673]_%s Provides safe, reliable storage for all your precious photos and videos."
+        },
+        {
+            "name":"gallery_splash_content_optimize",
+            "value":"[TS_1000684]_%s Automatically frees up storage space on your devices to keep them running smoothly."
+        },
+        {
+            "name":"gallery_update_card_confirm",
+            "value":"[TS_1000661]_Upgrade storage"
+        },
+        {
+            "name":"gallery_manage_card_confirm",
+            "value":"[TS_1045402]_Settings"
+        },
+        {
+            "name":"gallery_login_card_title",
+            "value":"[TS_1000671]_Cloud Gallery not enabled"
+        },
+        {
+            "name":"gallery_splash_content_sync",
+            "value":"[TS_1000693]_%s Keeps your photos and videos in sync across all your devices."
+        },
+        {
+            "name":"gallery_login_card_content",
+            "value":"[TS_1000677]_Cloud Gallery stores your photos and videos securely on the cloud, allowing you to access them from anywhere while saving space on your devices."
+        },
+        {
+            "name":"gallery_full_card_title",
+            "value":"[TS_1000698]_Cloud storage full"
+        },
+        {
+            "name":"gallery_splash_content",
+            "value":"[TS_1000668]_Reasons to upgrade to Cloud Gallery:"
+        },
+        {
+            "name":"gallery_full_card_default_content",
+            "value":"[TS_1004282]_Your photos are your memories. Upgrade your storage plan to store more of them safely on the cloud."
+        },
+        {
+            "name":"album_gallery_main_describe_msg",
+            "value":"[TS_1000665]_Store your photos and videos on Cloud to save space on your device."
+        },
+        {
+            "name":"gallery_neg_full_dialog_title",
+            "value":"[TS_1000663]_Tired of this kind of reminder?"
+        },
+        {
+            "name":"gallery_neg_full_dialog_content",
+            "value":"[TS_1000662]_You can stop receiving this kind of reminder by disabling Cloud Gallery.\n\nIf you want to delete your photos and videos from Cloud after disabling Cloud Gallery, you can do so from %s."
+        },
+        {
+            "name":"gallery_neg_full_dialog_confirm",
+            "value":"[TS_1000692]_Disable Cloud Gallery"
+        },
+        {
+            "name":"upgrade_to_cloud_gallery",
+            "value":"[TS_981327]_Cloud Gallery"
+        },
+        {
+            "name":"open_cloud_gallery_toast",
+            "value":"[TS_1020959]_Cloud Gallery has been enabled for you."
+        },
+        {
+            "name":"auto_cloud_enhance_closed",
+            "value":"[TS_1036384]_Off"
+        },
+        {
+            "name":"cloud_enhance_enable_tips",
+            "value":"[TS_1036379]_Enable"
+        },
+        {
+            "name":"auto_ai_cloud_enhance_des",
+            "value":"[TS_1036385]_Automatically enhance the sharpness of zoomed-in photos taken in \"Photo\" mode. Supported images will be uploaded to the cloud for processing."
+        },
+        {
+            "name":"auto_cloud_enhance_wlan_only",
+            "value":"[TS_1036378]_WLAN only"
+        },
+        {
+            "name":"ai_cloud_enhance_read_protocol",
+            "value":"[TS_1036380]_Please read the above statement carefully. By tapping Agree, you agree to let us provide you with this service."
+        },
+        {
+            "name":"auto_ai_cloud_enhance",
+            "value":"[TS_1036382]_Auto cloud enhancement"
+        },
+        {
+            "name":"auto_cloud_enhance_wlan_and_networks",
+            "value":"[TS_1036381]_WLAN & mobile data"
+        },
+        {
+            "name":"auto_cloud_enhance_toast",
+            "value":"[TS_1036383]_Auto cloud enhancement automatically enhances the sharpness of zoomed-in photos taken in \"Photo\" mode. You can enable this feature in Settings."
+        },
+        {
+            "name":"card_description",
+            "value":"[TS_1038770]_Free up to %1$s of device storage by removing photos and videos you rarely view."
+        },
+        {
+            "name":"cloud_all_videos_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_1038825]_All videos will be permanently deleted from this device, the cloud, and all synced devices."
+        },
+        {
+            "name":"local_all_videos_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_1038822]_All videos will be permanently deleted."
+        },
+        {
+            "name":"click_to_compare_after_cloud_enhancement",
+            "value":"[TS_1040012]_Tap to see the difference before and after enhancement."
+        },
+        {
+            "name":"recycle_all_videos_tips",
+            "value":"[TS_1038823]_Delete all videos?"
+        },
+        {
+            "name":"remove_from_current_highlight",
+            "value":"[TS_1034917]_Remove from highlight"
+        },
+        {
+            "name":"remove_from_highlight_tips",
+            "value":"[TS_1034916]_This item will no longer appear in this highlight."
+        },
+        {
+            "name":"card_router",
+            "value":"[TS_1040379]_Go optimize"
+        },
+        {
+            "name":"video_screenshot_saved_failed",
+            "value":"[TS_1036455]_Screen capture failed. Try again later."
+        },
+        {
+            "name":"video_screenshot_saved_success",
+            "value":"[TS_1036457]_Saved to Gallery."
+        },
+        {
+            "name":"video_screenshot",
+            "value":"[TS_1036456]_Screenshot"
+        },
+        {
+            "name":"card_info",
+            "value":"[TS_1033421]_Compress rarely viewed photos and videos to save space on your device."
+        },
+        {
+            "name":"optimize_gallery_space",
+            "value":"[TS_1025035]_Optimize Gallery storage"
+        },
+        {
+            "name":"all_selected",
+            "value":"[TS_1025037]_All selected"
+        },
+        {
+            "name":"card_button",
+            "value":"[TS_1033422]_View details"
+        },
+        {
+            "name":"detele_button",
+            "value":"[TS_1025036]_Delete selected (%1$s)"
+        },
+        {
+            "name":"video_deletion",
+            "value":"[TS_1025038]_Delete videos"
+        },
+        {
+            "name":"moving_photo_splice_failed",
+            "value":"[TS_1023751]_Stitching failed."
+        },
+        {
+            "name":"moving_photo_splice_success",
+            "value":"[TS_1041263]_Stitching successful. View it in the Videos album."
+        },
+        {
+            "name":"moving_photo_splice_canceled",
+            "value":"[TS_1041264]_Stitching canceled."
+        },
+        {
+            "name":"click_to_moving_photo_splice_function",
+            "value":"[TS_1023742]_Multiple moving pictures can be stitched together. First, select the moving pictures you want to include, then tap here."
+        },
+        {
+            "name":"moving_photo_splice_reselect",
+            "value":"[TS_1023747]_Select %1$d to %2$d moving pictures and try again."
+        },
+        {
+            "name":"moving_photo_splice",
+            "value":"[TS_1023738]_Turn into video"
+        },
+        {
+            "name":"action_moving_photo_splice",
+            "value":"[TS_1023744]_Stitching…"
+        },
+        {
+            "name":"action_slide_show",
+            "value":"[TS_1047759]_Slideshow"
+        },
+        {
+            "name":"slide_show_setting",
+            "value":"[TS_1048306]_Slideshow interval"
+        },
+        {
+            "name":"switch_to_timeline_display_prompt",
+            "value":"[TS_1044809]_Pinch to show photos as a grid or separate them by date."
+        },
+        {
+            "name":"grid_action_show_date",
+            "value":"[TS_1045408]_Show date"
+        },
+        {
+            "name":"grid_action_hide_date",
+            "value":"[TS_1045393]_Hide date"
+        },
+        {
+            "name":"Please_enter_main_title",
+            "value":"[TS_1045854]_Enter a title."
+        },
+        {
+            "name":"album_sort_by_creation_time",
+            "value":"[TS_1046195]_Sort by time created"
+        },
+        {
+            "name":"album_photo_sort_dialog_item_size",
+            "value":"[TS_1046199]_File size"
+        },
+        {
+            "name":"album_photo_sort",
+            "value":"[TS_1046200]_Sort"
+        },
+        {
+            "name":"album_sort_by_size",
+            "value":"[TS_1046193]_Sort by file size"
+        },
+        {
+            "name":"album_photo_sort_dialog_item_back_to_default",
+            "value":"[TS_1046194]_Reset"
+        },
+        {
+            "name":"album_photo_sort_dialog_item_creation_time",
+            "value":"[TS_1046197]_Time created"
+        },
+        {
+            "name":"album_photo_sort_dialog_item_name",
+            "value":"[TS_1046198]_File name"
+        },
+        {
+            "name":"album_sort_by_name",
+            "value":"[TS_1046191]_Sort by file name"
+        },
+        {
+            "name":"album_photo_sort_dialog_item_shoot_time",
+            "value":"[TS_1046192]_Time shot"
+        },
+        {
+            "name":"album_sort_by_shoot_time",
+            "value":"[TS_1046196]_Sort by time shot"
+        },
+        {
+            "name":"show_video",
+            "value":"[TS_1047186]_Show video"
+        },
+        {
+            "name":"Private_protection_in_progress",
+            "value":"[TS_1043183]_Hidden to protect your privacy"
+        },
+        {
+            "name":"Private_protection_view_photos",
+            "value":"[TS_1043184]_Show photos"
+        },
+        {
+            "name":"tv_menu_tips",
+            "value":"[TS_1054975]_Press %s for more options"
+        },
+        {
+            "name":"service_agreements_and_rules",
+            "value":"[TS_1052957]_Service agreements & rules"
+        },
+        {
+            "name":"color_stype_no_photo",
+            "value":"[TS_1049386]_Only photos with custom styles can be imported."
+        },
+        {
+            "name":"viewing_storage_devices_more_sub",
+            "value":"[TS_1053949]_You can access your external storage device by going to Files > Browse."
+        },
+        {
+            "name":"viewing_storage_devices_more",
+            "value":"[TS_1053951]_View images & videos on external storage"
+        },
+        {
+            "name":"no_optimize_device_storage_detail",
+            "value":"[TS_1048303]_Full-resolution photos and videos on your device will not be replaced with smaller versions."
+        },
+        {
+            "name":"optimize_storage_dialog_content",
+            "value":"[TS_1048301]_Gallery can free up %2$s of device storage by removing full-resolution versions of photos and videos taken more than %1$s days ago. The originals are kept on the cloud and can be downloaded at any time.\n\nGallery will automatically optimize device storage in this way when it is running low."
+        },
+        {
+            "name":"optimize_device_storage_detail_new",
+            "value":"[TS_1054460]_If your device is low on space, full-resolution photos and videos will be replaced with smaller versions. Originals can be downloaded from the cloud at any time."
+        },
+        {
+            "name":"optimize_storage_confirm",
+            "value":"[TS_1048304]_Optimize now"
+        },
+        {
+            "name":"keep_original_storage",
+            "value":"[TS_1048307]_Keep originals on device"
+        },
+        {
+            "name":"optimize_storage_title",
+            "value":"[TS_1048308]_Optimize device storage now?"
+        },
+        {
+            "name":"no_optimize_storage_dialog_content",
+            "value":"[TS_1048311]_No items to optimize."
+        },
+        {
+            "name":"optimize_device_storage",
+            "value":"[TS_1048309]_Optimize device storage"
+        },
+        {
+            "name":"optimize_loading_progress",
+            "value":"[TS_1048305]_Optimizing storage (%1$s/%2$s)…"
+        },
+        {
+            "name":"optimize_device_storage_detail",
+            "value":"[TS_1048302]_If your device is low on space, full-resolution photos and videos will be replaced with smaller versions. Originals can be downloaded from the cloud at any time. %1$s"
+        },
+        {
+            "name":"optimize_finish",
+            "value":"[TS_1054445]_Optimization complete. Freed up %1$s of space."
+        },
+        {
+            "name":"cloud_gallery",
+            "value":"[TS_981315]_Cloud Gallery"
+        },
+        {
+            "name":"video_image_cleanup",
+            "value":"[TS_1046471]_Clean up photos & videos"
+        },
+        {
+            "name":"cleanup_card_description",
+            "value":"[TS_1046469]_Free up to %1$s of storage space by deleting photos and videos you rarely view."
+        },
+        {
+            "name":"download_photo",
+            "value":"[TS_1057926]_Download"
+        },
+        {
+            "name":"only_selected_photos_can_be_accessed",
+            "value":"[TS_1061591]_This app can only access the photos you select"
+        },
+        {
+            "name":"name_add",
+            "value":"[TS_1062965]_Add name"
+        },
+        {
+            "name":"portrait_edit",
+            "value":"[TS_1061592]_Edit person"
+        },
+        {
+            "name":"edit_portrait",
+            "value":"[TS_1064077]_Edit person"
+        },
+        {
+            "name":"name_input",
+            "value":"[TS_1063333]_Enter name"
+        },
+        {
+            "name":"delete_highlight",
+            "value":"[TS_1058058]_Delete highlight"
+        },
+        {
+            "name":"photo_and_video_desc_tv",
+            "value":"[TS_1062418]_This is used to access and store photos and videos."
+        },
+        {
+            "name":"welcome_prompt1_tv",
+            "value":"[TS_1062419]_This app requires an %1$s connection and the %2$s permission to provide features such as image and video browsing."
+        },
+        {
+            "name":"photo_invalid_uri_from_faCard",
+            "value":"[TS_1048978]_Image error. Skipped to first image in album."
+        },
+        {
+            "name":"print_or_generate_pdf",
+            "value":"[TS_1058520]_Print or generate PDF"
+        },
+        {
+            "name":"pictures_and_videos_tv",
+            "value":"[TS_1066647]_Images & videos"
+        },
+        {
+            "name":"cloud_all_photos_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_1045392]_All photos will be permanently deleted from this device, the cloud, and all synced devices."
+        },
+        {
+            "name":"screenshot_cleanup",
+            "value":"[TS_1055938]_Delete screenshots"
+        },
+        {
+            "name":"local_all_photos_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_1045398]_All photos will be permanently deleted."
+        },
+        {
+            "name":"recycle_all_photos_tips",
+            "value":"[TS_1045409]_Delete all photos?"
+        },
+        {
+            "name":"convert_to_JPG",
+            "value":"[TS_1070809]_Convert to JPG"
+        },
+        {
+            "name":"tip_convert_to_JPG_success",
+            "value":"[TS_1070810]_Converted to JPG."
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_1",
+            "value":"[TS_1061719]_Automatically enhance recent photos with the help of AI. Simply tap the magic wand icon above supported images. This feature is free for a limited time only."
+        },
+        {
+            "name":"auto_ai_cloud_enhance_des_1",
+            "value":"[TS_1064723]_Auto cloud enhancement is available for some of your photos."
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_extra_1",
+            "value":"[TS_1061720]_Automatically enhance recent photos with the help of AI. Simply tap the magic wand icon above supported images. This feature is free for a limited time only."
+        },
+        {
+            "name":"auto_cloud_enhance_toast_1",
+            "value":"[TS_1064722]_Auto cloud enhancement is available for some of your photos. You can enable this feature in Settings."
+        },
+        {
+            "name":"loading_image_imageEdit",
+            "value":"[TS_1084877]_Loading image\u2026"
+        },
+        {
+            "name":"all_photos_title",
+            "value":"[TS_1045390]_All photos"
+        },
+        {
+            "name":"screenshot_photos",
+            "value":"[TS_1045414]_Screenshots"
+        },
+        {
+            "name":"recommended_cleanup",
+            "value":"[TS_1045405]_Recommended for cleanup"
+        },
+        {
+            "name":"remove_photo_from_highlight_tips",
+            "value":"[TS_1085355]_This photo will no longer appear in this highlight."
+        },
+        {
+            "name":"remove_from_this_highlight",
+            "value":"[TS_1085358]_Remove selected content?"
+        },
+        {
+            "name":"remove_all_from_highlight_tips",
+            "value":"[TS_1085357]_Selected items will no longer appear in this highlight."
+        },
+        {
+            "name":"remove_video_from_highlight_tips",
+            "value":"[TS_1085356]_This video will no longer appear in this highlight."
+        },
+        {
+            "name":"save_pdf_success",
+            "value":"[TS_1094209]_Document saved."
+        },
+        {
+            "name":"save_picture_success",
+            "value":"[TS_1094208]_Photo saved."
+        },
+        {
+            "name":"move_out_of_highlight",
+            "value":"[TS_1089097]_Remove from highlight"
+        },
+        {
+            "name":"image_size_ratio_too_large",
+            "value":"[TS_1093831]_Image aspect ratio exceeds recognition limits."
+        },
+        {
+            "name":"document_scan",
+            "value":"[TS_1083519]_Treat as document"
+        },
+        {
+            "name":"set_album_cover_ready",
+            "value":"[TS_1089514]_Cover changed."
+        },
+        {
+            "name":"reset_album_cover_ready",
+            "value":"[TS_1089511]_Default cover restored."
+        },
+        {
+            "name":"set_as_album_cover",
+            "value":"[TS_1089510]_Set as album cover"
+        },
+        {
+            "name":"occure_error_and_retry",
+            "value":"[TS_1061718]_System error. Try again later."
+        },
+        {
+            "name":"cancel_custom_cover",
+            "value":"[TS_1089512]_Cancel custom cover"
+        },
+        {
+            "name":"action_change_album_cover",
+            "value":"[TS_1089513]_Change album cover"
+        },
+        {
+            "name":"show_nearby_photos",
+            "value":"[TS_1093572]_Show photos taken nearby"
+        },
+        {
+            "name":"hide_nearby_photos",
+            "value":"[TS_1093573]_Hide photos taken nearby"
+        },
+        {
+            "name":"album_sorting",
+            "value":"[TS_1065122]_Sort albums"
+        },
+        {
+            "name":"restore_default_sort",
+            "value":"[TS_1085151]_Restore default order"
+        },
+        {
+            "name":"custom_sort",
+            "value":"[TS_1085150]_Reorder"
+        },
+        {
+            "name":"sort_by_name",
+            "value":"[TS_1085152]_Sort by name"
+        },
+        {
+            "name":"scan_qrcode_in_image",
+            "value":"[TS_1098973]_Scan QR code"
+        },
+        {
+            "name":"open_QRCode_error",
+            "value":"[TS_1100367]_No app to open."
+        },
+        {
+            "name":"document_scan_count_limit",
+            "value":"[TS_1095664]_Max %d photos supported."
+        },
+        {
+            "name":"document_scan_not_support_video_message",
+            "value":"[TS_1095663]_Videos are not supported."
+        },
+        {
+            "name":"restore_default_sort_message",
+            "value":"[TS_1098869]_Restore default order?"
+        },
+        {
+            "name":"time_travel_theme",
+            "value":"[TS_1094130]_Time travel theme"
+        },
+        {
+            "name":"media_intelligence_analysis",
+            "value":"[TS_1094131]_Media analysis"
+        },
+        {
+            "name":"map_album",
+            "value":"[TS_1094132]_Location albums"
+        },
+        {
+            "name":"xmage_vivid",
+            "value":"[TS_1102088]_Vivid"
+        },
+        {
+            "name":"xmage_original",
+            "value":"[TS_1102085]_Original"
+        },
+        {
+            "name":"xmage_bright",
+            "value":"[TS_1102086]_Bright"
+        },
+        {
+            "name":"xmage_mono",
+            "value":"[TS_1102087]_Mono"
+        },
+        {
+            "name":"focal_length_in_35mm_film",
+            "value":"[TS_1102070]_%1$s equivalent focal length"
+        },
+        {
+            "name":"location",
+            "value":"[TS_1102249]_Go to current location"
+        },
+        {
+            "name":"day_grid_view",
+            "value":"[TS_1111789]_Days view"
+        },
+        {
+            "name":"year_month_grid_message",
+            "value":"[TS_1112927]_%1$s to %2$s, %3$s in total"
+        },
+        {
+            "name":"broadcast_multi_video_and_photo_num",
+            "value":"[TS_1113242]_%1$s and %2$s"
+        },
+        {
+            "name":"year_grid_view",
+            "value":"[TS_1111792]_Years view"
+        },
+        {
+            "name":"month_grid_view",
+            "value":"[TS_1111867]_Months view"
+        },
+        {
+            "name":"remove_photos_from_group_tip",
+            "value":"[TS_1094002]_Selected content will no longer appear in this group."
+        },
+        {
+            "name":"tab_group",
+            "value":"[TS_1094001]_Groups"
+        },
+        {
+            "name":"remove_photo_from_group_tip",
+            "value":"[TS_1093992]_This photo will no longer appear in this group."
+        },
+        {
+            "name":"remove_from_group",
+            "value":"[TS_1094013]_Remove from group"
+        },
+        {
+            "name":"no_group_album",
+            "value":"[TS_1094005]_Take some group photos to get started\n\nGroup albums are automatically generated from group photos you take."
+        },
+        {
+            "name":"remove_video_from_group_tip",
+            "value":"[TS_1094016]_This video will no longer appear in this group."
+        },
+        {
+            "name":"remove_photo_from_group",
+            "value":"[TS_1094014]_Remove from group?"
+        },
+        {
+            "name":"panorama_mode",
+            "value":"[TS_1100015]_Panorama"
+        },
+        {
+            "name":"close_virtual_aperture",
+            "value":"[TS_1115108]_Virtual aperture off"
+        },
+        {
+            "name":"flash_capture",
+            "value":"[TS_1115104]_Snapshot effect"
+        },
+        {
+            "name":"virtual_aperture",
+            "value":"[TS_1115107]_Virtual aperture"
+        },
+        {
+            "name":"close_flash_capture",
+            "value":"[TS_1115110]_Snapshot effect off"
+        },
+        {
+            "name":"dynamic_panning",
+            "value":"[TS_1115105]_Pan"
+        },
+        {
+            "name":"overlay_effect",
+            "value":"[TS_1115106]_Overlay"
+        },
+        {
+            "name":"close_effect",
+            "value":"[TS_1115109]_Off"
+        },
+        {
+            "name":"raw",
+            "value":"[TS_1100014]_RAW"
+        },
+        {
+            "name":"ai_generated_tag_setting",
+            "value":"[TS_1113039]_AI-generated tag"
+        },
+        {
+            "name":"ai_generated_tag_setting_description",
+            "value":"[TS_1113037]_Show an \"AI-generated\" tag on images edited using AI retouch tools, like Expand, Remove, and Move."
+        },
+        {
+            "name":"light_glimpse_tips",
+            "value":"[TS_1095820]_Effects can only be applied to one Gallery widget at a time."
+        },
+        {
+            "name":"light_glimpse_tips_new",
+            "value":"[TS_1111232]_Add various dynamic camera effects to photos added to the home screen. Only enabled for one photo per home screen."
+        },
+        {
+            "name":"light_glimpse",
+            "value":"[TS_1095821]_Dynamic playback effects"
+        },
+        {
+            "name":"no_highlights",
+            "value":"[TS_1109900]_No highlights yet"
+        },
+        {
+            "name":"current_highlight_not_exist",
+            "value":"[TS_1114599]_Highlight has been deleted. The home screen widget will update shortly."
+        },
+        {
+            "name":"auth_camera_location_title",
+            "value":"[TS_1104672]_Allow Camera to record location information?"
+        },
+        {
+            "name":"auth_camera_location_gird",
+            "value":"[TS_1104674]_This lets you view location information for photos taken from now on. You'll also be able to use the Places and Highlights features in Gallery."
+        },
+        {
+            "name":"auth_camera_location_browser",
+            "value":"[TS_1104673]_This lets you view location information for photos taken from now on."
+        },
+        {
+            "name":"allow",
+            "value":"[TS_1104675]_Allow"
+        },
+        {
+            "name":"is_already_album_cover",
+            "value":"[TS_1106588]_This image is already set as the album cover."
+        },
+        {
+            "name":"cloud_delete_image_can_download_tips",
+            "value":"[TS_1119628]_This image will be deleted from this device. Images that have been synced to Cloud can be downloaded again at any time."
+        },
+        {
+            "name":"cloud_delete_all_images_can_download_tips",
+            "value":"[TS_1119621]_All images will be deleted from this device. Images that have been synced to Cloud can be downloaded again at any time."
+        },
+        {
+            "name":"cloud_delete_all_videos_can_download_tips",
+            "value":"[TS_1119620]_All videos will be deleted from this device. Videos that have been synced to Cloud can be downloaded again at any time."
+        },
+        {
+            "name":"cloud_delete_all_files_can_download_tips",
+            "value":"[TS_1119609]_All items will be deleted from this device. Items that have been synced to Cloud can be downloaded again at any time."
+        },
+        {
+            "name":"cloud_delete_video_can_download_tips",
+            "value":"[TS_1119624]_This video will be deleted from this device. Videos that have been synced to Cloud can be downloaded again at any time."
+        },
+        {
+            "name":"video_cleanup",
+            "value":"[TS_1122138]_Delete videos"
+        },
+        {
+            "name":"delete_group_album",
+            "value":"[TS_1115450]_Delete group"
+        },
+        {
+            "name":"edit_group_album",
+            "value":"[TS_1115448]_Edit group"
+        },
+        {
+            "name":"delete_this_group_album",
+            "value":"[TS_1118494]_Delete this group?"
+        },
+        {
+            "name":"delete_from_group_tips",
+            "value":"[TS_1122312]_These groups will no longer be shown. Deleting a group does not delete the photos it contains."
+        },
+        {
+            "name":"delete_from_one_group_tips",
+            "value":"[TS_1111269]_This group will no longer be shown. Deleting a group does not delete the photos it contains."
+        },
+        {
+            "name":"expression",
+            "value":"[TS_1112332]_Expression"
+        },
+        {
+            "name":"select_expression",
+            "value":"[TS_1112335]_Selected expression"
+        },
+        {
+            "name":"accessibility_face_edit_box",
+            "value":"[TS_1112333]_Edit box"
+        },
+        {
+            "name":"shanghai_world_expo_china_pavilion",
+            "value":"[TS_1102462]_Shanghai World Expo China Pavilion"
+        },
+        {
+            "name":"natural_scenery",
+            "value":"[TS_1102481]_Scenic spots"
+        },
+        {
+            "name":"slim_waist",
+            "value":"[TS_1102475]_Canton Tower"
+        },
+        {
+            "name":"humanities_and_landscapes",
+            "value":"[TS_1102492]_Famous landmarks"
+        },
+        {
+            "name":"night_sky",
+            "value":"[TS_1102437]_Night skies"
+        },
+        {
+            "name":"lightning",
+            "value":"[TS_1102472]_Lightning"
+        },
+        {
+            "name":"pyramids",
+            "value":"[TS_1102470]_Pyramids"
+        },
+        {
+            "name":"jewelry",
+            "value":"[TS_1102440]_Jewelry"
+        },
+        {
+            "name":"notes_album",
+            "value":"[TS_1102482]_Annoted photos & videos"
+        },
+        {
+            "name":"tiananmen",
+            "value":"[TS_1102446]_Tiananmen"
+        },
+        {
+            "name":"floor_plan",
+            "value":"[TS_1102460]_Floor plans"
+        },
+        {
+            "name":"marriage_certificate",
+            "value":"[TS_1102464]_Marriage certificates"
+        },
+        {
+            "name":"cards",
+            "value":"[TS_1102465]_Cards"
+        },
+        {
+            "name":"graduations",
+            "value":"[TS_1102461]_Graduations"
+        },
+        {
+            "name":"arc_de_triomphe_in_paris",
+            "value":"[TS_1102447]_Arc de Triomphe"
+        },
+        {
+            "name":"design",
+            "value":"[TS_1102493]_Design pictures"
+        },
+        {
+            "name":"cliff",
+            "value":"[TS_1102438]_Cliffs"
+        },
+        {
+            "name":"aurora",
+            "value":"[TS_1102444]_Aurora"
+        },
+        {
+            "name":"water_cube",
+            "value":"[TS_1102491]_Water Cube"
+        },
+        {
+            "name":"tickets",
+            "value":"[TS_1102488]_Tickets"
+        },
+        {
+            "name":"flowers_and_plants",
+            "value":"[TS_1102441]_Flowers & plants"
+        },
+        {
+            "name":"bicycles",
+            "value":"[TS_1102459]_Bicycles"
+        },
+        {
+            "name":"weddings",
+            "value":"[TS_1102454]_Weddings"
+        },
+        {
+            "name":"train_tickets",
+            "value":"[TS_1102483]_Train tickets"
+        },
+        {
+            "name":"sky",
+            "value":"[TS_1102442]_Sky"
+        },
+        {
+            "name":"airline_tickets",
+            "value":"[TS_1102466]_Plane tickets"
+        },
+        {
+            "name":"sunrise_and_sunset",
+            "value":"[TS_1102449]_Sunrises & sunsets"
+        },
+        {
+            "name":"clouds",
+            "value":"[TS_1102445]_Clouds"
+        },
+        {
+            "name":"parents",
+            "value":"[TS_1102455]_Children"
+        },
+        {
+            "name":"sea_and_lake_view",
+            "value":"[TS_1102494]_Seasides & lakes"
+        },
+        {
+            "name":"moon",
+            "value":"[TS_1102479]_Moon"
+        },
+        {
+            "name":"morning_glow_and_evening_glow",
+            "value":"[TS_1102486]_Sunrises & sunsets"
+        },
+        {
+            "name":"pets",
+            "value":"[TS_1102478]_Pets"
+        },
+        {
+            "name":"cars",
+            "value":"[TS_1102489]_Cars"
+        },
+        {
+            "name":"barcode",
+            "value":"[TS_1102474]_Barcodes"
+        },
+        {
+            "name":"coral",
+            "value":"[TS_1102450]_Coral"
+        },
+        {
+            "name":"buses",
+            "value":"[TS_1102476]_Buses"
+        },
+        {
+            "name":"bird_nest",
+            "value":"[TS_1102618]_Bird's Nest"
+        },
+        {
+            "name":"potala_palace_in_lhasa",
+            "value":"[TS_1102490]_Potala Palace"
+        },
+        {
+            "name":"macao_ruins",
+            "value":"[TS_1102619]_Ruins of St. Paul's"
+        },
+        {
+            "name":"ship",
+            "value":"[TS_1102453]_Ships"
+        },
+        {
+            "name":"birthdays",
+            "value":"[TS_1102458]_Birthdays"
+        },
+        {
+            "name":"movie_tickets",
+            "value":"[TS_1102484]_Movie tickets"
+        },
+        {
+            "name":"concerts",
+            "value":"[TS_1102469]_Concerts"
+        },
+        {
+            "name":"dogs",
+            "value":"[TS_1102439]_Dogs"
+        },
+        {
+            "name":"hukou",
+            "value":"[TS_1102473]_Hukou documents"
+        },
+        {
+            "name":"the_great_wall",
+            "value":"[TS_1102456]_The Great Wall"
+        },
+        {
+            "name":"beach",
+            "value":"[TS_1102467]_Beaches"
+        },
+        {
+            "name":"desert",
+            "value":"[TS_1102477]_Deserts"
+        },
+        {
+            "name":"snow_mountain",
+            "value":"[TS_1102452]_Snowy mountains"
+        },
+        {
+            "name":"parties",
+            "value":"[TS_1102457]_Parties"
+        },
+        {
+            "name":"invoices",
+            "value":"[TS_1102451]_Invoices"
+        },
+        {
+            "name":"trains",
+            "value":"[TS_1102448]_Trains"
+        },
+        {
+            "name":"CCTV_building",
+            "value":"[TS_1102471]_CCTV Headquarters"
+        },
+        {
+            "name":"chongqing_jiefangbei",
+            "value":"[TS_1102480]_Liberation Monument in Chongqing"
+        },
+        {
+            "name":"nas_all_photos_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_1115171]_All photos will be permanently deleted from this device, MemoSpace, and all synced devices."
+        },
+        {
+            "name":"time_line_message_nas_contains",
+            "value":"[TS_1115184]_%s on MemoSpace"
+        },
+        {
+            "name":"nas_picture_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_1115185]_This photo will be permanently deleted from this device, MemoSpace, and all synced devices."
+        },
+        {
+            "name":"nas_all_files_recycle_delete_kept_tips",
+            "value":"[TS_1115199]_All items will be deleted from this device, MemoSpace, and all synced devices. They will be kept in \"Recently deleted\" for %d days."
+        },
+        {
+            "name":"nas_all_videos_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_1115150]_All videos will be permanently deleted from this device, MemoSpace, and all synced devices."
+        },
+        {
+            "name":"nas_picture_recycle_delete_kept_tips",
+            "value":"[TS_1115173]_This photo will be deleted from this device, MemoSpace, and all synced devices. It will be kept in \"Recently deleted\" for %1$d days."
+        },
+        {
+            "name":"optimize_storage_dialog_content_nas",
+            "value":"[TS_1115151]_Gallery can free up %2$s of device storage by removing full-resolution versions of photos and videos taken more than %1$s days ago. The originals are kept on MemoSpace and can be downloaded at any time.\n\nGallery will automatically optimize device storage in this way when it is running low."
+        },
+        {
+            "name":"nas_video_recycle_delete_kept_tips",
+            "value":"[TS_1118809]_This video will be deleted from this device, MemoSpace, and all synced devices. It will be kept in \"Recently deleted\" for %1$d days."
+        },
+        {
+            "name":"nas_video_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_1115196]_This video will be permanently deleted from this device, MemoSpace, and all synced devices."
+        },
+        {
+            "name":"nas_single_file_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_1115179]_This item will be permanently deleted from this device, MemoSpace, and all synced devices."
+        },
+        {
+            "name":"nas_single_file_recycle_delete_kept_tips",
+            "value":"[TS_1115182]_This item will be deleted from this device, MemoSpace, and all synced devices. It will be kept in \"Recently deleted\" for %d days."
+        },
+        {
+            "name":"disable_gallery_date_sync_entry",
+            "value":"[TS_1113040]_Off"
+        },
+        {
+            "name":"gallery_and_cloud_synchronization_entry",
+            "value":"[TS_1113041]_Sync to Cloud"
+        },
+        {
+            "name":"disable_gallery_date_sync_dialog",
+            "value":"[TS_1113042]_Disable Gallery syncing?"
+        },
+        {
+            "name":"gallery_and_nas_synchronization_entry",
+            "value":"[TS_1113038]_Sync to MemoSpace"
+        },
+        {
+            "name":"nas_all_files_dialog_delete_permanently_not_recover_tips",
+            "value":"[TS_1115197]_All items will be permanently deleted from this device, MemoSpace, and all synced devices."
+        },
+        {
+            "name":"enable_gallery_network_connection_nas",
+            "value":"[TS_1115163]_Allowing Internet access lets you see where photos and videos were taken, get search suggestions, browse MemoSpace content, download thumbnails, and use features like AI cloud enhancement and AI retouch."
+        },
+        {
+            "name":"close_network_dialog_content_nas",
+            "value":"[TS_1115193]_If you disable this, you won't be able to see where photos were taken, browse your MemoSpace Gallery, or view thumbnails of images on MemoSpace."
+        },
+        {
+            "name":"switch_to_gallery_and_nas_sync_value",
+            "value":"[TS_1110730]_After switching, your photos and videos will no longer sync to Cloud."
+        },
+        {
+            "name":"switch_gallery_and_cloud_sync_value",
+            "value":"[TS_1110731]_After switching, your photos and videos will no longer sync to MemoSpace."
+        },
+        {
+            "name":"real_estate_certificate",
+            "value":"[TS_1102443]_Property ownership certificates"
+        },
+        {
+            "name":"classify_cv_popup",
+            "value":"[TS_1122051]_The \"Categories\" album has been upgraded. Tap to start exploring!"
+        },
+        {
+            "name":"selfie",
+            "value":"[TS_875994]_Selfies"
+        },
+        {
+            "name":"optimize_device_storage_detail_new_nas",
+            "value":"[TS_1110737]_If your device is low on space, full-resolution photos and videos will be replaced with smaller versions. Originals can be downloaded from MemoSpace at any time."
+        },
+        {
+            "name":"select_gallery_date_sync",
+            "value":"[TS_1110739]_Choose how to sync Gallery"
+        },
+        {
+            "name":"switch_gallery_and_nas_sync_value",
+            "value":"[TS_1110728]_Your photos and videos will sync to MemoSpace. Changes to Gallery on this device will be synced to all your devices that sync with MemoSpace."
+        },
+        {
+            "name":"disable_gallery_date_sync",
+            "value":"[TS_1110740]_Disable Gallery syncing"
+        },
+        {
+            "name":"enable_gallery_and_nas_sync_value",
+            "value":"[TS_1110741]_Gallery data on this device will be uploaded to MemoSpace and merged with data stored there."
+        },
+        {
+            "name":"enable_gallery_and_cloud_value",
+            "value":"[TS_1110746]_Gallery data on this device will be uploaded to the cloud and merged with data stored there."
+        },
+        {
+            "name":"gallery_auto_play_moving_photo",
+            "value":"[TS_1113237]_Automatically play moving pictures"
+        },
+        {
+            "name":"enable_gallery_and_nas_sync",
+            "value":"[TS_1110736]_Sync Gallery to MemoSpace?"
+        },
+        {
+            "name":"switch_to_gallery_and_nas_sync",
+            "value":"[TS_1110742]_Switch syncing to MemoSpace?"
+        },
+        {
+            "name":"gallery_and_cloud_synchronization_value",
+            "value":"[TS_1110733]_Your photos and videos will sync to Cloud. Changes to Gallery on this device will be synced to all your devices that sync with Cloud."
+        },
+        {
+            "name":"enable_gallery_and_cloud",
+            "value":"[TS_1110734]_Sync Gallery to Cloud?"
+        },
+        {
+            "name":"disable_gallery_date_sync_value",
+            "value":"[TS_1110738]_This will stop syncing your photos and videos to any other devices."
+        },
+        {
+            "name":"switch_gallery_and_cloud_sync",
+            "value":"[TS_1110744]_Switch syncing to Cloud?"
+        },
+        {
+            "name":"synchronous_mode",
+            "value":"[TS_1110735]_Gallery syncing"
+        },
+        {
+            "name":"sync_tips_nas_system_abnormal",
+            "value":"[TS_1118808]_MemoSpace error. %1$s"
+        },
+        {
+            "name":"gallery_and_cloud_synchronization",
+            "value":"[TS_1110743]_Sync to Cloud"
+        },
+        {
+            "name":"turn_on_nas",
+            "value":"[TS_1111330]_OK"
+        },
+        {
+          "name": "change_portrait",
+          "value": "[TS_1119212]_Select another person"
+        },
+        {
+          "name": "select_portrait",
+          "value": "[TS_1119214]_Select a person"
+        },
+        {
+          "name": "display_the_avatar",
+          "value": "[TS_1119213]_Show profile picture"
+        },
+        {
+          "name": "select_the_portrait_album_to_display",
+          "value": "[TS_1119215]_Select a person to display."
+        },
+        {
+          "name":"no_portrait",
+          "value":"[TS_1128777]_No people yet"
+        },
+        {
+          "name":"display_album_name",
+          "value":"[TS_1128771]_Show album name"
+        },
+        {
+            "name":"switch_cloud_and_nas_sync_toast",
+            "value":"[TS_1110745]_Syncing mode is being switched. Try again later."
+        },
+        {
+            "name":"switch_gallery_and_nas_sync",
+            "value":"[TS_1110732]_Sync to MemoSpace"
+        },
+      {
+        "name":"action_video_splicing",
+        "value":"[TS_1100368]_Video"
+      },
+      {
+        "name":"action_creation",
+        "value":"[TS_1095887]_Create"
+      },
+      {
+        "name":"exceeding_the_limit_message",
+        "value":"[TS_1107848]_Max %d files can be added."
+      },
+      {
+        "name":"action_time_files",
+        "value":"[TS_1095888]_Instant movie"
+      },
+        {
+            "name": "sync_all_cloud_album_title",
+            "value": "[TS_1125895]_Select albums to sync"
+        },
+        {
+            "name": "sync_all_cloud_album",
+            "value": "[TS_1125888]_Sync all"
+        },
+        {
+            "name": "sync_all_cloud_album_detail",
+            "value": "[TS_1125890]_The Camera album syncs by default."
+        },
+        {
+            "name": "cloud_album_sync",
+            "value": "[TS_1125894]_Select albums to sync"
         }
     ]
 }

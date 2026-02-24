@@ -2,7 +2,7 @@
   "module": {
     "name": "phone_photos",
     "type": "entry",
-    "srcEntry": "./ets/Application/AbilityStage.ts",
+    "srcEntry": "./ets/Application/AbilityStage.ets",
     "description": "$string:mainability_description",
     "mainElement": "MainAbility",
     "deviceTypes": [
@@ -12,58 +12,257 @@
     "deliveryWithInstall": true,
     "installationFree": false,
     "pages": "$profile:main_pages",
+    "dependencies": [
+      {
+        "bundleName": "com.ohos.photobrowser",
+        "moduleName": "browserlibrary",
+      }
+    ],
     "metadata": [
       {
+        "name": "avoid_cutout",
+        "value": "true"
+      },
+      {
         "name": "ArkTSPartialUpdate",
+        "value": "true"
+      },
+      {
+        "name": "client_id",
+        "value": "109998783"
+      },
+      {
+        "name": "action.settings.app.can_not_disable",
+        "value": "true"
+      },
+      {
+        "name": "action.calender.app.support_schedule",
         "value": "true"
       }
     ],
     "requestPermissions": [
       {
-        "name": "ohos.permission.PROXY_AUTHORIZATION_URI"
+        "name": "ohos.permission.VIBRATE",
+        "reason": "$string:read_imagevideo_desc",
+        "usedScene": {
+          "abilities": [
+            "MainAbility",
+            "FormAbility",
+            "ServiceExtAbility"
+          ]
+        }
+      },
+      {
+        "name": "ohos.permission.ACCESS_MEDIALIB_THUMB_DB",
+        "reason": "$string:access_medialib_thumb_db_desc",
+        "usedScene": {
+          "abilities": [
+            "MainAbility",
+            "FormAbility",
+            "ServiceExtAbility"
+          ]
+        }
       },
       {
         "name": "ohos.permission.READ_IMAGEVIDEO",
-        "reason": "$string:app_name",
+        "reason": "$string:read_imagevideo_desc",
         "usedScene": {
-          "abilities": ["FormAbility"],
-          "when": "inuse"
+          "abilities": [
+            "MainAbility",
+            "FormAbility",
+            "ServiceExtAbility"
+          ]
         }
       },
       {
         "name": "ohos.permission.WRITE_IMAGEVIDEO",
-        "reason": "$string:app_name",
+        "reason": "$string:write_imagevideo_desc",
         "usedScene": {
-          "abilities": ["FormAbility"],
-          "when": "inuse"
+          "abilities": [
+            "MainAbility",
+            "FormAbility",
+            "ServiceExtAbility"
+          ]
         }
-      },
-      {
-        "name": "ohos.permission.MEDIA_LOCATION",
-        "reason": "$string:app_name",
-        "usedScene": {
-          "abilities": ["FormAbility"],
-          "when": "inuse"
-        }
-      },
-      {
-        "name": "ohos.permission.START_ABILITIES_FROM_BACKGROUND"
       },
       {
         "name": "ohos.permission.GET_BUNDLE_INFO"
+      },
+      {
+        "name": "ohos.permission.GET_NETWORK_INFO"
+      },
+      {
+        "name": "ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS"
+      },
+      {
+        "name": "ohos.permission.INTERNET"
+      },
+      {
+        "name": "ohos.permission.CLOUDFILE_SYNC"
+      },
+      {
+        "name": "ohos.permission.USE_CLOUD_COMMON_SERVICE"
+      },
+      {
+        "name": "ohos.permission.PROXY_AUTHORIZATION_URI"
+      },
+      {
+        "name": "ohos.permission.PRINT"
+      },
+      {
+        "name": "ohos.permission.PRIVACY_WINDOW"
+      },
+      {
+        "name": "ohos.permission.FILE_ACCESS_PERSIST"
+      },
+      {
+        "name": "ohos.permission.MEDIA_LOCATION",
+        "reason": "$string:media_location_desc",
+        "usedScene": {
+          "abilities": [
+            "MainAbility",
+            "FormAbility",
+            "ServiceExtAbility"
+          ]
+        }
+      },
+      {
+        "name": "ohos.permission.READ_CLOUD_SYNC_CONFIG",
+        "reason": "$string:read_cloud_sync_config_desc",
+        "usedScene": {
+          "abilities": [
+            "MainAbility",
+            "FormAbility"
+          ]
+        }
+      },
+      {
+        "name": "ohos.permission.MANAGE_CLOUD_SYNC_CONFIG",
+        "reason": "$string:manage_cloud_sync_config_desc",
+        "usedScene": {
+          "abilities": [
+            "MainAbility",
+            "FormAbility"
+          ]
+        }
+      },
+      {
+        "name": "ohos.permission.MANAGE_SETTINGS"
+      },
+      {
+        "name": "ohos.permission.ACTIVATE_THEME_PACKAGE"
+      },
+      {
+        "name": "ohos.permission.ACCESS_SEARCH_SERVICE"
+      },
+      {
+        "name": "ohos.permission.PERMISSION_USED_STATS"
+      },
+      {
+        "name": "ohos.permission.LAUNCH_DATA_PRIVACY_CENTER",
+        "reason": "$string:business_privacy_statements"
+      },
+      {
+        "name": "ohos.permission.GRANT_SHORT_TERM_WRITE_MEDIAVIDEO"
+      },
+      {
+        "name": "ohos.permission.ACCESS_LEARN_MORE_DIALOG"
+      },
+      {
+        "name": "ohos.permission.STORAGE_MANAGER"
+      },
+      {
+        "name": "ohos.permission.READ_APP_LOCK"
+      },
+      {
+        "name": "ohos.permission.WRITE_APP_LOCK"
+      },
+      {
+        "name": "ohos.permission.VISIBLE_WINDOW_INFO"
+      },
+      {
+        "name": "ohos.permission.ACCESS_BIOMETRIC"
+      },
+      {
+        "name": "ohos.permission.MANAGE_SECURE_SETTINGS"
+      },
+      {
+        "name": "ohos.permission.LOCATION",
+        "reason": "$string:location_information_description",
+        "usedScene": {
+          "abilities": [
+            "MainAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.APPROXIMATELY_LOCATION",
+        "reason": "$string:location_information_description",
+        "usedScene": {
+          "abilities": [
+            "MainAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.DLP_GET_HIDE_STATUS"
+      },
+      {
+        "name": "ohos.permission.READ_PROTECTION_ADVICE_POLICY"
+      },
+      {
+        "name": "ohos.permission.GET_BUNDLE_INFO_PRIVILEGED"
+      },
+      {
+        "name": "ohos.permission.ACCESS_SCAN_SERVICE"
+      },
+      {
+        "name": "ohos.permission.PRELOAD_UI_EXTENSION_ABILITY"
       }
     ],
     "abilities": [
       {
-        "startWindowIcon": "$media:startWindow_Bg",
-        "startWindowBackground": "$color:white",
+        "minWindowWidth": 840,
+        "minWindowHeight": 560,
+        "startWindowIcon": "$media:starting_window",
+        "startWindowBackground": "$color:start_ability_background_color",
         "name": "com.ohos.photos.MainAbility",
-        "srcEntry": "./ets/MainAbility/MainAbility.ts",
+        "removeMissionAfterTerminate": true,
+        "srcEntry": "./ets/MainAbility/MainAbility.ets",
         "description": "$string:description_mainability",
-        "icon": "$media:ohos_gallery",
+        "icon": "$media:ohos_gallery_op",
         "label": "$string:app_name",
         "visible": true,
+        "orientation": "auto_rotation_unspecified",
         "launchType": "singleton",
+        //        "skills": [
+        //          {
+        //            "entities": [
+        //              "entity.system.home"
+        //            ],
+        //            "actions": [
+        //              "action.system.home","ohos.want.action.photoPicker"
+        //            ],
+        //            "uris": [
+        //              {
+        //                "type": "multipleselect",
+        //                "scheme": 'file'
+        //              },
+        //              {
+        //                "type": "singleselect",
+        //                "scheme": 'file'
+        //              },
+        //              {
+        //                "type": "multipleselect"
+        //              },
+        //              {
+        //                "type": "singleselect"
+        //              }
+        //            ]
+        //          }
+        //        ],
         "skills": [
           {
             "entities": [
@@ -102,70 +301,218 @@
               },
               {
                 "type": "singleselect"
+              },
+              {
+                "scheme": "cleanupPage",
+                "host": "settings/cache"
+              },
+              {
+                "type": "multipleselect",
+                "scheme": 'file'
+              },
+              {
+                "type": "singleselect",
+                "scheme": 'file'
+              },
+              {
+                "type": "multipleselect"
+              },
+              {
+                "type": "singleselect"
+              }
+            ]
+          },
+        ],
+        "supportWindowMode": []
+      },
+      {
+        "name": "GalleryCleanupAbility",
+        "srcEntry": "./ets/galleryCleanupAbility/GalleryCleanupAbility.ets",
+        "description": "GalleryCleanupAbility",
+        "label": "$string:app_name",
+        "startWindowIcon": "$media:startWindowBlack_Bg",
+        "startWindowBackground": "$color:start_ability_background_color",
+        "launchType": "singleton",
+        "exported": false,
+        "orientation": "auto_rotation_unspecified",
+        "removeMissionAfterTerminate": true,
+        "skills": [
+          {
+            "uris": [
+              {
+                "scheme": "cleanupPage",
+                "host": "settings/cache"
               }
             ]
           }
-        ],
-        "supportWindowMode": [
-          "fullscreen"
         ]
       }
     ],
     "extensionAbilities": [
-      {
-        "name": "com.ohos.photos.FormAbility",
-        "srcEntry": "./ets/FormAbility/FormAbility.ts",
-        "label": "$string:form_FormAbility_label",
-        "description": "$string:app_name",
-        "type": "form",
-        "metadata": [
-          {
-            "name": "ohos.extension.form",
-            "resource": "$profile:form_config"
-          }
-        ],
-      },
-      {
-        "name": "com.ohos.photos.ServiceExtAbility",
-        "srcEntry": "./ets/ServiceExt/ServiceExtAbility.ts",
-        "icon": "$media:ohos_gallery",
-        "description": "$string:app_name",
-        "type": "service",
-        "visible": true,
-        "skills": [
-          {
-            "actions": [
-              "ohos.want.action.deleteDialog"
-            ],
-            "uris": [
-              {
-                "type": "image/*"
-              }
-            ],
-          }
-        ]
-      },
+            {
+              "name": "PrivacyStatementAbility",
+              "srcEntry": "./ets/MainAbility/PrivacyStatementAbility.ets",
+              "description": "$string:paf_privacy_statement_see_more",
+              "icon": "$media:ohos_gallery",
+              "label": "$string:app_name",
+              "exported": true,
+              "type": 'sys/commonUI',
+              "permissions": [
+                "ohos.permission.ACCESS_SECURITY_PRIVACY_CENTER"
+              ],
+              "skills": [
+                {
+                  "entities": [
+                    "entity.system.home"
+                  ],
+                  "actions": [
+                    "action.system.home",
+                    "action.access.business_and_privacy_statement"
+                  ]
+                }
+              ],
+              "metadata": [
+                {
+                  "name": "metadata.access.business_and_privacy_statement",
+                  "value": 'data_privacy_center.json'
+                }
+              ]
+            },
+            {
+              "name": "FormAbility",
+              "srcEntry": "./ets/FormAbility/FormAbility.ets",
+              "label": "$string:form_FormAbility_label",
+              "description": "FormAbility",
+              "type": "form",
+              "metadata": [
+                {
+                  "name": "ohos.extension.form",
+                  "resource": "$profile:form_config"
+                }
+              ]
+            },
+            {
+              "name": "FacardDataShareAbility",
+              "srcEntry": "./ets/FormAbility/FacardDataShareAbility.ets",
+              "type": "dataShare",
+              "uri": "datashare://hmos_photodata",
+              "exported": false
+            },
+            {
+              "name": "AuthExtensionAbility",
+              "description": "AuthExtensionAbility",
+              "type": "sys/commonUI",
+              "exported": true,
+              "srcEntry": "./ets/AuthExtension/AuthExtensionAbility.ets",
+              "extensionProcessMode": "instance"
+            },
+            {
+              "name": "RecentUIExtensionAbility",
+              "description": "RecentUIExtensionAbility",
+              "type": "recentPhoto",
+              "exported": true,
+              "srcEntry": "./ets/RecentAbility/RecentUIExtensionAbility.ets",
+              "extensionProcessMode": "type"
+            },
       {
         "name": "PickerUIExtensionAbility",
         "description": "PickerUIExtensionAbility",
         "type": "sysPicker/photoPicker",
         "exported": true,
-        "srcEntry": "./ets/picker/PickerUIExtensionAbility.ets"
+        "srcEntry": "./ets/pickerability/PickerUIExtensionAbility.ets",
+        "extensionProcessMode": "type"
       },
-      {
-        "name": "DeleteUIExtensionAbility",
-        "description": "DeleteUIExtensionAbility",
-        "type": "sysDialog/common",
-        "exported": true,
-        "srcEntry": "./ets/DeleteAbility/DeleteUIExtensionAbility.ets"
-      },
-      {
-        "name": "SaveUIExtensionAbility",
-        "description": "SaveUIExtensionAbility",
-        "type": "sysDialog/common",
-        "exported": true,
-        "srcEntry": "./ets/SaveAbility/SaveUIExtensionAbility.ets"
-      }
+            {
+              "name": "DeleteUIExtensionAbility",
+              "description": "DeleteUIExtensionAbility",
+              "type": "sysDialog/common",
+              "exported": true,
+              "srcEntry": "./ets/DeleteAbility/DeleteUIExtensionAbility.ets"
+            },
+            {
+              "name": "SaveUIExtensionAbility",
+              "description": "SaveUIExtensionAbility",
+              "type": "sysDialog/common",
+              "exported": true,
+              "srcEntry": "./ets/SaveAbility/SaveUIExtensionAbility.ets"
+            },
+            {
+              "description": "com.ohos.BackupExtension",
+              "icon": "$media:ohos_gallery",
+              "name": "BackupExtensionAbility",
+              "srcEntrance": "./ets/BackupExtension/BackupExtension.ets",
+              "type": "backup",
+              "visible": true,
+              "metadata": [
+                {
+                  "name": "ohos.extension.backup",
+                  "resource": "$profile:backup_config"
+                }
+              ]
+            },
+            {
+              "name": "MusicServiceAbility",
+              "icon": "$media:app_icon",
+              "description": "service",
+              "type": "service",
+              "exported": true,
+              "srcEntry": "./ets/MusicAbility/MusicServiceAbility.ets"
+            },
+            {
+              "name": "FACardServiceAbility",
+              "icon": "$media:app_icon",
+              "description": "service",
+              "type": "service",
+              "exported": true,
+              "srcEntry": "./ets/FormAbility/FACardServiceAbility.ets"
+            },
+            {
+              "name": "RecentPhotoInfoAbility",
+              "icon": "$media:app_icon",
+              "description": "service",
+              "type": "service",
+              "exported": true,
+              "srcEntry": "./ets/RecentAbility/RecentPhotoInfoAbility.ets"
+            },
+            {
+              "srcEntry": "./ets/SettingCardDataShareAbility/SettingCardDataShareAbility.ets",
+              "name": "SettingCardDataShareAbility",
+              "icon": "$media:app_icon",
+              "description": "SettingDataShareAbility",
+              "type": "dataShare",
+              "uri": "datashare://com.ohos.photos.setting.card",
+              "readPermission": "ohos.permission.ACCESS_SYSTEM_SETTINGS",
+              "writePermission": "ohos.permission.ACCESS_SYSTEM_SETTINGS",
+              "exported": true,
+              "metadata": [{"name": "ohos.extension.dataShare", "resource": "$profile:data_share_config"}]
+            },
+            {
+              "name": "GalleryCleanupUIExtensionAbility",
+              "srcEntry": "./ets/galleryCleanupAbility/GalleryCleanupUIExtensionAbility.ets",
+              "type": "sys/commonUI",
+              "description": "GalleryCleanupUIExtensionAbility",
+              "exported": true,
+              "extensionProcessMode": "type",
+              "permissions": ["ohos.permission.ACCESS_SYSTEM_SETTINGS"]
+            },
+            {
+              "name": "DefaultAlbumNameUIExtensionAbility",
+              "description": "DefaultAlbumNameUIExtensionAbility",
+              "type": "sysDialog/common",
+              "exported": true,
+              "srcEntry": "./ets/DefaultAlbumNameAbility/DefaultAlbumNameUIExtensionAbility.ets"
+            }
+    ],
+    "proxyData": [
+            {
+              "uri": "datashareproxy://com.ohos.photos/facard_metadata",
+              "requiredReadPermission":"ohos.permission.GET_BUNDLE_INFO",
+              "requiredWritePermission":"ohos.permission.GET_BUNDLE_INFO",
+              "metadata": {
+                "name": "dataProperties",
+                "resource": "$profile:facard_metadata"
+              }
+            }
     ]
   },
 }

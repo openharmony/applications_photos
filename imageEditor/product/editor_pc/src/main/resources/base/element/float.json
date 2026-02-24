@@ -1,0 +1,12 @@
+{
+  "float":[
+    {
+      "name":"right_bar_width",
+      "value":"320"
+    },
+    {
+      "name":"right_bar_left_right_padding",
+      "value":"24"
+    }
+  ]
+}

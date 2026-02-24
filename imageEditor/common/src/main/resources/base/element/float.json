@@ -1,0 +1,48 @@
+{
+  "float": [
+    {
+      "name": "top_tool_bar_height",
+      "value": "56vp"
+    },
+    {
+      "name": "operation_area_expand_hotspot_width",
+      "value": "36vp"
+    },
+    {
+      "name": "operation_area_expand_hotspot_height",
+      "value": "12vp"
+    },
+    {
+      "name": "window_statusBar_height",
+      "value": "37vp"
+    },
+    {
+      "name": "window_topBar_height",
+      "value": "56vp"
+    },
+    {
+      "name": "right_bar_width",
+      "value": "320"
+    },
+    {
+      "name": "compare_btn_right_margin",
+      "value": "24vp"
+    },
+    {
+      "name": "bottom_tool_bar_height_split",
+      "value": "212vp"
+    },
+    {
+      "name": "bottom_tool_bar_height_portrait",
+      "value": "240vp"
+    },
+    {
+      "name": "bottom_tool_bar_height_landscape",
+      "value": "224vp"
+    },
+    {
+      "name": "top_tool_bar_dialog_top_margin",
+      "value": "16vp"
+    }
+  ]
+}

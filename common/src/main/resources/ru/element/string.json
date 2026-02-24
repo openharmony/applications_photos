@@ -1,0 +1,6451 @@
+{
+    "string":[
+        {
+            "name":"hide_single_file_tips",
+            "value":"Скрыть этот элемент?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"up_to_limit_tips",
+            "value":"Выбрано максимальное количество элементов.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pull_down_back_tips_for_sub_display",
+            "value":"Проведите вниз, чтобы выйти из режима предпросмотра фотографий",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_updating",
+            "value":"Выгрузка (%1$s/%2$s)…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_image",
+            "value":"Облако",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"local_image",
+            "value":"Устройство",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"selected_file_already_deleted",
+            "value":"Выбранные элементы уже удалены на этом устройстве.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_file",
+            "value":"Фильтр",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all",
+            "value":"Все",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"AI_cloud_enhance",
+            "value":"Обработка в облаке с ИИ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"download_failed_single",
+            "value":"Сбой сохранения файла.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_text",
+            "value":"Оригинал",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_daylight",
+            "value":"Дневной свет",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"phone_rotate",
+            "value":"Поворот",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"keep_original_storage",
+            "value":"Сохранение оригиналов на устройстве",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"vertical_collage",
+            "value":"Вертикальный коллаж, длинный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_select_image_text",
+            "value":"Выбор фото",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"play",
+            "value":"Воспроизвести",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no",
+            "value":"Отмена",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_picture",
+            "value":"Живые фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_creation_time",
+            "value":"Сортировка по времени создания",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"enable_sync_title_31",
+            "value":"Включение синхронизации с Галереей",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_size",
+            "value":"Размер файла",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort",
+            "value":"Сортировать",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"deselected",
+            "value":"Не выбрано",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"setting_up_the_network",
+            "value":"Настройки сети",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_field",
+            "value":"Центровзвешенный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_learn_more",
+            "value":"Подробнее",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_limited",
+            "value":"Эта служба предоставляется бесплатно только в течение ограниченного периода времени.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_and_video_desc_tv",
+            "value":"Используется для сохранения фото и видео и доступа к ним.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_compare_after_cloud_enhancement",
+            "value":"Нажмите, чтобы увидеть разницу между изображениями до и после обработки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_camera",
+            "value":"Камера",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_single_album_tips",
+            "value":"Удалить этот альбом? (Фото: %1$d, видео: %2$d)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_hdc_dialog_content",
+            "value":"Фото и видео больше не будут синхронизироваться с другими Вашими устройствами. Выключить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_fluorescent",
+            "value":"Флуоресцентный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_title_text",
+            "value":"Галерея",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"landscape_collage",
+            "value":"Коллаж в горизонтальной ориентации",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pause_none_battery_low",
+            "value":"Обновление приостановлено для энергосбережения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_size",
+            "value":"Сортировка по размеру файла",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"paste_from_pasteboard",
+            "value":"Вставить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new",
+            "value":"Автоматическое улучшение недавних фото с помощью искусственного интеллекта. Просто нажмите на значок волшебной палочки над поддерживаемым изображением. Эта функция бесплатна только в течение ограниченного периода времени.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"help_you_remind_memory_and_classify",
+            "value":"Бесценные моменты вашей жизни.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_prompt1_tv",
+            "value":"Для предоставления таких функций, как просмотр фото и видео, этому приложению требуется доступ в %1$s и следующее право доступа: %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_new",
+            "value":"Условия использования возможностей генеративного искусственного интеллекта службы Ретушь с ИИ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_hide",
+            "value":"Скрыть",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"yes",
+            "value":"OK",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_sync_cloud",
+            "value":"Синхронизация альбомов с Облаком",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_download",
+            "value":"Загрузка (%1$s/%2$s)…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_enhance_complete_tips",
+            "value":"Обработка в облаке с ИИ выполнена.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance_des_1",
+            "value":"На устройстве есть фото, которые соответствуют требованиям функции автообработки в облаке.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_new_album",
+            "value":"Новый альбом",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_back_to_default",
+            "value":"Сброс",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all_photos",
+            "value":"Все фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_other",
+            "value":"Вручную",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_failed",
+            "value":"Сбой загрузки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slide_show_setting",
+            "value":"Интервал слайд-шоу",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_creation_time",
+            "value":"Время создания",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_busy",
+            "value":"Сервер занят. Повторите попытку позже.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_compare",
+            "value":"Сравнить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all_videos",
+            "value":"Все видео",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_cloudy",
+            "value":"Облачно",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"stop_for_sync_cloud",
+            "value":"Уровень заряда батареи меньше %s. Синхронизация приостановлена.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"checkbox_deselected",
+            "value":"Поле для галочки, галочка не стоит, чтобы поставить, коснитесь дважды одним пальцем",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_time_update",
+            "value":"Обновлено %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_show_isShowAlbumName",
+            "value":"Показать имя альбома",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"privacy_statement",
+            "value":"Уведомление о приложении Галерея и конфиденциальности",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_stop_confirm",
+            "value":"Функция Ретушь с ИИ станет недоступна. Выключить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_stop_ai_creation_service",
+            "value":"Служба Создание контента с ИИ будет недоступна. Это не повлияет на работу других функций. Выключить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"on_network",
+            "value":"Интернет",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_albums_tips",
+            "value":"Удалить %1$d альбома? (Фото: %2$d, видео: %3$d)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"super_macro",
+            "value":"Супермакро",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_cloud_enhance_service_note",
+            "value":"Функция Обработка в облаке с ИИ будет недоступна. Выключить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title_select_album",
+            "value":"Выбрать альбом",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_settings",
+            "value":"Настройки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_prompt_message",
+            "value":"Фото и видео будут удалены без возможности восстановления через указанное количество дней (до %d дней)",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_extra_1",
+            "value":"Автоматическое улучшение недавних фото с помощью искусственного интеллекта. Просто нажмите на значок волшебной палочки над поддерживаемым изображением. Эта функция бесплатна только в течение ограниченного периода времени.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_switcher_square",
+            "value":"Отображать миниатюры в квадратной форме",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_switcher_rectangle",
+            "value":"Отображать миниатюры с исходным соотношением сторон",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_rename",
+            "value":"Переименовать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"search",
+            "value":"Поиск",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_privacy_protocol",
+            "value":"Уведомление о службе Создание контента с ИИ и конфиденциальности",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_name",
+            "value":"Имя файла",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_extra",
+            "value":"Автоматическое улучшение недавних фото с помощью искусственного интеллекта. Просто нажмите на значок волшебной палочки над поддерживаемым изображением. Эта функция бесплатна только в течение ограниченного периода времени.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_image_symbol_enhanced",
+            "value":"После",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_spot",
+            "value":"Точечный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_action_show_date",
+            "value":"Показать дату",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cast_mirror_title",
+            "value":"Проекция",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_network",
+            "value":"Нет доступного интернет-соединения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_name",
+            "value":"Сортировка по имени файла",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_shoot_time",
+            "value":"Время съемки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_selected",
+            "value":"Все выбрано",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_portrait",
+            "value":"Переместить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Switch_on",
+            "value":"Включить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_action_hide_date",
+            "value":"Скрыть дату",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_watermark_after_enhance",
+            "value":"Добавление водяного знака",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"target_has_same_name",
+            "value":"Файл с именем %1$s уже существует. Заменить?\n",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_petalclip_video",
+            "value":"Petal Clip",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_view",
+            "value":"Ночные пейзажи",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_collage",
+            "value":"Коллаж",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_network_error",
+            "value":"Ошибка сети. Проверьте и повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_storage_dialog_content",
+            "value":"Приложение Галерея может освободить %2$s в памяти устройства, удалив версии фото и видео в полном разрешении, снятые больше %1$s дней назад. Оригиналы будут сохранены в облаке, вы можете загрузить их в любое время.\n\nПри обнаружении нехватки свободного места Галерея будет автоматически оптимизировать пространство таким образом.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_video_dialog_show_petalClip_not_install",
+            "value":"Для использования этой функции требуется Petal Clip. Перейти к загрузке?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"favorited",
+            "value":"Добавлено в Избранное",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance",
+            "value":"Автообработка в облаке",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add",
+            "value":"Добавить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_temperature_high",
+            "value":"Слишком высокая температура устройства. Повторите попытку позже.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Picker_Unselect",
+            "value":"Отменить выбор",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_hicloud_gallery",
+            "value":"Синхронизируйте фото и видео с облаком.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"more_text",
+            "value":"Еще",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_all_files_tips",
+            "value":"Удалить все элементы?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_add",
+            "value":"Добавить имя",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"camera_flash_on",
+            "value":"Вспышка, включена",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_shoot_time",
+            "value":"Сортировка по времени съемки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_video_dialog_to_download_PetalClip",
+            "value":"Перейти",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pause_upload_for_low_battery",
+            "value":"Уровень заряда батареи меньше %s. Выгрузка приостановлена.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_off",
+            "value":"Вспышка выключена",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_sync_content_31",
+            "value":"В фото содержатся ваши воспоминания. Синхронизируйте фото с Облаком для их надежного хранения, быстрого доступа к ним на всех ваших устройствах, а также для освобождения места в памяти устройства.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_and_video_desc",
+            "value":"Используется для доступа к фото и видео, их редактирования и сохранения.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_remove",
+            "value":"Удалить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_items_to_add",
+            "value":"Выберите элементы, которые необходимо добавить.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_single_video_tips",
+            "value":"Скрыть это видео?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_enabled_now",
+            "value":"Включить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rainbow",
+            "value":"Радуга",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_empty_album_tips",
+            "value":"Удалить этот альбом?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_all_videos_tips",
+            "value":"Удалить все видео?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_motion_picture",
+            "value":"Живые фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_subTitle_text",
+            "value":"Выберите фото или альбом, который хотите посмотреть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_edit",
+            "value":"Изменить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_remove",
+            "value":"Удалить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_auto",
+            "value":"Авто",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_toast_1",
+            "value":"На устройстве есть фото, которые соответствуют требованиям функции автообработки в облаке. Вы можете включить эту функцию в разделе Настройки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_download_error",
+            "value":"Загрузка...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_default_content",
+            "value":"В фото содержатся ваши воспоминания. Выгрузите фото в Облако для их надежного хранения и быстрого доступа к ним на всех ваших устройствах. Также рекомендуется увеличить ваше облачное хранилище.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pictures_and_videos",
+            "value":"Фото и видео",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_1",
+            "value":"Автоматическое улучшение недавних фото с помощью искусственного интеллекта. Просто нажмите на значок волшебной палочки над поддерживаемым изображением. Эта функция бесплатна только в течение ограниченного периода времени.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_center_weighted",
+            "value":"Матричный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_image_symbol_initial",
+            "value":"До",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_slide_show",
+            "value":"Слайд-шоу",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_enhance_wait_tips",
+            "value":"Это фото обрабатывается в облаке. Подождите.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_highlight_tips",
+            "value":"Это фото больше не будет отображаться в этой подборке.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from_this_highlight",
+            "value":"Удалить выбранный контент?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_all_from_highlight_tips",
+            "value":"Выбранные элементы больше не будут отображаться в этой подборке.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_video_from_highlight_tips",
+            "value":"Это видео больше не будет отображаться в этой подборке.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_out_of_highlight",
+            "value":"Удалить из подборки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_already_use",
+            "value":"Такое имя уже используется.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"the_oriental_pearl_tower",
+            "value":"Телебашня Восточная жемчужина",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_deselect_all",
+            "value":"Отм. выбор",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_video_recycle_delete_kept_tips",
+            "value":"Это видео будет удалено с этого устройства, из облака и со всех синхронизированных устройств. Оно будет храниться в разделе Недавно удаленное в течение %1$d дней.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_splash_content_online",
+            "value":"%s Позволяет просматривать фото и видео и делиться ими прямо в облаке.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper",
+            "value":"Обои на базе ИИ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices_more_sub",
+            "value":"Для доступа к внешнему накопителю выберите Файлы > Обзор.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_current_highlight",
+            "value":"Удалить из подборки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cover_edit_title",
+            "value":"Изменение обложки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"means_of_transportation",
+            "value":"Транспорт",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_near_full_card_content",
+            "value":"Новые фото и видео больше не будут выгружаться в Облако, когда хранилище заполнится.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"distributed_album_disconnected",
+            "value":"Устройство отключено.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"skip_current_file",
+            "value":"Пропустить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"duplicate_name_merge_portrait_photo_title",
+            "value":"Объединить фото людей с одним именем?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_optimize_device_storage_detail",
+            "value":"Фото и видео в полном разрешении, хранящиеся на устройстве, не будут заменены версиями с небольшим разрешением.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"close_hdc_dialog_title",
+            "value":"Выключить синхронизацию с облаком",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_router",
+            "value":"Оптимизировать",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"blossom",
+            "value":"Цветы",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tab_highlights",
+            "value":"Интересное",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycleAlbum_delete_message",
+            "value":"Этот элемент будет удален без возможности восстановления.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"intelligent_classification_description_tips",
+            "value":"Распределение фото и видео по отдельным альбомам для удобства просмотра. Также доступен просмотр по людям, местам и источникам.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_as_cover",
+            "value":"На обложку",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_prompt_message",
+            "value":"Фото и видео будут удалены без возможности восстановления через указанное количество дней (максимум %d дней).",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_cancel_message",
+            "value":"%1$s удалено. Остановить удаление оставшихся файлов?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editBar_text",
+            "value":"Изменить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"please_enter_the_password",
+            "value":"Введите PIN-код",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_photo_and_video",
+            "value":"Приложение %s отредактировало изображения или видео в Галерее.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"print_or_generate_pdf",
+            "value":"Печать или генерация PDF",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_videos_to_timeline_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"file_size_location",
+            "value":"Размер: %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_photo",
+            "value":"Загрузить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_photo",
+            "value":"Приложение %s отредактировало изображения в Галерее.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"business_card",
+            "value":"Визитные карточки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_portrait_tips",
+            "value":"Вы можете в любой момент снова добавить его в альбоме Люди.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"more_portrait",
+            "value":"Другие люди",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Remove_From_Portrait",
+            "value":"Удалить из раздела Люди",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_description",
+            "value":"Персонализируйте ваше устройство, используя обои, сгенерированные ИИ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy",
+            "value":"Копировать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_content",
+            "value":"%s не выгружено в Облако.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_timeline",
+            "value":"Все важные моменты вашей жизни расположены здесь в хронологическом порядке. Просто прокрутите ленту.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tab_albums",
+            "value":"Альбомы",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Statue_of_liberty",
+            "value":"Статуя Свободы",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"double_click_to_restore_the_original_size",
+            "value":"Дважды нажмите, чтобы восстановить исходный размер.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_portrait_photo",
+            "value":"Выберите фото вас.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_description_new",
+            "value":"Эта служба выгружает выбранные вами изображения облако для редактирования на базе ИИ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_ai_creation_subtitle",
+            "value":"Эта служба обрабатывает изображения и видео с помощью алгоритмов на базе искусственного интеллекта. Ее можно использовать для ретуширования фото, автоматической генерации видео и др.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Tab_change_cover",
+            "value":"Выбор обложки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"displayed_agreeing_map",
+            "value":"Примите условия обслуживания для просмотра карты.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hidden_album",
+            "value":"Скрытые элементы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_setting",
+            "value":"Настройки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_content",
+            "value":"Чтобы больше не получать такие напоминания, выключите Галерею в Облаке.\n\nУдалить фото и видео из Облака после выключения Галереи в Облаке можно на сайте %s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_not_network",
+            "value":"Нет WLAN-соединения. %1$s не синхронизировано. %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_this_portrait",
+            "value":"Удалить этого человека?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"front_night_shot_album",
+            "value":"Ночная съемка",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_source",
+            "value":"Просмотр фото по приложению",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"new_recycle_single_album_tips",
+            "value":"Это действие не удалит фото и видео, хранящиеся в них.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_files_recycle_delete_kept_tips",
+            "value":"Все элементы будут удалены с этого устройства, из Облака и со всех синхронизированных устройств. Они будут храниться в разделе Недавно удаленное в течение %d дней.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_cancel_message",
+            "value":"Скрыто %1$s. Остановить скрытие оставшихся файлов?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_selected_albums",
+            "value":"Удалить выбранные альбомы?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"merge_portrait_photo_content",
+            "value":"После объединения эти фото будут считаться изображениями одного человека.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_info",
+            "value":"Поместите редко просматриваемые фото и видео в архив, чтобы сэкономить место.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"personal_information_collected",
+            "value":"Собираемые персональные данные",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_service",
+            "value":"Создание контента с ИИ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"map_album_service_description",
+            "value":"Эта служба позволяет просматривать фото и видео по месту съемки. Для этого ей требуется следующее право, которое вы можете отозвать в любое время в разделе Настройки > Приложения и службы > Приложения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"please_enter_name",
+            "value":"Введите имя.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_gallery_network_connection",
+            "value":"Доступ в Интернет нужен, чтобы вы могли узнавать места съемки фото и видео, получать рекомендации поиска, просматривать контент в облаке, загружать миниатюры, а также использовать функции Обработка в облаке с ИИ и Создание контента с ИИ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_service_description",
+            "value":"Выгружайте изображения в облако для их обработки на базе ИИ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_progress_done",
+            "value":"Элементы сохранены.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_cloud_gallery_toast",
+            "value":"Для вас включена Галерея в Облаке.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recommended_cleanup",
+            "value":"Рекомендуется очистить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time_line_message_cloud_contains",
+            "value":"%s в Облаке",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_file_tips",
+            "value":"Удалить этот элемент?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_screen_shot",
+            "value":"Скриншоты",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_cancel_text",
+            "value":"Отмена",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photos_videos_head_title_album",
+            "value":"Нет фото или видео",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"view_albums",
+            "value":"Посмотреть содержимое",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"send",
+            "value":"Отправить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cover_preview_title",
+            "value":"Предпросмотр обложки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tv_menu_tips",
+            "value":"Нажмите %s для дополнительных опций",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unnamed_albums",
+            "value":"Альбом без имени",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title_select_photos",
+            "value":"Выберите изображения",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information",
+            "value":"Геоданные",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"prompt_new_album_dialog_message",
+            "value":"Нет альбомов, в которые можно скопировать или переместить. Создать новый альбом?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_linkage",
+            "value":"Отменить привязку",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"find_same_name",
+            "value":"Найден повторяющийся файл",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"slow_motion_video",
+            "value":"Замедление",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shoot_album",
+            "value":"Режимы камеры",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_cover",
+            "value":"Изменить обложку",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_access_statement",
+            "value":"Права функции Обои на базе ИИ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unfavor_cancel_message",
+            "value":"%1$s элементов уже удалено из Избранного.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_off",
+            "value":"Приложению Галерея не разрешен доступ в Интернет. Синхронизация приостановлена.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_disabled_please_enable_it",
+            "value":"У приложения Галерея нет доступа в Интернет",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"puzzle_frame",
+            "value":"Рамка",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_title",
+            "value":"Надоели такие напоминания?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"do_same_action",
+            "value":"Применять во всех таких случаях",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_dialog_title_text",
+            "value":"Сохранить как новое или заменить исходное?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_content",
+            "value":"Выбранные фото будут сохранены как отдельные фото.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_gallery_space",
+            "value":"Оптимизация памяти Галереи",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_service_description",
+            "value":"Этому приложению требуется следующее право:",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tail_light",
+            "value":"Следы фар",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_cloud_update_latest",
+            "value":"Обновлено",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_portrait_photo_content",
+            "value":"Обеспечивает более точную работу этой функции.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice_success",
+            "value":"Склеивание выполнено. Вы можете посмотреть результат в альбоме Видео.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_disable_the_photo_linkage_compare_effect",
+            "value":"Нажмите, чтобы отменить привязку фото.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hide_all_files_tips",
+            "value":"Скрыть все элементы?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_timeline",
+            "value":"Пробегитесь по волнам памяти",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Private_protection_in_progress",
+            "value":"Скрыто для защиты от подсматривания",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_timeline",
+            "value":"Фото",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_highlight",
+            "value":"Храните прекрасные воспоминания",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_portrait",
+            "value":"Добавление людей",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_notify",
+            "value":"Для предоставления таких функций, как просмотр и редактирование фото и видео, а также интеллектуальный анализ мультимедиа, этому приложению требуется доступ в %1$s и следующее право доступа: %2$s. Нажимая Принимаю, вы принимаете данные положения. Подробную информацию об обработке ваших персональных данных см. в документах %3$s и %4$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropModeReset_text",
+            "value":"Сброс",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_and_protocol",
+            "value":"Для предоставления возможности редактирования изображений на базе ИИ этой службе требуется доступ в %1$s, а также право чтения и выгрузки изображений. Нажимая Принимаю, вы принимаете положения документа %2$s. Подробные сведения об обработке ваших персональных данных см. в документе %3$s. Эта служба предоставляется бесплатно только в течение ограниченного периода времени.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_enable_tips",
+            "value":"Включить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_terms",
+            "value":"Условия использования возможностей генеративного искусственного интеллекта службы Обои на базе ИИ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_selected",
+            "value":"Отменить выбор",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cast_hint",
+            "value":"Просмотр на большом экране.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_save_as_new_photo",
+            "value":"Приложение %s сохранило фото в Галерее.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hide_images_message",
+            "value":"Выбранные элементы будут перемещены в Скрытые элементы.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"date_today",
+            "value":"Сегодня",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"timeline_message_thumbnail_ready",
+            "value":"Синхронизировано: %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_button",
+            "value":"OK",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_privacy_options",
+            "value":"Параметры конфиденциальности",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_privacy_protected",
+            "value":"Защита конфиденциальности включена",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_remove_location_info",
+            "value":"Удалить геоданные",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_tagged_geographic_data",
+            "value":"Данные геотегов.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_remove_camera_info",
+            "value":"Удалить данные камеры",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_device_and_camera_info",
+            "value":"Модель устройства и параметры камеры.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_name",
+            "value":"Галерея",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_not_favorite",
+            "value":"В Избранное",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_files_to_system_album_merge",
+            "value":"%1$s %2$s %3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"graduation_photo",
+            "value":"Вручение дипломов",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"replace_with_new_file",
+            "value":"Заменить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_permanently_forever_cancel_message",
+            "value":"%s файлов удалено без возможности восстановления. Остановить удаление?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_video",
+            "value":"Отобразить видео",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wrist_watch",
+            "value":"Часы",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_as_new_photo_and_video",
+            "value":"Приложение %s сохранило изображения или видео в Галерее.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"learn_how_to_use_your_data",
+            "value":"Использование персональных данных",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_dialog_delete_permanently_not_recover_tips",
+            "value":"Это видео будет удалено без возможности восстановления.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_experience_the_hide_album_function",
+            "value":"Нажмите здесь для просмотра скрытых элементов.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_screenshot",
+            "value":"Скриншоты",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_screenshot_saved_failed",
+            "value":"Сбой съемки скриншота. Повторите попытку позже.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Please_enter_main_title",
+            "value":"Введите название.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"document_correction",
+            "value":"Документы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_distributed_photo_title_album",
+            "value":"Нет фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_photos_dialog_delete_permanently_not_recover_tips",
+            "value":"Все фото будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_prompt1",
+            "value":"Для предоставления соответствующих функций этому приложению требуется доступ в %1$s. Также ему требуется читать и выгружать или передавать изображения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_prompt2",
+            "value":"Нажимая Принимаю, вы принимаете вышеизложенные положения. Подробную информацию об обработке ваших персональных данных см. в документах %1$s и %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms",
+            "value":"Условия использования возможностей генеративного искусственного интеллекта службы Ретушь с ИИ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"verify_and_view_album",
+            "value":"Подтвердите, чтобы посмотреть содержимое",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_files_to_timeline_merge",
+            "value":"%1$s и %2$s сохранено в приложении Галерея. %3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_place",
+            "value":"Места",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_single_image_tips",
+            "value":"Скрыть это изображение?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"move_file_to",
+            "value":"Переместить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"name_input",
+            "value":"Введите имя",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"location_albums",
+            "value":"Места",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_highlight",
+            "value":"Удалить Интересное",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_duration",
+            "value":"Длительность: %s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fast_face_beautify",
+            "value":"Улучшить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_to",
+            "value":"Добавить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"not_support_wallpaper_edit",
+            "value":"Обои невозможно редактировать в маленьком окне.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lock_tips_password",
+            "value":"Настройте код разблокировки для защиты ваших скрытых альбомов от неавторизованного доступа.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"classified_album",
+            "value":"Категории",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"expand",
+            "value":"Еще",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_new",
+            "value":"Новый альбом",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_view_protocol",
+            "value":"Нажмите, чтобы посмотреть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_micro_motion",
+            "value":"Синемаграф",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from_album_tips",
+            "value":"Это фото больше не будет отображаться в этом альбоме.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_save_text",
+            "value":"Сохранить как новое",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_splash_button_cancel",
+            "value":"Позже",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_action",
+            "value":"Заменить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_experience_the_image_compare_function",
+            "value":"Нажмите здесь для сравнения изображений.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait",
+            "value":"Портреты",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_confirm_tips",
+            "value":"OK",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"dialog_clear",
+            "value":"Удалить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"clear_tips",
+            "value":"Удалить все?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_description",
+            "value":"Освободите %1$s в памяти, удалив редко просматриваемые фото и видео с вашего устройства.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_warning_content",
+            "value":"Здесь отображаются ваши фото и видео, но это приложение может получить доступ только к выбранным вами элементам.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"focal_length",
+            "value":"Фокусное расстояние: %s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"full_screen_browsing",
+            "value":"Просмотр в полноэкранном режиме",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_merge_to_me",
+            "value":"Будут отображаться как фото одного человека.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_photos_title",
+            "value":"Все фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"screenshot_photos",
+            "value":"Скриншоты",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_favor_process",
+            "value":"Сохранение в Избранное…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_btn_text_photo",
+            "value":"Сделать фото",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aircraft",
+            "value":"Самолеты",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_wlan_only",
+            "value":"Только WLAN",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"detail_dialog_confirm",
+            "value":"OK",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"high_pixel",
+            "value":"High-res",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"skip_action",
+            "value":"Пропустить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_picture_success",
+            "value":"Фото сохранено.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_format_compare_is_not_supported",
+            "value":"Такой формат изображения не поддерживает сравнение.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_to_timeline_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_single_file_tips",
+            "value":"Удалить этот элемент?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos",
+            "value":"Сохранение…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_unselected",
+            "value":"Выбрать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_delete",
+            "value":"Удалить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_pictures_to_system_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"pause",
+            "value":"Пауза",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_hidden_process",
+            "value":"Скрытие…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"social_gallery_downloading_toast",
+            "value":"Загрузка…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Picker_Select",
+            "value":"Выбрать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"burst_photos",
+            "value":"Серия",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"learn_more",
+            "value":"Подробнее",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"switch_to_timeline_display_prompt",
+            "value":"Сведите пальцы, чтобы отобразить фото в виде сетки или отсортировать их по дате.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_image_cleanup",
+            "value":"Удаление фото и видео",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eiffel_tower",
+            "value":"Эйфелева башня",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"access_hidden_albums",
+            "value":"для просмотра скрытых элементов",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"duration",
+            "value":"Длительность",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wait_none_no_wlan",
+            "value":"Нет WLAN-соединения. Синхронизация приостановлена.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_compare_is_not_supported",
+            "value":"Видео нельзя сравнивать.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_not_support_tip",
+            "value":"Невозможно одновременно передать перетаскиванием %1$d и более элементов. Выберите повторно.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"prompt_new_album_dialog_title",
+            "value":"Нет доступных альбомов",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"specific_characters_not_supported",
+            "value":"Не может содержать ' ` \" . \\ / : * ? < > | [ ] { }",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_highlight",
+            "value":"Сделайте больше фото для создания раздела Интересное.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"sound_filled",
+            "value":"Звук",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_shot",
+            "value":"Ночная съемка",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_favor",
+            "value":"Мое Избранное",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_splice_canceled",
+            "value":"Склеивание отменено.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice_failed",
+            "value":"Сбой склеивания.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_to_local",
+            "value":"Сохранить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slideshow_interval",
+            "value":"Интервал слайд-шоу",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_cloud_update",
+            "value":"Синхронизация…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"target_file_location",
+            "value":"Файл в целевом месте сохранения",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"this_unction_requires",
+            "value":"Этой функции требуется доступ в %1$s и право доступа к данным устройства. Нажимая Принимаю, вы принимаете эти положения и положения документа %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_cloud_data_all",
+            "value":"%1$s и %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_empty_albums_tips",
+            "value":"Удалить выбранные альбомы?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"date_yesterday",
+            "value":"Вчера",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_recover_process",
+            "value":"Восстановление…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"landscape",
+            "value":"Пейзаж",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_unlimited_use_mobile",
+            "value":"Синхронизация фото и видео по мобильной сети, когда WLAN недоступна.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_picture_tips",
+            "value":"Удалить это фото?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_manage_card_confirm",
+            "value":"Настройки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"complete",
+            "value":"Готово",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_screenshot_saved_success",
+            "value":"Сохранено в Галерее.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_tips",
+            "value":"Удалить?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"disable",
+            "value":"Выключить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_to_album",
+            "value":"Добавить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_frame_style",
+            "value":"Соотношение сторон",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_photos_and_dideos",
+            "value":"Выбор изображений и видео",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_rename",
+            "value":"Введите имя",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork",
+            "value":"Использовать мобильную сеть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_album",
+            "value":"Ваши самые любимые воспоминания теперь всегда под рукой!",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_moving_photo_splice_function",
+            "value":"Несколько живых фото можно склеить вместе. Сначала выберите несколько живых фото, которые хотите объединить, затем нажмите здесь.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycleAlbum_clear_message",
+            "value":"Все элементы будут удалены без возможности восстановления.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_subtitle",
+            "value":"Служба Путешествие во времени использует ИИ для создания тематических изображений на базе выгруженных вами портретных фото.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_success",
+            "value":"Скопировано.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"card_button",
+            "value":"Подробнее",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_all_files_tips",
+            "value":"Удалить все элементы?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"map_album_service",
+            "value":"Альбомы по месту съемки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_cancel_message",
+            "value":"%1$s удалено. Остановить удаление оставшихся элементов?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"check",
+            "value":"Посмотреть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_title",
+            "value":"Безграничные возможности вашей Галереи",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panorama",
+            "value":"Панорама",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"path",
+            "value":"Путь",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picture_dialog_delete_permanently_not_recover_tips",
+            "value":"Это фото будет удалено без возможности восстановления.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Private_protection_view_photos",
+            "value":"Отобразить фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rename",
+            "value":"Изменение имени",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_permanently_cancel_message",
+            "value":"%1$s удалено без возможности восстановления. Остановить удаление оставшихся файлов?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_authorization",
+            "value":"Предоставить доступ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_of_media_analysis_service_note",
+            "value":"Эта служба читает и анализирует изображения и видео в фоновом режиме для предоставления интеллектуальных функций в приложении Галерея.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_privacy_statement",
+            "value":"Уведомление о функции Обработка в облаке с ИИ и конфиденциальности",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"share_highlight_cover",
+            "value":"Отправить обложку",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_device_storage_detail_new",
+            "value":"Если на устройстве осталось мало свободного места, фото и видео в полном разрешении будут заменены версиями с небольшим разрешением для экономии места. Вы можете загрузить оригинальные версии из облака в любое время.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tip_convert_to_JPG_success",
+            "value":"Преобразовано в JPG.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_save_as_new_video",
+            "value":"Приложение %s сохранило видео в Галерее.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_all",
+            "value":"Все фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"duplicate_photo",
+            "value":"Дубликаты",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_setting_tips_show",
+            "value":"Анализ проводится, когда устройство подключено к сети питания и его экран выключен.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_portrait_photo_placeholder",
+            "value":"Введите имя",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_of_service_location",
+            "value":"Предоставьте приложению Галерея доступ к вашим точным геоданным в разделе Настройки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_highlight",
+            "value":"Удалить из подборки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_face_beautify",
+            "value":"Отменить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_wallpaper",
+            "value":"Установить как обои",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"not_support_wallpaper_change",
+            "value":"Невозможно изменить обои в этом режиме.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"items_gallery_alwaysrotate",
+            "value":"Автоповорот",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"items_gallery_followsystem",
+            "value":"Задано системой",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tips_gallery_roatesettings",
+            "value":"Поворот фото при просмотре в полноэкранном режиме.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"settings_gallery_rotate",
+            "value":"Ориентация фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_privacy_statement",
+            "value":"Уведомление о службе Обои на базе ИИ и конфиденциальности",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_view_learn_more_title",
+            "value":"Подробнее",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fireworks",
+            "value":"Фейерверки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_storage_confirm",
+            "value":"Оптимизировать",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"wait_none_no_network",
+            "value":"Нет сетевого соединения. Синхронизация приостановлена.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_near_full_card_title",
+            "value":"Облачное хранилище почти заполнено",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_finish",
+            "value":"Оптимизация завершена. Освобождено %1$s места.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_multi_video_and_photo_num",
+            "value":"%1$s, %2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_cloud_space_full",
+            "value":"Облачное хранилище заполнено. Невозможно выгрузить больше фото или видео.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel_move",
+            "value":"Отмена",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"business_privacy_statements",
+            "value":"Уведомления о конфиденциальности",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_video_tips",
+            "value":"Удалить это видео?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lock_tips_list",
+            "value":"Внимание",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_highlight_kept_tips",
+            "value":"Это действие не удалит какие-либо фото или видео из Галереи.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_remove_process",
+            "value":"Удаление…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_highlight_tips",
+            "value":"Это элемент больше не будет отображаться в этой подборке.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_cancel",
+            "value":"Отмена",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_toast",
+            "value":"Функция Автообработка в облаке автоматически оптимизирует четкость фото, сделанных с приближением в режиме Фото. Вы можете включить эту функцию в разделе Настройки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_new_album_title",
+            "value":"Новый альбом",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"select_portrait_photo_title",
+            "value":"Выберите фото вас",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_videos_to_user_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"details",
+            "value":"Сведения",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"to_set_up",
+            "value":"Настроить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"motion",
+            "value":"Спорт",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_splice_reselect",
+            "value":"Выберите %1$d–%2$d живых фото и повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_open_now",
+            "value":"Включить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_btn_text_shooting",
+            "value":"Записать видео",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_and_documents_description",
+            "value":"Используется для доступа к фото или видео и их отображения по месту съемки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"collage_save_fail_tips",
+            "value":"Сбой сохранения. Изображение не загружено. Проверьте настройки сети и повторите попытку.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rotate_text",
+            "value":"Повернуть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_version",
+            "value":"Версия %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"smart_albums",
+            "value":"Умные альбомы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_city",
+            "value":"Города",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_cloud_data_sync_summary",
+            "value":"Автоматическая синхронизация фото и видео с Облаком и сохранение их в нем для доступа к ним на всех ваших устройствах.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fail_to_beautify_please_try_again_later",
+            "value":"Невозможно применить эффекты украшения. Повторите попытку позже.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_me",
+            "value":"Я",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"linkage",
+            "value":"Привязать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document",
+            "value":"Документы",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"focal_length_focalLengthIn35mmFilm",
+            "value":"Фокусное расстояние: %1$s (эквивалентное фокусное расстояние: %2$s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time",
+            "value":"Время",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycleAlbum_delete_all_images_message",
+            "value":"Все элементы будут удалены без возможности восстановления.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"about",
+            "value":"Сведения",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"title_none_selected",
+            "value":"Не выбрано",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"about_privacy_statement",
+            "value":"Уведомление об Альбомах по месту съемки и конфиденциальности",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"file_time_location",
+            "value":"Изменено: %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_video_dialog_delete_permanently_not_recover_tips",
+            "value":"Это видео будет безвозвратно удалено с этого устройства, из облака и со всех синхронизированных устройств.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"my_albums",
+            "value":"Мои альбомы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"resolution",
+            "value":"Разрешение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"extended_services",
+            "value":"Дополнительные службы",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name",
+            "value":"Служба генерации обоев на базе ИИ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flash_shoot",
+            "value":"В движении",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_warning_content_more",
+            "value":"Здесь отображаются ваши фото и видео, но это приложение может получить доступ только к выбранным вами элементам. %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_photos_count_per_sum",
+            "value":"Выбрано (%1$d/%2$d)",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"unhide_cancel_message",
+            "value":"Раскрыто %1$s. Остановить раскрытие оставшихся файлов?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"city_overlook",
+            "value":"Городские пейзажи",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"size_of_compared_exceeds_the_limit_tips",
+            "value":"Некоторые изображения слишком большие для сравнения.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"time_line_message_loaded",
+            "value":"Всего загружено %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compass",
+            "value":"Компас",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_service",
+            "value":"Выключить службу",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_layout_tips",
+            "value":"Иммерсивный просмотр",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_description_1",
+            "value":"Для предоставления функций, связанных с обоями, этой службе требуется доступ в %1$s, а также право чтения и выгрузки или передачи изображений. Нажимая Принимаю, вы принимаете вышеизложенные положения и положения документа %2$s. Дополнительные сведения об обработке ваших персональных данных см. в документе %3$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_permanently_clear_cancel_message",
+            "value":"%s удалено. Остановить удаление?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picture_compare",
+            "value":"Сравнение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name_2",
+            "value":"Служба Путешествие во времени",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name_3",
+            "value":"Служба Обоев на базе ИИ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_network_environment_poor",
+            "value":"Слабый сигнал сети. Повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"birthday_cake",
+            "value":"Именинные торты",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"selected_photos_count",
+            "value":"Выбрано %1$d/%2$d",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"share_cancel_message",
+            "value":"Подготовка выполнена на %1$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_back",
+            "value":"Назад",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flowing_shutter",
+            "value":"Свет",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_picture_recycle_delete_kept_tips",
+            "value":"Это фото будет удалено с этого устройства, из облака и со всех синхронизированных устройств. Оно будет храниться в разделе Недавно удаленное в течение %1$d дней.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"highlight_no_tips_show",
+            "value":"Здесь будет отображаться раздел Интересное, когда Галерея завершит анализ ваших фото. Анализ фото проводится, когда устройство подключено к сети питания и его экран выключен.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_to_user_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_network_dialog_content",
+            "value":"Если выключить эту функцию, вы не сможете посмотреть места съемки фото, просматривать Галерею в Облаке и миниатюры изображений, сохраненных в облаке.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ppt",
+            "value":"Слайды",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_picture_tips",
+            "value":"Удалить это фото?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_view_toast_title",
+            "value":"Ограниченный доступ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"open_hdc_dialog_content",
+            "value":"Данные приложения Галерея на этом устройстве будут выгружены и объединены с вашими данными в Облаке.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_Personal_Portrait_tips_show",
+            "value":"Выполняется анализ фото (%1$s). Анализ проводится, когда устройство подключено к сети питания и его экран выключен.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cats",
+            "value":"Кошки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"continue",
+            "value":"Продолжить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"waterfall",
+            "value":"Водопады",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_picture_dialog_delete_permanently_not_recover_tips",
+            "value":"Это фото будет безвозвратно удалено с этого устройства, из облака и со всех синхронизированных устройств.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_to_pasteboard",
+            "value":"Копировать в буфер обмена",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_gallery_main_describe_msg",
+            "value":"Храните фото и видео в Облаке для экономии места в памяти устройства.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_save_picture_text",
+            "value":"Сохранение изображения\u2026",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_local_space_release_summary",
+            "value":"Для экономии места в памяти локальные копии фото и видео, выгруженных в Облако, будут удалены с этого устройства.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_display",
+            "value":"Альбомы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"easy_editing_ai_description_tips",
+            "value":"Удобные инструменты позволяют писать и рисовать. Вы можете продолжить оптимизацию ваших композиций с помощью инструментов на базе ИИ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photos_head_title_photoAlbum",
+            "value":"Нет фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_less",
+            "value":"Скрыть",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"dialog_delete_permanently",
+            "value":"Удалить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_security",
+            "value":"%s Предоставляет надежное и безопасное хранение всех ваших фото и видео.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_connection_view_image",
+            "value":"Для доступа в Галерею в Облаке, загрузки миниатюр и получения рекомендаций поиска требуется доступ в Интернет.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_progress_message",
+            "value":"Добавление в альбом %1$s…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"id_card",
+            "value":"Удостоверения",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_add_portrait_name",
+            "value":"Добавить имя",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"merge",
+            "value":"Объединить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Tab_Portrait",
+            "value":"Люди",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"download_failed_retry",
+            "value":"Ошибка сети. Проверьте сетевые настройки и повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_title",
+            "value":"Удалить исходную серию снимков?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"third_sdk_list",
+            "value":"Сторонние SDK",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_more",
+            "value":"Другие опции",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_stype_no_photo",
+            "value":"Можно импортировать только фото с пользовательскими стилями.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"snapshot",
+            "value":"В движении",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"external_Disk_toast",
+            "value":"Установите приложение Файлы и повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_share",
+            "value":"Отправить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"title_general_settings",
+            "value":"Настройки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_video_tips",
+            "value":"Удалить это видео?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_export_error",
+            "value":"Ошибка сети. Сбой загрузки изображения. Повторите попытку позже.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_picture_not_download_please_download_and_try_again",
+            "value":"Сначала загрузите изображение.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_me_content",
+            "value":"Настроить этого человека в качестве вас?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"picker_warning_title",
+            "value":"Ограниченный доступ к Галерее",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_not_name_set_for_me",
+            "value":"Настроить этого человека в качестве вас?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"convert_to_JPG",
+            "value":"Преобразовать в JPG",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"externalDisk",
+            "value":"SD-карта",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_description",
+            "value":"Для предоставления функции Обои на базе ИИ этому приложению требуется доступ в %1$s, а также право чтения и выгрузки или передачи изображений. Компания собирает только персональные данные, связанные с функциями, которые вы используете. Дополнительные сведения см. в документе %2$s. Внимательно прочтите вышеуказанные положения. Нажимая Принимаю, вы принимаете данные положения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_closed",
+            "value":"Выклю\u200bчено",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"location_information_title",
+            "value":"Просмотр фото по местам съемки.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_bounce_play",
+            "value":"Реверс",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bank_card",
+            "value":"Банковские карты",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_screen_recording",
+            "value":"Записи с экрана",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"professional_photography",
+            "value":"Профи (фото)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_print_exceeds_the_limit_tips",
+            "value":"Можно печатать максимум %d элементов одновременно.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_optimize",
+            "value":"%s Обеспечивает более плавную работу ваших устройств, освобождая место в их памяти.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_having_tips_show",
+            "value":"Выполняется анализ фото (%1$s). Галерея создаст раздел Интересное по завершении анализа ваших фото. Анализ проводится, когда устройство подключено к сети питания и его экран выключен.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"new_timeline_message_compose",
+            "value":"%1$s и %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"easy_editing_tips",
+            "value":"Редактируйте, используя профессиональные инструменты",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_picture_dialog_content",
+            "value":"Файлы, переданные перетаскиванием, сохранены в альбоме Фото.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_update_card_confirm",
+            "value":"Увеличить объем памяти",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_storage_title",
+            "value":"Оптимизировать память устройства?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_open_network_link",
+            "value":"Включить доступ в Интернет для приложения Галерея?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_delete_album",
+            "value":"Удалить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"unsupported_video_type",
+            "value":"Этот формат не поддерживается.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_note",
+            "value":"Добавление подписи",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"favor_cancel_message",
+            "value":"%1$s добавлено в Избранное. Остановить добавление в Избранное?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dynamic_photos_can_switched",
+            "value":"Доступно несколько эффектов воспроизведения. Нажмите здесь для переключения между ними.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_login_card_title",
+            "value":"Галерея в Облаке не включена",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_content",
+            "value":"Мобильная сеть будет использоваться при отсутствии сети WLAN. Вы можете выключить эту функцию в любой момент в разделе Настройки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_context_text",
+            "value":"Замененные исходные файлы можно найти в разделе Недавно удаленное.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_files_cancel_message",
+            "value":"%1$s элементов перемещено.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_scale_error",
+            "value":"Некоторые изображения слишком большие для коллажа.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_replace_me",
+            "value":"Замена меня",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_multi_exposure",
+            "value":"Мультиэкспозиция",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"time_line_message_cloud_sync",
+            "value":"Все элементы синхронизированы (%s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document_scan",
+            "value":"Обработать как документ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"loading_image_imageEdit",
+            "value":"Загрузка изображения...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_content",
+            "value":"Вы уже сохранили эти элементы в этом приложении. Повторно предоставьте доступ к тем, которые вам по-прежнему нужны.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Maximum_length_reached",
+            "value":"Достигнута максимальная длина.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_to_album",
+            "value":"Копировать в альбом",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_video",
+            "value":"Видео",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"share_highlight_as_video",
+            "value":"Отправить как видео",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_add",
+            "value":"Добавить имя",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"welcome_prompt2",
+            "value":"Нажимая Принимаю, вы принимаете данные положения. Подробную информацию об обработке ваших персональных данных см. в документах %1$s и %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_prompt1",
+            "value":"Для предоставления таких функций, как просмотр и редактирование фото и видео, а также интеллектуальный анализ мультимедиа, этому приложению требуется доступ в %1$s и следующее право доступа: %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"high_mountain",
+            "value":"Горы",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_delete",
+            "value":"Удалить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_recover",
+            "value":"Восстановить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_temperature_too_high",
+            "value":"Устройство сильно нагрелось. Синхронизация приостановлена.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_and_protocol_new",
+            "value":"Для предоставления возможности редактирования изображений на базе ИИ этой службе требуется доступ в %1$s, а также право чтения и выгрузки изображений. Нажимая %2$s, вы принимаете положения документа %3$s. Подробные сведения об обработке ваших персональных данных см. в документе %4$s. Эта служба предоставляется бесплатно только в течение ограниченного периода времени.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_ai_creation_description",
+            "value":"Этой службе требуется доступ в %1$s, читать видео, а также читать и выгружать или передавать изображения. Это необходимо для предоставления функций генерации изображений и видео на базе ИИ. Нажимая Принимаю, вы принимаете вышеизложенные положения. Подробную информацию об обработке ваших персональных данных см. в документе %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"day",
+            "value":"Дни",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"replace_me_content",
+            "value":"Изображения, ранее отмеченные как \"Я\", будут заменены.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices_more",
+            "value":"Просмотр фото и видео на внешнем накопителе",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_compared_exceeds_the_limit_tips",
+            "value":"Выберите %1$d–%2$d изображений.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"intelligent_classification_tips",
+            "value":"Удобные категории",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_stop_note_1",
+            "value":"Если вы выключите эту службу, она больше не будет доступна. Выключить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_connection",
+            "value":"Разрешить доступ в Интернет",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_rename_album",
+            "value":"Изменить имя",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"location_information_content",
+            "value":"Этому приложению требуется доступ в %1$s и право доступа к приложению Файлы. Также ему требуется доступ к данным устройства и сети. Компания собирает только персональные данные, связанные с функциями, которые вы используете. Нажимая Принимаю, вы принимаете данные положения. Подробную информацию см. в документе %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_title",
+            "value":"Разрешить синхронизацию по мобильной сети?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_media_analysis_service_note",
+            "value":"Эта служба остановит чтение и анализ изображений и видео в фоновом режиме.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"transfer_completed",
+            "value":"Передача выполнена",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_shared_exceeds_the_limit_tips",
+            "value":"Максимум %d элементов можно отправить единовременно.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sync",
+            "value":"Синхронизация",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_map",
+            "value":"Карта",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rename_portrait_photo_title",
+            "value":"Изменение имени",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_export_success",
+            "value":"Экспорт выполнен. Вы можете посмотреть результат в альбоме Видео.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_portrait",
+            "value":"Изменение человека",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"only_selected_photos_can_be_accessed",
+            "value":"Это приложение может осуществлять доступ только к выбранным вами фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_timeline_actionbar_title",
+            "value":"Все фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices",
+            "value":"Просмотр фото и видео на карте %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_hide",
+            "value":"Скрыть",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"grid_display",
+            "value":"Фотографии",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"experienc_tips",
+            "value":"Начать",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_album",
+            "value":"Все ваши альбомы в одном месте",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_videos_to_system_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_not_jigsaw_puzzle",
+            "value":"Видео невозможно использовать для создания коллажей.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_right_access_statement",
+            "value":"Уведомление о правах",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_files_dialog_delete_permanently_not_recover_tips",
+            "value":"Все элементы будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance_des",
+            "value":"Автоматическая оптимизация четкости фото, сделанных с приближением в режиме Фото. Поддерживаемые изображения будут выгружены в облако для обработки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information_description",
+            "value":"Используется для предоставления служб геолокации.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_loading",
+            "value":"Загрузка…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"print",
+            "value":"Печать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_network_link_title",
+            "value":"Выключить доступ в Интернет для приложения Галерея?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_exit_dialog_context_text",
+            "value":"Не сохранять изменения?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fluorescence_photography",
+            "value":"Свечение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"target_has_same_name_file",
+            "value":"Файл с таким именем уже существует. Заменить?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"number_of_selected_max",
+            "value":"Можно сравнивать максимум %d изображения одновременно.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"easy_editing_description_tips",
+            "value":"Удобные инструменты позволяют писать и рисовать.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"service_agreements_and_rules",
+            "value":"Соглашения о службе и правила",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mainability_description",
+            "value":"Фото",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_delete_kept_tips",
+            "value":"Удаленные элементы будут храниться в разделе Недавно удаленное в течение %1$d дней.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_close",
+            "value":"Выклю\u200bчено",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_ok",
+            "value":"Готово",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_confirm",
+            "value":"Выключить Галерею в Облаке",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_videos_dialog_delete_permanently_not_recover_tips",
+            "value":"Все видео будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"month",
+            "value":"Месяцы",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"name_portrait_photo_title",
+            "value":"Введите имя",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_highlight_tips",
+            "value":"Удалить эту подборку?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_merger",
+            "value":"Объединить фото выбранных людей?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_file_dialog_content",
+            "value":"Файлы, переданные перетаскиванием, сохранены в альбомах Фото и Видео.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_share_process",
+            "value":"Подготовка контента...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"local_all_photos_dialog_delete_permanently_not_recover_tips",
+            "value":"Все фото будут безвозвратно удалены.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_local_space_release",
+            "value":"Оптимизация памяти устройства",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title",
+            "value":"Название",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_overwrite_text",
+            "value":"Заменить исходное",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_permission_1",
+            "value":"Используется для чтения изображений с целью генерации обоев.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_more_portraits_currently",
+            "value":"Нет других людей",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_all_photos_tips",
+            "value":"Удалить все фото?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_select_all",
+            "value":"Выбрать все",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_export_to_video",
+            "value":"Экспортировать как видео",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_process_title",
+            "value":"Остановить выполнение этого действия?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_cloud_enhance",
+            "value":"Обработка в облаке с ИИ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_read_protocol",
+            "value":"Внимательно прочтите вышеуказанные положения. Нажимая Принимаю, вы даете компании согласие на предоставление этой службы.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice",
+            "value":"Создать видео",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_clear_recycle",
+            "value":"Удалить все",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"dialog_consent",
+            "value":"Принимаю",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_no_tips",
+            "value":"Больше не показывать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_optimize_storage_dialog_content",
+            "value":"Нет элементов, которые можно оптимизировать.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_to",
+            "value":"Копировать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_device_storage",
+            "value":"Оптимизация памяти устройства",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rename_failed",
+            "value":"Сбой изменения имени. Повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panda",
+            "value":"Панды",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Saved_to_Puzzle_Album",
+            "value":"Сохранено в альбом.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_select_cover",
+            "value":"Выбор обложки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"star_track",
+            "value":"Световое граффити",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cleanup_card_description",
+            "value":"Вы можете освободить %1$s места в памяти, удалив фото и видео, которые вы редко смотрите.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_cancel_message",
+            "value":"%1$s элементов добавлено. Остановить добавление элементов?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_loading_progress",
+            "value":"Оптимизация памяти (%1$s/%2$s)...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"local_all_videos_dialog_delete_permanently_not_recover_tips",
+            "value":"Все видео будут удалены без возможности восстановления.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recover_cancel_message",
+            "value":"%1$s восстановлено. Остановить восстановление оставшихся файлов?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"go_to_check_out",
+            "value":"Посмотреть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_videos_head_title_videoAlbum",
+            "value":"Нет видео",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_add_photo",
+            "value":"Добавить фото",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"new_recycle_albums_tips",
+            "value":"Удалить выбранные альбомы?\n\nФото и видео в этих альбомах не будут удалены.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"screenshot_cleanup",
+            "value":"Удалить скриншоты",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_specification_error",
+            "value":"Такой формат изображений не поддерживается.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_stop_note",
+            "value":"После выключения эта служба больше не будет собирать данные пользователей на вашем устройстве.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_delete_process",
+            "value":"Удаление…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_unfavor_process",
+            "value":"Удаление из Избранного…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_invalid_uri_from_faCard",
+            "value":"Ошибка изображения. Выполнен переход к первому изображению в альбоме.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_sync",
+            "value":"%s Синхронизирует фото и видео между всеми вашими устройствами.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_hide_albums",
+            "value":"Скрытые элементы",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_cancel_hidden_process",
+            "value":"Раскрытие…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"file_can_not_edited",
+            "value":"Файл не поддерживается или поврежден. Сбой изменения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_exporting",
+            "value":"Экспорт…",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"size",
+            "value":"Размер",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"stop",
+            "value":"Остановить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_cancel",
+            "value":"Отмена",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_login_card_content",
+            "value":"Галерея в Облаке обеспечивает защищенное хранение ваших фото и видео в облаке, так что у вас есть доступ к ним на всех ваших устройствах. Это также экономит место в локальной памяти.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"silky_water",
+            "value":"Шелковая вода",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_player_cloud_io_error",
+            "value":"Сбой воспроизведения. Повторите попытку позже.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_title",
+            "value":"Облачное хранилище заполнено",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fountain",
+            "value":"Фонтаны",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_favorite",
+            "value":"Из Избранного",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_unction_requires",
+            "value":"Для предоставления возможности оптимизации изображений этой службе требуется доступ в %1$s, а также право чтения и выгрузки или передачи изображений. Нажимая Принимаю, вы принимаете данные положения. Подробную информацию об обработке ваших персональных данных см. в документе %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_exit_dialog_discard_text",
+            "value":"Не сохранять",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_file_location",
+            "value":"Файл в исходном месте сохранения",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"year",
+            "value":"Годы",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_or_move",
+            "value":"Копировать или переместить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_analysis_progress",
+            "value":"Анализ фото…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_burst_photos_saving_progress",
+            "value":"Не сохранять",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mirror_text",
+            "value":"Отразить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_privacy_statement_1",
+            "value":"Уведомление о службе Обои на базе ИИ и конфиденциальности",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_copied_exceeds_the_limit_tips",
+            "value":"Одновременно можно скопировать максимум %d элементов.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_access_description",
+            "value":"Используется для чтения изображений с целью их редактирования на базе ИИ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_files_to_user_album_merge",
+            "value":"%1$s и %2$s сохранено в выбранном альбоме. %3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delicacy",
+            "value":"Еда и напитки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_splash_content",
+            "value":"Галерея в Облаке:",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_recycle",
+            "value":"Недавно удаленное",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_wlan_and_networks",
+            "value":"WLAN и мобильный трафик",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_analysis_service",
+            "value":"Служба анализа мультимедиа",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"grid_layout_description_tips",
+            "value":"Приложение Галерея теперь предоставляет по-настоящему иммерсивный опыт.\n\nПереключайтесь между режимами отображения по дням, месяцам и годам всего одним касанием.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_video_dialog_content",
+            "value":"Файлы, переданные перетаскиванием, сохранены в альбоме Видео.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_clear_process",
+            "value":"Удаление…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_progress",
+            "value":"Перемещение…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_progress",
+            "value":"Копирование…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_service_note",
+            "value":"Функция Альбомы по месту съемки станет недоступна. Это не повлияет на работу других функций. Выключить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"categorize",
+            "value":"Категории",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"merge_portrait_photo_title",
+            "value":"Объединить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"construct",
+            "value":"Здания",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_set_for_me",
+            "value":"Настроить человека \"%s\" в качестве вас?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_failed_single",
+            "value":"Сбой копирования. Повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_albums",
+            "value":"Люди",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sound_off_filled",
+            "value":"Выключить звук",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upgrade_to_cloud_gallery",
+            "value":"Галерея в Облаке",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel_hidden",
+            "value":"Раскрыть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_view_portrait",
+            "value":"Посмотреть фото с этим человеком",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Set_Is_Me",
+            "value":"Настроить как меня",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_save_btn",
+            "value":"Сохранить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dinner_party",
+            "value":"Еда в компании",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_description",
+            "value":"Эта служба выгружает выбранные вами изображения в облако для редактирования на базе ИИ. Ей требуются следующие права:",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photos",
+            "value":"Фото",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_enable_note",
+            "value":"Когда эта функция включена, эта служба в фоновом режиме читает файлы изображений для предоставления возможности генерации обоев на базе ИИ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_single_file_dialog_delete_permanently_not_recover_tips",
+            "value":"Этот элемент будет безвозвратно удален с этого устройства, из облака и со всех синхронизированных устройств.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"jump_to_file_management_tips",
+            "value":"Выберите Файлы > Обзор > %s, чтобы посмотреть фото и видео, сохраненные на этом накопителе, и управлять ими.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"form_FormAbility_label",
+            "value":"Альбом",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_device_storage_detail",
+            "value":"Если на устройстве осталось мало свободного места, фото и видео в полном разрешении будут заменены версиями с небольшим разрешением для экономии места. Вы можете загрузить оригинальные версии из облака в любое время. %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_subtitle_1",
+            "value":"Эта служба выгружает выбранные вами изображения на облачные серверы для генерации обоев с помощью алгоритмов ИИ. Ей требуются следующие права:",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"large_aperture",
+            "value":"Диафрагма",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_moving_photo_splice",
+            "value":"Склеивание…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_unlimited_use_mobile_network",
+            "value":"Использовать мобильную сеть",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_single_file_recycle_delete_kept_tips",
+            "value":"Этот элемент будет удален с этого устройства, из облака и со всех синхронизированных устройств. Он будет храниться в разделе Недавно удаленное в течение %d дней.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_long_exposure",
+            "value":"Длинная выдержка",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"pictures_and_videos_tv",
+            "value":"Изображения и видео",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_distributed_photo_head_title_album",
+            "value":"Нет фото или видео",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"only_selected_items_can_be_accessed",
+            "value":"Это приложение может получить доступ только к выбранным вами фото и видео",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_graffiti",
+            "value":"Следы звезд",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_loop_play",
+            "value":"По кругу",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from",
+            "value":"Удалить из альбома",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_saving_burst_photos_tip",
+            "value":"Не сохранять изменения?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_gallery",
+            "value":"Галерея в Облаке",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"detele_button",
+            "value":"Удалить выбранное (%1$s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_service",
+            "value":"Обработка в облаке с ИИ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_items_two_nine",
+            "value":"Выберите %1$d–%2$d изображений.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_video",
+            "value":"Приложение %s отредактировало видео в Галерее.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_and_documents",
+            "value":"Мультимедиа и файлы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_edit",
+            "value":"Изменение человека",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"not_prompt_again",
+            "value":"Больше не показывать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_deletion",
+            "value":"Удалить видео",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_pdf_success",
+            "value":"Документ сохранен.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_size_ratio_too_large",
+            "value":"Соотношение сторон изображения превышает лимит распознавания.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_nearby_photos",
+            "value":"Отобразить фото, снятые поблизости",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_nearby_photos",
+            "value":"Скрыть фото, снятые поблизости",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"set_album_cover_ready",
+            "value":"Обложка изменена.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"reset_album_cover_ready",
+            "value":"Обложка по умолчанию восстановлена.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_as_album_cover",
+            "value":"На обложку альбома",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"occure_error_and_retry",
+            "value":"Системная ошибка. Повторите попытку позже.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_custom_cover",
+            "value":"Отменить настраиваемую обложку",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_change_album_cover",
+            "value":"Изменить обложку альбома",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"scan_qrcode_in_image",
+            "value":"Сканировать QR-код",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_QRCode_error",
+            "value":"Нет приложений, которые можно открыть.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document_scan_count_limit",
+            "value":"Поддерживается максимум %d фото.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"restore_default_sort",
+            "value":"Восстановить порядок по умолчанию",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_sorting",
+            "value":"Сортировка альбомов",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"custom_sort",
+            "value":"Изменить порядок",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"document_scan_not_support_video_message",
+            "value":"Видео не поддерживаются.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sort_by_name",
+            "value":"Сортировать по имени",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"restore_default_sort_message",
+            "value":"Восстановить порядок по умолчанию?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"map_album",
+            "value":"Альбомы по месту съемки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_intelligence_analysis",
+            "value":"Анализ медиа",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time_travel_theme",
+            "value":"Тема Путешествие во времени",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"collapse_menu_bar",
+            "value":"Закрыть панель меню",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"disabled",
+            "value":"Недоступно",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_goto_photos",
+            "value":"Перейти в Галерею",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_checkbox_selected",
+            "value":"Выбрано, исходное изображение, поле для галочки, нажмите дважды, чтобы отменить выбор",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_search",
+            "value":"Поиск",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_material_select",
+            "value":"Выбрать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_menu_bar",
+            "value":"Открыть панель меню",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"random_collage",
+            "value":"Случайный коллаж %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"checkbox_selected",
+            "value":"Поле для галочки, выбрано, нажмите дважды для отмены выбора",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_screenshot",
+            "value":"Скриншот",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessibility_event_click_action",
+            "value":"Нажмите дважды, чтобы активировать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_checkbox_deselected",
+            "value":"Не выбрано, исходное изображение, поле для галочки, нажмите дважды, чтобы выбрать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_auto",
+            "value":"Вспышка, авто",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance",
+            "value":"Баланс белого %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_tungsten_incandescent_light",
+            "value":"Белый свет",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"multiselect",
+            "value":"Выбрать несколько",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_steady",
+            "value":"Вспышка, всегда включена",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected",
+            "value":"Выбрано",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_vivid",
+            "value":"Колоритный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_original",
+            "value":"Натуральный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_bright",
+            "value":"Яркий",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_mono",
+            "value":"Моно",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"focal_length_in_35mm_film",
+            "value":"Эквивалентное фокусное расстояние: %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location",
+            "value":"Переключение на текущее местоположение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"day_grid_view",
+            "value":"Отображение по дням",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"year_grid_view",
+            "value":"Отображение по годам",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"month_grid_view",
+            "value":"Отображение по месяцам",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photos_from_group_tip",
+            "value":"Выбранный контент больше не будет отображаться в этой группе.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_group",
+            "value":"Группы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_group_tip",
+            "value":"Это фото больше не будет отображаться в этой группе.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_group",
+            "value":"Удалить из группы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_group_album",
+            "value":"Сделайте несколько групповых фото, чтобы начать\n\nГрупповые альбомы генерируются автоматически на основе снятых групповых фото.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_video_from_group_tip",
+            "value":"Это видео больше не будет отображаться в этой группе.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_group",
+            "value":"Удалить из группы?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panorama_mode",
+            "value":"Панорама",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_virtual_aperture",
+            "value":"Виртуальная диафрагма выключена",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flash_capture",
+            "value":"Эффект В движении",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"virtual_aperture",
+            "value":"Виртуальная диафрагма",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_flash_capture",
+            "value":"Эффект В движении выключен",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dynamic_panning",
+            "value":"Поворот по горизонтали",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"overlay_effect",
+            "value":"Наложение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_effect",
+            "value":"Выключено",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"raw",
+            "value":"RAW",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_setting",
+            "value":"Тег \"Сгенерировано ИИ\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_setting_description",
+            "value":"Отображение тега \"Сгенерировано ИИ\" на изображениях, редактируемых с помощью инструментов функции Ретушь с ИИ, таких как Увеличить, Удаление и Удаление бликов.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"year_month_grid_message",
+            "value":"С %1$s до %2$s, всего %3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"broadcast_multi_video_and_photo_num",
+            "value":"%1$s и %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse_tips",
+            "value":"Эффекты будут отображаться только в одном виджете Галереи.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse_tips_new",
+            "value":"Добавление различных динамических эффектов камеры к фото, добавленным на рабочий экран. Можно использовать только для одного фото на одном рабочем экране.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse",
+            "value":"Визуальные эффекты во время показа",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_highlights",
+            "value":"Нет данных в Интересном",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_highlight_not_exist",
+            "value":"Контент в альбоме Интересное удален. Виджет на рабочем экране скоро будет обновлен.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auth_camera_location_title",
+            "value":"Разрешить приложению Камера запись геоданных?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auth_camera_location_gird",
+            "value":"Это необходимо, чтобы вы могли просматривать место съемки фото, снятых после предоставления права. Вы также сможете использовать функции Места и Интересное в приложении Галерея.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auth_camera_location_browser",
+            "value":"Это необходимо, чтобы вы могли просматривать место съемки фото, снятых после предоставления права.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Разрешить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"is_already_album_cover",
+            "value":"Это изображение уже настроено как обложка альбома.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_image_can_download_tips",
+            "value":"Это изображение будет удалено с этого устройства. Изображения, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_video_can_download_tips",
+            "value":"Это видео будет удалено с этого устройства. Видео, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_images_can_download_tips",
+            "value":"Все изображения будут удалены с этого устройства. Изображения, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_videos_can_download_tips",
+            "value":"Все видео будут удалены с этого устройства. Видео, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_files_can_download_tips",
+            "value":"Все элементы будут удалены с этого устройства. Элементы, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_cleanup",
+            "value":"Удаление видео",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_group_album",
+            "value":"Удалить группу",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_group_album",
+            "value":"Изменить группу",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_this_group_album",
+            "value":"Удалить эту группу?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_from_group_tips",
+            "value":"Эти группы больше не будут отображаться. При удалении группы фото в этой группе не будут удалены.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_from_one_group_tips",
+            "value":"Эта группа больше не будет отображаться. При удалении группы фото в этой группе не будут удалены.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"expression",
+            "value":"Выражение лица",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_expression",
+            "value":"Выбранное выражение лица",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessibility_face_edit_box",
+            "value":"Редактируемый участок",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shanghai_world_expo_china_pavilion",
+            "value":"Национальный павильон Китая на Шанхайской всемирной выставке",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"natural_scenery",
+            "value":"Достопримечательности",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slim_waist",
+            "value":"Телебашня Гуанчжоу",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"humanities_and_landscapes",
+            "value":"Известные достопримечательности",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_sky",
+            "value":"Ночное небо",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lightning",
+            "value":"Молнии",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pyramids",
+            "value":"Пирамиды",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"jewelry",
+            "value":"Украшения",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"notes_album",
+            "value":"Фото и видео с комментариями",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tiananmen",
+            "value":"Площадь Тяньаньмэнь",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"floor_plan",
+            "value":"Планы здания",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"marriage_certificate",
+            "value":"Свидетельства о браке",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cards",
+            "value":"Карты",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"graduations",
+            "value":"Вручение дипломов",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"arc_de_triomphe_in_paris",
+            "value":"Триумфальная арка",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"design",
+            "value":"Дизайн",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cliff",
+            "value":"Утесы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aurora",
+            "value":"Северное сияние",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"water_cube",
+            "value":"Пекинский национальный плавательный комплекс",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tickets",
+            "value":"Билеты",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flowers_and_plants",
+            "value":"Цветы и растения",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bicycles",
+            "value":"Велосипеды",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"weddings",
+            "value":"Свадьбы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"train_tickets",
+            "value":"Билеты на поезд",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sky",
+            "value":"Небо",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"airline_tickets",
+            "value":"Билеты на самолет",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sunrise_and_sunset",
+            "value":"Восходы и закаты",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"clouds",
+            "value":"Облака",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"parents",
+            "value":"Дети",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sea_and_lake_view",
+            "value":"Прибрежные зоны",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moon",
+            "value":"Луна",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"morning_glow_and_evening_glow",
+            "value":"Восходы и закаты",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pets",
+            "value":"Питомцы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cars",
+            "value":"Автомобили",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"barcode",
+            "value":"Штрихкоды",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"coral",
+            "value":"Кораллы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"buses",
+            "value":"Автобусы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bird_nest",
+            "value":"Пекинский национальный стадион",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"potala_palace_in_lhasa",
+            "value":"Дворец Потала",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"macao_ruins",
+            "value":"Руины собора Святого Павла",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ship",
+            "value":"Суда",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"birthdays",
+            "value":"Дни рождения",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"movie_tickets",
+            "value":"Билеты в кино",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"concerts",
+            "value":"Концерты",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dogs",
+            "value":"Собаки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hukou",
+            "value":"Регистрация",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"the_great_wall",
+            "value":"Великая Китайская стена",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"beach",
+            "value":"Пляжи",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"desert",
+            "value":"Пустыни",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"snow_mountain",
+            "value":"Заснеженные горы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"parties",
+            "value":"Вечеринки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"invoices",
+            "value":"Счета",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"trains",
+            "value":"Поезда",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"CCTV_building",
+            "value":"Штаб-квартира CCTV",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"chongqing_jiefangbei",
+            "value":"Памятник Цзефанбэй",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"real_estate_certificate",
+            "value":"Свидетельства о праве собственности на недвижимость",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+          "name":"change_portrait",
+          "value":"Выбрать другого человека",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"select_portrait",
+          "value":"Выберите человека",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"display_the_avatar",
+          "value":"Отображать фото профиля",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"select_the_portrait_album_to_display",
+          "value":"Выберите человека для отображения.",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+            "name":"classify_cv_popup",
+            "value":"Альбом Категории обновлен. Нажмите, чтобы посмотреть.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selfie",
+            "value":"Селфи",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_portrait",
+            "value":"Лица еще не обнаружены",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+          "name":"display_album_name",
+          "value":"Показать имя альбома",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+      {
+        "name":"action_video_splicing",
+        "value":"Видео",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"action_creation",
+        "value":"Создать",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"exceeding_the_limit_message",
+        "value":"Можно добавить максимум %d файлов.",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"action_time_files",
+        "value":"Фильм",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"sync_all_cloud_album_title",
+        "value":"Выбор альбомов для синхронизации",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"sync_all_cloud_album",
+        "value":"Синхронизировать все",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"sync_all_cloud_album_detail",
+        "value":"Синхронизация альбома Камера выполняется по умолчанию.",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"cloud_album_sync",
+        "value":"Выбор альбомов для синхронизации",
+        "attr":{
+          "priority":"translate"
+        }
+      }
+    ]
+}

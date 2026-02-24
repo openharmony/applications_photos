@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,24 +12,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ScreenManager } from '../model/common/ScreenManager';
+import lazy { getScreen } from '../model/common/ScreenManager';
 
 @Component
 export struct PhotoBrowserHolder {
   @Consume isShowBar: boolean;
-  @StorageLink('leftBlank') leftBlank: number[] =
-    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @StorageLink('leftBlank') leftBlank: number[] = getScreen().getLeftBlank();
 
   build() {
     Column() {
     }
     .key('PhotoBrowserHolder0')
-    .backgroundColor($r('app.color.default_background_color'))
+    .backgroundColor($r('sys.color.background_secondary'))
     .width('100%')
     .height(this.leftBlank[3])
     .markAnchor({ x: '0%', y: '100%' })
     .position({ x: '0%', y: '100%' })
     .opacity(0.95)
+    .accessibilityLevel('no')
     .visibility(this.isShowBar ? Visibility.Visible : Visibility.Hidden)
   }
 }

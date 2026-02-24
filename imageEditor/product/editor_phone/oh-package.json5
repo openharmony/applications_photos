@@ -1,0 +1,12 @@
+{
+  "name": "@oh-image-editor/editor-phone",
+  "version": "1.0.0",
+  "description": "harmony os next photos application image editor",
+  "main": "Index.ets",
+  "author": "",
+  "dependencies": {
+    "@oh-image-editor/editor-common": "file:../../common",
+    "@ohos/common": "file:../../../common",
+    "@ohos/privacy": "file:../../../feature/privacy",
+  }
+}

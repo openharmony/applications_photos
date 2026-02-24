@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,79 +13,150 @@
  * limitations under the License.
  */
 
-import { ScreenManager } from '../model/common/ScreenManager';
-import { Constants } from '../model/common/Constants';
-import { Log } from '../utils/Log';
+import lazy { getScreen, isOrientationHorizontal, ScreenManager } from '../model/common/ScreenManager';
+import lazy { Constants } from '../model/common/Constants';
+import lazy { Log } from '../utils/Log';
+import lazy { DeviceInfo } from '../utils/DeviceInfo';
 
+/* instrument ignore file */
 const TAG: string = 'common_NoPhotoComponent';
 
 @Component
 export struct NoPhotoComponent {
-  title?: Resource;
-
+  imageUri?: Resource = $r('app.media.no_image');
+  @Prop title: string | Resource = '';
   // set an initial value temporarily, later change to 0.
-  @State offSetY: number = Constants.EMPTY_PAGE_DEFAULT_OFFSET;
-  @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: number[] =
-    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
+  @State offSetY: number = 0;
+  @Prop @Watch('watchWinHeight') winHeight: number = 0;
+  private isThird: boolean = false;
+  private isThirdSelect: boolean = false;
+  @StorageLink('isHorizontal') isHorizontal: boolean = isOrientationHorizontal();
+  @StorageLink('isSidebar') isSidebar: boolean = getScreen().isSidebar();
+  @StorageLink('leftBlank') leftBlank: number[] = getScreen().getLeftBlank();
   @State bigScreen: boolean = false;
-  private updateImageLayoutFunc: Function = (): void => this.updateImageLayout();
+  @State lAndRMargin: number = 16;
+  private isFromEmptyAlbum = false;
+  private newVal: Area = {
+    width: 0,
+    height: 0,
+    position: {},
+    globalPosition: {},
+  };
 
   aboutToAppear(): void {
-    Log.info(TAG, `aboutToAppear`);
-    ScreenManager.getInstance().on(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateImageLayoutFunc);
-    this.updateImageLayout();
+    Log.info(TAG, 'aboutToAppear');
   }
 
   aboutToDisappear(): void {
     Log.info(TAG, 'aboutToDisappear');
-    ScreenManager.getInstance().off(ScreenManager.ON_WIN_SIZE_CHANGED, this.updateImageLayoutFunc);
+  }
+
+  watchWinHeight() {
+    Log.info(TAG, `watchIsHorizontal isHorizontal: ${this.winHeight}`)
+    this.getOffSetY(this.newVal);
+  }
+
+  private getAreaScreen(newVal: Area): void {
+    //判断当前区域宽度是否超过600
+    this.bigScreen = newVal.width > 600;
+  }
+
+  private getOffSetY(newVal: Area): void {
+    let halfImageHeight = this.bigScreen ? Constants.BIG_EMPTY_ICON_SIZE / 2 : Constants.SMALL_EMPTY_ICON_SIZE / 2;
+    let statusBarH = ScreenManager.getInstance().getStatusBarHeight();
+    let winH = ScreenManager.getInstance().getWinHeight();
+    let winDecorHeight = ScreenManager.getInstance().getWinDecorHeight();
+    if (this.isThird) {
+      this.offSetY = this.winHeight / 2 -
+        ((newVal.globalPosition.y as number) + (newVal.height as number) / 2) +
+        ((this.isHorizontal && this.isThirdSelect &&
+          (!DeviceInfo.isFoldable() && !DeviceInfo.isPcOrTablet())) ? 56 : 0);
+    } else {
+      if (ScreenManager.getInstance().getWinWidth() > ScreenManager.getInstance().getWinHeight()) {
+        if (this.isFromEmptyAlbum && DeviceInfo.isPc()) {
+          this.offSetY = (winH - winDecorHeight - statusBarH) * Constants.EMPTY_PAGE_OFFSET_BIG_RADIO -
+            halfImageHeight + statusBarH - Constants.ActionBarHeight - Constants.PC_ACIONBAR_MARGIN_TOP;
+          return;
+        } else if (this.isFromEmptyAlbum && DeviceInfo.isFoldable()) {
+          this.offSetY = (winH - statusBarH) * Constants.EMPTY_PAGE_OFFSET_RADIO - halfImageHeight + statusBarH;
+          return;
+        } else if (this.isFromEmptyAlbum) {
+          this.offSetY = (winH - statusBarH - Constants.PHOTO_GRID_PADDING_TOP) *
+          Constants.EMPTY_PAGE_OFFSET_BIG_RADIO - halfImageHeight + statusBarH;
+          return;
+        }
+        this.offSetY = ScreenManager.getInstance()
+          .getWinHeight() / 2 - ((newVal.globalPosition.y as number) + (newVal.height as number) / 2);
+      } else {
+        Log.info(TAG, ' getOffSetY aboutToAppear');
+        if (statusBarH > Constants.ActionBarHeight) {
+          statusBarH = px2vp(statusBarH);
+        }
+        if (this.isFromEmptyAlbum) {
+          this.offSetY = (winH - statusBarH) * Constants.EMPTY_PAGE_OFFSET_RADIO - halfImageHeight + statusBarH;
+          return;
+        }
+        this.offSetY = (winH - statusBarH) * Constants.EMPTY_PAGE_OFFSET_RADIO -
+          ((newVal.position.y as number + Constants.ActionBarHeight) + halfImageHeight);
+      }
+    }
+  }
+
+  private getMargin(newVal: Area): void {
+    this.lAndRMargin = getScreen().getMargin(newVal);
   }
 
   build() {
     Flex({
       direction: FlexDirection.Column,
-      justifyContent: FlexAlign.Start,
-      alignItems: ItemAlign.Center
+      justifyContent: FlexAlign.Center,
+      alignItems: ItemAlign.Center,
     }) {
-      Column() {
-        Image($r('app.media.no_image_icon'))
-          .height(this.bigScreen ? $r('app.float.empty_page_picture_size_large') : $r('app.float.empty_page_picture_size'))
-          .width(this.bigScreen ? $r('app.float.empty_page_picture_size_large') : $r('app.float.empty_page_picture_size'))
-          .margin({
-            bottom: $r('sys.float.ohos_id_elements_margin_vertical_m'),
-          })
-        Text(this.title)
-          .fontSize($r('sys.float.ohos_id_text_size_body2'))
-          .fontFamily($r('app.string.id_text_font_family_regular'))
-          .fontColor($r('app.color.tertiary_title_text_color'))
+      Scroll(){
+        Column() {
+          Image(this.imageUri)
+            .draggable(false)
+            .height(DeviceInfo.isTv() ?
+            $r('app.float.tv_empty_page_picture_size') : (this.bigScreen || DeviceInfo.isPc()
+                ? $r('app.float.empty_page_picture_size_large') : $r('app.float.empty_page_picture_size')))
+            .width(DeviceInfo.isTv() ? $r('app.float.tv_empty_page_picture_size') : (this.bigScreen || DeviceInfo.isPc()
+              ? $r('app.float.empty_page_picture_size_large') : $r('app.float.empty_page_picture_size')))
+            .margin({
+              bottom: DeviceInfo.isTv() ? 11 : $r('sys.float.padding_level4'),
+            })
+            .transition(TransitionEffect.OPACITY.animation({
+              duration: 200,
+              curve: Curve.Sharp
+            }))
+          Text(this.title)
+            .draggable(false)
+            .fontSize(DeviceInfo.isTv() ? 21 : $r('sys.float.Body_M'))
+            .fontFamily(DeviceInfo.isTv() ? 'HarmonyHeiTi' : $r('app.string.id_text_font_family_regular'))
+            .fontColor(DeviceInfo.isTv() ? $r('sys.color.font_secondary') : (this.isThird ? $r('sys.color.gray_04') :
+            $r('sys.color.font_tertiary')))
+            .fontWeight(DeviceInfo.isTv() ? FontWeight.Regular : undefined)
+            .lineHeight(DeviceInfo.isTv() ? 25 : undefined)
+            .transition(TransitionEffect.OPACITY.animation({
+              duration: 200,
+              curve: Curve.Sharp
+            }))
+        }
+        .width('100%')
+        .padding(DeviceInfo.isTv() ?
+          { left: $r('app.float.tv_max_padding_start'), right: $r('app.float.tv_max_padding_start') } :
+          { left: $r('app.float.max_padding_start'), right: $r('app.float.max_padding_start') })
+        .visibility((this.isThird && this.offSetY === 0) ? Visibility.Hidden : Visibility.Visible)
+        .position({ y: DeviceInfo.isTv() ? $r('app.float.tv_empty_page_picture_top_padding') : undefined })
       }
-      .width('100%')
-      .offset({ x: 0, y: this.offSetY })
-      .padding({ left: $r('app.float.max_padding_start'), right: $r('app.float.max_padding_start') })
-    }
-    .width('100%')
-  }
 
-  private updateImageLayout(): void {
-    this.bigScreen = Math.min(ScreenManager.getInstance().getWinHeight(), ScreenManager.getInstance()
-      .getWinWidth()) > Constants.BIG_SCREEN_WIDTH
-    let halfImageHeight = this.bigScreen ? Constants.BIG_EMPTY_ICON_SIZE / 2 : Constants.SMALL_EMPTY_ICON_SIZE / 2
-    let screenHeight = ScreenManager.getInstance().getWinHeight() - this.leftBlank[1] - this.leftBlank[3]
-    if (this.isHorizontal) {
-      if (this.isSidebar) {
-        // Pad landscape
-        this.offSetY = screenHeight / Constants.NUMBER_2 - halfImageHeight - Constants.ActionBarHeight;
-      } else {
-        // Phone landscape
-        this.offSetY = (screenHeight - Constants.ActionBarHeight) / Constants.NUMBER_2 - halfImageHeight;
-      }
-    } else {
-      // Phone vertical screen
-      this.offSetY = screenHeight * Constants.EMPTY_PAGE_OFFSET_RADIO -
-      Constants.ActionBarHeight - halfImageHeight;
     }
-    Log.info(TAG, `isHorizontal: ${this.isHorizontal}, offSetY: ${this.offSetY}, bigScreen: ${this.bigScreen}`);
+    .backgroundColor($r('sys.color.background_secondary'))
+    .width('100%')
+    .height('100%')
+    .flexShrink(1)
+    .onAreaChange((oldVal: Area, newVal: Area) => {
+      this.getAreaScreen(newVal);
+      this.getOffSetY(this.newVal);
+    })
   }
 }

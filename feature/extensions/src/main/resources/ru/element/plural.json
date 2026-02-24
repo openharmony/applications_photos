@@ -1,0 +1,103 @@
+{
+    "plural":[
+        {
+            "name":"third_save_picture",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Разрешить приложению %1$s сохранить %2$d изображения?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Разрешить приложению %1$s сохранить %2$d изображение?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Разрешить приложению %1$s сохранить %2$d изображения?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Разрешить приложению %1$s сохранить %2$d изображений?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_picture_and_video",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Разрешить приложению %1$s сохранить %2$d файл?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Разрешить приложению %1$s сохранить %2$d файла?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Разрешить приложению %1$s сохранить %2$d файла?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Разрешить приложению %1$s сохранить %2$d файлов?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Разрешить приложению %1$s сохранить %2$d видео?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Разрешить приложению %1$s сохранить %2$d видео?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Разрешить приложению %1$s сохранить %2$d видео?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Разрешить приложению %1$s сохранить %2$d видео?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,5660 @@
+{
+    "string":[
+        {
+            "name":"xt_style_natural_selected",
+            "value":"تم تحديد النمط الطبيعي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_film_selected",
+            "value":"تم تحديد نمط السيلولويد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_cinematic_selected",
+            "value":"تم تحديد النمط السينمائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_anime_selected",
+            "value":"تم تحديد نمط الأنمي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picking",
+            "value":"تحريك",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_cancel",
+            "value":"إلغاء",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_is_too_large_toast",
+            "value":"حجم الصورة كبير للغاية، أعد المحاولة باستخدام صورة مختلفة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_anime_imageEdit",
+            "value":"نمط الأنمي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_kaleidoscope",
+            "value":"نمط فسيفسائي بشكل المشكال",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_romance_imageEdit",
+            "value":"سينما",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_saturation_level",
+            "value":"مستوى التشبع %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"natural_style",
+            "value":"طبيعي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_reflect_light",
+            "value":"إزالة التوهج",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_reset_success",
+            "value":"تمت إعادة الضبط",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"best_expression_update_component",
+            "value":"تتيح لك هذه الميزة مزج أفضل تعبيرات الوجه من صور مختلفة في نفس السلسلة ومطابقتها. يلزم تحديث المكوّن الإضافي لاستخدام هذه الميزة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_sky_blue",
+            "value":"نمط فسيفساء بلون أزرق سماوي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_abnormal",
+            "value":"مشكلة في الخادم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_xt_style_selected",
+            "value":"تم تحديد الأنماط المخصصة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"update_now",
+            "value":"التحديث الآن",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_films_imageEdit",
+            "value":"فيلم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_generating_content",
+            "value":"جارِ الإنشاء…",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_typ_classic",
+            "value":"نمط فسيفساء كلاسيكي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_remove",
+            "value":"بدء الإزالة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_cartoon",
+            "value":"نمط فسيفسائي بشكل رسوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_level",
+            "value":"مستوى التباين اللوني %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_close",
+            "value":"مغلق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_slide_bar",
+            "value":"مستوى التباين اللوني %1$d، نطاق التعديل من %2$d إلى %3$d. انقر مرتين لتطبيقه، أو انقر مرتين مع الاستمرار ثم اسحب للأعلى أو للأسفل لتغييره",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shrink_image_to_adjust_expand_rect",
+            "value":"يُرجى تصغير الصورة لضبط المنطقة القابلة للتوسيع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_network_abnorma_toast",
+            "value":"مشكلة في الشبكة، يُرجى التحقق وإعادة المحاولة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"yellow_imageEdit",
+            "value":"أصفر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_reflect_light",
+            "value":"تقليل التوهج غير متوفر مع هذه الصورة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_identified_replace_face",
+            "value":"تعذّر التعرف على وجه قابل للاستبدال",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand",
+            "value":"يتعذر توسيع هذه الصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"best_expression_new_feature",
+            "value":"جرّب ميزة أفضل تعبير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_mosicac",
+            "value":"فسيفساء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_face_fail",
+            "value":"حدثت مشكلة ما، يُرجى اختيار صورة أخرى وإعادة المحاولة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_matrix_area",
+            "value":"منطقة ضبط الألوان. اسحب أفقيًا لضبط حرارة الألوان، ورأسيًا لضبط تشبع اللون.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_reflect_light",
+            "value":"إزالة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_default_template",
+            "value":"الإعداد المُسبق الافتراضي، حرارة الألوان %1$d، والتشبع %2$d، والتباين اللوني %3$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_open",
+            "value":"مشغّل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_haze_removal_imageEdit",
+            "value":"إزالة الضبابية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_polka_dot",
+            "value":"نمط فسيفسائي بشكل رقصة البولكا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove",
+            "value":"إزالة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"manual_selection",
+            "value":"تحديد يدوي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_star",
+            "value":"نمط فسيفسائي بشكل النجمة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_replace_emoticons",
+            "value":"التقط لقطات متعددة متتالية للحصول على تعبيرات بديلة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_continue",
+            "value":"متابعة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_triangle",
+            "value":"نمط فسيفسائي بشكل مثلث",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_aspect_ratio_too_large",
+            "value":"أبعاد الصورة كبيرة للغاية، أعد المحاولة باستخدام صورة مختلفة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_imageEdit",
+            "value":"زر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_selection",
+            "value":"تحديد تلقائي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_weaving",
+            "value":"نمط فسيفسائي بشكل النسيج",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_eraser",
+            "value":"ممحاة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_expand_image",
+            "value":"توسيع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aspect_ratio_of_the_image_toast",
+            "value":"أبعاد الصورة كبيرة للغاية، أعد المحاولة باستخدام صورة مختلفة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_expand_image",
+            "value":"توسيع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_color_temperature_level",
+            "value":"حرارة الألوان، المستوى %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"background",
+            "value":"الخلفية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aiproducer_best_expression",
+            "value":"أفضل تعبير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_bootstrapping_for_the_first_time",
+            "value":"اسحب من منتصف الكائن أو الشخص لتحديده",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_color_block",
+            "value":"نمط فسيفسائي بكتلة ملونة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_xt_style_template",
+            "value":"إعداد مسبق مخصص %1$d، وحرارة الألوان %2$d، والتشبع %3$d، والتباين اللوني %4$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_style_imageEdit",
+            "value":"الخط",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"تمت إعادة الضبط التلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_xt_style_imageEdit",
+            "value":"مؤثرات XMAGE",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_refinement",
+            "value":"تنقيح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_style",
+            "value":"عصري",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط حرارة الألوان",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_blossom_imageEdit",
+            "value":"تم التراجع عن فلتر الأزهار",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_remove",
+            "value":"إزالة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_rotate_imageEdit",
+            "value":"تدوير",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط التمييز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_pink_imageEdit",
+            "value":"تمت إعادة الفلتر الوردي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط الحدة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_strength_imageEdit",
+            "value":"تمت إعادة كثافة الفلتر الريفي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"تم التراجع عن إيقاف الضبط التلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_imageEdit",
+            "value":"ليموني",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط التلاشي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_finish",
+            "value":"تم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic",
+            "value":"تنويه",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_moody_imageEdit",
+            "value":"تمت إعادة الفلتر الرمادي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط تعتيم الزوايا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_imageEdit",
+            "value":"تم التراجع عن ضبط الظل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_imageEdit",
+            "value":"تم التراجع عن ضبط حرارة الألوان",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_natural_style",
+            "value":"إعادة: طبيعي.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_top",
+            "value":"الزاوية العلوية اليسرى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_top",
+            "value":"الزاوية العلوية اليمنى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_bottom",
+            "value":"الزاوية السفلية اليسرى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_bottom",
+            "value":"الزاوية السفلية اليمنى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left",
+            "value":"الحافة اليسرى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right",
+            "value":"الحافة اليمنى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_top",
+            "value":"الحافة العلوية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_bottom",
+            "value":"الحافة السفلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cutting_percentage",
+            "value":"قص %2$s من %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light",
+            "value":"إضاءة أمامية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط المنطقة الداكنة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_shoot_param_imageEdit",
+            "value":"تمت إعادة إظهار قيم التصوير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_param_imageEdit",
+            "value":"قيم التصوير",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط التمييز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_original_imageEdit",
+            "value":"الأصلية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_two",
+            "value":"سيؤدي استخدام ميزة التنقيح الذكي إلى جعل هذه الصورة ثابتة، ولن تتمكن بعد ذلك من ضبط %1$s و%2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_imageEdit",
+            "value":"تم التراجع عن ضبط التلاشي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_strength_imageEdit",
+            "value":"تم التراجع عن كثافة فلتر الحظ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup",
+            "value":"سيؤدي هذا إلى استبدال الفلتر الحالي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_imageEdit",
+            "value":"تجاهل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_proportional_imageEdit",
+            "value":"تمت إعادة تعيين الأبعاد",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_model_imageEdit",
+            "value":"موديل الجهاز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_time_imageEdit",
+            "value":"وقت التصوير",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_strength_imageEdit",
+            "value":"تم التراجع عن تطبيق كثافة الفلتر الريفي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_strength_imageEdit",
+            "value":"تم التراجع عن كثافة فلتر البلورات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_strength_imageEdit",
+            "value":"تمت إعادة كثافة فلتر البلورات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"revert_original_state_imageEdit",
+            "value":"هل تريد إعادة الضبط إلى الحالة الأصلية؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_one",
+            "value":"سيؤدي استخدام ميزة التنقيح الذكي إلى جعل هذه الصورة ثابتة، ولن تتمكن بعد ذلك من ضبط %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_close_watermark_imageEdit",
+            "value":"تمت إعادة إيقاف العلامة المائية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_sharpness_imageEdit",
+            "value":"الحدة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_softness",
+            "value":"هادئ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_media_imageEdit",
+            "value":"جارٍ الحفظ\u2026",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_none_imageEdit",
+            "value":"تم التراجع عن الصورة الأصلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_granules_imageEdit",
+            "value":"تمت إعادة ضبط النغمشة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_imageEdit",
+            "value":"تمت إعادة ضبط تعتيم الزوايا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_original_strength_imageEdit",
+            "value":"تم التراجع عن تطبيق كثافة الفلتر الأثيري",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_imageEdit",
+            "value":"تم التراجع عن الفلتر المحايد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_vertical_correction_imageEdit",
+            "value":"رأسي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_granules_imageEdit",
+            "value":"النغمشة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"تمت إعادة تشغيل الضبط التلقائي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_vignette_imageEdit",
+            "value":"تعتيم الزوايا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_imageEdit",
+            "value":"تمت إعادة فلتر الشفق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_vertical_imageEdit",
+            "value":"تمت إعادة التصحيح الرأسي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"contour_light",
+            "value":"تنحيل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_blossom_imageEdit",
+            "value":"تمت إعادة فلتر الأزهار",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_temperature_imageEdit",
+            "value":"حرارة اللون",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"blurred",
+            "value":"تمويه",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط التدرج اللوني",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_strength_imageEdit",
+            "value":"تم التراجع عن تطبيق كثافة الفلتر اللطيف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط التعرض للضوء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_crop_imageEdit",
+            "value":"اقتصاص",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_natural_imageEdit",
+            "value":"تمت إعادة الفلتر الطبيعي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tradition_remove_content",
+            "value":"جارٍ الإزالة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_dark_part_imageEdit",
+            "value":"تم التراجع عن ضبط المنطقة الداكنة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_format_abnormal_toast",
+            "value":"تنسيق الصورة غير مدعوم، أعد المحاولة باستخدام صورة أخرى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_imageEdit",
+            "value":"تم التراجع عن فلتر الحظ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_all_changes_imageEdit",
+            "value":"هل تريد تجاهل التغييرات؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_pink_imageEdit",
+            "value":"وردي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط المنطقة المضيئة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_nature_saturation_imageEdit",
+            "value":"تمت إعادة ضبط الحيوية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_horizontal_correction_imageEdit",
+            "value":"أفقي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_black_and_white_imageEdit",
+            "value":"أحادية اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_shoot_model_imageEdit",
+            "value":"تم التراجع عن إظهار موديل الجهاز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_fair_imageEdit",
+            "value":"تمت إعادة تطبيق الفلتر الفاتح",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bokeh",
+            "value":"تمويه",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط الحيوية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_films_imageEdit",
+            "value":"تمت إعادة نمط الفيلم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_dark_part_imageEdit",
+            "value":"تمت إعادة ضبط المنطقة الداكنة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_original_strength_imageEdit",
+            "value":"تمت إعادة كثافة الفلتر الأثيري",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_imageEdit",
+            "value":"التلاشي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_two",
+            "value":"ستؤدي إضافة فسيفساء إلى جعل هذه الصورة ثابتة، ولن تتمكن بعد ذلك من ضبط %1$s و%2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlights_imageEdit",
+            "value":"تمت إعادة ضبط التمييز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_adjust_imageEdit",
+            "value":"ضبط",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_one",
+            "value":"ستؤدي إضافة فسيفساء إلى جعل هذه الصورة ثابتة، ولن تتمكن بعد ذلك من ضبط %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_old_tree_imageEdit",
+            "value":"ريفي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط الحيوية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_imageEdit",
+            "value":"تمت إعادة الفلتر الريفي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_general_watermark_imageEdit",
+            "value":"تم التراجع عن العلامة المائية القياسية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط الظل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_original_imageEdit",
+            "value":"تمت إعادة الفلتر الأثيري",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_refinement_new",
+            "value":"الصورة لا تفي بمتطلبات تحسين صور البورتريه",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_imageEdit",
+            "value":"تمت إعادة الفلتر الدافئ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط تعتيم الزوايا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط التباين",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_bubble_save",
+            "value":"حفظ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_haze_removal_imageEdit",
+            "value":"تم التراجع عن إزالة الضبابية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_fail_toast",
+            "value":"تتعذر الإزالة، يُرجى إعادة المحاولة لاحقًا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_imageEdit",
+            "value":"تم التراجع عن ضبط تعتيم الزوايا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط التلاشي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط المنطقة الداكنة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_seal_imageEdit",
+            "value":"علامات مائية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"تمت إعادة إيقاف الضبط التلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_imageEdit",
+            "value":"حذف",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_imageEdit",
+            "value":"تمت إعادة الفلتر المحايد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_nature_saturation_imageEdit",
+            "value":"تم التراجع عن ضبط الحيوية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط الظل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_previous_step",
+            "value":"تراجع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط التدرج اللوني",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous",
+            "value":"عميق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editor_save_as",
+            "value":"حفظ كجديد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_sun_sets",
+            "value":"غروب الشمس",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_one_pen",
+            "value":"الإيقاف مؤقتًا لتكوين الشكل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_dark_part_imageEdit",
+            "value":"المنطقة الداكنة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_imageEdit",
+            "value":"تم التراجع عن الفلتر الريفي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tip",
+            "value":"إذا استخدمت العلامات، فلن تتمكن من ضبط فتحة العدسة الافتراضية أو الأنماط المخصصة لهذه الصورة. هل حقًا تريد المتابعة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_oversize_imageEdit",
+            "value":"العلامات المائية غير متوفرة مع حجم هذه الصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_oneClick_adjust_imageEdit",
+            "value":"ضبط تلقائي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_close_imageEdit",
+            "value":"تمت إعادة إيقاف النمط المخصص",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_pink_imageEdit",
+            "value":"تم التراجع عن الفلتر الوردي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_one",
+            "value":"ستؤدي إضافة نص إلى جعل هذه الصورة ثابتة، ولن تتمكن بعد ذلك من ضبط %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rebuild",
+            "value":"إعادة الإنشاء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_imageEdit",
+            "value":"تمت إعادة فلتر الحظ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط المنطقة الداكنة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_romance_imageEdit",
+            "value":"تم التراجع عن نمط السينما",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_two",
+            "value":"ستؤدي إضافة نص إلى جعل هذه الصورة ثابتة، ولن تتمكن بعد ذلك من ضبط %1$s و%2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_mirror_imageEdit",
+            "value":"تم التراجع عن الانعكاس",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sprightly",
+            "value":"مبهج",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai",
+            "value":"تنويه",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط تعتيم الزوايا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition",
+            "value":"تنضيد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_aperture",
+            "value":"فتحة العدسة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_ratio_imageEdit",
+            "value":"الأبعاد",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"subtitle_delete_cancel_imageEdit",
+            "value":"إلغاء",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_imageEdit",
+            "value":"تم التراجع عن فلتر البلورات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"background_decolorization",
+            "value":"لون أحادي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_standard_imageEdit",
+            "value":"قياسي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_imageEdit",
+            "value":"تم التراجع عن الفلترة أحادية اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"expand_image",
+            "value":"توسيع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editor_overwrite_the_original_image",
+            "value":"استبدال الصورة الأصلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_imageEdit",
+            "value":"تم التراجع عن ضبط التشبع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط الظل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_gorgeous",
+            "value":"مذهل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup",
+            "value":"تنويه",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"revert_imageEdit",
+            "value":"إعادة الضبط",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_imageEdit",
+            "value":"تمت إعادة ضبط التعرض للضوء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"petalClip_stylus_next_step",
+            "value":"إعادة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light",
+            "value":"رامبرانت",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_haze_removal_imageEdit",
+            "value":"تمت إعادة إزالة الضبابية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_natural_style",
+            "value":"تراجع: طبيعي.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light",
+            "value":"بدون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط التباين",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط التشبع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_moody_imageEdit",
+            "value":"تم التراجع عن الفلتر الرمادي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_translucent",
+            "value":"نقي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_downloading_imageEdit",
+            "value":"جارٍ تنزيل الصورة الأصلية، يُرجى الانتظار",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_shoot_param_imageEdit",
+            "value":"تم التراجع عن إظهار قيم التصوير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط التباين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_imageEdit",
+            "value":"شفق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_refinement",
+            "value":"تنقيح صورة البورتريه غير متوفر مع هذه الصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_strength_imageEdit",
+            "value":"تمت إعادة كثافة الفلتر المحايد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_bright_part_imageEdit",
+            "value":"المنطقة المضيئة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_strength_imageEdit",
+            "value":"تمت إعادة تطبيق فلتر الحظ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط النغمشة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_imageEdit",
+            "value":"تمت إعادة ضبط التباين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_standard_imageEdit",
+            "value":"تمت إعادة النمط القياسي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_mirror_imageEdit",
+            "value":"تمت إعادة الانعكاس",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط التمييز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_analyzing",
+            "value":"جارٍ التحليل…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط السطوع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_shadow_imageEdit",
+            "value":"الظل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"videoTool_compare_imageEdit",
+            "value":"مقارنة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_classics_imageEdit",
+            "value":"تم التراجع عن الفلتر الكلاسيكي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط النغمشة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط حرارة الألوان",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_fuji",
+            "value":"فوجي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant",
+            "value":"أنيق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_strength_imageEdit",
+            "value":"تمت إعادة كثافة الفلتر الدافئ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_imageEdit",
+            "value":"بلوري",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_text_imageEdit",
+            "value":"انقر هنا للتعديل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط المنطقة المضيئة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_horizontal_imageEdit",
+            "value":"تم التراجع عن التصحيح الأفقي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_strength_imageEdit",
+            "value":"تم التراجع عن كثافة الفلتر الليموني",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"soft_light",
+            "value":"هادئ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_intercept_imageEdit",
+            "value":"تمت إعادة التقليم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"refining_switch_blurred_tips",
+            "value":"ضبط تأثير التمويه يتطلب إعادة الإنشاء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_text_box_hints_imageEdit",
+            "value":"انقر هنا لإضافة نص.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"petalClip_stylus_shut_down",
+            "value":"إغلاق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_bright_part_imageEdit",
+            "value":"تمت إعادة ضبط المنطقة المضيئة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_one",
+            "value":"سيؤدي الرسم على هذه الصورة إلى جعلها ثابتة، ولن تتمكن بعد ذلك من ضبط %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_failed_imageEdit",
+            "value":"تعذر الحفظ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch",
+            "value":"ترتيش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_risk_control_alerts",
+            "value":"لا يمكن استخدام الإزالة على هذه الصورة، أعد المحاولة باستخدام صورة أخرى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_natural_imageEdit",
+            "value":"طبيعي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_anime_imageEdit",
+            "value":"تمت إعادة نمط الأنمي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_intercept_imageEdit",
+            "value":"تم التراجع عن التقليم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_cut_imageEdit",
+            "value":"اقتطاع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_imageEdit",
+            "value":"تم التراجع عن الفلتر الليموني",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_close_watermark_imageEdit",
+            "value":"تم التراجع عن إيقاف العلامة المائية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_two",
+            "value":"سيؤدي الرسم على هذه الصورة إلى جعلها ثابتة، ولن تتمكن بعد ذلك من ضبط %1$s و%2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_saturation_imageEdit",
+            "value":"التشبع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط الحدة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط التدرج اللوني",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط التمييز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_close_imageEdit",
+            "value":"تم التراجع عن إيقاف النمط المخصص",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط النغمشة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_none",
+            "value":"سيؤدي استخدام ميزة التنقيح الذكي إلى جعل هذه الصورة ثابتة.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_imageEdit",
+            "value":"تم التراجع عن فلتر الشفق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_imageEdit",
+            "value":"رمادي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط حرارة الألوان",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_expand_image",
+            "value":"توسيع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_proportional_imageEdit",
+            "value":"تم التراجع عن تعيين الأبعاد",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_fair_imageEdit",
+            "value":"تم التراجع عن الفلتر الفاتح",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط الحدة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_brush_adjusts",
+            "value":"تعديل الفرش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_refining",
+            "value":"تنقيح",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_luma_imageEdit",
+            "value":"تم التراجع عن ضبط السطوع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_imageEdit",
+            "value":"تم التراجع عن ضبط الحدة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_frame_watermark_imageEdit",
+            "value":"تم التراجع عن العلامة المائية للإطار",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_anime_imageEdit",
+            "value":"تم التراجع عن نمط الأنمي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_imageEdit",
+            "value":"تم التراجع عن ضبط التدرج اللوني",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_original_imageEdit",
+            "value":"تم التراجع عن الفلتر الأثيري",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen",
+            "value":"منعش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_imageEdit",
+            "value":"تمت إعادة ضبط الظل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_imageEdit",
+            "value":"تم التراجع عن الفلتر اللطيف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_imageEdit",
+            "value":"تمت إعادة فلتر البلورات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_strength_imageEdit",
+            "value":"تمت إعادة تطبيق كثافة الفلتر الليموني",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط التشبع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_moonlight",
+            "value":"ضوء القمر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup_tip",
+            "value":"إذا استخدمت العلامات، فلن تتمكن من ضبط الأنماط المخصصة لهذه الصورة. هل حقًا تريد المتابعة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_strength_imageEdit",
+            "value":"تم التراجع عن الكثافة أحادية اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط الحدة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid",
+            "value":"حيوي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_crop_imageEdit",
+            "value":"تم التراجع عن الاقتصاص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong",
+            "value":"قوي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_standard_imageEdit",
+            "value":"تم التراجع عن النمط القياسي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_strength_imageEdit",
+            "value":"تمت إعادة كثافة فلتر الشفق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط المنطقة المضيئة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_imageEdit",
+            "value":"تمت إعادة تطبيق الفلتر الليموني",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_imageEdit",
+            "value":"كلاسيكي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_refreshing",
+            "value":"راقي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_romance_imageEdit",
+            "value":"تمت إعادة نمط السينما",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_ninety_angle_rotate_imageEdit",
+            "value":"تمت إعادة التدوير بزاوية %s°",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_ninety_angle_rotate_imageEdit",
+            "value":"تم التراجع عن التدوير بزاوية %s°",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط النغمشة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط التشبع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_imageEdit",
+            "value":"إضافة نص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_imageEdit",
+            "value":"تمت إعادة ضبط التدرج اللوني",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"refining_switch_light_tips",
+            "value":"تبديل تأثيرات الإضاءة يتطلب إعادة الإنشاء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"retry_imageEdit",
+            "value":"إعادة المحاولة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط السطوع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_one_pen",
+            "value":"ارسم شكلاً بحركة واحدة، ثم توقف مؤقتًا، وسيتخذ شكلاً مثاليًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_none_imageEdit",
+            "value":"تمت إعادة الصورة الأصلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_classics_imageEdit",
+            "value":"تمت إعادة تطبيق الفلتر الكلاسيكي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط السطوع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"butterfly_light",
+            "value":"فراشة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_blossom_imageEdit",
+            "value":"أزهار",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_little_luck_imageEdit",
+            "value":"الحظ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_close_imageEdit",
+            "value":"لا توجد أنماط مخصصة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_milk_tea_imageEdit",
+            "value":"دافئ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_middle_tone_imageEdit",
+            "value":"محايد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_stylus",
+            "value":"رسم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_granules_imageEdit",
+            "value":"تم التراجع عن ضبط النغمشة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_strength_imageEdit",
+            "value":"تمت إعادة تطبيق الكثافة أحادية اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_imageEdit",
+            "value":"تم التراجع عن ضبط التعريض الضوئي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط التعريض الضوئي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_rotate_imageEdit",
+            "value":"تم التراجع عن التدوير",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط الحيوية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_shoot_time_imageEdit",
+            "value":"تمت إعادة إظهار وقت التصوير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_lift_pen",
+            "value":"الرفع لتكوين الشكل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_luma_imageEdit",
+            "value":"السطوع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط السطوع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_none",
+            "value":"ستؤدي إضافة تأثير الفسيفساء إلى جعل هذه الصورة ثابتة.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_vertical_imageEdit",
+            "value":"تم التراجع عن التصحيح الرأسي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط التعريض الضوئي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_imageEdit",
+            "value":"تمت إعادة ضبط التلاشي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_strength_imageEdit",
+            "value":"تم التراجع عن كثافة الفلتر المحايد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_loading",
+            "value":"جارٍ المعالجة…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_crop_imageEdit",
+            "value":"تمت إعادة الاقتصاص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_imageEdit",
+            "value":"الأصلية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"تم التراجع عن الضبط التلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_imageEdit",
+            "value":"النمط",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup",
+            "value":"لن تتوفر الأنماط المخصصة بعد الآن",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_imageEdit",
+            "value":"فاتح",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_limit_toast",
+            "value":"لا يمكن استخدام الإزالة على هذه الصورة، أعد المحاولة باستخدام صورة أخرى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط التشبع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_size_low",
+            "value":"دقة الصورة منخفضة جدًا مع هذه الميزة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_imageEdit",
+            "value":"تعديل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"current_file_cannot_import_imageEdit",
+            "value":"يتعذر التعديل لأن الملف غير مدعوم أو تالف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_general_watermark_imageEdit",
+            "value":"تمت إعادة العلامة المائية القياسية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_imageEdit",
+            "value":"فلاتر",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_has_been_refined",
+            "value":"تم تنقيح هذه الصورة بالفعل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_imageEdit",
+            "value":"لطيف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_imageEdit",
+            "value":"تم التراجع عن ضبط التباين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light",
+            "value":"إضاءة جانبية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_none",
+            "value":"ستؤدي إضافة نص إلى جعل هذه الصورة ثابتة.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_shoot_time_imageEdit",
+            "value":"تم التراجع عن إظهار وقت التصوير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_natural_imageEdit",
+            "value":"تم التراجع عن الفلتر الطبيعي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_shoot_model_imageEdit",
+            "value":"تمت إعادة إظهار موديل الجهاز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_free_imageEdit",
+            "value":"شكل حر",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط التلاشي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط تعتيم الزوايا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word",
+            "value":"تنويه",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_imageEdit",
+            "value":"تمت إعادة الفلترة أحادية اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_highlights_imageEdit",
+            "value":"التمييز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_rotate_imageEdit",
+            "value":"تمت إعادة التدوير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouching",
+            "value":"التنقيح الذكي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_imageEdit",
+            "value":"تم التراجع عن الفلتر الدافئ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_highlights_imageEdit",
+            "value":"تم التراجع عن ضبط التمييز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_refining",
+            "value":"بدء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط التعريض الضوئي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_nature_saturation_imageEdit",
+            "value":"الحيوية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_without_refinement",
+            "value":"تنقيح صورة البورتريه غير متوفر مع هذه الصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط الحيوية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_style",
+            "value":"الأنماط المخصصة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط المنطقة الداكنة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_imageEdit",
+            "value":"تمت إعادة ضبط الحدة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_whiten",
+            "value":"فاتح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط الظل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_strength_imageEdit",
+            "value":"تم التراجع عن كثافة الفلتر الدافئ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_bright_part_imageEdit",
+            "value":"تم التراجع عن ضبط المنطقة المضيئة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup_tip",
+            "value":"إذا اخترت نمطًا مخصصًا، فستُستبدل التعديلات والفلاتر الحالية التي أجريتها. هل تريد الاستبدال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_hue_imageEdit",
+            "value":"اللون",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_frame_watermark_imageEdit",
+            "value":"تمت إعادة العلامة المائية للإطار",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams",
+            "value":"خيالي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_haze_removal_selected_imageEdit",
+            "value":"إزالة الضباب المحدد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_off_imageEdit",
+            "value":"تم التراجع عن إيقاف ضبط حرارة الألوان",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_none",
+            "value":"سيؤدي الرسم على هذه الصورة إلى جعلها ثابتة.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_restore_origin_tips",
+            "value":"انقر هنا للتراجع عن التغييرات التي أجريتها.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_brilliant",
+            "value":"بريق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_content_brush_adjusts",
+            "value":"انقر نقرًا مزدوجًا على فرشاة لتغيير حجمها وتعتيمها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup_tip",
+            "value":"إذا استخدمت التنقيح الذكي، فلن تتمكن من ضبط الأنماط المخصصة لهذه الصورة. هل حقًا تريد المتابعة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_strength_imageEdit",
+            "value":"تم التراجع عن تطبيق كثافة فلتر الشفق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_content_lift_pen",
+            "value":"ارسم شكلاً بحركة واحدة، ثم ارفع قلمك أو إصبعك، وسيتخذ شكلاً مثاليًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_films_imageEdit",
+            "value":"تم التراجع عن نمط الفيلم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_imageEdit",
+            "value":"تمت إعادة ضبط التشبع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_soft",
+            "value":"ناعم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brightly",
+            "value":"ساطع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_imageEdit",
+            "value":"التباين",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_luma_imageEdit",
+            "value":"تمت إعادة ضبط السطوع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_imageEdit",
+            "value":"تمت إعادة ضبط حرارة الألوان",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_pave_imageEdit",
+            "value":"ملء الشاشة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_on_imageEdit",
+            "value":"تم التراجع عن تشغيل ضبط التدرج اللوني",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط التلاشي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_on_imageEdit",
+            "value":"تمت إعادة تشغيل ضبط التباين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light",
+            "value":"إضاءة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup",
+            "value":"لن تتوفر إعدادات النمط المخصص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_exposure_imageEdit",
+            "value":"التعريض الضوئي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"تم التراجع عن تشغيل الضبط التلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_strength_imageEdit",
+            "value":"تمت إعادة كثافة الفلتر اللطيف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_imageEdit",
+            "value":"أثيري",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_imageEdit",
+            "value":"تمت إعادة الفلتر اللطيف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_off_imageEdit",
+            "value":"تمت إعادة إيقاف ضبط المنطقة المضيئة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"first_time_use_penkit",
+            "value":"انقر هنا للرسم على هذه الصورة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_horizontal_imageEdit",
+            "value":"تمت إعادة التصحيح الأفقي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"color_light_blue_imageEdit",
+            "value":"أزرق فاتح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup_tip",
+            "value":"بعد استخدام العلامات، لن تتمكن بعد الآن من ضبط فتحة العدسة لهذه الصورة. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch_tip",
+            "value":"بعد استخدام التنقيح بالذكاء الاصطناعي، لن تتمكن بعد الآن من ضبط فتحة العدسة لهذه الصورة. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"none",
+            "value":"لا يوجد شيء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_right",
+            "value":"محاذاة لليسار",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"generation_image_imageEdit",
+            "value":"جارِ المعالجة…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"timeout_without_move_imageEdit",
+            "value":"انتهت مهلة طلب الخادم. أعد المحاولة لاحقًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_confirm_selection_imageEdit",
+            "value":"إعادة: تأكيد التحديد.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"draw_imageEdit",
+            "value":"جارٍ الرسم…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_imageEdit",
+            "value":"علامة مائية مخصصة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_abnormal_try_again",
+            "value":"تعذر طلب الخادم. تُرجى إعادة المحاولة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_tip",
+            "value":"بعد استخدام التنقيح بالذكاء الاصطناعي، لن تتمكن بعد الآن من ضبط فتحة العدسة أو النمط المخصص لهذه الصورة. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"synthesis_failed_without_move_imageEdit",
+            "value":"تعذر إنشاء الصورة. تُرجى إعادة المحاولة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_delete_object_imageEdit",
+            "value":"تراجع: حذف الغرض.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand_part_area",
+            "value":"لا يمكن توسيع بعض المحتوي. يُرجى تغيير موضعه ثم إعادة المحاولة مجددًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fusion_imageEdit",
+            "value":"جارِ المزج…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"regions_overlay_without_move_imageEdit",
+            "value":"حدثت مشكلة. تُرجى إعادة التحديد والمحاولة مرة أخرى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_compose_imageEdit",
+            "value":"إعادة: إنشاء.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_small_without_move_imageEdit",
+            "value":"أبعاد الصورة صغيرة جدًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_aperture_focus",
+            "value":"تراجع: موضع التركيز.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_aperture_adjust",
+            "value":"إعادة: ضبط فتحة العدسة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tips",
+            "value":"بعد استخدام العلامات، لن تتمكن بعد الآن من ضبط فتحة العدسة أو النمط المخصص لهذه الصورة. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_move_toast_content",
+            "value":"سيتم تجاهل التعديلات التي أجريتها إذا غادرت الآن. هل حقًا تريد المغادرة؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_move_bootstrapping",
+            "value":"ارسم خطًا لتحديد الموضوع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unavailable_move_imageEdit",
+            "value":"ميزة النقل غير متاحة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"generation_imageEdit",
+            "value":"جارِ الإنشاء…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_move_toast_title",
+            "value":"سيتم فقدان التعديلات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_object_imageEdit",
+            "value":"تراجع: ضبط الغرض.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_sign_imageEdit",
+            "value":"التوقيع الشخصي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_move_object_imageEdit",
+            "value":"إعادة: نقل الغرض.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_edit_imageEdit",
+            "value":"انقر على غرض ما لتعديله",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_green_imageEdit",
+            "value":"أخضر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_edit_watermark_imageEdit",
+            "value":"تراجع: تعديل العلامة المائية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_timeout_try_again",
+            "value":"انتهت مهلة طلب الخادم. تُرجى إعادة المحاولة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_switch_watermark_imageEdit",
+            "value":"إعادة: تبديل العلامة المائية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_aperture_adjust",
+            "value":"تراجع: ضبط فتحة العدسة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selected_watermark_imageEdit",
+            "value":"تراجع: تحديد العلامة المائية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fill_imageEdit",
+            "value":"جارٍ التعبئة…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_delete_object_imageEdit",
+            "value":"إعادة: حذف الغرض.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_display_param_imageEdit",
+            "value":"إظهار %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_tier_object_imageEdit",
+            "value":"تراجع: ضبط الطبقة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_object_imageEdit",
+            "value":"إعادة: ضبط الغرض.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_copy_object_imageEdit",
+            "value":"إعادة: نسخ الغرض.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_intelligent_correction_imageEdit",
+            "value":"تسوية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_move_imageEdit",
+            "value":"ميزة النقل غير متاحة لهذه الصورة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"oversize_imageEdit",
+            "value":"بلغ عدد الأغراض الحد الأقصى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"today_frequency_reached_upper_limit",
+            "value":"بلغ الاستخدام الحد الأقصى لهذا اليوم.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_tier_object_imageEdit",
+            "value":"إعادة: ضبط الطبقة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_light_purple_imageEdit",
+            "value":"أرجواني فاتح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_color_param_imageEdit",
+            "value":"معلومات الألوان",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_red_imageEdit",
+            "value":"أحمر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_imageEdit",
+            "value":"إنشاء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch",
+            "value":"لن تكون إعدادات فتحة العدسة متاحة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_intelligent_correction_on",
+            "value":"تسوية المحدد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_select_param_imageEdit",
+            "value":"تحديد %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_picture_tilt_is_detected",
+            "value":"لم يتم اكتشاف أي إمالة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_black_imageEdit",
+            "value":"أسود",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_center",
+            "value":"محاذاة المركز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_large_mask_without_move_imageEdit",
+            "value":"المنطقة المحددة كبيرة للغاية. تُرجى إعادة التحديد.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_correct_intelligent_imageEdit",
+            "value":"تراجع: التسوية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_edit_watermark_imageEdit",
+            "value":"إعادة: تعديل العلامة المائية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_imageEdit",
+            "value":"نص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_aperture_imageEdit",
+            "value":"فتحة العدسة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_edit_max_tip",
+            "value":"بلغ عدد مربعات النص الحد الأقصى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_small_mask_without_move_imageEdit",
+            "value":"المنطقة المحددة صغيرة للغاية. تُرجى إعادة التحديد.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_compose_imageEdit",
+            "value":"تراجع: إنشاء.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_left",
+            "value":"محاذاة لليمين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_copy_object_imageEdit",
+            "value":"تراجع: نسخ الغرض.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_intelligent_imageEdit",
+            "value":"إعادة: التسوية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_text_imageEdit",
+            "value":"إضافة نص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup",
+            "value":"لن تكون إعدادات فتحة العدسة متاحة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_aperture_focus",
+            "value":"إعادة: موضع التركيز.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_imageEdit",
+            "value":"تراجع: التحديد.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_close_param_imageEdit",
+            "value":"إلغاء التحديد %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cannot_be_erased_toast",
+            "value":"لا يمكن إزالة المحتوى الموجود في المنطقة المحددة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"exit_imageEdit",
+            "value":"مغادرة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"leave_imageEdit",
+            "value":"مغادرة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_dark_blue_imageEdit",
+            "value":"أزرق غامق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selected_watermark_imageEdit",
+            "value":"إعادة: تحديد العلامة المائية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_on_imageEdit",
+            "value":"تم تحديد علامة مائية مخصصة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_imageEdit",
+            "value":"محدد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_switch_watermark_imageEdit",
+            "value":"تراجع: تبديل العلامة المائية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_confirm_selection_imageEdit",
+            "value":"تراجع: تأكيد التحديد.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_white_imageEdit",
+            "value":"أبيض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_imageEdit",
+            "value":"إعادة: التحديد.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_move_object_imageEdit",
+            "value":"تراجع: نقل الغرض.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_manual_selection",
+            "value":"تراجع: التحديد اليدوي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_add_patches_imageEdit",
+            "value":"تم التراجع عن إضافة ملصق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_paint_text_announced",
+            "value":"تم مسح المنطقة المحددة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_wise_selection",
+            "value":"تراجع: التحديد التلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_manual_selection",
+            "value":"إعادة: التحديد اليدوي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_brush_thickness_selected",
+            "value":"شريط تمرير ضبط حجم الممحاة، يتراوح الحجم من %1$d إلى %2$d، انقر مرتين للتنشيط، وانقر مرتين ثم مطولًا، واسحب لليسار أو اليمين لضبط الحجم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_eraser_after_imageEdit",
+            "value":"يُرجى تحديد جسم وإعادة المحاولة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_add_patches_imageEdit",
+            "value":"تمت إعادة إضافة ملصق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"select_patches_object",
+            "value":"تحديد عنصر",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_wise_selection",
+            "value":"إعادة: التحديد التلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_selection_to_edit_imageEdit",
+            "value":"انقر على \"تلقائي\" أو \"يدوي\" لتعديل المنطقة المحددة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_picture",
+            "value":"حفظ كصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_eraser_selection",
+            "value":"تراجع: ممحاة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_eraser_selection",
+            "value":"إعادة: ممحاة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"patches_selection",
+            "value":"الملصقات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_selection",
+            "value":"الممحاة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_two",
+            "value":"لا يمكن تعديل %1$s، و%2$s بعد الرسم. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_one",
+            "value":"لا يمكن تعديل %1$s بعد استخدام التنقيح بالذكاء الاصطناعي. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_three",
+            "value":"لا يمكن تعديل %1$s، و%2$s، و%3$s بعد إضافة النص. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_one",
+            "value":"لا يمكن تعديل %1$s بعد إضافة نص. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_two",
+            "value":"لا يمكن تعديل %1$s و%2$s بعد إضافة تأثير الفسيفساء. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_no_effect",
+            "value":"تمت إعادة عملية إزالة التأثير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_panning_shot_effect",
+            "value":"تشتيت الخلفية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_no_effect",
+            "value":"تم التراجع عن عملية إزالة التأثير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_panning_shot_effect",
+            "value":"تمت إعادة عملية تشتيت الخلفية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_snapshot_effect",
+            "value":"تمت إعادة عملية التقاط لقطة سريعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_one",
+            "value":"لا يمكن تعديل %1$s بعد الرسم. هل حقًا تريد المتابعة؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_selection_snapshot_effect",
+            "value":"تم التراجع عن عملية التقاط لقطة سريعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_two",
+            "value":"لا يمكن تعديل %1$s، و%2$s بعد استخدام التنقيح بالذكاء الاصطناعي. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_three",
+            "value":"لا يمكن تعديل %1$s، و%2$s، و%3$s بعد استخدام التنقيح بالذكاء الاصطناعي. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_snapshot_effect",
+            "value":"لقطة سريعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_one",
+            "value":"لا يمكن تعديل %1$s بعد إضافة تأثير الفسيفساء. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_movement",
+            "value":"تأثيرات الحركة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_three",
+            "value":"سيؤدي استخدام تأثير الفسيفساء إلى جعل هذه الصورة ثابتة ولا يمكن تعديل %1$s، و%2$s، و%3$s بعد الآن. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_three",
+            "value":"سيؤدي استخدام التنقيح بالذكاء الاصطناعي إلى جعل هذه الصورة ثابتة ولا يمكن تعديل %1$s، و%2$s، و%3$s بعد الآن. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_three",
+            "value":"لا يمكن تعديل %1$s، و%2$s، و%3$s بعد إضافة تأثير الفسيفساء. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_two",
+            "value":"لا يمكن تعديل %1$s و%2$s بعد إضافة نص. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_three",
+            "value":"ستؤدي إضافة نص إلى جعل هذه الصورة ثابتة ولا يمكن تعديل %1$s، و%2$s، و%3$s بعد الآن. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_movement_imageEdit",
+            "value":"حركة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_panning_shot_effect",
+            "value":"تم التراجع عن عملية تشتيت الخلفية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_three",
+            "value":"لا يمكن تعديل %1$s، و%2$s، و%3$s بعد الرسم. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_three",
+            "value":"سيؤدي الرسم على الصورة إلى جعلها ثابتة ولا يمكن تعديل %1$s، و%2$s، و%3$s بعد الآن. هل تريد المتابعة على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_selected",
+            "value":"تم تحديد الفلتر الغائم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n_selected",
+            "value":"تم تحديد التعريض الضوئي %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_lr",
+            "value":"تبديل إلى التخطيط من اليسار إلى اليمين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_n",
+            "value":"تم تعيين تمويه الخلفية حاليًا على المستوى %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_style_selected",
+            "value":"تم تحديد عصري",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"double_click_edit_imageEdit",
+            "value":"انقر مرتين لتعديل النص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_top_middle",
+            "value":"أعلى مربع الاقتصاص، انقر مرتين ثم مطولاً ثم اسحب لتعديل المنطقة المحددة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightness_true",
+            "value":"تم تحديد السطوع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_original_selected",
+            "value":"تم تحديد الإضاءة الأصلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_true",
+            "value":"تم تحديد التلاشي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_imageEdit",
+            "value":"أعلى يمين مربع النص، انقر مرتين ثم مطولاً، ثم اسحب لتعديل الحجم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_imageEdit",
+            "value":"دون علامة مائية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_selected",
+            "value":"تم تحديد الفلاتر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_aperture_selected",
+            "value":"تم تحديد فتحة العدسة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice",
+            "value":"شريط لضبط تأثير تمويه الخلفية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_invisible",
+            "value":"زر التراجع، غير متاح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_0",
+            "value":"تم تعيين تمويه الخلفية على \"لا شيء\" حاليًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_focus_change",
+            "value":"تم تبديل موضع التركيز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid_selected",
+            "value":"تم تحديد حيوي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_selected",
+            "value":"تم تحديد الفلتر الأخضر المصفر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_rotation_on",
+            "value":"تم تحديد التدوير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9_on",
+            "value":"تم تحديد الأبعاد ستة عشر في تسعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_old_tree_selected",
+            "value":"تم تحديد الفلتر الريفي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_visible",
+            "value":"تراجع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_blossom_selected",
+            "value":"تم تحديد فلتر التوهج",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_rotation_btn",
+            "value":"تدوير بزاوية تسعين درجة عكس عقارب الساعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_box_imageEdit",
+            "value":"مربع النص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_milk_tea_selected",
+            "value":"تم تحديد الفلتر الدافئ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1_on",
+            "value":"تم تحديد الأبعاد واحد في واحد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_bottom",
+            "value":"أسفل يسار مربع الاقتصاص، انقر مرتين ثم مطولاً ثم اسحب لتعديل المنطقة المحددة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_sharpness_true",
+            "value":"تم تحديد الحدة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_imageEdit",
+            "value":"%1$s. يتراوح النطاق القابل للتعديل بين %2$d و%3$d درجة. انقر مرتين ثم مطولاً، ثم اسحب لتعديل الزاوية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bold_imageEdit",
+            "value":"عريض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_original_selected",
+            "value":"تم تحديد التعريض الضوئي الأصلي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_imageEdit",
+            "value":"أسفل يمين مربع النص، انقر مرتين ثم مطولاً، ثم اسحب لتعديل الحجم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_invisible",
+            "value":"زر الحفظ، غير متاح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_free_on",
+            "value":"تم تحديد شكل حر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong_selected",
+            "value":"تم تحديد \"قوي\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen_selected",
+            "value":"تم تحديده منعش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_pink_selected",
+            "value":"تم تحديد الفلتر الوردي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"italics_imageEdit",
+            "value":"مائل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_invisible",
+            "value":"زر الإعادة، غير متاح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn_desc",
+            "value":"انقر مرتين ثم مطولاً لمقارنة الصورة بالصورة الأصلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light_selected",
+            "value":"لم يتم تحديد تأثير إضاءة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vibrance_true",
+            "value":"تم تحديد الحيوية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_auto_true",
+            "value":"تم تحديد الضبط التلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_imageEdit",
+            "value":"أسفل يسار مربع النص، انقر مرتين ثم مطولاً، ثم اسحب لتعديل الحجم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_ud",
+            "value":"تبديل إلى التخطيط من الأعلى إلى الأسفل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_mirror_btn",
+            "value":"انعكاس المرآة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_bar_announced",
+            "value":"شريط تمرير لتعديل حجم الفرشاة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_on",
+            "value":"تم تحديد أبعاد الصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select_n",
+            "value":"تم تعديل تمويه الخلفية، المستوى الحالي %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_selected",
+            "value":"تم تحديد %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_exposure_true",
+            "value":"تم تحديد التعريض الضوئي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams_selected",
+            "value":"تم تحديد خيالي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_screen_on",
+            "value":"تم تحديد ملاءمة الشاشة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2_on",
+            "value":"تم تحديد الأبعاد ثلاثة في اثنين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n",
+            "value":"التعريض الضوئي %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_paint_text_announced",
+            "value":"اكتمل وضع العلامات، تم تحديد المنطقة المقابلة تلقائيًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_little_luck_selected",
+            "value":"تم تحديد فلتر السعادة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"manual_paint_text_announced",
+            "value":"تم تحديد المنطقة المُعلّمة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_imageEdit",
+            "value":"علامة مائية مبروزة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_watermark_selected",
+            "value":"تم تحديد العلامات المائية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_bottom",
+            "value":"أسفل يمين مربع الاقتصاص، انقر مرتين ثم مطولاً ثم اسحب لتعديل المنطقة المحددة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vignette_true",
+            "value":"تم تحديد تظليل الحواف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_selected",
+            "value":"تم تحديد الفلتر الفاتح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_verticalCorrection_on",
+            "value":"تم تحديد الضبط الرأسي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_on_imageEdit",
+            "value":"تم تحديد العلامة المائية العادية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant_selected",
+            "value":"تم تحديد أنيق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_on_imageEdit",
+            "value":"تم تحديد العلامة المائية المبروزة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_selected",
+            "value":"تم تحديد الفلتر الأصلي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select",
+            "value":"شريط تمرير ضبط مستوى تمويه الخلفية، النطاق قابل للتعديل من %1$d إلى %2$d، انقر مرتين للتفعيل، انقر مرتين ثم مطولاً، ثم اسحب لليمين أو اليسار لضبط المستوى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightzone_true",
+            "value":"تم تحديد المنطقة المضيئة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_grain_true",
+            "value":"تم تحديد التحبّب",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_selected",
+            "value":"تم تحديد فلتر الشفق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_top",
+            "value":"أعلى يسار مربع الاقتصاص، انقر مرتين ثم مطولاً ثم اسحب لتعديل المنطقة المحددة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_black_and_white_selected",
+            "value":"تم تحديد الفلتر أحادي اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_selected",
+            "value":"تم تحديد الفلتر الكلاسيكي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_true",
+            "value":"تم تحديد التباين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_soft_selected",
+            "value":"تم تحديد \"ناعم\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4_on",
+            "value":"تم تحديد الأبعاد ثلاثة في أربعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"alignment_imageEdit",
+            "value":"المحاذاة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_hue_true",
+            "value":"تم تحديد تدرج اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"underline_imageEdit",
+            "value":"تسطير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_selected",
+            "value":"تم تحديد الإضاءة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16_on",
+            "value":"تم تحديد الأبعاد تسعة في ستة عشر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_whiten_selected",
+            "value":"تم تحديد فاتح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9",
+            "value":"أفقي، الأبعاد ستة عشر في تسعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_origin_on",
+            "value":"تم تحديد الأبعاد الأصلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light_selected",
+            "value":"تم تحديد إضاءة جانبية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_imageEdit",
+            "value":"أعلى يسار مربع النص، انقر مرتين ثم مطولاً، ثم اسحب لتعديل الحجم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brightly_selected",
+            "value":"تم تحديد ساطع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_middle",
+            "value":"يسار مربع الاقتصاص، انقر مرتين ثم مطولاً ثم اسحب لتعديل المنطقة المحددة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_visible",
+            "value":"إعادة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_up",
+            "value":"رجوع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_value",
+            "value":"تم تعديل حجم الفرشاة، الحجم الحالي %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_selected",
+            "value":"تم تحديد \"تنضيد\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_top",
+            "value":"أعلى يمين مربع الاقتصاص، انقر مرتين ثم مطولاً ثم اسحب لتعديل المنطقة المحددة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_shadow_true",
+            "value":"تم تحديد الظل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_temperature_true",
+            "value":"تم تحديد درجة الحرارة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous_selected",
+            "value":"تم تحديد عميق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_gorgeous_selected",
+            "value":"تم تحديد مذهل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_point_announced",
+            "value":"حجم الفرشاة الحالي %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_selected",
+            "value":"شريط تمرير تعديل حجم الفرشاة، يتراوح الحجم من %1$d إلى %2$d، انقر مرتين للتفعيل، وانقر مرتين ثم مطولاً، واسحب لليمين أو اليسار لتعديل الحجم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light_selected",
+            "value":"تم تحديد رامبرانت",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3_on",
+            "value":"تم تحديد الأبعاد اثنين في ثلاثة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_sprightly_selected",
+            "value":"تم تحديد \"مبهج\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_selected",
+            "value":"تم تحديد الفلتر الأثيري",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_adjust_selected",
+            "value":"تم تحديد الضبط",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"blurred_selected",
+            "value":"تم تحديد التمويه",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_darkzone_true",
+            "value":"تم تحديد المنطقة الداكنة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_natural_selected",
+            "value":"تم تحديد الفلتر الطبيعي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3",
+            "value":"رأسي، الأبعاد اثنان في ثلاثة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light_selected",
+            "value":"تم تحديد \"إضاءة أمامية\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_horizontalCorrection_on",
+            "value":"تم تحديد الضبط الأفقي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn",
+            "value":"زر المقارنة، انقر مرتين ثم مطولاً لمقارنة الصورة الحالية بالصورة الأصلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_refreshing_selected",
+            "value":"تم تحديد \"راقي\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_middle_tone_selected",
+            "value":"تم تحديد الفلتر المحايد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_saturation_true",
+            "value":"تم تحديد تشبع اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1",
+            "value":"الأبعاد واحد في واحد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_selected",
+            "value":"تم تحديد الفلتر اللطيف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_crop_selected",
+            "value":"تم تحديد الاقتصاص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_highlight_true",
+            "value":"تم تحديد الإبراز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3_on",
+            "value":"تم تحديد الأبعاد أربعة في ثلاثة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"butterfly_light_selected",
+            "value":"تم تحديد الفراشة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_softness_selected",
+            "value":"تم تحديد هادئ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_original_selected",
+            "value":"تم تحديد اللون الأصلي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rectangle_sizer",
+            "value":"معاينة الصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_on_imageEdit",
+            "value":"تم تحديد خيار \"دون علامة مائية\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_middle_bottom",
+            "value":"أسفل مربع الاقتصاص، انقر مرتين ثم مطولاً ثم اسحب لتعديل المنطقة المحددة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3",
+            "value":"أفقي، الأبعاد أربعة في ثلاثة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch_selected",
+            "value":"تم تحديد تنقيح Celia",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brilliant_selected",
+            "value":"تم تحديد \"بريق\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_select_imageEdit",
+            "value":"انقر مرتين للتحديد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_imageEdit",
+            "value":"العلامة المائية العادية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_middle",
+            "value":"يمين مربع الاقتصاص، انقر مرتين ثم مطولاً ثم اسحب لتعديل المنطقة المحددة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16",
+            "value":"رأسي، الأبعاد تسعة في ستة عشر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4",
+            "value":"رأسي، الأبعاد ثلاثة في أربعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2",
+            "value":"أفقي، الأبعاد ثلاثة في اثنين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_toggle_imageEdit",
+            "value":"انقر مرتين للتبديل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_selected",
+            "value":"تم تحديد فلتر الصفاء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_ai_move_imageEdit",
+            "value":"أعلى يسار مربع التعديل، انقر مرتين ثم مطولاً، ثم اسحب لضبط الحجم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_ai_move_imageEdit",
+            "value":"%1$s، يتراوح نطاق الضبط بين %2$d و%3$d درجة. انقر مرتين ثم مطولاً، ثم اسحب لضبط الزاوية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_ai_move_imageEdit",
+            "value":"أسفل يسار مربع التعديل، انقر مرتين ثم مطولاً، ثم اسحب لضبط الحجم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_ai_move_imageEdit",
+            "value":"أسفل يمين مربع التعديل، انقر مرتين ثم مطولاً، ثم اسحب لضبط الحجم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_invisible",
+            "value":"زر %1$s، غير متاح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_ai_move_imageEdit",
+            "value":"أعلى يمين مربع التعديل، انقر مرتين ثم مطولاً، ثم اسحب لضبط الحجم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_tone",
+            "value":"درجة اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_bar",
+            "value":"شريط تمرير ضبط شدة الفلتر الليموني، نطاق الفلتر من صفر إلى مائة، انقر مرتين ثم مطولاً في المرة الثانية ثم اسحب لليسار أو اليمين لضبط شدة الفلتر الليموني، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_bar",
+            "value":"شريط تمرير ضبط شدة فلتر الشفق، نطاق الفلتر من صفر إلى مائة، انقر مرتين ثم مطولاً في المرة الثانية ثم اسحب لليسار أو اليمين لضبط شدة فلتر الشفق، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_adjust",
+            "value":"تم ضبط التدوير، قيمة التدوير الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_rulerScroller",
+            "value":"شريط تمرير ضبط فتحة العدسة، نطاق شريط التمرير من F0.95 إلى F16. انقر مطولاً بكلتا الإصبعين ثم اسحب لليسار أو اليمين لضبط قيمة فتحة العدسة، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_100_100",
+            "value":"شريط تمرير ضبط السطوع، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة السطوع، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_adjust",
+            "value":"تم ضبط قيمة الحدة، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_adjust",
+            "value":"تم ضبط الزاوية الأفقية، قياس الزاوية الحالية هو %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_adjust",
+            "value":"تم ضبط قيمة التشبع، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_value_change",
+            "value":"تم ضبط قيمة فتحة العدسة، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_adjust",
+            "value":"تم ضبط قيمة الظل، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_adjust",
+            "value":"تم ضبط قيمة التمييز، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_adjust",
+            "value":"تم ضبط قيمة المنطقة الداكنة، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_adjust",
+            "value":"تم ضبط قيمة المنطقة المضيئة، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_100_100",
+            "value":"شريط تمرير ضبط التباين، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة التباين، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_100_100",
+            "value":"شريط تمرير ضبط الظل، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة الظل، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_adjust",
+            "value":"تم ضبط الزاوية الرأسية، قياس الزاوية الحالية هو %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_imageEdit",
+            "value":"شريط تمرير التدوير، يتراوح نطاق شريط التمرير بين سالب خمس وأربعين درجة وخمس وأربعين درجة، انقر مرتين ثم مطولاً ثم اسحب إلى اليسار أو اليمين لضبط درجة التدوير، تبلغ درجة التدوير الحالية %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_adjust",
+            "value":"تم ضبط قيمة التلاشي، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_adjust",
+            "value":"تم ضبط قيمة تعتيم الزوايا، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_value",
+            "value":"تم ضبط شدة الفلتر الأثيري، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_adjust",
+            "value":"تم ضبط قيمة الحيوية، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_0_100",
+            "value":"شريط تمرير ضبط الحدة، نطاق شريط التمرير من صفر إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة الحدة، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_bar",
+            "value":"شريط تمرير ضبط شدة فلتر التأثير الريفي، نطاق الفلتر من صفر إلى مائة، انقر مرتين ثم مطولاً في المرة الثانية ثم اسحب لليسار أو اليمين لضبط شدة فلتر التأثير الريفي، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_100_100",
+            "value":"شريط تمرير ضبط التمييز، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة التمييز، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_imageEdit",
+            "value":"شريط تمرير الزاوية الأفقية، يتراوح نطاق شريط التمرير بين سالب خمس وأربعين درجة وخمس وأربعين درجة، انقر مرتين ثم مطولاً ثم اسحب إلى اليسار أو اليمين لضبط الزاوية الأفقية، يبلغ قياس الزاوية الحالية %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_adjust",
+            "value":"تم ضبط قيمة التعريض الضوئي، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_bar",
+            "value":"شريط تمرير ضبط شدة الفلتر الأثيري، نطاق الفلتر من صفر إلى مائة، انقر مرتين ثم مطولاً في المرة الثانية ثم اسحب لليسار أو اليمين لضبط شدة الفلتر الأثيري، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection",
+            "value":"شريط تمرير الزاوية الرأسية، يتراوح نطاق شريط التمرير بين سالب خمس وأربعين درجة وخمس وأربعين درجة. انقر مطولاً بكلتا الإصبعين ثم اسحب إلى اليسار أو اليمين لضبط الزاوية الرأسية، تبلغ الزاوية الحالية %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_adjust",
+            "value":"تم ضبط قيمة الصبغة، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_bar",
+            "value":"شريط تمرير ضبط شدة الفلتر اللطيف، نطاق الفلتر من صفر إلى مائة، انقر مرتين ثم مطولاً في المرة الثانية ثم اسحب لليسار أو اليمين لضبط شدة الفلتر اللطيف، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_100_100",
+            "value":"شريط تمرير ضبط حرارة الألوان، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة حرارة الألوان، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_100_100",
+            "value":"شريط تمرير ضبط الحيوية، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة الحيوية، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_adjust",
+            "value":"تم ضبط قيمة حرارة الألوان، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_bar",
+            "value":"شريط تمرير ضبط شدة الفلتر البلوري، نطاق الفلتر من صفر إلى مائة، انقر مرتين ثم مطولاً في المرة الثانية ثم اسحب لليسار أو اليمين لضبط شدة الفلتر البلوري، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_bar",
+            "value":"شريط تمرير ضبط شدة الفلتر الطبيعي، نطاق الفلتر من صفر إلى مائة، انقر مرتين ثم مطولاً في المرة الثانية ثم اسحب لليسار أو اليمين لضبط شدة الفلتر الطبيعي، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_value",
+            "value":"تم ضبط شدة الفلتر اللطيف، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_0_100",
+            "value":"شريط تمرير ضبط التلاشي، نطاق شريط التمرير من صفر إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة التلاشي، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_value",
+            "value":"تم ضبط شدة فلتر التأثير الريفي، الشدة الحالية %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_0_100",
+            "value":"شريط تمرير ضبط التحبب، نطاق شريط التمرير من صفر إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة التحبب، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_bar",
+            "value":"شريط تمرير ضبط شدة فلتر الحظ، نطاق الفلتر من صفر إلى مائة، انقر مرتين ثم مطولاً في المرة الثانية ثم اسحب لليسار أو اليمين لضبط شدة فلتر الحظ، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_value",
+            "value":"تم ضبط شدة الفلتر البلوري، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_adjust",
+            "value":"تم ضبط قيمة السطوع، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_adjust",
+            "value":"تم ضبط قيمة التباين، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_100_100",
+            "value":"شريط تمرير ضبط تعتيم الزوايا، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة تعتيم الزوايا، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_value",
+            "value":"تم ضبط شدة فلتر الشفق، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_adjust",
+            "value":"تم ضبط قيمة الضبط التلقائي، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_100_100",
+            "value":"شريط تمرير ضبط المنطقة المضيئة، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة المنطقة المضيئة، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_value",
+            "value":"تم ضبط شدة فلتر الحظ، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_value",
+            "value":"تم ضبط شدة الفلتر أحادي اللون، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_100_100",
+            "value":"شريط تمرير ضبط المنطقة الداكنة، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة المنطقة الداكنة، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_value",
+            "value":"تم ضبط شدة الفلتر الدافئ، الشدة الحالية %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_100_100",
+            "value":"شريط تمرير ضبط التشبع، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة التشبع، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_bar",
+            "value":"شريط تمرير ضبط شدة الفلتر الدافئ، نطاق الفلتر من صفر إلى مائة، انقر مرتين ثم مطولاً في المرة الثانية ثم اسحب لليسار أو اليمين لضبط شدة الفلتر الدافئ، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_100_100",
+            "value":"شريط تمرير ضبط التعريض الضوئي، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة التعريض الضوئي، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_100_100",
+            "value":"شريط تمرير الضبط التلقائي، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة الضبط التلقائي، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection",
+            "value":"شريط تمرير الزاوية الأفقية، يتراوح نطاق شريط التمرير بين سالب خمس وأربعين درجة وخمس وأربعين درجة. انقر مطولاً بكلتا الإصبعين ثم اسحب إلى اليسار أو اليمين لضبط الزاوية الأفقية، تبلغ الزاوية الحالية %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_bar",
+            "value":"شريط تمرير ضبط شدة الفلتر أحادي اللون، نطاق الفلتر من صفر إلى مائة، انقر مرتين ثم مطولاً في المرة الثانية ثم اسحب لليسار أو اليمين لضبط شدة الفلتر أحادي اللون، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation",
+            "value":"شريط تمرير التدوير، يتراوح نطاق شريط التمرير بين سالب خمس وأربعين درجة وخمس وأربعين درجة. انقر مطولاً بكلتا الإصبعين ثم اسحب إلى اليسار أو اليمين لضبط درجة التدوير، تبلغ درجة التدوير الحالية %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_100_100",
+            "value":"شريط تمرير ضبط الصبغة، نطاق شريط التمرير من سالب مائة إلى مائة، انقر مرتين ثم مطولاً ثم اسحب لليسار أو اليمين لضبط قيمة الصبغة، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_value",
+            "value":"تم ضبط شدة الفلتر الطبيعي، الشدة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_value",
+            "value":"تم ضبط شدة الفلتر الليموني، الشدة الحالية %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_adjust",
+            "value":"تم ضبط قيمة التحبب، القيمة الحالية هي %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_imageEdit",
+            "value":"شريط تمرير الزاوية الرأسية، يتراوح نطاق شريط التمرير بين سالب خمس وأربعين درجة وخمس وأربعين درجة، انقر مرتين ثم مطولاً ثم اسحب إلى اليسار أو اليمين لضبط الزاوية الرأسية، يبلغ قياس الزاوية الحالية %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_personality_style_imageEdit",
+            "value":"أنماط مخصصة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_disagree",
+            "value":"عدم إظهار العلامة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"border_background_imageEdit",
+            "value":"الإطار",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_description",
+            "value":"تشير علامة \"مُنشأة بواسطة الذكاء الاصطناعي\" إلى أن الصورة تحتوي على محتوى تم إنشاؤه بالذكاء الاصطناعي. يمكنك تغيير هذا متى شئت من خلال إعدادات المعرض.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"capture_location_imageEdit",
+            "value":"الموقع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_agree",
+            "value":"إظهار العلامة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"beauty_Custom_imageEdit",
+            "value":"تخصيص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup",
+            "value":"هل تريد إظهار علامة \"مُنشأة بواسطة الذكاء الاصطناعي\"؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_imageEdit",
+            "value":"تعديل العلامة المائية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_watermark_imageEdit",
+            "value":"العلامات المائية للعطلات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_text_imageEdit",
+            "value":"النص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_patterned_imageEdit",
+            "value":"النمط",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_festival_seal_edit",
+            "value":"لا يمكن تعديل العلامة المائية لمهرجان الربيع بمجرد حفظها. هل تريد الحفظ الآن؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_national_seal_edit",
+            "value":"لا يمكن تحرير العلامة المائية للعيد القومي بمجرد حفظها. هل تريد الحفظ الآن؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_brush_thickness_selected_new",
+            "value":"تعديل حجم الممحاة، تتراوح النسبة المعدلة من %1$d إلى %2$d، انقر مرتين، ثم اسحب لليسار أو اليمين للتعديل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_selected_new",
+            "value":"تعديل حجم الفرشاة، تتراوح النسبة المعدلة من %1$d إلى %2$d، انقر مرتين، ثم اسحب لليسار أو اليمين للتعديل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_color_temperature",
+            "value":"حرارة الألوان",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_saturation",
+            "value":"التشبع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_soft_imageEdit",
+            "value":"ساطع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_black_imageEdit",
+            "value":"أحادي اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_bright_imageEdit",
+            "value":"زاهٍ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_soft_imageEdit",
+            "value":"تم التراجع عن ساطع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_bright_imageEdit",
+            "value":"تم التراجع عن زاهٍ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_soft_imageEdit",
+            "value":"تمت الإعادة إلى ساطع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_black_imageEdit",
+            "value":"تمت الإعادة إلى أحادي اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_bright_imageEdit",
+            "value":"تمت الإعادة إلى زاهٍ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_black_imageEdit",
+            "value":"تم التراجع عن أحادي اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_editor_mirror_image_new",
+            "value":"عكس",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_editor_rotate_ninety_degrees_new",
+            "value":"تدوير بمقدار %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"free_crop_rotate_new",
+            "value":"تدوير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name": "tip_aigc_removing",
+            "value": "جارٍ الإزالة…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_material_loading",
+            "value": "جارٍ التحميل…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_emoj_replacing",
+            "value": "جارٍ استبدال التعبير…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_draw_and_select",
+            "value": "يمكنك رسم خطًا على أي عنصر لتحديده",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_click_and_remove_all",
+            "value": "يمكنك النقر على الزر لإزالة المحتوى المحدد",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_intelligent",
+            "value": "تلقائي",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_manual",
+            "value": "يدوي",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_expand_selection",
+            "value": "يمكنك توسيع المنطقة المحددة عن طريق السحب على الشاشة",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_remove_selection",
+            "value": "يمكنك السحب لإلغاء التحديد",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_click_intelli_manual_then_edit",
+            "value": "انقر على \"تلقائي\" أو \"يدوي\" لتعديل المنطقة المحددة",
+            "attr": {
+                "priority": "translate"
+            }
+        }
+    ]
+}

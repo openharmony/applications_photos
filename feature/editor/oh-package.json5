@@ -1,9 +1,0 @@
-{
-  "name": "@ohos/editor",
-  "description": "a npm package which contains editor feature",
-  "main": "index.ts",
-  "version": "1.0.0",
-  "dependencies": {
-    "@ohos/common": "../../common"
-  }
-}

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Matrix4 from '@ohos.matrix4';
+import type Matrix4 from '@ohos.matrix4';
 
 export interface Matrix4x4 extends Matrix4.Matrix4Transit {
-  matrix4x4?: Array<number>;
+  matrix4x4?: number[];
 }

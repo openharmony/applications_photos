@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,69 +13,108 @@
  * limitations under the License.
  */
 
-import { Action, ActionBarMode, ActionBarProp, Constants, ScreenManager } from '@ohos/common';
-import { ActionBar } from '@ohos/common/CommonComponents';
-import { IS_HORIZONTAL, SelectParams } from '../utils/ThirdSelectConstants';
+import lazy { Action } from '@ohos/common/src/main/ets/default/view/browserOperation/Action';
+import lazy {
+  ActionBarColorMode,
+  ActionBarMode
+} from '@ohos/common/src/main/ets/default/view/browserOperation/ActionBarMode';
+import lazy { ActionBarProp } from '@ohos/common/src/main/ets/default/view/browserOperation/ActionBarProp';
+import lazy {
+  DiggingHoleCameraArea,
+  getScreen,
+  isOrientationHorizontal
+} from '@ohos/common/src/main/ets/default/model/common/ScreenManager';
+import lazy { SelectParams } from '@ohos/common/src/main/ets/default/model/common/SelectParams';
+import lazy { ThirdSelectActionBar } from '@ohos/common/src/main/ets/default/view/actionbar/ThirdSelectActionBar';
+import lazy { IS_HORIZONTAL } from '../utils/ThirdSelectConstants';
+import lazy { AlbumListInfo } from '@ohos/common/src/main/ets/default/model/browser/album/AlbumThirdSelectDataSource';
+import lazy { UiUtil } from '@ohos/common/src/main/ets/default/utils/UiUtil';
+import lazy { DeviceInfo } from '@ohos/common/src/main/ets/default/utils/DeviceInfo';
+import lazy { PickerCloseButton } from './PickerCloseButton';
+import lazy { ThirdSelectGridController } from './ThirdSelectPhotoGridBase';
+
+/* instrument ignore file */
+const THIRD_SELECT_PAGE_ACTION_BAR_PADDING = 4;
 
 @Component
 export struct ThirdSelectedPageActionBar {
-  @StorageLink(IS_HORIZONTAL) @Watch('createActionBar') isHorizontal: boolean = ScreenManager.getInstance()
-    .isHorizontal();
+  @StorageLink(IS_HORIZONTAL) @Watch('createActionBar') isHorizontal: boolean = isOrientationHorizontal();
   @State menuList: Action[] = [];
-  selectParams: SelectParams = SelectParams.defaultParam();
+  public selectParams: SelectParams = SelectParams.defaultParam();
   @Provide selectedCount: number = 0;
   @Link @Watch('onSelectedCountChanged') totalSelectedCount: number;
-  isSelectPhotoGrid: boolean = false;
-  onMenuClicked: Function = (): void => {};
-  leftAction: Action = Action.BACK;
+  public isSelectPhotoGrid: boolean = false;
+  private isFromPickerView: boolean = false;
+  onMenuClicked: Function = (): void => {
+  };
+  public leftAction: Action = Action.BACK;
+  public rightAction: Action = Action.PICKER_CLOSE;
   @Link @Watch('onSelectedCountChanged') title: string;
   @State actionBarProp: ActionBarProp = new ActionBarProp();
-  isFirstEnter: boolean = true;
+  public isFirstEnter: boolean = true;
   @StorageLink('statusBarHeight') statusBarHeight: number = 0;
   @Provide hidePopup: boolean = false;
+  @StorageLink('digging_hole_camera_area') diggingHoleCameraArea: DiggingHoleCameraArea = getScreen()
+    .getDiggingHoleCameraArea();
+  @State isSearchEnabled: boolean = false;
+  @State isNeedShowPrivacyMask: boolean = false;
+  @Prop privacyOptionsText: Resource | undefined = undefined;
+  private changePrivacyViewStatus: Function | undefined;
+  public albumByTypeList: AlbumListInfo[] = [];
+  public isNavTitle: boolean = false;
+  private actionBarMarginTop: number =
+    px2vp(UiUtil.getResourceNumber($r('sys.float.ohos_id_elements_margin_vertical_m')));
+  @Prop private moreMenuList: Action[] = [];
+  private pickerController: ThirdSelectGridController = new ThirdSelectGridController();
 
   aboutToAppear(): void {
     this.onSelectedCountChanged();
-    this.createActionBar();
   }
 
-  onSelectedCountChanged() {
+  onSelectedCountChanged(): void {
     this.selectedCount = this.totalSelectedCount;
-    if (this.isSelectPhotoGrid == true) {
-      if (!this.selectParams.isFromFa || this.isFirstEnter) {
-        this.menuList = [Action.NAVIGATION_ALBUMS];
-      } else {
-        this.menuList = [];
-      }
-    } else {
-      this.menuList = [];
-    }
+    this.menuList = [];
     this.createActionBar();
   }
 
   build() {
-    Column() {
-      ActionBar({
-        actionBarProp: $actionBarProp,
-        onMenuClicked: this.onMenuClicked,
-        isNeedPlaceholder: false
+    Stack({alignContent: Alignment.End}){
+      Column() {
+        ThirdSelectActionBar({
+          actionBarProp: $actionBarProp,
+          onMenuClicked: this.onMenuClicked,
+          isNeedPlaceholder: false,
+          isFromPickerView: this.isFromPickerView,
+          moreMenuList: this.moreMenuList,
+          isNeedShowPrivacyMask: this.isNeedShowPrivacyMask,
+          changePrivacyViewStatus: this.changePrivacyViewStatus,
+          privacyOptionsText: this.privacyOptionsText,
+        })
+      }
+      .margin({
+        top: this.actionBarMarginTop,
+        bottom: this.actionBarMarginTop,
       })
+      if (DeviceInfo.isPhoneOrTablet() && !this.isFromPickerView) {
+        PickerCloseButton({
+          pickerController: this.pickerController,
+          componentHeight: $r('app.float.title_default'),
+        })
+      }
     }
-    .padding({
-      top: (this.isHorizontal && !ScreenManager.getInstance().isUIExtensionEnv()) ?
-        $r('app.float.third_selected_actionbar_padding_top') :
-        (this.statusBarHeight === 0) ? $r('app.float.third_selected_actionbar_padding_top') : px2vp(this.statusBarHeight)
-    })
   }
 
   private createActionBar(): void {
     let actionBarProp: ActionBarProp = new ActionBarProp();
     actionBarProp
-      .setLeftAction(this.leftAction)
+      .setLeftAction(!this.isNavTitle ? this.leftAction : Action.NONE)
+      .setRightAction(!this.isNavTitle ? this.rightAction : Action.NONE)
       .setTitle(this.title)
+      .setIsNavTitle(this.isNavTitle)
       .setMenuList(this.menuList)
       .setMode(ActionBarMode.STANDARD_MODE)
-      .setBackgroundColor($r('sys.color.ohos_id_color_sub_background'))
+      .setColorMode(ActionBarColorMode.NORMAL)
+      .setBackgroundColor($r('sys.color.background_secondary'))
       .setMaxSelectCount(this.selectParams.maxSelectCount);
     this.actionBarProp = actionBarProp;
   }

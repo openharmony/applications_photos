@@ -1,0 +1,21 @@
+{
+  "module": {
+    "name": "editor_common",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.VIBRATE"
+      }
+    ],
+    "metadata": [
+      {
+        "name": "license_file_path",
+        "value": "/system/etc/noticeFile/PhotosHm_OpenSource.html"
+      }
+    ]
+  }
+}

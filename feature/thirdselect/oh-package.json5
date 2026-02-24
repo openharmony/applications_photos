@@ -1,10 +1,12 @@
 {
+  "devDependencies": {},
   "name": "@ohos/thirdselect",
   "description": "a npm package which contains thirdSelect feature",
   "main": "index.ets",
   "version": "1.0.0",
   "dependencies": {
-    "@ohos/browser": "../browser",
-    "@ohos/common": "../../common"
+    "@ohos/tools": "file:../../tools",
+    "@ohos/common": "file:../../common",
+    "@ohos/browsercommon": "file:../../browserCommon"
   }
 }

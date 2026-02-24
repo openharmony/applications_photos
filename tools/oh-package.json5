@@ -1,0 +1,8 @@
+{
+  "name": "@ohos/tools",
+  "version": "1.0.0",
+  "description": "ts file only.",
+  "main": "index.ets",
+  "author": "",
+  "dependencies": {}
+}

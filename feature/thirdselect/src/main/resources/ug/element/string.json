@@ -1,0 +1,95 @@
+{
+    "string":[
+        {
+            "name":"driver_license",
+            "value":"پىراۋا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"driving_license",
+            "value":"يۈرۈش كىنىشكىسى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bar_code",
+            "value":"تاياقچە كود",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_bank_card",
+            "value":"بانكا كارتىسى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"avatar",
+            "value":"باش سۈرەت",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"qr_code",
+            "value":"ئىككىلىك كود",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"id_card",
+            "value":"كىملىك",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"passport",
+            "value":"پاسپورت",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"for_you_recommend",
+            "value":"تەۋسىيە",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all",
+            "value":"بارلىق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_albums",
+            "value":"بارلىق ئالبوم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"featured_single_portrait",
+            "value":"تەۋسىيەلىك ئادەم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recommended_portrait",
+            "value":"تەۋسىيە",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

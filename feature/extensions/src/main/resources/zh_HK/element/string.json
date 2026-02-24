@@ -1,0 +1,32 @@
+{
+    "string":[
+        {
+            "name":"dialog_ban",
+            "value":"禁止",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_allow",
+            "value":"允許",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"short_term_title",
+            "value":"允許「%s」應用程式儲存圖片和影片？",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_not_allowed",
+            "value":"不允許",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

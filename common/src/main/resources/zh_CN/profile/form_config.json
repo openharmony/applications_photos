@@ -2,7 +2,6 @@
   "forms": [
     {
       "name": "widget",
-      "displayName": "$string:form_FormAbility_label",
       "description": "$string:form_FormAbility_label",
       "src": "./js/widget/pages/index/index",
       "window": {
@@ -23,7 +22,6 @@
     },
     {
       "name": "widget1",
-      "displayName": "$string:form_FormAbility_label",
       "description": "$string:form_FormAbility_label",
       "src": "./js/widget1/pages/index/index",
       "window": {
@@ -44,7 +42,6 @@
     },
     {
       "name": "widget2",
-      "displayName": "$string:form_FormAbility_label",
       "description": "$string:form_FormAbility_label",
       "src": "./js/widget2/pages/index/index",
       "window": {

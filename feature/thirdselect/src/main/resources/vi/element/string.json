@@ -1,0 +1,95 @@
+{
+    "string":[
+        {
+            "name":"picker_bank_card",
+            "value":"Thẻ ngân hàng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"avatar",
+            "value":"Ảnh hồ sơ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"qr_code",
+            "value":"Mã QR",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"id_card",
+            "value":"ID",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"passport",
+            "value":"Hộ chiếu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_albums",
+            "value":"Tất cả album",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all",
+            "value":"Tất cả",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"driver_license",
+            "value":"Giấy phép lái xe",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"driving_license",
+            "value":"Giấy chứng nhận đăng ký xe",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"featured_single_portrait",
+            "value":"Người được đề xuất",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recommended_portrait",
+            "value":"Đề xuất",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bar_code",
+            "value":"Mã vạch",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"for_you_recommend",
+            "value":"Đề xuất",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

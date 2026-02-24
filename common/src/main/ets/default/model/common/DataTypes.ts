@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,3 +17,29 @@ export interface Size {
   width: number;
   height: number;
 }
+
+export interface Region {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+export type DisplayName = Resource | string;
+
+export type Loggable = Resource | string | number | boolean | undefined | object | Object | Error | Function;
+
+export type SelfObject = Loggable;
+
+// 节点信息
+export interface PositionInfo {
+  id: string;
+  index: number;
+}
+
+// 首尾节点信息
+export interface HeadTailPosition {
+  headPosition: PositionInfo | undefined;
+  tailPosition: PositionInfo | undefined;
+}
+;

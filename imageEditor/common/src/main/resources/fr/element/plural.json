@@ -1,0 +1,42 @@
+{
+    "plural":[
+        {
+            "name":"rotate_broadcast_imageEdit",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d degré",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d degrés",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"rotate_angle_imageEdit",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Bouton Faire pivoter, l'angle actuel de la zone de texte est de %1$d degrés",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Bouton Faire pivoter, l'angle actuel de la zone de texte est de %1$d degré",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

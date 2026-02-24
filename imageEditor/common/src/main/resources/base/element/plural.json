@@ -1,0 +1,42 @@
+{
+    "plural":[
+        {
+            "name":"rotate_broadcast_imageEdit",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d degree",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d degrees",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"rotate_angle_imageEdit",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Rotate button, current angle of text box is %1$d degree",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Rotate button, current angle of text box is %1$d degrees",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}
