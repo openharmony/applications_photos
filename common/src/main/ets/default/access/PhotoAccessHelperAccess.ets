@@ -772,13 +772,24 @@ export class PhotoAccessHelperAccess {
     try {
       accessHelper = photoAccessHelper.getPhotoAccessHelper(context);
       const map: Map<number, GroupTagInfo> = new Map<number, GroupTagInfo>();
+      resultSet = await accessHelper.query(groupTagQuerySql);
       let index: number = 0;
+      while (resultSet && !resultSet.isEnded) {
+        resultSet.goToRow(index);
+        let groupTagInfo: GroupTagInfo = resultSet.getRow() as GroupTagInfo;
+        map.set(groupTagInfo.album_id, groupTagInfo);
+        index++;
+        if (index >= resultSet.rowCount) {
+          break;
+        }
+      }
       Log.info(TAG, `getGroupTagInfo count: ${map.size}, cost:${Date.now() - startTime}`);
       return map;
     } catch (error) {
       Log.error(TAG, `getGroupTagInfo, error----: ${error}`);
       return undefined;
     } finally {
+      resultSet?.close();
       accessHelper?.release();
     }
     return undefined
@@ -798,14 +809,27 @@ export class PhotoAccessHelperAccess {
     try {
       accessHelper = photoAccessHelper.getPhotoAccessHelper(context);
       const faceInfoMap: Map<number, FaceDataInterface[]> = new Map<number, FaceDataInterface[]>();
+      resultSet = await accessHelper.query(faceDataSql);
       let index: number = 0;
       // todo 替换op后报错 先这样解决
+      while (resultSet && !resultSet.isEnded) {
+        resultSet.goToRow(index);
+        let faceData: FaceDataInterface = resultSet.getRow() as FaceDataInterface;
+        let faceDataArray: FaceDataInterface[] = faceInfoMap.get(faceData.file_id) ?? [];
+        faceDataArray.push(faceData);
+        faceInfoMap.set(faceData.file_id, faceDataArray);
+        index++;
+        if (index >= resultSet.rowCount) {
+          break;
+        }
+      }
       Log.info(TAG, `getPortraitInfos analysisFacesData count: ${faceInfoMap.size}, cost:${Date.now() - startTime}`);
       return faceInfoMap;
     } catch (error) {
       Log.error(TAG, `Failed to get albums from portrait album view, error----: ${error}`);
       return undefined;
     } finally {
+      resultSet?.close();
       accessHelper?.release();
     }
     return undefined

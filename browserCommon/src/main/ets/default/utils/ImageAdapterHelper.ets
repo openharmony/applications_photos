@@ -147,6 +147,11 @@ export class ImageAdapterHelper {
     Log.info(TAG, `onPixelmapReAdapt contrastEnhancer.setDetailImage pixelmapArea:${JSON.stringify(pixelmapArea)
     } displayArea:${JSON.stringify(displayArea)} position: ${photoItemCacheType.mPosition}`);
 
+    contrastEnhancer.setDetailImage(photoItemCacheType.pixelmap, photoItemCacheType.mPosition, pixelmapArea,
+      displayArea, { width: photoItemCacheType.width, height: photoItemCacheType.height },
+      photoItemCacheType.isGestureMove || photoItemCacheType.isRunningAnimation,
+      photoItemCacheType.maxScale * (photoItemCacheType?.firstLookRatio ?? 1),
+      photoItemCacheType?.duration ?? 0, (mat[0] ?? 1) * (photoItemCacheType?.firstLookRatio ?? 1));
   }
 
   public onLCDReAdapt(photoItemCacheType: photoItemCacheType): void {
@@ -158,6 +163,8 @@ export class ImageAdapterHelper {
     }
     Log.info(TAG, `onLCDReAdapt: start`);
     let contrastEnhancer = this.getContrastEnhancer();
+    contrastEnhancer.setLcdImage(photoItemCacheType.pixelmap, photoItemCacheType.mPosition,
+      photoItemCacheType.firstLookRatio);
   }
 
 

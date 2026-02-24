@@ -120,6 +120,8 @@ export type AlbumChangeData = photoAccessHelper.AlbumChangeData;
 
 export type PhotoAlbum = photoAccessHelper.Album;
 
+export type FileAssetInfo = photoAccessHelper.FileAssetInfo;
+
 export type MovingPhoto = photoAccessHelper.MovingPhoto;
 
 export type FetchAlbumResult = photoAccessHelper.FetchResult<PhotoAlbum>;
@@ -708,6 +710,10 @@ export class UserFileManagerAccess {
   // 是否正在基于ready机制批量生成缩略图
   public isInReadyProcess(): boolean {
     return this.isProcessingReady;
+  }
+
+  public getFileAssetsInfo(fetchOptions: FetchOptions): FileAssetInfo[] {
+    return this.photoAccessHelper?.getFileAssetsInfo(fetchOptions) ?? [];
   }
 
   public getAllFetchColumns(): string[] {
@@ -3027,8 +3033,7 @@ export class UserFileManagerAccess {
     try {
       let fetchOpt = AlbumDefine.getAlbumFetchOptByUri(albumUri);
       // Waiting: 支持不传入type时删掉
-      fetchResult = await this.photoAccessHelper.getAlbums(Constants.SOURCE_QUERY_TYPE,
-        Constants.SOURCE_QUERY_SUB_TYPE,fetchOpt);
+      fetchResult = await this.photoAccessHelper.getAlbums(fetchOpt);
       if (!fetchResult) {
         Log.warn(TAG, 'getAlbumByUri return null');
         return undefined;
@@ -3069,8 +3074,7 @@ export class UserFileManagerAccess {
         predicates: predicates,
         fetchColumns: [],
       };
-      fetchResult = await helper.getAlbums(Constants.SOURCE_QUERY_TYPE,
-        Constants.SOURCE_QUERY_SUB_TYPE,fetchOpt);
+      fetchResult = await helper.getAlbums(fetchOpt);
       if (!fetchResult) {
         Log.warn(TAG, 'getAlbum return null');
         return undefined;
@@ -3139,8 +3143,7 @@ export class UserFileManagerAccess {
     }
     let fetchResult: photoAccessHelper.FetchResult<PhotoAlbum> | undefined = undefined;
     try {
-      fetchResult = await this.photoAccessHelper.getAlbums(Constants.SOURCE_QUERY_TYPE,
-        Constants.SOURCE_QUERY_SUB_TYPE,fetchOption);
+      fetchResult = await this.photoAccessHelper.getAlbums(fetchOption);
       if (!fetchResult) {
         Log.warn(TAG, 'getAlbums return null');
         return [];
@@ -4460,8 +4463,7 @@ export class UserFileManagerAccess {
         predicates: predicates,
         fetchColumns: [],
       };
-      fetchResult = await this.photoAccessHelper?.getAlbums(Constants.SOURCE_QUERY_TYPE,
-        Constants.SOURCE_QUERY_SUB_TYPE,fetchOpt);
+      fetchResult = await this.photoAccessHelper?.getAlbums(fetchOpt);
       if (!fetchResult) {
         Log.warn(TAG, 'return null');
         return undefined;
@@ -4513,8 +4515,7 @@ export class UserFileManagerAccess {
         predicates: predicates,
         fetchColumns: [photoAccessHelper.AlbumKeys.UPLOAD_STATUS],
       };
-      fetchResult = await helper.getAlbums(Constants.SOURCE_QUERY_TYPE,
-        Constants.SOURCE_QUERY_SUB_TYPE,fetchOpt);
+      fetchResult = await helper.getAlbums(fetchOpt);
       if (!fetchResult) {
         Log.warn(TAG, 'return null');
         return countNum;
@@ -4526,6 +4527,10 @@ export class UserFileManagerAccess {
       let albums: PhotoAlbum[] = await fetchResult.getAllObjects();
       albums.forEach(album => {
         Log.info(TAG, "check " + album?.albumName + "updateStatus : " + album?.uploadStatus)
+        uploadStatusMap.set(JSON.stringify(album.albumUri), album?.uploadStatus === Constants.ONE)
+        if (album?.uploadStatus === Constants.ONE) {
+          countNum++;
+        }
       })
       Log.info(TAG, `countNum : ${countNum}`);
     } catch (err) {

@@ -103,8 +103,7 @@ export class AssetFetchProcessor extends RequestProcessor<Thumbnail> {
       if (isHiddenAlbum) {
         albumFetchResult = await userFileMgr.getHiddenAlbums(photoAccessHelper.HiddenPhotosDisplayMode.ASSETS_MODE);
       } else {
-        albumFetchResult = await userFileMgr.getAlbums(Constants.SOURCE_QUERY_TYPE,
-          Constants.SOURCE_QUERY_SUB_TYPE,fetchOptions);
+        albumFetchResult = await userFileMgr.getAlbums(fetchOptions);
       }
       if (!albumFetchResult || albumFetchResult.getCount() <= 0) {
         Log.warn(TAG, `failed to getAlbumByUri: ${context.request.albumUri}`);

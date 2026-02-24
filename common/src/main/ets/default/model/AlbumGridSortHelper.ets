@@ -280,6 +280,6 @@ export class AlbumGridSortHelper {
   }
 
   public static getAlbumKeyByPhotoAlbum(album: SendablePhotoAlbum | PhotoAlbum | undefined): string {
-    return album?.albumSubtype + '';
+    return album?.albumSubtype + (album?.lpath ?? '');
   }
 }
