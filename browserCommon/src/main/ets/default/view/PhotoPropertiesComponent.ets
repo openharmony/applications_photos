@@ -422,8 +422,8 @@ export struct PhotoPropertiesComponent {
       predicates: predicates,
       fetchColumns: [],
     };
-    let result = cameraAlbum.getAssetsSync(systemFetchOption);
-    if (result.length === 0) {
+    let result = cameraAlbum.getAssets(systemFetchOption);
+    if (!result) {
       Log.warn(TAG, 'asset not from camera');
       return;
     }

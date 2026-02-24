@@ -353,7 +353,6 @@ export class MoveMenuOperation extends ProcessMenuOperation {
         Log.info(TAG, 'moveFilesToAlbum is cancelled after getAssets, return');
         return;
       }
-      let repeatPhotoAlbumResult: PhotoAsset[] = album?.getAssetsSync(fetchOptions) ?? [];
       /* instrument ignore if */
       if (!album) {
         Log.error(TAG, 'album is null');
@@ -379,19 +378,6 @@ export class MoveMenuOperation extends ProcessMenuOperation {
         return;
       }
       if (isMoveFilesDirectly) {
-        // 直接移动文件，场景如：1、相机进大图，更多按钮弹窗中的移动到按钮，点击移动到其他相册
-        if (!repeatPhotoAlbumResult || repeatPhotoAlbumResult.length === 0) {
-          await this.moveFile(sourceAssets, originalAlbum, album, startTime);
-          if (this.isCancelled) {
-            Log.info(TAG, 'moveFilesToAlbum is cancelled after moveFile, return');
-            TraceControllerUtils.finishTraceWithTaskId('moveFilesToAlbum', startTime);
-            return;
-          }
-          TraceControllerUtils.finishTraceWithTaskId('moveFilesToAlbum', startTime);
-          this.onCompleted();
-        } else {
-          await this.handelAssets(sourceAssets, repeatPhotoAlbumResult, originalAlbum, album, startTime);
-        }
       } else {
         // 照片页源相册划分
         let originalAlbumMap: HashMap<string, PhotoAsset[]> = new HashMap();
@@ -415,7 +401,6 @@ export class MoveMenuOperation extends ProcessMenuOperation {
             originalAlbumMap.get(originalAlbumUri).push(source);
           }
         }
-        await this.handelAllAssets(repeatPhotoAlbumResult, album, originalAlbumMap, startTime);
       }
     } catch (err) {
       /* instrument ignore next */

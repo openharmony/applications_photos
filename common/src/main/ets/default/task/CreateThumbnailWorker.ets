@@ -102,7 +102,6 @@ async function startCreateThumbnailTaskAsync(
       clearInterval(readyTimerId);
       readyTimerId = 0;
 
-      photoHelper.stopCreateThumbnailTask(readyRequestId);
       readyRequestId = 0;
       isProcessingReady = false;
       clearInterval(readyTimerId);
@@ -118,10 +117,6 @@ async function startCreateThumbnailTaskAsync(
     let predicates: dataSharePredicates.DataSharePredicates = new dataSharePredicates.DataSharePredicates();
     Log.debug(TAG, `startCreateThumbnailTask order by ${orderDesc}`)
     predicates.orderByDesc(orderDesc);
-    readyRequestId = photoHelper.startCreateThumbnailTask(predicates, () => {
-      Log.info(TAG, 'startCreateThumbnailTask callback');
-      resetReadyRequestId();
-    });
     Log.info(TAG, `startCreateThumbnailTaskAsync requestId: ${readyRequestId}`);
   }, START_CREATE_THUMBNAIL_TASK_DURATION);
   isProcessingReady = true;
@@ -147,7 +142,6 @@ function stopCreateThumbnailTaskAsync(context: CommonContext): void {
   clearInterval(readyTimerId);
   readyTimerId = 0;
   Log.info(TAG, `stopCreateThumbnailTaskAsync requestId: ${readyRequestId}`);
-  photoHelper.stopCreateThumbnailTask(readyRequestId);
   readyRequestId = 0;
   isProcessingReady = false;
   workerPort.postMessage({ isProcessingReady: isProcessingReady });

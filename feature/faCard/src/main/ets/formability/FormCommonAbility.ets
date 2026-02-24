@@ -206,7 +206,6 @@ export default class FormCommonAbility extends FormExtensionAbility {
       try {
         const publishedFormInfo: formInfo.FormInfo = await formProvider.getPublishedFormInfoById(formId);
         Log.info(TAG, `publishForm ${formId} publishedFormInfo = ${JSON.stringify(publishedFormInfo)}`);
-        formDimension = publishedFormInfo.dimension ?? -1;
       } catch (err) {
         Log.error(TAG, `publishForm catch ${err.message}`);
       }
@@ -226,10 +225,6 @@ export default class FormCommonAbility extends FormExtensionAbility {
     try {
       Log.info(TAG, `getPublishedFormCount begin`);
       const formInfos: formInfo.FormInfo[] = await formProvider.getPublishedFormInfos();
-      const publishedFormInfos = formInfos.filter(formInfo => this.isPublished(formInfo?.formLocation));
-      Log.info(TAG, `getPublishedFormCount end, total: ${formInfos.length}, published: ${publishedFormInfos.length}`);
-
-      publishedFormCount = publishedFormInfos.length;
     } catch (err) {
       Log.error(TAG, `getPublishedFormInfos catch ${err.message}`);
     }

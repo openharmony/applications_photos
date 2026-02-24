@@ -809,20 +809,6 @@ export class BaseEditor extends IEditor {
         predicates: predicate,
       };
       phAccessHelper = photoAccessHelper.getPhotoAccessHelper(getContext(this));
-      let photoAssets = phAccessHelper.getAssetsSync(fetchOptions);
-      let result = photoAssets[0];
-      this.sealEnable = result.get(photoAccessHelper.PhotoKeys.SUPPORTED_WATERMARK_TYPE);
-      HiLog.i(TAG, `queryMediaProperties  sealEnable: ${this.sealEnable}`);
-      let shootingMode: string | undefined = result.get('shooting_mode_tag')?.toString();
-      let dateDay: photoAccessHelper.MemberType = result.get(photoAccessHelper.PhotoKeys.DATE_DAY) ?? 0;
-      this.isImageFullQuality = (result.get('photo_quality') as number) === 0;
-      this.isBurstImage = (result.get(photoAccessHelper.PhotoKeys.BURST_KEY)?.toString() || '') !== '';
-      this.isSupportApertureEdit = [ShootingModeType.PORTRAIT_ALBUM, ShootingModeType.WIDE_APERTURE_ALBUM].
-                                   includes(shootingMode as ShootingModeType) && (this.isImageFullQuality) &&
-                                   dateDay > APERTURE_ALLOW_DAY;
-      HiLog.i(TAG, `queryMediaProperties shootingDate ${dateDay}, allowAperture data: ${APERTURE_ALLOW_DAY}`);
-      HiLog.i(TAG, `queryMediaProperties , this.isImageFullQuality: ${this.isImageFullQuality},
-          pre check isSupportAperture:${this.isSupportApertureEdit}，isBurstImage:${this.isBurstImage}`);
     } catch (err) {
       this.isSupportApertureEdit = false;
       HiLog.e(TAG, `query media properties failed, err: ${err}, code: ${err?.code}`);
