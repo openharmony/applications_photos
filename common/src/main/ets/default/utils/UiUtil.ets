@@ -950,9 +950,8 @@ export class UiUtil {
       }
       Log.info(TAG, `vibrate effectId param: ${vibrateParam}`);
       vibrator.startVibration({
-        type: 'preset',
-        effectId: vibrateParam,
-        count: 1,
+        type: 'time',
+        duration: 100,
       }, {
         id: 0,
         usage: 'touch',

@@ -1056,6 +1056,24 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
       this.mediaOperation(displayName, albumUri, completedFunc));
     broadCast.on(BrowserConstants.BROWSER_FULL_SHOW,
       (isBrowserFullShow: boolean) => this.browserFullShow(isBrowserFullShow));
+    // 监听PC端大图菜单移动图片到相册的广播
+    this.appBroadCast.on(BroadCastConstants.PC_MEDIA_OPERATION_BROWSER, 
+      (...args: ESObject[]): void => {
+        Log.info(TAG, `BasePhotoBrowserController PC_MEDIA_OPERATION_BROWSER received, args count: ${args.length}, args: ${JSON.stringify(args)}`);
+        if (args.length < 3) {
+          Log.error(TAG, `PC_MEDIA_OPERATION_BROWSER invalid params count: ${args.length}, args: ${JSON.stringify(args)}`);
+          return;
+        }
+        const operationType: string = args[0] as string;
+        const albumName: string = args[1] as string;
+        const albumUri: string = args[2] as string;
+        Log.info(TAG, `BasePhotoBrowserController PC_MEDIA_OPERATION_BROWSER pageType: ${operationType}, albumName: ${albumName}, albumUri: ${albumUri}`);
+        if (!operationType || !albumName || !albumUri) {
+          Log.error(TAG, `PC_MEDIA_OPERATION_BROWSER invalid params: operationType=${operationType}, albumName=${albumName}, albumUri=${albumUri}`);
+          return;
+        }
+        this.mediaOperationBack(operationType, albumName, albumUri);
+      });
     this.appBroadCast.on(BroadCastConstants.MENU_ACTION_FROM_PHOTO_CAMERA, this.dealMenuClickFunc);
     this.appBroadCast.on(BroadCastConstants.PHOTO_BROWSER_BACK_PRESS_EVENT, this.onPhotoBrowserBackPressEventFunc);
     this.appBroadCast.on(BroadCastConstants.INIT_VIDEO_PLAY_CONTROLLER, this.initVideoPlayFunc);
@@ -1241,6 +1259,7 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
    */
   public unregisterBroadCast(broadCast?: BroadCast): void {
     Log.info(TAG, '[unregisterBroadCast] start');
+    this.appBroadCast.off(BroadCastConstants.PC_MEDIA_OPERATION_BROWSER, undefined);
     this.appBroadCast.off(BroadCastConstants.PHOTO_BROWSER_BACK_PRESS_EVENT, this.onPhotoBrowserBackPressEventFunc);
     this.appBroadCast.off(BroadCastConstants.INIT_VIDEO_PLAY_CONTROLLER, this.initVideoPlayFunc);
     this.appBroadCast.off(BroadCastConstants.ROUTE_TO_SETTINGS_PAGE, this.routeToSettingsPageFunc);

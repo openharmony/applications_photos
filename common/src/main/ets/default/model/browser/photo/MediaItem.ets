@@ -55,7 +55,7 @@ interface BurstKey {
 // 逐帧播放取帧公式系数
 const CON1: number = 2.8958;
 const CON2: number = 0.5016;
-// 逐帧播放xxx最小抽帧个数
+// 逐帧播放展开态最小抽帧个数
 const MIN_FRAME_NUM: number = 3;
 
 export const isPhotoAsset =

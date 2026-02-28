@@ -255,7 +255,7 @@ export struct ActionBarButton {
   private isThirdSelectPhoto?: boolean = false;
   private isFromCollage?: boolean = false;
   private isFromImmersiveCompared?: boolean = false;
-  private isFromPhotoBrowser?: boolean = false;
+  @Prop isFromPhotoBrowser?: boolean = false;
   private isFromRealTime: boolean = false;
   private isSearchResultPage: boolean = false;
   private isFromPhotoGrid: boolean = false;
@@ -548,12 +548,15 @@ export struct ActionBarButton {
         .contentFont({ weight: 'medium' })
         .menuItemCommArr()
         .onClick((): void => {
-          Log.info(TAG, `buildAlbumMenu click: ${albumInfo?.albumName}`);
+          Log.info(TAG, `buildAlbumMenu click: ${albumInfo?.albumName}, isFromPhotoBrowser: ${this.isFromPhotoBrowser}`);
           if (this.isFromPhotoBrowser) {
+            Log.info(TAG, `emit PC_MEDIA_OPERATION_BROWSER, albumName: ${albumInfo.albumName}, albumUri: ${albumInfo.uri}, appBroadCast instance: ${this.appBroadCast}`);
             this.appBroadCast
               .emit(BroadCastConstants.PC_MEDIA_OPERATION_BROWSER,
                 [MediaOperationType.MOVE, albumInfo.albumName, albumInfo.uri]);
+            Log.info(TAG, `PC_MEDIA_OPERATION_BROWSER emitted`);
           } else {
+            Log.info(TAG, `emit PC_MEDIA_OPERATION, albumName: ${albumInfo.albumName}, albumUri: ${albumInfo.uri}`);
             this.appBroadCast
               .emit(BroadCastConstants.PC_MEDIA_OPERATION,
                 [MediaOperationType.MOVE, albumInfo.albumName, albumInfo.uri]);

@@ -122,45 +122,6 @@ export class AlbumDefine {
       photoAccessHelper.PhotoViewMIMETypes.MOVING_PHOTO_IMAGE_TYPE);
     AlbumDefine.filterQueryTypeMap.set(photoAccessHelper.PhotoViewMIMETypes.MOVING_PHOTO_IMAGE_TYPE, QueryType.SUBTYPE);
 
-    AlbumDefine.filterMediaTypeMap.set(AlbumDefine.FILTER_MEDIA_TYPE_IMAGE_JPEG,
-      photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE);
-    AlbumDefine.filterQueryTypeMap.set(photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE, QueryType.MIME_TYPE);
-
-    AlbumDefine.filterMediaTypeMap.set(AlbumDefine.FILTER_MEDIA_TYPE_IMAGE_GIF,
-      photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE);
-    AlbumDefine.filterQueryTypeMap.set(photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE, QueryType.MIME_TYPE);
-
-    AlbumDefine.filterMediaTypeMap.set(AlbumDefine.FILTER_MEDIA_TYPE_IMAGE_PNG,
-      photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE);
-    AlbumDefine.filterQueryTypeMap.set(photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE, QueryType.MIME_TYPE);
-
-    AlbumDefine.filterMediaTypeMap.set(AlbumDefine.FILTER_MEDIA_TYPE_IMAGE_HEIC,
-      photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE);
-    AlbumDefine.filterQueryTypeMap.set(photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE, QueryType.MIME_TYPE);
-
-    AlbumDefine.filterMediaTypeMap.set(AlbumDefine.FILTER_MEDIA_TYPE_IMAGE_HEIF,
-      photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE);
-    AlbumDefine.filterQueryTypeMap.set(photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE, QueryType.MIME_TYPE);
-
-    AlbumDefine.filterMediaTypeMap.set(AlbumDefine.FILTER_MEDIA_TYPE_IMAGE_BMP,
-      photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE);
-    AlbumDefine.filterQueryTypeMap.set(photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE, QueryType.MIME_TYPE);
-
-    AlbumDefine.filterMediaTypeMap.set(AlbumDefine.FILTER_MEDIA_TYPE_IMAGE_WEBP,
-      photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE);
-    AlbumDefine.filterQueryTypeMap.set(photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE, QueryType.MIME_TYPE);
-
-    AlbumDefine.filterMediaTypeMap.set(AlbumDefine.FILTER_MEDIA_TYPE_IMAGE_AVIF,
-      photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE);
-    AlbumDefine.filterQueryTypeMap.set(photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE, QueryType.MIME_TYPE);
-
-    AlbumDefine.filterMediaTypeMap.set(AlbumDefine.FILTER_MEDIA_TYPE_VIDEO_MP4,
-      photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE);
-    AlbumDefine.filterQueryTypeMap.set(photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE, QueryType.MIME_TYPE);
-
-    AlbumDefine.filterMediaTypeMap.set(AlbumDefine.FILTER_MEDIA_TYPE_VIDEO_MOV,
-      photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE);
-    AlbumDefine.filterQueryTypeMap.set(photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE, QueryType.MIME_TYPE);
   }
 
   //params: LOWER_CASE  获取最终的自定义upper case string

@@ -714,46 +714,51 @@ export struct ActionBar {
 
   @Builder
   TopModeBuilder() {
-    if (!this.actionBarProp.getLeftAction().equals(Action.NONE) && DeviceInfo.isPc()) {
-      Row() {
-        this.LeftMenus();
-      }
-      .onAreaChange((oldValue: Area, newValue: Area) => {
-        Log.info(TAG, 'TopModeBuilder, onAreaChange');
-        if (!DeviceInfo.isPc()) {
-          return;
+    Row(){
+      if (!this.actionBarProp.getLeftAction().equals(Action.NONE) && DeviceInfo.isPc()) {
+        Row() {
+          this.LeftMenus();
         }
-        this.leftButtonWidth = newValue.width as number;
-      })
-    }
-    if (this.actionBarProp.getIsShowPhotoDate() && !this.notShowDate) {
-      Stack({ alignContent: Alignment.Start }) {
-        DetailTitle()
-          .onAreaChange((oldValue: Area, newValue: Area) => {
-            Log.info(TAG, 'DetailTitle, onAreaChange');
-            if (!DeviceInfo.isPc()) {
-              return;
-            }
-            this.titleWidth = newValue.width as number;
-          })
+        .onAreaChange((oldValue: Area, newValue: Area) => {
+          Log.info(TAG, 'TopModeBuilder, onAreaChange');
+          if (!DeviceInfo.isPc()) {
+            return;
+          }
+          this.leftButtonWidth = newValue.width as number;
+        })
       }
-      .flexGrow(DEFAULT_FLEX_GROW)
-      .opacity(this.detailTitleOpacity)
+      if (this.actionBarProp.getIsShowPhotoDate() && !this.notShowDate) {
+        Row() {
+          Stack({ alignContent: Alignment.Start }) {
+            DetailTitle()
+              .onAreaChange((oldValue: Area, newValue: Area) => {
+                Log.info(TAG, 'DetailTitle, onAreaChange');
+                if (!DeviceInfo.isPc()) {
+                  return;
+                }
+                this.titleWidth = newValue.width as number;
+              })
+          }
+          .flexGrow(DEFAULT_FLEX_GROW)
+          .opacity(this.detailTitleOpacity)
 
-      DetailMenuPanel({
-        menuList: this.actionBarProp.getMenuList(),
-        flexibleMenuList: this.actionBarProp.getFlexibleMenuList(),
-        actionBarProp: this.actionBarProp,
-        onMenuClicked: this.onMenuClicked,
-        moreMenuList: this.moreMenuList,
-        moreMenuListPC: this.moreMenuListPC,
-        triggerValue: this.getTriggerValue(),
-        showMovingPhotoCloseEffect: this.showMovingPhotoCloseEffect,
-        movingPhotoEffectMode: this.movingPhotoEffectMode,
-        isFromPhotoBrowser: this.isFromPhotoBrowser,
-      })
-        .flexShrink(0)
-        .opacity(this.detailMenuPanelOpacity)
+          DetailMenuPanel({
+            menuList: this.actionBarProp.getMenuList(),
+            flexibleMenuList: this.actionBarProp.getFlexibleMenuList(),
+            actionBarProp: this.actionBarProp,
+            onMenuClicked: this.onMenuClicked,
+            moreMenuList: this.moreMenuList,
+            moreMenuListPC: this.moreMenuListPC,
+            triggerValue: this.getTriggerValue(),
+            showMovingPhotoCloseEffect: this.showMovingPhotoCloseEffect,
+            movingPhotoEffectMode: this.movingPhotoEffectMode,
+            isFromPhotoBrowser: this.isFromPhotoBrowser,
+          })
+            .flexShrink(0)
+            .opacity(this.detailMenuPanelOpacity)
+        }.justifyContent(FlexAlign.SpaceEvenly)
+        .width('90%')
+      }
     }
   }
 
@@ -807,7 +812,6 @@ export struct ActionBar {
         .width(DeviceInfo.isPc() ? SELECTION_MODE_SIZE_PC : SELECTION_MODE_SIZE)
         .height(DeviceInfo.isPc() ? SELECTION_MODE_SIZE_PC : SELECTION_MODE_SIZE)
       }
-
       if (this.needToAddLeftMenus()) {
         this.LeftMenus();
       }
@@ -839,11 +843,11 @@ export struct ActionBar {
     })
     .zIndex(DEFAULT_ACTION_BAR_Z_INDEX)
     .backgroundColor(Color.Transparent)
-    .margin({
-      left: DeviceInfo.isTv() ? 0 : this.getMarginLeft(),
-      right: DeviceInfo.isTv() ? 0 : this.getMarginRight(),
-      top: DeviceInfo.isTv() ? $r('app.float.tv_Grid_top_padding') : 0,
-    })
+    // .margin({
+    //   left: DeviceInfo.isTv() ? 0 : this.getMarginLeft(),
+    //   // right: DeviceInfo.isTv() ? 0 : this.getMarginRight(),
+    //   // top: DeviceInfo.isTv() ? $r('app.float.tv_Grid_top_padding') : 0,
+    // })
     .height(this.getActionBarHeight())
     .clip(this.isAlbumSetPageActionBar)
     .gesture(

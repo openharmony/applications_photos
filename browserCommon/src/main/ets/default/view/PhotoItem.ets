@@ -174,7 +174,7 @@ const distanceThreshold: number = 5;
 const ANONYMIZATION_COUNT: number = 9;
 
 /**
- * xxxxxx信息详情比例
+ * 折叠屏展开态信息详情比例
  */
 const FOLD_EXPANDED_PERCENTAGE: number = 0.5;
 
@@ -1599,17 +1599,17 @@ export struct PhotoItem {
     }
   }
 
-  // xxx监听
+  // 半折态监听
   /* instrument ignore next */
   @StorageLink('isHalfFold') @Watch('startHalfFoldAnimation') isHalfFold: boolean = DeviceInfo.isHalfFoldState();
   /**
-   * xxximage上移比例
+   * 半折状态image上移比例
    */
   /* instrument ignore next */
   @State private translateY: number | string =
     this.isHalfFold && !this.isHorizontal ? Constants.PERCENT_NEGATIVE_50 : '0%';
   /**
-   * xxximage大小
+   * 半折状态image大小
    */
   /* instrument ignore next */
   @State private theImageHeight: Length = this.isHalfFold && !this.isHorizontal ? Constants.PERCENT_50 : '100%';
@@ -4793,7 +4793,7 @@ export struct PhotoItem {
     )
   }
 
-  // xxxxxx获取xxx竖屏宽度
+  // 折叠屏展开态获取折叠态竖屏宽度
   /* instrument ignore next */
   getUnFolderVerticalDeviceWidth(): number {
     let data: display.FoldCreaseRegion = display.getCurrentFoldCreaseRegion();
@@ -6602,7 +6602,7 @@ export struct PhotoItem {
   }
 
   /*
-   * phone模式,xxxxxx，横屏卡片300，竖屏自适应计算，方式变更，横竖屏切换时需重置相关变量
+   * phone模式,折叠屏非展开状态，横屏卡片300，竖屏自适应计算，方式变更，横竖屏切换时需重置相关变量
    */
   updateRatioOffset(): void {
     if ((DeviceInfo.isPhoneUx() && !FoldUtil.isTriExpand(this.curFoldStatus)) &&

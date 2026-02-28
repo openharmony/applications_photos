@@ -349,6 +349,38 @@ export struct PhotoBrowserComponent {
   private onDataReloadWithEditFunc: Function = (): void => this.onDataReloadWithEdit();
   private doMediaOperationFunc: Function = (displayName: string, albumUri: string, completedFunc?: Function):
     Promise<void> => this.doMediaOperation(displayName, albumUri, completedFunc);
+  private doPcMediaOperationBrowserFunc: Function = 
+    (...args: ESObject[]): Promise<void> => {
+      Log.info(TAG, `doPcMediaOperationBrowserFunc called, args count: ${args.length}, args: ${JSON.stringify(args)}`);
+      if (args.length < 3) {
+        Log.error(TAG, `doPcMediaOperationBrowserFunc invalid params count: ${args.length}, args: ${JSON.stringify(args)}`);
+        return Promise.resolve();
+      }
+      const operationType: string = args[0] as string;
+      const albumName: string = args[1] as string;
+      const albumUri: string = args[2] as string;
+      if (!operationType || !albumName || !albumUri) {
+        Log.error(TAG, `doPcMediaOperationBrowserFunc invalid params: operationType=${operationType}, albumName=${albumName}, albumUri=${albumUri}`);
+        return Promise.resolve();
+      }
+      return this.doPcMediaOperationBrowser([operationType, albumName, albumUri]);
+    };
+  private doPcMediaOperationFunc: Function = 
+    (...args: ESObject[]): Promise<void> => {
+      Log.info(TAG, `doPcMediaOperationFunc called, args count: ${args.length}, args: ${JSON.stringify(args)}`);
+      if (args.length < 3) {
+        Log.error(TAG, `doPcMediaOperationFunc invalid params count: ${args.length}, args: ${JSON.stringify(args)}`);
+        return Promise.resolve();
+      }
+      const operationType: string = args[0] as string;
+      const albumName: string = args[1] as string;
+      const albumUri: string = args[2] as string;
+      if (!operationType || !albumName || !albumUri) {
+        Log.error(TAG, `doPcMediaOperationFunc invalid params: operationType=${operationType}, albumName=${albumName}, albumUri=${albumUri}`);
+        return Promise.resolve();
+      }
+      return this.doPcMediaOperation([operationType, albumName, albumUri]);
+    };
   private slideShowChangeIndexFunc: Function = (index: number): void => this.slideShowChangeIndex(index);
   private routeToSettingsPageFunc: Function = (componentId: string): void => this.routeToSettingsPage(componentId);
   private showBarsFunc: Function = (backgroundColorResource?: Resource):
@@ -2148,6 +2180,8 @@ export struct PhotoBrowserComponent {
     this.broadCast.off(BroadCastConstants.ON_DATA_RELOADED_WITH_EDIT, this.onDataReloadWithEditFunc);
     this.broadCast.off(BroadCastConstants.SLIDESHOW_CHANGE_INDEX, this.slideShowChangeIndexFunc);
     this.broadCast.off(BroadCastConstants.MEDIA_OPERATION, this.doMediaOperationFunc);
+    this.appBroadCast.off(BroadCastConstants.PC_MEDIA_OPERATION_BROWSER, this.doPcMediaOperationBrowserFunc);
+    this.appBroadCast.off(BroadCastConstants.PC_MEDIA_OPERATION, this.doPcMediaOperationFunc);
 
     this.appBroadCast.off(BroadCastConstants.PHOTO_BROWSER_BACK_PRESS_EVENT, this.onPhotoBrowserBackPressEventFunc);
     this.navigationBroadCast.off(NavigationConstants.NAVIGATION_DESTINATION_MEDIA_OPERATION_BACK,
@@ -2323,6 +2357,10 @@ export struct PhotoBrowserComponent {
     this.broadCast.on(BroadCastConstants.ON_DATA_RELOADED_WITH_EDIT, this.onDataReloadWithEditFunc);
     this.broadCast.on(BroadCastConstants.MEDIA_OPERATION, this.doMediaOperationFunc);
     this.broadCast.on(BroadCastConstants.SLIDESHOW_CHANGE_INDEX, this.slideShowChangeIndexFunc);
+    Log.info(TAG, 'register PC_MEDIA_OPERATION_BROWSER and PC_MEDIA_OPERATION listeners');
+    this.appBroadCast.on(BroadCastConstants.PC_MEDIA_OPERATION_BROWSER, this.doPcMediaOperationBrowserFunc);
+    this.appBroadCast.on(BroadCastConstants.PC_MEDIA_OPERATION, this.doPcMediaOperationFunc);
+    Log.info(TAG, `PC_MEDIA_OPERATION_BROWSER listener registered, appBroadCast instance: ${this.appBroadCast}`);
     this.appBroadCast.on(BroadCastConstants.PHOTO_BROWSER_BACK_PRESS_EVENT, this.onPhotoBrowserBackPressEventFunc);
     this.appBroadCast.on(BroadCastConstants.UPDATE_MENU_BEFORE_PLAY_VIDEO, this.updateMenuBeforePlayFunc);
     this.appBroadCast.on(BroadCastConstants.VIDEO_PLAY_COMPLETED, this.videoPlayCompletedFunc);
@@ -3232,6 +3270,35 @@ export struct PhotoBrowserComponent {
     } catch (e) {
       Log.error(TAG, `ON_DATA_RELOADED_WITH_EDIT error ${e}`);
     }
+  }
+
+  private async doPcMediaOperationBrowser(params: string[]): Promise<void> {
+    Log.info(TAG, `doPcMediaOperationBrowser received, params: ${JSON.stringify(params)}`);
+    if (!params || params.length < 3) {
+      Log.error(TAG, `doPcMediaOperationBrowser invalid params, length: ${params?.length}`);
+      return;
+    }
+    const operationType: string = params[0];
+    const albumName: string = params[1];
+    const albumUri: string = params[2];
+    Log.info(TAG, `doPcMediaOperationBrowser operationType: ${operationType}, albumName: ${albumName}, albumUri: ${albumUri}`);
+    this.pageType = operationType;
+    await this.doMediaOperation(albumName, albumUri);
+  }
+
+  private async doPcMediaOperation(params: string[]): Promise<void> {
+    Log.info(TAG, `doPcMediaOperation received, params: ${JSON.stringify(params)}`);
+    if (!params || params.length < 3) {
+      Log.error(TAG, `doPcMediaOperation invalid params, length: ${params?.length}`);
+      return;
+    }
+    const operationType: string = params[0];
+    const albumName: string = params[1];
+    const albumUri: string = params[2];
+    Log.info(TAG, `doPcMediaOperation operationType: ${operationType}, albumName: ${albumName}, albumUri: ${albumUri}`);
+    // 如果是大图浏览器场景，也处理PC_MEDIA_OPERATION广播
+    this.pageType = operationType;
+    await this.doMediaOperation(albumName, albumUri);
   }
 
   private async doMediaOperation(displayName: string, albumUri: string, completedFunc?: Function): Promise<void> {

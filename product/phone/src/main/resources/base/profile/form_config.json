@@ -19,7 +19,9 @@
       "formConfigAbility": "ability://com.ohos.photos.MainAbility",
       "defaultDimension": "2*4",
       "supportDimensions": [
-        "2*4"
+        "2*4",
+        "2*2",
+        "4*4"
       ],
       "metadata": [
         {
