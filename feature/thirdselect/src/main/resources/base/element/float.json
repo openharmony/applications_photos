@@ -1,31 +1,7 @@
 {
-  "float": [
+  "float":[
     {
-      "name": "picker_smart_recommend_tab_text_margin_left",
-      "value": "4vp"
-    },
-    {
-      "name": "picker_smart_recommend_tab_text_height",
-      "value": "16vp"
-    },
-    {
-      "name": "picker_smart_recommend_tab_height",
-      "value": "28vp"
-    },
-    {
-      "name": "picker_smart_recommend_tab_margin_left",
-      "value": "8vp"
-    },
-    {
-      "name": "picker_smart_recommend_tab_left_padding",
-      "value": "12vp"
-    },
-    {
-      "name": "picker_smart_recommend_tab_right_padding",
-      "value": "12vp"
-    },
-    {
-      "name": "picker_smart_recommend_tab_bar_margin_bottom",
+      "name": "picker_smart_recommend_tab_space",
       "value": "8vp"
     },
     {
@@ -34,6 +10,186 @@
     },
     {
       "name": "picker_smart_recommend_tab_bar_padding_bottom",
+      "value": "8vp"
+    },
+    {
+      "name": "picker_panel_image_height",
+      "value": "92vp"
+    },
+    {
+      "name": "picker_panel_image_height_verde_out",
+      "value": "84vp"
+    },
+    {
+      "name": "picker_action_bar_height_verde_out",
+      "value": "56vp"
+    },
+    {
+      "name": "picker_panel_title_height_verde_out",
+      "value": "56vp"
+    },
+    {
+      "name": "picker_segment_button_height",
+      "value": "40vp"
+    },
+    {
+      "name": "picker_segment_button_margin_start_and_end",
+      "value": "72vp"
+    },
+    {
+      "name": "picker_action_bar_button_height",
+      "value": "40vp"
+    },
+    {
+      "name": "picker_action_bar_button_width",
+      "value": "40vp"
+    },
+    {
+      "name": "picker_panel_title_height",
+      "value": "52vp"
+    },
+    {
+      "name": "picker_action_bar_height",
+      "value": "72vp"
+    },
+    {
+      "name": "picker_action_bar_bottom_margin",
+      "value": "2vp"
+    },
+    {
+      "name": "photo_grid_view_padding_top",
+      "value": "8vp"
+    },
+    {
+      "name": "picker_under_bar",
+      "value": "28vp"
+    },
+    {
+      "name": "picker_fordable_under_bar",
+      "value": "16vp"
+    },
+    {
+      "name": "picker_button_padding_left_and_right",
+      "value": "22vp"
+    },
+    {
+      "name": "picker_button_padding_top_and_bottom",
+      "value": "7vp"
+    },
+    {
+      "name": "picker_button_constraint_min_height",
+      "value": "28vp"
+    },
+    {
+      "name": "picker_button_constraint_min_width",
+      "value": "72vp"
+    },
+    {
+      "name": "picker_footer_safety_height",
+      "value": "16vp"
+    },
+    {
+      "name": "picker_selected_button_height",
+      "value": "40vp"
+    },
+    {
+      "name": "picker_selected_button_width",
+      "value": "140vp"
+    },
+    {
+      "name": "picker_selected_button_panel_width",
+      "value": "256vp"
+    },
+    {
+      "name": "picker_album_grid_margin",
+      "value": "0"
+    },
+    {
+      "name": "picker_album_item_size",
+      "value": "40vp"
+    },
+    {
+      "name": "picker_album_border_radius",
+      "value": "12vp"
+    },
+    {
+      "name": "picker_album_border_width",
+      "value": "1vp"
+    },
+    {
+      "name": "tv_picker_album_item_margin",
+      "value": "16vp"
+    },
+    {
+      "name": "tv_picker_album_list_width",
+      "value": "315vp"
+    },
+    {
+      "name": "tv_picker_album_list_height",
+      "value": "64vp"
+    },
+    {
+      "name": "tv_picker_album_list_top_padding",
+      "value": "19vp"
+    },
+    {
+      "name": "tv_picker_select_tip_panel_padding",
+      "value": "32vp"
+    },
+    {
+      "name": "tv_picker_complete_button_height",
+      "value": "112vp"
+    },
+    {
+      "name": "tv_picker_photo_grid_size",
+      "value": "112vp"
+    },
+    {
+      "name": "tv_picker_photo_item_radius",
+      "value": "16vp"
+    },
+    {
+      "name": "tv_picker_display_area_height",
+      "value": "309vp"
+    },
+    {
+      "name": "tv_picker_album_title_height",
+      "value": "213vp"
+    },
+    {
+      "name": "tv_picker_album_side_bar_height",
+      "value": "379vp"
+    },
+    {
+      "name": "tv_picker_albums_height",
+      "value": "507vp"
+    },
+    {
+      "name": "picker_select_cancel_symbol_size",
+      "value": "16vp"
+    },
+    {
+      "name": "picker_album_grid_margin_show_dialog",
+      "value": "19vp"
+    },
+    {
+      "name": "pc_picker_selected_button_width",
+      "value": "120vp"
+    },
+    {
+      "name": "pc_picker_button_padding_left_and_right",
+      "value": "16vp"
+    },
+    {
+      "name": "pc_picker_button_margin_top",
+      "value": "25vp"
+    },
+    {
+      "name": "pc_picker_button_margin_bottom",
+      "value": "34vp"
+    },
+    {
+      "name": "pc_picker_text_padding",
       "value": "8vp"
     }
   ]

@@ -1,0 +1,6451 @@
+{
+    "string":[
+        {
+            "name":"hide_single_file_tips",
+            "value":"هل تريد إخفاء هذا العنصر؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"up_to_limit_tips",
+            "value":"لقد بلغ عدد العناصر المُحددة الحد الأقصى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pull_down_back_tips_for_sub_display",
+            "value":"اسحب للأسفل للخروج من معاينة الصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_file_already_deleted",
+            "value":"تم حذف العناصر المحددة بالفعل من هذا الجهاز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_image",
+            "value":"السحابة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"local_image",
+            "value":"الجهاز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_file",
+            "value":"تصفية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all",
+            "value":"الكل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_updating",
+            "value":"جارٍ الرفع (%1$s‏/‏%2$s)...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"AI_cloud_enhance",
+            "value":"التحسين بالذكاء الاصطناعي السحابي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"download_failed_single",
+            "value":"يتعذر حفظ الملف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_text",
+            "value":"الصورة الأصلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_daylight",
+            "value":"نهاري",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"phone_rotate",
+            "value":"تدوير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"keep_original_storage",
+            "value":"الاحتفاظ بالنسخ الأصلية على الجهاز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"vertical_collage",
+            "value":"دمج الصور بشكل رأسي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_select_image_text",
+            "value":"اختيار صورة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"play",
+            "value":"تشغيل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no",
+            "value":"إلغاء",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_picture",
+            "value":"صورة متحركة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_creation_time",
+            "value":"فرز حسب وقت الإنشاء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_sync_title_31",
+            "value":"تشغيل مزامنة المعرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_size",
+            "value":"حجم الملف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort",
+            "value":"فرز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"deselected",
+            "value":"غير مُحدد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"setting_up_the_network",
+            "value":"إعدادات الشبكة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_field",
+            "value":"مركزي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_learn_more",
+            "value":"معرفة المزيد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_limited",
+            "value":"هذه الخدمة متوفرة مجانًا لفترة محدودة فقط.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_and_video_desc_tv",
+            "value":"يُستخدم هذا للوصول إلى الصور ومقاطع الفيديو وتخزينها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_camera",
+            "value":"الكاميرا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_single_album_tips",
+            "value":"هل تريد حذف هذا الألبوم؟ (إجمالي الصور: %1$d ، الفيديوهات: %2$d)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_hdc_dialog_content",
+            "value":"لن تتم مزامنة الصور والفيديوهات بعد الآن مع أجهزتك الأخرى. هل حقًا تريد إيقاف المزامنة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_fluorescent",
+            "value":"متفتح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_title_text",
+            "value":"المعرض",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"landscape_collage",
+            "value":"دمج في الاتجاه الأفقي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pause_none_battery_low",
+            "value":"تم إيقاف التحديث مؤقتًا لتوفير طاقة البطارية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_size",
+            "value":"فرز حسب حجم الملف",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"paste_from_pasteboard",
+            "value":"لصق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"help_you_remind_memory_and_classify",
+            "value":"استرجع أجمل الذكريات.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_prompt1_tv",
+            "value":"يحتاج هذا التطبيق إلى %1$s وإلى منحه الإذن باستخدام/الوصول إلى %2$s لتوفير بعض الميزات مثل تصفح الصور والفيديوهات.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_new",
+            "value":"شروط استخدام قدرات الذكاء الاصطناعي التوليدي لتنقيح الصور بالذكاء الاصطناعي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_hide",
+            "value":"إخفاء",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"yes",
+            "value":"موافق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_sync_cloud",
+            "value":"مزامنة الألبومات إلى السحابة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_download",
+            "value":"جارِ التنزيل (%1$s‏/‏%2$s)...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_enhance_complete_tips",
+            "value":"اكتمل التحسين بالذكاء الاصطناعي السحابي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance_des_1",
+            "value":"تفي بعض الصور التي تم التقاطها بمعايير التحسين السحابي التلقائي.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_new_album",
+            "value":"ألبوم جديد",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_back_to_default",
+            "value":"إعادة الضبط",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all_photos",
+            "value":"جميع الصور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_other",
+            "value":"يدوي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_failed",
+            "value":"تعذر التنزيل.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slide_show_setting",
+            "value":"الفاصل الزمني لعرض الشرائح",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_creation_time",
+            "value":"وقت الإنشاء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_busy",
+            "value":"الخادم مشغول، يُرجى إعادة المحاولة لاحقًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_compare",
+            "value":"مقارنة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all_videos",
+            "value":"جميع الفيديوهات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_cloudy",
+            "value":"غائم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"stop_for_sync_cloud",
+            "value":"مستوى البطارية أقل من %s. تم إيقاف المزامنة مؤقتًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"checkbox_deselected",
+            "value":"لم يتم تحديد الاختيار، مربع اختيار، النقر المزدوج بإصبع واحدة لتحديد الاختيار",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_time_update",
+            "value":"تم التحديث في %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_show_isShowAlbumName",
+            "value":"إظهار اسم الألبوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"privacy_statement",
+            "value":"البيان المتعلق بتطبيق المعرض والخصوصية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_stop_confirm",
+            "value":"لن تكون ميزة التنقيح الذكي متوفرة بعد الآن. هل حقًا تريد إيقافها؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_stop_ai_creation_service",
+            "value":"لن تتوفر ميزة إنشاء المحتوى بالذكاء الاصطناعي بعد الآن، كما لن تتأثر الميزات الأخرى. هل حقًا تريد إيقاف تشغيلها؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"on_network",
+            "value":"الاتصال بالإنترنت",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_albums_tips",
+            "value":"هل تريد حذف الـ %1$d ألبوم المُحددة؟ (إجمالي الصور: %2$d ، الفيديوهات: %3$d)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"super_macro",
+            "value":"لقطة مقرَّبة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_cloud_enhance_service_note",
+            "value":"خدمة التحسين بالذكاء الاصطناعي السحابي لن تكون متوفرة بعد الآن. هل حقًا تريد إيقافها؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title_select_album",
+            "value":"حدد الألبوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_settings",
+            "value":"الإعدادات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_prompt_message",
+            "value":"سيتم حذف الصور والفيديوهات نهائيًا بعد انتهاء عدد الأيام المتبقية الذي يظهر على الشاشة (%d يومًا كحد أقصى)",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_extra_1",
+            "value":"يمكنك تحسين الصور الحديثة تلقائيًا بمساعدة الذكاء الاصطناعي. ما عليك سوى النقر على الأيقونة التي تشبه العصا السحرية أعلى الصور المدعومة. هذه الميزة مجانية لفترة محدودة فقط.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_rename",
+            "value":"إعادة التسمية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"search",
+            "value":"بحث",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_privacy_protocol",
+            "value":"بيان حول إنشاء محتوى الذكاء الاصطناعي وخصوصيته",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_name",
+            "value":"اسم الملف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_image_symbol_enhanced",
+            "value":"بعد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_spot",
+            "value":"نقطة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_action_show_date",
+            "value":"إظهار التاريخ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cast_mirror_title",
+            "value":"قيد العرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_network",
+            "value":"غير متصل بالإنترنت.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_name",
+            "value":"فرز حسب اسم الملف",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_shoot_time",
+            "value":"وقت التصوير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_selected",
+            "value":"تم تحديد الكل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_portrait",
+            "value":"نقل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Switch_on",
+            "value":"تشغيل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_action_hide_date",
+            "value":"إخفاء التاريخ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_watermark_after_enhance",
+            "value":"إضافة علامة مائية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"target_has_same_name",
+            "value":"يوجد بالفعل ملف بالاسم %1$s. هل تريد استبداله؟\n",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_petalclip_video",
+            "value":"محرر Petal",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_view",
+            "value":"مناظر ليلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_collage",
+            "value":"المُدمجة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_network_error",
+            "value":"مشكلة في الشبكة، يُرجى التحقق وإعادة المحاولة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_storage_dialog_content",
+            "value":"يمكن للمعرض تحرير %2$s من مساحة تخزين على الجهاز عن طريق إزالة نُسخ الصور والفيديوهات ذات الدقة الكاملة الملتقطة منذ أكثر من %1$s يومًا. يُحتفظ بالُنسخ الأصلية على السحابة ويمكن تنزيلها في أي وقت.\n\nسيحسّن المعرض المساحة التخزينية تلقائيًا على الجهاز بهذه الطريقة عندما تكون منخفضة.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_video_dialog_show_petalClip_not_install",
+            "value":"مطلوب توفر تطبيق محرر Petal لاستخدام هذه الميزة. هل تريد تنزيله؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"favorited",
+            "value":"تمت الإضافة إلى المفضلة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance",
+            "value":"التحسين السحابي التلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add",
+            "value":"إضافة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_temperature_high",
+            "value":"درجة حرارة الجهاز مرتفعة للغاية، أعد المحاولة لاحقًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Picker_Unselect",
+            "value":"إلغاء التحديد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_hicloud_gallery",
+            "value":"مزامنة الصور والفيديوهات إلى السحابة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"more_text",
+            "value":"المزيد",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_all_files_tips",
+            "value":"هل تريد إزالة جميع العناصر؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_add",
+            "value":"إضافة اسم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"camera_flash_on",
+            "value":"الفلاش، مفتوح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_shoot_time",
+            "value":"فرز حسب وقت التصوير",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_video_dialog_to_download_PetalClip",
+            "value":"انتقال",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pause_upload_for_low_battery",
+            "value":"تم إيقاف عمليات الرفع مؤقتًا لأن مستوى البطارية أقل من %s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_off",
+            "value":"الفلاش مغلق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_sync_content_31",
+            "value":"صورك هي من ذكرياتك الجميلة. يمكنك مزامنتها مع السحابة لحفظها بأمان والوصول إليها بسهولة على أي من أجهزتك. يساعد هذا أيضًا على تفريغ مساحة التخزين في جهازك.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_and_video_desc",
+            "value":"يُستخدم هذا للوصول إلى الصور ومقاطع الفيديو وتحريرها وتخزينها.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_remove",
+            "value":"إزالة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_items_to_add",
+            "value":"حدد العناصر المُراد إضافتها.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_single_video_tips",
+            "value":"هل تريد إخفاء هذا الفيديو؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_enabled_now",
+            "value":"تشغيل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rainbow",
+            "value":"أقواس قزح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_empty_album_tips",
+            "value":"هل تريد حذف هذا الألبوم؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_all_videos_tips",
+            "value":"هل تريد حذف كافة الفيديوهات؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_motion_picture",
+            "value":"صورة حية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_subTitle_text",
+            "value":"اختر الصورة أو الألبوم الذي ترغب بمشاهدته.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_edit",
+            "value":"تعديل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_remove",
+            "value":"إزالة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_auto",
+            "value":"تلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_toast_1",
+            "value":"تفي بعض الصور التي تم التقاطها بمعايير التحسين السحابي التلقائي. يمكنك تشغيل هذه الميزة من خلال الإعدادات.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_download_error",
+            "value":"جارٍ التنزيل…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_default_content",
+            "value":"صورك هي من ذكرياتك الجميلة. يمكنك رفعها إلى السحابة لحفظها بأمان والوصول إليها بسهولة على أي من أجهزتك. ننصح أيضًا بترقية باقة التخزين السحابية الخاصة بك للحصول على مساحة أكبر.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pictures_and_videos",
+            "value":"الصور والفيديوهات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_1",
+            "value":"يمكنك تحسين الصور الحديثة تلقائيًا بمساعدة الذكاء الاصطناعي. ما عليك سوى النقر على الأيقونة التي تشبه العصا السحرية أعلى الصور المدعومة. هذه الميزة مجانية لفترة محدودة فقط.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_center_weighted",
+            "value":"مصفوفة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_image_symbol_initial",
+            "value":"قبل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_slide_show",
+            "value":"عرض شرائح",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_enhance_wait_tips",
+            "value":"يجري تحسين هذه الصورة على السحابة، يُرجى الانتظار",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_highlight_tips",
+            "value":"لن تظهر هذه الصورة في هذه المقتطفات بعد الآن.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from_this_highlight",
+            "value":"هل تريد إزالة المحتوى المُحدد؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_all_from_highlight_tips",
+            "value":"لن تظهر العناصر المُحددة في هذه المقتطفات بعد الآن.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_video_from_highlight_tips",
+            "value":"لن يظهر هذا الفيديو في هذه المقتطفات بعد الآن.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_out_of_highlight",
+            "value":"إزالة من المقتطفات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_already_use",
+            "value":"هذا الاسم مُستخدم بالفعل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"the_oriental_pearl_tower",
+            "value":"برج لؤلؤة الشرق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_deselect_all",
+            "value":"إلغاء تحديد الكل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_video_recycle_delete_kept_tips",
+            "value":"سيُحذف هذا الفيديو من هذا الجهاز والسحابة ومن جميع الأجهزة التي تمت المزامنة معها. وسيُحتفظ به في مجلد \"المحذوفات مؤخرًا\" لمدة %1$d يومًا.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_splash_content_online",
+            "value":"%s تصفح الصور والفيديوهات ومشاركتها والاستمتاع بها مباشرةً من السحابة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper",
+            "value":"الخلفيات الذكية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices_more_sub",
+            "value":"يمكنك الوصول إلى جهاز التخزين الخارجي بالانتقال إلى \"مدير الملفات > استعراض\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_current_highlight",
+            "value":"إزالة من ألبوم المقتطفات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cover_edit_title",
+            "value":"تعديل الغلاف",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"means_of_transportation",
+            "value":"وسائل مواصلات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_near_full_card_content",
+            "value":"بمجرد امتلاء مساحة التخزين السحابية سيتوقف رفع الصور والفيديوهات الجديدة إلى السحابة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"distributed_album_disconnected",
+            "value":"انقطع الاتصال بالجهاز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"skip_current_file",
+            "value":"تخطي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"duplicate_name_merge_portrait_photo_title",
+            "value":"هل تريد دمج الأشخاص الذين يحملون نفس الاسم؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_optimize_device_storage_detail",
+            "value":"الاحتفاظ بالصور والفيديوهات ذات الدقة الكاملة على جهازك دون استبدالها بنُسخ أصغر حجمًا.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"close_hdc_dialog_title",
+            "value":"إيقاف المزامنة السحابية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_router",
+            "value":"تحسين",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"blossom",
+            "value":"أزهار",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tab_highlights",
+            "value":"مقتطفات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycleAlbum_delete_message",
+            "value":"سيتم حذف هذا العنصر نهائيًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"intelligent_classification_description_tips",
+            "value":"فرز الصور والفيديوهات في ألبومات منفصلة لتسهيل تصفحها. يمكنك أيضًا تصفحها بحسب الأشخاص والأماكن والمصادر.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_as_cover",
+            "value":"تعيين كغلاف",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_prompt_message",
+            "value":"سيتم حذف الصور والفيديوهات نهائيًا بعد انتهاء عدد الأيام المتبقية الذي يظهر على الشاشة (%d يومًا كحد أقصى).",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_cancel_message",
+            "value":"لقد تم حذف %1$s من الملفات. هل تريد إيقاف حذف بقية الملفات؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editBar_text",
+            "value":"تعديل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"please_enter_the_password",
+            "value":"أدخل رقم الدخول",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_photo_and_video",
+            "value":"قام تطبيق %s بالتعديل على صور/فيديوهات في المعرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"print_or_generate_pdf",
+            "value":"طباعة أو إنشاء ملف PDF",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_videos_to_timeline_merge",
+            "value":"%1$s و%2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_merge",
+            "value":"%1$s و%2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"file_size_location",
+            "value":"الحجم:‏ %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_photo",
+            "value":"تنزيل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_photo",
+            "value":"قام تطبيق %s بالتعديل على صور في المعرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"business_card",
+            "value":"بطاقات الأعمال",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_portrait_tips",
+            "value":"يمكنك إضافتهم مرة أخرى في أي وقت من ألبوم الأشخاص.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"more_portrait",
+            "value":"المزيد من الأشخاص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Remove_From_Portrait",
+            "value":"إزالة من ألبوم الأشخاص",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_description",
+            "value":"إضفاء طابعك الشخصي على جهازك بخلفيات مُنشأة بمساعدة الذكاء الاصطناعي.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy",
+            "value":"نسخ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_content",
+            "value":"العناصر التي تعذر رفعها إلى السحابة: %s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_timeline",
+            "value":"شاهد الصور والفيديوهات التي التقطتها واسترجع ذكريات حياتك حسب التسلسل الزمني.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tab_albums",
+            "value":"الألبومات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Statue_of_liberty",
+            "value":"تمثال الحرية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"double_click_to_restore_the_original_size",
+            "value":"انقر نقرًا مزدوجًا لاستعادة الحجم الأصلي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_portrait_photo",
+            "value":"يُرجى تحديد صورك.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_description_new",
+            "value":"ترفع هذه الخدمة الصور المحددة إلى السحابة لإجراء التعديلات عليها بمساعدة الذكاء الاصطناعي.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_ai_creation_subtitle",
+            "value":"تستخدم هذه الخدمة خوارزميات الذكاء الاصطناعي لمعالجة الصور والفيديوهات. كما يمكن استخدامها لتنقيح الصور وإنشاء الفيديوهات تلقائيًا، بالإضافة إلى تطبيقات أخرى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Tab_change_cover",
+            "value":"تحديد صورة الغلاف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"displayed_agreeing_map",
+            "value":"مطلوب الموافقة على بنود الخدمة لتتمكن من عرض الخريطة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hidden_album",
+            "value":"العناصر المخفية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_setting",
+            "value":"الإعدادات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_content",
+            "value":"يمكنك إيقاف تلقي هذا النوع من التذكيرات من خلال إيقاف تشغيل معرض السحابة.\n\nإذا كنت تريد حذف صورك وفيديوهاتك من السحابة بعد إيقاف تشغيل معرض السحابة، فيمكنك القيام بذلك من الرابط \u202a%s\u202c.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_not_network",
+            "value":"غير متصل بشبكة لاسلكية. العناصر التي لم تتم مزامنتها: %1$s. يمكنك %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_compare_after_cloud_enhancement",
+            "value":"انقر هنا لرؤية الفرق قبل وبعد التحسين.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_this_portrait",
+            "value":"هل تريد إزالة هذا الشخص؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"front_night_shot_album",
+            "value":"تصوير ليلي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_source",
+            "value":"استعراض حسب التطبيق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"new_recycle_single_album_tips",
+            "value":"هذا الإجراء لن يؤدي إلى حذف الصور والفيديوهات الموجودة في الألبوم.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_files_recycle_delete_kept_tips",
+            "value":"ستُحذف جميع العناصر من هذا الجهاز والسحابة ومن جميع الأجهزة التي تمت المزامنة معها. وسيُحتفظ بها في مجلد \"المحذوفات مؤخرًا\" لمدة %d يومًا.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_cancel_message",
+            "value":"تم إخفاء %1$s من الملفات. هل تريد إيقاف إخفاء بقية الملفات؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_selected_albums",
+            "value":"هل تريد حذف الألبومات المُحددة؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"merge_portrait_photo_content",
+            "value":"بمجرد دمج صور الأشخاص، سيتم معاملتهم كشخص واحد.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_info",
+            "value":"يمكنك ضغط الصور والفيديوهات التي نادرًا ما تستعرضها لتوفير مساحة على جهازك.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"personal_information_collected",
+            "value":"المعلومات الشخصية المُجمَّعة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_service",
+            "value":"إنشاء محتوى الذكاء الاصطناعي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"map_album_service_description",
+            "value":"تتيح لك هذه الخدمة استعراض صورك وفيديوهاتك بحسب موقعها الجغرافي. علمًا بأن استخدام هذه الخدمة يتطلب الحصول الإذن التالي، ويمكنك العدول عن منح هذا الإذن متى شئت من \"الإعدادات > التطبيقات والخدمات > التطبيقات\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"please_enter_name",
+            "value":"لم يتم إدخال اسم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_gallery_network_connection",
+            "value":"يتيح لك السماح بالاتصال بالإنترنت معرفة مكان التقاط الصور والفيديوهات وتلقي اقتراحات البحث وتصفح محتوى السحابة وتنزيل الصور المصغرة واستخدام بعض الميزات كالتحسين بالذكاء الاصطناعي السحابي وإنشاء محتوى الذكاء الاصطناعي.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_service_description",
+            "value":"يمكنك رفع الصور إلى السحابة لتحسينها باستخدام الذكاء الاصطناعي.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new",
+            "value":"تحسين الصور الملتقطة حديثًا تلقائيًا بمساعدة الذكاء الاصطناعي. ما عليك سوى النقر على أيقونة العصا السحرية التي تظهر أعلى الصور المدعومة. هذه الميزة مجانية لفترة محدودة فقط.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_progress_done",
+            "value":"تم الحفظ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_cloud_gallery_toast",
+            "value":"تم تشغيل معرض السحابة لديك",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recommended_cleanup",
+            "value":"موصى بتنظيفه",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time_line_message_cloud_contains",
+            "value":"%s على السحابة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_file_tips",
+            "value":"هل تريد حذف هذا العنصر؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_screen_shot",
+            "value":"لقطات الشاشة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_cancel_text",
+            "value":"إلغاء",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photos_videos_head_title_album",
+            "value":"لا توجد صور أو فيديوهات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"view_albums",
+            "value":"عرض المحتوى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"send",
+            "value":"إرسال",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cover_preview_title",
+            "value":"معاينة الغلاف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tv_menu_tips",
+            "value":"اضغط على %s لعرض المزيد من الخيارات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unnamed_albums",
+            "value":"ألبوم من دون اسم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title_select_photos",
+            "value":"تحديد الصور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information",
+            "value":"الموقع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"prompt_new_album_dialog_message",
+            "value":"لا توجد أي ألبومات لنقل أو نسخ الصور إليها. هل تريد إنشاء ألبوم جديد؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_linkage",
+            "value":"إلغاء الربط",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"find_same_name",
+            "value":"ملف مكرر",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"slow_motion_video",
+            "value":"فيديوهات بالحركة البطيئة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shoot_album",
+            "value":"أوضاع الكاميرا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_cover",
+            "value":"تغيير الغلاف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_access_statement",
+            "value":"أذونات الخلفيات الذكية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unfavor_cancel_message",
+            "value":"تمت إزالة %1$s من العناصر من المفضلة بالفعل.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_off",
+            "value":"توقفت المزامنة مؤقتًا لعدم السماح للمعرض بالاتصال إلى الإنترنت.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_network_disabled_please_enable_it",
+            "value":"اتصال المعرض بالإنترنت متوقف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"puzzle_frame",
+            "value":"إطار",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_title",
+            "value":"هل سئمت من هذا النوع من التذكيرات؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"do_same_action",
+            "value":"تطبيق هذا الإجراء مع أي تعارض مشابه مستقبلًا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_dialog_title_text",
+            "value":"هل تريد الحفظ كصورة جديدة أو استبدال الصورة الأصلية؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_content",
+            "value":"سيتم حفظ الصور المحددة كصور فردية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_gallery_space",
+            "value":"تحسين سعة المعرض التخزينية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_service_description",
+            "value":"استخدام هذا التطبيق يتطلب الحصول على الإذن التالي:",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tail_light",
+            "value":"وضع آثار أضواء السيارات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_cloud_update_latest",
+            "value":"تم التحديث",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_portrait_photo_content",
+            "value":"يساعد هذا في جعل هذه الميزة أكثر دقة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice_success",
+            "value":"تم الدمج بنجاح، يمكنك معاينة الفيديو في ألبوم الفيديوهات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_disable_the_photo_linkage_compare_effect",
+            "value":"انقر هنا لإلغاء ربط الصور.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hide_all_files_tips",
+            "value":"هل تريد إخفاء جميع العناصر؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_timeline",
+            "value":"نزهة مع الذكريات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Private_protection_in_progress",
+            "value":"مخفي لحماية خصوصيتك",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_timeline",
+            "value":"الصور",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_highlight",
+            "value":"استرجاع الذكريات الثمينة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_portrait",
+            "value":"إضافة أشخاص",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_notify",
+            "value":"يحتاج هذا التطبيق إلى %1$s وإلى منحه الإذن باستخدام/الوصول إلى %2$s من أجل توفير ميزات مثل تصفح الصور والفيديوهات وتعديلها والتحليل الذكي للوسائط. بالنقر على \"أوافق\"، فأنت تعني بذلك موافقتك على هذه البنود. يمكنك الاطلاع على %3$s و%4$s لمعرفة المزيد من التفاصيل حول كيفية معالجة معلوماتك الشخصية.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropModeReset_text",
+            "value":"إعادة الضبط",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_and_protocol",
+            "value":"تحتاج هذه الخدمة إلى %1$s وإلى قراءة ورفع الصور لتوفير ميزات تعديل الصور بمساعدة الذكاء الاصطناعي. بالنقر على \"أوافق\"، فأنت تعني بذلك موافقتك على %2$s. يمكنك الاطلاع على %3$s لمعرفة المزيد من التفاصيل حول كيفية معالجة معلوماتك الشخصية. علمًا بأن هذه الخدمة متوفرة مجانًا لفترة محدودة فقط.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_enable_tips",
+            "value":"تشغيل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_terms",
+            "value":"شروط استخدام قدرات الذكاء الاصطناعي التوليدي لخدمة الخلفيات الذكية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_selected",
+            "value":"إلغاء التحديد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cast_hint",
+            "value":"شاهد هذا المحتوى على الشاشة الكبيرة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_save_as_new_photo",
+            "value":"لقد قام تطبيق %s بحفظ الصور في المعرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hide_images_message",
+            "value":"ستُنقل العناصر المحددة إلى مجلد \"العناصر المخفية\".",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"date_today",
+            "value":"اليوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"timeline_message_thumbnail_ready",
+            "value":"تمت مزامنة: %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_button",
+            "value":"موافق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_privacy_options",
+            "value":"خيارات الخصوصية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_privacy_protected",
+            "value":"حماية الخصوصية مُشغَّلة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_remove_location_info",
+            "value":"إزالة معلومات الموقع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_tagged_geographic_data",
+            "value":"البيانات الجغرافية الموسومة على الصور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_remove_camera_info",
+            "value":"إزالة معلومات الكاميرا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_device_and_camera_info",
+            "value":"إعدادات الكاميرا وموديل الجهاز.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_name",
+            "value":"المعرض",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_not_favorite",
+            "value":"المفضلة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_files_to_system_album_merge",
+            "value":"%1$s و%2$s و%3$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"graduation_photo",
+            "value":"تخرُّج",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"replace_with_new_file",
+            "value":"استبدال",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_permanently_forever_cancel_message",
+            "value":"لقد تم حذف %s من الملفات نهائيًا. هل تريد إيقاف حذف بقية الملفات؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_video",
+            "value":"عرض الفيديو",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wrist_watch",
+            "value":"ساعات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_as_new_photo_and_video",
+            "value":"لقد قام تطبيق %s بحفظ الصور/الفيديوهات في المعرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"learn_how_to_use_your_data",
+            "value":"كيفية استخدامنا لبياناتك",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_dialog_delete_permanently_not_recover_tips",
+            "value":"سيتم حذف هذا الفيديو نهائيًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_experience_the_hide_album_function",
+            "value":"انقر هنا لعرض العناصر المخفية.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_screenshot",
+            "value":"لقطات الشاشة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_screenshot_saved_failed",
+            "value":"تعذر التقاط الشاشة، يُرجى إعادة المحاولة لاحقًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Please_enter_main_title",
+            "value":"أدخل العنوان",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"document_correction",
+            "value":"وضع المستندات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_distributed_photo_title_album",
+            "value":"لا توجد صور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_photos_dialog_delete_permanently_not_recover_tips",
+            "value":"سيتم حذف جميع الصور نهائيًا من هذا الجهاز والسحابة ومن جميع الأجهزة التي تمت المزامنة معها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_prompt1",
+            "value":"يحتاج هذا التطبيق إلى %1$s وإلى قراءة ورفع/نقل الصور من أجل توفير الميزات ذات الصلة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_prompt2",
+            "value":"بالنقر على \"أوافق\"، فأنت تعني بذلك موافقتك على البنود أعلاه. يمكنك الاطلاع على %1$s و%2$s لمعرفة المزيد من التفاصيل حول كيفية معالجة معلوماتك الشخصية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms",
+            "value":"بنود استخدام الذكاء الاصطناعي التوليدي لتنقيح الصور بالذكاء الاصطناعي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"verify_and_view_album",
+            "value":"يُرجى التحقق من الهوية لعرض المحتوى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_files_to_timeline_merge",
+            "value":"تم حفظ %1$s و%2$s في المعرض. و%3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_place",
+            "value":"أماكن",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_single_image_tips",
+            "value":"هل تريد إخفاء هذه الصورة؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"move_file_to",
+            "value":"نقل إلى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"name_input",
+            "value":"أدخل الاسم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"location_albums",
+            "value":"أماكن",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_highlight",
+            "value":"حذف الصور المميزة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_duration",
+            "value":"المدة: %s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fast_face_beautify",
+            "value":"تحسين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_to",
+            "value":"إضافة إلى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"not_support_wallpaper_edit",
+            "value":"لا يمكن تحرير الخلفيات في النوافذ الصغيرة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lock_tips_password",
+            "value":"يساعد تعيين كلمة مرور شاشة القفل في حماية ألبوماتك المخفية من الدخول غير المصرح به.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"classified_album",
+            "value":"الفئات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"expand",
+            "value":"إظهار المزيد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_new",
+            "value":"ألبوم جديد",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_view_protocol",
+            "value":"انقر هنا لعرض المحتوى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_micro_motion",
+            "value":"سينمائي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from_album_tips",
+            "value":"لن تظهر هذه الصورة في هذا الألبوم بعد الآن.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_save_text",
+            "value":"حفظ كصورة جديدة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_button_cancel",
+            "value":"ربما لاحقًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_action",
+            "value":"استبدال",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_experience_the_image_compare_function",
+            "value":"انقر هنا لمقارنة الصور.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait",
+            "value":"صور بورتريه",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_confirm_tips",
+            "value":"حسنًا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"dialog_clear",
+            "value":"مسح",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"clear_tips",
+            "value":"هل تريد مسح الكل؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_description",
+            "value":"يمكنك توفير مساحة تخزين تصل إلى %1$s عن طريق إزالة الصور والفيديوهات التي نادرًا ما تستعرضها من جهازك.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_warning_content",
+            "value":"تُعرض صورك وفيديوهاتك هنا، ولكن لا يمكن لهذا التطبيق الوصول إلا إلى العناصر التي تحددها فقط.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"focal_length",
+            "value":"الطول البؤري:‏ %s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"full_screen_browsing",
+            "value":"جارٍ التصفح في وضع ملء الشاشة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_merge_to_me",
+            "value":"بعد الدمج سيتم التعرف عليهم كشخص واحد.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_photos_title",
+            "value":"كل الصور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"screenshot_photos",
+            "value":"لقطات الشاشة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_favor_process",
+            "value":"جارٍ الحفظ إلى المفضلة…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_btn_text_photo",
+            "value":"التقاط صورة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aircraft",
+            "value":"الطائرات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_wlan_only",
+            "value":"استخدام الشبكة اللاسلكية فقط",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"detail_dialog_confirm",
+            "value":"حسنًا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"high_pixel",
+            "value":"دقة عالية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"skip_action",
+            "value":"تخطي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_picture_success",
+            "value":"تم حفظ الصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_format_compare_is_not_supported",
+            "value":"تنسيق الصورة لا يدعم إجراء المقارنة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_to_timeline_merge",
+            "value":"%1$s و%2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_single_file_tips",
+            "value":"هل تريد إزالة هذا العنصر؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos",
+            "value":"جارٍ الحفظ…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_unselected",
+            "value":"تحديد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_delete",
+            "value":"حذف",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_pictures_to_system_album_merge",
+            "value":"%1$s و%2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"pause",
+            "value":"إيقاف مؤقت",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_hidden_process",
+            "value":"جارٍ الإخفاء…",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"social_gallery_downloading_toast",
+            "value":"جارٍ التنزيل…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Picker_Select",
+            "value":"تحديد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"burst_photos",
+            "value":"تصوير متتابع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"learn_more",
+            "value":"معرفة المزيد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"switch_to_timeline_display_prompt",
+            "value":"اقرص الشاشة بإصبعين لعرض الصور كشبكة أو باعد بينهما لعرضها حسب التاريخ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_image_cleanup",
+            "value":"تنظيف الصور والفيديوهات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eiffel_tower",
+            "value":"برج إيفل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"access_hidden_albums",
+            "value":"لإظهار العناصر المخفية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"duration",
+            "value":"المدة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wait_none_no_wlan",
+            "value":"المزامنة متوقفة مؤقتًا لعدم الاتصال بشبكة لاسلكية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_compare_is_not_supported",
+            "value":"لا يمكن المقارنة بين الفيديوهات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_not_support_tip",
+            "value":"لا يمكنك سحب %1$d عنصر أو أكثر في المرة الواحدة، يُرجى إعادة التحديد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"prompt_new_album_dialog_title",
+            "value":"لا توجد ألبومات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"specific_characters_not_supported",
+            "value":"لا يمكن أن يحتوي على ' ` \" . \\ / : * ? < > | [ ] { }",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_highlight",
+            "value":"التقط المزيد من الصور لفتح قفل المقتطفات.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"sound_filled",
+            "value":"تشغيل الصوت",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_shot",
+            "value":"تصوير ليلي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_favor",
+            "value":"المفضلة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_splice_canceled",
+            "value":"تم إلغاء الدمج",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice_failed",
+            "value":"تعذر الدمج",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_to_local",
+            "value":"حفظ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slideshow_interval",
+            "value":"الفاصل الزمني لعرض الشرائح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_cloud_update",
+            "value":"جارٍ المزامنة…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"target_file_location",
+            "value":"الملف في المكان الجديد",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"this_unction_requires",
+            "value":"تحتاج هذه الميزة إلى %1$s ومعرفة معلومات عن جهازك. بالنقر على \"أوافق\"، فأنت تعني بذلك موافقتك على هذه البنود إضافةً إلى %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_cloud_data_all",
+            "value":"%1$s و%2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_empty_albums_tips",
+            "value":"هل تريد حذف الألبومات المُحددة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"date_yesterday",
+            "value":"أمس",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_recover_process",
+            "value":"جارٍ الاستعادة…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"landscape",
+            "value":"مناظر طبيعية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_unlimited_use_mobile",
+            "value":"مزامنة الصور والفيديوهات باستخدام بيانات الجوال عند عدم توفر شبكة لاسلكية.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_picture_tips",
+            "value":"هل تريد حذف هذه الصورة؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_manage_card_confirm",
+            "value":"الإعدادات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"complete",
+            "value":"تم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_screenshot_saved_success",
+            "value":"تم الحفظ في المعرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_tips",
+            "value":"هل تريد الحذف؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"disable",
+            "value":"إيقاف",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_to_album",
+            "value":"إضافة إلى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_frame_style",
+            "value":"أبعاد الصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_photos_and_dideos",
+            "value":"تحديد الصور والفيديوهات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_rename",
+            "value":"أدخل اسم الشخص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork",
+            "value":"استخدام بيانات الجوال",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_album",
+            "value":"ترتيب واستعراض أفضل الذكريات بكل سهولة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_moving_photo_splice_function",
+            "value":"يمكنك دمج العديد من الصور المتحركة معًا. أولاً، حدد الصور المتحركة التي تريد دمجها، ثم انقر هنا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycleAlbum_clear_message",
+            "value":"سيتم حذف جميع العناصر نهائيًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_subtitle",
+            "value":"تستخدم خدمة سمة السفر عبر الزمن الذكاء الاصطناعي لإنشاء صور ذات طابع زمني استنادًا إلى صورك الشخصية التي ترفعها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_success",
+            "value":"تم النسخ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"card_button",
+            "value":"عرض التفاصيل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_all_files_tips",
+            "value":"هل تريد حذف جميع العناصر؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"map_album_service",
+            "value":"ألبومات الموقع",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_cancel_message",
+            "value":"تمت إزالة %1$s من العناصر. هل تريد إيقاف إزالة بقية العناصر؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"check",
+            "value":"عرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_title",
+            "value":"معرضك الخاص، والمزيد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panorama",
+            "value":"بانوراما",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"path",
+            "value":"مسار التخزين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picture_dialog_delete_permanently_not_recover_tips",
+            "value":"سيتم حذف هذه الصورة نهائيًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Private_protection_view_photos",
+            "value":"إظهار الصور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rename",
+            "value":"إعادة التسمية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_permanently_cancel_message",
+            "value":"لقد تم حذف %1$s من الملفات نهائيًا. هل تريد إيقاف حذف بقية الملفات؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_authorization",
+            "value":"تخويل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_of_media_analysis_service_note",
+            "value":"تقوم هذه الخدمة بقراءة وتحليل الصور والفيديوهات الموجودة في الخلفية لتوفير ميزات ذكية في المعرض.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_privacy_statement",
+            "value":"البيان المتعلق بالتحسين بالذكاء الاصطناعي السحابي والخصوصية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"share_highlight_cover",
+            "value":"مشاركة الغلاف",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_device_storage_detail_new",
+            "value":"إذا كانت مساحة التخزين على جهازك منخفضة، فستُستبدل الصور والفيديوهات ذات الدقة الكاملة بنُسخ أصغر حجمًا لتوفير مساحة. ويمكنك تنزيل النُسخ الأصلية من السحابة في أي وقت.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tip_convert_to_JPG_success",
+            "value":"تم التحويل إلى JPG",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_save_as_new_video",
+            "value":"لقد قام تطبيق %s بحفظ الفيديوهات في المعرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_all",
+            "value":"كل الصور",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"duplicate_photo",
+            "value":"مكررة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_setting_tips_show",
+            "value":"يتم إجراء عملية التحليل عند توصيل جهازك بمصدر طاقة والشاشة مغلقة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_portrait_photo_placeholder",
+            "value":"أدخل اسم الشخص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_of_service_location",
+            "value":"امنح المعرض إذن الوصول إلى موقعك الدقيق من الإعدادات.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_highlight",
+            "value":"إزالة من ألبوم المقتطفات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel_face_beautify",
+            "value":"تراجع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_wallpaper",
+            "value":"تعيين كخلفية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_privacy_statement",
+            "value":"البيان المتعلق بالخلفيات الذكية والخصوصية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_view_learn_more_title",
+            "value":"معرفة المزيد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fireworks",
+            "value":"ألعاب نارية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_storage_confirm",
+            "value":"التحسين الآن",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"wait_none_no_network",
+            "value":"المزامنة متوقفة مؤقتًا لعدم الاتصال بالشبكة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_near_full_card_title",
+            "value":"مساحة التخزين السحابية ممتلئة تقريبًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_finish",
+            "value":"اكتمل التحسين. تم تفريغ %1$s من المساحة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_multi_video_and_photo_num",
+            "value":"%1$s و%2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_cloud_space_full",
+            "value":"مساحة التخزين السحابية ممتلئة. يتعذر رفع المزيد من الصور أو الفيديوهات.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel_move",
+            "value":"إلغاء",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"business_privacy_statements",
+            "value":"بيانات الخصوصية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_video_tips",
+            "value":"هل تريد إزالة هذا الفيديو؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lock_tips_list",
+            "value":"تنويه",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_highlight_kept_tips",
+            "value":"لن يؤدي هذا إلى حذف أي صورة أو فيديو من المعرض.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_remove_process",
+            "value":"جارٍ الإزالة…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_highlight_tips",
+            "value":"لن يظهر هذا العنصر في ألبوم المقتطفات هذا بعد الآن.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_cancel",
+            "value":"إلغاء",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_toast",
+            "value":"التحسين السحابي التلقائي يُحسِّن تلقائيًا من حدة الصور المقرّبة المُلتقطة في الوضع \"صورة\". يمكنك تشغيل هذه الميزة من الإعدادات.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_new_album_title",
+            "value":"ألبوم جديد",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"select_portrait_photo_title",
+            "value":"تحديد صورك",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_videos_to_user_album_merge",
+            "value":"%1$s و%2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"details",
+            "value":"التفاصيل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"to_set_up",
+            "value":"إعداد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"motion",
+            "value":"رياضة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_splice_reselect",
+            "value":"حدد %1$d إلى %2$d صور متحركة وأعد المحاولة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_open_now",
+            "value":"تشغيل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_btn_text_shooting",
+            "value":"تصوير فيديو",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_and_documents_description",
+            "value":"يُستخدم هذا الإذن لقراءة الصور والفيديوهات وعرضها بحسب الموقع الجغرافي.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"collage_save_fail_tips",
+            "value":"يتعذر الحفظ نظرًا لعدم تنزيل الصورة. تحقق من الشبكة لديك وأعد المحاولة.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rotate_text",
+            "value":"تدوير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_version",
+            "value":"الإصدار \u202a%1$d\u202c",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"smart_albums",
+            "value":"الألبومات الذكية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_city",
+            "value":"المدن",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_cloud_data_sync_summary",
+            "value":"مزامنة جميع صورك وفيديوهاتك مع السحابة بحيث تتمكن من الوصول إليها متى شئت ومن أي جهاز يخصك.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fail_to_beautify_please_try_again_later",
+            "value":"يتعذر تطبيق تأثيرات التجميل، يُرجى إعادة المحاولة لاحقًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_me",
+            "value":"أنا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"linkage",
+            "value":"ربط",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document",
+            "value":"مستندات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"focal_length_focalLengthIn35mmFilm",
+            "value":"الطول البؤري:‏ %1$s‏ (الطول البؤري المكافئ هو %2$s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time",
+            "value":"الوقت",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycleAlbum_delete_all_images_message",
+            "value":"سيتم حذف جميع العناصر نهائيًا.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"about",
+            "value":"حول",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"not_support_wallpaper_change",
+            "value":"يتعذّر تغيير الخلفية في هذا الوضع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"items_gallery_alwaysrotate",
+            "value":"تدوير تلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"items_gallery_followsystem",
+            "value":"حسب إعدادات النظام",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tips_gallery_roatesettings",
+            "value":"تدوير الصور عند عرضها في وضع ملء الشاشة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"settings_gallery_rotate",
+            "value":"اتجاه الصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title_none_selected",
+            "value":"لم تحدد أي عنصر",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"about_privacy_statement",
+            "value":"البيان المتعلق بميزة ألبومات الموقع والخصوصية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"file_time_location",
+            "value":"تاريخ التعديل:‏ %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_video_dialog_delete_permanently_not_recover_tips",
+            "value":"سيتم حذف هذا الفيديو نهائيًا من هذا الجهاز والسحابة ومن جميع الأجهزة التي تمت المزامنة معها.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"my_albums",
+            "value":"ألبوماتي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"resolution",
+            "value":"الدقة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"extended_services",
+            "value":"الخدمات الموسعة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name",
+            "value":"خدمة إنشاء الخلفيات الذكية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flash_shoot",
+            "value":"لقطة سريعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_warning_content_more",
+            "value":"تُعرض صورك وفيديوهاتك هنا، ولكن لا يمكن لهذا التطبيق الوصول إلا إلى العناصر التي تحددها فقط. %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_photos_count_per_sum",
+            "value":"تم تحديد (%1$d‏/%2$d)",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"unhide_cancel_message",
+            "value":"تم إظهار %1$s من الملفات. هل تريد إيقاف إظهار بقية الملفات؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"city_overlook",
+            "value":"مناظر المدن",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"size_of_compared_exceeds_the_limit_tips",
+            "value":"تتعذر المقارنة لأن حجم بعض الصور كبير للغاية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"time_line_message_loaded",
+            "value":"إجمالي عدد العناصر التي تم تحميلها: %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compass",
+            "value":"البوصلة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_service",
+            "value":"إيقاف الخدمة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_layout_tips",
+            "value":"تصفح شامل وغامر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_description_1",
+            "value":"تحتاج هذه الخدمة إلى %1$s وإلى قراءة ورفع/نقل الصور من أجل تزويدك بالميزات المتعلقة بالخلفيات. بالنقر على \"أوافق\"، فأنت تعني بذلك موافقتك على هذه البنود وعلى %2$s. يمكنك الاطلاع على %3$s لمعرفة المزيد من التفاصيل حول كيفية معالجة معلوماتك الشخصية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_permanently_clear_cancel_message",
+            "value":"لقد تم مسح %s من الملفات. هل تريد إيقاف مسح بقية الملفات؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picture_compare",
+            "value":"مقارنة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name_2",
+            "value":"خدمة سمة السفر عبر الزمن",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name_3",
+            "value":"خدمة الخلفيات الذكية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_network_environment_poor",
+            "value":"اتصال الشبكة سيء للغاية، يُرجى إعادة المحاولة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"birthday_cake",
+            "value":"كعك أعياد الميلاد",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"selected_photos_count",
+            "value":"تم تحديد %1$d‏/%2$d",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"share_cancel_message",
+            "value":"اكتمل تجهيز %1$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_back",
+            "value":"الرجوع إلى الخلف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flowing_shutter",
+            "value":"تصوير الإضاءة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_picture_recycle_delete_kept_tips",
+            "value":"ستُحذف هذه الصورة من هذا الجهاز والسحابة ومن جميع الأجهزة التي تمت المزامنة معها. وسيُحتفظ بها في مجلد \"المحذوفات مؤخرًا\" لمدة %1$d يومًا.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"highlight_no_tips_show",
+            "value":"يمكنك استعراض المقتطفات هنا بمجرد أن ينتهي المعرض من تحليل مكتبة صورك. علمًا بأن التحليل يتم عند توصيل جهازك بمصدر طاقة والشاشة مغلقة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_to_user_album_merge",
+            "value":"%1$s و%2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_network_dialog_content",
+            "value":"إذا قمت بإيقاف تشغيل هذا الخيار، فلن تتمكن من رؤية مكان التقاط الصور أو تصفح معرض السحابة الخاص بك أو عرض الصور المصغرة على السحابة.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ppt",
+            "value":"عروض تقديمية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_picture_tips",
+            "value":"هل تريد إزالة هذه الصورة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_view_toast_title",
+            "value":"الوصول الخاص",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"open_hdc_dialog_content",
+            "value":"سيتم رفع بيانات المعرض الموجودة على هذا الجهاز ودمجها مع بياناتك الموجودة على السحابة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_Personal_Portrait_tips_show",
+            "value":"عملية تحليل الصور جارية حاليًا (%1$s). وهذه العملية يتم إجراؤها عند توصيل جهازك بمصدر طاقة والشاشة مغلقة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cats",
+            "value":"قطط",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"continue",
+            "value":"متابعة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"waterfall",
+            "value":"شلالات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_picture_dialog_delete_permanently_not_recover_tips",
+            "value":"سيتم حذف هذه الصورة نهائيًا من هذا الجهاز والسحابة ومن جميع الأجهزة التي تمت المزامنة معها.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_to_pasteboard",
+            "value":"نسخ إلى الحافظة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_gallery_main_describe_msg",
+            "value":"تخزين صورك وفيديوهاتك على السحابة لتوفير مساحة تخزينية على جهازك.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_save_picture_text",
+            "value":"جارٍ حفظ الصورة\u2026",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_local_space_release_summary",
+            "value":"إزالة نُسخ الصور والفيديوهات الموجودة على الجهاز والتي تم رفعها إلى السحابة من هذا الجهاز لتوفير مساحة تخزينية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_display",
+            "value":"عرض الألبومات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"easy_editing_ai_description_tips",
+            "value":"يمكنك الكتابة والرسم بحرية باستخدام مجموعة مختارة من أدوات الرسم والتوضيح المفيدة. كما يمكنك أيضًا تعزيز إبداعاتك بشكلٍ أكبر بمساعدة أدوات الذكاء الاصطناعي المتقدمة.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photos_head_title_photoAlbum",
+            "value":"لا توجد صور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_less",
+            "value":"إظهار القليل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"dialog_delete_permanently",
+            "value":"حذف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_security",
+            "value":"%s توفير تخزين آمن وموثوق لجميع صورك وفيديوهاتك المهمة والثمينة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_connection_view_image",
+            "value":"الاتصال بالإنترنت مطلوب من أجل استخدام/الوصول إلى معرض السحابة، وتنزيل الصور المصغرة، وتلقي اقتراحات البحث.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_progress_message",
+            "value":"جارٍ الإضافة إلى ألبوم \"%1$s\"…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"id_card",
+            "value":"بطاقات الهوية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_add_portrait_name",
+            "value":"إضافة اسم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"merge",
+            "value":"دمج",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Tab_Portrait",
+            "value":"أشخاص",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"download_failed_retry",
+            "value":"مشكلة في الشبكة. يُرجى التحقق من إعدادات الشبكة وإعادة المحاولة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_title",
+            "value":"هل تريد حذف الصور الأصلية التي تم التقاطها بالتصوير المتتابع؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"third_sdk_list",
+            "value":"قائمة أدوات SDK للأطراف الخارجية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_more",
+            "value":"المزيد من الخيارات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_stype_no_photo",
+            "value":"لا يمكن استيراد إلا الصور ذات الأنماط المخصصة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"snapshot",
+            "value":"لقطة سريعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"external_Disk_toast",
+            "value":"قم بتثبيت تطبيق مدير الملفات ثم إعادة المحاولة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_share",
+            "value":"مشاركة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"title_general_settings",
+            "value":"الإعدادات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_video_tips",
+            "value":"هل تريد حذف هذا الفيديو؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_export_error",
+            "value":"تعذر تنزيل الصورة لوجود مشكلة في الشبكة، يُرجى إعادة المحاولة لاحقًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_picture_not_download_please_download_and_try_again",
+            "value":"مطلوب أولًا تنزيل الصورة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_me_content",
+            "value":"هل تريد تعيين اسم هذا الشخص \"أنا\"؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"picker_warning_title",
+            "value":"الوصول الخاص إلى المعرض",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_not_name_set_for_me",
+            "value":"هل تريد تعيين هذا الشخص كـ \"أنا\"؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"convert_to_JPG",
+            "value":"تحويل إلى JPG",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"externalDisk",
+            "value":"بطاقة SD",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_description",
+            "value":"يحتاج هذا التطبيق إلى %1$s وقراءة ورفع/نقل الصور لتوفير ميزات الخلفيات الذكية. نحن لا نجمع سوى المعلومات الشخصية اللازمة عند استخدامك للميزات ذات الصلة فقط. يمكنك الاطلاع على %2$s لمعرفة المزيد من المعلومات. يُرجى قراءة البيان السابق بتمعن. بالنقر على \"أوافق\"، فأنت تُقر وتوافق على هذه البنود.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_closed",
+            "value":"إغلاق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information_title",
+            "value":"تصفح صورك بحسب موقعها الجغرافي.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_bounce_play",
+            "value":"ارتداد",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bank_card",
+            "value":"بطاقات بنكية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_screen_recording",
+            "value":"تسجيلات الشاشة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"professional_photography",
+            "value":"صورة احترافية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"number_of_print_exceeds_the_limit_tips",
+            "value":"يمكن طباعة %d عنصر كحدٍ أقصى في المرة الواحدة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_optimize",
+            "value":"%s تفريغ مساحة تخزينية تلقائيًا على أجهزتك للحفاظ على تشغيلها بسلاسة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_having_tips_show",
+            "value":"عملية تحليل الصور جارية حاليًا (%1$s). سيقوم المعرض بإنشاء مقتطفات لك بمجرد الانتهاء من تحليل صورك. علمًا بأن التحليل يتم عند توصيل جهازك بمصدر طاقة والشاشة مغلقة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"new_timeline_message_compose",
+            "value":"%1$s و%2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"easy_editing_tips",
+            "value":"التحرير كالمحترفين",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_picture_dialog_content",
+            "value":"تم حفظ العناصر المستلمة عبر السحب والإفلات إلى ألبوم \"الصور\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_update_card_confirm",
+            "value":"ترقية مساحة التخزين",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_storage_title",
+            "value":"هل تريد تحسين وحدة التخزين للجهاز الآن؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_open_network_link",
+            "value":"هل تريد تشغيل اتصال المعرض بالإنترنت؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_delete_album",
+            "value":"حذف",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"unsupported_video_type",
+            "value":"هذا التنسيق غير مدعوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_note",
+            "value":"إضافة ملاحظة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"favor_cancel_message",
+            "value":"تمت إضافة %1$s إلى المفضلة. هل تريد إيقاف إضافة بقية الملفات إلى المفضلة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dynamic_photos_can_switched",
+            "value":"هناك تأثيرات تشغيل متعددة متوفرة. انقر هنا للتبديل فيما بينها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_login_card_title",
+            "value":"معرض السحابة غير مُشغّل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_content",
+            "value":"سيتم استخدام بيانات الجوال عند عدم توفر شبكة لاسلكية. يمكنك إيقاف تشغيل هذا متى شئت من الإعدادات.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_context_text",
+            "value":"يمكنك الانتقال إلى ألبوم \"المحذوفات مؤخرًا\" لإيجاد الصور الأصلية التي تم استبدالها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_files_cancel_message",
+            "value":"تم نقل %1$s من العناصر.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_scale_error",
+            "value":"يتعذر الدمج نظرًا لأن حجم بعض الصور كبير للغاية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_replace_me",
+            "value":"استبدال \"أنا\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_multi_exposure",
+            "value":"تعريض ضوئي متعدد",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"time_line_message_cloud_sync",
+            "value":"تمت مزامنة جميع العناصر (%s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document_scan",
+            "value":"تحويل لمستند",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"loading_image_imageEdit",
+            "value":"جاري تحميل الصورة…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_content",
+            "value":"لقد حفظت هذه العناصر مُسبقًا في هذا التطبيق. يُرجى إعادة تخويل الوصول إلى العناصر التي لا تزال تحتاجها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Maximum_length_reached",
+            "value":"بلغ طول الاسم الحد الأقصى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_to_album",
+            "value":"نسخ إلى الألبوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_video",
+            "value":"الفيديوهات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"share_highlight_as_video",
+            "value":"مشاركة كفيديو",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_add",
+            "value":"إضافة اسم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"welcome_prompt2",
+            "value":"بالنقر على \"أوافق\"، فأنت تعني بذلك موافقتك على هذه البنود. يمكنك الاطلاع على %1$s و%2$s لمعرفة المزيد من التفاصيل حول كيفية معالجة معلوماتك الشخصية.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_prompt1",
+            "value":"يحتاج هذا التطبيق إلى %1$s وإلى منحه الإذن باستخدام/الوصول إلى %2$s من أجل توفير ميزات مثل تصفح الصور والفيديوهات وتحريرها والتحليل الذكي للوسائط.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"high_mountain",
+            "value":"جبال",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_delete",
+            "value":"حذف",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_recover",
+            "value":"استعادة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_temperature_too_high",
+            "value":"الجهاز ساخن للغاية. توقفت المزامنة مؤقتًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_and_protocol_new",
+            "value":"تحتاج هذه الخدمة إلى %1$s وإلى قراءة ورفع الصور لتوفير ميزات تعديل الصور بمساعدة الذكاء الاصطناعي. بالنقر على \"%2$s\"، فأنت تعني بذلك موافقتك على %3$s. يمكنك الاطلاع على %4$s لمعرفة المزيد من التفاصيل حول كيفية معالجة معلوماتك الشخصية. علمًا بأن هذه الخدمة متوفرة مجانًا لفترة محدودة فقط.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_ai_creation_description",
+            "value":"تحتاج هذه الخدمة إلى %1$s وإلى قراءة الفيديوهات وقراءة ورفع/نقل الصور. الغرض من ذلك هو توفير ميزات إنشاء الصور والفيديوهات باستخدام الذكاء الاصطناعي. بالنقر على \"أوافق\"، فأنت تعني بذلك موافقتك على البنود الواردة أعلاه. يمكنك الاطلاع على %2$s لمعرفة التفاصيل حول كيفية معالجة معلوماتك الشخصية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"day",
+            "value":"يوم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"replace_me_content",
+            "value":"سيتم استبدال الصور التي تم تعيينها سابقًا لألبوم \"أنا\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices_more",
+            "value":"عرض الصور والفيديوهات على وحدة التخزين الخارجية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_compared_exceeds_the_limit_tips",
+            "value":"حدد من %1$d إلى %2$d صورة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"intelligent_classification_tips",
+            "value":"التنظيم الذكي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_stop_note_1",
+            "value":"لن تكون هذه الخدمة متوفرة بعد الآن في حال إيقافها. هل تريد إيقافها على أي حال؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_connection",
+            "value":"السماح بالاتصال بالإنترنت",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_rename_album",
+            "value":"إعادة التسمية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_switcher_square",
+            "value":"إظهار الصور المصغّرة في شكل مربعات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_switcher_rectangle",
+            "value":"إظهار الصور المصغّرة بالأبعاد الأصلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information_content",
+            "value":"يحتاج هذا التطبيق إلى %1$s وإلى منحه إذن استخدام/الوصول إلى مدير الملفات. كما يحتاج أيضًا إلى معرفة معلومات الجهاز والشبكة. نحن لا نجمع سوى المعلومات الشخصية المتعلقة بالميزات التي تستخدمها. بالنقر على \"أوافق\"، فأنت تعني بذلك موافقتك على هذه البنود. يمكنك الاطلاع على %2$s لمعرفة المزيد من التفاصيل.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_title",
+            "value":"هل توافق على استخدام بيانات الجوال في عملية المزامنة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_media_analysis_service_note",
+            "value":"ستتوقف هذه الخدمة عن قراءة وتحليل الصور والفيديوهات في الخلفية.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"transfer_completed",
+            "value":"اكتمل النقل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_shared_exceeds_the_limit_tips",
+            "value":"يمكن مشاركة %d عنصر كحدٍ أقصى في المرة الواحدة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sync",
+            "value":"مزامنة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_map",
+            "value":"الخريطة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rename_portrait_photo_title",
+            "value":"إعادة تسمية هذا الشخص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_export_success",
+            "value":"تم التصدير بنجاح، يمكنك معاينة الفيديو في ألبوم الفيديوهات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_portrait",
+            "value":"تعديل الاسم والصورة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"only_selected_photos_can_be_accessed",
+            "value":"يمكن لهذا التطبيق الوصول إلى الصور التي تحددها فقط",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tab_timeline_actionbar_title",
+            "value":"جميع الصور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices",
+            "value":"عرض الصور والفيديوهات على \"%s\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_hide",
+            "value":"إخفاء",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"grid_display",
+            "value":"عرض الصور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"experienc_tips",
+            "value":"بدء الاستخدام",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_album",
+            "value":"إدارة واستعراض الألبومات في لمحة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_videos_to_system_album_merge",
+            "value":"%1$s و%2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_not_jigsaw_puzzle",
+            "value":"لا يمكن دمج الفيديوهات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_right_access_statement",
+            "value":"إشعار الأذونات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_files_dialog_delete_permanently_not_recover_tips",
+            "value":"ستُحذف جميع العناصر نهائيًا من هذا الجهاز والسحابة ومن جميع الأجهزة التي تمت المزامنة معها.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance_des",
+            "value":"تحسين حدة الصور المقرّبة الملتقطة في الوضع \"صورة\" تلقائيًا. سيتم رفع الصور المدعومة إلى السحابة لمعالجتها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information_description",
+            "value":"يُستخدم هذا الإذن لتوفير الخدمات المستندة إلى معلومات الموقع.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_extra",
+            "value":"تحسين الصور الملتقطة حديثًا تلقائيًا بمساعدة الذكاء الاصطناعي. ما عليك سوى النقر على أيقونة العصا السحرية التي تظهر أعلى الصور المدعومة. هذه الميزة مجانية لفترة محدودة فقط.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_loading",
+            "value":"جارٍ التحميل...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"print",
+            "value":"طباعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_network_link_title",
+            "value":"هل تريد إيقاف اتصال المعرض بالإنترنت؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_exit_dialog_context_text",
+            "value":"هل تريد تجاهل التغييرات؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fluorescence_photography",
+            "value":"التصوير الفلوري",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"target_has_same_name_file",
+            "value":"يوجد ملف بنفس هذا الاسم. هل تريد استبداله؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"number_of_selected_max",
+            "value":"يمكن المقارنة بين %d صور كحدٍ أقصى في المرة الواحدة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"easy_editing_description_tips",
+            "value":"يمكنك الكتابة والرسم بحرية باستخدام مجموعة مختارة من أدوات الرسم والتوضيح المفيدة.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"service_agreements_and_rules",
+            "value":"اتفاقيات وقواعد الخدمة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mainability_description",
+            "value":"الصور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_delete_kept_tips",
+            "value":"سيتم الاحتفاظ بالعناصر المحذوفة في مجلد «المحذوفات مؤخرًا» لمدة %1$d يومًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_close",
+            "value":"مغلق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_ok",
+            "value":"تم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_confirm",
+            "value":"إيقاف تشغيل معرض السحابة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_videos_dialog_delete_permanently_not_recover_tips",
+            "value":"سيتم حذف جميع الفيديوهات نهائيًا من هذا الجهاز والسحابة ومن جميع الأجهزة التي تمت المزامنة معها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"month",
+            "value":"شهر",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"name_portrait_photo_title",
+            "value":"تسمية الشخص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_highlight_tips",
+            "value":"هل تريد حذف هذه المقتطفات؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_merger",
+            "value":"هل تريد دمج الأشخاص المحددين؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_file_dialog_content",
+            "value":"تم حفظ العناصر المستلمة عبر السحب والإفلات إلى ألبوم \"الصور\" و \"الفيديوهات\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_share_process",
+            "value":"جارٍ تجهيز المحتوى…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"local_all_photos_dialog_delete_permanently_not_recover_tips",
+            "value":"سيتم حذف جميع الصور نهائيًا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_local_space_release",
+            "value":"تحسين السعة التخزينية للجهاز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title",
+            "value":"الاسم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_overwrite_text",
+            "value":"استبدال الصورة الأصلية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_permission_1",
+            "value":"يُستخدم هذا الإذن لقراءة الصور لغرض إنشاء خلفيات.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_more_portraits_currently",
+            "value":"لا يوجد أشخاص",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_all_photos_tips",
+            "value":"هل تريد حذف جميع الصور؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_select_all",
+            "value":"تحديد الكل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_export_to_video",
+            "value":"التصدير كفيديو",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_process_title",
+            "value":"هل تريد إيقاف هذه العملية؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_cloud_enhance",
+            "value":"التحسين بالذكاء الاصطناعي السحابي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_read_protocol",
+            "value":"يُرجى قراءة البيان أعلاه بتمعن. بالنقر على \"أوافق\"، فأنت تعني بذلك موافقتك على السماح لنا بتقديم هذه الخدمة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice",
+            "value":"تحويل إلى فيديو",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_clear_recycle",
+            "value":"مسح الكل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"dialog_consent",
+            "value":"أوافق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_no_tips",
+            "value":"عدم الإظهار مرةً أخرى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_optimize_storage_dialog_content",
+            "value":"لا توجد عناصر لتحسينها.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_to",
+            "value":"نسخ إلى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_device_storage",
+            "value":"تحسين وحدة التخزين للجهاز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rename_failed",
+            "value":"تعذرت إعادة التسمية، يُرجى إعادة المحاولة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panda",
+            "value":"دببة الباندا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Saved_to_Puzzle_Album",
+            "value":"تم الحفظ في الألبوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_select_cover",
+            "value":"تحديد الغلاف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"star_track",
+            "value":"وضع كتابات ضوئية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cleanup_card_description",
+            "value":"يمكنك تفريغ ما يصل إلى %1$s من مساحة التخزين عن طريق حذف الصور والفيديوهات التي نادرًا ما تعرضها.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_cancel_message",
+            "value":"تمت إضافة %1$s من العناصر. هل تريد إيقاف إضافة العناصر؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_loading_progress",
+            "value":"جارِ تحسين وحدة التخزين (%1$s/%2$s)…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"local_all_videos_dialog_delete_permanently_not_recover_tips",
+            "value":"سيتم حذف جميع الفيديوهات نهائيًا.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recover_cancel_message",
+            "value":"تمت استعادة %1$s من الملفات. هل تريد إيقاف استعادة بقية الملفات؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"go_to_check_out",
+            "value":"عرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_videos_head_title_videoAlbum",
+            "value":"لا توجد فيديوهات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_add_photo",
+            "value":"إضافة صورة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"new_recycle_albums_tips",
+            "value":"هل تريد حذف الألبومات المحددة؟\n\nلن يتم حذف الصور والفيديوهات الموجودة في هذه الألبومات.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"screenshot_cleanup",
+            "value":"حذف لقطات الشاشة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_specification_error",
+            "value":"تنسيق الصورة غير مدعوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_stop_note",
+            "value":"إيقاف هذه الخدمة سيؤدي إلى إيقاف جمع بيانات المستخدم على جهازك.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_delete_process",
+            "value":"جارٍ الحذف…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_unfavor_process",
+            "value":"جارٍ الإزالة من المفضلة…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_invalid_uri_from_faCard",
+            "value":"خطأ في الصورة. تم التخطي إلى الصورة الأولى في الألبوم.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_sync",
+            "value":"%s مزامنة صورك وفيديوهاتك عبر جميع أجهزتك.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_hide_albums",
+            "value":"العناصر المخفية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_cancel_hidden_process",
+            "value":"جارٍ الإظهار…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"file_can_not_edited",
+            "value":"يتعذر التعديل، لأن تنسيق الملف غير مدعوم أو تالف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_exporting",
+            "value":"جارٍ التصدير…",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"size",
+            "value":"الحجم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"stop",
+            "value":"إيقاف",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_cancel",
+            "value":"إلغاء",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_login_card_content",
+            "value":"يُخزِّن معرض السحابة الصور والفيديوهات الخاصة بك بأمان على السحابة، لتتمكن من الوصول إليها من أي جهاز مع توفير مساحة الجهاز التخزينية.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"silky_water",
+            "value":"وضع حركة المياه",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_player_cloud_io_error",
+            "value":"تعذر التشغيل، يُرجى إعادة المحاولة لاحقًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_title",
+            "value":"مساحة التخزين السحابية ممتلئة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fountain",
+            "value":"نوافير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_favorite",
+            "value":"إزالة من المفضلة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_unction_requires",
+            "value":"تحتاج هذه الخدمة إلى %1$s وإلى قراءة ورفع/نقل الصور من أجل تزويدك بميزة تحسين الصور. بالنقر على \"أوافق\"، فأنت تعني بذلك موافقتك على هذه البنود. يمكنك الاطلاع على %2$s لمعرفة التفاصيل حول كيفية معالجة معلوماتك الشخصية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_exit_dialog_discard_text",
+            "value":"تجاهل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_file_location",
+            "value":"الملف في المكان الأصلي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"year",
+            "value":"سنة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_or_move",
+            "value":"اختر طريقة الإضافة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_analysis_progress",
+            "value":"جارٍ تحليل الصور…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_burst_photos_saving_progress",
+            "value":"تجاهل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mirror_text",
+            "value":"انعكاس",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_privacy_statement_1",
+            "value":"البيان المتعلق بخدمة الخلفيات الذكية والخصوصية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_copied_exceeds_the_limit_tips",
+            "value":"يمكن نسخ %d عنصر كحدٍ أقصى في المرة الواحدة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_access_description",
+            "value":"يُستخدم هذا الإذن لقراءة الصور بغرض تعديلها باستخدام الذكاء الاصطناعي.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_files_to_user_album_merge",
+            "value":"تم حفظ %1$s و%2$s في الألبوم المحدد. و%3$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delicacy",
+            "value":"أطعمة ومشروبات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_splash_content",
+            "value":"أسباب الترقية إلى معرض السحابة:",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_recycle",
+            "value":"المحذوفات مؤخرًا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_wlan_and_networks",
+            "value":"استخدام الشبكة اللاسلكية وبيانات الجوال",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_analysis_service",
+            "value":"خدمة تحليل الوسائط",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"grid_layout_description_tips",
+            "value":"توسعة معرض صورك ليشمل الآن الشاشة بأكملها للاستمتاع بتجربة عرض غامرة.\n\nيمكنك أيضًا التبديل بين العرض بحسب اليوم والشهر والسنة بنقرة واحدة فقط.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_video_dialog_content",
+            "value":"تم حفظ العناصر المستلمة عبر السحب والإفلات إلى ألبوم \"الفيديوهات\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_clear_process",
+            "value":"جارٍ المسح…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_progress",
+            "value":"جارٍ النقل…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_progress",
+            "value":"جارٍ النسخ…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_service_note",
+            "value":"ميزة ألبومات الموقع لن تكون مُتاحة بعد الآن، كما لن تتأثر الميزات الأخرى بذلك. هل حقًا تريد إيقاف تشغيلها؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"categorize",
+            "value":"الفئات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"merge_portrait_photo_title",
+            "value":"هل تريد الدمج؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"construct",
+            "value":"مباني",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_set_for_me",
+            "value":"هل تريد تعيين الألبوم \"\u202a%s\u202c\" كألبوم \"أنا\"؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_failed_single",
+            "value":"يتعذر النسخ، يُرجى إعادة المحاولة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_albums",
+            "value":"أشخاص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sound_off_filled",
+            "value":"كتم الصوت",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upgrade_to_cloud_gallery",
+            "value":"معرض السحابة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel_hidden",
+            "value":"إظهار",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_view_portrait",
+            "value":"عرض حسب الشخص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Set_Is_Me",
+            "value":"تعيين اسم الشخص \"أنا\"",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_save_btn",
+            "value":"إبقاء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dinner_party",
+            "value":"وجبات جماعية",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_description",
+            "value":"ترفع هذه الخدمة الصور التي تحددها إلى السحابة لإجراء التعديلات عليها بمساعدة الذكاء الاصطناعي. وتحتاج إلى منحها الأذونات التالية:",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photos",
+            "value":"الصور",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_enable_note",
+            "value":"تشغيل هذه الخدمة سيؤدي إلى قراءة ملفات الصور في الخلفية لتزويدك بميزات إنشاء الخلفيات بمساعدة الذكاء الاصطناعي.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_single_file_dialog_delete_permanently_not_recover_tips",
+            "value":"سيتم حذف هذا العنصر نهائيًا من هذا الجهاز والسحابة ومن جميع الأجهزة التي تمت المزامنة معها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"jump_to_file_management_tips",
+            "value":"انتقل إلى \"مدير الملفات > تصفح > \u202a%s\u202c\" لعرض الصور والفيديوهات وإدارتها على جهاز التخزين هذا.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"form_FormAbility_label",
+            "value":"ألبوم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_device_storage_detail",
+            "value":"إذا كانت مساحة وحدة التخزين في جهازك منخفضة، فسيتم استبدال الصور والفيديوهات ذات الدقة الكاملة بإصدارات أصغر لتوفير مساحة. يمكنك تنزيل النسخ الأصلية من السحابة في أي وقت. %1$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_subtitle_1",
+            "value":"ترفع هذه الخدمة الصور التي تحددها إلى خوادم السحابة لإنشاء خلفيات باستخدام خوارزميات الذكاء الاصطناعي. وتحتاج إلى منحها الأذونات التالية:",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"large_aperture",
+            "value":"عدسة واسعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_moving_photo_splice",
+            "value":"جارٍ الدمج…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_unlimited_use_mobile_network",
+            "value":"استخدام بيانات الجوال",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_single_file_recycle_delete_kept_tips",
+            "value":"سيتم حذف هذا العنصر من هذا الجهاز والسحابة ومن جميع الأجهزة التي تمت المزامنة معها. وسيتم الاحتفاظ به في مجلد \"المحذوفات مؤخرًا\" لمدة %d يومًا.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_long_exposure",
+            "value":"تعريض ضوئي طويل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"pictures_and_videos_tv",
+            "value":"الصور والفيديوهات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_distributed_photo_head_title_album",
+            "value":"لا توجد صور أو فيديوهات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"only_selected_items_can_be_accessed",
+            "value":"يمكن لهذا التطبيق الوصول إلى الصور والفيديوهات التي تحددها فقط.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_graffiti",
+            "value":"وضع آثار أضواء النجوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_loop_play",
+            "value":"تشغيل حلقي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from",
+            "value":"إزالة من هذا الألبوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_saving_burst_photos_tip",
+            "value":"هل تريد تجاهل التغييرات؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_gallery",
+            "value":"معرض السحابة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"detele_button",
+            "value":"حذف المُحدد (%1$s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_service",
+            "value":"التحسين بالذكاء الاصطناعي السحابي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_items_two_nine",
+            "value":"يُرجى تحديد من %1$d إلى %2$d صور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_video",
+            "value":"قام تطبيق %s بالتعديل على فيديوهات في المعرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_virtual_aperture",
+            "value":"فتحة العدسة الافتراضية موقوفة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flash_capture",
+            "value":"تأثير اللقطة السريعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"virtual_aperture",
+            "value":"فتحة العدسة الافتراضية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_flash_capture",
+            "value":"تأثير اللقطة السريعة موقوف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dynamic_panning",
+            "value":"تدوير أفقيًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"overlay_effect",
+            "value":"تداخل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_effect",
+            "value":"إغلاق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_and_documents",
+            "value":"الوسائط والملفات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_edit",
+            "value":"تعديل صورة الشخص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"not_prompt_again",
+            "value":"عدم الإظهار مجددًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_deletion",
+            "value":"حذف الفيديوهات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_pdf_success",
+            "value":"تم حفظ المستند",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_size_ratio_too_large",
+            "value":"تتجاوز نسبة العرض إلى ارتفاع الصورة حدود التعرّف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_nearby_photos",
+            "value":"إظهار الصور المُلتقطة في أماكن قريبة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_nearby_photos",
+            "value":"إخفاء الصور المُلتقطة في أماكن قريبة",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"set_album_cover_ready",
+            "value":"تم تغيير الغلاف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"reset_album_cover_ready",
+            "value":"تمت استعادة الغلاف الافتراضي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_as_album_cover",
+            "value":"تعيين كغلاف الألبوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"occure_error_and_retry",
+            "value":"مشكلة في النظام، يُرجى إعادة المحاولة لاحقًا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_custom_cover",
+            "value":"إلغاء الغلاف المخصص",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_change_album_cover",
+            "value":"تغيير غلاف الألبوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"scan_qrcode_in_image",
+            "value":"قراءة رمز QR",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_QRCode_error",
+            "value":"لا يوجد تطبيق لفتحه",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document_scan_count_limit",
+            "value":"دعم %d صور بحدٍ أقصى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"restore_default_sort",
+            "value":"استعادة الترتيب الافتراضي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_sorting",
+            "value":"فرز الألبومات",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"custom_sort",
+            "value":"إعادة الترتيب",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"document_scan_not_support_video_message",
+            "value":"الفيديوهات غير مدعومة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sort_by_name",
+            "value":"فرز حسب الاسم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"restore_default_sort_message",
+            "value":"هل تريد استعادة الترتيب الافتراضي؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"map_album",
+            "value":"ألبومات الموقع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_intelligence_analysis",
+            "value":"تحليل الوسائط",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time_travel_theme",
+            "value":"مظهر السفر عبر الزمن",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"collapse_menu_bar",
+            "value":"إغلاق شريط القائمة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"disabled",
+            "value":"غير متاح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_goto_photos",
+            "value":"انتقال إلى المعرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_checkbox_selected",
+            "value":"محدد، الصورة الأصلية، مربع اختيار، انقر مرتين لإلغاء التحديد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_search",
+            "value":"بحث",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_material_select",
+            "value":"تحديد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_menu_bar",
+            "value":"فتح شريط القائمة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"random_collage",
+            "value":"دمج صور %s عشوائيًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"checkbox_selected",
+            "value":"مربع اختيار، محدد، انقر مرتين لإلغاء التحديد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_screenshot",
+            "value":"لقطة شاشة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessibility_event_click_action",
+            "value":"انقر مرتين للتفعيل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_checkbox_deselected",
+            "value":"غير محدد، الصورة الأصلية، مربع الاختيار، انقر مرتين للتحديد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_auto",
+            "value":"الفلاش، تلقائي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance",
+            "value":"توازن اللون الأبيض %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_tungsten_incandescent_light",
+            "value":"متوهج",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"multiselect",
+            "value":"تحديد متعدد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_steady",
+            "value":"الفلاش، قيد التشغيل دائمًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected",
+            "value":"محددة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_vivid",
+            "value":"زاهٍ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_original",
+            "value":"أصلي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_bright",
+            "value":"ساطع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_mono",
+            "value":"أحادي اللون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"focal_length_in_35mm_film",
+            "value":"الطول البؤري المكافئ %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location",
+            "value":"الانتقال إلى الموقع الحالي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"day_grid_view",
+            "value":"عرض بالأيام",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"year_grid_view",
+            "value":"عرض بالسنوات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"month_grid_view",
+            "value":"عرض بالشهور",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photos_from_group_tip",
+            "value":"لن يظهر المحتوى المُحدد في هذه المجموعة بعد الآن.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_group",
+            "value":"المجموعات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_group_tip",
+            "value":"لن تظهر هذه الصورة في هذه المجموعة بعد الآن.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_group",
+            "value":"إزالة من المجموعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_group_album",
+            "value":"التقط بعض الصور الجماعية للبدء\n\nيتم إنشاء ألبومات المجموعات تلقائيًا من الصور الجماعية التي تلتقطها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_video_from_group_tip",
+            "value":"لن يظهر هذا الفيديو في هذه المجموعة بعد الآن.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_group",
+            "value":"هل تريد إزالة الصورة من المجموعة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panorama_mode",
+            "value":"بانوراما",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"raw",
+            "value":"خام",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_setting",
+            "value":"علامة الإنشاء بواسطة الذكاء الاصطناعي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_setting_description",
+            "value":"إظهار علامة \"مُنشأة بواسطة الذكاء الاصطناعي\" على الصور التي تم تعديلها باستخدام أدوات تحسين الصور بالذكاء الاصطناعي، مثل التوسيع والإزالة والتحريك.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"year_month_grid_message",
+            "value":"%1$s إلى %2$s، ‏%3$s إجمالاً",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"broadcast_multi_video_and_photo_num",
+            "value":"%1$s و%2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse_tips",
+            "value":"لا يمكن تطبيق التأثيرات إلا على أداة معرض واحدة في المرة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse_tips_new",
+            "value":"إضافة تأثيرات الكاميرا الديناميكية المتنوعة إلى الصور المضافة إلى الشاشة الرئيسية. يتم تفعيل هذا الخيار لصورة واحدة فقط لكل شاشة رئيسية.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse",
+            "value":"تأثيرات التشغيل الديناميكية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_highlights",
+            "value":"لا توجد مقتطفات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_highlight_not_exist",
+            "value":"تم حذف المقتطف، سيتم تحديث أداة الشاشة الرئيسية قريبًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auth_camera_location_title",
+            "value":"هل تريد السماح للكاميرا بتسجيل معلومات الموقع؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auth_camera_location_gird",
+            "value":"يتيح لك هذا عرض معلومات الموقع للصور المُلتقطة من الآن فصاعدًا. ستتمكن أيضًا من استخدام ميزتي \"الأماكن\" و\"المقتطفات\" في المعرض.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auth_camera_location_browser",
+            "value":"يتيح لك هذا عرض معلومات الموقع للصور المُلتقطة من الآن فصاعدًا.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"سماح",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"is_already_album_cover",
+            "value":"هذه الصورة مُعيّنة بالفعل كغلاف للألبوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_image_can_download_tips",
+            "value":"سيتم حذف هذه الصورة من هذا الجهاز. يمكن تنزيل الصور التي تمت مزامنتها إلى السحابة مرة أخرى في أي وقت.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_video_can_download_tips",
+            "value":"سيتم حذف هذا الفيديو من هذا الجهاز. يمكن تنزيل مقاطع الفيديو التي تمت مزامنتها إلى السحابة مرة أخرى في أي وقت.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_images_can_download_tips",
+            "value":"سيتم حذف كل الصور من هذا الجهاز. يمكن تنزيل الصور التي تمت مزامنتها إلى السحابة مرة أخرى في أي وقت.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_videos_can_download_tips",
+            "value":"سيتم حذف كل مقاطع الفيديو من هذا الجهاز. يمكن تنزيل مقاطع الفيديو التي تمت مزامنتها إلى السحابة مرة أخرى في أي وقت.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_files_can_download_tips",
+            "value":"سيتم حذف كل العناصر من هذا الجهاز. يمكن تنزيل العناصر التي تمت مزامنتها إلى السحابة مرة أخرى في أي وقت.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_cleanup",
+            "value":"حذف الفيديوهات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_group_album",
+            "value":"حذف المجموعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_group_album",
+            "value":"تعديل المجموعة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_this_group_album",
+            "value":"هل تريد حذف هذه المجموعة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_from_group_tips",
+            "value":".لن تُعرض هذه المجموعات بعد الآن. لا يؤدي حذف المجموعة إلى حذف الصور الموجودة فيها",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_from_one_group_tips",
+            "value":"لن تُعرض هذه المجموعة بعد الآن. لا يؤدي حذف مجموعة إلى حذف الصور الموجودة فيها.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"expression",
+            "value":"التعبير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_expression",
+            "value":"التعبير المحدد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessibility_face_edit_box",
+            "value":"صندوق التحرير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shanghai_world_expo_china_pavilion",
+            "value":"جناح الصين في معرض شنغهاي العالمي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"natural_scenery",
+            "value":"مناظر طبيعية خلابة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slim_waist",
+            "value":"برج كانتون",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"humanities_and_landscapes",
+            "value":"معالم شهيرة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_sky",
+            "value":"سماء الليل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lightning",
+            "value":"برق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pyramids",
+            "value":"أهرامات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"jewelry",
+            "value":"مجوهرات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"notes_album",
+            "value":"صور وفيديوهات بتعليقات توضيحية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tiananmen",
+            "value":"تيان آن من",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"floor_plan",
+            "value":"مخططات الطوابق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"marriage_certificate",
+            "value":"وثائق زواج",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cards",
+            "value":"بطاقات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"graduations",
+            "value":"حفلات تخرج",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"arc_de_triomphe_in_paris",
+            "value":"قوس النصر (باريس)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"design",
+            "value":"صور فنية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cliff",
+            "value":"منحدرات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aurora",
+            "value":"الشفق القطبي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"water_cube",
+            "value":"المكعب المائي (مركز بكين الوطني للرياضات المائية)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tickets",
+            "value":"التذاكر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flowers_and_plants",
+            "value":"أزهار ونباتات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bicycles",
+            "value":"دراجات هوائية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"weddings",
+            "value":"حفلات زفاف",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"train_tickets",
+            "value":"تذاكر القطار",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sky",
+            "value":"السماء",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"airline_tickets",
+            "value":"تذاكر الطيران",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sunrise_and_sunset",
+            "value":"الشروق والغروب",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"clouds",
+            "value":"سحب",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"parents",
+            "value":"أطفال",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sea_and_lake_view",
+            "value":"شواطئ البحار والبحيرات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moon",
+            "value":"القمر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"morning_glow_and_evening_glow",
+            "value":"الشروق والغروب",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pets",
+            "value":"حيوانات أليفة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cars",
+            "value":"سيارات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"barcode",
+            "value":"رموز شريطية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"coral",
+            "value":"مرجان",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"buses",
+            "value":"حافلات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bird_nest",
+            "value":"عش طائر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"potala_palace_in_lhasa",
+            "value":"قصر بوتالا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"macao_ruins",
+            "value":"أطلال كنيسة القديس بولس",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ship",
+            "value":"سفن",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"birthdays",
+            "value":"أعياد ميلاد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"movie_tickets",
+            "value":"تذاكر أفلام",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"concerts",
+            "value":"حفلات موسيقية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dogs",
+            "value":"كلاب",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hukou",
+            "value":"مستندات هوكو",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"the_great_wall",
+            "value":"سور الصين العظيم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"beach",
+            "value":"شواطئ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"desert",
+            "value":"صحارى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"snow_mountain",
+            "value":"جبال مغطاة بالثلوج",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"parties",
+            "value":"حفلات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"invoices",
+            "value":"فواتير",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"trains",
+            "value":"قطارات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"CCTV_building",
+            "value":"مقر CCTV الرئيسي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"chongqing_jiefangbei",
+            "value":"نصب التحرير في مدينة تشونغتشينغ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"real_estate_certificate",
+            "value":"شهادات ملكية العقارات",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+          "name":"change_portrait",
+          "value":"اختيار شخص آخر",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"select_portrait",
+          "value":"تحديد شخص",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"display_the_avatar",
+          "value":"عرض صورة الملف الشخصي",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"select_the_portrait_album_to_display",
+          "value":"حدد شخصًا للعرض.",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+            "name":"classify_cv_popup",
+            "value":"تمت ترقية ألبوم \"الفئات\". انقر هنا لبدء الاستكشاف!",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selfie",
+            "value":"الصور الذاتية",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_portrait",
+            "value":"لا يوجد أشخاص بعد",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"display_album_name",
+            "value":"إظهار اسم الألبوم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+      {
+        "name":"action_video_splicing",
+        "value":"فيديو",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"action_creation",
+        "value":"إنشاء",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"exceeding_the_limit_message",
+        "value":"يمكن إضافة %d ملفًا بحد أقصى",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"action_time_files",
+        "value":"فيلم فوري",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+        {
+            "name": "sync_all_cloud_album_title",
+            "value": "تحديد ألبومات لمزامنتها",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "sync_all_cloud_album",
+            "value": "مزامنة الكل",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "sync_all_cloud_album_detail",
+            "value": "مزامنة ألبوم الكاميرا بشكلٍ افتراضي.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "cloud_album_sync",
+            "value": "تحديد ألبومات لمزامنتها",
+            "attr": {
+                "priority": "translate"
+            }
+        }
+    ]
+}

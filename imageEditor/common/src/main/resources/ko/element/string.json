@@ -1,0 +1,5660 @@
+{
+    "string":[
+        {
+            "name":"xt_style_natural_selected",
+            "value":"내추럴 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_film_selected",
+            "value":"셀룰로이드 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_cinematic_selected",
+            "value":"시네마틱 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_anime_selected",
+            "value":"아니메 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picking",
+            "value":"이동",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_cancel",
+            "value":"취소",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_is_too_large_toast",
+            "value":"이미지가 너무 큽니다. 다른 이미지로 다시 시도하십시오.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_anime_imageEdit",
+            "value":"애니메이션",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_kaleidoscope",
+            "value":"만화경 모자이크 패턴",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_romance_imageEdit",
+            "value":"시네마",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_saturation_level",
+            "value":"채도 레벨 %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"natural_style",
+            "value":"내추럴",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_reflect_light",
+            "value":"눈부심 감소",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_reset_success",
+            "value":"재설정 완료됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"best_expression_update_component",
+            "value":"이 기능을 사용하면 동일한 시리즈의 여러 사진에서 가장 좋은 표정을 혼합하고 일치시킬 수 있습니다. 사용하려면 플러그인 업데이트가 필요합니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_sky_blue",
+            "value":"스카이 블루 모자이크 패턴",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_abnormal",
+            "value":"서버 오류입니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_xt_style_selected",
+            "value":"사용자 설정 스타일 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"update_now",
+            "value":"지금 업데이트",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_films_imageEdit",
+            "value":"필름",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_generating_content",
+            "value":"생성 중…",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_typ_classic",
+            "value":"클래식 모자이크 패턴",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_remove",
+            "value":"제거",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_cartoon",
+            "value":"만화 모자이크 패턴",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_level",
+            "value":"톤 레벨 %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_close",
+            "value":"꺼짐",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_slide_bar",
+            "value":"톤 레벨 %1$d, %2$d에서 %3$d까지 범위 조정 가능. 두 번 탭하여 적용하거나 두 번 탭하고 길게 누른 다음 위나 아래로 드래그하여 변경",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shrink_image_to_adjust_expand_rect",
+            "value":"이미지를 축소하여 확장 가능한영역을 조정합니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_network_abnorma_toast",
+            "value":"네트워크 오류입니다. 확인하고 다시 시도하십시오.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"yellow_imageEdit",
+            "value":"노란색",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_reflect_light",
+            "value":"이 이미지에서는 눈부심 감소를 사용할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_identified_replace_face",
+            "value":"바꿀 수 있는 얼굴이 식별되지 않았습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand",
+            "value":"이 이미지는 확대할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"best_expression_new_feature",
+            "value":"최고의 표정 체험",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_mosicac",
+            "value":"모자이크",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"replace_face_fail",
+            "value":"문제가 발생했습니다. 다른 이미지를 선택하고 다시 시도하십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_matrix_area",
+            "value":"색상 조정 영역입니다. 색온도를 조정하려면 가로로 드래그하고 채도를 조정하려면 세로로 드래그합니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_reflect_light",
+            "value":"제거",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_default_template",
+            "value":"기본 사전 설정, 색온도 %1$d, 채도 %2$d, 톤 %3$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_open",
+            "value":"켜짐",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_haze_removal_imageEdit",
+            "value":"미스트 제거",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_polka_dot",
+            "value":"물방울 무늬 모자이크 패턴",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove",
+            "value":"제거",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"manual_selection",
+            "value":"수동",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_star",
+            "value":"별 모자이크 패턴",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_replace_emoticons",
+            "value":"연속으로 여러 장의 사진을 촬영하여 대체 표정을 가져옵니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_continue",
+            "value":"계속",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_triangle",
+            "value":"삼각형 모자이크 패턴",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_aspect_ratio_too_large",
+            "value":"종횡비가 너무 큽니다. 다른 이미지로 다시 시도하십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_imageEdit",
+            "value":"버튼",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_selection",
+            "value":"자동",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_weaving",
+            "value":"직물 모자이크 패턴",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_eraser",
+            "value":"지우개",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_expand_image",
+            "value":"확장",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aspect_ratio_of_the_image_toast",
+            "value":"종횡비가 너무 큽니다. 다른 이미지로 다시 시도하십시오.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_expand_image",
+            "value":"확장",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_color_temperature_level",
+            "value":"색온도, 레벨 %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"background",
+            "value":"배경",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aiproducer_best_expression",
+            "value":"최고의 표현",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_bootstrapping_for_the_first_time",
+            "value":"개체나 사람의 중앙을 스와이프하여 선택합니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_color_block",
+            "value":"컬러 블록 모자이크 패턴",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_xt_style_template",
+            "value":"사용자 설정 사전 설정 %1$d, 색온도 %2$d, 채도 %3$d, 톤 %4$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_style_imageEdit",
+            "value":"텍스트 스타일",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"다시 실행: 자동 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_xt_style_imageEdit",
+            "value":"XMAGE",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_refinement",
+            "value":"다듬기",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_style",
+            "value":"세련되게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_off_imageEdit",
+            "value":"다시 실행: 색온도 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_blossom_imageEdit",
+            "value":"실행취소: 블러썸 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_remove",
+            "value":"제거",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_rotate_imageEdit",
+            "value":"회전",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_off_imageEdit",
+            "value":"다시 실행: 하이라이트 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_pink_imageEdit",
+            "value":"다시 실행: 핑크 필터.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_off_imageEdit",
+            "value":"다시 실행: 선명도 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_strength_imageEdit",
+            "value":"다시 실행: 소박하게 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"실행취소: 자동 조정 종료.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_imageEdit",
+            "value":"라임",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_on_imageEdit",
+            "value":"다시 실행: 페이드 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_finish",
+            "value":"완료",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic",
+            "value":"참고",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_moody_imageEdit",
+            "value":"다시 실행: 쓸쓸하게 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_off_imageEdit",
+            "value":"실행취소: 비네트 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_imageEdit",
+            "value":"실행취소: 그림자 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_imageEdit",
+            "value":"실행취소: 온도 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_natural_style",
+            "value":"다시 실행: 내추럴.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_top",
+            "value":"왼쪽 상단 모서리",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_top",
+            "value":"오른쪽 상단 모서리",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_bottom",
+            "value":"왼쪽 하단 모서리",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_bottom",
+            "value":"오른쪽 하단 모서리",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left",
+            "value":"왼쪽 가장자리",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right",
+            "value":"오른쪽 가장자리",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_top",
+            "value":"상단 가장자리",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_bottom",
+            "value":"하단 가장자리",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cutting_percentage",
+            "value":"%1$s에서 %2$s 잘라내기",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light",
+            "value":"전면",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_off_imageEdit",
+            "value":"다시 실행: 어두운 영역 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_shoot_param_imageEdit",
+            "value":"다시 실행: 촬영 매개변수 표시.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_param_imageEdit",
+            "value":"촬영 매개변수",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_on_imageEdit",
+            "value":"다시 실행: 하이라이트 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_original_imageEdit",
+            "value":"원본",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_two",
+            "value":"AI 리터치를 사용하면 이 이미지는 정지 상태가 되어 더 이상 %1$s 및 %2$s 조정이 불가능합니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_imageEdit",
+            "value":"실행취소: 페이드 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_strength_imageEdit",
+            "value":"실행취소: 럭키 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup",
+            "value":"현재 필터가 바뀝니다",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_imageEdit",
+            "value":"삭제",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_proportional_imageEdit",
+            "value":"다시 실행: 비율.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_model_imageEdit",
+            "value":"장치 모델",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_time_imageEdit",
+            "value":"촬영 시간",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_strength_imageEdit",
+            "value":"실행취소: 소박하게 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_strength_imageEdit",
+            "value":"실행취소: 크리스탈 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_strength_imageEdit",
+            "value":"다시 실행: 크리스탈 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"revert_original_state_imageEdit",
+            "value":"원본 상태로 재설정하시겠습니까?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_one",
+            "value":"AI 리터치를 사용하면 이 이미지는 정지 상태가 되어 더 이상 %1$s 조정이 불가능합니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_close_watermark_imageEdit",
+            "value":"다시 실행: 워터마크 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_sharpness_imageEdit",
+            "value":"선명도",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_softness",
+            "value":"부드럽게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_media_imageEdit",
+            "value":"저장 중\u2026",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_none_imageEdit",
+            "value":"실행취소: 원본.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_granules_imageEdit",
+            "value":"다시 실행: 입자 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_imageEdit",
+            "value":"다시 실행: 비네트 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_original_strength_imageEdit",
+            "value":"실행취소: 천상의 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_imageEdit",
+            "value":"실행취소: 중립 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_vertical_correction_imageEdit",
+            "value":"수직",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_granules_imageEdit",
+            "value":"입자",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"다시 실행: 자동 조정 실행.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_vignette_imageEdit",
+            "value":"비네트",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_imageEdit",
+            "value":"다시 실행: 트와일라이트 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_vertical_imageEdit",
+            "value":"다시 실행: 수직 보정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"contour_light",
+            "value":"윤곽",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_blossom_imageEdit",
+            "value":"다시 실행: 블러썸 필터.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_temperature_imageEdit",
+            "value":"온도",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"blurred",
+            "value":"블러",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_off_imageEdit",
+            "value":"다시 실행: 색조 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_strength_imageEdit",
+            "value":"실행취소: 달콤하게 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_on_imageEdit",
+            "value":"다시 실행: 노출 조정 켜기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_crop_imageEdit",
+            "value":"자르기",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_natural_imageEdit",
+            "value":"다시 실행: 자연스럽게 필터.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tradition_remove_content",
+            "value":"제거 중",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_dark_part_imageEdit",
+            "value":"실행취소: 어두운 영역 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_format_abnormal_toast",
+            "value":"지원되지 않는 이미지 형식입니다. 다른 이미지로 다시 시도하십시오.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_imageEdit",
+            "value":"실행취소: 럭키 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_all_changes_imageEdit",
+            "value":"변경 사항을 삭제하시겠습니까?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_pink_imageEdit",
+            "value":"핑크",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_on_imageEdit",
+            "value":"다시 실행: 밝은 영역 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_nature_saturation_imageEdit",
+            "value":"다시 실행: 생동감 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_horizontal_correction_imageEdit",
+            "value":"수평",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_black_and_white_imageEdit",
+            "value":"모노",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_shoot_model_imageEdit",
+            "value":"실행취소: 장치 모델 표시.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_fair_imageEdit",
+            "value":"다시 실행: 옅게 필터.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bokeh",
+            "value":"블러",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_on_imageEdit",
+            "value":"다시 실행: 생동감 조정 켜기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_films_imageEdit",
+            "value":"다시 실행: 필름.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_dark_part_imageEdit",
+            "value":"다시 실행: 어두운 영역 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_original_strength_imageEdit",
+            "value":"다시 실행: 천상의 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_imageEdit",
+            "value":"페이드",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_two",
+            "value":"모자이크를 추가하면 이 이미지는 정지 상태가 되어 더 이상 %1$s 및 %2$s 조정이 불가능합니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlights_imageEdit",
+            "value":"다시 실행: 하이라이트 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_adjust_imageEdit",
+            "value":"조정",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_one",
+            "value":"모자이크를 추가하면 이 이미지는 정지 상태가 되어 더 이상 %1$s 조정이 불가능합니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_old_tree_imageEdit",
+            "value":"소박하게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_on_imageEdit",
+            "value":"실행취소: 생동감 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_imageEdit",
+            "value":"다시 실행: 소박하게 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_general_watermark_imageEdit",
+            "value":"실행취소: 표준 워터마크.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_on_imageEdit",
+            "value":"실행취소: 그림자 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_original_imageEdit",
+            "value":"다시 실행: 천상의 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_refinement_new",
+            "value":"이미지가 포트레이트 보정 요건을 충족하지 않습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_imageEdit",
+            "value":"다시 실행: 따뜻하게 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_on_imageEdit",
+            "value":"다시 실행: 비네트 조정 켜기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_off_imageEdit",
+            "value":"다시 실행: 대비 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_bubble_save",
+            "value":"저장",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_haze_removal_imageEdit",
+            "value":"실행취소: 미스트 제거.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_fail_toast",
+            "value":"제거할 수 없습니다. 나중에 다시 시도하십시오.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_imageEdit",
+            "value":"실행취소: 비네트 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_off_imageEdit",
+            "value":"실행취소: 페이드 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_on_imageEdit",
+            "value":"실행취소: 어두운 영역 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_seal_imageEdit",
+            "value":"워터마크",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"다시 실행: 자동 조정 종료.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_imageEdit",
+            "value":"삭제",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_imageEdit",
+            "value":"다시 실행: 중립 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_nature_saturation_imageEdit",
+            "value":"실행취소: 생동감 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_on_imageEdit",
+            "value":"다시 실행: 그림자 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_previous_step",
+            "value":"실행취소",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_off_imageEdit",
+            "value":"실행취소: 색조 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous",
+            "value":"풍부하게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editor_save_as",
+            "value":"새로 저장",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sun_sets",
+            "value":"일몰",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_one_pen",
+            "value":"일시 정지하여 모양 형성",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_dark_part_imageEdit",
+            "value":"어두운 영역",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_imageEdit",
+            "value":"실행취소: 소박하게 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tip",
+            "value":"마크업을 사용하면 이 이미지의 가상 조리개나 사용자 설정 스타일을 조정할 수 없게 됩니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_oversize_imageEdit",
+            "value":"이 이미지 크기에는 워터마크를 사용할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_oneClick_adjust_imageEdit",
+            "value":"자동 조정",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_close_imageEdit",
+            "value":"다시 실행: 사용자 설정 스타일 종료.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_pink_imageEdit",
+            "value":"실행취소: 핑크 필터.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_one",
+            "value":"텍스트를 추가하면 이 이미지는 정지 상태가 되어 더 이상 %1$s 조정이 불가능합니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rebuild",
+            "value":"재생성",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_imageEdit",
+            "value":"다시 실행: 럭키 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_off_imageEdit",
+            "value":"실행취소: 어두운 영역 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_romance_imageEdit",
+            "value":"실행취소: 시네마.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_two",
+            "value":"텍스트를 추가하면 이 이미지는 정지 상태가 되어 더 이상 %1$s 및 %2$s 조정이 불가능합니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_mirror_imageEdit",
+            "value":"실행취소: 미러링.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sprightly",
+            "value":"즐겁게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai",
+            "value":"참고",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_off_imageEdit",
+            "value":"다시 실행: 비네트 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition",
+            "value":"구성 요소",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_aperture",
+            "value":"조리개",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_ratio_imageEdit",
+            "value":"종횡비",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"subtitle_delete_cancel_imageEdit",
+            "value":"취소",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_imageEdit",
+            "value":"실행취소: 크리스탈 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"background_decolorization",
+            "value":"모노",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_standard_imageEdit",
+            "value":"표준",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_imageEdit",
+            "value":"실행취소: 모노크롬 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"expand_image",
+            "value":"확장",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"editor_overwrite_the_original_image",
+            "value":"원본 바꾸기",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_imageEdit",
+            "value":"실행취소: 채도 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_off_imageEdit",
+            "value":"다시 실행: 그림자 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_gorgeous",
+            "value":"멋지게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup",
+            "value":"참고",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"revert_imageEdit",
+            "value":"재설정",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_imageEdit",
+            "value":"다시 실행: 노출 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"petalClip_stylus_next_step",
+            "value":"다시 실행",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light",
+            "value":"렘브란트",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_haze_removal_imageEdit",
+            "value":"다시 실행: 미스트 제거.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_natural_style",
+            "value":"실행취소: 내추럴.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light",
+            "value":"없음",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_off_imageEdit",
+            "value":"실행취소: 대비 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_on_imageEdit",
+            "value":"실행취소: 채도 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_moody_imageEdit",
+            "value":"실행취소: 쓸쓸하게 필터.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_translucent",
+            "value":"또렷하게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_downloading_imageEdit",
+            "value":"원본 이미지를 다운로드하는 중입니다. 기다리십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_shoot_param_imageEdit",
+            "value":"실행취소: 촬영 매개변수 표시.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_on_imageEdit",
+            "value":"실행취소: 대비 조정 켜기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_imageEdit",
+            "value":"황혼",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_refinement",
+            "value":"이 이미지에서는 포트레이트 보정 기능을 사용할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_strength_imageEdit",
+            "value":"다시 실행: 중립 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_bright_part_imageEdit",
+            "value":"밝은 영역",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_strength_imageEdit",
+            "value":"다시 실행: 럭키 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_off_imageEdit",
+            "value":"실행취소: 입자 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_imageEdit",
+            "value":"다시 실행: 대비 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_standard_imageEdit",
+            "value":"다시 실행: 표준.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_mirror_imageEdit",
+            "value":"다시 실행: 미러링.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_on_imageEdit",
+            "value":"실행취소: 하이라이트 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_analyzing",
+            "value":"분석 중…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_on_imageEdit",
+            "value":"다시 실행: 밝기 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_shadow_imageEdit",
+            "value":"그림자",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"videoTool_compare_imageEdit",
+            "value":"비교",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_classics_imageEdit",
+            "value":"실행취소: 클래식 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_on_imageEdit",
+            "value":"실행취소: 입자 조정 켜기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_on_imageEdit",
+            "value":"실행취소: 색온도 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_fuji",
+            "value":"후지",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant",
+            "value":"우아하게",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_strength_imageEdit",
+            "value":"다시 실행: 따뜻하게 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_imageEdit",
+            "value":"크리스탈",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_text_imageEdit",
+            "value":"탭하여 편집",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_on_imageEdit",
+            "value":"실행취소: 밝은 영역 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_horizontal_imageEdit",
+            "value":"실행취소: 수평 보정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_strength_imageEdit",
+            "value":"실행취소: 라임 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"soft_light",
+            "value":"부드럽게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_intercept_imageEdit",
+            "value":"다시 실행: 잘라내기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"refining_switch_blurred_tips",
+            "value":"블러 효과를 조정하려면 재생성이 필요합니다",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_hints_imageEdit",
+            "value":"탭하여 텍스트를 추가합니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"petalClip_stylus_shut_down",
+            "value":"닫기",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_bright_part_imageEdit",
+            "value":"다시 실행: 밝은 영역 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_one",
+            "value":"이 이미지 위에 그리면 정지 상태가 되어 더 이상 %1$s 조정이 불가능합니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_failed_imageEdit",
+            "value":"저장할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch",
+            "value":"리터치",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_risk_control_alerts",
+            "value":"이 이미지에서는 제거를 사용할 수 없습니다. 다른 이미지로 다시 시도하십시오.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_natural_imageEdit",
+            "value":"내추럴",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_anime_imageEdit",
+            "value":"다시 실행: 아니메.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_intercept_imageEdit",
+            "value":"실행취소: 잘라내기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_cut_imageEdit",
+            "value":"잘라내기",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_imageEdit",
+            "value":"실행취소: 라임 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_close_watermark_imageEdit",
+            "value":"실행취소: 워터마크 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_two",
+            "value":"이 이미지 위에 그리면 정지 상태가 되어 더 이상 %1$s 및 %2$s 조정이 불가능합니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_saturation_imageEdit",
+            "value":"채도",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_on_imageEdit",
+            "value":"실행취소: 선명도 조정 켜기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_on_imageEdit",
+            "value":"다시 실행: 색조 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_off_imageEdit",
+            "value":"실행취소: 하이라이트 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_close_imageEdit",
+            "value":"실행취소: 사용자 설정 스타일 종료.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_off_imageEdit",
+            "value":"다시 실행: 입자 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_none",
+            "value":"AI 리터치를 사용하면 이 이미지는 정지 상태가 됩니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_imageEdit",
+            "value":"실행취소: 트와일라이트 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_imageEdit",
+            "value":"쓸쓸하게",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_on_imageEdit",
+            "value":"다시 실행: 색온도 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_expand_image",
+            "value":"확장",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_proportional_imageEdit",
+            "value":"실행취소: 비율.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_fair_imageEdit",
+            "value":"실행취소: 옅게 필터.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_off_imageEdit",
+            "value":"실행취소: 선명도 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_brush_adjusts",
+            "value":"브러시 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_refining",
+            "value":"다듬기",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_luma_imageEdit",
+            "value":"실행취소: 밝기 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_imageEdit",
+            "value":"실행취소: 선명도 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_frame_watermark_imageEdit",
+            "value":"실행취소: 프레임 워터마크.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_anime_imageEdit",
+            "value":"실행취소: 아니메.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_imageEdit",
+            "value":"실행취소: 색조 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_original_imageEdit",
+            "value":"실행취소: 천상의 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen",
+            "value":"생생하게",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_imageEdit",
+            "value":"다시 실행: 그림자 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_imageEdit",
+            "value":"실행취소: 달콤하게 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_imageEdit",
+            "value":"다시 실행: 크리스탈 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_strength_imageEdit",
+            "value":"다시 실행: 라임 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_on_imageEdit",
+            "value":"다시 실행: 채도 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_moonlight",
+            "value":"달빛",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup_tip",
+            "value":"마크업을 사용하면 이 이미지의 사용자 설정 스타일을 조정할 수 없게 됩니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_strength_imageEdit",
+            "value":"실행취소: 모노크롬 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_on_imageEdit",
+            "value":"다시 실행: 선명도 조정 켜기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid",
+            "value":"활기차게",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_crop_imageEdit",
+            "value":"실행취소: 자르기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong",
+            "value":"강렬하게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_standard_imageEdit",
+            "value":"실행취소: 표준.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_strength_imageEdit",
+            "value":"다시 실행: 트와일라이트 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_off_imageEdit",
+            "value":"실행취소: 밝은 영역 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_imageEdit",
+            "value":"다시 실행: 라임 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_imageEdit",
+            "value":"클래식",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_refreshing",
+            "value":"경쾌하게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_romance_imageEdit",
+            "value":"다시 실행: 시네마.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_ninety_angle_rotate_imageEdit",
+            "value":"다시 실행: %s° 회전.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_ninety_angle_rotate_imageEdit",
+            "value":"실행취소: %s° 회전.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_on_imageEdit",
+            "value":"다시 실행: 입자 조정 켜기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_off_imageEdit",
+            "value":"실행취소: 채도 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_imageEdit",
+            "value":"텍스트 추가",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_imageEdit",
+            "value":"다시 실행: 색조 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"refining_switch_light_tips",
+            "value":"조명 효과를 전환하려면 재생성이 필요합니다",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"retry_imageEdit",
+            "value":"재시도",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_on_imageEdit",
+            "value":"실행취소: 밝기 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_one_pen",
+            "value":"한 번의 획으로 모양을 그린 다음 일시 정지하면 완벽한 모양으로 바뀝니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_none_imageEdit",
+            "value":"다시 실행: 원본.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_classics_imageEdit",
+            "value":"다시 실행: 클래식 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_off_imageEdit",
+            "value":"실행취소: 밝기 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"butterfly_light",
+            "value":"나비",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_blossom_imageEdit",
+            "value":"블러썸",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_little_luck_imageEdit",
+            "value":"럭키",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_close_imageEdit",
+            "value":"사용자 설정 스타일 없음",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_milk_tea_imageEdit",
+            "value":"따뜻하게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_middle_tone_imageEdit",
+            "value":"중립적인",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_stylus",
+            "value":"마크업",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_granules_imageEdit",
+            "value":"실행취소: 입자 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_strength_imageEdit",
+            "value":"다시 실행: 모노크롬 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_imageEdit",
+            "value":"실행취소: 노출 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_on_imageEdit",
+            "value":"실행취소: 노출 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_rotate_imageEdit",
+            "value":"실행취소: 회전.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_off_imageEdit",
+            "value":"실행취소: 생동감 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_shoot_time_imageEdit",
+            "value":"다시 실행: 촬영 시간 표시.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_lift_pen",
+            "value":"손을 떼어 모양 형성",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_luma_imageEdit",
+            "value":"밝기",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_off_imageEdit",
+            "value":"다시 실행: 밝기 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_none",
+            "value":"모자이크를 추가하면 이 이미지는 정지 상태가 됩니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_vertical_imageEdit",
+            "value":"실행취소: 수직 보정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_off_imageEdit",
+            "value":"실행취소: 노출 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_imageEdit",
+            "value":"다시 실행: 페이드 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_strength_imageEdit",
+            "value":"실행취소: 중립 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_loading",
+            "value":"처리 중…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_crop_imageEdit",
+            "value":"다시 실행: 자르기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_imageEdit",
+            "value":"원본",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"실행취소: 자동 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_imageEdit",
+            "value":"스타일",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup",
+            "value":"사용자 설정 스타일 더 이상 사용 불가",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_imageEdit",
+            "value":"옅게",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_limit_toast",
+            "value":"이 이미지에서는 제거를 사용할 수 없습니다. 다른 이미지로 다시 시도하십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_off_imageEdit",
+            "value":"다시 실행: 채도 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_size_low",
+            "value":"이 기능에 대해 이미지 해상도가 너무 낮습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_imageEdit",
+            "value":"편집",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"current_file_cannot_import_imageEdit",
+            "value":"지원되지 않거나 손상된 파일입니다. 편집할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_general_watermark_imageEdit",
+            "value":"다시 실행: 표준 워터마크.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_imageEdit",
+            "value":"필터",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_has_been_refined",
+            "value":"이미 보정된 이미지입니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_imageEdit",
+            "value":"달콤하게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_imageEdit",
+            "value":"실행취소: 대비 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light",
+            "value":"측면",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_none",
+            "value":"텍스트를 추가하면 이 이미지는 정지 상태가 됩니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_shoot_time_imageEdit",
+            "value":"실행취소: 촬영 시간 표시.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_natural_imageEdit",
+            "value":"실행취소: 자연스럽게 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_shoot_model_imageEdit",
+            "value":"다시 실행: 장치 모델 표시.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_free_imageEdit",
+            "value":"자유 형식",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_on_imageEdit",
+            "value":"실행취소: 페이드 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_on_imageEdit",
+            "value":"실행취소: 비네트 조정 켜기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word",
+            "value":"참고",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_imageEdit",
+            "value":"다시 실행: 모노크롬 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_highlights_imageEdit",
+            "value":"하이라이트",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_rotate_imageEdit",
+            "value":"다시 실행: 회전.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouching",
+            "value":"AI 리터치",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_imageEdit",
+            "value":"실행취소: 따뜻하게 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_highlights_imageEdit",
+            "value":"실행취소: 하이라이트 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_refining",
+            "value":"시작",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_off_imageEdit",
+            "value":"다시 실행: 노출 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_nature_saturation_imageEdit",
+            "value":"생동감",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_without_refinement",
+            "value":"이 이미지에서는 포트레이트 보정 기능을 사용할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_off_imageEdit",
+            "value":"다시 실행: 생동감 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_style",
+            "value":"사용자 설정 스타일",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_on_imageEdit",
+            "value":"다시 실행: 어두운 영역 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_imageEdit",
+            "value":"다시 실행: 선명도 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_whiten",
+            "value":"옅게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_off_imageEdit",
+            "value":"실행취소: 그림자 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_strength_imageEdit",
+            "value":"실행취소: 따뜻하게 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_bright_part_imageEdit",
+            "value":"실행취소: 밝은 영역 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup_tip",
+            "value":"사용자 설정 스타일을 선택하면 현재 필터와 조정한 내용이 바뀝니다. 바꾸시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_hue_imageEdit",
+            "value":"색상",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_frame_watermark_imageEdit",
+            "value":"다시 실행: 프레임 워터마크.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams",
+            "value":"드림",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_haze_removal_selected_imageEdit",
+            "value":"미스트 제거 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_off_imageEdit",
+            "value":"실행취소: 색온도 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_none",
+            "value":"이 이미지 위에 그리면 정지 상태가 됩니다.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_restore_origin_tips",
+            "value":"여기를 탭하면 변경 사항을 실행 취소할 수 있습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brilliant",
+            "value":"선명하게",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_brush_adjusts",
+            "value":"브러시를 두 번 탭하여 크기 및 불투명도를 변경합니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup_tip",
+            "value":"AI 리터치를 사용하면 이 이미지의 사용자 설정 스타일을 조정할 수 없게 됩니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_strength_imageEdit",
+            "value":"실행취소: 트와일라이트 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_content_lift_pen",
+            "value":"한 번의 획으로 모양을 그린 다음 스타일러스나 손가락을 떼면 완벽한 모양으로 바뀝니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_films_imageEdit",
+            "value":"실행취소: 필름.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_imageEdit",
+            "value":"다시 실행: 채도 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_soft",
+            "value":"부드럽게",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_brightly",
+            "value":"밝게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_imageEdit",
+            "value":"대비",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_luma_imageEdit",
+            "value":"다시 실행: 밝기 조정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_imageEdit",
+            "value":"다시 실행: 온도 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_pave_imageEdit",
+            "value":"화면에 맞추기",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_on_imageEdit",
+            "value":"실행취소: 색조 조정 켜기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_off_imageEdit",
+            "value":"다시 실행: 페이드 조정 끄기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_on_imageEdit",
+            "value":"다시 실행: 대비 조정 켜기.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light",
+            "value":"조명",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup",
+            "value":"사용자 설정 스타일 설정 사용 불가",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_exposure_imageEdit",
+            "value":"노출",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"실행취소: 자동 조정 실행.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_strength_imageEdit",
+            "value":"다시 실행: 달콤하게 강도.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_imageEdit",
+            "value":"천상의",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_imageEdit",
+            "value":"다시 실행: 달콤하게 필터.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_off_imageEdit",
+            "value":"다시 실행: 밝은 영역 조정 끄기.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"first_time_use_penkit",
+            "value":"여기를 탭하여 이 이미지에 낙서합니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_horizontal_imageEdit",
+            "value":"다시 실행: 수평 보정.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"color_light_blue_imageEdit",
+            "value":"연한 파란색",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup_tip",
+            "value":"마크업을 사용한 후에는 더 이상 이 이미지의 조리개를 조정할 수 없게 됩니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch_tip",
+            "value":"AI 리터치를 사용한 후에는 더 이상 이 이미지의 조리개를 조정할 수 없게 됩니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"none",
+            "value":"없음",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_right",
+            "value":"오른쪽 정렬",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"generation_image_imageEdit",
+            "value":"처리 중…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"timeout_without_move_imageEdit",
+            "value":"서버 요청 시간이 초과되었습니다. 나중에 다시 시도하십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_confirm_selection_imageEdit",
+            "value":"다시 실행: 선택 확인.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"draw_imageEdit",
+            "value":"스케치 중…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_imageEdit",
+            "value":"사용자 설정 워터마크",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_abnormal_try_again",
+            "value":"서버 요청에 실패했습니다. 다시 시도하십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_tip",
+            "value":"AI 리터치를 사용한 후에는 더 이상 이 이미지의 조리개나 사용자 설정 스타일을 조정할 수 없게 됩니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"synthesis_failed_without_move_imageEdit",
+            "value":"이미지 생성에 실패했습니다. 다시 시도하십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_delete_object_imageEdit",
+            "value":"실행취소: 개체 삭제.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand_part_area",
+            "value":"일부 콘텐츠를 확장할 수 없습니다. 위치를 변경하고 다시 시도하십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fusion_imageEdit",
+            "value":"블렌딩 중…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"regions_overlay_without_move_imageEdit",
+            "value":"오류가 발생했습니다. 다시 선택하고 다시 시도하십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_compose_imageEdit",
+            "value":"다시 실행: 생성.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_small_without_move_imageEdit",
+            "value":"이미지 크기가 너무 작습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_aperture_focus",
+            "value":"실행취소: 초점 위치.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_aperture_adjust",
+            "value":"다시 실행: 조리개 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tips",
+            "value":"마크업을 사용한 후에는 더 이상 이 이미지의 조리개나 사용자 설정 스타일을 조정할 수 없게 됩니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_move_toast_content",
+            "value":"지금 나가면 편집한 내용이 모두 삭제됩니다. 그래도 나가시겠습니까?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_move_bootstrapping",
+            "value":"선을 그려 피사체를 선택합니다",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unavailable_move_imageEdit",
+            "value":"움직이기 기능을 사용할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"generation_imageEdit",
+            "value":"생성 중…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_move_toast_title",
+            "value":"편집한 내용이 손실됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_object_imageEdit",
+            "value":"실행취소: 개체 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_sign_imageEdit",
+            "value":"맞춤형 서명",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_move_object_imageEdit",
+            "value":"다시 실행: 개체 이동.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_edit_imageEdit",
+            "value":"탭하여 개체 편집",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_green_imageEdit",
+            "value":"녹색",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_edit_watermark_imageEdit",
+            "value":"실행취소: 워터마크 편집.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_timeout_try_again",
+            "value":"서버 요청 시간이 초과되었습니다. 다시 시도하십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_switch_watermark_imageEdit",
+            "value":"다시 실행: 워터마크 전환.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_aperture_adjust",
+            "value":"실행취소: 조리개 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selected_watermark_imageEdit",
+            "value":"실행취소: 워터마크 선택.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fill_imageEdit",
+            "value":"채우는 중…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_delete_object_imageEdit",
+            "value":"다시 실행: 개체 삭제.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_display_param_imageEdit",
+            "value":"%1$s 표시",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_tier_object_imageEdit",
+            "value":"실행취소: 레이어 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_object_imageEdit",
+            "value":"다시 실행: 개체 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_copy_object_imageEdit",
+            "value":"다시 실행: 개체 복사.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_intelligent_correction_imageEdit",
+            "value":"수평 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_move_imageEdit",
+            "value":"이 이미지에는 움직이기 기능을 사용할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"oversize_imageEdit",
+            "value":"최대 개체 수에 도달했습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"today_frequency_reached_upper_limit",
+            "value":"오늘의 사용 제한에 도달했습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_tier_object_imageEdit",
+            "value":"다시 실행: 레이어 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_light_purple_imageEdit",
+            "value":"연보라색",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_color_param_imageEdit",
+            "value":"색상 정보",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_red_imageEdit",
+            "value":"빨간색",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_imageEdit",
+            "value":"생성",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch",
+            "value":"조리개 설정을 사용할 수 없음",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_intelligent_correction_on",
+            "value":"수평 조정 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_select_param_imageEdit",
+            "value":"%1$s 선택",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_picture_tilt_is_detected",
+            "value":"기울기가 감지되지 않았습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_black_imageEdit",
+            "value":"검은색",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_center",
+            "value":"중앙 정렬",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_large_mask_without_move_imageEdit",
+            "value":"선택한 영역이 너무 큽니다. 다시 선택하십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_correct_intelligent_imageEdit",
+            "value":"실행취소: 수평 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_edit_watermark_imageEdit",
+            "value":"다시 실행: 워터마크 편집.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_imageEdit",
+            "value":"텍스트",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_aperture_imageEdit",
+            "value":"조리개",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_edit_max_tip",
+            "value":"최대 텍스트 상자 수에 도달했습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_small_mask_without_move_imageEdit",
+            "value":"선택한 영역이 너무 작습니다. 다시 선택하십시오.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_compose_imageEdit",
+            "value":"실행취소: 생성.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_left",
+            "value":"왼쪽 정렬",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_copy_object_imageEdit",
+            "value":"실행취소: 개체 복사.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_intelligent_imageEdit",
+            "value":"다시 실행: 수평 조정.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_text_imageEdit",
+            "value":"텍스트 추가",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup",
+            "value":"조리개 설정을 사용할 수 없음",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_aperture_focus",
+            "value":"다시 실행: 초점 위치.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_imageEdit",
+            "value":"실행취소: 선택.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_close_param_imageEdit",
+            "value":"%1$s 선택 취소",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cannot_be_erased_toast",
+            "value":"선택한 영역의 콘텐츠를 제거할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"exit_imageEdit",
+            "value":"나가기",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"leave_imageEdit",
+            "value":"나가기",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_dark_blue_imageEdit",
+            "value":"진청색",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selected_watermark_imageEdit",
+            "value":"다시 실행: 워터마크 선택.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_on_imageEdit",
+            "value":"사용자 설정 워터마크 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_imageEdit",
+            "value":"선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_switch_watermark_imageEdit",
+            "value":"실행취소: 워터마크 전환.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_confirm_selection_imageEdit",
+            "value":"실행취소: 선택 확인.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_white_imageEdit",
+            "value":"흰색",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_imageEdit",
+            "value":"다시 실행: 선택.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_move_object_imageEdit",
+            "value":"실행취소: 개체 이동.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_manual_selection",
+            "value":"실행취소: 수동 선택.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_add_patches_imageEdit",
+            "value":"실행취소: 스티커 추가.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_paint_text_announced",
+            "value":"선택한 영역을 지웠습니다",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_wise_selection",
+            "value":"실행취소: 자동 선택.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_manual_selection",
+            "value":"다시 실행: 수동 선택.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_brush_thickness_selected",
+            "value":"지우개 크기 조정 슬라이더, 크기 범위는 %1$d에서 %2$d까지이고, 두 번 탭하여 활성화하고, 두 번 탭하고 길게 누른 상태로 왼쪽 또는 오른쪽으로 드래그하여 크기를 조정합니다",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_eraser_after_imageEdit",
+            "value":"사물을 선택하고 다시 시도합니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_add_patches_imageEdit",
+            "value":"다시 실행: 스티커 추가.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"select_patches_object",
+            "value":"사물 선택",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_wise_selection",
+            "value":"다시 실행: 자동 선택.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_selection_to_edit_imageEdit",
+            "value":"자동 또는 수동을 탭하여 선택한 영역을 편집합니다",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_picture",
+            "value":"이미지로 저장",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_eraser_selection",
+            "value":"실행취소: 지우개.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_eraser_selection",
+            "value":"다시 실행: 지우개.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"patches_selection",
+            "value":"스티커",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_selection",
+            "value":"지우개",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_two",
+            "value":"낙서한 후에는 더 이상 %1$s 및 %2$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_one",
+            "value":"AI 리터치를 사용한 후에는 더 이상 %1$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_three",
+            "value":"텍스트를 추가한 후에는 더 이상 %1$s, %2$s, %3$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_one",
+            "value":"텍스트를 추가한 후에는 더 이상 %1$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_two",
+            "value":"모자이크 효과를 추가한 후에는 더 이상 %1$s 및 %2$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_no_effect",
+            "value":"다시 실행: 효과 없음.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_panning_shot_effect",
+            "value":"수평 이동 중",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_no_effect",
+            "value":"실행취소: 효과 없음.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_panning_shot_effect",
+            "value":"다시 실행: 수평 이동 중.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_snapshot_effect",
+            "value":"다시 실행: 스냅샷.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_one",
+            "value":"낙서한 후에는 더 이상 %1$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_selection_snapshot_effect",
+            "value":"실행취소: 스냅샷.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_two",
+            "value":"AI 리터치를 사용한 후에는 더 이상 %1$s 및 %2$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_three",
+            "value":"AI 리터치를 사용한 후에는 더 이상 %1$s, %2$s, %3$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_snapshot_effect",
+            "value":"스냅샷",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_one",
+            "value":"모자이크 효과를 추가한 후에는 더 이상 %1$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_movement",
+            "value":"움직임 효과",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_three",
+            "value":"모자이크를 추가하면 이 이미지는 정지 상태가 되어 더 이상 %1$s, %2$s, %3$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_three",
+            "value":"AI 리터치를 사용하면 이미지는 정지 상태가 되어 더 이상 %1$s, %2$s, %3$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_three",
+            "value":"모자이크 효과를 추가한 후에는 더 이상 %1$s, %2$s, %3$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_two",
+            "value":"텍스트를 추가한 후에는 더 이상 %1$s 및 %2$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_three",
+            "value":"텍스트를 추가하면 이 이미지는 정지 상태가 되어 더 이상 %1$s, %2$s, %3$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_movement_imageEdit",
+            "value":"움직임",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_panning_shot_effect",
+            "value":"실행취소: 수평 이동 중.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_three",
+            "value":"낙서한 후에는 더 이상 %1$s, %2$s, %3$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_three",
+            "value":"이미지에 낙서하면 이 이미지는 정지 상태가 되어 더 이상 %1$s, %2$s, %3$s 조정이 불가능합니다. 그래도 계속하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_selected",
+            "value":"무디 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n_selected",
+            "value":"%1$d 구성 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_lr",
+            "value":"좌우 레이아웃으로 전환",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_n",
+            "value":"현재 배경 블러가 %1$d 레벨로 설정됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_style_selected",
+            "value":"세련되게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"double_click_edit_imageEdit",
+            "value":"두 번 탭하여 텍스트 편집",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_top_middle",
+            "value":"자르기 상자의 상단, 두 번 탭하고 길게 누른 상태로 드래그하여 선택된 영역 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightness_true",
+            "value":"밝기 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_original_selected",
+            "value":"원본 조명 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_true",
+            "value":"페이드 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_imageEdit",
+            "value":"텍스트 상자의 오른쪽 상단 모서리, 두 번 탭하고 길게 누른 상태로 드래그하여 크기 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_imageEdit",
+            "value":"워터마크 없음",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_selected",
+            "value":"필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_aperture_selected",
+            "value":"조리개 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice",
+            "value":"배경 블러 효과를 조정하는 표시줄",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_invisible",
+            "value":"실행취소 버튼, 사용 불가",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_0",
+            "value":"현재 배경 블러가 없음으로 설정됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_focus_change",
+            "value":"초점 위치 전환됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid_selected",
+            "value":"활기차게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_selected",
+            "value":"라임 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_rotation_on",
+            "value":"회전 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9_on",
+            "value":"16대9 종횡비 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_old_tree_selected",
+            "value":"러스틱 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_visible",
+            "value":"실행취소",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_blossom_selected",
+            "value":"블라썸 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_rotation_btn",
+            "value":"반시계 방향으로 90도 회전",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_box_imageEdit",
+            "value":"텍스트 상자",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_milk_tea_selected",
+            "value":"따뜻하게 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1_on",
+            "value":"1대1 종횡비 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_bottom",
+            "value":"자르기 상자의 왼쪽 하단 모서리, 두 번 탭하고 길게 누른 상태로 드래그하여 선택된 영역 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_sharpness_true",
+            "value":"선명도 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_imageEdit",
+            "value":"%1$s. 조정 가능한 범위는 %2$d도에서 %3$d도입니다. 두 번 탭하고 길게 누른 상태로 드래그하여 각도를 조정합니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bold_imageEdit",
+            "value":"굵게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_original_selected",
+            "value":"원래 구성 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_imageEdit",
+            "value":"텍스트 상자의 오른쪽 하단 모서리, 두 번 탭하고 길게 누른 상태로 드래그하여 크기 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_invisible",
+            "value":"저장 버튼, 사용 불가",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_free_on",
+            "value":"자유형 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong_selected",
+            "value":"강렬하게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen_selected",
+            "value":"신선하게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_pink_selected",
+            "value":"핑크 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"italics_imageEdit",
+            "value":"이탤릭체",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_invisible",
+            "value":"다시 실행 버튼, 사용 불가",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn_desc",
+            "value":"두 번 탭하고 길게 눌러 이미지를 원본과 비교",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light_selected",
+            "value":"조명 효과 없음 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vibrance_true",
+            "value":"활기 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_auto_true",
+            "value":"자동 조정 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_imageEdit",
+            "value":"텍스트 상자의 왼쪽 하단 모서리, 두 번 탭하고 길게 누른 상태로 드래그하여 크기 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_ud",
+            "value":"상하 레이아웃으로 전환",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_mirror_btn",
+            "value":"미러링 뒤집기",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_bar_announced",
+            "value":"브러시 크기를 조정하는 슬라이더",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_on",
+            "value":"종횡비 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select_n",
+            "value":"배경 블러가 조정됨, 현재 레벨 %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_selected",
+            "value":"%1$s 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_exposure_true",
+            "value":"노출 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams_selected",
+            "value":"드림 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_screen_on",
+            "value":"화면에 맞추기 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2_on",
+            "value":"3대2 종횡비 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n",
+            "value":"구성 %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_paint_text_announced",
+            "value":"표시 완료, 해당 영역이 자동으로 선택되었습니다",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_little_luck_selected",
+            "value":"럭키 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"manual_paint_text_announced",
+            "value":"표시된 영역 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_imageEdit",
+            "value":"프레임 워터마크",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_watermark_selected",
+            "value":"워터마크 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_bottom",
+            "value":"자르기 상자의 오른쪽 하단 모서리, 두 번 탭하고 길게 누른 상태로 드래그하여 선택된 영역 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vignette_true",
+            "value":"비네트 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_selected",
+            "value":"옅게 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_verticalCorrection_on",
+            "value":"세로 조정 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_on_imageEdit",
+            "value":"표준 워터마크 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant_selected",
+            "value":"우아하게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_on_imageEdit",
+            "value":"프레임 워터마크 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_selected",
+            "value":"원본 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select",
+            "value":"배경 블러 레벨 조정 슬라이더, %1$d에서 %2$d까지의 조정 가능 범위, 두 번 탭하여 활성화, 두 번 탭하고 길게 누른 상태로 왼쪽이나 오른쪽으로 드래그하여 레벨 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightzone_true",
+            "value":"밝은 영역 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_grain_true",
+            "value":"입자 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_selected",
+            "value":"트와일라이트 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_top",
+            "value":"자르기 상자의 왼쪽 상단 모서리, 두 번 탭하고 길게 누른 상태로 드래그하여 선택된 영역 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_black_and_white_selected",
+            "value":"모노크롬 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_selected",
+            "value":"클래식 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_true",
+            "value":"대비 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_soft_selected",
+            "value":"부드럽게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4_on",
+            "value":"3대4 종횡비 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"alignment_imageEdit",
+            "value":"정렬",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_hue_true",
+            "value":"색조 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"underline_imageEdit",
+            "value":"밑줄",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_selected",
+            "value":"조명 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16_on",
+            "value":"9대16 종횡비 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_whiten_selected",
+            "value":"옅게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9",
+            "value":"가로, 16대9 종횡비",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_origin_on",
+            "value":"원본 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light_selected",
+            "value":"측면 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_imageEdit",
+            "value":"텍스트 상자의 왼쪽 상단 모서리, 두 번 탭하고 길게 누른 상태로 드래그하여 크기 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brightly_selected",
+            "value":"밝게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_middle",
+            "value":"자르기 상자의 왼쪽, 두 번 탭하고 길게 누른 상태로 드래그하여 선택된 영역 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_visible",
+            "value":"다시 실행",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_up",
+            "value":"뒤로",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_value",
+            "value":"브러시 크기 조정됨, 현재 크기 %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_selected",
+            "value":"구성 요소 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_top",
+            "value":"자르기 상자의 오른쪽 상단 모서리, 두 번 탭하고 길게 누른 상태로 드래그하여 선택된 영역 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_shadow_true",
+            "value":"그림자 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_temperature_true",
+            "value":"온도 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous_selected",
+            "value":"풍부하게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_gorgeous_selected",
+            "value":"멋지게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_point_announced",
+            "value":"현재 브러시 크기 %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_selected",
+            "value":"브러시 크기 조정 슬라이더, %1$d에서 %2$d까지의 크기 범위, 두 번 탭하여 활성화, 두 번 탭하고 길게 누른 상태로 왼쪽이나 오른쪽으로 드래그하여 크기 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light_selected",
+            "value":"렘브란트 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3_on",
+            "value":"2대3 종횡비 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_sprightly_selected",
+            "value":"즐겁게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_selected",
+            "value":"천상 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_adjust_selected",
+            "value":"조정 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"blurred_selected",
+            "value":"블러 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_darkzone_true",
+            "value":"어두운 영역 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_natural_selected",
+            "value":"내추럴 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3",
+            "value":"세로, 2대3 종횡비",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light_selected",
+            "value":"전면 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_horizontalCorrection_on",
+            "value":"가로 조정 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn",
+            "value":"비교 버튼, 두 번 탭하고 길게 눌러 현재 이미지와 원본 이미지 비교",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_refreshing_selected",
+            "value":"경쾌하게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_middle_tone_selected",
+            "value":"중립 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_saturation_true",
+            "value":"채도 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1",
+            "value":"1대1 종횡비",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_selected",
+            "value":"달콤하게 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_crop_selected",
+            "value":"자르기 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_highlight_true",
+            "value":"하이라이트 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3_on",
+            "value":"4대3 종횡비 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"butterfly_light_selected",
+            "value":"나비 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_softness_selected",
+            "value":"부드럽게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_original_selected",
+            "value":"원본 색상 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rectangle_sizer",
+            "value":"이미지 미리보기",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_on_imageEdit",
+            "value":"워터마크 없음 옵션 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_middle_bottom",
+            "value":"자르기 상자의 하단, 두 번 탭하고 길게 누른 상태로 드래그하여 선택된 영역 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3",
+            "value":"가로, 4대3 종횡비",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch_selected",
+            "value":"Celia 리터치 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brilliant_selected",
+            "value":"선명하게 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_select_imageEdit",
+            "value":"두 번 탭하여 선택",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_imageEdit",
+            "value":"표준 워터마크",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_middle",
+            "value":"자르기 상자의 오른쪽, 두 번 탭하고 길게 누른 상태로 드래그하여 선택된 영역 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16",
+            "value":"세로, 9대16 종횡비",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4",
+            "value":"세로, 3대4 종횡비",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2",
+            "value":"가로, 3대2 종횡비",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_toggle_imageEdit",
+            "value":"두 번 탭하여 전환",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_selected",
+            "value":"크리스탈 필터 선택됨",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_ai_move_imageEdit",
+            "value":"편집 상자의 왼쪽 상단 모서리, 두 번 탭하고 길게 누른 상태에서 드래그하여 크기 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_ai_move_imageEdit",
+            "value":"%1$s, 조정 가능한 범위는 %2$d~%3$d도입니다. 두 번 탭하고 길게 누른 상태에서 드래그하여 각도 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_ai_move_imageEdit",
+            "value":"편집 상자의 왼쪽 하단 모서리, 두 번 탭하고 길게 누른 상태에서 드래그하여 크기 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_ai_move_imageEdit",
+            "value":"편집 상자의 오른쪽 하단 모서리, 두 번 탭하고 길게 누른 상태에서 드래그하여 크기 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_invisible",
+            "value":"%1$s 버튼, 사용 불가",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_ai_move_imageEdit",
+            "value":"편집 상자의 오른쪽 상단 모서리, 두 번 탭하고 길게 누른 상태에서 드래그하여 크기 조정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_tone",
+            "value":"색조",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_bar",
+            "value":"라임 필터 강도 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 라임 필터 강도 조정, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_bar",
+            "value":"트와일라이트 필터 강도 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 트와일라이트 필터 강도 조정, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_adjust",
+            "value":"회전 조정됨, 현재 회전 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_rulerScroller",
+            "value":"조리개 조정 슬라이더, F0.95부터 F16까지입니다. 두 손가락으로 길게 터치한 다음 왼쪽이나 오른쪽으로 드래그하여 조리개 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_100_100",
+            "value":"밝기 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 밝기 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_adjust",
+            "value":"선명도 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_adjust",
+            "value":"수평 각도 조정됨, 현재 각도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_adjust",
+            "value":"채도 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_value_change",
+            "value":"조리개 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_adjust",
+            "value":"그림자 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_adjust",
+            "value":"강조 표시 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_adjust",
+            "value":"어두운 영역 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_adjust",
+            "value":"밝은 영역 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_100_100",
+            "value":"대비 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 대비 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_100_100",
+            "value":"그림자 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 그림자 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_adjust",
+            "value":"수직 각도 조정됨, 현재 각도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_imageEdit",
+            "value":"회전 슬라이더, 슬라이더 범위는 -45도에서 45도입니다. 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 회전을 조정하며, 현재 회전은 %1$s입니다",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_adjust",
+            "value":"페이드 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_adjust",
+            "value":"비네트 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_value",
+            "value":"천상 필터 강도 조정됨, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_adjust",
+            "value":"생동감 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_0_100",
+            "value":"선명도 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 선명도 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_bar",
+            "value":"러스틱 필터 강도 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 러스틱 필터 강도 조정, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_100_100",
+            "value":"강조 표시 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 강조 표시 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_imageEdit",
+            "value":"수평 각도 슬라이더, 슬라이더 범위는 -45도에서 45도입니다. 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 수평 각도를 조정하며, 현재 각도는 %1$s입니다",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_adjust",
+            "value":"노출 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_bar",
+            "value":"천상 필터 강도 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 천상 필터 강도 조정, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection",
+            "value":"수직 각도 슬라이더, 슬라이더 범위는 -45도에서 45도입니다. 두 손가락으로 길게 터치한 다음 왼쪽이나 오른쪽으로 드래그하여 수직 각도를 조정하며, 현재 각도는 %1$s입니다",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_adjust",
+            "value":"색조 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_bar",
+            "value":"달콤하게 필터 강도 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 달콤하게 필터 강도 조정, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_100_100",
+            "value":"색온도 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 색온도 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_100_100",
+            "value":"생동감 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 생동감 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_adjust",
+            "value":"온도 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_bar",
+            "value":"크리스탈 필터 강도 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 크리스탈 필터 강도 조정, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_bar",
+            "value":"중립 필터 강도 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 중립 필터 강도 조정, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_value",
+            "value":"달콤하게 필터 강도 조정됨, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_0_100",
+            "value":"페이드 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 페이드 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_value",
+            "value":"러스틱 필터 강도 조정됨, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_0_100",
+            "value":"입자 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 입자 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_bar",
+            "value":"럭키 필터 강도 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 럭키 필터 강도 조정, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_value",
+            "value":"크리스탈 필터 강도 조정됨, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_adjust",
+            "value":"밝기 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_adjust",
+            "value":"대비 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_100_100",
+            "value":"비네트 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 비네트 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_value",
+            "value":"트와일라이트 필터 강도 조정됨, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_adjust",
+            "value":"자동 조정 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_100_100",
+            "value":"밝은 영역 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 밝은 영역 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_value",
+            "value":"럭키 필터 강도 조정됨, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_value",
+            "value":"모노크롬 필터 강도 조정됨, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_100_100",
+            "value":"어두운 영역 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 어두운 영역 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_value",
+            "value":"따뜻하게 필터 강도 조정됨, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_100_100",
+            "value":"채도 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 채도 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_bar",
+            "value":"따뜻하게 필터 강도 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 따뜻하게 필터 강도 조정, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_100_100",
+            "value":"노출 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 노출 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_100_100",
+            "value":"자동 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 자동 조정 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection",
+            "value":"수평 각도 슬라이더, 슬라이더 범위는 -45도에서 45도입니다. 두 손가락으로 길게 터치한 다음 왼쪽이나 오른쪽으로 드래그하여 수평 각도를 조정하며, 현재 각도는 %1$s입니다",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_bar",
+            "value":"모노크롬 필터 강도 조정 슬라이더, 영부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 모노크롬 필터 강도 조정, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation",
+            "value":"회전 슬라이더, 슬라이더 범위는 -45도에서 45도입니다. 두 손가락으로 길게 터치한 다음 왼쪽이나 오른쪽으로 드래그하여 회전을 조정하며, 현재 회전은 %1$s입니다",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_100_100",
+            "value":"색조 조정 슬라이더, 마이너스 백부터 백까지의 슬라이더 범위, 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 색조 값 조정, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_value",
+            "value":"중립 필터 강도 조정됨, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_value",
+            "value":"라임 필터 강도 조정됨, 현재 강도 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_adjust",
+            "value":"입자 값 조정됨, 현재 값 %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_imageEdit",
+            "value":"수직 각도 슬라이더, 슬라이더 범위는 -45도에서 45도입니다. 두 번 탭하고 길게 누른 다음 왼쪽이나 오른쪽으로 드래그하여 수직 각도를 조정하며, 현재 각도는 %1$s입니다",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_personality_style_imageEdit",
+            "value":"사용자 설정 스타일",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_disagree",
+            "value":"태그 표시 안 함",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"border_background_imageEdit",
+            "value":"테두리",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_agree",
+            "value":"태그 표시",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"capture_location_imageEdit",
+            "value":"위치",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup",
+            "value":"\"AI 생성\" 태그를 표시하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"beauty_Custom_imageEdit",
+            "value":"사용자 설정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_description",
+            "value":"\"AI 생성\" 태그는 이미지에 AI 생성 콘텐츠가 포함되어 있음을 나타냅니다. 갤러리 설정에서 언제든지 변경할 수 있습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_imageEdit",
+            "value":"워터마크 편집",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_watermark_imageEdit",
+            "value":"연휴 워터마크",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_text_imageEdit",
+            "value":"텍스트",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_patterned_imageEdit",
+            "value":"패턴",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_festival_seal_edit",
+            "value":"춘절 워터마크는 저장되고 나면 편집할 수 없습니다. 지금 저장하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_national_seal_edit",
+            "value":"국경일 워터마크는 저장 후 편집할 수 없습니다. 지금 저장하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_brush_thickness_selected_new",
+            "value":"지우개 크기 조정, %1$d에서 %2$d의 조정 범위, 두 번 탭하고 길게 누른 상태에서 왼쪽이나 오른쪽으로 스와이프하여 조정",
+            "attr":{
+              "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_selected_new",
+            "value":"브러시 크기 조정, %1$d에서 %2$d의 조정 범위, 두 번 탭하고 길게 누른 상태에서 왼쪽이나 오른쪽으로 스와이프하여 조정",
+            "attr":{
+              "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_color_temperature",
+            "value":"온도",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_saturation",
+            "value":"채도",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_soft_imageEdit",
+            "value":"밝게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_black_imageEdit",
+            "value":"모노",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_bright_imageEdit",
+            "value":"선명하게",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_soft_imageEdit",
+            "value":"실행취소: 밝게.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_bright_imageEdit",
+            "value":"실행취소: 선명하게.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_soft_imageEdit",
+            "value":"다시 실행: 밝게.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_black_imageEdit",
+            "value":"다시 실행: 모노.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_bright_imageEdit",
+            "value":"다시 실행: 선명하게.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_black_imageEdit",
+            "value":"실행취소: 모노.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_editor_mirror_image_new",
+            "value":"미러링",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_editor_rotate_ninety_degrees_new",
+            "value":"%s 회전",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"free_crop_rotate_new",
+            "value":"회전",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tip_aigc_removing",
+            "value":"제거 중…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name": "tip_aigc_material_loading",
+            "value": "로드 중…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_emoj_replacing",
+            "value": "표정 바꾸는 중…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_draw_and_select",
+            "value": "개체를 가로지르는 선을 그려 선택합니다.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_click_and_remove_all",
+            "value": "선택된 콘텐츠를 제거하려면 버튼을 탭합니다.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_intelligent",
+            "value": "자동",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_manual",
+            "value": "수동",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_expand_selection",
+            "value": "화면에서 스와이프하여 선택된 영역을 확장할 수 있습니다.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_remove_selection",
+            "value": "선택된 영역을 취소하려면 스와이프합니다.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_click_intelli_manual_then_edit",
+            "value": "자동 또는 수동을 탭하여 선택한 영역을 편집합니다.",
+            "attr": {
+                "priority": "translate"
+            }
+        }
+    ]
+}

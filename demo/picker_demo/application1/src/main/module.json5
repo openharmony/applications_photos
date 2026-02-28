@@ -1,0 +1,167 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "description": "$string:module_desc",
+    "mainElement": "EntryAbility",
+    "deviceTypes": [
+      "phone",
+      "tablet",
+      "2in1"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "EntryAbility",
+        "srcEntry": "./ets/entryability/EntryAbility.ets",
+        "description": "$string:EntryAbility_desc",
+        "icon": "$media:layered_image",
+        "label": "$string:EntryAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ]
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      }
+//            {
+//              "name": "ohos.permission.GRANT_SHORT_TERM_WRITE_MEDIAVIDEO"
+//            }
+    ],
+    /**
+        "requestPermissions": [
+          {
+            "name": "ohos.permission.VIBRATE",
+            "reason": "$string:read_imagevideo_desc",
+            "usedScene": {
+              "abilities": [
+                "MainAbility",
+                "FormAbility",
+                "ServiceExtAbility"
+              ]
+            }
+          },
+          {
+            "name": "ohos.permission.ACCESS_MEDIALIB_THUMB_DB",
+            "reason": "$string:access_medialib_thumb_db_desc",
+            "usedScene": {
+              "abilities": [
+                "MainAbility",
+                "FormAbility",
+                "ServiceExtAbility"
+              ]
+            }
+          },
+          {
+            "name": "ohos.permission.READ_IMAGEVIDEO",
+            "reason": "$string:read_imagevideo_desc",
+            "usedScene": {
+              "abilities": [
+                "MainAbility",
+                "FormAbility",
+                "ServiceExtAbility"
+              ]
+            }
+          },
+          {
+            "name": "ohos.permission.WRITE_IMAGEVIDEO",
+            "reason": "$string:write_imagevideo_desc",
+            "usedScene": {
+              "abilities": [
+                "MainAbility",
+                "FormAbility",
+                "ServiceExtAbility"
+              ]
+            }
+          },
+          {
+            "name": "ohos.permission.GET_BUNDLE_INFO"
+          },
+          {
+            "name": "ohos.permission.GET_NETWORK_INFO"
+          },
+          {
+            "name": "ohos.permission.INTERNET"
+          },
+          {
+            "name": "ohos.permission.CLOUDFILE_SYNC"
+          },
+          {
+            "name": "ohos.permission.PROXY_AUTHORIZATION_URI"
+          },
+          {
+            "name": "ohos.permission.PRIVACY_WINDOW"
+          },
+          {
+            "name": "ohos.permission.MEDIA_LOCATION",
+            "reason": "$string:media_location_desc",
+            "usedScene": {
+              "abilities": [
+                "MainAbility",
+                "FormAbility",
+                "ServiceExtAbility"
+              ]
+            }
+          },
+          {
+            "name": "ohos.permission.MANAGE_PRIVATE_PHOTOS",
+            "reason": "$string:manage_private_photos_desc",
+            "usedScene": {
+              "abilities": [
+                "MainAbility",
+                "FormAbility"
+              ]
+            }
+          },
+          {
+            "name": "ohos.permission.READ_CLOUD_SYNC_CONFIG",
+            "reason": "$string:read_cloud_sync_config_desc",
+            "usedScene": {
+              "abilities": [
+                "MainAbility",
+                "FormAbility"
+              ]
+            }
+          },
+          {
+            "name": "ohos.permission.MANAGE_CLOUD_SYNC_CONFIG",
+            "reason": "$string:manage_cloud_sync_config_desc",
+            "usedScene": {
+              "abilities": [
+                "MainAbility",
+                "FormAbility"
+              ]
+            }
+          },
+          {
+            "name": "ohos.permission.MANAGE_SETTINGS"
+          },
+          {
+            "name": "ohos.permission.ACTIVATE_THEME_PACKAGE"
+          },
+          {
+            "name": "ohos.permission.ACCESS_SEARCH_SERVICE"
+          },
+          {
+            "name": "ohos.permission.GRANT_SHORT_TERM_WRITE_MEDIAVIDEO"
+          }
+        ]*/
+    "routerMap": "$profile:route_map"
+  },
+
+
+}

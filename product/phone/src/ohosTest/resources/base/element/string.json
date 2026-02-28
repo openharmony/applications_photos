@@ -11,6 +11,34 @@
     {
       "name": "TestAbility_label",
       "value": "tvBase"
+    },
+    {
+      "name": "init_horizontal",
+      "value": "false"
+    },
+    {
+      "name": "init_sidebar",
+      "value": "false"
+    },
+    {
+      "name": "test_address",
+      "value": ""
+    },
+    {
+      "name": "test_auth",
+      "value": "security:504BFFB7DOCB406E2EB993341AD5177EE88F588930E6751C4934302"
+    },
+    {
+      "name": "test_json_address_part1",
+      "value": "/"
+    },
+    {
+      "name": "test_json_address_part2",
+      "value": "315094dcb2842d573c4c1a2767ea8122/e47d02fa-c5ae-43d3-bc2e-db2a7729b6e1.json"
+    },
+    {
+      "name": "storage_path",
+      "value": "/data/storage/el2/base/haps/phone_photos/files/test.mp3"
     }
   ]
 }

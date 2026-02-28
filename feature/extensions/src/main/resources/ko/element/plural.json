@@ -1,0 +1,40 @@
+{
+    "plural":[
+        {
+            "name":"third_save_picture",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$s 앱에서 %2$d개 이미지를 저장하도록 허용하시겠습니까?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_picture_and_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$s 앱에서 %2$d개 파일을 저장하도록 허용하시겠습니까?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$s 앱에서 %2$d개 비디오를 저장하도록 허용하시겠습니까?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

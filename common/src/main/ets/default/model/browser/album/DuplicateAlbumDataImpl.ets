@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import lazy { AlbumInfo } from './AlbumInfo';
+import lazy { UserFileManagerAccess } from '../../../access/UserFileManagerAccess';
+import lazy { AlbumDataImpl } from './AlbumDataImpl';
+import lazy { AlbumDefine } from '../AlbumDefine';
+import lazy { Constants } from '../../common/Constants';
+
+const TAG: string = 'common_DuplicateAlbumDataImpl';
+
+export class DuplicateAlbumDataImpl extends AlbumDataImpl {
+  constructor() {
+    super();
+  }
+
+  public async getDuplicateAlbums(): Promise<AlbumInfo[]> {
+    let fetchOpt = AlbumDefine.getAlbumFetchOptByUri(Constants.ALL_DUPLICATE_ASSETS);
+    let photoSize = await UserFileManagerAccess.getInstance().getCount(fetchOpt, TAG);
+    this.info(TAG, `getDuplicateAlbums result : ${photoSize}`);
+    let albumInfo: AlbumInfo = new AlbumInfo();
+    albumInfo.setCount(photoSize);
+    albumInfo.setVideoCount(0);
+    albumInfo.albumName = $r('app.string.duplicate_photo');
+    albumInfo.isDuplicateAlbum = true;
+    albumInfo.isSystemAlbum = true;
+    return [albumInfo];
+  }
+}

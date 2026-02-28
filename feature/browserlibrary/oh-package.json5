@@ -1,0 +1,18 @@
+{
+  "name": "@ohos/browserlibrary",
+  "version": "1.0.25",
+  "description": "a ohpm package which contains hsp har.",
+  "main": "./src/main/ets/Index.ets",
+  "author": "photoshsp",
+  "dependencies": {
+    "@ohos/tools": "file:../../tools",
+    "@ohos/common": "file:../../common",
+    "@ohos/browsercommon": "file:../../browserCommon",
+    "@ohos/privacy": "file:../../feature/privacy",
+    "browsercommonphone": "file:../../browserCommonPhone",
+    "browsercommonpc": "file:../../browserCommonPC",
+    "@oh-image-editor/editor-common": "file:../../imageEditor/common",
+    "@oh-image-editor/editor-phone": "file:../../imageEditor/product/editor_phone",
+    "@oh-image-editor/editor-pc": "file:../../imageEditor/product/editor_pc",
+  }
+}

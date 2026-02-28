@@ -1,0 +1,60 @@
+{
+    "string":[
+        {
+            "name":"button_bubble_redo",
+            "value":"Làm lại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_stylus",
+            "value":"Đánh dấu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_bubble_back",
+            "value":"Trở lại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_rotate",
+            "value":"Xoay",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_undo",
+            "value":"Hoàn tác",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_oneClick_adjust_imageEdit",
+            "value":"Tự động điều chỉnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_bubble_mirror",
+            "value":"Lật ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_save",
+            "value":"Lưu",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

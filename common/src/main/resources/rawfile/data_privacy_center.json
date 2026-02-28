@@ -1,0 +1,6 @@
+{
+  "mainTitleResource": "$string:app_name",
+  "dstBundleName": "com.ohos.photos",
+  "dstAbilityName": "PrivacyStatementAbility",
+  "displayOOBE": false
+}

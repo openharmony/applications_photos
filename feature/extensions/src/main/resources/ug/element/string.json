@@ -1,0 +1,32 @@
+{
+    "string":[
+        {
+            "name":"dialog_ban",
+            "value":"چەكلەش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_allow",
+            "value":"رۇخسەت",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"short_term_title",
+            "value":"\u200f«%s» نىڭ رەسىم ۋە سىن ساقلىشىغا رۇخسەتمۇ؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_not_allowed",
+            "value":"چەكلەش",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

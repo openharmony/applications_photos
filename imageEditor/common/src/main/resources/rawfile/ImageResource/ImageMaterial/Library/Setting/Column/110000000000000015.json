@@ -1,0 +1,22 @@
+{
+    "attribute" : 0,
+    "cacheTime" : 1644261688419,
+    "code" : "",
+    "columnId" : "110000000000000015",
+    "columnName" : "滤镜栏目",
+    "columnType" : 4,
+    "contentType" : 0,
+    "materialIdList" : 
+    [
+        {
+            "id" : "767848675702472704",
+            "type" : 101
+        }
+    ],
+    "materialOffset" : 0,
+    "picList" : [],
+    "state" : 0,
+    "tmpl" : "",
+    "type" : 101,
+    "uid" : "d0c24ca7-c2fb-485e-6e76-66225c45ff5f"
+}

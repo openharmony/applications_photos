@@ -1,0 +1,18 @@
+{
+    "string":[
+        {
+            "name":"intelligent_classification_description_tips",
+            "value":"Las fotos y los vídeos se ordenan en álbumes separados para facilitar la navegación. También puedes hacer búsquedas por persona, lugar y fuente.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"grid_layout_description_tips",
+            "value":"La Galería se extiende ahora por toda la pantalla para proporcionar una experiencia más inmersiva.\n\nAlterna entre las vistas de día, mes y año en un solo paso.",
+            "attr":{
+                "priority":"LT"
+            }
+        }
+    ]
+}

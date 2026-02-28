@@ -1,0 +1,3236 @@
+{
+    "string":[
+        {
+            "name":"xt_style_natural_selected",
+            "value":"[TS_1066049]_Natural is selected"
+        },
+        {
+            "name":"xt_style_film_selected",
+            "value":"[TS_1066044]_Celluloid is selected"
+        },
+        {
+            "name":"xt_style_cinematic_selected",
+            "value":"[TS_1066053]_Cinematic is selected"
+        },
+        {
+            "name":"xt_style_anime_selected",
+            "value":"[TS_1066045]_Anime is selected"
+        },
+        {
+            "name":"adjust_sharpness_imageEdit",
+            "value":"[TS_947011]_Sharpness"
+        },
+        {
+            "name":"adjust_contrast_imageEdit",
+            "value":"[TS_946950]_Contrast"
+        },
+        {
+            "name":"saving_media_imageEdit",
+            "value":"[TS_946966]_Saving\u2026"
+        },
+        {
+            "name":"tabs_crop_imageEdit",
+            "value":"[TS_947078]_Crop"
+        },
+        {
+            "name":"videoTool_compare_imageEdit",
+            "value":"[TS_946937]_Compare"
+        },
+        {
+            "name":"save_failed_imageEdit",
+            "value":"[TS_946963]_Unable to save."
+        },
+        {
+            "name":"subtitle_delete_cancel_imageEdit",
+            "value":"[TS_947000]_Cancel"
+        },
+        {
+            "name":"adjust_shadow_imageEdit",
+            "value":"[TS_946972]_Shadow"
+        },
+        {
+            "name":"adjust_hue_imageEdit",
+            "value":"[TS_946996]_Color"
+        },
+        {
+            "name":"tabs_filter_imageEdit",
+            "value":"[TS_946894]_Filters"
+        },
+        {
+            "name":"edit_imageEdit",
+            "value":"[TS_947013]_Edit"
+        },
+        {
+            "name":"crop_rotate_imageEdit",
+            "value":"[TS_947110]_Rotate"
+        },
+        {
+            "name":"adjust_temperature_imageEdit",
+            "value":"[TS_946951]_Temperature"
+        },
+        {
+            "name":"tabs_adjust_imageEdit",
+            "value":"[TS_947084]_Adjust"
+        },
+        {
+            "name":"crop_original_imageEdit",
+            "value":"[TS_947097]_Original"
+        },
+        {
+            "name":"discard_imageEdit",
+            "value":"[TS_947091]_Discard"
+        },
+        {
+            "name":"adjust_vignette_imageEdit",
+            "value":"[TS_946976]_Vignette"
+        },
+        {
+            "name":"adjust_saturation_imageEdit",
+            "value":"[TS_946940]_Saturation"
+        },
+        {
+            "name":"crop_ratio_imageEdit",
+            "value":"[TS_946952]_Aspect ratio"
+        },
+        {
+            "name":"redo_adjust_highlights_imageEdit",
+            "value":"[TS_947016]_Redo: Highlight adjustment."
+        },
+        {
+            "name":"undo_intercept_imageEdit",
+            "value":"[TS_946998]_Undo: Trim."
+        },
+        {
+            "name":"redo_adjust_vignette_imageEdit",
+            "value":"[TS_946989]_Redo: Vignette adjustment."
+        },
+        {
+            "name":"redo_adjust_sharpness_imageEdit",
+            "value":"[TS_946983]_Redo: Sharpness adjustment."
+        },
+        {
+            "name":"redo_correct_horizontal_imageEdit",
+            "value":"[TS_946943]_Redo: Horizontal correction."
+        },
+        {
+            "name":"undo_adjust_vignette_imageEdit",
+            "value":"[TS_947109]_Undo: Vignette adjustment."
+        },
+        {
+            "name":"tabs_cut_imageEdit",
+            "value":"[TS_947050]_Trim"
+        },
+        {
+            "name":"redo_mirror_imageEdit",
+            "value":"[TS_947022]_Redo: Mirror."
+        },
+        {
+            "name":"undo_adjust_shadow_imageEdit",
+            "value":"[TS_947066]_Undo: Shadow adjustment."
+        },
+        {
+            "name":"redo_rotate_imageEdit",
+            "value":"[TS_947039]_Redo: Rotation."
+        },
+        {
+            "name":"undo_mirror_imageEdit",
+            "value":"[TS_946909]_Undo: Mirror."
+        },
+        {
+            "name":"undo_adjust_saturation_imageEdit",
+            "value":"[TS_947107]_Undo: Saturation adjustment."
+        },
+        {
+            "name":"crop_free_imageEdit",
+            "value":"[TS_946993]_Freeform"
+        },
+        {
+            "name":"undo_rotate_imageEdit",
+            "value":"[TS_946913]_Undo: Rotation."
+        },
+        {
+            "name":"redo_ninety_angle_rotate_imageEdit",
+            "value":"[TS_1129182]_Redo: %s° rotation."
+        },
+        {
+            "name":"undo_adjust_luma_imageEdit",
+            "value":"[TS_946924]_Undo: Brightness adjustment."
+        },
+        {
+            "name":"undo_adjust_contrast_imageEdit",
+            "value":"[TS_947057]_Undo: Contrast adjustment."
+        },
+        {
+            "name":"redo_adjust_contrast_imageEdit",
+            "value":"[TS_946986]_Redo: Contrast adjustment."
+        },
+        {
+            "name":"undo_ninety_angle_rotate_imageEdit",
+            "value":"[TS_1129181]_Undo: %s° rotation."
+        },
+        {
+            "name":"redo_adjust_luma_imageEdit",
+            "value":"[TS_947024]_Redo: Brightness adjustment."
+        },
+        {
+            "name":"undo_filter_none_imageEdit",
+            "value":"[TS_945361]_Undo: Original."
+        },
+        {
+            "name":"redo_adjust_hue_imageEdit",
+            "value":"[TS_946915]_Redo: Hue adjustment."
+        },
+        {
+            "name":"redo_adjust_temperature_imageEdit",
+            "value":"[TS_946980]_Redo: Temperature adjustment."
+        },
+        {
+            "name":"discard_all_changes_imageEdit",
+            "value":"[TS_946904]_Discard changes?"
+        },
+        {
+            "name":"adjust_highlights_imageEdit",
+            "value":"[TS_947001]_Highlight"
+        },
+        {
+            "name":"undo_proportional_imageEdit",
+            "value":"[TS_947043]_Undo: Ratio."
+        },
+        {
+            "name":"redo_proportional_imageEdit",
+            "value":"[TS_946930]_Redo: Ratio."
+        },
+        {
+            "name":"undo_adjust_highlights_imageEdit",
+            "value":"[TS_947023]_Undo: Highlight adjustment."
+        },
+        {
+            "name":"redo_adjust_saturation_imageEdit",
+            "value":"[TS_947034]_Redo: Saturation adjustment."
+        },
+        {
+            "name":"undo_adjust_temperature_imageEdit",
+            "value":"[TS_946942]_Undo: Temperature adjustment."
+        },
+        {
+            "name":"redo_adjust_shadow_imageEdit",
+            "value":"[TS_946907]_Redo: Shadow adjustment."
+        },
+        {
+            "name":"crop_vertical_correction_imageEdit",
+            "value":"[TS_946914]_Vertical"
+        },
+        {
+            "name":"undo_adjust_sharpness_imageEdit",
+            "value":"[TS_946931]_Undo: Sharpness adjustment."
+        },
+        {
+            "name":"undo_adjust_hue_imageEdit",
+            "value":"[TS_947113]_Undo: Hue adjustment."
+        },
+        {
+            "name":"redo_crop_imageEdit",
+            "value":"[TS_947008]_Redo: Crop."
+        },
+        {
+            "name":"redo_intercept_imageEdit",
+            "value":"[TS_946899]_Redo: Trim."
+        },
+        {
+            "name":"adjust_luma_imageEdit",
+            "value":"[TS_946999]_Brightness"
+        },
+        {
+            "name":"undo_crop_imageEdit",
+            "value":"[TS_947037]_Undo: Crop."
+        },
+        {
+            "name":"redo_correct_vertical_imageEdit",
+            "value":"[TS_946954]_Redo: Vertical correction."
+        },
+        {
+            "name":"undo_correct_vertical_imageEdit",
+            "value":"[TS_947063]_Undo: Vertical correction."
+        },
+        {
+            "name":"redo_filter_none_imageEdit",
+            "value":"[TS_945360]_Redo: Original."
+        },
+        {
+            "name":"undo_correct_horizontal_imageEdit",
+            "value":"[TS_947049]_Undo: Horizontal correction."
+        },
+        {
+            "name":"crop_horizontal_correction_imageEdit",
+            "value":"[TS_946978]_Horizontal"
+        },
+        {
+            "name":"undo_adjust_saturation_on_imageEdit",
+            "value":"[TS_947003]_Undo: Saturation adjustment on."
+        },
+        {
+            "name":"redo_filter_sunset_imageEdit",
+            "value":"[TS_947064]_Redo: Twilight filter."
+        },
+        {
+            "name":"undo_filter_middle_tone_imageEdit",
+            "value":"[TS_947026]_Undo: Neutral filter."
+        },
+        {
+            "name":"undo_filter_little_luck_imageEdit",
+            "value":"[TS_947035]_Undo: Lucky filter."
+        },
+        {
+            "name":"redo_adjust_sharpness_off_imageEdit",
+            "value":"[TS_947047]_Redo: Sharpness adjustment off."
+        },
+        {
+            "name":"redo_adjust_granules_imageEdit",
+            "value":"[TS_947044]_Redo: Grain adjustment."
+        },
+        {
+            "name":"redo_filter_black_and_white_strength_imageEdit",
+            "value":"[TS_947102]_Redo: Monochrome intensity."
+        },
+        {
+            "name":"adjust_exposure_imageEdit",
+            "value":"[TS_946910]_Exposure"
+        },
+        {
+            "name":"adjust_nature_saturation_imageEdit",
+            "value":"[TS_947070]_Vibrance"
+        },
+        {
+            "name":"redo_filter_sweet_imageEdit",
+            "value":"[TS_946941]_Redo: Sweet filter."
+        },
+        {
+            "name":"undo_filter_original_imageEdit",
+            "value":"[TS_947101]_Undo: Ethereal filter."
+        },
+        {
+            "name":"filter_milk_tea_imageEdit",
+            "value":"[TS_947073]_Warm"
+        },
+        {
+            "name":"redo_filter_green_orange_imageEdit",
+            "value":"[TS_946958]_Redo: Lime filter."
+        },
+        {
+            "name":"undo_filter_original_strength_imageEdit",
+            "value":"[TS_946977]_Undo: Ethereal intensity."
+        },
+        {
+            "name":"filter_none_imageEdit",
+            "value":"[TS_947095]_Original"
+        },
+        {
+            "name":"undo_adjust_temperature_off_imageEdit",
+            "value":"[TS_947071]_Undo: Color Temperature adjustment off."
+        },
+        {
+            "name":"undo_adjust_temperature_on_imageEdit",
+            "value":"[TS_947045]_Undo: Color Temperature adjustment on."
+        },
+        {
+            "name":"undo_adjust_saturation_off_imageEdit",
+            "value":"[TS_947106]_Undo: Saturation adjustment off."
+        },
+        {
+            "name":"undo_adjust_fade_imageEdit",
+            "value":"[TS_947080]_Undo: Fade adjustment."
+        },
+        {
+            "name":"adjust_granules_imageEdit",
+            "value":"[TS_946964]_Grain"
+        },
+        {
+            "name":"filter_green_orange_imageEdit",
+            "value":"[TS_947076]_Lime"
+        },
+        {
+            "name":"undo_adjust_brightness_on_imageEdit",
+            "value":"[TS_947020]_Undo: Brightness adjustment on."
+        },
+        {
+            "name":"redo_adjust_exposure_imageEdit",
+            "value":"[TS_947052]_Redo: Exposure adjustment."
+        },
+        {
+            "name":"undo_filter_old_tree_strength_imageEdit",
+            "value":"[TS_947083]_Undo: Rustic intensity."
+        },
+        {
+            "name":"adjust_fade_imageEdit",
+            "value":"[TS_947029]_Fade"
+        },
+        {
+            "name":"filter_sunset_imageEdit",
+            "value":"[TS_947033]_Twilight"
+        },
+        {
+            "name":"redo_filter_middle_tone_imageEdit",
+            "value":"[TS_946908]_Redo: Neutral filter."
+        },
+        {
+            "name":"undo_adjust_bright_part_imageEdit",
+            "value":"[TS_946944]_Undo: Light area adjustment."
+        },
+        {
+            "name":"redo_adjust_saturation_on_imageEdit",
+            "value":"[TS_946895]_Redo: Saturation adjustment on."
+        },
+        {
+            "name":"redo_filter_old_tree_strength_imageEdit",
+            "value":"[TS_947055]_Redo: Rustic intensity."
+        },
+        {
+            "name":"redo_filter_little_luck_imageEdit",
+            "value":"[TS_946916]_Redo: Lucky filter."
+        },
+        {
+            "name":"redo_filter_sweet_strength_imageEdit",
+            "value":"[TS_946968]_Redo: Sweet intensity."
+        },
+        {
+            "name":"undo_filter_milk_tea_imageEdit",
+            "value":"[TS_946921]_Undo: Warm filter."
+        },
+        {
+            "name":"undo_adjust_shadow_on_imageEdit",
+            "value":"[TS_946923]_Undo: Shadow adjustment on."
+        },
+        {
+            "name":"undo_adjust_sharpness_off_imageEdit",
+            "value":"[TS_947059]_Undo: Sharpness adjustment off."
+        },
+        {
+            "name":"redo_filter_green_orange_strength_imageEdit",
+            "value":"[TS_946922]_Redo: Lime intensity."
+        },
+        {
+            "name":"redo_filter_milk_tea_strength_imageEdit",
+            "value":"[TS_947075]_Redo: Warm intensity."
+        },
+        {
+            "name":"filter_old_tree_imageEdit",
+            "value":"[TS_947089]_Rustic"
+        },
+        {
+            "name":"undo_filter_black_and_white_imageEdit",
+            "value":"[TS_947004]_Undo: Monochrome filter."
+        },
+        {
+            "name":"undo_adjust_vignette_off_imageEdit",
+            "value":"[TS_947096]_Undo: Vignette adjustment off."
+        },
+        {
+            "name":"redo_adjust_bright_part_imageEdit",
+            "value":"[TS_947056]_Redo: Light area adjustment."
+        },
+        {
+            "name":"filter_sweet_imageEdit",
+            "value":"[TS_946906]_Sweet"
+        },
+        {
+            "name":"redo_filter_old_tree_imageEdit",
+            "value":"[TS_946900]_Redo: Rustic filter."
+        },
+        {
+            "name":"undo_filter_crystal_clear_imageEdit",
+            "value":"[TS_946969]_Undo: Crystal filter."
+        },
+        {
+            "name":"redo_adjust_shadow_on_imageEdit",
+            "value":"[TS_946939]_Redo: Shadow adjustment on."
+        },
+        {
+            "name":"undo_adjust_nature_saturation_imageEdit",
+            "value":"[TS_946992]_Undo: Vibrance adjustment."
+        },
+        {
+            "name":"undo_filter_sunset_strength_imageEdit",
+            "value":"[TS_947014]_Undo: Twilight intensity."
+        },
+        {
+            "name":"undo_filter_green_orange_imageEdit",
+            "value":"[TS_946947]_Undo: Lime filter."
+        },
+        {
+            "name":"undo_filter_crystal_clear_strength_imageEdit",
+            "value":"[TS_946896]_Undo: Crystal intensity."
+        },
+        {
+            "name":"redo_adjust_highlight_on_imageEdit",
+            "value":"[TS_947082]_Redo: Highlight adjustment on."
+        },
+        {
+            "name":"redo_adjust_contrast_on_imageEdit",
+            "value":"[TS_947007]_Redo: Contrast adjustment on."
+        },
+        {
+            "name":"filter_black_and_white_imageEdit",
+            "value":"[TS_946991]_Mono"
+        },
+        {
+            "name":"undo_adjust_contrast_on_imageEdit",
+            "value":"[TS_947092]_Undo: Contrast adjustment on."
+        },
+        {
+            "name":"filter_middle_tone_imageEdit",
+            "value":"[TS_947041]_Neutral"
+        },
+        {
+            "name":"undo_filter_green_orange_strength_imageEdit",
+            "value":"[TS_946928]_Undo: Lime intensity."
+        },
+        {
+            "name":"undo_adjust_brightness_off_imageEdit",
+            "value":"[TS_946917]_Undo: Brightness adjustment off."
+        },
+        {
+            "name":"undo_filter_milk_tea_strength_imageEdit",
+            "value":"[TS_946948]_Undo: Warm intensity."
+        },
+        {
+            "name":"undo_adjust_highlight_off_imageEdit",
+            "value":"[TS_947002]_Undo: Highlight adjustment off."
+        },
+        {
+            "name":"redo_adjust_temperature_on_imageEdit",
+            "value":"[TS_947067]_Redo: Color Temperature adjustment on."
+        },
+        {
+            "name":"crop_pave_imageEdit",
+            "value":"[TS_947038]_Fit to screen"
+        },
+        {
+            "name":"filter_crystal_clear_imageEdit",
+            "value":"[TS_946985]_Crystal"
+        },
+        {
+            "name":"redo_adjust_saturation_off_imageEdit",
+            "value":"[TS_947019]_Redo: Saturation adjustment off."
+        },
+        {
+            "name":"redo_adjust_highlight_off_imageEdit",
+            "value":"[TS_946934]_Redo: Highlight adjustment off."
+        },
+        {
+            "name":"undo_filter_old_tree_imageEdit",
+            "value":"[TS_947021]_Undo: Rustic filter."
+        },
+        {
+            "name":"undo_adjust_vignette_on_imageEdit",
+            "value":"[TS_946973]_Undo: Vignette adjustment on."
+        },
+        {
+            "name":"undo_adjust_dark_part_imageEdit",
+            "value":"[TS_946984]_Undo: Dark area adjustment."
+        },
+        {
+            "name":"redo_filter_middle_tone_strength_imageEdit",
+            "value":"[TS_947072]_Redo: Neutral intensity."
+        },
+        {
+            "name":"redo_filter_little_luck_strength_imageEdit",
+            "value":"[TS_946981]_Redo: Lucky intensity."
+        },
+        {
+            "name":"undo_adjust_exposure_imageEdit",
+            "value":"[TS_946919]_Undo: Exposure adjustment."
+        },
+        {
+            "name":"filter_original_imageEdit",
+            "value":"[TS_947012]_Ethereal"
+        },
+        {
+            "name":"redo_filter_original_strength_imageEdit",
+            "value":"[TS_947030]_Redo: Ethereal intensity."
+        },
+        {
+            "name":"redo_filter_crystal_clear_imageEdit",
+            "value":"[TS_947108]_Redo: Crystal filter."
+        },
+        {
+            "name":"redo_adjust_contrast_off_imageEdit",
+            "value":"[TS_947081]_Redo: Contrast adjustment off."
+        },
+        {
+            "name":"undo_filter_black_and_white_strength_imageEdit",
+            "value":"[TS_946936]_Undo: Monochrome intensity."
+        },
+        {
+            "name":"undo_adjust_highlight_on_imageEdit",
+            "value":"[TS_946933]_Undo: Highlight adjustment on."
+        },
+        {
+            "name":"redo_adjust_vignette_off_imageEdit",
+            "value":"[TS_947061]_Redo: Vignette adjustment off."
+        },
+        {
+            "name":"filter_little_luck_imageEdit",
+            "value":"[TS_947031]_Lucky"
+        },
+        {
+            "name":"redo_filter_original_imageEdit",
+            "value":"[TS_946994]_Redo: Ethereal filter."
+        },
+        {
+            "name":"redo_adjust_temperature_off_imageEdit",
+            "value":"[TS_947005]_Redo: Color temperature adjustment off."
+        },
+        {
+            "name":"undo_adjust_hue_on_imageEdit",
+            "value":"[TS_947042]_Undo: Hue adjustment on."
+        },
+        {
+            "name":"redo_filter_milk_tea_imageEdit",
+            "value":"[TS_947053]_Redo: Warm filter."
+        },
+        {
+            "name":"redo_filter_crystal_clear_strength_imageEdit",
+            "value":"[TS_946946]_Redo: Crystal intensity."
+        },
+        {
+            "name":"adjust_bright_part_imageEdit",
+            "value":"[TS_946959]_Light area"
+        },
+        {
+            "name":"redo_adjust_sharpness_on_imageEdit",
+            "value":"[TS_947111]_Redo: Sharpness adjustment on."
+        },
+        {
+            "name":"redo_adjust_nature_saturation_imageEdit",
+            "value":"[TS_946920]_Redo: Vibrance adjustment."
+        },
+        {
+            "name":"undo_filter_little_luck_strength_imageEdit",
+            "value":"[TS_947054]_Undo: Lucky intensity."
+        },
+        {
+            "name":"redo_adjust_hue_off_imageEdit",
+            "value":"[TS_946957]_Redo: Hue adjustment off."
+        },
+        {
+            "name":"undo_adjust_hue_off_imageEdit",
+            "value":"[TS_946988]_Undo: Hue adjustment off."
+        },
+        {
+            "name":"undo_filter_sweet_imageEdit",
+            "value":"[TS_946997]_Undo: Sweet filter."
+        },
+        {
+            "name":"redo_adjust_shadow_off_imageEdit",
+            "value":"[TS_947015]_Redo: Shadow adjustment off."
+        },
+        {
+            "name":"adjust_dark_part_imageEdit",
+            "value":"[TS_946974]_Dark area"
+        },
+        {
+            "name":"redo_filter_black_and_white_imageEdit",
+            "value":"[TS_947048]_Redo: Monochrome filter."
+        },
+        {
+            "name":"undo_adjust_sharpness_on_imageEdit",
+            "value":"[TS_947103]_Undo: Sharpness adjustment on."
+        },
+        {
+            "name":"undo_filter_sweet_strength_imageEdit",
+            "value":"[TS_946965]_Undo: Sweet intensity."
+        },
+        {
+            "name":"undo_adjust_contrast_off_imageEdit",
+            "value":"[TS_946901]_Undo: Contrast adjustment off."
+        },
+        {
+            "name":"current_file_cannot_import_imageEdit",
+            "value":"[TS_947094]_Unsupported or corrupted file. Unable to edit."
+        },
+        {
+            "name":"redo_filter_sunset_strength_imageEdit",
+            "value":"[TS_946955]_Redo: Twilight intensity."
+        },
+        {
+            "name":"redo_adjust_fade_imageEdit",
+            "value":"[TS_946990]_Redo: Fade adjustment."
+        },
+        {
+            "name":"redo_adjust_hue_on_imageEdit",
+            "value":"[TS_947100]_Redo: Hue adjustment on."
+        },
+        {
+            "name":"undo_filter_middle_tone_strength_imageEdit",
+            "value":"[TS_946960]_Undo: Neutral intensity."
+        },
+        {
+            "name":"undo_adjust_shadow_off_imageEdit",
+            "value":"[TS_947058]_Undo: Shadow adjustment off."
+        },
+        {
+            "name":"redo_adjust_vignette_on_imageEdit",
+            "value":"[TS_947098]_Redo: Vignette adjustment on."
+        },
+        {
+            "name":"redo_adjust_brightness_on_imageEdit",
+            "value":"[TS_946932]_Redo: Brightness adjustment on."
+        },
+        {
+            "name":"redo_adjust_brightness_off_imageEdit",
+            "value":"[TS_947079]_Redo: Brightness adjustment off."
+        },
+        {
+            "name":"undo_adjust_granules_imageEdit",
+            "value":"[TS_946925]_Undo: Grain adjustment."
+        },
+        {
+            "name":"redo_adjust_dark_part_imageEdit",
+            "value":"[TS_947009]_Redo: Dark area adjustment."
+        },
+        {
+            "name":"undo_filter_sunset_imageEdit",
+            "value":"[TS_946905]_Undo: Twilight filter."
+        },
+        {
+            "name":"redo_adjust_darkzone_off_imageEdit",
+            "value":"[TS_946995]_Redo: Dark area adjustment off."
+        },
+        {
+            "name":"redo_adjust_darkzone_on_imageEdit",
+            "value":"[TS_946926]_Redo: Dark area adjustment on."
+        },
+        {
+            "name":"undo_adjust_vibrance_off_imageEdit",
+            "value":"[TS_947087]_Undo: Vibrance adjustment off."
+        },
+        {
+            "name":"redo_adjust_fade_on_imageEdit",
+            "value":"[TS_947010]_Redo: Fade adjustment on."
+        },
+        {
+            "name":"undo_adjust_darkzone_on_imageEdit",
+            "value":"[TS_947036]_Undo: Dark area adjustment on."
+        },
+        {
+            "name":"undo_adjust_darkzone_off_imageEdit",
+            "value":"[TS_946975]_Undo: Dark area adjustment off."
+        },
+        {
+            "name":"redo_adjust_brightzone_off_imageEdit",
+            "value":"[TS_947112]_Redo: Light area adjustment off."
+        },
+        {
+            "name":"undo_adjust_exposure_on_imageEdit",
+            "value":"[TS_946982]_Undo: Exposure adjustment on."
+        },
+        {
+            "name":"redo_adjust_grain_on_imageEdit",
+            "value":"[TS_947068]_Redo: Grain adjustment on."
+        },
+        {
+            "name":"redo_adjust_grain_off_imageEdit",
+            "value":"[TS_946953]_Redo: Grain adjustment off."
+        },
+        {
+            "name":"redo_adjust_exposure_on_imageEdit",
+            "value":"[TS_947085]_Redo: Exposure adjustment on."
+        },
+        {
+            "name":"undo_adjust_brightzone_off_imageEdit",
+            "value":"[TS_947017]_Undo: Light area adjustment off."
+        },
+        {
+            "name":"undo_adjust_fade_on_imageEdit",
+            "value":"[TS_946929]_Undo: Fade adjustment on."
+        },
+        {
+            "name":"button_bubble_oneClick_adjust_imageEdit",
+            "value":"[TS_947069]_Auto-adjust"
+        },
+        {
+            "name":"undo_adjust_exposure_off_imageEdit",
+            "value":"[TS_947027]_Undo: Exposure adjustment off."
+        },
+        {
+            "name":"undo_adjust_grain_off_imageEdit",
+            "value":"[TS_946987]_Undo: Grain adjustment off."
+        },
+        {
+            "name":"undo_adjust_fade_off_imageEdit",
+            "value":"[TS_947062]_Undo: Fade adjustment off."
+        },
+        {
+            "name":"undo_adjust_brightzone_on_imageEdit",
+            "value":"[TS_946962]_Undo: Light area adjustment on."
+        },
+        {
+            "name":"undo_adjust_grain_on_imageEdit",
+            "value":"[TS_947051]_Undo: Grain adjustment on."
+        },
+        {
+            "name":"redo_adjust_vibrance_on_imageEdit",
+            "value":"[TS_947032]_Redo: Vibrance adjustment on."
+        },
+        {
+            "name":"undo_adjust_vibrance_on_imageEdit",
+            "value":"[TS_946898]_Undo: Vibrance adjustment on."
+        },
+        {
+            "name":"redo_adjust_fade_off_imageEdit",
+            "value":"[TS_946970]_Redo: Fade adjustment off."
+        },
+        {
+            "name":"redo_adjust_exposure_off_imageEdit",
+            "value":"[TS_947060]_Redo: Exposure adjustment off."
+        },
+        {
+            "name":"redo_adjust_vibrance_off_imageEdit",
+            "value":"[TS_946903]_Redo: Vibrance adjustment off."
+        },
+        {
+            "name":"redo_adjust_brightzone_on_imageEdit",
+            "value":"[TS_947018]_Redo: Light area adjustment on."
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"[TS_946927]_Redo: Enable auto adjust."
+        },
+        {
+            "name":"revert_original_state_imageEdit",
+            "value":"[TS_946902]_Reset to original state?"
+        },
+        {
+            "name":"revert_imageEdit",
+            "value":"[TS_947040]_Reset"
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"[TS_947090]_Redo: Auto adjust."
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"[TS_946979]_Undo: Disable auto adjust."
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"[TS_947105]_Redo: Disable auto adjust."
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"[TS_947065]_Undo: Auto adjust."
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"[TS_947077]_Undo: Enable auto adjust."
+        },
+        {
+            "name":"retry_imageEdit",
+            "value":"[TS_946949]_Retry"
+        },
+        {
+            "name":"image_downloading_imageEdit",
+            "value":"[TS_946918]_Original image is being downloaded. Please wait."
+        },
+        {
+            "name":"filter_natural_imageEdit",
+            "value":"[TS_946935]_Natural"
+        },
+        {
+            "name":"undo_filter_pink_imageEdit",
+            "value":"[TS_946911]_Undo: Pink filter."
+        },
+        {
+            "name":"undo_filter_blossom_imageEdit",
+            "value":"[TS_947006]_Undo: Blossom filter."
+        },
+        {
+            "name":"filter_fair_imageEdit",
+            "value":"[TS_947099]_Fair"
+        },
+        {
+            "name":"redo_filter_pink_imageEdit",
+            "value":"[TS_947046]_Redo: Pink filter."
+        },
+        {
+            "name":"undo_filter_moody_imageEdit",
+            "value":"[TS_946945]_Undo: Moody filter."
+        },
+        {
+            "name":"redo_filter_fair_imageEdit",
+            "value":"[TS_946971]_Redo: Fair filter."
+        },
+        {
+            "name":"undo_filter_classics_imageEdit",
+            "value":"[TS_946961]_Undo: Classic filter."
+        },
+        {
+            "name":"undo_filter_natural_imageEdit",
+            "value":"[TS_946967]_Undo: Natural filter."
+        },
+        {
+            "name":"redo_filter_natural_imageEdit",
+            "value":"[TS_947025]_Redo: Natural filter."
+        },
+        {
+            "name":"filter_pink_imageEdit",
+            "value":"[TS_947093]_Pink"
+        },
+        {
+            "name":"filter_classics_imageEdit",
+            "value":"[TS_946938]_Classic"
+        },
+        {
+            "name":"undo_filter_fair_imageEdit",
+            "value":"[TS_946956]_Undo: Fair filter."
+        },
+        {
+            "name":"redo_filter_classics_imageEdit",
+            "value":"[TS_947086]_Redo: Classic filter."
+        },
+        {
+            "name":"redo_filter_moody_imageEdit",
+            "value":"[TS_947074]_Redo: Moody filter."
+        },
+        {
+            "name":"redo_filter_blossom_imageEdit",
+            "value":"[TS_946912]_Redo: Blossom filter."
+        },
+        {
+            "name":"filter_blossom_imageEdit",
+            "value":"[TS_947028]_Blossom"
+        },
+        {
+            "name":"filter_moody_imageEdit",
+            "value":"[TS_946897]_Moody"
+        },
+        {
+            "name":"first_time_use_penkit",
+            "value":"[TS_942893]_Tap here to doodle on this image."
+        },
+        {
+            "name":"click_restore_origin_tips",
+            "value":"[TS_979184]_Tap here to undo changes you've made."
+        },
+        {
+            "name":"ai_remove_risk_control_alerts",
+            "value":"[TS_948572]_Remove cannot be used on this image. Try again with another image."
+        },
+        {
+            "name":"image_is_too_large_toast",
+            "value":"[TS_948567]_Image too large. Try again with a different image."
+        },
+        {
+            "name":"button_open",
+            "value":"[TS_948574]_On"
+        },
+        {
+            "name":"image_format_abnormal_toast",
+            "value":"[TS_948563]_Image format not supported. Try again with another image."
+        },
+        {
+            "name":"cannot_be_erased_toast",
+            "value":"[TS_1054605]_Content in selected area cannot be removed."
+        },
+        {
+            "name":"server_is_abnormal",
+            "value":"[TS_948573]_Server error."
+        },
+        {
+            "name":"remove_fail_toast",
+            "value":"[TS_988947]_Unable to remove. Try again later."
+        },
+        {
+            "name":"remove",
+            "value":"[TS_948576]_Remove"
+        },
+        {
+            "name":"manual_selection",
+            "value":"[TS_948561]_Manual"
+        },
+        {
+            "name":"bokeh",
+            "value":"[TS_948562]_Blur"
+        },
+        {
+            "name":"start_remove",
+            "value":"[TS_948570]_Remove"
+        },
+        {
+            "name":"button_close",
+            "value":"[TS_948571]_Off"
+        },
+        {
+            "name":"ai_remove_loading",
+            "value":"[TS_948566]_Processing…"
+        },
+        {
+            "name":"wise_selection",
+            "value":"[TS_948559]_Auto"
+        },
+        {
+            "name":"ai_remove_limit_toast",
+            "value":"[TS_948564]_Remove cannot be used on this image. Try again with another image."
+        },
+        {
+            "name":"background_decolorization",
+            "value":"[TS_948575]_Mono"
+        },
+        {
+            "name":"ai_remove_network_abnorma_toast",
+            "value":"[TS_948577]_Network error. Check and try again."
+        },
+        {
+            "name":"ai_retouching",
+            "value":"[TS_948560]_AI retouch"
+        },
+        {
+            "name":"ai_is_selected",
+            "value":"[TS_1036542]_%1$s is selected"
+        },
+        {
+            "name":"brush_thickness_value",
+            "value":"[TS_1036543]_Brush size has been adjusted, current size is %1$d"
+        },
+        {
+            "name":"brush_thickness_selected",
+            "value":"[TS_1036541]_Brush size adjustment slider, size range from %1$d to %2$d, double tap to activate, double tap and hold, then drag left or right to adjust size"
+        },
+        {
+            "name":"aspect_ratio_of_the_image_toast",
+            "value":"[TS_948569]_Aspect ratio too large. Try again with a different image."
+        },
+        {
+            "name":"background",
+            "value":"[TS_948568]_Background"
+        },
+        {
+            "name":"ai_remove_bootstrapping_for_the_first_time",
+            "value":"[TS_948565]_Swipe over the center of an object or person to select it."
+        },
+        {
+            "name":"ai_expand_image",
+            "value":"[TS_956734]_Expand"
+        },
+        {
+            "name":"expand_image",
+            "value":"[TS_969170]_Expand"
+        },
+        {
+            "name":"ai_analyzing",
+            "value":"[TS_956738]_Analyzing…"
+        },
+        {
+            "name":"start_expand_image",
+            "value":"[TS_956737]_Expand"
+        },
+        {
+            "name":"ai_generating_content",
+            "value":"[TS_956739]_Generating…"
+        },
+        {
+            "name":"image_aspect_ratio_too_large",
+            "value":"[TS_956733]_Aspect ratio too large. Try again with a different image."
+        },
+        {
+            "name":"shrink_image_to_adjust_expand_rect",
+            "value":"[TS_956736]_Shrink the image to adjust the expandable zone."
+        },
+        {
+            "name":"image_can_not_expand",
+            "value":"[TS_956735]_This image can't be expanded."
+        },
+        {
+            "name":"tradition_remove_content",
+            "value":"[TS_973677]_Removing"
+        },
+        {
+            "name":"petalClip_stylus_shut_down",
+            "value":"[TS_972193]_Close"
+        },
+        {
+            "name":"petalClip_stylus_previous_step",
+            "value":"[TS_972194]_Undo"
+        },
+        {
+            "name":"petalClip_stylus_next_step",
+            "value":"[TS_972197]_Redo"
+        },
+        {
+            "name":"petalClip_stylus_finish",
+            "value":"[TS_972196]_Done"
+        },
+        {
+            "name":"celia_retouch",
+            "value":"[TS_977896]_Retouch"
+        },
+        {
+            "name":"back_up",
+            "value":"[TS_976442]_Back"
+        },
+        {
+            "name":"rect_right_top",
+            "value":"[TS_976568]_Top right corner of the crop box, double tap and hold then drag to adjust the selected area"
+        },
+        {
+            "name":"save_invisible",
+            "value":"[TS_976473]_Save button, unavailable"
+        },
+        {
+            "name":"adjust_shadow_true",
+            "value":"[TS_976542]_Shadow selected"
+        },
+        {
+            "name":"adjust_temperature_true",
+            "value":"[TS_976544]_Temperature selected"
+        },
+        {
+            "name":"cropTab_ratio_free_on",
+            "value":"[TS_976455]_Freeform selected"
+        },
+        {
+            "name":"redo_invisible",
+            "value":"[TS_976557]_Redo button, unavailable"
+        },
+        {
+            "name":"cropTab_ratio_2_3_on",
+            "value":"[TS_976445]_Two by three aspect ratio selected"
+        },
+        {
+            "name":"filter_original_selected",
+            "value":"[TS_976537]_Ethereal filter selected"
+        },
+        {
+            "name":"adjust_vibrance_true",
+            "value":"[TS_976519]_Vibrance selected"
+        },
+        {
+            "name":"adjust_darkzone_true",
+            "value":"[TS_976561]_Dark area selected"
+        },
+        {
+            "name":"adjust_auto_true",
+            "value":"[TS_976535]_Auto adjust selected"
+        },
+        {
+            "name":"crop_mirror_btn",
+            "value":"[TS_976513]_Mirror flip"
+        },
+        {
+            "name":"cropTab_ratio_2_3",
+            "value":"[TS_976488]_Vertical, two by three aspect ratio"
+        },
+        {
+            "name":"cropTab_horizontalCorrection_on",
+            "value":"[TS_976476]_Horizontal adjustment selected"
+        },
+        {
+            "name":"adjust_compare_btn",
+            "value":"[TS_976450]_Compare button, double tap and hold to compare the current image to the original image"
+        },
+        {
+            "name":"cropTab_ratio_on",
+            "value":"[TS_976560]_Aspect ratio selected"
+        },
+        {
+            "name":"filter_middle_tone_selected",
+            "value":"[TS_976454]_Neutral filter selected"
+        },
+        {
+            "name":"adjust_exposure_true",
+            "value":"[TS_976499]_Exposure selected"
+        },
+        {
+            "name":"adjust_saturation_true",
+            "value":"[TS_976554]_Saturation selected"
+        },
+        {
+            "name":"cropTab_ratio_1_1",
+            "value":"[TS_976563]_One by one aspect ratio"
+        },
+        {
+            "name":"filter_sweet_selected",
+            "value":"[TS_976439]_Sweet filter selected"
+        },
+        {
+            "name":"adjust_highlight_true",
+            "value":"[TS_976526]_Highlight selected"
+        },
+        {
+            "name":"cropTab_ratio_screen_on",
+            "value":"[TS_976566]_Fit to screen selected"
+        },
+        {
+            "name":"cropTab_ratio_4_3_on",
+            "value":"[TS_976545]_Four by three aspect ratio selected"
+        },
+        {
+            "name":"cropTab_ratio_3_2_on",
+            "value":"[TS_976451]_Three by two aspect ratio selected"
+        },
+        {
+            "name":"rectangle_sizer",
+            "value":"[TS_976502]_Preview image"
+        },
+        {
+            "name":"rect_left_top",
+            "value":"[TS_976498]_Top left corner of the crop box, double tap and hold then drag to adjust the selected area"
+        },
+        {
+            "name":"redo_visible",
+            "value":"[TS_976503]_Redo"
+        },
+        {
+            "name":"cropTab_ratio_16_9_on",
+            "value":"[TS_976460]_Sixteen by nine aspect ratio selected"
+        },
+        {
+            "name":"cropTab_ratio_16_9",
+            "value":"[TS_976533]_Horizontal, sixteen by nine aspect ratio"
+        },
+        {
+            "name":"cropTab_ratio_9_16_on",
+            "value":"[TS_976497]_Nine by sixteen aspect ratio selected"
+        },
+        {
+            "name":"cropTab_ratio_3_4_on",
+            "value":"[TS_976480]_Three by four aspect ratio selected"
+        },
+        {
+            "name":"crop_rotation_btn",
+            "value":"[TS_976466]_Rotate ninety degrees counter clockwise"
+        },
+        {
+            "name":"adjust_brightness_true",
+            "value":"[TS_976463]_Brightness selected"
+        },
+        {
+            "name":"adjust_hue_true",
+            "value":"[TS_976489]_Hue selected"
+        },
+        {
+            "name":"adjust_contrast_true",
+            "value":"[TS_976516]_Contrast selected"
+        },
+        {
+            "name":"adjust_sharpness_true",
+            "value":"[TS_976464]_Sharpness selected"
+        },
+        {
+            "name":"adjust_fade_true",
+            "value":"[TS_976446]_Fade selected"
+        },
+        {
+            "name":"cropTab_ratio_origin_on",
+            "value":"[TS_976543]_Original selected"
+        },
+        {
+            "name":"undo_visible",
+            "value":"[TS_976552]_Undo"
+        },
+        {
+            "name":"rect_left_middle",
+            "value":"[TS_976524]_Left side of the crop box, double tap and hold then drag to adjust the selected area"
+        },
+        {
+            "name":"undo_invisible",
+            "value":"[TS_976504]_Undo button, unavailable"
+        },
+        {
+            "name":"filter_green_orange_selected",
+            "value":"[TS_976559]_Lime filter selected"
+        },
+        {
+            "name":"filter_milk_tea_selected",
+            "value":"[TS_976553]_Warm filter selected"
+        },
+        {
+            "name":"filter_old_tree_selected",
+            "value":"[TS_976444]_Rustic filter selected"
+        },
+        {
+            "name":"filter_black_and_white_selected",
+            "value":"[TS_976447]_Monochrome filter selected"
+        },
+        {
+            "name":"filter_classics_selected",
+            "value":"[TS_1000171]_Classic filter selected"
+        },
+        {
+            "name":"filter_moody_selected",
+            "value":"[TS_1000172]_Moody filter selected"
+        },
+        {
+            "name":"filter_natural_selected",
+            "value":"[TS_1000170]_Natural filter selected"
+        },
+        {
+            "name":"filter_blossom_selected",
+            "value":"[TS_1000168]_Blossom filter selected"
+        },
+        {
+            "name":"filter_fair_selected",
+            "value":"[TS_1000169]_Fair filter selected"
+        },
+        {
+            "name":"filter_pink_selected",
+            "value":"[TS_1000395]_Pink filter selected"
+        },
+        {
+            "name":"cropTab_ratio_1_1_on",
+            "value":"[TS_976546]_One by one aspect ratio selected"
+        },
+        {
+            "name":"cropTab_rotation_on",
+            "value":"[TS_976518]_Rotate selected"
+        },
+        {
+            "name":"rect_left_bottom",
+            "value":"[TS_976528]_Bottom left corner of the crop box, double tap and hold then drag to adjust the selected area"
+        },
+        {
+            "name":"rect_middle_bottom",
+            "value":"[TS_976462]_Bottom of the crop box, double tap and hold then drag to adjust the selected area"
+        },
+        {
+            "name":"filter_little_luck_selected",
+            "value":"[TS_976521]_Lucky filter selected"
+        },
+        {
+            "name":"cropTab_ratio_4_3",
+            "value":"[TS_976491]_Horizontal, four by three aspect ratio"
+        },
+        {
+            "name":"rect_right_bottom",
+            "value":"[TS_976550]_Bottom right corner of the crop box, double tap and hold then drag to adjust the selected area"
+        },
+        {
+            "name":"adjust_vignette_true",
+            "value":"[TS_976469]_Vignette selected"
+        },
+        {
+            "name":"rect_right_middle",
+            "value":"[TS_976440]_Right side of the crop box, double tap and hold then drag to adjust the selected area"
+        },
+        {
+            "name":"cropTab_ratio_9_16",
+            "value":"[TS_976468]_Vertical, nine by sixteen aspect ratio"
+        },
+        {
+            "name":"cropTab_verticalCorrection_on",
+            "value":"[TS_976483]_Vertical adjustment selected"
+        },
+        {
+            "name":"cropTab_ratio_3_4",
+            "value":"[TS_976510]_Vertical, three by four aspect ratio"
+        },
+        {
+            "name":"cropTab_ratio_3_2",
+            "value":"[TS_976565]_Horizontal, three by two aspect ratio"
+        },
+        {
+            "name":"filter_crystal_clear_selected",
+            "value":"[TS_976540]_Crystal filter selected"
+        },
+        {
+            "name":"button_bubble_stylus",
+            "value":"[TS_972195]_Markup"
+        },
+        {
+            "name":"button_bubble_save",
+            "value":"[TS_954160]_Save"
+        },
+        {
+            "name":"rect_top_middle",
+            "value":"[TS_976438]_Top of the crop box, double tap and hold then drag to adjust the selected area"
+        },
+        {
+            "name":"filter_none_selected",
+            "value":"[TS_976539]_Original filter selected"
+        },
+        {
+            "name":"adjust_brightzone_true",
+            "value":"[TS_976453]_Light area selected"
+        },
+        {
+            "name":"adjust_grain_true",
+            "value":"[TS_976527]_Grain selected"
+        },
+        {
+            "name":"filter_sunset_selected",
+            "value":"[TS_976456]_Twilight filter selected"
+        },
+        {
+            "name":"pen_size_bar_announced",
+            "value":"[TS_982241]_Slider to adjust brush size"
+        },
+        {
+            "name":"wise_paint_text_announced",
+            "value":"[TS_982239]_Marking complete, the corresponding area has been automatically selected"
+        },
+        {
+            "name":"manual_paint_text_announced",
+            "value":"[TS_982238]_Marked area selected"
+        },
+        {
+            "name":"pen_size_point_announced",
+            "value":"[TS_982240]_Current brush size is %1$d"
+        },
+        {
+            "name":"edit_lr",
+            "value":"[TS_981311]_Switch to left-right layout"
+        },
+        {
+            "name":"edit_ud",
+            "value":"[TS_981310]_Switch to top-bottom layout"
+        },
+        {
+            "name":"editor_overwrite_the_original_image",
+            "value":"[TS_974988]_Replace original"
+        },
+        {
+            "name":"editor_save_as",
+            "value":"[TS_974989]_Save as new"
+        },
+        {
+            "name":"tabs_crop_selected",
+            "value":"[TS_989233]_Crop is selected"
+        },
+        {
+            "name":"tabs_adjust_selected",
+            "value":"[TS_989234]_Adjust is selected"
+        },
+        {
+            "name":"tabs_filter_selected",
+            "value":"[TS_989232]_Filters is selected"
+        },
+        {
+            "name":"celia_retouch_selected",
+            "value":"[TS_989260]_Celia Retouch is selected"
+        },
+        {
+            "name":"tabs_watermark_selected",
+            "value":"[TS_993974]_Watermarks is selected"
+        },
+        {
+            "name":"seal_shoot_param_imageEdit",
+            "value":"[TS_954687]_Shooting parameters"
+        },
+        {
+            "name":"seal_shoot_model_imageEdit",
+            "value":"[TS_954686]_Device model"
+        },
+        {
+            "name":"seal_shoot_time_imageEdit",
+            "value":"[TS_954684]_Shooting time"
+        },
+        {
+            "name":"tabs_seal_imageEdit",
+            "value":"[TS_954685]_Watermarks"
+        },
+        {
+            "name":"tabs_text_imageEdit",
+            "value":"[TS_1050386]_Text"
+        },
+        {
+            "name":"add_text_imageEdit",
+            "value":"[TS_1050387]_Add text"
+        },
+        {
+            "name":"text_align_left",
+            "value":"[TS_1050388]_Align left"
+        },
+        {
+            "name":"text_align_center",
+            "value":"[TS_1050385]_Align center"
+        },
+        {
+            "name":"text_align_right",
+            "value":"[TS_1050384]_Align right"
+        },
+        {
+            "name":"text_edit_max_tip",
+            "value":"[TS_1056946]_Maximum number of text boxes reached."
+        },
+        {
+            "name":"seal_shoot_sign_imageEdit",
+            "value":"[TS_1068254]_Personalized signature"
+        },
+        {
+            "name":"seal_oversize_imageEdit",
+            "value":"[TS_954688]_Watermarks are not available with this image size."
+        },
+        {
+            "name":"undo_close_watermark_imageEdit",
+            "value":"[TS_970580]_Undo: Turn off watermark."
+        },
+        {
+            "name":"redo_shoot_param_imageEdit",
+            "value":"[TS_970578]_Redo: Show shooting parameters."
+        },
+        {
+            "name":"redo_close_watermark_imageEdit",
+            "value":"[TS_970573]_Redo: Turn off watermark."
+        },
+        {
+            "name":"undo_frame_watermark_imageEdit",
+            "value":"[TS_970584]_Undo: Frame watermark."
+        },
+        {
+            "name":"undo_shoot_model_imageEdit",
+            "value":"[TS_970581]_Undo: Show device model."
+        },
+        {
+            "name":"undo_general_watermark_imageEdit",
+            "value":"[TS_970582]_Undo: Standard watermark."
+        },
+        {
+            "name":"redo_shoot_time_imageEdit",
+            "value":"[TS_970576]_Redo: Show shooting time."
+        },
+        {
+            "name":"redo_general_watermark_imageEdit",
+            "value":"[TS_970583]_Redo: Standard watermark."
+        },
+        {
+            "name":"undo_shoot_time_imageEdit",
+            "value":"[TS_970574]_Undo: Show shooting time."
+        },
+        {
+            "name":"redo_shoot_model_imageEdit",
+            "value":"[TS_970579]_Redo: Show device model."
+        },
+        {
+            "name":"undo_shoot_param_imageEdit",
+            "value":"[TS_970575]_Undo: Show shooting parameters."
+        },
+        {
+            "name":"redo_frame_watermark_imageEdit",
+            "value":"[TS_970577]_Redo: Frame watermark."
+        },
+        {
+            "name":"close_watermark_imageEdit",
+            "value":"[TS_986797]_No watermark"
+        },
+        {
+            "name":"general_watermark_imageEdit",
+            "value":"[TS_986796]_Standard watermark"
+        },
+        {
+            "name":"frame_watermark_imageEdit",
+            "value":"[TS_986801]_Frame watermark"
+        },
+        {
+            "name":"close_watermark_on_imageEdit",
+            "value":"[TS_986798]_The no watermark option is selected"
+        },
+        {
+            "name":"general_watermark_on_imageEdit",
+            "value":"[TS_986800]_Standard watermark selected"
+        },
+        {
+            "name":"frame_watermark_on_imageEdit",
+            "value":"[TS_986799]_Frame watermark selected"
+        },
+        {
+            "name":"portrait_refinement",
+            "value":"[TS_994956]_Refine"
+        },
+        {
+            "name":"hue_style",
+            "value":"[TS_994933]_Stylish"
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_n",
+            "value":"[TS_997699]_Background blur currently set to level %1$d"
+        },
+        {
+            "name":"front_light",
+            "value":"[TS_995257]_Front"
+        },
+        {
+            "name":"bokeh_adjustment_voice",
+            "value":"[TS_997698]_Bar to adjust background blur effect"
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_0",
+            "value":"[TS_997700]_Background blur currently set to none"
+        },
+        {
+            "name":"hue_softness",
+            "value":"[TS_994936]_Soft"
+        },
+        {
+            "name":"hue_soft",
+            "value":"[TS_999280]_Soft"
+        },
+        {
+            "name":"hue_vivid",
+            "value":"[TS_999281]_Vibrant"
+        },
+        {
+            "name":"contour_light",
+            "value":"[TS_994947]_Contour"
+        },
+        {
+            "name":"blurred",
+            "value":"[TS_994932]_Blur"
+        },
+        {
+            "name":"hue_grumous",
+            "value":"[TS_994953]_Rich"
+        },
+        {
+            "name":"hue_sun_sets",
+            "value":"[TS_994946]_Sunset"
+        },
+        {
+            "name":"rebuild",
+            "value":"[TS_994942]_Re-generate"
+        },
+        {
+            "name":"hue_sprightly",
+            "value":"[TS_994938]_Merry"
+        },
+        {
+            "name":"composition",
+            "value":"[TS_994934]_Composition"
+        },
+        {
+            "name":"hue_gorgeous",
+            "value":"[TS_994952]_Stunning"
+        },
+        {
+            "name":"rembrandt_light",
+            "value":"[TS_994935]_Rembrandt"
+        },
+        {
+            "name":"hue_translucent",
+            "value":"[TS_994950]_Lucid"
+        },
+        {
+            "name":"image_can_not_refinement",
+            "value":"[TS_998919]_Portrait refinement is not available with this image."
+        },
+        {
+            "name":"hue_fuji",
+            "value":"[TS_994958]_Fuji"
+        },
+        {
+            "name":"hue_simple_elegant",
+            "value":"[TS_994939]_Elegant"
+        },
+        {
+            "name":"soft_light",
+            "value":"[TS_994948]_Soft"
+        },
+        {
+            "name":"refining_switch_blurred_tips",
+            "value":"[TS_994937]_Adjusting the blur effect requires re-generation"
+        },
+        {
+            "name":"hue_freshen",
+            "value":"[TS_994945]_Fresh"
+        },
+        {
+            "name":"hue_moonlight",
+            "value":"[TS_994957]_Moonlight"
+        },
+        {
+            "name":"hue_strong",
+            "value":"[TS_994951]_Strong"
+        },
+        {
+            "name":"hue_refreshing",
+            "value":"[TS_994949]_Uplifting"
+        },
+        {
+            "name":"refining_switch_light_tips",
+            "value":"[TS_994940]_Switching lighting effects requires re-generation"
+        },
+        {
+            "name":"butterfly_light",
+            "value":"[TS_994955]_Butterfly"
+        },
+        {
+            "name":"image_size_low",
+            "value":"[TS_998920]_Image resolution too low for this feature."
+        },
+        {
+            "name":"back_light",
+            "value":"[TS_995256]_Side"
+        },
+        {
+            "name":"start_refining",
+            "value":"[TS_994943]_Start"
+        },
+        {
+            "name":"image_without_refinement",
+            "value":"[TS_998921]_Portrait refinement is not available with this image."
+        },
+        {
+            "name":"image_without_refinement_new",
+            "value":"[TS_1016262]_Image does not meet requirements for portrait refinement."
+        },
+        {
+            "name":"image_has_been_refined",
+            "value":"[TS_1016263]_This image has already been refined."
+        },
+        {
+            "name":"hue_whiten",
+            "value":"[TS_997701]_Fair"
+        },
+        {
+            "name":"hue_dreams",
+            "value":"[TS_994941]_Dream"
+        },
+        {
+            "name":"hue_brilliant",
+            "value":"[TS_994944]_Brilliant"
+        },
+        {
+            "name":"hue_brightly",
+            "value":"[TS_994931]_Bright"
+        },
+        {
+            "name":"light",
+            "value":"[TS_994954]_Lighting"
+        },
+        {
+            "name":"click_remove",
+            "value":"[TS_1005789]_Remove"
+        },
+        {
+            "name":"click_expand_image",
+            "value":"[TS_1005788]_Expand"
+        },
+        {
+            "name":"click_refining",
+            "value":"[TS_1005790]_Refine"
+        },
+        {
+            "name":"add_text_box_imageEdit",
+            "value":"[TS_1006147]_Add text"
+        },
+        {
+            "name":"text_style_imageEdit",
+            "value":"[TS_1006144]_Text style"
+        },
+        {
+            "name":"style_imageEdit",
+            "value":"[TS_1006145]_Style"
+        },
+        {
+            "name":"delete_imageEdit",
+            "value":"[TS_1006146]_Delete"
+        },
+        {
+            "name":"edit_text_imageEdit",
+            "value":"[TS_1016122]_Tap to edit"
+        },
+        {
+            "name":"add_text_box_hints_imageEdit",
+            "value":"[TS_1017150]_Tap here to add text."
+        },
+        {
+            "name":"best_expression_update_component",
+            "value":"[TS_1023676]_This feature allows you to mix and match the best facial expressions from different photos in the same series. A plug-in update is required to use it."
+        },
+        {
+            "name":"update_now",
+            "value":"[TS_1023682]_Update now"
+        },
+        {
+            "name":"no_identified_replace_face",
+            "value":"[TS_1023679]_No replaceable face identified."
+        },
+        {
+            "name":"best_expression_new_feature",
+            "value":"[TS_1023680]_Try Best expression"
+        },
+        {
+            "name":"replace_face_fail",
+            "value":"[TS_1023677]_Something went wrong. Select another image and try again."
+        },
+        {
+            "name":"no_replace_emoticons",
+            "value":"[TS_1023678]_Take multiple shots in a row to get alternate expressions."
+        },
+        {
+            "name":"aiproducer_best_expression",
+            "value":"[TS_1023681]_Expressions"
+        },
+        {
+            "name":"tabs_xt_style_imageEdit",
+            "value":"[TS_1034858]_XMAGE"
+        },
+        {
+            "name":"xt_style_anime_imageEdit",
+            "value":"[TS_1034843]_Anime"
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup",
+            "value":"[TS_1034928]_This will replace your current filter"
+        },
+        {
+            "name":"xt_style_romance_imageEdit",
+            "value":"[TS_1034848]_Cinema"
+        },
+        {
+            "name":"redo_xt_style_films_imageEdit",
+            "value":"[TS_1034852]_Redo: Film."
+        },
+        {
+            "name":"xt_style_films_imageEdit",
+            "value":"[TS_1034854]_Film"
+        },
+        {
+            "name":"some_functions_unsupport_markup_tip",
+            "value":"[TS_1034845]_After using markup, you will no longer be able to adjust the virtual aperture or custom style for this image. Continue anyway?"
+        },
+        {
+            "name":"redo_xt_style_close_imageEdit",
+            "value":"[TS_1034846]_Redo: Disable custom style."
+        },
+        {
+            "name":"undo_xt_style_romance_imageEdit",
+            "value":"[TS_1034850]_Undo: Cinema."
+        },
+        {
+            "name":"xt_style_standard_imageEdit",
+            "value":"[TS_1034844]_Standard"
+        },
+        {
+            "name":"natural_style",
+            "value":"[TS_1063122]_Natural"
+        },
+        {
+            "name":"some_functions_unsupport_markup",
+            "value":"[TS_1034849]_Note"
+        },
+        {
+            "name":"redo_xt_style_standard_imageEdit",
+            "value":"[TS_1034861]_Redo: Standard."
+        },
+        {
+            "name":"redo_xt_style_anime_imageEdit",
+            "value":"[TS_1034856]_Redo: Anime."
+        },
+        {
+            "name":"undo_xt_style_close_imageEdit",
+            "value":"[TS_1034853]_Undo: Disable custom style."
+        },
+        {
+            "name":"undo_xt_style_anime_imageEdit",
+            "value":"[TS_1034855]_Undo: Anime."
+        },
+        {
+            "name":"xt_style_unsupport_markup_tip",
+            "value":"[TS_1034862]_After using markup, you will no longer be able to adjust the custom style for this image. Continue anyway?"
+        },
+        {
+            "name":"undo_xt_style_standard_imageEdit",
+            "value":"[TS_1034851]_Undo: Standard."
+        },
+        {
+            "name":"redo_xt_style_romance_imageEdit",
+            "value":"[TS_1034859]_Redo: Cinema."
+        },
+        {
+            "name":"xt_style_close_imageEdit",
+            "value":"[TS_1034847]_No custom style"
+        },
+        {
+            "name":"xt_style_unsupport_markup",
+            "value":"[TS_1034860]_Custom styles will be unavailable"
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup_tip",
+            "value":"[TS_1034929]_If you select a custom style, the current filter and adjustments you've made will be replaced. Replace?"
+        },
+        {
+            "name":"undo_xt_style_films_imageEdit",
+            "value":"[TS_1034857]_Undo: Film."
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup_tip",
+            "value":"[TS_1035531]_After using AI retouch, you will no longer be able to adjust the custom style for this image. Continue anyway?"
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup",
+            "value":"[TS_1035532]_Custom styles will be unavailable"
+        },
+        {
+            "name":"undo_filter_haze_removal_imageEdit",
+            "value":"[TS_1019100]_Undo: De-mist."
+        },
+        {
+            "name":"redo_filter_haze_removal_imageEdit",
+            "value":"[TS_1019101]_Redo: De-mist."
+        },
+        {
+            "name":"filter_haze_removal_imageEdit",
+            "value":"[TS_1019099]_De-mist"
+        },
+        {
+            "name":"filter_haze_removal_selected_imageEdit",
+            "value":"[TS_1019102]_De-mist selected"
+        },
+        {
+            "name":"xtStyle_tone",
+            "value":"[TS_1104816]_Tone"
+        },
+        {
+            "name":"light_selected",
+            "value":"[TS_1040745]_Lighting selected"
+        },
+        {
+            "name":"blurred_selected",
+            "value":"[TS_1040746]_Blur selected"
+        },
+        {
+            "name":"composition_selected",
+            "value":"[TS_1040740]_Composition selected"
+        },
+        {
+            "name":"composition_n_selected",
+            "value":"[TS_1040752]_Composition %1$d selected"
+        },
+        {
+            "name":"composition_n",
+            "value":"[TS_1040753]_Composition %1$d"
+        },
+        {
+            "name":"rembrandt_light_selected",
+            "value":"[TS_1040748]_Rembrandt selected"
+        },
+        {
+            "name":"butterfly_light_selected",
+            "value":"[TS_1040757]_Butterfly selected"
+        },
+        {
+            "name":"back_light_selected",
+            "value":"[TS_1040737]_Side selected"
+        },
+        {
+            "name":"front_light_selected",
+            "value":"[TS_1040736]_Front selected"
+        },
+        {
+            "name":"hue_simple_elegant_selected",
+            "value":"[TS_1040739]_Elegant selected"
+        },
+        {
+            "name":"hue_brilliant_selected",
+            "value":"[TS_1040747]_Brilliant selected"
+        },
+        {
+            "name":"hue_dreams_selected",
+            "value":"[TS_1040761]_Dream selected"
+        },
+        {
+            "name":"hue_style_selected",
+            "value":"[TS_1040750]_Stylish selected"
+        },
+        {
+            "name":"hue_sprightly_selected",
+            "value":"[TS_1040756]_Merry selected"
+        },
+        {
+            "name":"hue_softness_selected",
+            "value":"[TS_1040742]_Soft selected"
+        },
+        {
+            "name":"hue_soft_selected",
+            "value":"[TS_1040754]_Soft selected"
+        },
+        {
+            "name":"hue_vivid_selected",
+            "value":"[TS_1040743]_Vibrant selected"
+        },
+        {
+            "name":"hue_gorgeous_selected",
+            "value":"[TS_1040741]_Stunning selected"
+        },
+        {
+            "name":"hue_grumous_selected",
+            "value":"[TS_1040755]_Rich selected"
+        },
+        {
+            "name":"hue_strong_selected",
+            "value":"[TS_1040758]_Strong selected"
+        },
+        {
+            "name":"hue_refreshing_selected",
+            "value":"[TS_1041401]_Uplifting selected"
+        },
+        {
+            "name":"hue_brightly_selected",
+            "value":"[TS_1040738]_Bright selected"
+        },
+        {
+            "name":"hue_freshen_selected",
+            "value":"[TS_1040751]_Fresh selected"
+        },
+        {
+            "name":"hue_whiten_selected",
+            "value":"[TS_1040744]_Fair selected"
+        },
+        {
+            "name":"light_original_selected",
+            "value":"[TS_1040759]_Original lighting selected"
+        },
+        {
+            "name":"style_original_selected",
+            "value":"[TS_1040749]_Original color selected"
+        },
+        {
+            "name":"compose_original_selected",
+            "value":"[TS_1040760]_Original composition selected"
+        },
+        {
+            "name":"bokeh_adjustment_voice_select_n",
+            "value":"[TS_1045385]_Background blur has been adjusted, current level is %1$d"
+        },
+        {
+            "name":"bokeh_adjustment_voice_select",
+            "value":"[TS_1045386]_Background blur level adjustment slider, adjustable range from %1$d to %2$d, double tap to activate, double tap and hold, then drag left or right to adjust level"
+        },
+        {
+            "name":"redo_confirm_selection_imageEdit",
+            "value":"[TS_1034684]_Redo: Confirm selection."
+        },
+        {
+            "name":"draw_imageEdit",
+            "value":"[TS_1034701]_Sketching…"
+        },
+        {
+            "name":"undo_delete_object_imageEdit",
+            "value":"[TS_1034697]_Undo: Delete object."
+        },
+        {
+            "name":"fusion_imageEdit",
+            "value":"[TS_1034698]_Blending…"
+        },
+        {
+            "name":"redo_compose_imageEdit",
+            "value":"[TS_1034685]_Redo: Generate."
+        },
+        {
+            "name":"generation_imageEdit",
+            "value":"[TS_1034707]_Generating…"
+        },
+        {
+            "name":"undo_adjust_object_imageEdit",
+            "value":"[TS_1034692]_Undo: Adjust object."
+        },
+        {
+            "name":"redo_move_object_imageEdit",
+            "value":"[TS_1034704]_Redo: Move object."
+        },
+        {
+            "name":"click_to_edit_imageEdit",
+            "value":"[TS_1034699]_Tap an object to edit it"
+        },
+        {
+            "name":"fill_imageEdit",
+            "value":"[TS_1034686]_Filling…"
+        },
+        {
+            "name":"redo_delete_object_imageEdit",
+            "value":"[TS_1034688]_Redo: Delete object."
+        },
+        {
+            "name":"undo_adjust_tier_object_imageEdit",
+            "value":"[TS_1034691]_Undo: Adjust layer."
+        },
+        {
+            "name":"redo_adjust_object_imageEdit",
+            "value":"[TS_1034702]_Redo: Adjust object."
+        },
+        {
+            "name":"redo_copy_object_imageEdit",
+            "value":"[TS_1034687]_Redo: Copy object."
+        },
+        {
+            "name":"image_without_move_imageEdit",
+            "value":"[TS_1034705]_The Move feature isn't available with this image."
+        },
+        {
+            "name":"too_small_without_move_imageEdit",
+            "value":"[TS_1054454]_Image dimensions are too small."
+        },
+        {
+            "name":"regions_overlay_without_move_imageEdit",
+            "value":"[TS_1054453]_An error occurred. Please reselect and try again."
+        },
+        {
+            "name":"today_frequency_reached_upper_limit",
+            "value":"[TS_1054451]_Usage limit reached for today."
+        },
+        {
+            "name":"unavailable_move_imageEdit",
+            "value":"[TS_1054447]_The Move feature isn't available."
+        },
+        {
+            "name":"synthesis_failed_without_move_imageEdit",
+            "value":"[TS_1054449]_Image generation failed. Please try again."
+        },
+        {
+            "name":"timeout_without_move_imageEdit",
+            "value":"[TS_1054452]_Server request timed out. Try again later."
+        },
+        {
+            "name":"too_small_mask_without_move_imageEdit",
+            "value":"[TS_1054450]_Selected area is too small. Please reselect."
+        },
+        {
+            "name":"too_large_mask_without_move_imageEdit",
+            "value":"[TS_1054448]_Selected area is too large. Please reselect."
+        },
+        {
+            "name":"oversize_imageEdit",
+            "value":"[TS_1034706]_Maximum number of objects reached."
+        },
+        {
+            "name":"picking",
+            "value":"[TS_1034689]_Move"
+        },
+        {
+            "name":"redo_adjust_tier_object_imageEdit",
+            "value":"[TS_1034696]_Redo: Adjust layer."
+        },
+        {
+            "name":"compose_imageEdit",
+            "value":"[TS_1034694]_Generate"
+        },
+        {
+            "name":"undo_compose_imageEdit",
+            "value":"[TS_1034708]_Undo: Generate."
+        },
+        {
+            "name":"undo_copy_object_imageEdit",
+            "value":"[TS_1034703]_Undo: Copy object."
+        },
+        {
+            "name":"undo_selection_imageEdit",
+            "value":"[TS_1034690]_Undo: Selection."
+        },
+        {
+            "name":"undo_confirm_selection_imageEdit",
+            "value":"[TS_1034693]_Undo: Confirm selection."
+        },
+        {
+            "name":"redo_selection_imageEdit",
+            "value":"[TS_1034695]_Redo: Selection."
+        },
+        {
+            "name":"undo_move_object_imageEdit",
+            "value":"[TS_1034700]_Undo: Move object."
+        },
+        {
+            "name":"ai_move_toast_content",
+            "value":"[TS_1038473]_Edits you've made will be discarded if you leave now. Leave anyway?"
+        },
+        {
+            "name":"ai_move_toast_title",
+            "value":"[TS_1038472]_Edits will be lost"
+        },
+        {
+            "name":"bottom_left_zoom_imageEdit",
+            "value":"[TS_1038967]_Bottom left corner of text box, double tap and hold, then drag to adjust the size"
+        },
+        {
+            "name":"upper_left_zoom_imageEdit",
+            "value":"[TS_1038970]_Top left corner of text box, double tap and hold, then drag to adjust the size"
+        },
+        {
+            "name":"bottom_right_zoom_imageEdit",
+            "value":"[TS_1038961]_Bottom right corner of text box, double tap and hold, then drag to adjust the size"
+        },
+        {
+            "name":"upper_right_zoom_imageEdit",
+            "value":"[TS_1038966]_Top right corner of text box, double tap and hold, then drag to adjust the size"
+        },
+        {
+            "name":"color_white_imageEdit",
+            "value":"[TS_1038968]_White"
+        },
+        {
+            "name":"color_red_imageEdit",
+            "value":"[TS_1038972]_Red"
+        },
+        {
+            "name":"color_green_imageEdit",
+            "value":"[TS_1038965]_Green"
+        },
+        {
+            "name":"color_light_blue_imageEdit",
+            "value":"[TS_1038964]_Light blue"
+        },
+        {
+            "name":"color_dark_blue_imageEdit",
+            "value":"[TS_1038971]_Dark blue"
+        },
+        {
+            "name":"color_light_purple_imageEdit",
+            "value":"[TS_1038963]_Light purple"
+        },
+        {
+            "name":"color_black_imageEdit",
+            "value":"[TS_1038962]_Black"
+        },
+        {
+            "name":"selected_imageEdit",
+            "value":"[TS_1038959]_Selected"
+        },
+        {
+            "name":"no_light",
+            "value":"[TS_1047940]_None"
+        },
+        {
+            "name":"no_light_selected",
+            "value":"[TS_1048299]_No lighting effect selected"
+        },
+        {
+            "name":"rotate_scope_imageEdit",
+            "value":"[TS_1053582]_%1$s. Adjustable range is %2$d to %3$d degrees. Double tap and hold, then drag to adjust the angle."
+        },
+        {
+            "name":"server_is_timeout_try_again",
+            "value":"[TS_1054763]_Server request timed out. Please try again."
+        },
+        {
+            "name":"exit_imageEdit",
+            "value":"[TS_1093308]_Leave"
+        },
+        {
+            "name":"leave_imageEdit",
+            "value":"[TS_1040361]_Leave"
+        },
+        {
+            "name":"generation_image_imageEdit",
+            "value":"[TS_1057841]_Processing…"
+        },
+        {
+            "name":"ai_move_bootstrapping",
+            "value":"[TS_1057840]_Draw a line to select the subject"
+        },
+        {
+            "name":"server_is_abnormal_try_again",
+            "value":"[TS_1054762]_Server request failed. Please try again."
+        },
+        {
+            "name":"image_can_not_expand_part_area",
+            "value":"[TS_1054761]_Some content cannot be expanded. Please reposition and try again."
+        },
+        {
+            "name":"adjust_compare_btn_desc",
+            "value":"[TS_1053453]_Double tap and hold to compare image with the original"
+        },
+        {
+            "name":"aperture_unsupport_markup_tip",
+            "value":"[TS_1024157]_After using markup, you will no longer be able to adjust the aperture for this image. Continue anyway?"
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch_tip",
+            "value":"[TS_1024161]_After using AI retouch, you will no longer be able to adjust the aperture for this image. Continue anyway?"
+        },
+        {
+            "name":"tabs_aperture_selected",
+            "value":"[TS_1024151]_Aperture selected"
+        },
+        {
+            "name":"aperture_focus_change",
+            "value":"[TS_1024154]_Switched focus position"
+        },
+        {
+            "name":"undo_aperture_focus",
+            "value":"[TS_1024152]_Undo: Focus position."
+        },
+        {
+            "name":"redo_aperture_adjust",
+            "value":"[TS_1024162]_Redo: Adjust aperture."
+        },
+        {
+            "name":"undo_aperture_adjust",
+            "value":"[TS_1024163]_Undo: Adjust aperture."
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch",
+            "value":"[TS_1024160]_Aperture settings will be unavailable"
+        },
+        {
+            "name":"tabs_aperture_imageEdit",
+            "value":"[TS_1024155]_Aperture"
+        },
+        {
+            "name":"aperture_unsupport_markup",
+            "value":"[TS_1024159]_Aperture settings will be unavailable"
+        },
+        {
+            "name":"redo_aperture_focus",
+            "value":"[TS_1024158]_Redo: Focus position."
+        },
+        {
+            "name":"aperture_unsupport_cancel",
+            "value":"[TS_1024891]_Cancel"
+        },
+        {
+            "name":"aperture_unsupport_continue",
+            "value":"[TS_1024892]_Continue"
+        },
+        {
+            "name":"some_functions_unsupport_ai_tip",
+            "value":"[TS_1057202]_After using AI retouch, you will no longer be able to adjust the aperture or custom style for this image. Continue anyway?"
+        },
+        {
+            "name":"some_functions_unsupport_markup_tips",
+            "value":"[TS_1057960]_After using markup, you will no longer be able to adjust the aperture or custom style for this image. Continue anyway?"
+        },
+        {
+            "name":"some_functions_unsupport_ai",
+            "value":"[TS_1057201]_Note"
+        },
+        {
+            "name":"bold_imageEdit",
+            "value":"[TS_1058511]_Bold"
+        },
+        {
+            "name":"italics_imageEdit",
+            "value":"[TS_1058509]_Italic"
+        },
+        {
+            "name":"underline_imageEdit",
+            "value":"[TS_1058506]_Underline"
+        },
+        {
+            "name":"one_finger_to_select_imageEdit",
+            "value":"[TS_1058504]_Double tap to select"
+        },
+        {
+            "name":"one_finger_to_toggle_imageEdit",
+            "value":"[TS_1058505]_Double tap to switch"
+        },
+        {
+            "name":"alignment_imageEdit",
+            "value":"[TS_1058510]_Alignment"
+        },
+        {
+            "name":"text_box_imageEdit",
+            "value":"[TS_1058507]_Text box"
+        },
+        {
+            "name":"double_click_edit_imageEdit",
+            "value":"[TS_1058508]_Double tap to edit text"
+        },
+        {
+            "name":"accessbility_xt_style_filter_reset_success",
+            "value":"[TS_1052640]_Reset completed"
+        },
+        {
+            "name":"accessbility_xt_style_filter_matrix_area",
+            "value":"[TS_1052637]_Color tuning area. Drag horizontally to adjust the color temperature and vertically to adjust the saturation."
+        },
+        {
+            "name":"accessbility_xt_style_filter_default_template",
+            "value":"[TS_1052633]_Default preset, color temperature %1$d, saturation %2$d, tone %3$d"
+        },
+        {
+            "name":"accessbility_xt_style_filter_xt_style_template",
+            "value":"[TS_1052638]_Custom preset %1$d, color temperature %2$d, saturation %3$d, tone %4$d"
+        },
+        {
+            "name":"accessbility_xt_style_filter_saturation_level",
+            "value":"[TS_1052636]_Saturation level %1$d"
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_level",
+            "value":"[TS_1052634]_Tone level %1$d"
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_slide_bar",
+            "value":"[TS_1052635]_Tone level %1$d, adjustable range %2$d to %3$d. Double tap to apply, or double tap and hold, then drag up or down to change"
+        },
+        {
+            "name":"accessbility_xt_style_filter_color_temperature_level",
+            "value":"[TS_1052639]_Color temperature, level %1$d"
+        },
+        {
+            "name":"no_picture_tilt_is_detected",
+            "value":"[TS_1037592]_No slant detected."
+        },
+        {
+            "name":"cropTab_intelligent_correction_on",
+            "value":"[TS_1037591]_Straighten selected"
+        },
+        {
+            "name":"crop_intelligent_correction_imageEdit",
+            "value":"[TS_1037593]_Straighten"
+        },
+        {
+            "name":"redo_correct_intelligent_imageEdit",
+            "value":"[TS_1043861]_Redo: Straighten."
+        },
+        {
+            "name":"undo_correct_intelligent_imageEdit",
+            "value":"[TS_1043860]_Undo: Straighten."
+        },
+        {
+            "name":"yellow_imageEdit",
+            "value":"[TS_1064092]_Yellow"
+        },
+        {
+            "name":"button_imageEdit",
+            "value":"[TS_1064856]_Button"
+        },
+        {
+            "name":"mosicac_type_kaleidoscope",
+            "value":"[TS_1061856]_Kaleidoscope mosaic pattern"
+        },
+        {
+            "name":"mosicac_type_sky_blue",
+            "value":"[TS_1061852]_Sky blue mosaic pattern"
+        },
+        {
+            "name":"mosicac_typ_classic",
+            "value":"[TS_1061857]_Classic mosaic pattern"
+        },
+        {
+            "name":"mosicac_type_cartoon",
+            "value":"[TS_1061863]_Cartoon mosaic pattern"
+        },
+        {
+            "name":"tabs_text_mosicac",
+            "value":"[TS_1061854]_Mosaic"
+        },
+        {
+            "name":"mosicac_type_polka_dot",
+            "value":"[TS_1061864]_Polka dot mosaic pattern"
+        },
+        {
+            "name":"mosicac_type_star",
+            "value":"[TS_1061858]_Star mosaic pattern"
+        },
+        {
+            "name":"mosicac_type_triangle",
+            "value":"[TS_1061853]_Triangle mosaic pattern"
+        },
+        {
+            "name":"mosicac_type_weaving",
+            "value":"[TS_1061855]_Weave mosaic pattern"
+        },
+        {
+            "name":"mosicac_eraser",
+            "value":"[TS_1061865]_Eraser"
+        },
+        {
+            "name":"mosicac_type_color_block",
+            "value":"[TS_1061851]_Color block mosaic pattern"
+        },
+        {
+            "name":"undo_edit_watermark_imageEdit",
+            "value":"[TS_1068256]_Undo: Edit watermark."
+        },
+        {
+            "name":"redo_selected_watermark_imageEdit",
+            "value":"[TS_1068255]_Redo: Select watermark."
+        },
+        {
+            "name":"redo_switch_watermark_imageEdit",
+            "value":"[TS_1068252]_Redo: Switch watermark."
+        },
+        {
+            "name":"undo_selected_watermark_imageEdit",
+            "value":"[TS_1068251]_Undo: Select watermark."
+        },
+        {
+            "name":"redo_edit_watermark_imageEdit",
+            "value":"[TS_1068253]_Redo: Edit watermark."
+        },
+        {
+            "name":"undo_switch_watermark_imageEdit",
+            "value":"[TS_1068257]_Undo: Switch watermark."
+        },
+        {
+            "name":"click_reflect_light",
+            "value":"[TS_1064647]_Remove"
+        },
+        {
+            "name":"image_can_not_reflect_light",
+            "value":"[TS_1064648]_Glare reduction is not available with this image."
+        },
+        {
+            "name":"ai_reflect_light",
+            "value":"[TS_1064649]_De-glare"
+        },
+        {
+            "name":"tabs_xt_style_selected",
+            "value":"[TS_1066051]_Custom styles is selected"
+        },
+        {
+            "name":"selected_font_style_none",
+            "value":"[TS_1067002]_Selected"
+        },
+        {
+            "name":"some_functions_unsupport_mosaic",
+            "value":"[TS_1066764]_Note"
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_one",
+            "value":"[TS_1066759]_Using AI retouch will cause this image to become static, and the %1$s can no longer be adjusted."
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_two",
+            "value":"[TS_1066765]_Adding a mosaic will cause this image to become static, and the %1$s and %2$s can no longer be adjusted."
+        },
+        {
+            "name":"some_functions_unsupport_word_param_one",
+            "value":"[TS_1066760]_Adding text will cause this image to become static, and the %1$s can no longer be adjusted."
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_one",
+            "value":"[TS_1066758]_Drawing on this image will cause it to become static, and the %1$s can no longer be adjusted."
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_none",
+            "value":"[TS_1066761]_Adding a mosaic will cause this image to become static."
+        },
+        {
+            "name":"some_functions_unsupport_param_style",
+            "value":"[TS_1066768]_custom styles"
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_two",
+            "value":"[TS_1066771]_Using AI retouch will cause this image to become static, and the %1$s and %2$s can no longer be adjusted."
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_one",
+            "value":"[TS_1066766]_Adding a mosaic will cause this image to become static, and the %1$s can no longer be adjusted."
+        },
+        {
+            "name":"some_functions_unsupport_word_param_two",
+            "value":"[TS_1066762]_Adding text will cause this image to become static, and the %1$s and %2$s can no longer be adjusted."
+        },
+        {
+            "name":"some_functions_unsupport_param_aperture",
+            "value":"[TS_1066763]_aperture"
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_two",
+            "value":"[TS_1066772]_Drawing on this image will cause it to become static, and the %1$s and %2$s can no longer be adjusted."
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_none",
+            "value":"[TS_1066769]_Using AI retouch will cause this image to become static."
+        },
+        {
+            "name":"some_functions_unsupport_word_param_none",
+            "value":"[TS_1066767]_Adding text will cause this image to become static."
+        },
+        {
+            "name":"some_functions_unsupport_word",
+            "value":"[TS_1066757]_Note"
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_none",
+            "value":"[TS_1066770]_Drawing on this image will cause it to become static."
+        },
+        {
+            "name":"redo_natural_style",
+            "value":"[TS_1068753]_Redo: Natural."
+        },
+        {
+            "name":"direction_right",
+            "value":"[TS_1084881]_Right edge"
+        },
+        {
+            "name":"direction_top",
+            "value":"[TS_1084882]_Top edge"
+        },
+        {
+            "name":"direction_bottom",
+            "value":"[TS_1084883]_Bottom edge"
+        },
+        {
+            "name":"direction_left_bottom",
+            "value":"[TS_1084878]_Bottom left corner"
+        },
+        {
+            "name":"direction_left",
+            "value":"[TS_1084879]_Left edge"
+        },
+        {
+            "name":"direction_right_top",
+            "value":"[TS_1084886]_Top right corner"
+        },
+        {
+            "name":"direction_left_top",
+            "value":"[TS_1084880]_Top left corner"
+        },
+        {
+            "name":"cutting_percentage",
+            "value":"[TS_1084885]_Cut %2$s from the %1$s"
+        },
+        {
+            "name":"direction_right_bottom",
+            "value":"[TS_1084884]_Bottom right corner"
+        },
+        {
+            "name":"undo_natural_style",
+            "value":"[TS_1068754]_Undo: Natural."
+        },
+        {
+            "name":"penKit_guide_title_brush_adjusts",
+            "value":"[TS_1066048]_Adjust brushes"
+        },
+        {
+            "name":"penKit_guide_title_lift_pen",
+            "value":"[TS_1066046]_Lift to form shape"
+        },
+        {
+            "name":"penKit_guide_title_one_pen",
+            "value":"[TS_1066054]_Pause to form shape"
+        },
+        {
+            "name":"penKit_guide_content_one_pen",
+            "value":"[TS_1066047]_Draw a shape in one stroke, then pause and it'll snap into a perfectly formed shape."
+        },
+        {
+            "name":"penKit_guide_content_brush_adjusts",
+            "value":"[TS_1066052]_Double-tap on a brush to change its size and opacity."
+        },
+        {
+            "name":"penKit_guide_content_lift_pen",
+            "value":"[TS_1066050]_Draw a shape in one stroke, then lift your stylus or finger and it'll snap into a perfectly formed shape."
+        },
+        {
+            "name":"none",
+            "value":"[TS_1067002]_None"
+        },
+        {
+            "name":"watermark_display_param_imageEdit",
+            "value":"[TS_1071567]_Show %1$s"
+        },
+        {
+            "name":"watermark_select_param_imageEdit",
+            "value":"[TS_1071568]_Select %1$s"
+        },
+        {
+            "name":"xtStyle_watermark_imageEdit",
+            "value":"[TS_1071565]_Custom watermark"
+        },
+        {
+            "name":"seal_color_param_imageEdit",
+            "value":"[TS_1071566]_Color info"
+        },
+        {
+            "name":"watermark_close_param_imageEdit",
+            "value":"[TS_1071564]_Deselect %1$s"
+        },
+        {
+            "name":"xtStyle_watermark_on_imageEdit",
+            "value":"[TS_1071563]_Custom watermark selected"
+        },
+        {
+            "name":"undo_manual_selection",
+            "value":"[TS_1091438]_Undo: Manual selection."
+        },
+        {
+            "name":"undo_add_patches_imageEdit",
+            "value":"[TS_1091449]_Undo: Add sticker."
+        },
+        {
+            "name":"eraser_paint_text_announced",
+            "value":"[TS_1091445]_Erased selected area"
+        },
+        {
+            "name":"undo_wise_selection",
+            "value":"[TS_1091446]_Undo: Auto selection."
+        },
+        {
+            "name":"redo_manual_selection",
+            "value":"[TS_1091443]_Redo: Manual selection."
+        },
+        {
+            "name":"eraser_brush_thickness_selected",
+            "value":"[TS_1091447]_Eraser size adjustment slider, size range from %1$d to %2$d, double tap to activate, double tap and hold, then drag left or right to adjust size"
+        },
+        {
+            "name":"click_eraser_after_imageEdit",
+            "value":"[TS_1091440]_Select an object and try again."
+        },
+        {
+            "name":"redo_add_patches_imageEdit",
+            "value":"[TS_1091451]_Redo: Add sticker."
+        },
+        {
+            "name":"select_patches_object",
+            "value":"[TS_1091444]_Select object"
+        },
+        {
+            "name":"redo_wise_selection",
+            "value":"[TS_1091439]_Redo: Auto selection."
+        },
+        {
+            "name":"click_selection_to_edit_imageEdit",
+            "value":"[TS_1091448]_Tap Auto or Manual to edit the selected area"
+        },
+        {
+            "name":"save_picture",
+            "value":"[TS_1091450]_Save as image"
+        },
+        {
+            "name":"undo_eraser_selection",
+            "value":"[TS_1091452]_Undo: Eraser."
+        },
+        {
+            "name":"redo_eraser_selection",
+            "value":"[TS_1091441]_Redo: Eraser."
+        },
+        {
+            "name":"patches_selection",
+            "value":"[TS_1091453]_Stickers"
+        },
+        {
+            "name":"eraser_selection",
+            "value":"[TS_1091442]_Eraser"
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_two",
+            "value":"[TS_1094030]_After doodling, %1$s and %2$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_one",
+            "value":"[TS_1094024]_After using AI retouch, %1$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_three",
+            "value":"[TS_1094017]_After adding text, %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_one",
+            "value":"[TS_1094028]_After adding text, %1$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_two",
+            "value":"[TS_1094036]_After adding a mosaic effect, %1$s and %2$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"redo_selection_no_effect",
+            "value":"[TS_1094031]_Redo: No effect."
+        },
+        {
+            "name":"selection_panning_shot_effect",
+            "value":"[TS_1094019]_Panning"
+        },
+        {
+            "name":"undo_selection_no_effect",
+            "value":"[TS_1094042]_Undo: No effect."
+        },
+        {
+            "name":"redo_selection_panning_shot_effect",
+            "value":"[TS_1094032]_Redo: Panning."
+        },
+        {
+            "name":"redo_selection_snapshot_effect",
+            "value":"[TS_1094021]_Redo: Snapshot."
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_one",
+            "value":"[TS_1094034]_After doodling, %1$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"undo_selection_snapshot_effect",
+            "value":"[TS_1094023]_Undo: Snapshot."
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_two",
+            "value":"[TS_1094022]_After using AI retouch, %1$s and %2$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_three",
+            "value":"[TS_1094039]_After using AI retouch, %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"selection_snapshot_effect",
+            "value":"[TS_1094018]_Snapshot"
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_one",
+            "value":"[TS_1094040]_After adding a mosaic effect, %1$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"some_functions_unsupport_param_movement",
+            "value":"[TS_1094038]_movement effects"
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_three",
+            "value":"[TS_1094037]_Adding a mosaic will cause the image to become static, and %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_three",
+            "value":"[TS_1094025]_Using AI retouch will cause the image to become static, and %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_three",
+            "value":"[TS_1094027]_After adding a mosaic effect, %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_two",
+            "value":"[TS_1094029]_After adding text, %1$s and %2$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"some_functions_unsupport_word_param_three",
+            "value":"[TS_1094033]_Adding text will cause the image to become static, and %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"tabs_movement_imageEdit",
+            "value":"[TS_1094041]_Movement"
+        },
+        {
+            "name":"undo_selection_panning_shot_effect",
+            "value":"[TS_1094026]_Undo: Panning."
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_three",
+            "value":"[TS_1094020]_After doodling, %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_three",
+            "value":"[TS_1094035]_Doodling on the image will cause it to become static, and %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?"
+        },
+        {
+            "name":"upper_left_zoom_ai_move_imageEdit",
+            "value":"[TS_1103473]_Top left corner of editing box, double tap and hold, then drag to adjust the size"
+        },
+        {
+            "name":"rotate_scope_ai_move_imageEdit",
+            "value":"[TS_1103477]_%1$s, adjustable range is %2$d to %3$d degrees. Double tap and hold, then drag to adjust the angle"
+        },
+        {
+            "name":"bottom_left_zoom_ai_move_imageEdit",
+            "value":"[TS_1103472]_Bottom left corner of editing box, double tap and hold, then drag to adjust the size"
+        },
+        {
+            "name":"bottom_right_zoom_ai_move_imageEdit",
+            "value":"[TS_1103475]_Bottom right corner of editing box, double tap and hold, then drag to adjust the size"
+        },
+        {
+            "name":"ai_is_invisible",
+            "value":"[TS_1103474]_%1$s button, unavailable"
+        },
+        {
+            "name":"upper_right_zoom_ai_move_imageEdit",
+            "value":"[TS_1103476]_Top right corner of editing box, double tap and hold, then drag to adjust the size"
+        },
+        {
+            "name":"voice_filter_green_strength_bar",
+            "value":"[TS_1109252]_Lime filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Lime filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_filter_sunset_strength_bar",
+            "value":"[TS_1109267]_Twilight filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Twilight filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_adjust",
+            "value":"[TS_1109246]_Adjusted rotation, the current rotation is %1$s"
+        },
+        {
+            "name":"voice_aperture_rulerScroller",
+            "value":"[TS_1109271]_Aperture adjustment slider, slider range is F0.95 to F16. Touch and hold with both fingers then drag left or right to adjust the aperture value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_100_100",
+            "value":"[TS_1109273]_Brightness adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the brightness value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_adjust",
+            "value":"[TS_1109249]_Adjusted the sharpness value, the current value is %1$s"
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_adjust",
+            "value":"[TS_1109235]_Adjusted horizontal angle, the current angle is %1$s"
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_adjust",
+            "value":"[TS_1109240]_Adjusted the saturation value, the current value is %1$s"
+        },
+        {
+            "name":"voice_aperture_value_change",
+            "value":"[TS_1109262]_Adjusted the aperture value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_adjust",
+            "value":"[TS_1109238]_Adjusted the shadow value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_adjust",
+            "value":"[TS_1109219]_Adjusted the highlight value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_adjust",
+            "value":"[TS_1109270]_Adjusted the dark area value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_adjust",
+            "value":"[TS_1109253]_Adjusted the light area value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_100_100",
+            "value":"[TS_1109243]_Contrast adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the contrast value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_100_100",
+            "value":"[TS_1109254]_Shadow adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the shadow value, the current value is %1$s"
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_adjust",
+            "value":"[TS_1109274]_Adjusted vertical angle, the current angle is %1$s"
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_imageEdit",
+            "value":"[TS_1109251]_Rotation slider, slider range is negative forty five degrees to forty five degrees, double tap and hold then drag left or right to adjust the rotation, the current rotation is %1$s"
+        },
+        {
+            "name":"voice_adjust_fade_scroll_adjust",
+            "value":"[TS_1109259]_Adjusted the fade value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_adjust",
+            "value":"[TS_1109269]_Adjusted the vignette value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_original_strength_value",
+            "value":"[TS_1109236]_Adjusted the Ethereal filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_adjust",
+            "value":"[TS_1109230]_Adjusted the vibrance value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_0_100",
+            "value":"[TS_1109216]_Sharpness adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the sharpness value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_old_tree_strength_bar",
+            "value":"[TS_1109220]_Rustic filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Rustic filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_100_100",
+            "value":"[TS_1109260]_Highlight adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the highlight value, the current value is %1$s"
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_imageEdit",
+            "value":"[TS_1109239]_Horizontal angle slider, slider range is negative forty five degrees to forty five degrees, double tap and hold then drag left or right to adjust the horizontal angle, the current angle is %1$s"
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_adjust",
+            "value":"[TS_1109257]_Adjusted the exposure value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_original_strength_bar",
+            "value":"[TS_1109275]_Ethereal filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Ethereal filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection",
+            "value":"[TS_1109215]_Vertical angle slider, slider range is negative forty five degrees to forty five degrees. Touch and hold with both fingers then drag left or right to adjust the vertical angle, the current angle is %1$s"
+        },
+        {
+            "name":"voice_adjust_hue_scroll_adjust",
+            "value":"[TS_1109222]_Adjusted the hue value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_sweet_strength_bar",
+            "value":"[TS_1109224]_Sweet filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Sweet filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_100_100",
+            "value":"[TS_1109225]_Color temperature adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the color temperature value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_100_100",
+            "value":"[TS_1109234]_Vibrance adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the vibrance value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_adjust",
+            "value":"[TS_1109229]_Adjusted the temperature value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_bar",
+            "value":"[TS_1109255]_Crystal filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Crystal filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_bar",
+            "value":"[TS_1109266]_Neutral filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Neutral filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_filter_sweet_strength_value",
+            "value":"[TS_1109265]_Adjusted the Sweet filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_adjust_fade_scroll_0_100",
+            "value":"[TS_1109221]_Fade adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the fade value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_old_tree_strength_value",
+            "value":"[TS_1109256]_Adjusted the Rustic filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_adjust_grain_scroll_0_100",
+            "value":"[TS_1109237]_Grain adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the grain value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_little_luck_strength_bar",
+            "value":"[TS_1109247]_Lucky filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Lucky filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_value",
+            "value":"[TS_1109232]_Adjusted the Crystal filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_adjust",
+            "value":"[TS_1109268]_Adjusted the brightness value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_adjust",
+            "value":"[TS_1109244]_Adjusted the contrast value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_100_100",
+            "value":"[TS_1109214]_Vignette adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the vignette value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_sunset_strength_value",
+            "value":"[TS_1109223]_Adjusted the Twilight filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_adjust_auto_scroll_adjust",
+            "value":"[TS_1109263]_Adjusted the auto adjust value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_100_100",
+            "value":"[TS_1109248]_Light area adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the light area value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_little_luck_strength_value",
+            "value":"[TS_1109226]_Adjusted the Lucky filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_value",
+            "value":"[TS_1109264]_Adjusted the Monochrome filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_100_100",
+            "value":"[TS_1109241]_Dark area adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the dark area value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_value",
+            "value":"[TS_1109261]_Adjusted the Warm filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_100_100",
+            "value":"[TS_1109231]_Saturation adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the saturation value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_bar",
+            "value":"[TS_1109233]_Warm filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Warm filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_100_100",
+            "value":"[TS_1109276]_Exposure adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the exposure value, the current value is %1$s"
+        },
+        {
+            "name":"voice_adjust_auto_scroll_100_100",
+            "value":"[TS_1109242]_Auto adjust slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the auto adjust value, the current value is %1$s"
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection",
+            "value":"[TS_1109245]_Horizontal angle slider, slider range is negative forty five degrees to forty five degrees. Touch and hold with both fingers then drag left or right to adjust the horizontal angle, the current angle is %1$s"
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_bar",
+            "value":"[TS_1109218]_Monochrome filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Monochrome filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation",
+            "value":"[TS_1109250]_Rotation slider, slider range is negative forty five degrees to forty five degrees. Touch and hold with both fingers then drag left or right to adjust the rotation, the current rotation is %1$s"
+        },
+        {
+            "name":"voice_adjust_hue_scroll_100_100",
+            "value":"[TS_1109227]_Hue adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the hue value, the current value is %1$s"
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_value",
+            "value":"[TS_1109258]_Adjusted the Neutral filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_filter_green_strength_value",
+            "value":"[TS_1109228]_Adjusted the Lime filter intensity, the current intensity is %1$s"
+        },
+        {
+            "name":"voice_adjust_grain_scroll_adjust",
+            "value":"[TS_1109272]_Adjusted the grain value, the current value is %1$s"
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_imageEdit",
+            "value":"[TS_1109217]_Vertical angle slider, slider range is negative forty five degrees to forty five degrees, double tap and hold then drag left or right to adjust the vertical angle, the current angle is %1$s"
+        },
+        {
+            "name":"tabs_personality_style_imageEdit",
+            "value":"[TS_1111425]_Custom styles"
+        },
+        {
+            "name":"ai_generated_tag_popup_disagree",
+            "value":"[TS_1112924]_Don't show tag"
+        },
+        {
+            "name":"ai_generated_tag_popup_agree",
+            "value":"[TS_1112925]_Show tag"
+        },
+        {
+            "name":"ai_generated_tag_popup",
+            "value":"[TS_1112926]_Show \"AI-generated\" tag?"
+        },
+        {
+            "name":"ai_generated_tag_popup_description",
+            "value":"[TS_1112921]_The \"AI-generated\" tag indicates that the image contains AI-generated content. You can change this at any time in Gallery settings."
+        },
+        {
+            "name":"border_background_imageEdit",
+            "value":"[TS_1104420]_Border"
+        },
+        {
+            "name":"capture_location_imageEdit",
+            "value":"[TS_1104422]_Location"
+        },
+        {
+            "name":"beauty_Custom_imageEdit",
+            "value":"[TS_1104419]_Custom"
+        },
+        {
+            "name":"watermark_imageEdit",
+            "value":"[TS_1105264]_Edit watermark"
+        },
+        {
+            "name":"festival_watermark_imageEdit",
+            "value":"[TS_1104418]_Holiday watermarks"
+        },
+        {
+            "name":"watermark_text_imageEdit",
+            "value":"[TS_1113044]_Text"
+        },
+        {
+            "name":"festival_patterned_imageEdit",
+            "value":"[TS_1113043]_Pattern"
+        },
+        {
+            "name":"unsupport_festival_seal_edit",
+            "value":"[TS_1114600]_The Spring Festival watermark can't be edited once saved. Save now?"
+        },
+        {
+            "name": "unsupport_national_seal_edit",
+            "value": "[TS_1115775]_The National Day watermark can't be edited once saved. Save now?"
+        },
+        {
+            "name":"eraser_brush_thickness_selected_new",
+            "value":"[TS_1121958]_Eraser size adjustment, adjustable range %1$d to %2$d, double-tap and hold, then slide left or right to adjust"
+        },
+        {
+          "name":"brush_thickness_selected_new",
+          "value":"[TS_1121957]_Brush size adjustment, adjustable range is %1$d to %2$d, double-tap and hold, then slide left or right to adjust"
+        },
+        {
+            "name":"xtStyle_color_temperature",
+            "value":"[TS_1112331]_Temperature"
+        },
+        {
+            "name": "xtStyle_saturation",
+            "value": "[TS_1112334]_Saturation"
+        },
+        {
+            "name":"xt_style_soft_imageEdit",
+            "value":"[TS_1104815]_Bright"
+        },
+        {
+            "name":"xt_style_black_imageEdit",
+            "value":"[TS_1104817]_Mono"
+        },
+        {
+            "name":"xt_style_bright_imageEdit",
+            "value":"[TS_1104818]_Vivid"
+        },
+        {
+            "name":"undo_xt_style_soft_imageEdit",
+            "value":"[TS_1108482]_Undo: Bright."
+        },
+        {
+            "name":"undo_xt_style_bright_imageEdit",
+            "value":"[TS_1108479]_Undo: Vivid."
+        },
+        {
+            "name":"redo_xt_style_soft_imageEdit",
+            "value":"[TS_1108484]_Redo: Bright."
+        },
+        {
+            "name":"redo_xt_style_black_imageEdit",
+            "value":"[TS_1108480]_Redo: Mono."
+        },
+        {
+            "name":"redo_xt_style_bright_imageEdit",
+            "value":"[TS_1108483]_Redo: Vivid."
+        },
+        {
+            "name":"undo_xt_style_black_imageEdit",
+            "value":"[TS_1108481]_Undo: Mono."
+        },
+        {
+        "name":"image_editor_rotate_ninety_degrees_new",
+        "value":"[TS_1108009]_Rotate %s"
+        },
+        {
+            "name": "free_crop_rotate_new",
+            "value": "[TS_1115083]_Rotate"
+        },
+        {
+            "name": "tip_aigc_removing",
+            "value": "[TS_1125899]_Removing…"
+        },
+        {
+            "name": "tip_aigc_material_loading",
+            "value": "[TS_1125904]_Loading…"
+        },
+        {
+            "name": "tip_aigc_emoj_replacing",
+            "value": "[TS_1125905]_Replacing expression…"
+        },
+        {
+            "name": "tip_aigc_remove_draw_and_select",
+            "value": "[TS_1125906]_Draw a line across an object to select it."
+        },
+        {
+            "name": "tip_aigc_remove_click_and_remove_all",
+            "value": "[TS_1125903]_Tap the button to remove selected content."
+        },
+        {
+            "name": "button_aigc_remove_intelligent",
+            "value": "[TS_1125901]_Auto"
+        },
+        {
+            "name": "button_aigc_remove_manual",
+            "value": "[TS_1125902]_Manual"
+        },
+        {
+            "name": "tip_aigc_paint_to_expand_selection",
+            "value": "[TS_1125900]_You can expand the selected area by swiping on the screen."
+        },
+        {
+            "name": "tip_aigc_paint_to_remove_selection",
+            "value": "[TS_1125907]_Swipe to cancel selection."
+        },
+        {
+            "name": "tip_aigc_click_intelli_manual_then_edit",
+            "value": "[TS_1125908]_Tap Auto or Manual to edit the selected area."
+        }
+    ]
+}

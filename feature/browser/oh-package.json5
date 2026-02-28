@@ -1,9 +1,12 @@
 {
+  "devDependencies": {},
   "name": "@ohos/browser",
   "description": "a npm package which contains browser feature",
-  "main": "index.ts",
-  "version": "1.0.0",
+  "main": "index.ets",
+  "version": "1.0.18",
+  "author": "photoshsp",
   "dependencies": {
-    "@ohos/common": "../../common"
-  }
+    "@ohos/tools": "file:../../tools",
+    "@ohos/common": "file:../../common",
+  },
 }

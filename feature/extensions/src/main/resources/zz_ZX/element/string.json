@@ -1,0 +1,20 @@
+{
+    "string":[
+        {
+            "name":"dialog_ban",
+            "value":"[TS_948128]_Deny"
+        },
+        {
+            "name":"dialog_allow",
+            "value":"[TS_948110]_Allow"
+        },
+        {
+            "name":"short_term_title",
+            "value":"[TS_967228]_Allow %s to save images and videos?"
+        },
+        {
+            "name":"dialog_not_allowed",
+            "value":"[TS_1009076]_Deny"
+        }
+    ]
+}

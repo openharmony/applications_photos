@@ -1,0 +1,32 @@
+{
+    "string":[
+        {
+            "name":"dialog_ban",
+            "value":"བཀག་འགོག",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_allow",
+            "value":"ཆོག་པ།",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"short_term_title",
+            "value":"༼%s༽ཉེར་སྤྱོད་ཀྱིས་པར་རིས་དང་བརྙན་ཟློས་ཉར་ཚགས་བྱ་ཆོག་པར་བྱེད་དམ།",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_not_allowed",
+            "value":"མི་ཆོག",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

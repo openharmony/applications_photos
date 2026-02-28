@@ -1,0 +1,28 @@
+{
+    "plural":[
+        {
+            "name":"rotate_broadcast_imageEdit",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"ཏུའུ་ %1$d",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"rotate_angle_imageEdit",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"འཁྱིལ་འཁོར་གནོན་མཐེབ། མིག་སྔའི་ཟུར་ཚད་ནི་ཏུའུ་ %1$d ཡིན།",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,9 +1,11 @@
 {
+  "devDependencies": {},
   "name": "@ohos/formability",
   "description": "a npm package which contains formAbility feature",
-  "main": "index.ts",
+  "main": "index.ets",
   "version": "1.0.0",
   "dependencies": {
-    "@ohos/common": "../../common"
+    "@ohos/common": "file:../../common",
+    "@ohos/dataprovider": "file:../../feature/dataProvider"
   }
 }

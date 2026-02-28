@@ -1,7 +1,13 @@
 {
+  "devDependencies": {},
   "name": "@ohos/common",
-  "description": "a npm package which contains common function",
-  "main": "index.ts",
-  "version": "1.0.0",
-  "dependencies": {}
+  "main": "index.ets",
+  "version": "1.0.18",
+  "author": "photoshsp",
+  "description": "common module为最底层依赖, 除hms-core之外禁止添加其他任何依赖! 新建的公共view页面推荐放进feature文件夹新建的module! a ohpm package which contains common function",
+  "dependencies": {
+    "@ohos/tools": "file:../tools",
+  },
+  "dynamicDependencies": {
+  }
 }

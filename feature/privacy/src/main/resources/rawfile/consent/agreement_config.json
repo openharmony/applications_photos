@@ -1,0 +1,57 @@
+{
+  "agrcfgs": [
+    {
+      "agrType": 10670,
+      "regionGroup": [
+        {
+          "branchesInfo": {
+            "0": ""
+          },
+          "groupName": "cn",
+          "mainBranchId": 0
+        }
+      ],
+      "regionGroups": [],
+      "routerURL": ""
+    },
+    {
+      "agrType": 10671,
+      "regionGroup": [
+        {
+          "branchesInfo": {
+            "0": ""
+          },
+          "groupName": "cn",
+          "mainBranchId": 0
+        }
+      ],
+      "regionGroups": [],
+      "routerURL": ""
+    },
+    {
+      "agrType": 10734,
+      "regionGroup": [
+        {
+          "branchesInfo": {
+            "0": ""
+          },
+          "groupName": "cn",
+          "mainBranchId": 0
+        }
+      ],
+      "regionGroups": [],
+      "routerURL": ""
+    }
+  ],
+  "clientId": "1595c56a87b24714ad8a160fb0d2b9d2",
+  "macroServiceId": "",
+  "regionGroups": [
+    {
+      "groupName": "cn",
+      "regionList": [
+        "cn"
+      ]
+    }
+  ],
+  "serviceId": "com.ohos.photos"
+}

@@ -1,6 +1,11 @@
 {
-  "hvigorVersion": "3.0.9",
+  "modelVersion": "5.0.2",
   "dependencies": {
-    "@ohos/hvigor-ohos-plugin": "3.0.9"
+//    "@ohos/hypium-plugin": "2.0.2-rc4",
+//    "@ohos/hvigor-ohos-online-sign-plugin": "4.0.2",
+    "json5": "2.2.3"
+  },
+  "debugging": {
+    "stacktrace": true
   }
 }

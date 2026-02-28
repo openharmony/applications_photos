@@ -1,0 +1,36 @@
+{
+    "string":[
+        {
+            "name":"button_bubble_redo",
+            "value":"[TS_954156]_Redo"
+        },
+        {
+            "name":"button_bubble_undo",
+            "value":"[TS_954159]_Undo"
+        },
+        {
+            "name":"button_bubble_mirror",
+            "value":"[TS_954155]_Mirror"
+        },
+        {
+            "name":"button_bubble_save",
+            "value":"[TS_954160]_Save"
+        },
+        {
+            "name":"button_bubble_back",
+            "value":"[TS_954157]_Go back"
+        },
+        {
+            "name":"button_bubble_rotate",
+            "value":"[TS_954158]_Rotate"
+        },
+        {
+            "name":"button_bubble_oneClick_adjust_imageEdit",
+            "value":"[TS_947069]_Auto-adjust"
+        },
+        {
+            "name":"button_bubble_stylus",
+            "value":"[TS_972195]_Markup"
+        }
+    ]
+}

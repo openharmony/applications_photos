@@ -14,66 +14,71 @@
      limitations under the License.
 
     This is the configuration file template for OpenHarmony OSS Audit Tool, please copy it to your project root dir and modify it refer to OpenHarmony/tools_oat/README.
-    All configurations in this file will be merged to OAT-Default.xml, if you have any questions or concerns, please create issue in OpenHarmony/tools_oat and @jalenchen or chenyaxun.
 
-    licensefile:
-    1.If the project don't have "LICENSE" in root dir, please define all the license files in this project in , OAT will check license files according to this rule.
-
-    policylist:
-    1. policy: If the OAT-Default.xml policies do not meet your requirements, please add policies here.
-    2. policyitem: The fields type, name, path, desc is required, and the fields rule, group, filefilter is optional,the default value is:
-    <policyitem type="" name="" path="" desc="" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter"/>
-    3. policyitem type:
-        "compatibility" is used to check license compatibility in the specified path;
-        "license" is used to check source license header in the specified path;
-        "copyright" is used to check source copyright header in the specified path;
-        "import" is used to check source dependency in the specified path, such as import ... ,include ...
-        "filetype" is used to check file type in the specified path, supported file types: archive, binary
-        "filename" is used to check whether the specified file exists in the specified path(projectroot means the root dir of the project), supported file names: LICENSE, README, README.OpenSource
-    4. policyitem name: This field is used for define the license, copyright, "*" means match all, the "!" prefix means could not match this value. For example, "!GPL" means can not use GPL license.
-    5. policyitem path: This field is used for define the source file scope to apply this policyitem, the "!" prefix means exclude the files. For example, "!.*/lib/.*" means files in lib dir will be exclude while process this policyitem.
-    6. policyitem rule and group: These two fields are used together to merge policy results. "may" policyitems in the same group means any one in this group passed, the result will be passed.
-    7. policyitem filefilter: Used to bind filefilter which define filter rules.
-    7. policyitem desc: Used to describe the reason of this policy item, committers will check this while merging the code.
-    8. filefilter: Filter rules, the type filename is used to filter file name, the type filepath is used to filter file path.
-
-    Note:If the text contains special characters, please escape them according to the following rules:
-    " == &gt;
-    & == &gt;
-    ' == &gt;
-    < == &gt;
-    > == &gt;
 -->
 
 <configuration>
     <oatconfig>
+        <licensefile></licensefile>
+        <policylist>
+            <policy name="projectPolicy" desc="">
+                <!--policyitem type="compatibility" name="GPL-2.0+" path="abc/.*" desc="Process that runs independently, invoked by the X process."/-->
+                <!--policyitem type="license" name="LGPL" path="abc/.*" desc="Dynamically linked by module X"/-->
+                <!--policyitem type="copyright" name="xxx" path="abc/.*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/-->
+                <policyitem type="copyright" name="Huawei Technologies Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc=""/>
+            </policy>
+        </policylist>
         <filefilterlist>
-            <filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies">
-                <filteritem type="filepath" name="AppScope/resources/base/media/.*.png" desc="self developed image"/>
-                <filteritem type="filepath" name="common/src/main/resources/.*.png" desc="self developed image"/>
-                <filteritem type="filepath" name="common/src/main/resources/.*.svg" desc="self developed image"/>
-                <filteritem type="filepath" name="feature/browser/src/resources/base/media/.*.svg" desc="self developed image"/>
-                <filteritem type="filepath" name="product/pad/src/.*.png" desc="self developed image"/>
-                <filteritem type="filepath" name="product/phone/src/.*.png" desc="self developed image"/>
-                <filteritem type="filepath" name="gradle/wrapper/.*.jar" desc="Build Files"/>
-                <filteritem type="filepath" name="figures/.*.png" desc="self developed image"/>
+            <filefilter name="defaultFilter" desc="Files not to check">
+                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
+                <filteritem type="filename" name="*.png|*.PNG|*.jpg|*.jpeg|*.webp" desc="self developed image"/>
+                <filteritem type="filepath" name=".*/cpp/sdk/libs/.*" desc="develop sdk files"/>
+                <filteritem type="filepath" name=".*/common/libs/.*" desc="develop sdk files"/>
+            </filefilter>
+            <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
+                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
             </filefilter>
             <filefilter name="copyrightPolicyFilter" desc="Filters for copyright header policies">
-                <filteritem type="filename" name="*.json5" desc="json file"/>
-                <filteritem type="filename" name="publicity.xml" desc="Build Files"/>
-                <filteritem type="filename" name="hvigorw" desc="Build Files"/>
-                <filteritem type="filename" name="hvigorw.bat" desc="Build Files"/>
-                <filteritem type="filename" name="hvigor-config.json5" desc="Build Files"/>
-                <filteritem type="filename" name="hvigor-wrapper.js" desc="Build Files"/>
+                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
             </filefilter>
-            <filefilter name="defaultPolicyFilter" desc="Filters for LICENSE file policies">
-                <filteritem type="filename" name="*.json5" desc="json file"/>
-                <filteritem type="filename" name="publicity.xml" desc="Build Files"/>
-                <filteritem type="filename" name="hvigorw" desc="Build Files"/>
-                <filteritem type="filename" name="hvigorw.bat" desc="Build Files"/>
-                <filteritem type="filename" name="hvigor-config.json5" desc="Build Files"/>
-                <filteritem type="filename" name="hvigor-wrapper.js" desc="Build Files"/>
+            <filefilter name="licenseFileNamePolicyFilter" desc="Filters for LICENSE file policies">
+                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
             </filefilter>
+            <filefilter name="readmeFileNamePolicyFilter" desc="Filters for README file policies">
+                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
+            </filefilter>
+            <filefilter name="readmeOpenSourcefileNamePolicyFilter" desc="Filters for README.OpenSource file policies">
+                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
+            </filefilter>
+            <filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies">
+                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
+                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
+                <filteritem type="filename" name="*.ets|*.hpp" desc="file is recognized as a binary file."/>
+            </filefilter>
+
         </filefilterlist>
+        <licensematcherlist>
+            <!--licensematcher name="uvwxyz License" desc="If the scanning result is InvalidLicense, you can define matching rules here. Note that quotation marks must be escaped.">
+                <licensetext name="
+                    uvwxyz license textA xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+				 " desc=""/>
+                <licensetext name="
+                    uvwxyz license textB xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+				 " desc=""/>
+            </licensematcher-->
+        </licensematcherlist>
     </oatconfig>
 </configuration>

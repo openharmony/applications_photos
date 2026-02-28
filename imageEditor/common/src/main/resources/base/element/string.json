@@ -1,0 +1,5668 @@
+{
+    "string":[
+        {
+            "name":"xt_style_natural_selected",
+            "value":"Natural is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_film_selected",
+            "value":"Celluloid is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_cinematic_selected",
+            "value":"Cinematic is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_anime_selected",
+            "value":"Anime is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_imageEdit",
+            "value":"Discard",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_bubble_oneClick_adjust_imageEdit",
+            "value":"Auto-adjust",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_luma_imageEdit",
+            "value":"Brightness",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_bright_part_imageEdit",
+            "value":"Light area",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_exposure_imageEdit",
+            "value":"Exposure",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_dark_part_imageEdit",
+            "value":"Dark area",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_nature_saturation_imageEdit",
+            "value":"Vibrance",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_imageEdit",
+            "value":"Fade",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_granules_imageEdit",
+            "value":"Grain",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_imageEdit",
+            "value":"Contrast",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_saturation_imageEdit",
+            "value":"Saturation",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_hue_imageEdit",
+            "value":"Color",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_temperature_imageEdit",
+            "value":"Temperature",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_sharpness_imageEdit",
+            "value":"Sharpness",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_highlights_imageEdit",
+            "value":"Highlight",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_shadow_imageEdit",
+            "value":"Shadow",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_vignette_imageEdit",
+            "value":"Vignette",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_rotate_imageEdit",
+            "value":"Rotate",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_horizontal_correction_imageEdit",
+            "value":"Horizontal",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_vertical_correction_imageEdit",
+            "value":"Vertical",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_ratio_imageEdit",
+            "value":"Aspect ratio",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_original_imageEdit",
+            "value":"Original",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_free_imageEdit",
+            "value":"Freeform",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_pave_imageEdit",
+            "value":"Fit to screen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_cut_imageEdit",
+            "value":"Trim",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_adjust_imageEdit",
+            "value":"Adjust",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_filter_imageEdit",
+            "value":"Filters",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_crop_imageEdit",
+            "value":"Crop",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_none_imageEdit",
+            "value":"Original",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_green_orange_imageEdit",
+            "value":"Lime",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_sunset_imageEdit",
+            "value":"Twilight",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_original_imageEdit",
+            "value":"Ethereal",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_imageEdit",
+            "value":"Crystal",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_old_tree_imageEdit",
+            "value":"Rustic",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_little_luck_imageEdit",
+            "value":"Lucky",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_sweet_imageEdit",
+            "value":"Sweet",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_middle_tone_imageEdit",
+            "value":"Neutral",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_milk_tea_imageEdit",
+            "value":"Warm",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_black_and_white_imageEdit",
+            "value":"Mono",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_intercept_imageEdit",
+            "value":"Undo: Trim.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_intercept_imageEdit",
+            "value":"Redo: Trim.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_none_imageEdit",
+            "value":"Undo: Original.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_none_imageEdit",
+            "value":"Redo: Original.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_luma_imageEdit",
+            "value":"Undo: Brightness adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_luma_imageEdit",
+            "value":"Redo: Brightness adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_bright_part_imageEdit",
+            "value":"Undo: Light area adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_bright_part_imageEdit",
+            "value":"Redo: Light area adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_imageEdit",
+            "value":"Undo: Exposure adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_imageEdit",
+            "value":"Redo: Exposure adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"Undo: Auto adjust.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"Redo: Auto adjust.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_dark_part_imageEdit",
+            "value":"Undo: Dark area adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_dark_part_imageEdit",
+            "value":"Redo: Dark area adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_imageEdit",
+            "value":"Undo: Fade adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_imageEdit",
+            "value":"Redo: Fade adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_granules_imageEdit",
+            "value":"Undo: Grain adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_granules_imageEdit",
+            "value":"Redo: Grain adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_nature_saturation_imageEdit",
+            "value":"Undo: Vibrance adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_nature_saturation_imageEdit",
+            "value":"Redo: Vibrance adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_imageEdit",
+            "value":"Undo: Contrast adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_imageEdit",
+            "value":"Redo: Contrast adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_imageEdit",
+            "value":"Undo: Saturation adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_imageEdit",
+            "value":"Redo: Saturation adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_imageEdit",
+            "value":"Undo: Hue adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_imageEdit",
+            "value":"Redo: Hue adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_imageEdit",
+            "value":"Undo: Temperature adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_imageEdit",
+            "value":"Redo: Temperature adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_imageEdit",
+            "value":"Undo: Sharpness adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_imageEdit",
+            "value":"Redo: Sharpness adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlights_imageEdit",
+            "value":"Undo: Highlight adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlights_imageEdit",
+            "value":"Redo: Highlight adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_imageEdit",
+            "value":"Undo: Shadow adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_imageEdit",
+            "value":"Redo: Shadow adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_imageEdit",
+            "value":"Undo: Vignette adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_imageEdit",
+            "value":"Redo: Vignette adjustment.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_rotate_imageEdit",
+            "value":"Undo: Rotation.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_rotate_imageEdit",
+            "value":"Redo: Rotation.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_horizontal_imageEdit",
+            "value":"Undo: Horizontal correction.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_correct_horizontal_imageEdit",
+            "value":"Redo: Horizontal correction.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_vertical_imageEdit",
+            "value":"Undo: Vertical correction.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_correct_vertical_imageEdit",
+            "value":"Redo: Vertical correction.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_proportional_imageEdit",
+            "value":"Undo: Ratio.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_proportional_imageEdit",
+            "value":"Redo: Ratio.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_ninety_angle_rotate_imageEdit",
+            "value":"Undo: %s° rotation.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_ninety_angle_rotate_imageEdit",
+            "value":"Redo: %s° rotation.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_mirror_imageEdit",
+            "value":"Undo: Mirror.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_mirror_imageEdit",
+            "value":"Redo: Mirror.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_crop_imageEdit",
+            "value":"Undo: Crop.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_crop_imageEdit",
+            "value":"Redo: Crop.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_imageEdit",
+            "value":"Undo: Lime filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_imageEdit",
+            "value":"Redo: Lime filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_strength_imageEdit",
+            "value":"Undo: Lime intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_strength_imageEdit",
+            "value":"Redo: Lime intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_imageEdit",
+            "value":"Undo: Twilight filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_imageEdit",
+            "value":"Redo: Twilight filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_strength_imageEdit",
+            "value":"Undo: Twilight intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_strength_imageEdit",
+            "value":"Redo: Twilight intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_original_imageEdit",
+            "value":"Undo: Ethereal filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_original_imageEdit",
+            "value":"Redo: Ethereal filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_original_strength_imageEdit",
+            "value":"Undo: Ethereal intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_original_strength_imageEdit",
+            "value":"Redo: Ethereal intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_imageEdit",
+            "value":"Undo: Crystal filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_imageEdit",
+            "value":"Redo: Crystal filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_strength_imageEdit",
+            "value":"Undo: Crystal intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_strength_imageEdit",
+            "value":"Redo: Crystal intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_imageEdit",
+            "value":"Undo: Rustic filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_imageEdit",
+            "value":"Redo: Rustic filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_strength_imageEdit",
+            "value":"Undo: Rustic intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_strength_imageEdit",
+            "value":"Redo: Rustic intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_imageEdit",
+            "value":"Undo: Lucky filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_imageEdit",
+            "value":"Redo: Lucky filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_strength_imageEdit",
+            "value":"Undo: Lucky intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_strength_imageEdit",
+            "value":"Redo: Lucky intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_imageEdit",
+            "value":"Undo: Sweet filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_imageEdit",
+            "value":"Redo: Sweet filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_strength_imageEdit",
+            "value":"Undo: Sweet intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_strength_imageEdit",
+            "value":"Redo: Sweet intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_imageEdit",
+            "value":"Undo: Neutral filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_imageEdit",
+            "value":"Redo: Neutral filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_strength_imageEdit",
+            "value":"Undo: Neutral intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_strength_imageEdit",
+            "value":"Redo: Neutral intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_imageEdit",
+            "value":"Undo: Warm filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_imageEdit",
+            "value":"Redo: Warm filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_strength_imageEdit",
+            "value":"Undo: Warm intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_strength_imageEdit",
+            "value":"Redo: Warm intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_imageEdit",
+            "value":"Undo: Monochrome filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_imageEdit",
+            "value":"Redo: Monochrome filter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_strength_imageEdit",
+            "value":"Undo: Monochrome intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_strength_imageEdit",
+            "value":"Redo: Monochrome intensity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_on_imageEdit",
+            "value":"Undo: Brightness adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_on_imageEdit",
+            "value":"Redo: Brightness adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_off_imageEdit",
+            "value":"Undo: Brightness adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_off_imageEdit",
+            "value":"Redo: Brightness adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_on_imageEdit",
+            "value":"Undo: Exposure adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_on_imageEdit",
+            "value":"Redo: Exposure adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_off_imageEdit",
+            "value":"Undo: Exposure adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_off_imageEdit",
+            "value":"Redo: Exposure adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"Undo: Enable auto adjust.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"Redo: Enable auto adjust.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"Undo: Disable auto adjust.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"Redo: Disable auto adjust.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_on_imageEdit",
+            "value":"Undo: Light area adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_on_imageEdit",
+            "value":"Redo: Light area adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_off_imageEdit",
+            "value":"Undo: Light area adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_off_imageEdit",
+            "value":"Redo: Light area adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_on_imageEdit",
+            "value":"Undo: Dark area adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_on_imageEdit",
+            "value":"Redo: Dark area adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_off_imageEdit",
+            "value":"Undo: Dark area adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_off_imageEdit",
+            "value":"Redo: Dark area adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_on_imageEdit",
+            "value":"Undo: Vibrance adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_on_imageEdit",
+            "value":"Redo: Vibrance adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_off_imageEdit",
+            "value":"Undo: Vibrance adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_off_imageEdit",
+            "value":"Redo: Vibrance adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_on_imageEdit",
+            "value":"Undo: Fade adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_on_imageEdit",
+            "value":"Redo: Fade adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_off_imageEdit",
+            "value":"Undo: Fade adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_off_imageEdit",
+            "value":"Redo: Fade adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_on_imageEdit",
+            "value":"Undo: Grain adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_on_imageEdit",
+            "value":"Redo: Grain adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_off_imageEdit",
+            "value":"Undo: Grain adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_off_imageEdit",
+            "value":"Redo: Grain adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_on_imageEdit",
+            "value":"Undo: Contrast adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_on_imageEdit",
+            "value":"Redo: Contrast adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_off_imageEdit",
+            "value":"Undo: Contrast adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_off_imageEdit",
+            "value":"Redo: Contrast adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_on_imageEdit",
+            "value":"Undo: Saturation adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_on_imageEdit",
+            "value":"Redo: Saturation adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_off_imageEdit",
+            "value":"Undo: Saturation adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_off_imageEdit",
+            "value":"Redo: Saturation adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_on_imageEdit",
+            "value":"Undo: Hue adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_on_imageEdit",
+            "value":"Redo: Hue adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_off_imageEdit",
+            "value":"Undo: Hue adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_off_imageEdit",
+            "value":"Redo: Hue adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_on_imageEdit",
+            "value":"Undo: Color Temperature adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_on_imageEdit",
+            "value":"Redo: Color Temperature adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_off_imageEdit",
+            "value":"Undo: Color Temperature adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_off_imageEdit",
+            "value":"Redo: Color temperature adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_on_imageEdit",
+            "value":"Undo: Sharpness adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_on_imageEdit",
+            "value":"Redo: Sharpness adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_off_imageEdit",
+            "value":"Undo: Sharpness adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_off_imageEdit",
+            "value":"Redo: Sharpness adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_on_imageEdit",
+            "value":"Undo: Highlight adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_on_imageEdit",
+            "value":"Redo: Highlight adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_off_imageEdit",
+            "value":"Undo: Highlight adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_off_imageEdit",
+            "value":"Redo: Highlight adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_on_imageEdit",
+            "value":"Undo: Shadow adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_on_imageEdit",
+            "value":"Redo: Shadow adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_off_imageEdit",
+            "value":"Undo: Shadow adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_off_imageEdit",
+            "value":"Redo: Shadow adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_on_imageEdit",
+            "value":"Undo: Vignette adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_on_imageEdit",
+            "value":"Redo: Vignette adjustment on.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_off_imageEdit",
+            "value":"Undo: Vignette adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_off_imageEdit",
+            "value":"Redo: Vignette adjustment off.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"subtitle_delete_cancel_imageEdit",
+            "value":"Cancel",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"revert_imageEdit",
+            "value":"Reset",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"revert_original_state_imageEdit",
+            "value":"Reset to original state?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_imageEdit",
+            "value":"Edit",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"discard_all_changes_imageEdit",
+            "value":"Discard changes?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"videoTool_compare_imageEdit",
+            "value":"Compare",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"current_file_cannot_import_imageEdit",
+            "value":"Unsupported or corrupted file. Unable to edit.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_failed_imageEdit",
+            "value":"Unable to save.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"saving_media_imageEdit",
+            "value":"Saving\u2026",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"retry_imageEdit",
+            "value":"Retry",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_downloading_imageEdit",
+            "value":"Original image is being downloaded. Please wait.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_imageEdit",
+            "value":"Classic",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_imageEdit",
+            "value":"Moody",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_natural_imageEdit",
+            "value":"Natural",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_blossom_imageEdit",
+            "value":"Blossom",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_imageEdit",
+            "value":"Fair",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_pink_imageEdit",
+            "value":"Pink",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_classics_imageEdit",
+            "value":"Undo: Classic filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_moody_imageEdit",
+            "value":"Undo: Moody filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_natural_imageEdit",
+            "value":"Undo: Natural filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_blossom_imageEdit",
+            "value":"Undo: Blossom filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_fair_imageEdit",
+            "value":"Undo: Fair filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_pink_imageEdit",
+            "value":"Undo: Pink filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_classics_imageEdit",
+            "value":"Redo: Classic filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_moody_imageEdit",
+            "value":"Redo: Moody filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_natural_imageEdit",
+            "value":"Redo: Natural filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_blossom_imageEdit",
+            "value":"Redo: Blossom filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_fair_imageEdit",
+            "value":"Redo: Fair filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_pink_imageEdit",
+            "value":"Redo: Pink filter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_seal_imageEdit",
+            "value":"Watermarks",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_text_imageEdit",
+            "value":"Text",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_imageEdit",
+            "value":"Add text",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"text_align_left",
+            "value":"Align left",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_center",
+            "value":"Align center",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"text_align_right",
+            "value":"Align right",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"text_edit_max_tip",
+            "value":"Maximum number of text boxes reached.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"close_watermark_imageEdit",
+            "value":"No watermark",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_imageEdit",
+            "value":"Standard watermark",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_imageEdit",
+            "value":"Frame watermark",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_on_imageEdit",
+            "value":"The no watermark option is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_on_imageEdit",
+            "value":"Standard watermark selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_on_imageEdit",
+            "value":"Frame watermark selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_model_imageEdit",
+            "value":"Device model",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_time_imageEdit",
+            "value":"Shooting time",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_param_imageEdit",
+            "value":"Shooting parameters",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_sign_imageEdit",
+            "value":"Personalized signature",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_oversize_imageEdit",
+            "value":"Watermarks are not available with this image size.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_general_watermark_imageEdit",
+            "value":"Redo: Standard watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_general_watermark_imageEdit",
+            "value":"Undo: Standard watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_frame_watermark_imageEdit",
+            "value":"Redo: Frame watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_frame_watermark_imageEdit",
+            "value":"Undo: Frame watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_close_watermark_imageEdit",
+            "value":"Redo: Turn off watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_close_watermark_imageEdit",
+            "value":"Undo: Turn off watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_shoot_model_imageEdit",
+            "value":"Redo: Show device model.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_shoot_model_imageEdit",
+            "value":"Undo: Show device model.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_shoot_time_imageEdit",
+            "value":"Redo: Show shooting time.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_shoot_time_imageEdit",
+            "value":"Undo: Show shooting time.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_shoot_param_imageEdit",
+            "value":"Redo: Show shooting parameters.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_shoot_param_imageEdit",
+            "value":"Undo: Show shooting parameters.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"first_time_use_penkit",
+            "value":"Tap here to doodle on this image.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_restore_origin_tips",
+            "value":"Tap here to undo changes you've made.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_bootstrapping_for_the_first_time",
+            "value":"Swipe over the center of an object or person to select it.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_risk_control_alerts",
+            "value":"Remove cannot be used on this image. Try again with another image.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_network_abnorma_toast",
+            "value":"Network error. Check and try again.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_limit_toast",
+            "value":"Remove cannot be used on this image. Try again with another image.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"server_is_abnormal",
+            "value":"Server error.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_is_too_large_toast",
+            "value":"Image too large. Try again with a different image.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aspect_ratio_of_the_image_toast",
+            "value":"Aspect ratio too large. Try again with a different image.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_format_abnormal_toast",
+            "value":"Image format not supported. Try again with another image.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cannot_be_erased_toast",
+            "value":"Content in selected area cannot be removed.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_fail_toast",
+            "value":"Unable to remove. Try again later.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouching",
+            "value":"AI retouch",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_is_selected",
+            "value":"%1$s is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_selected",
+            "value":"Brush size adjustment slider, size range from %1$d to %2$d, double tap to activate, double tap and hold, then drag left or right to adjust size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_value",
+            "value":"Brush size has been adjusted, current size is %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove",
+            "value":"Remove",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"wise_selection",
+            "value":"Auto",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"manual_selection",
+            "value":"Manual",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_remove",
+            "value":"Remove",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_loading",
+            "value":"Processing…",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_expand_image",
+            "value":"Expand",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"expand_image",
+            "value":"Expand",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_analyzing",
+            "value":"Analyzing…",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_expand_image",
+            "value":"Expand",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generating_content",
+            "value":"Generating…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shrink_image_to_adjust_expand_rect",
+            "value":"Shrink the image to adjust the expandable zone.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_aspect_ratio_too_large",
+            "value":"Aspect ratio too large. Try again with a different image.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand",
+            "value":"This image can't be expanded.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_can_not_expand_part_area",
+            "value":"Some content cannot be expanded. Please reposition and try again.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_abnormal_try_again",
+            "value":"Server request failed. Please try again.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_timeout_try_again",
+            "value":"Server request timed out. Please try again.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh",
+            "value":"Blur",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"background_decolorization",
+            "value":"Mono",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_open",
+            "value":"On",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_close",
+            "value":"Off",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"background",
+            "value":"Background",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tradition_remove_content",
+            "value":"Removing",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"petalClip_stylus_shut_down",
+            "value":"Close",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_previous_step",
+            "value":"Undo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_next_step",
+            "value":"Redo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_finish",
+            "value":"Done",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"celia_retouch",
+            "value":"Retouch",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_up",
+            "value":"Back",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_visible",
+            "value":"Redo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_invisible",
+            "value":"Redo button, unavailable",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_visible",
+            "value":"Undo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_invisible",
+            "value":"Undo button, unavailable",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_invisible",
+            "value":"Save button, unavailable",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rectangle_sizer",
+            "value":"Preview image",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rect_left_top",
+            "value":"Top left corner of the crop box, double tap and hold then drag to adjust the selected area",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rect_right_top",
+            "value":"Top right corner of the crop box, double tap and hold then drag to adjust the selected area",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_bottom",
+            "value":"Bottom left corner of the crop box, double tap and hold then drag to adjust the selected area",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_bottom",
+            "value":"Bottom right corner of the crop box, double tap and hold then drag to adjust the selected area",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_top_middle",
+            "value":"Top of the crop box, double tap and hold then drag to adjust the selected area",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_middle_bottom",
+            "value":"Bottom of the crop box, double tap and hold then drag to adjust the selected area",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rect_left_middle",
+            "value":"Left side of the crop box, double tap and hold then drag to adjust the selected area",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_middle",
+            "value":"Right side of the crop box, double tap and hold then drag to adjust the selected area",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_rotation_btn",
+            "value":"Rotate ninety degrees counter clockwise",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_mirror_btn",
+            "value":"Mirror flip",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_rotation_on",
+            "value":"Rotate selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_horizontalCorrection_on",
+            "value":"Horizontal adjustment selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_verticalCorrection_on",
+            "value":"Vertical adjustment selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_on",
+            "value":"Aspect ratio selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_origin_on",
+            "value":"Original selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_free_on",
+            "value":"Freeform selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_screen_on",
+            "value":"Fit to screen selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1_on",
+            "value":"One by one aspect ratio selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2_on",
+            "value":"Three by two aspect ratio selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3_on",
+            "value":"Two by three aspect ratio selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3_on",
+            "value":"Four by three aspect ratio selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4_on",
+            "value":"Three by four aspect ratio selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16_on",
+            "value":"Nine by sixteen aspect ratio selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9_on",
+            "value":"Sixteen by nine aspect ratio selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1",
+            "value":"One by one aspect ratio",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2",
+            "value":"Horizontal, three by two aspect ratio",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3",
+            "value":"Vertical, two by three aspect ratio",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3",
+            "value":"Horizontal, four by three aspect ratio",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4",
+            "value":"Vertical, three by four aspect ratio",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16",
+            "value":"Vertical, nine by sixteen aspect ratio",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9",
+            "value":"Horizontal, sixteen by nine aspect ratio",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_compare_btn",
+            "value":"Compare button, double tap and hold to compare the current image to the original image",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_auto_true",
+            "value":"Auto adjust selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_exposure_true",
+            "value":"Exposure selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_highlight_true",
+            "value":"Highlight selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_shadow_true",
+            "value":"Shadow selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_brightness_true",
+            "value":"Brightness selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_contrast_true",
+            "value":"Contrast selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_brightzone_true",
+            "value":"Light area selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_darkzone_true",
+            "value":"Dark area selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_saturation_true",
+            "value":"Saturation selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_vibrance_true",
+            "value":"Vibrance selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_temperature_true",
+            "value":"Temperature selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_hue_true",
+            "value":"Hue selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_sharpness_true",
+            "value":"Sharpness selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_vignette_true",
+            "value":"Vignette selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_fade_true",
+            "value":"Fade selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_grain_true",
+            "value":"Grain selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_none_selected",
+            "value":"Original filter selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_green_orange_selected",
+            "value":"Lime filter selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_sunset_selected",
+            "value":"Twilight filter selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_original_selected",
+            "value":"Ethereal filter selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_selected",
+            "value":"Crystal filter selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_old_tree_selected",
+            "value":"Rustic filter selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_little_luck_selected",
+            "value":"Lucky filter selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_sweet_selected",
+            "value":"Sweet filter selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_middle_tone_selected",
+            "value":"Neutral filter selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_milk_tea_selected",
+            "value":"Warm filter selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_black_and_white_selected",
+            "value":"Monochrome filter selected",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_classics_selected",
+            "value":"Classic filter selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_selected",
+            "value":"Moody filter selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_natural_selected",
+            "value":"Natural filter selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_blossom_selected",
+            "value":"Blossom filter selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_selected",
+            "value":"Fair filter selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_pink_selected",
+            "value":"Pink filter selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_no_strength_bar",
+            "value":" "
+        },
+        {
+            "name":"filter_none_no_strength_value",
+            "value":" "
+        },
+        {
+            "name":"button_bubble_stylus",
+            "value":"Markup",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_bubble_save",
+            "value":"Save",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_paint_text_announced",
+            "value":"Marking complete, the corresponding area has been automatically selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"manual_paint_text_announced",
+            "value":"Marked area selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_bar_announced",
+            "value":"Slider to adjust brush size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_point_announced",
+            "value":"Current brush size is %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_lr",
+            "value":"Switch to left-right layout",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_ud",
+            "value":"Switch to top-bottom layout",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editor_overwrite_the_original_image",
+            "value":"Replace original",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"editor_save_as",
+            "value":"Save as new",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_crop_selected",
+            "value":"Crop is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_adjust_selected",
+            "value":"Adjust is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_selected",
+            "value":"Filters is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch_selected",
+            "value":"Celia Retouch is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_watermark_selected",
+            "value":"Watermarks is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_refinement",
+            "value":"Refine",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_refining",
+            "value":"Start",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"light",
+            "value":"Lighting",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"blurred",
+            "value":"Blur",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"composition",
+            "value":"Composition",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rebuild",
+            "value":"Re-generate",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"refining_switch_light_tips",
+            "value":"Switching lighting effects requires re-generation",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"refining_switch_blurred_tips",
+            "value":"Adjusting the blur effect requires re-generation",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice",
+            "value":"Bar to adjust background blur effect",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_0",
+            "value":"Background blur currently set to none",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_n",
+            "value":"Background blur currently set to level %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"contour_light",
+            "value":"Contour",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rembrandt_light",
+            "value":"Rembrandt",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"butterfly_light",
+            "value":"Butterfly",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"soft_light",
+            "value":"Soft",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"back_light",
+            "value":"Side",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"front_light",
+            "value":"Front",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_simple_elegant",
+            "value":"Elegant",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_brilliant",
+            "value":"Brilliant",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_dreams",
+            "value":"Dream",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_style",
+            "value":"Stylish",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sprightly",
+            "value":"Merry",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_softness",
+            "value":"Soft",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_soft",
+            "value":"Soft",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_vivid",
+            "value":"Vibrant",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_gorgeous",
+            "value":"Stunning",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_grumous",
+            "value":"Rich",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_strong",
+            "value":"Strong",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_refreshing",
+            "value":"Uplifting",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_brightly",
+            "value":"Bright",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_freshen",
+            "value":"Fresh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_whiten",
+            "value":"Fair",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_fuji",
+            "value":"Fuji",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_moonlight",
+            "value":"Moonlight",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_translucent",
+            "value":"Lucid",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sun_sets",
+            "value":"Sunset",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_can_not_refinement",
+            "value":"Portrait refinement is not available with this image.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_size_low",
+            "value":"Image resolution too low for this feature.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_without_refinement",
+            "value":"Portrait refinement is not available with this image.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_without_refinement_new",
+            "value":"Image does not meet requirements for portrait refinement.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_has_been_refined",
+            "value":"This image has already been refined.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_remove",
+            "value":"Remove",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_expand_image",
+            "value":"Expand",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_refining",
+            "value":"Refine",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_imageEdit",
+            "value":"Add text",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"text_style_imageEdit",
+            "value":"Text style",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"style_imageEdit",
+            "value":"Style",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_imageEdit",
+            "value":"Delete",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_text_imageEdit",
+            "value":"Tap to edit",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_hints_imageEdit",
+            "value":"Tap here to add text.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"best_expression_update_component",
+            "value":"This feature allows you to mix and match the best facial expressions from different photos in the same series. A plug-in update is required to use it.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"update_now",
+            "value":"Update now",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_identified_replace_face",
+            "value":"No replaceable face identified.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"best_expression_new_feature",
+            "value":"Try Best expression",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_face_fail",
+            "value":"Something went wrong. Select another image and try again.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_replace_emoticons",
+            "value":"Take multiple shots in a row to get alternate expressions.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aiproducer_best_expression",
+            "value":"Expressions",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_xt_style_imageEdit",
+            "value":"XMAGE",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_close_imageEdit",
+            "value":"No custom style",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_standard_imageEdit",
+            "value":"Standard",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"natural_style",
+            "value":"Natural",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_films_imageEdit",
+            "value":"Film",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_romance_imageEdit",
+            "value":"Cinema",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_anime_imageEdit",
+            "value":"Anime",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup",
+            "value":"Custom styles will be unavailable",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup_tip",
+            "value":"After using markup, you will no longer be able to adjust the custom style for this image. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup",
+            "value":"Note",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tip",
+            "value":"After using markup, you will no longer be able to adjust the virtual aperture or custom style for this image. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_close_imageEdit",
+            "value":"Undo: Disable custom style.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_xt_style_standard_imageEdit",
+            "value":"Undo: Standard.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_xt_style_films_imageEdit",
+            "value":"Undo: Film.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_xt_style_romance_imageEdit",
+            "value":"Undo: Cinema.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_anime_imageEdit",
+            "value":"Undo: Anime.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_close_imageEdit",
+            "value":"Redo: Disable custom style.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_standard_imageEdit",
+            "value":"Redo: Standard.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_films_imageEdit",
+            "value":"Redo: Film.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_romance_imageEdit",
+            "value":"Redo: Cinema.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_anime_imageEdit",
+            "value":"Redo: Anime.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup",
+            "value":"This will replace your current filter",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup_tip",
+            "value":"If you select a custom style, the current filter and adjustments you've made will be replaced. Replace?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup",
+            "value":"Custom styles will be unavailable",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup_tip",
+            "value":"After using AI retouch, you will no longer be able to adjust the custom style for this image. Continue anyway?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_haze_removal_imageEdit",
+            "value":"De-mist",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_haze_removal_imageEdit",
+            "value":"Undo: De-mist.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_haze_removal_imageEdit",
+            "value":"Redo: De-mist.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_haze_removal_selected_imageEdit",
+            "value":"De-mist selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_selected",
+            "value":"Lighting selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"blurred_selected",
+            "value":"Blur selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_selected",
+            "value":"Composition selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n_selected",
+            "value":"Composition %1$d selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n",
+            "value":"Composition %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light_selected",
+            "value":"Rembrandt selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"butterfly_light_selected",
+            "value":"Butterfly selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light_selected",
+            "value":"Side selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light_selected",
+            "value":"Front selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant_selected",
+            "value":"Elegant selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brilliant_selected",
+            "value":"Brilliant selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams_selected",
+            "value":"Dream selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_style_selected",
+            "value":"Stylish selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_sprightly_selected",
+            "value":"Merry selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_softness_selected",
+            "value":"Soft selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_soft_selected",
+            "value":"Soft selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid_selected",
+            "value":"Vibrant selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_gorgeous_selected",
+            "value":"Stunning selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous_selected",
+            "value":"Rich selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong_selected",
+            "value":"Strong selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_refreshing_selected",
+            "value":"Uplifting selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brightly_selected",
+            "value":"Bright selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen_selected",
+            "value":"Fresh selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_whiten_selected",
+            "value":"Fair selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_original_selected",
+            "value":"Original lighting selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_original_selected",
+            "value":"Original color selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_original_selected",
+            "value":"Original composition selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select_n",
+            "value":"Background blur has been adjusted, current level is %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select",
+            "value":"Background blur level adjustment slider, adjustable range from %1$d to %2$d, double tap to activate, double tap and hold, then drag left or right to adjust level",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_imageEdit",
+            "value":"Undo: Selection.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_confirm_selection_imageEdit",
+            "value":"Undo: Confirm selection.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_compose_imageEdit",
+            "value":"Undo: Generate.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_move_object_imageEdit",
+            "value":"Undo: Move object.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_copy_object_imageEdit",
+            "value":"Undo: Copy object.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_delete_object_imageEdit",
+            "value":"Undo: Delete object.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_object_imageEdit",
+            "value":"Undo: Adjust object.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_tier_object_imageEdit",
+            "value":"Undo: Adjust layer.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fill_imageEdit",
+            "value":"Filling…",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fusion_imageEdit",
+            "value":"Blending…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"draw_imageEdit",
+            "value":"Sketching…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"generation_imageEdit",
+            "value":"Generating…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_imageEdit",
+            "value":"Generate",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"picking",
+            "value":"Move",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_to_edit_imageEdit",
+            "value":"Tap an object to edit it",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_move_imageEdit",
+            "value":"The Move feature isn't available with this image.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"too_small_without_move_imageEdit",
+            "value":"Image dimensions are too small.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"regions_overlay_without_move_imageEdit",
+            "value":"An error occurred. Please reselect and try again.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"today_frequency_reached_upper_limit",
+            "value":"Usage limit reached for today.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"unavailable_move_imageEdit",
+            "value":"The Move feature isn't available.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"synthesis_failed_without_move_imageEdit",
+            "value":"Image generation failed. Please try again.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"timeout_without_move_imageEdit",
+            "value":"Server request timed out. Try again later.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"too_small_mask_without_move_imageEdit",
+            "value":"Selected area is too small. Please reselect.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"too_large_mask_without_move_imageEdit",
+            "value":"Selected area is too large. Please reselect.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"oversize_imageEdit",
+            "value":"Maximum number of objects reached.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_imageEdit",
+            "value":"Redo: Selection.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_confirm_selection_imageEdit",
+            "value":"Redo: Confirm selection.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_compose_imageEdit",
+            "value":"Redo: Generate.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_move_object_imageEdit",
+            "value":"Redo: Move object.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_copy_object_imageEdit",
+            "value":"Redo: Copy object.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_delete_object_imageEdit",
+            "value":"Redo: Delete object.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_object_imageEdit",
+            "value":"Redo: Adjust object.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_tier_object_imageEdit",
+            "value":"Redo: Adjust layer.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_move_toast_title",
+            "value":"Edits will be lost",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_move_toast_content",
+            "value":"Edits you've made will be discarded if you leave now. Leave anyway?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_imageEdit",
+            "value":"Bottom left corner of text box, double tap and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_imageEdit",
+            "value":"Top left corner of text box, double tap and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_imageEdit",
+            "value":"Bottom right corner of text box, double tap and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_imageEdit",
+            "value":"Top right corner of text box, double tap and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_white_imageEdit",
+            "value":"White",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_red_imageEdit",
+            "value":"Red",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_green_imageEdit",
+            "value":"Green",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_light_blue_imageEdit",
+            "value":"Light blue",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_dark_blue_imageEdit",
+            "value":"Dark blue",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_light_purple_imageEdit",
+            "value":"Light purple",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_black_imageEdit",
+            "value":"Black",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_imageEdit",
+            "value":"Selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light",
+            "value":"None",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"exit_imageEdit",
+            "value":"Leave",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"leave_imageEdit",
+            "value":"Leave",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"generation_image_imageEdit",
+            "value":"Processing…",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_move_bootstrapping",
+            "value":"Draw a line to select the subject",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_light_selected",
+            "value":"No lighting effect selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_imageEdit",
+            "value":"%1$s. Adjustable range is %2$d to %3$d degrees. Double tap and hold, then drag to adjust the angle.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn_desc",
+            "value":"Double tap and hold to compare image with the original",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_aperture_imageEdit",
+            "value":"Aperture",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_aperture_adjust",
+            "value":"Undo: Adjust aperture.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_aperture_adjust",
+            "value":"Redo: Adjust aperture.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_aperture_focus",
+            "value":"Undo: Focus position.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_aperture_focus",
+            "value":"Redo: Focus position.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup",
+            "value":"Aperture settings will be unavailable",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup_tip",
+            "value":"After using markup, you will no longer be able to adjust the aperture for this image. Continue anyway?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch",
+            "value":"Aperture settings will be unavailable",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch_tip",
+            "value":"After using AI retouch, you will no longer be able to adjust the aperture for this image. Continue anyway?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_cancel",
+            "value":"Cancel",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_continue",
+            "value":"Continue",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_aperture_selected",
+            "value":"Aperture selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_focus_change",
+            "value":"Switched focus position",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai",
+            "value":"Note",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_tip",
+            "value":"After using AI retouch, you will no longer be able to adjust the aperture or custom style for this image. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tips",
+            "value":"After using markup, you will no longer be able to adjust the aperture or custom style for this image. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bold_imageEdit",
+            "value":"Bold",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"italics_imageEdit",
+            "value":"Italic",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"underline_imageEdit",
+            "value":"Underline",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_select_imageEdit",
+            "value":"Double tap to select",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_toggle_imageEdit",
+            "value":"Double tap to switch",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"alignment_imageEdit",
+            "value":"Alignment",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_box_imageEdit",
+            "value":"Text box",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"double_click_edit_imageEdit",
+            "value":"Double tap to edit text",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_color_temperature_level",
+            "value":"Color temperature, level %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_saturation_level",
+            "value":"Saturation level %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_level",
+            "value":"Tone level %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_matrix_area",
+            "value":"Color tuning area. Drag horizontally to adjust the color temperature and vertically to adjust the saturation.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_slide_bar",
+            "value":"Tone level %1$d, adjustable range %2$d to %3$d. Double tap to apply, or double tap and hold, then drag up or down to change",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_default_template",
+            "value":"Default preset, color temperature %1$d, saturation %2$d, tone %3$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_xt_style_template",
+            "value":"Custom preset %1$d, color temperature %2$d, saturation %3$d, tone %4$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_reset_success",
+            "value":"Reset completed",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_intelligent_correction_imageEdit",
+            "value":"Straighten",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_intelligent_correction_on",
+            "value":"Straighten selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_picture_tilt_is_detected",
+            "value":"No slant detected.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_correct_intelligent_imageEdit",
+            "value":"Redo: Straighten.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_intelligent_imageEdit",
+            "value":"Undo: Straighten.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"yellow_imageEdit",
+            "value":"Yellow",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_imageEdit",
+            "value":"Button",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_mosicac",
+            "value":"Mosaic",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_eraser",
+            "value":"Eraser",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_typ_classic",
+            "value":"Classic mosaic pattern",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_weaving",
+            "value":"Weave mosaic pattern",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_star",
+            "value":"Star mosaic pattern",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_sky_blue",
+            "value":"Sky blue mosaic pattern",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_polka_dot",
+            "value":"Polka dot mosaic pattern",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_kaleidoscope",
+            "value":"Kaleidoscope mosaic pattern",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_cartoon",
+            "value":"Cartoon mosaic pattern",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_triangle",
+            "value":"Triangle mosaic pattern",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_color_block",
+            "value":"Color block mosaic pattern",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_edit_watermark_imageEdit",
+            "value":"Redo: Edit watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_edit_watermark_imageEdit",
+            "value":"Undo: Edit watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_selected_watermark_imageEdit",
+            "value":"Undo: Select watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_switch_watermark_imageEdit",
+            "value":"Undo: Switch watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_selected_watermark_imageEdit",
+            "value":"Redo: Select watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_switch_watermark_imageEdit",
+            "value":"Redo: Switch watermark.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_reflect_light",
+            "value":"De-glare",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_reflect_light",
+            "value":"Remove",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_can_not_reflect_light",
+            "value":"Glare reduction is not available with this image.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_xt_style_selected",
+            "value":"Custom styles is selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"none",
+            "value":"None",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_aperture",
+            "value":"aperture",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_style",
+            "value":"custom styles",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word",
+            "value":"Note",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_none",
+            "value":"Adding text will cause this image to become static.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_one",
+            "value":"Adding text will cause this image to become static, and the %1$s can no longer be adjusted.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_two",
+            "value":"Adding text will cause this image to become static, and the %1$s and %2$s can no longer be adjusted.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic",
+            "value":"Note",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_none",
+            "value":"Adding a mosaic will cause this image to become static.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_one",
+            "value":"Adding a mosaic will cause this image to become static, and the %1$s can no longer be adjusted.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_two",
+            "value":"Adding a mosaic will cause this image to become static, and the %1$s and %2$s can no longer be adjusted.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_none",
+            "value":"Drawing on this image will cause it to become static.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_one",
+            "value":"Drawing on this image will cause it to become static, and the %1$s can no longer be adjusted.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_two",
+            "value":"Drawing on this image will cause it to become static, and the %1$s and %2$s can no longer be adjusted.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_none",
+            "value":"Using AI retouch will cause this image to become static.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_one",
+            "value":"Using AI retouch will cause this image to become static, and the %1$s can no longer be adjusted.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_two",
+            "value":"Using AI retouch will cause this image to become static, and the %1$s and %2$s can no longer be adjusted.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_natural_style",
+            "value":"Undo: Natural.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_natural_style",
+            "value":"Redo: Natural.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"direction_left_top",
+            "value":"Top left corner",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_top",
+            "value":"Top right corner",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_bottom",
+            "value":"Bottom left corner",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_bottom",
+            "value":"Bottom right corner",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left",
+            "value":"Left edge",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right",
+            "value":"Right edge",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_top",
+            "value":"Top edge",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_bottom",
+            "value":"Bottom edge",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cutting_percentage",
+            "value":"Cut %2$s from the %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_one_pen",
+            "value":"Pause to form shape",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_one_pen",
+            "value":"Draw a shape in one stroke, then pause and it'll snap into a perfectly formed shape.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_title_lift_pen",
+            "value":"Lift to form shape",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_lift_pen",
+            "value":"Draw a shape in one stroke, then lift your stylus or finger and it'll snap into a perfectly formed shape.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_title_brush_adjusts",
+            "value":"Adjust brushes",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_brush_adjusts",
+            "value":"Double-tap on a brush to change its size and opacity.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_color_param_imageEdit",
+            "value":"Color info",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_imageEdit",
+            "value":"Custom watermark",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_on_imageEdit",
+            "value":"Custom watermark selected",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_select_param_imageEdit",
+            "value":"Select %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_close_param_imageEdit",
+            "value":"Deselect %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_display_param_imageEdit",
+            "value":"Show %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_selection",
+            "value":"Eraser",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"patches_selection",
+            "value":"Stickers",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_selection_to_edit_imageEdit",
+            "value":"Tap Auto or Manual to edit the selected area",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_picture",
+            "value":"Save as image",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_brush_thickness_selected",
+            "value":"Eraser size adjustment slider, size range from %1$d to %2$d, double tap to activate, double tap and hold, then drag left or right to adjust size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_eraser_after_imageEdit",
+            "value":"Select an object and try again.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_paint_text_announced",
+            "value":"Erased selected area",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_patches_object",
+            "value":"Select object",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_add_patches_imageEdit",
+            "value":"Undo: Add sticker.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_add_patches_imageEdit",
+            "value":"Redo: Add sticker.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_eraser_selection",
+            "value":"Undo: Eraser.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_eraser_selection",
+            "value":"Redo: Eraser.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_wise_selection",
+            "value":"Undo: Auto selection.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_wise_selection",
+            "value":"Redo: Auto selection.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_manual_selection",
+            "value":"Undo: Manual selection.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_manual_selection",
+            "value":"Redo: Manual selection.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_movement_imageEdit",
+            "value":"Movement",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_snapshot_effect",
+            "value":"Snapshot",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_panning_shot_effect",
+            "value":"Panning",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_panning_shot_effect",
+            "value":"Undo: Panning.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_panning_shot_effect",
+            "value":"Redo: Panning.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_snapshot_effect",
+            "value":"Undo: Snapshot.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_snapshot_effect",
+            "value":"Redo: Snapshot.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_no_effect",
+            "value":"Undo: No effect.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_no_effect",
+            "value":"Redo: No effect.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_movement",
+            "value":"movement effects",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_three",
+            "value":"Using AI retouch will cause the image to become static, and %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_three",
+            "value":"Doodling on the image will cause it to become static, and %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_three",
+            "value":"Adding a mosaic will cause the image to become static, and %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_three",
+            "value":"Adding text will cause the image to become static, and %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_one",
+            "value":"After using AI retouch, %1$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_two",
+            "value":"After using AI retouch, %1$s and %2$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_three",
+            "value":"After using AI retouch, %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_one",
+            "value":"After doodling, %1$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_two",
+            "value":"After doodling, %1$s and %2$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_three",
+            "value":"After doodling, %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_one",
+            "value":"After adding a mosaic effect, %1$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_two",
+            "value":"After adding a mosaic effect, %1$s and %2$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_three",
+            "value":"After adding a mosaic effect, %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_one",
+            "value":"After adding text, %1$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_two",
+            "value":"After adding text, %1$s and %2$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_three",
+            "value":"After adding text, %1$s, %2$s, and %3$s can no longer be adjusted. Continue anyway?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_ai_move_imageEdit",
+            "value":"Bottom left corner of editing box, double tap and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_ai_move_imageEdit",
+            "value":"Top left corner of editing box, double tap and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_ai_move_imageEdit",
+            "value":"Bottom right corner of editing box, double tap and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_ai_move_imageEdit",
+            "value":"Top right corner of editing box, double tap and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_ai_move_imageEdit",
+            "value":"%1$s, adjustable range is %2$d to %3$d degrees. Double tap and hold, then drag to adjust the angle",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_invisible",
+            "value":"%1$s button, unavailable",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_tone",
+            "value":"Tone",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_adjust",
+            "value":"Adjusted the grain value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_adjust",
+            "value":"Adjusted the exposure value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_adjust",
+            "value":"Adjusted the brightness value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_rulerScroller",
+            "value":"Aperture adjustment slider, slider range is F0.95 to F16. Touch and hold with both fingers then drag left or right to adjust the aperture value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection",
+            "value":"Horizontal angle slider, slider range is negative forty five degrees to forty five degrees. Touch and hold with both fingers then drag left or right to adjust the horizontal angle, the current angle is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_value",
+            "value":"Adjusted the Ethereal filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_adjust",
+            "value":"Adjusted the sharpness value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_adjust",
+            "value":"Adjusted the contrast value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation",
+            "value":"Rotation slider, slider range is negative forty five degrees to forty five degrees. Touch and hold with both fingers then drag left or right to adjust the rotation, the current rotation is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_bar",
+            "value":"Lucky filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Lucky filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_value_change",
+            "value":"Adjusted the aperture value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_100_100",
+            "value":"Color temperature adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the color temperature value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_value",
+            "value":"Adjusted the Rustic filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_value",
+            "value":"Adjusted the Twilight filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_100_100",
+            "value":"Hue adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the hue value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_100_100",
+            "value":"Vibrance adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the vibrance value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_adjust",
+            "value":"Adjusted the hue value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_100_100",
+            "value":"Highlight adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the highlight value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_bar",
+            "value":"Crystal filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Crystal filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_100_100",
+            "value":"Shadow adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the shadow value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_adjust",
+            "value":"Adjusted horizontal angle, the current angle is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_100_100",
+            "value":"Saturation adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the saturation value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_bar",
+            "value":"Warm filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Warm filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_adjust",
+            "value":"Adjusted the highlight value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_adjust",
+            "value":"Adjusted the fade value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_bar",
+            "value":"Ethereal filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Ethereal filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_adjust",
+            "value":"Adjusted vertical angle, the current angle is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_adjust",
+            "value":"Adjusted the shadow value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_adjust",
+            "value":"Adjusted the light area value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_value",
+            "value":"Adjusted the Monochrome filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_100_100",
+            "value":"Contrast adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the contrast value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_adjust",
+            "value":"Adjusted the saturation value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_imageEdit",
+            "value":"Rotation slider, slider range is negative forty five degrees to forty five degrees, double tap and hold then drag left or right to adjust the rotation, the current rotation is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_adjust",
+            "value":"Adjusted the dark area value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_bar",
+            "value":"Sweet filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Sweet filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_bar",
+            "value":"Twilight filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Twilight filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_100_100",
+            "value":"Auto adjust slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the auto adjust value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_100_100",
+            "value":"Dark area adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the dark area value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_adjust",
+            "value":"Adjusted the temperature value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_value",
+            "value":"Adjusted the Lucky filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection",
+            "value":"Vertical angle slider, slider range is negative forty five degrees to forty five degrees. Touch and hold with both fingers then drag left or right to adjust the vertical angle, the current angle is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_value",
+            "value":"Adjusted the Warm filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_100_100",
+            "value":"Light area adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the light area value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_0_100",
+            "value":"Sharpness adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the sharpness value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_100_100",
+            "value":"Vignette adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the vignette value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_bar",
+            "value":"Monochrome filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Monochrome filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_value",
+            "value":"Adjusted the Lime filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_value",
+            "value":"Adjusted the Sweet filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_100_100",
+            "value":"Exposure adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the exposure value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_0_100",
+            "value":"Fade adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the fade value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_value",
+            "value":"Adjusted the Neutral filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_adjust",
+            "value":"Adjusted the auto adjust value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_bar",
+            "value":"Neutral filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Neutral filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_adjust",
+            "value":"Adjusted the vibrance value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_adjust",
+            "value":"Adjusted rotation, the current rotation is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_0_100",
+            "value":"Grain adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the grain value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_imageEdit",
+            "value":"Vertical angle slider, slider range is negative forty five degrees to forty five degrees, double tap and hold then drag left or right to adjust the vertical angle, the current angle is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_imageEdit",
+            "value":"Horizontal angle slider, slider range is negative forty five degrees to forty five degrees, double tap and hold then drag left or right to adjust the horizontal angle, the current angle is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_value",
+            "value":"Adjusted the Crystal filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_bar",
+            "value":"Lime filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Lime filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_100_100",
+            "value":"Brightness adjustment slider, slider range is negative one hundred to one hundred, double tap and hold then drag left or right to adjust the brightness value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_adjust",
+            "value":"Adjusted the vignette value, the current value is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_bar",
+            "value":"Rustic filter intensity adjustment slider, slider range is zero to one hundred, double tap and hold then drag left or right to adjust the Rustic filter intensity, the current intensity is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_personality_style_imageEdit",
+            "value":"Custom styles",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup",
+            "value":"Show \"AI-generated\" tag?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"border_background_imageEdit",
+            "value":"Border",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_description",
+            "value":"The \"AI-generated\" tag indicates that the image contains AI-generated content. You can change this at any time in Gallery settings.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"capture_location_imageEdit",
+            "value":"Location",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_agree",
+            "value":"Show tag",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_watermark_imageEdit",
+            "value":"Holiday watermarks",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_disagree",
+            "value":"Don't show tag",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"beauty_Custom_imageEdit",
+            "value":"Custom",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_imageEdit",
+            "value":"Edit watermark",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_text_imageEdit",
+            "value":"Text",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_patterned_imageEdit",
+            "value":"Pattern",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_festival_seal_edit",
+            "value":"The Spring Festival watermark can't be edited once saved. Save now?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_national_seal_edit",
+            "value":"The National Day watermark can't be edited once saved. Save now?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_selected_new",
+            "value":"Brush size adjustment, adjustable range is %1$d to %2$d, double-tap and hold, then slide left or right to adjust",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_brush_thickness_selected_new",
+            "value":"Eraser size adjustment, adjustable range %1$d to %2$d, double-tap and hold, then slide left or right to adjust",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_color_temperature",
+            "value":"Temperature",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_saturation",
+            "value":"Saturation",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_bright_imageEdit",
+            "value":"Vivid",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_soft_imageEdit",
+            "value":"Bright",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_black_imageEdit",
+            "value":"Mono",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_bright_imageEdit",
+            "value":"Redo: Vivid.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_soft_imageEdit",
+            "value":"Redo: Bright.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_black_imageEdit",
+            "value":"Redo: Mono.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_bright_imageEdit",
+            "value":"Undo: Vivid.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_soft_imageEdit",
+            "value":"Undo: Bright.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_black_imageEdit",
+            "value":"Undo: Mono.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_editor_rotate_ninety_degrees_new",
+            "value":"Rotate %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_editor_mirror_image_new",
+            "value":"Mirror",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"free_crop_rotate_new",
+            "value":"Rotate",
+            "attr":{
+                "priority":"translate"
+            }
+      },
+        {
+            "name": "tip_aigc_removing",
+            "value": "Removing…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_material_loading",
+            "value": "Loading…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_emoj_replacing",
+            "value": "Replacing expression…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_draw_and_select",
+            "value": "Draw a line across an object to select it.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_click_and_remove_all",
+            "value": "Tap the button to remove selected content.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_intelligent",
+            "value": "Auto",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_manual",
+            "value": "Manual",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_expand_selection",
+            "value": "You can expand the selected area by swiping on the screen.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_remove_selection",
+            "value": "Swipe to cancel selection.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_click_intelli_manual_then_edit",
+            "value": "Tap Auto or Manual to edit the selected area.",
+            "attr": {
+                "priority": "translate"
+            }
+        }
+    ]
+}
