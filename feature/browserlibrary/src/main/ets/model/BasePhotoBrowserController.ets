@@ -147,7 +147,8 @@ import lazy {
 import lazy { WallpaperUtils } from '@ohos/common/src/main/ets/default/utils/WallpaperUtils';
 import lazy { EffectToggleHelper } from '@ohos/browsercommon/src/main/ets/default/utils/EffectToggleHelper';
 import lazy {
-  EffectPhotoContext, ShotForMoreContext
+  EffectPhotoContext,
+  ShotForMoreContext
 } from '@ohos/browsercommon/src/main/ets/default/utils/EffectPhotoContext';
 
 /* instrument ignore file */
@@ -2087,11 +2088,15 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
 
   public updateCurrentLanguage(): void {
     Log.info(TAG, 'updateCurrentLanguage aaaaa');
-    if (this.abilityStage) {
-      LocalStorage.getShared()?.setOrCreate('photoLibraryContext',
-        this.abilityStage?.createModuleContext('com.ohos.photobrowser', 'browserlibrary'));
+    try {
+      if (this.abilityStage) {
+        LocalStorage.getShared()?.setOrCreate('photoLibraryContext',
+          this.abilityStage?.createModuleContext('com.ohos.photobrowser', 'browserlibrary'));
+      }
+      this.updateActionBar(this.getCurrentIndex());
+    } catch (e) {
+      Log.e(TAG, e);
     }
-    this.updateActionBar(this.getCurrentIndex());
   }
 
   /**

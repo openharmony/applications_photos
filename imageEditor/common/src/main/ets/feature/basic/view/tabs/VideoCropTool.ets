@@ -16,7 +16,7 @@ import { ScaleSelection } from '../../common/view/ScaleSelection';
 import { RulerBar } from '../../../../common/components/RulerBar';
 import { App, BaseEditor, TabName } from '../../../../service/App';
 import { Asset, CropAttr, OperationTip, } from '../../../../service/BaseEditor';
-import { ButtonItem } from '../../common/view/SelectableProgressButton';
+import { ButtonItem, TextItem } from '../../common/view/SelectableProgressButton';
 import { HiLog } from '../../../../common/util/HiLog';
 import {
   ALT_RULER_END_OPT,
@@ -161,7 +161,7 @@ export struct VideoCropTool {
   @State scrollWidth: number = 260;
   @State operationTip: OperationTip = App.getInstance().myEditor().operationTip;
   @State optArray: number[] = new Array(this.cropsAttr.cropTabs.length).fill(1);
-  @State progressVal: number = this.cropsAttr.cropTabs[this.cropsAttr.cropMenuIndex].value;
+  @State progressVal: number = 0;
   @State @Watch('stopScrolling') editor: BaseEditor = App.getInstance().myEditor();
   @State asset: Asset = App.getInstance().myEditor().asset;
   @StorageProp(SCREEN_ORIENTATION_PORTRAIT) isScreenPortrait: boolean = ScreenManager.getInstance().isScreenPortrait();
@@ -213,7 +213,10 @@ export struct VideoCropTool {
     }
     this.progressVal = intelligentDegree;
     HiLog.i(TAG, 'executeIntelligentCorrection intelligentDegree:' + intelligentDegree)
-    let scrollValue: number = this.cropsAttr.cropTabs[CropIndex.ROTATE].value;
+    let scrollValue: number = 0;
+    if (this.cropsAttr.cropTabs.length > CropIndex.ROTATE) {
+      scrollValue = this.cropsAttr.cropTabs[CropIndex.ROTATE]?.value || 0;
+    }
     HiLog.i(TAG, 'executeIntelligentCorrection scrollValue:' + scrollValue)
     let distance: number = intelligentDegree - scrollValue;
     let sign: number = distance >= 0 ? 1 : -1;
@@ -236,7 +239,10 @@ export struct VideoCropTool {
     this.cropsAttr.isClickUndoRedo = false;
 
     this.moveDegree = 0;
-    this.originDegree = this.cropsAttr.cropTabs[CropIndex.ROTATE].value;
+    this.originDegree = 0;
+    if (this.cropsAttr.cropTabs.length > CropIndex.ROTATE) {
+      this.originDegree = this.cropsAttr.cropTabs[CropIndex.ROTATE]?.value || 0;
+    }
     let origin: number = this.originDegree;
     clearInterval(this.timer);
     this.timer = setInterval(() => this.executeAnimation(origin, distance, sign), 1);
@@ -251,7 +257,9 @@ export struct VideoCropTool {
       let degree: number = Number((exact + origin).toFixed(1));
       HiLog.i(TAG, 'executeAnimation distance: %{public}i', distance);
       // 智能校正实际是修改旋转值
-      this.cropsAttr.cropTabs[CropIndex.ROTATE].value = degree;
+      if (this.cropsAttr.cropTabs.length > CropIndex.ROTATE) {
+        this.cropsAttr.cropTabs[CropIndex.ROTATE]?.setChangeValues?.(degree, 1);
+      }
       this.cropsAttr.setRotation(this.cropsAttr.cropTabs[CropIndex.INTELLIGENT].key, degree);
     } else {
       // 旋转结束后赋值
@@ -278,6 +286,14 @@ export struct VideoCropTool {
   }
 
   aboutToAppear() {
+    // 确保cropMenuIndex在有效范围内
+    if (this.cropsAttr.cropMenuIndex >= this.cropsAttr.cropTabs.length) {
+      this.cropsAttr.cropMenuIndex = this.cropsAttr.cropTabs.length - 1;
+    }
+    // 初始化progressVal
+    if (this.cropsAttr.cropTabs.length > 0 && this.cropsAttr.cropMenuIndex < this.cropsAttr.cropTabs.length) {
+      this.progressVal = this.cropsAttr.cropTabs[this.cropsAttr.cropMenuIndex].value;
+    }
     this.cropsAttr.switchCropPage(this.cropsAttr.cropMenuIndex);
     this.cropsAttr.isClickUndoRedo = false;
   }
@@ -351,22 +367,12 @@ export struct VideoCropTool {
       alignItems:ItemAlign.Center,
       space: {main: LengthMetrics.px(10)}
     }) {
-      if (this.isScreenPortrait) { //UX要求横屏时镜像在前，旋转在后。同时需要保证TAB走焦顺序
-        this.rotateBtn()
-      } else {
-        this.mirrorBtn();
-      }
       if (this.cropsAttr.cropMenuIndex !== CropIndex.INTELLIGENT) {
         if (this.isRulerScroller()) {
           this.rulerScroller();
         } else {
           this.cropRatio();
         }
-      }
-      if (this.isScreenPortrait) { //UX要求横屏时镜像在前，旋转在后。同时需要保证TAB走焦顺序
-        this.mirrorBtn()
-      } else {
-        this.rotateBtn();
       }
     }
     .width(this.isScreenPortrait ? '100%' : 56)
@@ -383,9 +389,7 @@ export struct VideoCropTool {
   }
 
   isRulerScroller(): boolean {
-    return (this.cropsAttr.cropMenuIndex === CropIndex.ROTATE ||
-      this.cropsAttr.cropMenuIndex === CropIndex.HORIZONTAL ||
-      this.cropsAttr.cropMenuIndex === CropIndex.VERTICAL) && !this.cropsAttr.enableRatio;
+    return false;
   }
 
   getStartOptNum() {
@@ -452,7 +456,7 @@ export struct VideoCropTool {
             this.scrollVibrate(scrollVal, isFastScroll);
             this.operationTip.value = Math.round(val).toString();
             /* instrument ignore if */
-            if (this.cropsAttr.cropMenuIndex === CropIndex.RATIO || this.isClick) {
+            if (this.cropsAttr.cropMenuIndex === 3 || this.isClick) {
               // 解决刻度条惯性滑动过程中切换比例页crash
               return;
             }
@@ -500,9 +504,10 @@ export struct VideoCropTool {
     .id('petalclip_CropTool_rulerScroller')
     .accessibilityLevel('yes')
     .accessibilityText((this.cropsAttr.cropMenuIndex === 0 ||
+      this.cropsAttr.cropScrollerTexts.length === 0 ||
       this.cropsAttr.cropMenuIndex - 1 >= this.cropsAttr.cropScrollerTexts.length)
       ? ''
-      : this.cropsAttr.cropScrollerTexts[this.cropsAttr.cropMenuIndex - 1]?.getString(this.progressVal)
+      : (this.cropsAttr.cropScrollerTexts[this.cropsAttr.cropMenuIndex - 1] as TextItem)?.getString(this.progressVal) || ''
     )
     .centerStyle();
   }
@@ -536,9 +541,10 @@ export struct VideoCropTool {
       this.editor.isShowRevert = !this.editor.isEdited();
     }
     if (accessibility.isOpenAccessibilitySync() && this.cropsAttr.cropMenuIndex > 0 &&
+      this.cropsAttr.cropAngleAdjustmentTexts.length > 0 &&
       this.cropsAttr.cropMenuIndex - 1 < this.cropsAttr.cropAngleAdjustmentTexts.length) {
-      const text =
-        this.cropsAttr.cropAngleAdjustmentTexts[this.cropsAttr.cropMenuIndex - 1]?.getString(this.progressVal) || '';
+      const text: string =
+        (this.cropsAttr.cropAngleAdjustmentTexts[this.cropsAttr.cropMenuIndex - 1] as TextItem)?.getString(this.progressVal) || '';
       let eventInfo: accessibility.EventInfo = ({
         type: 'announceForAccessibility',
         bundleName: 'com.ohos.photos',
@@ -684,7 +690,7 @@ export struct VideoCropTool {
         }) {
           Blank()
           ForEach(this.cropsAttr.cropTabs, (item: ButtonItem, index?: number) => {
-            if (index !== undefined && (index !== CropIndex.INTELLIGENT || this.intelligentCorrectionStatus)) {
+            if (index !== undefined && item.state !== 2 && (index !== CropIndex.INTELLIGENT || this.intelligentCorrectionStatus)) {
               Stack({ alignContent: Alignment.Center }) {
                 this.menuItem(item, index);
               }
@@ -714,8 +720,8 @@ export struct VideoCropTool {
                 }
                 this.editor.asset.overSizePrompt();
                 // instrument ignore if
-                if (index === undefined) {
-                  HiLog.e(TAG, 'unexpected scroll index');
+                if (index === undefined || item.state === 2) {
+                  HiLog.e(TAG, 'unexpected scroll index or disabled button');
                   return;
                 }
                 // 重复点击非智能校正按钮
@@ -724,7 +730,7 @@ export struct VideoCropTool {
                   return;
                 }
                 this.cropsAttr.cropMenuIndex = index;
-                this.cropsAttr.enableRatio = (index === CropIndex.RATIO);
+                this.cropsAttr.enableRatio = (index === CropIndex.VERTICAL);
                 this.cropsAttr.isScrolling = false;
                 if (this.progressVal != this.cropsAttr.cropTabs[this.cropsAttr.cropMenuIndex].value) {
                   this.progressVal = this.cropsAttr.cropTabs[this.cropsAttr.cropMenuIndex].value;
@@ -733,7 +739,7 @@ export struct VideoCropTool {
                 if (index === CropIndex.INTELLIGENT) {
                   if (this.selectedState === 1) {
                     this.selectedState = 0;
-                    this.cropsAttr.cropTabs[CropIndex.ROTATE].value = 0;
+                    this.cropsAttr.cropTabs[CropIndex.INTELLIGENT].value = 0;
                     this.cropsAttr.setRotation(this.cropsAttr.cropTabs[CropIndex.INTELLIGENT].key, 0);
                   } else {
                     this.selectedState = 1;
@@ -837,7 +843,7 @@ export struct VideoCropTool {
 
           value = value === -2 ? this.getPaveRatio() : value;
           this.cropsAttr.ratio = ratio;
-          this.cropsAttr.cropMenuIndex = CropIndex.RATIO;
+          this.cropsAttr.cropMenuIndex = CropIndex.VERTICAL;
           this.editor.timeline.timeProgressImmersiveMode = true;
           ratioCropTimeFn = setTimeout((): void => {
             this.editor.timeline.timeProgressImmersiveMode = false;

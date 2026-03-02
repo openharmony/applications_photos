@@ -693,18 +693,18 @@ export class TextInputData {
    * 吸附角度的振动
    */
   Vibrations(vibrationsStatus: boolean) {
+    HiLog.i(TAG, `vibrationsStatusxxx${vibrationsStatus}`);
     /* instrument ignore if */
     if (vibrationsStatus) {
       return;
     }
     try {
       vibrator.startVibration({
-        type: 'preset',
-        effectId: 'haptic.slide',
-        count: 1,
+        type: 'time',
+        duration:100
       }, {
         id: 0,
-        usage: 'alarm',
+        usage: 'touch',
       }, (error: BusinessError) => {
         /* instrument ignore if */
         if (error) {
