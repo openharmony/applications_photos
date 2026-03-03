@@ -575,6 +575,10 @@ export enum CropIndex {
   RATIO = 4 // 比例
 }
 
+export const CROP_PAVE_SCREEN_TAG: number = -2;
+
+export const CROP_RATIO_MENU_INDEX: number = 3;
+
 export const EPSILON: number = 1e-6;
 
 export const ONE_DAY_MS: number = 24 * 60 * 60 * 1000;

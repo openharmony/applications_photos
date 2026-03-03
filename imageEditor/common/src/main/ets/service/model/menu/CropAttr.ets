@@ -29,7 +29,7 @@ import { ScreenManager, } from '../../../common/util/ScreenManager';
 import { ScreenUtil } from '../../../common/util/ScreenUtil';
 import performanceMonitor from '@ohos.arkui.performanceMonitor';
 import { TextInterval } from '../tabTextEdit/util/TextConst';
-import { CropIndex } from '../../../common/const';
+import { CROP_RATIO_MENU_INDEX } from '../../../common/const';
 import {
   ApsUtil,
   APS_SCENE_STATE_ON,
@@ -84,7 +84,7 @@ export class CropAttr extends MenuAttr {
   public isClickUndoRedo: boolean = false;
   public redoCropItem: string = '';
   public isDragCrop: boolean = false; // 是否正在拖动裁剪框
-  public cropMenuIndex: number = CropIndex.VERTICAL; // 比例功能的新索引
+  public cropMenuIndex: number = CROP_RATIO_MENU_INDEX; // 比例功能的新索引
   public isEnableMask: boolean = true; // 旋转过程中隐藏蒙层，避免遮挡预览区
   public isEnableBlur: boolean = true;
   public correctionValue: number = 361;

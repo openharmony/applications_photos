@@ -22,6 +22,8 @@ import {
   ALT_RULER_END_OPT,
   ALT_RULER_START_OPT,
   AppColor,
+  CROP_PAVE_SCREEN_TAG,
+  CROP_RATIO_MENU_INDEX,
   CROP_ROT_MIR_SIZE,
   DEVICE_FOLD_STATUS,
   FOLD_PHONE_RULER_END_OPT,
@@ -456,7 +458,7 @@ export struct VideoCropTool {
             this.scrollVibrate(scrollVal, isFastScroll);
             this.operationTip.value = Math.round(val).toString();
             /* instrument ignore if */
-            if (this.cropsAttr.cropMenuIndex === 3 || this.isClick) {
+            if (this.cropsAttr.cropMenuIndex === CROP_RATIO_MENU_INDEX || this.isClick) {
               // 解决刻度条惯性滑动过程中切换比例页crash
               return;
             }
@@ -730,7 +732,7 @@ export struct VideoCropTool {
                   return;
                 }
                 this.cropsAttr.cropMenuIndex = index;
-                this.cropsAttr.enableRatio = (index === CropIndex.VERTICAL);
+                this.cropsAttr.enableRatio = (index === CROP_RATIO_MENU_INDEX);
                 this.cropsAttr.isScrolling = false;
                 if (this.progressVal != this.cropsAttr.cropTabs[this.cropsAttr.cropMenuIndex].value) {
                   this.progressVal = this.cropsAttr.cropTabs[this.cropsAttr.cropMenuIndex].value;
@@ -739,7 +741,7 @@ export struct VideoCropTool {
                 if (index === CropIndex.INTELLIGENT) {
                   if (this.selectedState === 1) {
                     this.selectedState = 0;
-                    this.cropsAttr.cropTabs[CropIndex.INTELLIGENT].value = 0;
+                    this.cropsAttr.cropTabs[CropIndex.INTELLIGENT].value = CropIndex.INTELLIGENT;
                     this.cropsAttr.setRotation(this.cropsAttr.cropTabs[CropIndex.INTELLIGENT].key, 0);
                   } else {
                     this.selectedState = 1;
@@ -841,9 +843,9 @@ export struct VideoCropTool {
           this.editor.asset.overSizePrompt();
           HiLog.i(TAG, `cropRatio value: ${value} ratio: ${ratio} index: ${index}`);
 
-          value = value === -2 ? this.getPaveRatio() : value;
+          value = value === CROP_PAVE_SCREEN_TAG ? this.getPaveRatio() : value;
           this.cropsAttr.ratio = ratio;
-          this.cropsAttr.cropMenuIndex = CropIndex.VERTICAL;
+          this.cropsAttr.cropMenuIndex = CROP_RATIO_MENU_INDEX;
           this.editor.timeline.timeProgressImmersiveMode = true;
           ratioCropTimeFn = setTimeout((): void => {
             this.editor.timeline.timeProgressImmersiveMode = false;
