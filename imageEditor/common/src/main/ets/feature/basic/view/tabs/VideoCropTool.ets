@@ -456,7 +456,7 @@ export struct VideoCropTool {
             this.scrollVibrate(scrollVal, isFastScroll);
             this.operationTip.value = Math.round(val).toString();
             /* instrument ignore if */
-            if (this.cropsAttr.cropMenuIndex === 3 || this.isClick) {
+            if (this.cropsAttr.cropMenuIndex === CropIndex.RATIO || this.isClick) {
               // 解决刻度条惯性滑动过程中切换比例页crash
               return;
             }
