@@ -57,15 +57,19 @@ export default class MainAbility extends Ability {
   private isOnDestroy: boolean = false;
   private localStorage: LocalStorage = new LocalStorage();
   private thirdRouterPageFunc: () => {} = () => this.thirdRouterPage();
+  private isUserFileManagerAccessCreated: boolean = false;
+  private isThirdRouterJumped: boolean = false;
 
   onCreate(want: Want, param: AbilityConstant.LaunchParam): void {
     AppStorage.setOrCreate('photosAbilityContext', this.context);
     AppStorage.setOrCreate('formContext', this.context);
     this.isOnDestroy = false;
+    this.isUserFileManagerAccessCreated = false;
+    this.isThirdRouterJumped = false;
     this.initPhotosPref();
 
     this.parseWantParameter(false, want);
-
+    appBroadCast.on(BroadCastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPageFunc);
     setTimeout(() => {
       UserFileManagerAccess.getInstance()
         .onCreate(AppStorage.get<common.UIAbilityContext>('photosAbilityContext'), (isForced?: boolean) => {
@@ -78,8 +82,11 @@ export default class MainAbility extends Ability {
           if (!isFromCard && !isFromCamera) {
             TimelineDataSourceManager.getInstance();
           }
-          appBroadCast.on(BroadCastConstants.THIRD_ROUTE_PAGE, this.thirdRouterPageFunc);
           UserFileManagerAccess.getInstance().prepareSystemAlbums();
+          this.isUserFileManagerAccessCreated = true;
+          if (!this.isThirdRouterJumped) {
+            this.thirdRouterPage();
+          }
         });
     }, 0); // Init system album information
     Log.info(TAG, 'Application onCreate end');
@@ -226,6 +233,11 @@ export default class MainAbility extends Ability {
   }
 
   async thirdRouterPage() {
+    if (!this.isUserFileManagerAccessCreated) {
+      Log.info(TAG, `thirdRouterPage isUserFileManagerAccessCreated false`);
+      return;
+    }
+    this.isThirdRouterJumped = true;
     let entryFrom = AppStorage.Get('entryFromHap');
     Log.info(TAG, `thirdRouterPage entryFromHap: ${entryFrom}`);
     if (entryFrom == Constants.ENTRY_FROM_NONE) {
