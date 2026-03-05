@@ -1537,7 +1537,15 @@ export struct PhotoItem {
       // png格式图片使用astc图代替LCD图
       return this.getPlaceHolderImage();
     }
-    return this.thumbnail.url;
+    let lcdUrl: string = this.thumbnail.url;
+    if (EditorPhotoContext.getInstance().getNotifyHideEditor()) {
+      if (this.item?.getDateModified?.()) {
+        lcdUrl += `${lcdUrl.includes('?') ? '&' : '?'}timestampApp=${this.item?.getDateModified?.()}&forceupdate=true`;
+      } else {
+        lcdUrl += `${lcdUrl.includes('?') ? '&' : '?'}timestampApp=${Date.now()}&forceupdate=true`;
+      }
+    }
+    return lcdUrl;
   }
 
   private getActualPixelMapImage(): image.PixelMap | undefined {
@@ -2872,7 +2880,7 @@ export struct PhotoItem {
     this.appBroadCast.on(BrowserConstants.MOVING_PHOTO_ON_COMPLETE, this.movingPhotoOnCompleteFunc);
     this.appBroadCast.on(BrowserConstants.PHOTO_PHOTO_BACK_PRESS, this.backPressEventFunc);
     this.appBroadCast.on(BroadCastConstants.RECOVER_SHOW_RESOURCE, this.recoverImageShowSourceFunc);
-    this.broadCast.on(BroadCastConstants.EDITOR_SAVE_BACK_PHOTOITEM, this.editorBackPhotoItemFunc);
+    this.appBroadCast.on(BroadCastConstants.EDITOR_SAVE_BACK_PHOTOITEM, this.editorBackPhotoItemFunc);
     this.appBroadCast.on(BroadCastConstants.CAST_UPDATE_POSITION + this.item.uri, this.updateCastMPosition);
     this.broadCast.on(BrowserConstants.DATA_SIZE_CHANGED, this.onDataSizeChangedFunc);
   }
@@ -2920,7 +2928,7 @@ export struct PhotoItem {
     this.appBroadCast.off(BrowserConstants.PHOTO_PHOTO_BACK_PRESS, this.backPressEventFunc);
     this.appBroadCast.off(BroadCastConstants.FIRST_CLICK_TO_PLAY_VIDEO + this.item.uri, this.handlePauseClickFunc);
     this.appBroadCast.off(BroadCastConstants.RECOVER_SHOW_RESOURCE, this.recoverImageShowSourceFunc);
-    this.broadCast.off(BroadCastConstants.EDITOR_SAVE_BACK_PHOTOITEM, this.editorBackPhotoItemFunc);
+    this.appBroadCast.off(BroadCastConstants.EDITOR_SAVE_BACK_PHOTOITEM, this.editorBackPhotoItemFunc);
     this.appBroadCast.off(BroadCastConstants.CAST_UPDATE_POSITION + this.item.uri, this.updateCastMPosition);
     this.broadCast.off(BrowserConstants.DATA_SIZE_CHANGED, this.onDataSizeChangedFunc);
   }
@@ -3593,6 +3601,9 @@ export struct PhotoItem {
   }
 
   private getImageSource(): image.PixelMap | string | undefined {
+    if (this.isEditorBack && EditorPhotoContext.getInstance().getNotifyHideEditor()) {
+      this.imageShowStringSource = this.getActualStringImage();
+    }
     if (this.isEditorBack) {
       return this.getImageShowStringSourceByTemper();
     }

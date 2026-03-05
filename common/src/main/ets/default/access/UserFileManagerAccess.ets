@@ -2006,8 +2006,7 @@ export class UserFileManagerAccess {
         predicates: predicates,
         fetchColumns: [],
       };
-      fetchResult = await this.photoAccessHelper.getAlbums(Constants.SOURCE_QUERY_TYPE,
-        Constants.SOURCE_QUERY_SUB_TYPE, systemFetchOption);
+      fetchResult = await this.photoAccessHelper.getPhotoAlbums(systemFetchOption);
       const count: number = fetchResult?.getCount();
       Log.info(TAG, `getSourceAlbumsCount: ${count}`);
       return count;
@@ -3027,8 +3026,7 @@ export class UserFileManagerAccess {
     try {
       let fetchOpt = AlbumDefine.getAlbumFetchOptByUri(albumUri);
       // Waiting: 支持不传入type时删掉
-      fetchResult = await this.photoAccessHelper.getAlbums(Constants.SOURCE_QUERY_TYPE,
-        Constants.SOURCE_QUERY_SUB_TYPE,fetchOpt);
+      fetchResult = await this.photoAccessHelper.getPhotoAlbums(fetchOpt);
       if (!fetchResult) {
         Log.warn(TAG, 'getAlbumByUri return null');
         return undefined;
@@ -3069,8 +3067,7 @@ export class UserFileManagerAccess {
         predicates: predicates,
         fetchColumns: [],
       };
-      fetchResult = await helper.getAlbums(Constants.SOURCE_QUERY_TYPE,
-        Constants.SOURCE_QUERY_SUB_TYPE,fetchOpt);
+      fetchResult = await helper.getPhotoAlbums(fetchOpt);
       if (!fetchResult) {
         Log.warn(TAG, 'getAlbum return null');
         return undefined;
@@ -3139,8 +3136,7 @@ export class UserFileManagerAccess {
     }
     let fetchResult: photoAccessHelper.FetchResult<PhotoAlbum> | undefined = undefined;
     try {
-      fetchResult = await this.photoAccessHelper.getAlbums(Constants.SOURCE_QUERY_TYPE,
-        Constants.SOURCE_QUERY_SUB_TYPE,fetchOption);
+      fetchResult = await this.photoAccessHelper.getPhotoAlbums(fetchOption);
       if (!fetchResult) {
         Log.warn(TAG, 'getAlbums return null');
         return [];
@@ -3678,8 +3674,7 @@ export class UserFileManagerAccess {
       };
 
       // 执行查询并获取查询结果
-      fetchResult = await this.photoAccessHelper.getAlbums(Constants.SOURCE_QUERY_TYPE,
-        Constants.SOURCE_QUERY_SUB_TYPE, systemFetchOption);
+      fetchResult = await this.photoAccessHelper.getPhotoAlbums(systemFetchOption);
       if (fetchResult.getCount() > 0) {
         result = await fetchResult.getAllObjects();
       }
@@ -4513,8 +4508,7 @@ export class UserFileManagerAccess {
         predicates: predicates,
         fetchColumns: [photoAccessHelper.AlbumKeys.UPLOAD_STATUS],
       };
-      fetchResult = await helper.getAlbums(Constants.SOURCE_QUERY_TYPE,
-        Constants.SOURCE_QUERY_SUB_TYPE,fetchOpt);
+      fetchResult = await helper.getPhotoAlbums(fetchOpt);
       if (!fetchResult) {
         Log.warn(TAG, 'return null');
         return countNum;

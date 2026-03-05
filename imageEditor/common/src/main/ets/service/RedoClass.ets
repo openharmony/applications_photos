@@ -283,15 +283,13 @@ export class RulerRedoClass extends RedoClass {
       HiLog.e(TAG, 'rulerVal is empty!');
       return;
     }
+    // 移除了自由旋转功能，跳过相关操作
     if (rulerVal.intelligentCorrection !== undefined) {
-      this.cropAttr.rotation.originalValue = this.cropAttr.cropTabs[CropIndex.ROTATE].value;
-      this.cropAttr.redoCropItem = 'rotation';
-      this.cropAttr.cropTabs[CropIndex.ROTATE].value = rulerVal.intelligentCorrection;
+      // 智能校正现在直接作用于智能校正按钮
+      this.cropAttr.redoCropItem = 'intelligentCorrection';
     }
     if (rulerVal.rotation !== undefined) {
-      this.cropAttr.rotation.originalValue = this.cropAttr.cropTabs[CropIndex.ROTATE].value;
-      this.cropAttr.redoCropItem = 'rotation';
-      this.cropAttr.cropTabs[CropIndex.ROTATE].value = rulerVal.rotation;
+      // 跳过自由旋转操作
     }
     if (rulerVal.horizontalCorrection !== undefined) {
       this.cropAttr.horizontalCorrection.originalValue = this.cropAttr.cropTabs[CropIndex.HORIZONTAL].value;

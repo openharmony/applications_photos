@@ -29,7 +29,7 @@ import { ScreenManager, } from '../../../common/util/ScreenManager';
 import { ScreenUtil } from '../../../common/util/ScreenUtil';
 import performanceMonitor from '@ohos.arkui.performanceMonitor';
 import { TextInterval } from '../tabTextEdit/util/TextConst';
-import { CropIndex } from '../../../common/const';
+import { CROP_RATIO_MENU_INDEX } from '../../../common/const';
 import {
   ApsUtil,
   APS_SCENE_STATE_ON,
@@ -84,19 +84,17 @@ export class CropAttr extends MenuAttr {
   public isClickUndoRedo: boolean = false;
   public redoCropItem: string = '';
   public isDragCrop: boolean = false; // 是否正在拖动裁剪框
-  public cropMenuIndex: number = CropIndex.ROTATE;
+  public cropMenuIndex: number = CROP_RATIO_MENU_INDEX; // 比例功能的新索引
   public isEnableMask: boolean = true; // 旋转过程中隐藏蒙层，避免遮挡预览区
   public isEnableBlur: boolean = true;
   public correctionValue: number = 361;
   public cropTabs = [
     new ButtonItem($r('app.string.crop_intelligent_correction_imageEdit'),
       $r('app.media.intelligent_correction'), false, 'intelligentCorrection', -45, 45, 1),
-    new ButtonItem($r('app.string.free_crop_rotate_new'),
-      $r('app.media.free_rotation'), false, 'rotation', -45, 45, 1),
     new ButtonItem($r('app.string.crop_horizontal_correction_imageEdit'),
-      $r('sys.symbol.trapezoid_and_line_horizontal'), true, 'horizontalCorrection', -45, 45, 1),
+      $r('sys.symbol.trapezoid_and_line_horizontal'), true, 'horizontalCorrection', -45, 45, 1, 2, 0, true, false),
     new ButtonItem($r('app.string.crop_vertical_correction_imageEdit'),
-      $r('sys.symbol.trapezoid_and_line_vertical'), true, 'verticalCorrection', -45, 45, 1),
+      $r('sys.symbol.trapezoid_and_line_vertical'), true, 'verticalCorrection', -45, 45, 1, 2, 0, true, false),
     new ButtonItem($r('app.string.crop_ratio_imageEdit'), $r('sys.symbol.aspect_ratio'), true, 'ratio', 0, 100, 1)
   ]
   public tabTexts = [
@@ -109,20 +107,17 @@ export class CropAttr extends MenuAttr {
   ]
   public cropTexts = [
     new TextItem($r('app.string.cropTab_intelligent_correction_on'), 'intelligentCorrection'),
-    new TextItem($r('app.string.cropTab_rotation_on'), 'rotation'),
     new TextItem($r('app.string.cropTab_horizontalCorrection_on'), 'horizontalCorrection'),
     new TextItem($r('app.string.cropTab_verticalCorrection_on'), 'verticalCorrection'),
     new TextItem($r('app.string.cropTab_ratio_on'), 'ratio')
   ]
   public cropScrollerTexts = [
-    new TextItem((...params) => $r('app.string.voice_crop_rulerScroller_rotation_imageEdit', ...params), 'rotation'),
     new TextItem((...params) => $r('app.string.voice_crop_rulerScroller_horizontalCorrection_imageEdit', ...params),
       'horizontalCorrection'),
     new TextItem((...params) => $r('app.string.voice_crop_rulerScroller_verticalCorrection_imageEdit', ...params),
       'verticalCorrection'),
   ]
   public cropAngleAdjustmentTexts = [
-    new TextItem((...params) => $r('app.string.voice_crop_rulerScroller_rotation_adjust', ...params), 'rotation'),
     new TextItem((...params) => $r('app.string.voice_crop_rulerScroller_horizontalCorrection_adjust', ...params),
       'horizontalCorrection'),
     new TextItem((...params) => $r('app.string.voice_crop_rulerScroller_verticalCorrection_adjust', ...params),

@@ -74,10 +74,10 @@ export struct TextEditItem {
     .getIsAccessibilityMode();
   @State scaleValueX: number =
     this.isPortrait || (DeviceUtil.isFoldable() && !ScreenManager.getInstance().isDeviceFold()) ?
-    1 : this.portraitScale.scaleValueX;
+      1 : this.portraitScale.scaleValueX;
   @State scaleValueY: number =
     this.isPortrait || (DeviceUtil.isFoldable() && !ScreenManager.getInstance().isDeviceFold()) ?
-    1 : this.portraitScale.scaleValueY;
+      1 : this.portraitScale.scaleValueY;
   @Prop isGestureRunning: boolean;
   @Consume rotateScale: number;
   private undoRedoManager: UndoRedoManager = UndoRedoManager.getInstance();
@@ -251,10 +251,10 @@ export struct TextEditItem {
         this.dealTouchMove(event, isResize, resizeDirection, scaleValue);
       }
     } else if (touchType === TouchType.Up) {
-      // let movePoint = this.dealTouchUp(event, scaleValue);
-      // if (movePoint.x === 0 && movePoint.y === 0) {
-      //   return;
-      // }
+      let movePoint = this.dealTouchUp(event, scaleValue);
+      if (movePoint.x === 0 && movePoint.y === 0) {
+        return;
+      }
       this.reportMsg(isResize);
     } else if (touchType === TouchType.Cancel) {
       HiLog.i(TAG, 'TextEditItem dealTouch Cancel');
@@ -392,7 +392,7 @@ export struct TextEditItem {
       .borderRadius(Constants.RESIZE_ICON_HEIGHT / 2)
       .backgroundColor(this.isShowBorder && this.textArea.isShownBorder ? Color.White : Color.Transparent)
       .shadow(this.textArea.editState === 1 && this.isShowBorder && this.textArea.isShownBorder ?
-      Constants.borderShadow : { radius: 0 })
+        Constants.borderShadow : { radius: 0 })
       .direction(Direction.Ltr)
       .accessibilityLevel('yes')
       .accessibilityText($r('app.string.upper_left_zoom_imageEdit'))
@@ -434,7 +434,7 @@ export struct TextEditItem {
       .borderRadius(Constants.RESIZE_ICON_HEIGHT / 2 * this.textInputData.dpiRatio)
       .backgroundColor(this.isShowBorder && this.textArea.isShownBorder ? Color.White : Color.Transparent)
       .shadow(this.textArea.editState === 1 && this.isShowBorder && this.textArea.isShownBorder ?
-      Constants.borderShadow : { radius: 0 })
+        Constants.borderShadow : { radius: 0 })
       .direction(Direction.Ltr)
       .accessibilityLevel('yes')
       .accessibilityText($r('app.string.upper_right_zoom_imageEdit'))
@@ -476,7 +476,7 @@ export struct TextEditItem {
       .borderRadius(Constants.RESIZE_ICON_HEIGHT / 2)
       .backgroundColor(this.isShowBorder && this.textArea.isShownBorder ? Color.White : Color.Transparent)
       .shadow(this.textArea.editState === 1 && this.isShowBorder && this.textArea.isShownBorder ?
-      Constants.borderShadow : { radius: 0 })
+        Constants.borderShadow : { radius: 0 })
       .direction(Direction.Ltr)
       .accessibilityLevel('yes')
       .accessibilityText($r('app.string.bottom_right_zoom_imageEdit'))
@@ -518,7 +518,7 @@ export struct TextEditItem {
       .borderRadius(Constants.RESIZE_ICON_HEIGHT / 2)
       .backgroundColor(this.isShowBorder && this.textArea.isShownBorder ? Color.White : Color.Transparent)
       .shadow(this.textArea.editState === 1 && this.isShowBorder && this.textArea.isShownBorder ?
-      Constants.borderShadow : { radius: 0 })
+        Constants.borderShadow : { radius: 0 })
       .direction(Direction.Ltr)
       .accessibilityLevel('yes')
       .accessibilityText($r('app.string.bottom_left_zoom_imageEdit'))
@@ -801,7 +801,7 @@ export struct TextEditItem {
       .constraintSize({
         maxWidth: this.textInputData.getTextMaxWidth(),
         minWidth: (this.textInputData.isNewTextView ?
-        this.textArea.width : this.textInputData.getTextMinWidth()),
+          this.textArea.width : this.textInputData.getTextMinWidth()),
         minHeight: this.textArea.height,
         maxHeight: this.textInputData.getTextMaxHeight(),
       })
@@ -865,7 +865,7 @@ export struct TextEditItem {
           return;
         }
         this.changeTextSpan(this.textArea.content === '' ?
-        UiUtil.getResourceString($r('app.string.edit_text_imageEdit')) : this.textArea.content);
+          UiUtil.getResourceString($r('app.string.edit_text_imageEdit')) : this.textArea.content);
       })
       .focusable(ScreenManager.getInstance().isUIExtensionEnv() && this.textArea.isShownBorder)
       .onFocus((): void => {
@@ -937,7 +937,7 @@ export struct TextEditItem {
     .onTouch((event: TouchEvent | undefined) => {
       this.isPullUpTextInput = this.textCanClickStyle;
       /* instrument ignore if */
-      if (!event || !App.getInstance().myEditor().isInTextArea) {
+      if (!event) {
         return;
       }
       /* instrument ignore if */
@@ -954,9 +954,16 @@ export struct TextEditItem {
       }
       /* instrument ignore if */
       if (this.isRotate) {
+        // 自由旋转时不再依赖是否在文本区域内的标志，避免大图编辑场景下旋转失效
         this.dealTouchRotate(event);
         event.stopPropagation();
       } else {
+        // 非旋转场景继续保持原有在文本区域内的限制
+        /* instrument ignore if */
+        if (!App.getInstance().myEditor().isInTextArea)
+        {
+          return;
+        }
         this.dealTouch(event as TouchEvent, false, ResizeDirectionEdit.TOP_LEFT, this.minHeight);
       }
     });

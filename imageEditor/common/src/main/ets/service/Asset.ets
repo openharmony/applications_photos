@@ -148,9 +148,13 @@ export class Asset {
     let crop = this.crops();
     replaceExists(asset, crop);
 
-    crop.cropTabs[CropIndex.ROTATE].setChangeValues(asset.extraRotation, 1);
-    crop.cropTabs[CropIndex.HORIZONTAL].setChangeValues(asset.rotationY, 1);
-    crop.cropTabs[CropIndex.VERTICAL].setChangeValues(asset.rotationX, 1);
+    // 移除了自由旋转功能，只设置水平和垂直校正
+    if (crop.cropTabs.length > CropIndex.HORIZONTAL) {
+      crop.cropTabs[CropIndex.HORIZONTAL]?.setChangeValues?.(asset.rotationY, 1);
+    }
+    if (crop.cropTabs.length > CropIndex.VERTICAL) {
+      crop.cropTabs[CropIndex.VERTICAL]?.setChangeValues?.(asset.rotationX, 1);
+    }
     crop.cropRect.left = asset.cropRectLeft;
     crop.cropRect.top = asset.cropRectTop;
     crop.cropRect.right = asset.cropRectRight;

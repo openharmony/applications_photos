@@ -996,10 +996,8 @@ export class BaseEditor extends IEditor {
         this.isPhotosEditData = true;
       }
 
+      // 移除了自由旋转功能，跳过相关操作
       const cropRotation = this.isPhotosEditData ? 0 : this.asset.crops().getInitCropRotation(editData);
-      this.asset.crops()
-        .cropTabs[CropIndex.ROTATE]
-        .setChangeValues(cropRotation, 1);
 
       if (this.isPhotosEditData || !this.isImageFullQuality) {
         this.isSupportApertureSys = false;

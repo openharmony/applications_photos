@@ -107,8 +107,8 @@ export struct ScaleSelection {
     Stack() {
       Scroll(this.scroller) {
         Flex({ direction: this.isScreenPortrait ? FlexDirection.Row : FlexDirection.Column ,
-        justifyContent:FlexAlign.Center,
-        alignItems:ItemAlign.Center}) {
+          justifyContent:FlexAlign.Center,
+          alignItems:ItemAlign.Center}) {
           ForEach(this.scaleList, (item: CropScaleClass, index?: number) => {
             if (index !== undefined) {
               Button() {
@@ -229,14 +229,33 @@ export struct ScaleSelection {
   }
 
   scaleTextString(scaleValue: number, index: number, ratioItem: CropScaleClass): string {
-    HiLog.i(TAG, `enter scaleTextString; scaleValue: ${scaleValue}`);
-    if (this.cropsAttr.scaleDataList[index] === null) {
-      HiLog.e(TAG, 'videoScaleText is null');
-      return '';
+    HiLog.i(TAG, `enter scaleTextString; scaleValue: ${scaleValue}, index: ${index}`);
+    // scaleDataList 中前 3 项为「原始 / 自由 / 铺满屏幕」，其后才是 1:1、3:2 等比例。
+    // scaleDataText 仅为比例项提供 on/off 文案，需要做索引映射并防止越界。
+    const textIndex: number = index - 3;
+
+    // 非比例项或映射索引非法时，直接使用 ratioItem.text，避免数组越界导致崩溃。
+    if (textIndex < 0 || textIndex >= this.cropsAttr.scaleDataText.length) {
+      const text = ratioItem.text;
+      if (typeof text === 'string') {
+        return text;
+      }
+      return UiUtil.getResourceString(text as Resource);
     }
+
+    const dataText = this.cropsAttr.scaleDataText[textIndex];
+    if (!dataText) {
+      HiLog.e(TAG, `scaleDataText[${textIndex}] is undefined`);
+      const fallback = ratioItem.text;
+      if (typeof fallback === 'string') {
+        return fallback;
+      }
+      return UiUtil.getResourceString(fallback as Resource);
+    }
+
     if (scaleValue === ratioItem.value) {
-      return UiUtil.getResourceString(this.cropsAttr.scaleDataText[index].text);
+      return UiUtil.getResourceString(dataText.text);
     }
-    return UiUtil.getResourceString(this.cropsAttr.scaleDataText[index].key);
+    return UiUtil.getResourceString(dataText.key);
   }
 }
