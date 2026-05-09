@@ -1418,7 +1418,7 @@ export struct VideoPlayer {
     }
     if (!this.expandAvImageGenerator) {
       Log.error(TAG, 'expandToFetchAllFrame: createAVImageGenerator returned null');
-      await fs.close(file);
+      fs.closeSync(file.fd);
       return;
     
     }
