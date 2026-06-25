@@ -214,6 +214,13 @@ export struct RulerItem {
         },
       })
 
+      // if (this.item.key == 'rotation' && !this.item.closed) {
+      //   Row() {
+      //     this.RotateButton();
+      //     this.CropTitleBar();
+      //   }
+      //   .RotateStyle()
+      // }
 
       Row() {
         RulerBar({

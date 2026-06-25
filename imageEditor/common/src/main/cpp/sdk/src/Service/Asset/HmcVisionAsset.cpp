@@ -1296,7 +1296,7 @@ FLOAT HmcVisionAsset::GetRenderScale() const
 
     float widthScale = canvasSize.width / (float)sourceWidth;
     float heightScale = canvasSize.height / (float)sourceHeight;
-    LOGI("GetRenderScale width = %f, height = %f, sourceWidth = %d, sourceHeight = %d", canvasSize.width,
+    LOGD("GetRenderScale width = %f, height = %f, sourceWidth = %d, sourceHeight = %d", canvasSize.width,
         canvasSize.height, sourceWidth, sourceHeight);
     return HMC_MIN(widthScale, heightScale);
 }
@@ -1504,6 +1504,9 @@ void HmcVisionAsset::SetDrawWaterMarkValue(bool isDrawWaterMark)
 
 void HmcVisionAsset::SetIsDragImage(bool isDragImage)
 {
-    LOGI("HmcVisionAsset::SetIsDragImage: %d", isDragImage);
+    if (m_isDragImage == isDragImage) {
+        return;
+    }
+    LOGD("HmcVisionAsset::SetIsDragImage: %d", isDragImage);
     m_isDragImage = isDragImage;
 }

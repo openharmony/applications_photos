@@ -22,8 +22,6 @@ import {
   ALT_RULER_END_OPT,
   ALT_RULER_START_OPT,
   AppColor,
-  CROP_PAVE_SCREEN_TAG,
-  CROP_RATIO_MENU_INDEX,
   CROP_ROT_MIR_SIZE,
   DEVICE_FOLD_STATUS,
   FOLD_PHONE_RULER_END_OPT,
@@ -369,12 +367,22 @@ export struct VideoCropTool {
       alignItems:ItemAlign.Center,
       space: {main: LengthMetrics.px(10)}
     }) {
+      if (this.isScreenPortrait) { //UX要求横屏时镜像在前，旋转在后。同时需要保证TAB走焦顺序
+        this.rotateBtn()
+      } else {
+        // this.mirrorBtn();
+      }
       if (this.cropsAttr.cropMenuIndex !== CropIndex.INTELLIGENT) {
         if (this.isRulerScroller()) {
           this.rulerScroller();
         } else {
           this.cropRatio();
         }
+      }
+      if (this.isScreenPortrait) { //UX要求横屏时镜像在前，旋转在后。同时需要保证TAB走焦顺序
+        // this.mirrorBtn()
+      } else {
+        this.rotateBtn();
       }
     }
     .width(this.isScreenPortrait ? '100%' : 56)
@@ -458,7 +466,7 @@ export struct VideoCropTool {
             this.scrollVibrate(scrollVal, isFastScroll);
             this.operationTip.value = Math.round(val).toString();
             /* instrument ignore if */
-            if (this.cropsAttr.cropMenuIndex === CROP_RATIO_MENU_INDEX || this.isClick) {
+            if (this.cropsAttr.cropMenuIndex === 3 || this.isClick) {
               // 解决刻度条惯性滑动过程中切换比例页crash
               return;
             }
@@ -732,7 +740,7 @@ export struct VideoCropTool {
                   return;
                 }
                 this.cropsAttr.cropMenuIndex = index;
-                this.cropsAttr.enableRatio = (index === CROP_RATIO_MENU_INDEX);
+                this.cropsAttr.enableRatio = (index === 3);
                 this.cropsAttr.isScrolling = false;
                 if (this.progressVal != this.cropsAttr.cropTabs[this.cropsAttr.cropMenuIndex].value) {
                   this.progressVal = this.cropsAttr.cropTabs[this.cropsAttr.cropMenuIndex].value;
@@ -741,7 +749,8 @@ export struct VideoCropTool {
                 if (index === CropIndex.INTELLIGENT) {
                   if (this.selectedState === 1) {
                     this.selectedState = 0;
-                    this.cropsAttr.cropTabs[CropIndex.INTELLIGENT].value = CropIndex.INTELLIGENT;
+                    // 智能校正关闭时，直接设置智能校正的值为0
+                    this.cropsAttr.cropTabs[CropIndex.INTELLIGENT].value = 0;
                     this.cropsAttr.setRotation(this.cropsAttr.cropTabs[CropIndex.INTELLIGENT].key, 0);
                   } else {
                     this.selectedState = 1;
@@ -816,8 +825,8 @@ export struct VideoCropTool {
       angle: this.isScreenPortrait ? 90 : 180,
       colors: [
         ['rgba(0, 0, 0, 0)', 0],
-        ['rgba(0, 0, 0, 1)', this.isShowShadowStart ? this.shadowRate : 0],
-        ['rgba(0, 0, 0, 1)', this.isShowShadowEnd ? 1 - this.shadowRate : 1],
+        ['rgba(0, 0, 0, 0)', this.isShowShadowStart ? this.shadowRate : 0],
+        ['rgba(0, 0, 0, 0)', this.isShowShadowEnd ? 1 - this.shadowRate : 1],
         ['rgba(0, 0, 0, 0)', 1]]
     })
   }
@@ -843,9 +852,9 @@ export struct VideoCropTool {
           this.editor.asset.overSizePrompt();
           HiLog.i(TAG, `cropRatio value: ${value} ratio: ${ratio} index: ${index}`);
 
-          value = value === CROP_PAVE_SCREEN_TAG ? this.getPaveRatio() : value;
+          value = value === -2 ? this.getPaveRatio() : value;
           this.cropsAttr.ratio = ratio;
-          this.cropsAttr.cropMenuIndex = CROP_RATIO_MENU_INDEX;
+          this.cropsAttr.cropMenuIndex = 3;
           this.editor.timeline.timeProgressImmersiveMode = true;
           ratioCropTimeFn = setTimeout((): void => {
             this.editor.timeline.timeProgressImmersiveMode = false;

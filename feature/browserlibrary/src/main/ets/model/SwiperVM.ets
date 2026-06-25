@@ -146,6 +146,10 @@ export class SwiperVM implements IStateChangeListener {
    * Swiper 组件所展示的当前图片信息
    */
   @Track public curItem: MediaItem = new MediaItem();
+  /**
+   * 外部分享等：MediaItem.duration 无效时由播放器广播写入，驱动时间胶囊等 UI（@Prop curItem 不会随字段突变刷新）
+   */
+  @Track public resolvedVideoDurationCapsuleMs: number = 0;
   @Track public pcCurItem: MediaItem = new MediaItem();
   /**
    * Swiper 切图动画时长
@@ -853,6 +857,9 @@ export class SwiperVM implements IStateChangeListener {
     void => this.initVideoPlay(videoPlayController);
   private updateProgressRawTimeFunc: Function = (rawTime: number):
     void => this.updateProgressRawTime(rawTime);
+  private onVideoDurationResolvedFunc: Function = (args: Object[]): void => {
+    this.onVideoDurationResolved(args);
+  };
   private backPressEventFunc: Function = (): void => {
     this.onBackPressEvent();
   };
@@ -941,6 +948,7 @@ export class SwiperVM implements IStateChangeListener {
     this.appBroadCast.on(BroadCastConstants.INIT_VIDEO_PLAY_CONTROLLER, this.initVideoPlayFunc);
     this.appBroadCast.on(BroadCastConstants.UPDATE_PROGRESS_RAW_TIME, this.updateProgressRawTimeFunc);
     this.appBroadCast.on(BroadCastConstants.BACK_PRESS_CENTER, this.backPressEventFunc);
+    this.appBroadCast.on(BroadCastConstants.VIDEO_DURATION_RESOLVED, this.onVideoDurationResolvedFunc);
     this.appBroadCast.on(BroadCastConstants.VIDEO_STATUS_REPORTED, this.videoStatusReportedFunc);
   }
 
@@ -1080,7 +1088,7 @@ export class SwiperVM implements IStateChangeListener {
       this.videoProgressScrollTo();
     } else {
       this.setPreviewProgressOffset((this.selectedSmallImgWidth * 2 - Constants.PREVIEW_PROGRESS_WIDTH) *
-      this.progressRawTime / this.curItem.duration);
+      this.progressRawTime / this.getCapsuleTotalDurationMs());
     }
   }
 
@@ -1258,7 +1266,7 @@ export class SwiperVM implements IStateChangeListener {
       const curItemResult: MediaItem | undefined =
         this.getBrowserController().dataSource?.getMediaItemWithoutCache(this.getCurrentIndex());
       if (curItemResult) {
-        this.curItem = curItemResult;
+        this.setCurrentDisplayItem(curItemResult);
         Log.info(TAG, `animateTo closure ->${this.getCurrentIndex()} ${this.currentUri}->${this.curItem.uri}`);
         this.currentUri = this.curItem.uri;
       }
@@ -1432,7 +1440,7 @@ export class SwiperVM implements IStateChangeListener {
       this.frameExpandListScroll();
     }
     // 根据视频时长，决定取帧数量。拟合曲线：count = 2.8958ln(x) + 0.5016; x为视频时长，单位秒。
-    this.frameNum = Math.floor(AvPlayConstants.CON1 * Math.log(this.curItem.duration /
+    this.frameNum = Math.floor(AvPlayConstants.CON1 * Math.log(this.getCapsuleTotalDurationMs() /
     AvPlayConstants.A_THOUSAND) + AvPlayConstants.CON2);
     this.frameNum = this.frameNum < AvPlayConstants.MIN_FRAME_NUM ? AvPlayConstants.MIN_FRAME_NUM : this.frameNum;
     if (!this.frameNum) {
@@ -1468,7 +1476,7 @@ export class SwiperVM implements IStateChangeListener {
   private scrollForList(): void {
     if (this.getIsVideoPlaying()) {
       let xOffset: number = this.getStartOffset() - this.selectedSmallImgWidth + Constants.PREVIEW_PROGRESS_WIDTH / 2 +
-        (this.progressRawTime / this.curItem.duration) *
+        (this.progressRawTime / this.getCapsuleTotalDurationMs()) *
           (this.selectedSmallImgWidth * this.frameNum - Constants.PREVIEW_PROGRESS_WIDTH);
       Log.info(TAG, `animatorForList onFrame callback begin: ${xOffset}`);
       this.smallScroller?.scrollTo({ xOffset: xOffset, yOffset: 0 });
@@ -1506,14 +1514,14 @@ export class SwiperVM implements IStateChangeListener {
       /* instrument ignore next */
       return;
     }
-    if (this.isShowBar && this.curItem.duration) {
+    if (this.isShowBar && this.getCapsuleTotalDurationMs()) {
       this.setPreviewProgressOffset((this.selectedSmallImgWidth * 2 - Constants.PREVIEW_PROGRESS_WIDTH) *
-        rawTime / this.curItem.duration);
+        rawTime / this.getCapsuleTotalDurationMs());
     }
     this.progressRawTimeDuration = rawTime - this.progressRawTime;
     this.setProgressRawTime(rawTime);
     Log.info(TAG, `${BrowserConstants.TAG_VIDEO_PLAY_BY_FRAME}, progressRawTimeDuration: ` +
-      `${this.progressRawTimeDuration}, duration: ${this.curItem.duration}, video: ${this.curItem?.uri}`);
+      `${this.progressRawTimeDuration}, duration: ${this.getCapsuleTotalDurationMs()}, video: ${this.curItem?.uri}`);
   }
 
   /**
@@ -1562,7 +1570,7 @@ export class SwiperVM implements IStateChangeListener {
       if (!this.getIsVideoPlaying() && !this.isFingerSlide && this.isExpandFinish) {
         this.videoProgressScrollTo();
       }
-      if (this.curItem.duration - this.progressRawTime < Constants.SEEK_ALLOWABLE_OFFSET_TIME) {
+      if (this.getCapsuleTotalDurationMs() - this.progressRawTime < Constants.SEEK_ALLOWABLE_OFFSET_TIME) {
         this.setIsVideoToEnd(true);
       } else {
         this.setIsVideoToEnd(false);
@@ -1580,7 +1588,7 @@ export class SwiperVM implements IStateChangeListener {
         this.isFingerSlide = false;
         this.videoPlayController?.updateFingerSlide(false);
       }
-      if (this.progressRawTime == this.curItem.duration) {
+      if (this.progressRawTime == this.getCapsuleTotalDurationMs()) {
         Log.info(TAG, `onVideoPlayChange startOffset: ${this.getStartOffset()}`)
       }
       return;
@@ -1630,9 +1638,17 @@ export class SwiperVM implements IStateChangeListener {
   }
 
   public convertTimeToSecond(milliseconds: number, isDuration: boolean = false): string {
-    if (milliseconds <= AvPlayConstants.A_THOUSAND && isDuration) {
-      /* instrument ignore next */
-      return '00:01';
+    if (!Number.isFinite(milliseconds) || Number.isNaN(milliseconds) || milliseconds < 0) {
+      return '00:00';
+    }
+    if (isDuration) {
+      if (milliseconds <= 0) {
+        return '00:00';
+      }
+      if (milliseconds <= AvPlayConstants.A_THOUSAND) {
+        /* instrument ignore next */
+        return '00:01';
+      }
     }
     let second: number = Math.floor(milliseconds / AvPlayConstants.A_THOUSAND % AvPlayConstants.VIDEO_FPS_60);
     let minute: number = Math.floor(milliseconds / AvPlayConstants.A_THOUSAND / AvPlayConstants.VIDEO_FPS_60);
@@ -1645,6 +1661,35 @@ export class SwiperVM implements IStateChangeListener {
     } else {
       return time.toString()
     }
+  }
+
+  /**
+   * 时间胶囊/逐帧条使用的总时长（外部分享等场景下 curItem.duration 可能为 NaN）
+   */
+  public getCapsuleTotalDurationMs(): number {
+    if (this.resolvedVideoDurationCapsuleMs > 0) {
+      return this.resolvedVideoDurationCapsuleMs;
+    }
+    const item: MediaItem = this.curItem;
+    const d: number = item.duration;
+    return Number.isFinite(d) && !Number.isNaN(d) ? d : 0;
+  }
+
+  private onVideoDurationResolved(args: Object[]): void {
+    if (!args || args.length < 2) {
+      return;
+    }
+    const uniqueId = args[0] as string;
+    const durationMs = args[1] as number;
+    if (!uniqueId || durationMs <= 0 || this.curItem.uniqueId !== uniqueId) {
+      return;
+    }
+    this.resolvedVideoDurationCapsuleMs = durationMs;
+  }
+
+  public setCurrentDisplayItem(item: MediaItem): void {
+    this.resolvedVideoDurationCapsuleMs = 0;
+    this.curItem = item;
   }
 
   // 图片点击事件
@@ -1724,6 +1769,7 @@ export class SwiperVM implements IStateChangeListener {
     this.appBroadCast.off(BroadCastConstants.INIT_VIDEO_PLAY_CONTROLLER, this.initVideoPlayFunc);
     this.appBroadCast.off(BroadCastConstants.UPDATE_PROGRESS_RAW_TIME, this.updateProgressRawTimeFunc);
     this.appBroadCast.off(BroadCastConstants.BACK_PRESS_CENTER, this.backPressEventFunc);
+    this.appBroadCast.off(BroadCastConstants.VIDEO_DURATION_RESOLVED, this.onVideoDurationResolvedFunc);
     this.appBroadCast.off(BroadCastConstants.VIDEO_STATUS_REPORTED, this.videoStatusReportedFunc);
   }
 
@@ -1798,7 +1844,7 @@ export class SwiperVM implements IStateChangeListener {
     let curItemResult: MediaResult | undefined =
       this.getBrowserController().dataSource.getDataWithoutCache(this.getCurrentIndex());
     if (curItemResult?.item && curItemResult) {
-      this.curItem = curItemResult.item;
+      this.setCurrentDisplayItem(curItemResult.item);
       // if (DeviceInfo.isPc()) {
       //   this.getPCImageCompleteValue();
       // }

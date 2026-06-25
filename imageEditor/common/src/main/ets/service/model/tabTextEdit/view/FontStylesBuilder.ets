@@ -56,10 +56,13 @@ export struct FontStylesBuilder {
   }
 
   onWillAppear = () => {
+    // 优先使用当前正在编辑的文本框；如果没有，则使用 lastTextArea 作为“默认样式”的载体
     this.textArea = TextAreaManager.getInstance().getEditingTextArea();
     if (this.textArea !== undefined) {
       displayOption(this.textArea, undefined, false);
       this.preTextArea = deepCopy(this.textArea);
+    } else {
+      this.textArea = TextAreaManager.getInstance().getLastTextArea();
     }
   }
   onWillDisAppear = () => {

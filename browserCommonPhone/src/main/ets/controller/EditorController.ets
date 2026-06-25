@@ -61,6 +61,9 @@ import lazy { FaceBeautyHelper } from '@ohos/browsercommon/src/main/ets/default/
 import lazy { FaceBeautyConstants } from '@ohos/common/src/main/ets/default/model/common/FaceBeautyConstants';
 import lazy { BigDataConstants, ReportToBigDataUtil } from '@ohos/common/src/main/ets/default/utils/ReportToBigDataUtil';
 import lazy process from '@ohos.process';
+import lazy ImageProxyDataService from '../../../../../feature/dataProvider/src/main/ets/database/service/ImageProxyDataService';
+import lazy { TaskUri } from '../../../../../feature/dataProvider/src/main/ets/database/databaseconstant/TaskInfo';
+import lazy { FormControllerManager } from '../../../../../feature/dataProvider/src/main/ets/controller/FormControllerManager';
 import lazy bundleManager from '@ohos.bundle.bundleManager';
 import lazy { PermissionPopup } from '@ohos/privacy/src/main/ets/about/consent/PermissionPopup';
 import lazy {
@@ -229,6 +232,30 @@ export class EditorController extends BaseEditorController {
 
   private processEditorCallbackExit(msg: ImageEditorMsg): boolean {
     if (msg.extra) {
+      // 覆盖原图或另存为成功返回时，主动更新 image_proxy_data 表中的缩略图，
+      // 确保使用同一 uri 的桌面卡片等组件能够尽快获取到最新图片。
+      if ((msg as ImageEditorMsg).isOverride) {
+        const uri = msg.extra as string;
+        const formId = AppStorage.get<string>(Constants.KEY_OF_REFRESH_FA_CARD_ID);
+        const formContext: Context | undefined = AppStorage.get<Context>('formContext') as Context;
+        // 先更新 image_proxy_data；延迟后“覆盖原图再走一次”写库，再通知卡片，避免卡片拿到的仍是旧图。
+        const delayMs = 500;
+        this.updateImageProxyData(uri).then(() => {
+          Log.info(TAG, `processEditorCallbackExit first updateImageProxyData done, re-run after ${delayMs}ms`);
+          setTimeout(() => {
+            this.updateImageProxyData(uri).then(() => {
+              if (formId && formContext) {
+                Log.info(TAG, `processEditorCallbackExit refresh facard, formId: ${formId}`);
+                FormControllerManager.getInstance(formContext).doTask({
+                  formId,
+                  taskUri: TaskUri.TASK_REFRESH_FACARD,
+                  editedImageUri: uri
+                });
+              }
+            });
+          }, delayMs);
+        });
+      }
       if (this.isMovingPhotoEditorShown && this.isImageEditorShown &&
         this.imageEditorParams.entryType === ImageEditorParams.PARAM_ENTRY_TYPE_AI) {
         // 在动态照片编辑中打开图片编辑，保存图片编辑需要销毁动态照片编辑数据
@@ -251,7 +278,8 @@ export class EditorController extends BaseEditorController {
         Log.error(TAG, 'onEditDataLoaded timeout');
         this.reportTimeout();
         this.broadCast?.emit(BroadCastConstants.ON_DATA_RELOADED_WITH_EDIT, []);
-        this.onEditDataLoaded(this.shownItem, this.shownItem?.uri);
+        const exitUri: string | undefined = EditorPhotoContext.getInstance().getEditorUriOnExit();
+        this.onEditDataLoaded(this.shownItem, exitUri);
       }, this.isLivePhoto ? LIVE_PHOTO_LOAD_TIMEOUT_MS : DATA_LOAD_TIMEOUT_MS);
       return true;
     } else {
@@ -260,6 +288,17 @@ export class EditorController extends BaseEditorController {
       return this.hideEditor(this.shownItem);
     }
     return false;
+  }
+
+  private async updateImageProxyData(uri: string): Promise<void> {
+    try {
+      const context = getContext();
+      const imageProxyDataService: ImageProxyDataService = new ImageProxyDataService(context as Context);
+      await imageProxyDataService.updateImageBlobByUri(uri);
+      Log.info(TAG, `updateImageProxyData success, uri: ${uri}`);
+    } catch (error) {
+      Log.error(TAG, `updateImageProxyData error: ${error}`);
+    }
   }
 
   private async reportTimeout(): Promise<void> {
@@ -702,12 +741,13 @@ export class EditorController extends BaseEditorController {
     this.opacity = 1;
     PickerEditorPhotoContext.getInstance().setIsThird(false);
     let isVideo = item.mediaType === UserFileManagerAccess.MEDIA_TYPE_VIDEO;
+    let targetUri = uri ? uri : item.uri;
     Log.info(TAG, `hideEditor ${item?.uri}&width = ${item?.width}&height = ${item?.height}`);
     this.appBroadCast?.emit(BroadCastConstants.CLOSE_PROGRESS_DIALOG, []);
-    if (this.shownItem?.uri !== item.uri) {
+    if (this.shownItem?.uri !== targetUri) {
       this.broadCast?.emit(BroadCastConstants.RESET_POSITION + (this.shownItem?.uniqueId ?? ''), []);
     }
-    if (item.mediaType === UserFileManagerAccess.MEDIA_TYPE_VIDEO && this.shownItem?.uri === item.uri) {
+    if (item.mediaType === UserFileManagerAccess.MEDIA_TYPE_VIDEO && this.shownItem?.uri === targetUri) {
       Log.info(TAG, `hideEditor,video content changs, original thumbnail is ${this.shownItem?.thumbnail},
       current thumbnail is ${item.thumbnail}`);
       BroadCastManager.getInstance()
@@ -763,7 +803,7 @@ export class EditorController extends BaseEditorController {
     }, BrowserConstants.EDITOR_SWITCH_ANIMATION_TIMEOUT_MS);
     if (this.broadCast != null) {
       // 另存退出后onEditDataLoaded timeout 情况下，使用新图uri发送广播，保证动效id匹配photoItem
-      let positionUri = uri ? uri : item.uri;
+      let positionUri = targetUri;
       Log.info(TAG, `hideEditor ${positionUri} isVideo ${isVideo}}`);
       if (this.isFromPickerToEditor) {
         clearTimeout(timeoutId);

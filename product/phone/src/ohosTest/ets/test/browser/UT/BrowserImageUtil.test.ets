@@ -320,7 +320,7 @@ export default function BrowserImageUtilTest() {
       let path = "myPhoto";
       let modifiedDate = 2012;
       let res = ImageUtil.getThumbnailJpgUri(originUrl, path, modifiedDate, 1);
-      expect(res).assertEqual('http://www.baidu.com?timestampApp=2012?' +
+      expect(res).assertEqual('http://www.baidu.com?timestampApp=2012&' +
         'thumbnailModifiedMs=1&oper=thumbnail&width=0&height=0&path=myPhoto');
       expect(NUMBER_ONE).assertEqual(1);
     });
@@ -340,7 +340,7 @@ export default function BrowserImageUtilTest() {
       let modifiedDate = 2012;
       let res = ImageUtil.getThumbnailAstcUri(originUrl, path, modifiedDate, 1);
       expect(res).assertEqual(
-        'http://www.baidu.com?timestampApp=2012?thumbnailModifiedMs=1&oper=astc&width=0&height=0&path=myPhoto');
+        'http://www.baidu.com?timestampApp=2012&thumbnailModifiedMs=1&oper=astc&width=0&height=0&path=myPhoto');
       expect(NUMBER_ONE).assertEqual(1);
     });
 

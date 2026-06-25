@@ -503,6 +503,14 @@ export class UiUtil {
       Log.error(TAG, `gridColumnsCount calculate error, ${winWidth}, ${sideBarWidth}, ${diggingAlbumArea ?? 0}`);
       gridColumnsCount = gridNum;
     }
+    if (DeviceInfo.isPhoneUx()) {
+      const isHorizontalBySize: boolean = getScreen().getWinWidth() > getScreen().getWinHeight();
+      if (isHorizontalBySize) {
+        gridColumnsCount = UiUtil.columCountFive;
+      } else if (gridColumnsCount > UiUtil.columCountThree) {
+        gridColumnsCount = UiUtil.columCountThree;
+      }
+    }
     Log.info(TAG, `gridColumnsCount=${gridColumnsCount}, contentWidth=${contentWidth}, gridNum=${gridNum}`);
     return gridColumnsCount;
   }
@@ -754,6 +762,9 @@ export class UiUtil {
     if (mediaItem?.mediaType !== UserFileManagerAccess.MEDIA_TYPE_IMAGE &&
       mediaItem?.mediaType !== UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
       Log.warn(TAG, `the mediaType is invalid, the type is ${mediaItem?.mediaType}`);
+      return false;
+    }
+    if (mediaItem?.isGifType()) {
       return false;
     }
     try {

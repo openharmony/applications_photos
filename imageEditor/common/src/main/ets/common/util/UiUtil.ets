@@ -160,10 +160,24 @@ export class UiUtil {
   public static getOperationArea(paddingLR: number, paddingTB: number, winSize?: WinSize,
     isVertical: boolean = false): Rectangle {
     let isCustomFilterCardShow: boolean = AppStorage.get<boolean>('isCustomFilterCardShow') ?? false;
+    // 竖屏时底部工具栏占位（BOTTOM_HEIGHT）+ 系统底部安全区（avoidBottom）都需要扣减，
+    // 否则裁剪预览区域会下探到安全区导致“越界/遮挡”。
+    // 兜底：部分场景 isVertical 可能与当前屏幕方向不同步（尤其是多窗/旋转切换中），
+    // 这里以 ScreenManager 的实时竖屏状态再校正一次，避免漏扣底部高度。
+    const isPortraitLayout: boolean = isVertical || ScreenManager.getInstance().isScreenPortrait();
+    const hasEditor: boolean = App.getInstance().hasBaseEditorExist() && !App.getInstance().myEditor().isEditorClosed;
+    const isPadLandscapeImmersive: boolean = DeviceUtil.isPad() && !isPortraitLayout &&
+      hasEditor && App.getInstance().myEditor().immersiveMode;
     let topHeight = vp2px((DeviceUtil.isPc() ? PC_TOP_BAR_HEIGHT : TOP_BAR_HEIGHT) +
       App.getInstance().screenClass.avoidTop);
-    let bottomHeight = (DeviceUtil.isPhone() || DeviceUtil.isPad()) ? (isVertical ? vp2px(BOTTOM_HEIGHT)
-      : 0) : 0;
+    if (isPadLandscapeImmersive) {
+      // Pad 横屏沉浸式下，顶部工具栏不占位，避免预览区域上下被压缩出黑边。
+      topHeight = 0;
+    }
+    const avoidBottomPx: number = vp2px(App.getInstance().screenClass.avoidBottom);
+    let bottomHeight = (DeviceUtil.isPhone() || DeviceUtil.isPad())
+      ? (isPortraitLayout ? vp2px(BOTTOM_HEIGHT) + avoidBottomPx : 0)
+      : 0;
     // 位置计算与PreviewStarter中timeline.operWidth、timeline.operHeight、timeline.operTop初始化逻辑保持一致
     let left = paddingLR;
     let top = topHeight + paddingTB;
@@ -173,11 +187,11 @@ export class UiUtil {
 
     let right = (DeviceUtil.isPhone() || DeviceUtil.isPad()) ?
       vp2px(winSize.width) - paddingLR -
-        (isVertical ?
+        (isPortraitLayout ?
           0 : vp2px(BOTTOM_HEIGHT_SPLIT + ScreenManager.getInstance().updateEditorPageGridPaddingLeftAndRight() - 6)
         ) : vp2px(winSize.width) - vp2px(RIGHT_BAR_HEIGHT) - paddingLR;
     let bottom = vp2px(winSize.height) - bottomHeight - paddingTB -
-      (isVertical ? 0 : vp2px(App.getInstance().screenClass.avoidBottom));
+      (isPortraitLayout || isPadLandscapeImmersive ? 0 : avoidBottomPx);
     HiLog.i(TAG, `getOperationArea avoidTop ${App.getInstance().screenClass.avoidTop}  avoidLeft ${App.getInstance()
       .screenClass
       .avoidLeft} avoidBottom${App.getInstance().screenClass.avoidBottom}  avoidRight${App.getInstance()

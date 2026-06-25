@@ -590,9 +590,14 @@ export class FormController extends BaseFormController {
 
     const formId = task.formId;
     const faCardInfo: FaCardInfo = await this.faCardService.queryFaCard(formId);
+    Log.info(TAG, `doFaCardUpdateTask queryFaCard result: ${JSON.stringify(faCardInfo)}`);
     if (faCardInfo.albumType !== AlbumType.NOT_FOUND) {
+      Log.info(TAG, `doFaCardUpdateTask will refresh card, albumUri: ${faCardInfo.albumUri}, albumType: ${faCardInfo.albumType}`);
       await this.doRefreshFaCardTask(task);
       await this.faCardAlbumUtils.updateForm(faCardInfo, this.context);
+      Log.info(TAG, `doFaCardUpdateTask updateForm done, formId: ${formId}`);
+    } else {
+      Log.info(TAG, `doFaCardUpdateTask skip, albumType is NOT_FOUND, formId: ${formId}`);
     }
 
     if (!DatabaseProxy.getInstance().isUpdatingBound()) {

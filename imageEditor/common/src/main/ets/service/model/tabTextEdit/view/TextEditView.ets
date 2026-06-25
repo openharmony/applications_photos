@@ -105,6 +105,8 @@ export struct TextEditView {
     this.appBroadCast.off('switchTab', this.switchTab);
     this.appBroadCast.off('clickTextInputMask', this.clickTextMask);
     this.appBroadCast.off('clearText', this.clearText);
+    this.isShowInPopup = false;
+    this.isShow = false
   }
 
   clearText = () => {

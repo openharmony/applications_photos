@@ -116,6 +116,29 @@
         "name": "ohos.permission.FILE_ACCESS_PERSIST"
       },
       {
+        "name": "ohos.permission.FILE_ACCESS_MANAGER"
+      },
+      {
+        "name": "ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY",
+        "reason": "$string:media_location_desc",
+        "usedScene": {
+          "abilities": [
+            "MainAbility"
+          ],
+          "when": "always"
+        }
+      },
+      {
+        "name": "ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY",
+        "reason": "$string:media_location_desc",
+        "usedScene": {
+          "abilities": [
+            "MainAbility"
+          ],
+          "when": "always"
+        }
+      },
+      {
         "name": "ohos.permission.MEDIA_LOCATION",
         "reason": "$string:media_location_desc",
         "usedScene": {

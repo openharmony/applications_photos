@@ -30,7 +30,10 @@ const TAG: string = 'common_DeleteDialog';
 
 @CustomDialog
 export struct DeleteDialog {
-  @Consume dialogCallback?: DialogCallback;
+  @Consume dialogCallback?: DialogCallback= {
+    confirmCallback: () => {},
+    cancelCallback: () => {}
+  };
   @Consume dialogBroadCast: BroadCast;
   @Consume dialogMessage: Resource;
   @Consume dialogContent: Resource;

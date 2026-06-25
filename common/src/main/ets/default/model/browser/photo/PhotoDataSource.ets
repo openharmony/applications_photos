@@ -192,6 +192,10 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
     this.albumDataSource?.enableGetData(flag);
   }
 
+  public isGetDataEnabled(): boolean {
+    return this.enableGetDataFlag;
+  }
+
   public getSimpleData(index: number): MediaResult | undefined {
     Log.info(TAG, "getSimpleData: " + index);
     TraceControllerUtils.startTrace('PhotoBrowser getData');
@@ -257,6 +261,19 @@ export class PhotoDataSource implements IDataSource, LoadingListener {
       return this.packData(index, mediaItem);
     }
     return undefined;
+  }
+
+  /** 探测滑动窗口是否已有可用 MediaItem（不依赖 enableGetDataFlag，供推迟绑定判定）。 */
+  public isAlbumWindowItemHydratedForIndex(index: number): boolean {
+    if (!this.albumDataSource) {
+      return false;
+    }
+    this.albumDataSource.updateSlidingWindow(index);
+    const mediaItem: MediaItem | undefined = this.albumDataSource.getRawData(index);
+    if (!mediaItem) {
+      return false;
+    }
+    return String(mediaItem.uri ?? '').length > 0 || String(mediaItem.path ?? '').length > 0;
   }
 
   public getMediaItemWithoutCache(index: number): MediaItem | undefined {

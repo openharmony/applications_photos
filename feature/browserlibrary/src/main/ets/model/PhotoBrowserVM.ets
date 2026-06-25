@@ -143,6 +143,7 @@ export class PhotoBrowserVM implements IStateChangeListener {
   }
 
   public onEnterStartAnim(): void {
+    Log.info(TAG, `PhotoBrowserController: enterOnStartFun`)
   }
 
   public onEnterEndAnim(): void {
@@ -150,7 +151,7 @@ export class PhotoBrowserVM implements IStateChangeListener {
   }
 
   public onExitStartAnim(): void {
-    Log.info(TAG, `onExitStartAnim`)
+    Log.info(TAG, `PhotoBrowserController: exitOnStartFun`)
     if (this.browserController?.browserAnimController.isTransitionEnable) {
       return;
     }

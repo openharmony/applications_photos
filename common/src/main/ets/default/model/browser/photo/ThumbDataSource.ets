@@ -27,6 +27,7 @@ import lazy { ImageSizeUtil } from './ImageSizeUtil';
 import lazy { TraceControllerUtils } from '../../../utils/TraceControllerUtils';
 import lazy { ImageUtil } from '../../../utils/ImageUtil';
 import lazy { DeviceInfo } from '../../../utils/DeviceInfo';
+import { MediaLibraryData } from './data/MediaData';
 import lazy {
   PhotoBrowserStateMachine
 } from '../../../../../../../../browserCommon/src/main/ets/default/viewModel/statemachine/PhotoBrowserStateMachine';
@@ -56,6 +57,21 @@ export class ThumbDataSource extends PhotoDataSource {
     }
   }
 
+  private getPreviewThumbUrl(mediaItem: MediaItem): string {
+    const modifiedDate: number | undefined = mediaItem.getDateModified?.();
+    const safeModifiedDate: number = (modifiedDate !== undefined && Number.isFinite(modifiedDate)) ? modifiedDate : 0;
+
+    // 第三方/VIEWDATA（file://docs... / file://...）不是媒体库 URI 时，
+    // photoDataImpl.getThumbnail 往往无法返回可用缩略图，导致预览条“有条但无内容”。
+    // 这里统一用 LCD thumbnail 协议兜底，确保 MediaCachedImage 可渲染。
+    if (!MediaLibraryData.isMediaLibraryUri(mediaItem.uri)) {
+      return ImageUtil.getLCDUri(mediaItem.uri, mediaItem.path, safeModifiedDate);
+    }
+
+    return this.photoDataImpl.getThumbnail(mediaItem.uri, mediaItem.path, safeModifiedDate,
+      ImageUtil.getThumbnailSize(mediaItem.width, mediaItem.height, false));
+  }
+
   totalCount(): number {
     return this.photoDataSource.totalCount();
   }
@@ -75,9 +91,7 @@ export class ThumbDataSource extends PhotoDataSource {
       mediaResult = this.mediaResultMap.get(uri) ?? new MediaResult(mediaItem);
       /* instrument ignore if*/
       if (mediaResult.dateModified !== mediaItem.getDateModified?.() || mediaResult.path != mediaItem.path) {
-        mediaResult.setItemThumbnail(new Thumbnail(
-          this.photoDataImpl.getThumbnail(mediaItem.uri, mediaItem.path, mediaItem.getDateModified?.(),
-            ImageUtil.getThumbnailSize(mediaItem.width, mediaItem.height, false))));
+        mediaResult.setItemThumbnail(new Thumbnail(this.getPreviewThumbUrl(mediaItem)));
       }
       mediaResult.update(mediaItem);
       mediaResult.setItemPos(result.pos);
@@ -85,9 +99,7 @@ export class ThumbDataSource extends PhotoDataSource {
       this.updateDataSourceMarginAndWidth(index, mediaResult, mediaItem);
     } else {
       mediaResult = new MediaResult(mediaItem);
-      mediaResult.setItemThumbnail(new Thumbnail(
-        this.photoDataImpl.getThumbnail(mediaItem.uri, mediaItem.path, mediaItem.getDateModified?.(),
-          ImageUtil.getThumbnailSize(mediaItem.width, mediaItem.height, false))));
+      mediaResult.setItemThumbnail(new Thumbnail(this.getPreviewThumbUrl(mediaItem)));
       mediaResult.setItemPos(result.pos);
       this.updateDataSourceMarginAndWidth(index, mediaResult, mediaItem);
       this.mediaResultMap.set(uri, mediaResult);

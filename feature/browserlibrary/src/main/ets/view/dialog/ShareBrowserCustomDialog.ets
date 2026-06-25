@@ -28,7 +28,8 @@ import lazy { CustomBuilderParam, ProgressDialog, ProgressParam } from '@ohos/co
 import lazy {
   getScreen,
   isOrientationHorizontal,
-  ScreenManager
+  ScreenManager,
+  WindowMode
 } from '@ohos/common/src/main/ets/default/model/common/ScreenManager';
 import lazy { Log } from '@ohos/common/src/main/ets/default/utils/Log';
 import lazy { NewAlbumDialog } from '@ohos/common/src/main/ets/default/view/dialog/NewAlbumDialog';
@@ -233,6 +234,7 @@ export struct ShareBrowserCustomDialog {
 
   private getDeleteDialogAlignment(): DialogAlignment {
     this.deleteDialogPositionY = this.getDeleteDialogPositionY();
+    const isFloatingWindow: boolean = getScreen().isFloatModeReal() || getScreen().getWinMode() === WindowMode.FLOATING;
     // 非手机
     if (!DeviceInfo.isPhoneUx()) {
       return DialogAlignment.Default;
@@ -241,13 +243,13 @@ export struct ShareBrowserCustomDialog {
     if (DeviceInfo.isVerdeFoldable() || getScreen().isFloatingFullMode()) {
       return DialogAlignment.Default;
     }
-    if (getScreen().isFloatModeReal()) {
-      this.deleteDialogPositionY = this.floatNavigationButtonOpen ? DIALOG_POSITION_MORE : DIALOG_POSITION;
-      return DialogAlignment.Bottom;
+    if (isFloatingWindow) {
+      this.deleteDialogPositionY = 0;
+      return DialogAlignment.Center;
     }
     // 手机
     if (DeviceInfo.isFoldable()) {
-      if (getScreen().isSplitModeReal() || getScreen().isFloatModeReal()) {
+      if (getScreen().isSplitModeReal()) {
         this.deleteDialogPositionY = this.floatNavigationButtonOpen ? DIALOG_POSITION_MORE : DIALOG_POSITION;
         // xxx打开左右分屏、悬浮都底部
         return DialogAlignment.Bottom;

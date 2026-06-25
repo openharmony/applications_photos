@@ -144,7 +144,8 @@ export class PhotoGridVm extends AbstractVm {
     } else {
       // dayColumn = Math.round(2 * (size.width / MIN_DP_NUM - 1) + PHOTO_GRID_NUM);
       // 手机形态宫格，横屏6格，竖屏4格
-      if (isOrientationHorizontal()) {
+      const isHorizontalBySize: boolean = size.width > size.height;
+      if (isHorizontalBySize || (size.width === size.height && isOrientationHorizontal())) {
         dayColumn = 6;
       } else {
         dayColumn = 4;

@@ -87,7 +87,9 @@ export struct FontSizeTool {
         .accessibilityText("缩小字体大小")
 
       Slider({
-        value: this.textArea === undefined ? 4 : this.textArea.fontSize * 10,
+        // 没有当前文本框时，使用 lastTextArea 的字体大小作为默认值
+        value: this.textArea === undefined ? this.textAreaManager.getLastTextArea().fontSize * 10 :
+          this.textArea.fontSize * 10,
         min: Constants.MIN_FONT_SIZE * 10,
         max: Constants.MAX_FONT_SIZE * 10,
         step: FONT_SIZE_SLIDE_STEP * 10,
@@ -105,13 +107,20 @@ export struct FontSizeTool {
           }
           // 十倍数值发出消息，消息接收端对值除10处理
           this.currentFontSize = value / 10;
+          let hasOnFocus: boolean = false;
           this.textAreaManager.getTextAreaList().forEach(textArea => {
             if (textArea.editState === Constants.ONFOCUS) {
               HiLog.i(TAG, 'FontColorTool textArea.editState: %{public}s', textArea.id);
               textArea.fontSize = this.currentFontSize;
               this.isFontSizeChange = !this.isFontSizeChange;
+              hasOnFocus = true;
             }
           })
+          // 如果当前没有正在编辑的文本框，则只更新 lastTextArea，作为“下一次新建文本框”的默认字体大小
+          if (!hasOnFocus) {
+            HiLog.i(TAG, 'FontSizeTool update lastTextArea fontSize');
+            this.textAreaManager.getLastTextArea().fontSize = this.currentFontSize;
+          }
         })
         .onTouch((event) => {
           if (!event) {
@@ -164,12 +173,19 @@ export struct FontColorTool {
 
   aboutToAppear(): void {
     if (!this.textArea) {
+      let hasOnFocus: boolean = false;
       this.textAreaManager.getTextAreaList().forEach(textArea => {
         if (textArea.editState === Constants.ONFOCUS) {
           HiLog.i(TAG, 'FontColorTool textArea.id: %{public}s', textArea.id);
           this.textArea = textArea;
+          hasOnFocus = true;
         }
       })
+      // 没有正在编辑的文本框时，使用 lastTextArea 作为“默认样式”
+      if (!hasOnFocus) {
+        HiLog.i(TAG, 'FontColorTool use lastTextArea as default');
+        this.textArea = this.textAreaManager.getLastTextArea();
+      }
     }
   }
 
@@ -235,13 +251,22 @@ export struct FontColorTool {
     .onClick((): void => {
       this.currentFontColor = '';
       HiLog.i(TAG, `FontColorTool currentFontColor:${this.currentFontColor}`);
+      let hasOnFocus: boolean = false;
       this.textAreaManager.getTextAreaList().forEach(textArea => {
         if (textArea.editState === Constants.ONFOCUS) {
           HiLog.i(TAG, 'FontColorTool textArea.id: %{public}s', textArea.id);
           this.textArea = textArea;
           textArea.fontColor = fontColor;
+          hasOnFocus = true;
         }
       })
+      // 如果没有正在编辑的文本框，则只更新 lastTextArea，作为默认字体颜色
+      if (!hasOnFocus) {
+        HiLog.i(TAG, 'FontColorTool update lastTextArea fontColor');
+        const lastTextArea = this.textAreaManager.getLastTextArea();
+        lastTextArea.fontColor = fontColor;
+        this.textArea = lastTextArea;
+      }
       this.currentFontColor = fontColor;
       let msg: Record<string, number | string | boolean> = {
         'FONT_COLOR': this.currentFontColor
@@ -289,12 +314,19 @@ export struct FontStyleTool {
 
   aboutToAppear(): void {
     if (!this.textArea) {
+      let hasOnFocus: boolean = false;
       this.textAreaManager.getTextAreaList().forEach(textArea => {
         if (textArea.editState === Constants.ONFOCUS) {
           HiLog.i(TAG, 'FontTool textArea.id: %{public}s', textArea.id);
           this.textArea = textArea
+          hasOnFocus = true;
         }
       })
+      // 没有正在编辑的文本框时，使用 lastTextArea 作为“默认样式”
+      if (!hasOnFocus) {
+        HiLog.i(TAG, 'FontStyleTool use lastTextArea as default');
+        this.textArea = this.textAreaManager.getLastTextArea();
+      }
     }
     this.onLanguageChange();
   }
@@ -365,13 +397,22 @@ export struct FontStyleTool {
   }
 
   updateTextAlign(textAlign: TextAlign, currentTextAlign: Resource) {
+    let hasOnFocus: boolean = false;
     this.textAreaManager.getTextAreaList().forEach(textArea => {
       if (textArea.editState === Constants.ONFOCUS) {
         HiLog.i(TAG, 'FontStyleTool textArea.id: %{public}s', textArea.id);
         textArea.textAlign = textAlign;
         this.textArea = textArea
+        hasOnFocus = true;
       }
     })
+    // 如果没有正在编辑的文本框，则只更新 lastTextArea 的对齐方式
+    if (!hasOnFocus) {
+      HiLog.i(TAG, 'FontStyleTool update lastTextArea textAlign');
+      const lastTextArea = this.textAreaManager.getLastTextArea();
+      lastTextArea.textAlign = textAlign;
+      this.textArea = lastTextArea;
+    }
     this.textArea.textAlign = textAlign
     this.currentTextAlign = currentTextAlign
     this.textArea.richEditorController.updateParagraphStyle({
@@ -435,6 +476,7 @@ export struct FontStyleTool {
 
   private changeFontStyle(resource: Resource, isTextShadow: boolean, isTextStroke: boolean, isBackground: boolean) {
     this.currentFontStyle = resource;
+    let hasOnFocus: boolean = false;
     this.textAreaManager.getTextAreaList().forEach(textArea => {
       if (textArea.editState === Constants.ONFOCUS) {
         HiLog.i(TAG, 'FontStyleTool textArea.id: %{public}s', textArea.id);
@@ -442,8 +484,18 @@ export struct FontStyleTool {
         textArea.isTextStroke = isTextStroke;
         textArea.isBackground = isBackground;
         this.textArea = textArea
+        hasOnFocus = true;
       }
     })
+    // 如果没有正在编辑的文本框，则只更新 lastTextArea 的样式
+    if (!hasOnFocus) {
+      HiLog.i(TAG, 'FontStyleTool update lastTextArea style');
+      const lastTextArea = this.textAreaManager.getLastTextArea();
+      lastTextArea.isTextShadow = isTextShadow;
+      lastTextArea.isTextStroke = isTextStroke;
+      lastTextArea.isBackground = isBackground;
+      this.textArea = lastTextArea;
+    }
     this.updateFontStyle();
   }
 
@@ -452,6 +504,10 @@ export struct FontStyleTool {
     HiLog.i(TAG, `updateFontStyle textArea:${JSON.stringify(this.textArea.id)}`);
     if (!this.textArea) {
       this.textArea = this.textAreaManager.getTextAreaList().filter(item => item.editState === 1)[0];
+      if (!this.textArea) {
+        // 没有正在编辑的文本框时，使用 lastTextArea 作为“默认样式”
+        this.textArea = this.textAreaManager.getLastTextArea();
+      }
       HiLog.i(TAG, `updateFontStyle textArea id:${JSON.stringify(this.textArea.id)}`);
     }
     this.textArea.richEditorController.deleteSpans();

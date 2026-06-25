@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 import { PhotosHmBrowserController } from "@ohos/browserlibrary"
 import { PhotoBrowserLoaderParams } from "@ohos/common/src/main/ets/default/interface/PhotoBrowserLoaderParams";
 import { PhotoBrowserViewLoaderParams } from "@ohos/common/src/main/ets/default/interface/PhotoBrowserViewLoaderParams";
@@ -26,8 +26,10 @@ import { isOrientationHorizontal, ScreenManager } from "@ohos/common/src/main/et
 import { AlbumRefreshConst } from "@ohos/common/src/main/ets/default/utils/AlbumRefreshUtil";
 import { AlbumUtils } from "@ohos/common/src/main/ets/default/utils/AlbumUtils"
 import { BroadCast } from "@ohos/common/src/main/ets/default/utils/BroadCast";
+import { AlbumInfo } from "@ohos/common/src/main/ets/default/model/browser/album/AlbumInfo";
 import { ParamsWrapper } from "@ohos/common/src/main/ets/default/view/actionbar/Menu";
 import { ActionBarController } from "@ohos/common/src/main/ets/default/view/ActionBarController";
+import { NavigationConstants } from "@ohos/common/src/main/ets/default/model/common/NavigationConstants";
 import { AlbumPhotoGridView, BindSheetController } from "@ohos/timeline/src/main/ets/albumgrid/view/AlbumPhotoGridView"
 import { AlbumPhotoGridVm } from "@ohos/timeline/src/main/ets/albumgrid/viewmodel/AlbumPhotoGridVm";
 import { Log } from "@ohos/tools/src/main/utils/Log";
@@ -35,7 +37,6 @@ import { AlbumPhotoGridAppBarManager } from "../../viewmodel/AlbumPhotoGridAppBa
 import { SourceAlbumPhotoGridAppBarManager } from "../../viewmodel/SourceAlbumPhotoGridAppBarManager";
 import { TrashAlbumPhotoGridAppBarManager } from "../../viewmodel/TrashAlbumPhotoGridAppBarManager";
 import { TrashAlbumPhotoGridVm } from "../../viewmodel/TrashAlbumPhotoGridVm";
-import lazy { GallerySettingsActionBar } from "@ohos/privacy/src/main/ets/setting/GallerySettingsActionBar";
 
 const TAG = 'OtherAlbumPage';
 
@@ -64,7 +65,7 @@ export struct OtherAlbumPage {
   private storageParams: object | undefined = undefined;
   private navParams: ParamsWrapper | undefined = undefined;
 
-  private appBarManager: AlbumPhotoGridAppBarManager | undefined = undefined;
+  @State private appBarManager: AlbumPhotoGridAppBarManager | undefined = undefined;
   @State private bindSheetController : BindSheetController = new BindSheetController();
   private viewModel: AlbumPhotoGridVm = new AlbumPhotoGridVm();
   private isSupportScaleAnimation: boolean | undefined = undefined;
@@ -96,7 +97,7 @@ export struct OtherAlbumPage {
         this.appBarManager = new SourceAlbumPhotoGridAppBarManager(this.importDataSource, this.navPathStack, this.bindSheetController);
         AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 1);
       } else if (this.storageParams?.['subType'] === Constants.TRASH_QUERY_SUB_TYPE ||
-                 albumInfo?.isTrashAlbum || albumInfo?.subType === Constants.TRASH_QUERY_SUB_TYPE) {
+        albumInfo?.isTrashAlbum || albumInfo?.subType === Constants.TRASH_QUERY_SUB_TYPE) {
         this.isRecycleAlbumPage = true;
         this.viewModel = new TrashAlbumPhotoGridVm((newState: boolean) => {
           this.isEmpty = newState;
@@ -106,6 +107,13 @@ export struct OtherAlbumPage {
         this.isSupportScaleAnimation = false;
         this.appBarManager = new SourceAlbumPhotoGridAppBarManager(this.importDataSource, this.navPathStack, this.bindSheetController);
         AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 1);
+      }
+
+      // Fallback: AlbumPhotoGridView requires a non-undefined gridAppBarManager.
+      // If the album is a normal user album (or nav params were transiently unavailable),
+      // make sure we still create a default manager to avoid crash in AlbumPhotoGridView.aboutToAppear().
+      if (!this.appBarManager) {
+        this.appBarManager = new AlbumPhotoGridAppBarManager(this.importDataSource, this.bindSheetController, this.browserController);
       }
     }
   }
@@ -127,12 +135,26 @@ export struct OtherAlbumPage {
       this.isSelectedMode = false;
       return true;
     }
-    if (this.browserController.isBrowserShow) {
+    if (this.browserController.isBrowserShow && this.browserController.isBrowserShowContent) {
       this.browserController.onBackPress();
-      this.appBroadCast.emit(BroadCastConstants.BACK_PRESS_EVENT, []);
+      this.appBroadCast.emit(BroadCastConstants.PHOTO_BROWSER_BACK_PRESS_EVENT, []);
+      if (!this.browserController.isPullDownAndDrag) {
+        this.browserController.isBrowserShow = false;
+      }
       return true;
     }
-    this.navigationPageInfos.pop();
+
+
+    interface NavPathStackPopOptions {}
+    const stackSize: number = this.navigationPageInfos.size();
+    if (stackSize <= 1) {
+      Log.warn(TAG, `onBackPressFunc at root, fallback to album back, size=${stackSize}`);
+      this.appBroadCast.emit(BroadCastConstants.BACK_PRESS_EVENT, []);
+      ScreenManager.getInstance().setDefaultStatusBarProperties(false);
+      return true;
+    }
+    const popOptions: NavPathStackPopOptions = {};
+    this.navigationPageInfos.pop(popOptions);
     ScreenManager.getInstance().setDefaultStatusBarProperties(false);
     return true;
   }
@@ -146,7 +168,38 @@ export struct OtherAlbumPage {
     }
 
     Log.info(TAG, `setupPhotoGridView album: ${uri}, subType: ${subType}`);
-    this.importDataSource = this.navParams?.get<MediaDataSource>(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_DATASOURCE);
+    // navParams may not always be a ParamsWrapper (e.g. wrapped object passed by other pages).
+    // Use optional call to avoid "undefined is not callable".
+    this.importDataSource = this.navParams?.get?.<MediaDataSource>(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_DATASOURCE);
+    Log.info(TAG, `setupPhotoGridView importDataSource isAlbumDataSource: ${this.importDataSource instanceof AlbumDataSource}, isNewCreateAlbum: ${this.isNewCreateAlbum}`);
+
+    // Fallback for "new album" flow: if datasource is missing, rebuild it from AppStorage.
+    // Keep it strictly scoped to new album to avoid affecting Trash/Source albums.
+    if (!this.importDataSource && this.isNewCreateAlbum) {
+      interface ParamAlbumInfoLike {
+        item?: string;
+      }
+      const paramAlbumInfo: ParamAlbumInfoLike | undefined =
+        AppStorage.get<ParamAlbumInfoLike>(Constants.KEY_OF_PHOTO_GRID_VIEW_ALBUM_ITEM);
+      const albumUri: string = AppStorage.get<string>(Constants.KEY_OF_ALBUM_URI) ?? '';
+      if (paramAlbumInfo?.item && albumUri !== '') {
+        try {
+          const parsed: object = JSON.parse(paramAlbumInfo.item) as object;
+          const albumInfo: AlbumInfo = parsed as AlbumInfo;
+          // Ensure uri/subType are correct for new album created by picker flow.
+          albumInfo.uri = albumUri;
+          if (albumInfo.subType === undefined || albumInfo.subType === null) {
+            albumInfo.subType = 1;
+          }
+          this.importDataSource = new AlbumDataSource({ context: getContext(), albumInfo: albumInfo, isAccurateNotify: true });
+          Log.info(TAG, `setupPhotoGridView fallback create AlbumDataSource success, uri: ${albumInfo.uri}, subType: ${albumInfo.subType}`);
+        } catch (e) {
+          Log.error(TAG, `setupPhotoGridView fallback create AlbumDataSource failed: ${e}`);
+        }
+      } else {
+        Log.warn(TAG, `setupPhotoGridView fallback skipped, hasItem: ${!!paramAlbumInfo?.item}, albumUriEmpty: ${albumUri === ''}`);
+      }
+    }
   }
 
   private setupSelectManager(): void {
@@ -169,9 +222,107 @@ export struct OtherAlbumPage {
   }
 
   private parseParams(): void {
-    if(this.navigationPageInfos.size() > 0) {
-      this.navParams = this.navigationPageInfos.getParamByIndex(this.navigationPageInfos.size() - 1) as ParamsWrapper;
-      this.isNewCreateAlbum = this.navParams?.get<boolean>(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_IS_NEW_ALBUM);
+    try {
+      if (!this.navigationPageInfos) {
+        Log.error(TAG, 'parseParams navigationPageInfos is undefined');
+        return;
+      }
+
+      interface NavPathStackLike {
+        size?: () => number;
+        getParamByIndex?: (index: number) => ParamsWrapper | object;
+        getParamByName?: (name: string) => Array<ParamsWrapper | object>;
+      }
+
+      const navInfos = this.navigationPageInfos as NavPathStackLike;
+
+      // IMPORTANT: don't detach methods from navInfos, or "this" may be lost inside
+      // NavPathStack implementation (e.g. uses this.pathArray).
+      // Prefer getParamByName: it's stable even when stack indices are in transition.
+      if (typeof navInfos.getParamByName === 'function') {
+        try {
+          const paramsArr = navInfos.getParamByName(NavigationConstants.NAVIGATION_OTHER_ALBUM_PAGE);
+          if (paramsArr && paramsArr.length > 0) {
+            this.navParams = paramsArr[paramsArr.length - 1] as ParamsWrapper;
+          }
+        } catch (e) {
+          Log.warn(TAG, `parseParams getParamByName failed: ${e}`);
+        }
+      }
+
+      // Fallback to last index only when needed.
+      if (!this.navParams && typeof navInfos.getParamByIndex === 'function' && typeof navInfos.size === 'function') {
+        try {
+          const size: number = navInfos.size();
+          if (size > 0) {
+            this.navParams = navInfos.getParamByIndex(size - 1) as ParamsWrapper;
+          }
+        } catch (e) {
+          // Avoid transient nav stack errors causing blank screen.
+          Log.warn(TAG, `parseParams getParamByIndex failed: ${e}`);
+        }
+      }
+
+      if (!this.navParams && typeof navInfos.getParamByName !== 'function' &&
+        (typeof navInfos.getParamByIndex !== 'function' || typeof navInfos.size !== 'function')) {
+        Log.error(TAG, `parseParams navigationPageInfos has no valid NavPathStack api, size type: ${typeof navInfos.size}, getParamByIndex type: ${typeof navInfos.getParamByIndex}, getParamByName type: ${typeof navInfos.getParamByName}`);
+        return;
+      }
+
+      interface ParamsWrapperLike {
+        get?: (key: string) => boolean | undefined;
+      }
+      interface WrappedParamsWrapper {
+        paramsWrapper?: ParamsWrapper;
+      }
+
+      // Some flows (e.g. picker back to new album) pass an object that contains paramsWrapper.
+      const maybeWrapped: WrappedParamsWrapper = (this.navParams as object) as WrappedParamsWrapper;
+      if (maybeWrapped?.paramsWrapper) {
+        this.navParams = maybeWrapped.paramsWrapper;
+      }
+
+      const navParamsObj: ParamsWrapperLike | undefined = this.navParams as ParamsWrapperLike;
+      // IMPORTANT: call as a method (navParamsObj.get(...)), never detach or use call/apply.
+      if (typeof navParamsObj?.get === 'function') {
+        const isNewAlbum: boolean | undefined =
+          navParamsObj.get(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_IS_NEW_ALBUM);
+        this.isNewCreateAlbum = !!isNewAlbum;
+      } else {
+        // Treat invalid navParams as missing to trigger AppStorage pending fallback.
+        this.navParams = undefined;
+        Log.error(TAG, `parseParams navParams.get is not a function, type: ${typeof navParamsObj?.get}`);
+      }
+    } catch (error) {
+      Log.error(TAG, `parseParams exception: ${error}`);
+    }
+    if (this.navParams === undefined) {
+      interface PendingWithGet {
+        get?: (key: string) => boolean | undefined;
+      }
+      interface PendingWithParamsWrapper {
+        paramsWrapper?: ParamsWrapper;
+      }
+      type PendingNavParam = PendingWithGet | PendingWithParamsWrapper;
+      const pending: PendingNavParam | undefined =
+        AppStorage.get<PendingNavParam>(AlbumRefreshConst.KEY_PENDING_ALBUM_NAV_PARAM);
+      if (pending !== undefined) {
+        let wrapper: ParamsWrapper | undefined = undefined;
+        const withGet = pending as PendingWithGet;
+        const withWrapper = pending as PendingWithParamsWrapper;
+        if (typeof withGet.get === 'function') {
+          wrapper = pending as ParamsWrapper;
+        } else if (withWrapper.paramsWrapper) {
+          wrapper = withWrapper.paramsWrapper;
+        }
+        if (wrapper) {
+          this.navParams = wrapper;
+          const isNewAlbum = wrapper.get<boolean>(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_IS_NEW_ALBUM);
+          this.isNewCreateAlbum = !!isNewAlbum;
+          Log.info(TAG, 'parseParams use pending param from AppStorage');
+        }
+        AppStorage.delete(AlbumRefreshConst.KEY_PENDING_ALBUM_NAV_PARAM);
+      }
     }
   }
 

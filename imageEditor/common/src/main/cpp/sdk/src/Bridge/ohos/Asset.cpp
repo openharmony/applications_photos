@@ -600,13 +600,13 @@ static void CalculatePosition(HveTimeline *timeline, HmcEditor *editor, HmcUid &
     HmcAssetSetSize(editor, assetUid, size);
     HmcEditorSetAutoFlush(editor, true);
     hveAsset->SetResetVertex(true);
-    LOGI("HmcAssetSetSize %lf  w = %lf  h = %lf", scale, size.width, size.height);
+    LOGD("HmcAssetSetSize %lf  w = %lf  h = %lf", scale, size.width, size.height);
 }
 
 void Asset::Scale(int timelineId, std::string const & assetId, double scale, double centerX, double centerY)
 {
     USE_ASSET();
-    LOGI("Asset::Scale:%lf, centerX:%lf, centerY:%lf", scale, centerX, centerY);
+    LOGD("Asset::Scale:%lf, centerX:%lf, centerY:%lf", scale, centerX, centerY);
 
     CancelAnimation();
 
@@ -615,6 +615,7 @@ void Asset::Scale(int timelineId, std::string const & assetId, double scale, dou
     double fixScale = scale;
 
     if (hveAsset->GetInPreviewMode()) {
+        hveAsset->SetIsDragImage(true);
         auto previewScale = hveAsset->GetPreviewScale();
         float newPreviewScale = previewScale * scale;
 
@@ -1209,6 +1210,12 @@ void Asset::SetPreviewMode(int timelineId, std::string const &assetId, bool valu
 {
     USE_ASSET();
     hveAsset->SetInPreviewMode(value);
+}
+
+void Asset::SetIsDragImage(int timelineId, std::string const &assetId, bool value)
+{
+    USE_ASSET();
+    hveAsset->SetIsDragImage(value);
 }
 
 void Asset::SetShowWatermarkValue(int timelineId, std::string const &assetId, bool value)

@@ -1390,11 +1390,9 @@ export struct ImageGridItemComponent {
     if (this.isContextMenuDisabled || this.isThird || this.gridScrollMsg?.isScrollerBarTouch) {
       return false;
     }
+    // 选择模式下，无论当前图片是否已选中，都允许长按弹出菜单（包含小图预览）
     if (this.isSelectedMode) {
-      if (this.isSelected) {
-        return this.selectedCountLessThanOne;
-      };
-      return !this.isSelected;
+      return true;
     }
     return this.longPressMenuList.length > 0;
   }
@@ -3100,7 +3098,7 @@ export struct ImageGridItemComponent {
   @Builder
   buildImageGrid() {
     if (this.isEffective) {
-      if (this.isTap) {
+      if (this.isTap && !this.useNewPhotoGrid) {
         Column() {
         }
         .onAppear(() => {
@@ -3186,6 +3184,8 @@ export struct ImageGridItemComponent {
         .accessibilityLevel('no')
       }
     }
+
+
   }
 
   @Builder

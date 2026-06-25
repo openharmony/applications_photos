@@ -29,6 +29,7 @@ import lazy { FormController } from './FormController';
 import lazy { formProvider } from '@kit.FormKit';
 import lazy DatabaseProxy from '../database/DatabaseProxy';
 import lazy { PipeStream } from '../promise/PromiseStream';
+import DatabaseUtils from '../database/DatabaseUtils';
 
 /* instrument ignore file */
 const TAG: string = 'FormControllerManager';
@@ -176,10 +177,138 @@ export class FormControllerManager {
     await this.pipeStreamInstance.emitAndGetStream(async () => {
       await DatabaseProxy.getInstance().clear();
       Log.info(TAG, `doUpdateTask pipeStream execute task: ${task.formId}`);
-      formController?.addTask(task);
-      await formController?.executeTask(true);
+
+      // 这里统一兜底：按 formId 再获取一次（必要时会创建）
+      const controller: BaseFormController | undefined =
+        formController ?? await this.getFormController(task.formId);
+      if (!controller) {
+        Log.error(TAG, `doUpdateTask skip, formController is undefined, formId: ${task.formId}`);
+        return;
+      }
+
+      Log.info(TAG, `doUpdateTask addTask formId: ${task.formId}, taskUri: ${task.taskUri}`);
+      controller.addTask(task);
+      Log.info(TAG, `doUpdateTask executeTask formId: ${task.formId}`);
+      await controller.executeTask(true);
+      Log.info(TAG, `doUpdateTask executeTask done, formId: ${task.formId}`);
     }, task.formId);
     Log.info(TAG, `doUpdateTask pipeStream emitAndGetStream done: ${task.formId}`);
+  }
+
+  /**
+   * 立即执行一次更新任务（不经过 pipeStream 串行队列）
+   * 仅用于相册删除这类低频、必须立刻生效的场景，避免与其他更新任务抢占导致本次不执行。
+   */
+  public async doUpdateTaskImmediately(task: Task, formController?: BaseFormController) {
+    Log.info(TAG, `doUpdateTaskImmediately start, formId: ${task.formId}, taskUri: ${task.taskUri}`);
+    await DatabaseProxy.getInstance().clear();
+    const controller: BaseFormController | undefined =
+      formController ?? await this.getFormController(task.formId);
+    if (!controller) {
+      Log.error(TAG, `doUpdateTaskImmediately skip, formController is undefined, formId: ${task.formId}`);
+      return;
+    }
+    Log.info(TAG, `doUpdateTaskImmediately addTask formId: ${task.formId}, taskUri: ${task.taskUri}`);
+    controller.addTask(task);
+    Log.info(TAG, `doUpdateTaskImmediately executeTask formId: ${task.formId}`);
+    await controller.executeTask(true);
+    Log.info(TAG, `doUpdateTaskImmediately executeTask done, formId: ${task.formId}`);
+  }
+
+  /**
+   * 删除图片后通知使用了该图片的桌面卡片刷新
+   * 1. 查询包含这些 imageUri 的卡片 formId
+   * 2. 将 Reminders 中对应记录标为隐藏（卡片 SQL 会过滤 is_hidden）
+   * 3. 对每个受影响的 formId 触发一次卡片更新任务
+   *
+   * @param imageUris 被删除的图片 URI 列表
+   */
+  public async notifyCardsOnPhotoDeleted(imageUris: string[]): Promise<void> {
+    if (!imageUris || imageUris.length === 0) {
+      return;
+    }
+    try {
+      const formIds: string[] = await this.reminderService.queryFormIdsByImageUris(imageUris);
+      if (formIds.length === 0) {
+        Log.info(TAG, `notifyCardsOnPhotoDeleted no cards use these uris`);
+        return;
+      }
+      // 使用 image_uri_id 维度进行隐藏，避免 URI 形态差异导致命中失败
+      await this.reminderService.hiddenRecordByImageUriIds(
+        DatabaseUtils.extractAssetUriPaths(imageUris)
+      );
+      Log.info(TAG, `notifyCardsOnPhotoDeleted hidden reminders for uris, formIds: ${JSON.stringify(formIds)}`);
+      for (const formId of formIds) {
+        const formController: BaseFormController | undefined = await this.getFormController(formId);
+        await this.doUpdateTask({
+          formId,
+          taskUri: TaskUri.TASK_UPDATE_FACARD_URI
+        }, formController);
+      }
+    } catch (error) {
+      Log.error(TAG, `notifyCardsOnPhotoDeleted error: ${error?.code}, ${error?.message}`);
+    }
+  }
+
+  /**
+   * 覆盖编辑图片后通知使用了该图片的桌面卡片刷新
+   * 1. 查询包含这些 imageUri 的卡片 formId
+   * 2. 不修改 Reminders 记录（仍然使用同一张图片，仅内容更新）
+   * 3. 对每个受影响的 formId 触发一次卡片更新任务
+   *
+   * @param imageUris 被更新的图片 URI 列表
+   */
+  public async notifyCardsOnPhotoUpdated(imageUris: string[]): Promise<void> {
+    if (!imageUris || imageUris.length === 0) {
+      return;
+    }
+    try {
+      const formIds: string[] = await this.reminderService.queryFormIdsByImageUris(imageUris);
+      if (formIds.length === 0) {
+        Log.info(TAG, `notifyCardsOnPhotoUpdated no cards use these uris`);
+        return;
+      }
+      Log.info(TAG, `notifyCardsOnPhotoUpdated formIds: ${JSON.stringify(formIds)}`);
+      for (const formId of formIds) {
+        const formController: BaseFormController | undefined = await this.getFormController(formId);
+        await this.doUpdateTask({
+          formId,
+          taskUri: TaskUri.TASK_UPDATE_FACARD_URI
+        }, formController);
+      }
+    } catch (error) {
+      Log.error(TAG, `notifyCardsOnPhotoUpdated error: ${error?.code}, ${error?.message}`);
+    }
+  }
+
+  /**
+   * 删除相册后通知使用了该相册的桌面卡片刷新
+   *
+   * @param albumUri 被删除的相册 URI
+   */
+  public async notifyCardsOnAlbumDeleted(albumUri: string): Promise<void> {
+    if (!albumUri) {
+      return;
+    }
+    try {
+      const faCardInfos = await this.faCardService.queryFaCardsByAlbumUri(albumUri);
+      if (!faCardInfos || faCardInfos.length === 0) {
+        Log.info(TAG, `notifyCardsOnAlbumDeleted no cards use this album: ${albumUri}`);
+        return;
+      }
+      Log.info(TAG,
+        `notifyCardsOnAlbumDeleted albumUri: ${albumUri}, formIds: ${JSON.stringify(faCardInfos.map(f => f.formId))}`);
+      for (const info of faCardInfos) {
+        const formController: BaseFormController | undefined = await this.getFormController(info.formId);
+        // 相册删除场景下，为了保证每次操作都能立即刷新卡片，这里不走 pipeStream 串行队列，直接执行更新任务
+        await this.doUpdateTaskImmediately({
+          formId: info.formId,
+          taskUri: TaskUri.TASK_UPDATE_FACARD_URI
+        }, formController);
+      }
+    } catch (error) {
+      Log.error(TAG, `notifyCardsOnAlbumDeleted error: ${error?.code}, ${error?.message}`);
+    }
   }
 
   public async addPoolTask(formId: string, poolTask: taskpool.Task) {

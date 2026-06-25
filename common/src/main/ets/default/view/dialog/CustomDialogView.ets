@@ -26,7 +26,7 @@ import lazy { MergeDialog } from './MergeDialog';
 import lazy { CustomBuilderParam, ProgressDialog, ProgressParam } from './ProgressDialog';
 import lazy { NewAlbumDialog } from './NewAlbumDialog';
 import lazy { CopyOrMoveDialog, OperateParam } from './CopyOrMoveDialog';
-import lazy { getScreen, isOrientationHorizontal, ScreenManager } from '../../model/common/ScreenManager';
+import lazy { getScreen, isOrientationHorizontal, ScreenManager, WindowMode } from '../../model/common/ScreenManager';
 import lazy { MoveDialog } from './MoveDialog';
 import lazy { SaveImageDialog } from './SaveImageDialog';
 import lazy { NetworkConnectionSwitchDialog } from './NetworkConnectionSwitchDialog';
@@ -116,7 +116,9 @@ export struct CustomDialogView {
   @Provide renameFileName: string = '';
   @Provide isDistributedAlbum: boolean = false;
   @Provide downloadUri: string = '';
-  private readonly MIN_PROGRESS_VISIBLE_TIME: number = 600;
+  private readonly MIN_PROGRESS_VISIBLE_TIME: number = 300 ;
+  /** 进度到 100% 后再保留展示的时长（毫秒） */
+  private readonly PROGRESS_HOLD_MS_AFTER_100: number = 200 ;
   private progressStartTime: number = 0;
   private progressCloseTimeout: number = Number.NaN;
   /**
@@ -312,20 +314,21 @@ export struct CustomDialogView {
   private getDeleteDialogAlignment(): DialogAlignment {
     Log.info(TAG, 'getDeleteDialogPositionY');
     this.deleteDialogPositionY = this.getDeleteDialogPositionY();
+    const isFloatingWindow: boolean = getScreen().isFloatModeReal() || getScreen().getWinMode() === WindowMode.FLOATING;
     // 设置页图库清理页面删除对话框居中显示
     if (this.isFromGalleryCleanupPage) {
       return DialogAlignment.Default;
     }
-    // Log.info(TAG, 'isVerdeFoldable');
-    // // Verde外屏则居中 全景模式也居中
-    // if (DeviceInfo.isVerdeFoldable() || getScreen().isFloatingFullMode()) {
-    //   return DialogAlignment.Default;
-    // }
+    Log.info(TAG, 'isVerdeFoldable');
+    // Verde外屏则居中 全景模式也居中
+    if (DeviceInfo.isVerdeFoldable() || getScreen().isFloatingFullMode()) {
+      return DialogAlignment.Default;
+    }
     Log.info(TAG, 'isFloatModeReal');
-    if (getScreen().isFloatModeReal()) {
+    if (isFloatingWindow) {
       this.isNeedDelDialogPositionChange = true;
-      this.deleteDialogPositionY = this.floatNavigationButtonOpen ? DIALOG_POSITION_MORE : DIALOG_POSITION;
-      return DialogAlignment.Bottom;
+      this.deleteDialogPositionY = 0;
+      return DialogAlignment.Center;
     }
     Log.info(TAG, 'isFoldable');
     // 手机
@@ -336,12 +339,6 @@ export struct CustomDialogView {
         if (getScreen().getWindowRectWidth() === this.disScreenWidth) {
           return DialogAlignment.Default;
         }
-        // 距离底部导航条16vp
-        this.deleteDialogPositionY = this.floatNavigationButtonOpen ? DIALOG_POSITION_MORE : DIALOG_POSITION;
-        // xxx打开左右分屏、悬浮都底部
-        return DialogAlignment.Bottom;
-      }
-      if (getScreen().isFloatModeReal()) {
         // 距离底部导航条16vp
         this.deleteDialogPositionY = this.floatNavigationButtonOpen ? DIALOG_POSITION_MORE : DIALOG_POSITION;
         // xxx打开左右分屏、悬浮都底部
@@ -906,7 +903,9 @@ export struct CustomDialogView {
       }
       const now: number = Date.now();
       const elapsed: number = this.progressStartTime ? now - this.progressStartTime : 0;
-      const delay: number = elapsed < this.MIN_PROGRESS_VISIBLE_TIME ? this.MIN_PROGRESS_VISIBLE_TIME - elapsed : 0;
+      const minVisibleRemainder: number =
+        elapsed < this.MIN_PROGRESS_VISIBLE_TIME ? this.MIN_PROGRESS_VISIBLE_TIME - elapsed : 0;
+      const delay: number = minVisibleRemainder + this.PROGRESS_HOLD_MS_AFTER_100;
       Log.info(TAG, `Progress reached 100%, elapsed: ${elapsed}ms, delay: ${delay}ms`);
       this.progressCloseTimeout = setTimeout((): void => {
         Log.info(TAG, 'Closing progress dialog after showing 100% for sufficient time');
@@ -1193,8 +1192,9 @@ export struct CustomDialogView {
     }
     // 窗体变化回调比横竖屏回调方法块，横竖屏判断异常
     setTimeout((): void => {
+      const isFloatingWindow: boolean = getScreen().isFloatModeReal() || getScreen().getWinMode() === WindowMode.FLOATING;
       // xxx展开太横竖屏旋转不需要位置变更
-      if (DeviceInfo.isFoldable() && !getScreen().isSplitModeReal() && !getScreen().isFloatModeReal() &&
+      if (DeviceInfo.isFoldable() && !getScreen().isSplitModeReal() && !isFloatingWindow &&
         !this.isNeedDelDialogPositionChange) {
         return;
       }

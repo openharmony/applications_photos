@@ -71,14 +71,15 @@ export class GridScrollBaseStrategy {
    * @param fetchOpt Fetch选项
    * @returns 媒体库资源
    */
-  // public getAssetsSync(fetchOpt: FetchOptions): PhotoAsset[] {
-  //   if (fetchOpt === undefined || fetchOpt === null) {
-  //     return [];
-  //   }
-  //
-  //   let userFileManager: photoAccessHelper.PhotoAccessHelper = UserFileManagerAccess.getInstance().getMediaLibrary();
-  //   return userFileManager?.getAssetsSync(fetchOpt) ?? [];
-  // }
+  public async getAssetsSync(fetchOpt: FetchOptions): Promise<PhotoAsset[]> {
+    if (fetchOpt === undefined || fetchOpt === null) {
+      return [];
+    }
+
+    let userFileManager: photoAccessHelper.PhotoAccessHelper = UserFileManagerAccess.getInstance().getMediaLibrary();
+    let result = await userFileManager?.getAssets(fetchOpt);
+    return result.getAllObjects() ?? [];
+  }
 
   /**
    * 获取相册
@@ -118,13 +119,13 @@ export class GridScrollBaseStrategy {
    * @param fetchOpt Fetch选项
    * @returns 相册的媒体库资源
    */
-  // public getAlbumAssetsSync(album: PhotoAlbum | undefined, fetchOpt: FetchOptions): PhotoAsset[] {
-  //   if (fetchOpt === undefined || fetchOpt === null) {
-  //     return [];
-  //   }
-  //
-  //   return album?.getAssetsSync(fetchOpt) ?? [];
-  // }
+  public async  getAlbumAssetsSync(album: PhotoAlbum | undefined, fetchOpt: FetchOptions): Promise<photoAccessHelper.PhotoAsset[]> {
+    if (fetchOpt === undefined || fetchOpt === null) {
+      return [];
+    }
+    let result = await album?.getAssets(fetchOpt)
+    return result?.getAllObjects() ?? [];
+  }
 }
 
 /**

@@ -36,6 +36,6 @@ export class MenuAttr {
     this.editor.tabIndex = index;
   }
 
-  leaveMenu(index: TabName, close = false) {
+  leaveMenu(index: TabName, close = false): Promise<void> | void {
   }
 }

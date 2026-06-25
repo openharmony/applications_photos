@@ -31,9 +31,13 @@ import type { QueryAlbumParams } from '../../../access/PhotoAccessHelperAccess';
 import lazy { PhotoAccessHelperAccess } from '../../../access/PhotoAccessHelperAccess';
 import lazy { PositionFilter } from '../../PositionFilter';
 import lazy { UserFileData } from '../../UserFileData';
+import lazy { ImageUtil } from '../../../utils/ImageUtil';
 
 /* instrument ignore file */
 const TAG: string = 'PhotoDataImpl';
+interface TimeLineManagerLike {
+  isOpenYearMonthTimeLine?: () => boolean;
+}
 
 export class PhotoDataImpl extends BrowserDataImpl {
   public name?: Resource;
@@ -94,8 +98,17 @@ export class PhotoDataImpl extends BrowserDataImpl {
       mediaItemList.push(mediaItem);
     } else {
       let mediaItem: MediaItem = new MediaItem(item);
-      mediaItem.setThumbnail(this.getThumbnailUri(mediaItem.uri, mediaItem.path, mediaItem.getDateModified(),
-        mediaItem.getThumbnailReady()));
+      // 这里不直接依赖 TimeLineModelManager 类型，避免引入额外耦合。
+      const timeLineManager = AppStorage.get('TimeLineModelManager') as TimeLineManagerLike | undefined;
+      let isOpenYearMonth: boolean = timeLineManager?.isOpenYearMonthTimeLine?.() ?? false;
+      const isLongImage = ImageUtil.isLongImage(mediaItem.width, mediaItem.height);
+      if (isOpenYearMonth && isLongImage) {
+        mediaItem.setThumbnail(ImageUtil.getThumbnailJpgUriWithSize(mediaItem.uri, mediaItem.path, mediaItem.getDateModified(),
+          256, 256, mediaItem.getThumbnailReady()));
+      } else {
+        mediaItem.setThumbnail(this.getThumbnailUri(mediaItem.uri, mediaItem.path, mediaItem.getDateModified(),
+          mediaItem.getThumbnailReady()));
+      }
       mediaItem.setDetailTimeString(String(item.get(photoAccessHelper.PhotoKeys.DETAIL_TIME.toString()))) ;
       mediaItemList.push(mediaItem);
     }

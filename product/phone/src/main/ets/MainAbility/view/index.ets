@@ -118,9 +118,9 @@ import lazy { AlbumUtils } from '@ohos/common/src/main/ets/default/utils/AlbumUt
 import lazy {
   PhotoBrowserViewLoaderParams
 } from '@ohos/common/src/main/ets/default/interface/PhotoBrowserViewLoaderParams';
- import lazy { initPhotoBrowserController,
-   LibraryConstants,
-   PhotosHmBrowserController } from '@ohos/browserlibrary';
+import lazy { initPhotoBrowserController,
+  LibraryConstants,
+  PhotosHmBrowserController } from '@ohos/browserlibrary';
 import lazy { global } from '@ohos/tools/src/main/global/Contexts';
 import lazy {
   AlbumCoverSelectLoaderParams,
@@ -139,7 +139,9 @@ import lazy { UiUtil } from '@ohos/common/src/main/ets/default/utils/UiUtil';
 import lazy { MediaDataSource } from '@ohos/common/src/main/ets/default/model/browser/photo/MediaDataSource';
 import lazy { DataSourceCommonUtil } from '@ohos/common/src/main/ets/default/utils/DataSourceCommonUtil';
 import lazy { AlbumDataSource } from '@ohos/common/src/main/ets/default/model/AlbumDataSource';
+import lazy { menuOption } from '@ohos/common/src/main/ets/default/view/browserOperation/MenuOption';
 import systemParameter from '@ohos.systemparameter';
+import { SelectManager } from '@ohos/common/src/main/ets/default/model/browser/SelectManager';
 
 export type Preferences = data_preferences.Preferences;
 
@@ -219,7 +221,7 @@ struct IndexPage {
     .renderingStrategy(SymbolRenderingStrategy.MULTIPLE_COLOR)
     .fontColor([$r('sys.color.font_emphasize'),
       this.currentMode === ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT ?
-      $r('app.color.tabbar_picture_fill_light_color') : $r('app.color.tabbar_picture_fill_dark_color')]);
+        $r('app.color.tabbar_picture_fill_light_color') : $r('app.color.tabbar_picture_fill_dark_color')]);
   @State symbolModifierAlbumHighlighting: SymbolGlyphModifier =
     new SymbolGlyphModifier($r('sys.symbol.rectangle_on_rectangle_fill'))
       .renderingStrategy(SymbolRenderingStrategy.MULTIPLE_COLOR)
@@ -291,7 +293,7 @@ struct IndexPage {
   @Provide('isShowPhotoHiddenView') @Watch('doAnimation') isShowPhotoHiddenView: boolean = false;
   @State private isShowHiddenGridView: boolean = false;
   @Provide @Watch('updateBrowserStatus') browserController: PhotosHmBrowserController = new PhotosHmBrowserController(
-   global.uiAbilityContext(), global.windowStage(), getContext())
+    global.uiAbilityContext(), global.windowStage(), getContext())
   @Provide isShowPhotoClassifieds: boolean = false;
   @Provide isShowPhotoShooting: boolean = false;
   @Provide isShowPortraitAlbumsView: boolean = false;
@@ -322,13 +324,14 @@ struct IndexPage {
     display.FoldDisplayMode =
     display.FoldDisplayMode.FOLD_DISPLAY_MODE_UNKNOWN;
   @State private currentTabBarHeight: number = DeviceInfo.isVerdeFoldable() ?
-  Constants.ToolBarHeight : px2vp(this.rsc.getNumber($r('app.float.tab_nav_bar_vertical_height')));
+    Constants.ToolBarHeight : px2vp(this.rsc.getNumber($r('app.float.tab_nav_bar_vertical_height')));
   @State isSelectedModeIndex: boolean = false;
   @State tabsPaddingBottom: number = this.isShowTabBar ? px2vp(this.navigationBarHeight) :
-  this.diggingHoleCameraArea.bottom;
+    this.diggingHoleCameraArea.bottom;
   @State initTabsPaddingBottom: number = this.tabsPaddingBottom;
   private navigationBroadCast = NavigationBroadCastManager.getInstance().getBroadCast();
-  private loadNavigationPageFun: Function = (name: string): Promise<void> => this.loadNavigationPage(name);
+  private loadNavigationPageFun: (name: string) => Promise<void> =
+    (name: string): Promise<void> => this.loadNavigationPage(name);
   @State private isBrowserLoaded: boolean = false;
   private isSelectBrowserLoaded: boolean = false;
   @State scrollIndex: number = -1;
@@ -382,7 +385,7 @@ struct IndexPage {
   private focusCtrlManager = FocusCtrlManager.getInstance();
   public isFromFormProfile: boolean = false;
   public isFromFormPortrait: boolean = false;
-  private handleShowSearchPageFunc: Function = (): void => this.handleShowSearchPage();
+  private handleShowSearchPageFunc: () => void = (): void => this.handleShowSearchPage();
   private isFromPortraitCard: boolean = false;
   private wrapperBindFunc?: () => void;
 
@@ -484,35 +487,36 @@ struct IndexPage {
     }
   }
 
-  private hideBrowserBarsFunc: Function = (): void => {
+  private hideBrowserBarsFunc: () => void = (): void => {
     this.browserController.emitCallback(LibraryConstants.HIDE_BARS_CALLBACK, []);
   }
   // tabBar显示和隐藏动效
   private viewAnimator: AnimatorResult | undefined;
-  private updateColorModeFunc: Function = (): void => this.updateColorMode();
-  private jumpToAlbumForFileManagerFunc: Function = (): void => this.jumpToAlbumForFileManager();
+  private updateColorModeFunc: () => void = (): void => this.updateColorMode();
+  private jumpToAlbumForFileManagerFunc: () => void = (): void => this.jumpToAlbumForFileManager();
 
   private isPullingDown: boolean = false;
-  private isPullingDownFunc: Function = (isPullingDown: boolean): void => {
+  private isPullingDownFunc: (isPullingDown: boolean) => void = (isPullingDown: boolean): void => {
     this.isPullingDown = isPullingDown;
   }
   private isPullingUp: boolean = false;
-  private isPullingUpFunc: Function = (isPullingUp: boolean): void => {
+  private isPullingUpFunc: (isPullingUp: boolean) => void = (isPullingUp: boolean): void => {
     this.isPullingUp = isPullingUp;
   }
   private isClickRemoveOrHiddenDialog: boolean = false;
-  private isClickRemoveOrHiddenDialogFunc: Function = (isClickRemoveOrHiddenDialog: boolean): void => {
-    this.isClickRemoveOrHiddenDialog = isClickRemoveOrHiddenDialog;
-  }
+  private isClickRemoveOrHiddenDialogFunc: (isClickRemoveOrHiddenDialog: boolean) => void =
+    (isClickRemoveOrHiddenDialog: boolean): void => {
+      this.isClickRemoveOrHiddenDialog = isClickRemoveOrHiddenDialog;
+    }
   private isShowOrHideBar: boolean = false;
-  private isShowOrHideBarFunc: Function = (isShowOrHideBar: boolean): void => {
+  private isShowOrHideBarFunc: (isShowOrHideBar: boolean) => void = (isShowOrHideBar: boolean): void => {
     this.isShowOrHideBar = isShowOrHideBar;
   }
-  private onIsSelectModeFunc: Function = (isSelectMode: boolean): void => {
+  private onIsSelectModeFunc: (isSelectMode: boolean) => void = (isSelectMode: boolean): void => {
     this.isSelectedMode = isSelectMode;
   }
   isFaCardExitTransition = false;
-  private changePageExitTransitionFunc: Function = (): void => {
+  private changePageExitTransitionFunc: () => void = (): void => {
     this.isFaCardExitTransition = true;
   }
   // 宫格初始配置同步器
@@ -649,7 +653,7 @@ struct IndexPage {
     }
     animateTo({
       duration: getDurationConst((this.isShowPhotoGridView || this.isShowPhotoHiddenView) ? GridLink.IN_TAB_BAR :
-      GridLink.OUT_TAB_BAR),
+        GridLink.OUT_TAB_BAR),
       curve: Curve.Sharp,
     }, (): void => {
       TabBarUtils.printLog(TAG, 'doAnimation', this.isShowTabBar, !this.isShowPhotoGridView);
@@ -779,35 +783,35 @@ struct IndexPage {
   }
 
   private currentTabBarHeightChange(): void {
-      // tab存在
-      if (!this.isHorizontal) {
-        // 垂直
-        this.currentTabBarHeight = this.isFullMode ? Constants.ToolBarHeight + px2vp(this.navigationBarHeight) :
-          Constants.ToolBarHeight + px2vp(this.navigationBarBottomHeight);
-      } else {
-        // 水平
-        if ((DeviceInfo.isTablet() || FoldUtil.isTriExpand(this.curFoldStatus)) || DeviceInfo.isPhoneUx()) {
-          this.currentTabBarHeight = this.isFullMode ?
-            Constants.ToolBarHeight_Horizontal + px2vp(this.navigationBarHeight) :
-            Constants.ToolBarHeight_Horizontal + px2vp(this.navigationBarBottomHeight);
-        }
-        /* instrument ignore next */
-        if (DeviceInfo.isFoldable() && getScreen().isFullMode()) {
-          this.currentTabBarHeight = Constants.TabCoverAIHeight;
-        }
-        /* instrument ignore next */
-        if (DeviceInfo.isFoldable() && !getScreen().isFullMode()) {
-          this.currentTabBarHeight = Constants.ToolBarHeight;
-        }
+    // tab存在
+    if (!this.isHorizontal) {
+      // 垂直
+      this.currentTabBarHeight = this.isFullMode ? Constants.ToolBarHeight + px2vp(this.navigationBarHeight) :
+        Constants.ToolBarHeight + px2vp(this.navigationBarBottomHeight);
+    } else {
+      // 水平
+      if ((DeviceInfo.isTablet() || FoldUtil.isTriExpand(this.curFoldStatus)) || DeviceInfo.isPhoneUx()) {
+        this.currentTabBarHeight = this.isFullMode ?
+          Constants.ToolBarHeight_Horizontal + px2vp(this.navigationBarHeight) :
+          Constants.ToolBarHeight_Horizontal + px2vp(this.navigationBarBottomHeight);
       }
       /* instrument ignore next */
-      if (DeviceInfo.isVerdeFoldable()) {
-        this.currentTabBarHeight = this.isShowVerdeOutTabBar ? Constants.ActionBarHeight : 0;
+      if (DeviceInfo.isFoldable() && getScreen().isFullMode()) {
+        this.currentTabBarHeight = Constants.TabCoverAIHeight;
       }
-      // 记录tabBar高度
-      if (!DeviceInfo.isFoldable() && this.isHorizontal) {
-        ImmersiveController.endTabBarHeight = this.currentTabBarHeight;
+      /* instrument ignore next */
+      if (DeviceInfo.isFoldable() && !getScreen().isFullMode()) {
+        this.currentTabBarHeight = Constants.ToolBarHeight;
       }
+    }
+    /* instrument ignore next */
+    if (DeviceInfo.isVerdeFoldable()) {
+      this.currentTabBarHeight = this.isShowVerdeOutTabBar ? Constants.ActionBarHeight : 0;
+    }
+    // 记录tabBar高度
+    if (!DeviceInfo.isFoldable() && this.isHorizontal) {
+      ImmersiveController.endTabBarHeight = this.currentTabBarHeight;
+    }
     Log.info(TAG, `currentTabBarHeightChange:${this.isShowTabBar} ${this.tabsPaddingBottom} ${this.currentTabBarHeight}`);
   }
 
@@ -1324,10 +1328,11 @@ struct IndexPage {
       this.doSelectPhotoBrowserViewBack();
       return true;
     }
-    if (!((DeviceInfo.isTablet() &&
-      AppStorage.get<window.WindowStatusType>('windowStatus') !== window.WindowStatusType.FLOATING) ||
-    FoldUtil.isTriExpand(this.curFoldStatus)) && this.currentIndex === Constants.ALBUM_PAGE_INDEX) {
-      return this.differentViewBack();
+    if (this.currentIndex === Constants.ALBUM_PAGE_INDEX) {
+      const processed: boolean = this.differentViewBack();
+      if (processed) {
+        return true;
+      }
     }
     if ((DeviceInfo.isTablet() || FoldUtil.isTriExpand(this.curFoldStatus)) && this.isShowSearchPage) {
       this.isShowSearchPage = false;
@@ -1470,37 +1475,37 @@ struct IndexPage {
       this.AlbumPhotoViewLoader()
     }
   }
-/*
-  @Builder
-  HDSSideBarBuilder() {
-    HdsSideBar({
-      sideBarPanelBuilder: (): void => {
-        this.SideBarPanelBuilder()
-      },
-      contentPanelBuilder: (): void => {
-        this.ContentPanelBuilder()
-      },
-      autoHide: true,
-      contentAreaMask: false,
-      sideBarContainerType: SideBarContainerType.Embed,
-      isShowSideBar: this.isShowSideBar,
-      sideBarWidth: $r('app.float.action_bar_view_width'),
-      minSideBarWidth: $r('app.float.action_bar_view_min_width'),
-      maxSideBarWidth: $r('app.float.action_bar_view_max_width'),
-      onChange: (isEmbed: boolean) => {
-        Log.info(TAG, `bar status:${isEmbed}`);
-        this.isShowSideBar = isEmbed;
-        ActionBarVar.isShowSideBar = isEmbed;
-        this.appBroadCast.emit(BroadCastConstants.ON_SIDEBAR_CHANGED, [this.isShowSideBar]);
-        let sideBarViewModel: SideBarViewModel | undefined =
-          LocalStorage.getShared()?.get<SideBarViewModel>(SideBarViewModel.STORAGE_KEY);
-        if (sideBarViewModel) {
-          sideBarViewModel.status = this.isShowSideBar;
-        }
-      },
-    })
-  }
-*/
+  /*
+    @Builder
+    HDSSideBarBuilder() {
+      HdsSideBar({
+        sideBarPanelBuilder: (): void => {
+          this.SideBarPanelBuilder()
+        },
+        contentPanelBuilder: (): void => {
+          this.ContentPanelBuilder()
+        },
+        autoHide: true,
+        contentAreaMask: false,
+        sideBarContainerType: SideBarContainerType.Embed,
+        isShowSideBar: this.isShowSideBar,
+        sideBarWidth: $r('app.float.action_bar_view_width'),
+        minSideBarWidth: $r('app.float.action_bar_view_min_width'),
+        maxSideBarWidth: $r('app.float.action_bar_view_max_width'),
+        onChange: (isEmbed: boolean) => {
+          Log.info(TAG, `bar status:${isEmbed}`);
+          this.isShowSideBar = isEmbed;
+          ActionBarVar.isShowSideBar = isEmbed;
+          this.appBroadCast.emit(BroadCastConstants.ON_SIDEBAR_CHANGED, [this.isShowSideBar]);
+          let sideBarViewModel: SideBarViewModel | undefined =
+            LocalStorage.getShared()?.get<SideBarViewModel>(SideBarViewModel.STORAGE_KEY);
+          if (sideBarViewModel) {
+            sideBarViewModel.status = this.isShowSideBar;
+          }
+        },
+      })
+    }
+  */
 
   build() {
     Navigation(this.navigationPageInfos) {
@@ -1731,6 +1736,15 @@ struct IndexPage {
           } else if (event.keyCode === MultimodalInputManager.KEY_CODE_KEYBOARD_V) {
             Log.info(TAG, 'index keyboardShortcut ctrl + v');
             this.appBroadCast.emit(BroadCastConstants.PASTE_MEDIA, []);
+          } else if (event.keyCode === MultimodalInputManager.KEY_CODE_P) {
+            Log.info(TAG, 'index keyboardShortcut ctrl + p');
+            // 优先处理宫格多选打印（SelectManager 由宫格写入 AppStorage）
+            let selectManager: SelectManager | undefined =
+              AppStorage.get<SelectManager>(Constants.PHOTO_GRID_SELECT_MANAGER);
+            if (selectManager && selectManager.getSelectedCount() > 0) {
+              menuOption(Action.PRINT.actionID, selectManager, this.appBroadCast);
+              return;
+            }
           }
         }
 
@@ -1770,7 +1784,7 @@ struct IndexPage {
           AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_SHIFT_PRESS, false);
         }
       }
-      if (DeviceInfo.isTablet() && (event.type == -1 || event.type == KeyType.Up)) {
+      if (DeviceInfo.isTablet() && (event.type == Number(-1) || event.type == KeyType.Up)) {
         Log.info(TAG, `phone index on key event Up, isKeyEvent = false`);
         LocalStorage.getShared()?.setOrCreate<boolean>('isKeyEvent', false);
       }
@@ -1855,7 +1869,9 @@ struct IndexPage {
       name === NavigationConstants.NAVIGATION_PRIVACY_VIEWER ||
       name === NavigationConstants.NAVIGATION_SMART_ALBUM_GRID_PAGE ||
       name === NavigationConstants.NAVIGATION_GROUP_PAGE) {
-      this.navigationPageLoader();
+      if (this.navigationPageLoader) {
+        this.navigationPageLoader();
+      }
     } else {
       this.PageMapContinue(name, param);
     }
@@ -1907,16 +1923,16 @@ struct IndexPage {
   sideBarButton() {
     Button({ type: ButtonType.Circle }) {
       SymbolGlyph(this.isShowSideBar ? $r('sys.symbol.open_sidebar') :
-      $r('sys.symbol.close_sidebar'))
+        $r('sys.symbol.close_sidebar'))
         .fontSize($r('app.float.icon_size'))
         .fontColor([this.colorMode && !this.isShowSideBar && !this.isShowSearchPage ?
-        Action.ICON_DEFAULT_COLOR_CONTRARY : $r('sys.color.icon_primary')])
+          Action.ICON_DEFAULT_COLOR_CONTRARY : $r('sys.color.icon_primary')])
         .draggable(false)
     }
     .backgroundColor(this.colorMode && !this.isShowSideBar && !this.isShowSearchPage ?
-    ImmersiveController.bottomColumnBgColor : $r('sys.color.comp_background_tertiary'))
+      ImmersiveController.bottomColumnBgColor : $r('sys.color.comp_background_tertiary'))
     .backgroundBlurStyle(this.colorMode && !this.isShowSideBar && !this.isShowSearchPage ?
-    BlurStyle.COMPONENT_ULTRA_THIN : BlurStyle.NONE)
+      BlurStyle.COMPONENT_ULTRA_THIN : BlurStyle.NONE)
     .borderRadius($r('sys.float.corner_radius_level4'))
     .height($r('app.float.action_bar_button_height'))
     .width($r('app.float.action_bar_button_height'))
@@ -2170,7 +2186,8 @@ struct IndexPage {
       } else if (name === NavigationConstants.NAVIGATION_DESTINATION_ALBUM_PREVIEW) {
         let pageObj = await import('@ohos/timeline/src/main/ets/albumgrid/view/albumCover/AlbumCoverChangeView');
         this.albumCoverPreviewPageLoader = pageObj.AlbumCoverPreviewPageLoader;
-      } else if (name === NavigationConstants.NAVIGATION_OTHER_ALBUM_PAGE) {
+      } else if (name === NavigationConstants.NAVIGATION_OTHER_ALBUM_PAGE ||
+        name === NavigationConstants.NAVIGATION_DESTINATION_PHOTO_GRID_VIEW) {
         let pageObj = await import('./OtherAlbumPage');
         this.navigationPageLoader = pageObj.OtherAlbumPageLoader;
       } else {
@@ -2206,13 +2223,13 @@ struct IndexPage {
     }
     this.isPhoneUx = this.getPhoneUX();
     if (DeviceInfo.isGRLFoldScreen()) {
-      this.isShowTabBar = AppStorage.get(Constants.KEY_OF_IS_SHOW_PHOTO_GRID_VIEW) || this.isSelectedMode ||
+      this.isShowTabBar = AppStorage.get<boolean>(Constants.KEY_OF_IS_SHOW_PHOTO_GRID_VIEW) || this.isSelectedMode ||
         (this.currentIndex !== 0 && (this.isShowPhotoClassifieds || this.isShowPortraitAlbumsView ||
         this.isShowPhotoShooting)) ? false : this.isPhoneUx;
     } else if (DeviceInfo.isTablet()) {
       this.isShowTabBar = this.isPhoneUx;
     } else {
-      this.isShowTabBar = AppStorage.get(Constants.KEY_OF_IS_SHOW_PHOTO_GRID_VIEW) ? false : this.isPhoneUx;
+      this.isShowTabBar = AppStorage.get<boolean>(Constants.KEY_OF_IS_SHOW_PHOTO_GRID_VIEW) ? false : this.isPhoneUx;
     }
     this.isShowSideBar = !this.isPhoneUx;
     ActionBarVar.isShowSideBar = this.isShowSideBar;
@@ -2264,7 +2281,7 @@ struct IndexPage {
   // 通过当前当前页面名称
   private getCurrentNavigationPathName(): string {
     let currentNavigationPathName = this.navigationPageInfos.size() === 0 ? '' :
-    this.navigationPageInfos.getAllPathName()[this.navigationPageInfos.size() - 1];
+      this.navigationPageInfos.getAllPathName()[this.navigationPageInfos.size() - 1];
     return currentNavigationPathName;
   }
 

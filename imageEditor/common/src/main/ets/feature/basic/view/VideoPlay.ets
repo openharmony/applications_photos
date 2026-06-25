@@ -51,6 +51,11 @@ export struct VideoPlay {
   aboutToAppear(): void {
   }
 
+  private getHiddenMaskColor(): Color | string {
+    const keepTransparent = this.editor.asset.mosaic().isLeaving;
+    return keepTransparent ? Color.Transparent : Color.Black;
+  }
+
   /* instrument ignore file */
   build() {
     Stack() {
@@ -84,7 +89,7 @@ export struct VideoPlay {
             .width('100%')
             .height('100%')
             .id('hideXcMask')
-            .backgroundColor(Color.Black)
+            .backgroundColor(this.getHiddenMaskColor())
         }
       }
 

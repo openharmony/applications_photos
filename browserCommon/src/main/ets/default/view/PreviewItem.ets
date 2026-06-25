@@ -30,6 +30,8 @@ import lazy { ImageUtil } from '@ohos/common/src/main/ets/default/utils/ImageUti
 import lazy { AvPlayConstants } from '@ohos/common/src/main/ets/default/model/common/AvPlayConstants';
 import lazy { MultimodalInputManager } from '@ohos/common/src/main/ets/default/model/common/MultimodalInputManager';
 import lazy { AssetHelper } from '@ohos/common/src/main/ets/default/utils/AssetHelper';
+import lazy { Thumbnail } from '@ohos/common/src/main/ets/default/model/browser/photo/Thumbnail';
+import lazy { SelectParams } from '@ohos/common/src/main/ets/default/model/common/SelectParams';
 import lazy { photoAccessHelper } from '@kit.MediaLibraryKit';
 import lazy { DateUtil } from '@ohos/common/src/main/ets/default/utils/DateUtil';
 import lazy Rsc from '@ohos/tools/src/main/global/RscString';
@@ -41,6 +43,7 @@ import lazy { i18n } from '@kit.LocalizationKit';
 import lazy { LengthMetrics } from '@kit.ArkUI';
 import lazy { PreviewItemVM } from '../viewModel/base/PreviewItemVM';
 import lazy { PhotoBrowserStateMachine } from '../viewModel/statemachine/PhotoBrowserStateMachine';
+import lazy { EditorPhotoContext } from '@ohos/common/src/main/ets/default/utils/EditorPhotoContext';
 
 /* instrument ignore file  */
 const TAG: string = 'common_PreviewItem';
@@ -55,6 +58,7 @@ const DIFF_FACTOR = 2;
 const HALF_FACTOR = 2;
 
 const PREVIEW_PROGRESS_TOP_MARGIN = 12;
+const PREVIEW_ITEM_PLACEHOLDER_COLOR: string = '#cfd3d8';
 
 export enum AnchorDirection {
   HEADER,
@@ -114,6 +118,7 @@ export struct PreviewItem {
   @StorageLink('isDoingRecoverBigPhotoAnim') isDoingRecoverAnim: boolean = false;
   @Link private opacityValue: number;
   @State viewModel: PreviewItemVM = new PreviewItemVM(this.stateMachine);
+  @State private hasRetriedLoadWithLcd: boolean = false;
   private onVideoFrameClickAction: Function = () => {
   }
   private updateVideoWidthFunc: Function = (width: number):
@@ -181,7 +186,30 @@ export struct PreviewItem {
 
   onForceRefreshChanged() {
     Log.info(TAG, 'onForceRefreshChanged');
+    if (this.shouldForceRefreshEditedItem()) {
+      const mediaItem = this.item.item;
+      this.hasRetriedLoadWithLcd = false;
+      const currentThumbnail: string = this.item?.thumbnail?.url ?? '';
+      const refreshToken: number = Date.now();
+      const refreshUri: string = `${ImageUtil.getLCDUri(mediaItem?.uri, mediaItem?.path, mediaItem?.getDateModified?.())}` +
+        `&forceupdate=true&timestampApp=${refreshToken}`;
+      if (currentThumbnail !== refreshUri) {
+        this.item.setItemThumbnail(new Thumbnail(refreshUri));
+      }
+      this.previewVisibility = Visibility.Hidden;
+    }
     this.calcItemStyle();
+  }
+
+  private shouldForceRefreshEditedItem(): boolean {
+    if (!this.item?.item?.path || !this.item?.item?.getDateModified?.()) {
+      return false;
+    }
+    const photoEditSaveUri: string | undefined = LocalStorage.getShared()?.get<string>(
+      BroadCastConstants.PHOTO_EDIT_SAVE_URI);
+    const editorExitUri: string | undefined = EditorPhotoContext.getInstance().getEditorUriOnExit();
+    const targetUri: string | undefined = photoEditSaveUri || editorExitUri;
+    return !!targetUri && targetUri === this.item.item.uri && EditorPhotoContext.getInstance().getNotifyHideEditor();
   }
 
   // 大图跟手位移
@@ -273,6 +301,26 @@ export struct PreviewItem {
     }
   }
 
+  private tryFallbackToLcdOnError(event: ImageError): boolean {
+    if (!this.item?.item || this.hasRetriedLoadWithLcd) {
+      return false;
+    }
+    let lcdUri = ImageUtil.getLCDUri(this.item.item.uri, this.item.item.path, this.item.item.getDateModified?.());
+    let userId = LocalStorage.getShared()?.get<SelectParams>(Constants.PHOTO_PICKER_PARAMS_KEY)?.userId ?? -1;
+    if (userId > 0) {
+      lcdUri += `&user=${userId}`;
+    }
+    if (!lcdUri || lcdUri === this.item?.thumbnail?.url) {
+      return false;
+    }
+    this.hasRetriedLoadWithLcd = true;
+    this.item.setItemThumbnail(new Thumbnail(lcdUri));
+    this.previewVisibility = Visibility.Visible;
+    Log.warn(TAG, `preview thumbnail load failed, retry with lcd. index=${this.item?.pos}, uri=${
+      this.item.item.uri}, path=${this.item.item.path}, fallbackSource=${lcdUri}, error=${event?.message}`);
+    return true;
+  }
+
   //获取图片文本信息
   /* instrument ignore next */
   private getImageText(): string {
@@ -322,6 +370,7 @@ export struct PreviewItem {
           Swipes.calcPxRoundToInteger(this.item?.itemWidth))
         .height(DeviceInfo.isTv() ? Constants.FULL_PERCENT : ((this.item?.pos === this.centerIndex) ?
           ImageUtil.getSelectedSmallImgHeight() : ImageUtil.getSmallImgHeight()))
+        .backgroundColor(PREVIEW_ITEM_PLACEHOLDER_COLOR)
         .draggable(false)
         .objectFit(ImageFit.Cover)
         .borderRadius(DeviceInfo.isTv() ? $r('sys.float.corner_radius_level6') : undefined)
@@ -342,6 +391,10 @@ export struct PreviewItem {
           this.previewVisibility = Visibility.Visible;
         })
         .onError((event: ImageError) => {
+          if (this.tryFallbackToLcdOnError(event)) {
+            return;
+          }
+          this.previewVisibility = Visibility.Visible;
           Log.error(TAG,
             `SmallImgItemBuilder load error, imagePosition: ${this.item?.pos}, item: ${this.item?.thumbnail?.url}, ${JSON.stringify(this.item?.thumbnail)}, error: ${event?.message}`);
         })
@@ -449,13 +502,15 @@ export struct PreviewItem {
       .width((this.isFrameExpand && this.item?.item?.frameNum) ?
         (this.item?.item?.frameNum * this.selectedSmallImgWidth) :
         (AvPlayConstants.COVER_FRAME_NUM * this.selectedSmallImgWidth))
-      .height(DeviceInfo.isTv() ? Constants.FULL_PERCENT : undefined)
+      .height(ImageUtil.getSelectedSmallImgHeight())
+      .backgroundColor(PREVIEW_ITEM_PLACEHOLDER_COLOR)
     }
     .accessibilityGroup(true)
     .borderRadius(DeviceInfo.isTv() ? $r('sys.float.corner_radius_level6') : undefined)
     .alignContent(this.anchorDirection === AnchorDirection.HEADER ? Alignment.TopStart : Alignment.TopEnd)
     .width(this.centerVideoPreviewWidth)
-    .height(DeviceInfo.isTv() ? Constants.FULL_PERCENT : undefined)
+    .height(ImageUtil.getSelectedSmallImgHeight())
+    .backgroundColor(PREVIEW_ITEM_PLACEHOLDER_COLOR)
     .clip(true)
     .transition(TransitionEffect.asymmetric(undefined, TransitionEffect.OPACITY.animation({
       duration: AvPlayConstants.thumbInOutDuration,
@@ -520,6 +575,7 @@ export struct PreviewItem {
         Swipes.calcPxRoundToInteger(ImageUtil.getSmallImgWidth()))
         .borderRadius(DeviceInfo.isTv() ? $r('sys.float.corner_radius_level6') : undefined)
         .height(DeviceInfo.isTv() ? Constants.FULL_PERCENT : ImageUtil.getSmallImgHeight())
+        .backgroundColor(PREVIEW_ITEM_PLACEHOLDER_COLOR)
         .backgroundBlurStyle(DeviceInfo.isTv() ? BlurStyle.BACKGROUND_ULTRA_THICK : undefined)
         .key(`previewItemImg${this.item.pos}`)
         .transition(!this.isBrowserShow ? TransitionEffect.OPACITY.animation({

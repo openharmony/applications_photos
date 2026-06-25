@@ -203,8 +203,15 @@ export class PhotoDataManager {
       mediaItemList.push(mediaItem);
     } else {
       let mediaItem: SendableMediaItem = new SendableMediaItem(item);
-      mediaItem.setThumbnail(ImageUtil.getThumbnailUri(mediaItem.uri, mediaItem.path, mediaItem.dateModified,
-        this.param.isOpenYearMonth, mediaItem?.thumbnailReady));
+      const isLongImage = ImageUtil.isLongImage(mediaItem.getWidth(), mediaItem.getHeight());
+      // 年月日模式默认走 ASTC，但超长图更容易在 ASTC 解码链路触发 AllocMem -5，因此回退到带尺寸的 JPG thumbnail。
+      if (this.param.isOpenYearMonth && isLongImage) {
+        mediaItem.setThumbnail(ImageUtil.getThumbnailJpgUriWithSize(mediaItem.uri, mediaItem.path, mediaItem.dateModified,
+          256, 256, mediaItem?.thumbnailReady));
+      } else {
+        mediaItem.setThumbnail(ImageUtil.getThumbnailUri(mediaItem.uri, mediaItem.path, mediaItem.dateModified,
+          this.param.isOpenYearMonth, mediaItem?.thumbnailReady));
+      }
       mediaItemList.push(mediaItem);
     }
     return;

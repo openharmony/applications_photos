@@ -39,7 +39,7 @@ const TAG: string = 'MediaItem';
 const THUMBNAIL_WIDTH: number = 256;
 const NUMBER_DIGIT: number = 3; // 地址经纬度小数位数
 const noEditableVideoType: string[] = ['video/mp2ts', 'video/mp2t', 'video/webm'];
-const editableImageType: string[] = ['jpg', 'jpeg', 'jpe', 'png', 'webp', 'heic', 'heif'];
+const editableImageType: string[] = ['jpg', 'jpeg', 'jpe', 'png', 'webp', 'heic', 'heif', 'wbmp', 'bmp', 'bm'];
 const FILE_ID_LENGTH: number = 10;
 const MILLISECONDS_PER_SECOND: number = 1000;
 const MAX_ENCODING_RESOLUTION: number = 1.5e8;
@@ -257,6 +257,11 @@ export class MediaItem {
       this.size = data.size;
       this.width = data.width;
       this.height = data.height;
+      // `getThumbnail/getLCDUri` 依赖 path data，用于从 URI 正确解码缩略图。
+      // 对于 Shared/导入来源，如果不初始化 path，会导致 `oper=thumbnail&path=...` 解析失败，从而一直展示占位图。
+      this.path = data.data ?? this.uri;
+      this.uniqueId = this.path;
+      this.hashCode = this.uniqueId;
     }
     this.isBurstPhotos = data?.subtype === BURST_PHOTOS_SUBTYPE;
     // instrument ignore if
@@ -465,13 +470,17 @@ export class MediaItem {
       return !noEditableVideoType.includes(this.mimeType);
     }
 
+    if (this.mediaType === photoAccessHelper.PhotoType.IMAGE && this.isGifType()) {
+      return false;
+    }
+
     // instrument ignore if
     if (!this.mimeType) {
-      let suffix = this.uri?.split('.')[this.uri?.split('.').length - 1].toLowerCase();
+      let suffix = this.getFileExtension()?.toLowerCase();
       return !editableImageType.every(imageType => suffix.indexOf(imageType) === -1);
     }
 
-    if (this.supportedFormats.includes(this.mimeType) && this.mimeType.toLowerCase() !== 'image/gif') {
+    if (this.supportedFormats.includes(this.mimeType) || this.isBmpType() || this.isWbmpType()) {
       return true;
     }
     // instrument ignore next
@@ -930,6 +939,105 @@ export class MediaItem {
     return this.subLocalityAddress;
   }
 
+  public async getGpsCoordinateStatic(): Promise<string> {
+    if (!this.data) {
+      Log.info(TAG, 'getGpsCoordinateStatic null:' + this.dateDay);
+      return '';
+    }
+    const fd: number = await this.data.open('R');
+    if (fd <= 0) {
+      return '';
+    }
+    try {
+      const imageSource: image.ImageSource = image.createImageSource(fd);
+      const longitude: string = await imageSource.getImageProperty(image.PropertyKey.GPS_LONGITUDE);
+      const latitude: string = await imageSource.getImageProperty(image.PropertyKey.GPS_LATITUDE);
+      const longitudeRef: string = await imageSource.getImageProperty(image.PropertyKey.GPS_LONGITUDE_REF);
+      const latitudeRef: string = await imageSource.getImageProperty(image.PropertyKey.GPS_LATITUDE_REF);
+      if (latitude && longitude) {
+        const formattedCoordinate: string = this.formatGpsCoordinate(longitude, latitude, longitudeRef, latitudeRef);
+        Log.info(TAG, `getGpsCoordinateStatic dateDay:${this.dateDay} lon:${longitude} lat:${latitude} ` +
+          `formatted:${formattedCoordinate}`);
+        return formattedCoordinate;
+      }
+    } catch (e) {
+      Log.error(TAG, `getGpsCoordinateStatic failed: ${e?.message}`, e?.stack);
+    } finally {
+      await this.data.close(fd);
+    }
+    return '';
+  }
+
+  private formatGpsCoordinate(longitude: string, latitude: string, longitudeRef: string, latitudeRef: string): string {
+    const formattedLongitude: string = this.formatSingleGpsCoordinate(longitude, longitudeRef, true);
+    const formattedLatitude: string = this.formatSingleGpsCoordinate(latitude, latitudeRef, false);
+    if (formattedLongitude && formattedLatitude) {
+      return `${formattedLongitude} ${formattedLatitude}`;
+    }
+    return formattedLongitude || formattedLatitude;
+  }
+
+  private formatSingleGpsCoordinate(coordinate: string, directionRef: string, isLongitude: boolean): string {
+    if (!coordinate) {
+      return '';
+    }
+    const coordinateValues: number[] = this.parseGpsCoordinateValues(coordinate);
+    if (coordinateValues.length === 0) {
+      return '';
+    }
+    let degrees: number = coordinateValues[0] ?? 0;
+    let minutes: number = coordinateValues[1] ?? 0;
+    let seconds: number = coordinateValues[2] ?? 0;
+    if (coordinateValues.length === 1) {
+      const dmsValues: number[] = this.convertDecimalToDms(Math.abs(degrees));
+      degrees = dmsValues[0];
+      minutes = dmsValues[1];
+      seconds = dmsValues[2];
+    }
+    const direction: string = this.getGpsDirection(directionRef, degrees, isLongitude);
+    const formattedSeconds: string = this.formatGpsNumber(seconds);
+    return `${direction}${Math.abs(degrees)}\u00B0${Math.abs(minutes)}\u2032${formattedSeconds}\u2033`;
+  }
+
+  private parseGpsCoordinateValues(coordinate: string): number[] {
+    return coordinate.split(',')
+      .map(item => Number(item.trim()))
+      .filter(item => !Number.isNaN(item));
+  }
+
+  private convertDecimalToDms(value: number): number[] {
+    const degrees: number = Math.trunc(value);
+    const minuteFloat: number = (value - degrees) * 60;
+    const minutes: number = Math.trunc(minuteFloat);
+    const seconds: number = (minuteFloat - minutes) * 60;
+    return [degrees, minutes, seconds];
+  }
+
+  private getGpsDirection(directionRef: string, degreeValue: number, isLongitude: boolean): string {
+    const upperDirectionRef: string = directionRef ? directionRef.trim().toUpperCase() : '';
+    if (upperDirectionRef === 'E') {
+      return '\u4E1C\u7ECF';
+    }
+    if (upperDirectionRef === 'W') {
+      return '\u897F\u7ECF';
+    }
+    if (upperDirectionRef === 'N') {
+      return '\u5317\u7EAC';
+    }
+    if (upperDirectionRef === 'S') {
+      return '\u5357\u7EAC';
+    }
+    if (isLongitude) {
+      return degreeValue < 0 ? '\u897F\u7ECF' : '\u4E1C\u7ECF';
+    }
+    return degreeValue < 0 ? '\u5357\u7EAC' : '\u5317\u7EAC';
+  }
+
+  private formatGpsNumber(value: number): string {
+    const fixedValue: string = value.toFixed(2);
+    return fixedValue.replace(/\.?0+$/, '');
+  }
+
   /**
    * 重置已缓存的地址
    */
@@ -962,8 +1070,18 @@ export class MediaItem {
   }
 
   public getFileExtension(): string {
-    let fileExt: string = this.uri.substring(this.uri.lastIndexOf('.'));
-    return fileExt;
+    const sourceList: string[] = [this.displayName, this.path, this.uri];
+    for (let source of sourceList) {
+      if (!source) {
+        continue;
+      }
+      let pointIndex = source.lastIndexOf('.');
+      let slashIndex = Math.max(source.lastIndexOf('/'), source.lastIndexOf('\\'));
+      if (pointIndex > slashIndex) {
+        return source.substring(pointIndex);
+      }
+    }
+    return '';
   }
 
   public isInvalidImageSize(): boolean {
@@ -973,5 +1091,28 @@ export class MediaItem {
   public isGifOrWebpType(): boolean {
     return this.mimeType?.toLowerCase().indexOf('gif') !== -1 ||
       this.mimeType?.toLowerCase().indexOf('webp') !== -1;
+  }
+
+  /** 是否为 GIF（按 mime 或文件扩展名），用于关闭编辑等能力 */
+  public isGifType(): boolean {
+    if (this.mimeType?.toLowerCase() === Constants.MIME_TYPE_GIF) {
+      return true;
+    }
+    return this.getFileExtension()?.toLowerCase() === Constants.EXTENSION_GIF;
+  }
+
+  public isWbmpType(): boolean {
+    if (this.mimeType?.toLowerCase().indexOf('wbmp') !== -1) {
+      return true;
+    }
+    return this.getFileExtension()?.toLowerCase() === Constants.EXTENSION_WBMP;
+  }
+
+  public isBmpType(): boolean {
+    if (this.mimeType?.toLowerCase() === 'image/bmp' || this.mimeType?.toLowerCase().indexOf('x-ms-bmp') !== -1) {
+      return true;
+    }
+    const extension = this.getFileExtension()?.toLowerCase();
+    return extension === '.bmp' || extension === '.bm';
   }
 }

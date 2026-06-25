@@ -74,6 +74,7 @@ export interface ParamBrowser {
   album: PhotoAlbum;
   broadCast?: BroadCast;
   isLoadLCD: boolean;
+  displayName?: string;
   coverPhotoUri?: string;
   sortHelper?: AlbumGridSortHelper;
 }

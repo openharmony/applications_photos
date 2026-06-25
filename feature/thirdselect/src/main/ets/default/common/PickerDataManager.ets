@@ -138,7 +138,8 @@ export class PickerDataManager {
 
   public addItemIntoArray(item: SendablePhotoAsset, mediaItemList: collections.Array<SendableMediaItem>): void {
     let mediaItem: SendableMediaItem = new SendableMediaItem(item);
-    mediaItem.setThumbnail(ImageUtil.getThumbnailAstcUri(mediaItem.uri, mediaItem.path, mediaItem.dateModified));
+    mediaItem.setThumbnail(ImageUtil.getThumbnailUri(mediaItem.uri, mediaItem.path, mediaItem.dateModified,
+      false, mediaItem?.thumbnailReady, true));
     mediaItemList.push(mediaItem);
     return;
   }

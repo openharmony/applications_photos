@@ -56,8 +56,8 @@ export class SwiperThirdVM extends SwiperVM {
     }
     /* instrument ignore next */
     this.getBrowserController().swiperOnFoldChange = () => this.onFoldChanged();
-    this.isThumbsourceLoadFinished =
-      this.getBrowserController().pageFrom === BrowserCaller.VIEWDATA_PAGE ? false : true;
+
+    this.isThumbsourceLoadFinished = true;
 
     this.statisticRptMgr.init();
     if (this.getBrowserController().pageFrom === BrowserCaller.CAMERA_PAGE) {
@@ -208,7 +208,9 @@ export class SwiperThirdVM extends SwiperVM {
   }
 
   public shouldShowPreview(): boolean {
-    return this.thumbSource?.getAlbumDataSource() !== undefined;
+    // 与基础 SwiperVM 保持一致，只要进入大图即允许显示预览条，
+    // 不再强依赖 albumDataSource 是否存在，保证 VIEWDATA 与图库入口表现一致
+    return super.shouldShowPreview();
   }
 
   protected onShowBarUpdateCapsuleAndProgress(): void {
@@ -219,7 +221,7 @@ export class SwiperThirdVM extends SwiperVM {
 
   protected videoProgressScrollToByDuration(duration: number): void {
     let xOffset: number = this.getStartOffset() - this.selectedSmallImgWidth + Constants.PREVIEW_PROGRESS_WIDTH / 2 +
-      (this.progressRawTime / this.curItem.duration) *
+      (this.progressRawTime / this.getCapsuleTotalDurationMs()) *
         (this.selectedSmallImgWidth * this.frameNum - Constants.PREVIEW_PROGRESS_WIDTH);
     if (duration < 0) {
       this.smallScroller?.scrollTo({
@@ -254,9 +256,8 @@ export class SwiperThirdVM extends SwiperVM {
     Log.info(TAG, 'From ViewData dataLoadFinished isThumbsourceLoadFinish:' + this.isThumbsourceLoadFinished +
       ' thumbsource size:' + this.thumbSource?.totalCount() + ', set isThumbsourceLoadFinished true ');
     this.isThumbsourceLoadFinished = true;
-    this.curItem =
-      this.getBrowserController().dataSource?.getData(this.getBrowserController().getCurrentIndex())?.item ??
-        new MediaItem();
+    this.setCurrentDisplayItem(this.getBrowserController().dataSource?.getData(
+      this.getBrowserController().getCurrentIndex())?.item ?? new MediaItem());
   }
 
   public smallImgClickAction(uri?: string): void {

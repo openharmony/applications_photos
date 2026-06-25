@@ -205,6 +205,12 @@ export const TOP_BAR_HEIGHT: number = 56;
 
 export const PC_TOP_BAR_HEIGHT: number = 72;
 
+/**
+ * PC：预览/裁剪与 native timeline 的 operTop 统一下移（vp），与白框、底图共用同一套增量，避免仅改 getOperationArea 导致框图错位。
+ * 与 PreviewStarter.calOperationArea、SwitchAnimator.getEditorPreviewRect 保持一致。
+ */
+export const PC_PREVIEW_VERTICAL_OFFSET_VP: number = 40;
+
 export const STATUS_BAR_HEIGHT: number = 48;
 
 export const RIGHT_BAR_HEIGHT: number = 320;
@@ -574,10 +580,6 @@ export enum CropIndex {
   VERTICAL = 3, // 垂直校正
   RATIO = 4 // 比例
 }
-
-export const CROP_PAVE_SCREEN_TAG: number = -2;
-
-export const CROP_RATIO_MENU_INDEX: number = 3;
 
 export const EPSILON: number = 1e-6;
 

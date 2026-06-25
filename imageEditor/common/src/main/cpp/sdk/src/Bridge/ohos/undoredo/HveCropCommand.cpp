@@ -601,9 +601,9 @@ int HveCmdRotate90Acw::ComRotate90Acw(int timelineId, std::string const & assetI
     int isHorizontalMirror = 0;
     HmcAssetGetMirror(editor, assetUid, HMC_ASSET_MIRROR_HORIZONTAL, &isHorizontalMirror);
     if (isHorizontalMirror) {
-        baseRotation = ((int)(baseRotation - undoRotation - 90)) % 360;
-    } else {
         baseRotation = ((int)(baseRotation + undoRotation + 90)) % 360;
+    } else {
+        baseRotation = ((int)(baseRotation - undoRotation - 90)) % 360;
     }
     hveAsset->SetBaseRotation(baseRotation);
     auto newRotation = extraRotation + baseRotation; // 每调用一次接口，逆时针90度（逆时针：正值）
@@ -1925,6 +1925,7 @@ int HveCmdRotate90Acw::CalculateRotation(HmcRectD &cropRect, int &isHorizontalMi
     if ((isHorizontalMirror && commandType != COMMAND_UNDO) || ((!isHorizontalMirror && commandType == COMMAND_UNDO))) {
         degree = -degree;
     }
+    degree = -degree;
     float rad = degree * MathUtils::PI / 180; // 弧度
 
     // 裁剪框中心a点以素材中心o点为中心逆时针旋转rad弧度后得到b点
@@ -1976,53 +1977,15 @@ int HveCmdRotate90Acw::RotationPreview(HmcRectD &cropRect, auto &scale, HmcSize 
     std::function<void(std::string const & jsonPos)> &cb)
 {
     USE_ASSET(HMC_ERR);
-    int clickTimes = hveAsset->GetClick90AckTimes();
-    LOGI("CurrenclickTimes is clickTimes=%d ", clickTimes);
-    float srcRotation = (clickTimes > 1) ? hveAsset->GetClick90AckPreviewRotation() : 0.0F;
-    float srcPreScale = (clickTimes > 1) ? hveAsset->GetClick90AckPreviewScale() : 1.0F;
-
+    (void)scale;
     bool previewMode;
-    if (clickTimes > 1) {
+    if (hveAsset->GetClick90AckTimes() > 1) {
         previewMode = hveAsset->GetClick90AckInPreviewMode();
     } else {
         previewMode = hveAsset->GetInPreviewMode();
         hveAsset->SetClick90AckInPreviewMode(previewMode);
     }
-    
-    double previewModeScale =
-        previewMode ? hveAsset->CalcPreviewModeAssetScale(cropRect, timeline->GetCropOperationArea()) : 1.0;
-    int refreshRate = hveAsset->GetRefreshRate();
-    postAnimation(
-        [timeline, assetUid, scale, size, assetPosition, cb, cropRect, previewMode, previewModeScale, clickTimes,
-         srcRotation, srcPreScale, this](float progress, bool startFlag) {
-            auto editor = timeline->GetEditor();
-            auto hveAsset = timeline->GetHveAsset(assetUid);
-            if (editor == nullptr || hveAsset == nullptr) {
-                LOGE("editor or asset is null.");
-                return;
-            }
-
-            HmcEditorSetAutoFlush(editor, false);
-            if (fabs(progress - 1.0) < DOUBLE_PRECISION) {
-                BackgroundTask(size, assetPosition, cropRect, previewMode, cb);
-            } else {
-                if (startFlag && previewMode) {
-                    timeline->SwitchPreviewMode();
-                }
-                auto previewOffsetX = hveAsset->GetPreviewOffsetX();
-                auto previewOffsetY = hveAsset->GetPreviewOffsetY();
-                auto newScale = srcPreScale + (scale * previewModeScale - srcPreScale) * progress;
-                auto rotation = srcRotation + (90 * clickTimes - srcRotation) * progress;
-                LOGI("CurrenRotation is clickTimes=%d , srcRotation=%lf, rotation=%lf, progress=%lf", clickTimes,
-                    srcRotation, rotation, progress);
-                HmcAssetCropTransformSetPosition(editor, assetUid, previewOffsetX, previewOffsetY, newScale, newScale,
-                                                 rotation);
-                hveAsset->SetClick90AckPreviewScale(newScale);
-                hveAsset->SetClick90AckPreviewRotation(rotation);
-                HmcEditorSetAutoFlush(editor, true);
-            }
-        },
-        g_animationTime, refreshRate);
+    BackgroundTask(size, assetPosition, cropRect, previewMode, cb);
     hveAsset->SetRefreshThumbnails(TRUE);
     return HMC_OK;
 }

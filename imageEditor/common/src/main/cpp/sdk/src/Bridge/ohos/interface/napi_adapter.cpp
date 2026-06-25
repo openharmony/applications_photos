@@ -538,6 +538,12 @@ static napi_value Asset_scale(napi_env env, napi_callback_info info)
     Asset::Scale(args[0], args[g_firstArg], args[g_secondArg], args[g_thirdArg], args[g_fourthArg]);
     return JSValue(env);
 }
+static napi_value Asset_setIsDragImage(napi_env env, napi_callback_info info)
+{
+    JSArguments args(env, info);
+    Asset::SetIsDragImage(args[0], args[g_firstArg], args[g_secondArg]);
+    return JSValue(env);
+}
 static napi_value Asset_calculateCropSize(napi_env env, napi_callback_info info)
 {
     JSArguments args(env, info);
@@ -1556,6 +1562,7 @@ static const napi_property_descriptor desc_sixty[] = {
 static const napi_property_descriptor desc_ninety[] = {
     {"Asset_translate", nullptr, Asset_translate, nullptr, nullptr, nullptr, napi_default, nullptr},
     {"Asset_scale", nullptr, Asset_scale, nullptr, nullptr, nullptr, napi_default, nullptr},
+    {"Asset_setIsDragImage", nullptr, Asset_setIsDragImage, nullptr, nullptr, nullptr, napi_default, nullptr},
     {"Asset_calculateCropSize", nullptr, Asset_calculateCropSize, nullptr, nullptr, nullptr, napi_default, nullptr},
     {"Asset_getPreviewMaxScale", nullptr, Asset_getPreviewMaxScale, nullptr, nullptr, nullptr, napi_default, nullptr},
     {"Asset_fillCropRect", nullptr, Asset_fillCropRect, nullptr, nullptr, nullptr, napi_default, nullptr},

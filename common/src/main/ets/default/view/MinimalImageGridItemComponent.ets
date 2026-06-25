@@ -63,7 +63,7 @@ export struct MinimalImageGridItemComponent {
   simpleMediaItem?: SimpleGridMediaItem;
   pageName = '';
   private geometryTransitionString: string = '';
-  private imageThumbnail: string = '';
+  @State imageThumbnail: string = '';
   @State isEditImage: boolean = false;
   @State editImageUri: string = '';
   @State thumbnailWidth: string | undefined = Constants.PERCENT_100;
@@ -104,6 +104,8 @@ export struct MinimalImageGridItemComponent {
       return;
     }
     if (!tempItem.equals?.(this.mediaItem)) {
+      // @ObjectLink更新后同步刷新@State imageThumbnail，触发builder重执行→MediaCachedImage更新
+      this.imageThumbnail = tempItem?.thumbnail ?? '';
       this.mediaItem = tempItem;
     }
     // 收藏后更新
@@ -127,7 +129,9 @@ export struct MinimalImageGridItemComponent {
       Log.error(TAG, 'reuse failed');
     }
     this.simpleMediaItem = params.simpleMediaItem;
-    this.initData(true);
+    // @ObjectLink item在aboutToReuse时仍指向旧数据，initData会读旧thumbnail。
+    // 传入params中的新thumbnail作为覆盖值，确保首次render用正确图片
+    this.initData(true, this.simpleMediaItem?.getThumbnailUri());
     Log.debug(TAG, `ImageGridItem aboutToReuse geometryTransitionString:` + this.geometryTransitionString
       + ' this.imageThumbnail: ' + this.imageThumbnail);
     if (this.useGridTrace) {
@@ -139,9 +143,9 @@ export struct MinimalImageGridItemComponent {
   }
 
   // 公共数据初始化
-  initData(isReuse: boolean): void {
+  initData(isReuse: boolean, thumbOverride?: string): void {
     this.mediaItem = this.item?.mediaItem;
-    this.imageThumbnail = this.mediaItem?.thumbnail ?? '';
+    this.imageThumbnail = thumbOverride ?? this.mediaItem?.thumbnail ?? '';
     this.updateRecycleAttributes();
 
     let userId = LocalStorage.getShared()?.get<SelectParams>(Constants.PHOTO_PICKER_PARAMS_KEY)?.userId ?? -1;

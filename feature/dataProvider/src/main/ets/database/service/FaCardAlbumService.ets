@@ -805,16 +805,23 @@ export class FaCardAlbumUtils {
           }
         }
       } else if (faCardInfo.albumType === FATableAlbumType.HIGHLIGHT_ALBUM) {
-        Log.info(TAG, `faCardInfo.albumType is HIGHLIGHT_ALBUM`);
+        Log.info(TAG, `updateForm highlight album, formId: ${faCardInfo.formId}`);
       } else {
         const photoAlbum: PhotoAlbum =
           await userFileManagerAccess.getAlbumByUri(faCardInfo.albumUri) as PhotoAlbum;
         // instrument ignore else
         if (photoAlbum === undefined) {
+          Log.info(TAG, `updateForm album not found, formId: ${formId}, albumUri: ${faCardInfo.albumUri}`);
           // 删除卡片reminder数据
           const reminderService: ReminderService = new ReminderService(context);
           await reminderService.deletePhotosByFormId(formId, undefined);
+          // 相册被删除时，立即将卡片内容清空，避免继续显示已删除相册的旧图片
+          const formData: Record<string, Object> = {};
+          formData['agendaObjList'] = [];
+          const formBinding: formBindingData.FormBindingData = formBindingData.createFormBindingData(formData);
+          await formProvider.updateForm(formId, formBinding);
         } else {
+          Log.info(TAG, `updateForm album exists, formId: ${formId}, albumUri: ${photoAlbum.albumUri}`);
           const reminderService: ReminderService = new ReminderService(context);
           const lastImageInfo: ImageInfo | undefined = await reminderService.queryLastImageInfo(formId);
           const lastCarouselImageInfo: ImageInfo | undefined = await reminderService.queryLastImageInfo(formId, true);

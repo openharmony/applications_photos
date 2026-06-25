@@ -94,7 +94,12 @@ export class RenameMenuOperation implements MenuOperation, MenuOperationCallback
     if (!dataImpl) {
       dataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
     }
-    let fileAsset: photoAccessHelper.PhotoAsset = await dataImpl?.getDataByUri(uri) as photoAccessHelper.PhotoAsset;
+    // getDataByUri 返回 MayVoid<PhotoAsset>，失败场景通常用 number 错误码表示
+    const mayVoidResult = await dataImpl?.getDataByUri(uri) as photoAccessHelper.PhotoAsset | number;
+    if (typeof mayVoidResult === 'number') {
+      throw new Error(`getDataByUri failed, errCode: ${mayVoidResult}`);
+    }
+    const fileAsset: photoAccessHelper.PhotoAsset = mayVoidResult;
     // 更新图片名称
     let operationImpl: BrowserOperationInterface =
       BrowserOperationFactory.getFeature(BrowserOperationFactory.TYPE_PHOTO);

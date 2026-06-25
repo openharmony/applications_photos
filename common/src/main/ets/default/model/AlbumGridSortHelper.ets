@@ -276,10 +276,12 @@ export class AlbumGridSortHelper {
   }
 
   public static getAlbumKeyByAlbumInfo(albumInfo: AlbumInfo | undefined): string {
-    return albumInfo?.subType + (albumInfo?.lpath ?? '');
+    return `${albumInfo?.subType ?? 0}${albumInfo?.uri ?? ''}`;
   }
 
   public static getAlbumKeyByPhotoAlbum(album: SendablePhotoAlbum | PhotoAlbum | undefined): string {
-    return album?.albumSubtype + '';
+    // Keep the key format consistent with getAlbumKeyByAlbumInfo(subType + uri),
+    // otherwise sort rules written with uri cannot be read back in album grid refresh.
+    return `${album?.albumSubtype ?? 0}${album?.albumUri ?? ''}`;
   }
 }

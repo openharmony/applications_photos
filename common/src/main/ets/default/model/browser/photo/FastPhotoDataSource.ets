@@ -24,6 +24,7 @@ import lazy { Constants as PhotoConstants } from './Constants';
 import lazy { DeviceInfo } from '../../../utils/DeviceInfo';
 import { PhotoDataSource } from './PhotoDataSource';
 import { LogUtils } from '../../../utils/LogUtils';
+import { MediaLibraryData } from './data/MediaData';
 
 const TAG: string = 'FastPhotoDataSource';
 const TMP_THUMBNAIL_COUNT_LIMIT = 5;
@@ -406,10 +407,14 @@ export class FastPhotoDataSource extends PhotoDataSource {
   }
 
   public getItemIndexByUri(uri: string, indexNotifyCallback: Function): void {
-    for (let index = 0; index < this.thumbnails.length; index++) {
-      if (this.thumbnails[index].captureId === uri || this.isSamePhotoAsset(this.thumbnails[index].thumbnailUri, uri)) {
-        indexNotifyCallback(index);
-        return;
+    // 标准媒体库 URI 优先走相册索引，避免仅命中缩略图槽时 MediaItem 尚未就绪。
+    const preferAlbumIndex: boolean = MediaLibraryData.isMediaLibraryUri(uri);
+    if (!preferAlbumIndex) {
+      for (let index = 0; index < this.thumbnails.length; index++) {
+        if (this.thumbnails[index].captureId === uri || this.isSamePhotoAsset(this.thumbnails[index].thumbnailUri, uri)) {
+          indexNotifyCallback(index);
+          return;
+        }
       }
     }
     if (super.isUriInCache(uri, (index: number): void =>
@@ -469,6 +474,18 @@ export class FastPhotoDataSource extends PhotoDataSource {
     } else {
       return super.getDataWithoutCache(this.getMediaIndex(index));
     }
+  }
+
+  public isAlbumWindowItemHydratedForIndex(index: number): boolean {
+    if (this.isThumbnailIndex(index)) {
+      const mediaItem: MediaItem | undefined = this.thumbnails[index];
+      if (!mediaItem) {
+        return false;
+      }
+      return String(mediaItem.uri ?? '').length > 0 || String(mediaItem.path ?? '').length > 0 ||
+        String(mediaItem.thumbnailUri ?? '').length > 0;
+    }
+    return super.isAlbumWindowItemHydratedForIndex(this.getMediaIndex(index));
   }
 
   public getMediaItemWithoutCache(index: number): MediaItem | undefined {

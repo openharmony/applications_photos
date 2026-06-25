@@ -39,6 +39,7 @@ import lazy { global } from '@ohos/tools/src/main/global/Contexts';
 import lazy { NavigationConstants } from '@ohos/common/src/main/ets/default/model/common/NavigationConstants';
 import lazy { UserFileManagerAccess } from '@ohos/common/src/main/ets/default/access/UserFileManagerAccess';
 import lazy { BindSheetController } from '@ohos/timeline/src/main/ets/albumgrid/view/AlbumPhotoGridView';
+import lazy { DeviceInfo } from '@ohos/common/src/main/ets/default/utils/DeviceInfo';
 
 
 /* instrument ignore file */
@@ -143,11 +144,11 @@ export struct GridCleanupPage {
 
   private initActionBarController() {
     this.actionBarController.isAllSelected = true;
-    this.actionBarController.isEmpty =
-      this.albumInfo?.albumLocalAssetCount ? this.albumInfo.albumLocalAssetCount > 0 : false;
+    // 有资源时不应标记为空，否则删除等按钮会被隐藏
+    const count: number = this.albumInfo?.albumLocalAssetCount ?? 0;
+    this.actionBarController.isEmpty = count <= 0;
     this.actionBarController.moreMenuList = [];
-    this.actionBarController.totalSelectedCount =
-      this.albumInfo?.albumLocalAssetCount ? this.albumInfo.albumLocalAssetCount : 0;
+    this.actionBarController.totalSelectedCount = count;
     this.actionBarController.title = '';
     this.actionBarController.actionMoreMenuList = [];
   }
@@ -243,6 +244,22 @@ export struct GridCleanupPage {
   build() {
     NavDestination() {
       Stack() {
+        Row() {
+          Button() {
+            SymbolGlyph($r('sys.symbol.chevron_backward'))
+          }
+          .borderRadius($r('sys.float.corner_radius_level4'))
+          .backgroundColor($r('app.color.transparent'))
+          .onClick(() => {
+            this.onBackPressFunc();
+          })
+        }
+        .alignItems(VerticalAlign.Center)
+        .justifyContent(FlexAlign.Start)
+        .padding({
+          left: $r('sys.float.padding_level4'),
+          top: $r('sys.float.padding_level4')
+        })
         Column() {
         }
         // .enabled(!this.browserController.isAnimating)

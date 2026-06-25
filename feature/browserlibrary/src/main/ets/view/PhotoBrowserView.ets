@@ -160,6 +160,7 @@ export struct PhotoBrowserView {
   };
   private onWinSizeChangedCallBack = (): void => this.onWinSizeChanged();
   @StorageLink('isBrowserShow') isBrowserShow: boolean = false;
+  @StorageLink('windowFocused') private isWindowFocused: boolean = true;
   @StorageLink('windowStatus') @Watch('windowStatusChange') windowStatus: number | undefined = undefined;
   @StorageLink('windowStageType') @Watch('windowStatusChange') windowType: window.WindowStageEventType | undefined =
     undefined;
@@ -490,7 +491,7 @@ export struct PhotoBrowserView {
     try {
       const enrolledState = userAuth.getEnrolledState(userAuth.UserAuthType.PIN);
       this.needUnlock = enrolledState?.credentialCount > 0;
-      Log.info(TAG, `get PIN enrolled state success, needUnlock: ${this.needUnlock}`);
+      Log.info(TAG, `get PIN enrolled state success, enrolledState: ${JSON.stringify(enrolledState)}`);
     } catch (error) {
       if (error?.code === LockResult.NOT_ENROLLED) {
         this.needUnlock = false;
@@ -926,6 +927,7 @@ export struct PhotoBrowserView {
         AppStorage.setOrCreate<PhotoDataSource>('dataSource', this.browserController.dataSource);
         this.hideBars()
       }, 600);
+      // AppStorage.setOrCreate<PhotoDataSource>('dataSource', this.browserController.dataSource);
       AppStorage.setOrCreate(Constants.APP_KEY_PHOTO_BROWSER, this.browserController.dataSource.getAlbumDataSource());
     } else {
     }
@@ -1094,7 +1096,11 @@ export struct PhotoBrowserView {
 
   private async windowStatusChange(): Promise<void> {
     await this.updateAppLockShow();
-    this.browserController.onWindowStatusShareListen(this.windowType, this.windowStatus);
+    // 打印 UIExtension 拉起/回焦场景下，IndexPage 可能正在重渲染；
+    // 同步修改 controller 会触发 ArkUI "state changed during render" 并卡死，统一异步化兜底。
+    setTimeout((): void => {
+      this.browserController.onWindowStatusShareListen(this.windowType, this.windowStatus);
+    }, 0);
   }
 
   setShowWallpaper = (isShowWallpaper: boolean): void => {
@@ -1288,7 +1294,7 @@ export struct PhotoBrowserView {
     if (toolMenuList) {
       if (!this.isShowPhoneRotate) {
         // 畅连场景临时方案：仅显示暂停/播放按钮、声音按钮；后续畅连接入预览框架
-        this.toolMenuList = toolMenuList.slice(2, 4);
+        this.toolMenuList = toolMenuList.length > 2 ? toolMenuList.slice(2, 4) : toolMenuList;
       } else {
         this.toolMenuList = toolMenuList;
       }
@@ -1429,7 +1435,11 @@ export struct PhotoBrowserView {
    * @param backgroundColorResource
    */
   onToggleBars(backgroundColorResource?: Resource): void {
-    if (this.isShowBar && !DeviceInfo.isPc()) {
+    // PC 与手机一致：有栏则隐藏（进沉浸），无栏则显示；此前误加 !isPc 导致 PC 永远无法 hideBars
+    if (DeviceInfo.isPc()) {
+      AppStorage.setOrCreate<boolean>('isHandleImmersive', true);
+    }
+    if (this.isShowBar) {
       this.hideBars(backgroundColorResource);
       this.appBroadCast.emit(BroadCastConstants.IS_SHOW_OR_HIDE_BAR, [true]);
     } else {
@@ -1451,6 +1461,13 @@ export struct PhotoBrowserView {
       this.isShowBar = true;
       if (!this.isHorizontal && !this.isHalfFold) {
         this.browserController.setSystemUi(true);
+      }
+      if (DeviceInfo.isPc()) {
+        try {
+          getScreen().getMainWindow()?.setWindowTitleButtonVisible(true, true, true);
+        } catch (err) {
+          Log.error(TAG, `showBars restore title button err: ${JSON.stringify(err)}`);
+        }
       }
       this.browserController.setIsShowBar(this.isShowBar);
       let currentPhoto: MediaItem | undefined = this.getPhotoByIndex(this.viewModel.getTargetIndex());
@@ -1800,7 +1817,9 @@ export struct PhotoBrowserView {
           this.buildPhotoBrowserComponent();
         }
       }
-      .expandSafeArea(this.stateMachine.isPropertiesShow() ? [] : [SafeAreaType.KEYBOARD, SafeAreaType.SYSTEM])
+      .expandSafeArea((!this.isShowBar && this.isHorizontal && DeviceInfo.isTabletDevice()) ?
+        [SafeAreaType.KEYBOARD, SafeAreaType.SYSTEM] :
+        (this.stateMachine.isPropertiesShow() ? [] : [SafeAreaType.KEYBOARD, SafeAreaType.SYSTEM]))
       .hitTestBehavior(this.editorController?.isInSwitchAnimation ? HitTestMode.Block : HitTestMode.Default)
     }
     .navDestination(this.PageMap)

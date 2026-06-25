@@ -58,7 +58,7 @@ export class DayRegularGridDragScrollHelper extends GridDragScrollBaseHelper {
   /**
    * 滑动策略类
    */
-  // private scrollStrategy: GridScrollBaseStrategy = new DayRegularGridScrollStrategy();
+  private scrollStrategy: GridScrollBaseStrategy = new DayRegularGridScrollStrategy();
   /**
    * 预期坐标偏移量
    */
@@ -142,36 +142,36 @@ export class DayRegularGridDragScrollHelper extends GridDragScrollBaseHelper {
   private irregularRegionHeight: number = 0;
 
   public init(scroller: Scroller, dataSource: MediaDataSource): void {
-    // super.init(scroller, dataSource);
-    // let gridScreenInfo: GridScreenInfo = this.scrollStrategy.getGridScreenInfo();
-    // let screenMaxGridNum: number = Math.max(gridScreenInfo.screenMaxGridNum, 0);
-    // this.dataSource?.createSimpleMediaItems(SCREEN_NUM_TO_CACHE_MEDIA_ITEMS * screenMaxGridNum);
-    //
-    // let albumUri: string = this.dataSource?.getAlbumUri() ?? '';
-    // if (albumUri) {
-    //   if (this.gridPageInfo?.gridScene === Constants.PHOTO_TRANSITION_HIDDEN) {
-    //     Log.info(TAG, `getHiddenAlbum of albumUri:${albumUri} begin`);
-    //     this.scrollStrategy.getHiddenAlbum(albumUri, this.gridPageInfo?.isHiddenSubAlbumQuery)
-    //       .then((album: PhotoAlbum | undefined): void => {
-    //         Log.info(TAG, `getHiddenAlbum of albumUri:${albumUri} end`);
-    //         this.album = album;
-    //       });
-    //   } else {
-    //     Log.info(TAG, `getAlbum of albumUri:${albumUri} begin`);
-    //     this.scrollStrategy.getAlbum(albumUri).then((album: PhotoAlbum | undefined): void => {
-    //       Log.info(TAG, `getAlbum of albumUri:${albumUri} end`);
-    //       this.album = album;
-    //     });
-    //   }
-    // }
+    super.init(scroller, dataSource);
+    let gridScreenInfo: GridScreenInfo = this.scrollStrategy.getGridScreenInfo();
+    let screenMaxGridNum: number = Math.max(gridScreenInfo.screenMaxGridNum, 0);
+    this.dataSource?.createSimpleMediaItems(SCREEN_NUM_TO_CACHE_MEDIA_ITEMS * screenMaxGridNum);
+
+    let albumUri: string = this.dataSource?.getAlbumUri() ?? '';
+    if (albumUri) {
+      if (this.gridPageInfo?.gridScene === Constants.PHOTO_TRANSITION_HIDDEN) {
+        Log.info(TAG, `getHiddenAlbum of albumUri:${albumUri} begin`);
+        this.scrollStrategy.getHiddenAlbum(albumUri, this.gridPageInfo?.isHiddenSubAlbumQuery)
+          .then((album: PhotoAlbum | undefined): void => {
+            Log.info(TAG, `getHiddenAlbum of albumUri:${albumUri} end`);
+            this.album = album;
+          });
+      } else {
+        Log.info(TAG, `getAlbum of albumUri:${albumUri} begin`);
+        this.scrollStrategy.getAlbum(albumUri).then((album: PhotoAlbum | undefined): void => {
+          Log.info(TAG, `getAlbum of albumUri:${albumUri} end`);
+          this.album = album;
+        });
+      }
+    }
   }
 
   public switchAlbum(albumUri: string): void {
-    // Log.info(TAG, `switchAlbum:${albumUri} start`);
-    // this.scrollStrategy?.getAlbum(albumUri).then((album: PhotoAlbum | undefined): void => {
-    //   this.album = album;
-    //   Log.info(TAG, `switchAlbum:${album?.albumUri} end`);
-    // });
+    Log.info(TAG, `switchAlbum:${albumUri} start`);
+    this.scrollStrategy?.getAlbum(albumUri).then((album: PhotoAlbum | undefined): void => {
+      this.album = album;
+      Log.info(TAG, `switchAlbum:${album?.albumUri} end`);
+    });
   }
 
   public recordScrollInfo(scrollInfo: GridScrollInfo): void {
@@ -186,53 +186,53 @@ export class DayRegularGridDragScrollHelper extends GridDragScrollBaseHelper {
   }
 
   public handleScrollStart(): void {
-    // TraceControllerUtils.startTrace('day scrollbar scrollStart');
-    //
-    // // 日视图滚动开启H8
+    TraceControllerUtils.startTrace('day scrollbar scrollStart');
+
+    // 日视图滚动开启H8
     // ImageCacheUtil.enableH8();
-    //
-    // if (this.dataSource) {
-    //   if (this.dataSource.getDataSourceMode()) {
-    //     this.dataSource.pause();
-    //   } else {
-    //     // 开始滚动时禁用滑窗
-    //     this.dataSource.enableDaySlidingWindow(false);
-    //     // 开始滚动时，错帧预加载机制下主线程会查询媒体库元数据，同时若数据变更导致子线程也在操作媒体库时，会产生查询冲突，
-    //     // 导致主线程严重恶化。因此，在开始滚动时禁用数据查询，拦截滚动期间数据变更，保持数据静态
-    //     this.dataSource.enableQueryData(false);
-    //   }
-    // }
-    //
-    // // 初始化每帧的滚动参数
-    // this.frameNum = 0;
-    // this.expectedScrollOffset = 0;
-    // this.lastPreloadOffset = 0;
-    // this.currentPreloadOffset = 0;
-    // this.maxGridOffset = 0;
-    // this.lastPreloadIndexRegion.start = this.lastScrollIndexRegion.start;
-    // this.lastPreloadIndexRegion.end = this.lastScrollIndexRegion.end;
-    // this.currentPreloadIndexRegion.start = this.lastPreloadIndexRegion.start;
-    // this.currentPreloadIndexRegion.end = this.lastPreloadIndexRegion.end;
-    // // let gridScreenInfo: GridScreenInfo = this.scrollStrategy.getGridScreenInfo();
-    // this.imageGridItemHeight = this.scrollInfo?.imageGridItemHeight ?? 0;
-    // let imageGridItemHeight: number = this.imageGridItemHeight + Constants.GRID_GUTTER;
-    // let gridRowCnt: number = Math.ceil(this.winHeight / imageGridItemHeight) + 1;
-    // let gridColCnt: number = Math.max(gridScreenInfo.screenGridColNum, 0);
-    // if (this.scrollInfo?.gridRowCount && this.scrollInfo?.gridRowCount > 0) {
-    //   gridColCnt = this.scrollInfo?.gridRowCount + 1;
-    // }
-    // this.screenGridCnt = gridRowCnt * gridColCnt;
-    // this.preloadGridCnt = this.screenGridCnt + 2 * gridColCnt;
-    // Log.info(TAG, `scroll start, grid:[${gridRowCnt} * ${gridColCnt}]`);
-    //
-    // TraceControllerUtils.finishTrace('day scrollbar scrollStart');
+
+    if (this.dataSource) {
+      if (this.dataSource.getDataSourceMode()) {
+        this.dataSource.pause();
+      } else {
+        // 开始滚动时禁用滑窗
+        this.dataSource.enableDaySlidingWindow(false);
+        // 开始滚动时，错帧预加载机制下主线程会查询媒体库元数据，同时若数据变更导致子线程也在操作媒体库时，会产生查询冲突，
+        // 导致主线程严重恶化。因此，在开始滚动时禁用数据查询，拦截滚动期间数据变更，保持数据静态
+        this.dataSource.enableQueryData(false);
+      }
+    }
+
+    // 初始化每帧的滚动参数
+    this.frameNum = 0;
+    this.expectedScrollOffset = 0;
+    this.lastPreloadOffset = 0;
+    this.currentPreloadOffset = 0;
+    this.maxGridOffset = 0;
+    this.lastPreloadIndexRegion.start = this.lastScrollIndexRegion.start;
+    this.lastPreloadIndexRegion.end = this.lastScrollIndexRegion.end;
+    this.currentPreloadIndexRegion.start = this.lastPreloadIndexRegion.start;
+    this.currentPreloadIndexRegion.end = this.lastPreloadIndexRegion.end;
+    let gridScreenInfo: GridScreenInfo = this.scrollStrategy.getGridScreenInfo();
+    this.imageGridItemHeight = this.scrollInfo?.imageGridItemHeight ?? 0;
+    let imageGridItemHeight: number = this.imageGridItemHeight + Constants.GRID_GUTTER;
+    let gridRowCnt: number = Math.ceil(this.winHeight / imageGridItemHeight) + 1;
+    let gridColCnt: number = Math.max(gridScreenInfo.screenGridColNum, 0);
+    if (this.scrollInfo?.gridRowCount && this.scrollInfo?.gridRowCount > 0) {
+      gridColCnt = this.scrollInfo?.gridRowCount + 1;
+    }
+    this.screenGridCnt = gridRowCnt * gridColCnt;
+    this.preloadGridCnt = this.screenGridCnt + 2 * gridColCnt;
+    Log.info(TAG, `scroll start, grid:[${gridRowCnt} * ${gridColCnt}]`);
+
+    TraceControllerUtils.finishTrace('day scrollbar scrollStart');
   }
 
   public handleScrollStop(): void {
     TraceControllerUtils.startTrace('day scrollbar scrollStop');
 
     // 日视图滚动关闭H8
-    ImageCacheUtil.resetH8();
+    // ImageCacheUtil.resetH8();
 
     if (this.dataSource) {
       // 停止滚动时恢复使能滑窗、数据查询
@@ -241,16 +241,25 @@ export class DayRegularGridDragScrollHelper extends GridDragScrollBaseHelper {
       } else {
         this.dataSource.enableDaySlidingWindow(true);
         this.dataSource.enableQueryData(true);
-        // 停止滚动时主动触发一次滑窗更新、数据更新
+        // 停止滚动时只基于当前最靠后的有效区间触发一次滑窗，
+        // 避免历史区间被依次回放导致窗口回跳到更早位置。
+        let finalIndex: number = -1;
         for (let region of this.lastAllPreloadRegions) {
           if (region === null || !region.isValid()) {
             continue;
           }
-          let index: number = region.start;
-          TraceControllerUtils.startTrace(`trigger sliding window:${index}`);
-          Log.info(TAG, `scrollbar scroll stop, trigger sliding window index:${index}`);
-          this.dataSource.updateSlidingWindow(index);
-          TraceControllerUtils.finishTrace(`trigger sliding window:${index}`);
+          finalIndex = Math.max(finalIndex, region.start);
+        }
+        if (finalIndex >= 0) {
+          // 方向保护：释放滚动条时仅允许保持/向后推进滑窗，屏蔽向前回拉更新。
+          if (finalIndex < this.dataSource.activeStart) {
+            Log.warn(TAG, `skip rebound sliding window, finalIndex:${finalIndex}, activeStart:${this.dataSource.activeStart}`);
+          } else {
+            TraceControllerUtils.startTrace(`trigger sliding window:${finalIndex}`);
+            Log.info(TAG, `scrollbar scroll stop, trigger sliding window index:${finalIndex}`);
+            this.dataSource.updateSlidingWindow(finalIndex);
+            TraceControllerUtils.finishTrace(`trigger sliding window:${finalIndex}`);
+          }
         }
       }
     }
@@ -652,45 +661,45 @@ export class DayRegularGridDragScrollHelper extends GridDragScrollBaseHelper {
    * @param startIndex 查询起点
    * @param count 查询个数
    */
-  private fetchMediaDataSync(startIndex: number, count: number): void {
-    // let queryParam: QueryParam | undefined = this.scrollStrategy.getGirdDataQueryParam(
-    //   this.dataSource, startIndex, count, this.gridPageInfo);
-    // if (queryParam === undefined) {
-    //   this.logTracker?.warn(TAG, 'queryParam is unknown, could not fetch');
-    //   return;
-    // }
-    // let fetchOpt: FetchOptions | undefined = this.scrollStrategy.getGirdDataFetchOptions(this.dataSource, queryParam);
-    // if (fetchOpt === undefined) {
-    //   this.logTracker?.warn(TAG, 'fetchOpt is unknown, could not fetch');
-    //   return;
-    // }
-    // fetchOpt.fetchColumns = FETCH_COLUMNS;
-    // let assetList: PhotoAsset[];
-    // let isUnionAlbum: boolean = this.dataSource instanceof UnionAlbumMediaDataSource && this.dataSource.isUnionAlbum;
-    // if (!queryParam.albumUri || isUnionAlbum) {
-    //   assetList = this.scrollStrategy.getAssetsSync(fetchOpt);
-    // } else {
-    //   assetList = this.scrollStrategy.getAlbumAssetsSync(this.album, fetchOpt);
-    // }
-    // if (assetList === null || assetList.length === 0) {
-    //   this.logTracker?.warn(TAG, 'assetList is null or size 0');
-    //   return;
-    // }
-    //
-    // this.logTracker?.info(TAG, `cache:${startIndex}-${startIndex + count - 1}`);
-    // let fetchedUriArr: string[] = [];
-    // for (let i: number = 0; i < assetList.length; i++) {
-    //   if (assetList[i] !== null) {
-    //     let mediaItem: SimpleGridMediaItem = new SimpleGridMediaItem(assetList[i])
-    //       .parseFromPhotoAsset().parseFromAlbum(this.album);
-    //     let uri: string = mediaItem.getThumbnailUri();
-    //     fetchedUriArr.push(uri);
-    //     this.dataSource?.recordSimpleMediaItem(startIndex + i, mediaItem);
-    //   }
-    // }
-    // this.logTracker?.info(TAG, `fetched assetList size:${assetList.length}` +
-    //   `, fetchedUriArr size:${fetchedUriArr.length}`);
-    // ImageCacheUtil.startCachingImages(fetchedUriArr);
-    // this.preloadUriArr = this.preloadUriArr.concat(fetchedUriArr);
+  private async  fetchMediaDataSync(startIndex: number, count: number) {
+    let queryParam: QueryParam | undefined = this.scrollStrategy.getGirdDataQueryParam(
+      this.dataSource, startIndex, count, this.gridPageInfo);
+    if (queryParam === undefined) {
+      this.logTracker?.warn(TAG, 'queryParam is unknown, could not fetch');
+      return;
+    }
+    let fetchOpt: FetchOptions | undefined = this.scrollStrategy.getGirdDataFetchOptions(this.dataSource, queryParam);
+    if (fetchOpt === undefined) {
+      this.logTracker?.warn(TAG, 'fetchOpt is unknown, could not fetch');
+      return;
+    }
+    fetchOpt.fetchColumns = FETCH_COLUMNS;
+    let assetList: PhotoAsset[];
+    let isUnionAlbum: boolean = this.dataSource instanceof UnionAlbumMediaDataSource && this.dataSource.isUnionAlbum;
+    if (!queryParam.albumUri || isUnionAlbum) {
+      assetList = await this.scrollStrategy.getAssetsSync(fetchOpt);
+    } else {
+      assetList = await this.scrollStrategy.getAlbumAssetsSync(this.album, fetchOpt);
+    }
+    if (assetList === null || assetList.length === 0) {
+      this.logTracker?.warn(TAG, 'assetList is null or size 0');
+      return;
+    }
+
+    this.logTracker?.info(TAG, `cache:${startIndex}-${startIndex + count - 1}`);
+    let fetchedUriArr: string[] = [];
+    for (let i: number = 0; i < assetList.length; i++) {
+      if (assetList[i] !== null) {
+        let mediaItem: SimpleGridMediaItem = new SimpleGridMediaItem(assetList[i])
+          .parseFromPhotoAsset().parseFromAlbum(this.album);
+        let uri: string = mediaItem.getThumbnailUri();
+        fetchedUriArr.push(uri);
+        this.dataSource?.recordSimpleMediaItem(startIndex + i, mediaItem);
+      }
+    }
+    this.logTracker?.info(TAG, `fetched assetList size:${assetList.length}` +
+      `, fetchedUriArr size:${fetchedUriArr.length}`);
+    ImageCacheUtil.startCachingImages(fetchedUriArr);
+    this.preloadUriArr = this.preloadUriArr.concat(fetchedUriArr);
   }
 }

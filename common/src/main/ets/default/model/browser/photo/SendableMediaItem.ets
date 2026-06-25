@@ -104,6 +104,14 @@ export class SendableMediaItem {
     }
   }
 
+  public getWidth(): number {
+    return this.width;
+  }
+
+  public getHeight(): number {
+    return this.height;
+  }
+
   initialize(data?: SendablePhotoAsset, fetchType?: FetchType): void {
     if (data) {
       this.data = data;
