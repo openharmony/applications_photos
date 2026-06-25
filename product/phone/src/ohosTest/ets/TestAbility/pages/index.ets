@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,18 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { Log } from '@ohos/common';
+import { Log } from '@ohos/common/src/main/ets/default/utils/Log';
 
 const TAG: string = 'index';
 
 @Entry
 @Component
 struct Index {
-  @State message: string = 'Hello World'
+  @State message: string = 'Hello World';
 
   aboutToAppear() {
-    Log.info(TAG, 'TestAbility index aboutToAppear')
+    Log.info(TAG, 'TestAbility index aboutToAppear');
   }
 
   build() {
@@ -34,17 +33,17 @@ struct Index {
           .fontWeight(FontWeight.Bold)
         Button() {
           Text('next page')
-            .fontSize(20)
+            .fontSize($r('sys.float.Body_L'))
             .fontWeight(FontWeight.Bold)
         }
         .type(ButtonType.Capsule)
         .margin({
-          top: 20
+          top: 20,
         })
         .backgroundColor('#0D9FFB')
         .width('35%')
         .height('5%')
-        .onClick(() => {
+        .onClick((): void => {
         })
       }
       .width('100%')

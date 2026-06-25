@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,76 +13,48 @@
  * limitations under the License.
  */
 
-import { AlbumDefine, Constants } from '@ohos/common';
+const DEFAULT_MAX_THIRD_SELECT_COUNT: number = 50;
+const FILTER_MEDIA_TYPE_ALL: string = 'FILTER_MEDIA_TYPE_ALL';
 
 export class FormConstants {
-  public static FORM_ITEM_ALBUM_URI = 'form_itemAlbumUri';
-  public static FORM_ITEM_DISPLAY_NAME = 'form_itemDisplayName';
+  public static readonly FORM_ITEM_ALBUM_URI: string = 'form_itemAlbumUri';
+  public static readonly FORM_ITEM_DISPLAY_NAME: string = 'form_itemDisplayName';
 }
 
-/**
- * Record parameters passed from outside moduel: FA/third apps
- * These parameters should not be modified after read from want
- */
-export class SelectParams {
-  /* max select count */
-  maxSelectCount: number;
-  /* select media type */
-  filterMediaType: string;
-  isFromWallpaper: boolean;
-  /* whether entered from FA */
-  isFromFa: boolean;
-  /* whether entered from pick photos in FA */
-  isFromFaPhoto: boolean;
-  /* whether is multiple pick */
-  isMultiPick: boolean;
-  /* caller bundle name */
-  bundleName: string;
-  /* whether picker from Camera */
-  cameraAble: boolean;
-  /* whether picker can edit */
-  editAble: boolean;
-  preselectedUris: string[];
-  uri: string;
-  itemDisplayName: string;
-  itemId: string;
-  isFirstEnter: boolean;
-  itemCount: number;
-  itemCoverUri: string;
-  remainingOfWallpapers: number;
-
-  static defaultParam(): SelectParams {
-    return {
-      maxSelectCount: Constants.DEFAULT_MAX_THIRD_SELECT_COUNT,
-      filterMediaType: AlbumDefine.FILTER_MEDIA_TYPE_ALL,
-      isFromWallpaper: false,
-      isFromFa: false,
-      isFromFaPhoto: false,
-      isMultiPick: false,
-      bundleName: '',
-      cameraAble: true,
-      editAble: true,
-      preselectedUris: [],
-      uri: '',
-      itemDisplayName: undefined,
-      itemId: '',
-      isFirstEnter: false,
-      itemCount: 0,
-      itemCoverUri: '',
-      remainingOfWallpapers: 0
-    };
-  }
-}
 /* storage key begin */
-export const THIRD_SELECT_IS_ORIGIN = 'third_select_is_origin';
+export const THIRD_SELECT_IS_ORIGIN: string = 'third_select_is_origin';
 
-export const IS_SPLIT_MODE = 'isSplitMode';
+export const IS_SPLIT_MODE: string = 'isSplitMode';
 
-export const LEFT_BLANK = 'leftBlank';
+export const LEFT_BLANK: string = 'leftBlank';
 
-export const IS_SIDE_BAR = 'isSidebar';
+export const IS_SIDE_BAR: string = 'isSidebar';
 
-export const IS_HORIZONTAL = 'isHorizontal';
+export const IS_HORIZONTAL: string = 'isHorizontal';
+
 /* storage key end */
 
 export const THUMBNAIL_WIDTH: number = 256;
+
+export class ThirdSelectConstants {
+  // picker完成按钮支持定制
+  public static readonly COMPLETE_BUTTON_TEXT_DONE: number = 0;
+  public static readonly COMPLETE_BUTTON_TEXT_SEND: number = 1;
+  public static readonly COMPLETE_BUTTON_TEXT_ADD: number = 2;
+  public static readonly COMPLETE_BUTTON_TEXT_GRANT: number = 100;
+
+  // 打开大图浏览模式后，左右滑动切换浏览图片的范围
+  public static readonly PHOTO_BROWSER_RANGE_ALL: number = 0;
+  public static readonly PHOTO_BROWSER_RANGE_SELECTED_ONLY: number = 1;
+
+  /**
+   * 模块全限定名，防止广播等发生冲突
+   */
+  public static readonly FQDN_PREFIX: string = 'com.ohos.photos.thirdselect_';
+
+  public static readonly ABILITY_RESULT: string = `${ThirdSelectConstants.FQDN_PREFIX}abilityResult`;
+
+  // 大图页面支持的UI元素类型
+  public static readonly PHOTO_BROWSER_UI_ELEMENT_CHECKBOX: number = 0;
+  public static readonly PHOTO_BROWSER_UI_ELEMENT_BACK_BUTTON: number = 1;
+}

@@ -1,0 +1,47 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import lazy { Log } from '@ohos/common/src/main/ets/default/utils/Log';
+import lazy { MediaDataSource } from '@ohos/common/src/main/ets/default/model/browser/photo/MediaDataSource';
+import lazy { Constants } from '@ohos/common/src/main/ets/default/model/common/Constants';
+
+const TAG: string = 'SideBarController';
+
+export class SideBarManager {
+  public static getInstance(): SideBarController {
+    if (!SideBarManager.instance) {
+      SideBarManager.instance = new SideBarController();
+    }
+    return SideBarManager.instance;
+  }
+
+  public static instance: SideBarController | undefined = undefined;
+}
+
+export class SideBarController {
+  private albumMap: Map<string, MediaDataSource> = new Map();
+
+  public add(uri: string): void {
+    Log.info(TAG, `sideBarController add ${uri}`);
+    let newDS: MediaDataSource = new MediaDataSource(Constants.DEFAULT_SLIDING_WIN_SIZE);
+    newDS.setAlbumUri(uri);
+    this.albumMap.set(uri, newDS);
+    newDS.onActive();
+    newDS.initData();
+  }
+
+  public get(uri: string): MediaDataSource | undefined {
+    return this.albumMap.get(uri);
+  }
+}

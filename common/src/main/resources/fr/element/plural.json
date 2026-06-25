@@ -1,0 +1,1664 @@
+{
+    "plural":[
+        {
+            "name":"recycleAlbum_delete_message",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Supprimer définitivement cet élément ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Supprimer définitivement ces éléments ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"first_delete_message",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Les photos/vidéos supprimées seront déplacées vers le dossier Récemment supprimées, puis définitivement supprimées après %d jour.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Les photos/vidéos supprimées seront déplacées vers le dossier Récemment supprimées, puis définitivement supprimées après %d jours.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_enhance_addimage_quota_used_up",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"La limite a été atteinte. Veuillez réessayer dans %d heure.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"La limite a été atteinte. Veuillez réessayer dans %d heures.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_days",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d jour",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d jours",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"timeline_message_type_image",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d photo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_enhancing_status_processing",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Amélioration de la photo en cours. Temps restant estimé : %1$d seconde.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Amélioration de la photo en cours. Temps restant estimé : %1$d secondes.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"slide_show_setting_interval",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d secondes",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d seconde",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_files_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Retirer %d éléments ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Retirer %d élément ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"count_details_selected",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d élément sélectionné"
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d éléments sélectionnés",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"timeline_message_type_video",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d vidéo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d vidéos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"message_uploading",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Transfert de %d éléments en cours.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Transfert d'%d élément en cours.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycleAlbum_delete_multiple_images_message",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d éléments seront définitivement supprimés.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d élément sera définitivement supprimé.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"low_power_pause_upload_files",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Niveau de batterie inférieur à %1$s. Le transfert d'%2$d élément a été mis en pause.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Niveau de batterie inférieur à %1$s. Le transfert de %2$d éléments a été mis en pause.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_videos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d vidéos seront définitivement supprimées de cet appareil, du cloud et de tous les appareils synchronisés.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d vidéo sera définitivement supprimée de cet appareil, du cloud et de tous les appareils synchronisés.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"local_videos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d vidéo sera définitivement supprimée.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d vidéos seront définitivement supprimées.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_three",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments n'ont pas pu être enregistrés dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément n'a pas pu être enregistré dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément n'a pas pu être enregistré dans Galerie.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments n'ont pas pu être enregistrés dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"new_hide_files_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Masquer %d élément ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Masquer %d éléments ?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"delete_hide_albums_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Supprimer %d albums ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Supprimer %d album ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"data_inherit_title",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$s souhaite accéder à %2$s éléments",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$s souhaite accéder à %2$s élément",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"time_line_message_upload",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Transfert d'%d élément en cours",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Transfert de %d éléments en cours",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"seconds",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d secondes",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d seconde",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d vidéo a été enregistrée dans l'album \"Vidéos\".",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d vidéos ont été enregistrées dans l'album \"Vidéos\".",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_no_wlan",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Aucune connexion WLAN. Transfert d'%d élément mis en pause.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Aucune connexion WLAN. Transfert de %d éléments mis en pause.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"items_in_albums_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments dans ces albums seront supprimés de cet appareil, du cloud et de tous les appareils synchronisés. Ils seront conservés dans \"Récemment supprimés\" pendant %2$d jours.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément dans ces albums sera supprimé de cet appareil, du cloud et de tous les appareils synchronisés. Il sera conservé dans \"Récemment supprimés\" pendant %2$d jours.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d vidéo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d vidéos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"add_to_album_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Ajouter %d élément à l'album",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Ajouter %d éléments à l'album",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_videos_tips_plural",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Supprimer %d vidéos ?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Supprimer %d vidéo ?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments n'ont pas pu être enregistrés dans Galerie.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément n'a pas pu être enregistré dans Galerie.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image a été enregistrée dans l'album \"Photos\".",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images ont été enregistrées dans l'album \"Photos\".",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"action_recover_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Restaurer %d éléments",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Restaurer %d élément",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"copy_to_album_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Copier %d élément",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Copier %d éléments",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"hide_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Masquer %d éléments",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Masquer %d élément",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"favor_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Ajouter %d élément aux favoris",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Ajouter %d éléments aux favoris",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"select_burst_photos",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d/%2$d photos sélectionnée",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d/%2$d photos sélectionnées",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_from_album_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Ces photos ne seront plus affichées dans cet album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Cette photo ne sera plus affichée dans cet album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d vidéos ont été enregistrées dans l'album sélectionné.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d vidéo a été enregistrée dans l'album sélectionné.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"collage_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Créer un collage avec %d élément",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Créer un collage avec %d éléments",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image a été enregistrée dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images ont été enregistrées dans Galerie.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_files_dialog_delete_permanently_not_recover_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d élément sera définitivement supprimé de cet appareil, du cloud et de tous les appareils synchronisés.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d éléments seront définitivement supprimés de cet appareil, du cloud et de tous les appareils synchronisés.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"copy_to_pasteboard_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Copier %d éléments",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Copier %d élément",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments n'ont pas pu être enregistrés dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément n'a pas pu être enregistré dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"unfavor_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Retirer %d élément des favoris",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Retirer %d éléments des favoris",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image a été enregistrée dans l'album \"Photos\".",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images ont été enregistrées dans l'album \"Photos\".",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_error",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Transfert d'%d élément mis en pause.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Transfert de %d éléments mis en pause.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"compare_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Comparer %d élément",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Comparer %d éléments",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image a été enregistrée dans l'album sélectionné.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images ont été enregistrées dans l'album sélectionné.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d vidéos ont été enregistrées dans l'album \"Vidéos\".",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d vidéo a été enregistrée dans l'album \"Vidéos\".",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_three",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments n'ont pas pu être enregistrés dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément n'a pas pu être enregistré dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_three",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément n'a pas pu être enregistré dans Galerie.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments n'ont pas pu être enregistrés dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d vidéos ont été enregistrées dans l'album \"Vidéos\".",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d vidéo a été enregistrée dans l'album \"Vidéos\".",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cancel_hide_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Démasquer %d élément",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Démasquer %d éléments",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d vidéos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d vidéo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"album_cloud_data_image",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d photo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_files_recycle_delete_kept_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément sera supprimé de cet appareil, du cloud et de tous les appareils synchronisés. Il sera conservé dans \"Récemment supprimés\" pendant %2$d jours.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments seront supprimés de cet appareil, du cloud et de tous les appareils synchronisés. Ils seront conservés dans \"Récemment supprimés\" pendant %2$d jours.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments n'ont pas pu être enregistrés dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément n'a pas pu être enregistré dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"print_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Imprimer %d éléments",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Imprimer %d élément",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"local_photos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d photos seront définitivement supprimées.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d photo sera définitivement supprimée.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"count_details_external_selected",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d/%2$d sélectionné",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d/%2$d sélectionnés",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"items_in_single_album_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément dans cet album sera supprimé de cet appareil, du cloud et de tous les appareils synchronisés. Il sera conservé dans \"Récemment supprimés\" pendant %2$d jours.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments dans cet album seront supprimés de cet appareil, du cloud et de tous les appareils synchronisés. Ils seront conservés dans \"Récemment supprimés\" pendant %2$d jours.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"show_photo_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d photo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_files_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Supprimer %d éléments ?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Supprimer %d élément ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments n'ont pas pu être enregistrés dans Galerie.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément n'a pas pu être enregistré dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d vidéo a été enregistrée dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d vidéos ont été enregistrées dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"days_left",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d jours",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d jour",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"album_cloud_data_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d vidéos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d vidéo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"gallery_cloud_space_full_item",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Espace de stockage Cloud plein. La synchronisation a été mise en pause pour %d éléments.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Espace de stockage Cloud plein. La synchronisation a été mise en pause pour %d élément.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_selected_portraits",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Retirer %d personnes ?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Retirer %d personne ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_photos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d photos seront définitivement supprimées de cet appareil, du cloud et de tous les appareils synchronisés.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d photo sera définitivement supprimée de cet appareil, du Cloud et de tous les appareils synchronisés.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"show_video_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d vidéos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d vidéo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"time_line_message_accumulation_sync",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d éléments synchronisés au total",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d élément synchronisé au total",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_photos_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Suppression de %d photo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Supprimer %d photos ?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d images",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d image",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"action_delete_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Supprimer %d élément",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Supprimer %d éléments",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"action_share_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Partager %d éléments",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Partager %d élément",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d images ont été enregistrées dans l'album \"Photos\".",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d image a été enregistrée dans l'album \"Photos\".",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments n'ont pas pu être enregistrés dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément n'a pas pu être enregistré dans Galerie.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_delete_message",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Autoriser %1$s à supprimer %2$d fichiers ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Autoriser %1$s à supprimer %2$d fichier ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_no_network",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Aucune connexion Internet. Transfert d'%d élément mis en pause.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Aucune connexion Internet. Transfert de %d éléments mis en pause.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"photo_albums_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments dans ces albums seront supprimés. Ils seront conservés dans la section \"Récemment supprimés\" pendant %2$d jours.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément dans ces albums sera supprimé. Il sera conservé dans la section \"Récemment supprimés\" pendant %2$d jours.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"single_photo_album_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d éléments de cet album seront supprimés. Ils seront conservés dans la section \"Récemment supprimés\" pendant %2$d jours.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d élément de cet album sera supprimé. Il sera conservé dans la section \"Récemment supprimés\" pendant %2$d jours.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"broadcast_photo_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d photo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"broadcast_video_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d vidéos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d vidéo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_images_can_download_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d image va être supprimée de cet appareil. Les images qui ont été synchronisées avec le Cloud peuvent être téléchargées à tout moment."
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d images vont être supprimées de cet appareil. Les images qui ont été synchronisées avec le Cloud peuvent être téléchargées à tout moment.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_videos_can_download_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d vidéo va être supprimée de cet appareil. Les vidéos qui ont été synchronisées avec le Cloud peuvent être téléchargées à tout moment."
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d vidéos vont être supprimées de cet appareil. Les vidéos qui ont été synchronisées avec le Cloud peuvent être téléchargées à tout moment.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_files_can_download_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d élément va être supprimé de cet appareil. Les éléments qui ont été synchronisés avec le Cloud peuvent être téléchargés à tout moment."
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d éléments vont être supprimés de cet appareil. Les éléments qui ont été synchronisés avec le Cloud peuvent être téléchargés à tout moment.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_selected_group_albums",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Supprimer %d groupes ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Supprimer %d groupe ?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

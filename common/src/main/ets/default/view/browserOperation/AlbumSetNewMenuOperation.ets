@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,127 +13,141 @@
  * limitations under the License.
  */
 
-import { Log } from '../../utils/Log';
-import { BroadCastConstants } from '../../model/common/BroadCastConstants';
-import { MenuOperationCallback } from './MenuOperationCallback';
-import { MenuOperation } from './MenuOperation';
-import { MenuContext, SourceSceneType } from './MenuContext';
-import { JumpSourceToMain } from '../../model/browser/photo/JumpSourceToMain';
-import { AlbumInfo } from '../../model/browser/album/AlbumInfo';
-import router from '@ohos.router';
-import { UiUtil } from '../../utils/UiUtil';
-import { AlbumDefine } from '../../model/browser/AlbumDefine';
-import { BrowserDataFactory } from '../../interface/BrowserDataFactory';
-import { BigDataConstants, ReportToBigDataUtil } from '../../utils/ReportToBigDataUtil';
-import { Album, UserFileManagerAccess } from '../../access/UserFileManagerAccess';
-import common from '@ohos.app.ability.common';
+import lazy { Log } from '../../utils/Log';
+import lazy { BroadCastConstants } from '../../model/common/BroadCastConstants';
+import type { MenuOperationCallback } from './MenuOperationCallback';
+import type { MenuOperation } from './MenuOperation';
+import type { MenuContext } from './MenuContext';
+import lazy { JumpSourceToMain } from '../../model/browser/photo/JumpSourceToMain';
+import lazy { UiUtil } from '../../utils/UiUtil';
+import lazy { BigDataConstants, ReportToBigDataUtil } from '../../utils/ReportToBigDataUtil';
+import type { PhotoAlbum } from '../../access/UserFileManagerAccess';
+import lazy { UserFileManagerAccess } from '../../access/UserFileManagerAccess';
+import lazy { AlbumSetDataSourceManager } from '../../model/browser/album/AlbumSetDataSourceManager';
+import lazy { DeviceInfo } from '../../utils/DeviceInfo';
+import lazy Rsc from '@ohos/tools/src/main/global/RscString';
+import lazy { AlbumDefine } from '../../model/browser/AlbumDefine';
+import lazy { TraceControllerUtils } from '../../utils/TraceControllerUtils';
+import lazy { BroadCastManager } from '../../model/common/BroadCastManager';
+import lazy { BroadCast } from '../../utils/BroadCast';
+import type { AlbumInfo } from '../../../default/model/browser/album/AlbumInfo';
+import lazy { Action } from './Action';
+import lazy { AlbumRefreshUtil } from '../../utils/AlbumRefreshUtil';
 
+/* instrument ignore file */
 const TAG: string = 'common_AlbumSetNewMenuOperation';
 
+export interface AlbumCreateListener {
+  onCompleted: (albumName: string, albumUri: string | undefined) => void;
+}
+
 export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCallback {
+  public static readonly LISTENER: string = 'com.ohos.photos.new_album.listener';
   private menuContext: MenuContext;
-  private defaultAlbumName: string = '';
-  private onOperationEnd: Function = (): void => {};
+  private onOperationEnd: Function = (): void => {
+  };
+  private hdrDelayTime: number = 400;
+  public static timerToHdr: number = 0;
+  private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
 
   constructor(menuContext: MenuContext) {
     this.menuContext = menuContext;
   }
 
-  async doAction(): Promise<void> {
-    if (this.menuContext == null) {
+  public async doAction(): Promise<void> {
+    if (!this.menuContext) {
       Log.error(TAG, 'menuContext is null, return');
       return;
     }
-    interface Msg1 {
-      type: string
-    }
-    let msg: Msg1 = {
-      type: BigDataConstants.ALBUM_CREATE
+    let albumInfo: AlbumInfo | undefined = this.menuContext?.albumInfo;
+    let msg: Record<string, number | string | boolean | undefined> = {
+      'type': BigDataConstants.ALBUM_CREATE,
+      'albumType': albumInfo?.subType,
     };
     ReportToBigDataUtil.report(BigDataConstants.ALBUM_OPERATION_ID, msg);
 
     let a = $r('app.string.album_new_album');
     Log.info(TAG, `The display name from resource ${JSON.stringify(a)}`);
-    this.defaultAlbumName = '';
     try {
-      let contextName: string = this.menuContext.sourceScene === SourceSceneType.BIG_PHOTO_COMPONENT ?
-        'photoLibraryContext' : 'photosAbilityContext';
-      let context: common.UIAbilityContext =
-        AppStorage.get<common.UIAbilityContext>(contextName) as common.UIAbilityContext;
-      if (context == null || context === undefined) {
-        Log.info(TAG, 'context is null!');
-      } else {
-        this.defaultAlbumName = await context.resourceManager.getString(a.id);
-        Log.info(TAG, `The display name is ${this.defaultAlbumName}`);
-        let newAlbumDisplayName =
-          this.getNewAlbumDefaultName(this.defaultAlbumName);
-        Log.info(TAG, `The display name of new album is ${newAlbumDisplayName}`);
+      let defaultAlbumName: string = await UiUtil.getResourceString(a);
+      Log.info(TAG, `The display name is ${AlbumDefine.getAnonymizeAlbumName(defaultAlbumName)}`);
+      let newAlbumDisplayName = await this.getNewAlbumDefaultName(defaultAlbumName);
+      Log.info(TAG, `The display name of new album is ${AlbumDefine.getAnonymizeAlbumName(newAlbumDisplayName)}`);
 
-        this.menuContext.broadCast.emit(BroadCastConstants.SHOW_NEW_ALBUM_PHOTO_DIALOG,
-          [newAlbumDisplayName, async (displayName: string): Promise<boolean> =>
-          await this.confirmCallbackBindImpl(displayName),
-            (): void => this.cancelCallbackBindImpl()]);
-      }
+      let confirmCallback =
+        async (displayName: string): Promise<boolean> => await this.confirmCallbackBindImpl(displayName);
+      let cancelCallback = (): void => this.cancelCallbackBindImpl();
+
+      this.menuContext.broadCast?.emit(BroadCastConstants.SHOW_NEW_ALBUM_PHOTO_DIALOG,
+        [newAlbumDisplayName, confirmCallback, cancelCallback]);
     } catch (error) {
-      interface Msg2 {
-        type: string
-        errMsg: string
-      }
-      let msg: Msg2 = {
-        type: BigDataConstants.ALBUM_CREATE_ERROR,
-        errMsg: JSON.stringify(error)
+      let msg: Record<string, number | string | boolean> = {
+        'type': BigDataConstants.ALBUM_CREATE_ERROR,
+        'errMsg': error,
       };
       ReportToBigDataUtil.errEventReport(BigDataConstants.ALBUM_OPERATION_ERROR_ID, msg);
-      Log.info(TAG, `The display name error ${error}`);
+      Log.info(TAG, `The display name error ${error}, code: ${error?.code}`);
     }
   }
 
-  onCompleted(): void {
+  public onCompleted(): void {
     Log.info(TAG, 'new album data succeed!');
-    this.onOperationEnd && this.onOperationEnd();
+    if (!DeviceInfo.isPhoneUx() && !DeviceInfo.isPc()) { // 三xxx侧边栏、PAD侧边栏
+      this.menuContext.broadCast?.emit(
+        BroadCastConstants.SIDEBAR_VIEW_SWITCH, [this.menuContext.albumInfo, Action.ALBUM_SET_NEW.actionID]);
+    }
+    this.onOperationEnd?.();
   }
 
-  onError(): void {
+  public onError(): void {
     Log.error(TAG, 'new album data failed!');
-    this.onOperationEnd && this.onOperationEnd();
-  }
-
-  private async confirmCallback(displayName: string): Promise<boolean> {
-    return await this.confirmCallbackBindImpl(displayName);
+    this.onOperationEnd?.();
   }
 
   private async confirmCallbackBindImpl(displayName: string): Promise<boolean> {
-    Log.info(TAG, `AlbumSet new album confirm and the new name is: ${displayName}`);
+    Log.info(TAG, `AlbumSet new album confirm and the new name is: ${AlbumDefine.getAnonymizeAlbumName(displayName)},` +
+      ` jumpSourceToMain = ${this.menuContext.jumpSourceToMain}`);
+    if (!displayName || !displayName.trim()) {
+      UiUtil.showToast($r('app.string.please_enter_name'));
+      return false;
+    }
     if (displayName) {
-      // 过滤用户相册
-      let targetAlbum: Album = await UserFileManagerAccess.getInstance().getAlbumByName(displayName);
-      // 过滤系统相册
-      let isAlbumNameExistInSystemAlbums: boolean = await UserFileManagerAccess.getInstance()
-        .isAlbumNameExistInSystemAlbums(displayName);
-      if (targetAlbum || isAlbumNameExistInSystemAlbums) {
+      // 过滤用户相册和来源相册
+      let startTime: number = Date.now();
+      TraceControllerUtils.startTraceWithTaskId('getAlbumByName', startTime);
+      let targetAlbum: PhotoAlbum | undefined =
+        await UserFileManagerAccess.getInstance().getAlbumByName(displayName);
+      TraceControllerUtils.finishTraceWithTaskId('getAlbumByName', startTime);
+      Log.info(TAG, `getAlbumByName cost ${Date.now() - startTime} ms`);
+      if (targetAlbum) {
         UiUtil.showToast($r('app.string.name_already_use'));
         return false;
       }
     }
     this.onOperationEnd = this.menuContext.onOperationEnd;
     let onOperationStart: Function = this.menuContext.onOperationStart;
-    onOperationStart && onOperationStart();
+    onOperationStart?.();
 
-    let album: Album = await UserFileManagerAccess.getInstance().createUserAlbum(displayName);
-    if (this.menuContext.jumpSourceToMain == JumpSourceToMain.ALBUM) {
-      Log.info(TAG, 'go back to photo grid');
-      this.menuContext.broadCast.emit(BroadCastConstants.MEDIA_OPERATION,
-        [displayName, album.albumUri, (): void => this.onCompleted()]);
-    } else {
-      router.pushUrl({
-        url: 'pages/AlbumSelect',
-        params: {
-          albumName: displayName,
-          albumUri: album.albumUri,
-          isNewAlbum: true
+    let album: PhotoAlbum | undefined = await UserFileManagerAccess.getInstance().createUserAlbum(displayName);
+    let listener: AlbumCreateListener | undefined =
+      this.menuContext.get<AlbumCreateListener>(AlbumSetNewMenuOperation.LISTENER);
+    listener?.onCompleted(displayName, album?.albumUri);
+    if (this.menuContext.jumpSourceToMain === JumpSourceToMain.ALBUM) {
+      let isAlbumActive: boolean = AlbumSetDataSourceManager.getInstance().getDataSource().isActive;
+      Log.info(TAG, `go back to photo grid isAlbumActive: ${isAlbumActive}}`);
+      if (!AlbumRefreshUtil.isSupportAccurateNotify()) {
+        if (!isAlbumActive) {
+          AlbumSetDataSourceManager.getInstance().getDataSource().resume();
         }
-      });
-      this.onCompleted();
+        AlbumSetDataSourceManager.getInstance().getDataSource().notifyDirty();
+      }
+      this.menuContext.broadCast?.emit(BroadCastConstants.MEDIA_OPERATION,
+        [displayName, album?.albumUri, (): void => this.onCompleted()]);
+    } else {
+      /* instrument ignore next */
+      Log.info(TAG, 'go to PickerBasePage');
+      this.menuContext.broadCast?.emit(BroadCastConstants.PICKER_OPERATION,
+        [displayName, album?.albumUri, (): void => this.onCompleted()]);
     }
     return true;
   }
@@ -146,40 +160,51 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
     Log.info(TAG, 'AlbumSet new album cancel');
   }
 
-  private checkAndAddNumber(albumInfo: AlbumInfo, prefixName: string, numbers: number[]): void {
-    if (!albumInfo || !albumInfo.albumName) {
+  /**
+   * 过滤出所有“新建相册 XXX”后的数字集合，以便生成新相册名时避开
+   *
+   * @param albumName 相册名称
+   * @param prefixName 相册名称前缀
+   * @param numbers 过滤出的数字放入numbers作为输出
+   */
+  private checkAndAddNumber(albumName: Resource | string, prefixName: string, numbers: number[]): void {
+    if (!albumName) {
       Log.warn(TAG, 'album is empty');
       return;
     }
-    let res: string[] = albumInfo.albumName.match(new RegExp('^' + prefixName + '[1-9][0-9]*$')) as string[];
-    Log.info(TAG, `check name res ${res}`)
-    if (res) {
-      let number: string[] = res[0].match(new RegExp('[1-9][0-9]*')) as string[];
-      if (number != null && number[0] != null) {
-        numbers.push(Number.parseInt(number[0]));
+    try {
+      let res: RegExpMatchArray | null | undefined =
+        Rsc.toString(albumName)?.match(new RegExp(`^${prefixName}` + ' ' + '[1-9][0-9]*$'));
+      Log.info(TAG, `check name res ${res}${albumName}`);
+      if (res) {
+        let number: RegExpMatchArray | null = res[0].match(new RegExp('[1-9][0-9]*'));
+        Log.info(TAG, `check name number ${JSON.stringify(number)}`);
+        if (number?.[0] != null) {
+          numbers.push(Number.parseInt(number[0]));
+        }
       }
+    } catch (e) {
+      Log.info(TAG, `${e.message}`);
     }
   }
 
-  private getNewAlbumDefaultName(prefixName: string): string {
-    let numbers: number[] = [];
-    for (let i = 0; i < this.menuContext.albumSetDataSource.totalCount(); i++) {
-      this.checkAndAddNumber(this.menuContext.albumSetDataSource.getData(i).data, prefixName, numbers);
-    }
-    let currentAlbum = this.menuContext.albumInfo;
-    if (currentAlbum != null) {
-      this.checkAndAddNumber(currentAlbum, prefixName, numbers);
-    }
-
-    Log.debug(TAG, `${JSON.stringify(numbers)}`);
+  /**
+   * 获取创建新相册的相册名
+   *
+   * @param prefixName 相册名前缀
+   * @returns Promise<string> 新相册名称
+   */
+  private async getNewAlbumDefaultName(prefixName: string): Promise<string> {
+    let numbers: number[] = await this.fetchAndFilterOutExistedNumbersToBeAdded(prefixName);
+    Log.debug(TAG, `before sort ${JSON.stringify(numbers)}`);
 
     if (numbers.length <= 0) {
-      return `${prefixName}1`;
-    } else if (numbers.length == 1) {
+      return `${prefixName} 1`;
+    } else if (numbers.length === 1) {
       if (numbers[0] - 1 > 0) {
-        return `${prefixName}1`;
+        return `${prefixName} 1`;
       } else {
-        return `${prefixName}${numbers[0] + 1}`;
+        return `${prefixName} ${numbers[0] + 1}`;
       }
     }
 
@@ -187,16 +212,42 @@ export class AlbumSetNewMenuOperation implements MenuOperation, MenuOperationCal
       return a - b;
     });
 
+    Log.debug(TAG, `after sort ${JSON.stringify(numbers)}`);
+
     if (numbers[0] - 1 > 0) {
-      return `${prefixName}1`;
+      return `${prefixName} 1`;
     }
 
     for (let i = 1; i < numbers.length; i++) {
       let res = numbers[i - 1] + 1;
       if (res < numbers[i]) {
-        return `${prefixName}${res}`;
+        return `${prefixName} ${res}`;
       }
     }
-    return `${prefixName}${numbers[numbers.length - 1] + 1}`;
+    return `${prefixName} ${numbers[numbers.length - 1] + 1}`;
+  }
+
+  /**
+   * 查询媒体库接口，获取并过滤出所有“新建相册 XXX”后的数字集合，以便生成新相册名时避开
+   *
+   * @param prefixName 文件夹名称前缀：“新建相册”
+   * @returns Promise<void>
+   */
+  private async fetchAndFilterOutExistedNumbersToBeAdded(prefixName: string): Promise<number[]> {
+    let numbers: number[] = [];
+    let existedAlbums: PhotoAlbum[] | undefined =
+      await UserFileManagerAccess.getInstance().getExistedSourceAndUserAlbums();
+    if (existedAlbums) {
+      for (let i: number = 0; i < (existedAlbums.length ?? Number.NaN); i++) {
+        let sourceAlbum: PhotoAlbum = existedAlbums[i];
+        Log.debug(TAG, `fetchAndFilterOutExistedNumbersToBeAdded albumName = ${AlbumDefine.getAnonymizeAlbumName(
+          sourceAlbum?.albumName)}`);
+        this.checkAndAddNumber(sourceAlbum?.albumName ?? '', prefixName, numbers);
+      }
+    }
+    if (this.menuContext && this.menuContext.albumInfo) {
+      this.checkAndAddNumber(this.menuContext.albumInfo?.albumName, prefixName, numbers);
+    }
+    return numbers;
   }
 }

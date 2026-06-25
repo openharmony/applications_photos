@@ -1,0 +1,61 @@
+{
+    "plural":[
+        {
+            "name":"third_save_picture",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"\u200f«%1$s» نۆۋەتتە %2$d رەسىمنى ساقلىماقچى، رۇخسەتمۇ؟",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"\u200f«%1$s» نۆۋەتتە %2$d رەسىمنى ساقلىماقچى، رۇخسەتمۇ؟",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_picture_and_video",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"\u200f«%1$s» نۆۋەتتە %2$d ھۆججەتنى ساقلىماقچى، رۇخسەتمۇ؟",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"\u200f«%1$s» نۆۋەتتە %2$d ھۆججەتنى ساقلىماقچى، رۇخسەتمۇ؟",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"\u200f«%1$s» نۆۋەتتە %2$d سىننى ساقلىماقچى، رۇخسەتمۇ؟",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"\u200f«%1$s» نۆۋەتتە %2$d سىننى ساقلىماقچى، رۇخسەتمۇ؟",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

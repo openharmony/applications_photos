@@ -1,0 +1,32 @@
+{
+    "string":[
+        {
+            "name":"dialog_ban",
+            "value":"Từ chối",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_allow",
+            "value":"Cho phép",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"short_term_title",
+            "value":"Cho phép %s lưu hình ảnh và video?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_not_allowed",
+            "value":"Từ chối",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

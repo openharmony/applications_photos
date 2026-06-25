@@ -1,0 +1,55 @@
+{
+  "description": "Configuration for demo Tests",
+  "driver": {
+    "type": "OHJSUnitTest",
+    "test-timeout": "300000",
+    "bundle-name": "com.ohos.photos",
+    "module-name": "phone_photos_test",
+    "shell-timeout": "2000000",
+    "testcase-timeout": "1200000",
+    "compile-mode": "esmodule",
+    "coverage": true,
+    "package-tool-path": "D:\\Local\\coverage2.0\\node_modules\\@ohos\\coverage"
+  },
+  "kits": [
+    {
+      "pre-push": [
+      ],
+      "post-push": [
+      ],
+      "push": [
+        "PhotoBrowser.hsp->/data/local/tmp/PhotoBrowser.hsp"
+      ],
+      "type": "PushKit",
+      "uninstall": true
+    },
+    {
+      "type": "ShellKit",
+      "run-command": [
+        "power-shell wakeup",
+        "bm install -s /data/local/tmp/PhotoBrowser.hsp",
+        "aa force-stop com.ohos.photos",
+        "param set persist.usb.setting.gadget_conn_prompt false",
+        "reboot",
+        "uinput -T -m 540 1752 540 751 500",
+        "power-shell setmode 602",
+        "power-shell timeout -o 1800000",
+        "killall accessibility",
+        "bm uninstall -n com.ohos.photos",
+        "hilog -b X -T ArkCompiler",
+        "hilog -b I"
+      ],
+      "teardown-command": [
+        "power-shell setmode 600"
+      ]
+    },
+    {
+      "test-file-name": [
+        "photos.hap",
+        "photosTest.hap"
+      ],
+      "type": "AppInstallKit",
+      "cleanup-apps": true
+    }
+  ]
+}

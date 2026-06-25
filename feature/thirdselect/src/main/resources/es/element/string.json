@@ -1,0 +1,95 @@
+{
+    "string":[
+        {
+            "name":"picker_bank_card",
+            "value":"Tarjetas bancarias",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"avatar",
+            "value":"Fotos de perfil",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"qr_code",
+            "value":"Códigos QR",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"id_card",
+            "value":"Documentos de identidad",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"passport",
+            "value":"Pasaportes",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_albums",
+            "value":"Todos los álbumes",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all",
+            "value":"Todo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"driver_license",
+            "value":"Permisos de conducir",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"driving_license",
+            "value":"Permisos de circulación",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"featured_single_portrait",
+            "value":"Persona sugerida",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recommended_portrait",
+            "value":"Sugerencias",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bar_code",
+            "value":"Códigos de barras",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"for_you_recommend",
+            "value":"Sugerencias",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

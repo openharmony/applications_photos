@@ -1,0 +1,14 @@
+{
+  "name": "browsercommonphone",
+  "version": "1.0.0",
+  "description": "a ohpm package which contains browsercommon function",
+  "main": "index.ets",
+  "author": "",
+  "dependencies": {
+    "@ohos/tools": "file:../tools",
+    "@ohos/common": "file:../common",
+    "@ohos/privacy": "file:../feature/privacy",
+    "@ohos/browsercommon": "file:../browserCommon",
+    "@oh-image-editor/editor-phone": "file:../imageEditor/product/editor_phone",
+  }
+}

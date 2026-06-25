@@ -5,11 +5,17 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"%d item selected"
+                    "value":"%d item selected",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 },
                 {
                     "quantity":"other",
-                    "value":"%d items selected"
+                    "value":"%d items selected",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 }
             ]
         },
@@ -18,11 +24,55 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"%1$d day"
+                    "value":"%1$d day",
+                    "attr":{
+                        "priority":"translate"
+                    }
                 },
                 {
                     "quantity":"other",
-                    "value":"%1$d days"
+                    "value":"%1$d days",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"items_in_single_album_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item in this album will be deleted from this device, the cloud, and all synced devices. It will be kept in \"Recently deleted\" for %2$d days.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items in this album will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"items_in_albums_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item in these albums will be deleted from this device, the cloud, and all synced devices. It will be kept in \"Recently deleted\" for %2$d days.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items in these albums will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days.",
+                    "attr":{
+                        "priority":"translate"
+                    }
                 }
             ]
         },
@@ -31,11 +81,17 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"%d photo"
+                    "value":"%d photo",
+                    "attr":{
+                        "priority":"translate"
+                    }
                 },
                 {
                     "quantity":"other",
-                    "value":"%d photos"
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 }
             ]
         },
@@ -44,11 +100,17 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"Restore %d item"
+                    "value":"Restore %d item",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 },
                 {
                     "quantity":"other",
-                    "value":"Restore %d items"
+                    "value":"Restore %d items",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 }
             ]
         },
@@ -57,24 +119,17 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"Delete %d item"
+                    "value":"Delete %d item",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 },
                 {
                     "quantity":"other",
-                    "value":"Delete %d items"
-                }
-            ]
-        },
-        {
-            "name":"move_to_album_count",
-            "value":[
-                {
-                    "quantity":"one",
-                    "value":"Move %d item"
-                },
-                {
-                    "quantity":"other",
-                    "value":"Move %d items"
+                    "value":"Delete %d items",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 }
             ]
         },
@@ -83,11 +138,93 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"Add %d item"
+                    "value":"Add %d item to album",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 },
                 {
                     "quantity":"other",
-                    "value":"Add %d items"
+                    "value":"Add %d items to album",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"action_share_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Share %d item",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Share %d items",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"print_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Print %d item",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Print %d items",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"compare_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Compare %d item",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Compare %d items",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"copy_to_pasteboard_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Copy %d item",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Copy %d items",
+                    "attr":{
+                        "priority":"translate"
+                    }
                 }
             ]
         },
@@ -96,11 +233,17 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"Copy %d item"
+                    "value":"Copy %d item",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 },
                 {
                     "quantity":"other",
-                    "value":"Copy %d items"
+                    "value":"Copy %d items",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 }
             ]
         },
@@ -109,37 +252,17 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"%d video"
+                    "value":"%d video",
+                    "attr":{
+                        "priority":"translate"
+                    }
                 },
                 {
                     "quantity":"other",
-                    "value":"%d videos"
-                }
-            ]
-        },
-        {
-            "name":"show_one_video_with_photo_num",
-            "value":[
-                {
-                    "quantity":"one",
-                    "value":"%d photo，1 video"
-                },
-                {
-                    "quantity":"other",
-                    "value":"%d photos，1 video"
-                }
-            ]
-        },
-        {
-            "name":"show_multi_video_with_photo_num",
-            "value":[
-                {
-                    "quantity":"one",
-                    "value":"%d photo，%d videos"
-                },
-                {
-                    "quantity":"other",
-                    "value":"%d photos，%d videos"
+                    "value":"%d videos",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 }
             ]
         },
@@ -148,11 +271,17 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"Permanently delete this item?"
+                    "value":"Permanently delete this item?",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 },
                 {
                     "quantity":"other",
-                    "value":"Permanently delete these items?"
+                    "value":"Permanently delete these items?",
+                    "attr":{
+                        "priority":"translate"
+                    }
                 }
             ]
         },
@@ -161,11 +290,17 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"Permanently delete %d item?"
+                    "value":"%d item will be permanently deleted.",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 },
                 {
                     "quantity":"other",
-                    "value":"Permanently delete %d items?"
+                    "value":"%d items will be permanently deleted.",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 }
             ]
         },
@@ -174,11 +309,1422 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"Deleted items are moved into the Recently deleted folder and permanently deleted after %d day."
+                    "value":"Deleted items are moved to the \"Recently deleted\" album and permanently deleted after %d day.",
+                    "attr":{
+                        "priority":"LT"
+                    }
                 },
                 {
                     "quantity":"other",
-                    "value":"Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                    "value":"Deleted items are moved to the \"Recently deleted\" album and permanently deleted after %d days.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"low_power_pause_upload_files",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Battery lower than %1$s. Upload of %2$d item paused.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Battery lower than %1$s. Upload of %2$d items paused.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_no_network",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"No Internet connection. Upload of %d item paused.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"No Internet connection. Upload of %d items paused.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"message_uploading",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Uploading %d item…",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Uploading %d items…",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_no_wlan",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"No WLAN connection. Upload of %d item paused.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"No WLAN connection. Upload of %d items paused.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_error",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Upload of %d item paused.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Upload of %d items paused.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"timeline_message_type_video",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d video",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d videos",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"timeline_message_type_image",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d photo",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_delete_message",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Allow %1$s to delete %2$d file?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Allow %1$s to delete %2$d files?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"favor_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Favorite %d item",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Favorite %d items",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"unfavor_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Unfavorite %d item",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Unfavorite %d items",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"hide_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Hide %d item",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Hide %d items",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cancel_hide_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Unhide %d item",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Unhide %d items",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"collage_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Create collage with %d item",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Create collage with %d items",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"count_details_external_selected",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d/%2$d selected",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d/%2$d selected",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"new_hide_files_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Hide %d item?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Hide %d items?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"delete_hide_albums_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Delete %d album?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Delete %d albums?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"days_left",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d day",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d days",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_enhance_addimage_quota_used_up",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Limit reached. Try again in %d hour.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Limit reached. Try again in %d hours.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_enhancing_status_processing",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Photo is being enhanced. Estimated time remaining: %1$d second.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Photo is being enhanced. Estimated time remaining: %1$d seconds.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_files_recycle_delete_kept_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item will be deleted from this device, the cloud, and all synced devices. It will be kept in \"Recently deleted\" for %2$d days.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_files_dialog_delete_permanently_not_recover_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d item will be permanently deleted from this device, the cloud, and all synced devices.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d items will be permanently deleted from this device, the cloud, and all synced devices.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_files_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Delete %d item?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Delete %d items?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_files_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Remove %d item?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Remove %d items?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"select_burst_photos",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d/%2$d photos selected",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d/%2$d photos selected",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_from_album_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"This photo will no longer be shown in this album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"These photos will no longer be shown in this album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_selected_portraits",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Remove %d person?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Remove %d people?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"data_inherit_title",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$s would like to access %2$s item",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$s would like to access %2$s items",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"time_line_message_accumulation_sync",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Synced %d item in total",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Synced %d items in total",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"time_line_message_upload",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Uploading %d item",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Uploading %d items",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images saved to Gallery.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d video saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d videos saved to Gallery.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d video",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d videos",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_three",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image saved to the \"Photos\" album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images saved to the \"Photos\" album.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d video saved to the \"Videos\" album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d videos saved to the \"Videos\" album.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image saved to the \"Photos\" album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images saved to the \"Photos\" album.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d video saved to the \"Videos\" album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d videos saved to the \"Videos\" album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_three",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image saved to the \"Photos\" album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images saved to the \"Photos\" album.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d video saved to the \"Videos\" album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d videos saved to the \"Videos\" album.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d video",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d videos",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_three",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d image saved to the selected album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d images saved to the selected album.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d video saved to the selected album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d videos saved to the selected album.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items couldn't be saved to Gallery.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"seconds",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d second",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d seconds",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"gallery_cloud_space_full_item",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Cloud storage full. Sync paused for %d item.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Cloud storage full. Sync paused for %d items.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"album_cloud_data_image",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d photo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"album_cloud_data_video",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d video",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d videos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_videos_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Delete %d video?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Delete %d videos?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_videos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d video will be permanently deleted from this device, the cloud, and all synced devices.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d videos will be permanently deleted from this device, the cloud, and all synced devices.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"local_videos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d video will be permanently deleted.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d videos will be permanently deleted.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"slide_show_setting_interval",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d second",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d seconds",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_photos_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Delete %d photo?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Delete %d photos?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_photos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d photo will be permanently deleted from this device, the cloud, and all synced devices.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d photos will be permanently deleted from this device, the cloud, and all synced devices.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"local_photos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d photo will be permanently deleted.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d photos will be permanently deleted.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"single_photo_album_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item in this album will be deleted. It will be kept in \"Recently deleted\" for %2$d days.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items in this album will be deleted. They will be kept in \"Recently deleted\" for %2$d days.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"photo_albums_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d item in these albums will be deleted. It will be kept in \"Recently deleted\" for %2$d days.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d items in these albums will be deleted. They will be kept in \"Recently deleted\" for %2$d days.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"broadcast_photo_num",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d photo",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"two",
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"zero",
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d photos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"broadcast_video_num",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d video",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"two",
+                    "value":"%d videos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d videos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d videos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"zero",
+                    "value":"%d videos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d videos",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_images_can_download_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d image will be deleted from this device. Images that have been synced to Cloud can be downloaded again at any time.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d images will be deleted from this device. Images that have been synced to Cloud can be downloaded again at any time.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_videos_can_download_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d video will be deleted from this device. Videos that have been synced to Cloud can be downloaded again at any time.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d videos will be deleted from this device. Videos that have been synced to Cloud can be downloaded again at any time.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_files_can_download_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d item will be deleted from this device. Items that have been synced to Cloud can be downloaded again at any time.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d items will be deleted from this device. Items that have been synced to Cloud can be downloaded again at any time.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_selected_group_albums",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Delete %d group?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Delete %d groups?",
+                    "attr":{
+                        "priority":"translate"
+                    }
                 }
             ]
         }

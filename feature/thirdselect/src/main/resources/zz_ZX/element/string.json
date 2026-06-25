@@ -1,24 +1,56 @@
 {
     "string":[
         {
-            "name": "photo_all",
-            "value": "[TS_871234]_All"
+            "name":"avatar",
+            "value":"[TS_871235]_Profile pictures"
         },
         {
-            "name": "photo_qr_code",
-            "value": "[TS_871236]_QR codes"
+            "name":"id_card",
+            "value":"[TS_871233]_IDs"
         },
         {
-            "name": "photo_bar_code",
-            "value": "[TS_871232]_Barcodes"
+            "name":"bar_code",
+            "value":"[TS_871232]_Barcodes"
         },
         {
-            "name": "photo_id_card",
-            "value": "[TS_871233]_ID documents"
+            "name":"qr_code",
+            "value":"[TS_871236]_QR codes"
         },
         {
-            "name": "photo_profile_picture",
-            "value": "[TS_871235]_Profile pictures"
+            "name":"all",
+            "value":"[TS_871234]_All"
+        },
+        {
+            "name":"driver_license",
+            "value":"[TS_910518]_Driver's licenses"
+        },
+        {
+            "name":"driving_license",
+            "value":"[TS_910514]_Vehicle licenses"
+        },
+        {
+            "name":"picker_bank_card",
+            "value":"[TS_910516]_Bank cards"
+        },
+        {
+            "name":"passport",
+            "value":"[TS_910515]_Passports"
+        },
+        {
+            "name":"for_you_recommend",
+            "value":"[TS_910517]_Suggestions"
+        },
+        {
+            "name":"featured_single_portrait",
+            "value":"[TS_927068]_Suggested person"
+        },
+        {
+            "name":"all_albums",
+            "value":"[TS_919911]_All albums"
+        },
+        {
+            "name":"recommended_portrait",
+            "value":"[TS_977988]_Suggested"
         }
     ]
 }

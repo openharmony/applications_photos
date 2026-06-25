@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,113 +13,52 @@
  * limitations under the License.
  */
 
-import { BroadCast } from '../../utils/BroadCast';
-import { Log } from '../../utils/Log';
-import { ColumnSize, ScreenManager } from '../../model/common/ScreenManager';
-import { Constants } from '../../model/common/Constants';
+import lazy { Log } from '../../utils/Log';
+import lazy { AlertDialog } from '@ohos.arkui.advanced.Dialog';
 
+/* instrument ignore file */
 const TAG: string = 'common_CancelOperationDialog';
 
 @Observed
 export class CancelParam {
-  public continueFunc: Function = (): void => {};
-  public cancelFunc: Function = (): void => {};
+  continueFunc: Function = (): void => {
+  };
+  cancelFunc: Function = (): void => {
+  };
 }
 
 @CustomDialog
 export struct CancelOperationDialog {
-  @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: number[] =
-    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller?: CustomDialogController;
-  @Consume cancelMessage: Resource;
-  @Consume broadCast: BroadCast;
-  @Consume deleteProgress: number;
+  public controller?: CustomDialogController;
+  private cancelMessage: Resource = $r('app.string.common_place_holder', '');
   @Consume cancelParam: CancelParam;
-  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
+  private message: Resource = $r('app.string.common_place_holder', '');
+
+  aboutToAppear(): void {
+    this.message = this.cancelMessage;
+  }
 
   build() {
-    Column() {
-      Stack({ alignContent: Alignment.Center }) {
-        Text(this.cancelMessage)
-          .fontSize($r('sys.float.ohos_id_text_size_body1'))
-          .fontWeight(FontWeight.Regular)
-          .fontColor($r('sys.color.ohos_id_color_text_primary'))
-      }.width('100%')
-      .margin({
-        top: $r('app.float.dialog_content_margin'),
-        bottom: $r('sys.float.ohos_id_elements_margin_vertical_l')
-      })
-
-      Stack({ alignContent: Alignment.Top }) {
-        Row() {
-          Column() {
-            Button() {
-              Text($r('app.string.continue'))
-                .fontSize($r('sys.float.ohos_id_text_size_button1'))
-                .fontColor($r('app.color.color_control_highlight'))
-                .fontWeight(FontWeight.Medium)
-                .width('100%')
-                .textAlign(TextAlign.Center)
-            }
-            .onClick(() => {
-              Log.info(TAG, 'click continue')
-              this.cancelParam.continueFunc();
-              this.controller?.close();
-            })
-            .margin({
-              right: $r('app.float.dialog_double_buttons_margin_right')
-            })
-            .backgroundColor($r('sys.color.ohos_id_color_button_normal'))
-            .borderRadius($r('sys.float.ohos_id_corner_radius_button'))
-            .height($r('app.float.details_dialog_button_height'))
-          }.width('50%')
-
-          Column() {
-            Button() {
-              Text($r('app.string.stop'))
-                .fontSize($r('sys.float.ohos_id_text_size_button1'))
-                .fontColor($r('sys.color.ohos_id_color_warning'))
-                .fontWeight(FontWeight.Medium)
-                .width('100%')
-                .textAlign(TextAlign.Center)
-            }
-            .onClick(() => {
-              Log.info(TAG, 'click cancel')
-              this.cancelParam.cancelFunc();
-              this.controller?.close();
-            })
-            .margin({
-              left: $r('app.float.dialog_double_buttons_margin_left')
-            })
-            .backgroundColor($r('sys.color.ohos_id_color_button_normal'))
-            .borderRadius($r('sys.float.ohos_id_corner_radius_button'))
-            .height($r('app.float.details_dialog_button_height'))
-          }.width('50%')
+    AlertDialog({
+      primaryTitle: $r('app.string.cancel_process_title'),
+      content: this.message,
+      primaryButton: {
+        value: $r('app.string.continue'),
+        action: (): void => {
+          Log.info(TAG, 'primaryButton onclick');
+          this.cancelParam.continueFunc();
+          this.controller?.close();
         }
-      }.width('100%')
-      .height($r('app.float.details_dialog_button_area_height'))
-    }
-    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
-    .width(this.isPcDevice ? $r('app.float.pc_dialog_width') : ScreenManager.getInstance()
-                                                                 .getColumnsWidth(ColumnSize.COLUMN_FOUR))
-    .backgroundColor($r('app.color.white'))
-    .margin({
-      right: $r('app.float.dialog_content_margin'),
-      left: $r('app.float.dialog_content_margin'),
-      bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
-    })
-    .padding({
-      left: $r('app.float.dialog_double_buttons_padding'),
-      right: $r('app.float.dialog_double_buttons_padding')
-    })
-    .alignItems(HorizontalAlign.Start)
-    .shadow({
-      radius: $r('app.float.dialog_defult_shadow_m_radio'),
-      color: $r('app.color.dialog_defult_shadow_m_color'),
-      offsetX: $r('app.float.dialog_defult_shadow_m_offsetX'),
-      offsetY: $r('app.float.dialog_defult_shadow_m_offsetY')
+      },
+      secondaryButton: {
+        value: $r('app.string.stop'),
+        fontColor: $r('sys.color.warning'),
+        action: (): void => {
+          Log.info(TAG, 'secondaryButton onclick');
+          this.cancelParam.cancelFunc();
+          this.controller?.close();
+        }
+      }
     })
   }
 }

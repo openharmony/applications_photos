@@ -1,0 +1,15 @@
+{
+  "module": {
+    "name": "editor_phone",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ],
+    "metadata": [
+      {
+        "name": "license_file_path",
+        "value": "/system/etc/noticeFile/PhotosHm_OpenSource.html"
+      }
+    ]
+  }
+}

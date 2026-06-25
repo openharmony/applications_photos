@@ -1,0 +1,13 @@
+{
+  "allowToBackupRestore": true,
+  "excludes": [
+    "data/storage/el2/distributedfiles"
+  ],
+  "extraInfo": {
+    "supportScene": [
+      "hmos2next",
+      "next2next"
+    ]
+  },
+  "fullBackupOnly": true
+}

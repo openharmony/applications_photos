@@ -1,0 +1,17 @@
+{
+  "module": {
+    "name": "photos_dataProviderAbility",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "metadata": [
+      {
+        "name": "license_file_path",
+        "value": "/system/etc/noticeFile/PhotosHm_OpenSource.html"
+      }
+    ],
+    "uiSyntax": "ets"
+  }
+}

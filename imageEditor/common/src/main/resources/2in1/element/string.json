@@ -1,0 +1,130 @@
+{
+    "string":[
+        {
+            "name":"edit_text_imageEdit",
+            "value":"Click to edit",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"double_click_edit_imageEdit",
+            "value":"Double click to edit text",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_rulerScroller_rotation_imageEdit",
+            "value":"Rotation slider, adjustable range is minus forty five degrees to forty five degrees. Double-click and hold, then drag left or right to adjust the rotation. The current rotation is",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_imageEdit",
+            "value":"%1$s. Adjustable range is %2$d to %3$d degrees. Double click and hold, then drag to adjust the angle.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_rulerScroller_verticalCorrection_imageEdit",
+            "value":"Vertical angle slider, adjustable range is minus forty five degrees to forty five degrees. Double-click and hold, then drag left or right to adjust the vertical angle. The current angle is",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_slide_bar",
+            "value":"Tone level %1$d, adjustable range %2$d to %3$d. Double click to apply, or double click and hold, then drag up or down to change",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_selected",
+            "value":"Brush size adjustment slider, size range from %1$d to %2$d, double click to activate, double click and hold, then drag left or right to adjust size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_rulerScroller_horizontalCorrection_imageEdit",
+            "value":"Horizontal angle slider, adjustable range is minus forty five degrees to forty five degrees. Double-click and hold, then drag left or right to adjust the horizontal angle. The current angle is",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_select_imageEdit",
+            "value":"Double click to select",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_toggle_imageEdit",
+            "value":"Double click to switch",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_imageEdit",
+            "value":"Top right corner of text box, double click and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_imageEdit",
+            "value":"Bottom right corner of text box, double click and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_imageEdit",
+            "value":"Bottom left corner of text box, double click and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_imageEdit",
+            "value":"Top left corner of text box, double click and hold, then drag to adjust the size",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_content_brush_adjusts",
+            "value":"Double-click on a brush to change its size and opacity.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_imageEdit",
+            "value":"Rotation slider, slider range is negative forty five degrees to forty five degrees, double click and hold then drag left or right to adjust the rotation, the current rotation is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_imageEdit",
+            "value":"Horizontal angle slider, slider range is negative forty five degrees to forty five degrees, double click and hold then drag left or right to adjust the horizontal angle, the current angle is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_imageEdit",
+            "value":"Vertical angle slider, slider range is negative forty five degrees to forty five degrees, double click and hold then drag left or right to adjust the vertical angle, the current angle is %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

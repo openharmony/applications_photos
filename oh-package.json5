@@ -1,12 +1,10 @@
 {
   "modelVersion": "5.0.2",
-  "license": "ISC",
-  "devDependencies": {
-    "@ohos/hypium": "1.0.6"
+  "description": "Please describe the basic information.",
+  "dependencies": {
   },
-  "name": "photos",
-  "description": "example description",
-  "repository": {},
-  "version": "1.0.0",
-  "dependencies": {}
+  "devDependencies": {
+    "@ohos/hypium": "1.0.22",
+    "@ohos/hamock": "1.0.0",
+  }
 }

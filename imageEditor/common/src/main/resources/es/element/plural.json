@@ -1,0 +1,42 @@
+{
+    "plural":[
+        {
+            "name":"rotate_broadcast_imageEdit",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d grado",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d grados",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"rotate_angle_imageEdit",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Botón Girar, el ángulo actual del cuadro de texto es de %1$d grados",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Botón Girar, el ángulo actual del cuadro de texto es de %1$d grado",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

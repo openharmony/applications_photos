@@ -1,0 +1,62 @@
+{
+    "plural":[
+        {
+            "name":"rotate_broadcast_imageEdit",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_1040302]_%1$d degree"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_1040296]_%1$d degrees"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1040291]_%1$d degrees"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1040299]_%1$d degrees"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1040300]_%1$d degrees"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1040294]_%1$d degrees"
+                }
+            ]
+        },
+        {
+            "name":"rotate_angle_imageEdit",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_1053587]_Rotate button, current angle of text box is %1$d degree"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_1053583]_Rotate button, current angle of text box is %1$d degrees"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1053586]_Rotate button, current angle of text box is %1$d degrees"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1053584]_Rotate button, current angle of text box is %1$d degrees"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1053585]_Rotate button, current angle of text box is %1$d degrees"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1053581]_Rotate button, current angle of text box is %1$d degrees"
+                }
+            ]
+        }
+    ]
+}

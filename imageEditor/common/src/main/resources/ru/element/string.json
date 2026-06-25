@@ -1,0 +1,5660 @@
+{
+    "string":[
+        {
+            "name":"xt_style_natural_selected",
+            "value":"Выбран стиль Естественный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_film_selected",
+            "value":"Выбран стиль Кинопленка",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_cinematic_selected",
+            "value":"Выбран стиль Кино",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_anime_selected",
+            "value":"Выбран стиль Аниме",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picking",
+            "value":"Перемещение",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_cancel",
+            "value":"Отмена",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_is_too_large_toast",
+            "value":"Слишком большое изображение. Повторите попытку, используя другое изображение.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_anime_imageEdit",
+            "value":"Аниме",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_kaleidoscope",
+            "value":"Калейдоскоп",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_romance_imageEdit",
+            "value":"Кино",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_saturation_level",
+            "value":"Уровень насыщенности %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"natural_style",
+            "value":"Естест\u200bвенный",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_reflect_light",
+            "value":"Удаление бликов",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_reset_success",
+            "value":"Сброс завершен",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"best_expression_update_component",
+            "value":"Эта функция позволяет определить и объединить лучшие выражения лица с разных фотографий из одной серии. Для использования этой функции необходимо обновить плагин.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_sky_blue",
+            "value":"Небесно-голубая мозаика",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_abnormal",
+            "value":"Ошибка сервера.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_xt_style_selected",
+            "value":"Пользовательский стиль выбран",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"update_now",
+            "value":"Обновить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_films_imageEdit",
+            "value":"Кинопленка",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_generating_content",
+            "value":"Создание...",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_typ_classic",
+            "value":"Классическая мозаика",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_remove",
+            "value":"Удалить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_cartoon",
+            "value":"Рисованная мозаика",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_level",
+            "value":"Уровень яркости %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_close",
+            "value":"Выклю\u200bчено",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_slide_bar",
+            "value":"Уровень яркости %1$d, диапазон настройки от %2$d до %3$d. Нажмите дважды, чтобы применить, или дважды нажмите и удерживайте, а затем потяните вверх или вниз, чтобы изменить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shrink_image_to_adjust_expand_rect",
+            "value":"Уменьшите изображение, чтобы изменить размер расширяемой зоны.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_network_abnorma_toast",
+            "value":"Ошибка сети. Проверьте и повторите попытку.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"yellow_imageEdit",
+            "value":"Желтый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_reflect_light",
+            "value":"Удаление бликов не поддерживается для этого изображения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_identified_replace_face",
+            "value":"Заменяемое лицо не определено.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand",
+            "value":"Это изображение невозможно расширить.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"best_expression_new_feature",
+            "value":"Попробуйте функцию Лучшая мимика",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_mosicac",
+            "value":"Мозаика",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_face_fail",
+            "value":"Произошла ошибка. Выберите другое изображение и повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_matrix_area",
+            "value":"Область настройки цвета. Проведите по горизонтали, чтобы изменить цветовую температуру. Проведите по вертикали, чтобы изменить уровень насыщенности.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_reflect_light",
+            "value":"Удалить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_default_template",
+            "value":"Стиль, предустановленный по умолчанию, цветовая температура %1$d, насыщенность %2$d, яркость %3$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_open",
+            "value":"Включе\u200bно",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_haze_removal_imageEdit",
+            "value":"Четкость",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_polka_dot",
+            "value":"Горошек",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove",
+            "value":"Удаление",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"manual_selection",
+            "value":"Вручную",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_star",
+            "value":"Звездная мозаика",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_replace_emoticons",
+            "value":"Сделайте несколько снимков подряд, чтобы получить альтернативную мимику.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_continue",
+            "value":"Продолжить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_triangle",
+            "value":"Треугольная мозаика",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_aspect_ratio_too_large",
+            "value":"Слишком большое соотношение сторон. Повторите попытку, используя другое изображение.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_imageEdit",
+            "value":"Кнопка",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_selection",
+            "value":"Авто",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_weaving",
+            "value":"Узорная мозаика",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_eraser",
+            "value":"Ластик",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_expand_image",
+            "value":"Увеличить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aspect_ratio_of_the_image_toast",
+            "value":"Слишком большое соотношение сторон. Повторите попытку, используя другое изображение.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_expand_image",
+            "value":"Расширить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_color_temperature_level",
+            "value":"Цветовая температура, уровень %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"background",
+            "value":"Фон",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aiproducer_best_expression",
+            "value":"Лучшая мимика",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_bootstrapping_for_the_first_time",
+            "value":"Проведите по центру объекта или человека, чтобы выбрать его.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_color_block",
+            "value":"Цветная мозаика",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_xt_style_template",
+            "value":"Стиль %1$d, предустановленный пользователем, цветовая температура %2$d, насыщенность %3$d, яркость %4$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_style_imageEdit",
+            "value":"Стиль текста",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"Повтор: Автонастройка.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_xt_style_imageEdit",
+            "value":"XMAGE",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_refinement",
+            "value":"Украшение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_style",
+            "value":"Стильный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_off_imageEdit",
+            "value":"Повтор: Выключение регулировки цветовой температуры.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_blossom_imageEdit",
+            "value":"Отмена: Фильтр Цветение.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_remove",
+            "value":"Удаление объектов",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_rotate_imageEdit",
+            "value":"Повернуть",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_off_imageEdit",
+            "value":"Повтор: Выключение регулировки светлых участков.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_pink_imageEdit",
+            "value":"Повтор: Розовый фильтр.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_off_imageEdit",
+            "value":"Повтор: Выключение регулировки резкости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_strength_imageEdit",
+            "value":"Повтор: Интенсивность фильтра Рустик.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"Отмена: Выключение автонастройки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_imageEdit",
+            "value":"Лайм",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_on_imageEdit",
+            "value":"Повтор: Включение регулировки тусклости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_finish",
+            "value":"Готово",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic",
+            "value":"Внимание",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_moody_imageEdit",
+            "value":"Повтор: Фильтр Настроение.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_off_imageEdit",
+            "value":"Отмена: Выключение регулировки виньетки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_imageEdit",
+            "value":"Отмена: Регулировка теней.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_imageEdit",
+            "value":"Отмена: Регулировка температуры.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_natural_style",
+            "value":"Повтор: Естественный.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_top",
+            "value":"Левый верхний угол",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_top",
+            "value":"Правый верхний угол",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_bottom",
+            "value":"Левый нижний угол",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_bottom",
+            "value":"Правый нижний угол",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left",
+            "value":"Левый край",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right",
+            "value":"Правый край",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_top",
+            "value":"Верхний край",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_bottom",
+            "value":"Нижний край",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cutting_percentage",
+            "value":"Обрезать %1$s на %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light",
+            "value":"Спереди",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_off_imageEdit",
+            "value":"Повтор: Выключение корректировки темной области.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_shoot_param_imageEdit",
+            "value":"Повтор: Отображение параметров съемки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_param_imageEdit",
+            "value":"Параметры съемки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_on_imageEdit",
+            "value":"Повтор: Включение регулировки светлых участков.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_original_imageEdit",
+            "value":"Оригинал",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_two",
+            "value":"В результате использования функции Ретушь с ИИ изображение станет статичным. Вы также не сможете настроить параметры %1$s и %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_imageEdit",
+            "value":"Отмена: Регулировка тусклости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_strength_imageEdit",
+            "value":"Отмена: Интенсивность фильтра Удача.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup",
+            "value":"Текущий фильтр будет заменен",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_imageEdit",
+            "value":"Не сохранять",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_proportional_imageEdit",
+            "value":"Повтор: Соотношение сторон.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_model_imageEdit",
+            "value":"Модель устройства",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_time_imageEdit",
+            "value":"Время съемки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_strength_imageEdit",
+            "value":"Отмена: Интенсивность фильтра Рустик.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_strength_imageEdit",
+            "value":"Отмена: Интенсивность фильтра Кристалл.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_strength_imageEdit",
+            "value":"Повтор: Интенсивность фильтра Кристалл.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"revert_original_state_imageEdit",
+            "value":"Сбросить до оригинального состояния?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_one",
+            "value":"В результате использования функции Ретушь с ИИ изображение станет статичным. Вы также не сможете настроить параметр %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_close_watermark_imageEdit",
+            "value":"Повтор: Выключение водяного знака.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_sharpness_imageEdit",
+            "value":"Резкость",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_softness",
+            "value":"Простота",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_media_imageEdit",
+            "value":"Сохранение\u2026",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_none_imageEdit",
+            "value":"Отмена: Оригинал.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_granules_imageEdit",
+            "value":"Повтор: Регулировка зернистости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_imageEdit",
+            "value":"Повтор: Регулировка виньетки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_original_strength_imageEdit",
+            "value":"Отмена: Интенсивность фильтра Великолепие.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_imageEdit",
+            "value":"Отмена: Нейтральный фильтр.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_vertical_correction_imageEdit",
+            "value":"Вертикаль",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_granules_imageEdit",
+            "value":"Зернистость",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"Повтор: Включение автонастройки.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_vignette_imageEdit",
+            "value":"Виньетка",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_imageEdit",
+            "value":"Повтор: Фильтр Сумерки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_vertical_imageEdit",
+            "value":"Повтор: Коррекция по вертикали.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"contour_light",
+            "value":"Контур",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_blossom_imageEdit",
+            "value":"Повтор: Фильтр Цветение.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_temperature_imageEdit",
+            "value":"Температура",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"blurred",
+            "value":"Размытие",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_off_imageEdit",
+            "value":"Повтор: Выключение регулировки оттенка.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_strength_imageEdit",
+            "value":"Отмена: Интенсивность фильтра Сладость.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_on_imageEdit",
+            "value":"Повтор: Включение регулировки экспозиции.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_crop_imageEdit",
+            "value":"Обрезать",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_natural_imageEdit",
+            "value":"Повтор: Естественный фильтр.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tradition_remove_content",
+            "value":"Удаление",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_dark_part_imageEdit",
+            "value":"Отмена: Корректировка темной области.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_format_abnormal_toast",
+            "value":"Такой формат изображений не поддерживается. Попробуйте на другом изображении.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_imageEdit",
+            "value":"Отмена: Фильтр Удача.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_all_changes_imageEdit",
+            "value":"Не сохранять изменения?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_pink_imageEdit",
+            "value":"Розовый",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_on_imageEdit",
+            "value":"Повтор: Включение корректировки светлой области.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_nature_saturation_imageEdit",
+            "value":"Повтор: Регулировка красочности.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_horizontal_correction_imageEdit",
+            "value":"Горизонталь",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_black_and_white_imageEdit",
+            "value":"Монохром",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_shoot_model_imageEdit",
+            "value":"Отмена: Отображение модели устройства.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_fair_imageEdit",
+            "value":"Повтор: Обычный фильтр.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bokeh",
+            "value":"Размытие",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_on_imageEdit",
+            "value":"Повтор: Включение регулировки красочности.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_films_imageEdit",
+            "value":"Повтор: Кинопленка.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_dark_part_imageEdit",
+            "value":"Повтор: Корректировка темной области.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_original_strength_imageEdit",
+            "value":"Повтор: Интенсивность фильтра Великолепие.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_imageEdit",
+            "value":"Тусклость",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_two",
+            "value":"В результате добавления мозаики изображение станет статичным. Вы также не сможете настроить параметры %1$s и %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlights_imageEdit",
+            "value":"Повтор: Регулировка светлых участков.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_adjust_imageEdit",
+            "value":"Изменить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_one",
+            "value":"В результате добавления мозаики изображение станет статичным. Вы также не сможете настроить параметр %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_old_tree_imageEdit",
+            "value":"Рустик",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_on_imageEdit",
+            "value":"Отмена: Включение регулировки красочности.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_imageEdit",
+            "value":"Повтор: Фильтр Рустик.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_general_watermark_imageEdit",
+            "value":"Отмена: Обычный водяной знак.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_on_imageEdit",
+            "value":"Отмена: Включение регулировки теней.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_original_imageEdit",
+            "value":"Повтор: Фильтр Великолепие.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_refinement_new",
+            "value":"Изображение не отвечает требованиям к украшению портрета.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_imageEdit",
+            "value":"Повтор: Теплый фильтр.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_on_imageEdit",
+            "value":"Повтор: Включение регулировки виньетки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_off_imageEdit",
+            "value":"Повтор: Выключение регулировки контраста.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_bubble_save",
+            "value":"Сохранить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_haze_removal_imageEdit",
+            "value":"Отмена: Фильтр Четкость.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_fail_toast",
+            "value":"Невозможно удалить. Повторите попытку позже.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_imageEdit",
+            "value":"Отмена: Регулировка виньетки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_off_imageEdit",
+            "value":"Отмена: Выключение регулировки тусклости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_on_imageEdit",
+            "value":"Отмена: Включение корректировки темной области.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_seal_imageEdit",
+            "value":"Водяные знаки",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"Повтор: Выключение автонастройки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_imageEdit",
+            "value":"Удалить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_imageEdit",
+            "value":"Повтор: Нейтральный фильтр.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_nature_saturation_imageEdit",
+            "value":"Отмена: Регулировка красочности.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_on_imageEdit",
+            "value":"Повтор: Включение регулировки теней.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_previous_step",
+            "value":"Отменить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_off_imageEdit",
+            "value":"Отмена: Выключение регулировки оттенка.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous",
+            "value":"Насыщенный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editor_save_as",
+            "value":"Сохранить как новое",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_sun_sets",
+            "value":"Закат",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_one_pen",
+            "value":"Пауза для создания фигуры",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_dark_part_imageEdit",
+            "value":"Темная область",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_imageEdit",
+            "value":"Отмена: Фильтр Рустик.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tip",
+            "value":"Если вы используете разметку, вы не сможете отрегулировать виртуальную диафрагму или настроить пользовательские стили для этого изображения. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_oversize_imageEdit",
+            "value":"Водяные знаки недоступны для изображений этого размера.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_oneClick_adjust_imageEdit",
+            "value":"Автонастройка",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_close_imageEdit",
+            "value":"Повтор: Выключение пользовательского стиля.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_pink_imageEdit",
+            "value":"Отмена: Розовый фильтр.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_one",
+            "value":"В результате добавления текста изображение станет статичным. Вы также не сможете настроить параметр %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rebuild",
+            "value":"Сгенерировать повторно",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_imageEdit",
+            "value":"Повтор: Фильтр Удача.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_off_imageEdit",
+            "value":"Отмена: Выключение корректировки темной области.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_romance_imageEdit",
+            "value":"Отмена: Кино.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_two",
+            "value":"В результате добавления текста изображение станет статичным. Вы также не сможете настроить параметры %1$s и %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_mirror_imageEdit",
+            "value":"Отмена: Отражение.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sprightly",
+            "value":"Счастливый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai",
+            "value":"Внимание",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_off_imageEdit",
+            "value":"Повтор: Выключение регулировки виньетки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition",
+            "value":"Композиция",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_aperture",
+            "value":"Диафрагма",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_ratio_imageEdit",
+            "value":"Соотношение сторон",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"subtitle_delete_cancel_imageEdit",
+            "value":"Отмена",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_imageEdit",
+            "value":"Отмена: Фильтр Кристалл.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"background_decolorization",
+            "value":"Монохром",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_standard_imageEdit",
+            "value":"Обычный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_imageEdit",
+            "value":"Отмена: Фильтр Монохром.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"expand_image",
+            "value":"Увеличить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editor_overwrite_the_original_image",
+            "value":"Заменить исходное",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_imageEdit",
+            "value":"Отмена: Регулировка насыщенности.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_off_imageEdit",
+            "value":"Повтор: Выключение регулировки теней.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_gorgeous",
+            "value":"Красочный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup",
+            "value":"Внимание",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"revert_imageEdit",
+            "value":"Сбросить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_imageEdit",
+            "value":"Повтор: Регулировка экспозиции",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"petalClip_stylus_next_step",
+            "value":"Повторить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light",
+            "value":"Рембрандт",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_haze_removal_imageEdit",
+            "value":"Повтор: Фильтр Четкость.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_natural_style",
+            "value":"Отмена: Естественный.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light",
+            "value":"Нет",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_off_imageEdit",
+            "value":"Отмена: Выключение регулировки контраста.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_on_imageEdit",
+            "value":"Отмена: Включение регулировки насыщенности.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_moody_imageEdit",
+            "value":"Отмена: Фильтр Настроение.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_translucent",
+            "value":"Ясный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_downloading_imageEdit",
+            "value":"Исходное изображение загружается. Подождите.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_shoot_param_imageEdit",
+            "value":"Отмена: Отображение параметров съемки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_on_imageEdit",
+            "value":"Отмена: Включение регулировки контраста.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_imageEdit",
+            "value":"Сумерки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_refinement",
+            "value":"Украшение портрета не поддерживается для этого изображения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_strength_imageEdit",
+            "value":"Повтор: Интенсивность фильтра Нейтральный.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_bright_part_imageEdit",
+            "value":"Светлая область",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_strength_imageEdit",
+            "value":"Повтор: Интенсивность фильтра Удача.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_off_imageEdit",
+            "value":"Отмена: Выключение регулировки зернистости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_imageEdit",
+            "value":"Повтор: Регулировка контраста.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_standard_imageEdit",
+            "value":"Повтор: Обычный.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_mirror_imageEdit",
+            "value":"Повтор: Отражение.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_on_imageEdit",
+            "value":"Отмена: Включение регулировки светлых участков.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_analyzing",
+            "value":"Анализ…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_on_imageEdit",
+            "value":"Повтор: Включение регулировки яркости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_shadow_imageEdit",
+            "value":"Тень",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"videoTool_compare_imageEdit",
+            "value":"Сравнить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_classics_imageEdit",
+            "value":"Отмена: Фильтр Классика.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_on_imageEdit",
+            "value":"Отмена: Включение регулировки зернистости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_on_imageEdit",
+            "value":"Отмена: Включение регулировки цветовой температуры.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_fuji",
+            "value":"Фудзи",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant",
+            "value":"Элегантный",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_strength_imageEdit",
+            "value":"Повтор: Интенсивность фильтра Теплый.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_imageEdit",
+            "value":"Кристалл",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_text_imageEdit",
+            "value":"Нажмите, чтобы изменить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_on_imageEdit",
+            "value":"Отмена: Включение корректировки светлой области.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_horizontal_imageEdit",
+            "value":"Отмена: Коррекция по горизонтали.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_strength_imageEdit",
+            "value":"Отмена: Интенсивность фильтра Лайм.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"soft_light",
+            "value":"Мягкое",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_intercept_imageEdit",
+            "value":"Повтор: Вырезание.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"refining_switch_blurred_tips",
+            "value":"Для регулировки эффекта размытия требуется сгенерировать повторно",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_hints_imageEdit",
+            "value":"Нажмите здесь, чтобы добавить текст.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"petalClip_stylus_shut_down",
+            "value":"Закрыть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_bright_part_imageEdit",
+            "value":"Повтор: Корректировка светлой области.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_one",
+            "value":"В результате создания рисунка изображение станет статичным. Вы также не сможете настроить параметр %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_failed_imageEdit",
+            "value":"Сбой сохранения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch",
+            "value":"Ретушь",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_risk_control_alerts",
+            "value":"Функция Удаление объектов не поддерживается этим изображением. Попробуйте на другом изображении.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_natural_imageEdit",
+            "value":"Естест\u200bвенный",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_anime_imageEdit",
+            "value":"Повтор: Аниме.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_intercept_imageEdit",
+            "value":"Отмена: Вырезание.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_cut_imageEdit",
+            "value":"Вырезать",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_imageEdit",
+            "value":"Отмена: Фильтр Лайм.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_close_watermark_imageEdit",
+            "value":"Отмена: Выключение водяного знака.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_two",
+            "value":"В результате создания рисунка изображение станет статичным. Вы также не сможете настроить параметры %1$s и %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_saturation_imageEdit",
+            "value":"Насыщенность",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_on_imageEdit",
+            "value":"Отмена: Включение регулировки резкости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_on_imageEdit",
+            "value":"Повтор: Включение регулировки оттенка.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_off_imageEdit",
+            "value":"Отмена: Выключение регулировки светлых участков.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_close_imageEdit",
+            "value":"Отмена: Выключение пользовательского стиля.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_off_imageEdit",
+            "value":"Повтор: Выключение регулировки зернистости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_none",
+            "value":"В результате использования функции Ретушь с ИИ изображение станет статичным.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_imageEdit",
+            "value":"Отмена: Фильтр Сумерки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_imageEdit",
+            "value":"Настроение",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_on_imageEdit",
+            "value":"Повтор: Включение регулировки цветовой температуры.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_expand_image",
+            "value":"Увеличить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_proportional_imageEdit",
+            "value":"Отмена: Соотношение сторон.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_fair_imageEdit",
+            "value":"Отмена: Обычный фильтр.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_off_imageEdit",
+            "value":"Отмена: Выключение регулировки резкости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_brush_adjusts",
+            "value":"Настройка кисти",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_refining",
+            "value":"Украшение",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_luma_imageEdit",
+            "value":"Отмена: Регулировка яркости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_imageEdit",
+            "value":"Отмена: Регулировка резкости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_frame_watermark_imageEdit",
+            "value":"Отмена: Водяной знак в рамке.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_anime_imageEdit",
+            "value":"Отмена: Аниме.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_imageEdit",
+            "value":"Отмена: Регулировка оттенка.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_original_imageEdit",
+            "value":"Отмена: Фильтр Великолепие.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen",
+            "value":"Свежесть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_imageEdit",
+            "value":"Повтор: Регулировка теней.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_imageEdit",
+            "value":"Отмена: Фильтр Сладость.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_imageEdit",
+            "value":"Повтор: Фильтр Кристалл.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_strength_imageEdit",
+            "value":"Повтор: Интенсивность фильтра Лайм.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_on_imageEdit",
+            "value":"Повтор: Включение регулировки насыщенности.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_moonlight",
+            "value":"Лунный свет",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup_tip",
+            "value":"Если вы используете разметку, вы не сможете настроить пользовательские стили для этого изображения. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_strength_imageEdit",
+            "value":"Отмена: Интенсивность фильтра Монохром.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_on_imageEdit",
+            "value":"Повтор: Включение регулировки резкости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid",
+            "value":"Энергичный",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_crop_imageEdit",
+            "value":"Отмена: Обрезка.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong",
+            "value":"Мощный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_standard_imageEdit",
+            "value":"Отмена: Обычный.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_strength_imageEdit",
+            "value":"Повтор: Интенсивность фильтра Сумерки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_off_imageEdit",
+            "value":"Отмена: Выключение корректировки светлой области.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_imageEdit",
+            "value":"Повтор: Фильтр Лайм.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_imageEdit",
+            "value":"Классика",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_refreshing",
+            "value":"Бодрый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_romance_imageEdit",
+            "value":"Повтор: Кино.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_ninety_angle_rotate_imageEdit",
+            "value":"Повтор: Поворот на %s°.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_ninety_angle_rotate_imageEdit",
+            "value":"Отмена: Поворот на %s°.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_on_imageEdit",
+            "value":"Повтор: Включение регулировки зернистости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_off_imageEdit",
+            "value":"Отмена: Выключение регулировки насыщенности.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_imageEdit",
+            "value":"Добавить текст",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_imageEdit",
+            "value":"Повтор: Регулировка оттенка.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"refining_switch_light_tips",
+            "value":"Для переключения эффектов освещения требуется сгенерировать повторно",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"retry_imageEdit",
+            "value":"Повторить",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_on_imageEdit",
+            "value":"Отмена: Включение регулировки яркости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_one_pen",
+            "value":"Нарисуйте фигуру одним непрерывным движением. Затем задержите стилус или палец на экране, и ее форма будет скорректирована.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_none_imageEdit",
+            "value":"Повтор: Оригинал.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_classics_imageEdit",
+            "value":"Повтор: Фильтр Классика.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_off_imageEdit",
+            "value":"Отмена: Выключение регулировки яркости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"butterfly_light",
+            "value":"Бабочка",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_blossom_imageEdit",
+            "value":"Цветение",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_little_luck_imageEdit",
+            "value":"Удача",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_close_imageEdit",
+            "value":"Нет пользовательских стилей",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_milk_tea_imageEdit",
+            "value":"Теплый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_middle_tone_imageEdit",
+            "value":"Нейтральный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_stylus",
+            "value":"Разметка",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_granules_imageEdit",
+            "value":"Отмена: Регулировка зернистости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_strength_imageEdit",
+            "value":"Повтор: Интенсивность фильтра Монохром.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_imageEdit",
+            "value":"Отмена: Регулировка экспозиции.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_on_imageEdit",
+            "value":"Отмена: Включение регулировки экспозиции.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_rotate_imageEdit",
+            "value":"Отмена: Поворот.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_off_imageEdit",
+            "value":"Отмена: Выключение регулировки красочности.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_shoot_time_imageEdit",
+            "value":"Повтор: Отображение времени съемки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_lift_pen",
+            "value":"Поднятие для создания фигуры",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_luma_imageEdit",
+            "value":"Яркость",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_off_imageEdit",
+            "value":"Повтор: Выключение регулировки яркости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_none",
+            "value":"В результате добавления мозаики изображение станет статичным.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_vertical_imageEdit",
+            "value":"Отмена: Коррекция по вертикали.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_off_imageEdit",
+            "value":"Отмена: Выключение регулировки экспозиции.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_imageEdit",
+            "value":"Повтор: Регулировка тусклости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_strength_imageEdit",
+            "value":"Отмена: Интенсивность фильтра Нейтральный.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_loading",
+            "value":"Обработка…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_crop_imageEdit",
+            "value":"Повтор: Обрезка.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_imageEdit",
+            "value":"Оригинал",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"Отмена: Автонастройка.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_imageEdit",
+            "value":"Стиль",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup",
+            "value":"Пользовательские стили станут недоступны",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_imageEdit",
+            "value":"Обычный",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_limit_toast",
+            "value":"Функция Удаление объектов не поддерживается этим изображением. Попробуйте на другом изображении.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_off_imageEdit",
+            "value":"Повтор: Выключение регулировки насыщенности.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_size_low",
+            "value":"Разрешение изображения слишком низкое для использования этой функции.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_imageEdit",
+            "value":"Изменение",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"current_file_cannot_import_imageEdit",
+            "value":"Файл не поддерживается или поврежден. Сбой изменения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_general_watermark_imageEdit",
+            "value":"Повтор: Обычный водяной знак.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_imageEdit",
+            "value":"Фильтры",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_has_been_refined",
+            "value":"К этому изображению уже применено украшение.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_imageEdit",
+            "value":"Сладость",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_imageEdit",
+            "value":"Отмена: Регулировка контраста.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light",
+            "value":"Сбоку",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_none",
+            "value":"В результате добавления текста изображение станет статичным.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_shoot_time_imageEdit",
+            "value":"Отмена: Отображение времени съемки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_natural_imageEdit",
+            "value":"Отмена: Естественный фильтр.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_shoot_model_imageEdit",
+            "value":"Повтор: Отображение модели устройства.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_free_imageEdit",
+            "value":"Свободная форма",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_on_imageEdit",
+            "value":"Отмена: Включение регулировки тусклости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_on_imageEdit",
+            "value":"Отмена: Включение регулировки виньетки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word",
+            "value":"Внимание",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_imageEdit",
+            "value":"Повтор: Фильтр Монохром.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_highlights_imageEdit",
+            "value":"Светлые участки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_rotate_imageEdit",
+            "value":"Повтор: Поворот.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouching",
+            "value":"Ретушь с ИИ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_imageEdit",
+            "value":"Отмена: Теплый фильтр.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_highlights_imageEdit",
+            "value":"Отмена: Регулировка светлых участков.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_refining",
+            "value":"Начать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_off_imageEdit",
+            "value":"Повтор: Выключение регулировки экспозиции.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_nature_saturation_imageEdit",
+            "value":"Красочность",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_without_refinement",
+            "value":"Украшение портрета не поддерживается для этого изображения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_off_imageEdit",
+            "value":"Повтор: Выключение регулировки красочности.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_style",
+            "value":"Пользовательский стиль",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_on_imageEdit",
+            "value":"Повтор: Включение корректировки темной области.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_imageEdit",
+            "value":"Повтор: Регулировка резкости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_whiten",
+            "value":"Обычный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_off_imageEdit",
+            "value":"Отмена: Выключение регулировки теней.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_strength_imageEdit",
+            "value":"Отмена: Интенсивность фильтра Теплый.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_bright_part_imageEdit",
+            "value":"Отмена: Корректировка светлой области.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup_tip",
+            "value":"Если вы выберете пользовательский стиль, текущий фильтр и сделанные вами изменения будут заменены. Заменить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_hue_imageEdit",
+            "value":"Цвет",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_frame_watermark_imageEdit",
+            "value":"Повтор: Водяной знак в рамке.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams",
+            "value":"Мечта",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_haze_removal_selected_imageEdit",
+            "value":"Выбран фильтр Четкость",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_off_imageEdit",
+            "value":"Отмена: Выключение регулировки цветовой температуры.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_none",
+            "value":"В результате создания рисунка изображение станет статичным.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_restore_origin_tips",
+            "value":"Нажмите здесь, чтобы отменить изменения.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_brilliant",
+            "value":"Мерцание",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_brush_adjusts",
+            "value":"Дважды нажмите на кисть, чтобы изменить ее размер и прозрачность.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup_tip",
+            "value":"Если вы используете Ретушь с ИИ, вы не сможете настроить пользовательские стили для этого изображения. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_strength_imageEdit",
+            "value":"Отмена: Интенсивность фильтра Сумерки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_content_lift_pen",
+            "value":"Нарисуйте фигуру одним непрерывным движением. Затем поднимите стилус или палец, и ее форма будет скорректирована.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_films_imageEdit",
+            "value":"Отмена: Кинопленка.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_imageEdit",
+            "value":"Повтор: Регулировка насыщенности.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_soft",
+            "value":"Простота",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brightly",
+            "value":"Яркий",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_imageEdit",
+            "value":"Контраст",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_luma_imageEdit",
+            "value":"Повтор: Регулировка яркости.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_imageEdit",
+            "value":"Повтор: Регулировка температуры.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_pave_imageEdit",
+            "value":"По размеру экрана",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_on_imageEdit",
+            "value":"Отмена: Включение регулировки оттенка.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_off_imageEdit",
+            "value":"Повтор: Выключение регулировки тусклости.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_on_imageEdit",
+            "value":"Повтор: Включение регулировки контраста.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light",
+            "value":"Освещение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup",
+            "value":"Настройки пользовательского стиля станут недоступны",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_exposure_imageEdit",
+            "value":"Экспозиция",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"Отмена: Включение автонастройки.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_strength_imageEdit",
+            "value":"Повтор: Интенсивность фильтра Сладость.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_imageEdit",
+            "value":"Великолепие",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_imageEdit",
+            "value":"Повтор: Фильтр Сладость.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_off_imageEdit",
+            "value":"Повтор: Выключение корректировки светлой области.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"first_time_use_penkit",
+            "value":"Нажмите здесь, чтобы порисовать на этом изображении.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_horizontal_imageEdit",
+            "value":"Повтор: Коррекция по горизонтали.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"color_light_blue_imageEdit",
+            "value":"Голубой",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup_tip",
+            "value":"В результате использования разметки вы не сможете настроить диафрагму для этого изображения. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch_tip",
+            "value":"В результате использования функции Ретушь с ИИ вы не сможете настроить диафрагму для этого изображения. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"none",
+            "value":"Нет",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_right",
+            "value":"По правому краю",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"generation_image_imageEdit",
+            "value":"Обработка...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"timeout_without_move_imageEdit",
+            "value":"Тайм-аут запроса сервера. Повторите попытку позже.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_confirm_selection_imageEdit",
+            "value":"Повтор: Подтвердить область выделения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"draw_imageEdit",
+            "value":"Создание скетча...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_imageEdit",
+            "value":"Пользовательский водяной знак",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_abnormal_try_again",
+            "value":"Сбой запроса сервера. Повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_tip",
+            "value":"В результате использования функции Ретушь с ИИ вы не сможете настроить диафрагму или пользовательский стиль для этого изображения. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"synthesis_failed_without_move_imageEdit",
+            "value":"Сбой генерации изображения. Повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_delete_object_imageEdit",
+            "value":"Отмена: Удалить объект.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand_part_area",
+            "value":"Некоторый контент невозможно расширить. Измените положение и повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fusion_imageEdit",
+            "value":"Смешивание...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"regions_overlay_without_move_imageEdit",
+            "value":"Произошла ошибка. Выберите снова и повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_compose_imageEdit",
+            "value":"Повтор: Сгенерировать.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_small_without_move_imageEdit",
+            "value":"Разрешение изображения слишком маленькое.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_aperture_focus",
+            "value":"Отмена: Положение фокуса.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_aperture_adjust",
+            "value":"Повтор: Настроить диафрагму.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tips",
+            "value":"В результате использования разметки вы не сможете настроить диафрагму или пользовательский стиль для этого изображения. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_move_toast_content",
+            "value":"Если вы выйдете, изменения не будут сохранены. Выйти?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_move_bootstrapping",
+            "value":"Нарисуйте линию, чтобы выбрать объект",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unavailable_move_imageEdit",
+            "value":"Функция перемещения недоступна.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"generation_imageEdit",
+            "value":"Генерация...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_move_toast_title",
+            "value":"Изменения будут утеряны",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_object_imageEdit",
+            "value":"Отмена: Настроить объект.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_sign_imageEdit",
+            "value":"Персонализированная подпись",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_move_object_imageEdit",
+            "value":"Повтор: Переместить объект.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_edit_imageEdit",
+            "value":"Нажмите на объект, чтобы отредактировать его",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_green_imageEdit",
+            "value":"Зеленый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_edit_watermark_imageEdit",
+            "value":"Отмена: Изменение водяного знака.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_timeout_try_again",
+            "value":"Тайм-аут запроса сервера. Повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_switch_watermark_imageEdit",
+            "value":"Повтор: Переключение водяного знака.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_aperture_adjust",
+            "value":"Отмена: Настроить диафрагму.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selected_watermark_imageEdit",
+            "value":"Отмена: Выбор водяного знака.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fill_imageEdit",
+            "value":"Заполнение...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_delete_object_imageEdit",
+            "value":"Повтор: Удалить объект.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_display_param_imageEdit",
+            "value":"Отобразить раздел %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_tier_object_imageEdit",
+            "value":"Отмена: Настроить слой.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_object_imageEdit",
+            "value":"Повтор: Настроить объект.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_copy_object_imageEdit",
+            "value":"Повтор: Скопировать объект.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_intelligent_correction_imageEdit",
+            "value":"Выровнять",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_move_imageEdit",
+            "value":"Функция перемещения недоступна для этого изображения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"oversize_imageEdit",
+            "value":"Достигнуто максимальное количество объектов.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"today_frequency_reached_upper_limit",
+            "value":"Достигнут лимит использования на сегодня.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_tier_object_imageEdit",
+            "value":"Повтор: Настроить слой.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_light_purple_imageEdit",
+            "value":"Светло-фиолетовый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_color_param_imageEdit",
+            "value":"Параметры цвета",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_red_imageEdit",
+            "value":"Красный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_imageEdit",
+            "value":"Сгенерировать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch",
+            "value":"Настройки диафрагмы будут недоступны",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_intelligent_correction_on",
+            "value":"Выбрана опция Выровнять",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_select_param_imageEdit",
+            "value":"Выбрать %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_picture_tilt_is_detected",
+            "value":"Наклон не обнаружен.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_black_imageEdit",
+            "value":"Черный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_center",
+            "value":"По центру",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_large_mask_without_move_imageEdit",
+            "value":"Выбранная область слишком большая. Выберите повторно.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_correct_intelligent_imageEdit",
+            "value":"Отмена: Выровнять",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_edit_watermark_imageEdit",
+            "value":"Повтор: Изменение водяного знака.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_imageEdit",
+            "value":"Текст",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_aperture_imageEdit",
+            "value":"Диафрагма",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_edit_max_tip",
+            "value":"Достигнуто максимальное количество текстовых полей.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_small_mask_without_move_imageEdit",
+            "value":"Выбранная область слишком маленькая. Выберите повторно.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_compose_imageEdit",
+            "value":"Отмена: Сгенерировать.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_left",
+            "value":"По левому краю",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_copy_object_imageEdit",
+            "value":"Отмена: Скопировать объект.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_intelligent_imageEdit",
+            "value":"Повтор: Выровнять",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_text_imageEdit",
+            "value":"Добавить текст",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup",
+            "value":"Настройки диафрагмы будут недоступны",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_aperture_focus",
+            "value":"Повтор: Положение фокуса.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_imageEdit",
+            "value":"Отмена: Выделение.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_close_param_imageEdit",
+            "value":"Закрыть раздел %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cannot_be_erased_toast",
+            "value":"Невозможно удалить контент в выбранной области.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"exit_imageEdit",
+            "value":"Выйти",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"leave_imageEdit",
+            "value":"Выйти",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_dark_blue_imageEdit",
+            "value":"Темно-синий",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selected_watermark_imageEdit",
+            "value":"Повтор: Выбор водяного знака.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_on_imageEdit",
+            "value":"Пользовательский водяной знак выбран",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_imageEdit",
+            "value":"Выбрано",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_switch_watermark_imageEdit",
+            "value":"Отмена: Переключение водяного знака.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_confirm_selection_imageEdit",
+            "value":"Отмена: Подтвердить область выделения.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_white_imageEdit",
+            "value":"Белый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_imageEdit",
+            "value":"Повтор: Выделение.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_move_object_imageEdit",
+            "value":"Отмена: Переместить объект.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_manual_selection",
+            "value":"Отмена: Выбор вручную.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_add_patches_imageEdit",
+            "value":"Отмена: Добавление стикера.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_paint_text_announced",
+            "value":"Удаленная выбранная область",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_wise_selection",
+            "value":"Отмена: Автовыбор.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_manual_selection",
+            "value":"Повтор: Выбор вручную.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_brush_thickness_selected",
+            "value":"Ползунок регулировки размера ластика, диапазон значений от %1$d до %2$d. Нажмите дважды, чтобы активировать, нажмите дважды и удерживайте, затем потяните влево или вправо, чтобы изменить размер",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_eraser_after_imageEdit",
+            "value":"Выберите объект и повторите попытку.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_add_patches_imageEdit",
+            "value":"Повтор: Добавление стикера.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"select_patches_object",
+            "value":"Выбор объекта",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_wise_selection",
+            "value":"Повтор: Автовыбор.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_selection_to_edit_imageEdit",
+            "value":"Нажмите Авто или Вручную, чтобы изменить выбранную область",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_picture",
+            "value":"Сохранить как изображение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_eraser_selection",
+            "value":"Отмена: Ластик.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_eraser_selection",
+            "value":"Повтор: Ластик.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"patches_selection",
+            "value":"Стикеры",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_selection",
+            "value":"Ластик",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_two",
+            "value":"После создания рисунка вы не сможете настроить параметры %1$s и %2$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_one",
+            "value":"После использования функции Ретушь с ИИ вы не сможете настроить параметр %1$s. Продолжить?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_three",
+            "value":"После добавления текста вы не сможете настроить параметры %1$s, %2$s и %3$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_one",
+            "value":"После добавления текста вы не сможете настроить параметр %1$s. Продолжить?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_two",
+            "value":"После добавления мозаики вы не сможете настроить параметры %1$s и %2$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_no_effect",
+            "value":"Повтор: Без эффекта.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_panning_shot_effect",
+            "value":"Съемка с проводкой",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_no_effect",
+            "value":"Отмена: Без эффекта.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_panning_shot_effect",
+            "value":"Повтор: Съемка с проводкой.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_snapshot_effect",
+            "value":"Повтор: Мгновенный снимок.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_one",
+            "value":"После создания рисунка вы не сможете настроить параметр %1$s. Продолжить?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_selection_snapshot_effect",
+            "value":"Отмена: Мгновенный снимок.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_two",
+            "value":"После использования функции Ретушь с ИИ вы не сможете настроить параметры %1$s и %2$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_three",
+            "value":"После использования функции Ретушь с ИИ вы не сможете настроить параметры %1$s, %2$s и %3$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_snapshot_effect",
+            "value":"Мгновенный снимок",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_one",
+            "value":"После добавления мозаики вы не сможете настроить параметр %1$s. Продолжить?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_movement",
+            "value":"Эффекты движения",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_three",
+            "value":"В результате добавления мозаики изображение станет статичным. Вы также не сможете настроить параметры %1$s, %2$s и %3$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_three",
+            "value":"В результате использования функции Ретушь с ИИ изображение станет статичным. Вы также не сможете настроить параметры %1$s, %2$s и %3$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_three",
+            "value":"После добавления мозаики вы не сможете настроить параметры %1$s, %2$s и %3$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_two",
+            "value":"После добавления текста вы не сможете настроить параметры %1$s и %2$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_three",
+            "value":"В результате добавления текста изображение станет статичным. Вы также не сможете настроить параметры %1$s, %2$s и %3$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_movement_imageEdit",
+            "value":"Движение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_panning_shot_effect",
+            "value":"Отмена: Съемка с проводкой.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_three",
+            "value":"После создания рисунка вы не сможете настроить параметры %1$s, %2$s и %3$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_three",
+            "value":"В результате создания рисунка изображение станет статичным. Вы также не сможете настроить параметры %1$s, %2$s и %3$s. Продолжить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_selected",
+            "value":"Выбран фильтр Настроение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n_selected",
+            "value":"Композиция %1$d выбрана",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_lr",
+            "value":"Переключение на отображение лево-право",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_n",
+            "value":"Размытие фона настроено на уровень %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_style_selected",
+            "value":"Выбрана опция Стильный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"double_click_edit_imageEdit",
+            "value":"Дважды нажмите, чтобы изменить текст",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_top_middle",
+            "value":"Верхний край рамки обрезки, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер выбранной области",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightness_true",
+            "value":"Выбран параметр Яркость",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_original_selected",
+            "value":"Выбрана опция освещения Оригинал",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_true",
+            "value":"Выбран параметр Тусклость",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_imageEdit",
+            "value":"Правый верхний угол текстового поля, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_imageEdit",
+            "value":"Без водяного знака",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_selected",
+            "value":"Выбран раздел Фильтры",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_aperture_selected",
+            "value":"Выбран раздел Диафрагма",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice",
+            "value":"Шкала регулировки степени размытия фона",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_invisible",
+            "value":"Кнопка отмены действия, недоступно",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_0",
+            "value":"Размытие фона не настроено",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_focus_change",
+            "value":"Положение фокуса переключено",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid_selected",
+            "value":"Выбрана опция Энергичный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_selected",
+            "value":"Выбран фильтр Лайм",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_rotation_on",
+            "value":"Выбран параметр Повернуть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9_on",
+            "value":"Выбрано соотношение сторон шестнадцать к девяти",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_old_tree_selected",
+            "value":"Выбран фильтр Рустик",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_visible",
+            "value":"Отмена",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_blossom_selected",
+            "value":"Выбран фильтр Цветение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_rotation_btn",
+            "value":"Поворот на девяносто градусов против часовой стрелки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_box_imageEdit",
+            "value":"Текстовое поле",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_milk_tea_selected",
+            "value":"Выбран фильтр Теплый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1_on",
+            "value":"Выбрано соотношение сторон один к одному",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_bottom",
+            "value":"Левый нижний угол рамки обрезки, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер выбранной области",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_sharpness_true",
+            "value":"Выбран параметр Резкость",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_imageEdit",
+            "value":"%1$s. Доступный диапазон от %2$d до %3$d градусов. Нажмите дважды и удерживайте, затем перетащите, чтобы изменить угол.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bold_imageEdit",
+            "value":"Жирный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_original_selected",
+            "value":"Выбрана исходная композиция",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_imageEdit",
+            "value":"Правый нижний угол текстового поля, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_invisible",
+            "value":"Кнопка сохранения, недоступно",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_free_on",
+            "value":"Выбран параметр Свободная форма",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong_selected",
+            "value":"Выбрана опция Мощный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen_selected",
+            "value":"Выбрана опция Свежесть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_pink_selected",
+            "value":"Выбран фильтр Розовый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"italics_imageEdit",
+            "value":"Курсив",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_invisible",
+            "value":"Кнопка повтора действия, недоступно",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn_desc",
+            "value":"Нажмите дважды и удерживайте, чтобы сравнить изображение с исходным изображением",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light_selected",
+            "value":"Эффект освещения не выбран",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vibrance_true",
+            "value":"Выбран параметр Красочность",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_auto_true",
+            "value":"Выбран параметр Автонастройка",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_imageEdit",
+            "value":"Левый нижний угол текстового поля, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_ud",
+            "value":"Переключение на отображение верх-низ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_mirror_btn",
+            "value":"Зеркальное отражение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_bar_announced",
+            "value":"Шкала регулировки размера кисти",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_on",
+            "value":"Выбрана опция Соотношение сторон",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select_n",
+            "value":"Изменен уровень размытия фона, текущий уровень %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_selected",
+            "value":"Выбран раздел %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_exposure_true",
+            "value":"Выбран параметр Экспозиция",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams_selected",
+            "value":"Выбрана опция Мечта",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_screen_on",
+            "value":"Выбрана опция По размеру экрана",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2_on",
+            "value":"Выбрано соотношение сторон три к двум",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n",
+            "value":"Композиция %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_paint_text_announced",
+            "value":"Разметка завершена, соответствующая область автоматически выбрана",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_little_luck_selected",
+            "value":"Выбран фильтр Удача",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"manual_paint_text_announced",
+            "value":"Выбран отмеченная область",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_imageEdit",
+            "value":"Водяной знак в рамке",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_watermark_selected",
+            "value":"Выбран раздел Водяные знаки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_bottom",
+            "value":"Правый нижний угол рамки обрезки, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер выбранной области",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vignette_true",
+            "value":"Выбран параметр Виньетка",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_selected",
+            "value":"Выбран фильтр Обычный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_verticalCorrection_on",
+            "value":"Выбран параметр Выравнивание по вертикали",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_on_imageEdit",
+            "value":"Выбран обычный водяной знак",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant_selected",
+            "value":"Выбрана опция Элегантный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_on_imageEdit",
+            "value":"Выбран водяной знак в рамке",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_selected",
+            "value":"Выбран фильтр Натуральный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select",
+            "value":"Ползунок регулировки уровня размытия фона, диапазон значений от %1$d до %2$d. Нажмите дважды, чтобы активировать, нажмите дважды и удерживайте, затем потяните влево или вправо, чтобы изменить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightzone_true",
+            "value":"Выбран параметр Светлая область",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_grain_true",
+            "value":"Выбран параметр Зернистость",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_selected",
+            "value":"Выбран фильтр Сумерки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_top",
+            "value":"Левый верхний угол рамки обрезки, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер выбранной области",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_black_and_white_selected",
+            "value":"Выбран фильтр Монохром",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_selected",
+            "value":"Выбран фильтр Классический",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_true",
+            "value":"Выбран параметр Контрастность",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_soft_selected",
+            "value":"Выбрана опция Простота",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4_on",
+            "value":"Выбрано соотношение сторон три к четырем",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"alignment_imageEdit",
+            "value":"Выравнивание",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_hue_true",
+            "value":"Выбран параметр Оттенок",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"underline_imageEdit",
+            "value":"Подчеркнутый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_selected",
+            "value":"Выбран параметр Освещение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16_on",
+            "value":"Выбрано соотношение сторон девять к шестнадцати",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_whiten_selected",
+            "value":"Выбрана опция Обычный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9",
+            "value":"Горизонтально, соотношение сторон шестнадцать к девяти",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_origin_on",
+            "value":"Выбран параметр Исходное",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light_selected",
+            "value":"Выбрана опция Сбоку",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_imageEdit",
+            "value":"Левый верхний угол текстового поля, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brightly_selected",
+            "value":"Выбрана опция Яркий",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_middle",
+            "value":"Левый край рамки обрезки, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер выбранной области",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_visible",
+            "value":"Повтор",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_up",
+            "value":"Назад",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_value",
+            "value":"Изменен размер кисти, текущий размер %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_selected",
+            "value":"Выбрана композиция",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_top",
+            "value":"Правый верхний угол рамки обрезки, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер выбранной области",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_shadow_true",
+            "value":"Выбран параметр Тень",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_temperature_true",
+            "value":"Выбран параметр Температура",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous_selected",
+            "value":"Выбрана опция Насыщенный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_gorgeous_selected",
+            "value":"Выбрана опция Красочный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_point_announced",
+            "value":"Текущий размер кисти %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_selected",
+            "value":"Ползунок регулировки размера кисти, диапазон значений от %1$d до %2$d. Нажмите дважды, чтобы активировать, нажмите дважды и удерживайте, затем потяните влево или вправо, чтобы изменить размер",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light_selected",
+            "value":"Выбрана опция Рембрандт",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3_on",
+            "value":"Выбрано соотношение сторон два к трем",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_sprightly_selected",
+            "value":"Выбрана опция Счастливый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_selected",
+            "value":"Выбран фильтр Великолепие",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_adjust_selected",
+            "value":"Выбран раздел Изменение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"blurred_selected",
+            "value":"Выбран параметр Размытие",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_darkzone_true",
+            "value":"Выбран параметр Темная область",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_natural_selected",
+            "value":"Выбран фильтр Естественный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3",
+            "value":"Вертикально, соотношение сторон два к трем",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light_selected",
+            "value":"Выбрана опция Спереди",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_horizontalCorrection_on",
+            "value":"Выбран параметр Выравнивание по горизонтали",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn",
+            "value":"Кнопка сравнения, нажмите дважды и удерживайте, чтобы сравнить текущее и исходное изображение",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_refreshing_selected",
+            "value":"Выбрана опция Бодрый",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_middle_tone_selected",
+            "value":"Выбран фильтр Нейтральный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_saturation_true",
+            "value":"Выбран параметр Насыщенность",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1",
+            "value":"Соотношение сторон один к одному",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_selected",
+            "value":"Выбран фильтр Сладость",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_crop_selected",
+            "value":"Выбран раздел Обрезка",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_highlight_true",
+            "value":"Выбран параметр Блик",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3_on",
+            "value":"Выбрано соотношение сторон четыре к трем",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"butterfly_light_selected",
+            "value":"Выбран эффект Бабочка",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_softness_selected",
+            "value":"Выбрана опция Простота",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_original_selected",
+            "value":"Выбран цвет Оригинал",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rectangle_sizer",
+            "value":"Изображение предпросмотра",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_on_imageEdit",
+            "value":"Выбрана опция Без водяного знака",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_middle_bottom",
+            "value":"Нижний край рамки обрезки, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер выбранной области",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3",
+            "value":"Горизонтально, соотношение сторон четыре к трем",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch_selected",
+            "value":"Выбран раздел Ретушь с Celia",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brilliant_selected",
+            "value":"Выбрана опция Мерцание",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_select_imageEdit",
+            "value":"Дважды нажмите, чтобы выбрать",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_imageEdit",
+            "value":"Обычный водяной знак",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_middle",
+            "value":"Правый край рамки обрезки, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер выбранной области",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16",
+            "value":"Вертикально, соотношение сторон девять к шестнадцати",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4",
+            "value":"Вертикально, соотношение сторон три к четырем",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2",
+            "value":"Горизонтально, соотношение сторон три к двум",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_toggle_imageEdit",
+            "value":"Дважды нажмите, чтобы переключить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_selected",
+            "value":"Выбран фильтр Кристалл",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_ai_move_imageEdit",
+            "value":"Левый верхний угол рамки редактирования, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_ai_move_imageEdit",
+            "value":"%1$s, доступный диапазон от %2$d до %3$d градусов. Нажмите дважды и удерживайте, затем перетащите, чтобы изменить угол",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_ai_move_imageEdit",
+            "value":"Левый нижний угол рамки редактирования, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_ai_move_imageEdit",
+            "value":"Правый нижний угол рамки редактирования, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_invisible",
+            "value":"Кнопка %1$s, недоступна",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_ai_move_imageEdit",
+            "value":"Правый верхний угол рамки редактирования, нажмите дважды и удерживайте, затем перетащите, чтобы изменить размер",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_tone",
+            "value":"Тон",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_bar",
+            "value":"Ползунок регулировки интенсивности фильтра Лайм, диапазон регулировки от нуля до ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать интенсивность фильтра Лайм, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_bar",
+            "value":"Ползунок регулировки интенсивности фильтра Сумерки, диапазон регулировки от нуля до ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать интенсивность фильтра Сумерки, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_adjust",
+            "value":"Отрегулирован поворот, сейчас установлено значение поворота %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_rulerScroller",
+            "value":"Ползунок регулировки значения диафрагмы, диапазон регулировки от F0.95 до F16. Нажмите и удерживайте двумя пальцами, затем перетащите влево или вправо, чтобы отрегулировать значение диафрагмы, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_100_100",
+            "value":"Ползунок регулировки яркости, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать яркость, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_adjust",
+            "value":"Отрегулировано значение резкости, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_adjust",
+            "value":"Отрегулирован горизонтальный угол, сейчас установлено значение угла %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_adjust",
+            "value":"Отрегулировано значение насыщенности, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_value_change",
+            "value":"Отрегулировано значение диафрагмы, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_adjust",
+            "value":"Отрегулировано значение тени, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_adjust",
+            "value":"Отрегулировано значение светлых участков, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_adjust",
+            "value":"Отрегулировано значение темной области, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_adjust",
+            "value":"Отрегулировано значение светлой области, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_100_100",
+            "value":"Ползунок регулировки контрастности, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать контрастность, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_100_100",
+            "value":"Ползунок регулировки тени, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать тень, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_adjust",
+            "value":"Отрегулирован вертикальный угол, сейчас установлено значение угла %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_imageEdit",
+            "value":"Ползунок регулировки поворота, диапазон регулировки от минус сорока пяти градусов до плюс сорока пяти градусов, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать значение поворота, сейчас установлено значение поворота %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_adjust",
+            "value":"Отрегулировано значение тусклости, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_adjust",
+            "value":"Отрегулировано значение виньетки, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_value",
+            "value":"Отрегулирована интенсивность фильтра Великолепие, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_adjust",
+            "value":"Отрегулировано значение красочности, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_0_100",
+            "value":"Ползунок регулировки резкости, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать резкость, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_bar",
+            "value":"Ползунок регулировки интенсивности фильтра Рустик, диапазон регулировки от нуля до ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать интенсивность фильтра Рустик, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_100_100",
+            "value":"Ползунок регулировки светлых участков, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать светлые участки, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_imageEdit",
+            "value":"Ползунок регулировки горизонтального угла, диапазон регулировки от минус сорока пяти градусов до плюс сорока пяти градусов, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать значение горизонтального угла, сейчас установлено значение угла %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_adjust",
+            "value":"Отрегулировано значение экспозиции, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_bar",
+            "value":"Ползунок регулировки интенсивности фильтра Великолепие, диапазон регулировки от нуля до ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать интенсивность фильтра Великолепие, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection",
+            "value":"Ползунок регулировки вертикального угла, диапазон регулировки от минус сорока пяти градусов до плюс сорока пяти градусов. Нажмите и удерживайте двумя пальцами, затем перетащите влево или вправо, чтобы отрегулировать значение вертикального угла, сейчас установлено значение угла %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_adjust",
+            "value":"Отрегулировано значение оттенка, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_bar",
+            "value":"Ползунок регулировки интенсивности фильтра Сладость, диапазон регулировки от нуля до ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать интенсивность фильтра Сладость, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_100_100",
+            "value":"Ползунок регулировки цветовой температуры, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать значение цветовой температуры, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_100_100",
+            "value":"Ползунок регулировки красочности, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать красочность, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_adjust",
+            "value":"Отрегулировано значение цветовой температуры, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_bar",
+            "value":"Ползунок регулировки интенсивности фильтра Кристалл, диапазон регулировки от нуля до ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать интенсивность фильтра Кристалл, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_bar",
+            "value":"Ползунок регулировки интенсивности фильтра Нейтральный, диапазон регулировки от нуля до ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать интенсивность фильтра Нейтральный, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_value",
+            "value":"Отрегулирована интенсивность фильтра Сладость, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_0_100",
+            "value":"Ползунок регулировки тусклости, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать тусклость, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_value",
+            "value":"Отрегулирована интенсивность фильтра Рустик, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_0_100",
+            "value":"Ползунок регулировки зернистости, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать зернистость, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_bar",
+            "value":"Ползунок регулировки интенсивности фильтра Удача, диапазон регулировки от нуля до ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать интенсивность фильтра Удача, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_value",
+            "value":"Отрегулирована интенсивность фильтра Кристалл, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_adjust",
+            "value":"Отрегулировано значение яркости, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_adjust",
+            "value":"Отрегулировано значение контрастности, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_100_100",
+            "value":"Ползунок регулировки виньетки, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать значение виньетки, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_value",
+            "value":"Отрегулирована интенсивность фильтра Сумерки, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_adjust",
+            "value":"Настроено значение автоматической регулировки, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_100_100",
+            "value":"Ползунок регулировки светлой области, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать значение светлой области, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_value",
+            "value":"Отрегулирована интенсивность фильтра Удача, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_value",
+            "value":"Отрегулирована интенсивность фильтра Монохром, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_100_100",
+            "value":"Ползунок регулировки темной области, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать значение темной области, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_value",
+            "value":"Отрегулирована интенсивность фильтра Теплый, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_100_100",
+            "value":"Ползунок регулировки насыщенности, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать насыщенность, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_bar",
+            "value":"Ползунок регулировки интенсивности фильтра Теплый, диапазон регулировки от нуля до ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать интенсивность фильтра Теплый, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_100_100",
+            "value":"Ползунок регулировки экспозиции, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать экспозицию, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_100_100",
+            "value":"Ползунок автоматической регулировки, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы установить значение автоматической регулировки, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection",
+            "value":"Ползунок регулировки горизонтального угла, диапазон регулировки от минус сорока пяти градусов до плюс сорока пяти градусов. Нажмите и удерживайте двумя пальцами, затем перетащите влево или вправо, чтобы отрегулировать горизонтальный угол, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_bar",
+            "value":"Ползунок регулировки интенсивности фильтра Монохром, диапазон регулировки от нуля до ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать интенсивность фильтра Монохром, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation",
+            "value":"Ползунок регулировки поворота, диапазон регулировки от минус сорока пяти градусов до плюс сорока пяти градусов. Нажмите и удерживайте двумя пальцами, затем перетащите влево или вправо, чтобы отрегулировать значение поворота, сейчас установлено значение поворота %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_100_100",
+            "value":"Ползунок регулировки оттенка, диапазон регулировки от минус ста до плюс ста, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать оттенок, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_value",
+            "value":"Отрегулирована интенсивность фильтра Нейтральный, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_value",
+            "value":"Отрегулирована интенсивность фильтра Лайм, сейчас установлено значение интенсивности %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_adjust",
+            "value":"Отрегулировано значение зернистости, сейчас установлено значение %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_imageEdit",
+            "value":"Ползунок регулировки вертикального угла, диапазон регулировки от минус сорока пяти градусов до плюс сорока пяти градусов, дважды нажмите и удерживайте, затем перетащите влево или вправо, чтобы отрегулировать значение вертикального угла, сейчас установлено значение угла %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_personality_style_imageEdit",
+            "value":"Пользовательские стили",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_disagree",
+            "value":"Не отображать тег",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"border_background_imageEdit",
+            "value":"Границы",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_agree",
+            "value":"Отображать тег",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"capture_location_imageEdit",
+            "value":"Место съемки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup",
+            "value":"Отображать тег \"Сгенерировано ИИ\"?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"beauty_Custom_imageEdit",
+            "value":"Настроить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_description",
+            "value":"Тег \"Сгенерировано ИИ\" указывает на то, что изображение содержит контент, сгенерированный искусственным интеллектом. Вы можете изменить эту настройку в любой момент в настройках Галереи.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_imageEdit",
+            "value":"Изменение водяного знака",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_watermark_imageEdit",
+            "value":"Праздничные водяные знаки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_text_imageEdit",
+            "value":"Текст",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_patterned_imageEdit",
+            "value":"Рисунок",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_festival_seal_edit",
+            "value":"Водяной знак в стиле Китайского нового года невозможно изменить после сохранения. Сохранить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_national_seal_edit",
+            "value":"Водяной знак в стиле Дня образования КНР невозможно изменить после сохранения. Сохранить?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+          "name":"eraser_brush_thickness_selected_new",
+          "value":"Ползунок регулировки размера ластика, диапазон значений от %1$d до %2$d, нажмите дважды и удерживайте, затем потяните влево или вправо, чтобы изменить размер",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"brush_thickness_selected_new",
+          "value":"Ползунок регулировки размера кисти, диапазон значений от %1$d до %2$d, нажмите дважды и удерживайте, затем потяните влево или вправо, чтобы изменить размер",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+            "name":"xtStyle_color_temperature",
+            "value":"Температура",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_saturation",
+            "value":"Насыщенность",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_soft_imageEdit",
+            "value":"Яркий",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_black_imageEdit",
+            "value":"Монохром",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_bright_imageEdit",
+            "value":"Колоритный",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_soft_imageEdit",
+            "value":"Отмена: Яркий.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_bright_imageEdit",
+            "value":"Отмена: Колоритный.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_soft_imageEdit",
+            "value":"Повтор: Яркий.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_black_imageEdit",
+            "value":"Повтор: Монохром.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_bright_imageEdit",
+            "value":"Повтор: Колоритный.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name": "undo_xt_style_black_imageEdit",
+            "value": "Отмена: Монохром.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name":"image_editor_mirror_image_new",
+            "value":"Отразить",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_editor_rotate_ninety_degrees_new",
+            "value":"Поворот на %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"free_crop_rotate_new",
+            "value":"Повернуть",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name": "tip_aigc_removing",
+            "value": "Удаление…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_material_loading",
+            "value": "Загрузка…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_emoj_replacing",
+            "value": "Замена выражения лица...",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_draw_and_select",
+            "value": "Нарисуйте на объекте линию, чтобы выбрать его.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_click_and_remove_all",
+            "value": "Нажмите на кнопку, чтобы удалить выбранный контент.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_intelligent",
+            "value": "Авто",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_manual",
+            "value": "Вручную",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_expand_selection",
+            "value": "Проводите по экрану, чтобы увеличить выбранную область.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_remove_selection",
+            "value": "Проведите, чтобы отменить выбор.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_click_intelli_manual_then_edit",
+            "value": "Нажмите Авто или Вручную, чтобы изменить выбранную область.",
+            "attr": {
+                "priority": "translate"
+            }
+        }
+    ]
+}

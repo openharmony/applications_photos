@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px"
+     height="56px"
+     viewBox="0 0 56 56"
+     version="1.1"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_parabar_story_play</title>
+    <defs>
+        <path
+            d="M0.5,3.56611368 L0.5,18.4338863 C0.5,19.5384558 1.3954305,20.4338863 2.5,20.4338863 C2.86800951,20.4338863 3.22888419,20.3323486 3.54290002,20.14045 L15.7074413,12.7065637 C16.6499504,12.1305859 16.9470827,10.8996091 16.3711049,9.95709998 C16.2056577,9.68636819 15.9781731,9.45888354 15.7074413,9.29343633 L3.54290002,1.85955001 C2.60039093,1.28357224 1.36941411,1.58070457 0.793436333,2.52321366 C0.601537771,2.83722949 0.5,3.19810417 0.5,3.56611368 Z"
+            id="path-1"></path>
+        <rect
+            id="path-3"
+            x="0"
+            y="0"
+            width="40"
+            height="40"></rect>
+        <filter
+            x="-17.5%"
+            y="-15.0%"
+            width="135.0%"
+            height="135.0%"
+            filterUnits="objectBoundingBox"
+            id="filter-4">
+            <feMorphology
+                radius="0.5"
+                operator="dilate"
+                in="SourceAlpha"
+                result="shadowSpreadOuter1"></feMorphology>
+            <feOffset
+                dx="0"
+                dy="1"
+                in="shadowSpreadOuter1"
+                result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur
+                stdDeviation="2"
+                in="shadowOffsetOuter1"
+                result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite
+                in="shadowBlurOuter1"
+                in2="SourceAlpha"
+                operator="out"
+                result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix
+                values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.12 0"
+                type="matrix"
+                in="shadowBlurOuter1"
+                result="shadowMatrixOuter1"></feColorMatrix>
+            <feMorphology
+                radius="0.5"
+                operator="dilate"
+                in="SourceAlpha"
+                result="shadowSpreadOuter2"></feMorphology>
+            <feOffset
+                dx="0"
+                dy="1"
+                in="shadowSpreadOuter2"
+                result="shadowOffsetOuter2"></feOffset>
+            <feGaussianBlur
+                stdDeviation="0.5"
+                in="shadowOffsetOuter2"
+                result="shadowBlurOuter2"></feGaussianBlur>
+            <feComposite
+                in="shadowBlurOuter2"
+                in2="SourceAlpha"
+                operator="out"
+                result="shadowBlurOuter2"></feComposite>
+            <feColorMatrix
+                values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.12 0"
+                type="matrix"
+                in="shadowBlurOuter2"
+                result="shadowMatrixOuter2"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="shadowMatrixOuter2"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g
+        id="ic_parabar_story_play"
+        stroke="none"
+        stroke-width="1"
+        fill="none"
+        fill-rule="evenodd">
+        <path
+            d="M1,28 C1,42.9121 13.0879,55 28,55 C42.9121,55 55,42.9121 55,28 C55,13.0879 42.9121,1 28,1 C13.0879,1 1,13.0879 1,28 Z"
+            id="Shape"
+            fill-opacity="0.5"
+            fill="#000000"></path>
+        <path
+            d="M1,28 C1,42.9121 13.0879,55 28,55 C42.9121,55 55,42.9121 55,28 C55,13.0879 42.9121,1 28,1 C13.0879,1 1,13.0879 1,28 Z M0,28 C0,12.535615 12.535615,0 28,0 C43.464385,0 56,12.535615 56,28 C56,43.464385 43.464385,56 28,56 C12.535615,56 0,43.464385 0,28 Z"
+            id="Shape"
+            fill-opacity="0.3"
+            fill="#FFFFFF"
+            fill-rule="nonzero"></path>
+        <g
+            id="ic/play/ic_play"
+            transform="translate(21.000000, 17.000000)">
+            <mask
+                id="mask-2"
+                fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use
+                id="Path-46"
+                fill="#000000"
+                xlink:href="#path-1"></use>
+            <g
+                id="color/light/#000000"
+                mask="url(#mask-2)">
+                <g
+                    transform="translate(-12.000000, -9.000000)"
+                    id="color/#000000">
+                    <use
+                        fill="black"
+                        fill-opacity="1"
+                        filter="url(#filter-4)"
+                        xlink:href="#path-3"></use>
+                    <rect
+                        stroke-opacity="0.03"
+                        stroke="#000000"
+                        stroke-width="0.5"
+                        fill="#FFFFFF"
+                        fill-rule="evenodd"
+                        x="-0.25"
+                        y="-0.25"
+                        width="40.5"
+                        height="40.5"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

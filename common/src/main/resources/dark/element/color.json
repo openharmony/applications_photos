@@ -1,0 +1,44 @@
+{
+  "color": [
+    {
+      "name": "start_ability_background_color",
+      "value": "#000000"
+    },
+    {
+      "name": "segment_button_selected_background_color",
+      "value": "#B2E6E6E6"
+    },
+    {
+      "name": "segment_button_selected_font_color",
+      "value": "#E5000000"
+    },
+    {
+      "name": "title_text_color",
+      "value": "#E5FFFFFF"
+    },
+    {
+      "name": "icon_bg_color",
+      "value": "#19ffffff"
+    },
+    {
+      "name": "highlight_border_color",
+      "value": "#26FFFFFF"
+    },
+    {
+      "name": "album_card_border_color",
+      "value": "#26FFFFFF"
+    },
+    {
+      "name": "penSize_bar_path_color",
+      "value": "#1affffff"
+    },
+    {
+      "name": "editSheet_button_normal_color",
+      "value": "#994d4d4d"
+    },
+    {
+      "name": "editSheet_button_selected_color",
+      "value": "#e5ffffff"
+    }
+  ]
+}

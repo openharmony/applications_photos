@@ -1,0 +1,5660 @@
+{
+    "string":[
+        {
+            "name":"xt_style_natural_selected",
+            "value":"Đã chọn Tự nhiên",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_film_selected",
+            "value":"Đã chọn Phim nhựa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_cinematic_selected",
+            "value":"Đã chọn Điện ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_anime_selected",
+            "value":"Đã chọn Anime",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picking",
+            "value":"Di chuyển",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_cancel",
+            "value":"Hủy",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_is_too_large_toast",
+            "value":"Hình ảnh quá lớn. Hãy thử lại với một hình ảnh khác.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_anime_imageEdit",
+            "value":"Anime",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_kaleidoscope",
+            "value":"Họa tiết kính vạn hoa khảm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_romance_imageEdit",
+            "value":"Điện ảnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_saturation_level",
+            "value":"Mức độ bão hòa %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"natural_style",
+            "value":"Tự nhiên",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_reflect_light",
+            "value":"Khử lóa sáng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_reset_success",
+            "value":"Đặt lại hoàn tất",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"best_expression_update_component",
+            "value":"Tính năng này giúp bạn kết hợp các biểu cảm khuôn mặt đẹp nhất từ các ảnh khác nhau trong cùng một loạt ảnh. Cần cập nhật trình cắm để sử dụng tính năng này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_sky_blue",
+            "value":"Họa tiết xanh da trời khảm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_abnormal",
+            "value":"Lỗi máy chủ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_xt_style_selected",
+            "value":"Đã chọn kiểu tùy chỉnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"update_now",
+            "value":"Cập nhật ngay",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_films_imageEdit",
+            "value":"Phim",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_generating_content",
+            "value":"Đang tạo…",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_typ_classic",
+            "value":"Họa tiết cổ điển khảm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_remove",
+            "value":"Xóa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_cartoon",
+            "value":"Họa tiết hoạt hình khảm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_level",
+            "value":"Mức độ tông màu %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_close",
+            "value":"Tắt",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_slide_bar",
+            "value":"Mức độ tông màu %1$d, phạm vi điều chỉnh từ %2$d đến %3$d. Chạm đúp để áp dụng hoặc chạm đúp và giữ, sau đó kéo lên hoặc xuống để thay đổi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shrink_image_to_adjust_expand_rect",
+            "value":"Hãy thu nhỏ hình ảnh để điều chỉnh vùng có thể mở rộng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_network_abnorma_toast",
+            "value":"Lỗi mạng. Hãy kiểm tra và thử lại.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"yellow_imageEdit",
+            "value":"Màu vàng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_reflect_light",
+            "value":"Tính năng giảm lóa sáng không khả dụng với hình ảnh này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_identified_replace_face",
+            "value":"Không xác định được khuôn mặt có thể thay thế.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand",
+            "value":"Không mở rộng được hình ảnh này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"best_expression_new_feature",
+            "value":"Dùng thử chức năng Biểu cảm đẹp nhất",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_mosicac",
+            "value":"Khảm",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"replace_face_fail",
+            "value":"Đã xảy ra lỗi. Hãy chọn một hình ảnh khác và thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_matrix_area",
+            "value":"Khu vực điều chỉnh màu. Kéo theo chiều ngang để điều chỉnh nhiệt độ màu và theo chiều dọc để điều chỉnh độ bão hòa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_reflect_light",
+            "value":"Xóa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_default_template",
+            "value":"Cài đặt sẵn mặc định, nhiệt độ màu %1$d, độ bão hòa %2$d, tông màu %3$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_open",
+            "value":"Bật",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_haze_removal_imageEdit",
+            "value":"Khử sương mù",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_polka_dot",
+            "value":"Họa tiết kẻ khảm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove",
+            "value":"Xóa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"manual_selection",
+            "value":"Thủ công",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_star",
+            "value":"Họa tiết ngôi sao khảm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_replace_emoticons",
+            "value":"Chụp nhiều ảnh liên tiếp để lấy biểu cảm thay thế.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_continue",
+            "value":"Tiếp tục",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_triangle",
+            "value":"Họa tiết hình tam giác khảm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_aspect_ratio_too_large",
+            "value":"Tỷ lệ khung hình quá lớn. Hãy thử lại với một hình ảnh khác.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_imageEdit",
+            "value":"Nút",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_selection",
+            "value":"Tự động",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_weaving",
+            "value":"Họa tiết dệt khảm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_eraser",
+            "value":"Tẩy",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_expand_image",
+            "value":"Mở rộng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aspect_ratio_of_the_image_toast",
+            "value":"Tỷ lệ khung hình quá lớn. Hãy thử lại với một hình ảnh khác.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_expand_image",
+            "value":"Mở rộng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_color_temperature_level",
+            "value":"Nhiệt độ màu, mức %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"background",
+            "value":"Nền",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aiproducer_best_expression",
+            "value":"Biểu cảm",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_bootstrapping_for_the_first_time",
+            "value":"Vuốt qua giữa đối tượng hoặc người để chọn đối tượng hoặc người đó.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_color_block",
+            "value":"Họa tiết khối màu khảm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_xt_style_template",
+            "value":"Cài đặt sẵn tùy chỉnh %1$d, nhiệt độ màu %2$d, độ bão hòa %3$d, tông màu %4$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_style_imageEdit",
+            "value":"Kiểu phông chữ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"Làm lại: Tự động điều chỉnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_xt_style_imageEdit",
+            "value":"XMAGE",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_refinement",
+            "value":"Tinh chỉnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_style",
+            "value":"Thời trang",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh nhiệt độ màu đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_blossom_imageEdit",
+            "value":"Hoàn tác: Bộ lọc hoa nở.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_remove",
+            "value":"Xóa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_rotate_imageEdit",
+            "value":"Xoay",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh tô sáng đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_pink_imageEdit",
+            "value":"Làm lại: Bộ lọc màu hồng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ sắc nét đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_strength_imageEdit",
+            "value":"Làm lại: Cường độ mộc mạc.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"Hoàn tác: Tắt tự động điều chỉnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_imageEdit",
+            "value":"Vàng chanh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ mờ đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_finish",
+            "value":"Xong",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic",
+            "value":"Lưu ý",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_moody_imageEdit",
+            "value":"Làm lại: Bộ lọc u ám.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh làm tối góc ảnh đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh bóng đổ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh nhiệt độ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_natural_style",
+            "value":"Làm lại: Tự nhiên.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_top",
+            "value":"Góc trên bên trái",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_top",
+            "value":"Góc trên bên phải",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_bottom",
+            "value":"Góc dưới bên trái",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_bottom",
+            "value":"Góc dưới bên phải",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left",
+            "value":"Cạnh trái",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right",
+            "value":"Cạnh phải",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_top",
+            "value":"Cạnh trên",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_bottom",
+            "value":"Cạnh dưới",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cutting_percentage",
+            "value":"Cắt %2$s tính từ %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light",
+            "value":"Phía trước",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh vùng tối đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_shoot_param_imageEdit",
+            "value":"Làm lại: Hiển thị thông số chụp.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_param_imageEdit",
+            "value":"Thông số chụp",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh tô sáng đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_original_imageEdit",
+            "value":"Nguyên bản",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_two",
+            "value":"Sử dụng chức năng Chỉnh sửa bằng AI sẽ khiến hình ảnh này trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s cũng như %2$s nữa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ mờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_strength_imageEdit",
+            "value":"Hoàn tác: Cường độ may mắn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup",
+            "value":"Thao tác này sẽ thay thế bộ lọc hiện tại của bạn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_imageEdit",
+            "value":"Bỏ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_proportional_imageEdit",
+            "value":"Làm lại: Tỷ lệ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_model_imageEdit",
+            "value":"Model thiết bị",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_time_imageEdit",
+            "value":"Thời gian chụp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_strength_imageEdit",
+            "value":"Hoàn tác: Cường độ mộc mạc.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_strength_imageEdit",
+            "value":"Hoàn tác: Cường độ tinh thể.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_strength_imageEdit",
+            "value":"Làm lại: Cường độ tinh thể.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"revert_original_state_imageEdit",
+            "value":"Đặt lại về trạng thái ban đầu?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_one",
+            "value":"Sử dụng chức năng Chỉnh sửa bằng AI sẽ khiến hình ảnh này trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s nữa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_close_watermark_imageEdit",
+            "value":"Làm lại: Tắt hình chìm mờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_sharpness_imageEdit",
+            "value":"Độ sắc nét",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_softness",
+            "value":"Mềm mại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_media_imageEdit",
+            "value":"Đang lưu\u2026",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_none_imageEdit",
+            "value":"Hoàn tác: Nguyên bản.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_granules_imageEdit",
+            "value":"Làm lại: Điều chỉnh hạt nhiễu.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_imageEdit",
+            "value":"Làm lại: Điều chỉnh làm tối góc ảnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_original_strength_imageEdit",
+            "value":"Hoàn tác: Cường độ thanh nhã.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_imageEdit",
+            "value":"Hoàn tác: Bộ lọc trung tính.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_vertical_correction_imageEdit",
+            "value":"Dọc",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_granules_imageEdit",
+            "value":"Hạt nhiễu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"Làm lại: Bật tự động điều chỉnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_vignette_imageEdit",
+            "value":"Làm tối góc ảnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_imageEdit",
+            "value":"Làm lại: Bộ lọc chạng vạng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_vertical_imageEdit",
+            "value":"Làm lại: Sửa theo chiều dọc.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"contour_light",
+            "value":"Tạo khối",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_blossom_imageEdit",
+            "value":"Làm lại: Bộ lọc hoa nở.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_temperature_imageEdit",
+            "value":"Nhiệt độ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"blurred",
+            "value":"Làm mờ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh sắc độ đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_strength_imageEdit",
+            "value":"Hoàn tác: Cường độ ngọt ngào.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh phơi sáng đang bật.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_crop_imageEdit",
+            "value":"Cắt",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_natural_imageEdit",
+            "value":"Làm lại: Bộ lọc tự nhiên.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tradition_remove_content",
+            "value":"Đang xóa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_dark_part_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh vùng tối.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_format_abnormal_toast",
+            "value":"Định dạng hình ảnh không được hỗ trợ. Hãy thử lại với một hình ảnh khác.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_imageEdit",
+            "value":"Hoàn tác: Bộ lọc may mắn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_all_changes_imageEdit",
+            "value":"Bỏ thay đổi?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_pink_imageEdit",
+            "value":"Hồng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh vùng sáng đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_nature_saturation_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ rực rỡ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_horizontal_correction_imageEdit",
+            "value":"Ngang",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_black_and_white_imageEdit",
+            "value":"Đơn sắc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_shoot_model_imageEdit",
+            "value":"Hoàn tác: Hiển thị model thiết bị.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_fair_imageEdit",
+            "value":"Làm lại: Bộ lọc cân bằng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bokeh",
+            "value":"Làm mờ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ rực rỡ đang bật.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_films_imageEdit",
+            "value":"Làm lại: Phim.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_dark_part_imageEdit",
+            "value":"Làm lại: Điều chỉnh vùng tối.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_original_strength_imageEdit",
+            "value":"Làm lại: Cường độ thanh nhã.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_imageEdit",
+            "value":"Độ mờ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_two",
+            "value":"Thêm hiệu ứng khảm sẽ khiến hình ảnh này trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s cũng như %2$s nữa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlights_imageEdit",
+            "value":"Làm lại: Điều chỉnh tô sáng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_adjust_imageEdit",
+            "value":"Điều chỉnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_one",
+            "value":"Thêm hiệu ứng khảm sẽ khiến hình ảnh này trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s nữa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_old_tree_imageEdit",
+            "value":"Mộc mạc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ rực rỡ đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_imageEdit",
+            "value":"Làm lại: Bộ lọc mộc mạc.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_general_watermark_imageEdit",
+            "value":"Hoàn tác: Hình chìm mờ chuẩn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh bóng đổ đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_original_imageEdit",
+            "value":"Làm lại: Bộ lọc thanh nhã.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_refinement_new",
+            "value":"Hình ảnh không đáp ứng được các yêu cầu để tinh chỉnh ảnh chân dung.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_imageEdit",
+            "value":"Làm lại: Bộ lọc ấm.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh làm tối góc ảnh đang bật.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ tương phản đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_bubble_save",
+            "value":"Lưu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_haze_removal_imageEdit",
+            "value":"Hoàn tác: Khử sương mù.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_fail_toast",
+            "value":"Không xóa được. Hãy thử lại sau.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh làm tối góc ảnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ mờ đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh vùng tối đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_seal_imageEdit",
+            "value":"Hình chìm mờ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"Làm lại: Tắt tự động điều chỉnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_imageEdit",
+            "value":"Xóa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_imageEdit",
+            "value":"Làm lại: Bộ lọc trung tính.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_nature_saturation_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ rực rỡ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh bóng đổ đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_previous_step",
+            "value":"Hoàn tác",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh sắc độ đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous",
+            "value":"Phong phú",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editor_save_as",
+            "value":"Lưu thành ảnh mới",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sun_sets",
+            "value":"Hoàng hôn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_one_pen",
+            "value":"Tạm dừng để tạo hình dạng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_dark_part_imageEdit",
+            "value":"Vùng tối",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_imageEdit",
+            "value":"Hoàn tác: Bộ lọc mộc mạc.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tip",
+            "value":"Nếu sử dụng tính năng đánh dấu, bạn sẽ không điều chỉnh được khẩu độ ảo hoặc kiểu tùy chỉnh cho hình ảnh này. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_oversize_imageEdit",
+            "value":"Không có hình chìm mờ ở kích thước hình ảnh này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_oneClick_adjust_imageEdit",
+            "value":"Tự động điều chỉnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_close_imageEdit",
+            "value":"Làm lại: Tắt kiểu tùy chỉnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_pink_imageEdit",
+            "value":"Hoàn tác: Bộ lọc màu hồng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_one",
+            "value":"Thêm văn bản sẽ khiến hình ảnh này trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s nữa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rebuild",
+            "value":"Tạo lại",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_imageEdit",
+            "value":"Làm lại: Bộ lọc may mắn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh vùng tối đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_romance_imageEdit",
+            "value":"Hoàn tác: Điện ảnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_two",
+            "value":"Thêm văn bản sẽ khiến hình ảnh này trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s cũng như %2$s nữa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_mirror_imageEdit",
+            "value":"Hoàn tác: Lật ảnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sprightly",
+            "value":"Vui vẻ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai",
+            "value":"Lưu ý",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh làm tối góc ảnh đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition",
+            "value":"Tạo bố cục",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_aperture",
+            "value":"khẩu độ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_ratio_imageEdit",
+            "value":"Tỷ lệ khung hình",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"subtitle_delete_cancel_imageEdit",
+            "value":"Hủy",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_imageEdit",
+            "value":"Hoàn tác: Bộ lọc tinh thể.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"background_decolorization",
+            "value":"Đơn sắc",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_standard_imageEdit",
+            "value":"Chuẩn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_imageEdit",
+            "value":"Hoàn tác: Bộ lọc đơn sắc.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"expand_image",
+            "value":"Mở rộng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"editor_overwrite_the_original_image",
+            "value":"Thay thế ảnh gốc",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ bão hòa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh bóng đổ đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_gorgeous",
+            "value":"Tuyệt đẹp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup",
+            "value":"Lưu ý",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"revert_imageEdit",
+            "value":"Đặt lại",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ phơi sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"petalClip_stylus_next_step",
+            "value":"Làm lại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light",
+            "value":"Ánh sáng Rembrandt",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_haze_removal_imageEdit",
+            "value":"Làm lại: Khử sương mù.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_natural_style",
+            "value":"Hoàn tác: Tự nhiên.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light",
+            "value":"Không có",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ tương phản đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ bão hòa đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_moody_imageEdit",
+            "value":"Hoàn tác: Bộ lọc u ám.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_translucent",
+            "value":"Sắc nét",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_downloading_imageEdit",
+            "value":"Đang tải ảnh gốc xuống. Vui lòng chờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_shoot_param_imageEdit",
+            "value":"Hoàn tác: Hiển thị thông số chụp.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ tương phản đang bật.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_imageEdit",
+            "value":"Chạng vạng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_refinement",
+            "value":"Tính năng tinh chỉnh ảnh chân dung không khả dụng với hình ảnh này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_strength_imageEdit",
+            "value":"Làm lại: Cường độ trung tính.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_bright_part_imageEdit",
+            "value":"Vùng sáng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_strength_imageEdit",
+            "value":"Làm lại: Cường độ may mắn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh hạt nhiễu đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ tương phản.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_standard_imageEdit",
+            "value":"Làm lại: Chuẩn.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_mirror_imageEdit",
+            "value":"Làm lại: Lật ảnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh tô sáng đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_analyzing",
+            "value":"Đang phân tích…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ sáng đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_shadow_imageEdit",
+            "value":"Bóng đổ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"videoTool_compare_imageEdit",
+            "value":"So sánh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_classics_imageEdit",
+            "value":"Hoàn tác: Bộ lọc cổ điển.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh hạt nhiễu đang bật.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh nhiệt độ màu đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_fuji",
+            "value":"Fuji",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant",
+            "value":"Thanh lịch",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_strength_imageEdit",
+            "value":"Làm lại: Cường độ ấm.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_imageEdit",
+            "value":"Tinh thể",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_text_imageEdit",
+            "value":"Chạm để sửa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh vùng sáng đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_horizontal_imageEdit",
+            "value":"Hoàn tác: Sửa theo chiều ngang.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_strength_imageEdit",
+            "value":"Hoàn tác: Cường độ vàng chanh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"soft_light",
+            "value":"Mềm mại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_intercept_imageEdit",
+            "value":"Làm lại: Cắt bớt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"refining_switch_blurred_tips",
+            "value":"Việc điều chỉnh hiệu ứng làm mờ yêu cầu phải tạo lại",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_hints_imageEdit",
+            "value":"Chạm vào đây để thêm văn bản.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"petalClip_stylus_shut_down",
+            "value":"Đóng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_bright_part_imageEdit",
+            "value":"Làm lại: Điều chỉnh vùng sáng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_one",
+            "value":"Vẽ lên hình ảnh này sẽ khiến hình ảnh này trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s nữa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_failed_imageEdit",
+            "value":"Không lưu được.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch",
+            "value":"Chỉnh sửa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_risk_control_alerts",
+            "value":"Không sử dụng được tính năng xóa trên hình ảnh này. Hãy thử lại với một hình ảnh khác.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_natural_imageEdit",
+            "value":"Tự nhiên",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_anime_imageEdit",
+            "value":"Làm lại: Anime.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_intercept_imageEdit",
+            "value":"Hoàn tác: Cắt bớt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_cut_imageEdit",
+            "value":"Cắt bớt",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_imageEdit",
+            "value":"Hoàn tác: Bộ lọc vàng chanh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_close_watermark_imageEdit",
+            "value":"Hoàn tác: Tắt hình chìm mờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_two",
+            "value":"Vẽ lên hình ảnh này sẽ khiến hình ảnh này trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s cũng như %2$s nữa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_saturation_imageEdit",
+            "value":"Độ bão hòa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ sắc nét đang bật.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh sắc độ đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh tô sáng đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_close_imageEdit",
+            "value":"Hoàn tác: Tắt kiểu tùy chỉnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh hạt nhiễu đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_none",
+            "value":"Sử dụng chức năng Chỉnh sửa bằng AI sẽ khiến hình ảnh này trở thành hình ảnh tĩnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_imageEdit",
+            "value":"Hoàn tác: Bộ lọc chạng vạng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_imageEdit",
+            "value":"U ám",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh nhiệt độ màu đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_expand_image",
+            "value":"Mở rộng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_proportional_imageEdit",
+            "value":"Hoàn tác: Tỷ lệ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_fair_imageEdit",
+            "value":"Hoàn tác: Bộ lọc cân bằng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ sắc nét đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_brush_adjusts",
+            "value":"Điều chỉnh cọ vẽ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_refining",
+            "value":"Tinh chỉnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_luma_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ sáng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ sắc nét.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_frame_watermark_imageEdit",
+            "value":"Hoàn tác: Hình chìm mờ khung.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_anime_imageEdit",
+            "value":"Hoàn tác: Anime.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh sắc độ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_original_imageEdit",
+            "value":"Hoàn tác: Bộ lọc thanh nhã.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen",
+            "value":"Tươi mới",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_imageEdit",
+            "value":"Làm lại: Điều chỉnh bóng đổ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_imageEdit",
+            "value":"Hoàn tác: Bộ lọc ngọt ngào.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_imageEdit",
+            "value":"Làm lại: Bộ lọc tinh thể.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_strength_imageEdit",
+            "value":"Làm lại: Cường độ vàng chanh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ bão hòa đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_moonlight",
+            "value":"Ánh trăng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup_tip",
+            "value":"Nếu sử dụng tính năng đánh dấu, bạn sẽ không điều chỉnh được kiểu tùy chỉnh cho hình ảnh này. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_strength_imageEdit",
+            "value":"Hoàn tác: Cường độ đơn sắc.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ sắc nét đang bật.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid",
+            "value":"Sống động",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_crop_imageEdit",
+            "value":"Hoàn tác: Cắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong",
+            "value":"Mạnh mẽ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_standard_imageEdit",
+            "value":"Hoàn tác: Chuẩn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_strength_imageEdit",
+            "value":"Làm lại: Cường độ chạng vạng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh vùng sáng đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_imageEdit",
+            "value":"Làm lại: Bộ lọc vàng chanh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_imageEdit",
+            "value":"Cổ điển",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_refreshing",
+            "value":"Tươi tắn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_romance_imageEdit",
+            "value":"Làm lại: Điện ảnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_ninety_angle_rotate_imageEdit",
+            "value":"Làm lại: Xoay %s°.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_ninety_angle_rotate_imageEdit",
+            "value":"Hoàn tác: Xoay %s°.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh hạt nhiễu đang bật.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ bão hòa đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_imageEdit",
+            "value":"Thêm văn bản",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_imageEdit",
+            "value":"Làm lại: Điều chỉnh sắc độ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"refining_switch_light_tips",
+            "value":"Việc chuyển đổi hiệu ứng ánh sáng yêu cầu phải tạo lại",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"retry_imageEdit",
+            "value":"Thử lại",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ sáng đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_one_pen",
+            "value":"Vẽ hình dạng chỉ bằng một nét, sau đó tạm dừng và hình đó sẽ biến thành một hình dạng hoàn hảo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_none_imageEdit",
+            "value":"Làm lại: Nguyên bản.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_classics_imageEdit",
+            "value":"Làm lại: Bộ lọc cổ điển.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ sáng đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"butterfly_light",
+            "value":"Cánh bướm",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_blossom_imageEdit",
+            "value":"Hoa nở",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_little_luck_imageEdit",
+            "value":"May mắn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_close_imageEdit",
+            "value":"Không có kiểu tùy chỉnh nào",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_milk_tea_imageEdit",
+            "value":"Ấm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_middle_tone_imageEdit",
+            "value":"Trung tính",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_stylus",
+            "value":"Đánh dấu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_granules_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh hạt nhiễu.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_strength_imageEdit",
+            "value":"Làm lại: Cường độ đơn sắc.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ phơi sáng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh phơi sáng đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_rotate_imageEdit",
+            "value":"Hoàn tác: Xoay.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ rực rỡ đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_shoot_time_imageEdit",
+            "value":"Làm lại: Hiển thị thời gian chụp.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_lift_pen",
+            "value":"Nâng lên để tạo hình dạng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_luma_imageEdit",
+            "value":"Độ sáng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ sáng đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_none",
+            "value":"Thêm hiệu ứng khảm sẽ khiến hình ảnh này trở thành hình ảnh tĩnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_vertical_imageEdit",
+            "value":"Hoàn tác: Sửa theo chiều dọc.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ phơi sáng đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ mờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_strength_imageEdit",
+            "value":"Hoàn tác: Cường độ trung tính.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_loading",
+            "value":"Đang xử lý…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_crop_imageEdit",
+            "value":"Làm lại: Cắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_imageEdit",
+            "value":"Nguyên bản",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"Hoàn tác: Tự động điều chỉnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_imageEdit",
+            "value":"Kiểu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup",
+            "value":"Các kiểu tùy chỉnh sẽ không còn khả dụng nữa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_imageEdit",
+            "value":"Cân bằng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_limit_toast",
+            "value":"Không sử dụng được tính năng xóa trên hình ảnh này. Hãy thử lại với một hình ảnh khác.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ bão hòa đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_size_low",
+            "value":"Độ phân giải hình ảnh quá thấp, không sử dụng được tính năng này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_imageEdit",
+            "value":"Sửa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"current_file_cannot_import_imageEdit",
+            "value":"Tệp tin không được hỗ trợ hoặc bị lỗi. Không sửa được.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_general_watermark_imageEdit",
+            "value":"Làm lại: Hình chìm mờ chuẩn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_imageEdit",
+            "value":"Bộ lọc",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_has_been_refined",
+            "value":"Hình ảnh này đã được chỉnh sửa rồi.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_imageEdit",
+            "value":"Ngọt ngào",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ tương phản.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light",
+            "value":"Bên",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_none",
+            "value":"Thêm văn bản sẽ khiến hình ảnh này trở thành hình ảnh tĩnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_shoot_time_imageEdit",
+            "value":"Hoàn tác: Hiển thị thời gian chụp.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_natural_imageEdit",
+            "value":"Hoàn tác: Bộ lọc tự nhiên.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_shoot_model_imageEdit",
+            "value":"Làm lại: Hiển thị model thiết bị.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_free_imageEdit",
+            "value":"Dạng tự do",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh độ mờ đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh làm tối góc ảnh đang bật.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word",
+            "value":"Lưu ý",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_imageEdit",
+            "value":"Làm lại: Bộ lọc đơn sắc.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_highlights_imageEdit",
+            "value":"Tô sáng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_rotate_imageEdit",
+            "value":"Làm lại: Xoay.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouching",
+            "value":"Chỉnh sửa bằng AI",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_imageEdit",
+            "value":"Hoàn tác: Bộ lọc ấm.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_highlights_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh tô sáng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_refining",
+            "value":"Bắt đầu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ phơi sáng đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_nature_saturation_imageEdit",
+            "value":"Độ rực rỡ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_without_refinement",
+            "value":"Tính năng tinh chỉnh ảnh chân dung không khả dụng với hình ảnh này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ rực rỡ đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_style",
+            "value":"kiểu tùy chỉnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh vùng tối đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ sắc nét.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_whiten",
+            "value":"Cân bằng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh bóng đổ đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_strength_imageEdit",
+            "value":"Hoàn tác: Cường độ ấm.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_bright_part_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh vùng sáng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup_tip",
+            "value":"Nếu bạn chọn một kiểu tùy chỉnh, bộ lọc hiện tại và những điều chỉnh bạn đã thực hiện sẽ bị thay thế. Thay thế?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_hue_imageEdit",
+            "value":"Màu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_frame_watermark_imageEdit",
+            "value":"Làm lại: Hình chìm mờ khung.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams",
+            "value":"Giấc mơ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_haze_removal_selected_imageEdit",
+            "value":"Đã chọn khử sương mù",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_off_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh nhiệt độ màu đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_none",
+            "value":"Vẽ lên hình ảnh này sẽ khiến hình ảnh trở thành hình ảnh tĩnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_restore_origin_tips",
+            "value":"Chạm vào đây để hoàn tác những thay đổi bạn đã thực hiện.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_brilliant",
+            "value":"Rực rỡ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_brush_adjusts",
+            "value":"Chạm đúp vào cọ vẽ để thay đổi kích thước và độ mờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup_tip",
+            "value":"Nếu sử dụng tính năng Chỉnh sửa bằng AI, bạn sẽ không điều chỉnh được kiểu tùy chỉnh cho hình ảnh này. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_strength_imageEdit",
+            "value":"Hoàn tác: Cường độ chạng vạng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_content_lift_pen",
+            "value":"Vẽ hình dạng chỉ bằng một nét, sau đó nhấc bút cảm ứng hoặc ngón tay lên và hình đó sẽ biến thành một hình dạng hoàn hảo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_films_imageEdit",
+            "value":"Hoàn tác: Phim.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ bão hòa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_soft",
+            "value":"Mềm mại",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_brightly",
+            "value":"Tươi sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_imageEdit",
+            "value":"Độ tương phản",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_luma_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ sáng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_imageEdit",
+            "value":"Làm lại: Điều chỉnh nhiệt độ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_pave_imageEdit",
+            "value":"Vừa với màn hình",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_on_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh sắc độ đang bật.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ mờ đã tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_on_imageEdit",
+            "value":"Làm lại: Điều chỉnh độ tương phản đang bật.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light",
+            "value":"Ánh sáng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup",
+            "value":"Cài đặt kiểu tùy chỉnh sẽ không khả dụng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_exposure_imageEdit",
+            "value":"Độ phơi sáng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"Hoàn tác: Bật tự động điều chỉnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_strength_imageEdit",
+            "value":"Làm lại: Cường độ ngọt ngào.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_imageEdit",
+            "value":"Thanh nhã",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_imageEdit",
+            "value":"Làm lại: Bộ lọc ngọt ngào.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_off_imageEdit",
+            "value":"Làm lại: Điều chỉnh vùng sáng đã tắt.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"first_time_use_penkit",
+            "value":"Chạm vào đây để vẽ tay trên hình ảnh này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_horizontal_imageEdit",
+            "value":"Làm lại: Sửa theo chiều ngang.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"color_light_blue_imageEdit",
+            "value":"Xanh nhạt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup_tip",
+            "value":"Sau khi sử dụng chức năng đánh dấu, bạn sẽ không thể điều chỉnh khẩu độ cho hình ảnh này nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch_tip",
+            "value":"Sau khi sử dụng chức năng Chỉnh sửa bằng AI, bạn sẽ không thể điều chỉnh khẩu độ cho hình ảnh này nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"none",
+            "value":"Không có",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_right",
+            "value":"Căn phải",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"generation_image_imageEdit",
+            "value":"Đang xử lý…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"timeout_without_move_imageEdit",
+            "value":"Đã hết thời gian chờ yêu cầu máy chủ. Hãy thử lại sau.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_confirm_selection_imageEdit",
+            "value":"Làm lại: Xác nhận lựa chọn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"draw_imageEdit",
+            "value":"Đang phác thảo…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_imageEdit",
+            "value":"Hình chìm mờ tùy chỉnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_abnormal_try_again",
+            "value":"Yêu cầu máy chủ không thành công. Vui lòng thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_tip",
+            "value":"Sau khi sử dụng chức năng Chỉnh sửa bằng AI, bạn sẽ không thể điều chỉnh khẩu độ hoặc kiểu tùy chỉnh cho hình ảnh này nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"synthesis_failed_without_move_imageEdit",
+            "value":"Tạo hình ảnh không thành công. Vui lòng thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_delete_object_imageEdit",
+            "value":"Hoàn tác: Xóa đối tượng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand_part_area",
+            "value":"Không thể mở rộng một số nội dung. Vui lòng điều chỉnh vị trí rồi thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fusion_imageEdit",
+            "value":"Đang hòa trộn…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"regions_overlay_without_move_imageEdit",
+            "value":"Đã xảy ra lỗi. Vui lòng chọn lại rồi thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_compose_imageEdit",
+            "value":"Làm lại: Tạo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_small_without_move_imageEdit",
+            "value":"Kích thước hình ảnh quá nhỏ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_aperture_focus",
+            "value":"Hoàn tác: Vị trí lấy nét.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_aperture_adjust",
+            "value":"Làm lại: Điều chỉnh khẩu độ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tips",
+            "value":"Sau khi sử dụng chức năng đánh dấu, bạn sẽ không thể điều chỉnh khẩu độ hoặc kiểu tùy chỉnh cho hình ảnh này nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_move_toast_content",
+            "value":"Các chỉnh sửa bạn đã thực hiện sẽ bị hủy nếu bạn thoát ngay bây giờ. Vẫn thoát?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_move_bootstrapping",
+            "value":"Vẽ một đường để chọn chủ đề",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unavailable_move_imageEdit",
+            "value":"Tính năng Di chuyển không khả dụng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"generation_imageEdit",
+            "value":"Đang tạo…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_move_toast_title",
+            "value":"Các chỉnh sửa sẽ bị mất",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_object_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh đối tượng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_sign_imageEdit",
+            "value":"Chữ ký cá nhân",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_move_object_imageEdit",
+            "value":"Làm lại: Di chuyển đối tượng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_edit_imageEdit",
+            "value":"Chạm vào một đối tượng để chỉnh sửa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_green_imageEdit",
+            "value":"Xanh lá",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_edit_watermark_imageEdit",
+            "value":"Hoàn tác: Sửa hình chìm mờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_timeout_try_again",
+            "value":"Đã hết thời gian chờ yêu cầu máy chủ. Vui lòng thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_switch_watermark_imageEdit",
+            "value":"Làm lại: Chuyển đổi hình chìm mờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_aperture_adjust",
+            "value":"Hoàn tác: Điều chỉnh khẩu độ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selected_watermark_imageEdit",
+            "value":"Hoàn tác: Chọn hình chìm mờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fill_imageEdit",
+            "value":"Đang điền…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_delete_object_imageEdit",
+            "value":"Làm lại: Xóa đối tượng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_display_param_imageEdit",
+            "value":"Hiện %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_tier_object_imageEdit",
+            "value":"Hoàn tác: Điều chỉnh lớp.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_object_imageEdit",
+            "value":"Làm lại: Điều chỉnh đối tượng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_copy_object_imageEdit",
+            "value":"Làm lại: Sao chép đối tượng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_intelligent_correction_imageEdit",
+            "value":"Chỉnh thẳng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_move_imageEdit",
+            "value":"Tính năng Di chuyển không khả dụng với hình ảnh này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"oversize_imageEdit",
+            "value":"Đã đạt đến số lượng đối tượng tối đa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"today_frequency_reached_upper_limit",
+            "value":"Đã đạt đến giới hạn sử dụng trong hôm nay.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_tier_object_imageEdit",
+            "value":"Làm lại: Điều chỉnh lớp.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_light_purple_imageEdit",
+            "value":"Tím nhạt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_color_param_imageEdit",
+            "value":"Thông tin màu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_red_imageEdit",
+            "value":"Màu đỏ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_imageEdit",
+            "value":"Tạo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch",
+            "value":"Cài đặt khẩu độ sẽ không hoạt động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_intelligent_correction_on",
+            "value":"Đã chọn Chỉnh thẳng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_select_param_imageEdit",
+            "value":"Chọn %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_picture_tilt_is_detected",
+            "value":"Không phát hiện độ nghiêng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_black_imageEdit",
+            "value":"Đen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_center",
+            "value":"Căn giữa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_large_mask_without_move_imageEdit",
+            "value":"Vùng đã chọn quá lớn. Vui lòng chọn lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_correct_intelligent_imageEdit",
+            "value":"Hoàn tác: Chỉnh thẳng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_edit_watermark_imageEdit",
+            "value":"Làm lại: Sửa hình chìm mờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_imageEdit",
+            "value":"Văn bản",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_aperture_imageEdit",
+            "value":"Khẩu độ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_edit_max_tip",
+            "value":"Đã đạt đến số lượng hộp văn bản tối đa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_small_mask_without_move_imageEdit",
+            "value":"Vùng đã chọn quá nhỏ. Vui lòng chọn lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_compose_imageEdit",
+            "value":"Hoàn tác: Tạo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_left",
+            "value":"Căn trái",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_copy_object_imageEdit",
+            "value":"Hoàn tác: Sao chép đối tượng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_intelligent_imageEdit",
+            "value":"Làm lại: Chỉnh thẳng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_text_imageEdit",
+            "value":"Thêm văn bản",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup",
+            "value":"Cài đặt khẩu độ sẽ không hoạt động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_aperture_focus",
+            "value":"Làm lại: Vị trí lấy nét.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_imageEdit",
+            "value":"Hoàn tác: Chọn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_close_param_imageEdit",
+            "value":"Bỏ chọn %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cannot_be_erased_toast",
+            "value":"Không thể xóa nội dung trong vùng đã chọn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"exit_imageEdit",
+            "value":"Thoát",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"leave_imageEdit",
+            "value":"Thoát",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_dark_blue_imageEdit",
+            "value":"Xanh sẫm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selected_watermark_imageEdit",
+            "value":"Làm lại: Chọn hình chìm mờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_on_imageEdit",
+            "value":"Đã chọn hình chìm mờ tùy chỉnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_imageEdit",
+            "value":"Đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_switch_watermark_imageEdit",
+            "value":"Hoàn tác: Chuyển đổi hình chìm mờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_confirm_selection_imageEdit",
+            "value":"Hoàn tác: Xác nhận lựa chọn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_white_imageEdit",
+            "value":"Trắng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_imageEdit",
+            "value":"Làm lại: Chọn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_move_object_imageEdit",
+            "value":"Hoàn tác: Di chuyển đối tượng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_manual_selection",
+            "value":"Hoàn tác: Chọn thủ công.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_add_patches_imageEdit",
+            "value":"Hoàn tác: Thêm hình dán.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_paint_text_announced",
+            "value":"Xóa vùng đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_wise_selection",
+            "value":"Hoàn tác: Chọn tự động.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_manual_selection",
+            "value":"Làm lại: Chọn thủ công.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_brush_thickness_selected",
+            "value":"Thanh trượt điều chỉnh kích thước cục gôm, phạm vi kích thước từ %1$d đến %2$d, chạm đúp để kích hoạt, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh kích thước",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_eraser_after_imageEdit",
+            "value":"Chọn một đối tượng và thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_add_patches_imageEdit",
+            "value":"Làm lại: Thêm hình dán.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"select_patches_object",
+            "value":"Chọn đối tượng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_wise_selection",
+            "value":"Làm lại: Chọn tự động.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_selection_to_edit_imageEdit",
+            "value":"Chạm vào Tự động hoặc Thủ công để chỉnh sửa vùng đã chọn",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_picture",
+            "value":"Lưu dưới dạng hình ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_eraser_selection",
+            "value":"Hoàn tác: Cục gôm.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_eraser_selection",
+            "value":"Làm lại: Cục gôm.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"patches_selection",
+            "value":"Hình dán",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_selection",
+            "value":"Cục gôm",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_two",
+            "value":"Sau khi vẽ phác, sẽ không thể điều chỉnh %1$s và %2$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_one",
+            "value":"Sau khi sử dụng Chỉnh sửa bằng AI, sẽ không thể điều chỉnh %1$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_three",
+            "value":"Sau khi thêm văn bản, sẽ không thể điều chỉnh %1$s, %2$s và %3$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_one",
+            "value":"Sau khi thêm văn bản, sẽ không thể điều chỉnh %1$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_two",
+            "value":"Sau khi thêm hiệu ứng khảm, sẽ không thể điều chỉnh %1$s và %2$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_no_effect",
+            "value":"Làm lại: Không có hiệu ứng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_panning_shot_effect",
+            "value":"Xoay ngang",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_no_effect",
+            "value":"Hoàn tác: Không có hiệu ứng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_panning_shot_effect",
+            "value":"Làm lại: Xoay ngang.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_snapshot_effect",
+            "value":"Làm lại: Ảnh chụp nhanh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_one",
+            "value":"Sau khi vẽ phác, sẽ không thể điều chỉnh %1$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_selection_snapshot_effect",
+            "value":"Hoàn tác: Ảnh chụp nhanh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_two",
+            "value":"Sau khi sử dụng Chỉnh sửa bằng AI, sẽ không thể điều chỉnh %1$s và %2$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_three",
+            "value":"Sau khi sử dụng Chỉnh sửa bằng AI, sẽ không thể điều chỉnh %1$s, %2$s và %3$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_snapshot_effect",
+            "value":"Ảnh chụp nhanh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_one",
+            "value":"Sau khi thêm hiệu ứng khảm, sẽ không thể điều chỉnh %1$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_movement",
+            "value":"hiệu ứng chuyển động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_three",
+            "value":"Thêm hiệu ứng khảm sẽ khiến hình ảnh trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s, %2$s cũng như %3$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_three",
+            "value":"Sử dụng chức năng Chỉnh sửa bằng AI sẽ khiến hình ảnh trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s, %2$s cũng như %3$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_three",
+            "value":"Sau khi thêm hiệu ứng khảm, sẽ không thể điều chỉnh %1$s, %2$s và %3$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_two",
+            "value":"Sau khi thêm văn bản, sẽ không thể điều chỉnh %1$s và %2$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_three",
+            "value":"Thêm văn bản sẽ khiến hình ảnh trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s, %2$s cũng như %3$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_movement_imageEdit",
+            "value":"Chuyển động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_panning_shot_effect",
+            "value":"Hoàn tác: Xoay ngang.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_three",
+            "value":"Sau khi vẽ phác, sẽ không thể điều chỉnh %1$s, %2$s và %3$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_three",
+            "value":"Vẽ phác trên hình ảnh sẽ khiến hình ảnh trở thành hình ảnh tĩnh và không thể điều chỉnh %1$s, %2$s cũng như %3$s nữa. Vẫn tiếp tục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_selected",
+            "value":"Đã chọn bộ lọc Tâm trạng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n_selected",
+            "value":"Đã chọn Bố cục %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_lr",
+            "value":"Chuyển sang bố cục trái-phải",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_n",
+            "value":"Mức độ làm mờ nền hiện được đặt ở mức %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_style_selected",
+            "value":"Đã chọn Thời trang",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"double_click_edit_imageEdit",
+            "value":"Chạm đúp để sửa văn bản",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_top_middle",
+            "value":"Phía trên cùng của hộp cắt, chạm đúp và giữ rồi kéo để điều chỉnh vùng đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightness_true",
+            "value":"Đã chọn Độ sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_original_selected",
+            "value":"Đã chọn Ánh sáng nguyên bản",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_true",
+            "value":"Đã chọn Làm mờ màu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_imageEdit",
+            "value":"Góc trên cùng bên phải của hộp văn bản, chạm đúp và giữ, sau đó kéo để điều chỉnh kích thước",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_imageEdit",
+            "value":"Không có hình chìm mờ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_selected",
+            "value":"Đã chọn Bộ lọc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_aperture_selected",
+            "value":"Đã chọn Khẩu độ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice",
+            "value":"Thanh điều chỉnh hiệu ứng làm mờ nền",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_invisible",
+            "value":"Nút Hoàn tác, không dùng được",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_0",
+            "value":"Mức độ làm mờ nền hiện được đặt là không có",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_focus_change",
+            "value":"Đã chuyển đổi vị trí tiêu điểm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid_selected",
+            "value":"Đã chọn Sống động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_selected",
+            "value":"Đã chọn bộ lọc Tươi sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_rotation_on",
+            "value":"Đã chọn Xoay",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9_on",
+            "value":"Đã chọn Tỷ lệ khung hình 16:9",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_old_tree_selected",
+            "value":"Đã chọn bộ lọc Mộc mạc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_visible",
+            "value":"Hoàn tác",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_blossom_selected",
+            "value":"Đã chọn bộ lọc Nở hoa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_rotation_btn",
+            "value":"Xoay chín mươi độ ngược chiều kim đồng hồ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_box_imageEdit",
+            "value":"Hộp văn bản",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_milk_tea_selected",
+            "value":"Đã chọn bộ lọc Ấm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1_on",
+            "value":"Đã chọn Tỷ lệ khung hình 1:1",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_bottom",
+            "value":"Góc dưới cùng bên trái của hộp cắt, chạm đúp và giữ rồi kéo để điều chỉnh vùng đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_sharpness_true",
+            "value":"Đã chọn Độ sắc nét",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_imageEdit",
+            "value":"%1$s. Phạm vi điều chỉnh là %2$d đến %3$d độ. Chạm đúp và giữ, sau đó kéo để điều chỉnh góc.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bold_imageEdit",
+            "value":"Đậm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_original_selected",
+            "value":"Đã chọn Tạo bố cục gốc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_imageEdit",
+            "value":"Góc dưới bên phải của hộp văn bản, chạm đúp và giữ, sau đó kéo để điều chỉnh kích thước",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_invisible",
+            "value":"Nút Lưu, không dùng được",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_free_on",
+            "value":"Đã chọn Hình dạng tự do",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong_selected",
+            "value":"Đã chọn Mạnh mẽ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen_selected",
+            "value":"Đã chọn Tươi mới",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_pink_selected",
+            "value":"Đã chọn bộ lọc Màu hồng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"italics_imageEdit",
+            "value":"In nghiêng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_invisible",
+            "value":"Nút Làm lại, không dùng được",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn_desc",
+            "value":"Chạm đúp và giữ để so sánh hình ảnh với hình ảnh gốc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light_selected",
+            "value":"Không có hiệu ứng ánh sáng được chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vibrance_true",
+            "value":"Đã chọn Độ rung",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_auto_true",
+            "value":"Đã chọn Tự động điều chỉnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_imageEdit",
+            "value":"Góc dưới bên trái của hộp văn bản, chạm đúp và giữ, sau đó kéo để điều chỉnh kích thước",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_ud",
+            "value":"Chuyển sang bố cục trên-dưới",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_mirror_btn",
+            "value":"Gương lật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_bar_announced",
+            "value":"Thanh trượt điều chỉnh kích thước cọ vẽ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_on",
+            "value":"Đã chọn Tỷ lệ khung hình",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select_n",
+            "value":"Mức độ làm mờ nền đã được điều chỉnh, mức hiện tại là %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_selected",
+            "value":"%1$s đã được chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_exposure_true",
+            "value":"Đã chọn Độ phơi sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams_selected",
+            "value":"Đã chọn Giấc mơ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_screen_on",
+            "value":"Đã chọn Vừa với màn hình",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2_on",
+            "value":"Đã chọn Tỷ lệ khung hình 3:2",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n",
+            "value":"Bố cục %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_paint_text_announced",
+            "value":"Đánh dấu hoàn tất, khu vực tương ứng đã được tự động chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_little_luck_selected",
+            "value":"Đã chọn bộ lọc May mắn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"manual_paint_text_announced",
+            "value":"Đã chọn Vùng được đánh dấu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_imageEdit",
+            "value":"Hình chìm mờ khung",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_watermark_selected",
+            "value":"Đã chọn Hình chìm mờ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_bottom",
+            "value":"Góc dưới cùng bên phải của hộp cắt, chạm đúp và giữ rồi kéo để điều chỉnh vùng đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vignette_true",
+            "value":"Đã chọn Làm mờ viền",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_selected",
+            "value":"Đã chọn bộ lọc Cân bằng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_verticalCorrection_on",
+            "value":"Đã chọn Điều chỉnh theo chiều dọc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_on_imageEdit",
+            "value":"Đã chọn Hình chìm mờ tiêu chuẩn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant_selected",
+            "value":"Đã chọn Thanh lịch",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_on_imageEdit",
+            "value":"Đã chọn Hình chìm mờ khung",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_selected",
+            "value":"Đã chọn bộ lọc Nguyên bản",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select",
+            "value":"Thanh trượt điều chỉnh mức độ làm mờ nền, phạm vi có thể điều chỉnh từ %1$d đến %2$d, chạm đúp để kích hoạt, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh mức độ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightzone_true",
+            "value":"Đã chọn Vùng sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_grain_true",
+            "value":"Đã chọn Hạt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_selected",
+            "value":"Đã chọn bộ lọc Chạng vạng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_top",
+            "value":"Góc trên cùng bên trái của hộp cắt, chạm đúp và giữ rồi kéo để điều chỉnh vùng đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_black_and_white_selected",
+            "value":"Đã chọn bộ lọc Đơn sắc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_selected",
+            "value":"Đã chọn bộ lọc Cổ điển",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_true",
+            "value":"Đã chọn Độ tương phản",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_soft_selected",
+            "value":"Đã chọn Mềm mại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4_on",
+            "value":"Đã chọn Tỷ lệ khung hình 3:4",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"alignment_imageEdit",
+            "value":"Căn chỉnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_hue_true",
+            "value":"Đã chọn Sắc thái",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"underline_imageEdit",
+            "value":"Gạch chân",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_selected",
+            "value":"Đã chọn Ánh sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16_on",
+            "value":"Đã chọn Tỷ lệ khung hình 9:16",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_whiten_selected",
+            "value":"Đã chọn Cân bằng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9",
+            "value":"Theo chiều ngang, tỷ lệ khung hình 16:9",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_origin_on",
+            "value":"Đã chọn Nguyên bản",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light_selected",
+            "value":"Đã chọn Bên",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_imageEdit",
+            "value":"Góc trên cùng bên trái của hộp văn bản, chạm đúp và giữ, sau đó kéo để điều chỉnh kích thước",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brightly_selected",
+            "value":"Đã chọn Tươi sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_middle",
+            "value":"Phía bên trái của hộp cắt, chạm đúp và giữ rồi kéo để điều chỉnh vùng đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_visible",
+            "value":"Làm lại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_up",
+            "value":"Trở lại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_value",
+            "value":"Kích thước cọ đã được điều chỉnh, kích thước hiện tại là %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_selected",
+            "value":"Đã chọn Tạo bố cục",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_top",
+            "value":"Góc trên cùng bên phải của hộp cắt, chạm đúp và giữ rồi kéo để điều chỉnh vùng đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_shadow_true",
+            "value":"Đã chọn Bóng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_temperature_true",
+            "value":"Đã chọn Nhiệt độ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous_selected",
+            "value":"Đã chọn Phong phú",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_gorgeous_selected",
+            "value":"Đã chọn Tuyệt đẹp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_point_announced",
+            "value":"Kích thước cọ vẽ hiện tại là %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_selected",
+            "value":"Thanh trượt điều chỉnh kích thước cọ vẽ, phạm vi kích thước từ %1$d đến %2$d, chạm đúp để kích hoạt, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh kích thước",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light_selected",
+            "value":"Đã chọn Ánh sáng Rembrandt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3_on",
+            "value":"Đã chọn Tỷ lệ khung hình 2:3",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_sprightly_selected",
+            "value":"Đã chọn Vui vẻ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_selected",
+            "value":"Đã chọn bộ lọc Mộng mơ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_adjust_selected",
+            "value":"Đã chọn Điều chỉnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"blurred_selected",
+            "value":"Đã chọn Làm mờ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_darkzone_true",
+            "value":"Đã chọn Vùng tối",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_natural_selected",
+            "value":"Đã chọn bộ lọc Tự nhiên",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3",
+            "value":"Theo chiều dọc, tỷ lệ khung hình 2:3",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light_selected",
+            "value":"Đã chọn Phía trước",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_horizontalCorrection_on",
+            "value":"Đã chọn Điều chỉnh theo chiều ngang",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn",
+            "value":"Nút so sánh, chạm đúp và giữ để so sánh hình ảnh hiện tại với hình ảnh gốc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_refreshing_selected",
+            "value":"Đã chọn Tươi tắn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_middle_tone_selected",
+            "value":"Đã chọn bộ lọc Bình thường",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_saturation_true",
+            "value":"Đã chọn Độ bão hòa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1",
+            "value":"Tỷ lệ khung hình 1:1",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_selected",
+            "value":"Đã chọn bộ lọc Ngọt ngào",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_crop_selected",
+            "value":"Đã chọn Cắt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_highlight_true",
+            "value":"Đã chọn Điểm nổi bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3_on",
+            "value":"Đã chọn Tỷ lệ khung hình 4:3",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"butterfly_light_selected",
+            "value":"Đã chọn Cánh bướm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_softness_selected",
+            "value":"Đã chọn Mềm mại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_original_selected",
+            "value":"Đã chọn Màu nguyên bản",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rectangle_sizer",
+            "value":"Xem trước hình ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_on_imageEdit",
+            "value":"Đã chọn tùy chọn không có hình chìm mờ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_middle_bottom",
+            "value":"Phía dưới cùng của hộp cắt, chạm đúp và giữ rồi kéo để điều chỉnh vùng đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3",
+            "value":"Theo chiều ngang, tỷ lệ khung hình 4:3",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch_selected",
+            "value":"Đã chọn Celia Retouch",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brilliant_selected",
+            "value":"Đã chọn Rực rỡ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_select_imageEdit",
+            "value":"Chạm đúp để chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_imageEdit",
+            "value":"Hình chìm mờ tiêu chuẩn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_middle",
+            "value":"Phía bên phải của hộp cắt, chạm đúp và giữ rồi kéo để điều chỉnh vùng đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16",
+            "value":"Theo chiều dọc, tỷ lệ khung hình 9:16",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4",
+            "value":"Theo chiều dọc, tỷ lệ khung hình 3:4",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2",
+            "value":"Theo chiều ngang, tỷ lệ khung hình 3:2",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_toggle_imageEdit",
+            "value":"Chạm đúp để chuyển đổi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_selected",
+            "value":"Đã chọn bộ lọc Tinh thể",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_ai_move_imageEdit",
+            "value":"Góc trên cùng bên trái hộp sửa, chạm đúp và giữ, sau đó kéo để điều chỉnh kích cỡ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_ai_move_imageEdit",
+            "value":"%1$s, phạm vi điều chỉnh là từ %2$d đến %3$d độ. Chạm đúp và giữ, sau đó kéo để điều chỉnh góc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_ai_move_imageEdit",
+            "value":"Góc dưới cùng bên trái hộp sửa, chạm đúp và giữ, sau đó kéo để điều chỉnh kích cỡ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_ai_move_imageEdit",
+            "value":"Góc dưới cùng bên phải hộp sửa, chạm đúp và giữ, sau đó kéo để điều chỉnh kích cỡ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_invisible",
+            "value":"Nút %1$s, không dùng được",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_ai_move_imageEdit",
+            "value":"Góc trên cùng bên phải hộp sửa, chạm đúp và giữ, sau đó kéo để điều chỉnh kích cỡ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_tone",
+            "value":"Tông màu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_bar",
+            "value":"Thanh trượt điều chỉnh cường độ bộ lọc Vàng chanh, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh cường độ bộ lọc Vàng chanh, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_bar",
+            "value":"Thanh trượt điều chỉnh cường độ bộ lọc Hoàng hôn, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh cường độ bộ lọc Hoàng hôn, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_adjust",
+            "value":"Đã điều chỉnh độ xoay, độ xoay hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_rulerScroller",
+            "value":"Thanh trượt điều chỉnh khẩu độ, phạm vi thanh trượt là F0,95 đến F16. Chạm và giữ bằng hai ngón tay, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị khẩu độ, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh Độ sáng, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị độ sáng, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị độ sắc nét, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_adjust",
+            "value":"Đã điều chỉnh góc ngang, góc hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị độ bão hòa, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_value_change",
+            "value":"Đã điều chỉnh giá trị khẩu độ, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị bóng, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị tô sáng, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị vùng tối, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị vùng sáng, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh Tương phản, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị độ tương phản, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh Bóng, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị bóng, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_adjust",
+            "value":"Đã điều chỉnh góc dọc, góc hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_imageEdit",
+            "value":"Thanh trượt xoay, phạm vi thanh trượt là từ âm bốn mươi lăm độ đến bốn mươi lăm độ, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh độ xoay, độ xoay hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị làm mờ, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị mờ viền, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_value",
+            "value":"Đã điều chỉnh cường độ bộ lọc Thanh nhã, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị độ rực rỡ, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_0_100",
+            "value":"Thanh trượt điều chỉnh Độ sắc nét, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị độ sắc nét, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_bar",
+            "value":"Thanh trượt điều chỉnh cường độ bộ lọc Mộc mạc, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh cường độ bộ lọc Mộc mạc, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh Tô sáng, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị tô sáng, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_imageEdit",
+            "value":"Thanh trượt góc Ngang, phạm vi thanh trượt là từ âm bốn mươi lăm độ đến bốn mươi lăm độ, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh góc ngang, góc hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị phơi sáng, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_bar",
+            "value":"Thanh trượt điều chỉnh cường độ bộ lọc Thanh nhã, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh cường độ bộ lọc Thanh nhã, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection",
+            "value":"Thanh trượt góc dọc, phạm vi trượt từ âm bốn mươi lăm độ đến bốn mươi lăm độ. Chạm và giữ bằng hai ngón tay, sau đó kéo sang trái hoặc phải để điều chỉnh góc dọc, góc hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị sắc độ, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_bar",
+            "value":"Thanh trượt điều chỉnh cường độ bộ lọc Ngọt ngào, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh cường độ bộ lọc Ngọt ngào, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh nhiệt độ màu, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị nhiệt độ màu, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh Độ rực rỡ, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị độ rực rỡ, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị nhiệt độ, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_bar",
+            "value":"Thanh trượt điều chỉnh cường độ bộ lọc Tinh thể, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh cường độ bộ lọc Tinh thể, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_bar",
+            "value":"Thanh trượt điều chỉnh cường độ bộ lọc Trung tính, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh cường độ bộ lọc Trung tính, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_value",
+            "value":"Đã điều chỉnh cường độ bộ lọc Ngọt ngào, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_0_100",
+            "value":"Thanh trượt điều chỉnh Làm mờ, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị làm mờ, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_value",
+            "value":"Đã điều chỉnh cường độ bộ lọc Mộc mạc, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_0_100",
+            "value":"Thanh trượt điều chỉnh độ Thô, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị độ thô, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_bar",
+            "value":"Thanh trượt điều chỉnh cường độ bộ lọc May mắn, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh cường độ bộ lọc May mắn, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_value",
+            "value":"Đã điều chỉnh cường độ bộ lọc Tinh thể, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị độ sáng, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị độ tương phản, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh Mờ viền, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị mờ viền, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_value",
+            "value":"Đã điều chỉnh cường độ bộ lọc Hoàng hôn, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị tự động điều chỉnh, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh Vùng sáng, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị vùng sáng, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_value",
+            "value":"Đã điều chỉnh cường độ bộ lọc May mắn, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_value",
+            "value":"Đã điều chỉnh cường độ bộ lọc Đơn sắc, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh Vùng tối, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị vùng tối, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_value",
+            "value":"Đã điều chỉnh cường độ bộ lọc Ấm, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh Bão hòa, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị độ bão hòa, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_bar",
+            "value":"Thanh trượt điều chỉnh cường độ bộ lọc Ấm, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh cường độ bộ lọc Ấm, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh Phơi sáng, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị phơi sáng, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_100_100",
+            "value":"Thanh trượt Tự động điều chỉnh, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị tự động điều chỉnh, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection",
+            "value":"Thanh trượt góc ngang, phạm vi trượt từ âm bốn mươi lăm độ đến bốn mươi lăm độ. Chạm và giữ bằng hai ngón tay, sau đó kéo sang trái hoặc phải để điều chỉnh góc ngang, góc hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_bar",
+            "value":"Thanh trượt điều chỉnh cường độ bộ lọc Đơn sắc, phạm vi thanh trượt là không đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh cường độ bộ lọc Đơn sắc, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation",
+            "value":"Thanh trượt xoay, phạm vi trượt từ âm bốn mươi lăm độ đến bốn mươi lăm độ. Chạm và giữ bằng hai ngón tay, sau đó kéo sang trái hoặc phải để điều chỉnh độ xoay, độ xoay hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_100_100",
+            "value":"Thanh trượt điều chỉnh Sắc độ, phạm vi thanh trượt là âm một trăm đến một trăm, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh giá trị sắc độ, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_value",
+            "value":"Đã điều chỉnh cường độ bộ lọc Trung tính, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_value",
+            "value":"Đã điều chỉnh cường độ bộ lọc Vàng chanh, cường độ hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_adjust",
+            "value":"Đã điều chỉnh giá trị độ thô, giá trị hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_imageEdit",
+            "value":"Thanh trượt góc dọc, phạm vi thanh trượt là từ âm bốn mươi lăm độ đến bốn mươi lăm độ, chạm đúp và giữ, sau đó kéo sang trái hoặc phải để điều chỉnh góc dọc, góc hiện tại là %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_personality_style_imageEdit",
+            "value":"Kiểu tùy chỉnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_disagree",
+            "value":"Không hiển thị thẻ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"border_background_imageEdit",
+            "value":"Viền",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_agree",
+            "value":"Hiển thị thẻ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"capture_location_imageEdit",
+            "value":"Vị trí",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup",
+            "value":"Hiển thị thẻ \"Do AI tạo\"?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"beauty_Custom_imageEdit",
+            "value":"Tùy chỉnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_description",
+            "value":"Thẻ \"Do AI tạo ra\" cho biết hình ảnh có chứa nội dung do AI tạo ra. Bạn có thể thay đổi cài đặt này bất kỳ lúc nào trong mục cài đặt của Bộ sưu tập.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_imageEdit",
+            "value":"Sửa hình chìm mờ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_watermark_imageEdit",
+            "value":"Hình chìm mờ ngày lễ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_text_imageEdit",
+            "value":"Văn bản",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_patterned_imageEdit",
+            "value":"Họa tiết",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_festival_seal_edit",
+            "value":"Không thể sửa hình chìm mờ Lễ hội mùa xuân sau khi đã lưu. Lưu ngay?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_national_seal_edit",
+            "value":"Không thể sửa hình chìm mờ Ngày Quốc khánh sau khi đã lưu. Lưu ngay?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+          "name":"eraser_brush_thickness_selected_new",
+          "value":"Điều chỉnh kích thước cục gôm, phạm vi điều chỉnh là từ %1$d đến %2$d, chạm đúp và giữ, sau đó trượt sang trái hoặc phải để điều chỉnh",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"brush_thickness_selected_new",
+          "value":"Điều chỉnh kích thước cọ vẽ, phạm vi điều chỉnh là từ %1$d đến %2$d, chạm đúp và giữ, sau đó trượt sang trái hoặc phải để điều chỉnh",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+            "name":"xtStyle_color_temperature",
+            "value":"Nhiệt độ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_saturation",
+            "value":"Độ bão hòa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_soft_imageEdit",
+            "value":"Tươi sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_black_imageEdit",
+            "value":"Đơn sắc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_bright_imageEdit",
+            "value":"Sống động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_soft_imageEdit",
+            "value":"Hoàn tác: Tươi sáng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_bright_imageEdit",
+            "value":"Hoàn tác: Sống động.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_soft_imageEdit",
+            "value":"Làm lại: Tươi sáng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_black_imageEdit",
+            "value":"Làm lại: Đơn sắc.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_bright_imageEdit",
+            "value":"Làm lại: Sống động.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name": "undo_xt_style_black_imageEdit",
+            "value": "Hoàn tác: Đơn sắc.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name":"image_editor_mirror_image_new",
+            "value":"Lật ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_editor_rotate_ninety_degrees_new",
+            "value":"Xoay %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"free_crop_rotate_new",
+            "value":"Xoay",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name": "tip_aigc_removing",
+            "value": "Đang xóa…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_material_loading",
+            "value": "Đang tải…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_emoj_replacing",
+            "value": "Đang thay thế biểu cảm…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_draw_and_select",
+            "value": "Vẽ một đường ngang qua đối tượng để chọn.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_click_and_remove_all",
+            "value": "Chạm vào nút để xóa nội dung đã chọn.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_intelligent",
+            "value": "Tự động",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_manual",
+            "value": "Thủ công",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_expand_selection",
+            "value": "Bạn có thể vuốt trên màn hình để mở rộng vùng đã chọn.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_remove_selection",
+            "value": "Vuốt để hủy bỏ lựa chọn.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_click_intelli_manual_then_edit",
+            "value": "Chạm vào Tự động hoặc Thủ công để chỉnh sửa vùng đã chọn.",
+            "attr": {
+                "priority": "translate"
+            }
+        }
+    ]
+}

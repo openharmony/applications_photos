@@ -1,0 +1,2890 @@
+{
+    "plural":[
+        {
+            "name":"recycleAlbum_delete_message",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Удалить этот элемент без возможности восстановления?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Удалить эти элементы без возможности восстановления?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Удалить эти элементы без возможности восстановления?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Удалить эти элементы без возможности восстановления?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"first_delete_message",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Удаленные элементы перемещаются в папку Недавно удаленное и безвозвратно удаляются через %d день.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Удаленные элементы перемещаются в папку Недавно удаленное и безвозвратно удаляются через %d дня.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Удаленные элементы перемещаются в папку Недавно удаленное и безвозвратно удаляются через %d дня.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Удаленные элементы перемещаются в папку Недавно удаленное и безвозвратно удаляются через %d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_enhance_addimage_quota_used_up",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Достигнут лимит. Попробуйте через %d час.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Достигнут лимит. Попробуйте через %d часа.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Достигнут лимит. Попробуйте через %d часа.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Достигнут лимит. Попробуйте через %d часов.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_days",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d день",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d дня",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d дня",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d дней",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"timeline_message_type_image",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_enhancing_status_processing",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Выполняется обработка фото. Примерно осталось: %1$d секунда.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Выполняется обработка фото. Примерно осталось: %1$d секунды.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Выполняется обработка фото. Примерно осталось: %1$d секунды.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Выполняется обработка фото. Примерно осталось: %1$d секунд.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"slide_show_setting_interval",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d секунды",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d секунда",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d секунды",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d секунд",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_files_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Удалить %d элемента?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Удалить %d элемент?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Удалить %d элемента?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Удалить %d элементов?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"count_details_selected",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Выбран %d элемент"
+                },
+                {
+                    "quantity":"other",
+                    "value":"Выбрано %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Выбрано %d элемента"
+                },
+                {
+                    "quantity":"many",
+                    "value":"Выбрано %d элементов"
+                }
+            ]
+        },
+        {
+            "name":"timeline_message_type_video",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"message_uploading",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Выгрузка %d элементов…",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Выгрузка %d элемента…",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Выгрузка %d элементов…",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Выгрузка %d элементов…",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycleAlbum_delete_multiple_images_message",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d элемента будет удалено без возможности восстановления.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d элемент будет удален без возможности восстановления.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d элемента будет удалено без возможности восстановления.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d элементов будет удалено без возможности восстановления.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"low_power_pause_upload_files",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Уровень заряда батареи меньше %1$s. Выгрузка %2$d элемента приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Уровень заряда батареи меньше %1$s. Выгрузка %2$d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Уровень заряда батареи меньше %1$s. Выгрузка %2$d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Уровень заряда батареи меньше %1$s. Выгрузка %2$d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_videos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d видео будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d видео будет безвозвратно удалено с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d видео будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d видео будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"local_videos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d видео будет удалено без возможности восстановления.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d видео будет удалено без возможности восстановления.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d видео будет удалено без возможности восстановления.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d видео будет удалено без возможности восстановления.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_three",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"new_hide_files_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Скрыть %d элемент?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Скрыть %d элемента?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Скрыть %d элемента?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Скрыть %d элементов?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"delete_hide_albums_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Удалить %d альбома?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Удалить %d альбом?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Удалить %d альбома?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Удалить %d альбомов?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"data_inherit_title",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Приложение %1$s хочет получить доступ к %2$s элементам",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Приложение %1$s хочет получить доступ к %2$s элементу",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Приложение %1$s хочет получить доступ к %2$s элементам",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Приложение %1$s хочет получить доступ к %2$s элементам",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"time_line_message_upload",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Выгрузка %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Выгрузка %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Выгрузка %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Выгрузка %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"seconds",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d секунды",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d секунда",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d секунды",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d секунд",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_no_wlan",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Нет WLAN-соединения. Выгрузка %d элемента приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Нет WLAN-соединения. Выгрузка %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Нет WLAN-соединения. Выгрузка %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Нет WLAN-соединения. Выгрузка %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"items_in_albums_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента в этих альбомах будут удалены с этого устройства, из облака и со всех синхронизированных устройств. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент в этих альбомах будет удален с этого устройства, из облака и со всех синхронизированных устройств. Он будет храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента в этих альбомах будут удалены с этого устройства, из облака и со всех синхронизированных устройств. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов в этих альбомах будут удалены с этого устройства, из облака и со всех синхронизированных устройств. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"add_to_album_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Добавить %d элемент в альбом",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Добавить %d элемента в альбом",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Добавить %d элемента в альбом",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Добавить %d элементов в альбом",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_videos_tips_plural",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Удалить %d видео?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Удалить %d видео?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Удалить %d видео?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Удалить %d видео?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d изображение сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d изображения сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d изображения сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d изображений сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"action_recover_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Восстановить %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Восстановить %d элемент",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Восстановить %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Восстановить %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"copy_to_album_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Копировать %d элемент",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Копировать %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Копировать %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Копировать %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"hide_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Скрыть %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Скрыть %d элемент",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Скрыть %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Скрыть %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"favor_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Добавить %d элемент в Избранное",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Добавить %d элемента в Избранное",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Добавить %d элемента в Избранное",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Добавить %d элементов в Избранное",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d изображение",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d изображения",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d изображения",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d изображений",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"select_burst_photos",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Выбрано %1$d из %2$d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Выбрано %1$d из %2$d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Выбрано %1$d из %2$d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Выбрано %1$d из %2$d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_from_album_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Эти фото больше не будут отображаться в этом альбоме.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Это фото больше не будет отображаться в этом альбоме.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Эти фото больше не будут отображаться в этом альбоме.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Эти фото больше не будут отображаться в этом альбоме.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d видео сохранено в выбранный альбом.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d видео сохранено в выбранный альбом.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d видео сохранено в выбранный альбом.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d видео сохранено в выбранный альбом.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"collage_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Создать коллаж из %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Создать коллаж из %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Создать коллаж из %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Создать коллаж из %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d изображение сохранено в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d изображения сохранено в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d изображения сохранено в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d изображений сохранено в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_files_dialog_delete_permanently_not_recover_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d элемент будет безвозвратно удален с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d элемента будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d элемента будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d элементов будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"copy_to_pasteboard_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Копировать %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Копировать %d элемент",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Копировать %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Копировать %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"unfavor_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Удалить %d элемент из Избранного",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Удалить %d элемента из Избранного",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Удалить %d элемента из Избранного",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Удалить %d элементов из Избранного",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d изображение сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d изображения сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d изображения сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d изображений сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_error",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Выгрузка %d элемента приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Выгрузка %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Выгрузка %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Выгрузка %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"compare_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Сравнить %d элемент",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Сравнить %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Сравнить %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Сравнить %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d изображение сохранено в выбранный альбом.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d изображения сохранено в выбранный альбом.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d изображения сохранено в выбранный альбом.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d изображений сохранено в выбранный альбом.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_three",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_three",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d видео сохранено в альбом Видео.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cancel_hide_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Раскрыть %d элемент",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Раскрыть %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Раскрыть %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Раскрыть %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"album_cloud_data_image",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_files_recycle_delete_kept_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент будет удален с этого устройства, из облака и со всех синхронизированных устройств. Он будет храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента будут удалены с этого устройства, из облака и со всех синхронизированных устройств. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента будут удалены с этого устройства, из облака и со всех синхронизированных устройств. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов будут удалены с этого устройства, из облака и со всех синхронизированных устройств. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"print_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Напечатать %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Напечатать %d элемент",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Напечатать %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Напечатать %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"local_photos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d фото будут безвозвратно удалены.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d фото будет безвозвратно удалено.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d фото будут безвозвратно удалены.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d фото будут безвозвратно удалены.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"count_details_external_selected",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Выбрано %1$d из %2$d",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Выбрано %1$d из %2$d",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Выбрано %1$d из %2$d",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Выбрано %1$d из %2$d",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"items_in_single_album_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент в этом альбоме будет удален с этого устройства, из облака и со всех синхронизированных устройств. Он будет храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента в этом альбоме будут удалены с этого устройства, из облака и со всех синхронизированных устройств. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента в этом альбоме будут удалены с этого устройства, из облака и со всех синхронизированных устройств. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов в этом альбоме будут удалены с этого устройства, из облака и со всех синхронизированных устройств. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"show_photo_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_files_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Удалить %d элемента?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Удалить %d элемент?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Удалить %d элемента?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Удалить %d элементов?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d видео сохранено в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d видео сохранено в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d видео сохранено в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d видео сохранено в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"days_left",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d дня",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d день",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d дня",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d дней",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"album_cloud_data_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"gallery_cloud_space_full_item",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Облачное хранилище заполнено. Синхронизация %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Облачное хранилище заполнено. Синхронизация %d элемента приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Облачное хранилище заполнено. Синхронизация %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Облачное хранилище заполнено. Синхронизация %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_selected_portraits",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Удалить %d человека?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Удалить %d человека?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Удалить %d человека?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Удалить %d человек?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_photos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d фото будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d фото будет безвозвратно удалено с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d фото будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d фото будут безвозвратно удалены с этого устройства, из облака и со всех синхронизированных устройств.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"show_video_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"time_line_message_accumulation_sync",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Всего синхронизировано %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Всего синхронизирован %d элемент",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Всего синхронизировано %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Всего синхронизировано %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_photos_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Удалить %d фото?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Удалить %d фото?",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Удалить %d фото?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Удалить %d фото?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d изображения",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d изображение",
+                    "attr":{
+                        "priority":"LT"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d изображения",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d изображений",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"action_delete_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Удалить %d элемент",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Удалить %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Удалить %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Удалить %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"action_share_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Отправить %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Отправить %d элемент",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Отправить %d элемента",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Отправить %d элементов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d изображения сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d изображение сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d изображения сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d изображений сохранено в альбом Фото.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов невозможно сохранить в приложении Галерея.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_delete_message",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Разрешить приложению %1$s удалить %2$d файла?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Разрешить приложению %1$s удалить %2$d файл?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Разрешить приложению %1$s удалить %2$d файла?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Разрешить приложению %1$s удалить %2$d файлов?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_no_network",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"Нет доступа в Интернет. Выгрузка %d элемента приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"Нет доступа в Интернет. Выгрузка %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Нет доступа в Интернет. Выгрузка %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Нет доступа в Интернет. Выгрузка %d элементов приостановлена.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"photo_albums_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента в этих альбомах будут удалены. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент в этих альбомах будет удален и будет храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента в этих альбомах будут удалены. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов в этих альбомах будут удалены. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"single_photo_album_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d элемента в этом альбоме будут удалены. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%1$d элемент в этом альбоме будет удален и будет храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d элемента в этом альбоме будут удалены. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d элементов в этом альбоме будут удалены. Они будут храниться в разделе Недавно удаленное в течение %2$d дней.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"broadcast_photo_num",
+            "value":[
+                {
+                    "quantity":"few",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d фото",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"broadcast_video_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d видео",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_images_can_download_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d изображение будет удалено с этого устройства. Изображения, синхронизированные с Облаком, можно будет загрузить повторно в любой момент."
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d изображения будут удалены с этого устройства. Изображения, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d изображения будут удалены с этого устройства. Изображения, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d изображений будут удалены с этого устройства. Изображения, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_videos_can_download_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d видео будет удалено с этого устройства. Видео, синхронизированные с Облаком, можно будет загрузить повторно в любой момент."
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d видео будут удалены с этого устройства. Видео, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d видео будут удалены с этого устройства. Видео, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d видео будут удалены с этого устройства. Видео, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_files_can_download_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d элемент будет удален с этого устройства. Элементы, синхронизированные с Облаком, можно будет загрузить повторно в любой момент."
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d элемента будут удалены с этого устройства. Элементы, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d элемента будут удалены с этого устройства. Элементы, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d элементов будут удалены с этого устройства. Элементы, синхронизированные с Облаком, можно будет загрузить повторно в любой момент.",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_selected_group_albums",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Удалить %d группы?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Удалить %d группу?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Удалить %d группы?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Удалить %d групп?",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

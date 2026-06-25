@@ -1,0 +1,9 @@
+{
+  "tableConfig":[
+    {
+      "uri":"*",
+      "crossUserMode":2
+    }
+  ],
+  "isSilentProxyEnable":true
+}

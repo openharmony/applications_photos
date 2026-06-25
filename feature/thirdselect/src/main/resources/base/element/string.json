@@ -1,24 +1,95 @@
 {
     "string":[
         {
-            "name": "photo_all",
-            "value": "All"
+            "name":"avatar",
+            "value":"Profile pictures",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
-            "name": "photo_qr_code",
-            "value": "QR codes"
+            "name":"id_card",
+            "value":"IDs",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
-            "name": "photo_bar_code",
-            "value": "Barcodes"
+            "name":"bar_code",
+            "value":"Barcodes",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
-            "name": "photo_id_card",
-            "value": "ID Documents"
+            "name":"qr_code",
+            "value":"QR codes",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
-            "name": "photo_profile_picture",
-            "value": "Profile"
+            "name":"all",
+            "value":"All",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"for_you_recommend",
+            "value":"Suggestions",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_bank_card",
+            "value":"Bank cards",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"driving_license",
+            "value":"Vehicle licenses",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"driver_license",
+            "value":"Driver's licenses",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"passport",
+            "value":"Passports",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_albums",
+            "value":"All albums",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"featured_single_portrait",
+            "value":"Suggested person",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recommended_portrait",
+            "value":"Suggested",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

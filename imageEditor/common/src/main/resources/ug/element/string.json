@@ -1,0 +1,5668 @@
+{
+    "string":[
+        {
+            "name":"xt_style_natural_selected",
+            "value":"تەبىئىي ئۇسلۇب تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_film_selected",
+            "value":"فىلىم ئۇسلۇب تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_cinematic_selected",
+            "value":"كىنو ئۇسلۇب تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_anime_selected",
+            "value":"كارتون ئۇسلۇب تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_on_imageEdit",
+            "value":"تويۇنۇشچانلىق تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_imageEdit",
+            "value":"گۇگۇم قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlights_imageEdit",
+            "value":"يورۇتۇش تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_intercept_imageEdit",
+            "value":"قىرقىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"ئۆزلۈكىدىن تەڭشەشنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_imageEdit",
+            "value":"ئارا ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_off_imageEdit",
+            "value":"قاراڭغۇ تەڭشەمنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_on_imageEdit",
+            "value":"قاراڭغۇ تەڭشەمنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_imageEdit",
+            "value":"قاراڭغۇ بۇلۇڭ تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_imageEdit",
+            "value":"تەلەي ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_off_imageEdit",
+            "value":"تەبىئىي تويۇنۇشچانلىق تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_off_imageEdit",
+            "value":"ئۆتكۈرلۈك تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"saving_media_imageEdit",
+            "value":"ساقلىنىۋاتىدۇ...",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_failed_imageEdit",
+            "value":"ساقلانمىدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"subtitle_delete_cancel_imageEdit",
+            "value":"بىكار قىلىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_granules_imageEdit",
+            "value":"دانچە تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_rotate_imageEdit",
+            "value":"چۆرۈش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_mirror_imageEdit",
+            "value":"تەسۋىردىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_strength_imageEdit",
+            "value":"رەڭسىزلىك دەرىجىسى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_exposure_imageEdit",
+            "value":"نۇر",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_nature_saturation_imageEdit",
+            "value":"تەبىئىي تويۇنۇشچانلىق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_imageEdit",
+            "value":"تاتلىق ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_original_imageEdit",
+            "value":"كەچكۈز ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_ninety_angle_rotate_imageEdit",
+            "value":"%s گىرادۇس چۆرۈش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_on_imageEdit",
+            "value":"ئۆڭدۈرۈش تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"revert_original_state_imageEdit",
+            "value":"ئەسلى ھالەتكە كەلتۈرەمسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_shadow_imageEdit",
+            "value":"سايە",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_luma_imageEdit",
+            "value":"يورۇقلۇق تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"revert_imageEdit",
+            "value":"ئەسلىگە كەلتۈرۈش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_milk_tea_imageEdit",
+            "value":"سۈتچاي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_on_imageEdit",
+            "value":"قاراڭغۇ تەڭشەمنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_imageEdit",
+            "value":"غورا ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_original_strength_imageEdit",
+            "value":"كەچكۈز دەرىجىسىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_imageEdit",
+            "value":"سېلىشتۇرما تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_none_imageEdit",
+            "value":"ئەسلى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_off_imageEdit",
+            "value":"رەڭ تېمپېراتۇرىسى تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_on_imageEdit",
+            "value":"رەڭ تېمپېراتۇرىسى تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_off_imageEdit",
+            "value":"قاراڭغۇ تەڭشەمنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_off_imageEdit",
+            "value":"تويۇنۇشچانلىق تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_imageEdit",
+            "value":"ئۆڭدۈرۈش تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_granules_imageEdit",
+            "value":"دانچە",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_imageEdit",
+            "value":"غورا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_on_imageEdit",
+            "value":"يورۇقلۇق تەڭشەشنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_imageEdit",
+            "value":"نۇر تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_strength_imageEdit",
+            "value":"كۆتەك ئۈنۈم دەرىجىسىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_fade_imageEdit",
+            "value":"ئۆڭۈش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_luma_imageEdit",
+            "value":"يورۇقلۇق تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_none_imageEdit",
+            "value":"ئەسلى رەسىمدىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_imageEdit",
+            "value":"گۇگۇم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_filter_imageEdit",
+            "value":"سۈزگۈچ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_imageEdit",
+            "value":"ئارا ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_bright_part_imageEdit",
+            "value":"يورۇق تەڭشەمدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"discard_all_changes_imageEdit",
+            "value":"بارلىق ئۆزگەرتىشلەرنى تاشلامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_highlights_imageEdit",
+            "value":"يورۇتۇش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_on_imageEdit",
+            "value":"تويۇنۇشچانلىق تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_proportional_imageEdit",
+            "value":"نىسبەت قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_rotate_imageEdit",
+            "value":"چۆرۈش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_strength_imageEdit",
+            "value":"كۆتەك ئۈنۈم دەرىجىسى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_imageEdit",
+            "value":"تەلەي ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlights_imageEdit",
+            "value":"يورۇتۇش تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_off_imageEdit",
+            "value":"يورۇق تەڭشەمنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_strength_imageEdit",
+            "value":"تاتلىق دەرىجىسى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_imageEdit",
+            "value":"سۈتچاي ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_on_imageEdit",
+            "value":"نۇر تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_on_imageEdit",
+            "value":"دانچە تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_adjust_imageEdit",
+            "value":"تەڭشەش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_off_imageEdit",
+            "value":"دانچە تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_on_imageEdit",
+            "value":"سايە تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_imageEdit",
+            "value":"تويۇنۇشچانلىق تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_imageEdit",
+            "value":"رەڭ تېمپېراتۇرىسى تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_on_imageEdit",
+            "value":"نۇر تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_imageEdit",
+            "value":"سايە تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_off_imageEdit",
+            "value":"ئۆتكۈرلۈك تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_strength_imageEdit",
+            "value":"غورا دەرىجىسى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_off_imageEdit",
+            "value":"يورۇق تەڭشەمنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_imageEdit",
+            "value":"ئۆتكۈرلۈك تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_on_imageEdit",
+            "value":"ئۆڭدۈرۈش تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_strength_imageEdit",
+            "value":"سۈتچاي دەرىجىسى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_old_tree_imageEdit",
+            "value":"كۆتەك",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_imageEdit",
+            "value":"رەڭ تۈسى تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_intercept_imageEdit",
+            "value":"قىرقىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_imageEdit",
+            "value":"رەڭسىز تەڭشەكتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_off_imageEdit",
+            "value":"قاراڭغۇ بۇلۇڭ تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_luma_imageEdit",
+            "value":"يورۇقلۇق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_bright_part_imageEdit",
+            "value":"يورۇق تەڭشەم قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_crop_imageEdit",
+            "value":"قىيىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_correct_vertical_imageEdit",
+            "value":"تىك تۈزەش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_vertical_imageEdit",
+            "value":"تىك تۈزەشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"discard_imageEdit",
+            "value":"تاشلاش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_none_imageEdit",
+            "value":"ئەسلى رەسىم قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_imageEdit",
+            "value":"تاتلىق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_imageEdit",
+            "value":"كۆتەك ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_imageEdit",
+            "value":"قاشتاش ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_on_imageEdit",
+            "value":"سايە تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_nature_saturation_imageEdit",
+            "value":"تەبىئىي تويۇنۇشچانلىق تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_horizontal_correction_imageEdit",
+            "value":"تۈزلەش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vignette_imageEdit",
+            "value":"بۇلۇڭ تۇتۇق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_strength_imageEdit",
+            "value":"گۇگۇم دەرىجىسىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_saturation_imageEdit",
+            "value":"تويۇنۇشچانلىق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_imageEdit",
+            "value":"غورا ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"ئۆزلۈكىدىن تەڭشەش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_strength_imageEdit",
+            "value":"قاشتاش دەرىجىسىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_ratio_imageEdit",
+            "value":"بوي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_on_imageEdit",
+            "value":"يورۇتۇش تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_on_imageEdit",
+            "value":"سېلىشتۇرما تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_black_and_white_imageEdit",
+            "value":"رەڭسىز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_on_imageEdit",
+            "value":"سېلىشتۇرما تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_imageEdit",
+            "value":"قاراڭغۇ بۇلۇڭ تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_sharpness_imageEdit",
+            "value":"ئۆتكۈرلۈك",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_imageEdit",
+            "value":"ئۆتكۈرلۈك تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_correct_horizontal_imageEdit",
+            "value":"تۈز تۈزەش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_middle_tone_imageEdit",
+            "value":"ئارا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_strength_imageEdit",
+            "value":"غورا ئۈنۈم دەرىجىسىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_off_imageEdit",
+            "value":"يورۇقلۇق تەڭشەشنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_strength_imageEdit",
+            "value":"سۈتچاي دەرىجىسىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_contrast_imageEdit",
+            "value":"سېلىشتۇرما",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_cut_imageEdit",
+            "value":"قىرقىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"ئۆزلۈكىدىن تەڭشەشنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_off_imageEdit",
+            "value":"يورۇتۇش تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_crop_imageEdit",
+            "value":"كېسىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_on_imageEdit",
+            "value":"رەڭ تېمپېراتۇرىسى تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_pave_imageEdit",
+            "value":"تولۇق ئېكران",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"videoTool_compare_imageEdit",
+            "value":"سېلىشتۇرۇش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_imageEdit",
+            "value":"قاشتاش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_off_imageEdit",
+            "value":"تويۇنۇشچانلىق تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_off_imageEdit",
+            "value":"يورۇتۇش تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_imageEdit",
+            "value":"كۆتەك ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_mirror_imageEdit",
+            "value":"تەسۋىر قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_imageEdit",
+            "value":"سايە تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_imageEdit",
+            "value":"تويۇنۇشچانلىق تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_bubble_oneClick_adjust_imageEdit",
+            "value":"ئۆزلۈكىدىن تەڭشەش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_free_imageEdit",
+            "value":"ئەركىن",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_on_imageEdit",
+            "value":"قاراڭغۇ بۇلۇڭ تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_dark_part_imageEdit",
+            "value":"قاراڭغۇ تەڭشەمدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_rotate_imageEdit",
+            "value":"چۆرۈشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_off_imageEdit",
+            "value":"نۇر تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_strength_imageEdit",
+            "value":"ئارا ئۈنۈم دەرىجىسى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_imageEdit",
+            "value":"سېلىشتۇرما تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_strength_imageEdit",
+            "value":"تەلەي دەرىجىسى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_off_imageEdit",
+            "value":"دانچە تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_imageEdit",
+            "value":"نۇر تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_original_imageEdit",
+            "value":"بۇرۇن",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_off_imageEdit",
+            "value":"ئۆڭدۈرۈش تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_original_strength_imageEdit",
+            "value":"كەچكۈز دەرىجىسى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_imageEdit",
+            "value":"قاشتاش ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_hue_imageEdit",
+            "value":"تۈس",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_ninety_angle_rotate_imageEdit",
+            "value":"%s گىرادۇس چۆرۈشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_off_imageEdit",
+            "value":"سېلىشتۇرما تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"ئۆزلۈكىدىن تەڭشەشنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_on_imageEdit",
+            "value":"يورۇق تەڭشەمنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_strength_imageEdit",
+            "value":"رەڭسىزلىك دەرىجىسىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_on_imageEdit",
+            "value":"يورۇتۇش تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_off_imageEdit",
+            "value":"قاراڭغۇ بۇلۇڭ تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_imageEdit",
+            "value":"رەڭ تۈسى تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_imageEdit",
+            "value":"رەڭ تېمپېراتۇرىسى تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_imageEdit",
+            "value":"تەھرىرلەش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_proportional_imageEdit",
+            "value":"نىسبەتتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_little_luck_imageEdit",
+            "value":"تەلەي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_original_imageEdit",
+            "value":"كەچكۈز ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_off_imageEdit",
+            "value":"رەڭ تېمپېراتۇرىسى تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_on_imageEdit",
+            "value":"رەڭ تۈسى تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_temperature_imageEdit",
+            "value":"تېمپېراتۇرا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_on_imageEdit",
+            "value":"دانچە تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_imageEdit",
+            "value":"سۈتچاي ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_strength_imageEdit",
+            "value":"قاشتاش دەرىجىسى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"ئۆزلۈكىدىن تەڭشەشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_bright_part_imageEdit",
+            "value":"يورۇق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_on_imageEdit",
+            "value":"ئۆتكۈرلۈك تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_nature_saturation_imageEdit",
+            "value":"تەبىئىي تويۇنۇشچانلىق تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_on_imageEdit",
+            "value":"تەبىئىي تويۇنۇشچانلىق تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_strength_imageEdit",
+            "value":"تەلەي دەرىجىسىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_off_imageEdit",
+            "value":"رەڭ تۈسى تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_vertical_correction_imageEdit",
+            "value":"تىك تۈزەش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_off_imageEdit",
+            "value":"رەڭ تۈسى تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_imageEdit",
+            "value":"تاتلىق ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_on_imageEdit",
+            "value":"تەبىئىي تويۇنۇشچانلىق تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_off_imageEdit",
+            "value":"سايە تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_dark_part_imageEdit",
+            "value":"قاراڭغۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_imageEdit",
+            "value":"رەڭسىز تەڭشەك قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_on_imageEdit",
+            "value":"ئۆتكۈرلۈك تەڭشىكىنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_strength_imageEdit",
+            "value":"تاتلىق ئۈنۈم دەرىجىسىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_crop_imageEdit",
+            "value":"قىيىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_off_imageEdit",
+            "value":"سېلىشتۇرما تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_original_imageEdit",
+            "value":"ئەسلى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"current_file_cannot_import_imageEdit",
+            "value":"ھۆججەت بۇزۇلغان ياكى بۇ فورماتنى قوللىمايدۇ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_strength_imageEdit",
+            "value":"گۇگۇم دەرىجىسى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_imageEdit",
+            "value":"ئۆڭدۈرۈش تەڭشىكى قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_on_imageEdit",
+            "value":"رەڭ تۈسى تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_strength_imageEdit",
+            "value":"ئارا ئۈنۈم دەرىجىسىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_off_imageEdit",
+            "value":"ئۆڭدۈرۈش تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_off_imageEdit",
+            "value":"نۇر تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_off_imageEdit",
+            "value":"سايە تەڭشىكىنى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_off_imageEdit",
+            "value":"تەبىئىي تويۇنۇشچانلىق تەڭشىكىنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_on_imageEdit",
+            "value":"قاراڭغۇ بۇلۇڭ تەڭشىكىنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_on_imageEdit",
+            "value":"يورۇق تەڭشەمنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_on_imageEdit",
+            "value":"يورۇقلۇق تەڭشەشنى ئېچىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_off_imageEdit",
+            "value":"يورۇقلۇق تەڭشەشنى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_granules_imageEdit",
+            "value":"دانچە تەڭشىكىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_horizontal_imageEdit",
+            "value":"تۈز تۈزەشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"ئۆزلۈكىدىن تەڭشەشنى ئېچىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_dark_part_imageEdit",
+            "value":"قاراڭغۇ تەڭشەم قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_imageEdit",
+            "value":"گۇگۇمدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_natural_imageEdit",
+            "value":"تەبىئىي",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"retry_imageEdit",
+            "value":"قايتا سىناش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_pink_imageEdit",
+            "value":"ھالرەڭ ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_blossom_imageEdit",
+            "value":"ئورمان ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_imageEdit",
+            "value":"ئاق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_pink_imageEdit",
+            "value":"ھالرەڭ ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_moody_imageEdit",
+            "value":"بوزراق ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_fair_imageEdit",
+            "value":"ئاق ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_classics_imageEdit",
+            "value":"كىلاسسىك ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_natural_imageEdit",
+            "value":"تەبىئىي ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_natural_imageEdit",
+            "value":"تەبىئىي ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_downloading_imageEdit",
+            "value":"ئەسلى رەسىم چۈشۈۋاتىدۇ، سەل كۈتۈڭ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_pink_imageEdit",
+            "value":"ھالرەڭ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_imageEdit",
+            "value":"كىلاسسىك",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_fair_imageEdit",
+            "value":"ئاق ئۈنۈمدىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_classics_imageEdit",
+            "value":"كىلاسسىك ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_moody_imageEdit",
+            "value":"بوزراق ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_blossom_imageEdit",
+            "value":"ئورمان ئۈنۈم قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_blossom_imageEdit",
+            "value":"ئورمان",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_imageEdit",
+            "value":"بوزراق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"first_time_use_penkit",
+            "value":"بۇ يەردىن رەسىم ئۈستىدە سىزىش ۋە تۇتۇقلاشقا بولىدۇ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_risk_control_alerts",
+            "value":"بۇ رەسىمدە «يوقىتىش» ئىقتىدارى ئىشلىمەيدۇ، باشقا رەسىم تاللاڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_is_too_large_toast",
+            "value":"رەسىم بەك چوڭ، رەسىم ئالماشتۇرۇپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_open",
+            "value":"ئوچۇق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_format_abnormal_toast",
+            "value":"رەسىم فورماتى خاتا، رەسىم ئالماشتۇرۇپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cannot_be_erased_toast",
+            "value":"تاللىغان مەزمۇن يوقالمايدۇ، قايتا تاللاڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"server_is_abnormal",
+            "value":"مۇلازىمىتېردا خاتالىق بار.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_fail_toast",
+            "value":"چىقىرىلمىدى، كېيىنرەك قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove",
+            "value":"يوقىتىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"manual_selection",
+            "value":"قولدا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bokeh",
+            "value":"تۇتۇق تەگ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_remove",
+            "value":"باشلاش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_close",
+            "value":"ئېتىك",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_loading",
+            "value":"\u200fAI مەزمۇن قۇرۇلۇۋاتىدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"wise_selection",
+            "value":"ئاڭلىق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_limit_toast",
+            "value":"بۇ رەسىم «يوقىتىش» ئىقتىدارىنى قوللىمايدۇ، باشقا رەسىم تاللاڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"background_decolorization",
+            "value":"رەڭسىز تەگ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_network_abnorma_toast",
+            "value":"توردا خاتالىق بار، تەكشۈرۈپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouching",
+            "value":"\u200fAI تۈزەش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_is_selected",
+            "value":"نۆۋەتتە %1$s تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_selected",
+            "value":"قەلەم توملۇقى تەڭشىكى، %1$d دىن %2$d گىچە تەڭشىلىدۇ، بىر بارماقتا قوش چەكسىڭىز يۈرگۈزۈلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ توملۇق قىممىتىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_value",
+            "value":"قەلەم توملۇقى تەڭشەلدى، نۆۋەتتە: %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aspect_ratio_of_the_image_toast",
+            "value":"رەسىمنىڭ بوي نىسبىتى بەك چوڭ، رەسىم ئالماشتۇرۇپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"background",
+            "value":"تەگلىك",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_bootstrapping_for_the_first_time",
+            "value":"نىشان ئۈستىدە سىزىپ تاللايسىز.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_expand_image",
+            "value":"كېڭەيتىش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"expand_image",
+            "value":"كېڭەيتىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_analyzing",
+            "value":"\u200fAI ئانالىز قىلىۋاتىدۇ...",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_expand_image",
+            "value":"كېڭەيتىش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generating_content",
+            "value":"مەزمۇن AI ئارقىلىق ئىشلىنىۋاتىدۇ...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_aspect_ratio_too_large",
+            "value":"رەسىمنىڭ بوي نىسبىتى بەك چوڭ، رەسىم ئالماشتۇرۇپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shrink_image_to_adjust_expand_rect",
+            "value":"رەسىمنى كىچىكلەتسىڭىز، كېڭەيتمە دائىرە تەڭشىلىدۇ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand",
+            "value":"بۇ رەسىم كېڭەيتىش ئىقتىدارىنى قوللىمايدۇ، باشقا رەسىم تاللاڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_can_not_expand_part_area",
+            "value":"بەزى مەزمۇن كېڭەيتىلمەيدۇ، ئورۇن تەڭشەپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"server_is_timeout_try_again",
+            "value":"مۇلازىمىتېر تەلىپىنىڭ ۋاقتى ئېشىپ كەتتى، كېيىنرەك قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"server_is_abnormal_try_again",
+            "value":"مۇلازىمىتېر تەلىپى يۈرمىدى، كېيىنرەك قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tradition_remove_content",
+            "value":"چىقىرىلىۋاتىدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_shut_down",
+            "value":"ئېتىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_finish",
+            "value":"پۈتتى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_previous_step",
+            "value":"ئالدىنقى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_next_step",
+            "value":"كېيىنكى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"celia_retouch",
+            "value":"شياۋيى رەسىم تۈزىگۈچ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"back_up",
+            "value":"قايتىش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_top",
+            "value":"سول ئۈستى كەسكۈچ، قوش بېسىپ تۇرۇپ دائىرە تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_invisible",
+            "value":"ساقلاش كۇنۇپكىسى، چېكىلمەيدۇ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_shadow_true",
+            "value":"سايە تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_temperature_true",
+            "value":"رەڭ تېمپېراتۇرىسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_free_on",
+            "value":"ئەركىن ھالەت تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_invisible",
+            "value":"قايتىلاش كۇنۇپكىسى، چېكىلمەيدۇ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3_on",
+            "value":"2 دە 3 نىسبەت تاللاندى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_original_selected",
+            "value":"كەچكۈز سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vibrance_true",
+            "value":"تەبىئىي تويۇنۇشچانلىق تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_darkzone_true",
+            "value":"قاراڭغۇ تەڭشەم تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_auto_true",
+            "value":"ئۆزلۈكىدىن تەڭشەش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_mirror_btn",
+            "value":"ئەكس ئۆرۈش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3",
+            "value":"تىكبوي 2 دە 3",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_horizontalCorrection_on",
+            "value":"تۈز تۈزەش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn",
+            "value":"سېلىشتۇرۇش كۇنۇپكىسى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_on",
+            "value":"نىسبەت تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_middle_tone_selected",
+            "value":"ئارا ئۈنۈم سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_exposure_true",
+            "value":"نۇر تەڭشەش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_saturation_true",
+            "value":"تويۇنۇشچانلىق تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1",
+            "value":"1 دە 1",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_selected",
+            "value":"تاتلىق سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_highlight_true",
+            "value":"يورۇتۇش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_screen_on",
+            "value":"تولۇق ئېكران تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3_on",
+            "value":"4 دە 3 نىسبەت تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2_on",
+            "value":"3 دە 2 نىسبەت تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rectangle_sizer",
+            "value":"كۆرەك",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_top",
+            "value":"ئوڭ ئۈستى كەسكۈچ، قوش بېسىپ تۇرۇپ دائىرە تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_visible",
+            "value":"قايتىلاش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_visible",
+            "value":"يېنىش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9_on",
+            "value":"16 دە 9 نىسبەت تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4_on",
+            "value":"3 دە 4 نىسبەت تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16_on",
+            "value":"9 دە 16 نىسبەت تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9",
+            "value":"تۈزبوي 16 دە 9",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightness_true",
+            "value":"يورۇقلۇق تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_true",
+            "value":"سېلىشتۇرما تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_hue_true",
+            "value":"رەڭ تۈسى تەڭشىكى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_sharpness_true",
+            "value":"ئۆتكۈرلۈك تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_true",
+            "value":"ئۆڭدۈرۈش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_origin_on",
+            "value":"ئەسلى ھالەت تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_rotation_btn",
+            "value":"سائەتكە قارشى 90 گىرادۇس چۆرۈش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_invisible",
+            "value":"يېنىش كۇنۇپكىسى، چېكىلمەيدۇ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_middle",
+            "value":"ئوڭ كەسكۈچ، قوش بېسىپ تۇرۇپ دائىرە تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_black_and_white_selected",
+            "value":"رەڭسىز سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_selected",
+            "value":"كىلاسسىك سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_selected",
+            "value":"بوز سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_natural_selected",
+            "value":"تەبىئىي سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_blossom_selected",
+            "value":"ئورمان سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_selected",
+            "value":"ئاق سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_pink_selected",
+            "value":"ھالرەڭ سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_selected",
+            "value":"غورا سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_old_tree_selected",
+            "value":"كۆتەك سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_milk_tea_selected",
+            "value":"سۈتچاي سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_no_strength_bar",
+            "value":" "
+        },
+        {
+            "name":"cropTab_ratio_1_1_on",
+            "value":"1 دە 1 نىسبەت تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_rotation_on",
+            "value":"چۆرۈش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_bottom",
+            "value":"ئوڭ ئاستى كەسكۈچ، قوش بېسىپ تۇرۇپ دائىرە تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_middle_bottom",
+            "value":"ئاستى كەسكۈچ، قوش بېسىپ تۇرۇپ دائىرە تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_little_luck_selected",
+            "value":"تەلەي سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3",
+            "value":"تۈزبوي 4 دە 3",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_bottom",
+            "value":"سول ئاستى كەسكۈچ، قوش بېسىپ تۇرۇپ دائىرە تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vignette_true",
+            "value":"قاراڭغۇ بۇلۇڭ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_middle",
+            "value":"سول كەسكۈچ، قوش بېسىپ تۇرۇپ دائىرە تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16",
+            "value":"تىكبوي 9 دە 16",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_verticalCorrection_on",
+            "value":"تىك تۈزەش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4",
+            "value":"تىكبوي 3 دە 4",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2",
+            "value":"تۈزبوي 3 دە 2",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_selected",
+            "value":"قاشتاش سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_top_middle",
+            "value":"ئۈستى كەسكۈچ، قوش بېسىپ تۇرۇپ دائىرە تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_no_strength_value",
+            "value":" "
+        },
+        {
+            "name":"filter_none_selected",
+            "value":"ئەسلى رەسىم سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightzone_true",
+            "value":"يورۇق تەڭشەم تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_selected",
+            "value":"گۇگۇم سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_grain_true",
+            "value":"دانچە تەڭشەش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_stylus",
+            "value":"بەلگە",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_bubble_save",
+            "value":"ساقلاش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_restore_origin_tips",
+            "value":"ئەسلى ھالەتكە قايتۇرۇش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"pen_size_bar_announced",
+            "value":"قەلەم توملۇقىنى تەڭشىگۈچ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_paint_text_announced",
+            "value":"سۇۋالدى، سۇۋاشقا ماس رايون ئۆزلۈكىدىن تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"manual_paint_text_announced",
+            "value":"سۇۋاق رايون تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_point_announced",
+            "value":"نۆۋەتتىكى قەلەم توملۇقى %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_lr",
+            "value":"ئوڭ-سول لايىھەگە ئالماشتۇرۇش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_ud",
+            "value":"ئۈستى-ئاستى لايىھەگە ئالماشتۇرۇش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editor_overwrite_the_original_image",
+            "value":"قاپلاش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"editor_save_as",
+            "value":"باشقا ساقلاش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_crop_selected",
+            "value":"كەسكۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_adjust_selected",
+            "value":"تەڭشەش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_selected",
+            "value":"سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch_selected",
+            "value":"شياۋيى رەسىم تۈزىگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_watermark_selected",
+            "value":"سۇباسما تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_param_imageEdit",
+            "value":"تارتىش ئۆلچىمى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_model_imageEdit",
+            "value":"ئۈسكۈنە تىپى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_time_imageEdit",
+            "value":"تارتقان ۋاقىت",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_seal_imageEdit",
+            "value":"سۇباسما",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_text_imageEdit",
+            "value":"يېزىق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_imageEdit",
+            "value":"خەت قوشۇش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"text_align_left",
+            "value":"ئوڭداش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"text_align_center",
+            "value":"مەركەزداش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"text_align_right",
+            "value":"سولداش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"text_edit_max_tip",
+            "value":"تېكىست رامكىسىنىڭ سانى چەككە يەتتى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_sign_imageEdit",
+            "value":"ئىمزا",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_oversize_imageEdit",
+            "value":"بۇ رەسىم ئۆلچىمى سۇباسما قوللىمايدۇ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_close_watermark_imageEdit",
+            "value":"سۇباسما ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_shoot_param_imageEdit",
+            "value":"تارتىش ئۆلچەملىرىنى كۆرسىتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_close_watermark_imageEdit",
+            "value":"سۇباسما ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_frame_watermark_imageEdit",
+            "value":"رامكا سۇباسمىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_shoot_model_imageEdit",
+            "value":"ئۈسكۈنە تىپىنى كۆرسىتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_general_watermark_imageEdit",
+            "value":"ئورتاق سۇباسمىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_shoot_time_imageEdit",
+            "value":"تارتقان ۋاقىتنى كۆرسىتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_general_watermark_imageEdit",
+            "value":"ئورتاق سۇباسما قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_shoot_time_imageEdit",
+            "value":"تارتقان ۋاقىتنى كۆرسىتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_shoot_model_imageEdit",
+            "value":"ئۈسكۈنە تىپىنى كۆرسىتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_shoot_param_imageEdit",
+            "value":"تارتىش ئۆلچەملىرىنى كۆرسىتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_frame_watermark_imageEdit",
+            "value":"رامكا سۇباسما قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"close_watermark_imageEdit",
+            "value":"سۇ باسما ئېتىش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_imageEdit",
+            "value":"ئورتاق سۇباسما",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_imageEdit",
+            "value":"رامكا سۇباسما",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_on_imageEdit",
+            "value":"سۇ باسما ئېتىش تاللانمىسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_on_imageEdit",
+            "value":"ئورتاق سۇباسما تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_on_imageEdit",
+            "value":"رامكا سۇباسما تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_refinement",
+            "value":"ئادەم تۈزەش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_refining",
+            "value":"تۈزەش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"light",
+            "value":"نۇر",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"blurred",
+            "value":"تۇتۇقلاش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"composition",
+            "value":"تۈزۈش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rebuild",
+            "value":"قايتا قۇرۇش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"refining_switch_light_tips",
+            "value":"نۇر ئۈنۈمىنى ئالماشتۇرسىڭىز، AI قايتا قۇرۇشى كېرەك.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"refining_switch_blurred_tips",
+            "value":"تۇتۇقلاش ئۈنۈمىنى تەڭشىسىڭىز، AI قايتا قۇرۇشى كېرەك.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice",
+            "value":"تۇتۇقلاش ئۈنۈمىنى تەڭشىگۈچ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_0",
+            "value":"نۆۋەتتىكى تۇتۇقلاش دەرىجىسى يوق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_n",
+            "value":"نۆۋەتتىكى تۇتۇقلاش دەرىجىسى %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"contour_light",
+            "value":"شەكىل",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rembrandt_light",
+            "value":"رېمبرانت",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"butterfly_light",
+            "value":"كېپىنەك",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"soft_light",
+            "value":"يۇمشاق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"back_light",
+            "value":"يان ئەكس نۇر",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"front_light",
+            "value":"يۈز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_simple_elegant",
+            "value":"ئاددىي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_brilliant",
+            "value":"كۆركەم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_dreams",
+            "value":"چۈش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_style",
+            "value":"نەپىس",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sprightly",
+            "value":"يورۇق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_softness",
+            "value":"ئىللىق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_soft",
+            "value":"سىلىق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_vivid",
+            "value":"جانلىق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_gorgeous",
+            "value":"يارقىن",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_grumous",
+            "value":"قويۇق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_strong",
+            "value":"كۈچلۈك",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_refreshing",
+            "value":"سالقىن",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_brightly",
+            "value":"روشەن",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_freshen",
+            "value":"ساپ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_whiten",
+            "value":"ئاق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_fuji",
+            "value":"فۇجى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_moonlight",
+            "value":"ئايدىڭ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_translucent",
+            "value":"سۈزۈك",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sun_sets",
+            "value":"شەپەق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_can_not_refinement",
+            "value":"بۇ رەسىم تۈزەش ئىقتىدارىنى قوللىمايدۇ، باشقا رەسىم تاللاڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_size_low",
+            "value":"رەسىمنىڭ ئېنىقلىقى بەك تۆۋەن، رەسىم ئالماشتۇرۇپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_refinement",
+            "value":"تۈزەيدىغان ئادەم رەسىمى تېپىلمىدى، رەسىم ئالماشتۇرۇپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_without_refinement_new",
+            "value":"تۈزەش شەرتىگە ئۇيغۇن ئادەم رەسىمى تېپىلمىدى، رەسىم ئالماشتۇرۇپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_has_been_refined",
+            "value":"بۇ رەسىمنى تۈزەپ بولغان، باشقا رەسىم تاللاڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_remove",
+            "value":"يوقىتىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_expand_image",
+            "value":"كېڭەيتىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_refining",
+            "value":"تۈزەش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_imageEdit",
+            "value":"تېكىست رامكىسى قوشۇش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"text_style_imageEdit",
+            "value":"تېكىست ئۇسلۇبى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"style_imageEdit",
+            "value":"ئۇسلۇب",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_imageEdit",
+            "value":"ئۆچۈرۈش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_text_imageEdit",
+            "value":"تېكىستنى چېكىپ تەھرىرلەڭ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_hints_imageEdit",
+            "value":"تېكىست رامكىسى قوشۇش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"best_expression_update_component",
+            "value":"بۇ ئىقتىدار چىراي ئىپادىسىنى ياخشىلايدۇ، ئىشلىتىش ئۈچۈن قىستۇرما يېڭىلاش كېرەك.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"update_now",
+            "value":"يېڭىلاش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_identified_replace_face",
+            "value":"ئالماشتۇرىدىغان چىراي يوق.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"best_expression_new_feature",
+            "value":"گۈزەل ئىپادە",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_face_fail",
+            "value":"مەشغۇلات يۈرمىدى، رەسىم ئالماشتۇرۇپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_replace_emoticons",
+            "value":"ئالماشتۇرىدىغان ئىپادە ئېلىش ئۈچۈن ئۇلاپ بىر نەچچە رەسىم تارتىڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aiproducer_best_expression",
+            "value":"يارقىن ئىپادە",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_xt_style_imageEdit",
+            "value":"XMAGE",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_anime_imageEdit",
+            "value":"كارتون",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup",
+            "value":"ئۆزلەشتۈرمە ئۇسلۇب تاللاش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_romance_imageEdit",
+            "value":"كىنو",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_films_imageEdit",
+            "value":"فىلىم ئۇسلۇب قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_films_imageEdit",
+            "value":"فىلىم",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tip",
+            "value":"سىزىش ئىقتىدارى پەقەت نۆۋەتتىكى مەۋھۇم يورۇقلۇق چەمبىرى ۋە ئۆزلەشتۈرمە ئۇسلۇبتا ئىشلەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_close_imageEdit",
+            "value":"رەڭ كارتىسى ئېتىش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_xt_style_romance_imageEdit",
+            "value":"كىنو ئۇسلۇبتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_standard_imageEdit",
+            "value":"ئۆلچەملىك",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"natural_style",
+            "value":"تەبىئىي",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup",
+            "value":"سىزغاندىن كېيىن بەزى ئىقتىدارلار تەڭشەلمەيدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_standard_imageEdit",
+            "value":"ئۆلچەملىك ئۇسلۇب قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_anime_imageEdit",
+            "value":"كارتون ئۇسلۇب قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_xt_style_close_imageEdit",
+            "value":"رەڭ كارتىسى ئېتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_xt_style_anime_imageEdit",
+            "value":"كارتون ئۇسلۇبتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup_tip",
+            "value":"سىزىش ئىقتىدارى پەقەت نۆۋەتتىكى ئۆزلەشتۈرمە ئۇسلۇبتا ئىشلەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_xt_style_standard_imageEdit",
+            "value":"ئۆلچەملىك ئۇسلۇبتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_romance_imageEdit",
+            "value":"كىنو ئۇسلۇب قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_close_imageEdit",
+            "value":"رەڭ كارتىسى ئېتىش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup",
+            "value":"سىزغاندىن كېيىن ئۆزلەشتۈرمە ئۇسلۇب تەڭشەلمەيدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup_tip",
+            "value":"ئۆزلەشتۈرمە ئۇسلۇب تاللانسا، نۆۋەتتىكى سۈزگۈچ ۋە تەڭشەك ئالمىشىدۇ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_xt_style_films_imageEdit",
+            "value":"فىلىم ئۇسلۇبتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup_tip",
+            "value":"\u200fAI تۈزەش پەقەت نۆۋەتتىكى ئۆزلەشتۈرمە ئۇسلۇبتا ئىشلەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup",
+            "value":"\u200fAI تۈزەلگەندىن كېيىن ئۆزلەشتۈرمە ئۇسلۇب تەڭشەلمەيدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_haze_removal_imageEdit",
+            "value":"تۇمانسىزلاشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_haze_removal_imageEdit",
+            "value":"تۇمانسىزلاش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_haze_removal_imageEdit",
+            "value":"تۇمانسىز",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_haze_removal_selected_imageEdit",
+            "value":"تۇمانسىزلاتقۇچ سۈزگۈچ تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_tone",
+            "value":"نۇر",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_selected",
+            "value":"سايە تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"blurred_selected",
+            "value":"تۇتۇقلاش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_selected",
+            "value":"تۈزۈش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n_selected",
+            "value":"تۈزۈلمە %1$d تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n",
+            "value":"تۈزۈلمە %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light_selected",
+            "value":"رېمبرانت سايە تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"butterfly_light_selected",
+            "value":"كېپىنەك سايە تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light_selected",
+            "value":"يان ئەكس نۇر سايە تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light_selected",
+            "value":"يۈز سايە تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant_selected",
+            "value":"ئاددىي رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brilliant_selected",
+            "value":"كۆركەم رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams_selected",
+            "value":"چۈش رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_style_selected",
+            "value":"نەپىس رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_sprightly_selected",
+            "value":"يورۇق رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_softness_selected",
+            "value":"ئىللىق رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_soft_selected",
+            "value":"سىلىق رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid_selected",
+            "value":"جانلىق رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_gorgeous_selected",
+            "value":"يارقىن رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous_selected",
+            "value":"قويۇق رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong_selected",
+            "value":"كۈچلۈك رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_refreshing_selected",
+            "value":"سالقىن رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brightly_selected",
+            "value":"روشەن رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen_selected",
+            "value":"ساپ رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_whiten_selected",
+            "value":"ئاق رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_original_selected",
+            "value":"ئەسلى سايە تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_original_selected",
+            "value":"ئەسلى رەڭ تۈسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_original_selected",
+            "value":"ئەسلى رەسىم تۈزۈش تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select_n",
+            "value":"تۇتۇقلاش دەرىجىسى تەڭشەلدى، نۆۋەتتە: %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select",
+            "value":"تۇتۇقلاش دەرىجىسى تەڭشىكى، %1$d دىن %2$d گىچە تەڭشىلىدۇ، بىر بارماقتا قوش چەكسىڭىز يۈرگۈزۈلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تۇتۇقلاش دەرىجىسىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_confirm_selection_imageEdit",
+            "value":"تاللانما جەزملەش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"draw_imageEdit",
+            "value":"\u200fAI رەسىم ئىشلەۋاتىدۇ...",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_delete_object_imageEdit",
+            "value":"ئوبيېكت ئۆچۈرۈشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fusion_imageEdit",
+            "value":"\u200fAI سايە بىرىكتۈرۈۋاتىدۇ...",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_compose_imageEdit",
+            "value":"بىرىكتۈرۈش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"generation_imageEdit",
+            "value":"\u200fAI ئىشلەۋاتىدۇ...",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_object_imageEdit",
+            "value":"ئوبيېكت تەڭشەشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_move_object_imageEdit",
+            "value":"ئوبيېكت يۆتكەش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_to_edit_imageEdit",
+            "value":"نەرسە چېكىپ تەھرىرلەڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fill_imageEdit",
+            "value":"\u200fAI تولدۇرۇۋاتىدۇ...",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_delete_object_imageEdit",
+            "value":"ئوبيېكت ئۆچۈرۈش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_tier_object_imageEdit",
+            "value":"قاتلام تەڭشەشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_object_imageEdit",
+            "value":"ئوبيېكت تەڭشەش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_copy_object_imageEdit",
+            "value":"ئوبيېكت كۆچۈرۈش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_without_move_imageEdit",
+            "value":"بۇ رەسىم يۆتكەش ئىقتىدارىنى قوللىمايدۇ، باشقا رەسىم تاللاڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"too_small_without_move_imageEdit",
+            "value":"رەسىم بەك كىچىك، ئالماشتۇرۇپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"regions_overlay_without_move_imageEdit",
+            "value":"تاللىغان دائىرە نورمالسىز، قايتا تاللاڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"today_frequency_reached_upper_limit",
+            "value":"بۈگۈنكى مەشغۇلات قېتىمى چەككە يەتتى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"unavailable_move_imageEdit",
+            "value":"يۆتكەش ئىقتىدارى ئىشلىمەيدۇ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"synthesis_failed_without_move_imageEdit",
+            "value":"بىرىكتۈرۈلمىدى، كېيىنرەك قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"timeout_without_move_imageEdit",
+            "value":"مۇلازىمىتېر تەلىپىنىڭ ۋاقتى ئېشىپ كەتتى، كېيىنرەك قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"too_small_mask_without_move_imageEdit",
+            "value":"تاللىغان دائىرە بەك كىچىك، قايتا تاللاڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"too_large_mask_without_move_imageEdit",
+            "value":"تاللىغان دائىرە بەك چوڭ، كىچىكلىتىپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"oversize_imageEdit",
+            "value":"نەرسە سانى چەككە يەتتى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"picking",
+            "value":"يۆتكەش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_tier_object_imageEdit",
+            "value":"قاتلام تەڭشەش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"compose_imageEdit",
+            "value":"بىرىكتۈرۈش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_compose_imageEdit",
+            "value":"بىرىكتۈرۈشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_copy_object_imageEdit",
+            "value":"ئوبيېكت كۆچۈرۈشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_selection_imageEdit",
+            "value":"تاللانمىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_confirm_selection_imageEdit",
+            "value":"تاللانما جەزملەشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_selection_imageEdit",
+            "value":"تاللانما قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_move_object_imageEdit",
+            "value":"ئوبيېكت يۆتكەشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_move_toast_content",
+            "value":"بىرىكتۈرۈلمىدى، يۆتكەشتىن چېكىنسىڭىز، ئۆزگەرتىشلەر ساقلانمايدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_move_toast_title",
+            "value":"مەشغۇلات ساقلانمايدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_imageEdit",
+            "value":"سول ئاستى چوڭ-كىچىكلىتىش تىزگىنى، قوش بېسىپ تۇرۇپ تېكىست رامكىسىنىڭ چوڭلۇقىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_imageEdit",
+            "value":"سول ئۈستى چوڭ-كىچىكلىتىش تىزگىنى، قوش بېسىپ تۇرۇپ تېكىست رامكىسىنىڭ چوڭلۇقىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_imageEdit",
+            "value":"ئوڭ ئاستى چوڭ-كىچىكلىتىش تىزگىنى، قوش بېسىپ تۇرۇپ تېكىست رامكىسىنىڭ چوڭلۇقىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_imageEdit",
+            "value":"ئوڭ ئۈستى چوڭ-كىچىكلىتىش تىزگىنى، قوش بېسىپ تۇرۇپ تېكىست رامكىسىنىڭ چوڭلۇقىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_white_imageEdit",
+            "value":"ئاق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_red_imageEdit",
+            "value":"قىزىل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_green_imageEdit",
+            "value":"يېشىل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_light_blue_imageEdit",
+            "value":"ئاچ كۆك",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_dark_blue_imageEdit",
+            "value":"توق كۆك",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_light_purple_imageEdit",
+            "value":"ئاچ بىنەپشە",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_black_imageEdit",
+            "value":"قارا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_imageEdit",
+            "value":"تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light",
+            "value":"سايە يوق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"exit_imageEdit",
+            "value":"چېكىنىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"leave_imageEdit",
+            "value":"ئايرىلىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"generation_image_imageEdit",
+            "value":"\u200fAI رەسىم ئىشلەۋاتىدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_move_bootstrapping",
+            "value":"سىزىق سىزىپ ئوبيېكت تاللايسىز.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_light_selected",
+            "value":"سايە يوق ھالەت تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_imageEdit",
+            "value":"‏%1$s، تەڭشەلمە دائىرە %2$d گىرادۇستىن %3$d گىرادۇسقىچە، قوش بېسىپ تۇرۇپ سىيرىپ تېكىست چۆرۈش گىرادۇسىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn_desc",
+            "value":"قوش بېسىپ قويۇپ بەرمەي ئەسلى رەسىم بىلەن سېلىشتۇرۇشقا بولىدۇ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup_tip",
+            "value":"سىزىش ئىقتىدارى پەقەت نۆۋەتتىكى يورۇقلۇق چەمبىرى ئۈنۈمىدە ئىشلەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch_tip",
+            "value":"\u200fAI تۈزەش ئىقتىدارى پەقەت نۆۋەتتىكى يورۇقلۇق چەمبىرى ئۈنۈمىدە ئىشلەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_aperture_selected",
+            "value":"يورۇقلۇق چەمبىرى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_focus_change",
+            "value":"فوكۇس نۇقتا ئالماشتى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_aperture_focus",
+            "value":"فوكۇس نۇقتىدىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_aperture_adjust",
+            "value":"يورۇقلۇق چەمبىرى تەڭشەش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_aperture_adjust",
+            "value":"يورۇقلۇق چەمبىرى تەڭشەشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch",
+            "value":"\u200fAI تۈزەلگەندىن كېيىن يورۇقلۇق چەمبىرى تەڭشەلمەيدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_aperture_imageEdit",
+            "value":"يورۇقلۇق چەمبىرى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup",
+            "value":"سىزغاندىن كېيىن يورۇقلۇق چەمبىرى تەڭشەلمەيدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_aperture_focus",
+            "value":"فوكۇس نۇقتا قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_cancel",
+            "value":"بىكار قىلىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aperture_unsupport_continue",
+            "value":"داۋاملاشتۇرۇش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_tip",
+            "value":"\u200fAI تۈزەش پەقەت نۆۋەتتىكى يورۇقلۇق چەمبىرى ۋە ئۆزلەشتۈرمە ئۇسلۇبتا ئىشلەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tips",
+            "value":"سىزىش ئىقتىدارى پەقەت نۆۋەتتىكى يورۇقلۇق چەمبىرى ۋە ئۆزلەشتۈرمە ئۇسلۇبتا ئىشلەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai",
+            "value":"\u200fAI تۈزەلگەندىن كېيىن بەزى ئىقتىدارلار تەڭشەلمەيدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bold_imageEdit",
+            "value":"توم",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"italics_imageEdit",
+            "value":"يانتۇ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"underline_imageEdit",
+            "value":"ئاستى سىزىق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_select_imageEdit",
+            "value":"بىر بارماقتا قوش چەكسىڭىز تاللىنىدۇ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_toggle_imageEdit",
+            "value":"بىر بارماقتا قوش چەكسىڭىز ئالمىشىدۇ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"alignment_imageEdit",
+            "value":"توغرىلاش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_box_imageEdit",
+            "value":"تېكىست رامكىسى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"double_click_edit_imageEdit",
+            "value":"بىر بارماقتا قوش چېكىپ تېكىست تەھرىرلەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_reset_success",
+            "value":"ئوڭۇشلۇق قايتا بەلگىلەندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_matrix_area",
+            "value":"رەڭ كارتىسى تەڭشەش رايونى، تۈزبوي سىيرىپ رەڭ تېمپېراتۇرىسىنى تەڭشەيسىز، تىكبوي سىيرىپ تويۇنۇشچانلىقنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_default_template",
+            "value":"سۈكۈت تەڭشەك، رەڭ تېمپېراتۇرىسى %1$d، تويۇنۇشچانلىق %2$d، سايە %3$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_xt_style_template",
+            "value":"ئۆزلەشتۈرمە تەييار تەڭشەك %1$d، رەڭ تېمپېراتۇرىسى %2$d، تويۇنۇشچانلىق %3$d، سايە %4$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_saturation_level",
+            "value":"تويۇنۇشچانلىق دەرىجىسى %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_level",
+            "value":"سايە دەرىجىسى %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_slide_bar",
+            "value":"سايە دەرىجىسى %1$d، بۇ %2$d دىن %3$d گىچە تەڭشىلىدۇ، بىر بارماقتا قوش چەكسىڭىز ئالمىشىدۇ، قوش بېسىپ تۇرۇپ ئۈستى-ئاستىغا تارتسىڭىز بولىدۇ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_color_temperature_level",
+            "value":"رەڭ تېمپېراتۇرىسى دەرىجىسى %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_intelligent_correction_imageEdit",
+            "value":"ئاڭلىق تۈزلەش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropTab_intelligent_correction_on",
+            "value":"ئاڭلىق تۈزلەش تاللاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_picture_tilt_is_detected",
+            "value":"رەسىمدە يانتۇلۇق بايقالمىدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_correct_intelligent_imageEdit",
+            "value":"ئاڭلىق تۈزلەش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_intelligent_imageEdit",
+            "value":"ئاڭلىق تۈزلەشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"yellow_imageEdit",
+            "value":"سېرىق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_imageEdit",
+            "value":"كۇنۇپكا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_kaleidoscope",
+            "value":"چېچەك تۇتۇق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_sky_blue",
+            "value":"كۆك تۇتۇق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_typ_classic",
+            "value":"كىلاسسىك تۇتۇق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_cartoon",
+            "value":"كارتون تۇتۇق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_mosicac",
+            "value":"تۇتۇقلاش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_polka_dot",
+            "value":"دولقۇن تۇتۇق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_star",
+            "value":"يۇلتۇز تۇتۇق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_triangle",
+            "value":"ئۈچبۇلۇڭ تۇتۇق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_weaving",
+            "value":"توقۇلما تۇتۇق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_eraser",
+            "value":"ئۆچۈرگۈچ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_color_block",
+            "value":"رەڭلىك تۇتۇق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_reflect_light",
+            "value":"پارقىراق يوقىتىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_reflect_light",
+            "value":"يوقىتىش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_can_not_reflect_light",
+            "value":"بۇ رەسىمدە پارقىراق ئىقتىدارى ئىشلىمەيدۇ، باشقا رەسىم تاللاڭ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_xt_style_selected",
+            "value":"ئۆزلەشتۈرمە رەڭ كارتىسى تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"none",
+            "value":"يوق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic",
+            "value":"تۇتۇقلىغاندىن كېيىن بەزى ئىقتىدار تەڭشەلمەيدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_one",
+            "value":"رەسىم AI تۈزەلگەندىن كېيىن تىنچ رەسىمگە ئايلىنىدۇ، %1$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_two",
+            "value":"تۇتۇقلىغان (موزايكا قوشقان) رەسىم تىنچ رەسىمگە ئايلىنىدۇ، %1$s ۋە %2$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_one",
+            "value":"تېكىست قوشقان رەسىم تىنچ رەسىمگە ئايلىنىدۇ، %1$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_one",
+            "value":"سىزغان رەسىم تىنچ رەسىمگە ئايلىنىدۇ، %1$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_none",
+            "value":"تۇتۇقلىغان (موزايكا قوشقان) رەسىم تىنچ رەسىمگە ئايلىنىدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_style",
+            "value":"رەڭ كارتىسى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_two",
+            "value":"رەسىم AI تۈزەلگەندىن كېيىن تىنچ رەسىمگە ئايلىنىدۇ، %1$s ۋە %2$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_one",
+            "value":"تۇتۇقلىغان (موزايكا قوشقان) رەسىم تىنچ رەسىمگە ئايلىنىدۇ، %1$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_two",
+            "value":"تېكىست قوشقان رەسىم تىنچ رەسىمگە ئايلىنىدۇ، %1$s ۋە %2$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_aperture",
+            "value":"يورۇقلۇق چەمبىرى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_two",
+            "value":"سىزغان رەسىم تىنچ رەسىمگە ئايلىنىدۇ، %1$s ۋە %2$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_none",
+            "value":"رەسىم AI تۈزەلگەندىن كېيىن تىنچ رەسىمگە ئايلىنىدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_none",
+            "value":"تېكىست قوشقان رەسىم تىنچ رەسىمگە ئايلىنىدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word",
+            "value":"تېكىست قوشقاندىن كېيىن بەزى ئىقتىدار تەڭشەلمەيدۇ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_none",
+            "value":"سىزغان رەسىم تىنچ رەسىمگە ئايلىنىدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_natural_style",
+            "value":"تەبىئىي ئۇسلۇب قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"direction_left_top",
+            "value":"سول ئۈستى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_top",
+            "value":"ئوڭ ئۈستى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_bottom",
+            "value":"سول ئاستى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_bottom",
+            "value":"ئوڭ ئاستى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left",
+            "value":"سول",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right",
+            "value":"ئوڭ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_top",
+            "value":"ئۈستى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_bottom",
+            "value":"ئاستى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cutting_percentage",
+            "value":"%1$sدىن ‎%2$s كېسىش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_natural_style",
+            "value":"تەبىئىي ئۇسلۇبتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_edit_watermark_imageEdit",
+            "value":"سۇباسما تەھرىرلەشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_selected_watermark_imageEdit",
+            "value":"سۇباسما تاللاش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_switch_watermark_imageEdit",
+            "value":"سۇباسما ئالماشتۇرۇش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_selected_watermark_imageEdit",
+            "value":"سۇباسما تاللاشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_edit_watermark_imageEdit",
+            "value":"سۇباسما تەھرىرلەش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_switch_watermark_imageEdit",
+            "value":"سۇباسما ئالماشتۇرۇشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_title_brush_adjusts",
+            "value":"چوتكا تەڭشەش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_title_lift_pen",
+            "value":"كۆتۈرۈپ شەكىل قۇرۇش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_title_one_pen",
+            "value":"سىزىپ توختاپ شەكىل قۇرۇش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_one_pen",
+            "value":"سىزىپ توختىغاندا ئۆزلۈكىدىن ئۆلچەملىك شەكىل قۇرۇلىدۇ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_brush_adjusts",
+            "value":"چوتكىنى قوش چېكىپ كەڭلىك ۋە سۈزۈكلۈكىنى تەڭشەشكە بولىدۇ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_lift_pen",
+            "value":"بۇ تاللانما ئوچۇق ھالەتتە سىزىپ بولۇپ قەلەمنى كۆتۈرۈپ ياكى قويۇپ بېرىپ ئۆلچەملىك شەكىل قۇرىسىز.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"watermark_display_param_imageEdit",
+            "value":"%1$sنى كۆرسىتىش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_select_param_imageEdit",
+            "value":"‏%1$s تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_imageEdit",
+            "value":"ئۆزلەشتۈرمە سۇباسما",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_color_param_imageEdit",
+            "value":"رەڭ كارتىسى ئۆلچىمى",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"watermark_close_param_imageEdit",
+            "value":"%1$sنى ئېتىش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_on_imageEdit",
+            "value":"ئۆزلەشتۈرمە سۇباسما تاللاندى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_manual_selection",
+            "value":"قولدا تاللاشتىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_add_patches_imageEdit",
+            "value":"چاپلاق قوشۇشتىن يېنىلدى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_paint_text_announced",
+            "value":"سۇۋاق دائىرە ئۆچۈرۈلدى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_wise_selection",
+            "value":"ئاڭلىق تاللاشتىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_manual_selection",
+            "value":"قولدا تاللاش قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_brush_thickness_selected",
+            "value":"ئۆچۈرگۈچ توملۇقى تەڭشىكى، %1$d دىن %2$d گىچە تەڭشىلىدۇ، بىر بارماقتا قوش چەكسىڭىز يۈرگۈزۈلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ توملۇق قىممىتىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_eraser_after_imageEdit",
+            "value":"نىشان تاللاپ قايتا سىناڭ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_add_patches_imageEdit",
+            "value":"چاپلاق قوشۇش قايتىلاندى.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"select_patches_object",
+            "value":"نىشان تاللاش",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_wise_selection",
+            "value":"ئاڭلىق تاللاش قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_selection_to_edit_imageEdit",
+            "value":"ئاڭلىق ياكى قولدا تاللاش ھالىتىنى چېكىپ دائىرە تەھرىرلەشكە بولىدۇ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_picture",
+            "value":"رەسىم ساقلاش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_eraser_selection",
+            "value":"ئۆچۈرگۈچتىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_eraser_selection",
+            "value":"ئۆچۈرگۈچ قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"patches_selection",
+            "value":"چاپلاق",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_selection",
+            "value":"ئۆچۈرگۈچ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_two",
+            "value":"سىزغان رەسىمدە %1$s ۋە %2$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_one",
+            "value":"رەسىم AI تۈزەلگەندىن كېيىن %1$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_three",
+            "value":"تېكىست قوشقان رەسىمدە %1$s، %2$s، %3$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_one",
+            "value":"تېكىست قوشقان رەسىمدە %1$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_two",
+            "value":"تۇتۇقلىغان (موزايكا قوشقان) رەسىمدە %1$s ۋە %2$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_no_effect",
+            "value":"ئۈنۈم يوق ھالەت قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_panning_shot_effect",
+            "value":"چۆرۈلمە",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_no_effect",
+            "value":"ئۈنۈم يوق ھالەتتىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_panning_shot_effect",
+            "value":"چۆرۈپ تارتىش قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_snapshot_effect",
+            "value":"ئەركىن تارتىش قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_one",
+            "value":"سىزغان رەسىمدە %1$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_selection_snapshot_effect",
+            "value":"ئەركىن تارتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_two",
+            "value":"رەسىم AI تۈزەلگەندىن كېيىن %1$s ۋە %2$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_three",
+            "value":"رەسىم AI تۈزەلگەندىن كېيىن %1$s، %2$s، %3$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_snapshot_effect",
+            "value":"ئەركىن",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_one",
+            "value":"تۇتۇقلىغان (موزايكا قوشقان) رەسىمدە %1$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_movement",
+            "value":"ھەرىكەت",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_three",
+            "value":"تۇتۇقلىغان (موزايكا قوشقان) رەسىم تىنچ رەسىمگە ئايلىنىدۇ؛ %1$s، %2$s، %3$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_three",
+            "value":"رەسىم AI تۈزەلگەندىن كېيىن تىنچ رەسىمگە ئايلىنىدۇ؛ %1$s، %2$s، %3$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_three",
+            "value":"تۇتۇقلىغان (موزايكا قوشقان) رەسىمدە %1$s، %2$s، %3$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_two",
+            "value":"تېكىست قوشقان رەسىمدە %1$s ۋە %2$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_three",
+            "value":"تېكىست قوشقان رەسىم تىنچ رەسىمگە ئايلىنىدۇ؛ %1$s، %2$s، %3$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_movement_imageEdit",
+            "value":"ھەرىكەت",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_panning_shot_effect",
+            "value":"چۆرۈپ تارتىشتىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_three",
+            "value":"سىزغان رەسىمدە %1$s، %2$s، %3$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_three",
+            "value":"سىزغان رەسىم تىنچ رەسىمگە ئايلىنىدۇ؛ %1$s، %2$s، %3$s تەڭشەلمەيدۇ، داۋاملاشتۇرامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_ai_move_imageEdit",
+            "value":"سول ئۈستى چوڭ-كىچىكلىتىش تىزگىنى، قوش بېسىپ تۇرۇپ تەھرىرلەش رامكىسىنىڭ چوڭلۇقىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_ai_move_imageEdit",
+            "value":"‏%1$s، تەڭشەلمە دائىرە %2$d گىرادۇستىن %3$d گىرادۇسقىچە، قوش بېسىپ تۇرۇپ سىيرىپ تەھرىرلەش رامكىسىنى چۆرۈش گىرادۇسىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_ai_move_imageEdit",
+            "value":"سول ئاستى چوڭ-كىچىكلىتىش تىزگىنى، قوش بېسىپ تۇرۇپ تەھرىرلەش رامكىسىنىڭ چوڭلۇقىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_ai_move_imageEdit",
+            "value":"ئوڭ ئاستى چوڭ-كىچىكلىتىش تىزگىنى، قوش بېسىپ تۇرۇپ تەھرىرلەش رامكىسىنىڭ چوڭلۇقىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_invisible",
+            "value":"‏%1$s كۇنۇپكىسى، چېكىلمەيدۇ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_ai_move_imageEdit",
+            "value":"ئوڭ ئۈستى چوڭ-كىچىكلىتىش تىزگىنى، قوش بېسىپ تۇرۇپ تەھرىرلەش رامكىسىنىڭ چوڭلۇقىنى تەڭشەيسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_bar",
+            "value":"غورا سۈزگۈچ بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_bar",
+            "value":"گۇگۇم سۈزگۈچ بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_adjust",
+            "value":"چۆرۈش بۇلۇڭى تاللاندى، نۆۋەتتىكى بۇلۇڭ %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_rulerScroller",
+            "value":"يورۇقلۇق چەمبىرى سىيرىش بالدىقى، F0.95 دىن F16 گىچە تەڭشىلىدۇ. قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_100_100",
+            "value":"يورۇقلۇق تەڭشەش بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_adjust",
+            "value":"ئۆتكۈرلۈك تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_adjust",
+            "value":"تۈز تۈزەش بۇلۇڭى تاللاندى، نۆۋەتتىكى بۇلۇڭ %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_adjust",
+            "value":"تويۇنۇشچانلىق قىممىتى تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_value_change",
+            "value":"يورۇقلۇق چەمبىرى تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_adjust",
+            "value":"سايە تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_adjust",
+            "value":"يورۇتۇش تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_adjust",
+            "value":"قاراڭغۇ تەڭشەم تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_adjust",
+            "value":"يورۇق تەڭشەم تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_100_100",
+            "value":"سېلىشتۇرما تەڭشەش بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_100_100",
+            "value":"سايە بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_adjust",
+            "value":"تىك تۈزەش بۇلۇڭى تاللاندى، نۆۋەتتىكى بۇلۇڭ %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_imageEdit",
+            "value":"چۆرۈش بۇلۇڭى بالدىقى، مىنۇس 45 گىرادۇستىن 45 گىرادۇسقىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى بۇلۇڭ %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_adjust",
+            "value":"ئۆڭدۈرۈش قىممىتى تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_adjust",
+            "value":"قاراڭغۇ بۇلۇڭ تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_value",
+            "value":"كەچكۈز سۈزگۈچ دەرىجىسى تاللاندى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_adjust",
+            "value":"تەبىئىي تويۇنۇشچانلىق تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_0_100",
+            "value":"ئۆتكۈرلۈك بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_bar",
+            "value":"كۆتەك سۈزگۈچ بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_100_100",
+            "value":"يورۇتۇش بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_imageEdit",
+            "value":"تۈز تۈزەش بۇلۇڭى بالدىقى، مىنۇس 45 گىرادۇستىن 45 گىرادۇسقىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى بۇلۇڭ %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_adjust",
+            "value":"نۇر تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_bar",
+            "value":"كەچكۈز سۈزگۈچ بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection",
+            "value":"تىك تۈزەش بۇلۇڭى بالدىقى، مىنۇس 45 گىرادۇستىن 45 گىرادۇسقىچە ئارىلىقتا تەڭشىلىدۇ، ئىككى بارماقتا بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى بۇلۇڭ %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_adjust",
+            "value":"رەڭ تۈسى تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_bar",
+            "value":"تاتلىق سۈزگۈچ بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_100_100",
+            "value":"رەڭ تېمپېراتۇرىسى بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_100_100",
+            "value":"تەبىئىي تويۇنۇشچانلىق بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_adjust",
+            "value":"رەڭ تېمپېراتۇرىسى تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_bar",
+            "value":"قاشتاش سۈزگۈچ بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_bar",
+            "value":"ئارا ئۈنۈم سۈزگۈچ بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_value",
+            "value":"تاتلىق سۈزگۈچ دەرىجىسى تاللاندى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_0_100",
+            "value":"ئۆڭدۈرۈش بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_value",
+            "value":"كۆتەك سۈزگۈچ دەرىجىسى تاللاندى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_0_100",
+            "value":"دانچە تەڭشەش بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_bar",
+            "value":"تەلەي سۈزگۈچ بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_value",
+            "value":"قاشتاش سۈزگۈچ دەرىجىسى تاللاندى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_adjust",
+            "value":"يورۇقلۇق قىممىتى تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_adjust",
+            "value":"سېلىشتۇرما قىممىتى تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_100_100",
+            "value":"قاراڭغۇ بۇلۇڭ بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_value",
+            "value":"گۇگۇم سۈزگۈچ دەرىجىسى تاللاندى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_adjust",
+            "value":"ئۆزلۈكىدىن تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_100_100",
+            "value":"يورۇق تەڭشەم بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_value",
+            "value":"تەلەي سۈزگۈچ دەرىجىسى تاللاندى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_value",
+            "value":"رەڭسىز سۈزگۈچ دەرىجىسى تاللاندى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_100_100",
+            "value":"قاراڭغۇ تەڭشەم بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_value",
+            "value":"سۈتچاي سۈزگۈچ دەرىجىسى تاللاندى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_100_100",
+            "value":"تويۇنۇشچانلىق بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_bar",
+            "value":"سۈتچاي سۈزگۈچ بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_100_100",
+            "value":"نۇر تەڭشەش بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_100_100",
+            "value":"ئۆزلۈكىدىن تەڭشەش بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection",
+            "value":"تۈز تۈزەش بۇلۇڭى بالدىقى، مىنۇس 45 گىرادۇستىن 45 گىرادۇسقىچە ئارىلىقتا تەڭشىلىدۇ، ئىككى بارماقتا بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى بۇلۇڭ %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_bar",
+            "value":"رەڭسىز سۈزگۈچ بالدىقى، 0 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation",
+            "value":"چۆرۈش بۇلۇڭى بالدىقى، مىنۇس 45 گىرادۇستىن 45 گىرادۇسقىچە ئارىلىقتا تەڭشىلىدۇ، ئىككى بارماقتا بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى بۇلۇڭ %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_100_100",
+            "value":"رەڭ تۈسى بالدىقى، ‎-100 دىن 100 گىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_value",
+            "value":"ئارا ئۈنۈم سۈزگۈچ دەرىجىسى تاللاندى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_value",
+            "value":"غورا سۈزگۈچ دەرىجىسى تاللاندى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_adjust",
+            "value":"دانچە قىممىتى تەڭشەلدى، نۆۋەتتىكى قىممەت %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_imageEdit",
+            "value":"تىك تۈزەش بۇلۇڭى بالدىقى، مىنۇس 45 گىرادۇستىن 45 گىرادۇسقىچە ئارىلىقتا تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ تەڭشەيسىز، نۆۋەتتىكى بۇلۇڭ %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_personality_style_imageEdit",
+            "value":"ئۆزلەشتۈرمە",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_disagree",
+            "value":"ياق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"border_background_imageEdit",
+            "value":"رامكا تەگلىكى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_agree",
+            "value":"كۆرسىتىش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"capture_location_imageEdit",
+            "value":"ئورۇن",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup",
+            "value":"\u200fAI ئىشلىگەنلىك بەلگىسى كۆرسىتەمسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"beauty_Custom_imageEdit",
+            "value":"ئىختىيارى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_description",
+            "value":"بۇ رەسىمدە AI ئارقىلىق بىرىكتۈرگەن مەزمۇن بار، AI ئىشلىگەنلىك بەلگىسى كۆرسىتەمسىز؟ بۇنى ئامبار تەڭشىكىدىن ئۆزگەرتەلەيسىز.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_imageEdit",
+            "value":"سۇباسما تەھرىرلەش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_watermark_imageEdit",
+            "value":"بايراملىق سۇباسما",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_text_imageEdit",
+            "value":"يېزىق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_patterned_imageEdit",
+            "value":"شەكىل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_festival_seal_edit",
+            "value":"باھار بايرىمىلىق سۇباسمىنى ساقلىغاندىن كېيىن تەھرىرلىگىلى بولمايدۇ، ساقلامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_national_seal_edit",
+            "value":"دۆلەت بايرىمىلىق سۇباسمىنى ساقلىغاندىن كېيىن تەھرىرلىگىلى بولمايدۇ، ساقلامسىز؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+          "name":"eraser_brush_thickness_selected_new",
+          "value":"ئۆچۈرگۈچ توملۇقى تەڭشىكى، %1$d دىن %2$d گىچە تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ توملۇق قىممىتىنى تەڭشەيسىز",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"brush_thickness_selected_new",
+          "value":"قەلەم توملۇقى تەڭشىكى، %1$d دىن %2$d گىچە تەڭشىلىدۇ، قوش بېسىپ تۇرۇپ ئوڭ-سولغا سىيرىپ توملۇق قىممىتىنى تەڭشەيسىز",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+            "name":"xtStyle_color_temperature",
+            "value":"تېمپېراتۇرا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_saturation",
+            "value":"تويۇنۇشچانلىق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_soft_imageEdit",
+            "value":"يورۇق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_black_imageEdit",
+            "value":"رەڭسىز",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_bright_imageEdit",
+            "value":"جانلىق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_soft_imageEdit",
+            "value":"يورۇق تەڭشەكتىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_bright_imageEdit",
+            "value":"جانلىق تەڭشەكتىن يېنىلدى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_soft_imageEdit",
+            "value":"يورۇق تەڭشەك قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_black_imageEdit",
+            "value":"رەڭسىز تەڭشەك قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_bright_imageEdit",
+            "value":"جانلىق تەڭشەك قايتىلاندى.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name": "undo_xt_style_black_imageEdit",
+            "value": "رەڭسىز تەڭشەكتىن يېنىلدى.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name":"image_editor_mirror_image_new",
+            "value":"ئەينەك",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_editor_rotate_ninety_degrees_new",
+            "value":"\u200f‎%s چۆرۈش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"free_crop_rotate_new",
+            "value":"چۆرۈش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name": "tip_aigc_removing",
+            "value": "‏AI يوقىتىۋاتىدۇ...",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_material_loading",
+            "value": "ماتېرىيال يۈكلىنىۋاتىدۇ...",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_emoj_replacing",
+            "value": "‏AI ئىپادە ئالمىشىۋاتىدۇ...",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_draw_and_select",
+            "value": "سىزىق سىزىپ ئوبيېكت تاللايسىز.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_click_and_remove_all",
+            "value": "كۇنۇپكىنى چېكىپ تاللىغان رايوننى ئۆچۈرۈشكە بولىدۇ.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_intelligent",
+            "value": "ئاڭلىق تاللاش",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_manual",
+            "value": "قولدا تاللاش",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_expand_selection",
+            "value": "تاللىغان رايوننى سۇۋاش ئارقىلىق كېڭەيتىشكە بولىدۇ.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_remove_selection",
+            "value": "تاللىغان رايوننى سۇۋاش ئارقىلىق ئۆچۈرۈشكە بولىدۇ.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_click_intelli_manual_then_edit",
+            "value": "ئاڭلىق ياكى قولدا تاللاش ھالىتىنى چېكىپ دائىرە تەھرىرلەشكە بولىدۇ.",
+            "attr": {
+                "priority": "translate"
+            }
+        }
+    ]
+}

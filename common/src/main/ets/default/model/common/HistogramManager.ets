@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,17 +13,17 @@
  * limitations under the License.
  */
 
-import { StringUtil } from '../../utils/StringUtil';
-import { Log } from '../../utils/Log';
-import { Constants } from './Constants'
-import { ImageUtil } from '../../utils/ImageUtil';
-import userFileManager from '@ohos.filemanagement.userFileManager';
-import image from '@ohos.multimedia.image';
-import { BrowserDataFactory } from '../../interface/BrowserDataFactory';
-import { TraceControllerUtils } from '../../utils/TraceControllerUtils';
-import { WorkerThreadPool } from './WorkerThreadPool';
-import { MessageEvents } from '@ohos.worker';
+import lazy { Log } from '../../utils/Log';
+import lazy { Constants } from './Constants';
+import lazy { ImageUtil } from '../../utils/ImageUtil';
+import type image from '@ohos.multimedia.image';
+import lazy { TraceControllerUtils } from '../../utils/TraceControllerUtils';
+import lazy taskpool from '@ohos.taskpool';
+import type { MediaItem } from '../browser/photo/MediaItem';
+import type { PhotoAsset } from '../../access/PhotoAccessHelperAccess';
+import lazy photoAccessHelper from '@ohos.file.photoAccessHelper';
 
+/* instrument ignore file */
 const TAG = 'HistogramManager';
 
 /**
@@ -36,6 +36,49 @@ export enum HistogramStatus {
   LOADING_FINISHED
 }
 
+// taskpool执行的任务
+function histogramStatisticTask(arrayBuffer: ArrayBuffer): ArrayBuffer {
+  'use concurrent';
+  let pixelArray: Uint8Array = new Uint8Array(arrayBuffer);
+  const CHANNEL_NUMBER: number = 3;
+  let result: Uint32Array = new Uint32Array(Constants.PIXEL_NUMBER * CHANNEL_NUMBER);
+
+  const RGBA_LENGTH: number = 4;
+  for (let i = 0, len = pixelArray.length; i < len; i += RGBA_LENGTH) {
+    result[pixelArray[i]]++;
+    result[pixelArray[i + 1] + Constants.HISTOGRAM_CONSTANT_256]++;
+    result[pixelArray[i + 2] + Constants.HISTOGRAM_CONSTANT_512]++;
+  }
+
+  // 平滑处理，SMOOTH越大，平滑度越高
+  const RGB_LENGTH = 3;
+  let smoothResult: Uint32Array = new Uint32Array(Constants.PIXEL_NUMBER * CHANNEL_NUMBER);
+  const SMOOTH = 4;
+  const HALF_SMOOTH = SMOOTH / 2;
+  for (let channelIndex = 0; channelIndex < RGB_LENGTH; channelIndex++) {
+    let channelStartIndex = channelIndex * Constants.PIXEL_NUMBER;
+    let channelEndIndex = (channelIndex + 1) * Constants.PIXEL_NUMBER;
+    let start = channelStartIndex + HALF_SMOOTH;
+    let end = channelEndIndex - HALF_SMOOTH;
+    for (let index = channelStartIndex; index < start; index++) {
+      smoothResult[index] = result[index];
+    }
+    for (let index = start; index < end; index++) {
+      let sum: number = 0;
+      // 在[index-smoothParam/2, index+smoothParam/2]范围内取均值
+      for (let offset = -HALF_SMOOTH; offset < HALF_SMOOTH; offset++) {
+        sum += result[index + offset];
+      }
+      sum /= SMOOTH;
+      smoothResult[index] = Math.ceil(sum);
+    }
+    for (let index = end; index < channelEndIndex; index++) {
+      smoothResult[index] = result[index];
+    }
+  }
+  return smoothResult.buffer as ArrayBuffer;
+}
+
 /**
  * 直方图工具类
  *
@@ -46,42 +89,35 @@ export enum HistogramStatus {
  *
  */
 export class HistogramManager {
-  private static histogramManagerInstance: HistogramManager;
-  private width: number;
-  private height: number;
-  private context: CanvasRenderingContext2D = undefined;
-  private pixelArray: Uint32Array;
-  private startTime: number;
-  private endTime: number;
+  private width: number = 0;
+  private height: number = 0;
+  private context: CanvasRenderingContext2D | null = null;
+  private pixelArray: Uint32Array = new Uint32Array(Constants.PIXEL_NUMBER * Constants.RGB_CHANNELS);
+  private startTime: number = 0;
+  private endTime: number = 0;
+  private drawFinished: boolean = false;
+  private taskArray: taskpool.Task[] = [];
+  public callback: Function = (): void => {
+  };
 
-  private constructor() {
-  }
-
-  public static getInstance(): HistogramManager {
-    if (!this.histogramManagerInstance) {
-      Log.info(TAG, 'instance create');
-      this.histogramManagerInstance = new HistogramManager();
-    }
-    return this.histogramManagerInstance;
-  }
-
-  public getContext(): CanvasRenderingContext2D {
+  public getContext(): CanvasRenderingContext2D | null {
     return this.context;
   }
 
   public setContext(ctx: CanvasRenderingContext2D): HistogramManager {
     this.context = ctx;
-    this.context.globalCompositeOperation = 'lighter'
     this.context.lineWidth = Constants.HISTOGRAM_LINE_WIDTH;
     return this;
   }
 
   public clear(): void {
     Log.info(TAG, 'clear context and pixel array');
-    this.context && this.context.clearRect(0, 0, this.width, this.height);
-    this.pixelArray = undefined;
+    this.clearTaskPool();
+    this.context?.clearRect(0, 0, this.width, this.height);
+    this.pixelArray = new Uint32Array(Constants.PIXEL_NUMBER * Constants.RGB_CHANNELS);
     this.startTime = 0;
     this.endTime = 0;
+    this.drawFinished = false;
   }
 
   public setWidth(width: number): HistogramManager {
@@ -93,6 +129,14 @@ export class HistogramManager {
     return this.width;
   }
 
+  public setDrawFinished(drawFinished: boolean): void {
+    this.drawFinished = drawFinished;
+  }
+
+  public getStatus(): boolean {
+    return this.drawFinished;
+  }
+
   public setHeight(height: number): HistogramManager {
     this.height = height;
     return this;
@@ -102,32 +146,33 @@ export class HistogramManager {
    * 图像解码，读取pixel map存入ArrayBuffer
    * @param mediaItem
    */
-  public async extractPixels(uri: string): Promise<ArrayBuffer> {
+  public async extractPixels(item: MediaItem, imageCompleteWidth?: number, imageCompleteHeight?: number):
+    Promise<ArrayBuffer | undefined> {
     TraceControllerUtils.startTrace('extractPixels');
     this.startTime = Date.now();
-    Log.info(TAG, 'extract pixels, start time: ' + this.startTime);
-    let dataImpl = BrowserDataFactory.getFeature(BrowserDataFactory.TYPE_PHOTO);
-    let fileAsset: userFileManager.FileAsset = await dataImpl.getDataByUri(uri);
+    Log.info(TAG, `extract pixels, start time: ${this.startTime}` + item?.uri);
+    let fileAsset: PhotoAsset = item.data as PhotoAsset;
     if (!fileAsset) {
       Log.error(TAG, 'get file asset failed.');
-      return null;
+      return undefined;
     }
     let size: image.Size = {
-      width: fileAsset.get(userFileManager.ImageVideoKey.WIDTH.toString()) as number,
-      height: fileAsset.get(userFileManager.ImageVideoKey.HEIGHT.toString()) as number
-    }
+      width: fileAsset.get(photoAccessHelper.PhotoKeys.WIDTH.toString()) as number,
+      height: fileAsset.get(photoAccessHelper.PhotoKeys.HEIGHT.toString()) as number,
+    };
     // 修改size到option采样尺寸
     ImageUtil.getScreenNailSize(size);
-    let pixelMap: PixelMap = await fileAsset.getThumbnail(size);
+    let pixelMap: image.PixelMap = await fileAsset.getThumbnail(size);
     if (!pixelMap) {
       Log.error(TAG, 'get pixel map failed');
-      return null;
+      return undefined;
     }
-    Log.debug(TAG, 'create pixel map success');
-    let pixelBuffer: ArrayBuffer;
-    await pixelMap.getImageInfo().then((imageInfo) => {
+    Log.info(TAG, 'create pixel map success');
+    let pixelBuffer: ArrayBuffer | undefined = undefined;
+    await pixelMap.getImageInfo().then((imageInfo: image.ImageInfo) => {
       Log.info(TAG, `image info get from pixelmap: ${JSON.stringify(imageInfo)}`);
-      pixelBuffer = new ArrayBuffer(imageInfo.size.height * imageInfo.size.width * Constants.RGBA_CHANNELS);
+      pixelBuffer =
+        new ArrayBuffer(imageInfo.size.height * imageInfo.size.width * Constants.RGBA_CHANNELS) as ArrayBuffer;
     });
     Log.debug(TAG, 'read pixels to arraybuffer start');
     await pixelMap.readPixelsToBuffer(pixelBuffer);
@@ -137,44 +182,75 @@ export class HistogramManager {
     return pixelBuffer;
   }
 
+  public setCallback(callback: Function): void {
+    this.callback = callback;
+  }
+
   /**
-   * 直方图数据准备，利用worker执行耗时操作
+   * 直方图数据准备，利用TaskPool执行耗时操作
    * @param itemId
    * @param mediaType
    */
-  async dataPrepare(uri: string): Promise<void> {
+  public async dataPrepare(item: MediaItem, imageCompleteWidth?: number, imageCompleteHeight?: number): Promise<void> {
+    if (!item) {
+      Log.error(TAG, 'data is empty!');
+      return;
+    }
     Log.info(TAG, 'photo detail, histogram start processing');
-    let pixelBuffer = await this.extractPixels(uri);
-    TraceControllerUtils.startTrace('dataPrepare');
-    let resultArray = new Uint32Array(Constants.PIXEL_NUMBER * Constants.RGB_CHANNELS);
-    let counter = WorkerThreadPool.CAPACITY;
-
-    // 定义worker主线程回调函数
-    let mainThreadCallback = function (e: MessageEvents, name: string): void {
-      Log.info(TAG, 'histogram main thread onMessage, received from ' + name);
-      let arrayBuffer: ArrayBuffer = e.data;
-      let channelArray = new Uint32Array(arrayBuffer);
-      // 三通道计算结果累加
-      resultArray = resultArray.map(function (value, index): number {
-        return value + channelArray[index];
-      })
-      Log.info(TAG, `multiworker ${name} array byteLength ${resultArray.byteLength}`);
-      counter--;
-      if (counter == Constants.NUMBER_0) {
-        TraceControllerUtils.finishTrace('dataPrepare');
-        Log.info(TAG, `histogram workers data process finished`);
-        // 重置status，防止被上次任务回调干扰
-        AppStorage.setOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.PREPARING);
-        // arrayBuffer直接传入，会丢失类型，需要转为string
-        Log.info(TAG, 'serialize the pixel array for histogram draw, pixel array length: ' + resultArray.length);
-        AppStorage.setOrCreate<string>(Constants.HISTOGRAM_ARRAY_BUFFER_KEY,
-          StringUtil.arraybufferSerialize(resultArray.buffer));
-        AppStorage.setOrCreate<number>(Constants.HISTOGRAM_READY_STATUS_KEY, HistogramStatus.READY);
-      }
+    let pixelBuffer = await this.extractPixels(item, imageCompleteWidth, imageCompleteHeight);
+    if (!pixelBuffer) {
+      return;
     }
 
-    let workerPath = '/ets/workers/HistogramWorker.ts';
-    WorkerThreadPool.getInstance().run(workerPath, pixelBuffer, Constants.RGBA_CHANNELS, mainThreadCallback);
+    // TaskPool容量，建议设置为3个 注：TaskPool扩容一般是2个为单位，默认开启1个，数量大概率是奇数 1->3->5->7
+    const TASK_POOL_CAPACITY: number = 3;
+
+    // RGBA通道数
+    const RGBA_LENGTH: number = 4;
+
+    // 以RGBA为一组，pixelBuffer所能分的组数
+    const groupCount = pixelBuffer.byteLength / RGBA_LENGTH;
+
+    // 一个task需要处理的byte个数，可能不被整除
+    const byteLengthOfTask = Math.floor(groupCount / TASK_POOL_CAPACITY) * RGBA_LENGTH;
+
+    this.clearTaskPool();
+    // task数组
+    let taskVector: Promise<Function>[] = [];
+    for (let i = 0; i < TASK_POOL_CAPACITY; i++) {
+      let dataSlice = (i === TASK_POOL_CAPACITY - 1) ? pixelBuffer.slice(i * byteLengthOfTask) : pixelBuffer.slice(
+        i * byteLengthOfTask, (i + 1) * byteLengthOfTask);
+      Log.info(TAG, `dataSlice_${i} length ${dataSlice.byteLength}`);
+      // 往task数组里放异步任务
+      let task = new taskpool.Task(histogramStatisticTask, dataSlice);
+      this.taskArray.push(task);
+      taskVector.push(taskpool.execute(task) as Promise<Function>);
+    }
+
+    // promise执行，汇总结果
+    Promise.all<Promise<Function>>(taskVector).then((values: Object[]): void | Promise<void> => {
+      for (let i = 0; i < values.length; i++) {
+        let channelArray = new Uint32Array(values[i] as ArrayBufferLike);
+        this.pixelArray = this.pixelArray.map((value: number, index: number): number => {
+          return value + channelArray[index];
+        });
+      }
+      Log.info(TAG, 'histogram taskpool data process finished');
+      this.callback();
+    }).catch((err: Error) => {
+      Log.info(TAG, `histogram taskpool data process failed ${err}`);
+    });
+  }
+
+  private clearTaskPool(): void {
+    this.taskArray.forEach((task: taskpool.Task): void => {
+      try {
+        taskpool.cancel(task);
+      } catch (e) {
+        Log.info(TAG, `histogram taskpool: cancel error code: ${e.code}, info: ${e.message}`);
+      }
+    })
+    this.taskArray.splice(0, this.taskArray.length);
   }
 
   /**
@@ -183,34 +259,25 @@ export class HistogramManager {
   public startDraw(): void {
     Log.info(TAG, 'data prepare finished, start draw histogram');
     TraceControllerUtils.startTrace('startDraw');
-    this.initializePixelArray();
     const startIndex = 0;
-    this.drawSingleHistogram(this.pixelArray.slice(startIndex, Constants.HISTOGRAM_CONSTANT_256),
-      Constants.HISTOGRAM_RED_FILL_COLOR);
-    this.drawSingleHistogram(this.pixelArray.slice(Constants.HISTOGRAM_CONSTANT_256,
-      Constants.HISTOGRAM_CONSTANT_512), Constants.HISTOGRAM_GREEN_FILL_COLOR);
-    this.drawSingleHistogram(this.pixelArray.slice(Constants.HISTOGRAM_CONSTANT_512),
-      Constants.HISTOGRAM_BLUE_FILL_COLOR);
+    if (this.context) {
+      this.context.globalCompositeOperation = 'lighter';
+    }
+    if (this.pixelArray) {
+      this.drawSingleHistogram(this.pixelArray.slice(startIndex,
+        Constants.HISTOGRAM_CONSTANT_256), Constants.HISTOGRAM_RED_FILL_COLOR);
+      this.drawSingleHistogram(this.pixelArray.slice(Constants.HISTOGRAM_CONSTANT_256,
+        Constants.HISTOGRAM_CONSTANT_512), Constants.HISTOGRAM_GREEN_FILL_COLOR);
+      this.drawSingleHistogram(this.pixelArray.slice(Constants.HISTOGRAM_CONSTANT_512),
+        Constants.HISTOGRAM_BLUE_FILL_COLOR);
+    } else {
+      Log.error(TAG, 'draw histogram error: pixel array is null.');
+    }
     this.internalStroke();
     this.endTime = Date.now();
+    this.drawFinished = true;
     TraceControllerUtils.finishTrace('startDraw');
     Log.info(TAG, 'histogram time cost: ' + (this.endTime - this.startTime) + 'ms');
-  }
-
-  /**
-   * 接收worker返回的数据
-   */
-  private initializePixelArray(): void {
-    Log.info(TAG, 'get pixel array by deserialize');
-    let serializedBuffer = AppStorage.get<string>(Constants.HISTOGRAM_ARRAY_BUFFER_KEY);
-    if (!serializedBuffer) {
-      Log.error(TAG, 'initializePixelArray: serializedBuffer is undefined');
-      return;
-    }
-    // 反序列化
-    let arrayBuffer: ArrayBuffer = StringUtil.arraybufferDeserialize(serializedBuffer);
-    this.pixelArray = new Uint32Array(arrayBuffer);
-    Log.info(TAG, 'pixel array length: ' + this.pixelArray.length);
   }
 
   /**
@@ -221,7 +288,7 @@ export class HistogramManager {
   private drawSingleHistogram(array: Uint32Array, color: string): void {
     let width = this.width;
     let height = this.height;
-    const startAxis: number = 0;
+    const START_AXIS: number = 0;
     let peakPoint: number = Math.max(...array);
     if (peakPoint === 0) {
       Log.warn(TAG, 'peakPoint is zero');
@@ -231,7 +298,7 @@ export class HistogramManager {
     let yStep = height / peakPoint;
     let region = new Path2D();
     // 移动到起始位置
-    region.moveTo(start_axis, height);
+    region.moveTo(START_AXIS, height);
     let last = 0;
     for (let pixelValue = 0; pixelValue < array.length; pixelValue++) {
       let v1 = pixelValue * xStep;
@@ -242,8 +309,12 @@ export class HistogramManager {
     }
     region.lineTo(last, height);
     region.lineTo(width, height);
-    region.lineTo(start_axis, height); // 回到原点，形成闭包
+    region.lineTo(START_AXIS, height); // 回到原点，形成闭包
     region.closePath();
+
+    if (!this.context) {
+      return;
+    }
 
     // 线条颜色
     this.context.strokeStyle = Constants.HISTOGRAM_REGION_STROKE_COLOR;
@@ -252,12 +323,16 @@ export class HistogramManager {
     // 闭包填充颜色
     this.context.fillStyle = color;
     this.context.fill(region, 'nonzero');
+    Log.info(TAG, 'draw Single Histogram done');
   }
 
   /**
    * 边框和内部描边
    */
   private internalStroke(): void {
+    if (!this.context) {
+      return;
+    }
     // 恢复叠加模式到初始值，避免叠加导致边框和线条被填充色掩盖
     this.context.globalCompositeOperation = 'source-over';
     // 绘制边框
@@ -271,7 +346,7 @@ export class HistogramManager {
     this.context.beginPath();
     this.context.strokeStyle = Constants.HISTOGRAM_INTERNAL_STROKE_COLOR;
     // stroke线条实际宽度被边缘裁切一半，线条宽度要除以2与其保持一致
-    this.context.lineWidth = Constants.HISTOGRAM_STROKE_WIDTH / Constants.NUMBER_2;
+    this.context.lineWidth = Constants.HISTOGRAM_STROKE_WIDTH / 2;
     let lineStartY: number = 0;
     this.context.moveTo(this.width / Constants.HISTOGRAM_DIVIDER_REGION_NUM, lineStartY);
     this.context.lineTo(this.width / Constants.HISTOGRAM_DIVIDER_REGION_NUM, this.height);
