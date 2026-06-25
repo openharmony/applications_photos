@@ -88,7 +88,7 @@ product/phone/src/main/
     ├── DefaultAlbumNameAbility/           # 默认相册命名等 UIExtension
     ├── galleryCleanupAbility/             # 图库清理（照片/视频清理入口与网格页等）
     ├── SettingCardDataShareAbility/       # 与设置卡片数据共享相关 Ability
-    ├── AuthExtension/                     # 认证扩展 Ability
+    ├── AuthExtension/                     # 鉴权扩展 Ability
     ├── BackupExtension/                   # 备份扩展
     ├── MusicAbility/                      # 音乐类服务桩（与媒体场景协同）
     ├── viewmodel/                         # 入口模块内的页面级 VM（如各相册页 AppBarManager）

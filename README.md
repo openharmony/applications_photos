@@ -66,7 +66,7 @@ applications_photos/
 └── oh-package.json5               # Root dependencies; submodules also have their own oh-package.json5
 ```
 
-Directories marked with **★** are the places where phone gallery feature changes are most concentrated.
+Directories marked with **★** are the locations where phone gallery feature changes are most concentrated.
 
 ### 2. Phone entry module `product/phone`
 
