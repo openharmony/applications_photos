@@ -1,0 +1,208 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef FFRT_API_CPP_QUEUE_H
+#define FFRT_API_CPP_QUEUE_H
+
+#include "ffrt/queue.h"
+#include "task.h"
+
+namespace ffrt {
+class queue_attr : public ffrt_queue_attr_t {
+public:
+    queue_attr()
+    {
+        ffrt_queue_attr_init(this);
+    }
+
+    ~queue_attr()
+    {
+        ffrt_queue_attr_destroy(this);
+    }
+
+    queue_attr(const queue_attr&) = delete;
+    queue_attr& operator=(const queue_attr&) = delete;
+    
+    inline queue_attr& qos(qos qos_)
+    {
+        ffrt_queue_attr_set_qos(this, qos_);
+        return *this;
+    }
+    
+    inline int qos() const
+    {
+        return ffrt_queue_attr_get_qos(this);
+    }
+    
+    inline queue_attr& timeout(uint64_t timeout_us)
+    {
+        ffrt_queue_attr_set_timeout(this, timeout_us);
+        return *this;
+    }
+    
+    inline uint64_t timeout() const
+    {
+        return ffrt_queue_attr_get_timeout(this);
+    }
+    
+    inline queue_attr& callback(std::function<void()>& func)
+    {
+        ffrt_queue_attr_set_callback(this, create_function_wrapper(func, ffrt_function_kind_queue));
+        return *this;
+    }
+    
+    inline ffrt_function_header_t* callback() const
+    {
+        return ffrt_queue_attr_get_callback(this);
+    }
+};
+
+class queue {
+public:
+    queue(const char* name, const queue_attr& attr = {})
+    {
+        queue_handle = ffrt_queue_create(ffrt_queue_serial, name, &attr);
+    }
+
+    ~queue()
+    {
+        ffrt_queue_destroy(queue_handle);
+    }
+
+    queue(queue const&) = delete;
+    void operator=(queue const&) = delete;
+
+    /**
+     * @brief Submits a task to this queue by fork.
+     *
+     * @param func Indicates a task executor function closure.
+     */
+    inline void submit(std::function<void()>& func)
+    {
+        ffrt_queue_submit(queue_handle, create_function_wrapper(func, ffrt_function_kind_queue), nullptr);
+    }
+
+    /**
+     * @brief Submits a task with a specified attribute to this queue  by fork.
+     *
+     * @param func Indicates a task executor function closure.
+     * @param attr Indicates a task attribute.
+     */
+    inline void submit(std::function<void()>& func, const task_attr& attr)
+    {
+        ffrt_queue_submit(queue_handle, create_function_wrapper(func, ffrt_function_kind_queue), &attr);
+    }
+
+    /**
+     * @brief Submits a task to this queue by fork.
+     *
+     * @param func Indicates a task executor function closure.
+     */
+    inline void submit(std::function<void()>&& func)
+    {
+        ffrt_queue_submit(queue_handle, create_function_wrapper(std::move(func), ffrt_function_kind_queue), nullptr);
+    }
+
+    /**
+     * @brief Submits a task with a specified attribute to this queue by fork.
+     *
+     * @param func Indicates a task executor function closure.
+     * @param attr Indicates a task attribute.
+     */
+    inline void submit(std::function<void()>&& func, const task_attr& attr)
+    {
+        ffrt_queue_submit(queue_handle, create_function_wrapper(std::move(func), ffrt_function_kind_queue), &attr);
+    }
+
+    /**
+     * @brief Submits a task to this queue, and obtains a task handle by fork.
+     *
+     * @param func Indicates a task executor function closure.
+     * @return Returns a non-null task handle if the task is submitted;
+               returns a null pointer otherwise.
+     */
+    inline task_handle submit_h(std::function<void()>& func)
+    {
+        return ffrt_queue_submit_h(queue_handle, create_function_wrapper(func, ffrt_function_kind_queue), nullptr);
+    }
+
+    /**
+     * @brief Submits a task with a specified attribute to this queue, and obtains a task handle by fork.
+     *
+     * @param func Indicates a task executor function closure.
+     * @param attr Indicates a task attribute.
+     * @return Returns a non-null task handle if the task is submitted;
+               returns a null pointer otherwise.
+     */
+    inline task_handle submit_h(std::function<void()>& func, const task_attr& attr)
+    {
+        return ffrt_queue_submit_h(queue_handle, create_function_wrapper(func, ffrt_function_kind_queue), &attr);
+    }
+
+    /**
+     * @brief Submits a task to this queue, and obtains a task handle by fork.
+     *
+     * @param func Indicates a task executor function closure.
+     * @return Returns a non-null task handle if the task is submitted;
+               returns a null pointer otherwise.
+     */
+    inline task_handle submit_h(std::function<void()>&& func)
+    {
+        return ffrt_queue_submit_h(
+            queue_handle, create_function_wrapper(std::move(func), ffrt_function_kind_queue), nullptr);
+    }
+
+    /**
+     * @brief Submits a task with a specified attribute to this queue, and obtains a task handle by fork.
+     *
+     * @param func Indicates a task executor function closure.
+     * @param attr Indicates a task attribute.
+     * @return Returns a non-null task handle if the task is submitted;
+               returns a null pointer otherwise.
+     */
+    inline task_handle submit_h(std::function<void()>&& func, const task_attr& attr)
+    {
+        return ffrt_queue_submit_h(
+            queue_handle, create_function_wrapper(std::move(func), ffrt_function_kind_queue), &attr);
+    }
+
+    /**
+     * @brief Cancels a task by fork.
+     *
+     * @param handle Indicates a task handle.
+     * @return Returns <b>0</b> if the task is canceled;
+               returns <b>-1</b> otherwise.
+     */
+    inline int cancel(task_handle& handle)
+    {
+        return ffrt_queue_cancel(handle);
+    }
+
+    /**
+     * @brief Waits until a task is complete by fork.
+     *
+     * @param handle Indicates a task handle.
+     */
+    inline void wait(task_handle& handle)
+    {
+        return ffrt_queue_wait(handle);
+    }
+
+private:
+    ffrt_queue_t queue_handle = nullptr;
+};
+} // namespace ffrt
+
+#endif // FFRT_API_CPP_QUEUE_H

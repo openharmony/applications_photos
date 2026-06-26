@@ -1,0 +1,10 @@
+{
+  "name": "@ohos/dataprovider",
+  "description": "a npm package which contains formAbility feature",
+  "main": "index.ts",
+  "version": "1.0.0",
+  "dependencies": {
+    "@ohos/tools": "file:../../tools",
+    "@ohos/common": "file:../../common",
+  }
+}

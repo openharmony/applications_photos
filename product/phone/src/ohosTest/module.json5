@@ -2,7 +2,6 @@
   "module": {
     "name": "phone_photos_test",
     "type": "feature",
-    "srcEntry": "./ets/TestAbility/TestAbility.ts",
     "description": "$string:entry_test_desc",
     "mainElement": "TestAbility",
     "deviceTypes": [
@@ -14,11 +13,13 @@
     "abilities": [
       {
         "name": "TestAbility",
-        "srcEntry": "./ets/TestAbility/TestAbility.ts",
+        "startWindowIcon": "$media:startWindow_Bg",
+        "startWindowBackground": "$color:white",
+        "srcEntry": "./ets/TestAbility/TestAbility.ets",
         "description": "$string:TestAbility_desc",
-        "icon": "$media:icon",
+        "icon": "$media:ohos_gallery_op",
         "label": "$string:TestAbility_label",
-        "visible": true,
+        "exported": true,
         "skills": [
           {
             "actions": [
@@ -29,6 +30,12 @@
             ]
           }
         ]
+      }
+    ],
+    "dependencies": [
+      {
+        "bundleName": "com.ohos.security.pickersheet",
+        "moduleName": "pickersheetlibrary"
       }
     ]
   }

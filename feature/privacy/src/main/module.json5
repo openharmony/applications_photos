@@ -1,0 +1,16 @@
+{
+  "module": {
+    "name": "security_and_privacy",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "metadata": [
+      {
+        "name": "license_file_path",
+        "value": "/system/etc/noticeFile/PhotosHm_OpenSource.html"
+      }
+    ]
+  }
+}

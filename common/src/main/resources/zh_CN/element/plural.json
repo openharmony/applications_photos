@@ -1,121 +1,1154 @@
 {
-  "plural":[
-    {
-      "name":"count_details_selected",
-      "value":[
+    "plural":[
         {
-          "quantity":"other",
-          "value":"已选择 %d 项"
-        }
-      ]
-    },
-    {
-      "name":"recycle_days",
-      "value":[
+            "name":"count_details_selected",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"已选择 %d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"%1$d 天"
-        }
-      ]
-    },
-    {
-      "name":"show_photo_num",
-      "value":[
+            "name":"recycle_days",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d 天",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"%d 张照片"
-        }
-      ]
-    },
-    {
-      "name":"action_recover_count",
-      "value":[
+            "name":"items_in_single_album_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"删除后，相册中的 %1$d 个文件将从本设备、云空间及所有同步设备中删除，可在“最近删除”中保留 %2$d 天。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"恢复 %d 项"
-        }
-      ]
-    },
-    {
-      "name":"action_delete_count",
-      "value":[
+            "name":"items_in_albums_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"删除后，相册中的 %1$d 个文件将从本设备、云空间及所有同步设备中删除，可在“最近删除”中保留 %2$d 天。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"删除 %d 项"
-        }
-      ]
-    },
-    {
-      "name":"move_to_album_count",
-      "value":[
+            "name":"show_photo_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d 张照片",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"移动 %d 项到相册"
-        }
-      ]
-    },
-    {
-      "name":"copy_to_album_count",
-      "value":[
+            "name":"action_recover_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"恢复 %d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"复制 %d 项到相册"
-        }
-      ]
-    },
-    {
-      "name":"show_video_num",
-      "value":[
+            "name":"action_delete_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"删除 %d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"%d 个视频"
-        }
-      ]
-    },
-    {
-      "name":"show_one_video_with_photo_num",
-      "value":[
+            "name":"action_share_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"分享 %d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"%d 张照片，1 个视频"
-        }
-      ]
-    },
-    {
-      "name":"show_multi_video_with_photo_num",
-      "value":[
+            "name":"print_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"打印 %d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"%d 张照片，%d 个视频"
-        }
-      ]
-    },
-    {
-      "name":"recycleAlbum_delete_message",
-      "value":[
+            "name":"compare_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"对比 %d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"所选设备上的文件将被永久删除，无法恢复。是否删除？"
-        }
-      ]
-    },
-    {
-      "name":"recycleAlbum_delete_multiple_images_message",
-      "value":[
+            "name":"copy_to_album_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"复制 %d 项到相册",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"所选 %d 个文件将被永久删除，无法恢复。是否删除？"
-        }
-      ]
-    },
-    {
-      "name":"first_delete_message",
-      "value":[
+            "name":"show_video_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d 个视频",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
         {
-          "quantity":"other",
-          "value":"您可在 %d 天内从最近删除中恢复或彻底删除"
+            "name":"copy_to_pasteboard_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"复制 %d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycleAlbum_delete_message",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"所选设备上的文件将被永久删除，无法恢复。是否删除？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycleAlbum_delete_multiple_images_message",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"所选 %d 个文件将被永久删除，无法恢复。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"first_delete_message",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"您可在 %d 天内从最近删除中恢复或彻底删除",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"add_to_album_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"添加 %d 项到相册",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"low_power_pause_upload_files",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"电量低于 %1$s，已暂停上传 %2$d 个项目",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_no_network",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"未连接网络，%d 个项目上传已暂停",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"message_uploading",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"正在上传 %d 个项目",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_no_wlan",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"未连接 WLAN，%d 个项目上传已暂停",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_error",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d 个项目上传已暂停",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"timeline_message_type_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d 个视频",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"timeline_message_type_image",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d 张照片",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_delete_message",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"是否允许 %1$s 删除 %2$d 个文件？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"favor_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"收藏 %d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"unfavor_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"取消收藏 %d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"hide_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"隐藏 %d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cancel_hide_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"取消隐藏 %d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"collage_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"使用 %d 项拼图",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"count_details_external_selected",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"已选择 %1$d/%2$d 项",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"new_hide_files_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"是否隐藏 %d 个文件？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"delete_hide_albums_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"是否删除 %d 个相册？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"days_left",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"还剩 %d 天",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_enhance_addimage_quota_used_up",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"当前限额已用完，请 %d 小时后再试",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_enhancing_status_processing",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"照片正在云增强，预计 %1$d 秒后完成",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_files_recycle_delete_kept_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"删除后，此 %1$d 个文件将从本设备、云空间及所有同步设备中删除，可在“最近删除”中保留 %2$d 天。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_files_dialog_delete_permanently_not_recover_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"所选 %d 个文件将从本设备、云空间及所有同步设备中永久删除，无法恢复。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_files_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"是否删除 %d 个文件？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_files_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"是否移除 %d 个文件？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"select_burst_photos",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"选择照片 %1$d/%2$d",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_from_album_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"移出后，将不再显示在此相册中。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_selected_portraits",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"是否移出 %d 个人像？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"data_inherit_title",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$s应用需访问 %2$s 个项目",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"拖入的 %1$d 个图片已保存至图库",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"其余 %1$d 个内容不支持保存至图库",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"拖入的 %1$d 个视频已保存至图库",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"其余 %1$d 个内容不支持保存至图库",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d 个图片",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d 个视频",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_three",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"其余 %1$d 个内容不支持保存至图库",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"拖入的 %1$d 个图片已保存至“图片”相册",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d 个视频已保存至“视频”相册",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"拖入的 %1$d 个图片已保存至“图片”相册",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d 个视频已保存至“视频”相册",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_three",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"其余 %1$d 个内容不支持保存至图库",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"拖入的 %1$d 个图片已保存至“图片”相册",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"其余 %1$d 个内容不支持保存至图库",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"拖入的 %1$d 个视频已保存至“视频”相册",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"其余 %1$d 个内容不支持保存至图库",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d 个图片",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d 个视频",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_three",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"其余 %1$d 个内容不支持保存至图库",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"拖入的 %1$d 个图片已保存至当前选中相册",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"其余 %1$d 个内容不支持保存至图库",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"拖入的 %1$d 个视频已保存至当前选中相册",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"其余 %1$d 个内容不支持保存至图库",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"seconds",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d 秒",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"time_line_message_accumulation_sync",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"累计已同步 %d 个项目",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"time_line_message_upload",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d 个本地项目正在上传",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"gallery_cloud_space_full_item",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"云存储空间已满，已暂停同步 %d 个项目",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"album_cloud_data_image",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d 张照片",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"album_cloud_data_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%d 个视频",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_videos_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"是否删除 %d 个视频？"
+                },
+                {
+                    "quantity":"other",
+                    "value":"是否删除 %d 个视频？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_videos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"所选 %d 个视频将从本设备、云空间及所有同步设备中永久删除，无法恢复。"
+                },
+                {
+                    "quantity":"other",
+                    "value":"所选 %d 个视频将从本设备、云空间及所有同步设备中永久删除，无法恢复。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"local_videos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"所选 %d 个视频将被永久删除，无法恢复。"
+                },
+                {
+                    "quantity":"other",
+                    "value":"所选 %d 个视频将被永久删除，无法恢复。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"slide_show_setting_interval",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d 秒",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"recycle_photos_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"是否删除 %d 个图片？"
+                },
+                {
+                    "quantity":"other",
+                    "value":"是否删除 %d 个图片？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_photos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"所选 %d 个图片将从本设备、云空间及所有同步设备中永久删除，无法恢复。"
+                },
+                {
+                    "quantity":"other",
+                    "value":"所选 %d 个图片将从本设备、云空间及所有同步设备中永久删除，无法恢复。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"local_photos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"所选 %d 个图片将被永久删除，无法恢复。"
+                },
+                {
+                    "quantity":"other",
+                    "value":"所选 %d 个图片将被永久删除，无法恢复。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"single_photo_album_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"删除后，相册中的 %1$d 个文件可在“最近删除”中保留 %2$d 天。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"photo_albums_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"删除后，相册中的 %1$d 个文件可在“最近删除”中保留 %2$d 天。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"broadcast_photo_num",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d 张照片",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"two",
+                    "value":"%d 张照片",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d 张照片",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d 张照片",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"zero",
+                    "value":"%d 张照片",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d 张照片",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"broadcast_video_num",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%d 个视频",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"two",
+                    "value":"%d 个视频",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%d 个视频",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%d 个视频",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"zero",
+                    "value":"%d 个视频",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%d 个视频",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_images_can_download_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"所选 %d 个图片将从本设备中删除，已同步至云空间的图片可从云空间下载。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_videos_can_download_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"所选 %d 个视频将从本设备中删除，已同步至云空间的视频可从云空间下载。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_files_can_download_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"所选 %d 个文件将从本设备中删除，已同步至云空间的文件可从云空间下载。",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"remove_selected_group_albums",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"是否删除 %d 个合影相册？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }

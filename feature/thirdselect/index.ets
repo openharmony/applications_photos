@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,20 +13,16 @@
  * limitations under the License.
  */
 
-export { CameraGridItemComponent } from './src/main/ets/default/view/CameraGridItemComponent';
-
-export { ThirdSelectedPageActionBar } from './src/main/ets/default/view/ThirdSelectedPageActionBar';
-
-export { ThirdAlbumGridItem } from './src/main/ets/default/view/ThirdAlbumGridItem';
-
-export { ThirdSelectAlbumPageBase } from './src/main/ets/default/view/ThirdSelectAlbumPageBase';
-
-export { ThirdSelectPhotoGridBase } from './src/main/ets/default/view/ThirdSelectPhotoGridBase';
-
-export { ThirdSelectPhotoBrowserBase } from './src/main/ets/default/view/ThirdSelectPhotoBrowserBase';
-
-export { ThirdSelectedPanel } from './src/main/ets/default/view/ThirdSelectedPanel';
-
-export { SmartPickerUtils } from './src/main/ets/default/utils/SmartPickerUtils';
-
-export { SmartPickerManager } from './src/main/ets/default/common/SmartPickerManager';
+/**
+ * 此文件已管控,禁止任何合入
+ * 责任田: 性能
+ * 原因: 在此export 引用对象, 将允许开发人员使用非精准导入, 影响冷启动
+ *
+ * 另外, 在视图文件中import大so文件的时候, 推荐使用懒加载而不是在开头import:
+ * (): void {
+ *   import('@ohos/common/src/main/ets/default/xxx').then((ns) => {
+ *   ns.xxx(getContext(), records);
+ * }
+ *
+ * 已有代码将被陆续删除, 所有非管控合入将被回退并追溯
+ */

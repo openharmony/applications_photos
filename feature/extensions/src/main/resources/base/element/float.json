@@ -1,0 +1,52 @@
+{
+  "float":[
+    {
+      "name": "offset_6",
+      "value": "6vp"
+    },
+    {
+      "name": "padding_8",
+      "value": "8vp"
+    },
+    {
+      "name": "padding_12",
+      "value": "12vp"
+    },
+    {
+      "name": "padding_16",
+      "value": "16vp"
+    },
+    {
+      "name": "padding_24",
+      "value": "24vp"
+    },
+    {
+      "name": "margin_8",
+      "value": "8vp"
+    },
+    {
+      "name": "radius_12",
+      "value": "12vp"
+    },
+    {
+      "name": "radius_24",
+      "value": "24vp"
+    },
+    {
+      "name": "save_dialog_ico_height",
+      "value": "180vp"
+    },
+    {
+      "name": "save_dialog_ico_height_multi",
+      "value": "172vp"
+    },
+    {
+      "name": "save_image_border_width",
+      "value": "0.8vp"
+    },
+    {
+      "name": "save_dialog_icon_inside",
+      "value": "20vp"
+    }
+  ]
+}

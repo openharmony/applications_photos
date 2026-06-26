@@ -1,0 +1,40 @@
+{
+    "plural":[
+        {
+            "name":"third_save_picture",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"允许“%1$s”保存 %2$d 张图片？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"允许“%1$s”保存 %2$d 个视频？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"third_save_picture_and_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"允许“%1$s”保存 %2$d 个文件？",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

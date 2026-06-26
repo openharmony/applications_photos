@@ -1,0 +1,67 @@
+{
+    "string":[
+        {
+            "name":"ai_retouch_terms_and_protocol_new",
+            "value":"This service requires an %1$s connection and needs to read and upload images to provide AI-based image editing features. By clicking %2$s, you agree to the %3$s. For more details about how your personal information is processed, refer to the %4$s. This service is provided free of charge for a limited time only.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_ai_creation_description",
+            "value":"This service requires an %1$s connection, and needs to read videos and read and upload/transfer images. This is to provide AI image and video generation features. By tapping Agree, you agree to the above terms. For details about how your personal information is processed, refer to the %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_unction_requires",
+            "value":"This service requires an %1$s connection and needs to read and upload/transfer images to provide image enhancement. By clicking Agree, you agree to these terms. For details about how your personal information is processed, refer to the %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_description",
+            "value":"This app requires an %1$s connection and needs to read and upload/transfer images to provide AI Wallpaper features. We collect only personal information relevant to the features you use. For more information, refer to the %2$s. Please read the preceding statement carefully. By clicking Agree, you acknowledge and agree to these terms.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information_content",
+            "value":"This app requires an %1$s connection and the Files permission. It also needs to access device and network information. We collect only personal information relevant to the features you use. By clicking Agree, you agree to these terms. For more details, refer to the %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch_terms_and_protocol",
+            "value":"This service requires %1$s access, and needs to read and upload images to provide Celia Retouch related features. By clicking %2$s, you agree to the %3$s. For more details about how your personal information is processed, refer to the %4$s. This service is provided free of charge for a limited time only.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_description_1",
+            "value":"This service requires an %1$s connection and needs to read and upload/transfer images to provide wallpaper-related features. By clicking Agree, you agree to these terms and the %2$s. For more details about how your personal information is processed, refer to the %3$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_experience_the_hide_album_function",
+            "value":"Click here to view hidden items.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dynamic_photos_can_switched",
+            "value":"Multiple playback effects are available. Click here to switch between them.",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

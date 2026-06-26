@@ -1,0 +1,70 @@
+{
+    "plural":[
+        {
+            "name":"rotate_broadcast_imageEdit",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"%1$d градус",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"other",
+                    "value":"%1$d градуса",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"%1$d градуса",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"%1$d градусов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"rotate_angle_imageEdit",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"Кнопка поворота, текущий угол текстового поля %1$d градуса",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"one",
+                    "value":"Кнопка поворота, текущий угол текстового поля %1$d градус",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"few",
+                    "value":"Кнопка поворота, текущий угол текстового поля %1$d градуса",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                },
+                {
+                    "quantity":"many",
+                    "value":"Кнопка поворота, текущий угол текстового поля %1$d градусов",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

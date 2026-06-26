@@ -1,0 +1,6451 @@
+{
+    "string":[
+        {
+            "name":"hide_single_file_tips",
+            "value":"Cacher cet élément ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"up_to_limit_tips",
+            "value":"Nombre maximum d'éléments pouvant être sélectionnés atteint.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pull_down_back_tips_for_sub_display",
+            "value":"Vous pouvez quitter l'aperçu de la photo en faisant glisser le doigt vers le bas",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_updating",
+            "value":"Transfert en cours (%1$s/%2$s).",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_image",
+            "value":"Cloud",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"local_image",
+            "value":"Appareil",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all",
+            "value":"Tout",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"selected_file_already_deleted",
+            "value":"Les éléments sélectionnés ont déjà été supprimés de cet appareil.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_file",
+            "value":"Filtrer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"AI_cloud_enhance",
+            "value":"Amélioration via cloud IA",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"download_failed_single",
+            "value":"L'enregistrement du fichier a échoué.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_text",
+            "value":"Original",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_daylight",
+            "value":"Lumière jour",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"phone_rotate",
+            "value":"Faire pivoter",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"keep_original_storage",
+            "value":"Conserver les originaux sur l'appareil",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"vertical_collage",
+            "value":"Collage à la verticale, long",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_select_image_text",
+            "value":"Sélectionner une photo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"play",
+            "value":"Lire",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no",
+            "value":"Annuler",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_picture",
+            "value":"Image dynamique",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_creation_time",
+            "value":"Trier par date/heure de création",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"enable_sync_title_31",
+            "value":"Activation de la synchronisation de Galerie",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_size",
+            "value":"Taille de fichier",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort",
+            "value":"Trier",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"deselected",
+            "value":"Non sélectionné",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"setting_up_the_network",
+            "value":"Paramètres réseau",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_field",
+            "value":"Centre",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_learn_more",
+            "value":"En savoir plus",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_limited",
+            "value":"Ce service est gratuit pendant une durée limitée uniquement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_and_video_desc_tv",
+            "value":"Ceci est utilisé pour accéder aux photos et vidéos et les stocker.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_camera",
+            "value":"Appareil photo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_album_tips",
+            "value":"Supprimer cet album ? (Photos : %1$d ; vidéos : %2$d)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_hdc_dialog_content",
+            "value":"Vos photos/vidéos ne seront plus synchronisées avec vos autres appareils. Désactiver ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_fluorescent",
+            "value":"Fluorescent",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_title_text",
+            "value":"Galerie",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"landscape_collage",
+            "value":"Collage en orientation paysage",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pause_none_battery_low",
+            "value":"Mise à jour suspendue pour économiser la batterie.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_size",
+            "value":"Trier par taille de fichier",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"paste_from_pasteboard",
+            "value":"Coller",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"help_you_remind_memory_and_classify",
+            "value":"Revivre les meilleurs moments.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_prompt1_tv",
+            "value":"Cette application nécessite une %1$s connexion et une %2$s autorisation pour fournir des fonctionnalités telles que la navigation dans les images et les vidéos.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_new",
+            "value":"Conditions d'utilisation des capacités IA générative de Retouche IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_hide",
+            "value":"Masquer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"yes",
+            "value":"OK",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_sync_cloud",
+            "value":"Synchronisation des albums avec Cloud",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_download",
+            "value":"Téléchargement en cours (%1$s/%2$s).",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_enhance_complete_tips",
+            "value":"La photo a été améliorée via cloud IA.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance_des_1",
+            "value":"Certaines des photos prises répondent aux critères d'amélioration automatique via cloud.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_new_album",
+            "value":"Nouvel album",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_back_to_default",
+            "value":"Réinitialiser",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all_photos",
+            "value":"Toutes les photos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_other",
+            "value":"Manuelle",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_failed",
+            "value":"Le téléchargement a échoué",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slide_show_setting",
+            "value":"Intervalle de diaporama",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_creation_time",
+            "value":"Date/heure de création",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_busy",
+            "value":"Le serveur est occupé. Veuillez réessayer ultérieurement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_compare",
+            "value":"Comparer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_videos",
+            "value":"Toutes les vidéos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_cloudy",
+            "value":"Nuageux",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"stop_for_sync_cloud",
+            "value":"Niveau de la batterie inférieur à %s. Synchronisation mise en pause.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"checkbox_deselected",
+            "value":"Non sélectionné, case à cocher, toucher deux fois avec un doigt pour sélectionner",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_time_update",
+            "value":"Actualisé le %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_show_isShowAlbumName",
+            "value":"Affichage du nom de l'album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"privacy_statement",
+            "value":"Déclaration relative à la vie privée Galerie",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_stop_confirm",
+            "value":"La fonctionnalité Retouche IA ne sera plus disponible. Désactiver malgré tout ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_stop_ai_creation_service",
+            "value":"La création de contenu par IA ne sera plus disponible. Les autres fonctionnalités ne seront pas affectées. Désactiver maintenant ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"on_network",
+            "value":"Internet",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_albums_tips",
+            "value":"Supprimer %1$d albums ? (Photos : %2$d ; vidéos : %3$d)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"super_macro",
+            "value":"Super macro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_cloud_enhance_service_note",
+            "value":"Amélioration via cloud IA ne sera plus disponible. Désactiver malgré tout ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title_select_album",
+            "value":"Sélectionner album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_settings",
+            "value":"Paramètres",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_prompt_message",
+            "value":"Les photos et vidéos seront définitivement supprimées à l'issue du nombre de jours affiché (jusqu'à %d jours).",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_extra_1",
+            "value":"Améliorer automatiquement les photos récentes avec l'aide de l'IA. Il suffit de toucher l'icône de la baguette magique au-dessus des images prises en charge. Cette fonctionnalité est gratuite pour une durée limitée.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_switcher_square",
+            "value":"Afficher les vignettes sous forme de carrés",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_switcher_rectangle",
+            "value":"Afficher les vignettes dans leur format d'image d'origine",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_rename",
+            "value":"Renommer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"search",
+            "value":"Rechercher",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_privacy_protocol",
+            "value":"Déclaration relative à la vie privée création de contenu IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_name",
+            "value":"Nom de fichier",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_image_symbol_enhanced",
+            "value":"Après",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_spot",
+            "value":"Spot",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_action_show_date",
+            "value":"Afficher la date",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cast_mirror_title",
+            "value":"Projection en cours",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_network",
+            "value":"Pas de connexion Internet disponible.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_name",
+            "value":"Trier par nom de fichier",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_shoot_time",
+            "value":"Date/heure de prise",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_selected",
+            "value":"Tout sélectionné",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_portrait",
+            "value":"Déplacer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Switch_on",
+            "value":"Activer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_action_hide_date",
+            "value":"Cacher la date",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_watermark_after_enhance",
+            "value":"Ajout du filigrane",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"target_has_same_name",
+            "value":"Un fichier nommé %1$s existe déjà. Que faire ?\n",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_petalclip_video",
+            "value":"Petal Clip",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_view",
+            "value":"Paysages nocturnes",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_collage",
+            "value":"Collage",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_network_error",
+            "value":"Une erreur réseau est survenue. Veuillez vérifier, puis réessayez.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_storage_dialog_content",
+            "value":"Galerie peut libérer %2$s de l'espace de stockage sur l'appareil en supprimant les versions haute résolution des photos et vidéos prises il y a plus de %1$s jours. Les originaux sont conservés sur le cloud et peuvent être téléchargés à tout moment.\n\nGalerie optimisera automatiquement le stockage de l'appareil de cette manière lorsqu'il sera presque plein.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_video_dialog_show_petalClip_not_install",
+            "value":"L'application Petal Clip est requise pour pouvoir utiliser cette fonctionnalité. Télécharger ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"favorited",
+            "value":"Ajouté aux favoris",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance",
+            "value":"Amélioration automatique via cloud",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add",
+            "value":"Ajouter",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_temperature_high",
+            "value":"La température de l'appareil est trop élevée. Veuillez réessayer ultérieurement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Picker_Unselect",
+            "value":"Désélectionner",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_hicloud_gallery",
+            "value":"Synchroniser photos et vidéos avec le cloud.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"more_text",
+            "value":"Plus",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_all_files_tips",
+            "value":"Retirer tous les éléments ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_add",
+            "value":"Ajouter un nom",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"camera_flash_on",
+            "value":"Flash, activé",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_shoot_time",
+            "value":"Trier par date/heure de prise",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_video_dialog_to_download_PetalClip",
+            "value":"Télécharger",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pause_upload_for_low_battery",
+            "value":"Niveau de batterie inférieur à %s. Les transferts ont été mis en pause.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_off",
+            "value":"Flash, désactivé",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_sync_content_31",
+            "value":"Vos photos sont vos souvenirs. Les synchroniser avec Cloud permet un stockage sûr et un accès facile depuis n'importe lequel de vos appareils. Ceci aide également à libérer de l'espace de stockage local.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_and_video_desc",
+            "value":"Ceci permet d'accéder, de modifier et de stocker photos et vidéos.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_remove",
+            "value":"Supprimer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_items_to_add",
+            "value":"Veuillez sélectionner les éléments à ajouter.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_single_video_tips",
+            "value":"Masquer cette vidéo ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_enabled_now",
+            "value":"Activer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rainbow",
+            "value":"Arcs-en-ciel",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_empty_album_tips",
+            "value":"Supprimer cet album ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_all_videos_tips",
+            "value":"Supprimer toutes les vidéos ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_motion_picture",
+            "value":"Image dynamique",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_subTitle_text",
+            "value":"Sélection de la photo ou de l'album que vous souhaitez voir",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_edit",
+            "value":"Modifier",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_remove",
+            "value":"Supprimer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_auto",
+            "value":"Automatique",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_toast_1",
+            "value":"Certaines des photos prises répondent aux critères d'amélioration automatique via cloud. Vous pouvez activer cette fonctionnalité dans les Paramètres.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_download_error",
+            "value":"Téléchargement en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_default_content",
+            "value":"Vos photos sont vos souvenirs. Les transférer vers Cloud permet un stockage sûr et un accès facile depuis n'importe lequel de vos appareils. Il est également recommandé de mettre à niveau votre package de stockage cloud pour obtenir plus d'espace.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pictures_and_videos",
+            "value":"Photos et vidéos",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_1",
+            "value":"Améliorer automatiquement les photos récentes avec l'aide de l'IA. Il suffit de toucher l'icône de la baguette magique au-dessus des images prises en charge. Cette fonctionnalité est gratuite pour une durée limitée.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_center_weighted",
+            "value":"Matrice",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_image_symbol_initial",
+            "value":"Avant",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_slide_show",
+            "value":"Diaporama",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_enhance_wait_tips",
+            "value":"Amélioration de la photo sur le cloud en cours. Veuillez patienter.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_highlight_tips",
+            "value":"Cette photo n'apparaîtra plus dans ce temps fort.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from_this_highlight",
+            "value":"Retirer le contenu sélectionné ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_all_from_highlight_tips",
+            "value":"Les éléments sélectionnés ne seront plus affichés dans ce temps fort.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_video_from_highlight_tips",
+            "value":"Cette vidéo n'apparaîtra plus dans ce temps fort.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_out_of_highlight",
+            "value":"Retirer des temps forts",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_already_use",
+            "value":"Ce nom est déjà utilisé.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"the_oriental_pearl_tower",
+            "value":"Perle de l'Orient",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_deselect_all",
+            "value":"Désélectionner tout",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_video_recycle_delete_kept_tips",
+            "value":"Cette vidéo sera supprimée de cet appareil, du cloud et de tous les appareils synchronisés. Elle sera conservée dans \"Récemment supprimés\" pendant %1$d jours.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_splash_content_online",
+            "value":"%s Vos photos et vidéos peuvent être directement consultées et partagées depuis le cloud.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper",
+            "value":"Fond d'écran IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices_more_sub",
+            "value":"Vous pouvez accéder à votre appareil de stockage externe en allant dans Fichiers > Parcourir.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_current_highlight",
+            "value":"Retirer des temps forts",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cover_edit_title",
+            "value":"Modifier la couverture",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"means_of_transportation",
+            "value":"Véhicules",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_near_full_card_content",
+            "value":"Les nouvelles photos et vidéos ne seront plus transférées vers le Cloud une fois que votre espace de stockage sera plein.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"distributed_album_disconnected",
+            "value":"Appareil déconnecté.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"skip_current_file",
+            "value":"Ignorer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"duplicate_name_merge_portrait_photo_title",
+            "value":"Fusionner les personnes portant le même nom ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_optimize_device_storage_detail",
+            "value":"Les photos et vidéos dans leurs formats originaux sur votre appareil ne seront pas remplacées par des versions réduites.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"close_hdc_dialog_title",
+            "value":"Désactiver la synchronisation cloud",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_router",
+            "value":"Optimiser",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"blossom",
+            "value":"Fleurs",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tab_highlights",
+            "value":"Temps forts",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycleAlbum_delete_message",
+            "value":"Cet élément sera définitivement supprimé.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"intelligent_classification_description_tips",
+            "value":"Les photos et vidéos sont catégorisées dans des albums distincts pour faciliter la consultation. Vous pouvez également parcourir vos photos par personnes, lieux et sources.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_as_cover",
+            "value":"Définir en tant que couverture",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_prompt_message",
+            "value":"Les photos et vidéos seront définitivement supprimées à l'issue du nombre de jours affiché (jusqu'à %d jours).",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_cancel_message",
+            "value":"%1$s supprimés. Arrêter de supprimer les fichiers restants ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editBar_text",
+            "value":"Modifier",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"please_enter_the_password",
+            "value":"Veuillez saisir le code",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_photo_and_video",
+            "value":"%s a modifié des images/vidéos dans Galerie.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"print_or_generate_pdf",
+            "value":"Imprimer ou générer un PDF",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_videos_to_timeline_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"file_size_location",
+            "value":"Taille : %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_photo",
+            "value":"Télécharger",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_photo",
+            "value":"%s a modifié des images dans Galerie.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"business_card",
+            "value":"Cartes de visite",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_portrait_tips",
+            "value":"Vous pouvez l'ajouter à nouveau à tout moment à partir de l'album Personnes.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"more_portrait",
+            "value":"Plus de personnes",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Remove_From_Portrait",
+            "value":"Retirer de l'album Personnes",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_description",
+            "value":"Personnalisation de votre appareil avec des fonds d'écran générés par l'IA.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy",
+            "value":"Copier",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_content",
+            "value":"%s non transférées vers le Cloud.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_timeline",
+            "value":"Ici, vous trouverez tous les paysages et les sons de votre vie organisés chronologiquement. Faire simplement défiler permet ainsi de vous remémorer un évènement.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tab_albums",
+            "value":"Albums",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Statue_of_liberty",
+            "value":"Statue de la Liberté",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"double_click_to_restore_the_original_size",
+            "value":"Veuillez toucher deux fois pour restaurer la taille d'origine.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_portrait_photo",
+            "value":"Veuillez sélectionner les photos de vous-même.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_description_new",
+            "value":"Ce service transfère les images sélectionnées vers le cloud pour procéder à des modifications via l'IA.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_ai_creation_subtitle",
+            "value":"Ce service applique des algorithmes d'IA aux images et aux vidéos. Il peut être utilisé pour retoucher des photos et générer automatiquement des vidéos, entre autres applications.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Tab_change_cover",
+            "value":"Sélectionner l'image de couverture",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"displayed_agreeing_map",
+            "value":"Veuillez accepter les conditions d'utilisation pour afficher la carte.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hidden_album",
+            "value":"Éléments cachés",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_setting",
+            "value":"Paramètres",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_content",
+            "value":"Vous pouvez arrêter de recevoir ce type de rappel en désactivant Galerie Cloud.\n\nSi vous souhaitez supprimer vos photos et vidéos du Cloud après avoir désactivé Galerie Cloud, vous pouvez le faire en accédant à %s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_not_network",
+            "value":"Aucune connexion WLAN. %1$s non synchronisées. %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_compare_after_cloud_enhancement",
+            "value":"Toucher ici pour voir la différence avant et après amélioration.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_this_portrait",
+            "value":"Retirer cette personne ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"front_night_shot_album",
+            "value":"Cliché nocturne",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_source",
+            "value":"Parcourir par application",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"new_recycle_single_album_tips",
+            "value":"Cela ne supprimera pas les photos et vidéos dans l'album.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_files_recycle_delete_kept_tips",
+            "value":"Tous les éléments seront supprimés de cet appareil, du cloud et de tous les appareils synchronisés. Ils seront conservés dans \"Récemment supprimés\" pendant %d jours.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_cancel_message",
+            "value":"%1$s éléments masqués. Arrêter de masquer les éléments restants ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_selected_albums",
+            "value":"Supprimer les albums sélectionnés ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"merge_portrait_photo_content",
+            "value":"Une fois fusionnées, ces personnes seront traitées comme une seule personne.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_info",
+            "value":"Vous pouvez compresser les photos/vidéos rarement consultées pour économiser de l'espace sur votre appareil.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"personal_information_collected",
+            "value":"Informations/données personnelles recueillies",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_service",
+            "value":"Création de contenu IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"map_album_service_description",
+            "value":"Ce service permet de consulter les photos et vidéos par localisation. Il a besoin d'accéder à l'élément suivant (révocable à tout moment sous Paramètres > Applications & services > Applications).",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"please_enter_name",
+            "value":"Aucun nom saisi.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_gallery_network_connection",
+            "value":"Autoriser l'accès à Internet vous permet de voir les lieux où sont prises les photos et les vidéos, de recevoir des suggestions de recherche, de consulter le contenu sur le cloud, de télécharger des vignettes et d'utiliser des fonctionnalités telles que la création de contenu IA et Amélioration via cloud IA.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_service_description",
+            "value":"Transfert d'images sur le cloud pour les améliorer via l'IA.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new",
+            "value":"La qualité des photos récentes est automatiquement améliorée via l'IA. Il suffit de toucher l'icône de baguette magique visible sur les images prises en charge. Cette fonctionnalité est gratuite pendant une durée limitée uniquement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_progress_done",
+            "value":"Éléments enregistrés.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_cloud_gallery_toast",
+            "value":"Galerie Cloud a été activée pour vous.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recommended_cleanup",
+            "value":"Nettoyage recommandé",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time_line_message_cloud_contains",
+            "value":"%s sur le Cloud",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_file_tips",
+            "value":"Supprimer cet élément ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_screen_shot",
+            "value":"Captures d'écran",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_cancel_text",
+            "value":"Annuler",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photos_videos_head_title_album",
+            "value":"Aucune photo ni vidéo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"view_albums",
+            "value":"Afficher le contenu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"send",
+            "value":"Envoyer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cover_preview_title",
+            "value":"Aperçu de la couverture",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tv_menu_tips",
+            "value":"Appuyer sur %s pour plus d'options",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unnamed_albums",
+            "value":"Album sans nom",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title_select_photos",
+            "value":"Sélectionner des images",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information",
+            "value":"Informations de localisation",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"prompt_new_album_dialog_message",
+            "value":"Il n'y a aucun album vers lequel déplacer ou copier. Créer un nouvel album ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_linkage",
+            "value":"Dissocier",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"find_same_name",
+            "value":"Fichier en double trouvé",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"slow_motion_video",
+            "value":"Ralenti",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shoot_album",
+            "value":"Mode d'Appareil photo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_cover",
+            "value":"Changer la couverture",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_access_statement",
+            "value":"Autorisations de Fond d'écran IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unfavor_cancel_message",
+            "value":"%1$s des éléments ont déjà été retirés des favoris.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_off",
+            "value":"L'application Galerie n'est pas autorisée à accéder à Internet. La synchronisation a été mise en pause.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_disabled_please_enable_it",
+            "value":"Accès Internet par Galerie désactivé",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"puzzle_frame",
+            "value":"Cadre",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_title",
+            "value":"Vous ne souhaitez plus recevoir ce type de rappel ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"do_same_action",
+            "value":"Faire de même pour tous les conflits à venir",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_dialog_title_text",
+            "value":"Enregistrer en tant que nouvelle photo ou remplacer l'originale ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_content",
+            "value":"Les photos sélectionnées seront enregistrées en tant que photos individuelles.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_gallery_space",
+            "value":"Optimiser l'espace de stockage de Galerie",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_service_description",
+            "value":"Cette application a besoin d'accéder à l'élément suivant :",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tail_light",
+            "value":"Traînées lumineuses",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_cloud_update_latest",
+            "value":"À jour",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_portrait_photo_content",
+            "value":"Cela améliore la précision de cette fonctionnalité.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice_success",
+            "value":"L'assemblage a réussi. Vous pouvez consulter le résultat dans l'album Vidéos.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_disable_the_photo_linkage_compare_effect",
+            "value":"Toucher pour dissocier les photos.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hide_all_files_tips",
+            "value":"Masquer tous les éléments ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_timeline",
+            "value":"Un petit tour dans vos souvenirs",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Private_protection_in_progress",
+            "value":"Masqué pour protéger votre vie privée",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_timeline",
+            "value":"Photos",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_highlight",
+            "value":"Des souvenirs inestimables à revivre",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_portrait",
+            "value":"Ajouter des personnes",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_notify",
+            "value":"Cette application a besoin d'accéder à %1$s et aux %2$s pour proposer des fonctionnalités telles que la consultation, l'édition d'images et vidéos ainsi que l'analyse intelligente du contenu média. En touchant Accepter, vous acceptez le contenu ci-dessus. Pour en savoir plus sur la façon dont vos informations/données personnelles sont traitées, veuillez consulter la %3$s et les %4$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropModeReset_text",
+            "value":"Réinitialiser",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_and_protocol",
+            "value":"Ce service a besoin d'accéder à %1$s et de lire et transférer des images pour proposer des fonctionnalités de modification d'images via l'IA. En touchant Accepter, vous acceptez les %2$s. Pour en savoir plus sur la façon dont vos informations/données personnelles sont traitées, veuillez consulter la %3$s. Ce service est fourni gratuitement pendant une durée limitée uniquement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_enable_tips",
+            "value":"Activer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_terms",
+            "value":"Conditions d'utilisation des capacités IA générative du Service de Fond d'écran IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_selected",
+            "value":"Désélectionner",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cast_hint",
+            "value":"Veuillez regarder la projection sur le grand écran.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_save_as_new_photo",
+            "value":"%s a enregistré des photos dans Galerie.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hide_images_message",
+            "value":"Les éléments sélectionnés seront déplacés vers \"Éléments masqués\".",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"date_today",
+            "value":"Aujourd'hui",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"timeline_message_thumbnail_ready",
+            "value":"Synchronisation terminée : %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_button",
+            "value":"OK",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_privacy_options",
+            "value":"Options relatives à la vie privée",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_privacy_protected",
+            "value":"Protection de la vie privée activée",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_remove_location_info",
+            "value":"Retrait des informations de localisation",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_tagged_geographic_data",
+            "value":"Données géographiques étiquetées.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_remove_camera_info",
+            "value":"Retrait des informations de l'appareil photo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_device_and_camera_info",
+            "value":"Modèle de l'appareil et paramètres de l'appareil photo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_name",
+            "value":"Galerie",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_not_favorite",
+            "value":"Ajouter aux favoris",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_files_to_system_album_merge",
+            "value":"%1$s %2$s %3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"graduation_photo",
+            "value":"Remise de diplôme",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"replace_with_new_file",
+            "value":"Remplacer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_permanently_forever_cancel_message",
+            "value":"%s des fichiers ont été définitivement supprimés. Arrêter de supprimer le reste ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_video",
+            "value":"Afficher la vidéo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wrist_watch",
+            "value":"Montres",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_as_new_photo_and_video",
+            "value":"%s a enregistré des images/vidéos dans Galerie.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"learn_how_to_use_your_data",
+            "value":"Utilisation de vos données personnelles",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_dialog_delete_permanently_not_recover_tips",
+            "value":"Cette vidéo sera définitivement supprimée.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_experience_the_hide_album_function",
+            "value":"Toucher ici pour voir les éléments masqués.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_screenshot",
+            "value":"Captures d'écran",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_screenshot_saved_failed",
+            "value":"La capture d'écran a échoué. Veuillez réessayer ultérieurement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Please_enter_main_title",
+            "value":"Veuillez saisir un titre.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"document_correction",
+            "value":"Documents",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_distributed_photo_title_album",
+            "value":"Aucune photo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_photos_dialog_delete_permanently_not_recover_tips",
+            "value":"Toutes les photos seront définitivement supprimées de cet appareil, du Cloud et de tous les appareils synchronisés.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_prompt1",
+            "value":"Pour proposer les fonctionnalités associées, cette application a besoin d'accéder à %1$s et de lire et transférer des images.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_prompt2",
+            "value":"En touchant Accepter, vous acceptez le contenu ci-dessus. Pour en savoir plus sur la façon dont vos informations/données personnelles sont traitées, veuillez consulter la %1$s et les %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms",
+            "value":"Conditions d'utilisation IA générative Retouche IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"verify_and_view_album",
+            "value":"Veuillez vérifier pour afficher le contenu.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_files_to_timeline_merge",
+            "value":"%1$s et %2$s ont été enregistrées dans Galerie. %3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_place",
+            "value":"Lieux",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_single_image_tips",
+            "value":"Masquer cette image ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"move_file_to",
+            "value":"Déplacer vers",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"name_input",
+            "value":"Saisir un nom",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"location_albums",
+            "value":"Lieux",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_highlight",
+            "value":"Supprimer la surbrillance",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_duration",
+            "value":"Durée : %s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fast_face_beautify",
+            "value":"Améliorer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_to",
+            "value":"Ajouter à",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"not_support_wallpaper_edit",
+            "value":"Les fonds d'écran ne peuvent pas être modifiés dans les petites fenêtres.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lock_tips_password",
+            "value":"Il est conseillé de définir un mode de déverrouillage de l'écran pour protéger vos albums masqués contre tout accès non autorisé.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"classified_album",
+            "value":"Catégories",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"expand",
+            "value":"Afficher plus",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_new",
+            "value":"Nouvel album",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_view_protocol",
+            "value":"Toucher pour afficher",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_micro_motion",
+            "value":"Double effet",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from_album_tips",
+            "value":"Cette photo ne sera plus affichée dans cet album.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_save_text",
+            "value":"Enregistrer en tant que nouvelle photo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_button_cancel",
+            "value":"Ultérieurement",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_action",
+            "value":"Remplacer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_experience_the_image_compare_function",
+            "value":"Toucher ici pour comparer des images.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait",
+            "value":"Portraits",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_confirm_tips",
+            "value":"OK",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_clear",
+            "value":"Effacer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"clear_tips",
+            "value":"Effacer tout ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_description",
+            "value":"Vous pouvez libérer jusqu'à %1$s d'espace de stockage en retirant les photos et vidéos rarement consultées de votre appareil.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_warning_content",
+            "value":"Vos photos et vidéos sont affichées ici, mais cette application ne peut accéder qu'aux éléments que vous sélectionnez.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"focal_length",
+            "value":"Distance focale : %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"full_screen_browsing",
+            "value":"Parcourir en mode plein écran",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_merge_to_me",
+            "value":"Ces personnes seront identifiées comme la même personne.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_photos_title",
+            "value":"Toutes les photos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"screenshot_photos",
+            "value":"Captures d'écran",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_favor_process",
+            "value":"Ajout aux favoris en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_btn_text_photo",
+            "value":"Prendre une photo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aircraft",
+            "value":"Avions",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_wlan_only",
+            "value":"WLAN uniquement",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"detail_dialog_confirm",
+            "value":"OK",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"high_pixel",
+            "value":"Haute résolution",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"skip_action",
+            "value":"Ignorer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_picture_success",
+            "value":"Photo enregistrée.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_format_compare_is_not_supported",
+            "value":"Le format d'image ne prend pas en charge la comparaison.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_to_timeline_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_single_file_tips",
+            "value":"Retirer cet élément ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos",
+            "value":"Enregistrement en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_unselected",
+            "value":"Sélectionner",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_delete",
+            "value":"Supprimer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_pictures_to_system_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"pause",
+            "value":"Mettre en pause",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_hidden_process",
+            "value":"Masquage en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"social_gallery_downloading_toast",
+            "value":"Téléchargement en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Picker_Select",
+            "value":"Sélectionner",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"burst_photos",
+            "value":"Rafale",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"learn_more",
+            "value":"En savoir plus",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"switch_to_timeline_display_prompt",
+            "value":"Veuillez pincer pour afficher les photos sous forme de grille ou les séparer par date.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_image_cleanup",
+            "value":"Nettoyage des photos et vidéos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eiffel_tower",
+            "value":"Tour Eiffel",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"access_hidden_albums",
+            "value":"pour afficher les éléments masqués",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"duration",
+            "value":"Durée",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wait_none_no_wlan",
+            "value":"Aucune connexion WLAN. La synchronisation a été mise en pause.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_compare_is_not_supported",
+            "value":"Les vidéos ne peuvent pas être comparées.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_not_support_tip",
+            "value":"Le déplacement de %1$d éléments ou plus à la fois ne peut pas se faire. Veuillez resélectionner.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"prompt_new_album_dialog_title",
+            "value":"Aucun album disponible",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"specific_characters_not_supported",
+            "value":"Ceci ne peut pas contenir ' ` \" . \\ / : * ? < > | [ ] { }",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_highlight",
+            "value":"Plus de temps forts seront débloqués au fur et à mesure que vous prenez des photos.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"sound_filled",
+            "value":"Son",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_shot",
+            "value":"Cliché nocturne",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_favor",
+            "value":"Mes favoris",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_splice_canceled",
+            "value":"Assemblage annulé.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice_failed",
+            "value":"L'assemblage a échoué.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_to_local",
+            "value":"Enregistrer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slideshow_interval",
+            "value":"Intervalle de diaporama",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_cloud_update",
+            "value":"Synchronisation en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"target_file_location",
+            "value":"Fichier à l'emplacement cible",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"this_unction_requires",
+            "value":"Cette fonctionnalité a besoin d'accéder à %1$s et aux informations sur votre appareil. En touchant Accepter, vous acceptez le contenu ci-dessus et la %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_cloud_data_all",
+            "value":"%1$s et %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_empty_albums_tips",
+            "value":"Supprimer les albums sélectionnés ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"date_yesterday",
+            "value":"Hier",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_recover_process",
+            "value":"Restauration en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"landscape",
+            "value":"Paysage",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_unlimited_use_mobile",
+            "value":"Les photos/vidéos sont synchronisées via données mobiles lorsque le WLAN n'est pas disponible.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_picture_tips",
+            "value":"Supprimer cette photo ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_manage_card_confirm",
+            "value":"Paramètres",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"complete",
+            "value":"Terminer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_screenshot_saved_success",
+            "value":"Élément enregistré dans Galerie.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_tips",
+            "value":"Supprimer ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"disable",
+            "value":"Désactiver",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_to_album",
+            "value":"Ajouter à",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_frame_style",
+            "value":"Format d'image",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_photos_and_dideos",
+            "value":"Sélectionner des images et des vidéos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_rename",
+            "value":"Saisir le nom",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork",
+            "value":"Utiliser les données mobiles",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_album",
+            "value":"Revivre vos meilleurs moments n'a jamais été aussi facile.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_moving_photo_splice_function",
+            "value":"Plusieurs images dynamiques peuvent être assemblées. Veuillez d'abord sélectionner les images dynamiques que vous souhaitez inclure, puis touchez ici.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycleAlbum_clear_message",
+            "value":"Tous les éléments seront définitivement supprimés.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_subtitle",
+            "value":"Voyage dans le temps utilise l'IA pour créer des images thématiques basées sur les photos de portrait que vous transférez.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_success",
+            "value":"Élément copié.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"card_button",
+            "value":"Voir les détails",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_all_files_tips",
+            "value":"Supprimer tous les éléments ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"map_album_service",
+            "value":"Albums par localisation",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_cancel_message",
+            "value":"%1$s retirés. Arrêter de retirer les éléments restants ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"check",
+            "value":"Afficher",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_title",
+            "value":"Votre Galerie, et bien plus encore",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panorama",
+            "value":"Panoramique",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"path",
+            "value":"Chemin d'accès",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picture_dialog_delete_permanently_not_recover_tips",
+            "value":"Cette photo sera définitivement supprimée.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Private_protection_view_photos",
+            "value":"Afficher les photos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rename",
+            "value":"Renommer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_permanently_cancel_message",
+            "value":"%1$s définitivement supprimés. Arrêter de supprimer les fichiers restants ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_authorization",
+            "value":"Autoriser",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_of_media_analysis_service_note",
+            "value":"Ce service lit et analyse les images et vidéos en arrière-plan pour fournir des fonctionnalités intelligentes dans Galerie.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_privacy_statement",
+            "value":"Déclaration relative à la vie privée Amélioration via cloud IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"share_highlight_cover",
+            "value":"Partager la couverture",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_device_storage_detail_new",
+            "value":"Si votre appareil commence à être à court d'espace de stockage, les photos et les vidéos dans leurs formats originaux seront remplacées par des version réduites pour économiser de l'espace. Vous pouvez télécharger les originaux dans le Cloud à tout moment.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tip_convert_to_JPG_success",
+            "value":"Converti en JPG.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_save_as_new_video",
+            "value":"%s a enregistré des vidéos dans Galerie.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_all",
+            "value":"Toutes les photos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"duplicate_photo",
+            "value":"Doublons",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_setting_tips_show",
+            "value":"L'analyse se fait lorsque votre appareil est en charge et que l'écran est éteint.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_portrait_photo_placeholder",
+            "value":"Saisir le nom",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_of_service_location",
+            "value":"Autoriser Galerie à accéder à vos informations précises de localisation depuis Paramètres",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_highlight",
+            "value":"Retirer des temps forts",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_face_beautify",
+            "value":"Annuler",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_wallpaper",
+            "value":"Définir en tant que fond d'écran",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_privacy_statement",
+            "value":"Déclaration relative à la vie privée Fond d'écran IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_view_learn_more_title",
+            "value":"En savoir plus",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fireworks",
+            "value":"Feux d'artifice",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_storage_confirm",
+            "value":"Optimiser maintenant",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"wait_none_no_network",
+            "value":"Aucune connexion réseau. La synchronisation a été mise en pause.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_near_full_card_title",
+            "value":"Espace de stockage cloud presque plein",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_finish",
+            "value":"Optimisation complète. Vous avez libéré %1$s d'espace.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_multi_video_and_photo_num",
+            "value":"%1$s, %2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_cloud_space_full",
+            "value":"Espace de stockage Cloud plein. Aucune autre photo ou vidéo ne peut être transférée.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel_move",
+            "value":"Annuler",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"business_privacy_statements",
+            "value":"Déclarations relatives à la vie privée",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_video_tips",
+            "value":"Retirer cette vidéo ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lock_tips_list",
+            "value":"Remarque",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_highlight_kept_tips",
+            "value":"Ceci ne supprimera pas les photos ou vidéos de Galerie.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_remove_process",
+            "value":"Retrait en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_highlight_tips",
+            "value":"Cet élément ne sera plus affiché dans ce temps fort.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_cancel",
+            "value":"Annuler",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_toast",
+            "value":"L'amélioration automatique via cloud améliore automatiquement la netteté des photos zoomées prises en mode \"Photo\". Cette fonctionnalité peut être activée depuis Paramètres.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_new_album_title",
+            "value":"Nouvel album",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"select_portrait_photo_title",
+            "value":"Sélectionner les photos de vous-même",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_videos_to_user_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"details",
+            "value":"Détails",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"to_set_up",
+            "value":"Définir",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"motion",
+            "value":"Sports",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_splice_reselect",
+            "value":"Veuillez sélectionner %1$d à %2$d images dynamiques, puis réessayez.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_open_now",
+            "value":"Activer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_btn_text_shooting",
+            "value":"Prendre une vidéo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_and_documents_description",
+            "value":"Ceci est utilisé pour lire des photos et vidéos, et les afficher par localisation.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"collage_save_fail_tips",
+            "value":"L'enregistrement a échoué car l'image n'a pas été téléchargée. Veuillez vérifier votre réseau, puis réessayez.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rotate_text",
+            "value":"Rotation",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_version",
+            "value":"Version %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"smart_albums",
+            "value":"Albums intelligents",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_city",
+            "value":"Villes",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_cloud_data_sync_summary",
+            "value":"Synchronisation et stockage automatiques de toutes vos photos et vidéos sur le Cloud pour que vous puissiez y accéder depuis n'importe lequel de vos appareils.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fail_to_beautify_please_try_again_later",
+            "value":"L'application des effets d'embellissement a échoué. Veuillez réessayer ultérieurement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_me",
+            "value":"Moi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"linkage",
+            "value":"Associer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document",
+            "value":"Documents",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"focal_length_focalLengthIn35mmFilm",
+            "value":"Distance focale : %1$s (distance focale équivalente en %2$s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time",
+            "value":"Date/heure",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycleAlbum_delete_all_images_message",
+            "value":"Tous les éléments seront définitivement supprimés.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"about",
+            "value":"À propos",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"title_none_selected",
+            "value":"Aucune sélection",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"about_privacy_statement",
+            "value":"Déclaration relative à la vie privée Albums par localisation",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"file_time_location",
+            "value":"Date/heure de modification : %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_video_dialog_delete_permanently_not_recover_tips",
+            "value":"Cette vidéo sera définitivement supprimée de cet appareil, du cloud et de tous les appareils synchronisés.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"my_albums",
+            "value":"Mes albums",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"resolution",
+            "value":"Résolution",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"extended_services",
+            "value":"Services étendus",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name",
+            "value":"Service de génération de fonds d'écran IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flash_shoot",
+            "value":"Instantané",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_warning_content_more",
+            "value":"Vos photos et vidéos sont affichées ici, mais cette application ne peut accéder qu'aux éléments que vous sélectionnez. %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_photos_count_per_sum",
+            "value":"Sélection (%1$d/%2$d)",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"unhide_cancel_message",
+            "value":"%1$s démasqués. Arrêter de démasquer les fichiers restants ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"city_overlook",
+            "value":"Paysage urbain",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"size_of_compared_exceeds_the_limit_tips",
+            "value":"Certaines images sont trop volumineuses pour être comparées.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"time_line_message_loaded",
+            "value":"%s chargées au total",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compass",
+            "value":"Boussole",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_service",
+            "value":"Désactiver le service",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_layout_tips",
+            "value":"Navigation immersive",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_description_1",
+            "value":"Ce service a besoin d'accéder à %1$s, ainsi que de lire et transférer des images pour proposer des fonctionnalités liées aux fonds d'écran. En touchant Accepter, vous acceptez le contenu ci-dessus, les %2$s et la %3$s, qui précise la façon dont vos informations/données personnelles sont utilisées.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_permanently_clear_cancel_message",
+            "value":"%s effacés. Arrêter d'effacer le reste ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picture_compare",
+            "value":"Comparer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name_2",
+            "value":"Service Voyage dans le temps",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name_3",
+            "value":"Service de Fond d'écran IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_network_environment_poor",
+            "value":"Connexion Internet médiocre. Veuillez réessayer.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"birthday_cake",
+            "value":"Gâteaux d'anniversaire",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"selected_photos_count",
+            "value":"Sélection %1$d/%2$d",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"share_cancel_message",
+            "value":"La préparation est achevée à %1$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_back",
+            "value":"Revenir",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flowing_shutter",
+            "value":"Light Painting",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_picture_recycle_delete_kept_tips",
+            "value":"Cette photo sera supprimée de cet appareil, du cloud et de tous les appareils synchronisés. Elle sera conservée dans \"Récemment supprimés\" pendant %1$d jours.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"highlight_no_tips_show",
+            "value":"Les Temps forts vous seront présentés ici une fois que Galerie aura terminé l'analyse de votre photothèque. L'analyse des photos se fait lorsque votre appareil est en charge et que l'écran est éteint.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_to_user_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_network_dialog_content",
+            "value":"Si vous désactivez cette option, vous ne pourrez pas voir où les photos ont été prises, parcourir votre Galerie Cloud ni afficher les vignettes des images sur le cloud.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ppt",
+            "value":"Diapositives",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_picture_tips",
+            "value":"Retirer cette photo ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_view_toast_title",
+            "value":"Accès privé",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"open_hdc_dialog_content",
+            "value":"Les données de Galerie sur cet appareil seront transférées et fusionnées avec vos données sur le Cloud.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_Personal_Portrait_tips_show",
+            "value":"Analyse des photos en cours (%1$s). L'analyse se fait lorsque votre appareil est en charge et que l'écran est éteint.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cats",
+            "value":"Chats",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"continue",
+            "value":"Continuer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"waterfall",
+            "value":"Chutes d'eau",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_picture_dialog_delete_permanently_not_recover_tips",
+            "value":"Cette photo sera définitivement supprimée de cet appareil, du cloud et de tous les appareils synchronisés.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_to_pasteboard",
+            "value":"Copier dans le presse-papiers",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_gallery_main_describe_msg",
+            "value":"Stockage de vos photos et vidéos sur le Cloud pour économiser de l'espace de stockage sur votre appareil.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_save_picture_text",
+            "value":"Enregistrement de l'image en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_local_space_release_summary",
+            "value":"Pour économiser de l'espace de stockage, les copies locales des photos et vidéos qui ont été transférées vers le Cloud seront retirées de cet appareil.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_display",
+            "value":"Afficher par albums",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"easy_editing_ai_description_tips",
+            "value":"L'écriture ou le dessin en toute liberté avec une sélection d'outils de marquage pratiques. Vous pouvez également améliorer vos compositions à l'aide de puissants outils IA.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photos_head_title_photoAlbum",
+            "value":"Aucune photo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_less",
+            "value":"Afficher moins",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"dialog_delete_permanently",
+            "value":"Supprimer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_security",
+            "value":"%s Un espace de stockage sûr et fiable pour toutes vos photos et vidéos précieuses.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_connection_view_image",
+            "value":"Une connexion Internet est requise pour accéder à Galerie Cloud, télécharger des vignettes et obtenir des suggestions de recherche.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_progress_message",
+            "value":"Ajout à %1$s en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"id_card",
+            "value":"Pièces d'identité",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_add_portrait_name",
+            "value":"Ajouter un nom",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"merge",
+            "value":"Fusionner",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Tab_Portrait",
+            "value":"Personnes",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"download_failed_retry",
+            "value":"Erreur réseau. Veuillez vérifier les paramètres réseau, puis réessayez.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_title",
+            "value":"Supprimer les photos d'origine prises en rafale ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"third_sdk_list",
+            "value":"Liste des SDK tiers",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_more",
+            "value":"Plus d'options",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_stype_no_photo",
+            "value":"Seules les photos avec des styles personnalisés peuvent être importées.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"snapshot",
+            "value":"Instantané",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"external_Disk_toast",
+            "value":"Veuillez installer l'application Fichiers, puis réessayer.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_share",
+            "value":"Partager",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"title_general_settings",
+            "value":"Paramètres",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_video_tips",
+            "value":"Supprimer cette vidéo ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_export_error",
+            "value":"Erreur réseau. Le téléchargement de l'image a échoué. Veuillez réessayer ultérieurement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_picture_not_download_please_download_and_try_again",
+            "value":"Veuillez d'abord télécharger l'image.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_me_content",
+            "value":"Définir cette personne en tant que \"Moi\" ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"picker_warning_title",
+            "value":"Accès privé à Galerie",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_not_name_set_for_me",
+            "value":"Définir cette personne en tant que Moi ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"convert_to_JPG",
+            "value":"Convertir en JPG",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"externalDisk",
+            "value":"Carte SD",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_description",
+            "value":"Cette application a besoin d'accéder à %1$s et de lire et transférer des images pour proposer les fonctionnalités de Fond d'écran IA. Seules les informations personnelles relatives aux fonctionnalités que vous utilisez sont recueillies. Plus d'informations sont disponibles dans la %2$s. Veuillez lire attentivement la déclaration précédente. En touchant Accepter, vous reconnaissez avoir lu, compris et accepté le contenu ci-dessus.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_closed",
+            "value":"Désactivé",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information_title",
+            "value":"Parcourir vos photos par localisation.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_bounce_play",
+            "value":"Boomerang",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bank_card",
+            "value":"Cartes bancaires",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_screen_recording",
+            "value":"Captures vidéo d'écran",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"professional_photography",
+            "value":"Photo pro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_print_exceeds_the_limit_tips",
+            "value":"%d éléments maximum peuvent être imprimés à la fois.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_optimize",
+            "value":"%s L'espace de stockage sur vos appareils est automatiquement libéré pour garantir leur fonctionnement fluide.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_having_tips_show",
+            "value":"Analyse des photos en cours (%1$s). Galerie créera des Temps forts pour vous une fois l'analyse de vos photos terminée. L'analyse se fait lorsque votre appareil est en charge et que l'écran est éteint.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"new_timeline_message_compose",
+            "value":"%1$s et %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"easy_editing_tips",
+            "value":"Édition comme un pro",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_picture_dialog_content",
+            "value":"Les éléments transférés ont été enregistrés dans \"Photos\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_update_card_confirm",
+            "value":"Mettre à niveau le stockage",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_storage_title",
+            "value":"Optimiser le stockage de l'appareil maintenant ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_open_network_link",
+            "value":"Activer l'accès Internet pour Galerie ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_delete_album",
+            "value":"Supprimer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"unsupported_video_type",
+            "value":"Ce format n'est pas pris en charge.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_note",
+            "value":"Ajouter une légende",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"favor_cancel_message",
+            "value":"%1$s ajoutés aux favoris. Arrêter d'ajouter le reste aux favoris ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dynamic_photos_can_switched",
+            "value":"Plusieurs effets de lecture sont disponibles. Veuillez toucher ici pour passer de l'un à l'autre.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_login_card_title",
+            "value":"Galerie Cloud non activée",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_content",
+            "value":"Les données mobiles seront utilisées en cas d'absence de connexion WLAN. Ceci peut être désactivé à tout moment depuis Paramètres.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_context_text",
+            "value":"Les images originales remplacées restent accessibles dans Récemment supprimés.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_files_cancel_message",
+            "value":"%1$s des éléments déplacés.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_scale_error",
+            "value":"Certaines images sont trop grandes pour le collage.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_replace_me",
+            "value":"Remplacer \"Moi\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_multi_exposure",
+            "value":"Exposition multiple",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"time_line_message_cloud_sync",
+            "value":"Tous les éléments synchronisés (%s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document_scan",
+            "value":"Traiter comme doc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"loading_image_imageEdit",
+            "value":"Chargement de l'image...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_content",
+            "value":"Vous avez précédemment enregistré ces éléments sur cette application. Veuillez autoriser à nouveau l'accès à ceux dont vous avez encore besoin.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Maximum_length_reached",
+            "value":"Longueur maximum atteinte.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_to_album",
+            "value":"Copier dans l'album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_video",
+            "value":"Vidéos",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"share_highlight_as_video",
+            "value":"Partager en tant que vidéo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_add",
+            "value":"Ajouter un nom",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"welcome_prompt2",
+            "value":"En touchant Accepter, vous acceptez le contenu ci-dessus. Pour en savoir plus sur la façon dont vos informations/données personnelles sont traitées, veuillez consulter la %1$s et les %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_prompt1",
+            "value":"Cette application a besoin d'accéder à %1$s et aux %2$s pour proposer des fonctionnalités telles que la consultation, l'édition d'images et vidéos ainsi que l'analyse intelligente du contenu média.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"high_mountain",
+            "value":"Montagnes",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"not_support_wallpaper_change",
+            "value":"Ce mode ne permet pas le changement de fond d'écran.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"items_gallery_alwaysrotate",
+            "value":"Rotation automatique",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"items_gallery_followsystem",
+            "value":"Suivre paramètres système",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tips_gallery_roatesettings",
+            "value":"Faire pivoter les photos lorsqu'en mode de visualisation plein écran.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"settings_gallery_rotate",
+            "value":"Orientation de la photo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_delete",
+            "value":"Supprimer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_recover",
+            "value":"Restaurer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_temperature_too_high",
+            "value":"L'appareil est trop chaud. La synchronisation a été mise en pause.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_and_protocol_new",
+            "value":"Ce service a besoin d'accéder à %1$s et de lire et transférer des images pour proposer des fonctionnalités de modification d'images via l'IA. En touchant %2$s, vous acceptez les %3$s. Pour en savoir plus sur la façon dont vos informations/données personnelles sont traitées, veuillez consulter la %4$s. Ce service est fourni gratuitement pendant une durée limitée uniquement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_ai_creation_description",
+            "value":"Ce service a besoin d'accéder à %1$s et de lire des vidéos ainsi que de lire et de transférer des images. Ceci permet de fournir des fonctionnalités de génération d'images et de vidéos IA. En touchant Accepter, vous acceptez le contenu ci-dessus. Pour plus de détails sur la façon dont vos informations/données personnelles sont traitées, veuillez vous référer à la %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"day",
+            "value":"Jours",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"replace_me_content",
+            "value":"Les images précédemment définies en tant que \"Moi\" seront remplacées.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices_more",
+            "value":"Voir les images et vidéos sur le stockage externe",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_compared_exceeds_the_limit_tips",
+            "value":"Veuillez sélectionner entre %1$d et %2$d images.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"intelligent_classification_tips",
+            "value":"Organisation intelligente",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_stop_note_1",
+            "value":"Ce service ne sera plus disponible si vous le désactiver. Désactiver quand même ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_connection",
+            "value":"Accès Internet",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_rename_album",
+            "value":"Renommer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"location_information_content",
+            "value":"Cette application a besoin d'accéder à %1$s et aux Fichiers. Elle a également besoin d'accéder aux informations sur l'appareil et réseau. Seules les informations personnelles relatives aux fonctionnalités que vous utilisez sont recueillies. En touchant Accepter, vous acceptez le contenu ci-dessus. Pour plus de détails, veuillez consulter la %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_title",
+            "value":"Autoriser la synchronisation via données mobiles ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_media_analysis_service_note",
+            "value":"Ce service arrêtera de lire et d'analyser les images et les vidéos en arrière-plan.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"transfer_completed",
+            "value":"Transfert terminé",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_shared_exceeds_the_limit_tips",
+            "value":"%d éléments maximum peuvent être partagés à la fois.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sync",
+            "value":"Synchroniser",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_map",
+            "value":"Carte",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rename_portrait_photo_title",
+            "value":"Renommer cette personne",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_export_success",
+            "value":"Élément exporté. Vous pouvez le consulter dans l'album Vidéos.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_portrait",
+            "value":"Modifier la personne",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"only_selected_photos_can_be_accessed",
+            "value":"Cette application ne peut accéder qu'aux photos que vous sélectionnez",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_timeline_actionbar_title",
+            "value":"Toutes les photos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices",
+            "value":"Voir les photos et vidéos sur \"%s\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_hide",
+            "value":"Masquer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_display",
+            "value":"Vue photos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"experienc_tips",
+            "value":"Commencer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_album",
+            "value":"Tous vos albums en un coup d'œil",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_videos_to_system_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_not_jigsaw_puzzle",
+            "value":"Les vidéos ne peuvent pas être utilisées pour créer des collages.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_right_access_statement",
+            "value":"Avis relatif aux autorisations",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_files_dialog_delete_permanently_not_recover_tips",
+            "value":"Tous les éléments seront définitivement supprimés de cet appareil, du cloud et de tous les appareils synchronisés.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance_des",
+            "value":"Amélioration automatique de la netteté des photos zoomées prises en mode \"Photo\". Les images prises en charge seront transférées vers le cloud pour traitement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information_description",
+            "value":"Ceci est utilisé pour proposer des services de localisation.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_extra",
+            "value":"La qualité des photos récentes est automatiquement améliorée via l'IA. Il suffit de toucher l'icône de baguette magique visible sur les images prises en charge. Cette fonctionnalité est gratuite pendant une durée limitée uniquement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_loading",
+            "value":"Chargement en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"print",
+            "value":"Imprimer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_network_link_title",
+            "value":"Désactiver l'accès Internet pour Galerie ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_exit_dialog_context_text",
+            "value":"Annuler les changements ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fluorescence_photography",
+            "value":"Fluorescence",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"target_has_same_name_file",
+            "value":"Un fichier ayant le même nom existe déjà. Le remplacer ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_selected_max",
+            "value":"%d images maximum peuvent être comparées à la fois.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"easy_editing_description_tips",
+            "value":"L'écriture ou le dessin en toute liberté avec une sélection d'outils de marquage pratiques.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"service_agreements_and_rules",
+            "value":"Accords de service et règles",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mainability_description",
+            "value":"Photos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_delete_kept_tips",
+            "value":"Les éléments supprimés sont conservés dans \"Récemment supprimés\" pendant %1$d jours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_close",
+            "value":"Désactivé",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_ok",
+            "value":"Terminer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_confirm",
+            "value":"Désactiver Galerie Cloud",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_videos_dialog_delete_permanently_not_recover_tips",
+            "value":"Toutes les vidéos seront définitivement supprimées de cet appareil, du cloud et de tous les appareils synchronisés.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"month",
+            "value":"Mois",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"name_portrait_photo_title",
+            "value":"Nommer cette personne",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_highlight_tips",
+            "value":"Supprimer ce temps fort ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_merger",
+            "value":"Fusionner les personnes sélectionnées ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_file_dialog_content",
+            "value":"Les éléments transférés ont été enregistrés dans \"Photos\" et \"Vidéos\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_share_process",
+            "value":"Préparation du contenu en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"local_all_photos_dialog_delete_permanently_not_recover_tips",
+            "value":"Toutes les photos seront définitivement supprimées.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_local_space_release",
+            "value":"Optimisation de l'espace de stockage de l'appareil",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title",
+            "value":"Titre",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_overwrite_text",
+            "value":"Remplacer l'original",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_permission_1",
+            "value":"Ceci est utilisé pour lire des images dans le but de générer des fonds d'écran.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_more_portraits_currently",
+            "value":"Aucune autre personne",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_all_photos_tips",
+            "value":"Supprimer toutes les photos ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_select_all",
+            "value":"Sélectionner tout",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_export_to_video",
+            "value":"Exporter en tant que vidéo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel_process_title",
+            "value":"Arrêter cette opération ?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_cloud_enhance",
+            "value":"Amélioration via cloud IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_read_protocol",
+            "value":"Veuillez lire attentivement la déclaration ci-dessus. En touchant Accepter, vous acceptez de nous laisser vous fournir ce service.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice",
+            "value":"Transformer en vidéo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_clear_recycle",
+            "value":"Tout effacer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"dialog_consent",
+            "value":"Accepter",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_no_tips",
+            "value":"Ne plus afficher",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_optimize_storage_dialog_content",
+            "value":"Aucun élément à optimiser.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_to",
+            "value":"Copier vers",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_device_storage",
+            "value":"Optimiser le stockage de l'appareil",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rename_failed",
+            "value":"Le changement de nom a échoué. Veuillez réessayer.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panda",
+            "value":"Pandas",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Saved_to_Puzzle_Album",
+            "value":"Élément enregistré dans l'album.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_select_cover",
+            "value":"Sélectionner la couverture",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"star_track",
+            "value":"Graffiti lumineux",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cleanup_card_description",
+            "value":"Libère jusqu'à %1$s d'espace de stockage en supprimant des photos et des vidéos que vous consultez rarement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_cancel_message",
+            "value":"%1$s des éléments ajoutés. Arrêter d'ajouter les éléments ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_loading_progress",
+            "value":"Optimisation de stockage en cours (%1$s/%2$s).",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"local_all_videos_dialog_delete_permanently_not_recover_tips",
+            "value":"Toutes les vidéos seront définitivement supprimées.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recover_cancel_message",
+            "value":"%1$s restaurés. Arrêter de restaurer les fichiers restants ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"go_to_check_out",
+            "value":"Afficher",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_videos_head_title_videoAlbum",
+            "value":"Aucune vidéo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_add_photo",
+            "value":"Ajouter une photo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"new_recycle_albums_tips",
+            "value":"Supprimer les albums sélectionnés ?\n\nLes photos et vidéos dans ces albums ne seront pas supprimées.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"screenshot_cleanup",
+            "value":"Supprimer des captures d'écran",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_specification_error",
+            "value":"Le format d'image n'est pas pris en charge.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_stop_note",
+            "value":"Une fois désactivé, ce service ne recueillera plus de données utilisateur sur votre appareil.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_delete_process",
+            "value":"Suppression en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_unfavor_process",
+            "value":"Retrait des favoris en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_invalid_uri_from_faCard",
+            "value":"Une erreur d'image est survenue. Vous êtes passé à la première image de l'album.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_sync",
+            "value":"%s Vos photos et vidéos sont synchronisées sur tous vos appareils.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_hide_albums",
+            "value":"Éléments masqués",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_cancel_hidden_process",
+            "value":"Démasquage en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"file_can_not_edited",
+            "value":"Fichier non pris en charge ou corrompu. La modification a échoué.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_exporting",
+            "value":"Exportation en cours.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"size",
+            "value":"Taille",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"stop",
+            "value":"Arrêter",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_cancel",
+            "value":"Annuler",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_login_card_content",
+            "value":"Galerie Cloud stocke vos photos et vidéos en toute sécurité sur le cloud, vous pouvez ainsi y accéder depuis n'importe lequel de vos appareils tout en économisant l'espace de stockage de l'appareil.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"silky_water",
+            "value":"Eau de soie",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_player_cloud_io_error",
+            "value":"La lecture a échoué. Veuillez réessayer ultérieurement.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_title",
+            "value":"Espace de stockage Cloud plein",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fountain",
+            "value":"Fontaines",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_favorite",
+            "value":"Retirer des favoris",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_unction_requires",
+            "value":"Ce service a besoin d'accéder à %1$s, ainsi que de lire et transférer des images pour proposer la fonctionnalité d'amélioration d'image. En touchant Accepter, vous acceptez le contenu ci-dessus. Pour en savoir plus sur la façon dont vos informations/données personnelles sont traitées, veuillez consulter la %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_exit_dialog_discard_text",
+            "value":"Annuler",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_file_location",
+            "value":"Fichier à l'emplacement initial",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"year",
+            "value":"Années",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_or_move",
+            "value":"Copier ou déplacer ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_analysis_progress",
+            "value":"Analyse des photos en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_burst_photos_saving_progress",
+            "value":"Annuler",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mirror_text",
+            "value":"Miroir",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_privacy_statement_1",
+            "value":"Déclaration relative à la vie privée Service de Fond d'écran IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_copied_exceeds_the_limit_tips",
+            "value":"%d éléments maximum peuvent être copiés à la fois.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_access_description",
+            "value":"Ceci est utilisé pour lire les images pour la modification via l'IA.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_files_to_user_album_merge",
+            "value":"%1$s et %2$s ont été enregistrées dans l'album sélectionné. %3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delicacy",
+            "value":"Nourriture et boisson",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_splash_content",
+            "value":"Les raisons pour mettre à niveau vers Galerie Cloud :",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_recycle",
+            "value":"Récemment supprimés",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_wlan_and_networks",
+            "value":"WLAN et données mobiles",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_analysis_service",
+            "value":"Service d'analyse média",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"grid_layout_description_tips",
+            "value":"Votre Galerie s'affiche désormais sur l'ensemble de l'écran pour une expérience plus immersive.\n\nVous pouvez basculer entre les vues jours, mois et années en une seule touche.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_video_dialog_content",
+            "value":"Les éléments transférés ont été enregistrés dans \"Vidéos\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_clear_process",
+            "value":"Effacement en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_progress",
+            "value":"Déplacement en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_progress",
+            "value":"Copie en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_service_note",
+            "value":"La fonctionnalité Albums par localisation ne sera plus disponible. Les autres fonctionnalités ne seront cependant pas affectées. Désactiver malgré tout ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"categorize",
+            "value":"Catégories",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"merge_portrait_photo_title",
+            "value":"Fusionner ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"construct",
+            "value":"Bâtiments",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_set_for_me",
+            "value":"Définir \"%s\" en tant que Moi ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_failed_single",
+            "value":"La copie a échoué. Veuillez réessayer.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_albums",
+            "value":"Personnes",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sound_off_filled",
+            "value":"Couper le son",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upgrade_to_cloud_gallery",
+            "value":"Galerie Cloud",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel_hidden",
+            "value":"Démasquer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_view_portrait",
+            "value":"Afficher la personne",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Set_Is_Me",
+            "value":"Définir en tant que Moi",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_save_btn",
+            "value":"Conserver",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dinner_party",
+            "value":"Repas de groupe",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_description",
+            "value":"Ce service transfère les images que vous sélectionnez vers le cloud pour procéder à des modifications via l'IA. Il a besoin d'accéder aux éléments suivants :",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photos",
+            "value":"Photos",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_enable_note",
+            "value":"Une fois activé, ce service lit les fichiers d'image en arrière-plan pour vous fournir des fonctionnalités de génération de fonds d'écran basée sur l'IA.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_single_file_dialog_delete_permanently_not_recover_tips",
+            "value":"Cet élément sera définitivement supprimé de cet appareil, du cloud et de tous les appareils synchronisés.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"jump_to_file_management_tips",
+            "value":"Vous pouvez afficher et gérer les photos et vidéos sur cet appareil de stockage en accédant à Fichiers > Parcourir > \"%s\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"form_FormAbility_label",
+            "value":"Album",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_device_storage_detail",
+            "value":"Si votre appareil commence à être à court d'espace de stockage, les photos et les vidéos dans leurs formats originaux seront remplacées par des version réduites pour économiser de l'espace. Vous pouvez télécharger les originaux dans le Cloud à tout moment. %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_subtitle_1",
+            "value":"Ce service transfère les images que vous sélectionnez vers des serveurs cloud pour générer des fonds d'écran à l'aide d'algorithmes IA. Il a besoin d'accéder aux éléments suivants :",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"large_aperture",
+            "value":"Ouverture",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_moving_photo_splice",
+            "value":"Assemblage en cours.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_unlimited_use_mobile_network",
+            "value":"Utilisation des données mobiles",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_single_file_recycle_delete_kept_tips",
+            "value":"Cet élément sera supprimé de cet appareil, du cloud et de tous les appareils synchronisés. Il sera conservé dans \"Récemment supprimés\" pendant %d jours.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_long_exposure",
+            "value":"Exposition longue",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"pictures_and_videos_tv",
+            "value":"Images et vidéos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_distributed_photo_head_title_album",
+            "value":"Aucune photo ni vidéo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"only_selected_items_can_be_accessed",
+            "value":"Cette application ne peut accéder qu'aux photos et vidéos que vous sélectionnez",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_graffiti",
+            "value":"Poussières d'étoiles",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_loop_play",
+            "value":"En boucle",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from",
+            "value":"Retirer de l'album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_saving_burst_photos_tip",
+            "value":"Annuler les changements ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_gallery",
+            "value":"Galerie Cloud",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"detele_button",
+            "value":"Supprimer la sélection (%1$s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_service",
+            "value":"Amélioration via cloud IA",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_items_two_nine",
+            "value":"Veuillez sélectionner entre %1$d et %2$d images.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_video",
+            "value":"%s a modifié des vidéos dans Galerie.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_and_documents",
+            "value":"Fichiers et contenu média",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_edit",
+            "value":"Modifier la personne",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"not_prompt_again",
+            "value":"Ne plus afficher",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_deletion",
+            "value":"Supprimer des vidéos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_pdf_success",
+            "value":"Document enregistré.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_size_ratio_too_large",
+            "value":"Le format d'image dépasse les limites de reconnaissance.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_nearby_photos",
+            "value":"Afficher les photos prises à proximité",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_nearby_photos",
+            "value":"Masquer les photos prises à proximité",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"set_album_cover_ready",
+            "value":"La couverture a été changée.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"reset_album_cover_ready",
+            "value":"La couverture par défaut a été restaurée.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_as_album_cover",
+            "value":"Définir en tant que couverture d'album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"occure_error_and_retry",
+            "value":"Une erreur système est survenue. Veuillez réessayer ultérieurement.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_custom_cover",
+            "value":"Annuler la couverture personnalisée",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_change_album_cover",
+            "value":"Changement de couverture d'album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"scan_qrcode_in_image",
+            "value":"Scanner le QR code",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_QRCode_error",
+            "value":"Il n'y a aucune application à ouvrir.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document_scan_count_limit",
+            "value":"%d photos sont prises en charge au maximum.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"restore_default_sort",
+            "value":"Restaurer l'ordre par défaut",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sorting",
+            "value":"Trier les albums",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"custom_sort",
+            "value":"Réorganiser",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"document_scan_not_support_video_message",
+            "value":"Les vidéos ne sont pas prises en charge.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sort_by_name",
+            "value":"Trier par nom",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"restore_default_sort_message",
+            "value":"Restaurer l'ordre par défaut ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"map_album",
+            "value":"Albums par localisation",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_intelligence_analysis",
+            "value":"Analyse multimédia",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time_travel_theme",
+            "value":"Thème Voyage dans le temps",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"collapse_menu_bar",
+            "value":"Fermer la barre de menu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"disabled",
+            "value":"Non disponible",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_goto_photos",
+            "value":"Accéder à Galerie",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_checkbox_selected",
+            "value":"Cochée, image d'origine, case, toucher deux fois pour décocher",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_search",
+            "value":"Recherche",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_material_select",
+            "value":"Sélectionner",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_menu_bar",
+            "value":"Ouvrir la barre de menu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"random_collage",
+            "value":"Collage aléatoire %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"checkbox_selected",
+            "value":"Case, cochée, toucher deux fois pour décocher",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_screenshot",
+            "value":"Capture d'écran",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessibility_event_click_action",
+            "value":"Toucher deux fois pour activer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_checkbox_deselected",
+            "value":"Décochée, image d'origine, case, toucher deux fois pour cocher",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_auto",
+            "value":"Flash, automatique",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance",
+            "value":"Balance des blancs %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_tungsten_incandescent_light",
+            "value":"Incandescent",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"multiselect",
+            "value":"Sélectionner plusieurs",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_steady",
+            "value":"Flash, toujours allumé",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected",
+            "value":"Sélectionné",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_vivid",
+            "value":"Vif",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_original",
+            "value":"Original",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_bright",
+            "value":"Clair",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_mono",
+            "value":"Mono",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"focal_length_in_35mm_film",
+            "value":"Longueur focale équivalente à %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location",
+            "value":"Aller à l'emplacement actuel",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"day_grid_view",
+            "value":"Affichage par jours",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"year_grid_view",
+            "value":"Affichage par années",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"month_grid_view",
+            "value":"Affichage par mois",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photos_from_group_tip",
+            "value":"Le contenu sélectionné n'apparaîtra plus dans ce groupe.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_group",
+            "value":"Groupes",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_group_tip",
+            "value":"Cette photo n'apparaîtra plus dans ce groupe.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_group",
+            "value":"Supprimer du groupe",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_group_album",
+            "value":"Veuillez prendre quelques photos de groupe pour commencer\n\nDes albums de groupe sont automatiquement générés à partir des photos de groupe que vous prenez.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_video_from_group_tip",
+            "value":"Cette vidéo n'apparaîtra plus dans ce groupe.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_group",
+            "value":"Supprimer du groupe ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panorama_mode",
+            "value":"Panoramique",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_virtual_aperture",
+            "value":"Ouverture virtuelle désactivée",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flash_capture",
+            "value":"Effet Instantané",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"virtual_aperture",
+            "value":"Ouverture virtuelle",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_flash_capture",
+            "value":"Effet Instantané désactivé",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dynamic_panning",
+            "value":"Panoramique",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"overlay_effect",
+            "value":"Incrustation",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_effect",
+            "value":"Désactivé",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"raw",
+            "value":"RAW",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_setting",
+            "value":"Étiquette \"Contenu généré par IA\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_setting_description",
+            "value":"Une étiquette \"Contenu généré par IA\" est affichée sur les images modifiées à l'aide d'outils de Retouche IA, tels qu'Étendre, Retirer et Déplacer.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"year_month_grid_message",
+            "value":"De %1$s à %2$s, %3$s au total",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"broadcast_multi_video_and_photo_num",
+            "value":"%1$s et %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse_tips",
+            "value":"Les effets ne peuvent être appliqués qu'à un seul widget Galerie à la fois.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse_tips_new",
+            "value":"Des effets dynamiques variés d'appareil photo sont ajoutés aux photos mises sur l'écran d'accueil. Il ne s'active que pour une photo par écran d'accueil.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse",
+            "value":"Effets de lecture dynamique",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_highlights",
+            "value":"Pas encore de temps forts",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_highlight_not_exist",
+            "value":"Le moment fort a été supprimé. Le widget de l'écran d'accueil sera bientôt mis à jour.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auth_camera_location_title",
+            "value":"Autoriser l'application Appareil photo à enregistrer les informations de localisation ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auth_camera_location_gird",
+            "value":"Cela vous permet de voir les informations de localisation pour les photos prises à partir de maintenant. Vous pourrez également utiliser les fonctionnalités Lieux et Temps forts dans Galerie.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auth_camera_location_browser",
+            "value":"Cela vous permet de voir les informations de localisation pour les photos prises à partir de maintenant.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Autoriser",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"is_already_album_cover",
+            "value":"Cette image est déjà définie comme la couverture de l'album.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_image_can_download_tips",
+            "value":"Cette image va être supprimée de cet appareil. Les images qui ont été synchronisées avec le Cloud peuvent être téléchargées à tout moment.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_video_can_download_tips",
+            "value":"Cette vidéo va être supprimée de cet appareil. Les vidéos qui ont été synchronisées avec le Cloud peuvent être téléchargées à tout moment.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_images_can_download_tips",
+            "value":"Toutes les images vont être supprimées de cet appareil. Les images qui ont été synchronisées avec le Cloud peuvent être téléchargées à tout moment.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_videos_can_download_tips",
+            "value":"Toutes les vidéos vont être supprimées de cet appareil. Les vidéos qui ont été synchronisées avec le Cloud peuvent être téléchargées à tout moment.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_files_can_download_tips",
+            "value":"Tous les éléments vont être supprimés de cet appareil. Les éléments qui ont été synchronisés avec le Cloud peuvent être téléchargés à tout moment.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_cleanup",
+            "value":"Supprimer des vidéos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_group_album",
+            "value":"Supprimer le groupe",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_group_album",
+            "value":"Modifier le groupe",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_this_group_album",
+            "value":"Supprimer ce groupe ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_from_group_tips",
+            "value":"Ces groupes ne seront plus affichés. Supprimer un groupe ne supprime pas les photos qu'il contient.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_from_one_group_tips",
+            "value":"Ce groupe ne sera plus affiché. Supprimer un groupe ne supprime pas les photos qu'il contient.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"expression",
+            "value":"Expression",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_expression",
+            "value":"Expression sélectionnée",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessibility_face_edit_box",
+            "value":"Modifier la boîte",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shanghai_world_expo_china_pavilion",
+            "value":"Pavillon de la Chine à l'exposition universelle de Shanghai",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"natural_scenery",
+            "value":"Sites touristiques",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slim_waist",
+            "value":"Tour de Canton",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"humanities_and_landscapes",
+            "value":"Monuments célèbres",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_sky",
+            "value":"Ciels nocturnes",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lightning",
+            "value":"Éclairs",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pyramids",
+            "value":"Pyramides",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"jewelry",
+            "value":"Bijoux",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"notes_album",
+            "value":"Photos et vidéos annotées",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tiananmen",
+            "value":"Place Tian'anmen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"floor_plan",
+            "value":"Plans d'étage",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"marriage_certificate",
+            "value":"Certificats de mariage",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cards",
+            "value":"Cartes",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"graduations",
+            "value":"Remises de diplôme",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"arc_de_triomphe_in_paris",
+            "value":"Arc de Triomphe",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"design",
+            "value":"Photos de design",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cliff",
+            "value":"Falaises",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aurora",
+            "value":"Aurore",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"water_cube",
+            "value":"Cube d'eau",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tickets",
+            "value":"Tickets",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flowers_and_plants",
+            "value":"Fleurs et plantes",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bicycles",
+            "value":"Bicyclettes",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"weddings",
+            "value":"Mariages",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"train_tickets",
+            "value":"Billets de train",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sky",
+            "value":"Ciel",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"airline_tickets",
+            "value":"Billets d'avion",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sunrise_and_sunset",
+            "value":"Levers et couchers de soleil",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"clouds",
+            "value":"Nuages",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"parents",
+            "value":"Enfants",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sea_and_lake_view",
+            "value":"Bords de mer et lacs",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moon",
+            "value":"Lune",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"morning_glow_and_evening_glow",
+            "value":"Levers et couchers de soleil",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pets",
+            "value":"Animaux de compagnie",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cars",
+            "value":"Voitures",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"barcode",
+            "value":"Codes-barres",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"coral",
+            "value":"Corail",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"buses",
+            "value":"Bus",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bird_nest",
+            "value":"Nid d'oiseau",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"potala_palace_in_lhasa",
+            "value":"Palais du Potala",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"macao_ruins",
+            "value":"Ruines de Saint-Paul",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ship",
+            "value":"Navires",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"birthdays",
+            "value":"Anniversaires",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"movie_tickets",
+            "value":"Tickets de cinéma",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"concerts",
+            "value":"Concerts",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dogs",
+            "value":"Chiens",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hukou",
+            "value":"Documents de Hukou",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"the_great_wall",
+            "value":"La Grande Muraille",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"beach",
+            "value":"Plages",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"desert",
+            "value":"Déserts",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"snow_mountain",
+            "value":"Montagnes enneigées",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"parties",
+            "value":"Fêtes",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"invoices",
+            "value":"Factures",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"trains",
+            "value":"Trains",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"CCTV_building",
+            "value":"Siège de CCTV",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"chongqing_jiefangbei",
+            "value":"Monument de la libération de Chongqing",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"real_estate_certificate",
+            "value":"Certificats de propriété de biens",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+          "name":"change_portrait",
+          "value":"Sélectionner une autre personne",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"select_portrait",
+          "value":"Sélection d'une personne",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"display_the_avatar",
+          "value":"Affichage de la photo de profil",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"select_the_portrait_album_to_display",
+          "value":"Vous pouvez sélectionner une personne à afficher.",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+            "name":"classify_cv_popup",
+            "value":"L'album \"Catégories\" a été mis à niveau. Veuillez toucher pour commencer à explorer !",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selfie",
+            "value":"Selfies",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_portrait",
+            "value":"Pas encore de personnes",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+          "name":"display_album_name",
+          "value":"Affichage du nom de l'album",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+      {
+        "name":"action_video_splicing",
+        "value":"Vidéo",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"action_creation",
+        "value":"Créer",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"exceeding_the_limit_message",
+        "value":"%d fichiers maximum peuvent être ajoutés.",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"action_time_files",
+        "value":"Film instantané",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"sync_all_cloud_album_title",
+        "value":"Sélectionner les albums à synchroniser",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"sync_all_cloud_album",
+        "value":"Synchronisation complète",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"sync_all_cloud_album_detail",
+        "value":"L'album d'Appareil photo est synchronisé par défaut.",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"cloud_album_sync",
+        "value":"Sélectionner les albums à synchroniser",
+        "attr":{
+          "priority":"translate"
+        }
+      }
+    ]
+}

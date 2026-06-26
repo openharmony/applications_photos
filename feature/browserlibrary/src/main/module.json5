@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "browserlibrary",
+    "type": "har",
+    "description": "$string:mainability_description",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "libIsolation": true,
+   // "deliveryWithInstall": true
+  }
+}

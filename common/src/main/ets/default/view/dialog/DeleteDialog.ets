@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,156 +12,117 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { DialogCallback } from '../../model/common/DialogUtil';
-import { Log } from '../../utils/Log';
-import { ColumnSize, ScreenManager } from '../../model/common/ScreenManager';
-import { Constants } from '../../model/common/Constants';
-import data_preferences from '@ohos.data.preferences';
-import { BusinessError } from '@ohos.base';
+import lazy { DialogCallback } from '../../model/common/DialogUtil';
+import lazy { Log } from '../../utils/Log';
+import lazy { Constants } from '../../model/common/Constants';
+import lazy data_preferences from '@ohos.data.preferences';
+import lazy { BroadCast } from '../../utils/BroadCast';
+import lazy { BroadCastConstants } from '../../model/common/BroadCastConstants';
+import lazy { BusinessError } from '@ohos.base';
+import lazy { BroadCastManager } from '../../model/common/BroadCastManager';
+import lazy { AlertDialog } from '@ohos.arkui.advanced.Dialog';
+import lazy { ButtonOptions } from '../../utils/ButtonOptionUtil';
+import lazy { DeviceInfo } from '../../utils/DeviceInfo';
+import lazy { FocusUtil } from '../../utils/FocusUtil';
+import lazy { ShortCut } from '../../model/ShortCut';
 
 const TAG: string = 'common_DeleteDialog';
 
 @CustomDialog
 export struct DeleteDialog {
-  @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: number[] =
-    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  @Consume dialogCallback: DialogCallback;
+  @Consume dialogCallback?: DialogCallback= {
+    confirmCallback: () => {},
+    cancelCallback: () => {}
+  };
+  @Consume dialogBroadCast: BroadCast;
   @Consume dialogMessage: Resource;
-  controller?: CustomDialogController;
+  @Consume dialogContent: Resource;
+  public controller?: CustomDialogController;
+  public appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   @StorageLink('isFirstTimeDelete') isFirstTimeDelete: boolean = false;
   @StorageLink('confirmText') confirmText: Resource = $r('app.string.dialog_delete');
-  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
+  @StorageLink('isShowDeleteFollowDialog') isShow: boolean = false;
+  @Consume isAlbumDelete: boolean;
+  private title: Resource = $r('app.string.common_place_holder', '');
+  private content: Resource = $r('app.string.common_place_holder', '');
+  private cancelButton: ButtonOptions = {
+    defaultFocus: false,
+    value: $r('app.string.dialog_cancel'),
+    fontColor: DeviceInfo.isTv() ? $r('sys.color.font') : undefined,
+    action: (): void => {
+      Log.info(TAG, 'primaryButton onclick');
+      ShortCut.deleteDialogOpenFlag = false;
+      this.isShow = false;
+      this.dialogBroadCast.emit(BroadCastConstants.HIDE_DELETE_DIALOG, []);
+      BroadCastManager.getInstance().getBroadCast().emit(BroadCastConstants.HIDE_DELETE_DIALOG, []);
+      this.dialogCallback && this.dialogCallback?.cancelCallback?.();
+    },
+  };
+  private confirmButton: ButtonOptions = {
+    defaultFocus: true,
+    value: this.confirmText,
+    fontColor: DeviceInfo.isTv() ? $r('sys.color.font') : $r('sys.color.warning'),
+    background: DeviceInfo.isTv() ? $r('app.color.tv_delete_dialog_button_bg') : undefined,
+    action: (): void => {
+      Log.info(TAG, 'secondaryButton onclick');
+      ShortCut.deleteDialogOpenFlag = false;
+      this.isShow = false;
+      this.dialogBroadCast.emit(BroadCastConstants.HIDE_DELETE_DIALOG, []);
+      this.dialogCallback && this.dialogCallback?.confirmCallback?.();
+      FocusUtil.clearFocus(this.getUIContext()?.getFocusController());
+    },
+  };
 
-  aboutToDisappear() {
-    if (this.isFirstTimeDelete) {
+  aboutToAppear() {
+    Log.info(TAG, 'DeleteDialog aboutToAppear');
+    this.title = this.dialogMessage;
+    this.content = this.dialogContent;
+    /* instrument ignore next */
+    if (DeviceInfo.isPc()) {
+      FocusUtil.activateFocus(this.getUIContext()?.getFocusController());
+      AppStorage.setOrCreate<boolean>('hasDeleteDialog', true);
+    }
+  }
+
+  public async aboutToDisappear() {
+    Log.info(TAG, 'DeleteDialog aboutToDisappear');
+    this.appBroadCast.emit(BroadCastConstants.HAS_CLICKED_ALBUM_DELETE_BUTTON, []);
+    await this.putIsFirstTimeDelete();
+    /* instrument ignore next */
+    if (DeviceInfo.isPc()) {
+      AppStorage.setOrCreate<boolean>('hasDeleteDialog', false);
+      // 删除弹窗出现后，键盘CTRL与shift设置为false
+      AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_SHIFT_PRESS, false);
+      AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_CTRL_PRESS, false);
+    }
+  }
+
+  private putIsFirstTimeDelete(): void {
+    if (this.isFirstTimeDelete && !this.isAlbumDelete) {
       AppStorage.setOrCreate(Constants.IS_FIRST_TIME_DELETE, false);
       let pref: data_preferences.Preferences =
         AppStorage.get<data_preferences.Preferences>(Constants.PHOTOS_STORE_KEY) as data_preferences.Preferences;
-      pref.put(Constants.IS_FIRST_TIME_DELETE, false).then(() => {
+      pref.put(Constants.IS_FIRST_TIME_DELETE, false).then((): void => {
         Log.debug(TAG, `Succeeded in putting the value of '${Constants.IS_FIRST_TIME_DELETE}'.`);
         pref.flush();
       }).catch((err: BusinessError) => {
-        Log.error(TAG, `Failed to put the value of '${Constants.IS_FIRST_TIME_DELETE}'. Cause: ${err}`);
+        Log.error(TAG, `Failed to put the value of '${
+        Constants.IS_FIRST_TIME_DELETE}'. Cause: ${err}, code: ${err?.code}`);
       });
     }
   }
 
   build() {
-    Column() {
-      Column() {
-        if (this.isFirstTimeDelete) {
-          Image($r('app.media.first_delete_dialog_ico'))
-            .objectFit(ImageFit.Cover)
-            .height($r('app.float.first_delete_dialog_ico_height'))
-            .width($r('app.float.first_delete_dialog_ico_width'))
-            .margin({
-              bottom: $r('app.float.first_delete_dialog_ico_margin_bottom')
-            })
-        }
+    this.delete();
+  }
 
-        Text(this.dialogMessage)
-          .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
-          .fontWeight(FontWeight.Medium)
-          .fontColor($r('sys.color.ohos_id_color_text_primary'))
-          .textAlign(TextAlign.Center)
-
-        if (this.isFirstTimeDelete) {
-          Text($r('app.plural.first_delete_message', Constants.RECYCLE_DAYS_MAX, Constants.RECYCLE_DAYS_MAX))
-            .textAlign(TextAlign.Center)
-            .fontSize($r('sys.float.ohos_id_text_size_body1'))
-            .fontWeight(FontWeight.Regular)
-            .fontColor($r('sys.color.ohos_id_color_text_primary'))
-            .margin({ top: $r('app.float.first_delete_message_margin_top') })
-        }
-      }
-      .alignItems(HorizontalAlign.Center)
-      .width('100%')
-      .margin({
-        top: $r('app.float.dialog_content_margin'),
-        bottom: $r('app.float.dialog_button_and_text_margin')
-      })
-
-
-      Stack({ alignContent: Alignment.Top }) {
-        Row() {
-          Column() {
-            Button() {
-              Text($r('app.string.dialog_cancel'))
-                .fontSize($r('sys.float.ohos_id_text_size_button1'))
-                .fontColor($r('app.color.color_control_highlight'))
-                .fontWeight(FontWeight.Medium)
-                .width('100%')
-                .textAlign(TextAlign.Center)
-            }
-            .key('DeleteDialogCancelButton')
-            .margin({
-              right: $r('app.float.dialog_double_buttons_margin_right')
-            })
-            .backgroundColor(this.isPcDevice ? $r('sys.color.ohos_id_color_button_normal') : $r('app.color.transparent'))
-            .borderRadius($r('sys.float.ohos_id_corner_radius_button'))
-            .height($r('app.float.details_dialog_button_height'))
-            .onClick(() => {
-              Log.debug(TAG, `cancelCallback`);
-              this.controller?.close();
-              this.dialogCallback && this.dialogCallback.cancelCallback();
-            })
-          }.width('50%')
-
-          if (!this.isPcDevice) {
-            Divider()
-              .vertical(true)
-              .color(Constants.DEFAULT_DIVIDER_COLOR)
-              .height(Constants.DEFAULT_DIVIDER_HEIGHT)
-          }
-
-          Column() {
-            Button() {
-              Text(this.confirmText)
-                .fontSize($r('sys.float.ohos_id_text_size_button1'))
-                .fontColor($r('sys.color.ohos_id_color_warning'))
-                .fontWeight(FontWeight.Medium)
-                .width('100%')
-                .textAlign(TextAlign.Center)
-            }
-            .key('DeleteDialogConfirmButton')
-            .margin({
-              left: $r('app.float.dialog_double_buttons_margin_left')
-            })
-            .backgroundColor(this.isPcDevice ? $r('sys.color.ohos_id_color_button_normal') : $r('app.color.transparent'))
-            .borderRadius($r('sys.float.ohos_id_corner_radius_button'))
-            .height($r('app.float.details_dialog_button_height'))
-            .onClick(() => {
-              Log.debug(TAG, `confirmCallback`);
-              this.controller?.close();
-              this.dialogCallback && this.dialogCallback.confirmCallback();
-            })
-          }.width('50%')
-        }
-      }
-      .width('100%')
-      .height($r('app.float.details_dialog_button_area_height'))
-    }
-    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
-    .width(this.isPcDevice ? $r('app.float.pc_dialog_width') : ScreenManager.getInstance()
-                                                                 .getColumnsWidth(ColumnSize.COLUMN_FOUR))
-    .backgroundColor($r('app.color.white'))
-    .margin({
-      right: $r('app.float.dialog_content_margin'),
-      left: $r('app.float.dialog_content_margin'),
-      bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
-    })
-    .padding({
-      left: $r('app.float.dialog_double_buttons_padding'),
-      right: $r('app.float.dialog_double_buttons_padding')
-    })
-    .alignItems(HorizontalAlign.Center)
-    .shadow({
-      radius: $r('app.float.dialog_defult_shadow_m_radio'),
-      color: $r('app.color.dialog_defult_shadow_m_color'),
-      offsetX: $r('app.float.dialog_defult_shadow_m_offsetX'),
-      offsetY: $r('app.float.dialog_defult_shadow_m_offsetY')
+  @Builder
+  delete() {
+    AlertDialog({
+      primaryTitle: this.title,
+      content: this.content,
+      primaryButton: this.cancelButton,
+      secondaryButton: this.confirmButton,
     })
   }
 }

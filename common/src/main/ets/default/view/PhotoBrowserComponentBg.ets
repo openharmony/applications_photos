@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,22 +12,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Constants as PhotoConstants } from '../model/browser/photo/Constants';
-import Curves from '@ohos.curves';
-import { Log } from '../utils/Log';
+import lazy { Constants as PhotoConstants } from '../model/browser/photo/Constants';
+import lazy { Log } from '../utils/Log';
+import lazy Curves from '@ohos.curves';
+import lazy { DeviceInfo } from '../utils/DeviceInfo';
+import lazy { BroadCastManager } from '../model/common/BroadCastManager';
+import lazy { BroadCast } from '../utils/BroadCast';
+import lazy { BroadCastConstants } from '../model/common/BroadCastConstants';
 
 const TAG: string = 'browser_PhotoBrowserComponentBg';
+const PROPERTY_BACK_GROUND_OPACITY: number = 0.05;
+const BG_COLOR_CHANGE_ANIMATION = 200;
 
 @Component
 export struct PhotoBrowserComponentBg {
+  private isShowPhotoClassifieds: boolean = false;
+  private isShowPortraitAlbumsView: boolean = false;
   @Consume @Watch('onChangeBgColor') onlyChangeBgColor: boolean;
   @Consume backgroundColorResource: Resource;
   @Link @Watch('onShowChanged') isShowBar: boolean;
   @State opacityValue: number = 1;
+  @State backColor: Resource = $r('sys.color.background_secondary');
   @State isBlackBgVisibility: boolean = false;
   @State blackBgColorResource: Resource = this.backgroundColorResource;
+  // 防止大图背景与actionbar、toolbar背景过度绘制，导致进出编辑动效背景透明度不一致的问题
+  @Prop avoidOverdrawPadding: Padding | null = null;
+  @LocalStorageLink('isBlackBg') @Watch('onChangeBlackBg') isBlackBg: boolean = false;
+  @LocalStorageProp('isEditorShown') isEditorShown: boolean = false;
   private isFromPhotoBrowser = false;
+  private isFromPortraitCoverSet: boolean = false;
+  @Prop @Watch('onIsDetailSelectedChanged') isDetailSelected: boolean = false;
+  private isShowSearchPage: boolean = false;
+  private appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
 
+  // 显示变化
   onShowChanged(): void {
     if (!this.isShowBar) {
       this.isBlackBgVisibility = true;
@@ -54,8 +72,73 @@ export struct PhotoBrowserComponentBg {
     })
   }
 
+  changeToImmersive(): void {
+    this.opacityValue = 0;
+    this.isBlackBgVisibility = true;
+    if (this.blackBgColorResource.id != $r('app.color.black').id) {
+      this.blackBgColorResource = this.backgroundColorResource;
+    }
+    this.blackBgColorResource = this.backgroundColorResource;
+  }
+
+  onIsDetailSelectedChanged(): void {
+    if (!DeviceInfo.isPc()) {
+      return;
+    }
+    if (this.isDetailSelected) {
+      this.opacityValue = PROPERTY_BACK_GROUND_OPACITY;
+      animateTo({
+        duration: BG_COLOR_CHANGE_ANIMATION,
+        curve: Curve.Sharp,
+      }, () => {
+        this.backColor = $r('app.color.black');
+      })
+    } else {
+      this.backColor =
+        (this.isBlackBg || this.isFromPortraitCoverSet) ? $r('app.color.black') :
+        $r('sys.color.background_secondary');
+      this.isNotDetailSelectedAnimate();
+    }
+  }
+
+  private isNotDetailSelectedAnimate(): void {
+    animateTo({
+      duration: BG_COLOR_CHANGE_ANIMATION,
+      curve: Curve.Sharp,
+      onFinish: () => {
+        if (this.isShowSearchPage) {
+          this.appBroadCast.emit(BroadCastConstants.CHANGE_SEARCH_RESULT_PAGE_VISIBILITY, [Visibility.Visible]);
+          if (this.isShowPhotoClassifieds) {
+            this.appBroadCast.emit(BroadCastConstants.CHANGE_CATEGORY_ALBUM_VIEW_VISIBILITY, [Visibility.Visible]);
+          }
+          if (this.isShowPortraitAlbumsView) {
+            this.appBroadCast.emit(BroadCastConstants.CHANGE_PORTRAIT_ALBUM_PAGE_VISIBILITY, [Visibility.Visible]);
+          }
+        }
+      }
+    }, () => {
+      this.opacityValue = this.isShowBar ? 1 : 0;
+    })
+  }
+
   onChangeBgColor(): void {
     this.blackBgColorResource = this.backgroundColorResource;
+  }
+
+  onChangeBlackBg(): void {
+    Log.info(TAG, `change isBlackBg:${this.isBlackBg}`);
+    this.backColor =
+      (this.isBlackBg || this.isFromPortraitCoverSet) ? $r('app.color.black') : $r('sys.color.background_secondary');
+  }
+
+  aboutToAppear(): void {
+    Log.info(TAG, `aboutToAppear isBlackBg:${this.isBlackBg}, isFromPortraitCoverSet:${this.isFromPortraitCoverSet}`);
+    this.backColor =
+      (this.isBlackBg || this.isFromPortraitCoverSet) ? $r('app.color.black') : $r('sys.color.background_secondary');
+    /* instrument ignore next */
+    if (DeviceInfo.isVerdeFoldable()) {
+      this.changeToImmersive();
+    }
   }
 
   build() {
@@ -72,11 +155,14 @@ export struct PhotoBrowserComponentBg {
 
         Column() {
         }
+        .backgroundColor((DeviceInfo.isPc() && (!this.isShowBar || this.isEditorShown)) ?
+        PhotoConstants.FILLET_SERRATION_COLOR : this.backColor)
+        .layoutWeight(1)
         .key('PhotoBrowserBg')
-        .backgroundColor($r('app.color.default_background_color'))
+        .padding(this.isBlackBgVisibility ? 0 : (this.avoidOverdrawPadding ?? 0))
         .width('100%')
         .height('100%')
-        .opacity(this.opacityValue)
+        .opacity(DeviceInfo.isTv() ? undefined : this.opacityValue)
       } else {
         Column() {
         }
@@ -85,7 +171,7 @@ export struct PhotoBrowserComponentBg {
         .width('100%')
         .height('100%')
         .animation({
-          duration: PhotoConstants.IMMERSE_ANIM_DURATION
+          duration: PhotoConstants.IMMERSE_ANIM_DURATION,
         })
       }
 

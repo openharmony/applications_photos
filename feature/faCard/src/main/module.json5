@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "faCard",
+    "type": "har",
+    "mainElement": "FormAbility",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "installationFree": false
+  }
+}

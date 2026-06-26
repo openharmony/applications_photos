@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="6px" viewBox="0 0 40 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>圆</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="水印_画框水印备份" transform="translate(-160.000000, -668.000000)">
+            <g id="编组-2" transform="translate(146.000000, 618.000000)">
+                <g id="编组-4" transform="translate(8.000000, 8.000000)">
+                    <g id="圆" transform="translate(6.000000, 42.000000)">
+                        <rect id="矩形" fill="#D8D8D8" opacity="0" x="0" y="0" width="40" height="6"></rect>
+                        <path d="M3,4.850625 C1.978125,4.850625 1.149375,4.02225 1.149375,3 C1.149375,1.978125 1.978125,1.14975 3,1.14975 C4.021875,1.14975 4.850625,1.978125 4.850625,3 C4.850625,4.02225 4.021875,4.850625 3,4.850625 M3,0 C1.34325,0 0,1.34325 0,3 C0,4.657125 1.34325,6 3,6 C4.65675,6 6,4.657125 6,3 C6,1.34325 4.65675,0 3,0" id="Fill-28备份" fill="#FFFFFF" opacity="0.6"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

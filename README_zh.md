@@ -1,354 +1,145 @@
-# 图库源码开发说明
-## 1. 简介
-图库是系统内置的可视资源访问应用，提供图片和视频的管理、浏览、显示、编辑操作等功能，并支持默认相册和用户相册管理。  
-图库项目采用 TS 语言开发。
+# photos（图库）
 
-![](./figures/1层逻辑.png)
+## 介绍
 
+图库应用是 OpenHarmony 标准系统中预置的系统应用，为用户提供基础的图库能力，主要包括：相册宫格与时间线浏览、照片/大图浏览（含增强能力）、静态图片编辑（含接续编辑、一键还原、对比与基础编辑）、PhotoPicker、服务卡片、设置与隐私声明、开源资料与扩展能力等。
 
+## 核心功能
 
-图库整体以 OpenHarmony 既有的 MVVM 的 App 架构设计为基础，向下扩展出一套 MVP（View, Presenter, Model）分层架构（既有的 MVVM 框架整体理解为新扩展的 MVP 框架的 View 层），用于处理图库的业务逻辑与数据管理。
+1. **首页图片视图**：支持按相册宫格、时间线等方式浏览照片与视频，提供图库主入口的基础浏览能力；包括普通日视图查看、滚动查看、单击状态栏回到顶部、顶部多选按钮、长按多选等交互，同时支持删除、全选、滑动多选、移动到相册等宫格操作，以及幻灯片播放时长等相关设置。
+2. **照片 / 大图浏览**：支持大图标题展示与沉浸式浏览体验，提供滑动切换、双击放大、双指旋转、下拉返回、上滑查看详情等手势操作；同时支持收藏、编辑、删除等大图菜单能力，以及移动相册、播放幻灯片、设置壁纸、重命名等顶部操作入口。
+3. **视频播放**：支持视频的播放、暂停、静音播放、seek 播放、拖动进度条、倍速播放和横竖屏切换，满足图库场景下对短视频和本地视频内容的基础播放需求。
+4. **相册操作**：支持展示预置相册与最近删除页面，创建相册、重命名、删除、添加照片、相册内照片排序等常用相册管理能力，并提供最近删除页面，清空删除、还原。
+5. **静态图片编辑**：支持基础编辑、剪裁、调节、标注、马赛克、保存、对比、撤销恢复、一键复原等能力，满足用户对静态图片的常见编辑与修复需求。
+6. **PhotoPicker 选图**：支持 PhotoPicker 自定义，提供单选、多选、相册切换、大图视频预览、选择顺序、最新照片 / 视频、拍摄入口、原图选择、文件格式、数量等能力，便于在系统与三方场景下完成灵活选图。
+7. **桌面卡片**：支持在桌面展示图片，提供卡片编辑页面，并支持选择单张图片或者相册内容进行展示，方便用户在桌面快速查看图库内容。
+8. **适配**：支持图库旋转、深色模式、三方应用图片保存到图库等能力，提升图库在不同系统特性和跨应用场景下的兼容性与体验一致性。
 
-各层的作用分别如下：
+## 软件架构
 
-- 视图层（View）：负责更新 UI 显示以及触摸与点击事件的监听。
-- 展现层（Presenter）：负责处理视图层（View）发送的业务逻辑处理请求，并连通 Model 层获取数据。
-- 模型层（Model）：负责处理展现层（Presenter） 中关于数据处理的请求以及返回数据请求结果。
+本工程为 **多模块 HAP/HSP 形态** 的 ArkTS 应用，由 `build-profile.json5` 统一编排各子模块。
 
-应用各层中重要类及其功能如下表所示
+### 手机端在整体架构中的位置
 
-| 模块   | 层级   | 类名                     | 作用                                 |
-| ------ | ------ | ------------------------ | ------------------------------------ |
-| photos | 视图层 | phone.view.Index         | phone图库入口画面的视图层逻辑控制类  |
-| photos | 视图层 | pad.view.Index           | pad图库入口画面的视图层逻辑控制类    |
-| photos | 视图层 | TimelinePage             | 图库图片视图层逻辑控制类             |
-| photos | 视图层 | AlbumSetPage             | 图库相册视图层逻辑控制类             |
-| photos | 视图层 | PhotoBrowser             | 图库大图浏览视图层逻辑控制类         |
-| photos | 视图层 | PhotoGridPage            | 图库宫格视图层逻辑控制类             |
-| photos | 视图层 | ThirdSelectAlbumSetPage  | 图库三方选择相册视图层逻辑控制类     |
-| photos | 视图层 | ThirdSelectPhotoGridPage | 图库三方选择宫格视图层逻辑控制类     |
-| photos | 视图层 | ThirdSelectPhotoBrowser  | 图库三方选择大图浏览视图层逻辑控制类 |
-| photos | 展现层 | GroupItemDataSource      | 图库列大图浏览展现层数据逻辑类       |
-| photos | 展现层 | TimelineItemDataSource   | 图库日试图展现层数据逻辑类           |
-| photos | 展现层 | AlbumsDataSource         | 图库相册展现层数据逻辑类             |
-| photos | 展现层 | GroupItemDataSource      | 图库宫格展现层数据逻辑类             |
-| photos | 展现层 | SelectManager            | 图库展现层选择逻辑类                 |
-| photos | 展现层 | BroadCast                | 图库展现层消息分发类                 |
-| photos | 模型层 | AlbumDataItem            | 图库模型层相册信息类                 |
-| photos | 模型层 | MediaDataItem            | 图库模型层媒体信息类                 |
-| photos | 模型层 | TimelineDataItem         | 图库模型层日试图信息类              |
+- **手机入口 HAP**：`product/phone` 模块类型为 `entry`（工程内模块名 `phone_photos`），声明主 Ability、页面路由、权限与对其它 HSP/HAR 的依赖；日常「图库」App 的主进程与主界面逻辑由此进入。
+- **业务能力分层**：具体相册/时间线/大图/选图等能力多数实现在 `feature/*` 与 `common` 中；入口模块通过 **ohpm 本地依赖** 引用 `@ohos/common`、`@ohos/browserlibrary` 等包（构建时由 `oh-package.json5` 与模块依赖解析），保持入口轻薄、特性可复用。
+- **手机端浏览适配**：`browserCommon` 提供跨端浏览公共逻辑；**手机专用差异**集中在 `browserCommonPhone`（例如布局、手势、控制器在手机上的装配），与 `feature/browser`、`feature/browserlibrary` 协同。
+- **手机端图片编辑**：静态编辑主路径在 `imageEditor` 子工程中；手机产品形态对应 `imageEditor/product/editor_phone`，与 `imageEditor/common`（算法/SDK 桥接等）一起被主应用集成。
 
+### 架构图
 
+- `product/phone` 作为 **entry 入口层**，负责 Ability、页面装配、路由、权限声明与模块集成；
+- `feature/*` 承载 **相册/时间线/浏览/选图/隐私/卡片** 等主要业务能力；
+- `common`、`browserCommon`、`browserCommonPhone`、`tools`、`imageEditor` 提供 **公共模型、通用 UI / ViewModel、浏览共用能力、工具与编辑能力**；
+- 各模块共同依赖 ArkUI、Ability、DataShare、Media Library 等 **OpenHarmony 系统框架**。
 
-## 2. 目录
+![图库应用架构图](docs/gallery-architecture.svg)
 
-```
-/applications
-├── src
-│   └── main
-│       ├── ets    # ets代码目录
-│               ├── MainAbility
-│               ├── common # 共同代码目录
-│ 		    ├── model # model目录
-│			    ├── common # 共同业务逻辑和实体模型目录
-│ 		    └──  view # 共同视图组件
-│ 			    ├── actionbar # 共同标题栏、底层栏和工具栏组件目录
-│ 			    ├── browserOperation # 共同操作项目录
-│			    └── dialog # 共同对话框目录
-│               ├── feature # 功能模块目录
-│                   ├── album # 相册组件目录
-│ 			    ├── model # 相册model目录
-│ 			    └── view # 相册视图组件目录
-│                   ├── albumSelect # 相册视图目录
-│ 			    ├── model # 三方相册选择model目录
-│ 			    ├── utils # 三方相册选择工具目录
-│ 			    └── view # 三方相册选择视图组件目录
-│                   ├── brower # 图库浏览功能目录
-│ 			    ├── view # 图库浏览视图组件目录
-│                   ├── editor # 图库图片编辑功能目录
-│ 			    ├── base # 图片编辑基础目录
-│ 			    ├── crop # 裁剪框组件目录
-│ 			    ├── utils # 图片编辑工具目录
-│ 			    └── view # 图片编辑视图组件目录
-│                   ├── formEditor # 图库FA卡片编辑功能目录
-│ 			    ├── view # 图库FA卡片编辑视图组件目录
-│                   ├── newAlbum # 新建相册功能目录
-│ 			    ├── model # 新建相册model目录
-│ 			    └── view # 新建相册视图组件目录
-│                   ├── photoGrid # 图片宫格功能目录
-│ 			    ├── model # 图片宫格model目录
-│ 			    └── view # 图片宫格视图组件目录
-│                   ├── thirdSelect # 第三方选择功能目录
-│ 			    ├── model # 第三方选择model目录
-│ 			    └── view # 第三方选择视图组件目录
-│                   └── timeline # 日视图宫格功能目录
-│  			    ├── model # 日视图model目录
-│ 			    └── view # 日试图视图目录
-│               ├── product # 产品模块目录
-│                   ├── pad # pad模块目录
-│   			    └── view # pad模块视图目录
-│                   └── phone # phone模块目录
-│  			    └── view # phone模块视图目录
-│       ├── resources # 资源目录
-│       └── module.json5 # 项目配置信息
-```
-### 
+### 其它层次（与手机共用）
 
-## 3. 基础开发说明
-### 资源引用
-#### 定义资源文件
-- 在 `src/main/resources/`目录下，根据不同的资源类型，定义资源文件。
+- **应用级配置**：`AppScope`（`bundleName`、版本、图标、全局配置等）。
+- **公共基础**：`common`（数据模型、权限、任务、通用 UI/VM）；`tools`（通用工具）。
+- **特性模块目录**：`feature` 下按域拆分，如 `browser`、`browserlibrary`、`timeline`、`dataProvider`、`thirdselect`、`formAbility`、`faCard`、`extensions`、`privacy` 等。
+- **构建与签名**：根目录 `hvigorfile.ts`、`hvigor/`；`signature/`
 
-  ```json
-      {
-        "name": "default_background_color",
-        "value": "#F1F3F5"
-      },
-  ```
-#### 引用资源
-- 在有对应page的ets文件中，可直接通过`$r()`引用。
-  ```` JavaScript
-  @Provide backgroundColor: Resource = $r('app.color.default_background_color');
-  ````
-## 4. 典型接口的使用
-1. 相机启动图库大图浏览
+---
 
-   ```
-   this.context.startAbility({
-     bundleName:"com.ohos.photos",
-     abilityName: "com.ohos.photos.MainAbility",
-     parameters: {
-       uri: "photodetail"
-     }
-   }).then((data) => {
-     console.debug('startAbility complete');
-   }).catch((error) => {
-     console.debug(`startAbility failed, error: ${JSON.stringify(error)}`);
-   })
-   ```
+## 目录说明
 
-2. 三方应用启动图库三方单选
-
-   ```
-   let startParmameter = {
-     bundleName:"com.ohos.photos",
-     abilityName: "com.ohos.photos.MainAbility",
-     parameters: {
-       uri: "singleselect"
-     }
-   };
-   this.context.startAbilityForResult(startParmameter).then((result) => {
-     console.info(`startAbilityForResult Promise.resolve is called, result.resultCode =  ${JSON.stringify(result)}`)
-     let want = result['want'];
-     console.info(`test select single ${JSON.stringify(want)}`);
-     if (want != null && want != undefined) {
-       let param = want['parameters'];
-       console.info(`test select single ${JSON.stringify(param)}`);
-       if (param != null && param != undefined) {
-         let uri = param['select-item-list'];
-         console.info(`test select single ${uri[0]}`);
-       }
-     }
-   }, (error) => {
-     console.info(`startAbilityForResult Promise.Reject is called, error.code = ${error.code}`)
-   })
-   ```
-
-3. 三方应用启动图库三方多选
-
-   ```
-   let startParmameter = {
-     bundleName:"com.ohos.photos",
-     abilityName: "com.ohos.photos.MainAbility",
-     parameters: {
-       uri: "multipleselect"
-     }
-   };
-   this.context.startAbilityForResult(startParmameter).then((v) => {
-     let want = v['want'];
-     console.info(`test select multiple ${want}`);
-     if (want != null && want != undefined) {
-       let param = want['parameters'];
-       console.info(`test select multiple ${param}`);
-       if (param != null && param != undefined) {
-         let uri = param['select-item-list'];
-         console.info(`test select multiple ${uri[0]} ${uri[1]}`);
-       }
-     }
-   }, (error) => {
-     console.debug(`startAbility failed, error: ${JSON.stringify(error)}`);
-   })
-   ```
-
-## 5. 签名打包
-### 签名
-#### 签名文件的获取
-1. 拷贝 OpenHarmony 标准版的 prebuilts\signcenter 目录到操作目录。
-2. 标准版的签名文件下载路径：https://gitee.com/openharmony/signcenter_tool?_from=gitee_search。
-3. 拷贝图库工程的 signature\photos.p7b 到该目录下。
-
-
-#### 签名文件的配置
-打开项目工程，选择 File → Project Structure
-
-![](./figures/signature_1.png)
-
-选择 Modules → Signing Configs，将对应的签名文件配置如下，完成后点击Apply，再点击OK。
-密码为生成签名文件时的密码，如果使用默认的签名文件，则使用默认密码123456。
-
-![](./figures/signature_2.png)
-
-配置完成后，对应的build.gradle文件中会出现如下内容
-
-![](./figures/signature_3.png)
-
-### 打包
-DevEco Studio 支持 debug 与 release 两种打包类型。可以在 OhosBuild Variants 窗口中进行切换。
-
- ![](./figures/ds_ohosbuild_variants.png)
-
-#### release打包
-1. 代码准备完成后，在 OhosBuild Variants 窗口的 Selected Variant 中选择 release   
-
-    ![](./figures/ds_ohosbuild_variants_release.png)
-
-2. 选择Build → Build Haps(s)/APP(s) → Build Hap(s)
-
-   ![](./figures/ds_build_haps.png)
-
-3. 编译完成后，hap包会生成在工程目录下的 `\build\outputs\hap\release\`路径下（如果没有配置签名，则只会生成未签名的hap包）
-
-   ![](./figures/ds_ohosbuild_output_dir_release.png)
-
-
-## 6. 安装、运行、调试
-### 应用安装
-配置 hdc：
-进入SDK目录中的toolchains文件夹下，获取文件路径：
-
-![](./figures/sdk_catalogue.png)
-
-
-并将此路径配置到环境变量中：
-
-![](./figures/sdk_environment_variable.png)
-
-连接开发板，打开一个新的cmd命令窗口，执行`hdc list targets`，弹出窗口如下：
-
-![](./figures/cmd1.png)
-
-等待一段时间后，窗口出现如下打印，可回到输入 hdc list targets 的命令窗口继续操作:
-
-![](./figures/cmd2.png)
-
-再次输入hdc list targets，出现如下结果，说明hdc连接成功
-
-![](./figures/cmd3.png)
-
-刷完版本后安装需要卸载系统自带的图库
-
-```html
-hdc shell mount -o remount,rw /
-
-hdc shell rm -rf /system/app/com.ohos.photos/Photos.hap
-
-hdc shell reboot
-```
-
-安装签过名的hap包
-
-```html
-hdc install 包路径
-```
-
-长按图库图标添加到工作区
-
-### 应用调试
-#### log打印
-- 在程序中添加 log
-```JS
-const TAG = "MoudleXXX"
-
-entry() {
-    let input = 'hello'
-	 Log.info(TAG, `onPhotoChanged start ${input}`);
-}
-```
-上述log打印为：
+### 1. 工程根目录（手机开发最常打开的层级）
 
 ```
-Photos_MoudleXXX:entry: hello
+applications_photos/
+├── AppScope/                      # 应用级 app.json5 等（包名、版本、图标）
+├── product/phone/                 # 手机/平板 entry：主 HAP、Ability、主页面入口
+├── common/                        # 全局公共：模型、权限、视图与 VM 等
+├── feature/                       # 各业务特性 HSP/HAR（浏览、时间线、选图、隐私…）
+├── browserCommon/                 # 浏览公共逻辑
+├── browserCommonPhone/            # 手机端浏览差异与控制器等
+├── browserCommonPC/               # PC 端浏览（手机开发一般少改）
+├── imageEditor/                   # 图片编辑子工程（含 editor_phone）
+├── tools/                         # 工具模块
+├── demo/                          # 示例工程（如 PhotoPicker demo）
+├── signature/                     # 签名证书与 profile（按环境配置，勿泄露）
+├── hvigor/hvigorfile.ts           # Hvigor 构建配置
+├── build-profile.json5            # 全工程模块、SDK、签名方案
+└── oh-package.json5               # 根依赖（如 hypium）；各子模块另有独立 oh-package.json5
 ```
 
-可以在DevEco Studio中查看log
-![](./figures/ds_hilog_window.png)
+### 2. 手机入口模块 `product/phone`
 
-#### log获取及过滤
-- log获取
+手机用户安装的图库主应用，对应本目录编译出的 **entry HAP**。源码主路径：`product/phone/src/main/`。
 
-
-将log输出至文件  
 ```
-hdc shell hilog > 输出文件名称
+product/phone/src/main/
+├── module.json5                           # 模块类型 entry、mainElement、权限、依赖的 HSP 等
+├── resources/                             # 本模块字符串、媒体、主题、页面 profile（如 main_pages）
+└── ets/
+    ├── Application/                       # AbilityStage 等应用级生命周期
+    ├── MainAbility/                       # 主界面：相册 Tab、宫格、时间线入口、大图容器等
+    │   ├── MainAbility.ets
+    │   ├── PrivacyStatementAbility.ets    # 隐私声明相关页面 Ability
+    │   └── view/                          # 主流程页面与子组件（宫格、时间线 Loader、PhotoBrowser 等）
+    ├── FormAbility/                       # 服务卡片 / 桌面卡片：卡片 UI、编辑页、多尺寸 Widget
+    ├── pickerability/                     # 系统选图 / PhotoPicker：Picker 扩展页、授权与警告页等
+    ├── RecentAbility/                     # 「最近」类选图/展示扩展（含 Recent UIExtension）
+    ├── DeleteAbility/                     # 删除相关 UIExtension 与页面
+    ├── SaveAbility/                       # 保存相关 UIExtension 与页面
+    ├── DefaultAlbumNameAbility/           # 默认相册命名等 UIExtension
+    ├── galleryCleanupAbility/             # 图库清理（照片/视频清理入口与网格页等）
+    ├── SettingCardDataShareAbility/       # 与设置卡片数据共享相关 Ability
+    ├── AuthExtension/                     # 鉴权扩展 Ability
+    ├── BackupExtension/                   # 备份扩展
+    ├── MusicAbility/                      # 音乐类服务桩（与媒体场景协同）
+    ├── viewmodel/                         # 入口模块内的页面级 VM（如各相册页 AppBarManager）
+    └── resources/                         # 模块内嵌资源（如 lottie/json）
 ```
 
-例：
-在真实环境查看log，将全log输出到当前目录的hilog.log文件中
+### 3. 公共模块 `common`（手机与特性共用）
+
+路径：`common/src/main/ets/`。手机端大量页面与逻辑依赖此处的模型与组件。
+
 ```
-hdc shell hilog > hilog.log
+common/src/main/ets/
+├── default/                       # 主业务代码根
+│   ├── model/                     # 媒体项、相册、浏览等数据模型（如 browser/photo）
+│   ├── view/viewmodel/            # 可复用 UI 与状态管理
+│   ├── permission/                # 权限申请与说明封装
+│   ├── task/                      # 异步任务、调度相关
+│   ├── utils/access/config/       # 工具、访问封装、配置
+│   └── interface/                 # 对外或模块间接口定义
 ```
 
-- log过滤
+### 4. 特性模块 `feature/*`
 
-在命令行窗口中过滤log
+路径：`feature/<模块名>/src/main/ets/`。下列为手机图库**常见关联模块**
+
+| 目录 | 手机端典型职责 |
+|------|------------------|
+| `feature/browser` | 图库内「浏览」相关实现与默认打包逻辑 |
+| `feature/browserlibrary` | 可被其它应用依赖的浏览库（入口 HAP 在 `module.json5` 中声明依赖） |
+| `feature/timeline` | 时间线视图、相册宫格子能力（含 albumgrid、photogrid 等子目录） |
+| `feature/dataProvider` | 媒体数据对外提供（系统图库数据通道相关） |
+| `feature/thirdselect` | 三方应用选图、与系统选择器协同 |
+| `feature/formAbility` | 与表单/扩展 Ability 相关的特性侧实现（与 `product/phone` 中 Form 协同） |
+| `feature/faCard` | 服务卡片数据与逻辑 |
+| `feature/privacy` | 安全与隐私（安全中心、隐私声明能力等） |
+| `feature/extensions` | 扩展点聚合 |
+
+### 5. 浏览公共层 `browserCommon` 与 `browserCommonPhone`
+
+- **`browserCommon`**：跨设备浏览共用逻辑（组件、管线等，具体见该模块 `src/main/ets`）。
+- **`browserCommonPhone`**：手机端专用控制器、布局或交互差异（当前可见如 `controller` 子目录）；与 `feature/browserlibrary` 中控制器配合完成大图体验。
+
+### 6. 手机端图片编辑 `imageEditor`
+
 ```
-hilog | grep 过滤信息
+imageEditor/
+├── common/                        # 编辑内核侧公共代码、Native/桥接等（模块 editor_common）
+└── product/
+    └── editor_phone/              # 手机编辑器产品：页面与组件（如 component/）
 ```
 
-例：过滤包含信息 Album的 hilog
-```
-hilog | grep Album
-```
-## 7. 贡献代码
-### Fork 代码仓库
-1. 在码云上打开 photos代码仓库（[仓库地址](https://gitee.com/OHOS_STD/applications_photos)）。
-2. 点击仓库右上角的 Forked 按钮
-   ![](./figures/commit_source_fork_button.png)
-3. 在弹出的画面中，选择将仓库 fork 到哪里，点击确认。
-   ![](./figures/commit_source_fork_confirm.png)
-4. Fork 成功之后，会在自己的账号下看见 fork 的代码仓库。
-   ![](./figures/commit_source_forked_repo.png)
+## 相关仓
 
-### 提交代码
-1. 访问自己在码云账号上 fork 的代码仓库，点击“克隆/下载”按钮，选择 SSH，点击“复制”按钮。
-   ![](./figures/commit_source_clone_page.png)
-
-2. 在本地新建 Photos 目录，在 Photos 目录中执行如下命令
-   ```
-   git clone 步骤1中复制的地址
-   ```
-
-3. 修改代码。
-
-   > 将代码引入工程，以及编译工程等相关内容请参见 **3. 代码使用** 部分的相关内容。
-4. 提交代码到 fork 仓库。  
-   > 修改后的代码，首先执行 `git add` 命令，然后执行 `git commit` 命令与 `git push` 命令，将代码 push 到自己的 fork 仓中。
-   > 关于代码提交的这部分内容涉及 git 的使用，可以参照 [git官网](https://git-scm.com/) 的内容，在此不再赘述。
-   > 注意事项：需要使用commit -s,暴露提交者信息，否则门禁不通过
-
-### 发起 Pull Request (PR)
-在将代码提交到 fork 仓之后，可以通过发起 Pull Request（PR）的方式来为 OpenHarmony 的相关项目贡献代码。
-
-1. 打开 fork 仓库。选择 `Pull Requests` → `新建 Pull Request`
-
-   ![](./figures/commit_source_new_pull_request.png)
-
-2. 在 `新建 Pull Request` 画面填入标题与说明，点击 `创建` 按钮。
-
-   ![](./figures/commit_source_new_pull_request_confirm.png)
-3. 创建 Pull Request 完成。 PR 创建完成后，会有专门的代码审查人员对代码进行评审，评审通过之后会合入相应的代码库。
-
-   ![](./figures/commit_source_new_pr_done.png)
-
-
-
+- https://gitcode.com/openharmony/applications_photos

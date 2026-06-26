@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,13 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Constants as PhotoConstants } from '../model/browser/photo/Constants';
+import lazy { Constants as PhotoConstants } from '../model/browser/photo/Constants';
 
 @Component
 export struct PhotoBrowserBg {
   @Consume backgroundColorResource: Resource;
   @Link isShowBar: boolean;
 
+  /* instrument ignore file */
   build() {
     Column() {
     }
@@ -27,7 +28,7 @@ export struct PhotoBrowserBg {
     .width('100%')
     .height('100%')
     .animation({
-      duration: PhotoConstants.IMMERSE_ANIM_DURATION
+      duration: PhotoConstants.IMMERSE_ANIM_DURATION,
     })
   }
 }

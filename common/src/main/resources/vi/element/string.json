@@ -1,0 +1,6452 @@
+{
+    "string":[
+        {
+            "name":"hide_single_file_tips",
+            "value":"Ẩn mục này?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"up_to_limit_tips",
+            "value":"Đã chọn số mục tối đa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pull_down_back_tips_for_sub_display",
+            "value":"Vuốt xuống để thoát xem trước ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_image",
+            "value":"Cloud",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all",
+            "value":"Tất cả",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"local_image",
+            "value":"Thiết bị",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"selected_file_already_deleted",
+            "value":"Các mục được chọn đã bị xóa khỏi thiết bị này.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_file",
+            "value":"Bộ lọc",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+
+        {
+            "name":"close_virtual_aperture",
+            "value":"Khẩu độ ảo đã tắt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flash_capture",
+            "value":"Hiệu ứng ảnh chụp nhanh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"virtual_aperture",
+            "value":"Khẩu độ ảo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_flash_capture",
+            "value":"Hiệu ứng ảnh chụp nhanh đã tắt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dynamic_panning",
+            "value":"Xoay ngang",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"overlay_effect",
+            "value":"Lớp phủ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_effect",
+            "value":"Tắt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_updating",
+            "value":"Đang tải lên (%1$s/%2$s)…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"AI_cloud_enhance",
+            "value":"Cải thiện trên đám mây AI",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"download_failed_single",
+            "value":"Không lưu được tệp tin.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_text",
+            "value":"Gốc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_daylight",
+            "value":"Ánh sáng ban ngày",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"phone_rotate",
+            "value":"Xoay",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"keep_original_storage",
+            "value":"Giữ bản gốc trên thiết bị",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"vertical_collage",
+            "value":"Cắt dán theo chiều dọc, dài",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_select_image_text",
+            "value":"Chọn ảnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"play",
+            "value":"Phát",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no",
+            "value":"Hủy",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_picture",
+            "value":"Hình ảnh động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_creation_time",
+            "value":"Sắp xếp theo thời gian tạo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"enable_sync_title_31",
+            "value":"Bật tính năng Đồng bộ Bộ sưu tập",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_size",
+            "value":"Kích thước tệp tin",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort",
+            "value":"Sắp xếp",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"deselected",
+            "value":"Chưa chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"setting_up_the_network",
+            "value":"Cài đặt mạng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_field",
+            "value":"Trung tâm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_learn_more",
+            "value":"Tìm hiểu thêm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_limited",
+            "value":"Dịch vụ này chỉ được cung cấp miễn phí trong thời gian có hạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_and_video_desc_tv",
+            "value":"Quyền này được sử dụng để truy cập và lưu trữ ảnh cũng như video.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_camera",
+            "value":"Máy ảnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_single_album_tips",
+            "value":"Xóa album này? (Ảnh: %1$d, Video: %2$d)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_hdc_dialog_content",
+            "value":"Ảnh và video của bạn sẽ không còn được đồng bộ với các thiết bị khác của bạn nữa. Vẫn tắt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_fluorescent",
+            "value":"Ánh đèn huỳnh quang",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_title_text",
+            "value":"Bộ sưu tập",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"landscape_collage",
+            "value":"Ảnh ghép theo hướng ngang",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pause_none_battery_low",
+            "value":"Cập nhật tạm dừng để tiết kiệm pin.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_size",
+            "value":"Sắp xếp theo kích thước tệp tin",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"paste_from_pasteboard",
+            "value":"Dán",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"help_you_remind_memory_and_classify",
+            "value":"Sống lại những khoảnh khắc đẹp nhất của bạn.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_prompt1_tv",
+            "value":"Ứng dụng này yêu cầu kết nối %1$s và quyền truy cập %2$s để cung cấp các tính năng như duyệt hình ảnh và video.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_new",
+            "value":"Điều khoản Sử dụng Các chức năng Tạo bằng AI của dịch vụ Chỉnh sửa bằng AI",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_hide",
+            "value":"Ẩn",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"yes",
+            "value":"OK",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_sync_cloud",
+            "value":"Đồng bộ album lên Cloud",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_download",
+            "value":"Đang tải xuống (%1$s/%2$s)…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_enhance_complete_tips",
+            "value":"Cải thiện trên đám mây AI hoàn tất.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance_des_1",
+            "value":"Một số ảnh đã chụp đáp ứng các tiêu chí để tự động cải thiện trên đám mây.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_new_album",
+            "value":"Album mới",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_back_to_default",
+            "value":"Đặt lại",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all_photos",
+            "value":"Tất cả ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_other",
+            "value":"Thủ công",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_failed",
+            "value":"Tải về thất bại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slide_show_setting",
+            "value":"Khoảng thời gian trình chiếu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_creation_time",
+            "value":"Thời gian tạo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_busy",
+            "value":"Máy chủ đang bận. Hãy thử lại sau.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_compare",
+            "value":"So sánh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all_videos",
+            "value":"Tất cả video",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_cloudy",
+            "value":"Ngày nhiều mây",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"stop_for_sync_cloud",
+            "value":"Mức pin thấp hơn %s. Đồng bộ đã tạm dừng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"checkbox_deselected",
+            "value":"Chưa được chọn, hộp kiểm, chạm đúp bằng một ngón tay để chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_time_update",
+            "value":"Đã cập nhật %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_show_isShowAlbumName",
+            "value":"Hiện tên album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"privacy_statement",
+            "value":"Tuyên bố về Bộ sưu tập và Quyền riêng tư",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_stop_confirm",
+            "value":"Tính năng sửa bằng AI sẽ không còn khả dụng nữa. Vẫn tắt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_stop_ai_creation_service",
+            "value":"Tính năng Sáng tạo nội dung AI sẽ không còn hoạt động nữa. Các tính năng khác sẽ không bị ảnh hưởng. Tắt ngay?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"on_network",
+            "value":"Internet",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_albums_tips",
+            "value":"Xóa %1$d album? (Ảnh: %2$d, Video: %3$d)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"super_macro",
+            "value":"Super macro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_cloud_enhance_service_note",
+            "value":"Tính năng Cải thiện trên đám mây AI sẽ không còn khả dụng nữa. Vẫn tắt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title_select_album",
+            "value":"Chọn album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_settings",
+            "value":"Cài đặt",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_prompt_message",
+            "value":"Ảnh và video sẽ bị xóa vĩnh viễn sau số ngày được hiển thị (tối đa %d ngày).",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_extra_1",
+            "value":"Tự động cải thiện các ảnh gần đây bằng AI. Chỉ cần chạm vào biểu tượng cây đũa thần phía trên các hình ảnh được hỗ trợ. Tính năng này chỉ miễn phí trong một khoảng thời gian có hạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_switcher_square",
+            "value":"Hiển thị hình thu nhỏ dưới dạng hình vuông",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_switcher_rectangle",
+            "value":"Hiển thị hình thu nhỏ theo tỷ lệ khung hình ban đầu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_rename",
+            "value":"Đổi tên",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"search",
+            "value":"Tìm kiếm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_privacy_protocol",
+            "value":"Tuyên bố về Tạo nội dung bằng AI và Quyền riêng tư",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_name",
+            "value":"Tên tệp tin",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_image_symbol_enhanced",
+            "value":"Sau",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_spot",
+            "value":"Điểm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_action_show_date",
+            "value":"Hiện ngày",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cast_mirror_title",
+            "value":"Đang chiếu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_network",
+            "value":"Không có kết nối Internet.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_name",
+            "value":"Sắp xếp theo tên tệp tin",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_photo_sort_dialog_item_shoot_time",
+            "value":"Thời gian quay/chụp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_selected",
+            "value":"Đã chọn tất cả",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_portrait",
+            "value":"Chuyển",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Switch_on",
+            "value":"Bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_action_hide_date",
+            "value":"Ẩn ngày",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_watermark_after_enhance",
+            "value":"Thêm hình chìm mờ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"target_has_same_name",
+            "value":"Một tập tin với tên gọi %1$s đã tồn tại. Thay thế nó?\n",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_petalclip_video",
+            "value":"Petal Clip",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_view",
+            "value":"Cảnh đêm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_collage",
+            "value":"Ảnh ghép",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_network_error",
+            "value":"Lỗi mạng. Hãy kiểm tra và thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_storage_dialog_content",
+            "value":"Bộ sưu tập có thể giải phóng %2$s bộ nhớ thiết bị bằng cách xóa các phiên bản ảnh và video có độ phân giải đầy đủ được chụp cách đây hơn %1$s ngày. Bản gốc được lưu trữ trên đám mây và có thể tải xuống bất cứ lúc nào.\n\nBộ sưu tập sẽ tự động tối ưu hóa bộ nhớ thiết bị theo cách này khi dung lượng sắp hết.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_video_dialog_show_petalClip_not_install",
+            "value":"Cần có Petal Clip để sử dụng tính năng này. Tải xuống?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"favorited",
+            "value":"Đã thêm vào mục ưa thích",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance",
+            "value":"Tự động cải thiện trên đám mây",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add",
+            "value":"Thêm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_addimage_temperature_high",
+            "value":"Nhiệt độ thiết bị quá cao. Hãy thử lại sau.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Picker_Unselect",
+            "value":"Bỏ chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_hicloud_gallery",
+            "value":"Đồng bộ ảnh và video lên đám mây.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"more_text",
+            "value":"Thêm",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_all_files_tips",
+            "value":"Gỡ tất cả các mục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_add",
+            "value":"Thêm tên",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"camera_flash_on",
+            "value":"Đèn flash, bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_sort_by_shoot_time",
+            "value":"Sắp xếp theo thời gian quay/chụp",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_video_dialog_to_download_PetalClip",
+            "value":"Vào",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pause_upload_for_low_battery",
+            "value":"Pin còn dưới %s. Đã tạm dừng tải lên.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_off",
+            "value":"Đèn flash, tắt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_sync_content_31",
+            "value":"Ảnh là những kỷ niệm của bạn. Hãy đồng bộ ảnh của bạn lên Cloud để dễ dàng truy cập trên bất kỳ thiết bị nào của bạn. Việc này giúp bạn giải phóng dung lượng lưu trữ trên thiết bị.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_and_video_desc",
+            "value":"Quyền này được sử dụng để truy cập, sửa và lưu trữ ảnh và video.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_remove",
+            "value":"Gỡ bỏ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_items_to_add",
+            "value":"Chọn mục cần thêm.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_single_video_tips",
+            "value":"Ẩn video này?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_enabled_now",
+            "value":"Bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rainbow",
+            "value":"Cầu vồng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_empty_album_tips",
+            "value":"Xóa album này?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_all_videos_tips",
+            "value":"Xóa tất cả video?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_motion_picture",
+            "value":"Hình ảnh động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fa_subTitle_text",
+            "value":"Chọn ảnh hoặc album bạn muốn xem.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_edit",
+            "value":"Chỉnh sửa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_remove",
+            "value":"Gỡ bỏ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_auto",
+            "value":"Tự động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_toast_1",
+            "value":"Một số ảnh đã chụp đáp ứng các tiêu chí để tự động cải thiện trên đám mây. Bạn có thể bật chế độ này trong mục Cài đặt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhancing_status_download_error",
+            "value":"Đang tải xuống…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_default_content",
+            "value":"Ảnh là những kỷ niệm của bạn. Hãy tải ảnh lên Cloud để lưu giữ an toàn và dễ dàng truy cập trên bất kỳ thiết bị nào của bạn. Bạn cũng nên nâng cấp gói bộ nhớ đám mây của mình để nhận thêm dung lượng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pictures_and_videos",
+            "value":"Ảnh và video",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_1",
+            "value":"Tự động cải thiện các ảnh gần đây bằng AI. Chỉ cần chạm vào biểu tượng cây đũa thần phía trên các hình ảnh được hỗ trợ. Tính năng này chỉ miễn phí trong một khoảng thời gian có hạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_metering_center_weighted",
+            "value":"Ma trận",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_image_symbol_initial",
+            "value":"Trước",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_slide_show",
+            "value":"Trình chiếu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_enhance_wait_tips",
+            "value":"Ảnh này đang được cải thiện trên đám mây. Vui lòng chờ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_highlight_tips",
+            "value":"Ảnh này sẽ không còn xuất hiện trong phần khoảnh khắc nổi bật này nữa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from_this_highlight",
+            "value":"Xóa nội dung đã chọn?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_all_from_highlight_tips",
+            "value":"Các mục đã chọn sẽ không còn xuất hiện trong phần khoảnh khắc nổi bật này nữa.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_video_from_highlight_tips",
+            "value":"Video này sẽ không còn xuất hiện trong phần khoảnh khắc nổi bật này nữa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_out_of_highlight",
+            "value":"Xóa khỏi album mục nổi bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_already_use",
+            "value":"Tên đã được sử dụng rồi.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"the_oriental_pearl_tower",
+            "value":"Tháp Minh Châu Phương Đông",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_deselect_all",
+            "value":"Bỏ chọn tất cả",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_video_recycle_delete_kept_tips",
+            "value":"Video này sẽ bị xóa khỏi thiết bị này, đám mây và mọi thiết bị đã đồng bộ. Mục này sẽ được lưu trong mục \"Đã xóa gần đây\" trong %1$d ngày.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_splash_content_online",
+            "value":"%s Cho phép bạn duyệt xem, chia sẻ và thưởng thức ảnh cũng như video ngay từ đám mây.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper",
+            "value":"Hình nền AI",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices_more_sub",
+            "value":"Bạn có thể truy cập thiết bị lưu trữ ngoài bằng cách vào Tệp tin > Duyệt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_current_highlight",
+            "value":"Xóa khỏi phần khoảnh khắc nổi bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cover_edit_title",
+            "value":"Sửa ảnh bìa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"means_of_transportation",
+            "value":"Xe",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_near_full_card_content",
+            "value":"Ảnh và video mới sẽ không còn được tải lên Cloud nữa sau khi bộ nhớ của bạn đầy.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"distributed_album_disconnected",
+            "value":"Thiết bị đã bị ngắt kết nối.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"skip_current_file",
+            "value":"Bỏ qua",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"duplicate_name_merge_portrait_photo_title",
+            "value":"Hợp nhất những người có cùng tên?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_optimize_device_storage_detail",
+            "value":"Video và ảnh có độ phân giải đầy đủ trên thiết bị của bạn sẽ không bị thay thế bằng phiên bản nhỏ hơn.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"close_hdc_dialog_title",
+            "value":"Tắt tính năng đồng bộ lên đám mây",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_router",
+            "value":"Vào tối ưu hóa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"blossom",
+            "value":"Hoa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tab_highlights",
+            "value":"Album mục nổi bật",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycleAlbum_delete_message",
+            "value":"Mục này sẽ bị xóa vĩnh viễn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"intelligent_classification_description_tips",
+            "value":"Ảnh và video được sắp xếp thành các album riêng biệt để duyệt xem dễ dàng hơn. Bạn cũng có thể duyệt xem theo người, địa điểm và nguồn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_as_cover",
+            "value":"Đặt làm ảnh bìa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_prompt_message",
+            "value":"Ảnh và video sẽ bị xóa vĩnh viễn sau số ngày được hiển thị (tối đa %d ngày).",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_cancel_message",
+            "value":"Đã xóa %1$s. Dừng xóa các tệp tin còn lại?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editBar_text",
+            "value":"Sửa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"please_enter_the_password",
+            "value":"Nhập mã PIN",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_photo_and_video",
+            "value":"%s đã sửa hình ảnh/video trong Bộ sưu tập.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"print_or_generate_pdf",
+            "value":"In hoặc tạo PDF",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_videos_to_timeline_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"file_size_location",
+            "value":"Kích thước: %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_photo",
+            "value":"Tải xuống",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_photo",
+            "value":"%s đã sửa hình ảnh trong Bộ sưu tập.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"business_card",
+            "value":"Danh thiếp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_portrait_tips",
+            "value":"Bạn có thể thêm lại bất kỳ lúc nào từ album Mọi người.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"more_portrait",
+            "value":"Thêm người",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Remove_From_Portrait",
+            "value":"Xóa khỏi album Người",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_description",
+            "value":"Cá nhân hóa thiết bị của bạn bằng hình nền do AI tạo ra.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy",
+            "value":"Sao chép",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_content",
+            "value":"Chưa tải %s lên Cloud.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_timeline",
+            "value":"Ở đây, tất cả hình ảnh và thanh âm cuộc sống của bạn được sắp xếp theo thứ tự. Chỉ cần cuộn để nhìn lại.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tab_albums",
+            "value":"Album",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Statue_of_liberty",
+            "value":"Tượng Nữ thần Tự do",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"double_click_to_restore_the_original_size",
+            "value":"Chạm đúp để khôi phục kích thước ban đầu.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_portrait_photo",
+            "value":"Chọn ảnh của bạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_description_new",
+            "value":"Dịch vụ này tải các hình ảnh đã chọn lên đám mây để chỉnh sửa bằng AI.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_ai_creation_subtitle",
+            "value":"Dịch vụ này áp dụng các thuật toán AI cho hình ảnh và video. Dịch vụ này có thể được dùng để chỉnh sửa ảnh và tự động tạo video, cùng với nhiều ứng dụng khác.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Tab_change_cover",
+            "value":"Chọn hình ảnh bìa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"displayed_agreeing_map",
+            "value":"Đồng ý với các điều khoản dịch vụ để xem bản đồ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hidden_album",
+            "value":"Mục ẩn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_setting",
+            "value":"Cài đặt",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_content",
+            "value":"Bạn có thể ngừng nhận loại thông báo nhắc này bằng cách tắt Bộ sưu tập Cloud.\n\nNếu muốn xóa ảnh và video của mình khỏi Cloud sau khi tắt Bộ sưu tập Cloud, bạn có thể thực hiện việc này từ %s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_not_network",
+            "value":"Không có kết nối WLAN. Chưa đồng bộ %1$s. %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_compare_after_cloud_enhancement",
+            "value":"Chạm để xem sự khác biệt trước và sau khi cải thiện.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_this_portrait",
+            "value":"Xóa người này?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"front_night_shot_album",
+            "value":"Ảnh chụp ở chế độ Ban đêm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_source",
+            "value":"Duyệt xem theo ứng dụng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"new_recycle_single_album_tips",
+            "value":"Thao tác này sẽ không xóa ảnh và video bên trong album đó.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_files_recycle_delete_kept_tips",
+            "value":"Tất cả các mục sẽ bị xóa khỏi thiết bị này, đám mây và mọi thiết bị đã đồng bộ. Các mục này sẽ được lưu trong mục \"Đã xóa gần đây\" trong %d ngày.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_cancel_message",
+            "value":"Đã ẩn %1$s. Dừng ẩn các tệp tin còn lại?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_selected_albums",
+            "value":"Xóa các album đã chọn?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"merge_portrait_photo_content",
+            "value":"Sau khi hợp nhất, họ sẽ được coi là một người.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_info",
+            "value":"Nén ảnh và video ít được xem để tiết kiệm dung lượng trên thiết bị của bạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"personal_information_collected",
+            "value":"Thông tin cá nhân được thu thập",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_service",
+            "value":"Tạo nội dung bằng AI",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"map_album_service_description",
+            "value":"Dịch vụ này giúp bạn duyệt xem ảnh và video theo vị trí. Dịch vụ này yêu cầu quyền sau. Bạn có thể thu hồi quyền này bất kỳ lúc nào trong Cài đặt > Ứng dụng và dịch vụ > Ứng dụng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"please_enter_name",
+            "value":"Chưa nhập tên nào.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"enable_gallery_network_connection",
+            "value":"Việc cho phép truy cập Internet giúp bạn xem vị trí chụp ảnh và quay video, nhận đề xuất tìm kiếm, duyệt xem nội dung trên đám mây, tải xuống hình thu nhỏ và sử dụng các tính năng như Cải thiện trên đám mây AI và Tạo nội dung bằng AI.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_service_description",
+            "value":"Tải hình ảnh lên đám mây để cải thiện hình ảnh bằng AI.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new",
+            "value":"Tự động cải thiện các ảnh gần đây bằng AI. Chỉ cần chạm vào biểu tượng cây đũa thần phía trên các hình ảnh được hỗ trợ. Tính năng này chỉ miễn phí trong một khoảng thời gian có hạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_progress_done",
+            "value":"Đã lưu mục.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_cloud_gallery_toast",
+            "value":"Bộ sưu tập Cloud đã được bật cho bạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recommended_cleanup",
+            "value":"Khuyến cáo dọn dẹp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time_line_message_cloud_contains",
+            "value":"%s trên Cloud",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_file_tips",
+            "value":"Xóa mục này?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_screen_shot",
+            "value":"Ảnh chụp màn hình",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_cancel_text",
+            "value":"Hủy",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photos_videos_head_title_album",
+            "value":"Không có ảnh hoặc video nào",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"view_albums",
+            "value":"Xem nội dung",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"send",
+            "value":"Gửi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cover_preview_title",
+            "value":"Xem trước ảnh bìa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tv_menu_tips",
+            "value":"Nhấn %s để biết thêm tùy chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unnamed_albums",
+            "value":"Album chưa đặt tên",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title_select_photos",
+            "value":"Chọn hình ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information",
+            "value":"Vị trí",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"prompt_new_album_dialog_message",
+            "value":"Không có album nào để di chuyển hoặc sao chép sang. Tạo album mới?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_linkage",
+            "value":"Hủy liên kết",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"find_same_name",
+            "value":"Đã tìm thấy tệp tin trùng lặp",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"slow_motion_video",
+            "value":"Chuyển động chậm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shoot_album",
+            "value":"Chế độ Máy ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_cover",
+            "value":"Thay đổi ảnh bìa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_access_statement",
+            "value":"Quyền của Hình nền AI",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unfavor_cancel_message",
+            "value":"%1$s mục đã được xóa khỏi mục ưa thích.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_off",
+            "value":"Bộ sưu tập không được phép truy cập Internet. Đã tạm dừng đồng bộ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_disabled_please_enable_it",
+            "value":"Bộ sưu tập đã bị tắt quyền truy cập Internet",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"puzzle_frame",
+            "value":"Khung",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_title",
+            "value":"Bạn thấy chán loại thông báo nhắc này?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"do_same_action",
+            "value":"Áp dụng cho mọi xung đột sau này",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_dialog_title_text",
+            "value":"Lưu làm ảnh mới hay thay thế ảnh gốc?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_content",
+            "value":"Ảnh được chọn sẽ được lưu thành ảnh riêng lẻ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_gallery_space",
+            "value":"Tối ưu hóa bộ nhớ của Bộ sưu tập",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_service_description",
+            "value":"Ứng dụng này yêu cầu quyền sau đây:",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tail_light",
+            "value":"Vệt sáng xe",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_cloud_update_latest",
+            "value":"Đã cập nhật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_portrait_photo_content",
+            "value":"Việc này giúp cải thiện độ chính xác của tính năng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice_success",
+            "value":"Ghép ảnh thành công. Hãy xem trong album Video.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_disable_the_photo_linkage_compare_effect",
+            "value":"Chạm để hủy liên kết ảnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hide_all_files_tips",
+            "value":"Ẩn tất cả các mục?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_timeline",
+            "value":"Xem lại những khoảnh khắc đáng nhớ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Private_protection_in_progress",
+            "value":"Ẩn để bảo vệ quyền riêng tư của bạn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_timeline",
+            "value":"Ảnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_highlight",
+            "value":"Sống lại những kỷ niệm vô giá",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_portrait",
+            "value":"Thêm người",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_notify",
+            "value":"Ứng dụng này yêu cầu kết nối %1$s cũng như quyền truy cập %2$s để cung cấp các tính năng như duyệt xem hình ảnh và video, chỉnh sửa và phân tích phương tiện thông minh. Bằng việc chạm vào Đồng ý, bạn đồng ý với các điều khoản này. Để biết thêm chi tiết về cách thông tin cá nhân của bạn được xử lý, hãy tham khảo %3$s và %4$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cropModeReset_text",
+            "value":"Đặt lại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_and_protocol",
+            "value":"Dịch vụ này yêu cầu kết nối %1$s cũng như cần đọc và tải hình ảnh lên để cung cấp các tính năng chỉnh sửa hình ảnh bằng AI. Bằng việc chạm vào Đồng ý, bạn đồng ý với %2$s. Để biết thêm chi tiết về cách thông tin cá nhân của bạn được xử lý, hãy tham khảo %3$s. Dịch vụ này chỉ được cung cấp miễn phí trong thời gian có hạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_enable_tips",
+            "value":"Bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_terms",
+            "value":"Điều khoản Sử dụng Các chức năng Tạo bằng AI của Dịch vụ Hình nền AI",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_selected",
+            "value":"Bỏ chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cast_hint",
+            "value":"Xem trên màn hình lớn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_save_as_new_photo",
+            "value":"%s đã lưu ảnh vào Bộ sưu tập.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hide_images_message",
+            "value":"Các mục đã chọn sẽ được chuyển vào \"Mục ẩn\".",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"date_today",
+            "value":"Hôm nay",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"timeline_message_thumbnail_ready",
+            "value":"Đã đồng bộ: %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_button",
+            "value":"OK",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_privacy_options",
+            "value":"Tùy chọn quyền riêng tư",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_privacy_protected",
+            "value":"Đã bật bảo vệ quyền riêng tư",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_remove_location_info",
+            "value":"Xóa thông tin vị trí",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_tagged_geographic_data",
+            "value":"Dữ liệu địa lý được gắn thẻ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_remove_camera_info",
+            "value":"Xóa thông tin máy ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"source_device_and_camera_info",
+            "value":"Model thiết bị và cài đặt máy ảnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_name",
+            "value":"Bộ sưu tập",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_not_favorite",
+            "value":"Ưa thích",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_files_to_system_album_merge",
+            "value":"%1$s %2$s %3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"graduation_photo",
+            "value":"Tốt nghiệp",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"replace_with_new_file",
+            "value":"Thay thế",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_permanently_forever_cancel_message",
+            "value":"Đã xóa vĩnh viễn %s các tệp tin. Dừng xóa phần còn lại?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_video",
+            "value":"Hiện video",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wrist_watch",
+            "value":"Đồng hồ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_as_new_photo_and_video",
+            "value":"%s đã lưu hình ảnh/video vào Bộ sưu tập.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"learn_how_to_use_your_data",
+            "value":"Cách chúng tôi sử dụng dữ liệu của bạn",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_dialog_delete_permanently_not_recover_tips",
+            "value":"Video này sẽ bị xóa vĩnh viễn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_experience_the_hide_album_function",
+            "value":"Chạm vào đây để xem các mục bị ẩn.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_screenshot",
+            "value":"Ảnh chụp màn hình",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_screenshot_saved_failed",
+            "value":"Chụp màn hình không thành công. Hãy thử lại sau.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Please_enter_main_title",
+            "value":"Nhập tiêu đề.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"document_correction",
+            "value":"Tài liệu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_distributed_photo_title_album",
+            "value":"Không có ảnh nào",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_photos_dialog_delete_permanently_not_recover_tips",
+            "value":"Tất cả ảnh sẽ bị xóa vĩnh viễn khỏi thiết bị này, đám mây và mọi thiết bị đã đồng bộ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_prompt1",
+            "value":"Để cung cấp các tính năng liên quan, ứng dụng này yêu cầu kết nối %1$s cũng như cần đọc và tải lên/truyền hình ảnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_prompt2",
+            "value":"Bằng việc chạm vào Đồng ý, bạn đồng ý với các điều khoản trên. Để biết thêm chi tiết về cách thông tin cá nhân của bạn được xử lý, hãy tham khảo %1$s và %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms",
+            "value":"Điều khoản sử dụng tính năng Tạo bằng AI của dịch vụ Chỉnh sửa bằng AI",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"verify_and_view_album",
+            "value":"Xác minh để xem nội dung",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_files_to_timeline_merge",
+            "value":"Đã lưu %1$s và %2$s vào Bộ sưu tập. %3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_place",
+            "value":"Địa điểm",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_single_image_tips",
+            "value":"Ẩn hình ảnh này?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"move_file_to",
+            "value":"Di chuyển tới",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"name_input",
+            "value":"Nhập tên",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"location_albums",
+            "value":"Địa điểm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_highlight",
+            "value":"Xóa khoảnh khắc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_duration",
+            "value":"Thời lượng: %s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fast_face_beautify",
+            "value":"Tăng cường",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_to",
+            "value":"Thêm vào",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"not_support_wallpaper_edit",
+            "value":"Không sửa được hình nền trong cửa sổ nhỏ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lock_tips_password",
+            "value":"Đặt khóa màn hình để bảo vệ album ẩn của bạn khỏi bị truy cập trái phép.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"classified_album",
+            "value":"Danh mục",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"expand",
+            "value":"Hiển thị thêm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_new",
+            "value":"Album mới",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_view_protocol",
+            "value":"Chạm để xem",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_micro_motion",
+            "value":"Cinemagraph",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from_album_tips",
+            "value":"Ảnh này sẽ không còn hiển thị trong album này nữa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_save_text",
+            "value":"Lưu thành ảnh mới",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_splash_button_cancel",
+            "value":"Có lẽ để sau",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"replace_action",
+            "value":"Thay thế",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_experience_the_image_compare_function",
+            "value":"Chạm vào đây để so sánh các hình ảnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait",
+            "value":"Ảnh chân dung",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_confirm_tips",
+            "value":"Đã hiểu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"dialog_clear",
+            "value":"Xóa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"clear_tips",
+            "value":"Xóa tất cả?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"card_description",
+            "value":"Giải phóng tới %1$s dung lượng lưu trữ bằng cách xóa những ảnh và video ít xem khỏi thiết bị của bạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_warning_content",
+            "value":"Ảnh và video của bạn được hiển thị ở đây, nhưng ứng dụng này chỉ có thể truy cập các mục bạn chọn.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"focal_length",
+            "value":"Độ dài tiêu cự: %s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"full_screen_browsing",
+            "value":"Đang duyệt xem ở chế độ toàn màn hình",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_merge_to_me",
+            "value":"Họ sẽ được coi là cùng một người.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_photos_title",
+            "value":"Tất cả ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"screenshot_photos",
+            "value":"Ảnh chụp màn hình",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_favor_process",
+            "value":"Đang lưu vào mục ưa thích…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_btn_text_photo",
+            "value":"Chụp ảnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"aircraft",
+            "value":"Máy bay",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_wlan_only",
+            "value":"Chỉ WLAN",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"detail_dialog_confirm",
+            "value":"OK",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"high_pixel",
+            "value":"Độ phân giải cao",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"skip_action",
+            "value":"Bỏ qua",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_picture_success",
+            "value":"Đã lưu ảnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_format_compare_is_not_supported",
+            "value":"Định dạng hình ảnh không hỗ trợ so sánh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_to_timeline_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_single_file_tips",
+            "value":"Xóa mục này?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos",
+            "value":"Đang lưu…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_unselected",
+            "value":"Chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_delete",
+            "value":"Xóa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_pictures_to_system_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pause",
+            "value":"Tạm dừng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_hidden_process",
+            "value":"Đang ẩn…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"social_gallery_downloading_toast",
+            "value":"Đang tải xuống…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Picker_Select",
+            "value":"Chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"burst_photos",
+            "value":"Ảnh chụp liên tiếp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"learn_more",
+            "value":"Tìm hiểu thêm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"switch_to_timeline_display_prompt",
+            "value":"Hãy đưa hai ngón tay về gần nhau để hiển thị ảnh dưới dạng lưới hoặc tách ảnh theo ngày.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_image_cleanup",
+            "value":"Dọn dẹp ảnh và video",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eiffel_tower",
+            "value":"Tháp Eiffel",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"access_hidden_albums",
+            "value":"để xem các mục ẩn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"duration",
+            "value":"Thời lượng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wait_none_no_wlan",
+            "value":"Không có kết nối WLAN. Đã tạm dừng đồng bộ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_compare_is_not_supported",
+            "value":"Không so sánh được các video.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_not_support_tip",
+            "value":"Không kéo được %1$d mục trở lên cùng một lúc. Vui lòng chọn lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"prompt_new_album_dialog_title",
+            "value":"Không có album nào",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"specific_characters_not_supported",
+            "value":"Không được chứa ' ` \" . \\ / : * ? < > | [ ] { }",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_highlight",
+            "value":"Chụp thêm ảnh để khám phá những khoảnh khắc nổi bật của bạn.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"sound_filled",
+            "value":"Âm thanh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_shot",
+            "value":"Ảnh chụp ở chế độ Ban đêm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_favor",
+            "value":"Mục ưa thích của tôi",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_splice_canceled",
+            "value":"Đã hủy ghép ảnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice_failed",
+            "value":"Ghép ảnh không thành công.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_to_local",
+            "value":"Lưu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slideshow_interval",
+            "value":"Khoảng thời gian trình chiếu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_cloud_update",
+            "value":"Đang đồng bộ…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"target_file_location",
+            "value":"Tệp tin ở vị trí đích",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"this_unction_requires",
+            "value":"Tính năng này yêu cầu kết nối %1$s và truy cập thông tin về thiết bị của bạn. Bằng việc chạm vào Đồng ý, bạn đồng ý với các điều khoản này và %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_cloud_data_all",
+            "value":"%1$s và %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_empty_albums_tips",
+            "value":"Xóa các album đã chọn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"date_yesterday",
+            "value":"Hôm qua",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_recover_process",
+            "value":"Đang khôi phục…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"landscape",
+            "value":"Phong cảnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_unlimited_use_mobile",
+            "value":"Đồng bộ ảnh và video với dữ liệu di động khi không có WLAN.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_picture_tips",
+            "value":"Xóa ảnh này?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_manage_card_confirm",
+            "value":"Cài đặt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"complete",
+            "value":"Xong",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"video_screenshot_saved_success",
+            "value":"Đã lưu vào Bộ sưu tập.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_tips",
+            "value":"Xóa?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"disable",
+            "value":"Tắt",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_to_album",
+            "value":"Thêm vào",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_frame_style",
+            "value":"Tỷ lệ khung hình",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_photos_and_dideos",
+            "value":"Chọn hình ảnh và video",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_rename",
+            "value":"Nhập tên của họ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork",
+            "value":"Sử dụng dữ liệu di động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photo_sub_title_album",
+            "value":"Sống lại những kỷ niệm đẹp nhất chưa bao giờ dễ dàng như thế.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_moving_photo_splice_function",
+            "value":"Nhiều hình ảnh động có thể được ghép lại với nhau. Đầu tiên, chọn những hình ảnh động mà bạn muốn đưa vào, sau đó chạm vào đây.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycleAlbum_clear_message",
+            "value":"Tất cả các mục sẽ bị xóa vĩnh viễn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_subtitle",
+            "value":"Chủ đề Du hành thời gian sử dụng AI để tạo hình ảnh theo chủ đề dựa trên ảnh chân dung bạn tải lên.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_success",
+            "value":"Đã sao chép.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"card_button",
+            "value":"Xem chi tiết",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_all_files_tips",
+            "value":"Xóa tất cả các mục?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"map_album_service",
+            "value":"Album địa điểm",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_cancel_message",
+            "value":"Đã xóa %1$s. Dừng xóa các mục còn lại?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"check",
+            "value":"Xem",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_title",
+            "value":"Bộ sưu tập của bạn và hơn thế nữa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panorama",
+            "value":"Toàn cảnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"path",
+            "value":"Đường dẫn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picture_dialog_delete_permanently_not_recover_tips",
+            "value":"Ảnh này sẽ bị xóa vĩnh viễn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Private_protection_view_photos",
+            "value":"Hiển thị ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rename",
+            "value":"Đổi tên",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"delete_permanently_cancel_message",
+            "value":"Đã xóa vĩnh viễn %1$s. Dừng xóa các tệp tin còn lại?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_authorization",
+            "value":"Cấp quyền",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_of_media_analysis_service_note",
+            "value":"Dịch vụ này đọc và phân tích hình ảnh cũng như video ở dưới nền để cung cấp các tính năng thông minh trong Bộ sưu tập.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_privacy_statement",
+            "value":"Tuyên bố về Cải thiện trên đám mây AI và Quyền riêng tư",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"share_highlight_cover",
+            "value":"Chia sẻ ảnh bìa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_device_storage_detail_new",
+            "value":"Nếu thiết bị còn ít dung lượng, video và ảnh có độ phân giải đầy đủ sẽ được thay thế bằng phiên bản nhỏ hơn để tiết kiệm dung lượng. Bạn có thể tải xuống bản gốc từ đám mây bất cứ lúc nào.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tip_convert_to_JPG_success",
+            "value":"Đã chuyển đổi sang JPG.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_save_as_new_video",
+            "value":"%s đã lưu video vào Bộ sưu tập.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_all",
+            "value":"Tất cả ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"duplicate_photo",
+            "value":"Trùng lặp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_setting_tips_show",
+            "value":"Quá trình phân tích diễn ra khi thiết bị của bạn được cắm nguồn và màn hình tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"name_portrait_photo_placeholder",
+            "value":"Nhập tên của họ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_of_service_location",
+            "value":"Cho phép Bộ sưu tập truy cập vị trí chính xác của bạn trong mục Cài đặt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_highlight",
+            "value":"Xóa khỏi phần khoảnh khắc nổi bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel_face_beautify",
+            "value":"Hoàn tác",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_wallpaper",
+            "value":"Đặt làm hình nền",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_privacy_statement",
+            "value":"Tuyên bố về Hình nền AI và Quyền riêng tư",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_view_learn_more_title",
+            "value":"Tìm hiểu thêm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fireworks",
+            "value":"Pháo hoa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_storage_confirm",
+            "value":"Tối ưu ngay",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"wait_none_no_network",
+            "value":"Không có kết nối mạng. Đã tạm dừng đồng bộ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_near_full_card_title",
+            "value":"Bộ nhớ đám mây gần đầy",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_finish",
+            "value":"Tối ưu hóa hoàn tất. Đã giải phóng %1$s dung lượng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_multi_video_and_photo_num",
+            "value":"%1$s, %2$s",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_cloud_space_full",
+            "value":"Bộ nhớ đám mây đầy. Không tải lên được thêm bất kỳ ảnh hoặc video nào nữa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel_move",
+            "value":"Hủy",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"business_privacy_statements",
+            "value":"Tuyên bố Quyền riêng tư",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_video_tips",
+            "value":"Xóa video này?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lock_tips_list",
+            "value":"Lưu ý",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_highlight_kept_tips",
+            "value":"Thao tác này sẽ không xóa bất kỳ ảnh hoặc video nào khỏi Bộ sưu tập.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_remove_process",
+            "value":"Đang xóa…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_highlight_tips",
+            "value":"Mục này sẽ không còn xuất hiện trong phần khoảnh khắc nổi bật này nữa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_cancel",
+            "value":"Hủy",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_toast",
+            "value":"Tính năng Tự động cải thiện trên đám mây tự động nâng cao độ sắc nét của ảnh phóng to được chụp ở chế độ \"Ảnh\". Bạn có thể bật tính năng này trong Cài đặt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_new_album_title",
+            "value":"Album mới",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"select_portrait_photo_title",
+            "value":"Chọn ảnh của chính bạn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_videos_to_user_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"details",
+            "value":"Chi tiết",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"to_set_up",
+            "value":"Vào thiết lập",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"motion",
+            "value":"Thể thao",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_splice_reselect",
+            "value":"Chọn %1$d đến %2$d ảnh động rồi thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_open_now",
+            "value":"Bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_btn_text_shooting",
+            "value":"Quay video",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_and_documents_description",
+            "value":"Quyền này được sử dụng để đọc ảnh và video, đồng thời hiển thị ảnh và video theo vị trí.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"collage_save_fail_tips",
+            "value":"Không lưu được. Hình ảnh chưa được tải xuống. Hãy kiểm tra mạng của bạn rồi thử lại.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rotate_text",
+            "value":"Xoay",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"app_version",
+            "value":"Phiên bản %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"smart_albums",
+            "value":"Album thông minh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_city",
+            "value":"Thành phố",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_cloud_data_sync_summary",
+            "value":"Tự động đồng bộ và lưu trữ tất cả ảnh và video của bạn trên Cloud để bạn có thể truy cập các nội dung đó trên bất kỳ thiết bị nào của mình.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"fail_to_beautify_please_try_again_later",
+            "value":"Không áp dụng được các hiệu ứng làm đẹp. Hãy thử lại sau.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_me",
+            "value":"Tôi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"linkage",
+            "value":"Liên kết",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document",
+            "value":"Tài liệu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"focal_length_focalLengthIn35mmFilm",
+            "value":"Độ dài tiêu cự: %1$s (Tiêu cự tương đương %2$s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time",
+            "value":"Thời gian",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycleAlbum_delete_all_images_message",
+            "value":"Tất cả các mục sẽ bị xóa vĩnh viễn.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"about",
+            "value":"Giới thiệu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"title_none_selected",
+            "value":"Chưa chọn mục nào",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"about_privacy_statement",
+            "value":"Tuyên bố về Album địa điểm và Quyền riêng tư",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"file_time_location",
+            "value":"Ngày sửa đổi: %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_video_dialog_delete_permanently_not_recover_tips",
+            "value":"Video này sẽ bị xóa vĩnh viễn khỏi thiết bị này, đám mây và mọi thiết bị đã đồng bộ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"my_albums",
+            "value":"Album của tôi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"resolution",
+            "value":"Độ phân giải",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"extended_services",
+            "value":"Dịch vụ mở rộng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name",
+            "value":"Dịch vụ Tạo hình nền bằng AI",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flash_shoot",
+            "value":"Ảnh chụp nhanh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_warning_content_more",
+            "value":"Ảnh và video của bạn được hiển thị ở đây, nhưng ứng dụng này chỉ có thể truy cập các mục bạn chọn. %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_photos_count_per_sum",
+            "value":"Đã chọn (%1$d/%2$d)",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"unhide_cancel_message",
+            "value":"Đã hiện %1$s. Dừng hiện các tệp tin còn lại?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"city_overlook",
+            "value":"Cảnh quan thành phố",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"size_of_compared_exceeds_the_limit_tips",
+            "value":"Một số hình ảnh quá lớn, không so sánh được.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"time_line_message_loaded",
+            "value":"Đã tải tổng %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compass",
+            "value":"La bàn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_service",
+            "value":"Tắt dịch vụ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"grid_layout_tips",
+            "value":"Duyệt xem sống động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_description_1",
+            "value":"Để cung cấp các tính năng liên quan đến hình nền, dịch vụ này yêu cầu kết nối %1$s cũng như cần đọc và tải lên/truyền hình ảnh. Bằng việc chạm vào Đồng ý, bạn đồng ý với các điều khoản này và %2$s. Để biết thêm chi tiết về cách thông tin cá nhân của bạn được xử lý, hãy tham khảo %3$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_permanently_clear_cancel_message",
+            "value":"Đã xóa %s. Dừng xóa phần còn lại?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picture_compare",
+            "value":"So sánh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name_2",
+            "value":"Dịch vụ Du hành thời gian",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_name_3",
+            "value":"Dịch vụ Hình nền AI",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_network_environment_poor",
+            "value":"Kết nối mạng kém. Vui lòng thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"birthday_cake",
+            "value":"Bánh sinh nhật",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"selected_photos_count",
+            "value":"Đã chọn %1$d/%2$d",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"share_cancel_message",
+            "value":"Quá trình chuẩn bị đã hoàn thành %1$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_back",
+            "value":"Trở lại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flowing_shutter",
+            "value":"Vẽ bằng ánh sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_picture_recycle_delete_kept_tips",
+            "value":"Ảnh này sẽ bị xóa khỏi thiết bị này, đám mây và mọi thiết bị đã đồng bộ. Mục này sẽ được lưu trong mục \"Đã xóa gần đây\" trong %1$d ngày.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"highlight_no_tips_show",
+            "value":"Bạn sẽ thấy Album mục nổi bật ở đây sau khi Bộ sưu tập phân tích xong thư viện ảnh của bạn. Quá trình phân tích ảnh diễn ra khi thiết bị của bạn được cắm điện và màn hình tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_pictures_to_user_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_network_dialog_content",
+            "value":"Nếu tắt tính năng này, bạn sẽ không xem được ảnh đã được chụp ở đâu, duyệt xem Bộ sưu tập Cloud hoặc xem hình thu nhỏ của hình ảnh trên đám mây.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"not_support_wallpaper_change",
+            "value":"Không thể thay đổi hình nền ở chế độ này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"items_gallery_alwaysrotate",
+            "value":"Tự động xoay",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"items_gallery_followsystem",
+            "value":"Tùy theo hệ thống",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tips_gallery_roatesettings",
+            "value":"Xoay ảnh khi xem ở chế độ toàn màn hình",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"settings_gallery_rotate",
+            "value":"Chiều xem ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ppt",
+            "value":"Trang trình bày",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_picture_tips",
+            "value":"Xóa ảnh này?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_view_toast_title",
+            "value":"Quyền truy cập riêng tư",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"open_hdc_dialog_content",
+            "value":"Dữ liệu Bộ sưu tập trên thiết bị này sẽ được tải lên và hợp nhất với dữ liệu Cloud của bạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_Personal_Portrait_tips_show",
+            "value":"Đang phân tích ảnh (%1$s). Quá trình phân tích diễn ra khi thiết bị của bạn được cắm nguồn và màn hình tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cats",
+            "value":"Mèo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"continue",
+            "value":"Tiếp tục",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"waterfall",
+            "value":"Thác nước",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_picture_dialog_delete_permanently_not_recover_tips",
+            "value":"Ảnh này sẽ bị xóa vĩnh viễn khỏi thiết bị này, đám mây và mọi thiết bị đã đồng bộ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_to_pasteboard",
+            "value":"Sao chép vào bộ nhớ tạm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_gallery_main_describe_msg",
+            "value":"Lưu trữ ảnh và video của bạn trên Cloud để tiết kiệm dung lượng trên thiết bị của bạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_save_picture_text",
+            "value":"Đang lưu ảnh\u2026",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_local_space_release_summary",
+            "value":"Để tiết kiệm dung lượng lưu trữ, các bản sao cục bộ của ảnh và video đã tải lên Cloud sẽ bị xóa khỏi thiết bị này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_display",
+            "value":"Xem album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"easy_editing_ai_description_tips",
+            "value":"Viết hoặc vẽ tay thoải mái với nhiều công cụ đánh dấu tiện dụng. Bạn cũng có thể cải thiện hơn nữa tác phẩm của mình với sự trợ giúp của các công cụ AI mạnh mẽ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_photos_head_title_photoAlbum",
+            "value":"Không có ảnh nào",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_less",
+            "value":"Ẩn bớt",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"dialog_delete_permanently",
+            "value":"Xóa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_security",
+            "value":"%s Cung cấp nơi lưu trữ an toàn, đáng tin cậy cho mọi hình ảnh và video quý giá của bạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_connection_view_image",
+            "value":"Cần có Internet để truy cập Bộ sưu tập Cloud, tải xuống hình thu nhỏ và nhận đề xuất tìm kiếm.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_progress_message",
+            "value":"Đang thêm vào %1$s…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"id_card",
+            "value":"ID",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_add_portrait_name",
+            "value":"Thêm tên",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"merge",
+            "value":"Hợp nhất",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Tab_Portrait",
+            "value":"Người",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"download_failed_retry",
+            "value":"Lỗi mạng. Hãy kiểm tra cài đặt mạng của bạn rồi thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_title",
+            "value":"Xóa các ảnh chụp liên tiếp ban đầu?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"third_sdk_list",
+            "value":"Danh sách SDK bên thứ ba",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_more",
+            "value":"Thêm tùy chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_stype_no_photo",
+            "value":"Chỉ có thể nhập ảnh có kiểu tùy chỉnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"snapshot",
+            "value":"Ảnh chụp nhanh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"external_Disk_toast",
+            "value":"Cài đặt ứng dụng Tệp tin và thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_share",
+            "value":"Chia sẻ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"title_general_settings",
+            "value":"Cài đặt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_video_tips",
+            "value":"Xóa video này?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_export_error",
+            "value":"Lỗi mạng. Tải hình ảnh xuống không thành công. Hãy thử lại sau.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_picture_not_download_please_download_and_try_again",
+            "value":"Trước tiên, hãy tải hình ảnh xuống.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_me_content",
+            "value":"Đặt người này là \"Tôi\"?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"picker_warning_title",
+            "value":"Quyền truy cập riêng tư vào Bộ sưu tập",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_not_name_set_for_me",
+            "value":"Đặt người này là Tôi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"convert_to_JPG",
+            "value":"Chuyển đổi sang JPG",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"externalDisk",
+            "value":"Thẻ SD",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_description",
+            "value":"Để cung cấp các tính năng của dịch vụ Hình nền AI, ứng dụng này yêu cầu kết nối %1$s cũng như cần đọc và tải lên/truyền hình ảnh. Chúng tôi chỉ thu thập thông tin cá nhân liên quan đến các tính năng bạn sử dụng. Để biết thêm thông tin, hãy tham khảo %2$s. Vui lòng đọc kỹ tuyên bố trên. Bằng việc chạm vào Đồng ý, bạn xác nhận và đồng ý với các điều khoản này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_closed",
+            "value":"Tắt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information_title",
+            "value":"Duyệt xem ảnh của bạn theo vị trí.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_bounce_play",
+            "value":"Đảo ngược",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bank_card",
+            "value":"Thẻ ngân hàng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_screen_recording",
+            "value":"Video quay phim màn hình",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"professional_photography",
+            "value":"Chụp ảnh chuyên nghiệp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_print_exceeds_the_limit_tips",
+            "value":"Mỗi lần chỉ có thể in tối đa %d mục.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_optimize",
+            "value":"%s Tự động giải phóng không gian lưu trữ trên thiết bị của bạn để thiết bị luôn hoạt động mượt mà.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"highlight_having_tips_show",
+            "value":"Đang phân tích ảnh (%1$s). Bộ sưu tập sẽ tạo Album mục nổi bật cho bạn sau khi phân tích xong ảnh. Quá trình phân tích diễn ra khi thiết bị của bạn được cắm nguồn và màn hình tắt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"new_timeline_message_compose",
+            "value":"%1$s và %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"easy_editing_tips",
+            "value":"Chỉnh sửa như một người chuyên nghiệp",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"drag_picture_dialog_content",
+            "value":"Đã lưu các mục được thả vào \"Ảnh\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_update_card_confirm",
+            "value":"Nâng cấp dung lượng lưu trữ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_storage_title",
+            "value":"Tối ưu bộ nhớ thiết bị ngay?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_open_network_link",
+            "value":"Bật quyền truy cập Internet cho Bộ sưu tập?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_delete_album",
+            "value":"Xóa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"unsupported_video_type",
+            "value":"Định dạng này không được hỗ trợ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_note",
+            "value":"Thêm chú thích",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"favor_cancel_message",
+            "value":"Đã chuyển %1$s vào mục ưa thích. Ngừng chuyển phần còn lại vào mục ưa thích?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dynamic_photos_can_switched",
+            "value":"Có sẵn nhiều hiệu ứng phát lại. Hãy chạm vào đây để chuyển đổi giữa các hiệu ứng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_login_card_title",
+            "value":"Bộ sưu tập Cloud chưa được bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_content",
+            "value":"Dữ liệu di động sẽ được sử dụng khi không có WLAN. Bạn có thể tắt tính năng này bất kỳ lúc nào trong Cài đặt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_context_text",
+            "value":"Bạn có thể tìm ảnh gốc đã thay thế trong mục Đã xóa gần đây.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_files_cancel_message",
+            "value":"Đã di chuyển %1$s mục.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_scale_error",
+            "value":"Một số hình ảnh quá lớn, không ghép được.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_replace_me",
+            "value":"Thay thế \"Tôi\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_multi_exposure",
+            "value":"Phơi sáng nhiều lần",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"time_line_message_cloud_sync",
+            "value":"Đã đồng bộ tất cả các mục (%s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document_scan",
+            "value":"Xử lý như tài liệu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"loading_image_imageEdit",
+            "value":"Đang tải ảnh…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"data_inherit_content",
+            "value":"Trước đây, bạn đã lưu các mục này trong ứng dụng này. Vui lòng cấp lại quyền truy cập vào những mục bạn vẫn cần.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Maximum_length_reached",
+            "value":"Đã đạt đến độ dài tối đa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_to_album",
+            "value":"Sao chép vào album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_video",
+            "value":"Video",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"share_highlight_as_video",
+            "value":"Chia sẻ dưới dạng video",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_add",
+            "value":"Thêm tên",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"welcome_prompt2",
+            "value":"Bằng việc chạm vào Đồng ý, bạn đồng ý với các điều khoản này. Để biết thêm chi tiết về cách thông tin cá nhân của bạn được xử lý, hãy tham khảo %1$s và %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"welcome_prompt1",
+            "value":"Ứng dụng này yêu cầu kết nối %1$s cũng như quyền truy cập %2$s để cung cấp các tính năng như duyệt xem hình ảnh và video, chỉnh sửa và phân tích phương tiện thông minh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"high_mountain",
+            "value":"Núi",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_delete",
+            "value":"Xóa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_recover",
+            "value":"Khôi phục",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"message_temperature_too_high",
+            "value":"Thiết bị quá nóng. Đã tạm dừng đồng bộ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_terms_and_protocol_new",
+            "value":"Dịch vụ này yêu cầu kết nối %1$s cũng như cần đọc và tải hình ảnh lên để cung cấp các tính năng chỉnh sửa hình ảnh bằng AI. Bằng việc chạm vào %2$s, bạn đồng ý với %3$s. Để biết thêm chi tiết về cách thông tin cá nhân của bạn được xử lý, hãy tham khảo %4$s. Dịch vụ này chỉ được cung cấp miễn phí trong thời gian có hạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_ai_creation_description",
+            "value":"Dịch vụ này yêu cầu kết nối %1$s, đồng thời cần đọc video cũng như đọc và tải lên/truyền hình ảnh. Quyền này được dùng để cung cấp tính năng tạo ảnh và video bằng AI. Bằng việc chạm vào Đồng ý, bạn đồng ý với các điều khoản trên. Để biết chi tiết về cách thông tin cá nhân của bạn được xử lý, hãy tham khảo %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"day",
+            "value":"Ngày",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"replace_me_content",
+            "value":"Những hình ảnh trước đây được đặt là \"Tôi\" sẽ được thay thế.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices_more",
+            "value":"Xem hình ảnh và video trên bộ nhớ ngoài",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_compared_exceeds_the_limit_tips",
+            "value":"Chọn %1$d – %2$d hình ảnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"intelligent_classification_tips",
+            "value":"Sắp xếp thông minh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_stop_note_1",
+            "value":"Dịch vụ này sẽ không còn khả dụng nếu bạn tắt dịch vụ. Vẫn tắt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_network_connection",
+            "value":"Cho phép truy cập Internet",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_rename_album",
+            "value":"Đổi tên",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"location_information_content",
+            "value":"Ứng dụng này yêu cầu kết nối %1$s và quyền truy cập Tệp tin. Dịch vụ này cũng cần truy cập thông tin thiết bị và mạng. Chúng tôi chỉ thu thập thông tin cá nhân liên quan đến các tính năng bạn sử dụng. Bằng việc chạm vào Đồng ý, bạn đồng ý với các điều khoản này. Để biết thêm chi tiết, hãy tham khảo %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"message_use_mobile_newwork_dialog_title",
+            "value":"Cho phép đồng bộ bằng dữ liệu di động?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_media_analysis_service_note",
+            "value":"Dịch vụ này sẽ ngừng đọc và phân tích hình ảnh cũng như video ở dưới nền.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"transfer_completed",
+            "value":"Hoàn tất truyền",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_shared_exceeds_the_limit_tips",
+            "value":"Mỗi lần chỉ có thể chia sẻ tối đa %d mục.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sync",
+            "value":"Đồng bộ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_map",
+            "value":"Bản đồ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rename_portrait_photo_title",
+            "value":"Đổi tên người này",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_export_success",
+            "value":"Xuất thành công. Hãy xem trong album Video.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_portrait",
+            "value":"Sửa người",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"only_selected_photos_can_be_accessed",
+            "value":"Ứng dụng này chỉ có thể truy cập những ảnh bạn chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_timeline_actionbar_title",
+            "value":"Tất cả ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"viewing_storage_devices",
+            "value":"Xem ảnh và video trên \"%s\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_hide",
+            "value":"Ẩn",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"grid_display",
+            "value":"Xem ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"experienc_tips",
+            "value":"Bắt đầu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"no_photo_head_title_album",
+            "value":"Xem nhanh tất cả album của bạn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_videos_to_system_album_merge",
+            "value":"%1$s %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_not_jigsaw_puzzle",
+            "value":"Không sử dụng được video để tạo ảnh ghép.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_right_access_statement",
+            "value":"Thông báo Quyền hạn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_files_dialog_delete_permanently_not_recover_tips",
+            "value":"Tất cả các mục sẽ bị xóa vĩnh viễn khỏi thiết bị này, đám mây và mọi thiết bị đã đồng bộ.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_ai_cloud_enhance_des",
+            "value":"Tự động nâng cao độ sắc nét của ảnh phóng to chụp ở chế độ \"Ảnh\". Những hình ảnh được hỗ trợ sẽ được tải lên đám mây để xử lý.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location_information_description",
+            "value":"Quyền này được dùng để cung cấp dịch vụ vị trí.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_des_new_extra",
+            "value":"Tự động cải thiện các ảnh gần đây bằng AI. Chỉ cần chạm vào biểu tượng cây đũa thần phía trên các hình ảnh được hỗ trợ. Tính năng này chỉ miễn phí trong một khoảng thời gian có hạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_loading",
+            "value":"Đang tải…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"print",
+            "value":"In",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_network_link_title",
+            "value":"Tắt quyền truy cập Internet đối với Bộ sưu tập?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"edit_exit_dialog_context_text",
+            "value":"Bỏ thay đổi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fluorescence_photography",
+            "value":"Huỳnh quang",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"target_has_same_name_file",
+            "value":"Đã tồn tại một tệp tin có tên này. Thay thế?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"number_of_selected_max",
+            "value":"Mỗi lần chỉ có thể so sánh tối đa %d hình ảnh.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"easy_editing_description_tips",
+            "value":"Viết hoặc vẽ tay thoải mái với nhiều công cụ đánh dấu tiện dụng.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"service_agreements_and_rules",
+            "value":"Thỏa thuận và quy tắc dịch vụ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mainability_description",
+            "value":"Ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_delete_kept_tips",
+            "value":"Các mục bị xóa sẽ được lưu trong \"Đã xóa gần đây\" trong vòng %1$d ngày.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_close",
+            "value":"Tắt",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_ok",
+            "value":"Xong",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_neg_full_dialog_confirm",
+            "value":"Tắt Bộ sưu tập Cloud",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_all_videos_dialog_delete_permanently_not_recover_tips",
+            "value":"Tất cả video sẽ bị xóa vĩnh viễn khỏi thiết bị này, đám mây và mọi thiết bị đã đồng bộ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"month",
+            "value":"Tháng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"name_portrait_photo_title",
+            "value":"Tên người này",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recycle_single_highlight_tips",
+            "value":"Xóa khoảnh khắc nổi bật này?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_merger",
+            "value":"Hợp nhất những người đã chọn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_file_dialog_content",
+            "value":"Đã lưu các mục được thả vào \"Ảnh\" và \"Video\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_share_process",
+            "value":"Đang chuẩn bị nội dung…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"local_all_photos_dialog_delete_permanently_not_recover_tips",
+            "value":"Tất cả ảnh sẽ bị xóa vĩnh viễn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_local_space_release",
+            "value":"Tối ưu bộ nhớ thiết bị",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title",
+            "value":"Tiêu đề",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_dialog_overwrite_text",
+            "value":"Thay thế ảnh gốc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_permission_1",
+            "value":"Quyền này được sử dụng để đọc hình ảnh với mục đích tạo hình nền.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_more_portraits_currently",
+            "value":"Không còn người nào nữa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recycle_all_photos_tips",
+            "value":"Xóa tất cả ảnh?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_select_all",
+            "value":"Chọn tất cả",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_export_to_video",
+            "value":"Xuất dưới dạng video",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_process_title",
+            "value":"Dừng thao tác này?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_cloud_enhance",
+            "value":"Cải thiện trên đám mây AI",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_cloud_enhance_read_protocol",
+            "value":"Vui lòng đọc kỹ tuyên bố trên. Bằng việc chạm vào Đồng ý, bạn đồng ý cho chúng tôi cung cấp dịch vụ này cho bạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_splice",
+            "value":"Chuyển thành video",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_clear_recycle",
+            "value":"Xóa tất cả",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"dialog_consent",
+            "value":"Đồng ý",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_no_tips",
+            "value":"Không hiện lại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_optimize_storage_dialog_content",
+            "value":"Không có mục nào để tối ưu.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_to",
+            "value":"Sao chép vào",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_device_storage",
+            "value":"Tối ưu bộ nhớ thiết bị",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rename_failed",
+            "value":"Không đổi tên được. Vui lòng thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panda",
+            "value":"Gấu trúc",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"Saved_to_Puzzle_Album",
+            "value":"Đã lưu vào album.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_select_cover",
+            "value":"Chọn ảnh bìa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"star_track",
+            "value":"Graffiti ánh sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cleanup_card_description",
+            "value":"Giải phóng tới %1$s dung lượng lưu trữ bằng cách xóa ảnh và video mà bạn hiếm khi xem.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_cancel_message",
+            "value":"Đã thêm %1$s mục. Dừng thêm mục?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"optimize_loading_progress",
+            "value":"Đang tối ưu bộ nhớ (%1$s/%2$s)…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"local_all_videos_dialog_delete_permanently_not_recover_tips",
+            "value":"Tất cả các video sẽ bị xóa vĩnh viễn.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"recover_cancel_message",
+            "value":"Đã khôi phục %1$s. Dừng khôi phục các tệp tin còn lại?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"go_to_check_out",
+            "value":"Vào xem",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_videos_head_title_videoAlbum",
+            "value":"Không có video nào",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_add_photo",
+            "value":"Thêm ảnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"new_recycle_albums_tips",
+            "value":"Xóa các album đã chọn?\n\nẢnh và video trong các album này sẽ không bị xóa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"screenshot_cleanup",
+            "value":"Xóa ảnh chụp màn hình",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_specification_error",
+            "value":"Định dạng hình ảnh không được hỗ trợ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_stop_note",
+            "value":"Khi bị tắt, dịch vụ này sẽ ngừng thu thập dữ liệu người dùng trên thiết bị của bạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_delete_process",
+            "value":"Đang xóa…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_unfavor_process",
+            "value":"Đang xóa khỏi mục Ưa thích…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_invalid_uri_from_faCard",
+            "value":"Lỗi hình ảnh. Bỏ qua đến hình ảnh đầu tiên trong album.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_splash_content_sync",
+            "value":"%s Đồng bộ ảnh và video trên mọi thiết bị của bạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_hide_albums",
+            "value":"Mục ẩn",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_cancel_hidden_process",
+            "value":"Đang hiện…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"file_can_not_edited",
+            "value":"Tệp tin không được hỗ trợ hoặc bị lỗi. Không sửa được.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_exporting",
+            "value":"Đang xuất…",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"size",
+            "value":"Kích thước",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"stop",
+            "value":"Dừng",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"action_cancel",
+            "value":"Hủy",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_login_card_content",
+            "value":"Bộ sưu tập Cloud lưu trữ ảnh và video của bạn một cách an toàn trên đám mây, nghĩa là bạn có thể truy cập những nội dung đó từ bất kỳ thiết bị nào trong khi vẫn tiết kiệm dung lượng lưu trữ của thiết bị.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"silky_water",
+            "value":"Thảm nước mượt mà",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_player_cloud_io_error",
+            "value":"Phát lại không thành công. Hãy thử lại sau.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_full_card_title",
+            "value":"Bộ nhớ đám mây đầy",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fountain",
+            "value":"Đài phun nước",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_favorite",
+            "value":"Xóa khỏi mục ưa thích",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_enhance_unction_requires",
+            "value":"Dịch vụ này yêu cầu kết nối %1$s cũng như cần đọc và tải lên/truyền hình ảnh để cải thiện hình ảnh. Bằng việc chạm vào Đồng ý, bạn đồng ý với các điều khoản này. Để biết thêm chi tiết về cách thông tin cá nhân của bạn được xử lý, vui lòng tham khảo %2$s.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_exit_dialog_discard_text",
+            "value":"Bỏ",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"source_file_location",
+            "value":"Tệp tin ở vị trí nguồn",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"year",
+            "value":"Năm",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"copy_or_move",
+            "value":"Sao chép hay di chuyển?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"photo_analysis_progress",
+            "value":"Đang phân tích ảnh…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_burst_photos_saving_progress",
+            "value":"Bỏ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mirror_text",
+            "value":"Lật ảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_privacy_statement_1",
+            "value":"Tuyên bố về Dịch vụ Hình nền AI và Quyền riêng tư",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"number_of_copied_exceeds_the_limit_tips",
+            "value":"Mỗi lần chỉ có thể sao chép tối đa %d mục.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouch_access_description",
+            "value":"Quyền này được sử dụng để đọc hình ảnh để chỉnh sửa bằng AI.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_files_to_user_album_merge",
+            "value":"Đã lưu %1$s và %2$s vào album được chọn. %3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delicacy",
+            "value":"Ẩm thực",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"gallery_splash_content",
+            "value":"Lý do nên nâng cấp lên Bộ sưu tập Cloud:",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_recycle",
+            "value":"Đã xóa gần đây",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auto_cloud_enhance_wlan_and_networks",
+            "value":"WLAN và dữ liệu di động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_analysis_service",
+            "value":"Dịch vụ phân tích tệp tin phương tiện",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"grid_layout_description_tips",
+            "value":"Bộ sưu tập của bạn giờ đây hiển thị toàn màn hình để mang lại trải nghiệm sống động hơn.\n\nChuyển đổi giữa các chế độ xem ngày, tháng và năm chỉ bằng một chạm.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"drag_video_dialog_content",
+            "value":"Đã lưu các mục được thả vào \"Video\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_clear_process",
+            "value":"Đang dọn dẹp…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"move_progress",
+            "value":"Đang di chuyển…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_progress",
+            "value":"Đang sao chép…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"end_of_service_note",
+            "value":"Tính năng Album địa điểm sẽ không còn khả dụng nữa. Các tính năng khác sẽ không bị ảnh hưởng. Vẫn tắt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"categorize",
+            "value":"Danh mục",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"merge_portrait_photo_title",
+            "value":"Hợp nhất?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"construct",
+            "value":"Tòa nhà",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_set_for_me",
+            "value":"Đặt \"%s\" là Tôi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"copy_failed_single",
+            "value":"Không sao chép được. Vui lòng thử lại.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_albums",
+            "value":"Người",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sound_off_filled",
+            "value":"Tắt tiếng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upgrade_to_cloud_gallery",
+            "value":"Bộ sưu tập Cloud",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel_hidden",
+            "value":"Bỏ ẩn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_view_portrait",
+            "value":"Xem người",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"Set_Is_Me",
+            "value":"Đặt là Tôi",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"saving_burst_photos_dialog_save_btn",
+            "value":"Giữ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dinner_party",
+            "value":"Bữa ăn nhóm",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_retouch_description",
+            "value":"Dịch vụ này tải các hình ảnh bạn chọn lên đám mây để chỉnh sửa bằng AI. Dịch vụ này yêu cầu các quyền sau:",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"album_photos",
+            "value":"Ảnh",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_enable_note",
+            "value":"Khi bật nút chuyển này, dịch vụ này sẽ đọc các tệp hình ảnh dưới nền để cung cấp cho bạn các tính năng tạo hình nền bằng AI.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_single_file_dialog_delete_permanently_not_recover_tips",
+            "value":"Mục này sẽ bị xóa vĩnh viễn khỏi thiết bị này, đám mây và mọi thiết bị đã đồng bộ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"jump_to_file_management_tips",
+            "value":"Vào Tệp tin > Duyệt > \"%s\" để xem và quản lý ảnh và video trên thiết bị lưu trữ này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"form_FormAbility_label",
+            "value":"Album",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"optimize_device_storage_detail",
+            "value":"Nếu thiết bị còn ít dung lượng, video và ảnh có độ phân giải đầy đủ sẽ được thay thế bằng phiên bản nhỏ hơn để tiết kiệm dung lượng. Bạn có thể tải xuống bản gốc từ đám mây bất cứ lúc nào. %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_wallpaper_service_subtitle_1",
+            "value":"Dịch vụ này tải hình ảnh bạn chọn lên máy chủ đám mây để tạo hình nền bằng thuật toán AI. Dịch vụ này yêu cầu các quyền sau:",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"large_aperture",
+            "value":"Khẩu độ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_moving_photo_splice",
+            "value":"Đang ghép ảnh…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"gallery_unlimited_use_mobile_network",
+            "value":"Sử dụng dữ liệu di động",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cloud_single_file_recycle_delete_kept_tips",
+            "value":"Mục này sẽ bị xóa khỏi thiết bị này, đám mây và mọi thiết bị đã đồng bộ. Mục này sẽ được lưu trong mục \"Đã xóa gần đây\" trong %d ngày.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"moving_photo_long_exposure",
+            "value":"Phơi sáng lâu",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"pictures_and_videos_tv",
+            "value":"Hình ảnh và video",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_distributed_photo_head_title_album",
+            "value":"Không có ảnh hoặc video nào",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"only_selected_items_can_be_accessed",
+            "value":"Ứng dụng này chỉ có thể truy cập ảnh và video bạn chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_graffiti",
+            "value":"Vệt sáng ngôi sao",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moving_photo_loop_play",
+            "value":"Lặp",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_from",
+            "value":"Xóa khỏi album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_saving_burst_photos_tip",
+            "value":"Bỏ thay đổi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_gallery",
+            "value":"Bộ sưu tập Cloud",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"detele_button",
+            "value":"Xóa mục đã chọn (%1$s)",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_enhance_service",
+            "value":"Cải thiện trên đám mây AI",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_items_two_nine",
+            "value":"Chọn %1$d – %2$d hình ảnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_gallery_video",
+            "value":"%s đã sửa video trong Bộ sưu tập.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_and_documents",
+            "value":"Tệp tin phương tiện và tệp tin",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"portrait_edit",
+            "value":"Sửa người",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"not_prompt_again",
+            "value":"Không hiện lại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_deletion",
+            "value":"Xóa video",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_pdf_success",
+            "value":"Đã lưu tài liệu.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_size_ratio_too_large",
+            "value":"Tỷ lệ khung hình của ảnh vượt quá giới hạn nhận dạng.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_nearby_photos",
+            "value":"Hiển thị ảnh được chụp gần đó",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hide_nearby_photos",
+            "value":"Ẩn ảnh được chụp gần đó",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"set_album_cover_ready",
+            "value":"Đã thay đổi ảnh bìa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"reset_album_cover_ready",
+            "value":"Đã khôi phục ảnh bìa mặc định.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"set_as_album_cover",
+            "value":"Đặt làm ảnh bìa album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"occure_error_and_retry",
+            "value":"Lỗi hệ thống. Vui lòng thử lại sau.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"cancel_custom_cover",
+            "value":"Hủy bỏ ảnh bìa tùy chỉnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_change_album_cover",
+            "value":"Thay đổi bìa album",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"scan_qrcode_in_image",
+            "value":"Quét mã QR",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_QRCode_error",
+            "value":"Không có ứng dụng để mở.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"document_scan_count_limit",
+            "value":"Hỗ trợ tối đa %d ảnh.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"restore_default_sort",
+            "value":"Khôi phục thứ tự mặc định",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"album_sorting",
+            "value":"Sắp xếp album",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"custom_sort",
+            "value":"Sắp xếp lại",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"document_scan_not_support_video_message",
+            "value":"Không hỗ trợ video.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sort_by_name",
+            "value":"Sắp xếp theo tên",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"restore_default_sort_message",
+            "value":"Khôi phục thứ tự mặc định?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"map_album",
+            "value":"Album địa điểm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_intelligence_analysis",
+            "value":"Phân tích tệp tin phương tiện",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"time_travel_theme",
+            "value":"Chủ đề Du hành thời gian",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"collapse_menu_bar",
+            "value":"Đóng thanh menu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"disabled",
+            "value":"Không dùng được",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_goto_photos",
+            "value":"Vào Bộ sưu tập",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_checkbox_selected",
+            "value":"Đã chọn, ảnh gốc, hộp kiểm, chạm đúp để bỏ chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_search",
+            "value":"Tìm kiếm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"action_material_select",
+            "value":"Chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open_menu_bar",
+            "value":"Mở thanh menu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"random_collage",
+            "value":"Ảnh ghép ngẫu nhiên %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"checkbox_selected",
+            "value":"Hộp kiểm, đã chọn, chạm đúp để bỏ chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_screenshot",
+            "value":"Ảnh chụp màn hình",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessibility_event_click_action",
+            "value":"Chạm đúp để kích hoạt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_checkbox_deselected",
+            "value":"Chưa chọn, ảnh gốc, hộp kiểm, chạm đúp để chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_auto",
+            "value":"Đèn flash, tự động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance",
+            "value":"Cân bằng trắng %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"white_balance_tungsten_incandescent_light",
+            "value":"Ánh đèn sợi đốt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"multiselect",
+            "value":"Chọn nhiều mục",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"camera_flash_steady",
+            "value":"Đèn flash, luôn bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected",
+            "value":"Đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_vivid",
+            "value":"Sống động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_original",
+            "value":"Gốc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_bright",
+            "value":"Tươi sáng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xmage_mono",
+            "value":"Đơn sắc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"focal_length_in_35mm_film",
+            "value":"%1$s độ dài tiêu cự tương đương",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"location",
+            "value":"Đi đến vị trí hiện tại",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"day_grid_view",
+            "value":"Chế độ xem theo ngày",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"year_grid_view",
+            "value":"Chế độ xem theo năm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"month_grid_view",
+            "value":"Chế độ xem theo tháng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photos_from_group_tip",
+            "value":"Nội dung được chọn sẽ không còn xuất hiện trong nhóm này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tab_group",
+            "value":"Nhóm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_group_tip",
+            "value":"Bức ảnh này sẽ không còn xuất hiện trong nhóm này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_from_group",
+            "value":"Xóa khỏi nhóm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_group_album",
+            "value":"Chụp một số ảnh nhóm để bắt đầu\n\nAlbum nhóm được tự động tạo từ ảnh nhóm bạn chụp.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_video_from_group_tip",
+            "value":"Video này sẽ không còn xuất hiện trong nhóm này.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove_photo_from_group",
+            "value":"Xóa khỏi nhóm?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"panorama_mode",
+            "value":"Toàn cảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"raw",
+            "value":"RAW",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_setting",
+            "value":"Thẻ Do AI tạo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_setting_description",
+            "value":"Hiển thị thẻ \"Do AI tạo\" trên hình ảnh được chỉnh sửa bằng các công cụ Chỉnh sửa bằng AI, như Mở rộng, Xóa và Di chuyển.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"year_month_grid_message",
+            "value":"%1$s đến %2$s, tổng %3$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"broadcast_multi_video_and_photo_num",
+            "value":"%1$s và %2$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse_tips",
+            "value":"Chỉ có thể áp dụng hiệu ứng cho một tiện ích Bộ sưu tập tại một thời điểm.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse_tips_new",
+            "value":"Bổ sung nhiều hiệu ứng máy ảnh động cho các ảnh được thêm vào màn hình chính. Chỉ được phép hiển thị một ảnh trên mỗi màn hình chính.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_glimpse",
+            "value":"Hiệu ứng phát lại động",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_highlights",
+            "value":"Chưa có Album mục nổi bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"current_highlight_not_exist",
+            "value":"Mục nổi bật đã bị xóa. Tiện ích màn hình chính sẽ sớm được cập nhật.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"auth_camera_location_title",
+            "value":"Cho phép Máy ảnh ghi lại thông tin vị trí?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auth_camera_location_gird",
+            "value":"Điều này cho phép bạn xem thông tin vị trí cho ảnh chụp từ bây giờ trở đi. Bạn cũng sẽ có thể sử dụng các tính năng Địa điểm và Album mục nổi bật trong Bộ sưu tập.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"auth_camera_location_browser",
+            "value":"Điều này cho phép bạn xem thông tin vị trí cho ảnh chụp từ bây giờ trở đi.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Cho phép",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"is_already_album_cover",
+            "value":"Hình ảnh này đã được đặt làm bìa album.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_image_can_download_tips",
+            "value":"Hình ảnh này sẽ bị xóa khỏi thiết bị này. Có thể tải xuống lại các hình ảnh đã được đồng bộ với Cloud bất cứ lúc nào.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_video_can_download_tips",
+            "value":"Video này sẽ bị xóa khỏi thiết bị này. Có thể tải xuống lại các video đã được đồng bộ với Cloud bất cứ lúc nào.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_images_can_download_tips",
+            "value":"Tất cả hình ảnh sẽ bị xóa khỏi thiết bị này. Có thể tải xuống lại các hình ảnh đã được đồng bộ với Cloud bất cứ lúc nào.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_videos_can_download_tips",
+            "value":"Tất cả video sẽ bị xóa khỏi thiết bị này. Có thể tải xuống lại các video đã được đồng bộ với Cloud bất cứ lúc nào.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cloud_delete_all_files_can_download_tips",
+            "value":"Tất cả các mục sẽ bị xóa khỏi thiết bị này. Có thể tải xuống lại các mục đã được đồng bộ với Cloud bất cứ lúc nào.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"video_cleanup",
+            "value":"Xóa video",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_group_album",
+            "value":"Xóa nhóm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_group_album",
+            "value":"Sửa nhóm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_this_group_album",
+            "value":"Xóa nhóm này?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_from_group_tips",
+            "value":"Các nhóm này sẽ không còn hiển thị nữa. Xóa nhóm sẽ không xóa ảnh chứa trong nhóm đó.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_from_one_group_tips",
+            "value":"Nhóm này sẽ không còn hiển thị nữa. Xóa nhóm sẽ không xóa ảnh chứa trong nhóm đó.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"expression",
+            "value":"Biểu cảm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_expression",
+            "value":"Biểu cảm đã chọn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessibility_face_edit_box",
+            "value":"Hộp chỉnh sửa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shanghai_world_expo_china_pavilion",
+            "value":"Gian hàng Trung Quốc tại Triển lãm Thế giới Thượng Hải",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"natural_scenery",
+            "value":"Danh lam thắng cảnh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"slim_waist",
+            "value":"Tháp Quảng Châu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"humanities_and_landscapes",
+            "value":"Địa danh nổi tiếng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"night_sky",
+            "value":"Bầu trời ban đêm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"lightning",
+            "value":"Sấm sét",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pyramids",
+            "value":"Kim tự tháp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"jewelry",
+            "value":"Trang sức",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"notes_album",
+            "value":"Ảnh và video có chú thích",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tiananmen",
+            "value":"Thiên An Môn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"floor_plan",
+            "value":"Sơ đồ mặt bằng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"marriage_certificate",
+            "value":"Giấy chứng nhận kết hôn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cards",
+            "value":"Thiệp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"graduations",
+            "value":"Tốt nghiệp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"arc_de_triomphe_in_paris",
+            "value":"Khải Hoàn Môn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"design",
+            "value":"Hình ảnh thiết kế",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cliff",
+            "value":"Vách đá",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aurora",
+            "value":"Cực quang",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"water_cube",
+            "value":"Trung tâm thể thao dưới nước quốc gia Bắc Kinh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tickets",
+            "value":"Vé",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"flowers_and_plants",
+            "value":"Hoa và cây cối",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bicycles",
+            "value":"Xe đạp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"weddings",
+            "value":"Đám cưới",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"train_tickets",
+            "value":"Vé tàu hỏa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sky",
+            "value":"Bầu trời",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"airline_tickets",
+            "value":"Vé máy bay",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sunrise_and_sunset",
+            "value":"Bình minh và hoàng hôn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"clouds",
+            "value":"Mây",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"parents",
+            "value":"Trẻ em",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"sea_and_lake_view",
+            "value":"Bờ biển và hồ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"moon",
+            "value":"Mặt trăng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"morning_glow_and_evening_glow",
+            "value":"Bình minh và hoàng hôn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pets",
+            "value":"Thú cưng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cars",
+            "value":"Xe hơi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"barcode",
+            "value":"Mã vạch",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"coral",
+            "value":"San hô",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"buses",
+            "value":"Xe buýt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bird_nest",
+            "value":"Sân vận động Tổ chim",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"potala_palace_in_lhasa",
+            "value":"Cung điện Potala",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"macao_ruins",
+            "value":"Di tích Nhà thờ Thánh Paul",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ship",
+            "value":"Thuyền",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"birthdays",
+            "value":"Sinh nhật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"movie_tickets",
+            "value":"Vé xem phim",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"concerts",
+            "value":"Hòa nhạc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dogs",
+            "value":"Chó",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hukou",
+            "value":"Giấy tờ Hộ khẩu",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"the_great_wall",
+            "value":"Vạn Lý Trường Thành",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"beach",
+            "value":"Bãi biển",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"desert",
+            "value":"Sa mạc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"snow_mountain",
+            "value":"Núi tuyết",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"parties",
+            "value":"Bữa tiệc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"invoices",
+            "value":"Hóa đơn",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"trains",
+            "value":"Tàu hỏa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"CCTV_building",
+            "value":"Trụ sở CCTV",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"chongqing_jiefangbei",
+            "value":"Đài tưởng niệm Giải phóng Trùng Khánh",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"real_estate_certificate",
+            "value":"Giấy chứng nhận quyền sở hữu đất",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+          "name":"change_portrait",
+          "value":"Chọn người khác",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"select_portrait",
+          "value":"Chọn một người",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"display_the_avatar",
+          "value":"Hiển thị hình ảnh hồ sơ",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"select_the_portrait_album_to_display",
+          "value":"Chọn một người để hiển thị.",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+            "name":"classify_cv_popup",
+            "value":"Album \"Danh mục\" đã được nâng cấp. Hãy chạm để bắt đầu khám phá!",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selfie",
+            "value":"Ảnh tự chụp",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_portrait",
+            "value":"Chưa có người nào",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+          "name":"display_album_name",
+          "value":"Hiện tên album",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+      {
+        "name":"action_video_splicing",
+        "value":"Video",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"action_creation",
+        "value":"Tạo",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"exceeding_the_limit_message",
+        "value":"Có thể thêm tối đa %d tệp tin.",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name":"action_time_files",
+        "value":"Phim nhanh",
+        "attr":{
+          "priority":"translate"
+        }
+      },
+      {
+        "name": "sync_all_cloud_album_title",
+        "value": "Chọn album cần đồng bộ",
+        "attr": {
+          "priority": "translate"
+        }
+      },
+      {
+        "name": "sync_all_cloud_album",
+        "value": "Đồng bộ tất cả",
+        "attr": {
+          "priority": "translate"
+        }
+      },
+      {
+        "name": "sync_all_cloud_album_detail",
+        "value": "Album Máy ảnh của bạn đồng bộ theo mặc định.",
+        "attr": {
+          "priority": "translate"
+        }
+      },
+      {
+        "name": "cloud_album_sync",
+        "value": "Chọn album cần đồng bộ",
+        "attr": {
+          "priority": "translate"
+        }
+      }
+    ]
+}

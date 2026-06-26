@@ -1,24 +1,95 @@
 {
     "string":[
         {
-            "name": "photo_all",
-            "value": "全部"
+            "name":"all",
+            "value":"全部",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
-            "name": "photo_qr_code",
-            "value": "二维码"
+            "name":"id_card",
+            "value":"身份证",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
-            "name": "photo_bar_code",
-            "value": "条码"
+            "name":"avatar",
+            "value":"头像",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
-            "name": "photo_id_card",
-            "value": "身份证"
+            "name":"qr_code",
+            "value":"二维码",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
-            "name": "photo_profile_picture",
-            "value": "头像"
+            "name":"bar_code",
+            "value":"条码",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"for_you_recommend",
+            "value":"推荐",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picker_bank_card",
+            "value":"银行卡",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"driving_license",
+            "value":"行驶证",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"driver_license",
+            "value":"驾驶证",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"passport",
+            "value":"护照",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"featured_single_portrait",
+            "value":"精选单人像",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_albums",
+            "value":"所有相册",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"recommended_portrait",
+            "value":"推荐人像",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

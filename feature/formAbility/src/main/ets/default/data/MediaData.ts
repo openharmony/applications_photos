@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,30 +13,21 @@
  * limitations under the License.
  */
 export class MediaData {
-  formId: string = '0';
-  albumName: string = '';
-  albumUri: string = '';
-  displayName: string = '';
-  currentUri: string = '';
-  currentIndex: number = 0;
-  intervalTime: number = 0;
-  //数据持久化保存布尔型目前存在问题，使用数字类型保存。
-  //isShowAlbum: true or 1 is displaying Album; false or 0 is displaying a Picture
-  isShowAlbum: number = 0;
-  arkUri: number = 0;
-  orientation: number = 0;
+  public formId: string = '0';
+  public albumName: string = '';
+  public albumUri: string = '';
+  public currentUri: string = '';
+  public currentIndex: number = 0;
+  public isShowAlbum: number = 0;
 
-  constructor(formId: string, displayName: string, albumName: string,
-              albumUri: string, currentUri: string, currentIndex: number,
-              intervalTime: number, isShowAlbum: number, arkUri: number) {
+  /* instrument ignore file */
+  constructor(formId: string, albumName: string, albumUri: string,
+              currentUri: string, currentIndex: number, isShowAlbum: number) {
     this.formId = formId;
-    this.albumUri = albumUri;
-    this.displayName = displayName;
     this.albumName = albumName;
+    this.albumUri = albumUri;
     this.currentUri = currentUri;
     this.currentIndex = currentIndex;
-    this.intervalTime = intervalTime;
     this.isShowAlbum = isShowAlbum;
-    this.arkUri = arkUri;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,44 +12,80 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Log } from './Log';
+import lazy { Log } from './Log';
 
+/* instrument ignore file */
 const TAG: string = 'ErrUtil';
 
-export function tryFunc(getValue: Function, ...args): any {
-  if (typeof getValue !== 'function') {
-    Log.e(TAG, typeof getValue, 'is not a func ', ...args);
-    return;
+export function tryFunc<R = void, P = never>(func?: (...params: P[]) => R, ...params: P[]): R {
+  if (typeof func !== 'function') {
+    Log.error(TAG, `func.name, is not a func ${typeof func}` + params);
+    return undefined as R;
   }
-  let res;
+  let res: R | undefined = undefined;
   try {
-    res = getValue(...args);
+    res = func(...params);
   } catch (error) {
-    Log.e(TAG, {
-      function: getValue.name,
-      args: args,
-      error,
-      errMsg: String(error)
+    Log.error(TAG, `err: ${error?.message ?? error?.code ?? ''} ${
+    func.name ? 'funcName: ' + func.name : ''}, params: ${params}`);
+  }
+  return res as R;
+}
+
+export async function catchPromise<R>(promise: Promise<R>): Promise<R> {
+  return promise
+    .then((data: R): R => data)
+    .catch((error: Error): Promise<R> => {
+      Log.error(TAG, error + String(promise));
+      return undefined;
     });
+}
+
+export async function catchWithErr<R>(promise: Promise<R>): Promise<[R, undefined] | [undefined, Error]> {
+  return promise
+    .then<[R, undefined]>((data: R): [R, undefined] => [data, undefined])
+    .catch<[undefined, Error]>((err: Error): [undefined, Error] => [undefined, err]);
+}
+
+export async function tryPromise<R, P = void>(func: Function, ...params: P[]): Promise<R | undefined> {
+  if (typeof func !== 'function') {
+    Log.error(TAG, `func.name, is not a func ${typeof func}` + params);
+    return undefined;
+  }
+  let res: R | undefined = undefined;
+  try {
+    res = await catchPromise(func(...params));
+  } catch (error) {
+    Log.error(TAG, `err: ${error?.message ?? error?.code ?? ''} ${
+    func.name ? 'funcName: ' + func.name : ''}, params: ${params}`);
+  }
+  if (!res) {
+    return undefined;
   }
   return res;
 }
 
-export async function tryFuncAsync(getValue: Function, ...args): Promise<any> {
-  if (typeof getValue !== 'function') {
-    Log.e(TAG, 'not a func ', ...args);
-    return;
+export async function tryWithErr<R, P = void>(func: Function, ...params: P[]):
+  Promise<[R, undefined] | [undefined, Error]> {
+  if (typeof func !== 'function') {
+    Log.error(TAG, `func.name, is not a func ${typeof func}` + params);
+    return undefined;
   }
-  let res;
+  let [res, err]: [R, undefined] | [undefined, Error] = [undefined, undefined];
   try {
-    res = await getValue(...args);
+    [res, err] = await func(...params).then((data: R): [R, undefined] => [data, undefined])
+      .catch((error: Error): void => {
+        Log.error(TAG, `tryWithErr err: ${
+        error?.message ?? ''} ${func.name ? 'funcName: ' + func.name : ''}, params: ${params}`);
+        err = error;
+      });
   } catch (error) {
-    Log.e(TAG, {
-      function: getValue.name,
-      args: args,
-      error,
-      errMsg: String(error)
-    });
+    Log.error(TAG, `err: ${error?.message ?? error?.code ?? ''} ${
+    func.name ? 'funcName: ' + func.name : ''}, params: ${params}`);
+    err = err ?? error;
   }
-  return res;
+  if (!res) {
+    return [undefined, err];
+  }
+  return [res, undefined];
 }

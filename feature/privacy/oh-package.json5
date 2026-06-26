@@ -1,0 +1,11 @@
+{
+  "name": "@ohos/privacy",
+  "version": "1.0.3",
+  "description": "describe the privacy information.",
+  "main": "index.ets",
+  "author": "",
+  "dependencies": {
+    "@ohos/tools": "file:../../tools",
+    "@ohos/common": "file:../../common",
+  }
+}

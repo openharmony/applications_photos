@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,20 +13,21 @@
  * limitations under the License.
  */
 
-import { BroadCastConstants } from '../../model/common/BroadCastConstants';
-import { Constants } from '../../model/common/Constants';
-import { AddMenuOperation } from './AddMenuOperation';
-import { MenuContext } from './MenuContext';
-import { MenuOperationFactory } from '../../interface/MenuOperationFactory';
-import { MoveMenuOperation } from './MoveMenuOperation';
-import { Log } from '../../utils/Log';
-import router from '@ohos.router';
-import { AlbumInfo } from '../../model/browser/album/AlbumInfo';
-import { BroadCast } from '../../utils/BroadCast';
-import { SelectManager } from '../../model/browser/SelectManager';
-import { UserFileManagerAccess } from '../../access/UserFileManagerAccess';
-import { AlbumDefine } from '../../model/browser/AlbumDefine';
+import lazy { BroadCastConstants } from '../../model/common/BroadCastConstants';
+import lazy { Constants } from '../../model/common/Constants';
+import lazy { MenuContext } from './MenuContext';
+import lazy { Log } from '../../utils/Log';
+import lazy { AlbumInfo } from '../../model/browser/album/AlbumInfo';
+import type { BroadCast } from '../../utils/BroadCast';
+import type { SelectManager } from '../../model/browser/SelectManager';
+import lazy { UserFileManagerAccess } from '../../access/UserFileManagerAccess';
+import lazy { AlbumDefine } from '../../model/browser/AlbumDefine';
+import lazy { Action } from './Action';
+import lazy { TraceControllerUtils } from '../../utils/TraceControllerUtils';
+import lazy photoAccessHelper from '@ohos.file.photoAccessHelper';
+import type { PhotoAsset } from '../../access/UserFileManagerAccess';
 
+/* instrument ignore file */
 const TAG: string = 'common_MoveOrCopyBroadCastProp';
 
 interface ParamAlbumInfo {
@@ -44,12 +45,13 @@ export class MoveOrCopyBroadCastProp {
    * Get MoveOrCopyBroadCastProp instance
    */
   public static getInstance(): MoveOrCopyBroadCastProp {
-    if (AppStorage.get<MoveOrCopyBroadCastProp>(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) == null) {
-      AppStorage.setOrCreate(Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP, new MoveOrCopyBroadCastProp());
+    if (!MoveOrCopyBroadCastProp.instance) {
+      MoveOrCopyBroadCastProp.instance = new MoveOrCopyBroadCastProp();
     }
-    return AppStorage.get<MoveOrCopyBroadCastProp>(
-      Constants.INSTANCE_MOVE_OR_COPY_BROADCAST_PROP) as MoveOrCopyBroadCastProp;
+    return MoveOrCopyBroadCastProp.instance;
   }
+
+  public static instance: MoveOrCopyBroadCastProp | undefined = undefined;
 
   /**
    * sendMoveOrCopyBroadCast
@@ -79,9 +81,8 @@ export class MoveOrCopyBroadCastProp {
       this.addOperation();
     } else {
       if (this.broadCast != null) {
-        this.broadCast.emit(BroadCastConstants.SHOW_COPY_OR_MOVE_DIALOG,
-          [async (): Promise<void> => await this.moveOperation(),
-            async (): Promise<void> => await this.addOperation()]);
+        this.broadCast.emit(BroadCastConstants.SHOW_COPY_OR_MOVE_DIALOG, [async ():
+          Promise<void> => await this.addOperation()]);
       }
     }
   }
@@ -91,7 +92,7 @@ export class MoveOrCopyBroadCastProp {
    *
    * @param broadCast broadCast
    */
-  public doAddOperation(broadCast: BroadCast) {
+  public doAddOperation(broadCast: BroadCast): void {
     if (broadCast === null || broadCast === undefined) {
       Log.error(TAG, 'doCopyOperation error: null or undefined broadcast');
       return;
@@ -100,93 +101,36 @@ export class MoveOrCopyBroadCastProp {
     this.addOperation();
   }
 
-  private setBroadCast(broadCast: BroadCast) {
+  private setBroadCast(broadCast: BroadCast): void {
     this.broadCast = broadCast;
   }
 
-  private async addOperation() {
-    let selectManager: SelectManager =
-      AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
-    let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;
-    let targetAlbumUri: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET_URI) as string;
+  private async addOperation(): Promise<void> {
+    let selectManager: SelectManager |
+    undefined = AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED);
+    let targetAlbumName: string | undefined = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET);
+    let targetAlbumUri: string | undefined = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET_URI);
     if (this.broadCast === null || this.broadCast === undefined) {
       Log.error(TAG, 'addOperation error: null or undefined broadcast');
       return;
     }
 
     let menuContext = new MenuContext();
+    let onOperationStart = (): void => this.onOperationStartBindImpl();
+    let onOperationEnd = async (): Promise<void> => await this.onOperationEndBindImpl();
     menuContext
       .withSelectManager(selectManager)
-      .withOperationStartCallback((): void => this.onOperationStartBindImpl())
-      .withOperationEndCallback(async (): Promise<void> => await this.onOperationEndBindImpl())
-      .withBroadCast(this.broadCast)
-    menuContext.withTargetAlbumName(targetAlbumName).withAlbumUri(targetAlbumUri);
-    let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(AddMenuOperation, menuContext);
-    menuOperation.doAction();
-  }
-
-  private async moveOperation() {
-    let selectManager: SelectManager =
-      AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
-    let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;
-    let targetAlbumUri: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET_URI) as string;
-    if (this.broadCast === null || this.broadCast === undefined) {
-      Log.error(TAG, 'moveOperation error: null or undefined broadcast');
-      return;
+      .withOperationStartCallback(onOperationStart)
+      .withOperationEndCallback(onOperationEnd)
+      .withBroadCast(this.broadCast);
+    if (targetAlbumName) {
+      menuContext.withTargetAlbumName(targetAlbumName).withAlbumUri(targetAlbumUri);
     }
-
-    let menuContext = new MenuContext();
-    menuContext
-      .withSelectManager(selectManager)
-      .withOperationStartCallback((): void => this.onOperationStartBindImpl())
-      .withOperationEndCallback(async (): Promise<void> => await this.onOperationEndBindImpl())
-      .withBroadCast(this.broadCast)
-    menuContext.withTargetAlbumName(targetAlbumName).withAlbumUri(targetAlbumUri);
-    let menuOperation = MenuOperationFactory.getInstance().createMenuOperation(MoveMenuOperation, menuContext);
-    menuOperation.doAction();
+    menuContext.operate(Action.MOVE.actionID);
   }
 
   private onOperationStart(): void {
     this.onOperationStartBindImpl();
-  }
-
-  private async onOperationEndBindImpl(): Promise<void> {
-    AppStorage.setOrCreate(Constants.IS_DATA_FREEZE, false);
-    let isNewAlbum: boolean = AppStorage.get<boolean>(Constants.APP_KEY_NEW_ALBUM) as boolean;
-    let selectManager: SelectManager =
-      AppStorage.get<SelectManager>(Constants.APP_KEY_NEW_ALBUM_SELECTED) as SelectManager;
-    let targetAlbumName: string = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET) as string;
-
-    let album = await UserFileManagerAccess.getInstance().getAlbumByName(targetAlbumName);
-    let albumInfo: AlbumInfo = new AlbumInfo(album);
-    albumInfo.setAlbumName(targetAlbumName);
-    let fetchOpt = AlbumDefine.getFileFetchOpt();
-    let fetchResult = await album.getPhotoAssets(fetchOpt);
-    let count = fetchResult.getCount();
-    fetchResult.close();
-    albumInfo.setCount(count);
-
-    if (isNewAlbum) {
-      selectManager.onModeChange(false);
-      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM);
-      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM_TARGET);
-      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM_TARGET_URI);
-      AppStorage.delete(Constants.APP_KEY_NEW_ALBUM_SELECTED);
-      router.pushUrl({
-        url: 'pages/PhotoGridPage',
-        params: {
-          item: JSON.stringify(albumInfo),
-        }
-      });
-    } else {
-      AppStorage.setOrCreate<ParamAlbumInfo>(Constants.KEY_OF_PHOTO_GRID_VIEW_ALBUM_ITEM, {
-        item: JSON.stringify(albumInfo)
-      });
-      AppStorage.setOrCreate(Constants.KEY_OF_ALBUM_URI, albumInfo.uri);
-      router.back({
-        url: 'pages/index',
-      });
-    }
   }
 
   private onOperationStartBindImpl(): void {
@@ -195,5 +139,34 @@ export class MoveOrCopyBroadCastProp {
 
   private async onOperationEnd(): Promise<void> {
     await this.onOperationEndBindImpl();
+  }
+
+  private async onOperationEndBindImpl(): Promise<void> {
+    AppStorage.setOrCreate(Constants.IS_DATA_FREEZE, false);
+    let targetAlbumUri: string | undefined = AppStorage.get<string>(Constants.APP_KEY_NEW_ALBUM_TARGET_URI);
+
+    let startTime: number = Date.now();
+    TraceControllerUtils.startTraceWithTaskId('getAlbumByUri', startTime);
+    let album = await UserFileManagerAccess.getInstance().getAlbumByUri(targetAlbumUri);
+    TraceControllerUtils.finishTraceWithTaskId('getAlbumByUri', startTime);
+    Log.info(TAG, `getAlbumByName cost ${Date.now() - startTime} ms`);
+    let albumInfo: AlbumInfo = new AlbumInfo(album);
+    let fetchOpt = AlbumDefine.getFileFetchOpt();
+    if (album) {
+      let fetchResult: photoAccessHelper.FetchResult<PhotoAsset> | undefined = undefined;
+      try {
+        fetchResult = await album.getAssets(fetchOpt);
+        let count = fetchResult.getCount();
+        albumInfo.setCount(count);
+      } catch (err) {
+        Log.error(TAG, `on operation end bind impl, error: ${err?.code}, ${err?.message}`);
+      } finally {
+        fetchResult?.close();
+        Log.info(TAG, `fetchResult is close.`);
+      }
+
+
+    }
+    this.broadCast?.emit(BroadCastConstants.FINISH_PICKER_OPERATION, [albumInfo]);
   }
 }

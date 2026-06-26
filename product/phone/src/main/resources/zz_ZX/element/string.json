@@ -1,0 +1,12 @@
+{
+    "string":[
+        {
+            "name":"musicServiceSecret",
+            "value":"[TS_953278]_7B5547C57F67B79C8E19E336FEC409D8B325D93849A19E500A643B73882CDAD7"
+        },
+        {
+            "name":"musicServiceAuth",
+            "value":"[TS_970405]_C8E19E336FEC409D8B325D"
+        }
+    ]
+}

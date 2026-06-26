@@ -1,0 +1,25 @@
+{
+    "string":[
+        {
+            "name":"cloud_enhance_announcement",
+            "value":"This feature uses AI to enhance portrait photos taken in Photo and Portrait modes. In Gallery, click the wand icon on a photo to upload it for processing. This feature is free for a limited time.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_experience_the_hide_album_function",
+            "value":"Click here to view hidden items.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dynamic_photos_can_switched",
+            "value":"Multiple playback effects are available. Click here to switch between them.",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@ohos/extensions",
+  "description": "extensions is a module higher than common and lower than pc&phone",
+  "main": "index.ets",
+  "version": "1.0.0",
+  "dependencies": {
+    "@ohos/tools": "file:../../tools",
+    "@ohos/common": "file:../../common",
+    "@ohos/thirdselect": "file:../thirdselect",
+    "@ohos/timeline": "file:../timeline",
+    "@ohos/privacy": "file:../privacy",
+    "@ohos/dataprovider": "file:../../feature/dataProvider",
+    "@ohos/browsercommon": "file:../../browserCommon"
+  }
+}

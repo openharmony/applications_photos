@@ -1,6 +1,26 @@
 {
   "color": [
     {
+      "name": "ohos_id_color_white_icon",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "ohos_id_color_black_icon",
+      "value": "#E6000000"
+    },
+    {
+      "name": "ohos_id_color_blackIcon_whitePlane",
+      "value": "#33FFFFFF"
+    },
+    {
+      "name": "ohos_id_color_whiteIcon_blackPlane_hover",
+      "value": "#40000000"
+    },
+    {
+      "name": "ohos_id_color_blackIcon_whitePlane_hover",
+      "value": "#40FFFFFF"
+    },
+    {
       "name": "white",
       "value": "#FFFFFF"
     },
@@ -11,6 +31,10 @@
     {
       "name": "transparent",
       "value": "#00000000"
+    },
+    {
+      "name": "start_ability_background_color",
+      "value": "#FFFFFF"
     },
     {
       "name": "default_background_color",
@@ -74,7 +98,7 @@
     },
     {
       "name": "item_selection_bg_color",
-      "value": "#80FFFFFF"
+      "value": "#33FFFFFF"
     },
     {
       "name": "recycle_album_bg_color",
@@ -329,7 +353,7 @@
       "value": "#1A000000"
     },
     {
-      "name": "dialog_defult_shadow_m_color",
+      "name": "dialog_default_shadow_m_color",
       "value": "#2600001E"
     },
     {
@@ -355,6 +379,382 @@
     {
       "name": "histogram_background_light",
       "value": "#F1F3F5"
+    },
+    {
+      "name": "album_border_color",
+      "value": "#0D000000"
+    },
+    {
+      "name": "slider_bar_divider_color",
+      "value": "#1A000000"
+    },
+    {
+      "name": "slider_bar_background",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "browser_action_bar_background_color",
+      "value": "#F2F1F3F5"
+    },
+    {
+      "name": "list_item_right_icon_light_bg",
+      "value": "#0C000000"
+    },
+    {
+      "name": "list_divider",
+      "value": "#00000033"
+    },
+    {
+      "name": "view_albums",
+      "value": "#164FBC"
+    },
+    {
+      "name": "verify_and_view_album",
+      "value": "#737476"
+    },
+    {
+      "name": "immersive_comparedPhoto_view_background_color",
+      "value": "#19FFFFFF"
+    },
+    {
+      "name": "thirdSelectPhotoBrowserActionBar_black_view_background_color",
+      "value": "#19FFFFFF"
+    },
+    {
+      "name": "immersive_compared_swiper_add_color",
+      "value": "#FFF"
+    },
+    {
+      "name": "immersive_compared_swiper_left_background_color",
+      "value": "#664D4D4D"
+    },
+    {
+      "name": "immersive_compared_swiper_background_color",
+      "value": "#000"
+    },
+    {
+      "name": "immersive_compared_swiper_shadow_left",
+      "value": "#BF000000"
+    },
+    {
+      "name": "immersive_compared_swiper_shadow_center",
+      "value": "#7A000000"
+    },
+    {
+      "name": "immersive_compared_swiper_shadow_right",
+      "value": "#00000000"
+    },
+    {
+      "name": "immersive_compared_swiper_index_font_color",
+      "value": "#E6000000"
+    },
+    {
+      "name": "immersive_compared_swiper_index_background_color",
+      "value": "#fff"
+    },
+    {
+      "name": "immersive_compared_swiper_selected_shadow_color",
+      "value": "#59000000"
+    },
+    {
+      "name": "segment_button_selected_background_color",
+      "value": "#b31f1f1f"
+    },
+    {
+      "name": "segment_button_selected_font_color",
+      "value": "#DBFFFFFF"
+    },
+    {
+      "name": "cast_mirror_dark_color",
+      "value": "#DBFFFFFF"
+    },
+    {
+      "name": "selectPhotoBrowser_button_selected_color",
+      "value": "#DBFFFFFF"
+    },
+    {
+      "name": "segment_button_and_clear_recycle_button_background_color",
+      "value": "#7F808080"
+    },
+    {
+      "name": "switch_lite_device_light_color",
+      "value": "#E5E5E5"
+    },
+    {
+      "name": "switch_lite_device_dark_color",
+      "value": "#202224"
+    },
+    {
+      "name": "sub_screen_video_background",
+      "value": "#676658"
+    },
+    {
+      "name": "ohos_id_color_whiteIcon_blackPlane",
+      "value": "#33000000"
+    },
+    {
+      "name": "icon_bg_color",
+      "value": "#0C000000"
+    },
+    {
+      "name": "icon_bg_color_immersive",
+      "value": "#cc808080"
+    },
+    {
+      "name": "icon_fill_color_immersive",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "icon_person_crop_circle_fill_1_light_background",
+      "value": "#FF999999"
+    },
+    {
+      "name": "icon_person_crop_circle_fill_1_light_font",
+      "value": "#E5FFFFFF"
+    },
+    {
+      "name": "icon_person_crop_circle_fill_1_dark_background",
+      "value": "#FF666666"
+    },
+    {
+      "name": "icon_person_crop_circle_fill_1_dark_font",
+      "value": "#66FFFFFF"
+    },
+    {
+      "name": "ohos_id_color_outer_default_sm",
+      "value": "#19000000"
+    },
+    {
+      "name": "ohos_id_color_play_background_color",
+      "value": "#7F000000"
+    },
+    {
+      "name": "ohos_id_color_play_border_color",
+      "value": "#4DFFFFFF"
+    },
+    {
+      "name": "picker_background_color",
+      "value": "#E6FFFFFF"
+    },
+    {
+      "name": "icon_primary_light",
+      "value": "#E5000000"
+    },
+    {
+      "name": "icon_emphasize_light",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "timeline_mask_start_color",
+      "value": "#00000000"
+    },
+    {
+      "name": "timeline_mask_end_color",
+      "value": "#99000000"
+    },
+    {
+      "name": "icon_tertiary_dark_color",
+      "value": "#33000000"
+    },
+    {
+      "name": "highlight_border_color",
+      "value": "#0C000000"
+    },
+    {
+      "name": "album_card_border_color",
+      "value": "#0C000000"
+    },
+    {
+      "name": "tabbar_picture_fill_light_color",
+      "value": "#CEDEFD"
+    },
+    {
+      "name": "tabbar_picture_fill_dark_color",
+      "value": "#DCE9FF"
+    },
+    {
+      "name": "dialog_content_bg",
+      "value": "#D9FAFAFA"
+    },
+    {
+      "name": "text_input_underline",
+      "value": "#32ffffff"
+    },
+    {
+      "name": "tv_delete_dialog_button_bg",
+      "value": "#E84026"
+    },
+    {
+      "name": "tv_icon_button_bg",
+      "value": "#33F1F3F5"
+    },
+    {
+      "name": "tv_icon_button_border_color",
+      "value": "#26FFFFFF"
+    },
+    {
+      "name": "tv_gird_checkbox_border_color",
+      "value": "#99FFFFFF"
+    },
+    {
+      "name": "tv_detail_bg_color",
+      "value": "#E6000000"
+    },
+    {
+      "name": "tv_detail_textinput_border_color",
+      "value": "#26FFFFFF"
+    },
+    {
+      "name": "tv_detail_name_color",
+      "value": "#E6FFFFFF"
+    },
+    {
+      "name": "tv_detail_list_card_bg",
+      "value": "#3C3C3C"
+    },
+    {
+      "name": "portrait_edit_border_light_color",
+      "value": "#0C000000"
+    },
+    {
+      "name": "portrait_edit_border_dark_color",
+      "value": "#26FFFFFF"
+    },
+    {
+      "name": "tv_sidebar_select_bg",
+      "value": "#1AFFFFFF"
+    },
+    {
+      "name": "tv_sidebar_press_bg",
+      "value": "#40FFFFFF"
+    },
+    {
+      "name": "tv_sidebar_hover_bg",
+      "value": "#66FFFFFF"
+    },
+    {
+      "name": "search_font_primary_light",
+      "value": "#E5000000"
+    },
+    {
+      "name": "search_font_primary_dark",
+      "value": "#E5FFFFFF"
+    },
+    {
+      "name": "picker_sub_background_color_light",
+      "value": "#FFF1F3F5"
+    },
+    {
+      "name": "picker_sub_background_color_dark",
+      "value": "#FF000000"
+    },
+    {
+      "name": "search_background_color_light",
+      "value": "#0C000000"
+    },
+    {
+      "name": "search_background_color_dark",
+      "value": "#19FFFFFF"
+    },
+    {
+      "name": "picker_color_text_primary_light",
+      "value": "#FF000000"
+    },
+    {
+      "name": "picker_color_text_primary_dark",
+      "value": "#DBFFFFFF"
+    },
+    {
+      "name": "picker_color_text_secondary_light",
+      "value": "#99000000"
+    },
+    {
+      "name": "picker_color_text_secondary_dark",
+      "value": "#99FFFFFF"
+    },
+    {
+      "name": "picker_warning_learn_more_font_color_light",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "picker_warning_learn_more_font_color_dark",
+      "value": "#5291FF"
+    },
+    {
+      "name": "picker_color_button_normal_light",
+      "value": "#0C000000"
+    },
+    {
+      "name": "picker_color_button_normal_dark",
+      "value": "#19FFFFFF"
+    },
+    {
+      "name": "picker_warning_icon_hover_color_light",
+      "value": "#0C000000"
+    },
+    {
+      "name": "picker_warning_icon_hover_color_dark",
+      "value": "#19FFFFFF"
+    },
+    {
+      "name": "picker_color_help_tip_bg_light",
+      "value": "#FF4D4D4D"
+    },
+    {
+      "name": "picker_color_help_tip_bg_dark",
+      "value": "#FF4D4D4D"
+    },
+    {
+      "name": "picker_color_text_primary_contrary_light",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "picker_color_text_primary_contrary_dark",
+      "value": "#FFE5E5E5"
+    },
+    {
+      "name": "picker_color_font_secondary_light",
+      "value": "#99000000"
+    },
+    {
+      "name": "picker_color_font_secondary_dark",
+      "value": "#99FFFFFF"
+    },
+    {
+      "name": "picker_color_icon_secondary_light",
+      "value": "#99000000"
+    },
+    {
+      "name": "picker_color_icon_secondary_dark",
+      "value": "#99FFFFFF"
+    },
+    {
+      "name": "picker_color_component_normal_light",
+      "value": "#19000000"
+    },
+    {
+      "name": "picker_color_component_normal_dark",
+      "value": "#19FFFFFF"
+    },
+    {
+      "name": "picker_color_icon_primary_light",
+      "value": "#E5000000"
+    },
+    {
+      "name": "picker_color_icon_primary_dark",
+      "value": "#E5FFFFFF"
+    },
+    {
+      "name": "penSize_bar_path_color",
+      "value": "#1a000000"
+    },
+    {
+      "name": "editSheet_button_normal_color",
+      "value": "#0d000000"
+    },
+    {
+      "name": "editSheet_button_selected_color",
+      "value": "#cc000000"
     }
   ]
 }

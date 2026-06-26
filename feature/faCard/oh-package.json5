@@ -1,0 +1,13 @@
+{
+  "name": "facard",
+  "version": "1.0.0",
+  "description": "a npm package which contains form feature",
+  "main": "index.ets",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@ohos/common": "file:../../common",
+    "@ohos/tools": "file:../../tools",
+    "@ohos/dataprovider": "file:../../feature/dataProvider",
+  }
+}

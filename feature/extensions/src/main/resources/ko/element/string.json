@@ -1,0 +1,32 @@
+{
+    "string":[
+        {
+            "name":"dialog_ban",
+            "value":"거부",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_allow",
+            "value":"허용",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"short_term_title",
+            "value":"%s 앱에서 이미지 및 비디오를 저장하도록 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"dialog_not_allowed",
+            "value":"거부",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

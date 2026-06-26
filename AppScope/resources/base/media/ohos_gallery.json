@@ -1,0 +1,6 @@
+{
+  "layered-image": {
+    "background": "$media:ohos_gallery_background",
+    "foreground": "$media:ohos_gallery_op"
+  }
+}

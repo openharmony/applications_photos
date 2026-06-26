@@ -1,0 +1,5660 @@
+{
+    "string":[
+        {
+            "name":"xt_style_natural_selected",
+            "value":"Se ha seleccionado Natural",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_film_selected",
+            "value":"Se ha seleccionado Celuloide",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_cinematic_selected",
+            "value":"Se ha seleccionado Cine",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_anime_selected",
+            "value":"Se ha seleccionado Anime",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"picking",
+            "value":"Movimiento",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_cancel",
+            "value":"Cancelar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_is_too_large_toast",
+            "value":"La imagen es demasiado grande. Inténtalo de nuevo con una imagen diferente.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_anime_imageEdit",
+            "value":"Anime",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_kaleidoscope",
+            "value":"Patrón de mosaico caleidoscopio",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_romance_imageEdit",
+            "value":"Cine",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_saturation_level",
+            "value":"Nivel de saturación %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"natural_style",
+            "value":"Natural",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_reflect_light",
+            "value":"Eliminar reflejos no deseados",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_reset_success",
+            "value":"Reinicio finalizado",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"best_expression_update_component",
+            "value":"Esta función permite mezclar y combinar las mejores expresiones faciales de diferentes fotos de la misma serie. Se requiere una actualización del plug-in para usarla.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_sky_blue",
+            "value":"Patrón de mosaico celeste",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_abnormal",
+            "value":"Error de servidor.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_xt_style_selected",
+            "value":"Se han seleccionado los estilos personalizados",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"update_now",
+            "value":"Actualizar ahora",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_films_imageEdit",
+            "value":"Película",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_generating_content",
+            "value":"Generando…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_typ_classic",
+            "value":"Patrón de mosaico clásico",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"start_remove",
+            "value":"Eliminar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_type_cartoon",
+            "value":"Patrón de mosaico de dibujos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_level",
+            "value":"Nivel de tono %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_close",
+            "value":"No",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_shadow_slide_bar",
+            "value":"Nivel de tono %1$d, rango ajustable de %2$d a %3$d. Pulsa dos veces para aplicarlo, o pulsa dos veces y mantén pulsado y arrástralo hacia arriba o hacia abajo para cambiar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"shrink_image_to_adjust_expand_rect",
+            "value":"Reduce la imagen para ajustar la zona expandible.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_network_abnorma_toast",
+            "value":"Error de red. Comprueba y vuelve a intentarlo.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"yellow_imageEdit",
+            "value":"Amarillo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_reflect_light",
+            "value":"La reducción de reflejos no está disponible con esta imagen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_identified_replace_face",
+            "value":"No se ha identificado ninguna cara reemplazable.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand",
+            "value":"No se puede ampliar esta imagen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"best_expression_new_feature",
+            "value":"Prueba Mejor expresión",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_mosicac",
+            "value":"Pixelar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"replace_face_fail",
+            "value":"Algo ha salido mal. Selecciona otra imagen y vuelve a intentarlo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_matrix_area",
+            "value":"Área de ajuste de color. Arrastra horizontalmente para ajustar la temperatura de color y verticalmente para ajustar la saturación.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_reflect_light",
+            "value":"Eliminar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_default_template",
+            "value":"Ajuste predeterminado, temperatura de color %1$d, saturación %2$d, tono %3$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_open",
+            "value":"Sí",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_haze_removal_imageEdit",
+            "value":"Desempañar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_polka_dot",
+            "value":"Patrón de mosaico de lunares",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"remove",
+            "value":"Eliminar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"manual_selection",
+            "value":"Manual",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_star",
+            "value":"Patrón de mosaico con estrellas",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_replace_emoticons",
+            "value":"Realiza múltiples tomas seguidas para obtener distintas expresiones.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_continue",
+            "value":"Continuar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_triangle",
+            "value":"Patrón de mosaico con triángulos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_aspect_ratio_too_large",
+            "value":"La relación de aspecto es demasiado grande. Inténtalo de nuevo con una imagen diferente.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_imageEdit",
+            "value":"Botón",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_selection",
+            "value":"Automático",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_weaving",
+            "value":"Patrón de mosaico tejido",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"mosicac_eraser",
+            "value":"Goma de borrar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_expand_image",
+            "value":"Expandir",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aspect_ratio_of_the_image_toast",
+            "value":"La relación de aspecto es demasiado grande. Inténtalo de nuevo con una imagen diferente.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_expand_image",
+            "value":"Ampliar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_color_temperature_level",
+            "value":"Temperatura de color, nivel %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"background",
+            "value":"Fondo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aiproducer_best_expression",
+            "value":"Mejor expresión",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_bootstrapping_for_the_first_time",
+            "value":"Desliza el dedo sobre el centro de un objeto o una persona para seleccionarlo/e.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"mosicac_type_color_block",
+            "value":"Patrón de mosaico de bloques de color",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"accessbility_xt_style_filter_xt_style_template",
+            "value":"Ajuste personalizado %1$d, temperatura de color %2$d, saturación %3$d, tono %4$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_style_imageEdit",
+            "value":"Estilo de texto",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"Rehacer: Ajuste automático.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_xt_style_imageEdit",
+            "value":"XMAGE",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"portrait_refinement",
+            "value":"Refinar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_style",
+            "value":"Con estilo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_off_imageEdit",
+            "value":"Rehacer: Ajuste de temperatura de color desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_blossom_imageEdit",
+            "value":"Deshacer: Filtro floral",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_remove",
+            "value":"Eliminar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_rotate_imageEdit",
+            "value":"Girar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_off_imageEdit",
+            "value":"Rehacer: Desactivar ajuste de iluminación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_pink_imageEdit",
+            "value":"Rehacer: Filtro rosado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_off_imageEdit",
+            "value":"Rehacer: Ajuste de nitidez desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_strength_imageEdit",
+            "value":"Rehacer: Intensidad de rústico.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"Deshacer: Deshabilitar ajuste automático.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_imageEdit",
+            "value":"Lima",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_on_imageEdit",
+            "value":"Rehacer: Activar ajuste de difuminado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_finish",
+            "value":"Listo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic",
+            "value":"Nota",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_moody_imageEdit",
+            "value":"Rehacer: Filtro sombrío.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_off_imageEdit",
+            "value":"Deshacer: Ajuste de viñeteado desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_imageEdit",
+            "value":"Deshacer: Ajuste de sombra.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_imageEdit",
+            "value":"Deshacer: Ajuste de temperatura.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_natural_style",
+            "value":"Rehacer: Natural.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_top",
+            "value":"Extremo superior izquierdo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_top",
+            "value":"Extremo superior derecho",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left_bottom",
+            "value":"Extremo inferior izquierdo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right_bottom",
+            "value":"Extremo inferior derecho",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_left",
+            "value":"Borde izquierdo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_right",
+            "value":"Borde derecho",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_top",
+            "value":"Borde superior",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"direction_bottom",
+            "value":"Borde inferior",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cutting_percentage",
+            "value":"Cortar el %2$s del %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light",
+            "value":"Frontal",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_off_imageEdit",
+            "value":"Rehacer: Ajuste de área oscura desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_shoot_param_imageEdit",
+            "value":"Rehacer: Mostrar parámetros de captura.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_param_imageEdit",
+            "value":"Parámetros de captura",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlight_on_imageEdit",
+            "value":"Rehacer: Activar ajuste de iluminación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_original_imageEdit",
+            "value":"Original",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_two",
+            "value":"AI aplicar el retoque con IA, esta imagen se volverá estática y ya no se podrán ajustar la %1$s ni los %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_imageEdit",
+            "value":"Deshacer: Ajuste de difuminado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_strength_imageEdit",
+            "value":"Deshacer: Intensidad de suerte.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup",
+            "value":"Esto reemplazará tu filtro actual",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_imageEdit",
+            "value":"Descartar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_proportional_imageEdit",
+            "value":"Rehacer: Proporción.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_model_imageEdit",
+            "value":"Modelo del dispositivo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"seal_shoot_time_imageEdit",
+            "value":"Fecha/hora de captura",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_strength_imageEdit",
+            "value":"Deshacer: Intensidad de rústico.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_strength_imageEdit",
+            "value":"Deshacer: Intensidad de cristal.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_strength_imageEdit",
+            "value":"Rehacer: Intensidad de cristal.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"revert_original_state_imageEdit",
+            "value":"¿Restablecer estado original?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_one",
+            "value":"AI aplicar el retoque con IA, esta imagen se volverá estática y ya no se podrá ajustar la %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_close_watermark_imageEdit",
+            "value":"Rehacer: Desactivar marca de agua.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_sharpness_imageEdit",
+            "value":"Nitidez",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_softness",
+            "value":"Suave",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"saving_media_imageEdit",
+            "value":"Guardando\u2026",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_none_imageEdit",
+            "value":"Deshacer: Original.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_granules_imageEdit",
+            "value":"Rehacer: Ajuste de granulado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_imageEdit",
+            "value":"Rehacer: Ajuste de viñeteado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_original_strength_imageEdit",
+            "value":"Deshacer: Intensidad de etéreo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_imageEdit",
+            "value":"Deshacer: Filtro neutral.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_vertical_correction_imageEdit",
+            "value":"Vertical",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_granules_imageEdit",
+            "value":"Granulado",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"Rehacer: Habilitar ajuste automático.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_vignette_imageEdit",
+            "value":"Viñeteado",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_imageEdit",
+            "value":"Rehacer: Filtro crepúsculo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_vertical_imageEdit",
+            "value":"Rehacer: Corrección vertical.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"contour_light",
+            "value":"Iluminación de contorno",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_blossom_imageEdit",
+            "value":"Rehacer: Filtro floral.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_temperature_imageEdit",
+            "value":"Temperatura",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"blurred",
+            "value":"Desenfoque",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_off_imageEdit",
+            "value":"Rehacer: Desactivar ajuste de matiz.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_strength_imageEdit",
+            "value":"Deshacer: Intensidad de dulce.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_on_imageEdit",
+            "value":"Rehacer: Ajuste de exposición activado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_crop_imageEdit",
+            "value":"Recortar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_natural_imageEdit",
+            "value":"Rehacer: Filtro natural.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tradition_remove_content",
+            "value":"Eliminando",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_dark_part_imageEdit",
+            "value":"Deshacer: Ajuste de área oscura.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_format_abnormal_toast",
+            "value":"Formato de imagen no compatible. Vuelve a intentarlo con otra imagen.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_little_luck_imageEdit",
+            "value":"Deshacer: Filtro suerte.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"discard_all_changes_imageEdit",
+            "value":"¿Descartar cambios?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_pink_imageEdit",
+            "value":"Rosado",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_on_imageEdit",
+            "value":"Rehacer: Activar ajuste de área clara.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_nature_saturation_imageEdit",
+            "value":"Rehacer: Ajuste de intensidad.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_horizontal_correction_imageEdit",
+            "value":"Horizontal",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_black_and_white_imageEdit",
+            "value":"Monocromo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_shoot_model_imageEdit",
+            "value":"Deshacer: Mostrar modelo de dispositivo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_fair_imageEdit",
+            "value":"Rehacer: Filtro claro.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"bokeh",
+            "value":"Desenfoque",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_on_imageEdit",
+            "value":"Rehacer: Ajuste de intensidad activado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_films_imageEdit",
+            "value":"Rehacer: Película.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_dark_part_imageEdit",
+            "value":"Rehacer: Ajuste de área oscura.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_original_strength_imageEdit",
+            "value":"Rehacer: Intensidad de etéreo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_imageEdit",
+            "value":"Disminuir intensidad",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_two",
+            "value":"AI añadir un mosaico, esta imagen se volverá estática y ya no se podrán ajustar la %1$s ni los %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_highlights_imageEdit",
+            "value":"Rehacer: Ajuste de iluminación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_adjust_imageEdit",
+            "value":"Ajustar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_one",
+            "value":"AI añadir un mosaico, esta imagen se volverá estática y ya no se podrá ajustar la %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_old_tree_imageEdit",
+            "value":"Rústico",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_on_imageEdit",
+            "value":"Deshacer: Activar ajuste de intensidad.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_old_tree_imageEdit",
+            "value":"Rehacer: Filtro rústico.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_general_watermark_imageEdit",
+            "value":"Deshacer: Marca de agua estándar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_on_imageEdit",
+            "value":"Deshacer: Activar el ajuste de sombra.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_original_imageEdit",
+            "value":"Rehacer: Filtro etéreo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_refinement_new",
+            "value":"La imagen no cumple los requisitos de refinamiento del retrato.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_imageEdit",
+            "value":"Rehacer: Filtro cálido.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_on_imageEdit",
+            "value":"Rehacer: Ajuste de viñeteado activado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_off_imageEdit",
+            "value":"Rehacer: Desactivar ajuste de contraste.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"button_bubble_save",
+            "value":"Guardar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_haze_removal_imageEdit",
+            "value":"Deshacer: Desempañado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"remove_fail_toast",
+            "value":"No es posible eliminar. Vuelve a intentarlo más tarde.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_imageEdit",
+            "value":"Deshacer: Ajuste de viñeteado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_off_imageEdit",
+            "value":"Deshacer: Ajuste de difuminado desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_on_imageEdit",
+            "value":"Deshacer: Activar ajuste de área oscura.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"tabs_seal_imageEdit",
+            "value":"Marcas de agua",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_button_bubble_oneClick_adjust_off_imageEdit",
+            "value":"Rehacer: Deshabilitar ajuste automático.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"delete_imageEdit",
+            "value":"Eliminar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_imageEdit",
+            "value":"Rehacer: Filtro neutral.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_nature_saturation_imageEdit",
+            "value":"Deshacer: Ajuste de intensidad.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_on_imageEdit",
+            "value":"Rehacer: Activar ajuste de sombra.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"petalClip_stylus_previous_step",
+            "value":"Deshacer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_off_imageEdit",
+            "value":"Deshacer: Ajuste de matiz desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous",
+            "value":"Potente",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"editor_save_as",
+            "value":"Guardar como nueva",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sun_sets",
+            "value":"Atardecer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_one_pen",
+            "value":"Pausar para dar forma",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_dark_part_imageEdit",
+            "value":"Área oscura",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_old_tree_imageEdit",
+            "value":"Deshacer: Filtro rústico.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tip",
+            "value":"Si utilizas el marcado, no podrás ajustar la apertura virtual ni el estilo personalizado de esta imagen. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_oversize_imageEdit",
+            "value":"Las marcas de agua no están disponibles con este tamaño de imagen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_oneClick_adjust_imageEdit",
+            "value":"Ajuste automático",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_close_imageEdit",
+            "value":"Rehacer: Deshabilitar estilo personalizado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_pink_imageEdit",
+            "value":"Deshacer: Filtro rosado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_one",
+            "value":"Al añadir texto, esta imagen se volverá estática y ya no se podrá ajustar la %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"rebuild",
+            "value":"Regenerar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_imageEdit",
+            "value":"Rehacer: Filtro suerte.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_darkzone_off_imageEdit",
+            "value":"Deshacer: Ajuste de área oscura desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_romance_imageEdit",
+            "value":"Deshacer: Cine.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_two",
+            "value":"Al añadir texto, esta imagen se volverá estática y ya no se podrán ajustar la %1$s ni los %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_mirror_imageEdit",
+            "value":"Deshacer: Espejo.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_sprightly",
+            "value":"Alegre",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai",
+            "value":"Nota",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_vignette_off_imageEdit",
+            "value":"Rehacer: Ajuste de viñeteado desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition",
+            "value":"Composición",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_aperture",
+            "value":"Apertura",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"crop_ratio_imageEdit",
+            "value":"Relación de aspecto",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"subtitle_delete_cancel_imageEdit",
+            "value":"Cancelar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_crystal_clear_imageEdit",
+            "value":"Deshacer: Filtro cristal.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"background_decolorization",
+            "value":"Monocromo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_standard_imageEdit",
+            "value":"Estándar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_imageEdit",
+            "value":"Deshacer: Filtro monocromo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"expand_image",
+            "value":"Expandir",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"editor_overwrite_the_original_image",
+            "value":"Reemplazar el original",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_imageEdit",
+            "value":"Deshacer: Ajuste de saturación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_off_imageEdit",
+            "value":"Rehacer: Desactivar ajuste de sombra.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_gorgeous",
+            "value":"Sorprendente",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup",
+            "value":"Nota",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"revert_imageEdit",
+            "value":"Restablecer",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_imageEdit",
+            "value":"Rehacer: Ajuste de exposición",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"petalClip_stylus_next_step",
+            "value":"Rehacer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light",
+            "value":"Rembrandt",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_haze_removal_imageEdit",
+            "value":"Rehacer: Desempañado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_natural_style",
+            "value":"Deshacer: Natural.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light",
+            "value":"Ninguno",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_off_imageEdit",
+            "value":"Deshacer: Desactivar ajuste de contraste.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_on_imageEdit",
+            "value":"Deshacer: Activar ajuste de saturación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_moody_imageEdit",
+            "value":"Deshacer: Filtro sombrío.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_translucent",
+            "value":"Lúcido",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_downloading_imageEdit",
+            "value":"Se está descargando la imagen original. Espera.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_shoot_param_imageEdit",
+            "value":"Deshacer: Mostrar parámetros de captura.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_on_imageEdit",
+            "value":"Deshacer: Ajuste de contraste activado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_imageEdit",
+            "value":"Crepúsculo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_refinement",
+            "value":"El refinamiento de retratos no está disponible con esta imagen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_middle_tone_strength_imageEdit",
+            "value":"Rehacer: Intensidad de neutral.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_bright_part_imageEdit",
+            "value":"Área clara",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_little_luck_strength_imageEdit",
+            "value":"Rehacer: Intensidad de suerte.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_off_imageEdit",
+            "value":"Deshacer: Ajuste de granulado desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_imageEdit",
+            "value":"Rehacer: Ajuste de contraste.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_standard_imageEdit",
+            "value":"Rehacer: Estándar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_mirror_imageEdit",
+            "value":"Rehacer: Espejo.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_on_imageEdit",
+            "value":"Deshacer: Activar ajuste de iluminación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_analyzing",
+            "value":"Analizando...",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_on_imageEdit",
+            "value":"Rehacer: Activar ajuste de brillo.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_shadow_imageEdit",
+            "value":"Sombra",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"videoTool_compare_imageEdit",
+            "value":"Comparar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_classics_imageEdit",
+            "value":"Deshacer: Filtro clásico.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_grain_on_imageEdit",
+            "value":"Deshacer: Ajuste de granulado activado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_on_imageEdit",
+            "value":"Deshacer: Activar ajuste de temperatura de color.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_fuji",
+            "value":"Fuji",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant",
+            "value":"Elegante",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_milk_tea_strength_imageEdit",
+            "value":"Rehacer: Intensidad de cálido.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_imageEdit",
+            "value":"Cristal",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_text_imageEdit",
+            "value":"Pulsar para editar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_on_imageEdit",
+            "value":"Deshacer: Activar ajuste de área clara.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_horizontal_imageEdit",
+            "value":"Deshacer: Corrección horizontal.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_strength_imageEdit",
+            "value":"Deshacer: Intensidad de lima.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"soft_light",
+            "value":"Suave",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_intercept_imageEdit",
+            "value":"Rehacer: Cortar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"refining_switch_blurred_tips",
+            "value":"El ajuste del efecto de desenfoque requiere regeneración",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_hints_imageEdit",
+            "value":"Pulsa aquí para añadir texto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"petalClip_stylus_shut_down",
+            "value":"Cerrar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_bright_part_imageEdit",
+            "value":"Rehacer: Ajuste de área clara.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_one",
+            "value":"Al dibujar en esta imagen, la imagen se volverá estática y ya no se podrá ajustar la %1$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_failed_imageEdit",
+            "value":"No se ha podido guardar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch",
+            "value":"Retoque",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_risk_control_alerts",
+            "value":"No se puede usar la opción Eliminar en esta imagen. Vuelve a intentarlo con otra imagen.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_natural_imageEdit",
+            "value":"Natural",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_xt_style_anime_imageEdit",
+            "value":"Rehacer: Anime.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_intercept_imageEdit",
+            "value":"Deshacer: Cortar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_cut_imageEdit",
+            "value":"Cortar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_green_orange_imageEdit",
+            "value":"Deshacer: Filtro lima.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_close_watermark_imageEdit",
+            "value":"Deshacer: Desactivar marca de agua.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_two",
+            "value":"Al dibujar en esta imagen, la imagen se volverá estática y ya no se podrán ajustar la %1$s ni los %2$s.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_saturation_imageEdit",
+            "value":"Saturación",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_on_imageEdit",
+            "value":"Deshacer: Ajuste de nitidez activado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_on_imageEdit",
+            "value":"Rehacer: Activar ajuste de matiz.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_highlight_off_imageEdit",
+            "value":"Deshacer: Ajuste de iluminación desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_close_imageEdit",
+            "value":"Deshacer: Deshabilitar estilo personalizado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_off_imageEdit",
+            "value":"Rehacer: Desactivar ajuste de granulado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_none",
+            "value":"AI aplicar el retoque con IA, esta imagen se volverá estática.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_imageEdit",
+            "value":"Deshacer: Filtro crepúsculo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_imageEdit",
+            "value":"Sombrío",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_on_imageEdit",
+            "value":"Rehacer: Activar ajuste de temperatura de color.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_expand_image",
+            "value":"Expandir",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_proportional_imageEdit",
+            "value":"Deshacer: Proporción.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_fair_imageEdit",
+            "value":"Deshacer: Filtro claro.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_off_imageEdit",
+            "value":"Deshacer: Ajuste de nitidez desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_brush_adjusts",
+            "value":"Ajustar pinceles",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_refining",
+            "value":"Refinar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_luma_imageEdit",
+            "value":"Deshacer: Ajuste de brillo.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_sharpness_imageEdit",
+            "value":"Deshacer: Ajuste de nitidez.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_frame_watermark_imageEdit",
+            "value":"Deshacer: Marca de agua de marco.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_anime_imageEdit",
+            "value":"Deshacer: Anime.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_imageEdit",
+            "value":"Deshacer: Ajuste de matiz.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_original_imageEdit",
+            "value":"Deshacer: Filtro etéreo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen",
+            "value":"Fresco",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_shadow_imageEdit",
+            "value":"Rehacer: Ajuste de sombra.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_sweet_imageEdit",
+            "value":"Deshacer: Filtro dulce.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_crystal_clear_imageEdit",
+            "value":"Rehacer: Filtro cristal.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_strength_imageEdit",
+            "value":"Rehacer: Intensidad de lima.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_on_imageEdit",
+            "value":"Rehacer: Activar ajuste de saturación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_moonlight",
+            "value":"Luz de luna",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup_tip",
+            "value":"Si utilizas el marcado, no podrás ajustar el estilo personalizado de esta imagen. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_black_and_white_strength_imageEdit",
+            "value":"Deshacer: Intensidad de monocromo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_on_imageEdit",
+            "value":"Rehacer: Ajuste de nitidez activado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid",
+            "value":"Vibrante",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_crop_imageEdit",
+            "value":"Deshacer: Recortar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong",
+            "value":"Fuerte",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_standard_imageEdit",
+            "value":"Deshacer: Estándar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sunset_strength_imageEdit",
+            "value":"Rehacer: Intensidad de crepúsculo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightzone_off_imageEdit",
+            "value":"Deshacer: Ajuste de área clara desactivado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_green_orange_imageEdit",
+            "value":"Rehacer: Filtro lima.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_imageEdit",
+            "value":"Clásico",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_refreshing",
+            "value":"Motivante",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_romance_imageEdit",
+            "value":"Rehacer: Cine.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_ninety_angle_rotate_imageEdit",
+            "value":"Rehacer: Rotación de %s°.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_ninety_angle_rotate_imageEdit",
+            "value":"Deshacer: Rotación de %s°.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_grain_on_imageEdit",
+            "value":"Rehacer: Ajuste de granulado activado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_saturation_off_imageEdit",
+            "value":"Deshacer: Desactivar ajuste de saturación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"add_text_box_imageEdit",
+            "value":"Añadir texto",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_hue_imageEdit",
+            "value":"Rehacer: Ajuste de matiz.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"refining_switch_light_tips",
+            "value":"Cambiar los efectos de iluminación requiere regeneración",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"retry_imageEdit",
+            "value":"Reintentar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_on_imageEdit",
+            "value":"Deshacer: Activar ajuste de brillo.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"penKit_guide_content_one_pen",
+            "value":"Dibuja una forma de un trazo, haz una pausa y se ajustará a una forma perfecta.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_none_imageEdit",
+            "value":"Rehacer: Original.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_classics_imageEdit",
+            "value":"Rehacer: Filtro clásico.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_brightness_off_imageEdit",
+            "value":"Deshacer: Ajuste de brillo desactivado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"butterfly_light",
+            "value":"Mariposa",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_blossom_imageEdit",
+            "value":"Floral",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"filter_little_luck_imageEdit",
+            "value":"Suerte",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_close_imageEdit",
+            "value":"Sin estilo personalizado",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_milk_tea_imageEdit",
+            "value":"Cálido",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_middle_tone_imageEdit",
+            "value":"Neutral",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"button_bubble_stylus",
+            "value":"Marcado",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_granules_imageEdit",
+            "value":"Deshacer: Ajuste de granulado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_strength_imageEdit",
+            "value":"Rehacer: Intensidad de monocromo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_imageEdit",
+            "value":"Deshacer: Ajuste de exposición.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_on_imageEdit",
+            "value":"Deshacer: Activar ajuste de exposición.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_rotate_imageEdit",
+            "value":"Deshacer: Rotación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vibrance_off_imageEdit",
+            "value":"Deshacer: Desactivar ajuste de intensidad.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_shoot_time_imageEdit",
+            "value":"Rehacer: Mostrar fecha/hora de captura.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_title_lift_pen",
+            "value":"Levantar para dar forma",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_luma_imageEdit",
+            "value":"Brillo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_brightness_off_imageEdit",
+            "value":"Rehacer: Ajuste de brillo desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_none",
+            "value":"AI añadir un mosaico, esta imagen se volverá estática.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_correct_vertical_imageEdit",
+            "value":"Deshacer: Corrección vertical.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_exposure_off_imageEdit",
+            "value":"Deshacer: Desactivar ajuste de exposición.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_imageEdit",
+            "value":"Rehacer: Ajuste de difuminado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_middle_tone_strength_imageEdit",
+            "value":"Deshacer: Intensidad de neutral.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_remove_loading",
+            "value":"Procesando…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_crop_imageEdit",
+            "value":"Rehacer: Recortar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_imageEdit",
+            "value":"Original",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_imageEdit",
+            "value":"Deshacer: Ajuste automático.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_imageEdit",
+            "value":"Estilo",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_unsupport_markup",
+            "value":"Los estilos personalizados ya no estarán disponibles",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_imageEdit",
+            "value":"Claro",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_remove_limit_toast",
+            "value":"No se puede usar Eliminar en esta imagen. Vuelve a intentarlo con otra imagen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_off_imageEdit",
+            "value":"Rehacer: Desactivar ajuste de saturación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_size_low",
+            "value":"Resolución de imagen demasiado baja para esta función.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_imageEdit",
+            "value":"Editar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"current_file_cannot_import_imageEdit",
+            "value":"Archivo no compatible o dañado. No se puede editar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_general_watermark_imageEdit",
+            "value":"Rehacer: Marca de agua estándar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_imageEdit",
+            "value":"Filtros",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_has_been_refined",
+            "value":"Esta imagen ya se ha refinado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_imageEdit",
+            "value":"Dulce",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_contrast_imageEdit",
+            "value":"Deshacer: Ajuste de contraste.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light",
+            "value":"Lateral",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_none",
+            "value":"Al añadir texto, esta imagen se volverá estática.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_shoot_time_imageEdit",
+            "value":"Deshacer: Mostrar fecha/hora de captura.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_natural_imageEdit",
+            "value":"Deshacer: Filtro natural.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_shoot_model_imageEdit",
+            "value":"Rehacer: Mostrar modelo de dispositivo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_free_imageEdit",
+            "value":"Forma libre",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_fade_on_imageEdit",
+            "value":"Deshacer: Activar ajuste de difuminado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_vignette_on_imageEdit",
+            "value":"Deshacer: Ajuste de viñeteado activado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word",
+            "value":"Nota",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_filter_black_and_white_imageEdit",
+            "value":"Rehacer: Filtro monocromo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_highlights_imageEdit",
+            "value":"Iluminación",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_rotate_imageEdit",
+            "value":"Rehacer: Rotación.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_retouching",
+            "value":"Retoque con IA",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_imageEdit",
+            "value":"Deshacer: Filtro cálido.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_highlights_imageEdit",
+            "value":"Deshacer: Ajuste de iluminación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"start_refining",
+            "value":"Comenzar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_exposure_off_imageEdit",
+            "value":"Rehacer: Desactivar ajuste de exposición.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"adjust_nature_saturation_imageEdit",
+            "value":"Intensidad",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"image_without_refinement",
+            "value":"El refinamiento de retratos no está disponible con esta imagen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_vibrance_off_imageEdit",
+            "value":"Rehacer: Ajuste de intensidad desactivado.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_style",
+            "value":"estilos personalizados",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_darkzone_on_imageEdit",
+            "value":"Rehacer: Activar el ajuste de área oscura.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_sharpness_imageEdit",
+            "value":"Rehacer: Ajuste de nitidez.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_whiten",
+            "value":"Claro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_shadow_off_imageEdit",
+            "value":"Deshacer: Ajuste de sombra desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_milk_tea_strength_imageEdit",
+            "value":"Deshacer: Intensidad de cálido.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_bright_part_imageEdit",
+            "value":"Deshacer: Ajuste de área clara.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_choose_filter_adjust_markup_tip",
+            "value":"Si seleccionas un estilo personalizado, se reemplazarán el filtro actual y los ajustes que hayas realizado. ¿Reemplazar?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_hue_imageEdit",
+            "value":"Color",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_frame_watermark_imageEdit",
+            "value":"Rehacer: Marca de agua de marco.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams",
+            "value":"Sueño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_haze_removal_selected_imageEdit",
+            "value":"Desempañado seleccionado",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_temperature_off_imageEdit",
+            "value":"Deshacer: Desactivar ajuste de temperatura de color.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_none",
+            "value":"Al dibujar en esta imagen, esta se volverá estática.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"click_restore_origin_tips",
+            "value":"Pulsa aquí para deshacer los cambios realizados.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_brilliant",
+            "value":"Deslumbrante",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_content_brush_adjusts",
+            "value":"Pulsa dos veces un pincel para cambiar su tamaño y opacidad.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup_tip",
+            "value":"Si utilizas Retoque con IA, no podrás ajustar el estilo personalizado de esta imagen. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_filter_sunset_strength_imageEdit",
+            "value":"Deshacer: Intensidad de crepúsculo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"penKit_guide_content_lift_pen",
+            "value":"Dibuja una forma de un trazo, levanta el lápiz óptico o el dedo y se ajustará a una forma perfecta.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_films_imageEdit",
+            "value":"Deshacer: Película.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_saturation_imageEdit",
+            "value":"Rehacer: Ajuste de saturación.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_soft",
+            "value":"Suave",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"hue_brightly",
+            "value":"Brillante",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_imageEdit",
+            "value":"Contraste",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_luma_imageEdit",
+            "value":"Rehacer: Ajuste de brillo.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_temperature_imageEdit",
+            "value":"Rehacer: Ajuste de temperatura.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_pave_imageEdit",
+            "value":"Ajustar a pantalla",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_adjust_hue_on_imageEdit",
+            "value":"Deshacer: Activar ajuste de matiz.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_adjust_fade_off_imageEdit",
+            "value":"Rehacer: Ajuste de difuminado desactivado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_contrast_on_imageEdit",
+            "value":"Rehacer: Ajuste de contraste activado.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light",
+            "value":"Iluminación",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"xt_style_ai_unsupport_markup",
+            "value":"Los ajustes de estilos personalizados no estarán disponibles",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_exposure_imageEdit",
+            "value":"Exposición",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_button_bubble_oneClick_adjust_on_imageEdit",
+            "value":"Deshacer: Habilitar ajuste automático.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_strength_imageEdit",
+            "value":"Rehacer: Intensidad de dulce.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_imageEdit",
+            "value":"Etéreo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_filter_sweet_imageEdit",
+            "value":"Rehacer: Filtro dulce.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_brightzone_off_imageEdit",
+            "value":"Rehacer: Desactivar ajuste de área clara.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"first_time_use_penkit",
+            "value":"Pulsa aquí para garabatear esta imagen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_horizontal_imageEdit",
+            "value":"Rehacer: Corrección horizontal.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"color_light_blue_imageEdit",
+            "value":"Celeste",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup_tip",
+            "value":"Después de usar marcado, no podrás ajustar la apertura para esta imagen. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch_tip",
+            "value":"Después de usar Retoque con IA, no podrás ajustar la apertura para esta imagen. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"none",
+            "value":"Ninguno",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_right",
+            "value":"Alinear a derecha",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"generation_image_imageEdit",
+            "value":"Procesando…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"timeout_without_move_imageEdit",
+            "value":"Fin del tiempo de espera de la solicitud del servidor. Vuelve a intentarlo más tarde.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_confirm_selection_imageEdit",
+            "value":"Rehacer: Confirmar selección.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"draw_imageEdit",
+            "value":"Creando boceto…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_imageEdit",
+            "value":"Personalizar marca de agua",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_abnormal_try_again",
+            "value":"Error de solicitud del servidor. Vuelve a intentarlo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_tip",
+            "value":"Después de usar Retoque con IA, no podrás ajustar la apertura ni el estilo personalizado para esta imagen. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"synthesis_failed_without_move_imageEdit",
+            "value":"Error al generar imagen. Vuelve a intentarlo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_delete_object_imageEdit",
+            "value":"Deshacer: Eliminar objeto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_can_not_expand_part_area",
+            "value":"No se puede expandir parte del contenido. Reposiciona y vuelve a intentarlo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fusion_imageEdit",
+            "value":"Mezclando…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"regions_overlay_without_move_imageEdit",
+            "value":"Se ha producido un error. Selecciona de nuevo y vuelve a intentarlo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_compose_imageEdit",
+            "value":"Rehacer: Generar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_small_without_move_imageEdit",
+            "value":"Las dimensiones de la imagen son muy pequeñas.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_aperture_focus",
+            "value":"Deshacer: Posición de enfoque.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_aperture_adjust",
+            "value":"Rehacer: Ajustar apertura.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_tips",
+            "value":"Después de usar marcado, no podrás ajustar la apertura ni el estilo personalizado para esta imagen. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_move_toast_content",
+            "value":"Las modificaciones que hayas realizado se descartarán si sales ahora. ¿Quieres salir de todos modos?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"ai_move_bootstrapping",
+            "value":"Dibuja una línea para seleccionar el sujeto",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unavailable_move_imageEdit",
+            "value":"La función Movimiento no está disponible.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"generation_imageEdit",
+            "value":"Generando…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_move_toast_title",
+            "value":"Se perderán las ediciones",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_object_imageEdit",
+            "value":"Deshacer: Ajustar objeto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_shoot_sign_imageEdit",
+            "value":"Firma personalizada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_move_object_imageEdit",
+            "value":"Rehacer: Mover objeto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_to_edit_imageEdit",
+            "value":"Toca un objeto para editarlo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_green_imageEdit",
+            "value":"Verde",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_edit_watermark_imageEdit",
+            "value":"Deshacer: Editar marca de agua.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"server_is_timeout_try_again",
+            "value":"Fin del tiempo de espera de la solicitud del servidor. Vuelve a intentarlo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_switch_watermark_imageEdit",
+            "value":"Rehacer: Cambiar marca de agua.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_aperture_adjust",
+            "value":"Deshacer: Ajustar apertura.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selected_watermark_imageEdit",
+            "value":"Deshacer: Seleccionar marca de agua.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fill_imageEdit",
+            "value":"Rellenando…",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_delete_object_imageEdit",
+            "value":"Rehacer: Eliminar objeto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_display_param_imageEdit",
+            "value":"Mostrar %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_adjust_tier_object_imageEdit",
+            "value":"Deshacer: Ajustar capa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_object_imageEdit",
+            "value":"Rehacer: Ajustar objeto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_copy_object_imageEdit",
+            "value":"Rehacer: Copiar objeto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_intelligent_correction_imageEdit",
+            "value":"Enderezar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_without_move_imageEdit",
+            "value":"La función Movimiento no está disponible con esta imagen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"oversize_imageEdit",
+            "value":"Se alcanzó el número máximo de objetos.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"today_frequency_reached_upper_limit",
+            "value":"Límite de uso alcanzado por hoy.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_adjust_tier_object_imageEdit",
+            "value":"Rehacer: Ajustar capa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_light_purple_imageEdit",
+            "value":"Lila",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"seal_color_param_imageEdit",
+            "value":"Información de color",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_red_imageEdit",
+            "value":"Rojo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_imageEdit",
+            "value":"Generar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_ai_retouch",
+            "value":"Los ajustes de apertura no estarán disponibles",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_intelligent_correction_on",
+            "value":"Enderezar seleccionado",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_select_param_imageEdit",
+            "value":"Seleccionar %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_picture_tilt_is_detected",
+            "value":"No se detectó inclinación.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_black_imageEdit",
+            "value":"Negro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_center",
+            "value":"Alinear centro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_large_mask_without_move_imageEdit",
+            "value":"El área seleccionada es demasiado grande. Vuelve a seleccionar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_correct_intelligent_imageEdit",
+            "value":"Deshacer: Enderezar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_edit_watermark_imageEdit",
+            "value":"Rehacer: Editar marca de agua.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_text_imageEdit",
+            "value":"Texto",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_aperture_imageEdit",
+            "value":"Apertura",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_edit_max_tip",
+            "value":"Se alcanzó el número máximo de cuadros de texto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"too_small_mask_without_move_imageEdit",
+            "value":"El área seleccionada es demasiado pequeña. Vuelve a seleccionar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_compose_imageEdit",
+            "value":"Deshacer: Generar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_align_left",
+            "value":"Alinear a izquierda",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_copy_object_imageEdit",
+            "value":"Deshacer: Copiar objeto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_correct_intelligent_imageEdit",
+            "value":"Rehacer: Enderezar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"add_text_imageEdit",
+            "value":"Añadir texto",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_unsupport_markup",
+            "value":"Los ajustes de apertura no estarán disponibles",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_aperture_focus",
+            "value":"Rehacer: Posición de enfoque.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_imageEdit",
+            "value":"Deshacer: Selección.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_close_param_imageEdit",
+            "value":"Deseleccionar %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cannot_be_erased_toast",
+            "value":"No se puede eliminar el contenido del área seleccionada.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"exit_imageEdit",
+            "value":"Salir",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"leave_imageEdit",
+            "value":"Salir",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_dark_blue_imageEdit",
+            "value":"Azul oscuro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selected_watermark_imageEdit",
+            "value":"Rehacer: Seleccionar marca de agua.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_watermark_on_imageEdit",
+            "value":"Marca de agua personalizada seleccionada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_imageEdit",
+            "value":"Seleccionado",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_switch_watermark_imageEdit",
+            "value":"Deshacer: Cambiar marca de agua.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_confirm_selection_imageEdit",
+            "value":"Deshacer: Confirmar selección.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"color_white_imageEdit",
+            "value":"Blanco",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_imageEdit",
+            "value":"Rehacer: Selección.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_move_object_imageEdit",
+            "value":"Deshacer: Mover objeto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_manual_selection",
+            "value":"Deshacer: selección manual.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_add_patches_imageEdit",
+            "value":"Deshacer: Añadir sticker.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_paint_text_announced",
+            "value":"Área seleccionada eliminada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_wise_selection",
+            "value":"Deshacer: selección automática.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_manual_selection",
+            "value":"Rehacer: selección manual.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"eraser_brush_thickness_selected",
+            "value":"Control deslizante para el ajuste de tamaño de la goma de borrar; rango de tamaño de %1$d a %2$d; pulsa dos veces para activar, mantén pulsado dos veces y arrastra hacia la izquierda o hacia la derecha para ajustar el tamaño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_eraser_after_imageEdit",
+            "value":"Selecciona un objeto y vuelve a intentarlo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_add_patches_imageEdit",
+            "value":"Rehacer: Añadir stickers.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"select_patches_object",
+            "value":"Seleccionar objeto",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"redo_wise_selection",
+            "value":"Rehacer: selección automática.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"click_selection_to_edit_imageEdit",
+            "value":"Pulsa Automático o Manual para editar el área seleccionada",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"save_picture",
+            "value":"Guardar como imagen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_eraser_selection",
+            "value":"Deshacer: goma de borrar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_eraser_selection",
+            "value":"Rehacer: goma de borrar.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"patches_selection",
+            "value":"Stickers",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"eraser_selection",
+            "value":"Goma de borrar",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_two",
+            "value":"Tras hacer garabatos, ya no se podrán ajustar los %1$s ni los %2$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_one",
+            "value":"Tras aplicar Retoque con IA, ya no se podrán ajustar los %1$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_three",
+            "value":"Tras añadir texto, ya no se podrán ajustar los %1$s, la %2$s ni los %3$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_one",
+            "value":"Tras añadir texto, ya no se podrán ajustar los %1$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_two",
+            "value":"Tras añadir un efecto de imagen pixelada, ya no se podrán ajustar los %1$s ni los %2$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_no_effect",
+            "value":"Rehacer: ningún efecto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_panning_shot_effect",
+            "value":"Panorámica",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_no_effect",
+            "value":"Deshacer: ningún efecto.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_panning_shot_effect",
+            "value":"Rehacer: Panorámica.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_selection_snapshot_effect",
+            "value":"Rehacer: Instantánea.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_one",
+            "value":"Tras hacer garabatos, ya no se podrán ajustar los %1$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"undo_selection_snapshot_effect",
+            "value":"Deshacer: Instantánea.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_two",
+            "value":"Tras aplicar Retoque con IA, ya no se podrán ajustar los %1$s ni los %2$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_ai_param_three",
+            "value":"Tras aplicar Retoque con IA, ya no se podrán ajustar los %1$s, la %2$s ni los %3$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selection_snapshot_effect",
+            "value":"Instantánea",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_one",
+            "value":"Tras añadir un efecto de imagen pixelada, ya no se podrán ajustar los %1$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_param_movement",
+            "value":"efectos de movimiento",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_mosaic_param_three",
+            "value":"AI añadir una imagen pixelada, la imagen se volverá estática y ya no se podrán ajustar los %1$s, la %2$s ni los %3$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_ai_param_three",
+            "value":"AI aplicar Retoque con IA, la imagen se volverá estática y ya no se podrán ajustar los %1$s, la %2$s ni los %3$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_mosaic_param_three",
+            "value":"Tras añadir un efecto de imagen pixelada, ya no se podrán ajustar los %1$s, la %2$s ni los %3$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_word_param_two",
+            "value":"Tras añadir texto, ya no se podrán ajustar los %1$s ni los %2$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_word_param_three",
+            "value":"Al añadir texto, la imagen se volverá estática y ya no se podrán ajustar los %1$s, la %2$s ni los %3$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_movement_imageEdit",
+            "value":"Movimiento",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_selection_panning_shot_effect",
+            "value":"Deshacer: Panorámica.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"static_some_functions_unsupport_markup_param_three",
+            "value":"Tras hacer garabatos, ya no se podrán ajustar los %1$s, la %2$s ni los %3$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"some_functions_unsupport_markup_param_three",
+            "value":"Al hacer garabatos en la imagen, esta se volverá estática y ya no se podrán ajustar los %1$s, la %2$s ni los %3$s. ¿Continuar de todos modos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_moody_selected",
+            "value":"Se ha seleccionado el filtro Cambiante",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n_selected",
+            "value":"Se ha seleccionado Composición %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_lr",
+            "value":"Cambiar a diseño izquierda-derecha",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_n",
+            "value":"Desenfoque de fondo actualmente configurado en el nivel %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_style_selected",
+            "value":"Se ha seleccionado Con estilo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"double_click_edit_imageEdit",
+            "value":"Pulsar dos veces para editar texto",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_top_middle",
+            "value":"Parte superior del cuadro de recorte, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el área seleccionada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightness_true",
+            "value":"Se ha seleccionado Brillo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_original_selected",
+            "value":"Se ha seleccionado iluminación Original",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_fade_true",
+            "value":"Se ha seleccionado Difuminar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_imageEdit",
+            "value":"Extremo superior derecho del cuadro de texto, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el tamaño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_imageEdit",
+            "value":"Sin marca de agua",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_filter_selected",
+            "value":"Se ha seleccionado Filtros",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_aperture_selected",
+            "value":"Se ha seleccionado Apertura",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice",
+            "value":"Barra para ajustar el efecto de desenfoque de fondo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_invisible",
+            "value":"Botón Deshacer, no disponible",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_lvl_0",
+            "value":"Desenfoque de fondo actualmente configurado como ninguno",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"aperture_focus_change",
+            "value":"Se ha cambiado la posición de enfoque",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_vivid_selected",
+            "value":"Se ha seleccionado Vibrante",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_green_orange_selected",
+            "value":"Se ha seleccionado el filtro Lima",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_rotation_on",
+            "value":"Se ha seleccionado Girar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9_on",
+            "value":"Se ha seleccionado la relación de aspecto dieciséis por nueve",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_old_tree_selected",
+            "value":"Se ha seleccionado el filtro Rústico",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_visible",
+            "value":"Deshacer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_blossom_selected",
+            "value":"Se ha seleccionado el filtro Floral",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_rotation_btn",
+            "value":"Girar noventa grados en sentido contrario a las agujas del reloj",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"text_box_imageEdit",
+            "value":"Cuadro de texto",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_milk_tea_selected",
+            "value":"Se ha seleccionado el filtro Cálido",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1_on",
+            "value":"Se ha seleccionado la relación de aspecto uno por uno",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_bottom",
+            "value":"Extremo inferior izquierdo del cuadro de recorte, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el área seleccionada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_sharpness_true",
+            "value":"Se ha seleccionado Nitidez",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_imageEdit",
+            "value":"%1$s. El rango ajustable es de %2$d a %3$d grados. Pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el ángulo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bold_imageEdit",
+            "value":"Negrita",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"compose_original_selected",
+            "value":"Se ha seleccionado Composición original",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_imageEdit",
+            "value":"Extremo inferior derecho del cuadro de texto, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el tamaño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"save_invisible",
+            "value":"Botón Guardar, no disponible",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_free_on",
+            "value":"Se ha seleccionado Forma libre",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_strong_selected",
+            "value":"Se ha seleccionado Fuerte",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_freshen_selected",
+            "value":"Se ha seleccionado Fresco",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_pink_selected",
+            "value":"Se ha seleccionado el filtro Rosado",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"italics_imageEdit",
+            "value":"Cursiva",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_invisible",
+            "value":"Botón Rehacer, no disponible",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn_desc",
+            "value":"Pulsa dos veces y mantén pulsado para comparar la imagen con la original",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"no_light_selected",
+            "value":"No se ha seleccionado ningún efecto de iluminación",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vibrance_true",
+            "value":"Se ha seleccionado Intensidad",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_auto_true",
+            "value":"Se ha seleccionado Ajuste automático",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_imageEdit",
+            "value":"Extremo inferior izquierdo del cuadro de texto, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el tamaño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"edit_ud",
+            "value":"Cambiar a diseño arriba-abajo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"crop_mirror_btn",
+            "value":"Reflejo en espejo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_bar_announced",
+            "value":"Control deslizante para ajustar el tamaño del pincel",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_on",
+            "value":"Se ha seleccionado Relación de aspecto",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select_n",
+            "value":"Se ha ajustado el desenfoque de fondo, el nivel actual es %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_selected",
+            "value":"Se ha seleccionado %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_exposure_true",
+            "value":"Se ha seleccionado Exposición",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_dreams_selected",
+            "value":"Se ha seleccionado Sueño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_screen_on",
+            "value":"Se ha seleccionado Ajustar a pantalla",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2_on",
+            "value":"Se ha seleccionado la relación de aspecto tres por dos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_n",
+            "value":"Composición %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"wise_paint_text_announced",
+            "value":"Marcado completado, se ha seleccionado automáticamente el área correspondiente",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_little_luck_selected",
+            "value":"Se ha seleccionado el filtro Suerte",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"manual_paint_text_announced",
+            "value":"Se ha seleccionado el área marcada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_imageEdit",
+            "value":"Marca de agua de marco",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_watermark_selected",
+            "value":"Se ha seleccionado Marcas de agua",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_bottom",
+            "value":"Extremo inferior derecho del cuadro de recorte, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el área seleccionada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_vignette_true",
+            "value":"Se ha seleccionado Viñeta",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_fair_selected",
+            "value":"Se ha seleccionado el filtro Claro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_verticalCorrection_on",
+            "value":"Se ha seleccionado Ajuste vertical",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_on_imageEdit",
+            "value":"Se ha seleccionado Marca de agua estándar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_simple_elegant_selected",
+            "value":"Se ha seleccionado Elegante",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"frame_watermark_on_imageEdit",
+            "value":"Se ha seleccionado Marca de agua de marco",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_none_selected",
+            "value":"Se ha seleccionado el filtro Original",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bokeh_adjustment_voice_select",
+            "value":"Control deslizante de ajuste de nivel de desenfoque de fondo, rango ajustable de %1$d a %2$d, pulsa dos veces para activar, pulsa dos veces y mantén pulsado; a continuación, arrastra hacia la izquierda o hacia la derecha para ajustar el nivel",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_brightzone_true",
+            "value":"Se ha seleccionado Área iluminada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_grain_true",
+            "value":"Se ha seleccionado Efecto grano",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sunset_selected",
+            "value":"Se ha seleccionado el filtro Crepúsculo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_top",
+            "value":"Extremo superior izquierdo del cuadro de recorte, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el área seleccionada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_black_and_white_selected",
+            "value":"Se ha seleccionado el filtro Monocromático",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_classics_selected",
+            "value":"Se ha seleccionado el filtro Clásico",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_contrast_true",
+            "value":"Se ha seleccionado Contraste",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_soft_selected",
+            "value":"Se ha seleccionado Suave",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4_on",
+            "value":"Se ha seleccionado la relación de aspecto tres por cuatro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"alignment_imageEdit",
+            "value":"Alineación",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_hue_true",
+            "value":"Se ha seleccionado Matiz",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"underline_imageEdit",
+            "value":"Subrayado",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"light_selected",
+            "value":"Se ha seleccionado Iluminación",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16_on",
+            "value":"Se ha seleccionado la relación de aspecto nueve por dieciséis",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_whiten_selected",
+            "value":"Se ha seleccionado Claro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_16_9",
+            "value":"Horizontal, relación de aspecto dieciséis por nueve",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_origin_on",
+            "value":"Se ha seleccionado Original",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_light_selected",
+            "value":"Se ha seleccionado Lateral",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_imageEdit",
+            "value":"Extremo superior izquierdo del cuadro de texto, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el tamaño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brightly_selected",
+            "value":"Se ha seleccionado Brillante",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_left_middle",
+            "value":"Lado izquierdo del cuadro de recorte, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el área seleccionada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_visible",
+            "value":"Rehacer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"back_up",
+            "value":"Volver",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_value",
+            "value":"Se ha ajustado el tamaño del pincel, el tamaño actual es %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"composition_selected",
+            "value":"Se ha seleccionado Composición",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_top",
+            "value":"Extremo superior derecho del cuadro de recorte, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el área seleccionada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_shadow_true",
+            "value":"Se ha seleccionado Sombra",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_temperature_true",
+            "value":"Se ha seleccionado Temperatura",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_grumous_selected",
+            "value":"Se ha seleccionado Potente",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_gorgeous_selected",
+            "value":"Se ha seleccionado Sorprendente",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pen_size_point_announced",
+            "value":"El tamaño actual del pincel es %1$d",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"brush_thickness_selected",
+            "value":"Control deslizante de ajuste del tamaño del pincel, el tamaño oscila entre %1$d y %2$d, pulsa dos veces para activar, pulsa dos veces y mantén pulsado; a continuación, arrastra hacia la izquierda o hacia la derecha para ajustar el tamaño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rembrandt_light_selected",
+            "value":"Se ha seleccionado Rembrandt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3_on",
+            "value":"Se ha seleccionado la relación de aspecto dos por tres",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_sprightly_selected",
+            "value":"Se ha seleccionado Alegre",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_original_selected",
+            "value":"Se ha seleccionado el filtro Etéreo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_adjust_selected",
+            "value":"Se ha seleccionado Ajustar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"blurred_selected",
+            "value":"Se ha seleccionado Desenfoque",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_darkzone_true",
+            "value":"Se ha seleccionado Área oscura",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_natural_selected",
+            "value":"Se ha seleccionado el filtro Natural",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_2_3",
+            "value":"Vertical, relación de aspecto dos por tres",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"front_light_selected",
+            "value":"Se ha seleccionado Frontal",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_horizontalCorrection_on",
+            "value":"Se ha seleccionado Ajuste horizontal",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_compare_btn",
+            "value":"Botón Comparar, pulsa dos veces y mantén pulsado para comparar la imagen actual con la original",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_refreshing_selected",
+            "value":"Se ha seleccionado Motivante",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_middle_tone_selected",
+            "value":"Se ha seleccionado el filtro Neutro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_saturation_true",
+            "value":"Se ha seleccionado Saturación",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_1_1",
+            "value":"Relación de aspecto uno por uno",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_sweet_selected",
+            "value":"Se ha seleccionado el filtro Agradable",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_crop_selected",
+            "value":"Se ha seleccionado Recortar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"adjust_highlight_true",
+            "value":"Se ha seleccionado Resaltar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3_on",
+            "value":"Se ha seleccionado la relación de aspecto cuatro por tres",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"butterfly_light_selected",
+            "value":"Se ha seleccionado Mariposa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_softness_selected",
+            "value":"Se ha seleccionado Suave",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"style_original_selected",
+            "value":"Se ha seleccionado el color Original",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rectangle_sizer",
+            "value":"Vista previa de la imagen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_watermark_on_imageEdit",
+            "value":"Se ha seleccionado la opción sin marca de agua",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_middle_bottom",
+            "value":"Parte inferior del cuadro de recorte, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el área seleccionada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_4_3",
+            "value":"Horizontal, relación de aspecto cuatro por tres",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"celia_retouch_selected",
+            "value":"Se ha seleccionado Celia Retouch",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"hue_brilliant_selected",
+            "value":"Se ha seleccionado Deslumbrante",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_select_imageEdit",
+            "value":"Pulsar dos veces para seleccionar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"general_watermark_imageEdit",
+            "value":"Marca de agua estándar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rect_right_middle",
+            "value":"Lado derecho del cuadro de recorte, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el área seleccionada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_9_16",
+            "value":"Vertical, relación de aspecto nueve por dieciséis",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_4",
+            "value":"Vertical, relación de aspecto tres por cuatro",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cropTab_ratio_3_2",
+            "value":"Horizontal, relación de aspecto tres por dos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"one_finger_to_toggle_imageEdit",
+            "value":"Pulsar dos veces para cambiar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"filter_crystal_clear_selected",
+            "value":"Se ha seleccionado el filtro Cristal",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_left_zoom_ai_move_imageEdit",
+            "value":"Esquina superior izquierda del cuadro de edición, pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el tamaño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"rotate_scope_ai_move_imageEdit",
+            "value":"%1$s; el rango ajustable es de %2$d a %3$d grados. Pulsa dos veces y mantén pulsado; luego arrastra para ajustar el ángulo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_left_zoom_ai_move_imageEdit",
+            "value":"Esquina inferior izquierda del cuadro de edición; pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el tamaño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"bottom_right_zoom_ai_move_imageEdit",
+            "value":"Esquina inferior derecha del cuadro de edición; pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el tamaño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_is_invisible",
+            "value":"Botón de %1$s, no disponible",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"upper_right_zoom_ai_move_imageEdit",
+            "value":"Esquina superior derecha del cuadro de edición; pulsa dos veces y mantén pulsado; a continuación, arrastra para ajustar el tamaño",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_tone",
+            "value":"Tono",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_bar",
+            "value":"Control deslizante de ajuste de la intensidad del filtro Lima; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar la intensidad del filtro Lima. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_bar",
+            "value":"Control deslizante de ajuste de la intensidad del filtro Ocaso; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar la intensidad del filtro Ocaso. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_adjust",
+            "value":"Se ha ajustado la rotación. El valor de rotación actual es de %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_rulerScroller",
+            "value":"Control deslizante de ajuste de apertura. El rango del control deslizante es de F0.95 a F16. Mantén pulsado con ambos dedos y arrastra hacia la izquierda o hacia la derecha para ajustar el valor de apertura. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_100_100",
+            "value":"Control deslizante de ajuste del brillo; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor del brillo. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_adjust",
+            "value":"Se ha ajustado el valor de la nitidez. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_adjust",
+            "value":"Se ha ajustado el ángulo horizontal. El ángulo actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_adjust",
+            "value":"Se ha ajustado el valor de la saturación. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_aperture_value_change",
+            "value":"Se ha ajustado el valor de apertura. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_adjust",
+            "value":"Se ha ajustado el valor de la sombra. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_adjust",
+            "value":"Se ha ajustado el valor del reflejo. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_adjust",
+            "value":"Se ha ajustado el valor del área oscura. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_adjust",
+            "value":"Se ha ajustado el valor del área clara. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_100_100",
+            "value":"Control deslizante de ajuste del contraste; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor del contraste. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_shadow_scroll_100_100",
+            "value":"Control deslizante de ajuste de la sombra; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor de la sombra. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_adjust",
+            "value":"Se ha ajustado el ángulo vertical. El ángulo actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation_imageEdit",
+            "value":"Control deslizante de rotación; el rango del control deslizante es de −45° a 45°; pulsa dos veces y mantén pulsado; a continuación, arrastra hacia la izquierda o hacia la derecha para ajustar la rotación; la rotación actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_adjust",
+            "value":"Se ha ajustado el valor del fundido. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_adjust",
+            "value":"Se ha ajustado el valor del viñeteado. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_value",
+            "value":"Se ha ajustado la intensidad del filtro Etéreo. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_adjust",
+            "value":"Se ha ajustado el valor de la intensidad. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_sharpness_scroll_0_100",
+            "value":"Control deslizante de ajuste de la nitidez; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor de la nitidez. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_bar",
+            "value":"Control deslizante de ajuste de la intensidad del filtro Rústico; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar la intensidad del filtro Rústico. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_highlight_scroll_100_100",
+            "value":"Control deslizante de ajuste del reflejo; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor del reflejo. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection_imageEdit",
+            "value":"Control deslizante de ángulo horizontal; el rango del control deslizante es de −45° a 45°; pulsa dos veces y mantén pulsado; a continuación, arrastra hacia la izquierda o hacia la derecha para ajustar el ángulo horizontal; el ángulo actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_adjust",
+            "value":"Se ha ajustado el valor de la exposición. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_original_strength_bar",
+            "value":"Control deslizante de ajuste de la intensidad del filtro Etéreo; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar la intensidad del filtro Etéreo. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection",
+            "value":"Control deslizante de ángulo vertical; el rango del control deslizante es de −45° a 45°. Mantén pulsado con dos dedos y, a continuación, arrastra hacia la izquierda o hacia la derecha para ajustar el ángulo vertical; el ángulo actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_adjust",
+            "value":"Se ha ajustado el valor del matiz. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_bar",
+            "value":"Control deslizante de ajuste de la intensidad del filtro Dulce; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar la intensidad del filtro Dulce. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_100_100",
+            "value":"Control deslizante de ajuste de la temperatura de color; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor de la temperatura de color. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vibrance_scroll_100_100",
+            "value":"Control deslizante de ajuste de la intensidad; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor de intensidad. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_temperature_scroll_adjust",
+            "value":"Se ha ajustado el valor de la temperatura. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_bar",
+            "value":"Control deslizante de ajuste de la intensidad del filtro Cristal; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar la intensidad del filtro Cristal. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_bar",
+            "value":"Control deslizante de ajuste de la intensidad del filtro Neutro; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar la intensidad del filtro Neutro. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sweet_strength_value",
+            "value":"Se ha ajustado la intensidad del filtro Dulce. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_fade_scroll_0_100",
+            "value":"Control deslizante de ajuste del fundido; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor del fundido. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_old_tree_strength_value",
+            "value":"Se ha ajustado la intensidad del filtro Rústico. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_0_100",
+            "value":"Control deslizante de ajuste de la textura; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor de la textura. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_bar",
+            "value":"Control deslizante de intensidad del filtro Suerte; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar la intensidad del filtro Suerte. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_crystal_clear_strength_value",
+            "value":"Se ha ajustado la intensidad del filtro Cristal. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightness_scroll_adjust",
+            "value":"Se ha ajustado el valor del brillo. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_contrast_scroll_adjust",
+            "value":"Se ha ajustado el valor del contraste. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_vignette_scroll_100_100",
+            "value":"Control deslizante de ajuste del viñeteado; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor de viñeteado. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_sunset_strength_value",
+            "value":"Se ha ajustado la intensidad del filtro Ocaso. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_adjust",
+            "value":"Se ha regulado el valor de ajuste automático. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_brightzone_scroll_100_100",
+            "value":"Control deslizante de ajuste del área clara; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor del área clara. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_little_luck_strength_value",
+            "value":"Se ha ajustado la intensidad del filtro Suerte. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_value",
+            "value":"Se ha ajustado la intensidad del filtro Monocromático. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_darkzone_scroll_100_100",
+            "value":"Control deslizante de ajuste del área oscura; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor del área oscura. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_value",
+            "value":"Se ha ajustado la intensidad del filtro Cálido. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_saturation_scroll_100_100",
+            "value":"Control deslizante de ajuste de la saturación; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor de la saturación. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_milk_tea_strength_bar",
+            "value":"Control deslizante de ajuste de la intensidad del filtro Cálido; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar la intensidad del filtro Cálido. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_exposure_scroll_100_100",
+            "value":"Control deslizante de ajuste de la exposición; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor de la exposición. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_auto_scroll_100_100",
+            "value":"Control deslizante de ajuste automático; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para regular el valor de ajuste automático. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_horizontalCorrection",
+            "value":"Control deslizante de ángulo horizontal; el rango del control deslizante es de −45° a 45°. Mantén pulsado con dos dedos y, a continuación, arrastra hacia la izquierda o hacia la derecha para ajustar el ángulo horizontal; el ángulo actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_black_and_white_strength_bar",
+            "value":"Control deslizante de ajuste de la intensidad del filtro Monocromático; rango de 0 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar la intensidad del filtro Monocromático. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_rotation",
+            "value":"Control deslizante de rotación; el rango del control deslizante es de −45° a 45°. Mantén pulsado con dos dedos y, a continuación, arrastra hacia la izquierda o hacia la derecha para ajustar la rotación; la rotación actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_hue_scroll_100_100",
+            "value":"Control deslizante de ajuste del matiz; rango de -100 a 100. Pulsa dos veces y mantén pulsado; luego arrastra hacia la izquierda o hacia la derecha para ajustar el valor del matiz. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_middle_tone_strength_value",
+            "value":"Se ha ajustado la intensidad del filtro Neutro. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_filter_green_strength_value",
+            "value":"Se ha ajustado la intensidad del filtro Lima. La intensidad actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_adjust_grain_scroll_adjust",
+            "value":"Se ha ajustado el valor de la textura. El valor actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"voice_crop_rulerScroller_verticalCorrection_imageEdit",
+            "value":"Control deslizante de ángulo vertical; el rango del control deslizante es de −45° a 45°; pulsa dos veces y mantén pulsado; a continuación, arrastra hacia la izquierda o hacia la derecha para ajustar el ángulo vertical; el ángulo actual es %1$s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"tabs_personality_style_imageEdit",
+            "value":"Estilos personalizados",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_disagree",
+            "value":"No mostrar etiqueta",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"border_background_imageEdit",
+            "value":"Borde",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_agree",
+            "value":"Mostrar etiqueta",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"capture_location_imageEdit",
+            "value":"Ubicación",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup",
+            "value":"¿Mostrar etiqueta “generada con IA”?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"beauty_Custom_imageEdit",
+            "value":"Personalizar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ai_generated_tag_popup_description",
+            "value":"La etiqueta “generado por IA” indica que la imagen contiene contenido generado por IA. Puedes cambiar esto en cualquier momento desde los ajustes de Galería.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_imageEdit",
+            "value":"Editar marca de agua",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_watermark_imageEdit",
+            "value":"Marcas de agua festivas",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"watermark_text_imageEdit",
+            "value":"Texto",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"festival_patterned_imageEdit",
+            "value":"Patrón",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_festival_seal_edit",
+            "value":"Una vez guardada, la marca de agua del Año Nuevo chino no se puede editar. ¿Guardar ahora?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"unsupport_national_seal_edit",
+            "value":"La marca de agua del Día Nacional no se puede editar una vez guardada. ¿Guardar ahora?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+          "name":"eraser_brush_thickness_selected_new",
+          "value":"Ajuste del tamaño de la goma de borrar, rango ajustable de %1$d a %2$d, pulsa dos veces y mantén pulsado; a continuación, desliza el dedo hacia la izquierda o hacia la derecha para ajustarlo",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+          "name":"brush_thickness_selected_new",
+          "value":"Ajuste del tamaño del pincel, rango ajustable de %1$d a %2$d, pulsa dos veces y mantén pulsado; a continuación, desliza el dedo hacia la izquierda o hacia la derecha para ajustarlo",
+          "attr":{
+            "priority":"translate"
+          }
+        },
+        {
+            "name":"xtStyle_color_temperature",
+            "value":"Temperatura",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xtStyle_saturation",
+            "value":"Saturación",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_soft_imageEdit",
+            "value":"Brillante",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_black_imageEdit",
+            "value":"Monocromo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"xt_style_bright_imageEdit",
+            "value":"Vívido",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_soft_imageEdit",
+            "value":"Deshacer: Brillante.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"undo_xt_style_bright_imageEdit",
+            "value":"Deshacer: Vívido.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_soft_imageEdit",
+            "value":"Rehacer: Brillante.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_black_imageEdit",
+            "value":"Rehacer: Monocromo.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"redo_xt_style_bright_imageEdit",
+            "value":"Rehacer: Vívido.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name": "undo_xt_style_black_imageEdit",
+            "value": "Deshacer: Monocromo.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name":"image_editor_mirror_image_new",
+            "value":"Espejo",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"image_editor_rotate_ninety_degrees_new",
+            "value":"Girar %s",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"free_crop_rotate_new",
+            "value":"Girar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name": "tip_aigc_removing",
+            "value": "Eliminando…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_material_loading",
+            "value": "Cargando…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_emoj_replacing",
+            "value": "Reemplazando expresión…",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_draw_and_select",
+            "value": "Traza una línea sobre un objeto para seleccionarlo.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_remove_click_and_remove_all",
+            "value": "Pulsa el botón para eliminar el contenido seleccionado.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_intelligent",
+            "value": "Automático",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "button_aigc_remove_manual",
+            "value": "Manual",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_expand_selection",
+            "value": "Puedes expandir el área seleccionada deslizando el dedo sobre la pantalla.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_paint_to_remove_selection",
+            "value": "Desliza el dedo para cancelar la selección.",
+            "attr": {
+                "priority": "translate"
+            }
+        },
+        {
+            "name": "tip_aigc_click_intelli_manual_then_edit",
+            "value": "Pulsa Automático o Manual para editar el área seleccionada.",
+            "attr": {
+                "priority": "translate"
+            }
+        }
+    ]
+}

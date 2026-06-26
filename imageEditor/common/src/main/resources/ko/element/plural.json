@@ -1,0 +1,28 @@
+{
+    "plural":[
+        {
+            "name":"rotate_broadcast_imageEdit",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"%1$d도",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        },
+        {
+            "name":"rotate_angle_imageEdit",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"회전 버튼, 텍스트 상자의 현재 각도 %1$d도",
+                    "attr":{
+                        "priority":"translate"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,12 +1,12 @@
 {
-  "string": [
-    {
-      "name": "init_horizontal",
-      "value": "false"
-    },
-    {
-      "name": "init_sidebar",
-      "value": "false"
-    }
-  ]
+    "string":[
+        {
+            "name":"musicServiceAuth",
+            "value":"C8E19E336FEC409D8B325D"
+        },
+        {
+            "name":"paf_privacy_statement_see_more",
+            "value":"paf_privacy_statement_see_more"
+        }
+    ]
 }

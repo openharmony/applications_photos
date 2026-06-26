@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,30 +13,28 @@
  * limitations under the License.
  */
 
-import { Log } from '../../utils/Log';
-import { ColumnSize, ScreenManager } from '../../model/common/ScreenManager';
-import { Constants } from '../../model/common/Constants';
+import lazy { ColumnSize, getScreen, isOrientationHorizontal } from '../../model/common/ScreenManager';
+import lazy { DeviceInfo } from '../../utils/DeviceInfo';
 
+/* instrument ignore file */
 const TAG: string = 'common_CopyOrMoveDialog';
 
 @Observed
 export class OperateParam {
-  public moveFunc: Function = (): void => {};
-  public copyFunc: Function = (): void => {};
+  copyFunc: Function = (): void => {
+  };
 }
 
 @CustomDialog
 export struct CopyOrMoveDialog {
-  static readonly INTERNAL_PREFIX_NUM = 3;
-  static readonly EXTERNAL_PREFIX_NUM = 2;
-  @StorageLink('isHorizontal') isHorizontal: boolean = ScreenManager.getInstance().isHorizontal();
-  @StorageLink('isSidebar') isSidebar: boolean = ScreenManager.getInstance().isSidebar();
-  @StorageLink('leftBlank') leftBlank: number[] =
-    [0, ScreenManager.getInstance().getStatusBarHeight(), 0, ScreenManager.getInstance().getNaviBarHeight()];
-  controller?: CustomDialogController;
-  dataTime: string = '';
+  public static readonly INTERNAL_PREFIX_NUM: number = 3;
+  public static readonly EXTERNAL_PREFIX_NUM: number = 2;
+  @StorageLink('isHorizontal') isHorizontal: boolean = isOrientationHorizontal();
+  @StorageLink('isSidebar') isSidebar: boolean = getScreen().isSidebar();
+  @StorageLink('leftBlank') leftBlank: number[] = getScreen().getLeftBlank();
+  public controller?: CustomDialogController;
+  public dataTime: string = '';
   @Consume operateParam: OperateParam;
-  private isPcDevice: boolean = AppStorage.get<string>('deviceType') === Constants.PC_DEVICE_TYPE;
 
   aboutToAppear() {
 
@@ -48,23 +46,21 @@ export struct CopyOrMoveDialog {
         Text($r('app.string.copy_or_move'))
           .fontSize($r('sys.float.ohos_id_text_size_dialog_tittle'))
           .fontWeight(FontWeight.Medium)
-          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .fontColor($r('sys.color.font_primary'))
       }.alignItems(VerticalAlign.Center)
       .height($r('app.float.dialog_title_height'))
 
 
       Row() {
-        Column() {
-          Text($r('app.string.add'))
-            .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
-            .fontFamily($r('app.string.id_text_font_family_regular'))
-            .fontColor($r('sys.color.ohos_id_color_text_primary'))
-        }
+        Text($r('app.string.add'))
+          .fontSize($r('sys.float.Subtitle_M'))
+          .fontFamily($r('app.string.id_text_font_family_regular'))
+          .fontColor($r('sys.color.font_primary'))
       }
       .height($r('app.float.dialog_list_card_height'))
       .width('100%')
       .key('Copy')
-      .onClick(() => {
+      .onClick((): void => {
         this.controller?.close();
         this.operateParam.copyFunc();
       })
@@ -72,64 +68,49 @@ export struct CopyOrMoveDialog {
 
       Divider()
         .vertical(false)
-        .color($r('sys.color.ohos_id_color_list_separator'))
+        .color($r('sys.color.comp_divider'))
         .width('100%')
-
-      Row() {
-        Column() {
-          Text($r('app.string.move'))
-            .fontSize($r('sys.float.ohos_id_text_size_sub_title2'))
-            .fontFamily($r('app.string.id_text_font_family_regular'))
-            .fontColor($r('sys.color.ohos_id_color_text_primary'))
-        }
-
-      }
-      .height($r('app.float.dialog_list_card_height'))
-      .width('100%')
-      .onClick(() => {
-        this.controller?.close();
-        this.operateParam.moveFunc();
-      })
 
       Stack({ alignContent: Alignment.Top }) {
         Button() {
-          Text($r('app.string.cancel_button'))
-            .fontSize($r('sys.float.ohos_id_text_size_button1'))
-            .fontColor($r('app.color.color_control_highlight'))
+          Text($r('app.string.dialog_cancel'))
+            .fontSize($r('sys.float.Body_L'))
+            .fontColor($r('sys.color.font_emphasize'))
             .width('100%')
             .textAlign(TextAlign.Center)
             .fontWeight(FontWeight.Medium)
         }
-        .backgroundColor(this.isPcDevice ?
-        $r('sys.color.ohos_id_color_button_normal') : $r('app.color.transparent'))
+        .backgroundColor(DeviceInfo.isPc() ?
+        $r('sys.color.comp_background_tertiary') : Color.Transparent)
         .height($r('app.float.details_dialog_button_height'))
         .key('Cancel')
-        .onClick(() => {
+        .onClick((): void => {
           this.controller?.close();
         })
         .margin({
           left: $r('app.float.dialog_single_button_indent_margin'),
-          right: $r('app.float.dialog_single_button_indent_margin')
+          right: $r('app.float.dialog_single_button_indent_margin'),
         })
       }.width('100%')
-      .height($r('app.float.details_dialog_button_area_height'))
+      .height(DeviceInfo.isPc() ?
+      $r('app.float.details_dialog_button_area_height_pc') : $r('app.float.details_dialog_button_area_height'))
     }
     .padding({ left: $r('app.float.dialog_content_margin'), right: $r('app.float.dialog_content_margin') })
     .alignItems(HorizontalAlign.Start)
-    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
-    .width(this.isPcDevice ? $r('app.float.pc_dialog_width') : ScreenManager.getInstance()
-                                                                 .getColumnsWidth(ColumnSize.COLUMN_FOUR))
-    .backgroundColor($r('app.color.white'))
+    .borderRadius($r('sys.float.corner_radius_level16'))
+    .width(DeviceInfo.isPc() ? $r('app.float.pc_dialog_width') : getScreen()
+      .getColumnsWidth(ColumnSize.COLUMN_FOUR))
+    .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
     .margin({
-      right: $r('app.float.dialog_content_margin'),
-      left: $r('app.float.dialog_content_margin'),
-      bottom: this.isHorizontal || this.isSidebar ? 0 : Constants.DIALOG_BOTTOM_OFFSET + this.leftBlank[3]
+      right: $r('sys.float.padding_level6'),
+      left: $r('sys.float.padding_level6'),
+      bottom: $r('app.float.navigation_margin_bottom'),
     })
     .shadow({
-      radius: $r('app.float.dialog_defult_shadow_m_radio'),
-      color: $r('app.color.dialog_defult_shadow_m_color'),
-      offsetX: $r('app.float.dialog_defult_shadow_m_offsetX'),
-      offsetY: $r('app.float.dialog_defult_shadow_m_offsetY')
+      radius: $r('app.float.dialog_default_shadow_m_radio'),
+      color: $r('app.color.dialog_default_shadow_m_color'),
+      offsetX: $r('app.float.dialog_default_shadow_m_offsetX'),
+      offsetY: $r('app.float.dialog_default_shadow_m_offsetY'),
     })
   }
 }

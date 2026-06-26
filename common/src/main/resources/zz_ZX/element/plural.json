@@ -81,6 +81,22 @@
                 {
                     "quantity":"one",
                     "value":"[TS_802451]_Restore %d item"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_802436]_Restore %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_802434]_Restore %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_802447]_Restore %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_802444]_Restore %d items"
                 }
             ]
         },
@@ -114,31 +130,60 @@
             ]
         },
         {
-            "name":"move_to_album_count",
+            "name":"items_in_albums_will_be_recycled",
             "value":[
                 {
-                    "quantity":"one",
-                    "value":"[TS_802437]_Move %d item"
+                    "quantity":"other",
+                    "value":"[TS_975273]_%1$d items in these albums will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
                 },
                 {
-                    "quantity":"other",
-                    "value":"[TS_802429]_Move %d items"
+                    "quantity":"one",
+                    "value":"[TS_975268]_%1$d item in these albums will be deleted from this device, the cloud, and all synced devices. It will be kept in \"Recently deleted\" for %2$d days."
                 },
                 {
                     "quantity":"zero",
-                    "value":"[TS_802433]_Move %d items"
+                    "value":"[TS_975279]_%1$d items in these albums will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
                 },
                 {
                     "quantity":"few",
-                    "value":"[TS_802450]_Move %d items"
+                    "value":"[TS_975262]_%1$d items in these albums will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
                 },
                 {
                     "quantity":"many",
-                    "value":"[TS_802432]_Move %d items"
+                    "value":"[TS_975264]_%1$d items in these albums will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
                 },
                 {
                     "quantity":"two",
-                    "value":"[TS_802430]_Move %d items"
+                    "value":"[TS_975275]_%1$d items in these albums will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
+                }
+            ]
+        },
+        {
+            "name":"items_in_single_album_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_975258]_%1$d item in this album will be deleted from this device, the cloud, and all synced devices. It will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_975269]_%1$d items in this album will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_975267]_%1$d items in this album will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_975266]_%1$d items in this album will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_975270]_%1$d items in this album will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_975260]_%1$d items in this album will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
                 }
             ]
         },
@@ -176,27 +221,27 @@
             "value":[
                 {
                     "quantity":"one",
-                    "value":"[TS_818397]_Permanently delete %d item?"
+                    "value":"[TS_818397]_%d item will be permanently deleted."
                 },
                 {
                     "quantity":"other",
-                    "value":"[TS_818408]_Permanently delete %d items?"
+                    "value":"[TS_818408]_%d items will be permanently deleted."
                 },
                 {
                     "quantity":"zero",
-                    "value":"[TS_818402]_Permanently delete %d items?"
+                    "value":"[TS_818402]_%d items will be permanently deleted."
                 },
                 {
                     "quantity":"few",
-                    "value":"[TS_818405]_Permanently delete %d items?"
+                    "value":"[TS_818405]_%d items will be permanently deleted."
                 },
                 {
                     "quantity":"many",
-                    "value":"[TS_818400]_Permanently delete %d items?"
+                    "value":"[TS_818400]_%d items will be permanently deleted."
                 },
                 {
                     "quantity":"two",
-                    "value":"[TS_818398]_Permanently delete %d items?"
+                    "value":"[TS_818398]_%d items will be permanently deleted."
                 }
             ]
         },
@@ -234,27 +279,27 @@
             "value":[
                 {
                     "quantity":"other",
-                    "value":"[TS_837544]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                    "value":"[TS_837544]_Deleted items are moved to the \"Recently deleted\" album and permanently deleted after %d days."
                 },
                 {
                     "quantity":"one",
-                    "value":"[TS_837545]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d day."
+                    "value":"[TS_837545]_Deleted items are moved to the \"Recently deleted\" album and permanently deleted after %d day."
                 },
                 {
                     "quantity":"zero",
-                    "value":"[TS_837548]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                    "value":"[TS_837548]_Deleted items are moved to the \"Recently deleted\" album and permanently deleted after %d days."
                 },
                 {
                     "quantity":"few",
-                    "value":"[TS_837543]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                    "value":"[TS_837543]_Deleted items are moved to the \"Recently deleted\" album and permanently deleted after %d days."
                 },
                 {
                     "quantity":"many",
-                    "value":"[TS_837547]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                    "value":"[TS_837547]_Deleted items are moved to the \"Recently deleted\" album and permanently deleted after %d days."
                 },
                 {
                     "quantity":"two",
-                    "value":"[TS_837546]_Deleted items are moved into the Recently deleted folder and permanently deleted after %d days."
+                    "value":"[TS_837546]_Deleted items are moved to the \"Recently deleted\" album and permanently deleted after %d days."
                 }
             ]
         },
@@ -288,64 +333,6 @@
             ]
         },
         {
-            "name":"show_one_video_with_photo_num",
-            "value":[
-                {
-                    "quantity":"one",
-                    "value":"[TS_788705]_%d photo，1 video"
-                },
-                {
-                    "quantity":"other",
-                    "value":"[TS_788701]_%d photos，1 video"
-                },
-                {
-                    "quantity":"zero",
-                    "value":"[TS_788686]_%d photos，1 video"
-                },
-                {
-                    "quantity":"few",
-                    "value":"[TS_788709]_%d photos，1 video"
-                },
-                {
-                    "quantity":"many",
-                    "value":"[TS_788698]_%d photos，1 video"
-                },
-                {
-                    "quantity":"two",
-                    "value":"[TS_788714]_%d photos，1 video"
-                }
-            ]
-        },
-        {
-            "name":"show_multi_video_with_photo_num",
-            "value":[
-                {
-                    "quantity":"other",
-                    "value":"[TS_788707]_%d photos，%d videos"
-                },
-                {
-                    "quantity":"one",
-                    "value":"[TS_788689]_%d photo，%d videos"
-                },
-                {
-                    "quantity":"zero",
-                    "value":"[TS_788712]_%d photos，%d videos"
-                },
-                {
-                    "quantity":"few",
-                    "value":"[TS_788710]_%d photos，%d videos"
-                },
-                {
-                    "quantity":"many",
-                    "value":"[TS_788692]_%d photos，%d videos"
-                },
-                {
-                    "quantity":"two",
-                    "value":"[TS_788706]_%d photos，%d videos"
-                }
-            ]
-        },
-        {
             "name":"show_photo_num",
             "value":[
                 {
@@ -371,6 +358,2210 @@
                 {
                     "quantity":"two",
                     "value":"[TS_788703]_%d photos"
+                }
+            ]
+        },
+        {
+            "name":"add_to_album_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_846555]_Add %d item to album"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_846554]_Add %d items to album"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_846558]_Add %d items to album"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_846557]_Add %d items to album"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_846556]_Add %d items to album"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_846559]_Add %d items to album"
+                }
+            ]
+        },
+        {
+            "name":"low_power_pause_upload_files",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_861533]_Battery lower than %1$s. Upload of %2$d items paused."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_861532]_Battery lower than %1$s. Upload of %2$d item paused."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_861530]_Battery lower than %1$s. Upload of %2$d items paused."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_861531]_Battery lower than %1$s. Upload of %2$d items paused."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_861534]_Battery lower than %1$s. Upload of %2$d items paused."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_861529]_Battery lower than %1$s. Upload of %2$d items paused."
+                }
+            ]
+        },
+        {
+            "name":"copy_to_pasteboard_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_862243]_Copy %d items"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_862240]_Copy %d item"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_862242]_Copy %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_862241]_Copy %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_862238]_Copy %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_862239]_Copy %d items"
+                }
+            ]
+        },
+        {
+            "name":"action_share_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_852474]_Share %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_852476]_Share %d items"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_852472]_Share %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_852473]_Share %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_852475]_Share %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_852477]_Share %d items"
+                }
+            ]
+        },
+        {
+            "name":"message_uploading",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_865239]_Uploading %d items…"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_865221]_Uploading %d item…"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_865214]_Uploading %d items…"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_865249]_Uploading %d items…"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_865218]_Uploading %d items…"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_865240]_Uploading %d items…"
+                }
+            ]
+        },
+        {
+            "name":"timeline_message_type_image",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_865231]_%d photos"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_865223]_%d photo"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_865247]_%d photos"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_865252]_%d photos"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_865227]_%d photos"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_865245]_%d photos"
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_no_wlan",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_865215]_No WLAN connection. Upload of %d item paused."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_865246]_No WLAN connection. Upload of %d items paused."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_865225]_No WLAN connection. Upload of %d items paused."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_865253]_No WLAN connection. Upload of %d items paused."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_865250]_No WLAN connection. Upload of %d items paused."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_865241]_No WLAN connection. Upload of %d items paused."
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_error",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_865228]_Upload of %d item paused."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_865222]_Upload of %d items paused."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_865235]_Upload of %d items paused."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_865213]_Upload of %d items paused."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_865244]_Upload of %d items paused."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_865251]_Upload of %d items paused."
+                }
+            ]
+        },
+        {
+            "name":"timeline_message_type_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_865238]_%d videos"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_865243]_%d video"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_865224]_%d videos"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_865233]_%d videos"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_865219]_%d videos"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_865216]_%d videos"
+                }
+            ]
+        },
+        {
+            "name":"third_delete_message",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_865237]_Allow %1$s to delete %2$d file?"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_865217]_Allow %1$s to delete %2$d files?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_865254]_Allow %1$s to delete %2$d files?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_865232]_Allow %1$s to delete %2$d files?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_865242]_Allow %1$s to delete %2$d files?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_865226]_Allow %1$s to delete %2$d files?"
+                }
+            ]
+        },
+        {
+            "name":"wait_upload_no_network",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_865220]_No Internet connection. Upload of %d item paused."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_865234]_No Internet connection. Upload of %d items paused."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_865229]_No Internet connection. Upload of %d items paused."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_865230]_No Internet connection. Upload of %d items paused."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_865248]_No Internet connection. Upload of %d items paused."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_865236]_No Internet connection. Upload of %d items paused."
+                }
+            ]
+        },
+        {
+            "name":"cancel_hide_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_870491]_Unhide %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_870488]_Unhide %d items"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_870492]_Unhide %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_870490]_Unhide %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_870487]_Unhide %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_870498]_Unhide %d items"
+                }
+            ]
+        },
+        {
+            "name":"print_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_866493]_Print %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_866494]_Print %d items"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_866497]_Print %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_866499]_Print %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_866496]_Print %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_866495]_Print %d items"
+                }
+            ]
+        },
+        {
+            "name":"hide_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_870495]_Hide %d items"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_870494]_Hide %d item"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_870489]_Hide %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_870497]_Hide %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_870496]_Hide %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_870493]_Hide %d items"
+                }
+            ]
+        },
+        {
+            "name":"count_details_external_selected",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_900527]_%1$d/%2$d selected"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_900530]_%1$d/%2$d selected"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_900531]_%1$d/%2$d selected"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_900528]_%1$d/%2$d selected"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_900526]_%1$d/%2$d selected"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_900529]_%1$d/%2$d selected"
+                }
+            ]
+        },
+        {
+            "name":"collage_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_877887]_Create collage with %d items"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_877889]_Create collage with %d item"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_877888]_Create collage with %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_877892]_Create collage with %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_877891]_Create collage with %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_877890]_Create collage with %d items"
+                }
+            ]
+        },
+        {
+            "name":"compare_count",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_877565]_Compare %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_877564]_Compare %d items"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_877562]_Compare %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_877566]_Compare %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_877563]_Compare %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_877567]_Compare %d items"
+                }
+            ]
+        },
+        {
+            "name":"new_hide_files_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_910614]_Hide %d item?"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_910615]_Hide %d items?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_910610]_Hide %d items?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_910616]_Hide %d items?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_910611]_Hide %d items?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_910613]_Hide %d items?"
+                }
+            ]
+        },
+        {
+            "name":"delete_hide_albums_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_911423]_Delete %d albums?"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_911428]_Delete %d album?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_911424]_Delete %d albums?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_911427]_Delete %d albums?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_911426]_Delete %d albums?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_911425]_Delete %d albums?"
+                }
+            ]
+        },
+        {
+            "name":"favor_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_931675]_Favorite %d items"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_931665]_Favorite %d item"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_931668]_Favorite %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_931666]_Favorite %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_931664]_Favorite %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_931669]_Favorite %d items"
+                }
+            ]
+        },
+        {
+            "name":"unfavor_count",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_931672]_Unfavorite %d items"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_931673]_Unfavorite %d item"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_931670]_Unfavorite %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_931671]_Unfavorite %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_931667]_Unfavorite %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_931674]_Unfavorite %d items"
+                }
+            ]
+        },
+        {
+            "name":"days_left",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_943603]_%d days"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_943605]_%d day"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_943600]_%d days"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_943602]_%d days"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_943604]_%d days"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_943601]_%d days"
+                }
+            ]
+        },
+        {
+            "name":"cloud_files_recycle_delete_kept_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_953751]_%1$d item will be deleted from this device, the cloud, and all synced devices. It will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_953756]_%1$d items will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_953758]_%1$d items will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_953754]_%1$d items will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_953760]_%1$d items will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_953759]_%1$d items will be deleted from this device, the cloud, and all synced devices. They will be kept in \"Recently deleted\" for %2$d days."
+                }
+            ]
+        },
+        {
+            "name":"cloud_files_dialog_delete_permanently_not_recover_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_953749]_%d items will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_953755]_%d item will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_953753]_%d items will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_953752]_%d items will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_953750]_%d items will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_953757]_%d items will be permanently deleted from this device, the cloud, and all synced devices."
+                }
+            ]
+        },
+        {
+            "name":"recycle_files_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_951128]_Delete %d items?"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_951124]_Delete %d item?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_951134]_Delete %d items?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_951127]_Delete %d items?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_951131]_Delete %d items?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_951130]_Delete %d items?"
+                }
+            ]
+        },
+        {
+            "name":"remove_files_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_850488]_Remove %d items?"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_850493]_Remove %d item?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_850491]_Remove %d items?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_850483]_Remove %d items?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_850484]_Remove %d items?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_850487]_Remove %d items?"
+                }
+            ]
+        },
+        {
+            "name":"cloud_enhance_addimage_quota_used_up",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_975263]_Limit reached. Try again in %d hour."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_975276]_Limit reached. Try again in %d hours."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_975272]_Limit reached. Try again in %d hours."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_975274]_Limit reached. Try again in %d hours."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_975261]_Limit reached. Try again in %d hours."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_975257]_Limit reached. Try again in %d hours."
+                }
+            ]
+        },
+        {
+            "name":"cloud_enhancing_status_processing",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_975259]_Photo is being enhanced. Estimated time remaining: %1$d second."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_975277]_Photo is being enhanced. Estimated time remaining: %1$d seconds."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_975265]_Photo is being enhanced. Estimated time remaining: %1$d seconds."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_975256]_Photo is being enhanced. Estimated time remaining: %1$d seconds."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_975278]_Photo is being enhanced. Estimated time remaining: %1$d seconds."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_975271]_Photo is being enhanced. Estimated time remaining: %1$d seconds."
+                }
+            ]
+        },
+        {
+            "name":"select_burst_photos",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_961622]_%1$d/%2$d photos selected"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_961623]_%1$d/%2$d photos selected"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_961619]_%1$d/%2$d photos selected"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_961621]_%1$d/%2$d photos selected"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_961618]_%1$d/%2$d photos selected"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_961620]_%1$d/%2$d photos selected"
+                }
+            ]
+        },
+        {
+            "name":"remove_from_album_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1022815]_These photos will no longer be shown in this album."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1022813]_This photo will no longer be shown in this album."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1022810]_These photos will no longer be shown in this album."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1022814]_These photos will no longer be shown in this album."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1022812]_These photos will no longer be shown in this album."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1022811]_These photos will no longer be shown in this album."
+                }
+            ]
+        },
+        {
+            "name":"remove_selected_portraits",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_961298]_Remove %d people?"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_961295]_Remove %d person?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_961294]_Remove %d people?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_961293]_Remove %d people?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_961296]_Remove %d people?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_961297]_Remove %d people?"
+                }
+            ]
+        },
+        {
+            "name":"data_inherit_title",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_981741]_%1$s would like to access %2$s items"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_981742]_%1$s would like to access %2$s item"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_981743]_%1$s would like to access %2$s items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_981744]_%1$s would like to access %2$s items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_981745]_%1$s would like to access %2$s items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_981746]_%1$s would like to access %2$s items"
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_three",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997563]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997654]_%1$d item couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997619]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997644]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997579]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997614]_%1$d items couldn't be saved to Gallery."
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_997609]_%1$d item couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_997651]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997639]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997528]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997608]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997564]_%1$d items couldn't be saved to Gallery."
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_997620]_%1$d video saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_997648]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997618]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997566]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997646]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997669]_%1$d videos saved to the \"Videos\" album."
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_997611]_%1$d video"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_997640]_%1$d videos"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997544]_%1$d videos"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997580]_%1$d videos"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997650]_%1$d videos"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997659]_%1$d videos"
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997660]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997604]_%1$d item couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997670]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997526]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997529]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997570]_%1$d items couldn't be saved to Gallery."
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_997602]_%1$d image saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_997600]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997546]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997569]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997586]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997617]_%1$d images saved to the \"Photos\" album."
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_997571]_%1$d image"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_997606]_%1$d images"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997647]_%1$d images"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997524]_%1$d images"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997593]_%1$d images"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997601]_%1$d images"
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997568]_%1$d videos saved to the selected album."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997594]_%1$d video saved to the selected album."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997656]_%1$d videos saved to the selected album."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997587]_%1$d videos saved to the selected album."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997592]_%1$d videos saved to the selected album."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997530]_%1$d videos saved to the selected album."
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_997598]_%1$d image saved to Gallery."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_997547]_%1$d images saved to Gallery."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997627]_%1$d images saved to Gallery."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997538]_%1$d images saved to Gallery."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997539]_%1$d images saved to Gallery."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997572]_%1$d images saved to Gallery."
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997638]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997548]_%1$d item couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997575]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997666]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997541]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997573]_%1$d items couldn't be saved to Gallery."
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_997583]_%1$d image saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_997590]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997555]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997596]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997577]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997550]_%1$d images saved to the \"Photos\" album."
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_user_album_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_997636]_%1$d image saved to the selected album."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_997567]_%1$d images saved to the selected album."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997525]_%1$d images saved to the selected album."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997551]_%1$d images saved to the selected album."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997560]_%1$d images saved to the selected album."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997658]_%1$d images saved to the selected album."
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_system_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997634]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997591]_%1$d video saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997632]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997615]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997616]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997603]_%1$d videos saved to the \"Videos\" album."
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_three",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997559]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997543]_%1$d item couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997581]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997657]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997621]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997558]_%1$d items couldn't be saved to Gallery."
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_three",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_997545]_%1$d item couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_997599]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997584]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997589]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997653]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997531]_%1$d items couldn't be saved to Gallery."
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_system_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997633]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997549]_%1$d video saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997576]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997645]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997630]_%1$d videos saved to the \"Videos\" album."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997535]_%1$d videos saved to the \"Videos\" album."
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997533]_%1$d videos"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997623]_%1$d video"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997635]_%1$d videos"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997643]_%1$d videos"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997532]_%1$d videos"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997597]_%1$d videos"
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997565]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997607]_%1$d item couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997557]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997556]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997664]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997612]_%1$d items couldn't be saved to Gallery."
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_to_user_album_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997624]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997622]_%1$d item couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997585]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997625]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997628]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997662]_%1$d items couldn't be saved to Gallery."
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_997610]_%1$d video saved to Gallery."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_997588]_%1$d videos saved to Gallery."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997582]_%1$d videos saved to Gallery."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997629]_%1$d videos saved to Gallery."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997665]_%1$d videos saved to Gallery."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997668]_%1$d videos saved to Gallery."
+                }
+            ]
+        },
+        {
+            "name":"drag_files_to_timeline_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997554]_%1$d images"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997641]_%1$d image"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997561]_%1$d images"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997523]_%1$d images"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997527]_%1$d images"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997663]_%1$d images"
+                }
+            ]
+        },
+        {
+            "name":"drag_pictures_and_videos_to_album_one",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997613]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997667]_%1$d image saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997536]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997552]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997652]_%1$d images saved to the \"Photos\" album."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997637]_%1$d images saved to the \"Photos\" album."
+                }
+            ]
+        },
+        {
+            "name":"drag_videos_to_timeline_two",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_997661]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_997553]_%1$d item couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_997578]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_997595]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_997540]_%1$d items couldn't be saved to Gallery."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_997537]_%1$d items couldn't be saved to Gallery."
+                }
+            ]
+        },
+        {
+            "name":"seconds",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_994347]_%d seconds"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_994342]_%d second"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_994345]_%d seconds"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_994343]_%d seconds"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_994344]_%d seconds"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_994346]_%d seconds"
+                }
+            ]
+        },
+        {
+            "name":"time_line_message_accumulation_sync",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1024898]_Synced %d items in total"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1024896]_Synced %d item in total"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1024903]_Synced %d items in total"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1024905]_Synced %d items in total"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1024901]_Synced %d items in total"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1024893]_Synced %d items in total"
+                }
+            ]
+        },
+        {
+            "name":"time_line_message_upload",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_1024904]_Uploading %d item"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_1024895]_Uploading %d items"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1024899]_Uploading %d items"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1024897]_Uploading %d items"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1024906]_Uploading %d items"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1024902]_Uploading %d items"
+                }
+            ]
+        },
+        {
+            "name":"album_cloud_data_image",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1000696]_%d photos"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1000664]_%d photo"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1000688]_%d photos"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1000680]_%d photos"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1000697]_%d photos"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1000691]_%d photos"
+                }
+            ]
+        },
+        {
+            "name":"album_cloud_data_video",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1000683]_%d videos"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1000678]_%d video"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1000674]_%d videos"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1000667]_%d videos"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1000669]_%d videos"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1000701]_%d videos"
+                }
+            ]
+        },
+        {
+            "name":"gallery_cloud_space_full_item",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1000682]_Cloud storage full. Sync paused for %d items."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1000685]_Cloud storage full. Sync paused for %d item."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1000699]_Cloud storage full. Sync paused for %d items."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1000689]_Cloud storage full. Sync paused for %d items."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1000666]_Cloud storage full. Sync paused for %d items."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1000679]_Cloud storage full. Sync paused for %d items."
+                }
+            ]
+        },
+        {
+            "name":"cloud_videos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1039284]_%d videos will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1039289]_%d video will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1039279]_%d videos will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1039299]_%d videos will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1039283]_%d videos will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1039297]_%d videos will be permanently deleted from this device, the cloud, and all synced devices."
+                }
+            ]
+        },
+        {
+            "name":"local_videos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_1039292]_%d video will be permanently deleted."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_1039286]_%d videos will be permanently deleted."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1039296]_%d videos will be permanently deleted."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1039294]_%d videos will be permanently deleted."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1039287]_%d videos will be permanently deleted."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1039285]_%d videos will be permanently deleted."
+                }
+            ]
+        },
+        {
+            "name":"recycle_videos_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_1039288]_Delete %d video?"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_1039300]_Delete %d videos?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1039280]_Delete %d videos?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1039298]_Delete %d videos?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1039301]_Delete %d videos?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1039293]_Delete %d videos?"
+                }
+            ]
+        },
+        {
+            "name":"slide_show_setting_interval",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1048744]_%1$d seconds"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1048749]_%1$d second"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1048746]_%1$d seconds"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1048748]_%1$d seconds"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1048747]_%1$d seconds"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1048745]_%1$d seconds"
+                }
+            ]
+        },
+        {
+            "name":"local_photos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1045413]_%d photos will be permanently deleted."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1045406]_%d photo will be permanently deleted."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1045417]_%d photos will be permanently deleted."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1045404]_%d photos will be permanently deleted."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1045399]_%d photos will be permanently deleted."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1045410]_%d photos will be permanently deleted."
+                }
+            ]
+        },
+        {
+            "name":"cloud_photos_dialog_delete_permanently_not_recover_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_1045411]_%d photo will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_1045415]_%d photos will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1045407]_%d photos will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1045403]_%d photos will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1045400]_%d photos will be permanently deleted from this device, the cloud, and all synced devices."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1045397]_%d photos will be permanently deleted from this device, the cloud, and all synced devices."
+                }
+            ]
+        },
+        {
+            "name":"recycle_photos_tips_plural",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_1045401]_Delete %d photo?"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_1045394]_Delete %d photos?"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1045396]_Delete %d photos?"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1045391]_Delete %d photos?"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1045395]_Delete %d photos?"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1045416]_Delete %d photos?"
+                }
+            ]
+        },
+        {
+            "name":"single_photo_album_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1086564]_%1$d items in this album will be deleted. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1086565]_%1$d item in this album will be deleted. It will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1086563]_%1$d items in this album will be deleted. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1086566]_%1$d items in this album will be deleted. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1086567]_%1$d items in this album will be deleted. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1086568]_%1$d items in this album will be deleted. They will be kept in \"Recently deleted\" for %2$d days."
+                }
+            ]
+        },
+        {
+            "name":"photo_albums_will_be_recycled",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1079892]_%1$d items in these albums will be deleted. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1079891]_%1$d item in these albums will be deleted. It will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1079894]_%1$d items in these albums will be deleted. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1079895]_%1$d items in these albums will be deleted. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1079893]_%1$d items in these albums will be deleted. They will be kept in \"Recently deleted\" for %2$d days."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1079890]_%1$d items in these albums will be deleted. They will be kept in \"Recently deleted\" for %2$d days."
+                }
+            ]
+        },
+        {
+            "name":"broadcast_photo_num",
+            "value":[
+                {
+                    "quantity":"few",
+                    "value":"[TS_1113230]_%d photos"
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_1113229]_%d photos"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1113235]_%d photo"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1113240]_%d photos"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1113234]_%d photos"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1113239]_%d photos"
+                }
+            ]
+        },
+        {
+            "name":"broadcast_video_num",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1113232]_%d videos"
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1113241]_%d videos"
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1113238]_%d video"
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1113236]_%d videos"
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1113233]_%d videos"
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1113231]_%d videos"
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_videos_can_download_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1119618]_%d videos will be deleted from this device. Videos that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1119617]_%d video will be deleted from this device. Videos that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1119626]_%d videos will be deleted from this device. Videos that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1119623]_%d videos will be deleted from this device. Videos that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1119612]_%d videos will be deleted from this device. Videos that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1119613]_%d videos will be deleted from this device. Videos that have been synced to Cloud can be downloaded again at any time."
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_files_can_download_tips",
+            "value":[
+                {
+                    "quantity":"other",
+                    "value":"[TS_1119625]_%d items will be deleted from this device. Items that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"one",
+                    "value":"[TS_1119607]_%d item will be deleted from this device. Items that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1119615]_%d items will be deleted from this device. Items that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1119616]_%d items will be deleted from this device. Items that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1119627]_%d items will be deleted from this device. Items that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1119614]_%d items will be deleted from this device. Items that have been synced to Cloud can be downloaded again at any time."
+                }
+            ]
+        },
+        {
+            "name":"cloud_delete_images_can_download_tips",
+            "value":[
+                {
+                    "quantity":"one",
+                    "value":"[TS_1119622]_%d image will be deleted from this device. Images that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"other",
+                    "value":"[TS_1119610]_%d images will be deleted from this device. Images that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"zero",
+                    "value":"[TS_1119629]_%d images will be deleted from this device. Images that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"few",
+                    "value":"[TS_1119619]_%d images will be deleted from this device. Images that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"many",
+                    "value":"[TS_1119611]_%d images will be deleted from this device. Images that have been synced to Cloud can be downloaded again at any time."
+                },
+                {
+                    "quantity":"two",
+                    "value":"[TS_1119608]_%d images will be deleted from this device. Images that have been synced to Cloud can be downloaded again at any time."
+                }
+            ]
+        },
+        {
+            "name": "remove_selected_group_albums",
+            "value": [
+                {
+                    "quantity": "other",
+                    "value": "[TS_1115445]_Delete %d groups?"
+                },
+                {
+                    "quantity": "zero",
+                    "value": "[TS_1115446]_Delete %d groups?"
+                },
+                {
+                    "quantity": "one",
+                    "value": "[TS_1115451]_Delete %d group?"
+                },
+                {
+                    "quantity": "few",
+                    "value": "[TS_1115452]_Delete %d groups?"
+                },
+                {
+                    "quantity": "many",
+                    "value": "[TS_1115449]_Delete %d groups?"
+                },
+                {
+                    "quantity": "two",
+                    "value": "[TS_1115447]_Delete %d groups?"
                 }
             ]
         }
