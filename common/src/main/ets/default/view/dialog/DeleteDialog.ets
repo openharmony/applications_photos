@@ -30,19 +30,17 @@ const TAG: string = 'common_DeleteDialog';
 
 @CustomDialog
 export struct DeleteDialog {
-  @Consume dialogCallback?: DialogCallback= {
-    confirmCallback: () => {},
-    cancelCallback: () => {}
-  };
-  @Consume dialogBroadCast: BroadCast;
-  @Consume dialogMessage: Resource;
-  @Consume dialogContent: Resource;
+  public confirmCallback: Function | undefined = undefined;
+  public cancelCallback: Function | undefined = undefined;
+  @State public dialogBroadCast: BroadCast = new BroadCast();
+  @State public dialogMessage: Resource = $r('app.string.common_place_holder', String(''));
+  @State dialogContent: Resource = $r('app.string.common_place_holder', String(''));
   public controller?: CustomDialogController;
   public appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   @StorageLink('isFirstTimeDelete') isFirstTimeDelete: boolean = false;
   @StorageLink('confirmText') confirmText: Resource = $r('app.string.dialog_delete');
   @StorageLink('isShowDeleteFollowDialog') isShow: boolean = false;
-  @Consume isAlbumDelete: boolean;
+  @State public isAlbumDelete: boolean = false;
   private title: Resource = $r('app.string.common_place_holder', '');
   private content: Resource = $r('app.string.common_place_holder', '');
   private cancelButton: ButtonOptions = {
@@ -55,7 +53,7 @@ export struct DeleteDialog {
       this.isShow = false;
       this.dialogBroadCast.emit(BroadCastConstants.HIDE_DELETE_DIALOG, []);
       BroadCastManager.getInstance().getBroadCast().emit(BroadCastConstants.HIDE_DELETE_DIALOG, []);
-      this.dialogCallback && this.dialogCallback?.cancelCallback?.();
+      this.cancelCallback?.();
     },
   };
   private confirmButton: ButtonOptions = {
@@ -68,7 +66,7 @@ export struct DeleteDialog {
       ShortCut.deleteDialogOpenFlag = false;
       this.isShow = false;
       this.dialogBroadCast.emit(BroadCastConstants.HIDE_DELETE_DIALOG, []);
-      this.dialogCallback && this.dialogCallback?.confirmCallback?.();
+      this.confirmCallback?.();
       FocusUtil.clearFocus(this.getUIContext()?.getFocusController());
     },
   };

@@ -752,7 +752,7 @@ export struct DayGridView {
     if (!this.controller.isSelectMode) {
       tempMenuList.push(Action.MULTISELECT);
     }
-    if (this.albumInfo.uri != "" && !this.albumInfo.isTrashAlbum && isFavor !== undefined) {
+    if (!this.albumInfo.isTrashAlbum && isFavor !== undefined) {
       tempMenuList.push(isFavor ? Action.FAVORITE : Action.NOT_FAVORITE);
     }
     if (this.albumInfo.isTrashAlbum) {

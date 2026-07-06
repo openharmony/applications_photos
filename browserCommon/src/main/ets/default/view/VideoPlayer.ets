@@ -1538,9 +1538,12 @@ export struct VideoPlayer {
       Log.error(TAG, `expandToFetchAllFrame fd: ${file.fd}`);
       return;
     }
-    if (this.expandAvImageGenerator) {
-      this.expandAvImageGenerator.fdSrc = { fd: file.fd };
+    if (!this.expandAvImageGenerator) {
+      Log.error(TAG, 'expandToFetchAllFrame: createAVImageGenerator returned null');
+      fs.closeSync(file.fd);
+      return;
     }
+    this.expandAvImageGenerator.fdSrc = { fd: file.fd };
     for (let i = 0; i < frameNum; i++) {
       Log.info(TAG, `expandToFetchAllFrame ${i} - ${frameTime[i]} - ${frameNum} - ${this.maxTime}`);
       try {
