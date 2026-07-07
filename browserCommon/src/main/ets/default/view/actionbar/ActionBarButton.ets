@@ -189,7 +189,8 @@ export struct ActionBarButton {
   }
   @Provide dialogCallback: DialogCallback = {
     confirmCallback: (): void => {
-    }, cancelCallback: (): void => {
+    },
+    cancelCallback: (): void => {
     }
   };
   private showDeleteDialogFunc: Function =
@@ -1706,7 +1707,14 @@ export struct ActionBarButton {
 
   @Builder
   delete() {
-    DeleteDialog();
+    DeleteDialog({
+      confirmCallback: this.dialogCallback?.confirmCallback,
+      cancelCallback: this.dialogCallback?.cancelCallback,
+      dialogBroadCast: this.dialogBroadCast,
+      dialogMessage: this.dialogMessage,
+      dialogContent: this.dialogContent,
+      isAlbumDelete: this.isAlbumDelete
+    });
   }
 
   @Builder

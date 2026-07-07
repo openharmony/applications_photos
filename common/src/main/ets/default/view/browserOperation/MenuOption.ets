@@ -153,10 +153,10 @@ function handleOtherCase(actionID: number, menuContext: MenuContext, currentPage
     case Action.REMOVE_FROM_LARGE.actionID:
     case Action.RENAME.actionID:
     case Action.NOT_FAVORITE.actionID:
-      menuContext.withTargetFavorStatus(false);
+      menuContext.withTargetFavorStatus(true);
       break;
     case Action.FAVORITE.actionID:
-      menuContext.withTargetFavorStatus(true);
+      menuContext.withTargetFavorStatus(false);
       break;
     default:
       Log.error(TAG, 'action: ' + ActionID[actionID] + ' not implemented');

@@ -190,7 +190,14 @@ export struct ShareBrowserCustomDialog {
     }
     Log.info(TAG, 'DeleteDialog Callback exist, build DeleteDialog')
     this.deleteDialogController = new CustomDialogController({
-      builder: DeleteDialog(),
+      builder: DeleteDialog({
+        confirmCallback: this.dialogCallback?.confirmCallback,
+        cancelCallback: this.dialogCallback?.cancelCallback,
+        dialogBroadCast: this.dialogBroadCast,
+        dialogMessage: this.dialogMessage,
+        dialogContent: this.dialogContent,
+        isAlbumDelete: this.isAlbumDelete
+      }),
       cancel: () => {
         Log.debug(TAG, 'Cancel Callback HIDE_DELETE_DIALOG');
         this.dialogBroadCast.emit(BroadCastConstants.HIDE_DELETE_DIALOG, []);

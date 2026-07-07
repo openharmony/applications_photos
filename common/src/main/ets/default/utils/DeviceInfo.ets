@@ -201,12 +201,10 @@ export class DeviceInfo {
    */
   public static isPhoneUx(): boolean {
     /* instrument ignore if */
-    //todo 先注释pc也用手机手机的ui
-    // if (DeviceInfo.isGRLFoldScreen()) {
-    //   return !FoldUtil.isTriExpand(FoldUtil.getInstance().getCurFoldStatus());
-    // }
-    // return DeviceInfo.isPhoneExact() || DeviceInfo.isDefault();
-    return true
+    if (DeviceInfo.isGRLFoldScreen()) {
+      return !FoldUtil.isTriExpand(FoldUtil.getInstance().getCurFoldStatus());
+    }
+    return DeviceInfo.isPhoneExact() || DeviceInfo.isDefault();
   }
 
   /**

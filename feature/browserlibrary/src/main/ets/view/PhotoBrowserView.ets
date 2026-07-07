@@ -491,7 +491,7 @@ export struct PhotoBrowserView {
     try {
       const enrolledState = userAuth.getEnrolledState(userAuth.UserAuthType.PIN);
       this.needUnlock = enrolledState?.credentialCount > 0;
-      Log.info(TAG, `get PIN enrolled state success, enrolledState: ${JSON.stringify(enrolledState)}`);
+      Log.info(TAG, `get PIN enrolled state success, needUnlock: ${this.needUnlock}`);
     } catch (error) {
       if (error?.code === LockResult.NOT_ENROLLED) {
         this.needUnlock = false;

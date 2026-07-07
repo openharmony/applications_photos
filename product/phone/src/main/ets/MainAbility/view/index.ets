@@ -363,7 +363,7 @@ struct IndexPage {
   private insertExternalStorageCount: number = 0;
   private removeExternalStorageCount: number = 0;
   @State strokeWidth: string = '0';
-  @State @Watch('onPhoneUxChange') isPhoneUx: boolean = true;
+  @State @Watch('onPhoneUxChange') isPhoneUx: boolean = DeviceInfo.isPhoneUx();
   // 是否需要横屏后隐藏年月日和TAB，false表示横竖屏切换时不用隐藏
   private whetherToHide: boolean = false;
   @State @Watch('isShowTabBarByHotZone') isShowTabAndSegmentButton: boolean = this.whetherToHide ? !this.isHorizontal : true;
@@ -917,6 +917,11 @@ struct IndexPage {
     } else {
       this.isPhoneUx = this.getPhoneUX(currentWinMode);
     }
+    if (DeviceInfo.isTablet()) {
+      this.isShowTabBar = this.isPhoneUx;
+      this.isShowSideBar = !this.isPhoneUx;
+      ActionBarVar.isShowSideBar = this.isShowSideBar;
+    }
     getScreen().updateSize();
     taskpool.execute(preLoad).then((res): void => {
       Log.i(TAG, `preLoad res：${res}`);
@@ -1399,7 +1404,7 @@ struct IndexPage {
       !this.isShowHiddenGridView && !this.isShowPhotoHiddenView && !getScreen().isInImmersivePage;
   }
 
-  //左侧侧边栏区
+  //左侧侧边栏区 + 右侧内容区
   @Builder
   SideBarPanelBuilder() {
     SideBarContainer(SideBarContainerType.Embed) {
@@ -1434,16 +1439,22 @@ struct IndexPage {
           this.sideBarWidth = ActionBarVar.sideBarWidth;
           this.appBroadCast.emit(BroadCastConstants.ON_SIDEBAR_WIDTH_CHANGED, []);
         })
+
+      Column() {
+        this.ContentPanelBuilder()
+      }
+      .width('100%')
+      .height('100%')
     }
     .showControlButton(false)
     .showSideBar(this.isShowSideBar)
     .divider({ strokeWidth: this.strokeWidth })
+    .width('100%')
+    .height('100%')
+    .flexGrow(1)
     .onAppear((): void => {
       this.strokeWidth = '1vp';
     })
-    // .visibility(
-    //   !this.browserController.isBrowserShow &&
-    //     !this.browserController.isSelectBrowserShow ? Visibility.Visible : Visibility.Hidden)
   }
   // 相册照片视图加载器
   @Builder
@@ -1627,12 +1638,18 @@ struct IndexPage {
               }
             })
             .visibility(this.isPageHidden)
-          } /*else {
-            this.HDSSideBarBuilder()
-            if (this.isShowSideBar || !(this.isSelectedMode || this.isAlbumSetSelectedMode)) {
-              this.sideBarButton();
+          } else {
+            Stack({ alignContent: Alignment.TopStart }) {
+              this.SideBarPanelBuilder()
+              if (this.isShowSideBar || !(this.isSelectedMode || this.isAlbumSetSelectedMode)) {
+                this.sideBarButton();
+              }
             }
-          }*/
+            .width('100%')
+            .height('100%')
+            .flexGrow(1)
+            .visibility(this.isPageHidden)
+          }
 
           if (this.isShowPhotoBrowser && this.isBrowserLoaded) {
             Column() {
