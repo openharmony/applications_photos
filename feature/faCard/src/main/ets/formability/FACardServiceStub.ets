@@ -169,7 +169,8 @@ export default class FACardServiceStub {
       let faCardType: number = AlbumType.ALBUM;
       while (faCardResult && faCardResult.goToNextRow()) {
         faCardType = Number(faCardResult.getString(2));
-        await FaCardAlbumUtils.updateScheduler(faCardResult.getString(0), Number(faCardResult.getString(1)),true);
+        await FaCardAlbumUtils.updateScheduler(faCardResult.getString(0), Number(faCardResult.getString(1)),
+          true, this.context);
       }
     } catch (error) {
       Log.error(TAG, `refreshForms error`)
@@ -302,6 +303,9 @@ export default class FACardServiceStub {
         const item = updateItems[i];
         if (!item.isAlbumChanged) {
           await imageProxyDataService.updateImageBlobByUri(item.imageUri);
+          // 图片被编辑并覆盖原图时，即便所属相册未发生变化，也需要刷新对应卡片，
+          // 否则卡片仍然展示更新前的缩略图。
+          this.needRefreshForms.add(item.formId);
         } else {
           if (!changeAlbumUris[item.formId]) {
             changeAlbumUris[item.formId] = new Set();

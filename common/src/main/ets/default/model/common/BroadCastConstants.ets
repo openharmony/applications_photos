@@ -351,6 +351,8 @@ export class BroadCastConstants {
   public static readonly UPDATE_BURST_TOP_MODE_BUILDER_OPACITY: string = 'update_burst_top_mode_builder_opacity';
   // 逐帧播放: 进度条时间点更新
   public static readonly UPDATE_PROGRESS_RAW_TIME: string = 'update_progress_raw_time';
+  /** AVPlayer 解析出真实时长后通知（参数: [uniqueId, durationMs]），用于 @Prop MediaItem 无法触发刷新的时间胶囊等 */
+  public static readonly VIDEO_DURATION_RESOLVED: string = 'video_duration_resolved';
   public static readonly UPDATE_VIDEO_WIDTH: string = 'update_video_width';
   public static readonly ON_SWIPER_ANIMATION_CHANGE: string = 'on_swiper_animation_change';
   public static readonly SET_SLIDE_BAR_TIMER: string = 'set_slide_bar_timer';
@@ -530,6 +532,15 @@ export class BroadCastConstants {
    * 图库卡片
    */
   public static readonly UPDATE_FA_CARD_URI: string = 'update_fa_card_uri';
+
+  /** 删除图片后通知桌面卡片刷新，参数为被删除的图片 URI 列表 string[] */
+  public static readonly PHOTO_DELETED_FOR_FACARD: string = 'photo_deleted_for_facard';
+
+  /** 删除相册后通知桌面卡片刷新，参数为被删除的相册 URI string */
+  public static readonly ALBUM_DELETED_FOR_FACARD: string = 'album_deleted_for_facard';
+
+  /** 覆盖编辑图片后通知桌面卡片刷新，参数为被更新的图片 URI 列表 string[] */
+  // public static readonly PHOTO_UPDATED_FOR_FACARD: string = 'photo_updated_for_facard';
 
   public static readonly SET_CURRENT_IMAGE_URI: string = 'set_current_image_uri';
 

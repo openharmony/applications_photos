@@ -133,10 +133,17 @@ export struct CompareTool {
       // instrument ignore if
       if (event.action === MouseAction.Press) {
         this.comparePress = true;
+        // 鼠标按下也需要触发对比逻辑（PC/模拟器点击否则无效果）
+        this.compareTouch(TouchType.Down);
       }
       // instrument ignore if
       if (event.action === MouseAction.Release) {
         this.comparePress = false;
+        this.compareTouch(TouchType.Up);
+      }
+      // instrument ignore if
+      if (event.action === MouseAction.Move && this.comparePress) {
+        this.compareTouch(TouchType.Move);
       }
       HiLog.i('CompareTool', 'is onMouse comparePress ' + this.comparePress);
     })
@@ -188,26 +195,29 @@ export struct CompareTool {
     // 截取、调色、滤镜原色对比
     if (this.editor.tabIndex !== TabName.TabCrop) {
       if (touchType === TouchType.Down || touchType === TouchType.Move) {
-        if (this.originalColorMode === 1) {
-          return;
+        // 移除 early return，确保每次 Down/Move 都触发渲染更新
+        if (this.originalColorMode !== 1) {
+          HiLog.i('MainContent', 'setOriginalColorMode 1, event.type down');
+          this.asset.textEdit().isComparing = true;
+          this.asset.mosaic().setComparing(true);
+          this.asset.isTouching = true;
+          this.editor.asset.setOriginalColorMode(1);
+          this.originalColorMode = 1;
         }
-        HiLog.i('MainContent', 'setOriginalColorMode 1, event.type down');
-        this.asset.textEdit().isComparing = true;
-        this.asset.mosaic().setComparing(true);
-        this.asset.isTouching = true;
-        this.editor.asset.setOriginalColorMode(1);
-        this.originalColorMode = 1;
       } else if (touchType === TouchType.Up || touchType === TouchType.Cancel) {
-        HiLog.i('MainContent', 'setOriginalColorMode 0, event.type up');
-        clearTimeout(touchUpTimeFn);
-        this.asset.textEdit().isComparing = false;
-        touchUpTimeFn = setTimeout(() => {
-          // 标识延时50ms设置，避免与父组件或兄弟onTouch事件冲突
-          this.asset.isTouching = false;
-        }, 50)
-        this.asset.mosaic().setComparing(false);
-        this.editor.asset.setOriginalColorMode(0);
-        this.originalColorMode = 0;
+        // 移除 early return，确保每次 Up/Cancel 都触发渲染更新
+        if (this.originalColorMode !== 0) {
+          HiLog.i('MainContent', 'setOriginalColorMode 0, event.type up');
+          clearTimeout(touchUpTimeFn);
+          this.asset.textEdit().isComparing = false;
+          touchUpTimeFn = setTimeout(() => {
+            // 标识延时50ms设置，避免与父组件或兄弟onTouch事件冲突
+            this.asset.isTouching = false;
+          }, 50)
+          this.asset.mosaic().setComparing(false);
+          this.editor.asset.setOriginalColorMode(0);
+          this.originalColorMode = 0;
+        }
       }
     }
   }

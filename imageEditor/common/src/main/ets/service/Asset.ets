@@ -327,7 +327,6 @@ export class Asset {
    * @param offsetY y轴增量移动距离，基于Canvas坐标系
    */
   public translate(offsetX: number, offsetY: number, moveType: number = 0): number {
-    console.log('Asset: translate ' + offsetX + `,${offsetY}`);
     return sdk.Asset_translate(this.editor.timeline.id, this.uid, offsetX, offsetY, moveType);
   }
 
@@ -339,8 +338,11 @@ export class Asset {
    * @param centerY 缩放的中心点y，基于Canvas坐标系
    */
   public scale(ratio: number, centerX: number, centerY: number): void {
-    console.log('Asset: scale ' + ratio + ` center=${centerX}` + ',' + centerY);
     sdk.Asset_scale(this.editor.timeline.id, this.uid, ratio, centerX, centerY);
+  }
+
+  public setIsDragImage(isDragImage: boolean): void {
+    sdk.Asset_setIsDragImage(this.editor.timeline.id, this.uid, isDragImage);
   }
 
   public getCropSize(cb?: (width: number, height: number) => void): void {
@@ -553,9 +555,6 @@ export class Asset {
   getReachableCropRect(left: number, top: number, right: number, bottom: number, ratio: number,
     directionLeft: number, directionTop: number, directionRight: number, directionBottom: number,
     pressure: number = 1): Object | undefined {
-    console.log('Asset: getReachableCropRect input=[' + left + `,${top}` + ',' + right + ',' + bottom + '] ratio=' +
-      ratio);
-
     // 超出可操作区域的 异常输入分支 兜底
     let timeline = this.editor.timeline;
     let ret: string = '';
@@ -563,12 +562,12 @@ export class Asset {
       top < timeline.operTop - 10e-2 ||
       right > timeline.operLeft + timeline.operWidth + 10e-2 ||
       bottom > timeline.operTop + timeline.operHeight + 10e-2) {
-      HiLog.i(TAG, 'out crop range');
+      HiLog.d(TAG, 'out crop range');
       Trace.begin('outEditorCropRange');
       let cropRect = this.crops().cropRect;
       if (cropRect.left - left >= 4 || right - cropRect.right >= 4 || cropRect.top - top >= 4 ||
         bottom - cropRect.bottom >= 4) {
-        HiLog.i(TAG, 'begin reverse crop');
+        HiLog.d(TAG, 'begin reverse crop');
         ret = sdk.Asset_ReverseCrop(timeline.id, this.uid,
           [vp2px(left), vp2px(top), vp2px(right), vp2px(bottom), vp2px(cropRect.left), vp2px(cropRect.top),
             vp2px(cropRect.right), vp2px(cropRect.bottom)], ratio,
@@ -576,7 +575,7 @@ export class Asset {
         Trace.end('outEditorCropRange');
       } else {
         Trace.end('outEditorCropRange');
-        HiLog.i(TAG, 'begin max crop');
+        HiLog.d(TAG, 'begin max crop');
         return undefined;
       }
     } else {
@@ -587,7 +586,6 @@ export class Asset {
         directionLeft, directionTop, directionRight, directionBottom, () => {
         });
       Trace.end('inEditorCropRange');
-      HiLog.i(TAG, 'in crop range');
     }
     try {
       let json: CropVal2 = JSON.parse(ret);
@@ -596,8 +594,6 @@ export class Asset {
         return undefined;
       }
       this.rectTo(json, px2vp);
-      HiLog.i(TAG, 'Asset: getReachableCropRect output=[' + json.left + `,${json.top}` + ',' +
-      json.right + ',' + json.bottom + ']');
       return json;
     } catch {
       return undefined;

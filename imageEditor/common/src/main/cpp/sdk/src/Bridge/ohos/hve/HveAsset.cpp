@@ -478,7 +478,10 @@ void HveAsset::UpdatePreviewMode(const HmcRectD &cropRect, const HmcRectD &cropO
     HmcAssetCropPosition cropPosition = {{left, top}, {left, bottom}, {right, top}, {right, bottom}};
     HmcAssetCropTransformSetCrop(m_editor, m_assetUid, &cropPosition);
 
-    m_previewScale = useHotspotsPreScale ? CalcPreviewModeAssetScale(cropRect, cropOperationArea) : 1.0f;
+    // 无论是否处于“已预缩放”状态，都应当基于 cropRect/cropOperationArea 重新计算预览缩放。
+    // 否则在首次进入裁剪页时 useHotspotsPreScale=false 会把缩放置为 1.0f，
+    // 造成图片相对裁剪框偏大/不对齐（UI框正确但图片未按框铺满）。
+    m_previewScale = CalcPreviewModeAssetScale(cropRect, cropOperationArea);
     m_previewOffsetX = cropRect.CenterX() - canvasWidth / g_two;
     m_previewOffsetY = canvasHeight / g_two - cropRect.CenterY() + m_previewScale / g_two;
     HmcAssetCropTransformSetPosition(m_editor, m_assetUid, m_previewOffsetX, m_previewOffsetY, m_previewScale,
@@ -487,6 +490,10 @@ void HveAsset::UpdatePreviewMode(const HmcRectD &cropRect, const HmcRectD &cropO
     LOGD("cropRect=[left=%lf, top=%lf, right=%lf, bottom=%lf, width=%lf, height=%lf, OffsetX=%f, OffsetY=%f, Scale=%f]",
          cropRect.left, cropRect.top, cropRect.right, cropRect.bottom, cropRect.Width(), cropRect.Height(),
          m_previewOffsetX, m_previewOffsetY, m_previewScale);
+
+    // setCropAreaEnable(true) 会直接走 UpdatePreviewMode，但如果不更新状态标记，
+    // 后续基于 GetInPreviewMode() 的逻辑仍会走 crop 分支，导致“框对但图不对齐”。
+    m_isInPreviewMode = true;
 }
 
 void HveAsset::setExportSize(const HmcRectD &cropRect)
@@ -617,6 +624,9 @@ void HveAsset::UpdateCropMode()
     HmcAssetCropPosition cropPosition = {{0, 1}, {0, 0}, {1, 1}, {1, 0}};
     HmcAssetCropTransformSetCrop(m_editor, m_assetUid, &cropPosition);
     HmcAssetCropTransformSetPosition(m_editor, m_assetUid, 0, 0, 1, 1, 0);
+
+    // 与 UpdatePreviewMode 互补：裁剪框禁用/切换时确保清掉预览状态。
+    m_isInPreviewMode = false;
 }
 
 void HveAsset::SetAdjustVignetteEnable(bool enable)
@@ -806,9 +816,10 @@ bool HveAsset::IsDefaultConfig()
 
 double HveAsset::CalcPreviewModeAssetScale(const HmcRectD &cropRect, const HmcRectD &cropOperationArea)
 {
-    HmcRectD expandedOperationArea(
-        cropOperationArea.left - GetExpandedHotspotsWidth(), cropOperationArea.top - GetExpandedHotspotsHeight(),
-        cropOperationArea.right + GetExpandedHotspotsWidth(), cropOperationArea.bottom + GetExpandedHotspotsHeight());
+    // 为了保证“裁剪框(cropRect)与图片显示区域一致铺满”，
+    // 计算预览铺满缩放时不应再额外扩张 cropOperationArea（热点扩张只服务触控热区）。
+    // 否则会导致 scale 偏大，出现“框正常但图片相对框偏大/外溢”的现象。
+    HmcRectD expandedOperationArea = cropOperationArea;
 
     float sealHeight = GetExportH() == 0;
     float sealWidth = GetExportW() == 0;
@@ -978,6 +989,9 @@ bool HveAsset::GetShowWatermarkValue() const
 
 void HveAsset::SetIsDragImage(bool isDragImage)
 {
+    if (m_isDragImage == isDragImage) {
+        return;
+    }
     m_isDragImage = isDragImage;
     HmcAssetSetIsDragImage(m_editor, m_assetUid, isDragImage);
 }

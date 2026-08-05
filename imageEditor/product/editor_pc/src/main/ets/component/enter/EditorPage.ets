@@ -241,6 +241,8 @@ export struct EditorMain {
         HiLog.i(TAG, 'on first frame');
         App.getInstance().myEditor()?.releaseDownLoadingLcd();
         ScreenManager.getInstance().setIsFirstFrame(true);
+        // 初始化对比快照：将“进入编辑页时的画面”缓存为对比基准，避免编辑后对比无差异
+        App.getInstance().myEditor().refreshCompareEffectList();
         if (this.params !== undefined) {
           this.params.position = Constants.FILE_LOCATION_LOCAL;
         }

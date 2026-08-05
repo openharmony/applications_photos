@@ -382,6 +382,9 @@ export abstract class AbstractScrollVm extends AbstractFormVm {
       LogUtils.debug(this.tag, `GRID_SWITCH ignor onScrollFrameBegin offset: ${offset}, state: ${ScrollState[state]}`);
       return { offsetRemain: 0 };
     }
+    if (this.gridForm === FormIndex.DAY || this.gridForm === FormIndex.GROUP_DAY) {
+      return { offsetRemain: offset };
+    }
     if (!this.gridObserverProxy.config.isSupportHeadMsg) {
       // 不支持消息头时直接返回
       return { offsetRemain: offset };
@@ -620,6 +623,15 @@ export abstract class AbstractScrollVm extends AbstractFormVm {
     }
   }
 
+  private async loadGpsCoordinate(dataIndex: number): Promise<string> {
+    try {
+      return (await this.firstAddressMediaItem?.getGpsCoordinateStatic()) ?? '';
+    } catch (e) {
+      LogUtils.error(this.tag, `getGpsCoordinateStatic error at index ${dataIndex}: ${e?.message}`, e?.stack);
+      return '';
+    }
+  }
+
   private async findAddress(findAddressParam: FindAddressParam): Promise<void> {
     if (OperateStateTypeUtils.isInSelectState(this.getOperateState())) {
       this.stateProxy.titleBarStateManager.subTitleContentAsm.updateState('');
@@ -629,12 +641,16 @@ export abstract class AbstractScrollVm extends AbstractFormVm {
     for (let i = 0; i < findAddressParam.columnCount; i++) {
       let dataIndex: number = findAddressParam.firstIndex + i;
       let subLocalityAddress: string = '';
+      let gpsCoordinate: string = '';
       this.firstAddressMediaItem = this.dayDataSource?.getMediaItemByPosition(dataIndex);
       if (this.firstAddressMediaItem) {
         if (this.isNeedResetSubLocalityAddress) {
           this.firstAddressMediaItem.resetSubLocalityAddress();
         }
         subLocalityAddress = await this.loadSubLocalityAddress(dataIndex);
+        if (this.firstAddressMediaItem.mediaType !== UserFileManagerAccess.MEDIA_TYPE_VIDEO) {
+          gpsCoordinate = await this.loadGpsCoordinate(dataIndex);
+        }
       } else {
         // 拖动滚动条时滑窗不更新，会导致获取不到对应Index的MediaItem，此时获取SimpleGridMediaItem
         LogUtils.info(this.tag, `findAddress from SimpleGridMediaItem:${dataIndex}`);
@@ -646,6 +662,11 @@ export abstract class AbstractScrollVm extends AbstractFormVm {
       if (subLocalityAddress?.length > 0) {
         this.stateProxy.titleBarStateManager.subTitleContentAsm.updateState(subLocalityAddress);
         LogUtils.info(this.tag, 'findAddress subLocalityAddress is not empty');
+        return;
+      }
+      if (gpsCoordinate?.length > 0) {
+        this.stateProxy.titleBarStateManager.subTitleContentAsm.updateState(gpsCoordinate);
+        LogUtils.info(this.tag, `findAddress gpsCoordinate: ${gpsCoordinate}`);
         return;
       }
     }

@@ -269,7 +269,7 @@ export struct AlbumSetPage {
   private onSelectFunc: Function = (key: string, value: boolean, isDisableRename: boolean, isDisableDelete: boolean,
     callback: Function): void => this.onSelect(key, value, isDisableRename, isDisableDelete, callback);
   private updateSelectedAlbumInfosFunc: Function = (isSelected: boolean, albumInfo: AlbumInfo): void =>
-    this.updateSelectedAlbumInfos(isSelected, albumInfo);
+  this.updateSelectedAlbumInfos(isSelected, albumInfo);
   private onDataReloadedCallbackFunc: Function = (): void => this.onDataReloadedCallback();
   @State @Watch('onIsVerdeFoldableChanged') isVerdeFoldable: boolean = DeviceInfo.isVerdeFoldable();
   private readonly tabbarShowListener: IsShowListener = {
@@ -479,8 +479,8 @@ export struct AlbumSetPage {
   }
 
   private updatedOptionAndData(): void {
-      this.updateLayoutOptions('updatedOptionAndData');
-      this.albums.onDataReloaded();
+    this.updateLayoutOptions('updatedOptionAndData');
+    this.albums.onDataReloaded();
   }
 
   private onDataReloadedCallback(): void {
@@ -575,15 +575,16 @@ export struct AlbumSetPage {
     AppStorage.setOrCreate<string>(Constants.KEY_OF_ALBUM_URI, targetAlbumInfo.uri);
     let params: ParamsWrapper = new ParamsWrapper();
     let targetDataSource: AlbumDataSource = new AlbumDataSource({
-        context: getContext(),
-        albumInfo: targetAlbumInfo,
-        isAccurateNotify: true,
-      });
+      context: getContext(),
+      albumInfo: targetAlbumInfo,
+      isAccurateNotify: true,
+    });
     params.set(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_DATASOURCE, targetDataSource);
     params.set(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_IS_NEW_ALBUM, true);
     params.set(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_LISTENER, this.pageStatusListener);
     this.setStatusOnAnimationFinish();
     this.navigationPageInfos.pop();
+    AppStorage.setOrCreate(AlbumRefreshConst.KEY_PENDING_ALBUM_NAV_PARAM,params)
     NavigationBroadCastManager.getInstance().getBroadCast().emitAsync(
       NavigationConstants.LOAD_PAGE, [NavigationConstants.NAVIGATION_OTHER_ALBUM_PAGE]).then(() => {
       this.navigationPageInfos.pushPath(new NavPathInfo(NavigationConstants.NAVIGATION_OTHER_ALBUM_PAGE, params));
@@ -597,7 +598,8 @@ export struct AlbumSetPage {
     this.onModeChange();
     this.onDataReloadedCallback();
 
-    if (!DeviceInfo.isEmulator() && !DeviceInfo.isTablet() && AlbumUtils.useNewPhotoGrid()) {
+    // 新建相册选图返回：平板与手机统一走新宫格页（AlbumUtils.useNewPhotoGrid 已包含平板）
+    if (!DeviceInfo.isEmulator() && AlbumUtils.useNewPhotoGrid()) {
       this.onPickerOperationBackToNewAlbumNewGrid(albumInfo);
       return;
     }
@@ -617,11 +619,12 @@ export struct AlbumSetPage {
         new AlbumDataSource({ context: getContext(), albumInfo: targetAlbumInfo });
       params.paramsWrapper?.set(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_DATASOURCE, targetDataSource);
     }
-    // 使用动态加载，在navigation pushPath之前调用
+    // 使用动态加载，在navigation pushPath之前调用；写入 AppStorage 供 OtherAlbumPage 在 getParamByIndex 不可用时读取
+    AppStorage.setOrCreate(AlbumRefreshConst.KEY_PENDING_ALBUM_NAV_PARAM, params);
     this.navigationBroadCast.emitAsync(
-      NavigationConstants.LOAD_PAGE, [NavigationConstants.NAVIGATION_DESTINATION_PHOTO_GRID_VIEW]).then(() => {
+      NavigationConstants.LOAD_PAGE, [NavigationConstants.NAVIGATION_OTHER_ALBUM_PAGE]).then(() => {
       this.navigationPageInfos.pop();
-      this.navigationPageInfos?.pushPath(new NavPathInfo(NavigationConstants.NAVIGATION_DESTINATION_PHOTO_GRID_VIEW,
+      this.navigationPageInfos?.pushPath(new NavPathInfo(NavigationConstants.NAVIGATION_OTHER_ALBUM_PAGE,
         params));
     });
   }
@@ -739,7 +742,7 @@ export struct AlbumSetPage {
   /**
    * 调用菜单的前置方法
    * @param isOnAlbumSetPage
-   * 新建相册时会进入picker页面，不会处于相册首页，页面需要去激活，避免相册页dataSource查询
+  * 新建相册时会进入picker页面，不会处于相册首页，页面需要去激活，避免相册页dataSource查询
    * 删除、重命名场景，仍处于相册页，则使用默认参数
    */
   onOperationStart(isOnAlbumSetPage: boolean = true): void {
@@ -1287,13 +1290,18 @@ export struct AlbumSetPage {
 
   initGridRowCount(): void {
     Log.info(TAG, `get screen width is : ${getScreen().getWinWidth()}, height is : ${getScreen().getWinHeight()}`);
+    const isHorizontalBySize: boolean = getScreen().getWinWidth() > getScreen().getWinHeight();
     let diggingAlbumArea = this.diggingHoleCameraArea?.top || this.diggingHoleCameraArea?.left ||
       this.diggingHoleCameraArea?.right || this.diggingHoleCameraArea?.bottom;
-    if (DeviceInfo.isPhoneUx() && getScreen().isHorizontal() && diggingAlbumArea === 0 &&
+    if (DeviceInfo.isPhoneUx() && isHorizontalBySize && diggingAlbumArea === 0 &&
       !DeviceInfo.isGRLMStatus() && !DeviceInfo.isSuperLauncher()) {
       // 横屏时进多任务直接切换到一个不支持横屏的应用，再从多任务切回图库，此时图库是横屏的，若挖空区域都为空，不做处理.
-      Log.warn(TAG, 'screen is horizontal and diggingAlbumArea is invalid');
-      return;
+      // Cold start can still have default single-column value here; avoid keeping an invalid first frame.
+      if (!this.isHorizontal && this.gridColumnsCount > 1) {
+        Log.warn(TAG, 'screen size is horizontal but orientation state is not ready, keep current columns');
+        return;
+      }
+      Log.warn(TAG, 'screen is horizontal and diggingAlbumArea is invalid, recalc columns');
     }
     this.gridColumnsCount = UiUtil.getAlbumGridCount(this.isSidebar);
   }
@@ -1436,6 +1444,8 @@ export struct AlbumSetPage {
   // 方向变化监听
   onOrientationChanged() {
     Log.info(TAG, `onOrientationChanged isHorizontal: ${this.isHorizontal}`);
+    getScreen().updateSize();
+    this.initGridRowCount();
     this.calculateGridHeight();
   }
 
@@ -1616,7 +1626,7 @@ export struct AlbumSetPage {
   @Styles
   pressedStyles(): void {
     .backgroundColor(
-        this.isAlbumSetSelectedMode ? $r('sys.color.ohos_id_color_list_card_bg') : $r('sys.color.interactive_click'))
+      this.isAlbumSetSelectedMode ? $r('sys.color.ohos_id_color_list_card_bg') : $r('sys.color.interactive_click'))
     .borderColor($r('sys.color.comp_background_list_card'))
   }
 
@@ -1900,8 +1910,8 @@ export struct AlbumSetPage {
           .key(`Album_${index}`)
           .animation(this.enableAnimation ? {
             duration: this.gestureEnd ? Constants.albumStyleSwitchDuration : Constants.albumItemSmoothDuration,
-              tempo: this.animationTempo,
-              curve: this.gestureEnd ? Curve.Friction : Curve.Smooth,
+            tempo: this.animationTempo,
+            curve: this.gestureEnd ? Curve.Friction : Curve.Smooth,
           }: null)
           .transition(AnimationUtil.albumAnimation(this.judgeIsOpenTransitionAni()))
           .onAppear((): void => {
@@ -2135,10 +2145,10 @@ export struct AlbumSetPage {
       // HdsListItem({
       //   customItemBuilder: this.AlbumBuilder.bind(this, item, index)
       // })
-        .padding({
-          left: $r('sys.float.corner_radius_level4'),
-          right: $r('sys.float.corner_radius_level4'),
-        })
+      .padding({
+        left: $r('sys.float.corner_radius_level4'),
+        right: $r('sys.float.corner_radius_level4'),
+      })
     }, (item: AlbumSetDataInfo, index?: number) => this.buildSmartItemKey(item, index))
   }
 

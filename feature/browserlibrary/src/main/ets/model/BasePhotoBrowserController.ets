@@ -137,6 +137,7 @@ import lazy { BrowserAnimController } from '@ohos/common/src/main/ets/default/mo
 import lazy { IdGenerator } from '@ohos/common/src/main/ets/default/utils/IdGenerator';
 import lazy { UserConstraintUtil } from '@ohos/common/src/main/ets/default/utils/UserConstraintUtil';
 import lazy { LIST_CACHE_COUNT } from '../view/SwiperView';
+import type { LoadingListener } from '@ohos/common/src/main/ets/default/model/browser/LoadingListener';
 import lazy { WallpaperEditorComponent } from '@ohos/common/src/main/ets/default/view/WallpaperEditorComponent';
 import lazy { AlbumGridSortHelper } from '@ohos/common/src/main/ets/default/model/AlbumGridSortHelper';
 import lazy { GridViewMode } from '@ohos/common/src/main/ets/default/view/grid/GridView';
@@ -233,6 +234,7 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
   protected appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
   public isFromViewDataWithThirdUri = false;
   protected isFromViewDataWithMediaUri = false;
+  private viewDataBindDeferListener: LoadingListener | undefined = undefined;
   public isForceShowBar = false;
   // time to view the current picture
   public checkedTransition: string = Constants.PHOTO_TRANSITION_CAMERA;
@@ -311,7 +313,7 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
 
   private routeToSettingsPageFunc: Function = (componentId: string) => this.routeToSettingsPage(componentId);
   private dealMenuClickFunc: Function = (action: Action, actionId: number): void =>
-    this.dealMenuClick(action, actionId);
+  this.dealMenuClick(action, actionId);
   mSelectManager = new SelectManager();
   private operationPosition: number = BigDataConstants.OPERATION_IN_INVALID_POSITION;
   public isPullDownAndDrag: boolean = false;
@@ -532,7 +534,8 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
       Log.info(TAG, 'found viewIndex');
       this.isFromViewDataWithThirdUri = true;
       this.dataSource = new UriDataSource(this.stateMachine, String(param.viewData)
-        .split('?'), UserFileManagerAccess.MEDIA_TYPE_IMAGE, undefined, undefined, param.isAllMediaData);
+        .split('?'), UserFileManagerAccess.MEDIA_TYPE_IMAGE, undefined, undefined, param.isAllMediaData,
+        param.displayName);
       let viewIndex = Number.parseInt(param.viewDataIndex);
       if (Number.isNaN(viewIndex) || viewIndex <= 0 || viewIndex > String(param.viewData).split('?').length) {
         viewIndex = 0;
@@ -592,7 +595,9 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
         this.dataSource = new UriDataSource(this.stateMachine, [String(param.viewData)],
           param.viewDataType,
           param.imageArea ? param.imageArea.width : 0,
-          param.imageArea ? param.imageArea.height : 0);
+          param.imageArea ? param.imageArea.height : 0,
+          undefined,
+          param.displayName);
         this.isFromViewDataWithThirdUri = true;
       }
     }
@@ -601,17 +606,94 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
   private onGetItemIndexByUri(index: number, uri: string): void {
     if (uri) {
       if (index !== -1) {
-        // 三方拉起，大图显示传入的图片
+        const deferEmpty: boolean = this.shouldDeferViewDataBindForEmptyWindow(index);
+        // 须先于 enableGetData：窗口未就绪时 emit 会在 albumDataSource 未绑定时刷新 UI。
+        if (deferEmpty) {
+          this.setCurrentIndex(index);
+          this.deferViewDataBindUntilAlbumWindowReady(uri);
+          return;
+        }
         this.setCurrentIndex(index);
         this.emitCallback(LibraryConstants.UPDATE_CURRENT_INDEX, [index]);
         this.dataSource.enableGetData(true);
         this.dataSource.getData(this.getCurrentIndex());
         this.dataSource.onDataReloaded();
+        this.onPhotoChanged(this.getCurrentIndex());
       } else {
         this.dataSource.getItemIndexByUri(uri, (index: number) => {
           this.onGetItemIndexByUri(index, uri)
         })
       }
+    }
+  }
+
+  private shouldDeferViewDataBindForEmptyWindow(index: number): boolean {
+    if (!this.isFromViewDataWithMediaUri) {
+      return false;
+    }
+    return !this.isViewDataMediaItemHydrated(index);
+  }
+
+  /**
+   * 与相册滑动窗口取数路径一致，但不依赖 enableGetDataFlag（推迟绑定阶段须保持 false，避免 UI 抢先缓存空 MediaResult）。
+   */
+  private isViewDataMediaItemHydrated(index: number): boolean {
+    return this.dataSource.isAlbumWindowItemHydratedForIndex(index);
+  }
+
+  /** 标准相册 ViewData 在 enableGetData(false) 期间勿挂载 Swiper 内 LazyForEach（槽0 曾占位后难以刷新）。 */
+  public shouldMountSwiperLazyForEachNow(): boolean {
+    if (!this.isFromViewDataWithMediaUri) {
+      return true;
+    }
+    return this.dataSource?.isGetDataEnabled() ?? true;
+  }
+
+  private clearViewDataBindDeferListener(): void {
+    if (!this.viewDataBindDeferListener) {
+      return;
+    }
+    this.dataSource.getAlbumDataSource()?.removeLoadingListener(this.viewDataBindDeferListener);
+    this.viewDataBindDeferListener = undefined;
+  }
+
+  private flushViewDataBindAfterThumbReady(): void {
+    this.dataSource.enableGetData(true);
+    this.dataSource.getData(this.getCurrentIndex());
+    this.dataSource.onDataReloaded();
+    this.emitCallback(LibraryConstants.UPDATE_CURRENT_INDEX, [this.getCurrentIndex()]);
+    this.onPhotoChanged(this.getCurrentIndex());
+    setTimeout((): void => {
+      this.broadCast.emit(BrowserConstants.VIEWDATA_FLUSH_BIND_SYNC, []);
+    }, 0);
+  }
+
+  private deferViewDataBindUntilAlbumWindowReady(uri: string): void {
+    this.clearViewDataBindDeferListener();
+    const albumDs = this.dataSource.getAlbumDataSource();
+    if (!albumDs) {
+      this.dataSource.getItemIndexByUri(uri, (retryIndex: number): void => {
+        this.onGetItemIndexByUri(retryIndex, uri);
+      });
+      return;
+    }
+    const tryFlushWhenWindowReady = (): void => {
+      if (!this.isViewDataMediaItemHydrated(this.getCurrentIndex())) {
+        return;
+      }
+      this.clearViewDataBindDeferListener();
+      this.flushViewDataBindAfterThumbReady();
+    };
+    this.viewDataBindDeferListener = {
+      onDataLoadingFinished: tryFlushWhenWindowReady,
+      onSizeLoadingFinished: (_size: number): void => tryFlushWhenWindowReady(),
+      onDataChanged: (_dataIndex: number): void => {
+      }
+    };
+    albumDs.addLoadingListener(this.viewDataBindDeferListener);
+    if (this.isViewDataMediaItemHydrated(this.getCurrentIndex())) {
+      this.clearViewDataBindDeferListener();
+      this.flushViewDataBindAfterThumbReady();
     }
   }
 
@@ -621,7 +703,6 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
   public cancelBrowserToGridAnim(): void {
     this.stateMachine.processExitAnimationEndEvent();
   }
-
 
   /**
    * 大图组件初始化，完成权限确认、窗口信息同步、回调注册和数据初始化工作
@@ -848,7 +929,7 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
     this.currentMediaUri = mediaUri;
     this.dataSource.getItemIndexByUri(mediaUri, (index: number) => {
       Log.info(TAG, `[enterLibrary] get index from mediaLibrary, currentIndex: ${
-        this.getCurrentIndex()}, index: ${index}`);
+      this.getCurrentIndex()}, index: ${index}`);
       if (index === -1) {
         Log.error(TAG, `[enterLibrary] failed to getData, set index 0`);
         index = 0;
@@ -1058,7 +1139,7 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
     broadCast.on(BrowserConstants.BROWSER_FULL_SHOW,
       (isBrowserFullShow: boolean) => this.browserFullShow(isBrowserFullShow));
     // 监听PC端大图菜单移动图片到相册的广播
-    this.appBroadCast.on(BroadCastConstants.PC_MEDIA_OPERATION_BROWSER, 
+    this.appBroadCast.on(BroadCastConstants.PC_MEDIA_OPERATION_BROWSER,
       (...args: ESObject[]): void => {
         Log.info(TAG, `BasePhotoBrowserController PC_MEDIA_OPERATION_BROWSER received, args count: ${args.length}, args: ${JSON.stringify(args)}`);
         if (args.length < 3) {
@@ -1876,6 +1957,10 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
       Log.warn(TAG, 'currentPhoto is undefined or size is 0.');
       return;
     }
+    if (currentPhoto.isGifType()) {
+      Log.warn(TAG, 'onEditClicked ignored for gif.');
+      return;
+    }
     this.emitCallback(LibraryConstants.EDITOR_INIT, []);
     // 上报编辑的资源类型
     let editType: EditType = currentPhoto.getIsMovingPhoto() ? EditType.MOVING_PHOTO : (currentPhoto.mediaType ===
@@ -2005,8 +2090,8 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
     //   this.emitCallback(LibraryConstants.JUMP_TO_WALLPAPER_EDITOR, [currentPhoto.uri, lcdUri]);
     // }
     //todo 设置壁纸pc和手机先都走手机逻辑
-      let lcdUri: string = ImageUtil.getLCDUri(currentPhoto.uri, currentPhoto.path, currentPhoto.getDateModified());
-      this.emitCallback(LibraryConstants.JUMP_TO_WALLPAPER_EDITOR, [currentPhoto.uri, lcdUri]);
+    let lcdUri: string = ImageUtil.getLCDUri(currentPhoto.uri, currentPhoto.path, currentPhoto.getDateModified());
+    this.emitCallback(LibraryConstants.JUMP_TO_WALLPAPER_EDITOR, [currentPhoto.uri, lcdUri]);
 
     ReportToBigDataUtil.report(BigDataConstants.SET_WALLPAPER, {
       'url': ReportToBigDataUtil.urlAnonymize(currentPhoto.uri)
@@ -2216,7 +2301,7 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
     let timestamp: number;
 
     if (!currentPhoto) {
-      this.emitCallback(LibraryConstants.KEY_UPDATE_ACTION_BAR_TITLE, [photoDate, photoDate]);
+      this.emitCallback(LibraryConstants.KEY_UPDATE_ACTION_BAR_TITLE, ['', photoDate]);
       return;
     }
 
@@ -2224,7 +2309,9 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
     if (!timestamp) {
       timestamp = currentPhoto?.getDetailTime?.();
     }
-    this.emitCallback(LibraryConstants.KEY_UPDATE_ACTION_BAR_TITLE, [photoDate, DateUtil.getLocalizedTime(timestamp)])
+    const timeText: string = DateUtil.getLocalizedTime(timestamp);
+    const subTitle: string = [photoDate, timeText].filter((text: string) => !!text).join(' ');
+    this.emitCallback(LibraryConstants.KEY_UPDATE_ACTION_BAR_TITLE, [currentPhoto.displayName || '', subTitle]);
   }
 
   /**
@@ -2331,12 +2418,12 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
     }
     this.appBroadCast.emit(BroadCastConstants.UPDATE_SHOW_MOVING_PHOTO_STATUS, [this.isShowMovingPhoto]);
 
-    // 编辑规避verde外屏
-    if (!DeviceInfo.isVerdeFoldable() && !DeviceInfo.isTv()) {
+    // 编辑规避verde外屏，大图视频不显示编辑按钮
+    if (!DeviceInfo.isVerdeFoldable() && !DeviceInfo.isTv() && !isVideo) {
       try {
         toolMenuTemp.push(await UiUtil.isEditedEnable(currentPhoto) && hasWrite && currentPhoto?.data &&
           await currentPhoto?.isEditable?.() && !this.isMovingPhotoSwitching && !item?.isShowThumbnail ?
-        Action.EDIT : Action.EDIT_INVALID);
+          Action.EDIT : Action.EDIT_INVALID);
       } catch (error) {
         Log.error(TAG, `get isEditable failed: ${error}, code: ${error?.code}`);
         toolMenuTemp.push(Action.EDIT_INVALID);
@@ -2373,7 +2460,7 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
       currentPhoto?.mediaType === photoAccessHelper.PhotoType.IMAGE && !DeviceInfo.isVerdeFoldable() &&
       !UserConstraintUtil.isConstraintUserModifyWallpaper()) {
       moreMenuTemp.unshift(hasWrite && currentPhoto?.data && !this.isMovingPhotoSwitching ?
-      Action.SET_WALLPAPER : Action.SET_WALLPAPER_INVALID);
+        Action.SET_WALLPAPER : Action.SET_WALLPAPER_INVALID);
     }
     Log.info(TAG, `updateMenuForLibrary end`);
   }
@@ -2421,6 +2508,16 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
   public async updateMenuForPhotoHm(index: number) {
     this.isFoldExpanded = DeviceInfo.isFoldable(); // 更新菜单栏之前更新xxx机手机xxx
     Log.info(TAG, `updateMenuForPhotoHm start`);
+    if (this.isReadOnlyForThirdViewData()) {
+      let currentPhoto: MediaItem | undefined = this.getPhotoByIndex(index);
+      if (!currentPhoto) {
+        this.emitCallback(LibraryConstants.MENU_KEY_UPDATE_CALLBACK, [[], [], [], false, []]);
+        Log.info(TAG, 'updateMenuForPhotoHm read-only mode, current photo invalid');
+        return;
+      }
+      this.updateReadOnlyThirdViewDataMenus(currentPhoto);
+      return;
+    }
     let currentPhoto: MediaItem | undefined = this.getPhotoByIndex(index);
     if (!currentPhoto) {
       return;
@@ -2484,8 +2581,8 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
         } else {
           Log.info(TAG, '[normal picture]')
         }
-        // 编辑按钮
-        if (!DeviceInfo.isVerdeFoldable()) {
+        // 编辑按钮（大图视频不显示）
+        if (!DeviceInfo.isVerdeFoldable() && !isVideo) {
           list.push(!isEdit || this.isMovingPhotoSwitching ? Action.EDIT_INVALID : Action.EDIT);
         }
         // 删除按钮
@@ -2511,14 +2608,19 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
         } else {
           Log.info(TAG, '[normal picture]')
         }
-        if (!DeviceInfo.isVerdeFoldable()) {
+        if (!DeviceInfo.isVerdeFoldable() && !isVideo) {
           list.push(!isEdit || this.isMovingPhotoSwitching || this.isPrivateHideState ?
-          Action.EDIT_INVALID : Action.EDIT);
+            Action.EDIT_INVALID : Action.EDIT);
         }
         list.push(this.isPrivateHideState ? Action.DELETE_INVALID : Action.DELETE);
         finalMenuList.push(this.isPrivateHideState ? Action.MORE_INVALID : Action.MORE);
         break;
       case BrowserCaller.RECYCLE:
+        // 最近删除(回收站)场景：需要展示“恢复”入口
+        // 预期顺序：恢复、删除、（视频时）播放/暂停
+        list.push(Action.RECOVER);
+        // 删除 按钮
+        list.push(Action.DELETE);
         // 动态照片、视频 按钮
         if (Global.getBoolean('autoPlayEnable') ? isVideo : this.isShowVideo) {
           list.push(this.isVideoPlaying ? Action.VIDEO_PAUSE : Action.VIDEO_PLAY,
@@ -2526,8 +2628,6 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
         } else {
           Log.info(TAG, '[normal picture]')
         }
-        // 删除 按钮
-        list.push(Action.DELETE);
         // 更多按钮
         finalMenuList.push(Action.MORE);
         break;
@@ -2537,8 +2637,8 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
           list.push(this.isVideoPlaying ? Action.VIDEO_PAUSE : Action.VIDEO_PLAY,
             this.isMute ? Action.SOUND_OFF_FILLED : Action.SOUND_FILLED);
         }
-        if (!DeviceInfo.isVerdeFoldable()) {
-          list.push(Action.EDIT);
+        if (!DeviceInfo.isVerdeFoldable() && !isVideo) {
+          list.push(!isEdit || this.isMovingPhotoSwitching ? Action.EDIT_INVALID : Action.EDIT);
         }
         list.push(Action.DELETE);
         finalMenuList.push(Action.MORE)
@@ -2551,8 +2651,8 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
         } else {
           Log.info(TAG, '[normal picture]')
         }
-        if (!DeviceInfo.isVerdeFoldable()) {
-          list.push(Action.EDIT);
+        if (!DeviceInfo.isVerdeFoldable() && !isVideo) {
+          list.push(!isEdit || this.isMovingPhotoSwitching ? Action.EDIT_INVALID : Action.EDIT);
         }
         list.push(Action.DELETE);
         finalMenuList.push(Action.MORE)
@@ -2627,6 +2727,38 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
     Log.info(TAG, 'updateMenuForPhotoHm complete');
   }
 
+  private isReadOnlyForThirdViewData(): boolean {
+    return this.pageFrom === BrowserCaller.VIEWDATA_PAGE && this.isFromViewDataWithThirdUri;
+  }
+
+  private shouldShowReadOnlyThirdViewVideoControls(currentPhoto: MediaItem): boolean {
+    let isVideo: boolean = currentPhoto.mediaType === UserFileManagerAccess.MEDIA_TYPE_VIDEO;
+    return Global.getBoolean('autoPlayEnable') ? isVideo : this.isShowVideo;
+  }
+
+  private updateReadOnlyThirdViewDataMenus(currentPhoto: MediaItem): void {
+    let list: Action[] = [];
+    if (this.shouldShowReadOnlyThirdViewVideoControls(currentPhoto)) {
+      list.push(this.isVideoPlaying ? Action.VIDEO_PAUSE : Action.VIDEO_PLAY,
+        this.isMute ? Action.SOUND_OFF_FILLED : Action.SOUND_FILLED);
+    }
+    let finalMenuList: Action[] = [];
+    let toolMenuList: Action[] = [];
+    if (!DeviceInfo.isVerdeFoldable() && isOrientationHorizontal()) {
+      finalMenuList = list;
+    } else {
+      toolMenuList = list;
+    }
+    if ((DeviceInfo.isFoldable() && !DeviceInfo.isPhoneVde()) &&
+    this.isFullMode && !lockedScreenMgr().isFromLockedScreen) {
+      finalMenuList = list;
+      toolMenuList = [];
+    }
+    this.emitCallback(LibraryConstants.MENU_KEY_UPDATE_CALLBACK, [finalMenuList, toolMenuList, [], false, []]);
+    Log.info(TAG, `updateMenuForPhotoHm read-only restore video controls, menuLen:${finalMenuList.length}, ` +
+      `toolLen:${toolMenuList.length}, isShowVideo:${this.isShowVideo}`);
+  }
+
   private isSupportSlideShow(albumInfo: AlbumInfo | undefined): boolean {
     // false
     return !(albumInfo?.isTrashAlbum ||
@@ -2678,7 +2810,7 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
     if (!currentPhoto) {
       this.initDataOnceMoreWhenError();
       Log.warn(TAG, `getCurrentPhoto currentIndex: ${this.getCurrentIndex()}, currentPhoto is undefined` +
-       `cameraAlbumInfo ${PhotoBrowserGetCameraAlbum?.cameraAlbumInfo?.uri}`);
+        `cameraAlbumInfo ${PhotoBrowserGetCameraAlbum?.cameraAlbumInfo?.uri}`);
     }
     Log.info(TAG, `getCurrentPhoto success! getCurrentPhoto currentIndex: ${this.getCurrentIndex()}`)
     return currentPhoto;
@@ -2760,14 +2892,14 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
         break;
       case display.Orientation.LANDSCAPE:
         result = (DeviceInfo.isTablet() && !PhotoConfig.isLibrary()) ? window.Orientation.USER_ROTATION_LANDSCAPE :
-        window.Orientation.USER_ROTATION_LANDSCAPE_INVERTED;
+          window.Orientation.USER_ROTATION_LANDSCAPE_INVERTED;
         break;
       case display.Orientation.PORTRAIT_INVERTED:
         result = window.Orientation.USER_ROTATION_PORTRAIT_INVERTED;
         break;
       case display.Orientation.LANDSCAPE_INVERTED:
         result = (DeviceInfo.isTablet() && !PhotoConfig.isLibrary()) ?
-        window.Orientation.USER_ROTATION_LANDSCAPE_INVERTED : window.Orientation.USER_ROTATION_LANDSCAPE;
+          window.Orientation.USER_ROTATION_LANDSCAPE_INVERTED : window.Orientation.USER_ROTATION_LANDSCAPE;
         break;
       default:
         result = window.Orientation.AUTO_ROTATION_UNSPECIFIED;
@@ -2967,7 +3099,7 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
 
       let msg: Msg = {
         type: currentPhoto.mediaType == UserFileManagerAccess.MEDIA_TYPE_VIDEO ?
-        BigDataConstants.VIDEO : BigDataConstants.NORMAL_PHOTO,
+          BigDataConstants.VIDEO : BigDataConstants.NORMAL_PHOTO,
         duration: (currentTime - this.viewTime),
       }
       ReportToBigDataUtil.report(BigDataConstants.PHOTO_BROWSER_SLIDE_ID, msg);
@@ -3030,7 +3162,7 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
     if (isShowBar) {
       getScreen().setSystemUi(isShowBar);
     } else {
-      getScreen().setSystemUi(isShowBar, !isShowBar, true);
+      getScreen().setSystemUi(isShowBar, isShowBar, true);
     }
   }
 
@@ -3077,7 +3209,7 @@ export class BasePhotoBrowserController implements BrowserControlInterface {
       // }
     } else {
       WindowUtil.setPreferredOrientation(this.abilityContext,
-          DeviceInfo.isSmallFoldState() ? window.Orientation.PORTRAIT : window.Orientation.UNSPECIFIED);
+        DeviceInfo.isSmallFoldState() ? window.Orientation.PORTRAIT : window.Orientation.UNSPECIFIED);
       this.breakpointSystem.unregisterOrientationChange();
     }
   }

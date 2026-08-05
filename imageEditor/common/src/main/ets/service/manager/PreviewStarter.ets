@@ -25,6 +25,7 @@ import {
   HOT_SPOT_HEIGHT,
   HOT_SPOT_WIDTH,
   PC_MIN_CROP,
+  PC_PREVIEW_VERTICAL_OFFSET_VP,
   PC_TOP_BAR_HEIGHT,
   PHONE_MIN_CROP,
   TOP_BAR_HEIGHT
@@ -321,7 +322,8 @@ export class PreviewStarter {
     }, realScreenPortrait);
 
     this.timeline.operTop =
-      px2vp(previewRect.y) - (DeviceUtil.isPc() ? PC_TOP_BAR_HEIGHT : 0) // pc的xcomponent是不带topbar的
+      px2vp(previewRect.y) - (DeviceUtil.isPc() ? PC_TOP_BAR_HEIGHT : 0) + // pc的xcomponent是不带topbar的
+      (DeviceUtil.isPc() ? PC_PREVIEW_VERTICAL_OFFSET_VP : 0)
     this.timeline.operLeft = px2vp(previewRect.x);
     this.timeline.operLeft += UiUtil.getPreviewRectOffset();
     this.timeline.operWidth = px2vp(previewRect.width);
@@ -340,7 +342,8 @@ export class PreviewStarter {
     }, realScreenPortrait);
 
     let operTop: number =
-      px2vp(previewRect.y) - (DeviceUtil.isPc() ? PC_TOP_BAR_HEIGHT : 0) // pc的xcomponent是不带topbar的
+      px2vp(previewRect.y) - (DeviceUtil.isPc() ? PC_TOP_BAR_HEIGHT : 0) + // pc的xcomponent是不带topbar的
+      (DeviceUtil.isPc() ? PC_PREVIEW_VERTICAL_OFFSET_VP : 0)
     let operLeft: number = px2vp(previewRect.x);
     operLeft += UiUtil.getPreviewRectOffset();
     let operWidth: number = px2vp(previewRect.width);
@@ -368,7 +371,8 @@ export class PreviewStarter {
       .isPad() ? this.screenManager.getWinLayoutWidth() : this.previewOperationArea.width as number;
     let previewOperationAreaHeight = DeviceUtil.isPhone() || DeviceUtil
       .isPad() ? this.screenManager.getWinLayoutHeight() : this.previewOperationArea.height as number;
-    result.operTop = previewRect.y - (DeviceUtil.isPc() ? vp2px(PC_TOP_BAR_HEIGHT) : 0) // pc的xcomponent是不带topbar的
+    result.operTop = previewRect.y - (DeviceUtil.isPc() ? vp2px(PC_TOP_BAR_HEIGHT) : 0) + // pc的xcomponent是不带topbar的
+      (DeviceUtil.isPc() ? vp2px(PC_PREVIEW_VERTICAL_OFFSET_VP) : 0)
     result.operLeft = previewRect.x;
     result.operLeft += vp2px(UiUtil.getPreviewRectOffset());
     result.operWidth = previewRect.width;

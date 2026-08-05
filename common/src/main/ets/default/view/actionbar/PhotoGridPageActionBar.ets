@@ -382,9 +382,11 @@ export struct PhotoGridPageActionBar {
         menuList.push(this.selectedCount === 0 ? MOVIE_INVALID : MOVIE);
       }
       menuList.push(
+          Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
           Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
     } else {
       menuList.push(this.isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL,
+          Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
           Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
     }
   }
@@ -402,14 +404,17 @@ export struct PhotoGridPageActionBar {
       /* instrument ignore next */
       if (DeviceInfo.isVerdeFoldable()) {
         menuList.push(this.isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL,
+          Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
           Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID)
       } else {
         if (DeviceInfo.isSupportMovie()) {
           menuList.push(this.isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL,
+            Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
             (this.selectedCount === 0 ? CREATION_INVALID : CREATION),
-              Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
+            Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
         } else {
           menuList.push(this.isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL,
+              Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
               Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
         }
       }
@@ -709,9 +714,11 @@ export struct PhotoGridPageActionBar {
     /* instrument ignore next */
     if (DeviceInfo.isVerdeFoldable()) {
       menuList.push(this.isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL,
+        Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
         Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
     } else {
       menuList.push(this.isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL,
+        Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
         (this.selectedCount === 0 ? CREATION_INVALID : CREATION),
         Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
     }
@@ -724,7 +731,9 @@ export struct PhotoGridPageActionBar {
     if (this.isSelectedMode) {
       menuList.push(this.isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL);
     }
-    menuList.push(Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
+    menuList.push(
+      Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
+      Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
     return menuList;
   }
 
@@ -736,6 +745,9 @@ export struct PhotoGridPageActionBar {
           Log.info(TAG, 'albumInfo is null');
         }
         menuList.push(this.isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL);
+      }
+      if (!this.albumInfo?.isTrashAlbum) {
+        menuList.push(Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID);
       }
       actionBarProp
         .setLeftAction(Action.CANCEL)

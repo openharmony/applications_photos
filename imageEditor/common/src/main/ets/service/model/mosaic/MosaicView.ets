@@ -39,6 +39,8 @@ import { BroadCastManager } from '@ohos/common/src/main/ets/default/model/common
 import { BroadCast } from '@ohos/common/src/main/ets/default/utils/BroadCast';
 import { AccessibilityManager } from '../../../common/util/AccessibilityManager';
 import { UiUtil } from '../../../common/util/UiUtil';
+import { ComposeUtil } from '../../../common/util/ComposeUtil';
+import { PixelMapUtil } from '../../../common/util/PixelMapUtil';
 
 const TAG = 'MosaicView';
 
@@ -61,6 +63,7 @@ export struct MosaicView {
   @State rotateScale: number = 1;
   @State imageReady: boolean = false;
   @State mosaicReady: boolean = false;
+  @State transitionPixelMap: PixelMap | undefined = undefined;
   @StorageLink('isAccessibilityMode') isAccessibilityMode: boolean = AccessibilityManager.getInstance()
     .getIsAccessibilityMode();
   @StorageLink(CURRENT_LANGUAGE) @Watch('refreshWinSize') currentLanguage: string | undefined = undefined;
@@ -94,6 +97,7 @@ export struct MosaicView {
   aboutToAppear() {
     this.controller.initPatterns();
     this.gestureInit();
+    this.clearTransitionPixelMap();
     this.mosaicAttr.gestureController = this.gestureController;
     this.mosaicAttr.paintController = this.paintController;
     HiLog.i(TAG, 'MosaicView aboutToAppear');
@@ -166,6 +170,7 @@ export struct MosaicView {
     this.mosaicAttr.paintController = undefined;
     this.mosaicAttr.gestureController = undefined;
     this.status.isPreviewHidden = false;
+    this.clearTransitionPixelMap();
     this.controller.clear();
     HiLog.i(TAG, 'aboutToDisappear isPreviewHidden = false');
   }
@@ -185,6 +190,7 @@ export struct MosaicView {
     this.appBroadCast.on('LeaveMosaicView', this.onLeaveView);
     this.appBroadCast.on('EnterAiEditor', this.onEnterAiEditor);
     this.appBroadCast.on('LeaveAiEditor', this.onLeaveAiEditor);
+    this.mosaicAttr.listener.on('onMosaicViewChange', this.onMosaicViewTabChange);
     this.mosaicAttr.listener.on('beforeLeaveMosaicView', this.beforeLeave);
     this.mosaicAttr.listener.on('beforeEnterStylus', this.beforeEnterStylus);
     this.mosaicAttr.listener.on('beforeEnterAi', this.beforeEnterStylus);
@@ -196,12 +202,23 @@ export struct MosaicView {
     this.appBroadCast.off('EnterAiEditor', this.onEnterAiEditor);
     this.appBroadCast.off('LeaveAiEditor', this.onLeaveAiEditor);
     this.appBroadCast.off('LeaveMosaicView', this.onLeaveView);
+    this.mosaicAttr.listener.off('onMosaicViewChange', this.onMosaicViewTabChange);
     this.mosaicAttr.listener.off('hideImage', this.onEnterStylus);
-    this.mosaicAttr.listener.off('showImage', this.onEnterStylus);
+    this.mosaicAttr.listener.off('showImage', this.onLeaveStylus);
     this.mosaicAttr.listener.off('beforeEnterStylus', this.beforeEnterStylus);
     this.mosaicAttr.listener.off('beforeEnterAi', this.beforeEnterStylus);
     this.mosaicAttr.listener.off('updateBaseImage', this.updateBaseImage);
     this.mosaicAttr.listener.off('beforeLeaveMosaicView', this.beforeLeave);
+  };
+
+
+  onMosaicViewTabChange = (display: boolean) => {
+    if (!display) {
+      return;
+    }
+    this.status.isPreviewHidden = true;
+    this.gestureController.init();
+    this.gestureController.resetParam();
   };
   onEnterAiEditor = () => {
     this.onEnterStylus();
@@ -284,10 +301,12 @@ export struct MosaicView {
     HiLog.i(TAG, 'onLeaveMosaicView');
     this.mosaicAttr.changeView(false);
     this.status.isPreviewHidden = false;
+    this.clearTransitionPixelMap();
     HiLog.i(TAG, 'isPreviewHidden = false');
     clearTimeout(this.hideXcTimer);
   };
   beforeLeave = (index: TabName) => {
+    this.cacheTransitionPixelMap();
     this.gestureController.close();
     this.mosaicAttr.leaveAnimPromise = new Promise<void>((resolve) => {
       animateTo({
@@ -361,16 +380,62 @@ export struct MosaicView {
     this.preventRightEvent();
   }
 
+  private isInMosaicTab(): boolean {
+    return this.editor.tabIndex === TabName.TabMosaic;
+  }
+
+  private shouldShowOverlay(): boolean {
+    // 马赛克 tab 内，或“只有马赛克修改、还没有文字修改”时展示画布
+    // 裁剪页（含比例子页）应始终使用裁剪链路显示，避免马赛克画布残留
+    return this.isInMosaicTab() || (this.editor.tabIndex !== TabName.TabCrop &&
+      this.editor.mosaicModified && !this.editor.textEditModified);
+  }
+
+  private shouldShowBaseImage(): boolean {
+    return this.isInMosaicTab() || this.editor.isSaveVideoDialog ||
+      (this.editor.tabIndex !== TabName.TabCrop &&
+        this.status.isPreviewHidden && this.transitionPixelMap !== undefined);
+  }
+
+  private getBaseImageSource(): PixelMap | undefined {
+    if (this.isInMosaicTab() || this.editor.isSaveVideoDialog) {
+      return this.asset.exportPixelMap;
+    }
+    return this.transitionPixelMap;
+  }
+
+  private cacheTransitionPixelMap(): void {
+    if (this.transitionPixelMap || !this.asset.exportPixelMap) {
+      return;
+    }
+    try {
+      const clonedPm = ComposeUtil.clonePixelMap(this.asset.exportPixelMap);
+      PixelMapUtil.setMemoryNameSync(clonedPm, 'MosaicTransitionPixelMap');
+      this.transitionPixelMap = clonedPm;
+    } catch (e) {
+      HiLog.e(TAG, `cacheTransitionPixelMap failed: ${e?.code} ${e?.message}`);
+    }
+  }
+
+  private clearTransitionPixelMap(): void {
+    this.transitionPixelMap?.release();
+    this.transitionPixelMap = undefined;
+  }
+
   @Builder
   buildMosicPage() {
     Column() {
-      this.prevent();
+      if (this.isInMosaicTab()) {
+        this.prevent();
+      }
       Stack() {
-        Image(this.asset.exportPixelMap)
+        Image(this.getBaseImageSource())
           .objectFit(ImageFit.Contain)
           .syncLoad(true)
           .draggable(false)
-          .visibility(this.mosaicVisible && this.imageViewWidth ? Visibility.Visible : Visibility.Hidden);
+          .visibility((this.shouldShowBaseImage() &&
+            this.mosaicVisible && this.imageViewWidth) ? Visibility.Visible :
+            Visibility.Hidden);
 
         Canvas(this.context)
           .id('mosaic_canvas')
@@ -379,7 +444,8 @@ export struct MosaicView {
           .height(this.imageViewHeight)
           .backgroundColor('#00000000')
           .visibility(this.mosaicAttr.isComparing ? Visibility.Hidden : Visibility.Visible)
-          .onTouch(this.handleTouchEvent);
+          .hitTestBehavior(this.isInMosaicTab() ? HitTestMode.Default : HitTestMode.None)
+          .onTouch(this.isInMosaicTab() ? this.handleTouchEvent : undefined);
       }
       .transform(this.matrix)
       .width(this.imageViewWidth * this.rotateScale)
@@ -396,7 +462,8 @@ export struct MosaicView {
       x: this.operationRect.x,
       y: this.operationRect.y,
     })
-    .visibility(this.mosaicVisible ? Visibility.Visible : Visibility.None)
+    .visibility((this.shouldShowOverlay() && this.mosaicVisible) ? Visibility.Visible : Visibility.None)
+    .hitTestBehavior(this.isInMosaicTab() ? HitTestMode.Default : HitTestMode.None)
     .gesture(GestureGroup(GestureMode.Parallel,
       PinchGesture({ fingers: 2, distance: 0.01 })
         .onActionStart(this.gestureController.pinchStartHandle)
@@ -535,10 +602,10 @@ export struct MosaicView {
     cropRect.x += mirrorOffsetx;
     this.operationRect =
       new RectValue(
-        px2vp(cropRect.x) - HOT_SPOT_WIDTH,
-        px2vp(cropRect.y) - HOT_SPOT_HEIGHT,
-        px2vp(cropRect.width) + HOT_SPOT_WIDTH * 2,
-        px2vp(cropRect.height) + HOT_SPOT_HEIGHT * 2
+        px2vp(cropRect.x),
+        px2vp(cropRect.y),
+        px2vp(cropRect.width),
+        px2vp(cropRect.height)
       );
     return cropRect;
   };

@@ -372,8 +372,16 @@ void HmcExportEngine::UpdateTransformEffect(HmcRenderEffectPtr &transform,
     transform->SetParam(PROJECT_KEY_TRANSFORM_CROP_OFFSET_Y, 0.0);
     transform->SetParam(PROJECT_KEY_TRANSFORM_CROP_SCALE_X, 1.0);
     transform->SetParam(PROJECT_KEY_TRANSFORM_CROP_SCALE_Y, 1.0);
-    transform->SetParam(PROJECT_KEY_TRANSFORM_CROP_ROTATION, 0.0);
-    transform->SetParam(PROJECT_KEY_TRANSFORM_CROP_ENABLE, 0.0);
+    // IMPORTANT:
+    // Do not clear cropRotate/cropEnable during export/save, otherwise 90deg rotate
+    // (implemented via transform/crop geometry) will not appear in the final saved image.
+    // Keep current effect params as-is.
+    double cropRotation = 0.0;
+    double cropEnable = 0.0;
+    transform->GetParam(PROJECT_KEY_TRANSFORM_CROP_ROTATION, cropRotation);
+    transform->GetParam(PROJECT_KEY_TRANSFORM_CROP_ENABLE, cropEnable);
+    transform->SetParam(PROJECT_KEY_TRANSFORM_CROP_ROTATION, cropRotation);
+    transform->SetParam(PROJECT_KEY_TRANSFORM_CROP_ENABLE, cropEnable);
 }
 
 void HmcExportEngine::CancelInner()

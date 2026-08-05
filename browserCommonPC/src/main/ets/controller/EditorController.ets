@@ -143,6 +143,15 @@ export class EditorController extends BaseEditorController {
       Log.warn(TAG, 'showEditor ignored, in switching animation');
       return;
     }
+    const editorContext: EditorPhotoContext = EditorPhotoContext.getInstance();
+    if (this.isEditorShown || this.isImageEditorShown || editorContext.getEditorStage() === EditorContextStage.SHOWN) {
+      // 卡片/外部入口重复触发时，避免重复创建/重复动效导致闪退
+      Log.warn(TAG,
+        `showEditor ignored, editor already shown. current=${this.shownItem?.uri ?? ''}, incoming=${item?.uri ?? ''}`);
+      this.setPcShowingEditor(true);
+      LocalStorage.getShared()?.setOrCreate<boolean>('isEditorShown', true);
+      return;
+    }
     reportEmpty(item);
     if (!item) {
       Log.error(TAG, 'showEditor failed, current photo is null');
@@ -154,7 +163,7 @@ export class EditorController extends BaseEditorController {
     const effectMode: number = Number(item.data?.get(photoAccessHelper.PhotoKeys.MOVING_PHOTO_EFFECT_MODE));
     this.isLivePhoto = item.data?.get(SUBTYPE) === photoAccessHelper.PhotoSubtype.MOVING_PHOTO ||
       effectMode === photoAccessHelper.MovingPhotoEffectMode.IMAGE_ONLY;
-    EditorPhotoContext.getInstance()
+    editorContext
       .setEditorStage(EditorContextStage.SHOWN)
       .setEditorUriOnEnter(item.uri)
       .setEditorType(isVideo ? EditType.VIDEO : (this.isLivePhoto ? EditType.MOVING_PHOTO : EditType.IMAGE));

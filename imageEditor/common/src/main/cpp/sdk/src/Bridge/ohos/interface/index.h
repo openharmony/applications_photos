@@ -356,6 +356,7 @@ struct Asset {
     static int Translate(int timelineId, std::string const &assetId, double offsetX, double offsetY,
                          int screenOperationType);
     static void Scale(int timelineId, std::string const &assetId, double scale, double centerX, double centerY);
+    static void SetIsDragImage(int timelineId, std::string const &assetId, bool value);
     static void CalculateCropSize(int timelineId, std::string const &assetId,
                                   std::function<void(int width, int height)> cb);
     static float GetPreviewMaxScale(int timelineId, std::string const &assetId);

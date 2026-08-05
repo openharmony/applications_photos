@@ -740,6 +740,8 @@ export struct ActionBar {
               })
           }
           .flexGrow(DEFAULT_FLEX_GROW)
+          .flexShrink(1)
+          .constraintSize({ maxWidth: '100%' })
           .opacity(this.detailTitleOpacity)
 
           DetailMenuPanel({
@@ -843,6 +845,7 @@ export struct ActionBar {
     })
     .zIndex(DEFAULT_ACTION_BAR_Z_INDEX)
     .backgroundColor(Color.Transparent)
+    .padding({left:DeviceInfo.isTv()?0:this.getMarginLeft(),right:DeviceInfo.isTv()?0:this.getMarginRight()})
     // .margin({
     //   left: DeviceInfo.isTv() ? 0 : this.getMarginLeft(),
     //   // right: DeviceInfo.isTv() ? 0 : this.getMarginRight(),

@@ -141,7 +141,7 @@ export struct VideoTool {
   }
 
   isShowCompareButton() {
-    return this.editor.tabIndex != TabName.TabCrop;
+    return this.editor.tabIndex != TabName.TabCrop && this.editor.tabIndex != TabName.TabAdjust;
   }
 
   build() {

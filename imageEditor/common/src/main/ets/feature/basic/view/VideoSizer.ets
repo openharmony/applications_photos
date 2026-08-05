@@ -31,6 +31,7 @@ import {
 } from '../../../common/util/ApsUtil';
 
 const  TAG: string = 'VideoSizer';
+const GESTURE_FLUSH_INTERVAL_MS: number = 16;
 
 @Component
 export struct VideoSizer {
@@ -44,8 +45,17 @@ export struct VideoSizer {
   @StorageProp(SCREEN_ORIENTATION_PORTRAIT) isScreenPortrait: boolean = ScreenManager.getInstance().isScreenPortrait();
   // 是否需要直接显示个性风格调色盘, 由演示APP拉起图库跳转编辑的场景会被置成true, 正常从大图进编辑时值为false
   @StorageLink('is_entry_XTStyle') showXTStyleDirectly: boolean = false;
+  private gestureFlushTimer: number = -1;
+  private pendingPanX: number = 0;
+  private pendingPanY: number = 0;
+  private pendingScaleRatio: number = 1;
+  private pendingScaleCenterX: number = 0;
+  private pendingScaleCenterY: number = 0;
+  private isDragImageEnabled: boolean = false;
 
   aboutToDisappear(): void {
+    this.resetGestureBuffer();
+    this.setDragImageState(false);
     HiLog.i(TAG, 'aboutToDisappear, close setApsSceneState begin.');
     ApsUtil.setApsSceneState(PHOTO_BUNDLE_NAME, PHOTO_IN_EDIT_CROP, APS_SCENE_STATE_OFF);
     HiLog.i(TAG, 'aboutToDisappear, close setApsSceneState end.');
@@ -79,42 +89,117 @@ export struct VideoSizer {
     .enabled(!this.editor.isInTextArea && !this.editor.apertureMode)
   }
 
-  panGestureMove = (movex: number, movey: number): void => {
+  private enterRealtimeOperationState(showSplitLine: boolean = true): void {
     this.clearTimeout();
-    this.editor.asset.crops().isEnableBlur = false;
-    if (this.editor.tabIndex === TabName.TabCrop) {
-      this.editor.asset.crops().animateShowSplitLine(true); // 显示九宫格
+    this.setDragImageState(true);
+    const crops = this.editor.asset.crops();
+    if (crops.isEnableBlur) {
+      crops.isEnableBlur = false;
     }
-    this.editor.asset.translate(vp2px(movex), vp2px(movey));
-    this.editor.timeline.timeProgressImmersiveMode = true;
-    this.editor.operationTip.immersiveMode = true;
+    if (showSplitLine && this.editor.tabIndex === TabName.TabCrop) {
+      crops.animateShowSplitLine(true);
+    }
+    if (!this.editor.timeline.timeProgressImmersiveMode) {
+      this.editor.timeline.timeProgressImmersiveMode = true;
+    }
+    if (!this.editor.operationTip.immersiveMode) {
+      this.editor.operationTip.immersiveMode = true;
+    }
+  }
+
+  private setDragImageState(enabled: boolean): void {
+    if (this.isDragImageEnabled === enabled) {
+      return;
+    }
+    this.isDragImageEnabled = enabled;
+    this.editor.asset.setIsDragImage(enabled);
+  }
+
+  private hasPendingGestureOperation(): boolean {
+    return this.pendingPanX !== 0 || this.pendingPanY !== 0 || this.pendingScaleRatio !== 1;
+  }
+
+  private scheduleGestureFlush(): void {
+    if (this.gestureFlushTimer !== -1) {
+      return;
+    }
+    this.gestureFlushTimer = setTimeout((): void => {
+      this.gestureFlushTimer = -1;
+      this.flushGestureOperations();
+      if (this.hasPendingGestureOperation()) {
+        this.scheduleGestureFlush();
+      }
+    }, GESTURE_FLUSH_INTERVAL_MS);
+  }
+
+  private flushGestureOperations(): void {
+    if (this.pendingPanX !== 0 || this.pendingPanY !== 0) {
+      this.editor.asset.translate(vp2px(this.pendingPanX), vp2px(this.pendingPanY));
+      this.pendingPanX = 0;
+      this.pendingPanY = 0;
+    }
+    if (this.pendingScaleRatio !== 1) {
+      this.editor.asset.scale(this.pendingScaleRatio, vp2px(this.pendingScaleCenterX), vp2px(this.pendingScaleCenterY));
+      this.pendingScaleRatio = 1;
+    }
+  }
+
+  private resetGestureBuffer(): void {
+    if (this.gestureFlushTimer !== -1) {
+      clearTimeout(this.gestureFlushTimer);
+      this.gestureFlushTimer = -1;
+    }
+    this.pendingPanX = 0;
+    this.pendingPanY = 0;
+    this.pendingScaleRatio = 1;
+    this.pendingScaleCenterX = 0;
+    this.pendingScaleCenterY = 0;
+  }
+
+  panGestureMove = (movex: number, movey: number): void => {
+    this.enterRealtimeOperationState();
+    this.pendingPanX += movex;
+    this.pendingPanY += movey;
+    this.scheduleGestureFlush();
     this.editor.isImageMove = true;
   }
   pinchGestureScale = (ratio: number, centerx: number, centery: number): void => {
-    this.clearTimeout();
-    this.editor.asset.crops().isEnableBlur = false;
-    if (this.editor.tabIndex === TabName.TabCrop) {
-      this.editor.asset.crops().animateShowSplitLine(true); // 显示九宫格
+    this.enterRealtimeOperationState();
+    if (ratio !== 1) {
+      this.pendingScaleRatio *= ratio;
+      this.pendingScaleCenterX = centerx;
+      this.pendingScaleCenterY = centery;
+      this.scheduleGestureFlush();
     }
-    this.editor.asset.scale(ratio, vp2px(centerx), vp2px(centery));
-    this.editor.timeline.timeProgressImmersiveMode = true;
-    this.editor.operationTip.immersiveMode = true;
     this.editor.isImageMove = true;
   }
   gestureEnd = (): void => {
+    this.flushGestureOperations();
+    this.resetGestureBuffer();
+    this.setDragImageState(false);
     this.clearTimeout();
     this.editor.interrupt = true;
     this.editor.tabIndex == TabName.TabCrop && this.editor.stopEditorOperate();
     this.editor.imageMove = setTimeout((): void => {
       this.editor.isImageMove = false;
     }, ANIMATION_DURATION)
-    this.editor.timeline.timeProgressImmersiveMode = false;
-    this.editor.operationTip.immersiveMode = false;
-    this.editor.timeBlur = setTimeout((): void => {
-      this.editor.tabIndex == TabName.TabCrop && (this.editor.asset.crops().isEnableBlur = true);
-      this.editor.interrupt = false;
+    if (this.editor.timeline.timeProgressImmersiveMode) {
       this.editor.timeline.timeProgressImmersiveMode = false;
+    }
+    if (this.editor.operationTip.immersiveMode) {
       this.editor.operationTip.immersiveMode = false;
+    }
+    this.editor.timeBlur = setTimeout((): void => {
+      this.editor.tabIndex == TabName.TabCrop &&
+      !this.editor.asset.crops().isEnableBlur &&
+      (this.editor.asset.crops().isEnableBlur = true);
+      this.editor.interrupt = false;
+      if (this.editor.timeline.timeProgressImmersiveMode) {
+        this.editor.timeline.timeProgressImmersiveMode = false;
+      }
+      if (this.editor.operationTip.immersiveMode) {
+        this.editor.operationTip.immersiveMode = false;
+      }
       this.editor.asset.crops().animateShowSplitLine(false);
     }, 1300);
 
@@ -133,13 +218,10 @@ export struct VideoSizer {
   sizing = (l: number, t: number, r: number, b: number,
     directionLeft: number, directionTop: number, directionRight: number, directionBottom: number,
     pressure: number): boolean => {
+    this.flushGestureOperations();
+    this.resetGestureBuffer();
     this.crop.isDragCrop = true;
-    this.editor.asset.crops().isEnableBlur = false;
-    this.editor.timeline.timeProgressImmersiveMode = true;
-    this.editor.operationTip.immersiveMode = true;
-    this.editor.asset.crops().animateShowSplitLine(true);
-    clearTimeout(this.editor.timeBlur);
-    clearTimeout(this.editor.timeStartZoom);
+    this.enterRealtimeOperationState();
     // 裁剪单边拖动可移动边设置
     if (this.editor.asset.crops()
       .clipRatio > 0 && (directionLeft + directionTop + directionRight + directionBottom) === 1) {
@@ -160,13 +242,22 @@ export struct VideoSizer {
     return false;
   }
   sizeEnd = (l: number, t: number, r: number, b: number): void => {
+    this.flushGestureOperations();
+    this.resetGestureBuffer();
+    this.setDragImageState(false);
     clearTimeout(this.editor.timeBlur);
     clearTimeout(this.editor.timeStartZoom);
     this.editor.interrupt = true;
     this.editor.timeBlur = setTimeout((): void => {
-      this.editor.tabIndex == TabName.TabCrop && (this.editor.asset.crops().isEnableBlur = true);
-      this.editor.timeline.timeProgressImmersiveMode = false;
-      this.editor.operationTip.immersiveMode = false;
+      this.editor.tabIndex == TabName.TabCrop &&
+      !this.editor.asset.crops().isEnableBlur &&
+      (this.editor.asset.crops().isEnableBlur = true);
+      if (this.editor.timeline.timeProgressImmersiveMode) {
+        this.editor.timeline.timeProgressImmersiveMode = false;
+      }
+      if (this.editor.operationTip.immersiveMode) {
+        this.editor.operationTip.immersiveMode = false;
+      }
     }, 1300); // 裁剪恢复后再开高斯模糊，时间轴等显示 == 恢复速度很快，暂定300ms
     //  裁剪结束后等待恢复时长 500ms
     this.editor.timeStartZoom = setTimeout((): void => {

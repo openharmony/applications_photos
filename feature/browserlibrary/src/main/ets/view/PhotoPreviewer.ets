@@ -55,6 +55,7 @@ import lazy {
 } from '@ohos/browsercommon/src/main/ets/default/viewModel/statemachine/PhotoBrowserStateMachine';
 import lazy { AnchorDirection, SCROLL_ANIMATION_DURATION } from './SwiperView';
 import lazy { ImageFlushItem } from '@ohos/browsercommon/src/main/ets/default/view/ImageFlushItem';
+import lazy { BrowserCaller } from '../model/ShowBrowserParam';
 
 /* instrument ignore file  */
 const TAG: string = 'browser_PhotoPreviewer';
@@ -75,7 +76,8 @@ export struct PhotoPreviewer {
   @ObjectLink browserController: BasePhotoBrowserController;
   @ObjectLink stateMachine: PhotoBrowserStateMachine;
   @Link viewModel: SwiperVM;
-  @ObjectLink curItem: MediaItem;
+  /** MediaItem 非 @Observed，首帧换实例时用 @Prop 避免状态管理异常。 */
+  @Prop curItem: MediaItem = new MediaItem();
   @Link broadCast: BroadCast
   @Link timeCapsuleRawTime: number;
   @Link isFrameExpand: boolean;
@@ -212,7 +214,7 @@ export struct PhotoPreviewer {
 
   aboutToAppear(): void {
     this.viewModel.registerPreviewStateListener(this.swiperStateListener);
-    this.appBroadCast.emit(BroadCastConstants.GET_VIDEO_FRAME_FOR_PREVIEW + this.curItem.uniqueId, []);
+    // this.appBroadCast.emit(BroadCastConstants.GET_VIDEO_FRAME_FOR_PREVIEW + this.curItem.uniqueId, []);
   }
 
   private getPreviewProgressHeight(): number {
@@ -227,17 +229,17 @@ export struct PhotoPreviewer {
 
   private getPreviewProgressBorderColor(): ResourceColor | EdgeColors | LocalizedEdgeColors {
     return DeviceInfo.isTv() ? Constants.TV_PREVIEW_PROGRESS_BORDER_COLOR :
-    Constants.PREVIEW_PROGRESS_BORDER_COLOR;
+      Constants.PREVIEW_PROGRESS_BORDER_COLOR;
   }
 
   private getPreviewProgressBorderWidth(): Length | EdgeWidths | LocalizedEdgeWidths {
     return DeviceInfo.isTv() ? Constants.TV_PREVIEW_PROGRESS_BORDER_WIDTH :
-    Constants.PREVIEW_PROGRESS_BORDER_WIDTH;
+      Constants.PREVIEW_PROGRESS_BORDER_WIDTH;
   }
 
   private getPreviewProgressBorderRadius(): Length | BorderRadiuses | LocalizedBorderRadiuses {
     return DeviceInfo.isTv() ? Constants.TV_PREVIEW_PROGRESS_BORDER_RADIUS :
-    Constants.PREVIEW_PROGRESS_BORDER_RADIUS;
+      Constants.PREVIEW_PROGRESS_BORDER_RADIUS;
   }
 
   private handleKeyEvent(event: KeyEvent): void {
@@ -273,13 +275,13 @@ export struct PhotoPreviewer {
     if (this.seekTime <= 0) {
       hasSeek = true;
     }
-    this.seekTime = Math.floor(this.curItem.duration * offset / width);
-    this.seekTime = this.seekTime < 0 ? 0 : this.seekTime > this.curItem.duration ? this.curItem.duration :
-    this.seekTime;
+    this.seekTime = Math.floor(this.viewModel.getCapsuleTotalDurationMs() * offset / width);
+    this.seekTime = this.seekTime < 0 ? 0 : this.seekTime > this.viewModel.getCapsuleTotalDurationMs() ? this.viewModel.getCapsuleTotalDurationMs() :
+      this.seekTime;
     try {
       this.viewModel.setTimeCapsuleRawTime(this.seekTime);
       this.viewModel.setProgressRawTime(this.seekTime);
-      let offsetTime = this.curItem.duration - this.seekTime;
+      let offsetTime = this.viewModel.getCapsuleTotalDurationMs() - this.seekTime;
       if (offsetTime > Constants.SEEK_ALLOWABLE_OFFSET_TIME ||
         this.videoPlayController?.getAvPlayerState() !== AvplayerStatus.COMPLETED) {
         this.videoPlayController?.updateSeekRawTime(this.seekTime);
@@ -288,7 +290,7 @@ export struct PhotoPreviewer {
         return;
       }
       Log.info(TAG, `${BrowserConstants.TAG_VIDEO_PLAY_BY_FRAME} slideVideoFrameBarMove, \
-      width: ${width}, duration: ${this.curItem.duration}  offset: ${offset} seek to time : ${this.seekTime}, \
+      width: ${width}, duration: ${this.viewModel.getCapsuleTotalDurationMs()}  offset: ${offset} seek to time : ${this.seekTime}, \
       isCloud: ${this.curItem.getPosition?.() === photoAccessHelper.PositionType.CLOUD} \
       getAvPlayerState:${this.videoPlayController?.getAvPlayerState()}`);
       if (this.isCloudOrSeekUnSupported()) {
@@ -321,13 +323,13 @@ export struct PhotoPreviewer {
     let width = this.viewModel.frameNum * this.selectedSmallImgWidth - Constants.PREVIEW_PROGRESS_WIDTH;
     // 是否超出滑动有效范围
     offset = offset < 0 ? 0 : offset > width ? width : offset;
-    let endTime: number = Math.floor(this.curItem.duration * offset / width);
+    let endTime: number = Math.floor(this.viewModel.getCapsuleTotalDurationMs() * offset / width);
     this.expectedProgressRawTime = endTime;
     this.waitingForTimeSync = true;
     // 松手后重新play
-    let offsetTime = this.curItem.duration - this.viewModel.progressRawTime;
+    let offsetTime = this.viewModel.getCapsuleTotalDurationMs() - this.viewModel.progressRawTime;
     Log.info(TAG, `${BrowserConstants.TAG_VIDEO_PLAY_BY_FRAME} slideVideoFrameBarEnd play endTime: ${endTime}\
-     viewModel.progressRawTime: ${this.viewModel.progressRawTime} curItem.duration: ${this.curItem.duration} ,offsetTime: ${offsetTime},\
+     viewModel.progressRawTime: ${this.viewModel.progressRawTime} curItem.duration: ${this.viewModel.getCapsuleTotalDurationMs()} ,offsetTime: ${offsetTime},\
      isTouchUpPlaying: ${this.isTouchUpPlaying} isVideoPlayBeforeSlide: ${this.isVideoPlayBeforeSlide},\
      getAvPlayerState: ${this.videoPlayController?.getAvPlayerState()}`);
     let isVideoPlayCompleted: boolean =
@@ -335,7 +337,7 @@ export struct PhotoPreviewer {
         this.videoPlayController?.getAvPlayerState() !== AvplayerStatus.COMPLETED;
     if (isVideoPlayCompleted && !this.isTouchUpPlaying &&
       this.curItem.getPosition?.() !== photoAccessHelper.PositionType.CLOUD &&
-      this.videoPlayController?.isSeekContinueSupported()) {
+    this.videoPlayController?.isSeekContinueSupported()) {
       this.videoPlayController?.setLastReportTime(this.seekTime);
       this.videoPlayController?.play();
       this.isVideoPlaying = false;
@@ -352,7 +354,7 @@ export struct PhotoPreviewer {
       'type': BigDataConstants.VIDEO_SLIDE_BY_FRAME_END,
       'startSeek': this.viewModel.progressRawTime,
       'endSeek': endTime,
-      'duration': this.curItem.duration,
+      'duration': this.viewModel.getCapsuleTotalDurationMs(),
       'netType': this.videoPlayController?.getVideoPlayer()?.netQuality?.netType() ?? -1,
     };
     ReportToBigDataUtil.report(BigDataConstants.VIDEO_SLIDE_BY_FRAME, msg);
@@ -417,7 +419,7 @@ export struct PhotoPreviewer {
           'url': ReportToBigDataUtil.urlAnonymize(this.curItem?.uri),
           'type': BigDataConstants.VIDEO_SLIDE_BY_FRAME_START,
           'startSeek': this.viewModel.progressRawTime,
-          'duration': this.curItem.duration
+          'duration': this.viewModel.getCapsuleTotalDurationMs()
         };
         ReportToBigDataUtil.report(BigDataConstants.VIDEO_SLIDE_BY_FRAME, msg);
         this.videoPlayController?.updateFingerSlide(true);
@@ -443,6 +445,17 @@ export struct PhotoPreviewer {
   /**
    * 预览条：手势响应事件是否存在
    */
+  private shouldKeepPreviewVisibleForThirdVideo(): boolean {
+    return this.browserController.pageFrom === BrowserCaller.VIEWDATA_PAGE &&
+    this.browserController.isFromViewDataWithThirdUri &&
+      this.curItem.mediaType === UserFileManagerAccess.MEDIA_TYPE_VIDEO &&
+      !this.isEditorShown;
+  }
+
+  private isPreviewBarVisible(): boolean {
+    return this.viewModel.isSlideBarVisibility() || this.shouldKeepPreviewVisibleForThirdVideo();
+  }
+
   private isExistGestureEvent(event: GestureEvent): boolean {
     if (!event) {
       Log.warn(TAG, 'gesture event does not exist');
@@ -525,11 +538,11 @@ export struct PhotoPreviewer {
             Row() {
               Text(
                 `${this.viewModel.convertTimeToSecond(this.timeCapsuleRawTime)} | ${
-                this.viewModel.convertTimeToSecond(this.curItem.duration, true)}`)
+                this.viewModel.convertTimeToSecond(this.viewModel.getCapsuleTotalDurationMs(), true)}`)
                 .fontSize(AvPlayConstants.TIME_CAPSULE_FONT_SIZE)
                 .fontWeight(FontWeight.Regular)
                 .fontColor(this.currentMode === ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT ?
-                Color.Black : Color.White)
+                  Color.Black : Color.White)
                 .lineHeight(Constants.TIME_CAPSULE_LINE_HEIGHT)
                 .fontFamily('HarmonyHeiTi')
                 .textAlign(TextAlign.Center)
@@ -551,7 +564,7 @@ export struct PhotoPreviewer {
             .shadow(ShadowStyle.OUTER_DEFAULT_XS)
           }
           .margin({ bottom: AvPlayConstants.TIME_CAPSULE_MARGIN_BOTTOM })
-          .visibility(this.viewModel.isSlideBarVisibility() && this.stateReported &&
+          .visibility(this.isPreviewBarVisible() && this.stateReported &&
             (this.stateReported === AvplayerStatus.PAUSED ||
               this.stateReported === AvplayerStatus.PLAYING) ?
             Visibility.Visible : Visibility.Hidden)
@@ -586,7 +599,8 @@ export struct PhotoPreviewer {
         .scale({ y: this.widthScale })
         .color($r('sys.color.comp_divider'))
         .opacity(this.isRunningAnimation ? this.dividerOpacity : this.geometryOpacity)
-        .visibility(this.viewModel.isSlideBarVisibility() ? Visibility.Visible : Visibility.Hidden)
+        .visibility(this.isPreviewBarVisible() ?
+          Visibility.Visible : Visibility.Hidden)
         .renderFit(RenderFit.CENTER)
 
       Stack({ alignContent: Alignment.Top }) {
@@ -680,7 +694,7 @@ export struct PhotoPreviewer {
             }
           }
           if (event.type === TouchType.Up) {
-            let offsetTime = this.curItem.duration - this.viewModel.progressRawTime;
+            let offsetTime = this.viewModel.getCapsuleTotalDurationMs() - this.viewModel.progressRawTime;
             Log.info(TAG, `ontouch Up ${this.curItem.getPosition?.()} offsetTime: ${offsetTime}\
              isFrameExpand: ${this.isFrameExpand},CLOUD: ${photoAccessHelper.PositionType.CLOUD}`);
             if (this.isFrameExpand && this.curItem.getPosition?.() !== photoAccessHelper.PositionType.CLOUD &&
@@ -923,7 +937,7 @@ export struct PhotoPreviewer {
       .opacity(DeviceInfo.isTv() ? undefined : (this.viewModel.isPullDownStart ?
         this.geometryOpacity : this.opacityValue))
       .visibility(DeviceInfo.isTv() ? undefined :
-        (this.viewModel.isSlideBarVisibility() ? Visibility.Visible : Visibility.Hidden))
+        (this.isPreviewBarVisible() ? Visibility.Visible : Visibility.Hidden))
       .width(Constants.FULL_PERCENT)
       .height(DeviceInfo.isTv() ? Constants.FULL_PERCENT : undefined)
       .transition(this.viewModel.makePreviewBarTransition())
@@ -941,6 +955,6 @@ export struct PhotoPreviewer {
     .id(TAG)
     .height(DeviceInfo.isTv() ? $r('app.float.tv_swiper_list_height') : undefined)
     .attributeModifier(this.viewModel.listColumnModifier)
-    .visibility(this.viewModel.isSlideBarVisibility() ? Visibility.Visible : Visibility.Hidden)
+    .visibility(this.isPreviewBarVisible() ? Visibility.Visible : Visibility.Hidden)
   }
 }

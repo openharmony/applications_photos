@@ -226,6 +226,9 @@ export struct EditorMain {
   }
 
   private onBackGroundChange(): void {
+    if (this.onBackGround) {
+      return;
+    }
     if (this.editor.tabIndex != TabName.TabSeal) {
       App.getInstance().myEditor().previewStarter.updatePreview();
     }
@@ -309,11 +312,11 @@ export struct EditorMain {
       },
       customStyle: false,
       autoCancel: false,
-      alignment: backSureDialogTopRight? DialogAlignment.TopEnd : (isFollow ?
-        DialogAlignment.TopStart : DialogAlignment.Center),
+      // 返回确认弹窗固定居中展示，避免受跟随模式状态影响出现在左上角
+      alignment: DialogAlignment.Center,
       offset: {
-        dy: isFollow ? topHeight : 0,
-        dx: backSureDialogTopRight? -paddingStart : (isFollow ? paddingStart : 0),
+        dy: 0,
+        dx: 0,
       }
     });
     ResourceCleaner.registerDialogController(this.backSureDialog);
@@ -545,6 +548,8 @@ export struct EditorMain {
         HiLog.i(TAG, 'on first frame, cost time is ' + (Date.now() - this.currenTime));
         App.getInstance().myEditor()?.releaseDownLoadingLcd();
         this.firstFrameLoaded = true;
+        // 初始化对比快照：将“进入编辑页时的画面”缓存为对比基准，避免编辑后对比无差异
+        App.getInstance().myEditor().refreshCompareEffectList();
         if (!this.params?.entryType || this.params?.entryType === EditorParams.PARAM_ENTRY_TYPE_DEFAULT) {
           this.openAnimation();
         }
@@ -572,7 +577,15 @@ export struct EditorMain {
       await this.sealOpenAnimation();
     } else {
       this.editor.isOpenAnimation = false;
+      // 首次进入大图编辑时兜底同步一次裁剪态，避免出现“图片比裁剪框大”的首帧错位。
+      this.editor.asset.switchCropMode();
       this.editor.asset.crops().setCropAreaEnable(false);
+      setTimeout((): void => {
+        if (this.editor.tabIndex === TabName.TabCrop) {
+          this.editor.asset.switchCropMode();
+          this.editor.asset.crops().setCropAreaEnable(false);
+        }
+      }, 80);
       this.isButtonFreeze = false;
     }
     if (this.params !== undefined) {
@@ -771,7 +784,8 @@ export struct EditorMain {
   }
 
   backDeal(isLeftBack: boolean = false): void {
-    this.isDialogCenter = isLeftBack === true ? true : false;
+    // 返回确认弹窗统一居中，避免工具栏返回触发时被定位到左上角
+    this.isDialogCenter = true;
     HiLog.i(TAG, 'backDeal onBackPress isModify :' + (App.getInstance().myEditor().isEdited()) + '  isDialogCenter: ' +
     this.isDialogCenter);
     if (App.getInstance().needConfirmBack() && this.backSureDialog) {
@@ -978,6 +992,49 @@ export struct EditorMain {
     }
   }
 
+  private isCropOverlayTab(): boolean {
+    return this.editor.tabIndex === TabName.TabAdjust || this.editor.tabIndex === TabName.TabTextEdit;
+  }
+
+  private isCropOverlayVisible(): boolean {
+    return this.isCropOverlayTab() &&
+      this.editor.asset.crops().cropRect.width() > 0 &&
+      this.editor.asset.crops().cropRect.height() > 0;
+  }
+
+  private getCropLeft(): number {
+    return this.editor.asset.crops().cropRect.left;
+  }
+
+  private getCropTop(): number {
+    return this.editor.asset.crops().cropRect.top;
+  }
+
+  private getCropWidth(): number {
+    return this.editor.asset.crops().cropRect.width();
+  }
+
+  private getCropHeight(): number {
+    return this.editor.asset.crops().cropRect.height();
+  }
+
+  private getCropRight(): number {
+    return this.getCropLeft() + this.getCropWidth();
+  }
+
+  private getCropBottom(): number {
+    return this.getCropTop() + this.getCropHeight();
+  }
+
+  private getMaskExtend(): number {
+    return 10000;
+  }
+
+  private getMaskColor(): string {
+    // 框外遮罩需要完全不透出内容
+    return '#FF000000';
+  }
+
   @Builder
   editorPage() {
     Stack() {
@@ -998,6 +1055,48 @@ export struct EditorMain {
           },
         })
           .id('petalClip_VideoPlay')
+
+        if (this.isCropOverlayVisible()) {
+          // 仅叠加遮罩和边框，不改动VideoPlay树，降低渲染风险。
+          Stack() {
+            // 上
+            Stack() {}
+              .position({ x: -this.getMaskExtend(), y: -this.getMaskExtend() })
+              .width(this.getMaskExtend() * 2 + this.getCropRight() + 1)
+              .height(this.getMaskExtend() + this.getCropTop())
+              .backgroundColor(this.getMaskColor());
+            // 下
+            Stack() {}
+              .position({ x: -this.getMaskExtend(), y: this.getCropBottom() })
+              .width(this.getMaskExtend() * 2 + this.getCropRight() + 1)
+              .height(this.getMaskExtend())
+              .backgroundColor(this.getMaskColor());
+            // 左
+            Stack() {}
+              .position({ x: -this.getMaskExtend(), y: this.getCropTop() })
+              .width(this.getMaskExtend() + this.getCropLeft())
+              .height(this.getCropHeight())
+              .backgroundColor(this.getMaskColor());
+            // 右
+            Stack() {}
+              .position({ x: this.getCropRight(), y: this.getCropTop() })
+              .width(this.getMaskExtend())
+              .height(this.getCropHeight())
+              .backgroundColor(this.getMaskColor());
+            // 裁切框
+            Stack() {}
+              .position({ x: this.getCropLeft(), y: this.getCropTop() })
+              .width(this.getCropWidth())
+              .height(this.getCropHeight())
+              .border({
+                width: 2,
+                color: '#FFFFFFFF'
+              });
+          }
+          .width('100%')
+          .height('100%')
+          .hitTestBehavior(HitTestMode.Transparent);
+        }
 
         Column() {
           TopToolbar({
@@ -1067,6 +1166,10 @@ export struct EditorMain {
                 HiLog.i(TAG, `BottomToolbar onAreaChange: ${oldValue.width} ${oldValue.height}, ${newValue.width} ${newValue.height}`);
               })
           }.layoutWeight(1)
+          // 及时更新OperationArea，以便计算正确的预览区域，解决横竖屏旋转动画卡顿问题
+          .onSizeChange((_: SizeOptions, newValue: SizeOptions) => {
+            App.getInstance().myEditor().previewStarter.updatePreview(false);
+          })
         }
         .visibility(this.editor.stylusMode ? Visibility.Hidden : Visibility.Visible)
         .opacity(this.animOpacity)
@@ -1106,6 +1209,7 @@ export struct EditorMain {
 
         if (this.editor.hasCustomFilterStackCardViewInitiated) {
         }
+
       }
     }
     .backgroundColor(Color.Black)

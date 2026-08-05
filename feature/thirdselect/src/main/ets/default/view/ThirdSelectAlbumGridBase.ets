@@ -78,6 +78,7 @@ import { BadgeType } from '@ohos.file.PhotoPickerComponent';
 const TAG: string = 'ThirdSelectAlbumGridBase';
 const INIT_PADDING_IN_GRID_TOP_HEIGHT: number = 0.1;
 const INVALID_RECOMMEND_TYPE: number = 0;
+const MAX_REUSE_ID_COUNT: number = 500;
 
 /**
  * ThirdSelectAlbumGridBase
@@ -1750,8 +1751,7 @@ export struct ThirdSelectAlbumGridBase {
         .width(this.isSlidingHorizontally ? undefined : Constants.PERCENT_100)
         .height(this.isSlidingHorizontally ? Constants.PERCENT_100 : (this.singleSelectionMode ? undefined :
           Constants.PERCENT_100))
-        .reuseId(UiUtil.generateReuseId(Constants.PHOTO_TRANSITION_ALBUM,
-          item, this.getGeometryTransitionId(item, index as number)))
+        .reuseId(`${TAG}_gridItem_${(index as number) % MAX_REUSE_ID_COUNT}`)
         .aspectRatio(this.itemDisplayRatio !== ItemDisplayRatio.ORIGINAL_SIZE_RATIO ? 1 :
           ImageUtil.getSingleLineIrregularModeAspectRatio(item.mediaItem?.width, item.mediaItem?.height))
         .zIndex(index === this.placeholderIndex ? 1 : 0);

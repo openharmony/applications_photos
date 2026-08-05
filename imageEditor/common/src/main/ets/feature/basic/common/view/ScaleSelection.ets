@@ -34,17 +34,17 @@ import { UiUtil } from '../../../../common/util/UiUtil';
 const TAG = 'ScaleSelection';
 
 @Extend(Button)
-function tabStyle(isVertical: boolean, isChecked: boolean, isHover: boolean) {
-  .padding({ left: 12, right: 12 })
+function tabStyle(isPortrait: boolean, isChecked: boolean, isHover: boolean) {
+  .padding({ left: isPortrait ? 12 : 6, right: isPortrait ? 12 : 6 })
   .fontFamily('HarmonyHeiTi')
   .fontColor(isChecked ? $r('sys.color.font_on_primary') : $r('sys.color.comp_background_primary_contrary'))
   .fontWeight(FontWeight.Medium)
   .opacity(0.9)
   .margin({
-    right: 4,
-    left: 4,
-    bottom: isVertical ? 0 : 9,
-    top: isVertical ? 0 : 9,
+    right: isPortrait ? 4 : 1,
+    left: isPortrait ? 4 : 1,
+    bottom: isPortrait ? 0 : 9,
+    top: isPortrait ? 0 : 9,
   })
   .backgroundColor(isChecked ? AppColor.white(0.2) :
     isHover ? $r('sys.color.ohos_id_color_hover_transparent') : AppColor.black(0))
@@ -209,8 +209,8 @@ export struct ScaleSelection {
       angle: this.isScreenPortrait ? 90 : 180,
       colors: [
         ['rgba(0, 0, 0, 0)', 0],
-        ['rgba(0, 0, 0, 1)', this.isShowShadowStart ? this.shadowRate : 0],
-        ['rgba(0, 0, 0, 1)', this.isShowShadowEnd ? 1 - this.shadowRate : 1],
+        ['rgba(0, 0, 0, 0)', this.isShowShadowStart ? this.shadowRate : 0],
+        ['rgba(0, 0, 0, 0)', this.isShowShadowEnd ? 1 - this.shadowRate : 1],
         ['rgba(0, 0, 0, 0)', 1]]
     })
   }

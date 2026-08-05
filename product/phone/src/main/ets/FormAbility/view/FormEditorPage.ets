@@ -149,9 +149,9 @@ struct FormEditorPage {
     Log.info(TAG,
       `setUpWinOrientation : ${JSON.stringify(deviceInfo.deviceType)}`);
     let winOrientation = window.Orientation.PORTRAIT;
-    // if (!DeviceInfo.isPhoneUx()) {
-    //   winOrientation = window.Orientation.AUTO_ROTATION_UNSPECIFIED;
-    // }
+    if (!DeviceInfo.isPhoneUx()) {
+      winOrientation = window.Orientation.AUTO_ROTATION_UNSPECIFIED;
+    }
     const context: common.UIAbilityContext =
       AppStorage.get<common.UIAbilityContext>('formContext') as common.UIAbilityContext;
     WindowUtil.setPreferredOrientation(context, winOrientation);
@@ -338,7 +338,6 @@ struct FormEditorPage {
 
   onPageHide(): void {
     Log.info(TAG, 'onpagehide pid: ' + process.tid + ' start time: ' + process.getStartRealtime());
-    this.terminateSelf(true);
   }
 
   onBackPress(): boolean | void {

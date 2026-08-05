@@ -47,6 +47,9 @@ export struct TextInputEditItem {
   @Link keyboardHeight: number;
   private navHeight: number = 0;
   @State inputBoxHeight: number = 0;
+  private lastWindow?: window.Window;
+  private keyboardHeightChangeCallback?: (size: number) => void;
+  private avoidAreaChangeCallback?: (options: window.AvoidAreaOptions) => void;
   @Link @Watch('currentFontColorChange') currentFontColor: Color | string | Resource;
   @Link @Watch('currentFontSizeChange') currentFontSize: number;
   @Link isFontSizeChange: boolean;
@@ -85,9 +88,17 @@ export struct TextInputEditItem {
 
   textInputAreaHideChange() {
     if (this.textInputAreaHide) {
+      // 某些设备/输入法（如手写面板）可能不触发 keyboardHeightChange，兜底给一个默认高度；
+      // 如果后续从 avoidAreaChange / keyboardHeightChange 获得真实高度，会自动覆盖。
+      const DEFAULT_KEYBOARD_HEIGHT_VP = 366;
+      if (this.keyboardHeight <= 0) {
+        this.keyboardHeight = DEFAULT_KEYBOARD_HEIGHT_VP;
+      }
       this.timer = setTimeout((): void => {
         focusControl.requestFocus('text_edit_input_' + this.fromId);
       }, 100)
+    } else {
+      this.keyboardHeight = 0;
     }
   }
 
@@ -133,7 +144,7 @@ export struct TextInputEditItem {
     }
     textArea.richEditorController.deleteSpans();
     textArea.richEditorController.addTextSpan(textArea.content === '' ?
-    UiUtil.getResourceString($r('app.string.edit_text_imageEdit')) : textArea.content, {
+      UiUtil.getResourceString($r('app.string.edit_text_imageEdit')) : textArea.content, {
       style: {
         fontColor: fontColor,
         fontSize: vp2px(fontSize) + 'px',
@@ -160,16 +171,46 @@ export struct TextInputEditItem {
     HiLog.i(TAG, 'TextInputEditItem aboutToAppear');
     this.textArea = this.textAreaManager.getTextAreaList().filter(item => item.editState === 1)[0];
     window.getLastWindow(getContext()).then(lastWindow => {
-      lastWindow.on('keyboardHeightChange', (size: number) => {
-        if (size == 0 && this.textArea) {
-          let msg: Record<string, number | string | boolean> = {
-            'TEXT_LEN': this.textArea.content.length
-          };
+      this.lastWindow = lastWindow;
+
+      this.keyboardHeightChangeCallback = (size: number) => {
+
+        const heightVp = px2vp(size);
+        if (heightVp <= 0) {
+          this.keyboardHeight = 0;
+        } else {
+          this.keyboardHeight = Math.max(this.keyboardHeight, heightVp);
         }
-        this.keyboardHeight = px2vp(size);
-        HiLog.i(TAG, `TextInputEditItem aboutToAppear keyboardHeight:${this.keyboardHeight}`);
-      })
+        HiLog.i(TAG, `TextInputEditItem keyboardHeightChange keyboardHeight:${this.keyboardHeight}`);
+      };
+      lastWindow.on('keyboardHeightChange', this.keyboardHeightChangeCallback);
+
+      this.avoidAreaChangeCallback = (options: window.AvoidAreaOptions) => {
+        if (!options) {
+          return;
+        }
+        if (options.type === window.AvoidAreaType.TYPE_KEYBOARD) {
+          const kbHeightVp = px2vp(options.area?.bottomRect?.height ?? 0);
+          this.keyboardHeight = kbHeightVp;
+          HiLog.i(TAG, `TextInputEditItem avoidAreaChange(TYPE_KEYBOARD) keyboardHeight:${this.keyboardHeight}`);
+        } else if (options.type === window.AvoidAreaType.TYPE_SYSTEM) {
+          this.navHeight = px2vp(options.area?.bottomRect?.height ?? 0);
+        }
+      };
+      lastWindow.on('avoidAreaChange', this.avoidAreaChangeCallback);
+
+
       this.navHeight = px2vp(lastWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM).bottomRect.height);
+
+      try {
+        const kbArea = lastWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_KEYBOARD);
+        const kbHeightVp = px2vp(kbArea?.bottomRect?.height ?? 0);
+        if (kbHeightVp > 0) {
+          this.keyboardHeight = kbHeightVp;
+        }
+      } catch (e) {
+
+      }
     }).catch((err: BusinessError) => {
       HiLog.e(TAG, `TextInputEditItem aboutToAppear err:${err.message}`);
     })
@@ -180,6 +221,18 @@ export struct TextInputEditItem {
     HiLog.i(TAG, 'aboutToDisAppear: %{public}s', this.fromId);
     this.textArea = undefined;
     clearTimeout(this.timer);
+    if (this.lastWindow) {
+      try {
+        this.keyboardHeightChangeCallback &&
+        this.lastWindow.off('keyboardHeightChange', this.keyboardHeightChangeCallback);
+        this.avoidAreaChangeCallback && this.lastWindow.off('avoidAreaChange', this.avoidAreaChangeCallback);
+      } catch (e) {
+
+      }
+    }
+    this.lastWindow = undefined;
+    this.keyboardHeightChangeCallback = undefined;
+    this.avoidAreaChangeCallback = undefined;
   }
 
   getInputValue(): string {
@@ -367,7 +420,7 @@ export struct TextInputEditItem {
         .id('edit_box_check_mark')
         .accessibilityLevel('yes')
         .accessibilityText(UiUtil.getResourceString($r('app.string.petalClip_stylus_finish')) +
-          UiUtil.getResourceString($r('app.string.button_imageEdit')))
+        UiUtil.getResourceString($r('app.string.button_imageEdit')))
         .onClick((): void => {
           if (!this.textArea) {
             return;

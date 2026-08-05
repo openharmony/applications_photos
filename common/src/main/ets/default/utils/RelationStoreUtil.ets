@@ -106,8 +106,11 @@ export class RelationStoreUtil {
       Log.error(TAG, `queryAllSortRuleFromDb rdbStore is undefined`);
       return;
     }
-
-    sortRuleMap.clear();
+    try {
+      sortRuleMap.clear();
+    } catch (err) {
+      Log.error(TAG, `sortRuleMap clear failed, ${err?.code}-${err?.message}`);
+    }
     try {
       // 查询所有行和列
       Log.info(TAG, `queryAllSortRuleFromDb querySql start`);

@@ -705,7 +705,7 @@ export default abstract class CommonAbility extends UIAbility {
   /* instrument ignore next */
   private parseWantForPickerSingleSelect(wantParam: Record<string, Object>): void {
     mCallerBundleName = wantParam[Bundles.KEY_WANT_PARAMETERS_CALLER_BUNDLE_NAME] as string;
-    mMaxSelectCount = 1; // Max select count must be 1 in single select mode
+    // mMaxSelectCount = 1; // Max select count must be 1 in single select mode
     mFilterMediaType = assert.asDefault(wantParam.filterMediaType, '');
     cameraAble = (wantParam?.isPhotoTakingSupported as boolean) ?? true;
     editAble = (wantParam?.isEditSupported as boolean) ?? true;
@@ -1052,6 +1052,18 @@ export default abstract class CommonAbility extends UIAbility {
 
   public loadPage(windowStage: window.WindowStage): void {
     AppStorage.delete('router');
+    appBroadCast.on(BroadCastConstants.COMMON_ABILITY_RESTORE_FA_CARD, (): void => {
+      FormControllerManager.getInstance(this.context).restore();
+    });
+    appBroadCast.on(BroadCastConstants.PHOTO_DELETED_FOR_FACARD, (deletedUris: string[]): void => {
+      FormControllerManager.getInstance(this.context).notifyCardsOnPhotoDeleted(deletedUris ?? []);
+    });
+    appBroadCast.on(BroadCastConstants.ALBUM_DELETED_FOR_FACARD, (albumUri: string): void => {
+      FormControllerManager.getInstance(this.context).notifyCardsOnAlbumDeleted(albumUri ?? '');
+    });
+    // appBroadCast.on(BroadCastConstants.PHOTO_UPDATED_FOR_FACARD, (updatedUris: string[]): void => {
+    //   FormControllerManager.getInstance(this.context).notifyCardsOnPhotoUpdated(updatedUris ?? []);
+    // });
     let isAgreed: boolean = true;
     if (!isAgreed) {
       isAgreed = assert.asDefault(
@@ -1072,9 +1084,6 @@ export default abstract class CommonAbility extends UIAbility {
       return;
     }
 
-    appBroadCast.on(BroadCastConstants.COMMON_ABILITY_RESTORE_FA_CARD, (): void => {
-      FormControllerManager.getInstance(this.context).restore();
-    });
     DeviceInfo.isPhoneUx() && windowStage.disableWindowDecor();
   }
 
@@ -1548,6 +1557,7 @@ export default abstract class CommonAbility extends UIAbility {
         cameraShotKey: AppStorage.get<string>('cameraShotKey') ?? '',
         isShowTabMenu: Global.getBoolean('isShowTabMenu', true),
         isAllMediaData: AppStorage.get<boolean>('isAllMediaData') ?? false,
+        displayName: AppStorage.get<string>('viewDataDisplayName') ?? '',
         imageArea: {
           width: AppStorage.get<number>('viewDataPhotoWidth'),
           height: AppStorage.get<number>('viewDataPhotoHeight'),
@@ -1622,12 +1632,22 @@ export default abstract class CommonAbility extends UIAbility {
 
     const entry = lockedScreenMgr().wakenByLockScreen(wantParam);
     if (want.action === wantConstant.Action.ACTION_VIEW_DATA) {
+
+      let viewDataType: photoAccessHelper.PhotoType = UserFileManagerAccess.MEDIA_TYPE_IMAGE;
       if (want.type?.startsWith?.(PhotoDataSource.VIDEO_TYPE_PREFIX_STR)) {
-        AppStorage.setOrCreate<photoAccessHelper.PhotoType>('viewDataType', UserFileManagerAccess.MEDIA_TYPE_VIDEO);
+        viewDataType = UserFileManagerAccess.MEDIA_TYPE_VIDEO;
+      } else if (want.type?.startsWith?.(PhotoDataSource.IMAGE_TYPE_PREFIX_STR)) {
+        viewDataType = UserFileManagerAccess.MEDIA_TYPE_IMAGE;
       } else {
-        AppStorage.setOrCreate<photoAccessHelper.PhotoType>('viewDataType', UserFileManagerAccess.MEDIA_TYPE_IMAGE);
+
+        const uriStr: string = (want.uri as string) || (wantParam?.uri as string) || '';
+        if (CommonUtil.isVideoFile(uriStr)) {
+          viewDataType = UserFileManagerAccess.MEDIA_TYPE_VIDEO;
+        }
       }
+      AppStorage.setOrCreate<photoAccessHelper.PhotoType>('viewDataType', viewDataType);
       if (!wantParam) {
+        AppStorage.setOrCreate<string>('viewDataDisplayName', '');
         return Constants.ENTRY_FROM_VIEW_DATA;
       }
       isShowMenuFromThirdView = wantParam?.isShowMenu as boolean;
@@ -1636,6 +1656,9 @@ export default abstract class CommonAbility extends UIAbility {
         wantParam?.isAllMediaData ? wantParam.isAllMediaData as boolean : false);
       AppStorage.setOrCreate<string>('viewDataAlbumUri', wantParam?.albumUri ? wantParam.albumUri as string : '');
       AppStorage.setOrCreate<string>('viewDataIndex', wantParam?.viewIndex ? wantParam.viewIndex as string : '');
+      const fileNameInfo: Record<string, Object> | undefined = wantParam?.fileName as Record<string, Object> | undefined;
+      const displayName: string = String(wantParam?.displayName ?? fileNameInfo?.['name'] ?? '');
+      AppStorage.setOrCreate<string>('viewDataDisplayName', displayName);
       AppStorage.setOrCreate<string>('viewDataPhotoWidth', wantParam?.width ? wantParam.width as string : '0');
       AppStorage.setOrCreate<string>('viewDataPhotoHeight', wantParam?.height ? wantParam.height as string : '0');
       AppStorage.setOrCreate<string>('viewDataToHwShareGird',

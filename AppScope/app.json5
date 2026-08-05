@@ -10,6 +10,7 @@
     "distributedNotificationEnabled": true,
     "minAPIVersion": 9,
     "targetAPIVersion": 10,
-    "configuration": "$profile:configuration"
+    "configuration": "$profile:configuration",
+    "debug": false
   }
 }

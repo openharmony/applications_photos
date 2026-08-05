@@ -31,6 +31,7 @@
 #include <multimedia/image_effect/image_effect_errors.h>
 #include <multimedia/image_framework/image_pixel_map_mdk.h>
 #include <native_window/external_window.h>
+#include <algorithm>
 #include <string>
 
 #ifndef GL_TEXTURE_EXTERNAL_OES
@@ -144,10 +145,12 @@ HmcRenderEngine::~HmcRenderEngine() { Destroy(); }
 
 static ImageEffect_Any GetAny(void *value, ImageEffect_DataType type)
 {
-    ImageEffect_Any ohAny;
-    ImageEffect_DataValue dataValue;
+    ImageEffect_Any ohAny {};
+    ImageEffect_DataValue dataValue {};
     if (value == nullptr) {
         LOGE("SetValue failed, value is null");
+        ohAny.dataType = ImageEffect_DataType::EFFECT_DATA_TYPE_PTR;
+        ohAny.dataValue.ptrValue = nullptr;
         return ohAny;
     }
 
@@ -169,6 +172,9 @@ static ImageEffect_Any GetAny(void *value, ImageEffect_DataType type)
             break;
         default:
             LOGE("Set Value Failed, type = %d", type);
+            ohAny.dataType = ImageEffect_DataType::EFFECT_DATA_TYPE_PTR;
+            ohAny.dataValue.ptrValue = nullptr;
+            return ohAny;
     }
     ohAny.dataValue = dataValue;
     ohAny.dataType = type;
@@ -177,6 +183,11 @@ static ImageEffect_Any GetAny(void *value, ImageEffect_DataType type)
 
 static VOID ConfigValue(OH_ImageEffect *effect, void *value, const char *key, ImageEffect_DataType type)
 {
+    if (effect == nullptr || key == nullptr || value == nullptr) {
+        LOGE("ConfigValue skip. effect=%{public}d key=%{public}d value=%{public}d",
+            effect != nullptr, key != nullptr, value != nullptr);
+        return;
+    }
     ImageEffect_Any ohAny = GetAny(value, type);
     OH_ImageEffect_Configure(effect, key, &ohAny);
 }
@@ -184,6 +195,11 @@ static VOID ConfigValue(OH_ImageEffect *effect, void *value, const char *key, Im
 
 static VOID SetValue(OH_EffectFilter *filter, void *value, const char *key, ImageEffect_DataType type)
 {
+    if (filter == nullptr || key == nullptr || value == nullptr) {
+        LOGE("SetValue skip. filter=%{public}d key=%{public}d value=%{public}d",
+            filter != nullptr, key != nullptr, value != nullptr);
+        return;
+    }
     ImageEffect_Any ohAny = GetAny(value, type);
     OH_EffectFilter_SetValue(filter, key, &ohAny);
 }
@@ -201,11 +217,13 @@ INT32 HmcRenderEngine::RestoreImageEffect(const STRING &restoreInfo)
 {
     if (restoreInfo == "") {
         LOGE("restore image effect fail ");
+        ReleaseImageEffectOnRenderThread();
         if (mIsHMCRenderEnable) {
             mImageEffect = OH_ImageEffect_Create("HMC_EXT");
         } else {
             mImageEffect = OH_ImageEffect_Create("Photo");
         }
+        m_restoredFilterCount = mImageEffect == nullptr ? 0 : OH_ImageEffect_GetFilterCount(mImageEffect);
         return HMC_ERR;
     }
 
@@ -215,6 +233,8 @@ INT32 HmcRenderEngine::RestoreImageEffect(const STRING &restoreInfo)
         LOGE("restore image effect failed because of parsing data to json object.");
         return HMC_ERR;
     }
+
+    ReleaseImageEffectOnRenderThread();
 
     Json::Value jsonSystem;
     if (SINGLETON(HmcProjectEntity)->CheckImageEffectEditorDataSignature(restoreInfoData)) {
@@ -238,6 +258,8 @@ INT32 HmcRenderEngine::RestoreImageEffect(const STRING &restoreInfo)
         LOGE("restore image effect failed because of mImageEffect is null.");
         return HMC_ERR;
     }
+    m_restoredFilterCount = OH_ImageEffect_GetFilterCount(mImageEffect);
+    LOGI("RestoreImageEffect filter count: %d", m_restoredFilterCount);
     return HMC_OK;
 }
 
@@ -252,12 +274,13 @@ std:
         return;
     }
     m_ready = FALSE;
+    window_ = nullptr;
     if (m_lastExportTaskFuture.valid()) {
         m_lastExportTaskFuture.wait();
     }
     if (m_renderThread) {
         auto weakThis = weak_from_this();
-        auto task = std::make_shared<RenderTask<>>([weakThis]() {
+        auto task = std::make_shared<RenderTask<>>([weakThis]() { 
                 auto strong = weakThis.lock();
                 if (strong == nullptr) {
                     LOGE("HmcRenderEngine::Destroy strong is nullptr.");
@@ -276,6 +299,7 @@ std:
     }
     std::lock_guard<std::mutex> locker(m_waterMarkMtx);
     m_watermarkCache.clear();
+    m_effectGlobalCache.clear();
     LOGI("[Render] Engine %ld destroy end!", m_id);
 }
 
@@ -286,7 +310,7 @@ VOID HmcRenderEngine::InitEnv(std::string const & editData)
     if (m_renderThread == NULL) {
         // 自动回收纹理资源
         auto weakThis = weak_from_this();
-        auto func = [weakThis]() {
+        auto func = [weakThis, editData]() {
             auto strong = weakThis.lock();
             if (strong == nullptr) {
                 LOGE("HmcRenderEngine::InitEnv1 strong is nullptr.");
@@ -296,6 +320,10 @@ VOID HmcRenderEngine::InitEnv(std::string const & editData)
                 int temp = 1;
                 ConfigValue(strong->mImageEffect, &temp, CONFIG_TEXTURE_RESIZE_TEX_CACHE_FUNCTION,
                     ImageEffect_DataType::EFFECT_DATA_TYPE_INT32);
+            }
+            if (strong->m_needFlush) {
+                strong->RestoreImageEffect(editData);
+                strong->m_needFlush = false;
             }
         };
         m_renderThread = new RenderThread<>(RENDER_QUEUE_SIZE, func);
@@ -402,7 +430,7 @@ VOID HmcRenderEngine::Draw(VECTOR<HmcRenderLayerPtr> &renderLayers, const HmcRen
 std:
     std::lock_guard<std::recursive_mutex> guard(m_renderMutex);
     if (m_ready && !m_exported) {
-        LOGI("[Render]Draw Frame %ld launched, Engine : %ld, canvas: %d %d %d %d %d %d\n", id, m_id, canvas.x_,
+        LOGD("[Render]Draw Frame %ld launched, Engine : %ld, canvas: %d %d %d %d %d %d\n", id, m_id, canvas.x_,
              canvas.y_, canvas.width_, canvas.height_, canvas.canvasWidth_, canvas.canvasHeight_);
     } else {
         LOGE("[Render]Not Ready! Draw Frame %ld, Engine : %ld\n", id, m_id);
@@ -421,11 +449,11 @@ std:
     RenderEngineType type = TYPE_PREVIEW;
 
     auto launchTime = std::chrono::high_resolution_clock::now();
-    LOGI("RenderTask taskId:%d launchTime:%ld", taskId, launchTime);
+    LOGD("RenderTask taskId:%d launchTime:%ld", taskId, launchTime);
     auto weakThis = weak_from_this();
     auto task = std::make_shared<RenderTask<>>(
         [weakThis, type, layers, canvas, taskId, launchTime, id, func, isPicChangingPtr]() {
-            LOGI("[Render]Draw Frame running start, id: %ld, taskId: %d, launchTime:%ld", id, taskId, launchTime);
+            LOGD("[Render]Draw Frame running start, id: %ld, taskId: %d, launchTime:%ld", id, taskId, launchTime);
             OH_HiTrace_StartTrace("ImageEditorRenderDraw RunTask");
             auto strong = weakThis.lock();
             if (strong == nullptr) {
@@ -437,24 +465,139 @@ std:
                 return;
             }
             VECTOR<SHARED_PTR<Image>> images;
-            for (auto &layerInfo : *layers) {
-                images.emplace_back(strong->ConfigRenderInfo(layerInfo, nullptr, TYPE_PREVIEW, canvas, 0));
+
+            // 对预览渲染进行降分辨率处理，降低低端机单帧开销
+            HmcRenderCanvas previewCanvas = canvas;
+            bool isDraggingImage = std::any_of(layers->begin(), layers->end(),
+                [](const HmcRenderLayerPtr &layerInfo) {
+                    return layerInfo != nullptr && layerInfo->m_isDragImage;
+                });
+            const INT32 MAX_PREVIEW_EDGE_DEFAULT = 1280;
+            const INT32 MAX_PREVIEW_EDGE_DRAG = 960;
+            const INT32 maxPreviewEdge = isDraggingImage ? MAX_PREVIEW_EDGE_DRAG : MAX_PREVIEW_EDGE_DEFAULT;
+            float scaleW = static_cast<float>(previewCanvas.canvasWidth_) / static_cast<float>(maxPreviewEdge);
+            float scaleH = static_cast<float>(previewCanvas.canvasHeight_) / static_cast<float>(maxPreviewEdge);
+            float downScale = std::max(scaleW, scaleH);
+            float downScaleInv = 1.0f; // 用于同步 transform offset 的坐标系缩放
+            if (downScale > 1.0f) {
+                float inv = 1.0f / downScale;
+                downScaleInv = inv;
+                previewCanvas.canvasWidth_ = static_cast<INT32>(previewCanvas.canvasWidth_ * inv);
+                previewCanvas.canvasHeight_ = static_cast<INT32>(previewCanvas.canvasHeight_ * inv);
+                previewCanvas.width_ = static_cast<INT32>(previewCanvas.width_ * inv);
+                previewCanvas.height_ = static_cast<INT32>(previewCanvas.height_ * inv);
+                previewCanvas.x_ = static_cast<INT32>(previewCanvas.x_ * inv);
+                previewCanvas.y_ = static_cast<INT32>(previewCanvas.y_ * inv);
+                LOGD("[Render]Preview downScale:%f edge:%d drag:%d canvas(%d,%d,%d,%d,%d,%d)",
+                    downScale, maxPreviewEdge, isDraggingImage, previewCanvas.x_, previewCanvas.y_,
+                    previewCanvas.width_, previewCanvas.height_, previewCanvas.canvasWidth_, previewCanvas.canvasHeight_);
             }
-            if (!strong->mIsHMCRenderEnable && !strong->m_isSurfaceOutput) {
-                strong->m_isSurfaceOutput = true;
-                OH_ImageEffect_SetOutputSurface(strong->mImageEffect, static_cast<OHNativeWindow *>(strong->window_));
+
+            // 预览降分辨率会改变 transform 中使用的 viewportX/viewportY，
+            // 而 transform 的 cropOffsetX/cropOffsetY/offsetX/offsetY 是按未降采样 canvas 坐标系算的。
+            // 因此进入 ConfigRenderInfo 前需要按 downScaleInv 把这些 offset 同步缩放回来，
+            // 否则会出现“裁剪框正常但图片不铺满/溢出”的错位。
+            struct TransformOffsetBackup {
+                HmcRenderEffectPtr effect;
+                double cropOffsetX = 0.0;
+                double cropOffsetY = 0.0;
+                double offsetX = 0.0;
+                double offsetY = 0.0;
+                double scaleX = 0.0;
+                double scaleY = 0.0;
+                bool hasCropOffsetX = false;
+                bool hasCropOffsetY = false;
+                bool hasOffsetX = false;
+                bool hasOffsetY = false;
+                bool hasScaleX = false;
+                bool hasScaleY = false;
+            };
+            std::vector<TransformOffsetBackup> offsetBackups;
+            if (downScaleInv != 1.0f) {
+                for (auto &layerInfo : *layers) {
+                    for (auto &effect : layerInfo->m_effectList) {
+                        if (effect == nullptr || effect->m_resource == nullptr) {
+                            continue;
+                        }
+                        if (effect->m_resource->m_effectType != "transform") {
+                            continue;
+                        }
+
+                        TransformOffsetBackup b;
+                        b.effect = effect;
+                        b.hasCropOffsetX = effect->GetParam(PROJECT_KEY_TRANSFORM_CROP_OFFSET_X, b.cropOffsetX);
+                        b.hasCropOffsetY = effect->GetParam(PROJECT_KEY_TRANSFORM_CROP_OFFSET_Y, b.cropOffsetY);
+                        b.hasOffsetX = effect->GetParam(PROJECT_KEY_TRANSFORM_OFFSET_X, b.offsetX);
+                        b.hasOffsetY = effect->GetParam(PROJECT_KEY_TRANSFORM_OFFSET_Y, b.offsetY);
+                        b.hasScaleX = effect->GetParam(PROJECT_KEY_TRANSFORM_SCALE_X, b.scaleX);
+                        b.hasScaleY = effect->GetParam(PROJECT_KEY_TRANSFORM_SCALE_Y, b.scaleY);
+
+                        if (b.hasCropOffsetX) {
+                            effect->SetParam(PROJECT_KEY_TRANSFORM_CROP_OFFSET_X, b.cropOffsetX * downScaleInv);
+                        }
+                        if (b.hasCropOffsetY) {
+                            effect->SetParam(PROJECT_KEY_TRANSFORM_CROP_OFFSET_Y, b.cropOffsetY * downScaleInv);
+                        }
+                        if (b.hasOffsetX) {
+                            effect->SetParam(PROJECT_KEY_TRANSFORM_OFFSET_X, b.offsetX * downScaleInv);
+                        }
+                        if (b.hasOffsetY) {
+                            effect->SetParam(PROJECT_KEY_TRANSFORM_OFFSET_Y, b.offsetY * downScaleInv);
+                        }
+                        if (b.hasScaleX) {
+                            effect->SetParam(PROJECT_KEY_TRANSFORM_SCALE_X, b.scaleX * downScaleInv);
+                        }
+                        if (b.hasScaleY) {
+                            effect->SetParam(PROJECT_KEY_TRANSFORM_SCALE_Y, b.scaleY * downScaleInv);
+                        }
+                        offsetBackups.emplace_back(b);
+                    }
+                }
+            }
+
+            for (auto &layerInfo : *layers) {
+                images.emplace_back(strong->ConfigRenderInfo(layerInfo, nullptr, TYPE_PREVIEW, previewCanvas, 0));
             }
         
-            OH_PixelmapNative *outPixelMap = strong->GenerateOutputPixelmap(layers, canvas, 0, taskId);
+            OH_PixelmapNative *outPixelMap = strong->GenerateOutputPixelmap(layers, previewCanvas, 0, taskId);
+
+            // restore original transform offsets
+            if (!offsetBackups.empty()) {
+                for (auto &b : offsetBackups) {
+                    if (b.effect == nullptr) {
+                        continue;
+                    }
+                    if (b.hasCropOffsetX) {
+                        b.effect->SetParam(PROJECT_KEY_TRANSFORM_CROP_OFFSET_X, b.cropOffsetX);
+                    }
+                    if (b.hasCropOffsetY) {
+                        b.effect->SetParam(PROJECT_KEY_TRANSFORM_CROP_OFFSET_Y, b.cropOffsetY);
+                    }
+                    if (b.hasOffsetX) {
+                        b.effect->SetParam(PROJECT_KEY_TRANSFORM_OFFSET_X, b.offsetX);
+                    }
+                    if (b.hasOffsetY) {
+                        b.effect->SetParam(PROJECT_KEY_TRANSFORM_OFFSET_Y, b.offsetY);
+                    }
+                    if (b.hasScaleX) {
+                        b.effect->SetParam(PROJECT_KEY_TRANSFORM_SCALE_X, b.scaleX);
+                    }
+                    if (b.hasScaleY) {
+                        b.effect->SetParam(PROJECT_KEY_TRANSFORM_SCALE_Y, b.scaleY);
+                    }
+                }
+            }
 
             OH_ImageEffect_RemoveFilter(strong->mImageEffect, "CustomCropFilter");
             OH_ImageEffect_SetInputPixelmap(strong->mImageEffect, outPixelMap);
-            OH_ImageEffect_SetOutputSurface(strong->mImageEffect, static_cast<OHNativeWindow *>(strong->window_));
+            if (strong->window_ != nullptr) {
+                OH_ImageEffect_SetOutputSurface(strong->mImageEffect, static_cast<OHNativeWindow *>(strong->window_));
+            }
             
             OH_HiTrace_StartTrace("ImageEditorRenderDraw");
-            LOGI("[Render]Draw Frame OH_ImageEffect_Start start");
+            LOGD("[Render]Draw Frame OH_ImageEffect_Start start");
             OH_ImageEffect_Start(strong->mImageEffect);
-            LOGI("[Render]Draw Frame OH_ImageEffect_Start end");
+            LOGD("[Render]Draw Frame OH_ImageEffect_Start end");
             OH_HiTrace_FinishTrace();
 
             if (func) {
@@ -462,7 +605,10 @@ std:
             }
             OH_HiTrace_FinishTrace();
             images.clear();
-            LOGI("[Render]Draw Frame running end, id: %ld, taskId: %d", id, taskId);
+            OH_PixelmapNative_Release(outPixelMap);
+            strong->RemoveFilters();
+            strong->m_needFlush = true;
+            LOGD("[Render]Draw Frame running end, id: %ld, taskId: %d", id, taskId);
         },
         PREVIEW_TASK_TAG, taskId);
     OH_HiTrace_StartTrace("ImageEditorRenderDraw AddTask");
@@ -565,6 +711,7 @@ std:
     std::future<ExportData> fut = prom->get_future();
     if (!m_ready) {
         LOGE("[Render]Not Ready! Export Frame %ld, Engine : %ld\n", param.id, m_id);
+        m_exported = FALSE;
         prom->set_value(ExportData());
         return fut;
     }
@@ -578,6 +725,9 @@ std:
             auto strong = weakThis.lock();
             if (strong == nullptr || layers == nullptr) {
                 LOGE("HmcRenderEngine::Export strong is nullptr = %d", strong == nullptr);
+                if (strong != nullptr) {
+                    strong->m_exported = FALSE;
+                }
                 prom->set_value(param.func(nullptr, canvas.canvasWidth_, canvas.canvasHeight_, param.id));
                 return;
             }
@@ -586,6 +736,7 @@ std:
             cvs.canvasWidth_ = exportSize.width;
             cvs.canvasHeight_ = exportSize.height;
             HmcEFilterPtr config = strong->m_efilterList["config"];
+            strong->RemoveFilters();
             VECTOR<SHARED_PTR<Image>> images;
             for (auto &layerInfo : *layers) {
                 RenderEngineType type = param.exportType == EXPORT_TYPE_SAVE ? TYPE_SAVE : TYPE_EXPORT;
@@ -599,9 +750,11 @@ std:
                 OH_PixelmapNative *outPixelMap = strong->GenerateOutputPixelmap(layers, cvs, param.exportType, taskId);
                 OH_PictureNative* outPicture;
                 OH_PictureNative_CreatePicture(outPixelMap, &outPicture);
+                OH_PixelmapNative_Release(outPixelMap);
                 prom->set_value(param.func(outPicture, cvs.canvasWidth_, cvs.canvasHeight_, param.id));
             }
             images.clear();
+            strong->m_exported = FALSE;
         },
         EXPORT_TASK_TAG, taskId);
     m_renderThread->AddTask(task);
@@ -690,6 +843,7 @@ OH_PixelmapNative *HmcRenderEngine::CreateOutputPixelmap(SHARED_PTR<VECTOR<HmcRe
     }
 
     OH_PictureNative *outPicture = CopyPicture(inPicture, w, h, false, exportType != 1);
+    inPicture = nullptr;
     if (outPicture == nullptr) {
         LOGE("CreateOutputPicture outPicture is nullptr");
         return nullptr;
@@ -699,6 +853,8 @@ OH_PixelmapNative *HmcRenderEngine::CreateOutputPixelmap(SHARED_PTR<VECTOR<HmcRe
     OH_PixelmapNative* outPixelMap = nullptr;
     OH_PictureNative_GetMainPixelmap(outPicture, &outPixelMap);
     OH_ImageEffect_SetOutputPixelmap(mImageEffect, outPixelMap);
+    
+    OH_PictureNative_Release(outPicture);
     
     m_isSurfaceOutput = false;
     return outPixelMap;
@@ -726,6 +882,7 @@ OH_PictureNative *HmcRenderEngine::CreateOutputPicture(SHARED_PTR<VECTOR<HmcRend
     }
     
     OH_PictureNative *outPicture = CopyPicture(inPicture, w, h, false, exportType != 1);
+    inPicture = nullptr;
     if (outPicture == nullptr) {
         LOGE("CreateOutputPicture outPicture is nullptr");
         return nullptr;
@@ -805,11 +962,29 @@ VOID HmcRenderEngine::InitThread(std::string const & editData)
 #endif
 }
 
+VOID HmcRenderEngine::AbandonAndClearEFilterList()
+{
+    for (auto &entry : m_efilterList) {
+        if (entry.second != nullptr) {
+            entry.second->AbandonFilterOwnership();
+        }
+    }
+    m_efilterList.clear();
+}
+
+VOID HmcRenderEngine::ReleaseImageEffectOnRenderThread()
+{
+    AbandonAndClearEFilterList();
+    if (mImageEffect != nullptr) {
+        OH_ImageEffect_Release(mImageEffect);
+        mImageEffect = nullptr;
+    }
+    m_restoredFilterCount = 0;
+}
+
 VOID HmcRenderEngine::ReleaseThread()
 {
-    m_efilterList.clear();
-    OH_ImageEffect_Release(mImageEffect);
-    mImageEffect = nullptr;
+    ReleaseImageEffectOnRenderThread();
     nativePicture = nullptr;
     LOGI("HmcRenderEngine release imageEffect");
 }
@@ -1055,7 +1230,7 @@ bool HmcRenderEngine::SetInputPixelMap(std::shared_ptr<Image> &image, RenderEngi
 {
     bool isPictureChange = nativePicture != image->nativePicture && nativePicture != nullptr;
     RenderInputType inputType = GetInputType(image, type);
-    LOGI("SetInputPixelMap inputType=%d, lastInputType=%d, renderType=%d, m_renderType=%d, isPictureChange=%d",
+    LOGD("SetInputPixelMap inputType=%d, lastInputType=%d, renderType=%d, m_renderType=%d, isPictureChange=%d",
          inputType, m_lastRenderInputType, type, m_renderType, isPictureChange);
 
     nativePicture = image->nativePicture;
@@ -1074,16 +1249,18 @@ bool HmcRenderEngine::SetInputPixelMap(std::shared_ptr<Image> &image, RenderEngi
         LOGE("RenderInputType not supported: %d", inputType);
         return false;
     }
-    LOGI("SetInputPixelMap set lastRenderInputType=%d", inputType);
+    LOGD("SetInputPixelMap set lastRenderInputType=%d", inputType);
     m_lastRenderInputType = inputType;
 
     OH_PixelmapNative* pixelMap = nullptr;
     OH_PictureNative_GetMainPixelmap(inputPicture, &pixelMap);
+    inputPicture = nullptr;
     
     if (pixelMap == nullptr) {
         LOGE("SetInputPixelmap");
     }
     ImageEffect_ErrorCode code = OH_ImageEffect_SetInputPixelmap(mImageEffect, pixelMap);
+    OH_PixelmapNative_Release(pixelMap);
     if (code != ImageEffect_ErrorCode::EFFECT_SUCCESS) {
         LOGE("ConfigRenderInfo SetInputPicture failed: %d", code);
         return false;
@@ -1094,8 +1271,9 @@ bool HmcRenderEngine::SetInputPixelMap(std::shared_ptr<Image> &image, RenderEngi
 VOID HmcRenderEngine::RemoveFilters()
 {
     int size = OH_ImageEffect_GetFilterCount(mImageEffect);
-    for (int i = 0; i < size - 1; i++) {
-        OH_ImageEffect_RemoveFilterByIndex(mImageEffect, 0);
+    while (size > m_restoredFilterCount) {
+        OH_ImageEffect_RemoveFilterByIndex(mImageEffect, m_restoredFilterCount);
+        size--;
     }
 }
 SHARED_PTR<Image> HmcRenderEngine::ConfigRenderInfo(HmcRenderLayerPtr &layerInfo, HmcEFilterPtr config,
@@ -1118,15 +1296,27 @@ SHARED_PTR<Image> HmcRenderEngine::ConfigRenderInfo(HmcRenderLayerPtr &layerInfo
     
     GenBrightnessEFilter();
     GenContrastEFilter();
-    LOGI("HmcRenderEngine::ConfigRenderInfo m_IsInPreviewMode %d, m_IsSwitchPage %d, m_isDragImage %d",
+    LOGD("HmcRenderEngine::ConfigRenderInfo m_IsInPreviewMode %d, m_IsSwitchPage %d, m_isDragImage %d",
         layerInfo->m_IsInPreviewMode, layerInfo->m_IsSwitchPage, layerInfo->m_isDragImage);
-    HmcEFilterPtr cropEfilter = layerInfo->m_IsInPreviewMode && !layerInfo->m_IsSwitchPage && !layerInfo->m_isDragImage
-                                    ? GenCropEFilter()
-                                    : nullptr;
+    bool enableCropEfilter = layerInfo->m_IsInPreviewMode && !layerInfo->m_IsSwitchPage && !layerInfo->m_isDragImage;
+    // 部分机型/链路在进入裁剪界面时 m_IsInPreviewMode 仍为 0，但 transform 的 cropEnable=1 已经生效；
+    // 同时我们会跳过 transform 原生滤镜（避免依赖 libimage_effect_ext.so），因此必须保证 CustomCropFilter 被启用来承担几何变换。
+    if (!enableCropEfilter) {
+        for (auto &e : layerInfo->m_effectList) {
+            if (e && e->m_resource && e->m_resource->m_effectType == "transform") {
+                DOUBLE cropEnable = 0.0;
+                if (e->GetParam("cropEnable", cropEnable) && cropEnable > 0.5) {
+                    enableCropEfilter = true;
+                    break;
+                }
+            }
+        }
+    }
+    HmcEFilterPtr cropEfilter = enableCropEfilter ? GenCropEFilter() : nullptr;
     bool useOrgSize = type != TYPE_PREVIEW && image->originalPicture != nullptr &&
         m_renderType != RenderType::THUMBNAIL;
     for (auto &effect : layerInfo->m_effectList) {
-        LOGI("[Render]effectType: %s", effect->m_resource->m_effectType.c_str());
+        LOGD("[Render]effectType: %s", effect->m_resource->m_effectType.c_str());
         if (effect->m_resource->m_effectType == "adjust") {
             if (m_efilterList.contains("brightness")) {
                 double brightnessValue = -100;
@@ -1149,8 +1339,13 @@ SHARED_PTR<Image> HmcRenderEngine::ConfigRenderInfo(HmcRenderLayerPtr &layerInfo
             ProcessEffect(type, effect, layerInfo);
             int tempNeedRGBA = (int)needRGBA;
             effect->SetParam("outPutFormat", tempNeedRGBA);
+            INT32 baseRotationDeg = 0;
+            if (tex != nullptr) {
+                baseRotationDeg = tex->GetRotation();
+            }
             CalculateEffectiveArea(effect, canvas, useOrgSize ? image->originalWidth : image->width,
-                useOrgSize ? image->originalHeight : image->height, cropEfilter);
+                useOrgSize ? image->originalHeight : image->height, cropEfilter, baseRotationDeg,
+                layerInfo->m_isDragImage);
         }
         ProcessComposeEffect(layerInfo, type, needRGBA, effect);
     }
@@ -1170,7 +1365,16 @@ VOID HmcRenderEngine::ConfigEffectFilter(HmcRenderLayerPtr &layerInfo, RenderEng
     const HmcRenderCanvas &canvas, SHARED_PTR<Image> image)
 {
     for (auto &effect : layerInfo->m_effectList) {
-        LOGI("HmcRenderEngine::ConfigEffectFilter m_effectType:%s", effect->m_resource->m_effectType.c_str());
+        LOGD("HmcRenderEngine::ConfigEffectFilter m_effectType:%s", effect->m_resource->m_effectType.c_str());
+        // 剪裁界面预览：不允许依赖扩展 so（libimage_effect_ext.so）时，transform 对应的原生滤镜创建会失败并刷屏。
+        // 注意：部分链路中 layerInfo->m_IsInPreviewMode 在裁剪时为 0，但 transform 参数里的 cropEnable=1 能可靠表征裁剪状态。
+        if (effect->m_resource->m_effectType == "transform") {
+            DOUBLE cropEnable = 0.0;
+            if (effect->GetParam("cropEnable", cropEnable) && cropEnable > 0.5) {
+                LOGD("ConfigEffectFilter skip native transform filter (cropEnable=1)");
+                continue;
+            }
+        }
         ConfigEFilter(effect, type);
     }
 }
@@ -1192,7 +1396,7 @@ VOID HmcRenderEngine::ConfigEFilter(HmcRenderEffectPtr effect, HmcEFilterPtr efi
                 INT32 temp = value.Get<INT32>();
                 efilter->SetValue(&temp, tempKey.c_str(), ImageEffect_DataType::EFFECT_DATA_TYPE_INT32);
                 if (type == TYPE_EXPORT || type == TYPE_SAVE) {
-                    LOGI("ConfigEFilter key: %s, value: %d", tempKey.c_str(), temp);
+                    LOGD("ConfigEFilter key: %s, value: %d", tempKey.c_str(), temp);
                 } else {
                     LOGD("ConfigEFilter key: %s, value: %d", tempKey.c_str(), temp);
                 }
@@ -1202,7 +1406,7 @@ VOID HmcRenderEngine::ConfigEFilter(HmcRenderEffectPtr effect, HmcEFilterPtr efi
                 DOUBLE temp = value.Get<DOUBLE>();
                 efilter->SetValue(&temp, tempKey.c_str(), ImageEffect_DataType::EFFECT_DATA_TYPE_DOUBLE);
                 if (type == TYPE_EXPORT || type == TYPE_SAVE) {
-                    LOGI("ConfigEFilter key: %s, value: %f", tempKey.c_str(), temp);
+                    LOGD("ConfigEFilter key: %s, value: %f", tempKey.c_str(), temp);
                 } else {
                     LOGD("ConfigEFilter key: %s, value: %f", tempKey.c_str(), temp);
                 }
@@ -1221,20 +1425,45 @@ VOID HmcRenderEngine::ConfigEFilter(HmcRenderEffectPtr effect, HmcEFilterPtr efi
 
 VOID HmcRenderEngine::ConfigEFilter(HmcRenderEffectPtr effect, RenderEngineType type)
 {
-    const char *name = "HMCEFilter";
+    // 优先按资源的 effectName 创建；失败再尝试 HMCEFilter。
+    // 线上日志显示部分环境缺少 libimage_effect_ext.so，会导致 HMCEFilter 创建失败；
+    // 同时也存在部分环境 transform 不是扩展滤镜，直接用 "transform" 创建才可用。
+    std::string createName = "HMCEFilter";
     if (!m_efilterList.contains(effect->m_resource->m_effectType)
         || m_efilterList[effect->m_resource->m_effectType] == nullptr) {
         if (effect->m_resource->m_effectType == "compose") {
-            name = "ComposeFilter";
+            createName = "ComposeFilter";
+        } else if (effect->m_resource->m_effectType == "transform" && !effect->m_resource->m_effectName.empty()) {
+            createName = effect->m_resource->m_effectName; // usually "transform"
         }
-        HmcEFilterPtr filter = std::make_shared<HmcEFilter>(name, effect->m_resource->m_effectType);
+        HmcEFilterPtr filter = std::make_shared<HmcEFilter>(createName, effect->m_resource->m_effectType);
         m_efilterList[effect->m_resource->m_effectType] = filter;
+
+        // transform 尝试降级：如果按 effectName 创建失败，再尝试 HMCEFilter
         if (effect->m_resource->m_effectType == "transform") {
-            m_efilterList[effect->m_resource->m_effectType]->StartCache();
+            OH_EffectFilter *nativeTry = filter != nullptr ? filter->GetEFilter() : nullptr;
+            if (nativeTry == nullptr && createName != "HMCEFilter") {
+                LOGW("ConfigEFilter transform create failed by name=%s, fallback to HMCEFilter",
+                    createName.c_str());
+                filter = std::make_shared<HmcEFilter>("HMCEFilter", effect->m_resource->m_effectType);
+                m_efilterList[effect->m_resource->m_effectType] = filter;
+            }
+            // 缓存开关仅在滤镜可用时开启
+            if (filter != nullptr && filter->GetEFilter() != nullptr) {
+                filter->StartCache();
+            }
         }
     }
     HmcEFilterPtr efilter = m_efilterList[effect->m_resource->m_effectType];
-    OH_ImageEffect_AddFilterByFilter(mImageEffect, efilter->GetEFilter());
+    OH_EffectFilter *native = efilter != nullptr ? efilter->GetEFilter() : nullptr;
+    if (native == nullptr) {
+        LOGE("ConfigEFilter failed, native filter is null. effectType=%s",
+            effect->m_resource->m_effectType.c_str());
+        // 下次渲染重新创建，避免持有一个永久为空的filter对象
+        m_efilterList[effect->m_resource->m_effectType] = nullptr;
+        return;
+    }
+    OH_ImageEffect_AddFilterByFilter(mImageEffect, native);
     efilter->SetValue(&effect->m_name, "m_name", ImageEffect_DataType::EFFECT_DATA_TYPE_PTR);
     efilter->SetValue(&(effect->m_inTex.begin()->key), "m_inTex",
         ImageEffect_DataType::EFFECT_DATA_TYPE_PTR);
@@ -1266,7 +1495,7 @@ void HmcRenderEngine::UpdateTransformParam(HmcRenderEffectPtr &effect, HmcEFilte
 }
 
 VOID HmcRenderEngine::CalculateEffectiveArea(HmcRenderEffectPtr effect, const HmcRenderCanvas &canvas, INT32 width,
-    INT32 height, HmcEFilterPtr cropEfilter)
+    INT32 height, HmcEFilterPtr cropEfilter, INT32 baseRotationDeg, bool isDragImage)
 {
     TransformInfo *info = new TransformInfo();
     info->srcW = width;
@@ -1305,6 +1534,21 @@ VOID HmcRenderEngine::CalculateEffectiveArea(HmcRenderEffectPtr effect, const Hm
     cropEfilter->SetValue(&info->scaleY, "scaleY", EFFECT_DATA_TYPE_FLOAT);
     cropEfilter->SetValue(&info->ratioX, "ratioX", EFFECT_DATA_TYPE_FLOAT);
     cropEfilter->SetValue(&info->ratioY, "ratioY", EFFECT_DATA_TYPE_FLOAT);
+    // CustomCropFilter内部算法需要感知transform的平面旋转角度（rotationZ，单位：degree）
+    float rotationZ = (FLOAT)effect->m_effectParam["rotationZ"].Get<DOUBLE>();
+    // 90°旋转存放在纹理的 baseRotation（m_rotation）中；导出时 transform.rotationZ 可能为 0，
+    // 需要把 baseRotation 合并进来，才能让 CustomCropFilter 真正旋转内容并填满画布。
+    float rotationZTotal = rotationZ + static_cast<float>(baseRotationDeg);
+    rotationZTotal = fmodf(rotationZTotal, 360.0f);
+    if (rotationZTotal < 0.0f) {
+        rotationZTotal += 360.0f;
+    }
+    cropEfilter->SetValue(&rotationZTotal, "rotationZ", EFFECT_DATA_TYPE_FLOAT);
+    // 裁剪页微调旋转角（cropRotate，单位：degree）
+    float cropRotate = (FLOAT)effect->m_effectParam["cropRotate"].Get<DOUBLE>();
+    cropEfilter->SetValue(&cropRotate, "cropRotate", EFFECT_DATA_TYPE_FLOAT);
+    INT32 dragImage = isDragImage ? 1 : 0;
+    cropEfilter->SetValue(&dragImage, "isDragImage", EFFECT_DATA_TYPE_INT32);
              
     delete info;
 }
@@ -1339,6 +1583,7 @@ HmcRenderEffectPtr HmcRenderEngine::CopyParamToWatermark(HmcRenderLayerPtr &laye
     watermarkEffect->SetParam(PROJECT_KEY_TRANSFORM_RATIO_X, info->ratioX);
     watermarkEffect->SetParam(PROJECT_KEY_TRANSFORM_VIEWPORT_X, canvas.canvasWidth_);
     watermarkEffect->SetParam(PROJECT_KEY_TRANSFORM_VIEWPORT_Y, canvas.canvasHeight_);
+    delete info;
 
     return watermarkEffect;
 }
@@ -1473,16 +1718,6 @@ void HmcRenderEngine::CalculateWatermarkPosition(HmcRenderEffectPtr effect,
 VOID HmcRenderEngine::ProcessEffect(RenderEngineType type, HmcRenderEffectPtr effect, HmcRenderLayerPtr &layerInfo)
 {
     if (type == TYPE_EXPORT || type == TYPE_SAVE) {
-        effect->SetParam("cropOffsetX", 0.0);
-        effect->SetParam("cropOffsetY", 0.0);
-        effect->SetParam("cropScaleX", 1.0);
-        effect->SetParam("cropScaleY", 1.0);
-        effect->SetParam("cropRotate", 0.0);
-        effect->SetParam("cropLBX", 0.0);
-        effect->SetParam("cropRTX", 1.0);
-        effect->SetParam("cropLBY", 0.0);
-        effect->SetParam("cropRTY", 1.0);
-        effect->SetParam("cropEnable", 0.0);
         effect->SetParam("renderType", 1.0);
     } else {
         effect->SetParam("renderType", 0.0);

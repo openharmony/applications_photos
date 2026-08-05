@@ -85,4 +85,6 @@ export interface Task {
   faTableAlbumType?: FATableAlbumType;
   playbackInterval?: number;
   photoUris?: string[];
+  /** 编辑覆盖原图后刷新时传入，用于立即把 DB 中已更新的 photo_blob 推送给卡片；防抖期内也会执行推送 */
+  editedImageUri?: string;
 }

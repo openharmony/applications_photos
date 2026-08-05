@@ -118,6 +118,7 @@ import lazy utd from '@ohos.data.uniformTypeDescriptor';
 import lazy { StartOptions } from '@kit.AbilityKit';
 import lazy { BusinessError } from '@kit.BasicServicesKit';
 import lazy { MediaLibraryData } from '@ohos/common/src/main/ets/default/model/browser/photo/data/MediaData';
+import type { LoadingListener } from '@ohos/common/src/main/ets/default/model/browser/LoadingListener';
 import lazy { ImageUtil } from '@ohos/common/src/main/ets/default/utils/ImageUtil';
 import lazy Global from '@ohos/common/src/main/ets/default/utils/GlobalContext';
 
@@ -305,6 +306,7 @@ export struct PhotoBrowserComponent {
   private deviceName = '';
   private backFromCopy = false;
   private uriFromThirdPartyApp: string = '';
+  private viewDataBindDeferListener: LoadingListener | undefined = undefined;
   private editNewUri: string = '';
   private favorCacheItemsMap = new Map<String, MediaItem>();
   private theDeleteItem: MediaItem | null = null;
@@ -349,7 +351,7 @@ export struct PhotoBrowserComponent {
   private onDataReloadWithEditFunc: Function = (): void => this.onDataReloadWithEdit();
   private doMediaOperationFunc: Function = (displayName: string, albumUri: string, completedFunc?: Function):
     Promise<void> => this.doMediaOperation(displayName, albumUri, completedFunc);
-  private doPcMediaOperationBrowserFunc: Function = 
+  private doPcMediaOperationBrowserFunc: Function =
     (...args: ESObject[]): Promise<void> => {
       Log.info(TAG, `doPcMediaOperationBrowserFunc called, args count: ${args.length}, args: ${JSON.stringify(args)}`);
       if (args.length < 3) {
@@ -365,7 +367,7 @@ export struct PhotoBrowserComponent {
       }
       return this.doPcMediaOperationBrowser([operationType, albumName, albumUri]);
     };
-  private doPcMediaOperationFunc: Function = 
+  private doPcMediaOperationFunc: Function =
     (...args: ESObject[]): Promise<void> => {
       Log.info(TAG, `doPcMediaOperationFunc called, args count: ${args.length}, args: ${JSON.stringify(args)}`);
       if (args.length < 3) {
@@ -1166,6 +1168,10 @@ export struct PhotoBrowserComponent {
       Log.warn(TAG, 'currentPhoto is undefined or size is 0.');
       return;
     }
+    if (currentPhoto.isGifType()) {
+      Log.warn(TAG, 'onEditClicked ignored for gif.');
+      return;
+    }
     // 上报编辑的资源类型
     let editType: EditType = currentPhoto.getIsMovingPhoto() ? EditType.MOVING_PHOTO : (currentPhoto.mediaType ===
     photoAccessHelper.PhotoType.IMAGE ? EditType.IMAGE : EditType.VIDEO);
@@ -1482,6 +1488,10 @@ export struct PhotoBrowserComponent {
     if (!currentPhoto) {
       return;
     }
+    if (this.isReadOnlyFromFileManagerNonGalleryPath()) {
+      this.clearAllActionMenus();
+      return;
+    }
     let isEdit = false;
     try {
       isEdit = await currentPhoto?.isEditable?.();
@@ -1677,6 +1687,10 @@ export struct PhotoBrowserComponent {
     if (!currentPhoto) {
       return;
     }
+    if (this.isReadOnlyFromFileManagerNonGalleryPath()) {
+      this.clearAllActionMenus();
+      return;
+    }
     //大图在相册判断--收藏相册逻辑更新
     this.SetFavorCacheItemsMap(currentPhoto);
     //更新三个menuList---this.menuList  this.toolMenuList  this.moreMenuList
@@ -1783,7 +1797,7 @@ export struct PhotoBrowserComponent {
         break;
       case Constants.ENTRY_FROM.RECYCLE:
         list.push(this.isVideoPlaying ? Action.VIDEO_PAUSE : Action.VIDEO_PLAY,
-            this.isMute ? Action.SOUND_OFF_FILLED : Action.SOUND_FILLED);
+          this.isMute ? Action.SOUND_OFF_FILLED : Action.SOUND_FILLED);
         list.push(Action.DELETE);
         break;
       default:
@@ -1795,7 +1809,7 @@ export struct PhotoBrowserComponent {
 
   private setVideoPlayingActions(list: Action[]) {
     list.push(this.isVideoPlaying ? Action.VIDEO_PAUSE : Action.VIDEO_PLAY,
-        this.isMute ? Action.SOUND_OFF_FILLED : Action.SOUND_FILLED);
+      this.isMute ? Action.SOUND_OFF_FILLED : Action.SOUND_FILLED);
   }
 
   private setList(list: Action[], currentPhoto: MediaItem) {
@@ -1858,6 +1872,10 @@ export struct PhotoBrowserComponent {
   }
 
   updateMoreMenu(): void {
+    if (this.isReadOnlyFromFileManagerNonGalleryPath()) {
+      this.clearAllActionMenus();
+      return;
+    }
     this.moreMenuList = [];
     let currentPhoto: MediaItem | undefined = this.getPhotoByIndex(this.currentIndex);
     Log.info(TAG, `updateMoreMenu curIndex: ${this.currentIndex}  isMoving: ${currentPhoto?.getIsMovingPhoto()}`);
@@ -2667,13 +2685,20 @@ export struct PhotoBrowserComponent {
     }
     this.fromCardCurrentIndex = index;
     if (this.uriFromThirdPartyApp) {
+      let viewDataBindDeferred: boolean = false;
       if (index != Constants.NOT_FOUND) {
         this.currentIndex = index;
-        this.uriFromThirdPartyApp = '';
-        this.dataSource.enableGetData(true);
-        this.dataSource.getData(this.currentIndex);
-        this.dataSource.onDataReloaded();
-        Log.info(TAG, `Found: ${this.currentIndex}, ${this.albumUri}`);
+        const deferEmptyComp: boolean = this.shouldDeferViewDataBindForEmptyWindow(index);
+        if (deferEmptyComp) {
+          this.deferViewDataBindUntilAlbumWindowReady(this.uriFromThirdPartyApp);
+          viewDataBindDeferred = true;
+        } else {
+          this.uriFromThirdPartyApp = '';
+          this.dataSource.enableGetData(true);
+          this.dataSource.getData(this.currentIndex);
+          this.dataSource.onDataReloaded();
+          Log.info(TAG, `Found: ${this.currentIndex}, ${this.albumUri}`);
+        }
       } else {
         if (UserFileManagerAccess.isRecycleBin(this.albumUri)) {
           if (this.isFromViewDataWithMediaUri || this.isFromViewDataWithThirdUri) {
@@ -2698,7 +2723,69 @@ export struct PhotoBrowserComponent {
             (index: number): void => this.onGetItemIndexByUri(index, --inLoopCount));
         }
       }
-      this.onPhotoChanged(this.currentIndex);
+      if (!viewDataBindDeferred) {
+        this.onPhotoChanged(this.currentIndex);
+      }
+    }
+  }
+
+  private shouldDeferViewDataBindForEmptyWindow(index: number): boolean {
+    if (!this.isFromViewDataWithMediaUri) {
+      return false;
+    }
+    return !this.isViewDataMediaItemHydrated(index);
+  }
+
+  private isViewDataMediaItemHydrated(index: number): boolean {
+    return this.dataSource.isAlbumWindowItemHydratedForIndex(index);
+  }
+
+  private clearViewDataBindDeferListener(): void {
+    if (!this.viewDataBindDeferListener) {
+      return;
+    }
+    this.dataSource.getAlbumDataSource()?.removeLoadingListener(this.viewDataBindDeferListener);
+    this.viewDataBindDeferListener = undefined;
+  }
+
+  private flushViewDataBindAfterThumbReady(): void {
+    this.uriFromThirdPartyApp = '';
+    this.dataSource.enableGetData(true);
+    this.dataSource.getData(this.currentIndex);
+    this.dataSource.onDataReloaded();
+    Log.info(TAG, `Found: ${this.currentIndex}, ${this.albumUri}`);
+    this.onPhotoChanged(this.currentIndex);
+    setTimeout((): void => {
+      this.broadCast.emit(BrowserConstants.VIEWDATA_FLUSH_BIND_SYNC, []);
+    }, 0);
+  }
+
+  private deferViewDataBindUntilAlbumWindowReady(uri: string): void {
+    this.clearViewDataBindDeferListener();
+    const albumDs = this.dataSource.getAlbumDataSource();
+    if (!albumDs) {
+      this.dataSource.getItemIndexByUri(uri, (retryIndex: number): void => {
+        this.onGetItemIndexByUri(retryIndex);
+      });
+      return;
+    }
+    const tryFlushWhenWindowReady = (): void => {
+      if (!this.isViewDataMediaItemHydrated(this.currentIndex)) {
+        return;
+      }
+      this.clearViewDataBindDeferListener();
+      this.flushViewDataBindAfterThumbReady();
+    };
+    this.viewDataBindDeferListener = {
+      onDataLoadingFinished: tryFlushWhenWindowReady,
+      onSizeLoadingFinished: (_size: number): void => tryFlushWhenWindowReady(),
+      onDataChanged: (_dataIndex: number): void => {
+      }
+    };
+    albumDs.addLoadingListener(this.viewDataBindDeferListener);
+    if (this.isViewDataMediaItemHydrated(this.currentIndex)) {
+      this.clearViewDataBindDeferListener();
+      this.flushViewDataBindAfterThumbReady();
     }
   }
 
@@ -2893,7 +2980,7 @@ export struct PhotoBrowserComponent {
         .opacity(this.geometryOpacity)
         .transition(TransitionEffect.asymmetric(
           PhotoConstants.OPEN_EFFECT,
-            this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
+          this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
         ))
         .enabled(!this.isPullDownAndDragPhoto && !this.browserController.isAnimating)
 
@@ -2978,10 +3065,11 @@ export struct PhotoBrowserComponent {
             })
             .transition(TransitionEffect.asymmetric(
               PhotoConstants.OPEN_EFFECT,
-                this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
+              this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
             ))
         }
-        if (this.isForceShowBar || (!this.isFromViewDataWithThirdUri && !this.isFromPortraitCoverSet)) {
+        if ((this.isForceShowBar || (!this.isFromViewDataWithThirdUri && !this.isFromPortraitCoverSet)) &&
+          !this.isReadOnlyFromFileManagerNonGalleryPath()) {
           if (!this.isPullingUp) {
             PhotoBrowserActionBar({
               onMenuClicked: (action: Action): void => this.onMenuClicked(action),
@@ -2995,7 +3083,7 @@ export struct PhotoBrowserComponent {
               .opacity(this.geometryOpacity)
               .transition(TransitionEffect.asymmetric(
                 PhotoConstants.OPEN_EFFECT_ACTIONBAR,
-                  this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
+                this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
               ))
               .enabled(!this.isPullDownAndDragPhoto)
           }
@@ -3020,7 +3108,7 @@ export struct PhotoBrowserComponent {
               .position({ x: Constants.PERCENT_0, y: Constants.PERCENT_100 })
               .transition(TransitionEffect.asymmetric(
                 PhotoConstants.OPEN_EFFECT,
-                  this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
+                this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
               ))
               .enabled(!this.isPullDownAndDragPhoto && this.toolBarOpacityWithBurstPhotos !== 0)
           }
@@ -3029,7 +3117,7 @@ export struct PhotoBrowserComponent {
             .opacity(this.geometryOpacity)
             .transition(TransitionEffect.asymmetric(
               PhotoConstants.OPEN_EFFECT,
-                this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
+              this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
             ))
             .enabled(!this.isPullDownAndDragPhoto && !this.browserController.isAnimating)
           CustomDialogView({
@@ -3040,10 +3128,11 @@ export struct PhotoBrowserComponent {
             .opacity(this.geometryOpacity)
             .transition(TransitionEffect.asymmetric(
               PhotoConstants.OPEN_EFFECT,
-                this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
+              this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
             ))
             .enabled(!this.isPullDownAndDragPhoto && !this.browserController.isAnimating)
-        } else if (!this.isPullingUp && !this.isFromPortraitCoverSet) {
+        } else if (!this.isPullingUp && !this.isFromPortraitCoverSet &&
+          !this.isReadOnlyFromFileManagerNonGalleryPath()) {
           PhotoBrowserActionBar({
             onMenuClicked: (action: Action): void => this.onMenuClicked(action),
             moreMenuList: this.moreMenuList,
@@ -3054,7 +3143,7 @@ export struct PhotoBrowserComponent {
             .opacity(this.geometryOpacity)
             .transition(TransitionEffect.asymmetric(
               PhotoConstants.OPEN_EFFECT_ACTIONBAR,
-                this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
+              this.browserController.isDrag ? TransitionEffect.opacity(0) : PhotoConstants.CLOSE_EFFECT
             ))
             .enabled(!this.isPullDownAndDragPhoto && !this.browserController.isAnimating)
         }
@@ -3249,6 +3338,17 @@ export struct PhotoBrowserComponent {
   private setSwiperDisable(value: boolean): void {
     Log.info(TAG, `set swiper swipe ${value}`);
     this.disableSwipe = value;
+  }
+
+  private isReadOnlyFromFileManagerNonGalleryPath(): boolean {
+    // viewData + third uri 对应“非图库路径”场景（如 file://docs/...）。
+    return this.pageFrom === Constants.ENTRY_FROM.VIEW_DATA && this.isFromViewDataWithThirdUri;
+  }
+
+  private clearAllActionMenus(): void {
+    this.menuList = [];
+    this.toolMenuList = [];
+    this.moreMenuList = [];
   }
 
   private onDataReloadWithEdit(): void {
@@ -3507,7 +3607,7 @@ export struct PhotoBrowserComponent {
 
   private getMenuOnShowVideo(list: Action[]): void {
     list.push(this.isMute ? Action.SOUND_OFF_FILLED : Action.SOUND_FILLED,
-        this.isVideoPlaying ? Action.VIDEO_PAUSE : Action.VIDEO_PLAY);
+      this.isVideoPlaying ? Action.VIDEO_PAUSE : Action.VIDEO_PLAY);
     list.push(getScreen().getWinMode() === WindowMode.FULLSCREEN ?
       Action.PHONE_ROTATE : Action.PHONE_ROTATE_INVALID);
   }

@@ -193,6 +193,7 @@ export class TimelineAppBarManager extends GridAppBarManager {
         titleProp.mainTitle.fontSize = AppBarStyles.FIRST_LEVEL_TITLE_FONT_SIZE;
         titleProp.subTitle.visibility = Visibility.Visible;
       }
+      titleProp.subTitle.visibility = titleProp.subTitle.content ? Visibility.Visible : Visibility.None;
       titleProp.mainTitle.content = newState;
     })
 
@@ -204,6 +205,7 @@ export class TimelineAppBarManager extends GridAppBarManager {
         return;
       }
       titleProp.subTitle.content = newState;
+      titleProp.subTitle.visibility = newState ? Visibility.Visible : Visibility.None;
     })
   }
 

@@ -223,6 +223,8 @@ export struct SwiperView {
 
   private isShowThumbSource: boolean = true;
   @State viewModel: SwiperVM = new SwiperThirdVM(this.stateMachine);
+  /** 标准 ViewData 且 enableGetData(false) 时为 false，推迟挂载 LazyForEach 直至 flush。 */
+  @State viewDataSwiperLazyMounted: boolean = true;
   @State startTouchIndex: number = this.stateMachine.getCurrentIndex();
   @Prop @Watch('updateDataSourceMarginAndWidth') forceRefresh: number = 0;
   @Prop @Watch('onVideoPlayChange') private isVideoPlaying: boolean;
@@ -676,6 +678,12 @@ export struct SwiperView {
 
   private onPhotoSingleClick: Function = (): void => {
   };
+  private readonly onViewDataFlushBindSync: () => void = (): void => {
+    setTimeout((): void => {
+      this.viewDataSwiperLazyMounted = true;
+      this.syncCurItemAndSlideBarFromDataSource();
+    }, 0);
+  };
   private geoIdMgr: GeometryIdManager = {
     canSetNewId: () => {
       return true;
@@ -730,9 +738,12 @@ export struct SwiperView {
     this.viewModel.imageList = this.imageList;
     this.viewModel.registerStateListener(this.swiperStateListener);
     this.viewModel.onCreate(this.browserController.browserAnimController);
+    this.viewDataSwiperLazyMounted = this.browserController.shouldMountSwiperLazyForEachNow();
+    this.broadCast?.on(BrowserConstants.VIEWDATA_FLUSH_BIND_SYNC, this.onViewDataFlushBindSync);
   }
 
   aboutToDisappear() {
+    this.broadCast?.off(BrowserConstants.VIEWDATA_FLUSH_BIND_SYNC, this.onViewDataFlushBindSync);
     this.viewModel.unRegisterStateListener();
     this.viewModel.onDestroy();
   }
@@ -745,6 +756,19 @@ export struct SwiperView {
       return Visibility.None;
     }
     return Visibility.Visible;
+  }
+
+  private syncCurItemAndSlideBarFromDataSource(): void {
+    const cur: number = this.viewModel.getCurrentIndex();
+    const curItemResult: MediaResult | undefined =
+      this.browserController.dataSource.getDataWithoutCache(cur);
+    if (curItemResult?.item) {
+      this.viewModel.setCurrentDisplayItem(curItemResult.item);
+    }
+    this.isSlideBarShow = this.viewModel.isSlideBarVisibility();
+    if (DeviceInfo.isPc()) {
+      this.viewModel.getPCImageCompleteValue();
+    }
   }
 
   build() {
@@ -782,93 +806,95 @@ export struct SwiperView {
     Stack({ alignContent: Alignment.Bottom }) {
       Stack() {
         Swiper(this.swiperController) {
-          LazyForEach(this.browserController.dataSource, (result: MediaResult, index?: number): void => {
-            if (result) {
-              PhotoItem({
-                photoBrowserStateMachine: this.stateMachine,
-                browserAnimController: this.browserController.browserAnimController,
-                mediaResult: result,
-                transitionTag: this.mTransition ? this.mTransition : 'default_id',
-                verifyPhotoScaled: this.verifyPhotoScaledFunc,
-                albumUri: this.browserController.getAlbumUri(),
-                albumInfo: this.browserController.getAlbumInfo(),
-                canPullingUp: this.canPullingUp,
-                geometryTransitionEnable: this.geometryTransitionEnable,
-                broadCast: this.broadCast,
-                isRunningAnimation: $isRunningAnimation,
-                isFromFACard: this.viewModel.isFromFACard,
-                isInSelectedMode: this.viewModel.isInSelectedMode,
-                dataSource: this.browserController.dataSource,
-                isDoingDeleteAnim: $isDoingDeleteAnim,
-                isLeftToRightAnim: $isLeftToRightAnim,
-                isPreviewListScrolling: $isScrolling,
-                isShowImageAnalyzer: this.isShowImageAnalyzer,
-                isPcCameraPull: this.isPcCameraPull,
-                swiperController: this.swiperController,
-                imageIndex: index,
-                imageList: this.imageList,
-                isPcPictureScene: this.isPcPictureScene,
-                isDetailSelected: this.browserController.isDetailSelected,
-                isPrivateHideState: this.isPrivateHideState,
-                onLargePhotoComplete: () => {
-                  if (index !== undefined && index === this.viewModel.getCurrentIndex() && result.isShowThumbnail) {
-                    this.browserController.updateActionBar(index)
-                  }
-                  this.browserController.removeCachedThumbnail(result.item);
-                },
+          if (this.viewDataSwiperLazyMounted) {
+            LazyForEach(this.browserController.dataSource, (result: MediaResult, index?: number): void => {
+              if (result) {
+                PhotoItem({
+                  photoBrowserStateMachine: this.stateMachine,
+                  browserAnimController: this.browserController.browserAnimController,
+                  mediaResult: result,
+                  transitionTag: this.mTransition ? this.mTransition : 'default_id',
+                  verifyPhotoScaled: this.verifyPhotoScaledFunc,
+                  albumUri: this.browserController.getAlbumUri(),
+                  albumInfo: this.browserController.getAlbumInfo(),
+                  canPullingUp: this.canPullingUp,
+                  geometryTransitionEnable: this.geometryTransitionEnable,
+                  broadCast: this.broadCast,
+                  isRunningAnimation: $isRunningAnimation,
+                  isFromFACard: this.viewModel.isFromFACard,
+                  isInSelectedMode: this.viewModel.isInSelectedMode,
+                  dataSource: this.browserController.dataSource,
+                  isDoingDeleteAnim: $isDoingDeleteAnim,
+                  isLeftToRightAnim: $isLeftToRightAnim,
+                  isPreviewListScrolling: $isScrolling,
+                  isShowImageAnalyzer: this.isShowImageAnalyzer,
+                  isPcCameraPull: this.isPcCameraPull,
+                  swiperController: this.swiperController,
+                  imageIndex: index,
+                  imageList: this.imageList,
+                  isPcPictureScene: this.isPcPictureScene,
+                  isDetailSelected: this.browserController.isDetailSelected,
+                  isPrivateHideState: this.isPrivateHideState,
+                  onLargePhotoComplete: () => {
+                    if (index !== undefined && index === this.viewModel.getCurrentIndex() && result.isShowThumbnail) {
+                      this.browserController.updateActionBar(index)
+                    }
+                    this.browserController.removeCachedThumbnail(result.item);
+                  },
 
-                // Some state for image analyzer behaviors
-                isPullDownAndDragPhoto: $isPullDownAndDragPhoto,
-                isDoingImageSlideAnimation: $isDoingImageSlideAnimation,
-                canRespondPanGesture: $canRespondPanGesture,
-                isTappingAiButton: $isTappingAiButton,
-                isTappingAiButtonChange: $isTappingAiButtonChange,
-                isMenuShow: $isMenuShow,
-                isMenuShowStatusChange: $isMenuShowStatusChange,
-                hasSelectedText: $hasSelectedText,
-                isSelectedTextChange: $isSelectedTextChange,
-                isOnDragText: $isOnDragText,
-                isInAnimateToPosition: $isInAnimateToPosition,
-                currentImageWidth: $currentImageWidth,
-                currentDeleteID: $currentDeleteID,
-                isShowBar: $isShowBar,
-                isVideoToEnd: this.isVideoToEnd,
-                videoCoverFrame: this.videoCoverFrame,
-                isFrameExpand: this.isFrameExpand,
-                isNeedRightMenu: true,
-                isVideoPlaying: this.isVideoPlaying,
-                geoIdMgr: this.geoIdMgr,
-                onPhotoSingleClick: this.onPhotoSingleClick,
-                curHiSearchWords: this.curHiSearchWords,
-                isUserCreatedAlbum: this.isUserCreatedAlbum,
-                isSelected: (): boolean => this.isSelected(),
-                selectStateChange: (): void => this.selectStateChange(),
-                changeMoreMenuList: (array: Action[], index: number): void => this.changeMoreMenuList(array, index),
-                isThirdScene: this.isThirdScene,
-              })
-                .opacity(this.swiperOpacityWithBurstPhotos)
-                .zIndex((result.item?.uniqueId === this.currentDeleteID) ?
-                BrowserConstants.DELETE_LOW_INDEX : BrowserConstants.DELETE_HIGH_INDEX)
-            }
-          }, (result: MediaResult, index?: number): string => {
-            if (result === null || result === undefined) {
-              return JSON.stringify(result) + index;
-            }
-            if (result.item && index === this.viewModel.getCurrentIndex()) {
-              this.viewModel.curItem = result.item;
-              this.isSlideBarShow = this.viewModel.isSlideBarVisibility();
-
-              if (DeviceInfo.isPc()) {
-                this.viewModel.getPCImageCompleteValue();
+                  // Some state for image analyzer behaviors
+                  isPullDownAndDragPhoto: $isPullDownAndDragPhoto,
+                  isDoingImageSlideAnimation: $isDoingImageSlideAnimation,
+                  canRespondPanGesture: $canRespondPanGesture,
+                  isTappingAiButton: $isTappingAiButton,
+                  isTappingAiButtonChange: $isTappingAiButtonChange,
+                  isMenuShow: $isMenuShow,
+                  isMenuShowStatusChange: $isMenuShowStatusChange,
+                  hasSelectedText: $hasSelectedText,
+                  isSelectedTextChange: $isSelectedTextChange,
+                  isOnDragText: $isOnDragText,
+                  isInAnimateToPosition: $isInAnimateToPosition,
+                  currentImageWidth: $currentImageWidth,
+                  currentDeleteID: $currentDeleteID,
+                  isShowBar: $isShowBar,
+                  isVideoToEnd: this.isVideoToEnd,
+                  videoCoverFrame: this.videoCoverFrame,
+                  isFrameExpand: this.isFrameExpand,
+                  isNeedRightMenu: true,
+                  isVideoPlaying: this.isVideoPlaying,
+                  geoIdMgr: this.geoIdMgr,
+                  onPhotoSingleClick: this.onPhotoSingleClick,
+                  curHiSearchWords: this.curHiSearchWords,
+                  isUserCreatedAlbum: this.isUserCreatedAlbum,
+                  isSelected: (): boolean => this.isSelected(),
+                  selectStateChange: (): void => this.selectStateChange(),
+                  changeMoreMenuList: (array: Action[], index: number): void => this.changeMoreMenuList(array, index),
+                  isThirdScene: this.isThirdScene,
+                })
+                  .opacity(this.swiperOpacityWithBurstPhotos)
+                  .zIndex((result.item?.uniqueId === this.currentDeleteID) ?
+                    BrowserConstants.DELETE_LOW_INDEX : BrowserConstants.DELETE_HIGH_INDEX)
+              } else {
+                Column()
+                  .width('100%')
+                  .height('100%')
               }
-            }
-            if (result.captureId) {
-              return result.captureId;
-            } else {
+            }, (result: MediaResult, index?: number): string => {
+              if (result === null || result === undefined) {
+                return `${index}_empty`;
+              }
+              if (result.captureId) {
+                return result.captureId;
+              }
               return `${result.item?.path}`;
-            }
-          })
+            })
+          } else {
+            Column()
+              .width('100%')
+              .height('100%')
+          }
         }
+        .key(this.viewDataSwiperLazyMounted ? 'browser_vd_swiper_lazy' : 'browser_vd_swiper_ph')
         .onKeyPreIme((event: KeyEvent) => {
           if (DeviceInfo.isPc() && event.type === KeyType.Down) {
             if (event.keyCode === KeyCode.KEYCODE_DPAD_RIGHT || event.keyCode === KeyCode.KEYCODE_DPAD_LEFT) {
@@ -921,6 +947,11 @@ export struct SwiperView {
             }
           }
         })
+        .onAppear((): void => {
+          setTimeout((): void => {
+            this.syncCurItemAndSlideBarFromDataSource();
+          }, 0);
+        })
 
         ImageFlushItem({
           broadCast: this.broadCast,
@@ -943,8 +974,8 @@ export struct SwiperView {
 
       // 大图组件的pc和手机的图片下面的浏览条
       if (this.browserController.isBrowserShowContent && !this.isFromPortraitCoverSet &&
-        this.viewModel.shouldShowPreview() &&
-        this.viewModel.isShowThumbSource && this.showPreviewer() && this.viewModel.isThumbsourceLoadFinished) {
+      this.viewModel.shouldShowPreview() &&
+      this.viewModel.isShowThumbSource && this.showPreviewer() && this.viewModel.isThumbsourceLoadFinished) {
         PhotoPreviewer({
           browserController: this.browserController,
           stateMachine: this.stateMachine,
@@ -990,7 +1021,7 @@ export struct SwiperView {
       }
     }
     .id(TAG)
-    .padding({bottom:30})
+    // .padding({ bottom: this.isShowBar ? 30 : 0 })
     .width(Constants.FULL_PERCENT)
     .height(Constants.FULL_PERCENT)
   }

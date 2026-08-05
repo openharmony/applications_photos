@@ -69,7 +69,7 @@ import lazy { IrregularElement, IrregularElementBuilder } from '../../albumgrid/
 import lazy { BaseBuildParams, emptyBuildBuilder } from './ViewLoader';
 import text from '@ohos.graphics.text';
 import { Stack } from '@kit.ArkTS';
-import { LazyLoadImg } from './LazyLoadImg';
+// import { LazyLoadImg } from './LazyLoadImg';
 
 const TAG: string = 'DayGridView';
 AppStorage.setOrCreate<number>('TimelinePageIndex', Constants.INVALID);
@@ -456,17 +456,11 @@ export struct DayGridView {
           geometryTransitionString: this.viewModel.getGeometryTransitionId(item, index as number),
           gridItemWidth: this.imageGridItemHeight,
           isRecycle: this.albumInfo.isTrashAlbum,
-        }).onAppear(()=>{
-          Log.info(TAG,'MinimalImageGridItemComponent');
         })
           .reuseId(UiUtil.generateReuseId(Constants.PHOTO_TRANSITION_TIMELINE_MINIMAL,
           item, this.viewModel.getGeometryTransitionId(item, index as number)))
       } else {
         if (!this.controller.recycleGridItemSate) {
-          LazyLoadImg({
-            item: item,
-            touchScrollEnd: this.touchScrollEnd,
-          }) {
             ImageGridItemComponent({
               item: item,
               dataSource: this.viewModel.dataSource,
@@ -511,13 +505,9 @@ export struct DayGridView {
               pcRecycleBottomHeight: this.recycleBottomHeight,
               selectMediaType: this.controller.selectMediaType,
             })
-              .onAppear(() => {
-                Log.info(TAG, 'ImageGridItemComponent');
-              })
               .reuseId(this.controller.isBlockReuse ? undefined :
                 UiUtil.generateReuseId(Constants.PHOTO_TRANSITION_TIMELINE, item,
                   this.viewModel.getGeometryTransitionId(item, index as number)));
-          }
         }
       }
     }, (item: ViewData, index?: number) => {
@@ -627,8 +617,7 @@ export struct DayGridView {
       this.isGridScrolling = true;
       this.viewModel.onScrollStart();
     })
-    // todo 先注释注释后日试图滚动正常
-    // .onScrollFrameBegin((offset: number, state: number) => this.viewModel.onScrollFrameBegin(offset, state))
+    .onScrollFrameBegin((offset: number, state: number) => this.viewModel.onScrollFrameBegin(offset, state))
     .onWillScroll((offset: number, state: number, source: number) => this.viewModel.onWillScroll(offset, state, source))
     .onScrollStop(() => {
       this.isGridScrolling = false;
@@ -763,7 +752,7 @@ export struct DayGridView {
     if (!this.controller.isSelectMode) {
       tempMenuList.push(Action.MULTISELECT);
     }
-    if (this.albumInfo.uri != "" && !this.albumInfo.isTrashAlbum && isFavor !== undefined) {
+    if (!this.albumInfo.isTrashAlbum && isFavor !== undefined) {
       tempMenuList.push(isFavor ? Action.FAVORITE : Action.NOT_FAVORITE);
     }
     if (this.albumInfo.isTrashAlbum) {

@@ -342,6 +342,10 @@ export class VideoPlayController {
     };
     this.avPlayerCallBack.playingCallBack = (): void => {
       let duration = this.avPlayer?.duration || 0;
+      if (duration > 0 && this.duration === 0) {
+        this.duration = duration;
+        this.videoPlayer?.syncItemDurationFromAvPlayer(duration);
+      }
       this.videoPlayer?.onPlaying(this.src, this.avPlayer?.surfaceId);
       let currentState: string | undefined = VideoPlayController.currentVideoController.getAvPlayerState();
       Log.info(TAG, `${this.label} will invoke playing callback. ${this.seekRawTime}. ${duration}. ${currentState}`);

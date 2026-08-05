@@ -85,6 +85,7 @@ import lazy { AccessibilityUtil } from '@ohos/common/src/main/ets/default/utils/
 import lazy { CreationActionRegister } from '@ohos/common/src/main/ets/default/view/actionbar/CreationAction';
 import lazy { MovieActionRegister } from '@ohos/common/src/main/ets/default/view/actionbar/MovieAction';
 import lazy { VideoSplicingActionRegister } from '@ohos/common/src/main/ets/default/view/actionbar/VideoSplicingAction';
+import lazy { MoveActionRegister } from '@ohos/common/src/main/ets/default/view/actionbar/MoveAction';
 import lazy { AlbumDefine } from '@ohos/common/src/main/ets/default/model/browser/AlbumDefine';
 import lazy { photoAccessHelper } from '@kit.MediaLibraryKit';
 import lazy { getScreen } from '@ohos/common/src/main/ets/default/model/common/ScreenManager';
@@ -224,8 +225,8 @@ export class AlbumPhotoGridAppBarManager extends GridAppBarManager {
     // 返回
     if (this.albumInfo?.subType === photoAccessHelper.AlbumSubtype.GEOGRAPHY_LOCATION) {
       new LeftBackActionRegister(() => this.backFunc()).register(params);
-    } else if (!((this.albumInfo?.isUserCreatedAlbum || this.albumInfo?.isSourceAlbum ||
-      this.albumInfo?.isSystemAlbum) && DeviceInfo.isTablet())) {
+    } else {
+      // 统一展示返回按钮（包括 Pad/折叠屏下的系统默认相册/来源相册）
       new LeftBackActionRegister(() => this.backFunc()).register(params);
     }
     this.actionBarController.put(this.elements.get(GridAppBarManager.BUILDER_KEY_TITLE));
@@ -401,6 +402,11 @@ export class AlbumPhotoGridAppBarManager extends GridAppBarManager {
     }
 
     // 删除
+    if (this.albumInfo?.subType !== Number(photoAccessHelper.AlbumSubtype.TRASH)) {
+      new MoveActionRegister().register(params);
+    }
+
+    // 删除
     new DeleteActionRegister().register(params);
 
   }
@@ -482,43 +488,40 @@ export class AlbumPhotoGridAppBarManager extends GridAppBarManager {
     this.browserController?.cancelBrowserToGridAnim();
     // 返回相册页
     Log.info(TAG, `Exit album, albumname ${AlbumDefine.getAnonymizeAlbumName(this.albumInfo?.albumName)}, subType ${this.albumInfo?.subType}`);
-    if (!(DeviceInfo.isTablet() &&
-      (this.albumInfo?.isSystemAlbum || this.albumInfo?.isUserCreatedAlbum || this.albumInfo?.isSourceAlbum))) {
-      AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_DOING_GEOMETRY_TRANSITION_ANIMATION, true);
-      animateTo({
-        duration: getDurationConst(GridLink.ALBUM_ACTIONBAR),
-        delay: getDelayConst(GridLink.ALBUM_ACTIONBAR),
-        curve: Curve.Sharp,
-      }, (): void => {
-        AppStorage.setOrCreate<number>(Constants.KEY_OF_ALBUM_ACTIONBAR_OPACITY, 1);
-      })
-      animateTo({
-        duration: getDurationConst(GridLink.OUT_PHOTO_GRID_ACTIONBAR),
-        curve: Curve.Sharp,
-      }, (): void => {
-        AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_ACTIONBAR_OPACITY, 0);
-        AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 0);
-        AppStorage.setOrCreate<number>(Constants.KEY_OF_ALBUM_OPACITY, 1);
-      })
-      animateTo({
-        duration: getDurationConst(GridLink.PHOTO_GRID_TO_ALBUM),
-        curve: Curve.Friction,
-        onFinish: (): void => {
-          performanceMonitor.end('CLOSE_ALBUM');
-          AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_DOING_GEOMETRY_TRANSITION_ANIMATION, false);
-        }
-      }, (): void => {
-        this.updateFocusWhenBackToAlbum();
-        AppStorage.setOrCreate<number>(Constants.KEY_OF_SELECTED_ALBUM_INDEX, -1);
-        AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_SHOW_PHOTO_GRID_VIEW, false);
-        AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_SHOW_CITY_GRID_VIEW, false);
-        AppStorage.setOrCreate<string>(Constants.KEY_OF_SELECTED_ALBUM_URI, '');
-        let controller: PhotoGridViewController = new PhotoGridViewController();
-        controller.setIsShow(TAG, 'backFunc', controller.isShow, false);
-        controller.dataSource = this.dataSource;
-        getContext().eventHub.emit(PhotoGridViewConstants.EVENT_KEY_SHOW_GRID_VIEW, controller);
-      });
-    }
+    AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_DOING_GEOMETRY_TRANSITION_ANIMATION, true);
+    animateTo({
+      duration: getDurationConst(GridLink.ALBUM_ACTIONBAR),
+      delay: getDelayConst(GridLink.ALBUM_ACTIONBAR),
+      curve: Curve.Sharp,
+    }, (): void => {
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_ALBUM_ACTIONBAR_OPACITY, 1);
+    })
+    animateTo({
+      duration: getDurationConst(GridLink.OUT_PHOTO_GRID_ACTIONBAR),
+      curve: Curve.Sharp,
+    }, (): void => {
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_ACTIONBAR_OPACITY, 0);
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 0);
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_ALBUM_OPACITY, 1);
+    })
+    animateTo({
+      duration: getDurationConst(GridLink.PHOTO_GRID_TO_ALBUM),
+      curve: Curve.Friction,
+      onFinish: (): void => {
+        performanceMonitor.end('CLOSE_ALBUM');
+        AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_DOING_GEOMETRY_TRANSITION_ANIMATION, false);
+      }
+    }, (): void => {
+      this.updateFocusWhenBackToAlbum();
+      AppStorage.setOrCreate<number>(Constants.KEY_OF_SELECTED_ALBUM_INDEX, -1);
+      AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_SHOW_PHOTO_GRID_VIEW, false);
+      AppStorage.setOrCreate<boolean>(Constants.KEY_OF_IS_SHOW_CITY_GRID_VIEW, false);
+      AppStorage.setOrCreate<string>(Constants.KEY_OF_SELECTED_ALBUM_URI, '');
+      let controller: PhotoGridViewController = new PhotoGridViewController();
+      controller.setIsShow(TAG, 'backFunc', controller.isShow, false);
+      controller.dataSource = this.dataSource;
+      getContext().eventHub.emit(PhotoGridViewConstants.EVENT_KEY_SHOW_GRID_VIEW, controller);
+    });
   }
 
   private updateFocusWhenBackToAlbum(): void {

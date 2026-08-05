@@ -887,7 +887,8 @@ export struct BottomToolbar {
           right: !UiUtil.isMirrorMode() ?
             (this.isScreenPortrait && this.isSupportTabScroll ? this.calcEndPadding() : 0) :
             (this.isScreenPortrait ? 12 : 0),
-          top: !this.isScreenPortrait ? (this.isSupportTabScroll ? 10 : this.caleTabsDefineSpace()) : 0
+          // top: !this.isScreenPortrait ? (this.isSupportTabScroll ? 10 : this.caleTabsDefineSpace()) : 0
+          top: !this.isScreenPortrait ? (this.isSupportTabScroll ? 10 : 10) : 0
         })
         .id('petalClip_bottomToolBar_TabsBar')
       }
@@ -930,8 +931,8 @@ export struct BottomToolbar {
       angle: this.isScreenPortrait ? 90 : 180,
       colors: [
         ['rgba(0, 0, 0, 0)', 0],
-        ['rgba(0, 0, 0, 1)', this.isSupportTabScroll && this.isShowShadowStart ? this.shadowRate : 0],
-        ['rgba(0, 0, 0, 1)', this.isSupportTabScroll && this.isShowShadowEnd ? 1 - this.shadowRate : 1],
+        ['rgba(0, 0, 0, 0)', this.isSupportTabScroll && this.isShowShadowStart ? this.shadowRate : 0],
+        ['rgba(0, 0, 0, 0)', this.isSupportTabScroll && this.isShowShadowEnd ? 1 - this.shadowRate : 1],
         ['rgba(0, 0, 0, 0)', 1]]
     })
     // .blendMode(BlendMode.SRC_OVER, BlendApplyType.OFFSCREEN)
@@ -1025,9 +1026,20 @@ export struct BottomToolbar {
     }
     // 从文本Tab切换
     if (this.editor.tabIndex === TabName.TabTextEdit) {
-      this.fromTextTab(index);
+      const needWaitComposeForMosaic = index === TabName.TabMosaic;
+      const deferSwitch = this.fromTextTab(index, needWaitComposeForMosaic ? () => {
+        HiLog.i(TAG, 'fromTextTab compose finished, continue switch to mosaic');
+        this.doSwitchMenu(index);
+      } : undefined);
       this.getUIContext().setKeyboardAvoidMode(KeyboardAvoidMode.OFFSET);
+      if (needWaitComposeForMosaic && deferSwitch) {
+        return;
+      }
     }
+    this.doSwitchMenu(index);
+  }
+
+  private doSwitchMenu(index: number) {
     if (index === TabName.TabTextEdit) {
       // KeyboardAvoidMode.None; 避免拉起键盘时，触发ScreenTool onAreaChange
       this.getUIContext().setKeyboardAvoidMode(KEYBOARD_AVOID_MODE_NONE);
@@ -1073,7 +1085,7 @@ export struct BottomToolbar {
     HiLog.i(TAG, 'hide Aperture');
   }
 
-  private fromTextTab(toIndex: number) {
+  private fromTextTab(toIndex: number, onComposeDone?: () => void): boolean {
     this.textAreaManager.initLastTextArea();
     // 清空undo/redo信息
     this.textCanUndo = false;
@@ -1101,16 +1113,34 @@ export struct BottomToolbar {
         this.editor.isSupportApertureEdit = false;
         this.hideXTStyleAperture();
         this.refreshXTStyleTab();
+        if (toIndex === TabName.TabCrop || toIndex === TabName.TabAdjust) {
+          this.editor.previewStarter.updatePreview();
+        }
+        onComposeDone?.();
       });
+      return true;
     } else {
       this.asset.clearComposedCache();
+      return false;
     }
   }
 
   private switchMenu(enterMenu: MenuAttr, leaveMenu: MenuAttr, index: number, close = false): void {
-    leaveMenu.leaveMenu(index, close);
-    enterMenu.enterMenu();
-    enterMenu.changeMenuAnimate(index);
+    const enterTargetMenu = (): void => {
+      enterMenu.enterMenu();
+      enterMenu.changeMenuAnimate(index);
+    };
+    const leaveResult = leaveMenu.leaveMenu(index, close) as Promise<void> | void;
+    if (leaveResult !== undefined && typeof (leaveResult as Promise<void>).then === 'function') {
+      (leaveResult as Promise<void>).then(() => {
+        enterTargetMenu();
+      }).catch((err: Error | BusinessError) => {
+        HiLog.e(TAG, `switchMenu leaveMenu failed: ${JSON.stringify(err)}`);
+        enterTargetMenu();
+      });
+      return;
+    }
+    enterTargetMenu();
   }
 
   scrollToTargetTabIndex(index: number) {
@@ -1393,9 +1423,9 @@ export struct BottomToolbar {
         justifyContent: this.isScreenPortrait ?
           FlexAlign.Start : FlexAlign.SpaceBetween
       }) {
-        Divider()
-          .tabDivider(this.isScreenPortrait)
-          .visibility(this.isShowDivider() ? Visibility.Visible : Visibility.Hidden);
+        // Divider()
+        //   .tabDivider(this.isScreenPortrait)
+        //   .visibility(this.isShowDivider() ? Visibility.Visible : Visibility.Hidden);
         this.switchTabsDefine();
       }
     }

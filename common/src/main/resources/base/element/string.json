@@ -913,6 +913,20 @@
             }
         },
         {
+            "name":"small_batch_delete_to_trash_success",
+            "value":"Moved to Recently deleted.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"small_batch_delete_permanently_success",
+            "value":"Permanently deleted.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
             "name":"action_hidden_process",
             "value":"Hiding…",
             "attr":{

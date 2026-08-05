@@ -116,7 +116,7 @@ export struct ToolBarView {
       }
       .margin({
         // bottom: 0,
-        bottom: this.isFromPhotoBrowser ? 30 : 0,
+        // bottom: this.isFromPhotoBrowser ? 30 : 0,
       })
       .opacity(this.opacityValue)
       .width(Constants.PERCENT_100)

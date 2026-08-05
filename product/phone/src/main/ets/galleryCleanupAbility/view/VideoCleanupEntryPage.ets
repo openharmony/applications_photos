@@ -69,14 +69,15 @@ export struct VideoCleanupEntryPage {
     this.isAppLockShow = state;
   };
 
-  private galleryCleanupOnForegroundFun: Function = async (isOnForeground: boolean): Promise<void> => {
-    Log.info(TAG, `VideoCleanupEntryPage galleryCleanupOnForegroundFun: isOnForeground=${isOnForeground}`);
-    if (isOnForeground) {
-      LocalStorage.getShared()?.setOrCreate<PageStatus>(Constants.VIDEO_PAGE_STATUS, PageStatus.SHOW);
-    } else {
-      LocalStorage.getShared()?.setOrCreate<PageStatus>(Constants.VIDEO_PAGE_STATUS, PageStatus.HIDE);
+  private galleryCleanupOnForegroundFun: (isOnForeground: boolean) => Promise<void> =
+    async (isOnForeground: boolean): Promise<void> => {
+      Log.info(TAG, `VideoCleanupEntryPage galleryCleanupOnForegroundFun: isOnForeground=${isOnForeground}`);
+      if (isOnForeground) {
+        LocalStorage.getShared()?.setOrCreate<PageStatus>(Constants.VIDEO_PAGE_STATUS, PageStatus.SHOW);
+      } else {
+        LocalStorage.getShared()?.setOrCreate<PageStatus>(Constants.VIDEO_PAGE_STATUS, PageStatus.HIDE);
+      }
     }
-  }
 
   private createActionBar(): ActionBarProp {
     let menuList: Action[] = [];

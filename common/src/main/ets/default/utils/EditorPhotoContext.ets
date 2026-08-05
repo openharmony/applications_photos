@@ -124,6 +124,9 @@ export class EditorPhotoContext {
     if (this.editorStage === EditorStage.NONE) {
       return;
     }
+    if (this.shouldSkipBroadNotify(changeType, uris)) {
+      return;
+    }
     Log.info(TAG, 'libraryNotify action is required in editing scenarios.');
     switch (this.editorType) {
       case EditType.IMAGE:
@@ -139,6 +142,24 @@ export class EditorPhotoContext {
         Log.error(TAG, 'editor source type is none');
         break;
     }
+  }
+
+  private shouldSkipBroadNotify(changeType: number, uris: string[]): boolean {
+    if (this.editorType !== EditType.IMAGE || !this.isOverride || this.editorStage !== EditorStage.EXIT) {
+      return false;
+    }
+    if (changeType !== LibraryNotifyType.UPDATE) {
+      return false;
+    }
+    if (uris.length <= 1) {
+      return false;
+    }
+    if (!uris.includes(this.editorUriOnExit)) {
+      return false;
+    }
+    Log.info(TAG, `skip broad notify while exiting editor, uriCount: ${uris.length}, ` +
+      `editorUriOnExit: ${this.editorUriOnExit}`);
+    return true;
   }
 
   private imageHandler(changeType: number, uris: string[]): void {

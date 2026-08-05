@@ -148,7 +148,8 @@ export struct GallerySettingsBasePage {
     DiggingHoleCameraArea = getScreen().getDiggingHoleCameraArea();
   @State private actionBarPaddingTop: number = 0;
   private readonly onAreaHeightChangedFunc: Function = (data: number): void => {
-    if (!DeviceInfo.isPcOrTablet()) {
+    // 设置页在 pad 上也需要避让状态栏；pc 维持现有布局不变
+    if (DeviceInfo.isTablet() || !DeviceInfo.isPcOrTablet()) {
       this.actionBarPaddingTop = this.getUIContext()?.px2vp(data) ?? data;
     }
   };
@@ -297,9 +298,10 @@ export struct GallerySettingsBasePage {
     this.isPageOnShow = true;
     
     // 初始化ActionBar的padding top，动态适配状态栏高度
-    if (!DeviceInfo.isPcOrTablet()) {
+    if (DeviceInfo.isTablet() || !DeviceInfo.isPcOrTablet()) {
       this.actionBarPaddingTop = this.getUIContext()?.px2vp(this.statusBarHeight) ?? this.statusBarHeight;
     } else {
+      // pc：保持原有布局（不额外下移标题栏）
       this.actionBarPaddingTop = 0;
     }
     getScreen().on(ScreenManager.ON_AREA_HEIGHT_CHANGED, this.onAreaHeightChangedFunc);
