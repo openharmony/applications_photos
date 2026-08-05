@@ -7652,7 +7652,7 @@ export struct PhotoItem {
         Log.error(TAG, `calculateXComponentSize display.getDefaultDisplaySync, error code : ${err.code}`)
       }
     }
-    // 三方/VIEWDATA 场景下，视频使用 XComponent surface 渲染无法被普通 ArkUI 组件覆盖，
+    // 三方/VIEWDATA 场景下，视频使用 XComponent 渲染无法被普通 ArkUI 组件覆盖，
     // 若不预留底部栏高度，会出现“视频内容挡住底部功能/预览条”的问题
     if (this.isThird && this.isShowBar && !DeviceInfo.isPc() && !this.isHorizontal && this.viewModel.isVideo()) {
       const bottomReserveVp: number = Constants.ToolBarAvoidHeight + Constants.ToolBarHeight + Constants.PreviewHeight;

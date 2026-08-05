@@ -58,7 +58,7 @@ const DIFF_FACTOR = 2;
 const HALF_FACTOR = 2;
 
 const PREVIEW_PROGRESS_TOP_MARGIN = 12;
-const PREVIEW_ITEM_PLACEHOLDER_COLOR: string = '#cfd3d8';
+const PREVIEW_ITEM_PLACEHOLDER_COLOR: string = '#CFD3D8';
 
 export enum AnchorDirection {
   HEADER,

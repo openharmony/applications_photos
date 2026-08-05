@@ -13,30 +13,30 @@
  * limitations under the License.
  */
 
-import { PhotosHmBrowserController } from "@ohos/browserlibrary"
-import { PhotoBrowserLoaderParams } from "@ohos/common/src/main/ets/default/interface/PhotoBrowserLoaderParams";
-import { PhotoBrowserViewLoaderParams } from "@ohos/common/src/main/ets/default/interface/PhotoBrowserViewLoaderParams";
-import { AlbumDataSource } from "@ohos/common/src/main/ets/default/model/AlbumDataSource"
-import { MediaDataSource } from "@ohos/common/src/main/ets/default/model/browser/photo/MediaDataSource";
-import { SelectManager } from "@ohos/common/src/main/ets/default/model/browser/SelectManager";
-import { BroadCastConstants } from "@ohos/common/src/main/ets/default/model/common/BroadCastConstants";
-import { BroadCastManager } from "@ohos/common/src/main/ets/default/model/common/BroadCastManager";
-import { Constants } from "@ohos/common/src/main/ets/default/model/common/Constants";
-import { isOrientationHorizontal, ScreenManager } from "@ohos/common/src/main/ets/default/model/common/ScreenManager";
-import { AlbumRefreshConst } from "@ohos/common/src/main/ets/default/utils/AlbumRefreshUtil";
-import { AlbumUtils } from "@ohos/common/src/main/ets/default/utils/AlbumUtils"
-import { BroadCast } from "@ohos/common/src/main/ets/default/utils/BroadCast";
-import { AlbumInfo } from "@ohos/common/src/main/ets/default/model/browser/album/AlbumInfo";
-import { ParamsWrapper } from "@ohos/common/src/main/ets/default/view/actionbar/Menu";
-import { ActionBarController } from "@ohos/common/src/main/ets/default/view/ActionBarController";
-import { NavigationConstants } from "@ohos/common/src/main/ets/default/model/common/NavigationConstants";
-import { AlbumPhotoGridView, BindSheetController } from "@ohos/timeline/src/main/ets/albumgrid/view/AlbumPhotoGridView"
-import { AlbumPhotoGridVm } from "@ohos/timeline/src/main/ets/albumgrid/viewmodel/AlbumPhotoGridVm";
-import { Log } from "@ohos/tools/src/main/utils/Log";
-import { AlbumPhotoGridAppBarManager } from "../../viewmodel/AlbumPhotoGridAppBarManager";
-import { SourceAlbumPhotoGridAppBarManager } from "../../viewmodel/SourceAlbumPhotoGridAppBarManager";
-import { TrashAlbumPhotoGridAppBarManager } from "../../viewmodel/TrashAlbumPhotoGridAppBarManager";
-import { TrashAlbumPhotoGridVm } from "../../viewmodel/TrashAlbumPhotoGridVm";
+import { PhotosHmBrowserController } from '@ohos/browserlibrary'
+import { PhotoBrowserLoaderParams } from '@ohos/common/src/main/ets/default/interface/PhotoBrowserLoaderParams';
+import { PhotoBrowserViewLoaderParams } from '@ohos/common/src/main/ets/default/interface/PhotoBrowserViewLoaderParams';
+import { AlbumDataSource } from '@ohos/common/src/main/ets/default/model/AlbumDataSource';
+import { MediaDataSource } from '@ohos/common/src/main/ets/default/model/browser/photo/MediaDataSource';
+import { SelectManager } from '@ohos/common/src/main/ets/default/model/browser/SelectManager';
+import { BroadCastConstants } from '@ohos/common/src/main/ets/default/model/common/BroadCastConstants';
+import { BroadCastManager } from '@ohos/common/src/main/ets/default/model/common/BroadCastManager';
+import { Constants } from '@ohos/common/src/main/ets/default/model/common/Constants';
+import { isOrientationHorizontal, ScreenManager } from '@ohos/common/src/main/ets/default/model/common/ScreenManager';
+import { AlbumRefreshConst } from '@ohos/common/src/main/ets/default/utils/AlbumRefreshUtil';
+import { AlbumUtils } from '@ohos/common/src/main/ets/default/utils/AlbumUtils'
+import { BroadCast } from '@ohos/common/src/main/ets/default/utils/BroadCast';
+import { AlbumInfo } from '@ohos/common/src/main/ets/default/model/browser/album/AlbumInfo';
+import { ParamsWrapper } from '@ohos/common/src/main/ets/default/view/actionbar/Menu';
+import { ActionBarController } from '@ohos/common/src/main/ets/default/view/ActionBarController';
+import { NavigationConstants } from '@ohos/common/src/main/ets/default/model/common/NavigationConstants';
+import { AlbumPhotoGridView, BindSheetController } from '@ohos/timeline/src/main/ets/albumgrid/view/AlbumPhotoGridView'
+import { AlbumPhotoGridVm } from '@ohos/timeline/src/main/ets/albumgrid/viewmodel/AlbumPhotoGridVm';
+import { Log } from '@ohos/tools/src/main/utils/Log';
+import { AlbumPhotoGridAppBarManager } from '../../viewmodel/AlbumPhotoGridAppBarManager';
+import { SourceAlbumPhotoGridAppBarManager } from '../../viewmodel/SourceAlbumPhotoGridAppBarManager';
+import { TrashAlbumPhotoGridAppBarManager } from '../../viewmodel/TrashAlbumPhotoGridAppBarManager';
+import { TrashAlbumPhotoGridVm } from '../../viewmodel/TrashAlbumPhotoGridVm';
 
 const TAG = 'OtherAlbumPage';
 
@@ -78,7 +78,7 @@ export struct OtherAlbumPage {
 
   @StorageLink('isShowDeleteAll') isShowDeleteAll: boolean = true;
   aboutToAppear(): void {
-    Log.info(TAG, "aboutToAppear");
+    Log.info(TAG, 'aboutToAppear');
     this.isShowDeleteAll = true
     this.updateStatusBar();
     AppStorage.setOrCreate<Boolean>(Constants.KEY_OF_GRID_SCROLL_ENABLED, false);
@@ -113,7 +113,8 @@ export struct OtherAlbumPage {
       // If the album is a normal user album (or nav params were transiently unavailable),
       // make sure we still create a default manager to avoid crash in AlbumPhotoGridView.aboutToAppear().
       if (!this.appBarManager) {
-        this.appBarManager = new AlbumPhotoGridAppBarManager(this.importDataSource, this.bindSheetController, this.browserController);
+        this.appBarManager = new AlbumPhotoGridAppBarManager(this.importDataSource,
+          this.bindSheetController, this.browserController);
       }
     }
   }
@@ -170,8 +171,9 @@ export struct OtherAlbumPage {
     Log.info(TAG, `setupPhotoGridView album: ${uri}, subType: ${subType}`);
     // navParams may not always be a ParamsWrapper (e.g. wrapped object passed by other pages).
     // Use optional call to avoid "undefined is not callable".
-    this.importDataSource = this.navParams?.get?.<MediaDataSource>(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_DATASOURCE);
-    Log.info(TAG, `setupPhotoGridView importDataSource isAlbumDataSource: ${this.importDataSource instanceof AlbumDataSource}, isNewCreateAlbum: ${this.isNewCreateAlbum}`);
+    this.importDataSource = this.navParams?.get?.<MediaDataSource>(
+      AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_DATASOURCE);
+    Log.info(TAG, `setupPhotoGridView importDataSource isAlbumDataSource: ${this.importDataSource instanceof AlbumDataSource},isNewCreateAlbum:${this.isNewCreateAlbum}`);
 
     // Fallback for "new album" flow: if datasource is missing, rebuild it from AppStorage.
     // Keep it strictly scoped to new album to avoid affecting Trash/Source albums.
@@ -347,7 +349,8 @@ export struct OtherAlbumPage {
           bottom: 0,
         })
 
-        if (this.importDataSource instanceof AlbumDataSource && this.appBarManager instanceof TrashAlbumPhotoGridAppBarManager && this.isShowDeleteAll) {
+        if (this.importDataSource instanceof AlbumDataSource &&
+          this.appBarManager instanceof TrashAlbumPhotoGridAppBarManager && this.isShowDeleteAll) {
           Column() {
             Button({ type: ButtonType.Normal, buttonStyle: ButtonStyleMode.NORMAL, controlSize: ControlSize.NORMAL }) {
               Text($r(`app.string.action_clear_recycle`))
