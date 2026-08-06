@@ -94,7 +94,8 @@ export struct OtherAlbumPage {
       let albumInfo = this.importDataSource.albumInfo;
       if (this.storageParams?.['isSourceAlbum']) {
         this.isSourceAlbum = true;
-        this.appBarManager = new SourceAlbumPhotoGridAppBarManager(this.importDataSource, this.navPathStack, this.bindSheetController);
+        this.appBarManager = new SourceAlbumPhotoGridAppBarManager(
+          this.importDataSource, this.navPathStack,this.bindSheetController);
         AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 1);
       } else if (this.storageParams?.['subType'] === Constants.TRASH_QUERY_SUB_TYPE ||
         albumInfo?.isTrashAlbum || albumInfo?.subType === Constants.TRASH_QUERY_SUB_TYPE) {
@@ -102,10 +103,12 @@ export struct OtherAlbumPage {
         this.viewModel = new TrashAlbumPhotoGridVm((newState: boolean) => {
           this.isEmpty = newState;
         });
-        this.appBarManager = new TrashAlbumPhotoGridAppBarManager(this.importDataSource, this.navPathStack, this.bindSheetController);
+        this.appBarManager = new TrashAlbumPhotoGridAppBarManager(this.importDataSource,
+          this.navPathStack, this.bindSheetController);
       } else if (this.isNewCreateAlbum) {
         this.isSupportScaleAnimation = false;
-        this.appBarManager = new SourceAlbumPhotoGridAppBarManager(this.importDataSource, this.navPathStack, this.bindSheetController);
+        this.appBarManager = new SourceAlbumPhotoGridAppBarManager(
+          this.importDataSource, this.navPathStack, this.bindSheetController);
         AppStorage.setOrCreate<number>(Constants.KEY_OF_PHOTO_GRID_VIEW_OPACITY, 1);
       }
 
@@ -173,7 +176,8 @@ export struct OtherAlbumPage {
     // Use optional call to avoid "undefined is not callable".
     this.importDataSource = this.navParams?.get?.<MediaDataSource>(
       AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_DATASOURCE);
-    Log.info(TAG, `setupPhotoGridView importDataSource isAlbumDataSource: ${this.importDataSource instanceof AlbumDataSource},isNewCreateAlbum:${this.isNewCreateAlbum}`);
+    Log.info(TAG, `setupPhotoGridView importDataSource isAlbumDataSource: ${this.importDataSource instanceof AlbumDataSource},
+      isNewCreateAlbum:${this.isNewCreateAlbum}`);
 
     // Fallback for "new album" flow: if datasource is missing, rebuild it from AppStorage.
     // Keep it strictly scoped to new album to avoid affecting Trash/Source albums.
@@ -193,13 +197,16 @@ export struct OtherAlbumPage {
           if (albumInfo.subType === undefined || albumInfo.subType === null) {
             albumInfo.subType = 1;
           }
-          this.importDataSource = new AlbumDataSource({ context: getContext(), albumInfo: albumInfo, isAccurateNotify: true });
-          Log.info(TAG, `setupPhotoGridView fallback create AlbumDataSource success, uri: ${albumInfo.uri}, subType: ${albumInfo.subType}`);
+          this.importDataSource = new AlbumDataSource(
+            { context: getContext(), albumInfo: albumInfo, isAccurateNotify: true });
+          Log.info(TAG, `setupPhotoGridView fallback create AlbumDataSource success,
+            uri: ${albumInfo.uri}, subType: ${albumInfo.subType}`);
         } catch (e) {
           Log.error(TAG, `setupPhotoGridView fallback create AlbumDataSource failed: ${e}`);
         }
       } else {
-        Log.warn(TAG, `setupPhotoGridView fallback skipped, hasItem: ${!!paramAlbumInfo?.item}, albumUriEmpty: ${albumUri === ''}`);
+        Log.warn(TAG, `setupPhotoGridView fallback skipped, hasItem: ${!!paramAlbumInfo?.item},
+          albumUriEmpty: ${albumUri === ''}`);
       }
     }
   }
