@@ -401,10 +401,7 @@ void PositiveM2ForNegative(MAT &a, int &m1, int &m2, int &n, MAT &tmp, int &inde
 bool makeAllConstantsPositive(MAT &a, int &m1, int &m2, int m3, int n)
 {
     MAT tmp;
-    if (memcpy_s(tmp, sizeof(MAT), a, sizeof(a)) != EOK) {
-        LOGE("memcpy_s error");
-        return false;
-    }
+    memcpy(tmp, a, sizeof(a));
 
     int index = 1;
     for (j = 1; j <= n + 1; j++) {
@@ -425,10 +422,7 @@ bool makeAllConstantsPositive(MAT &a, int &m1, int &m2, int m3, int n)
         index++;
     }
 
-    if (memcpy_s(a, sizeof(MAT), tmp, sizeof(tmp)) != EOK) {
-        LOGE("memcpy_s error");
-        return false;
-    }
+    memcpy(a, tmp, sizeof(tmp));
 
     m1 = newM1;
     m2 = newM2;

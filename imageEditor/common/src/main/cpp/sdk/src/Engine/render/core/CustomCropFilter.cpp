@@ -14,7 +14,8 @@
  */
 
 #include "CustomCropFilter.h"
-#include "../../../../libs/SecureC/include/securec.h"
+
+
 #include <algorithm>
 #include <cmath>
 #include <cstring>
@@ -72,7 +73,7 @@ void ApplyCustomAlgo(EffectBufferInfo& src, EffectBufferInfo& dst, FilterInfo& f
     dst.rowSize = dst.width * bytesPerPixel;
     dst.format = src.format;
     dst.addr = malloc(dst.rowSize * dst.height);
-    memset_s(dst.addr, dst.rowSize * dst.height, 0, dst.rowSize * dst.height);
+    memset(dst.addr, 0, dst.rowSize * dst.height);
 
     float totalRotate = rotationZ + cropRotate;
     float centerX = viewportX / 2.0f;
@@ -232,7 +233,7 @@ bool Render(OH_EffectFilter *filter, OH_EffectBufferInfo *info, OH_EffectFilterD
         filterInfo.cropRotate = value.dataValue.floatValue;
     }
     ImageEffect_Any dragValue;
-    memset_s(&dragValue, sizeof(ImageEffect_Any), 0, sizeof(ImageEffect_Any));
+    memset(&dragValue, 0, sizeof(ImageEffect_Any));
     OH_EffectFilter_GetValue(filter, "isDragImage", &dragValue);
     if (dragValue.dataType == ImageEffect_DataType::EFFECT_DATA_TYPE_INT32) {
         filterInfo.isDragImage = dragValue.dataValue.int32Value != 0;

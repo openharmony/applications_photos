@@ -508,7 +508,7 @@ export struct EditorMain {
       return;
     }
     this.editor.mediaType = MediaType.IMAGE;
-    this.editor.tabIndex = TabName.TabCrop;
+    this.editor.tabIndex = TabName.TabAdjust;
 
     this.editor.albumUri = this.params.albumUri;
     let thumbnail: string = this.params.thumbnail;
@@ -998,6 +998,7 @@ export struct EditorMain {
 
   private isCropOverlayVisible(): boolean {
     return this.isCropOverlayTab() &&
+      this.editor.asset.isShowCropRect &&
       this.editor.asset.crops().cropRect.width() > 0 &&
       this.editor.asset.crops().cropRect.height() > 0;
   }

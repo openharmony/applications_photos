@@ -136,9 +136,7 @@ const CHAR *HmcMaterialJsonUtil::HmcReadStringValue(const CHAR *string, const CH
         return nullptr;
     }
 
-    if (memcpy_s(str, size + 1, start, size) != EOK) {
-        LOGE("memcpy_s error");
-    }
+    memcpy(str, start, size);
     str[size] = '\0';
     value = str;
     return end + 1;

@@ -53,15 +53,11 @@ VOID *HmcImageFromFileSerialized::Serialize(UINT32 *size)
     }
 
     // 拷贝文件头字符串
-    if (strcpy_s(buffer, bufferSize, header.c_str()) <= 0) {
-        LOGE("strcpy_s error");
-    }
+    strncpy(buffer, header.c_str(), bufferSize);
+    buffer[bufferSize - 1] = '\0';
 
     // 把文件内容拷贝到缓冲区
-    auto ret = memcpy_s(buffer + headerSize, m_fileSize, m_fileData, m_fileSize);
-    if (ret != EOK) {
-        LOGW("memcpy");
-    }
+    memcpy(buffer + headerSize, m_fileData, m_fileSize);
 
     // 完成序列化
     *size = bufferSize;
@@ -92,11 +88,7 @@ INT32 HmcImageFromFileSerialized::Deserialize(HmcDict *dict, const VOID *data, U
         return HMC_ERR;
     }
 
-    errno_t err = memcpy_s(m_fileData, size, data, size);
-    if (err != EOK) {
-        LOGE("memcpy_s failed in deserialize, error=%d", err);
-        return HMC_ERR;
-    }
+    memcpy(m_fileData, data, size);
 
     m_fileSize = size;
     return HMC_OK;

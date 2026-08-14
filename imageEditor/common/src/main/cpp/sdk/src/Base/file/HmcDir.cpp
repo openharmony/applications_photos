@@ -82,10 +82,8 @@ INT32 HmcRemoveDirTree(const STRING &dir_path)
     dir_info = opendir(dir_path.c_str());
     char dir_name[PATH_MAX];
     char absolutePath[PATH_MAX];
-    if (strcpy_s(dir_name, sizeof(dir_name), dir_path.c_str()) != EOK) {
-    }
-    if (strcat_s(dir_name, sizeof(dir_name), "/%s") != EOK) {
-    }
+    strncpy(dir_name, dir_path.c_str(), sizeof(dir_name)); dir_name[sizeof(dir_name)-1] = '\0';
+    strncat(dir_name, "/%s", sizeof(dir_name) - strlen(dir_name) - 1);
 
     if (!dir_info) {
         LOGW("Failed to open directory %s, errno %d.", dir_path.c_str(), errno);
@@ -95,8 +93,7 @@ INT32 HmcRemoveDirTree(const STRING &dir_path)
     while ((dirEntry = readdir(dir_info))) {
         if (strcmp(dirEntry->d_name, ".") != 0 && strcmp(dirEntry->d_name, "..") != 0) {
             // 需要获取文件的完整路径
-            if (sprintf_s(absolutePath, sizeof(absolutePath), dir_name, dirEntry->d_name) < 0) {
-            }
+            snprintf(absolutePath, sizeof(absolutePath), dir_name, dirEntry->d_name);
             dir_temp = opendir(absolutePath);
             // 遍历文件夹，需要先删除子目录的全部文件，再删除父目录
             if (dir_temp != NULL) {

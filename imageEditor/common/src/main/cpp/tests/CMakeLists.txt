@@ -13,11 +13,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/third_party/cmake/Fetchgtest.cmake)
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/third_party/googletest/googletest/include")
 
-link_directories(${LIBS_DIR}/turbojpeg/ohos/${OHOS_ARCH})
-link_directories(${LIBS_DIR}/SecureC/ohos/${OHOS_ARCH})
 link_directories(${LIBS_DIR}/JsonCpp/ohos/${OHOS_ARCH})
-link_directories(${LIBS_DIR}/ffrt/ohos/${OHOS_ARCH})
-link_directories(${LIBS_DIR}/AiModelRef/ohos/${OHOS_ARCH})
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/out/unittest/common)
 
 file(GLOB_RECURSE TESTCASE_FILES
@@ -37,12 +33,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${TEST_TARGET_SOURCE_DIR}/Engine
     ${TEST_TARGET_SOURCE_DIR}/Service
     ${TEST_TARGET_SOURCE_DIR}/Bridge
-    ${LIBS_DIR}/FFmpeg/ohos/include
-    ${LIBS_DIR}/JsonCpp/include
-    ${LIBS_DIR}/GLM
-    ${LIBS_DIR}/turbojpeg/include
-    ${LIBS_DIR}/ffrt/include
-    ${LIBS_DIR}/AiModelRef/include)
+    ${LIBS_DIR}/JsonCpp/include)
 
 target_link_libraries(${PROJECT_NAME} gtest_main MediaCreativity
     native_window native_image GLESv3

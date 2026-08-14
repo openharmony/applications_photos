@@ -31,8 +31,8 @@
 #include "../../include/MediaCreative/HmcConfig.h"
 #include "../../include/MediaCreative/HmcConfigName.h"
 #include "../../include/ffrt/ffrt.h"
-#include "../SecureC/include/securec.h"
-#include "../SecureC/include/securectype.h"
+
+
 
 #include "./HmcBaseConfigurations.h"
 #include "./system/HmcSystem.h"

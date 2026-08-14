@@ -139,8 +139,7 @@ HmcSimpleString &HmcSimpleString::Assign(const CHAR *s, UINT32 n)
     if (s) {
         m_str = (CHAR *)HmcMalloc(n + 1);
         if (m_str) {
-            if (memcpy_s(m_str, n, s, n)) {
-            };
+            memcpy(m_str, s, n);
             m_str[n] = '\0';
         }
     }
@@ -158,10 +157,8 @@ HmcSimpleString &HmcSimpleString::Append(const CHAR *s, UINT32 n)
     auto m = strlen(m_str);
     auto str = (CHAR *)HmcMalloc(m + n + 1);
     if (str) {
-        if (memcpy_s(str, m, m_str, m)) {
-        };
-        if (memcpy_s(str + m, n, s, n)) {
-        };
+        memcpy(str, m_str, m);
+        memcpy(str + m, s, n);
         str[m + n] = '\0';
         Release();
         m_str = str;

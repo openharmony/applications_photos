@@ -71,7 +71,7 @@ export struct ScreenTool {
   @StorageProp(SCREEN_ORIENTATION_PORTRAIT) isScreenPortrait: boolean = ScreenManager.getInstance().isScreenPortrait();
 
   private isCropOverlayTab(): boolean {
-    return this.editor.tabIndex === TabName.TabAdjust;
+    return this.editor.tabIndex === TabName.TabAdjust && this.editor.asset.isShowCropRect;
   }
 
   screenToolAreaChange() {

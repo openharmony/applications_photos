@@ -16,7 +16,7 @@
 #define HMC_JPEG_ENCODER_H
 
 #include "HmcBase.h"
-#include "turbojpeg.h"
+#include "image/HmcJpegCodecDefs.h"
 
 class HmcJpegEncoder {
 public:
@@ -38,8 +38,8 @@ private:
     int32_t m_width = 0;
     int32_t m_height = 0;
     int32_t m_quality = 50;
-    int32_t m_pixelfmt{ TJPF_BGRA };
-    int32_t m_subsamp{ TJSAMP_422 };
-    tjhandle m_handle{ nullptr };
+    int32_t m_pixelfmt{ HMC_JPEG_PF_BGRA };
+    int32_t m_subsamp{ HMC_JPEG_CS_422 };
+    HmcJpegCodecHandle m_handle{ nullptr };
 };
 #endif // HMC_JPEG_ENCODER_H

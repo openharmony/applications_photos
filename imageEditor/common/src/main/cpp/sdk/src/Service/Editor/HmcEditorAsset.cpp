@@ -984,11 +984,8 @@ int HmcGetAssetName(HmcEditor *editor, HmcUid assetUid, char *name, int size)
 
     STRING assetName = asset->GetName();
     LOGD("asset name: %s.", assetName.c_str());
-    errno_t rc = strcpy_s(name, size, assetName.c_str());
-    if (rc != EOK) {
-        LOGE("Copy name failed: %d", rc);
-        return HMC_ERR;
-    }
+    strncpy(name, assetName.c_str(), size);
+    name[size - 1] = '\0';
 
     return HMC_OK;
 }
@@ -1008,11 +1005,8 @@ int HmcGetAssetResource(HmcEditor *editor, HmcUid assetUid, char *path, int size
 
     STRING assetPath = asset->GetPath();
     LOGD("asset path: %s.", assetPath.c_str());
-    errno_t rc = strcpy_s(path, size, assetPath.c_str());
-    if (rc != EOK) {
-        LOGE("Copy path failed: %d", rc);
-        return HMC_ERR;
-    }
+    strncpy(path, assetPath.c_str(), size);
+    path[size - 1] = '\0';
 
     return HMC_OK;
 }

@@ -229,7 +229,7 @@ export class BaseEditor extends IEditor {
   public asset: Asset = new Asset(this);
   public timeline: Timeline = new Timeline();
   public operationTip: OperationTip = new OperationTip('', '', false, false, false, 0);
-  public tabIndex: TabName = TabName.TabCrop; // 初始tab页 .TabCrop
+  public tabIndex: TabName = TabName.TabAdjust; // 初始tab页
   public isScreenClassInit: boolean = false;
   /** 沉浸式标志 */
   public immersiveMode: boolean = false;
@@ -1502,7 +1502,7 @@ export class BaseEditor extends IEditor {
     this.asset.textEditPixelMap?.release();
     this.asset.exportPixelMap?.release();
     this.isPhotosEditData = false;
-    this.tabIndex = TabName.TabCrop;
+    this.tabIndex = TabName.TabAdjust;
 
     sdk.EditorContext_closeProject(this.timeline.id, (result: string) => {
       HiLog.i(TAG, 'close project end');

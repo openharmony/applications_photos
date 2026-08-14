@@ -18,13 +18,13 @@
 
 HmcJpegDecoder::HmcJpegDecoder()
 {
-    m_handle = tjInitDecompress();
+    m_handle = HmcJpegInitDecompress();
 }
 
 HmcJpegDecoder::~HmcJpegDecoder()
 {
     if (m_handle) {
-        tjDestroy(m_handle);
+        HmcJpegDestroy(m_handle);
     }
 }
 
@@ -40,9 +40,9 @@ SHARED_PTR<Image> HmcJpegDecoder::Decode(const u_char *buffer, unsigned long siz
     int32_t height = 0;
     int32_t subsamp = 0;
     int32_t colorSpace = 0;
-    auto ret = tjDecompressHeader3(m_handle, buffer, size, &width, &height, &subsamp, &colorSpace);
+    auto ret = HmcJpegDecompressHeader3(m_handle, buffer, size, &width, &height, &subsamp, &colorSpace);
     if (ret != 0) {
-        LOGE("Jpeg decoder decompress header failed. %d : %s", tjGetErrorCode(m_handle), tjGetErrorStr2(m_handle));
+        LOGE("Jpeg decoder decompress header failed. %d : %s", HmcJpegGetErrorCode(m_handle), HmcJpegGetErrorStr(m_handle));
         return nullptr;
     }
     if (width <= 0 || height <= 0) {
@@ -55,9 +55,9 @@ SHARED_PTR<Image> HmcJpegDecoder::Decode(const u_char *buffer, unsigned long siz
         LOGE("Jpeg decoder malloc buffer failed");
         return nullptr;
     }
-    ret = tjDecompress2(m_handle, buffer, size, outBuffer, width, 0, height, m_pixelfmt, 0);
+    ret = HmcJpegDecompress2(m_handle, buffer, size, outBuffer, width, 0, height, m_pixelfmt, 0);
     if (ret != 0) {
-        LOGE("Jpeg decoder decompress failed. %d : %s", tjGetErrorCode(m_handle), tjGetErrorStr2(m_handle));
+        LOGE("Jpeg decoder decompress failed. %d : %s", HmcJpegGetErrorCode(m_handle), HmcJpegGetErrorStr(m_handle));
         return nullptr;
     }
 
@@ -85,8 +85,8 @@ std::shared_ptr<YUVDataInfo> HmcJpegDecoder::DecodeYUV(const u_char *buffer, uns
     int32_t height = 0;
     int32_t subsamp = 0;
     int32_t colorSpace = 0;
-    if (HMC_OK != tjDecompressHeader3(m_handle, buffer, size, &width, &height, &subsamp, &colorSpace)) {
-        LOGE("Jpeg decompress header failed. %d : %s", tjGetErrorCode(m_handle), tjGetErrorStr2(m_handle));
+    if (HMC_OK != HmcJpegDecompressHeader3(m_handle, buffer, size, &width, &height, &subsamp, &colorSpace)) {
+        LOGE("Jpeg decompress header failed. %d : %s", HmcJpegGetErrorCode(m_handle), HmcJpegGetErrorStr(m_handle));
         return nullptr;
     }
 
@@ -96,15 +96,15 @@ std::shared_ptr<YUVDataInfo> HmcJpegDecoder::DecodeYUV(const u_char *buffer, uns
     }
 
     int padding = 1;
-    auto outSize = tjBufSizeYUV2(width, padding, height, subsamp);
+    auto outSize = HmcJpegBufSizeYUV2(width, padding, height, subsamp);
     auto outBuffer = (unsigned char *)malloc(outSize);
     if (outBuffer == nullptr) {
         LOGE("Jpeg decoder malloc buffer failed");
         return nullptr;
     }
 
-    if (HMC_OK != tjDecompressToYUV2(m_handle, buffer, size, outBuffer, width, padding, height, 0)) {
-        LOGE("Jpeg decompress failed. %d : %s", tjGetErrorCode(m_handle), tjGetErrorStr2(m_handle));
+    if (HMC_OK != HmcJpegDecompressToYUV2(m_handle, buffer, size, outBuffer, width, padding, height, 0)) {
+        LOGE("Jpeg decompress failed. %d : %s", HmcJpegGetErrorCode(m_handle), HmcJpegGetErrorStr(m_handle));
         free(outBuffer);
         return nullptr;
     }

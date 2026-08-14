@@ -150,7 +150,7 @@ INT32 HmcMaterialUtil::CompareVersion(STRING &v1, STRING &v2)
 
 VOID HmcMaterialUtil::InitLibraryColumn(HmcMaterialLibraryColumn &column)
 {
-    memset_s(column.name, sizeof(column.name), 0, sizeof(column.name));
+    memset(column.name, 0, sizeof(column.name));
     column.uid = HMC_UID_NULL;
     column.columnType = HMC_MATERIAL_COLUMN_BUTTOM;
     column.dict = nullptr;
@@ -358,11 +358,8 @@ char *HmcMaterialUtil::DupCString(const STRING &string)
     size_t len = string.size() > 0 ? (string.size() + 1) : 4; // 可能会有中文，最少按照4个字节处理
     char *dupStr = new (std::nothrow) char[len];
     if (dupStr != nullptr) {
-        memset_s(dupStr, len, 0, len);
-        auto ret = memcpy_s(dupStr, len, string.c_str(), string.size());
-        if (ret != EOK) {
-            LOGE("memory copy string error:%d", ret);
-        }
+        memset(dupStr, 0, len);
+        memcpy(dupStr, string.c_str(), string.size());
     }
     return dupStr;
 }

@@ -20,8 +20,7 @@ import { Asset } from '../../BaseEditor'
 export class MenuAttr {
   public editor: BaseEditor;
   public asset: Asset;
-  public changeTabIndex: TabName = DeviceUtil.isPhone() || DeviceUtil
-    .isPad() ? TabName.TabCrop : TabName.TabAdjust
+  public changeTabIndex: TabName = TabName.TabAdjust
 
   constructor(editor: BaseEditor, asset: Asset) {
     this.editor = editor;

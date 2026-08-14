@@ -1252,22 +1252,15 @@ int HmcJpegMetadataEncoder::PutLong(UINT32 ul)
 int HmcJpegMetadataEncoder::PutString(const char *s)
 {
     size_t len = strlen(s);
-    errno_t err = strcpy_s((char *)m_buffer + m_attrOffset, m_maxSize - m_attrOffset, s);
-    if (err != EOK) {
-        LOGE("strcpy_s failed for putting string, error=%d", err);
-        return 1;
-    }
+    strncpy((char *)m_buffer + m_attrOffset, s, m_maxSize - m_attrOffset);
+    m_buffer[m_maxSize - 1] = '\0';
     m_attrOffset += len;
     return 0;
 }
 
 int HmcJpegMetadataEncoder::PutData(const void *data, UINT16 len)
 {
-    errno_t err = memcpy_s(m_buffer + m_bufferOffset, m_maxSize - m_bufferOffset, data, len);
-    if (err != EOK) {
-        LOGE("memcpy_s failed for putting raw data, error=%d", err);
-        return 1;
-    }
+    memcpy(m_buffer + m_bufferOffset, data, len);
     m_bufferOffset += len;
     m_dataOffset += len;
     return 0;
@@ -1325,11 +1318,7 @@ int HmcJpegMetadataEncoder::PutLongData(UINT32 ul)
 {
     UINT32 temp = htonl(ul);
     UINT32 len = sizeof(UINT32);
-    errno_t err = memcpy_s(m_buffer + m_bufferOffset, m_maxSize - m_bufferOffset, &temp, len);
-    if (err != EOK) {
-        LOGE("memcpy_s failed for putting long data, error=%d", err);
-        return 1;
-    }
+    memcpy(m_buffer + m_bufferOffset, &temp, len);
     m_bufferOffset += len;
     m_dataOffset += len;
     return 0;
@@ -1339,11 +1328,7 @@ int HmcJpegMetadataEncoder::PutSLongData(INT32 sl)
 {
     INT32 temp = static_cast<INT32>(htonl(static_cast<UINT32>(sl)));
     UINT32 len = sizeof(INT32);
-    errno_t err = memcpy_s(m_buffer + m_bufferOffset, m_maxSize - m_bufferOffset, &temp, len);
-    if (err != EOK) {
-        LOGE("memcpy_s failed for putting slong data, error=%d", err);
-        return 1;
-    }
+    memcpy(m_buffer + m_bufferOffset, &temp, len);
     m_bufferOffset += len;
     m_dataOffset += len;
     return 0;

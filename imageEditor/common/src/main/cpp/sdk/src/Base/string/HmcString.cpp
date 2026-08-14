@@ -38,7 +38,7 @@ INT32 HmcStringFormatV(STRING &string, const CHAR *format, va_list arg)
 
     while (len <= MAX_BUFFER_SIZE) {
         string.resize(len + 1, 0);
-        int ret = vsprintf_s((char *)string.data(), len, format, arg);
+        int ret = vsnprintf((char *)string.data(), len, format, arg);
         if (ret != INVALID_FLAG) {
             break;
         }

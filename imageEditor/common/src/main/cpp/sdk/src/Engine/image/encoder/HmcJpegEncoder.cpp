@@ -17,18 +17,18 @@
 HmcJpegEncoder::HmcJpegEncoder(int32_t width, int32_t height, int32_t quality)
     : m_width(width), m_height(height), m_quality(quality)
 {
-    m_handle = tjInitCompress();
+    m_handle = HmcJpegInitCompress();
 }
 
 HmcJpegEncoder::HmcJpegEncoder()
 {
-    m_handle = tjInitCompress();
+    m_handle = HmcJpegInitCompress();
 }
 
 HmcJpegEncoder::~HmcJpegEncoder()
 {
     if (m_handle) {
-        tjDestroy(m_handle);
+        HmcJpegDestroy(m_handle);
     }
 }
 
@@ -45,9 +45,9 @@ int32_t HmcJpegEncoder::Encode(const unsigned char *buffer, unsigned char **jpeg
     }
     LOGD("Jpeg encoder begin w=%d,h=%d,fmt:%d,q=%d", m_width, m_height, m_pixelfmt, m_quality);
     auto ret =
-        tjCompress2(m_handle, buffer, m_width, 0, m_height, m_pixelfmt, jpegBuffer, jpegSize, m_subsamp, m_quality, 0);
+        HmcJpegCompress2(m_handle, buffer, m_width, 0, m_height, m_pixelfmt, jpegBuffer, jpegSize, m_subsamp, m_quality, 0);
     if (ret != 0) {
-        LOGE("Jpeg encoder failed! %d : %s", tjGetErrorCode(m_handle), tjGetErrorStr2(m_handle));
+        LOGE("Jpeg encoder failed! %d : %s", HmcJpegGetErrorCode(m_handle), HmcJpegGetErrorStr(m_handle));
         return HMC_ERR;
     }
     LOGD("Jpeg encoder finish size=%llu", *jpegSize);
@@ -67,8 +67,8 @@ int32_t HmcJpegEncoder::EncodeYUV(const unsigned char *buffer, int width, int he
     int padding = 1;
     int flags = 0;
     if (HMC_OK !=
-        tjCompressFromYUV(m_handle, buffer, width, padding, height, TJSAMP_420, jpegBuffer, jpegSize, quality, flags)) {
-        LOGE("Jpeg encoder failed! %d : %s", tjGetErrorCode(m_handle), tjGetErrorStr2(m_handle));
+        HmcJpegCompressFromYUV(m_handle, buffer, width, padding, height, HMC_JPEG_CS_420, jpegBuffer, jpegSize, quality, flags)) {
+        LOGE("Jpeg encoder failed! %d : %s", HmcJpegGetErrorCode(m_handle), HmcJpegGetErrorStr(m_handle));
         return HMC_ERR;
     }
 
@@ -79,6 +79,6 @@ int32_t HmcJpegEncoder::EncodeYUV(const unsigned char *buffer, int width, int he
 void HmcJpegEncoder::FreeBuffer(unsigned char *buffer)
 {
     if (buffer) {
-        tjFree(buffer);
+        HmcJpegFree(buffer);
     }
 }

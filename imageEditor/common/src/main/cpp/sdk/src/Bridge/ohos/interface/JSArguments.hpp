@@ -23,7 +23,8 @@
 #include <condition_variable>
 
 #include "ArrayBuffer.hpp"
-#include "../../../../libs/SecureC/include/securec.h"
+
+
 #include "ohos/common/NapiCommon.h"
 #include "log/HmcLog.h"
 
@@ -117,7 +118,7 @@ public:
     {
         void *data = nullptr;
         if (napi_ok == napi_create_arraybuffer(env, buf.Size(), &data, &value)) {
-            memcpy_s(data, buf.Size(), buf.Data(), buf.Size());
+            memcpy(data, buf.Data(), buf.Size());
         }
     }
     template <typename T>

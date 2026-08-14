@@ -145,15 +145,15 @@ INT32 HmcOhosGetSymbolInfo(const void *pc, CHAR *info, UINT32 infoSize)
         return HMC_ERR;
     }
 
-    UINT32 i = (UINT32)sprintf_s(info, infoSize, "0x%08lx", (ULONG)(uintptr_t)pc);
+    UINT32 i = (UINT32)snprintf(info, infoSize, "0x%08lx", (ULONG)(uintptr_t)pc);
 
     if (dlinfo.dli_fname && dlinfo.dli_fbase) {
-        i += (UINT32)sprintf_s(info + i, infoSize, " %s+0x%lx", dlinfo.dli_fname,
+        i += (UINT32)snprintf(info + i, infoSize, " %s+0x%lx", dlinfo.dli_fname,
             (LONG)(uintptr_t)pc - (LONG)(uintptr_t)dlinfo.dli_fbase);
     }
 
     if (dlinfo.dli_sname && dlinfo.dli_saddr) {
-        int len = sprintf_s(info + i, infoSize, " (%s+0x%lx)", dlinfo.dli_sname,
+        int len = snprintf(info + i, infoSize, " (%s+0x%lx)", dlinfo.dli_sname,
             (LONG)(uintptr_t)pc - (LONG)(uintptr_t)dlinfo.dli_saddr);
         if (len <= 0) {
             LOGE("sprintf_s error");

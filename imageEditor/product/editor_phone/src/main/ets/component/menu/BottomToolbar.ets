@@ -764,8 +764,6 @@ export struct BottomToolbar {
   @Builder
   TabsContent() {
     Column() {
-      VideoCropTool().visibility(this.editor.tabIndex === TabName.TabCrop ? Visibility.Visible : Visibility.None)
-        .transition(this.switchTabContentTransitionEffect());
       if (this.editor.isInitComp) {
         VideoAdjustTool().visibility(this.editor.tabIndex === TabName.TabAdjust ?
           Visibility.Visible : Visibility.None)

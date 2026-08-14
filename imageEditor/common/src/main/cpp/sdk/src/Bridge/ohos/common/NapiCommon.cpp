@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 #include "NapiCommon.h"
-#include "../../../../libs/SecureC/include/securec.h"
+
+
 
 napi_value wrap_void_to_js(napi_env env)
 {
@@ -52,9 +53,7 @@ napi_value wrap_buffer_to_js(napi_env env, int size, void *data)
         return nullptr;
     }
 
-    if (memcpy_s(native, size, data, size) != EOK) {
-        return buffer;
-    }
+    memcpy(native, data, size);
 
     return buffer;
 }
@@ -85,7 +84,7 @@ std::string unwrap_string_from_js(napi_env env, napi_value param)
     if (buf == nullptr) {
         return value;
     }
-    memset_s(buf, size + 1, 0, size + 1);
+    memset(buf, 0, size + 1);
 
     bool rev = napi_get_value_string_utf8(env, param, buf, size + 1, &size) == napi_ok;
     if (rev) {

@@ -206,7 +206,7 @@ export struct EditorMain {
       return;
     }
     this.editor.mediaType = MediaType.IMAGE;
-    this.editor.tabIndex = TabName.TabCrop;
+    this.editor.tabIndex = TabName.TabAdjust;
 
     this.editor.albumUri = this.params.albumUri;
     let thumbnail = this.params.thumbnail;

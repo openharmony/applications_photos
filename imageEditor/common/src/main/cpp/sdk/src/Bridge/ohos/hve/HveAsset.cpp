@@ -412,7 +412,7 @@ HmcUid HveAsset::FindEffectByType(HmcEffectType type)
         return HMC_UID_NULL;
     }
 
-    memset_s(effectUidArr, sizeof(HmcUid) * count, 0, sizeof(HmcUid) * count);
+    memset(effectUidArr, 0, sizeof(HmcUid) * count);
 
     if (HmcEffectGetEffects(m_editor, m_assetUid, type, effectUidArr, count) != HMC_OK) {
         LOGD("FindEffectByType HmcEffectGetEffects failed");

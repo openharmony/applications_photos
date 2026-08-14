@@ -103,7 +103,7 @@ VOID HmcLog(HmcLogLevel level, const CHAR *tag, const CHAR *fileName, INT32 line
 
     va_list arg;
     va_start(arg, format);
-    int count = vsnprintf_truncated_s(content, maxlength - 1, format, arg);
+    int count = vsnprintf(content, maxlength - 1, format, arg);
     va_end(arg);
 
     if (count == -1) {
