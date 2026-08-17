@@ -4,9 +4,9 @@
       {
         "name": "default",
         "signingConfig": "release",
-        "compileSdkVersion": 23,
-        "compatibleSdkVersion": 20,
-        "targetSdkVersion": 20,
+        "compileSdkVersion": "26.0.0",
+        "compatibleSdkVersion": 23,
+        "targetSdkVersion": 23,
         "runtimeOS": "OpenHarmony",
         "buildOption": {
           "nativeCompiler": "BiSheng"
