@@ -49,8 +49,8 @@ interface SetWallpaperParams {
 @Component
 export struct WallpaperEditorComponent {
   // 因为壁纸编辑加载完缩略图后，上屏存在延迟。增加延时避免屏闪
-  static readonly LOAD_WALLPAPER_EDITOR_DELAY: number = 50;
-  static readonly THUMBNAIL_SCALE: number = 1.1;
+  static readonly LOAD_WALLPAPER_EDITOR_DELAY: number = 300;
+  static readonly THUMBNAIL_SCALE: number = 1;
   private navPageInfos: NavPathStack = new NavPathStack();
   private imageUri: string = '';
   private lcdUri: string = '';
@@ -213,11 +213,12 @@ export struct WallpaperEditorComponent {
     const isFullscreen = DeviceInfo.isPhoneVde() ? AppStorage.get('windowStatus') ===
       window.WindowStatusType.FULL_SCREEN : getScreen().getWinMode() === WindowMode.FULLSCREEN ;
     const isMobileNotFullscreen = !isDesktop && !isFullscreen;
-    const isDesktopNotFullscreenMode = isDesktop && winStatus !== window.WindowStatusType.FULL_SCREEN;
-    Log.info(TAG, `shouldBlockWallpaperEdit isDesktop:${isDesktop} isMobileNotFullscreen:${isMobileNotFullscreen} isDesktopNotFullscreenMode:${isDesktopNotFullscreenMode}`);
+    // const isDesktopNotFullscreenMode = isDesktop && winStatus !== window.WindowStatusType.FULL_SCREEN;
+    // Log.info(TAG, `shouldBlockWallpaperEdit isDesktop:${isDesktop} isMobileNotFullscreen:${isMobileNotFullscreen} isDesktopNotFullscreenMode:${isDesktopNotFullscreenMode}`);
+    Log.info(TAG, `shouldBlockWallpaperEdit isDesktop:${isDesktop} isMobileNotFullscreen:${isMobileNotFullscreen}`);
     if (isMobileNotFullscreen) {
-      return true;
-    } else if (isDesktopNotFullscreenMode) {
+    //   return true;
+    // } else if (isDesktopNotFullscreenMode) {
       return true;
     }
     return false;

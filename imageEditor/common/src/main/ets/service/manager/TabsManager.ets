@@ -18,9 +18,6 @@ import { TabName } from '../../service/model/Enum'
 
 const TAG = 'TabsManager';
 
-export const TAB_CROP: TabType =
-  new TabType($r('app.string.tabs_crop_imageEdit'), TabName.TabCrop, $r('sys.symbol.crop_rotate'));
-
 export const TAB_ADJUST: TabType =
   new TabType($r('app.string.tabs_adjust_imageEdit'), TabName.TabAdjust, $r('sys.symbol.slider_horizontal_2'));
 
@@ -31,7 +28,6 @@ export const TAB_MOSAIC: TabType =
   new TabType($r('app.string.tabs_text_mosicac'), TabName.TabMosaic, $r('sys.symbol.mosaic'));
 
 const TABS_SORTS: TabType[] = [
-  TAB_CROP,
   TAB_ADJUST,
   TAB_TEXT,
   TAB_MOSAIC,
@@ -56,7 +52,7 @@ export class TabsManager {
   constructor() {
     this.rankMap = new Map(TABS_SORTS.map((tab, rank) => [tab, rank]));
     this.tabs = [
-      TAB_CROP, TAB_ADJUST, TAB_TEXT, TAB_MOSAIC
+      TAB_ADJUST, TAB_TEXT, TAB_MOSAIC
     ];
   }
 

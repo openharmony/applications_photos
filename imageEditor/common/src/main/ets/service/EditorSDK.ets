@@ -22,7 +22,7 @@ import { UiUtil } from '../common/util/UiUtil';
 import { GlobalThisUtil } from '../common/util/GlobalThisUtil';
 import emitter from '@ohos.events.emitter';
 import { Constants } from '../common/util/Constants';
-import { HOT_SPOT_HEIGHT, HOT_SPOT_WIDTH, PREVIEW_HEIGHT_OFFSET } from '../common/const';
+import { HOT_SPOT_HEIGHT, HOT_SPOT_WIDTH, PC_PREVIEW_VERTICAL_OFFSET_VP, PREVIEW_HEIGHT_OFFSET } from '../common/const';
 import { ScreenManager } from '../common/util/ScreenManager';
 import { DeviceUtil } from '../common/util/DeviceUtil';
 import display from '@ohos.display';
@@ -338,6 +338,9 @@ export class SwitchAnimator {
     let previewRect: RectValue = SwitchAnimator.getPreviewPosition(winSize, isRealPortrait);
     let mirrorOffsetx = vp2px(UiUtil.getPreviewRectOffset());
     previewRect.x += mirrorOffsetx;
+    if (DeviceUtil.isPc()) {
+      previewRect.y += vp2px(PC_PREVIEW_VERTICAL_OFFSET_VP);
+    }
     HiLog.i(TAG, `getEditorPreviewRect ${JSON.stringify(previewRect)}`);
 
     let width = previewRect.width;

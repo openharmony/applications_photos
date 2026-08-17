@@ -1672,6 +1672,7 @@ export class Constants {
   public static readonly EXTENSION_PNG: string = '.png';
   public static readonly EXTENSION_HEIC: string = '.heic';
   public static readonly EXTENSION_GIF: string = '.gif';
+  public static readonly EXTENSION_WBMP: string = '.wbmp';
 
   // 大图组件维测日志错误码
   public static readonly API_RESPONSE_DELAY_TIMEOUT: number = 95271001; //medialibrary query time out

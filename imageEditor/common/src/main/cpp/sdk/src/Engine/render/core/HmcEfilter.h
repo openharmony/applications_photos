@@ -28,7 +28,10 @@ public:
     void StartCache();
     void CancelCache();
     bool HasStartCache();
+    // Filters attached via OH_ImageEffect_AddFilterByFilter are owned by ImageEffect; do not OH_EffectFilter_Release.
+    void AbandonFilterOwnership();
 private:
+    bool EnsureCreated();
     OH_EffectFilter *efilter_;
     std::string name_ = "";
     std::string type_ = "";

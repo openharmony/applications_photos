@@ -20,6 +20,7 @@ import lazy { MediaResult } from './MediaResult';
 import lazy { Thumbnail } from './Thumbnail';
 import lazy { PhotoAsset, UserFileManagerAccess } from '../../../access/UserFileManagerAccess';
 import lazy photoAccessHelper from '@ohos.file.photoAccessHelper';
+import lazy fs from '@ohos.file.fs';
 import lazy { ImageUtil } from '../../../utils/ImageUtil';
 import lazy { ResultsData } from '../../ResultsData';
 import lazy { BroadCast } from '../../../utils/BroadCast';
@@ -36,26 +37,133 @@ import lazy {
 const MEDIA_ABILITY = 'dataability';
 const TAG: string = 'common_UriDataSource';
 
+interface FileStatLike {
+  mtimeMs?: number;
+  lastModifiedTime?: number | string | TimeSpecLike;
+  mtime?: number | string | TimeSpecLike;
+  ctimeMs?: number;
+  ctime?: number | string | TimeSpecLike;
+}
+
+interface TimeSpecLike {
+  sec?: number;
+  seconds?: number;
+  nsec?: number;
+  nanoseconds?: number;
+  getTime?: () => number;
+}
+
+function resolveFileTimestamp(uri: string): number {
+  if (!uri || !uri.startsWith('file://')) {
+    return 0;
+  }
+  try {
+    const statInfo: fs.Stat = fs.statSync(uri);
+    return extractTimestampFromStat(statInfo);
+  } catch (error) {
+    Log.warn(TAG, `resolveFileTimestamp failed, uri: ${uri}, error: ${JSON.stringify(error)}`);
+    return 0;
+  }
+}
+
+function extractTimestampFromStat(statInfo: fs.Stat): number {
+  const statRecord: FileStatLike = statInfo as FileStatLike;
+  const candidates: Array<number | string | TimeSpecLike | undefined> = [
+    statRecord.mtimeMs,
+    statRecord.lastModifiedTime,
+    statRecord.mtime,
+    statRecord.ctimeMs,
+    statRecord.ctime,
+  ];
+  for (const candidate of candidates) {
+    const timestamp: number = convertToTimestamp(candidate);
+    if (timestamp > 0) {
+      return timestamp;
+    }
+  }
+  return 0;
+}
+
+function convertToTimestamp(rawValue: number | string | TimeSpecLike | undefined): number {
+  if (typeof rawValue === 'number') {
+    return normalizeEpoch(rawValue);
+  }
+  if (typeof rawValue === 'string') {
+    const numericValue: number = Number(rawValue);
+    if (Number.isFinite(numericValue) && numericValue > 0) {
+      return normalizeEpoch(numericValue);
+    }
+    const parsedValue: number = Date.parse(rawValue);
+    return Number.isNaN(parsedValue) ? 0 : parsedValue;
+  }
+  if (!rawValue || typeof rawValue !== 'object') {
+    return 0;
+  }
+
+  if (typeof rawValue.getTime === 'function') {
+    const timestamp: number = rawValue.getTime();
+    if (Number.isFinite(timestamp) && timestamp > 0) {
+      return timestamp;
+    }
+  }
+
+  const secondValue: number = Number(rawValue.sec ?? rawValue.seconds ?? 0);
+  const nanoValue: number = Number(rawValue.nsec ?? rawValue.nanoseconds ?? 0);
+  if (Number.isFinite(secondValue) && secondValue > 0) {
+    return secondValue * 1000 + Math.floor(nanoValue / 1000000);
+  }
+  return 0;
+}
+
+function normalizeEpoch(value: number): number {
+  if (!Number.isFinite(value) || value <= 0) {
+    return 0;
+  }
+  if (value < 100000000000) {
+    return value * 1000;
+  }
+  if (value > 100000000000000) {
+    return Math.floor(value / 1000);
+  }
+  return value;
+}
+
 class InnerMediaItem extends MediaItem {
   isHttp: boolean;
 
-  constructor(uri: string, mediaType: number, width?: number, height?: number) {
+  constructor(uri: string, mediaType: number, width?: number, height?: number, displayName?: string) {
     super(undefined);
     this.uri = uri;
-    this.width = 0;
+    // UriDataSource（非媒体库 URI）场景下没有真实物理 path/uniqueId，会导致：
+    // - 预览条 LazyForEach key 冲突（path 为空）
+    // - 逐帧播放/预览条相关广播 key 冲突（uniqueId 为空）
+    // 这里用 uri 兜底，保证 UI 与事件链路可用
+    this.path = uri;
+    this.uniqueId = uri;
+    // 避免 timestampApp/path 等参数出现 NaN，导致缩略图协议无法解析
+    this.dateModified = 0;
+    // this.width = 0;
     this.imgWidth = 0;
     if (width) {
-      this.width = width;
+      // this.width = width;
       this.imgWidth = width;
     }
-    this.height = 0;
+    // this.height = 0;
     this.imgHeight = 0;
     if (height) {
-      this.height = height;
+      // this.height = height;
       this.imgHeight = height;
     }
+    this.displayName = displayName ?? '';
     this.mediaType = mediaType;
     this.isHttp = !uri.startsWith(MEDIA_ABILITY);
+    const fileTimestamp: number = resolveFileTimestamp(uri);
+    if (fileTimestamp > 0) {
+      this.setDateModified(fileTimestamp);
+      this.setDateTaken(fileTimestamp);
+      this.setDetailTime(fileTimestamp);
+      this.setDetailTimeString(String(fileTimestamp));
+    }
   }
 }
 
@@ -68,7 +176,7 @@ export class UriDataSource extends PhotoDataSource {
   private mUriArr: string[] = [];
 
   constructor(stateMachine: PhotoBrowserStateMachine, uriArr: string[], mediaType: number,
-    width?: number, height?: number, isAllMediaData?: boolean) {
+    width?: number, height?: number, isAllMediaData?: boolean, displayName?: string) {
     super(stateMachine);
     Log.error(TAG, `UriDataSource constructor isAllMediaData : ${isAllMediaData}`);
     this.mUriArr = uriArr;
@@ -76,7 +184,7 @@ export class UriDataSource extends PhotoDataSource {
       this.requestData();
     } else {
       this.mItems = uriArr.map((uri) => {
-        let item = new InnerMediaItem(uri, mediaType, width, height);
+        let item = new InnerMediaItem(uri, mediaType, width, height, uriArr.length === 1 ? displayName : '');
         if (uri.startsWith(MEDIA_ABILITY)) {
           item.setThumbnail(this.photoDataImpl.getThumbnail(item.uri, item.path, item.getDateModified(), {
             height: item.height,

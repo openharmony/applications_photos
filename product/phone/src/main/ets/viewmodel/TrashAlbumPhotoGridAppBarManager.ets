@@ -117,8 +117,11 @@ export class TrashAlbumPhotoGridAppBarManager extends AlbumPhotoGridAppBarManage
     // 返回
     if (this.albumInfo?.subType === photoAccessHelper.AlbumSubtype.GEOGRAPHY_LOCATION) {
       new LeftBackActionRegister(() => this.backFunc()).register(params);
-    } else if (!((this.albumInfo?.isUserCreatedAlbum || this.albumInfo?.isSourceAlbum ||
-      this.albumInfo?.isSystemAlbum) && DeviceInfo.isTablet())) {
+    } else if (!(DeviceInfo.isTablet() &&
+      // Pad 上，仅对“非最近删除”的系统 / 来源相册保留原来的无返回行为；
+      // 最近删除(TRASH) 页面本身需要返回按钮。
+      ((this.albumInfo?.isSystemAlbum && this.albumInfo?.subType !== photoAccessHelper.AlbumSubtype.TRASH) ||
+        this.albumInfo?.isSourceAlbum))) {
       new LeftBackActionRegister(() => this.backFunc()).register(params);
     }
     this.actionBarController.put(this.elements.get(GridAppBarManager.BUILDER_KEY_TITLE));

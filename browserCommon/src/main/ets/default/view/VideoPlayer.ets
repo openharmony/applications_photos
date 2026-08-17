@@ -72,6 +72,7 @@ import lazy { VideoPlayerVM } from '../viewModel/base/VideoPlayerVM';
 import lazy { ConfigurationConstant } from '@kit.AbilityKit';
 import lazy { PhotoBrowserStateMachine } from '../viewModel/statemachine/PhotoBrowserStateMachine';
 import { PhotoAccessHelperAccess } from '@ohos/common/src/main/ets/default/access/PhotoAccessHelperAccess';
+import lazy { MediaLibraryData } from '@ohos/common/src/main/ets/default/model/browser/photo/data/MediaData';
 
 export class VideoPlayerBigDataReport {
   public static videoPlay(params: VideoReportParams): void {
@@ -260,6 +261,8 @@ export struct VideoPlayer {
   private imageComplete: Function = (): void => {
   };
   private imageError: Function = (): void => {
+    // 封面图加载失败时隐藏封面，避免一直显示空白背景
+    this.isShowCoverPicture = false;
   };
   private placeHolderImage: string = '';
   // 广播工具
@@ -455,6 +458,34 @@ export struct VideoPlayer {
 
   public getSrc(): string {
     return this.src;
+  }
+
+  private normalizePathForFsOpen(input: string): string {
+    if (!input) {
+      return input;
+    }
+    // file manager docs uri, e.g. file://docs/storage/External/...
+    const docsPrefix: string = 'file://docs';
+    if (input.startsWith(docsPrefix)) {
+      let p: string = input.substring(docsPrefix.length);
+      if (p.length > 0 && !p.startsWith('/')) {
+        p = '/' + p;
+      }
+      return decodeURI(p);
+    }
+    // generic file uri, e.g. file:///data/storage/... or file://<abs-path>
+    const filePrefix: string = 'file://';
+    if (input.startsWith(filePrefix)) {
+      let p: string = input.substring(filePrefix.length);
+      // handle file:///xxx -> /xxx
+      if (p.startsWith('/')) {
+        // already absolute
+        return decodeURI(p);
+      }
+      // file://C:/... or other absolute formats: keep as-is after stripping scheme
+      return decodeURI(p);
+    }
+    return input;
   }
 
   public setSpeedUpValue(value: boolean): void {
@@ -705,7 +736,7 @@ export struct VideoPlayer {
 
   private playVideo(fromCloudSync: boolean, uniqueId: string): void {
     Log.info(TAG, `playVideo check mPosition: ${this.mPosition},currentIndex: ${
-      this.viewModel.getCurrentIndex()},src:${this.src}, uniqueId:${uniqueId}`);
+    this.viewModel.getCurrentIndex()},src:${this.src}, uniqueId:${uniqueId}`);
     if (this.mPosition !== this.viewModel.getCurrentIndex()) {
       return;
     }
@@ -794,10 +825,15 @@ export struct VideoPlayer {
   private attemptPlayCloudVideo(): void {
     let status: string | undefined = this.videoPlayController?.getAvPlayerState();
     let overTimes: number = this.attemptPlayVideoTimes < this.attemptPlayVideoMaxTimes ?
-    this.attemptWaitTime : this.attemptWaitTime * this.attemptPlayVideoMaxTimes;
+      this.attemptWaitTime : this.attemptWaitTime * this.attemptPlayVideoMaxTimes;
     if ((status === AvplayerStatus.INITIALIZED || status === AvplayerStatus.IDLE)) {
       setTimeout((): void => {
         this.attemptPlayVideoTimes++;
+        let currentState: string | undefined = this.videoPlayController?.getAvPlayerState();
+        if (currentState !== AvplayerStatus.INITIALIZED && currentState !== AvplayerStatus.IDLE) {
+          Log.info(TAG, `attemptPlayCloudVideo: state changed to ${currentState} during wait, skip retry. src: ${this.src}`);
+          return;
+        }
         this.playLocalVideo();
       }, overTimes);
     }
@@ -809,6 +845,11 @@ export struct VideoPlayer {
       this.attemptPlayVideoTimes < this.attemptPlayVideoMaxTimes) {
       setTimeout((): void => {
         this.attemptPlayVideoTimes++;
+        let currentState: string | undefined = this.videoPlayController?.getAvPlayerState();
+        if (currentState !== AvplayerStatus.INITIALIZED && currentState !== AvplayerStatus.IDLE) {
+          Log.info(TAG, `attemptPlayLocalVideo: state changed to ${currentState} during wait, skip retry. src: ${this.src}`);
+          return;
+        }
         this.playLocalVideo();
       }, this.attemptWaitTime);
     }
@@ -870,9 +911,25 @@ export struct VideoPlayer {
     });
   }
 
+  public syncItemDurationFromAvPlayer(durationMs: number): void {
+    if (!Number.isFinite(durationMs) || durationMs <= 0) {
+      return;
+    }
+    const current: number | undefined = this.item?.duration;
+    if (!Number.isFinite(current) || Number.isNaN(current) || (current ?? 0) <= 0) {
+      this.item.duration = durationMs;
+    }
+    // PhotoPreviewer 使用 @Prop curItem，对 MediaItem 字段原地赋值不会触发 UI；SwiperVM 侧用 @Track 承接
+    this.appBroadCast.emit(BroadCastConstants.VIDEO_DURATION_RESOLVED, [this.item.uniqueId, durationMs]);
+  }
+
   public onPrepared(src: string): void {
     Log.info(TAG, `onPrepared,this.src: ${this.src},src: ${src},this.pageStatus: ${this.pageStatus}`);
     if (this.src === src && this.pageStatus === PageStatus.SHOW) {
+      const preparedDuration: number = this.videoPlayController?.getAvPlayer()?.duration ?? Number.NaN;
+      if (Number.isFinite(preparedDuration) && preparedDuration > 0) {
+        this.syncItemDurationFromAvPlayer(preparedDuration);
+      }
       Log.info(TAG, `on prepared auto play,isShowCoverPicture: ${
       this.isShowCoverPicture},mediaPosition: ${this.mediaPosition}`);
       if (this.playType === PlayType.AUTOPLAY ||
@@ -1022,7 +1079,7 @@ export struct VideoPlayer {
           VideoPlayerBigDataReport.cloudVideoNetworkNoService();
         }
       }
-      this.expandToFetchAllFrame()
+      // this.expandToFetchAllFrame()
     }
   }
 
@@ -1326,7 +1383,7 @@ export struct VideoPlayer {
     Log.info(TAG, `setAvplayerUrlAndSurfaceId surfaceId: ${surfaceId}, fd: ${this.fd}, src: ${src}`);
     if (!(this.videoPlayController && src)) {
       Log.info(TAG, `setAvplayerUrlAndSurfaceId return directly videoPlayController:${
-        VideoPlayController} mCurrent:${this.mIsCurrent}`)
+      VideoPlayController} mCurrent:${this.mIsCurrent}`)
       return;
     }
     if (this.fd && surfaceId && this.fd !== -1) {
@@ -1354,11 +1411,52 @@ export struct VideoPlayer {
       }).finally((): void => {
         AppStorage.setOrCreate<boolean>('isVideoFdOpening', false);
       });
+    } else if (MediaLibraryData.isMediaLibraryUri(src) && this.item.data) {
+      // 如果是 media library URI（如从文件管理拉起），使用 PhotoAsset 的 requestSource 方法打开
+      this.item.data.requestSource().then(fd => {
+        this.requestFdCallback(surfaceId, src, fd);
+        AppStorage.setOrCreate<boolean>('isVideoFdOpening', false);
+      }).catch((err: BusinessError): void => {
+        Log.error(TAG, `open media library uri failed with error message: ${err.message}, error code: ${err.code}, src: ${this.src}`);
+        // 如果 requestSource 失败，尝试使用 open 方法
+        this.item.data?.open('r').then(fd => {
+          this.requestFdCallback(surfaceId, src, fd);
+          AppStorage.setOrCreate<boolean>('isVideoFdOpening', false);
+        }).catch((openErr: BusinessError): void => {
+          Log.error(TAG, `open media library uri with open method failed, error message: ${openErr.message}, error code: ${openErr.code}, src: ${this.src}`);
+          AppStorage.setOrCreate<boolean>('isVideoFdOpening', false);
+        });
+      });
     } else {
-      fs.open(src).then((file): void => {
+      // 非媒体库 URI 的处理
+      // 1. 对于 file://docs/... 这类由文件管理“其它路径”拉起的沙箱文档 URI：
+      //    - 不能转成 /storage/... 的真实路径去 open（通常无权限，会 13900002）
+      //    - 但可以直接对 docs URI 执行 fs.open 以拿到可用 fd，再交给 avplayer
+      const docsPrefix: string = 'file://docs';
+      if (src.startsWith(docsPrefix)) {
+        if (!surfaceId) {
+          Log.error(TAG, `surfaceId is undefined when handling docs uri, src: ${src}`);
+          AppStorage.setOrCreate<boolean>('isVideoFdOpening', false);
+          return;
+        }
+        Log.info(TAG, `open docs uri by fs.open, src: ${src}, surfaceId: ${surfaceId}`);
+        fs.open(src).then((file): void => {
+          this.requestFdCallback(surfaceId, src, file.fd);
+        }).catch((err: BusinessError): void => {
+          Log.error(TAG, `open docs uri failed with error message: ${err.message}, error code: ${err.code}, src: ${src}`);
+        }).finally((): void => {
+          AppStorage.setOrCreate<boolean>('isVideoFdOpening', false);
+        });
+        return;
+      }
+
+      // 2. 普通文件路径，优先使用真实物理路径打开
+      let openPath: string = this.path && this.path.length > 0 ? this.path : this.normalizePathForFsOpen(src);
+      fs.open(openPath).then((file): void => {
         this.requestFdCallback(surfaceId, src, file.fd);
       }).catch((err: BusinessError): void => {
-        Log.error(TAG, `open file failed with error message: ${err.message}, error code: ${err.code}, src: ${this.src}`);
+        Log.error(TAG,
+          `open file failed with error message: ${err.message}, error code: ${err.code}, src: ${this.src}, openPath: ${openPath}`);
       }).finally((): void => {
         AppStorage.setOrCreate<boolean>('isVideoFdOpening', false);
       });
@@ -1387,13 +1485,40 @@ export struct VideoPlayer {
     return params;
   }
 
+  private async openFileForFrameFetch(): Promise<fs.File | undefined> {
+    if (this.isMovieModeLow(this.item) || (MediaLibraryData.isMediaLibraryUri(this.src) && this.item.data)) {
+      try {
+        const fd: number = await this.item.data!.requestSource();
+        return { fd } as fs.File;
+      } catch (error) {
+        Log.error(TAG, `expandToFetchAllFrame requestSource error: ${error}, src: ${this.src}`);
+        return undefined;
+      }
+    }
+    const openPath: string = this.path && this.path.length > 0 ? this.path : this.normalizePathForFsOpen(this.src);
+    try {
+      return await fs.open(openPath);
+    } catch (error) {
+      Log.error(TAG, `expandToFetchAllFrame fs open error: ${error}, openPath: ${openPath}, src: ${this.src}`);
+      return undefined;
+    }
+  }
+
   public async expandToFetchAllFrame() {
-    Log.info(TAG, 'expandToFetchAllFrame function start');
-    Log.info(TAG, 'expandToFetchAllFrame function start'+this.mPosition+'xxx'+this.viewModel.currentIndex);
-    // if (this.mPosition != this.viewModel.currentIndex) {
-    //   Log.info(TAG, 'video fetch all frame failed');
-    //   return;
-    // }
+    const currentIndex: number = this.viewModel.getCurrentIndex();
+    Log.info(TAG, `expandToFetchAllFrame start, mPosition: ${this.mPosition}, currentIndex: ${currentIndex}, src: ${this.src}`);
+    if (this.mPosition !== currentIndex) {
+      Log.info(TAG, `expandToFetchAllFrame skip, not current page`);
+      return;
+    }
+    let avplayerState: string | undefined = this.videoPlayController?.getAvPlayerState();
+    if (avplayerState === AvplayerStatus.INITIALIZED || avplayerState === AvplayerStatus.PREPARED) {
+      Log.info(TAG, `expandToFetchAllFrame: avplayer is ${avplayerState}, defer to avoid decoder contention`);
+      setTimeout((): void => {
+        this.expandToFetchAllFrame();
+      }, 300);
+      return;
+    }
     let frameNum: number = Math.floor(AvPlayConstants.CON1 * Math.log(this.maxTime / AvPlayConstants.A_THOUSAND) + AvPlayConstants.CON2);
     frameNum = frameNum < AvPlayConstants.MIN_FRAME_NUM ? AvPlayConstants.MIN_FRAME_NUM : frameNum;
     let frameGap: number = this.maxTime / frameNum;
@@ -1405,11 +1530,8 @@ export struct VideoPlayer {
     let queryOption = media.AVImageQueryOptions.AV_IMAGE_QUERY_PREVIOUS_SYNC;
     let params: media.PixelMapParams = this.calcVideoFrameSize();
     this.expandAvImageGenerator = await media.createAVImageGenerator();
-    let file: fs.File;
-    try {
-      file = await fs.open(this.src);
-    } catch (error) {
-      Log.error(TAG, `expandToFetchAllFrame fs open error: ${error}`);
+    const file: fs.File | undefined = await this.openFileForFrameFetch();
+    if (!file) {
       return;
     }
     if (!file.fd) {
@@ -1420,7 +1542,6 @@ export struct VideoPlayer {
       Log.error(TAG, 'expandToFetchAllFrame: createAVImageGenerator returned null');
       fs.closeSync(file.fd);
       return;
-    
     }
     this.expandAvImageGenerator.fdSrc = { fd: file.fd };
     for (let i = 0; i < frameNum; i++) {
@@ -1558,7 +1679,7 @@ export struct VideoPlayer {
             this.setAvplayerUrlAndSurfaceId(this.src, this.getSurfaceID());
           }
           if (Global.getBoolean('autoPlayEnable') && this.mPosition ===
-            this.viewModel.getCurrentIndex() && this.mediaPosition === photoAccessHelper.PositionType.CLOUD) {
+          this.viewModel.getCurrentIndex() && this.mediaPosition === photoAccessHelper.PositionType.CLOUD) {
             if (!this.networkAvailable) {
               // 网络不可用
               UiUtil.showToast($r('app.string.no_network'));
@@ -1598,6 +1719,12 @@ export struct VideoPlayer {
                 this.setSpeedUpValue(false);
                 this.fastPlayExit();
               }
+              return;
+            }
+            // 仅正在播放时允许长按倍速；播放结束、未起播等状态不展示倍速标识
+            if (this.videoPlayController?.getAvPlayerState() !== AvplayerStatus.PLAYING) {
+              Log.info(TAG,
+                `longpress fast play skipped, state is ${this.videoPlayController?.getAvPlayerState()}`);
               return;
             }
             // 如果在加速状态下，就不用再设置加速了

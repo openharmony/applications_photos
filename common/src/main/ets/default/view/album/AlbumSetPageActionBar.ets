@@ -30,6 +30,8 @@ import lazy { display } from '@kit.ArkUI';
 import lazy { Constants } from '../../../default/model/common/Constants';
 import lazy { MenuListUtil } from '../../../default/utils/MenuListUtil';
 import lazy { RightClickMenuGroup } from '../../view/menu/MenuController';
+import lazy { FoldUtil } from '../../../default/utils/FoldUtil';
+import lazy { ActionBarVar } from '@ohos/tools/src/main/variables/ActionBarVar';
 
 /* instrument ignore file */
 const TAG: string = 'browser_AlbumSetPageActionBar';
@@ -50,7 +52,7 @@ export struct AlbumSetPageActionBar {
     display.FoldDisplayMode.FOLD_DISPLAY_MODE_UNKNOWN;
   @StorageLink('getFoldStatus') private isFoldExpanded: boolean = DeviceInfo.isFoldable();
   @StorageLink('isSidebar') isSidebar: boolean = getScreen().isSidebar();
-  @StorageLink('statusBarHeight') statusBarHeight: number = 0;
+  @StorageLink('statusBarHeight') @Watch('onStatusBarHeightChanged') statusBarHeight: number = 0;
   onMenuClicked: Function = (): void => {
   };
   @State private isNeedPlaceholder: boolean = true;
@@ -58,11 +60,12 @@ export struct AlbumSetPageActionBar {
   @Prop private moreMenuListPC: RightClickMenuGroup[] = [];
   @Link actionMoreMenuList: Action[];
   @Provide hidePopup: boolean = false;
-  @State private actionBarPaddingTop: number | Resource = 0;
+  @State private actionBarPaddingTop: number = 0;
   @StorageLink('IsCloudDriveInstalled') @Watch('updateActionBar') isCloudDriveInstalled: boolean = false;
   private onAreaHeightChangedFunc: Function = (data: number): void => this.onAreaHeightChanged(data);
   @StorageLink('digging_hole_camera_area') diggingHoleCameraArea: DiggingHoleCameraArea = getScreen()
     .getDiggingHoleCameraArea();
+  @LocalStorageLink('isSidebarDrawerShown') isSidebarDrawerShown: boolean = true;
 
   updatePlaceholderStatus(): void {
     if (!DeviceInfo.isPc()) {
@@ -81,15 +84,18 @@ export struct AlbumSetPageActionBar {
   }
 
   aboutToAppear(): void {
-    if (!DeviceInfo.isPcOrTablet()) {
-      this.actionBarPaddingTop = px2vp(this.statusBarHeight);
-    } else {
-      this.actionBarPaddingTop = $r('app.float.album_set_page_action_bar_padding_top');
-    }
+    this.syncActionBarPaddingTop();
     getScreen().on(ScreenManager.ON_AREA_HEIGHT_CHANGED, this.onAreaHeightChangedFunc);
     Log.info(TAG, `action bar padding top: ${this.actionBarPaddingTop}`);
     this.updatePlaceholderStatus();
     this.updateActionBar();
+  }
+  private onStatusBarHeightChanged(): void {
+    this.syncActionBarPaddingTop();
+  }
+  private syncActionBarPaddingTop(): void {
+    const baseTop = px2vp(this.statusBarHeight) / 2;
+    this.actionBarPaddingTop = DeviceInfo.isTablet() ? (baseTop + px2vp(25)) : (baseTop * 2);
   }
 
   aboutToDisappear(): void {
@@ -97,9 +103,59 @@ export struct AlbumSetPageActionBar {
   }
 
   private onAreaHeightChanged(data: number): void {
-    if (!DeviceInfo.isPcOrTablet()) {
-      this.actionBarPaddingTop = px2vp(data);
+    const baseTop = px2vp(data) / 2;
+    this.actionBarPaddingTop = DeviceInfo.isTablet() ? (baseTop + px2vp(25)) : (baseTop * 2);
+  }
+  private getCommAppBarMatchedHorizontalPadding(): [number, number] {
+    const foldStatus = FoldUtil.getInstance().getCurFoldStatus();
+    const isTabletLayout: boolean = DeviceInfo.isTablet() || FoldUtil.isTriExpand(foldStatus);
+    const holeArea = this.diggingHoleCameraArea;
+    const isFloatingOrSplit: boolean = getScreen().isSplitOrFloating();
+    const windowPcmodeSwitchStatus: boolean | undefined = AppStorage.get<boolean>('windowPcmodeSwitchStatus');
+    const isFoldableDevice: boolean = DeviceInfo.isFoldable();
+    const skipTabletExtraLeft: boolean = ActionBarVar.isShowSideBar ||
+      (isFloatingOrSplit && !windowPcmodeSwitchStatus) || this.isAlbumSetSelectedMode;
+    let paddingLeft = 0;
+    let paddingRight = 0;
+    if (isFoldableDevice) {
+      paddingLeft = 24;
+      paddingRight = 24;
+    } else if (isTabletLayout) {
+      if (this.isHorizontal) {
+        paddingLeft = 32 + (skipTabletExtraLeft ? 0 : 48);
+        paddingRight = 32;
+      } else {
+        paddingLeft = 16 + (skipTabletExtraLeft ? 0 : 64);
+        paddingRight = 16;
+      }
+      if (DeviceInfo.isTablet()) {
+        paddingLeft = paddingLeft * 2;
+      }
+    } else {
+      const padding: number = this.isHorizontal ? 24 : 16;
+      paddingLeft = padding + holeArea.left;
+      paddingRight = padding + holeArea.right;
     }
+    if (DeviceInfo.isPc() && this.isSidebarDrawerShown) {
+      paddingLeft += Constants.DRAWER_BUTTON_WIDTH_PC / 2;
+    }
+    return [paddingLeft, paddingRight];
+  }
+  private getActionBarPaddingLeft(): number {
+    const left = this.getCommAppBarMatchedHorizontalPadding()[0];
+    if (DeviceInfo.isPc()) {
+      return left / 2;
+    }
+    return DeviceInfo.isTablet() ? (left / 2) : left;
+  }
+  private getActionBarPaddingRight(): number {
+    return this.getCommAppBarMatchedHorizontalPadding()[1];
+  }
+  private getAlbumTabTitleFontSize(): Resource | number {
+    if (DeviceInfo.isPc()) {
+      return ActionBarProp.HEAD_TITLE_TEXT_SIZE;
+    }
+    return $r('app.float.first_level_title_font_size');
   }
 
   build() {
@@ -119,8 +175,8 @@ export struct AlbumSetPageActionBar {
     .padding({
       top: this.isHorizontal && (!this.isFoldExpanded && !DeviceInfo.isTablet()) || this.isVerdeFoldable ? 0 :
       this.actionBarPaddingTop,
-      left: this.isFoldExpanded ? 0 : this.diggingHoleCameraArea.left,
-      right: this.isFoldExpanded ? 0 : this.diggingHoleCameraArea.right,
+      left: this.getActionBarPaddingLeft(),
+      right: this.getActionBarPaddingRight(),
     })
   }
 
@@ -135,8 +191,7 @@ export struct AlbumSetPageActionBar {
       .setTitle($r('app.string.tab_albums'))
       .setIsLevelOneHeadTitle(true)
       .setIsHeadTitle(true)
-      .setTitleFontSize(DeviceInfo.isPc() ?
-      ActionBarProp.HEAD_TITLE_TEXT_SIZE : ActionBarProp.HEAD_TITLE_ONE_LINE_TEXT_SIZE)
+      .setTitleFontSize(this.getAlbumTabTitleFontSize())
 
     if (this.isAlbumSetSelectedMode) {
       menuList.push(
@@ -180,8 +235,7 @@ export struct AlbumSetPageActionBar {
       .setHasTabBar(this.isSidebar)
       .setTitle($r('app.string.tab_albums'))
       .setIsLevelOneHeadTitle(true)
-      .setTitleFontSize(
-        DeviceInfo.isPc() ? ActionBarProp.HEAD_TITLE_TEXT_SIZE : ActionBarProp.HEAD_TITLE_ONE_LINE_TEXT_SIZE)
+      .setTitleFontSize(this.getAlbumTabTitleFontSize())
       .setIsHeadTitle(true);
 
     if (this.isAlbumSetSelectedMode) {

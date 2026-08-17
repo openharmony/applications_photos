@@ -29,8 +29,7 @@ import {
   ANIMATION_DURATION,
   CURRENT_LANGUAGE,
   AVOID_LEFT_OFFSET,
-  LONG_SCREENSHOT_CROP_HOT_AREA,
-  PositionType
+  LONG_SCREENSHOT_CROP_HOT_AREA
 } from '../const';
 import { Trace } from '../util/Trace';
 import { FillCropType } from '../../service/model/Enum';
@@ -41,9 +40,7 @@ import { DeviceInfo } from '@ohos/common/src/main/ets/default/utils/DeviceInfo'
 
 const TAG = 'FrostedGlass';
 
-let offsetX: number = 0;
-let offsetY: number = 0;
-let scaleRatio = 1;
+let scaleRatioDefault = 1;
 let animationTime = 100;
 let percentage = 100;
 let cropFrameResetTime = 800;
@@ -124,6 +121,32 @@ export struct ScreenMask {
   @State xOffset: number = UiUtil.getPreviewRectOffset();
   private isEnableMaskOfLast: boolean = false;
 
+
+  private ceilRight(): number {
+
+    return DeviceInfo.isPc() ? Math.ceil(vp2px(this.clipSize.right)) : this.clipSize.roundRight();
+  }
+
+  private ceilBottom(): number {
+
+    return DeviceInfo.isPc() ? Math.ceil(vp2px(this.clipSize.bottom)) : this.clipSize.roundBottom();
+  }
+
+
+  private pcMaskUpOffsetPx(): number {
+    return DeviceInfo.isPc() ? 25 : 0;
+  }
+
+  private maskTopPx(): number {
+    return Math.max(0, this.clipSize.roundTop() - this.pcMaskUpOffsetPx());
+  }
+
+  private maskBottomPx(): number {
+    const top: number = this.maskTopPx();
+    const bottom: number = this.ceilBottom() - this.pcMaskUpOffsetPx();
+    return bottom < top ? top : bottom;
+  }
+
   @Builder
   blurBack() {
     EffectComponent() {
@@ -131,23 +154,23 @@ export struct ScreenMask {
       }
       .width(`${this.clipSize.roundLeft()}px`)
       .height(`${this.clipSize.roundHeight()}px`)
-      .position({ x: 0, y: this.clipSize.roundTop() + 'px' })
+      .position({ x: 0, y: this.maskTopPx() + 'px' })
       .useEffect(true)
       .visibility(this.crop.isEnableBlur ? Visibility.Visible : Visibility.Hidden)
 
       Row() {
       }
       .width('100%')
-      .height(`${this.clipSize.roundTop()}px`)
+      .height(`${this.maskTopPx()}px`)
       .position({ x: 0, y: 0 })
       .useEffect(true)
       .visibility(this.crop.isEnableBlur ? Visibility.Visible : Visibility.Hidden)
 
       Row() {
       }
-      .width(display.getDefaultDisplaySync().width - this.clipSize.roundRight() + 'px')
+      .width(display.getDefaultDisplaySync().width - this.ceilRight() + 'px')
       .height(`${this.clipSize.roundHeight()}px`)
-      .position({ x: this.clipSize.roundRight() + 'px', y: this.clipSize.roundTop() + 'px' })
+      .position({ x: this.ceilRight() + 'px', y: this.maskTopPx() + 'px' })
       .useEffect(true)
       .visibility(this.crop.isEnableBlur ? Visibility.Visible : Visibility.Hidden)
 
@@ -155,7 +178,7 @@ export struct ScreenMask {
       }
       .width('100%')
       .height('100%')
-      .position({ x: 0, y: this.clipSize.roundBottom() + 'px' })
+      .position({ x: 0, y: this.maskBottomPx() + 'px' })
       .useEffect(true)
       .visibility(this.crop.isEnableBlur ? Visibility.Visible : Visibility.Hidden)
     }
@@ -169,23 +192,23 @@ export struct ScreenMask {
     }
     .width(`${this.clipSize.roundLeft()}px`)
     .height(`${this.clipSize.roundHeight()}px`)
-    .position({ x: 0, y: this.clipSize.roundTop() + 'px' })
+    .position({ x: 0, y: this.maskTopPx() + 'px' })
     .backgroundColor('rgba(0,0,0,0.8)')
     .visibility(this.crop.isEnableMask ? Visibility.Visible : Visibility.Hidden)
 
     Row() {
     }
     .width('100%')
-    .height(`${this.clipSize.roundTop()}px`)
+    .height(`${this.maskTopPx()}px`)
     .position({ x: 0, y: 0 })
     .backgroundColor('rgba(0,0,0,0.8)')
     .visibility(this.crop.isEnableMask ? Visibility.Visible : Visibility.Hidden)
 
     Row() {
     }
-    .width(display.getDefaultDisplaySync().width - this.clipSize.roundRight() + 'px')
+    .width(display.getDefaultDisplaySync().width - this.ceilRight() + 'px')
     .height(`${this.clipSize.roundHeight()}px`)
-    .position({ x: this.clipSize.roundRight() + 'px', y: this.clipSize.roundTop() + 'px' })
+    .position({ x: this.ceilRight() + 'px', y: this.maskTopPx() + 'px' })
     .backgroundColor('rgba(0,0,0,0.8)')
     .visibility(this.crop.isEnableMask ? Visibility.Visible : Visibility.Hidden)
 
@@ -193,7 +216,7 @@ export struct ScreenMask {
     }
     .width('100%')
     .height('100%')
-    .position({ x: 0, y: this.clipSize.roundBottom() + 'px' })
+    .position({ x: 0, y: this.maskBottomPx() + 'px' })
     .backgroundColor('rgba(0,0,0,0.8)')
     .visibility(this.crop.isEnableMask ? Visibility.Visible : Visibility.Hidden)
   }
@@ -211,7 +234,7 @@ export struct ScreenMask {
     })
     .width(`${this.clipSize.roundLeft()}px`)
     .height(`${this.clipSize.roundHeight()}px`)
-    .position({ x: 0, y: this.clipSize.roundTop() + 'px' })
+    .position({ x: 0, y: this.maskTopPx() + 'px' })
     .visibility(this.crop.isEnableMask ? Visibility.Visible : Visibility.Hidden)
 
     Row() {
@@ -224,7 +247,7 @@ export struct ScreenMask {
       playMode: PlayMode.Normal,
     })
     .width('100%')
-    .height(`${this.clipSize.roundTop()}px`)
+    .height(`${this.maskTopPx()}px`)
     .position({ x: 0, y: 0 })
     .visibility(this.crop.isEnableMask ? Visibility.Visible : Visibility.Hidden)
 
@@ -237,9 +260,9 @@ export struct ScreenMask {
       delay: 0,
       playMode: PlayMode.Normal,
     })
-    .width(display.getDefaultDisplaySync().width - this.clipSize.roundRight() + 'px')
+    .width(display.getDefaultDisplaySync().width - this.ceilRight() + 'px')
     .height(`${this.clipSize.roundHeight()}px`)
-    .position({ x: this.clipSize.roundRight() + 'px', y: this.clipSize.roundTop() + 'px' })
+    .position({ x: this.ceilRight() + 'px', y: this.maskTopPx() + 'px' })
     .visibility(this.crop.isEnableMask ? Visibility.Visible : Visibility.Hidden)
 
     Row() {
@@ -253,7 +276,7 @@ export struct ScreenMask {
     })
     .width('100%')
     .height('100%')
-    .position({ x: 0, y: this.clipSize.roundBottom() + 'px' })
+    .position({ x: 0, y: this.maskBottomPx() + 'px' })
     .visibility(this.crop.isEnableMask ? Visibility.Visible : Visibility.Hidden)
   }
 
@@ -314,11 +337,16 @@ export struct ScreenSizer {
   @Prop isStopOperating: boolean = false;
   @Prop isRecordOperating: boolean = false;
   @StorageProp(SCREEN_ORIENTATION_PORTRAIT) @Watch('onPortraitChange')
-    isScreenPortrait: boolean = ScreenManager.getInstance().isScreenPortrait();
+  isScreenPortrait: boolean = ScreenManager.getInstance().isScreenPortrait();
   private isTouchScreen: boolean = false;
   private relateScale: number = 1;
   @StorageLink('windowFocused') @Watch('resetOperate') private isWindowFocused: boolean = true;
   private startClipSize: Rectangle = new Rectangle(0, 0, 0, 0);
+  private pinchCenterX: number = 0;
+  private pinchCenterY: number = 0;
+  private panOffsetX: number = 0;
+  private panOffsetY: number = 0;
+  private scaleRatio: number = scaleRatioDefault;
 
   build() {
     Stack() {
@@ -353,7 +381,6 @@ export struct ScreenSizer {
             if (this.editor.tabIndex == TabName.TabAperture) {
             }
 
-            this.fingerIds = this.getFingerIds(event);
             let isInHotArea = (this.editor.tabIndex === TabName.TabCrop) && this.isCropFrameHotArea(event);
             /* instrument ignore if */
             if (!this.isTouchScreen && this.isRecordOperating) {
@@ -375,29 +402,29 @@ export struct ScreenSizer {
             // 缩放视频
             this.asset.isGestureOperate = true;
             HiLog.i('FrostedGlass', 'PinchGesture start');
-            scaleRatio = 1;
+            this.scaleRatio = scaleRatioDefault;
             this.relateScale = 1;
-            offsetX = (event.fingerList[this.fingerIds[0]]?.localX + event.fingerList[this.fingerIds[1]]?.localX) / 2;
-            offsetY = (event.fingerList[this.fingerIds[0]]?.localY + event.fingerList[this.fingerIds[1]]?.localY) / 2;
+            this.pinchCenterX = (event.fingerList[0]?.localX + event.fingerList[1]?.localX) / 2;
+            this.pinchCenterY = (event.fingerList[0]?.localY + event.fingerList[1]?.localY) / 2;
           })
           .onActionUpdate((event: GestureEvent) => {
-            // 裁剪和手势组合互斥
-            HiLog.i('FrostedGlass', 'PinchGesture scale hasActionStarted = ' + this.asset.isGestureOperate);
             /* instrument ignore if */
             if (!this.asset.isGestureOperate) {
               return;
             }
 
-            let fingerIds: number[] = this.getFingerIds(event);
             /* instrument ignore if */
-            if (this.isFingerListEmpty(fingerIds)) {
+            let fl = event.fingerList;
+            if (!fl || fl.length < 2 || !fl[0] || !fl[1]) {
               return;
             }
-            let mx = (event.fingerList[fingerIds[0]]?.localX + event.fingerList[fingerIds[1]]?.localX) / 2;
-            let my = (event.fingerList[fingerIds[0]]?.localY + event.fingerList[fingerIds[1]]?.localY) / 2;
-            this.onPanGestureMove(mx - offsetX, my - offsetY);
-            offsetX = mx;
-            offsetY = my;
+            let f0 = fl[0];
+            let f1 = fl[1];
+            let mx = (f0.localX + f1.localX) / 2;
+            let my = (f0.localY + f1.localY) / 2;
+            this.onPanGestureMove(mx - this.pinchCenterX, my - this.pinchCenterY);
+            this.pinchCenterX = mx;
+            this.pinchCenterY = my;
 
             /* instrument ignore if */
             if ((Math.abs(event.scale - this.relateScale) <= SCALE_THRESHOLD)) {
@@ -406,18 +433,15 @@ export struct ScreenSizer {
               this.relateScale = event.scale < this.relateScale ? (event.scale + SCALE_THRESHOLD) :
                 (event.scale - SCALE_THRESHOLD)
             }
-            let centerX = (event.fingerList[fingerIds[0]].globalX + event.fingerList[fingerIds[1]].globalX) / 2;
-            let centerY = (event.fingerList[fingerIds[0]].globalY + event.fingerList[fingerIds[1]].globalY) / 2;
-            // 缩放比例
             this.onPinchGestureScale(
-              this.relateScale / scaleRatio,
-              centerX,
-              centerY
+              this.relateScale / this.scaleRatio,
+              (f0.globalX + f1.globalX) / 2,
+              (f0.globalY + f1.globalY) / 2
             );
 
-            HiLog.i(TAG, 'offsetX is ' + offsetX + ', offsetY is ' + offsetY + ', centerX is ' + centerX +
-              'centerY is ' + centerY + ', relateScale is ' + this.relateScale + ', scaleRatio is ' + scaleRatio)
-            scaleRatio = this.relateScale;
+            HiLog.d(TAG, 'pinchCenterX is ' + this.pinchCenterX + ', pinchCenterY is ' + this.pinchCenterY +
+              ', relateScale is ' + this.relateScale + ', scaleRatio is ' + this.scaleRatio)
+            this.scaleRatio = this.relateScale;
           })
           .onActionEnd((): void => {
             /* instrument ignore if */
@@ -435,7 +459,9 @@ export struct ScreenSizer {
             }, 50)
 
             // 平移缩放同时进行时，缩放结束重置比例
-            scaleRatio = ONE_SCALE_RATION;
+            this.scaleRatio = ONE_SCALE_RATION;
+            this.pinchCenterX = 0;
+            this.pinchCenterY = 0;
             // 缩放结束
             HiLog.i('FrostedGlass', 'PinchGesture end');
             this.isTouchScreen = false;
@@ -449,34 +475,36 @@ export struct ScreenSizer {
             });
           })
           .onActionCancel((): void => {
-          /* instrument ignore if */
-          if (!this.asset.isGestureOperate) {
-            return;
-          }
-          /* instrument ignore if */
-          if (!ScreenManager.getInstance().getIsFirstFrame()) {
-            return;
-          }
-          Trace.end('pinch gesture')
-          setTimeout(() => {
-            // 标识延时50ms设置，避免与父组件或兄弟onTouch事件冲突
-            this.asset.isGestureOperate = false;
-          }, 50)
-
-          // 平移缩放同时进行时，缩放结束重置比例
-          scaleRatio = 1;
-          // 缩放结束
-          HiLog.i('FrostedGlass', 'PinchGesture end');
-          this.isTouchScreen = false;
-          App.getInstance().myEditor().asset.fillCropRect(ANIMATION_DURATION, FillCropType.PinchEnd, () => {
-            this.onGestureEnd();
-            this.editor.asset.overSizePrompt();
             /* instrument ignore if */
-            if (this.editor.isEdit) {
-              this.editor.isShowRevert = !this.editor.isEdited();
+            if (!this.asset.isGestureOperate) {
+              return;
             }
-          });
-        }),
+            /* instrument ignore if */
+            if (!ScreenManager.getInstance().getIsFirstFrame()) {
+              return;
+            }
+            Trace.end('pinch gesture')
+            setTimeout(() => {
+              // 标识延时50ms设置，避免与父组件或兄弟onTouch事件冲突
+              this.asset.isGestureOperate = false;
+            }, 50)
+
+            // 平移缩放同时进行时，缩放结束重置比例
+            this.scaleRatio = scaleRatioDefault;
+            this.pinchCenterX = 0;
+            this.pinchCenterY = 0;
+            // 缩放结束
+            HiLog.i('FrostedGlass', 'PinchGesture end');
+            this.isTouchScreen = false;
+            App.getInstance().myEditor().asset.fillCropRect(ANIMATION_DURATION, FillCropType.PinchEnd, () => {
+              this.onGestureEnd();
+              this.editor.asset.overSizePrompt();
+              /* instrument ignore if */
+              if (this.editor.isEdit) {
+                this.editor.isShowRevert = !this.editor.isEdited();
+              }
+            });
+          }),
         PanGesture({ distance: 0.01, fingers: 1 })// 最小拖动识别距离，单位为vp。默认值：5
           .onActionStart((event: GestureEvent | undefined): void => {
             HiLog.i(TAG, 'FrostedGlass, start PanGesture');
@@ -516,61 +544,49 @@ export struct ScreenSizer {
             App.getInstance().myEditor().interrupt = true;
             HiLog.i('FrostedGlass', 'PanGesture start');
             // 拖动视频
-            offsetX = 0;
-            offsetY = 0;
+            this.panOffsetX = 0;
+            this.panOffsetY = 0;
             this.asset.isGestureOperate = !this.dragObj.dragging;
           })
           .onActionUpdate((event: GestureEvent) => {
             /* instrument ignore if */
             if (!event || !event.fingerList || event.fingerList.length === 0 ||
               !this.fingerIds || this.fingerIds.length === 0 || this.fingerIds[0] === undefined) {
-              HiLog.e(TAG, `PanGesture event is empty or fingerIds length is zero!` +
-                `PanGesture event:[ ${JSON.stringify(event)} ]`);
+              HiLog.e(TAG, 'PanGesture event is empty or fingerIds length is zero!');
               return;
             }
             let index: number = (!event.fingerList[this.fingerIds[0]]) ?
               ((!event.fingerList[0]) ? -1 : 0) : this.fingerIds[0];
             if (index === -1) {
-              HiLog.e(TAG, `PanGesture event is undefined!` +
-                `PanGesture event:[ ${JSON.stringify(event)} ]`);
+              HiLog.e(TAG, 'PanGesture event fingerList is undefined!');
               return;
             }
-            HiLog.i('FrostedGlass', 'PanGesture move hasActionStarted = ' + this.asset.isGestureOperate);
             if (this.dragObj.dragging) {
               let touch = event.fingerList[index];
-              let delX: number = touch.globalX - this.dragObj.x;
-              let delY: number = touch.globalY - this.dragObj.y;
-              // 裁剪和缩放平移手势互斥
               let newPosition = this.clipSize.clone()
               let direction = this.dragObj.action
-              Trace.begin('getEditorCropRect');
               if (this.dragObj.multiCrop) {
-                this.getMultiCropRect(delX, delY, newPosition, direction, event.pressure)
+                this.getMultiCropRect(touch.globalX - this.dragObj.x, touch.globalY - this.dragObj.y,
+                  newPosition, direction, event.pressure)
               } else {
-                this.getSingleCropRect(delX, delY, newPosition, direction, event.pressure)
+                this.getSingleCropRect(touch.globalX - this.dragObj.x, touch.globalY - this.dragObj.y,
+                  newPosition, direction, event.pressure)
               }
-              Trace.end('getEditorCropRect');
               return
             }
             /* instrument ignore if */
             if (!this.asset.isGestureOperate) {
               return;
             }
-            // 移动距离 正负值
             let mx = event.offsetX;
             let my = event.offsetY;
-            if (Math.round(mx - offsetX) != 0 || Math.round(my - offsetY) != 0) {
-              this.onPanGestureMove(mx - offsetX, my - offsetY);
-              offsetX = mx;
-              offsetY = my;
+            let dx = mx - this.panOffsetX;
+            let dy = my - this.panOffsetY;
+            if (dx !== 0 || dy !== 0) {
+              this.onPanGestureMove(dx, dy);
+              this.panOffsetX = mx;
+              this.panOffsetY = my;
             }
-            let offset: PositionType = {
-              x: offsetX,
-              y: offsetY,
-            }
-            App.getInstance()
-              .myEditor()
-              .asset
           })
           .onActionEnd((event: GestureEvent) => {
             setTimeout((): void => {
@@ -620,7 +636,7 @@ export struct ScreenSizer {
             Trace.end('pan gesture')
             this.endGestureOperate(event);
             HiLog.i('FrostedGlass', 'PanGesture end');
-        }),
+          }),
       )
     )
   }
@@ -814,8 +830,8 @@ export struct ScreenSizer {
   private endGestureOperate(event?: GestureEvent) {
     this.asset.isGestureOperate = false;
     // 平移缩放同时进行时，拖拽结束重置比例
-    offsetX = 0;
-    offsetY = 0;
+    this.panOffsetX = 0;
+    this.panOffsetY = 0;
     this.isTouchScreen = false;
     App.getInstance()
       .myEditor()

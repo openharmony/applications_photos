@@ -28,6 +28,7 @@ import lazy { Region } from './Region';
 import lazy { SimpleGridMediaItem } from '../model/browser/photo/SimpleGridMediaItem';
 import lazy { TraceControllerUtils } from './TraceControllerUtils';
 import lazy { getScreen } from '../model/common/ScreenManager';
+import { DayIrregularGridScrollStrategy, GridScrollBaseStrategy } from './GridScrollBaseStrategy';
 
 /* instrument ignore file */
 const TAG: string = 'common_DayIrregularGridDragScrollHelper';
@@ -57,7 +58,7 @@ export class DayIrregularGridDragScrollHelper extends GridDragScrollBaseHelper {
   /**
    * 滑动策略类
    */
-  // private scrollStrategy: GridScrollBaseStrategy = new DayIrregularGridScrollStrategy();
+  private scrollStrategy: GridScrollBaseStrategy = new DayIrregularGridScrollStrategy();
   /**
    * 预期坐标偏移量
    */
@@ -138,24 +139,24 @@ export class DayIrregularGridDragScrollHelper extends GridDragScrollBaseHelper {
   private winHeight: number = getScreen().getWinHeight();
 
   public init(scroller: Scroller, dataSource: MediaDataSource): void {
-  //   super.init(scroller, dataSource);
-  //   let gridScreenInfo: GridScreenInfo = this.scrollStrategy.getGridScreenInfo();
-  //   let screenMaxGridNum: number = Math.max(gridScreenInfo.screenMaxGridNum, 0);
-  //   this.dataSource?.createSimpleMediaItems(SCREEN_NUM_TO_CACHE_MEDIA_ITEMS * screenMaxGridNum);
-  //
-  //   let albumUri: string = this.dataSource?.getAlbumUri() ?? '';
-  //   if (albumUri) {
-  //     this.scrollStrategy.getAlbum(albumUri).then((album: PhotoAlbum | undefined): void => {
-  //       this.album = album;
-  //     });
-  //   }
-  // }
-  //
-  // public recordScrollInfo(scrollInfo: GridScrollInfo): void {
-  //   if (scrollInfo === undefined || scrollInfo === null) {
-  //     return;
-  //   }
-  //   this.scrollInfo = scrollInfo as IrregularGridScrollInfo;
+    super.init(scroller, dataSource);
+    let gridScreenInfo: GridScreenInfo = this.scrollStrategy.getGridScreenInfo();
+    let screenMaxGridNum: number = Math.max(gridScreenInfo.screenMaxGridNum, 0);
+    this.dataSource?.createSimpleMediaItems(SCREEN_NUM_TO_CACHE_MEDIA_ITEMS * screenMaxGridNum);
+
+    let albumUri: string = this.dataSource?.getAlbumUri() ?? '';
+    if (albumUri) {
+      this.scrollStrategy.getAlbum(albumUri).then((album: PhotoAlbum | undefined): void => {
+        this.album = album;
+      });
+    }
+  }
+
+  public recordScrollInfo(scrollInfo: GridScrollInfo): void {
+    if (scrollInfo === undefined || scrollInfo === null) {
+      return;
+    }
+    this.scrollInfo = scrollInfo as IrregularGridScrollInfo;
   }
 
   public handleScrollStart(): void {
@@ -592,50 +593,50 @@ export class DayIrregularGridDragScrollHelper extends GridDragScrollBaseHelper {
    * @param startIndex 查询起点
    * @param count 查询个数
    */
-  private fetchMediaDataSync(startIndex: number, count: number): void {
-    // let actualIndex = startIndex;
-    // if (startIndex === 0) {
-    //   actualIndex++;
-    // }
-    // let actualStartIndex: number =
-    //   (this.dataSource?.findGroupViewIndexes(actualIndex - 1) === TITLE_DATA_INDEX) ? actualIndex + 1 : actualIndex;
-    // let startIndexGroupIndex = this.dataSource?.timeGroupIndexes(actualStartIndex - 1) as number;
-    // let mediaStartIndex: number = actualStartIndex - startIndexGroupIndex - 2;
-    // let queryParam: QueryParam | undefined = this.scrollStrategy.getGirdDataQueryParam(
-    //   this.dataSource, mediaStartIndex, count, this.gridPageInfo);
-    // if (queryParam === undefined) {
-    //   Log.debug(TAG, 'queryParam is unknown, could not fetch')
-    //   this.logTracker?.warn(TAG, 'queryParam is unknown, could not fetch');
-    //   return;
-    // }
-    // let fetchOpt: FetchOptions | undefined = this.scrollStrategy.getGirdDataFetchOptions(this.dataSource, queryParam);
-    // if (fetchOpt === undefined) {
-    //   this.logTracker?.warn(TAG, 'fetchOpt is unknown, could not fetch');
-    //   return;
-    // }
-    // let assetList: PhotoAsset[];
-    // if (!queryParam.albumUri) {
-    //   assetList = this.scrollStrategy.getAssetsSync(fetchOpt);
-    // } else {
-    //   assetList = this.scrollStrategy.getAlbumAssetsSync(this.album, fetchOpt);
-    // }
-    // if (assetList === null || assetList.length === 0) {
-    //   this.logTracker?.warn(TAG, 'assetList is null or size 0');
-    //   return;
-    // }
-    // this.logTracker?.info(TAG, `fetchMediaDataSync cache:${startIndex}-${startIndex + count - 1}`);
-    // this.fetchedUriArr = [];
-    // let layoutStartIndex: number = actualIndex;
-    // for (let i: number = 0; i < assetList.length; i++) {
-    //   if (this.dataSource?.findGroupViewIndexes(layoutStartIndex + i - 1) === TITLE_DATA_INDEX) {
-    //     layoutStartIndex++;
-    //   }
-    //   this.fetchIndexMediaUriSync(layoutStartIndex, i, assetList);
-    // }
-    // this.logTracker?.info(TAG, `fetched assetList size:${assetList.length}` +
-    //   `, fetchedUriArr size:${this.fetchedUriArr.length}`);
-    // ImageCacheUtil.startCachingImages(this.fetchedUriArr);
-    // this.preloadUriArr = this.preloadUriArr.concat(this.fetchedUriArr);
+  private async  fetchMediaDataSync(startIndex: number, count: number) {
+    let actualIndex = startIndex;
+    if (startIndex === 0) {
+      actualIndex++;
+    }
+    let actualStartIndex: number =
+      (this.dataSource?.findGroupViewIndexes(actualIndex - 1) === TITLE_DATA_INDEX) ? actualIndex + 1 : actualIndex;
+    let startIndexGroupIndex = this.dataSource?.timeGroupIndexes(actualStartIndex - 1) as number;
+    let mediaStartIndex: number = actualStartIndex - startIndexGroupIndex - 2;
+    let queryParam: QueryParam | undefined = this.scrollStrategy.getGirdDataQueryParam(
+      this.dataSource, mediaStartIndex, count, this.gridPageInfo);
+    if (queryParam === undefined) {
+      Log.debug(TAG, 'queryParam is unknown, could not fetch')
+      this.logTracker?.warn(TAG, 'queryParam is unknown, could not fetch');
+      return;
+    }
+    let fetchOpt: FetchOptions | undefined = this.scrollStrategy.getGirdDataFetchOptions(this.dataSource, queryParam);
+    if (fetchOpt === undefined) {
+      this.logTracker?.warn(TAG, 'fetchOpt is unknown, could not fetch');
+      return;
+    }
+    let assetList: PhotoAsset[];
+    if (!queryParam.albumUri) {
+      assetList = await this.scrollStrategy.getAssetsSync(fetchOpt);
+    } else {
+      assetList = await this.scrollStrategy.getAlbumAssetsSync(this.album, fetchOpt);
+    }
+    if (assetList === null || assetList.length === 0) {
+      this.logTracker?.warn(TAG, 'assetList is null or size 0');
+      return;
+    }
+    this.logTracker?.info(TAG, `fetchMediaDataSync cache:${startIndex}-${startIndex + count - 1}`);
+    this.fetchedUriArr = [];
+    let layoutStartIndex: number = actualIndex;
+    for (let i: number = 0; i < assetList.length; i++) {
+      if (this.dataSource?.findGroupViewIndexes(layoutStartIndex + i - 1) === TITLE_DATA_INDEX) {
+        layoutStartIndex++;
+      }
+      this.fetchIndexMediaUriSync(layoutStartIndex, i, assetList);
+    }
+    this.logTracker?.info(TAG, `fetched assetList size:${assetList.length}` +
+      `, fetchedUriArr size:${this.fetchedUriArr.length}`);
+    ImageCacheUtil.startCachingImages(this.fetchedUriArr);
+    this.preloadUriArr = this.preloadUriArr.concat(this.fetchedUriArr);
   }
 
   private fetchIndexMediaUriSync(layoutStartIndex: number, indexOffset: number, assetList: PhotoAsset[]): void {

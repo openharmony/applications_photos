@@ -116,7 +116,7 @@ export struct TopNavBar {
   @State editor: BaseEditor = App.getInstance().myEditor();
   @State selectedTab: number = 0;
   @StorageProp(FIRST_FRAME_STATUS) isFirstFrameStatue: boolean = ScreenManager.getInstance().getIsFirstFrame();
-  @State currentIndex: number = TabName.TabCrop;
+  @State currentIndex: number = TabName.TabAdjust;
   @State editTextWidth: number = 0;
   @State customPopup: boolean = false;
   @Link clickBackState: boolean;

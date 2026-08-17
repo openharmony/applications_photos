@@ -717,6 +717,20 @@
             }
         },
         {
+            "name":"small_batch_delete_to_trash_success",
+            "value":"已移至最近删除",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"small_batch_delete_permanently_success",
+            "value":"已永久删除",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
             "name":"action_hidden_process",
             "value":"正在隐藏…",
             "attr":{
@@ -1096,7 +1110,7 @@
         },
         {
             "name":"number_of_print_exceeds_the_limit_tips",
-            "value":"打印上限 %d 张，打印失败",
+            "value":"打印上限 100 张，打印失败",
             "attr":{
                 "priority":"translate"
             }
@@ -5852,7 +5866,7 @@
         },
         {
             "name":"auth_camera_location_gird",
-            "value":"允许后可查看本机后续拍摄照片的位置信息，并使用“地点相册”、“时刻”等服务。",
+            "value":"允许后可查看本机后续拍摄照片的位置信息",
             "attr":{
                 "priority":"LT"
             }

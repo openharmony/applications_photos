@@ -507,29 +507,50 @@ export class TextInputData {
       this.getRotateDegree(this.moveTouchStartX, this.moveTouchStartY, touchEvt.touches[0].x, touchEvt.touches[0].y,
         textArea)
     if (degree != 0) {
+      const previousAngle = this.normalizeAngle(this.angle);
       degree = Number((degree).toFixed(2));
       this.moveTouchStartX = touchEvt.touches[0].x;
       this.moveTouchStartY = touchEvt.touches[0].y;
-      this.angle = (degree + this.angle) % 360;
-      if (this.angle >= 90 - Constants.ADSORPTION_ANGLE && this.angle <= 90 + Constants.ADSORPTION_ANGLE) {
-        this.Vibrations(this.vibrationsStatus);
-        return;
-      }
-      if ((this.angle >= 360 - Constants.ADSORPTION_ANGLE && this.angle < 360) ||
-        (this.angle >= 0 && this.angle < Constants.ADSORPTION_ANGLE)) {
-        this.Vibrations(this.vibrationsStatus);
-        return;
-      }
-      if (this.angle >= 180 - Constants.ADSORPTION_ANGLE && this.angle <= 180 + Constants.ADSORPTION_ANGLE) {
-        this.Vibrations(this.vibrationsStatus);
-        return;
-      }
-      if (this.angle >= 270 - Constants.ADSORPTION_ANGLE && this.angle <= 270 + Constants.ADSORPTION_ANGLE) {
+      this.angle = this.normalizeAngle(degree + this.angle);
+      if (this.shouldVibrateAtSnapAngle(previousAngle, this.angle, degree)) {
         this.Vibrations(this.vibrationsStatus);
         return;
       }
       this.vibrationsStatus = false;
     }
+  }
+
+  private normalizeAngle(angle: number): number {
+    const normalizedAngle = angle % 360;
+    return normalizedAngle < 0 ? normalizedAngle + 360 : normalizedAngle;
+  }
+
+  private normalizeSignedDelta(delta: number): number {
+    return delta > 180 ? delta - 360 : delta;
+  }
+
+  private isInSnapRange(angle: number, snapAngle: number): boolean {
+    return Math.abs(angle - snapAngle) <= Constants.ADSORPTION_ANGLE;
+  }
+
+  private isSegmentNearSnapAngle(startAngle: number, endAngle: number, snapAngle: number): boolean {
+    const minAngle = Math.min(startAngle, endAngle);
+    const maxAngle = Math.max(startAngle, endAngle);
+    return maxAngle >= snapAngle - Constants.ADSORPTION_ANGLE &&
+      minAngle <= snapAngle + Constants.ADSORPTION_ANGLE;
+  }
+
+  private shouldVibrateAtSnapAngle(previousAngle: number, currentAngle: number, degree: number): boolean {
+    const signedDelta = this.normalizeSignedDelta(degree);
+    const unwrappedCurrentAngle = previousAngle + signedDelta;
+    const snapAngles = signedDelta >= 0 ? [0, 90, 180, 270, 360] : [0, -90, 90, 180, 270];
+    for (const snapAngle of snapAngles) {
+      if (this.isInSnapRange(currentAngle, this.normalizeAngle(snapAngle)) ||
+        this.isSegmentNearSnapAngle(previousAngle, unwrappedCurrentAngle, snapAngle)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**

@@ -81,6 +81,8 @@ export class SimpleGridMediaItem {
   private subLocalityAddress: string = '';
   private size: number = VALUE_UNKNOWN;
   private position: number = Number.NaN;
+  private width: number = VALUE_UNKNOWN;
+  private height: number = VALUE_UNKNOWN;
 
   constructor(data?: PhotoAsset) {
     if (!data) {
@@ -241,9 +243,38 @@ export class SimpleGridMediaItem {
     if (!this.data) {
       return '';
     }
-    this.thumbnailUri = ImageUtil.getThumbnailUri(this.uri, this.getPath(), this.getDateModified(), true,
-      this.getThumbnailReady());
+    // 年月日模式默认走 ASTC，但超长图更容易在 ASTC 解码链路触发 AllocMem -5，因此回退到带尺寸的 JPG thumbnail。
+    const isLongImage = ImageUtil.isLongImage(this.getWidth(), this.getHeight());
+    if (isLongImage) {
+      this.thumbnailUri = ImageUtil.getThumbnailJpgUriWithSize(this.uri, this.getPath(), this.getDateModified(),
+        Constants.GRID_IMAGE_SIZE, Constants.GRID_IMAGE_SIZE, this.getThumbnailReady());
+    } else {
+      this.thumbnailUri = ImageUtil.getThumbnailUri(this.uri, this.getPath(), this.getDateModified(), true,
+        this.getThumbnailReady());
+    }
     return this.thumbnailUri;
+  }
+
+  private getWidth(): number {
+    if (this.width !== VALUE_UNKNOWN) {
+      return this.width;
+    }
+    if (!this.data) {
+      return 0;
+    }
+    this.width = Number(AssetHelper.get(this.data, photoAccessHelper.PhotoKeys.WIDTH.toString(), 0));
+    return this.width;
+  }
+
+  private getHeight(): number {
+    if (this.height !== VALUE_UNKNOWN) {
+      return this.height;
+    }
+    if (!this.data) {
+      return 0;
+    }
+    this.height = Number(AssetHelper.get(this.data, photoAccessHelper.PhotoKeys.HEIGHT.toString(), 0));
+    return this.height;
   }
 
   /**

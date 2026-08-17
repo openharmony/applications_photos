@@ -36,6 +36,8 @@ import { BusinessError } from '@ohos.base';
 const TAG = 'MediaSaveManager';
 const fileNameRegex = new RegExp('[\.\\\\/:*?"\'`<>|{}\\\[\\\]]', 'g');
 const PHOTO_ASSET_KEYS_MIME_TYPE = 'mime_type';
+const EXPORT_FALLBACK_MIME_TYPE = 'image/jpeg';
+const EXPORT_FALLBACK_FILE_SUFFIX = '.jpg';
 
 /**
  * 媒体文件保存管理类
@@ -58,9 +60,9 @@ export interface ImgInfo {
 
 @Concurrent
 async function transferAllAsync(sourceUri: string, outputUri: string | undefined, isDoAiRefine: boolean,
-  isAiLableNeeded: boolean, isXmageWatermark: boolean) {
+  isAiLableNeeded: boolean, isXmageWatermark: boolean, isOverride: boolean, sourceDateTakenMs: number) {
   await ExifUtil.transferAll('MediaSaveManager', sourceUri, outputUri,
-    isDoAiRefine, isAiLableNeeded, isXmageWatermark);
+    isDoAiRefine, isAiLableNeeded, isXmageWatermark, isOverride, sourceDateTakenMs);
 }
 
 export class MediaSaveManager {
@@ -98,10 +100,12 @@ export class MediaSaveManager {
           throw new Error('mediaType is not support');
         }
         let fileName: string = '';
-        let fileNameSuffix: string = '.' + this.editor.mediaUri.split('.')
-        [this.editor.mediaUri?.split('.').length - 1].toLowerCase();
+        let fileNameSuffix: string = this.getFileSuffixFromUri(this.editor.mediaUri);
         let fileFd: number = -1;
         if (isOverride) {
+          let asset: photoAccessHelper.PhotoAsset = await this.getEditorAsset(this.editor.mediaUri);
+          await this.setMimeType(asset);
+          fileNameSuffix = this.getExportFileSuffix(fileNameSuffix);
           let newAssetFile = await this.overrideAssetFile(fileName, fileNameSuffix);
           fileFd = newAssetFile.fd;
           this.overrideTempFile = new MediaOverrideTempFile(newAssetFile, this.filePath);
@@ -117,6 +121,7 @@ export class MediaSaveManager {
           Trace.end('createMediaFileCloneAsset');
           this.mediaAsset = new MediaAsset(-1, asset);
           await this.setMimeType(asset);
+          fileNameSuffix = this.getExportFileSuffix(fileNameSuffix);
           let title = this.getAssetTitle(asset) ?? fileName;
           let newAssetFile = await this.createNewAssetFile(title, fileNameSuffix);
           fileFd = newAssetFile.fd;
@@ -164,7 +169,6 @@ export class MediaSaveManager {
 
   public async overrideAssetFile(fileName: string, fileNameSuffix: string): Promise<fs.File> {
     let asset: photoAccessHelper.PhotoAsset = await this.getEditorAsset(this.editor.mediaUri);
-    await this.setMimeType(asset);
     let title = this.getAssetTitle(asset) ?? fileName;
     return await this.createNewAssetFile(title, fileNameSuffix);
   }
@@ -230,12 +234,30 @@ export class MediaSaveManager {
     if (this.mimeType !== '' && supportedType.length > 0 && supportedType.indexOf(this.mimeType) < 0) {
       HiLog.w(TAG, `setMimeType not supported: ${supportedType}`);
       let assetMimeType: string | undefined = await this.getPhotoAssetMimeTypeMember(asset);
-      if (assetMimeType) {
+      if (assetMimeType && supportedType.indexOf(assetMimeType.toString()) >= 0) {
         this.mimeType = assetMimeType.toString();
         HiLog.w(TAG, `setMimeType change PhotoAsset mimeType=${assetMimeType}`);
+      } else {
+        this.mimeType = EXPORT_FALLBACK_MIME_TYPE;
+        HiLog.w(TAG, `setMimeType fallback export mimeType=${this.mimeType}, assetMimeType=${assetMimeType}`);
       }
     }
     HiLog.end(TAG, 'setMimeType');
+  }
+
+  private getFileSuffixFromUri(uri: string): string {
+    let pointIndex = uri.lastIndexOf('.');
+    if (pointIndex < 0) {
+      return EXPORT_FALLBACK_FILE_SUFFIX;
+    }
+    return uri.substring(pointIndex).toLowerCase();
+  }
+
+  private getExportFileSuffix(defaultSuffix: string): string {
+    if (this.mimeType === EXPORT_FALLBACK_MIME_TYPE) {
+      return EXPORT_FALLBACK_FILE_SUFFIX;
+    }
+    return defaultSuffix;
   }
 
   // instrument ignore next
@@ -288,10 +310,21 @@ export class MediaSaveManager {
         // 保存文件EXIF信息
         HiLog.i(TAG, 'compileFinish start try save exif ' + this.editor.mediaUri + " " + this.overrideTempFile.file.fd);
         let sourceUri = this.editor.mediaUri;
+        let sourceDateTakenMs: number = 0;
+        if (!isOverride && this.editor.mediaAsset) {
+          let dateTaken = this.editor.mediaAsset.get(photoAccessHelper.PhotoKeys.DATE_TAKEN_MS);
+          sourceDateTakenMs = Number(dateTaken);
+          if (isNaN(sourceDateTakenMs) || sourceDateTakenMs <= 0) {
+            HiLog.w(TAG, `compileFinish invalid dateTakenMs: ${dateTaken}`);
+            sourceDateTakenMs = 0;
+          } else {
+            HiLog.i(TAG, `compileFinish sourceDateTakenMs=${sourceDateTakenMs}`);
+          }
+        }
         await this.closeTempFile();
         let isAiLableNeeded : boolean = sdk.aiEditorContextIsAiLableNeeded();
         let task: taskpool.Task = new taskpool.Task(transferAllAsync, sourceUri, this.overrideTempFile.path,
-          isDoAiRefine, isAiLableNeeded, false);
+          isDoAiRefine, isAiLableNeeded, false, isOverride, sourceDateTakenMs);
         await taskpool.execute(task);
         resolve(this.filePath);
       } catch (err) {

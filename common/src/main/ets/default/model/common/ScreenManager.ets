@@ -563,8 +563,8 @@ export class ScreenManager {
   }
 
   public isFloatModeReal(): boolean {
-    return false;
-    // return this.getMainWindow()?.getWindowStatus() === window.WindowStatusType.FLOATING;
+    // return false;
+    return this.getMainWindow()?.getWindowStatus() === window.WindowStatusType.FLOATING;
   }
 
   public isPrimaryMode(): boolean {
@@ -1257,9 +1257,13 @@ export class ScreenManager {
         break;
       case window.WindowStatusType.FLOATING:
         topWindow.setWindowTitleButtonVisible(false, false, false);
+        this.isImmersiveEnabled = true;
+        LocalStorage.getShared()?.setOrCreate<boolean>('isImmersiveEnabled', true);
         break;
       case window.WindowStatusType.SPLIT_SCREEN:
         topWindow.setWindowTitleButtonVisible(false, false, false);
+        this.isImmersiveEnabled = true;
+        LocalStorage.getShared()?.setOrCreate<boolean>('isImmersiveEnabled', true);
         break;
     }
   }
@@ -1302,9 +1306,12 @@ export class ScreenManager {
       case window.WindowStatusType.FLOATING:
         topWindow.setWindowTitleButtonVisible(true, true, true);
         this.isImmersiveEnabled = false;
+        LocalStorage.getShared()?.setOrCreate<boolean>('isImmersiveEnabled', false);
         break;
       case window.WindowStatusType.SPLIT_SCREEN:
         topWindow.setWindowTitleButtonVisible(true, true, true);
+        this.isImmersiveEnabled = false;
+        LocalStorage.getShared()?.setOrCreate<boolean>('isImmersiveEnabled', false);
         break;
     }
   }
@@ -1391,6 +1398,7 @@ export class ScreenManager {
   public setSystemUi(isShowBar: boolean, isShowNavigation: boolean = isShowBar, isImmersionStyle: boolean = false,
     updateStatus: boolean = true, isUpdateProperties: boolean = true): void {
     let isEditorShow = this.storage?.get<boolean>('isEditorShown');
+    let isThreeKeyNavigation: boolean = false;
     if (this.isUIExtensionEnv() || !updateStatus) {
       return;
     }
@@ -1433,6 +1441,12 @@ export class ScreenManager {
 
     /* instrument ignore next */
     if (DeviceInfo.isPc()) {
+      // 大图隐藏工具栏时同步窗口沉浸式，否则 isLayoutFullScreen/LocalStorage 不更新，PC 动效与顶栏状态异常
+      if (!isShowBar && isImmersionStyle) {
+        this.setImmersiveModeEnabledStateLocal(true);
+      } else if (isShowBar) {
+        this.setImmersiveModeEnabledStateLocal(false);
+      }
       return;
     }
     this.setSpecificSystemUi('status', names.includes('status'), isUpdateProperties);
@@ -1442,7 +1456,7 @@ export class ScreenManager {
       Log.info(TAG, `clear timer ${this.timer}`);
       clearTimeout(this.timer);
     }
-    if (isImmersionStyle) {
+    if (!DeviceInfo.isPc()) {
       let uiContext: common.UIAbilityContext | undefined = undefined;
       if (PhotoConfig.isLibrary()) {
         uiContext = global?.browserUiAbilityContext();
@@ -1451,14 +1465,19 @@ export class ScreenManager {
       }
       if (!uiContext || !uiContext.windowStage) {
         Log.error(TAG, 'uiContext is error. isLibrary: ' + PhotoConfig.isLibrary());
-        return;
+      } else {
+        const flag: string = settings.getValueSync(
+          uiContext, 'floatingNavigation', '1', settings.domainName.USER_PROPERTY
+        );
+        Log.info(TAG, `floatingNavigation flag: ${flag}`);
+        isThreeKeyNavigation = flag === NavigationStyle.THREE_KEY;
       }
-      const flag: string = settings.getValueSync(
-        uiContext, 'floatingNavigation', '1', settings.domainName.USER_PROPERTY
-      );
-      Log.info(TAG, `floatingNavigation flag: ${flag}`);
-      if (flag === NavigationStyle.THREE_KEY) {
-        // 三键导航栏不隐藏
+    }
+    if (isThreeKeyNavigation) {
+      this.setSpecificSystemUi('navigation', isShowNavigation, isUpdateProperties);
+    }
+    if (isImmersionStyle) {
+      if (isThreeKeyNavigation) {
         return;
       }
       this.timer = setTimeout((): void => {

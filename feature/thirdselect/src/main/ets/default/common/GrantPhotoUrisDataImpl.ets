@@ -56,7 +56,8 @@ export class GrantPhotoUrisDataImpl extends PhotoDataImpl {
       for (let item of photoAssets) {
         try {
           let mediaItem: SendableMediaItem = new SendableMediaItem(item);
-          mediaItem.setThumbnail(ImageUtil.getThumbnailAstcUri(mediaItem.uri, mediaItem.path, mediaItem.dateModified));
+          mediaItem.setThumbnail(ImageUtil.getThumbnailUri(mediaItem.uri, mediaItem.path, mediaItem.dateModified,
+            false, mediaItem?.thumbnailReady, true));
           array.push(mediaItem);
         } catch (err) {
           Log.error(TAG, `getData: err_message:${err}`);

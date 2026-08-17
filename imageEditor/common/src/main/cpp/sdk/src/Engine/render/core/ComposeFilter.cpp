@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+#include <algorithm>
 #include <sstream>
 #include "ComposeFilter.h"
 #include "log/HmcLog.h"
@@ -21,15 +22,14 @@
 
 void doInitialize();
 
-ComposeFilterInit &ComposeFilterInit::getInstance() 
+ComposeFilterInit &ComposeFilterInit::getInstance()
 {
     static ComposeFilterInit instance;
     return instance;
 }
 
 bool ComposeFilterInit::initialize()
-{ 
-    // 初始化操作，只执行一次
+{
     if (this->isInitialized_) {
         return false;
     } else {
@@ -39,7 +39,6 @@ bool ComposeFilterInit::initialize()
     }
 }
 
-// 图像信息结构体。
 struct EffectBufferInfo {
     void *addr = nullptr;
     int32_t width = 0;
@@ -48,79 +47,116 @@ struct EffectBufferInfo {
     ImageEffect_Format format = ImageEffect_Format::EFFECT_PIXEL_FORMAT_UNKNOWN;
 };
 
-// 滤镜参数结构体
 struct FilterInfo {
     void *dstBmp = nullptr;
     int32_t dstRectWidth = 0;
     int32_t dstRectHeight = 0;
-    // 下面这两个暂时不用到，用于分析
     int32_t dstScaleX = 1;
     int32_t dstScaleY = 1;
 };
 
-void ApplyCustomAlgo(EffectBufferInfo& effectBufferInfo, FilterInfo& filterInfo) {
-    uint32_t dstWidth = effectBufferInfo.width;
-    uint32_t dstHeight = effectBufferInfo.height;
-    uint32_t dstStride = effectBufferInfo.rowSize;
-    uint8_t* dst = (uint8_t*)effectBufferInfo.addr;
-    uint32_t srcWidth = filterInfo.dstRectWidth;
-    uint32_t srcHeight = filterInfo.dstRectHeight;
-    LOGI("ApplyCustomAlgo %d %d %d %d %d", dstWidth, dstHeight, dstStride, srcWidth, srcHeight);
-    if (srcWidth == 0 ||srcHeight == 0) {
+void ApplyCustomAlgo(EffectBufferInfo& effectBufferInfo, FilterInfo& filterInfo)
+{
+    constexpr uint32_t PIXEL_SIZE_RGBA8888 = 4;
+    if (effectBufferInfo.addr == nullptr || filterInfo.dstBmp == nullptr) {
+        LOGE("ApplyCustomAlgo invalid buffer, dst=%p, srcBmp=%p", effectBufferInfo.addr, filterInfo.dstBmp);
         return;
     }
+    if (effectBufferInfo.width <= 0 || effectBufferInfo.height <= 0 || effectBufferInfo.rowSize <= 0 ||
+        filterInfo.dstRectWidth <= 0 || filterInfo.dstRectHeight <= 0) {
+        LOGE("ApplyCustomAlgo invalid size, dst(%d, %d, %d), srcHint(%d, %d)", effectBufferInfo.width,
+            effectBufferInfo.height, effectBufferInfo.rowSize, filterInfo.dstRectWidth, filterInfo.dstRectHeight);
+        return;
+    }
+
+    uint32_t dstWidth = static_cast<uint32_t>(effectBufferInfo.width);
+    uint32_t dstHeight = static_cast<uint32_t>(effectBufferInfo.height);
+    uint32_t dstStride = static_cast<uint32_t>(effectBufferInfo.rowSize);
+    uint8_t *dst = static_cast<uint8_t *>(effectBufferInfo.addr);
+
+    OhosPixelMapInfos srcPixelInfo {};
+    int ret = OH_PixelMap_GetImageInfo(static_cast<NativePixelMap *>(filterInfo.dstBmp), &srcPixelInfo);
+    LOGI("OH_PixelMap_GetImageInfo ret %d", ret);
+    if (ret != 0) {
+        return;
+    }
+
+    uint32_t srcWidth = std::min(static_cast<uint32_t>(srcPixelInfo.width),
+        static_cast<uint32_t>(filterInfo.dstRectWidth));
+    uint32_t srcHeight = std::min(static_cast<uint32_t>(srcPixelInfo.height),
+        static_cast<uint32_t>(filterInfo.dstRectHeight));
+    uint32_t srcStride = static_cast<uint32_t>(srcPixelInfo.rowSize);
+    LOGI("ApplyCustomAlgo dst(%d, %d, %d) src(%d, %d, %d) srcHint(%d, %d)", dstWidth, dstHeight, dstStride,
+        srcWidth, srcHeight, srcStride, filterInfo.dstRectWidth, filterInfo.dstRectHeight);
+    if (srcWidth == 0 || srcHeight == 0 || srcStride == 0) {
+        return;
+    }
+
     void *addrPtr = nullptr;
-    int ret = OH_PixelMap_AccessPixels((NativePixelMap*)(filterInfo.dstBmp), &addrPtr);
+    ret = OH_PixelMap_AccessPixels(static_cast<NativePixelMap *>(filterInfo.dstBmp), &addrPtr);
     LOGI("OH_PixelMap_AccessPixels ret %d", ret);
     if (ret != 0) {
         return;
     }
-    uint8_t* src = (uint8_t*)addrPtr;
-    // format rgba
-    for (int y = 0; y < dstHeight; y++) {
-        for (int x = 0; x < dstWidth; x++) {
-            size_t dst_pos = y * dstStride + x * 4;
-            size_t src_pos = (dstHeight - y - 1) * dstWidth * 4 + x * 4;
-            uint8_t alpha = src[src_pos + 3];
-            uint8_t dst_alpha = 0;
+
+    auto unaccessPixels = [&filterInfo]() {
+        int unaccessRet = OH_PixelMap_UnAccessPixels(static_cast<NativePixelMap *>(filterInfo.dstBmp));
+        if (unaccessRet != 0) {
+            LOGE("OH_PixelMap_UnAccessPixels ret %d", unaccessRet);
+        }
+    };
+
+    uint8_t *src = static_cast<uint8_t *>(addrPtr);
+    uint32_t blendWidth = std::min(std::min(dstWidth, srcWidth),
+        std::min(dstStride / PIXEL_SIZE_RGBA8888, srcStride / PIXEL_SIZE_RGBA8888));
+    uint32_t blendHeight = std::min(dstHeight, srcHeight);
+    if (blendWidth == 0 || blendHeight == 0) {
+        unaccessPixels();
+        return;
+    }
+
+    for (uint32_t y = 0; y < blendHeight; y++) {
+        uint32_t srcY = srcHeight - y - 1;
+        for (uint32_t x = 0; x < blendWidth; x++) {
+            size_t dstPos = static_cast<size_t>(y) * dstStride + x * PIXEL_SIZE_RGBA8888;
+            size_t srcPos = static_cast<size_t>(srcY) * srcStride + x * PIXEL_SIZE_RGBA8888;
+            uint8_t alpha = src[srcPos + 3];
             if (alpha != 0) {
-                // https://zh.wikipedia.org/wiki/Alpha%E5%90%88%E6%88%90
-                // 目前认为是预乘alpha的(dump出来数据中rgb都是小于alpha的)
-                uint16_t src_r = src[src_pos + 0];
-                uint16_t src_g = src[src_pos + 1];
-                uint16_t src_b = src[src_pos + 2];
-                uint16_t src_a = src[src_pos + 3];
-                uint16_t dst_r = dst[dst_pos + 0];
-                uint16_t dst_g = dst[dst_pos + 1];
-                uint16_t dst_b = dst[dst_pos + 2];
-                uint16_t dst_a = dst[dst_pos + 3];
-                uint8_t out_a = (src_a + dst_a * (1.0 - src_a / 255.0));
-                uint8_t out_r  = (src_r + dst_r * (1.0 - src_a / 255.0));
-                uint8_t out_g  = (src_g + dst_g * (1.0 - src_a / 255.0));
-                uint8_t out_b  = (src_b + dst_b * (1.0 - src_a / 255.0));
-                dst[dst_pos + 0] = out_r;
-                dst[dst_pos + 1] = out_g;
-                dst[dst_pos + 2] = out_b;
-                dst[dst_pos + 3] = out_a;
+                uint16_t srcR = src[srcPos + 0];
+                uint16_t srcG = src[srcPos + 1];
+                uint16_t srcB = src[srcPos + 2];
+                uint16_t srcA = src[srcPos + 3];
+                uint16_t dstR = dst[dstPos + 0];
+                uint16_t dstG = dst[dstPos + 1];
+                uint16_t dstB = dst[dstPos + 2];
+                uint16_t dstA = dst[dstPos + 3];
+                uint8_t outA = (srcA + dstA * (1.0 - srcA / 255.0));
+                uint8_t outR = (srcR + dstR * (1.0 - srcA / 255.0));
+                uint8_t outG = (srcG + dstG * (1.0 - srcA / 255.0));
+                uint8_t outB = (srcB + dstB * (1.0 - srcA / 255.0));
+                dst[dstPos + 0] = outR;
+                dst[dstPos + 1] = outG;
+                dst[dstPos + 2] = outB;
+                dst[dstPos + 3] = outA;
             }
         }
     }
+    unaccessPixels();
 }
 
 bool Render(OH_EffectFilter *filter, OH_EffectBufferInfo *info, OH_EffectFilterDelegate_PushData pushData)
 {
-    // 获取图像信息具体参数。
     EffectBufferInfo inputBufferInfo;
     OH_EffectBufferInfo_GetAddr(info, &inputBufferInfo.addr);
     OH_EffectBufferInfo_GetWidth(info, &inputBufferInfo.width);
     OH_EffectBufferInfo_GetHeight(info, &inputBufferInfo.height);
     OH_EffectBufferInfo_GetRowSize(info, &inputBufferInfo.rowSize);
     OH_EffectBufferInfo_GetEffectFormat(info, &inputBufferInfo.format);
-    
+
     FilterInfo filterInfo;
     ImageEffect_Any value;
     OH_EffectFilter_GetValue(filter, "dst_bmp", &value);
-    filterInfo.dstBmp = value.dataValue.ptrValue;  // dstBmp 是 NativePixelMap 格式的数据指针
+    filterInfo.dstBmp = value.dataValue.ptrValue;
     OH_EffectFilter_GetValue(filter, "dst_rect_width", &value);
     filterInfo.dstRectWidth = value.dataValue.int32Value;
     OH_EffectFilter_GetValue(filter, "dst_rect_height", &value);
@@ -130,10 +166,8 @@ bool Render(OH_EffectFilter *filter, OH_EffectBufferInfo *info, OH_EffectFilterD
     OH_EffectFilter_GetValue(filter, "dst_scale_y", &value);
     filterInfo.dstScaleY = value.dataValue.int32Value;
 
-    // 调用自定义滤镜算法。
-     ApplyCustomAlgo(inputBufferInfo, filterInfo);
+    ApplyCustomAlgo(inputBufferInfo, filterInfo);
 
-    // 编辑完成后调用pushData直接传递原图。
     pushData(filter, info);
     return true;
 }
@@ -141,9 +175,8 @@ bool Render(OH_EffectFilter *filter, OH_EffectBufferInfo *info, OH_EffectFilterD
 ImageEffect_FilterDelegate filterDelegate = {
     .setValue = [](OH_EffectFilter *filter, const char *key, const ImageEffect_Any *value) {
         std::string strKey(key);
-        // 参数校验，校验成功时返回true，否则返回false。
         std::ostringstream oss;
-        oss << "自定义滤镜传入kv, key: " << strKey << ", value: ";
+        oss << "compose filter setValue, key: " << strKey << ", value: ";
         if (value->dataType == ImageEffect_DataType::EFFECT_DATA_TYPE_INT32) {
             oss << value->dataValue.int32Value;
         } else if (value->dataType == ImageEffect_DataType::EFFECT_DATA_TYPE_FLOAT) {
@@ -160,31 +193,31 @@ ImageEffect_FilterDelegate filterDelegate = {
             if (strKey == "dst_bmp") {
                 oss << value->dataValue.ptrValue;
             } else {
-                std::string str((char*)value->dataValue.ptrValue);
+                std::string str(static_cast<char *>(value->dataValue.ptrValue));
                 oss << str;
             }
         }
+        (void)filter;
         LOGI("[ohblue_native] %s", oss.str().c_str());
-        
-        // 当前为替换方案，目前不做参数校验，认为参数都是正确的
         return true;
     },
     .render = [](OH_EffectFilter *filter, OH_EffectBufferInfo *info, OH_EffectFilterDelegate_PushData pushData) {
         return Render(filter, info, pushData);
     },
     .save = [](OH_EffectFilter *filter, char **info) {
-        // 暂不支持序列化能力
+        (void)filter;
         *info = "{\"compose\": \"\"}";
         return true;
     },
     .restore = [](const char *info) {
-        // 暂不支持反序列化，直接生成默认实例
+        (void)info;
         OH_EffectFilter *filter = OH_EffectFilter_Create("ComposeFilter");
         return filter;
     }
 };
 
-void doInitialize() {
+void doInitialize()
+{
     OH_EffectFilterInfo *filterInfo = OH_EffectFilterInfo_Create();
     if (filterInfo == nullptr) {
         LOGI("OH_EffectFilter_GetValue fail!");
@@ -193,10 +226,10 @@ void doInitialize() {
     OH_EffectFilterInfo_SetFilterName(filterInfo, "ComposeFilter");
     ImageEffect_BufferType bufferTypeArray[] = {ImageEffect_BufferType::EFFECT_BUFFER_TYPE_PIXEL};
     OH_EffectFilterInfo_SetSupportedBufferTypes(filterInfo, sizeof(bufferTypeArray) / sizeof(ImageEffect_BufferType),
-                                                bufferTypeArray);
-    ImageEffect_Format formatArray[] = { ImageEffect_Format::EFFECT_PIXEL_FORMAT_RGBA8888  };
+        bufferTypeArray);
+    ImageEffect_Format formatArray[] = { ImageEffect_Format::EFFECT_PIXEL_FORMAT_RGBA8888 };
     OH_EffectFilterInfo_SetSupportedFormats(filterInfo, sizeof(formatArray) / sizeof(ImageEffect_Format), formatArray);
-    
+
     ImageEffect_ErrorCode errorCode = OH_EffectFilter_Register(filterInfo, &filterDelegate);
     if (errorCode != ImageEffect_ErrorCode::EFFECT_SUCCESS) {
         LOGI("OH_EffectFilter_Register fail!");

@@ -30,14 +30,8 @@ include_directories(${SRC_DIR}/Service)
 include_directories(${SRC_DIR}/Bridge)
 
 include_directories(${LIBS_DIR}/JsonCpp/include)
-include_directories(${LIBS_DIR}/GLM)
-include_directories(${LIBS_DIR}/turbojpeg/include)
-include_directories(${LIBS_DIR}/AiModelRef/include)
 
-link_directories(${LIBS_DIR}/turbojpeg/ohos/${OHOS_ARCH})
-link_directories(${LIBS_DIR}/SecureC/ohos/${OHOS_ARCH})
 link_directories(${LIBS_DIR}/JsonCpp/ohos/${OHOS_ARCH})
-link_directories(${LIBS_DIR}/AiModelRef/ohos/${OHOS_ARCH})
 
 file(GLOB_RECURSE BASE_SRC        "${SRC_DIR}/Base/*.cpp")
 file(GLOB_RECURSE ENGINE_IMAGE_SRC      "${SRC_DIR}/Engine/image/*.cpp")
@@ -56,7 +50,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     hitrace_ndk.z
     pixelmap_ndk.z
     OpenSLES
-    secure_c
     JsonCpp
     native_media_codecbase
     native_media_vdec
@@ -76,11 +69,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     image_packer
     native_window
     rawfile.z
-    turbojpeg
     ffrt.z
     z
-    opencv_core
-    opencv_imgproc
     mindspore_lite_ndk
     hilog_ndk.z
     rawfile.z

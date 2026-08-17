@@ -259,9 +259,7 @@ INT32 HmcEncoderManager::SetPcmData(UINT8 **pcmData, INT32 pcmSize)
         return HMC_ERR;
     }
 
-    if (memcpy_s(audioData, pcmSize, *pcmData, pcmSize) != EOK) {
-        LOGE("memcpy_s error");
-    }
+    memcpy(audioData, *pcmData, pcmSize);
     HMC_MUTEX_LOCK(m_audioPcmListLock);
     m_audioPcmList.emplace_back(std::make_pair(audioData, pcmSize));
     HMC_MUTEX_UNLOCK(m_audioPcmListLock);

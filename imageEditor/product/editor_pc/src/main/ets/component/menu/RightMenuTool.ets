@@ -14,7 +14,6 @@
  */
 import { App, BaseEditor, FIRST_FRAME_STATUS, HiLog, ScreenManager, TabName } from '@oh-image-editor/editor-common'
 import { AdjustTab } from '../adjust/AdjustTab'
-import { CropTab } from '../crop/CropTab'
 import { FilterTab } from '../filter/FilterTab'
 import { Service } from '@oh-image-editor/editor-common/src/main/ets/common/util/Service'
 import pointer from '@ohos.multimodalInput.pointer';
@@ -45,7 +44,7 @@ export struct RightMenuTool {
   @State @Watch('changeMenu') singleSelectCapsuleSelectedIndexes: number[] = [0];
   @StorageProp(FIRST_FRAME_STATUS) isFirstFrameStatue: boolean = ScreenManager.getInstance().getIsFirstFrame();
   @State menuTabs: SegmentButtonOptions = SegmentButtonOptions.capsule({
-    buttons: [{ text: $r('app.string.tabs_crop_imageEdit') }, { text: $r('app.string.tabs_adjust_imageEdit') }, {
+    buttons: [{ text: $r('app.string.tabs_adjust_imageEdit') }, {
       text: $r('app.string.tabs_filter_imageEdit'),
     }] as SegmentButtonItemTuple,
     multiply: false,
@@ -64,7 +63,7 @@ export struct RightMenuTool {
       bottom: 8,
     },
   })
-  private tabs: TabName[] = [TabName.TabCrop, TabName.TabAdjust, TabName.TabFilter];
+  private tabs: TabName[] = [TabName.TabAdjust, TabName.TabFilter];
 
   changeMenu() {
     if (this.singleSelectCapsuleSelectedIndexes.length < 1) {
@@ -105,7 +104,6 @@ export struct RightMenuTool {
       }
       .menuStyle(this.isFirstFrameStatue)
 
-      CropTab().visibility(this.editor.tabIndex == TabName.TabCrop ? Visibility.Visible : Visibility.None)
       AdjustTab().visibility(this.editor.tabIndex == TabName.TabAdjust ? Visibility.Visible : Visibility.None)
       FilterTab().visibility(this.editor.tabIndex == TabName.TabFilter ? Visibility.Visible : Visibility.None)
     }

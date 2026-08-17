@@ -349,6 +349,23 @@ export class ImageUtil {
   }
 
   /**
+   * 是否为超长图（长短边比超过阈值）。
+   * 用于在部分场景下避免走 ASTC 缩略图解码链路（更容易触发内存分配失败）。
+   */
+  public static isLongImage(width: number | undefined, height: number | undefined,
+    longShortRatio: number = 4): boolean {
+    if (!width || !height || width <= 0 || height <= 0) {
+      return false;
+    }
+    const maxLen = Math.max(width, height);
+    const minLen = Math.min(width, height);
+    if (minLen === 0) {
+      return false;
+    }
+    return (maxLen / minLen) > longShortRatio;
+  }
+
+  /**
    * 逐帧播放-抽帧等比例宽高计算方式
    * 根据LCD宽高调整，双边最小值大于128时，取128，按比例计算另一边
    *
@@ -380,7 +397,7 @@ export class ImageUtil {
       return `${sourceUri}?timestampApp=${modifiedDate}&oper=thumbnail&width=0&height=0&path=${path}`;
     }
     return `${sourceUri}?timestampApp=${
-    modifiedDate}?thumbnailModifiedMs=${thumbnailReady}&oper=thumbnail&width=0&height=0&path=${path}`;
+    modifiedDate}&thumbnailModifiedMs=${thumbnailReady}&oper=thumbnail&width=0&height=0&path=${path}`;
   }
 
   /**
@@ -398,7 +415,19 @@ export class ImageUtil {
       return `${sourceUri}?timestampApp=${modifiedDate}&oper=astc&width=0&height=0&path=${path}`;
     }
     return `${sourceUri}?timestampApp=${
-    modifiedDate}?thumbnailModifiedMs=${thumbnailReady}&oper=astc&width=0&height=0&path=${path}`;
+    modifiedDate}&thumbnailModifiedMs=${thumbnailReady}&oper=astc&width=0&height=0&path=${path}`;
+  }
+
+  /**
+   * 获取带宽高的 JPG 缩略图 uri（用于特殊场景降内存）
+   */
+  public static getThumbnailJpgUriWithSize(sourceUri: string | undefined, path: string, modifiedDate: number,
+    width: number, height: number, thumbnailReady?: number): string {
+    if (!thumbnailReady) {
+      return `${sourceUri}?timestampApp=${modifiedDate}&oper=thumbnail&width=${width}&height=${height}&path=${path}`;
+    }
+    return `${sourceUri}?timestampApp=${
+    modifiedDate}&thumbnailModifiedMs=${thumbnailReady}&oper=thumbnail&width=${width}&height=${height}&path=${path}`;
   }
 
   /**
@@ -418,7 +447,9 @@ export class ImageUtil {
       return '';
     }
     if (isOpenYearMonth || isPickerPage) {
-      return ImageUtil.getThumbnailAstcUri(sourceUri, path, modifiedDate, thumbnailReady);
+      // 宫格/Picker 走 ASTC 容易触发 AllocMem -5，改用带尺寸的 JPG 缩略图
+      return ImageUtil.getThumbnailJpgUriWithSize(sourceUri, path, modifiedDate, Constants.GRID_IMAGE_SIZE,
+        Constants.GRID_IMAGE_SIZE, thumbnailReady);
     }
     return ImageUtil.getThumbnailJpgUri(sourceUri, path, modifiedDate, thumbnailReady);
   }

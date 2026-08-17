@@ -145,6 +145,10 @@ protected:
 
     VOID ReleaseThread();
 
+    VOID AbandonAndClearEFilterList();
+
+    VOID ReleaseImageEffectOnRenderThread();
+
     void ProcessComposeEffect(HmcRenderLayerPtr &layerInfo, RenderEngineType &type, unsigned int &needRGBA,
         HmcRenderEffectPtr &effect);
     bool IsSameXtStyleFilter(HmcRenderEffectPtr effect, HmcRenderEffectPtr preEffect);
@@ -165,7 +169,7 @@ protected:
 
     void UpdateTransformParam(HmcRenderEffectPtr &effect, HmcEFilterPtr nativeEffect, TransformInfo *&info);
     VOID CalculateEffectiveArea(HmcRenderEffectPtr effect, const HmcRenderCanvas &canvas, INT32 width, INT32 height,
-        HmcEFilterPtr cropEfilter);
+        HmcEFilterPtr cropEfilter, INT32 baseRotationDeg, bool isDragImage);
 
     VOID ConfigEFilter(HmcRenderEffectPtr effect, RenderEngineType type);
     
@@ -260,7 +264,9 @@ protected:
     std::map<std::string, SHARED_PTR<WatermarkPicInfo>> m_watermarkCache;
     
     INT32 m_firstFilterIndex{-1};
+    INT32 m_restoredFilterCount{0};
     bool m_isSurfaceOutput = false;
+    bool m_needFlush = false;
     
 private:
     RenderType m_renderType;

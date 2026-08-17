@@ -15,7 +15,7 @@
 #ifndef HMC_JPEG_DECODER_H
 #define HMC_JPEG_DECODER_H
 
-#include "turbojpeg.h"
+#include "image/HmcJpegCodecDefs.h"
 #include "HmcBase.h"
 #include "MediaCreative/HmcImage.h"
 #include "image/HmcImageBase.h"
@@ -42,7 +42,7 @@ public:
     std::shared_ptr<YUVDataInfo> DecodeYUV(const u_char *buffer, unsigned long size);
 
 private:
-    int32_t m_pixelfmt{ TJPF_RGBA };
-    tjhandle m_handle{ nullptr };
+    int32_t m_pixelfmt{ HMC_JPEG_PF_RGBA };
+    HmcJpegCodecHandle m_handle{ nullptr };
 };
 #endif // HMC_JPEG_DECODER_H

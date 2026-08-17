@@ -37,6 +37,8 @@ export enum AlbumRefreshConst {
   KEY_OF_ALBUM_NAV_PARAM_LISTENER = 'com.ohos.photos.album_refresh_util.key_of_active',
   KEY_OF_ALBUM_NAV_PARAM_DATASOURCE = 'com.ohos.photos.album_refresh_util.key_of_datasource',
   KEY_OF_ALBUM_NAV_PARAM_IS_NEW_ALBUM = 'com.ohos.photos.album_refresh_util.is_new_album',
+  /** 当 NavPathStack.getParamByIndex 不可用时，由 IndexPage PageMap 写入的待用 param，OtherAlbumPage 解析后删除 */
+  KEY_PENDING_ALBUM_NAV_PARAM = 'com.ohos.photos.album_refresh_util.pending_album_nav_param',
 }
 
 export interface PageStatusListener {
@@ -174,13 +176,12 @@ export class AlbumRefreshUtil {
 
         // 新增用户相册场景: tf, 2.1
         if (albumChangeData?.albumAfterChange?.albumType === photoAccessHelper.AlbumType.USER) {
-
-          // 当前阶段，非按名称排序场景，即未排序与自定义排序场景，新增的用户相册应排最后
-          // 注意：后续若相册排序字段上云后，此逻辑需要进行处理
-          albumParams = AlbumRefreshUtil.initParam(albumAfterAsset);
-          AlbumRefreshUtil.albumsAdd.add(albumParams);
-          AlbumRefreshUtil.albumRefreshDFX(type, RefreshDFX.createUser);
-          continue;
+          // 新增相册时通知中缺少可用于稳定定位的排序字段，直接增量追加会导致“按名称排序”场景顺序异常。
+          // 统一回退到全量查询，确保新建相册按当前排序规则展示。
+          Log.info(TAG, '[preciseInfo] setPreciseAlbumInfo will load for add user album to keep order');
+          AlbumRefreshUtil.resetNeedLoadStatus(type);
+          AlbumRefreshUtil.albumRefreshDFX(type, RefreshDFX.reset);
+          return;
         }
 
         // tf, 2.2
@@ -356,7 +357,7 @@ export class AlbumRefreshUtil {
       .set(SharedAlbumAssetItems.videoCount, albumInfo.videoCount)
       .set(SharedAlbumAssetItems.hiddenCount, albumInfo.hiddenCount)
       .set(SharedAlbumAssetItems.hiddenCoverUri, albumInfo.hiddenCoverUri)
-      // orderSection, albumOrder 字段待媒体库添加后修改
+    // orderSection, albumOrder 字段待媒体库添加后修改
     return albumParam;
   }
 

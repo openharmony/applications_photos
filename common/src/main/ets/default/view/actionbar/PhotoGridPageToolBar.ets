@@ -87,9 +87,12 @@ export struct PhotoGridPageToolBar {
         this.toolMenuList.push(this.selectedCount === 0 ? MOVIE_INVALID : MOVIE);
       }
       this.toolMenuList.push(
+        Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
           Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
     }else{
-      this.toolMenuList.push(Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
+      this.toolMenuList.push(
+        Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
+        Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
     }
   }
   private updateToolbar(): void {
@@ -101,12 +104,16 @@ export struct PhotoGridPageToolBar {
       if (DeviceInfo.isFoldable() && this.isFullMode && !DeviceInfo.isPhoneVde()) {
         return;
       }
-      if (this.isRecycleAlbum) {
+      if (this.isRecycleAlbum && UserFileManagerAccess.isRecycleBin(this.albumUri)) {
         this.toolMenuList.push(Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
       } else if (this.isDistributedAlbum) {
-        this.toolMenuList.push(this.isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL);
+        this.toolMenuList.push(
+          this.isAllSelected ? Action.DESELECT_ALL : Action.SELECT_ALL,
+          Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID);
       } else if (this.isDuplicateAlbum) {
-        this.toolMenuList.push(Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
+        this.toolMenuList.push(
+          Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
+          Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
       } else {
         if (this.albumUri === UserFileManagerAccess.getInstance()
           .getSystemAlbumUri(UserFileManagerAccess.VIDEO_ALBUM_SUB_TYPE)) {
@@ -117,14 +124,18 @@ export struct PhotoGridPageToolBar {
           /* instrument ignore next */
           if (DeviceInfo.isVerdeFoldable()) {
             this.toolMenuList.push(
+              Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
               Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
           } else {
             if (DeviceInfoMovie.isSupportMovie()) {
               this.toolMenuList.push(
+                Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
                 (this.selectedCount === 0 ? CREATION_INVALID : CREATION),
-                  Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
+                Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
             } else {
-              this.toolMenuList.push(Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
+              this.toolMenuList.push(
+                Boolean(this.selectedCount) ? Action.MOVE : Action.MOVE_INVALID,
+                Boolean(this.selectedCount) ? Action.DELETE : Action.DELETE_INVALID);
             }
           }
         }

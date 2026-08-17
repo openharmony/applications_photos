@@ -59,6 +59,7 @@ import lazy {
 import lazy {
   RecoverActionRegister
 } from '@ohos/common/src/main/ets/default/view/actionbar/RecoverAction';
+import lazy { PrintActionRegister } from '@ohos/common/src/main/ets/default/view/actionbar/PrintAction';
 import lazy {
   ActionButtonProp,
   immersiveActionBuilder,
@@ -442,6 +443,8 @@ export class GridAppBarManager implements AppBarManager {
 
     // 移动到相册
     new MoveActionRegister().register(params);
+    // 打印
+    new PrintActionRegister().register(params);
     // 删除
     new DeleteActionRegister().register(params);
 
@@ -607,10 +610,13 @@ export class GridAppBarManager implements AppBarManager {
     this.setActionEnabled(VIDEO_SPLICING, selectedCount > 0);
     this.setActionEnabled(MOVIE, selectedCount > 0);
     this.setActionEnabled(CREATION, selectedCount > 0);
+    this.setActionEnabled(Action.MOVE, selectedCount > 0);
+    this.setActionEnabled(Action.PRINT, selectedCount > 0);
     this.setActionEnabled(Action.DELETE, selectedCount > 0);
     let gifPhotoChecker: boolean = this.selectedParseResult.get<boolean>(GIFPhotoChecker.KEY_IS_GIF_PHOTO);
     let mediaType: SelectMediaType =
       this.selectedParseResult.get<SelectMediaType>(MediaTypeChecker.KEY_SELECT_MEDIA_TYPE) ?? SelectMediaType.INVALID;
+    this.setActionEnabled(Action.PRINT, selectedCount > 0 && mediaType === SelectMediaType.IMAGE);
 
     // 设置收藏/取消收藏
     this.updateFavor();

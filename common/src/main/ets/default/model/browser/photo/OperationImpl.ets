@@ -118,7 +118,8 @@ export class OperationImpl implements BrowserOperationInterface {
   }
 
   public async trash(uris: string[]): Promise<void> {
-    Log.debug(TAG, `trash start ${JSON.stringify(uris)}`);
+    // JSON.stringify huge uri arrays is expensive and blocks the JS thread.
+    Log.debug(TAG, `trash start, count=${uris?.length ?? 0}`);
     await UserFileManagerAccess.getInstance().deleteToTrash(uris);
   }
 

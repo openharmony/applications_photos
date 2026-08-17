@@ -69,7 +69,8 @@ export default class ExifUtil {
    * @param isXmageWatermark 是否保存XMAGE水印信息
    */
   public static async transferAll(tag: string, sourceUri: string, outputUri: string | undefined, isDoAiRefine: boolean,
-    isAiLableNeeded: boolean, isXmageWatermark: boolean): Promise<void> {
+    isAiLableNeeded: boolean, isXmageWatermark: boolean, isOverride: boolean = true,
+    sourceDateTakenMs: number = 0): Promise<void> {
     if (!sourceUri || !outputUri) {
       HiLog.d(tag, 'try transferExifInfo, but url is empty');
       return;
@@ -108,8 +109,12 @@ export default class ExifUtil {
       }
 
       // 可修改项为空时不处理
-      modifyProps.set('HwMnoteAiEdit' as image.PropertyKey, isDoAiRefine ? '1' : '0');
-      HiLog.i(tag, `transferExifInfo success set ai flag ${isDoAiRefine.toString()}`);
+      modifyProps.set('HwMnoteAiEdit' as image.PropertyKey, isDoAiRefine === true ? '1' : '0');
+      HiLog.i(tag, `transferExifInfo success set ai flag ${isDoAiRefine === true}`);
+      // 另存为写入原图拍摄时间，避免 commitEditedAsset 后 dateTaken 错乱
+      if (!isOverride && sourceDateTakenMs > 0) {
+        ExifUtil.setSaveAsExifDateTime(tag, modifyProps, sourceDateTakenMs);
+      }
       await ExifUtil.upDateXtStyleExifInfos(tag, modifyProps);
       if (modifyProps.isEmpty()) {
         HiLog.d(tag, 'transferExifInfo to modify properties empty, skip modify.');
@@ -312,6 +317,17 @@ export default class ExifUtil {
       let nowDate: string = DateUtil.format(new Date(), 'yyyy:MM:dd HH:mm:ss');
       propsMap.set(image.PropertyKey.DATE_TIME, nowDate);
     }
+  }
+
+  private static setSaveAsExifDateTime(tag: string, propsMap: HashMap<image.PropertyKey, string | null>,
+    sourceDateTakenMs: number): void {
+    let exifDate: string = DateUtil.format(new Date(sourceDateTakenMs), 'yyyy:MM:dd HH:mm:ss');
+    propsMap.set(image.PropertyKey.DATE_TIME_ORIGINAL, exifDate);
+    let subSecMs: number = sourceDateTakenMs % 1000;
+    if (subSecMs > 0) {
+      propsMap.set(image.PropertyKey.SUBSEC_TIME_ORIGINAL, subSecMs.toString());
+    }
+    HiLog.i(tag, `setSaveAsExifDateTime: ${exifDate}, sourceDateTakenMs=${sourceDateTakenMs}`);
   }
 
   private static removeReadonlyAndNullValue(records: Record<image.PropertyKey, string | null>):

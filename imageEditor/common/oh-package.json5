@@ -8,7 +8,6 @@
   "dependencies": {
     "@ohos/common": "file:../../common",
     "@ohos/tools": "file:../../tools",
-    "@ohos/lottie": "2.0.19",
     "libImageEditor.so": "file:./src/main/cpp/sdk/src/Bridge/ohos/interface"
   }
 }

@@ -164,6 +164,9 @@ export class MosaicAttr extends MenuAttr {
       ]).then(async () => {
         await sleep(WAIT_FOR_FLUSH);
         appBroadCast.emit('LeaveMosaicView');
+        if (index === TabName.TabTextEdit) {
+          this.editor.previewStarter.updatePreview();
+        }
         this.isLeaving = false;
         this.asset.clearComposedCache();
       });

@@ -116,7 +116,11 @@ export class AlbumGridSortHelper {
       return;
     }
 
-    RelationStoreUtil.getInstance().queryAllSortRuleFromDb(context, this.sortRuleMap);
+    try {
+      RelationStoreUtil.getInstance().queryAllSortRuleFromDb(context, this.sortRuleMap);
+    } catch (err) {
+      Log.error(AlbumGridSortHelper.tag, `queryAllSortRuleFromDb fail, ${err?.code}-${err?.message}`);
+    }
   }
 
   /**
@@ -126,7 +130,11 @@ export class AlbumGridSortHelper {
    */
   public setSortRule(albumKey: string, rule: AlbumGridSortRule, sortType: string): void {
     Log.info(AlbumGridSortHelper.tag, `setSortRule: albumKey: ${StringUtil.getAnonymizeString(albumKey)}, rule: ${rule}, sortType:${sortType}`);
-    this.sortRuleMap.set(albumKey, new SortRuleString(rule, sortType));
+    try {
+      this.sortRuleMap.set(albumKey, new SortRuleString(rule, sortType));
+    } catch (err) {
+      Log.error(AlbumGridSortHelper.tag, `sortRuleMap set failed, ${err?.code}-${err?.message}`);
+    }
     // 持久化
     RelationStoreUtil.getInstance().insertSortRule(albumKey, rule.toString(), sortType);
   }
@@ -138,7 +146,11 @@ export class AlbumGridSortHelper {
    */
   public setSortRuleEx(context: Context, albumKey: string, rule: AlbumGridSortRule, sortType: string): void {
     Log.info(AlbumGridSortHelper.tag, `setSortRule: albumKey: ${StringUtil.getAnonymizeString(albumKey)}, rule: ${rule}, sortType:${sortType}`);
-    this.sortRuleMap.set(albumKey, new SortRuleString(rule, sortType));
+    try {
+      this.sortRuleMap.set(albumKey, new SortRuleString(rule, sortType));
+    } catch (err) {
+      Log.error(AlbumGridSortHelper.tag, `sortRuleMap set failed, ${err?.code}-${err?.message}`);
+    }
     // 持久化
     RelationStoreUtil.getInstance().insertSortRuleEx(context, albumKey, rule.toString(), sortType);
   }
@@ -150,12 +162,19 @@ export class AlbumGridSortHelper {
    * @returns 排序规则
    */
   public getSortRule(callFrom: string, albumKey: string, selfInstance?: AlbumGridSortHelper): SortRuleString {
-    Log.info(AlbumGridSortHelper.tag, `getSortRule: callFrom: ${callFrom}, albumKey: ${StringUtil.getAnonymizeString(albumKey)}` +
-      ` , rule: ${this.sortRuleMap.get(albumKey)}`);
+    Log.info(AlbumGridSortHelper.tag, `getSortRule: callFrom: ${callFrom}, albumKey: ${StringUtil.getAnonymizeString(albumKey)}`);
     if (!this.isOpenGridSort) {
       return new SortRuleString();
     }
-    return (selfInstance ?? this).sortRuleMap.get(albumKey) || new SortRuleString();
+    let sortRule: SortRuleString | undefined = undefined;
+    try {
+      sortRule = (selfInstance ?? this).sortRuleMap.get(albumKey);
+      Log.info(AlbumGridSortHelper.tag, `sortRuleMap get success, ${sortRule}`);
+    } catch (err) {
+      Log.error(AlbumGridSortHelper.tag, `sortRuleMap get failed, ${err?.code}-${err?.message}`);
+    } finally {
+      return sortRule || new SortRuleString();
+    }
   }
 
   public static transferRuleToOrderProp(rule: AlbumGridSortRule | undefined): string | undefined {
@@ -280,6 +299,9 @@ export class AlbumGridSortHelper {
   }
 
   public static getAlbumKeyByPhotoAlbum(album: SendablePhotoAlbum | PhotoAlbum | undefined): string {
-    return album?.albumSubtype + '';
+    // Keep the key format consistent with getAlbumKeyByAlbumInfo(subType + lpath),
+    // otherwise sort rules written with lpath cannot be read back in album grid refresh.
+    // return album?.albumSubtype + (album?.lpath ?? '');
+    return ''
   }
 }

@@ -103,10 +103,10 @@ export class AddActionViewModel implements ActionViewModel {
     params.uri = '';
     params.cameraAble = false;
     params.editAble = false;
-    if (DeviceInfo.isPc()) {
-      this.addActionOperate(params, this.albumInfo);
-      return;
-    }
+    // if (DeviceInfo.isPc()) {
+    //   this.addActionOperate(params, this.albumInfo);
+    //   return;
+    // }
     params.albumName =
       this.albumInfo.isSystemAlbum && !this.albumInfo.isSystemAlbum ?
         (UiUtil.getResourceStringSync(this.albumInfo.albumName as Resource)) : (this.albumInfo.albumName as string);

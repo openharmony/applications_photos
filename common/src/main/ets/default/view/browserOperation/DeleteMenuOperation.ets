@@ -37,6 +37,7 @@ import lazy { DeviceInfo } from '@ohos/tools/src/main/utils/DeviceInfo';
 import lazy { NavigationConstants } from '../../model/common/NavigationConstants';
 import lazy { MenuConstants } from '../actionbar/Menu';
 import lazy { DataListener, LoadingResult } from '../../model/DataSource';
+import lazy { UiUtil } from '../../utils/UiUtil';
 
 const TAG: string = 'DeleteMenuOperation';
 const DELETE: string = 'single_photo_delete';
@@ -51,15 +52,23 @@ export interface PositionParams {
   isHoldPosition?: boolean;
 }
 
+interface UiDeleteAwareDataSource {
+  getDataIndexByUri?: (uri: string) => number;
+  deleteData?: (index: number) => void;
+}
+
 let appBroadCast: BroadCast = BroadCastManager.getInstance().getBroadCast();
 const PAGE_LIST: string [] = [Constants.MEDIA_OPERATION_FROM_PHOTO_BROWSER,Constants.MEDIA_OPERATION_FROM_PHOTO_GRID,
   Constants.MEDIA_OPERATION_FROM_TIMELINE,Constants.MEDIA_OPERATION_FROM_HIDDEN_PHOTO_GRID];
 
 export class DeleteMenuOperation extends ProcessMenuOperation {
-  readonly BATCH_SIZE: number = 100;
+  readonly BATCH_SIZE: number = 1000;
+  /** 小批量删除不展示进度弹窗的上限（含） */
+  private readonly SMALL_BATCH_NO_PROGRESS_THRESHOLD: number = 20;
   private readonly PROGRESS_MESSAGE_WIDTH: number = 120;
   private readonly MAX_LOAD_DATA_COST_TIME: number = 3000;
-  private readonly NAVIGATE_AFTER_PROGRESS_CLOSE_TIMEOUT: number = 1500;
+  /** 须大于进度弹窗在 100% 后的最短驻留（见 CustomDialogView PROGRESS_HOLD_MS_AFTER_100 + MIN_PROGRESS_VISIBLE_TIME） */
+  private readonly NAVIGATE_AFTER_PROGRESS_CLOSE_TIMEOUT: number = 1200;
   private isTrash = true;
   public isClear = false;
   public isHoldPosition: boolean = false;
@@ -71,6 +80,7 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
   private isLemFoldState: boolean = display.getFoldDisplayMode() === display.FoldDisplayMode.FOLD_DISPLAY_MODE_SUB;
   private retentionDays: number = 30;
   private isShowProgress: boolean = true;
+  private isSmallBatchFastDelete: boolean = false;
   private allowedToClick: boolean = true;
   private clickDelay: number = 300;
   private clickedPath: Set<string> = new Set();
@@ -184,6 +194,40 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
     Log.info(TAG, `clearProgressDialogTimer`);
   }
 
+  private getDeleteCountForFastPath(): number {
+    if (Number.isFinite(this.count) && this.count > 0) {
+      return this.count;
+    }
+    return this.menuContext.selectManager?.getSelectedCount() ?? 0;
+  }
+
+  private shouldUseSmallBatchFastDelete(deleteCount?: number): boolean {
+    if (this.isClear) {
+      return false;
+    }
+    const count = deleteCount ?? this.getDeleteCountForFastPath();
+    return count > 0 && count <= this.SMALL_BATCH_NO_PROGRESS_THRESHOLD;
+  }
+
+  private configureSmallBatchFastDeleteIfNeeded(deleteCount?: number): void {
+    this.isSmallBatchFastDelete = this.shouldUseSmallBatchFastDelete(deleteCount);
+    if (this.isSmallBatchFastDelete) {
+      this.isShowProgress = false;
+      Log.info(TAG,
+        `configureSmallBatchFastDeleteIfNeeded: enabled, count=${deleteCount ?? this.getDeleteCountForFastPath()}`);
+    }
+  }
+
+  private showSmallBatchDeleteToast(): void {
+    if (this.isError) {
+      return;
+    }
+    const toastRes: Resource = this.isTrash
+      ? $r('app.string.small_batch_delete_to_trash_success')
+      : $r('app.string.small_batch_delete_permanently_success');
+    UiUtil.showToastShorter(toastRes);
+  }
+
   public setConfirmText(): void {
     const dialog = this.isTrash ? $r('app.string.dialog_delete') : $r('app.string.dialog_delete_permanently');
     AppStorage.setOrCreate<Resource>(Constants.CONFIRM_TEXT_KEY, dialog);
@@ -206,6 +250,8 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
         return;
       }
     }
+    this.isShowProgress = true;
+    this.isSmallBatchFastDelete = false;
     Log.debug(TAG, 'prepare selectManager complete');
     const mediaItem: MediaItem | undefined = this.menuContext.mediaItem;
     if (mediaItem) {
@@ -297,6 +343,31 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
     this.updateProgress(progress, completedCount);
   }
 
+  private notifyUiDeleted(deletedUris: string[]): void {
+    if (!deletedUris?.length) {
+      return;
+    }
+    // menuContext.dataSource is usually PhotoDataSource, but typed as a generic DataSource.
+    const dataSource: UiDeleteAwareDataSource | undefined = this.menuContext.dataSource as UiDeleteAwareDataSource;
+    const getIndexByUri: ((uri: string) => number) | undefined = dataSource?.getDataIndexByUri;
+    const deleteData: ((index: number) => void) | undefined = dataSource?.deleteData;
+    if (!getIndexByUri || !deleteData) {
+      return;
+    }
+    const indexes: number[] = deletedUris
+      .map((uri: string) => getIndexByUri(uri))
+      .filter((idx: number) => Number.isFinite(idx) && idx >= 0);
+    // Delete from tail to head to reduce index shift impact.
+    indexes.sort((a: number, b: number) => b - a);
+    for (const idx of indexes) {
+      try {
+        deleteData(idx);
+      } catch (e) {
+        Log.warn(TAG, `notifyUiDeleted failed for idx=${idx}, err=${e}`);
+      }
+    }
+  }
+
   // Delete a batch of data
   public async requestOneBatchOperation(): Promise<void> {
     Log.info(TAG, 'requestOneBatchOperation');
@@ -375,7 +446,6 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
   async doDeleteOperation(isTrash: boolean = false, batchUris: string[], batchAssets: PhotoAsset[]) {
     Log.info(TAG, `Start do delete operation for playAnime`)
     const operationImpl = BrowserOperationFactory.getFeature(BrowserOperationFactory.TYPE_PHOTO);
-    const BATCH_SIZE_FOR_PROGRESS: number = 50;
     let isFromSelectMode = true;
     Log.info(TAG, `Change isDoingDeleteBigPhotoAnim, fromPage:${this.menuContext.fromPage},
     batchUris: ${batchUris.length}, batchAssets: ${batchAssets.length}`);
@@ -393,27 +463,26 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
       if (!this.isGalleryCleanupPage()) {
         this.reportTrashDeletedInfo(batchUris, isFromSelectMode);
       }
-      // 将batchAssets拆分成小批次处理
-      for (let i = 0; i < batchAssets.length; i += BATCH_SIZE_FOR_PROGRESS) {
-        if (await this.waitIfPaused()) {
-          Log.info(TAG, 'doDeleteOperation paused and cancelled, return');
-          return;
-        }
-        if (this.isCancelled) {
-          Log.info(TAG, 'doDeleteOperation is cancelled in batch loop, return');
-          return;
-        }
-        let batchAssetsSub: PhotoAsset[] = batchAssets.slice(i, Math.min(i + BATCH_SIZE_FOR_PROGRESS, batchAssets.length));
+      if (await this.waitIfPaused()) {
+        Log.info(TAG, 'doDeleteOperation paused and cancelled, return');
+        return;
+      }
+      if (this.isCancelled) {
+        Log.info(TAG, 'doDeleteOperation is cancelled, return');
+        return;
+      }
+      if (batchAssets.length <= 0) {
+        Log.warn(TAG, `doDeleteOperation trash batchAssets empty`);
+      } else {
         try {
-          if (this.isGalleryCleanupPage() && batchAssetsSub.length > 0) {
-            Log.info(TAG, `deleteAlbumAssetsPermanently: batchAssetsSub.length=${batchAssetsSub.length}`);
-            await operationImpl.deleteAlbumAssetsPermanently(batchAssetsSub);
+          if (this.isGalleryCleanupPage()) {
+            Log.info(TAG, `deleteAlbumAssetsPermanently: batchAssets.length=${batchAssets.length}`);
+            await operationImpl.deleteAlbumAssetsPermanently(batchAssets);
           } else {
-            await operationImpl.deleteTrash(batchAssetsSub);
+            await operationImpl.deleteTrash(batchAssets);
           }
-          // 删除成功后，累加实际删除的文件数（用于逐张计算进度）
-          this.addCompletedFilesCount(batchAssetsSub.length);
-          await new Promise<void>((resolve: () => void) => setTimeout(resolve, 10));
+          this.notifyUiDeleted(batchAssets.map((a: PhotoAsset) => a.uri));
+          this.addCompletedFilesCount(batchAssets.length);
         } catch (error) {
           Log.error(TAG, `delete operation failed: ${error}`);
           this.onError('on delete ' + String(error) + '; isTrash: ' + isTrash);
@@ -421,31 +490,26 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
         }
       }
     } else {
-      // 将batchUris拆分成小批次处理
-      if (batchUris !== undefined && batchUris.length > 0) {
-        for (let i = 0; i < batchUris.length; i += BATCH_SIZE_FOR_PROGRESS) {
-          if (await this.waitIfPaused()) {
-            Log.info(TAG, 'doDeleteOperation paused and cancelled, return');
-            return;
-          }
-          if (this.isCancelled) {
-            Log.info(TAG, 'doDeleteOperation is cancelled in batch loop, return');
-            return;
-          }
-          let batchUrisSub: string[] = batchUris.slice(i, Math.min(i + BATCH_SIZE_FOR_PROGRESS, batchUris.length));
-          try {
-            await operationImpl.trash(batchUrisSub);
-            // 删除成功后，累加实际删除的文件数（用于逐张计算进度）
-            this.addCompletedFilesCount(batchUrisSub.length);
-            await new Promise<void>((resolve: () => void) => setTimeout(resolve, 10));
-          } catch (error) {
-            Log.error(TAG, `trash operation failed: ${error}`);
-            this.onError('on delete ' + String(error) + '; isTrash: ' + isTrash);
-            return;
-          }
-        }
-      } else {
+      if (await this.waitIfPaused()) {
+        Log.info(TAG, 'doDeleteOperation paused and cancelled, return');
+        return;
+      }
+      if (this.isCancelled) {
+        Log.info(TAG, 'doDeleteOperation is cancelled, return');
+        return;
+      }
+      if (batchUris === undefined || batchUris.length <= 0) {
         Log.error(TAG, `batchUris length is  ${batchUris?.length}`);
+      } else {
+        try {
+          await operationImpl.trash(batchUris);
+          this.notifyUiDeleted(batchUris);
+          this.addCompletedFilesCount(batchUris.length);
+        } catch (error) {
+          Log.error(TAG, `trash operation failed: ${error}`);
+          this.onError('on delete ' + String(error) + '; isTrash: ' + isTrash);
+          return;
+        }
       }
     }
     // 所有批次处理完成后，调用reportFinish
@@ -456,6 +520,14 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
     if (!this.isGalleryCleanupPage()) {
       const msg: Record<string, number | string | boolean | undefined> = { 'isTrashAlbum': isTrash };
       ReportToBigDataUtil.report(BigDataConstants.DELETE_FILE_OPERATION_FINISH, msg);
+    }
+    // 删除的图片若被桌面卡片使用，通知卡片刷新
+    // 注意：batchUris 后面会被 splice 清空，这里必须用拷贝，不能直接引用原数组
+    const deletedUris: string[] = isTrash
+      ? batchAssets.map((a: PhotoAsset) => a.uri)
+      : batchUris.slice();
+    if (deletedUris.length > 0) {
+      appBroadCast.emit(BroadCastConstants.PHOTO_DELETED_FOR_FACARD, [deletedUris]);
     }
     batchUris.splice(0, batchUris.length);
     batchAssets.splice(0, batchAssets.length);
@@ -478,6 +550,9 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
     }, this.clickDelay)
   }
   confirmCallback = (): void => {
+    this.isShowProgress = true;
+    this.isSmallBatchFastDelete = false;
+    this.configureSmallBatchFastDeleteIfNeeded();
     let mediaItem = this.menuContext.mediaItem;
     const isTrash = this.menuContext.albumInfo?.isTrashAlbum || this.isGalleryCleanupPage();
     Log.info(TAG, `Delete confirming isTrash ${this.isTrash},` + ` count: ${this.count},` + ` uri: ${mediaItem?.uri}`);
@@ -538,14 +613,21 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
     let onOperationStart: Function = this.menuContext.onOperationStart;
     onOperationStart?.();
     if (this.menuContext.dataSource) {
-      this.menuContext.dataSource?.addListener(this.dataListener);
-      this.isCloseDeleteProgressPending = true;
-      Log.info(TAG, 'onOperationStart: addListener' + this.menuContext.dataSource);
-      this.menuContext.dataSource?.switchRefreshOn?.();
+      if (this.isSmallBatchFastDelete) {
+        Log.info(TAG, 'onOperationStart: small batch fast delete, skip progress listener');
+        this.menuContext.dataSource?.switchRefreshOn?.();
+      } else {
+        this.menuContext.dataSource?.addListener(this.dataListener);
+        this.isCloseDeleteProgressPending = true;
+        Log.info(TAG, 'onOperationStart: addListener' + this.menuContext.dataSource);
+        this.menuContext.dataSource?.switchRefreshOn?.();
+      }
     }
     msg.from = BigDataConstants.BATCH_DELETE_PHOTO_GRID_ALBUM;
     ReportToBigDataUtil.report(BigDataConstants.DELETE_MENU_RESPONSE, msg);
-    this.menuContext.broadCast?.on(BroadCastConstants.CANCEL_PROGRESS_DIALOG, this.cancelProgress.bind(this));
+    if (!this.isSmallBatchFastDelete) {
+      this.menuContext.broadCast?.on(BroadCastConstants.CANCEL_PROGRESS_DIALOG, this.cancelProgress.bind(this));
+    }
     if (this.isClear && this.menuContext.albumInfo?.isTrashAlbum) {
       this.menuContext.broadCast?.emit(BroadCastConstants.SHOW_PROGRESS_DIALOG,
         [$r('app.string.action_clear_process'), this.deleteCancelFunc, true, this.PROGRESS_MESSAGE_WIDTH]);
@@ -595,6 +677,11 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
 
   confirmCallbackWithMediaItem(mediaItem: MediaItem, msg: Record<string, string |
   number | boolean>, isTrash: boolean | undefined): void {
+    const deleteCount: number = (this.menuContext.isBurstPhotos && this.menuContext.burstPhotos)
+      ? this.menuContext.burstPhotos.length : 1;
+    this.isShowProgress = true;
+    this.isSmallBatchFastDelete = false;
+    this.configureSmallBatchFastDeleteIfNeeded(deleteCount);
     if (this.menuContext.fromPage === Constants.MEDIA_OPERATION_FROM_PHOTO_BROWSER) {
       appBroadCast.emit(BroadCastConstants.CURRENT_DELETE_UNIQUEID, [mediaItem.uniqueId]);
     }
@@ -659,6 +746,9 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
     Log.info(TAG, 'onProcessDone');
     if (this.completedFilesCount < this.count) {
       this.completedFilesCount = this.count;
+    }
+    if (this.isSmallBatchFastDelete) {
+      this.showSmallBatchDeleteToast();
     }
     if (this.isCloseDeleteProgressPending) {
       this.isWaitingDataRefreshToComplete = true;
@@ -953,6 +1043,7 @@ export class DeleteMenuOperation extends ProcessMenuOperation {
 
   public onOperateCancelled(): void {
     this.isCloseDeleteProgressPending = false;
+    this.isSmallBatchFastDelete = false;
     this.menuContext.dataSource?.removeListener(this.dataListener);
     this.clearProgressDialogTimer();
     this.clearNavigateAfterProgressCloseTimer();

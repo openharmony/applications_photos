@@ -27,8 +27,11 @@ import lazy { UserFileManagerAccess } from '../../../default/access/UserFileMana
 import type { PositionParams } from '../../../default/view/browserOperation/DeleteMenuOperation';
 import lazy { BusinessError } from '@kit.BasicServicesKit';
 import lazy { AsyncCallback } from '../../../default/model/common/AsyncCallback';
+import lazy { BroadCastManager } from '../../../default/model/common/BroadCastManager';
 
 /* instrument ignore file */
+
+let appBroadCast = BroadCastManager.getInstance().getBroadCast();
 
 const TAG: string = 'browser_AlbumSetDeleteMenuOperation';
 
@@ -115,7 +118,11 @@ export class AlbumSetDeleteMenuOperation extends ProcessMenuOperation {
       return;
     }
     let batchUris: string[] = this.getBatchUris();
-    UserFileManagerAccess.getInstance().deleteAlbumByUri(batchUris[0]).then((): void => {
+    const deletedAlbumUri: string = batchUris[0];
+    UserFileManagerAccess.getInstance().deleteAlbumByUri(deletedAlbumUri).then((): void => {
+      if (deletedAlbumUri) {
+        appBroadCast.emit(BroadCastConstants.ALBUM_DELETED_FOR_FACARD, [deletedAlbumUri]);
+      }
       this.onCompleted();
     }).catch((error: BusinessError): void => {
       this.onError(error);

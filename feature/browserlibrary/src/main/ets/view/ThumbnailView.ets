@@ -135,6 +135,12 @@ export struct ThumbnailView {
       return '';
     }
     if (ImageUtil.isExitTransparentChannelImgMimeType(this.viewModel.item)) {
+      const width = this.viewModel.item.width ?? 0;
+      const height = this.viewModel.item.height ?? 1;
+      if (width > 0 && height > 0 && (width / height > 3 || height / width > 3)) {
+        return this.getLCDUri(this.viewModel.item?.uri, this.viewModel.item?.path,
+          this.viewModel.item?.getDateModified?.());
+      }
       /* instrument ignore next  */
       Log.info(TAG ,`${this.viewModel.item.uri} transparent channel image ,place holder is astc`);
       return `${this.viewModel.item.uri}?timestampApp=${this.viewModel.item.getDateModified?.()}&oper=astc&path=${

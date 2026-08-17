@@ -24,6 +24,7 @@ import {
   SCREEN_ORIENTATION_PORTRAIT
 } from '@oh-image-editor/editor-common';
 import { VideoTool } from '@oh-image-editor/editor-common/src/main/ets/common/components/VideoTool';
+import { CompareTool } from '@oh-image-editor/editor-common/src/main/ets/common/components/CompareTool';
 import { ScreenClass } from '@oh-image-editor/editor-common/src/main/ets/service/App';
 import { AiTabName } from '@oh-image-editor/editor-common/src/main/ets/service/model/Enum';
 import { HashSet } from '@kit.ArkTS';
@@ -69,6 +70,10 @@ export struct ScreenTool {
   @State @Watch('screenToolAreaChange') screenClass: ScreenClass = App.getInstance().screenClass;
   @StorageProp(SCREEN_ORIENTATION_PORTRAIT) isScreenPortrait: boolean = ScreenManager.getInstance().isScreenPortrait();
 
+  private isCropOverlayTab(): boolean {
+    return this.editor.tabIndex === TabName.TabAdjust && this.editor.asset.isShowCropRect;
+  }
+
   screenToolAreaChange() {
     let isSplitMode: boolean = ScreenManager.getInstance().isSplitMode();
     let isScreenPortrait = ScreenManager.getInstance().isScreenPortrait();
@@ -101,9 +106,31 @@ export struct ScreenTool {
         }.width('100%').height('100%').hitTestBehavior(HitTestMode.Transparent);
       }
       if (this.editor.isInitComp) {
-        VideoTool({
-          originalColorMode: this.originalColorMode
-        })
+        if (this.isCropOverlayTab()) {
+          Stack() {
+            VideoTool({
+              originalColorMode: this.originalColorMode
+            })
+              .position({
+                x: -this.editor.asset.crops().cropRect.left,
+                y: -this.editor.asset.crops().cropRect.top
+              })
+          }
+          .position({
+            x: this.editor.asset.crops().cropRect.left,
+            y: this.editor.asset.crops().cropRect.top
+          })
+          .width(this.editor.asset.crops().cropRect.width())
+          .height(this.editor.asset.crops().cropRect.height())
+          .clip(true);
+          CompareTool({
+            originalColorMode: this.originalColorMode
+          })
+        } else {
+          VideoTool({
+            originalColorMode: this.originalColorMode
+          })
+        }
       }
       if (this.editor.changeLoading) {
         Stack() {

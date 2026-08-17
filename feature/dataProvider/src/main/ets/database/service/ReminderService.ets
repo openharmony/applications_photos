@@ -355,6 +355,45 @@ export default class ReminderService extends BaseDatashare {
   }
 
   /**
+   * 根据被删除/更新的图片 URI 列表，查询使用了这些图片的卡片 formId 列表（去重）
+   *
+   * @param imageUris 图片 URI 列表
+   * @returns 使用了这些图片的 formId 列表
+   */
+  public async queryFormIdsByImageUris(imageUris: string[]): Promise<string[]> {
+    if (!imageUris || imageUris.length === 0) {
+      return [];
+    }
+    const formIdSet: Set<string> = new Set();
+    let queryResult: DataShareResultSet | undefined = undefined;
+    try {
+      // 优先通过 image_uri_id 匹配，避免 URI 形态差异导致命中失败
+      queryResult = await this.queryImageByImageUriId(imageUris, true);
+      // 兜底：如果按 image_uri_id 没查到，再按 image_uri 精确匹配一次
+      if (!queryResult || queryResult.rowCount <= 0) {
+        queryResult = await this.queryImageByUris(imageUris);
+      }
+      if (queryResult && queryResult.rowCount > 0) {
+        const formIdIndex: number = queryResult.getColumnIndex(RemindersTable.FORM_ID);
+        queryResult.goToFirstRow();
+        for (let i = 0; i < queryResult.rowCount; i++) {
+          formIdSet.add(String(queryResult.getString(formIdIndex)));
+          queryResult.goToNextRow();
+        }
+      }
+      const formIds = Array.from(formIdSet);
+      Log.info(TAG,
+        `queryFormIdsByImageUris imageUris count: ${imageUris.length}, formIds: ${JSON.stringify(formIds)}`);
+      return formIds;
+    } catch (error) {
+      Log.error(TAG, `queryFormIdsByImageUris error ${error}`);
+      return [];
+    } finally {
+      queryResult?.close();
+    }
+  }
+
+  /**
    * 通过ImageUriId去批量查询reminders表
    *
    * @param imageUris 需要查询的imageUris
@@ -430,6 +469,10 @@ export default class ReminderService extends BaseDatashare {
   // 切换照片删除状态
   private async changeDeleteStatus(isDelete: number, imageUris: string[], formId?: string): Promise<void> {
     try {
+      if (!imageUris || imageUris.length === 0) {
+        Log.info(TAG, `changeDeleteStatus skip with empty imageUris, isDelete: ${isDelete}, formId: ${formId}`);
+        return;
+      }
       const predicates: dataSharePredicates.DataSharePredicates = new dataSharePredicates.DataSharePredicates();
       predicates.beginWrap();
       for (let i = 0; i < imageUris.length; i++) {
@@ -464,7 +507,11 @@ export default class ReminderService extends BaseDatashare {
   }
 
   public async hiddenRecordByImageUriIds(imageUriIds: string[], formId?: string): Promise<void> {
-    this.changeDeleteStatusByImgId(1, imageUriIds, formId);
+    if (!imageUriIds || imageUriIds.length === 0) {
+      Log.info(TAG, `hiddenRecordByImageUriIds skip with empty imageUriIds, formId: ${formId}`);
+      return;
+    }
+    await this.changeDeleteStatusByImgId(1, imageUriIds, formId);
   }
 
   public async hiddenRecordByIds(hiddenIds: string[], formId?: string): Promise<void> {

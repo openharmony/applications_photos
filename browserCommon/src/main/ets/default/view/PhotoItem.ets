@@ -246,6 +246,11 @@ interface QualityMsg {
   quality: number;
 }
 
+interface LayoutContentMaxPx {
+  maxWidth: number;
+  maxHeight: number;
+}
+
 class RectValue {
   public x: number = 0;
   public y: number = 0;
@@ -1061,6 +1066,7 @@ export struct PhotoItem {
   @State @Watch('onVideoRatioChanged') videoRatio: number = -1;
   //【视频】是否是支持的视频格式
   private isSupportedVideoType: boolean = true;
+  @State private isVideoError: boolean = false;
   //【视频】广播回调
   /* instrument ignore next  */
   private setIsSupportedVideoTypeFunc: Function = (isSupportedVideoType: boolean, src: string):
@@ -1092,6 +1098,9 @@ export struct PhotoItem {
    * 大图image控件创建添加定时器维测
    */
   private imageOnCompleteTimer: number = -1;
+  private hasRetriedLoadWithLcd: boolean = false;
+  private hasDelayedLcdRetry: boolean = false;
+  private lcdRetryTimer: number = -1;
   private timerDuration: number = 3000;
   // image组件完成渲染后的宽高
   private imageCompleteWidth: number | undefined = 0;
@@ -1219,8 +1228,9 @@ export struct PhotoItem {
   //宫格进大图LCD图ai使能延长时间,单图片适配后可以删除
   @State private aiDelay: boolean = true;
   private aiDelayId: number = 0;
-  private isInBackPressEvent = false;
+  @State private isInBackPressEvent: boolean = false;
   private isEditorBack: boolean = false;
+  private editOverwriteUri: string = '';
   private isMultiPick: boolean = false;
   private isHighQualityFirst: boolean = true;
   /* instrument ignore next */
@@ -1326,9 +1336,24 @@ export struct PhotoItem {
     this.isInBackPressEvent = true;
     this.enableEnterInnerPic = false;
     this.viewModel.videoButtonRowModifier?.updateVisibility(Visibility.Hidden);
+
+
+    const cachedGridThumbnailUrl: string | undefined =
+      this.dataSource?.photoDataAdapter.getCachedThumbnail(this.item.uri)?.url ?? this.thumbnail?.url;
+    const currentShownSource: string | image.PixelMap | sendableImage.PixelMap | undefined =
+      this.imageShowSource ?? this.getActualImage();
+    const actualThumbUrl: string | undefined = (typeof currentShownSource === 'string') ? currentShownSource : undefined;
+    const isUltraLongPhoto: boolean = !this.isThird && this.isUltraLongImage();
+
     let astcUri = isLoadLCD && (index == this.mPosition) ?
     ImageUtil.getLCDUri(this.item.uri, this.item.path, this.item.getDateModified?.()) :
     ImageUtil.getThumbnailAstcUri(this.item.uri, this.item.path, this.item.getDateModified?.());
+    if (this.isCloudTransparentChannelImage()) {
+      astcUri = ImageUtil.getLCDUri(this.item.uri, this.item.path, this.item.getDateModified?.());
+    }
+    if (isUltraLongPhoto) {
+      astcUri = this.thumbnail?.url ?? ImageUtil.getLCDUri(this.item.uri, this.item.path, this.item.getDateModified?.());
+    }
     if (this.isEditor) {
       /* instrument ignore next */
       let mediaItem = this.replaceUriManager?.getReplaceMediaItem(this.mediaResult.item)
@@ -1339,13 +1364,12 @@ export struct PhotoItem {
       /* instrument ignore next */
       astcUri += (astcUri.includes('?') ? '&' : '?') + 'user=' + this.userId;
     }
-    this.imageShowStringSource = astcUri;
+
+    this.imageShowStringSource = cachedGridThumbnailUrl ?? actualThumbUrl ?? astcUri;
     Log.info(TAG, `imageShowStringSource: ${this.imageShowStringSource}`);
     if (ImageUtil.isExitTransparentChannelImgMimeType(this.item)) {
       /* instrument ignore next */
       Log.info(TAG, 'png luminance is change');
-      /* instrument ignore next */
-      return;
     }
 
     Log.info(TAG, `imageShowPixMapSource: ${this.imageShowPixMapSource}`);
@@ -1394,6 +1418,40 @@ export struct PhotoItem {
     Log.info(TAG, 'resetInPhotoScaleGeometry end');
   }
 
+  private resetEditReturnTransformState(): void {
+    const displayRatio: number = this.viewModel.isVideo() ? this.videoRatio : this.ratio;
+    UiUtil.resetGeometryTransitionParams();
+    this.viewModel.initSaliencyImageSlide();
+    this.viewModel.resetImageSlideInitState();
+    this.viewModel.setGeometryScale(1);
+    this.viewModel.setGeometryOffsetX(0);
+    this.viewModel.setGeometryOffsetY(0);
+    this.isPullDownAndDragPhoto = false;
+    this.isPullingDown = false;
+    this.isInAnimateToPosition = false;
+    this.resetInPhotoScaleGeometry();
+    this.viewModel.updateStackScale();
+    this.viewModel.updateStackOffset();
+    this.viewModel.stackModifier?.updateAspectRatio(displayRatio);
+    this.viewModel.oriImageColumnModifier?.updateWidth(BrowserConstants.targetWidth);
+    this.viewModel.oriImageColumnModifier?.updateHeight(BrowserConstants.targetHeight);
+    this.viewModel.oriImageColumnModifier?.updateTranslate(BrowserConstants.targetTranslate);
+    this.viewModel.oriImageColumnModifier?.updateOpacity(BrowserConstants.targetPhotoOpacity);
+    this.viewModel.thumbImageModifier?.updateAspectRatio(displayRatio);
+    this.viewModel.thumbImageStackModifier?.updateBorderRadius(BrowserConstants.targetRadius);
+    this.viewModel.thumbImageStackModifier?.updateBorderWidth(BrowserConstants.targetBorderWidth);
+    this.viewModel.thumbImageColumnModifier?.updateOffset({ x: 0, y: 0 });
+    this.viewModel.thumbImageColumnModifier?.updateScale(BrowserConstants.targetScale);
+    this.viewModel.thumbImageColumnModifier?.updateTranslate(BrowserConstants.targetTranslate);
+    this.viewModel.thumbImageColumnModifier?.attribute?.transform(Matrix4.identity().copy());
+    this.viewModel.thumbImageColumnModifier?.updateVisibility(Visibility.Hidden);
+    this.calculateImagePos();
+    this.initImageTool();
+    if (this.mIsCurrent) {
+      LocalStorage.getShared()?.delete(BrowserConstants.MATRIX);
+    }
+  }
+
   private onShowImageChanged(): void {
     Log.info(TAG, "onShowImageChanged");
     if (this.isBackGround) {
@@ -1417,6 +1475,14 @@ export struct PhotoItem {
   }
 
   private setImagePixMapAndString() {
+    if (this.shouldForceRefreshEditedCurrentItem() && this.imageShowPixMapSource) {
+      Log.info(TAG, `clear stale pixelMap after overwrite save, uri: ${this.item?.uri}`);
+      this.stringImageModifier.attribute?.visibility(Visibility.Visible);
+      this.imageShowSourceOpacity = 0;
+      this.pixmapImageModifier?.updateConstructorParams(ImageContent.EMPTY);
+      this.imageShowPixMapSource = undefined;
+      this.isUseImageCache = false;
+    }
     let newImageShowPixMapSource = this.getActualPixelMapImage();
 
     if (this.imageShowPixMapSource !== newImageShowPixMapSource && newImageShowPixMapSource) {
@@ -1429,6 +1495,7 @@ export struct PhotoItem {
         this.onLCDReAdapt();
         this.isUseImageCache = false;
         this.isEditorBack = false;
+        this.editOverwriteUri = '';
       }
       // 美肤不能走单属性刷新逻辑
       if (!this.isUseImageCache) {
@@ -1446,11 +1513,21 @@ export struct PhotoItem {
       Log.info(TAG, `onShowImageChanged but imageShowPixMapSource not changed : ${this.mPosition}`);
     }
     let newImageShowStringSource = this.getActualStringImage();
+    const needRefreshAfterEdit: boolean = this.shouldForceRefreshEditedCurrentItem();
+    if (needRefreshAfterEdit && newImageShowStringSource &&
+      !newImageShowStringSource.includes('forceupdate=true')) {
+      newImageShowStringSource =
+        `${newImageShowStringSource}${newImageShowStringSource.includes('?') ? '&' : '?'}forceupdate=true`;
+    }
     if (this.imageShowStringSource !== newImageShowStringSource &&
-      (this.imageShowStringSource === undefined || this.isEditSaveReload)) {
+      (this.imageShowStringSource === undefined || this.isEditSaveReload || needRefreshAfterEdit)) {
       Log.info(TAG, `onshowImageChanged oldString: ${this.imageShowStringSource} new: ${newImageShowStringSource}`);
       this.imageShowStringSource = newImageShowStringSource;
       this.pixmapImageModifier.attribute?.visibility(Visibility.Visible);
+      if (needRefreshAfterEdit) {
+        this.isEditorBack = false;
+        this.editOverwriteUri = '';
+      }
     } else if (this.imageShowStringSource !== newImageShowStringSource &&
       this.item.imgOriginWidth * this.item.imgOriginHeight > PRELOAD_ORIGIN_MAX_SIZE * PRELOAD_ORIGIN_MAX_SIZE) {
       this.imageShowStringSource = newImageShowStringSource;
@@ -1534,6 +1611,9 @@ export struct PhotoItem {
       if (this.userId > 0) {
         return this.thumbnail.url;
       }
+      if (this.isBrowserNoCropMode()) {
+        return this.thumbnail.url;
+      }
       // png格式图片使用astc图代替LCD图
       return this.getPlaceHolderImage();
     }
@@ -1550,6 +1630,10 @@ export struct PhotoItem {
 
   private getActualPixelMapImage(): image.PixelMap | undefined {
     Log.info(TAG, `getActualPixelMapImage pixelmap ${this.imageShowPixMapSource} index=${this.mPosition}`);
+    if (this.shouldForceRefreshEditedCurrentItem()) {
+      Log.info(TAG, `skip cached pixelMap after overwrite save, uri: ${this.item?.uri}`);
+      return undefined;
+    }
     if (this.item.isGifOrWebpType()) {
       /* instrument ignore next */
       return undefined;
@@ -1568,6 +1652,27 @@ export struct PhotoItem {
       return this.thumbnail.yuvPixelMap;
     }
     return undefined;
+  }
+
+  private shouldForceRefreshEditedCurrentItem(): boolean {
+    const photoEditSaveUri: string | undefined = LocalStorage.getShared()?.get<string>(BroadCastConstants.PHOTO_EDIT_SAVE_URI);
+    const editorExitUri: string | undefined = EditorPhotoContext.getInstance().getEditorUriOnExit();
+    const targetUri: string | undefined = photoEditSaveUri || editorExitUri || this.editOverwriteUri;
+    return !!targetUri && targetUri === this.item?.uri &&
+      (this.isEditSaveReload || this.isEditorBack || EditorPhotoContext.getInstance().getNotifyHideEditor());
+  }
+
+  private refreshImageAfterEditOverwrite(): void {
+    if (!this.shouldForceRefreshEditedCurrentItem()) {
+      return;
+    }
+    Log.info(TAG, `refreshImageAfterEditOverwrite uri: ${this.item?.uri}, index: ${this.mPosition}`);
+    this.dataSource?.resetPhotoRequest(this.item.uri);
+    if (this.thumbnail?.pixelMap || this.thumbnail?.yuvPixelMap) {
+      this.thumbnail.release();
+    }
+    this.thumbnail = this.dataSource?.photoDataAdapter.getThumbnail(this.item) ?? new Thumbnail();
+    this.setImagePixMapAndString();
   }
 
   /* instrument ignore next */
@@ -1713,6 +1818,10 @@ export struct PhotoItem {
   onShowChanged() {
     Log.info(TAG, `photoItem onShowChanged: ${this.isShowBar}, currentIndex:${this.currentIndex}`);
     this.viewModel.isShowBar = this.isShowBar;
+
+    if (this.isThird && this.viewModel.isVideo()) {
+      this.calculateXComponentSize();
+    }
     this.calcLoadingPosition();
     this.viewModel.updateSystemUi();
     this.updateAbleEnterInnerPic();
@@ -1931,73 +2040,66 @@ export struct PhotoItem {
   }
 
   onMediaResultChanged(): void {
-    // todo 先注释这里注释后暂时没看见有什么影响，但是方法一直在执行有可能卡死问题是这里导致的
-    // uri showthub captureID this.mPosition
-    // Log.info(TAG, `onMediaResultChanged captureId: ${this.mediaResult.captureId},
-    //   isShowThumbnail: ${this.mediaResult.isShowThumbnail}, mPosition: ${this.mPosition}, item.uri:${this.item.uri},
-    //   patch:${this.mediaResult.path}, isCurrent: ${this.mIsCurrent} `);
-    // if (this.mIsCurrent) {
-    //   AppStorage.setOrCreate<MediaItem>('targetItem', this.item);
-    // }
-    // if (this.isDelayRegisterUriBroadcast && this.item.uri && this.item.uniqueId) {
-    //   /* instrument ignore next */
-    //   this.registerUriBroadcast();
-    // }
-    //
-    // if (!this.thumbnail) {
-    //   /* instrument ignore next */
-    //   Log.error(TAG, 'thumbnail is undefined');
-    //   /* instrument ignore next */
-    //   return;
-    // }
-    // Log.info(TAG,`onMediaItemResult, this.thumbnail: ${JSON.stringify(this.thumbnail)}`
-    //   + ` mediaResult.thumbnail: ${JSON.stringify(this.mediaResult.thumbnail)}`);
-    // if (this.thumbnail != this.mediaResult.thumbnail) {
-    //   Log.info(TAG, `onMediaItemResult, isCurrent: ${this.mIsCurrent}`);
-    // }
-    //
-    // if (this.mediaResult.dateModified !== this.item.dateModified) {
-    //   Log.info(TAG, `onMediaItemResult, dateModified is changed from ${this.item.dateModified} to ${
-    //   this.mediaResult.dateModified} for ${this.mediaResult.path}`);
-    // }
-    //
-    // if (this.mediaResult.pos !== undefined) {
-    //   this.viewModel.updatemPosition(this.mediaResult.pos);
-    // }
-    //
-    // if (this.mediaResult?.item) {
-    //   this.updateBroadcastWithItem?.(this.mediaResult.item);
-    // }
-    // if (this.dataSource) {
-    //   this.mPosition = this.dataSource?.getDataIndexByUri?.(this.item.uri ? this.item.uri : this.item.captureId);
-    //   this.appBroadCast.emit(BroadCastConstants.CAST_POSITION_CHANGED + this.src, [this.mPosition]);
-    // }
-    //
-    // if (this.mediaResult?.item?.getPosition) {
-    //   this.mediaPosition = this.mediaResult.item.getPosition();
-    // }
-    // if (this.mediaResult.thumbnail) {
-    //   if (PhotoConfig.isFromMeetime) {
-    //     /* instrument ignore next */
-    //     this.thumbnail = this.mediaResult.thumbnail;
-    //   } else {
-    //     this.thumbnail = this.dataSource?.photoDataAdapter.getThumbnail(this.item) ?? new Thumbnail;
-    //   }
-    // }
-    // if (this.mediaResult.orientation != undefined) {
-    //   this.orientation = this.mediaResult.orientation;
-    // }
-    // this.updateIsCurrent();
-    // this.rotateController?.init(this.item, this.videoRealWidth, this.videoRealHeight, this.isShowBar);
-    // this.rotateController?.setComponentSize(vp2px(this.viewModel.windowLayoutWidth),
-    //   vp2px(this.viewModel.windowLayoutHeight));
-    // this.setRotateButtonOffset();
-    // this.onPhotoChanged();
-    // if (!LocalStorage.getShared()?.get<Context>('photoLibraryContext') &&
-    //   !LocalStorage.getShared()?.get<Context>(Constants.PHOTO_PICKER_SESSION_KEY) &&
-    //   !LocalStorage.getShared()?.get<Context>('geometryEnable')) {
-    //   this.onGeometryIdChange();
-    // }
+    const nextItem: MediaItem | undefined = this.mediaResult?.item;
+    if (!nextItem) {
+      return;
+    }
+    const isEditOverwriteRefresh: boolean = nextItem.uri === this.item.uri &&
+      nextItem.getDateModified?.() !== this.item.getDateModified?.() &&
+      (this.isEditSaveReload || this.isEditorBack ||
+        EditorPhotoContext.getInstance().getNotifyHideEditor());
+    const isItemChanged: boolean = nextItem.uri !== this.item.uri ||
+      nextItem.uniqueId !== this.item.uniqueId ||
+      nextItem.width !== this.item.width ||
+      nextItem.height !== this.item.height ||
+      nextItem.path !== this.item.path ||
+      isEditOverwriteRefresh;
+    const isPositionChanged: boolean = this.mediaResult.pos !== undefined && this.mediaResult.pos !== this.mPosition;
+    const isOrientationChanged: boolean =
+      this.mediaResult.orientation !== undefined && this.mediaResult.orientation !== this.orientation;
+    if (!isItemChanged && !isPositionChanged && !isOrientationChanged) {
+      return;
+    }
+    Log.info(TAG, `onMediaResultChanged uri:${this.item.uri} -> ${nextItem.uri}, itemChanged:${isItemChanged},
+      positionChanged:${isPositionChanged}, orientationChanged:${isOrientationChanged}`);
+    this.item = nextItem;
+    if (isEditOverwriteRefresh) {
+      this.isEditorBack = true;
+      this.editOverwriteUri = nextItem.uri;
+    }
+    if (isItemChanged) {
+      this.updateBroadcastWithItem(nextItem);
+    }
+    if (this.mediaResult.pos !== undefined) {
+      this.mPosition = this.mediaResult.pos;
+      this.viewModel.updatemPosition(this.mediaResult.pos);
+      this.appBroadCast.emit(BroadCastConstants.CAST_POSITION_CHANGED + this.item.uri, [this.mPosition]);
+    }
+    if (this.mediaResult.item?.getPosition) {
+      this.mediaPosition = this.mediaResult.item.getPosition();
+    }
+    if (this.mediaResult.thumbnail) {
+      if (PhotoConfig.isFromMeetime) {
+        this.thumbnail = this.mediaResult.thumbnail;
+      } else {
+        this.thumbnail = this.dataSource?.photoDataAdapter.getThumbnail(this.item) ?? new Thumbnail;
+      }
+    }
+    if (this.mediaResult.orientation !== undefined) {
+      this.orientation = this.mediaResult.orientation;
+    }
+    this.updateIsCurrent();
+    this.changeStringIfEditor();
+    this.onViewDataChanged();
+    if (!this.shouldForceRefreshEditedCurrentItem()) {
+      this.imageShowSource = this.getActualImage();
+      this.imageShowPixMapSource = this.getActualPixelMapImage();
+    }
+    if (isItemChanged || this.isEditSaveReload || this.isEditorBack ||
+      EditorPhotoContext.getInstance().getNotifyHideEditor()) {
+      this.resetEditReturnTransformState();
+    }
+    this.onPhotoChanged();
   }
 
   private updateIsCurrent() {
@@ -2190,6 +2292,18 @@ export struct PhotoItem {
       }
     }
     return scale;
+  }
+
+  private hasTransformResidue(): boolean {
+    let matrix: Matrix4.Matrix4Transit = this.matrix;
+    if (!matrix) {
+      return false;
+    }
+    let mat: number[] | undefined = (matrix?.copy() as Matrix4x4)?.matrix4x4;
+    if (!mat) {
+      return false;
+    }
+    return mat[0] !== 1 || mat[5] !== 1 || mat[10] !== 1 || mat[12] !== 0 || mat[13] !== 0;
   }
 
   /**
@@ -2586,7 +2700,9 @@ export struct PhotoItem {
       this.pixmapImageModifier.attribute?.visibility(Visibility.Hidden);
       Log.info(TAG, `imageShowStringSource: ${this.imageShowStringSource}`);
     } else {
-      if (this.imageShowPixMapSource) {
+      if (this.shouldForceRefreshEditedCurrentItem()) {
+        this.refreshImageAfterEditOverwrite();
+      } else if (this.imageShowPixMapSource) {
         this.imageShowSourceOpacity = 1;
       } else {
         this.imageShowStringSource = this.getActualStringImage();
@@ -2618,6 +2734,7 @@ export struct PhotoItem {
       this.mediaPosition = this.mediaResult.item.getPosition();
     }
     Log.info(TAG, "initMediaResult: " + this.mediaResult.thumbnail?.url + " " + this.thumbnail.url);
+    this.resetImageLoadRetryState();
     if (this.mediaResult.thumbnail) {
       if (PhotoConfig.isFromMeetime) {
         /* instrument ignore next */
@@ -2766,7 +2883,7 @@ export struct PhotoItem {
 
   private setImagePixMap: () => void = (): void => {
     Log.info(TAG, `setImagePixMapAndString, mediaPosition:${this.item.getPosition()} index: ${this.mPosition}}`)
-    if (!this.imageShowPixMapSource) {
+    if (!this.imageShowPixMapSource || this.shouldForceRefreshEditedCurrentItem()) {
       this.setImagePixMapAndString();
     }
     this.onVisibilityChange(true);
@@ -3100,8 +3217,7 @@ export struct PhotoItem {
 
   /* instrument ignore next */
   resetPosition(): void {
-    this.matrix = Matrix4.identity().copy();
-    this.viewModel.stackModifier?.attribute?.transform(this.matrix);
+    this.resetEditReturnTransformState();
   }
 
   /* instrument ignore next */
@@ -3174,6 +3290,7 @@ export struct PhotoItem {
       }
     }
     clearTimeout(this.imageOnCompleteTimer);
+    this.resetImageLoadRetryState();
     clearTimeout(this.panelTimer);
     this.isLoading = false;
     this.isRequestOriginLoading = false;
@@ -3526,6 +3643,8 @@ export struct PhotoItem {
 
   private getPlaceHolderImage(): string {
     Log.debug(TAG, `start loading placeHolder : ${this.thumbnail?.url}`);
+    const needForceRefresh: boolean = this.shouldForceRefreshEditedCurrentItem() ||
+      EditorPhotoContext.getInstance().getNotifyHideEditor();
     if (!this.item) {
       /* instrument ignore next  */
       Log.error(TAG, `Invalid item=${this.item}`);
@@ -3533,6 +3652,21 @@ export struct PhotoItem {
       return '';
     }
     if (ImageUtil.isExitTransparentChannelImgMimeType(this.item)) {
+      if (this.isBrowserNoCropMode() && this.thumbnail?.url) {
+        Log.info(TAG, `${this.item.uri} no-crop mode, place holder use thumbnail`);
+        return this.thumbnail.url;
+      }
+      if (this.isCloudTransparentChannelImage() && this.item.path && this.item.getDateModified?.()) {
+        Log.info(TAG, `${this.item.uri} cloud transparent channel image, place holder use lcd`);
+        return ImageUtil.getLCDUri(this.item.uri, this.item.path, this.item.getDateModified?.());
+      }
+      if (this.thumbnail?.url) {
+        Log.info(TAG, `${this.item.uri} transparent channel image, place holder use thumbnail`);
+        if (needForceRefresh) {
+          return `${this.thumbnail.url}${this.thumbnail.url.includes('?') ? '&' : '?'}forceupdate=true`;
+        }
+        return this.thumbnail.url;
+      }
       /* instrument ignore next  */
       Log.info(TAG ,`${this.item.uri} transparent channel image ,place holder is astc`);
       return `${this.item.uri}?timestampApp=${this.item.getDateModified?.()}&oper=astc&path=${this.item.path}`;
@@ -3548,6 +3682,9 @@ export struct PhotoItem {
       return placeholderUri;
     }
     if (this.item.uri) {
+      if (this.isBrowserNoCropMode() && this.item.path && this.item.getDateModified?.()) {
+        return `${this.item.uri}?timestampApp=${this.item.getDateModified?.()}&oper=thumbnail&path=${this.item.path}`;
+      }
       Log.info(TAG ,`place holder is astc ${this.item.uri}?oper=astc&path=${this.item.path}` );
       return `${this.item.uri}?oper=astc&path=${this.item.path}`;
     }
@@ -3600,8 +3737,16 @@ export struct PhotoItem {
     return false;
   }
 
-  private getImageSource(): image.PixelMap | string | undefined {
-    if (this.isEditorBack && EditorPhotoContext.getInstance().getNotifyHideEditor()) {
+  private getImageSource(): image.PixelMap | string | Resource | undefined {
+    //大图加载错误，返回错误图片，避免白屏
+    if (this.showError) {
+      return $r('app.media.alt_placeholder');
+    }
+    const editorContext: EditorPhotoContext = EditorPhotoContext.getInstance();
+    if (this.isEditorBack && editorContext.getEditorStage() === EditorStage.NONE) {
+      this.isEditorBack = false;
+    }
+    if (this.isEditorBack && editorContext.getNotifyHideEditor()) {
       this.imageShowStringSource = this.getActualStringImage();
     }
     if (this.isEditorBack) {
@@ -3731,11 +3876,11 @@ export struct PhotoItem {
           .attributeModifier(this.stringImageModifier)
           .alt(this.getPlaceHolderImage())
           .opacity(this.isRunningAnimation ? this.imageStringSourceOpacity : 1)
-          .objectFit(ImageFit.Cover)
+          .objectFit(this.getBrowserImageFit())
           .autoResize(false)
           .width(Constants.PERCENT_100)
           .height(Constants.PERCENT_100)
-          .clip(true)
+          .clip(!this.isBrowserNoCropMode())
           .onComplete((event?: completed): void => {
             this.imageCompleteWidth = event?.width;
             this.imageCompleteHeight = event?.height;
@@ -3784,9 +3929,9 @@ export struct PhotoItem {
           .opacity(this.imageShowSourceOpacity)
           .width(Constants.PERCENT_100)
           .height(Constants.PERCENT_100)
-          .objectFit(ImageFit.Cover)
+          .objectFit(this.getBrowserImageFit())
           .autoResize(false)
-          .clip(true)
+          .clip(!this.isBrowserNoCropMode())
           .onComplete((event?: completed): void => {
             if (this.startImageOnCompleteTimerId !== -1) {
               clearTimeout(this.startImageOnCompleteTimerId);
@@ -3824,7 +3969,7 @@ export struct PhotoItem {
       .attributeModifier(this.viewModel.thumbImageStackModifier)
       .borderColor(Color.White)
       .rotate({ angle: this.angle })
-      .clip(true)
+      .clip(!this.isBrowserNoCropMode())
       .opacity(this.photoRotateStackOpacity)
     }
     .tabIndex(IndexFocusOrder.PHOTO_GRID_VIEW)
@@ -3894,10 +4039,6 @@ export struct PhotoItem {
     }
     this.viewModel.thumbImageColumnModifier?.attribute?.visibility(Visibility.Visible);
     const endParams = this.browserAnimController?.getBrowserToGridAnimationParams(this.mPosition, this.item.uri);
-    // todo 先加个40给他强行挤下去
-    if(endParams.targetTranslate){
-      endParams.targetTranslate.y = Number(endParams.targetTranslate.y) + 40
-    }
     performanceMonitor.begin(this.browserAnimController.getExitAnimTraceName(),
       performanceMonitor?.ActionType.LAST_UP);
     this.viewModel.playImageAnimationAsync(endParams, this.viewModel.getTargetIndex(), (index: number) => {
@@ -3914,13 +4055,11 @@ export struct PhotoItem {
       } else {
         this.ratio = endParams.targetAspectRatio ?? 1;
       }
+      this.geometryScale = 1;
       this.geometryOffsetX = 0;
       this.geometryOffsetY = 0;
       this.viewModel.thumbImageColumnModifier?.updateVisibility(Visibility.Hidden);
-      // TODO 临时规避宫格进大图下拉返回动效问题
-      if (this.browserAnimController.getControllerTypeCamera()) {
-        this.viewModel.setGeometryScale(1);
-      }
+      UiUtil.resetGeometryTransitionParams();
     }, false);
   }
 
@@ -3958,15 +4097,16 @@ export struct PhotoItem {
         this.viewModel.readyToPlayAnim();
       })
       .onError((event: ImageError): void => {
-        this.imageError(event, 'buildImage failed by ThumbnailImage');
+        Log.warn(TAG, `buildThumbnailImage fallback, item: ${this.item?.uri}, error: ${event?.message}`);
+        this.viewModel.thumbImageColumnModifier?.updateVisibility(Visibility.Hidden);
         // 图片加载错误后还是要保障动画播放
         this.viewModel.isThumbnailComplete = true;
         this.viewModel.readyToPlayAnim();
       })
-      .clip(true)
+      .clip(!this.isBrowserNoCropMode())
       .width(Constants.PERCENT_100)
       .height(Constants.PERCENT_100)
-      .objectFit(ImageFit.Cover)
+      .objectFit(this.getBrowserImageFit())
   }
 
   @Styles
@@ -4079,6 +4219,32 @@ export struct PhotoItem {
     }
   }
 
+  private isUltraLongImage(): boolean {
+    let w: number = this.item?.width ?? 0;
+    let h: number = this.item?.height ?? 0;
+    if (w > 0 && h > 0) {
+      return (w / h) >= 3 || (h / w) >= 3;
+    }
+    return this.ratio >= 3 || this.ratio <= 1 / 3;
+  }
+
+  private getBrowserImageFit(): ImageFit {
+
+    if (this.isInBackPressEvent) {
+      return ImageFit.Cover;
+    }
+    // 对超宽图优先全显，避免 Cover 裁切导致主体不可见。
+    if (!this.isThird && this.isUltraLongImage()) {
+      return ImageFit.Contain;
+    }
+    return ImageFit.Cover;
+  }
+
+  private isBrowserNoCropMode(): boolean {
+
+    return !this.isInBackPressEvent && !this.isThird && this.isUltraLongImage();
+  }
+
   private getImageWidth(originalVal?: Length): Length | undefined {
     if (!this.isThird) {
       return originalVal;
@@ -4117,9 +4283,10 @@ export struct PhotoItem {
     .aspectRatio(this.ratio)
     .width(this.needJustifyWidth() ? this.getImageWidth(this.imageWidth) : undefined)
     .height(this.needJustifyWidth() ? undefined : this.getImageHeight(this.imageHeight))
-    .clip(
-      this.isRunningAnimation ? true : (this.isInRotateAction ||
-      this.isInRotateState ? false : ((this.isSubScreen && !DeviceInfo.isPhonePSD()) ? new Circle({ width: '100%', height: '100%' }) : true)))
+    .clip(this.isBrowserNoCropMode() ? false :
+      (this.isRunningAnimation ? true : (this.isInRotateAction ||
+      this.isInRotateState ? false : ((this.isSubScreen && !DeviceInfo.isPhonePSD()) ?
+      new Circle({ width: '100%', height: '100%' }) : true))))
     .geometryTransition(this.geometryTransitionChange())
     .focusBox({
       strokeWidth: LengthMetrics.px(0),
@@ -4329,7 +4496,9 @@ export struct PhotoItem {
       /* instrument ignore next */
       return;
     }
-    if (!this.isInBackPressEvent && !this.isEditor && this.mIsCurrent) {
+
+    const shouldHideOnBackPressForLongImage: boolean = this.isInBackPressEvent && this.isUltraLongImage();
+    if ((!this.isInBackPressEvent || shouldHideOnBackPressForLongImage) && !this.isEditor && this.mIsCurrent) {
       this.stringImageModifier.attribute?.visibility(Visibility.Hidden);
     }
   }
@@ -4445,6 +4614,15 @@ export struct PhotoItem {
       AppStorage.setOrCreate(IS_EDIT_SAVE, true);
     }
 
+
+    if (this.isInBackPressEvent && this.mIsCurrent) {
+      Log.info(TAG, 'skip imageComplete refresh during back animation');
+      this.showError = false;
+      this.isLoading = false;
+      this.isComplete = true;
+      return;
+    }
+
     if (this.lastThumbnail === this.thumbnail) {
       Log.info(TAG, `imageComplete`)
       return;
@@ -4474,6 +4652,9 @@ export struct PhotoItem {
   }
 
   imageError(event: ImageError, scene: string): void {
+    if (this.tryFallbackToLcdOnError(event, scene)) {
+      return;
+    }
     // 大图image加载错误
     if (!ImageUtil.isExitTransparentChannelLocalImgMimeType(this.item)) {
       ReportToBigDataUtil.errEventReport(BigDataConstants.BROWER_IMAGE_LOAD_ERROR,
@@ -4492,126 +4673,233 @@ export struct PhotoItem {
     }
   }
 
+  private resetImageLoadRetryState(): void {
+    this.hasRetriedLoadWithLcd = false;
+    this.hasDelayedLcdRetry = false;
+    if (this.lcdRetryTimer !== -1) {
+      clearTimeout(this.lcdRetryTimer);
+      this.lcdRetryTimer = -1;
+    }
+  }
+
+  private isCloudTransparentChannelImage(): boolean {
+    return ImageUtil.isExitTransparentChannelImgMimeType(this.item) &&
+      this.item?.getPosition?.() === UserFileManagerAccess.FILE_LOCATION_CLOUD;
+  }
+
+  private appendUserIdToImageUri(uri: string): string {
+    if (this.userId > 0) {
+      return uri + (uri.includes('?') ? '&' : '?') + 'user=' + this.userId;
+    }
+    return uri;
+  }
+
+  private getLcdImageUri(forceUpdate: boolean = false): string {
+    let lcdUri: string = ImageUtil.getLCDUri(this.item.uri, this.item.path, this.item.getDateModified?.());
+    if (forceUpdate) {
+      lcdUri += `${lcdUri.includes('?') ? '&' : '?'}forceupdate=true`;
+    }
+    return this.appendUserIdToImageUri(lcdUri);
+  }
+
+  private tryFallbackToLcdOnError(event: ImageError, scene: string): boolean {
+    if (!this.item?.uri || this.item.isGifOrWebpType() || this.isEditor) {
+      return false;
+    }
+    const currentSource: string = this.imageShowStringSource ?? '';
+    const isAstcSource: boolean = currentSource.includes('oper=astc');
+    const isCloud: boolean = this.item.getPosition?.() === UserFileManagerAccess.FILE_LOCATION_CLOUD;
+
+    if (!this.hasRetriedLoadWithLcd && isAstcSource) {
+      const lcdUri: string = this.getLcdImageUri();
+      if (StringUtil.isEmpty(lcdUri)) {
+        return false;
+      }
+      this.hasRetriedLoadWithLcd = true;
+      this.showError = false;
+      this.isLoading = true;
+      this.imageShowStringSource = lcdUri;
+      this.thumbnail = new Thumbnail(lcdUri);
+      Log.warn(TAG, `image load failed, retry with lcd. scene=${scene}, index=${this.mPosition}, uri=${
+        this.item.uri}, path=${this.item.path}, failedSource=${currentSource}, fallbackSource=${lcdUri}, ` +
+        `error=${event?.message}`);
+      return true;
+    }
+
+    if (isCloud && !this.hasDelayedLcdRetry && currentSource.includes('oper=thumbnail')) {
+      this.hasDelayedLcdRetry = true;
+      this.showError = false;
+      if (this.lcdRetryTimer !== -1) {
+        clearTimeout(this.lcdRetryTimer);
+      }
+      this.lcdRetryTimer = setTimeout((): void => {
+        this.lcdRetryTimer = -1;
+        if (this.showError || !this.mIsCurrent) {
+          return;
+        }
+        const retryUri: string = this.getLcdImageUri(true);
+        this.imageShowStringSource = retryUri;
+        this.thumbnail = new Thumbnail(retryUri);
+        Log.warn(TAG, `cloud image delayed lcd retry. scene=${scene}, index=${this.mPosition}, uri=${
+          this.item?.uri}, fallbackSource=${retryUri}`);
+      }, 150);
+      Log.warn(TAG, `cloud image load failed, schedule delayed lcd retry. scene=${scene}, index=${
+        this.mPosition}, uri=${this.item.uri}, error=${event?.message}`);
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * 视频异常时的大图错误占位
+   */
+  @Builder
+  buildVideoErrorPlaceholder() {
+    Stack({ alignContent: Alignment.Center }) {
+      Column() {
+        // 使用系统视频图标作为错误占位
+        SymbolGlyph($r('sys.symbol.resolution_video_fill'))
+          .fontSize(PLAY_BUTTON_SIZE * 2)
+          .fontColor([$r('sys.color.icon_secondary')])
+          .draggable(false)
+      }
+      .justifyContent(FlexAlign.Center)
+      .alignItems(HorizontalAlign.Center)
+    }
+    .width(this.getImageWidth(DeviceInfo.isPc() ? this.imageWidth : this.xComponentWidth))
+    .height(this.getImageHeight(DeviceInfo.isPc() ? this.imageHeight : this.xComponentHeight))
+    .backgroundColor('#e7eaeb')
+    .clip(true)
+  }
+
   /**
    * 视频播放控件子树
    */
   @Builder
   buildVideo() {
-    Stack() {
-      VideoPlayer({
-        stateMachine: this.photoBrowserStateMachine,
-        isEditor: this.isEditor,
-        item: this.item,
-        replaceUriManager: this.replaceUriManager,
-        /* instrument ignore next */
-        src: this.isEditor ? this.editorImageUri : this.item.uri,
-        path: this.item.path,
-        /* instrument ignore next */
-        coverWidth: this.isEditor ? this.replaceUriManager?.getReplaceMediaItem(this.item)?.coverWidth ?? 0 :
-        this.item.coverWidth,
-        /* instrument ignore next */
-        coverHeight: this.isEditor ? this.replaceUriManager?.getReplaceMediaItem(this.item)?.coverHeight ?? 0 :
-        this.item.coverHeight,
-        dateModified: this.item.getDateModified?.(),
-        thumbnail: this.thumbnail,
-        imageShowSource: this.imageShowPixMapSource,
-        /* instrument ignore next */
-        imageComplete: (event?: completed): void => this.imageComplete(event, true),
-        /* instrument ignore next */
-        imageError: (event: ImageError): void => this.imageError(event, 'buildVideo'),
-        placeHolderImage: this.getPlaceHolderImage(),
-        isRunningAnimation: $isRunningAnimation,
-        broadCast: this.broadCast,
-        mediaPosition: this.mediaPosition,
-        /* instrument ignore next */
-        maxTime: this.isEditor ? this.replaceUriManager?.getReplaceMediaItem(this.item)?.duration ?? 0 :
-        this.item.duration,
-        videoRealWidth: this.videoRealWidth,
-        videoRealHeight: this.videoRealHeight,
-        videoRatio: this.videoRatio,
-        xComponentHeight: $xComponentHeight,
-        onVideoPlayButtonClick: this.onVideoPlayButtonClickFunc,
-        geometryTransitionId: $geometryTransitionId,
-        pauseFromSubScreen: this.pauseFromSubScreen,
-        pageStatusValue: this.pageStatus,
-        xComponentController: this.xComponentController,
-        mIsCurrent: this.mIsCurrent,
-        videoCoverFrame: this.videoCoverFrame,
-        isFrameExpand: this.isFrameExpand,
-        playType: this.getPlayType(),
-        progressType: this.getProgressType(),
-        isFromPickerView: this.isFromPickerView,
-        geometryOffsetX: this.geometryOffsetX,
-        geometryOffsetY: this.geometryOffsetY,
-        albumInfo: this.albumInfo,
-        /* instrument ignore next */
-        isThird: this.isThird,
-        canFastPlay: this.canFastPlay(),
-        onValueChange: this.handleValueChange.bind(this),
-        hideThumbnailImageFunc: this.viewModel.hideThumbnailImageFunc
-      })
-        .width(Constants.PERCENT_100)
-        .height(Constants.PERCENT_100)
-        .attributeModifier(this.viewModel.thumbImageStackModifier)
-        .borderColor(Color.White)
-        .clip(!this.isFromPickerView)
-    }
-    .accessibilityLevel('no')
-    .attributeModifier(this.isStackModifierChange ? this.viewModel.stackModifier : this.viewModel.stackModifier)
-    .blur(this.isSupportBlurEnabled() ? this.itemBlur : 0)
-    .focusable(true)
-    .width(this.getImageWidth(DeviceInfo.isPc() ? this.imageWidth : this.xComponentWidth))
-    .height(this.getImageHeight(DeviceInfo.isPc() ? this.imageHeight : this.xComponentHeight))
-    .aspectRatio(this.videoRatio)
-    .geometryTransition(this.isFromPickerView ? '' : this.geometryTransitionChange())
-    .offset({
-      x: this.isFromPickerView ? 0 : this.geometryOffsetX,
-      y: this.isFromPickerView ? 0 : this.geometryOffsetY,
-    })
-    .clip(!this.isFromPickerView)
-    .onClick((event: ClickEvent) => {
-      if (this.isThird || this.isInSelectedMode) {
-        /* instrument ignore next */
-        this.handlePauseClick();
-      }
-      if (DeviceInfo.isPhoneOrTablet() && this.viewModel.isPropertiesShow() && !this.isTouchingPullUp) {
-        this.broadCast.emit(BrowserConstants.CLOSE_CLICK_DETAIL_PULLING_UP + this.item.uniqueId,
-          [this.item.uniqueId]);
-      }
-    }, distanceThreshold as number)
-    .onGestureJudgeBegin((gestureInfo: GestureInfo, event: BaseGestureEvent) => {
-      // 旋转后swiper 和 该pangesture手势 冲突，导致无法滑动，提前拦截 --- 旋转横向拉详情 详情反复下滑导致无法在图片区域pangesture下滑退出详情
-      if (gestureInfo.type === GestureControl.GestureType.PAN_GESTURE &&
-        this.angle / BrowserConstants.ROTATION_NINETY % 2 !== 0) {
-        /* instrument ignore next  */
-        Log.info(TAG, `photoViewArea gesture reject`);
-        /* instrument ignore next  */
-        return GestureJudgeResult.REJECT;
-      }
-      return GestureJudgeResult.CONTINUE;
-    })
-    .gesture(
-      GestureGroup(GestureMode.Exclusive,
-        TapGesture({
-          count: 1,
+    // 视频格式或内容异常时，使用错误占位，避免大图白屏
+    if (this.isVideoError) {
+      this.buildVideoErrorPlaceholder();
+    }else {
+
+      Stack() {
+        VideoPlayer({
+          stateMachine: this.photoBrowserStateMachine,
+          isEditor: this.isEditor,
+          item: this.item,
+          replaceUriManager: this.replaceUriManager,
+          /* instrument ignore next */
+          src: this.isEditor ? this.editorImageUri : this.item.uri,
+          path: this.item.path,
+          /* instrument ignore next */
+          coverWidth: this.isEditor ? this.replaceUriManager?.getReplaceMediaItem(this.item)?.coverWidth ?? 0 :
+            this.item.coverWidth,
+          /* instrument ignore next */
+          coverHeight: this.isEditor ? this.replaceUriManager?.getReplaceMediaItem(this.item)?.coverHeight ?? 0 :
+            this.item.coverHeight,
+          dateModified: this.item.getDateModified?.(),
+          thumbnail: this.thumbnail,
+          imageShowSource: this.imageShowPixMapSource,
+          /* instrument ignore next */
+          imageComplete: (event?: completed): void => this.imageComplete(event, true),
+          /* instrument ignore next */
+          imageError: (event: ImageError): void => this.imageError(event, 'buildVideo'),
+          placeHolderImage: this.getPlaceHolderImage(),
+          isRunningAnimation: $isRunningAnimation,
+          broadCast: this.broadCast,
+          mediaPosition: this.mediaPosition,
+          /* instrument ignore next */
+          maxTime: this.isEditor ? this.replaceUriManager?.getReplaceMediaItem(this.item)?.duration ?? 0 :
+            this.item.duration,
+          videoRealWidth: this.videoRealWidth,
+          videoRealHeight: this.videoRealHeight,
+          videoRatio: this.videoRatio,
+          xComponentHeight: $xComponentHeight,
+          onVideoPlayButtonClick: this.onVideoPlayButtonClickFunc,
+          geometryTransitionId: $geometryTransitionId,
+          pauseFromSubScreen: this.pauseFromSubScreen,
+          pageStatusValue: this.pageStatus,
+          xComponentController: this.xComponentController,
+          mIsCurrent: this.mIsCurrent,
+          videoCoverFrame: this.videoCoverFrame,
+          isFrameExpand: this.isFrameExpand,
+          playType: this.getPlayType(),
+          progressType: this.getProgressType(),
+          isFromPickerView: this.isFromPickerView,
+          geometryOffsetX: this.geometryOffsetX,
+          geometryOffsetY: this.geometryOffsetY,
+          albumInfo: this.albumInfo,
+          /* instrument ignore next */
+          isThird: this.isThird,
+          canFastPlay: this.canFastPlay(),
+          onValueChange: this.handleValueChange.bind(this),
+          hideThumbnailImageFunc: this.viewModel.hideThumbnailImageFunc
         })
-          .onAction((event?: GestureEvent): void => {
-            Log.info(TAG, `image single tab gesture ${!this.viewModel.isPropertiesShow()} ${this.isTouchingPullUp} ${this.isShowVideo} isInSelectedMode:${this.isInSelectedMode}`);
-            if (this.viewModel.isPropertiesShow() && !this.isTouchingPullUp && !DeviceInfo.isPc()) {
-              this.broadCast.emit(BrowserConstants.CLOSE_CLICK_DETAIL_PULLING_UP + this.item.uniqueId,
-                [this.item.uniqueId]);
-            }
-            if (this.isSubScreen && this.isShowVideo) {
-              /* instrument ignore next */
-              this.appBroadCast.emit(BroadCastConstants.PAUSE_FROM_SUB_SCREEN, []);
-            }
-          }),
-        PanGesture(this.panOption)
-          .onActionStart((event: GestureEvent) => {
-            this.eventOnMainPhotoView = true;
+          .width(Constants.PERCENT_100)
+          .height(Constants.PERCENT_100)
+          .attributeModifier(this.viewModel.thumbImageStackModifier)
+          .borderColor(Color.White)
+          .clip(!this.isFromPickerView)
+      }
+      .accessibilityLevel('no')
+      .attributeModifier(this.isStackModifierChange ? this.viewModel.stackModifier : this.viewModel.stackModifier)
+      .blur(this.isSupportBlurEnabled() ? this.itemBlur : 0)
+      .focusable(true)
+      .width(this.getImageWidth(DeviceInfo.isPc() ? this.imageWidth : this.xComponentWidth))
+      .height(this.getImageHeight(DeviceInfo.isPc() ? this.imageHeight : this.xComponentHeight))
+      .aspectRatio(this.videoRatio)
+      .geometryTransition(this.isFromPickerView ? '' : this.geometryTransitionChange())
+      .offset({
+        x: this.isFromPickerView ? 0 : this.geometryOffsetX,
+        y: this.isFromPickerView ? 0 : this.geometryOffsetY,
+      })
+      .clip(!this.isFromPickerView)
+      .onClick((event: ClickEvent) => {
+        if (this.isThird || this.isInSelectedMode) {
+          /* instrument ignore next */
+          this.handlePauseClick();
+        }
+        if (DeviceInfo.isPhoneOrTablet() && this.viewModel.isPropertiesShow() && !this.isTouchingPullUp) {
+          this.broadCast.emit(BrowserConstants.CLOSE_CLICK_DETAIL_PULLING_UP + this.item.uniqueId,
+            [this.item.uniqueId]);
+        }
+      }, distanceThreshold as number)
+      .onGestureJudgeBegin((gestureInfo: GestureInfo, event: BaseGestureEvent) => {
+        // 旋转后swiper 和 该pangesture手势 冲突，导致无法滑动，提前拦截 --- 旋转横向拉详情 详情反复下滑导致无法在图片区域pangesture下滑退出详情
+        if (gestureInfo.type === GestureControl.GestureType.PAN_GESTURE &&
+          this.angle / BrowserConstants.ROTATION_NINETY % 2 !== 0) {
+          /* instrument ignore next  */
+          Log.info(TAG, `photoViewArea gesture reject`);
+          /* instrument ignore next  */
+          return GestureJudgeResult.REJECT;
+        }
+        return GestureJudgeResult.CONTINUE;
+      })
+      .gesture(
+        GestureGroup(GestureMode.Exclusive,
+          TapGesture({
+            count: 1,
           })
+            .onAction((event?: GestureEvent): void => {
+              Log.info(TAG, `image single tab gesture ${!this.viewModel.isPropertiesShow()} ${this.isTouchingPullUp} ${this.isShowVideo} isInSelectedMode:${this.isInSelectedMode}`);
+              if (this.viewModel.isPropertiesShow() && !this.isTouchingPullUp && !DeviceInfo.isPc()) {
+                this.broadCast.emit(BrowserConstants.CLOSE_CLICK_DETAIL_PULLING_UP + this.item.uniqueId,
+                  [this.item.uniqueId]);
+              }
+              if (this.isSubScreen && this.isShowVideo) {
+                /* instrument ignore next */
+                this.appBroadCast.emit(BroadCastConstants.PAUSE_FROM_SUB_SCREEN, []);
+              }
+            }),
+          PanGesture(this.panOption)
+            .onActionStart((event: GestureEvent) => {
+              this.eventOnMainPhotoView = true;
+            })
+        )
       )
-    )
+    }
+
   }
 
   private handlePauseClick(): void {
@@ -4658,8 +4946,14 @@ export struct PhotoItem {
   }
   /* instrument ignore next */
   private editorBackPhotoItem(): void {
-    Log.info(TAG, '[editorPhotoContext] editorBackPhotoItem set isEditorBack true');
+    const editorExitUri: string | undefined = EditorPhotoContext.getInstance().getEditorUriOnExit();
+    if (!editorExitUri || editorExitUri !== this.item?.uri) {
+      return;
+    }
+    Log.info(TAG, `[editorPhotoContext] editorBackPhotoItem overwrite save, uri: ${this.item.uri}`);
     this.isEditorBack = true;
+    this.editOverwriteUri = editorExitUri;
+    this.resetEditReturnTransformState();
   }
 
   private showVideoPlayButton(): boolean {
@@ -4669,6 +4963,10 @@ export struct PhotoItem {
     !this.isShowVideo}, isVideoPlaying: ${this.isVideoPlaying}, isShowPlayButton: ${this.isShowPlayButton}, isClickPlay: ${(this.isShowPlayButton ||
       this.getPlayType() === PlayType.CLICK_TO_PLAY)}, ${
     !(this.viewModel.isPropertiesShow() && this.isFullMode)}, shareIsShowPlayButton: ${this.shareIsShowPlayButton}`);
+    // 视频异常或格式不支持时，不展示播放按钮
+    if (this.isVideoError || !this.isSupportedVideoType) {
+      return false;
+    }
     return !this.isDoingDeleteAnim && !this.isPullDownAndDragPhoto && !this.isInAnimateToPosition &&
       (!this.isShowVideo || (DeviceInfo.isTv() && this.isVideoPlaying)) &&
       (this.isShowPlayButton || this.getPlayType() === PlayType.CLICK_TO_PLAY) &&
@@ -4702,19 +5000,34 @@ export struct PhotoItem {
   private canFastPlay(): boolean {
     return !this.isThird && !this.isFromFACard && !this.isInSelectedMode;
   }
-
-
   updateBroadcastWithItem(item: MediaItem): void {
     if (this.item === item) {
       /* instrument ignore next */
       return;
     }
+    this.appBroadCast.off(BroadCastConstants.DOWNLOAD_ORIGIN_PHOTO_RESULT + this.item.uri,
+      this.downloadOriginPhotoResultFunc);
+    this.broadCast.off(BrowserConstants.RESET_DEFAULT_SCALE + this.item.uri, this.resetDefaultScaleFunc);
     this.broadCast.off(BroadCastConstants.ANIMATE_TO_POSITION + this.item.uri, this.animateToPositionFunc);
+    this.broadCast.off(BroadCastConstants.RESET_POSITION + this.item.uniqueId, this.resetPositionFunc);
+    this.broadCast.off(BroadCastConstants.JUMP_TO_BURST + this.item.uri, this.resetMatrixFunc);
+    this.broadCast.off(PhotoDataAdapter.EVENT_THUMBNAIL_LOADED_PREFIX + this.item.uniqueId, this.thumbnailLoadedFunc);
+    this.appBroadCast.off(BroadCastConstants.FIRST_CLICK_TO_PLAY_VIDEO + this.item.uri, this.handlePauseClickFunc);
+    this.broadCast.off(BrowserConstants.OPEN_CLICK_DETAIL_PULLING_UP + this.item.uniqueId,
+      this.openClickDetailPullingUpAnimationFunc);
+    this.broadCast.off(BrowserConstants.CLOSE_CLICK_DETAIL_PULLING_UP + this.item.uniqueId,
+      this.closeClickDetailPullingUpAnimationFunc);
+    this.broadCast.off(BrowserConstants.CLOSE_CLICK_DETAIL_BY_BACK_PRESS + this.item.path,
+      this.closeClickDetailByBackPressFun);
+    this.broadCast.off(BrowserConstants.PHOTO_RESET_ROTATION + this.item.uniqueId,
+      this.resetPhotoDefaultRotationFun);
+    this.appBroadCast.off(BroadCastConstants.CAST_UPDATE_POSITION + this.item.uri, this.updateCastMPosition);
     this.item = item;
-    // 防止重复注册，重复注册会导致callBack函数多次执行，且需要多次取消注册
-    if (!this.broadCast.has(BroadCastConstants.ANIMATE_TO_POSITION + this.item.uri)) {
-      this.broadCast.on(BroadCastConstants.ANIMATE_TO_POSITION + this.item.uri, this.animateToPositionFunc);
+    this.isDelayRegisterUriBroadcast = !this.item.uri || !this.item.uniqueId;
+    if (!this.isDelayRegisterUriBroadcast) {
+      this.registerUriBroadcast();
     }
+    this.appBroadCast.on(BroadCastConstants.CAST_UPDATE_POSITION + this.item.uri, this.updateCastMPosition);
   }
   /* instrument ignore next */
   onStatusBarHeightChange(): void {
@@ -6666,9 +6979,17 @@ export struct PhotoItem {
    * 计算图片展示信息
    */
   private calculateImageAbsolutePos(isEdit: boolean = false): RectValue {
-    let screenWidth: number = vp2px(this.viewModel.windowLayoutWidth - (DeviceInfo.isPc() &&
-      (this.isDetailSelected || this.viewModel.isPropertiesShow()) ? Constants.PROPERTIES_WIDTH : 0));
-    let screenHeight: number = vp2px(this.viewModel.windowLayoutHeight);
+    let screenWidth: number;
+    let screenHeight: number;
+    if (this.viewModel.checkNeedJustify()) {
+      let layoutSize: LayoutContentMaxPx = this.getLayoutContentMaxSizePx(isEdit);
+      screenWidth = layoutSize.maxWidth;
+      screenHeight = layoutSize.maxHeight;
+    } else {
+      screenWidth = vp2px(this.viewModel.windowLayoutWidth - (DeviceInfo.isPc() &&
+        (this.isDetailSelected || this.viewModel.isPropertiesShow()) ? Constants.PROPERTIES_WIDTH : 0));
+      screenHeight = vp2px(this.viewModel.windowLayoutHeight);
+    }
     let imageLeft: number;
     let imageTop: number;
     let imageWidth: number;
@@ -6757,13 +7078,15 @@ export struct PhotoItem {
         /* instrument ignore if */
         if (this.justifyWidth) {
           /* instrument ignore next */
-          let winWidthTmp = this.viewModel.windowLayoutWidth;
+          let layoutSize: LayoutContentMaxPx = this.getLayoutContentMaxSizePx(false);
+          let winWidthTmp: number = px2vp(layoutSize.maxWidth);
           this.imageStackHeight = winWidthTmp?.toString();
           this.imageStackWidth = (winWidthTmp * this.ratio).toString();
           Log.info(TAG, `winWidthTmp=${winWidthTmp}`);
           /* instrument ignore next */
         } else {
-          let winHeightTmp = this.viewModel.windowLayoutHeight;
+          let layoutSize: LayoutContentMaxPx = this.getLayoutContentMaxSizePx(false);
+          let winHeightTmp: number = px2vp(layoutSize.maxHeight);
           this.imageStackWidth = winHeightTmp.toString();
           this.imageStackHeight = (winHeightTmp / this.ratio).toString();
           Log.info(TAG, `winHeightTmp=${winHeightTmp},ratio=${this.ratio}`);
@@ -6894,17 +7217,18 @@ export struct PhotoItem {
     }
     // 将图片缩放矩阵复原
     /* instrument ignore if */
-    if (this.isPhotoScaled) {
+    if (this.hasTransformResidue() || this.isInAnimateToPosition) {
       TraceControllerUtils.startTrace('onTransitionChange matrix');
-      this.matrix = Matrix4.identity().copy();
-      this.viewModel.stackModifier?.attribute?.transform(this.matrix);
-      this.eventPipeline?.reset();
-      this.updatePhotoScaledStatus();
+      this.resetEditReturnTransformState();
       TraceControllerUtils.finishTrace('onTransitionChange matrix');
     }
     // 画中画变量逻辑更新
     this.updateAbleEnterInnerPic();
     this.updateInnerPicInfo();
+    if (this.isEditSaveReload || this.isEditorBack || EditorPhotoContext.getInstance().getNotifyHideEditor()) {
+      this.changeStringIfEditor();
+      this.onViewDataChanged();
+    }
     Log.info(TAG, `onTransitionChange end, isPullingDown: ${this.isPullingDown}`);
     TraceControllerUtils.finishTrace('onTransitionChange');
     this.onPhotoChanged();
@@ -6916,13 +7240,11 @@ export struct PhotoItem {
   }
 
   /**
-   * 利用图片宽高值，计算图片在 Image 中是否应该优先宽度充满整个控件
-   *
-   * @returns 返回 True 如果应该宽度优先充满控件
+   * 浏览器内容区最大宽高（px），与 needJustifyWidth 判定及大图/旋转布局共用，避免 PC 下扣除顶栏底栏后仍按全屏高度绘制导致遮挡返回栏。
    */
-  private needJustifyWidth(isEdit: boolean = false): boolean {
+  private getLayoutContentMaxSizePx(isEdit: boolean): LayoutContentMaxPx {
     let maxWidth = vp2px(this.viewModel.windowLayoutWidth - ((DeviceInfo.isPc() && this.isShowSideBar && !isEdit) ?
-    this.sideBarWidth : 0) - ((DeviceInfo.isPc() && this.isDetailSelected) ? Constants.PROPERTIES_WIDTH : 0));
+      this.sideBarWidth : 0) - ((DeviceInfo.isPc() && this.isDetailSelected) ? Constants.PROPERTIES_WIDTH : 0));
     let maxHeight =
       vp2px(this.viewModel.windowLayoutHeight -
         (DeviceInfo.isPc() && !this.isThird && this.isShowBar ? (this.previewStackHeight +
@@ -6931,7 +7253,6 @@ export struct PhotoItem {
       /* instrument ignore next */
       maxHeight = maxHeight / 2;
     }
-
     if (DeviceInfo.isPc() && !this.isShowBar && this.windowStatus === window.WindowStatusType.FULL_SCREEN) {
       try {
         let winDisplay = display.getDefaultDisplaySync();
@@ -6940,6 +7261,19 @@ export struct PhotoItem {
         Log.error(TAG, `getDefaultDisplaySync error msg: ${error?.msg}, code: ${error?.code}`);
       }
     }
+    let result: LayoutContentMaxPx = { maxWidth: maxWidth, maxHeight: maxHeight };
+    return result;
+  }
+
+  /**
+   * 利用图片宽高值，计算图片在 Image 中是否应该优先宽度充满整个控件
+   *
+   * @returns 返回 True 如果应该宽度优先充满控件
+   */
+  private needJustifyWidth(isEdit: boolean = false): boolean {
+    let layoutSize: LayoutContentMaxPx = this.getLayoutContentMaxSizePx(isEdit);
+    let maxWidth = layoutSize.maxWidth;
+    let maxHeight = layoutSize.maxHeight;
 
     // 适配xxx视频上云再下行宽高异常后，pc显示不完全问题，此处videoRatio值由视频封面解析得出
     let curRatio = (DeviceInfo.isPc() && this.viewModel.isVideo()) ? this.videoRatio : this.ratio;
@@ -7233,6 +7567,8 @@ export struct PhotoItem {
   private setIsSupportedVideoType(isSupportedVideoType: boolean, src: string): void {
     if (this.item.uri === src) {
       this.isSupportedVideoType = isSupportedVideoType;
+      // 不支持的视频格式，进入错误态，用错误占位替代原视频画面
+      this.isVideoError = !isSupportedVideoType;
     }
   }
 
@@ -7315,6 +7651,12 @@ export struct PhotoItem {
       } catch (err) {
         Log.error(TAG, `calculateXComponentSize display.getDefaultDisplaySync, error code : ${err.code}`)
       }
+    }
+    // 三方/VIEWDATA 场景下，视频使用 XComponent 渲染无法被普通 ArkUI 组件覆盖，
+    // 若不预留底部栏高度，会出现“视频内容挡住底部功能/预览条”的问题
+    if (this.isThird && this.isShowBar && !DeviceInfo.isPc() && !this.isHorizontal && this.viewModel.isVideo()) {
+      const bottomReserveVp: number = Constants.ToolBarAvoidHeight + Constants.ToolBarHeight + Constants.PreviewHeight;
+      winHeight = Math.max(0, winHeight - vp2px(bottomReserveVp));
     }
     let isWindowPcmodeSwitchStatus = this.windowPcmodeSwitchStatus;
     if (DeviceInfo.isPcOrTablet() && isWindowPcmodeSwitchStatus) {

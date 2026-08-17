@@ -14,7 +14,6 @@
  */
 
 import lazy { CommonContext } from '../model/browser/photo/TimelineDataManager';
-import lazy { dataSharePredicates } from '@kit.ArkData';
 import lazy { ErrorEvent, MessageEvents, ThreadWorkerGlobalScope, worker } from '@kit.ArkTS';
 import lazy { Log } from '../utils/Log';
 import lazy { photoAccessHelper } from '@kit.MediaLibraryKit';
@@ -79,7 +78,7 @@ workerPort.onerror = (e: ErrorEvent) => {
 
 async function startCreateThumbnailTaskAsync(
   context: CommonContext,
-  orderDesc: photoAccessHelper.PhotoKeys = UserFileManagerAccess.FILE_KEY_DATE_TAKEN_MS
+  _orderDesc: photoAccessHelper.PhotoKeys = UserFileManagerAccess.FILE_KEY_DATE_TAKEN_MS
 ): Promise<void> {
   if (readyTimerId !== 0) {
     Log.info(TAG, 'startCreateThumbnailTaskAsync readyTimerId != 0');
@@ -90,36 +89,8 @@ async function startCreateThumbnailTaskAsync(
     return;
   }
 
-  let photoHelper: photoAccessHelper.PhotoAccessHelper = photoAccessHelper.getPhotoAccessHelper(context);
-  if (!photoHelper) {
-    Log.error(TAG, 'startCreateThumbnailTaskAsync photoAccessHelper undefined');
-    return;
-  }
-
-  readyTimerId = setInterval(() => {
-    if (readyRequestId === ALL_THUMBNAIL_READY) {
-      Log.info(TAG, 'all thumbnail are ready');
-      clearInterval(readyTimerId);
-      readyTimerId = 0;
-
-      readyRequestId = 0;
-      isProcessingReady = false;
-      clearInterval(readyTimerId);
-      readyTimerId = 0;
-      workerPort.postMessage({ isProcessingReady: isProcessingReady });
-      return;
-    }
-    if (readyRequestId !== 0) {
-      Log.debug(TAG, 'readyRequestId != 0, no need to startCreateThumbnailTaskAsync again.');
-      return;
-    }
-
-    let predicates: dataSharePredicates.DataSharePredicates = new dataSharePredicates.DataSharePredicates();
-    Log.debug(TAG, `startCreateThumbnailTask order by ${orderDesc}`)
-    predicates.orderByDesc(orderDesc);
-    Log.info(TAG, `startCreateThumbnailTaskAsync requestId: ${readyRequestId}`);
-  }, START_CREATE_THUMBNAIL_TASK_DURATION);
-  isProcessingReady = true;
+  Log.info(TAG, 'startCreateThumbnailTaskAsync: SDK has no startCreateThumbnailTask, use getThumbnail on demand');
+  isProcessingReady = false;
   workerPort.postMessage({ isProcessingReady: isProcessingReady });
 }
 
@@ -129,24 +100,12 @@ function stopCreateThumbnailTaskAsync(context: CommonContext): void {
     return;
   }
 
-  let photoHelper: photoAccessHelper.PhotoAccessHelper = photoAccessHelper.getPhotoAccessHelper(context);
-  if (!photoHelper) {
-    Log.error(TAG, 'stopCreateThumbnailTaskAsync photoAccessHelper undefined');
-    return;
+  if (readyTimerId !== 0) {
+    clearInterval(readyTimerId);
+    readyTimerId = 0;
   }
-  if (readyTimerId === 0) {
-    Log.info(TAG, 'stopCreateThumbnailTaskAsync no need to clear thumbnail task interval');
-    return;
-  }
-
-  clearInterval(readyTimerId);
-  readyTimerId = 0;
-  Log.info(TAG, `stopCreateThumbnailTaskAsync requestId: ${readyRequestId}`);
+  Log.info(TAG, 'stopCreateThumbnailTaskAsync: SDK has no stopCreateThumbnailTask, clear local state only');
   readyRequestId = 0;
   isProcessingReady = false;
   workerPort.postMessage({ isProcessingReady: isProcessingReady });
-}
-
-function resetReadyRequestId(): void {
-  readyRequestId = 0;
 }

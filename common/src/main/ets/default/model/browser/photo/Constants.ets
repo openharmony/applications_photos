@@ -436,6 +436,8 @@ export class Constants {
   public static readonly LOAD_YUV_PIXEL_MAP: string = 'loadYuvPixelMap';
   // 全搜引起页面刷新
   public static readonly DATA_LOAD_FINISH_PREVIEWER_REFRESH: string = 'data_load_finish_previewer_refresh';
+  /** 标准相册 ViewData完成 enableGetData 后的 flush，通知 Swiper 同步 curItem。 */
+  public static readonly VIEWDATA_FLUSH_BIND_SYNC: string = 'viewdata_flush_bind_sync';
   // 全搜预览条出现广播延时
   public static readonly DATA_LOAD_FINISH_BROADCAST_DELAY: number = 100;
   // 点击播放按钮 list滑动曲线

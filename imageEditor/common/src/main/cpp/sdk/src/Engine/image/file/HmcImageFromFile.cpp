@@ -112,9 +112,8 @@ VOID *HmcImageFromFile::Serialize(UINT32 *size)
     }
 
     // 拷贝文件头字符串
-    if (strcpy_s(buffer, bufferSize, header.c_str()) <= 0) {
-        LOGE("strcpy_s error");
-    }
+    strncpy(buffer, header.c_str(), bufferSize);
+    buffer[bufferSize - 1] = '\0';
 
     // 把文件内容读入缓冲区
     UINT32 leftSize(fileSize);

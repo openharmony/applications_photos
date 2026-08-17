@@ -164,7 +164,12 @@ export class DuplicateMediaDataSource extends MediaDataSource implements IndexCo
   public getMediaItemSafely(index: number): MediaItem {
     let mediaItem: MediaItem = super.getMediaItemSafely(index);
     if (mediaItem.uri && !mediaItem.thumbnail) {
-      mediaItem.thumbnail = ImageUtil.getThumbnailAstcUri(mediaItem.uri, mediaItem.path, mediaItem.getDateModified());
+      if (ImageUtil.isLongImage(mediaItem.width, mediaItem.height)) {
+        mediaItem.thumbnail = ImageUtil.getThumbnailJpgUriWithSize(mediaItem.uri, mediaItem.path, mediaItem.getDateModified(),
+          256, 256, 0);
+      } else {
+        mediaItem.thumbnail = ImageUtil.getThumbnailAstcUri(mediaItem.uri, mediaItem.path, mediaItem.getDateModified());
+      }
     }
     return mediaItem;
   }

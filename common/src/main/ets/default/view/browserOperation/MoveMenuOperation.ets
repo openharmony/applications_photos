@@ -80,21 +80,14 @@ export class MoveMenuOperation extends ProcessMenuOperation {
       Log.error(TAG, 'menuContext is null, return');
       return;
     }
-    if (this.menuContext.fromPage === Constants.MEDIA_OPERATION_FROM_PHOTO_BROWSER) {
-      this.menuContext.broadCast?.emit(BroadCastConstants.SHOW_PROGRESS_DIALOG,
-        [$r('app.string.move_progress', this.albumName), this.moveCancelFunc, undefined, this.PROGRESS_MESSAGE_WIDTH]);
-    } else {
-      this.menuContext.broadCast?.emit(BroadCastConstants.SHOW_PROGRESS_DIALOG,
-        [$r('app.string.move_progress', this.albumName), this.moveCancelFunc, true, this.PROGRESS_MESSAGE_WIDTH]);
-    }
-
-    AppStorage.setOrCreate<string>('choiceMode', 'None');
     /* instrument ignore else*/
     if (this.menuContext.selectManager) {
       this.count = this.menuContext.selectManager.getSelectedCount();
       /* instrument ignore if */
       if (this.count <= 0) {
         Log.error(TAG, 'count <= 0, return');
+        // 兜底：避免此前残留的进度弹窗造成“卡住”观感
+        this.menuContext.broadCast?.emit(BroadCastConstants.HIDE_PROGRESS_DIALOG, []);
         return;
       }
       this.onOperationEnd = this.menuContext.onOperationEnd;
@@ -107,6 +100,8 @@ export class MoveMenuOperation extends ProcessMenuOperation {
       this.onOperationEnd = this.menuContext.onOperationEnd;
       if (mediaItem == null) {
         Log.error(TAG, 'mediaItem is null, return');
+
+        this.menuContext.broadCast?.emit(BroadCastConstants.HIDE_PROGRESS_DIALOG, []);
         return;
       }
       if (this.menuContext.isBurstPhotos) {
@@ -115,6 +110,17 @@ export class MoveMenuOperation extends ProcessMenuOperation {
         this.callback([mediaItem.uri]);
       }
     }
+
+
+    if (this.menuContext.fromPage === Constants.MEDIA_OPERATION_FROM_PHOTO_BROWSER) {
+      this.menuContext.broadCast?.emit(BroadCastConstants.SHOW_PROGRESS_DIALOG,
+        [$r('app.string.move_progress', this.albumName), this.moveCancelFunc, undefined, this.PROGRESS_MESSAGE_WIDTH]);
+    } else {
+      this.menuContext.broadCast?.emit(BroadCastConstants.SHOW_PROGRESS_DIALOG,
+        [$r('app.string.move_progress', this.albumName), this.moveCancelFunc, true, this.PROGRESS_MESSAGE_WIDTH]);
+    }
+
+    AppStorage.setOrCreate<string>('choiceMode', 'None');
     this.doActionNext();
   }
 

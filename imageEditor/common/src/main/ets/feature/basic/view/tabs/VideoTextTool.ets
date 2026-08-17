@@ -332,9 +332,9 @@ export struct VideoTextTool {
         .id('textTab_' + item.key + (this.asset.textEdit().tabIndex == index ? '_on' : '_off'))
         .accessibilityText(UiUtil.getResourceString(
           this.cropTextResource(this.asset.textEdit().tabIndex, index, item)))
-        .bindPopup(this.isShowBorder && this.isShowInPopup &&
+        .bindPopup(this.isShowInPopup &&
           ((DeviceUtil.isFoldable() && !ScreenManager.getInstance().isDeviceFold()) || DeviceUtil.isPad() ||
-          DeviceUtil.isPc()) && item.key === 'style' && this.textCanClickStyle, {
+          DeviceUtil.isPc()) && item.key === 'style', {
           builder: this.fontStylesBuilder(),
           popupColor: $r('sys.color.comp_background_tertiary'),
           enableArrow: true,
@@ -354,7 +354,7 @@ export struct VideoTextTool {
             }
           }
         })
-        .enabled(!this.textInputAreaHide && (item.key !== 'style' || this.textCanClickStyle))
+        .enabled(!this.textInputAreaHide)
         .onClick(() => this.menuBtnOnClickEvent(item.key))
         .backgroundColor(this.buttonHoverStates[index] ? $r('sys.color.ohos_id_color_hover_transparent') :
         AppColor.black(0))
@@ -373,17 +373,49 @@ export struct VideoTextTool {
       this.addTextBox();
       this.editor.isInTextArea = true;
     }
-    if (key === 'style' && this.textCanClickStyle) {
-      //textArea赋值
-      this.textArea = this.textAreaManager.getEditingTextArea();
-      // instrument ignore if
-      if (!this.textArea) {
-        HiLog.i(TAG, 'currentEdit textArea is undefined');
-        return;
-      }
+    if (key === 'style') {
+      this.ensureTextAreaSelectedForStyle();
       this.isShowInPopup = true;
       HiLog.i(TAG,
         `currentEdit textArea isShowBorder:${this.isShowBorder},isShowInPopup:${this.isShowInPopup}`)
     }
+  }
+
+  private ensureTextAreaSelectedForStyle(): void {
+    // 优先使用当前正在编辑的文本框
+    this.textArea = this.textAreaManager.getEditingTextArea();
+    if (this.textArea) {
+      this.editor.isInTextArea = true;
+      this.textCanClickStyle = true;
+      return;
+    }
+
+    const textAreaList = this.textAreaManager.getTextAreaList();
+    // 没有任何文本框时自动创建并选中
+    if (textAreaList.length === 0) {
+      if (this.textAreaManager.checkTextNumber()) {
+        return;
+      }
+      this.textAreaManager.register(
+        this.asset.textEdit().textRect.width,
+        this.asset.textEdit().textRect.height,
+        this.isScreenPortrait
+      );
+      this.textCanUndo = this.undoRedoManager.canUndo();
+      this.textCanRedo = this.undoRedoManager.canRedo();
+      this.textArea = this.textAreaManager.getEditingTextArea();
+      this.editor.isInTextArea = true;
+      this.textCanClickStyle = true;
+      HiLog.i(TAG, `style click auto create textArea id:${this.textArea?.id}`);
+      return;
+    }
+
+    // 有文本框但当前没有选中时，默认选中最近一个
+    const latestTextArea = textAreaList[textAreaList.length - 1];
+    this.textAreaManager.flush(latestTextArea.id);
+    this.textArea = this.textAreaManager.getEditingTextArea();
+    this.editor.isInTextArea = true;
+    this.textCanClickStyle = true;
+    HiLog.i(TAG, `style click auto select textArea id:${latestTextArea.id}`);
   }
 }

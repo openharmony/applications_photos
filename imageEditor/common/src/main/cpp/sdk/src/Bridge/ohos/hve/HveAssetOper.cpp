@@ -164,7 +164,7 @@ HmcUid HveAssetOper::FindEffectByType(HmcEditor *editor, HmcUid assetUid, HmcEff
         return HMC_UID_NULL;
     }
 
-    memset_s(effectUidArr, sizeof(HmcUid) * count, 0, sizeof(HmcUid) * count);
+    memset(effectUidArr, 0, sizeof(HmcUid) * count);
 
     if (HmcEffectGetEffects(editor, assetUid, type, effectUidArr, count) != HMC_OK) {
         LOGD("FindEffectByType: HmcEffectGetEffects failed");
@@ -341,11 +341,13 @@ HmcAssetPoint HveAssetOper::CalPreviewAssetPos(HveTimeline *timeline, HmcUid &as
     //前preOffsetX 与  preOffsetY的计算，暂时不考虑水印对x轴的移动影响,因为现有的水印都是左右对称的
     float preOffsetX = hveAsset->GetPreviewOffsetX() -
                        (static_cast<float>(oldCropRect.CenterX()) - oldCanvasSize.width / 2);
+    // preOffsetY 的基准应与 HveAsset::UpdatePreviewMode 中的坐标体系一致：
+    // previewOffsetY = canvasHeight/2 - cropRect.CenterY (不应再对 CenterY 再做 /2)
     float preOffsetY = hveAsset->GetPreviewOffsetY() -
-                       (oldCanvasSize.height / 2 - static_cast<float>(oldCropRect.CenterY()) / 2);
+                       (oldCanvasSize.height / 2 - static_cast<float>(oldCropRect.CenterY()));
     //baseOffsetX 与 baseOffsetY的计算，暂时不考虑水印对x轴的移动影响,因为现有的水印都是左右对称的
     float baseOffsetX = static_cast<float>(newCropRect.CenterX() - canvasWidth / 2);
-    float baseOffsetY = static_cast<float>(canvasHeight / 2 - newCropRect.CenterY() / 2);
+    float baseOffsetY = static_cast<float>(canvasHeight / 2 - newCropRect.CenterY());
     HmcAssetPoint previewPos;
     previewPos.x = preOffsetX * cropScale + baseOffsetX;
     previewPos.y = preOffsetY * cropScale + baseOffsetY;

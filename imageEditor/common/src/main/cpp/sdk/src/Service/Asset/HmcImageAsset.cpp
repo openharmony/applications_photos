@@ -24,6 +24,7 @@
 #include "file/HmcFile.h"
 #include "../Effect/HmcEffect.h"
 #include "../../Bridge/ohos/hve/ProjectConfig.h"
+#include "MediaCreative/HmcParams.h"
 
 #define DEFAULT_EXIF_VALUE "default_exif_value"
 
@@ -44,6 +45,92 @@ VECTOR<STRING> HmcImageAsset::EXIF_XT_STYLE_KEYS = {"HwMnoteXtStyleTemplateName"
                                                     "HwMnoteXtStyleCustomLightAndShadow",
                                                     "HwMnoteXtStyleCustomSaturation",
                                                     "HwMnoteXtStyleCustomHue"};
+
+namespace {
+// 对比"原图色彩"时，需要把调色/滤镜/个性风格等颜色类 effect 从 layer 里剔除，
+// 仅保留 transform 等几何类 effect（transform 会在 compare 分支后续补回）。
+inline void RemoveColorEffectsForCompare(const std::shared_ptr<HmcRenderLayer> &layer)
+{
+    if (!layer) {
+        return;
+    }
+    for (auto it = layer->m_effectList.begin(); it != layer->m_effectList.end();) {
+        HmcRenderEffectPtr &effect = *it;
+        if (!effect || !effect->m_resource) {
+            ++it;
+            continue;
+        }
+        const STRING &type = effect->m_resource->m_effectType;
+        if (type == "adjust" || type == "filter" || type == XTSTYLE_FILTER_NAME) {
+            it = layer->m_effectList.erase(it);
+            continue;
+        }
+        ++it;
+    }
+}
+
+// 在对比模式下添加一个默认的 adjust effect，确保 Brightness 和 Contrast 滤镜被重置为 0
+inline void AddDefaultAdjustEffectForCompare(const std::shared_ptr<HmcRenderLayer> &layer)
+{
+    if (!layer) {
+        return;
+    }
+    // 检查是否已经有 adjust effect
+    bool hasAdjustEffect = false;
+    for (const auto &effect : layer->m_effectList) {
+        if (effect && effect->m_resource && effect->m_resource->m_effectType == "adjust") {
+            hasAdjustEffect = true;
+            break;
+        }
+    }
+    
+    if (!hasAdjustEffect) {
+        // 创建一个默认的 adjust effect，所有参数都是 0
+        HmcRenderEffectPtr defaultAdjustEffect = std::make_shared<HmcRenderEffect>();
+        defaultAdjustEffect->m_resource = std::make_shared<HmcMaterialRenderResource>();
+        defaultAdjustEffect->m_resource->m_effectType = "adjust";
+        defaultAdjustEffect->m_resource->m_effectName = "ColorAdjust";
+        
+        // 设置所有 adjust 参数为默认值（0）
+        defaultAdjustEffect->SetParam("HUE", 0.0);
+        defaultAdjustEffect->SetParam("SATURATION", 0.0);
+        defaultAdjustEffect->SetParam("BRIGHTNESS", 0.0);
+        defaultAdjustEffect->SetParam("CONTRAST", 0.0);
+        defaultAdjustEffect->SetParam("TEMPERATURE", 0.0);
+        defaultAdjustEffect->SetParam("SHARPNESS", 0.0);
+        defaultAdjustEffect->SetParam("FADE", 0.0);
+        defaultAdjustEffect->SetParam("EXPOSURE", 0.0);
+        defaultAdjustEffect->SetParam("GRAIN", 0.0);
+        defaultAdjustEffect->SetParam("HIGHLIGHT", 0.0);
+        defaultAdjustEffect->SetParam("SHADOW", 0.0);
+        defaultAdjustEffect->SetParam("VIGNETTE", 0.0);
+        defaultAdjustEffect->SetParam("VIBRANCE", 0.0);
+        defaultAdjustEffect->SetParam("BRIGHTZONE", 0.0);
+        defaultAdjustEffect->SetParam("DARKZONE", 0.0);
+        
+        // 设置所有 enable 标志为 1（启用）
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_HUE", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_SATURATION", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_BRIGHTNESS", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_CONTRAST", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_TEMPERATURE", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_SHARPNESS", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_FADE", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_EXPOSURE", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_GRAIN", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_HIGHLIGHT", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_SHADOW", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_VIGNETTE", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_VIBRANCE", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_BRIGHTZONE", 1);
+        defaultAdjustEffect->SetParam("COLOR_ADJUST_DARKZONE", 1);
+        
+        // 将默认的 adjust effect 添加到 layer 的开头（在 transform 之前）
+        layer->m_effectList.push_front(defaultAdjustEffect);
+        LOGI("AddDefaultAdjustEffectForCompare: added default adjust effect with all values = 0");
+    }
+}
+} // namespace
 
 // 冻结帧场景
 HmcImageAsset::HmcImageAsset(HmcUid laneUid, HmcEventHandler *eventHandler)
@@ -189,6 +276,9 @@ VOID HmcImageAsset::refreshCompareEffectList()
         }
         LOGI("refresh m_layer to m_compareLayer before");
         m_CompareLayer->CopyHmcLayerInfo(m_layer);
+        // 保存对比快照时移除颜色类效果，确保对比时显示原始色彩
+        // 这样即使切换 tab 时更新对比快照，也不会包含颜色调整
+        RemoveColorEffectsForCompare(m_CompareLayer);
         LOGI("refresh m_layer to m_compareLayer after");
     }
     
@@ -522,7 +612,20 @@ int32_t HmcImageAsset::PackGraphicsRenderInfo(uint64_t timestamp,
     }
     if (m_originalColorMode == 1) {
         LOGI("PackGraphicsRenderInfo, set m_CompareLayer");
+        // 确保 m_CompareLayer 已初始化，如果为空则使用当前 m_layer 初始化
+        {
+            std::lock_guard<ffrt::mutex> lock(m_layerMutex);
+            if (m_CompareLayer == nullptr) {
+                LOGI("PackGraphicsRenderInfo, m_CompareLayer is null, initialize it");
+                m_CompareLayer = std::make_shared<HmcRenderLayer>();
+                m_CompareLayer->CopyHmcLayerInfo(m_layer);
+            }
+        }
         layer->CopyHmcLayerInfo(m_CompareLayer);
+        // 原图色彩对比：移除颜色类 effect，避免对比时仍然应用当前调色/滤镜
+        RemoveColorEffectsForCompare(layer);
+        // 添加默认的 adjust effect（所有参数为 0），确保 Brightness 和 Contrast 滤镜被重置为 0
+        AddDefaultAdjustEffectForCompare(layer);
         UpdateTransformToCompareLayer(layer);
         layer->m_isDrawWaterMark = m_isDrawWaterMark;
         layer->m_IsInPreviewMode = m_IsInPreviewMode;

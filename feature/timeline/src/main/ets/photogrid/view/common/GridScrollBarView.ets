@@ -58,6 +58,7 @@ const MAX_EDGE_OFFSET: number = 250;
 const MAX_SCALE_OFFSET: number = 200;
 const SCALE_VERTICAL_PADDING: number = 80;
 const SCALE_HORIZONTAL_PADDING: number = 100;
+const SCROLLBAR_EDGE_SNAP_THRESHOLD: number = 24;
 
 /**
  * 日期胶囊
@@ -548,6 +549,7 @@ export struct GridScrollBarView {
       }
       ReportToBigDataUtil.report(BigDataConstants.SCROLL_BAR_BROWSE, msg);
     } else if (event.type === TouchType.Up || event.type === TouchType.Cancel) {
+      this.alignGridToScrollbarEdge();
       AppStorage.setOrCreate<boolean>('isTouchScrollBar', false);
       this.isMovedFlag = false;
       this.moveStartY = -1;
@@ -559,6 +561,25 @@ export struct GridScrollBarView {
       Log.info(TAG, `handleTouchEvent scrollBar Up or Cancel:${event.type}, isSelectedMode:${this.isSelectedMode}` +
         `, isClickScrollBar:${this.isClickScrollBar}`);
       AppStorage.setOrCreate<boolean>(Constants.SCROLL_BAR_CLICKING, this.isClickScrollBar);
+    }
+  }
+
+  private alignGridToScrollbarEdge(): void {
+    if (!this.isClickScrollBar || !this.scroller || this.currentScrollerHeight <= 0) {
+      return;
+    }
+    const edgeThreshold: number = Math.min(SCROLLBAR_EDGE_SNAP_THRESHOLD, this.currentScrollerHeight / 10);
+    const y: number = this.moveEndY;
+    const h: number = this.currentScrollerHeight;
+    // 仅当触点纵坐标落在滚动条有效高度内时才吸边，避免略小于 0 的坐标误触发 scrollEdge(Top)
+    if (y >= 0 && y <= edgeThreshold) {
+      this.scroller.scrollEdge(Edge.Top);
+      Log.info(TAG, `alignGridToScrollbarEdge to top, moveEndY:${this.moveEndY}, threshold:${edgeThreshold}`);
+      return;
+    }
+    if (y <= h && y >= h - edgeThreshold) {
+      this.scroller.scrollEdge(Edge.Bottom);
+      Log.info(TAG, `alignGridToScrollbarEdge to bottom, moveEndY:${this.moveEndY}, threshold:${edgeThreshold}`);
     }
   }
 

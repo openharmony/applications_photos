@@ -89,7 +89,7 @@ function focusSetting(uri: string) {
 @Component
 export struct AlbumGridItemNewStyle {
   private albumContext?: Context;
-  @ObjectLink item: AlbumInfo;
+  @ObjectLink @Watch('onAlbumInfoChanged') item: AlbumInfo;
   private dataSource: AlbumSetDataSource | undefined;
   @State isSelected: boolean = false;
   @State selectable: boolean = true;
@@ -154,6 +154,8 @@ export struct AlbumGridItemNewStyle {
   private isOpenAlbum: boolean = false;
   @Prop @Watch('onSelectStateChange') private isRefreshSelectState: boolean = false;
   @State private albumItemWidth: number = 0;
+  @State private isCoverLoadError: boolean = false;
+  @State private hasTriedThumbnailFallback: boolean = false;
   private boxSelectStr: string = '';
   private boxDeselectStr: string = '';
   private selectStr: string = '';
@@ -167,6 +169,7 @@ export struct AlbumGridItemNewStyle {
   @Link isDraggingToPage: boolean;
   @Prop @Watch('closeContextMenu') isPrivateHideState: boolean = false;
   @Link albumCardLargeHeight: number;
+  private lastAlbumCoverUri: string = '';
 
   private onSelectStateChange(): void {
     if (!this.mSelectManager) {
@@ -184,6 +187,23 @@ export struct AlbumGridItemNewStyle {
 
   coverUriFunction(): void {
     Log.info(TAG, ` coverUri ===${this.coverUri}`);
+  }
+
+  private onAlbumInfoChanged(): void {
+    this.syncAlbumCoverState();
+  }
+
+  private syncAlbumCoverState(): void {
+    let nextCoverUri: string = this.item?.coverUri ?? '';
+    if (this.lastAlbumCoverUri !== nextCoverUri) {
+      this.dataSource?.releaseAlbumCoverCache(this.item?.uri ?? '');
+      this.lastAlbumCoverUri = nextCoverUri;
+    }
+    if (this.coverUri !== nextCoverUri || this.isCoverLoadError) {
+      this.coverUri = nextCoverUri;
+      this.isCoverLoadError = false;
+      this.hasTriedThumbnailFallback = false;
+    }
   }
 
   private requestFocus(keyName: string): void {
@@ -303,7 +323,7 @@ export struct AlbumGridItemNewStyle {
 
   aboutToAppear(): void {
     Log.info(TAG, `aboutToAppear---album uri: ${this.item.uri}`);
-    this.coverUri = this.item.coverUri;
+    this.syncAlbumCoverState();
     this.selectable = !this.item.isTrashAlbum;
     let isFirstPhotoItem = AppStorage.get<boolean>(Constants.KEY_OF_IS_FIRST_PHOTO_ITEM);
     let lastTransitionId = AppStorage.get<string>(Constants.KEY_OF_GEOMETRY_TRANSITION_ID_HEIGHT) as string;
@@ -352,6 +372,7 @@ export struct AlbumGridItemNewStyle {
     if (this.isSelected != params.isSelected) {
       this.isSelected = params.isSelected;
     }
+    this.syncAlbumCoverState();
   }
 
   aboutToRecycle() {
@@ -575,8 +596,9 @@ export struct AlbumGridItemNewStyle {
 
   @Builder
   normalAlbumCard() {
-    if (this.item?.coverUri) {
-      Image(this.item?.coverUri)
+    // 封面缩略图为空或加载失败时，使用占位图，避免出现白屏
+    if (this.coverUri && !this.isCoverLoadError) {
+      Image(this.coverUri)
         .draggable(false)
         .border({ radius: $r('sys.float.corner_radius_level6') })
         .width('100%')
@@ -584,21 +606,50 @@ export struct AlbumGridItemNewStyle {
         .objectFit(ImageFit.Cover)
         .onComplete((event?: completed): void => {
           if ((event?.loadingStatus === ImageUtil.LOADING_STATUS_DECODE_SUCC)) {
-            Log.info(TAG, `album cover show path : ${this.item?.coverUri}`);
+            Log.info(TAG, `album cover show path : ${this.coverUri}`);
           } else {
-            Log.info(TAG, `album cover onComplete, status: ${event?.loadingStatus}, path: ${this.item?.coverUri}`);
-            this.dataSource?.setAlbumCoverCache(this.item.uri, this.item?.coverUri);
+            Log.info(TAG, `album cover onComplete, status: ${event?.loadingStatus}, path: ${this.coverUri}`);
+            this.dataSource?.setAlbumCoverCache(this.item.uri, this.coverUri);
           }
         })
         .onError((event: ImageError): void => {
+          if (!this.hasTriedThumbnailFallback && this.coverUri.includes('oper=astc')) {
+            this.coverUri = this.coverUri.replace('oper=astc', 'oper=thumbnail');
+            this.hasTriedThumbnailFallback = true;
+            Log.warn(TAG, `album cover astc decode failed, retry thumbnail, path: ${this.coverUri}`);
+            return;
+          }
           Log.error(TAG, `album is empty or its cover is error, ` +
             `album_photoBrowser: ${AlbumDefine.getAnonymizeAlbumName(this.item?.albumName)}, ` +
-            `path: ${this.item?.coverUri}, error: ${event.message}`);
+            `path: ${this.coverUri}, error: ${event.message}`);
           this.dataSource?.releaseAlbumCoverCache(this.item.uri);
+          this.isCoverLoadError = true;
         })
         .focusSetting(this.item.uri)
         .alt(this.dataSource?.getAlbumCoverCache(this.item.uri))
+    } else {
+      this.buildCoverErrorPlaceholder();
     }
+  }
+
+  /**
+   * 相册封面加载失败或无封面时的占位图（图片/视频都有占位）
+   */
+  @Builder
+  private buildCoverErrorPlaceholder() {
+    Column() {
+      SymbolGlyph(this.item?.isVideoAlbum ? $r('sys.symbol.resolution_video_fill') : $r('sys.symbol.picture_fill'))
+        .fontSize($r('app.float.album_set_new_style_icon'))
+        .draggable(false)
+        .aspectRatio(1)
+        .fontColor([$r('sys.color.ohos_id_color_click_effect')])
+    }
+    .width('100%')
+    .aspectRatio(1)
+    .border({ radius: $r('sys.float.corner_radius_level6') })
+    .justifyContent(FlexAlign.Center)
+    .alignItems(HorizontalAlign.Center)
+    .backgroundColor($r('sys.color.ohos_id_color_hover'))
   }
 
   private isShowLongPressMenu(item: AlbumInfo): boolean {

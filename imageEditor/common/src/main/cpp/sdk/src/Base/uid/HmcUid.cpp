@@ -48,7 +48,7 @@ int HmcUidIsEqual(const HmcUid *uid1, const HmcUid *uid2)
 
 void HmcUidCopy(HmcUid *dest, const HmcUid *src)
 {
-    memcpy_s(dest->id, sizeof(dest->id), src->id, sizeof(src->id));
+    memcpy(dest->id, src->id, sizeof(dest->id));
 }
 
 int HmcUidIsNull(const HmcUid *uid)
@@ -75,7 +75,7 @@ void HmcUidGenerate(HmcUid *uid)
     }
 
     char bufferChar[HMC_UID_LEN_NO_CONNECT] = {0};
-    auto result = sprintf_s(bufferChar, HMC_UID_LEN_NO_CONNECT, "%016llx", generateId);
+    auto result = snprintf(bufferChar, HMC_UID_LEN_NO_CONNECT, "%016llx", generateId);
     if (result <= 0) {
         LOGE("Generate uid failed, sprintf_s result is %d!", result);
         return;
@@ -102,7 +102,7 @@ char *HmcUidToString(const HmcUid *uid, char *string, int size)
             string[j++] = '-';
         }
 
-        j += (UINT32)sprintf_s(string + j, size - j, "%02x", uid->id[i]);
+        j += (UINT32)snprintf(string + j, size - j, "%02x", uid->id[i]);
     }
     return string;
 }

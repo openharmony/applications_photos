@@ -701,11 +701,7 @@ static void CopyData(ImageInfo &src, ImageInfo &dst)
 
     // direct copy the date while the size is same.
     if (srcRowStride == dstRowStride && srcBufferLen == dstBufferLen) {
-        errno_t ret = memcpy_s(dstBuffer, dstBufferLen, srcBuffet, srcBufferLen);
-        if (ret != 0) {
-            LOGE("CopyData memcpy_s failed. ret=%d, dstBufLen=%d,"
-                " srcBufLen=%d", ret, dstBufferLen, srcBufferLen);
-        }
+        memcpy(dstBuffer, srcBuffet, srcBufferLen);
         return;
     }
 
@@ -721,14 +717,7 @@ static void CopyData(ImageInfo &src, ImageInfo &dst)
         return;
     }
     for (uint32_t i = 0; i < rowCount; i++) {
-        errno_t ret = memcpy_s(dstBuffer + i * dstRowStride, dstRowStride, srcBuffet + i * srcRowStride, count);
-        if (ret != 0) {
-            LOGE("CopyData: copy by row memcpy_s failed. ret=%d, row=%d, srcH=%d, "
-                "srcStride=%d, srcLen=%d, dstH=%d, "
-                "dstStride=%d, dstLen=%d", ret, i, src.height, src.rowStride, srcBufferLen,
-                dst.height, dst.rowStride, dstRowStride);
-            continue;
-        }
+        memcpy(dstBuffer + i * dstRowStride, srcBuffet + i * srcRowStride, count);
     }
 }
 

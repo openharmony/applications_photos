@@ -244,11 +244,27 @@ export struct AlbumPhotoGridView {
     // 设置相册页数据 inactive 状态
     getContext()?.eventHub.emit(AlbumRefreshConst.EVENT_KEY_APPEAR, []);
     getContext()?.eventHub.off(AlbumRefreshConst.EVENT_KEY_APPEAR);
-    let listenerParam: ParamsWrapper =
-      this.navPathStack.getParamByName(NavigationConstants.NAVIGATION_OTHER_ALBUM_PAGE)[0] as ParamsWrapper;
-    if (listenerParam) {
-      this.onAlbumClickListener =
-        listenerParam.params.get(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_LISTENER) as PageStatusListener;
+    // Nav params may be transient/empty, or wrapped (e.g. { paramsWrapper }) in some flows (picker -> new album).
+    // Never crash the album page if listener is missing.
+    try {
+      const paramsArr: Array<ParamsWrapper | object> | undefined =
+        this.navPathStack?.getParamByName?.(NavigationConstants.NAVIGATION_OTHER_ALBUM_PAGE) as Array<ParamsWrapper | object> | undefined;
+      const lastParam: ParamsWrapper | object | undefined =
+        (paramsArr && paramsArr.length > 0) ? paramsArr[paramsArr.length - 1] : undefined;
+
+      interface WrappedParamsWrapper {
+        paramsWrapper?: ParamsWrapper;
+      }
+      const wrapped: WrappedParamsWrapper = (lastParam as object) as WrappedParamsWrapper;
+      const listenerParam: ParamsWrapper | undefined =
+        wrapped?.paramsWrapper ? wrapped.paramsWrapper : (lastParam as ParamsWrapper | undefined);
+
+      if (listenerParam) {
+        this.onAlbumClickListener =
+          listenerParam.get<PageStatusListener>(AlbumRefreshConst.KEY_OF_ALBUM_NAV_PARAM_LISTENER) as PageStatusListener;
+      }
+    } catch (e) {
+      LogUtils.warn(TAG, `read listener param failed: ${e}`);
     }
     if (this.onAlbumClickListener) {
       this.onAlbumClickListener.onAppear();
@@ -612,15 +628,15 @@ export struct AlbumPhotoGridView {
           (DeviceInfo.isTablet()) ?
             TransitionEffect.asymmetric(
               TransitionEffect.OPACITY.animation({
-                duration: 200,
+                duration: 1000,
                 curve: Curve.Sharp,
               })
               ,
               TransitionEffect.OPACITY.animation({
-                duration: 200,
+                duration: 1000,
                 curve: Curve.Sharp,
               })
-            ) : TransitionEffect.OPACITY.animation({ duration: 300, curve: 'standard' }))
+            ) : TransitionEffect.OPACITY.animation({ duration: 1000, curve: 'standard' }))
         .bindSheet(this.bindSheetController.isShow, this.buildHighlightBindSheet(), {
           showClose: false,
           preferType: SheetType.CENTER,

@@ -1499,10 +1499,14 @@ export struct PickerGridItemComponent {
   buildPickerIcon() {
     if (this.isDownloading && !this.isPhotoInner) {
       this.buildLoadingPanel();
-    } else if (this.isSelectedMode || this.selectParams.isMultiPick) {
-      // 多选模式下显示checkbox（包括云图片和本地图片）
+    } else if ((this.isSelectedMode || this.selectParams.isMultiPick) &&
+      // 单选 + 不预览 时隐藏右下角多选框
+      !(this.singleSelectionMode === SingleSelectionMode.SELECT_MODE &&
+        !this.isPreviewForSingleSelectionSupported)) {
+      // 多选模式 / 选择模式下显示checkbox（包括云图片和本地图片）
       this.buildCheckBox();
     } else if (this.singleSelectionMode === SingleSelectionMode.BROWSER_AND_SELECT_MODE) {
+      // 混合模式始终显示多选框
       this.buildCheckBox();
     } else if (!this.isLocalImage && !this.isDownloading && !this.isPhotoInner) {
       // 非多选模式下，云图片显示云下载图标
@@ -1687,6 +1691,13 @@ export struct PickerGridItemComponent {
           Log.info(TAG, `ignore image tap gesture, isThird and single line`);
           return;
         }
+      // 单选 + 不预览：点击缩略图直接选中并返回，不进入大图
+      if (this.singleSelectionMode === SingleSelectionMode.SELECT_MODE &&
+        !this.isPreviewForSingleSelectionSupported) {
+        if (this.isPreviewForSingleSelectionSupportedCheck()) {
+          return;
+        }
+      }
         if (this.shouldProcessClick(event)) {
           // picker 单选模式支持混合选择设置
           Log.info(TAG, `singleSelectionMode: ${this.singleSelectionMode}`);

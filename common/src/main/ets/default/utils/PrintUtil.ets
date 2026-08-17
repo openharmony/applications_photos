@@ -31,7 +31,7 @@ import { global } from '@ohos/tools/src/main/global/Contexts';
 const TAG: string = 'PrintUtil';
 const PRINT_BUNDLE_NAME: string = 'com.ohos.spooler';
 
-const suffixList: Array<string> = ['.png', '.gif', '.jpeg', '.jpg', '.jpe', '.bm', '.bmp', '.webp', '.wpng', '.srw', '.rw2', '.pef', '.orf', '.nrw', '.nef', '.ico', '.cr2', '.arw'];
+const suffixList: Array<string> = ['.wbmp','.png', '.gif', '.jpeg', '.jpg', '.jpe', '.bm', '.bmp', '.webp', '.wpng', '.srw', '.rw2', '.pef', '.orf', '.nrw', '.nef', '.ico', '.cr2', '.arw'];
 
 export interface PrintDFXOption {
   printTriggerPlace: string,

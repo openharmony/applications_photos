@@ -62,9 +62,12 @@ export class SelectionChecker {
       let itemInfos: BaseItemInfo[] = [];
       invalidUris.forEach(uri => {
         this.manager?.updateTotalSelectUris(uri, false);
-        this.broadcast?.emit(Constants.UPDATE_SELECTED, [false, uri]);
+        this.broadcast?.emit(Constants.UPDATE_SELECTED + uri, [false, uri]);
         itemInfos.push({ uri: uri, });
       });
+      if (invalidUris.length > 0) {
+        this.broadcast?.emit(Constants.UPDATE_SELECTED, [false, '']);
+      }
       this.manager?.updateMediaItemFullState();
       if (itemInfos.length > 0) {
         this.session?.sendData({ 'dataType': 'selectedItemsDeleted', 'selectedItemInfos': itemInfos, });

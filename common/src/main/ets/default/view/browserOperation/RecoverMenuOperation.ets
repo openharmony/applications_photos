@@ -17,9 +17,12 @@ import lazy { Log } from '../../utils/Log';
 import type { MenuContext } from '../../view/browserOperation/MenuContext';
 import type { MenuOperation } from '../../view/browserOperation/MenuOperation';
 import type { MenuOperationCallback } from '../../view/browserOperation/MenuOperationCallback';
+import type { PositionParams } from '../../view/browserOperation/DeleteMenuOperation';
 import lazy { BrowserOperationFactory } from '../../interface/BrowserOperationFactory';
 import { PhotoAsset } from '../dialog/MoveDialog';
-import { Constants } from '../../model/browser/photo/Constants';
+import lazy { BroadCastConstants } from '../../model/common/BroadCastConstants';
+import { Constants as CommonConstants } from '../../model/common/Constants';
+import { Constants as PhotoConstants } from '../../model/browser/photo/Constants';
 
 /* instrument ignore file */
 const TAG: string = 'RecoverMenuOperation';
@@ -36,8 +39,13 @@ export class RecoverMenuOperation implements MenuOperation, MenuOperationCallbac
       Log.error(TAG, 'menuContext is null, return');
       return;
     }
-    AppStorage.setOrCreate<boolean>('isDoingRecoverBigPhotoAnim', true);
-    this.doRecover();
+    AppStorage.setOrCreate<Resource>(CommonConstants.CONFIRM_TEXT_KEY, $r('app.string.action_recover'));
+    let locationParams: PositionParams = {
+      isClearRecycle: false,
+      isHoldPosition: false,
+    };
+    this.menuContext.broadCast?.emit(BroadCastConstants.SHOW_DELETE_DIALOG,
+      [this.getRecoverDialog(), this.confirmCallback, this.cancelCallback, false, locationParams]);
   }
 
   public onCompleted(): void {
@@ -48,10 +56,26 @@ export class RecoverMenuOperation implements MenuOperation, MenuOperationCallbac
     Log.error(TAG, 'Recover data failed!');
   }
 
+  private getRecoverDialog(): Resource[] {
+    return [$r('app.plural.action_recover_count', 1, 1), $r('app.string.common_place_holder', '')];
+  }
+
+  private confirmCallback = (): void => {
+    AppStorage.setOrCreate<boolean>('isDoingRecoverBigPhotoAnim', true);
+    this.menuContext.onOperationStart?.();
+    this.doRecover();
+  };
+
+  private cancelCallback = (): void => {
+    Log.info(TAG, 'Single recover canceled');
+    this.menuContext.onOperationEnd?.();
+  };
+
   private async doRecover(): Promise<void> {
     let mediaItem = this.menuContext.mediaItem;
     if (!mediaItem || !mediaItem.data) {
       Log.error(TAG, 'mediaItem is null');
+      this.menuContext.onOperationEnd?.();
       return;
     }
     let operationImpl = BrowserOperationFactory.getFeature(BrowserOperationFactory.TYPE_PHOTO);
@@ -66,8 +90,10 @@ export class RecoverMenuOperation implements MenuOperation, MenuOperationCallbac
     } catch (error) {
       Log.error(TAG, `recover error: ${error}`);
       this.onError();
+    } finally {
+      this.menuContext.onOperationEnd?.();
     }
-    this.menuContext.broadCast?.emit(Constants.DELETE, []);
+    this.menuContext.broadCast?.emit(PhotoConstants.DELETE, []);
     Log.info(TAG, 'Single Recover confirm');
   }
 }
