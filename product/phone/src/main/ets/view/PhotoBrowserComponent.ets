@@ -802,11 +802,15 @@ export struct PhotoBrowserComponent {
         if (String(param.viewDataIndex).length > 0) {
           Log.debug(TAG, `Found viewIndex`);
           this.dataSource = new UriDataSource(String(param.viewData).split('?'));
-          let viewIndex = Number.parseInt(param.viewDataIndex);
-          if (Number.isNaN(viewIndex) || viewIndex <= 0 || viewIndex > String(param.viewData).split('?').length) {
-            viewIndex = 0;
-          } else {
-            viewIndex -= 1;
+          let viewIndex = 0;
+          const viewIndexText: string = String(param.viewDataIndex);
+          if (/^\d+$/.test(viewIndexText)) {
+            viewIndex = Number.parseInt(viewIndexText, 10);
+            if (viewIndex <= 0 || viewIndex > String(param.viewData).split('?').length) {
+              viewIndex = 0;
+            } else {
+              viewIndex -= 1;
+            }
           }
           this.isFromViewDataWithThirdUri = true;
           this.currentIndex = viewIndex;
